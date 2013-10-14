@@ -24,13 +24,17 @@
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface SYNContainerViewController () <UIPopoverControllerDelegate,
-UITextViewDelegate>
+
+#define VIEW_CONTROLLER_TRANSITION_DURATION 0.4
+
+@interface SYNContainerViewController () <UIPopoverControllerDelegate, UITextViewDelegate>
 
 @property (nonatomic) BOOL didNotSwipeMessageInbox;
 @property (nonatomic, readonly) CGFloat currentScreenOffset;
 @property (nonatomic, strong) UIPopoverController *actionButtonPopover;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
+
+@property (nonatomic, strong) SYNAbstractViewController *currentViewController;
 
 @property (nonatomic, strong) NSArray* viewControllers;
 
@@ -100,6 +104,12 @@ UITextViewDelegate>
     
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
+
 
 - (void) dealloc
 {
@@ -108,20 +118,64 @@ UITextViewDelegate>
 
 #pragma mark - UIViewController Containment
 
-- (void) addChildViewController: (UIViewController *) childController
+- (void) addChildViewController: (UIViewController *) newViewController
 {
-    [self.showingViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
     
-    [childController willMoveToParentViewController: self];
+    __weak SYNAbstractViewController* toViewController = (SYNAbstractViewController*)newViewController;
+    __weak SYNAbstractViewController* fromViewController = self.currentViewController;
     
-    [super addChildViewController: childController];
+    [toViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
     
-    childController.view.frame = self.view.frame;
+    [super addChildViewController: toViewController];
     
-    [[self view] addSubview:childController.view];
     
-    [childController didMoveToParentViewController: self];
+    [[self view] addSubview:toViewController.view];
+    
+    // == Define the completion block == //
+    
+    void(^CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
+        
+        [fromViewController.view removeFromSuperview];
+        
+        [fromViewController removeFromParentViewController];
+        
+        [toViewController didMoveToParentViewController: self];
+        
+        self.currentViewController = toViewController;
+    };
+    
+    // == Do the Transition selectively == //
+    
+    if(fromViewController) // if not from first time
+    {
+        
+        toViewController.view.frame = CGRectZero;
+        
+        [self transitionFromViewController:fromViewController
+                          toViewController:toViewController
+                                  duration:VIEW_CONTROLLER_TRANSITION_DURATION
+                                   options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                       
+                                       
+                                       toViewController.view.frame = self.view.frame;
+                                       fromViewController.view.frame = CGRectZero;
+                                       
+                                   } completion:CompleteTransitionBlock];
+    }
+    else
+    {
+        toViewController.view.frame = self.view.frame;
+        CompleteTransitionBlock(YES);
+    }
+    
+    
+    // == Do the transition == //
+    
+    
+    
+    
 }
+
 
 
 
@@ -187,13 +241,6 @@ UITextViewDelegate>
 
 
 
-
-#pragma mark - Getters/Setters
-
-- (SYNAbstractViewController *) showingViewController
-{
-    return self.childViewControllers.count > 0 ? (SYNAbstractViewController*)self.childViewControllers[0] : nil;
-}
 
 
 

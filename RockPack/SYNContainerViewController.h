@@ -13,8 +13,9 @@
 @interface SYNContainerViewController : UIViewController
 
 @property (nonatomic) CGPoint currentPageOffset;
+
 @property (nonatomic, readonly) NSInteger currentPage;
-@property (nonatomic, readonly) SYNAbstractViewController *showingViewController;
+@property (nonatomic, readonly) SYNAbstractViewController *currentViewController;
 @property (nonatomic, readonly) NSArray* viewControllers;
 
 

@@ -323,7 +323,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) pageChanged: (NSInteger) pageNumber
 {
-    self.pageTitleLabel.text = [self.containerViewController.showingViewController.title uppercaseString];
+    self.pageTitleLabel.text = [self.containerViewController.currentViewController.title uppercaseString];
     
     if (self.sideNavigatorViewController.state == SideNavigationStateFull)
     {
@@ -332,7 +332,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     else
     {
-        NSString* controllerTitle = self.containerViewController.showingViewController.title;
+        NSString* controllerTitle = self.containerViewController.currentViewController.title;
         
         [self.sideNavigatorViewController setSelectedCellByPageName: controllerTitle];
     }
@@ -391,7 +391,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.sideNavigatorViewController.searchViewController.searchTextField.placeholder = @"Find videos, packs and people";
     }
     
-    NSString* controllerTitle = self.containerViewController.showingViewController.title;
+    NSString* controllerTitle = self.containerViewController.currentViewController.title;
     
     [self.sideNavigatorViewController setSelectedCellByPageName: controllerTitle];
     
@@ -1057,7 +1057,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 - (SYNAbstractViewController*) showingViewController
 {
     if ([self.mainNavigationController.topViewController isKindOfClass:[SYNContainerViewController class]])
-        return self.containerViewController.showingViewController;
+        return self.containerViewController.currentViewController;
     else
         return (SYNAbstractViewController*)self.mainNavigationController.topViewController;
 }
