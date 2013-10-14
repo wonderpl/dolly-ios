@@ -442,7 +442,7 @@ typedef enum : NSInteger {
     kSideNavigationType navigationType = [((NSNumber*)navigationElement[kSideNavType]) integerValue];
     NSString* navigationAction = (NSString*)navigationElement[kSideNavAction];
     
-    if (navigationType == kSideNavigationTypeLoad)
+    if (navigationType == kSideNavigationTypeLoad) // the case of loading something into the nav (ex. friends view)
     {
         Class theClass = NSClassFromString(navigationAction);
         self.currentlyLoadedViewController = (UIViewController*)[[theClass alloc] init];
@@ -492,7 +492,7 @@ typedef enum : NSInteger {
         self.state = SideNavigationStateFull;
         
     }
-    else // the selection is a notification for the container to change pages
+    else // navigate to a page by notifying the container
     {
         
         NSNotification* navigationNotification = [NSNotification notificationWithName: kNavigateToPage

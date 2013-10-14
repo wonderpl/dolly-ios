@@ -104,17 +104,7 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-}
 
-
-- (void) dealloc
-{
-    // TODO: nil delegates for tab view
-}
 
 #pragma mark - UIViewController Containment
 
@@ -191,36 +181,8 @@
 
 
 
-#pragma mark - maintaion orientation
-
-- (void) refreshView
-{
-    
-    // TODO: Notify with kScrollerPageChanged
-}
 
 
-
-
-
-#pragma mark - Notification Methods
-
-
-- (void) navigateToPageByName: (NSString *) pageName
-{
-    int page = 0;
-    
-    for (SYNAbstractViewController *nvc in self.childViewControllers)
-    {
-        if ([pageName isEqualToString: nvc.title])
-        {
-            //TODO: Perform the navigation
-            break;
-        }
-        
-        page++;
-    }
-}
 
 -(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName
 {

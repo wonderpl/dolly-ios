@@ -794,7 +794,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     
     //Scroll to the requested page
-    [self.containerViewController navigateToPageByName: pageName];
+    [self.containerViewController addChildViewController:controllerToGo];
     
     self.sideNavigatorViewController.state = SideNavigationStateHidden;
     
