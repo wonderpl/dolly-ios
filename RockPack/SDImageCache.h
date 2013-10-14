@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SDWebImageCompat.h"
 
-enum SDImageCacheType
+enum  SDImageCacheType : NSInteger
 {
     /**
      * The image wasn't available the SDWebImage caches, but was downloaded from the web.

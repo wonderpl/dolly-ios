@@ -84,7 +84,10 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     self.searchField.font = [UIFont rockpackFontOfSize: self.searchField.font.pointSize];
     
-    if([[SYNFacebookManager sharedFBManager] hasActiveSession])
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    if ([[SYNFacebookManager sharedFBManager] hasActiveSession])
     {
         self.facebookLoginButton.hidden = YES;
         self.preLoginLabel.hidden = YES;
@@ -96,7 +99,8 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
         
         [self fetchAndDisplayFriends];
         
-        [GAI.sharedInstance.defaultTracker sendView: @"Friends All"];
+        [tracker set: kGAIScreenName
+               value: @"Friends All"];
     }
     else
     {
@@ -107,8 +111,11 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
         self.friendsCollectionView.hidden = YES;
         self.activityIndicator.hidden = YES;
         
-        [GAI.sharedInstance.defaultTracker sendView: @"Friends Fb Connect"];
+        [tracker set: kGAIScreenName
+               value: @"Friends Fb Connect"];
     }
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.followInviteLabel.font = [UIFont rockpackFontOfSize:self.followInviteLabel.font.pointSize];
     
@@ -151,20 +158,27 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     [self.searchField resignFirstResponder];
     
-    if(tab == self.onRockpackButton)
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    if (tab == self.onRockpackButton)
     {
         self.onFacebookButton.selected = NO;
         self.followInviteLabel.text = NSLocalizedString(@"friends_follow", nil);
-        [GAI.sharedInstance.defaultTracker sendView: @"Friends RP"];
         
+        [tracker set: kGAIScreenName
+               value: @"Friends RP"];
     }
     else
     {
         self.onRockpackButton.selected = NO;
         self.followInviteLabel.text = NSLocalizedString(@"friends_invite", nil);
-        [GAI.sharedInstance.defaultTracker sendView: @"Friends All"];
+        
+        [tracker set: kGAIScreenName
+               value: @"Friends All"];
     }
         
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     tab.selected = YES;
     
@@ -397,6 +411,8 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
         [self.currentSearchTerm deleteCharactersInRange:NSMakeRange(self.currentSearchTerm.length - 1, 1)];
     
     
+    
+    // this will ask .displayFriends which will filter the friends array accroding to the search term
     [self.friendsCollectionView reloadData];
     
     return YES;
@@ -405,6 +421,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 -(NSArray*)displayFriends
 {
     
+    // first decide which tab we are on ...
     if(self.onRockpackButton.selected)
     {
         _displayFriends = [self rockpackFriends];
@@ -417,6 +434,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
         
     }
     
+    // ... then filter search according to term if present
     if(self.currentSearchTerm.length > 0)
     {
         NSPredicate* searchPredicate = [NSPredicate predicateWithBlock:^BOOL(Friend* friend, NSDictionary *bindings) {
@@ -430,15 +448,24 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
                 result = result & friend.isOnRockpack;
             }
             
-            
             return result;
         }];
         
         _displayFriends = [_displayFriends filteredArrayUsingPredicate:searchPredicate];
     }
     
-    return _displayFriends;
+    if(_displayFriends.count == 0)
+    {
+        // show message
+        self.preLoginLabel.hidden = NO;
+        self.preLoginLabel.text = NSLocalizedString(@"friends_name_not_found", nil);;
+    }
+    else
+    {
+        self.preLoginLabel.hidden = YES;
+    }
     
+    return _displayFriends;
     
 }
 
@@ -468,19 +495,21 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     if(!self.currentlySelectedFriend.isOnRockpack) // facebook friend, invite to rockpack
     {
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [[GAI sharedInstance].defaultTracker sendEventWithCategory: @"uiAction"
-                                                        withAction: @"friendToInvite"
-                                                         withLabel: nil
-                                                         withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"friendToInvite"
+                                                                label: nil
+                                                                value: nil] build]];
         
         [[SYNFacebookManager sharedFBManager] sendAppRequestToFriend:self.currentlySelectedFriend
                                                            onSuccess:^{
+                                                               id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                                                
-                                                               [[GAI sharedInstance].defaultTracker sendEventWithCategory: @"goal"
-                                                                                                               withAction: @"friendInvited"
-                                                                                                                withLabel: nil
-                                                                                                                withValue: nil];
+                                                               [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                                                                      action: @"friendInvited"
+                                                                                                                       label: nil
+                                                                                                                       value: nil] build]];
                                                                
                                                                [appDelegate.viewStackManager removePopoverView];
                                                                

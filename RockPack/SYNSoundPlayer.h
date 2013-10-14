@@ -16,7 +16,7 @@
 @interface SYNSoundPlayer : NSObject
 
 @property (nonatomic) BOOL soundEnabled;
-+ (id)sharedInstance;
--(void)playSoundByName:(NSString*)soundName;
++ (instancetype) sharedInstance;
+-(void) playSoundByName: (NSString*)soundName;
 
 @end

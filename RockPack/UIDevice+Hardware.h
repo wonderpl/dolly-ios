@@ -47,7 +47,7 @@
 #define SIMULATOR_IPAD_NAMESTRING       @"iPad Simulator"
 #define SIMULATOR_APPLETV_NAMESTRING    @"Apple TV Simulator" // :)
 
-typedef enum {
+typedef enum : NSInteger {
     UIDeviceUnknown,
     
     UIDeviceSimulator,
@@ -85,7 +85,7 @@ typedef enum {
 } UIDevicePlatform;
 
 
-typedef enum {
+typedef enum : NSInteger {
     UIDeviceFamilyiPhone,
     UIDeviceFamilyiPod,
     UIDeviceFamilyiPad,

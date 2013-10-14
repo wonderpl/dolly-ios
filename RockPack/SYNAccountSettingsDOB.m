@@ -42,10 +42,10 @@
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"accountPropertyChanged"
-                         withLabel: @"Date of birth"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"accountPropertyChanged"
+                                                            label: @"Date of birth"
+                                                            value: nil] build]];
     
     [self.view addSubview: datePicker];
     

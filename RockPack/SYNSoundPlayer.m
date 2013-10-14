@@ -15,7 +15,7 @@
 @implementation SYNSoundPlayer
 @synthesize soundEnabled;
 
-+ (id)sharedInstance
++ (instancetype) sharedInstance
 {
     static dispatch_once_t once;
     static id sharedInstance;

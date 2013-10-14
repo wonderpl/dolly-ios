@@ -21,13 +21,9 @@
 
 @interface SYNOAuthNetworkEngine ()
 
-// OAuth2 and refresh tokens
-@property (nonatomic, strong) SYNOAuth2Credential *oAuth2Credential;
-
-// Used for authentication callbacks
 @property (nonatomic, copy) SYNOAuth2CompletionBlock oAuthCompletionBlock;
 @property (nonatomic, copy) SYNOAuth2RefreshCompletionBlock oAuthRefreshCompletionBlock;
-
+@property (nonatomic, strong) SYNOAuth2Credential *oAuth2Credential;
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
 
 @end
@@ -41,8 +37,7 @@
     
     hostName = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"SecureAPIHostName"];
 
-    self = [super initWithDefaultSettings];
-    if(self)
+    if ((self = [super initWithDefaultSettings]))
     {
         self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     }
@@ -75,11 +70,10 @@
 	}
 	else
     {   
-        [request setUsername: kOAuth2ClientId
-                    password: kOAuth2ClientSecret];
-        
         [request setAuthorizationHeaderValue: self.oAuth2Credential.accessToken
                                  forAuthType: @"Bearer"];
+        
+        request.shouldCacheResponseEvenIfProtocolIsHTTPS = TRUE;
         
 		[self enqueueOperation: request];
 	}
@@ -123,10 +117,10 @@
              {
                  id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                  
-                 [tracker sendEventWithCategory: @"goal"
-                                     withAction: @"userRegistration"
-                                      withLabel: origin
-                                      withValue: nil];
+                 [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                        action: @"userRegistration"
+                                                                         label: origin
+                                                                         value: nil] build]];
              }
              
              SYNOAuth2Credential* newOAuth2Credentials = [SYNOAuth2Credential credentialWithAccessToken: responseDictionary[@"access_token"]
@@ -559,22 +553,16 @@
             errorBlock(@{@"saving_error" : @"Main Registry Could Not Save the User"});
             return;
         }
-        
-        
+
         // Get subscriptions
         
         NSString* userId = responseDictionary[@"id"];
-        
-        
-        
-        
+
         [self channelSubscriptionsForUserId:userId
                                  credential:credentials
                                       start:0
                                        size:50
                           completionHandler:^(id subscriptionsDictionary) {
-                              
-                              
                               NSString* possibleError = subscriptionsDictionary[@"error"];
                               
                               if (possibleError)
@@ -626,9 +614,6 @@
          NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %i", error.domain, error.code] , @"nserror" : error };
          errorBlock(customErrorDictionary);
      }];
-    
-    [networkOperation setUsername: kOAuth2ClientId
-                         password: kOAuth2ClientSecret];
     
     [networkOperation setAuthorizationHeaderValue: credentials.accessToken
                                       forAuthType: @"Bearer"];
@@ -1052,7 +1037,7 @@
 
 
 - (MKNetworkOperation *) updateRecommendedChannelsScreenForUserId: (NSString *) userId
-                                                          rorRange: (NSRange) range
+                                                          forRange: (NSRange) range
                                                     ignoringCache: (BOOL) ignore
                                                      onCompletion: (MKNKJSONCompleteBlock) completeBlock
                                                           onError: (MKNKJSONErrorBlock) errorBlock
@@ -1070,7 +1055,7 @@
                                                                                                      httpMethod: @"GET"
                                                                                                             ssl: TRUE];
     
-    networkOperation.ignoreCachedResponse = ignore;
+//    networkOperation.ignoreCachedResponse = ignore;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
         completeBlock(dictionary);
@@ -1330,9 +1315,6 @@
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
-    
-    [networkOperation setUsername: kOAuth2ClientId
-                         password: kOAuth2ClientSecret];
     
     [networkOperation setAuthorizationHeaderValue: credential.accessToken
                                       forAuthType: @"Bearer"];

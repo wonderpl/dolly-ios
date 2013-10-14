@@ -16,7 +16,7 @@
 
 #define kSideNavigationSearchCloseNotification @"SideNavigationSearchCloseNotification"
 
-typedef enum {
+typedef enum : NSInteger {
     SideNavigationStateHidden = 0,
     SideNavigationStateHalf = 1,
     SideNavigationStateFull = 2

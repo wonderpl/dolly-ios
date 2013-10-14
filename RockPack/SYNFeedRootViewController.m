@@ -305,7 +305,12 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) updateAnalytics
 {
     // Google analytics support
-    [GAI.sharedInstance.defaultTracker sendView: @"Feed"];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set: kGAIScreenName
+           value: @"Feed"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
 
 
@@ -319,11 +324,10 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
--(void) loadAndUpdateOriginalFeedData
+- (void) loadAndUpdateOriginalFeedData
 {
     [self resetDataRequestRange];
     [self loadAndUpdateFeedData];
-    
 }
 
 
@@ -332,32 +336,34 @@ typedef void(^FeedDataErrorBlock)(void);
     self.loadingMoreContent = YES;
     
     if (!appDelegate.currentOAuth2Credentials.userId)
+    {
         return;
-
+    }
+    
     [self.refreshButton startRefreshCycle];
     
-    __weak SYNFeedRootViewController* wself = self;
+    __weak SYNFeedRootViewController *wself = self;
+    
     FeedDataErrorBlock errorBlock = ^{
-        
         [wself handleRefreshComplete];
         
         [wself removeEmptyGenreMessage];
         
-        if(wself.feedItemsData.count == 0)
+        if (wself.feedItemsData.count == 0)
         {
-            [wself displayEmptyGenreMessage:NSLocalizedString(@"feed_screen_loading_error", nil) andLoader:NO]; 
+            [wself displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_loading_error", nil)
+                                  andLoader: NO];
         }
-            
         else
         {
-            [wself displayEmptyGenreMessage:NSLocalizedString(@"feed_screen_updating_error", nil) andLoader:NO];
-            [NSTimer scheduledTimerWithTimeInterval:3.0f
-                                             target:self
-                                           selector:@selector(removeEmptyGenreMessage)
-                                           userInfo:nil
-                                            repeats:NO];
+            [wself displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_updating_error", nil)
+                                  andLoader: NO];
+            [NSTimer scheduledTimerWithTimeInterval: 3.0f
+                                             target: self
+                                           selector: @selector(removeEmptyGenreMessage)
+                                           userInfo: nil
+                                            repeats: NO];
         }
-            
         
         self.loadingMoreContent = NO;
         
@@ -368,65 +374,51 @@ typedef void(^FeedDataErrorBlock)(void);
                                                    start: self.dataRequestRange.location
                                                     size: self.dataRequestRange.length
                                        completionHandler: ^(NSDictionary *responseDictionary) {
-                                                    
-                                           
                                            BOOL toAppend = (self.dataRequestRange.location > 0);
-                                                    
-                                           
-                                           NSDictionary *contentItem = responseDictionary[@"content"];
-                                           
-                                           if (!contentItem || ![contentItem isKindOfClass: [NSDictionary class]]) {
-                                               
-                                               errorBlock();
-                                               
-                                               return;
-                                               
-                                           }
-                                                        
-                                           
-                                           NSNumber* totalNumber = [contentItem[@"total"] isKindOfClass:[NSNumber class]] ? contentItem[@"total"] : @0 ;
-                                           wself.dataItemsAvailable = [totalNumber integerValue];
-                                           
-                                           // NSLog(@"%i from %i", ((NSArray*)contentItem[@"items"]).count, wself.dataItemsAvailable);
                                            
                                            
-                                           [wself removeEmptyGenreMessage];
-                                               
+                                           NSDictionary *contentItems = responseDictionary[@"content"];
                                            
-                                           if(![appDelegate.mainRegistry registerDataForSocialFeedFromItemsDictionary:contentItem
-                                                                                                          byAppending:toAppend])
-                                               
+                                           if (!contentItems || ![contentItems isKindOfClass: [NSDictionary class]])
                                            {
-                                               
                                                errorBlock();
                                                
                                                return;
-                                               
                                            }
                                            
-                                           
-                                           [wself fetchAndDisplayFeedItems];
-                                           
-                                           
-                                           wself.loadingMoreContent = NO;
-                                                    
-                                           
-                                           [wself handleRefreshComplete];
-                                           
-                                           if(wself.dataItemsAvailable == 0) {
+                                           [appDelegate.mainRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+                                               BOOL result = [appDelegate.mainRegistry
+                                                              registerDataForSocialFeedFromItemsDictionary: contentItems
+                                                              byAppending: toAppend];
                                                
-                                               [wself displayEmptyGenreMessage:NSLocalizedString(@"feed_screen_empty_message", nil) andLoader:NO];
+                                               return result;
+                                           } completionBlock: ^(BOOL registryResultOk) {
+                                               NSNumber *totalNumber = [contentItems[@"total"]
+                                                                        isKindOfClass: [NSNumber class]] ? contentItems[@"total"] : @0;
+                                               wself.dataItemsAvailable = [totalNumber integerValue];
                                                
+                                               if (!registryResultOk)
+                                               {
+                                                   DebugLog(@"Refresh subscription updates failed");
+                                                   errorBlock();
+                                               }
                                                
-                                           }
-                                                    
-                                           
-                                       } errorHandler: ^(NSDictionary* errorDictionary) {
-                                                    
-                                           
+                                               [wself removeEmptyGenreMessage];
+                                               
+                                               [wself fetchAndDisplayFeedItems];
+                                               
+                                               wself.loadingMoreContent = NO;
+                                               
+                                               [wself handleRefreshComplete];
+                                               
+                                               if (wself.dataItemsAvailable == 0)
+                                               {
+                                                   [wself								   displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_empty_message", nil)
+                                                                                   andLoader: NO];
+                                               }
+                                           }];
+                                       } errorHandler: ^(NSDictionary *errorDictionary) {
                                            errorBlock();
-                                                    
-                                           
                                        }];
 }
 
@@ -524,7 +516,6 @@ typedef void(^FeedDataErrorBlock)(void);
         [self.feedCollectionView reloadData];
         return;
     }
-    
     
     NSMutableDictionary* buckets = [NSMutableDictionary dictionary];
     NSDate* dateNoTime;
@@ -1234,10 +1225,10 @@ typedef void(^FeedDataErrorBlock)(void);
         
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker sendEventWithCategory: @"uiAction"
-                            withAction: @"videoPlusButtonClick"
-                             withLabel: nil
-                             withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"videoPlusButtonClick"
+                                                                label: nil
+                                                                value: nil] build]];
         
         [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                          action: @"select"
@@ -1300,10 +1291,10 @@ typedef void(^FeedDataErrorBlock)(void);
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"videoStarButtonClick"
-                         withLabel: @"feed"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoStarButtonClick"
+                                                            label: @"feed"
+                                                            value: nil] build]];
     
     BOOL didStar = (button.selected == NO);
     

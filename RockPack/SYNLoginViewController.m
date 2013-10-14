@@ -211,8 +211,14 @@
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear:animated];
+
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
     
-    [GAI.sharedInstance.defaultTracker sendView: @"Start"];
+    [tracker set: kGAIScreenName
+           value: @"Start"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     memberLabel.center = CGPointMake(memberLabel.center.x, loginButton.center.y - 54.0);
     memberLabel.frame = CGRectIntegral(memberLabel.frame);
@@ -365,6 +371,10 @@
 
 - (void) setState: (kLoginScreenState) newState
 {
+    
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
     if (newState == state)
         return;
     
@@ -376,17 +386,29 @@
     }
     else if (newState == kLoginScreenStateLogin)
     {
-        [GAI.sharedInstance.defaultTracker sendView: @"Login"];
+        [tracker set: kGAIScreenName
+               value: @"Login"];
+        
+        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+        
         [self setUpLoginStateFromPreviousState:state];
     }
     else if (newState == kLoginScreenStateRegister)
     {
-        [GAI.sharedInstance.defaultTracker sendView: @"Register"];
-        [self setUpRegisterStateFromState:state];
+        [tracker set: kGAIScreenName
+               value: @"Register"];
+        
+        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+        
+        [self setUpRegisterStateFromState: state];
     }
     else if (newState == kLoginScreenStatePasswordRetrieve)
     {
-        [GAI.sharedInstance.defaultTracker sendView: @"Forgot password"];
+        [tracker set: kGAIScreenName
+               value: @"Forgot password"];
+        
+        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+        
         [self setUpPasswordState];
     }
     
@@ -937,10 +959,10 @@
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"goal"
-                        withAction: @"userLogin"
-                         withLabel: @"Rockpack"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"userLogin"
+                                                            label: @"Rockpack"
+                                                            value: nil] build]];
     
     [self clearAllErrorArrows];
     
@@ -1119,11 +1141,11 @@
     [self hideOnboarding];
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"facebookLogin"
-                         withLabel: nil
-                         withValue: nil];    
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"facebookLogin"
+                                                            label: nil
+                                                            value: nil] build]];
     
     _facebookLoginIsInProcess = NO;
     
@@ -1273,13 +1295,13 @@
     // Now set the age
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"goal"
-                        withAction: @"userRegistration"
-                         withLabel: @"Rockpack"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"userRegistration"
+                                                            label: @"Rockpack"
+                                                            value: nil] build]];
     
-    [tracker setCustom: kGADimensionAge
-             dimension: ageString];
+    [tracker set: [GAIFields customDimensionForIndex: kGADimensionAge]
+           value: ageString];
     
     activityIndicator.center = CGPointMake(registerNewUserButton.center.x, registerNewUserButton.center.y);
     [activityIndicator startAnimating];

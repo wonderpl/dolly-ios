@@ -76,11 +76,6 @@
 //    [Appirater setDebug: YES];
 #endif
     
-    // Enable the Spark Inspector
-#if DEBUG
-    [SparkInspector enableObservation];
-#endif
-    
 #if USEUDID
     //    [TestFlight setDeviceIdentifier: [[UIDevice currentDevice] uniqueIdentifier]];
 #endif
@@ -554,10 +549,6 @@
     // Automatically send uncaught exceptions to Google Analytics.
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 30;
-    [GAI sharedInstance].defaultTracker.sessionTimeout = 300; // was 30
-    
-    // Set debug to YES to enable  extra debugging information.
-    [GAI sharedInstance].debug = NO;
     
     // Create tracker instance.
     [[GAI sharedInstance] trackerWithTrackingId: kGoogleAnalyticsId];
@@ -593,14 +584,19 @@
         AssertOrLog(@"Failed to initialize persistent store coordinator");
     }
     
-    // == Main Context
+    
+    // == 3 Contexts == //
+    
+    
+    // == Private Context == //
     self.privateManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSPrivateQueueConcurrencyType];
     self.privateManagedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
     
+    // == Main Context == //
     self.mainManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
     self.mainManagedObjectContext.parentContext = self.privateManagedObjectContext;
     
-    // == Search Context
+    // == Search Context == //
     self.searchManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
     NSPersistentStoreCoordinator *searchPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: managedObjectModel];
     NSPersistentStore *searchStore = [searchPersistentStoreCoordinator addPersistentStoreWithType: NSInMemoryStoreType
@@ -616,7 +612,7 @@
     
     self.searchManagedObjectContext.persistentStoreCoordinator = searchPersistentStoreCoordinator;
 
-    // == Channel Context
+    // == Channel Context == //
     self.channelsManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
     NSPersistentStoreCoordinator *channelsPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: managedObjectModel];
     NSPersistentStore *channelsStore = [channelsPersistentStoreCoordinator addPersistentStoreWithType: NSInMemoryStoreType
@@ -678,8 +674,8 @@
         DebugLog(@"Error adding persistent store to coordinator %@\n%@", [error localizedDescription], [error userInfo]);
     }
     
-    _mainRegistry = [SYNMainRegistry registry];
-    _searchRegistry = [SYNSearchRegistry registry];
+    _mainRegistry = [SYNMainRegistry registryWithParentContext:self.mainManagedObjectContext];
+    _searchRegistry = [SYNSearchRegistry registryWithParentContext:self.searchManagedObjectContext];
 }
 
 
@@ -785,31 +781,36 @@
 {
     if ([self.mainManagedObjectContext hasChanges])
     {
-        [self.mainManagedObjectContext performBlockAndWait: ^{
+        [self.mainManagedObjectContext performBlock: ^{
+            NSError *error = nil;
             
-             NSError *error = nil;
-             
-             if (![self.mainManagedObjectContext save: &error])
+            if (![self.mainManagedObjectContext save: &error])
+            {
                 AssertOrLog(@"Error saving Main moc: %@\n%@", [error localizedDescription], [error userInfo]);
-              
-         }];
-    }
-    
-    void (^ savePrivate) (void) = ^
-    {
-        NSError *error = nil;
-        
-        if (![self.privateManagedObjectContext save: &error])
-            AssertOrLog(@"Error saving Private moc: %@\n%@", [error localizedDescription], [error userInfo]);
-         
-    };
-    
-    if ([self.privateManagedObjectContext hasChanges])
-    {
-        if (wait)
-            [self.privateManagedObjectContext performBlockAndWait: savePrivate];
-        else
-            [self.privateManagedObjectContext performBlock: savePrivate];
+            }
+            
+            void (^ savePrivate) (void) = ^
+            {
+                NSError *error = nil;
+                
+                if (![self.privateManagedObjectContext save: &error])
+                {
+                    AssertOrLog(@"Error saving Private moc: %@\n%@", [error localizedDescription], [error userInfo]);
+                }
+            };
+            
+            if ([self.privateManagedObjectContext hasChanges])
+            {
+                if (wait)
+                {
+                    [self.privateManagedObjectContext performBlockAndWait: savePrivate];
+                }
+                else
+                {
+                    [self.privateManagedObjectContext performBlock: savePrivate];
+                }
+            }
+        }];
     }
 }
 
@@ -1485,11 +1486,10 @@
         
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker sendEventWithCategory: @"goal"
-                            withAction: @"openDeepLink"
-                             withLabel: url.absoluteString
-                             withValue: nil];
-        
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"openDeepLink"
+                                                                label: url.absoluteString
+                                                                value: nil] build]];
         
         enteredAppThroughNotification = YES;
     }
@@ -1547,10 +1547,10 @@
         
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker sendEventWithCategory: @"goal"
-                            withAction: @"openDeepLink"
-                             withLabel: targetURLString
-                             withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"openDeepLink"
+                                                                label: targetURLString
+                                                                value: nil] build]];
         
         return [FBSession.activeSession
                 handleOpenURL: url];

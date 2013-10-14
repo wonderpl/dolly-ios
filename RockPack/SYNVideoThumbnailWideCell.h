@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "VideoInstance.h"
 
-typedef enum {
+typedef enum : NSInteger {
     kVideoThumbnailDisplayModeChannel = 0,
     kVideoThumbnailDisplayModeYoutube = 1
 } kVideoThumbnailDisplayMode;

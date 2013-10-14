@@ -216,7 +216,13 @@
 {
     [super viewDidAppear:animated];
     
-    [GAI.sharedInstance.defaultTracker sendView: @"Start"];
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set: kGAIScreenName
+           value: @"Start"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.isPreIPhone5 = [SYNDeviceManager.sharedInstance currentScreenHeight] < 500;
     
@@ -361,14 +367,13 @@
     [self hideOnboarding];
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"facebookLogin"
+                                                            label: nil
+                                                            value: nil] build]];
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"facebookLogin"
-                         withLabel: nil
-                         withValue: nil];
-    
-    
-    if(![self isNetworkAccessibleOtherwiseShowErrorAlert])
+    if (![self isNetworkAccessibleOtherwiseShowErrorAlert])
     {
         return;
     }
@@ -423,12 +428,16 @@
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"goal"
-                        withAction: @"userRegistration"
-                         withLabel: @"Rockpack"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"userRegistration"
+                                                            label: @"Rockpack"
+                                                            value: nil] build]];
     
-    [GAI.sharedInstance.defaultTracker sendView: @"Register"];
+    // Google analytics support
+    [tracker set: kGAIScreenName
+           value: @"Register"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     //Fade out login background
     self.loginBackgroundImage.alpha = 1.0f;
@@ -469,8 +478,14 @@
 - (IBAction) loginTapped: (id) sender
 {
     [self hideOnboarding];
+
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
     
-    [GAI.sharedInstance.defaultTracker sendView: @"Login"];
+    [tracker set: kGAIScreenName
+           value: @"Login"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     //Fade out login background
     self.loginBackgroundImage.alpha = 1.0f;
@@ -509,7 +524,13 @@
 - (IBAction) forgotPasswordTapped: (id) sender
 {
     // Google analytics support
-    [GAI.sharedInstance.defaultTracker sendView: @"Forgot password"];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set: kGAIScreenName
+           value: @"Forgot password"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+     
     self.state = kLoginScreenStatePasswordRetrieve;
     [UIView animateWithDuration:kLoginAnimationTransitionDuration delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGPoint newCenter = self.passwordView.center;
@@ -724,11 +745,11 @@
                 [self completeLoginProcess];
                 
                 id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                
-                [tracker sendEventWithCategory: @"goal"
-                                    withAction: @"userLogin"
-                                     withLabel: @"Rockpack"
-                                     withValue: nil];
+
+                [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                       action: @"userLogin"
+                                                                        label: @"Rockpack"
+                                                                        value: nil] build]];
                 
             } errorHandler:^(NSDictionary* errorDictionary) {
                 
@@ -998,7 +1019,13 @@
 
 -(void)showRegistrationStep2
 {
-    [GAI.sharedInstance.defaultTracker sendView: @"Register 2"];
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set: kGAIScreenName
+           value: @"Register 2"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.state = kLoginScreenStateRegisterStepTwo;
     [self turnOnButton:self.backButton];

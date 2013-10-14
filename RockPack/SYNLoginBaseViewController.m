@@ -451,16 +451,24 @@
             // Now set the age
             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
             
-            [tracker setCustom: kGADimensionAge
-                     dimension: ageString];
+            [tracker set: [GAIFields customDimensionForIndex: kGADimensionAge]
+                   value: ageString];
         }
         
         [self doFacebookLoginAnimation];
         
-        // after the log-in with FB through its SDK, log in with the server hitting "/ws/login/external/"
         
+        // We need to check if the expiration date is valid (if the user is using the native iOS Facebook settings, it will be invalid ([NSDate distantFuture])
+        NSDate *expDate = nil;
+        
+        if ([accessTokenData.expirationDate compare: [NSDate distantFuture]] != NSOrderedSame)
+        {
+            expDate = accessTokenData.expirationDate;
+        }
+        
+        // after the log-in with FB through its SDK, log in with the server hitting "/ws/login/external/"
         [_appDelegate.oAuthNetworkEngine doFacebookLoginWithAccessToken: accessTokenData.accessToken
-                                                                expires: accessTokenData.expirationDate
+                                                                expires: expDate
                                                             permissions: accessTokenData.permissions // @"read" at this time
                                                       completionHandler: ^(SYNOAuth2Credential* credential) {
                                                           
@@ -947,11 +955,11 @@
     self.currentOnBoardingPage = (NSInteger)floorf(contentOffsetX / self.onBoardingController.scrollView.frame.size.width);
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"cardSlide"
-                         withLabel: [NSString stringWithFormat:@"%i", (_currentOnBoardingPage + 1)]
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"cardSlide"
+                                                            label: [NSString stringWithFormat:@"%i", (_currentOnBoardingPage + 1)]
+                                                            value: nil] build]];
 }
 
 

@@ -261,7 +261,12 @@
 - (void) updateAnalytics
 {
     // Google analytics support
-    [GAI.sharedInstance.defaultTracker sendView: @"Channels - Root"];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+
+    [tracker set: kGAIScreenName
+           value: @"Channels - Root"    ];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
 
 
@@ -278,6 +283,7 @@
                   byAppending: (BOOL) append
 {
     void (^completeBlock) (NSDictionary *) = ^(NSDictionary *response) {
+        
         NSDictionary *channelsDictionary = response[@"channels"];
         
         if (!channelsDictionary || ![channelsDictionary isKindOfClass: [NSDictionary class]])
@@ -305,39 +311,48 @@
         
         self.dataItemsAvailable = [totalNumber integerValue];
         
+        [self.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
+            
+            BOOL registryResultOk = [appDelegate.mainRegistry registerChannelsFromDictionary: response
+                                                                                    forGenre: genre
+                                                                                 byAppending: append];
+            
+            return registryResultOk;
+            
+        } completionBlock:^(BOOL registryResultOk) {
+            
+            self.loadingMoreContent = NO;
+            
+            if (!registryResultOk)
+            {
+                DebugLog(@"Registration of Channel Failed for: %@", self.currentCategoryId);
+                return;
+            }
+            
+            [self displayChannelsForGenre: genre];
+            
+            if (self.emptyGenreMessageView)
+            {
+                [self.emptyGenreMessageView removeFromSuperview];
+                self.emptyGenreMessageView = nil;
+            }
+            
+            if (self.channels.count == 0)
+            {
+                [self displayEmptyGenreMessage: @"No Channels Found"];
+            }
+            else
+            {
+                // show on boarding when we have channels after a delay to allow them to display
+                [self performSelector: @selector(checkForOnBoarding)
+                           withObject: nil
+                           afterDelay: 0.5f];
+            }
+            
+        }]; // end of background registry operation
         
-        BOOL registryResultOk = [appDelegate.mainRegistry
-                                 registerChannelsFromDictionary: response
-                                 forGenre: genre
-                                 byAppending: append];
-        self.loadingMoreContent = NO;
         
-        if (!registryResultOk)
-        {
-            DebugLog(@"Registration of Channel Failed for: %@", self.currentCategoryId);
-            return;
-        }
-        
-        [self displayChannelsForGenre: genre];
-        
-        if (self.emptyGenreMessageView)
-        {
-            [self.emptyGenreMessageView removeFromSuperview];
-            self.emptyGenreMessageView = nil;
-        }
-        
-        if (self.channels.count == 0)
-        {
-            [self displayEmptyGenreMessage: @"No Channels Found"];
-        }
-        else
-        {
-            // show on boarding when we have channels after a delay to allow them to display
-            [self performSelector: @selector(checkForOnBoarding)
-                       withObject: nil
-                       afterDelay: 0.5f];
-        }
-    };
+    }; // end of completion block
 
     void (^errorBlock) (NSDictionary *) = ^(NSDictionary *errorInfo) {
         DebugLog(@"Could not load channels: %@", errorInfo);
@@ -346,20 +361,21 @@
     
     if (genre)
     {
-    self.runningNetworkOperation = [appDelegate.networkEngine
-                                    updateChannelsScreenForCategory: (genre ? genre.uniqueId : @"all")
-                                    forRange: self.dataRequestRange
-                                    ignoringCache: NO
-                                    onCompletion: completeBlock
-                                    onError: errorBlock];
+        self.runningNetworkOperation = [appDelegate.networkEngine
+                                        updateChannelsScreenForCategory: (genre ? genre.uniqueId : @"all")
+                                        forRange: self.dataRequestRange
+                                        ignoringCache: NO
+                                        onCompletion: completeBlock
+                                        onError: errorBlock];
     }
     else
     {
-        self.runningNetworkOperation = [appDelegate.oAuthNetworkEngine updateRecommendedChannelsScreenForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                                                                       rorRange: self.dataRequestRange
-                                                                                                  ignoringCache: NO
-                                                                                                   onCompletion: completeBlock
-                                                                                                        onError: errorBlock];
+        self.runningNetworkOperation = [appDelegate.oAuthNetworkEngine
+                                        updateRecommendedChannelsScreenForUserId: appDelegate.currentOAuth2Credentials.userId
+                                        forRange: self.dataRequestRange
+                                        ignoringCache: NO
+                                        onCompletion: completeBlock
+                                        onError: errorBlock];
     }
 }
 
@@ -599,18 +615,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 }
 
 
-//- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-//{
-//    if (self.isAnimating) // prevent double clicking
-//    {
-//        return;
-//    }
-//    
-//    Channel *channel = (Channel *) self.channels[indexPath.row];
-//    
-//    [appDelegate.viewStackManager
-//     viewChannelDetails: channel];
-//}
 
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
@@ -804,7 +808,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     self.categoryTableViewController = [[SYNChannelCategoryTableViewController alloc] init];
     CGRect newFrame = self.channelThumbnailCollectionView.frame;
-    newFrame.size.height += IS_IOS_7_OR_GREATER ? 20.0f : 0.0f;
+//    newFrame.size.height += IS_IOS_7_OR_GREATER ? 20.0f : 0.0f;
     newFrame.size.width = self.categoryTableViewController.view.frame.size.width;
     self.categoryTableViewController.view.frame = newFrame;
     [self.view addSubview: self.categoryTableViewController.view];
@@ -941,10 +945,10 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"categoryItemClick"
-                         withLabel: category.name
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"categoryItemClick"
+                                                            label: category.name
+                                                            value: nil] build]];
     
     if (category)
     {
@@ -970,11 +974,11 @@ referenceSizeForFooterInSection: (NSInteger) section
             didSelectSubCategory: (SubGenre *) subCategory
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"categoryItemClick"
-                         withLabel: subCategory.name
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"categoryItemClick"
+                                                            label: subCategory.name
+                                                            value: nil] build]];
     
     self.categoryNameLabel.text = subCategory.genre.name;
     [self.categoryNameLabel sizeToFit];

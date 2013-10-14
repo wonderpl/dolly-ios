@@ -42,6 +42,14 @@
 // FIXME: NOT QUITE SURE WHY THESE ARE REQUIRED
 @synthesize dataRequestRange;
 
+
+- (void) dealloc
+{
+    self.videoThumbnailCollectionView.delegate = self;
+    self.videoThumbnailCollectionView.dataSource = self;
+}
+
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -74,10 +82,15 @@
                                          [[SYNDeviceManager sharedInstance] currentScreenWidth],
                                          [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar]);
         
+        CGFloat adjustmentY = 0;
+        
+        if (IS_IOS_7_OR_GREATER)
+            adjustmentY = 15.0f;
+        
         videoCollectionViewFrame = CGRectMake(0.0,
-                                              kStandardCollectionViewOffsetY + 40.0f,
+                                              kStandardCollectionViewOffsetY + 40.0f + adjustmentY,
                                               [[SYNDeviceManager sharedInstance] currentScreenWidth],
-                                              [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar] - kStandardCollectionViewOffsetY - 36.0f);
+                                              [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar] - kStandardCollectionViewOffsetY - 36.0f - adjustmentY);
         
         
         sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 15.0f, 10.0f);
@@ -107,8 +120,7 @@
     self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
     self.videoThumbnailCollectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
-    [self.view
-     addSubview: self.videoThumbnailCollectionView];
+    [self.view addSubview: self.videoThumbnailCollectionView];
     
     
     self.videoThumbnailCollectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -505,10 +517,10 @@
 }
 
 
-- (CGSize) footerSize
-{
-    return [SYNDeviceManager.sharedInstance isIPhone] ? CGSizeMake(320.0f, 64.0f) : CGSizeMake(1024.0, 64.0);
-}
+//- (CGSize) footerSize
+//{
+//    return [SYNDeviceManager.sharedInstance isIPhone] ? CGSizeMake(320.0f, 64.0f) : CGSizeMake(1024.0, 64.0);
+//}
 
 
 - (SYNAppDelegate *) appDelegate
@@ -585,10 +597,10 @@
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker sendEventWithCategory: @"uiAction"
-                            withAction: @"videoPlusButtonClick"
-                             withLabel: nil
-                             withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"videoPlusButtonClick"
+                                                                label: nil
+                                                                value: nil] build]];
         
         [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                          action: @"select"
@@ -634,6 +646,32 @@
 -(EntityType)associatedEntity
 {
     return EntityTypeVideoInstance;
+}
+
+- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
+            viewForSupplementaryElementOfKind: (NSString *) kind
+                                  atIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionReusableView *supplementaryView;
+    
+    if (collectionView == self.videoThumbnailCollectionView)
+    {
+        if (kind == UICollectionElementKindSectionFooter)
+        {
+            self.footerView = [self.videoThumbnailCollectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                                                      withReuseIdentifier: @"SYNChannelFooterMoreView"
+                                                                                             forIndexPath: indexPath];
+            
+            supplementaryView = self.footerView;
+            
+            if (self.fetchedResultsController.fetchedObjects.count > 0)
+            {
+                self.footerView.showsLoading = self.isLoadingMoreContent;
+            }
+        }
+    }
+    
+    return supplementaryView;
 }
 
 

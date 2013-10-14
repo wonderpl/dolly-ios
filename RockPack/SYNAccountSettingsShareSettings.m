@@ -32,11 +32,11 @@
     [super viewDidLoad];
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"accountPropertyChanged"
-                         withLabel: @"Share"
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"accountPropertyChanged"
+                                                            label: @"Share"
+                                                            value: nil] build]];
     
     self.controls = [[NSMutableArray alloc] init];
     

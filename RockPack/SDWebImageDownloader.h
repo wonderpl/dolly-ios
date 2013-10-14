@@ -10,7 +10,7 @@
 #import "SDWebImageCompat.h"
 #import "SDWebImageOperation.h"
 
-typedef enum
+typedef enum : NSInteger
 {
     SDWebImageDownloaderLowPriority = 1 << 0,
     SDWebImageDownloaderProgressiveDownload = 1 << 1,

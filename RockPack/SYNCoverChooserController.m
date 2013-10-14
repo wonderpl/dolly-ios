@@ -257,10 +257,10 @@
         {
             case 0:
             {
-                [tracker sendEventWithCategory: @"goal"
-                                    withAction: @"channelCoverSelected"
-                                     withLabel: @"None"
-                                     withValue: nil];
+                [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                       action: @"channelCoverSelected"
+                                                                        label: @"None"
+                                                                        value: nil] build]];
                 
                 imageURLString = @"";
                 remoteId = kCoverSetNoCover;
@@ -269,10 +269,10 @@
                 
             case 1:
             {
-                [tracker sendEventWithCategory: @"goal"
-                                    withAction: @"channelCoverSelected"
-                                     withLabel: @"Uploaded"
-                                     withValue: nil];
+                [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                       action: @"channelCoverSelected"
+                                                                        label: @"Uploaded"
+                                                                        value: nil] build]];
                 
                 if (self.shouldShowUploadingPlaceholder)
                 {
@@ -292,10 +292,10 @@
                 
             case 2:
             {
-                [tracker sendEventWithCategory: @"goal"
-                                    withAction: @"channelCoverSelected"
-                                     withLabel: @"Rockpack"
-                                     withValue: nil];
+                [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                       action: @"channelCoverSelected"
+                                                                        label: @"Rockpack"
+                                                                        value: nil] build]];
                 
                 // User channel covers
                 CoverArt *coverArt = [self.rockpackCoverFetchedResultsController objectAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row

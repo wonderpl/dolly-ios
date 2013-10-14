@@ -45,8 +45,8 @@
         
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker setCustom: kGADimensionLocale
-                 dimension: self.localeString];
+        [tracker set: [GAIFields customDimensionForIndex: kGADimensionLocale]
+               value: self.localeString];
     }
     
     return self;
@@ -240,10 +240,11 @@
              
              NSString *errorCodeString = [NSString stringWithFormat: @"Error %d", responseError.code];
              
-             [tracker sendEventWithCategory: @"network"
-                                 withAction: errorCodeString
-                                  withLabel: weakNetworkOperation.url
-                                  withValue: nil];
+             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"network"
+                                                                    action: errorCodeString
+                                                                     label: weakNetworkOperation.url
+                                                                     value: nil] build]];
+             
              if (responseError.code >=500 && responseError.code < 600)
              {
                  [self showErrorPopUpForError:responseError];

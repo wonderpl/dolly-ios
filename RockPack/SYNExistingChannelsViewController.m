@@ -176,11 +176,11 @@
             // this is a replacement for the sharing granularity
             
             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-            
-            [tracker sendEventWithCategory: @"goal"
-                                withAction: @"videoShared"
-                                 withLabel: @"fbe"
-                                 withValue: nil];
+
+            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                   action: @"videoShared"
+                                                                    label: @"fbe"
+                                                                    value: nil] build]];
         }
     };
     
@@ -231,11 +231,14 @@
     [super viewWillAppear: animated];
     
     self.channelThumbnailCollectionView.scrollsToTop = YES;
-    
-    
+
     // Google analytics support
-    [GAI.sharedInstance.defaultTracker
-     sendView: @"Channels - Create - Select"];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set: kGAIScreenName
+           value: @"Channels - Create - Select"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.closeButton.enabled = YES;
     self.confirmButtom.enabled = YES;
@@ -404,10 +407,10 @@
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"channelSelectionClick"
-                         withLabel: @"Existing"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelSelectionClick"
+                                                            label: @"Existing"
+                                                            value: nil] build]];
     
     if (self.previouslySelectedPath)
     {
@@ -434,11 +437,11 @@
     
     if(indexPath.row != 0) // only the 'create new channel' triggers the function , the rest of the cells respond to press
         return;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"channelSelectionClick"
-                         withLabel: @"New"
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelSelectionClick"
+                                                            label: @"New"
+                                                            value: nil] build]];
     
     //Reset any previous selection
     self.previouslySelectedPath = nil;

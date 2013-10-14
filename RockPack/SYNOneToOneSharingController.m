@@ -220,6 +220,10 @@
         CGRect cbFrame = self.closeButton.frame;
         cbFrame.origin.x = 278.0f;
         self.closeButton.frame = cbFrame;
+        
+        UIEdgeInsets ei = self.searchResultsTableView.contentInset;
+        ei.bottom = 58.0f;
+        self.searchResultsTableView.contentInset = ei;
     }
     
     self.originalFrame = CGRectZero;
@@ -273,8 +277,14 @@
     
     // always present the buttons at the bottom
     [self presentActivities];
+
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
     
-    [GAI.sharedInstance.defaultTracker sendView: @"Share"];
+    [tracker set: kGAIScreenName
+           value: @"Share"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void) viewWillAppear: (BOOL) animated
@@ -358,48 +368,46 @@
     ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, &error);
     
     if (addressBookRef == NULL)
+    {
         return;
-    
+    }
     
     BOOL hasFacebookSession = [[SYNFacebookManager sharedFBManager] hasActiveSession];
     
     ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-                           if (granted)
-                           {
-                               NSLog(@"Address Book Access GRANTED");
-                               
-                               // saves the address book friends in the DB
-                               [self fetchAddressBookFriends];
-                               
-                               // populates the self.friends array with possibly new data
-                               [self fetchAndDisplayFriends];
-                               
-                               
-                           }
-                           else
-                           {
-                               NSLog(@"Address Book Access DENIED");
-                               
-                               if (!hasFacebookSession)
-                               {
-                                   
-                               }
-                           }
+            if (granted)
+            {
+                NSLog(@"Address Book Access GRANTED");
+                
+                // saves the address book friends in the DB
+                [self fetchAddressBookFriends];
+                
+                // populates the self.friends array with possibly new data
+                [self fetchAndDisplayFriends];
+            }
+            else
+            {
+                NSLog(@"Address Book Access DENIED");
+                
+                if (!hasFacebookSession)
+                {
+                }
+            }
             
-                        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
             
-                        [tracker sendEventWithCategory: @"AddressBookPerm"
-                                            withAction: granted ? @"accepted" : @"rejected"
-                                             withLabel: nil
-                                             withValue: nil];
+            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                   action: @"AddressBookPerm"
+                                                                    label: granted ? @"accepted": @"rejected"
+                                                                    value: nil] build]];
             
-                        if(addressBookRef)
-                           CFRelease(addressBookRef);
-
-                       });
-          });
+            if (addressBookRef)
+            {
+                CFRelease(addressBookRef);
+            }
+        });
+    });
 }
 
 
@@ -775,10 +783,10 @@
      
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"SearchFriendtoShare"
-                        withAction: (lastCellPressed ? @"New" : ([friend.externalSystem isEqualToString:kFacebook] ? @"fromFB" : @"fromAB"))
-                         withLabel: nil
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"SearchFriendtoShare"
+                                                            label: (lastCellPressed ? @"New" : ([friend.externalSystem isEqualToString:kFacebook] ? @"fromFB" : @"fromAB"))
+                                                            value: nil] build]];
     
     [tableView removeFromSuperview];
     
@@ -871,10 +879,10 @@
     
     NSString* whereFrom = [self.friendToAddEmail.externalSystem isEqualToString:kFacebook] ? @"fromFB" : @"New";
     
-    [tracker sendEventWithCategory: @"ProvideEmailtoShare"
-                        withAction: whereFrom
-                         withLabel: nil
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"ProvideEmailtoShare"
+                                                            label: whereFrom
+                                                            value: nil] build]];
     
     [self sendEmailToFriend: self.friendToAddEmail];
 }
@@ -951,10 +959,10 @@
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"SearchFriendtoShare"
-                        withAction: nil
-                         withLabel: nil
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"SearchFriendtoShare"
+                                                            label: nil
+                                                            value: nil] build]];
     
     return YES;
 }
@@ -1160,10 +1168,11 @@
                                                id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                                NSString* actionType =
                                                [self.mutableShareDictionary[@"type"] isEqualToString:@"channel"] ? @"channelShared" : @"videoShared";
-                                               [tracker sendEventWithCategory: actionType
-                                                                   withAction: @"1to1"
-                                                                    withLabel: nil
-                                                                    withValue: nil];
+
+                                               [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                                                      action: actionType
+                                                                                                       label: @"1to1"
+                                                                                                       value: nil] build]];
                                                
                                            } errorHandler: ^(NSDictionary *error) {
                                                

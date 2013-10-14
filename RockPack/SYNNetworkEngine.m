@@ -10,13 +10,14 @@
 #import "Genre.h"
 #import "NSString+Utils.h"
 #import "SYNAppDelegate.h"
-#import "SYNAppDelegate.h"
 #import "SYNMainRegistry.h"
 #import "SYNNetworkEngine.h"
 #import "SYNSearchRegistry.h"
 #import "VideoInstance.h"
 
 @interface SYNNetworkEngine ()
+
+@property (nonatomic, weak) SYNAppDelegate* appDelegate;
 
 @end
 
@@ -36,7 +37,7 @@
     
     if ((self = [super initWithDefaultSettings]))
     {
-        // Custom init goes here
+        self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     }
     
     return self;
@@ -263,6 +264,7 @@
 
 #pragma mark - Search
 
+
 - (MKNetworkOperation *) searchVideosForTerm: (NSString *) searchTerm
                                      inRange: (NSRange) range
                                   onComplete: (MKNKSearchSuccessBlock) completeBlock
@@ -287,28 +289,32 @@
     networkOperation.shouldNotCacheResponse = YES;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        int itemsCount = 0;
         
         if (!dictionary)
         {
             return;
         }
         
-        NSNumber * totalNumber = (NSNumber *) dictionary[@"videos"][@"total"];
-        
-        if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
-        {
-            itemsCount = totalNumber.intValue;
-        }
-        
-        BOOL registryResultOk = [self.searchRegistry registerVideosFromDictionary: dictionary];
-        
-        if (!registryResultOk)
-        {
-            return;
-        }
-        
-        completeBlock(itemsCount);
+        [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            BOOL registryResultOk = [self.searchRegistry registerVideosFromDictionary: dictionary];
+            
+            return registryResultOk;
+        } completionBlock: ^(BOOL registryResultOk) {
+            int itemsCount = 0;
+            
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"videos"][@"total"];
+            
+            if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
+            {
+                itemsCount = totalNumber.intValue;
+            }
+            if (!registryResultOk)
+            {
+                return;
+            }
+            
+            completeBlock(itemsCount);
+        }];
     } errorHandler: ^(NSError *error) {
         DebugLog(@"Update Videos Screens Request Failed");
         
@@ -349,29 +355,34 @@
     networkOperation.shouldNotCacheResponse = YES;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        int itemsCount = 0;
         
         if (!dictionary)
         {
             return;
         }
         
-        NSNumber *totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
-        
-        if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
-        {
-            itemsCount = totalNumber.intValue;
-        }
-        
-        BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary
-                                                                     byAppending: append];
-        
-        if (!registryResultOk)
-        {
-            return;
-        }
-        
-        completeBlock(itemsCount);
+        [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary
+                                                                         byAppending: append];
+            
+            return registryResultOk;
+        } completionBlock: ^(BOOL registryResultOk) {
+            int itemsCount = 0;
+            
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
+            
+            if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
+            {
+                itemsCount = totalNumber.intValue;
+            }
+            
+            if (!registryResultOk)
+            {
+                return;
+            }
+            
+            completeBlock(itemsCount);
+        }];
     } errorHandler: ^(NSError *error) {
         DebugLog(@"Update Videos Screens Request Failed");
         
@@ -411,28 +422,35 @@
     networkOperation.shouldNotCacheResponse = YES;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        int itemsCount = 0;
-        
         if (!dictionary)
         {
             return;
         }
+
         
-        NSNumber * totalNumber = (NSNumber *) dictionary[@"channels"][@"total"];
+        [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            BOOL registryResultOk = [self.searchRegistry registerChannelsFromDictionary: dictionary];
+            
+            return registryResultOk;
+        } completionBlock: ^(BOOL registryResultOk) {
+            int itemsCount = 0;
+            
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"channels"][@"total"];
+            
+            if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
+            {
+                itemsCount = totalNumber.intValue;
+            }
+            
+            if (!registryResultOk)
+            {
+                return;
+            }
+            
+            completeBlock(itemsCount);
+        }];
         
-        if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
-        {
-            itemsCount = totalNumber.intValue;
-        }
         
-        BOOL registryResultOk = [self.searchRegistry registerChannelsFromDictionary: dictionary];
-        
-        if (!registryResultOk)
-        {
-            return;
-        }
-        
-        completeBlock(itemsCount);
     } errorHandler: ^(NSError *error) {
         DebugLog(@"Update Videos Screens Request Failed");
         
@@ -619,30 +637,34 @@
     networkOperation.shouldNotCacheResponse = YES;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        int itemsCount = 0;
         
         if (!dictionary)
         {
             return;
         }
         
-        NSNumber *totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
-        
-        if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
-        {
-            itemsCount = totalNumber.intValue;
-        }
-        
-        BOOL registryResultOk = [self.searchRegistry registerSubscribersFromDictionary: dictionary
-                                                                           byAppending: append];
-        
-        if (!registryResultOk)
-        {
-            errorBlock();
-            return;
-        }
-        
-        completionBlock(itemsCount);
+        [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            BOOL registryResultOk = [self.searchRegistry registerSubscribersFromDictionary: dictionary
+                                                                               byAppending: append];
+            
+            return registryResultOk;
+        } completionBlock: ^(BOOL registryResultOk) {
+            int itemsCount = 0;
+            
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
+            
+            if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
+            {
+                itemsCount = totalNumber.intValue;
+            }
+            
+            if (!registryResultOk)
+            {
+                return;
+            }
+            
+            completionBlock(itemsCount);
+        }];
     } errorHandler: ^(NSError *error) {
     }];
     

@@ -44,7 +44,7 @@
 // Pre Sign-Up Onboarding
 //iPhone - has line breaks
 "startscreen_onboard_1_title_iphone" = " ";
-"startscreen_onboard_1_iphone" = "\nLove video again.";
+"startscreen_onboard_1_iphone" = "\nLove video again";
 
 "startscreen_onboard_2_title_iphone" = "INDULGE";
 "startscreen_onboard_2_iphone" = "\nFeast on playlists full of\nhandpicked video goodness.\n(We call them ‘packs’).";
@@ -60,7 +60,7 @@
 
 //iPad
 "startscreen_onboard_1_title_ipad" = " ";
-"startscreen_onboard_1_ipad" = "\nLove video again.";
+"startscreen_onboard_1_ipad" = "\nLove video again";
 
 "startscreen_onboard_2_title_ipad" = "INDULGE";
 "startscreen_onboard_2_ipad" = "\nFeast on playlists full of handpicked video goodness.\n(We call them ‘packs’).";
@@ -93,6 +93,9 @@
 "login_screen_form_field_username_error_empty" = "Please enter your email or username";
 "login_screen_form_field_password_error_empty" = "Please enter your password";
 "login_screen_saving_error" = "Oops! Please try again.";
+
+
+
 
 //Errors - Registration
 "register_screen_form_field_email_error_empty" = "Please enter a valid email address";
@@ -134,6 +137,7 @@
 
 "friends_follow" = "Follow your friends on Rockpack";
 "friends_invite" = "Invite your friends to Rockpack";
+"friends_name_not_found" = "This person is not a\nfacebook friend";
 
 // == One to One Sharing == //
 

@@ -75,11 +75,11 @@
     [super viewDidLoad];
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"accountPropertyChanged"
-                         withLabel: @"Location"
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"accountPropertyChanged"
+                                                            label: @"Location"
+                                                            value: nil] build]];
     
     self.view.backgroundColor = [UIColor whiteColor];
     

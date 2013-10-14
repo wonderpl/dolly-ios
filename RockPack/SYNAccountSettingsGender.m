@@ -74,11 +74,11 @@
     [super viewDidLoad];
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"accountPropertyChanged"
-                         withLabel: @"Gender"
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"accountPropertyChanged"
+                                                            label: @"Gender"
+                                                            value: nil] build]];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -221,23 +221,23 @@
                                            if([newGender isEqualToString: @"m"])
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderMale);
-                                               
-                                               [tracker setCustom: kGADimensionGender
-                                                        dimension: @"male"];
+
+                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
+                                                      value: @"male"];
                                            }
                                            else if([newGender isEqualToString: @"f"])
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderFemale);
                                                
-                                               [tracker setCustom: kGADimensionGender
-                                                        dimension: @"female"];
+                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
+                                                      value: @"female"];
                                            }
                                            else
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderUndecided);
                                                
-                                               [tracker setCustom: kGADimensionGender
-                                                        dimension: @"unknown"];
+                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
+                                                      value: @"unknown"];
                                            }
                                            
                                            [self.appDelegate saveContext: YES];

@@ -33,10 +33,10 @@
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"accountPropertyChanged"
-                         withLabel: @"Push"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"accountPropertyChanged"
+                                                            label: @"Push"
+                                                            value: nil] build]];
     
     self.controls = [[NSMutableArray alloc] init];
     

@@ -11,7 +11,7 @@
 #import "SDWebImageDownloader.h"
 #import "SDImageCache.h"
 
-typedef enum
+typedef enum : NSInteger
 {
     /**
      * By default, when a URL fail to be downloaded, the URL is blacklisted so the library won't keep trying.

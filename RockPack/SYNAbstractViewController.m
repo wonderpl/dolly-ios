@@ -407,10 +407,10 @@
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"videoShareButtonClick"
-                         withLabel: nil
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoShareButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
     
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];
@@ -429,10 +429,10 @@
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"channelShareButtonClick"
-                         withLabel: nil
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelShareButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
     
     [self shareObjectType:  @"channel"
                  objectId: channel.uniqueId
@@ -672,10 +672,10 @@
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker sendEventWithCategory: @"uiAction"
-                            withAction: @"videoPlusButtonClick"
-                             withLabel: nil
-                             withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"videoPlusButtonClick"
+                                                                label: nil
+                                                                value: nil] build]];
         
         [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                          action: @"select"
@@ -697,10 +697,10 @@
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"videoStarButtonClick"
-                         withLabel: nil
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoStarButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
     
     __weak VideoInstance *videoInstance = [self videoInstanceForIndexPath: indexPath];
     
@@ -923,11 +923,11 @@
     
     // track
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"pressHold"
-                         withLabel: analyticsLabel  
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"pressHold"
+                                                            label: analyticsLabel
+                                                            value: nil] build]];
 }
 
 

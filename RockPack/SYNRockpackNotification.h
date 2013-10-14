@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 
-typedef enum
+typedef enum : NSInteger
 {
     kNotificationObjectTypeUserLikedYourVideo = 0,
     kNotificationObjectTypeUserSubscibedToYourChannel = 1,

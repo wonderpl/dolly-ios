@@ -59,6 +59,7 @@ static void PSPDFAssertIfNotMainThread(void) {
     PSPDFAssert(NSThread.isMainThread, @"\nERROR: All calls to UIKit need to happen on the main thread. You have a bug in your code. Use dispatch_async(dispatch_get_main_queue(), ^{ ... }); if you're unsure what thread you're in.\n\nBreak on PSPDFAssertIfNotMainThread to find out where.\n\nStacktrace: %@", [NSThread callStackSymbols]);
 }
 
+#if DEBUG
 // This installs a small guard that checks for the most common threading-errors in UIKit.
 // This won't really slow down performance but still only is compiled in DEBUG versions of PSPDFKit.
 // @note No private API is used here.
@@ -81,3 +82,5 @@ __attribute__((constructor)) static void PSPDFUIKitMainThreadGuard(void) {
         }
     }
 }
+
+#endif

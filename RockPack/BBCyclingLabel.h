@@ -21,7 +21,7 @@
 
 #pragma mark - Enums
 
-typedef enum
+typedef enum : NSInteger
 {
     // User must provide pre-transition and transition blocks
     BBCyclingLabelTransitionEffectCustom = 0,

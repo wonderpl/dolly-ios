@@ -25,6 +25,7 @@
 
 @property (nonatomic) CGFloat initialPanelHeight;
 @property (nonatomic, strong) NSTimer* autocompleteTimer;
+@property (nonatomic, strong) NSArray* nib;
 @property (nonatomic, strong) SYNAutocompleteSuggestionsController* autoSuggestionController;
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (nonatomic, weak) SYNTextField* searchTextField;
@@ -54,14 +55,14 @@
 
 - (void) loadView
 {
-    if (IS_IPAD)
+    if (IS_IPAD || IS_IOS_7_OR_GREATER)
     {
         self.view = [SYNSearchBoxView searchBoxView];
     }
     else
     {
-        self.view = [[NSBundle mainBundle] loadNibNamed:@"SYNSearchBoxIphoneView" owner:self options:nil][0];
-        
+        self.nib =[[NSBundle mainBundle] loadNibNamed:@"SYNSearchBoxIphoneView" owner:self options:nil];
+        self.view = self.nib[0];
     }    
 }
 
@@ -129,9 +130,7 @@
     
     __weak SYNSearchBoxViewController* wself = self;
     [UIView animateWithDuration:0.3f animations:^{
-        
-        
-        
+
         wself.searchCategoriesController.tableView.alpha = 0.0f;
         
     } completion:^(BOOL finished) {
@@ -140,49 +139,34 @@
         [self.searchBoxView resizeForHeight: 0.0f];
         
     }];
-    
-    
-    
-    
 }
--(void)presentSearchCategoriesIPhone
+
+
+- (void) presentSearchCategoriesIPhone
 {
-    
-    if(IS_IPAD) return;
-    
-    
+    if (IS_IPAD) return;
+
     [self.view insertSubview:self.searchCategoriesController.tableView atIndex:0];
     
     self.searchCategoriesController.tableView.alpha = 1.0f;
     
     [self.searchBoxView resizeForHeight: 548.0f]; // 548.0f max
-    
-    
-    
+
     CGRect searchTBVFrame = self.searchCategoriesController.tableView.frame;
     searchTBVFrame.origin = CGPointMake(0.0f, IS_IOS_7_OR_GREATER ? 74.0f : 64.0f);
     self.searchCategoriesController.tableView.frame = searchTBVFrame;
     [self.searchCategoriesController setSize:CGSizeMake(self.view.frame.size.width,
                                                        [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar] - searchTBVFrame.origin.y)];
-    
-    
+
     __weak SYNSearchBoxViewController* wself = self;
     
      self.searchCategoriesController.tableView.alpha = 0.0f;
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
         wself.searchCategoriesController.tableView.alpha = 1.0f;
-        
-        
+ 
     } completion:^(BOOL finished) {
         
     }];
-    
-
-    
-    
-    
-    
-    
 }
 
 #pragma mark - Text Field Delegate

@@ -48,8 +48,14 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
     
-    [GAI.sharedInstance.defaultTracker sendView: @"Notifications"];
+    [tracker set: kGAIScreenName
+           value: @"Notifications"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     

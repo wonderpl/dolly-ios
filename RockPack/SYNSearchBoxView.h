@@ -18,7 +18,7 @@
 @property (nonatomic, strong) IBOutlet SYNTextField* searchTextField;
 
 //iPhone specific
-@property (weak, nonatomic) IBOutlet UIButton *integratedCloseButton;
+@property (strong, nonatomic) IBOutlet UIButton *integratedCloseButton;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundSearchPanel;
 
 -(void)resizeForHeight:(CGFloat)height;

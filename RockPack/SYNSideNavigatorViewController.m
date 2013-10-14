@@ -33,7 +33,7 @@
 
 typedef void (^SideNavigationMotionBlock)(void);
 
-typedef enum {
+typedef enum : NSInteger {
     kSideNavigationTypeLoad = 0,
     kSideNavigationTypePage
 

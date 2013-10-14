@@ -631,11 +631,11 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     // TODO: Add GA here
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"searchInitiate"
-                         withLabel: nil
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"searchInitiate"
+                                                            label: nil
+                                                            value: nil] build]];
     
     NSString* termString = (NSString*)[notification userInfo][kSearchTerm];
     

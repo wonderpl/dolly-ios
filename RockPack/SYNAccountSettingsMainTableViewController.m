@@ -87,9 +87,13 @@
 {
     [super viewDidLoad];
     
-    //self.edgesForExtendedLayout = UIRectEdgeNone;
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
     
-    [GAI.sharedInstance.defaultTracker sendView: @"Account Settings - Root"];
+    [tracker set: kGAIScreenName
+           value: @"Account Settings - Root"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.contentSizeForViewInPopover = CGSizeMake(380, 476);
 
@@ -466,8 +470,8 @@
     // Now set the age
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker setCustom: kGADimensionAge
-             dimension: ageString];
+    [tracker set: [GAIFields customDimensionForIndex: kGADimensionAge]
+           value: ageString];
 }
 
 

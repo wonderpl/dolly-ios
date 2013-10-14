@@ -613,35 +613,6 @@ static UIWebView* vimeoideoWebViewInstance;
     self.videoPlaceholderMiddleImageView = [self createNewVideoPlaceholderImageView: @"PlaceholderVideoMiddle"];
     self.videoPlaceholderBottomImageView = [self createNewVideoPlaceholderImageView: @"PlaceholderVideoBottom"];    
     
-    UIButton *youTubeButton;
-    CGFloat youTubeButtonOffsetX;
-    CGFloat youTubeButtonOffsetY;
-
-    
-    UIImage *youTubeImage = [UIImage imageNamed: @"ButtonYouTubeDefault"];
-    
-    if (IS_IPAD)
-    {
-        youTubeButtonOffsetX = 320;
-        youTubeButtonOffsetY = 328;
-    }
-    else
-    {
-        youTubeButtonOffsetX = 215;
-        youTubeButtonOffsetY = 8;
-    }
-    
-    // Create YouTube button
-    youTubeButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    youTubeButton.frame =  CGRectMake(youTubeButtonOffsetX, youTubeButtonOffsetY, 100, 22);
-    
-    [youTubeButton setImage: youTubeImage
-                   forState: UIControlStateNormal];
-    
-    [youTubeButton addTarget: self
-                      action: @selector(openYouTubeURL:)
-            forControlEvents: UIControlEventTouchUpInside];
-    
     // Pop them in a view to keep them together
     UIView *videoPlaceholderView = [[UIView alloc] initWithFrame: self.view.bounds];
     
@@ -649,9 +620,6 @@ static UIWebView* vimeoideoWebViewInstance;
     [videoPlaceholderView addSubview: self.videoPlaceholderBottomImageView];
     [videoPlaceholderView addSubview: self.videoPlaceholderMiddleImageView];
     [videoPlaceholderView addSubview: self.videoPlaceholderTopImageView];
-    
-    // Branding
-    [videoPlaceholderView addSubview: youTubeButton];
     
     [self.view addSubview: videoPlaceholderView];
 
@@ -1697,15 +1665,15 @@ static UIWebView* vimeoideoWebViewInstance;
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker sendEventWithCategory: @"goal"
-                            withAction: @"videoViewed"
-                             withLabel: self.previousSourceId
-                             withValue: @((int) (self.percentageViewed  * 100.0f))];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"videoViewed"
+                                                                label: self.previousSourceId
+                                                                value: @((int) (self.percentageViewed  * 100.0f))] build]];
         
-        [tracker sendEventWithCategory: @"goal"
-                            withAction: @"videoViewedDuration"
-                             withLabel: self.previousSourceId
-                             withValue: @((int) (self.timeViewed))];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"videoViewedDuration"
+                                                                label: self.previousSourceId
+                                                                value: @((int) (self.timeViewed))] build]];
     }
 }
 

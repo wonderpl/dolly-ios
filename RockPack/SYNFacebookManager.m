@@ -25,7 +25,7 @@
 @implementation SYNFacebookManager
 
 // Singleton
-+ (id) sharedFBManager
++ (instancetype) sharedFBManager
 {
     static dispatch_once_t onceQueue;
     static SYNFacebookManager *fBManager = nil;

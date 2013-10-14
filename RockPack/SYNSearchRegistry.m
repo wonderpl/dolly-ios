@@ -7,45 +7,33 @@
 //
 
 #import "AppConstants.h"
+#import "AppConstants.h"
 #import "Channel.h"
+#import "Friend.h"
 #import "SYNAppDelegate.h"
 #import "SYNSearchRegistry.h"
 #import "Video.h"
-#import "Friend.h"
 #import "VideoInstance.h"
-#import "AppConstants.h"
 #import <AddressBook/AddressBook.h>
 
 @implementation SYNSearchRegistry
 
-- (id) init
-{
-    if (self = [super init])
-    {
-        appDelegate = UIApplication.sharedApplication.delegate;
-        importManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSConfinementConcurrencyType];
-        importManagedObjectContext.parentContext = appDelegate.searchManagedObjectContext;
-    }
-    
-    return self;
-}
 
-- (BOOL) clearImportContextFromEntityName: (NSString*) entityName
+- (BOOL) clearImportContextFromEntityName: (NSString *) entityName
 {
-    if([super clearImportContextFromEntityName:entityName])
+    if ([super clearImportContextFromEntityName: entityName])
     {
         [appDelegate saveSearchContext];
         return YES;
     }
     
     return NO;
-    
 }
 
+
 // returns a cached image dictionary
-- (NSCache*) registerFriendsFromAddressBookArray:(NSArray*)abArray
+- (NSCache *) registerFriendsFromAddressBookArray: (NSArray *) abArray
 {
-    
     NSInteger total = [abArray count];
     
     // placeholders
@@ -54,7 +42,7 @@
     Friend *contactAsFriend;
     
     
-    NSCache* imageCache = [[NSCache alloc] init];
+    NSCache *imageCache = [[NSCache alloc] init];
     
     // fetch existing friends from DB
     
@@ -68,24 +56,26 @@
     
     
     // friends from address book only
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem == %@ AND localOrigin == YES", kEmail];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat: @"externalSystem == %@ AND localOrigin == YES", kEmail];
     
-    existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                 error: &error];
+    existingFriendsArray = [appDelegate.searchManagedObjectContext
+                            executeFetchRequest: fetchRequest
+                            error: &error];
     
     
     
-    NSMutableDictionary* existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity:existingFriendsArray.count];
+    NSMutableDictionary *existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
     
-    for (Friend* existingFriend in existingFriendsArray)
+    for (Friend *existingFriend in existingFriendsArray)
     {
-        if(!existingFriend.email)
+        if (!existingFriend.email)
+        {
             continue;
+        }
         
         existingFriendsByEmail[existingFriend.email] = existingFriend;
         
         existingFriend.markedForDeletionValue = YES;
-        
     }
     
     // parse friends from address book array
@@ -96,21 +86,28 @@
         ABRecordID cid;
         
         if (!currentPerson || ((cid = ABRecordGetRecordID(currentPerson)) == kABRecordInvalidID))
+        {
             continue;
-        
+        }
         
         ABMultiValueRef emailAddressMultValue = ABRecordCopyValue(currentPerson, kABPersonEmailProperty);
         NSArray *emailAddresses = (__bridge NSArray *) ABMultiValueCopyArrayOfAllValues(emailAddressMultValue);
         CFRelease(emailAddressMultValue);
         
-        if(emailAddresses.count == 0) // only keep contacts with email addresses
+        if (emailAddresses.count == 0) // only keep contacts with email addresses
+        {
             continue;
+        }
         
-        email = (NSString*)emailAddresses[0];
+        email = (NSString *) emailAddresses[0];
         
-        if(!(contactAsFriend = existingFriendsByEmail[email])) // will have email due to previous condition
-            if(!(contactAsFriend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext]))
+        if (!(contactAsFriend = existingFriendsByEmail[email])) // will have email due to previous condition
+        {
+            if (!(contactAsFriend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext]))
+            {
                 continue; // if cache AND instatiation fails, bail
+            }
+        }
         
         contactAsFriend.uniqueId = email; // email serves as a uniqueId for address book friends
         contactAsFriend.markedForDeletionValue = NO;
@@ -123,7 +120,7 @@
         imageData = (__bridge_transfer NSData *) ABPersonCopyImageData(currentPerson);
         
         
-        contactAsFriend.email =  email; 
+        contactAsFriend.email = email;
         contactAsFriend.externalSystem = kEmail;
         contactAsFriend.externalUID = [NSString stringWithFormat: @"%i", cid];
         
@@ -136,34 +133,41 @@
             [imageCache setObject: imageData
                            forKey: key];
         }
-        
     }
     
     // delete old friends cached
-    Friend* deleteCandidate;
+    Friend *deleteCandidate;
+    
     for (id key in existingFriendsByEmail)
     {
-        deleteCandidate = (Friend*)existingFriendsByEmail[key];
+        deleteCandidate = (Friend *) existingFriendsByEmail[key];
         
-        if(deleteCandidate && deleteCandidate.markedForDeletionValue)
-            [deleteCandidate.managedObjectContext deleteObject:deleteCandidate];
+        if (deleteCandidate && deleteCandidate.markedForDeletionValue)
+        {
+            [deleteCandidate.managedObjectContext
+             deleteObject: deleteCandidate];
+        }
     }
     
-    if(![appDelegate.searchManagedObjectContext save:&error])
+    if (![appDelegate.searchManagedObjectContext
+          save: &error])
+    {
         return nil; //
+    }
     
     return imageCache;
-    
-    
 }
 
-- (BOOL) registerFriendsFromDictionary:(NSDictionary *) dictionary
+
+- (BOOL) registerFriendsFromDictionary: (NSDictionary *) dictionary
 {
-    
     NSDictionary *usersDictionary = dictionary[@"users"];
     
-    if (!usersDictionary || ![usersDictionary[@"items"] isKindOfClass:[NSArray class]])
+    if (!usersDictionary || ![usersDictionary[@"items"]
+                              isKindOfClass: [NSArray class]])
+    {
         return NO;
+    }
     
     // fetch existing friends
     
@@ -179,32 +183,32 @@
     // friends from address book are not found in the web service responce and should be protected from deletion
     //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem != %@", kEmail];
     
-    existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                 error: &error];
+    existingFriendsArray = [appDelegate.searchManagedObjectContext
+                            executeFetchRequest: fetchRequest
+                            error: &error];
     
     
     
-    NSMutableDictionary* existingFriendsByUID = [NSMutableDictionary dictionaryWithCapacity:existingFriendsArray.count];
-//    NSMutableDictionary* existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity:existingFriendsArray.count];
+    NSMutableDictionary *existingFriendsByUID = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
+    //    NSMutableDictionary* existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity:existingFriendsArray.count];
     
-    for (Friend* existingFriend in existingFriendsArray)
+    for (Friend *existingFriend in existingFriendsArray)
     {
-        
-        if(!existingFriend.uniqueId)
+        if (!existingFriend.uniqueId)
         {
             existingFriend.markedForDeletionValue = YES;
             continue;
         }
         
-        
         existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
         
-        if(!existingFriend.localOriginValue) // protect the address book friends...
+        if (!existingFriend.localOriginValue) // protect the address book friends...
+        {
             existingFriend.markedForDeletionValue = YES;
-//        else if (existingFriend.email && ![existingFriend.email isEqualToString:@""]) // ... and save them in the dictionary
-//            existingFriendsByEmail[existingFriend.email] = existingFriend;
+        }
         
-            
+        //        else if (existingFriend.email && ![existingFriend.email isEqualToString:@""]) // ... and save them in the dictionary
+        //            existingFriendsByEmail[existingFriend.email] = existingFriend;
     }
     
     // parse new data
@@ -212,44 +216,42 @@
     
     NSArray *itemsDictionary = usersDictionary[@"items"];
     
-    Friend* friend;
+    Friend *friend;
     
-    
-    for (NSDictionary * itemDictionary in itemsDictionary)
+    for (NSDictionary *itemDictionary in itemsDictionary)
     {
-        
-        if(!(friend = existingFriendsByUID[itemDictionary[@"id"]]))
-            if(!(friend = [Friend instanceFromDictionary: itemDictionary
-                               usingManagedObjectContext: appDelegate.searchManagedObjectContext]))
+        if (!(friend = existingFriendsByUID[itemDictionary[@"id"]]))
+        {
+            if (!(friend = [Friend instanceFromDictionary: itemDictionary
+                                usingManagedObjectContext: appDelegate.searchManagedObjectContext]))
+            {
                 continue;
-        
-//        if(friend.email && existingFriendsByEmail[friend.email]) // the friend returned also exists on address book
-//        {
-//            ((Friend*)existingFriendsByEmail[friend.email]).markedForDeletionValue = YES;
-//        }
-        
+            }
+        }
         
         // if an address book friend has been transfered to
         
         friend.markedForDeletionValue = NO;
-        
-        
     }
     
     // delete old friends
     
     for (id key in existingFriendsByUID)
     {
-        Friend* deleteCandidate = (Friend*)existingFriendsByUID[key];
+        Friend *deleteCandidate = (Friend *) existingFriendsByUID[key];
         
-        if(deleteCandidate && deleteCandidate.markedForDeletionValue)
-            [deleteCandidate.managedObjectContext deleteObject:deleteCandidate];
+        if (deleteCandidate && deleteCandidate.markedForDeletionValue)
+        {
+            [deleteCandidate.managedObjectContext
+             deleteObject: deleteCandidate];
+        }
     }
     
     [appDelegate saveSearchContext];
     
     return YES;
 }
+
 
 - (BOOL) registerVideosFromDictionary: (NSDictionary *) dictionary
 {
@@ -394,7 +396,7 @@
     NSArray *itemsToDelete;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-
+    
     [fetchRequest setEntity: [NSEntityDescription entityForName: @"ChannelOwner"
                                          inManagedObjectContext: appDelegate.searchManagedObjectContext]];
     
@@ -409,7 +411,8 @@
     {
         for (NSManagedObject *objectToDelete in itemsToDelete)
         {
-            [appDelegate.searchManagedObjectContext deleteObject: objectToDelete];
+            [appDelegate.searchManagedObjectContext
+             deleteObject: objectToDelete];
         }
     }
     

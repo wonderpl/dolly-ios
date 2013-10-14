@@ -12,7 +12,7 @@
 
 @interface SYNActivityManager : NSObject
 
-+ (id) sharedInstance;
++ (instancetype) sharedInstance;
 - (void) updateActivityForCurrentUser;
 - (void) updateActivityForVideo: (Video *) video;
 

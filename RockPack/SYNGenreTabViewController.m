@@ -265,13 +265,10 @@
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"categoryItemClick"
-                         withLabel: self.currentlySelectedGenre.name
-                         withValue: nil];
-    
-    [tracker setCustom: kGADimensionCategory
-             dimension: self.currentlySelectedGenre.name];
+    [tracker send: [[[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                            action: @"categoryItemClick"
+                                                             label: self.currentlySelectedGenre.name
+                                                             value: nil] set: self.currentlySelectedGenre.name forKey: [GAIFields customDimensionForIndex: kGADimensionCategory]] build]];
 }
 
 -(void)handleMainGenreSelection:(Genre*)genreSelected
@@ -313,13 +310,10 @@
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
     // TODO: Not sure if we need both of these
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"categoryItemClick"
-                         withLabel: self.currentlySelectedGenre.name
-                         withValue: nil];
-    
-    [tracker setCustom: kGADimensionCategory
-             dimension: self.currentlySelectedGenre.name];
+    [tracker send: [[[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"categoryItemClick"
+                                                            label: self.currentlySelectedGenre.name
+                                                            value: nil] set: self.currentlySelectedGenre.name forKey: [GAIFields customDimensionForIndex: kGADimensionCategory]] build]];
 }
 
 -(SYNGenreTabView*)categoriesTabView

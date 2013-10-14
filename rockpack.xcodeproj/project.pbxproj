@@ -190,7 +190,6 @@
 		016B97171770C42200892211 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97161770C42200892211 /* StoreKit.framework */; };
 		0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717D165550A900A3C7C4 /* SystemConfiguration.framework */; };
 		01707180165550BE00A3C7C4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717F165550BE00A3C7C4 /* Security.framework */; };
-		0173E6CC1718231F00EEE76B /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0173E6CB1718231F00EEE76B /* libGoogleAnalytics.a */; };
 		0173F6FB16E028E4005B3ECA /* BackgroundVideoThumbnailSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6F716E028E4005B3ECA /* BackgroundVideoThumbnailSmall.png */; };
 		0173F6FC16E028E4005B3ECA /* BackgroundVideoThumbnailSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6F816E028E4005B3ECA /* BackgroundVideoThumbnailSmall@2x.png */; };
 		0173F6FD16E028E4005B3ECA /* GlossVideoThumbnailSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6F916E028E4005B3ECA /* GlossVideoThumbnailSmall.png */; };
@@ -349,6 +348,7 @@
 		01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD13169E11B000E01AA3 /* AbstractCommon.m */; };
 		01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */; };
 		01C9CFA61697496400C42479 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C9CFA51697496400C42479 /* NSDate-Utilities.m */; };
+		01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */; };
 		01D0996617429F4E00351C82 /* ButtonPopoverCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0995E17429F4E00351C82 /* ButtonPopoverCancel.png */; };
 		01D0996717429F4E00351C82 /* ButtonPopoverCancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0995F17429F4E00351C82 /* ButtonPopoverCancel@2x.png */; };
 		01D0996817429F4E00351C82 /* ButtonPopoverCancelHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0996017429F4E00351C82 /* ButtonPopoverCancelHighlighted.png */; };
@@ -456,8 +456,6 @@
 		01F94F2B1761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */; };
 		01F94F2C1761EE56006C024D /* ButtonCreateDisabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */; };
 		01F94F2D1761EE56006C024D /* ButtonCreateDisabled~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */; };
-		01F94F2E1761EE56006C024D /* ButtonYouTubeDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F281761EE56006C024D /* ButtonYouTubeDefault.png */; };
-		01F94F2F1761EE56006C024D /* ButtonYouTubeDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F291761EE56006C024D /* ButtonYouTubeDefault@2x.png */; };
 		1F003B42174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B3E174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png */; };
 		1F003B43174A782100BBAE2F /* ButtonSettingsSave~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B3F174A782100BBAE2F /* ButtonSettingsSave~iphone.png */; };
 		1F003B44174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B40174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png */; };
@@ -1669,9 +1667,6 @@
 		0173E6C6171822F000EEE76B /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		0173E6C7171822F000EEE76B /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		0173E6C8171822F000EEE76B /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		0173E6C9171822F000EEE76B /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
-		0173E6CA171822F000EEE76B /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
-		0173E6CB1718231F00EEE76B /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		0173F6F716E028E4005B3ECA /* BackgroundVideoThumbnailSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundVideoThumbnailSmall.png; path = Assets/Images/BackgroundVideoThumbnailSmall.png; sourceTree = "<group>"; };
 		0173F6F816E028E4005B3ECA /* BackgroundVideoThumbnailSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundVideoThumbnailSmall@2x.png"; path = "Assets/Images/BackgroundVideoThumbnailSmall@2x.png"; sourceTree = "<group>"; };
 		0173F6F916E028E4005B3ECA /* GlossVideoThumbnailSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GlossVideoThumbnailSmall.png; path = Assets/Images/GlossVideoThumbnailSmall.png; sourceTree = "<group>"; };
@@ -1874,6 +1869,10 @@
 		01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNetworkEngine.m; sourceTree = "<group>"; };
 		01C9CFA41697496400C42479 /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
 		01C9CFA51697496400C42479 /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
+		01CDCC811806C79800CF3AE9 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		01CDCC821806C79800CF3AE9 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		01CDCC831806C79800CF3AE9 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = RockPack/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		01D0995E17429F4E00351C82 /* ButtonPopoverCancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPopoverCancel.png; path = Assets/Images/ButtonPopoverCancel.png; sourceTree = "<group>"; };
 		01D0995F17429F4E00351C82 /* ButtonPopoverCancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPopoverCancel@2x.png"; path = "Assets/Images/ButtonPopoverCancel@2x.png"; sourceTree = "<group>"; };
 		01D0996017429F4E00351C82 /* ButtonPopoverCancelHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPopoverCancelHighlighted.png; path = Assets/Images/ButtonPopoverCancelHighlighted.png; sourceTree = "<group>"; };
@@ -1998,8 +1997,6 @@
 		01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x~iphone.png"; path = "Assets/Images/ButtonCreateDisabled@2x~iphone.png"; sourceTree = "<group>"; };
 		01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x.png"; path = "Assets/Images/ButtonCreateDisabled@2x.png"; sourceTree = "<group>"; };
 		01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled~iphone.png"; path = "Assets/Images/ButtonCreateDisabled~iphone.png"; sourceTree = "<group>"; };
-		01F94F281761EE56006C024D /* ButtonYouTubeDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonYouTubeDefault.png; path = Assets/Images/ButtonYouTubeDefault.png; sourceTree = "<group>"; };
-		01F94F291761EE56006C024D /* ButtonYouTubeDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonYouTubeDefault@2x.png"; path = "Assets/Images/ButtonYouTubeDefault@2x.png"; sourceTree = "<group>"; };
 		1F003B3E174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSave@2x~iphone.png"; sourceTree = "<group>"; };
 		1F003B3F174A782100BBAE2F /* ButtonSettingsSave~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSave~iphone.png"; sourceTree = "<group>"; };
 		1F003B40174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSaveHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
@@ -3104,10 +3101,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */,
 				BE3574EC17CE09B80083CBB1 /* AddressBook.framework in Frameworks */,
 				016B97171770C42200892211 /* StoreKit.framework in Frameworks */,
 				01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */,
-				0173E6CC1718231F00EEE76B /* libGoogleAnalytics.a in Frameworks */,
 				3854788417946630006EB38B /* libGoogleConversionTracking.a in Frameworks */,
 				C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */,
 				019824F01629CC7600216900 /* libTestFlight.a in Frameworks */,
@@ -3175,8 +3172,8 @@
 		010DEFD31629BDC40080F26B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */,
 				01F7C9671748ED0B00E36994 /* libsqlite3.dylib */,
-				0173E6CB1718231F00EEE76B /* libGoogleAnalytics.a */,
 				019824EE1629CC7600216900 /* libTestFlight.a */,
 				019824F11629CE1600216900 /* libz.dylib */,
 				012502C416CA99710029C7C8 /* Accounts.framework */,
@@ -3621,11 +3618,12 @@
 		0173E6C5171822BF00EEE76B /* Google Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				01CDCC811806C79800CF3AE9 /* GAIDictionaryBuilder.h */,
+				01CDCC821806C79800CF3AE9 /* GAIFields.h */,
+				01CDCC831806C79800CF3AE9 /* GAILogger.h */,
 				0173E6C6171822F000EEE76B /* GAI.h */,
 				0173E6C7171822F000EEE76B /* GAITrackedViewController.h */,
 				0173E6C8171822F000EEE76B /* GAITracker.h */,
-				0173E6C9171822F000EEE76B /* GAITransaction.h */,
-				0173E6CA171822F000EEE76B /* GAITransactionItem.h */,
 			);
 			name = "Google Analytics";
 			sourceTree = "<group>";
@@ -4291,8 +4289,6 @@
 				01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */,
 				01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */,
 				01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */,
-				01F94F281761EE56006C024D /* ButtonYouTubeDefault.png */,
-				01F94F291761EE56006C024D /* ButtonYouTubeDefault@2x.png */,
 				1F22C1861744ED0F0065D4BF /* ButtonSave.png */,
 				1F22C1871744ED0F0065D4BF /* ButtonSave@2x.png */,
 				1F22C1881744ED0F0065D4BF /* ButtonSaveHighlighted.png */,
@@ -7001,8 +6997,6 @@
 				01F94F2B1761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png in Resources */,
 				01F94F2C1761EE56006C024D /* ButtonCreateDisabled@2x.png in Resources */,
 				01F94F2D1761EE56006C024D /* ButtonCreateDisabled~iphone.png in Resources */,
-				01F94F2E1761EE56006C024D /* ButtonYouTubeDefault.png in Resources */,
-				01F94F2F1761EE56006C024D /* ButtonYouTubeDefault@2x.png in Resources */,
 				1FE1C6601761FFFF00EDFC0E /* IconRockpackAbout.png in Resources */,
 				1FE1C6611761FFFF00EDFC0E /* IconRockpackAbout@2x.png in Resources */,
 				1FE1C66617621F7400EDFC0E /* ButtonPrivacy.png in Resources */,
@@ -7720,9 +7714,7 @@
 				INFOPLIST_FILE = "RockPack/rockpack-Develop-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/RockPack\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/RockPack/GoogleConversionTrackingSDK-iOS-1.2.0\"",
+					"$(SRCROOT)/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -7776,9 +7768,7 @@
 				INFOPLIST_FILE = "RockPack/rockpack-Release-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/RockPack\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/RockPack/GoogleConversionTrackingSDK-iOS-1.2.0\"",
+					"$(SRCROOT)/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -7931,9 +7921,7 @@
 				INFOPLIST_FILE = "RockPack/rockpack-Release-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/RockPack\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/RockPack/GoogleConversionTrackingSDK-iOS-1.2.0\"",
+					"$(SRCROOT)/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

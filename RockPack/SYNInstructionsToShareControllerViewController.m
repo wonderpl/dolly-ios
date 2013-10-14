@@ -131,25 +131,25 @@
     
     if(self.state == InstructionsShareStatePacks)
     {
-        
-        [tracker sendEventWithCategory: @"PassedCard1"
-                            withAction: nil
-                             withLabel: nil
-                             withValue: nil];
+
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"PassedCard1"
+                                                                label: nil
+                                                                value: nil] build]];
     }
     else if (self.state == InstructionsShareStatePressAndHold || self.state == InstructionsShareStateChooseAction)
     {
-        [tracker sendEventWithCategory: @"PassedCard2"
-                            withAction: nil
-                             withLabel: nil
-                             withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"PassedCard2"
+                                                                label: nil
+                                                                value: nil] build]];
     }
     else if (self.state == InstructionsShareStateGoodJob)
     {
-        [tracker sendEventWithCategory: @"GestureDoneCard2"
-                            withAction: nil
-                             withLabel: nil
-                             withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"GestureDoneCard2"
+                                                                label: nil
+                                                                value: nil] build]];
     }
     
     

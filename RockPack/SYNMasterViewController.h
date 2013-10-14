@@ -17,7 +17,7 @@
 
 typedef void (^VideoOverlayDismissBlock)(void);
 
-typedef enum NotificationMessageType {
+typedef enum NotificationMessageType : NSInteger {
     NotificationMessageTypeError = 0,
     NotificationMessageTypeSuccess = 1
 } NotificationMessageType;

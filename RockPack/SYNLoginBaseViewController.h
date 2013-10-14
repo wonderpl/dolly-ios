@@ -20,7 +20,7 @@
 #define kLoginTermsUrl @"http://rockpack.com/tos"
 #define kLoginPrivacyUrl @"http://rockpack.com/privacy"
 
-typedef enum {
+typedef enum : NSInteger {
     kLoginScreenStateNull = 0,
     kLoginScreenStateInitial,
     kLoginScreenStateLogin,

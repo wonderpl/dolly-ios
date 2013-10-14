@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class SYNAbstractViewController;
 
-typedef enum InstructionsShareState {
+typedef enum InstructionsShareState : NSInteger {
     InstructionsShareStateNone = 0,
     InstructionsShareStatePressAndHold,
     InstructionsShareStateChooseAction,

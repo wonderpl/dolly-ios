@@ -13,7 +13,7 @@
 #import "NSDate-Utilities.h"
 
 #define DATE_COMPONENTS (NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit |  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit)
-#define DATE_COMPONENTS_NO_TIME (NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit)
+#define DATE_COMPONENTS_NO_TIME (NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit | NSDayCalendarUnit)
 #define CURRENT_CALENDAR [NSCalendar currentCalendar]
 
 @implementation NSDate (Utilities)
@@ -72,14 +72,28 @@
 	return newDate;		
 }
 
+
+
+
 - (NSDate *) dateIgnoringTime
 {
+    // Get special calendar, ut only once
+    static NSCalendar *zuluTimeCalendar;
+    static dispatch_once_t oncePredicate;
+    
+    dispatch_once (&oncePredicate, ^{
+        zuluTimeCalendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+        zuluTimeCalendar.timeZone = [NSTimeZone timeZoneWithAbbreviation: @"GMT"];
+    });
+    
     // Get just the year, Month and day from our date
     NSDateComponents *components = [CURRENT_CALENDAR components: DATE_COMPONENTS_NO_TIME
                                                        fromDate: self];
     
+    components.hour = 0;
+    
     // Convert the components back to a date (hopefully without a time component)
-    NSDate *dateWithoutTime = [CURRENT_CALENDAR dateFromComponents: components];
+    NSDate *dateWithoutTime = [zuluTimeCalendar dateFromComponents: components];
     
     return dateWithoutTime;
 }

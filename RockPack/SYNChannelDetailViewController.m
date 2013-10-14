@@ -288,19 +288,24 @@
     
     self.originalMasterControlsViewOrigin = self.masterControlsView.frame.origin;
     
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
     if (self.mode == kChannelDetailsModeDisplay)
     {
-        // Google analytics support
-        [GAI.sharedInstance.defaultTracker
-         sendView: @"Channel details"];
+        [tracker set: kGAIScreenName
+               value: @"Channel details"];
+        
+        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
         
         self.createChannelButton.hidden = YES;
     }
-    else if(self.mode)
+    else if (self.mode)
     {
-        // Google analytics support
-        [GAI.sharedInstance.defaultTracker
-         sendView: @"Add to channel"];
+        [tracker set: kGAIScreenName
+               value: @"Add to channel"];
+        
+        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
         
         self.createChannelButton.hidden = NO;
         self.backButton.hidden = YES;
@@ -389,7 +394,7 @@
             
             CGRect vFrame;
             for (UIView* viewToMove in @[self.saveChannelButton, self.createChannelButton,
-                                         self.cancelEditButton, self.deleteChannelButton, self.cancelTextInputButton]) {
+                                         self.cancelEditButton, self.deleteChannelButton, self.cancelTextInputButton, self.activityIndicator]) {
                 vFrame = viewToMove.frame;
                 vFrame.origin.y += 6.0f;
                 viewToMove.frame = vFrame;
@@ -572,11 +577,11 @@
 - (IBAction) playChannelsButtonTouched: (id) sender
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"playAll"
-                         withLabel: nil
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"playAll"
+                                                            label: nil
+                                                            value: nil] build]];
     
     [self displayVideoViewerWithVideoInstanceArray: self.channel.videoInstances.array
                                   andSelectedIndex: 0
@@ -607,18 +612,19 @@
     {
         return;
     }
+
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
     
-    [GAI.sharedInstance.defaultTracker
-     sendView: @"Subscribers List"];
+    [tracker set: kGAIScreenName
+           value: @"Subscribers List"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
     
-    
     if (IS_IPAD)
     {
-        
-        
-        
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: subscribersViewController];
         navigationController.view.backgroundColor = [UIColor clearColor];
         
@@ -1408,11 +1414,11 @@
 {
     // Update google analytics
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"channelSubscribeButtonClick"
-                         withLabel: nil
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelSubscribeButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
     
     self.subscribeButton.enabled = NO;
     self.subscribeButton.selected = FALSE;
@@ -1556,8 +1562,13 @@
 
 - (IBAction) editButtonTapped: (id) sender
 {
-    [GAI.sharedInstance.defaultTracker
-     sendView: @"Edit channel"];
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set: kGAIScreenName
+           value: @"Edit channel"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsHide
                                                         object: self
@@ -1704,11 +1715,11 @@
 - (IBAction) saveChannelTapped: (id) sender
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"channelSaveButtonClick"
-                         withLabel: nil
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelSaveButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
     
     self.saveChannelButton.enabled = NO;
     self.deleteChannelButton.enabled = YES;
@@ -1732,11 +1743,11 @@
                                          completionHandler: ^(NSDictionary *resourceCreated) {
                                              
                                              id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                             
-                                             [tracker sendEventWithCategory: @"goal"
-                                                                 withAction: @"channelEdited"
-                                                                  withLabel: category
-                                                                  withValue: nil];
+
+                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                                                    action: @"channelEdited"
+                                                                                                     label: category
+                                                                                                     value: nil] build]];
                                              
                                              NSString *channelId = resourceCreated[@"id"];
                                              
@@ -2060,11 +2071,11 @@
         self.selectedCategoryId = genre.uniqueId;
         
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker sendEventWithCategory: @"goal"
-                            withAction: @"channelCategorised"
-                             withLabel: buttonText
-                             withValue: nil];
+
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"channelCategorised"
+                                                                label: buttonText
+                                                                value: nil] build]];
     }
     else
     {
@@ -2203,10 +2214,10 @@
                                              // shows the message label from the MasterViewController
                                              id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                              
-                                             [tracker sendEventWithCategory: @"goal"
-                                                                 withAction: @"channelCreated"
-                                                                  withLabel: category
-                                                                  withValue: nil];
+                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                                                    action: @"channelCreated"
+                                                                                                     label: category
+                                                                                                     value: nil] build]];
                                              
                                              NSString *channelId = resourceCreated[@"id"];
                                              
@@ -2837,11 +2848,11 @@ shouldChangeTextInRange: (NSRange) range
 - (void) uploadChannelImage: (UIImage *) imageToUpload
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"goal"
-                        withAction: @"channelCoverUploaded"
-                         withLabel: nil
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"channelCoverUploaded"
+                                                            label: nil
+                                                            value: nil] build]];
     
     self.createChannelButton.enabled = FALSE;
     self.saveChannelButton.enabled = FALSE;
@@ -2929,10 +2940,10 @@ shouldChangeTextInRange: (NSRange) range
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
-        [tracker sendEventWithCategory: @"goal"
-                            withAction: @"channelCategorised"
-                             withLabel: category.name
-                             withValue: nil];
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"channelCategorised"
+                                                                label: category.name
+                                                                value: nil] build]];
         
         NSArray *filteredSubcategories = [[category.subgenres array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"isDefault == YES"]];
         
@@ -2962,11 +2973,11 @@ shouldChangeTextInRange: (NSRange) range
             didSelectSubCategory: (SubGenre *) subCategory
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker sendEventWithCategory: @"goal"
-                        withAction: @"channelCategorised"
-                         withLabel: subCategory.name
-                         withValue: nil];
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                           action: @"channelCategorised"
+                                                            label: subCategory.name
+                                                            value: nil] build]];
     
     self.selectedCategoryId = subCategory.uniqueId;
     

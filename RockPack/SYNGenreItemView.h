@@ -10,7 +10,7 @@
 
 @class Genre;
 
-typedef enum {
+typedef enum : NSInteger {
     TabItemTypeMain,
     TabItemTypeSub
 } TabItemType;

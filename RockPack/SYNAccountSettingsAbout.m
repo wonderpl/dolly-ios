@@ -56,10 +56,10 @@
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
-    [tracker sendEventWithCategory: @"uiAction"
-                        withAction: @"accountPropertyChanged"
-                         withLabel: @"About"
-                         withValue: nil];
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"accountPropertyChanged"
+                                                            label: @"About"
+                                                            value: nil] build]];
 	
     self.view.backgroundColor = [UIColor colorWithWhite:247.0/255 alpha:1.0];
     

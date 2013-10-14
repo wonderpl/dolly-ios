@@ -46,7 +46,7 @@ typedef void (^FacebookPostFailureBlock)(NSError *error);
 
 @interface SYNFacebookManager : NSObject
 
-+ (id) sharedFBManager;
++ (instancetype) sharedFBManager;
 
 - (void) loginOnSuccess: (FacebookLoginSuccessBlock) successBlock
               onFailure: (FacebookLoginFailureBlock) failureBlock;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum
+typedef enum : NSInteger
 {
     SearchTabTypeVideos = 0,
     SearchTabTypeChannels = 1,

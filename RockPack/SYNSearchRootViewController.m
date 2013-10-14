@@ -61,6 +61,13 @@
 
 - (void) loadView
 {
+    
+    if (IS_IOS_7_OR_GREATER)
+    {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    
     CGRect frame = CGRectMake(0.0, 0.0, [SYNDeviceManager.sharedInstance currentScreenWidth],
                               [SYNDeviceManager.sharedInstance currentScreenHeight]);
     
@@ -303,21 +310,29 @@
 // Google analytics view logging
 - (void) logViewInGA: (UIViewController *) currentViewController
 {
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
     if (currentViewController == self.searchVideosController)
     {
         // Video tab
-        [GAI.sharedInstance.defaultTracker sendView: @"Search - Videos"];
+        [tracker set: kGAIScreenName
+               value: @"Search - Videos"];
     }
     else if (currentViewController == self.searchChannelsController)
     {
         // Channels tab
-        [GAI.sharedInstance.defaultTracker sendView: @"Search - Channels"];
+        [tracker set: kGAIScreenName
+               value: @"Search - Channels"];
     }
     else
     {
         // Users tab
-        [GAI.sharedInstance.defaultTracker sendView: @"Search - Users"];
+        [tracker set: kGAIScreenName
+               value: @"Search - Users"];
     }
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
 
 

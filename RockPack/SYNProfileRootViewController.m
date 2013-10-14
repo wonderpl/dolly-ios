@@ -335,7 +335,13 @@
         }
         else
         {
-            [GAI.sharedInstance.defaultTracker sendView: @"Own Profile"];
+            // Google analytics support
+            id tracker = [[GAI sharedInstance] defaultTracker];
+            
+            [tracker set: kGAIScreenName
+                   value: @"Own Profile"];
+            
+            [tracker send: [[GAIDictionaryBuilder createAppView] build]];
         }
     }
     else
@@ -353,8 +359,13 @@
             self.subscriptionsViewController.channelThumbnailCollectionView.scrollsToTop = NO;
         }
         
-        [GAI.sharedInstance.defaultTracker
-         sendView: @"User Profile"];
+        // Google analytics support
+        id tracker = [[GAI sharedInstance] defaultTracker];
+        
+        [tracker set: kGAIScreenName
+               value: @"User Profile"];
+        
+        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     }
     
     self.channelThumbnailCollectionView.delegate = self;
@@ -418,14 +429,21 @@
 - (void) updateAnalytics
 {
     // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // Google analytics support
     if (self.user == appDelegate.currentUser)
     {
-        [GAI.sharedInstance.defaultTracker sendView: @"Own Profile"];
+        [tracker set: kGAIScreenName
+               value: @"Own Profile"];
     }
     else
     {
-        [GAI.sharedInstance.defaultTracker sendView: @"User Profile"];
+        [tracker set: kGAIScreenName
+               value: @"User Profile"];
     }
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
 
 

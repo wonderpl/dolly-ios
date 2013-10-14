@@ -22,7 +22,7 @@
 
 @implementation SYNActivityManager
 
-+ (id) sharedInstance
++ (instancetype) sharedInstance
 {
     static dispatch_once_t onceQueue;
     static SYNActivityManager *activityManager = nil;

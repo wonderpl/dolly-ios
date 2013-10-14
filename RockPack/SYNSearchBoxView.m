@@ -29,50 +29,100 @@
     return [[self alloc] initWithFrame:CGRectZero];
 }
 
-
 - (id) initWithFrame: (CGRect) frame
 {
     if ((self = [super initWithFrame: frame]))
     {
-        CGFloat barWidth = [SYNDeviceManager.sharedInstance currentScreenWidth] - 90.0;
-        
-        backgroundPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, barWidth, 61.0)];
-        if(IS_IPAD)
+        if (IS_IPAD)
+        {
+            CGFloat barWidth = [SYNDeviceManager.sharedInstance currentScreenWidth] - 90.0;
+            
+            backgroundPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, barWidth, 61.0)];
             backgroundPanel.backgroundColor = [UIColor whiteColor];
-        
-        backgroundPanel.autoresizesSubviews = YES;
-        
-        initialPanelHeight = backgroundPanel.frame.size.height;
-        
-        // == Gray Panel == //
-        grayPanel = [[UIView alloc] initWithFrame:CGRectMake(kGrayPanelBorderWidth,
-                                                             kGrayPanelBorderWidth,
-                                                             backgroundPanel.frame.size.width - kGrayPanelBorderWidth * 2,
-                                                             backgroundPanel.frame.size.height - kGrayPanelBorderWidth * 2)];
-        
-        grayPanel.backgroundColor = [UIColor colorWithRed:(249.0/255.0) green:(249.0/255.0) blue:(249.0/255.0) alpha:(1.0)];
-        grayPanel.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        [backgroundPanel addSubview:grayPanel];
-        
-        
-        backgroundPanel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        
-        // == Loop == // 
-        UIImage* loopImage = [UIImage imageNamed:@"IconSearch"];
-        UIImageView* loopImageView = [[UIImageView alloc] initWithImage:loopImage];
-        loopImageView.frame = CGRectMake(15.0, 15.0, loopImage.size.width, loopImage.size.height);
-        loopImageView.image = loopImage;
-        grayPanel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        [grayPanel addSubview:loopImageView];
+            
+            backgroundPanel.autoresizesSubviews = YES;
+            
+            initialPanelHeight = backgroundPanel.frame.size.height;
+            
+            // == Gray Panel == //
+            grayPanel = [[UIView alloc] initWithFrame:CGRectMake(kGrayPanelBorderWidth,
+                                                                 kGrayPanelBorderWidth,
+                                                                 backgroundPanel.frame.size.width - kGrayPanelBorderWidth * 2,
+                                                                 backgroundPanel.frame.size.height - kGrayPanelBorderWidth * 2)];
+            
+            grayPanel.backgroundColor = [UIColor colorWithRed:(249.0/255.0) green:(249.0/255.0) blue:(249.0/255.0) alpha:(1.0)];
+            grayPanel.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+            [backgroundPanel addSubview:grayPanel];
+            
+            
+            backgroundPanel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+            
+            // == Loop == //
+            UIImage* loopImage = [UIImage imageNamed:@"IconSearch"];
+            UIImageView* loopImageView = [[UIImageView alloc] initWithImage:loopImage];
+            loopImageView.frame = CGRectMake(15.0, 15.0, loopImage.size.width, loopImage.size.height);
+            loopImageView.image = loopImage;
+            grayPanel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+            [grayPanel addSubview:loopImageView];
+            
+            // == Label == //
+            CGRect fieldRect = grayPanel.frame;
+            fieldRect.origin.x += 28.0 + loopImage.size.width;
+            fieldRect.origin.y += 14.0;
+            fieldRect.size.width -= 28.0 * 2;
+            fieldRect.size.height -= 14.0 * 2;
+            self.searchTextField = [[SYNTextField alloc] initWithFrame:fieldRect];
+            self.searchTextField.font = [UIFont rockpackFontOfSize:26.0];
+        }
+        else
+        {
+            backgroundPanel = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 65)];
+            backgroundPanel.autoresizesSubviews = YES;
+            
+            self.backgroundSearchPanel = [[UIImageView alloc] initWithFrame: CGRectMake(0, 0, 320, 65)];
+            self.backgroundSearchPanel.image = [UIImage imageNamed: @"PanelSearch"];
+            [backgroundPanel addSubview: self.backgroundSearchPanel];
+            
+            self.searchFieldFrameImageView = [[UIImageView alloc] initWithFrame: CGRectMake(10, 10, 300, 45)];
+            
+            self.searchFieldFrameImageView.image = [[UIImage imageNamed: @"FieldSearch"]
+                                                    resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+            
+            [backgroundPanel addSubview: self.searchFieldFrameImageView];
 
-        // == Label == // 
-        CGRect fieldRect = grayPanel.frame;
-        fieldRect.origin.x += 28.0 + loopImage.size.width;
-        fieldRect.origin.y += 14.0;
-        fieldRect.size.width -= 28.0 * 2;
-        fieldRect.size.height -= 14.0 * 2;
-        self.searchTextField = [[SYNTextField alloc] initWithFrame:fieldRect];
-        self.searchTextField.font = [UIFont rockpackFontOfSize:26.0];
+            initialPanelHeight = backgroundPanel.frame.size.height;
+            
+            // == Loop == //
+            UIImage* loopImage = [UIImage imageNamed: @"IconSearch"];
+            UIImageView* loopImageView = [[UIImageView alloc] initWithImage:loopImage];
+            loopImageView.frame = CGRectMake(10.0f, 10.0f, 34.0f, 45.0f);
+            loopImageView.image = loopImage;
+            [backgroundPanel addSubview: loopImageView];
+            
+            // == Label == //
+            self.searchTextField = [[SYNTextField alloc] initWithFrame: CGRectMake(52, 18, 248, 30)];
+            
+            self.searchTextField.font = [UIFont rockpackFontOfSize: 16.0];
+            self.searchTextField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
+            self.searchTextField.layer.shadowOpacity = 1.0;
+            self.searchTextField.layer.shadowColor = [UIColor whiteColor].CGColor;
+            self.searchTextField.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+            self.searchTextField.layer.shadowRadius = 0.0f;
+
+            // Display Search instead of Return on iPhone Keyboard
+            self.searchTextField.returnKeyType = UIReturnKeySearch;
+            
+            self.integratedCloseButton = [[UIButton alloc] initWithFrame: CGRectMake(266, 10, 44, 44)];
+            
+            UIImage* closeButtonImage = [UIImage imageNamed: @"ButtonCloseSearch"];
+            
+            [self.integratedCloseButton setImage: closeButtonImage
+                                forState: UIControlStateNormal];
+            
+            [backgroundPanel addSubview: self.integratedCloseButton];
+                                          
+        }
+    
         self.searchTextField.backgroundColor = [UIColor clearColor];
         self.searchTextField.textAlignment = NSTextAlignmentLeft;
         self.searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -82,20 +132,20 @@
         
         // Display Search instead of Return on iPad Keyboard
         self.searchTextField.returnKeyType = UIReturnKeySearch;
+
+        self.frame = backgroundPanel.frame;
         
-        CGRect finalFrame = backgroundPanel.frame;
-        
-        self.frame = finalFrame;
-        [self addSubview:backgroundPanel];
-        [self addSubview:self.searchTextField];
+        [self addSubview: backgroundPanel];
+        [self addSubview: self.searchTextField];
         
         self.autoresizesSubviews = YES;
-
+        
         self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     }
     
     return self;
 }
+
 
 -(void)enlargeForiOS7
 {
@@ -137,22 +187,27 @@
 
 - (void) awakeFromNib
 {
-    self.searchFieldFrameImageView.image = [[UIImage imageNamed: @"FieldSearch"]
-                                            resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+    [super awakeFromNib];
     
-    self.searchTextField.font = [UIFont rockpackFontOfSize: self.searchTextField.font.pointSize];
-    self.searchTextField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
-    self.searchTextField.layer.shadowOpacity = 1.0;
-    self.searchTextField.layer.shadowColor = [UIColor whiteColor].CGColor;
-    self.searchTextField.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
-    self.searchTextField.layer.shadowRadius = 0.0f;
-    self.searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    
-    // Display Search instead of Return on iPhone Keyboard
-    self.searchTextField.returnKeyType = UIReturnKeySearch;
-    
-    [self hideCloseButton];
+    if (!IS_IOS_7_OR_GREATER)
+    {
+        self.searchFieldFrameImageView.image = [[UIImage imageNamed: @"FieldSearch"]
+                                                resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+        
+        self.searchTextField.font = [UIFont rockpackFontOfSize: self.searchTextField.font.pointSize];
+        self.searchTextField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
+        self.searchTextField.layer.shadowOpacity = 1.0;
+        self.searchTextField.layer.shadowColor = [UIColor whiteColor].CGColor;
+        self.searchTextField.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+        self.searchTextField.layer.shadowRadius = 0.0f;
+        self.searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        
+        // Display Search instead of Return on iPhone Keyboard
+        self.searchTextField.returnKeyType = UIReturnKeySearch;
+        
+        [self hideCloseButton];
+    }
 }
 
 
