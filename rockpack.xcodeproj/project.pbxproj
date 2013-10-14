@@ -1398,7 +1398,6 @@
 		BED4312B16F20CD70051465B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4312A16F20CD70051465B /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
-		BEE732BA1727D99E0083E1B9 /* SYNContainerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE732B91727D99E0083E1B9 /* SYNContainerScrollView.m */; };
 		BEEB6F1C1721713500FEFA43 /* PanelMenuBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEB6F1A1721713500FEFA43 /* PanelMenuBottom.png */; };
 		BEEB6F1D1721713500FEFA43 /* PanelMenuBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEB6F1B1721713500FEFA43 /* PanelMenuBottom@2x.png */; };
 		BEEB6F201721807200FEFA43 /* SYNSearchTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEB6F1F1721807100FEFA43 /* SYNSearchTabView.m */; };
@@ -3061,8 +3060,6 @@
 		BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsEmail.m; sourceTree = "<group>"; };
 		BEE4A6C3170B56B3008F9D05 /* SYNAccountSettingsUsername.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsUsername.h; sourceTree = "<group>"; };
 		BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsUsername.m; sourceTree = "<group>"; };
-		BEE732B81727D99E0083E1B9 /* SYNContainerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNContainerScrollView.h; sourceTree = "<group>"; };
-		BEE732B91727D99E0083E1B9 /* SYNContainerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNContainerScrollView.m; sourceTree = "<group>"; };
 		BEEB6F1A1721713500FEFA43 /* PanelMenuBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelMenuBottom.png; path = Assets/Images/PanelMenuBottom.png; sourceTree = "<group>"; };
 		BEEB6F1B1721713500FEFA43 /* PanelMenuBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelMenuBottom@2x.png"; path = "Assets/Images/PanelMenuBottom@2x.png"; sourceTree = "<group>"; };
 		BEEB6F1E1721807100FEFA43 /* SYNSearchTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchTabView.h; sourceTree = "<group>"; };
@@ -4004,8 +4001,6 @@
 			children = (
 				0198250A1629DCF100216900 /* SYNContainerViewController.h */,
 				0198250B1629DCF100216900 /* SYNContainerViewController.m */,
-				BEE732B81727D99E0083E1B9 /* SYNContainerScrollView.h */,
-				BEE732B91727D99E0083E1B9 /* SYNContainerScrollView.m */,
 			);
 			name = Container;
 			sourceTree = "<group>";
@@ -7466,7 +7461,6 @@
 				BE285D9F172584E200D995AB /* SYNChannelCreateNewCell.m in Sources */,
 				BE285DB01725A23300D995AB /* SYNNetworkMessageView.m in Sources */,
 				BE285DBC1726828F00D995AB /* SYNChannelManager.m in Sources */,
-				BEE732BA1727D99E0083E1B9 /* SYNContainerScrollView.m in Sources */,
 				0111CDFC1729314E00612186 /* SYNCoverThumbnailCell.m in Sources */,
 				01F1B85D17297471005735AF /* CoverArt.m in Sources */,
 				3862E8B1172979410066E8E7 /* SYNChannelCategoryTableCell.m in Sources */,

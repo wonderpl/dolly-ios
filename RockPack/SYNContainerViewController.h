@@ -7,16 +7,15 @@
 //
 
 #import "SYNAbstractViewController.h"
-#import "SYNContainerScrollView.h"
 #import <UIKit/UIKit.h>
 
 
-@interface SYNContainerViewController : UIViewController <UIScrollViewDelegate>
+@interface SYNContainerViewController : UIViewController
 
 @property (nonatomic) CGPoint currentPageOffset;
 @property (nonatomic, readonly) NSInteger currentPage;
 @property (nonatomic, readonly) SYNAbstractViewController *showingViewController;
-@property (nonatomic, readonly) SYNContainerScrollView *scrollView;
+@property (nonatomic, readonly) NSArray* viewControllers;
 
 
 - (void) swipedTo: (UISwipeGestureRecognizerDirection) direction;

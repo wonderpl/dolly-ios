@@ -28,16 +28,11 @@
 UITextViewDelegate>
 
 @property (nonatomic) BOOL didNotSwipeMessageInbox;
-@property (nonatomic) BOOL shouldAnimateViewTransitions;
-@property (nonatomic) int lastSelectedPageIndex;
-@property (nonatomic, assign) BOOL didNotSwipeShareMenu;
-@property (nonatomic, assign) double lowPassResults;
-@property (nonatomic, assign, getter = isShowingBackButton) BOOL showingBackButton;
-@property (nonatomic, getter = isTabBarHidden) BOOL tabBarHidden;
 @property (nonatomic, readonly) CGFloat currentScreenOffset;
 @property (nonatomic, strong) UIPopoverController *actionButtonPopover;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
-@property (strong, nonatomic) MKNetworkOperation *downloadOperation;
+
+@property (nonatomic, strong) NSArray* viewControllers;
 
 @end
 
@@ -47,19 +42,10 @@ UITextViewDelegate>
 // Initialise all the elements common to all 4 tabs
 #pragma mark - View lifecycle
 
-- (void) loadView
+-(void)loadView
 {
-    if (IS_IOS_7_OR_GREATER)
-    {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    
-    SYNContainerScrollView *scrollView = [[SYNContainerScrollView alloc] initFullScreenWithDelegate:self];
-    
-    self.view = scrollView;
-    
-    // Indicate that we don't start with a selected page
-    self.lastSelectedPageIndex = -1;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view = [[UIView alloc] initWithFrame:[[SYNDeviceManager sharedInstance] currentScreenRect]];
 }
 
 
@@ -69,10 +55,13 @@ UITextViewDelegate>
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
+    
     // == Feed Page == //
+    
     SYNFeedRootViewController *feedRootViewController = [[SYNFeedRootViewController alloc] initWithViewId: kFeedViewId];
     
     // == Channels Page == //
+    
     SYNChannelsRootViewController *channelsRootViewController = [[SYNChannelsRootViewController alloc] initWithViewId: kChannelsViewId];
     
     if (IS_IPAD)
@@ -86,6 +75,7 @@ UITextViewDelegate>
     }
     
     // == Profile Page == //
+    
     SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
     
     if (!IS_IPAD)
@@ -93,80 +83,56 @@ UITextViewDelegate>
         profileViewController.hideUserProfile = YES;
     }
     
+    
     profileViewController.user = self.appDelegate.currentUser;
     
-    self.shouldAnimateViewTransitions = YES;
+    // == Hold the vc locally
     
-    self.didNotSwipeMessageInbox = YES;
-    self.didNotSwipeShareMenu = YES;
+    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController];
     
-    // == Populate Scroller == //
-    CGRect scrollerFrame = CGRectMake(0.0f,
-                                      0.0f,
-                                      [[SYNDeviceManager sharedInstance] currentScreenWidth],
-                                      [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar]);
     
-    self.scrollView.frame = scrollerFrame;
+    // == Set the first vc
     
-    [self addChildViewController: feedRootViewController];
+    [self addChildViewController:self.viewControllers[0]];
     
-    [self addChildViewController: channelsRootViewController];
-    
-    [self addChildViewController: profileViewController];
-    
-    [self packViewControllersForInterfaceOrientation: UIDeviceOrientationLandscapeLeft];
 
-    // == Set Firts Page == //
-    if (self.appDelegate.currentUser.subscriptions.count > 3)
-    {
-        self.scrollView.page = self.lastSelectedPageIndex = 0;
-    }
-    else
-    {
-        self.scrollView.page = self.lastSelectedPageIndex = 1;
-    }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollerPageChanged
-                                                        object: self
-                                                      userInfo: @{kCurrentPage: @(self.scrollView.page)}];
-}
-
-
-- (void) viewWillAppear: (BOOL) animated
-{
-    [super viewWillAppear: animated];
-    
-    [self packViewControllersForInterfaceOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
 }
 
 
 - (void) dealloc
 {
-    // Defensive programming
-    self.scrollView.delegate = nil;
+    // TODO: nil delegates for tab view
 }
+
+#pragma mark - UIViewController Containment
+
+- (void) addChildViewController: (UIViewController *) childController
+{
+    [self.showingViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
+    
+    [childController willMoveToParentViewController: self];
+    
+    [super addChildViewController: childController];
+    
+    childController.view.frame = self.view.frame;
+    
+    [[self view] addSubview:childController.view];
+    
+    [childController didMoveToParentViewController: self];
+}
+
+
+
+
+
+
 
 
 - (void) swipedTo: (UISwipeGestureRecognizerDirection) direction
 {
-    NSInteger page = self.currentPage;
-    
-    if (direction == UISwipeGestureRecognizerDirectionLeft) // go right
-    {
-        page = self.currentPage + 1 < self.childViewControllers.count ? self.currentPage + 1 : self.currentPage;
-    }
-    else if (direction == UISwipeGestureRecognizerDirectionRight) // go left
-    {
-        page = self.currentPage - 1 >= 0 ? self.currentPage - 1 : self.currentPage;
-    }
-    else
-    {
-        return;
-    }
-    
-    [self.scrollView setPage: page
-                    animated: YES];
+    // TODO: swipe to change view
 }
 
 
@@ -175,73 +141,12 @@ UITextViewDelegate>
 
 - (void) refreshView
 {
-    [self packViewControllersForInterfaceOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollerPageChanged
-                                                        object: self
-                                                      userInfo: @{kCurrentPage: @(self.scrollView.page)}];
+    // TODO: Notify with kScrollerPageChanged
 }
 
 
-#pragma mark - Placement of Views
 
-- (void) packViewControllersForInterfaceOrientation: (UIInterfaceOrientation) orientation
-{
-    CGRect newFrame;
-    
-    if (IS_IPHONE)
-    {
-        // The full screen video player can interfere with reading the screen dimensions on viewWillAppear.
-        // Use MAX and MIN to determine which one is width and which one is height
-        newFrame = CGRectMake(0.0f,
-                              0.0f,
-                              [[SYNDeviceManager sharedInstance] currentScreenWidth],
-                              [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar]);
-    }
-    else // IS_IPAD
-    {
-        newFrame = CGRectMake(0.0f,
-                              0.0f,
-                              [[SYNDeviceManager sharedInstance] currentScreenWidth],
-                              [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar]);
-    }
-    
-    self.scrollView.frame = CGRectMake(0.0f, 0.0f,
-                                       [SYNDeviceManager.sharedInstance currentScreenWidth],
-                                       [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar]);
-    
-    
-    for (SYNAbstractViewController *controller in self.childViewControllers)
-    {
-        controller.view.frame = newFrame;
-        
-        newFrame.origin.x += newFrame.size.width;
-    }
-    
-    // pack replacement
-    //get page before resizing scrollview
-    int showingPage = self.currentPage;
-    
-    //resize scrollview
-    self.scrollView.contentSize = CGSizeMake(newFrame.origin.x, newFrame.size.height);
-    
-    //adjust offset
-    self.currentPageOffset = CGPointMake(showingPage * newFrame.size.width, 0);
-    
-    [self.scrollView setContentOffset: self.currentPageOffset];
-}
-
-
-- (void) addChildViewController: (UIViewController *) childController
-{
-    [childController willMoveToParentViewController: self];
-    
-    [super addChildViewController: childController];
-    
-    [self.scrollView addSubview: childController.view];
-    
-    [childController didMoveToParentViewController: self];
-}
 
 
 #pragma mark - Notification Methods
@@ -255,8 +160,7 @@ UITextViewDelegate>
     {
         if ([pageName isEqualToString: nvc.title])
         {
-            [self.scrollView setPage: page
-                            animated: YES];
+            //TODO: Perform the navigation
             break;
         }
         
@@ -267,7 +171,7 @@ UITextViewDelegate>
 -(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName
 {
     SYNAbstractViewController* child;
-    for (child in self.childViewControllers)
+    for (child in self.viewControllers)
     {
         if ([pageName isEqualToString: child.title])
             break;
@@ -278,69 +182,19 @@ UITextViewDelegate>
 
 #pragma mark - UIScrollViewDelegate
 
+// TODO: notify with kScrollerPageChanged AND [lastSelectedViewController viewDidScrollToBack]; AND [self.showingViewController viewDidScrollToFront];
 
 
-- (void) scrollViewDidEndScrollingAnimation: (UIScrollView *) scrollView
-{
-    // catch programmatic animations
-    [self scrollViewDidEndDecelerating: scrollView];
-}
 
-
-- (void) scrollViewDidEndDecelerating: (UIScrollView *) scrollView
-{
-    self.currentPageOffset = self.scrollView.contentOffset;
-    
-    // These are the things we need to do if the page has actually changed
-    if (self.currentPage != self.lastSelectedPageIndex)
-    {
-        // Now let the page know that it has the focus
-        if (self.lastSelectedPageIndex >= 0 && self.lastSelectedPageIndex < 3)
-        {
-            SYNAbstractViewController *lastSelectedViewController = (SYNAbstractViewController *) self.childViewControllers[self.lastSelectedPageIndex];
-            [lastSelectedViewController viewDidScrollToBack];
-        }
-        
-        [self.showingViewController viewDidScrollToFront];
-        
-        // Remember our last page
-        self.lastSelectedPageIndex = self.currentPage;
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollerPageChanged
-                                                            object: self
-                                                          userInfo: @{kCurrentPage: @(self.scrollView.page)}];
-    }
-}
-
-
-#pragma mark - Rotation Callbacks
-
-- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
-                                          duration: (NSTimeInterval) duration
-{
-    [super willAnimateRotationToInterfaceOrientation: toInterfaceOrientation
-                                            duration: duration];
-    
-    [self packViewControllersForInterfaceOrientation: toInterfaceOrientation];
-}
 
 
 #pragma mark - Getters/Setters
 
 - (SYNAbstractViewController *) showingViewController
 {
-    int currentPage = self.scrollView.page;
-    currentPage = MIN (self.childViewControllers.count, currentPage);
-    currentPage = MAX (0, currentPage);
-    
-    return self.childViewControllers[currentPage];
+    return self.childViewControllers.count > 0 ? (SYNAbstractViewController*)self.childViewControllers[0] : nil;
 }
 
-
-- (SYNContainerScrollView *) scrollView
-{
-    return (SYNContainerScrollView *) self.view;
-}
 
 
 - (NSString *) description
@@ -349,10 +203,7 @@ UITextViewDelegate>
 }
 
 
-- (NSInteger) currentPage
-{
-    return self.scrollView.page;
-}
+
 
 
 @end
