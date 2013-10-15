@@ -50,6 +50,8 @@
 #define kChannelDetailsViewId       @"ChannelDetails"
 #define kSideNavigationViewId       @"kSideNavigationViewId"
 #define kSubscribersListViewId      @"kSubscribersListViewId"
+#define kFriendsViewId              NSLocalizedString(@"core_nav_section_friends", nil)
+#define kActivityViewId         NSLocalizedString(@"core_nav_section_activity", nil)
 
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"

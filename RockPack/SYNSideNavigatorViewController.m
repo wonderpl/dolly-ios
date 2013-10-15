@@ -33,11 +33,7 @@
 
 typedef void (^SideNavigationMotionBlock)(void);
 
-typedef enum : NSInteger {
-    kSideNavigationTypeLoad = 0,
-    kSideNavigationTypePage
 
-} kSideNavigationType;
 
 @interface SYNSideNavigatorViewController () <SYNImagePickerControllerDelegate>
 
@@ -87,20 +83,15 @@ typedef enum : NSInteger {
     {
         self.navigationData = @[
                 @{kSideNavTitle: NSLocalizedString(@"core_nav_section_feed", nil),
-                   kSideNavType: @(kSideNavigationTypePage),
                  kSideNavAction: kFeedViewId},
                 @{kSideNavTitle: NSLocalizedString(@"core_nav_section_channels", nil),
-                   kSideNavType: @(kSideNavigationTypePage),
                  kSideNavAction: kChannelsViewId},
                 @{kSideNavTitle: NSLocalizedString(@"core_nav_section_profile", nil),
-                   kSideNavType: @(kSideNavigationTypePage),
                  kSideNavAction: kProfileViewId},
                 @{kSideNavTitle: NSLocalizedString(@"core_nav_section_friends", nil),
-                  kSideNavType: @(kSideNavigationTypeLoad),
-                  kSideNavAction: @"SYNFriendsViewController"},
+                  kSideNavAction: kFriendsViewId},
                 @{kSideNavTitle: NSLocalizedString(@"core_nav_section_notifications", nil),
-                   kSideNavType: @(kSideNavigationTypeLoad),
-                 kSideNavAction: @"SYNNotificationsTableViewController"}];
+                 kSideNavAction: kActivityViewId}];
         
         _state = SideNavigationStateHidden;
         
@@ -379,47 +370,15 @@ typedef enum : NSInteger {
         NSDictionary* navigationElement = (NSDictionary*)(self.navigationData)[indexPath.row];
         
         
-        kSideNavigationType navigationType = [((NSNumber*)navigationElement[kSideNavType]) integerValue];
         
         // == Type == //
         
         NSString* cellTitle = navigationElement[kSideNavTitle];
         
-        if (navigationType == kSideNavigationTypePage)
-        {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            NSString* pageName = navigationElement[kSideNavAction];
-            
-            (self.cellByPageName)[pageName] = cell;
-        }
-        else
-        {
-            if (indexPath.row == kNotificationsRowIndex)
-            {
-
-                SYNSideNavigationIphoneCell* iPhoneCell = (SYNSideNavigationIphoneCell*)cell;
-                
-                if (self.unreadNotifications > 0)
-                {
-                    [iPhoneCell setAccessoryNumber:[NSString stringWithFormat: @"%i",self.unreadNotifications]];
-                    iPhoneCell.accessoryNumberLabel.hidden = NO;
-                    iPhoneCell.accessoryNumberBackground.hidden = NO;
-                }
-                else
-                {
-                    iPhoneCell.accessoryNumberLabel.hidden = YES;
-                    iPhoneCell.accessoryNumberBackground.hidden = YES;
-                }
-
-                iPhoneCell.accessoryView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"NavArrow"]];
-                    
-            }
-            else
-            {
-                SYNSideNavigationIphoneCell* iPhoneCell = (SYNSideNavigationIphoneCell*)cell;
-                iPhoneCell.accessoryView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"NavArrow"]];
-            }
-        }
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        NSString* pageName = navigationElement[kSideNavAction];
+        
+        (self.cellByPageName)[pageName] = cell;
         
         // == Title == //
 
@@ -439,70 +398,13 @@ typedef enum : NSInteger {
     self.currentlySelectedIndexPath = indexPath;
     
     NSDictionary* navigationElement = (NSDictionary*)(self.navigationData)[indexPath.row];
-    kSideNavigationType navigationType = [((NSNumber*)navigationElement[kSideNavType]) integerValue];
     NSString* navigationAction = (NSString*)navigationElement[kSideNavAction];
     
-    if (navigationType == kSideNavigationTypeLoad) // the case of loading something into the nav (ex. friends view)
-    {
-        Class theClass = NSClassFromString(navigationAction);
-        self.currentlyLoadedViewController = (UIViewController*)[[theClass alloc] init];
-        
-        // == NOTIFICATIONS == //
-        if (indexPath.row == kNotificationsRowIndex)
-        {
-            ((SYNNotificationsTableViewController*)self.currentlyLoadedViewController).notifications = self.notifications;
-            self.navigationContainerTitleLabel.text = NSLocalizedString(@"core_nav_section_notifications",nil);
-        }
-        else if (indexPath.row == kFriendsRowIndex)
-        {
-            self.navigationContainerTitleLabel.text = NSLocalizedString(@"core_nav_section_friends",nil);
-            if(IS_IPHONE)
-            {
-                SYNFriendsViewController* friendsController = (SYNFriendsViewController*) self.currentlyLoadedViewController;
-                [friendsController addSearchBarToView:self.navigationContainerView];
-            }
-            
-        }
-        
-        
-        if (IS_IPAD)
-        {
-            CGRect frameThatFits = self.currentlyLoadedViewController.view.frame;
-            frameThatFits.size.width = self.containerView.frame.size.width;
-            frameThatFits.size.height = self.containerView.frame.size.height - 10.0;
-            self.currentlyLoadedViewController.view.frame = frameThatFits;
-        }
-        else if (IS_IPHONE)
-        {
-            CGRect frameThatFits = self.currentlyLoadedViewController.view.frame;
-            frameThatFits.size.width = self.containerView.frame.size.width;
-            if(IS_IOS_7_OR_GREATER)
-            {
-                frameThatFits.origin.y = -10.0f;
-                frameThatFits.size.height += 10;
-            }
-            else
-            {
-                
-                frameThatFits.size.height = self.containerView.frame.size.height - 6.0;
-            }
-            
-            self.currentlyLoadedViewController.view.frame = frameThatFits;
-        }
-        self.state = SideNavigationStateFull;
-        
-    }
-    else // navigate to a page by notifying the container
-    {
-        
-        NSNotification* navigationNotification = [NSNotification notificationWithName: kNavigateToPage
-                                                                               object: self
-                                                                             userInfo: @{@"pageName":navigationAction}];
-        
-        [[NSNotificationCenter defaultCenter] postNotification: navigationNotification];
-        
-        
-    }
+    NSNotification* navigationNotification = [NSNotification notificationWithName: kNavigateToPage
+                                                                           object: self
+                                                                         userInfo: @{@"pageName":navigationAction}];
+    
+    [[NSNotificationCenter defaultCenter] postNotification: navigationNotification];
 }
 
 
