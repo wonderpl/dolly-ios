@@ -42,8 +42,6 @@
 @property (getter = isVideoQueueVisible) BOOL videoQueueVisible;
 @property (nonatomic, assign) BOOL shouldPlaySound;
 @property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, strong) IBOutlet UIImageView *channelOverlayView;
-@property (nonatomic, strong) IBOutlet UITextField *channelNameTextField;
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
 @property (nonatomic, strong) UIView *dropZoneView;

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchViewController">
             <connections>
+                <outlet property="autocompleteTableView" destination="cx7-DP-WVU" id="HeX-r9-hcU"/>
                 <outlet property="categoriesCollectionView" destination="fhE-V4-G8V" id="YX8-7v-zh8"/>
                 <outlet property="searchCloseButton" destination="00M-z9-Akl" id="rp9-Ri-3EQ"/>
                 <outlet property="searchField" destination="PuK-Uv-Znu" id="Kc3-ml-VOf"/>
@@ -23,13 +24,13 @@
                     <rect key="frame" x="10" y="22" width="300" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PuK-Uv-Znu" customClass="SYNTextFieldSearchIPhone">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PuK-Uv-Znu" userLabel="Text Field Search" customClass="SYNTextFieldSearchIPhone">
                     <rect key="frame" x="52" y="29" width="215" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="IconSearch.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Vh-uG-Yok">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="IconSearch.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Vh-uG-Yok" userLabel="Loop Icon">
                     <rect key="frame" x="10" y="22" width="34" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -50,6 +51,10 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="oXw-KP-4iS"/>
+                        <outlet property="delegate" destination="-1" id="9Hd-ZH-Z1L"/>
+                    </connections>
                 </tableView>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fhE-V4-G8V">
                     <rect key="frame" x="10" y="75" width="300" height="473"/>

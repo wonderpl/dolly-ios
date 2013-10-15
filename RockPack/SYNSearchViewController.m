@@ -14,7 +14,8 @@
 
 #define kAutocompleteTime 0.2
 
-@interface SYNSearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SYNSearchViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
+                                        UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView* searchFieldBGImageView;
 @property (nonatomic, strong) IBOutlet UITextField* searchField;
@@ -39,6 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     
     // set the image here instead of the XIB to make it streachable
     self.searchFieldBGImageView.image = [[UIImage imageNamed: @"FieldSearch"]
@@ -166,8 +169,8 @@
         return YES;
     }
     
-    
     // == Restart Timer == //
+    
     if (self.autocompleteTimer)
         [self.autocompleteTimer invalidate];
     
