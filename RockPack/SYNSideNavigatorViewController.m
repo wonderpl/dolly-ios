@@ -14,7 +14,7 @@
 #import "SYNFriendsViewController.h"
 #import "SYNImagePickerController.h"
 #import "SYNMasterViewController.h"
-#import "SYNNotificationsTableViewController.h"
+#import "SYNActivityViewController.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNRockpackNotification.h"
 #import "SYNSearchBoxViewController.h"
@@ -303,9 +303,9 @@ typedef void (^SideNavigationMotionBlock)(void);
                                                    
             [self.tableView reloadData];
         
-        if (self.currentlyLoadedViewController && [self.currentlyLoadedViewController isKindOfClass:[SYNNotificationsTableViewController class]])
+        if (self.currentlyLoadedViewController && [self.currentlyLoadedViewController isKindOfClass:[SYNActivityViewController class]])
         {
-            ((SYNNotificationsTableViewController*)self.currentlyLoadedViewController).notifications = self.notifications;
+            ((SYNActivityViewController*)self.currentlyLoadedViewController).notifications = self.notifications;
         }
         
     } errorHandler:^(id error) {

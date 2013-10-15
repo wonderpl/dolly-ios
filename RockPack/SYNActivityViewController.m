@@ -10,37 +10,26 @@
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
 #import "SYNNotificationsTableViewCell.h"
-#import "SYNNotificationsTableViewController.h"
-#import "SYNOAuthNetworkEngine.h"
+#import "SYNActivityViewController.h"
 #import "SYNRockpackNotification.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
 
-@interface SYNNotificationsTableViewController ()
+@interface SYNActivityViewController ()
 
-@property (nonatomic, weak) SYNAppDelegate *appDelegate;
 @property (nonatomic, strong) UIImageView *logoImageView;
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
 
 @end
 
 
-@implementation SYNNotificationsTableViewController
+@implementation SYNActivityViewController
 
 @synthesize notifications = _notifications;
 
-#pragma mark - Object lifecycle
 
-- (id) init
-{
-    if ((self = [super initWithStyle: UITableViewStylePlain]))
-    {
-        // TODO: Get notifications
-    }
-    
-    return self;
-}
 
 
 #pragma mark - View Life Cycle
@@ -57,7 +46,7 @@
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+    appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
     self.logoImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"LogoNotifications"]];
 
@@ -261,7 +250,6 @@
     
     SYNRockpackNotification *notification = self.notifications[indexPathForCellPressed.row];
     
-    SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
     [appDelegate.viewStackManager viewProfileDetails: notification.channelOwner];
     
@@ -283,7 +271,6 @@
         return;
     }
     
-    SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
     switch (notification.objectType)
     {
@@ -345,19 +332,21 @@
     
     NSArray *array = @[@(notification.identifier)];
     
-    [self.appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes: array
-                                                               fromUserId: self.appDelegate.currentUser.uniqueId
-                                                        completionHandler: ^(id response) {
-                                                            notification.read = YES;
-                                                            
-                                                            [self.tableView reloadData];
-                                                            
-                                                            [[NSNotificationCenter defaultCenter]  postNotificationName: kNotificationMarkedRead
-                                                                                                                 object: self];
-                                                        } errorHandler: ^(id error) {
-                                                            
-                                                            
-                                                        }];
+    [appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes:array
+                                                          fromUserId:appDelegate.currentUser.uniqueId
+                                                   completionHandler:^(id responce) {
+        
+                                                       notification.read = YES;
+        
+                                                       [self.tableView reloadData];
+        
+                                                       [[NSNotificationCenter defaultCenter]  postNotificationName: kNotificationMarkedRead
+                                                                                                            object: self];
+        
+                                                   } errorHandler:^(id error) {
+        
+                                                   }];
+    
 }
 
 
@@ -385,11 +374,11 @@
     NSFetchRequest *channelFetchRequest = [[NSFetchRequest alloc] init];
     
     channelFetchRequest.entity = [NSEntityDescription entityForName: @"Channel"
-                                             inManagedObjectContext: self.appDelegate.mainManagedObjectContext];
+                                             inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     channelFetchRequest.predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", channelId];
 
-    NSArray *matchingChannelEntries = [self.appDelegate.mainManagedObjectContext executeFetchRequest: channelFetchRequest
+    NSArray *matchingChannelEntries = [appDelegate.mainManagedObjectContext executeFetchRequest: channelFetchRequest
                                                                                                error: &error];
     
     if (matchingChannelEntries.count > 0)

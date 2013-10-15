@@ -995,6 +995,8 @@
 		BE1B3DC3180D4EEB00DA2BD6 /* SYNSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DC1180D4EEB00DA2BD6 /* SYNSearchViewController.m */; };
 		BE1B3DC4180D4EEB00DA2BD6 /* SYNSearchViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DC2180D4EEB00DA2BD6 /* SYNSearchViewController~iphone.xib */; };
 		BE1B3DC6180D50C700DA2BD6 /* SYNSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DC5180D50C700DA2BD6 /* SYNSearchViewController.xib */; };
+		BE1B3DC9180D804A00DA2BD6 /* SYNActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DC8180D804A00DA2BD6 /* SYNActivityViewController.xib */; };
+		BE1B3DCB180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */; };
 		BE21EE7C16F9FF520067223B /* SYNAccountSettingsTextInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EE7B16F9FF520067223B /* SYNAccountSettingsTextInputController.m */; };
 		BE21EE8316FA108E0067223B /* SYNAccountSettingsPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EE8216FA108D0067223B /* SYNAccountSettingsPopoverBackgroundView.m */; };
 		BE21EE8716FA202F0067223B /* SYNAccountSettingsFullNameInput.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EE8616FA202F0067223B /* SYNAccountSettingsFullNameInput.m */; };
@@ -1205,7 +1207,7 @@
 		BE7D3431170DDB310085AB81 /* SYNChannelFooterMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D3430170DDB310085AB81 /* SYNChannelFooterMoreView.m */; };
 		BE7D34CE1714434D0085AB81 /* SYNDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D34CD1714434D0085AB81 /* SYNDeviceManager.m */; };
 		BE7D34D317159E2C0085AB81 /* SYNNotificationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */; };
-		BE7D34D617159F3C0085AB81 /* SYNNotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D34D517159F3C0085AB81 /* SYNNotificationsTableViewController.m */; };
+		BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D34D517159F3C0085AB81 /* SYNActivityViewController.m */; };
 		BE7D34DC1715A9560085AB81 /* ButtonSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D34D81715A9560085AB81 /* ButtonSettings.png */; };
 		BE7D34DD1715A9560085AB81 /* ButtonSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D34D91715A9560085AB81 /* ButtonSettings@2x.png */; };
 		BE7D34E21715A9BE0085AB81 /* PanelMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D34E01715A9BE0085AB81 /* PanelMenu.png */; };
@@ -2574,6 +2576,8 @@
 		BE1B3DC1180D4EEB00DA2BD6 /* SYNSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchViewController.m; sourceTree = "<group>"; };
 		BE1B3DC2180D4EEB00DA2BD6 /* SYNSearchViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNSearchViewController~iphone.xib"; sourceTree = "<group>"; };
 		BE1B3DC5180D50C700DA2BD6 /* SYNSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNSearchViewController.xib; sourceTree = "<group>"; };
+		BE1B3DC8180D804A00DA2BD6 /* SYNActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNActivityViewController.xib; sourceTree = "<group>"; };
+		BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNActivityViewController~iphone.xib"; sourceTree = "<group>"; };
 		BE21EE7A16F9FF520067223B /* SYNAccountSettingsTextInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsTextInputController.h; sourceTree = "<group>"; };
 		BE21EE7B16F9FF520067223B /* SYNAccountSettingsTextInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsTextInputController.m; sourceTree = "<group>"; };
 		BE21EE8116FA108D0067223B /* SYNAccountSettingsPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsPopoverBackgroundView.h; sourceTree = "<group>"; };
@@ -2828,8 +2832,8 @@
 		BE7D34CD1714434D0085AB81 /* SYNDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDeviceManager.m; sourceTree = "<group>"; };
 		BE7D34D117159E2C0085AB81 /* SYNNotificationsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNotificationsTableViewCell.h; sourceTree = "<group>"; };
 		BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNotificationsTableViewCell.m; sourceTree = "<group>"; };
-		BE7D34D417159F3C0085AB81 /* SYNNotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNotificationsTableViewController.h; sourceTree = "<group>"; };
-		BE7D34D517159F3C0085AB81 /* SYNNotificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNotificationsTableViewController.m; sourceTree = "<group>"; };
+		BE7D34D417159F3C0085AB81 /* SYNActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNActivityViewController.h; sourceTree = "<group>"; };
+		BE7D34D517159F3C0085AB81 /* SYNActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNActivityViewController.m; sourceTree = "<group>"; };
 		BE7D34D81715A9560085AB81 /* ButtonSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSettings.png; path = Assets/Images/ButtonSettings.png; sourceTree = "<group>"; };
 		BE7D34D91715A9560085AB81 /* ButtonSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSettings@2x.png"; path = "Assets/Images/ButtonSettings@2x.png"; sourceTree = "<group>"; };
 		BE7D34DA1715A9560085AB81 /* ButtonSettingsHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSettingsHighlighted.png; path = Assets/Images/ButtonSettingsHighlighted.png; sourceTree = "<group>"; };
@@ -3814,6 +3818,7 @@
 				01D9196A178B08B400D980A7 /* Cover Art */,
 				0199F1371672199F00E479C6 /* Feed */,
 				BE7D02FD179D4318008053DC /* Friends */,
+				BE7D34D017159DF20085AB81 /* Activity */,
 				38015B4F174CCE1A005D3F18 /* Genres */,
 				BE270B7B16EDE0A500CDDA6D /* Login */,
 				BE0815C216D5386B00ADB1DC /* Master */,
@@ -5383,6 +5388,15 @@
 			name = "Instructions Controller";
 			sourceTree = "<group>";
 		};
+		BE1B3DC7180D7F4000DA2BD6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BE0FF0301754C39D0088294F /* ISO8601DateFormatter.h */,
+				BE0FF0311754C39D0088294F /* ISO8601DateFormatter.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		BE21EE8416FA200C0067223B /* Specific Fields */ = {
 			isa = PBXGroup;
 			children = (
@@ -5758,7 +5772,6 @@
 			isa = PBXGroup;
 			children = (
 				388CAF64172EBD8E00721372 /* iPhoneCell */,
-				BE7D34D017159DF20085AB81 /* Notifications */,
 				BE0815CF16D6448200ADB1DC /* SYNSideNavigatorViewController.h */,
 				BE0815D016D6448200ADB1DC /* SYNSideNavigatorViewController.m */,
 				BE0815D116D6448200ADB1DC /* SYNSideNavigatorViewController.xib */,
@@ -5776,19 +5789,20 @@
 			name = Device;
 			sourceTree = "<group>";
 		};
-		BE7D34D017159DF20085AB81 /* Notifications */ = {
+		BE7D34D017159DF20085AB81 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
-				BE7D34D417159F3C0085AB81 /* SYNNotificationsTableViewController.h */,
-				BE7D34D517159F3C0085AB81 /* SYNNotificationsTableViewController.m */,
+				BE1B3DC7180D7F4000DA2BD6 /* Helpers */,
+				BE7D34D417159F3C0085AB81 /* SYNActivityViewController.h */,
+				BE7D34D517159F3C0085AB81 /* SYNActivityViewController.m */,
+				BE1B3DC8180D804A00DA2BD6 /* SYNActivityViewController.xib */,
+				BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */,
 				BE7D34D117159E2C0085AB81 /* SYNNotificationsTableViewCell.h */,
 				BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */,
 				BE7D35031715CE440085AB81 /* SYNRockpackNotification.h */,
 				BE7D35041715CE450085AB81 /* SYNRockpackNotification.m */,
-				BE0FF0301754C39D0088294F /* ISO8601DateFormatter.h */,
-				BE0FF0311754C39D0088294F /* ISO8601DateFormatter.m */,
 			);
-			name = Notifications;
+			name = Activity;
 			sourceTree = "<group>";
 		};
 		BE7D34D71715A8E30085AB81 /* Navigation Panel */ = {
@@ -6714,6 +6728,7 @@
 				38A200D81731607F00FB9F57 /* ButtonProfileChannels@2x~iphone.png in Resources */,
 				38A200D91731607F00FB9F57 /* ButtonProfileChannelsHighlighted@2x~iphone.png in Resources */,
 				38A200DA1731607F00FB9F57 /* ButtonProfileChannelsHighlighted~iphone.png in Resources */,
+				BE1B3DCB180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib in Resources */,
 				38A200DB1731607F00FB9F57 /* ButtonProfileChannelsSelected@2x~iphone.png in Resources */,
 				38A200DC1731607F00FB9F57 /* ButtonProfileChannelsSelected~iphone.png in Resources */,
 				38A200DD1731607F00FB9F57 /* ButtonProfileChannels~iphone.png in Resources */,
@@ -7157,6 +7172,7 @@
 				BE82099617A95F6E00472ADD /* channelFeedCoverFourth@2x.png in Resources */,
 				BE82099717A95F6E00472ADD /* channelFeedCoverFourth~iphone.png in Resources */,
 				BE82099817A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png in Resources */,
+				BE1B3DC9180D804A00DA2BD6 /* SYNActivityViewController.xib in Resources */,
 				BE82099A17A95F9900472ADD /* channelFeedCover.png in Resources */,
 				01EC094317AAA37A00E1ACE1 /* ButtonSubscribeDisabled.png in Resources */,
 				01EC094417AAA37A00E1ACE1 /* ButtonSubscribeDisabled@2x.png in Resources */,
@@ -7457,7 +7473,7 @@
 				BE7D3431170DDB310085AB81 /* SYNChannelFooterMoreView.m in Sources */,
 				BE7D34CE1714434D0085AB81 /* SYNDeviceManager.m in Sources */,
 				BE7D34D317159E2C0085AB81 /* SYNNotificationsTableViewCell.m in Sources */,
-				BE7D34D617159F3C0085AB81 /* SYNNotificationsTableViewController.m in Sources */,
+				BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */,
 				BE7D35051715CE450085AB81 /* SYNRockpackNotification.m in Sources */,
 				BE7D353B171708F60085AB81 /* SYNRefreshButton.m in Sources */,
 				BE7D354C1718667F0085AB81 /* SYNUserProfileViewController.m in Sources */,

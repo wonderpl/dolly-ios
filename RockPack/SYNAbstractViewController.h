@@ -14,6 +14,7 @@
 #import "SYNChannelFooterMoreView.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOnBoardingPopoverQueueController.h"
+#import "SYNOAuthNetworkEngine.h"
 #import "SYNOnBoardingPopoverView.h"
 #import "SYNTabViewController.h"
 #import "SYNTabViewDelegate.h"

@@ -28,7 +28,6 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 }
 
 @property (nonatomic, strong) NSArray* friends;
-@property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (nonatomic) BOOL onRockpackFilterOn;
 @property (nonatomic, strong) NSArray* displayFriends;
 @property (nonatomic, weak) Friend* currentlySelectedFriend;

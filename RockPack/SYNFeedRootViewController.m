@@ -1243,7 +1243,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                             object: self
                                                           userInfo: @{@"VideoInstance": videoInstance}];
         
-        [self.videoThumbnailCollectionView reloadData];
+        
     }
 }
 
