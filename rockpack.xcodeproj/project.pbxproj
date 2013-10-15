@@ -3826,7 +3826,7 @@
 				01982560162ADE3300216900 /* Profile */,
 				BE7D3496171412EC0085AB81 /* Side Navigator */,
 				BE08158F16D3C46800ADB1DC /* Search */,
-				BE0AAD2616E6521300DA958E /* Search Box */,
+				BE0AAD2616E6521300DA958E /* Search Controller */,
 				BE7D02F1178C1D13008053DC /* Users */,
 				01F8E77B16B039E6000D44B9 /* Video viewer */,
 			);
@@ -5356,7 +5356,7 @@
 			name = Master;
 			sourceTree = "<group>";
 		};
-		BE0AAD2616E6521300DA958E /* Search Box */ = {
+		BE0AAD2616E6521300DA958E /* Search Controller */ = {
 			isa = PBXGroup;
 			children = (
 				38A2FF1817314B0200FB9F57 /* iPhoneSearchResultCell */,
@@ -5374,7 +5374,7 @@
 				BE1B3DC5180D50C700DA2BD6 /* SYNSearchViewController.xib */,
 				BE1B3DC2180D4EEB00DA2BD6 /* SYNSearchViewController~iphone.xib */,
 			);
-			name = "Search Box";
+			name = "Search Controller";
 			sourceTree = "<group>";
 		};
 		BE1280C317E0B51F00BD5E3A /* Instructions Controller */ = {

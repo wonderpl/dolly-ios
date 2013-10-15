@@ -74,7 +74,19 @@
 
 - (id) initWithViewId: (NSString*) vid
 {
-    if ((self = [super init]))
+    // Check to see if there is a XIB file in the system and initialise accordingly
+    
+    NSString* classNameString = NSStringFromClass([self class]);
+    
+    if([[NSBundle mainBundle] pathForResource:classNameString ofType:@"nib"] != nil)
+    {
+        self = [super initWithNibName:classNameString bundle:nil];
+    }
+    else
+    {
+        self = [super init];
+    }
+    if (self)
     {
         viewId = vid;
         

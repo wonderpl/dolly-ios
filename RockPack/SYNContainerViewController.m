@@ -19,7 +19,9 @@
 #import "SYNFeedRootViewController.h"
 #import "SYNGenreTabViewController.h"
 #import "SYNMasterViewController.h"
+#import "SYNActivityViewController.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "SYNFriendsViewController.h"
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
@@ -88,11 +90,20 @@
     }
     
     
+    // == Friends Page == //
+    
+    SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
+    
+    // == Activity Page == //
+    
+    SYNActivityViewController* activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];;
+    
+    
     profileViewController.channelOwner = self.appDelegate.currentUser;
     
     // == Hold the vc locally
     
-    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController];
+    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController, friendsViewController, activityViewController];
     
     
     // == Set the first vc
@@ -159,7 +170,6 @@
     }
     
     
-    // == Do the transition == //
     
     
     
