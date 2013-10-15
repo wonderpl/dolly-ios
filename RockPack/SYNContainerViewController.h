@@ -21,13 +21,9 @@
 
 - (void) swipedTo: (UISwipeGestureRecognizerDirection) direction;
 
-- (void) navigateToPageByName: (NSString *) pageName;
 -(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName;
 
-/**
- Method to re-layout view to maintain orientation. Specifically intended for when orientation may have changed during popover views.
- */
-- (void) refreshView;
+
 
 
 

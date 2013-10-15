@@ -39,14 +39,12 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 //iPhone specific
 @property (nonatomic, strong) IBOutlet UIView* searchContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *searchFieldBackground;
-@property (weak, nonatomic) IBOutlet UIView *searchSlider;
 @property (weak, nonatomic) IBOutlet UIButton * buttonShowSearch;
 
 @end
 
 @implementation SYNFriendsViewController
 
-@synthesize appDelegate;
 @synthesize onRockpackFilterOn;
 @synthesize displayFriends = _displayFriends;
 
@@ -54,7 +52,6 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 {
     [super viewDidLoad];
     
-    appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     onRockpackFilterOn = NO;
     
@@ -119,20 +116,8 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     self.followInviteLabel.font = [UIFont rockpackFontOfSize:self.followInviteLabel.font.pointSize];
     
-    if(IS_IPHONE)
-    {
-        
-        
-        self.searchFieldBackground.image = [[UIImage imageNamed: @"FieldSearch"]
-                                    resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
-        
-        //Push the search slider out to the right.
-        CGRect searchSliderFrame = self.searchSlider.frame;
-        searchSliderFrame.origin.x = searchSliderFrame.size.width;
-        self.searchSlider.frame= searchSliderFrame;
-        
-        
-    }
+    self.searchFieldBackground.image = [[UIImage imageNamed: @"FieldSearch"]
+                                        resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -547,7 +532,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     }
 }
 
-#pragma mark - iPhone Search bar
+#pragma mark - Search Field
 
 -(void)addSearchBarToView:(UIView*)view
 {
@@ -558,38 +543,14 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 }
 
 - (IBAction)closeSearchBox:(id)sender {
+    
+    self.searchField.text = @"";
     [self.searchField resignFirstResponder];
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
-        CGRect newFrame = self.searchSlider.frame;
-        newFrame.origin.x = newFrame.size.width;
-        self.searchSlider.frame = newFrame;
-    } completion:^(BOOL finished) {
-        
-        if (finished)
-        {
-            self.buttonShowSearch.hidden = NO;
-            
-            [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-                self.buttonShowSearch.alpha = 1.0f;
-            } completion:nil];
-        }
-    }];
+    
+    
 }
 
-- (IBAction)revealSearchBox:(id)sender {
-    
-    self.buttonShowSearch.hidden = YES;
-    self.buttonShowSearch.alpha = 0.0f;
-    
-    
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseIn animations:^{
-        CGRect newFrame = self.searchSlider.frame;
-        newFrame.origin.x = 0.0f;
-        self.searchSlider.frame = newFrame;
-    } completion:^(BOOL finished) {
-        [self.searchField becomeFirstResponder];
-    }];
-}
+
 
 #pragma mark - Helper Methods
 

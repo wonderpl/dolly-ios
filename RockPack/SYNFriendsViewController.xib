@@ -14,7 +14,6 @@
                 <outlet property="onFacebookButton" destination="28" id="5jC-Nz-uC1"/>
                 <outlet property="onRockpackButton" destination="29" id="30"/>
                 <outlet property="preLoginLabel" destination="6" id="10"/>
-                <outlet property="searchField" destination="20" id="27"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -23,19 +22,32 @@
             <rect key="frame" x="0.0" y="0.0" width="362" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="FieldSearchFriends.png" id="21" userLabel="SearchFieldBackground">
-                    <rect key="frame" x="10" y="10" width="342" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="QeU-Ue-g1H" userLabel="SearchFieldBackground">
+                    <rect key="frame" x="29" y="9" width="304" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Friend's name" adjustsFontSizeToFit="NO" minimumFontSize="18" clearButtonMode="whileEditing" id="20" customClass="SYNTextFieldSearchIPhone">
-                    <rect key="frame" x="52" y="17" width="289" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QJi-PH-yOA">
+                    <rect key="frame" x="289" y="9" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" image="ButtonCloseSearch.png">
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" image="ButtonCloseSearchHighlighted.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Friend's name" adjustsFontSizeToFit="NO" minimumFontSize="18" clearButtonMode="whileEditing" id="zsG-xT-1Sh" userLabel="Text Field" customClass="SYNTextFieldSearchIPhone">
+                    <rect key="frame" x="71" y="16" width="221" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="26"/>
-                    </connections>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="IconSearch.png" id="0TP-vu-fkJ" userLabel="Loop Icon">
+                    <rect key="frame" x="29" y="9" width="34" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <collectionView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="7">
                     <rect key="frame" x="6" y="166" width="350" height="402"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -134,6 +146,8 @@
         </view>
     </objects>
     <resources>
+        <image name="ButtonCloseSearch.png" width="44" height="45"/>
+        <image name="ButtonCloseSearchHighlighted.png" width="44" height="45"/>
         <image name="ButtonFacebookFriendsDefault.png" width="280" height="45"/>
         <image name="ButtonFacebookFriendsHighlighted.png" width="280" height="45"/>
         <image name="ButtonFriendsFacebookDefault.png" width="160" height="44"/>
@@ -142,6 +156,6 @@
         <image name="ButtonFriendsRockpackDefault.png" width="160" height="44"/>
         <image name="ButtonFriendsRockpackHighlighted.png" width="160" height="44"/>
         <image name="ButtonFriendsRockpackSelected.png" width="160" height="44"/>
-        <image name="FieldSearchFriends.png" width="342" height="44"/>
+        <image name="IconSearch.png" width="34" height="45"/>
     </resources>
 </document>
