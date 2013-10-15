@@ -88,7 +88,7 @@
     }
     
     
-    profileViewController.user = self.appDelegate.currentUser;
+    profileViewController.channelOwner = self.appDelegate.currentUser;
     
     // == Hold the vc locally
     

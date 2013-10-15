@@ -55,7 +55,7 @@
         [self pushController: profileVC];
     }
     
-    profileVC.user = channelOwner;
+    profileVC.channelOwner = channelOwner;
     
     [self hideSideNavigator];
 }
