@@ -6,7 +6,7 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNAutocompleteIphoneCell.h"
+#import "SYNSearchAutocompleteTableViewCell.h"
 #import "SYNAutocompleteSuggestionsController.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
@@ -124,7 +124,7 @@
     }
     else
     {
-        cell = [[SYNAutocompleteIphoneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[SYNSearchAutocompleteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         //Text
         cell.textLabel.font = rockpackFont;

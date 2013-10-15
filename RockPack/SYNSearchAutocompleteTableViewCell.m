@@ -6,10 +6,10 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNAutocompleteIphoneCell.h"
+#import "SYNSearchAutocompleteTableViewCell.h"
 #import "UIFont+SYNFont.h"
 
-@interface SYNAutocompleteIphoneCell ()
+@interface SYNSearchAutocompleteTableViewCell ()
 
 @property (nonatomic,weak)UIImageView* backgroundImageView;
 @property (nonatomic,strong)UIColor* defaultColor;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation SYNAutocompleteIphoneCell
+@implementation SYNSearchAutocompleteTableViewCell
 @synthesize separatorView;
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
