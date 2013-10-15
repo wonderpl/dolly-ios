@@ -14,6 +14,7 @@
                 <outlet property="onFacebookButton" destination="28" id="5jC-Nz-uC1"/>
                 <outlet property="onRockpackButton" destination="29" id="30"/>
                 <outlet property="preLoginLabel" destination="6" id="10"/>
+                <outlet property="searchField" destination="zsG-xT-1Sh" id="FFG-WR-8IU"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -43,6 +44,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="QCJ-iG-03T"/>
+                    </connections>
                 </textField>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="IconSearch.png" id="0TP-vu-fkJ" userLabel="Loop Icon">
                     <rect key="frame" x="29" y="9" width="34" height="45"/>

@@ -34,6 +34,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="meR-ww-gFI"/>
+                    </connections>
                 </textField>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="voe-PP-I8e">
                     <rect key="frame" x="20" y="69" width="728" height="915"/>
@@ -69,7 +72,7 @@
     </objects>
     <resources>
         <image name="ButtonCloseSearch.png" width="320" height="65"/>
-        <image name="ButtonCloseSearchHighlighted.png" width="320" height="65"/>
+        <image name="ButtonCloseSearchHighlighted.png" width="110" height="110"/>
         <image name="IconSearch.png" width="26" height="27"/>
     </resources>
 </document>

@@ -29,6 +29,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ewp-4z-9dp"/>
+                    </connections>
                 </textField>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="IconSearch.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Vh-uG-Yok" userLabel="Loop Icon">
                     <rect key="frame" x="10" y="22" width="34" height="45"/>

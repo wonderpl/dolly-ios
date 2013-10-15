@@ -59,7 +59,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     [self.searchField setAutocorrectionType:UITextAutocorrectionTypeNo];
     
-    self.friends = @[];
+    self.friends = [NSArray array];
     
     
     
