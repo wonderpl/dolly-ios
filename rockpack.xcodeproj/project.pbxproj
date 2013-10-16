@@ -417,26 +417,6 @@
 		01F1B895172A9B41005735AF /* ButtonCloseHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F1B893172A9B41005735AF /* ButtonCloseHighlighted@2x.png */; };
 		01F1B898172AC2F1005735AF /* ButtonCreateHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F1B896172AC2F1005735AF /* ButtonCreateHighlighted.png */; };
 		01F1B899172AC2F1005735AF /* ButtonCreateHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F1B897172AC2F1005735AF /* ButtonCreateHighlighted@2x.png */; };
-		01F24AD617B8F2C000FC8820 /* ActionLike.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC217B8F2C000FC8820 /* ActionLike.png */; };
-		01F24AD717B8F2C000FC8820 /* ActionLike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC317B8F2C000FC8820 /* ActionLike@2x.png */; };
-		01F24AD817B8F2C000FC8820 /* ActionLikeHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC417B8F2C000FC8820 /* ActionLikeHighlighted.png */; };
-		01F24AD917B8F2C000FC8820 /* ActionLikeHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC517B8F2C000FC8820 /* ActionLikeHighlighted@2x.png */; };
-		01F24ADA17B8F2C000FC8820 /* ActionUnlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC617B8F2C000FC8820 /* ActionUnlike.png */; };
-		01F24ADB17B8F2C000FC8820 /* ActionUnlike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC717B8F2C000FC8820 /* ActionUnlike@2x.png */; };
-		01F24ADC17B8F2C000FC8820 /* ActionUnlikeHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC817B8F2C000FC8820 /* ActionUnlikeHighlighted.png */; };
-		01F24ADD17B8F2C000FC8820 /* ActionUnlikeHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AC917B8F2C000FC8820 /* ActionUnlikeHighlighted@2x.png */; };
-		01F24ADE17B8F2C000FC8820 /* ActionAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24ACA17B8F2C000FC8820 /* ActionAdd.png */; };
-		01F24ADF17B8F2C000FC8820 /* ActionAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24ACB17B8F2C000FC8820 /* ActionAdd@2x.png */; };
-		01F24AE017B8F2C000FC8820 /* ActionAddHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24ACC17B8F2C000FC8820 /* ActionAddHighlighted.png */; };
-		01F24AE117B8F2C000FC8820 /* ActionAddHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24ACD17B8F2C000FC8820 /* ActionAddHighlighted@2x.png */; };
-		01F24AE217B8F2C000FC8820 /* ActionRingNoTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24ACE17B8F2C000FC8820 /* ActionRingNoTouch.png */; };
-		01F24AE317B8F2C000FC8820 /* ActionRingNoTouch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24ACF17B8F2C000FC8820 /* ActionRingNoTouch@2x.png */; };
-		01F24AE417B8F2C000FC8820 /* ActionRingTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AD017B8F2C000FC8820 /* ActionRingTouch.png */; };
-		01F24AE517B8F2C000FC8820 /* ActionRingTouch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AD117B8F2C000FC8820 /* ActionRingTouch@2x.png */; };
-		01F24AE617B8F2C000FC8820 /* ActionShare.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AD217B8F2C000FC8820 /* ActionShare.png */; };
-		01F24AE717B8F2C000FC8820 /* ActionShare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AD317B8F2C000FC8820 /* ActionShare@2x.png */; };
-		01F24AE817B8F2C000FC8820 /* ActionShareHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AD417B8F2C000FC8820 /* ActionShareHighlighted.png */; };
-		01F24AE917B8F2C000FC8820 /* ActionShareHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F24AD517B8F2C000FC8820 /* ActionShareHighlighted@2x.png */; };
 		01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7C9671748ED0B00E36994 /* libsqlite3.dylib */; };
 		01F8E73A16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E73816B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png */; };
 		01F8E73B16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E73916B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png */; };
@@ -1951,26 +1931,6 @@
 		01F1B893172A9B41005735AF /* ButtonCloseHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCloseHighlighted@2x.png"; path = "Assets/Images/ButtonCloseHighlighted@2x.png"; sourceTree = "<group>"; };
 		01F1B896172AC2F1005735AF /* ButtonCreateHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCreateHighlighted.png; path = Assets/Images/ButtonCreateHighlighted.png; sourceTree = "<group>"; };
 		01F1B897172AC2F1005735AF /* ButtonCreateHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateHighlighted@2x.png"; path = "Assets/Images/ButtonCreateHighlighted@2x.png"; sourceTree = "<group>"; };
-		01F24AC217B8F2C000FC8820 /* ActionLike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionLike.png; path = Assets/Images/ActionLike.png; sourceTree = "<group>"; };
-		01F24AC317B8F2C000FC8820 /* ActionLike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionLike@2x.png"; path = "Assets/Images/ActionLike@2x.png"; sourceTree = "<group>"; };
-		01F24AC417B8F2C000FC8820 /* ActionLikeHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionLikeHighlighted.png; path = Assets/Images/ActionLikeHighlighted.png; sourceTree = "<group>"; };
-		01F24AC517B8F2C000FC8820 /* ActionLikeHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionLikeHighlighted@2x.png"; path = "Assets/Images/ActionLikeHighlighted@2x.png"; sourceTree = "<group>"; };
-		01F24AC617B8F2C000FC8820 /* ActionUnlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionUnlike.png; path = Assets/Images/ActionUnlike.png; sourceTree = "<group>"; };
-		01F24AC717B8F2C000FC8820 /* ActionUnlike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionUnlike@2x.png"; path = "Assets/Images/ActionUnlike@2x.png"; sourceTree = "<group>"; };
-		01F24AC817B8F2C000FC8820 /* ActionUnlikeHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionUnlikeHighlighted.png; path = Assets/Images/ActionUnlikeHighlighted.png; sourceTree = "<group>"; };
-		01F24AC917B8F2C000FC8820 /* ActionUnlikeHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionUnlikeHighlighted@2x.png"; path = "Assets/Images/ActionUnlikeHighlighted@2x.png"; sourceTree = "<group>"; };
-		01F24ACA17B8F2C000FC8820 /* ActionAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionAdd.png; path = Assets/Images/ActionAdd.png; sourceTree = "<group>"; };
-		01F24ACB17B8F2C000FC8820 /* ActionAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionAdd@2x.png"; path = "Assets/Images/ActionAdd@2x.png"; sourceTree = "<group>"; };
-		01F24ACC17B8F2C000FC8820 /* ActionAddHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionAddHighlighted.png; path = Assets/Images/ActionAddHighlighted.png; sourceTree = "<group>"; };
-		01F24ACD17B8F2C000FC8820 /* ActionAddHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionAddHighlighted@2x.png"; path = "Assets/Images/ActionAddHighlighted@2x.png"; sourceTree = "<group>"; };
-		01F24ACE17B8F2C000FC8820 /* ActionRingNoTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionRingNoTouch.png; path = Assets/Images/ActionRingNoTouch.png; sourceTree = "<group>"; };
-		01F24ACF17B8F2C000FC8820 /* ActionRingNoTouch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionRingNoTouch@2x.png"; path = "Assets/Images/ActionRingNoTouch@2x.png"; sourceTree = "<group>"; };
-		01F24AD017B8F2C000FC8820 /* ActionRingTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionRingTouch.png; path = Assets/Images/ActionRingTouch.png; sourceTree = "<group>"; };
-		01F24AD117B8F2C000FC8820 /* ActionRingTouch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionRingTouch@2x.png"; path = "Assets/Images/ActionRingTouch@2x.png"; sourceTree = "<group>"; };
-		01F24AD217B8F2C000FC8820 /* ActionShare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionShare.png; path = Assets/Images/ActionShare.png; sourceTree = "<group>"; };
-		01F24AD317B8F2C000FC8820 /* ActionShare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionShare@2x.png"; path = "Assets/Images/ActionShare@2x.png"; sourceTree = "<group>"; };
-		01F24AD417B8F2C000FC8820 /* ActionShareHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionShareHighlighted.png; path = Assets/Images/ActionShareHighlighted.png; sourceTree = "<group>"; };
-		01F24AD517B8F2C000FC8820 /* ActionShareHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionShareHighlighted@2x.png"; path = "Assets/Images/ActionShareHighlighted@2x.png"; sourceTree = "<group>"; };
 		01F7C9671748ED0B00E36994 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		01F8E73816B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelVideoScreenVideoMainOverlay.png; path = Assets/Images/PanelVideoScreenVideoMainOverlay.png; sourceTree = "<group>"; };
 		01F8E73916B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelVideoScreenVideoMainOverlay@2x.png"; path = "Assets/Images/PanelVideoScreenVideoMainOverlay@2x.png"; sourceTree = "<group>"; };
@@ -3744,7 +3704,6 @@
 			isa = PBXGroup;
 			children = (
 				1F5FAED517E73F8C00205F3F /* Add to Pack */,
-				01F24AC117B8F27900FC8820 /* Arc menu */,
 				1FD2856417BBA1640094F488 /* Share Panel */,
 				BE8F938F17B3CF9700E7035F /* Sharing */,
 				BE7D030F179E8563008053DC /* Friends */,
@@ -4442,33 +4401,6 @@
 				018B0DA1179EDBD200F2D3CD /* OverlayNotificationVideo@2x.png */,
 			);
 			name = Slider;
-			sourceTree = "<group>";
-		};
-		01F24AC117B8F27900FC8820 /* Arc menu */ = {
-			isa = PBXGroup;
-			children = (
-				01F24AC217B8F2C000FC8820 /* ActionLike.png */,
-				01F24AC317B8F2C000FC8820 /* ActionLike@2x.png */,
-				01F24AC417B8F2C000FC8820 /* ActionLikeHighlighted.png */,
-				01F24AC517B8F2C000FC8820 /* ActionLikeHighlighted@2x.png */,
-				01F24AC617B8F2C000FC8820 /* ActionUnlike.png */,
-				01F24AC717B8F2C000FC8820 /* ActionUnlike@2x.png */,
-				01F24AC817B8F2C000FC8820 /* ActionUnlikeHighlighted.png */,
-				01F24AC917B8F2C000FC8820 /* ActionUnlikeHighlighted@2x.png */,
-				01F24ACA17B8F2C000FC8820 /* ActionAdd.png */,
-				01F24ACB17B8F2C000FC8820 /* ActionAdd@2x.png */,
-				01F24ACC17B8F2C000FC8820 /* ActionAddHighlighted.png */,
-				01F24ACD17B8F2C000FC8820 /* ActionAddHighlighted@2x.png */,
-				01F24ACE17B8F2C000FC8820 /* ActionRingNoTouch.png */,
-				01F24ACF17B8F2C000FC8820 /* ActionRingNoTouch@2x.png */,
-				01F24AD017B8F2C000FC8820 /* ActionRingTouch.png */,
-				01F24AD117B8F2C000FC8820 /* ActionRingTouch@2x.png */,
-				01F24AD217B8F2C000FC8820 /* ActionShare.png */,
-				01F24AD317B8F2C000FC8820 /* ActionShare@2x.png */,
-				01F24AD417B8F2C000FC8820 /* ActionShareHighlighted.png */,
-				01F24AD517B8F2C000FC8820 /* ActionShareHighlighted@2x.png */,
-			);
-			name = "Arc menu";
 			sourceTree = "<group>";
 		};
 		01F8E73316AFF426000D44B9 /* Video viewer */ = {
@@ -7188,27 +7120,7 @@
 				BE8F93B617B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png in Resources */,
 				BE8F93B717B3D00700E7035F /* ImageFacebookImplicit~iphone.png in Resources */,
 				BE8F93B917B3D22500E7035F /* SYNImplicitSharingController~iphone.xib in Resources */,
-				01F24AD617B8F2C000FC8820 /* ActionLike.png in Resources */,
-				01F24AD717B8F2C000FC8820 /* ActionLike@2x.png in Resources */,
-				01F24AD817B8F2C000FC8820 /* ActionLikeHighlighted.png in Resources */,
-				01F24AD917B8F2C000FC8820 /* ActionLikeHighlighted@2x.png in Resources */,
-				01F24ADA17B8F2C000FC8820 /* ActionUnlike.png in Resources */,
-				01F24ADB17B8F2C000FC8820 /* ActionUnlike@2x.png in Resources */,
-				01F24ADC17B8F2C000FC8820 /* ActionUnlikeHighlighted.png in Resources */,
-				01F24ADD17B8F2C000FC8820 /* ActionUnlikeHighlighted@2x.png in Resources */,
-				01F24ADE17B8F2C000FC8820 /* ActionAdd.png in Resources */,
-				01F24ADF17B8F2C000FC8820 /* ActionAdd@2x.png in Resources */,
 				1F65D49417EB3D13004326A9 /* Default-Portrait-iOS7~ipad.png in Resources */,
-				01F24AE017B8F2C000FC8820 /* ActionAddHighlighted.png in Resources */,
-				01F24AE117B8F2C000FC8820 /* ActionAddHighlighted@2x.png in Resources */,
-				01F24AE217B8F2C000FC8820 /* ActionRingNoTouch.png in Resources */,
-				01F24AE317B8F2C000FC8820 /* ActionRingNoTouch@2x.png in Resources */,
-				01F24AE417B8F2C000FC8820 /* ActionRingTouch.png in Resources */,
-				01F24AE517B8F2C000FC8820 /* ActionRingTouch@2x.png in Resources */,
-				01F24AE617B8F2C000FC8820 /* ActionShare.png in Resources */,
-				01F24AE717B8F2C000FC8820 /* ActionShare@2x.png in Resources */,
-				01F24AE817B8F2C000FC8820 /* ActionShareHighlighted.png in Resources */,
-				01F24AE917B8F2C000FC8820 /* ActionShareHighlighted@2x.png in Resources */,
 				1FD2857717BBAD6A0094F488 /* PanelShare.png in Resources */,
 				1FD2857817BBAD6A0094F488 /* PanelShare@2x.png in Resources */,
 				BE0B151217BC16240053E551 /* ButtonSearch@2x~iphone.png in Resources */,
