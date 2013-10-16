@@ -30,7 +30,6 @@
 #import "SYNMasterViewController.h"
 #import "VideoInstance.h"
 #import "Appirater.h"
-#import "SYNInstructionsToShareControllerViewController.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
@@ -284,9 +283,9 @@ typedef void(^FeedDataErrorBlock)(void);
     NSInteger onBoarding1State = [defaults integerForKey:kInstruction1OnBoardingState];
     if(onBoarding1State == 3) // has shown on channel details and can show here IF videos are present
     {
-        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePressAndHold];
-        
-        [appDelegate.viewStackManager presentCoverViewController:itsVC];
+//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePressAndHold];
+//        
+//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
         
         [defaults setInteger:4 forKey:kInstruction1OnBoardingState]; // inc by one
         
@@ -702,7 +701,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
     
-    if (componentIndex == kArcMenuInvalidComponentIndex)
+    if (componentIndex == kInvalidComponentIndex)
     {
         DebugLog(@"*** channelAtCoverOfFeedItem");
         channel = [self channelAtCoverOfFeedItem: feedItem];
@@ -729,48 +728,6 @@ typedef void(^FeedDataErrorBlock)(void);
 {
     NSIndexPath *indexPath = [self.feedCollectionView indexPathForItemAtPoint: cell.center];
     return indexPath;
-}
-
-
-- (void) arcMenu: (SYNArcMenuView *) menu
-         didSelectMenuName: (NSString *) menuName
-         forCellAtIndex: (NSIndexPath *) cellIndexPath
-         andComponentIndex: (NSInteger) componentIndex
-{
-    if ([menuName isEqualToString: kActionLike])
-    {
-        [self toggleStarAtIndexPath: cellIndexPath];
-    }
-    else if ([menuName isEqualToString: kActionAdd])
-    {
-        [self addVideoAtIndexPath: cellIndexPath
-                    withOperation: kVideoQueueAdd];
-    }
-    else if ([menuName isEqualToString: kActionShareVideo])
-    {
-        VideoInstance *videoInstance = [self videoInstanceForIndexPath: self.arcMenuIndexPath
-                                                     andComponentIndex: self.arcMenuComponentIndex];
-        
-        [self requestShareLinkWithObjectType: @"video_instance"
-                                    objectId: videoInstance.uniqueId];
-        
-        [self shareVideoAtIndexPath: cellIndexPath];
-    }
-    else if ([menuName isEqualToString: kActionShareChannel])
-    {
-        Channel *channel = [self channelInstanceForIndexPath: self.arcMenuIndexPath
-                                           andComponentIndex: self.arcMenuComponentIndex];
-        
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-        
-        [self shareChannelAtIndexPath: cellIndexPath
-                    andComponentIndex: componentIndex];
-    }
-    else
-    {
-        AssertOrLog(@"Invalid Arc Menu index selected");
-    }
 }
 
 
@@ -980,34 +937,16 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
 {
-    return [self videoInstanceForIndexPath: indexPath
-                         andComponentIndex: kArcMenuInvalidComponentIndex];
-}
-
-
-- (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
-                            andComponentIndex: (NSInteger) componentIndex
-{
     if (!indexPath)
     {
         DebugLog(@"Nil index path");
     }
-        
-    
     
     VideoInstance *videoInstance;
     
     FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
     
-    if (componentIndex == kArcMenuInvalidComponentIndex)
-    {
-        videoInstance = [self videoInstanceAtCoverOfFeedItem: feedItem];
-    }
-    else
-    {
-        // Aggregate cell with multiple indices
-        videoInstance = (self.feedVideosById)[feedItem.coverIndexArray[componentIndex]];
-    }
+    videoInstance = [self videoInstanceAtCoverOfFeedItem: feedItem];
     
     return videoInstance;
 }
@@ -1099,7 +1038,10 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) touchedAggregateCell
 {
-    FeedItem *selectedFeedItem = [self feedItemAtIndexPath: self.arcMenuIndexPath];
+    // FIXME: Need to plumb correct cell and index in her
+    //    FeedItem *selectedFeedItem = [self feedItemAtIndexPath: self.arcMenuIndexPath];
+    FeedItem *selectedFeedItem = [self feedItemAtIndexPath: [NSIndexPath indexPathForItem: 0 inSection: 0]];
+
     
     if (selectedFeedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
@@ -1138,8 +1080,9 @@ typedef void(^FeedDataErrorBlock)(void);
             channel = (self.feedChannelsById)[selectedFeedItem.resourceId];
         }
         else
-        {
-            channel = (self.feedChannelsById)[selectedFeedItem.coverIndexArray[self.arcMenuComponentIndex]];
+        {    // FIXME: Need to plumb correct cell and index in her
+//            channel = (self.feedChannelsById)[selectedFeedItem.coverIndexArray[self.arcMenuComponentIndex]];
+            channel = (self.feedChannelsById)[selectedFeedItem.coverIndexArray[0]];
         }
         
         if (channel)

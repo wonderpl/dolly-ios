@@ -8,7 +8,6 @@
 
 #import "AppConstants.h"
 #import "SYNAggregateChannelCell.h"
-#import "SYNArcMenuView.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "UIImage+Tint.h"
 

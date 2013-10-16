@@ -28,7 +28,6 @@
 #import "UIFont+SYNFont.h"
 #import "SYNTrackableFrameView.h"
 #import "UIImageView+WebCache.h"
-#import "SYNInstructionsToShareControllerViewController.h"
 #import "Video.h"
 #import "VideoInstance.h"
 
@@ -242,9 +241,9 @@
     BOOL onBoarding1State = [defaults boolForKey:kInstruction1OnBoardingState];
     if(!onBoarding1State) // 1rst card
     {
-        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePacks];
-        
-        [appDelegate.viewStackManager presentCoverViewController:itsVC];
+//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePacks];
+//        
+//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
         
         [defaults setBool:YES forKey:kInstruction1OnBoardingState];
         
@@ -1034,59 +1033,10 @@ referenceSizeForFooterInSection: (NSInteger) section
                                                  animated: YES];
 }
 
-#pragma mark - Arc menu support
-
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
-{
-    [super arcMenuUpdateState: recognizer];
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        Channel *channel = [self channelInstanceForIndexPath: self.arcMenuIndexPath
-                                           andComponentIndex: kArcMenuInvalidComponentIndex];
-        
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-    }
-}
-
-
-// Bypass implementation for derived classes
-- (void) superArcMenuUpdateState: (UIGestureRecognizer *) recognizer
-{
-    [super arcMenuUpdateState: recognizer];
-}
-
-
-- (void) arcMenu: (SYNArcMenuView *) menu
-         didSelectMenuName: (NSString *) menuName
-         forCellAtIndex: (NSIndexPath *) cellIndexPath
-         andComponentIndex: (NSInteger) componentIndex
-{
-    if ([menuName isEqualToString: kActionShareVideo])
-    {
-        [self shareVideoAtIndexPath: cellIndexPath];
-    }
-    else if ([menuName isEqualToString: kActionShareChannel])
-    {
-        [self shareChannelAtIndexPath: cellIndexPath
-                    andComponentIndex: componentIndex];
-    }
-    else
-    {
-        AssertOrLog(@"Invalid Arc Menu index selected");
-    }
-}
-
 
 - (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
                         andComponentIndex: (NSInteger) componentIndex
-{
-    if (componentIndex != kArcMenuInvalidComponentIndex)
-    {
-        AssertOrLog(@"Unexpectedly valid componentIndex");
-    }
-    
+{    
     Channel *channel = (Channel *) self.channels[indexPath.row];
     
     return channel;

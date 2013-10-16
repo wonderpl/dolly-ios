@@ -36,7 +36,6 @@
 #import "SYNReportConcernTableViewController.h"
 #import "SYNSubscribersViewController.h"
 #import "SYNVideoThumbnailRegularCell.h"
-#import "SYNInstructionsToShareControllerViewController.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
@@ -2776,9 +2775,9 @@ shouldChangeTextInRange: (NSRange) range
     
     if(!onBoarding1State || onBoarding1State == 1) // has shown on channel details and can show here IF videos are present
     {
-        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePressAndHold];
-        
-        [appDelegate.viewStackManager presentCoverViewController:itsVC];
+//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePressAndHold];
+//        
+//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
         
         [defaults setInteger:2 forKey:kInstruction1OnBoardingState]; // inc by one
         

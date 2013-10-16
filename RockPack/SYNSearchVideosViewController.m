@@ -462,6 +462,7 @@
     
 }
 
+
 - (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
 {
     return [self.fetchedResultsController objectAtIndexPath: indexPath];

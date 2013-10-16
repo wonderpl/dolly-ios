@@ -271,10 +271,9 @@ typedef enum : NSInteger {
     
 } NavigationButtonsAppearance;
 
-
 typedef enum : NSInteger {
-    kArcMenuInvalidComponentIndex = 999999
-} kArcMenuComponentIndex;
+    kInvalidComponentIndex = 999999
+} kComponentIndex;
 
 //
 // Colours
@@ -290,7 +289,6 @@ typedef enum : NSInteger {
 // Animations
 //
 
-#define kArcMenuStartButtonTag 456
 
 // Text cross-fade
 #define kTextCrossfadeDuration 0.3f

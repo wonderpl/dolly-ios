@@ -16,15 +16,10 @@ typedef enum : NSInteger
     kChannelThumbnailDisplayModeDisplaySearch = 3
 } kChannelThumbnailDisplayMode;
 
-// the arcMenu method is in the delegate defined here...
 @protocol SYNVideoThumbnailRegularCellDelegate <NSObject>
 
 - (void) videoButtonPressed: (UIButton *) videoButton;
 
-- (void) arcMenuSelectedCell: (UICollectionViewCell *) selectedCell
-           andComponentIndex: (NSInteger) componentIndex;
-
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer;
 
 @end
 
