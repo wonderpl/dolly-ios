@@ -252,14 +252,6 @@
 - (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
 {
     [self superArcMenuUpdateState: recognizer];
-
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        Channel *channel = self.user.subscriptions[self.arcMenuIndexPath.item];
-        
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-    }
 }
 
 
@@ -270,6 +262,11 @@
 {
     if ([menuName isEqualToString: kActionShareChannel])
     {
+        Channel *channel = self.user.subscriptions[self.arcMenuIndexPath.item];
+        
+        [self requestShareLinkWithObjectType: @"channel"
+                                    objectId: channel.uniqueId];
+        
         [self shareChannelAtIndexPath: cellIndexPath
                     andComponentIndex: componentIndex];
     }

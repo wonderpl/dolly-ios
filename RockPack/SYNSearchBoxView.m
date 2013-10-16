@@ -76,14 +76,14 @@
         }
         else
         {
-            backgroundPanel = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 65)];
-            backgroundPanel.autoresizesSubviews = YES;
+            backgroundPanel = [[UIView alloc] initWithFrame: CGRectMake(0, -10, 320, 75)];
+            backgroundPanel.backgroundColor = [UIColor colorWithRed:(248.0/255.0) green:(248.0/255.0) blue:(248.0/255.0) alpha:(1.0)];
             
-            self.backgroundSearchPanel = [[UIImageView alloc] initWithFrame: CGRectMake(0, 0, 320, 65)];
-            self.backgroundSearchPanel.image = [UIImage imageNamed: @"PanelSearch"];
-            [backgroundPanel addSubview: self.backgroundSearchPanel];
+//            self.backgroundSearchPanel = [[UIImageView alloc] initWithFrame: CGRectMake(0, 10, 320, 65)];
+//            self.backgroundSearchPanel.image = [UIImage imageNamed: @"PanelSearch"];
+//            [backgroundPanel addSubview: self.backgroundSearchPanel];
             
-            self.searchFieldFrameImageView = [[UIImageView alloc] initWithFrame: CGRectMake(10, 10, 300, 45)];
+            self.searchFieldFrameImageView = [[UIImageView alloc] initWithFrame: CGRectMake(10, 20, 300, 45)];
             
             self.searchFieldFrameImageView.image = [[UIImage imageNamed: @"FieldSearch"]
                                                     resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
@@ -93,11 +93,11 @@
             initialPanelHeight = backgroundPanel.frame.size.height;
             
             // == Loop == //
-            UIImage* loopImage = [UIImage imageNamed: @"IconSearch"];
-            UIImageView* loopImageView = [[UIImageView alloc] initWithImage:loopImage];
-            loopImageView.frame = CGRectMake(10.0f, 10.0f, 34.0f, 45.0f);
-            loopImageView.image = loopImage;
-            [backgroundPanel addSubview: loopImageView];
+            UIImage* loupeImage = [UIImage imageNamed: @"IconSearch"];
+            UIImageView* loupeImageView = [[UIImageView alloc] initWithImage: loupeImage];
+            loupeImageView.frame = CGRectMake(10.0f, 20.0f, 34.0f, 45.0f);
+            loupeImageView.image = loupeImage;
+            [backgroundPanel addSubview: loupeImageView];
             
             // == Label == //
             self.searchTextField = [[SYNTextField alloc] initWithFrame: CGRectMake(52, 18, 248, 30)];
@@ -112,7 +112,7 @@
             // Display Search instead of Return on iPhone Keyboard
             self.searchTextField.returnKeyType = UIReturnKeySearch;
             
-            self.integratedCloseButton = [[UIButton alloc] initWithFrame: CGRectMake(266, 10, 44, 44)];
+            self.integratedCloseButton = [[UIButton alloc] initWithFrame: CGRectMake(266, 20, 44, 44)];
             
             UIImage* closeButtonImage = [UIImage imageNamed: @"ButtonCloseSearch"];
             
@@ -140,7 +140,7 @@
         
         self.autoresizesSubviews = YES;
         
-        self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
     
     return self;

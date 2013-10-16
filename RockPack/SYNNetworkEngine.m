@@ -188,7 +188,32 @@
                                                                                                          params: [self getLocaleParamWithParams: parameters]
                                                                                                      httpMethod: @"GET"
                                                                                                             ssl: NO];
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
     
+    [self enqueueOperation: networkOperation];
+}
+
+
+- (void) videoForChannelForUserId: (NSString *) userId
+                        channelId: (NSString *) channelId
+                       instanceId: (NSString *) instanceId
+                completionHandler: (MKNKUserSuccessBlock) completionBlock
+                     errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{ @"USERID": userId,
+                                                 @"CHANNELID": channelId,
+                                                 @"INSTANCEID": instanceId};
+    
+    NSString *apiString = [kAPIGetVideoDetails stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                                                                         params: nil
+                                                                                                     httpMethod: @"GET"
+                                                                                                            ssl: FALSE];
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];

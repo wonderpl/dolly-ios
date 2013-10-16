@@ -90,6 +90,12 @@
                  completionHandler: (MKNKUserSuccessBlock) completionBlock
                       errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+- (void) videoForChannelForUserId: (NSString *) userId
+                        channelId: (NSString *) channelId
+                       instanceId: (NSString *) instanceId
+                completionHandler: (MKNKUserSuccessBlock) completionBlock
+                     errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 
 #pragma mark - Video player HTML update
 

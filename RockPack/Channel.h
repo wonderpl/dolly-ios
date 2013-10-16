@@ -21,6 +21,8 @@
         usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
               ignoringObjectTypes: (IgnoringObjects) ignoringObjects;
 
+- (void) addVideoInstanceFromDictionary: (NSDictionary *) videosInstanceDictionary;
+
 - (void) addVideoInstancesFromDictionary: (NSDictionary *) videosInstancesDictionary;
 
 

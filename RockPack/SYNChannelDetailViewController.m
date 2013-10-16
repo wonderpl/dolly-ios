@@ -14,6 +14,7 @@
 #import "GAI.h"
 #import "Genre.h"
 #import "SSTextView.h"
+#import "SYNAppDelegate.h"
 #import "SYNCaution.h"
 #import "SYNChannelCategoryTableViewController.h"
 #import "SYNChannelCoverImageSelectorViewController.h"
@@ -27,6 +28,8 @@
 #import "SYNImagePickerController.h"
 #import "SYNMasterViewController.h"
 #import "SYNModalSubscribersController.h"
+#import "SYNNetworkEngine.h"
+#import "SYNOAuthNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNProfileRootViewController.h"
@@ -137,11 +140,6 @@
         // mode must be set first because setChannel relies on it...
         self.mode = mode;
         self.channel = channel;
-        
-        
-        // Get share link pre-emptively
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
     }
     
     return self;
@@ -420,10 +418,10 @@
                           action: @selector(userTouchedCameraButton:)
                 forControlEvents: UIControlEventTouchUpInside];
     
-    if (self.autoplayVideoId)
-    {
-        [self autoplayVideoIfAvailable];
-    }
+//    if (self.autoplayVideoId)
+//    {
+//        [self autoplayVideoIfAvailable];
+//    }
     
     self.originalContentOffset = self.videoThumbnailCollectionView.contentOffset;
     
@@ -1177,8 +1175,7 @@
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
         weakSelf.loadingMoreContent = NO;
         
-        [weakSelf.channel
-         addVideoInstancesFromDictionary: dictionary];
+        [weakSelf.channel addVideoInstancesFromDictionary: dictionary];
         
         NSError *error;
         [weakSelf.channel.managedObjectContext
@@ -1244,7 +1241,8 @@
 
 - (void) autoplayVideoIfAvailable
 {
-    NSArray *videoSubset = [[self.channel.videoInstances array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"uniqueId == %@", self.autoplayVideoId]];
+    __block NSArray *videoSubset = [[self.channel.videoInstances array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"uniqueId == %@", self.autoplayVideoId]];
+
     
     if ([videoSubset count] == 1)
     {
@@ -1252,6 +1250,48 @@
                                       andSelectedIndex: [self.channel.videoInstances indexOfObject: videoSubset[0]]
                                                 center: self.view.center];
         self.autoplayVideoId = nil;
+    }
+    else
+    {
+        __weak typeof(self) weakSelf = self;
+
+        MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
+            [weakSelf.channel addVideoInstanceFromDictionary: dictionary];
+            
+            NSError *error;
+            [weakSelf.channel.managedObjectContext save: &error];
+            
+            videoSubset = [[self.channel.videoInstances array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"uniqueId == %@", self.autoplayVideoId]];
+            
+            if ([videoSubset count] >= 1)
+            {
+                [self displayVideoViewerWithVideoInstanceArray: self.channel.videoInstances.array
+                                              andSelectedIndex: [self.channel.videoInstances indexOfObject: videoSubset[0]]
+                                                        center: self.view.center];
+                self.autoplayVideoId = nil;
+            }
+        };
+        
+        // define success block //
+        MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
+        };
+        
+        if ([self.channel.resourceURL hasPrefix: @"https"])                          // https does not cache so it is fresh
+        {
+            [appDelegate.oAuthNetworkEngine videoForChannelForUserId: appDelegate.currentUser.uniqueId
+                                                           channelId: self.channel.uniqueId
+                                                          instanceId: self.autoplayVideoId
+                                                   completionHandler: successBlock
+                                                        errorHandler: errorBlock];
+        }
+        else
+        {
+            [appDelegate.networkEngine videoForChannelForUserId: appDelegate.currentUser.uniqueId
+                                                      channelId: self.channel.uniqueId
+                                                     instanceId: self.autoplayVideoId
+                                              completionHandler: successBlock
+                                                   errorHandler: errorBlock];
+        }
     }
 }
 
@@ -1395,6 +1435,9 @@
 
 - (IBAction) shareChannelButtonTapped: (UIButton *) shareButton
 {
+    // Get share link pre-emptively
+    [self requestShareLinkWithObjectType: @"channel"
+                                objectId: self.channel.uniqueId];
     
     [self shareChannel: self.channel
                isOwner: ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
