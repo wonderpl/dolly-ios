@@ -671,8 +671,6 @@
     return NO;
 }
 
-#pragma mark - Arc menu support
-
 
 - (void) addVideoAtIndexPath: (NSIndexPath *) indexPath
                withOperation: (NSString *) operation
@@ -795,13 +793,6 @@
     return  nil;
 }
 
-- (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
-                            andComponentIndex: (NSInteger) componentIndex
-{
-    AssertOrLog(@"Shouldn't be calling abstract function");
-    return  nil;
-}
-
 
 - (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
 {
@@ -823,258 +814,23 @@
     return  nil;
 }
 
-#pragma mark - Arc Menu
-
--(void)arcMenuShowFake:(UILongPressGestureRecognizer*)longPressRecogniser
-{
-    self.arcMenuIsFakeCell = YES;
-    [self arcMenuUpdateState:longPressRecogniser];
-}
-
-- (void) arcMenuSelectedCell: (UICollectionViewCell *) selectedCell
-           andComponentIndex: (NSInteger) componentIndex
-{
-    if ([self isChannelCell: selectedCell])
-    {
-        // Channel
-        self.arcMenuIsChannelCell = TRUE;
-        self.arcMenuIndexPath = [self indexPathForChannelCell: selectedCell];
-    }
-    else
-    {
-        // Video
-        self.arcMenuIsChannelCell = FALSE;
-        self.arcMenuIndexPath = [self indexPathForVideoCell: selectedCell];
-    }
-
-    self.arcMenuComponentIndex = componentIndex;
-}
-
-
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
-{
-    NSArray *menuItems;
-    float menuArc, menuStartAngle;
-    NSString *analyticsLabel;
-    
-    if (self.arcMenuIsChannelCell)
-    {
-        // Channel cell
-        analyticsLabel = @"channel";
-        
-        SYNArcMenuItem *arcMenuItem1 = [[SYNArcMenuItem alloc] initWithImage: [UIImage imageNamed: @"ActionShare"]
-                                                            highlightedImage: [UIImage imageNamed: @"ActionShareHighlighted"]
-                                                                        name: kActionShareChannel
-                                                                   labelText: @"Share it"];
-        menuItems = @[arcMenuItem1];
-
-        menuArc = M_PI / 4;
-        menuStartAngle = 0;
-    }
-    else
-    {
-        // Video cell
-        analyticsLabel = @"video";
-
-        VideoInstance *videoInstance = [self videoInstanceForIndexPath: self.arcMenuIndexPath];
-
-        // A bit of a hack, but we need to work out whether the user has starred this videoInstance (we can't completely trust starredByUserValue)
-        BOOL starredByUser = videoInstance.starredByUserValue;
-        
-        if (!starredByUser)
-        {
-            // Double check, by iterating through the list of starrers to see if we are there
-            NSArray *starrers = [videoInstance.starrers array];
-            
-            for (ChannelOwner *channelOwner in starrers)
-            {
-                if ([channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-                {
-                    starredByUser = TRUE;
-                    videoInstance.starredByUserValue = starredByUser;
-                    break;
-                }
-            }
-        }
-        
-        SYNArcMenuItem *arcMenuItem1 = [[SYNArcMenuItem alloc] initWithImage: [UIImage imageNamed: (starredByUser == FALSE) ? @"ActionLike" : @"ActionUnlike"]
-                                                            highlightedImage: [UIImage imageNamed: (starredByUser == FALSE) ? @"ActionLikeHighlighted" : @"ActionUnlikeHighlighted"]
-                                                                        name: kActionLike
-                                                                   labelText: (starredByUser == FALSE) ? @"Like it" : @"Unlike it"];
-        
-        SYNArcMenuItem *arcMenuItem2 = [[SYNArcMenuItem alloc] initWithImage: [UIImage imageNamed: @"ActionAdd"]
-                                                            highlightedImage: [UIImage imageNamed: @"ActionAddHighlighted"]
-                                                                        name: kActionAdd
-                                                                   labelText: @"Pack it"];
-        
-        SYNArcMenuItem *arcMenuItem3 = [[SYNArcMenuItem alloc] initWithImage: [UIImage imageNamed: @"ActionShare"]
-                                                            highlightedImage: [UIImage imageNamed: @"ActionShareHighlighted"]
-                                                                        name: kActionShareVideo
-                                                                   labelText: @"Share it"];
-        
-        menuItems = @[arcMenuItem1, arcMenuItem2, arcMenuItem3];
-        
-        menuArc = M_PI / 2;
-        menuStartAngle = -M_PI / 4;
-    }
-    
-    [self arcMenuUpdateState: recognizer
-          forCellAtIndexPath: self.arcMenuIndexPath
-          withComponentIndex: self.arcMenuComponentIndex
-                   menuItems: menuItems
-                     menuArc: menuArc
-              menuStartAngle: menuStartAngle];
-    
-    // track
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"pressHold"
-                                                            label: analyticsLabel
-                                                            value: nil] build]];
-}
-
-
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
-         forCellAtIndexPath: (NSIndexPath *) cellIndexPath
-         withComponentIndex: (NSInteger) componentIndex
-                  menuItems: (NSArray *) menuItems
-                    menuArc: (float) menuArc
-             menuStartAngle: (float) menuStartAngle
-{
-    UIView *referenceView = appDelegate.masterViewController.view;
-    
-    CGPoint tapPoint = [recognizer locationInView: referenceView];
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        SYNArcMenuItem *mainMenuItem = [[SYNArcMenuItem alloc] initWithImage: [UIImage imageNamed: @"ActionRingNoTouch"]
-                                                            highlightedImage: [UIImage imageNamed: @"ActionRingTouch"]
-                                                                        name: kActionNone
-                                                                   labelText: nil];
-        
-        self.arcMenu = [[SYNArcMenuView alloc] initWithFrame: referenceView.bounds
-                                                   startItem: mainMenuItem
-                                                 optionMenus: menuItems
-                                               cellIndexPath: cellIndexPath
-                                              componentIndex: componentIndex];
-        self.arcMenu.delegate = self;
-        self.arcMenu.startPoint = tapPoint;
-        self.arcMenu.menuWholeAngle = menuArc;
-        self.arcMenu.rotateAngle = menuStartAngle;
-        
-        CGFloat screenWidth = referenceView.bounds.size.width;
-        
-        if (tapPoint.x < kRotateThresholdX)
-        {
-            float proportion = 1 - MAX(tapPoint.x - kRotateBorderX, 0) / kRotateThresholdX;
-            
-            // The touch is near the left hand size, so rotate the menu angle clockwise proportionally
-            if (tapPoint.y > kRotateThresholdY)
-            {
-                self.arcMenu.rotateAngle += menuArc * proportion;
-            }
-            else
-            {
-                self.arcMenu.rotateAngle += M_PI - menuArc * proportion;
-            }
-        }
-        else if (tapPoint.x > (screenWidth - kRotateThresholdX))
-        {
-            float proportion = 1 - MAX((screenWidth - tapPoint.x - kRotateBorderX), 0) / kRotateThresholdX;
-            
-            // The touch is near the left hand size, so rotate the menu angle anti-clockwise proportionally
-            if (tapPoint.y > kRotateThresholdY)
-            {
-                self.arcMenu.rotateAngle -= menuArc * proportion;
-            }
-            else
-            {
-                self.arcMenu.rotateAngle -= M_PI - menuArc * proportion;
-            }
-        }
-        else if (tapPoint.y < kRotateThresholdY)
-        {
-            self.arcMenu.rotateAngle += M_PI;
-        }
-        
-        [appDelegate.masterViewController.view addSubview: self.arcMenu];
-        
-        [self.arcMenu show: YES];
-    }
-    else if (recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        [self.arcMenu show: NO];
-        self.arcMenu = nil;
-    }
-    else if (recognizer.state == UIGestureRecognizerStateChanged)
-    {
-        [self.arcMenu positionUpdate: tapPoint];
-    }
-}
-
-
-- (BOOL) isChannelCell: (UICollectionViewCell *) cell
-{
-    return ([NSStringFromClass(cell.class) rangeOfString: @"Channel"].location == NSNotFound ? FALSE : TRUE);
-}
-
-
-- (void) arcMenu: (SYNArcMenuView *) menu
-         didSelectMenuName: (NSString *) menuName
-         forCellAtIndex: (NSIndexPath *) cellIndexPath
-         andComponentIndex: (NSInteger) componentIndex
-{
-    if ([menuName isEqualToString: kActionLike])
-    {
-        [self toggleStarAtIndexPath: cellIndexPath];
-    }
-    else if ([menuName isEqualToString: kActionAdd])
-    {
-        [self addVideoAtIndexPath: cellIndexPath
-                    withOperation: kVideoQueueAdd];
-    }
-    else if ([menuName isEqualToString: kActionShareVideo])
-    {
-        VideoInstance *videoInstance = [self videoInstanceForIndexPath: self.arcMenuIndexPath];
-        
-        [self requestShareLinkWithObjectType: @"video_instance"
-                                    objectId: videoInstance.uniqueId];
-        
-        [self shareVideoAtIndexPath: cellIndexPath];
-    }
-    else if ([menuName isEqualToString: kActionShareChannel])
-    {
-        [self shareChannelAtIndexPath: cellIndexPath
-                    andComponentIndex: kArcMenuInvalidComponentIndex];
-    }
-    else
-    {
-        AssertOrLog(@"Invalid Arc Menu index selected");
-    }
-}
-
-
-- (UIView *) arcMenuViewToShade
-{
-    return appDelegate.masterViewController.view;
-}
 
 - (BOOL) needsHeaderButton
 {
     return YES;
 }
 
--(void)checkForOnBoarding
+
+- (void) checkForOnBoarding
 {
     // to be implemented in subclass
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle
+
+- (UIStatusBarStyle) preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
-
 
 
 - (void) createAndDisplayNewChannel

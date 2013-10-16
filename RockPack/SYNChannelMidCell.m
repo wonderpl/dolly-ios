@@ -194,11 +194,6 @@
 }
 
 
-- (void) showMenu: (UILongPressGestureRecognizer *) recognizer
-{
-    [self.viewControllerDelegate arcMenuUpdateState: recognizer];
-}
-
 
 // This is used to lowlight the gloss image on touch
 - (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
@@ -216,8 +211,6 @@
     {
         case UIGestureRecognizerStateBegan:
         {
-            [self.viewControllerDelegate arcMenuSelectedCell: self
-                                           andComponentIndex: kArcMenuInvalidComponentIndex];
             // Set lowlight tint
             UIImage *glossImage = [UIImage imageNamed: imageName];
             UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0

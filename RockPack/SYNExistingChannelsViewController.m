@@ -398,11 +398,6 @@
     return  indexPath;
 }
 
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
-{
-    // Don't allow sharing of channel creation channels
-}
-
 
 - (void) channelTapped: (UICollectionViewCell *) cell
 {

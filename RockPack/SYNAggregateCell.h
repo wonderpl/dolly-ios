@@ -14,11 +14,6 @@
 
 - (void) touchedAggregateCell;
 
-- (void) arcMenuSelectedCell: (UICollectionViewCell *) selectedCell
-           andComponentIndex: (NSInteger) componentIndex;
-
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer;
-
 @end
 
 @interface SYNAggregateCell : UICollectionViewCell

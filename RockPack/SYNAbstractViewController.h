@@ -10,7 +10,6 @@
 
 #import "MKNetworkOperation.h"
 #import "SYNAppDelegate.h"
-#import "SYNArcMenuView.h"
 #import "SYNChannelFooterMoreView.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOnBoardingPopoverQueueController.h"
@@ -28,8 +27,7 @@ typedef void (^SYNShareCompletionBlock)(void);
 @interface SYNAbstractViewController : UIViewController <NSFetchedResultsControllerDelegate,
                                                          UICollectionViewDataSource,
                                                          UICollectionViewDelegate,
-                                                         SYNTabViewDelegate,
-                                                         SYNArcMenuViewDelegate>
+                                                         SYNTabViewDelegate>
 {
 @protected
     SYNAppDelegate *appDelegate;
@@ -42,20 +40,15 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 @property (nonatomic) BOOL isAnimating;
 @property (nonatomic) BOOL isLocked;
-@property (nonatomic) BOOL arcMenuIsChannelCell;
-@property (nonatomic) BOOL arcMenuIsFakeCell;
 @property (nonatomic) NSInteger dataItemsAvailable;
 @property (nonatomic) NSRange dataRequestRange;
 @property (nonatomic, assign) BOOL inDrag;
 @property (nonatomic, assign) CGPoint initialDragCenter;
-@property (nonatomic, assign) NSInteger arcMenuComponentIndex;
 @property (nonatomic, assign, getter = isLoadingMoreContent) BOOL loadingMoreContent;
 @property (nonatomic, readonly) NSString *viewId;
-@property (nonatomic, strong)  NSIndexPath *arcMenuIndexPath;
 @property (nonatomic, strong) IBOutlet UICollectionView *videoThumbnailCollectionView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSIndexPath *draggedIndexPath;
-@property (nonatomic, strong) SYNArcMenuView *arcMenu;
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
 @property (nonatomic, strong) SYNTabViewController *tabViewController;
 @property (nonatomic, strong) UIImageView *draggedView;
@@ -123,18 +116,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (CGSize) footerSize;
 
 - (NavigationButtonsAppearance) navigationAppearance;
-
-- (void) arcMenuSelectedCell: (UICollectionViewCell *) selectedCell
-           andComponentIndex: (NSInteger) componentIndex;
-
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer;
-
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
-         forCellAtIndexPath: (NSIndexPath *) cellIndexPath
-         withComponentIndex: (NSInteger) componentIndex
-                  menuItems: (NSArray *) menuItems
-                    menuArc: (float) menuArc
-             menuStartAngle: (float) menuStartAngle;
 
 - (BOOL) needsHeaderButton ;
 

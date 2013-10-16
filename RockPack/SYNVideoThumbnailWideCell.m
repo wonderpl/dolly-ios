@@ -26,7 +26,6 @@
 @property (nonatomic, strong) IBOutlet UILabel* fromLabel;
 @property (nonatomic, strong) IBOutlet UIView *videoPlaceholder;
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
@@ -54,16 +53,6 @@
     self.durationLabel.font = [UIFont rockpackFontOfSize: self.durationLabel.font.pointSize];
     
     self.displayMode = kVideoThumbnailDisplayModeChannel; // default is channel
-    
-#ifdef ENABLE_ARC_MENU
-    
-    // Add long-press and tap recognizers (once only per cell)
-    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
-                                                                   action: @selector(showMenu:)];
-    self.longPress.delegate = self;
-    [self.videoPlaceholder addGestureRecognizer: self.longPress];
-#endif
-    
     
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
@@ -228,9 +217,6 @@
     {
         case UIGestureRecognizerStateBegan:
         {
-            [self.viewControllerDelegate arcMenuSelectedCell: self
-                                           andComponentIndex: kArcMenuInvalidComponentIndex];
-            
             // Set lowlight tint
             UIImage *glossImage = [UIImage imageNamed: @"GlossVideo.png"];
             UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
@@ -253,12 +239,6 @@
 - (void) showVideo: (UILongPressGestureRecognizer *) recognizer
 {
     [self.viewControllerDelegate performSelector:@selector(videoButtonPressed:) withObject: self.videoPlaceholder];
-}
-
-
-- (void) showMenu: (UILongPressGestureRecognizer *) recognizer
-{
-    [self.viewControllerDelegate arcMenuUpdateState: recognizer];
 }
 
 @end

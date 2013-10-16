@@ -20,7 +20,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
 @property (nonatomic, strong) IBOutlet UILabel *byLabel;
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
@@ -31,15 +30,7 @@
 - (void) awakeFromNib
 {
     [super awakeFromNib];
-    
-#ifdef ENABLE_ARC_MENU
-    
-    // Add long-press and tap recognizers (once only per cell)
-    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
-                                                                   action: @selector(showMenu:)];
-    self.longPress.delegate = self;
-    [self addGestureRecognizer: self.longPress];
-#endif
+
     
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
@@ -141,11 +132,6 @@
 }
 
 
-- (void) showMenu: (UILongPressGestureRecognizer *) recognizer
-{
-    [self.viewControllerDelegate arcMenuUpdateState: recognizer];
-}
-
 
 // This is used to lowlight the gloss image on touch
 - (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
@@ -163,9 +149,6 @@
     {
         case UIGestureRecognizerStateBegan:
         {
-            [self.viewControllerDelegate arcMenuSelectedCell: self
-                                           andComponentIndex: kArcMenuInvalidComponentIndex];
-            
             // Set lowlight tint
             UIImage *glossImage = [UIImage imageNamed: imageName];
             UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0

@@ -1176,43 +1176,10 @@
 }
 
 
-#pragma mark - Arc menu support
-
-- (void) arcMenu: (SYNArcMenuView *) menu
-         didSelectMenuName: (NSString *) menuName
-         forCellAtIndex: (NSIndexPath *) cellIndexPath
-         andComponentIndex: (NSInteger) componentIndex
-{
-    if ([menuName isEqualToString: kActionShareVideo])
-    {
-        [self shareVideoAtIndexPath: cellIndexPath];
-    }
-    else if ([menuName isEqualToString: kActionShareChannel])
-    {
-        Channel *channel = [self channelInstanceForIndexPath: self.arcMenuIndexPath
-                                           andComponentIndex: kArcMenuInvalidComponentIndex];
-        
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-        
-        [self shareChannelAtIndexPath: cellIndexPath
-                    andComponentIndex: componentIndex];
-    }
-    else
-    {
-        AssertOrLog(@"Invalid Arc Menu index selected");
-    }
-}
-
 
 - (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
                         andComponentIndex: (NSInteger) componentIndex
 {
-    if (componentIndex != kArcMenuInvalidComponentIndex)
-    {
-        AssertOrLog(@"Unexpectedly valid componentIndex");
-    }
-    
     Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
     
     return channel;
