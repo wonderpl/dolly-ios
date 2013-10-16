@@ -650,7 +650,6 @@
 		1FFAE62C17E21BBC006C92CA /* ShadowPanelFriends~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FFAE62A17E21BBC006C92CA /* ShadowPanelFriends~iphone.png */; };
 		1FFAE63317E230EB006C92CA /* ShadowPanelFriends.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FFAE63117E230EB006C92CA /* ShadowPanelFriends.png */; };
 		1FFAE63417E230EB006C92CA /* ShadowPanelFriends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FFAE63217E230EB006C92CA /* ShadowPanelFriends@2x.png */; };
-		38015B4E174CC51A005D3F18 /* SYNUserProfileViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38015B4D174CC51A005D3F18 /* SYNUserProfileViewController~iphone.xib */; };
 		38061BC1173D15BE00A7E349 /* SYNAccountSettingsModalContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38061BC0173D15BE00A7E349 /* SYNAccountSettingsModalContainer.xib */; };
 		38281F1D17439B770024DC18 /* SYNLoginBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */; };
 		3854788417946630006EB38B /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3854788317946630006EB38B /* libGoogleConversionTracking.a */; };
@@ -2202,7 +2201,6 @@
 		1FFAE63217E230EB006C92CA /* ShadowPanelFriends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShadowPanelFriends@2x.png"; path = "Assets/Images/ShadowPanelFriends@2x.png"; sourceTree = "<group>"; };
 		276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		3685246F69AA4C9B93DDEDAC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		38015B4D174CC51A005D3F18 /* SYNUserProfileViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNUserProfileViewController~iphone.xib"; sourceTree = "<group>"; };
 		38061BC0173D15BE00A7E349 /* SYNAccountSettingsModalContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAccountSettingsModalContainer.xib; sourceTree = "<group>"; };
 		38281F1B17439B770024DC18 /* SYNLoginBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginBaseViewController.h; sourceTree = "<group>"; };
 		38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginBaseViewController.m; sourceTree = "<group>"; };
@@ -4000,7 +3998,6 @@
 		01982560162ADE3300216900 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				38015B4D174CC51A005D3F18 /* SYNUserProfileViewController~iphone.xib */,
 				0142ED8716B19FBE008694DA /* SYNProfileRootViewController.h */,
 				0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */,
 				0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */,
@@ -7020,7 +7017,6 @@
 				1FE4BA46174BCF26001DC49C /* Default-Landscape@2x~ipad.png in Resources */,
 				1FE4BA49174BF02A001DC49C /* NotificationBubble.png in Resources */,
 				1FE4BA4A174BF02A001DC49C /* NotificationBubble@2x.png in Resources */,
-				38015B4E174CC51A005D3F18 /* SYNUserProfileViewController~iphone.xib in Resources */,
 				1FD12372174CD76700144374 /* NavDefault.png in Resources */,
 				1F458B2217E1CE8E003C14AC /* AppIcon-Dev-29x29.png in Resources */,
 				1FD12373174CD76700144374 /* NavDefault@2x.png in Resources */,

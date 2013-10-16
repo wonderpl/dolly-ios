@@ -617,11 +617,11 @@ SYNImagePickerControllerDelegate>
 
     [self.headerChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
     [self.headerSubscriptionsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.subscriptions.count];
-    
+    [self resizeScrollViews];
+
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
     
-    [self resizeScrollViews];
     
 }
 
@@ -867,8 +867,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 - (IBAction) channelsTabTapped: (id) sender
 {
     
-    
-    
     self.subscriptionsTabActive = NO;
     [self updateTabStates];
 }
@@ -876,8 +874,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 - (IBAction) subscriptionsTabTapped: (id) sender
 {
-    
-    
     self.subscriptionsTabActive = YES;
     [self updateTabStates];
 }
