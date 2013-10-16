@@ -89,7 +89,7 @@
     </objects>
     <resources>
         <image name="ButtonCloseSearchHighlighted.png" width="44" height="45"/>
-        <image name="ButtonCloseSearch~iphone.png" width="184" height="184"/>
+        <image name="ButtonCloseSearch~iphone.png" width="290" height="54"/>
         <image name="ButtonSearch.png" width="60" height="60"/>
     </resources>
 </document>

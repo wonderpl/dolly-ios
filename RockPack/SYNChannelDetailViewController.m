@@ -1188,7 +1188,7 @@
         DebugLog(@"Update action failed");
     };
     
-    if ([self.channel.resourceURL hasPrefix: @"https"])                          // https does not cache so it is fresh
+    if ([self.channel.resourceURL hasPrefix: @"https"]) // https does not cache so it is fresh
     {
         [appDelegate.oAuthNetworkEngine videosForChannelForUserId: appDelegate.currentUser.uniqueId
                                                         channelId: self.channel.uniqueId
@@ -1208,7 +1208,7 @@
 
 
 - (void)	  collectionView: (UICollectionView *) collectionView
-          didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+    didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     // the method is being replaced by the 'videoButtonPressed' because other elements on the cell migth be interactive as well
 }
@@ -1420,9 +1420,12 @@
     if ([keyPath isEqualToString: kTextViewContentSizeKey])
     {
         UITextView *tv = object;
-        //Bottom vertical alignment
+        
+        // Bottom vertical alignment
         CGFloat topCorrect = ([tv bounds].size.height - [tv contentSize].height);
-        //            topCorrect = (topCorrect <0.0 ? 0.0 : topCorrect);
+        
+        
+        // topCorrect = (topCorrect < 0.0 ? 0.0 : topCorrect);
         
         
         [tv setContentOffset: (CGPoint) { .x = 0, .y = -topCorrect}

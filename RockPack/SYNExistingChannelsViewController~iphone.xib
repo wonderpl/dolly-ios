@@ -151,7 +151,7 @@
     <resources>
         <image name="ButtonCancelAddToPack.png" width="30" height="30"/>
         <image name="ButtonCancelAddToPackHighlighted.png" width="30" height="30"/>
-        <image name="ButtonConfirmYellow.png" width="130" height="45"/>
+        <image name="ButtonConfirmYellow.png" width="290" height="54"/>
         <image name="ButtonConfirmYellowHighlighted.png" width="30" height="30"/>
     </resources>
 </document>

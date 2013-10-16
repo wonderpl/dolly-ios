@@ -39,6 +39,9 @@ typedef enum : NSInteger {
 @property (nonatomic, strong) IBOutlet UIImageView* loginBackgroundImage;
 @property (nonatomic, strong) IBOutlet UITextField* ddInputField;
 @property (nonatomic, strong) IBOutlet UITextField* mmInputField;
+
+@property (nonatomic, strong) IBOutlet UISegmentedControl* genderSegmentedControl;
+
 @property (nonatomic, strong) Reachability *reachability;
 @property (nonatomic, strong) SYNImagePickerController* imagePicker;
 @property (nonatomic, strong) SYNLoginOnBoardingController* onBoardingController;

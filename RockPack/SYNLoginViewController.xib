@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -17,6 +17,7 @@
                 <outlet property="faceImageButton" destination="72" id="73"/>
                 <outlet property="facebookSignInButton" destination="4" id="17"/>
                 <outlet property="finalLoginButton" destination="11" id="18"/>
+                <outlet property="genderSegmentedControl" destination="gXi-3t-nte" id="fwo-Jq-6Sh"/>
                 <outlet property="loginBackgroundFrontImage" destination="113" id="114"/>
                 <outlet property="loginBackgroundImage" destination="103" id="104"/>
                 <outlet property="loginButton" destination="6" id="19"/>
@@ -156,6 +157,19 @@
                     <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="gXi-3t-nte" userLabel="Gender Control">
+                    <rect key="frame" x="194" y="262" width="117" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="Male">
+                            <size key="contentOffset" width="0.0" height="1"/>
+                        </segment>
+                        <segment title="Female">
+                            <size key="contentOffset" width="0.0" height="1"/>
+                        </segment>
+                    </segments>
+                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </segmentedControl>
                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" adjustsFontSizeToFit="NO" minimumFontSize="17" background="FieldLogin.png" clearButtonMode="whileEditing" id="9" userLabel="UName TextField" customClass="SYNTextFieldLogin">
                     <rect key="frame" x="358" y="406" width="308" height="57"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -352,6 +366,7 @@
     <resources>
         <image name="ButtonFacebookDefault.png" width="316" height="62"/>
         <image name="ButtonFacebookHighlighted.png" width="316" height="62"/>
+        <image name="ButtonFacebookHighlighted.png" width="316" height="62"/>
         <image name="ButtonLoginBigDefault.png" width="315" height="62"/>
         <image name="ButtonLoginDefault.png" width="113" height="54"/>
         <image name="ButtonLoginHighlighted.png" width="113" height="54"/>
@@ -364,6 +379,9 @@
         <image name="ButtonSignupHighlighted.png" width="123" height="62"/>
         <image name="DividerLogin.png" width="306" height="3"/>
         <image name="FieldDayMonth.png" width="72" height="57"/>
+        <image name="FieldDayMonth.png" width="72" height="57"/>
+        <image name="FieldLogin.png" width="308" height="57"/>
+        <image name="FieldLogin.png" width="308" height="57"/>
         <image name="FieldLogin.png" width="308" height="57"/>
         <image name="FieldPhoto.png" width="187" height="187"/>
         <image name="FieldYear.png" width="138" height="57"/>
