@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNAbstractViewController.h"
 
-@interface SYNNotificationsTableViewController : UITableViewController
+@interface SYNActivityViewController : SYNAbstractViewController
 
 @property (nonatomic, strong) NSArray* notifications;
 

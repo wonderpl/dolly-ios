@@ -7,7 +7,7 @@
 //
 
 #import "SYNNotificationsTableViewCell.h"
-#import "SYNNotificationsTableViewController.h"
+#import "SYNActivityViewController.h"
 #import "UIFont+SYNFont.h"
 
 @interface SYNNotificationsTableViewCell ()
@@ -140,7 +140,7 @@
 
 #pragma mark - Accesssors
 
-- (void) setDelegate: (SYNNotificationsTableViewController *) delegate
+- (void) setDelegate: (SYNActivityViewController *) delegate
 {
     if (_delegate && delegate && _delegate == delegate) // assign once
     {

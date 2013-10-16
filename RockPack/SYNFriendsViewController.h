@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNAbstractViewController.h"
 
-@interface SYNFriendsViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate>
+@interface SYNFriendsViewController : SYNAbstractViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView* friendsCollectionView;
 @property (nonatomic, strong) IBOutlet UILabel* preLoginLabel;

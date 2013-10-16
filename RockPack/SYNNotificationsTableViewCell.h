@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class SYNNotificationsTableViewController;
+@class SYNActivityViewController;
 
 @interface SYNNotificationsTableViewCell : UITableViewCell
 
@@ -16,6 +16,6 @@
 @property (nonatomic, strong) UIImageView *playSymbolImageView;
 @property (nonatomic, strong) UIImageView *thumbnailImageView;
 @property (nonatomic, weak) NSString *messageTitle;
-@property (nonatomic, weak) SYNNotificationsTableViewController *delegate;
+@property (nonatomic, weak) SYNActivityViewController *delegate;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractCommon" representedClassName="AbstractCommon" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletion" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
@@ -133,18 +133,18 @@
         <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="videoInstances" inverseEntity="Video" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AbstractCommon" positionX="-74" positionY="-333" width="128" height="90"/>
-        <element name="Channel" positionX="-2" positionY="-36" width="128" height="298"/>
-        <element name="ChannelCover" positionX="178" positionY="-36" width="128" height="133"/>
-        <element name="ChannelOwner" positionX="-362" positionY="-27" width="128" height="148"/>
-        <element name="CoverArt" positionX="-324" positionY="-180" width="128" height="103"/>
-        <element name="ExternalAccount" positionX="-522" positionY="405" width="128" height="180"/>
-        <element name="FeedItem" positionX="142" positionY="-316" width="128" height="208"/>
-        <element name="Friend" positionX="-533" positionY="-13" width="128" height="150"/>
-        <element name="Genre" positionX="-290" positionY="-326" width="128" height="88"/>
-        <element name="SubGenre" positionX="-461" positionY="-319" width="128" height="73"/>
-        <element name="User" positionX="-531" positionY="149" width="128" height="238"/>
-        <element name="Video" positionX="162" positionY="218" width="128" height="223"/>
-        <element name="VideoInstance" positionX="-306" positionY="234" width="128" height="148"/>
+        <element name="AbstractCommon" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Channel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ChannelCover" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ChannelOwner" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CoverArt" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ExternalAccount" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="FeedItem" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Genre" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SubGenre" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Video" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="VideoInstance" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

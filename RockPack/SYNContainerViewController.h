@@ -7,27 +7,23 @@
 //
 
 #import "SYNAbstractViewController.h"
-#import "SYNContainerScrollView.h"
 #import <UIKit/UIKit.h>
 
 
-@interface SYNContainerViewController : UIViewController <UIScrollViewDelegate>
+@interface SYNContainerViewController : UIViewController
 
 @property (nonatomic) CGPoint currentPageOffset;
+
 @property (nonatomic, readonly) NSInteger currentPage;
-@property (nonatomic, readonly) SYNAbstractViewController *showingViewController;
-@property (nonatomic, readonly) SYNContainerScrollView *scrollView;
+@property (nonatomic, readonly) SYNAbstractViewController *currentViewController;
+@property (nonatomic, readonly) NSArray* viewControllers;
 
 
 - (void) swipedTo: (UISwipeGestureRecognizerDirection) direction;
 
-- (void) navigateToPageByName: (NSString *) pageName;
 -(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName;
 
-/**
- Method to re-layout view to maintain orientation. Specifically intended for when orientation may have changed during popover views.
- */
-- (void) refreshView;
+
 
 
 

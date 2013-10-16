@@ -42,8 +42,6 @@
 @property (getter = isVideoQueueVisible) BOOL videoQueueVisible;
 @property (nonatomic, assign) BOOL shouldPlaySound;
 @property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, strong) IBOutlet UIImageView *channelOverlayView;
-@property (nonatomic, strong) IBOutlet UITextField *channelNameTextField;
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
 @property (nonatomic, strong) UIView *dropZoneView;
@@ -76,7 +74,19 @@
 
 - (id) initWithViewId: (NSString*) vid
 {
-    if ((self = [super init]))
+    // Check to see if there is a XIB file in the system and initialise accordingly
+    
+    NSString* classNameString = NSStringFromClass([self class]);
+    
+    if([[NSBundle mainBundle] pathForResource:classNameString ofType:@"nib"] != nil)
+    {
+        self = [super initWithNibName:classNameString bundle:nil];
+    }
+    else
+    {
+        self = [super init];
+    }
+    if (self)
     {
         viewId = vid;
         

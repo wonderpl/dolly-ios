@@ -269,8 +269,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     
     self.closeSearchButton.hidden = YES;
-    
-    [self pageChanged: self.containerViewController.scrollView.page];
+  
+    // TODO:
+//    [self pageChanged: self.containerViewController.scrollView.page];
     
     self.darkOverlayView.hidden = YES;
     
@@ -303,43 +304,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) viewWillAppear: (BOOL) animated
-{
-    [super viewWillAppear: animated];
-    
-    [self.containerViewController.scrollView addObserver: self forKeyPath: kCollectionViewContentOffsetKey
-                                                 options: NSKeyValueObservingOptionNew
-                                                 context: nil];
-}
 
-
-- (void) viewWillDisappear: (BOOL) animated
-{
-    [self.containerViewController.scrollView removeObserver: self
-                                                 forKeyPath: kCollectionViewContentOffsetKey];
-    
-    [super viewWillDisappear: animated];
-}
-
-
-- (void) observeValueForKeyPath: (NSString *) keyPath
-                       ofObject: (id) object
-                         change: (NSDictionary *) change
-                        context: (void *) context
-{
-    if ([keyPath isEqualToString: kCollectionViewContentOffsetKey])
-    {
-        CGRect scrollViewFrame = self.containerViewController.scrollView.frame;
-        CGSize scrollViewContentSize = self.containerViewController.scrollView.contentSize;
-        CGPoint scrollViewContentOffset = self.containerViewController.scrollView.contentOffset;
-        
-        CGFloat frameWidth = scrollViewFrame.size.width;
-        CGFloat contentWidth = scrollViewContentSize.width;
-        CGFloat offset = scrollViewContentOffset.x;
-        
-        self.pagePositionIndicatorView.position = offset / (contentWidth - frameWidth);
-    }
-}
 
 
 #pragma mark - Scroller Changes
@@ -358,7 +323,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) pageChanged: (NSInteger) pageNumber
 {
-    self.pageTitleLabel.text = [self.containerViewController.showingViewController.title uppercaseString];
+    self.pageTitleLabel.text = [self.containerViewController.currentViewController.title uppercaseString];
     
     if (self.sideNavigatorViewController.state == SideNavigationStateFull)
     {
@@ -367,7 +332,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     else
     {
-        NSString* controllerTitle = self.containerViewController.showingViewController.title;
+        NSString* controllerTitle = self.containerViewController.currentViewController.title;
         
         [self.sideNavigatorViewController setSelectedCellByPageName: controllerTitle];
     }
@@ -426,7 +391,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.sideNavigatorViewController.searchViewController.searchTextField.placeholder = @"Find videos, packs and people";
     }
     
-    NSString* controllerTitle = self.containerViewController.showingViewController.title;
+    NSString* controllerTitle = self.containerViewController.currentViewController.title;
     
     [self.sideNavigatorViewController setSelectedCellByPageName: controllerTitle];
     
@@ -829,7 +794,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     
     //Scroll to the requested page
-    [self.containerViewController navigateToPageByName: pageName];
+    [self.containerViewController addChildViewController:controllerToGo];
     
     self.sideNavigatorViewController.state = SideNavigationStateHidden;
     
@@ -1092,7 +1057,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 - (SYNAbstractViewController*) showingViewController
 {
     if ([self.mainNavigationController.topViewController isKindOfClass:[SYNContainerViewController class]])
-        return self.containerViewController.showingViewController;
+        return self.containerViewController.currentViewController;
     else
         return (SYNAbstractViewController*)self.mainNavigationController.topViewController;
 }

@@ -133,7 +133,11 @@
 "core_nav_section_channels" = "PACKS";
 "core_nav_section_profile" = "ME";
 "core_nav_section_notifications" = "NOTIFICATIONS";
-"core_nav_section_friends" = "MY FRIENDS";
+"core_nav_section_friends" = "FRIENDS";
+"core_nav_section_search" = "SEARCH";
+"core_nav_section_discover" = "DISCOVER";
+"core_nav_section_channel_details" = "DISCOVER";
+"core_nav_section_activity" = "ACTIVITY";
 
 "friends_follow" = "Follow your friends on Rockpack";
 "friends_invite" = "Invite your friends to Rockpack";
