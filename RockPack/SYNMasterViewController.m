@@ -119,10 +119,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSInteger onBoarding1State = [defaults integerForKey:kInstruction1OnBoardingState];
+        
+        // FIXME: Now we have no press and hold, I think that this logic can be simplified
         if(onBoarding1State == 2) // has shown on channel details and can show here IF videos are present
         {
-            
-            
             [defaults setInteger:3 forKey:kInstruction1OnBoardingState]; // inc by one
             
         }

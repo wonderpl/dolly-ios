@@ -139,6 +139,5 @@
         <image name="ButtonNavSelected.png" width="48" height="49"/>
         <image name="ButtonSearch.png" width="48" height="49"/>
         <image name="IconSearch.png" width="34" height="45"/>
-        <image name="IconSearch.png" width="34" height="45"/>
     </resources>
 </document>

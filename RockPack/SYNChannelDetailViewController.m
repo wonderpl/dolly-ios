@@ -2768,22 +2768,18 @@ shouldChangeTextInRange: (NSRange) range
 
 - (void) checkForOnBoarding
 {
-    
-    if(![appDelegate.viewStackManager controllerViewIsVisible:self])
+    if (![appDelegate.viewStackManager controllerViewIsVisible: self])
+    {
         return;
-    
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger onBoarding1State = [defaults integerForKey:kInstruction1OnBoardingState];
+    NSInteger onBoarding1State = [defaults integerForKey: kInstruction1OnBoardingState];
     
-    if(!onBoarding1State || onBoarding1State == 1) // has shown on channel details and can show here IF videos are present
+    if (!onBoarding1State || onBoarding1State == 1) // has shown on channel details and can show here IF videos are present
     {
-//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePressAndHold];
-//        
-//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
-        
-        [defaults setInteger:2 forKey:kInstruction1OnBoardingState]; // inc by one
-        
+        [defaults setInteger: 2
+                      forKey: kInstruction1OnBoardingState];         // inc by one
     }
 }
 

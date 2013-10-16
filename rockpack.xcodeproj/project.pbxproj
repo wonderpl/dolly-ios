@@ -1127,10 +1127,6 @@
 		BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */; };
 		BE458AF617E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */; };
 		BE458AF717E71BE000776B0D /* InstructionBackgroundPacks~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */; };
-		BE458AF817E71BE000776B0D /* InstructionBackgroundPressAndHold.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AF017E71BE000776B0D /* InstructionBackgroundPressAndHold.png */; };
-		BE458AF917E71BE000776B0D /* InstructionBackgroundPressAndHold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AF117E71BE000776B0D /* InstructionBackgroundPressAndHold@2x.png */; };
-		BE458AFA17E71BE000776B0D /* InstructionBackgroundPressAndHold@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AF217E71BE000776B0D /* InstructionBackgroundPressAndHold@2x~iphone.png */; };
-		BE458AFB17E71BE000776B0D /* InstructionBackgroundPressAndHold~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AF317E71BE000776B0D /* InstructionBackgroundPressAndHold~iphone.png */; };
 		BE5D29EB17577E2800C00486 /* SYNFeedMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D29EA17577E2800C00486 /* SYNFeedMessagesView.m */; };
 		BE7D02E5178AF310008053DC /* SYNSearchUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D02E4178AF310008053DC /* SYNSearchUsersViewController.m */; };
 		BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D02E9178B138B008053DC /* SYNUserThumbnailCell.m */; };
@@ -2703,10 +2699,6 @@
 		BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x.png"; path = "Assets/Images/InstructionBackgroundPacks@2x.png"; sourceTree = "<group>"; };
 		BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks@2x~iphone.png"; sourceTree = "<group>"; };
 		BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks~iphone.png"; sourceTree = "<group>"; };
-		BE458AF017E71BE000776B0D /* InstructionBackgroundPressAndHold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InstructionBackgroundPressAndHold.png; path = Assets/Images/InstructionBackgroundPressAndHold.png; sourceTree = "<group>"; };
-		BE458AF117E71BE000776B0D /* InstructionBackgroundPressAndHold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPressAndHold@2x.png"; path = "Assets/Images/InstructionBackgroundPressAndHold@2x.png"; sourceTree = "<group>"; };
-		BE458AF217E71BE000776B0D /* InstructionBackgroundPressAndHold@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPressAndHold@2x~iphone.png"; path = "Assets/Images/InstructionBackgroundPressAndHold@2x~iphone.png"; sourceTree = "<group>"; };
-		BE458AF317E71BE000776B0D /* InstructionBackgroundPressAndHold~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPressAndHold~iphone.png"; path = "Assets/Images/InstructionBackgroundPressAndHold~iphone.png"; sourceTree = "<group>"; };
 		BE53EE6017609587008360D2 /* Rockpack 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 4.xcdatamodel"; sourceTree = "<group>"; };
 		BE5D29E917577E2800C00486 /* SYNFeedMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedMessagesView.h; sourceTree = "<group>"; };
 		BE5D29EA17577E2800C00486 /* SYNFeedMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedMessagesView.m; sourceTree = "<group>"; };
@@ -5522,10 +5514,6 @@
 				BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */,
 				BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */,
 				BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */,
-				BE458AF017E71BE000776B0D /* InstructionBackgroundPressAndHold.png */,
-				BE458AF117E71BE000776B0D /* InstructionBackgroundPressAndHold@2x.png */,
-				BE458AF217E71BE000776B0D /* InstructionBackgroundPressAndHold@2x~iphone.png */,
-				BE458AF317E71BE000776B0D /* InstructionBackgroundPressAndHold~iphone.png */,
 				BE458AE417E6007500776B0D /* InstructionCard2fakeVideoCell.png */,
 				BE458AE517E6007500776B0D /* InstructionCard2fakeVideoCell@2x.png */,
 				BE458AE617E6007500776B0D /* InstructionCard2fakeVideoCell@2x~iphone.png */,
@@ -6538,7 +6526,6 @@
 				1F5FAEC017E7244F00205F3F /* ButtonCancelAddToPack@2x~iphone.png in Resources */,
 				38A2007D1731607F00FB9F57 /* FieldYear~iphone.png in Resources */,
 				38A2007E1731607F00FB9F57 /* LogoSignup@2x~iphone.png in Resources */,
-				BE458AF917E71BE000776B0D /* InstructionBackgroundPressAndHold@2x.png in Resources */,
 				38A2007F1731607F00FB9F57 /* LogoSignup~iphone.png in Resources */,
 				38A200801731607F00FB9F57 /* ButtonCloseSearch@2x~iphone.png in Resources */,
 				38A200811731607F00FB9F57 /* ButtonCloseSearchHighlighted@2x~iphone.png in Resources */,
@@ -6911,7 +6898,6 @@
 				BE458AE917E6007500776B0D /* InstructionCard2fakeVideoCell@2x.png in Resources */,
 				1FABF7A51753DA1500AE5CCB /* ShadowChannelMidThumb.png in Resources */,
 				1FABF7A61753DA1500AE5CCB /* ShadowChannelMidThumb@2x.png in Resources */,
-				BE458AFB17E71BE000776B0D /* InstructionBackgroundPressAndHold~iphone.png in Resources */,
 				1FABF7A91753EAEA00AE5CCB /* ShadowChannelThumb@2x~iphone.png in Resources */,
 				1FABF7AA1753EAEA00AE5CCB /* ShadowChannelThumb~iphone.png in Resources */,
 				01811A5717576D2A00AFA926 /* ButtonShuttleBarMaximise@2x.png in Resources */,
@@ -6975,7 +6961,6 @@
 				BE2AE4C2176E0F2E00A753E3 /* ButtonCancelCD@2x.png in Resources */,
 				BE2AE4C9176E64D300A753E3 /* ButtonNavCD@2x~iphone.png in Resources */,
 				BE2AE4CA176E64D300A753E3 /* ButtonNavCD~iphone.png in Resources */,
-				BE458AF817E71BE000776B0D /* InstructionBackgroundPressAndHold.png in Resources */,
 				BE2AE4CB176E64D300A753E3 /* ButtonNavHighlightedCD@2x~iphone.png in Resources */,
 				BE2AE4CC176E64D300A753E3 /* ButtonNavHighlightedCD~iphone.png in Resources */,
 				BE2AE4CD176E64D300A753E3 /* ButtonNavSelectedCD@2x~iphone.png in Resources */,
@@ -7143,7 +7128,6 @@
 				BE06EFA717DB6C810028F2E3 /* ShareUnconnectedabaccess@2x.png in Resources */,
 				BE06EFA817DB6C810028F2E3 /* ShareUnconnectedFbConnect.png in Resources */,
 				BE06EFA917DB6C810028F2E3 /* ShareUnconnectedFbConnect@2x.png in Resources */,
-				BE458AFA17E71BE000776B0D /* InstructionBackgroundPressAndHold@2x~iphone.png in Resources */,
 				BEF5ED8F17DE061E006EF5A1 /* ShareAddEntry.jpg in Resources */,
 				BEF5ED9017DE061E006EF5A1 /* ShareAddEntry@2x.jpg in Resources */,
 				BEF5ED9117DE061E006EF5A1 /* ShareAddEntrySmall.jpg in Resources */,

@@ -221,10 +221,7 @@
     [self updateAnalytics];
     
     self.channelThumbnailCollectionView.scrollsToTop = YES;
-    
-    
-    
-    
+
     // if the user has requested 'Load More' channels then dont refresh the page cause he is in the middle of a search
     if (self.dataRequestRange.location == 0)
     {
@@ -232,21 +229,21 @@
     }
 }
 
--(void)checkForOnBoarding
+- (void) checkForOnBoarding
 {
-    if(![appDelegate.viewStackManager controllerViewIsVisible:self])
+    if (![appDelegate.viewStackManager controllerViewIsVisible: self])
+    {
         return;
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL onBoarding1State = [defaults boolForKey:kInstruction1OnBoardingState];
-    if(!onBoarding1State) // 1rst card
+    BOOL onBoarding1State = [defaults boolForKey: kInstruction1OnBoardingState];
+    
+    // FIXME: Now we have no press and hold, I think that this logic can be simplified
+    if (!onBoarding1State) // 1rst card
     {
-//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePacks];
-//        
-//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
-        
-        [defaults setBool:YES forKey:kInstruction1OnBoardingState];
-        
+        [defaults setBool: YES
+                   forKey: kInstruction1OnBoardingState];
     }
 }
 
