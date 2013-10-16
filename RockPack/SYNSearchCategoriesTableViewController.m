@@ -12,7 +12,6 @@
 #import "SYNAppDelegate.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
-#import "SYNSearchCategoriesIphoneCell.h"
 #import "SYNDeviceManager.h"
 
 static NSString *SearchGenresTableCellIdentifier = @"SYNSearchCategoriesIphoneCell";
@@ -37,7 +36,6 @@ static NSString *SearchGenresTableCellIdentifier = @"SYNSearchCategoriesIphoneCe
     self.cellFont = [UIFont rockpackFontOfSize: 16.0];
     self.cellTextColor = [UIColor colorWithRed:(106.0f/255.0f) green:(114.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
     
-    [self.tableView registerClass:[SYNSearchCategoriesIphoneCell class] forCellReuseIdentifier:SearchGenresTableCellIdentifier];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor rockpacLedColor];
@@ -132,24 +130,9 @@ static NSString *SearchGenresTableCellIdentifier = @"SYNSearchCategoriesIphoneCe
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    SYNSearchCategoriesIphoneCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchGenresTableCellIdentifier forIndexPath:indexPath];
     
-    Genre* genre = self.searchCategories[indexPath.item];
     
-    if ([genre.name isEqual: @"TV & NEWS"])
-    {
-        cell.textLabel.text = @"TV & News";
-    }
-    
-    else
-    {
-        cell.textLabel.text = [genre.name capitalizedString];
-    }
-        
-    cell.textLabel.font = self.cellFont;
-    cell.textLabel.textColor = self.cellTextColor;
-    
-    return cell;
+    return nil;
 }
 
 

@@ -986,7 +986,6 @@
 		BE0815D316D6448200ADB1DC /* SYNSideNavigatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE0815D116D6448200ADB1DC /* SYNSideNavigatorViewController.xib */; };
 		BE0AAD2916E6534300DA958E /* SYNAutocompleteSuggestionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0AAD2816E6534300DA958E /* SYNAutocompleteSuggestionsController.m */; };
 		BE0B150B17BA3B400053E551 /* SYNSearchCategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B150A17BA3B400053E551 /* SYNSearchCategoriesTableViewController.m */; };
-		BE0B150F17BA4BDA0053E551 /* SYNSearchCategoriesIphoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B150E17BA4BDA0053E551 /* SYNSearchCategoriesIphoneCell.m */; };
 		BE0B151217BC16240053E551 /* ButtonSearch@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE0B151017BC16240053E551 /* ButtonSearch@2x~iphone.png */; };
 		BE0B151317BC16240053E551 /* ButtonSearch~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE0B151117BC16240053E551 /* ButtonSearch~iphone.png */; };
 		BE0FF0321754C39D0088294F /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0311754C39D0088294F /* ISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -2567,8 +2566,6 @@
 		BE0AAD2816E6534300DA958E /* SYNAutocompleteSuggestionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAutocompleteSuggestionsController.m; sourceTree = "<group>"; };
 		BE0B150917BA3B3F0053E551 /* SYNSearchCategoriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchCategoriesTableViewController.h; sourceTree = "<group>"; };
 		BE0B150A17BA3B400053E551 /* SYNSearchCategoriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchCategoriesTableViewController.m; sourceTree = "<group>"; };
-		BE0B150D17BA4BD90053E551 /* SYNSearchCategoriesIphoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchCategoriesIphoneCell.h; sourceTree = "<group>"; };
-		BE0B150E17BA4BDA0053E551 /* SYNSearchCategoriesIphoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchCategoriesIphoneCell.m; sourceTree = "<group>"; };
 		BE0B151017BC16240053E551 /* ButtonSearch@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSearch@2x~iphone.png"; path = "Assets/Images/ButtonSearch@2x~iphone.png"; sourceTree = "<group>"; };
 		BE0B151117BC16240053E551 /* ButtonSearch~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSearch~iphone.png"; path = "Assets/Images/ButtonSearch~iphone.png"; sourceTree = "<group>"; };
 		BE0FF0301754C39D0088294F /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
@@ -4821,8 +4818,6 @@
 			children = (
 				38A2FF1917314B3E00FB9F57 /* SYNSearchAutocompleteTableViewCell.h */,
 				38A2FF1A17314B3E00FB9F57 /* SYNSearchAutocompleteTableViewCell.m */,
-				BE0B150D17BA4BD90053E551 /* SYNSearchCategoriesIphoneCell.h */,
-				BE0B150E17BA4BDA0053E551 /* SYNSearchCategoriesIphoneCell.m */,
 			);
 			name = "Search Controller Cells";
 			sourceTree = "<group>";
@@ -7627,7 +7622,6 @@
 				BE1B3DC3180D4EEB00DA2BD6 /* SYNDiscoverViewController.m in Sources */,
 				019CE3F817B8EF740059822C /* SYNArcMenuItem.m in Sources */,
 				BE0B150B17BA3B400053E551 /* SYNSearchCategoriesTableViewController.m in Sources */,
-				BE0B150F17BA4BDA0053E551 /* SYNSearchCategoriesIphoneCell.m in Sources */,
 				0177002717C37AF6006DE415 /* SYNTouchGestureRecognizer.m in Sources */,
 				0177002A17C382C3006DE415 /* UIImage+Tint.m in Sources */,
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
