@@ -11,12 +11,9 @@
 
 @implementation SYNCategoryCollectionViewCell
 
--(void)awakeFromNib
+- (void) awakeFromNib
 {
-    self.label.font = [UIFont rockpackFontOfSize:self.label.font.pointSize];
+    self.label.font = [UIFont rockpackFontOfSize: self.label.font.pointSize];
 }
-
-
-
 
 @end
