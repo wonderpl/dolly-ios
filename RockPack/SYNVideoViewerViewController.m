@@ -328,11 +328,6 @@
                                     selectedIndex: self.currentSelectedIndex
                                          autoPlay: TRUE];
     
-    // Get share link pre-emptively
-    [self requestShareLinkWithObjectType: @"video_instance"
-                                objectId: [(VideoInstance *)self.videoInstanceArray[self.currentSelectedIndex] uniqueId]];
-    
-    
     // likes count
     self.likesCountLabel.font = [UIFont rockpackFontOfSize:self.likesCountLabel.font.pointSize];
     self.likesCountLabel.text = @"0";
@@ -1140,9 +1135,11 @@
 
 - (IBAction) userTouchedVideoShareButton: (UIButton *) videoShareButton
 {
-    VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
+    // Get share link pre-emptively
+    [self requestShareLinkWithObjectType: @"video_instance"
+                                objectId: [(VideoInstance *)self.videoInstanceArray[self.currentSelectedIndex] uniqueId]];
     
-    //videoShareButton.enabled = NO;
+    VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
     [self shareVideoInstance: videoInstance];
 }

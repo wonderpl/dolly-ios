@@ -1164,21 +1164,6 @@
 
 #pragma mark - Arc menu support
 
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
-{
-    [super arcMenuUpdateState: recognizer];
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {        
-        Channel *channel = [self channelInstanceForIndexPath: self.arcMenuIndexPath
-                                           andComponentIndex: kArcMenuInvalidComponentIndex];
-        
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-    }
-}
-
-
 - (void) arcMenu: (SYNArcMenuView *) menu
          didSelectMenuName: (NSString *) menuName
          forCellAtIndex: (NSIndexPath *) cellIndexPath
@@ -1190,6 +1175,12 @@
     }
     else if ([menuName isEqualToString: kActionShareChannel])
     {
+        Channel *channel = [self channelInstanceForIndexPath: self.arcMenuIndexPath
+                                           andComponentIndex: kArcMenuInvalidComponentIndex];
+        
+        [self requestShareLinkWithObjectType: @"channel"
+                                    objectId: channel.uniqueId];
+        
         [self shareChannelAtIndexPath: cellIndexPath
                     andComponentIndex: componentIndex];
     }

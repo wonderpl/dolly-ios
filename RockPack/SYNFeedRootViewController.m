@@ -732,37 +732,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) arcMenuUpdateState: (UIGestureRecognizer *) recognizer
-{
-    [super arcMenuUpdateState: recognizer];
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        // Need to set the component index if aggregate celll
-        FeedItem *feedItem = [self feedItemAtIndexPath: self.arcMenuIndexPath];
-        
-        if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
-        {
-            // Channel
-            Channel *channel = [self channelInstanceForIndexPath: self.arcMenuIndexPath
-                                               andComponentIndex: self.arcMenuComponentIndex];
-            
-            [self requestShareLinkWithObjectType: @"channel"
-                                        objectId: channel.uniqueId];
-        }
-        else
-        {
-            // Video
-            VideoInstance *videoInstance = [self videoInstanceForIndexPath: self.arcMenuIndexPath
-                                                         andComponentIndex: self.arcMenuComponentIndex];
-            
-            [self requestShareLinkWithObjectType: @"video_instance"
-                                        objectId: videoInstance.uniqueId];
-        }
-    }
-}
-
-
 - (void) arcMenu: (SYNArcMenuView *) menu
          didSelectMenuName: (NSString *) menuName
          forCellAtIndex: (NSIndexPath *) cellIndexPath
@@ -779,10 +748,22 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     else if ([menuName isEqualToString: kActionShareVideo])
     {
+        VideoInstance *videoInstance = [self videoInstanceForIndexPath: self.arcMenuIndexPath
+                                                     andComponentIndex: self.arcMenuComponentIndex];
+        
+        [self requestShareLinkWithObjectType: @"video_instance"
+                                    objectId: videoInstance.uniqueId];
+        
         [self shareVideoAtIndexPath: cellIndexPath];
     }
     else if ([menuName isEqualToString: kActionShareChannel])
     {
+        Channel *channel = [self channelInstanceForIndexPath: self.arcMenuIndexPath
+                                           andComponentIndex: self.arcMenuComponentIndex];
+        
+        [self requestShareLinkWithObjectType: @"channel"
+                                    objectId: channel.uniqueId];
+        
         [self shareChannelAtIndexPath: cellIndexPath
                     andComponentIndex: componentIndex];
     }

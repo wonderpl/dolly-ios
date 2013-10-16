@@ -501,10 +501,7 @@
     {
         [setOfVideosToPost addObject:newVideoInstance];
     }
-    
-    
-    
-    
+
     [appDelegate.oAuthNetworkEngine updateVideosForChannelForUserId: appDelegate.currentUser.uniqueId
                                                           channelId: channel.uniqueId
                                                    videoInstanceSet: setOfVideosToPost

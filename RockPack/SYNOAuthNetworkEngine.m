@@ -957,27 +957,55 @@
 }
 
 
+// Multiple videos
 - (void) videosForChannelForUserId: (NSString *) userId
                          channelId: (NSString *) channelId
                            inRange: (NSRange) range
                  completionHandler: (MKNKUserSuccessBlock) completionBlock
                       errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId,
-                                                @"CHANNELID" : channelId};
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId,
+                                                @"CHANNELID": channelId};
     
     NSString *apiString = [kAPIGetVideosForChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[@"start"] = @(range.location);
     parameters[@"size"] = @(range.length);
     
-    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
-                                                                                                       params: [self getLocaleParamWithParams:parameters]
-                                                                                                   httpMethod: @"GET"
-                                                                                                          ssl: TRUE];
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                                                                         params: [self getLocaleParamWithParams: parameters]
+                                                                                                     httpMethod: @"GET"
+                                                                                                            ssl: TRUE];
     
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
+
+// Single video
+- (void) videoForChannelForUserId: (NSString *) userId
+                        channelId: (NSString *) channelId
+                       instanceId: (NSString *) instanceId
+                completionHandler: (MKNKUserSuccessBlock) completionBlock
+                     errorHandler: (MKNKUserErrorBlock) errorBlock;
+{
+    NSDictionary *apiSubstitutionDictionary = @{ @"USERID": userId,
+                                                @"CHANNELID": channelId,
+                                                @"INSTANCEID": instanceId};
+    
+    NSString *apiString = [kAPIGetVideoDetails stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                                                                         params: nil
+                                                                                                     httpMethod: @"GET"
+                                                                                                            ssl: TRUE];
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
