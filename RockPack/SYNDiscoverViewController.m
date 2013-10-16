@@ -15,6 +15,7 @@
 #define kAutocompleteTime 0.2
 
 static NSString* kCategoryCellIndetifier = @"SYNCategoryCollectionViewCell";
+static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
                                         UITableViewDataSource, UITableViewDelegate>
@@ -114,7 +115,6 @@ static NSString* kCategoryCellIndetifier = @"SYNCategoryCollectionViewCell";
     NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
                                                                                       error: &error];
     
-    NSLog(@"%@", genresFetchedArray);
     
     self.categoriesDataArray = [NSArray arrayWithArray:genresFetchedArray];
     
@@ -169,11 +169,11 @@ static NSString* kCategoryCellIndetifier = @"SYNCategoryCollectionViewCell";
 - (UITableViewCell *) tableView: (UITableView *) tableView
           cellForRowAtIndexPath: (NSIndexPath *) indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    
     UITableViewCell *cell;
     
-    if (!(cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier]))
-        cell = [[SYNSearchAutocompleteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if (!(cell = [tableView dequeueReusableCellWithIdentifier: kAutocompleteCellIdentifier]))
+        cell = [[SYNSearchAutocompleteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: kAutocompleteCellIdentifier];
     
     cell.textLabel.text = [((NSString*)self.autocompleteSuggestionsArray[indexPath.row]) capitalizedString];
     
@@ -248,10 +248,15 @@ static NSString* kCategoryCellIndetifier = @"SYNCategoryCollectionViewCell";
             [wordsReturned addObject: suggestion[0]];
         }
         
+        
+        
         wself.autocompleteSuggestionsArray =
         [NSArray arrayWithArray:wordsReturned];
         
-        self.autocompleteTableView.hidden = NO;
+        
+        wself.autocompleteTableView.hidden = NO;
+        
+        [wself.autocompleteTableView reloadData];
         
     };
     

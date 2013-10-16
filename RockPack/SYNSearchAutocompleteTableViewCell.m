@@ -91,19 +91,13 @@
     
     if(selected)
     {
-        if(IS_IOS_7_OR_GREATER)
-            self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"NavSelected"]];
-        else
-            self.backgroundColor = [UIColor whiteColor];
+        self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"NavSelected"]];
         self.textLabel.textColor = self.selectedColor;
         self.textLabel.shadowColor = self.selectedShadowColor;
     }
     else
     {
-        if(IS_IOS_7_OR_GREATER)
-            self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"NavSeleNavDefaultcted"]];
-        else
-            self.backgroundColor = [UIColor whiteColor];
+        self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"NavSeleNavDefaultcted"]];
         self.textLabel.textColor = self.defaultColor;
         self.textLabel.shadowColor = self.defaultShadowColor;
     }
