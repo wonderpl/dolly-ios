@@ -21,6 +21,7 @@
 
 @implementation SYNSearchAutocompleteTableViewCell
 @synthesize separatorView;
+
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     

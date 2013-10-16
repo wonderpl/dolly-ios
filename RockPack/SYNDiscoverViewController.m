@@ -10,9 +10,11 @@
 #import "UIFont+SYNFont.h"
 #import "SYNSearchAutocompleteTableViewCell.h"
 #import "Genre.h"
-
+#import "SYNCategoryCollectionViewCell.h"
 
 #define kAutocompleteTime 0.2
+
+static NSString* kCategoryCellIndetifier = @"SYNCategoryCollectionViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
                                         UITableViewDataSource, UITableViewDelegate>
@@ -31,6 +33,8 @@
 @property (nonatomic, strong) NSArray* autocompleteSuggestionsArray;
 @property (nonatomic, strong) IBOutlet UITableView* autocompleteTableView;
 
+@property (nonatomic, strong) NSDictionary* colorMapForCells;
+
 @end
 
 @implementation SYNDiscoverViewController
@@ -40,6 +44,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.colorMapForCells = @{
+                              @"" : @""
+                              
+                              
+                              };
+    
+    self.autocompleteTableView.hidden = YES;
+    
+    
+    // == Set the Collection View's Cells == //
+    
+    
+    [self.categoriesCollectionView registerNib: [UINib nibWithNibName: kCategoryCellIndetifier bundle: nil]
+                    forCellWithReuseIdentifier: kCategoryCellIndetifier];
     
     
     
@@ -60,6 +79,10 @@
     self.searchField.returnKeyType = UIReturnKeySearch;
     
     self.autocompleteSuggestionsArray = [NSArray array]; // just so we have an array to return count == 0
+    
+    
+    
+    
     
     // == Load and Display Categories == //
     
@@ -113,13 +136,23 @@
 {
     Genre* genre = self.categoriesDataArray[indexPath.item];
     
+    SYNCategoryCollectionViewCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier: kCategoryCellIndetifier
+                                                                                forIndexPath: indexPath];
     
-    return [[UICollectionViewCell alloc] init];
+    
+    categoryCell.backgroundColor = [UIColor redColor];
+    
+    categoryCell.label.text = genre.name;
+    
+    
+    
+    
+    return categoryCell;
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Genre* selectedGenre = self.categoriesDataArray[indexPath.item];
+    // Genre* selectedGenre = self.categoriesDataArray[indexPath.item];
 }
 
 
@@ -216,6 +249,8 @@
         wself.autocompleteSuggestionsArray =
         [NSArray arrayWithArray:wordsReturned];
         
+        self.autocompleteTableView.hidden = NO;
+        
     };
     
     
@@ -229,6 +264,19 @@
                                                                               forResource: appDelegate.searchEntity
                                                                              withComplete: processBlock
                                                                                  andError: errorBlock];
+}
+
+#pragma mark - Close Button Delegates
+
+-(IBAction)closeButtonPressed:(id)sender
+{
+    [self clearSearch];
+}
+
+-(void)clearSearch
+{
+    self.searchField.text = @"";
+    self.autocompleteTableView.hidden = YES;
 }
 
 @end
