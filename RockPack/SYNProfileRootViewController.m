@@ -20,8 +20,6 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPassthroughView.h"
 #import "SYNProfileRootViewController.h"
-#import "SYNSubscriptionsViewController.h"
-#import "SYNUserProfileViewController.h"
 #import "SYNYouHeaderView.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
@@ -52,8 +50,6 @@ SYNImagePickerControllerDelegate>
 
 @property (nonatomic, strong) id orientationDesicionmaker;
 
-@property (nonatomic, strong) SYNSubscriptionsViewController *subscriptionsViewController;
-@property (nonatomic, strong) SYNUserProfileViewController *userProfileController;
 
 @property (nonatomic, weak) IBOutlet UIButton *channelsTabButton;
 @property (nonatomic, weak) IBOutlet UIButton *subscriptionsTabButton;
@@ -98,13 +94,6 @@ SYNImagePickerControllerDelegate>
                                                      name: NSManagedObjectContextObjectsDidChangeNotification
                                                    object: appDelegate.searchManagedObjectContext];
         
-        /*
-         if([[NSBundle mainBundle] pathForResource:NSStringFromClass([SYNProfileRootViewController class]) ofType:@"nib"] != nil)
-         {
-         NSLog(@"Nib exists");
-         
-         }*/
-        
     }
     
     return self;
@@ -113,12 +102,11 @@ SYNImagePickerControllerDelegate>
 - (void) dealloc
 {
     self.channelOwner = nil;
-    
+    self.subscriptionThumbnailCollectionView.delegate =nil;
+    self.subscriptionThumbnailCollectionView.dataSource =nil;
     // Defensive programming
     self.channelThumbnailCollectionView.delegate = nil;
     self.channelThumbnailCollectionView.dataSource = nil;
-    self.subscriptionsViewController.collectionView.delegate = nil;
-    self.subscriptionsViewController.collectionView.dataSource = nil;
 }
 
 #pragma mark - User Profile
@@ -203,8 +191,6 @@ SYNImagePickerControllerDelegate>
     [self.channelThumbnailCollectionView registerNib: thumbnailCellNib
                           forCellWithReuseIdentifier: @"SYNChannelMidCell"];
     
-    
-    
     [self.subscriptionThumbnailCollectionView registerNib: thumbnailCellNib
                                forCellWithReuseIdentifier: @"SYNChannelMidCell"];
     
@@ -265,8 +251,6 @@ SYNImagePickerControllerDelegate>
     
     [self setUpUserProfile];
     
-    
-    
     //Header set up for ipad
     CGFloat correctWidth = [SYNDeviceManager.sharedInstance isLandscape] ? 600.0 : 400.0;
     SYNYouHeaderView *tmpHeaderChannelsView = [SYNYouHeaderView headerViewForWidth: correctWidth];
@@ -307,7 +291,6 @@ SYNImagePickerControllerDelegate>
     {
         [self updateTabStates];
     }
-    
     
 }
 
@@ -363,10 +346,6 @@ SYNImagePickerControllerDelegate>
     
     self.deletionModeActive = NO;
     
-    self.subscriptionsViewController.collectionView.delegate = self;
-
-    self.subscriptionsViewController.user = self.channelOwner;
-    
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
     [self.channelThumbnailCollectionView reloadData];
@@ -380,7 +359,7 @@ SYNImagePickerControllerDelegate>
 - (void) viewWillDisappear: (BOOL) animated
 {
     self.channelThumbnailCollectionView.delegate = nil;
-    
+    self.subscriptionThumbnailCollectionView.delegate = nil;
     self.deletionModeActive = NO;
     
     [super viewWillDisappear: animated];
@@ -388,43 +367,6 @@ SYNImagePickerControllerDelegate>
     
 }
 
-
-
-
-#pragma mark - Print all views
-
-//will use later to determine acurate positions of the views
-//Will be removed later
--(void) printViews{
-    
-    
-    NSLog(@"headerChannelsView");
-    NSLog(@" x%f, y%f",self.headerChannelsView.frame.origin.x,self.headerChannelsView.frame.origin.y);
-    NSLog(@"w%f, h%f",self.headerChannelsView.frame.size.width,self.headerChannelsView.frame.size.height);
-    
-    
-    
-    NSLog(@"headerSubscriptionsView");
-    NSLog(@" x%f, y%f",self.headerSubscriptionsView.frame.origin.x,self.headerSubscriptionsView.frame.origin.y);
-    NSLog(@"w%f, h%f",self.headerSubscriptionsView.frame.size.width,self.headerSubscriptionsView.frame.size.height);
-    
-    NSLog(@"self.userProfileController.view");
-    NSLog(@" x%f, y%f",self.userProfileController.view.frame.origin.x,self.userProfileController.view.frame.origin.y);
-    NSLog(@"w%f, h%f",self.userProfileController.view.frame.size.width,self.userProfileController.view.frame.size.height);
-    
-    
-    NSLog(@"channelThumbnailCollectionView");
-    NSLog(@" x%f, y%f",self.channelThumbnailCollectionView.frame.origin.x,self.channelThumbnailCollectionView.frame.origin.y);
-    NSLog(@"w%f, h%f",self.channelThumbnailCollectionView.frame.size.width,self.channelThumbnailCollectionView.frame.size.height);
-    
-    
-    
-    NSLog(@"subscriptionsViewController.view");
-    NSLog(@" x%f, y%f",self.subscriptionsViewController.view.frame.origin.x,self.subscriptionsViewController.view.frame.origin.y);
-    NSLog(@"w%f, h%f",self.subscriptionsViewController.view.frame.size.width,self.subscriptionsViewController.view.frame.size.height);
-    
-    
-}
 
 #pragma mark - Container Scroll Delegates
 
@@ -491,9 +433,6 @@ SYNImagePickerControllerDelegate>
      {
          if (obj == self.channelOwner)
          {
-             [self.userProfileController setChannelOwner: (ChannelOwner *) obj];
-             
-             // Handle new insertions
              
              [self reloadCollectionViews];
              
@@ -949,7 +888,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     self.channelThumbnailCollectionView.scrollsToTop = !self.subscriptionsTabActive;
     
-    self.subscriptionsViewController.channelThumbnailCollectionView.scrollsToTop = self.subscriptionsTabActive;
+    self.subscriptionThumbnailCollectionView.scrollsToTop = self.subscriptionsTabActive;
     
     self.channelsTabButton.selected = !self.subscriptionsTabActive;
     self.subscriptionsTabButton.selected = self.subscriptionsTabActive;
@@ -1196,10 +1135,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
             self.isUserProfile = NO;
         }
         
-        self.subscriptionsViewController.user = self.channelOwner;
         
-        
-        self.userProfileController.channelOwner = self.channelOwner;
         
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)

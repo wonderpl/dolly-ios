@@ -1264,8 +1264,6 @@
 		BE7D354517170F540085AB81 /* ButtonRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D353F17170F530085AB81 /* ButtonRefreshArrow@2x.png */; };
 		BE7D354617170F540085AB81 /* ButtonRefreshSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D354017170F540085AB81 /* ButtonRefreshSelected.png */; };
 		BE7D354717170F540085AB81 /* ButtonRefreshSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D354117170F540085AB81 /* ButtonRefreshSelected@2x.png */; };
-		BE7D354C1718667F0085AB81 /* SYNUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D354A1718667F0085AB81 /* SYNUserProfileViewController.m */; };
-		BE7D354D1718667F0085AB81 /* SYNUserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7D354B1718667F0085AB81 /* SYNUserProfileViewController.xib */; };
 		BE7D3551171870780085AB81 /* SYNBackButtonControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D3550171870780085AB81 /* SYNBackButtonControl.m */; };
 		BE82099217A95F6E00472ADD /* channelFeedCover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82098B17A95F6E00472ADD /* channelFeedCover@2x.png */; };
 		BE82099317A95F6E00472ADD /* channelFeedCover~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82098C17A95F6E00472ADD /* channelFeedCover~iphone.png */; };
@@ -1275,7 +1273,6 @@
 		BE82099717A95F6E00472ADD /* channelFeedCoverFourth~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82099017A95F6E00472ADD /* channelFeedCoverFourth~iphone.png */; };
 		BE82099817A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82099117A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png */; };
 		BE82099A17A95F9900472ADD /* channelFeedCover.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82099917A95F9900472ADD /* channelFeedCover.png */; };
-		BE86BF17171F001E0006DC8A /* SYNSubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE86BF16171F001E0006DC8A /* SYNSubscriptionsViewController.m */; };
 		BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE86BF19171F07B10006DC8A /* SYNChannelMidCell.m */; };
 		BE86BF1C171F07C70006DC8A /* SYNChannelMidCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF1B171F07C70006DC8A /* SYNChannelMidCell.xib */; };
 		BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE86BF1E171FFB980006DC8A /* SYNYouHeaderView.m */; };
@@ -2901,9 +2898,6 @@
 		BE7D353F17170F530085AB81 /* ButtonRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonRefreshArrow@2x.png"; path = "Assets/Images/ButtonRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		BE7D354017170F540085AB81 /* ButtonRefreshSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonRefreshSelected.png; path = Assets/Images/ButtonRefreshSelected.png; sourceTree = "<group>"; };
 		BE7D354117170F540085AB81 /* ButtonRefreshSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonRefreshSelected@2x.png"; path = "Assets/Images/ButtonRefreshSelected@2x.png"; sourceTree = "<group>"; };
-		BE7D35491718667F0085AB81 /* SYNUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNUserProfileViewController.h; sourceTree = "<group>"; };
-		BE7D354A1718667F0085AB81 /* SYNUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNUserProfileViewController.m; sourceTree = "<group>"; };
-		BE7D354B1718667F0085AB81 /* SYNUserProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNUserProfileViewController.xib; sourceTree = "<group>"; };
 		BE7D354F171870780085AB81 /* SYNBackButtonControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNBackButtonControl.h; sourceTree = "<group>"; };
 		BE7D3550171870780085AB81 /* SYNBackButtonControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNBackButtonControl.m; sourceTree = "<group>"; };
 		BE82098B17A95F6E00472ADD /* channelFeedCover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "channelFeedCover@2x.png"; path = "Assets/Images/channelFeedCover@2x.png"; sourceTree = "<group>"; };
@@ -2915,8 +2909,6 @@
 		BE82099117A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "channelFeedCoverFourth@2x~iphone.png"; path = "Assets/Images/channelFeedCoverFourth@2x~iphone.png"; sourceTree = "<group>"; };
 		BE82099917A95F9900472ADD /* channelFeedCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = channelFeedCover.png; path = Assets/Images/channelFeedCover.png; sourceTree = "<group>"; };
 		BE82099B17A9651900472ADD /* Rockpack 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 8.xcdatamodel"; sourceTree = "<group>"; };
-		BE86BF15171F001E0006DC8A /* SYNSubscriptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSubscriptionsViewController.h; sourceTree = "<group>"; };
-		BE86BF16171F001E0006DC8A /* SYNSubscriptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSubscriptionsViewController.m; sourceTree = "<group>"; };
 		BE86BF18171F07B10006DC8A /* SYNChannelMidCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelMidCell.h; sourceTree = "<group>"; };
 		BE86BF19171F07B10006DC8A /* SYNChannelMidCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelMidCell.m; sourceTree = "<group>"; };
 		BE86BF1B171F07C70006DC8A /* SYNChannelMidCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelMidCell.xib; sourceTree = "<group>"; };
@@ -4008,16 +4000,11 @@
 		01982560162ADE3300216900 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				BE7D35491718667F0085AB81 /* SYNUserProfileViewController.h */,
-				BE7D354A1718667F0085AB81 /* SYNUserProfileViewController.m */,
-				BE7D354B1718667F0085AB81 /* SYNUserProfileViewController.xib */,
 				38015B4D174CC51A005D3F18 /* SYNUserProfileViewController~iphone.xib */,
 				0142ED8716B19FBE008694DA /* SYNProfileRootViewController.h */,
 				0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */,
 				0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */,
 				0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */,
-				BE86BF15171F001E0006DC8A /* SYNSubscriptionsViewController.h */,
-				BE86BF16171F001E0006DC8A /* SYNSubscriptionsViewController.m */,
 				BE86BF1D171FFB980006DC8A /* SYNYouHeaderView.h */,
 				BE86BF1E171FFB980006DC8A /* SYNYouHeaderView.m */,
 				1FCB6A6017E89C37009B6D29 /* SYNNoChannelsMessageView.h */,
@@ -6391,7 +6378,6 @@
 				BE7D354517170F540085AB81 /* ButtonRefreshArrow@2x.png in Resources */,
 				BE7D354617170F540085AB81 /* ButtonRefreshSelected.png in Resources */,
 				BE7D354717170F540085AB81 /* ButtonRefreshSelected@2x.png in Resources */,
-				BE7D354D1718667F0085AB81 /* SYNUserProfileViewController.xib in Resources */,
 				BE2D213F171C527B00B4B755 /* ButtonBackLabel.png in Resources */,
 				BE2D2140171C527B00B4B755 /* ButtonBackLabel@2x.png in Resources */,
 				BE2D214C171D5B9500B4B755 /* IconSearch.png in Resources */,
@@ -7518,11 +7504,9 @@
 				BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */,
 				BE7D35051715CE450085AB81 /* SYNRockpackNotification.m in Sources */,
 				BE7D353B171708F60085AB81 /* SYNRefreshButton.m in Sources */,
-				BE7D354C1718667F0085AB81 /* SYNUserProfileViewController.m in Sources */,
 				BE7D3551171870780085AB81 /* SYNBackButtonControl.m in Sources */,
 				01AFF99717EC91540002131A /* NSObject+LLDBQuickLook.m in Sources */,
 				BE2D2145171C5A0600B4B755 /* SYNSearchBoxViewController.m in Sources */,
-				BE86BF17171F001E0006DC8A /* SYNSubscriptionsViewController.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */,
 				BEEB6F201721807200FEFA43 /* SYNSearchTabView.m in Sources */,
