@@ -114,6 +114,8 @@ static NSString* kCategoryCellIndetifier = @"SYNCategoryCollectionViewCell";
     NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
                                                                                       error: &error];
     
+    NSLog(@"%@", genresFetchedArray);
+    
     self.categoriesDataArray = [NSArray arrayWithArray:genresFetchedArray];
     
 }
