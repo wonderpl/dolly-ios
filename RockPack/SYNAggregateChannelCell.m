@@ -12,13 +12,11 @@
 #import "SYNTouchGestureRecognizer.h"
 #import "UIImage+Tint.h"
 
-
 @interface SYNAggregateChannelCell () <UIGestureRecognizerDelegate>
 
 @property (nonatomic) CGRect originalImageContainerRect;
 @property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UIView *buttonContainerView;
 @property (nonatomic, strong) UIView *labelsContainerView;
@@ -26,19 +24,11 @@
 @end
 
 
-@implementation SYNAggregateChannelCell 
+@implementation SYNAggregateChannelCell
 
 - (void) awakeFromNib
 {
     [super awakeFromNib];
-
-#ifdef ENABLE_ARC_MENU
-    // Add long-press and tap recognizers (once only per cell)
-    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
-                                                                   action: @selector(showMenu:)];
-    self.longPress.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.longPress];
-#endif
     
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
@@ -92,7 +82,7 @@
         [imageView removeFromSuperview];
     }
     
-    // Remove all our image buttons      
+    // Remove all our image buttons
     for (UIImageView *imageView in self.buttonContainerView.subviews) // there should only be UIImageView instances
     {
         [imageView removeFromSuperview];
@@ -111,7 +101,7 @@
     if (count == 1)
     {
         containerRect.size = self.imageContainer.frame.size;
-
+        
         self.lowlightImageView.hidden = NO;
         self.mainTitleLabel.hidden = NO;
         
@@ -120,11 +110,11 @@
         [imageView setImageWithURL: [NSURL URLWithString: ((NSString *) array[0][@"image"])]
                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                            options: SDWebImageRetryFailed];
-
+        
         [self.imageContainer addSubview: imageView];
-
+        
         self.mainTitleLabel.text = (NSString *) array[0][@"title"];
- 
+        
         return;
     }
     
@@ -196,10 +186,11 @@
             label.lineBreakMode = NSLineBreakByWordWrapping;
             label.textColor = [UIColor whiteColor];
             channelTitle = coverInfo[@"title"];
+            
             expectedLabelSize = [channelTitle sizeWithFont: label.font
                                          constrainedToSize: CGSizeMake(containerRect.size.width, 500.0)
                                              lineBreakMode: label.lineBreakMode];
-
+            
             label.frame = CGRectMake(containerRect.origin.x + 6.0,
                                      (containerRect.size.height) - (expectedLabelSize.height) - (IS_IPHONE ? 28.0f : 0.0f),
                                      expectedLabelSize.width,
@@ -219,9 +210,9 @@
     {
         self.lowlightImageView.hidden = YES;
         self.mainTitleLabel.hidden = YES;
-
+        
         containerRect.size = self.imageContainer.frame.size; // {{0, 0}, {298, 298}} (IPAD),
-        // container.origin = CGPointZero from above -> {{0, 0}, {310, 310}}
+                                                             // container.origin = CGPointZero from above -> {{0, 0}, {310, 310}}
         
         self.buttonContainerView = [[UIView alloc] initWithFrame: self.imageContainer.frame];
         
@@ -234,10 +225,10 @@
         
         [self insertSubview: self.labelsContainerView
                aboveSubview: self.buttonContainerView];
-
+        
         containerRect.size.width = containerRect.size.width / 2.0;
         containerRect.size.height = containerRect.size.height / 2.0;
-
+        
         NSInteger idx = 0;
         
         for (NSDictionary *coverInfo in array)
@@ -270,10 +261,11 @@
             label.lineBreakMode = NSLineBreakByWordWrapping;
             label.textColor = [UIColor whiteColor];
             channelTitle = coverInfo[@"title"];
+            
             expectedLabelSize = [channelTitle sizeWithFont: label.font
                                          constrainedToSize: CGSizeMake(containerRect.size.width, 500.0)
                                              lineBreakMode: label.lineBreakMode];
-
+            
             label.frame = CGRectMake(containerRect.origin.x + 6.0, (containerRect.origin.y + containerRect.size.height) - (expectedLabelSize.height), expectedLabelSize.width, expectedLabelSize.height);
             label.text = channelTitle;
             
@@ -302,12 +294,6 @@
     {
         for (UIImageView *simulatedButtonView in self.buttonContainerView.subviews)
         {
-#ifdef ENABLE_ARC_MENU
-            UILongPressGestureRecognizer *buttonLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
-                                                                                                          action: @selector(showMenu:)];
-            buttonLongPress.delegate = self;
-            [simulatedButtonView addGestureRecognizer: buttonLongPress];
-#endif
             // Tap for showing video
             UITapGestureRecognizer *buttonTap = [[UITapGestureRecognizer alloc] initWithTarget: self
                                                                                         action: @selector(showChannel:)];
@@ -347,7 +333,7 @@
     
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
                                                                                       attributes: self.lightTextAttributes]];
-
+    
     self.messageLabel.attributedText = attributedCompleteString;
 }
 
@@ -369,18 +355,8 @@
     
     switch (recognizer.state)
     {
-        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateBegan :
         {
-            NSInteger componentIndex = kArcMenuInvalidComponentIndex;
-            
-            if (self.buttonContainerView)
-            {
-                componentIndex =  [self.buttonContainerView.subviews indexOfObject: simulatedButton];
-            }
-            
-            [self.viewControllerDelegate arcMenuSelectedCell: self
-                                           andComponentIndex: componentIndex];
-            
             // Set lowlight tint
             UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
                                                                                           alpha: 0.3]];
@@ -394,6 +370,7 @@
         {
             simulatedButton.image = glossImage;
         }
+            
         default:
             break;
     }
@@ -403,12 +380,6 @@
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
 {
     [self.viewControllerDelegate touchedAggregateCell];
-}
-
-
-- (void) showMenu: (UILongPressGestureRecognizer *) recognizer
-{
-    [self.viewControllerDelegate arcMenuUpdateState: recognizer];
 }
 
 

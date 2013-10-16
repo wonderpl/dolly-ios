@@ -14,5 +14,4 @@
 @property (nonatomic, strong) IBOutlet UIImageView* videoImageView;
 @property (nonatomic, strong) IBOutlet UILabel* likesNumberLabel;
 
-
 @end

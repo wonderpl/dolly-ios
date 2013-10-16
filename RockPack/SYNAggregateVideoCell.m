@@ -13,22 +13,22 @@
 #import "UIColor+SYNColor.h"
 #import "UIImage+Tint.h"
 
-
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet UILabel* likeLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (nonatomic, strong) IBOutlet UILabel *likeLabel;
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
+
 
 @implementation SYNAggregateVideoCell
 
 - (void) awakeFromNib
 {
     [super awakeFromNib];
+    
     self.mainTitleLabel.font = [UIFont boldRockpackFontOfSize: self.mainTitleLabel.font.pointSize];
     self.likeLabel.font = [UIFont rockpackFontOfSize: self.likeLabel.font.pointSize];
     
@@ -40,16 +40,6 @@
     {
         self.likesNumberLabel.font = [UIFont boldRockpackFontOfSize: self.likesNumberLabel.font.pointSize];
     }
-    
-#ifdef ENABLE_ARC_MENU
-    
-    // Add long-press and tap recognizers (once only per cell)
-    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
-                                                                   action: @selector(showMenu:)];
-    self.longPress.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.longPress];
-#endif
-    
     
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
@@ -86,10 +76,8 @@
 
 - (void) setViewControllerDelegate: (UIViewController *) viewControllerDelegate
 {
-    [super setViewControllerDelegate: (id<SYNAggregateCellDelegate>) viewControllerDelegate];
-    
+    [super setViewControllerDelegate: (id < SYNAggregateCellDelegate >)viewControllerDelegate];
 
-    
     [self.heartButton addTarget: self.viewControllerDelegate
                          action: @selector(likeButtonPressed:)
                forControlEvents: UIControlEventTouchUpInside];
@@ -117,7 +105,7 @@
     
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
                                                                                       attributes: self.lightTextAttributes]];
-
+    
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" to "
                                                                                       attributes: self.lightTextAttributes]];
     
@@ -137,6 +125,7 @@
     
     NSAttributedString *likesAttributedString = [[NSAttributedString alloc] initWithString: [NSString stringWithFormat: @"%@ ", likesString]
                                                                                 attributes: self.boldTextAttributes];
+    
     if (likesNumber.integerValue == 0)
     {
         if (IS_IPAD)
@@ -191,8 +180,7 @@
                 continue;
             }
             
-            if ([co.uniqueId
-                 isEqualToString: appDelegate.currentUser.uniqueId])
+            if ([co.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
             {
                 name = @"You";
                 self.heartButton.selected = YES;
@@ -216,7 +204,6 @@
                                                                                                   attributes: self.boldTextAttributes]];
             }
         }
-        
     }
     
     self.likeLabel.attributedText = attributedCompleteString;
@@ -232,14 +219,7 @@
 }
 
 
-- (void) setCoverTitleWithString: (NSString *) coverTitle
-{
-}
-
-
 #pragma mark - Gesture recognizers for arc menu and show video
-
-
 
 // This is used to lowlight the gloss image on touch
 - (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
@@ -248,11 +228,8 @@
     
     switch (recognizer.state)
     {
-        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateBegan :
         {
-            [self.viewControllerDelegate arcMenuSelectedCell: self
-                                           andComponentIndex: kArcMenuInvalidComponentIndex];
-            
             // Set lowlight tint
             UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
                                                                                           alpha: 0.3]];
@@ -265,6 +242,7 @@
         {
             self.lowlightImageView.image = glossImage;
         }
+            
         default:
             break;
     }
@@ -274,12 +252,6 @@
 - (void) showVideo: (UITapGestureRecognizer *) recognizer
 {
     [self.viewControllerDelegate touchedAggregateCell];
-}
-
-
-- (void) showMenu: (UILongPressGestureRecognizer *) recognizer
-{
-    [self.viewControllerDelegate arcMenuUpdateState: recognizer];
 }
 
 
