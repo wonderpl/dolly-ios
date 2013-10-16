@@ -42,6 +42,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *autopostNoButton;
 @property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UITextField* createNewTextField;
 
 @end
 
