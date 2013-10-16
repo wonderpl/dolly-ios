@@ -547,6 +547,22 @@
 }
 
 
+- (void) collectionView: (UICollectionView *) collectionView
+         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+
+{
+    if (self.isAnimating) // prevent double clicking
+    {
+        return;
+    }
+    
+    Channel *channel = (Channel *) self.channels[indexPath.row];
+    
+    [appDelegate.viewStackManager viewChannelDetails: channel];
+}
+
+
+
 - (void)  collectionView: (UICollectionView *) collectionView
     didEndDisplayingCell: (UICollectionViewCell *) cell
       forItemAtIndexPath: (NSIndexPath *) indexPath
@@ -608,23 +624,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     }
     
     return footerSize;
-}
-
-
-
-- (void) channelTapped: (UICollectionViewCell *) cell
-{
-    SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
-    NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-    
-    if (self.isAnimating) // prevent double clicking
-    {
-        return;
-    }
-
-    Channel *channel = (Channel *) self.channels[indexPath.row];
-
-    [appDelegate.viewStackManager viewChannelDetails: channel];
 }
 
 

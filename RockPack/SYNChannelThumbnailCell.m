@@ -19,8 +19,6 @@
 
 @property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
 @property (nonatomic, strong) IBOutlet UILabel *byLabel;
-@property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
 
@@ -30,22 +28,6 @@
 - (void) awakeFromNib
 {
     [super awakeFromNib];
-
-    
-    // Tap for showing video
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                       action: @selector(showChannel:)];
-    self.tap.delegate = self;
-    [self addGestureRecognizer: self.tap];
-    
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
-    
-    // Touch for highlighting cells when the user touches them (like UIButton)
-    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self
-                                                            action: @selector(showGlossLowlight:)];
-    
-    self.touch.delegate = self;
-    [self addGestureRecognizer: self.touch];
     
     self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
     self.displayNameLabel.font = [UIFont rockpackFontOfSize: self.displayNameLabel.font.pointSize];
@@ -53,16 +35,13 @@
     
     self.deleteButton.hidden = YES;
     
-    
-    if (IS_IOS_7_OR_GREATER) {
-        self.displayNameLabel.frame = CGRectMake(self.displayNameLabel.frame.origin.x, self.displayNameLabel.frame.origin.y - 1.0f, self.displayNameLabel.frame.size.width, self.displayNameLabel.frame.size.height);
+    if (IS_IOS_7_OR_GREATER)
+    {
+        self.displayNameLabel.frame = CGRectMake(self.displayNameLabel.frame.origin.x,
+                                                 self.displayNameLabel.frame.origin.y - 1.0f,
+                                                 self.displayNameLabel.frame.size.width,
+                                                 self.displayNameLabel.frame.size.height);
     }
-}
-
-
-- (void) showDeleteButton: (BOOL) showDeleteButton
-{
-    self.deleteButton.hidden = showDeleteButton ? FALSE : TRUE;
 }
 
 
@@ -70,14 +49,9 @@
 {
     _viewControllerDelegate = viewControllerDelegate;
     
-    
     [self.displayNameButton addTarget: self.viewControllerDelegate
                                action: @selector(displayNameButtonPressed:)
                      forControlEvents: UIControlEventTouchUpInside];
-    
-    [self.deleteButton addTarget: self.viewControllerDelegate
-                          action: @selector(channelDeleteButtonTapped:)
-                forControlEvents: UIControlEventTouchUpInside];
 }
 
 
@@ -106,31 +80,7 @@
     [self.layer removeAllAnimations];
     
     [self.imageView setImageWithURL: nil];
-    
-    self.deleteButton.hidden = TRUE;
 }
-
-#pragma mark - Gesture regognizer support
-
-// Required to pass through events to controls overlaid on view with gesture recognizers
-- (BOOL) gestureRecognizer: (UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch: (UITouch *) touch
-{
-    if ([touch.view isKindOfClass: [UIControl class]])
-    {
-        // we touched a button, slider, or other UIControl
-        return NO; // ignore the touch
-    }
-    
-    return YES; // handle the touch
-}
-
-
-- (void) showChannel: (UITapGestureRecognizer *) recognizer
-{
-    // Just need to reference any button in the cell (as there is no longer an actual video button)
-    [self.viewControllerDelegate channelTapped: self];
-}
-
 
 
 // This is used to lowlight the gloss image on touch
@@ -142,9 +92,9 @@
     // Use different image for iPhone
     if (IS_IPHONE)
     {
-       imageName = @"GlossChannelProfile";
+        imageName = @"GlossChannelProfile";
     }
-
+    
     switch (recognizer.state)
     {
         case UIGestureRecognizerStateBegan:
@@ -162,9 +112,11 @@
         {
             self.lowlightImageView.image = [UIImage imageNamed: imageName];
         }
+            
         default:
             break;
     }
 }
+
 
 @end
