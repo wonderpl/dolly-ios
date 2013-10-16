@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSearchViewController.h"
+#import "SYNDiscoverViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNSearchAutocompleteTableViewCell.h"
 #import "Genre.h"
@@ -14,7 +14,7 @@
 
 #define kAutocompleteTime 0.2
 
-@interface SYNSearchViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
+@interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
                                         UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView* searchFieldBGImageView;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation SYNSearchViewController
+@implementation SYNDiscoverViewController
 
 
 
@@ -191,7 +191,7 @@
     
     // == Define Process and Error Blocks == //
     
-    __weak SYNSearchViewController* wself = self;
+    __weak SYNDiscoverViewController* wself = self;
     
     MKNKAutocompleteProcessBlock processBlock = ^(NSArray * array) {
         

@@ -5,13 +5,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNDiscoverViewController">
             <connections>
                 <outlet property="autocompleteTableView" destination="s2u-9J-KS3" id="LY3-X8-dVk"/>
                 <outlet property="categoriesCollectionView" destination="voe-PP-I8e" id="uX9-Dx-CDa"/>
                 <outlet property="searchCloseButton" destination="7WG-vD-4Hw" id="bfT-Zz-Dh7"/>
                 <outlet property="searchField" destination="REn-5N-Vsu" id="Hyl-dO-fNf"/>
                 <outlet property="searchFieldBGImageView" destination="sW2-tS-fv5" id="RJ8-Mx-IUo"/>
+                <outlet property="view" destination="1" id="9g5-gS-N94"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -72,7 +73,7 @@
     </objects>
     <resources>
         <image name="ButtonCloseSearch.png" width="320" height="65"/>
-        <image name="ButtonCloseSearchHighlighted.png" width="110" height="110"/>
+        <image name="ButtonCloseSearchHighlighted.png" width="44" height="45"/>
         <image name="IconSearch.png" width="26" height="27"/>
     </resources>
 </document>

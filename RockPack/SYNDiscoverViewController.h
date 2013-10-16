@@ -8,6 +8,6 @@
 
 #import "SYNAbstractViewController.h"
 
-@interface SYNSearchViewController : SYNAbstractViewController
+@interface SYNDiscoverViewController : SYNAbstractViewController
 
 @end

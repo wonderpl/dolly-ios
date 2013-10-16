@@ -21,6 +21,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNActivityViewController.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "SYNDiscoverViewController.h"
 #import "SYNFriendsViewController.h"
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
@@ -92,18 +93,20 @@
     
     // == Friends Page == //
     
-    SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
+    //SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
     
     // == Activity Page == //
     
     SYNActivityViewController* activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];;
-    
-    
     profileViewController.channelOwner = self.appDelegate.currentUser;
+    
+    // == Discovery (Search) Page == //
+    
+    SYNDiscoverViewController* searchViewController = [[SYNDiscoverViewController alloc] initWithViewId:kDiscoverViewId];
     
     // == Hold the vc locally
     
-    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController, friendsViewController, activityViewController];
+    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController, searchViewController, activityViewController];
     
     
     // == Set the first vc

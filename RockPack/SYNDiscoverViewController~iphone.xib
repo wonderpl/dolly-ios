@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNDiscoverViewController">
             <connections>
                 <outlet property="autocompleteTableView" destination="cx7-DP-WVU" id="HeX-r9-hcU"/>
                 <outlet property="categoriesCollectionView" destination="fhE-V4-G8V" id="YX8-7v-zh8"/>

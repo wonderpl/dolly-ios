@@ -45,13 +45,14 @@
 #define kFeedViewId                 NSLocalizedString(@"core_nav_section_feed", nil)
 #define kChannelsViewId             NSLocalizedString(@"core_nav_section_channels", nil)
 #define kProfileViewId              NSLocalizedString(@"core_nav_section_profile", nil)
-#define kSearchViewId               @"Search"
+#define kSearchViewId               NSLocalizedString(@"core_nav_section_search", nil)
+#define kDiscoverViewId             NSLocalizedString(@"core_nav_section_discover", nil)
 #define kExistingChannelsViewId     @"ExistingChannels"
-#define kChannelDetailsViewId       @"ChannelDetails"
+#define kChannelDetailsViewId       NSLocalizedString(@"core_nav_section_channel_details", nil)
 #define kSideNavigationViewId       @"kSideNavigationViewId"
 #define kSubscribersListViewId      @"kSubscribersListViewId"
 #define kFriendsViewId              NSLocalizedString(@"core_nav_section_friends", nil)
-#define kActivityViewId         NSLocalizedString(@"core_nav_section_activity", nil)
+#define kActivityViewId             NSLocalizedString(@"core_nav_section_activity", nil)
 
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"

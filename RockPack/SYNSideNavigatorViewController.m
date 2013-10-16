@@ -88,8 +88,8 @@ typedef void (^SideNavigationMotionBlock)(void);
                  kSideNavAction: kChannelsViewId},
                 @{kSideNavTitle: NSLocalizedString(@"core_nav_section_profile", nil),
                  kSideNavAction: kProfileViewId},
-                @{kSideNavTitle: NSLocalizedString(@"core_nav_section_friends", nil),
-                  kSideNavAction: kFriendsViewId},
+                @{kSideNavTitle: NSLocalizedString(@"core_nav_section_discover", nil),
+                  kSideNavAction: kDiscoverViewId},
                 @{kSideNavTitle: NSLocalizedString(@"core_nav_section_notifications", nil),
                  kSideNavAction: kActivityViewId}];
         
