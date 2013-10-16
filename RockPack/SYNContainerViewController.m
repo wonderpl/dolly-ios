@@ -90,6 +90,8 @@
         profileViewController.hideUserProfile = YES;
     }
     
+
+    profileViewController.channelOwner = self.appDelegate.currentUser;
     
     // == Friends Page == //
     
