@@ -23,7 +23,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNPageView.h"
 #import "SYNSearchBoxViewController.h"
 #import "SYNSearchRootViewController.h"
 #import "SYNSideNavigatorViewController.h"
@@ -46,7 +45,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic) BOOL searchIsInProgress;
 @property (nonatomic) BOOL showingBackButton;
 @property (nonatomic) NavigationButtonsAppearance currentNavigationButtonsAppearance;
-@property (nonatomic, strong) IBOutlet SYNPageView* pagePositionIndicatorView;
 @property (nonatomic, strong) IBOutlet UIButton* headerButton;
 @property (nonatomic, strong) IBOutlet UIButton* hideNavigationButton;
 @property (nonatomic, strong) IBOutlet UILabel* pageTitleLabel;
@@ -751,8 +749,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         
         self.pageTitleLabel.hidden = NO;
-        
-        self.pagePositionIndicatorView.hidden = NO;
+
         self.backButtonControl.hidden = NO;
     }
     else
@@ -762,7 +759,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.sideNavigationButton.hidden = YES;
         self.closeSearchButton.hidden = YES;
         self.pageTitleLabel.hidden = YES;
-        self.pagePositionIndicatorView.hidden = YES;
         self.backButtonControl.hidden = YES;
         self.sideNavigatorViewController.state = SideNavigationStateHidden;
     }
@@ -856,7 +852,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) hideTitleAndDots: (NSNotification*) note
 {
-    self.pagePositionIndicatorView.alpha = 0.0f;
     self.pageTitleLabel.alpha = 0.0f;
 }
 
@@ -1169,7 +1164,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     
     self.pageTitleLabel.alpha = !targetAlpha;
-    self.pagePositionIndicatorView.alpha = !targetAlpha;
     
     
     

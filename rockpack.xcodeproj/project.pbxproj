@@ -240,7 +240,6 @@
 		01982589162B605A00216900 /* SYNTabImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01982588162B605A00216900 /* SYNTabImageView.m */; };
 		019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 019825F0162C94A300216900 /* UIColor+SYNColor.m */; };
 		019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 019825F3162C94B500216900 /* UIFont+SYNFont.m */; };
-		0198E46A176F0AEC00AFBE2F /* SYNPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198E469176F0AEC00AFBE2F /* SYNPageView.m */; };
 		0199E486179D6ED900448C95 /* NSObject+AutoDescribe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199E485179D6ED900448C95 /* NSObject+AutoDescribe.m */; };
 		0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F13916721A4500E479C6 /* SYNFeedRootViewController.m */; };
 		019E6A61165FD99A002B312A /* SYNOAuth2Credential.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E6A60165FD99A002B312A /* SYNOAuth2Credential.m */; };
@@ -1715,8 +1714,6 @@
 		019825F0162C94A300216900 /* UIColor+SYNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SYNColor.m"; sourceTree = "<group>"; };
 		019825F2162C94B500216900 /* UIFont+SYNFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+SYNFont.h"; sourceTree = "<group>"; };
 		019825F3162C94B500216900 /* UIFont+SYNFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+SYNFont.m"; sourceTree = "<group>"; };
-		0198E468176F0AEC00AFBE2F /* SYNPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPageView.h; sourceTree = "<group>"; };
-		0198E469176F0AEC00AFBE2F /* SYNPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPageView.m; sourceTree = "<group>"; };
 		0199E484179D6ED900448C95 /* NSObject+AutoDescribe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AutoDescribe.h"; sourceTree = "<group>"; };
 		0199E485179D6ED900448C95 /* NSObject+AutoDescribe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AutoDescribe.m"; sourceTree = "<group>"; };
 		0199F13816721A4500E479C6 /* SYNFeedRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedRootViewController.h; sourceTree = "<group>"; };
@@ -3793,11 +3790,9 @@
 		019824E31629CADE00216900 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE285DAD1725A20B00D995AB /* Slide In Messages */,
 				0110AE5F17DF383C00DC7724 /* SYNProgressView.m */,
 				0110AE6017DF383C00DC7724 /* SYNProgressView.h */,
-				BE285DAD1725A20B00D995AB /* Slide In Messages */,
-				0198E468176F0AEC00AFBE2F /* SYNPageView.h */,
-				0198E469176F0AEC00AFBE2F /* SYNPageView.m */,
 				011CC6A7164D19D800F02B6D /* SYNPassthroughView.h */,
 				011CC6A8164D19D800F02B6D /* SYNPassthroughView.m */,
 				012B4C9B17393A080019DA4C /* SYNPopoverBackgroundView.h */,
@@ -7448,7 +7443,6 @@
 				BE3983D41768B6D800EE9C7B /* SYNOnBoardingPopoverQueueController.m in Sources */,
 				0154E8481768E268001C7B75 /* SYNTimer.m in Sources */,
 				01A02E76176E1EA5001F14BD /* UIImage+Monochrome.m in Sources */,
-				0198E46A176F0AEC00AFBE2F /* SYNPageView.m in Sources */,
 				BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */,
 				BEBFD0921779F0F800C90544 /* SYNCaution.m in Sources */,
 				BEBFD0951779F25800C90544 /* SYNCautionMessageView.m in Sources */,
