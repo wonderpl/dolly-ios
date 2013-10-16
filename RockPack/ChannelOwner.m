@@ -102,7 +102,7 @@
     
     // Simple objects
     self.thumbnailURL = [dictionary objectForKey: @"avatar_thumbnail_url"
-                                     withDefault: @"http://localhost"];
+                                     withDefault: @""];
     
     self.displayName = [dictionary objectForKey: @"display_name"
                                     withDefault: @""];
@@ -337,7 +337,7 @@
 - (NSString *) thumbnailSmallUrl
 {
     return [self.thumbnailURL stringByReplacingOccurrencesOfString: kImageSizeStringReplace
-            withString: @"thumbnail_small"];
+                                                        withString: @"thumbnail_small"];
 }
 
 
@@ -350,7 +350,7 @@
 - (NSString *) thumbnailLargeUrl
 {
     return [self.thumbnailURL stringByReplacingOccurrencesOfString: kImageSizeStringReplace
-            withString: @"thumbnail_large"];
+                                                        withString: @"thumbnail_large"];
 }
 
 @end
