@@ -424,10 +424,6 @@
 		01F8E78016B03A7C000D44B9 /* SYNVideoViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */; };
 		01F8E78316B0554B000D44B9 /* ButtonClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E78116B0554B000D44B9 /* ButtonClose.png */; };
 		01F8E78416B0554B000D44B9 /* ButtonClose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E78216B0554B000D44B9 /* ButtonClose@2x.png */; };
-		01F94F0D17608396006C024D /* SYNTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F94F0C17608396006C024D /* SYNTextField.m */; };
-		01F94F1117609608006C024D /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F94F1017609608006C024D /* SYNTextFieldLogin.m */; };
-		01F94F1417609F9B006C024D /* SYNTextFieldLoginiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F94F1317609F9A006C024D /* SYNTextFieldLoginiPhone.m */; };
-		01F94F171760A2D2006C024D /* SYNTextFieldSearchIPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F94F161760A2D2006C024D /* SYNTextFieldSearchIPhone.m */; };
 		01F94F2A1761EE56006C024D /* ButtonCreateDisabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F241761EE56006C024D /* ButtonCreateDisabled.png */; };
 		01F94F2B1761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */; };
 		01F94F2C1761EE56006C024D /* ButtonCreateDisabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */; };
@@ -1934,14 +1930,6 @@
 		01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNVideoViewerViewController.xib; sourceTree = "<group>"; };
 		01F8E78116B0554B000D44B9 /* ButtonClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonClose.png; path = Assets/Images/ButtonClose.png; sourceTree = "<group>"; };
 		01F8E78216B0554B000D44B9 /* ButtonClose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonClose@2x.png"; path = "Assets/Images/ButtonClose@2x.png"; sourceTree = "<group>"; };
-		01F94F0B17608396006C024D /* SYNTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextField.h; sourceTree = "<group>"; };
-		01F94F0C17608396006C024D /* SYNTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextField.m; sourceTree = "<group>"; };
-		01F94F0F17609608006C024D /* SYNTextFieldLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLogin.h; sourceTree = "<group>"; };
-		01F94F1017609608006C024D /* SYNTextFieldLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLogin.m; sourceTree = "<group>"; };
-		01F94F1217609F9A006C024D /* SYNTextFieldLoginiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginiPhone.h; sourceTree = "<group>"; };
-		01F94F1317609F9A006C024D /* SYNTextFieldLoginiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLoginiPhone.m; sourceTree = "<group>"; };
-		01F94F151760A2D1006C024D /* SYNTextFieldSearchIPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldSearchIPhone.h; sourceTree = "<group>"; };
-		01F94F161760A2D2006C024D /* SYNTextFieldSearchIPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldSearchIPhone.m; sourceTree = "<group>"; };
 		01F94F241761EE56006C024D /* ButtonCreateDisabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCreateDisabled.png; path = Assets/Images/ButtonCreateDisabled.png; sourceTree = "<group>"; };
 		01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x~iphone.png"; path = "Assets/Images/ButtonCreateDisabled@2x~iphone.png"; sourceTree = "<group>"; };
 		01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x.png"; path = "Assets/Images/ButtonCreateDisabled@2x.png"; sourceTree = "<group>"; };
@@ -4014,14 +4002,6 @@
 				BE7D353A171708F60085AB81 /* SYNRefreshButton.m */,
 				01982587162B605A00216900 /* SYNTabImageView.h */,
 				01982588162B605A00216900 /* SYNTabImageView.m */,
-				01F94F0B17608396006C024D /* SYNTextField.h */,
-				01F94F0C17608396006C024D /* SYNTextField.m */,
-				01F94F0F17609608006C024D /* SYNTextFieldLogin.h */,
-				01F94F1017609608006C024D /* SYNTextFieldLogin.m */,
-				01F94F1217609F9A006C024D /* SYNTextFieldLoginiPhone.h */,
-				01F94F1317609F9A006C024D /* SYNTextFieldLoginiPhone.m */,
-				01F94F151760A2D1006C024D /* SYNTextFieldSearchIPhone.h */,
-				01F94F161760A2D2006C024D /* SYNTextFieldSearchIPhone.m */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -7450,11 +7430,7 @@
 				BE0FF0321754C39D0088294F /* ISO8601DateFormatter.m in Sources */,
 				BE5D29EB17577E2800C00486 /* SYNFeedMessagesView.m in Sources */,
 				1F356185175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m in Sources */,
-				01F94F0D17608396006C024D /* SYNTextField.m in Sources */,
 				BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */,
-				01F94F1117609608006C024D /* SYNTextFieldLogin.m in Sources */,
-				01F94F1417609F9B006C024D /* SYNTextFieldLoginiPhone.m in Sources */,
-				01F94F171760A2D2006C024D /* SYNTextFieldSearchIPhone.m in Sources */,
 				BE3983D11768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m in Sources */,
 				BE3983D41768B6D800EE9C7B /* SYNOnBoardingPopoverQueueController.m in Sources */,
 				0154E8481768E268001C7B75 /* SYNTimer.m in Sources */,

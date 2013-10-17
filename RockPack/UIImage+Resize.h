@@ -10,11 +10,7 @@
 
 @interface UIImage (Resize)
 
-+ (UIImage*) imageWithImage: (UIImage*) image
-			   scaledToSize: (CGSize) newSize;
-
-- (NSData*) jpegDataForResizedImageWithMaxDimension: (CGFloat) maxDimension;
-
+// TODO: Remove this category once we have replaced avatar capture
 + (UIImage*) scaleAndRotateImage: (UIImage*) image
                      withMaxSize: (int) newSize;
 
