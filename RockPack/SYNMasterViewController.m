@@ -261,7 +261,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [self.headerButton addGestureRecognizer:leftSwipeGesture];
     [self.headerButton addGestureRecognizer:rightSwipeGesture];
     
-    self.pageTitleLabel.font = [UIFont boldRockpackFontOfSize:self.pageTitleLabel.font.pointSize];
+    self.pageTitleLabel.font = [UIFont regularCustomFontOfSize:self.pageTitleLabel.font.pointSize];
     self.pageTitleLabel.textColor = [UIColor colorWithRed:(40.0/255.0)
                                                     green:(45.0/255.0)
                                                      blue:(51.0/255.0)

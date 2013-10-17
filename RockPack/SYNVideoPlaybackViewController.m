@@ -600,7 +600,7 @@ static UIWebView* vimeoideoWebViewInstance;
     UILabel *timeLabel = [[UILabel alloc] initWithFrame: timeLabelFrame];
     timeLabel.textColor = [UIColor whiteColor];
     timeLabel.textAlignment = textAlignment;
-    timeLabel.font = [UIFont boldRockpackFontOfSize: 12.0f];
+    timeLabel.font = [UIFont regularCustomFontOfSize: 12.0f];
     timeLabel.backgroundColor = [UIColor clearColor];
     
     return timeLabel;

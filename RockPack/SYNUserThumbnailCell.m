@@ -17,8 +17,8 @@
 {
     [super awakeFromNib];
     
-    self.nameLabel.font = [UIFont rockpackFontOfSize: self.nameLabel.font.pointSize];
-    self.usernameLabel.font = [UIFont rockpackFontOfSize: self.usernameLabel.font.pointSize];
+    self.nameLabel.font = [UIFont lightCustomFontOfSize: self.nameLabel.font.pointSize];
+    self.usernameLabel.font = [UIFont lightCustomFontOfSize: self.usernameLabel.font.pointSize];
     
     self.nameLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.nameLabel.numberOfLines = 2;

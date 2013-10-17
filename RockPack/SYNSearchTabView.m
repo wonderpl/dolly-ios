@@ -74,7 +74,7 @@
         }
         
         titleLabel = [[UILabel alloc] initWithFrame: labelFrame];
-        titleLabel.font = [UIFont rockpackFontOfSize: IS_IPAD ? 14.0f: 12.0f];
+        titleLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 14.0f: 12.0f];
         titleLabel.textColor = offColor;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;

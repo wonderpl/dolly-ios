@@ -60,7 +60,7 @@
     
     self.backgroundImage.image = [[UIImage imageNamed: @"PanelMenuSecondLevel"] resizableImageWithCapInsets: UIEdgeInsetsMake(65, 0, 1, 0)];
     
-    self.titleLabel.font = [UIFont rockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     self.titleLabel.text = NSLocalizedString(@"SETTINGS",nil);
 	
 }

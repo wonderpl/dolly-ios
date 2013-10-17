@@ -181,7 +181,7 @@
             
             label = [[UILabel alloc] initWithFrame: CGRectZero];
             label.backgroundColor = [UIColor clearColor];
-            label.font = [UIFont boldRockpackFontOfSize: 14.0f];
+            label.font = [UIFont regularCustomFontOfSize: 14.0f];
             label.lineBreakMode = NSLineBreakByWordWrapping;
             label.textColor = [UIColor whiteColor];
             channelTitle = coverInfo[@"title"];
@@ -264,7 +264,7 @@
             
             label = [[UILabel alloc] initWithFrame: CGRectZero];
             label.backgroundColor = [UIColor clearColor];
-            label.font = [UIFont boldRockpackFontOfSize: 14.0f];
+            label.font = [UIFont regularCustomFontOfSize: 14.0f];
             label.lineBreakMode = NSLineBreakByWordWrapping;
             label.textColor = [UIColor whiteColor];
             channelTitle = coverInfo[@"title"];

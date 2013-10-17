@@ -122,8 +122,8 @@ typedef void (^SideNavigationMotionBlock)(void);
 {
     [super viewDidLoad];
     
-    self.userNameLabel.font = [UIFont rockpackFontOfSize: self.userNameLabel.font.pointSize];
-    self.nicknameLabel.font = [UIFont rockpackFontOfSize: self.nicknameLabel.font.pointSize];
+    self.userNameLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabel.font.pointSize];
+    self.nicknameLabel.font = [UIFont lightCustomFontOfSize: self.nicknameLabel.font.pointSize];
     
     self.navItemColor = [UIColor colorWithRed: (40.0/255.0)
                                         green: (45.0/255.0)
@@ -187,7 +187,7 @@ typedef void (^SideNavigationMotionBlock)(void);
         self.searchViewController.searchBoxView.searchTextField.delegate = self;
         [self.searchViewController.searchBoxView.integratedCloseButton addTarget:self action:@selector(closeSearch:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.navigationContainerTitleLabel.font = [UIFont rockpackFontOfSize:self.navigationContainerTitleLabel.font.pointSize];
+        self.navigationContainerTitleLabel.font = [UIFont lightCustomFontOfSize:self.navigationContainerTitleLabel.font.pointSize];
         
         //Correct Notif / friends screen layouts
         CGRect screenBoundsNavCont = self.view.bounds;

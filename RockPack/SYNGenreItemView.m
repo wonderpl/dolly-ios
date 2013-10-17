@@ -98,11 +98,11 @@
     
     if (type == TabItemTypeMain)
     {
-        fontToUse = [UIFont rockpackFontOfSize: 15.0f];
+        fontToUse = [UIFont lightCustomFontOfSize: 15.0f];
     }
     else
     {
-        fontToUse = [UIFont rockpackFontOfSize: 13.0f];
+        fontToUse = [UIFont lightCustomFontOfSize: 13.0f];
     }
     
     CGSize sizeToUse = [itemName sizeWithAttributes: @{NSFontAttributeName: fontToUse}];
@@ -153,26 +153,26 @@
     {
         if (isLandscape)
         {
-            fontToUse = [UIFont rockpackFontOfSize: kCategoriesTabFontSizeLandscape];
+            fontToUse = [UIFont lightCustomFontOfSize: kCategoriesTabFontSizeLandscape];
             offsetX = kCategoriesTabOffsetXLandscape;
             labelYOffset = kCategoriesTabLabelOffsetYLandscape;
         }
         else
         {
-            fontToUse = [UIFont rockpackFontOfSize: kCategoriesTabFontSizePortrait];
+            fontToUse = [UIFont lightCustomFontOfSize: kCategoriesTabFontSizePortrait];
             offsetX = kCategoriesTabOffsetXPortrait;
             labelYOffset = kCategoriesTabLabelOffsetYPortrait;
         }
     }
     else if (isLandscape)
     {
-        fontToUse = [UIFont rockpackFontOfSize: kCategoriesSubTabFontSizeLandscape];
+        fontToUse = [UIFont lightCustomFontOfSize: kCategoriesSubTabFontSizeLandscape];
         offsetX = kCategoriesTabOffsetXLandscape;
         labelYOffset = kCategoriesSubTabLabelOffsetY;
     }
     else
     {
-        fontToUse = [UIFont rockpackFontOfSize: kCategoriesSubTabFontSizePortrait];
+        fontToUse = [UIFont lightCustomFontOfSize: kCategoriesSubTabFontSizePortrait];
         offsetX = kCategoriesTabOffsetXPortrait;
         labelYOffset = kCategoriesSubTabLabelOffsetY;
     }

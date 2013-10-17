@@ -72,7 +72,7 @@
             fieldRect.size.width -= 28.0 * 2;
             fieldRect.size.height -= 14.0 * 2;
             self.searchTextField = [[SYNTextField alloc] initWithFrame:fieldRect];
-            self.searchTextField.font = [UIFont rockpackFontOfSize:26.0];
+            self.searchTextField.font = [UIFont lightCustomFontOfSize:26.0];
         }
         else
         {
@@ -102,7 +102,7 @@
             // == Label == //
             self.searchTextField = [[SYNTextField alloc] initWithFrame: CGRectMake(52, 18, 248, 30)];
             
-            self.searchTextField.font = [UIFont rockpackFontOfSize: 16.0];
+            self.searchTextField.font = [UIFont lightCustomFontOfSize: 16.0];
             self.searchTextField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
             self.searchTextField.layer.shadowOpacity = 1.0;
             self.searchTextField.layer.shadowColor = [UIColor whiteColor].CGColor;
@@ -194,7 +194,7 @@
         self.searchFieldFrameImageView.image = [[UIImage imageNamed: @"FieldSearch"]
                                                 resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
         
-        self.searchTextField.font = [UIFont rockpackFontOfSize: self.searchTextField.font.pointSize];
+        self.searchTextField.font = [UIFont lightCustomFontOfSize: self.searchTextField.font.pointSize];
         self.searchTextField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
         self.searchTextField.layer.shadowOpacity = 1.0;
         self.searchTextField.layer.shadowColor = [UIColor whiteColor].CGColor;

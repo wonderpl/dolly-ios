@@ -36,7 +36,7 @@
     
     // ====
     
-    self.textLabel.font = [UIFont rockpackFontOfSize:self.textLabel.font.pointSize];
+    self.textLabel.font = [UIFont lightCustomFontOfSize:self.textLabel.font.pointSize];
     
     [self.textLabel sizeToFit];
     

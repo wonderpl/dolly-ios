@@ -52,7 +52,7 @@
             titleRect.origin.x = 10.0;
             titleRect.origin.y = 10.0;
             titleLabel.frame = titleRect;
-            titleLabel.font = [UIFont rockpackFontOfSize: 20.0];
+            titleLabel.font = [UIFont customFontOfSize: 20.0];
             titleLabel.textColor = [UIColor lightGrayColor];
             titleLabel.textAlignment = NSTextAlignmentLeft;
             titleLabel.backgroundColor = [UIColor clearColor];

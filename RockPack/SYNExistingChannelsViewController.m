@@ -53,10 +53,10 @@
 {
     [super viewDidLoad];
     
-    self.autopostTitleLabel.font = [UIFont rockpackFontOfSize: self.autopostTitleLabel.font.pointSize];
+    self.autopostTitleLabel.font = [UIFont lightCustomFontOfSize: self.autopostTitleLabel.font.pointSize];
     
-    self.autopostNoButton.titleLabel.font = [UIFont boldRockpackFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
-    self.autopostYesButton.titleLabel.font = [UIFont boldRockpackFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
+    self.autopostNoButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
+    self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
     
     // We need to use a custom layout (as due to the deletion/wobble logic used elsewhere)
     if (IS_IPAD)
@@ -91,7 +91,7 @@
     
     self.channelThumbnailCollectionView.scrollsToTop = NO;
 
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
     

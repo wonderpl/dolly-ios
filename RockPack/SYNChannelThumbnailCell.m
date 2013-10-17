@@ -29,9 +29,9 @@
 {
     [super awakeFromNib];
     
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
-    self.displayNameLabel.font = [UIFont rockpackFontOfSize: self.displayNameLabel.font.pointSize];
-    self.byLabel.font = [UIFont rockpackFontOfSize: self.byLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
+    self.displayNameLabel.font = [UIFont lightCustomFontOfSize: self.displayNameLabel.font.pointSize];
+    self.byLabel.font = [UIFont lightCustomFontOfSize: self.byLabel.font.pointSize];
     
     self.deleteButton.hidden = YES;
     

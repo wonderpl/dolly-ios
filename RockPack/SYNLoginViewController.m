@@ -108,16 +108,16 @@
     activityIndicator.hidesWhenStopped = YES;
     
         // == Setup Fonts for labels (except Input Fields)
-    UIFont* rockpackBigLabelFont = [UIFont rockpackFontOfSize: 20];
+    UIFont* rockpackBigLabelFont = [UIFont lightCustomFontOfSize: 20];
         
     memberLabel.font = rockpackBigLabelFont;
     areYouNewLabel.font = rockpackBigLabelFont;
         
-    passwordForgottenLabel.font = [UIFont rockpackFontOfSize: 14.0];
-    secondaryFacebookMessage.font = [UIFont rockpackFontOfSize: 20.0];
-    termsAndConditionsLabel.font = [UIFont rockpackFontOfSize: 14.0];
+    passwordForgottenLabel.font = [UIFont lightCustomFontOfSize: 14.0];
+    secondaryFacebookMessage.font = [UIFont lightCustomFontOfSize: 20.0];
+    termsAndConditionsLabel.font = [UIFont lightCustomFontOfSize: 14.0];
     termsAndConditionsLabelSide.font = termsAndConditionsLabel.font;
-    wellSendYouLabel.font = [UIFont rockpackFontOfSize: 16.0];
+    wellSendYouLabel.font = [UIFont lightCustomFontOfSize: 16.0];
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
@@ -161,7 +161,7 @@
         
     // == Setup Input Fields
         
-    UIFont* rockpackInputFont = [UIFont rockpackFontOfSize: 20];
+    UIFont* rockpackInputFont = [UIFont lightCustomFontOfSize: 20];
     NSArray* textFieldsToSetup = @[emailInputField, userNameInputField, passwordInputField,
                                        ddInputField, mmInputField, yyyyInputField];
         

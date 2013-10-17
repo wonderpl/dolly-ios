@@ -67,8 +67,8 @@
 	<string>secure.demo.rockpack.com</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>DINNextLTPro-Regular.otf</string>
-		<string>DINNextLTPro-Bold.otf</string>
+		<string>ProximaNova-Light.otf</string>
+		<string>ProximaNova-Regular.otf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>

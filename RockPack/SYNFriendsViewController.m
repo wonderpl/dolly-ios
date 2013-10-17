@@ -69,16 +69,16 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     [self.friendsCollectionView registerNib: thumbnailCellNib
                  forCellWithReuseIdentifier: @"SYNFriendThumbnailCell"];
     
-    self.preLoginLabel.font = [UIFont rockpackFontOfSize:self.preLoginLabel.font.pointSize];
+    self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
     
     [self.activityIndicator hidesWhenStopped];
     
-    self.onFacebookButton.titleLabel.font = [UIFont rockpackFontOfSize: IS_IPAD ? 14.0f : 12.0f];
+    self.onFacebookButton.titleLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 14.0f : 12.0f];
     self.onFacebookButton.contentEdgeInsets = UIEdgeInsetsMake(IS_IPAD ? 7.0f : 5.0, 0.0f, 0.0f, 0.0f);
-    self.onRockpackButton.titleLabel.font = [UIFont rockpackFontOfSize: IS_IPAD ? 14.0f : 12.0f];
+    self.onRockpackButton.titleLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 14.0f : 12.0f];
     self.onRockpackButton.contentEdgeInsets = UIEdgeInsetsMake(IS_IPAD ? 7.0f : 5.0, 0.0f, 0.0f, 0.0f);
     
-    self.searchField.font = [UIFont rockpackFontOfSize: self.searchField.font.pointSize];
+    self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -113,7 +113,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    self.followInviteLabel.font = [UIFont rockpackFontOfSize:self.followInviteLabel.font.pointSize];
+    self.followInviteLabel.font = [UIFont lightCustomFontOfSize:self.followInviteLabel.font.pointSize];
     
     self.searchFieldBackground.image = [[UIImage imageNamed: @"FieldSearch"]
                                         resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];

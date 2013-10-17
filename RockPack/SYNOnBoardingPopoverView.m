@@ -73,7 +73,7 @@
         
         UILabel* label = [[UILabel alloc] init];
         
-        label.font = [UIFont rockpackFontOfSize:fontSize];
+        label.font = [UIFont lightCustomFontOfSize:fontSize];
         label.shadowColor = [UIColor colorWithWhite:1.0f/255.0f alpha:0.15f];
         label.shadowOffset = CGSizeMake(0.0f, 1.0f);
         label.lineBreakMode = NSLineBreakByWordWrapping;

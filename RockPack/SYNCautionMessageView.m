@@ -44,8 +44,8 @@
         
         self.backgroundColor = [UIColor colorWithPatternImage: bgImage];
         
-        UIFont *titleFontToUse = [UIFont boldRockpackFontOfSize: CAUTION_TITLE_FONT_SIZE];
-        UIFont *messageFontToUse = [UIFont rockpackFontOfSize: CAUTION_MESSAGE_FONT_SIZE];
+        UIFont *titleFontToUse = [UIFont regularCustomFontOfSize: CAUTION_TITLE_FONT_SIZE];
+        UIFont *messageFontToUse = [UIFont lightCustomFontOfSize: CAUTION_MESSAGE_FONT_SIZE];
         self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin; // center
         
         // == title label == //
@@ -117,7 +117,7 @@
                                     forState: UIControlStateNormal];
             
             [self.actionButton setTitleEdgeInsets: UIEdgeInsetsMake(4.0, 0.0, 0.0, 0.0)];
-            self.actionButton.titleLabel.font = [UIFont boldRockpackFontOfSize: CAUTION_BUTTON_FONT_SIZE];
+            self.actionButton.titleLabel.font = [UIFont regularCustomFontOfSize: CAUTION_BUTTON_FONT_SIZE];
             
             [self.actionButton setTitleShadowColor: [UIColor blackColor]
                                           forState: UIControlStateNormal];
@@ -151,7 +151,7 @@
         [self.skipButton setTitleColor: [UIColor blackColor]
                               forState: UIControlStateNormal];
         
-        self.skipButton.titleLabel.font = [UIFont boldRockpackFontOfSize: CAUTION_BUTTON_FONT_SIZE];
+        self.skipButton.titleLabel.font = [UIFont regularCustomFontOfSize: CAUTION_BUTTON_FONT_SIZE];
         
         [self.skipButton setTitleShadowColor: [UIColor blackColor]
                                     forState: UIControlStateNormal];

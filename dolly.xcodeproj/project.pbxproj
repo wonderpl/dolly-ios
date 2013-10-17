@@ -121,6 +121,8 @@
 		012502C516CA99710029C7C8 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C416CA99710029C7C8 /* Accounts.framework */; };
 		012502C716CA997A0029C7C8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C616CA99790029C7C8 /* Social.framework */; };
 		0126331F162E2A060009FF9C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126331E162E2A060009FF9C /* MediaPlayer.framework */; };
+		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
+		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
 		012B4C9D17393A080019DA4C /* SYNPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */; };
 		012B4CA617393CA10019DA4C /* ButtonChooseExistingDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4C9E17393CA10019DA4C /* ButtonChooseExistingDefault.png */; };
 		012B4CA717393CA10019DA4C /* ButtonChooseExistingDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4C9F17393CA10019DA4C /* ButtonChooseExistingDefault@2x.png */; };
@@ -184,8 +186,6 @@
 		01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */; };
 		01677E0E16554AB500B1B1D8 /* ButtonBackHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */; };
 		01677E0F16554AB500B1B1D8 /* ButtonBackHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF916554AB500B1B1D8 /* ButtonBackHighlighted@2x.png */; };
-		01677F1616554D2700B1B1D8 /* DINNextLTPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01677F1416554D2700B1B1D8 /* DINNextLTPro-Bold.otf */; };
-		01677F1716554D2700B1B1D8 /* DINNextLTPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01677F1516554D2700B1B1D8 /* DINNextLTPro-Regular.otf */; };
 		016B97151770C3DE00892211 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97141770C3DE00892211 /* CFNetwork.framework */; };
 		016B97171770C42200892211 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97161770C42200892211 /* StoreKit.framework */; };
 		0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717D165550A900A3C7C4 /* SystemConfiguration.framework */; };
@@ -1542,6 +1542,8 @@
 		012502C416CA99710029C7C8 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		012502C616CA99790029C7C8 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		0126331E162E2A060009FF9C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Light.otf"; path = "Assets/Fonts/ProximaNova-Light.otf"; sourceTree = "<group>"; };
+		0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Assets/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		012B4C9B17393A080019DA4C /* SYNPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopoverBackgroundView.h; sourceTree = "<group>"; };
 		012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopoverBackgroundView.m; sourceTree = "<group>"; };
 		012B4C9E17393CA10019DA4C /* ButtonChooseExistingDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonChooseExistingDefault.png; path = Assets/Images/ButtonChooseExistingDefault.png; sourceTree = "<group>"; };
@@ -1636,8 +1638,6 @@
 		01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackHighlighted.png; path = Assets/Images/ButtonBackHighlighted.png; sourceTree = "<group>"; };
 		01677DF916554AB500B1B1D8 /* ButtonBackHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonBackHighlighted@2x.png"; path = "Assets/Images/ButtonBackHighlighted@2x.png"; sourceTree = "<group>"; };
 		01677F1216554CFD00B1B1D8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Assets/Images/iTunesArtwork; sourceTree = "<group>"; };
-		01677F1416554D2700B1B1D8 /* DINNextLTPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DINNextLTPro-Bold.otf"; path = "Assets/Fonts/DINNextLTPro-Bold.otf"; sourceTree = "<group>"; };
-		01677F1516554D2700B1B1D8 /* DINNextLTPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DINNextLTPro-Regular.otf"; path = "Assets/Fonts/DINNextLTPro-Regular.otf"; sourceTree = "<group>"; };
 		016B97141770C3DE00892211 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		016B97161770C42200892211 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0170717D165550A900A3C7C4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -3919,8 +3919,8 @@
 		019824FB1629D19600216900 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				01677F1416554D2700B1B1D8 /* DINNextLTPro-Bold.otf */,
-				01677F1516554D2700B1B1D8 /* DINNextLTPro-Regular.otf */,
+				0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */,
+				0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -6064,8 +6064,7 @@
 				01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */,
 				01677E0E16554AB500B1B1D8 /* ButtonBackHighlighted.png in Resources */,
 				01677E0F16554AB500B1B1D8 /* ButtonBackHighlighted@2x.png in Resources */,
-				01677F1616554D2700B1B1D8 /* DINNextLTPro-Bold.otf in Resources */,
-				01677F1716554D2700B1B1D8 /* DINNextLTPro-Regular.otf in Resources */,
+				0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */,
 				01B0A968166CE22300CAA235 /* SYNVideoThumbnailRegularCell.xib in Resources */,
 				01B0A96C166CEC4D00CAA235 /* BackgroundVideoThumbnailRegular@2x.png in Resources */,
 				1F5FAED417E73F8700205F3F /* ButtonConfirmAddToPackHighlighted@2x.png in Resources */,
@@ -6315,6 +6314,7 @@
 				01ABBAD7172002E6007E4462 /* ChannelDetailOverlayBackground@2x.png in Resources */,
 				01ABBADC17200992007E4462 /* PanelVideoFeedLandscape.png in Resources */,
 				01ABBADD17200992007E4462 /* PanelVideoFeedLandscape@2x.png in Resources */,
+				0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */,
 				01ABBADE17200992007E4462 /* PanelVideoFeedPortrait.png in Resources */,
 				01ABBADF17200992007E4462 /* PanelVideoFeedPortrait@2x.png in Resources */,
 				38C3FA7417203D6600F126B1 /* PanelDayPortrait.png in Resources */,

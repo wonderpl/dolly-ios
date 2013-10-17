@@ -41,7 +41,7 @@
 {
     if (self = [super init])
     {
-        UIFont* fontToUse = [UIFont rockpackFontOfSize: IS_IPHONE ? 14.0f : 18.0f ];
+        UIFont* fontToUse = [UIFont lightCustomFontOfSize: IS_IPHONE ? 14.0f : 18.0f ];
         
         CGRect labelFrame = CGRectZero;
         

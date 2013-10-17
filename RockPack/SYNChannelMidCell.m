@@ -55,7 +55,7 @@
     self.touch.delegate = self;
     [self addGestureRecognizer: self.touch];
     
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     self.specialSelected = NO;
     self.deleteButton.layer.opacity = 0.0f;
