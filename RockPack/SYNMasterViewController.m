@@ -30,6 +30,7 @@
 #import "SYNVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
+#import "SYNTabsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kMovableViewOffX -58
@@ -59,6 +60,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) UINavigationController* mainNavigationController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
 @property (nonatomic, strong) UIView* accountSettingsCoverView;
+@property (nonatomic, strong) SYNTabsViewController* tabsViewController;
 
 @property (nonatomic, strong) IBOutlet UIView* headerContainerView;
 
@@ -77,13 +79,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         
         
-        // == main navigation == //
+        // == Main UINavigationController == //
         
         self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:root];
         self.mainNavigationController.navigationBarHidden = YES;
         self.mainNavigationController.delegate = self;
         self.mainNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-//        self.mainNavigationController.wantsFullScreenLayout = YES;
         
         appDelegate.viewStackManager.navigationController = self.mainNavigationController;
         
@@ -99,10 +100,16 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.sideNavigatorViewController.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         
         self.sideNavigatorViewController.user = appDelegate.currentUser;
-        
-        
-        
         [self addChildViewController:self.sideNavigatorViewController];
+        
+        // == Tabs == //
+        
+        SYNTabsViewController* tabsViewController = [[SYNTabsViewController alloc] init];
+        
+        [self addChildViewController:tabsViewController];
+        
+        self.tabsViewController = tabsViewController;
+        
         
         
         // == Setup ViewStack and Navigation Managers == //
@@ -113,6 +120,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         appDelegate.navigationManager.masterController = self;
         appDelegate.navigationManager.containerController = root;
         appDelegate.navigationManager.sideNavigationController = self.sideNavigatorViewController;
+        appDelegate.navigationManager.tabsViewController = self.tabsViewController;
+        
+        
         
     
         // == Search Box == //

@@ -11,6 +11,7 @@
 #import "SYNContainerViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNSideNavigatorViewController.h"
+#import "SYNTabsViewController.h"
 
 @implementation SYNNavigationManager
 
@@ -19,17 +20,33 @@
     return [[SYNNavigationManager alloc] init];
 }
 
--(void)navigateToPage:(NSInteger)index
-{
-    
-}
 -(void)navigateToPageByName:(NSString*)pageName
 {
     if(!pageName)
         return;
     
+    NSInteger index = [self.containerController indexOfControllerByName:pageName];
+    [self navigateToPage:index];
     
     
+}
+
+-(void)navigateToPage:(NSInteger)index
+{
+    if(index < 0 || index > self.containerController.viewControllers.count)
+        return;
+    
+    
+    // Set to the correct tab
+    // note: it is a little convoluted for tabs to call this class to change itself but it allows for extra checking and synching the views with the state of the app
+    
+    for (UIButton* tab in self.tabsViewController.tabs)
+        tab.highlighted = (BOOL)(tab.tag == index + 1);
+    
+    
+    self.sideNavigationController.state = SideNavigationStateHidden;
+    
+    [self.containerController navigateToPage:index];
     
     // TODO: Check if it is changed and keep (refactor) accordingly
     //    if (self.showingBackButton)
@@ -40,11 +57,8 @@
     //        [self showBackButton:NO];
     //    }
     
-    //Scroll to the requested page
     
-    [self.containerController navigateToPageByName:pageName];
-    
-    self.sideNavigationController.state = SideNavigationStateHidden;
 }
+
 
 @end

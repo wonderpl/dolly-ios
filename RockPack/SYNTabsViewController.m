@@ -8,8 +8,12 @@
 
 #import "SYNTabsViewController.h"
 #import "AppConstants.h"
+#import "SYNAppDelegate.h"
 
 @interface SYNTabsViewController ()
+{
+    SYNAppDelegate* appDelegate;
+}
 
 @property (nonatomic, strong) NSArray* tabsData;
 
@@ -30,7 +34,7 @@
     
     // == Populate Tabs == //
     
-    
+    appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     
 }
@@ -38,30 +42,14 @@
 
 -(IBAction)tabButtonPressed:(UIButton*)tabButton
 {
-    switch (tabButton.tag) {
-        case 1:
-            
-            break;
-        case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        case 4:
-            
-            break;
-        case 5:
-            
-            break;
-        default:
-            DebugLog(@"Tab with unknown tag %i clicked", tabButton.tag);
-            break;
-            
-    }
-    
+    // tags are 1 indexed
+    [appDelegate.navigationManager navigateToPageByName:self.tabsData[tabButton.tag-1]];
 }
 
+-(NSArray*)tabs
+{
+    return self.view.subviews;
+}
 
 
 @end
