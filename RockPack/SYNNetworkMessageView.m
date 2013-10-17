@@ -85,7 +85,7 @@
 -(void)setText:(NSString *)text
 {
     NSString* capsText = [text uppercaseString];
-    CGSize textSize = [capsText sizeWithFont:self.errorLabel.font];
+    CGSize textSize = [capsText sizeWithAttributes: @{NSFontAttributeName: self.errorLabel.font}];
     
     CGRect labelFrame = self.errorLabel.frame;
     labelFrame.size = textSize;

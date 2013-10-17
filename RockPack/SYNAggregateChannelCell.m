@@ -186,9 +186,17 @@
             label.textColor = [UIColor whiteColor];
             channelTitle = coverInfo[@"title"];
             
-            expectedLabelSize = [channelTitle sizeWithFont: label.font
-                                         constrainedToSize: CGSizeMake(containerRect.size.width, 500.0)
-                                             lineBreakMode: label.lineBreakMode];
+            NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: channelTitle
+                                                                                  attributes: @{NSFontAttributeName: label.font}];
+            
+            CGRect rect = [attributedText boundingRectWithSize: (CGSize){containerRect.size.width, CGFLOAT_MAX}
+                                                       options: NSStringDrawingUsesLineFragmentOrigin
+                                                       context: nil];
+            
+            CGFloat height = ceilf(rect.size.height);
+            CGFloat width  = ceilf(rect.size.width);
+            
+            CGSize expectedLabelSize = (CGSize){width, height};
             
             label.frame = CGRectMake(containerRect.origin.x + 6.0,
                                      (containerRect.size.height) - (expectedLabelSize.height) - (IS_IPHONE ? 28.0f : 0.0f),
@@ -261,9 +269,17 @@
             label.textColor = [UIColor whiteColor];
             channelTitle = coverInfo[@"title"];
             
-            expectedLabelSize = [channelTitle sizeWithFont: label.font
-                                         constrainedToSize: CGSizeMake(containerRect.size.width, 500.0)
-                                             lineBreakMode: label.lineBreakMode];
+            NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: channelTitle
+                                                                                  attributes: @{NSFontAttributeName: label.font}];
+            
+            CGRect rect = [attributedText boundingRectWithSize: (CGSize){containerRect.size.width, CGFLOAT_MAX}
+                                                       options: NSStringDrawingUsesLineFragmentOrigin
+                                                       context: nil];
+            
+            CGFloat height = ceilf(rect.size.height);
+            CGFloat width  = ceilf(rect.size.width);
+            
+            CGSize expectedLabelSize = (CGSize){width, height};
             
             label.frame = CGRectMake(containerRect.origin.x + 6.0, (containerRect.origin.y + containerRect.size.height) - (expectedLabelSize.height), expectedLabelSize.width, expectedLabelSize.height);
             label.text = channelTitle;

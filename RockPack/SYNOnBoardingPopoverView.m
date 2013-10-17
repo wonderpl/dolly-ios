@@ -87,9 +87,17 @@
         
         label.shadowColor = [UIColor colorWithWhite:0.0/255.0 alpha:0.15];
         
-        CGSize textSize = [message sizeWithFont:label.font
-                                       forWidth:labelRect.size.width
-                                  lineBreakMode:label.lineBreakMode];
+        NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: message
+                                                                              attributes: @{NSFontAttributeName: label.font}];
+        
+        CGRect rect = [attributedText boundingRectWithSize: (CGSize){labelRect.size.width, CGFLOAT_MAX}
+                                                   options: NSStringDrawingUsesLineFragmentOrigin
+                                                   context: nil];
+        
+        CGFloat height = ceilf(rect.size.height);
+        CGFloat width  = ceilf(rect.size.width);
+        
+        CGSize textSize = (CGSize){width, height};
         
         labelRect.size.height = textSize.height * label.numberOfLines;
         

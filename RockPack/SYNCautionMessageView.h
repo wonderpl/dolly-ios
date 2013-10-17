@@ -6,23 +6,20 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SYNCaution.h"
+#import <UIKit/UIKit.h>
 
 @interface SYNCautionMessageView : UIView
 
-- (id) initWithCaution:(SYNCaution*)caution;
-+ (id) withCaution:(SYNCaution*)caution;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *messageLabel;
+@property (nonatomic, strong) UIButton *skipButton;
+@property (nonatomic, strong) UIButton *actionButton;
+@property (nonatomic, strong) SYNCaution *caution;
 
-@property (nonatomic, strong) UILabel* titleLabel;
-@property (nonatomic, strong) UILabel* messageLabel;
+- (id) initWithCaution: (SYNCaution *) caution;
++ (id) withCaution: (SYNCaution *) caution;
 
-@property (nonatomic, strong) UIButton* skipButton;
-@property (nonatomic, strong) UIButton* actionButton;
-
-@property (nonatomic, strong) SYNCaution* caution;
-
--(void) presentInView:(UIView*)container;
-
+- (void) presentInView: (UIView *) container;
 
 @end
