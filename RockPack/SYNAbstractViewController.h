@@ -124,4 +124,5 @@ typedef void (^SYNShareCompletionBlock)(void);
 -(EntityType)associatedEntity;
 
 -(void)checkForOnBoarding ;
+
 @end

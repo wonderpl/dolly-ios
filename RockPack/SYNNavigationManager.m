@@ -24,6 +24,7 @@
     if(!pageName)
         return;
     
+    
     NSInteger index = [self.containerController indexOfControllerByName:pageName];
     [self navigateToPage:index];
     
@@ -34,9 +35,6 @@
 {
     if(index < 0 || index > self.containerController.viewControllers.count)
         return;
-    
-    
-    
     
     self.sideNavigationController.state = SideNavigationStateHidden;
     
@@ -51,8 +49,25 @@
     //        [self showBackButton:NO];
     //    }
     
+    // == Set the Τitle == //
+    
+    self.masterController.pageTitleLabel.text = [self.containerController.currentViewController.title uppercaseString];
+    
+    if (self.sideNavigationController.state == SideNavigationStateFull)
+    {
+        [self.sideNavigationController deselectAllCells];
+        
+    }
+    else
+    {
+        NSString* controllerTitle = self.containerController.currentViewController.title;
+        
+        [self.sideNavigationController setSelectedCellByPageName: controllerTitle];
+    }
     
 }
+
+
 
 -(void)setMasterController:(SYNMasterViewController *)masterController
 {

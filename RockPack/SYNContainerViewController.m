@@ -138,7 +138,7 @@
     __weak SYNAbstractViewController* toViewController = currentViewController;
     __weak SYNAbstractViewController* fromViewController = _currentViewController;
     
-    [toViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
+    [fromViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
     
     [super addChildViewController: toViewController];
     

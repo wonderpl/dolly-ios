@@ -47,7 +47,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic) NavigationButtonsAppearance currentNavigationButtonsAppearance;
 @property (nonatomic, strong) IBOutlet UIButton* headerButton;
 @property (nonatomic, strong) IBOutlet UIButton* hideNavigationButton;
-@property (nonatomic, strong) IBOutlet UILabel* pageTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView* sideNavigationContainerView;
 @property (nonatomic, strong) IBOutlet UIView* tabsView;
 @property (nonatomic, strong) SYNAccountSettingsModalContainer* modalAccountContainer;
@@ -312,43 +311,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     // TODO: figure out if swiping of header is needed
 }
-
-
-
-
-
-#pragma mark - Scroller Changes
-
-- (void) scrollerPageChanged: (NSNotification*) notification
-{
-    NSNumber* pageNumber = [notification userInfo][kCurrentPage];
-    if (!pageNumber)
-        return;
-    
-    [self pageChanged: [pageNumber integerValue]];
-    
-    
-}
-
-
-- (void) pageChanged: (NSInteger) pageNumber
-{
-    self.pageTitleLabel.text = [self.containerViewController.currentViewController.title uppercaseString];
-    
-    if (self.sideNavigatorViewController.state == SideNavigationStateFull)
-    {
-        [self.sideNavigatorViewController deselectAllCells];
-        [self showSideNavigation];
-    }
-    else
-    {
-        NSString* controllerTitle = self.containerViewController.currentViewController.title;
-        
-        [self.sideNavigatorViewController setSelectedCellByPageName: controllerTitle];
-    }
-}
-
-
 
 
 
