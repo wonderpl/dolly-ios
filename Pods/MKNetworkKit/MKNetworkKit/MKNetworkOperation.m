@@ -494,6 +494,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     [theCopy setStartPosition:0];
 
     theCopy.postDataEncoding = _postDataEncoding;
+    theCopy.postDataEncodingHandler = [self.postDataEncodingHandler copy];
     [theCopy setStringEncoding:self.stringEncoding];
     [theCopy setUniqueId:[self.uniqueId copy]];
     [theCopy setRequest:[self.request copy]];
