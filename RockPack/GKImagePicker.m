@@ -74,7 +74,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
     GKImageCropViewController *cropController = [[GKImageCropViewController alloc] init];
-    cropController.contentSizeForViewInPopover = picker.contentSizeForViewInPopover;
+    cropController.preferredContentSize = picker.preferredContentSize;
     UIImage* image = info[UIImagePickerControllerOriginalImage];
 
 //    DebugLog(@"%f,%f",image.size.width, image.size.height);

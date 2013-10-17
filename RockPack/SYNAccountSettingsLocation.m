@@ -33,7 +33,7 @@
 {
     if (self = [super init])
     {
-        self.contentSizeForViewInPopover = CGSizeMake(380, 476);
+        self.preferredContentSize = CGSizeMake(380, 476);
 
         CGRect tableViewFrame = CGRectMake((IS_IPAD ? 1.0 : 0.0), 0.0, (IS_IPAD ? 378.0 : 320.0), 200.0);
         self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStyleGrouped];
@@ -105,7 +105,7 @@
     
     self.navigationItem.leftBarButtonItem = backButtonItem;
     
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.contentSizeForViewInPopover.width * 0.5), -15.0, self.contentSizeForViewInPopover.width, 40.0)];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
     titleLabel.text = NSLocalizedString (@"settings_popover_location_title", nil);

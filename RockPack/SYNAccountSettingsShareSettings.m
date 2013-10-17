@@ -40,7 +40,7 @@
     
     self.controls = [[NSMutableArray alloc] init];
     
-    self.contentSizeForViewInPopover = CGSizeMake(380, 476);
+    self.preferredContentSize = CGSizeMake(380, 476);
     
     self.view.backgroundColor = [UIColor clearColor];
     
@@ -53,7 +53,7 @@
     
     for (NSString* field in fields)
     {
-        CGRect onOffFieldFrame = CGRectMake(10.0, offsetY, self.contentSizeForViewInPopover.width - 10.0, 50.0);
+        CGRect onOffFieldFrame = CGRectMake(10.0, offsetY, self.preferredContentSize.width - 10.0, 50.0);
         SYNAccountSettingsOnOffField* onOffField = [[SYNAccountSettingsOnOffField alloc] initWithFrame:onOffFieldFrame andString:field];
         
         [self.controls addObject:onOffField];
