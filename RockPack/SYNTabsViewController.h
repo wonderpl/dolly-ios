@@ -10,4 +10,6 @@
 
 @interface SYNTabsViewController : UIViewController
 
+@property (nonatomic, readonly) NSArray* tabs;
+
 @end

@@ -138,7 +138,7 @@
     __weak SYNAbstractViewController* toViewController = currentViewController;
     __weak SYNAbstractViewController* fromViewController = _currentViewController;
     
-    [toViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
+    [fromViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
     
     [super addChildViewController: toViewController];
     
@@ -194,6 +194,28 @@
            
     }
     return child;
+}
+
+-(NSInteger)indexOfControllerByName: (NSString*) pageName
+{
+    NSInteger index = 0;
+    for (SYNAbstractViewController* child in self.viewControllers)
+    {
+        if ([pageName isEqualToString: child.title])
+            break;
+        
+        index++;
+        
+    }
+    return index;
+}
+
+-(void)navigateToPage:(NSInteger)index
+{
+    if(index < 0 || index > self.viewControllers.count)
+        self.currentViewController = nil; // will be caught by the setter
+    
+    self.currentViewController = self.viewControllers[index];
 }
 
 -(void)navigateToPageByName:(NSString*)pageName

@@ -38,6 +38,7 @@ typedef enum NotificationMessageType : NSInteger {
 @property (strong, nonatomic) Reachability *reachability;
 @property (nonatomic, readonly) BOOL hasSearchBarOn;
 @property (nonatomic, readonly) BOOL isInSearchMode;
+@property (nonatomic, strong) IBOutlet UILabel* pageTitleLabel;
 @property (nonatomic, readonly) SYNVideoViewerViewController *videoViewerViewController;
 
 @property (nonatomic, strong) IBOutlet UIView* errorContainerView;
@@ -48,6 +49,8 @@ typedef enum NotificationMessageType : NSInteger {
 @property (nonatomic, strong) IBOutlet UIButton* closeSearchButton;
 @property (nonatomic, strong) IBOutlet UIView* overlayView;
 @property (nonatomic, strong) IBOutlet UIButton* sideNavigationButton;
+
+@property (nonatomic, readonly) NSArray* tabs;
 
 
 @property (nonatomic, weak, readonly) SYNAbstractViewController* showingBaseViewController;

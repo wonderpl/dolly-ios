@@ -19,10 +19,11 @@
 @property (nonatomic, readonly) NSArray* viewControllers;
 
 
+-(void)navigateToPage:(NSInteger)index;
 -(void)navigateToPageByName:(NSString*)pageName;
 
 -(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName;
-
+-(NSInteger)indexOfControllerByName: (NSString*) pageName;
 
 
 
