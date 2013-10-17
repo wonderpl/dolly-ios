@@ -77,8 +77,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) refresh;
 
 - (id) initWithViewId: (NSString *) vid;
-- (void) viewDidScrollToFront;
-- (void) viewDidScrollToBack;
 
 - (void) resetDataRequestRange;
 

@@ -109,7 +109,6 @@
 		011C16941732834F00CF50B9 /* PanelChannelCreateNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C16921732834F00CF50B9 /* PanelChannelCreateNew@2x.png */; };
 		011C169B1732B65400CF50B9 /* NoCover184.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C16991732B65400CF50B9 /* NoCover184.png */; };
 		011C169C1732B65400CF50B9 /* NoCover184@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C169A1732B65400CF50B9 /* NoCover184@2x.png */; };
-		011CC67C164A9EC300F02B6D /* SYNCaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 011CC67B164A9EC300F02B6D /* SYNCaptureSessionManager.m */; };
 		011CC67E164AA41800F02B6D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011CC67D164AA41700F02B6D /* CoreMedia.framework */; };
 		011CC680164AA42300F02B6D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011CC67F164AA42300F02B6D /* AVFoundation.framework */; };
 		011CC683164BB94D00F02B6D /* SYNUserCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 011CC682164BB94D00F02B6D /* SYNUserCollectionViewLayoutAttributes.m */; };
@@ -1521,8 +1520,6 @@
 		011C16921732834F00CF50B9 /* PanelChannelCreateNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelChannelCreateNew@2x.png"; path = "Assets/Images/PanelChannelCreateNew@2x.png"; sourceTree = "<group>"; };
 		011C16991732B65400CF50B9 /* NoCover184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoCover184.png; path = Assets/Images/NoCover184.png; sourceTree = "<group>"; };
 		011C169A1732B65400CF50B9 /* NoCover184@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NoCover184@2x.png"; path = "Assets/Images/NoCover184@2x.png"; sourceTree = "<group>"; };
-		011CC67A164A9EC300F02B6D /* SYNCaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCaptureSessionManager.h; sourceTree = "<group>"; };
-		011CC67B164A9EC300F02B6D /* SYNCaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCaptureSessionManager.m; sourceTree = "<group>"; };
 		011CC67D164AA41700F02B6D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		011CC67F164AA42300F02B6D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		011CC681164BB94D00F02B6D /* SYNUserCollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNUserCollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
@@ -3289,15 +3286,6 @@
 			path = OWActivityViewController/Localizations;
 			sourceTree = SOURCE_ROOT;
 		};
-		011CC679164A9E9C00F02B6D /* Camera Overlay */ = {
-			isa = PBXGroup;
-			children = (
-				011CC67A164A9EC300F02B6D /* SYNCaptureSessionManager.h */,
-				011CC67B164A9EC300F02B6D /* SYNCaptureSessionManager.m */,
-			);
-			name = "Camera Overlay";
-			sourceTree = "<group>";
-		};
 		012502BA16CA8FCE0029C7C8 /* Social Media */ = {
 			isa = PBXGroup;
 			children = (
@@ -3798,7 +3786,6 @@
 				BE9071A717CCD62F00FCB320 /* Blur View iOS7 */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
 				012BD2C7173BE84C00BE28B6 /* Async Image load and cache */,
-				011CC679164A9E9C00F02B6D /* Camera Overlay */,
 				BE285DB91726826800D995AB /* Channels Manager */,
 				019824E51629CB1D00216900 /* Debug */,
 				BE7D34CB171443330085AB81 /* Device */,
@@ -7256,7 +7243,6 @@
 				019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */,
 				01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */,
 				01363F241630B81400FFAA09 /* SYNVideoThumbnailWideCell.m in Sources */,
-				011CC67C164A9EC300F02B6D /* SYNCaptureSessionManager.m in Sources */,
 				011CC683164BB94D00F02B6D /* SYNUserCollectionViewLayoutAttributes.m in Sources */,
 				011CC6A9164D19D800F02B6D /* SYNPassthroughView.m in Sources */,
 				01B7F763164FC88A009C5CCD /* SYNChannelThumbnailCell.m in Sources */,

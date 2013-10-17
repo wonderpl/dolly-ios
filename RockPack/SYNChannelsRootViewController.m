@@ -216,16 +216,26 @@
     [super viewDidAppear:animated];
 }
 
-- (void) viewDidScrollToFront
-{
-    [self updateAnalytics];
-    
-    self.channelThumbnailCollectionView.scrollsToTop = YES;
 
-    // if the user has requested 'Load More' channels then dont refresh the page cause he is in the middle of a search
-    if (self.dataRequestRange.location == 0)
+- (void) didMoveToParentViewController: (UIViewController *) parent
+{
+    if (parent == nil)
     {
-        [self loadChannelsForGenre: self.currentGenre];
+        // Removed from parent
+        self.channelThumbnailCollectionView.scrollsToTop = NO;
+    }
+    else
+    {
+        // Added to parent
+        [self updateAnalytics];
+        
+        self.channelThumbnailCollectionView.scrollsToTop = YES;
+        
+        // if the user has requested 'Load More' channels then dont refresh the page cause he is in the middle of a search
+        if (self.dataRequestRange.location == 0)
+        {
+            [self loadChannelsForGenre: self.currentGenre];
+        }
     }
 }
 
@@ -245,12 +255,6 @@
         [defaults setBool: YES
                    forKey: kInstruction1OnBoardingState];
     }
-}
-
-
-- (void) viewDidScrollToBack
-{
-    self.channelThumbnailCollectionView.scrollsToTop = NO;
 }
 
 

@@ -153,11 +153,6 @@
     self.dataRequestRange = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
 }
 
-- (void) viewDidScrollToFront
-{
-//    DebugLog (@"%@ came to front", self.title);
-}
-
 
 - (void) controllerDidChangeContent: (NSFetchedResultsController *) controller
 {
@@ -169,9 +164,6 @@
 {
     //AssertOrLog (@"Abstract class called 'reloadCollectionViews'");
 }
-
-
-
 
 // This can be overridden if updating star may cause the videoFetchedResults
 - (BOOL) shouldUpdateStarStatus
@@ -621,10 +613,6 @@
     // to be implemented by subclass
 }
 
-- (void) viewDidScrollToBack
-{
-    // to be implemented by subclass
-}
 
 -(void)performAction:(NSString*)action withObject:(id)object
 {

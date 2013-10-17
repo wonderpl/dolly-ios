@@ -251,26 +251,35 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Container Scrol Delegates
 
-- (void) viewDidScrollToFront
+- (void) didMoveToParentViewController: (UIViewController *) parent
 {
-    [self updateAnalytics];
-    
-    self.feedCollectionView.scrollsToTop = YES;
-    
-    self.togglingInProgress = NO;
-    
-    // if the user has not pressed load more
-    if (self.dataRequestRange.location == 0)
+    if (parent == nil)
     {
-        [self resetDataRequestRange]; // just in case the length is less than standard
-        [self.refreshButton startRefreshCycle];
-        [self loadAndUpdateFeedData];
-       
+        // Removed from parent
+        self.feedCollectionView.scrollsToTop = NO;
     }
-
-    [self checkForOnBoarding];
-
+    else
+    {
+        // Added to parent
+        [self updateAnalytics];
+        
+        self.feedCollectionView.scrollsToTop = YES;
+        
+        self.togglingInProgress = NO;
+        
+        // if the user has not pressed load more
+        if (self.dataRequestRange.location == 0)
+        {
+            [self resetDataRequestRange]; // just in case the length is less than standard
+            [self.refreshButton startRefreshCycle];
+            [self loadAndUpdateFeedData];
+            
+        }
+        
+        [self checkForOnBoarding];
+    }
 }
+
 
 - (void) checkForOnBoarding
 {
@@ -288,11 +297,6 @@ typedef void(^FeedDataErrorBlock)(void);
         [defaults setInteger: 4
                       forKey: kInstruction1OnBoardingState];         // inc by one
     }
-}
-
-- (void) viewDidScrollToBack
-{
-    self.feedCollectionView.scrollsToTop = NO;
 }
 
 
