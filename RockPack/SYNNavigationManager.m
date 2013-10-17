@@ -11,7 +11,6 @@
 #import "SYNContainerViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNSideNavigatorViewController.h"
-#import "SYNTabsViewController.h"
 
 @implementation SYNNavigationManager
 
@@ -37,11 +36,6 @@
         return;
     
     
-    // Set to the correct tab
-    // note: it is a little convoluted for tabs to call this class to change itself but it allows for extra checking and synching the views with the state of the app
-    
-    for (UIButton* tab in self.tabsViewController.tabs)
-        tab.highlighted = (BOOL)(tab.tag == index + 1);
     
     
     self.sideNavigationController.state = SideNavigationStateHidden;
@@ -57,6 +51,28 @@
     //        [self showBackButton:NO];
     //    }
     
+    
+}
+
+-(void)setMasterController:(SYNMasterViewController *)masterController
+{
+    _masterController = masterController;
+    
+    for (UIButton* tab in masterController.tabs)
+    {
+        [tab addTarget:self action:@selector(tabPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+}
+
+
+-(void)tabPressed:(UIButton*)tabPressed
+{
+    
+    for (UIButton* tab in self.masterController.tabs)
+        tab.highlighted = (BOOL)(tab == tabPressed);
+    
+    [self navigateToPage:tabPressed.tag];
     
 }
 

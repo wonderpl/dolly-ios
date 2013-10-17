@@ -8,14 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class SYNMasterViewController, SYNContainerViewController, SYNSideNavigatorViewController, SYNTabsViewController;
+@class SYNMasterViewController, SYNContainerViewController, SYNSideNavigatorViewController;
 
 @interface SYNNavigationManager : NSObject
 
 @property (nonatomic, weak) SYNMasterViewController* masterController;
 @property (nonatomic, weak) SYNContainerViewController* containerController;
 @property (nonatomic, weak) SYNSideNavigatorViewController* sideNavigationController;
-@property (nonatomic, weak) SYNTabsViewController* tabsViewController;
 
 -(void)navigateToPage:(NSInteger)index;
 -(void)navigateToPageByName:(NSString*)pageName;

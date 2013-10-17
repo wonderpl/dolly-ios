@@ -49,6 +49,8 @@ typedef enum NotificationMessageType : NSInteger {
 @property (nonatomic, strong) IBOutlet UIView* overlayView;
 @property (nonatomic, strong) IBOutlet UIButton* sideNavigationButton;
 
+@property (nonatomic, readonly) NSArray* tabs;
+
 
 @property (nonatomic, weak, readonly) SYNAbstractViewController* showingBaseViewController;
 @property (nonatomic, weak, readonly) SYNAbstractViewController* showingViewController;

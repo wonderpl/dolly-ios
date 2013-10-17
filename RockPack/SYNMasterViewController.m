@@ -30,7 +30,6 @@
 #import "SYNVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
-#import "SYNTabsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kMovableViewOffX -58
@@ -50,6 +49,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) IBOutlet UIButton* hideNavigationButton;
 @property (nonatomic, strong) IBOutlet UILabel* pageTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView* navigationContainerView;
+@property (nonatomic, strong) IBOutlet UIView* tabsView;
 @property (nonatomic, strong) SYNAccountSettingsModalContainer* modalAccountContainer;
 @property (nonatomic, strong) SYNBackButtonControl* backButtonControl;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
@@ -60,7 +60,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) UINavigationController* mainNavigationController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
 @property (nonatomic, strong) UIView* accountSettingsCoverView;
-@property (nonatomic, strong) SYNTabsViewController* tabsViewController;
 
 @property (nonatomic, strong) IBOutlet UIView* headerContainerView;
 
@@ -102,13 +101,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.sideNavigatorViewController.user = appDelegate.currentUser;
         [self addChildViewController:self.sideNavigatorViewController];
         
-        // == Tabs == //
-        
-        SYNTabsViewController* tabsViewController = [[SYNTabsViewController alloc] init];
-        
-        [self addChildViewController:tabsViewController];
-        
-        self.tabsViewController = tabsViewController;
         
         
         
@@ -116,11 +108,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         appDelegate.viewStackManager.masterController = self;
         appDelegate.viewStackManager.sideNavigatorController = self.sideNavigatorViewController;
-        
-        appDelegate.navigationManager.masterController = self;
-        appDelegate.navigationManager.containerController = root;
-        appDelegate.navigationManager.sideNavigationController = self.sideNavigatorViewController;
-        appDelegate.navigationManager.tabsViewController = self.tabsViewController;
         
         
         
@@ -163,7 +150,15 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) viewDidLoad
 {
+    
     [super viewDidLoad];
+    
+    // == Setup Navigation Manager == (This should be done here because it is dependent on controls) == //
+    
+    
+    appDelegate.navigationManager.masterController = self;
+    appDelegate.navigationManager.containerController = self.containerViewController; // container
+    appDelegate.navigationManager.sideNavigationController = self.sideNavigatorViewController;
     
     
     // == Compensate for iOS7 == //
@@ -239,10 +234,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     self.currentNavigationButtonsAppearance = NavigationButtonsAppearanceBlack;
     
-    // == Add the Root Navigation Controller == //
-
-    self.mainNavigationController.view.frame = self.view.frame;
-    [self.view insertSubview:self.mainNavigationController.view atIndex:0];
     
     
     
@@ -1088,10 +1079,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (SYNContainerViewController*) containerViewController
-{
-    return (SYNContainerViewController*) self.mainNavigationController.viewControllers[0];
-}
+
 
 
 - (void) showBackButton: (BOOL) show 
@@ -1272,4 +1260,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     self.headerButton.hidden = !isActive;
 }
 
+-(NSArray*)tabs
+{
+    return self.tabsView.subviews;
+}
+- (SYNContainerViewController*) containerViewController
+{
+    return (SYNContainerViewController*) self.mainNavigationController.viewControllers[0];
+}
 @end
