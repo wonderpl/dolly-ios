@@ -39,18 +39,18 @@
 {
     [super awakeFromNib];
     
-    self.videoTitle.font = [UIFont boldRockpackFontOfSize: self.videoTitle.font.pointSize];
+    self.videoTitle.font = [UIFont regularCustomFontOfSize: self.videoTitle.font.pointSize];
     
-    self.fromLabel.font = [UIFont rockpackFontOfSize: self.fromLabel.font.pointSize];
-    self.channelName.font = [UIFont boldRockpackFontOfSize: self.channelName.font.pointSize];
+    self.fromLabel.font = [UIFont lightCustomFontOfSize: self.fromLabel.font.pointSize];
+    self.channelName.font = [UIFont regularCustomFontOfSize: self.channelName.font.pointSize];
     
-    self.usernameLabel.font = [UIFont rockpackFontOfSize: self.usernameLabel.font.pointSize];
-    self.byLabel.font = [UIFont rockpackFontOfSize: self.byLabel.font.pointSize];
+    self.usernameLabel.font = [UIFont lightCustomFontOfSize: self.usernameLabel.font.pointSize];
+    self.byLabel.font = [UIFont lightCustomFontOfSize: self.byLabel.font.pointSize];
     
-    self.numberOfViewLabel.font = [UIFont rockpackFontOfSize: self.numberOfViewLabel.font.pointSize];
-    self.youTubeUserLabel.font = [UIFont rockpackFontOfSize: self.youTubeUserLabel.font.pointSize];
-    self.dateAddedLabel.font = [UIFont rockpackFontOfSize: self.dateAddedLabel.font.pointSize];
-    self.durationLabel.font = [UIFont rockpackFontOfSize: self.durationLabel.font.pointSize];
+    self.numberOfViewLabel.font = [UIFont lightCustomFontOfSize: self.numberOfViewLabel.font.pointSize];
+    self.youTubeUserLabel.font = [UIFont lightCustomFontOfSize: self.youTubeUserLabel.font.pointSize];
+    self.dateAddedLabel.font = [UIFont lightCustomFontOfSize: self.dateAddedLabel.font.pointSize];
+    self.durationLabel.font = [UIFont lightCustomFontOfSize: self.durationLabel.font.pointSize];
     
     self.displayMode = kVideoThumbnailDisplayModeChannel; // default is channel
     

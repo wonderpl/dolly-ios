@@ -18,7 +18,7 @@
 - (id) initWithFrame: (CGRect) frame
            andString: (NSString *) value
 {
-    UIFont *rockpackFont = [UIFont boldRockpackFontOfSize: 20];
+    UIFont *rockpackFont = [UIFont regularCustomFontOfSize: 20];
     CGSize measure = [value sizeWithAttributes: @{NSFontAttributeName: rockpackFont}];
     
     self = [super initWithFrame: frame];

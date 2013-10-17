@@ -116,8 +116,8 @@ SYNImagePickerControllerDelegate>
 -(void) setUpUserProfile
 {
     
-    self.fullNameLabel.font = [UIFont boldRockpackFontOfSize:30];
-    self.userNameLabel.font = [UIFont rockpackFontOfSize:12.0];
+    self.fullNameLabel.font = [UIFont regularCustomFontOfSize:30];
+    self.userNameLabel.font = [UIFont lightCustomFontOfSize:12.0];
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(userDataChanged:)

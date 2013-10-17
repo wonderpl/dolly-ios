@@ -15,7 +15,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         
-        self.font = [UIFont rockpackFontOfSize:16.0f];        
+        self.font = [UIFont lightCustomFontOfSize:16.0f];        
     }
     return self;
 }

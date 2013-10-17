@@ -47,7 +47,7 @@
             messageLabel = [[UILabel alloc] initWithFrame:labelFrame];
         }
         
-        messageLabel.font = [UIFont rockpackFontOfSize:13.0];
+        messageLabel.font = [UIFont lightCustomFontOfSize:13.0];
         messageLabel.textColor = [UIColor whiteColor];
         messageLabel.backgroundColor = [UIColor clearColor];
         messageLabel.textAlignment = NSTextAlignmentLeft;

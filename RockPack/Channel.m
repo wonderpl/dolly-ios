@@ -3,7 +3,6 @@
 #import "ChannelCover.h"
 #import "ChannelOwner.h"
 #import "NSDictionary+Validation.h"
-#import "NSObject+AutoDescribe.h"
 #import "SYNAppDelegate.h"
 #import "VideoInstance.h"
 

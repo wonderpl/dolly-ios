@@ -16,14 +16,14 @@
 
 - (void) awakeFromNib
 {
-    self.messageLabel.font = [UIFont rockpackFontOfSize: self.messageLabel.font.pointSize];
+    self.messageLabel.font = [UIFont lightCustomFontOfSize: self.messageLabel.font.pointSize];
     
     self.stringButtonsArray = [[NSMutableArray alloc] initWithCapacity: STANDARD_BUTTON_CAPACITY];
     
-    self.lightTextAttributes = @{NSFontAttributeName: [UIFont rockpackFontOfSize: 13.0f],
+    self.lightTextAttributes = @{NSFontAttributeName: [UIFont lightCustomFontOfSize: 13.0f],
                                  NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
     
-    self.boldTextAttributes = @{NSFontAttributeName: [UIFont boldRockpackFontOfSize: 13.0f],
+    self.boldTextAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize: 13.0f],
                                 NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
 }
 

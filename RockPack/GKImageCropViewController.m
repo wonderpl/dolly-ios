@@ -177,7 +177,7 @@
     [self.cancelButton setBackgroundImage: [UIImage imageNamed: @"ButtonCancelHighlighted~iphone.png"]
                                  forState: UIControlStateHighlighted];
     
-    [[self.cancelButton titleLabel] setFont: [UIFont boldRockpackFontOfSize: 11.0]];
+    [[self.cancelButton titleLabel] setFont: [UIFont regularCustomFontOfSize: 11.0]];
     [[self.cancelButton titleLabel] setShadowOffset: CGSizeMake(0, 1)];
     [self.cancelButton setFrame: CGRectMake(0, 0, 48, 49)];
     
@@ -203,7 +203,7 @@
     [self.useButton setBackgroundImage: [UIImage imageNamed: @"ButtonConfirmYellowHighlighted~iphone.png"]
                               forState: UIControlStateHighlighted];
     
-    [[self.useButton titleLabel] setFont: [UIFont boldRockpackFontOfSize: 11]];
+    [[self.useButton titleLabel] setFont: [UIFont regularCustomFontOfSize: 11]];
     [[self.useButton titleLabel] setShadowOffset: CGSizeMake(0, -1)];
     [self.useButton setFrame: CGRectMake(0, 0, 48, 49)];
     
@@ -265,7 +265,7 @@
                                           blue: 255.0 / 255.0
                                          alpha: 1];
         
-        info.font = [UIFont rockpackFontOfSize: 18];
+        info.font = [UIFont lightCustomFontOfSize: 18];
         
         info.layer.shadowColor = [[UIColor colorWithRed: (1.0 / 255.0)
                                                   green: (1.0 / 255.0)

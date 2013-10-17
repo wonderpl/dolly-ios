@@ -19,7 +19,6 @@
 #import "SYNOAuth2Credential.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPopoverBackgroundView.h"
-#import "SYNTextFieldLogin.h"
 #import "UIFont+SYNFont.h"
 #import "User.h"
 
@@ -33,12 +32,12 @@
 @property (nonatomic) CGRect initialUsernameFrame;
 @property (nonatomic) CGRect signUpButtonInitialFrame;
 @property (nonatomic, readonly) CGFloat elementsOffsetY;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* ddInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* emailInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* mmInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* passwordInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* userNameInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* yyyyInputField;
+@property (nonatomic, strong) IBOutlet UITextField* ddInputField;
+@property (nonatomic, strong) IBOutlet UITextField* emailInputField;
+@property (nonatomic, strong) IBOutlet UITextField* mmInputField;
+@property (nonatomic, strong) IBOutlet UITextField* passwordInputField;
+@property (nonatomic, strong) IBOutlet UITextField* userNameInputField;
+@property (nonatomic, strong) IBOutlet UITextField* yyyyInputField;
 @property (nonatomic, strong) IBOutlet UIButton* faceImageButton;
 @property (nonatomic, strong) IBOutlet UIButton* facebookSignInButton;
 @property (nonatomic, strong) IBOutlet UIButton* finalLoginButton;
@@ -108,16 +107,16 @@
     activityIndicator.hidesWhenStopped = YES;
     
         // == Setup Fonts for labels (except Input Fields)
-    UIFont* rockpackBigLabelFont = [UIFont rockpackFontOfSize: 20];
+    UIFont* rockpackBigLabelFont = [UIFont lightCustomFontOfSize: 20];
         
     memberLabel.font = rockpackBigLabelFont;
     areYouNewLabel.font = rockpackBigLabelFont;
         
-    passwordForgottenLabel.font = [UIFont rockpackFontOfSize: 14.0];
-    secondaryFacebookMessage.font = [UIFont rockpackFontOfSize: 20.0];
-    termsAndConditionsLabel.font = [UIFont rockpackFontOfSize: 14.0];
+    passwordForgottenLabel.font = [UIFont lightCustomFontOfSize: 14.0];
+    secondaryFacebookMessage.font = [UIFont lightCustomFontOfSize: 20.0];
+    termsAndConditionsLabel.font = [UIFont lightCustomFontOfSize: 14.0];
     termsAndConditionsLabelSide.font = termsAndConditionsLabel.font;
-    wellSendYouLabel.font = [UIFont rockpackFontOfSize: 16.0];
+    wellSendYouLabel.font = [UIFont lightCustomFontOfSize: 16.0];
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
@@ -161,7 +160,7 @@
         
     // == Setup Input Fields
         
-    UIFont* rockpackInputFont = [UIFont rockpackFontOfSize: 20];
+    UIFont* rockpackInputFont = [UIFont lightCustomFontOfSize: 20];
     NSArray* textFieldsToSetup = @[emailInputField, userNameInputField, passwordInputField,
                                        ddInputField, mmInputField, yyyyInputField];
         

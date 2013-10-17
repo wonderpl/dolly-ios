@@ -124,9 +124,9 @@
     
     self.closeButton.hidden = YES;
      
-    self.searchTextField.font = [UIFont rockpackFontOfSize: self.searchTextField.font.pointSize];
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
-    self.shareLabel.font = [UIFont rockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.searchTextField.font = [UIFont lightCustomFontOfSize: self.searchTextField.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
+    self.shareLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
     [self.recentFriendsCollectionView registerNib: [UINib nibWithNibName: @"SYNOneToOneSharingFriendCell" bundle: nil]
                        forCellWithReuseIdentifier: @"SYNOneToOneSharingFriendCell"];

@@ -29,8 +29,8 @@
 {
     [super awakeFromNib];
     
-    self.mainTitleLabel.font = [UIFont boldRockpackFontOfSize: self.mainTitleLabel.font.pointSize];
-    self.likeLabel.font = [UIFont rockpackFontOfSize: self.likeLabel.font.pointSize];
+    self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
+    self.likeLabel.font = [UIFont lightCustomFontOfSize: self.likeLabel.font.pointSize];
     
     if (!IS_IPAD)
     {
@@ -38,7 +38,7 @@
     }
     else
     {
-        self.likesNumberLabel.font = [UIFont boldRockpackFontOfSize: self.likesNumberLabel.font.pointSize];
+        self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
     }
     
     // Tap for showing video

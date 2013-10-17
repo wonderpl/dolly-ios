@@ -24,7 +24,7 @@
     if(self = [super initWithFrame:frame])
     {
         label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,0.0f,0.0f,0.0f)];
-        UIFont* fontToUse = [UIFont rockpackFontOfSize:21.0];
+        UIFont* fontToUse = [UIFont lightCustomFontOfSize:21.0];
         label.font = fontToUse;
         label.textColor = [UIColor colorWithRed:(106.0/255.0) green:(114.0/255.0) blue:(112.0/255.0) alpha:(1.0)];
         label.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
@@ -92,7 +92,7 @@
 
 -(void)setFontSize:(CGFloat)pointSize
 {
-    label.font = [UIFont rockpackFontOfSize:pointSize];
+    label.font = [UIFont lightCustomFontOfSize:pointSize];
 }
 
 -(void) setColorsForText:(UIColor*)textColor parentheses:(UIColor*)parenthesesColor number:(UIColor*)numberColor

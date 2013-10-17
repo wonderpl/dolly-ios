@@ -10,7 +10,7 @@
 
 @interface UIFont (SYNFont)
 
-+ (UIFont *) rockpackFontOfSize: (CGFloat) fontSize;
-+ (UIFont *) boldRockpackFontOfSize: (CGFloat) fontSize;
++ (UIFont *) lightCustomFontOfSize: (CGFloat) fontSize;
++ (UIFont *) regularCustomFontOfSize: (CGFloat) fontSize;
 
 @end

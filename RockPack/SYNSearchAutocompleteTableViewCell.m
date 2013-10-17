@@ -59,7 +59,7 @@
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        self.textLabel.font = [UIFont rockpackFontOfSize:14.0f];
+        self.textLabel.font = [UIFont lightCustomFontOfSize:14.0f];
         self.textLabel.textColor = self.defaultColor;
         self.textLabel.shadowColor = self.defaultShadowColor;
         self.textLabel.shadowOffset = CGSizeMake(0.0f,1.0f);

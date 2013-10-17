@@ -195,7 +195,7 @@
     if(title)
     {
         
-        UIFont* fontTitleToUse = [UIFont boldRockpackFontOfSize: IS_IPHONE ? 25.0f : 28.0f];
+        UIFont* fontTitleToUse = [UIFont regularCustomFontOfSize: IS_IPHONE ? 25.0f : 28.0f];
         titleLabel.font = fontTitleToUse;
         titleLabel.numberOfLines = 0;
         titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -218,7 +218,7 @@
     UILabel* textLabel = [[UILabel alloc] initWithFrame:newFrame];
     if (message)
     {
-        UIFont* fontToUse = [UIFont rockpackFontOfSize:  IS_IPHONE ? 16.0f : 22.0f];
+        UIFont* fontToUse = [UIFont lightCustomFontOfSize:  IS_IPHONE ? 16.0f : 22.0f];
         
         // Move text on first card down a bit - only ipad
         if (IS_IPAD)

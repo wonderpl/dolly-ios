@@ -16,7 +16,7 @@
 -(void)awakeFromNib
 {
     
-    self.nameLabel.font = [UIFont rockpackFontOfSize:self.nameLabel.font.pointSize];
+    self.nameLabel.font = [UIFont lightCustomFontOfSize:self.nameLabel.font.pointSize];
     
     self.pressedLayerView.hidden = YES;
     

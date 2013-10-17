@@ -20,7 +20,7 @@
                                                          owner: self
                                                        options:nil] [0];
         subView.frame = self.bounds;
-        self.titleLabel.font = [UIFont rockpackFontOfSize:self.titleLabel.font.pointSize];
+        self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
         [self addSubview:subView];
     }
     return self;

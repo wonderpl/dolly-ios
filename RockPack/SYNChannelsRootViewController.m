@@ -835,7 +835,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     UILabel *newLabel = [[UILabel alloc] initWithFrame: newFrame];
 
-    newLabel.font = [UIFont boldRockpackFontOfSize: 15.0f];
+    newLabel.font = [UIFont regularCustomFontOfSize: 15.0f];
     
     newLabel.textColor = [UIColor colorWithRed: 40.0f / 255.0f
                                          green: 45.0f / 255.0f

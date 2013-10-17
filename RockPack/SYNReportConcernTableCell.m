@@ -16,7 +16,7 @@
 {
     [super awakeFromNib];
     
-    self.titleLabel.font = [UIFont rockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
     [self.highlightedViewiOS7 removeFromSuperview];
 }

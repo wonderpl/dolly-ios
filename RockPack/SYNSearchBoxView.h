@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SYNTextField.h"
 
 @interface SYNSearchBoxView : UIView {
     UIView* backgroundPanel;
@@ -15,7 +14,7 @@
     CGFloat initialPanelHeight;
 }
 
-@property (nonatomic, strong) IBOutlet SYNTextField* searchTextField;
+@property (nonatomic, strong) IBOutlet UITextField *searchTextField;
 
 //iPhone specific
 @property (strong, nonatomic) IBOutlet UIButton *integratedCloseButton;

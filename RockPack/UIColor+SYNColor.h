@@ -10,17 +10,8 @@
 
 @interface UIColor (SYNColor)
 
-+ (UIColor *) rockpackTitleColor;
-+ (UIColor *) rockpackSubtitleColor;
-+ (UIColor *) rockpackBlueColor;
-+ (UIColor *) rockpackLogoColor;
 + (UIColor *) rockpacLedColor;
-+ (UIColor *) rockpacTurcoiseColor;
-+ (UIColor *) rockpackHeaderSubtitleColor;
-
 + (UIColor *) rockpacAggregateTextLight;
-+ (UIColor *) rockpacAggregateTextBold;
-
 + (UIColor *) colorWithHex:(NSInteger)hex;
 
 @end

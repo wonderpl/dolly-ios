@@ -39,7 +39,7 @@
                                                alpha: (1.0)];
         
         titleLabel.text = NSLocalizedString(@"SUBSCRIBERS", nil);
-        titleLabel.font = [UIFont rockpackFontOfSize: 19.0];
+        titleLabel.font = [UIFont lightCustomFontOfSize: 19.0];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.shadowColor = [UIColor whiteColor];
         titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
@@ -65,7 +65,7 @@
                                                     blue: (33.0 / 255.0)
                                                    alpha: (1.0)];
         
-        self.infoLabel.font = [UIFont boldRockpackFontOfSize: 15.0];
+        self.infoLabel.font = [UIFont regularCustomFontOfSize: 15.0];
         self.infoLabel.textAlignment = NSTextAlignmentCenter;
         self.infoLabel.shadowColor = [UIColor whiteColor];
         self.infoLabel.shadowOffset = CGSizeMake(0.0, 1.0);

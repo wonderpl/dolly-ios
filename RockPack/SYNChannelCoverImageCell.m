@@ -29,7 +29,7 @@
 - (void) layoutSubviews
 {
     [super layoutSubviews];
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     self.placeholderImage = [UIImage imageNamed: @"PlaceholderChannelCover.png"];
 }
 

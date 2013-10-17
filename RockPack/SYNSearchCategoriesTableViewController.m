@@ -33,7 +33,7 @@ static NSString *SearchGenresTableCellIdentifier = @"SYNSearchCategoriesIphoneCe
     [super viewDidLoad];
     
     
-    self.cellFont = [UIFont rockpackFontOfSize: 16.0];
+    self.cellFont = [UIFont lightCustomFontOfSize: 16.0];
     self.cellTextColor = [UIColor colorWithRed:(106.0f/255.0f) green:(114.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
     
     

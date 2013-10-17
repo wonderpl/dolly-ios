@@ -84,7 +84,7 @@
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
     titleLabel.text = NSLocalizedString (@"settings_popover_about_title", nil);
-    titleLabel.font = [UIFont boldRockpackFontOfSize:18.0];
+    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.shadowColor = [UIColor whiteColor];
     titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
@@ -222,7 +222,7 @@
     
     self.rockpackWithVersionLabel.text = [NSString stringWithFormat:@"ROCKPACK %@", appBuild];
     self.rockpackWithVersionLabel.textAlignment = NSTextAlignmentCenter;
-    self.rockpackWithVersionLabel.font = [UIFont boldRockpackFontOfSize:18.0f];
+    self.rockpackWithVersionLabel.font = [UIFont regularCustomFontOfSize:18.0f];
     self.rockpackWithVersionLabel.textColor = [UIColor colorWithRed:40.0/255.0 green:45.0/255.0 blue:51.0/255 alpha:1.0];
     self.rockpackWithVersionLabel.backgroundColor = [UIColor clearColor];
     
@@ -249,7 +249,7 @@
     
     self.rockpackCopyrightTextLabel.text = NSLocalizedString(@"© 2013 Rockpack Limited.", nil);
     self.rockpackCopyrightTextLabel.textAlignment = NSTextAlignmentCenter;
-    self.rockpackCopyrightTextLabel.font = [UIFont rockpackFontOfSize:12.0f];
+    self.rockpackCopyrightTextLabel.font = [UIFont lightCustomFontOfSize:12.0f];
     self.rockpackCopyrightTextLabel.textColor = [UIColor colorWithWhite:153.0/255.0 alpha:1.0];
     self.rockpackCopyrightTextLabel.backgroundColor = [UIColor clearColor];
     
@@ -274,7 +274,7 @@
     
     self.attributionTextView.attributedText = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"attribution_list", nil) attributes:attributes];
     self.attributionTextView.textAlignment = NSTextAlignmentCenter;
-    self.attributionTextView.font = [UIFont rockpackFontOfSize:12.0f];
+    self.attributionTextView.font = [UIFont lightCustomFontOfSize:12.0f];
     self.attributionTextView.textColor = [UIColor colorWithWhite:153.0/255.0 alpha:1.0];
     self.attributionTextView.backgroundColor = [UIColor clearColor];
     
