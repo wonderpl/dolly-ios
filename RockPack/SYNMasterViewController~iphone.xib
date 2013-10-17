@@ -12,11 +12,11 @@
                 <outlet property="headerButton" destination="41" id="47"/>
                 <outlet property="headerContainerView" destination="bGf-Ia-h26" id="hV8-mT-xye"/>
                 <outlet property="hideNavigationButton" destination="36" id="39"/>
-                <outlet property="navigationContainerView" destination="28" id="33"/>
                 <outlet property="overlayView" destination="23" id="26"/>
                 <outlet property="pageTitleLabel" destination="14" id="15"/>
                 <outlet property="searchButton" destination="48" id="50"/>
                 <outlet property="sideNavigationButton" destination="12" id="38"/>
+                <outlet property="sideNavigationContainerView" destination="28" id="xzF-5M-RyN"/>
                 <outlet property="view" destination="1" id="19"/>
             </connections>
         </placeholder>

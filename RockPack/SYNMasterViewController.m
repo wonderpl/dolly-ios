@@ -48,7 +48,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) IBOutlet UIButton* headerButton;
 @property (nonatomic, strong) IBOutlet UIButton* hideNavigationButton;
 @property (nonatomic, strong) IBOutlet UILabel* pageTitleLabel;
-@property (nonatomic, strong) IBOutlet UIView* navigationContainerView;
+@property (nonatomic, strong) IBOutlet UIView* sideNavigationContainerView;
 @property (nonatomic, strong) IBOutlet UIView* tabsView;
 @property (nonatomic, strong) SYNAccountSettingsModalContainer* modalAccountContainer;
 @property (nonatomic, strong) SYNBackButtonControl* backButtonControl;
@@ -230,7 +230,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     
     
-    self.navigationContainerView.userInteractionEnabled = YES;
+    self.sideNavigationContainerView.userInteractionEnabled = YES;
     
     self.currentNavigationButtonsAppearance = NavigationButtonsAppearanceBlack;
     
@@ -301,7 +301,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
     
     
-    [self.navigationContainerView addSubview:self.sideNavigatorViewController.view];
+    [self.sideNavigationContainerView addSubview:self.sideNavigatorViewController.view];
+    
+    self.mainNavigationController.view.frame = self.view.frame;
+    [self.view insertSubview:self.mainNavigationController.view atIndex:0];
 }
 
 
@@ -579,7 +582,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         sboxFrame.origin.y = IS_IOS_7_OR_GREATER ? 20.0f : 10.0f;
         self.searchBoxController.view.frame = sboxFrame;
         
-        [self.view insertSubview:self.searchBoxController.view belowSubview:self.navigationContainerView];
+        [self.view insertSubview:self.searchBoxController.view belowSubview:self.sideNavigationContainerView];
         
         self.searchBoxController.searchTextField.text = @"";
         

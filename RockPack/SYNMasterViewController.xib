@@ -11,11 +11,11 @@
                 <outlet property="errorContainerView" destination="128" id="129"/>
                 <outlet property="headerButton" destination="138" id="141"/>
                 <outlet property="headerContainerView" destination="146" id="kgz-AQ-Sao"/>
-                <outlet property="navigationContainerView" destination="67" id="137"/>
                 <outlet property="overlayView" destination="89" id="91"/>
                 <outlet property="pageTitleLabel" destination="99" id="100"/>
                 <outlet property="searchButton" destination="105" id="124"/>
                 <outlet property="sideNavigationButton" destination="101" id="122"/>
+                <outlet property="sideNavigationContainerView" destination="67" id="DMG-Ef-syd"/>
                 <outlet property="tabsView" destination="tNm-DH-njZ" id="IW2-Xp-Spw"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
