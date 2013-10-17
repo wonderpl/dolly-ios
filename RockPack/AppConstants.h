@@ -380,7 +380,6 @@ typedef enum : NSInteger {
 
 #define kScrollerPageChanged        @"kScrollerPageChanged"
 
-#define kNavigateToPage       @"kNavigateToPage"
 
 #define kNoteCreateButtonRequested       @"kNoteCreateButtonRequested"
 

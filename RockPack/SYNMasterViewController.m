@@ -75,14 +75,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        appDelegate.viewStackManager.masterController = self;
+        
         
         // == main navigation == //
         
         self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:root];
         self.mainNavigationController.navigationBarHidden = YES;
         self.mainNavigationController.delegate = self;
-        //self.mainNavigationController.view.autoresizesSubviews = YES;
         self.mainNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         self.mainNavigationController.wantsFullScreenLayout = YES;
         
@@ -101,9 +100,19 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         self.sideNavigatorViewController.user = appDelegate.currentUser;
         
-        appDelegate.viewStackManager.sideNavigatorController = self.sideNavigatorViewController;
+        
         
         [self addChildViewController:self.sideNavigatorViewController];
+        
+        
+        // == Setup ViewStack and Navigation Managers == //
+        
+        appDelegate.viewStackManager.masterController = self;
+        appDelegate.viewStackManager.sideNavigatorController = self.sideNavigatorViewController;
+        
+        appDelegate.navigationManager.masterController = self;
+        appDelegate.navigationManager.containerController = root;
+        appDelegate.navigationManager.sideNavigationController = self.sideNavigatorViewController;
         
     
         // == Search Box == //
@@ -284,7 +293,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteHideNetworkMessages object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteShowNetworkMessages object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTitleAndDots:) name:kNoteHideTitleAndDots object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateToPage:) name:kNavigateToPage object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollerPageChanged:) name:kScrollerPageChanged object:nil];
@@ -298,7 +306,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) headerSwiped:(UISwipeGestureRecognizer*) recogniser
 {
-    [self.containerViewController swipedTo: recogniser.direction];
+    // TODO: figure out if swiping of header is needed
 }
 
 
@@ -765,46 +773,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) navigateToPage: (NSNotification*) notification
-{
-    
-    NSString* pageName = [notification userInfo][@"pageName"];
-    if (!pageName)
-        return;
-    
-    SYNAbstractViewController* controllerToGo = [self.containerViewController viewControllerByPageName:pageName];
-    if(!controllerToGo)
-        return;
-    
-    if (self.isInSearchMode)
-    {
-        [self cancelButtonPressed:nil];
-    }
-
-    if (self.showingBackButton)
-    {
-        //pop the current section navcontroller to the root controller
-        [appDelegate.viewStackManager popToRootController];
-        
-        [self showBackButton:NO];
-    }
-    
-    //Scroll to the requested page
-    [self.containerViewController addChildViewController:controllerToGo];
-    
-    self.sideNavigatorViewController.state = SideNavigationStateHidden;
-    
-    // post open actions
-    
-    if ([notification userInfo][@"action"])
-    {
-        
-        [controllerToGo performAction:[notification userInfo][@"action"]
-                           withObject:[notification userInfo][@"object"]];
-    }
-    
-    
-}
 
 
 - (void) channelSuccessfullySaved: (NSNotification*) note

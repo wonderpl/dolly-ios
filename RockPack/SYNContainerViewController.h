@@ -19,7 +19,7 @@
 @property (nonatomic, readonly) NSArray* viewControllers;
 
 
-- (void) swipedTo: (UISwipeGestureRecognizerDirection) direction;
+-(void)navigateToPageByName:(NSString*)pageName;
 
 -(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName;
 

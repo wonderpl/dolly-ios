@@ -978,6 +978,9 @@
 		BE1B3DD3180E902800DA2BD6 /* MoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DD2180E902800DA2BD6 /* MoodViewController.xib */; };
 		BE1B3DD6180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DD5180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.m */; };
 		BE1B3DD8180EA31800DA2BD6 /* SYNCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DD7180EA31800DA2BD6 /* SYNCategoryCollectionViewCell.xib */; };
+		BE1B3DE11810242E00DA2BD6 /* SYNTabsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DDF1810242E00DA2BD6 /* SYNTabsViewController.m */; };
+		BE1B3DE21810242E00DA2BD6 /* SYNTabsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DE01810242E00DA2BD6 /* SYNTabsViewController.xib */; };
+		BE1B3DE61810265700DA2BD6 /* SYNNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DE51810265700DA2BD6 /* SYNNavigationManager.m */; };
 		BE21EE7C16F9FF520067223B /* SYNAccountSettingsTextInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EE7B16F9FF520067223B /* SYNAccountSettingsTextInputController.m */; };
 		BE21EE8316FA108E0067223B /* SYNAccountSettingsPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EE8216FA108D0067223B /* SYNAccountSettingsPopoverBackgroundView.m */; };
 		BE21EE8716FA202F0067223B /* SYNAccountSettingsFullNameInput.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EE8616FA202F0067223B /* SYNAccountSettingsFullNameInput.m */; };
@@ -2527,6 +2530,11 @@
 		BE1B3DD4180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCategoryCollectionViewCell.h; sourceTree = "<group>"; };
 		BE1B3DD5180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCategoryCollectionViewCell.m; sourceTree = "<group>"; };
 		BE1B3DD7180EA31800DA2BD6 /* SYNCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		BE1B3DDE1810242E00DA2BD6 /* SYNTabsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTabsViewController.h; sourceTree = "<group>"; };
+		BE1B3DDF1810242E00DA2BD6 /* SYNTabsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTabsViewController.m; sourceTree = "<group>"; };
+		BE1B3DE01810242E00DA2BD6 /* SYNTabsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNTabsViewController.xib; sourceTree = "<group>"; };
+		BE1B3DE41810265700DA2BD6 /* SYNNavigationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNavigationManager.h; sourceTree = "<group>"; };
+		BE1B3DE51810265700DA2BD6 /* SYNNavigationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNavigationManager.m; sourceTree = "<group>"; };
 		BE21EE7A16F9FF520067223B /* SYNAccountSettingsTextInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsTextInputController.h; sourceTree = "<group>"; };
 		BE21EE7B16F9FF520067223B /* SYNAccountSettingsTextInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsTextInputController.m; sourceTree = "<group>"; };
 		BE21EE8116FA108D0067223B /* SYNAccountSettingsPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsPopoverBackgroundView.h; sourceTree = "<group>"; };
@@ -3800,6 +3808,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				BE06EEE517D635090028F2E3 /* Strict Interactive View */,
 				BE9071A717CCD62F00FCB320 /* Blur View iOS7 */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
@@ -5236,6 +5245,7 @@
 		BE0815C216D5386B00ADB1DC /* Master */ = {
 			isa = PBXGroup;
 			children = (
+				BE1B3DDA181023FB00DA2BD6 /* Tabs */,
 				BE0815C316D5389C00ADB1DC /* SYNMasterViewController.h */,
 				BE0815C416D5389C00ADB1DC /* SYNMasterViewController.m */,
 				BE0815C516D5389C00ADB1DC /* SYNMasterViewController.xib */,
@@ -5293,6 +5303,25 @@
 				BE1B3DD7180EA31800DA2BD6 /* SYNCategoryCollectionViewCell.xib */,
 			);
 			name = "Search Cells";
+			sourceTree = "<group>";
+		};
+		BE1B3DDA181023FB00DA2BD6 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				BE1B3DDE1810242E00DA2BD6 /* SYNTabsViewController.h */,
+				BE1B3DDF1810242E00DA2BD6 /* SYNTabsViewController.m */,
+				BE1B3DE01810242E00DA2BD6 /* SYNTabsViewController.xib */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		BE1B3DE31810263B00DA2BD6 /* Navigation Manager */ = {
+			isa = PBXGroup;
+			children = (
+				BE1B3DE41810265700DA2BD6 /* SYNNavigationManager.h */,
+				BE1B3DE51810265700DA2BD6 /* SYNNavigationManager.m */,
+			);
+			name = "Navigation Manager";
 			sourceTree = "<group>";
 		};
 		BE21EE8416FA200C0067223B /* Specific Fields */ = {
@@ -6965,6 +6994,7 @@
 				BE2AE4CC176E64D300A753E3 /* ButtonNavHighlightedCD~iphone.png in Resources */,
 				BE2AE4CD176E64D300A753E3 /* ButtonNavSelectedCD@2x~iphone.png in Resources */,
 				BE2AE4CE176E64D300A753E3 /* ButtonNavSelectedCD~iphone.png in Resources */,
+				BE1B3DE21810242E00DA2BD6 /* SYNTabsViewController.xib in Resources */,
 				BE2AE4D3176E689C00A753E3 /* ButtonBackCD@2x~iphone.png in Resources */,
 				BE2AE4D4176E689C00A753E3 /* ButtonBackCD~iphone.png in Resources */,
 				BE2AE4D5176E689C00A753E3 /* ButtonBackHighlightedCD@2x~iphone.png in Resources */,
@@ -7259,6 +7289,7 @@
 				01E427E51664DF21009B941F /* Channel.m in Sources */,
 				01E427F01664EE52009B941F /* _Channel.m in Sources */,
 				01E427F11664EE52009B941F /* _Video.m in Sources */,
+				BE1B3DE61810265700DA2BD6 /* SYNNavigationManager.m in Sources */,
 				014A456816691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				014A4570166A39E60091E4E5 /* SYNChannelsRootViewController.m in Sources */,
 				01B0A963166CE1EE00CAA235 /* SYNVideoThumbnailRegularCell.m in Sources */,
@@ -7353,6 +7384,7 @@
 				BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */,
 				BEEB6F201721807200FEFA43 /* SYNSearchTabView.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
+				BE1B3DE11810242E00DA2BD6 /* SYNTabsViewController.m in Sources */,
 				BE285D9B1725726300D995AB /* SYNExistingChannelsViewController.m in Sources */,
 				01AFF99617EC91540002131A /* NSData+LLDBQuickLook.m in Sources */,
 				BE285D9F172584E200D995AB /* SYNChannelCreateNewCell.m in Sources */,

@@ -54,6 +54,7 @@
 @property (nonatomic, strong) SYNOAuthNetworkEngine *oAuthNetworkEngine;
 @property (nonatomic, strong) SYNOnBoardingPopoverQueueController *onBoardingQueue;
 @property (nonatomic, strong) SYNVideoQueue *videoQueue;
+@property (nonatomic, strong) SYNNavigationManager* navigationManager;
 @property (nonatomic, strong) SYNViewStackManager *viewStackManager;
 @property (nonatomic, strong) User *currentUser;
 
@@ -137,6 +138,10 @@
     
     // ViewStack Manager //
     self.viewStackManager = [SYNViewStackManager manager];
+    
+    
+    // Video Queue View Controller //
+    self.navigationManager = [SYNNavigationManager manager];
     
     // Network Engine //
     [self initializeNetworkEngines];

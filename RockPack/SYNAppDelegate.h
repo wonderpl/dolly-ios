@@ -16,6 +16,7 @@
 #import "SYNViewStackManager.h"
 #import "User.h"
 #import "AppConstants.h"
+#import "SYNNavigationManager.h"
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
@@ -36,6 +37,7 @@
 @property (nonatomic, readonly) NSManagedObjectContext *mainManagedObjectContext;
 @property (nonatomic, readonly) NSManagedObjectContext *searchManagedObjectContext;
 @property (nonatomic, readonly) SYNChannelManager* channelManager;
+@property (nonatomic, readonly) SYNNavigationManager* navigationManager;
 @property (nonatomic, readonly) SYNOnBoardingPopoverQueueController* onBoardingQueue;
 @property (nonatomic, readonly) SYNVideoQueue* videoQueue;
 @property (nonatomic, readonly) SYNViewStackManager* viewStackManager;
