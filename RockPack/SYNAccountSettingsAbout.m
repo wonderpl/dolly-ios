@@ -37,12 +37,12 @@
     {
         if (IS_IPAD)
         {
-            self.contentSizeForViewInPopover = CGSizeMake(380, 476);
+            self.preferredContentSize = CGSizeMake(380, 476);
         }
         
         else
         {
-            self.contentSizeForViewInPopover = CGSizeMake(320, IS_IOS_7_OR_GREATER ? 598 : 578);
+            self.preferredContentSize = CGSizeMake(320, IS_IOS_7_OR_GREATER ? 598 : 578);
         }
        
     }
@@ -80,7 +80,7 @@
     
     self.navigationItem.leftBarButtonItem = backButtonItem;
     
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.contentSizeForViewInPopover.width * 0.5), -15.0, self.contentSizeForViewInPopover.width, 40.0)];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
     titleLabel.text = NSLocalizedString (@"settings_popover_about_title", nil);
@@ -101,7 +101,7 @@
     
     self.scrollView = [[UIScrollView alloc] initWithFrame: CGRectMake( 0, 0, screenWidth, screenHeight - 144.0)];
     self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
-    [self.scrollView setContentSize: self.contentSizeForViewInPopover];
+    [self.scrollView setContentSize: self.preferredContentSize];
     
     //Content
     [self rockpackLogoImage];
@@ -118,7 +118,7 @@
     [self attributionList];
     
     // Terms Button
-    self.termsButton = [[UIButton alloc] initWithFrame:CGRectMake((self.contentSizeForViewInPopover.width * 0.5) - 80.0,
+    self.termsButton = [[UIButton alloc] initWithFrame:CGRectMake((self.preferredContentSize.width * 0.5) - 80.0,
                                                                   
                                                                   IS_IPHONE ?
                                                                   
@@ -158,7 +158,7 @@
     
     
     // privacy button
-    self.privacyButton = [[UIButton alloc] initWithFrame:CGRectMake((self.contentSizeForViewInPopover.width * 0.5) - 80.0,
+    self.privacyButton = [[UIButton alloc] initWithFrame:CGRectMake((self.preferredContentSize.width * 0.5) - 80.0,
                                                                   
                                                                   self.termsButton.frame.origin.y + self.termsButton.frame.size.height + 10.0f,
                                                                   
@@ -191,7 +191,7 @@
 - (void) rockpackLogoImage
 {
     self.logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"IconRockpackAbout"]];
-    self.logoImageView.frame = CGRectMake((self.contentSizeForViewInPopover.width * 0.5) - 38.0, (IS_IPAD ? 40.0 : 30.0), 76.0, 77.0);
+    self.logoImageView.frame = CGRectMake((self.preferredContentSize.width * 0.5) - 38.0, (IS_IPAD ? 40.0 : 30.0), 76.0, 77.0);
     self.logoImageView.backgroundColor = [UIColor clearColor];
     [self.scrollView addSubview: self.logoImageView];
     
@@ -216,7 +216,7 @@
                                                                               self.logoImageView.frame.origin.y
                                                                               + self.logoImageView.frame.size.height,
                                                                               
-                                                                              self.contentSizeForViewInPopover.width,
+                                                                              self.preferredContentSize.width,
                                                                               
                                                                               60.0)];
     
@@ -243,7 +243,7 @@
                                                                                 + self.rockpackWithVersionLabel.frame.size.height
                                                                                 - 27.0,
                                                                                 
-                                                                                self.contentSizeForViewInPopover.width,
+                                                                                self.preferredContentSize.width,
                                                                                 
                                                                                 30.0)];
     
@@ -292,7 +292,7 @@
                                                 + self.rockpackCopyrightTextLabel.frame.size.height
                                                 - 20.0,
                                                 
-                                                self.contentSizeForViewInPopover.width,
+                                                self.preferredContentSize.width,
                                                 
                                                 300.0f);
 

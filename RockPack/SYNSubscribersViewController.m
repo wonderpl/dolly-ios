@@ -57,7 +57,7 @@
         
         self.navigationItem.titleView = labelContentView;
         
-        self.infoLabel = [[UILabel alloc] initWithFrame: CGRectMake(0.0f, 0.0f, self.contentSizeForViewInPopover.width, 0.0f)];
+        self.infoLabel = [[UILabel alloc] initWithFrame: CGRectMake(0.0f, 0.0f, self.preferredContentSize.width, 0.0f)];
         self.infoLabel.backgroundColor = [UIColor clearColor];
         
         self.infoLabel.textColor = [UIColor colorWithRed: (28.0 / 255.0)

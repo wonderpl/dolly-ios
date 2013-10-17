@@ -196,7 +196,7 @@
             CGFloat height = ceilf(rect.size.height);
             CGFloat width  = ceilf(rect.size.width);
             
-            CGSize expectedLabelSize = (CGSize){width, height};
+            expectedLabelSize = (CGSize){width, height};
             
             label.frame = CGRectMake(containerRect.origin.x + 6.0,
                                      (containerRect.size.height) - (expectedLabelSize.height) - (IS_IPHONE ? 28.0f : 0.0f),
