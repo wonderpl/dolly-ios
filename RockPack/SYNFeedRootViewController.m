@@ -75,7 +75,7 @@ typedef void(^FeedDataErrorBlock)(void);
 {
     [super viewDidLoad];
     
-    self.wantsFullScreenLayout = YES;
+//    self.wantsFullScreenLayout = YES;
     
     self.feedItemsData = @[];
     
