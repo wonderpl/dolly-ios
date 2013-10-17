@@ -13,7 +13,6 @@
 #import "SYNLoginViewController.h"
 #import "SYNLoginViewControllerIphone.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNTextFieldLoginiPhone.h"
 #import "UIFont+SYNFont.h"
 #import <FacebookSDK/FacebookSDK.h>
 
@@ -25,15 +24,15 @@
 
 @property (nonatomic) BOOL hasAnimated;
 @property (nonatomic) BOOL isPreIPhone5;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* ddInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* emailInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* mmInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* passwordInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* registeringUserEmailInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* registeringUserNameInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* registeringUserPasswordInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* userNameInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* yyyyInputField;
+@property (nonatomic, strong) IBOutlet UITextField* ddInputField;
+@property (nonatomic, strong) IBOutlet UITextField* emailInputField;
+@property (nonatomic, strong) IBOutlet UITextField* mmInputField;
+@property (nonatomic, strong) IBOutlet UITextField* passwordInputField;
+@property (nonatomic, strong) IBOutlet UITextField* registeringUserEmailInputField;
+@property (nonatomic, strong) IBOutlet UITextField* registeringUserNameInputField;
+@property (nonatomic, strong) IBOutlet UITextField* registeringUserPasswordInputField;
+@property (nonatomic, strong) IBOutlet UITextField* userNameInputField;
+@property (nonatomic, strong) IBOutlet UITextField* yyyyInputField;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activityIndicator;
 @property (nonatomic, strong) IBOutlet UIButton* passwordForgottenButton;
 @property (nonatomic, strong) IBOutlet UIImage* avatarImage;

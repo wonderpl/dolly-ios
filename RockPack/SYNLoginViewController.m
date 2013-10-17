@@ -19,7 +19,6 @@
 #import "SYNOAuth2Credential.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPopoverBackgroundView.h"
-#import "SYNTextFieldLogin.h"
 #import "UIFont+SYNFont.h"
 #import "User.h"
 
@@ -33,12 +32,12 @@
 @property (nonatomic) CGRect initialUsernameFrame;
 @property (nonatomic) CGRect signUpButtonInitialFrame;
 @property (nonatomic, readonly) CGFloat elementsOffsetY;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* ddInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* emailInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* mmInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* passwordInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* userNameInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin* yyyyInputField;
+@property (nonatomic, strong) IBOutlet UITextField* ddInputField;
+@property (nonatomic, strong) IBOutlet UITextField* emailInputField;
+@property (nonatomic, strong) IBOutlet UITextField* mmInputField;
+@property (nonatomic, strong) IBOutlet UITextField* passwordInputField;
+@property (nonatomic, strong) IBOutlet UITextField* userNameInputField;
+@property (nonatomic, strong) IBOutlet UITextField* yyyyInputField;
 @property (nonatomic, strong) IBOutlet UIButton* faceImageButton;
 @property (nonatomic, strong) IBOutlet UIButton* facebookSignInButton;
 @property (nonatomic, strong) IBOutlet UIButton* finalLoginButton;
