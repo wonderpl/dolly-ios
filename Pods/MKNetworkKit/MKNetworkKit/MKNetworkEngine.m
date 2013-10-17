@@ -72,65 +72,59 @@ static NSOperationQueue *_sharedNetworkQueue;
 #pragma mark -
 #pragma mark Initialization
 
-+ (void) initialize
-{
-  if (!_sharedNetworkQueue)
-  {
++(void) initialize {
+  
+  if(!_sharedNetworkQueue) {
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
       _sharedNetworkQueue = [[NSOperationQueue alloc] init];
-        
-      [_sharedNetworkQueue addObserver: [self self]
-                            forKeyPath: @"operationCount"
-                               options: 0
-                               context: NULL];
-        
-      [_sharedNetworkQueue setMaxConcurrentOperationCount: 6];
+      [_sharedNetworkQueue addObserver:[self self] forKeyPath:@"operationCount" options:0 context:NULL];
+      [_sharedNetworkQueue setMaxConcurrentOperationCount:6];
+      
     });
   }
 }
 
-
-- (id) init
-{
-  return [self initWithHostName: nil];
+- (id) init {
+  
+  return [self initWithHostName:nil];
 }
 
-
-- (id) initWithHostName: (NSString*) hostName
-{
+- (id) initWithHostName:(NSString*) hostName {
   
   return [self initWithHostName:hostName apiPath:nil customHeaderFields:nil];
 }
 
+- (id) initWithHostName:(NSString*) hostName apiPath:(NSString*) apiPath customHeaderFields:(NSDictionary*) headers {
+  
+  return [self initWithHostName:hostName portNumber:0 apiPath:apiPath customHeaderFields:headers];
+}
 
-- (id) initWithHostName: (NSString*) hostName
-                apiPath: (NSString*) apiPath
-     customHeaderFields: (NSDictionary*) headers
-{
-  if ((self = [super init]))
-  {
+- (id) initWithHostName:(NSString*) hostName portNumber:(int)portNumber apiPath:(NSString*) apiPath customHeaderFields:(NSDictionary*) headers {
+  if((self = [super init])) {
+    
+    self.portNumber = portNumber;
     self.apiPath = apiPath;
     self.backgroundCacheQueue = dispatch_queue_create("com.mknetworkkit.cachequeue", DISPATCH_QUEUE_SERIAL);
     self.operationQueue = dispatch_queue_create("com.mknetworkkit.operationqueue", DISPATCH_QUEUE_SERIAL);
     
-    if (hostName)
-    {
-      [[NSNotificationCenter defaultCenter] addObserver: self
-                                               selector: @selector(reachabilityChanged:)
-                                                   name: kReachabilityChangedNotification
-                                                 object: nil];
+    if(hostName) {
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(reachabilityChanged:)
+                                                   name:kReachabilityChangedNotification
+                                                 object:nil];
       
       self.hostName = hostName;
       self.reachability = [Reachability reachabilityWithHostname:self.hostName];
       
       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         [self.reachability startNotifier];
       });
     }
     
-    if (headers[@"User-Agent"] == nil)
-    {
+    if(headers[@"User-Agent"] == nil) {
+      
       NSMutableDictionary *newHeadersDict = [headers mutableCopy];
       NSString *userAgentString = [NSString stringWithFormat:@"%@/%@",
                                    [[NSBundle mainBundle] infoDictionary][(NSString *)kCFBundleNameKey],

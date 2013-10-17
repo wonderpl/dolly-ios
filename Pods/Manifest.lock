@@ -1,26 +1,23 @@
 PODS:
-  - Appirater (HEAD based on 1.0.3)
-  - Kiwi (2.1)
+  - Appirater (HEAD based on 2.0.2)
   - MKNetworkKit (HEAD based on 0.87):
     - Reachability (~> 3.1.0)
-  - Reachability (HEAD based on 3.1.0)
-  - SparkInspector (1.0.9)
+  - Reachability (HEAD based on 3.1.1)
+  - SparkInspector (1.0.13)
   - SSKeychain (0.2.1)
 
 DEPENDENCIES:
   - Appirater (HEAD)
-  - Kiwi
   - MKNetworkKit (HEAD)
   - Reachability (HEAD)
   - SparkInspector
   - SSKeychain (~> 0.2.1)
 
 SPEC CHECKSUMS:
-  Appirater: 1c146af7b0ef3e2114a17db2e185f94367f63a99
-  Kiwi: 054ef97d0e50c279b21113a0880a906fa153a7fd
+  Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
   MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
-  Reachability: ba94ecd4eaa037be3d0588b38956672588530c5b
-  SparkInspector: 624c94c3f7ae60ac57f85fbda48fce1f4470d9b4
+  Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
+  SparkInspector: 4bd64457d0d8b488b071839cfa7d459fcc33c967
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
 
-COCOAPODS: 0.20.2
+COCOAPODS: 0.26.2

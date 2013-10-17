@@ -83,7 +83,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.mainNavigationController.navigationBarHidden = YES;
         self.mainNavigationController.delegate = self;
         self.mainNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        self.mainNavigationController.wantsFullScreenLayout = YES;
+//        self.mainNavigationController.wantsFullScreenLayout = YES;
         
         appDelegate.viewStackManager.navigationController = self.mainNavigationController;
         
