@@ -59,9 +59,17 @@
 {
     CGRect titleFrame = self.titleLabel.frame;
     
-    CGSize expectedSize = [titleString sizeWithFont: self.titleLabel.font
-                                  constrainedToSize: CGSizeMake(titleFrame.size.width, 500.0)
-                                      lineBreakMode: self.titleLabel.lineBreakMode];
+    NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: titleString
+                                                                          attributes: @{NSFontAttributeName: self.titleLabel.font}];
+    
+    CGRect rect = [attributedText boundingRectWithSize: (CGSize){titleFrame.size.width, CGFLOAT_MAX}
+                                               options: NSStringDrawingUsesLineFragmentOrigin
+                                               context: nil];
+    
+    CGFloat height = ceilf(rect.size.height);
+    CGFloat width  = ceilf(rect.size.width);
+    
+    CGSize expectedSize = (CGSize){width, height};
     
     titleFrame.size.height = expectedSize.height;
     titleFrame.origin.y = self.imageView.frame.size.height - titleFrame.size.height - 4.0;

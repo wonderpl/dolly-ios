@@ -37,17 +37,22 @@
     }
 }
 
--(void)setDisplayName:(NSString*)name
+- (void) setDisplayName: (NSString*)name
 {
-    
     // name label //
-    
-    
     CGRect nameLabelFrame = self.nameLabel.frame;
     
-    CGSize correctSize = [name sizeWithFont:self.nameLabel.font
-                          constrainedToSize:CGSizeMake(self.frame.size.width - 10.0, 200.0)
-                              lineBreakMode:NSLineBreakByWordWrapping];
+    NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: name
+                                                                          attributes: @{NSFontAttributeName: self.nameLabel.font}];
+    
+    CGRect rect = [attributedText boundingRectWithSize: (CGSize){self.frame.size.width - 10.0, CGFLOAT_MAX}
+                                               options: NSStringDrawingUsesLineFragmentOrigin
+                                               context: nil];
+    
+    CGFloat height = ceilf(rect.size.height);
+    CGFloat width  = ceilf(rect.size.width);
+    
+    CGSize correctSize = (CGSize){width, height};
     
     
     nameLabelFrame.size = correctSize;

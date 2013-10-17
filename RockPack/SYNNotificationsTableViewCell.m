@@ -191,9 +191,17 @@
     CGRect textLabelFrame = self.textLabel.frame;
     CGFloat maxWidth = IS_IPAD ? 200.0 : 170.0;
     
-    CGSize mainTSize = [messageTitle sizeWithFont: self.textLabel.font
-                                constrainedToSize: CGSizeMake(maxWidth, 500.0)
-                                    lineBreakMode: self.textLabel.lineBreakMode];
+    NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: messageTitle
+                                                                          attributes: @{NSFontAttributeName: self.textLabel.font}];
+    
+    CGRect rect = [attributedText boundingRectWithSize: (CGSize){maxWidth, CGFLOAT_MAX}
+                                               options: NSStringDrawingUsesLineFragmentOrigin
+                                               context: nil];
+    
+    CGFloat height = ceilf(rect.size.height);
+    CGFloat width  = ceilf(rect.size.width);
+    
+    CGSize mainTSize = (CGSize){width, height};
     
     mainTSize.height += 2.0f;
     self.mainTextSize = mainTSize;
