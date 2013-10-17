@@ -113,7 +113,7 @@
     
     // == Set the first vc
     
-    [self addChildViewController:self.viewControllers[0]];
+    self.currentViewController = self.viewControllers[0];
     
 
     
@@ -124,11 +124,19 @@
 
 #pragma mark - UIViewController Containment
 
-- (void) addChildViewController: (UIViewController *) newViewController
+
+
+-(void)setCurrentViewController:(SYNAbstractViewController *)currentViewController
 {
+    if(!currentViewController)
+    {
+        DebugLog(@"setCurrentViewController: to nil");
+        return;
+        
+    }
     
-    __weak SYNAbstractViewController* toViewController = (SYNAbstractViewController*)newViewController;
-    __weak SYNAbstractViewController* fromViewController = self.currentViewController;
+    __weak SYNAbstractViewController* toViewController = currentViewController;
+    __weak SYNAbstractViewController* fromViewController = _currentViewController;
     
     [toViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
     
@@ -147,7 +155,7 @@
         
         [toViewController didMoveToParentViewController: self];
         
-        self.currentViewController = toViewController;
+        _currentViewController = toViewController;
     };
     
     // == Do the Transition selectively == //
@@ -173,30 +181,7 @@
         toViewController.view.frame = self.view.frame;
         CompleteTransitionBlock(YES);
     }
-    
-    
-    
-    
-    
-    
 }
-
-
-
-
-
-
-
-
-
-- (void) swipedTo: (UISwipeGestureRecognizerDirection) direction
-{
-    // TODO: swipe to change view
-}
-
-
-
-
 
 
 -(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName
@@ -211,15 +196,13 @@
     return child;
 }
 
-#pragma mark - UIScrollViewDelegate
+-(void)navigateToPageByName:(NSString*)pageName
+{
+    self.currentViewController = [self viewControllerByPageName:pageName];
+    
+}
 
-// TODO: notify with kScrollerPageChanged AND [lastSelectedViewController viewDidScrollToBack]; AND [self.showingViewController viewDidScrollToFront];
-
-
-
-
-
-
+#pragma mark - Description
 
 - (NSString *) description
 {

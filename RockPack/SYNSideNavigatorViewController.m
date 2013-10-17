@@ -36,6 +36,9 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 
 @interface SYNSideNavigatorViewController () <SYNImagePickerControllerDelegate>
+{
+    SYNAppDelegate* appDelegate;
+}
 
 @property (nonatomic) NSInteger unreadNotifications;
 @property (nonatomic, strong) IBOutlet UIButton* settingsButton;
@@ -50,7 +53,6 @@ typedef void (^SideNavigationMotionBlock)(void);
 @property (nonatomic, strong) UIColor* navItemColor;
 @property (nonatomic, strong) UIView* bottomExtraView;
 @property (nonatomic, strong) UIViewController* currentlyLoadedViewController;
-@property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (strong, nonatomic) SYNImagePickerController* imagePickerController;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *avatarButton;
@@ -73,7 +75,6 @@ typedef void (^SideNavigationMotionBlock)(void);
 @synthesize currentlyLoadedViewController = _currentlyLoadedViewController;
 @synthesize state = _state;
 
-
 #pragma mark - Object lifecycle
 
 - (id) init
@@ -95,7 +96,7 @@ typedef void (^SideNavigationMotionBlock)(void);
         
         _state = SideNavigationStateHidden;
         
-        self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+        appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
         
         self.unreadNotifications = 0;
     }
@@ -250,7 +251,7 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 - (void) getNotifications
 {
-    [self.appDelegate.oAuthNetworkEngine notificationsFromUserId: self.appDelegate.currentUser.uniqueId completionHandler: ^(id response) {
+    [appDelegate.oAuthNetworkEngine notificationsFromUserId: appDelegate.currentUser.uniqueId completionHandler: ^(id response) {
                                                    
             if (![response isKindOfClass:[NSDictionary class]])
                 return;
@@ -400,11 +401,8 @@ typedef void (^SideNavigationMotionBlock)(void);
     NSDictionary* navigationElement = (NSDictionary*)(self.navigationData)[indexPath.row];
     NSString* navigationAction = (NSString*)navigationElement[kSideNavAction];
     
-    NSNotification* navigationNotification = [NSNotification notificationWithName: kNavigateToPage
-                                                                           object: self
-                                                                         userInfo: @{@"pageName":navigationAction}];
+    [appDelegate.navigationManager navigateToPageByName:navigationAction];
     
-    [[NSNotificationCenter defaultCenter] postNotification: navigationNotification];
 }
 
 
@@ -611,7 +609,7 @@ typedef void (^SideNavigationMotionBlock)(void);
 - (BOOL) textFieldShouldBeginEditing: (UITextField *) textField
 {
     
-    [self.appDelegate.viewStackManager presentSearchBar];
+    [appDelegate.viewStackManager presentSearchBar];
     
     return YES;
 }
@@ -623,7 +621,7 @@ typedef void (^SideNavigationMotionBlock)(void);
 - (void) closeSearch: (id) sender
 {
     
-    [self.appDelegate.viewStackManager dismissSearchBar];
+    [appDelegate.viewStackManager dismissSearchBar];
 }
 
 
@@ -808,7 +806,7 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 - (void) userDataChanged: (NSNotification*) notification
 {
-    [self setUser: self.appDelegate.currentUser];
+    [self setUser: appDelegate.currentUser];
 }
 
 
@@ -840,7 +838,7 @@ typedef void (^SideNavigationMotionBlock)(void);
     self.avatarButton.enabled = NO;
     self.profilePictureImageView.image = image;
     [self.activityIndicator startAnimating];
-    [self.appDelegate.oAuthNetworkEngine updateAvatarForUserId: self.appDelegate.currentOAuth2Credentials.userId
+    [appDelegate.oAuthNetworkEngine updateAvatarForUserId: appDelegate.currentOAuth2Credentials.userId
                                                          image: image
                                              completionHandler: ^(NSDictionary* result)
      {

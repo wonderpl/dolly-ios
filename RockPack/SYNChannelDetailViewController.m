@@ -1484,11 +1484,7 @@
 {
     if ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
     {
-        NSNotification *navigationNotification = [NSNotification notificationWithName: kNavigateToPage
-                                                                               object: self
-                                                                             userInfo: @{@"pageName": kProfileViewId}];
-        
-        [[NSNotificationCenter defaultCenter] postNotification: navigationNotification];
+        [appDelegate.navigationManager navigateToPageByName:kProfileViewId];
         return;
     }
     
