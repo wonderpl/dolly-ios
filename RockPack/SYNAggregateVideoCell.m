@@ -34,32 +34,13 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
     self.likeLabel.font = [UIFont lightCustomFontOfSize: self.likeLabel.font.pointSize];
-    
-    if (!IS_IPAD)
-    {
-        self.likesNumberLabel.hidden = YES;
-    }
-    else
-    {
-        self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
-    }
-    
-    // Tap for showing video
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                       action: @selector(showVideo:)];
-    self.tap.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.tap];
-    
-    // Touch for highlighting cells when the user touches them (like UIButton)
-    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self
-                                                            action: @selector(showGlossLowlight:)];
-    
-    self.touch.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.touch];
+    self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
     
     
     [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
           forCellWithReuseIdentifier:kVideoItemCellIndetifier];
+    
+    [self.collectionView reloadData];
 }
 
 
@@ -268,6 +249,8 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndetifier
                                                                                     forIndexPath: indexPath];
     

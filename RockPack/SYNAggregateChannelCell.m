@@ -9,6 +9,7 @@
 #import "AppConstants.h"
 #import "SYNAggregateChannelCell.h"
 #import "SYNTouchGestureRecognizer.h"
+#import "SYNAggregateChannelItemCell.h"
 #import "UIImage+Tint.h"
 
 @interface SYNAggregateChannelCell () <UIGestureRecognizerDelegate>
@@ -19,6 +20,8 @@
 
 @end
 
+static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
+
 
 @implementation SYNAggregateChannelCell
 
@@ -27,6 +30,8 @@
     [super awakeFromNib];
     
     
+    [self.collectionView registerNib:[UINib nibWithNibName:kChannelItemCellIndetifier bundle:nil]
+          forCellWithReuseIdentifier:kChannelItemCellIndetifier];
 }
 
 
@@ -115,5 +120,27 @@
     [self.viewControllerDelegate touchedAggregateCell];
 }
 
+#pragma mark - UICollectionView DataSource
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    
+    return 1;
+    
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    SYNAggregateChannelItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kChannelItemCellIndetifier
+                                                                                    forIndexPath: indexPath];
+    
+    
+    return itemCell;
+    
+    
+}
 
 @end
