@@ -46,17 +46,6 @@
                             <outlet property="dataSource" destination="2" id="8sF-JC-nbU"/>
                         </connections>
                     </collectionView>
-                    <view contentMode="scaleToFill" id="15" userLabel="Container">
-                        <rect key="frame" x="0.0" y="53" width="310" height="174"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    </view>
-                    <imageView contentMode="scaleToFill" image="GlossFeedVideo.png" id="33" userLabel="Image View - Gloss placeholder">
-                        <rect key="frame" x="0.0" y="53" width="310" height="174"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="28" userLabel="User Thumbnail Button">
                         <rect key="frame" x="10" y="10" width="33" height="33"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,10 +87,9 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="353" height="261"/>
             <connections>
+                <outlet property="collectionView" destination="lMc-y5-kdQ" id="QfR-qq-uHx"/>
                 <outlet property="heartButton" destination="31" id="32"/>
-                <outlet property="imageContainer" destination="15" id="18"/>
                 <outlet property="likeLabel" destination="19" id="20"/>
-                <outlet property="lowlightImageView" destination="33" id="36"/>
                 <outlet property="mainTitleLabel" destination="26" id="27"/>
                 <outlet property="messageLabel" destination="9" id="11"/>
                 <outlet property="userThumbnailButton" destination="28" id="29"/>
@@ -112,6 +100,5 @@
     <resources>
         <image name="ButtonFeedLikeDefault.png" width="44" height="44"/>
         <image name="ButtonFeedLikeSelected.png" width="44" height="44"/>
-        <image name="GlossFeedVideo.png" width="310" height="174"/>
     </resources>
 </document>

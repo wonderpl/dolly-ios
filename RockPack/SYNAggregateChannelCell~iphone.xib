@@ -11,18 +11,9 @@
             <rect key="frame" x="0.0" y="0.0" width="310" height="364"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="310" height="363.99999999999994"/>
+                <rect key="frame" x="0.0" y="0.0" width="310" height="364"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" id="17" userLabel="Image Container">
-                        <rect key="frame" x="0.0" y="54" width="310" height="310"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
-                    </view>
-                    <imageView contentMode="scaleToFill" image="channelFeedCover.png" id="25" userLabel="Image View - Cover Overlay">
-                        <rect key="frame" x="0.0" y="54" width="310" height="310"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="13" userLabel="User Thumb Image View">
                         <rect key="frame" x="10" y="10" width="33" height="33"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -62,8 +53,6 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="353" height="361"/>
             <connections>
-                <outlet property="imageContainer" destination="17" id="18"/>
-                <outlet property="lowlightImageView" destination="25" id="26"/>
                 <outlet property="mainTitleLabel" destination="19" id="20"/>
                 <outlet property="messageLabel" destination="14" id="15"/>
                 <outlet property="userThumbnailButton" destination="23" id="24"/>
@@ -71,7 +60,4 @@
             </connections>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="channelFeedCover.png" width="298" height="298"/>
-    </resources>
 </document>

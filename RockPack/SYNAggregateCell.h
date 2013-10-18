@@ -22,7 +22,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel *mainTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
-@property (nonatomic, strong) IBOutlet UIView *imageContainer;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 
 @property (nonatomic, strong) NSDictionary *boldTextAttributes;
