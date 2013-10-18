@@ -315,6 +315,11 @@ static NSDateFormatter *dateFormatter = nil;
     self.channel.channelOwner.markedForDeletionValue = value_;
 }
 
+-(NSString*)thumbnailURL
+{
+    return self.video.thumbnailURL;
+}
+
 -(NSString*)description
 {
     NSMutableString* dMutableString = [[NSMutableString alloc] init];

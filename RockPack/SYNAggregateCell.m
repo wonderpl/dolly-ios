@@ -32,6 +32,8 @@
     
     self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
     self.userThumbnailImageView.clipsToBounds = YES;
+    
+    self.collectionData = @[]; // set to 0
 }
 
 

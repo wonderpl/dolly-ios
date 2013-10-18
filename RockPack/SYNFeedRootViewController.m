@@ -749,22 +749,36 @@ typedef void(^FeedDataErrorBlock)(void);
         videoInstance = (VideoInstance*)(self.feedVideosById)[feedItem.coverIndexArray[0]]; // there should be only one
 
         cell.mainTitleLabel.text = videoInstance.title;
+        
+        
 
         if (!feedItem.title) // it should usually be nil
         {
+            // Creating "Dolly Proxima-SMith created 1 new collection
             [cell setTitleMessageWithDictionary: @{@"display_name" : videoInstance.channel.channelOwner ? videoInstance.channel.channelOwner.displayName : @"",
                                                    @"item_count" : @(feedItemsAggregated),
-             @"channel_name" : videoInstance.channel ? videoInstance.channel.title : @""}];
+                                                   @"channel_name" : videoInstance.channel ? videoInstance.channel.title : @""}];
             
         }
-        else
+        else // force show a specific message
             cell.messageLabel.text = feedItem.title;
 
         [cell setSupplementaryMessageWithDictionary: @{@"star_count": videoInstance.video ? videoInstance.video.starCount : @0,
          @"starrers": videoInstance ? [videoInstance.starrers array] : @[]}];
         
-        [cell setCoverImagesAndTitlesWithArray: @[@{@"image": videoInstance.video ? videoInstance.video.thumbnailURL : @"",
-         @"title" : videoInstance ? videoInstance.title : @""}]];
+        NSMutableArray* videos = [NSMutableArray array];
+        VideoInstance* vi;
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            for (FeedItem* childFeedItem in feedItem.feedItems)
+            {
+                // they have also the same type (video)
+                vi = (VideoInstance*)((self.feedVideosById)[childFeedItem.resourceId]);
+                [videos addObject:vi];
+            }
+        }
+        
+        cell.collectionData = videos;
         
         channelOwner = videoInstance.channel.channelOwner; // heuristic, get the last video instance, all should have the same channelOwner however
         

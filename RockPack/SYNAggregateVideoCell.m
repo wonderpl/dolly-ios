@@ -12,6 +12,8 @@
 #import "SYNTouchGestureRecognizer.h"
 #import "SYNAggregateVideoItemCell.h"
 #import "UIColor+SYNColor.h"
+#import "VideoInstance.h"
+#import "Video.h"
 #import "UIImage+Tint.h"
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
@@ -38,18 +40,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
           forCellWithReuseIdentifier:kVideoItemCellIndetifier];
     
     [self.collectionView reloadData];
-}
-
-
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) array
-{
-
-    
-    NSDictionary *coverInfo = (NSDictionary *) array[0];
-    
-    [self.videoImageView setImageWithURL: [NSURL URLWithString: coverInfo[@"image"]]
-                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                 options: SDWebImageRetryFailed];
 }
 
 
@@ -212,7 +202,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 1;
+    return self.collectionData.count;
     
 }
 
@@ -223,6 +213,12 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndetifier
                                                                                     forIndexPath: indexPath];
     
+    VideoInstance* videoInstance = self.collectionData[indexPath.item];
+    
+    
+    [itemCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
+                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                options: SDWebImageRetryFailed];
     
     return itemCell;
     
