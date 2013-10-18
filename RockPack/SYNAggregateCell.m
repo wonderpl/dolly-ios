@@ -10,6 +10,8 @@
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #define STANDARD_BUTTON_CAPACITY 10
 
 @implementation SYNAggregateCell
@@ -25,6 +27,11 @@
     
     self.boldTextAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize: 13.0f],
                                 NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
+    
+    // == Round off the image == //
+    
+    self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
+    self.userThumbnailImageView.clipsToBounds = YES;
 }
 
 

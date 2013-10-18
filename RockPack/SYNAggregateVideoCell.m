@@ -16,10 +16,7 @@
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
 @property (nonatomic, strong) IBOutlet UILabel *likeLabel;
-@property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
 
@@ -201,34 +198,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 }
 
 
-#pragma mark - Gesture recognizers for arc menu and show video
-
-// This is used to lowlight the gloss image on touch
-- (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
-{
-    UIImage *glossImage = [UIImage imageNamed: @"GlossFeedVideo"];
-    
-    switch (recognizer.state)
-    {
-        case UIGestureRecognizerStateBegan :
-        {
-            // Set lowlight tint
-            UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
-                                                                                          alpha: 0.3]];
-            self.lowlightImageView.image = lowlightImage;
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
-            self.lowlightImageView.image = glossImage;
-        }
-            
-        default:
-            break;
-    }
-}
 
 
 - (void) showVideo: (UITapGestureRecognizer *) recognizer
