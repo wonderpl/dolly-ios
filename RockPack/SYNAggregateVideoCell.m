@@ -12,14 +12,13 @@
 #import "SYNTouchGestureRecognizer.h"
 #import "SYNAggregateVideoItemCell.h"
 #import "UIColor+SYNColor.h"
+#import "VideoInstance.h"
+#import "Video.h"
 #import "UIImage+Tint.h"
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
 @property (nonatomic, strong) IBOutlet UILabel *likeLabel;
-@property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
 
@@ -44,26 +43,16 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 }
 
 
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) array
-{
-
-    
-    NSDictionary *coverInfo = (NSDictionary *) array[0];
-    
-    [self.videoImageView setImageWithURL: [NSURL URLWithString: coverInfo[@"image"]]
-                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                 options: SDWebImageRetryFailed];
-}
-
-
 - (void) setViewControllerDelegate: (UIViewController *) viewControllerDelegate
 {
     [super setViewControllerDelegate: (id < SYNAggregateCellDelegate >)viewControllerDelegate];
 
-    [self.heartButton addTarget: self.viewControllerDelegate
+    [self.likeButton addTarget: self.viewControllerDelegate
                          action: @selector(likeButtonPressed:)
                forControlEvents: UIControlEventTouchUpInside];
 }
+
+
 
 
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
@@ -146,7 +135,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
                                                                                           attributes: self.lightTextAttributes]];
     }
     
-    self.heartButton.selected = NO;
+    self.likeButton.selected = NO;
     
     if (users.count > 0)
     {
@@ -165,7 +154,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
             if ([co.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
             {
                 name = @"You";
-                self.heartButton.selected = YES;
+                self.likeButton.selected = YES;
             }
             else
             {
@@ -196,39 +185,9 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 {
     [super prepareForReuse];
     
-    self.likeLabel.hidden = NO;
-    self.heartButton.selected = NO;
 }
 
 
-#pragma mark - Gesture recognizers for arc menu and show video
-
-// This is used to lowlight the gloss image on touch
-- (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
-{
-    UIImage *glossImage = [UIImage imageNamed: @"GlossFeedVideo"];
-    
-    switch (recognizer.state)
-    {
-        case UIGestureRecognizerStateBegan :
-        {
-            // Set lowlight tint
-            UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
-                                                                                          alpha: 0.3]];
-            self.lowlightImageView.image = lowlightImage;
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
-            self.lowlightImageView.image = glossImage;
-        }
-            
-        default:
-            break;
-    }
-}
 
 
 - (void) showVideo: (UITapGestureRecognizer *) recognizer
@@ -243,7 +202,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 1;
+    return self.collectionData.count;
     
 }
 
@@ -254,6 +213,12 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndetifier
                                                                                     forIndexPath: indexPath];
     
+    VideoInstance* videoInstance = self.collectionData[indexPath.item];
+    
+    
+    [itemCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
+                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                options: SDWebImageRetryFailed];
     
     return itemCell;
     

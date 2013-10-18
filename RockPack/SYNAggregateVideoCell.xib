@@ -94,8 +94,8 @@
             <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
             <size key="customSize" width="353" height="231"/>
             <connections>
-                <outlet property="heartButton" destination="31" id="32"/>
                 <outlet property="imageContainer" destination="15" id="16"/>
+                <outlet property="likeButton" destination="31" id="qkh-YN-g4I"/>
                 <outlet property="likeLabel" destination="19" id="22"/>
                 <outlet property="likesNumberLabel" destination="33" id="34"/>
                 <outlet property="lowlightImageView" destination="35" id="38"/>

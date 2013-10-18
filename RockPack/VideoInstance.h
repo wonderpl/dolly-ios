@@ -6,6 +6,7 @@
 @property (nonatomic) BOOL selectedForVideoQueue;
 @property (nonatomic, strong) NSNumber* starredByUser;
 @property (nonatomic) BOOL starredByUserValue;
+@property (nonatomic, readonly) NSString* thumbnailURL;
 
 + (VideoInstance *) instanceFromDictionary: (NSDictionary *) dictionary
                  usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
