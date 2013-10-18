@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import <UIKit/UIKit.h>
 
-@protocol SYNAggregateCellDelegate <NSObject>
+@protocol SYNAggregateCellDelegate <NSObject, UICollectionViewDataSource>
 
 - (void) touchedAggregateCell;
 
@@ -23,6 +23,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *mainTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UIView *imageContainer;
+@property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
+
 @property (nonatomic, strong) NSDictionary *boldTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;

@@ -59,4 +59,15 @@
 }
 
 
+#pragma mark - UICollectionView DataSource
+
+// they all have 1 section
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+
+
 @end
