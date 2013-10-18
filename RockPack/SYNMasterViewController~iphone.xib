@@ -17,6 +17,7 @@
                 <outlet property="searchButton" destination="48" id="50"/>
                 <outlet property="sideNavigationButton" destination="12" id="38"/>
                 <outlet property="sideNavigationContainerView" destination="28" id="xzF-5M-RyN"/>
+                <outlet property="tabsView" destination="6hy-Hf-wx9" id="HeQ-oo-rJG"/>
                 <outlet property="view" destination="1" id="19"/>
             </connections>
         </placeholder>
@@ -121,7 +122,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="6hy-Hf-wx9" userLabel="Tabs">
+                <view contentMode="scaleToFill" id="6hy-Hf-wx9" userLabel="Tabs">
                     <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
@@ -181,7 +182,6 @@
         <image name="ButtonNavHighlighted.png" width="48" height="49"/>
         <image name="ButtonNavSelected.png" width="48" height="49"/>
         <image name="ButtonSearch.png" width="48" height="49"/>
-        <image name="IconSearch.png" width="34" height="45"/>
         <image name="IconSearch.png" width="34" height="45"/>
         <image name="TabActivity.png" width="64" height="49"/>
         <image name="TabFeed.png" width="64" height="49"/>

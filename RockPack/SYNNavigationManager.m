@@ -66,9 +66,11 @@
     
     for (UIButton *tab in masterController.tabs)
     {
-        [tab	 addTarget: self
+        
+        [tab addTarget: self
                 action: @selector(tabPressed:)
       forControlEvents: UIControlEventTouchUpInside];
+        
     }
 }
 
