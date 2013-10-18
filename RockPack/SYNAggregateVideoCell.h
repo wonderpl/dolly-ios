@@ -10,7 +10,10 @@
 
 @interface SYNAggregateVideoCell : SYNAggregateCell
 
-@property (nonatomic, strong) IBOutlet UIButton* heartButton;
+@property (nonatomic, strong) IBOutlet UIButton* likeButton;
+@property (nonatomic, strong) IBOutlet UIButton* addButton;
+@property (nonatomic, strong) IBOutlet UIButton* shareButton;
+
 @property (nonatomic, strong) IBOutlet UIImageView* videoImageView;
 @property (nonatomic, strong) IBOutlet UILabel* likesNumberLabel;
 

@@ -47,10 +47,12 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 {
     [super setViewControllerDelegate: (id < SYNAggregateCellDelegate >)viewControllerDelegate];
 
-    [self.heartButton addTarget: self.viewControllerDelegate
+    [self.likeButton addTarget: self.viewControllerDelegate
                          action: @selector(likeButtonPressed:)
                forControlEvents: UIControlEventTouchUpInside];
 }
+
+
 
 
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
@@ -133,7 +135,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
                                                                                           attributes: self.lightTextAttributes]];
     }
     
-    self.heartButton.selected = NO;
+    self.likeButton.selected = NO;
     
     if (users.count > 0)
     {
@@ -152,7 +154,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
             if ([co.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
             {
                 name = @"You";
-                self.heartButton.selected = YES;
+                self.likeButton.selected = YES;
             }
             else
             {
@@ -183,8 +185,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 {
     [super prepareForReuse];
     
-    self.likeLabel.hidden = NO;
-    self.heartButton.selected = NO;
 }
 
 

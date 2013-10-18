@@ -1213,7 +1213,7 @@ typedef void(^FeedDataErrorBlock)(void);
     // Bit of a hack, but find the button in the cell
     SYNAggregateVideoCell *cell = (SYNAggregateVideoCell *)[self.feedCollectionView cellForItemAtIndexPath: indexPath];
     
-    UIButton *heartButton = cell.heartButton;
+    UIButton *heartButton = cell.likeButton;
     
     [self likeButtonPressed: heartButton];
 }
