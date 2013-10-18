@@ -14,8 +14,6 @@
 @interface SYNAggregateChannelCell () <UIGestureRecognizerDelegate>
 
 @property (nonatomic) CGRect originalImageContainerRect;
-@property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
-@property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UIView *buttonContainerView;
 @property (nonatomic, strong) UIView *labelsContainerView;
@@ -29,18 +27,7 @@
 {
     [super awakeFromNib];
     
-    // Tap for showing video
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                       action: @selector(showChannel:)];
-    self.tap.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.tap];
     
-    // Touch for highlighting cells when the user touches them (like UIButton)
-    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self
-                                                            action: @selector(showGlossLowlight:)];
-    
-    self.touch.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.touch];
 }
 
 
@@ -61,7 +48,6 @@
     }
     
     self.imageContainer.frame = self.originalImageContainerRect;
-    self.lowlightImageView.hidden = NO;
     self.mainTitleLabel.hidden = NO;
 }
 
@@ -101,7 +87,6 @@
     {
         containerRect.size = self.imageContainer.frame.size;
         
-        self.lowlightImageView.hidden = NO;
         self.mainTitleLabel.hidden = NO;
         
         imageView = [[UIImageView alloc] initWithFrame: containerRect];
@@ -139,8 +124,8 @@
         
         self.buttonContainerView = [[UIView alloc] initWithFrame: self.imageContainer.frame];
         
-        [self insertSubview: self.buttonContainerView
-               belowSubview: self.lowlightImageView];
+        [self addSubview:self.buttonContainerView];
+        
         
         self.labelsContainerView = [[UIView alloc] initWithFrame: self.imageContainer.frame];
         self.labelsContainerView.userInteractionEnabled = NO;
@@ -151,7 +136,6 @@
         
         containerRect.size.width = containerRect.size.width / 2.0;
         
-        self.lowlightImageView.hidden = YES;
         self.mainTitleLabel.hidden = YES;
         
         for (int i = 0; i < 2; i++)
@@ -215,16 +199,14 @@
     
     if (count == 4)
     {
-        self.lowlightImageView.hidden = YES;
         self.mainTitleLabel.hidden = YES;
         
         containerRect.size = self.imageContainer.frame.size; // {{0, 0}, {298, 298}} (IPAD),
                                                              // container.origin = CGPointZero from above -> {{0, 0}, {310, 310}}
         
         self.buttonContainerView = [[UIView alloc] initWithFrame: self.imageContainer.frame];
+        [self addSubview:self.buttonContainerView];
         
-        [self insertSubview: self.buttonContainerView
-               belowSubview: self.lowlightImageView];
         
         self.labelsContainerView = [[UIView alloc] initWithFrame: self.imageContainer.frame];
         self.labelsContainerView.userInteractionEnabled = NO;
@@ -353,43 +335,6 @@
 }
 
 
-#pragma mark - Gesture recognizers for arc menu and show video
-
-// This is used to lowlight the gloss image on touch
-- (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
-{
-    UIImageView *simulatedButton = self.lowlightImageView;
-    UIImage *glossImage = [UIImage imageNamed: @"channelFeedCover"];
-    
-    // Special-case container views
-    if (self.buttonContainerView)
-    {
-        simulatedButton = (UIImageView *) recognizer.view;
-        glossImage = [UIImage imageNamed: @"channelFeedCoverFourth"];
-    }
-    
-    switch (recognizer.state)
-    {
-        case UIGestureRecognizerStateBegan :
-        {
-            // Set lowlight tint
-            UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
-                                                                                          alpha: 0.3]];
-            
-            simulatedButton.image = lowlightImage;
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
-            simulatedButton.image = glossImage;
-        }
-            
-        default:
-            break;
-    }
-}
 
 
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
