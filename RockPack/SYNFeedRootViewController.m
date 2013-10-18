@@ -74,11 +74,8 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
-//    self.wantsFullScreenLayout = YES;
-    
+
     self.feedItemsData = @[];
-    
     self.videosInOrderArray = @[];
     
     SYNIntegralCollectionViewFlowLayout *standardFlowLayout;
@@ -88,7 +85,6 @@ typedef void(^FeedDataErrorBlock)(void);
     CGFloat minimumLineSpacing;
     
     // Setup device dependent parametes/dimensions
-    
     if (IS_IPHONE)
     {
         // Calculate frame size
@@ -104,7 +100,6 @@ typedef void(^FeedDataErrorBlock)(void);
         contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
         minimumLineSpacing = 12.0f;
-        
     }
     else
     {
@@ -112,13 +107,11 @@ typedef void(^FeedDataErrorBlock)(void);
                                          0.0f,
                                          [SYNDeviceManager.sharedInstance currentScreenWidth],
                                          [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar]);
-        
-        
+
         videoCollectionViewFrame = calculatedViewFrame;
         videoCollectionViewFrame.origin.y += kStandardCollectionViewOffsetY;
         videoCollectionViewFrame.size.height -= kStandardCollectionViewOffsetY;
-        
-        
+
         // Collection view parameters
         contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         sectionInset = UIEdgeInsetsMake(10.0f, 10.0f, 15.0f, 10.0f);
@@ -128,8 +121,7 @@ typedef void(^FeedDataErrorBlock)(void);
     // Set our view frame and attributes
     self.view.frame = calculatedViewFrame;
     self.view.backgroundColor = [UIColor clearColor];
-    
-    
+
     [self removeEmptyGenreMessage];
     
     CGSize itemSize;
@@ -167,7 +159,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
     self.feedCollectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
 
-    
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
                         forCellWithReuseIdentifier: @"SYNAggregateVideoCell"];
     
@@ -186,7 +177,6 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView registerNib: footerViewNib
               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                      withReuseIdentifier: @"SYNChannelFooterMoreView"];
-    
     
     // Refresh control
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame: CGRectMake(0, -44, 320, 44)];
@@ -211,10 +201,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                              selector: @selector(videoQueueCleared)
                                                  name: kVideoQueueClear
                                                object: nil];
-    
-    
 }
-
 
 
 - (void) viewWillAppear: (BOOL) animated
@@ -229,10 +216,7 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
-    
-    
- 
-    
+
     [self displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
                          andLoader: YES];
     
@@ -248,6 +232,7 @@ typedef void(^FeedDataErrorBlock)(void);
     // this will remove the '+' from the videos that where selected
     [self.feedCollectionView reloadData];
 }
+
 
 #pragma mark - Container Scrol Delegates
 
@@ -273,7 +258,6 @@ typedef void(^FeedDataErrorBlock)(void);
             [self resetDataRequestRange]; // just in case the length is less than standard
             [self.refreshButton startRefreshCycle];
             [self loadAndUpdateFeedData];
-            
         }
         
         [self checkForOnBoarding];
