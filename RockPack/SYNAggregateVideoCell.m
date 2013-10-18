@@ -10,6 +10,7 @@
 #import "SYNAggregateVideoCell.h"
 #import "SYNAppDelegate.h"
 #import "SYNTouchGestureRecognizer.h"
+#import "SYNAggregateVideoItemCell.h"
 #import "UIColor+SYNColor.h"
 #import "UIImage+Tint.h"
 
@@ -22,6 +23,8 @@
 
 @end
 
+static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
+
 
 @implementation SYNAggregateVideoCell
 
@@ -31,40 +34,19 @@
     
     self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
     self.likeLabel.font = [UIFont lightCustomFontOfSize: self.likeLabel.font.pointSize];
+    self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
     
-    if (!IS_IPAD)
-    {
-        self.likesNumberLabel.hidden = YES;
-    }
-    else
-    {
-        self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
-    }
     
-    // Tap for showing video
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                       action: @selector(showVideo:)];
-    self.tap.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.tap];
+    [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
+          forCellWithReuseIdentifier:kVideoItemCellIndetifier];
     
-    // Touch for highlighting cells when the user touches them (like UIButton)
-    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self
-                                                            action: @selector(showGlossLowlight:)];
-    
-    self.touch.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.touch];
+    [self.collectionView reloadData];
 }
 
 
 - (void) setCoverImagesAndTitlesWithArray: (NSArray *) array
 {
-    if (!self.videoImageView)
-    {
-        CGRect videoImageFrame = CGRectZero;
-        videoImageFrame.size = self.imageContainer.frame.size;
-        self.videoImageView = [[UIImageView alloc] initWithFrame: videoImageFrame];
-        [self.imageContainer addSubview: self.videoImageView];
-    }
+
     
     NSDictionary *coverInfo = (NSDictionary *) array[0];
     
@@ -261,10 +243,20 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
+    return 1;
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndetifier
+                                                                                    forIndexPath: indexPath];
+    
+    
+    return itemCell;
+    
     
 }
 
