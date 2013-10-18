@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view autoresizesSubviews="NO" contentMode="scaleToFill" id="60h-qX-Xkd">
-                    <rect key="frame" x="0.0" y="33" width="512" height="94"/>
+                    <rect key="frame" x="8" y="70" width="512" height="94"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AvatarProfile.png" id="1Ii-Uo-tHf" userLabel="ImageView - Avatar">
@@ -72,19 +72,19 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
                 <view contentMode="scaleToFill" id="tqP-na-NBI" customClass="SYNYouHeaderView">
-                    <rect key="frame" x="0.0" y="165" width="384" height="50"/>
+                    <rect key="frame" x="2" y="190" width="384" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="vnK-MI-7ZZ" customClass="SYNYouHeaderView">
-                    <rect key="frame" x="389" y="165" width="384" height="50"/>
+                    <rect key="frame" x="384" y="190" width="384" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="MS7-tW-0TH">
-                    <rect key="frame" x="0.0" y="272" width="384" height="719"/>
+                    <rect key="frame" x="-9" y="259" width="385" height="781"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
-                        <size key="itemSize" width="192" height="192"/>
+                        <size key="itemSize" width="190" height="190"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -96,11 +96,11 @@
                     </connections>
                 </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0td-Z3-eno">
-                    <rect key="frame" x="389" y="272" width="379" height="719"/>
+                    <rect key="frame" x="384" y="259" width="407" height="763"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="AUe-Ip-zbd">
-                        <size key="itemSize" width="192" height="192"/>
+                        <size key="itemSize" width="190" height="190"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
