@@ -54,9 +54,6 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 {
     [super setViewControllerDelegate: viewControllerDelegate];
     
-    
-    
-    
 }
 
 
