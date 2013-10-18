@@ -68,7 +68,7 @@
     {
         
         [tab addTarget: self
-                action: @selector(tabPressed:)
+                action: @selector(tabPressed:) 
       forControlEvents: UIControlEventTouchUpInside];
         
     }
