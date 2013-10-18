@@ -13,7 +13,7 @@
 
 - (void) awakeFromNib
 {
-    self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
+    self.label.font = [UIFont regularCustomFontOfSize: self.label.font.pointSize];
 }
 
 @end

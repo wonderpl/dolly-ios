@@ -8,11 +8,13 @@
 
 #import "SYNMoodRootViewController.h"
 #import "SYNMoodCell.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNMoodRootViewController ()
 
 @property (nonatomic, strong) NSArray *optionNames;
-@property (nonatomic, weak) UICollectionView *moodCollectionView;
+@property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
+@property (nonatomic, weak) IBOutlet UILabel *mainLabel;
 
 @end
 
@@ -29,7 +31,10 @@
     // Setup mood collection view
     [self.moodCollectionView registerNib: [UINib nibWithNibName: @"SYNMoodCell" bundle: nil]
               forCellWithReuseIdentifier: @"SYNMoodCell"];
+    
+    self.mainLabel.font = [UIFont regularCustomFontOfSize: self.mainLabel.font.pointSize];
 }
+
 
 #pragma mark - UICollectionView Data Source Stubs
 
@@ -50,17 +55,19 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    return nil;
+    SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: @"SYNMoodCell"
+                                                                               forIndexPath: indexPath];
+    
+    moodCell.label.text = self.optionNames [indexPath.item];
+    
+    return moodCell;
 }
 
 
 - (void) collectionView: (UICollectionView *) cv
          didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: @"SYNMoodCell"
-                                                                                 forIndexPath: indexPath];
-    
-    moodCell.label = self.optionNames [indexPath.item];
+
 }
 
 
