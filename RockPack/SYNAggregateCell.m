@@ -40,14 +40,12 @@
 - (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString
 {
     // to be implemented in subclass
-    AssertOrLog(@"Not meant to be called, as should be overridden in derived class");
 }
 
 
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
 {
     // to be implemented in subclass
-    AssertOrLog(@"Not meant to be called, as should be overridden in derived class");
 }
 
 
