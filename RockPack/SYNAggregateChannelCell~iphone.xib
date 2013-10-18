@@ -38,7 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="Khg-wM-3Jg">
-                        <rect key="frame" x="0.0" y="91" width="310" height="215"/>
+                        <rect key="frame" x="31" y="166" width="248" height="139"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ho0-dD-Ple">
                             <size key="itemSize" width="50" height="50"/>

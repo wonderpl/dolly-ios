@@ -57,6 +57,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="307" height="175"/>
             <connections>
                 <outlet property="followButton" destination="kOy-bk-Sdy" id="Zn7-b1-rXm"/>
