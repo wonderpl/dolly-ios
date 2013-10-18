@@ -6,89 +6,81 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNNavigationManager.h"
 #import "SYNAbstractViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNMasterViewController.h"
+#import "SYNNavigationManager.h"
 #import "SYNSideNavigatorViewController.h"
 
 @implementation SYNNavigationManager
 
-+(id)manager
++ (id) manager
 {
     return [[SYNNavigationManager alloc] init];
 }
 
--(void)navigateToPageByName:(NSString*)pageName
+
+- (void) navigateToPageByName: (NSString *) pageName
 {
-    if(!pageName)
+    if (!pageName)
+    {
         return;
+    }
     
-    
-    NSInteger index = [self.containerController indexOfControllerByName:pageName];
-    [self navigateToPage:index];
-    
-    
+    NSInteger index = [self.containerController
+                       indexOfControllerByName: pageName];
+    [self navigateToPage: index];
 }
 
--(void)navigateToPage:(NSInteger)index
+
+- (void) navigateToPage: (NSInteger) index
 {
-    if(index < 0 || index > self.containerController.viewControllers.count)
+    if (index < 0 || index > self.containerController.viewControllers.count)
+    {
         return;
+    }
     
     self.sideNavigationController.state = SideNavigationStateHidden;
     
-    [self.containerController navigateToPage:index];
-    
-    // TODO: Check if it is changed and keep (refactor) accordingly
-    //    if (self.showingBackButton)
-    //    {
-    //        //pop the current section navcontroller to the root controller
-    //        [appDelegate.viewStackManager popToRootController];
-    //
-    //        [self showBackButton:NO];
-    //    }
+    [self.containerController navigateToPage: index];
     
     // == Set the Τitle == //
-    
     self.masterController.pageTitleLabel.text = [self.containerController.currentViewController.title uppercaseString];
     
     if (self.sideNavigationController.state == SideNavigationStateFull)
     {
         [self.sideNavigationController deselectAllCells];
-        
     }
     else
     {
-        NSString* controllerTitle = self.containerController.currentViewController.title;
+        NSString *controllerTitle = self.containerController.currentViewController.title;
         
         [self.sideNavigationController setSelectedCellByPageName: controllerTitle];
     }
-    
 }
 
 
-
--(void)setMasterController:(SYNMasterViewController *)masterController
+- (void) setMasterController: (SYNMasterViewController *) masterController
 {
     _masterController = masterController;
     
-    for (UIButton* tab in masterController.tabs)
+    for (UIButton *tab in masterController.tabs)
     {
-        [tab addTarget:self action:@selector(tabPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [tab	 addTarget: self
+                action: @selector(tabPressed:)
+      forControlEvents: UIControlEventTouchUpInside];
     }
 }
 
 
--(void)tabPressed:(UIButton*)tabPressed
+- (void) tabPressed: (UIButton *) tabPressed
 {
+    for (UIButton *tab in self.masterController.tabs)
+    {
+        tab.highlighted = (BOOL) (tab == tabPressed);
+    }
     
-    for (UIButton* tab in self.masterController.tabs)
-        tab.highlighted = (BOOL)(tab == tabPressed);
-    
-    [self navigateToPage:tabPressed.tag];
-    
+    [self navigateToPage: tabPressed.tag];
 }
 
 

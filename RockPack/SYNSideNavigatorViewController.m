@@ -9,12 +9,12 @@
 #import "AppConstants.h"
 #import "GAI.h"
 #import "SYNAccountSettingsMainTableViewController.h"
+#import "SYNActivityViewController.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNFriendsViewController.h"
 #import "SYNImagePickerController.h"
 #import "SYNMasterViewController.h"
-#import "SYNActivityViewController.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNRockpackNotification.h"
 #import "SYNSearchBoxViewController.h"
@@ -22,58 +22,46 @@
 #import "SYNSideNavigatorViewController.h"
 #import "SYNSoundPlayer.h"
 #import "UIFont+SYNFont.h"
+#import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kSideNavTitle @"kSideNavTitle"
-#define kSideNavType @"kSideNavType"
+#define kSideNavTitle  @"kSideNavTitle"
+#define kSideNavType   @"kSideNavType"
 #define kSideNavAction @"kSideNavAction"
-
-
 
 typedef void (^SideNavigationMotionBlock)(void);
 
-
-
 @interface SYNSideNavigatorViewController () <SYNImagePickerControllerDelegate>
-{
-    SYNAppDelegate* appDelegate;
-}
+
 
 @property (nonatomic) NSInteger unreadNotifications;
-@property (nonatomic, strong) IBOutlet UIButton* settingsButton;
-@property (nonatomic, strong) IBOutlet UIImageView* profilePictureImageView;
-@property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
-@property (nonatomic, strong) IBOutlet UITableView* tableView;
-@property (nonatomic, strong) IBOutlet UIView* containerView;
-@property (nonatomic, strong) NSArray* navigationData;
-@property (nonatomic, strong) NSIndexPath* currentlySelectedIndexPath;
-@property (nonatomic, strong) NSMutableArray* notifications;
-@property (nonatomic, strong) NSMutableDictionary* cellByPageName;
-@property (nonatomic, strong) UIColor* navItemColor;
-@property (nonatomic, strong) UIView* bottomExtraView;
-@property (nonatomic, strong) UIViewController* currentlyLoadedViewController;
-@property (strong, nonatomic) SYNImagePickerController* imagePickerController;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *avatarButton;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
-@property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
-
-//iPhone specific
-@property (weak, nonatomic) IBOutlet UIImageView *navigationContainerBackgroundImage;
-@property (weak, nonatomic) IBOutlet UILabel *navigationContainerTitleLabel;
-
-@property (weak, nonatomic) IBOutlet UIView *navigationContainerView;
-
+@property (nonatomic, strong) IBOutlet UIButton *settingsButton;
+@property (nonatomic, strong) IBOutlet SYNAppDelegate *appDelegate;
+@property (nonatomic, strong) IBOutlet UIImageView *profilePictureImageView;
+@property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UIView *containerView;
+@property (nonatomic, strong) NSArray *navigationData;
+@property (nonatomic, strong) NSIndexPath *currentlySelectedIndexPath;
+@property (nonatomic, strong) NSMutableArray *notifications;
+@property (nonatomic, strong) NSMutableDictionary *cellByPageName;
+@property (nonatomic, strong) SYNImagePickerController *imagePickerController;
+@property (nonatomic, strong) UIColor *navItemColor;
+@property (nonatomic, strong) UIView *bottomExtraView;
+@property (nonatomic, strong) UIViewController *currentlyLoadedViewController;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIButton *avatarButton;
+@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *navigationContainerBackgroundImage;
+@property (nonatomic, weak) IBOutlet UILabel *navigationContainerTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nicknameLabel;
+@property (weak, nonatomic, weak) IBOutlet UIView *navigationContainerView;
 
 @end
 
 
 @implementation SYNSideNavigatorViewController
-
-// Only need synthesize for custom setters, use latest ObjC naming convention
-@synthesize currentlyLoadedViewController = _currentlyLoadedViewController;
-@synthesize state = _state;
 
 #pragma mark - Object lifecycle
 
@@ -82,25 +70,20 @@ typedef void (^SideNavigationMotionBlock)(void);
     if ((self = [super initWithNibName: @"SYNSideNavigatorViewController"
                                 bundle: nil]))
     {
-        self.navigationData = @[
-                @{kSideNavTitle: NSLocalizedString(@"core_nav_section_feed", nil),
-                 kSideNavAction: kFeedViewId},
-                @{kSideNavTitle: NSLocalizedString(@"core_nav_section_channels", nil),
-                 kSideNavAction: kChannelsViewId},
-                @{kSideNavTitle: NSLocalizedString(@"core_nav_section_profile", nil),
-                 kSideNavAction: kProfileViewId},
-                @{kSideNavTitle: NSLocalizedString(@"core_nav_section_discover", nil),
-                  kSideNavAction: kDiscoverViewId},
-                @{kSideNavTitle: NSLocalizedString(@"core_nav_section_notifications", nil),
-                 kSideNavAction: kActivityViewId}];
+        self.navigationData = @[kFeedViewId,
+                                kChannelsViewId,
+                                kProfileViewId,
+                                kDiscoverViewId,
+                                kMoodViewId,
+                                kActivityViewId];
         
         _state = SideNavigationStateHidden;
         
-        appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+        self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         
         self.unreadNotifications = 0;
     }
-        
+    
     return self;
 }
 
@@ -117,7 +100,7 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 
 #pragma mark - View lifecycle
-        
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -125,9 +108,9 @@ typedef void (^SideNavigationMotionBlock)(void);
     self.userNameLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabel.font.pointSize];
     self.nicknameLabel.font = [UIFont lightCustomFontOfSize: self.nicknameLabel.font.pointSize];
     
-    self.navItemColor = [UIColor colorWithRed: (40.0/255.0)
-                                        green: (45.0/255.0)
-                                         blue: (51.0/255.0)
+    self.navItemColor = [UIColor colorWithRed: (40.0 / 255.0)
+                                        green: (45.0 / 255.0)
+                                         blue: (51.0 / 255.0)
                                         alpha: (1.0)];
     
     // Need to init this higher up
@@ -137,7 +120,7 @@ typedef void (^SideNavigationMotionBlock)(void);
         self.searchViewController = [[SYNSearchBoxViewController alloc] init];
     }
     
-    if(IS_IOS_7_OR_GREATER)
+    if (IS_IOS_7_OR_GREATER)
     {
         CGRect frameToMove;
         frameToMove = self.backgroundImageView.frame;
@@ -146,9 +129,9 @@ typedef void (^SideNavigationMotionBlock)(void);
         
         // move elements down so that the title does not hit the new transparent status bar
         
-        NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray: @[self.tableView, self.containerView,
-                                                                              self.avatarButton, self.userNameLabel,
-                                                                              self.activityIndicator, self.profilePictureImageView]];
+        NSMutableArray *viewArray = [[NSMutableArray alloc] initWithArray: @[self.tableView, self.containerView,
+                                                                             self.avatarButton, self.userNameLabel,
+                                                                             self.activityIndicator, self.profilePictureImageView]];
         
         if (IS_IPHONE)
         {
@@ -159,7 +142,7 @@ typedef void (^SideNavigationMotionBlock)(void);
             self.nicknameLabel.frame = nFrame;
         }
         
-        for (UIView* viewToMove in viewArray)
+        for (UIView *viewToMove in viewArray)
         {
             frameToMove = viewToMove.frame;
             frameToMove.origin.y += 10.0f;
@@ -167,7 +150,7 @@ typedef void (^SideNavigationMotionBlock)(void);
         }
     }
     
-    self.cellByPageName = [NSMutableDictionary dictionaryWithCapacity:3];
+    self.cellByPageName = [NSMutableDictionary dictionaryWithCapacity: 3];
     
     CGRect newFrame = self.view.frame;
     
@@ -180,14 +163,20 @@ typedef void (^SideNavigationMotionBlock)(void);
         screenBounds.origin.y += IS_IOS_7_OR_GREATER ? 10.0f : 0.0f;
         
         self.mainContentView.frame = screenBounds;
-        self.backgroundImageView.image = [[UIImage imageNamed:@"PanelMenu"] resizableImageWithCapInsets:UIEdgeInsetsMake( 68.0f, 0.0f, 65.0f ,0.0f)];
+        self.backgroundImageView.image = [[UIImage imageNamed: @"PanelMenu"] resizableImageWithCapInsets: UIEdgeInsetsMake(68.0f, 0.0f, 65.0f, 0.0f)];
         
-        [self addChildViewController:self.searchViewController];
-        [self.view insertSubview:self.searchViewController.view belowSubview:self.navigationContainerView];
+        [self addChildViewController: self.searchViewController];
+        
+        [self.view insertSubview: self.searchViewController.view
+                    belowSubview: self.navigationContainerView];
+        
         self.searchViewController.searchBoxView.searchTextField.delegate = self;
-        [self.searchViewController.searchBoxView.integratedCloseButton addTarget:self action:@selector(closeSearch:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.navigationContainerTitleLabel.font = [UIFont lightCustomFontOfSize:self.navigationContainerTitleLabel.font.pointSize];
+        [self.searchViewController.searchBoxView.integratedCloseButton addTarget: self
+                                                                          action: @selector(closeSearch:)
+                                                                forControlEvents: UIControlEventTouchUpInside];
+        
+        self.navigationContainerTitleLabel.font = [UIFont lightCustomFontOfSize: self.navigationContainerTitleLabel.font.pointSize];
         
         //Correct Notif / friends screen layouts
         CGRect screenBoundsNavCont = self.view.bounds;
@@ -196,36 +185,31 @@ typedef void (^SideNavigationMotionBlock)(void);
         
         self.navigationContainerView.frame = screenBounds;
         
-        self.navigationContainerBackgroundImage.image = [[UIImage imageNamed:@"PanelMenuSecondLevel"] resizableImageWithCapInsets:UIEdgeInsetsMake(65, 0, 1, 0)];
+        self.navigationContainerBackgroundImage.image = [[UIImage imageNamed: @"PanelMenuSecondLevel"] resizableImageWithCapInsets: UIEdgeInsetsMake(65, 0, 1, 0)];
     }
-    
     else // isIPad == TRUE
     {
         CGFloat bgHeight = (self.backgroundImageView.frame.origin.y + self.backgroundImageView.frame.size.height);
-        self.bottomExtraView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
-                                                                        bgHeight,
-                                                                        self.backgroundImageView.frame.size.width,
-                                                                        [SYNDeviceManager.sharedInstance currentScreenHeight] - bgHeight)];
+        self.bottomExtraView = [[UIView alloc] initWithFrame: CGRectMake(0.0,
+                                                                         bgHeight,
+                                                                         self.backgroundImageView.frame.size.width,
+                                                                         [SYNDeviceManager.sharedInstance currentScreenHeight] - bgHeight)];
         
-        self.bottomExtraView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"PanelMenuBottom"]];
+        self.bottomExtraView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"PanelMenuBottom"]];
         
-        [self.view insertSubview:self.bottomExtraView belowSubview:self.backgroundImageView];
+        [self.view insertSubview: self.bottomExtraView
+                    belowSubview: self.backgroundImageView];
         
         newFrame.size.height = [SYNDeviceManager.sharedInstance currentScreenHeight];
         self.view.frame = newFrame;
-        
-        
-        
 
         // == Settings Button == //
-        
         CGRect settingsButtonFrame = self.settingsButton.frame;
         settingsButtonFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - 26.0 - settingsButtonFrame.size.height;
         self.settingsButton.frame = settingsButtonFrame;
         self.settingsButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-
-        // == User Name Label == //
         
+        // == User Name Label == //
         self.userNameLabel.alpha = 0.0;
     }
     
@@ -233,8 +217,7 @@ typedef void (^SideNavigationMotionBlock)(void);
                                              selector: @selector(notificationMarkedRead:)
                                                  name: kNotificationMarkedRead
                                                object: nil];
-    
-    
+
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(userDataChanged:)
                                                  name: kUserDataChanged
@@ -246,76 +229,92 @@ typedef void (^SideNavigationMotionBlock)(void);
 }
 
 
-
 #pragma mark - Notifications
 
 - (void) getNotifications
 {
-    [appDelegate.oAuthNetworkEngine notificationsFromUserId: appDelegate.currentUser.uniqueId completionHandler: ^(id response) {
-                                                   
-            if (![response isKindOfClass:[NSDictionary class]])
-                return;
-                                                   
-            NSDictionary* responseDictionary = (NSDictionary*)response;
-                                                   
-            NSDictionary* notificationsDictionary = responseDictionary[@"notifications"];
-            if (!notificationsDictionary)
-                return;
-                                                   
-            NSNumber* totalNumber = notificationsDictionary[@"total"];
-            if (!totalNumber)
-                return;
-        
-            NSArray* itemsArray = (NSArray*)notificationsDictionary[@"items"];
-            if (!itemsArray)
-                return;
-        
-            NSInteger total = [totalNumber integerValue];
-                                                   
-            if (total == 0) // good responce but no notifications
-            {
-                [self.tableView reloadData];
-                
-                [self.notifications removeAllObjects];
-                self.notifications = nil;
-                return;
-            }
-                                                   
-            self.notifications = [NSMutableArray arrayWithCapacity: total];
-            self.unreadNotifications = 0;
-        
-            for (NSDictionary* itemData in itemsArray)
-            {
-                if (![itemData isKindOfClass:[NSDictionary class]]) continue;
-                                                       
-                SYNRockpackNotification* notification = [SYNRockpackNotification notificationWithDictionary:itemData];
-                
-                if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
-                {
-                    continue;
-                }
-                                                       
-                if (!notification.read)
-                    self.unreadNotifications++;
-                                                       
-                [self.notifications addObject:notification];
-                                                       
-            }
-                                                   
-            [self.tableView reloadData];
-        
-        if (self.currentlyLoadedViewController && [self.currentlyLoadedViewController isKindOfClass:[SYNActivityViewController class]])
-        {
-            ((SYNActivityViewController*)self.currentlyLoadedViewController).notifications = self.notifications;
-        }
-        
-    } errorHandler:^(id error) {
-        DebugLog(@"Could not load notifications");
-    }];
+    [self.appDelegate.oAuthNetworkEngine
+     notificationsFromUserId: self.appDelegate.currentUser.uniqueId
+     completionHandler: ^(id response) {
+         if (![response isKindOfClass: [NSDictionary class]])
+         {
+             return;
+         }
+         
+         NSDictionary * responseDictionary = (NSDictionary *) response;
+         
+         NSDictionary *notificationsDictionary = responseDictionary[@"notifications"];
+         
+         if (!notificationsDictionary)
+         {
+             return;
+         }
+         
+         NSNumber * totalNumber = notificationsDictionary[@"total"];
+         
+         if (!totalNumber)
+         {
+             return;
+         }
+         
+         NSArray * itemsArray = (NSArray *) notificationsDictionary[@"items"];
+         
+         if (!itemsArray)
+         {
+             return;
+         }
+         
+         NSInteger total = [totalNumber integerValue];
+         
+         if (total == 0) // good responce but no notifications
+         {
+             [self.tableView reloadData];
+             
+             [self.notifications removeAllObjects];
+             self.notifications = nil;
+             return;
+         }
+         
+         self.notifications = [NSMutableArray arrayWithCapacity: total];
+         self.unreadNotifications = 0;
+         
+         for (NSDictionary * itemData in itemsArray)
+         {
+             if (![itemData isKindOfClass: [NSDictionary class]])
+             {
+                 continue;
+             }
+             
+             SYNRockpackNotification * notification = [SYNRockpackNotification notificationWithDictionary: itemData];
+             
+             if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
+             {
+                 continue;
+             }
+             
+             if (!notification.read)
+             {
+                 self.unreadNotifications++;
+             }
+             
+             [self.notifications addObject: notification];
+         }
+         
+         [self.tableView reloadData];
+         
+         if (self.currentlyLoadedViewController && [self.currentlyLoadedViewController
+                                                    isKindOfClass: [SYNActivityViewController class]])
+         {
+             ((SYNActivityViewController *) self.currentlyLoadedViewController).notifications = self.notifications;
+         }
+     }
+     errorHandler: ^(id error) {
+         DebugLog(@"Could not load notifications");
+     }];
 }
 
 
-- (void) notificationMarkedRead: (NSNotification*) notification
+- (void) notificationMarkedRead: (NSNotification *) notification
 {
     self.unreadNotifications--;
     [self.tableView reloadData];
@@ -326,13 +325,18 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 - (IBAction) settingsButtonPressed: (id) sender
 {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAccountSettingsPressed
-                                                            object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName: kAccountSettingsPressed
+                                                        object: self];
 }
-- (IBAction)changeAvatarTapped:(id)sender {
-    self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController:self];
+
+
+- (IBAction) changeAvatarTapped: (id) sender
+{
+    self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController: self];
     self.imagePickerController.delegate = self;
-    [self.imagePickerController presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+    [self.imagePickerController
+     presentImagePickerAsPopupFromView: sender
+     arrowDirection: UIPopoverArrowDirectionRight];
 }
 
 
@@ -343,8 +347,9 @@ typedef void (^SideNavigationMotionBlock)(void);
     return 1;
 }
 
+
 - (NSInteger) tableView: (UITableView *) tableView
-  numberOfRowsInSection: (NSInteger) section
+              numberOfRowsInSection: (NSInteger) section
 {
     return self.navigationData.count;
 }
@@ -357,63 +362,60 @@ typedef void (^SideNavigationMotionBlock)(void);
     UITableViewCell *cell;
     
     if (indexPath.section == 0)
-    { 
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier];
+        
         if (!cell)
         {
-            SYNSideNavigationIphoneCell* iPhoneCell = [[SYNSideNavigationIphoneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            SYNSideNavigationIphoneCell *iPhoneCell = [[SYNSideNavigationIphoneCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                                                                         reuseIdentifier: CellIdentifier];
             iPhoneCell.accessoryNumberLabel.hidden = YES;
             iPhoneCell.accessoryNumberBackground.hidden = YES;
-            cell = iPhoneCell; 
-   
+            cell = iPhoneCell;
         }
         
-        NSDictionary* navigationElement = (NSDictionary*)(self.navigationData)[indexPath.row];
-        
-        
-        
+        NSString *navigationName = (NSString *) (self.navigationData)[indexPath.row];
+
         // == Type == //
-        
-        NSString* cellTitle = navigationElement[kSideNavTitle];
+        NSString *cellTitle = navigationName;
         
         cell.accessoryType = UITableViewCellAccessoryNone;
-        NSString* pageName = navigationElement[kSideNavAction];
+        NSString *pageName = navigationName;
         
         (self.cellByPageName)[pageName] = cell;
         
         // == Title == //
-
         cell.textLabel.text = cellTitle;
         cell.textLabel.backgroundColor = [UIColor clearColor];
-        
     }
     
     return cell;
 }
 
--(void)openToIndexPath:(NSIndexPath*)indexPath
+
+- (void) openToIndexPath: (NSIndexPath *) indexPath
 {
-    UITableViewCell* previousSelectedCell = [self.tableView cellForRowAtIndexPath: self.currentlySelectedIndexPath];
+    UITableViewCell *previousSelectedCell = [self.tableView
+                                             cellForRowAtIndexPath: self.currentlySelectedIndexPath];
+    
     [previousSelectedCell setSelected: NO];
     
     self.currentlySelectedIndexPath = indexPath;
     
-    NSDictionary* navigationElement = (NSDictionary*)(self.navigationData)[indexPath.row];
-    NSString* navigationAction = (NSString*)navigationElement[kSideNavAction];
+    NSString *navigationName = (NSString *) (self.navigationData)[indexPath.row];
     
-    [appDelegate.navigationManager navigateToPageByName:navigationAction];
-    
+    [self.appDelegate.navigationManager navigateToPageByName: navigationName];
 }
 
 
-- (void) tableView: (UITableView *) tableView
-        didSelectRowAtIndexPath: (NSIndexPath *) indexPath
+- (void)	 tableView: (UITableView *) tableView
+         didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 {
-    [self openToIndexPath:indexPath];
+    [self openToIndexPath: indexPath];
 }
 
 
-- (void) tableView: (UITableView *) tableView
+- (void)	tableView: (UITableView *) tableView
    willDisplayCell: (UITableViewCell *) cell
  forRowAtIndexPath: (NSIndexPath *) indexPath
 {
@@ -429,9 +431,9 @@ typedef void (^SideNavigationMotionBlock)(void);
 - (void) setUser: (User *) user
 {
     _user = user;
-    NSString* fullname = user.fullName;
+    NSString *fullname = user.fullName;
     
-    if ([fullname length]>1)
+    if ([fullname length] > 1)
     {
         self.userNameLabel.text = self.user.fullName;
         self.nicknameLabel.text = self.user.username;
@@ -444,14 +446,14 @@ typedef void (^SideNavigationMotionBlock)(void);
     
     if (!self.profilePictureImageView.image)
     {
-        self.profilePictureImageView.image = [UIImage imageNamed:@"PlaceholderSidebarAvatar"];
+        self.profilePictureImageView.image = [UIImage imageNamed: @"PlaceholderSidebarAvatar"];
     }
     
-    // We can't use our standard asynchronous loader due to cacheing    
-  
+    // We can't use our standard asynchronous loader due to cacheing
+    
     dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
     dispatch_async(downloadQueue, ^{
-        NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.user.thumbnailURL]];
+        NSData *imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.user.thumbnailURL]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (imageData)
@@ -463,30 +465,33 @@ typedef void (^SideNavigationMotionBlock)(void);
 }
 
 
-- (void) setSelectedCellByPageName: (NSString*) pageName
+- (void) setSelectedCellByPageName: (NSString *) pageName
 {
     self.keyForSelectedPage = pageName;
-    UITableViewCell* cellSelected = (UITableViewCell*)(self.cellByPageName)[pageName];
+    UITableViewCell *cellSelected = (UITableViewCell *) (self.cellByPageName)[pageName];
     
     if (!cellSelected)
+    {
         return;
+    }
     
     NSInteger row = 0;
-    for (UITableViewCell* cell in [self.cellByPageName allValues])
+    
+    for (UITableViewCell *cell in [self.cellByPageName allValues])
     {
-        if (cellSelected == cell) {
-            [cell setSelected:YES];
-            self.currentlySelectedIndexPath = [NSIndexPath indexPathForRow: row inSection: 0];
+        if (cellSelected == cell)
+        {
+            [cell setSelected: YES];
+            self.currentlySelectedIndexPath = [NSIndexPath indexPathForRow: row
+                                                                 inSection: 0];
         }
-        else {
-            [cell setSelected:NO];
+        else
+        {
+            [cell setSelected: NO];
         }
         
         row++;
-            
     }
-    
-    
 }
 
 
@@ -496,15 +501,17 @@ typedef void (^SideNavigationMotionBlock)(void);
     {
         for (int row = 0; row < [self.tableView numberOfRowsInSection: section]; row++)
         {
-            NSIndexPath* cellPath = [NSIndexPath indexPathForRow: row
+            NSIndexPath *cellPath = [NSIndexPath indexPathForRow: row
                                                        inSection: section];
             
-            UITableViewCell* cell = [self.tableView cellForRowAtIndexPath: cellPath];
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: cellPath];
             [cell setSelected: NO];
         }
     }
+    
     self.currentlySelectedIndexPath = nil;
 }
+
 
 - (void) setCurrentlyLoadedViewController: (UIViewController *) currentlyLoadedVC
 {
@@ -518,7 +525,9 @@ typedef void (^SideNavigationMotionBlock)(void);
     
     // Bail out if setting to nil
     if (!self.currentlyLoadedViewController)
+    {
         return;
+    }
     
     if (IS_IPHONE)
     {
@@ -529,7 +538,6 @@ typedef void (^SideNavigationMotionBlock)(void);
         vcRect.origin.y = 2.0;
         vcRect.size = containerSize;
         self.currentlyLoadedViewController.view.frame = vcRect;
-
     }
     else
     {
@@ -544,10 +552,9 @@ typedef void (^SideNavigationMotionBlock)(void);
         vcRect.size = containerSize;
         self.currentlyLoadedViewController.view.frame = vcRect;
     }
-
     
     [self.containerView addSubview: self.currentlyLoadedViewController.view];
-    [self addChildViewController:self.currentlyLoadedViewController];
+    [self addChildViewController: self.currentlyLoadedViewController];
 }
 
 
@@ -562,7 +569,6 @@ typedef void (^SideNavigationMotionBlock)(void);
         self.navigationContainerView.frame = startFrame;
         self.currentlyLoadedViewController = nil;
     }
-    
 }
 
 
@@ -593,14 +599,10 @@ typedef void (^SideNavigationMotionBlock)(void);
     // FIXME: ???
     if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
     {
-        
-        
     }
     else
     {
-        
-        
-    } 
+    }
 }
 
 
@@ -608,41 +610,40 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 - (BOOL) textFieldShouldBeginEditing: (UITextField *) textField
 {
-    
-    [appDelegate.viewStackManager presentSearchBar];
+    [self.appDelegate.viewStackManager presentSearchBar];
     
     return YES;
 }
-
 
 
 #pragma mark - close search callback iPhone specific
 
 - (void) closeSearch: (id) sender
 {
-    
-    [appDelegate.viewStackManager dismissSearchBar];
+    [self.appDelegate.viewStackManager dismissSearchBar];
 }
 
 
 #pragma mark - Accessor & Animation
 
--(void) setState:(SideNavigationState)state animated:(BOOL)animated
+- (void) setState: (SideNavigationState) state
+         animated: (BOOL) animated
 {
-    
-    
-    if (state == _state) return;
+    if (state == _state)
+    {
+        return;
+    }
     
     _state = state;
     
     switch (_state)
     {
         case SideNavigationStateHidden:
-            [self showHiddenNavigationAnimated:animated];
+            [self showHiddenNavigationAnimated: animated];
             break;
             
         case SideNavigationStateHalf:
-            [self showHalfNavigationAnimated:animated];
+            [self showHalfNavigationAnimated: animated];
             [self getNotifications];
             break;
             
@@ -650,25 +651,29 @@ typedef void (^SideNavigationMotionBlock)(void);
             [self showFullNavigation];
             break;
     }
-    
 }
+
 
 - (void) setState: (SideNavigationState) state
 {
-    [self setState:state animated:YES];
+    [self setState: state
+          animated: YES];
 }
 
 
-- (void) showHalfNavigationAnimated:(BOOL)animated
+- (void) showHalfNavigationAnimated: (BOOL) animated
 {
     // Light up navigation button
     self.captiveButton.selected = TRUE;
     
     [[SYNSoundPlayer sharedInstance] playSoundByName: kSoundNewSlideIn];
     self.mainContentView.alpha = 1.0f;
-    if(IS_IPHONE)
+    
+    if (IS_IPHONE)
     {
-        [self.view insertSubview:self.searchViewController.searchBoxView belowSubview:self.navigationContainerView];
+        [self.view insertSubview: self.searchViewController.searchBoxView
+                    belowSubview: self.navigationContainerView];
+        
         self.searchViewController.searchBoxView.searchTextField.text = @"";
         self.searchViewController.searchBoxView.searchTextField.delegate = self;
         [self.searchViewController.searchBoxView resignFirstResponder];
@@ -677,6 +682,7 @@ typedef void (^SideNavigationMotionBlock)(void);
     
     SideNavigationMotionBlock motionBlock = ^{
         CGRect sideNavigationFrame = self.view.frame;
+        
         if (IS_IPAD)
         {
             sideNavigationFrame.origin.x = 1024.0 - 192.0;
@@ -686,16 +692,17 @@ typedef void (^SideNavigationMotionBlock)(void);
         {
             sideNavigationFrame.origin.x = 704.0f;
         }
+        
         self.view.frame = sideNavigationFrame;
     };
     
-    if(animated)
+    if (animated)
     {
         [UIView animateWithDuration: kRockieTalkieAnimationDuration
                               delay: 0.0f
                             options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                          animations: motionBlock
-                         completion:^(BOOL finished) {
+                         completion: ^(BOOL finished) {
                              // check for on boarding
                              [self checkAndDisplayOnBoarding];
                          }];
@@ -704,14 +711,13 @@ typedef void (^SideNavigationMotionBlock)(void);
     {
         motionBlock();
     }
-    
 }
+
 
 - (void) checkAndDisplayOnBoarding
 {
-    
-    
 }
+
 
 - (void) showFullNavigation
 {
@@ -727,7 +733,7 @@ typedef void (^SideNavigationMotionBlock)(void);
                              CGRect sideNavigationFrame = self.view.frame;
                              
                              sideNavigationFrame.origin.x = 1024.0 - self.view.frame.size.width;
-                             self.view.frame =  sideNavigationFrame;
+                             self.view.frame = sideNavigationFrame;
                              
                              self.userNameLabel.alpha = 1.0;
                          }
@@ -740,7 +746,9 @@ typedef void (^SideNavigationMotionBlock)(void);
         self.navigationContainerView.frame = startFrame;
         self.navigationContainerView.hidden = NO;
         self.navigationContainerView.alpha = 1.0f;
-        [self.view insertSubview:self.navigationContainerView aboveSubview: self.searchViewController.view];
+        
+        [self.view insertSubview: self.navigationContainerView
+                    aboveSubview: self.searchViewController.view];
         
         [UIView animateWithDuration: 0.3f
                               delay: 0.0f
@@ -750,12 +758,14 @@ typedef void (^SideNavigationMotionBlock)(void);
                              selfBounds.origin.y = self.navigationContainerView.frame.origin.y;
                              self.navigationContainerView.frame = selfBounds;
                          }
+         
+         
                          completion: nil];
     }
 }
 
 
-- (void) showHiddenNavigationAnimated:(BOOL)animated
+- (void) showHiddenNavigationAnimated: (BOOL) animated
 {
     // Turn off button highlighting
     self.captiveButton.selected = FALSE;
@@ -763,25 +773,20 @@ typedef void (^SideNavigationMotionBlock)(void);
     self.darkOverlay.alpha = 1.0;
     
     SideNavigationMotionBlock motionBlock = ^{
-        
         self.darkOverlay.alpha = 0.0;
         
         CGRect sideNavigationFrame = self.view.frame;
         sideNavigationFrame.origin.x = 1024;
-        self.view.frame =  sideNavigationFrame;
-        
+        self.view.frame = sideNavigationFrame;
     };
     
-    void(^completionBlock)(BOOL) = ^(BOOL finished) {
-      
+    void (^ completionBlock)(BOOL) = ^(BOOL finished) {
         self.darkOverlay.hidden = YES;
         [self reset];
         [self deselectAllCells];
-        
     };
     
-    
-    if(animated)
+    if (animated)
     {
         [[SYNSoundPlayer sharedInstance] playSoundByName: kSoundNewSlideOut];
         
@@ -789,24 +794,23 @@ typedef void (^SideNavigationMotionBlock)(void);
                               delay: 0.0f
                             options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                          animations: motionBlock
-                         completion:completionBlock];
+                         completion: completionBlock];
     }
     else
     {
         motionBlock();
         completionBlock(YES);
     }
-    
-
 }
+
 
 #pragma mark - Notification Handlers
 
 
 
-- (void) userDataChanged: (NSNotification*) notification
+- (void) userDataChanged: (NSNotification *) notification
 {
-    [self setUser: appDelegate.currentUser];
+    [self setUser: self.appDelegate.currentUser];
 }
 
 
@@ -822,49 +826,51 @@ typedef void (^SideNavigationMotionBlock)(void);
                          CGRect startFrame = self.navigationContainerView.frame;
                          startFrame.origin.x = self.view.frame.size.width;
                          self.navigationContainerView.frame = startFrame;
-                         
                      }
                      completion: ^(BOOL finished) {
                          self.currentlyLoadedViewController = nil;
                      }];
 }
 
+
 #pragma mark - image picker delegate
 
-- (void) picker: (SYNImagePickerController *) picker
+- (void)	 picker: (SYNImagePickerController *) picker
          finishedWithImage: (UIImage *) image
 {
-//    DebugLog(@"Orign image width: %f, height%f", image.size.width, image.size.height);
+    //    DebugLog(@"Orign image width: %f, height%f", image.size.width, image.size.height);
     self.avatarButton.enabled = NO;
     self.profilePictureImageView.image = image;
     [self.activityIndicator startAnimating];
-    [appDelegate.oAuthNetworkEngine updateAvatarForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                         image: image
-                                             completionHandler: ^(NSDictionary* result)
+    
+    [self.appDelegate.oAuthNetworkEngine
+     updateAvatarForUserId: self.appDelegate.currentOAuth2Credentials.userId
+     image: image
+     completionHandler: ^(NSDictionary *result)
      {
-//         self.profilePictureImageView.image = image;
+         //         self.profilePictureImageView.image = image;
          [self.activityIndicator stopAnimating];
          self.avatarButton.enabled = YES;
      }
-                                                  errorHandler: ^(id error)
+     errorHandler: ^(id error)
      {
-         [self.profilePictureImageView setImageWithURL: [NSURL URLWithString: self.user.thumbnailURL]
-                                      placeholderImage: [UIImage imageNamed: @"PlaceholderSidebarAvatar"]
-                                               options: SDWebImageRetryFailed];
+         [self.profilePictureImageView
+          setImageWithURL: [NSURL URLWithString: self.user.thumbnailURL]
+          placeholderImage: [UIImage imageNamed: @"PlaceholderSidebarAvatar"]
+          options: SDWebImageRetryFailed];
          
          [self.activityIndicator stopAnimating];
          self.avatarButton.enabled = YES;
          
-         UIAlertView* alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title",nil)
-                                                         message: NSLocalizedString(@"register_screen_form_avatar_upload_description",nil)
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title", nil)
+                                                         message: NSLocalizedString(@"register_screen_form_avatar_upload_description", nil)
                                                         delegate: nil
                                                cancelButtonTitle: nil
-                                               otherButtonTitles: NSLocalizedString(@"OK",nil), nil];
+                                               otherButtonTitles: NSLocalizedString(@"OK", nil), nil];
          [alert show];
      }];
     
     self.imagePickerController = nil;
-
 }
 
 
@@ -881,5 +887,6 @@ typedef void (^SideNavigationMotionBlock)(void);
     
     [self tableView: self.tableView didSelectRowAtIndexPath: indexPath];
 }
+
 
 @end

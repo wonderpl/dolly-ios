@@ -154,9 +154,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // Create a dictionary of defaults to add and register them (if they have not already been set)
-    NSDictionary *initDefaults = @{
-                                   kDownloadedVideoContentBool: @(NO)
-                                   };
+    NSDictionary *initDefaults = @{kDownloadedVideoContentBool: @(NO)};
     
     [defaults registerDefaults: initDefaults];
     
@@ -346,9 +344,7 @@
         
         self.tokenExpiryTimer = nil;
         
-        [self refreshFacebookSession];
-        
-        
+        [self refreshFacebookSession]; 
     } errorHandler: ^(id response) {
         DebugLog(@"Failed to refresh token");
         if (!self.window.rootViewController)

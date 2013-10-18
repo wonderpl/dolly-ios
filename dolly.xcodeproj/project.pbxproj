@@ -122,6 +122,8 @@
 		0126331F162E2A060009FF9C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126331E162E2A060009FF9C /* MediaPlayer.framework */; };
 		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
 		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
+		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */; };
+		0127B88418113A1100DE2FD6 /* BackgroundMoodView.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88218113A1100DE2FD6 /* BackgroundMoodView.png */; };
 		012B4C9D17393A080019DA4C /* SYNPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */; };
 		012B4CA617393CA10019DA4C /* ButtonChooseExistingDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4C9E17393CA10019DA4C /* ButtonChooseExistingDefault.png */; };
 		012B4CA717393CA10019DA4C /* ButtonChooseExistingDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4C9F17393CA10019DA4C /* ButtonChooseExistingDefault@2x.png */; };
@@ -967,9 +969,9 @@
 		BE1B3DC6180D50C700DA2BD6 /* SYNDiscoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DC5180D50C700DA2BD6 /* SYNDiscoverViewController.xib */; };
 		BE1B3DC9180D804A00DA2BD6 /* SYNActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DC8180D804A00DA2BD6 /* SYNActivityViewController.xib */; };
 		BE1B3DCB180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */; };
-		BE1B3DD0180E8FFE00DA2BD6 /* SYNMoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DCE180E8FFE00DA2BD6 /* SYNMoodViewController.m */; };
-		BE1B3DD1180E8FFE00DA2BD6 /* SYNMoodViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DCF180E8FFE00DA2BD6 /* SYNMoodViewController~iphone.xib */; };
-		BE1B3DD3180E902800DA2BD6 /* MoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DD2180E902800DA2BD6 /* MoodViewController.xib */; };
+		BE1B3DD0180E8FFE00DA2BD6 /* SYNMoodRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DCE180E8FFE00DA2BD6 /* SYNMoodRootViewController.m */; };
+		BE1B3DD1180E8FFE00DA2BD6 /* SYNMoodRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DCF180E8FFE00DA2BD6 /* SYNMoodRootViewController~iphone.xib */; };
+		BE1B3DD3180E902800DA2BD6 /* SYNMoodRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DD2180E902800DA2BD6 /* SYNMoodRootViewController.xib */; };
 		BE1B3DD6180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DD5180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.m */; };
 		BE1B3DD8180EA31800DA2BD6 /* SYNCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DD7180EA31800DA2BD6 /* SYNCategoryCollectionViewCell.xib */; };
 		BE1B3DE61810265700DA2BD6 /* SYNNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DE51810265700DA2BD6 /* SYNNavigationManager.m */; };
@@ -1534,6 +1536,8 @@
 		0126331E162E2A060009FF9C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Light.otf"; path = "Assets/Fonts/ProximaNova-Light.otf"; sourceTree = "<group>"; };
 		0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Assets/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundMoodView@2x.png"; path = "Assets/Images/BackgroundMoodView@2x.png"; sourceTree = "<group>"; };
+		0127B88218113A1100DE2FD6 /* BackgroundMoodView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundMoodView.png; path = Assets/Images/BackgroundMoodView.png; sourceTree = "<group>"; };
 		012B4C9B17393A080019DA4C /* SYNPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopoverBackgroundView.h; sourceTree = "<group>"; };
 		012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopoverBackgroundView.m; sourceTree = "<group>"; };
 		012B4C9E17393CA10019DA4C /* ButtonChooseExistingDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonChooseExistingDefault.png; path = Assets/Images/ButtonChooseExistingDefault.png; sourceTree = "<group>"; };
@@ -2503,10 +2507,10 @@
 		BE1B3DC5180D50C700DA2BD6 /* SYNDiscoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverViewController.xib; sourceTree = "<group>"; };
 		BE1B3DC8180D804A00DA2BD6 /* SYNActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNActivityViewController.xib; sourceTree = "<group>"; };
 		BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNActivityViewController~iphone.xib"; sourceTree = "<group>"; };
-		BE1B3DCD180E8FFE00DA2BD6 /* SYNMoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNMoodViewController.h; sourceTree = "<group>"; };
-		BE1B3DCE180E8FFE00DA2BD6 /* SYNMoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNMoodViewController.m; sourceTree = "<group>"; };
-		BE1B3DCF180E8FFE00DA2BD6 /* SYNMoodViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNMoodViewController~iphone.xib"; sourceTree = "<group>"; };
-		BE1B3DD2180E902800DA2BD6 /* MoodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoodViewController.xib; sourceTree = "<group>"; };
+		BE1B3DCD180E8FFE00DA2BD6 /* SYNMoodRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNMoodRootViewController.h; sourceTree = "<group>"; };
+		BE1B3DCE180E8FFE00DA2BD6 /* SYNMoodRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNMoodRootViewController.m; sourceTree = "<group>"; };
+		BE1B3DCF180E8FFE00DA2BD6 /* SYNMoodRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNMoodRootViewController~iphone.xib"; sourceTree = "<group>"; };
+		BE1B3DD2180E902800DA2BD6 /* SYNMoodRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNMoodRootViewController.xib; sourceTree = "<group>"; };
 		BE1B3DD4180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCategoryCollectionViewCell.h; sourceTree = "<group>"; };
 		BE1B3DD5180EA2EF00DA2BD6 /* SYNCategoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCategoryCollectionViewCell.m; sourceTree = "<group>"; };
 		BE1B3DD7180EA31800DA2BD6 /* SYNCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -3342,6 +3346,15 @@
 			name = Buttons;
 			sourceTree = "<group>";
 		};
+		0127B880181139F500DE2FD6 /* Mood Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */,
+				0127B88218113A1100DE2FD6 /* BackgroundMoodView.png */,
+			);
+			name = "Mood Controller";
+			sourceTree = "<group>";
+		};
 		012BD2C7173BE84C00BE28B6 /* Async Image load and cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -3668,6 +3681,7 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0127B880181139F500DE2FD6 /* Mood Controller */,
 				1F5FAED517E73F8C00205F3F /* Add to Pack */,
 				1FD2856417BBA1640094F488 /* Share Panel */,
 				BE8F938F17B3CF9700E7035F /* Sharing */,
@@ -5243,10 +5257,10 @@
 		BE1B3DCC180E8FDC00DA2BD6 /* Mood */ = {
 			isa = PBXGroup;
 			children = (
-				BE1B3DCD180E8FFE00DA2BD6 /* SYNMoodViewController.h */,
-				BE1B3DCE180E8FFE00DA2BD6 /* SYNMoodViewController.m */,
-				BE1B3DCF180E8FFE00DA2BD6 /* SYNMoodViewController~iphone.xib */,
-				BE1B3DD2180E902800DA2BD6 /* MoodViewController.xib */,
+				BE1B3DCD180E8FFE00DA2BD6 /* SYNMoodRootViewController.h */,
+				BE1B3DCE180E8FFE00DA2BD6 /* SYNMoodRootViewController.m */,
+				BE1B3DCF180E8FFE00DA2BD6 /* SYNMoodRootViewController~iphone.xib */,
+				BE1B3DD2180E902800DA2BD6 /* SYNMoodRootViewController.xib */,
 			);
 			name = Mood;
 			sourceTree = "<group>";
@@ -6903,6 +6917,7 @@
 				BE3983DA176A0CD200EE9C7B /* onboarding_button_ok.png in Resources */,
 				BE3983DB176A0CD200EE9C7B /* onboarding_button_ok@2x.png in Resources */,
 				BE3983DC176A0CD200EE9C7B /* onboarding_button_ok@2x~iphone.png in Resources */,
+				0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x.png in Resources */,
 				BE3983DD176A0CD200EE9C7B /* onboarding_button_ok~iphone.png in Resources */,
 				BE3983E2176A108900EE9C7B /* onboarding_arrow_bottom.png in Resources */,
 				BE3983E3176A108900EE9C7B /* onboarding_arrow_bottom@2x.png in Resources */,
@@ -6910,7 +6925,7 @@
 				BE3983E5176A108900EE9C7B /* onboarding_arrow_up@2x.png in Resources */,
 				BE3983EA176A129500EE9C7B /* onboarding_button_ok_highlighted.png in Resources */,
 				BE3983EB176A129500EE9C7B /* onboarding_button_ok_highlighted@2x.png in Resources */,
-				BE1B3DD3180E902800DA2BD6 /* MoodViewController.xib in Resources */,
+				BE1B3DD3180E902800DA2BD6 /* SYNMoodRootViewController.xib in Resources */,
 				BE3983F2176A164500EE9C7B /* onboarding_arrow_left.png in Resources */,
 				BE3983F3176A164500EE9C7B /* onboarding_arrow_left@2x.png in Resources */,
 				BE3983F4176A164500EE9C7B /* onboarding_arrow_right.png in Resources */,
@@ -6924,6 +6939,7 @@
 				BEA2AEDF176E03370099DB74 /* ButtonNavHighlightedCD@2x.png in Resources */,
 				BEA2AEE0176E03370099DB74 /* ButtonNavSelectedCD.png in Resources */,
 				1F458B2A17E1CE8E003C14AC /* AppIcon-Dev-60x60.png in Resources */,
+				0127B88418113A1100DE2FD6 /* BackgroundMoodView.png in Resources */,
 				012CDC4017E2286C00C723BB /* DeletePackButton~iphone.png in Resources */,
 				BEA2AEE1176E03370099DB74 /* ButtonNavSelectedCD@2x.png in Resources */,
 				1F458B2817E1CE8E003C14AC /* AppIcon-Dev-57x57.png in Resources */,
@@ -7025,7 +7041,7 @@
 				BE458AE117E5FD8D00776B0D /* InstructionsCardOkayButton@2x.png in Resources */,
 				BE22A83817A7FE020004BBF4 /* ButtonFeedLikeSelected@2x.png in Resources */,
 				BE22A83D17A806490004BBF4 /* PanelFeedLong.png in Resources */,
-				BE1B3DD1180E8FFE00DA2BD6 /* SYNMoodViewController~iphone.xib in Resources */,
+				BE1B3DD1180E8FFE00DA2BD6 /* SYNMoodRootViewController~iphone.xib in Resources */,
 				BEA216D517E9B389007C6DF7 /* ButtonFriendsFacebookSelected@2x~iphone.png in Resources */,
 				BE22A83E17A806490004BBF4 /* PanelFeedLong@2x.png in Resources */,
 				BE22A83F17A806490004BBF4 /* PanelFeedShort.png in Resources */,
@@ -7348,7 +7364,7 @@
 				01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */,
 				011C1676173003E800CF50B9 /* OWActivity.m in Sources */,
 				011C1677173003E800CF50B9 /* OWActivityDelegateObject.m in Sources */,
-				BE1B3DD0180E8FFE00DA2BD6 /* SYNMoodViewController.m in Sources */,
+				BE1B3DD0180E8FFE00DA2BD6 /* SYNMoodRootViewController.m in Sources */,
 				011C1678173003E800CF50B9 /* OWActivityView.m in Sources */,
 				011C167A173003E800CF50B9 /* OWActivityViewController.m in Sources */,
 				011C167B173003E800CF50B9 /* OWCopyActivity.m in Sources */,

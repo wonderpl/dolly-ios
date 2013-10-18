@@ -40,20 +40,19 @@
 
 #define kDataRequestRange           @"DataRequestRange"
 
-
 // viewId
-#define kFeedViewId                 NSLocalizedString(@"core_nav_section_feed", nil)
-#define kChannelsViewId             NSLocalizedString(@"core_nav_section_channels", nil)
-#define kProfileViewId              NSLocalizedString(@"core_nav_section_profile", nil)
-#define kSearchViewId               NSLocalizedString(@"core_nav_section_search", nil)
-#define kDiscoverViewId             NSLocalizedString(@"core_nav_section_discover", nil)
-#define kExistingChannelsViewId     @"ExistingChannels"
-#define kChannelDetailsViewId       NSLocalizedString(@"core_nav_section_channel_details", nil)
-#define kSideNavigationViewId       @"kSideNavigationViewId"
-#define kSubscribersListViewId      @"kSubscribersListViewId"
-#define kFriendsViewId              NSLocalizedString(@"core_nav_section_friends", nil)
-#define kActivityViewId             NSLocalizedString(@"core_nav_section_activity", nil)
-
+#define kFeedViewId                 @"FEED"
+#define kChannelsViewId             @"PACKS"
+#define kProfileViewId              @"ME"
+#define kSearchViewId               @"SEARCH"
+#define kDiscoverViewId             @"DISCOVER"
+#define kExistingChannelsViewId     @"CHANNELS"
+#define kChannelDetailsViewId       @"CHANNEL DETAILS"
+#define kSideNavigationViewId       @"SIDE NAVIGATION"
+#define kSubscribersListViewId      @"SUBSCRIBERS"
+#define kFriendsViewId              @"FRIENDS"
+#define kActivityViewId             @"ACTIVITY"
+#define kMoodViewId                 @"MOOD-O-MATIC"
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"
 
