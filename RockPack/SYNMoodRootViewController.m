@@ -9,6 +9,7 @@
 #import "SYNMoodRootViewController.h"
 #import "SYNMoodCell.h"
 #import "UIFont+SYNFont.h"
+#import "SYNFadingFlowLayout.h"
 
 @interface SYNMoodRootViewController ()
 
@@ -31,6 +32,15 @@
     // Setup mood collection view
     [self.moodCollectionView registerNib: [UINib nibWithNibName: @"SYNMoodCell" bundle: nil]
               forCellWithReuseIdentifier: @"SYNMoodCell"];
+    
+    SYNFadingFlowLayout *fadingFlowLayout = [[SYNFadingFlowLayout alloc] init];
+    
+    fadingFlowLayout.itemSize = CGSizeMake (320, 50);
+    fadingFlowLayout.minimumInteritemSpacing = 0;
+    fadingFlowLayout.minimumLineSpacing = 0;
+    fadingFlowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
+    self.moodCollectionView.collectionViewLayout = fadingFlowLayout;
     
     self.mainLabel.font = [UIFont regularCustomFontOfSize: self.mainLabel.font.pointSize];
 }

@@ -244,6 +244,7 @@
 		0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F13916721A4500E479C6 /* SYNFeedRootViewController.m */; };
 		019CB6A218117D300079DFCF /* SYNMoodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CB6A118117D300079DFCF /* SYNMoodCell.m */; };
 		019CB6A418117D450079DFCF /* SYNMoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019CB6A318117D450079DFCF /* SYNMoodCell.xib */; };
+		019CB6A8181187E80079DFCF /* SYNFadingFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */; };
 		019E6A61165FD99A002B312A /* SYNOAuth2Credential.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E6A60165FD99A002B312A /* SYNOAuth2Credential.m */; };
 		019E6A64165FD9AC002B312A /* SYNOAuthNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E6A63165FD9AC002B312A /* SYNOAuthNetworkEngine.m */; };
 		019E6A8F16E9081D00647002 /* GlossVideoThumbnailSmallPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 019E6A8D16E9081D00647002 /* GlossVideoThumbnailSmallPlaying.png */; };
@@ -1718,6 +1719,8 @@
 		019CB6A018117D300079DFCF /* SYNMoodCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNMoodCell.h; sourceTree = "<group>"; };
 		019CB6A118117D300079DFCF /* SYNMoodCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNMoodCell.m; sourceTree = "<group>"; };
 		019CB6A318117D450079DFCF /* SYNMoodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNMoodCell.xib; sourceTree = "<group>"; };
+		019CB6A6181187E80079DFCF /* SYNFadingFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFadingFlowLayout.h; sourceTree = "<group>"; };
+		019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFadingFlowLayout.m; sourceTree = "<group>"; };
 		019E6A5F165FD99A002B312A /* SYNOAuth2Credential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOAuth2Credential.h; sourceTree = "<group>"; };
 		019E6A60165FD99A002B312A /* SYNOAuth2Credential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOAuth2Credential.m; sourceTree = "<group>"; };
 		019E6A62165FD9AC002B312A /* SYNOAuthNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOAuthNetworkEngine.h; sourceTree = "<group>"; };
@@ -3594,6 +3597,8 @@
 		0173F70416E0C498005B3ECA /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
+				019CB6A6181187E80079DFCF /* SYNFadingFlowLayout.h */,
+				019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */,
 				015CEE3D16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.h */,
 				015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */,
 				014A456616691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.h */,
@@ -7374,6 +7379,7 @@
 				BE21EEAC16FB4C060067223B /* SYNAccountSettingsShareSettings.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
 				BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */,
+				019CB6A8181187E80079DFCF /* SYNFadingFlowLayout.m in Sources */,
 				BE13E38916FB85220098F23C /* SYNAccountSettingsLocation.m in Sources */,
 				BE13E38C16FC85E60098F23C /* SYNAccountSettingsAbout.m in Sources */,
 				01AEFBCD1701AC460060467A /* SYNActivityManager.m in Sources */,
