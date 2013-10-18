@@ -19,7 +19,9 @@
 @interface SYNAggregateCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
+
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
+
 @property (nonatomic, strong) IBOutlet UILabel *mainTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
@@ -29,8 +31,14 @@
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
 @property (nonatomic, weak) id<SYNAggregateCellDelegate> viewControllerDelegate;
 
+@property (nonatomic, strong) NSArray* collectionData;
+
 - (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString;
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary;
 - (void) setSupplementaryMessageWithDictionary: (NSDictionary *) messageDictionary;
+
+// new
+
+
 
 @end

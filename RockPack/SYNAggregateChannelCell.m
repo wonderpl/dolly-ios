@@ -39,54 +39,20 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 {
     [super prepareForReuse];
     
-    if (self.buttonContainerView)
-    {
-        [self.buttonContainerView removeFromSuperview];
-        self.buttonContainerView = nil;
-    }
     
-    if (self.labelsContainerView)
-    {
-        [self.labelsContainerView removeFromSuperview];
-        self.labelsContainerView = nil;
-    }
-    
-    self.mainTitleLabel.hidden = NO;
 }
 
 
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) array
-{
-    
-}
+
 
 
 - (void) setViewControllerDelegate: (id<SYNAggregateCellDelegate>) viewControllerDelegate
 {
     [super setViewControllerDelegate: viewControllerDelegate];
     
-    if (self.buttonContainerView)
-    {
-        for (UIImageView *simulatedButtonView in self.buttonContainerView.subviews)
-        {
-            // Tap for showing video
-            UITapGestureRecognizer *buttonTap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                                                        action: @selector(showChannel:)];
-            buttonTap.delegate = self;
-            [simulatedButtonView addGestureRecognizer: buttonTap];
-            
-            // Touch for highlighting cells when the user touches them (like UIButton)
-            SYNTouchGestureRecognizer *buttonTouch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self
-                                                                                                action: @selector(showGlossLowlight:)];
-            
-            buttonTouch.delegate = self;
-            [simulatedButtonView addGestureRecognizer: buttonTouch];
-        }
-    }
     
-    [self.userThumbnailButton addTarget: self.viewControllerDelegate
-                                 action: @selector(profileButtonTapped:)
-                       forControlEvents: UIControlEventTouchUpInside];
+    
+    
 }
 
 
@@ -126,7 +92,7 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 1;
+    return 2;
     
 }
 
