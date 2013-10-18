@@ -17,6 +17,7 @@
                 <outlet property="searchButton" destination="48" id="50"/>
                 <outlet property="sideNavigationButton" destination="12" id="38"/>
                 <outlet property="sideNavigationContainerView" destination="28" id="xzF-5M-RyN"/>
+                <outlet property="tabsView" destination="6hy-Hf-wx9" id="HeQ-oo-rJG"/>
                 <outlet property="view" destination="1" id="19"/>
             </connections>
         </placeholder>
@@ -121,40 +122,47 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="6hy-Hf-wx9" userLabel="Tabs">
+                <view contentMode="scaleToFill" id="6hy-Hf-wx9" userLabel="Tabs">
                     <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2cq-OW-20C" userLabel="Tab 1">
-                            <rect key="frame" x="14" y="10" width="46" height="30"/>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MW4-we-NYV" userLabel="Tab - Feed">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button">
+                            <state key="normal" title="Button" image="TabFeed.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MW4-we-NYV" userLabel="Tab 2">
-                            <rect key="frame" x="84" y="10" width="46" height="30"/>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D77-86-KYt" userLabel="Tab - Search">
+                            <rect key="frame" x="72" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button">
+                            <state key="normal" title="Button" image="TabSearch.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D77-86-KYt" userLabel="Tab 3">
-                            <rect key="frame" x="147" y="10" width="46" height="30"/>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jmp-TX-9Wq" userLabel="Tab - Mood-o-Meter">
+                            <rect key="frame" x="144" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button">
+                            <state key="normal" title="Button" image="TabMoods.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jmp-TX-9Wq" userLabel="Tab 4">
-                            <rect key="frame" x="209" y="10" width="46" height="30"/>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H3w-hz-oZe" userLabel="Tab - Profile">
+                            <rect key="frame" x="199" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button">
+                            <state key="normal" title="Button" image="TabProfile.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2cq-OW-20C" userLabel="Tab - Activity (Notifications)">
+                            <rect key="frame" x="256" y="0.0" width="64" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button" image="TabActivity.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="31" userLabel="Error Container View">
@@ -175,5 +183,10 @@
         <image name="ButtonNavSelected.png" width="48" height="49"/>
         <image name="ButtonSearch.png" width="48" height="49"/>
         <image name="IconSearch.png" width="34" height="45"/>
+        <image name="TabActivity.png" width="64" height="49"/>
+        <image name="TabFeed.png" width="64" height="49"/>
+        <image name="TabMoods.png" width="64" height="49"/>
+        <image name="TabProfile.png" width="64" height="49"/>
+        <image name="TabSearch.png" width="64" height="49"/>
     </resources>
 </document>

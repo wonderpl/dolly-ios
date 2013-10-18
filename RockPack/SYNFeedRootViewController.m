@@ -761,6 +761,11 @@ typedef void(^FeedDataErrorBlock)(void);
                 [videos addObject:vi];
             }
         }
+        else
+        {
+            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
+            [videos addObject:vi];
+        }
         
         cell.collectionData = videos;
         
@@ -774,29 +779,31 @@ typedef void(^FeedDataErrorBlock)(void);
         
         Channel* channel;
         
+        NSMutableArray* channelsMutArray = [NSMutableArray array];
+        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
-            NSArray* coverIndexIds = [feedItem.coverIndexes componentsSeparatedByString:@":"];
-            
-            NSMutableArray* coverImagesAndTitles = [NSMutableArray arrayWithCapacity:coverIndexIds.count];
             
             
-            for (NSString* resourceId in coverIndexIds)
+            
+            for (FeedItem* childFeedItem in feedItem.feedItems)
             {
-                channel = (Channel*)(self.feedChannelsById)[resourceId];
-                [coverImagesAndTitles addObject:@{  @"image": channel.channelCover ? channel.channelCover.imageUrl : @"",
-                                                    @"title" : channel.title    }];
+                channel = (Channel*)(self.feedChannelsById[childFeedItem.resourceId]);
+                [channelsMutArray addObject:channel];
+                
             }
             
-            [cell setCoverImagesAndTitlesWithArray: coverImagesAndTitles];
+            
+            
         }
         else
         {
             channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
+            [channelsMutArray addObject:channel];
             
-            [cell setCoverImagesAndTitlesWithArray:@[@{@"image": channel.channelCover ? channel.channelCover.imageLargeUrl : @"",
-                                                       @"title" : channel.title    }]]; 
         }
+        
+        cell.collectionData = [NSArray arrayWithArray:channelsMutArray];
         
         channelOwner = channel.channelOwner;
         

@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "010DEFCF1629BDC40080F26B"
-            BuildableName = "rockpack.app"
-            BlueprintName = "rockpack"
-            ReferencedContainer = "container:rockpack.xcodeproj">
+            BuildableName = "dolly.app"
+            BlueprintName = "dolly"
+            ReferencedContainer = "container:dolly.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>

@@ -9,6 +9,7 @@
 #import "AppConstants.h"
 #import "SYNAggregateChannelCell.h"
 #import "SYNTouchGestureRecognizer.h"
+#import "Channel.h"
 #import "SYNAggregateChannelItemCell.h"
 #import "UIImage+Tint.h"
 
@@ -32,6 +33,9 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     [self.collectionView registerNib:[UINib nibWithNibName:kChannelItemCellIndetifier bundle:nil]
           forCellWithReuseIdentifier:kChannelItemCellIndetifier];
+    
+    [self.collectionView reloadData];
+    
 }
 
 
@@ -92,7 +96,7 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 2;
+    return self.collectionData.count;
     
 }
 
@@ -103,6 +107,9 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     SYNAggregateChannelItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kChannelItemCellIndetifier
                                                                                     forIndexPath: indexPath];
     
+    Channel* channel = (Channel*)self.collectionData[indexPath.item];
+    
+    itemCell.titleLabel.text = channel.title;
     
     return itemCell;
     
