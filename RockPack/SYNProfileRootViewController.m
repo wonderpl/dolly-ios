@@ -104,114 +104,6 @@ SYNImagePickerControllerDelegate>
     self.channelThumbnailCollectionView.dataSource = nil;
 }
 
-#pragma mark - User Profile
-
-//config for user profile views
-
--(void) setUpUserProfile
-{
-    
-    self.fullNameLabel.font = [UIFont boldRockpackFontOfSize:30];
-    self.userNameLabel.font = [UIFont rockpackFontOfSize:12.0];
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(userDataChanged:)
-                                                 name: kUserDataChanged
-                                               object: nil];
-    
-    self.userNameLabel.text = self.channelOwner.username;
-    self.fullNameLabel.text = self.channelOwner.displayName;
-    
-    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
-    
-    if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
-        
-        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
-        dispatch_async(downloadQueue, ^{
-            
-            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailURL ]];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.self.profileImageView.image = [UIImage imageWithData: imageData];
-            });
-        });
-        
-    }else{
-        self.profileImageView.image = placeholderImage;
-    }
-}
-
--(void) setUpHeader {
-    
-    SYNYouHeaderView *tmpHeaderChannelsView;
-    SYNYouHeaderView *tmpHeaderSubscriptionsView;
-    
-    if (!self.isIPhone)
-    {
-        CGFloat correctWidth = [SYNDeviceManager.sharedInstance isLandscape] ? 600.0 : 400.0;
-        
-        self.headerChannelsView.frame = CGRectMake(self.headerChannelsView.frame.origin.x, self.headerChannelsView.frame.origin.y, correctWidth, self.headerChannelsView.frame.size.height);
-        
-        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerChannelsView.frame];
-        self.headerSubscriptionsView.frame = CGRectMake(self.headerSubscriptionsView.frame.origin.x, self.headerSubscriptionsView.frame.origin.y, correctWidth, self.headerSubscriptionsView.frame.size.height);
-        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerSubscriptionsView.frame];
-        
-        self.headerChannelsView = tmpHeaderChannelsView;
-        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
-        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
-        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
-        
-        
-        [self.view addSubview:tmpHeaderChannelsView];
-        [self.view addSubview:tmpHeaderSubscriptionsView];
-        
-    }
-    
-    if (self.isIPhone)
-    {
-        
-        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.channelsTabButton.frame];
-        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.subscriptionsTabButton.frame];
-        
-        self.headerChannelsView = tmpHeaderChannelsView;
-        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
-        
-        [tmpHeaderChannelsView setFontSize: 12.0f];
-        [tmpHeaderSubscriptionsView setFontSize: 12.0f];
-        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
-        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
-        
-        tmpHeaderChannelsView.userInteractionEnabled = NO;
-        tmpHeaderSubscriptionsView.userInteractionEnabled = NO;
-        
-        [self.channelsTabButton addSubview:tmpHeaderChannelsView];
-        [self.channelsTabButton addSubview:tmpHeaderSubscriptionsView];
-        
-    }
-}
-
-
-- (void) userDataChanged: (NSNotification*) notification
-{
-    User* currentUser = (User*)[notification userInfo][@"user"];
-    if(!currentUser)
-        return;
-    
-    if ([self.channelOwner.uniqueId isEqualToString: currentUser.uniqueId])
-    {
-        [self setChannelOwner: currentUser];
-    }
-}
-
-
-- (IBAction) userTouchedAvatarButton: (UIButton *) avatarButton
-{
-    self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController: self];
-    self.imagePickerController.delegate = self;
-    
-    [self.imagePickerController presentImagePickerAsPopupFromView: avatarButton
-                                                   arrowDirection: UIPopoverArrowDirectionUp];
-}
 
 #pragma mark - View Lifecycle
 
@@ -395,6 +287,115 @@ SYNImagePickerControllerDelegate>
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
 
+
+#pragma mark - User Profile
+
+//config for user profile views
+
+-(void) setUpUserProfile
+{
+    
+    self.fullNameLabel.font = [UIFont boldRockpackFontOfSize:30];
+    self.userNameLabel.font = [UIFont rockpackFontOfSize:12.0];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(userDataChanged:)
+                                                 name: kUserDataChanged
+                                               object: nil];
+    
+    self.userNameLabel.text = self.channelOwner.username;
+    self.fullNameLabel.text = self.channelOwner.displayName;
+    
+    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+    
+    if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
+        
+        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailURL ]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.self.profileImageView.image = [UIImage imageWithData: imageData];
+            });
+        });
+        
+    }else{
+        self.profileImageView.image = placeholderImage;
+    }
+}
+
+-(void) setUpHeader {
+    
+    SYNYouHeaderView *tmpHeaderChannelsView;
+    SYNYouHeaderView *tmpHeaderSubscriptionsView;
+    
+    if (!self.isIPhone)
+    {
+        CGFloat correctWidth = [SYNDeviceManager.sharedInstance isLandscape] ? 600.0 : 400.0;
+        
+        self.headerChannelsView.frame = CGRectMake(self.headerChannelsView.frame.origin.x, self.headerChannelsView.frame.origin.y, correctWidth, self.headerChannelsView.frame.size.height);
+        
+        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerChannelsView.frame];
+        self.headerSubscriptionsView.frame = CGRectMake(self.headerSubscriptionsView.frame.origin.x, self.headerSubscriptionsView.frame.origin.y, correctWidth, self.headerSubscriptionsView.frame.size.height);
+        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerSubscriptionsView.frame];
+        
+        self.headerChannelsView = tmpHeaderChannelsView;
+        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
+        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
+        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
+        
+        
+        [self.view addSubview:tmpHeaderChannelsView];
+        [self.view addSubview:tmpHeaderSubscriptionsView];
+        
+    }
+    
+    if (self.isIPhone)
+    {
+        
+        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.channelsTabButton.frame];
+        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.subscriptionsTabButton.frame];
+        
+        self.headerChannelsView = tmpHeaderChannelsView;
+        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
+        
+        [tmpHeaderChannelsView setFontSize: 12.0f];
+        [tmpHeaderSubscriptionsView setFontSize: 12.0f];
+        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
+        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
+        
+        tmpHeaderChannelsView.userInteractionEnabled = NO;
+        tmpHeaderSubscriptionsView.userInteractionEnabled = NO;
+        
+        [self.channelsTabButton addSubview:tmpHeaderChannelsView];
+        [self.channelsTabButton addSubview:tmpHeaderSubscriptionsView];
+        
+    }
+}
+
+
+- (void) userDataChanged: (NSNotification*) notification
+{
+    User* currentUser = (User*)[notification userInfo][@"user"];
+    if(!currentUser)
+        return;
+    
+    if ([self.channelOwner.uniqueId isEqualToString: currentUser.uniqueId])
+    {
+        [self setChannelOwner: currentUser];
+    }
+}
+
+
+- (IBAction) userTouchedAvatarButton: (UIButton *) avatarButton
+{
+    self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController: self];
+    self.imagePickerController.delegate = self;
+    
+    [self.imagePickerController presentImagePickerAsPopupFromView: avatarButton
+                                                   arrowDirection: UIPopoverArrowDirectionUp];
+}
 
 #pragma mark - Core Data Callbacks
 

@@ -53,7 +53,7 @@
                     </subviews>
                 </view>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="Gpk-go-IZt">
-                    <rect key="frame" x="0.0" y="111" width="320" height="457"/>
+                    <rect key="frame" x="0.0" y="110" width="320" height="457"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4RR-LR-xcl">
@@ -69,7 +69,7 @@
                     </connections>
                 </collectionView>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8">
-                    <rect key="frame" x="0.0" y="111" width="320" height="457"/>
+                    <rect key="frame" x="0.0" y="110" width="320" height="457"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OHx-Au-cg1">
@@ -92,10 +92,7 @@
     </objects>
     <resources>
         <image name="ButtonProfileChannels.png" width="160" height="44"/>
-        <image name="ButtonProfileChannels.png" width="160" height="44"/>
         <image name="ButtonProfileChannelsHighlighted.png" width="160" height="44"/>
-        <image name="ButtonProfileChannelsHighlighted.png" width="160" height="44"/>
-        <image name="ButtonProfileChannelsSelected.png" width="160" height="44"/>
         <image name="ButtonProfileChannelsSelected.png" width="160" height="44"/>
     </resources>
 </document>
