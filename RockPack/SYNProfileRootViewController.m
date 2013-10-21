@@ -143,42 +143,51 @@ SYNImagePickerControllerDelegate>
 
 -(void) setUpHeader {
     
-    //Header set up for ipad
-    CGFloat correctWidth = [SYNDeviceManager.sharedInstance isLandscape] ? 600.0 : 400.0;
+    SYNYouHeaderView *tmpHeaderChannelsView;
+    SYNYouHeaderView *tmpHeaderSubscriptionsView;
     
-    self.headerChannelsView.frame = CGRectMake(self.headerChannelsView.frame.origin.x, self.headerChannelsView.frame.origin.y, correctWidth, self.headerChannelsView.frame.size.height);
-    
-    SYNYouHeaderView *tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerChannelsView.frame];
-    [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
-    self.headerSubscriptionsView.frame = CGRectMake(self.headerSubscriptionsView.frame.origin.x, self.headerSubscriptionsView.frame.origin.y, correctWidth, self.headerSubscriptionsView.frame.size.height);
-    
-    SYNYouHeaderView *tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerSubscriptionsView.frame];
-    
-    [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
-    
-    self.headerChannelsView = tmpHeaderChannelsView;
-    self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
+    if (!self.isIPhone)
+    {
+        CGFloat correctWidth = [SYNDeviceManager.sharedInstance isLandscape] ? 600.0 : 400.0;
+        
+        self.headerChannelsView.frame = CGRectMake(self.headerChannelsView.frame.origin.x, self.headerChannelsView.frame.origin.y, correctWidth, self.headerChannelsView.frame.size.height);
+        
+        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerChannelsView.frame];
+        self.headerSubscriptionsView.frame = CGRectMake(self.headerSubscriptionsView.frame.origin.x, self.headerSubscriptionsView.frame.origin.y, correctWidth, self.headerSubscriptionsView.frame.size.height);
+        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerSubscriptionsView.frame];
+        
+        self.headerChannelsView = tmpHeaderChannelsView;
+        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
+        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
+        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
+        
+        
+        [self.view addSubview:tmpHeaderChannelsView];
+        [self.view addSubview:tmpHeaderSubscriptionsView];
+        
+    }
     
     if (self.isIPhone)
     {
-        CGRect newFrame = self.headerChannelsView.frame;
-        newFrame.origin.y = 59.0f;
-        newFrame.size.height = 42.0f;
-        self.headerChannelsView.frame = newFrame;
-        [self.headerChannelsView setFontSize: 12.0f];
         
-        self.headerChannelsView.userInteractionEnabled = NO;
-        newFrame.origin.y = 58.0f;
-        newFrame.size.height = 43.0f;
-        self.headerSubscriptionsView.frame = newFrame;
-        [self.headerSubscriptionsView setFontSize: 12.0f];
-        self.headerSubscriptionsView.userInteractionEnabled = NO;
+        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.channelsTabButton.frame];
+        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.subscriptionsTabButton.frame];
+        
+        self.headerChannelsView = tmpHeaderChannelsView;
+        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
+        
+        [tmpHeaderChannelsView setFontSize: 12.0f];
+        [tmpHeaderSubscriptionsView setFontSize: 12.0f];
+        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
+        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
+        
+        tmpHeaderChannelsView.userInteractionEnabled = NO;
+        tmpHeaderSubscriptionsView.userInteractionEnabled = NO;
+        
+        [self.channelsTabButton addSubview:tmpHeaderChannelsView];
+        [self.channelsTabButton addSubview:tmpHeaderSubscriptionsView];
+        
     }
-    
-    [self.view addSubview:tmpHeaderChannelsView];
-    [self.view addSubview:tmpHeaderSubscriptionsView];
-    
-    NSLog(@"aaa%f,%f,",tmpHeaderSubscriptionsView.frame.origin.x, tmpHeaderSubscriptionsView.frame.origin.y );
 }
 
 
