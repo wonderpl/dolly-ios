@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
@@ -9,11 +9,13 @@
             <connections>
                 <outlet property="activityIndicatiorView" destination="pde-NF-Z40" id="gmY-BD-k4d"/>
                 <outlet property="avatarButton" destination="zRu-2Q-Df1" id="7GU-Kx-bih"/>
+                <outlet property="channelLayoutIPad" destination="XH1-bA-kHd" id="YF5-u3-Kj0"/>
                 <outlet property="channelThumbnailCollectionView" destination="MS7-tW-0TH" id="JAi-QX-iX9"/>
                 <outlet property="fullNameLabel" destination="KyT-Nw-OMd" id="2lF-qg-Ruu"/>
                 <outlet property="headerChannelsView" destination="tqP-na-NBI" id="0Q8-gw-7KN"/>
                 <outlet property="headerSubscriptionsView" destination="vnK-MI-7ZZ" id="t2s-1u-Omm"/>
                 <outlet property="profileImageView" destination="1Ii-Uo-tHf" id="XFC-68-wls"/>
+                <outlet property="subscriptionLayoutIPad" destination="AUe-Ip-zbd" id="b3T-XB-9Ti"/>
                 <outlet property="subscriptionThumbnailCollectionView" destination="0td-Z3-eno" id="xKN-cx-zOO"/>
                 <outlet property="userNameLabel" destination="htU-sh-KKe" id="Bcb-9T-EmV"/>
                 <outlet property="userProfileView" destination="60h-qX-Xkd" id="TJp-5o-yx9"/>
@@ -26,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view autoresizesSubviews="NO" contentMode="scaleToFill" id="60h-qX-Xkd">
-                    <rect key="frame" x="0.0" y="33" width="512" height="94"/>
+                    <rect key="frame" x="21" y="78" width="512" height="94"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AvatarProfile.png" id="1Ii-Uo-tHf" userLabel="ImageView - Avatar">
@@ -70,19 +72,19 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
                 <view contentMode="scaleToFill" id="tqP-na-NBI" customClass="SYNYouHeaderView">
-                    <rect key="frame" x="0.0" y="165" width="384" height="50"/>
+                    <rect key="frame" x="20" y="190" width="384" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="vnK-MI-7ZZ" customClass="SYNYouHeaderView">
-                    <rect key="frame" x="389" y="165" width="384" height="50"/>
+                    <rect key="frame" x="384" y="190" width="384" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="MS7-tW-0TH">
-                    <rect key="frame" x="0.0" y="272" width="384" height="719"/>
+                    <rect key="frame" x="-9" y="262" width="385" height="761"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XH1-bA-kHd">
-                        <size key="itemSize" width="50" height="50"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
+                        <size key="itemSize" width="190" height="190"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -94,11 +96,11 @@
                     </connections>
                 </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0td-Z3-eno">
-                    <rect key="frame" x="389" y="272" width="379" height="719"/>
+                    <rect key="frame" x="384" y="262" width="407" height="743"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AUe-Ip-zbd">
-                        <size key="itemSize" width="50" height="50"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="AUe-Ip-zbd">
+                        <size key="itemSize" width="190" height="190"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
