@@ -14,7 +14,7 @@
 -(void)awakeFromNib
 {
     
-    self.nameLabel.font = [UIFont rockpackFontOfSize:self.nameLabel.font.pointSize];
+    self.nameLabel.font = [UIFont lightCustomFontOfSize:self.nameLabel.font.pointSize];
     
     if(!IS_IOS_7_OR_GREATER)
     {

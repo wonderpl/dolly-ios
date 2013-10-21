@@ -37,12 +37,12 @@
         
         if (IS_IPAD)
         {
-            self.textLabel.font = [UIFont rockpackFontOfSize:15];
+            self.textLabel.font = [UIFont lightCustomFontOfSize:15];
         }
         
         else
         {
-            self.textLabel.font = [UIFont rockpackFontOfSize:18];
+            self.textLabel.font = [UIFont lightCustomFontOfSize:18];
         }
         
         self.textLabel.textColor = self.defaultColor;
@@ -57,7 +57,7 @@
         self.accessoryNumberLabel.backgroundColor = [UIColor clearColor];
         self.accessoryNumberLabel.hidden = YES;
         self.accessoryNumberBackground = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"NotificationBubble"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,16,0,16)]];
-        self.accessoryNumberLabel.font = [UIFont rockpackFontOfSize:14];
+        self.accessoryNumberLabel.font = [UIFont lightCustomFontOfSize:14];
         self.accessoryNumberLabel.textColor = self.selectedColor;
         self.accessoryNumberLabel.shadowColor = self.selectedShadowColor;
         self.accessoryNumberLabel.shadowOffset = CGSizeMake(0.0f,1.0f);

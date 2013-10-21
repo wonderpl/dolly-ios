@@ -40,7 +40,7 @@
         
         // == Main Text == //
         self.textLabel.frame = CGRectMake(74.0, 10.0, 0.0, 0.0); // width, height will be set below
-        self.textLabel.font = [UIFont rockpackFontOfSize: 14.0];
+        self.textLabel.font = [UIFont lightCustomFontOfSize: 14.0];
         self.textLabel.textAlignment = NSTextAlignmentLeft;
         self.textLabel.numberOfLines = 3;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -51,7 +51,7 @@
                                                    alpha: (1.0)];
         
         // == Subtitle == //
-        self.detailTextLabel.font = [UIFont rockpackFontOfSize: 12.0];
+        self.detailTextLabel.font = [UIFont lightCustomFontOfSize: 12.0];
         self.detailTextLabel.textAlignment = NSTextAlignmentLeft;
         
         self.detailTextLabel.textColor = [UIColor colorWithRed: (187.0 / 255.0)
@@ -191,9 +191,17 @@
     CGRect textLabelFrame = self.textLabel.frame;
     CGFloat maxWidth = IS_IPAD ? 200.0 : 170.0;
     
-    CGSize mainTSize = [messageTitle sizeWithFont: self.textLabel.font
-                                constrainedToSize: CGSizeMake(maxWidth, 500.0)
-                                    lineBreakMode: self.textLabel.lineBreakMode];
+    NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: messageTitle
+                                                                          attributes: @{NSFontAttributeName: self.textLabel.font}];
+    
+    CGRect rect = [attributedText boundingRectWithSize: (CGSize){maxWidth, CGFLOAT_MAX}
+                                               options: NSStringDrawingUsesLineFragmentOrigin
+                                               context: nil];
+    
+    CGFloat height = ceilf(rect.size.height);
+    CGFloat width  = ceilf(rect.size.width);
+    
+    CGSize mainTSize = (CGSize){width, height};
     
     mainTSize.height += 2.0f;
     self.mainTextSize = mainTSize;

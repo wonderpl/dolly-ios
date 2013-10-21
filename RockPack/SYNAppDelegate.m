@@ -54,6 +54,7 @@
 @property (nonatomic, strong) SYNOAuthNetworkEngine *oAuthNetworkEngine;
 @property (nonatomic, strong) SYNOnBoardingPopoverQueueController *onBoardingQueue;
 @property (nonatomic, strong) SYNVideoQueue *videoQueue;
+@property (nonatomic, strong) SYNNavigationManager* navigationManager;
 @property (nonatomic, strong) SYNViewStackManager *viewStackManager;
 @property (nonatomic, strong) User *currentUser;
 
@@ -138,6 +139,10 @@
     // ViewStack Manager //
     self.viewStackManager = [SYNViewStackManager manager];
     
+    
+    // Video Queue View Controller //
+    self.navigationManager = [SYNNavigationManager manager];
+    
     // Network Engine //
     [self initializeNetworkEngines];
     
@@ -149,9 +154,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // Create a dictionary of defaults to add and register them (if they have not already been set)
-    NSDictionary *initDefaults = @{
-                                   kDownloadedVideoContentBool: @(NO)
-                                   };
+    NSDictionary *initDefaults = @{kDownloadedVideoContentBool: @(NO)};
     
     [defaults registerDefaults: initDefaults];
     
@@ -341,9 +344,7 @@
         
         self.tokenExpiryTimer = nil;
         
-        [self refreshFacebookSession];
-        
-        
+        [self refreshFacebookSession]; 
     } errorHandler: ^(id response) {
         DebugLog(@"Failed to refresh token");
         if (!self.window.rootViewController)

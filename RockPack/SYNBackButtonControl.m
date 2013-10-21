@@ -19,45 +19,50 @@
     if (self = [super init])
     {
         // == Over Button == //
-        UIImage* normalImage = [UIImage imageNamed:@"ButtonBack"];
-        UIImage* highImage = [UIImage imageNamed:@"ButtonBackHighlighted"];
+        UIImage *normalImage = [UIImage imageNamed: @"ButtonBack"];
+        UIImage *highImage = [UIImage imageNamed: @"ButtonBackHighlighted"];
         
-        button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setImage:normalImage forState:UIControlStateNormal];
-        [button setImage:highImage forState:UIControlStateHighlighted];
+        button = [UIButton buttonWithType: UIButtonTypeCustom];
+        
+        [button setImage: normalImage
+                forState: UIControlStateNormal];
+        
+        [button setImage: highImage
+                forState: UIControlStateHighlighted];
+        
         button.enabled = YES;
         button.frame = CGRectMake(0.0, 0.0, normalImage.size.width, normalImage.size.height);
-        [self addSubview:button];
+        [self addSubview: button];
         
 #ifdef USE_TITLE_STRING
+        
         if (IS_IPAD)
         {
             // == UIView == //
-            
             titleBGView = [[UIView alloc] init];
-            titleBGView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ButtonBackLabel"]];
+            titleBGView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"ButtonBackLabel"]];
             CGRect titleBGRect = CGRectZero;
             titleBGRect.origin.x = button.frame.origin.x + button.frame.size.width;
             titleBGRect.size.height = button.frame.size.height;
             titleBGView.frame = titleBGRect;
-
-            // == UILabel == //
             
+            // == UILabel == //
             titleLabel = [[UILabel alloc] init];
             CGRect titleRect = CGRectZero;
             titleRect.origin.x = 10.0;
             titleRect.origin.y = 10.0;
             titleLabel.frame = titleRect;
-            titleLabel.font = [UIFont rockpackFontOfSize:20.0];
+            titleLabel.font = [UIFont customFontOfSize: 20.0];
             titleLabel.textColor = [UIColor lightGrayColor];
             titleLabel.textAlignment = NSTextAlignmentLeft;
             titleLabel.backgroundColor = [UIColor clearColor];
-            [titleBGView addSubview:titleLabel];
+            [titleBGView addSubview: titleLabel];
             
-            [self addSubview:titleBGView];
+            [self addSubview: titleBGView];
         }
-#endif        
-        self.frame = button.frame;  
+        
+#endif /* ifdef USE_TITLE_STRING */
+        self.frame = button.frame;
     }
     
     return self;
@@ -66,32 +71,44 @@
 
 #pragma mark - UIControl Methods
 
-- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents
+- (void) addTarget: (id) target action: (SEL) action forControlEvents: (UIControlEvents) controlEvents
 {
-    [button addTarget:target action:action forControlEvents:controlEvents];
-    recogniser = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
-    [titleBGView addGestureRecognizer:recogniser];
+    [button	addTarget: target
+               action: action
+     forControlEvents: controlEvents];
+    
+    recogniser = [[UITapGestureRecognizer alloc] initWithTarget: target
+                                                         action: action];
+    [titleBGView addGestureRecognizer: recogniser];
 }
 
-- (void)removeTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents
+
+- (void) removeTarget: (id) target action: (SEL) action forControlEvents: (UIControlEvents) controlEvents
 {
-    [button removeTarget:target action:action forControlEvents:controlEvents];
-    [titleBGView removeGestureRecognizer:recogniser];
+    [button removeTarget: target
+                  action: action
+        forControlEvents: controlEvents];
+    
+    [titleBGView removeGestureRecognizer: recogniser];
 }
 
-- (NSArray *)actionsForTarget:(id)target forControlEvent:(UIControlEvents)controlEvent
+
+- (NSArray *) actionsForTarget: (id) target forControlEvent: (UIControlEvents) controlEvent
 {
-    return [button actionsForTarget:target forControlEvent:controlEvent];
+    return [button actionsForTarget: target
+                    forControlEvent: controlEvent];
 }
+
 
 #pragma mark - Set the Title Methods
 //No more labels next to back button as per the redesign of the redesign, will leave this incase of u-turn - Kish
 
--(void)setBackTitle:(NSString*)backTitle
+- (void) setBackTitle: (NSString *) backTitle
 {
 #ifdef USE_TITLE_STRING
-    NSString* upperTitle = [backTitle uppercaseString];
-    CGSize titleSize = [upperTitle sizeWithFont:titleLabel.font];
+    NSString *upperTitle = [backTitle uppercaseString];
+    CGSize titleSize = [upperTitle sizeWithAttributes: @{NSFontAttributeName: titleLabel.font}];
+    
     CGRect titleLabelRect = titleLabel.frame;
     titleLabelRect.size = titleSize;
     titleLabel.frame = titleLabelRect;
@@ -112,17 +129,15 @@
     overButtonFrame.origin = self.frame.origin;
     
     self.frame = overButtonFrame;
-#endif
+#endif /* ifdef USE_TITLE_STRING */
 }
 
 
 #pragma mark - Initialiser Method
 
-
-+(id)backButton
++ (id) backButton
 {
     return [[self alloc] init];
 }
-
 
 @end

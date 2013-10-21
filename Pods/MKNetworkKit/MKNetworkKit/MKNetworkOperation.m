@@ -89,7 +89,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
 
 @property (strong, nonatomic) NSError *error;
 
-- (id)initWithURLString:(NSString *)aURLString
+- (instancetype)initWithURLString:(NSString *)aURLString
                  params:(NSDictionary *)body
              httpMethod:(NSString *)method;
 
@@ -202,11 +202,9 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
    [NSString stringWithFormat:@"%@; charset=%@", contentType, charset]
       forHTTPHeaderField:@"Content-Type"];
 }
-
 //===========================================================
 //  freezable
 //===========================================================
-
 - (BOOL)freezable
 {
   return _freezable;
@@ -378,7 +376,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   [encoder encodeInteger:self.credentialPersistence forKey:@"credentialPersistence"];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
   self = [super init];
   if (self) {
@@ -409,7 +407,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   return self;
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
   MKNetworkOperation *theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
   
@@ -446,6 +444,44 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   return theCopy;
 }
 
+
+- (instancetype)mutableCopyWithZone:(NSZone *)zone
+{
+  MKNetworkOperation *theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
+  
+  theCopy.postDataEncoding = _postDataEncoding;
+  [theCopy setStringEncoding:self.stringEncoding];
+  [theCopy setUniqueId:[self.uniqueId copy]];
+  
+  [theCopy setConnection:[self.connection mutableCopy]];
+  [theCopy setRequest:[self.request mutableCopy]];
+  [theCopy setResponse:[self.response mutableCopy]];
+  [theCopy setFieldsToBePosted:[self.fieldsToBePosted mutableCopy]];
+  [theCopy setFilesToBePosted:[self.filesToBePosted mutableCopy]];
+  [theCopy setDataToBePosted:[self.dataToBePosted mutableCopy]];
+  [theCopy setUsername:[self.username copy]];
+  [theCopy setPassword:[self.password copy]];
+  [theCopy setClientCertificate:[self.clientCertificate copy]];
+  [theCopy setClientCertificatePassword:[self.clientCertificatePassword copy]];
+  [theCopy setResponseBlocks:[self.responseBlocks mutableCopy]];
+  [theCopy setErrorBlocks:[self.errorBlocks mutableCopy]];
+  [theCopy setErrorBlocksType2:[self.errorBlocksType2 mutableCopy]];
+  [theCopy setState:self.state];
+  [theCopy setIsCancelled:self.isCancelled];
+  [theCopy setMutableData:[self.mutableData mutableCopy]];
+  [theCopy setDownloadedDataSize:self.downloadedDataSize];
+  [theCopy setNotModifiedHandlers:[self.notModifiedHandlers mutableCopy]];
+  [theCopy setUploadProgressChangedHandlers:[self.uploadProgressChangedHandlers mutableCopy]];
+  [theCopy setDownloadProgressChangedHandlers:[self.downloadProgressChangedHandlers mutableCopy]];
+  [theCopy setDownloadStreams:[self.downloadStreams mutableCopy]];
+  [theCopy setCachedResponse:[self.cachedResponse mutableCopy]];
+  [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
+  [theCopy setStartPosition:self.startPosition];
+  [theCopy setCredentialPersistence:self.credentialPersistence];
+  
+  return theCopy;
+}
+
 - (instancetype)copyForRetry
 {
     MKNetworkOperation *theCopy = [[[self class] alloc] init];
@@ -460,15 +496,15 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     theCopy.postDataEncoding = _postDataEncoding;
     theCopy.postDataEncodingHandler = [self.postDataEncodingHandler copy];
     [theCopy setStringEncoding:self.stringEncoding];
-    [theCopy setUniqueId:[self.uniqueId mutableCopy]];
-    [theCopy setRequest:[self.request mutableCopy]];
+    [theCopy setUniqueId:[self.uniqueId copy]];
+    [theCopy setRequest:[self.request copy]];
     [theCopy setFieldsToBePosted:[self.fieldsToBePosted mutableCopy]];
     [theCopy setFilesToBePosted:[self.filesToBePosted mutableCopy]];
     [theCopy setDataToBePosted:[self.dataToBePosted mutableCopy]];
-    [theCopy setUsername:[self.username mutableCopy]];
-    [theCopy setPassword:[self.password mutableCopy]];
-    [theCopy setClientCertificate:[self.clientCertificate mutableCopy]];
-    [theCopy setClientCertificatePassword:[self.clientCertificatePassword mutableCopy]];
+    [theCopy setUsername:[self.username copy]];
+    [theCopy setPassword:[self.password copy]];
+    [theCopy setClientCertificate:[self.clientCertificate copy]];
+    [theCopy setClientCertificatePassword:[self.clientCertificatePassword copy]];
     [theCopy setResponseBlocks:[self.responseBlocks mutableCopy]];
     [theCopy setErrorBlocks:[self.errorBlocks mutableCopy]];
     [theCopy setErrorBlocksType2:[self.errorBlocksType2 mutableCopy]];
@@ -480,8 +516,6 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     [theCopy setCachedResponse:[self.cachedResponse mutableCopy]];
     [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
     [theCopy setCredentialPersistence:self.credentialPersistence];
-    
-    
     
     return theCopy;
 }
@@ -1375,8 +1409,10 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)([self responseData]), NULL);
     CGImageRef cgImage = CGImageSourceCreateImageAtIndex(source, 0, (__bridge CFDictionaryRef)(@{(id)kCGImageSourceShouldCache:@(YES)}));
     UIImage *decompressedImage = [UIImage imageWithCGImage:cgImage];
-    CFRelease(source);
-    CGImageRelease(cgImage);
+    if(source)
+      CFRelease(source);
+    if(cgImage)
+      CGImageRelease(cgImage);
 
     dispatch_async(dispatch_get_main_queue(), ^{
       imageDecompressionHandler(decompressedImage);

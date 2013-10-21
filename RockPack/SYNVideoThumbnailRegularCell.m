@@ -36,7 +36,7 @@
     self.tap.delegate = self;
     [self addGestureRecognizer: self.tap];
 
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     // Touch for highlighting cells when the user touches them (like UIButton)
     self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self

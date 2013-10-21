@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BD3376FA-CBB4-4E0E-B311-B4251E3D904A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>dolly</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</key>
+		<string>https://github.com/rockpack/ios-app.git</string>
+		<key>F2B7B098-AA83-4F6C-A3D9-69E2F4A27E83</key>
+		<string>ssh://github.com/rockpack/dolly-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>dolly.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</key>
+		<string>../../ios-app</string>
+		<key>F2B7B098-AA83-4F6C-A3D9-69E2F4A27E83</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/rockpack/dolly-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F2B7B098-AA83-4F6C-A3D9-69E2F4A27E83</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F2B7B098-AA83-4F6C-A3D9-69E2F4A27E83</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Dolly</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios-app</string>
+		</dict>
+	</array>
+</dict>
+</plist>

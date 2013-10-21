@@ -242,9 +242,7 @@ SYNImagePickerControllerDelegate>
 #pragma mark - Container Scroll Delegates
 - (void) viewDidScrollToFront
 {
-    [self updateAnalytics];
-    
-    if (self.isIPhone)
+    if (parent == nil)
     {
         self.channelThumbnailCollectionView.scrollsToTop = !self.subscriptionsTabActive;
         self.subscriptionThumbnailCollectionView.scrollsToTop = self.subscriptionsTabActive;
@@ -254,10 +252,6 @@ SYNImagePickerControllerDelegate>
         self.channelThumbnailCollectionView.scrollsToTop = YES;
         self.subscriptionThumbnailCollectionView.scrollsToTop = YES;
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
-                                                        object: self
-                                                      userInfo: @{kChannelOwner: self.channelOwner}];
 }
 
 - (void) viewDidScrollToBack

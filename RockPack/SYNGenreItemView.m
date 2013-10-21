@@ -7,8 +7,8 @@
 //
 
 #import "Genre.h"
-#import "SYNGenreItemView.h"
 #import "SYNDeviceManager.h"
+#import "SYNGenreItemView.h"
 #import "SubGenre.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
@@ -16,17 +16,17 @@
 
 // These layout offsets and font sizes have been eyeballed to compensate for font offset. May need tweaking.
 
-#define kCategoriesTabOffsetXLandscape 34.0f
-#define kCategoriesTabOffsetXPortrait 16.0f
+#define kCategoriesTabOffsetXLandscape		34.0f
+#define kCategoriesTabOffsetXPortrait		16.0f
 
 #define kCategoriesTabLabelOffsetYLandscape 6.0f
-#define kCategoriesTabLabelOffsetYPortrait 8.0f
-#define kCategoriesSubTabLabelOffsetY 11.0f
+#define kCategoriesTabLabelOffsetYPortrait	8.0f
+#define kCategoriesSubTabLabelOffsetY		11.0f
 
-#define kCategoriesTabFontSizeLandscape 15.0f
-#define kCategoriesTabFontSizePortrait 13.0f
-#define kCategoriesSubTabFontSizeLandscape 13.0f
-#define kCategoriesSubTabFontSizePortrait 12.0f
+#define kCategoriesTabFontSizeLandscape		15.0f
+#define kCategoriesTabFontSizePortrait		13.0f
+#define kCategoriesSubTabFontSizeLandscape	13.0f
+#define kCategoriesSubTabFontSizePortrait	12.0f
 
 
 @implementation SYNGenreItemView
@@ -36,16 +36,19 @@
 - (id) initWithTabItemModel: (Genre *) tabItemModel
 {
     if ((self = [super init]))
-    {        
+    {
         // Set view tag equal to the category id
         self.tag = [tabItemModel.uniqueId integerValue];
         
         // Identify what type it is (could have passed is as argument)
-        if ([tabItemModel isKindOfClass: [SubGenre class]]) 
+        if ([tabItemModel isKindOfClass: [SubGenre class]])
+        {
             type = TabItemTypeSub;
+        }
         else
+        {
             type = TabItemTypeMain;
-        
+        }
         
         model = tabItemModel;
         
@@ -54,6 +57,7 @@
     
     return self;
 }
+
 
 - (id) initWithLabel: (NSString *) label
               andTag: (int) tag
@@ -72,28 +76,36 @@
     return self;
 }
 
+
 - (void) setViewAttributesWithItemName: (NSString *) itemName
 {
-    
-    
     if (type == TabItemTypeMain)
-    grayColor = [UIColor colorWithRed: (40.0/255.0)
-                                green: (45.0/255.0)
-                                 blue: (51.0/255.0)
-                                alpha: (1.0)];
-    else
-        grayColor = [UIColor colorWithRed: (113.0/255.0)
-                                    green: (124.0/255.0)
-                                     blue: (126.0/255.0)
+    {
+        grayColor = [UIColor colorWithRed: (40.0 / 255.0)
+                                    green: (45.0 / 255.0)
+                                     blue: (51.0 / 255.0)
                                     alpha: (1.0)];
-    
-    UIFont* fontToUse;
-    if (type == TabItemTypeMain)
-        fontToUse = [UIFont rockpackFontOfSize: 15.0f];
+    }
     else
-        fontToUse = [UIFont rockpackFontOfSize: 13.0f];
+    {
+        grayColor = [UIColor colorWithRed: (113.0 / 255.0)
+                                    green: (124.0 / 255.0)
+                                     blue: (126.0 / 255.0)
+                                    alpha: (1.0)];
+    }
     
-    CGSize sizeToUse = [itemName sizeWithFont: fontToUse];
+    UIFont *fontToUse;
+    
+    if (type == TabItemTypeMain)
+    {
+        fontToUse = [UIFont lightCustomFontOfSize: 15.0f];
+    }
+    else
+    {
+        fontToUse = [UIFont lightCustomFontOfSize: 13.0f];
+    }
+    
+    CGSize sizeToUse = [itemName sizeWithAttributes: @{NSFontAttributeName: fontToUse}];
     
     self.label = [[UILabel alloc] initWithFrame: CGRectMake(0.0, 0.0, sizeToUse.width + kCategoriesTabOffsetXLandscape, 0.0f)];
     self.label.font = fontToUse;
@@ -102,27 +114,22 @@
     self.label.textColor = grayColor;
     self.label.userInteractionEnabled = NO;
     self.label.backgroundColor = [UIColor clearColor];
-    
-    
-    
+
     [self addSubview: self.label];
     
     self.backgroundColor = [UIColor clearColor];
-
 }
 
 
--  (void) makeHighlighted
+- (void) makeHighlighted
 {
-    UIImage* pressedImage = [UIImage imageNamed: @"CategoryBarSelected"];
+    UIImage *pressedImage = [UIImage imageNamed: @"CategoryBarSelected"];
+    
     self.backgroundColor = [UIColor colorWithPatternImage: pressedImage];
     
     UIColor *color = [UIColor whiteColor];
     self.label.textColor = color;
 }
-
-
-
 
 
 - (void) makeStandard
@@ -139,49 +146,50 @@
 {
     BOOL isLandscape = [SYNDeviceManager.sharedInstance isLandscape];
     CGFloat offsetX;
-    UIFont* fontToUse;
+    UIFont *fontToUse;
     CGFloat labelYOffset;
     
     if (type == TabItemTypeMain)
     {
-        if(isLandscape)
+        if (isLandscape)
         {
-            fontToUse = [UIFont rockpackFontOfSize: kCategoriesTabFontSizeLandscape];
+            fontToUse = [UIFont lightCustomFontOfSize: kCategoriesTabFontSizeLandscape];
             offsetX = kCategoriesTabOffsetXLandscape;
             labelYOffset = kCategoriesTabLabelOffsetYLandscape;
         }
         else
         {
-            fontToUse = [UIFont rockpackFontOfSize: kCategoriesTabFontSizePortrait];
+            fontToUse = [UIFont lightCustomFontOfSize: kCategoriesTabFontSizePortrait];
             offsetX = kCategoriesTabOffsetXPortrait;
             labelYOffset = kCategoriesTabLabelOffsetYPortrait;
         }
     }
-    else if(isLandscape)
+    else if (isLandscape)
     {
-        fontToUse = [UIFont rockpackFontOfSize: kCategoriesSubTabFontSizeLandscape];
+        fontToUse = [UIFont lightCustomFontOfSize: kCategoriesSubTabFontSizeLandscape];
         offsetX = kCategoriesTabOffsetXLandscape;
         labelYOffset = kCategoriesSubTabLabelOffsetY;
     }
     else
     {
-        fontToUse = [UIFont rockpackFontOfSize: kCategoriesSubTabFontSizePortrait];
+        fontToUse = [UIFont lightCustomFontOfSize: kCategoriesSubTabFontSizePortrait];
         offsetX = kCategoriesTabOffsetXPortrait;
         labelYOffset = kCategoriesSubTabLabelOffsetY;
     }
     
     self.label.font = fontToUse;
-
-    CGSize sizeToUse = [self.label.text sizeWithFont:fontToUse];
+    
+    CGSize sizeToUse = [self.label.text sizeWithAttributes: @{NSFontAttributeName: fontToUse}];
     
     CGRect newFrame = self.label.frame;
     newFrame.size = CGSizeMake(sizeToUse.width + offsetX, height + labelYOffset);
     self.label.frame = newFrame;
     
     CGRect finalFrame = self.label.frame;
-    finalFrame.size = CGSizeMake(sizeToUse.width + offsetX , height );
+    finalFrame.size = CGSizeMake(sizeToUse.width + offsetX, height);
     
     self.frame = finalFrame;
 }
+
 
 @end

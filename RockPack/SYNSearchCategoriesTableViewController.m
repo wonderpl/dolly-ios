@@ -33,7 +33,7 @@ static NSString *SearchGenresTableCellIdentifier = @"SYNSearchCategoriesIphoneCe
     [super viewDidLoad];
     
     
-    self.cellFont = [UIFont rockpackFontOfSize: 16.0];
+    self.cellFont = [UIFont lightCustomFontOfSize: 16.0];
     self.cellTextColor = [UIColor colorWithRed:(106.0f/255.0f) green:(114.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
     
     
@@ -141,16 +141,12 @@ static NSString *SearchGenresTableCellIdentifier = @"SYNSearchCategoriesIphoneCe
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Genre* genreSelected = self.searchCategories[indexPath.item];
+    
     
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    NSNotification* navigationNotification = [NSNotification notificationWithName: kNavigateToPage
-                                                                           object: self
-                                                                         userInfo: @{@"pageName":kChannelsViewId,
-                                                                                     @"action":@"open", @"object":genreSelected}];
+    [appDelegate.navigationManager navigateToPageByName:kChannelsViewId];
     
-    [[NSNotificationCenter defaultCenter] postNotification: navigationNotification];
     
     [appDelegate.viewStackManager dismissSearchBarTotal:YES];
     

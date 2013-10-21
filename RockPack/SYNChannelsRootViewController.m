@@ -216,44 +216,45 @@
     [super viewDidAppear:animated];
 }
 
-- (void) viewDidScrollToFront
+
+- (void) didMoveToParentViewController: (UIViewController *) parent
 {
-    [self updateAnalytics];
-    
-    self.channelThumbnailCollectionView.scrollsToTop = YES;
-    
-    
-    
-    
-    // if the user has requested 'Load More' channels then dont refresh the page cause he is in the middle of a search
-    if (self.dataRequestRange.location == 0)
+    if (parent == nil)
     {
-        [self loadChannelsForGenre: self.currentGenre];
+        // Removed from parent
+        self.channelThumbnailCollectionView.scrollsToTop = NO;
+    }
+    else
+    {
+        // Added to parent
+        [self updateAnalytics];
+        
+        self.channelThumbnailCollectionView.scrollsToTop = YES;
+        
+        // if the user has requested 'Load More' channels then dont refresh the page cause he is in the middle of a search
+        if (self.dataRequestRange.location == 0)
+        {
+            [self loadChannelsForGenre: self.currentGenre];
+        }
     }
 }
 
--(void)checkForOnBoarding
+- (void) checkForOnBoarding
 {
-    if(![appDelegate.viewStackManager controllerViewIsVisible:self])
+    if (![appDelegate.viewStackManager controllerViewIsVisible: self])
+    {
         return;
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL onBoarding1State = [defaults boolForKey:kInstruction1OnBoardingState];
-    if(!onBoarding1State) // 1rst card
+    BOOL onBoarding1State = [defaults boolForKey: kInstruction1OnBoardingState];
+    
+    // FIXME: Now we have no press and hold, I think that this logic can be simplified
+    if (!onBoarding1State) // 1rst card
     {
-//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePacks];
-//        
-//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
-        
-        [defaults setBool:YES forKey:kInstruction1OnBoardingState];
-        
+        [defaults setBool: YES
+                   forKey: kInstruction1OnBoardingState];
     }
-}
-
-
-- (void) viewDidScrollToBack
-{
-    self.channelThumbnailCollectionView.scrollsToTop = NO;
 }
 
 
@@ -550,6 +551,22 @@
 }
 
 
+- (void) collectionView: (UICollectionView *) collectionView
+         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+
+{
+    if (self.isAnimating) // prevent double clicking
+    {
+        return;
+    }
+    
+    Channel *channel = (Channel *) self.channels[indexPath.row];
+    
+    [appDelegate.viewStackManager viewChannelDetails: channel];
+}
+
+
+
 - (void)  collectionView: (UICollectionView *) collectionView
     didEndDisplayingCell: (UICollectionViewCell *) cell
       forItemAtIndexPath: (NSIndexPath *) indexPath
@@ -611,23 +628,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     }
     
     return footerSize;
-}
-
-
-
-- (void) channelTapped: (UICollectionViewCell *) cell
-{
-    SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
-    NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-    
-    if (self.isAnimating) // prevent double clicking
-    {
-        return;
-    }
-
-    Channel *channel = (Channel *) self.channels[indexPath.row];
-
-    [appDelegate.viewStackManager viewChannelDetails: channel];
 }
 
 
@@ -839,7 +839,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     UILabel *newLabel = [[UILabel alloc] initWithFrame: newFrame];
 
-    newLabel.font = [UIFont boldRockpackFontOfSize: 15.0f];
+    newLabel.font = [UIFont regularCustomFontOfSize: 15.0f];
     
     newLabel.textColor = [UIColor colorWithRed: 40.0f / 255.0f
                                          green: 45.0f / 255.0f

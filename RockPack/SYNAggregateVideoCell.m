@@ -10,17 +10,19 @@
 #import "SYNAggregateVideoCell.h"
 #import "SYNAppDelegate.h"
 #import "SYNTouchGestureRecognizer.h"
+#import "SYNAggregateVideoItemCell.h"
 #import "UIColor+SYNColor.h"
+#import "VideoInstance.h"
+#import "Video.h"
 #import "UIImage+Tint.h"
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIImageView *lowlightImageView;
 @property (nonatomic, strong) IBOutlet UILabel *likeLabel;
-@property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
+
+static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 
 
 @implementation SYNAggregateVideoCell
@@ -29,48 +31,15 @@
 {
     [super awakeFromNib];
     
-    self.mainTitleLabel.font = [UIFont boldRockpackFontOfSize: self.mainTitleLabel.font.pointSize];
-    self.likeLabel.font = [UIFont rockpackFontOfSize: self.likeLabel.font.pointSize];
+    self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
+    self.likeLabel.font = [UIFont lightCustomFontOfSize: self.likeLabel.font.pointSize];
+    self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
     
-    if (!IS_IPAD)
-    {
-        self.likesNumberLabel.hidden = YES;
-    }
-    else
-    {
-        self.likesNumberLabel.font = [UIFont boldRockpackFontOfSize: self.likesNumberLabel.font.pointSize];
-    }
     
-    // Tap for showing video
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                       action: @selector(showVideo:)];
-    self.tap.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.tap];
+    [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
+          forCellWithReuseIdentifier:kVideoItemCellIndetifier];
     
-    // Touch for highlighting cells when the user touches them (like UIButton)
-    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self
-                                                            action: @selector(showGlossLowlight:)];
-    
-    self.touch.delegate = self;
-    [self.lowlightImageView addGestureRecognizer: self.touch];
-}
-
-
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) array
-{
-    if (!self.videoImageView)
-    {
-        CGRect videoImageFrame = CGRectZero;
-        videoImageFrame.size = self.imageContainer.frame.size;
-        self.videoImageView = [[UIImageView alloc] initWithFrame: videoImageFrame];
-        [self.imageContainer addSubview: self.videoImageView];
-    }
-    
-    NSDictionary *coverInfo = (NSDictionary *) array[0];
-    
-    [self.videoImageView setImageWithURL: [NSURL URLWithString: coverInfo[@"image"]]
-                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                 options: SDWebImageRetryFailed];
+    [self.collectionView reloadData];
 }
 
 
@@ -78,10 +47,12 @@
 {
     [super setViewControllerDelegate: (id < SYNAggregateCellDelegate >)viewControllerDelegate];
 
-    [self.heartButton addTarget: self.viewControllerDelegate
+    [self.likeButton addTarget: self.viewControllerDelegate
                          action: @selector(likeButtonPressed:)
                forControlEvents: UIControlEventTouchUpInside];
 }
+
+
 
 
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
@@ -164,7 +135,7 @@
                                                                                           attributes: self.lightTextAttributes]];
     }
     
-    self.heartButton.selected = NO;
+    self.likeButton.selected = NO;
     
     if (users.count > 0)
     {
@@ -183,7 +154,7 @@
             if ([co.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
             {
                 name = @"You";
-                self.heartButton.selected = YES;
+                self.likeButton.selected = YES;
             }
             else
             {
@@ -214,44 +185,44 @@
 {
     [super prepareForReuse];
     
-    self.likeLabel.hidden = NO;
-    self.heartButton.selected = NO;
 }
 
 
-#pragma mark - Gesture recognizers for arc menu and show video
-
-// This is used to lowlight the gloss image on touch
-- (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
-{
-    UIImage *glossImage = [UIImage imageNamed: @"GlossFeedVideo"];
-    
-    switch (recognizer.state)
-    {
-        case UIGestureRecognizerStateBegan :
-        {
-            // Set lowlight tint
-            UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
-                                                                                          alpha: 0.3]];
-            self.lowlightImageView.image = lowlightImage;
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
-            self.lowlightImageView.image = glossImage;
-        }
-            
-        default:
-            break;
-    }
-}
 
 
 - (void) showVideo: (UITapGestureRecognizer *) recognizer
 {
     [self.viewControllerDelegate touchedAggregateCell];
+}
+
+
+#pragma mark - UICollectionView DataSource
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    
+    return self.collectionData.count;
+    
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndetifier
+                                                                                    forIndexPath: indexPath];
+    
+    VideoInstance* videoInstance = self.collectionData[indexPath.item];
+    
+    
+    [itemCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
+                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                options: SDWebImageRetryFailed];
+    
+    return itemCell;
+    
+    
 }
 
 

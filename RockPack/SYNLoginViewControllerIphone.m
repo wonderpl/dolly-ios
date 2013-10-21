@@ -13,7 +13,6 @@
 #import "SYNLoginViewController.h"
 #import "SYNLoginViewControllerIphone.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNTextFieldLoginiPhone.h"
 #import "UIFont+SYNFont.h"
 #import <FacebookSDK/FacebookSDK.h>
 
@@ -25,15 +24,15 @@
 
 @property (nonatomic) BOOL hasAnimated;
 @property (nonatomic) BOOL isPreIPhone5;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* ddInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* emailInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* mmInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* passwordInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* registeringUserEmailInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* registeringUserNameInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* registeringUserPasswordInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* userNameInputField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLoginiPhone* yyyyInputField;
+@property (nonatomic, strong) IBOutlet UITextField* ddInputField;
+@property (nonatomic, strong) IBOutlet UITextField* emailInputField;
+@property (nonatomic, strong) IBOutlet UITextField* mmInputField;
+@property (nonatomic, strong) IBOutlet UITextField* passwordInputField;
+@property (nonatomic, strong) IBOutlet UITextField* registeringUserEmailInputField;
+@property (nonatomic, strong) IBOutlet UITextField* registeringUserNameInputField;
+@property (nonatomic, strong) IBOutlet UITextField* registeringUserPasswordInputField;
+@property (nonatomic, strong) IBOutlet UITextField* userNameInputField;
+@property (nonatomic, strong) IBOutlet UITextField* yyyyInputField;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activityIndicator;
 @property (nonatomic, strong) IBOutlet UIButton* passwordForgottenButton;
 @property (nonatomic, strong) IBOutlet UIImage* avatarImage;
@@ -142,40 +141,40 @@
     self.termsAndConditionsView.center = newCenter;
     
     //Setup fonts
-    self.userNameInputField.font = [UIFont rockpackFontOfSize:self.userNameInputField.font.pointSize];
+    self.userNameInputField.font = [UIFont lightCustomFontOfSize:self.userNameInputField.font.pointSize];
     self.userNameInputField.delegate = self;
-    self.registeringUserEmailInputField.font = [UIFont rockpackFontOfSize:self.registeringUserEmailInputField.font.pointSize];
+    self.registeringUserEmailInputField.font = [UIFont lightCustomFontOfSize:self.registeringUserEmailInputField.font.pointSize];
     self.registeringUserEmailInputField.delegate = self;
-    self.registeringUserNameInputField.font = [UIFont rockpackFontOfSize:self.registeringUserNameInputField.font.pointSize];
+    self.registeringUserNameInputField.font = [UIFont lightCustomFontOfSize:self.registeringUserNameInputField.font.pointSize];
     self.registeringUserNameInputField.delegate=self;
-    self.registeringUserPasswordInputField.font = [UIFont rockpackFontOfSize:self.registeringUserPasswordInputField.font.pointSize];
+    self.registeringUserPasswordInputField.font = [UIFont lightCustomFontOfSize:self.registeringUserPasswordInputField.font.pointSize];
     self.registeringUserPasswordInputField.delegate = self;
-    self.passwordInputField.font = [UIFont rockpackFontOfSize:self.passwordInputField.font.pointSize];
+    self.passwordInputField.font = [UIFont lightCustomFontOfSize:self.passwordInputField.font.pointSize];
     self.passwordInputField.delegate = self;
-    self.ddInputField.font = [UIFont rockpackFontOfSize:self.ddInputField.font.pointSize];
+    self.ddInputField.font = [UIFont lightCustomFontOfSize:self.ddInputField.font.pointSize];
     self.ddInputField.delegate = self;
-    self.mmInputField.font = [UIFont rockpackFontOfSize:self.mmInputField.font.pointSize];
+    self.mmInputField.font = [UIFont lightCustomFontOfSize:self.mmInputField.font.pointSize];
     self.mmInputField.delegate = self;
-    self.yyyyInputField.font = [UIFont rockpackFontOfSize:self.yyyyInputField.font.pointSize];
+    self.yyyyInputField.font = [UIFont lightCustomFontOfSize:self.yyyyInputField.font.pointSize];
     self.yyyyInputField.delegate = self;
-    self.emailInputField.font = [UIFont rockpackFontOfSize:self.emailInputField.font.pointSize];
+    self.emailInputField.font = [UIFont lightCustomFontOfSize:self.emailInputField.font.pointSize];
     self.emailInputField.delegate = self;
     
-    self.loginErrorLabel.font = [UIFont rockpackFontOfSize:self.loginErrorLabel.font.pointSize];
-    self.passwordResetErrorLabel.font = [UIFont rockpackFontOfSize:self.passwordResetErrorLabel.font.pointSize];
-    self.signupErrorLabel.font = [UIFont rockpackFontOfSize:self.signupErrorLabel.font.pointSize];
+    self.loginErrorLabel.font = [UIFont lightCustomFontOfSize:self.loginErrorLabel.font.pointSize];
+    self.passwordResetErrorLabel.font = [UIFont lightCustomFontOfSize:self.passwordResetErrorLabel.font.pointSize];
+    self.signupErrorLabel.font = [UIFont lightCustomFontOfSize:self.signupErrorLabel.font.pointSize];
     
-    self.signupButton.titleLabel.font = [UIFont rockpackFontOfSize:17.0f];
-    self.loginButton.titleLabel.font = [UIFont rockpackFontOfSize:17.0f];
+    self.signupButton.titleLabel.font = [UIFont lightCustomFontOfSize:17.0f];
+    self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:17.0f];
     
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal" , nil)];
     
     [termsString addAttribute: NSForegroundColorAttributeName value: [UIColor colorWithRed:(11.0/255.0) green:(166.0/255.0) blue:(171.0/255.0) alpha:(1.0)] range: NSMakeRange(36, 17)];
     [termsString addAttribute: NSForegroundColorAttributeName value: [UIColor colorWithRed:(11.0/255.0) green:(166.0/255.0) blue:(171.0/255.0) alpha:(1.0)] range: NSMakeRange(58, 14)];
     self.termsAndConditionsLabel.attributedText = termsString;
-    self.termsAndConditionsLabel.font = [UIFont rockpackFontOfSize:self.termsAndConditionsLabel.font.pointSize];
+    self.termsAndConditionsLabel.font = [UIFont lightCustomFontOfSize:self.termsAndConditionsLabel.font.pointSize];
     
-    self.passwordForgottenButton.titleLabel.font = [UIFont rockpackFontOfSize:self.passwordForgottenButton.titleLabel.font.pointSize];
+    self.passwordForgottenButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.passwordForgottenButton.titleLabel.font.pointSize];
     
     //Setup Keyboard Return Button
     self.userNameInputField.returnKeyType = UIReturnKeyNext;

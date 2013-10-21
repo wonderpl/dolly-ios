@@ -74,11 +74,8 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.wantsFullScreenLayout = YES;
-    
+
     self.feedItemsData = @[];
-    
     self.videosInOrderArray = @[];
     
     SYNIntegralCollectionViewFlowLayout *standardFlowLayout;
@@ -88,7 +85,6 @@ typedef void(^FeedDataErrorBlock)(void);
     CGFloat minimumLineSpacing;
     
     // Setup device dependent parametes/dimensions
-    
     if (IS_IPHONE)
     {
         // Calculate frame size
@@ -104,7 +100,6 @@ typedef void(^FeedDataErrorBlock)(void);
         contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
         minimumLineSpacing = 12.0f;
-        
     }
     else
     {
@@ -112,13 +107,11 @@ typedef void(^FeedDataErrorBlock)(void);
                                          0.0f,
                                          [SYNDeviceManager.sharedInstance currentScreenWidth],
                                          [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar]);
-        
-        
+
         videoCollectionViewFrame = calculatedViewFrame;
         videoCollectionViewFrame.origin.y += kStandardCollectionViewOffsetY;
         videoCollectionViewFrame.size.height -= kStandardCollectionViewOffsetY;
-        
-        
+
         // Collection view parameters
         contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         sectionInset = UIEdgeInsetsMake(10.0f, 10.0f, 15.0f, 10.0f);
@@ -128,8 +121,7 @@ typedef void(^FeedDataErrorBlock)(void);
     // Set our view frame and attributes
     self.view.frame = calculatedViewFrame;
     self.view.backgroundColor = [UIColor clearColor];
-    
-    
+
     [self removeEmptyGenreMessage];
     
     CGSize itemSize;
@@ -167,7 +159,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
     self.feedCollectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
 
-    
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
                         forCellWithReuseIdentifier: @"SYNAggregateVideoCell"];
     
@@ -186,7 +177,6 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView registerNib: footerViewNib
               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                      withReuseIdentifier: @"SYNChannelFooterMoreView"];
-    
     
     // Refresh control
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame: CGRectMake(0, -44, 320, 44)];
@@ -211,10 +201,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                              selector: @selector(videoQueueCleared)
                                                  name: kVideoQueueClear
                                                object: nil];
-    
-    
 }
-
 
 
 - (void) viewWillAppear: (BOOL) animated
@@ -229,10 +216,7 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
-    
-    
- 
-    
+
     [self displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
                          andLoader: YES];
     
@@ -249,55 +233,54 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView reloadData];
 }
 
+
 #pragma mark - Container Scrol Delegates
 
-- (void) viewDidScrollToFront
+- (void) didMoveToParentViewController: (UIViewController *) parent
 {
-    [self updateAnalytics];
-    
-    self.feedCollectionView.scrollsToTop = YES;
-    
-    self.togglingInProgress = NO;
-    
-    // if the user has not pressed load more
-    if (self.dataRequestRange.location == 0)
+    if (parent == nil)
     {
-        [self resetDataRequestRange]; // just in case the length is less than standard
-        [self.refreshButton startRefreshCycle];
-        [self loadAndUpdateFeedData];
-       
+        // Removed from parent
+        self.feedCollectionView.scrollsToTop = NO;
     }
-
-    [self checkForOnBoarding];
-
+    else
+    {
+        // Added to parent
+        [self updateAnalytics];
+        
+        self.feedCollectionView.scrollsToTop = YES;
+        
+        self.togglingInProgress = NO;
+        
+        // if the user has not pressed load more
+        if (self.dataRequestRange.location == 0)
+        {
+            [self resetDataRequestRange]; // just in case the length is less than standard
+            [self.refreshButton startRefreshCycle];
+            [self loadAndUpdateFeedData];
+        }
+        
+        [self checkForOnBoarding];
+    }
 }
 
--(void)checkForOnBoarding
+
+- (void) checkForOnBoarding
 {
-    
-    if(![appDelegate.viewStackManager controllerViewIsVisible:self])
+    if (![appDelegate.viewStackManager controllerViewIsVisible: self])
+    {
         return;
-    
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger onBoarding1State = [defaults integerForKey:kInstruction1OnBoardingState];
-    if(onBoarding1State == 3) // has shown on channel details and can show here IF videos are present
+    NSInteger onBoarding1State = [defaults integerForKey: kInstruction1OnBoardingState];
+    
+    // FIXME: Now we have no press and hold, I think that this logic can be simplified
+    if (onBoarding1State == 3) // has shown on channel details and can show here IF videos are present
     {
-//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePressAndHold];
-//        
-//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
-        
-        [defaults setInteger:4 forKey:kInstruction1OnBoardingState]; // inc by one
-        
+        [defaults setInteger: 4
+                      forKey: kInstruction1OnBoardingState];         // inc by one
     }
-    
-    
-    
-}
-
-- (void) viewDidScrollToBack
-{
-    self.feedCollectionView.scrollsToTop = NO;
 }
 
 
@@ -750,22 +733,41 @@ typedef void(^FeedDataErrorBlock)(void);
         videoInstance = (VideoInstance*)(self.feedVideosById)[feedItem.coverIndexArray[0]]; // there should be only one
 
         cell.mainTitleLabel.text = videoInstance.title;
+        
+        
 
         if (!feedItem.title) // it should usually be nil
         {
+            // Creating "Dolly Proxima-SMith created 1 new collection
             [cell setTitleMessageWithDictionary: @{@"display_name" : videoInstance.channel.channelOwner ? videoInstance.channel.channelOwner.displayName : @"",
                                                    @"item_count" : @(feedItemsAggregated),
-             @"channel_name" : videoInstance.channel ? videoInstance.channel.title : @""}];
+                                                   @"channel_name" : videoInstance.channel ? videoInstance.channel.title : @""}];
             
         }
-        else
+        else // force show a specific message
             cell.messageLabel.text = feedItem.title;
 
         [cell setSupplementaryMessageWithDictionary: @{@"star_count": videoInstance.video ? videoInstance.video.starCount : @0,
          @"starrers": videoInstance ? [videoInstance.starrers array] : @[]}];
         
-        [cell setCoverImagesAndTitlesWithArray: @[@{@"image": videoInstance.video ? videoInstance.video.thumbnailURL : @"",
-         @"title" : videoInstance ? videoInstance.title : @""}]];
+        NSMutableArray* videos = [NSMutableArray array];
+        VideoInstance* vi;
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            for (FeedItem* childFeedItem in feedItem.feedItems)
+            {
+                // they have also the same type (video)
+                vi = (VideoInstance*)((self.feedVideosById)[childFeedItem.resourceId]);
+                [videos addObject:vi];
+            }
+        }
+        else
+        {
+            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
+            [videos addObject:vi];
+        }
+        
+        cell.collectionData = videos;
         
         channelOwner = videoInstance.channel.channelOwner; // heuristic, get the last video instance, all should have the same channelOwner however
         
@@ -777,29 +779,31 @@ typedef void(^FeedDataErrorBlock)(void);
         
         Channel* channel;
         
+        NSMutableArray* channelsMutArray = [NSMutableArray array];
+        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
-            NSArray* coverIndexIds = [feedItem.coverIndexes componentsSeparatedByString:@":"];
-            
-            NSMutableArray* coverImagesAndTitles = [NSMutableArray arrayWithCapacity:coverIndexIds.count];
             
             
-            for (NSString* resourceId in coverIndexIds)
+            
+            for (FeedItem* childFeedItem in feedItem.feedItems)
             {
-                channel = (Channel*)(self.feedChannelsById)[resourceId];
-                [coverImagesAndTitles addObject:@{  @"image": channel.channelCover ? channel.channelCover.imageUrl : @"",
-                                                    @"title" : channel.title    }];
+                channel = (Channel*)(self.feedChannelsById[childFeedItem.resourceId]);
+                [channelsMutArray addObject:channel];
+                
             }
             
-            [cell setCoverImagesAndTitlesWithArray: coverImagesAndTitles];
+            
+            
         }
         else
         {
             channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
+            [channelsMutArray addObject:channel];
             
-            [cell setCoverImagesAndTitlesWithArray:@[@{@"image": channel.channelCover ? channel.channelCover.imageLargeUrl : @"",
-                                                       @"title" : channel.title    }]]; 
         }
+        
+        cell.collectionData = [NSArray arrayWithArray:channelsMutArray];
         
         channelOwner = channel.channelOwner;
         
@@ -1200,7 +1204,7 @@ typedef void(^FeedDataErrorBlock)(void);
     // Bit of a hack, but find the button in the cell
     SYNAggregateVideoCell *cell = (SYNAggregateVideoCell *)[self.feedCollectionView cellForItemAtIndexPath: indexPath];
     
-    UIButton *heartButton = cell.heartButton;
+    UIButton *heartButton = cell.likeButton;
     
     [self likeButtonPressed: heartButton];
 }

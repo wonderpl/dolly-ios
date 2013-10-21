@@ -80,11 +80,11 @@
     
     self.navigationItem.leftBarButtonItem = backButtonItem;
 	
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.contentSizeForViewInPopover.width * 0.5), -15.0, self.contentSizeForViewInPopover.width, 40.0)];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
     titleLabel.text = NSLocalizedString (@"settings_popover_password_title", nil);
-    titleLabel.font = [UIFont boldRockpackFontOfSize:18.0];
+    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.shadowColor = [UIColor whiteColor];
     titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);

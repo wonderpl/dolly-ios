@@ -27,11 +27,11 @@
     
     if (IS_IPAD)
     {
-        self.sectionTitleLabel.font = [UIFont rockpackFontOfSize: 20.0f];
+        self.sectionTitleLabel.font = [UIFont lightCustomFontOfSize: 20.0f];
     }
     else
     {
-        self.sectionTitleLabel.font = [UIFont rockpackFontOfSize: 14.0f];
+        self.sectionTitleLabel.font = [UIFont lightCustomFontOfSize: 14.0f];
     }
     
     self.highlightedSectionView.hidden = TRUE;

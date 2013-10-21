@@ -29,6 +29,5 @@
 @property (nonatomic, weak) id<SYNChannelThumbnailCellDelegate> viewControllerDelegate;
 
 - (void) setChannelTitle: (NSString*) titleString;
-- (void) showDeleteButton: (BOOL) showDeleteButton;
 
 @end

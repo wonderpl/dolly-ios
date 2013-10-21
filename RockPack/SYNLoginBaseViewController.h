@@ -14,8 +14,6 @@
 #import "SYNNetworkMessageView.h"
 #import "SYNNetworkOperationJsonObject.h"
 #import "SYNOAuth2Credential.h"
-#import "SYNTextFieldLoginiPhone.h"
-
 
 #define kLoginTermsUrl @"http://rockpack.com/tos"
 #define kLoginPrivacyUrl @"http://rockpack.com/privacy"

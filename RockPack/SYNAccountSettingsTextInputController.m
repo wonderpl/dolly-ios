@@ -74,12 +74,12 @@
                                                  name: UIKeyboardWillHideNotification
                                                object: nil];
     
-    self.contentSizeForViewInPopover = CGSizeMake(IS_IPAD ? 380 : [SYNDeviceManager.sharedInstance currentScreenWidth], IS_IPAD ? 476 : [SYNDeviceManager.sharedInstance currentScreenHeight]);
+    self.preferredContentSize = CGSizeMake(IS_IPAD ? 380 : [SYNDeviceManager.sharedInstance currentScreenWidth], IS_IPAD ? 476 : [SYNDeviceManager.sharedInstance currentScreenHeight]);
     
     self.view.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor whiteColor];
     
-    self.sizeInContainer = self.contentSizeForViewInPopover.width - 20.0;
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0, self.contentSizeForViewInPopover.width, self.contentSizeForViewInPopover.height)];
+    self.sizeInContainer = self.preferredContentSize.width - 20.0;
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0, self.preferredContentSize.width, self.preferredContentSize.height)];
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.bounces = NO;
     [self.view addSubview:self.scrollView];
@@ -149,7 +149,7 @@
     
     errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(10.0,
                                                             saveButton.frame.origin.y + saveButton.frame.size.height + 10.0,
-                                                            self.contentSizeForViewInPopover.width - 20.0,
+                                                            self.preferredContentSize.width - 20.0,
                                                             50)];
     
     errorLabel.textColor = [UIColor colorWithRed: (11.0/255.0)
@@ -157,7 +157,7 @@
                                             blue: (171.0/255.0)
                                            alpha: (1.0)];
     
-    errorLabel.font = [UIFont rockpackFontOfSize: 18];
+    errorLabel.font = [UIFont lightCustomFontOfSize: 18];
     errorLabel.numberOfLines = 0;
     errorLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -176,7 +176,7 @@
     }
     
     CGRect newFrame = self.scrollView.frame;
-    newFrame.size = self.contentSizeForViewInPopover;
+    newFrame.size = self.preferredContentSize;
     self.scrollView.frame = newFrame;
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, maxY);

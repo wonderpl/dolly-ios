@@ -10,16 +10,16 @@
 
 @implementation UIFont (SYNFont)
 
-+ (UIFont *) rockpackFontOfSize: (CGFloat) fontSize
++ (UIFont *) lightCustomFontOfSize: (CGFloat) fontSize
 {
-    return [UIFont fontWithName: @"DINNextLTPro-Regular"
+    return [UIFont fontWithName: @"ProximaNova-Light"
                            size: fontSize];
 }
 
 
-+ (UIFont *) boldRockpackFontOfSize: (CGFloat) fontSize
++ (UIFont *) regularCustomFontOfSize: (CGFloat) fontSize
 {
-    return [UIFont fontWithName: @"DINNextLTPro-Bold"
+    return [UIFont fontWithName: @"ProximaNova-Regular"
                            size: fontSize];
 }
 

@@ -85,7 +85,7 @@
     
     self.tableView.scrollsToTop = NO;
     
-    self.titleLabel.font = [UIFont boldRockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     if (self.showAllCategoriesHeader)
     {

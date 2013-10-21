@@ -12,7 +12,6 @@
 #import "SYNAutocompleteSuggestionsController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNSearchBoxViewController.h"
-#import "SYNTextField.h"
 #import "UIFont+SYNFont.h"
 #import "SYNSearchCategoriesTableViewController.h"
 #import "SYNDeviceManager.h"
@@ -28,7 +27,7 @@
 @property (nonatomic, strong) NSArray* nib;
 @property (nonatomic, strong) SYNAutocompleteSuggestionsController* autoSuggestionController;
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
-@property (nonatomic, weak) SYNTextField* searchTextField;
+@property (nonatomic, weak) UITextField* searchTextField;
 @property (nonatomic, weak) MKNetworkOperation* autocompleteNetworkOperation;
 @property (nonatomic, strong) SYNSearchCategoriesTableViewController* searchCategoriesController;
 

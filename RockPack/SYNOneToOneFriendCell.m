@@ -19,14 +19,14 @@
     
     if (self)
     {
-        self.textLabel.font = [UIFont boldRockpackFontOfSize: 13.0f];
+        self.textLabel.font = [UIFont regularCustomFontOfSize: 13.0f];
         
         self.textLabel.textColor = [UIColor colorWithRed: (40.0f / 255.0f)
                                                    green: (45.0f / 255.0f)
                                                     blue: (51.0f / 255.0f)
                                                    alpha: 1.0f];
         
-        self.detailTextLabel.font = [UIFont rockpackFontOfSize: 12.0f];
+        self.detailTextLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
         
         self.detailTextLabel.textColor = [UIColor colorWithRed: (170.0f / 255.0f)
                                                          green: (170.0f / 255.0f)

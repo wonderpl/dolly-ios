@@ -24,7 +24,7 @@
     if (self) {
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 20.0)];
-        self.timeLabel.font = [UIFont rockpackFontOfSize:12.0];
+        self.timeLabel.font = [UIFont lightCustomFontOfSize:12.0];
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         self.timeLabel.textColor = [UIColor grayColor];
         self.timeLabel.backgroundColor = [UIColor clearColor];

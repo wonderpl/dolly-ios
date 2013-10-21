@@ -138,9 +138,9 @@
     if (IS_IPHONE)
     {
         // Set custom fonts
-        self.channelTitleLabel.font = [UIFont rockpackFontOfSize: 12.0f];
-        self.channelCreatorLabel.font = [UIFont rockpackFontOfSize: 10.0f];
-        self.videoTitleLabel.font = [UIFont rockpackFontOfSize: 13.0f];
+        self.channelTitleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
+        self.channelCreatorLabel.font = [UIFont lightCustomFontOfSize: 10.0f];
+        self.videoTitleLabel.font = [UIFont lightCustomFontOfSize: 13.0f];
         
         // Cross-face transitions
         self.channelTitleLabel.transitionDuration = kTextCrossfadeDuration;
@@ -150,9 +150,9 @@
     else
     {
         // Set custom fonts
-        self.channelTitleLabel.font = [UIFont rockpackFontOfSize: 15.0f];
-        self.channelCreatorLabel.font = [UIFont rockpackFontOfSize: 12.0f];
-        self.videoTitleLabel.font = [UIFont rockpackFontOfSize: 18.0f];
+        self.channelTitleLabel.font = [UIFont lightCustomFontOfSize: 15.0f];
+        self.channelCreatorLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
+        self.videoTitleLabel.font = [UIFont lightCustomFontOfSize: 18.0f];
         
         // Cross-face transitions
         self.channelTitleLabel.transitionDuration = kTextCrossfadeDuration;
@@ -329,7 +329,7 @@
                                          autoPlay: TRUE];
     
     // likes count
-    self.likesCountLabel.font = [UIFont rockpackFontOfSize:self.likesCountLabel.font.pointSize];
+    self.likesCountLabel.font = [UIFont lightCustomFontOfSize:self.likesCountLabel.font.pointSize];
     self.likesCountLabel.text = @"0";
     
     

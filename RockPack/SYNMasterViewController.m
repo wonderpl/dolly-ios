@@ -23,7 +23,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNPageView.h"
 #import "SYNSearchBoxViewController.h"
 #import "SYNSearchRootViewController.h"
 #import "SYNSideNavigatorViewController.h"
@@ -46,11 +45,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic) BOOL searchIsInProgress;
 @property (nonatomic) BOOL showingBackButton;
 @property (nonatomic) NavigationButtonsAppearance currentNavigationButtonsAppearance;
-@property (nonatomic, strong) IBOutlet SYNPageView* pagePositionIndicatorView;
 @property (nonatomic, strong) IBOutlet UIButton* headerButton;
 @property (nonatomic, strong) IBOutlet UIButton* hideNavigationButton;
-@property (nonatomic, strong) IBOutlet UILabel* pageTitleLabel;
-@property (nonatomic, strong) IBOutlet UIView* navigationContainerView;
+@property (nonatomic, strong) IBOutlet UIView* sideNavigationContainerView;
+@property (nonatomic, strong) IBOutlet UIView* tabsView;
 @property (nonatomic, strong) SYNAccountSettingsModalContainer* modalAccountContainer;
 @property (nonatomic, strong) SYNBackButtonControl* backButtonControl;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
@@ -77,16 +75,14 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        appDelegate.viewStackManager.masterController = self;
         
-        // == main navigation == //
+        
+        // == Main UINavigationController == //
         
         self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:root];
         self.mainNavigationController.navigationBarHidden = YES;
         self.mainNavigationController.delegate = self;
-        //self.mainNavigationController.view.autoresizesSubviews = YES;
         self.mainNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        self.mainNavigationController.wantsFullScreenLayout = YES;
         
         appDelegate.viewStackManager.navigationController = self.mainNavigationController;
         
@@ -102,10 +98,17 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.sideNavigatorViewController.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         
         self.sideNavigatorViewController.user = appDelegate.currentUser;
+        [self addChildViewController:self.sideNavigatorViewController];
         
+        
+        
+        
+        // == Setup ViewStack and Navigation Managers == //
+        
+        appDelegate.viewStackManager.masterController = self;
         appDelegate.viewStackManager.sideNavigatorController = self.sideNavigatorViewController;
         
-        [self addChildViewController:self.sideNavigatorViewController];
+        
         
     
         // == Search Box == //
@@ -121,10 +124,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSInteger onBoarding1State = [defaults integerForKey:kInstruction1OnBoardingState];
+        
+        // FIXME: Now we have no press and hold, I think that this logic can be simplified
         if(onBoarding1State == 2) // has shown on channel details and can show here IF videos are present
         {
-            
-            
             [defaults setInteger:3 forKey:kInstruction1OnBoardingState]; // inc by one
             
         }
@@ -146,7 +149,15 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) viewDidLoad
 {
+    
     [super viewDidLoad];
+    
+    // == Setup Navigation Manager == (This should be done here because it is dependent on controls) == //
+    
+    
+    appDelegate.navigationManager.masterController = self;
+    appDelegate.navigationManager.containerController = self.containerViewController; // container
+    appDelegate.navigationManager.sideNavigationController = self.sideNavigatorViewController;
     
     
     // == Compensate for iOS7 == //
@@ -218,14 +229,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     
     
-    self.navigationContainerView.userInteractionEnabled = YES;
+    self.sideNavigationContainerView.userInteractionEnabled = YES;
     
     self.currentNavigationButtonsAppearance = NavigationButtonsAppearanceBlack;
     
-    // == Add the Root Navigation Controller == //
-
-    self.mainNavigationController.view.frame = self.view.frame;
-    [self.view insertSubview:self.mainNavigationController.view atIndex:0];
     
     
     
@@ -254,7 +261,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [self.headerButton addGestureRecognizer:leftSwipeGesture];
     [self.headerButton addGestureRecognizer:rightSwipeGesture];
     
-    self.pageTitleLabel.font = [UIFont boldRockpackFontOfSize:self.pageTitleLabel.font.pointSize];
+    self.pageTitleLabel.font = [UIFont regularCustomFontOfSize:self.pageTitleLabel.font.pointSize];
     self.pageTitleLabel.textColor = [UIColor colorWithRed:(40.0/255.0)
                                                     green:(45.0/255.0)
                                                      blue:(51.0/255.0)
@@ -286,7 +293,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteHideNetworkMessages object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteShowNetworkMessages object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTitleAndDots:) name:kNoteHideTitleAndDots object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateToPage:) name:kNavigateToPage object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollerPageChanged:) name:kScrollerPageChanged object:nil];
@@ -294,51 +300,17 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
     
     
-    [self.navigationContainerView addSubview:self.sideNavigatorViewController.view];
+    [self.sideNavigationContainerView addSubview:self.sideNavigatorViewController.view];
+    
+    self.mainNavigationController.view.frame = self.view.frame;
+    [self.view insertSubview:self.mainNavigationController.view atIndex:0];
 }
 
 
 - (void) headerSwiped:(UISwipeGestureRecognizer*) recogniser
 {
-    [self.containerViewController swipedTo: recogniser.direction];
+    // TODO: figure out if swiping of header is needed
 }
-
-
-
-
-
-#pragma mark - Scroller Changes
-
-- (void) scrollerPageChanged: (NSNotification*) notification
-{
-    NSNumber* pageNumber = [notification userInfo][kCurrentPage];
-    if (!pageNumber)
-        return;
-    
-    [self pageChanged: [pageNumber integerValue]];
-    
-    
-}
-
-
-- (void) pageChanged: (NSInteger) pageNumber
-{
-    self.pageTitleLabel.text = [self.containerViewController.currentViewController.title uppercaseString];
-    
-    if (self.sideNavigatorViewController.state == SideNavigationStateFull)
-    {
-        [self.sideNavigatorViewController deselectAllCells];
-        [self showSideNavigation];
-    }
-    else
-    {
-        NSString* controllerTitle = self.containerViewController.currentViewController.title;
-        
-        [self.sideNavigatorViewController setSelectedCellByPageName: controllerTitle];
-    }
-}
-
-
 
 
 
@@ -572,7 +544,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         sboxFrame.origin.y = IS_IOS_7_OR_GREATER ? 20.0f : 10.0f;
         self.searchBoxController.view.frame = sboxFrame;
         
-        [self.view insertSubview:self.searchBoxController.view belowSubview:self.navigationContainerView];
+        [self.view insertSubview:self.searchBoxController.view belowSubview:self.sideNavigationContainerView];
         
         self.searchBoxController.searchTextField.text = @"";
         
@@ -751,8 +723,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         
         self.pageTitleLabel.hidden = NO;
-        
-        self.pagePositionIndicatorView.hidden = NO;
+
         self.backButtonControl.hidden = NO;
     }
     else
@@ -762,53 +733,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.sideNavigationButton.hidden = YES;
         self.closeSearchButton.hidden = YES;
         self.pageTitleLabel.hidden = YES;
-        self.pagePositionIndicatorView.hidden = YES;
         self.backButtonControl.hidden = YES;
         self.sideNavigatorViewController.state = SideNavigationStateHidden;
     }
 }
 
 
-- (void) navigateToPage: (NSNotification*) notification
-{
-    
-    NSString* pageName = [notification userInfo][@"pageName"];
-    if (!pageName)
-        return;
-    
-    SYNAbstractViewController* controllerToGo = [self.containerViewController viewControllerByPageName:pageName];
-    if(!controllerToGo)
-        return;
-    
-    if (self.isInSearchMode)
-    {
-        [self cancelButtonPressed:nil];
-    }
-
-    if (self.showingBackButton)
-    {
-        //pop the current section navcontroller to the root controller
-        [appDelegate.viewStackManager popToRootController];
-        
-        [self showBackButton:NO];
-    }
-    
-    //Scroll to the requested page
-    [self.containerViewController addChildViewController:controllerToGo];
-    
-    self.sideNavigatorViewController.state = SideNavigationStateHidden;
-    
-    // post open actions
-    
-    if ([notification userInfo][@"action"])
-    {
-        
-        [controllerToGo performAction:[notification userInfo][@"action"]
-                           withObject:[notification userInfo][@"object"]];
-    }
-    
-    
-}
 
 
 - (void) channelSuccessfullySaved: (NSNotification*) note
@@ -856,7 +786,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) hideTitleAndDots: (NSNotification*) note
 {
-    self.pagePositionIndicatorView.alpha = 0.0f;
     self.pageTitleLabel.alpha = 0.0f;
 }
 
@@ -1115,10 +1044,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (SYNContainerViewController*) containerViewController
-{
-    return (SYNContainerViewController*) self.mainNavigationController.viewControllers[0];
-}
+
 
 
 - (void) showBackButton: (BOOL) show 
@@ -1169,7 +1095,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     
     self.pageTitleLabel.alpha = !targetAlpha;
-    self.pagePositionIndicatorView.alpha = !targetAlpha;
     
     
     
@@ -1300,4 +1225,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     self.headerButton.hidden = !isActive;
 }
 
+-(NSArray*)tabs
+{
+    return self.tabsView.subviews;
+}
+- (SYNContainerViewController*) containerViewController
+{
+    return (SYNContainerViewController*) self.mainNavigationController.viewControllers[0];
+}
 @end

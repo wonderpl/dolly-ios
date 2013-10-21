@@ -17,6 +17,7 @@
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNFeedRootViewController.h"
+#import "SYNMoodRootViewController.h"
 #import "SYNGenreTabViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNActivityViewController.h"
@@ -34,12 +35,10 @@
 
 @property (nonatomic) BOOL didNotSwipeMessageInbox;
 @property (nonatomic, readonly) CGFloat currentScreenOffset;
+@property (nonatomic, strong) NSArray *viewControllers;
+@property (nonatomic, strong) SYNAbstractViewController *currentViewController;
 @property (nonatomic, strong) UIPopoverController *actionButtonPopover;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
-
-@property (nonatomic, strong) SYNAbstractViewController *currentViewController;
-
-@property (nonatomic, strong) NSArray* viewControllers;
 
 @end
 
@@ -49,10 +48,10 @@
 // Initialise all the elements common to all 4 tabs
 #pragma mark - View lifecycle
 
--(void)loadView
+- (void) loadView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view = [[UIView alloc] initWithFrame:[[SYNDeviceManager sharedInstance] currentScreenRect]];
+    self.view = [[UIView alloc] initWithFrame: [[SYNDeviceManager sharedInstance] currentScreenRect]];
 }
 
 
@@ -90,144 +89,148 @@
         profileViewController.hideUserProfile = YES;
     }
     
-
     profileViewController.channelOwner = self.appDelegate.currentUser;
+    
+
     
     // == Friends Page == //
     
     //SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
     
     // == Activity Page == //
-    
-    SYNActivityViewController* activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];;
+    SYNActivityViewController *activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];
     profileViewController.channelOwner = self.appDelegate.currentUser;
     
     // == Discovery (Search) Page == //
+    SYNDiscoverViewController *searchViewController = [[SYNDiscoverViewController alloc] initWithViewId: kDiscoverViewId];
     
-    SYNDiscoverViewController* searchViewController = [[SYNDiscoverViewController alloc] initWithViewId:kDiscoverViewId];
+    // == Feed Page == //
+    
+    SYNMoodRootViewController *moodRootViewController = [[SYNMoodRootViewController alloc] initWithViewId: kMoodViewId];
     
     // == Hold the vc locally
-    
-    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController, searchViewController, activityViewController];
-    
+    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController, searchViewController, moodRootViewController,activityViewController];
     
     // == Set the first vc
-    
-    [self addChildViewController:self.viewControllers[0]];
-    
-
-    
-    
+    self.currentViewController = self.viewControllers[0];
 }
-
 
 
 #pragma mark - UIViewController Containment
 
-- (void) addChildViewController: (UIViewController *) newViewController
+
+
+- (void) setCurrentViewController: (SYNAbstractViewController *) currentViewController
 {
+    if (!currentViewController)
+    {
+        DebugLog(@"setCurrentViewController: to nil");
+        return;
+    }
     
-    __weak SYNAbstractViewController* toViewController = (SYNAbstractViewController*)newViewController;
-    __weak SYNAbstractViewController* fromViewController = self.currentViewController;
+    __weak SYNAbstractViewController *toViewController = currentViewController;
+    __weak SYNAbstractViewController *fromViewController = _currentViewController;
     
-    [toViewController willMoveToParentViewController:nil]; // remove the current view controller if there is one
+    // We need to set this here, as effectively we have commited to the current view controller at this stage
+    // and any methods that access this before the transition has completed, need to get the new view controller
+    _currentViewController = toViewController;
+    
+    [fromViewController willMoveToParentViewController: nil]; // remove the current view controller if there is one
     
     [super addChildViewController: toViewController];
     
     
-    [[self view] addSubview:toViewController.view];
+    [[self view] addSubview: toViewController.view];
     
     // == Define the completion block == //
     
-    void(^CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
-        
+    void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
         [fromViewController.view removeFromSuperview];
         
         [fromViewController removeFromParentViewController];
         
         [toViewController didMoveToParentViewController: self];
-        
-        self.currentViewController = toViewController;
     };
     
     // == Do the Transition selectively == //
-    
-    if(fromViewController) // if not from first time
+    if (fromViewController) // if not from first time
     {
-        
         toViewController.view.frame = CGRectZero;
         
-        [self transitionFromViewController:fromViewController
-                          toViewController:toViewController
-                                  duration:VIEW_CONTROLLER_TRANSITION_DURATION
-                                   options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                                       
-                                       
-                                       toViewController.view.frame = self.view.frame;
-                                       fromViewController.view.frame = CGRectZero;
-                                       
-                                   } completion:CompleteTransitionBlock];
+        [self transitionFromViewController: fromViewController
+                          toViewController: toViewController
+                                  duration: VIEW_CONTROLLER_TRANSITION_DURATION
+                                   options: UIViewAnimationOptionCurveEaseInOut
+                                animations: ^{
+                                    toViewController.view.frame = self.view.frame;
+                                    fromViewController.view.frame = CGRectZero;
+                                }
+                                completion: CompleteTransitionBlock];
     }
     else
     {
         toViewController.view.frame = self.view.frame;
         CompleteTransitionBlock(YES);
     }
-    
-    
-    
-    
-    
-    
 }
 
-
-
-
-
-
-
-
-
-- (void) swipedTo: (UISwipeGestureRecognizerDirection) direction
+- (SYNAbstractViewController *) viewControllerByPageName: (NSString *) pageName
 {
-    // TODO: swipe to change view
-}
-
-
-
-
-
-
--(SYNAbstractViewController*)viewControllerByPageName: (NSString *) pageName
-{
-    SYNAbstractViewController* child;
+    SYNAbstractViewController *child;
+    
     for (child in self.viewControllers)
     {
         if ([pageName isEqualToString: child.title])
+        {
             break;
-           
+        }
     }
+    
     return child;
 }
 
-#pragma mark - UIScrollViewDelegate
 
-// TODO: notify with kScrollerPageChanged AND [lastSelectedViewController viewDidScrollToBack]; AND [self.showingViewController viewDidScrollToFront];
+- (NSInteger) indexOfControllerByName: (NSString *) pageName
+{
+    NSInteger index = 0;
+    
+    for (SYNAbstractViewController *child in self.viewControllers)
+    {
+        if ([pageName isEqualToString: child.title])
+        {
+            break;
+        }
+        
+        index++;
+    }
+    
+    return index;
+}
 
 
+- (void) navigateToPage: (NSInteger) index
+{
+    if (index < 0 || index > self.viewControllers.count)
+    {
+        self.currentViewController = nil; // will be caught by the setter
+    }
+    
+    self.currentViewController = self.viewControllers[index];
+}
 
 
+- (void) navigateToPageByName: (NSString *) pageName
+{
+    self.currentViewController = [self viewControllerByPageName: pageName];
+}
 
 
+#pragma mark - Description
 
 - (NSString *) description
 {
     return NSStringFromClass([self class]);
 }
-
-
-
 
 
 @end

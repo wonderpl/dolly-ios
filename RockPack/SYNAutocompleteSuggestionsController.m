@@ -26,7 +26,7 @@
     if ((self = [super initWithStyle:style]))
     {
         wordsArray = [[NSMutableArray alloc] init];
-        rockpackFont = IS_IPAD ? [UIFont rockpackFontOfSize: 26.0] : [UIFont rockpackFontOfSize: 14.0];
+        rockpackFont = IS_IPAD ? [UIFont lightCustomFontOfSize: 26.0] : [UIFont lightCustomFontOfSize: 14.0];
         
         textColor = [UIColor colorWithRed: (187.0f/255.0f)
                                     green: (187.0f/255.0f)

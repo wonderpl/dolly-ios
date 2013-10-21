@@ -77,8 +77,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) refresh;
 
 - (id) initWithViewId: (NSString *) vid;
-- (void) viewDidScrollToFront;
-- (void) viewDidScrollToBack;
 
 - (void) resetDataRequestRange;
 
@@ -108,7 +106,6 @@ typedef void (^SYNShareCompletionBlock)(void);
                andComponentIndex: (NSInteger) componentIndex;
 
 // Purchase
-
 - (void) initiatePurchaseAtURL: (NSURL *) purchaseURL;
 
 - (void) applicationWillEnterForeground: (UIApplication *) application;
@@ -117,11 +114,12 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (NavigationButtonsAppearance) navigationAppearance;
 
-- (BOOL) needsHeaderButton ;
+- (BOOL) needsHeaderButton;
 
 - (void) createAndDisplayNewChannel;
 
--(EntityType)associatedEntity;
+- (EntityType) associatedEntity;
 
--(void)checkForOnBoarding ;
+- (void) checkForOnBoarding;
+
 @end

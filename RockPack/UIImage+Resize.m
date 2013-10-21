@@ -11,49 +11,6 @@
 
 @implementation UIImage (Resize)
 
-+ (UIImage*) imageWithImage: (UIImage*) image
-			   scaledToSize: (CGSize) newSize
-{
-	UIGraphicsBeginImageContext( newSize );
-	[image drawInRect: CGRectMake(0, 0, newSize.width, newSize.height)];
-	UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	
-	return newImage;
-}
-
-
-- (NSData*) jpegDataForResizedImageWithMaxDimension: (CGFloat) maxDimension
-{
-    NSData *imageData = UIImagePNGRepresentation(self);
-    
-    CGImageSourceRef imageSource = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
-    
-    if (!imageSource)
-        return nil;
-    
-    CFDictionaryRef options = (CFDictionaryRef)CFBridgingRetain(@{(id)kCGImageSourceCreateThumbnailWithTransform: (id)kCFBooleanTrue,
-                                                                 (id)kCGImageSourceCreateThumbnailFromImageIfAbsent: (id)kCFBooleanTrue,
-                                                                 (id)kCGImageSourceThumbnailMaxPixelSize: (id)@(maxDimension)});
-    
-    
-    CGImageRef imgRef = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options);
-    
-    CFRelease(options);
-    
-    UIImage* scaledImage = [UIImage imageWithCGImage: imgRef];
-    
-//    DebugLog(@"Scaled image width: %f, height%f", scaledImage.size.width, scaledImage.size.height);
-    
-    CGImageRelease(imgRef);
-    CFRelease(imageSource);
-    
-    NSData *jpegData = UIImageJPEGRepresentation(scaledImage, 0.70);
-    
-    return jpegData;
-}
-
-
 + (UIImage*) scaleAndRotateImage: (UIImage*) image
                      withMaxSize: (int) newSize
 {

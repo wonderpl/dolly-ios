@@ -32,7 +32,7 @@
 {
     if ((self = [super init]))
     {        
-        self.contentSizeForViewInPopover = CGSizeMake(380, 476);
+        self.preferredContentSize = CGSizeMake(380, 476);
         
         self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
         
@@ -106,11 +106,11 @@
     
     self.navigationItem.leftBarButtonItem = backButtonItem;
     
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.contentSizeForViewInPopover.width * 0.5), -15.0, self.contentSizeForViewInPopover.width, 40.0)];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
     titleLabel.text = NSLocalizedString (@"settings_popover_gender_title", nil);
-    titleLabel.font = [UIFont boldRockpackFontOfSize:18.0];
+    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.shadowColor = [UIColor whiteColor];
     titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
@@ -175,7 +175,7 @@
         cell.textLabel.text = NSLocalizedString (@"Female", nil);
     }
     
-    cell.textLabel.font = [UIFont rockpackFontOfSize:16.0];
+    cell.textLabel.font = [UIFont lightCustomFontOfSize:16.0];
     
     return cell;
 }

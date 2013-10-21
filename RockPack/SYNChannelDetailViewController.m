@@ -174,17 +174,17 @@
     
     // Originally the opacity was required to be 0.25f, but this appears less visible on the actual screen
     // Set custom fonts and shadows for labels
-    self.channelOwnerLabel.font = [UIFont boldRockpackFontOfSize: self.channelOwnerLabel.font.pointSize];
+    self.channelOwnerLabel.font = [UIFont regularCustomFontOfSize: self.channelOwnerLabel.font.pointSize];
     [self addShadowToLayer: self.channelOwnerLabel.layer];
     
-    self.subscribersLabel.font = [UIFont boldRockpackFontOfSize: self.subscribersLabel.font.pointSize];
+    self.subscribersLabel.font = [UIFont regularCustomFontOfSize: self.subscribersLabel.font.pointSize];
     [self addShadowToLayer: self.subscribersLabel.layer];
     
-    self.byLabel.font = [UIFont rockpackFontOfSize: self.byLabel.font.pointSize];
+    self.byLabel.font = [UIFont lightCustomFontOfSize: self.byLabel.font.pointSize];
     [self addShadowToLayer: self.byLabel.layer];
     
     // Add Rockpack font and shadow to UITextView
-    self.channelTitleTextView.font = [UIFont rockpackFontOfSize: self.channelTitleTextView.font.pointSize];
+    self.channelTitleTextView.font = [UIFont lightCustomFontOfSize: self.channelTitleTextView.font.pointSize];
     [self addShadowToLayer: self.channelTitleTextView.layer];
     
     // Display 'Done' instead of 'Return' on Keyboard
@@ -326,7 +326,7 @@
                                                                                                                                                                 green: 45.0f / 255.0f
                                                                                                                                                                  blue: 51.0f / 255.0f
                                                                                                                                                                 alpha: 1.0f],
-                                                                                         NSFontAttributeName: [UIFont boldRockpackFontOfSize: 18.0f]}];
+                                                                                         NSFontAttributeName: [UIFont regularCustomFontOfSize: 18.0f]}];
         
         [self.addCoverButton setAttributedTitle: attributedCoverString
                                        forState: UIControlStateNormal];
@@ -340,7 +340,7 @@
                                                                                                                                                                    green: 45.0f / 255.0f
                                                                                                                                                                     blue: 51.0f / 255.0f
                                                                                                                                                                    alpha: 1.0f],
-                                                                                            NSFontAttributeName: [UIFont boldRockpackFontOfSize: 18.0f]}];
+                                                                                            NSFontAttributeName: [UIFont regularCustomFontOfSize: 18.0f]}];
         
         // Set text on add cover and select category buttons
         [self.selectCategoryButton setAttributedTitle: attributedCategoryString
@@ -358,12 +358,12 @@
     {
         self.textBackgroundImageView.image = [[UIImage imageNamed: @"FieldChannelTitle"] resizableImageWithCapInsets: UIEdgeInsetsMake(5, 5, 6, 6)];
         
-        self.addCoverButton.titleLabel.font = [UIFont boldRockpackFontOfSize: self.addCoverButton.titleLabel.font.pointSize];
+        self.addCoverButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.addCoverButton.titleLabel.font.pointSize];
         self.addCoverButton.titleLabel.numberOfLines = 2;
         self.addCoverButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.addCoverButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         
-        self.selectCategoryButton.titleLabel.font = [UIFont boldRockpackFontOfSize: self.selectCategoryButton.titleLabel.font.pointSize];
+        self.selectCategoryButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.selectCategoryButton.titleLabel.font.pointSize];
         self.selectCategoryButton.titleLabel.numberOfLines = 2;
         self.selectCategoryButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.selectCategoryButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -681,7 +681,7 @@
                                                                                                                                                                green: 45.0f / 255.0f
                                                                                                                                                                 blue: 51.0f / 255.0f
                                                                                                                                                                alpha: 1.0f],
-                                                                                        NSFontAttributeName: [UIFont boldRockpackFontOfSize: 18.0f]}];
+                                                                                        NSFontAttributeName: [UIFont regularCustomFontOfSize: 18.0f]}];
     
     // Set text on add cover and select category buttons
     [self.selectCategoryButton setAttributedTitle: attributedCategoryString
@@ -865,7 +865,7 @@
     UILabel *noVideosLabel = [[UILabel alloc] initWithFrame: CGRectZero];
     noVideosLabel.text = message;
     noVideosLabel.textAlignment = NSTextAlignmentCenter;
-    noVideosLabel.font = [UIFont rockpackFontOfSize: self.isIPhone ? 12.0f: 16.0f];
+    noVideosLabel.font = [UIFont lightCustomFontOfSize: self.isIPhone ? 12.0f: 16.0f];
     noVideosLabel.textColor = [UIColor whiteColor];
     [noVideosLabel sizeToFit];
     noVideosLabel.backgroundColor = [UIColor clearColor];
@@ -1484,11 +1484,7 @@
 {
     if ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
     {
-        NSNotification *navigationNotification = [NSNotification notificationWithName: kNavigateToPage
-                                                                               object: self
-                                                                             userInfo: @{@"pageName": kProfileViewId}];
-        
-        [[NSNotificationCenter defaultCenter] postNotification: navigationNotification];
+        [appDelegate.navigationManager navigateToPageByName:kProfileViewId];
         return;
     }
     
@@ -2768,22 +2764,18 @@ shouldChangeTextInRange: (NSRange) range
 
 - (void) checkForOnBoarding
 {
-    
-    if(![appDelegate.viewStackManager controllerViewIsVisible:self])
+    if (![appDelegate.viewStackManager controllerViewIsVisible: self])
+    {
         return;
-    
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger onBoarding1State = [defaults integerForKey:kInstruction1OnBoardingState];
+    NSInteger onBoarding1State = [defaults integerForKey: kInstruction1OnBoardingState];
     
-    if(!onBoarding1State || onBoarding1State == 1) // has shown on channel details and can show here IF videos are present
+    if (!onBoarding1State || onBoarding1State == 1) // has shown on channel details and can show here IF videos are present
     {
-//        SYNInstructionsToShareControllerViewController* itsVC = [[SYNInstructionsToShareControllerViewController alloc] initWithDelegate:self andState:InstructionsShareStatePressAndHold];
-//        
-//        [appDelegate.viewStackManager presentCoverViewController:itsVC];
-        
-        [defaults setInteger:2 forKey:kInstruction1OnBoardingState]; // inc by one
-        
+        [defaults setInteger: 2
+                      forKey: kInstruction1OnBoardingState];         // inc by one
     }
 }
 

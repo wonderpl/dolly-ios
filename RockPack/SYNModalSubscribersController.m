@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     
-    self.titleLabel.font = [UIFont rockpackFontOfSize: self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
     CGRect containerViewFrame = self.containerView.frame;
     self.viewController.view.frame = containerViewFrame;

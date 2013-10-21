@@ -23,7 +23,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.titleLabel.font = [UIFont rockpackFontOfSize:self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "SYNSearchBoxView.h"
-#import "SYNTextField.h"
 
 @interface SYNSearchBoxViewController : UIViewController <UITextFieldDelegate, UITableViewDelegate>
 
 @property (nonatomic, readonly) SYNSearchBoxView* searchBoxView;
-@property (nonatomic, weak, readonly) SYNTextField* searchTextField;
+@property (nonatomic, weak, readonly) UITextField* searchTextField;
 
 - (void) clear;
 -(void)presentSearchCategoriesIPhone;
