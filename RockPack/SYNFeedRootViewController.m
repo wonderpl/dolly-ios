@@ -124,18 +124,14 @@ typedef void(^FeedDataErrorBlock)(void);
 
     [self removeEmptyGenreMessage];
     
-    CGSize itemSize;
+    CGSize itemSize = CGSizeMake(0.0f, 280.0f);
     if (IS_IPHONE)
     {
-        itemSize = CGSizeMake(310.0f , 261.0f);
-    }
-    else if ([SYNDeviceManager.sharedInstance isLandscape])
-    {
-        itemSize = CGSizeMake(616, 168);
+        itemSize.width = 310.0f;
     }
     else
     {
-        itemSize = CGSizeMake(616, 168);
+        itemSize.width = [[SYNDeviceManager sharedInstance] currentScreenWidth];
     }
     
     standardFlowLayout = [SYNIntegralCollectionViewFlowLayout layoutWithItemSize: itemSize
@@ -600,7 +596,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 
 
-#pragma mark - UICollectionView Delegate
+#pragma mark - UICollectionView Delegate/Data Source
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
@@ -623,87 +619,22 @@ typedef void(^FeedDataErrorBlock)(void);
     
 }
 
-
 - (CGSize) collectionView: (UICollectionView *) collectionView
                    layout: (UICollectionViewLayout*) collectionViewLayout
    sizeForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    FeedItem* feedItem = [self feedItemAtIndexPath:indexPath];
-    CGFloat cellWidth = 0.0;
+    CGSize cellSize = CGSizeMake(0.0f, AGGREGATION_CELL_DEFAULT_HEIGHT);
     if(IS_IPHONE)
     {
-        cellWidth = 310.0f;
+        cellSize.width = 310.0f;
     }
     else
     {
-        cellWidth = 616.0f;
+        cellSize.width = [[SYNDeviceManager sharedInstance] currentScreenWidth];
     }
     
-    if(feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        return CGSizeMake(cellWidth, IS_IPHONE ? 280.0f : 168.0f);
-    }
-    else // Channel
-    {
-        if(feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-           
-            if(feedItem.itemCountValue == 2 || feedItem.itemCountValue == 3)
-                return CGSizeMake(cellWidth, IS_IPHONE ? 182.0f : 149.0f);
-        }
-        return CGSizeMake(cellWidth, IS_IPHONE ? 363.0f : 298.0f);
-    }
-}
-
-- (void) videoOverlayDidDissapear
-{
+    return cellSize;
     
-    
-    [self.feedCollectionView reloadData];
-}
-
-
-- (FeedItem*) feedItemAtIndexPath: (NSIndexPath*) indexPath
-{
-    NSArray* sectionArray = self.feedItemsData[indexPath.section];
-    FeedItem* feedItem = sectionArray[indexPath.row];
-    return feedItem;
-}
-
-
-- (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
-                        andComponentIndex: (NSInteger) componentIndex
-{
-    if (!indexPath)
-    {
-        DebugLog(@"Nil index path");
-    }
-        
-    
-    Channel *channel;
-    
-    FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
-    
-    if (componentIndex == kInvalidComponentIndex)
-    {
-        DebugLog(@"*** channelAtCoverOfFeedItem");
-        channel = [self channelAtCoverOfFeedItem: feedItem];
-    }
-    else
-    {
-        DebugLog(@"*** feedChannelsById");
-        // Aggregate cell with multiple indices
-        channel = (self.feedChannelsById)[feedItem.coverIndexArray[componentIndex]];
-    }
-
-    return channel;
-}
-
-
-- (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
-{
-    // Same mechanism as for video cell
-    return  [self indexPathForVideoCell: cell];
 }
 
 
@@ -935,6 +866,60 @@ typedef void(^FeedDataErrorBlock)(void);
     }
 
     return supplementaryView;
+    
+    
+}
+
+
+#pragma mark - Get Cell Data 
+
+- (void) videoOverlayDidDissapear
+{
+    [self.feedCollectionView reloadData];
+}
+
+
+- (FeedItem*) feedItemAtIndexPath: (NSIndexPath*) indexPath
+{
+    NSArray* sectionArray = self.feedItemsData[indexPath.section];
+    FeedItem* feedItem = sectionArray[indexPath.row];
+    return feedItem;
+}
+
+
+- (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
+                        andComponentIndex: (NSInteger) componentIndex
+{
+    if (!indexPath)
+    {
+        DebugLog(@"Nil index path");
+    }
+    
+    
+    Channel *channel;
+    
+    FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
+    
+    if (componentIndex == kInvalidComponentIndex)
+    {
+        DebugLog(@"*** channelAtCoverOfFeedItem");
+        channel = [self channelAtCoverOfFeedItem: feedItem];
+    }
+    else
+    {
+        DebugLog(@"*** feedChannelsById");
+        // Aggregate cell with multiple indices
+        channel = (self.feedChannelsById)[feedItem.coverIndexArray[componentIndex]];
+    }
+    
+    return channel;
+}
+
+
+- (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
+{
+    // Same mechanism as for video cell
+    return  [self indexPathForVideoCell: cell];
 }
 
 #pragma mark - Click Cell Delegates

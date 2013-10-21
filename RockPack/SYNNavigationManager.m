@@ -29,18 +29,22 @@
     
     NSInteger index = [self.containerController
                        indexOfControllerByName: pageName];
+    
     [self navigateToPage: index];
 }
 
 
 - (void) navigateToPage: (NSInteger) index
 {
+    
+    // == Check the index is within the bounds of the controller's array
     if (index < 0 || index > self.containerController.viewControllers.count)
     {
         return;
     }
     
     self.sideNavigationController.state = SideNavigationStateHidden;
+    
     
     [self.containerController navigateToPage: index];
     
