@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import <UIKit/UIKit.h>
 
+#define AGGREGATION_CELL_DEFAULT_HEIGHT 280.0f
+
 @protocol SYNAggregateCellDelegate <NSObject, UICollectionViewDataSource>
 
 - (void) touchedAggregateCell;

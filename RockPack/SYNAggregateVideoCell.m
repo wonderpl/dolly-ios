@@ -40,6 +40,8 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
           forCellWithReuseIdentifier:kVideoItemCellIndetifier];
     
     [self.collectionView reloadData];
+    
+    NSLog(@"%@", NSStringFromCGRect(self.frame));
 }
 
 
