@@ -1354,6 +1354,8 @@
 		BEB312FF1815638700FAF98A /* TabProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F51815638700FAF98A /* TabProfile@2x.png */; };
 		BEB313001815638700FAF98A /* TabSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F61815638700FAF98A /* TabSearch.png */; };
 		BEB313011815638700FAF98A /* TabSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F71815638700FAF98A /* TabSearch@2x.png */; };
+		BEB31305181565CE00FAF98A /* SYNSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB31303181565CE00FAF98A /* SYNSearchResultsViewController.m */; };
+		BEB31306181565CE00FAF98A /* SYNSearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB31304181565CE00FAF98A /* SYNSearchResultsViewController.xib */; };
 		BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */; };
 		BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */; };
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
@@ -2988,6 +2990,9 @@
 		BEB312F51815638700FAF98A /* TabProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabProfile@2x.png"; path = "Assets/Images/TabProfile@2x.png"; sourceTree = "<group>"; };
 		BEB312F61815638700FAF98A /* TabSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabSearch.png; path = Assets/Images/TabSearch.png; sourceTree = "<group>"; };
 		BEB312F71815638700FAF98A /* TabSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabSearch@2x.png"; path = "Assets/Images/TabSearch@2x.png"; sourceTree = "<group>"; };
+		BEB31302181565CE00FAF98A /* SYNSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchResultsViewController.h; sourceTree = "<group>"; };
+		BEB31303181565CE00FAF98A /* SYNSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchResultsViewController.m; sourceTree = "<group>"; };
+		BEB31304181565CE00FAF98A /* SYNSearchResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNSearchResultsViewController.xib; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -5212,6 +5217,9 @@
 				BE7D02E4178AF310008053DC /* SYNSearchUsersViewController.m */,
 				BEEB6F1E1721807100FEFA43 /* SYNSearchTabView.h */,
 				BEEB6F1F1721807100FEFA43 /* SYNSearchTabView.m */,
+				BEB31302181565CE00FAF98A /* SYNSearchResultsViewController.h */,
+				BEB31303181565CE00FAF98A /* SYNSearchResultsViewController.m */,
+				BEB31304181565CE00FAF98A /* SYNSearchResultsViewController.xib */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -7162,6 +7170,7 @@
 				01EC094F17AAA63100E1ACE1 /* ButtonPlayChannelHighlighted@2x~iphone.png in Resources */,
 				01EC095017AAA63100E1ACE1 /* ButtonPlayChannelHighlighted~iphone.png in Resources */,
 				01EC095517AAA64F00E1ACE1 /* ButtonPlayChannelHighlighted.png in Resources */,
+				BEB31306181565CE00FAF98A /* SYNSearchResultsViewController.xib in Resources */,
 				01EC095617AAA64F00E1ACE1 /* ButtonPlayChannelHighlighted@2x.png in Resources */,
 				01EC095717AAA64F00E1ACE1 /* ButtonPlayChannel.png in Resources */,
 				01EC095817AAA64F00E1ACE1 /* ButtonPlayChannel@2x.png in Resources */,
@@ -7543,6 +7552,7 @@
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
 				BE06EEE417D6344E0028F2E3 /* SYNStrictInteractionView.m in Sources */,
 				BE06EEF417D78DCA0028F2E3 /* SYNOneToOneFriendCell.m in Sources */,
+				BEB31305181565CE00FAF98A /* SYNSearchResultsViewController.m in Sources */,
 				0110AE6117DF383C00DC7724 /* SYNProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
