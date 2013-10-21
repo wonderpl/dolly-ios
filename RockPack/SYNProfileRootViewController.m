@@ -242,16 +242,24 @@ SYNImagePickerControllerDelegate>
 #pragma mark - Container Scroll Delegates
 - (void) viewDidScrollToFront
 {
-    if (parent == nil)
+    [self updateAnalytics];
+    
+    if (self.isIPhone)
     {
         self.channelThumbnailCollectionView.scrollsToTop = !self.subscriptionsTabActive;
+        
         self.subscriptionThumbnailCollectionView.scrollsToTop = self.subscriptionsTabActive;
     }
     else
     {
         self.channelThumbnailCollectionView.scrollsToTop = YES;
+        
         self.subscriptionThumbnailCollectionView.scrollsToTop = YES;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
+                                                        object: self
+                                                      userInfo: @{kChannelOwner: self.channelOwner}];
 }
 
 - (void) viewDidScrollToBack
@@ -289,8 +297,8 @@ SYNImagePickerControllerDelegate>
 -(void) setUpUserProfile
 {
     
-    self.fullNameLabel.font = [UIFont boldRockpackFontOfSize:30];
-    self.userNameLabel.font = [UIFont rockpackFontOfSize:12.0];
+    self.fullNameLabel.font = [UIFont boldSystemFontOfSize:30];
+    self.userNameLabel.font = [UIFont lightCustomFontOfSize:12.0];
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(userDataChanged:)
