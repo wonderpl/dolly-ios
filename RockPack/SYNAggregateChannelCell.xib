@@ -29,11 +29,6 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" id="15" userLabel="Container">
-                        <rect key="frame" x="0.0" y="0.0" width="298" height="298"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="22" userLabel="User Thumbnail Button">
                         <rect key="frame" x="313" y="0.0" width="70" height="70"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -62,7 +57,6 @@
             <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
             <size key="customSize" width="353" height="231"/>
             <connections>
-                <outlet property="imageContainer" destination="15" id="16"/>
                 <outlet property="mainTitleLabel" destination="18" id="19"/>
                 <outlet property="messageLabel" destination="4" id="13"/>
                 <outlet property="userThumbnailButton" destination="22" id="23"/>

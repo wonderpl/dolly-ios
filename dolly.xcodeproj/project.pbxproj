@@ -1345,16 +1345,16 @@
 		BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB1578A173D016B00DAFA2F /* _CoverArt.m */; };
 		BEB1578E173D060700DAFA2F /* _ChannelCover.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB1578D173D060700DAFA2F /* _ChannelCover.m */; };
 		BEB15791173D061700DAFA2F /* ChannelCover.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB15790173D061700DAFA2F /* ChannelCover.m */; };
-		BEB312DA181185F500FAF98A /* TabActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D0181185F500FAF98A /* TabActivity.png */; };
-		BEB312DB181185F500FAF98A /* TabActivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D1181185F500FAF98A /* TabActivity@2x.png */; };
-		BEB312DC181185F500FAF98A /* TabFeed.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D2181185F500FAF98A /* TabFeed.png */; };
-		BEB312DD181185F500FAF98A /* TabFeed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D3181185F500FAF98A /* TabFeed@2x.png */; };
-		BEB312DE181185F500FAF98A /* TabMoods.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D4181185F500FAF98A /* TabMoods.png */; };
-		BEB312DF181185F500FAF98A /* TabMoods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D5181185F500FAF98A /* TabMoods@2x.png */; };
-		BEB312E0181185F500FAF98A /* TabProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D6181185F500FAF98A /* TabProfile.png */; };
-		BEB312E1181185F500FAF98A /* TabProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D7181185F500FAF98A /* TabProfile@2x.png */; };
-		BEB312E2181185F500FAF98A /* TabSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D8181185F500FAF98A /* TabSearch.png */; };
-		BEB312E3181185F500FAF98A /* TabSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312D9181185F500FAF98A /* TabSearch@2x.png */; };
+		BEB312F81815638700FAF98A /* TabActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312EE1815638700FAF98A /* TabActivity.png */; };
+		BEB312F91815638700FAF98A /* TabActivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312EF1815638700FAF98A /* TabActivity@2x.png */; };
+		BEB312FA1815638700FAF98A /* TabFeed.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F01815638700FAF98A /* TabFeed.png */; };
+		BEB312FB1815638700FAF98A /* TabFeed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F11815638700FAF98A /* TabFeed@2x.png */; };
+		BEB312FC1815638700FAF98A /* TabMoods.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F21815638700FAF98A /* TabMoods.png */; };
+		BEB312FD1815638700FAF98A /* TabMoods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F31815638700FAF98A /* TabMoods@2x.png */; };
+		BEB312FE1815638700FAF98A /* TabProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F41815638700FAF98A /* TabProfile.png */; };
+		BEB312FF1815638700FAF98A /* TabProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F51815638700FAF98A /* TabProfile@2x.png */; };
+		BEB313001815638700FAF98A /* TabSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F61815638700FAF98A /* TabSearch.png */; };
+		BEB313011815638700FAF98A /* TabSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F71815638700FAF98A /* TabSearch@2x.png */; };
 		BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */; };
 		BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */; };
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
@@ -2981,16 +2981,16 @@
 		BEB1578D173D060700DAFA2F /* _ChannelCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ChannelCover.m; sourceTree = "<group>"; };
 		BEB1578F173D061700DAFA2F /* ChannelCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelCover.h; sourceTree = "<group>"; };
 		BEB15790173D061700DAFA2F /* ChannelCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelCover.m; sourceTree = "<group>"; };
-		BEB312D0181185F500FAF98A /* TabActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabActivity.png; path = "../ios-app/Assets/Images/TabActivity.png"; sourceTree = "<group>"; };
-		BEB312D1181185F500FAF98A /* TabActivity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivity@2x.png"; path = "../ios-app/Assets/Images/TabActivity@2x.png"; sourceTree = "<group>"; };
-		BEB312D2181185F500FAF98A /* TabFeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabFeed.png; path = "../ios-app/Assets/Images/TabFeed.png"; sourceTree = "<group>"; };
-		BEB312D3181185F500FAF98A /* TabFeed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabFeed@2x.png"; path = "../ios-app/Assets/Images/TabFeed@2x.png"; sourceTree = "<group>"; };
-		BEB312D4181185F500FAF98A /* TabMoods.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabMoods.png; path = "../ios-app/Assets/Images/TabMoods.png"; sourceTree = "<group>"; };
-		BEB312D5181185F500FAF98A /* TabMoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabMoods@2x.png"; path = "../ios-app/Assets/Images/TabMoods@2x.png"; sourceTree = "<group>"; };
-		BEB312D6181185F500FAF98A /* TabProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabProfile.png; path = "../ios-app/Assets/Images/TabProfile.png"; sourceTree = "<group>"; };
-		BEB312D7181185F500FAF98A /* TabProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabProfile@2x.png"; path = "../ios-app/Assets/Images/TabProfile@2x.png"; sourceTree = "<group>"; };
-		BEB312D8181185F500FAF98A /* TabSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabSearch.png; path = "../ios-app/Assets/Images/TabSearch.png"; sourceTree = "<group>"; };
-		BEB312D9181185F500FAF98A /* TabSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabSearch@2x.png"; path = "../ios-app/Assets/Images/TabSearch@2x.png"; sourceTree = "<group>"; };
+		BEB312EE1815638700FAF98A /* TabActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabActivity.png; path = Assets/Images/TabActivity.png; sourceTree = "<group>"; };
+		BEB312EF1815638700FAF98A /* TabActivity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivity@2x.png"; path = "Assets/Images/TabActivity@2x.png"; sourceTree = "<group>"; };
+		BEB312F01815638700FAF98A /* TabFeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabFeed.png; path = Assets/Images/TabFeed.png; sourceTree = "<group>"; };
+		BEB312F11815638700FAF98A /* TabFeed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabFeed@2x.png"; path = "Assets/Images/TabFeed@2x.png"; sourceTree = "<group>"; };
+		BEB312F21815638700FAF98A /* TabMoods.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabMoods.png; path = Assets/Images/TabMoods.png; sourceTree = "<group>"; };
+		BEB312F31815638700FAF98A /* TabMoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabMoods@2x.png"; path = "Assets/Images/TabMoods@2x.png"; sourceTree = "<group>"; };
+		BEB312F41815638700FAF98A /* TabProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabProfile.png; path = Assets/Images/TabProfile.png; sourceTree = "<group>"; };
+		BEB312F51815638700FAF98A /* TabProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabProfile@2x.png"; path = "Assets/Images/TabProfile@2x.png"; sourceTree = "<group>"; };
+		BEB312F61815638700FAF98A /* TabSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabSearch.png; path = Assets/Images/TabSearch.png; sourceTree = "<group>"; };
+		BEB312F71815638700FAF98A /* TabSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabSearch@2x.png"; path = "Assets/Images/TabSearch@2x.png"; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -5942,16 +5942,16 @@
 		BEB312CF181185E500FAF98A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				BEB312D0181185F500FAF98A /* TabActivity.png */,
-				BEB312D1181185F500FAF98A /* TabActivity@2x.png */,
-				BEB312D2181185F500FAF98A /* TabFeed.png */,
-				BEB312D3181185F500FAF98A /* TabFeed@2x.png */,
-				BEB312D4181185F500FAF98A /* TabMoods.png */,
-				BEB312D5181185F500FAF98A /* TabMoods@2x.png */,
-				BEB312D6181185F500FAF98A /* TabProfile.png */,
-				BEB312D7181185F500FAF98A /* TabProfile@2x.png */,
-				BEB312D8181185F500FAF98A /* TabSearch.png */,
-				BEB312D9181185F500FAF98A /* TabSearch@2x.png */,
+				BEB312EE1815638700FAF98A /* TabActivity.png */,
+				BEB312EF1815638700FAF98A /* TabActivity@2x.png */,
+				BEB312F01815638700FAF98A /* TabFeed.png */,
+				BEB312F11815638700FAF98A /* TabFeed@2x.png */,
+				BEB312F21815638700FAF98A /* TabMoods.png */,
+				BEB312F31815638700FAF98A /* TabMoods@2x.png */,
+				BEB312F41815638700FAF98A /* TabProfile.png */,
+				BEB312F51815638700FAF98A /* TabProfile@2x.png */,
+				BEB312F61815638700FAF98A /* TabSearch.png */,
+				BEB312F71815638700FAF98A /* TabSearch@2x.png */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -6116,7 +6116,7 @@
 				01B0A971166CEE0700CAA235 /* GlossVideoThumbnailRegular@2x.png in Resources */,
 				01891A001672255F00AB07BB /* SYNHomeSectionHeaderView.xib in Resources */,
 				01891A3D16725A3400AB07BB /* PanelDay.png in Resources */,
-				BEB312DD181185F500FAF98A /* TabFeed@2x.png in Resources */,
+				BEB312FB1815638700FAF98A /* TabFeed@2x.png in Resources */,
 				01891A3E16725A3400AB07BB /* PanelDay@2x.png in Resources */,
 				01A076831676293200E1CDAD /* ButtonAdd@2x.png in Resources */,
 				01A076841676293200E1CDAD /* ButtonAddHighlighted.png in Resources */,
@@ -6283,7 +6283,7 @@
 				BE7D34F01715AD060085AB81 /* ButtonNav.png in Resources */,
 				BE7D34F11715AD060085AB81 /* ButtonNav@2x.png in Resources */,
 				1F458B0E17E1C6F8003C14AC /* AppIcon50x50.png in Resources */,
-				BEB312E1181185F500FAF98A /* TabProfile@2x.png in Resources */,
+				BEB312FF1815638700FAF98A /* TabProfile@2x.png in Resources */,
 				BE7D34F21715AD060085AB81 /* ButtonNavHighlighted.png in Resources */,
 				BE7D34F31715AD060085AB81 /* ButtonNavHighlighted@2x.png in Resources */,
 				BE7D34F91715C66B0085AB81 /* NavSelected.png in Resources */,
@@ -6357,7 +6357,7 @@
 				1F458B0417E1C4E6003C14AC /* AppIcon60x60.png in Resources */,
 				01ABBAD6172002E6007E4462 /* ChannelDetailOverlayBackground.png in Resources */,
 				01ABBAD7172002E6007E4462 /* ChannelDetailOverlayBackground@2x.png in Resources */,
-				BEB312E0181185F500FAF98A /* TabProfile.png in Resources */,
+				BEB312FE1815638700FAF98A /* TabProfile.png in Resources */,
 				01ABBADC17200992007E4462 /* PanelVideoFeedLandscape.png in Resources */,
 				01ABBADD17200992007E4462 /* PanelVideoFeedLandscape@2x.png in Resources */,
 				0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */,
@@ -6390,7 +6390,7 @@
 				BEEB6F1D1721713500FEFA43 /* PanelMenuBottom@2x.png in Resources */,
 				BEEB6F25172181FD00FEFA43 /* SearchTab.png in Resources */,
 				BEEB6F26172181FD00FEFA43 /* SearchTab@2x.png in Resources */,
-				BEB312E2181185F500FAF98A /* TabSearch.png in Resources */,
+				BEB313001815638700FAF98A /* TabSearch.png in Resources */,
 				BEEB6F27172181FD00FEFA43 /* SearchTabHighlighted.png in Resources */,
 				BEEB6F28172181FD00FEFA43 /* SearchTabHighlighted@2x.png in Resources */,
 				01ABBB3417218A60007E4462 /* SYNChannelDetailViewController.xib in Resources */,
@@ -6499,7 +6499,7 @@
 				38A200191731607F00FB9F57 /* BackgroundVideoThumbnailRegular~iphone.png in Resources */,
 				38A2001A1731607F00FB9F57 /* ButtonBack@2x~iphone.png in Resources */,
 				38A2001B1731607F00FB9F57 /* ButtonBack~iphone.png in Resources */,
-				BEB312DA181185F500FAF98A /* TabActivity.png in Resources */,
+				BEB312F81815638700FAF98A /* TabActivity.png in Resources */,
 				38A2001C1731607F00FB9F57 /* ButtonEdit@2x~iphone.png in Resources */,
 				38A2001D1731607F00FB9F57 /* ButtonEditHighlighted@2x~iphone.png in Resources */,
 				38A2001E1731607F00FB9F57 /* ButtonEditHighlighted~iphone.png in Resources */,
@@ -6537,7 +6537,7 @@
 				38A2003C1731607F00FB9F57 /* IconCategorySlideChevron@2x~iphone.png in Resources */,
 				38A2003D1731607F00FB9F57 /* IconCategorySlideChevronSelected@2x~iphone.png in Resources */,
 				BEA216DD17E9B389007C6DF7 /* ButtonFriendsRockpackHighlighted@2x~iphone.png in Resources */,
-				BEB312DB181185F500FAF98A /* TabActivity@2x.png in Resources */,
+				BEB312F91815638700FAF98A /* TabActivity@2x.png in Resources */,
 				38A2003E1731607F00FB9F57 /* IconCategorySlideChevronSelected~iphone.png in Resources */,
 				BEA216CB17E9B389007C6DF7 /* ButtonFriendsFacebookDefault.png in Resources */,
 				38A2003F1731607F00FB9F57 /* IconCategorySlideChevron~iphone.png in Resources */,
@@ -6782,7 +6782,7 @@
 				38BACE47173415DF00406597 /* ButtonCreate@2x~iphone.png in Resources */,
 				38BACE48173415DF00406597 /* ButtonCreateHighlighted@2x~iphone.png in Resources */,
 				38BACE49173415DF00406597 /* ButtonCreateHighlighted~iphone.png in Resources */,
-				BEB312DE181185F500FAF98A /* TabMoods.png in Resources */,
+				BEB312FC1815638700FAF98A /* TabMoods.png in Resources */,
 				38BACE4A173415DF00406597 /* ButtonCreate~iphone.png in Resources */,
 				38BACE4B173415DF00406597 /* ButtonVideoDelete@2x~iphone.png in Resources */,
 				38BACE4C173415DF00406597 /* ButtonVideoDeleteHighlighted@2x~iphone.png in Resources */,
@@ -6901,7 +6901,7 @@
 				1F51A69C1742A93B009907CA /* PlaceholderChannelSmall.png in Resources */,
 				1F51A69D1742A93B009907CA /* PlaceholderChannelSmall@2x.png in Resources */,
 				1F51A69E1742A93B009907CA /* PlaceholderNotificationAvatar.png in Resources */,
-				BEB312DF181185F500FAF98A /* TabMoods@2x.png in Resources */,
+				BEB312FD1815638700FAF98A /* TabMoods@2x.png in Resources */,
 				1F51A69F1742A93B009907CA /* PlaceholderNotificationAvatar@2x.png in Resources */,
 				1F51A6A01742A93B009907CA /* PlaceholderNotificationChannel.png in Resources */,
 				1F51A6A11742A93B009907CA /* PlaceholderNotificationChannel@2x.png in Resources */,
@@ -6938,7 +6938,7 @@
 				1F46C86D1743C2FD00C6089D /* ButtonReportHighlighted@2x~iphone.png in Resources */,
 				1F46C86E1743C2FD00C6089D /* ButtonReportHighlighted~iphone.png in Resources */,
 				1F46C86F1743C2FD00C6089D /* ButtonReportSelected@2x~iphone.png in Resources */,
-				BEB312DC181185F500FAF98A /* TabFeed.png in Resources */,
+				BEB312FA1815638700FAF98A /* TabFeed.png in Resources */,
 				1F46C8701743C2FD00C6089D /* ButtonReportSelected~iphone.png in Resources */,
 				1F22C18A1744ED0F0065D4BF /* ButtonSave.png in Resources */,
 				1F22C18B1744ED0F0065D4BF /* ButtonSave@2x.png in Resources */,
@@ -7104,7 +7104,7 @@
 				BE7D033E179E94D6008053DC /* ButtonInviteFriendHighlighted@2x~iphone.png in Resources */,
 				BEA216D117E9B389007C6DF7 /* ButtonFriendsFacebookHighlighted@2x~iphone.png in Resources */,
 				BE7D033F179E94D6008053DC /* ButtonInviteFriendHighlighted~iphone.png in Resources */,
-				BEB312E3181185F500FAF98A /* TabSearch@2x.png in Resources */,
+				BEB313011815638700FAF98A /* TabSearch@2x.png in Resources */,
 				BE7D034A179EA04C008053DC /* ButtonInviteDefault@2x.png in Resources */,
 				BE7D034C179EA04C008053DC /* ButtonInviteHighlighted.png in Resources */,
 				BE7D034D179EA04C008053DC /* ButtonInviteHighlighted@2x.png in Resources */,
