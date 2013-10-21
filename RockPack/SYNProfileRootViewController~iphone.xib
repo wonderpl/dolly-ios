@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="KiH-Yk-GZo" customClass="SYNYouHeaderView">
-                    <rect key="frame" x="0.0" y="71" width="320" height="48"/>
+                    <rect key="frame" x="0.0" y="65" width="320" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Luy-aO-skH">
@@ -92,7 +92,10 @@
     </objects>
     <resources>
         <image name="ButtonProfileChannels.png" width="160" height="44"/>
+        <image name="ButtonProfileChannels.png" width="160" height="44"/>
         <image name="ButtonProfileChannelsHighlighted.png" width="160" height="44"/>
+        <image name="ButtonProfileChannelsHighlighted.png" width="160" height="44"/>
+        <image name="ButtonProfileChannelsSelected.png" width="160" height="44"/>
         <image name="ButtonProfileChannelsSelected.png" width="160" height="44"/>
     </resources>
 </document>
