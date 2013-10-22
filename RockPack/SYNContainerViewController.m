@@ -139,6 +139,8 @@
     
     [super addChildViewController: toViewController];
     
+    // This will minimize the view for iPad as it is not taking all of the screen anymore
+    toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
     
     [[self view] addSubview: toViewController.view];
     
