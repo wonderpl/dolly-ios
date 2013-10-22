@@ -17,8 +17,10 @@
 #import "Video.h"
 #import "UIImage+Tint.h"
 
+
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
+@property (nonatomic, readonly) CGFloat scrollViewMargin;
 
 @end
 
@@ -40,7 +42,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     [self.collectionView reloadData];
     
-    NSLog(@"%@", NSStringFromCGRect(self.frame));
+    //self.collectionView.clipsToBounds = NO;
 }
 
 
@@ -104,27 +106,30 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
     
-    // collection view
-    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
+    
+    
+    
+    // == Collection View == //
     
     CGRect collectionFrame = self.collectionView.frame;
-    CGSize correntSize = CGSizeZero;
-    if(IS_IPHONE)
-    {
-        correntSize = CGSizeMake(248.0f, 139.0f);
-    }
-    else
-    {
-        correntSize = CGSizeMake(0.0f, 139.0f);
-        if([[SYNDeviceManager sharedInstance] isLandscape])
-            correntSize.width = 248.0f;
-        else
-            correntSize.width = 248.0f;
-        
-    }
-    collectionFrame.size = correntSize;
+    
+    // the idea is to put a margin so as to show the next video cell while adding an inset of the same value
+    collectionFrame.size = CGSizeMake(self.sizeForItemAtDefaultPath.width + self.scrollViewMargin, self.sizeForItemAtDefaultPath.height);
     
     self.collectionView.frame = collectionFrame;
+    
+    // now set the bounds
+    
+    self.collectionView.contentSize = CGSizeMake(collectionFrame.size.width, collectionFrame.size.width * (float)self.collectionData.count);
+    
+    UIEdgeInsets scrollViewInsets = self.collectionView.contentInset;
+    scrollViewInsets.left = self.scrollViewMargin;
+    self.collectionView.contentInset = scrollViewInsets;
+    
+    // finally center it
+    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
+    
+    
 }
 
 
@@ -134,9 +139,11 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 {
     [super prepareForReuse];
     
+    self.collectionData = @[];
+    
+    [self.collectionView reloadData];
+    
 }
-
-
 
 
 - (void) showVideo: (UITapGestureRecognizer *) recognizer
@@ -147,6 +154,38 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 
 #pragma mark - UICollectionView DataSource
 
+// utility method (overriding abstract class)
+-(CGSize)sizeForItemAtDefaultPath
+{
+    return [self collectionView:self.collectionView
+                         layout:self.collectionView.collectionViewLayout
+         sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+}
+
+
+- (CGSize) collectionView: (UICollectionView *) collectionView
+                   layout: (UICollectionViewLayout*) collectionViewLayout
+   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    CGSize correctSize = CGSizeZero;
+    if(IS_IPHONE)
+    {
+        
+        correctSize.width = 248.0f;
+        correctSize.height = 139.0f;
+    }
+    else
+    {
+        
+        correctSize.width = 288.0f;
+        correctSize.height = 139.0f;
+            
+        
+    }
+    
+    return correctSize;
+    
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -173,6 +212,12 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     
 }
+
+-(CGFloat)scrollViewMargin
+{
+    return 40.0f;
+}
+
 
 
 @end
