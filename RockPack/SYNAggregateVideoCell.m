@@ -11,6 +11,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "SYNAggregateVideoItemCell.h"
+#import "SYNDeviceManager.h"
 #import "UIColor+SYNColor.h"
 #import "VideoInstance.h"
 #import "Video.h"
@@ -18,7 +19,6 @@
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet UILabel *likeLabel;
 
 @end
 
@@ -32,7 +32,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     [super awakeFromNib];
     
     self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
-    self.likeLabel.font = [UIFont lightCustomFontOfSize: self.likeLabel.font.pointSize];
     self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
     
     
@@ -104,99 +103,31 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
-}
-
-
-- (void) setSupplementaryMessageWithDictionary: (NSDictionary *) messageDictionary
-{
-    NSNumber *likesNumber = messageDictionary[@"star_count"] ? messageDictionary[@"star_count"] : @(0);
-    NSString *likesString = [NSString stringWithFormat: @"%i likes", likesNumber.integerValue];
     
-    NSAttributedString *likesAttributedString = [[NSAttributedString alloc] initWithString: [NSString stringWithFormat: @"%@ ", likesString]
-                                                                                attributes: self.boldTextAttributes];
+    // collection view
+    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
     
-    if (likesNumber.integerValue == 0)
+    CGRect collectionFrame = self.collectionView.frame;
+    CGSize correntSize = CGSizeZero;
+    if(IS_IPHONE)
     {
-        if (IS_IPAD)
-        {
-            self.likesNumberLabel.text = @"0";
-            self.likeLabel.hidden = YES;
-        }
-        else
-        {
-            self.likeLabel.attributedText = likesAttributedString;
-        }
-        
-        return;
-    }
-    
-    SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    
-    NSArray *users = messageDictionary[@"starrers"] ? messageDictionary[@"starrers"] : @[];
-    
-    // initial setup
-    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
-    
-    if (!IS_IPAD && users.count > 3)
-    {
-        [attributedCompleteString appendAttributedString: likesAttributedString];
+        correntSize = CGSizeMake(248.0f, 139.0f);
     }
     else
     {
-        self.likesNumberLabel.text = [NSString stringWithFormat: @"%i", likesNumber.integerValue];
-    }
-    
-    if (users.count > 1 && users.count < 4 && IS_IPAD)
-    {
-        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @"including "
-                                                                                          attributes: self.lightTextAttributes]];
-    }
-    
-    self.likeButton.selected = NO;
-    
-    if (users.count > 0)
-    {
-        ChannelOwner *co;
-        NSString *name;
+        correntSize = CGSizeMake(0.0f, 139.0f);
+        if([[SYNDeviceManager sharedInstance] isLandscape])
+            correntSize.width = 248.0f;
+        else
+            correntSize.width = 248.0f;
         
-        for (int i = 0; i < users.count; i++)
-        {
-            co = (ChannelOwner *) users[i];
-            
-            if (!co)
-            {
-                continue;
-            }
-            
-            if ([co.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-            {
-                name = @"You";
-                self.likeButton.selected = YES;
-            }
-            else
-            {
-                name = co.displayName;
-            }
-            
-            [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: name
-                                                                                              attributes: self.boldTextAttributes]];
-            
-            if ((users.count - i) == 2) // the one before last
-            {
-                [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" & "
-                                                                                                  attributes: self.boldTextAttributes]];
-            }
-            else if ((users.count - i) > 2)
-            {
-                [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @", "
-                                                                                                  attributes: self.boldTextAttributes]];
-            }
-        }
     }
+    collectionFrame.size = correntSize;
     
-    self.likeLabel.attributedText = attributedCompleteString;
+    self.collectionView.frame = collectionFrame;
 }
+
+
 
 
 - (void) prepareForReuse

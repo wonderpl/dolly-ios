@@ -38,7 +38,6 @@
 
 - (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString;
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary;
-- (void) setSupplementaryMessageWithDictionary: (NSDictionary *) messageDictionary;
 
 // new
 

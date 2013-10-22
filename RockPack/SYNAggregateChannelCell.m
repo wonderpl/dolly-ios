@@ -47,9 +47,6 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 }
 
 
-
-
-
 - (void) setViewControllerDelegate: (id<SYNAggregateCellDelegate>) viewControllerDelegate
 {
     [super setViewControllerDelegate: viewControllerDelegate];
