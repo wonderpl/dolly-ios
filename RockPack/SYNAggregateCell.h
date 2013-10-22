@@ -23,6 +23,8 @@
 
 @property (nonatomic, readonly) CGSize sizeForItemAtDefaultPath;
 
+@property (nonatomic, strong) IBOutlet UIView* backgroundView;
+
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
 

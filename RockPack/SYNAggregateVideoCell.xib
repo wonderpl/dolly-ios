@@ -14,6 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="310" height="280"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" id="3Gf-DD-R5M" userLabel="Background View">
+                        <rect key="frame" x="0.0" y="0.0" width="310" height="280"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="8" userLabel="User Thumbnail">
                         <rect key="frame" x="131" y="10" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,6 +119,7 @@
             <size key="customSize" width="353" height="261"/>
             <connections>
                 <outlet property="addButton" destination="Zr3-MY-aIb" id="aUZ-Mt-eu8"/>
+                <outlet property="backgroundView" destination="3Gf-DD-R5M" id="nZN-gE-3LS"/>
                 <outlet property="bottomControlsView" destination="XuX-7e-o3L" id="yUj-ze-mGk"/>
                 <outlet property="collectionView" destination="lMc-y5-kdQ" id="QfR-qq-uHx"/>
                 <outlet property="likeButton" destination="31" id="vVq-My-Ibh"/>

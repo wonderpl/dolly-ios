@@ -42,7 +42,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     [self.collectionView reloadData];
     
-    //self.collectionView.clipsToBounds = NO;
+    self.collectionView.clipsToBounds = NO;
 }
 
 
@@ -116,6 +116,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     // the idea is to put a margin so as to show the next video cell while adding an inset of the same value
     collectionFrame.size = CGSizeMake(self.sizeForItemAtDefaultPath.width + self.scrollViewMargin, self.sizeForItemAtDefaultPath.height);
     
+    
     self.collectionView.frame = collectionFrame;
     
     // now set the bounds
@@ -124,7 +125,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     UIEdgeInsets scrollViewInsets = self.collectionView.contentInset;
     scrollViewInsets.left = self.scrollViewMargin;
-    self.collectionView.contentInset = scrollViewInsets;
+    //self.collectionView.contentInset = scrollViewInsets;
     
     // finally center it
     self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);

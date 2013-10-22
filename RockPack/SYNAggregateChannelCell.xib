@@ -14,6 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="310" height="364"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" id="fSH-ql-UNu" userLabel="Background View">
+                        <rect key="frame" x="0.0" y="0.0" width="310" height="364"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="13" userLabel="User Thumb Image View">
                         <rect key="frame" x="131" y="10" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -100,6 +105,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="353" height="361"/>
             <connections>
+                <outlet property="backgroundView" destination="fSH-ql-UNu" id="vXn-Qg-I2t"/>
                 <outlet property="bottomControlsView" destination="myh-LN-hBb" id="wAL-8V-gWG"/>
                 <outlet property="collectionView" destination="Khg-wM-3Jg" id="Q4C-Q4-HIo"/>
                 <outlet property="followButton" destination="xtc-cX-EZE" id="gJb-aa-q0q"/>
@@ -113,6 +119,8 @@
     </objects>
     <resources>
         <image name="ButtonFeedLikeDefault.png" width="44" height="44"/>
+        <image name="ButtonFeedLikeDefault.png" width="44" height="44"/>
+        <image name="ButtonFeedLikeSelected.png" width="44" height="44"/>
         <image name="ButtonFeedLikeSelected.png" width="44" height="44"/>
     </resources>
 </document>
