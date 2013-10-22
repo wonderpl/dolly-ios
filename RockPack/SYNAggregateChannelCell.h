@@ -10,4 +10,7 @@
 
 @interface SYNAggregateChannelCell : SYNAggregateCell
 
+@property (nonatomic, strong) IBOutlet UIButton* followButton;
+@property (nonatomic, strong) IBOutlet UIButton* shareButton;
+
 @end

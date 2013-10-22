@@ -21,12 +21,13 @@
 @interface SYNAggregateCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
-
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
 
 @property (nonatomic, strong) IBOutlet UILabel *mainTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
+
+@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 
 @property (nonatomic, strong) NSDictionary *boldTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;

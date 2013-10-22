@@ -91,6 +91,22 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 }
 
 
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGSize viewSize = self.frame.size;
+    CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
+    
+    // user thumbnail
+    self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
+    self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
+    
+    // bottom controls
+    self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
+}
+
+
 - (void) setSupplementaryMessageWithDictionary: (NSDictionary *) messageDictionary
 {
     NSNumber *likesNumber = messageDictionary[@"star_count"] ? messageDictionary[@"star_count"] : @(0);
