@@ -3795,7 +3795,7 @@
 				01982560162ADE3300216900 /* Profile */,
 				BE7D3496171412EC0085AB81 /* Side Navigator */,
 				BE08158F16D3C46800ADB1DC /* Search */,
-				BE0AAD2616E6521300DA958E /* Search Controller */,
+				BE0AAD2616E6521300DA958E /* Search Controller (old) */,
 				BE7D02F1178C1D13008053DC /* Users */,
 				01F8E77B16B039E6000D44B9 /* Video viewer */,
 			);
@@ -5208,19 +5208,14 @@
 		BE08158F16D3C46800ADB1DC /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				BE29A32D16DE8C8600C00F92 /* SYNSearchRootViewController.h */,
-				BE29A32E16DE8C8700C00F92 /* SYNSearchRootViewController.m */,
-				BE29A32A16DE56AB00C00F92 /* SYNSearchVideosViewController.h */,
-				BE29A32B16DE56AB00C00F92 /* SYNSearchVideosViewController.m */,
-				BE29A33016DE8CAE00C00F92 /* SYNSearchChannelsViewController.h */,
-				BE29A33116DE8CAE00C00F92 /* SYNSearchChannelsViewController.m */,
-				BE7D02E3178AF310008053DC /* SYNSearchUsersViewController.h */,
-				BE7D02E4178AF310008053DC /* SYNSearchUsersViewController.m */,
-				BEEB6F1E1721807100FEFA43 /* SYNSearchTabView.h */,
-				BEEB6F1F1721807100FEFA43 /* SYNSearchTabView.m */,
+				38A2FF1817314B0200FB9F57 /* Search Controller Cells */,
 				BEB31302181565CE00FAF98A /* SYNSearchResultsViewController.h */,
 				BEB31303181565CE00FAF98A /* SYNSearchResultsViewController.m */,
 				BEB31304181565CE00FAF98A /* SYNSearchResultsViewController.xib */,
+				BE1B3DC0180D4EEB00DA2BD6 /* SYNDiscoverViewController.h */,
+				BE1B3DC1180D4EEB00DA2BD6 /* SYNDiscoverViewController.m */,
+				BE1B3DC5180D50C700DA2BD6 /* SYNDiscoverViewController.xib */,
+				BE1B3DC2180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -5279,10 +5274,19 @@
 			name = Master;
 			sourceTree = "<group>";
 		};
-		BE0AAD2616E6521300DA958E /* Search Controller */ = {
+		BE0AAD2616E6521300DA958E /* Search Controller (old) */ = {
 			isa = PBXGroup;
 			children = (
-				38A2FF1817314B0200FB9F57 /* Search Controller Cells */,
+				BE29A32D16DE8C8600C00F92 /* SYNSearchRootViewController.h */,
+				BE29A32E16DE8C8700C00F92 /* SYNSearchRootViewController.m */,
+				BE29A32A16DE56AB00C00F92 /* SYNSearchVideosViewController.h */,
+				BE29A32B16DE56AB00C00F92 /* SYNSearchVideosViewController.m */,
+				BE29A33016DE8CAE00C00F92 /* SYNSearchChannelsViewController.h */,
+				BE29A33116DE8CAE00C00F92 /* SYNSearchChannelsViewController.m */,
+				BE7D02E3178AF310008053DC /* SYNSearchUsersViewController.h */,
+				BE7D02E4178AF310008053DC /* SYNSearchUsersViewController.m */,
+				BEEB6F1E1721807100FEFA43 /* SYNSearchTabView.h */,
+				BEEB6F1F1721807100FEFA43 /* SYNSearchTabView.m */,
 				BE2D2143171C5A0600B4B755 /* SYNSearchBoxViewController.h */,
 				BE2D2144171C5A0600B4B755 /* SYNSearchBoxViewController.m */,
 				BE0AAD2716E6534300DA958E /* SYNAutocompleteSuggestionsController.h */,
@@ -5292,12 +5296,8 @@
 				BEF3448C172FCB78008F98FF /* SYNSearchBoxView.h */,
 				BEF3448D172FCB79008F98FF /* SYNSearchBoxView.m */,
 				38A2FF161730828100FB9F57 /* SYNSearchBoxIphoneView.xib */,
-				BE1B3DC0180D4EEB00DA2BD6 /* SYNDiscoverViewController.h */,
-				BE1B3DC1180D4EEB00DA2BD6 /* SYNDiscoverViewController.m */,
-				BE1B3DC5180D50C700DA2BD6 /* SYNDiscoverViewController.xib */,
-				BE1B3DC2180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib */,
 			);
-			name = "Search Controller";
+			name = "Search Controller (old)";
 			sourceTree = "<group>";
 		};
 		BE1B3DC7180D7F4000DA2BD6 /* Helpers */ = {
