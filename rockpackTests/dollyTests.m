@@ -59,6 +59,8 @@
     
     [appDelegate.searchRegistry registerVideosFromDictionary:jsonDictionary];
     
+    // Get the objects from core data
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     
@@ -76,6 +78,25 @@
     STAssertNil(error, @"Error occured while fetching the data");
     
     STAssertEquals(fetchedObjects.count, (NSUInteger)10, @"Not all objects parsed");
+    
+    // == Clear the Search Registry == //
+    
+    BOOL success = [appDelegate.searchRegistry clearImportContextFromEntityName: @"VideoInstance"];
+    
+    STAssertTrue(success, @"Could not clear search registry from VideoInstance");
+    
+    
+    // == Do it Again! == //
+    
+    [appDelegate.searchRegistry registerVideosFromDictionary:jsonDictionary];
+    
+    fetchedObjects = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest error: &error];
+    
+    STAssertNil(error, @"Error occured while fetching the data for the second time (after clearing db)");
+    
+    STAssertEquals(fetchedObjects.count, (NSUInteger)10, @"Not all objects parsed for the second time (after clearing db)");
+    
+    
     
     
 }

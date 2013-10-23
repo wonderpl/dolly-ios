@@ -257,8 +257,6 @@
 {
     // == Check for Validity == //
     
-    //[self clearImportContextFromEntityName:@"VideoInstance"];
-    
     NSDictionary *videosDictionary = dictionary[@"videos"];
     
     if (!videosDictionary || ![videosDictionary isKindOfClass: [NSDictionary class]])
