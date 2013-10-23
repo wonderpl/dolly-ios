@@ -71,7 +71,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.videosArray = [NSArray arrayWithArray:fetchedObjects];
         
-        
         [wself.videosCollectionView reloadData];
         
     };
@@ -156,6 +155,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
     
     NSArray* results = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest error: error];
+    
+    
     
     return results;
     

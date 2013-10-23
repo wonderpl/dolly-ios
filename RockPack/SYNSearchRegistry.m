@@ -255,6 +255,8 @@
 
 - (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary
 {
+    
+    
     // == Check for Validity == //
     
     NSDictionary *videosDictionary = dictionary[@"videos"];
