@@ -562,7 +562,7 @@
     
     Channel *channel = (Channel *) self.channels[indexPath.row];
     
-    [appDelegate.viewStackManager viewChannelDetails: channel];
+    [appDelegate.viewStackManager viewChannelDetails: channel withNavigationController:self.navigationController];
 }
 
 

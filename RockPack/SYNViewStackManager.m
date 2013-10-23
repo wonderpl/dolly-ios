@@ -60,13 +60,77 @@
     [self hideSideNavigator];
 }
 
+- (void) viewProfileDetails: (ChannelOwner *) channelOwner withNavigationController:(UINavigationController*) navigationController
+{
+    if (!channelOwner)
+    {
+        return;
+    }
+    
+    SYNProfileRootViewController *profileVC =
+    (SYNProfileRootViewController *) [self topControllerMatchingTypeString: NSStringFromClass([SYNProfileRootViewController class])];
+    
+    if (profileVC)
+    {
+        [navigationController popToViewController: profileVC animated:NO];
+    }
+    else
+    {
+        profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
+        
+        [navigationController pushViewController:profileVC animated:nil];
+
+    }
+    
+    profileVC.channelOwner = channelOwner;
+    
+    [self hideSideNavigator];
+}
+
+
 
 - (void) viewChannelDetails: (Channel *) channel
 {
-    [self viewChannelDetails: channel
-              withAutoplayId: nil];
+    [self viewChannelDetails: channel withAutoplayId: nil];
 }
 
+- (void) viewChannelDetails: (Channel *) channel withNavigationController:(UINavigationController*) navigationController
+{
+    [self viewChannelDetails: channel withAutoplayId: nil withNavigationController: navigationController];
+}
+
+
+
+- (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId withNavigationController:(UINavigationController*) navigationController
+{
+    if (!channel)
+    {
+        return;
+    }
+    
+    SYNChannelDetailViewController *channelVC =
+    (SYNChannelDetailViewController *) [self topControllerMatchingTypeString: NSStringFromClass([SYNChannelDetailViewController class])];
+    
+    
+    if (channelVC)
+    {
+        channelVC.channel = channel;
+        channelVC.autoplayVideoId = autoplayId;
+        [navigationController popToViewController:channelVC animated:nil];
+
+
+    }
+    else
+    {
+        channelVC = [[SYNChannelDetailViewController alloc] initWithChannel: channel
+                                                                  usingMode: kChannelDetailsModeDisplay];
+        channelVC.autoplayVideoId = autoplayId;
+        [navigationController pushViewController:channelVC animated:nil];
+
+    }
+    
+    [self hideSideNavigator];
+}
 
 - (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId
 {
@@ -111,7 +175,7 @@
     
     [UIView animateWithDuration: 0.5f
                           delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                        options: UIViewAnimationOptionCurveEaseInOut |UIViewAnimationOptionBeginFromCurrentState
                      animations: ^{
                          // Contract thumbnail view
                          self.navigationController.topViewController.view.alpha = 0.0;

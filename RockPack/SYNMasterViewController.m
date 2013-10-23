@@ -506,7 +506,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 
 #pragma mark - Search (Text Delegate) Methods
-
+/*
 - (IBAction) showSearchBoxField: (id) sender
 {
     
@@ -562,7 +562,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
    
 }
-
+*/
 
 - (void) searchTyped: (NSNotification*) notification
 {
@@ -710,7 +710,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         NSString  *showSearchString = notification.userInfo[@"showSearch"];
         
         if(IS_IPAD || showSearchString)
-            self.searchButton.hidden = NO;
+         //   self.searchButton.hidden = NO;
         
         self.sideNavigationButton.hidden = NO;
         self.closeSearchButton.hidden = YES;
@@ -729,7 +729,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     else
     {
         // ex. when clicking on 'EDIT' in channel details
-        self.searchButton.hidden = YES;
+     //   self.searchButton.hidden = YES;
         self.sideNavigationButton.hidden = YES;
         self.closeSearchButton.hidden = YES;
         self.pageTitleLabel.hidden = YES;
@@ -1012,8 +1012,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     if (appearance == NavigationButtonsAppearanceWhite) // white buttons
     {
-        [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearchCD"] forState:UIControlStateNormal];
-        [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearchHighlightedCD"] forState:UIControlStateHighlighted];
+       // [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearchCD"] forState:UIControlStateNormal];
+       // [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearchHighlightedCD"] forState:UIControlStateHighlighted];
         
         [self.closeSearchButton setImage:[UIImage imageNamed:@"ButtonCancelCD"] forState:UIControlStateNormal];
         [self.closeSearchButton setImage:[UIImage imageNamed:@"ButtonCancelCD"] forState:UIControlStateHighlighted];
@@ -1028,8 +1028,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     else if (appearance == NavigationButtonsAppearanceBlack) // black buttons
     {
-        [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearch"] forState:UIControlStateNormal];
-        [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearchHighlighted"] forState:UIControlStateHighlighted];
+       // [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearch"] forState:UIControlStateNormal];
+       // [self.searchButton setImage:[UIImage imageNamed:@"ButtonSearchHighlighted"] forState:UIControlStateHighlighted];
         
         [self.closeSearchButton setImage:[UIImage imageNamed:@"ButtonCancel"] forState:UIControlStateNormal];
         [self.closeSearchButton setImage:[UIImage imageNamed:@"ButtonCancelHighlighted"] forState:UIControlStateHighlighted];
@@ -1091,7 +1091,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     if(!IS_IPAD && show)
     {
-        self.searchButton.hidden = YES;
+      //  self.searchButton.hidden = YES;
     }
     
     self.pageTitleLabel.alpha = !targetAlpha;
@@ -1109,12 +1109,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          
                          if(!IS_IPAD && !show)
                          {
-                             self.searchButton.alpha = 0.0f;
+                           /*  self.searchButton.alpha = 0.0f;
                              self.searchButton.hidden = NO;
                              [UIView animateWithDuration:0.3f animations:^{
                                  self.searchButton.alpha = 1.0f;
                              }];
-                             
+                             */
                          }
                      }];
     
@@ -1182,7 +1182,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
             else
             {
                 
-                [self showSearchBoxField:nil];
+               // [self showSearchBoxField:nil];
                 
                 self.closeSearchButton.hidden = YES;
                 self.sideNavigationButton.hidden = NO;

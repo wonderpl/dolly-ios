@@ -43,7 +43,7 @@ typedef enum NotificationMessageType : NSInteger {
 
 @property (nonatomic, strong) IBOutlet UIView* errorContainerView;
 
-@property (nonatomic, strong) IBOutlet UIButton* searchButton;
+@property (nonatomic, strong) IBOutlet UIView* tabsView;
 
 @property (nonatomic, strong) IBOutlet UIView* darkOverlayView;
 @property (nonatomic, strong) IBOutlet UIButton* closeSearchButton;

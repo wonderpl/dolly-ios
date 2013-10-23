@@ -10,6 +10,7 @@
                 <outlet property="channelThumbnailCollectionView" destination="0Yx-dc-wS8" id="Fnp-Jg-2dm"/>
                 <outlet property="channelsTabButton" destination="QSG-DB-FMW" id="aNr-3b-Wrl"/>
                 <outlet property="headerChannelsView" destination="KiH-Yk-GZo" id="fa4-Lm-gOB"/>
+                <outlet property="mainScrollView" destination="ruw-g4-aRU" id="dgT-JT-yTn"/>
                 <outlet property="subscriptionLayoutIPhone" destination="4RR-LR-xcl" id="WDG-c9-7JK"/>
                 <outlet property="subscriptionThumbnailCollectionView" destination="Gpk-go-IZt" id="aG2-t4-yQi"/>
                 <outlet property="subscriptionsTabButton" destination="Luy-aO-skH" id="jiL-wq-x9V"/>
@@ -21,68 +22,114 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="KiH-Yk-GZo" customClass="SYNYouHeaderView">
-                    <rect key="frame" x="0.0" y="65" width="320" height="48"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ruw-g4-aRU">
+                    <rect key="frame" x="0.0" y="20" width="320" height="554"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Luy-aO-skH">
-                            <rect key="frame" x="159" y="0.0" width="161" height="48"/>
+                        <view contentMode="scaleToFill" id="KiH-Yk-GZo" customClass="SYNYouHeaderView">
+                            <rect key="frame" x="0.0" y="400" width="320" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="ButtonProfileChannels.png">
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Luy-aO-skH">
+                                    <rect key="frame" x="159" y="0.0" width="161" height="48"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ButtonProfileChannels.png">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected" image="ButtonProfileChannelsSelected.png"/>
+                                    <state key="highlighted" image="ButtonProfileChannelsHighlighted.png"/>
+                                    <connections>
+                                        <action selector="subscriptionsTabTapped:" destination="-1" eventType="touchUpInside" id="AKC-P0-Xo0"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QSG-DB-FMW">
+                                    <rect key="frame" x="0.0" y="0.0" width="159" height="48"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ButtonProfileChannels.png">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected" image="ButtonProfileChannelsSelected.png"/>
+                                    <state key="highlighted" image="ButtonProfileChannelsHighlighted.png"/>
+                                    <connections>
+                                        <action selector="channelsTabTapped:" destination="-1" eventType="touchUpInside" id="9lr-2U-hVo"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="Gpk-go-IZt">
+                            <rect key="frame" x="0.0" y="344" width="320" height="597"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4RR-LR-xcl">
+                                <size key="itemSize" width="158" height="158"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="eWO-h0-NzZ"/>
+                                <outlet property="delegate" destination="-1" id="CxB-n2-HkS"/>
+                            </connections>
+                        </collectionView>
+                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8">
+                            <rect key="frame" x="0.0" y="344" width="320" height="597"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OHx-Au-cg1">
+                                <size key="itemSize" width="158" height="158"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="s14-R1-b7L"/>
+                                <outlet property="delegate" destination="-1" id="U4k-zh-4K9"/>
+                            </connections>
+                        </collectionView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="q5m-iH-3Ci">
+                            <rect key="frame" x="-1" y="1" width="320" height="253"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AvatarProfile.png" id="5Wb-qH-nzQ" userLabel="ImageView - Avatar">
+                            <rect key="frame" x="112" y="205" width="96" height="96"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="29c-Ki-1uc">
+                            <rect key="frame" x="94" y="309" width="131" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xoe-yj-Heo">
+                            <rect key="frame" x="101" y="334" width="117" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xAT-fj-vhM">
+                            <rect key="frame" x="145" y="357" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <state key="normal" title="edit">
+                                <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="ButtonProfileChannelsSelected.png"/>
-                            <state key="highlighted" image="ButtonProfileChannelsHighlighted.png"/>
-                            <connections>
-                                <action selector="subscriptionsTabTapped:" destination="-1" eventType="touchUpInside" id="AKC-P0-Xo0"/>
-                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QSG-DB-FMW">
-                            <rect key="frame" x="0.0" y="0.0" width="159" height="48"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SOt-r8-4Fb">
+                            <rect key="frame" x="280" y="254" width="38" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="ButtonProfileChannels.png">
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="ButtonProfileChannelsSelected.png"/>
-                            <state key="highlighted" image="ButtonProfileChannelsHighlighted.png"/>
-                            <connections>
-                                <action selector="channelsTabTapped:" destination="-1" eventType="touchUpInside" id="9lr-2U-hVo"/>
-                            </connections>
                         </button>
                     </subviews>
-                </view>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="Gpk-go-IZt">
-                    <rect key="frame" x="0.0" y="110" width="320" height="457"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4RR-LR-xcl">
-                        <size key="itemSize" width="158" height="158"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="eWO-h0-NzZ"/>
-                        <outlet property="delegate" destination="-1" id="CxB-n2-HkS"/>
-                    </connections>
-                </collectionView>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8">
-                    <rect key="frame" x="0.0" y="110" width="320" height="457"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OHx-Au-cg1">
-                        <size key="itemSize" width="158" height="158"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="s14-R1-b7L"/>
-                        <outlet property="delegate" destination="-1" id="U4k-zh-4K9"/>
-                    </connections>
-                </collectionView>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -90,6 +137,7 @@
         </view>
     </objects>
     <resources>
+        <image name="AvatarProfile.png" width="60" height="61"/>
         <image name="ButtonProfileChannels.png" width="160" height="44"/>
         <image name="ButtonProfileChannelsHighlighted.png" width="160" height="44"/>
         <image name="ButtonProfileChannelsSelected.png" width="160" height="44"/>
