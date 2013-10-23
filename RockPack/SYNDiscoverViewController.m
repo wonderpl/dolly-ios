@@ -21,7 +21,7 @@ static NSString* kCategoryCellIndetifier = @"SYNDiscoverCategoriesCell";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
-                                        UITableViewDataSource, UITableViewDelegate>
+                                        UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView* searchFieldBGImageView;
 @property (nonatomic, strong) IBOutlet UITextField* searchField;
@@ -94,16 +94,27 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kDiscoverViewId];
     
-    CGRect resultsFrame = self.searchResultsController.view.frame;
-    resultsFrame.origin.x = self.searchField.frame.size.width + 10.0f; // collection views should be aligned to the search field
-    resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
-    resultsFrame.origin.y = 0.0f;
-    resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
-    self.searchResultsController.view.frame = resultsFrame;
-    self.searchResultsController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    if(IS_IPAD)
+    {
+        CGRect resultsFrame = self.searchResultsController.view.frame;
+        resultsFrame.origin.x = self.searchField.frame.size.width + 10.0f; // collection views should be aligned to the search field
+        resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
+        resultsFrame.origin.y = 0.0f;
+        resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
+        self.searchResultsController.view.frame = resultsFrame;
+        self.searchResultsController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        [self addChildViewController:self.searchResultsController]; // containment
+        [self.view addSubview:self.searchResultsController.view];
+    }
+    else // IS_IPHONE
+    {
+        
+        
+        
+        
+    }
     
-    [self addChildViewController:self.searchResultsController]; // containment
-    [self.view addSubview:self.searchResultsController.view];
     
     // == Load and Display Categories == //
     
@@ -233,7 +244,26 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 
-#pragma mark - TextField Delegate and Autocomplete Methods
+#pragma mark - UITextField Delegate and Autocomplete Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    
+    if(IS_IPAD)
+    {
+        [self.searchResultsController searchForString:textField.text];
+        
+        
+    }
+    else
+    {
+        
+    }
+    
+    
+    return YES;
+}
 
 - (void) textViewDidBeginEditing: (UITextView *) textView
 {

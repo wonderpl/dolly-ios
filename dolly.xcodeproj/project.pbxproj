@@ -5945,11 +5945,11 @@
 		BEB3134F1817D67F00FAF98A /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				BEB313531817D7C100FAF98A /* Cells */,
 				BE1B3DC0180D4EEB00DA2BD6 /* SYNDiscoverViewController.h */,
 				BE1B3DC1180D4EEB00DA2BD6 /* SYNDiscoverViewController.m */,
 				BE1B3DC5180D50C700DA2BD6 /* SYNDiscoverViewController.xib */,
 				BE1B3DC2180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib */,
+				BEB313531817D7C100FAF98A /* Cells */,
 			);
 			name = Discover;
 			sourceTree = "<group>";
@@ -5957,10 +5957,10 @@
 		BEB313511817D6EE00FAF98A /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				BEB313521817D70500FAF98A /* Cells */,
 				BEB31302181565CE00FAF98A /* SYNSearchResultsViewController.h */,
 				BEB31303181565CE00FAF98A /* SYNSearchResultsViewController.m */,
 				BEB31304181565CE00FAF98A /* SYNSearchResultsViewController.xib */,
+				BEB313521817D70500FAF98A /* Cells */,
 			);
 			name = Search;
 			sourceTree = "<group>";
