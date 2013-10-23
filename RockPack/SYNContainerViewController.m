@@ -31,14 +31,16 @@
 
 #define VIEW_CONTROLLER_TRANSITION_DURATION 0.4
 
-@interface SYNContainerViewController () <UIPopoverControllerDelegate, UITextViewDelegate>
+@interface SYNContainerViewController () <UIPopoverControllerDelegate, UITextViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic) BOOL didNotSwipeMessageInbox;
 @property (nonatomic, readonly) CGFloat currentScreenOffset;
 @property (nonatomic, strong) NSArray *viewControllers;
-@property (nonatomic, strong) SYNAbstractViewController *currentViewController;
+@property (nonatomic, strong) UINavigationController *currentViewController;
 @property (nonatomic, strong) UIPopoverController *actionButtonPopover;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
+@property (nonatomic, weak) SYNProfileRootViewController *tmpProfileRootView;
+
 
 @end
 
@@ -66,9 +68,15 @@
     
     SYNFeedRootViewController *feedRootViewController = [[SYNFeedRootViewController alloc] initWithViewId: kFeedViewId];
     
+    UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
+
+    
     // == Channels Page == //
     
     SYNChannelsRootViewController *channelsRootViewController = [[SYNChannelsRootViewController alloc] initWithViewId: kChannelsViewId];
+    
+    UINavigationController *navChannelsRootViewController = [[UINavigationController alloc] initWithRootViewController:channelsRootViewController];
+
     
     if (IS_IPAD)
     {
@@ -81,8 +89,12 @@
     }
     
     // == Profile Page == //
-    
+
     SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
+    
+    UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    
+    //profileViewController.moveTabDelegate = self;
     
     if (!IS_IPAD)
     {
@@ -101,15 +113,20 @@
     SYNActivityViewController *activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];
     profileViewController.channelOwner = self.appDelegate.currentUser;
     
+    UINavigationController *navActivityViewController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
+
     // == Discovery (Search) Page == //
     SYNDiscoverViewController *searchViewController = [[SYNDiscoverViewController alloc] initWithViewId: kDiscoverViewId];
     
+    UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+
     // == Feed Page == //
     
     SYNMoodRootViewController *moodRootViewController = [[SYNMoodRootViewController alloc] initWithViewId: kMoodViewId];
+    UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
     
     // == Hold the vc locally
-    self.viewControllers = @[feedRootViewController, channelsRootViewController, profileViewController, searchViewController, moodRootViewController,activityViewController];
+    self.viewControllers = @[navFeedViewController, navChannelsRootViewController, navProfileViewController, navSearchViewController, navMoodRootViewController,navActivityViewController];
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
@@ -120,7 +137,7 @@
 
 
 
-- (void) setCurrentViewController: (SYNAbstractViewController *) currentViewController
+- (void) setCurrentViewController: (UINavigationController *) currentViewController
 {
     if (!currentViewController)
     {
@@ -128,8 +145,8 @@
         return;
     }
     
-    __weak SYNAbstractViewController *toViewController = currentViewController;
-    __weak SYNAbstractViewController *fromViewController = _currentViewController;
+    __weak UINavigationController *toViewController = currentViewController;
+    __weak UINavigationController *fromViewController = _currentViewController;
     
     // We need to set this here, as effectively we have commited to the current view controller at this stage
     // and any methods that access this before the transition has completed, need to get the new view controller
@@ -139,19 +156,22 @@
     
     [super addChildViewController: toViewController];
     
-    // This will minimize the view for iPad as it is not taking all of the screen anymore
-    toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-    
     [[self view] addSubview: toViewController.view];
     
     // == Define the completion block == //
     
     void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
-        [fromViewController.view removeFromSuperview];
         
-        [fromViewController removeFromParentViewController];
         
-        [toViewController didMoveToParentViewController: self];
+        for (UIViewController *tmpController in fromViewController.viewControllers) {
+            [tmpController.view removeFromSuperview];
+        }
+        
+        
+        for (UIViewController *tmpController in toViewController.viewControllers) {
+            [tmpController didMoveToParentViewController: self];
+        }
+
     };
     
     // == Do the Transition selectively == //
@@ -176,9 +196,9 @@
     }
 }
 
-- (SYNAbstractViewController *) viewControllerByPageName: (NSString *) pageName
+- (UINavigationController *) viewControllerByPageName: (NSString *) pageName
 {
-    SYNAbstractViewController *child;
+    UINavigationController *child;
     
     for (child in self.viewControllers)
     {
@@ -209,15 +229,18 @@
     return index;
 }
 
-
 - (void) navigateToPage: (NSInteger) index
 {
+    
     if (index < 0 || index > self.viewControllers.count)
     {
         self.currentViewController = nil; // will be caught by the setter
     }
     
+    
     self.currentViewController = self.viewControllers[index];
+    
+
 }
 
 
@@ -234,5 +257,25 @@
     return NSStringFromClass([self class]);
 }
 
+
+- (void) moveTab : (UIScrollView*) scrollView{
+   // NSLog(@"moveTab container");
+    
+    if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
+    {
+        [self.moveTabDelegate moveTab:scrollView];
+    }
+}
+
+
+- (void) observeValueForKeyPath: (NSString *) keyPath
+                       ofObject: (id) object
+                         change: (NSDictionary *) change
+                        context: (void *) context
+{
+    if ([keyPath isEqualToString: @"scrollViewKVO"]){
+        NSLog(@"something changed");
+    }
+}
 
 @end

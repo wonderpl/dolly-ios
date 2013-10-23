@@ -60,6 +60,7 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
+@property (strong, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
 //New Outlets for user profile
 @property (strong, nonatomic) IBOutlet UIView *userProfileView;
@@ -70,8 +71,6 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatiorView;
-
-
 @end
 
 
@@ -89,6 +88,7 @@ SYNImagePickerControllerDelegate>
                                                  selector: @selector(handleDataModelChange:)
                                                      name: NSManagedObjectContextObjectsDidChangeNotification
                                                    object: appDelegate.searchManagedObjectContext];
+        
     }
     
     return self;
@@ -126,8 +126,6 @@ SYNImagePickerControllerDelegate>
     
     [self.subscriptionThumbnailCollectionView registerNib: thumbnailCellNib
                                forCellWithReuseIdentifier: @"SYNChannelMidCell"];
-    
-
     self.isIPhone = IS_IPHONE;
     
     // Main Collection View
@@ -141,7 +139,6 @@ SYNImagePickerControllerDelegate>
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
-        
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
         
     }else{
@@ -152,17 +149,16 @@ SYNImagePickerControllerDelegate>
     
     [self setUpHeader];
     
-    
     if (self.isIPhone)
     {
         [self updateTabStates];
     }
     
+    [self updateMainScrollView];
+    
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
     
-    
-
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -171,6 +167,8 @@ SYNImagePickerControllerDelegate>
 
 - (void) viewDidAppear: (BOOL) animated
 {
+    self.navigationController.navigationBar.hidden = YES;
+
 
     [super viewDidAppear: animated];
     
@@ -229,6 +227,8 @@ SYNImagePickerControllerDelegate>
 
 - (void) viewWillDisappear: (BOOL) animated
 {
+    self.navigationController.navigationBar.hidden = NO;
+
     self.channelThumbnailCollectionView.delegate = nil;
     self.subscriptionThumbnailCollectionView.delegate = nil;
     self.deletionModeActive = NO;
@@ -376,6 +376,15 @@ SYNImagePickerControllerDelegate>
     }
 }
 
+- (void) updateMainScrollView {
+    
+    CGRect newFrame = self.mainScrollView.frame;
+    newFrame.size.height += self.channelThumbnailCollectionView.contentSize.height;
+    self.mainScrollView.frame = newFrame;
+    self.mainScrollView.contentSize = CGSizeMake(self.mainScrollView.frame.size.width, self.mainScrollView.frame.size.height);
+
+}
+
 
 - (void) userDataChanged: (NSNotification*) notification
 {
@@ -417,6 +426,12 @@ SYNImagePickerControllerDelegate>
          }
      }];
     
+}
+
+//Doesnt work as expected, check it out.
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 
@@ -808,11 +823,15 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 [self.view.window.layer addAnimation: animation
                                               forKey: nil];
                 
-                [self presentViewController: channelCreationVC
+                
+                //presented twice
+               /* [self presentViewController: channelCreationVC
                                    animated: NO
                                  completion: ^{
+                                     
+                                     */
                                      [self createAndDisplayNewChannel];
-                                 }];
+                               //  }];
             }
             
             return;
@@ -827,13 +846,32 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         channel = self.channelOwner.subscriptions[indexPath.row];
     }
     
-    [appDelegate.viewStackManager viewChannelDetails: channel];
-}
+    
+    
+  //  [self.navigationController pushViewController:channel animated:nil];
 
+    
+    [appDelegate.viewStackManager viewChannelDetails: channel];
+
+}
 
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
+    
+    if (self.isIPhone) {
+      //  NSLog(@"SCROLLING");
+        
+        if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
+        {
+            
+            [self.moveTabDelegate moveTab:scrollView];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollMoved" object:scrollView userInfo:nil];
+
+
+    }
     if (!self.isIPhone)
     {
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
@@ -857,6 +895,14 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             [self.channelThumbnailCollectionView setContentOffset: offset];
         }
     }
+    
+    
+    if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
+    {
+        [self.moveTabDelegate moveTab:scrollView];
+    }
+
+    
 }
 
 
@@ -895,7 +941,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 - (IBAction) channelsTabTapped: (id) sender
 {
-    
     self.subscriptionsTabActive = NO;
     [self updateTabStates];
 }
@@ -919,6 +964,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (self.subscriptionsTabActive)
     {
+        
         [self.headerChannelsView setColorsForText: [UIColor colorWithRed: 106.0f / 255.0f
                                                                    green: 114.0f / 255.0f
                                                                     blue: 122.0f / 255.0f
@@ -1246,30 +1292,23 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     if([cell.superview isEqual:self.channelThumbnailCollectionView])
     {
         
-        if (self.isDeletionModeActive)
-        {
-            self.deletionModeActive = NO;
-            return;
-        }
-        
         Channel *channel;
         
         if (self.isUserProfile && indexPath.row == 0)
         {
-            [self createAndDisplayNewChannel];
+        //never gets called, first cell gets called and created in didSelectItem
+           // [self createAndDisplayNewChannel];
             
             return;
         }
         else
         {
-            self.indexPathToDelete = indexPath;
+            
+          //  self.indexPathToDelete = indexPath;
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         
-        
-        [appDelegate.viewStackManager viewChannelDetails: channel];
-        
-        
+        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
         
     }
     
@@ -1281,13 +1320,22 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
         
         Channel *channel = self.channelOwner.subscriptions[indexPath.item];
         
-        [appDelegate.viewStackManager viewChannelDetails: channel];
-        
+        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
         
     }
     
+}
+
+
+
+#pragma mark - move tab delegate
+
+-(void) moveTab{
+    
     
 }
+
+
 
 
 @end

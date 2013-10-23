@@ -351,8 +351,6 @@
         self.coverChooserMasterView = self.coverChooserController.view;
         
         
-        
-        
     }
     else
     {
@@ -446,6 +444,8 @@
 
 - (void) viewWillAppear: (BOOL) animated
 {
+    
+    
     [super viewWillAppear: animated];
     
     self.editedVideos = NO;
@@ -1416,17 +1416,14 @@
                          change: (NSDictionary *) change
                         context: (void *) context
 {
-    if ([keyPath isEqualToString: kTextViewContentSizeKey])
-    {
+    if ([keyPath isEqualToString: kTextViewContentSizeKey]){
         UITextView *tv = object;
         
         // Bottom vertical alignment
         CGFloat topCorrect = ([tv bounds].size.height - [tv contentSize].height);
         
-        
         // topCorrect = (topCorrect < 0.0 ? 0.0 : topCorrect);
-        
-        
+                
         [tv setContentOffset: (CGPoint) { .x = 0, .y = -topCorrect}
                     animated: NO];
     }

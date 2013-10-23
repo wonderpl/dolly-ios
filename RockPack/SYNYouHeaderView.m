@@ -116,6 +116,8 @@
     [repaintedString addAttribute: NSForegroundColorAttributeName value: self.parenthesesColor range: rightParentheseRange];
     [repaintedString addAttribute: NSForegroundColorAttributeName value: self.numberColor range: numberRange];
     label.attributedText = repaintedString;
+    
+
 }
 
 @end

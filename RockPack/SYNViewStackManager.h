@@ -51,6 +51,10 @@ typedef void(^ViewStackReturnBlock)(void);
 
 - (void) viewProfileDetails: (ChannelOwner *) channelOwner;
 - (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId;
+- (void) viewProfileDetails: (ChannelOwner *) channelOwner withNavigationController:(UINavigationController*) navigationController;
+- (void) viewChannelDetails: (Channel *) channel withNavigationController:(UINavigationController*) navigationController;
+- (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId withNavigationController:(UINavigationController*) navigationController;
+
 - (void) viewChannelDetails: (Channel *) channel;
 
 - (void) presentExistingChannelsController;
