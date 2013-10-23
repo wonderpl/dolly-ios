@@ -9,9 +9,12 @@
 #import "SYNSearchResultsViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNSearchResultsVideoCell.h"
-
+#import "SYNSearchResultsUserCell.h"
 
 typedef void(^SearchResultCompleteBlock)(int);
+
+static NSString *kSearchResultVideoCell = @"SYNSearchResultsVideoCell";
+static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 @interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -44,6 +47,11 @@ typedef void(^SearchResultCompleteBlock)(int);
     self.videosArray = @[];
     self.usersArray = @[];
     
+    [self.videosCollectionView registerNib:[UINib nibWithNibName:kSearchResultVideoCell bundle:nil]
+                forCellWithReuseIdentifier:kSearchResultVideoCell];
+    
+    [self.usersCollectionView registerNib:[UINib nibWithNibName:kSearchResultUserCell bundle:nil]
+               forCellWithReuseIdentifier:kSearchResultUserCell];
     
     // == Define Completion Blocks for operations == //
     
@@ -63,6 +71,9 @@ typedef void(^SearchResultCompleteBlock)(int);
         
         wself.videosArray = [NSArray arrayWithArray:fetchedObjects];
         
+        
+        [wself.videosCollectionView reloadData];
+        
     };
     
     
@@ -74,11 +85,13 @@ typedef void(^SearchResultCompleteBlock)(int);
         
         if(error)
         {
-            //handle error
+            // handle error
             return ;
         }
         
         wself.usersArray = [NSArray arrayWithArray:fetchedObjects];
+        
+        [wself.usersCollectionView reloadData];
         
     };
     
@@ -162,9 +175,9 @@ typedef void(^SearchResultCompleteBlock)(int);
     NSInteger count = 0;
     
     if(collectionView == self.videosCollectionView)
-        return self.videosArray.count;
+        count = self.videosArray.count;
     else if(collectionView == self.usersCollectionView)
-        return self.usersArray.count;
+        count = self.usersArray.count;
     
     return count;
 }
@@ -174,20 +187,27 @@ typedef void(^SearchResultCompleteBlock)(int);
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     UICollectionViewCell* cell;
+    
     if(collectionView == self.videosCollectionView)
     {
         
+        SYNSearchResultsVideoCell* videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultVideoCell
+                                                                                         forIndexPath:indexPath];
+        
+        cell = videoCell;
         
         
     }
     else if(collectionView == self.usersCollectionView)
     {
         
+        SYNSearchResultsUserCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultUserCell
+                                                                                       forIndexPath:indexPath];
         
         
-        
-        
+        cell = userCell;
     }
+    
     return cell;
     
 }
@@ -212,6 +232,7 @@ typedef void(^SearchResultCompleteBlock)(int);
 
 - (void) setVideoSearchOperation: (MKNetworkOperation *) runningSearchOperation
 {
+    
     if (_videoSearchOperation)
     {
         [_videoSearchOperation cancel];
@@ -222,6 +243,7 @@ typedef void(^SearchResultCompleteBlock)(int);
 
 - (void) setUserSearchOperation: (MKNetworkOperation *) runningSearchOperation
 {
+    
     if (_userSearchOperation)
     {
         [_userSearchOperation cancel];

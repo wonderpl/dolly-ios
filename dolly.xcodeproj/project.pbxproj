@@ -162,7 +162,6 @@
 		01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 01363EB4162FDEA600FFAA09 /* NSObject+Blocks.m */; };
 		01363EC116300F3A00FFAA09 /* SYNVideoThumbnailWideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01363EC016300F3A00FFAA09 /* SYNVideoThumbnailWideCell.xib */; };
 		01363F241630B81400FFAA09 /* SYNVideoThumbnailWideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01363F231630B81400FFAA09 /* SYNVideoThumbnailWideCell.m */; };
-		0141CC701771DA4A00B617A7 /* SampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0141CC6F1771DA4A00B617A7 /* SampleSpec.m */; };
 		0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */; };
 		01450AF5171DB4B5009F54CD /* ButtonAddSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF3171DB4B5009F54CD /* ButtonAddSelected.png */; };
 		01450AF6171DB4B5009F54CD /* ButtonAddSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF4171DB4B5009F54CD /* ButtonAddSelected@2x.png */; };
@@ -219,7 +218,7 @@
 		01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD41629BDC40080F26B /* UIKit.framework */; };
 		01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD61629BDC40080F26B /* Foundation.framework */; };
 		01901A9F1771CCBA007DBEAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01901A9D1771CCBA007DBEAC /* InfoPlist.strings */; };
-		01901AA21771CCBA007DBEAC /* rockpackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01901AA11771CCBA007DBEAC /* rockpackTests.m */; };
+		01901AA21771CCBA007DBEAC /* dollyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01901AA11771CCBA007DBEAC /* dollyTests.m */; };
 		01946B551683209600354601 /* GlossChannelSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 01946B4D1683209600354601 /* GlossChannelSmall.png */; };
 		01946B561683209600354601 /* GlossChannelSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01946B4E1683209600354601 /* GlossChannelSmall@2x.png */; };
 		01946B571683209600354601 /* GlossVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 01946B4F1683209600354601 /* GlossVideo.png */; };
@@ -935,7 +934,6 @@
 		38C3FA7517203D6600F126B1 /* PanelDayPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C3FA7317203D6600F126B1 /* PanelDayPortrait@2x.png */; };
 		38FD441F172A9E280086B524 /* SYNChannelDetailViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FD441E172A9E280086B524 /* SYNChannelDetailViewController~iphone.xib */; };
 		38FD4421172AC9B30086B524 /* SYNVideoThumbnailRegularCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FD4420172AC9B30086B524 /* SYNVideoThumbnailRegularCell~iphone.xib */; };
-		A77EDC52ADCD4B7BA4217379 /* libPods-rockpackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsMainTableViewController.m */; };
 		BE03A6CC16F7697900245314 /* ButtonSettingsHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */; };
 		BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */; };
@@ -1615,7 +1613,6 @@
 		01363EC016300F3A00FFAA09 /* SYNVideoThumbnailWideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNVideoThumbnailWideCell.xib; sourceTree = "<group>"; };
 		01363F221630B81400FFAA09 /* SYNVideoThumbnailWideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoThumbnailWideCell.h; sourceTree = "<group>"; };
 		01363F231630B81400FFAA09 /* SYNVideoThumbnailWideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoThumbnailWideCell.m; sourceTree = "<group>"; };
-		0141CC6F1771DA4A00B617A7 /* SampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSpec.m; sourceTree = "<group>"; };
 		0142ED8716B19FBE008694DA /* SYNProfileRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileRootViewController.h; sourceTree = "<group>"; };
 		0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileRootViewController.m; sourceTree = "<group>"; };
 		01450AF3171DB4B5009F54CD /* ButtonAddSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonAddSelected.png; path = Assets/Images/ButtonAddSelected.png; sourceTree = "<group>"; };
@@ -1694,8 +1691,8 @@
 		01901A961771CCBA007DBEAC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		01901A9C1771CCBA007DBEAC /* dollyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "dollyTests-Info.plist"; sourceTree = "<group>"; };
 		01901A9E1771CCBA007DBEAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		01901AA01771CCBA007DBEAC /* rockpackTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rockpackTests.h; sourceTree = "<group>"; };
-		01901AA11771CCBA007DBEAC /* rockpackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rockpackTests.m; sourceTree = "<group>"; };
+		01901AA01771CCBA007DBEAC /* dollyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dollyTests.h; sourceTree = "<group>"; };
+		01901AA11771CCBA007DBEAC /* dollyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dollyTests.m; sourceTree = "<group>"; };
 		01901AA31771CCBA007DBEAC /* dollyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dollyTests-Prefix.pch"; sourceTree = "<group>"; };
 		01946B4D1683209600354601 /* GlossChannelSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GlossChannelSmall.png; path = Assets/Images/GlossChannelSmall.png; sourceTree = "<group>"; };
 		01946B4E1683209600354601 /* GlossChannelSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GlossChannelSmall@2x.png"; path = "Assets/Images/GlossChannelSmall@2x.png"; sourceTree = "<group>"; };
@@ -3122,7 +3119,6 @@
 				01901A971771CCBA007DBEAC /* SenTestingKit.framework in Frameworks */,
 				01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */,
 				01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */,
-				A77EDC52ADCD4B7BA4217379 /* libPods-rockpackTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3697,9 +3693,8 @@
 		01901A9A1771CCBA007DBEAC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				01901AA01771CCBA007DBEAC /* rockpackTests.h */,
-				01901AA11771CCBA007DBEAC /* rockpackTests.m */,
-				0141CC6F1771DA4A00B617A7 /* SampleSpec.m */,
+				01901AA01771CCBA007DBEAC /* dollyTests.h */,
+				01901AA11771CCBA007DBEAC /* dollyTests.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
 			);
 			name = Tests;
@@ -6095,6 +6090,9 @@
 					010DEFCF1629BDC40080F26B = {
 						DevelopmentTeam = 3M76KMT8LS;
 					};
+					01901A941771CCBA007DBEAC = {
+						TestTargetID = 010DEFCF1629BDC40080F26B;
+					};
 				};
 			};
 			buildConfigurationList = 010DEFCA1629BDC40080F26B /* Build configuration list for PBXProject "dolly" */;
@@ -7595,8 +7593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01901AA21771CCBA007DBEAC /* rockpackTests.m in Sources */,
-				0141CC701771DA4A00B617A7 /* SampleSpec.m in Sources */,
+				01901AA21771CCBA007DBEAC /* dollyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7815,7 +7812,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rockpack.app/rockpack";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7838,7 +7835,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rockpack.app/rockpack";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7861,7 +7858,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/rockpack.app/rockpack";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;

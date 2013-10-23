@@ -92,7 +92,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // == Handle Search Results Controller for iPad (integrated in the view), for iPhone it is loaded upon demand as a different page
     
-    self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kDiscoverViewId];
+    self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
     
     if(IS_IPAD)
     {
@@ -243,24 +243,19 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     return cell;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
+    
+    [self dispatchSearch:suggestion];
+}
 
 #pragma mark - UITextField Delegate and Autocomplete Methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     
-    
-    if(IS_IPAD)
-    {
-        [self.searchResultsController searchForString:textField.text];
-        
-        
-    }
-    else
-    {
-        
-    }
-    
+    [self dispatchSearch:textField.text];
     
     return YES;
 }
@@ -353,6 +348,23 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                               forResource: appDelegate.searchEntity
                                                                              withComplete: processBlock
                                                                                  andError: errorBlock];
+}
+
+
+- (void) dispatchSearch:(NSString*)searchTerm
+{
+    if(IS_IPAD)
+    {
+        
+        [self.searchResultsController searchForString:searchTerm];
+        
+    }
+    else
+    {
+        
+        
+        
+    }
 }
 
 #pragma mark - Close Button Delegates

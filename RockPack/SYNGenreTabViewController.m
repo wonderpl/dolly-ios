@@ -216,9 +216,6 @@
 }
 
 
-
-
-
 #pragma mark - TabView Delagate methods
 
 - (void) handleMainTap: (UIView *) tab

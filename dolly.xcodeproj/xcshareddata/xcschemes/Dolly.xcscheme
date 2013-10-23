@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "01901A941771CCBA007DBEAC"
-               BuildableName = "rockpackTests.octest"
-               BlueprintName = "rockpackTests"
-               ReferencedContainer = "container:rockpack.xcodeproj">
+               BuildableName = "dollyTests.octest"
+               BlueprintName = "dollyTests"
+               ReferencedContainer = "container:dolly.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

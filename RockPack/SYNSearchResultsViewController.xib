@@ -39,7 +39,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SgG-lq-X96" userLabel="Videos Collection View">
-                    <rect key="frame" x="129" y="157" width="337" height="384"/>
+                    <rect key="frame" x="129" y="157" width="337" height="559"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N5E-Iz-Q71">
                         <size key="itemSize" width="50" height="50"/>
@@ -54,7 +54,7 @@
                     </connections>
                 </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-Ly-eu6" userLabel="Users Collection View">
-                    <rect key="frame" x="178" y="192" width="337" height="384"/>
+                    <rect key="frame" x="178" y="192" width="363" height="556"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hqH-9q-DcO">
                         <size key="itemSize" width="50" height="50"/>
