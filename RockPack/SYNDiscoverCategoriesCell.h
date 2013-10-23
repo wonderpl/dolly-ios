@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNCategoryCollectionViewCell : UICollectionViewCell
+@interface SYNDiscoverCategoriesCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel* label;
+@property (nonatomic, strong) IBOutlet UIImageView* arrow;
 
 @end

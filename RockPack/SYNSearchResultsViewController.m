@@ -8,6 +8,8 @@
 
 #import "SYNSearchResultsViewController.h"
 #import "SYNNetworkEngine.h"
+#import "SYNSearchResultsVideoCell.h"
+
 
 typedef void(^SearchResultCompleteBlock)(int);
 
@@ -188,6 +190,22 @@ typedef void(^SearchResultCompleteBlock)(int);
     }
     return cell;
     
+}
+
+#pragma mark - Tab Delegate
+
+-(IBAction)tabPressed:(id)sender
+{
+    if(self.videosTabButton == sender)
+    {
+        self.videosCollectionView.hidden = NO;
+        self.usersCollectionView.hidden = YES;
+    }
+    else if (self.usersTabButton == sender)
+    {
+        self.videosCollectionView.hidden = YES;
+        self.usersCollectionView.hidden = NO;
+    }
 }
 
 #pragma mark - Accessors

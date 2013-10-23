@@ -14,10 +14,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="310" height="280"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" id="3Gf-DD-R5M" userLabel="Background View">
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" id="3Gf-DD-R5M" userLabel="Background View">
                         <rect key="frame" x="0.0" y="0.0" width="310" height="280"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="8" userLabel="User Thumbnail">
                         <rect key="frame" x="131" y="10" width="48" height="48"/>
@@ -115,7 +115,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <size key="customSize" width="353" height="261"/>
             <connections>
                 <outlet property="addButton" destination="Zr3-MY-aIb" id="aUZ-Mt-eu8"/>

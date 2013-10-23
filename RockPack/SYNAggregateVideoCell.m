@@ -42,7 +42,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     [self.collectionView reloadData];
     
-    self.collectionView.clipsToBounds = NO;
 }
 
 
@@ -99,6 +98,20 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     CGSize viewSize = self.frame.size;
     CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
     
+    CGRect bgViewFrame = self.backgroundView.frame;
+    if(IS_IPHONE)
+    {
+        bgViewFrame.size.width = 320.0f;
+        
+    }
+    else
+    {
+        bgViewFrame.size.width = 400.0f;
+    }
+    
+    self.backgroundView.frame = bgViewFrame;
+    self.backgroundView.center = CGPointMake(middleOfView, self.backgroundView.center.y);
+    
     // user thumbnail
     self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
     self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
@@ -121,11 +134,11 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     // now set the bounds
     
-    self.collectionView.contentSize = CGSizeMake(collectionFrame.size.width, collectionFrame.size.width * (float)self.collectionData.count);
+    //self.collectionView.contentSize = CGSizeMake(collectionFrame.size.width, collectionFrame.size.width * (float)self.collectionData.count);
     
     UIEdgeInsets scrollViewInsets = self.collectionView.contentInset;
     scrollViewInsets.left = self.scrollViewMargin;
-    //self.collectionView.contentInset = scrollViewInsets;
+    self.collectionView.contentInset = scrollViewInsets;
     
     // finally center it
     self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);

@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNCategoryCollectionViewCell.h"
+#import "SYNDiscoverCategoriesCell.h"
 #import "UIFont+SYNFont.h"
 
-@implementation SYNCategoryCollectionViewCell
+@implementation SYNDiscoverCategoriesCell
 
 - (void) awakeFromNib
 {
