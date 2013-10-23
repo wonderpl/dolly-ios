@@ -20,13 +20,19 @@
 
 @interface SYNAggregateCell : UICollectionViewCell
 
-@property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
 
+@property (nonatomic, readonly) CGSize sizeForItemAtDefaultPath;
+
+@property (nonatomic, strong) IBOutlet UIView* backgroundView;
+
+@property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
 
 @property (nonatomic, strong) IBOutlet UILabel *mainTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
+
+@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 
 @property (nonatomic, strong) NSDictionary *boldTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
@@ -37,7 +43,6 @@
 
 - (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString;
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary;
-- (void) setSupplementaryMessageWithDictionary: (NSDictionary *) messageDictionary;
 
 // new
 

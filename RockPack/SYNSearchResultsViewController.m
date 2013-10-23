@@ -8,10 +8,12 @@
 
 #import "SYNSearchResultsViewController.h"
 #import "SYNNetworkEngine.h"
+#import "SYNSearchResultsVideoCell.h"
+
 
 typedef void(^SearchResultCompleteBlock)(int);
 
-@interface SYNSearchResultsViewController ()
+@interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 // search operations
 @property (nonatomic, strong) MKNetworkOperation* videoSearchOperation;
@@ -23,6 +25,10 @@ typedef void(^SearchResultCompleteBlock)(int);
 @property (nonatomic, copy) SearchResultCompleteBlock videoSearchCompleteBlock;
 @property (nonatomic, copy) SearchResultCompleteBlock userSearchCompleteBlock;
 
+// Data Arrays
+@property (nonatomic, strong) NSArray* videosArray;
+@property (nonatomic, strong) NSArray* usersArray;
+
 @end
 
 @implementation SYNSearchResultsViewController
@@ -33,20 +39,46 @@ typedef void(^SearchResultCompleteBlock)(int);
 {
     [super viewDidLoad];
     
+    // == Initialise the arrays == //
+    
+    self.videosArray = @[];
+    self.usersArray = @[];
+    
+    
     // == Define Completion Blocks for operations == //
+    
+    SYNSearchResultsViewController* wself = self;
     
     self.videoSearchCompleteBlock = ^(int count) {
         
-        // 1. Display the number of results
-        // 2. Update Collection View
+        NSError* error;
+        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kVideoInstance
+                                                       withError: &error];
+        
+        if(error)
+        {
+            //handle error
+            return ;
+        }
+        
+        wself.videosArray = [NSArray arrayWithArray:fetchedObjects];
         
     };
     
     
     self.userSearchCompleteBlock = ^(int count) {
         
-        // 1. Display the number of results
-        // 2. Update Collection View
+        NSError* error;
+        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kUser
+                                                       withError: &error];
+        
+        if(error)
+        {
+            //handle error
+            return ;
+        }
+        
+        wself.usersArray = [NSArray arrayWithArray:fetchedObjects];
         
     };
     
@@ -91,6 +123,89 @@ typedef void(^SearchResultCompleteBlock)(int);
     self.userSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
                                                                       inRange: self.dataRequestRange
                                                                    onComplete: self.userSearchCompleteBlock];
+}
+
+
+-(NSArray*)getSearchEntitiesByName:(NSString*)entityName withError:(NSError**)error
+{
+    if(!entityName)
+        return nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    
+    fetchRequest.entity = [NSEntityDescription entityForName: entityName
+                                      inManagedObjectContext: appDelegate.searchManagedObjectContext];
+    
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", self.viewId]];
+    
+    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
+    
+    
+    return [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: error];
+    
+}
+
+
+#pragma mark - UICollectionView Delegate/Data Source
+
+
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
+{
+    return 1;
+}
+
+
+- (NSInteger) collectionView: (UICollectionView *) collectionView numberOfItemsInSection: (NSInteger) section
+{
+    NSInteger count = 0;
+    
+    if(collectionView == self.videosCollectionView)
+        return self.videosArray.count;
+    else if(collectionView == self.usersCollectionView)
+        return self.usersArray.count;
+    
+    return count;
+}
+
+
+- (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
+                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionViewCell* cell;
+    if(collectionView == self.videosCollectionView)
+    {
+        
+        
+        
+    }
+    else if(collectionView == self.usersCollectionView)
+    {
+        
+        
+        
+        
+        
+    }
+    return cell;
+    
+}
+
+#pragma mark - Tab Delegate
+
+-(IBAction)tabPressed:(id)sender
+{
+    if(self.videosTabButton == sender)
+    {
+        self.videosCollectionView.hidden = NO;
+        self.usersCollectionView.hidden = YES;
+    }
+    else if (self.usersTabButton == sender)
+    {
+        self.videosCollectionView.hidden = YES;
+        self.usersCollectionView.hidden = NO;
+    }
 }
 
 #pragma mark - Accessors

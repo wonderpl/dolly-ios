@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNSearchAutocompleteTableViewCell : UITableViewCell
+@interface SYNDiscoverAutocompleteCell : UITableViewCell
 @property (nonatomic, strong) UIView* separatorView;
 @end

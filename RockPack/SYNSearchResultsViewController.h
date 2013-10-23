@@ -10,4 +10,10 @@
 
 @interface SYNSearchResultsViewController : SYNAbstractViewController
 
+@property (nonatomic, strong) IBOutlet UIButton* videosTabButton;
+@property (nonatomic, strong) IBOutlet UIButton* usersTabButton;
+
+@property (nonatomic, strong) IBOutlet UICollectionView* videosCollectionView;
+@property (nonatomic, strong) IBOutlet UICollectionView* usersCollectionView;
+
 @end

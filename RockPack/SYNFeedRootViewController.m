@@ -678,8 +678,6 @@ typedef void(^FeedDataErrorBlock)(void);
         else // force show a specific message
             cell.messageLabel.text = feedItem.title;
 
-        [cell setSupplementaryMessageWithDictionary: @{@"star_count": videoInstance.video ? videoInstance.video.starCount : @0,
-         @"starrers": videoInstance ? [videoInstance.starrers array] : @[]}];
         
         NSMutableArray* videos = [NSMutableArray array];
         VideoInstance* vi;

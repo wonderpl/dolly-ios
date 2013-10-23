@@ -8,13 +8,15 @@
 
 #import "SYNDiscoverViewController.h"
 #import "UIFont+SYNFont.h"
-#import "SYNSearchAutocompleteTableViewCell.h"
+#import "SYNDiscoverAutocompleteCell.h"
 #import "Genre.h"
-#import "SYNCategoryCollectionViewCell.h"
+#import "SYNSearchResultsViewController.h"
+#import "SYNDeviceManager.h"
+#import "SYNDiscoverCategoriesCell.h"
 
 #define kAutocompleteTime 0.2
 
-static NSString* kCategoryCellIndetifier = @"SYNCategoryCollectionViewCell";
+static NSString* kCategoryCellIndetifier = @"kCategoryCellIndetifier";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
@@ -33,6 +35,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 @property (nonatomic, weak) MKNetworkOperation* autocompleteNetworkOperation;
 @property (nonatomic, strong) NSArray* autocompleteSuggestionsArray;
 @property (nonatomic, strong) IBOutlet UITableView* autocompleteTableView;
+
+@property (nonatomic, strong) SYNSearchResultsViewController* searchResultsController;
 
 @property (nonatomic, strong) NSDictionary* colorMapForCells;
 
@@ -82,8 +86,20 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.autocompleteSuggestionsArray = [NSArray array]; // just so we have an array to return count == 0
     
     
+    // == Handle Search Results Controller for iPad (integrated in the view), for iPhone it is loaded upon demand as a different page
     
+    self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kDiscoverViewId];
     
+    CGRect resultsFrame = self.searchResultsController.view.frame;
+    resultsFrame.origin.x = self.searchField.frame.size.width + 10.0f; // collection views should be aligned to the search field
+    resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
+    resultsFrame.origin.y = 0.0f;
+    resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
+    self.searchResultsController.view.frame = resultsFrame;
+    self.searchResultsController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [self addChildViewController:self.searchResultsController]; // containment
+    [self.view addSubview:self.searchResultsController.view];
     
     // == Load and Display Categories == //
     
@@ -138,15 +154,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     Genre* genre = self.categoriesDataArray[indexPath.item];
     
-    SYNCategoryCollectionViewCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier: kCategoryCellIndetifier
-                                                                                forIndexPath: indexPath];
+    SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier: kCategoryCellIndetifier
+                                                                            forIndexPath: indexPath];
     
     
     categoryCell.backgroundColor = [UIColor redColor];
     
     categoryCell.label.text = genre.name;
-    
-    
     
     
     return categoryCell;
@@ -173,7 +187,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     UITableViewCell *cell;
     
     if (!(cell = [tableView dequeueReusableCellWithIdentifier: kAutocompleteCellIdentifier]))
-        cell = [[SYNSearchAutocompleteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: kAutocompleteCellIdentifier];
+        cell = [[SYNDiscoverAutocompleteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: kAutocompleteCellIdentifier];
     
     cell.textLabel.text = [((NSString*)self.autocompleteSuggestionsArray[indexPath.row]) capitalizedString];
     

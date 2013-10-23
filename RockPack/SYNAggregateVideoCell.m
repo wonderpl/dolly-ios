@@ -11,14 +11,16 @@
 #import "SYNAppDelegate.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "SYNAggregateVideoItemCell.h"
+#import "SYNDeviceManager.h"
 #import "UIColor+SYNColor.h"
 #import "VideoInstance.h"
 #import "Video.h"
 #import "UIImage+Tint.h"
 
+
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet UILabel *likeLabel;
+@property (nonatomic, readonly) CGFloat scrollViewMargin;
 
 @end
 
@@ -32,7 +34,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     [super awakeFromNib];
     
     self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
-    self.likeLabel.font = [UIFont lightCustomFontOfSize: self.likeLabel.font.pointSize];
     self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
     
     
@@ -41,7 +42,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     [self.collectionView reloadData];
     
-    NSLog(@"%@", NSStringFromCGRect(self.frame));
 }
 
 
@@ -91,105 +91,73 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 }
 
 
-- (void) setSupplementaryMessageWithDictionary: (NSDictionary *) messageDictionary
+-(void)layoutSubviews
 {
-    NSNumber *likesNumber = messageDictionary[@"star_count"] ? messageDictionary[@"star_count"] : @(0);
-    NSString *likesString = [NSString stringWithFormat: @"%i likes", likesNumber.integerValue];
+    [super layoutSubviews];
     
-    NSAttributedString *likesAttributedString = [[NSAttributedString alloc] initWithString: [NSString stringWithFormat: @"%@ ", likesString]
-                                                                                attributes: self.boldTextAttributes];
+    CGSize viewSize = self.frame.size;
+    CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
     
-    if (likesNumber.integerValue == 0)
+    CGRect bgViewFrame = self.backgroundView.frame;
+    if(IS_IPHONE)
     {
-        if (IS_IPAD)
-        {
-            self.likesNumberLabel.text = @"0";
-            self.likeLabel.hidden = YES;
-        }
-        else
-        {
-            self.likeLabel.attributedText = likesAttributedString;
-        }
+        bgViewFrame.size.width = 320.0f;
         
-        return;
-    }
-    
-    SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    
-    NSArray *users = messageDictionary[@"starrers"] ? messageDictionary[@"starrers"] : @[];
-    
-    // initial setup
-    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
-    
-    if (!IS_IPAD && users.count > 3)
-    {
-        [attributedCompleteString appendAttributedString: likesAttributedString];
     }
     else
     {
-        self.likesNumberLabel.text = [NSString stringWithFormat: @"%i", likesNumber.integerValue];
+        bgViewFrame.size.width = 400.0f;
     }
     
-    if (users.count > 1 && users.count < 4 && IS_IPAD)
-    {
-        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @"including "
-                                                                                          attributes: self.lightTextAttributes]];
-    }
+    self.backgroundView.frame = bgViewFrame;
+    self.backgroundView.center = CGPointMake(middleOfView, self.backgroundView.center.y);
     
-    self.likeButton.selected = NO;
+    // user thumbnail
+    self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
+    self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
     
-    if (users.count > 0)
-    {
-        ChannelOwner *co;
-        NSString *name;
-        
-        for (int i = 0; i < users.count; i++)
-        {
-            co = (ChannelOwner *) users[i];
-            
-            if (!co)
-            {
-                continue;
-            }
-            
-            if ([co.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-            {
-                name = @"You";
-                self.likeButton.selected = YES;
-            }
-            else
-            {
-                name = co.displayName;
-            }
-            
-            [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: name
-                                                                                              attributes: self.boldTextAttributes]];
-            
-            if ((users.count - i) == 2) // the one before last
-            {
-                [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" & "
-                                                                                                  attributes: self.boldTextAttributes]];
-            }
-            else if ((users.count - i) > 2)
-            {
-                [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @", "
-                                                                                                  attributes: self.boldTextAttributes]];
-            }
-        }
-    }
+    // bottom controls
+    self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
     
-    self.likeLabel.attributedText = attributedCompleteString;
+    
+    
+    
+    // == Collection View == //
+    
+    CGRect collectionFrame = self.collectionView.frame;
+    
+    // the idea is to put a margin so as to show the next video cell while adding an inset of the same value
+    collectionFrame.size = CGSizeMake(self.sizeForItemAtDefaultPath.width + self.scrollViewMargin, self.sizeForItemAtDefaultPath.height);
+    
+    
+    self.collectionView.frame = collectionFrame;
+    
+    // now set the bounds
+    
+    //self.collectionView.contentSize = CGSizeMake(collectionFrame.size.width, collectionFrame.size.width * (float)self.collectionData.count);
+    
+    UIEdgeInsets scrollViewInsets = self.collectionView.contentInset;
+    scrollViewInsets.left = self.scrollViewMargin;
+    self.collectionView.contentInset = scrollViewInsets;
+    
+    // finally center it
+    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
+    
+    
 }
+
+
 
 
 - (void) prepareForReuse
 {
     [super prepareForReuse];
     
+    self.collectionData = @[];
+    
+    [self.collectionView reloadData];
+    
 }
-
-
 
 
 - (void) showVideo: (UITapGestureRecognizer *) recognizer
@@ -200,6 +168,38 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 
 #pragma mark - UICollectionView DataSource
 
+// utility method (overriding abstract class)
+-(CGSize)sizeForItemAtDefaultPath
+{
+    return [self collectionView:self.collectionView
+                         layout:self.collectionView.collectionViewLayout
+         sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+}
+
+
+- (CGSize) collectionView: (UICollectionView *) collectionView
+                   layout: (UICollectionViewLayout*) collectionViewLayout
+   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    CGSize correctSize = CGSizeZero;
+    if(IS_IPHONE)
+    {
+        
+        correctSize.width = 248.0f;
+        correctSize.height = 139.0f;
+    }
+    else
+    {
+        
+        correctSize.width = 288.0f;
+        correctSize.height = 139.0f;
+            
+        
+    }
+    
+    return correctSize;
+    
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -226,6 +226,12 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     
 }
+
+-(CGFloat)scrollViewMargin
+{
+    return 40.0f;
+}
+
 
 
 @end
