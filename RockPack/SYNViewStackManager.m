@@ -34,7 +34,7 @@
 
 #pragma mark - Specific Views Methods
 
-- (void) viewProfileDetails: (ChannelOwner *) channelOwner
+- (void) viewProfileDetails: (ChannelOwner *) channelOwner 
 {
     if (!channelOwner)
     {
@@ -185,8 +185,8 @@
     
     
     [self.navigationController pushViewController: controller
-                                         animated: NO];
-    
+                                         animated: YES];
+    //controller.view.hidden = YES;
     [self hideSideNavigator];
 }
 
@@ -197,7 +197,6 @@
     
     if (viewControllersCount < 2) // we must have at least two to pop one
         return;
-    
     
     UIViewController* controllerToPopTo = ((UIViewController *) self.navigationController.viewControllers[viewControllersCount - 2]);
     

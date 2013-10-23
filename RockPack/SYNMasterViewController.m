@@ -48,7 +48,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) IBOutlet UIButton* headerButton;
 @property (nonatomic, strong) IBOutlet UIButton* hideNavigationButton;
 @property (nonatomic, strong) IBOutlet UIView* sideNavigationContainerView;
-@property (nonatomic, strong) IBOutlet UIView* tabsView;
 @property (nonatomic, strong) SYNAccountSettingsModalContainer* modalAccountContainer;
 @property (nonatomic, strong) SYNBackButtonControl* backButtonControl;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
@@ -59,6 +58,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) UINavigationController* mainNavigationController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
 @property (nonatomic, strong) UIView* accountSettingsCoverView;
+@property (nonatomic,assign) id moveTabDelegate;
+//@property (strong, nonatomic) IBOutlet UIButton *searchButton;
+
 
 @property (nonatomic, strong) IBOutlet UIView* headerContainerView;
 
@@ -82,6 +84,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:root];
         self.mainNavigationController.navigationBarHidden = YES;
         self.mainNavigationController.delegate = self;
+        
+        
         self.mainNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         
         appDelegate.viewStackManager.navigationController = self.mainNavigationController;
@@ -157,6 +161,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     appDelegate.navigationManager.masterController = self;
     appDelegate.navigationManager.containerController = self.containerViewController; // container
+    self.containerViewController.moveTabDelegate = self;
+    
     appDelegate.navigationManager.sideNavigationController = self.sideNavigatorViewController;
     
     
@@ -179,9 +185,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     if(IS_IPHONE && IS_IOS_7_OR_GREATER)
     {
-        frameToAdjust = self.searchButton.frame;
-        frameToAdjust.origin.y += 2.0f;
-        self.searchButton.frame = frameToAdjust;
+        //frameToAdjust = self.searchButton.frame;
+        //frameToAdjust.origin.y += 2.0f;
+       // self.searchButton.frame = frameToAdjust;
     }
     
     
@@ -286,7 +292,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountSettingsLogout) name:kAccountSettingsLogout object:nil];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allNavControlsRequested:) name:kNoteAllNavControlsHide object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allNavControlsRequested:) name:kNoteAllNavControlsShow object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
@@ -414,8 +419,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     // Remember the view controller that we came from
     self.originViewController = originViewController;
     
-    self.videoViewerViewController = [[SYNVideoViewerViewController alloc] initWithVideoInstanceArray: videoInstanceArray
-                                                                                        selectedIndex: selectedIndex];
+    self.videoViewerViewController = [[SYNVideoViewerViewController alloc] initWithVideoInstanceArray: videoInstanceArray selectedIndex: selectedIndex];
     
     if ([originViewController isKindOfClass:[SYNChannelDetailViewController class]])
     {
@@ -451,9 +455,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          [self.videoViewerViewController runAppearAnimation];
                          self.overlayView.userInteractionEnabled = YES;
     }];
-    
-    
-    
     
     //video overlay bug - keyboard needs to be dismissed if a video is played;
     [self.searchBoxController.searchBoxView.searchTextField resignFirstResponder];
@@ -1232,5 +1233,15 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 - (SYNContainerViewController*) containerViewController
 {
     return (SYNContainerViewController*) self.mainNavigationController.viewControllers[0];
+}
+
+- (void) moveTab : (UIScrollView *) scrollView{
+
+  //  NSLog(@"%@", scrollView);
+    
+//    NSLog(@"moveTab master");
+    
+  //  self.tabsView.hidden=YES;
+    
 }
 @end

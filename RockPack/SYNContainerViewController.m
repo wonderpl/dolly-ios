@@ -229,15 +229,18 @@
     return index;
 }
 
-
 - (void) navigateToPage: (NSInteger) index
 {
+    
     if (index < 0 || index > self.viewControllers.count)
     {
         self.currentViewController = nil; // will be caught by the setter
     }
     
+    
     self.currentViewController = self.viewControllers[index];
+    
+
 }
 
 

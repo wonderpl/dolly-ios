@@ -45,7 +45,6 @@
     
     self.sideNavigationController.state = SideNavigationStateHidden;
     
-    
     [self.containerController navigateToPage: index];
     
     // == Set the Τitle == //
@@ -89,5 +88,12 @@
     [self navigateToPage: tabPressed.tag];
 }
 
+
+-(void) scrollMoved: (UIScrollView *) scrollMoved{
+    CGRect newFrame = _masterController.tabsView.frame;
+   // NSLog(@"Navigation %@, ",scrollMoved);
+   // NSLog (@"%@",scrollMoved);
+
+}
 
 @end
