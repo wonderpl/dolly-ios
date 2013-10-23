@@ -90,7 +90,7 @@
 
 
 -(void) scrollMoved: (UIScrollView *) scrollMoved{
-    CGRect newFrame = _masterController.tabsView.frame;
+  //  CGRect newFrame = _masterController.tabsView.frame;
    // NSLog(@"Navigation %@, ",scrollMoved);
    // NSLog (@"%@",scrollMoved);
 

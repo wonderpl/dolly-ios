@@ -984,12 +984,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (SYNAbstractViewController*) showingViewController
+- (UINavigationController*) showingViewController
 {
     if ([self.mainNavigationController.topViewController isKindOfClass:[SYNContainerViewController class]])
         return self.containerViewController.currentViewController;
     else
-        return (SYNAbstractViewController*)self.mainNavigationController.topViewController;
+        return (UINavigationController*)self.mainNavigationController.topViewController;
 }
 
 
