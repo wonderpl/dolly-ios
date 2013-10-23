@@ -253,7 +253,7 @@
 }
 
 
-- (BOOL) registerVideosFromDictionary: (NSDictionary *) dictionary
+- (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary
 {
     // == Check for Validity == //
     

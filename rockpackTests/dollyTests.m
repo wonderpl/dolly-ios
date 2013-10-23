@@ -57,7 +57,7 @@
                                                                      error:&error];
     
     
-    [appDelegate.searchRegistry registerVideosFromDictionary:jsonDictionary];
+    [appDelegate.searchRegistry registerVideoInstancesFromDictionary:jsonDictionary];
     
     // Get the objects from core data
     
@@ -88,7 +88,7 @@
     
     // == Do it Again! == //
     
-    [appDelegate.searchRegistry registerVideosFromDictionary:jsonDictionary];
+    [appDelegate.searchRegistry registerVideoInstancesFromDictionary:jsonDictionary];
     
     fetchedObjects = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest error: &error];
     

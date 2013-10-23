@@ -322,7 +322,7 @@
         
         [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
             
-            BOOL registryResultOk = [self.searchRegistry registerVideosFromDictionary: dictionary];
+            BOOL registryResultOk = [self.searchRegistry registerVideoInstancesFromDictionary: dictionary];
             
             return registryResultOk;
             
