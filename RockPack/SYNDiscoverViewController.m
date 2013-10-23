@@ -16,7 +16,7 @@
 
 #define kAutocompleteTime 0.2
 
-static NSString* kCategoryCellIndetifier = @"kCategoryCellIndetifier";
+static NSString* kCategoryCellIndetifier = @"SYNDiscoverCategoriesCell";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
@@ -43,6 +43,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 @end
 
 @implementation SYNDiscoverViewController
+
+
+
 
 
 
@@ -103,14 +106,19 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // == Load and Display Categories == //
     
-    [self loadCategories];
+    [self fetchCategories];
+    
     
     [self.categoriesCollectionView reloadData];
+    
+    // == Since this is method is called once use it to update the categories == //
+    
+    [self loadCategories];
 }
 
 #pragma mark - Data Retrieval
 
-- (void) loadCategories
+- (void) fetchCategories
 {
     NSEntityDescription* categoryEntity = [NSEntityDescription entityForName: @"Genre"
                                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
@@ -136,6 +144,34 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
+- (void) loadCategories
+{
+    
+    
+    [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
+        
+        [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
+            
+            return [appDelegate.mainRegistry registerCategoriesFromDictionary: dictionary];
+            
+        } completionBlock:^(BOOL success) {
+            
+            [self fetchCategories];
+            [self.categoriesCollectionView reloadData];
+        }];
+        
+        
+        
+        
+        
+    } onError:^(NSError* error) {
+        
+        DebugLog(@"%@", [error debugDescription]);
+        
+        
+    }];
+}
+
 #pragma mark - CollectionView Delegate/Data Source
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
@@ -145,6 +181,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
 {
+    
     return self.categoriesDataArray.count;
 }
 
