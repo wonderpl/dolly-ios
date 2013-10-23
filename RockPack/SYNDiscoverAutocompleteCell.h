@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SYNDiscoverAutocompleteCell : UITableViewCell
+
+
 @property (nonatomic, strong) UIView* separatorView;
+
 @end
