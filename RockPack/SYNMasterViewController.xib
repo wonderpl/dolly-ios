@@ -13,7 +13,6 @@
                 <outlet property="headerContainerView" destination="146" id="kgz-AQ-Sao"/>
                 <outlet property="overlayView" destination="89" id="91"/>
                 <outlet property="pageTitleLabel" destination="99" id="100"/>
-                <outlet property="searchButton" destination="105" id="124"/>
                 <outlet property="sideNavigationButton" destination="101" id="122"/>
                 <outlet property="sideNavigationContainerView" destination="67" id="DMG-Ef-syd"/>
                 <outlet property="tabsView" destination="tNm-DH-njZ" id="IW2-Xp-Spw"/>
@@ -37,21 +36,6 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <color key="highlightedColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="1" colorSpace="calibratedRGB"/>
                         </label>
-                        <button opaque="NO" tag="516" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="105" userLabel="Search Button">
-                            <rect key="frame" x="889" y="12" width="60" height="61"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="ButtonSearch.png">
-                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="ButtonSearchHighlighted.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="showSearchBoxField:" destination="-1" eventType="touchUpInside" id="107"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" tag="515" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="118" userLabel="Close Search Button">
                             <rect key="frame" x="954" y="11" width="60" height="61"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -168,8 +152,6 @@
         <image name="ButtonNav.png" width="60" height="60"/>
         <image name="ButtonNavHighlighted.png" width="60" height="60"/>
         <image name="ButtonNavSelected.png" width="60" height="60"/>
-        <image name="ButtonSearch.png" width="60" height="60"/>
-        <image name="ButtonSearchHighlighted.png" width="60" height="60"/>
         <image name="TabActivity.png" width="64" height="49"/>
         <image name="TabFeed.png" width="64" height="49"/>
         <image name="TabMoods.png" width="64" height="49"/>
