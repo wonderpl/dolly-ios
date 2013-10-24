@@ -37,6 +37,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 @property (nonatomic, strong) NSArray* autocompleteSuggestionsArray;
 @property (nonatomic, strong) IBOutlet UITableView* autocompleteTableView;
 
+@property (nonatomic, strong) IBOutlet UIView* sideContainerView;
+
 @property (nonatomic, strong) SYNSearchResultsViewController* searchResultsController;
 
 @property (nonatomic, strong) NSDictionary* colorMapForCells;
@@ -99,15 +101,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if(IS_IPAD)
     {
         
-        resultsFrame.origin.x = self.searchField.frame.size.width + 50.0f; // collection views should be aligned to the search field
+        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width;
         resultsFrame.origin.y = 0.0f;
         resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
         resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
         
         self.searchResultsController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        [self addChildViewController:self.searchResultsController]; // containment
-        [self.view addSubview:self.searchResultsController.view];
+        [self addChildViewController: self.searchResultsController]; // containment
+        [self.view addSubview: self.searchResultsController.view];
+        
+        
     }
     else // IS_IPHONE
     {
@@ -382,4 +386,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.autocompleteTableView.hidden = YES;
 }
 
+#pragma mark - Rotation Callbacks
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    CGRect sideContainerFrame = self.sideContainerView.frame;
+    sideContainerFrame.size.width = UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? 342.0f : 300.0f;
+    self.sideContainerView.frame = sideContainerFrame;
+}
 @end

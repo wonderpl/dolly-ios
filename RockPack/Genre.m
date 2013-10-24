@@ -2,7 +2,6 @@
 #import "NSDictionary+Validation.h"
 #import "SubGenre.h"
 
-static NSEntityDescription *categoryEntity = nil;
 
 @implementation Genre
 
@@ -11,47 +10,13 @@ static NSEntityDescription *categoryEntity = nil;
 + (Genre *) instanceFromDictionary: (NSDictionary *) dictionary
          usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
 {
-    NSError *error = nil;
     
-    // Get the unique id of this object from the dictionary that has been passed in
-    NSString *uniqueId = [dictionary objectForKey: @"id"
-                                      withDefault: @"Uninitialized Id"];
+    NSString *uniqueId = [dictionary objectForKey: @"id"];
     
-    // Only create an entity description once, should increase performance
-    if (categoryEntity == nil)
-    {
-        // Do once, and only once
-        static dispatch_once_t oncePredicate;
-        dispatch_once(&oncePredicate, ^{
-            // Not entirely sure I shouldn't 'copy' this object before assigning it to the static variable
-            categoryEntity = [NSEntityDescription entityForName: @"Genre"
-                                         inManagedObjectContext: managedObjectContext];
-        });
-    }
+    if(!uniqueId)
+        return nil;
     
-    // Now we need to see if this object already exists, and if so return it and if not create it
-    NSFetchRequest *categoryFetchRequest = [[NSFetchRequest alloc] init];
-    [categoryFetchRequest setEntity: categoryEntity];
-    
-    // Search on the unique Id
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", uniqueId];
-    [categoryFetchRequest setPredicate: predicate];
-    
-    NSArray *matchingCategoryInstanceEntries = [managedObjectContext executeFetchRequest: categoryFetchRequest
-                                                                                   error: &error];
-    
-    Genre *instance;
-    
-    if (matchingCategoryInstanceEntries.count > 0)
-    {
-        instance = matchingCategoryInstanceEntries[0];
-        
-        instance.markedForDeletionValue = NO;
-    }
-    else
-    {
-        instance = [Genre insertInManagedObjectContext: managedObjectContext];
-    }
+    Genre *instance = [Genre insertInManagedObjectContext: managedObjectContext];
     
     [instance setAttributesFromDictionary: dictionary
                                    withId: uniqueId
@@ -65,40 +30,38 @@ static NSEntityDescription *categoryEntity = nil;
                               withId: (NSString *) uniqueId
            usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
 {
-    // Is we are not actually a dictionary, then bail
-    if (![dictionary isKindOfClass: [NSDictionary class]])
-    {
-        AssertOrLog(@"setAttributesFromDictionary: not a dictionary, unable to construct object");
-        return;
-    }
     
-    // Simple objects
+    
     self.uniqueId = uniqueId;
     
     
     self.name = [dictionary upperCaseStringForKey: @"name"
                                       withDefault: @"-?-"];
+    
     NSNumber *priorityString = (NSNumber *) dictionary[@"priority"];
     self.priority = @([priorityString integerValue]);
     
     // Parse Subcategories
     
-    if (!dictionary[@"sub_categories"] || ![dictionary[@"sub_categories"]
-                                            isKindOfClass: [NSArray class]])
+    if ([dictionary[@"sub_categories"] isKindOfClass: [NSArray class]])
     {
-        AssertOrLog(@"Category %@ did not have subcategories", self.name);
-        return;
+        NSMutableArray *subgenresArray = [[NSMutableArray alloc] initWithCapacity:((NSArray*)dictionary[@"sub_categories"]).count];
+        for (NSDictionary *subgenreData in dictionary[@"sub_categories"])
+        {
+            SubGenre *subgenre = [SubGenre instanceFromDictionary: subgenreData
+                                        usingManagedObjectContext: managedObjectContext];
+            
+            [subgenresArray addObject: subgenre];
+        }
+        
+        NSLock *lock = [NSLock new];
+        @synchronized(lock) { // to protect from very rare "Collection <__NSCFSet: 0xc1e0040> was mutated while being enumerated"
+            self.subgenres = [NSOrderedSet orderedSetWithArray:subgenresArray];
+        }
+        
     }
     
-    for (NSDictionary *subgenreData in dictionary[@"sub_categories"])
-    {
-        SubGenre *subgenre = [SubGenre instanceFromDictionary: subgenreData
-                                    usingManagedObjectContext: managedObjectContext];
-        
-        
-        [self.subgenresSet
-         addObject: subgenre];
-    }
+    
 }
 
 
