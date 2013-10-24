@@ -8,12 +8,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNMasterViewController">
             <connections>
                 <outlet property="closeSearchButton" destination="118" id="127"/>
+                <outlet property="containerView" destination="128" id="H2i-CV-79G"/>
                 <outlet property="errorContainerView" destination="128" id="129"/>
                 <outlet property="headerButton" destination="138" id="141"/>
                 <outlet property="headerContainerView" destination="146" id="kgz-AQ-Sao"/>
                 <outlet property="overlayView" destination="89" id="91"/>
                 <outlet property="pageTitleLabel" destination="99" id="100"/>
-                <outlet property="sideNavigationButton" destination="101" id="122"/>
                 <outlet property="tabsView" destination="tNm-DH-njZ" id="IW2-Xp-Spw"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -66,28 +66,11 @@
                     </subviews>
                     <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="View Container">
+                <view contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="Container View">
                     <rect key="frame" x="71" y="0.0" width="953" height="768"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="101" userLabel="Side Navigation Button">
-                    <rect key="frame" x="954" y="10" width="60" height="61"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Button Nav"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="ButtonNav.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="ButtonNavSelected.png"/>
-                    <state key="highlighted" image="ButtonNavHighlighted.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="showAndHideSideNavigation:" destination="-1" eventType="touchUpInside" id="123"/>
-                    </connections>
-                </button>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="89" userLabel="Video Overlay View">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,9 +131,6 @@
     <resources>
         <image name="ButtonCancel.png" width="60" height="60"/>
         <image name="ButtonCancelHighlighted.png" width="60" height="60"/>
-        <image name="ButtonNav.png" width="60" height="60"/>
-        <image name="ButtonNavHighlighted.png" width="60" height="60"/>
-        <image name="ButtonNavSelected.png" width="60" height="60"/>
         <image name="TabActivity.png" width="64" height="49"/>
         <image name="TabFeed.png" width="64" height="49"/>
         <image name="TabMoods.png" width="64" height="49"/>

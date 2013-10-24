@@ -162,7 +162,6 @@
 {
     controller.view.alpha = 0.0f;
     
-    [self.masterController headerButtonIsActive:controller.needsHeaderButton];
     
     if (self.masterController.videoViewerViewController) // close the video viewer if in view
         [self.masterController removeVideoOverlayController];
@@ -196,10 +195,7 @@
     
     __weak SYNViewStackManager* wself = self;
     
-    if([controllerToPopTo isKindOfClass:[SYNAbstractViewController class]])
-        [self.masterController headerButtonIsActive:((SYNAbstractViewController *) controllerToPopTo).needsHeaderButton];
-    else
-        [self.masterController headerButtonIsActive:YES];
+    
     
     [UIView animateWithDuration: 0.5f
                           delay: 0.0f
