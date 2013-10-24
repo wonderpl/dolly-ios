@@ -253,11 +253,11 @@
 }
 
 
-- (BOOL) registerVideosFromDictionary: (NSDictionary *) dictionary
+- (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary
 {
-    // == Check for Validity == //
     
-    //[self clearImportContextFromEntityName:@"VideoInstance"];
+    
+    // == Check for Validity == //
     
     NSDictionary *videosDictionary = dictionary[@"videos"];
     
@@ -403,9 +403,8 @@
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", viewId]];
     
     
-    itemsToDelete = [appDelegate.searchManagedObjectContext
-                     executeFetchRequest: fetchRequest
-                     error: &error];
+    itemsToDelete = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                          error: &error];
     
     if (append == NO)
     {

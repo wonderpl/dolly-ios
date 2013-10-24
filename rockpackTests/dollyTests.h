@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface rockpackTests : SenTestCase
+@interface dollyTests : SenTestCase
 
 @end

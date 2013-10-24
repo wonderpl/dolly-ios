@@ -16,4 +16,6 @@
 @property (nonatomic, strong) IBOutlet UICollectionView* videosCollectionView;
 @property (nonatomic, strong) IBOutlet UICollectionView* usersCollectionView;
 
+- (void) searchForString: (NSString *) newSearchTerm ;
+
 @end

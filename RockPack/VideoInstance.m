@@ -326,7 +326,7 @@ static NSDateFormatter *dateFormatter = nil;
     
     [dMutableString appendString:@"[VideoInstance "];
     [dMutableString appendFormat:@"%@", self.starredByUserValue ? @"* " : @""];
-    [dMutableString appendFormat:@"(*c:%i)", self.starrers.count];
+    [dMutableString appendFormat:@"(starrets:%i)", self.starrers.count];
     [dMutableString appendString:@"]"];
     
     

@@ -321,10 +321,13 @@
         }
         
         [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
-            BOOL registryResultOk = [self.searchRegistry registerVideosFromDictionary: dictionary];
+            
+            BOOL registryResultOk = [self.searchRegistry registerVideoInstancesFromDictionary: dictionary];
             
             return registryResultOk;
+            
         } completionBlock: ^(BOOL registryResultOk) {
+            
             int itemsCount = 0;
             
             NSNumber * totalNumber = (NSNumber *) dictionary[@"videos"][@"total"];
