@@ -1,5 +1,5 @@
 //
-//  SYNBottomTabViewController.m
+//  SYNContainerViewController.m
 //  RockPack
 //
 //  Created by Nick Banks on 13/10/2012.
@@ -24,7 +24,6 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNDiscoverViewController.h"
 #import "SYNFriendsViewController.h"
-#import "SYNTrackableFrameView.h"
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
@@ -51,13 +50,18 @@
 // Initialise all the elements common to all 4 tabs
 #pragma mark - View lifecycle
 
+- (void) loadView
+{
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view = [[UIView alloc] initWithFrame: [[SYNDeviceManager sharedInstance] currentScreenRect]];
+}
+
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
-    
-    
     
     
     // == Feed Page == //
@@ -119,6 +123,8 @@
     // == Feed Page == //
     
     SYNMoodRootViewController *moodRootViewController = [[SYNMoodRootViewController alloc] initWithViewId: kMoodViewId];
+    
+    
     UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
     
     // == Hold the vc locally
@@ -133,8 +139,6 @@
 
 #pragma mark - UIViewController Containment
 
-
-
 - (void) setCurrentViewController: (UINavigationController *) currentViewController
 {
     if (!currentViewController)
@@ -143,6 +147,12 @@
         return;
     }
     
+    if (_currentViewController == currentViewController)
+    {
+        NSLog(@"same view, so dont change");
+        return;
+    }
+
     
     __weak UINavigationController *toViewController = currentViewController;
     __weak UINavigationController *fromViewController = _currentViewController;
@@ -167,34 +177,34 @@
         for (UIViewController *tmpController in fromViewController.viewControllers) {
             [tmpController.view removeFromSuperview];
         }
-        
-        
         for (UIViewController *tmpController in toViewController.viewControllers) {
             [tmpController didMoveToParentViewController: self];
         }
-
     };
     
-    
+    __block CGRect correctFrame = CGRectMake(100.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
     
     // == Do the Transition selectively == //
     if (fromViewController) // if not from first time
     {
+        toViewController.view.frame = CGRectZero;
+       
+
+            [self transitionFromViewController: fromViewController
+                              toViewController: toViewController
+                                      duration: VIEW_CONTROLLER_TRANSITION_DURATION
+                                       options: UIViewAnimationOptionCurveEaseInOut
+                                    animations: ^{
+                                        toViewController.view.frame = self.view.frame;
+                                        fromViewController.view.frame = CGRectZero;
+                                    }
+                                    completion: CompleteTransitionBlock];
+
         
-        
-        [self transitionFromViewController: fromViewController
-                          toViewController: toViewController
-                                  duration: VIEW_CONTROLLER_TRANSITION_DURATION
-                                   options: UIViewAnimationOptionCurveEaseInOut
-                                animations: ^{
-                                    toViewController.view.frame = self.view.frame;
-                                    fromViewController.view.frame = CGRectZero;
-                                }
-                                completion: CompleteTransitionBlock];
     }
     else
     {
-        toViewController.view.frame = self.view.frame;
+        toViewController.view.frame = correctFrame;
         CompleteTransitionBlock(YES);
     }
 }

@@ -26,7 +26,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 @property (nonatomic, strong) IBOutlet UIImageView* searchFieldBGImageView;
 @property (nonatomic, strong) IBOutlet UITextField* searchField;
 @property (nonatomic, strong) IBOutlet UIButton* searchCloseButton;
-@property (nonatomic, strong) IBOutlet UIView* sidePanelView; // contains all the search elements for iPad only
 
 // Categories Stuff
 @property (nonatomic, strong) IBOutlet UICollectionView* categoriesCollectionView;
@@ -97,8 +96,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     if(IS_IPAD)
     {
-        CGRect resultsFrame = self.sidePanelView.frame;
-        resultsFrame.origin.x = self.searchField.frame.origin.x + self.searchField.frame.size.width + 10.0f;
+        CGRect resultsFrame = self.searchResultsController.view.frame;
+        resultsFrame.origin.x = self.searchField.frame.size.width + 10.0f; // collection views should be aligned to the search field
         resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
         resultsFrame.origin.y = 0.0f;
         resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];

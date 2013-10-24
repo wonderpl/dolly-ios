@@ -51,6 +51,14 @@
 @property (strong, readonly, nonatomic) NSArray *activities;
 @property (weak, nonatomic) UIPopoverController *presentingPopoverController;
 @property (weak, nonatomic) UIViewController *presentingController;
+@property (nonatomic, assign) NSInteger lastContentOffset;
+@property (nonatomic, assign) CGPoint startDraggingPoint;
+@property (nonatomic, assign) CGPoint endDraggingPoint;
+@property (strong, nonatomic) NSDate *startDate;
+@property (strong, nonatomic) NSDate *endDate;
+@property (nonatomic, assign) ScrollingDirection *scrollDirection;
+
+
 
 @end
 
@@ -852,12 +860,8 @@
     }
     else
     {
-        
-        
         [appDelegate.viewStackManager pushController:channelCreationVC];
     }
-    
-    
     
 }
 
@@ -865,5 +869,50 @@
 {
     return EntityTypeAny;
 }
+
+
+#pragma mark - scroll view delegates
+
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    self.startDraggingPoint = scrollView.contentOffset;
+    self.startDate = [NSDate date];
+    
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    self.endDraggingPoint = scrollView.contentOffset;
+    self.endDate = [NSDate dateWithTimeIntervalSinceNow:self.startDate.timeIntervalSinceNow];
+    [self shouldHideTabBar];
+}
+
+- (void) scrollViewDidScroll: (UIScrollView *) scrollView
+{
+    
+        if (self.lastContentOffset > scrollView.contentOffset.y)
+        {
+            self.scrollDirection = ScrollingDirectionUp;
+        }
+        else {
+            self.scrollDirection = ScrollingDirectionDown;
+        }
+        
+        self.lastContentOffset = scrollView.contentOffset.y;
+    
+}
+
+-(void) shouldHideTabBar{
+    
+    CGPoint difference = CGPointMake(self.startDraggingPoint.x - self.endDraggingPoint.x, self.startDraggingPoint.y - self.endDraggingPoint.y);
+    
+    int check =fabsf(difference.y)/fabsf(self.startDate.timeIntervalSinceNow);
+
+    if (check > 550) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollDetected" object:[NSNumber numberWithInteger:self.scrollDirection]  userInfo:nil];
+    }
+    
+}
+
+
 
 @end
