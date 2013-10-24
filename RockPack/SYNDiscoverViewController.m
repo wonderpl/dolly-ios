@@ -103,8 +103,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if(IS_IPAD)
     {
         
-        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width;
-        resultsFrame.origin.y = 0.0f;
+        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
+        resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
         resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
         resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
         
@@ -118,7 +118,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
         
         resultsFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-        
         
     }
     
@@ -135,6 +134,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [self loadCategories];
 }
+
 
 #pragma mark - Data Retrieval
 
@@ -401,7 +401,22 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
     CGRect sideContainerFrame = self.sideContainerView.frame;
-    sideContainerFrame.size.width = UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? 342.0f : 300.0f;
+    sideContainerFrame.size.width = UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? 280.0f : 342.0f;
     self.sideContainerView.frame = sideContainerFrame;
+    
+    CGRect resultsFrame = CGRectZero;
+    
+    if(IS_IPAD) // there is no rotation on iPhone
+    {
+        
+        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
+        resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
+        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x - 10.0f;
+        resultsFrame.size.height = self.view.frame.size.height - resultsFrame.origin.y;
+        self.searchResultsController.view.frame = resultsFrame;
+    }
+    
+    
+    
 }
 @end

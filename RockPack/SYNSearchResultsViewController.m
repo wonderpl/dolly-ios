@@ -50,6 +50,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     self.videosArray = @[];
     self.usersArray = @[];
     
+    self.view.autoresizesSubviews = NO;
+    
     [self.videosCollectionView registerNib:[UINib nibWithNibName:kSearchResultVideoCell bundle:nil]
                 forCellWithReuseIdentifier:kSearchResultVideoCell];
     
@@ -110,8 +112,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 {
     // offset from the top
     CGRect containerRect = self.containerView.frame;
-    containerRect.origin.y = 60.0f;
-    containerRect.size.width = self.view.frame.size.width * 0.5f;
+    containerRect.origin.x = (self.view.frame.size.width * 0.5f) - (self.containerView.frame.size.width * 0.5f);
     containerRect.size.height = self.view.frame.size.height;
     self.containerView.frame = containerRect;
     
