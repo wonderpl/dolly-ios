@@ -362,7 +362,7 @@
     if (genre)
     {
         self.runningNetworkOperation = [appDelegate.networkEngine
-                                        updateChannelsScreenForCategory: (genre ? genre.uniqueId : @"all")
+                                        collectionsForCategory: (genre ? genre.uniqueId : @"all")
                                         forRange: self.dataRequestRange
                                         ignoringCache: NO
                                         onCompletion: completeBlock
@@ -726,7 +726,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (void) handleNewTabSelectionWithGenre: (Genre *) genre
 {
-    [appDelegate.viewStackManager hideSideNavigator];
+    
     
     if ([self.currentGenre.uniqueId
          isEqualToString: genre.uniqueId])

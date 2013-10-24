@@ -163,6 +163,8 @@
     
     [super addChildViewController: toViewController];
     
+    toViewController.view.frame = CGRectZero;
+    
     [[self view] addSubview: toViewController.view];
     
     // == Define the completion block == //
@@ -177,6 +179,8 @@
             [tmpController didMoveToParentViewController: self];
         }
     };
+    
+    __block CGRect correctFrame = CGRectMake(100.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
     
     // == Do the Transition selectively == //
     if (fromViewController) // if not from first time
@@ -198,7 +202,7 @@
     }
     else
     {
-        toViewController.view.frame = self.view.frame;
+        toViewController.view.frame = correctFrame;
         CompleteTransitionBlock(YES);
     }
 }

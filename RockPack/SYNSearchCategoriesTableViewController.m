@@ -148,7 +148,6 @@ static NSString *SearchGenresTableCellIdentifier = @"SYNSearchCategoriesIphoneCe
     [appDelegate.navigationManager navigateToPageByName:kChannelsViewId];
     
     
-    [appDelegate.viewStackManager dismissSearchBarTotal:YES];
     
     
     

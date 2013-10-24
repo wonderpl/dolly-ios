@@ -1343,7 +1343,7 @@
     if (urlString == nil || notificationId == nil)
     {
         // No additionaly rockpack:// url, so just display the notifications panel
-        [self.viewStackManager displaySideNavigatorFromPushNotification];
+        // TODO: Re-Implement the old [self.viewStackManager displaySideNavigatorFromPushNotification] method
     }
     else if(!self.currentUser)
     {

@@ -59,22 +59,11 @@ typedef void(^ViewStackReturnBlock)(void);
 
 - (void) presentExistingChannelsController;
 
-- (void) dismissSearchBar;
-- (void) presentSearchBar;
 
-- (void) dismissSearchBarTotal: (BOOL) total;
 
 - (void) hideModalController;
 
 
-- (void) hideSideNavigator;
-- (void) showSideNavigator;
-
--(void) openSideNavigatorToIndex: (NSInteger) index;
-
-- (void) displaySideNavigatorFromPushNotification;
-
--(void)resumeVideoIfShowing;
 
 -(BOOL) controllerViewIsVisible:(SYNAbstractViewController*)controllerToTest;
 

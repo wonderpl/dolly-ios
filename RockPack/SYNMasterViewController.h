@@ -32,8 +32,8 @@ typedef enum NotificationMessageType : NSInteger {
 }
 
 
-@property (nonatomic, strong) IBOutlet UIView* containerView;
-@property (nonatomic, readonly) SYNContainerViewController* containerViewController;
+
+
 @property (nonatomic, strong) SYNAbstractViewController* originViewController;
 @property (strong, nonatomic) Reachability *reachability;
 @property (nonatomic, readonly) BOOL hasSearchBarOn;
@@ -63,9 +63,6 @@ typedef enum NotificationMessageType : NSInteger {
                         andSelectedIndex: (int) selectedIndex fromCenter:(CGPoint)centerPoint;
 
 - (void) removeVideoOverlayController;
-- (void) showSideNavigation;
--(void) clearSearchBoxController;
 
--(void) headerButtonIsActive: (BOOL)isActive;
 
 @end

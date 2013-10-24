@@ -510,9 +510,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
         
         
         
-        appDelegate.viewStackManager.returnBlock = ^{
-            [appDelegate.viewStackManager openSideNavigatorToIndex:kFriendsRowIndex];
-        };
+
         [appDelegate.viewStackManager viewProfileDetails:friendAsChannelOwner];
         
     }

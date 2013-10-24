@@ -218,6 +218,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SubGenre* selectedGenre = self.categoriesDataArray[indexPath.item];
+    
+    [self dispatchSearch:selectedGenre.name];
 }
 
 
