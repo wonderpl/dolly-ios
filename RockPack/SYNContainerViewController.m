@@ -126,7 +126,9 @@
     UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
     
     // == Hold the vc locally
-    self.viewControllers = @[navFeedViewController, navChannelsRootViewController, navProfileViewController, navSearchViewController, navMoodRootViewController,navActivityViewController];
+    self.viewControllers = @[navFeedViewController, navSearchViewController,
+                             navMoodRootViewController,
+                             navProfileViewController,  navChannelsRootViewController, navActivityViewController];
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];

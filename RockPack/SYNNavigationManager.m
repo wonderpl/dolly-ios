@@ -20,6 +20,47 @@
 }
 
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(scrollDetected:) name:@"ScrollDetected" object:nil];
+
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ScrollDetected" object:nil];
+}
+
+- (void)scrollDetected:(NSNotification *)notification
+{
+    
+    NSNumber *numOfScrollDirection = [notification object];
+    
+    if (numOfScrollDirection.intValue == ScrollingDirectionDown) {
+        [UIView animateWithDuration:0.5f animations:^{
+            
+            CGRect tmpFrame = _masterController.tabsView.frame;
+            tmpFrame.origin.y += _masterController.tabsView.frame.size.height;
+            _masterController.tabsView.frame = tmpFrame;
+        }];
+
+    }
+
+    if (numOfScrollDirection.intValue == ScrollingDirectionUp) {
+        [UIView animateWithDuration:0.5f animations:^{
+            
+            CGRect tmpFrame = _masterController.tabsView.frame;
+            tmpFrame.origin.y -= _masterController.tabsView.frame.size.height;
+            _masterController.tabsView.frame = tmpFrame;
+        }];
+        
+    }
+
+}
 - (void) navigateToPageByName: (NSString *) pageName
 {
     if (!pageName)
