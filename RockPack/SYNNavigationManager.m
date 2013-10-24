@@ -128,7 +128,11 @@
         tab.highlighted = (BOOL) (tab == tabPressed);
     }
     
-    [self navigateToPage: tabPressed.tag];
+    if (!self.containerController.inTransitioning)
+    {
+        [self navigateToPage: tabPressed.tag];
+    }
+    
 }
 
 

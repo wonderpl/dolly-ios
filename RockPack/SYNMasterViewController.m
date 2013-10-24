@@ -108,7 +108,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     appDelegate.navigationManager.masterController = self;
     appDelegate.navigationManager.containerController = self.containerViewController; // container
-    self.containerViewController.moveTabDelegate = self;
     
     
     

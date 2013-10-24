@@ -41,7 +41,6 @@
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
 @property (nonatomic, weak) SYNProfileRootViewController *tmpProfileRootView;
 
-
 @end
 
 
@@ -190,6 +189,7 @@
         toViewController.view.frame = CGRectZero;
        
 
+        self.inTransitioning = YES;
             [self transitionFromViewController: fromViewController
                               toViewController: toViewController
                                       duration: VIEW_CONTROLLER_TRANSITION_DURATION
@@ -200,6 +200,7 @@
                                     }
                                     completion: CompleteTransitionBlock];
 
+        self.inTransitioning = NO;
         
     }
     else
@@ -268,27 +269,6 @@
 - (NSString *) description
 {
     return NSStringFromClass([self class]);
-}
-
-
-- (void) moveTab : (UIScrollView*) scrollView{
-   // NSLog(@"moveTab container");
-    
-    if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
-    {
-        [self.moveTabDelegate moveTab:scrollView];
-    }
-}
-
-
-- (void) observeValueForKeyPath: (NSString *) keyPath
-                       ofObject: (id) object
-                         change: (NSDictionary *) change
-                        context: (void *) context
-{
-    if ([keyPath isEqualToString: @"scrollViewKVO"]){
-        NSLog(@"something changed");
-    }
 }
 
 @end
