@@ -61,8 +61,6 @@ SYNImagePickerControllerDelegate>
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UIScrollView *mainScrollView;
-
-//New Outlets for user profile
 @property (strong, nonatomic) IBOutlet UIView *userProfileView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -71,7 +69,17 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatiorView;
+@property (nonatomic, assign) NSInteger lastContentOffset;
+@property (nonatomic, assign) CGPoint startDraggingPoint;
+@property (nonatomic, assign) CGPoint endDraggingPoint;
+@property (strong, nonatomic) NSDate *startDate;
+@property (strong, nonatomic) NSDate *endDate;
+@property (nonatomic, assign) ScrollingDirection *scrollDirection;
+
+
 @end
+
+
 
 
 @implementation SYNProfileRootViewController
@@ -88,6 +96,7 @@ SYNImagePickerControllerDelegate>
                                                  selector: @selector(handleDataModelChange:)
                                                      name: NSManagedObjectContextObjectsDidChangeNotification
                                                    object: appDelegate.searchManagedObjectContext];
+        
         
     }
     
@@ -110,7 +119,7 @@ SYNImagePickerControllerDelegate>
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UINib *createCellNib = [UINib nibWithNibName: @"SYNChannelCreateNewCell"
                                           bundle: nil];
     
@@ -154,7 +163,6 @@ SYNImagePickerControllerDelegate>
         [self updateTabStates];
     }
     
-    [self updateMainScrollView];
     
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
@@ -221,6 +229,7 @@ SYNImagePickerControllerDelegate>
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
+   // [self updateMainScrollView];
     
 }
 
@@ -265,7 +274,6 @@ SYNImagePickerControllerDelegate>
 - (void) viewDidScrollToBack
 {
     self.channelThumbnailCollectionView.scrollsToTop = NO;
-    
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
 }
 
@@ -377,11 +385,17 @@ SYNImagePickerControllerDelegate>
 }
 
 - (void) updateMainScrollView {
-    
+    NSLog(@"Before, %f", self.mainScrollView.frame.size.height);
+    NSLog(@"%f", self.mainScrollView.contentSize.height);
+
     CGRect newFrame = self.mainScrollView.frame;
+    newFrame.size.height = 400;
     newFrame.size.height += self.channelThumbnailCollectionView.contentSize.height;
-    self.mainScrollView.frame = newFrame;
-    self.mainScrollView.contentSize = CGSizeMake(self.mainScrollView.frame.size.width, self.mainScrollView.frame.size.height);
+    
+    self.mainScrollView.contentSize = newFrame.size;
+
+    NSLog(@"After, %f", self.mainScrollView.frame.size.height);
+    NSLog(@"%f", self.mainScrollView.contentSize.height);
 
 }
 
@@ -397,6 +411,7 @@ SYNImagePickerControllerDelegate>
         [self setChannelOwner: currentUser];
     }
 }
+
 
 
 - (IBAction) userTouchedAvatarButton: (UIButton *) avatarButton
@@ -855,57 +870,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 }
 
-
-- (void) scrollViewDidScroll: (UIScrollView *) scrollView
-{
-    
-    if (self.isIPhone) {
-      //  NSLog(@"SCROLLING");
-        
-        if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
-        {
-            
-            [self.moveTabDelegate moveTab:scrollView];
-        }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollMoved" object:scrollView userInfo:nil];
-
-
-    }
-    if (!self.isIPhone)
-    {
-        if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
-        {
-            scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
-            return;
-        }
-        
-        CGPoint offset;
-        
-        if ([scrollView isEqual: self.channelThumbnailCollectionView])
-        {
-            offset = self.channelThumbnailCollectionView.contentOffset;
-            offset.y = self.channelThumbnailCollectionView.contentOffset.y;
-            [self.subscriptionThumbnailCollectionView setContentOffset: offset];
-        }
-        else if ([scrollView isEqual: self.subscriptionThumbnailCollectionView])
-        {
-            offset = self.subscriptionThumbnailCollectionView.contentOffset;
-            offset.y = self.subscriptionThumbnailCollectionView.contentOffset.y;
-            [self.channelThumbnailCollectionView setContentOffset: offset];
-        }
-    }
-    
-    
-    if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
-    {
-        [self.moveTabDelegate moveTab:scrollView];
-    }
-
-    
-}
-
-
 - (void) resizeScrollViews
 {
     if (self.isIPhone)
@@ -1105,13 +1069,91 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
      }];
 }
 
-
 - (void) headerTapped
 {
     // no need to animate the subscriptions part since it observes the channels thumbnails scroll view
-    [self.channelThumbnailCollectionView setContentOffset: CGPointZero
-                                                 animated: YES];
+    [self.channelThumbnailCollectionView setContentOffset: CGPointZero animated: YES];
 }
+
+
+#pragma mark - scroll view delegates
+
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    self.startDraggingPoint = scrollView.contentOffset;
+    self.startDate = [NSDate date];
+    
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    self.endDraggingPoint = scrollView.contentOffset;
+    self.endDate = [NSDate dateWithTimeIntervalSinceNow:self.startDate.timeIntervalSinceNow];
+    [self shouldHideTabBar];
+}
+
+- (void) scrollViewDidScroll: (UIScrollView *) scrollView
+{
+    
+    if (self.isIPhone) {
+        
+        if (self.lastContentOffset > scrollView.contentOffset.y)
+        {
+            self.scrollDirection = ScrollingDirectionUp;
+        }
+        else {
+            self.scrollDirection = ScrollingDirectionDown;
+        }
+        
+        self.lastContentOffset = scrollView.contentOffset.y;
+    }
+    if (!self.isIPhone)
+    {
+        if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
+        {
+            scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
+            return;
+        }
+        
+        CGPoint offset;
+        
+        if ([scrollView isEqual: self.channelThumbnailCollectionView])
+        {
+            offset = self.channelThumbnailCollectionView.contentOffset;
+            offset.y = self.channelThumbnailCollectionView.contentOffset.y;
+            [self.subscriptionThumbnailCollectionView setContentOffset: offset];
+        }
+        else if ([scrollView isEqual: self.subscriptionThumbnailCollectionView])
+        {
+            offset = self.subscriptionThumbnailCollectionView.contentOffset;
+            offset.y = self.subscriptionThumbnailCollectionView.contentOffset.y;
+            [self.channelThumbnailCollectionView setContentOffset: offset];
+        }
+    }
+    
+    if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
+    {
+        [self.moveTabDelegate moveTab:scrollView];
+    }
+}
+
+-(void) shouldHideTabBar{
+
+   CGPoint difference = CGPointMake(self.startDraggingPoint.x - self.endDraggingPoint.x, self.startDraggingPoint.y - self.endDraggingPoint.y);
+
+    NSLog(@"x:%f, y:%f", difference.x, difference.y);
+    NSLog(@"Time interval %f", self.startDate.timeIntervalSinceNow*-1);
+    
+    NSLog(@"%i", self.lastContentOffset);
+    
+    int check =fabsf(difference.y)/fabsf(self.startDate.timeIntervalSinceNow);
+    
+    NSLog(@"Check: %i", check);
+    if (check > 550) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollDetected" object:[NSNumber numberWithInteger:self.scrollDirection]  userInfo:nil];
+    }
+    
+}
+
 
 
 #pragma mark - Accessors

@@ -432,6 +432,8 @@ typedef enum : NSInteger {
     ScrollingDirectionNone = 0,
     ScrollingDirectionLeft,
     ScrollingDirectionRight,
+    ScrollingDirectionUp,
+    ScrollingDirectionDown,
 } ScrollingDirection;
 
 typedef enum : NSInteger {
