@@ -91,9 +91,9 @@
 
     SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
     
-    UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
     
-    //profileViewController.moveTabDelegate = self;
+    // profileViewController.moveTabDelegate = self;
     
     if (!IS_IPAD)
     {
@@ -133,6 +133,8 @@
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
+    
+    
 }
 
 
@@ -162,6 +164,7 @@
     
     [super addChildViewController: toViewController];
     
+    // TODO: Remove it when we come up with a good animation
     toViewController.view.frame = CGRectZero;
     
     [[self view] addSubview: toViewController.view];
@@ -181,7 +184,7 @@
 
     };
     
-    __block CGRect correctFrame = CGRectMake(100.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+    __block CGRect correctFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
     
     // == Do the Transition selectively == //
     if (fromViewController) // if not from first time
@@ -195,7 +198,7 @@
                                       duration: VIEW_CONTROLLER_TRANSITION_DURATION
                                        options: UIViewAnimationOptionCurveEaseInOut
                                     animations: ^{
-                                        toViewController.view.frame = self.view.frame;
+                                        toViewController.view.frame = correctFrame;
                                         fromViewController.view.frame = CGRectZero;
                                     }
                                     completion: CompleteTransitionBlock];

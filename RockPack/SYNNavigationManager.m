@@ -90,8 +90,6 @@
     
     [self.containerController navigateToPage: index];
     
-    // == Set the Τitle == //
-    self.masterController.pageTitleLabel.text = [self.containerController.currentViewController.title uppercaseString];
     
     if (self.sideNavigationController.state == SideNavigationStateFull)
     {

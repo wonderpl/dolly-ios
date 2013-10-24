@@ -143,22 +143,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default"]];
     }
     
-//	[self.view addSubview: splashView];
-//    
-//    [UIView animateWithDuration: kSplashAnimationDuration
-//                          delay: kSplashViewDuration
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations: ^{
-//                         splashView.alpha = 0.0f;
-//                     } completion: ^(BOOL finished) {
-//                         
-//                         
-//                         [splashView removeFromSuperview];
-//                     }];
-    
-    
-    
-    
     
     self.currentNavigationButtonsAppearance = NavigationButtonsAppearanceBlack;
     
@@ -177,23 +161,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.self.backButtonControl.center = CGPointMake(self.self.backButtonControl.center.x, self.self.backButtonControl.center.y + kiOS7PlusHeaderYOffset);
     }
     
-    
-    
-    
-    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerTapped:)];
-    UISwipeGestureRecognizer* leftSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(headerSwiped:)];
-    leftSwipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    UISwipeGestureRecognizer* rightSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(headerSwiped:)];
-    rightSwipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.headerButton addGestureRecognizer:tapGesture];
-    [self.headerButton addGestureRecognizer:leftSwipeGesture];
-    [self.headerButton addGestureRecognizer:rightSwipeGesture];
-    
-    self.pageTitleLabel.font = [UIFont regularCustomFontOfSize:self.pageTitleLabel.font.pointSize];
-    self.pageTitleLabel.textColor = [UIColor colorWithRed:(40.0/255.0)
-                                                    green:(45.0/255.0)
-                                                     blue:(51.0/255.0)
-                                                    alpha:(1.0)];
     
     self.reachability = [Reachability reachabilityWithHostname:appDelegate.networkEngine.hostName];
     
@@ -516,18 +483,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         self.closeSearchButton.hidden = YES;
         self.backButtonControl.hidden = NO;
         
-        
-        
-        
-        self.pageTitleLabel.hidden = NO;
-
         self.backButtonControl.hidden = NO;
     }
     else
     {
        
         self.closeSearchButton.hidden = YES;
-        self.pageTitleLabel.hidden = YES;
         self.backButtonControl.hidden = YES;
     }
 }
@@ -578,10 +539,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) hideTitleAndDots: (NSNotification*) note
-{
-    self.pageTitleLabel.alpha = 0.0f;
-}
 
 #pragma mark - Account Settings
 
@@ -841,13 +798,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         targetAlpha = 0.0;
     }
     
-    
-    if(!IS_IPAD && show)
-    {
-      //  self.searchButton.hidden = YES;
-    }
-    
-    self.pageTitleLabel.alpha = !targetAlpha;
     
     
     
