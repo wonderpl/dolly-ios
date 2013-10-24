@@ -82,7 +82,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.searchField.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
     self.searchField.layer.shadowRadius = 0.0f;
     self.searchField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.searchField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.searchField.clearButtonMode = UITextFieldViewModeNever;
     
     // Display Search instead of Return on iPhone Keyboard
     self.searchField.returnKeyType = UIReturnKeySearch;
@@ -93,15 +93,16 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // == Handle Search Results Controller for iPad (integrated in the view), for iPhone it is loaded upon demand as a different page
     
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
+    CGRect resultsFrame = CGRectZero;
     
     if(IS_IPAD)
     {
-        CGRect resultsFrame = self.searchResultsController.view.frame;
-        resultsFrame.origin.x = self.searchField.frame.size.width + 10.0f; // collection views should be aligned to the search field
-        resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
+        
+        resultsFrame.origin.x = self.searchField.frame.size.width + 50.0f; // collection views should be aligned to the search field
         resultsFrame.origin.y = 0.0f;
+        resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
         resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
-        self.searchResultsController.view.frame = resultsFrame;
+        
         self.searchResultsController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self addChildViewController:self.searchResultsController]; // containment
@@ -110,11 +111,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     else // IS_IPHONE
     {
         
-        
+        resultsFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
         
         
     }
     
+    self.searchResultsController.view.frame = resultsFrame;
     
     // == Load and Display Categories == //
     
@@ -355,15 +357,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) dispatchSearch:(NSString*)searchTerm
 {
-    if(IS_IPAD)
+    [self.searchResultsController searchForString:searchTerm];
+    
+    if(IS_IPHONE)
     {
-        
-        [self.searchResultsController searchForString:searchTerm];
-        
-    }
-    else
-    {
-        
+        [self.navigationController pushViewController:self.searchResultsController
+                                             animated:YES];
         
         
     }
