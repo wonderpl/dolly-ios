@@ -3869,6 +3869,8 @@
 		019824E51629CB1D00216900 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				BEA216E317E9ED31007C6DF7 /* SYNTrackableFrameView.h */,
+				BEA216E417E9ED31007C6DF7 /* SYNTrackableFrameView.m */,
 				019824E61629CB4300216900 /* SYNDebug.h */,
 				019824E71629CB4300216900 /* SYNDebug.m */,
 			);
@@ -4243,8 +4245,6 @@
 				01EC6235166EAAA6003154B1 /* SYNChannelDetailViewController.m */,
 				01ABBB3317218A60007E4462 /* SYNChannelDetailViewController.xib */,
 				38FD441E172A9E280086B524 /* SYNChannelDetailViewController~iphone.xib */,
-				BEA216E317E9ED31007C6DF7 /* SYNTrackableFrameView.h */,
-				BEA216E417E9ED31007C6DF7 /* SYNTrackableFrameView.m */,
 			);
 			name = Channels;
 			sourceTree = "<group>";

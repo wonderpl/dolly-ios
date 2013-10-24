@@ -24,6 +24,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNDiscoverViewController.h"
 #import "SYNFriendsViewController.h"
+#import "SYNTrackableFrameView.h"
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
@@ -50,18 +51,13 @@
 // Initialise all the elements common to all 4 tabs
 #pragma mark - View lifecycle
 
-- (void) loadView
-{
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view = [[UIView alloc] initWithFrame: [[SYNDeviceManager sharedInstance] currentScreenRect]];
-}
-
-
 - (void) viewDidLoad
 {
     [super viewDidLoad];
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    
     
     
     // == Feed Page == //
@@ -182,7 +178,7 @@
         }
     };
     
-    __block CGRect correctFrame = CGRectMake(100.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+    
     
     // == Do the Transition selectively == //
     if (fromViewController) // if not from first time
@@ -204,7 +200,7 @@
     }
     else
     {
-        toViewController.view.frame = correctFrame;
+        toViewController.view.frame = self.view.frame;
         CompleteTransitionBlock(YES);
     }
 }
