@@ -399,6 +399,7 @@
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
+    [super scrollViewDidScroll:scrollView];
     // when reaching far right hand side, load a new page
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
         && self.isLoadingMoreContent == NO)

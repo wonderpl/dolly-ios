@@ -123,6 +123,8 @@
     // == Feed Page == //
     
     SYNMoodRootViewController *moodRootViewController = [[SYNMoodRootViewController alloc] initWithViewId: kMoodViewId];
+    
+    
     UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
     
     // == Hold the vc locally

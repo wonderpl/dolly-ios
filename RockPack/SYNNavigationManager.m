@@ -37,27 +37,29 @@
 
 - (void)scrollDetected:(NSNotification *)notification
 {
+ 
+    //Worse case check for ipad
+    if (!IS_IPHONE) {
+        return;
+    }
     
     NSNumber *numOfScrollDirection = [notification object];
-    
-    if (numOfScrollDirection.intValue == ScrollingDirectionDown) {
+        
+    if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == 519.0f) {
         [UIView animateWithDuration:0.5f animations:^{
-            
             CGRect tmpFrame = _masterController.tabsView.frame;
             tmpFrame.origin.y += _masterController.tabsView.frame.size.height;
             _masterController.tabsView.frame = tmpFrame;
         }];
-
     }
 
-    if (numOfScrollDirection.intValue == ScrollingDirectionUp) {
+    if (numOfScrollDirection.intValue == ScrollingDirectionUp && _masterController.tabsView.frame.origin.y == 568.0f) {
         [UIView animateWithDuration:0.5f animations:^{
             
             CGRect tmpFrame = _masterController.tabsView.frame;
             tmpFrame.origin.y -= _masterController.tabsView.frame.size.height;
             _masterController.tabsView.frame = tmpFrame;
         }];
-        
     }
 
 }

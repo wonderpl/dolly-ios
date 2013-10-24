@@ -860,12 +860,8 @@
     }
     else
     {
-        
-        
         [appDelegate.viewStackManager pushController:channelCreationVC];
     }
-    
-    
     
 }
 
@@ -893,7 +889,6 @@
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
     
-    
         if (self.lastContentOffset > scrollView.contentOffset.y)
         {
             self.scrollDirection = ScrollingDirectionUp;
@@ -910,14 +905,8 @@
     
     CGPoint difference = CGPointMake(self.startDraggingPoint.x - self.endDraggingPoint.x, self.startDraggingPoint.y - self.endDraggingPoint.y);
     
-    NSLog(@"x:%f, y:%f", difference.x, difference.y);
-    NSLog(@"Time interval %f", self.startDate.timeIntervalSinceNow*-1);
-    
-    NSLog(@"%i", self.lastContentOffset);
-    
     int check =fabsf(difference.y)/fabsf(self.startDate.timeIntervalSinceNow);
-    
-    NSLog(@"Check: %i", check);
+
     if (check > 550) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollDetected" object:[NSNumber numberWithInteger:self.scrollDirection]  userInfo:nil];
     }
