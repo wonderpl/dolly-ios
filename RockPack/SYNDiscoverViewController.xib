@@ -29,13 +29,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="342" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" id="REn-5N-Vsu" userLabel="Text Field Search" customClass="SYNTextFieldSearchIPhone">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" id="REn-5N-Vsu" userLabel="Text Field Search">
                             <rect key="frame" x="49" y="8" width="244" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="webSearch" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             <connections>
-                                <outlet property="delegate" destination="-1" id="meR-ww-gFI"/>
+                                <outlet property="delegate" destination="-1" id="4VP-O4-epB"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7WG-vD-4Hw" userLabel="Close Button">

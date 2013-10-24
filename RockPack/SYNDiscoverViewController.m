@@ -62,6 +62,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                               
                               };
     
+    self.searchCloseButton.alpha = 0.0f;
+    
     self.autocompleteTableView.hidden = YES;
     
     
@@ -269,9 +271,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     return YES;
 }
 
-- (void) textViewDidBeginEditing: (UITextView *) textView
+- (void) textFieldDidBeginEditing: (UITextView *) textView
 {
     [textView setText: @""];
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        self.searchCloseButton.alpha = 1.0f;
+    }];
 }
 
 
@@ -384,6 +390,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     self.searchField.text = @"";
     self.autocompleteTableView.hidden = YES;
+    
+    
 }
 
 #pragma mark - Rotation Callbacks
