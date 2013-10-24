@@ -146,11 +146,9 @@
         return;
     }
     
+    //If the current view is the already showing, dont change.
     if (_currentViewController == currentViewController)
-    {
-        NSLog(@"same view, so dont change");
         return;
-    }
 
     
     __weak UINavigationController *toViewController = currentViewController;
@@ -179,6 +177,8 @@
         for (UIViewController *tmpController in toViewController.viewControllers) {
             [tmpController didMoveToParentViewController: self];
         }
+        self.inTransitioning = NO;
+
     };
     
     __block CGRect correctFrame = CGRectMake(100.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);

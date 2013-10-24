@@ -57,8 +57,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
 @property (nonatomic, strong) UIView* accountSettingsCoverView;
-@property (nonatomic,assign) id moveTabDelegate;
-//@property (strong, nonatomic) IBOutlet UIButton *searchButton;
 
 
 @property (nonatomic, strong) IBOutlet UIView* headerContainerView;
@@ -912,8 +910,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     else
     {
-        
-        
         SYNAbstractViewController* abstractController = (SYNAbstractViewController*)viewController;
         
         if(IS_IOS_7_OR_GREATER)
@@ -923,9 +919,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
             else
                 [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         }
-        
-        
-        
     }
     
     if( viewController == self.containerViewController)
@@ -937,22 +930,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-
-
-
 -(NSArray*)tabs
 {
     return self.tabsView.subviews;
 }
 
-
-- (void) moveTab : (UIScrollView *) scrollView{
-
-  //  NSLog(@"%@", scrollView);
-    
-//    NSLog(@"moveTab master");
-    
-  //  self.tabsView.hidden=YES;
-    
-}
 @end

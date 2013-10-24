@@ -163,6 +163,7 @@ SYNImagePickerControllerDelegate>
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
     
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -225,8 +226,7 @@ SYNImagePickerControllerDelegate>
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
-   // [self updateMainScrollView];
-    
+    //[self updateMainScrollView];
 }
 
 
@@ -1333,14 +1333,15 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 
 
 
-#pragma mark - move tab delegate
-
--(void) moveTab{
+-(void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
     
+    NSLog(@"Scroll hit the top");
+
+    [UIView animateWithDuration:1.5f animations:^{
+        CGRect tmpFrame =     self.navigationController.navigationBar.frame;
+        tmpFrame.origin.y -= self.navigationController.navigationBar.frame.size.height;
+        self.navigationController.navigationBar.frame = tmpFrame;
+    }];
     
 }
-
-
-
-
 @end
