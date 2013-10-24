@@ -32,6 +32,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 @property (nonatomic, strong) NSArray* videosArray;
 @property (nonatomic, strong) NSArray* usersArray;
 
+// Container View (Used for Positioning)
+@property (nonatomic, strong) IBOutlet UIView* containerView;
+
 @end
 
 @implementation SYNSearchResultsViewController
@@ -96,6 +99,23 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self repositionContainer];
+}
+
+-(void)repositionContainer
+{
+    // offset from the top
+    CGRect containerRect = self.containerView.frame;
+    containerRect.origin.y = 60.0f;
+    containerRect.size.height = self.view.frame.size.height;
+    self.containerView.frame = containerRect;
+    
+    // position elements in the middle correctly
+    self.containerView.center = CGPointMake(self.containerView.center.x, self.containerView.center.y);
+    self.containerView.frame = CGRectIntegral(self.containerView.frame);
+}
 
 #pragma mark - Load Data
 
@@ -228,6 +248,15 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         self.videosCollectionView.hidden = YES;
         self.usersCollectionView.hidden = NO;
     }
+}
+
+#pragma mark - Orientation Delegates
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    [self repositionContainer];
 }
 
 #pragma mark - Accessors
