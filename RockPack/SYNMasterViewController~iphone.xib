@@ -15,7 +15,6 @@
                 <outlet property="overlayView" destination="23" id="26"/>
                 <outlet property="pageTitleLabel" destination="14" id="15"/>
                 <outlet property="sideNavigationButton" destination="12" id="38"/>
-                <outlet property="sideNavigationContainerView" destination="28" id="xzF-5M-RyN"/>
                 <outlet property="tabsView" destination="6hy-Hf-wx9" id="HeQ-oo-rJG"/>
                 <outlet property="view" destination="1" id="19"/>
             </connections>
@@ -76,11 +75,6 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                </view>
-                <view contentMode="scaleToFill" id="28" userLabel="Navigation Container View" customClass="SYNPassthroughView">
-                    <rect key="frame" x="-704" y="0.0" width="1024" height="568"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="12" userLabel="Side Navigation Button">
                     <rect key="frame" x="267" y="5" width="48" height="49"/>

@@ -246,7 +246,7 @@
 }
 
 
-- (MKNetworkOperation *) updateChannelsScreenForCategory: (NSString *) categoryId
+- (MKNetworkOperation *) collectionsForCategory: (NSString *) categoryId
                                                 forRange: (NSRange) range
                                            ignoringCache: (BOOL) ignore
                                             onCompletion: (MKNKJSONCompleteBlock) completeBlock
@@ -271,8 +271,11 @@
     networkOperation.ignoreCachedResponse = ignore;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
+        
         completeBlock(dictionary);
+        
     } errorHandler: ^(NSError *error) {
+        
         errorBlock(@{@"network_error": @"Engine Failed to Load Channels"});
         
         if (error.code >= 500 && error.code < 600)

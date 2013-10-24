@@ -610,7 +610,7 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 - (BOOL) textFieldShouldBeginEditing: (UITextField *) textField
 {
-    [self.appDelegate.viewStackManager presentSearchBar];
+    
     
     return YES;
 }
@@ -620,7 +620,7 @@ typedef void (^SideNavigationMotionBlock)(void);
 
 - (void) closeSearch: (id) sender
 {
-    [self.appDelegate.viewStackManager dismissSearchBar];
+    
 }
 
 

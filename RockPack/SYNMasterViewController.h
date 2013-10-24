@@ -63,7 +63,6 @@ typedef enum NotificationMessageType : NSInteger {
                         andSelectedIndex: (int) selectedIndex fromCenter:(CGPoint)centerPoint;
 
 - (void) removeVideoOverlayController;
-- (void) showSideNavigation;
 -(void) clearSearchBoxController;
 
 -(void) headerButtonIsActive: (BOOL)isActive;

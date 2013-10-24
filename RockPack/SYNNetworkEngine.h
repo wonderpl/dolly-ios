@@ -21,7 +21,7 @@
 - (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
                               onError: (MKNKErrorBlock) errorBlock;
 
-- (MKNetworkOperation *) updateChannelsScreenForCategory: (NSString *) categoryId
+- (MKNetworkOperation *) collectionsForCategory: (NSString *) categoryId
                                                 forRange: (NSRange) range
                                            ignoringCache: (BOOL) ignore
                                             onCompletion: (MKNKJSONCompleteBlock) completeBlock

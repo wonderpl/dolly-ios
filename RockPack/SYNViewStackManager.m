@@ -12,7 +12,6 @@
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNProfileRootViewController.h"
-#import "SYNSideNavigatorViewController.h"
 #import "SYNViewStackManager.h"
 #import "SYNSearchBoxViewController.h"
 #import "SYNNetworkMessageView.h"
@@ -57,7 +56,6 @@
     
     profileVC.channelOwner = channelOwner;
     
-    [self hideSideNavigator];
 }
 
 - (void) viewProfileDetails: (ChannelOwner *) channelOwner withNavigationController:(UINavigationController*) navigationController
@@ -84,7 +82,6 @@
     
     profileVC.channelOwner = channelOwner;
     
-    [self hideSideNavigator];
 }
 
 
@@ -129,7 +126,6 @@
 
     }
     
-    [self hideSideNavigator];
 }
 
 - (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId
@@ -157,7 +153,6 @@
         [self pushController: channelVC];
     }
     
-    [self hideSideNavigator];
 }
 
 
@@ -186,8 +181,7 @@
     
     [self.navigationController pushViewController: controller
                                          animated: YES];
-    //controller.view.hidden = YES;
-    [self hideSideNavigator];
+    
 }
 
 
@@ -263,228 +257,25 @@
     [self.navigationController popToViewController: controller
                                           animated: NO];
     
-    [self hideSideNavigator];
+    
 }
 
 #pragma mark - Search Bar Animations
 
--(void)dismissSearchBar
-{
-    [self dismissSearchBarTotal:NO];
-}
 
--(void)dismissSearchBarTotal:(BOOL)total
-{
-    
-    if(IS_IPAD) // this function is only for iPhone
-        return;
-   
-    SYNSearchBoxViewController* searchBoxVC = self.sideNavigatorController.searchViewController;
-    
-    if(self.searchBarOriginSideNavigation && !total) // open up the side navigation
-    {
-        [self.sideNavigatorController setState:SideNavigationStateHalf animated:NO];
-        
-        self.masterController.sideNavigationButton.selected = YES;
-        
-        self.masterController.darkOverlayView.hidden = NO;
-        
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                             
-                             self.masterController.darkOverlayView.alpha = 1.0;
-                             
-                         } completion:nil];
-    }
-    
-    
-    
-    if (self.masterController.isInSearchMode)
-    {
-        
-        [self popController];
-    }
-    
-    self.masterController.closeSearchButton.hidden = YES;
-    
-    self.masterController.sideNavigationButton.hidden = NO;
-    
-    
-    
-    [searchBoxVC removeFromParentViewController];
-    [self.masterController.view insertSubview:searchBoxVC.searchBoxView belowSubview:self.masterController.overlayView];
-    
-    
-    
-    [searchBoxVC.searchBoxView.searchTextField resignFirstResponder];
-    searchBoxVC.searchBoxView.searchTextField.text = @"";
-    
-    [searchBoxVC clear];
-    
-    searchBoxVC.searchBoxView.searchTextField.delegate = self.sideNavigatorController;
-    
-    //
-    
-    [searchBoxVC dismissSearchCategoriesIPhone];
-    
-    [UIView animateWithDuration: 0.1f
-                          delay: 0.3f
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations: ^{
-                         
-                         [searchBoxVC.searchBoxView hideCloseButton];
-                         
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         self.sideNavigatorController.mainContentView.hidden = NO;
-                         
-                         
-                         
-                         [UIView animateWithDuration: 0.2f
-                                               delay: 0.0f
-                                             options: UIViewAnimationOptionCurveEaseInOut
-                                          animations: ^{
-                                              
-                                              self.sideNavigatorController.mainContentView.alpha = 1.0f;
-                                              
-                                              if(IS_IOS_7_OR_GREATER)
-                                                  [searchBoxVC.searchBoxView shrinkForiOS7];
-                                              
-                                              CGRect newFrame = searchBoxVC.searchBoxView.frame;
-                                              
-                                              if(self.searchBarOriginSideNavigation && !total)
-                                              {
-                                                  newFrame.origin = CGPointMake(0.0f, 58.0f);
-                                              }
-                                                  
-                                              
-                                              else
-                                              {
-                                                  newFrame.origin = CGPointMake(0.0f, -58.0f);
-                                              }
-                                              
-                                              
-                                              searchBoxVC.searchBoxView.frame = newFrame;
-                                              
-                                          } completion:^(BOOL finished) {
-                                              
-                                              CGRect newFrame = searchBoxVC.searchBoxView.frame;
-                                              newFrame.origin = CGPointMake(0.0f, IS_IOS_7_OR_GREATER ? 10.0f : 0.0f);
-                                              searchBoxVC.searchBoxView.frame = newFrame;
-                                              
-                                              [searchBoxVC.searchBoxView removeFromSuperview];
-                                              [searchBoxVC removeFromParentViewController];
-                                              
-                                              [self.sideNavigatorController addChildViewController:searchBoxVC];
-                                              [self.sideNavigatorController.view addSubview:searchBoxVC.searchBoxView];
-                                              
-                                          }];
-                         
-                     }];
-}
+
+
 
 
 // for iPhone
 
--(void)presentSearchBar
-{
-    
-    SYNSearchBoxViewController* searchBoxVC = self.sideNavigatorController.searchViewController;
-    
-    self.searchBarOriginSideNavigation = (self.sideNavigatorController.state != SideNavigationStateHidden);
-    
-    
-    // do the swap...
-    
-    [searchBoxVC.searchBoxView removeFromSuperview];
-    
-    [searchBoxVC removeFromParentViewController];
-    
-    [self.masterController addChildViewController:searchBoxVC];
-    
-    [self.masterController.view addSubview:searchBoxVC.searchBoxView];
-    
-    CGRect newFrame = searchBoxVC.searchBoxView.frame;
-    
-    if(self.searchBarOriginSideNavigation)
-    {
-        newFrame.origin = CGPointMake(0.0f, 58.0f);
-        searchBoxVC.searchTextField.placeholder = @"Find videos, packs and people";
-    }
 
-    else
-    {
-        newFrame.origin = CGPointMake(0.0f, -58.0f);
-        searchBoxVC.searchTextField.placeholder = @"What are you into?";
-    }
-    
-    searchBoxVC.searchBoxView.frame = newFrame;
-    
-    [UIView animateWithDuration: 0.2f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         
-                         self.sideNavigatorController.mainContentView.alpha = 0.0f;
-                         
-                         if(IS_IOS_7_OR_GREATER)
-                             [searchBoxVC.searchBoxView enlargeForiOS7]; // set the elements for iOS7
-                         
-                         CGRect endFrame = searchBoxVC.searchBoxView.frame;
-                         
-                         if(self.searchBarOriginSideNavigation)
-                         {
-                             endFrame.origin.y -= 58.0f;
-                             
-                             
-                             
-                         }
-                         else
-                         {
-                             endFrame.origin.y += 58.0f;
-                             endFrame.size.height -= IS_IOS_7_OR_GREATER ? 10.0f : 0.0f;
-                         }
-                         
-                         
-                         
-                         
-                         searchBoxVC.searchBoxView.frame = endFrame;
-                         
-                     } completion: ^(BOOL finished) {
-                         
-                         [UIView animateWithDuration: 0.2
-                                               delay:0.0
-                                             options: UIViewAnimationOptionCurveEaseOut
-                                          animations: ^{
-                                              
-                                              [searchBoxVC.searchBoxView revealCloseButton];
-                                              
-                                          } completion:^(BOOL finished) {
-                                              if(!IS_IPAD)
-                                                  [searchBoxVC presentSearchCategoriesIPhone]; // already animated
-                                          }];
-                         
-                     }];
-    
-    searchBoxVC.searchBoxView.searchTextField.delegate = searchBoxVC;
-}
 
-- (void) hideSideNavigator
-{
-    self.sideNavigatorController.state = SideNavigationStateHidden;
-}
 
-- (void) showSideNavigator
-{
-    [self.masterController showSideNavigation];
-}
 
--(void) openSideNavigatorToIndex:(NSInteger)index
-{
-    [self showSideNavigator];
-    [self.sideNavigatorController openToIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-}
+
+
+
 #pragma mark - Popover Managment
 
 -(void)presentCoverViewController:(UIViewController*)viewController
@@ -635,15 +426,6 @@
 }
 
 
-- (void) displaySideNavigatorFromPushNotification
-{
-    if(IS_IPHONE)
-    {
-        self.sideNavigatorController.state = SideNavigationStateHalf;
-    }
-    
-    [self.sideNavigatorController displayFromPushNotification];
-}
 
 
 // for iPhone

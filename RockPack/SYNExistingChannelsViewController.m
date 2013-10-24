@@ -354,7 +354,6 @@
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
         
-        [appDelegate.viewStackManager resumeVideoIfShowing];
     }];
 }
 

@@ -14,7 +14,6 @@
                 <outlet property="overlayView" destination="89" id="91"/>
                 <outlet property="pageTitleLabel" destination="99" id="100"/>
                 <outlet property="sideNavigationButton" destination="101" id="122"/>
-                <outlet property="sideNavigationContainerView" destination="67" id="DMG-Ef-syd"/>
                 <outlet property="tabsView" destination="tNm-DH-njZ" id="IW2-Xp-Spw"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -67,10 +66,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" id="67" userLabel="Navigation Container View" customClass="SYNPassthroughView">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <view contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="View Container">
+                    <rect key="frame" x="71" y="0.0" width="953" height="768"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="101" userLabel="Side Navigation Button">
                     <rect key="frame" x="954" y="10" width="60" height="61"/>
