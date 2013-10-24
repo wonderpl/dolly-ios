@@ -1,5 +1,5 @@
 //
-//  SYNBottomTabViewController.m
+//  SYNContainerViewController.m
 //  RockPack
 //
 //  Created by Nick Banks on 13/10/2012.
@@ -137,8 +137,6 @@
 
 #pragma mark - UIViewController Containment
 
-
-
 - (void) setCurrentViewController: (UINavigationController *) currentViewController
 {
     if (!currentViewController)
@@ -146,6 +144,13 @@
         DebugLog(@"setCurrentViewController: to nil");
         return;
     }
+    
+    if (_currentViewController == currentViewController)
+    {
+        NSLog(@"same view, so dont change");
+        return;
+    }
+
     
     __weak UINavigationController *toViewController = currentViewController;
     __weak UINavigationController *fromViewController = _currentViewController;
@@ -168,28 +173,28 @@
         for (UIViewController *tmpController in fromViewController.viewControllers) {
             [tmpController.view removeFromSuperview];
         }
-        
-        
         for (UIViewController *tmpController in toViewController.viewControllers) {
             [tmpController didMoveToParentViewController: self];
         }
-
     };
     
     // == Do the Transition selectively == //
     if (fromViewController) // if not from first time
     {
         toViewController.view.frame = CGRectZero;
+       
+
+            [self transitionFromViewController: fromViewController
+                              toViewController: toViewController
+                                      duration: VIEW_CONTROLLER_TRANSITION_DURATION
+                                       options: UIViewAnimationOptionCurveEaseInOut
+                                    animations: ^{
+                                        toViewController.view.frame = self.view.frame;
+                                        fromViewController.view.frame = CGRectZero;
+                                    }
+                                    completion: CompleteTransitionBlock];
+
         
-        [self transitionFromViewController: fromViewController
-                          toViewController: toViewController
-                                  duration: VIEW_CONTROLLER_TRANSITION_DURATION
-                                   options: UIViewAnimationOptionCurveEaseInOut
-                                animations: ^{
-                                    toViewController.view.frame = self.view.frame;
-                                    fromViewController.view.frame = CGRectZero;
-                                }
-                                completion: CompleteTransitionBlock];
     }
     else
     {

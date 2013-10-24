@@ -69,12 +69,6 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatiorView;
-@property (nonatomic, assign) NSInteger lastContentOffset;
-@property (nonatomic, assign) CGPoint startDraggingPoint;
-@property (nonatomic, assign) CGPoint endDraggingPoint;
-@property (strong, nonatomic) NSDate *startDate;
-@property (strong, nonatomic) NSDate *endDate;
-@property (nonatomic, assign) ScrollingDirection *scrollDirection;
 
 
 @end
@@ -164,6 +158,8 @@ SYNImagePickerControllerDelegate>
     }
     
     
+    
+    
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
     
@@ -175,9 +171,9 @@ SYNImagePickerControllerDelegate>
 
 - (void) viewDidAppear: (BOOL) animated
 {
-    self.navigationController.navigationBar.hidden = YES;
-
-
+ //   self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    
+    
     [super viewDidAppear: animated];
     
     if (self.channelOwner == appDelegate.currentUser)
@@ -236,7 +232,7 @@ SYNImagePickerControllerDelegate>
 
 - (void) viewWillDisappear: (BOOL) animated
 {
-    self.navigationController.navigationBar.hidden = NO;
+   // self.navigationController.navigationBar.hidden = NO;
 
     self.channelThumbnailCollectionView.delegate = nil;
     self.subscriptionThumbnailCollectionView.delegate = nil;
@@ -1080,32 +1076,17 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    self.startDraggingPoint = scrollView.contentOffset;
-    self.startDate = [NSDate date];
-    
+    [super scrollViewWillBeginDragging:scrollView];
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    self.endDraggingPoint = scrollView.contentOffset;
-    self.endDate = [NSDate dateWithTimeIntervalSinceNow:self.startDate.timeIntervalSinceNow];
-    [self shouldHideTabBar];
+    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
 }
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
     
-    if (self.isIPhone) {
-        
-        if (self.lastContentOffset > scrollView.contentOffset.y)
-        {
-            self.scrollDirection = ScrollingDirectionUp;
-        }
-        else {
-            self.scrollDirection = ScrollingDirectionDown;
-        }
-        
-        self.lastContentOffset = scrollView.contentOffset.y;
-    }
+    [super scrollViewDidScroll:scrollView];
     if (!self.isIPhone)
     {
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
@@ -1134,24 +1115,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     {
         [self.moveTabDelegate moveTab:scrollView];
     }
-}
-
--(void) shouldHideTabBar{
-
-   CGPoint difference = CGPointMake(self.startDraggingPoint.x - self.endDraggingPoint.x, self.startDraggingPoint.y - self.endDraggingPoint.y);
-
-    NSLog(@"x:%f, y:%f", difference.x, difference.y);
-    NSLog(@"Time interval %f", self.startDate.timeIntervalSinceNow*-1);
-    
-    NSLog(@"%i", self.lastContentOffset);
-    
-    int check =fabsf(difference.y)/fabsf(self.startDate.timeIntervalSinceNow);
-    
-    NSLog(@"Check: %i", check);
-    if (check > 550) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollDetected" object:[NSNumber numberWithInteger:self.scrollDirection]  userInfo:nil];
-    }
-    
 }
 
 
