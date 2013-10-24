@@ -36,6 +36,9 @@
 #import "VideoInstance.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kScrollContentOff 100.0f
+#define kScrollSpeedBoundary 550.0f
+
 @interface SYNAbstractViewController ()  <UITextFieldDelegate,
                                           UIPopoverControllerDelegate>
 
@@ -57,8 +60,7 @@
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
 @property (nonatomic, assign) ScrollingDirection *scrollDirection;
-
-
+@property (nonatomic, assign) BOOL scrollerIsNearTop;
 
 @end
 
@@ -898,7 +900,19 @@
         }
         
         self.lastContentOffset = scrollView.contentOffset.y;
+ 
     
+    if (scrollView.contentOffset.y<kScrollContentOff && !self.scrollerIsNearTop) {
+        self.scrollerIsNearTop = YES;
+        //Notification that tells the navigation manager to show the navigation bar
+        [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement object:[NSNumber numberWithInt:3]  userInfo:nil];
+
+    }
+    
+    
+    if (scrollView.contentOffset.y>kScrollContentOff && self.scrollerIsNearTop) {
+        self.scrollerIsNearTop = NO;
+    }
 }
 
 -(void) shouldHideTabBar{
@@ -907,8 +921,8 @@
     
     int check =fabsf(difference.y)/fabsf(self.startDate.timeIntervalSinceNow);
 
-    if (check > 550) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollDetected" object:[NSNumber numberWithInteger:self.scrollDirection]  userInfo:nil];
+    if (check > kScrollSpeedBoundary) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement object:[NSNumber numberWithInteger:self.scrollDirection]  userInfo:nil];
     }
     
 }

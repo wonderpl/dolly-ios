@@ -157,9 +157,6 @@ SYNImagePickerControllerDelegate>
         [self updateTabStates];
     }
     
-    
-    
-    
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
     
@@ -1087,6 +1084,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 {
     
     [super scrollViewDidScroll:scrollView];
+    
     if (!self.isIPhone)
     {
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
@@ -1336,12 +1334,16 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 -(void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
     
     NSLog(@"Scroll hit the top");
-
+/*
     [UIView animateWithDuration:1.5f animations:^{
         CGRect tmpFrame =     self.navigationController.navigationBar.frame;
         tmpFrame.origin.y -= self.navigationController.navigationBar.frame.size.height;
         self.navigationController.navigationBar.frame = tmpFrame;
     }];
+  */
+    
+    
+    
     
 }
 @end

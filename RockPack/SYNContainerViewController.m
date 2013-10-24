@@ -202,8 +202,6 @@
                                         fromViewController.view.frame = CGRectZero;
                                     }
                                     completion: CompleteTransitionBlock];
-
-        self.inTransitioning = NO;
         
     }
     else

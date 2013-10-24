@@ -24,7 +24,7 @@
 {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(scrollDetected:) name:@"ScrollDetected" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(scrollDetected:) name:kScrollMovement object:nil];
 
     }
     return self;
@@ -32,7 +32,7 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ScrollDetected" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kScrollMovement object:nil];
 }
 
 - (void)scrollDetected:(NSNotification *)notification
