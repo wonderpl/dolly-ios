@@ -38,6 +38,11 @@
     
 }
 
+-(void)test
+{
+    
+}
+
 -(void)testSearchVideosRegistration
 {
     // for: http://api.rockpack.com/ws/search/videos/?locale=en_gb&q=Michael&start=0&size=10 as received on 23 of December 2013
