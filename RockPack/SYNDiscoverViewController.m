@@ -29,7 +29,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 // Categories Stuff
 @property (nonatomic, strong) IBOutlet UICollectionView* categoriesCollectionView;
-@property (nonatomic, strong) NSArray* categoriesDataArray;
+@property (nonatomic, strong) NSArray* genres;
 
 // Autocomplete Stuff
 @property (nonatomic, strong) NSTimer* autocompleteTimer;
@@ -106,7 +106,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
         resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
         
-        self.searchResultsController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self addChildViewController: self.searchResultsController]; // containment
         [self.view addSubview: self.searchResultsController.view];
@@ -139,15 +138,15 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) fetchCategories
 {
-    NSEntityDescription* categoryEntity = [NSEntityDescription entityForName: @"SubGenre"
-                                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-    [categoriesFetchRequest setEntity:categoryEntity];
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"genre.priority" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
+    
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
     
     
@@ -160,7 +159,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     
-    self.categoriesDataArray = [NSArray arrayWithArray:genresFetchedArray];
+    self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
 }
 
@@ -195,20 +194,21 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
-    return 1;
+    return self.genres.count;
 }
 
 - (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
 {
     
-    return self.categoriesDataArray.count;
+    return ((Genre*)self.genres[section]).subgenres.count;
 }
 
 
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SubGenre* genre = self.categoriesDataArray[indexPath.item];
+    Genre* currentGenre = self.genres[indexPath.section];
+    SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
     SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier: kCategoryCellIndetifier
                                                                             forIndexPath: indexPath];
@@ -216,7 +216,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     categoryCell.backgroundColor = [UIColor redColor];
     
-    categoryCell.label.text = genre.name;
+    categoryCell.label.text = subgenre.name;
     
     
     return categoryCell;
@@ -224,7 +224,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubGenre* selectedGenre = self.categoriesDataArray[indexPath.item];
+    SubGenre* selectedGenre = self.genres[indexPath.item];
     
     [self dispatchSearch:selectedGenre.name];
 }

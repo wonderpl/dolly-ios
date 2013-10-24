@@ -56,6 +56,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     [self.usersCollectionView registerNib:[UINib nibWithNibName:kSearchResultUserCell bundle:nil]
                forCellWithReuseIdentifier:kSearchResultUserCell];
     
+    
+    
     // == Define Completion Blocks for operations == //
     
     SYNSearchResultsViewController* wself = self;
@@ -99,7 +101,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewDidAppear:(BOOL)animated
 {
     [self repositionContainer];
 }
@@ -109,11 +111,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     // offset from the top
     CGRect containerRect = self.containerView.frame;
     containerRect.origin.y = 60.0f;
+    containerRect.size.width = self.view.frame.size.width * 0.5f;
     containerRect.size.height = self.view.frame.size.height;
     self.containerView.frame = containerRect;
     
-    // position elements in the middle correctly
-    self.containerView.center = CGPointMake(self.containerView.center.x, self.containerView.center.y);
     self.containerView.frame = CGRectIntegral(self.containerView.frame);
 }
 
