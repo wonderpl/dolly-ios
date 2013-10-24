@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNMasterViewController">
             <connections>
                 <outlet property="closeSearchButton" destination="118" id="127"/>
-                <outlet property="containerView" destination="128" id="H2i-CV-79G"/>
+                <outlet property="containerView" destination="jC0-R1-iPf" id="JHj-Hj-VmE"/>
                 <outlet property="errorContainerView" destination="128" id="129"/>
                 <outlet property="headerButton" destination="138" id="141"/>
                 <outlet property="headerContainerView" destination="146" id="kgz-AQ-Sao"/>
@@ -66,7 +66,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="Container View">
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="Container View">
                     <rect key="frame" x="71" y="0.0" width="953" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
