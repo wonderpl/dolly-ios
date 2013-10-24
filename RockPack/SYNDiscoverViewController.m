@@ -73,7 +73,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // set the image here instead of the XIB to make it streachable
     self.searchFieldBGImageView.image = [[UIImage imageNamed: @"FieldSearch"]
-                                            resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+                                 resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+    
     
     self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
     self.searchField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];

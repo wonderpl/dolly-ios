@@ -100,7 +100,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     [self addChildViewController:self.containerViewController];
     
-    self.containerViewController.view.frame = self.containerView.frame;
+    self.containerViewController.view.frame = CGRectMake(0.0f, 0.0f, self.containerView.frame.size.width, self.containerView.frame.size.height);
     [self.containerView addSubview:self.containerViewController.view];
     
     // == Setup Navigation Manager == (This should be done here because it is dependent on controls) == //

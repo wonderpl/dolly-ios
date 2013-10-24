@@ -25,6 +25,7 @@
 #import "SYNDiscoverViewController.h"
 #import "SYNFriendsViewController.h"
 #import "SYNProfileRootViewController.h"
+#import "SYNTrackableFrameView.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -50,11 +51,13 @@
 // Initialise all the elements common to all 4 tabs
 #pragma mark - View lifecycle
 
-- (void) loadView
+/* Uncomment to test the frame setting from outside this class
+-(void)loadView
 {
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view = [[UIView alloc] initWithFrame: [[SYNDeviceManager sharedInstance] currentScreenRect]];
+    self.view = [[SYNTrackableFrameView alloc] initWithFrame:CGRectZero];
 }
+*/
+
 
 
 - (void) viewDidLoad
@@ -62,6 +65,7 @@
     [super viewDidLoad];
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
     
     
     // == Feed Page == //
@@ -176,13 +180,10 @@
     
     void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
         
+        [fromViewController.view removeFromSuperview];
+        [fromViewController removeFromParentViewController];
         
-        for (UIViewController *tmpController in fromViewController.viewControllers) {
-            [tmpController.view removeFromSuperview];
-        }
-        for (UIViewController *tmpController in toViewController.viewControllers) {
-            [tmpController didMoveToParentViewController: self];
-        }
+        
     };
     
     __block CGRect correctFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
