@@ -14,7 +14,6 @@
 @interface SYNCollectionCellButtonControl : UIControl
 {
     @protected UIButton* button;
-    @protected UIFont* font;
     
 }
 

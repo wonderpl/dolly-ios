@@ -13,11 +13,14 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         
-        [button setImage:[UIImage imageNamed:@"IconVideoAddDefault"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState:UIControlStateSelected];
-        [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState:UIControlStateHighlighted];
+        [button setImage:[UIImage imageNamed:@"IconVideoAddDefault"] forState: UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateHighlighted];
+        
+        
     }
     return self;
 }

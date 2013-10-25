@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SYNCollectionCellButtonControl.h"
+
 @interface SYNAggregateChannelItemCell : UICollectionViewCell
+{
+    SYNCollectionCellButtonControl* followControl;
+    SYNCollectionCellButtonControl* shareControl;
+}
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* followersLabel;
 @property (nonatomic, strong) IBOutlet UILabel* videosLabel;
 
-@property (nonatomic, strong) IBOutlet UIButton* followButton;
-@property (nonatomic, strong) IBOutlet UIButton* shareButton;
-
--(IBAction)buttonPressed:(id)sender;
+@property (nonatomic, weak) id delegate;
 
 @end

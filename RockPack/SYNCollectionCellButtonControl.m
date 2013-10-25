@@ -7,12 +7,13 @@
 //
 
 #import "SYNCollectionCellButtonControl.h"
+#import "UIFont+SYNFont.h"
 
 @implementation SYNCollectionCellButtonControl
 
 +(id)buttonControl
 {
-    return [[self alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
+    return [[self alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 50.0f)];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -20,13 +21,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        font = [UIFont fontWithName:@"Avenir-Book" size:12.0f];
         
         // == Set Style == //
         
         button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = frame;
         
-        button.titleLabel.font = font;
+        button.titleLabel.font = [UIFont lightCustomFontOfSize:12.0f];
+        button.titleLabel.text = @"Michael";
         
         button.layer.cornerRadius = button.frame.size.height * 0.5;
         button.layer.borderColor = [self.defaultColor CGColor];
@@ -36,8 +38,10 @@
         [button setTitleColor: self.highlightedColor forState:UIControlStateHighlighted];
         [button setTitleColor: self.selectedColor forState:UIControlStateSelected];
         
-        //Make border change on Highlight
-        [button addTarget:self action:@selector(highlightedStateForButton:) forControlEvents:UIControlEventTouchDown];
+        self.backgroundColor = [UIColor clearColor];
+        button.backgroundColor = [UIColor clearColor];
+        
+        [self addSubview:button];
         
     }
     return self;
@@ -94,7 +98,9 @@
 
 -(void)setTitle:(NSString *)title
 {
-    button.titleLabel.text = title;
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitle:title forState:UIControlStateSelected];
+    [button setTitle:title forState:UIControlStateHighlighted];
 }
 -(NSString*)title
 {
@@ -106,14 +112,14 @@
 -(UIColor*)defaultColor
 {
     // override in subclass
-    return [UIColor colorWithWhite:(152.0f/255.0f)
-                             alpha:1.0f];
+    return [UIColor colorWithWhite: (152.0f/255.0f)
+                             alpha: 1.0f];
 }
 
 -(UIColor*)highlightedColor
 {
-    return [UIColor colorWithWhite:(194.0f/255.0f)
-                             alpha:1.0f];
+    return [UIColor colorWithWhite: (194.0f/255.0f)
+                             alpha: 1.0f];
 }
 
 -(UIColor*)selectedColor

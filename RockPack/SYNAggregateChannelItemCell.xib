@@ -34,35 +34,13 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kOy-bk-Sdy" userLabel="&quot;follow&quot; - Button">
-                        <rect key="frame" x="58" y="90" width="46" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="follow">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="buttonPressed:" destination="5ES-BZ-yAz" eventType="touchUpInside" id="yve-xs-qer"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hy4-QC-x2b" userLabel="&quot;share&quot; - Button">
-                        <rect key="frame" x="145" y="90" width="46" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="share">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="buttonPressed:" destination="5ES-BZ-yAz" eventType="touchUpInside" id="7Xg-GM-bJh"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="307" height="175"/>
             <connections>
-                <outlet property="followButton" destination="kOy-bk-Sdy" id="Zn7-b1-rXm"/>
                 <outlet property="followersLabel" destination="kbZ-M4-tPZ" id="QwD-ZG-u3G"/>
-                <outlet property="shareButton" destination="hy4-QC-x2b" id="0QF-rT-V7c"/>
                 <outlet property="titleLabel" destination="Au2-6S-lR8" id="x6M-jI-2wQ"/>
                 <outlet property="videosLabel" destination="u0i-15-nv2" id="Ttd-3l-H7J"/>
             </connections>
