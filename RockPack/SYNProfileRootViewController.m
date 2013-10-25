@@ -379,8 +379,6 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
         
         
-        [self.view addSubview:tmpHeaderChannelsView];
-        [self.view addSubview:tmpHeaderSubscriptionsView];
         
     }
     
