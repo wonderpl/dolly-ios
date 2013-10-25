@@ -1222,7 +1222,6 @@
 		BE7D354517170F540085AB81 /* ButtonRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D353F17170F530085AB81 /* ButtonRefreshArrow@2x.png */; };
 		BE7D354617170F540085AB81 /* ButtonRefreshSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D354017170F540085AB81 /* ButtonRefreshSelected.png */; };
 		BE7D354717170F540085AB81 /* ButtonRefreshSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D354117170F540085AB81 /* ButtonRefreshSelected@2x.png */; };
-		BE7D3551171870780085AB81 /* SYNBackButtonControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D3550171870780085AB81 /* SYNBackButtonControl.m */; };
 		BE82099217A95F6E00472ADD /* channelFeedCover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82098B17A95F6E00472ADD /* channelFeedCover@2x.png */; };
 		BE82099317A95F6E00472ADD /* channelFeedCover~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82098C17A95F6E00472ADD /* channelFeedCover~iphone.png */; };
 		BE82099417A95F6E00472ADD /* channelFeedCover@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82098D17A95F6E00472ADD /* channelFeedCover@2x~iphone.png */; };
@@ -2816,8 +2815,6 @@
 		BE7D353F17170F530085AB81 /* ButtonRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonRefreshArrow@2x.png"; path = "Assets/Images/ButtonRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		BE7D354017170F540085AB81 /* ButtonRefreshSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonRefreshSelected.png; path = Assets/Images/ButtonRefreshSelected.png; sourceTree = "<group>"; };
 		BE7D354117170F540085AB81 /* ButtonRefreshSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonRefreshSelected@2x.png"; path = "Assets/Images/ButtonRefreshSelected@2x.png"; sourceTree = "<group>"; };
-		BE7D354F171870780085AB81 /* SYNBackButtonControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNBackButtonControl.h; sourceTree = "<group>"; };
-		BE7D3550171870780085AB81 /* SYNBackButtonControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNBackButtonControl.m; sourceTree = "<group>"; };
 		BE82098B17A95F6E00472ADD /* channelFeedCover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "channelFeedCover@2x.png"; path = "Assets/Images/channelFeedCover@2x.png"; sourceTree = "<group>"; };
 		BE82098C17A95F6E00472ADD /* channelFeedCover~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "channelFeedCover~iphone.png"; path = "Assets/Images/channelFeedCover~iphone.png"; sourceTree = "<group>"; };
 		BE82098D17A95F6E00472ADD /* channelFeedCover@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "channelFeedCover@2x~iphone.png"; path = "Assets/Images/channelFeedCover@2x~iphone.png"; sourceTree = "<group>"; };
@@ -4003,8 +4000,6 @@
 			children = (
 				01D0998917452A4000351C82 /* BBCyclingLabel.h */,
 				01D0998A17452A4000351C82 /* BBCyclingLabel.m */,
-				BE7D354F171870780085AB81 /* SYNBackButtonControl.h */,
-				BE7D3550171870780085AB81 /* SYNBackButtonControl.m */,
 				BE7D3539171708F60085AB81 /* SYNRefreshButton.h */,
 				BE7D353A171708F60085AB81 /* SYNRefreshButton.m */,
 				01982587162B605A00216900 /* SYNTabImageView.h */,
@@ -7392,7 +7387,6 @@
 				BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */,
 				BE7D35051715CE450085AB81 /* SYNRockpackNotification.m in Sources */,
 				BE7D353B171708F60085AB81 /* SYNRefreshButton.m in Sources */,
-				BE7D3551171870780085AB81 /* SYNBackButtonControl.m in Sources */,
 				01AFF99717EC91540002131A /* NSObject+LLDBQuickLook.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */,

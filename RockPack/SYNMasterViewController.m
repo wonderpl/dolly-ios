@@ -12,7 +12,6 @@
 #import "SYNAccountSettingsMainTableViewController.h"
 #import "SYNAccountSettingsModalContainer.h"
 #import "SYNActivityPopoverViewController.h"
-#import "SYNBackButtonControl.h"
 #import "SYNCaution.h"
 #import "SYNCautionMessageView.h"
 #import "SYNChannelDetailViewController.h"
@@ -48,7 +47,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic, strong) SYNAccountSettingsModalContainer* modalAccountContainer;
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
-@property (nonatomic, strong) SYNBackButtonControl* backButtonControl;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
@@ -104,21 +102,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     appDelegate.navigationManager.containerController = self.containerViewController; // container
     
     
-    
-    // == Compensate for iOS7 == //
-    CGFloat offsetFromTop = IS_IOS_7_OR_GREATER ? (IS_IPAD ? 10.0f : 4.0f) : 0.0f;
-    CGRect frameToAdjust;
-    frameToAdjust = self.headerContainerView.frame;
-    frameToAdjust.origin.y += offsetFromTop;
-    self.headerContainerView.frame = frameToAdjust;
-    
-    
-    
-    // ======================= //
-    
-    
-    
-        
     // == Fade in from splash screen (not in AppDelegate so that the Orientation is known) == //
     
     UIImageView *splashView;
@@ -142,20 +125,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     self.currentNavigationButtonsAppearance = NavigationButtonsAppearanceBlack;
     
-    
-    
-    
-    // == Back Button == //
-    
-    self.backButtonControl = [SYNBackButtonControl backButton];
-    CGRect backButtonFrame = self.backButtonControl.frame;
-    backButtonFrame.origin.y = IS_IPAD ? 10.0f : (IS_IOS_7_OR_GREATER ? 3.0f : 5.0f);
-    self.backButtonControl.frame = backButtonFrame;
-    
-    if (IS_IOS_7_OR_GREATER)
-    {
-        self.self.backButtonControl.center = CGPointMake(self.self.backButtonControl.center.x, self.self.backButtonControl.center.y + kiOS7PlusHeaderYOffset);
-    }
+    // == Listen to Reachability Notifications for no network messages == //
     
     
     self.reachability = [Reachability reachabilityWithHostname:appDelegate.networkEngine.hostName];
@@ -177,16 +147,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountSettingsLogout) name:kAccountSettingsLogout object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allNavControlsRequested:) name:kNoteAllNavControlsHide object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allNavControlsRequested:) name:kNoteAllNavControlsShow object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteHideNetworkMessages object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteShowNetworkMessages object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTitleAndDots:) name:kNoteHideTitleAndDots object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollerPageChanged:) name:kScrollerPageChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchTyped:) name:kSearchTyped object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
     
     
@@ -462,32 +428,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) allNavControlsRequested: (NSNotification*) notification
-{
-    
-    NSString* notificationName = [notification name];
-    if (!notificationName)
-        return;
-    
-    if ([notificationName isEqualToString: kNoteAllNavControlsShow])
-    {
-        NSString  *showSearchString = notification.userInfo[@"showSearch"];
-        
-        if(IS_IPAD || showSearchString)
-         //   self.searchButton.hidden = NO;
-        
-        self.closeSearchButton.hidden = YES;
-        self.backButtonControl.hidden = NO;
-        
-        self.backButtonControl.hidden = NO;
-    }
-    else
-    {
-       
-        self.closeSearchButton.hidden = YES;
-        self.backButtonControl.hidden = YES;
-    }
-}
 
 
 
