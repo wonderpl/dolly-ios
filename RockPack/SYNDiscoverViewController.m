@@ -101,13 +101,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
     CGRect resultsFrame = CGRectZero;
     
+    
     if(IS_IPAD)
     {
         
         resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
         resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
-        resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
-        resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
+        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x;
+        resultsFrame.size.height = self.view.frame.size.height;
         
         
         [self addChildViewController: self.searchResultsController]; // containment
