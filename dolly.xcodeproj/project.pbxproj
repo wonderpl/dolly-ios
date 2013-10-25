@@ -40,12 +40,6 @@
 		010DEFE11629BDC40080F26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 010DEFE01629BDC40080F26B /* main.m */; };
 		010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 010DEFE41629BDC40080F26B /* SYNAppDelegate.m */; };
 		0110AE6117DF383C00DC7724 /* SYNProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0110AE5F17DF383C00DC7724 /* SYNProgressView.m */; };
-		0111CDE717284DD700612186 /* ButtonVideoDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDE117284DD700612186 /* ButtonVideoDelete.png */; };
-		0111CDE817284DD700612186 /* ButtonVideoDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDE217284DD700612186 /* ButtonVideoDelete@2x.png */; };
-		0111CDE917284DD700612186 /* ButtonVideoDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDE317284DD700612186 /* ButtonVideoDeleteHighlighted.png */; };
-		0111CDEA17284DD700612186 /* ButtonVideoDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDE417284DD700612186 /* ButtonVideoDeleteHighlighted@2x.png */; };
-		0111CDEB17284DD700612186 /* ButtonVideoDeleteSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDE517284DD700612186 /* ButtonVideoDeleteSelected.png */; };
-		0111CDEC17284DD700612186 /* ButtonVideoDeleteSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDE617284DD700612186 /* ButtonVideoDeleteSelected@2x.png */; };
 		0111CDF317292F3B00612186 /* ButtonCameraPadHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDED17292F3B00612186 /* ButtonCameraPadHighlighted.png */; };
 		0111CDF417292F3B00612186 /* ButtonCameraPadHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDEE17292F3B00612186 /* ButtonCameraPadHighlighted@2x.png */; };
 		0111CDF517292F3B00612186 /* ButtonCameraPadSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDEF17292F3B00612186 /* ButtonCameraPadSelected.png */; };
@@ -163,8 +157,6 @@
 		01363EC116300F3A00FFAA09 /* SYNVideoThumbnailWideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01363EC016300F3A00FFAA09 /* SYNVideoThumbnailWideCell.xib */; };
 		01363F241630B81400FFAA09 /* SYNVideoThumbnailWideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01363F231630B81400FFAA09 /* SYNVideoThumbnailWideCell.m */; };
 		0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */; };
-		01450AF5171DB4B5009F54CD /* ButtonAddSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF3171DB4B5009F54CD /* ButtonAddSelected.png */; };
-		01450AF6171DB4B5009F54CD /* ButtonAddSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF4171DB4B5009F54CD /* ButtonAddSelected@2x.png */; };
 		01450AFA171DB4D7009F54CD /* PlaceholderVideoBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF7171DB4D7009F54CD /* PlaceholderVideoBottom@2x.png */; };
 		01450AFB171DB4D7009F54CD /* PlaceholderVideoMiddle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF8171DB4D7009F54CD /* PlaceholderVideoMiddle@2x.png */; };
 		01450AFC171DB4D7009F54CD /* PlaceholderVideoTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF9171DB4D7009F54CD /* PlaceholderVideoTop@2x.png */; };
@@ -255,10 +247,6 @@
 		019E82031654043A00744A03 /* Select.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FD1654043A00744A03 /* Select.aif */; };
 		019E82041654043A00744A03 /* Trash.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FE1654043A00744A03 /* Trash.aif */; };
 		01A02E76176E1EA5001F14BD /* UIImage+Monochrome.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A02E75176E1EA5001F14BD /* UIImage+Monochrome.m */; };
-		01A076831676293200E1CDAD /* ButtonAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A076781676292F00E1CDAD /* ButtonAdd@2x.png */; };
-		01A076841676293200E1CDAD /* ButtonAddHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A076791676292F00E1CDAD /* ButtonAddHighlighted.png */; };
-		01A076851676293200E1CDAD /* ButtonAddHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A0767A1676292F00E1CDAD /* ButtonAddHighlighted@2x.png */; };
-		01A0768F1676295C00E1CDAD /* ButtonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A0768E1676295B00E1CDAD /* ButtonAdd.png */; };
 		01A3EC2E16AECE4B008DCE08 /* SYNActivityPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A3EC2C16AECE4B008DCE08 /* SYNActivityPopoverViewController.m */; };
 		01A3EC2F16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A3EC2D16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib */; };
 		01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8216F32C3400B05084 /* ShuttleBarRemainingBar.png */; };
@@ -1347,6 +1335,10 @@
 		BEB3135B18182D6A00FAF98A /* SearchVideosResultsForMichael.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB3135A18182D6A00FAF98A /* SearchVideosResultsForMichael.json */; };
 		BEB3135C1818373100FAF98A /* SearchVideosResultsForMichael.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB3135A18182D6A00FAF98A /* SearchVideosResultsForMichael.json */; };
 		BEB3135D181838BB00FAF98A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E427BB1664C5F1009B941F /* CoreData.framework */; };
+		BEB31365181AB81600FAF98A /* IconVideoAddDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31361181AB81600FAF98A /* IconVideoAddDefault.png */; };
+		BEB31366181AB81600FAF98A /* IconVideoAddDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */; };
+		BEB31367181AB81600FAF98A /* IconVideoAddHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */; };
+		BEB31368181AB81600FAF98A /* IconVideoAddHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */; };
 		BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */; };
 		BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */; };
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
@@ -1431,12 +1423,6 @@
 		010DEFE41629BDC40080F26B /* SYNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYNAppDelegate.m; sourceTree = "<group>"; };
 		0110AE5F17DF383C00DC7724 /* SYNProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProgressView.m; sourceTree = "<group>"; };
 		0110AE6017DF383C00DC7724 /* SYNProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProgressView.h; sourceTree = "<group>"; };
-		0111CDE117284DD700612186 /* ButtonVideoDelete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonVideoDelete.png; path = Assets/Images/ButtonVideoDelete.png; sourceTree = "<group>"; };
-		0111CDE217284DD700612186 /* ButtonVideoDelete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonVideoDelete@2x.png"; path = "Assets/Images/ButtonVideoDelete@2x.png"; sourceTree = "<group>"; };
-		0111CDE317284DD700612186 /* ButtonVideoDeleteHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonVideoDeleteHighlighted.png; path = Assets/Images/ButtonVideoDeleteHighlighted.png; sourceTree = "<group>"; };
-		0111CDE417284DD700612186 /* ButtonVideoDeleteHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonVideoDeleteHighlighted@2x.png"; path = "Assets/Images/ButtonVideoDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
-		0111CDE517284DD700612186 /* ButtonVideoDeleteSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonVideoDeleteSelected.png; path = Assets/Images/ButtonVideoDeleteSelected.png; sourceTree = "<group>"; };
-		0111CDE617284DD700612186 /* ButtonVideoDeleteSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonVideoDeleteSelected@2x.png"; path = "Assets/Images/ButtonVideoDeleteSelected@2x.png"; sourceTree = "<group>"; };
 		0111CDED17292F3B00612186 /* ButtonCameraPadHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCameraPadHighlighted.png; path = Assets/Images/ButtonCameraPadHighlighted.png; sourceTree = "<group>"; };
 		0111CDEE17292F3B00612186 /* ButtonCameraPadHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCameraPadHighlighted@2x.png"; path = "Assets/Images/ButtonCameraPadHighlighted@2x.png"; sourceTree = "<group>"; };
 		0111CDEF17292F3B00612186 /* ButtonCameraPadSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCameraPadSelected.png; path = Assets/Images/ButtonCameraPadSelected.png; sourceTree = "<group>"; };
@@ -1603,8 +1589,6 @@
 		01363F231630B81400FFAA09 /* SYNVideoThumbnailWideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoThumbnailWideCell.m; sourceTree = "<group>"; };
 		0142ED8716B19FBE008694DA /* SYNProfileRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileRootViewController.h; sourceTree = "<group>"; };
 		0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileRootViewController.m; sourceTree = "<group>"; };
-		01450AF3171DB4B5009F54CD /* ButtonAddSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonAddSelected.png; path = Assets/Images/ButtonAddSelected.png; sourceTree = "<group>"; };
-		01450AF4171DB4B5009F54CD /* ButtonAddSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonAddSelected@2x.png"; path = "Assets/Images/ButtonAddSelected@2x.png"; sourceTree = "<group>"; };
 		01450AF7171DB4D7009F54CD /* PlaceholderVideoBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlaceholderVideoBottom@2x.png"; path = "Assets/Images/PlaceholderVideoBottom@2x.png"; sourceTree = "<group>"; };
 		01450AF8171DB4D7009F54CD /* PlaceholderVideoMiddle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlaceholderVideoMiddle@2x.png"; path = "Assets/Images/PlaceholderVideoMiddle@2x.png"; sourceTree = "<group>"; };
 		01450AF9171DB4D7009F54CD /* PlaceholderVideoTop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlaceholderVideoTop@2x.png"; path = "Assets/Images/PlaceholderVideoTop@2x.png"; sourceTree = "<group>"; };
@@ -1734,10 +1718,6 @@
 		019E81FE1654043A00744A03 /* Trash.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trash.aif; path = Assets/Audio/Trash.aif; sourceTree = "<group>"; };
 		01A02E74176E1EA5001F14BD /* UIImage+Monochrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Monochrome.h"; sourceTree = "<group>"; };
 		01A02E75176E1EA5001F14BD /* UIImage+Monochrome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Monochrome.m"; sourceTree = "<group>"; };
-		01A076781676292F00E1CDAD /* ButtonAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonAdd@2x.png"; path = "Assets/Images/ButtonAdd@2x.png"; sourceTree = "<group>"; };
-		01A076791676292F00E1CDAD /* ButtonAddHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonAddHighlighted.png; path = Assets/Images/ButtonAddHighlighted.png; sourceTree = "<group>"; };
-		01A0767A1676292F00E1CDAD /* ButtonAddHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonAddHighlighted@2x.png"; path = "Assets/Images/ButtonAddHighlighted@2x.png"; sourceTree = "<group>"; };
-		01A0768E1676295B00E1CDAD /* ButtonAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonAdd.png; path = Assets/Images/ButtonAdd.png; sourceTree = "<group>"; };
 		01A3EC2B16AECE4B008DCE08 /* SYNActivityPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNActivityPopoverViewController.h; sourceTree = "<group>"; };
 		01A3EC2C16AECE4B008DCE08 /* SYNActivityPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNActivityPopoverViewController.m; sourceTree = "<group>"; };
 		01A3EC2D16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNActivityPopoverViewController.xib; sourceTree = "<group>"; };
@@ -2965,6 +2945,10 @@
 		BEB313551817D8C400FAF98A /* SYNSearchResultsUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchResultsUserCell.m; sourceTree = "<group>"; };
 		BEB313571817D93F00FAF98A /* SYNSearchResultsUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNSearchResultsUserCell.xib; sourceTree = "<group>"; };
 		BEB3135A18182D6A00FAF98A /* SearchVideosResultsForMichael.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SearchVideosResultsForMichael.json; sourceTree = "<group>"; };
+		BEB31361181AB81600FAF98A /* IconVideoAddDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoAddDefault.png; path = Assets/Images/IconVideoAddDefault.png; sourceTree = "<group>"; };
+		BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoAddDefault@2x.png"; path = "Assets/Images/IconVideoAddDefault@2x.png"; sourceTree = "<group>"; };
+		BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoAddHighlighted.png; path = Assets/Images/IconVideoAddHighlighted.png; sourceTree = "<group>"; };
+		BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoAddHighlighted@2x.png"; path = "Assets/Images/IconVideoAddHighlighted@2x.png"; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -3348,8 +3332,10 @@
 				01677DF616554AB500B1B1D8 /* ButtonBack.png */,
 				01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */,
 				01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */,
-				01363F251631523100FFAA09 /* Search */,
-				01363F111630AEA600FFAA09 /* Thumbnail */,
+				BEB31361181AB81600FAF98A /* IconVideoAddDefault.png */,
+				BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */,
+				BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */,
+				BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -3404,32 +3390,6 @@
 				019E81FE1654043A00744A03 /* Trash.aif */,
 			);
 			name = Audio;
-			sourceTree = "<group>";
-		};
-		01363F111630AEA600FFAA09 /* Thumbnail */ = {
-			isa = PBXGroup;
-			children = (
-				0111CDE117284DD700612186 /* ButtonVideoDelete.png */,
-				0111CDE217284DD700612186 /* ButtonVideoDelete@2x.png */,
-				0111CDE317284DD700612186 /* ButtonVideoDeleteHighlighted.png */,
-				0111CDE417284DD700612186 /* ButtonVideoDeleteHighlighted@2x.png */,
-				0111CDE517284DD700612186 /* ButtonVideoDeleteSelected.png */,
-				0111CDE617284DD700612186 /* ButtonVideoDeleteSelected@2x.png */,
-				01450AF3171DB4B5009F54CD /* ButtonAddSelected.png */,
-				01450AF4171DB4B5009F54CD /* ButtonAddSelected@2x.png */,
-				01A0768E1676295B00E1CDAD /* ButtonAdd.png */,
-				01A076781676292F00E1CDAD /* ButtonAdd@2x.png */,
-				01A076791676292F00E1CDAD /* ButtonAddHighlighted.png */,
-				01A0767A1676292F00E1CDAD /* ButtonAddHighlighted@2x.png */,
-			);
-			name = Thumbnail;
-			sourceTree = "<group>";
-		};
-		01363F251631523100FFAA09 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Search;
 			sourceTree = "<group>";
 		};
 		0142ED8D16B1B7FE008694DA /* You */ = {
@@ -6053,6 +6013,7 @@
 				019E82011654043A00744A03 /* NewSlideOut.aif in Resources */,
 				019E82021654043A00744A03 /* Scroll.aif in Resources */,
 				BEA216CD17E9B389007C6DF7 /* ButtonFriendsFacebookDefault@2x~iphone.png in Resources */,
+				BEB31368181AB81600FAF98A /* IconVideoAddHighlighted@2x.png in Resources */,
 				019E82031654043A00744A03 /* Select.aif in Resources */,
 				BEA216E217E9B389007C6DF7 /* ButtonFriendsRockpackSelected~iphone.png in Resources */,
 				019E82041654043A00744A03 /* Trash.aif in Resources */,
@@ -6071,10 +6032,6 @@
 				01891A3D16725A3400AB07BB /* PanelDay.png in Resources */,
 				BEB312FB1815638700FAF98A /* TabFeed@2x.png in Resources */,
 				01891A3E16725A3400AB07BB /* PanelDay@2x.png in Resources */,
-				01A076831676293200E1CDAD /* ButtonAdd@2x.png in Resources */,
-				01A076841676293200E1CDAD /* ButtonAddHighlighted.png in Resources */,
-				01A076851676293200E1CDAD /* ButtonAddHighlighted@2x.png in Resources */,
-				01A0768F1676295C00E1CDAD /* ButtonAdd.png in Resources */,
 				01946B551683209600354601 /* GlossChannelSmall.png in Resources */,
 				01946B561683209600354601 /* GlossChannelSmall@2x.png in Resources */,
 				01946B571683209600354601 /* GlossVideo.png in Resources */,
@@ -6209,6 +6166,7 @@
 				01AEFBD01701AC870060467A /* AccountSettingsView.png in Resources */,
 				01AEFBD11701AC870060467A /* AccountSettingsView@2x.png in Resources */,
 				01AEFBD81701ACD60060467A /* DividerSearch.png in Resources */,
+				BEB31366181AB81600FAF98A /* IconVideoAddDefault@2x.png in Resources */,
 				01AEFBD91701ACD60060467A /* DividerSearch@2x.png in Resources */,
 				01AEFBE21701ACFD0060467A /* popover-black-bcg-image.png in Resources */,
 				01AEFBE31701ACFE0060467A /* popover-black-bcg-image@2x.png in Resources */,
@@ -6289,8 +6247,6 @@
 				BE2D2155171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png in Resources */,
 				BE2D2158171D8A4500B4B755 /* AvatarProfile.png in Resources */,
 				BE2D2159171D8A4500B4B755 /* AvatarProfile@2x.png in Resources */,
-				01450AF5171DB4B5009F54CD /* ButtonAddSelected.png in Resources */,
-				01450AF6171DB4B5009F54CD /* ButtonAddSelected@2x.png in Resources */,
 				1FFAE63417E230EB006C92CA /* ShadowPanelFriends@2x.png in Resources */,
 				01450AFA171DB4D7009F54CD /* PlaceholderVideoBottom@2x.png in Resources */,
 				01450AFB171DB4D7009F54CD /* PlaceholderVideoMiddle@2x.png in Resources */,
@@ -6373,12 +6329,6 @@
 				BE285DC51726996700D995AB /* IconNetwork@2x.png in Resources */,
 				012CDC3D17E2286C00C723BB /* DeletePackButton.png in Resources */,
 				1F458B2317E1CE8E003C14AC /* AppIcon-Dev-29x29@2x.png in Resources */,
-				0111CDE717284DD700612186 /* ButtonVideoDelete.png in Resources */,
-				0111CDE817284DD700612186 /* ButtonVideoDelete@2x.png in Resources */,
-				0111CDE917284DD700612186 /* ButtonVideoDeleteHighlighted.png in Resources */,
-				0111CDEA17284DD700612186 /* ButtonVideoDeleteHighlighted@2x.png in Resources */,
-				0111CDEB17284DD700612186 /* ButtonVideoDeleteSelected.png in Resources */,
-				0111CDEC17284DD700612186 /* ButtonVideoDeleteSelected@2x.png in Resources */,
 				1F5FAEC217E7244F00205F3F /* ButtonCancelAddToPackHighlighted@2x~iphone.png in Resources */,
 				0111CDF317292F3B00612186 /* ButtonCameraPadHighlighted.png in Resources */,
 				01578C2B17DF840800B4F498 /* LowerParallaxStars.png in Resources */,
@@ -6631,6 +6581,7 @@
 				38A200C31731607F00FB9F57 /* FieldSearch.png in Resources */,
 				38A200C41731607F00FB9F57 /* IconSearch@2x~iphone.png in Resources */,
 				38A200C51731607F00FB9F57 /* IconSearch~iphone.png in Resources */,
+				BEB31367181AB81600FAF98A /* IconVideoAddHighlighted.png in Resources */,
 				38A200C61731607F00FB9F57 /* NavArrow@2x~iphone.png in Resources */,
 				38A200C71731607F00FB9F57 /* NavArrowSelected@2x~iphone.png in Resources */,
 				38A200C81731607F00FB9F57 /* NavArrowSelected~iphone.png in Resources */,
@@ -6954,6 +6905,7 @@
 				1FE1C6611761FFFF00EDFC0E /* IconRockpackAbout@2x.png in Resources */,
 				1FE1C66617621F7400EDFC0E /* ButtonPrivacy.png in Resources */,
 				1FE1C66717621F7400EDFC0E /* ButtonPrivacy@2x.png in Resources */,
+				BEB31365181AB81600FAF98A /* IconVideoAddDefault.png in Resources */,
 				1FE1C66817621F7400EDFC0E /* ButtonTerms.png in Resources */,
 				1FE1C66917621F7400EDFC0E /* ButtonTerms@2x.png in Resources */,
 				1FE1C66F1762236B00EDFC0E /* ButtonPrivacyHighlighted.png in Resources */,
