@@ -76,7 +76,7 @@
     {
         profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
         
-        [navigationController pushViewController:profileVC animated:nil];
+        [navigationController pushViewController:profileVC animated:NO];
 
     }
     
@@ -181,6 +181,7 @@
     [self.navigationController pushViewController: controller
                                          animated: YES];
     
+
 }
 
 
@@ -293,6 +294,7 @@
                      completion: ^(BOOL finished) {
                          
                      }];
+    
     
 }
 -(void)removeCoverPopoverViewController

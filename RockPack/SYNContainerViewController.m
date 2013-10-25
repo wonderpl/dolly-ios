@@ -42,7 +42,6 @@
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
 @property (nonatomic, weak) SYNProfileRootViewController *tmpProfileRootView;
 
-
 @end
 
 
@@ -153,11 +152,9 @@
         return;
     }
     
+    //If the current view is the already showing, dont change.
     if (_currentViewController == currentViewController)
-    {
-        NSLog(@"same view, so dont change");
         return;
-    }
 
     
     __weak UINavigationController *toViewController = currentViewController;
@@ -184,6 +181,15 @@
         [fromViewController removeFromParentViewController];
         
         
+        for (UIViewController *tmpController in fromViewController.viewControllers) {
+            [tmpController.view removeFromSuperview];
+        }
+        for (UIViewController *tmpController in toViewController.viewControllers) {
+            [tmpController didMoveToParentViewController: self];
+        }
+        
+        self.isTransitioning = NO;
+
     };
     
     __block CGRect correctFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
@@ -194,6 +200,7 @@
         toViewController.view.frame = CGRectZero;
        
 
+        self.isTransitioning = YES;
             [self transitionFromViewController: fromViewController
                               toViewController: toViewController
                                       duration: VIEW_CONTROLLER_TRANSITION_DURATION
@@ -203,7 +210,6 @@
                                         fromViewController.view.frame = CGRectZero;
                                     }
                                     completion: CompleteTransitionBlock];
-
         
     }
     else
@@ -272,27 +278,6 @@
 - (NSString *) description
 {
     return NSStringFromClass([self class]);
-}
-
-
-- (void) moveTab : (UIScrollView*) scrollView{
-   // NSLog(@"moveTab container");
-    
-    if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
-    {
-        [self.moveTabDelegate moveTab:scrollView];
-    }
-}
-
-
-- (void) observeValueForKeyPath: (NSString *) keyPath
-                       ofObject: (id) object
-                         change: (NSDictionary *) change
-                        context: (void *) context
-{
-    if ([keyPath isEqualToString: @"scrollViewKVO"]){
-        NSLog(@"something changed");
-    }
 }
 
 @end
