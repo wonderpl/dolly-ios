@@ -29,13 +29,15 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 // Categories Stuff
 @property (nonatomic, strong) IBOutlet UICollectionView* categoriesCollectionView;
-@property (nonatomic, strong) NSArray* categoriesDataArray;
+@property (nonatomic, strong) NSArray* genres;
 
 // Autocomplete Stuff
 @property (nonatomic, strong) NSTimer* autocompleteTimer;
 @property (nonatomic, weak) MKNetworkOperation* autocompleteNetworkOperation;
 @property (nonatomic, strong) NSArray* autocompleteSuggestionsArray;
 @property (nonatomic, strong) IBOutlet UITableView* autocompleteTableView;
+
+@property (nonatomic, strong) IBOutlet UIView* sideContainerView;
 
 @property (nonatomic, strong) SYNSearchResultsViewController* searchResultsController;
 
@@ -60,6 +62,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                               
                               };
     
+    self.searchCloseButton.alpha = 0.0f;
+    
     self.autocompleteTableView.hidden = YES;
     
     
@@ -73,7 +77,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // set the image here instead of the XIB to make it streachable
     self.searchFieldBGImageView.image = [[UIImage imageNamed: @"FieldSearch"]
-                                            resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+                                 resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+    
     
     self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
     self.searchField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
@@ -98,21 +103,21 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if(IS_IPAD)
     {
         
-        resultsFrame.origin.x = self.searchField.frame.size.width + 50.0f; // collection views should be aligned to the search field
-        resultsFrame.origin.y = 0.0f;
+        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
+        resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
         resultsFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth] - resultsFrame.origin.x;
         resultsFrame.size.height = [[SYNDeviceManager sharedInstance] currentScreenHeight];
         
-        self.searchResultsController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        [self addChildViewController:self.searchResultsController]; // containment
-        [self.view addSubview:self.searchResultsController.view];
+        [self addChildViewController: self.searchResultsController]; // containment
+        [self.view addSubview: self.searchResultsController.view];
+        
+        
     }
     else // IS_IPHONE
     {
         
         resultsFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-        
         
     }
     
@@ -130,19 +135,20 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self loadCategories];
 }
 
+
 #pragma mark - Data Retrieval
 
 - (void) fetchCategories
 {
-    NSEntityDescription* categoryEntity = [NSEntityDescription entityForName: @"SubGenre"
-                                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-    [categoriesFetchRequest setEntity:categoryEntity];
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"genre.priority" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
+    
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
     
     
@@ -155,7 +161,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     
-    self.categoriesDataArray = [NSArray arrayWithArray:genresFetchedArray];
+    self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
 }
 
@@ -190,20 +196,21 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
-    return 1;
+    return self.genres.count;
 }
 
 - (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
 {
     
-    return self.categoriesDataArray.count;
+    return ((Genre*)self.genres[section]).subgenres.count;
 }
 
 
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SubGenre* genre = self.categoriesDataArray[indexPath.item];
+    Genre* currentGenre = self.genres[indexPath.section];
+    SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
     SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier: kCategoryCellIndetifier
                                                                             forIndexPath: indexPath];
@@ -211,7 +218,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     categoryCell.backgroundColor = [UIColor redColor];
     
-    categoryCell.label.text = genre.name;
+    categoryCell.label.text = subgenre.name;
     
     
     return categoryCell;
@@ -219,7 +226,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubGenre* selectedGenre = self.categoriesDataArray[indexPath.item];
+    SubGenre* selectedGenre = self.genres[indexPath.item];
     
     [self dispatchSearch:selectedGenre.name];
 }
@@ -264,9 +271,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     return YES;
 }
 
-- (void) textViewDidBeginEditing: (UITextView *) textView
+- (void) textFieldDidBeginEditing: (UITextView *) textView
 {
     [textView setText: @""];
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        self.searchCloseButton.alpha = 1.0f;
+    }];
 }
 
 
@@ -379,6 +390,33 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     self.searchField.text = @"";
     self.autocompleteTableView.hidden = YES;
+    
+    
 }
 
+#pragma mark - Rotation Callbacks
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    CGRect sideContainerFrame = self.sideContainerView.frame;
+    sideContainerFrame.size.width = UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? 280.0f : 342.0f;
+    self.sideContainerView.frame = sideContainerFrame;
+    
+    CGRect resultsFrame = CGRectZero;
+    
+    if(IS_IPAD) // there is no rotation on iPhone
+    {
+        
+        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
+        resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
+        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x - 10.0f;
+        resultsFrame.size.height = self.view.frame.size.height - resultsFrame.origin.y;
+        self.searchResultsController.view.frame = resultsFrame;
+    }
+    
+    
+    
+}
 @end
