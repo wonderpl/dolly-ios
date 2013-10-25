@@ -159,17 +159,9 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     [self setUpUserProfile];
     
 
-    self.segmentedControlsView.layer.cornerRadius = 4;
-    self.segmentedControlsView.layer.borderWidth = .5f;
-
-    //self.segmentedControlsView.layer.borderColor = [[UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:120.0f/255.0f alpha:0] CGColor];
     
+    [self setUpSegmentedControl];
     
-    self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
-    
-    self.segmentedControlsView.layer.masksToBounds = YES;
-    
-    [self setUpHeader];
     
     if (self.isIPhone)
     {
@@ -179,10 +171,13 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
 
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
-    
+    /*
     self.channelThumbnailCollectionView.frame = CGRectMake(self.channelThumbnailCollectionView.frame.origin.x, self.channelThumbnailCollectionView.frame.origin.y, self.channelThumbnailCollectionView.frame.size.width, self.channelThumbnailCollectionView.frame.size.height);
 
     self.subscriptionThumbnailCollectionView.frame = CGRectMake(self.subscriptionThumbnailCollectionView.frame.origin.x, self.subscriptionThumbnailCollectionView.frame.origin.y, self.subscriptionThumbnailCollectionView.frame.size.width, self.subscriptionThumbnailCollectionView.frame.size.height);
+     */
+    
+    self.channelThumbnailCollectionView.hidden = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -358,23 +353,14 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     }
 }
 
--(void) setUpHeader {
-    
-    SYNYouHeaderView *tmpHeaderChannelsView;
-    SYNYouHeaderView *tmpHeaderSubscriptionsView;
-    
-    if (!self.isIPhone)
-    {
-      
-        
-        
-        
-    }
-    
-    if (self.isIPhone)
-    {
 
-    }
+-(void) setUpSegmentedControl{
+    
+    self.segmentedControlsView.layer.cornerRadius = 4;
+    self.segmentedControlsView.layer.borderWidth = .5f;
+    self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.segmentedControlsView.layer.masksToBounds = YES;
+
 }
 
 - (void) updateMainScrollView {
