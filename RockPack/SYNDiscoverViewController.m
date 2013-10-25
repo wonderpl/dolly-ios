@@ -59,9 +59,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     [super viewDidLoad];
     
-    self.colorMapForCells = @{
-                              @"" : @""
-                              };
+    self.colorMapForCells = @{};
     
     self.searchCloseButton.alpha = 0.0f;
     
@@ -89,7 +87,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // == set border around the text field == //
     
-    self.panelBGWhite.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.panelBGWhite.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.panelBGWhite.layer.borderWidth = 1.0f;
     
     
@@ -137,6 +135,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // == Since this is method is called once use it to update the categories == //
     
     [self loadCategories];
+    
+    
+    
 }
 
 
@@ -147,6 +148,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    
     categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
@@ -163,9 +165,21 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                                       error: &error];
     
     
-    
-    
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
+    
+    NSMutableDictionary* mutDictionary = @{}.mutableCopy;
+    for (Genre* genre in self.genres)
+    {
+        
+        CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+        CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+        CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+        UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+        
+        mutDictionary[genre.name] = color;
+        
+    }
+    self.colorMapForCells = [NSDictionary dictionaryWithDictionary:mutDictionary];
     
 }
 
@@ -220,7 +234,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                             forIndexPath: indexPath];
     
     
-    categoryCell.backgroundColor = [UIColor redColor];
+    categoryCell.backgroundColor = self.colorMapForCells[currentGenre.name];
     
     categoryCell.label.text = subgenre.name;
     
@@ -398,25 +412,4 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
-#pragma mark - Rotation Callbacks
-
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-//    CGRect resultsFrame = CGRectZero;
-//    
-//    if(IS_IPAD) // there is no rotation on iPhone
-//    {
-//        
-//        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
-//        resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
-//        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x - 10.0f;
-//        resultsFrame.size.height = self.view.frame.size.height - resultsFrame.origin.y;
-//        self.searchResultsController.view.frame = resultsFrame;
-//    }
-    
-    
-    
-}
 @end

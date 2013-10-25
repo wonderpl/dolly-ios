@@ -11,6 +11,9 @@
 @interface SYNDiscoverCategoriesCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel* label;
+
 @property (nonatomic, strong) IBOutlet UIImageView* arrow;
+
+@property (nonatomic, strong) IBOutlet UIView* line;
 
 @end
