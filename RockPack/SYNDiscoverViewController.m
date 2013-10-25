@@ -22,7 +22,7 @@ static NSString* kCategoryCellIndetifier = @"SYNDiscoverCategoriesCell";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
-                                        UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+                                        UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 
 
@@ -289,6 +289,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
 {
     
+    
     // 1. Do not accept blank characters at the beggining of the field
     if ([text isEqualToString: @" "] && self.searchBar.text.length == 0)
         return NO;
@@ -297,8 +298,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if ((range.location - range.length) < 2)
     {
         // TODO: close suggestion box
-        
-        
         return YES;
     }
     
