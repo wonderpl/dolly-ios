@@ -23,8 +23,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNSearchBoxViewController.h"
-#import "SYNSearchRootViewController.h"
 #import "SYNSoundPlayer.h"
 #import "SYNVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
@@ -52,8 +50,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
 @property (nonatomic, strong) SYNBackButtonControl* backButtonControl;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
-@property (nonatomic, strong) SYNSearchBoxViewController* searchBoxController;
-@property (nonatomic, strong) SYNSearchRootViewController* searchViewController;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
 @property (nonatomic, strong) UIView* accountSettingsCoverView;
@@ -740,144 +736,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (BOOL) hasSearchBarOn
-{
-    return (BOOL)self.searchBoxController.view.superview;
-}
 
-
-- (BOOL) isInSearchMode
-{
-    return (BOOL)(self.searchViewController.navigationController.topViewController == self.searchViewController);
-}
-
-
-
-
-
-
-
-- (void) showBackButton: (BOOL) show 
-{
-    CGRect targetFrame;
-    CGFloat targetAlpha;
-    
-    // XOR '^' the values so that they return 0 if they are both YES or both NO
-    if (!(show ^ self.showingBackButton))
-        return;
-
-    if (show)
-    {
-        [self.backButtonControl addTarget: appDelegate.viewStackManager
-                                   action: @selector(popController)
-                         forControlEvents:UIControlEventTouchUpInside];
-
-        self.showingBackButton = YES;
-        targetFrame = self.backButtonControl.frame;
-        targetAlpha = 1.0;
-        
-        if (IS_IPAD)
-        {
-            targetFrame.origin.x = 10.0;
-        }
-        
-        else
-        {
-            targetFrame.origin.x = 5.0;
-        }
-    }
-    else
-    {
-        [self.backButtonControl removeTarget: appDelegate.viewStackManager
-                                      action: @selector(popController)
-                            forControlEvents: UIControlEventTouchUpInside];
-        
-        self.showingBackButton = NO;
-        targetFrame = self.backButtonControl.frame;
-        targetFrame.origin.x = kMovableViewOffX;
-        targetAlpha = 0.0;
-    }
-    
-    
-    
-    
-    [UIView animateWithDuration: 0.6f
-                          delay: (show && self.isInSearchMode ? 0.4f : 0.0f)
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         self.backButtonControl.frame = targetFrame;
-                         self.backButtonControl.alpha = targetAlpha;
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         if(!IS_IPAD && !show)
-                         {
-                           /*  self.searchButton.alpha = 0.0f;
-                             self.searchButton.hidden = NO;
-                             [UIView animateWithDuration:0.3f animations:^{
-                                 self.searchButton.alpha = 1.0f;
-                             }];
-                             */
-                         }
-                     }];
-    
-    [UIView animateWithDuration: 0.6f
-                          delay: (show ? 0.0f : 0.4f)
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         CGRect sboxFrame = self.searchBoxController.view.frame;
-                         sboxFrame.origin.x = (show ? 76.0f : 10.0f);
-                         sboxFrame.size.width = self.closeSearchButton.frame.origin.x - sboxFrame.origin.x - 8.0;
-                         self.searchBoxController.view.frame = sboxFrame;
-                     } completion: nil];
-    
-}
-
-
-#pragma mark - Delegate
-
-- (void) navigationController: (UINavigationController *) navigationController
-        didShowViewController: (UIViewController *) viewController
-                     animated: (BOOL) animated
-{
-    
-    
-}
-
-- (void) navigationController: (UINavigationController *) navigationController
-       willShowViewController: (UIViewController *) viewController
-                     animated: (BOOL) animated
-{
-    if ([viewController isKindOfClass:[SYNContainerViewController class]]) // special case for the container which is not an abstract view controller
-    {
-        
-        [self cancelButtonPressed:nil];
-        
-        if(IS_IOS_7_OR_GREATER)
-        {
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-        }
-    }
-    else
-    {
-        SYNAbstractViewController* abstractController = (SYNAbstractViewController*)viewController;
-        
-        if(IS_IOS_7_OR_GREATER)
-        {
-            if(abstractController.navigationAppearance == NavigationButtonsAppearanceWhite)
-                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            else
-                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-        }
-    }
-    
-    if( viewController == self.containerViewController)
-    {
-        self.searchViewController = nil;
-    }
-
-    [self showBackButton: (navigationController.viewControllers.count > 1)];
-}
 
 
 -(NSArray*)tabs
