@@ -25,14 +25,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                         UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 
-@property (nonatomic, strong) IBOutlet UIView* panelBGWhite;
-
-@property (nonatomic, strong) IBOutlet UITextField* searchField;
-@property (nonatomic, strong) IBOutlet UIButton* searchCloseButton;
 
 // Categories Stuff
 @property (nonatomic, strong) IBOutlet UICollectionView* categoriesCollectionView;
 @property (nonatomic, strong) NSArray* genres;
+
+@property (nonatomic, strong) IBOutlet UISearchBar* searchBar;
 
 // Autocomplete Stuff
 @property (nonatomic, strong) NSTimer* autocompleteTimer;
@@ -63,7 +61,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.colorMapForCells = @{};
     
-    self.searchCloseButton.alpha = 0.0f;
     
     self.autocompleteTableView.hidden = YES;
     
@@ -74,24 +71,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.categoriesCollectionView registerNib: [UINib nibWithNibName: kCategoryCellIndetifier bundle: nil]
                     forCellWithReuseIdentifier: kCategoryCellIndetifier];
     
-    self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
-    self.searchField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
-    self.searchField.layer.shadowOpacity = 1.0;
-    self.searchField.layer.shadowColor = [UIColor whiteColor].CGColor;
-    self.searchField.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
-    self.searchField.layer.shadowRadius = 0.0f;
-    self.searchField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.searchField.clearButtonMode = UITextFieldViewModeNever;
     
-    
-    // == set border around the text field == //
-    
-    self.panelBGWhite.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.panelBGWhite.layer.borderWidth = 1.0f;
-    
-    
-    // Display Search instead of Return on iPhone Keyboard
-    self.searchField.returnKeyType = UIReturnKeySearch;
     
     self.autocompleteSuggestionsArray = [NSArray array]; // just so we have an array to return count == 0
     
@@ -285,30 +265,32 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self dispatchSearch:suggestion];
 }
 
-#pragma mark - UITextField Delegate and Autocomplete Methods
+#pragma mark - UISearchBar Delegate and Autocomplete Methods
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchbar
 {
-    
-    [self dispatchSearch:textField.text];
-    
+    //[searchbar setText: @""];
     return YES;
 }
 
-- (void) textFieldDidBeginEditing: (UITextView *) textView
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    [textView setText: @""];
     
-    [UIView animateWithDuration:0.2f animations:^{
-        self.searchCloseButton.alpha = 1.0f;
-    }];
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    
 }
 
-
-- (BOOL) textField: (UITextField *) textField shouldChangeCharactersInRange: (NSRange) range replacementString: (NSString *) newCharacter
+- (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
 {
+    
     // 1. Do not accept blank characters at the beggining of the field
-    if ([newCharacter isEqualToString: @" "] && self.searchField.text.length == 0)
+    if ([text isEqualToString: @" "] && self.searchBar.text.length == 0)
         return NO;
     
     // 2. if there are less than 3 chars currently typed do not perform search
@@ -379,16 +361,21 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     MKNKErrorBlock errorBlock = ^(NSError* error) {
         
+        
+        
     };
     
     // == Make and Save the Request == //
     
-    self.autocompleteNetworkOperation = [appDelegate.networkEngine getAutocompleteForHint: self.searchField.text
+    self.autocompleteNetworkOperation = [appDelegate.networkEngine getAutocompleteForHint: self.searchBar.text
                                                                               forResource: appDelegate.searchEntity
                                                                              withComplete: processBlock
                                                                                  andError: errorBlock];
 }
-
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self dispatchSearch:searchBar.text];
+}
 
 - (void) dispatchSearch:(NSString*)searchTerm
 {
@@ -403,19 +390,5 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
 }
 
-#pragma mark - Close Button Delegates
-
--(IBAction)closeButtonPressed:(id)sender
-{
-    [self clearSearch];
-}
-
--(void)clearSearch
-{
-    self.searchField.text = @"";
-    self.autocompleteTableView.hidden = YES;
-    
-    
-}
 
 @end

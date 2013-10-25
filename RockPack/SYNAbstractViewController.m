@@ -148,6 +148,14 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if(IS_IOS_7_OR_GREATER)
+        [self setNeedsStatusBarAppearanceUpdate];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -158,10 +166,32 @@
 
 }
 
+#pragma mark - Data Request Range
+
 - (void) resetDataRequestRange
 {
     self.dataRequestRange = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
 }
+
+- (BOOL) moreItemsToLoad
+{
+    
+    return (self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable);
+}
+
+- (void) incrementRangeForNextRequest
+{
+    if(!self.moreItemsToLoad)
+        return;
+    
+    NSInteger nextStart = self.dataRequestRange.location + self.dataRequestRange.length; // one is subtracted when the call happens for 0 indexing
+    
+    NSInteger nextSize = MIN(STANDARD_REQUEST_LENGTH, self.dataItemsAvailable - nextStart);
+    
+    self.dataRequestRange = NSMakeRange(nextStart, nextSize);
+}
+
+#pragma mark -
 
 
 - (void) controllerDidChangeContent: (NSFetchedResultsController *) controller
@@ -191,25 +221,6 @@
 
 
 
-
-- (BOOL) moreItemsToLoad
-{
-    
-    return (self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable);
-}
-
-
-- (void) incrementRangeForNextRequest
-{
-    if(!self.moreItemsToLoad)
-        return;
-    
-    NSInteger nextStart = self.dataRequestRange.location + self.dataRequestRange.length; // one is subtracted when the call happens for 0 indexing
-    
-    NSInteger nextSize = MIN(STANDARD_REQUEST_LENGTH, self.dataItemsAvailable - nextStart);
-    
-    self.dataRequestRange = NSMakeRange(nextStart, nextSize);
-}
 
 
 - (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button
@@ -312,13 +323,7 @@
         [appDelegate.viewStackManager viewChannelDetails:videoInstance.channel];
     }
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if(IS_IOS_7_OR_GREATER)
-        [self setNeedsStatusBarAppearanceUpdate];
-}
+
 
 - (void) videoOverlayDidDissapear
 {
@@ -873,7 +878,7 @@
 }
 
 
-#pragma mark - scroll view delegates
+#pragma mark - UIScrollView delegates
 
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
