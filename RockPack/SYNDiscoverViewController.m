@@ -59,6 +59,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.colorMapForCells = @{};
     
     self.searchCloseButton.alpha = 0.0f;
@@ -71,9 +73,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [self.categoriesCollectionView registerNib: [UINib nibWithNibName: kCategoryCellIndetifier bundle: nil]
                     forCellWithReuseIdentifier: kCategoryCellIndetifier];
-    
-    
-    
     
     self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
     self.searchField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
@@ -141,6 +140,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 
+
+
 #pragma mark - Data Retrieval
 
 - (void) fetchCategories
@@ -187,6 +188,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     
     
+    
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
         
         [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
@@ -212,8 +214,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 #pragma mark - CollectionView Delegate/Data Source
 
+
+
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
+    
     return self.genres.count;
 }
 
