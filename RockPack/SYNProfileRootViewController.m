@@ -36,7 +36,7 @@ SYNImagePickerControllerDelegate>
 @property (nonatomic) BOOL isIPhone;
 @property (nonatomic) BOOL isUserProfile;
 @property (nonatomic) BOOL trackView;
-@property (nonatomic, assign) BOOL subscriptionsTabActive;
+@property (nonatomic, assign) BOOL collectionsTabActive;
 @property (nonatomic, assign, getter = isDeletionModeActive) BOOL deletionModeActive;
 
 @property (nonatomic, strong) NSArray *sortDescriptors;
@@ -46,7 +46,6 @@ SYNImagePickerControllerDelegate>
 
 @property (nonatomic, strong) id orientationDesicionmaker;
 
-@property (nonatomic, weak) IBOutlet UIButton *channelsTabButton;
 @property (nonatomic, weak) IBOutlet UIButton *subscriptionsTabButton;
 
 @property (nonatomic, strong) SYNImagePickerController* imagePickerController;
@@ -70,7 +69,12 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatiorView;
 
-
+@property (strong, nonatomic) IBOutlet UILabel *aboutMeLabel;
+@property (strong, nonatomic) IBOutlet UIButton *editButton;
+@property (strong, nonatomic) IBOutlet UIButton *collectionsTabButton;
+@property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
+@property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
+@property (strong, nonatomic) UIColor *greyColor;
 @end
 
 
@@ -113,6 +117,10 @@ SYNImagePickerControllerDelegate>
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    self.collectionsTabActive = YES;
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
+    self.profileImageView.layer.masksToBounds = YES;
+self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:120.0f/255.0f alpha:1];
 
     UINib *createCellNib = [UINib nibWithNibName: @"SYNChannelCreateNewCell"
                                           bundle: nil];
@@ -150,17 +158,31 @@ SYNImagePickerControllerDelegate>
     }
     [self setUpUserProfile];
     
+
+    self.segmentedControlsView.layer.cornerRadius = 4;
+    self.segmentedControlsView.layer.borderWidth = .5f;
+
+    //self.segmentedControlsView.layer.borderColor = [[UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:120.0f/255.0f alpha:0] CGColor];
+    
+    
+    self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
+    
+    self.segmentedControlsView.layer.masksToBounds = YES;
+    
     [self setUpHeader];
     
     if (self.isIPhone)
     {
-        [self updateTabStates];
+      [self updateTabStates];
     }
     
+
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
     
-    
+    self.channelThumbnailCollectionView.frame = CGRectMake(self.channelThumbnailCollectionView.frame.origin.x, self.channelThumbnailCollectionView.frame.origin.y, self.channelThumbnailCollectionView.frame.size.width, self.channelThumbnailCollectionView.frame.size.height);
+
+    self.subscriptionThumbnailCollectionView.frame = CGRectMake(self.subscriptionThumbnailCollectionView.frame.origin.x, self.subscriptionThumbnailCollectionView.frame.origin.y, self.subscriptionThumbnailCollectionView.frame.size.width, self.subscriptionThumbnailCollectionView.frame.size.height);
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -169,7 +191,7 @@ SYNImagePickerControllerDelegate>
 
 - (void) viewDidAppear: (BOOL) animated
 {
- //   self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.hidden = YES;
     
     
     [super viewDidAppear: animated];
@@ -196,8 +218,8 @@ SYNImagePickerControllerDelegate>
     {
         if (self.isIPhone)
         {
-            self.channelThumbnailCollectionView.scrollsToTop = !self.subscriptionsTabActive;
-            self.subscriptionThumbnailCollectionView.scrollsToTop = self.subscriptionsTabActive;
+            self.channelThumbnailCollectionView.scrollsToTop = !self.collectionsTabActive;
+            self.subscriptionThumbnailCollectionView.scrollsToTop = self.collectionsTabActive;
         }
         else
         {
@@ -223,13 +245,18 @@ SYNImagePickerControllerDelegate>
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
+    
     //[self updateMainScrollView];
+
+    
+  //  NSLog(@"PRVC view did appear");
+    
 }
 
 
 - (void) viewWillDisappear: (BOOL) animated
 {
-   // self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.hidden = NO;
 
     self.channelThumbnailCollectionView.delegate = nil;
     self.subscriptionThumbnailCollectionView.delegate = nil;
@@ -237,7 +264,8 @@ SYNImagePickerControllerDelegate>
     
     [super viewWillDisappear: animated];
     
-    
+//    NSLog(@"PRVC view will Disappear");
+
 }
 
 
@@ -248,9 +276,9 @@ SYNImagePickerControllerDelegate>
     
     if (self.isIPhone)
     {
-        self.channelThumbnailCollectionView.scrollsToTop = !self.subscriptionsTabActive;
+        self.channelThumbnailCollectionView.scrollsToTop = !self.collectionsTabActive;
         
-        self.subscriptionThumbnailCollectionView.scrollsToTop = self.subscriptionsTabActive;
+        self.subscriptionThumbnailCollectionView.scrollsToTop = self.collectionsTabActive;
     }
     else
     {
@@ -298,8 +326,9 @@ SYNImagePickerControllerDelegate>
 -(void) setUpUserProfile
 {
     
-    self.fullNameLabel.font = [UIFont boldSystemFontOfSize:30];
-    self.userNameLabel.font = [UIFont lightCustomFontOfSize:12.0];
+
+    self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
+    self.aboutMeLabel.font = [UIFont lightCustomFontOfSize:13.0];
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(userDataChanged:)
@@ -324,6 +353,7 @@ SYNImagePickerControllerDelegate>
         });
         
     }else{
+
         self.profileImageView.image = placeholderImage;
     }
 }
@@ -356,24 +386,7 @@ SYNImagePickerControllerDelegate>
     
     if (self.isIPhone)
     {
-        
-        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.channelsTabButton.frame];
-        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.subscriptionsTabButton.frame];
-        
-        self.headerChannelsView = tmpHeaderChannelsView;
-        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
-        
-        [tmpHeaderChannelsView setFontSize: 12.0f];
-        [tmpHeaderSubscriptionsView setFontSize: 12.0f];
-        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
-        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
-        
-        tmpHeaderChannelsView.userInteractionEnabled = NO;
-        tmpHeaderSubscriptionsView.userInteractionEnabled = NO;
-        
-        [self.channelsTabButton addSubview:tmpHeaderChannelsView];
-        [self.channelsTabButton addSubview:tmpHeaderSubscriptionsView];
-        
+
     }
 }
 
@@ -404,8 +417,6 @@ SYNImagePickerControllerDelegate>
         [self setChannelOwner: currentUser];
     }
 }
-
-
 
 - (IBAction) userTouchedAvatarButton: (UIButton *) avatarButton
 {
@@ -620,43 +631,6 @@ SYNImagePickerControllerDelegate>
     [self resizeScrollViews];
 }
 
--(void) rotateForBugFix
-{
-    
-    if (self.channelThumbnailCollectionView.collectionViewLayout.collectionViewContentSize.height > self.subscriptionThumbnailCollectionView.collectionViewLayout.collectionViewContentSize.height)
-    {
-        self.channelsIndexPath = [self topIndexPathForCollectionView: self.channelThumbnailCollectionView];
-        self.orientationDesicionmaker = self.channelThumbnailCollectionView;
-    }
-    else
-    {
-        self.subscriptionsIndexPath = [self topIndexPathForCollectionView: self.subscriptionThumbnailCollectionView];
-        self.orientationDesicionmaker = self.subscriptionThumbnailCollectionView;
-    }
-    
-    if (self.channelsIndexPath)
-    {
-        [self.channelThumbnailCollectionView scrollToItemAtIndexPath: self.channelsIndexPath
-                                                    atScrollPosition: UICollectionViewScrollPositionTop
-                                                            animated: NO];
-    }
-    
-    if (self.subscriptionsIndexPath)
-    {
-        [self.subscriptionThumbnailCollectionView scrollToItemAtIndexPath: self.subscriptionsIndexPath
-                                                         atScrollPosition: UICollectionViewScrollPositionTop
-                                                                 animated: NO];
-    }
-    
-    self.orientationDesicionmaker = nil;
-    
-    self.channelsIndexPath = nil;
-    self.subscriptionsIndexPath = nil;
-    
-    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-}
-
-
 
 - (void) reloadCollectionViews
 {
@@ -729,7 +703,6 @@ SYNImagePickerControllerDelegate>
 {
     
     UICollectionViewCell *cell = nil;
-    
     
     SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
     
@@ -880,192 +853,57 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (channelViewSize.height < subscriptionsViewSize.height)
     {
-        NSLog(@"A WINS");
-        NSLog(@"%f, %f", channelViewSize.height, subscriptionsViewSize.height);
 
         self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, subscriptionsViewSize.height - channelViewSize.height, 0.0f);
     }
     else if (channelViewSize.height > subscriptionsViewSize.height)
     {
-                NSLog(@"B WINS");
-        NSLog(@"%f, %f", channelViewSize.height, subscriptionsViewSize.height);
 
         self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, channelViewSize.height - subscriptionsViewSize.height, 0.0f);
     }
 }
 
 #pragma mark - tab button actions
-
-- (IBAction) channelsTabTapped: (id) sender
-{
-    self.subscriptionsTabActive = NO;
+- (IBAction)collectionsTabTapped:(id)sender {
+    self.collectionsTabActive = YES;
     [self updateTabStates];
+
 }
-
-
-- (IBAction) subscriptionsTabTapped: (id) sender
-{
-    self.subscriptionsTabActive = YES;
+- (IBAction)followingsTabTapped:(id)sender {
+    self.collectionsTabActive = NO;
     [self updateTabStates];
+
 }
 
 - (void) updateTabStates
 {
-    self.channelThumbnailCollectionView.scrollsToTop = !self.subscriptionsTabActive;
-    self.subscriptionThumbnailCollectionView.scrollsToTop = self.subscriptionsTabActive;
     
-    self.channelsTabButton.selected = !self.subscriptionsTabActive;
-    self.subscriptionsTabButton.selected = self.subscriptionsTabActive;
-    self.channelThumbnailCollectionView.hidden = self.subscriptionsTabActive;
-    self.subscriptionThumbnailCollectionView.hidden = !self.subscriptionsTabActive;
-    
-    if (self.subscriptionsTabActive)
+    if (self.collectionsTabActive)
     {
+       // self.collectionsTabButton.backgroundColor = [UIColor colorWithRed:120 green:120 blue:120 alpha:0];
         
-        [self.headerChannelsView setColorsForText: [UIColor colorWithRed: 106.0f / 255.0f
-                                                                   green: 114.0f / 255.0f
-                                                                    blue: 122.0f / 255.0f
-                                                                   alpha: 1.0f]
-                                      parentheses: [UIColor colorWithRed: 187.0f / 255.0f
-                                                                   green: 187.0f / 255.0f
-                                                                    blue: 187.0f / 255.0f
-                                                                   alpha: 1.0f]
-                                           number: [UIColor colorWithRed: 11.0f / 255.0f
-                                                                   green: 166.0f / 255.0f
-                                                                    blue: 171.0f / 255.0f
-                                                                   alpha: 1.0f]];
-        
-        [self.headerSubscriptionsView setColorsForText: [UIColor colorWithRed: 1.0f
-                                                                        green: 1.0f
-                                                                         blue: 1.0f
-                                                                        alpha: 1.0f]
-                                           parentheses: [UIColor colorWithRed: 1.0f
-                                                                        green: 1.0f
-                                                                         blue: 1.0f
-                                                                        alpha: 1.0f]
-                                                number: [UIColor colorWithRed: 1.0f
-                                                                        green: 1.0f
-                                                                         blue: 1.0f
-                                                                        alpha: 1.0f]];
+       // self.followingTabButton.backgroundColor = [UIColor colorWithRed:244 green:244 blue:244 alpha:0];
+
+        self.followingTabButton.backgroundColor = [UIColor blackColor];
+        [self.followingTabButton.titleLabel setTextColor:self.greyColor];
+        [self.collectionsTabButton.titleLabel setTextColor:[UIColor blackColor]];
+        self.collectionsTabButton.backgroundColor = self.greyColor;
+
     }
     else
     {
-        [self.headerSubscriptionsView setColorsForText: [UIColor colorWithRed: 106.0f / 255.0f
-                                                                        green: 114.0f / 255.0f
-                                                                         blue: 122.0f / 255.0f
-                                                                        alpha: 1.0f]
-                                           parentheses: [UIColor colorWithRed: 187.0f / 255.0f
-                                                                        green: 187.0f / 255.0f
-                                                                         blue: 187.0f / 255.0f
-                                                                        alpha: 1.0f]
-                                                number: [UIColor colorWithRed: 11.0f / 255.0f
-                                                                        green: 166.0f / 255.0f
-                                                                         blue: 171.0f / 255.0f
-                                                                        alpha: 1.0f]];
-        
-        [self.headerChannelsView setColorsForText: [UIColor colorWithRed: 1.0f
-                                                                   green: 1.0f
-                                                                    blue: 1.0f
-                                                                   alpha: 1.0f]
-                                      parentheses: [UIColor colorWithRed: 1.0f
-                                                                   green: 1.0f
-                                                                    blue: 1.0f
-                                                                   alpha: 1.0f]
-                                           number: [UIColor colorWithRed: 1.0f
-                                                                   green: 1.0f
-                                                                    blue: 1.0f
-                                                                   alpha: 1.0f]];
+        self.collectionsTabButton.backgroundColor = [UIColor blackColor];
+        [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
+        [self.followingTabButton.titleLabel setTextColor:[UIColor blackColor]];
+        self.followingTabButton.backgroundColor = self.greyColor;
     }
 }
 
-#pragma mark - Deleting Channels
-
-- (void) channelDeleteButtonTapped: (UIButton *) sender
-{
-    if (_deleteCellModeOn)
-    {
-        return;
-    }
-    
-    UIView *v = sender.superview.superview;
-    self.indexPathToDelete = [self.channelThumbnailCollectionView indexPathForItemAtPoint: v.center];
-    
-    Channel *channelToDelete = (Channel *) self.channelOwner.channels[self.indexPathToDelete.row - (self.isUserProfile ? 1 : 0)];
-    
-    if (!channelToDelete)
-    {
-        return;
-    }
-    
-    NSString *message = [NSString stringWithFormat: NSLocalizedString(@"profile_screen_channel_delete_dialog_description", nil), channelToDelete.title];
-    NSString *title = [NSString stringWithFormat: NSLocalizedString(@"profile_screen_channel_delete_dialog_title", nil), channelToDelete.title ];
-    
-    [[[UIAlertView alloc] initWithTitle: title
-                                message: message
-                               delegate: self
-                      cancelButtonTitle: NSLocalizedString(@"Cancel", nil)
-                      otherButtonTitles: NSLocalizedString(@"Delete", nil), nil] show];
-}
-
-
-- (void)	 alertView: (UIAlertView *) alertView
-willDismissWithButtonIndex: (NSInteger) buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        [self deleteChannel];
-    }
-    else
-    {
-        // Cancel Clicked, do nothing
-    }
-}
-
-
-- (void) deleteChannel
-{
-    Channel *channelToDelete = (Channel *) self.channelOwner.channels[self.indexPathToDelete.row - (self.isUserProfile ? 1 : 0)];
-    
-    if (!channelToDelete)
-    {
-        return;
-    }
-    
-    [appDelegate.oAuthNetworkEngine
-     deleteChannelForUserId: appDelegate.currentUser.uniqueId
-     channelId: channelToDelete.uniqueId
-     completionHandler: ^(id response) {
-         UICollectionViewCell *cell = [self.channelThumbnailCollectionView cellForItemAtIndexPath: self.indexPathToDelete];
-         
-         [UIView	 animateWithDuration: 0.2
-                           animations: ^{
-                               cell.alpha = 0.0;
-                           }
-                           completion: ^(BOOL finished) {
-                               [appDelegate.currentUser.channelsSet
-                                removeObject: channelToDelete];
-                               
-                               [channelToDelete.managedObjectContext
-                                deleteObject: channelToDelete];
-                               
-                               [self.channelThumbnailCollectionView deleteItemsAtIndexPaths: @[self.indexPathToDelete]];
-                               
-                               [appDelegate saveContext: YES];
-                               
-                               _deleteCellModeOn = NO;
-                           }];
-     }
-     errorHandler: ^(id error) {
-         DebugLog(@"Delete channel NOT succeed");
-         
-         _deleteCellModeOn = NO;
-     }];
-}
 
 - (void) headerTapped
 {
     // no need to animate the subscriptions part since it observes the channels thumbnails scroll view
-    [self.channelThumbnailCollectionView setContentOffset: CGPointZero animated: YES];
+   // [self.channelThumbnailCollectionView setContentOffset: CGPointZero animated: YES];
 }
 
 
@@ -1109,10 +947,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
         }
     }
     
-    if([self.moveTabDelegate respondsToSelector:@selector(moveTab:)])
-    {
-        [self.moveTabDelegate moveTab:scrollView];
-    }
 }
 
 
@@ -1285,7 +1119,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     [appDelegate.viewStackManager viewProfileDetails: channel.channelOwner];
 }
 
-
+//Channels are the cell in the collection view
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
     SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
@@ -1323,27 +1157,14 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
         
         Channel *channel = self.channelOwner.subscriptions[indexPath.item];
         
-        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
-        
+        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];        
     }
-    
+}
+
+- (IBAction)editButtonTapped:(id)sender
+{
+
 }
 
 
-
--(void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
-    
-    NSLog(@"Scroll hit the top");
-/*
-    [UIView animateWithDuration:1.5f animations:^{
-        CGRect tmpFrame =     self.navigationController.navigationBar.frame;
-        tmpFrame.origin.y -= self.navigationController.navigationBar.frame.size.height;
-        self.navigationController.navigationBar.frame = tmpFrame;
-    }];
-  */
-    
-    
-    
-    
-}
 @end

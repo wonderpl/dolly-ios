@@ -180,7 +180,8 @@
         for (UIViewController *tmpController in toViewController.viewControllers) {
             [tmpController didMoveToParentViewController: self];
         }
-        self.inTransitioning = NO;
+        
+        self.isTransitioning = NO;
 
     };
     
@@ -192,7 +193,7 @@
         toViewController.view.frame = CGRectZero;
        
 
-        self.inTransitioning = YES;
+        self.isTransitioning = YES;
             [self transitionFromViewController: fromViewController
                               toViewController: toViewController
                                       duration: VIEW_CONTROLLER_TRANSITION_DURATION
