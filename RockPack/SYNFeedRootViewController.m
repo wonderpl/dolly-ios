@@ -252,7 +252,7 @@ typedef void(^FeedDataErrorBlock)(void);
         if (self.dataRequestRange.location == 0)
         {
             [self resetDataRequestRange]; // just in case the length is less than standard
-            [self.refreshButton startRefreshCycle];
+            
             [self loadAndUpdateFeedData];
         }
         
@@ -318,7 +318,6 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     }
     
-    [self.refreshButton startRefreshCycle];
     
     __weak SYNFeedRootViewController *wself = self;
     
@@ -405,7 +404,6 @@ typedef void(^FeedDataErrorBlock)(void);
 {
     self.refreshing = NO;
     [self.refreshControl endRefreshing];
-    [self.refreshButton endRefreshCycle];
 }
 
 
