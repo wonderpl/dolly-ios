@@ -9,9 +9,10 @@
             <connections>
                 <outlet property="autocompleteTableView" destination="cx7-DP-WVU" id="HeX-r9-hcU"/>
                 <outlet property="categoriesCollectionView" destination="fhE-V4-G8V" id="YX8-7v-zh8"/>
+                <outlet property="panelBGWhite" destination="LDV-p6-tdK" id="1h1-mn-2Nd"/>
                 <outlet property="searchCloseButton" destination="00M-z9-Akl" id="rp9-Ri-3EQ"/>
+                <outlet property="searchDisplayController" destination="sUR-my-XlW" id="Pc8-CF-GdL"/>
                 <outlet property="searchField" destination="PuK-Uv-Znu" id="Kc3-ml-VOf"/>
-                <outlet property="searchFieldBGImageView" destination="Lzu-Yv-rwy" id="kLs-EU-Pgj"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -20,10 +21,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lzu-Yv-rwy" userLabel="BG ImageView">
-                    <rect key="frame" x="10" y="22" width="300" height="45"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDV-p6-tdK" userLabel="Panel BG White">
+                    <rect key="frame" x="0.0" y="29" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="PuK-Uv-Znu" userLabel="Text Field Search" customClass="SYNTextFieldSearchIPhone">
                     <rect key="frame" x="52" y="29" width="215" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -82,6 +85,14 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <searchDisplayController id="sUR-my-XlW">
+            <connections>
+                <outlet property="delegate" destination="-1" id="QhH-dD-eme"/>
+                <outlet property="searchContentsController" destination="-1" id="jfX-S2-13P"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="VJH-3S-p3R"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="8z1-re-KYm"/>
+            </connections>
+        </searchDisplayController>
     </objects>
     <resources>
         <image name="ButtonCloseSearch.png" width="44" height="45"/>

@@ -13,7 +13,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNViewStackManager.h"
-#import "SYNSearchBoxViewController.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNExistingChannelsViewController.h"
 

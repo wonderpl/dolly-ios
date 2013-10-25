@@ -527,8 +527,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
 
 - (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation
 {
-    CGRect newFrame;
-    CGFloat viewHeight;
+    
     UICollectionViewFlowLayout *channelsLayout;
     UICollectionViewFlowLayout *subscriptionsLayout;
     

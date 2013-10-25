@@ -18,7 +18,6 @@
 #import "Friend.h"
 #import "GAI.h"
 #import "SYNFacebookManager.h"
-#import "SYNSideNavigatorViewController.h"
 #import <objc/runtime.h>
 
 static char* friend_association_key = "SYNFriendThumbnailCell to Friend";

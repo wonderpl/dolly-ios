@@ -10,7 +10,6 @@
 #import "SYNContainerViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNNavigationManager.h"
-#import "SYNSideNavigatorViewController.h"
 
 @implementation SYNNavigationManager
 
@@ -86,21 +85,11 @@
         return;
     }
     
-    self.sideNavigationController.state = SideNavigationStateHidden;
     
     [self.containerController navigateToPage: index];
     
     
-    if (self.sideNavigationController.state == SideNavigationStateFull)
-    {
-        [self.sideNavigationController deselectAllCells];
-    }
-    else
-    {
-        NSString *controllerTitle = self.containerController.currentViewController.title;
-        
-        [self.sideNavigationController setSelectedCellByPageName: controllerTitle];
-    }
+    
 }
 
 
