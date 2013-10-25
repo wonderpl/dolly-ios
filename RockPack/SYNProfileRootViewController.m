@@ -379,8 +379,6 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
         
         
-        [self.view addSubview:tmpHeaderChannelsView];
-        [self.view addSubview:tmpHeaderSubscriptionsView];
         
     }
     
@@ -538,31 +536,12 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     if (self.isIPhone)
     {
-        newFrame = self.headerChannelsView.frame;
-        newFrame.size.width = 160.0f;
-        self.headerChannelsView.frame = newFrame;
-        
-        newFrame = self.headerSubscriptionsView.frame;
-        newFrame.origin.x = 160.0f;
-        newFrame.size.width = 160.0f;
-        self.headerSubscriptionsView.frame = newFrame;
-        channelsLayout = self.channelLayoutIPhone;
-        subscriptionsLayout = self.subscriptionLayoutIPhone;
         
     }
     else
     {
         if (UIDeviceOrientationIsPortrait(orientation))
         {
-            newFrame = self.headerChannelsView.frame;
-            newFrame.size.width = 384.0f;
-            self.headerChannelsView.frame = newFrame;
-            
-            newFrame = self.headerSubscriptionsView.frame;
-            newFrame.origin.x = 384.0f;
-            newFrame.size.width = 385.0f;
-            self.headerSubscriptionsView.frame = newFrame;
-            
             self.channelLayoutIPad.minimumLineSpacing = 0.0f;
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin, 0.0, kInterRowMargin, 0.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 0.0f;
@@ -573,14 +552,6 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         }
         else
         {
-            newFrame = self.headerChannelsView.frame;
-            newFrame.size.width = 612.0f;
-            self.headerChannelsView.frame = newFrame;
-            
-            newFrame = self.headerSubscriptionsView.frame;
-            newFrame.origin.x = 612.0f;
-            newFrame.size.width = 412.0f;
-            self.headerSubscriptionsView.frame = newFrame;
             
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
             
@@ -592,38 +563,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
         }
-        
-        
-        
-        //Apply correct backgorund images
-        [self.headerSubscriptionsView setBackgroundImage: ([SYNDeviceManager.sharedInstance isLandscape] ?
-                                                           [UIImage imageNamed: @"HeaderProfileSubscriptionsLandscape"] :
-                                                           [UIImage imageNamed: @"HeaderProfilePortraitBoth"])];
-        
-        [self.headerChannelsView setBackgroundImage: [SYNDeviceManager.sharedInstance isLandscape] ?
-         [UIImage imageNamed: @"HeaderProfileChannelsLandscape"]:
-         [UIImage imageNamed: @"HeaderProfilePortraitBoth"]];
     }
-    
-    viewHeight = [[SYNDeviceManager sharedInstance] currentScreenHeightWithStatusBar];
-    
-    // Setup Channel feed collection view
-    newFrame = self.channelThumbnailCollectionView.frame;
-    newFrame.size.width = self.isIPhone ? 320.0f : self.headerChannelsView.frame.size.width;
-    
-    newFrame.size.height = viewHeight - newFrame.origin.y;
-    self.channelThumbnailCollectionView.collectionViewLayout = channelsLayout;
-    self.channelThumbnailCollectionView.frame = newFrame;
-    
-    
-    //Setup subscription feed collection view
-    newFrame = self.subscriptionThumbnailCollectionView.frame;
-    newFrame.size.width = self.isIPhone ? 320.0f : self.headerSubscriptionsView.frame.size.width;
-    newFrame.size.height = viewHeight - newFrame.origin.y;
-    newFrame.origin.x = self.isIPhone ? 0.0f : self.headerSubscriptionsView.frame.origin.x;
-    self.self.self.subscriptionThumbnailCollectionView.collectionViewLayout = subscriptionsLayout;
-    self.self.self.subscriptionThumbnailCollectionView.frame = newFrame;
-    
     
     [subscriptionsLayout invalidateLayout];
     [channelsLayout invalidateLayout];
