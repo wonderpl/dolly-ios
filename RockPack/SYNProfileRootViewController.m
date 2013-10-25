@@ -365,18 +365,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     if (!self.isIPhone)
     {
-        CGFloat correctWidth = [SYNDeviceManager.sharedInstance isLandscape] ? 600.0 : 400.0;
-        
-        self.headerChannelsView.frame = CGRectMake(self.headerChannelsView.frame.origin.x, self.headerChannelsView.frame.origin.y, correctWidth, self.headerChannelsView.frame.size.height);
-        
-        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerChannelsView.frame];
-        self.headerSubscriptionsView.frame = CGRectMake(self.headerSubscriptionsView.frame.origin.x, self.headerSubscriptionsView.frame.origin.y, correctWidth, self.headerSubscriptionsView.frame.size.height);
-        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerSubscriptionsView.frame];
-        
-        self.headerChannelsView = tmpHeaderChannelsView;
-        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
-        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
-        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
+      
         
         
         
@@ -816,6 +805,12 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 - (void) updateTabStates
 {
+    
+    self.collectionsTabButton.selected = !self.collectionsTabActive;
+    self.subscriptionsTabButton.selected = self.collectionsTabActive;
+    self.channelThumbnailCollectionView.hidden = self.collectionsTabActive;
+    self.subscriptionThumbnailCollectionView.hidden = !self.collectionsTabActive;
+
     
     if (self.collectionsTabActive)
     {
