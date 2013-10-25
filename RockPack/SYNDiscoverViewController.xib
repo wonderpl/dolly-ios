@@ -9,9 +9,9 @@
             <connections>
                 <outlet property="autocompleteTableView" destination="s2u-9J-KS3" id="LY3-X8-dVk"/>
                 <outlet property="categoriesCollectionView" destination="voe-PP-I8e" id="uX9-Dx-CDa"/>
+                <outlet property="panelBGWhite" destination="iRQ-J6-enP" id="Dlt-Oe-ZlA"/>
                 <outlet property="searchCloseButton" destination="7WG-vD-4Hw" id="bfT-Zz-Dh7"/>
                 <outlet property="searchField" destination="REn-5N-Vsu" id="Hyl-dO-fNf"/>
-                <outlet property="searchFieldBGImageView" destination="sW2-tS-fv5" id="RJ8-Mx-IUo"/>
                 <outlet property="sideContainerView" destination="r19-QH-EUb" id="bn0-SA-nlf"/>
                 <outlet property="view" destination="1" id="9g5-gS-N94"/>
             </connections>
@@ -22,24 +22,59 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="r19-QH-EUb" userLabel="Side Container (Used for Resize)">
-                    <rect key="frame" x="9" y="74" width="342" height="694"/>
+                    <rect key="frame" x="9" y="74" width="256" height="694"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="sW2-tS-fv5" userLabel="BG ImageView">
-                            <rect key="frame" x="0.0" y="0.0" width="342" height="45"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
+                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="voe-PP-I8e">
+                            <rect key="frame" x="0.0" y="53" width="256" height="641"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="wQf-6D-brT">
+                                <size key="itemSize" width="256" height="44"/>
+                                <size key="headerReferenceSize" width="0.0" height="3"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="qn5-x9-sS5"/>
+                                <outlet property="delegate" destination="-1" id="B7h-Rg-UO2"/>
+                            </connections>
+                        </collectionView>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="s2u-9J-KS3" userLabel="Autosuggestion Table View">
+                            <rect key="frame" x="0.0" y="53" width="256" height="495"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                            <color key="sectionIndexColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="vAz-6m-pHc"/>
+                                <outlet property="delegate" destination="-1" id="Fna-7B-iUZ"/>
+                            </connections>
+                        </tableView>
+                        <view contentMode="scaleToFill" id="iRQ-J6-enP" userLabel="Panel BG White">
+                            <rect key="frame" x="0.0" y="0.0" width="256" height="53"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="f2z-tl-eUC" userLabel="Panel BG Gray">
+                            <rect key="frame" x="7" y="7" width="242" height="39"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.8999180947580645" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="18" id="REn-5N-Vsu" userLabel="Text Field Search">
-                            <rect key="frame" x="49" y="8" width="244" height="30"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <rect key="frame" x="40" y="10" width="171" height="33"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="webSearch" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="4VP-O4-epB"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7WG-vD-4Hw" userLabel="Close Button">
-                            <rect key="frame" x="298" y="1" width="44" height="44"/>
+                            <rect key="frame" x="212" y="5" width="44" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" image="ButtonCloseSearch~iphone.png">
@@ -54,38 +89,9 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ButtonSearch.png" id="gPN-6b-PHQ" userLabel="Loop Icon">
-                            <rect key="frame" x="-6" y="-7" width="60" height="60"/>
+                            <rect key="frame" x="6" y="10" width="33" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="voe-PP-I8e">
-                            <rect key="frame" x="0.0" y="46" width="342" height="648"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wQf-6D-brT">
-                                <size key="itemSize" width="342" height="100"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <cells/>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="qn5-x9-sS5"/>
-                                <outlet property="delegate" destination="-1" id="B7h-Rg-UO2"/>
-                            </connections>
-                        </collectionView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="s2u-9J-KS3" userLabel="Autosuggestion Table View">
-                            <rect key="frame" x="0.0" y="46" width="342" height="495"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                            <color key="sectionIndexColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="vAz-6m-pHc"/>
-                                <outlet property="delegate" destination="-1" id="Fna-7B-iUZ"/>
-                            </connections>
-                        </tableView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>

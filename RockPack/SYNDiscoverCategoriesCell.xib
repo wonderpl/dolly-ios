@@ -8,19 +8,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SYNDiscoverCategoriesCell" id="DiE-ts-EYH" userLabel="SYNCategoryCollectionViewCell" customClass="SYNDiscoverCategoriesCell">
-            <rect key="frame" x="0.0" y="0.0" width="332" height="67"/>
+            <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="332" height="67"/>
+                <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="CREATE NEW PACK" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="332" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
-                        <rect key="frame" x="0.0" y="0.0" width="332" height="67"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="CREATE NEW PACK" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
+                        <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.15686274510000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p9B-3P-4cn" userLabel="Line">
+                        <rect key="frame" x="0.0" y="43" width="256" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66721270161290325" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2U-bh-bl3" userLabel="Arrow Image View">
                         <rect key="frame" x="287" y="17" width="34" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -33,6 +38,7 @@
             <connections>
                 <outlet property="arrow" destination="R2U-bh-bl3" id="F5w-V6-8gv"/>
                 <outlet property="label" destination="VDA-cz-Gkg" id="Unb-AB-PbO"/>
+                <outlet property="line" destination="p9B-3P-4cn" id="b4b-82-amC"/>
             </connections>
         </collectionViewCell>
     </objects>

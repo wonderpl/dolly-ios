@@ -14,6 +14,7 @@
 #import "SYNSearchResultsViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNDiscoverCategoriesCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kAutocompleteTime 0.2
 
@@ -23,7 +24,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
                                         UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
-@property (nonatomic, strong) IBOutlet UIImageView* searchFieldBGImageView;
+
+@property (nonatomic, strong) IBOutlet UIView* panelBGWhite;
+
 @property (nonatomic, strong) IBOutlet UITextField* searchField;
 @property (nonatomic, strong) IBOutlet UIButton* searchCloseButton;
 
@@ -56,11 +59,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     [super viewDidLoad];
     
-    self.colorMapForCells = @{
-                              @"" : @""
-                              
-                              
-                              };
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    self.colorMapForCells = @{};
     
     self.searchCloseButton.alpha = 0.0f;
     
@@ -73,13 +74,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.categoriesCollectionView registerNib: [UINib nibWithNibName: kCategoryCellIndetifier bundle: nil]
                     forCellWithReuseIdentifier: kCategoryCellIndetifier];
     
-    
-    
-    // set the image here instead of the XIB to make it streachable
-    self.searchFieldBGImageView.image = [[UIImage imageNamed: @"FieldSearch"]
-                                 resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
-    
-    
     self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
     self.searchField.textColor = [UIColor colorWithRed: 40.0/255.0 green: 45.0/255.0 blue: 51.0/255.0 alpha: 1.0];
     self.searchField.layer.shadowOpacity = 1.0;
@@ -88,6 +82,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.searchField.layer.shadowRadius = 0.0f;
     self.searchField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.searchField.clearButtonMode = UITextFieldViewModeNever;
+    
+    
+    // == set border around the text field == //
+    
+    self.panelBGWhite.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.panelBGWhite.layer.borderWidth = 1.0f;
+    
     
     // Display Search instead of Return on iPhone Keyboard
     self.searchField.returnKeyType = UIReturnKeySearch;
@@ -133,7 +134,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // == Since this is method is called once use it to update the categories == //
     
     [self loadCategories];
+    
+    
+    
 }
+
+
 
 
 #pragma mark - Data Retrieval
@@ -143,6 +149,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    
     categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
@@ -159,14 +166,27 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                                       error: &error];
     
     
-    
-    
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
+    
+    NSMutableDictionary* mutDictionary = @{}.mutableCopy;
+    for (Genre* genre in self.genres)
+    {
+        
+        CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+        CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+        CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+        UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+        
+        mutDictionary[genre.name] = color;
+        
+    }
+    self.colorMapForCells = [NSDictionary dictionaryWithDictionary:mutDictionary];
     
 }
 
 - (void) loadCategories
 {
+    
     
     
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
@@ -194,8 +214,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 #pragma mark - CollectionView Delegate/Data Source
 
+
+
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
+    
     return self.genres.count;
 }
 
@@ -216,7 +239,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                             forIndexPath: indexPath];
     
     
-    categoryCell.backgroundColor = [UIColor redColor];
+    categoryCell.backgroundColor = self.colorMapForCells[currentGenre.name];
     
     categoryCell.label.text = subgenre.name;
     
@@ -394,29 +417,4 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
-#pragma mark - Rotation Callbacks
-
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    CGRect sideContainerFrame = self.sideContainerView.frame;
-    sideContainerFrame.size.width = UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? 280.0f : 342.0f;
-    self.sideContainerView.frame = sideContainerFrame;
-    
-    CGRect resultsFrame = CGRectZero;
-    
-    if(IS_IPAD) // there is no rotation on iPhone
-    {
-        
-        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
-        resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
-        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x - 10.0f;
-        resultsFrame.size.height = self.view.frame.size.height - resultsFrame.origin.y;
-        self.searchResultsController.view.frame = resultsFrame;
-    }
-    
-    
-    
-}
 @end
