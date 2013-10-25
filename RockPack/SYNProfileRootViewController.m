@@ -820,22 +820,25 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (self.collectionsTabActive)
     {
-       // self.collectionsTabButton.backgroundColor = [UIColor colorWithRed:120 green:120 blue:120 alpha:0];
-        
-       // self.followingTabButton.backgroundColor = [UIColor colorWithRed:244 green:244 blue:244 alpha:0];
-
-        self.followingTabButton.backgroundColor = [UIColor blackColor];
         [self.followingTabButton.titleLabel setTextColor:self.greyColor];
-        [self.collectionsTabButton.titleLabel setTextColor:[UIColor blackColor]];
+        self.followingTabButton.backgroundColor = [UIColor whiteColor];
+
         self.collectionsTabButton.backgroundColor = self.greyColor;
+        [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
+
 
     }
     else
     {
-        self.collectionsTabButton.backgroundColor = [UIColor blackColor];
-        [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
-        [self.followingTabButton.titleLabel setTextColor:[UIColor blackColor]];
+        
+        [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.followingTabButton.backgroundColor = self.greyColor;
+        
+        [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
+        self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
+
+        
+        
     }
 }
 

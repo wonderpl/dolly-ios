@@ -11,7 +11,7 @@
                 <outlet property="channelThumbnailCollectionView" destination="0Yx-dc-wS8" id="Fnp-Jg-2dm"/>
                 <outlet property="collectionsTabButton" destination="cbc-Sn-3Xw" id="i22-Wo-SLk"/>
                 <outlet property="editButton" destination="xAT-fj-vhM" id="aBJ-HS-lXz"/>
-                <outlet property="followingTabButton" destination="XNW-BF-LK9" id="K5c-VN-k87"/>
+                <outlet property="followingTabButton" destination="55i-48-sal" id="RFy-8Z-R5x"/>
                 <outlet property="fullNameLabel" destination="29c-Ki-1uc" id="55S-Wa-o38"/>
                 <outlet property="mainScrollView" destination="ruw-g4-aRU" id="dgT-JT-yTn"/>
                 <outlet property="profileImageView" destination="5Wb-qH-nzQ" id="kMc-dH-UVW"/>
@@ -46,16 +46,17 @@
                                         <action selector="collectionsTabTapped:" destination="-1" eventType="touchUpInside" id="wYg-dO-CCY"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XNW-BF-LK9">
-                                    <rect key="frame" x="124" y="-3" width="123" height="30"/>
+                                <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="55i-48-sal">
+                                    <rect key="frame" x="123" y="0.0" width="123" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="Following">
-                                        <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="followingsTabTapped:" destination="-1" eventType="touchUpInside" id="56c-8Q-4mx"/>
+                                        <action selector="collectionsTabTapped:" destination="-1" eventType="touchUpInside" id="D28-V9-HkO"/>
+                                        <action selector="followingsTabTapped:" destination="-1" eventType="touchUpInside" id="V3B-Sn-RiY"/>
                                     </connections>
                                 </button>
                             </subviews>
