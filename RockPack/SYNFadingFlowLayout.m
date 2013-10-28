@@ -20,6 +20,25 @@
     return YES;
 }
 
+- (void) prepareLayout
+{
+    [super prepareLayout];
+    
+    CGFloat verticalCenter = (CGRectGetHeight(self.collectionView.bounds) / 2.0);
+    
+    CGRect targetRect = CGRectMake(0.0f,  0.0f, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
+    NSArray *attributesArray = [super layoutAttributesForElementsInRect: targetRect];
+    
+    // If we have anything to layout
+    if (attributesArray.count > 0)
+    {
+        UICollectionViewLayoutAttributes *firstLayoutAttribute = attributesArray[0];
+        
+         self.sectionInset =  UIEdgeInsetsMake (verticalCenter - (firstLayoutAttribute.size.height / 2), 0,
+                                                verticalCenter - (firstLayoutAttribute.size.height / 2), 0);
+    }
+}
+
 
 - (NSArray *) layoutAttributesForElementsInRect: (CGRect) rect
 {
