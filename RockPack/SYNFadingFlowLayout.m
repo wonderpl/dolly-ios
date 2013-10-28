@@ -24,6 +24,10 @@
 {
     [super prepareLayout];
     
+    self.minimumInteritemSpacing = 0;
+    self.minimumLineSpacing = 0;
+    self.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
     CGFloat verticalCenter = (CGRectGetHeight(self.collectionView.bounds) / 2.0);
     
     CGRect targetRect = CGRectMake(0.0f,  0.0f, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
