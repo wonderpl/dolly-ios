@@ -26,7 +26,7 @@
 #import "Video.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kInterRowMargin 8.0f
+#define kInterRowMargin 15.0f
 
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
@@ -157,19 +157,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPad;
     }
     [self setUpUserProfile];
-    
-
-    self.segmentedControlsView.layer.cornerRadius = 4;
-    self.segmentedControlsView.layer.borderWidth = .5f;
-
-    //self.segmentedControlsView.layer.borderColor = [[UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:120.0f/255.0f alpha:0] CGColor];
-    
-    
-    self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
-    
-    self.segmentedControlsView.layer.masksToBounds = YES;
-    
-    [self setUpHeader];
+    [self setUpSegmentedControl];
     
     if (self.isIPhone)
     {
@@ -179,15 +167,15 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
 
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
-    
+    /*
     self.channelThumbnailCollectionView.frame = CGRectMake(self.channelThumbnailCollectionView.frame.origin.x, self.channelThumbnailCollectionView.frame.origin.y, self.channelThumbnailCollectionView.frame.size.width, self.channelThumbnailCollectionView.frame.size.height);
 
     self.subscriptionThumbnailCollectionView.frame = CGRectMake(self.subscriptionThumbnailCollectionView.frame.origin.x, self.subscriptionThumbnailCollectionView.frame.origin.y, self.subscriptionThumbnailCollectionView.frame.size.width, self.subscriptionThumbnailCollectionView.frame.size.height);
+     */
+    
+    self.channelThumbnailCollectionView.hidden = YES;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-   // [self resizeScrollViews];
-}
 
 - (void) viewDidAppear: (BOOL) animated
 {
@@ -238,10 +226,8 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     self.deletionModeActive = NO;
     
-    self.channelThumbnailCollectionView.delegate=self;
-    self.subscriptionThumbnailCollectionView.delegate=self;
-    
-    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+  //  [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+ 
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
@@ -358,34 +344,14 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     }
 }
 
--(void) setUpHeader {
-    
-    SYNYouHeaderView *tmpHeaderChannelsView;
-    SYNYouHeaderView *tmpHeaderSubscriptionsView;
-    
-    if (!self.isIPhone)
-    {
-        CGFloat correctWidth = [SYNDeviceManager.sharedInstance isLandscape] ? 600.0 : 400.0;
-        
-        self.headerChannelsView.frame = CGRectMake(self.headerChannelsView.frame.origin.x, self.headerChannelsView.frame.origin.y, correctWidth, self.headerChannelsView.frame.size.height);
-        
-        tmpHeaderChannelsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerChannelsView.frame];
-        self.headerSubscriptionsView.frame = CGRectMake(self.headerSubscriptionsView.frame.origin.x, self.headerSubscriptionsView.frame.origin.y, correctWidth, self.headerSubscriptionsView.frame.size.height);
-        tmpHeaderSubscriptionsView = [[SYNYouHeaderView alloc]initWithFrame:self.headerSubscriptionsView.frame];
-        
-        self.headerChannelsView = tmpHeaderChannelsView;
-        self.headerSubscriptionsView = tmpHeaderSubscriptionsView;
-        [tmpHeaderChannelsView setTitle: [self getHeaderTitleForChannels] andNumber: self.channelOwner.channels.count];
-        [tmpHeaderSubscriptionsView setTitle: NSLocalizedString(@"profile_screen_section_owner_subscription_title", nil) andNumber: self.channelOwner.subscriptions.count];
-        
-        
-        
-    }
-    
-    if (self.isIPhone)
-    {
 
-    }
+-(void) setUpSegmentedControl{
+    
+    self.segmentedControlsView.layer.cornerRadius = 4;
+    self.segmentedControlsView.layer.borderWidth = .5f;
+    self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.segmentedControlsView.layer.masksToBounds = YES;
+
 }
 
 - (void) updateMainScrollView {
@@ -552,7 +518,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         else
         {
             
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
+           self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
             
             self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
             
@@ -562,12 +528,16 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
         }
+        
+        self.channelThumbnailCollectionView.collectionViewLayout = channelsLayout;
+        self.subscriptionThumbnailCollectionView.collectionViewLayout = subscriptionsLayout;
+        
     }
     
     [subscriptionsLayout invalidateLayout];
     [channelsLayout invalidateLayout];
     
-    [self resizeScrollViews];
+   // [self resizeScrollViews];
 }
 
 
@@ -652,49 +622,40 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     }
     else if([collectionView isEqual:self.channelThumbnailCollectionView])
     {
-        Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+      /*  Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         
         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
                                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
                                                 options: SDWebImageRetryFailed];
-        
-        // Make sure we can't delete the favourites channel
-        if (channel.favouritesValue)
-        {
-            channelThumbnailCell.deleteButton.enabled = NO;
-        }
-        else
-        {
-            channelThumbnailCell.deleteButton.enabled = YES;
-        }
-        
-        [channelThumbnailCell setChannelTitle: channel.title];
+                */
+     //   [channelThumbnailCell setChannelTitle: channel.title];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView]){
         
         
         Channel *channel = self.channelOwner.subscriptions[indexPath.item];
-        
+        /*
         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
                                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
                                                 options: SDWebImageRetryFailed];
-        
+        */
         if (channel.favouritesValue)
         {
             if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
             {
-                [channelThumbnailCell setChannelTitle: [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ];
+                /*
+                [channelThumbnailCell setChannelTitle: [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ];*/
             }
             else
-            {
+            {/*
                 [channelThumbnailCell setChannelTitle:
-                 [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)]];
+                 [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)]];*/
             }
         }
         else
         {
-            [channelThumbnailCell setChannelTitle: channel.title];
+            //[channelThumbnailCell setChannelTitle: channel.title];
         }
         
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
@@ -817,24 +778,33 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 - (void) updateTabStates
 {
     
+    self.collectionsTabButton.selected = !self.collectionsTabActive;
+    self.subscriptionsTabButton.selected = self.collectionsTabActive;
+    self.channelThumbnailCollectionView.hidden = self.collectionsTabActive;
+    self.subscriptionThumbnailCollectionView.hidden = !self.collectionsTabActive;
+
+    
     if (self.collectionsTabActive)
     {
-       // self.collectionsTabButton.backgroundColor = [UIColor colorWithRed:120 green:120 blue:120 alpha:0];
-        
-       // self.followingTabButton.backgroundColor = [UIColor colorWithRed:244 green:244 blue:244 alpha:0];
-
-        self.followingTabButton.backgroundColor = [UIColor blackColor];
         [self.followingTabButton.titleLabel setTextColor:self.greyColor];
-        [self.collectionsTabButton.titleLabel setTextColor:[UIColor blackColor]];
+        self.followingTabButton.backgroundColor = [UIColor whiteColor];
+
         self.collectionsTabButton.backgroundColor = self.greyColor;
+        [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
+
 
     }
     else
     {
-        self.collectionsTabButton.backgroundColor = [UIColor blackColor];
-        [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
-        [self.followingTabButton.titleLabel setTextColor:[UIColor blackColor]];
+        
+        [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.followingTabButton.backgroundColor = self.greyColor;
+        
+        [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
+        self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
+
+        
+        
     }
 }
 

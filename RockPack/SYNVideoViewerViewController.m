@@ -945,6 +945,7 @@
 // The user touched the invisible button above the channel thumbnail, taking the user to the channel page
 - (IBAction) userTouchedChannelButton: (id) sender
 {
+    
     if(self.isVideoExpanded)
     {
         return;
@@ -960,7 +961,7 @@
     // Get the video instance for the currently selected video
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-    [appDelegate.viewStackManager viewChannelDetails: videoInstance.channel];
+    [appDelegate.viewStackManager viewChannelDetails: videoInstance.channel withNavigationController:self.navigationController];
     
 }
 

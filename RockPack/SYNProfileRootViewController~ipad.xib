@@ -12,7 +12,7 @@
                 <outlet property="channelThumbnailCollectionView" destination="MS7-tW-0TH" id="JAi-QX-iX9"/>
                 <outlet property="collectionsTabButton" destination="ylf-0F-Wru" id="Zoj-al-39U"/>
                 <outlet property="editButton" destination="TRR-mm-3I5" id="zNw-nx-SCP"/>
-                <outlet property="followingTabButton" destination="LqA-wU-GDN" id="Do1-14-0nw"/>
+                <outlet property="followingTabButton" destination="QFb-tH-WdG" id="iNt-7y-ACk"/>
                 <outlet property="fullNameLabel" destination="3wY-iP-RPC" id="Z8q-oT-Sfa"/>
                 <outlet property="profileImageView" destination="lPO-sd-9aT" id="eej-bf-Yw0"/>
                 <outlet property="segmentedControlsView" destination="R5e-8b-TEg" id="FYz-15-bxH"/>
@@ -22,23 +22,24 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="670" height="1004"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BTk-aM-5W2">
-                    <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
+                    <rect key="frame" x="0.0" y="0.0" width="670" height="1004"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="NLw-Oe-3pp">
-                            <rect key="frame" x="0.0" y="0.0" width="671" height="502"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <rect key="frame" x="0.0" y="0.0" width="649" height="502"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="MS7-tW-0TH">
-                            <rect key="frame" x="47" y="728" width="545" height="291"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="MS7-tW-0TH">
+                            <rect key="frame" x="47" y="728" width="544" height="691"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="contentInset" minX="2" minY="2" maxX="2" maxY="2"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
                                 <size key="itemSize" width="190" height="190"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -51,10 +52,11 @@
                                 <outlet property="delegate" destination="-1" id="s7b-h4-zad"/>
                             </connections>
                         </collectionView>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0td-Z3-eno">
-                            <rect key="frame" x="47" y="728" width="545" height="351"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0td-Z3-eno">
+                            <rect key="frame" x="47" y="728" width="544" height="651"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="contentInset" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="AUe-Ip-zbd">
                                 <size key="itemSize" width="190" height="190"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -68,7 +70,7 @@
                             </connections>
                         </collectionView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uxB-NR-Hkw">
-                            <rect key="frame" x="641" y="502" width="30" height="30"/>
+                            <rect key="frame" x="594" y="502" width="56" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                             <color key="backgroundColor" red="0.2122873639" green="0.61273946479999997" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal">
@@ -95,16 +97,16 @@
                                                 <action selector="collectionsTabTapped:" destination="-1" eventType="touchUpInside" id="oOm-zp-UY6"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LqA-wU-GDN">
-                                            <rect key="frame" x="124" y="-3" width="123" height="30"/>
+                                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QFb-tH-WdG">
+                                            <rect key="frame" x="123" y="0.0" width="123" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Following">
                                                 <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="followingsTabTapped:" destination="-1" eventType="touchUpInside" id="FGo-NB-nZV"/>
+                                                <action selector="followingsTabTapped:" destination="-1" eventType="touchUpInside" id="zZq-oX-ZJ8"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -146,9 +148,15 @@
                                     </state>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
+                    <inset key="contentInset" minX="0.0" minY="-64" maxX="0.0" maxY="0.0"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="size" keyPath="contentSize">
+                            <size key="value" width="670" height="1504"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.96335767663043481" green="0.96335767663043481" blue="0.96335767663043481" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>

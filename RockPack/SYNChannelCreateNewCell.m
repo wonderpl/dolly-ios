@@ -15,7 +15,10 @@
 {
     [super awakeFromNib];
     
-    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
+    [self.createLabel setFont:[UIFont lightCustomFontOfSize:18]];
+    
+    [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
+    [self.boarderView.layer setBorderWidth:1.0f];
 }
 
 

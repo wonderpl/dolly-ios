@@ -171,12 +171,12 @@
     // TODO: Remove it when we come up with a good animation
     toViewController.view.frame = CGRectZero;
     
-    [[self view] addSubview: toViewController.view];
     
     // == Define the completion block == //
     
     void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
-        
+        [[self view] addSubview: toViewController.view];
+
         [fromViewController.view removeFromSuperview];
         [fromViewController removeFromParentViewController];
         
