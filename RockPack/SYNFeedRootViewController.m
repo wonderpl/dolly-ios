@@ -1034,7 +1034,7 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) profileIconPressed: (UIButton *) sender
 {
     SYNAggregateCell* cell = [self aggregateCellFromView: sender];
-    if(!cell)
+    if(!cell.channelOwner) // checking for both channel and channel owner
         return;
     
     [appDelegate.viewStackManager viewProfileDetails: cell.channelOwner];

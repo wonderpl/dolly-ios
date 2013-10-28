@@ -86,6 +86,7 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     
 }
+
 -(ChannelOwner*)channelOwner
 {
     Channel* heuristic = self.channelShowing;
@@ -94,6 +95,7 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     return heuristic.channelOwner;
 }
+
 -(Channel*)channelShowing
 {
     if(self.collectionData.count == 0)

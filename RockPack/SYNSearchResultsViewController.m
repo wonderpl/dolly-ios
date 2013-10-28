@@ -18,6 +18,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 @interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
+// UI stuff
+@property (nonatomic, strong) IBOutlet UIView* containerTabs;
+
 // search operations
 @property (nonatomic, strong) MKNetworkOperation* videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation* userSearchOperation;
@@ -59,6 +62,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
                forCellWithReuseIdentifier:kSearchResultUserCell];
     
     
+    self.containerTabs.layer.cornerRadius = 3.0f;
+    self.containerTabs.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.containerTabs.layer.borderWidth = 1.0f;
     
     // == Define Completion Blocks for operations == //
     
