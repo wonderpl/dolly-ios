@@ -87,7 +87,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
         resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
-        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x;
+        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x - 100.0f;
         resultsFrame.size.height = self.view.frame.size.height;
         
         

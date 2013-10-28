@@ -875,7 +875,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 
 
-- (SYNAggregateCell *) aggregateCellFromView: (UIView *) view
+- (SYNAggregateCell *) aggregateCellFromSubview: (UIView *) view
 {
     UIView *candidateCell = view;
     
@@ -890,7 +890,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (NSIndexPath *) indexPathFromView: (UIView *) view
 {
-    SYNAggregateCell *aggregateCellSelected = [self aggregateCellFromView: view];
+    SYNAggregateCell *aggregateCellSelected = [self aggregateCellFromSubview: view];
     NSIndexPath *indexPath = [self.feedCollectionView indexPathForItemAtPoint: aggregateCellSelected.center];
     
     return indexPath;
@@ -907,10 +907,10 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Cell Actions Delegate
 
-- (void) addControlPressed: (UIButton *) button
+- (void) addControlPressed: (UIControl*) control
 {
     
-    SYNAggregateCell* cell = [self aggregateCellFromView:button];
+    SYNAggregateCell* cell = [self aggregateCellFromSubview: control];
     if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // sanity check
         return;
     
@@ -940,7 +940,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 // only relates to videos
-- (void) likeControlPressed: (UIButton *) button
+- (void) likeControlPressed: (UIControl*) control
 {
     if (self.togglingInProgress)
     {
@@ -948,8 +948,7 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     
     
-    
-    SYNAggregateCell* cell = [self aggregateCellFromView:button];
+    SYNAggregateCell* cell = [self aggregateCellFromSubview:control];
     if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // only videos can have a like action (currently, remove if changed)
         return;
     
@@ -966,9 +965,10 @@ typedef void(^FeedDataErrorBlock)(void);
                                                             label: @"feed"
                                                             value: nil] build]];
     
-    BOOL didStar = (button.selected == NO);
     
-    button.enabled = NO;
+    BOOL didStar = (control.selected == NO);
+    
+    control.enabled = NO;
     
     self.togglingInProgress = YES;
     
@@ -987,7 +987,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.starredByUserValue = YES;
                                                   videoInstance.video.starCountValue += 1;
                                                   
-                                                  button.selected = YES;
+                                                  control.selected = YES;
                                                   
                                                   [videoInstance addStarrersObject: appDelegate.currentUser];
                                               }
@@ -997,7 +997,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.starredByUserValue = NO;
                                                   videoInstance.video.starCountValue -= 1;
                                                   
-                                                  button.selected = NO;
+                                                  control.selected = NO;
                                               }
                                               
                                               NSError* error;
@@ -1011,19 +1011,19 @@ typedef void(^FeedDataErrorBlock)(void);
                                               
                                               [self.feedCollectionView reloadData];
                                               
-                                              button.enabled = YES;
+                                              control.enabled = YES;
                                           }
                                                errorHandler: ^(id error) {
                                                    self.togglingInProgress = NO;
                                                    
                                                    DebugLog(@"Could not star video");
                                                    
-                                                   button.enabled = YES;
+                                                   control.enabled = YES;
                                                }];
 }
 
 
--(void)shareControlPressed
+-(void)shareControlPressed:(UIControl*) control
 {
     
 }
@@ -1033,7 +1033,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) profileIconPressed: (UIButton *) sender
 {
-    SYNAggregateCell* cell = [self aggregateCellFromView: sender];
+    SYNAggregateCell* cell = [self aggregateCellFromSubview: sender];
     if(!cell.channelOwner) // checking for both channel and channel owner
         return;
     

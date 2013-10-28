@@ -10,9 +10,9 @@
 
 @protocol SYNSocialActionsDelegate <NSObject>
 
--(void)followControlPressed:(id)control;
--(void)shareControlPressed:(id)control;
--(void)likeControlPressed:(id)control;
--(void)addControlPressed:(id)control;
+-(void)followControlPressed:(UIControl*)control;
+-(void)shareControlPressed:(UIControl*)control;
+-(void)likeControlPressed:(UIControl*)control;
+-(void)addControlPressed:(UIControl*)control;
 
 @end

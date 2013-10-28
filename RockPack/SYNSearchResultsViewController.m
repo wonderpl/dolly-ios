@@ -8,6 +8,7 @@
 
 #import "SYNSearchResultsViewController.h"
 #import "SYNNetworkEngine.h"
+#import "SYNSearchResultsCell.h"
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsUserCell.h"
 
@@ -107,10 +108,16 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
     };
     
+    
+    // Set Initial
+    
+    self.searchresultsShowing = SearchResultsShowingVideos;
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self repositionContainer];
 }
 
@@ -118,11 +125,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 {
     // offset from the top
     CGRect containerRect = self.containerView.frame;
+    
+    
     containerRect.origin.x = (self.view.frame.size.width * 0.5f) - (self.containerView.frame.size.width * 0.5f);
     containerRect.size.height = self.view.frame.size.height;
-    self.containerView.frame = containerRect;
-    
-    self.containerView.frame = CGRectIntegral(self.containerView.frame);
+    self.containerView.frame = CGRectIntegral(containerRect);
 }
 
 #pragma mark - Load Data
@@ -216,7 +223,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    UICollectionViewCell* cell;
+    SYNSearchResultsCell* cell;
     
     if(collectionView == self.videosCollectionView)
     {
@@ -238,23 +245,59 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         cell = userCell;
     }
     
+    cell.delegate = self;
+    
     return cell;
     
 }
+#pragma mark - Social Action Delegate
 
-#pragma mark - Tab Delegate
+-(void)followControlPressed:(id)control
+{
+    
+}
+-(void)shareControlPressed:(id)control
+{
+    
+}
+-(void)likeControlPressed:(id)control
+{
+    
+}
+-(void)addControlPressed:(id)control
+{
+    
+}
+
+
+#pragma mark - Tabs Delegate
 
 -(IBAction)tabPressed:(id)sender
 {
     if(self.videosTabButton == sender)
-    {
-        self.videosCollectionView.hidden = NO;
-        self.usersCollectionView.hidden = YES;
-    }
+        self.searchresultsShowing = SearchResultsShowingVideos;
     else if (self.usersTabButton == sender)
+        self.searchresultsShowing = SearchResultsShowingUsers;
+}
+
+-(void)setSearchresultsShowing:(SearchResultsShowing)searchresultsShowing
+{
+    _searchResultsShowing = searchresultsShowing;
+    switch (_searchResultsShowing)
     {
-        self.videosCollectionView.hidden = YES;
-        self.usersCollectionView.hidden = NO;
+        case SearchResultsShowingVideos:
+            self.videosCollectionView.hidden = NO;
+            self.usersCollectionView.hidden = YES;
+            self.videosTabButton.selected = YES;
+            self.usersTabButton.selected = NO;
+            break;
+            
+        case SearchResultsShowingUsers:
+            self.videosCollectionView.hidden = YES;
+            self.usersCollectionView.hidden = NO;
+            self.videosTabButton.selected = NO;
+            self.usersTabButton.selected = YES;
+            break;
     }
 }
 

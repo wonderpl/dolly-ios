@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNSearchResultsCell.h"
 #import "SYNSocialControl.h"
 
-@interface SYNSearchResultsVideoCell : UICollectionViewCell
+@interface SYNSearchResultsVideoCell : SYNSearchResultsCell
 {
     SYNSocialControl* likeControl;
     SYNSocialControl* addControl;
