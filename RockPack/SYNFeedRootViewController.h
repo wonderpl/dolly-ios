@@ -7,9 +7,9 @@
 //
 
 #import "SYNAbstractViewController.h"
+#import "SYNSocialActionsDelegate.h"
 
-
-@interface SYNFeedRootViewController : SYNAbstractViewController
+@interface SYNFeedRootViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
 
 
 - (void) removeEmptyGenreMessage;

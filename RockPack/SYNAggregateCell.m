@@ -49,11 +49,11 @@
 }
 
 
-- (void) setViewControllerDelegate: (id<SYNAggregateCellDelegate>) viewControllerDelegate
+- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
-    _viewControllerDelegate = viewControllerDelegate;
+    _delegate = delegate;
     
-    [self.userThumbnailButton addTarget: self.viewControllerDelegate
+    [self.userThumbnailButton addTarget: _delegate
                                  action: @selector(profileButtonTapped:)
                        forControlEvents: UIControlEventTouchUpInside];
 }

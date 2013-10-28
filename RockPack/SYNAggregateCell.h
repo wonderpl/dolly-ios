@@ -8,20 +8,19 @@
 
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
+#import "SYNSocialActionsDelegate.h"
 #import <UIKit/UIKit.h>
 
 #define AGGREGATION_CELL_DEFAULT_HEIGHT 280.0f
 
-@protocol SYNAggregateCellDelegate <NSObject, UICollectionViewDataSource>
 
-- (void) touchedAggregateCell;
 
-@end
-
-@interface SYNAggregateCell : UICollectionViewCell
+@interface SYNAggregateCell : UICollectionViewCell <NSObject, UICollectionViewDataSource, SYNSocialActionsDelegate>
 
 
 @property (nonatomic, readonly) CGSize sizeForItemAtDefaultPath;
+
+@property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 
@@ -37,7 +36,6 @@
 @property (nonatomic, strong) NSDictionary *boldTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
-@property (nonatomic, weak) id<SYNAggregateCellDelegate> viewControllerDelegate;
 
 @property (nonatomic, strong) NSArray* collectionData;
 

@@ -18,7 +18,6 @@
     followControl = [SYNCollectionCellButtonControl buttonControl];
     followControl.title = @"follow";
     followControl.center = CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f);
-    
     [self addSubview:followControl];
     
     shareControl = [SYNCollectionCellButtonControl buttonControl];
