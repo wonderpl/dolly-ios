@@ -169,6 +169,7 @@
 		01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */; };
 		01578C2B17DF840800B4F498 /* LowerParallaxStars.png in Resources */ = {isa = PBXBuildFile; fileRef = 01578C2917DF840800B4F498 /* LowerParallaxStars.png */; };
 		01578C2C17DF840800B4F498 /* UpperParallaxStars.png in Resources */ = {isa = PBXBuildFile; fileRef = 01578C2A17DF840800B4F498 /* UpperParallaxStars.png */; };
+		015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */; };
 		015C13C1173B034C001569FE /* SYNReportConcernTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015C13C0173B034C001569FE /* SYNReportConcernTableViewController.m */; };
 		015CB01616AE039900FEB8E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01516AE039900FEB8E7 /* User.m */; };
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
@@ -1661,6 +1662,8 @@
 		01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIInterpolatingMotionEffect+DualAxis.m"; sourceTree = "<group>"; };
 		01578C2917DF840800B4F498 /* LowerParallaxStars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LowerParallaxStars.png; path = Assets/Images/LowerParallaxStars.png; sourceTree = "<group>"; };
 		01578C2A17DF840800B4F498 /* UpperParallaxStars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UpperParallaxStars.png; path = Assets/Images/UpperParallaxStars.png; sourceTree = "<group>"; };
+		015AC9FB181EB86E0020E685 /* SYNAggregateFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAggregateFlowLayout.h; sourceTree = "<group>"; };
+		015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAggregateFlowLayout.m; sourceTree = "<group>"; };
 		015C13BF173B034C001569FE /* SYNReportConcernTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNReportConcernTableViewController.h; sourceTree = "<group>"; };
 		015C13C0173B034C001569FE /* SYNReportConcernTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNReportConcernTableViewController.m; sourceTree = "<group>"; };
 		015CB01416AE039900FEB8E7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -3657,6 +3660,8 @@
 		0173F70416E0C498005B3ECA /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
+				015AC9FB181EB86E0020E685 /* SYNAggregateFlowLayout.h */,
+				015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */,
 				019CB6A6181187E80079DFCF /* SYNFadingFlowLayout.h */,
 				019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */,
 				015CEE3D16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.h */,
@@ -7590,6 +7595,7 @@
 			files = (
 				010DEFE11629BDC40080F26B /* main.m in Sources */,
 				010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */,
+				015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */,
 				019824E81629CB4300216900 /* SYNDebug.m in Sources */,
 				019824EC1629CBDF00216900 /* UncaughtExceptionHandler.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,

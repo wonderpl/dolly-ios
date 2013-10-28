@@ -7,23 +7,24 @@
 //
 
 #import "ChannelOwner.h"
+#import "SYNAggregateFlowLayout.h"
 #import "SYNAggregateVideoCell.h"
-#import "SYNAppDelegate.h"
-#import "SYNTouchGestureRecognizer.h"
 #import "SYNAggregateVideoItemCell.h"
+#import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
+#import "SYNSocialControlFactory.h"
+#import "SYNTouchGestureRecognizer.h"
 #import "UIColor+SYNColor.h"
 #import "UIImage+Tint.h"
-#import "SYNSocialControlFactory.h"
+#import "Video.h"
+#import "VideoInstance.h"
 
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, readonly) CGFloat scrollViewMargin;
-
 @end
 
-static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
+static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 
 @implementation SYNAggregateVideoCell
@@ -41,14 +42,14 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
     
     likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                          forTitle:@"like"
-                                                                       andPosition:CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
+                                                                        forTitle:@"like"
+                                                                     andPosition:CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
     
     [self.bottomControlsView addSubview:likeControl];
     
     addControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeAdd
-                                                                         forTitle:nil
-                                                                      andPosition:CGPointMake(middlePoint.x, middlePoint.y)];
+                                                                       forTitle:nil
+                                                                    andPosition:CGPointMake(middlePoint.x, middlePoint.y)];
     
     [self.bottomControlsView addSubview:addControl];
     
@@ -59,13 +60,24 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     [self.bottomControlsView addSubview:shareControl];
     
     
-    // == Set Nib == //
+    [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
+          forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
+    SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
-    [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
-          forCellWithReuseIdentifier:kVideoItemCellIndetifier];
+    self.collectionView.collectionViewLayout = aggregateFlowLayout;
     
+    [self.collectionView reloadData];
+}
+
+
+- (void) prepareForReuse
+{
+    [super prepareForReuse];
     
+    self.collectionData = @[];
+
+    [self.collectionView reloadData];
 }
 
 
@@ -78,18 +90,52 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
           forControlEvents: UIControlEventTouchUpInside];
     
     [addControl addTarget: self.delegate
-                    action: @selector(addControlPressed:)
-          forControlEvents: UIControlEventTouchUpInside];
+                   action: @selector(addControlPressed:)
+         forControlEvents: UIControlEventTouchUpInside];
     
     [shareControl addTarget: self.delegate
-                    action: @selector(shareControlPressed:)
-          forControlEvents: UIControlEventTouchUpInside];
+                     action: @selector(shareControlPressed:)
+           forControlEvents: UIControlEventTouchUpInside];
 }
 
 
+- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
+{
+    NSString *channelOwnerName = messageDictionary[@"display_name"] ? messageDictionary[@"display_name"] : @"User";
+    
+    NSNumber *itemCountNumber = messageDictionary[@"item_count"] ? messageDictionary[@"item_count"] : @1;
+    NSString *actionString = [NSString stringWithFormat: @"%i video%@", itemCountNumber.integerValue, itemCountNumber.integerValue > 1 ? @"s": @""];
+    
+    NSString *channelNameString = messageDictionary[@"channel_name"] ? messageDictionary[@"channel_name"] : @"his channel";
+    
+    // create the attributed string //
+    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
+    
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelOwnerName
+                                                                                      attributes: self.boldTextAttributes]];
+    
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" added "
+                                                                                      attributes: self.lightTextAttributes]];
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
+                                                                                      attributes: self.lightTextAttributes]];
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" to "
+                                                                                      attributes: self.lightTextAttributes]];
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelNameString
+                                                                                      attributes: self.boldTextAttributes]];
+    
+    self.messageLabel.attributedText = attributedCompleteString;
+    self.messageLabel.center = CGPointMake(self.messageLabel.center.x, self.userThumbnailImageView.center.y + 2.0f);
+    self.messageLabel.frame = CGRectIntegral(self.messageLabel.frame);
+
+}
 
 
--(void)layoutSubviews
+- (void) layoutSubviews
 {
     [super layoutSubviews];
     
@@ -97,6 +143,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
     
     CGRect bgViewFrame = self.backgroundView.frame;
+    
     if(IS_IPHONE)
     {
         bgViewFrame.size.width = 320.0f;
@@ -116,53 +163,18 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
-    
-    // == Collection View == //
-    
-    CGRect collectionFrame = self.collectionView.frame;
-    
-    // the idea is to put a margin so as to show the next video cell while adding an inset of the same value
-    collectionFrame.size = CGSizeMake(self.sizeForItemAtDefaultPath.width + self.scrollViewMargin, self.sizeForItemAtDefaultPath.height);
-    
-    
-    self.collectionView.frame = collectionFrame;
-    
-    // now set the bounds
-    
-    
-    UIEdgeInsets scrollViewInsets = self.collectionView.contentInset;
-    scrollViewInsets.left = self.scrollViewMargin;
-    self.collectionView.contentInset = scrollViewInsets;
-    
-    // finally center it
-    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
-    
-    
 }
-
-
-
-
-- (void) prepareForReuse
-{
-    [super prepareForReuse];
-    
-    self.collectionData = @[];
-    
-    [self.collectionView reloadData];
-    
-}
-
 
 
 #pragma mark - UICollectionView DataSource
 
 // utility method (overriding abstract class)
--(CGSize)sizeForItemAtDefaultPath
+- (CGSize) sizeForItemAtDefaultPath
 {
-    return [self collectionView:self.collectionView
-                         layout:self.collectionView.collectionViewLayout
-         sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    // TODO: Might be a good idea to cache this, as this might be (relatively) computationally expensive
+    return [self collectionView: self.collectionView
+                         layout: self.collectionView.collectionViewLayout
+         sizeForItemAtIndexPath: [NSIndexPath indexPathForItem: 0 inSection: 0]];
 }
 
 
@@ -171,57 +183,48 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
    sizeForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     CGSize correctSize = CGSizeZero;
-    if(IS_IPHONE)
+    
+    if (IS_IPHONE)
     {
-        
         correctSize.width = 248.0f;
         correctSize.height = 139.0f;
     }
     else
     {
-        
         correctSize.width = 288.0f;
         correctSize.height = 139.0f;
-            
-        
     }
     
     return correctSize;
     
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+
+- (NSInteger) collectionView: (UICollectionView *) collectionView
+      numberOfItemsInSection: (NSInteger) section
 {
     
     return self.collectionData.count;
     
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+
+- (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
+                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    
-    
-    SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndetifier
+    SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndentifier
                                                                                     forIndexPath: indexPath];
     
     VideoInstance* videoInstance = self.collectionData[indexPath.item];
-    
     
     [itemCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                 options: SDWebImageRetryFailed];
     
     return itemCell;
-    
-    
 }
 
--(CGFloat)scrollViewMargin
-{
-    return 40.0f;
-}
-
--(ChannelOwner*)channelOwner
+- (ChannelOwner*) channelOwner
 {
     VideoInstance* heuristic = self.videoInstanceShowing;
     if(!heuristic)
@@ -230,7 +233,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     return heuristic.channel.channelOwner;
 }
 
--(VideoInstance*)videoInstanceShowing
+- (VideoInstance*) videoInstanceShowing
 {
     if(self.collectionData.count == 0)
         return nil;
