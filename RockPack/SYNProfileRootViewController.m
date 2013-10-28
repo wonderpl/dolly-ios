@@ -627,49 +627,40 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     }
     else if([collectionView isEqual:self.channelThumbnailCollectionView])
     {
-        Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+      /*  Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         
         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
                                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
                                                 options: SDWebImageRetryFailed];
-        
-        // Make sure we can't delete the favourites channel
-        if (channel.favouritesValue)
-        {
-            channelThumbnailCell.deleteButton.enabled = NO;
-        }
-        else
-        {
-            channelThumbnailCell.deleteButton.enabled = YES;
-        }
-        
-        [channelThumbnailCell setChannelTitle: channel.title];
+                */
+     //   [channelThumbnailCell setChannelTitle: channel.title];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView]){
         
         
         Channel *channel = self.channelOwner.subscriptions[indexPath.item];
-        
+        /*
         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
                                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
                                                 options: SDWebImageRetryFailed];
-        
+        */
         if (channel.favouritesValue)
         {
             if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
             {
-                [channelThumbnailCell setChannelTitle: [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ];
+                /*
+                [channelThumbnailCell setChannelTitle: [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ];*/
             }
             else
-            {
+            {/*
                 [channelThumbnailCell setChannelTitle:
-                 [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)]];
+                 [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)]];*/
             }
         }
         else
         {
-            [channelThumbnailCell setChannelTitle: channel.title];
+            //[channelThumbnailCell setChannelTitle: channel.title];
         }
         
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];

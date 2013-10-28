@@ -320,12 +320,13 @@
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
         SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell"
                                                                                             forIndexPath: indexPath];
-        
+        //To be removed. Old cell setter.
+        /*
         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
                                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
                                                 options: SDWebImageRetryFailed];
         
-        [channelThumbnailCell setChannelTitle: channel.title];
+        [channelThumbnailCell setChannelTitle: channel.title];*/
         
         channelThumbnailCell.specialSelected = (channel == self.selectedChannel);
         

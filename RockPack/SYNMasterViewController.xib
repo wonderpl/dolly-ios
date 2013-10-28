@@ -21,7 +21,7 @@
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="Container View">
                     <rect key="frame" x="97" y="0.0" width="953" height="768"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="89" userLabel="Video Overlay View">

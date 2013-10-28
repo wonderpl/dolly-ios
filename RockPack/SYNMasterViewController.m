@@ -199,32 +199,34 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     
     // Remember the view controller that we came from
-    self.originViewController = originViewController;
+ //   self.originViewController = originViewController;
     
     self.videoViewerViewController = [[SYNVideoViewerViewController alloc] initWithVideoInstanceArray: videoInstanceArray selectedIndex: selectedIndex];
-    
+    /*
     if ([originViewController isKindOfClass:[SYNChannelDetailViewController class]])
     {
         self.videoViewerViewController.shownFromChannelScreen = YES;
         
     }
+    */
+  //  [self addChildViewController: self.videoViewerViewController];
     
-    [self addChildViewController: self.videoViewerViewController];
     
-    
-    self.videoViewerViewController.view.frame = self.overlayView.bounds;
-    
-    [self.overlayView addSubview: self.videoViewerViewController.view];
+//    self.videoViewerViewController.view.frame = self.overlayView.bounds;
+ //   [self.overlayView addSubview: self.videoViewerViewController.view];
     self.videoViewerViewController.overlayParent = self;
-    [self.videoViewerViewController prepareForAppearAnimation];
+   // [self.videoViewerViewController prepareForAppearAnimation];
 
-    CGPoint delta = [self.originViewController.view convertPoint:centerPoint toView:self.view];
-    CGPoint originalCenter = self.videoViewerViewController.view.center;
-    self.videoViewerViewController.view.center = delta;
-    self.videoViewerViewController.view.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
-    self.videoViewerViewController.view.alpha = 0.0f;
+   // CGPoint delta = [self.originViewController.view convertPoint:centerPoint toView:self.view];
+   // CGPoint originalCenter = self.videoViewerViewController.view.center;
+   // self.videoViewerViewController.view.center = delta;
+   // self.videoViewerViewController.view.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
+   // self.videoViewerViewController.view.alpha = 0.0f;
     
     
+    
+    [self presentViewController:self.videoViewerViewController animated:YES completion:nil];
+    /*
     [UIView animateWithDuration: kVideoInAnimationDuration
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -237,7 +239,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          [self.videoViewerViewController runAppearAnimation];
                          self.overlayView.userInteractionEnabled = YES;
     }];
-    
+    */
 }
 
 
@@ -245,7 +247,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     // FIXME: Replace with something more elegant (i.e. anything else)
     appDelegate.searchRefreshDisabled = FALSE;
-    
+   /*
     if (!self.videoViewerViewController)
     {
         return;
@@ -278,10 +280,18 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          self.videoViewerViewController = nil;
                      }];
     
-    
-    [self.originViewController videoOverlayDidDissapear];
+    */
+  //  [self.originViewController videoOverlayDidDissapear];
     //FIXME: Nick to rework
-    [self.containerViewController viewWillAppear:NO];
+  //  [self.containerViewController viewWillAppear:NO];
+
+    
+    // [self.overlayView addSubview: self.videoViewerViewController.view];
+
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.videoViewerViewController = nil;
+    }];
+
 }
 
 
@@ -663,21 +673,14 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                                                      inView: self.view
                                    permittedArrowDirections: 0
                                                    animated: YES];
-        
-        
     }
-    
-}
 
+}
 
 - (UINavigationController*) showingViewController
 {
     return self.containerViewController.currentViewController;
 }
-
-
-
-
 
 -(NSArray*)tabs
 {

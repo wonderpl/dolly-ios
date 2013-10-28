@@ -149,6 +149,7 @@
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
+                    <inset key="contentInset" minX="0.0" minY="-64" maxX="0.0" maxY="0.0"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="size" keyPath="contentSize">
                             <size key="value" width="670" height="1504"/>
