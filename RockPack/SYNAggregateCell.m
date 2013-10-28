@@ -36,10 +36,10 @@
     self.collectionData = @[]; // set to 0
 }
 
-
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString
+-(void)setCollectionData:(NSArray *)collectionData
 {
-    // to be implemented in subclass
+    _collectionData = collectionData;
+    [self.collectionView reloadData];
 }
 
 
@@ -72,6 +72,9 @@
     return 1;
 }
 
-
+-(ChannelOwner*)channelOwner
+{
+    return nil; // implement in subclass
+}
 
 @end

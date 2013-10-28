@@ -9,6 +9,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "SYNSocialActionsDelegate.h"
+#import "ChannelOwner.h"
 #import <UIKit/UIKit.h>
 
 #define AGGREGATION_CELL_DEFAULT_HEIGHT 280.0f
@@ -39,7 +40,8 @@
 
 @property (nonatomic, strong) NSArray* collectionData;
 
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString;
+@property (nonatomic, readonly) ChannelOwner* channelOwner;
+
 
 // new
 

@@ -7,10 +7,13 @@
 //
 
 #import "SYNAggregateCell.h"
+#import "Channel.h"
 
 @interface SYNAggregateChannelCell : SYNAggregateCell 
 
 @property (nonatomic, strong) IBOutlet UIButton* followButton;
 @property (nonatomic, strong) IBOutlet UIButton* shareButton;
+
+@property (nonatomic, readonly) Channel* channelShowing;
 
 @end

@@ -3056,6 +3056,7 @@
 		BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNSocialActionsDelegate.h; sourceTree = "<group>"; };
 		BEB3137A181E9C2900FAF98A /* SYNSocialControlFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialControlFactory.h; sourceTree = "<group>"; };
 		BEB3137B181E9C2900FAF98A /* SYNSocialControlFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialControlFactory.m; sourceTree = "<group>"; };
+		BEB3137E181EB52400FAF98A /* SYNAggregateCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNAggregateCellDelegate.h; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -5826,6 +5827,7 @@
 		BE7D036A17A69A99008053DC /* Aggregate Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BEB3137F181EB52900FAF98A /* Delegates */,
 				BE1B3DEB1811422500DA2BD6 /* Item Cells */,
 				BE7D036B17A69B67008053DC /* SYNAggregateCell.h */,
 				BE7D036C17A69B67008053DC /* SYNAggregateCell.m */,
@@ -5835,7 +5837,6 @@
 				BE7D037717A69DCD008053DC /* SYNAggregateChannelCell.h */,
 				BE7D037817A69DCF008053DC /* SYNAggregateChannelCell.m */,
 				BE7D038017A69E86008053DC /* SYNAggregateChannelCell.xib */,
-				BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */,
 			);
 			name = "Aggregate Cells";
 			sourceTree = "<group>";
@@ -6154,6 +6155,15 @@
 				BEB3137B181E9C2900FAF98A /* SYNSocialControlFactory.m */,
 			);
 			name = Factory;
+			sourceTree = "<group>";
+		};
+		BEB3137F181EB52900FAF98A /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */,
+				BEB3137E181EB52400FAF98A /* SYNAggregateCellDelegate.h */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		BEBD09781743A1700092F527 /* CoverArt Chooser View */ = {

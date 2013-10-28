@@ -13,8 +13,6 @@
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNDeviceManager.h"
 #import "UIColor+SYNColor.h"
-#import "VideoInstance.h"
-#import "Video.h"
 #import "UIImage+Tint.h"
 #import "SYNSocialControlFactory.h"
 
@@ -67,7 +65,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
           forCellWithReuseIdentifier:kVideoItemCellIndetifier];
     
-    [self.collectionView reloadData];
     
 }
 
@@ -77,15 +74,15 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     [super setDelegate: delegate];
 
     [likeControl addTarget: self.delegate
-                    action: @selector(likeButtonPressed:)
+                    action: @selector(likeControlPressed:)
           forControlEvents: UIControlEventTouchUpInside];
     
     [addControl addTarget: self.delegate
-                    action: @selector(likeButtonPressed:)
+                    action: @selector(addControlPressed:)
           forControlEvents: UIControlEventTouchUpInside];
     
     [shareControl addTarget: self.delegate
-                    action: @selector(likeButtonPressed:)
+                    action: @selector(shareControlPressed:)
           forControlEvents: UIControlEventTouchUpInside];
 }
 
@@ -224,6 +221,24 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     return 40.0f;
 }
 
+-(ChannelOwner*)channelOwner
+{
+    VideoInstance* heuristic = self.videoInstanceShowing;
+    if(!heuristic)
+        return nil;
+    
+    return heuristic.channel.channelOwner;
+}
+
+-(VideoInstance*)videoInstanceShowing
+{
+    if(self.collectionData.count == 0)
+        return nil;
+    
+    // TODO: Figure out the correct video instance according to scroll offset
+    
+    return (VideoInstance*)self.collectionData[0];
+}
 
 
 @end
