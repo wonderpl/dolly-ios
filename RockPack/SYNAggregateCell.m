@@ -43,10 +43,7 @@
 }
 
 
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
-{
-    // to be implemented in subclass
-}
+
 
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate

@@ -27,7 +27,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
 
-@property (nonatomic, strong) IBOutlet UILabel *mainTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 
@@ -40,7 +40,6 @@
 @property (nonatomic, strong) NSArray* collectionData;
 
 - (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString;
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary;
 
 // new
 

@@ -650,7 +650,6 @@ typedef void(^FeedDataErrorBlock)(void);
     FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
     ChannelOwner* channelOwner;
     
-    NSInteger feedItemsAggregated = feedItem.itemTypeValue == FeedItemTypeAggregate ? feedItem.feedItems.count : 1;
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
@@ -661,21 +660,8 @@ typedef void(^FeedDataErrorBlock)(void);
         
         videoInstance = (VideoInstance*)(self.feedVideosById)[feedItem.coverIndexArray[0]]; // there should be only one
 
-        cell.mainTitleLabel.text = videoInstance.title;
+        cell.titleLabel.text = videoInstance.title;
         
-        
-
-        if (!feedItem.title) // it should usually be nil
-        {
-            // Creating "Dolly Proxima-SMith created 1 new collection
-            [cell setTitleMessageWithDictionary: @{@"display_name" : videoInstance.channel.channelOwner ? videoInstance.channel.channelOwner.displayName : @"",
-                                                   @"item_count" : @(feedItemsAggregated),
-                                                   @"channel_name" : videoInstance.channel ? videoInstance.channel.title : @""}];
-            
-        }
-        else // force show a specific message
-            cell.messageLabel.text = feedItem.title;
-
         
         NSMutableArray* videos = [NSMutableArray array];
         VideoInstance* vi;
@@ -734,13 +720,8 @@ typedef void(^FeedDataErrorBlock)(void);
         
         channelOwner = channel.channelOwner;
         
-        if (!feedItem.title)
-        {
-            [cell setTitleMessageWithDictionary:@{@"display_name" : channel.channelOwner ? channel.channelOwner.displayName : @"",
-                                                  @"item_count" : @(feedItemsAggregated)}];
-        }
-        else
-            cell.messageLabel.text = feedItem.title; 
+        cell.titleLabel.text = channel.title;
+        
     }
     
     cell.delegate = self;

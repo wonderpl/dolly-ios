@@ -17,7 +17,7 @@
 }
 
 
-
+@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 
 
 @end

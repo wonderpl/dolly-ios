@@ -109,9 +109,9 @@
                 <outlet property="bottomControlsView" destination="myh-LN-hBb" id="wAL-8V-gWG"/>
                 <outlet property="collectionView" destination="Khg-wM-3Jg" id="Q4C-Q4-HIo"/>
                 <outlet property="followButton" destination="xtc-cX-EZE" id="gJb-aa-q0q"/>
-                <outlet property="mainTitleLabel" destination="19" id="20"/>
                 <outlet property="messageLabel" destination="14" id="15"/>
                 <outlet property="shareButton" destination="Wee-Ll-aeV" id="4R4-pq-lzX"/>
+                <outlet property="titleLabel" destination="19" id="R2k-7H-gMu"/>
                 <outlet property="userThumbnailButton" destination="23" id="24"/>
                 <outlet property="userThumbnailImageView" destination="13" id="16"/>
             </connections>

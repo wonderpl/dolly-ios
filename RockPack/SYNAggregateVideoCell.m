@@ -34,29 +34,34 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 {
     [super awakeFromNib];
     
-    self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    // Create Buttons //
     
-    CGPoint middlePoint = CGPointMake(self.frame.size.width * 0.5f, self.frame.size.height * 0.5);
+    
+    // == Create Buttons == //
+    
+    CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
     
     likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                          forTitle:@"follow"
-                                                                       andPosition:CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f)];
+                                                                          forTitle:@"like"
+                                                                       andPosition:CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
     
-    [self addSubview:likeControl];
+    [self.bottomControlsView addSubview:likeControl];
     
     addControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeAdd
                                                                          forTitle:nil
-                                                                      andPosition:CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+                                                                      andPosition:CGPointMake(middlePoint.x, middlePoint.y)];
     
-    [self addSubview:addControl];
+    [self.bottomControlsView addSubview:addControl];
     
     shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
                                                                          forTitle:@"share"
-                                                                      andPosition:CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+                                                                      andPosition:CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
     
-    [self addSubview:shareControl];
+    [self.bottomControlsView addSubview:shareControl];
+    
+    
+    // == Set Nib == //
     
     
     [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
@@ -74,43 +79,17 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     [likeControl addTarget: self.delegate
                     action: @selector(likeButtonPressed:)
           forControlEvents: UIControlEventTouchUpInside];
+    
+    [addControl addTarget: self.delegate
+                    action: @selector(likeButtonPressed:)
+          forControlEvents: UIControlEventTouchUpInside];
+    
+    [shareControl addTarget: self.delegate
+                    action: @selector(likeButtonPressed:)
+          forControlEvents: UIControlEventTouchUpInside];
 }
 
 
-
-
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
-{
-    NSString *channelOwnerName = messageDictionary[@"display_name"] ? messageDictionary[@"display_name"] : @"User";
-    
-    NSNumber *itemCountNumber = messageDictionary[@"item_count"] ? messageDictionary[@"item_count"] : @1;
-    NSString *actionString = [NSString stringWithFormat: @"%i video%@", itemCountNumber.integerValue, itemCountNumber.integerValue > 1 ? @"s": @""];
-    
-    NSString *channelNameString = messageDictionary[@"channel_name"] ? messageDictionary[@"channel_name"] : @"his channel";
-    
-    // create the attributed string //
-    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
-    
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelOwnerName
-                                                                                      attributes: self.boldTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" added "
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" to "
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelNameString
-                                                                                      attributes: self.boldTextAttributes]];
-    
-    self.messageLabel.attributedText = attributedCompleteString;
-    self.messageLabel.center = CGPointMake(self.messageLabel.center.x, self.userThumbnailImageView.center.y + 2.0f);
-    self.messageLabel.frame = CGRectIntegral(self.messageLabel.frame);
-}
 
 
 -(void)layoutSubviews

@@ -57,12 +57,12 @@
                         </state>
                     </button>
                     <view contentMode="scaleToFill" id="XuX-7e-o3L" userLabel="Bottom Controls View">
-                        <rect key="frame" x="31" y="228" width="248" height="44"/>
+                        <rect key="frame" x="31" y="234" width="248" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <label autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" text="BASEMENT JAXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="26" userLabel="Video Title">
-                        <rect key="frame" x="31" y="212" width="248" height="24"/>
+                        <rect key="frame" x="31" y="210" width="248" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -80,7 +80,6 @@
                 <outlet property="backgroundView" destination="3Gf-DD-R5M" id="nZN-gE-3LS"/>
                 <outlet property="bottomControlsView" destination="XuX-7e-o3L" id="yUj-ze-mGk"/>
                 <outlet property="collectionView" destination="lMc-y5-kdQ" id="QfR-qq-uHx"/>
-                <outlet property="mainTitleLabel" destination="26" id="27"/>
                 <outlet property="messageLabel" destination="9" id="11"/>
                 <outlet property="userThumbnailButton" destination="28" id="29"/>
                 <outlet property="userThumbnailImageView" destination="8" id="12"/>
