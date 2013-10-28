@@ -48,7 +48,7 @@
     
     if(title && (type != SocialControlTypeAdd)) // the add button has not text
     {
-        sControl.title = @"follow";
+        sControl.title = title;
     }
     
     sControl.center = position;

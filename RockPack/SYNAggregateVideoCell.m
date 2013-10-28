@@ -33,29 +33,31 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super awakeFromNib];
     
-    self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    // Create Buttons //
     
-    CGPoint middlePoint = CGPointMake(self.frame.size.width * 0.5f, self.frame.size.height * 0.5);
     
-    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                        forTitle: @"follow"
-                                                                     andPosition: CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f)];
+    // == Create Buttons == //
     
-    [self addSubview: likeControl];
+    CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
     
-    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeAdd
-                                                                       forTitle: nil
-                                                                    andPosition: CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
+                                                                        forTitle:@"like"
+                                                                     andPosition:CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
     
-    [self addSubview: addControl];
+    [self.bottomControlsView addSubview:likeControl];
     
-    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                         forTitle: @"share"
-                                                                      andPosition: CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeAdd
+                                                                       forTitle:nil
+                                                                    andPosition:CGPointMake(middlePoint.x, middlePoint.y)];
     
-    [self addSubview: shareControl];
+    [self.bottomControlsView addSubview:addControl];
+    
+    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
+                                                                         forTitle:@"share"
+                                                                      andPosition:CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
+    
+    [self.bottomControlsView addSubview:shareControl];
     
     
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
@@ -74,7 +76,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [super prepareForReuse];
     
     self.collectionData = @[];
-    
+
     [self.collectionView reloadData];
 }
 
@@ -84,8 +86,16 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [super setDelegate: delegate];
 
     [likeControl addTarget: self.delegate
-                    action: @selector(likeButtonPressed:)
+                    action: @selector(likeControlPressed:)
           forControlEvents: UIControlEventTouchUpInside];
+    
+    [addControl addTarget: self.delegate
+                   action: @selector(addControlPressed:)
+         forControlEvents: UIControlEventTouchUpInside];
+    
+    [shareControl addTarget: self.delegate
+                     action: @selector(shareControlPressed:)
+           forControlEvents: UIControlEventTouchUpInside];
 }
 
 
@@ -105,6 +115,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelOwnerName
                                                                                       attributes: self.boldTextAttributes]];
     
+    
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" added "
                                                                                       attributes: self.lightTextAttributes]];
     
@@ -120,6 +131,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.messageLabel.attributedText = attributedCompleteString;
     self.messageLabel.center = CGPointMake(self.messageLabel.center.x, self.userThumbnailImageView.center.y + 2.0f);
     self.messageLabel.frame = CGRectIntegral(self.messageLabel.frame);
+
 }
 
 
@@ -210,6 +222,25 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
                                 options: SDWebImageRetryFailed];
     
     return itemCell;
+}
+
+- (ChannelOwner*) channelOwner
+{
+    VideoInstance* heuristic = self.videoInstanceShowing;
+    if(!heuristic)
+        return nil;
+    
+    return heuristic.channel.channelOwner;
+}
+
+- (VideoInstance*) videoInstanceShowing
+{
+    if(self.collectionData.count == 0)
+        return nil;
+    
+    // TODO: Figure out the correct video instance according to scroll offset
+    
+    return (VideoInstance*)self.collectionData[0];
 }
 
 

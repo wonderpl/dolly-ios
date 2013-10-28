@@ -8,6 +8,8 @@
 
 #import "SYNAggregateCell.h"
 #import "SYNSocialAddControl.h"
+#import "VideoInstance.h"
+#import "Video.h"
 
 @interface SYNAggregateVideoCell : SYNAggregateCell
 {
@@ -17,7 +19,8 @@
 }
 
 
-
+@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+@property (nonatomic, readonly) VideoInstance* videoInstanceShowing;
 
 
 @end

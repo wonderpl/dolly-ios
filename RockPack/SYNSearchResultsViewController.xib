@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchResultsViewController">
             <connections>
+                <outlet property="containerTabs" destination="NhX-A4-SLJ" id="Bw3-LY-KfJ"/>
                 <outlet property="containerView" destination="Dg2-lP-CVQ" id="4ta-Cu-sSo"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="QkW-ty-jhC"/>
                 <outlet property="usersTabButton" destination="yoQ-RH-8rc" id="pKU-kC-LKQ"/>
@@ -23,30 +24,37 @@
                     <rect key="frame" x="67" y="0.0" width="363" height="684"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yoQ-RH-8rc" userLabel="Tab - Videos">
-                            <rect key="frame" x="56" y="20" width="124" height="25"/>
+                        <view contentMode="scaleToFill" id="NhX-A4-SLJ" userLabel="Container Tabs">
+                            <rect key="frame" x="58" y="20" width="247" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <state key="normal" title="Videos">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="Te8-JC-B2V"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XFa-4q-Brg" userLabel="Tab - People">
-                            <rect key="frame" x="188" y="20" width="124" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <state key="normal" title="People">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="WXu-cn-8EN"/>
-                            </connections>
-                        </button>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yoQ-RH-8rc" userLabel="Tab - Videos">
+                                    <rect key="frame" x="0.0" y="0.0" width="124" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <state key="normal" title="Videos">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="Te8-JC-B2V"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XFa-4q-Brg" userLabel="Tab - People">
+                                    <rect key="frame" x="123" y="0.0" width="124" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <state key="normal" title="People">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="WXu-cn-8EN"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="SgG-lq-X96" userLabel="Videos Collection View">
                             <rect key="frame" x="0.0" y="63" width="363" height="559"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +72,7 @@
                             </connections>
                         </collectionView>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="4v1-Ly-eu6" userLabel="Users Collection View">
-                            <rect key="frame" x="0.0" y="64" width="363" height="556"/>
+                            <rect key="frame" x="0.0" y="63" width="363" height="556"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hqH-9q-DcO">

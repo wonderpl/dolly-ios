@@ -36,17 +36,14 @@
     self.collectionData = @[]; // set to 0
 }
 
-
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString
+-(void)setCollectionData:(NSArray *)collectionData
 {
-    // to be implemented in subclass
+    _collectionData = collectionData;
+    [self.collectionView reloadData];
 }
 
 
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
-{
-    // to be implemented in subclass
-}
+
 
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
@@ -75,6 +72,9 @@
     return 1;
 }
 
-
+-(ChannelOwner*)channelOwner
+{
+    return nil; // implement in subclass
+}
 
 @end

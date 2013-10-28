@@ -7,14 +7,22 @@
 //
 
 #import "SYNAbstractViewController.h"
+#import "SYNSocialActionsDelegate.h"
 
-@interface SYNSearchResultsViewController : SYNAbstractViewController
+typedef enum {
+    SearchResultsShowingVideos = 0,
+    SearchResultsShowingUsers
+} SearchResultsShowing;
+
+@interface SYNSearchResultsViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton* videosTabButton;
 @property (nonatomic, strong) IBOutlet UIButton* usersTabButton;
 
 @property (nonatomic, strong) IBOutlet UICollectionView* videosCollectionView;
 @property (nonatomic, strong) IBOutlet UICollectionView* usersCollectionView;
+
+@property (nonatomic) SearchResultsShowing searchResultsShowing;
 
 - (void) searchForString: (NSString *) newSearchTerm ;
 

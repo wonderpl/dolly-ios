@@ -636,13 +636,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
-{
-    NSIndexPath *indexPath = [self.feedCollectionView indexPathForItemAtPoint: cell.center];
-    return indexPath;
-}
-
-
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
@@ -650,7 +643,6 @@ typedef void(^FeedDataErrorBlock)(void);
     FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
     ChannelOwner* channelOwner;
     
-    NSInteger feedItemsAggregated = feedItem.itemTypeValue == FeedItemTypeAggregate ? feedItem.feedItems.count : 1;
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
@@ -661,21 +653,8 @@ typedef void(^FeedDataErrorBlock)(void);
         
         videoInstance = (VideoInstance*)(self.feedVideosById)[feedItem.coverIndexArray[0]]; // there should be only one
 
-        cell.mainTitleLabel.text = videoInstance.title;
+        cell.titleLabel.text = videoInstance.title;
         
-        
-
-        if (!feedItem.title) // it should usually be nil
-        {
-            // Creating "Dolly Proxima-SMith created 1 new collection
-            [cell setTitleMessageWithDictionary: @{@"display_name" : videoInstance.channel.channelOwner ? videoInstance.channel.channelOwner.displayName : @"",
-                                                   @"item_count" : @(feedItemsAggregated),
-                                                   @"channel_name" : videoInstance.channel ? videoInstance.channel.title : @""}];
-            
-        }
-        else // force show a specific message
-            cell.messageLabel.text = feedItem.title;
-
         
         NSMutableArray* videos = [NSMutableArray array];
         VideoInstance* vi;
@@ -734,14 +713,11 @@ typedef void(^FeedDataErrorBlock)(void);
         
         channelOwner = channel.channelOwner;
         
-        if (!feedItem.title)
-        {
-            [cell setTitleMessageWithDictionary:@{@"display_name" : channel.channelOwner ? channel.channelOwner.displayName : @"",
-                                                  @"item_count" : @(feedItemsAggregated)}];
-        }
-        else
-            cell.messageLabel.text = feedItem.title; 
+        cell.titleLabel.text = channel.title;
+        
     }
+    
+    // common for both types
     
     cell.delegate = self;
     
@@ -749,7 +725,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                 placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                          options: SDWebImageRetryFailed];
     
-    // add common properties
+    
     
     return cell;
 }
@@ -866,13 +842,13 @@ typedef void(^FeedDataErrorBlock)(void);
     
 }
 
-
-#pragma mark - Get Cell Data 
-
 - (void) videoOverlayDidDissapear
 {
     [self.feedCollectionView reloadData];
 }
+
+
+#pragma mark - Helper Methods to get AggreagateCell's Data
 
 
 - (FeedItem*) feedItemAtIndexPath: (NSIndexPath*) indexPath
@@ -882,107 +858,218 @@ typedef void(^FeedDataErrorBlock)(void);
     return feedItem;
 }
 
-
-- (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
-                        andComponentIndex: (NSInteger) componentIndex
-{
-    if (!indexPath)
-    {
-        DebugLog(@"Nil index path");
-    }
-    
-    
-    Channel *channel;
-    
-    FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
-    
-    if (componentIndex == kInvalidComponentIndex)
-    {
-        DebugLog(@"*** channelAtCoverOfFeedItem");
-        channel = [self channelAtCoverOfFeedItem: feedItem];
-    }
-    else
-    {
-        DebugLog(@"*** feedChannelsById");
-        // Aggregate cell with multiple indices
-        channel = (self.feedChannelsById)[feedItem.coverIndexArray[componentIndex]];
-    }
-    
-    return channel;
-}
-
-
 - (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
 {
     // Same mechanism as for video cell
     return  [self indexPathForVideoCell: cell];
 }
 
+- (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
+{
+    NSIndexPath *indexPath = [self.feedCollectionView indexPathForItemAtPoint: cell.center];
+    return indexPath;
+}
+
 #pragma mark - Click Cell Delegates
 
-- (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
+
+
+
+- (SYNAggregateCell *) aggregateCellFromSubview: (UIView *) view
 {
-    if (!indexPath)
+    UIView *candidateCell = view;
+    
+    while (![candidateCell isKindOfClass: [SYNAggregateCell class]])
     {
-        DebugLog(@"Nil index path");
+        candidateCell = candidateCell.superview;
     }
     
-    VideoInstance *videoInstance;
-    
-    FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
-    
-    videoInstance = [self videoInstanceAtCoverOfFeedItem: feedItem];
-    
-    return videoInstance;
+    return (SYNAggregateCell *) candidateCell;
 }
 
 
-
-- (VideoInstance *) videoInstanceAtCoverOfFeedItem: (FeedItem *) feedItem
+- (NSIndexPath *) indexPathFromView: (UIView *) view
 {
-    if (!feedItem || (feedItem.resourceTypeValue != FeedItemResourceTypeVideo))
-    {
-        return nil;
-    }
+    SYNAggregateCell *aggregateCellSelected = [self aggregateCellFromSubview: view];
+    NSIndexPath *indexPath = [self.feedCollectionView indexPathForItemAtPoint: aggregateCellSelected.center];
     
-    VideoInstance *videoInstance;
-    
-    if (feedItem.itemTypeValue == FeedItemTypeLeaf)
-    {
-        videoInstance = (self.feedVideosById)[feedItem.resourceId];
-    }
-    else
-    {
-        videoInstance = (self.feedVideosById)[feedItem.coverIndexArray[0]];
-    }
-    
-    return videoInstance;
+    return indexPath;
 }
 
 
-- (Channel *) channelAtCoverOfFeedItem: (FeedItem *) feedItem
+- (FeedItem *) feedItemFromView: (UIView *) view
 {
-    DebugLog(@"Feed Item: %@", feedItem);
+    NSIndexPath *indexPath = [self indexPathFromView: view];
+    FeedItem *selectedFeedItem = [self feedItemAtIndexPath: indexPath];
     
-    if (!feedItem || (feedItem.resourceTypeValue != FeedItemResourceTypeChannel))
-    {
-        return nil;
-    }
-    
-    Channel *channel;
-    
-    if (feedItem.itemTypeValue == FeedItemTypeLeaf)
-    {
-        channel = (self.feedChannelsById)[feedItem.resourceId];
-    }
-    else
-    {
-        channel = (self.feedChannelsById)[feedItem.coverIndexArray[0]];
-    }
-    
-    return channel;
+    return selectedFeedItem;
 }
 
+#pragma mark - Cell Actions Delegate
+
+- (void) addControlPressed: (UIControl*) control
+{
+    
+    SYNAggregateCell* cell = [self aggregateCellFromSubview: control];
+    if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // sanity check
+        return;
+    
+    VideoInstance *videoInstance = ((SYNAggregateVideoCell*)cell).videoInstanceShowing;
+    if (!videoInstance)
+        return;
+        
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoPlusButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
+    
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
+                                                     action: @"select"
+                                            videoInstanceId: videoInstance.uniqueId
+                                          completionHandler: nil errorHandler: nil];
+        
+        
+    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
+                                                        object: self
+                                                      userInfo: @{@"VideoInstance": videoInstance}];
+        
+        
+    
+}
+
+// only relates to videos
+- (void) likeControlPressed: (UIControl*) control
+{
+    if (self.togglingInProgress)
+    {
+        return;
+    }
+    
+    
+    SYNAggregateCell* cell = [self aggregateCellFromSubview:control];
+    if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // only videos can have a like action (currently, remove if changed)
+        return;
+    
+    VideoInstance *videoInstance = ((SYNAggregateVideoCell*)cell).videoInstanceShowing;
+    if (!videoInstance)
+        return;
+    
+    // Track
+    
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoStarButtonClick"
+                                                            label: @"feed"
+                                                            value: nil] build]];
+    
+    
+    BOOL didStar = (control.selected == NO);
+    
+    control.enabled = NO;
+    
+    self.togglingInProgress = YES;
+    
+    // Send
+    
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
+                                                     action: (didStar ? @"star" : @"unstar")
+                                            videoInstanceId: videoInstance.uniqueId
+                                          completionHandler: ^(id response) {
+                                              self.togglingInProgress = NO;
+                                              BOOL previousStarringState = videoInstance.starredByUserValue;
+                                              NSInteger previousStarCount = videoInstance.video.starCountValue;
+                                              if (didStar)
+                                              {
+                                                  // Currently highlighted, so increment
+                                                  videoInstance.starredByUserValue = YES;
+                                                  videoInstance.video.starCountValue += 1;
+                                                  
+                                                  control.selected = YES;
+                                                  
+                                                  [videoInstance addStarrersObject: appDelegate.currentUser];
+                                              }
+                                              else
+                                              {
+                                                  // Currently highlighted, so decrement
+                                                  videoInstance.starredByUserValue = NO;
+                                                  videoInstance.video.starCountValue -= 1;
+                                                  
+                                                  control.selected = NO;
+                                              }
+                                              
+                                              NSError* error;
+                                              if(![videoInstance.managedObjectContext save:&error])
+                                              {
+                                                  videoInstance.starredByUserValue = previousStarringState;
+                                                  videoInstance.video.starCountValue = previousStarCount;
+                                              }
+                                              
+                                              
+                                              
+                                              [self.feedCollectionView reloadData];
+                                              
+                                              control.enabled = YES;
+                                          }
+                                               errorHandler: ^(id error) {
+                                                   self.togglingInProgress = NO;
+                                                   
+                                                   DebugLog(@"Could not star video");
+                                                   
+                                                   control.enabled = YES;
+                                               }];
+}
+
+
+-(void)shareControlPressed:(UIControl*) control
+{
+    
+}
+
+
+#pragma mark - Aggregate Cell Delegate
+
+- (void) profileIconPressed: (UIButton *) sender
+{
+    SYNAggregateCell* cell = [self aggregateCellFromSubview: sender];
+    if(!cell.channelOwner) // checking for both channel and channel owner
+        return;
+    
+    [appDelegate.viewStackManager viewProfileDetails: cell.channelOwner];
+}
+
+#pragma mark - Load More Footer
+
+- (void) loadMoreVideos
+{
+    if (self.moreItemsToLoad == TRUE)
+    {
+        [self incrementRangeForNextRequest];
+        [self loadAndUpdateFeedData];
+    }
+}
+
+- (void) scrollViewDidScroll: (UIScrollView *) scrollView
+{
+    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
+        && self.isLoadingMoreContent == NO)
+    {
+        [self loadMoreVideos];
+    }
+}
+
+
+- (void) applicationWillEnterForeground: (UIApplication *) application
+{
+    // set the data request range back to 0, 48 and refresh
+    [super applicationWillEnterForeground: application];
+    
+    [self loadAndUpdateFeedData];
+}
+
+#pragma mark - Sort Method
 
 - (void) sortVideosForPlaylist
 {
@@ -1018,280 +1105,6 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     
     self.videosInOrderArray = [NSArray arrayWithArray: ma];
-}
-
-
-- (void) touchedAggregateCell
-{
-    // FIXME: Need to plumb correct cell and index in her
-    //    FeedItem *selectedFeedItem = [self feedItemAtIndexPath: self.arcMenuIndexPath];
-    FeedItem *selectedFeedItem = [self feedItemAtIndexPath: [NSIndexPath indexPathForItem: 0 inSection: 0]];
-
-    
-    if (selectedFeedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        if (self.videosInOrderArray.count == 0)
-        {
-            return;
-        }
-        
-        VideoInstance *videoInstance = [self videoInstanceAtCoverOfFeedItem: selectedFeedItem];
-        
-        SYNMasterViewController *masterViewController = (SYNMasterViewController *) appDelegate.masterViewController;
-        
-        __block NSInteger indexOfSelectedVideoInArray = 0;
-        [self.videosInOrderArray enumerateObjectsUsingBlock: ^(VideoInstance *vi, NSUInteger idx, BOOL *stop) {
-             indexOfSelectedVideoInArray++;
-             
-             if ([vi.uniqueId isEqualToString: videoInstance.uniqueId])
-             {
-                 *stop = YES;
-             }
-         }];
-        
-        indexOfSelectedVideoInArray--; // zero index
-        
-        [masterViewController addVideoOverlayToViewController: self
-                                       withVideoInstanceArray: self.videosInOrderArray
-                                             andSelectedIndex: indexOfSelectedVideoInArray
-                                                   fromCenter: self.view.center];
-    }
-    else
-    {
-        Channel *channel;
-        
-        if (selectedFeedItem.itemTypeValue == FeedItemTypeLeaf)
-        {
-            channel = (self.feedChannelsById)[selectedFeedItem.resourceId];
-        }
-        else
-        {    // FIXME: Need to plumb correct cell and index in her
-//            channel = (self.feedChannelsById)[selectedFeedItem.coverIndexArray[self.arcMenuComponentIndex]];
-            channel = (self.feedChannelsById)[selectedFeedItem.coverIndexArray[0]];
-        }
-        
-        if (channel)
-        {
-            [appDelegate.viewStackManager viewChannelDetails: channel];
-        }
-    }
-}
-
-
-- (SYNAggregateCell *) aggregateCellFromView: (UIView *) view
-{
-    UIView *candidateCell = view;
-    
-    while (![candidateCell isKindOfClass: [SYNAggregateCell class]])
-    {
-        candidateCell = candidateCell.superview;
-    }
-    
-    return (SYNAggregateCell *) candidateCell;
-}
-
-
-- (NSIndexPath *) indexPathFromView: (UIView *) view
-{
-    SYNAggregateCell *aggregateCellSelected = [self aggregateCellFromView: view];
-    NSIndexPath *indexPath = [self.feedCollectionView indexPathForItemAtPoint: aggregateCellSelected.center];
-    
-    return indexPath;
-}
-
-
-- (FeedItem *) feedItemFromView: (UIView *) view
-{
-    NSIndexPath *indexPath = [self indexPathFromView: view];
-    FeedItem *selectedFeedItem = [self feedItemAtIndexPath: indexPath];
-    
-    return selectedFeedItem;
-}
-
-#pragma mark - Cell Actions Delegate
-
-- (void) videoAddButtonTapped: (UIButton *) addButton
-{
-    FeedItem *selectedFeedItem = [self feedItemFromView: addButton];
-    
-    if (selectedFeedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        VideoInstance *videoInstance;
-        
-        if (selectedFeedItem.itemTypeValue == FeedItemTypeLeaf)
-        {
-            videoInstance = (self.feedVideosById)[selectedFeedItem.resourceId];
-        }
-        else
-        {
-            videoInstance = (self.feedVideosById)[selectedFeedItem.coverIndexArray[0]];
-        }
-        
-        if (!videoInstance)
-        {
-            return;
-        }
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"videoPlusButtonClick"
-                                                                label: nil
-                                                                value: nil] build]];
-        
-        [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                         action: @"select"
-                                                videoInstanceId: videoInstance.uniqueId
-                                              completionHandler: ^(id response) {
-                                              } errorHandler: ^(id error) {
-                                                  DebugLog(@"Could not record videoAddButtonTapped: activity");
-                                              }];
-        
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
-                                                            object: self
-                                                          userInfo: @{@"VideoInstance": videoInstance}];
-        
-        
-    }
-}
-
-
-- (void) profileButtonTapped: (UIButton *) sender
-{
-    FeedItem *feedItem = [self feedItemFromView: sender];
-    ChannelOwner *channelOwner;
-    
-    if ([self videoInstanceAtCoverOfFeedItem: feedItem])
-    {
-        channelOwner = [self videoInstanceAtCoverOfFeedItem: feedItem].channel.channelOwner;
-    }
-    else if ([self channelAtCoverOfFeedItem: feedItem])
-    {
-        channelOwner = [self channelAtCoverOfFeedItem: feedItem].channelOwner;
-    }
-    
-    if (!channelOwner)
-    {
-        return;
-    }
-    
-    [appDelegate.viewStackManager viewProfileDetails: channelOwner];
-}
-
-
-
-
-- (void) likeButtonPressed: (UIButton *) button
-{
-    if (self.togglingInProgress)
-    {
-        return;
-    }
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoStarButtonClick"
-                                                            label: @"feed"
-                                                            value: nil] build]];
-    
-    BOOL didStar = (button.selected == NO);
-    
-    button.enabled = NO;
-    
-    VideoInstance *videoInstance = [self videoInstanceAtCoverOfFeedItem: [self feedItemFromView: button]];
-    
-    if (!videoInstance)
-    {
-        return;
-    }
-    
-    self.togglingInProgress = YES;
-    
-    // int starredIndex = self.currentSelectedIndex;
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                     action: (didStar ? @"star" : @"unstar")
-                                            videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: ^(id response) {
-                                              self.togglingInProgress = NO;
-                                              BOOL previousStarringState = videoInstance.starredByUserValue;
-                                              NSInteger previousStarCount = videoInstance.video.starCountValue;
-                                              if (didStar)
-                                              {
-                                                  // Currently highlighted, so increment
-                                                  videoInstance.starredByUserValue = YES;
-                                                  videoInstance.video.starCountValue += 1;
-                                                  
-                                                  button.selected = YES;
-                                                  
-                                                  [videoInstance addStarrersObject: appDelegate.currentUser];
-                                              }
-                                              else
-                                              {
-                                                  // Currently highlighted, so decrement
-                                                  videoInstance.starredByUserValue = NO;
-                                                  videoInstance.video.starCountValue -= 1;
-                                                  
-                                                  button.selected = NO;
-                                              }
-                                              
-                                              NSError* error;
-                                              if(![videoInstance.managedObjectContext save:&error])
-                                              {
-                                                  videoInstance.starredByUserValue = previousStarringState;
-                                                  videoInstance.video.starCountValue = previousStarCount;
-                                              }
-                                              
-                                              
-                                              
-                                              [self.feedCollectionView reloadData];
-                                              
-                                              button.enabled = YES;
-                                          }
-                                               errorHandler: ^(id error) {
-                                                   self.togglingInProgress = NO;
-                                                   
-                                                   DebugLog(@"Could not star video");
-                                                   
-                                                   button.enabled = YES;
-                                               }];
-}
-
-#pragma mark - Load More Footer
-
-- (void) loadMoreVideos
-{
-    if (self.moreItemsToLoad == TRUE)
-    {
-        [self incrementRangeForNextRequest];
-        [self loadAndUpdateFeedData];
-    }
-}
-
-
-- (void) headerTapped
-{
-    [self.feedCollectionView setContentOffset:CGPointZero animated:YES];
-}
-
-
-- (void) scrollViewDidScroll: (UIScrollView *) scrollView
-{
-    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
-        && self.isLoadingMoreContent == NO)
-    {
-        [self loadMoreVideos];
-    }
-}
-
-
-- (void) applicationWillEnterForeground: (UIApplication *) application
-{
-    // set the data request range back to 0, 48 and refresh
-    [super applicationWillEnterForeground: application];
-    
-    [self loadAndUpdateFeedData];
 }
 
 
