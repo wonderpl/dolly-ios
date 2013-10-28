@@ -33,7 +33,7 @@
 
 typedef void(^FeedDataErrorBlock)(void);
 
-@interface SYNFeedRootViewController () <SYNAggregateCellDelegate>
+@interface SYNFeedRootViewController () 
 
 @property (nonatomic, assign) BOOL refreshing;
 @property (nonatomic, assign) BOOL shouldReloadCollectionView;
@@ -743,7 +743,7 @@ typedef void(^FeedDataErrorBlock)(void);
             cell.messageLabel.text = feedItem.title; 
     }
     
-    cell.viewControllerDelegate = self;
+    cell.delegate = self;
     
     [cell.userThumbnailImageView setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
                                 placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]

@@ -47,9 +47,9 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 }
 
 
-- (void) setViewControllerDelegate: (id<SYNAggregateCellDelegate>) viewControllerDelegate
+- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
-    [super setViewControllerDelegate: viewControllerDelegate];
+    [super setDelegate: delegate];
     
 }
 
@@ -78,12 +78,6 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 
 
 
-
-- (void) showChannel: (UITapGestureRecognizer *) recognizer
-{
-    [self.viewControllerDelegate touchedAggregateCell];
-}
-
 #pragma mark - UICollectionView DataSource
 
 
@@ -104,6 +98,8 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     Channel* channel = (Channel*)self.collectionData[indexPath.item];
     
     itemCell.titleLabel.text = channel.title;
+    
+    itemCell.delegate = self;
     
     return itemCell;
     
