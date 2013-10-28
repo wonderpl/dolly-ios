@@ -39,6 +39,7 @@
                             <rect key="frame" x="47" y="728" width="544" height="691"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="contentInset" minX="2" minY="2" maxX="2" maxY="2"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
                                 <size key="itemSize" width="190" height="190"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -55,6 +56,7 @@
                             <rect key="frame" x="47" y="728" width="544" height="651"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="contentInset" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="AUe-Ip-zbd">
                                 <size key="itemSize" width="190" height="190"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>

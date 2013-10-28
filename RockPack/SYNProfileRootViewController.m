@@ -26,7 +26,7 @@
 #import "Video.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kInterRowMargin 8.0f
+#define kInterRowMargin 15.0f
 
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
@@ -157,11 +157,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPad;
     }
     [self setUpUserProfile];
-    
-
-    
     [self setUpSegmentedControl];
-    
     
     if (self.isIPhone)
     {
@@ -180,9 +176,6 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     self.channelThumbnailCollectionView.hidden = YES;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-   // [self resizeScrollViews];
-}
 
 - (void) viewDidAppear: (BOOL) animated
 {
@@ -233,10 +226,8 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     self.deletionModeActive = NO;
     
-    self.channelThumbnailCollectionView.delegate=self;
-    self.subscriptionThumbnailCollectionView.delegate=self;
-    
-    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+  //  [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+ 
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
@@ -527,7 +518,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         else
         {
             
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
+           self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
             
             self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
             
@@ -537,12 +528,16 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
         }
+        
+        self.channelThumbnailCollectionView.collectionViewLayout = channelsLayout;
+        self.subscriptionThumbnailCollectionView.collectionViewLayout = subscriptionsLayout;
+        
     }
     
     [subscriptionsLayout invalidateLayout];
     [channelsLayout invalidateLayout];
     
-    [self resizeScrollViews];
+   // [self resizeScrollViews];
 }
 
 

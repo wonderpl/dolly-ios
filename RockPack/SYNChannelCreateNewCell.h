@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SYNChannelCreateNewCell : UICollectionViewCell
+@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
+@property (strong, nonatomic) IBOutlet UIView *boarderView;
 
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *createLabel;
 
 @end

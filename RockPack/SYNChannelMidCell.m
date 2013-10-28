@@ -21,6 +21,11 @@
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *followerCountLabel;
+@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
+@property (strong, nonatomic) IBOutlet UIView *boarderView;
 
 @end
 
@@ -58,10 +63,14 @@
     // Required to make cells look good when wobbling (delete)
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = UIScreen.mainScreen.scale;
+    
+    [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:18]];
+    [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
+    [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
+    [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
+    [self.boarderView.layer setBorderWidth:1.0f];
+    
 }
-
-
-
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
 {
