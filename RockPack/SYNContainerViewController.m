@@ -183,6 +183,8 @@
     };
     
     void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
+        
+        
         [[self view] addSubview: toViewController.view];
 
         [fromViewController.view removeFromSuperview];
@@ -218,7 +220,7 @@
     }
     else // first time
     {
-        AnimationBlock();
+        
         CompleteTransitionBlock(YES);
     }
 }

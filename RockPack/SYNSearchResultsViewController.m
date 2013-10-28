@@ -113,13 +113,17 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     self.searchresultsShowing = SearchResultsShowingVideos;
     
+    
+    
 }
 
-- (void) viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    //[self repositionContainer];
+    [super viewWillAppear:animated];
+    
+    [self repositionContainer];
 }
+
 
 -(void)repositionContainer
 {
