@@ -66,6 +66,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
     self.collectionView.collectionViewLayout = aggregateFlowLayout;
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     
     [self.collectionView reloadData];
 }
