@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNLikeControlButton.h"
+#import "SYNSocialLikeControl.h"
 
-@implementation SYNLikeControlButton
+@implementation SYNSocialLikeControl
 
 -(id)initWithFrame:(CGRect)frame
 {

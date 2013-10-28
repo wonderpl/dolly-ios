@@ -16,6 +16,7 @@
 #import "VideoInstance.h"
 #import "Video.h"
 #import "UIImage+Tint.h"
+#import "SYNSocialControlFactory.h"
 
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
@@ -34,7 +35,28 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     [super awakeFromNib];
     
     self.mainTitleLabel.font = [UIFont regularCustomFontOfSize: self.mainTitleLabel.font.pointSize];
-    self.likesNumberLabel.font = [UIFont regularCustomFontOfSize: self.likesNumberLabel.font.pointSize];
+    
+    // Create Buttons //
+    
+    CGPoint middlePoint = CGPointMake(self.frame.size.width * 0.5f, self.frame.size.height * 0.5);
+    
+    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
+                                                                          forTitle:@"follow"
+                                                                       andPosition:CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f)];
+    
+    [self addSubview:likeControl];
+    
+    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeAdd
+                                                                         forTitle:nil
+                                                                      andPosition:CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+    
+    [self addSubview:addControl];
+    
+    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
+                                                                         forTitle:@"share"
+                                                                      andPosition:CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+    
+    [self addSubview:shareControl];
     
     
     [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
@@ -49,9 +71,9 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 {
     [super setDelegate: delegate];
 
-    [self.likeButton addTarget: self.delegate
-                         action: @selector(likeButtonPressed:)
-               forControlEvents: UIControlEventTouchUpInside];
+    [likeControl addTarget: self.delegate
+                    action: @selector(likeButtonPressed:)
+          forControlEvents: UIControlEventTouchUpInside];
 }
 
 
@@ -119,9 +141,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
     
-    
-    
-    
     // == Collection View == //
     
     CGRect collectionFrame = self.collectionView.frame;
@@ -134,7 +153,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     // now set the bounds
     
-    //self.collectionView.contentSize = CGSizeMake(collectionFrame.size.width, collectionFrame.size.width * (float)self.collectionData.count);
     
     UIEdgeInsets scrollViewInsets = self.collectionView.contentInset;
     scrollViewInsets.left = self.scrollViewMargin;

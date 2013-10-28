@@ -9,9 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+typedef enum {
+    SocialControlTypeDefault = 0,
+    SocialControlTypeLike = 1,
+    SocialControlTypeAdd
+} SocialControlType;
+
 // Superclass for the (currently) 3 buttons at the bottom of UICollectionView cells for aggregates and videos
 
-@interface SYNCollectionCellButtonControl : UIControl
+@interface SYNSocialControl : UIControl
 {
     @protected UIButton* button;
     

@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNCollectionCellButtonControl.h"
+#import "SYNSocialControl.h"
 #import "UIFont+SYNFont.h"
 
-@implementation SYNCollectionCellButtonControl
+@implementation SYNSocialControl
 
 +(id)buttonControl
 {

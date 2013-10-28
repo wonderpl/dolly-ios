@@ -1387,9 +1387,10 @@
 		BEB31366181AB81600FAF98A /* IconVideoAddDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */; };
 		BEB31367181AB81600FAF98A /* IconVideoAddHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */; };
 		BEB31368181AB81600FAF98A /* IconVideoAddHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */; };
-		BEB3136D181ABD8C00FAF98A /* SYNCollectionCellButtonControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3136C181ABD8C00FAF98A /* SYNCollectionCellButtonControl.m */; };
-		BEB31370181ABF5900FAF98A /* SYNLikeControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3136F181ABF5900FAF98A /* SYNLikeControlButton.m */; };
-		BEB31374181AC6DB00FAF98A /* SYNAddControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB31373181AC6DB00FAF98A /* SYNAddControlButton.m */; };
+		BEB3136D181ABD8C00FAF98A /* SYNSocialControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3136C181ABD8C00FAF98A /* SYNSocialControl.m */; };
+		BEB31370181ABF5900FAF98A /* SYNSocialLikeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3136F181ABF5900FAF98A /* SYNSocialLikeControl.m */; };
+		BEB31374181AC6DB00FAF98A /* SYNSocialAddControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB31373181AC6DB00FAF98A /* SYNSocialAddControl.m */; };
+		BEB3137C181E9C2900FAF98A /* SYNSocialControlFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3137B181E9C2900FAF98A /* SYNSocialControlFactory.m */; };
 		BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */; };
 		BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */; };
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
@@ -3046,13 +3047,15 @@
 		BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoAddDefault@2x.png"; path = "Assets/Images/IconVideoAddDefault@2x.png"; sourceTree = "<group>"; };
 		BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoAddHighlighted.png; path = Assets/Images/IconVideoAddHighlighted.png; sourceTree = "<group>"; };
 		BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoAddHighlighted@2x.png"; path = "Assets/Images/IconVideoAddHighlighted@2x.png"; sourceTree = "<group>"; };
-		BEB3136B181ABD8C00FAF98A /* SYNCollectionCellButtonControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCollectionCellButtonControl.h; sourceTree = "<group>"; };
-		BEB3136C181ABD8C00FAF98A /* SYNCollectionCellButtonControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCollectionCellButtonControl.m; sourceTree = "<group>"; };
-		BEB3136E181ABF5900FAF98A /* SYNLikeControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLikeControlButton.h; sourceTree = "<group>"; };
-		BEB3136F181ABF5900FAF98A /* SYNLikeControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLikeControlButton.m; sourceTree = "<group>"; };
-		BEB31372181AC6DB00FAF98A /* SYNAddControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddControlButton.h; sourceTree = "<group>"; };
-		BEB31373181AC6DB00FAF98A /* SYNAddControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddControlButton.m; sourceTree = "<group>"; };
+		BEB3136B181ABD8C00FAF98A /* SYNSocialControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialControl.h; sourceTree = "<group>"; };
+		BEB3136C181ABD8C00FAF98A /* SYNSocialControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialControl.m; sourceTree = "<group>"; };
+		BEB3136E181ABF5900FAF98A /* SYNSocialLikeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialLikeControl.h; sourceTree = "<group>"; };
+		BEB3136F181ABF5900FAF98A /* SYNSocialLikeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialLikeControl.m; sourceTree = "<group>"; };
+		BEB31372181AC6DB00FAF98A /* SYNSocialAddControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialAddControl.h; sourceTree = "<group>"; };
+		BEB31373181AC6DB00FAF98A /* SYNSocialAddControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialAddControl.m; sourceTree = "<group>"; };
 		BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNSocialActionsDelegate.h; sourceTree = "<group>"; };
+		BEB3137A181E9C2900FAF98A /* SYNSocialControlFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialControlFactory.h; sourceTree = "<group>"; };
+		BEB3137B181E9C2900FAF98A /* SYNSocialControlFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialControlFactory.m; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -6125,9 +6128,10 @@
 		BEB3136A181ABD0D00FAF98A /* Cell Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				BEB3136B181ABD8C00FAF98A /* SYNCollectionCellButtonControl.h */,
-				BEB3136C181ABD8C00FAF98A /* SYNCollectionCellButtonControl.m */,
+				BEB3136B181ABD8C00FAF98A /* SYNSocialControl.h */,
+				BEB3136C181ABD8C00FAF98A /* SYNSocialControl.m */,
 				BEB31371181AC40100FAF98A /* Subclasses */,
+				BEB3137D181E9C3100FAF98A /* Factory */,
 			);
 			name = "Cell Buttons";
 			sourceTree = "<group>";
@@ -6135,12 +6139,21 @@
 		BEB31371181AC40100FAF98A /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				BEB3136E181ABF5900FAF98A /* SYNLikeControlButton.h */,
-				BEB3136F181ABF5900FAF98A /* SYNLikeControlButton.m */,
-				BEB31372181AC6DB00FAF98A /* SYNAddControlButton.h */,
-				BEB31373181AC6DB00FAF98A /* SYNAddControlButton.m */,
+				BEB3136E181ABF5900FAF98A /* SYNSocialLikeControl.h */,
+				BEB3136F181ABF5900FAF98A /* SYNSocialLikeControl.m */,
+				BEB31372181AC6DB00FAF98A /* SYNSocialAddControl.h */,
+				BEB31373181AC6DB00FAF98A /* SYNSocialAddControl.m */,
 			);
 			name = Subclasses;
+			sourceTree = "<group>";
+		};
+		BEB3137D181E9C3100FAF98A /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				BEB3137A181E9C2900FAF98A /* SYNSocialControlFactory.h */,
+				BEB3137B181E9C2900FAF98A /* SYNSocialControlFactory.m */,
+			);
+			name = Factory;
 			sourceTree = "<group>";
 		};
 		BEBD09781743A1700092F527 /* CoverArt Chooser View */ = {
@@ -7566,7 +7579,7 @@
 				019824EC1629CBDF00216900 /* UncaughtExceptionHandler.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,
-				BEB31374181AC6DB00FAF98A /* SYNAddControlButton.m in Sources */,
+				BEB31374181AC6DB00FAF98A /* SYNSocialAddControl.m in Sources */,
 				019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */,
 				01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */,
 				01363F241630B81400FFAA09 /* SYNVideoThumbnailWideCell.m in Sources */,
@@ -7632,7 +7645,7 @@
 				011A162E16EF5EC5008CF25E /* GKImageCropOverlayView.m in Sources */,
 				011A162F16EF5EC5008CF25E /* GKImageCropView.m in Sources */,
 				011A163016EF5EC5008CF25E /* GKImageCropViewController.m in Sources */,
-				BEB31370181ABF5900FAF98A /* SYNLikeControlButton.m in Sources */,
+				BEB31370181ABF5900FAF98A /* SYNSocialLikeControl.m in Sources */,
 				011A163116EF5EC5008CF25E /* GKImagePicker.m in Sources */,
 				011A163216EF5EC5008CF25E /* GKResizeableCropOverlayView.m in Sources */,
 				BE270B7F16EDE0E800CDDA6D /* SYNLoginViewController.m in Sources */,
@@ -7699,6 +7712,7 @@
 				011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */,
 				011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */,
 				BE3A771117300D3C008ED81F /* SYNAccountSettingsModalContainer.m in Sources */,
+				BEB3137C181E9C2900FAF98A /* SYNSocialControlFactory.m in Sources */,
 				38A2FF1B17314B3E00FB9F57 /* SYNDiscoverAutocompleteCell.m in Sources */,
 				011C168D173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m in Sources */,
 				011C16901731782800CF50B9 /* SYNDeletionWobbleLayout.m in Sources */,
@@ -7715,7 +7729,7 @@
 				012BD2E4173BE87300BE28B6 /* SDWebImageCompat.m in Sources */,
 				012BD2E5173BE87300BE28B6 /* SDWebImageDecoder.m in Sources */,
 				012BD2E6173BE87300BE28B6 /* SDWebImageDownloader.m in Sources */,
-				BEB3136D181ABD8C00FAF98A /* SYNCollectionCellButtonControl.m in Sources */,
+				BEB3136D181ABD8C00FAF98A /* SYNSocialControl.m in Sources */,
 				01AFF99817EC91540002131A /* NSString+LLDBQuickLook.m in Sources */,
 				012BD2E7173BE87300BE28B6 /* SDWebImageDownloaderOperation.m in Sources */,
 				012BD2E8173BE87300BE28B6 /* SDWebImageManager.m in Sources */,
