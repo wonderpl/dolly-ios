@@ -52,7 +52,7 @@
 #define kSubscribersListViewId      @"SUBSCRIBERS"
 #define kFriendsViewId              @"FRIENDS"
 #define kActivityViewId             @"ACTIVITY"
-#define kMoodViewId                 @"MOOD-O-MATIC"
+#define kMoodViewId                 @"MOOD-MINDER"
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"
 
