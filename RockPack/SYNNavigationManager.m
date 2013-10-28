@@ -105,6 +105,9 @@
       forControlEvents: UIControlEventTouchUpInside];
         
     }
+    
+    ((UIButton*)[self.masterController.tabs objectAtIndex:0]).selected = YES;
+
 }
 
 
@@ -113,6 +116,7 @@
     for (UIButton *tab in self.masterController.tabs)
     {
         tab.highlighted = (BOOL) (tab == tabPressed);
+        tab.selected = (BOOL) (tab == tabPressed);
     }
     
     if (!self.containerController.isTransitioning)

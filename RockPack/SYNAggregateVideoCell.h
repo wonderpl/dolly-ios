@@ -8,7 +8,8 @@
 
 #import "SYNAggregateCell.h"
 
-@interface SYNAggregateVideoCell : SYNAggregateCell
+
+@interface SYNAggregateVideoCell : SYNAggregateCell 
 
 @property (nonatomic, strong) IBOutlet UIButton* likeButton;
 @property (nonatomic, strong) IBOutlet UIButton* addButton;

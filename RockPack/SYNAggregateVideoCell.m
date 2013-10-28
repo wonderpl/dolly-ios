@@ -45,11 +45,11 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 }
 
 
-- (void) setViewControllerDelegate: (UIViewController *) viewControllerDelegate
+- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
-    [super setViewControllerDelegate: (id < SYNAggregateCellDelegate >)viewControllerDelegate];
+    [super setDelegate: delegate];
 
-    [self.likeButton addTarget: self.viewControllerDelegate
+    [self.likeButton addTarget: self.delegate
                          action: @selector(likeButtonPressed:)
                forControlEvents: UIControlEventTouchUpInside];
 }
@@ -159,11 +159,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
 }
 
-
-- (void) showVideo: (UITapGestureRecognizer *) recognizer
-{
-    [self.viewControllerDelegate touchedAggregateCell];
-}
 
 
 #pragma mark - UICollectionView DataSource

@@ -7,12 +7,10 @@
 //
 
 #import "SYNAbstractViewController.h"
+#import "SYNSocialActionsDelegate.h"
 
-#import "SYNRefreshButton.h"
+@interface SYNFeedRootViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
 
-@interface SYNFeedRootViewController : SYNAbstractViewController
-
-@property (nonatomic, strong) SYNRefreshButton* refreshButton;
 
 - (void) removeEmptyGenreMessage;
 
