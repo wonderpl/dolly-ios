@@ -7,25 +7,24 @@
 //
 
 #import "ChannelOwner.h"
+#import "SYNAggregateFlowLayout.h"
 #import "SYNAggregateVideoCell.h"
-#import "SYNAppDelegate.h"
-#import "SYNTouchGestureRecognizer.h"
 #import "SYNAggregateVideoItemCell.h"
+#import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
-#import "UIColor+SYNColor.h"
-#import "VideoInstance.h"
-#import "Video.h"
-#import "UIImage+Tint.h"
 #import "SYNSocialControlFactory.h"
+#import "SYNTouchGestureRecognizer.h"
+#import "UIColor+SYNColor.h"
+#import "UIImage+Tint.h"
+#import "Video.h"
+#import "VideoInstance.h"
 
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, readonly) CGFloat scrollViewMargin;
-
 @end
 
-static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
+static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 
 @implementation SYNAggregateVideoCell
@@ -40,30 +39,43 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     CGPoint middlePoint = CGPointMake(self.frame.size.width * 0.5f, self.frame.size.height * 0.5);
     
-    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                          forTitle:@"follow"
-                                                                       andPosition:CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f)];
+    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
+                                                                        forTitle: @"follow"
+                                                                     andPosition: CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f)];
     
-    [self addSubview:likeControl];
+    [self addSubview: likeControl];
     
-    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeAdd
-                                                                         forTitle:nil
-                                                                      andPosition:CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeAdd
+                                                                       forTitle: nil
+                                                                    andPosition: CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
     
-    [self addSubview:addControl];
+    [self addSubview: addControl];
     
-    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                         forTitle:@"share"
-                                                                      andPosition:CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
+                                                                         forTitle: @"share"
+                                                                      andPosition: CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
     
-    [self addSubview:shareControl];
+    [self addSubview: shareControl];
     
     
-    [self.collectionView registerNib:[UINib nibWithNibName:kVideoItemCellIndetifier bundle:nil]
-          forCellWithReuseIdentifier:kVideoItemCellIndetifier];
+    [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
+          forCellWithReuseIdentifier: kVideoItemCellIndentifier];
+    
+    SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
+    
+    self.collectionView.collectionViewLayout = aggregateFlowLayout;
     
     [self.collectionView reloadData];
+}
+
+
+- (void) prepareForReuse
+{
+    [super prepareForReuse];
     
+    self.collectionData = @[];
+    
+    [self.collectionView reloadData];
 }
 
 
@@ -75,8 +87,6 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
                     action: @selector(likeButtonPressed:)
           forControlEvents: UIControlEventTouchUpInside];
 }
-
-
 
 
 - (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
@@ -113,7 +123,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
 }
 
 
--(void)layoutSubviews
+- (void) layoutSubviews
 {
     [super layoutSubviews];
     
@@ -121,6 +131,7 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
     
     CGRect bgViewFrame = self.backgroundView.frame;
+    
     if(IS_IPHONE)
     {
         bgViewFrame.size.width = 320.0f;
@@ -140,53 +151,18 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
     
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
-    
-    // == Collection View == //
-    
-    CGRect collectionFrame = self.collectionView.frame;
-    
-    // the idea is to put a margin so as to show the next video cell while adding an inset of the same value
-    collectionFrame.size = CGSizeMake(self.sizeForItemAtDefaultPath.width + self.scrollViewMargin, self.sizeForItemAtDefaultPath.height);
-    
-    
-    self.collectionView.frame = collectionFrame;
-    
-    // now set the bounds
-    
-    
-    UIEdgeInsets scrollViewInsets = self.collectionView.contentInset;
-    scrollViewInsets.left = self.scrollViewMargin;
-    self.collectionView.contentInset = scrollViewInsets;
-    
-    // finally center it
-    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
-    
-    
 }
-
-
-
-
-- (void) prepareForReuse
-{
-    [super prepareForReuse];
-    
-    self.collectionData = @[];
-    
-    [self.collectionView reloadData];
-    
-}
-
 
 
 #pragma mark - UICollectionView DataSource
 
 // utility method (overriding abstract class)
--(CGSize)sizeForItemAtDefaultPath
+- (CGSize) sizeForItemAtDefaultPath
 {
-    return [self collectionView:self.collectionView
-                         layout:self.collectionView.collectionViewLayout
-         sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    // TODO: Might be a good idea to cache this, as this might be (relatively) computationally expensive
+    return [self collectionView: self.collectionView
+                         layout: self.collectionView.collectionViewLayout
+         sizeForItemAtIndexPath: [NSIndexPath indexPathForItem: 0 inSection: 0]];
 }
 
 
@@ -195,56 +171,46 @@ static NSString* kVideoItemCellIndetifier = @"SYNAggregateVideoItemCell";
    sizeForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     CGSize correctSize = CGSizeZero;
-    if(IS_IPHONE)
+    
+    if (IS_IPHONE)
     {
-        
         correctSize.width = 248.0f;
         correctSize.height = 139.0f;
     }
     else
     {
-        
         correctSize.width = 288.0f;
         correctSize.height = 139.0f;
-            
-        
     }
     
     return correctSize;
     
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+
+- (NSInteger) collectionView: (UICollectionView *) collectionView
+      numberOfItemsInSection: (NSInteger) section
 {
     
     return self.collectionData.count;
     
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+
+- (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
+                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    
-    
-    SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndetifier
+    SYNAggregateVideoItemCell* itemCell = [collectionView dequeueReusableCellWithReuseIdentifier: kVideoItemCellIndentifier
                                                                                     forIndexPath: indexPath];
     
     VideoInstance* videoInstance = self.collectionData[indexPath.item];
-    
     
     [itemCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                 options: SDWebImageRetryFailed];
     
     return itemCell;
-    
-    
 }
-
--(CGFloat)scrollViewMargin
-{
-    return 40.0f;
-}
-
 
 
 @end

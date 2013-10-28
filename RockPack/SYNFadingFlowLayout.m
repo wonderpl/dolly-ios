@@ -24,6 +24,9 @@
 {
     [super prepareLayout];
     
+    // TODO: Find a way not to hardcode these
+    self.itemSize = CGSizeMake (320, 50);
+    
     self.minimumInteritemSpacing = 0;
     self.minimumLineSpacing = 0;
     self.scrollDirection = UICollectionViewScrollDirectionVertical;
