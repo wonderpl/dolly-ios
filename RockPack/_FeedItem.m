@@ -5,7 +5,6 @@
 
 const struct FeedItemAttributes FeedItemAttributes = {
 	.channelOwnerId = @"channelOwnerId",
-	.coverIndexes = @"coverIndexes",
 	.dateAdded = @"dateAdded",
 	.itemCount = @"itemCount",
 	.itemType = @"itemType",
@@ -77,13 +76,6 @@ const struct FeedItemFetchedProperties FeedItemFetchedProperties = {
 
 
 @dynamic channelOwnerId;
-
-
-
-
-
-
-@dynamic coverIndexes;
 
 
 

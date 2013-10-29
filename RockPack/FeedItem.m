@@ -20,7 +20,6 @@
     
     instance.uniqueId = [NSString stringWithString: object.uniqueId];
     instance.resourceId = [NSString stringWithString: object.uniqueId];
-    instance.coverIndexes = [NSString stringWithString: object.uniqueId];
 
     // pass date according to type
     instance.itemTypeValue = FeedItemTypeLeaf;
@@ -105,10 +104,7 @@
 }
 
 
-- (NSArray *) coverIndexArray
-{
-    return [self.coverIndexes componentsSeparatedByString: @":"];
-}
+
 
 
 - (void) addFeedItemsObject: (FeedItem *) value_

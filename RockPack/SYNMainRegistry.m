@@ -414,13 +414,6 @@
             aggregationItems[aggregationFeedItem.uniqueId] = aggregationFeedItem;
             
             
-            // == Parse Covers == //
-            
-            NSArray* coversArray = (NSArray*)(aggregationItemDictionary[@"covers"]);
-   
-            aggregationFeedItem.coverIndexes = [coversArray isKindOfClass:[NSArray class]] ? [coversArray componentsJoinedByString:@":"] : @"Mike";
-            
-            
         }
         
         
