@@ -12,7 +12,6 @@
 #import "ChannelOwner.h"
 #import <UIKit/UIKit.h>
 
-#define AGGREGATION_CELL_DEFAULT_HEIGHT 280.0f
 
 
 
@@ -32,7 +31,6 @@
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 
-@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 
 @property (nonatomic, strong) NSDictionary *boldTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
@@ -41,6 +39,8 @@
 @property (nonatomic, strong) NSArray* collectionData;
 
 @property (nonatomic, readonly) ChannelOwner* channelOwner;
+
+@property (nonatomic, readonly) CGSize correctSize;
 
 
 // new

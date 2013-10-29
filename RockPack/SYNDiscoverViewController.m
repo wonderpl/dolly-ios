@@ -99,6 +99,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
     }
     
+    self.categoriesCollectionView.frame = [self getCollectionViewRect];
+    
+    
     // == Load and Display Categories == //
     
     [self fetchCategories];
@@ -119,6 +122,19 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [super viewWillAppear: animated];
     
     self.searchResultsController.view.frame = [self getSearchResultsRect];
+}
+
+#pragma mark - Sizing Elements
+
+-(CGRect)getCollectionViewRect
+{
+    CGRect frame = self.categoriesCollectionView.frame;
+    
+    frame.size.height = self.view.frame.size.height - frame.origin.y;
+    
+    
+    
+    return frame;
 }
 
 -(CGRect)getSearchResultsRect
@@ -403,6 +419,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    self.categoriesCollectionView.frame = [self getCollectionViewRect];
     
     self.searchResultsController.view.frame = [self getSearchResultsRect];
 }

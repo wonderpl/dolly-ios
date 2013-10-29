@@ -10,6 +10,9 @@
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 
+#import "SYNAggregateChannelCell.h"
+#import "SYNAggregateVideoCell.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 #define STANDARD_BUTTON_CAPACITY 10
@@ -75,6 +78,16 @@
 -(ChannelOwner*)channelOwner
 {
     return nil; // implement in subclass
+}
+
+-(CGSize)correctSize
+{
+    return CGSizeZero; // override in subclass
+}
+
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"AggregateCell of type %@", [self isKindOfClass:[SYNAggregateCell class]] ? @"Video" : @"Channel"];
 }
 
 @end

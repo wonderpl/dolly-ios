@@ -414,11 +414,7 @@
     [self.cameraButton addTarget: self
                           action: @selector(userTouchedCameraButton:)
                 forControlEvents: UIControlEventTouchUpInside];
-    
-//    if (self.autoplayVideoId)
-//    {
-//        [self autoplayVideoIfAvailable];
-//    }
+
     
     self.originalContentOffset = self.videoThumbnailCollectionView.contentOffset;
     

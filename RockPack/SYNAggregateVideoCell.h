@@ -23,4 +23,5 @@
 @property (nonatomic, readonly) VideoInstance* videoInstanceShowing;
 
 
+@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 @end
