@@ -27,7 +27,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define kInterRowMargin 1.0f
-
+#define PULL_THRESHOLD 1
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
 SYNImagePickerControllerDelegate>
@@ -77,6 +77,9 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) UIColor *greyColor;
+@property (nonatomic, assign) BOOL pulling;
+@property (nonatomic,assign) CGFloat startingPosition;
+
 @end
 
 
@@ -122,8 +125,8 @@ SYNImagePickerControllerDelegate>
     self.collectionsTabActive = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
-self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:120.0f/255.0f alpha:1];
-
+    self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:120.0f/255.0f alpha:1];
+    
     UINib *createCellNib = [UINib nibWithNibName: @"SYNChannelCreateNewCell"
                                           bundle: nil];
     
@@ -163,38 +166,47 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     if (self.isIPhone)
     {
-      [self updateTabStates];
+        [self updateTabStates];
     }
-
-    self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
-    self.channelThumbnailCollectionView.scrollsToTop = NO;
+    
+    //  self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
+    //  self.channelThumbnailCollectionView.scrollsToTop = NO;
     /*
-    self.channelThumbnailCollectionView.frame = CGRectMake(self.channelThumbnailCollectionView.frame.origin.x, self.channelThumbnailCollectionView.frame.origin.y, self.channelThumbnailCollectionView.frame.size.width, self.channelThumbnailCollectionView.frame.size.height);
-
-    self.subscriptionThumbnailCollectionView.frame = CGRectMake(self.subscriptionThumbnailCollectionView.frame.origin.x, self.subscriptionThumbnailCollectionView.frame.origin.y, self.subscriptionThumbnailCollectionView.frame.size.width, self.subscriptionThumbnailCollectionView.frame.size.height);
+     self.channelThumbnailCollectionView.frame = CGRectMake(self.channelThumbnailCollectionView.frame.origin.x, self.channelThumbnailCollectionView.frame.origin.y, self.channelThumbnailCollectionView.frame.size.width, self.channelThumbnailCollectionView.frame.size.height);
+     
+     self.subscriptionThumbnailCollectionView.frame = CGRectMake(self.subscriptionThumbnailCollectionView.frame.origin.x, self.subscriptionThumbnailCollectionView.frame.origin.y, self.subscriptionThumbnailCollectionView.frame.size.width, self.subscriptionThumbnailCollectionView.frame.size.height);
      */
     
     self.channelThumbnailCollectionView.hidden = YES;
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    [self updateMainScrollView];
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
+    
+    self.pulling = NO;
+    //self.channelThumbnailCollectionView.userInteractionEnabled = NO;
+    //self.subscriptionThumbnailCollectionView.userInteractionEnabled = NO;
+    
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = YES;
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
-
+    
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-
+    
     [self updateTabStates];
-
-
+    
+    
 }
 
 - (void) viewDidAppear: (BOOL) animated
 {
     NSLog(@" Channel width vwa begining: %f", self.channelThumbnailCollectionView.contentSize.width);
-
+    
     
     
     [super viewDidAppear: animated];
@@ -241,31 +253,30 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     self.deletionModeActive = NO;
     
- 
     
-    //[self updateMainScrollView];
-
     
-  //  NSLog(@"PRVC view did appear");
-    NSLog(@" Channel width vwa end: %f", self.channelThumbnailCollectionView.contentSize.width);
-
+    
+    
+    //  NSLog(@"PRVC view did appear");
+    //  NSLog(@" Channel width vwa end: %f", self.channelThumbnailCollectionView.contentSize.width);
+    
 }
 
 
 - (void) viewWillDisappear: (BOOL) animated
 {
     self.navigationController.navigationBar.hidden = NO;
-
+    
     self.channelThumbnailCollectionView.delegate = nil;
     self.subscriptionThumbnailCollectionView.delegate = nil;
     self.deletionModeActive = NO;
     
     [super viewWillDisappear: animated];
     
-//    NSLog(@"PRVC view will Disappear");
+    //    NSLog(@"PRVC view will Disappear");
     
     NSLog(@" Channel width vwd: %f", self.channelThumbnailCollectionView.contentSize.width);
-
+    
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -355,7 +366,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         });
         
     }else{
-
+        
         self.profileImageView.image = placeholderImage;
     }
 }
@@ -367,11 +378,14 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     self.segmentedControlsView.layer.borderWidth = .5f;
     self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.segmentedControlsView.layer.masksToBounds = YES;
-
+    
 }
 
 - (void) updateMainScrollView {
-
+    
+    CGRect tmpFrame;
+    tmpFrame = self.channelThumbnailCollectionView.frame;
+    
 }
 
 - (void) userDataChanged: (NSNotification*) notification
@@ -514,13 +528,13 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);            self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
-     //       self.channelThumbnailCollectionView.contentSize = CGSizeMake(500, self.channelThumbnailCollectionView.contentSize.height);
+            //       self.channelThumbnailCollectionView.contentSize = CGSizeMake(500, self.channelThumbnailCollectionView.contentSize.height);
             //NEED TO USE MORE DYNAMIC VALUES?
             self.channelThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
             self.subscriptionThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
-
+            
             self.coverImage.frame = CGRectMake(0.0f, 0.0f, 670.0f, 512.0f);
-            self.moreButton.frame = CGRectMake(614, 512, 56, 56);            
+            self.moreButton.frame = CGRectMake(614, 512, 56, 56);
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
             
@@ -528,25 +542,25 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         else
         {
             
-        
+            
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
             self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-
-      //      self.channelThumbnailCollectionView.contentSize = CGSizeMake(800, self.channelThumbnailCollectionView.contentSize.height);
-
+            
+            //      self.channelThumbnailCollectionView.contentSize = CGSizeMake(800, self.channelThumbnailCollectionView.contentSize.height);
+            
             self.channelThumbnailCollectionView.frame = CGRectMake(27.0f, 580.0f, 870.0f, 260.0f);
             
             self.subscriptionThumbnailCollectionView.frame = CGRectMake(27.0f, 580.0f, 870.0f, 260.0f);
             self.moreButton.frame = CGRectMake(384, 871, 56, 56);
-
+            
             
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
             
             self.coverImage.frame = CGRectMake(0.0f, 0.0f, 927.0f, 384.0f);
-        
+            
         }
         
         self.channelThumbnailCollectionView.collectionViewLayout = channelsLayout;
@@ -557,7 +571,7 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     [subscriptionsLayout invalidateLayout];
     [channelsLayout invalidateLayout];
     
-   // [self resizeScrollViews];
+    // [self resizeScrollViews];
 }
 
 
@@ -569,8 +583,8 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
-  //  [self resizeScrollViews];
-
+    //  [self resizeScrollViews];
+    
 }
 
 
@@ -642,13 +656,13 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     }
     else if([collectionView isEqual:self.channelThumbnailCollectionView])
     {
-      /*  Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-        
-        [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
-                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
-                                                options: SDWebImageRetryFailed];
-                */
-     //   [channelThumbnailCell setChannelTitle: channel.title];
+        /*  Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+         
+         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
+         placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
+         options: SDWebImageRetryFailed];
+         */
+        //   [channelThumbnailCell setChannelTitle: channel.title];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView]){
@@ -656,21 +670,21 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
         
         Channel *channel = self.channelOwner.subscriptions[indexPath.item];
         /*
-        [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
-                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
-                                                options: SDWebImageRetryFailed];
-        */
+         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
+         placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
+         options: SDWebImageRetryFailed];
+         */
         if (channel.favouritesValue)
         {
             if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
             {
                 /*
-                [channelThumbnailCell setChannelTitle: [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ];*/
+                 [channelThumbnailCell setChannelTitle: [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ];*/
             }
             else
             {/*
-                [channelThumbnailCell setChannelTitle:
-                 [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)]];*/
+              [channelThumbnailCell setChannelTitle:
+              [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)]];*/
             }
         }
         else
@@ -726,13 +740,13 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 
                 
                 //presented twice
-               /* [self presentViewController: channelCreationVC
-                                   animated: NO
-                                 completion: ^{
-                                     
-                                     */
-                                     [self createAndDisplayNewChannel];
-                               //  }];
+                /* [self presentViewController: channelCreationVC
+                 animated: NO
+                 completion: ^{
+                 
+                 */
+                [self createAndDisplayNewChannel];
+                //  }];
             }
             
             return;
@@ -747,13 +761,9 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         channel = self.channelOwner.subscriptions[indexPath.row];
     }
     
-    
-    
-  //  [self.navigationController pushViewController:channel animated:nil];
-
-    
+    //  [self.navigationController pushViewController:channel animated:nil];
     [appDelegate.viewStackManager viewChannelDetails: channel];
-
+    
 }
 
 - (void) resizeScrollViews
@@ -777,7 +787,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
     else if (channelViewSize.height > subscriptionsViewSize.height)
     {
-
+        
         self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, channelViewSize.height - subscriptionsViewSize.height, 0.0f);
     }
 }
@@ -786,12 +796,12 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 - (IBAction)collectionsTabTapped:(id)sender {
     self.collectionsTabActive = YES;
     [self updateTabStates];
-
+    
 }
 - (IBAction)followingsTabTapped:(id)sender {
     self.collectionsTabActive = NO;
     [self updateTabStates];
-
+    
 }
 
 - (void) updateTabStates
@@ -801,17 +811,17 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.subscriptionsTabButton.selected = self.collectionsTabActive;
     self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
     self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
-
+    
     
     if (self.collectionsTabActive)
     {
         [self.followingTabButton.titleLabel setTextColor:self.greyColor];
         self.followingTabButton.backgroundColor = [UIColor whiteColor];
-
+        
         self.collectionsTabButton.backgroundColor = self.greyColor;
         [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
-
-
+        
+        
     }
     else
     {
@@ -821,7 +831,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         
         [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
-
         
         
     }
@@ -831,7 +840,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 - (void) headerTapped
 {
     // no need to animate the subscriptions part since it observes the channels thumbnails scroll view
-   // [self.channelThumbnailCollectionView setContentOffset: CGPointZero animated: YES];
+    // [self.channelThumbnailCollectionView setContentOffset: CGPointZero animated: YES];
 }
 
 
@@ -844,7 +853,16 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    if (!decelerate) {
+        [self scrollingEnded];
+    }
+
 }
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self scrollingEnded];
+}
+
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
@@ -872,10 +890,66 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             offset = self.subscriptionThumbnailCollectionView.contentOffset;
             offset.y = self.subscriptionThumbnailCollectionView.contentOffset.y;
             [self.channelThumbnailCollectionView setContentOffset: offset];
+            
+            [self.mainScrollView setScrollEnabled:NO];
         }
+    }
+    else
+    {
+        CGFloat offset = scrollView.contentOffset.y;
+        if (scrollView == self.channelThumbnailCollectionView || scrollView == self.subscriptionThumbnailCollectionView)
+        {
+            if (offset > PULL_THRESHOLD && !_pulling) {
+                [self didBeginPulling];
+                _startingPosition = self.mainScrollView.contentOffset.y;
+                
+                _pulling = YES;
+            }
+            if (_pulling) {
+                CGFloat pullOffSet = MAX(0, offset - PULL_THRESHOLD + _startingPosition);
+                [self didChangePullOffSet:pullOffSet];
+                scrollView.transform = CGAffineTransformMakeTranslation(0, pullOffSet);
+            }
+        }
+        
+        if (scrollView == self.mainScrollView) {
+            //scale the image here
+            if (scrollView.contentOffset.y < 0) {
+            }
+        }
+        
     }
     
 }
+
+
+-(void) scrollingEnded{
+    [self didEndPulling];
+    _pulling = NO;
+    
+    self.channelThumbnailCollectionView.contentOffset = CGPointZero;
+    self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+
+    
+    self.channelThumbnailCollectionView.transform = CGAffineTransformIdentity;
+}
+
+
+
+-(void) didBeginPulling{
+    [_mainScrollView setScrollEnabled:NO];
+}
+
+-(void) didChangePullOffSet:(CGFloat) offset{
+    [_mainScrollView setContentOffset:CGPointMake(0, offset)];
+}
+
+
+-(void) didEndPulling{
+    [_mainScrollView setScrollEnabled:YES];
+}
+
+
 
 
 
@@ -1061,22 +1135,20 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         
         if (self.isUserProfile && indexPath.row == 0)
         {
-        //never gets called, first cell gets called and created in didSelectItem
-           // [self createAndDisplayNewChannel];
+            //never gets called, first cell gets called and created in didSelectItem
+            // [self createAndDisplayNewChannel];
             
             return;
         }
         else
         {
             
-          //  self.indexPathToDelete = indexPath;
+            //  self.indexPathToDelete = indexPath;
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         
         [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
-        
     }
-    
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {
         
@@ -1085,20 +1157,16 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         
         Channel *channel = self.channelOwner.subscriptions[indexPath.item];
         
-        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];        
+        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
     }
 }
 
 - (IBAction)editButtonTapped:(id)sender
 {
-
+    
 }
-- (IBAction)moreButtonTapped:(id)sender {
-
-    NSLog(@"moreButtonTapped");
-    
-    self.moreButton.frame;
-    
+- (IBAction)moreButtonTapped:(id)sender
+{
     
 }
 

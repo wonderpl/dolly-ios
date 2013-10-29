@@ -139,6 +139,7 @@
     self.currentViewController = self.viewControllers[0];
     
     
+    
 }
 
 
@@ -187,16 +188,9 @@
         
         [[self view] addSubview: toViewController.view];
 
-        [fromViewController.view removeFromSuperview];
+        [((UIViewController*)fromViewController.viewControllers.lastObject).view removeFromSuperview];
         [fromViewController removeFromParentViewController];
         
-        
-        for (UIViewController *tmpController in fromViewController.viewControllers) {
-            [tmpController.view removeFromSuperview];
-        }
-        for (UIViewController *tmpController in toViewController.viewControllers) {
-            [tmpController didMoveToParentViewController: self];
-        }
         
         self.isTransitioning = NO;
 
