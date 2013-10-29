@@ -20,6 +20,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* followersLabel;
 @property (nonatomic, strong) IBOutlet UILabel* videosLabel;
 
+@property (nonatomic, strong) IBOutlet UIView* stripView;
+
 @property (nonatomic, weak) id delegate;
 
 @end

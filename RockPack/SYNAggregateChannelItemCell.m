@@ -15,15 +15,16 @@
 {
     CGPoint middlePoint = CGPointMake(self.frame.size.width * 0.5f, self.frame.size.height * 0.5);
     
+    
     followControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
                                                                           forTitle: @"follow"
-                                                                       andPosition: CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f)];
+                                                                       andPosition: CGPointMake(middlePoint.x - 40.0f, self.stripView.frame.origin.y)];
     
     [self addSubview: followControl];
     
     shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
                                                                          forTitle: @"share"
-                                                                      andPosition: CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+                                                                      andPosition: CGPointMake(middlePoint.x + 40.0f, self.stripView.frame.origin.y)];
     
     [self addSubview: shareControl];
 }
