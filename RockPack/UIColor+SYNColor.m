@@ -10,20 +10,37 @@
 
 @implementation UIColor (SYNColor)
 
-+ (UIColor *) rockpacLedColor
+
++ (UIColor *) dollyTextDarkGray
 {
-    return [UIColor colorWithRed: 45.0f / 255.0f
-                           green: 53.0f / 255.0f
-                            blue: 58.0f / 255.0f
+    return [UIColor colorWithRed: 70.0f / 255.0f
+                           green: 70.0f / 255.0f
+                            blue: 70.0f / 255.0f
+                           alpha: 1.0f];
+}
+
++ (UIColor *) dollyTextMediumGray
+{
+    return [UIColor colorWithRed: 120.0f / 255.0f
+                           green: 120.0f / 255.0f
+                            blue: 120.0f / 255.0f
                            alpha: 1.0f];
 }
 
 
-+ (UIColor *) rockpacAggregateTextLight
++ (UIColor *) dollyTextLigthGray
 {
-    return [UIColor colorWithRed: 170.0f / 255.0f
-                           green: 170.0f / 255.0f
-                            blue: 170.0f / 255.0f
+    return [UIColor colorWithRed: 152.0f / 255.0f
+                           green: 152.0f / 255.0f
+                            blue: 152.0f / 255.0f
+                           alpha: 1.0f];
+}
+
++ (UIColor *) dollyTextLigtherGray
+{
+    return [UIColor colorWithRed: 188.0f / 255.0f
+                           green: 188.0f / 255.0f
+                            blue: 188.0f / 255.0f
                            alpha: 1.0f];
 }
 

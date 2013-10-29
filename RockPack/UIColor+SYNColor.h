@@ -10,8 +10,11 @@
 
 @interface UIColor (SYNColor)
 
-+ (UIColor *) rockpacLedColor;
-+ (UIColor *) rockpacAggregateTextLight;
++ (UIColor *) dollyTextDarkGray;
++ (UIColor *) dollyTextMediumGray;
++ (UIColor *) dollyTextLigthGray;
++ (UIColor *) dollyTextLigtherGray;
+
 + (UIColor *) colorWithHex:(NSInteger)hex;
 
 @end

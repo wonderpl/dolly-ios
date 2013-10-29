@@ -6,7 +6,6 @@
 
 extern const struct FeedItemAttributes {
 	__unsafe_unretained NSString *channelOwnerId;
-	__unsafe_unretained NSString *coverIndexes;
 	__unsafe_unretained NSString *dateAdded;
 	__unsafe_unretained NSString *itemCount;
 	__unsafe_unretained NSString *itemType;
@@ -36,7 +35,6 @@ extern const struct FeedItemFetchedProperties {
 
 
 
-
 @interface FeedItemID : NSManagedObjectID {}
 @end
 
@@ -55,16 +53,6 @@ extern const struct FeedItemFetchedProperties {
 
 
 //- (BOOL)validateChannelOwnerId:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSString* coverIndexes;
-
-
-
-//- (BOOL)validateCoverIndexes:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -187,12 +175,6 @@ extern const struct FeedItemFetchedProperties {
 
 - (NSString*)primitiveChannelOwnerId;
 - (void)setPrimitiveChannelOwnerId:(NSString*)value;
-
-
-
-
-- (NSString*)primitiveCoverIndexes;
-- (void)setPrimitiveCoverIndexes:(NSString*)value;
 
 
 

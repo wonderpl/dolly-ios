@@ -28,7 +28,6 @@
         button.frame = frame;
         
         button.titleLabel.font = [UIFont lightCustomFontOfSize:12.0f];
-        button.titleLabel.text = @"Michael";
         
         button.layer.cornerRadius = button.frame.size.height * 0.5;
         button.layer.borderColor = [self.defaultColor CGColor];
@@ -39,7 +38,7 @@
         [button setTitleColor: self.selectedColor forState:UIControlStateSelected];
         
         self.backgroundColor = [UIColor clearColor];
-        button.backgroundColor = [UIColor clearColor];
+        button.backgroundColor = [UIColor whiteColor];
         
         [self addSubview:button];
         

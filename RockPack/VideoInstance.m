@@ -180,11 +180,14 @@ static NSDateFormatter *dateFormatter = nil;
 
 #pragma mark - Helper methods
 
-- (NSNumber *) daysAgo
+- (NSDateComponents *) timeAgo
 {
-    NSTimeInterval timeIntervalSeconds = [NSDate.date timeIntervalSinceDate: self.dateAdded];
+    NSCalendarUnit flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |NSCalendarUnitHour | kCFCalendarUnitMinute;
+    return [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] components:flags
+                                                                                  fromDate:self.dateAdded
+                                                                                    toDate:NSDate.date
+                                                                                   options:0];
     
-    return @((int) (timeIntervalSeconds / 86400.0f));
 }
 
 

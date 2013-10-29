@@ -36,26 +36,25 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     
-    
     // == Create Buttons == //
     
     CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
     
-    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                        forTitle:@"like"
-                                                                     andPosition:CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
+    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
+                                                                        forTitle: @"like"
+                                                                     andPosition: CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
     
-    [self.bottomControlsView addSubview:likeControl];
+    [self.bottomControlsView addSubview: likeControl];
     
-    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeAdd
-                                                                       forTitle:nil
-                                                                    andPosition:CGPointMake(middlePoint.x, middlePoint.y)];
+    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeAdd
+                                                                       forTitle: nil
+                                                                    andPosition: CGPointMake(middlePoint.x, middlePoint.y)];
     
-    [self.bottomControlsView addSubview:addControl];
+    [self.bottomControlsView addSubview: addControl];
     
-    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                         forTitle:@"share"
-                                                                      andPosition:CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
+    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
+                                                                         forTitle: @"share"
+                                                                      andPosition: CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
     
     [self.bottomControlsView addSubview:shareControl];
     
@@ -66,7 +65,11 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
     self.collectionView.collectionViewLayout = aggregateFlowLayout;
-    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+    
+    // Attempt to tween scroll rate (doesn't seem to work, anything less than 0.3 is jerky)
+    CGFloat scrollCoefficient = kFeedAggregateScrollCoefficient * (UIScrollViewDecelerationRateNormal - UIScrollViewDecelerationRateFast);
+    
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast + scrollCoefficient;
     
     [self.collectionView reloadData];
 }
@@ -100,39 +103,32 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 }
 
 
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
+- (void) setCollectionData:(NSArray *)collectionData
 {
-    NSString *channelOwnerName = messageDictionary[@"display_name"] ? messageDictionary[@"display_name"] : @"User";
+    [super setCollectionData:collectionData];
     
-    NSNumber *itemCountNumber = messageDictionary[@"item_count"] ? messageDictionary[@"item_count"] : @1;
-    NSString *actionString = [NSString stringWithFormat: @"%i video%@", itemCountNumber.integerValue, itemCountNumber.integerValue > 1 ? @"s": @""];
+    if(collectionData.count <= 0)
+        return;
     
-    NSString *channelNameString = messageDictionary[@"channel_name"] ? messageDictionary[@"channel_name"] : @"his channel";
+    VideoInstance* firstVideoInstance = collectionData[0];
+    // create string
     
-    // create the attributed string //
+    Channel* heuristicChannel = firstVideoInstance.channel;
+    NSString *nameString = heuristicChannel.channelOwner.displayName; // ex 'Dolly Proxima'
+    NSString *actionString = [NSString stringWithFormat:@" added %i videos to", _collectionData.count];
+    
+    
     NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
     
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelOwnerName
-                                                                                      attributes: self.boldTextAttributes]];
-    
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" added "
-                                                                                      attributes: self.lightTextAttributes]];
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
+                                                                                      attributes: self.darkTextAttributes]];
     
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
                                                                                       attributes: self.lightTextAttributes]];
     
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" to "
-                                                                                      attributes: self.lightTextAttributes]];
+    self.actionMessageLabel.attributedText = attributedCompleteString;
     
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelNameString
-                                                                                      attributes: self.boldTextAttributes]];
-    
-    self.messageLabel.attributedText = attributedCompleteString;
-    self.messageLabel.center = CGPointMake(self.messageLabel.center.x, self.userThumbnailImageView.center.y + 2.0f);
-    self.messageLabel.frame = CGRectIntegral(self.messageLabel.frame);
-
+    self.channelNameLabel.text = heuristicChannel.title;
 }
 
 
@@ -143,20 +139,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     CGSize viewSize = self.frame.size;
     CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
     
-    CGRect bgViewFrame = self.backgroundView.frame;
     
-    if(IS_IPHONE)
-    {
-        bgViewFrame.size.width = 320.0f;
-        
-    }
-    else
-    {
-        bgViewFrame.size.width = 400.0f;
-    }
-    
-    self.backgroundView.frame = bgViewFrame;
-    self.backgroundView.center = CGPointMake(middleOfView, self.backgroundView.center.y);
     
     // user thumbnail
     self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
@@ -164,6 +147,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
+    self.collectionView.center =CGPointMake(middleOfView, self.collectionView.center.y);
+    self.actionMessageLabel.center =CGPointMake(middleOfView, self.actionMessageLabel.center.y);
+    self.channelNameLabel.center =CGPointMake(middleOfView, self.channelNameLabel.center.y);
 }
 
 
@@ -222,8 +208,17 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                 options: SDWebImageRetryFailed];
     
+    // set time //
+    itemCell.timeAgoComponents = videoInstance.timeAgo;
+    
+    // set title //
+    itemCell.titleLabel.text = videoInstance.title;
+    [itemCell.titleLabel sizeToFit];
+    
     return itemCell;
 }
+
+#pragma mark - Data Retrieval
 
 - (ChannelOwner*) channelOwner
 {
@@ -243,6 +238,8 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     return (VideoInstance*)self.collectionData[0];
 }
+
+
 
 
 @end

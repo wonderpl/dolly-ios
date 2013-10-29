@@ -20,7 +20,6 @@
     
     instance.uniqueId = [NSString stringWithString: object.uniqueId];
     instance.resourceId = [NSString stringWithString: object.uniqueId];
-    instance.coverIndexes = [NSString stringWithString: object.uniqueId];
 
     // pass date according to type
     instance.itemTypeValue = FeedItemTypeLeaf;
@@ -68,6 +67,7 @@
 
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
 {
+    // usually empty, title is derived from other data
     NSString *n_title = dictionary[@"title"];
     
     if (n_title && [n_title isKindOfClass: [NSString class]])
@@ -104,10 +104,7 @@
 }
 
 
-- (NSArray *) coverIndexArray
-{
-    return [self.coverIndexes componentsSeparatedByString: @":"];
-}
+
 
 
 - (void) addFeedItemsObject: (FeedItem *) value_

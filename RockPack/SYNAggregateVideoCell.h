@@ -19,8 +19,9 @@
 }
 
 
-@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel* channelNameLabel;
 @property (nonatomic, readonly) VideoInstance* videoInstanceShowing;
 
 
+@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 @end

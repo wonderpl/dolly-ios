@@ -11,5 +11,9 @@
 @interface SYNAggregateVideoItemCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
+@property (nonatomic, strong) IBOutlet UILabel* timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 
+// sets the timeLabel text
+@property (nonatomic, weak) NSDateComponents* timeAgoComponents;
 @end

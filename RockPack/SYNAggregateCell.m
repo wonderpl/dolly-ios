@@ -10,40 +10,44 @@
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 
+#import "SYNAggregateChannelCell.h"
+#import "SYNAggregateVideoCell.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 #define STANDARD_BUTTON_CAPACITY 10
+
 
 @implementation SYNAggregateCell
 
 - (void) awakeFromNib
 {
-    self.messageLabel.font = [UIFont lightCustomFontOfSize: self.messageLabel.font.pointSize];
+    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize: self.actionMessageLabel.font.pointSize];
     
     self.stringButtonsArray = [[NSMutableArray alloc] initWithCapacity: STANDARD_BUTTON_CAPACITY];
     
-    self.lightTextAttributes = @{NSFontAttributeName: [UIFont lightCustomFontOfSize: 13.0f],
-                                 NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
     
-    self.boldTextAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize: 13.0f],
-                                NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
+    // == Attributes == //
+    self.darkTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextDarkGray]};
+    self.lightTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLigthGray]};
     
     // == Round off the image == //
-    
     self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
     self.userThumbnailImageView.clipsToBounds = YES;
     
     self.collectionData = @[]; // set to 0
 }
 
--(void)setCollectionData:(NSArray *)collectionData
+
+- (void) setCollectionData: (NSArray *) collectionData
 {
     _collectionData = collectionData;
+    
+    if(!_collectionData)
+        return;
+    
     [self.collectionView reloadData];
 }
-
-
-
 
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
@@ -67,14 +71,25 @@
 
 // they all have 1 section
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
     return 1;
 }
 
--(ChannelOwner*)channelOwner
+
+- (ChannelOwner *) channelOwner
 {
     return nil; // implement in subclass
+}
+
+-(CGSize)correctSize
+{
+    return CGSizeZero; // override in subclass
+}
+
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"AggregateCell of type %@", [self isKindOfClass:[SYNAggregateCell class]] ? @"Video" : @"Channel"];
 }
 
 @end

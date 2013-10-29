@@ -15,15 +15,16 @@
 {
     CGPoint middlePoint = CGPointMake(self.frame.size.width * 0.5f, self.frame.size.height * 0.5);
     
+    
     followControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
                                                                           forTitle: @"follow"
-                                                                       andPosition: CGPointMake(middlePoint.x - 40.0f, middlePoint.y + 40.0f)];
+                                                                       andPosition: CGPointMake(middlePoint.x - 40.0f, self.stripView.frame.origin.y)];
     
     [self addSubview: followControl];
     
     shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
                                                                          forTitle: @"share"
-                                                                      andPosition: CGPointMake(middlePoint.x + 40.0f, middlePoint.y + 40.0f)];
+                                                                      andPosition: CGPointMake(middlePoint.x + 40.0f, self.stripView.frame.origin.y)];
     
     [self addSubview: shareControl];
 }
@@ -58,6 +59,32 @@
     [shareControl addTarget: delegate
                      action: @selector(shareControlPressed:)
            forControlEvents: UIControlEventTouchUpInside];
+}
+
+#pragma mark - Date Components
+
+-(NSDateComponents*)timeAgoComponents
+{
+    return _timeAgoComponents;
+}
+-(void)setTimeAgoComponents:(NSDateComponents *)timeAgoComponents
+{
+    _timeAgoComponents = timeAgoComponents;
+    if(!_timeAgoComponents)
+        return;
+    
+    NSString* finalTimeString;
+    if(_timeAgoComponents.year)
+        finalTimeString = [NSString stringWithFormat:@"%i year%@ ago", _timeAgoComponents.year, _timeAgoComponents.year == 1 ? @"" : @"s"];
+    else if(_timeAgoComponents.month)
+        finalTimeString = [NSString stringWithFormat:@"%i month%@ ago", _timeAgoComponents.month, _timeAgoComponents.month == 1 ? @"" : @"s"];
+    else if(_timeAgoComponents.day)
+        finalTimeString = [NSString stringWithFormat:@"%i day%@ ago", _timeAgoComponents.day, _timeAgoComponents.day == 1 ? @"" : @"s"];
+    else if(_timeAgoComponents.minute)
+        finalTimeString = [NSString stringWithFormat:@"%i minute%@ ago", _timeAgoComponents.minute, _timeAgoComponents.minute == 1 ? @"" : @"s"];
+    
+    self.timeLabel.text = finalTimeString;
+    
 }
 
 

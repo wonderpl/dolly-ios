@@ -169,17 +169,17 @@
     [fromViewController willMoveToParentViewController: nil]; // remove the current view controller if there is one
     
     [super addChildViewController: toViewController];
-    
-    // TODO: Remove it when we come up with a good animation
-    toViewController.view.frame = CGRectZero;
+    [[self view] addSubview: toViewController.view];
     
     
-    // == Define the Animation and Completion Blocks == //
+    
+    
+    // == Define the Animation and Completion Blocks == // (imporove visually)
     
     void (^ AnimationBlock)(void) = ^{
         
         toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-        fromViewController.view.frame = CGRectZero;
+        fromViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width * 0.5f, self.view.frame.size.height * 0.5f);
         
     };
     
@@ -200,8 +200,8 @@
     // == Do the Transition selectively == //
     if (fromViewController) // if not from first time
     {
-        toViewController.view.frame = CGRectZero;
        
+       toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width * 0.5f, self.view.frame.size.height * 0.5f);
 
         wself.isTransitioning = YES;
         [wself transitionFromViewController: fromViewController
