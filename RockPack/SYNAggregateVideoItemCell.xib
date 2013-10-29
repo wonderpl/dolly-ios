@@ -30,6 +30,13 @@
                         <color key="textColor" red="0.73725490199999999" green="0.73725490199999999" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="De9-NT-r06" userLabel="Title">
+                        <rect key="frame" x="20" y="141" width="320" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -37,6 +44,7 @@
             <connections>
                 <outlet property="imageView" destination="JRy-me-y1R" id="V1P-bh-Jlu"/>
                 <outlet property="timeLabel" destination="xKG-at-dZF" id="FA7-wh-LGt"/>
+                <outlet property="titleLabel" destination="De9-NT-r06" id="IMB-yo-9Iw"/>
             </connections>
         </collectionViewCell>
     </objects>

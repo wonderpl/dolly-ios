@@ -30,6 +30,13 @@
                         <color key="textColor" red="0.73725490199999999" green="0.73725490199999999" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVW-WR-RU9" userLabel="Title">
+                        <rect key="frame" x="76" y="157" width="208" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -37,6 +44,7 @@
             <connections>
                 <outlet property="imageView" destination="ZPQ-jB-6Su" id="2xf-ry-0hc"/>
                 <outlet property="timeLabel" destination="1bU-ZO-Uzp" id="yiG-Lv-wHt"/>
+                <outlet property="titleLabel" destination="vVW-WR-RU9" id="fqv-O6-igg"/>
             </connections>
         </collectionViewCell>
     </objects>
