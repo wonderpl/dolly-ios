@@ -14,19 +14,27 @@
 
 
 @interface SYNAggregateCell : UICollectionViewCell <NSObject, UICollectionViewDataSource, SYNSocialActionsDelegate>
+{
+    NSArray* _collectionData;
+}
+
+@property (nonatomic, strong) NSArray* collectionData;
 
 @property (nonatomic, readonly) CGSize sizeForItemAtDefaultPath;
 @property (nonatomic, readonly) ChannelOwner* channelOwner;
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
-@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
+
+// main labels from top to bottom
+@property (nonatomic, strong) IBOutlet UILabel *actionMessageLabel;
+@property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
 @property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
-@property (nonatomic, strong) NSArray* collectionData;
-@property (nonatomic, strong) NSDictionary *boldTextAttributes;
+
+@property (nonatomic, strong) NSDictionary *darkTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;

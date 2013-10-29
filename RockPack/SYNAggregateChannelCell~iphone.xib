@@ -80,9 +80,9 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="353" height="361"/>
             <connections>
+                <outlet property="actionMessageLabel" destination="9IE-Sr-Xy2" id="9Mj-IM-yJA"/>
                 <outlet property="backgroundView" destination="Iub-u5-jgh" id="VFY-p7-Skj"/>
                 <outlet property="collectionView" destination="Ud6-Qb-LXB" id="55D-QY-52p"/>
-                <outlet property="messageLabel" destination="9IE-Sr-Xy2" id="wat-mp-bnQ"/>
                 <outlet property="timeLabel" destination="7Gb-RR-1yW" id="hhg-ds-qtN"/>
                 <outlet property="titleLabel" destination="AJ2-CL-KjL" id="vS5-pj-6ap"/>
                 <outlet property="userThumbnailButton" destination="T5x-bY-knj" id="j4J-L7-hyD"/>

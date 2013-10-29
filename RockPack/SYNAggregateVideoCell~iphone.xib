@@ -78,10 +78,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <size key="customSize" width="353" height="261"/>
             <connections>
+                <outlet property="actionMessageLabel" destination="8K1-ya-hql" id="Lqd-Fv-mFB"/>
                 <outlet property="backgroundView" destination="dpy-mE-787" id="BUs-S9-Qs8"/>
                 <outlet property="bottomControlsView" destination="P8l-VE-REU" id="usl-zF-3RF"/>
                 <outlet property="collectionView" destination="BBe-eW-NPp" id="Mq0-yc-PWV"/>
-                <outlet property="messageLabel" destination="8K1-ya-hql" id="qN0-Cp-fWN"/>
                 <outlet property="userThumbnailButton" destination="CJI-4Q-kVG" id="YbH-sq-5mz"/>
                 <outlet property="userThumbnailImageView" destination="HQt-5K-LTL" id="se7-iZ-d4P"/>
             </connections>

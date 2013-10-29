@@ -17,19 +17,19 @@
 
 #define STANDARD_BUTTON_CAPACITY 10
 
+
 @implementation SYNAggregateCell
 
 - (void) awakeFromNib
 {
-    self.messageLabel.font = [UIFont lightCustomFontOfSize: self.messageLabel.font.pointSize];
+    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize: self.actionMessageLabel.font.pointSize];
     
     self.stringButtonsArray = [[NSMutableArray alloc] initWithCapacity: STANDARD_BUTTON_CAPACITY];
     
-    self.lightTextAttributes = @{NSFontAttributeName: [UIFont lightCustomFontOfSize: 13.0f],
-                                 NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
     
-    self.boldTextAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize: 13.0f],
-                                NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
+    // == Attributes == //
+    self.darkTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextDarkGray]};
+    self.lightTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLigthGray]};
     
     // == Round off the image == //
     self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
@@ -42,6 +42,10 @@
 - (void) setCollectionData: (NSArray *) collectionData
 {
     _collectionData = collectionData;
+    
+    if(!_collectionData)
+        return;
+    
     [self.collectionView reloadData];
 }
 

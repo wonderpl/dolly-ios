@@ -74,8 +74,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="353" height="361"/>
             <connections>
+                <outlet property="actionMessageLabel" destination="14" id="nQ7-ZF-WSn"/>
                 <outlet property="collectionView" destination="Khg-wM-3Jg" id="Q4C-Q4-HIo"/>
-                <outlet property="messageLabel" destination="14" id="15"/>
                 <outlet property="timeLabel" destination="UyV-NQ-2WF" id="6e0-Pn-kZl"/>
                 <outlet property="titleLabel" destination="19" id="R2k-7H-gMu"/>
                 <outlet property="userThumbnailButton" destination="23" id="24"/>

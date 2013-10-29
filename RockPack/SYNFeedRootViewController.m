@@ -555,14 +555,9 @@ typedef void(^FeedDataErrorBlock)(void);
         cell = [cv dequeueReusableCellWithReuseIdentifier: @"SYNAggregateVideoCell"
                                              forIndexPath: indexPath];
         
-        VideoInstance* videoInstance;
         
-        videoInstance = (VideoInstance*)(self.feedVideosById)[feedItem.coverIndexArray[0]]; // there should be only one
-
-        cell.titleLabel.text = videoInstance.title;
+        NSMutableArray* videosArray = [NSMutableArray array];
         
-        
-        NSMutableArray* videos = [NSMutableArray array];
         VideoInstance* vi;
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
@@ -570,18 +565,17 @@ typedef void(^FeedDataErrorBlock)(void);
             {
                 // they have also the same type (video)
                 vi = (VideoInstance*)((self.feedVideosById)[childFeedItem.resourceId]);
-                [videos addObject:vi];
+                [videosArray addObject:vi];
             }
         }
         else
         {
             vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
-            [videos addObject:vi];
+            [videosArray addObject:vi];
         }
         
-        cell.collectionData = videos;
+        cell.collectionData = videosArray;
         
-        channelOwner = videoInstance.channel.channelOwner; // heuristic, get the last video instance, all should have the same channelOwner however
         
     }
     else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
@@ -637,7 +631,20 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
+    CGSize size;
+    size.width = self.feedCollectionView.frame.size.width;
+    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
+        size.height = 460.0f;
+    else
+        size.height = 336.0f;
+    
+    return size;
+}
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
                    layout: (UICollectionViewLayout*) collectionViewLayout

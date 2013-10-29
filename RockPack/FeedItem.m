@@ -68,6 +68,7 @@
 
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
 {
+    // usually empty, title is derived from other data
     NSString *n_title = dictionary[@"title"];
     
     if (n_title && [n_title isKindOfClass: [NSString class]])

@@ -15,6 +15,5 @@
 @property (nonatomic, strong) IBOutlet UIButton *shareButton;
 @property (nonatomic, readonly) Channel *channelShowing;
 
-@property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 
 @end

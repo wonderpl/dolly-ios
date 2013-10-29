@@ -36,7 +36,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     
-    
     // == Create Buttons == //
     
     CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
@@ -104,7 +103,33 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 }
 
 
-
+- (void) setCollectionData:(NSArray *)collectionData
+{
+    [super setCollectionData:collectionData];
+    
+    if(collectionData.count <= 0)
+        return;
+    
+    VideoInstance* firstVideoInstance = collectionData[0];
+    // create string
+    
+    Channel* heuristicChannel = firstVideoInstance.channel;
+    NSString *nameString = heuristicChannel.channelOwner.displayName; // ex 'Dolly Proxima'
+    NSString *actionString = [NSString stringWithFormat:@" added %i videos to", _collectionData.count];
+    
+    
+    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
+                                                                                      attributes: self.darkTextAttributes]];
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
+                                                                                      attributes: self.lightTextAttributes]];
+    
+    self.actionMessageLabel.attributedText = attributedCompleteString;
+    
+    self.channelNameLabel.text = heuristicChannel.title;
+}
 
 
 - (void) layoutSubviews
