@@ -229,6 +229,8 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     return itemCell;
 }
 
+#pragma mark - Data Retrieval
+
 - (ChannelOwner*) channelOwner
 {
     VideoInstance* heuristic = self.videoInstanceShowing;
@@ -248,16 +250,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     return (VideoInstance*)self.collectionData[0];
 }
 
--(CGSize)correctSize
-{
-    CGSize s;
-    if(IS_IPAD)
-        s = CGSizeMake(400.0f, 330.0f);
-    else
-        s = CGSizeMake(310.0f, 353.0f);
-    
-    return s;
-}
+
 
 
 @end

@@ -76,11 +76,15 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     itemCell.titleLabel.text = channel.title;
     
+    itemCell.followersLabel.text = [NSString stringWithFormat:@"%lli followers", channel.subscribersCountValue];
+    itemCell.videosLabel.text = [NSString stringWithFormat:@"%i videos", channel.videoInstances.count];
+    
     itemCell.delegate = self;
     
     return itemCell;
 }
 
+#pragma mark - Data Retrieval
 
 - (ChannelOwner *) channelOwner
 {
@@ -105,16 +109,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     return (Channel *) self.collectionData[0];
 }
 
--(CGSize)correctSize
-{
-    CGSize s;
-    if(IS_IPAD)
-        s = CGSizeMake(400.0f, 330.0f);
-    else
-        s = CGSizeMake(310.0f, 353.0f);
-    
-    return s;
-}
+
 
 
 @end
