@@ -11,6 +11,12 @@
 #import "SYNSearchResultsCell.h"
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsUserCell.h"
+#import "UIImageView+WebCache.h"
+
+#import "UIColor+SYNColor.h"
+
+#import "VideoInstance.h"
+#import "ChannelOwner.h"
 
 typedef void(^SearchResultCompleteBlock)(int);
 
@@ -25,6 +31,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 // search operations
 @property (nonatomic, strong) MKNetworkOperation* videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation* userSearchOperation;
+
+@property (nonatomic) SearchResultsShowing searchResultsShowing;
 
 @property (nonatomic, strong) NSString* currentSearchTerm;
 
@@ -63,7 +71,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
                forCellWithReuseIdentifier:kSearchResultUserCell];
     
     
-    self.containerTabs.layer.cornerRadius = 3.0f;
+    self.containerTabs.layer.cornerRadius = 8.0f;
     self.containerTabs.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.containerTabs.layer.borderWidth = 1.0f;
     
@@ -93,7 +101,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     self.userSearchCompleteBlock = ^(int count) {
         
         NSError* error;
-        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kUser
+        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kChannelOwner
                                                        withError: &error];
         
         if(error)
@@ -111,30 +119,26 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     // Set Initial
     
-    self.searchresultsShowing = SearchResultsShowingVideos;
-    
-    
+    self.searchResultsShowing = SearchResultsShowingVideos;
     
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     
-    [self repositionContainer];
-}
-
-
--(void)repositionContainer
-{
-    // offset from the top
     CGRect containerRect = self.containerView.frame;
     
     
     containerRect.origin.x = (self.view.frame.size.width * 0.5f) - (self.containerView.frame.size.width * 0.5f);
     containerRect.size.height = self.view.frame.size.height;
+    
+    
     self.containerView.frame = CGRectIntegral(containerRect);
 }
+
+
+
 
 #pragma mark - Load Data
 
@@ -171,9 +175,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
                                                                        inRange: self.dataRequestRange
                                                                     onComplete: self.videoSearchCompleteBlock];
     
-    self.userSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
-                                                                      inRange: self.dataRequestRange
-                                                                   onComplete: self.userSearchCompleteBlock];
+    self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
+                                                                    andRange: self.dataRequestRange
+                                                                 byAppending: NO
+                                                                  onComplete: self.userSearchCompleteBlock];
 }
 
 
@@ -235,6 +240,15 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsVideoCell* videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultVideoCell
                                                                                          forIndexPath:indexPath];
         
+        VideoInstance* vi = self.videosArray[indexPath.item];
+        
+        videoCell.titleLabel.text = vi.title;
+        [videoCell.titleLabel sizeToFit];
+        
+        [videoCell.iconImageView setImageWithURL: [NSURL URLWithString: vi.thumbnailURL] // calls vi.video.thumbnailURL
+                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                         options: SDWebImageRetryFailed];
+        
         cell = videoCell;
         
         
@@ -245,6 +259,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsUserCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultUserCell
                                                                                        forIndexPath:indexPath];
         
+        ChannelOwner* co = self.usersArray[indexPath.item];
+        
+        userCell.userNameLabel.text = co.displayName;
+        [userCell.userNameLabel sizeToFit];
         
         cell = userCell;
     }
@@ -279,40 +297,48 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 -(IBAction)tabPressed:(id)sender
 {
     if(self.videosTabButton == sender)
-        self.searchresultsShowing = SearchResultsShowingVideos;
+        self.searchResultsShowing = SearchResultsShowingVideos;
     else if (self.usersTabButton == sender)
-        self.searchresultsShowing = SearchResultsShowingUsers;
+        self.searchResultsShowing = SearchResultsShowingUsers;
 }
 
--(void)setSearchresultsShowing:(SearchResultsShowing)searchresultsShowing
+-(void)setSearchResultsShowing:(SearchResultsShowing)searchResultsShowing
 {
-    _searchResultsShowing = searchresultsShowing;
+    
+    _searchResultsShowing = searchResultsShowing;
     switch (_searchResultsShowing)
     {
         case SearchResultsShowingVideos:
+            
             self.videosCollectionView.hidden = NO;
             self.usersCollectionView.hidden = YES;
+            
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
+            
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLigthGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLigtherGray];
+            
             break;
             
         case SearchResultsShowingUsers:
+            
             self.videosCollectionView.hidden = YES;
             self.usersCollectionView.hidden = NO;
+            
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
+            
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLigtherGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLigthGray];
+            
             break;
     }
-}
-
-#pragma mark - Orientation Delegates
-
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    [self repositionContainer];
+    
 }
+
+
 
 #pragma mark - Accessors
 

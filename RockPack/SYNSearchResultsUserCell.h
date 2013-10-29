@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SYNSearchResultsCell.h"
+#import "SYNSocialActionsDelegate.h"
 
 @interface SYNSearchResultsUserCell : SYNSearchResultsCell
 
 @property (nonatomic, strong) IBOutlet UIImageView* userThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
+@property (nonatomic, strong) IBOutlet UIButton* followButton;
+
 
 @end

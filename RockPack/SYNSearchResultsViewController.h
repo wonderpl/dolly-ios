@@ -22,7 +22,7 @@ typedef enum {
 @property (nonatomic, strong) IBOutlet UICollectionView* videosCollectionView;
 @property (nonatomic, strong) IBOutlet UICollectionView* usersCollectionView;
 
-@property (nonatomic) SearchResultsShowing searchResultsShowing;
+@property (nonatomic, readonly) SearchResultsShowing searchResultsShowing;
 
 - (void) searchForString: (NSString *) newSearchTerm ;
 

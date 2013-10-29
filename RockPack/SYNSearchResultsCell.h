@@ -11,6 +11,9 @@
 
 
 @interface SYNSearchResultsCell : UICollectionViewCell
+{
+    __weak id<SYNSocialActionsDelegate> _delegate;
+}
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 

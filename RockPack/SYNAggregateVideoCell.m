@@ -96,17 +96,35 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
+    if(_delegate)
+    {
+        [likeControl removeTarget: _delegate
+                           action: @selector(likeControlPressed:)
+                 forControlEvents: UIControlEventTouchUpInside];
+        
+        [addControl removeTarget: _delegate
+                          action: @selector(addControlPressed:)
+                forControlEvents: UIControlEventTouchUpInside];
+        
+        [shareControl removeTarget: _delegate
+                            action: @selector(shareControlPressed:)
+                  forControlEvents: UIControlEventTouchUpInside];
+    }
+    
     [super setDelegate: delegate];
+    
+    if(!_delegate)
+        return;
 
-    [likeControl addTarget: self.delegate
+    [likeControl addTarget: _delegate
                     action: @selector(likeControlPressed:)
           forControlEvents: UIControlEventTouchUpInside];
     
-    [addControl addTarget: self.delegate
+    [addControl addTarget: _delegate
                    action: @selector(addControlPressed:)
          forControlEvents: UIControlEventTouchUpInside];
     
-    [shareControl addTarget: self.delegate
+    [shareControl addTarget: _delegate
                      action: @selector(shareControlPressed:)
            forControlEvents: UIControlEventTouchUpInside];
 }
