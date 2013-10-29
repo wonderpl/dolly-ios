@@ -13,6 +13,8 @@
 #import "SYNSearchResultsUserCell.h"
 #import "UIImageView+WebCache.h"
 
+#import "UIColor+SYNColor.h"
+
 #import "VideoInstance.h"
 #import "ChannelOwner.h"
 
@@ -29,6 +31,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 // search operations
 @property (nonatomic, strong) MKNetworkOperation* videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation* userSearchOperation;
+
+@property (nonatomic) SearchResultsShowing searchResultsShowing;
 
 @property (nonatomic, strong) NSString* currentSearchTerm;
 
@@ -67,7 +71,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
                forCellWithReuseIdentifier:kSearchResultUserCell];
     
     
-    self.containerTabs.layer.cornerRadius = 3.0f;
+    self.containerTabs.layer.cornerRadius = 8.0f;
     self.containerTabs.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.containerTabs.layer.borderWidth = 1.0f;
     
@@ -97,7 +101,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     self.userSearchCompleteBlock = ^(int count) {
         
         NSError* error;
-        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kUser
+        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kChannelOwner
                                                        withError: &error];
         
         if(error)
@@ -116,8 +120,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     // Set Initial
     
     self.searchResultsShowing = SearchResultsShowingVideos;
-    
-    
     
 }
 
@@ -173,9 +175,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
                                                                        inRange: self.dataRequestRange
                                                                     onComplete: self.videoSearchCompleteBlock];
     
-    self.userSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
-                                                                      inRange: self.dataRequestRange
-                                                                   onComplete: self.userSearchCompleteBlock];
+    self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
+                                                                    andRange: self.dataRequestRange
+                                                                 byAppending: NO
+                                                                  onComplete: self.userSearchCompleteBlock];
 }
 
 
@@ -294,14 +297,15 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 -(IBAction)tabPressed:(id)sender
 {
     if(self.videosTabButton == sender)
-        self.searchresultsShowing = SearchResultsShowingVideos;
+        self.searchResultsShowing = SearchResultsShowingVideos;
     else if (self.usersTabButton == sender)
-        self.searchresultsShowing = SearchResultsShowingUsers;
+        self.searchResultsShowing = SearchResultsShowingUsers;
 }
 
--(void)setSearchresultsShowing:(SearchResultsShowing)searchresultsShowing
+-(void)setSearchResultsShowing:(SearchResultsShowing)searchResultsShowing
 {
-    _searchResultsShowing = searchresultsShowing;
+    
+    _searchResultsShowing = searchResultsShowing;
     switch (_searchResultsShowing)
     {
         case SearchResultsShowingVideos:
@@ -311,6 +315,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
+            
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLigthGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLigtherGray];
+            
             break;
             
         case SearchResultsShowingUsers:
@@ -320,8 +328,14 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
+            
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLigtherGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLigthGray];
+            
             break;
     }
+    
+    
 }
 
 

@@ -16,15 +16,26 @@
     
     self.userNameLabel.font = [UIFont lightCustomFontOfSize:self.userNameLabel.font.pointSize];
     
-    
-    
 }
 
 -(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
 {
+    if(_delegate)
+    {
+        [self.followButton removeTarget:_delegate
+                                 action:@selector(followControlPressed:)
+                    forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     [super setDelegate:delegate];
     
     
+    if(!_delegate)
+        return; // can set nil
+    
+    [self.followButton addTarget:_delegate
+                          action:@selector(followControlPressed:)
+                forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

@@ -16,6 +16,7 @@
 @interface SYNAggregateCell : UICollectionViewCell <NSObject, UICollectionViewDataSource, SYNSocialActionsDelegate>
 {
     NSArray* _collectionData;
+    __weak id<SYNSocialActionsDelegate> _delegate;
 }
 
 @property (nonatomic, strong) NSArray* collectionData;

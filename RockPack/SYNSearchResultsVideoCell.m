@@ -41,9 +41,39 @@
     
 }
 
--(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
+- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
-    [super setDelegate:delegate];
+    if(_delegate)
+    {
+        [likeControl removeTarget: _delegate
+                           action: @selector(likeControlPressed:)
+                 forControlEvents: UIControlEventTouchUpInside];
+        
+        [addControl removeTarget: _delegate
+                          action: @selector(addControlPressed:)
+                forControlEvents: UIControlEventTouchUpInside];
+        
+        [shareControl removeTarget: _delegate
+                            action: @selector(shareControlPressed:)
+                  forControlEvents: UIControlEventTouchUpInside];
+    }
+    
+    [super setDelegate: delegate];
+    
+    if(!_delegate)
+        return;
+    
+    [likeControl addTarget: _delegate
+                    action: @selector(likeControlPressed:)
+          forControlEvents: UIControlEventTouchUpInside];
+    
+    [addControl addTarget: _delegate
+                   action: @selector(addControlPressed:)
+         forControlEvents: UIControlEventTouchUpInside];
+    
+    [shareControl addTarget: _delegate
+                     action: @selector(shareControlPressed:)
+           forControlEvents: UIControlEventTouchUpInside];
 }
 
 @end
