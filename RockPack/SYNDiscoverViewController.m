@@ -89,6 +89,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
         [self addChildViewController: self.searchResultsController]; // containment
         [self.containerView addSubview: self.searchResultsController.view];
+        
+        CGRect sResRect = self.searchResultsController.view.frame;
+        sResRect.size = self.containerView.frame.size;
+        self.searchResultsController.view.frame = sResRect;
     }
     
     
@@ -117,29 +121,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
-#pragma mark - Sizing Elements
-
-
-
--(CGRect)getSearchResultsRect
-{
-    
-    CGRect frame = CGRectZero;
-    if(IS_IPAD)
-    {
-        frame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
-        frame.origin.y = self.sideContainerView.frame.origin.y;
-        frame.size.width = self.view.frame.size.width - frame.origin.x;
-        frame.size.height = self.view.frame.size.height;
-    }
-    else
-    {
-        frame = self.view.frame;
-    }
-    
-    
-    return frame;
-}
 
 #pragma mark - Data Retrieval
 
