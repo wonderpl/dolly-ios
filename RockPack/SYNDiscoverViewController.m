@@ -79,27 +79,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // == Handle Search Results Controller for iPad (integrated in the view), for iPhone it is loaded upon demand as a different page
     
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
-    CGRect resultsFrame = CGRectZero;
+    
     
     
     if(IS_IPAD)
     {
-        
-        resultsFrame = [self getSearchResultsRect];
-        
         [self addChildViewController: self.searchResultsController]; // containment
         [self.view addSubview: self.searchResultsController.view];
-        
-        
-    }
-    else // IS_IPHONE
-    {
-        
-        resultsFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-        
     }
     
-    self.categoriesCollectionView.frame = [self getCollectionViewRect];
+    
+    
     
     
     // == Load and Display Categories == //
@@ -122,6 +112,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [super viewWillAppear: animated];
     
     self.searchResultsController.view.frame = [self getSearchResultsRect];
+    self.categoriesCollectionView.frame = [self getCollectionViewRect];
 }
 
 #pragma mark - Sizing Elements
@@ -141,11 +132,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     
     CGRect frame = CGRectZero;
+    if(IS_IPAD)
+    {
+        frame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
+        frame.origin.y = self.sideContainerView.frame.origin.y;
+        frame.size.width = self.view.frame.size.width - frame.origin.x;
+        frame.size.height = self.view.frame.size.height;
+    }
+    else
+    {
+        frame = self.view.frame;
+    }
     
-    frame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
-    frame.origin.y = self.sideContainerView.frame.origin.y;
-    frame.size.width = self.view.frame.size.width - frame.origin.x;
-    frame.size.height = self.view.frame.size.height;
     
     return frame;
 }
