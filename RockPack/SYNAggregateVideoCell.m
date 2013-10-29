@@ -104,40 +104,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 }
 
 
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
-{
-    NSString *channelOwnerName = messageDictionary[@"display_name"] ? messageDictionary[@"display_name"] : @"User";
-    
-    NSNumber *itemCountNumber = messageDictionary[@"item_count"] ? messageDictionary[@"item_count"] : @1;
-    NSString *actionString = [NSString stringWithFormat: @"%i video%@", itemCountNumber.integerValue, itemCountNumber.integerValue > 1 ? @"s": @""];
-    
-    NSString *channelNameString = messageDictionary[@"channel_name"] ? messageDictionary[@"channel_name"] : @"his channel";
-    
-    // create the attributed string //
-    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
-    
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelOwnerName
-                                                                                      attributes: self.boldTextAttributes]];
-    
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" added "
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" to "
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelNameString
-                                                                                      attributes: self.boldTextAttributes]];
-    
-    self.messageLabel.attributedText = attributedCompleteString;
-    self.messageLabel.center = CGPointMake(self.messageLabel.center.x, self.userThumbnailImageView.center.y + 2.0f);
-    self.messageLabel.frame = CGRectIntegral(self.messageLabel.frame);
 
-}
 
 
 - (void) layoutSubviews

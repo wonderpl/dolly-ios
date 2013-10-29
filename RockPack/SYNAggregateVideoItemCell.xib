@@ -7,19 +7,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aP1-jF-WwS" customClass="SYNAggregateVideoItemCell">
-            <rect key="frame" x="0.0" y="0.0" width="248" height="139"/>
+            <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="248" height="139"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JRy-me-y1R">
-                        <rect key="frame" x="0.0" y="0.0" width="248" height="139"/>
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <imageView contentMode="scaleToFill" fixedFrame="YES" image="GlossFeedVideo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ChM-8B-oy3" userLabel="Gloss placeholder">
-                        <rect key="frame" x="0.0" y="0.0" width="248" height="139"/>
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>

@@ -1401,6 +1401,8 @@
 		BEB31389181FCD7500FAF98A /* SYNFeedRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB31388181FCD7500FAF98A /* SYNFeedRootViewController~iphone.xib */; };
 		BEB3138B181FCD9400FAF98A /* SYNFeedRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB3138A181FCD9400FAF98A /* SYNFeedRootViewController.xib */; };
 		BEB3138D181FD0F300FAF98A /* SYNAggregateChannelItemCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB3138C181FD0F300FAF98A /* SYNAggregateChannelItemCell~iphone.xib */; };
+		BEB3138F181FD98600FAF98A /* SYNAggregateVideoCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB3138E181FD98600FAF98A /* SYNAggregateVideoCell~iphone.xib */; };
+		BEB31391181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB31390181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib */; };
 		BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */; };
 		BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */; };
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
@@ -3079,6 +3081,8 @@
 		BEB31388181FCD7500FAF98A /* SYNFeedRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFeedRootViewController~iphone.xib"; sourceTree = "<group>"; };
 		BEB3138A181FCD9400FAF98A /* SYNFeedRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFeedRootViewController.xib; sourceTree = "<group>"; };
 		BEB3138C181FD0F300FAF98A /* SYNAggregateChannelItemCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAggregateChannelItemCell~iphone.xib"; sourceTree = "<group>"; };
+		BEB3138E181FD98600FAF98A /* SYNAggregateVideoCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAggregateVideoCell~iphone.xib"; sourceTree = "<group>"; };
+		BEB31390181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAggregateVideoItemCell~iphone.xib"; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -5497,6 +5501,7 @@
 				BE1B3DE8181141D600DA2BD6 /* SYNAggregateVideoItemCell.h */,
 				BE1B3DE9181141D600DA2BD6 /* SYNAggregateVideoItemCell.m */,
 				BE1B3DEC1811425900DA2BD6 /* SYNAggregateVideoItemCell.xib */,
+				BEB31390181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib */,
 				BE1B3DEE18114F9400DA2BD6 /* SYNAggregateChannelItemCell.h */,
 				BE1B3DEF18114F9400DA2BD6 /* SYNAggregateChannelItemCell.m */,
 				BE1B3DF118114FAE00DA2BD6 /* SYNAggregateChannelItemCell.xib */,
@@ -5866,6 +5871,7 @@
 				BE7D037117A69D85008053DC /* SYNAggregateVideoCell.h */,
 				BE7D037217A69D86008053DC /* SYNAggregateVideoCell.m */,
 				BE7D037C17A69E4A008053DC /* SYNAggregateVideoCell.xib */,
+				BEB3138E181FD98600FAF98A /* SYNAggregateVideoCell~iphone.xib */,
 				BE7D037717A69DCD008053DC /* SYNAggregateChannelCell.h */,
 				BE7D037817A69DCF008053DC /* SYNAggregateChannelCell.m */,
 				BE7D038017A69E86008053DC /* SYNAggregateChannelCell.xib */,
@@ -6583,6 +6589,7 @@
 				BE7D3530171700010085AB81 /* ButtonAddToChannelActive.png in Resources */,
 				BE7D3531171700010085AB81 /* ButtonAddToChannelActive@2x.png in Resources */,
 				BE7D3532171700010085AB81 /* ButtonAddToChannelActiveHighlighted.png in Resources */,
+				BEB3138F181FD98600FAF98A /* SYNAggregateVideoCell~iphone.xib in Resources */,
 				BE7D3533171700010085AB81 /* ButtonAddToChannelActiveHighlighted@2x.png in Resources */,
 				BE7D3534171700010085AB81 /* ButtonAddToChannelInactive.png in Resources */,
 				1F458AE717E1C27B003C14AC /* ButtonReportConfirmHighlighted~iphone.png in Resources */,
@@ -7316,6 +7323,7 @@
 				BE3983E4176A108900EE9C7B /* onboarding_arrow_up.png in Resources */,
 				BE3983E5176A108900EE9C7B /* onboarding_arrow_up@2x.png in Resources */,
 				BE3983EA176A129500EE9C7B /* onboarding_button_ok_highlighted.png in Resources */,
+				BEB31391181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib in Resources */,
 				BE3983EB176A129500EE9C7B /* onboarding_button_ok_highlighted@2x.png in Resources */,
 				BE1B3DD3180E902800DA2BD6 /* SYNMoodRootViewController.xib in Resources */,
 				BE3983F2176A164500EE9C7B /* onboarding_arrow_left.png in Resources */,
