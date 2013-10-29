@@ -5857,7 +5857,6 @@
 		BE7D036A17A69A99008053DC /* Aggregate Cells */ = {
 			isa = PBXGroup;
 			children = (
-				BEB31383181FC5AA00FAF98A /* New Group */,
 				BEB3137F181EB52900FAF98A /* Delegates */,
 				BE1B3DEB1811422500DA2BD6 /* Item Cells */,
 				BE7D036B17A69B67008053DC /* SYNAggregateCell.h */,
@@ -6199,13 +6198,6 @@
 				BEB3137E181EB52400FAF98A /* SYNAggregateCellDelegate.h */,
 			);
 			name = Delegates;
-			sourceTree = "<group>";
-		};
-		BEB31383181FC5AA00FAF98A /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		BEB31392181FFDBE00FAF98A /* Videos */ = {
