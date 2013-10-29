@@ -77,14 +77,10 @@ typedef void(^FeedDataErrorBlock)(void);
 
     self.feedItemsData = @[];
     self.videosInOrderArray = @[];
-    
-    
 
     [self removeEmptyGenreMessage];
-    
-    
-    // Register XIBs for Cells
 
+    // Register XIBs for Cell
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
                         forCellWithReuseIdentifier: @"SYNAggregateVideoCell"];
     
@@ -221,7 +217,9 @@ typedef void(^FeedDataErrorBlock)(void);
     [super willRotateToInterfaceOrientation: toInterfaceOrientation
                                    duration: duration];
     
-    [self.feedCollectionView reloadData];
+    // NOTE: WE might not need to reload, just invalidate the layout
+//    [self.feedCollectionView reloadData];
+    [self.feedCollectionView.collectionViewLayout invalidateLayout];
 }
 
 

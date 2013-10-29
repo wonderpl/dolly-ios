@@ -64,7 +64,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
-    aggregateFlowLayout.sectionInset =  UIEdgeInsetsMake (0.0f, 36.0f, 0.0f, 36.0f);
     aggregateFlowLayout.itemSize = [self sizeForItemAtDefaultPath];
     
     NSLog (@"Size %@", NSStringFromCGSize(aggregateFlowLayout.itemSize));
@@ -210,7 +209,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     }
     
     return correctSize;
-    
 }
 
 
