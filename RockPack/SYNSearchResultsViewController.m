@@ -111,7 +111,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     // Set Initial
     
-    self.searchresultsShowing = SearchResultsShowingVideos;
+    self.searchResultsShowing = SearchResultsShowingVideos;
     
     
     
@@ -288,15 +288,19 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     switch (_searchResultsShowing)
     {
         case SearchResultsShowingVideos:
+            
             self.videosCollectionView.hidden = NO;
             self.usersCollectionView.hidden = YES;
+            
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
             break;
             
         case SearchResultsShowingUsers:
+            
             self.videosCollectionView.hidden = YES;
             self.usersCollectionView.hidden = NO;
+            
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
             break;

@@ -9,9 +9,9 @@
                 <outlet property="containerTabs" destination="NhX-A4-SLJ" id="Bw3-LY-KfJ"/>
                 <outlet property="containerView" destination="Dg2-lP-CVQ" id="4ta-Cu-sSo"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="QkW-ty-jhC"/>
-                <outlet property="usersTabButton" destination="yoQ-RH-8rc" id="pKU-kC-LKQ"/>
+                <outlet property="usersTabButton" destination="XFa-4q-Brg" id="Uxk-o2-yqr"/>
                 <outlet property="videosCollectionView" destination="SgG-lq-X96" id="vcl-iZ-YZh"/>
-                <outlet property="videosTabButton" destination="XFa-4q-Brg" id="fKP-W8-Mng"/>
+                <outlet property="videosTabButton" destination="yoQ-RH-8rc" id="7LY-7G-f2D"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -55,28 +55,12 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="SgG-lq-X96" userLabel="Videos Collection View">
-                            <rect key="frame" x="0.0" y="63" width="363" height="621"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N5E-Iz-Q71">
-                                <size key="itemSize" width="310" height="235"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <cells/>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="NdV-1d-ucx"/>
-                                <outlet property="delegate" destination="-1" id="0ji-qZ-XOS"/>
-                            </connections>
-                        </collectionView>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="4v1-Ly-eu6" userLabel="Users Collection View">
                             <rect key="frame" x="0.0" y="63" width="363" height="621"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hqH-9q-DcO">
-                                <size key="itemSize" width="50" height="50"/>
+                                <size key="itemSize" width="363" height="50"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -85,6 +69,22 @@
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="pFJ-cR-UHr"/>
                                 <outlet property="delegate" destination="-1" id="U0r-Bh-voS"/>
+                            </connections>
+                        </collectionView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="SgG-lq-X96" userLabel="Videos Collection View">
+                            <rect key="frame" x="0.0" y="63" width="363" height="621"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N5E-Iz-Q71">
+                                <size key="itemSize" width="363" height="235"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="NdV-1d-ucx"/>
+                                <outlet property="delegate" destination="-1" id="0ji-qZ-XOS"/>
                             </connections>
                         </collectionView>
                     </subviews>

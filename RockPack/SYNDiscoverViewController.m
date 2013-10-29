@@ -52,12 +52,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 @implementation SYNDiscoverViewController
 
 
-
-
-
-
 - (void)viewDidLoad
 {
+    
+    
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -96,9 +94,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
     
     
-    
-    
-    
     // == Load and Display Categories == //
     
     [self fetchCategories];
@@ -110,23 +105,21 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [self loadCategories];
     
-    
-    
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear: animated];
+    [super viewDidAppear:animated];
+    
+    [self.categoriesCollectionView.collectionViewLayout invalidateLayout];
+    
     
     
 }
-
-
 #pragma mark - Data Retrieval
 
 - (void) fetchCategories
 {
-    
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
@@ -234,16 +227,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self dispatchSearch:selectedGenre.name];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    CGSize size = CGSizeMake(self.categoriesCollectionView.frame.size.width, 44.0f);
-    
-    
-    return size;
-}
+
 
 
 #pragma mark - UITableView Delegate/Data Source
@@ -273,6 +257,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     NSString* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
     
     [self dispatchSearch:suggestion];
+    
+    [self closeAutocomplete];
 }
 
 #pragma mark - UISearchBar Delegate and Autocomplete Methods
@@ -290,10 +276,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
+    
+    
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
-    
+    [self closeAutocomplete];
 }
 
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
@@ -400,6 +388,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 
+#pragma mark - Helper Methods
 
+-(void)closeAutocomplete
+{
+    self.autocompleteTableView.hidden = YES;
+    self.autocompleteSuggestionsArray = @[];
+    [self.autocompleteTableView reloadData];
+}
 
 @end
