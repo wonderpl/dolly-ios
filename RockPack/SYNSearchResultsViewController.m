@@ -117,24 +117,22 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     
-    [self repositionContainer];
-}
-
-
--(void)repositionContainer
-{
-    // offset from the top
     CGRect containerRect = self.containerView.frame;
     
     
     containerRect.origin.x = (self.view.frame.size.width * 0.5f) - (self.containerView.frame.size.width * 0.5f);
     containerRect.size.height = self.view.frame.size.height;
+    
+    
     self.containerView.frame = CGRectIntegral(containerRect);
 }
+
+
+
 
 #pragma mark - Load Data
 
@@ -305,14 +303,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     }
 }
 
-#pragma mark - Orientation Delegates
 
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [self repositionContainer];
-}
 
 #pragma mark - Accessors
 
