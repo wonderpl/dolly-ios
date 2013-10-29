@@ -218,7 +218,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                 options: SDWebImageRetryFailed];
     
-    
+    itemCell.timeAgoComponents = videoInstance.timeAgo;
     
     return itemCell;
 }

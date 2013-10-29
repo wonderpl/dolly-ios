@@ -5498,14 +5498,8 @@
 		BE1B3DEB1811422500DA2BD6 /* Item Cells */ = {
 			isa = PBXGroup;
 			children = (
-				BE1B3DE8181141D600DA2BD6 /* SYNAggregateVideoItemCell.h */,
-				BE1B3DE9181141D600DA2BD6 /* SYNAggregateVideoItemCell.m */,
-				BE1B3DEC1811425900DA2BD6 /* SYNAggregateVideoItemCell.xib */,
-				BEB31390181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib */,
-				BE1B3DEE18114F9400DA2BD6 /* SYNAggregateChannelItemCell.h */,
-				BE1B3DEF18114F9400DA2BD6 /* SYNAggregateChannelItemCell.m */,
-				BE1B3DF118114FAE00DA2BD6 /* SYNAggregateChannelItemCell.xib */,
-				BEB3138C181FD0F300FAF98A /* SYNAggregateChannelItemCell~iphone.xib */,
+				BEB31392181FFDBE00FAF98A /* Videos */,
+				BEB31393181FFDCB00FAF98A /* Channels */,
 			);
 			name = "Item Cells";
 			sourceTree = "<group>";
@@ -6212,6 +6206,28 @@
 			children = (
 			);
 			name = "New Group";
+			sourceTree = "<group>";
+		};
+		BEB31392181FFDBE00FAF98A /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				BE1B3DE8181141D600DA2BD6 /* SYNAggregateVideoItemCell.h */,
+				BE1B3DE9181141D600DA2BD6 /* SYNAggregateVideoItemCell.m */,
+				BE1B3DEC1811425900DA2BD6 /* SYNAggregateVideoItemCell.xib */,
+				BEB31390181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
+		BEB31393181FFDCB00FAF98A /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				BE1B3DEE18114F9400DA2BD6 /* SYNAggregateChannelItemCell.h */,
+				BE1B3DEF18114F9400DA2BD6 /* SYNAggregateChannelItemCell.m */,
+				BE1B3DF118114FAE00DA2BD6 /* SYNAggregateChannelItemCell.xib */,
+				BEB3138C181FD0F300FAF98A /* SYNAggregateChannelItemCell~iphone.xib */,
+			);
+			name = Channels;
 			sourceTree = "<group>";
 		};
 		BEBD09781743A1700092F527 /* CoverArt Chooser View */ = {

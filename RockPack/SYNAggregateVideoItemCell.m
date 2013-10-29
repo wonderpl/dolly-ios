@@ -25,7 +25,8 @@
         finalTimeString = [NSString stringWithFormat:@"%i day%@ ago", _timeAgoComponents.day, _timeAgoComponents.day == 1 ? @"" : @"s"];
     else if(_timeAgoComponents.minute)
         finalTimeString = [NSString stringWithFormat:@"%i minute%@ ago", _timeAgoComponents.minute, _timeAgoComponents.minute == 1 ? @"" : @"s"];
-    
+ 
+    self.timeLabel.text = finalTimeString;
 }
 
 @end
