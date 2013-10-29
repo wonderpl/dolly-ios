@@ -64,12 +64,21 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
+    aggregateFlowLayout.sectionInset =  UIEdgeInsetsMake (0.0f, 36.0f, 0.0f, 36.0f);
+    aggregateFlowLayout.itemSize = [self sizeForItemAtDefaultPath];
+    
+    NSLog (@"Size %@", NSStringFromCGSize(aggregateFlowLayout.itemSize));
+    
     self.collectionView.collectionViewLayout = aggregateFlowLayout;
     
-    // Attempt to tween scroll rate (doesn't seem to work, anything less than 0.3 is jerky)
-    CGFloat scrollCoefficient = kFeedAggregateScrollCoefficient * (UIScrollViewDecelerationRateNormal - UIScrollViewDecelerationRateFast);
+
     
-    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast + scrollCoefficient;
+    // Attempt to tween scroll rate (doesn't seem to work, anything less than 0.3 is jerky)
+//    CGFloat scrollCoefficient = kFeedAggregateScrollCoefficient * (UIScrollViewDecelerationRateNormal - UIScrollViewDecelerationRateFast);
+//    
+//    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast + scrollCoefficient;
+    
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
     
     [self.collectionView reloadData];
 }
@@ -178,8 +187,8 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     }
     else
     {
-        correctSize.width = 288.0f;
-        correctSize.height = 139.0f;
+        correctSize.width = 360.0f;
+        correctSize.height = 203.0f;
     }
     
     return correctSize;
