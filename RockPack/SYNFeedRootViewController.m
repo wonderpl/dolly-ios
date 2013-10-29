@@ -636,31 +636,7 @@ typedef void(^FeedDataErrorBlock)(void);
     return cell;
 }
 
-// Size Methods
 
-- (CGSize) collectionView: (UICollectionView *) collectionView
-                   layout: (UICollectionViewLayout*) collectionViewLayout
-   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    // NOTE: This is called before the cell is created so we do not have a cell at this point and have to tell the type through the data
-    FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
-    CGSize cellSize;
-    if(feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        cellSize.height = IS_IPAD ? 330.0f : 353.0f;
-    }
-    else
-    {
-        cellSize.height = IS_IPAD ? 330.0f : 353.0f;
-    }
-    
-    cellSize.width = self.feedCollectionView.frame.size.width;
-    
-    cellSize = CGSizeMake(310.0f, 400.0f);
-    
-    return cellSize;
-    
-}
 
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
