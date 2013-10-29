@@ -44,6 +44,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) NSDictionary* colorMapForCells;
 
+// only used on iPad
+@property (nonatomic, strong) IBOutlet UIView* containerView;
+
 @end
 
 @implementation SYNDiscoverViewController
@@ -79,27 +82,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // == Handle Search Results Controller for iPad (integrated in the view), for iPhone it is loaded upon demand as a different page
     
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
-    CGRect resultsFrame = CGRectZero;
+    
     
     
     if(IS_IPAD)
     {
-        
-        resultsFrame = [self getSearchResultsRect];
-        
         [self addChildViewController: self.searchResultsController]; // containment
-        [self.view addSubview: self.searchResultsController.view];
-        
-        
-    }
-    else // IS_IPHONE
-    {
-        
-        resultsFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-        
+        [self.containerView addSubview: self.searchResultsController.view];
     }
     
-    self.categoriesCollectionView.frame = [self getCollectionViewRect];
+    
+    
     
     
     // == Load and Display Categories == //
@@ -121,31 +114,29 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     [super viewWillAppear: animated];
     
-    self.searchResultsController.view.frame = [self getSearchResultsRect];
+    
 }
 
 #pragma mark - Sizing Elements
 
--(CGRect)getCollectionViewRect
-{
-    CGRect frame = self.categoriesCollectionView.frame;
-    
-    frame.size.height = self.view.frame.size.height - frame.origin.y;
-    
-    
-    
-    return frame;
-}
+
 
 -(CGRect)getSearchResultsRect
 {
     
     CGRect frame = CGRectZero;
+    if(IS_IPAD)
+    {
+        frame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
+        frame.origin.y = self.sideContainerView.frame.origin.y;
+        frame.size.width = self.view.frame.size.width - frame.origin.x;
+        frame.size.height = self.view.frame.size.height;
+    }
+    else
+    {
+        frame = self.view.frame;
+    }
     
-    frame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
-    frame.origin.y = self.sideContainerView.frame.origin.y;
-    frame.size.width = self.view.frame.size.width - frame.origin.x;
-    frame.size.height = self.view.frame.size.height;
     
     return frame;
 }
@@ -260,6 +251,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     SubGenre* selectedGenre = self.genres[indexPath.item];
     
     [self dispatchSearch:selectedGenre.name];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    CGSize size = CGSizeMake(self.categoriesCollectionView.frame.size.width, 44.0f);
+    
+    
+    return size;
 }
 
 
@@ -416,14 +418,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
 }
 
--(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    self.categoriesCollectionView.frame = [self getCollectionViewRect];
-    
-    self.searchResultsController.view.frame = [self getSearchResultsRect];
-}
+
 
 
 @end

@@ -639,9 +639,9 @@ typedef void(^FeedDataErrorBlock)(void);
     CGSize size;
     size.width = self.feedCollectionView.frame.size.width;
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-        size.height = 460.0f;
+        size.height = IS_IPAD ? 460.0f : 353.0f;
     else
-        size.height = 336.0f;
+        size.height = IS_IPAD ? 330.0f : 244.0f;
     
     return size;
 }
