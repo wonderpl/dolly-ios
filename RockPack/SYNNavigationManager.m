@@ -44,7 +44,7 @@
     
     NSNumber *numOfScrollDirection = [notification object];
         
-    if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == 519.0f) {
+    if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height - _masterController.tabsView.frame.size.height) {
         [UIView animateWithDuration:0.5f animations:^{
             CGRect tmpFrame = _masterController.tabsView.frame;
             tmpFrame.origin.y += _masterController.tabsView.frame.size.height;
@@ -52,7 +52,7 @@
         }];
     }
 
-    if (numOfScrollDirection.intValue == ScrollingDirectionUp && _masterController.tabsView.frame.origin.y == 568.0f) {
+    if (numOfScrollDirection.intValue == ScrollingDirectionUp && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height) {
         [UIView animateWithDuration:0.5f animations:^{
             
             CGRect tmpFrame = _masterController.tabsView.frame;

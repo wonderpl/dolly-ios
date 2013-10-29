@@ -26,7 +26,7 @@
 #import "Video.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kInterRowMargin 15.0f
+#define kInterRowMargin 1.0f
 
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
@@ -68,12 +68,14 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatiorView;
+@property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 
 @property (strong, nonatomic) IBOutlet UILabel *aboutMeLabel;
 @property (strong, nonatomic) IBOutlet UIButton *editButton;
 @property (strong, nonatomic) IBOutlet UIButton *collectionsTabButton;
 @property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
+@property (strong, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) UIColor *greyColor;
 @end
 
@@ -163,7 +165,6 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     {
       [self updateTabStates];
     }
-    
 
     self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     self.channelThumbnailCollectionView.scrollsToTop = NO;
@@ -174,12 +175,26 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
      */
     
     self.channelThumbnailCollectionView.hidden = YES;
+    [self setNeedsStatusBarAppearanceUpdate];
+    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+    [self.channelThumbnailCollectionView reloadData];
+    [self.subscriptionThumbnailCollectionView reloadData];
+
+    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+
+    [self updateTabStates];
+
+
+}
 
 - (void) viewDidAppear: (BOOL) animated
 {
-    self.navigationController.navigationBar.hidden = YES;
+    NSLog(@" Channel width vwa begining: %f", self.channelThumbnailCollectionView.contentSize.width);
+
     
     
     [super viewDidAppear: animated];
@@ -226,17 +241,14 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     
     self.deletionModeActive = NO;
     
-  //  [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
  
-    
-    [self.channelThumbnailCollectionView reloadData];
-    [self.subscriptionThumbnailCollectionView reloadData];
     
     //[self updateMainScrollView];
 
     
   //  NSLog(@"PRVC view did appear");
-    
+    NSLog(@" Channel width vwa end: %f", self.channelThumbnailCollectionView.contentSize.width);
+
 }
 
 
@@ -251,7 +263,13 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     [super viewWillDisappear: animated];
     
 //    NSLog(@"PRVC view will Disappear");
+    
+    NSLog(@" Channel width vwd: %f", self.channelThumbnailCollectionView.contentSize.width);
 
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 
@@ -311,8 +329,6 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
 
 -(void) setUpUserProfile
 {
-    
-
     self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
     self.aboutMeLabel.font = [UIFont lightCustomFontOfSize:13.0];
     
@@ -355,20 +371,8 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
 }
 
 - (void) updateMainScrollView {
-    NSLog(@"Before, %f", self.mainScrollView.frame.size.height);
-    NSLog(@"%f", self.mainScrollView.contentSize.height);
-
-    CGRect newFrame = self.mainScrollView.frame;
-    newFrame.size.height = 400;
-    newFrame.size.height += self.channelThumbnailCollectionView.contentSize.height;
-    
-    self.mainScrollView.contentSize = newFrame.size;
-
-    NSLog(@"After, %f", self.mainScrollView.frame.size.height);
-    NSLog(@"%f", self.mainScrollView.contentSize.height);
 
 }
-
 
 - (void) userDataChanged: (NSNotification*) notification
 {
@@ -507,26 +511,42 @@ self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:12
     {
         if (UIDeviceOrientationIsPortrait(orientation))
         {
-            self.channelLayoutIPad.minimumLineSpacing = 0.0f;
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin, 0.0, kInterRowMargin, 0.0);
-            self.subscriptionLayoutIPad.minimumLineSpacing = 0.0f;
-            self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin, 0.0, kInterRowMargin, 0.0);
-            
+            self.channelLayoutIPad.minimumLineSpacing = 14.0f;
+            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);            self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
+            self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+     //       self.channelThumbnailCollectionView.contentSize = CGSizeMake(500, self.channelThumbnailCollectionView.contentSize.height);
+            //NEED TO USE MORE DYNAMIC VALUES?
+            self.channelThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
+            self.subscriptionThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
+
+            self.coverImage.frame = CGRectMake(0.0f, 0.0f, 670.0f, 512.0f);
+            self.moreButton.frame = CGRectMake(614, 512, 56, 56);            
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
+            
         }
         else
         {
             
-           self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
+        
+            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+            self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+            self.channelLayoutIPad.minimumLineSpacing = 14.0f;
+            self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
+
+      //      self.channelThumbnailCollectionView.contentSize = CGSizeMake(800, self.channelThumbnailCollectionView.contentSize.height);
+
+            self.channelThumbnailCollectionView.frame = CGRectMake(27.0f, 580.0f, 870.0f, 260.0f);
             
-            self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(kInterRowMargin - 8.0, 12.0, kInterRowMargin, 11.0);
+            self.subscriptionThumbnailCollectionView.frame = CGRectMake(27.0f, 580.0f, 870.0f, 260.0f);
+            self.moreButton.frame = CGRectMake(384, 871, 56, 56);
+
             
-            self.channelLayoutIPad.minimumLineSpacing = 5.0f;
-            
-            self.subscriptionLayoutIPad.minimumLineSpacing = 5.0f;
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
+            
+            self.coverImage.frame = CGRectMake(0.0f, 0.0f, 927.0f, 384.0f);
+        
         }
         
         self.channelThumbnailCollectionView.collectionViewLayout = channelsLayout;
@@ -753,7 +773,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (channelViewSize.height < subscriptionsViewSize.height)
     {
-
         self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, subscriptionsViewSize.height - channelViewSize.height, 0.0f);
     }
     else if (channelViewSize.height > subscriptionsViewSize.height)
@@ -780,8 +799,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     self.collectionsTabButton.selected = !self.collectionsTabActive;
     self.subscriptionsTabButton.selected = self.collectionsTabActive;
-    self.channelThumbnailCollectionView.hidden = self.collectionsTabActive;
-    self.subscriptionThumbnailCollectionView.hidden = !self.collectionsTabActive;
+    self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
+    self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
 
     
     if (self.collectionsTabActive)
@@ -1073,6 +1092,14 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 - (IBAction)editButtonTapped:(id)sender
 {
 
+}
+- (IBAction)moreButtonTapped:(id)sender {
+
+    NSLog(@"moreButtonTapped");
+    
+    self.moreButton.frame;
+    
+    
 }
 
 

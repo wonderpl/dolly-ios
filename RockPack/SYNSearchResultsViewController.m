@@ -54,7 +54,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     self.videosArray = @[];
     self.usersArray = @[];
     
-    self.view.autoresizesSubviews = NO;
+    self.view.autoresizesSubviews = YES;
     
     [self.videosCollectionView registerNib:[UINib nibWithNibName:kSearchResultVideoCell bundle:nil]
                 forCellWithReuseIdentifier:kSearchResultVideoCell];
@@ -113,13 +113,17 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     self.searchresultsShowing = SearchResultsShowingVideos;
     
+    
+    
 }
 
-- (void) viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    
     [self repositionContainer];
 }
+
 
 -(void)repositionContainer
 {

@@ -183,6 +183,8 @@
     };
     
     void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
+        
+        
         [[self view] addSubview: toViewController.view];
 
         [fromViewController.view removeFromSuperview];
@@ -218,13 +220,15 @@
     }
     else // first time
     {
-        AnimationBlock();
+        
         CompleteTransitionBlock(YES);
     }
 }
 
 - (UINavigationController *) viewControllerByPageName: (NSString *) pageName
 {
+    
+    
     UINavigationController *child;
     
     for (child in self.viewControllers)
