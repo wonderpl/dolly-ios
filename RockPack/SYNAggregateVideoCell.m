@@ -41,21 +41,21 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
     
-    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                        forTitle:@"like"
-                                                                     andPosition:CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
+    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
+                                                                        forTitle: @"like"
+                                                                     andPosition: CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
     
-    [self.bottomControlsView addSubview:likeControl];
+    [self.bottomControlsView addSubview: likeControl];
     
-    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeAdd
-                                                                       forTitle:nil
-                                                                    andPosition:CGPointMake(middlePoint.x, middlePoint.y)];
+    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeAdd
+                                                                       forTitle: nil
+                                                                    andPosition: CGPointMake(middlePoint.x, middlePoint.y)];
     
-    [self.bottomControlsView addSubview:addControl];
+    [self.bottomControlsView addSubview: addControl];
     
-    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType:SocialControlTypeDefault
-                                                                         forTitle:@"share"
-                                                                      andPosition:CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
+    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
+                                                                         forTitle: @"share"
+                                                                      andPosition: CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
     
     [self.bottomControlsView addSubview:shareControl];
     
@@ -66,7 +66,11 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
     self.collectionView.collectionViewLayout = aggregateFlowLayout;
-    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+    
+    // Attempt to tween scroll rate (doesn't seem to work, anything less than 0.3 is jerky)
+    CGFloat scrollCoefficient = kFeedAggregateScrollCoefficient * (UIScrollViewDecelerationRateNormal - UIScrollViewDecelerationRateFast);
+    
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast + scrollCoefficient;
     
     [self.collectionView reloadData];
 }

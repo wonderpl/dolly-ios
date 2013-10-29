@@ -11,9 +11,11 @@
                 <outlet property="channelLayoutIPad" destination="XH1-bA-kHd" id="YF5-u3-Kj0"/>
                 <outlet property="channelThumbnailCollectionView" destination="MS7-tW-0TH" id="JAi-QX-iX9"/>
                 <outlet property="collectionsTabButton" destination="ylf-0F-Wru" id="Zoj-al-39U"/>
+                <outlet property="coverImage" destination="NLw-Oe-3pp" id="KxP-B7-hBe"/>
                 <outlet property="editButton" destination="TRR-mm-3I5" id="zNw-nx-SCP"/>
                 <outlet property="followingTabButton" destination="QFb-tH-WdG" id="iNt-7y-ACk"/>
                 <outlet property="fullNameLabel" destination="3wY-iP-RPC" id="Z8q-oT-Sfa"/>
+                <outlet property="moreButton" destination="uxB-NR-Hkw" id="gKc-Uc-4KY"/>
                 <outlet property="profileImageView" destination="lPO-sd-9aT" id="eej-bf-Yw0"/>
                 <outlet property="segmentedControlsView" destination="R5e-8b-TEg" id="FYz-15-bxH"/>
                 <outlet property="subscriptionLayoutIPad" destination="AUe-Ip-zbd" id="b3T-XB-9Ti"/>
@@ -23,25 +25,24 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="670" height="1004"/>
+            <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BTk-aM-5W2">
-                    <rect key="frame" x="0.0" y="0.0" width="670" height="1004"/>
+                    <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="NLw-Oe-3pp">
-                            <rect key="frame" x="0.0" y="0.0" width="649" height="502"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <imageView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="NLw-Oe-3pp">
+                            <rect key="frame" x="0.0" y="0.0" width="671" height="502"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="MS7-tW-0TH">
-                            <rect key="frame" x="47" y="728" width="544" height="691"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="MS7-tW-0TH">
+                            <rect key="frame" x="47" y="742" width="573" height="260"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <inset key="contentInset" minX="2" minY="2" maxX="2" maxY="2"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
-                                <size key="itemSize" width="190" height="190"/>
+                                <size key="itemSize" width="280" height="80"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -52,13 +53,12 @@
                                 <outlet property="delegate" destination="-1" id="s7b-h4-zad"/>
                             </connections>
                         </collectionView>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0td-Z3-eno">
-                            <rect key="frame" x="47" y="728" width="544" height="651"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0td-Z3-eno">
+                            <rect key="frame" x="48" y="742" width="573" height="260"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <inset key="contentInset" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="AUe-Ip-zbd">
-                                <size key="itemSize" width="190" height="190"/>
+                                <size key="itemSize" width="280" height="80"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -69,16 +69,18 @@
                                 <outlet property="delegate" destination="-1" id="H3W-Im-7ur"/>
                             </connections>
                         </collectionView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uxB-NR-Hkw">
-                            <rect key="frame" x="594" y="502" width="56" height="56"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                            <color key="backgroundColor" red="0.2122873639" green="0.61273946479999997" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="uxB-NR-Hkw">
+                            <rect key="frame" x="615" y="502" width="56" height="56"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="ButtonMore.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="moreButtonTapped:" destination="-1" eventType="touchUpInside" id="YBp-b2-AfD"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" id="VWl-sk-eXe">
-                            <rect key="frame" x="178" y="449" width="314" height="252"/>
+                            <rect key="frame" x="178" y="452" width="314" height="252"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="R5e-8b-TEg">
@@ -89,6 +91,7 @@
                                             <rect key="frame" x="0.0" y="-3" width="123" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <state key="normal" title="Collections">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -150,8 +153,17 @@
                             </subviews>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
+                        <view contentMode="scaleToFill" id="OvN-pL-Ijx">
+                            <rect key="frame" x="0.0" y="0.0" width="1" height="502"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="JSp-xV-6Ab">
+                            <rect key="frame" x="670" y="251" width="1" height="502"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
-                    <inset key="contentInset" minX="0.0" minY="-64" maxX="0.0" maxY="0.0"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="size" keyPath="contentSize">
                             <size key="value" width="670" height="1504"/>
@@ -164,4 +176,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="ButtonMore.png" width="56" height="56"/>
+    </resources>
 </document>

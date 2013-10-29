@@ -27,6 +27,10 @@
 @property (strong, nonatomic) IBOutlet UIView *bottomBarView;
 @property (strong, nonatomic) IBOutlet UIView *boarderView;
 
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
+// detail label for iphone, need better logic than this!!
+@property (strong, nonatomic) IBOutlet UILabel *detailsLabel;
+
 @end
 
 
@@ -54,21 +58,31 @@
     [self addGestureRecognizer: self.tap];
     
     // Touch for highlighting cells when the user touches them (like UIButton)
-    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self
-                                                            action: @selector(showGlossLowlight:)];
+    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self action: @selector(showGlossLowlight:)];
     self.touch.delegate = self;
-    [self addGestureRecognizer: self.touch];
+   // [self addGestureRecognizer: self.touch];
     self.specialSelected = NO;
     
     // Required to make cells look good when wobbling (delete)
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = UIScreen.mainScreen.scale;
     
-    [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:18]];
-    [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
-    [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
-    [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-    [self.boarderView.layer setBorderWidth:1.0f];
+    if (IS_IPHONE) {
+        [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
+        [self.detailsLabel setFont:[UIFont lightCustomFontOfSize:10]];
+        
+        [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
+        [self.boarderView.layer setBorderWidth:1.0f];
+
+        
+    }else{
+        [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:18]];
+        [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
+        [self.boarderView.layer setBorderWidth:1.0f];
+        
+    }
     
 }
 

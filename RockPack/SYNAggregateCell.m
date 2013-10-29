@@ -32,21 +32,18 @@
                                 NSForegroundColorAttributeName: [UIColor rockpacAggregateTextLight]};
     
     // == Round off the image == //
-    
     self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
     self.userThumbnailImageView.clipsToBounds = YES;
     
     self.collectionData = @[]; // set to 0
 }
 
--(void)setCollectionData:(NSArray *)collectionData
+
+- (void) setCollectionData: (NSArray *) collectionData
 {
     _collectionData = collectionData;
     [self.collectionView reloadData];
 }
-
-
-
 
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
@@ -70,12 +67,13 @@
 
 // they all have 1 section
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
     return 1;
 }
 
--(ChannelOwner*)channelOwner
+
+- (ChannelOwner *) channelOwner
 {
     return nil; // implement in subclass
 }

@@ -289,6 +289,8 @@ typedef enum : NSInteger {
 // Animations
 //
 
+#define kFeedAggregateScrollCoefficient 0.5f
+
 
 // Text cross-fade
 #define kTextCrossfadeDuration 0.3f
