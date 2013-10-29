@@ -139,20 +139,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     CGSize viewSize = self.frame.size;
     CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
     
-    CGRect bgViewFrame = self.backgroundView.frame;
     
-    if(IS_IPHONE)
-    {
-        bgViewFrame.size.width = 320.0f;
-        
-    }
-    else
-    {
-        bgViewFrame.size.width = 400.0f;
-    }
-    
-    self.backgroundView.frame = bgViewFrame;
-    self.backgroundView.center = CGPointMake(middleOfView, self.backgroundView.center.y);
     
     // user thumbnail
     self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
@@ -160,6 +147,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
+    self.collectionView.center =CGPointMake(middleOfView, self.collectionView.center.y);
+    self.actionMessageLabel.center =CGPointMake(middleOfView, self.actionMessageLabel.center.y);
+    self.channelNameLabel.center =CGPointMake(middleOfView, self.channelNameLabel.center.y);
 }
 
 
