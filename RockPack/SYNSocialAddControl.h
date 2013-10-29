@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNCollectionCellButtonControl.h"
+#import "SYNSocialControl.h"
 
-@interface SYNAddControlButton : SYNCollectionCellButtonControl
+@interface SYNSocialAddControl : SYNSocialControl
 
 @end

@@ -20,5 +20,11 @@
     
 }
 
+-(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
+{
+    [super setDelegate:delegate];
+    
+    
+}
 
 @end

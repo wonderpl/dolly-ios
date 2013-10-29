@@ -9,7 +9,6 @@
 #import "AppConstants.h"
 #import "SYNAggregateChannelCell.h"
 #import "SYNTouchGestureRecognizer.h"
-#import "Channel.h"
 #import "SYNAggregateChannelItemCell.h"
 #import "UIImage+Tint.h"
 
@@ -46,34 +45,16 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
 }
 
+// NOTE: will be called back from the inner cell and the message should be passed to the feed controller acting as THIS cell's delegate
 
-- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
+-(void)followControlPressed:(id)control
 {
-    [super setDelegate: delegate];
+    [self.delegate performSelector:@selector(followControlPressed:) withObject:self];
     
 }
-
-
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary
+-(void)shareControlPressed:(id)control
 {
-    NSString *channelOwnerName = messageDictionary[@"display_name"] ? messageDictionary[@"display_name"] : @"User";
-    
-    NSNumber *itemCountNumber = messageDictionary[@"item_count"] ? messageDictionary[@"item_count"] : @1;
-    NSString *actionString = [NSString stringWithFormat: @"%i pack%@", itemCountNumber.integerValue, itemCountNumber.integerValue > 1 ? @"s": @""];
-    
-    // craete the attributed string //
-    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: channelOwnerName
-                                                                                      attributes: self.boldTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" created "
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    self.messageLabel.attributedText = attributedCompleteString;
+    [self.delegate performSelector:@selector(shareControlPressed:) withObject:self];
 }
 
 
@@ -104,6 +85,23 @@ static NSString* kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     return itemCell;
     
     
+}
+
+-(ChannelOwner*)channelOwner
+{
+    Channel* heuristic = self.channelShowing;
+    if(!heuristic)
+        return nil;
+    
+    return heuristic.channelOwner;
+}
+
+-(Channel*)channelShowing
+{
+    if(self.collectionData.count == 0)
+        return nil;
+    
+    return (Channel*)self.collectionData[0];
 }
 
 @end

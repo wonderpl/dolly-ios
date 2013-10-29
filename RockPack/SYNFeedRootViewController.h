@@ -8,8 +8,9 @@
 
 #import "SYNAbstractViewController.h"
 #import "SYNSocialActionsDelegate.h"
+#import "SYNAggregateCellDelegate.h"
 
-@interface SYNFeedRootViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
+@interface SYNFeedRootViewController : SYNAbstractViewController <SYNSocialActionsDelegate, SYNAggregateCellDelegate>
 
 
 - (void) removeEmptyGenreMessage;

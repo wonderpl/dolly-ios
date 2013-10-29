@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SYNCollectionCellButtonControl.h"
+#import "SYNSocialControl.h"
 
 @interface SYNAggregateChannelItemCell : UICollectionViewCell
 {
-    SYNCollectionCellButtonControl* followControl;
-    SYNCollectionCellButtonControl* shareControl;
+    SYNSocialControl* followControl;
+    SYNSocialControl* shareControl;
 }
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;

@@ -7,12 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNSearchResultsCell.h"
+#import "SYNSocialControl.h"
 
-@interface SYNSearchResultsVideoCell : UICollectionViewCell
+@interface SYNSearchResultsVideoCell : SYNSearchResultsCell
+{
+    SYNSocialControl* likeControl;
+    SYNSocialControl* addControl;
+    SYNSocialControl* shareControl;
+}
 
 @property (nonatomic, strong) IBOutlet UIImageView* overlayImageView;
 @property (nonatomic, strong) IBOutlet UIImageView* iconImageView;
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+
+@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 
 @end

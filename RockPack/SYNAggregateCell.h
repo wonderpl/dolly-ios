@@ -9,6 +9,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "SYNSocialActionsDelegate.h"
+#import "ChannelOwner.h"
 #import <UIKit/UIKit.h>
 
 #define AGGREGATION_CELL_DEFAULT_HEIGHT 280.0f
@@ -27,7 +28,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
 
-@property (nonatomic, strong) IBOutlet UILabel *mainTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 
@@ -39,8 +40,8 @@
 
 @property (nonatomic, strong) NSArray* collectionData;
 
-- (void) setCoverImagesAndTitlesWithArray: (NSArray *) imageString;
-- (void) setTitleMessageWithDictionary: (NSDictionary *) messageDictionary;
+@property (nonatomic, readonly) ChannelOwner* channelOwner;
+
 
 // new
 

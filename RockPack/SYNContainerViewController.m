@@ -156,6 +156,7 @@
     if (_currentViewController == currentViewController)
         return;
 
+    __weak SYNContainerViewController* wself = self;
     
     __weak UINavigationController *toViewController = currentViewController;
     __weak UINavigationController *fromViewController = _currentViewController;
@@ -172,9 +173,18 @@
     toViewController.view.frame = CGRectZero;
     
     
-    // == Define the completion block == //
+    // == Define the Animation and Completion Blocks == //
+    
+    void (^ AnimationBlock)(void) = ^{
+        
+        toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+        fromViewController.view.frame = CGRectZero;
+        
+    };
     
     void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
+        
+        
         [[self view] addSubview: toViewController.view];
 
         [fromViewController.view removeFromSuperview];
@@ -192,7 +202,6 @@
 
     };
     
-    __block CGRect correctFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
     
     // == Do the Transition selectively == //
     if (fromViewController) // if not from first time
@@ -200,27 +209,26 @@
         toViewController.view.frame = CGRectZero;
        
 
-        self.isTransitioning = YES;
-            [self transitionFromViewController: fromViewController
-                              toViewController: toViewController
-                                      duration: VIEW_CONTROLLER_TRANSITION_DURATION
-                                       options: UIViewAnimationOptionCurveEaseInOut
-                                    animations: ^{
-                                        toViewController.view.frame = correctFrame;
-                                        fromViewController.view.frame = CGRectZero;
-                                    }
-                                    completion: CompleteTransitionBlock];
+        wself.isTransitioning = YES;
+        [wself transitionFromViewController: fromViewController
+                           toViewController: toViewController
+                                   duration: VIEW_CONTROLLER_TRANSITION_DURATION
+                                    options: UIViewAnimationOptionCurveEaseInOut
+                                 animations: AnimationBlock
+                                 completion: CompleteTransitionBlock];
         
     }
-    else
+    else // first time
     {
-        toViewController.view.frame = correctFrame;
+        
         CompleteTransitionBlock(YES);
     }
 }
 
 - (UINavigationController *) viewControllerByPageName: (NSString *) pageName
 {
+    
+    
     UINavigationController *child;
     
     for (child in self.viewControllers)

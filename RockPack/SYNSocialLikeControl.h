@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNCollectionCellButtonControl.h"
+#import "SYNSocialControl.h"
 
-@interface SYNLikeControlButton : SYNCollectionCellButtonControl
+@interface SYNSocialLikeControl : SYNSocialControl
 {
     @private UILabel* numberLabel;
 }

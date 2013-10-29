@@ -92,7 +92,16 @@
                           completionHandler: (MKNKUserSuccessBlock) completionBlock
                                errorHandler: (MKNKUserErrorBlock) errorBlock
                                 retryInputStream: (NSInputStream*) retryInputStream
-{    
+{
+    
+    // if nil was passed for any of the blocks, create enpty blocks so as to avoid calling a nil block
+    if(!completionBlock)
+        completionBlock = ^(id data) {};
+    
+    if(!errorBlock)
+        errorBlock = ^(id data) {};
+    
+    
     // First, copy the network operation so that if authentication fails we can try again
     SYNNetworkOperationJsonObject *retryNetworkOperation = [networkOperation copyForRetry];
     if(retryInputStream)

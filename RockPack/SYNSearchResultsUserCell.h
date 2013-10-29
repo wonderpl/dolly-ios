@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNSearchResultsCell.h"
 
-@interface SYNSearchResultsUserCell : UICollectionViewCell
+@interface SYNSearchResultsUserCell : SYNSearchResultsCell
 
 @property (nonatomic, strong) IBOutlet UIImageView* userThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel* userNameLabel;

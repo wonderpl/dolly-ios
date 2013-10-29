@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNAddControlButton.h"
+#import "SYNSocialAddControl.h"
 
-@implementation SYNAddControlButton
+@implementation SYNSocialAddControl
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -25,6 +25,25 @@
     return self;
 }
 
+-(UIColor*)defaultColor
+{
+    // override in subclass
+    return [UIColor colorWithWhite: (152.0f/255.0f)
+                             alpha: 1.0f];
+}
 
+-(UIColor*)highlightedColor
+{
+    return [UIColor colorWithWhite: (194.0f/255.0f)
+                             alpha: 1.0f];
+}
+
+-(UIColor*)selectedColor
+{
+    return [UIColor colorWithRed:(0.0f/255.0f)
+                           green:(255.0f/255.0f)
+                            blue:(0.0f/255.0f)
+                           alpha:1.0f];
+}
 
 @end

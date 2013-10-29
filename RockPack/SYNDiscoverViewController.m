@@ -85,11 +85,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if(IS_IPAD)
     {
         
-        resultsFrame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
-        resultsFrame.origin.y = self.sideContainerView.frame.origin.y;
-        resultsFrame.size.width = self.view.frame.size.width - resultsFrame.origin.x;
-        resultsFrame.size.height = self.view.frame.size.height;
-        
+        resultsFrame = [self getSearchResultsRect];
         
         [self addChildViewController: self.searchResultsController]; // containment
         [self.view addSubview: self.searchResultsController.view];
@@ -102,8 +98,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         resultsFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
         
     }
-    
-    self.searchResultsController.view.frame = resultsFrame;
     
     // == Load and Display Categories == //
     
@@ -120,8 +114,25 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+    
+    self.searchResultsController.view.frame = [self getSearchResultsRect];
+}
 
-
+-(CGRect)getSearchResultsRect
+{
+    
+    CGRect frame = CGRectZero;
+    
+    frame.origin.x = self.sideContainerView.frame.origin.x + self.sideContainerView.frame.size.width + 10.0f;
+    frame.origin.y = self.sideContainerView.frame.origin.y;
+    frame.size.width = self.view.frame.size.width - frame.origin.x;
+    frame.size.height = self.view.frame.size.height;
+    
+    return frame;
+}
 
 #pragma mark - Data Retrieval
 
@@ -387,6 +398,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         
     }
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    self.searchResultsController.view.frame = [self getSearchResultsRect];
 }
 
 
