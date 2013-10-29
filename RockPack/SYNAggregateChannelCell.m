@@ -41,6 +41,24 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     [super prepareForReuse];
 }
 
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGSize viewSize = self.frame.size;
+    CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
+    
+    
+    
+    
+    // user thumbnail
+    self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
+    self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
+    
+    self.actionMessageLabel.center =CGPointMake(middleOfView, self.actionMessageLabel.center.y);
+    self.collectionView.center =CGPointMake(middleOfView, self.collectionView.center.y);
+}
+
 
 // NOTE: will be called back from the inner cell and the message should be passed to the feed controller acting as THIS cell's delegate
 
