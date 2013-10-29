@@ -16,6 +16,9 @@
     
     self.userNameLabel.font = [UIFont lightCustomFontOfSize:self.userNameLabel.font.pointSize];
     
+    // == Round off the image == //
+    self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
+    self.userThumbnailImageView.clipsToBounds = YES;
 }
 
 -(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate

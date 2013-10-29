@@ -249,6 +249,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
                                 placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                          options: SDWebImageRetryFailed];
         
+        videoCell.delegate = self;
+        
         cell = videoCell;
         
         
@@ -261,8 +263,14 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         ChannelOwner* co = self.usersArray[indexPath.item];
         
+        [userCell.userThumbnailImageView setImageWithURL: [NSURL URLWithString: co.thumbnailURL] // calls vi.video.thumbnailURL
+                                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                                 options: SDWebImageRetryFailed];
+        
         userCell.userNameLabel.text = co.displayName;
         [userCell.userNameLabel sizeToFit];
+        
+        userCell.delegate = self;
         
         cell = userCell;
     }
