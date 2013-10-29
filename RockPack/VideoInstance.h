@@ -8,6 +8,8 @@
 @property (nonatomic) BOOL starredByUserValue;
 @property (nonatomic, readonly) NSString* thumbnailURL;
 
+@property (nonatomic, readonly) NSDateComponents* timeAgo;
+
 + (VideoInstance *) instanceFromDictionary: (NSDictionary *) dictionary
                  usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
                        ignoringObjectTypes: (IgnoringObjects) ignoringObjects
@@ -24,7 +26,7 @@
 + (VideoInstance *) instanceFromDictionary: (NSDictionary *) dictionary
                  usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
 
-- (NSNumber *) daysAgo;
+
 - (NSDate *) dateAddedIgnoringTime;
 
 

@@ -57,6 +57,32 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
                         withObject: self];
 }
 
+- (void) setCollectionData:(NSArray *)collectionData
+{
+    [super setCollectionData:collectionData];
+    
+    if(collectionData.count <= 0)
+        return;
+    
+    Channel* firstChannel = collectionData[0];
+    // create string
+    
+    NSString *nameString = firstChannel.channelOwner.displayName; // ex 'Dolly Proxima'
+    NSString *actionString = [NSString stringWithFormat:@" created %@ collection%@", _collectionData.count > 1 ? [NSString stringWithFormat:@"%i", _collectionData.count] : @"a new", _collectionData.count > 1 ? @"s" : @""];
+    
+    
+    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
+                                                                                      attributes: self.darkTextAttributes]];
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
+                                                                                      attributes: self.lightTextAttributes]];
+    
+    self.actionMessageLabel.attributedText = attributedCompleteString;
+    
+}
+
 
 #pragma mark - UICollectionView DataSource
 
@@ -78,6 +104,8 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     itemCell.followersLabel.text = [NSString stringWithFormat:@"%lli followers", channel.subscribersCountValue];
     itemCell.videosLabel.text = [NSString stringWithFormat:@"%i videos", channel.videoInstances.count];
+    
+    itemCell.timeAgoComponents = channel.timeAgo;
     
     itemCell.delegate = self;
     
