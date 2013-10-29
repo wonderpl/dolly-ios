@@ -12,6 +12,9 @@
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsUserCell.h"
 
+#import "VideoInstance.h"
+#import "ChannelOwner.h"
+
 typedef void(^SearchResultCompleteBlock)(int);
 
 static NSString *kSearchResultVideoCell = @"SYNSearchResultsVideoCell";
@@ -233,6 +236,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsVideoCell* videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultVideoCell
                                                                                          forIndexPath:indexPath];
         
+        VideoInstance* vi = self.videosArray[indexPath.item];
+        
+        videoCell.titleLabel.text = vi.title;
+        
         cell = videoCell;
         
         
@@ -243,6 +250,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsUserCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultUserCell
                                                                                        forIndexPath:indexPath];
         
+        ChannelOwner* co = self.usersArray[indexPath.item];
+        
+        userCell.userNameLabel.text = co.displayName;
         
         cell = userCell;
     }
