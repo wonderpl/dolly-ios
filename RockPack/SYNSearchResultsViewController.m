@@ -11,6 +11,7 @@
 #import "SYNSearchResultsCell.h"
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsUserCell.h"
+#import "UIImageView+WebCache.h"
 
 #import "VideoInstance.h"
 #import "ChannelOwner.h"
@@ -239,6 +240,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         VideoInstance* vi = self.videosArray[indexPath.item];
         
         videoCell.titleLabel.text = vi.title;
+        [videoCell.titleLabel sizeToFit];
+        
+        [videoCell.iconImageView setImageWithURL: [NSURL URLWithString: vi.thumbnailURL] // calls vi.video.thumbnailURL
+                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                         options: SDWebImageRetryFailed];
         
         cell = videoCell;
         
@@ -253,6 +259,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         ChannelOwner* co = self.usersArray[indexPath.item];
         
         userCell.userNameLabel.text = co.displayName;
+        [userCell.userNameLabel sizeToFit];
         
         cell = userCell;
     }
