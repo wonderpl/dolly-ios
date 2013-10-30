@@ -15,4 +15,6 @@
 - (void) setTitle: (NSString *) title
          andCount: (NSInteger) count;
 
+@property (nonatomic, weak) id dataItemLinked;
+
 @end
