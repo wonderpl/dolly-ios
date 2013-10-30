@@ -179,6 +179,7 @@
 		01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */; };
 		01677E0E16554AB500B1B1D8 /* ButtonBackHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */; };
 		01677E0F16554AB500B1B1D8 /* ButtonBackHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF916554AB500B1B1D8 /* ButtonBackHighlighted@2x.png */; };
+		016AED3B1821349800DEAF7E /* SYNRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AED3A1821349800DEAF7E /* SYNRoundButton.m */; };
 		016B97151770C3DE00892211 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97141770C3DE00892211 /* CFNetwork.framework */; };
 		016B97171770C42200892211 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97161770C42200892211 /* StoreKit.framework */; };
 		0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717D165550A900A3C7C4 /* SystemConfiguration.framework */; };
@@ -1688,6 +1689,8 @@
 		01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackHighlighted.png; path = Assets/Images/ButtonBackHighlighted.png; sourceTree = "<group>"; };
 		01677DF916554AB500B1B1D8 /* ButtonBackHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonBackHighlighted@2x.png"; path = "Assets/Images/ButtonBackHighlighted@2x.png"; sourceTree = "<group>"; };
 		01677F1216554CFD00B1B1D8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Assets/Images/iTunesArtwork; sourceTree = "<group>"; };
+		016AED391821349800DEAF7E /* SYNRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNRoundButton.h; sourceTree = "<group>"; };
+		016AED3A1821349800DEAF7E /* SYNRoundButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNRoundButton.m; sourceTree = "<group>"; };
 		016B97141770C3DE00892211 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		016B97161770C42200892211 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0170717D165550A900A3C7C4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -6163,6 +6166,8 @@
 		BEB3136A181ABD0D00FAF98A /* Cell Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				016AED391821349800DEAF7E /* SYNRoundButton.h */,
+				016AED3A1821349800DEAF7E /* SYNRoundButton.m */,
 				BEB3136B181ABD8C00FAF98A /* SYNSocialControl.h */,
 				BEB3136C181ABD8C00FAF98A /* SYNSocialControl.m */,
 				BEB31371181AC40100FAF98A /* Subclasses */,
@@ -7706,6 +7711,7 @@
 				BE08159F16D3EF7F00ADB1DC /* SYNGenreTabViewController.m in Sources */,
 				BE0815A216D4DADB00ADB1DC /* SYNTabView.m in Sources */,
 				BE0815A516D4E53600ADB1DC /* SYNTabViewController.m in Sources */,
+				016AED3B1821349800DEAF7E /* SYNRoundButton.m in Sources */,
 				BE0815C616D5389C00ADB1DC /* SYNMasterViewController.m in Sources */,
 				BE0815CA16D5478B00ADB1DC /* SYNRegistry.m in Sources */,
 				BE0815CD16D5487B00ADB1DC /* SYNSearchRegistry.m in Sources */,
