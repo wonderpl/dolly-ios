@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSocialControl.h"
+#import "SYNSocialButton.h"
 
-@interface SYNSocialLikeControl : SYNSocialControl
+@interface SYNSocialLikeButton : SYNSocialButton
 {
     @private UILabel* numberLabel;
 }

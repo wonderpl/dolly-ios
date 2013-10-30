@@ -829,7 +829,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Social Actions Delegate
 
-- (void) addControlPressed: (SYNSocialControl*) socialControl
+- (void) addControlPressed: (SYNSocialButton*) socialControl
 {
     
     
@@ -859,13 +859,13 @@ typedef void(^FeedDataErrorBlock)(void);
     
 }
 
-- (void) followControlPressed: (SYNSocialControl *) socialControl
+- (void) followControlPressed: (SYNSocialButton *) socialControl
 {
     
     
     
 }
-- (void) likeControlPressed: (SYNSocialControl*) socialControl
+- (void) likeControlPressed: (SYNSocialButton*) socialControl
 {
     if (self.togglingInProgress)
     {
@@ -945,7 +945,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
--(void)shareControlPressed:(SYNSocialControl*) socialControl
+-(void)shareControlPressed:(SYNSocialButton *) socialControl
 {
     
 }

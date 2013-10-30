@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNRoundButton : UIButton
+@interface SYNSocialButton : UIButton
 
 - (void) setTitle: (NSString *) title;
 

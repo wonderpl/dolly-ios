@@ -7,7 +7,7 @@
 //
 
 #import "SYNAggregateCell.h"
-#import "SYNSocialAddControl.h"
+#import "SYNSocialAddButton.h"
 #import "VideoInstance.h"
 #import "Video.h"
 

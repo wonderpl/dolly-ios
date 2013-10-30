@@ -62,7 +62,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 
 // NOTE: will be called back from the inner cell and the message should be passed to the feed controller acting as THIS cell's delegate
 
-- (void) followControlPressed: (SYNSocialControl *) socialControl
+- (void) followControlPressed: (SYNSocialButton *) socialControl
 {
     
     [self.delegate performSelector: @selector(followControlPressed:)
@@ -70,7 +70,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 }
 
 
-- (void) shareControlPressed: (SYNSocialControl *) socialControl
+- (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
     [self.delegate performSelector: @selector(shareControlPressed:)
                         withObject: socialControl];

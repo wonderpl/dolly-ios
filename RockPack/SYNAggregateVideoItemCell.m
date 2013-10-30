@@ -7,17 +7,16 @@
 //
 
 #import "SYNAggregateVideoItemCell.h"
-#import "SYNSocialControlFactory.h"
-#import "SYNSocialLikeControl.h"
-#import "SYNSocialAddControl.h"
+#import "SYNSocialLikeButton.h"
+#import "SYNSocialAddButton.h"
 #import "UIImageView+WebCache.h"
 
 
 @interface SYNAggregateVideoItemCell ()
 
-@property (strong, nonatomic) IBOutlet SYNSocialLikeControl *likeControl;
-@property (strong, nonatomic) IBOutlet SYNSocialAddControl *addControl;
-@property (strong, nonatomic) IBOutlet SYNSocialControl *shareControl;
+@property (strong, nonatomic) IBOutlet SYNSocialLikeButton *likeControl;
+@property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
 
 @end
 

@@ -12,7 +12,6 @@
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
-#import "SYNSocialControlFactory.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "UIColor+SYNColor.h"
 #import "UIImage+Tint.h"
