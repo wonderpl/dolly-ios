@@ -349,6 +349,9 @@
     self.closeButton.enabled = NO;
     self.confirmButtom.enabled = NO;
     
+    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+                                                        object: self];
+    
     [self closeAnimation: ^(BOOL finished) {
         
         // will remove itself and will be deallocated since no other reference is held
