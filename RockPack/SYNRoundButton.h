@@ -10,8 +10,4 @@
 
 @interface SYNRoundButton : UIButton
 
-@property (nonatomic, readonly) UIColor *defaultColor;
-@property (nonatomic, readonly) UIColor *highlightedColor;
-@property (nonatomic, readonly) UIColor *selectedColor;
-
 @end

@@ -12,8 +12,13 @@
 
 + (UIColor *) dollyTextDarkGray;
 + (UIColor *) dollyTextMediumGray;
-+ (UIColor *) dollyTextLigthGray;
-+ (UIColor *) dollyTextLigtherGray;
++ (UIColor *) dollyTextLightGray;
++ (UIColor *) dollyTextLighterGray;
+
++ (UIColor *) dollyButtonDefaultColor;
++ (UIColor *) dollyButtonHighlightedColor;
++ (UIColor *) dollyButtonSelectedColor;
++ (UIColor *) dollyButtonDisabledColor;
 
 + (UIColor *) colorWithHex:(NSInteger)hex;
 

@@ -28,7 +28,7 @@
 }
 
 
-+ (UIColor *) dollyTextLigthGray
++ (UIColor *) dollyTextLightGray
 {
     return [UIColor colorWithRed: 152.0f / 255.0f
                            green: 152.0f / 255.0f
@@ -36,12 +36,45 @@
                            alpha: 1.0f];
 }
 
-+ (UIColor *) dollyTextLigtherGray
+
++ (UIColor *) dollyTextLighterGray
 {
     return [UIColor colorWithRed: 188.0f / 255.0f
                            green: 188.0f / 255.0f
                             blue: 188.0f / 255.0f
                            alpha: 1.0f];
+}
+
+
++ (UIColor *) dollyButtonDefaultColor
+{
+    // override in subclass
+    return [UIColor colorWithWhite: (152.0f / 255.0f)
+                             alpha: 1.0f];
+}
+
+
++ (UIColor *) dollyButtonHighlightedColor
+{
+    return [UIColor colorWithWhite: (194.0f / 255.0f)
+                             alpha: 1.0f];
+}
+
+
++ (UIColor *) dollyButtonSelectedColor
+{
+    return [UIColor colorWithRed: (0.0f / 255.0f)
+                           green: (255.0f / 255.0f)
+                            blue: (0.0f / 255.0f)
+                           alpha: 1.0f];
+}
+
+
++ (UIColor *) dollyButtonDisabledColor
+{
+    // override in subclass
+    return [UIColor colorWithWhite: (152.0f / 255.0f)
+                             alpha: 0.5f];
 }
 
 

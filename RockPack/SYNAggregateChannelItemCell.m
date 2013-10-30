@@ -7,12 +7,12 @@
 //
 
 #import "SYNAggregateChannelItemCell.h"
-#import "SYNSocialControlFactory.h"
+#import "SYNRoundButton.h"
 
 @interface SYNAggregateChannelItemCell ()
 
-@property (strong, nonatomic) IBOutlet SYNSocialControl *followControl;
-@property (strong, nonatomic) IBOutlet SYNSocialControl *shareControl;
+@property (strong, nonatomic) IBOutlet SYNRoundButton *followControl;
+@property (strong, nonatomic) IBOutlet SYNRoundButton *shareControl;
 
 @end
 
@@ -20,8 +20,11 @@
 
 - (void) awakeFromNib
 {
-    self.followControl.title = NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell");
-    self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateChannelItemCell");
+    [self.followControl setTitle:  NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell")
+                        forState: UIControlStateNormal];
+    
+    [self.shareControl setTitle:  NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell")
+                        forState: UIControlStateNormal];
 }
 
 
