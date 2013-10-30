@@ -13,25 +13,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="184" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="BASEMENT JAXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HN0-YT-gxN" userLabel="User Name">
-                        <rect key="frame" x="18.5" y="63" width="147" height="24"/>
+                    <label autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" text="BASEMENT JAXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HN0-YT-gxN" userLabel="User Name">
+                        <rect key="frame" x="13" y="69" width="159" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <size key="shadowOffset" width="0.0" height="1"/>
                     </label>
-                    <imageView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dxV-U1-Wu9">
+                    <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxV-U1-Wu9">
                         <rect key="frame" x="68" y="10" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="gOu-Ee-WFY"/>
+                            <constraint firstAttribute="width" constant="48" id="vBo-Cl-AuG"/>
+                        </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0r-3h-zVM" userLabel="follow">
-                        <rect key="frame" x="72" y="85" width="41" height="30"/>
+                        <rect key="frame" x="62" y="90" width="61" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <state key="normal" title="follow">
+                            <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -39,6 +45,13 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="HN0-YT-gxN" secondAttribute="centerX" id="1jJ-z0-kiU"/>
+                <constraint firstItem="dxV-U1-Wu9" firstAttribute="top" secondItem="CEG-kZ-abl" secondAttribute="top" constant="10" id="7li-EV-y5L"/>
+                <constraint firstAttribute="centerX" secondItem="dxV-U1-Wu9" secondAttribute="centerX" id="Pws-wY-3kf"/>
+                <constraint firstAttribute="centerX" secondItem="dxV-U1-Wu9" secondAttribute="centerX" id="WHt-7u-odw"/>
+                <constraint firstItem="HN0-YT-gxN" firstAttribute="top" secondItem="dxV-U1-Wu9" secondAttribute="bottom" constant="11" id="eRx-5A-gtj"/>
+            </constraints>
             <size key="customSize" width="353" height="216"/>
             <connections>
                 <outlet property="followButton" destination="v0r-3h-zVM" id="nXY-Ye-Vuz"/>
