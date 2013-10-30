@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aP1-jF-WwS" customClass="SYNAggregateVideoItemCell">
-            <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
+            <rect key="frame" x="0.0" y="0.0" width="360" height="331"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="331"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JRy-me-y1R">
@@ -31,24 +31,36 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="De9-NT-r06" userLabel="Title">
-                        <rect key="frame" x="20" y="141" width="320" height="42"/>
+                        <rect key="frame" x="20" y="209" width="320" height="42"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AD9-RU-T0l" userLabel="Bottom Controls View">
-                        <rect key="frame" x="56" y="133" width="248" height="44"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-ub-5d4" userLabel="Control - Like" customClass="SYNSocialLikeControl">
+                        <rect key="frame" x="94" y="260" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17f-oW-Eyn" userLabel="Control - Add" customClass="SYNSocialAddControl">
+                        <rect key="frame" x="155" y="260" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2a0-ea-Q5D" userLabel="Control - Share" customClass="SYNSocialControl">
+                        <rect key="frame" x="234" y="260" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <size key="customSize" width="307" height="175"/>
+            <size key="customSize" width="307" height="303"/>
             <connections>
-                <outlet property="bottomControlsView" destination="AD9-RU-T0l" id="MdX-F6-edp"/>
+                <outlet property="addControl" destination="17f-oW-Eyn" id="ARl-Cj-RRL"/>
                 <outlet property="imageView" destination="JRy-me-y1R" id="V1P-bh-Jlu"/>
+                <outlet property="likeControl" destination="DfI-ub-5d4" id="KXv-95-aLU"/>
+                <outlet property="shareControl" destination="2a0-ea-Q5D" id="SKh-MA-ai1"/>
                 <outlet property="timeLabel" destination="xKG-at-dZF" id="FA7-wh-LGt"/>
                 <outlet property="titleLabel" destination="De9-NT-r06" id="IMB-yo-9Iw"/>
             </connections>

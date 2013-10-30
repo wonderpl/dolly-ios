@@ -37,12 +37,30 @@
                         <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="itY-F3-N2F" userLabel="Control - Like" customClass="SYNSocialLikeControl">
+                        <rect key="frame" x="99" y="45" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f51-4M-uJb" userLabel="Control - Add" customClass="SYNSocialAddControl">
+                        <rect key="frame" x="99" y="45" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z9K-pr-Uk0" userLabel="Control - Share" customClass="SYNSocialControl">
+                        <rect key="frame" x="99" y="45" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <size key="customSize" width="307" height="175"/>
             <connections>
+                <outlet property="addControl" destination="f51-4M-uJb" id="CII-Qy-2hK"/>
                 <outlet property="imageView" destination="ZPQ-jB-6Su" id="2xf-ry-0hc"/>
+                <outlet property="likeControl" destination="itY-F3-N2F" id="J6A-qC-5cc"/>
+                <outlet property="shareControl" destination="z9K-pr-Uk0" id="IyH-ho-BHu"/>
                 <outlet property="timeLabel" destination="1bU-ZO-Uzp" id="yiG-Lv-wHt"/>
                 <outlet property="titleLabel" destination="vVW-WR-RU9" id="fqv-O6-igg"/>
             </connections>

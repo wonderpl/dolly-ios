@@ -25,6 +25,8 @@ typedef enum {
 
 + (id) buttonControl;
 
+- (void) commonInit ;
+
 @property (nonatomic, readonly) UIColor *defaultColor;
 @property (nonatomic, readonly) UIColor *highlightedColor;
 @property (nonatomic, readonly) UIColor *selectedColor;

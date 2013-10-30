@@ -47,13 +47,27 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oXP-Dg-dtu" userLabel="Control - Follow" customClass="SYNSocialControl">
+                        <rect key="frame" x="99" y="45" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qWi-6t-eqm" userLabel="Control - Share" customClass="SYNSocialControl">
+                        <rect key="frame" x="99" y="45" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="307" height="175"/>
             <connections>
+                <outlet property="followControl" destination="oXP-Dg-dtu" id="1lb-f2-b6Z"/>
                 <outlet property="followersLabel" destination="lz5-MW-Poc" id="BQC-a7-snx"/>
+                <outlet property="shareControl" destination="qWi-6t-eqm" id="6DJ-IA-Vy5"/>
+                <outlet property="stripView" destination="CF3-lv-t0P" id="5wm-2H-mWZ"/>
+                <outlet property="timeLabel" destination="wE3-8D-gFQ" id="Tth-v4-YbD"/>
                 <outlet property="titleLabel" destination="4V5-I8-f6N" id="dHR-fE-0PP"/>
                 <outlet property="videosLabel" destination="yPw-rY-sDs" id="HLU-mN-9y5"/>
             </connections>

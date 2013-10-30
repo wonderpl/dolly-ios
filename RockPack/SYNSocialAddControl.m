@@ -10,19 +10,15 @@
 
 @implementation SYNSocialAddControl
 
-- (id)initWithFrame:(CGRect)frame
+
+
+- (void) commonInit
 {
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        
-        [button setImage:[UIImage imageNamed:@"IconVideoAddDefault"] forState: UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateSelected];
-        [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateHighlighted];
-        
-        
-    }
-    return self;
+    [super commonInit];
+    
+    [button setImage:[UIImage imageNamed:@"IconVideoAddDefault"] forState: UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateSelected];
+    [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateHighlighted];
 }
 
 -(UIColor*)defaultColor
