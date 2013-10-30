@@ -9,6 +9,7 @@
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNSocialLikeButton.h"
 #import "SYNSocialAddButton.h"
+#import "SYNSocialButton.h"
 #import "UIImageView+WebCache.h"
 
 
