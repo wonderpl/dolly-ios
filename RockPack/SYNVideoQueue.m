@@ -129,6 +129,14 @@
         return;
     }
 
+    for (VideoInstance* currentVideoInstance in self.currentlyCreatingChannel.videoInstances)
+    {
+        if ([currentVideoInstance.uniqueId isEqualToString: videoInstance.uniqueId])
+        {
+            AssertOrLog(@"WARNING: Adding a video that already exists: %@", videoInstance.title);
+            return; // avoid duplicates
+        }
+    }
     
     VideoInstance* copyOfVideoInstance = [VideoInstance instanceFromVideoInstance: videoInstance
                                                         usingManagedObjectContext: self.appDelegate.channelsManagedObjectContext

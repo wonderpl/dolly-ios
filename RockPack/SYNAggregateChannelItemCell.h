@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "SYNSocialControl.h"
+#import "SYNSocialActionsDelegate.h"
 
 @interface SYNAggregateChannelItemCell : UICollectionViewCell
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet UILabel* videosLabel;
 @property (nonatomic, strong) IBOutlet UIView* stripView;
 @property (nonatomic, weak) NSDateComponents* timeAgoComponents;
-@property (nonatomic, weak) id delegate;
+
+@property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
 @end

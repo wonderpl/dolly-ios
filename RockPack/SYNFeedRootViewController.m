@@ -218,7 +218,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                    duration: duration];
     
     // NOTE: WE might not need to reload, just invalidate the layout
-//    [self.feedCollectionView reloadData];
+
     [self.feedCollectionView.collectionViewLayout invalidateLayout];
 }
 
@@ -243,6 +243,7 @@ typedef void(^FeedDataErrorBlock)(void);
     __weak SYNFeedRootViewController *wself = self;
     
     FeedDataErrorBlock errorBlock = ^{
+        
         [wself handleRefreshComplete];
         
         [wself removeEmptyGenreMessage];
@@ -348,6 +349,18 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     
     [self.emptyGenreMessageView removeFromSuperview];
+    
+    /* OPTIONAL
+    __weak SYNFeedRootViewController* wself = self;
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+        wself.emptyGenreMessageView.transform = CGAffineTransformScale( wself.emptyGenreMessageView.transform, 0.8f, 0.8f);
+        wself.emptyGenreMessageView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [wself.emptyGenreMessageView removeFromSuperview];
+    }];
+     */
+    
 }
 
 
@@ -364,8 +377,8 @@ typedef void(^FeedDataErrorBlock)(void);
     self.emptyGenreMessageView = [SYNFeedMessagesView withMessage:NSLocalizedString(messageKey ,nil) andLoader:isLoader];
     
     CGRect messageFrame = self.emptyGenreMessageView.frame;
-    messageFrame.origin.y = ([[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5) - (messageFrame.size.height * 0.5);
-    messageFrame.origin.x = ([[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5) - (messageFrame.size.width * 0.5);
+    messageFrame.origin.x = (self.view.frame.size.width * 0.5) - (messageFrame.size.width * 0.5);
+    messageFrame.origin.y = (self.view.frame.size.height * 0.5) - (messageFrame.size.height * 0.5) - 20.0f;
     
     messageFrame = CGRectIntegral(messageFrame);
     self.emptyGenreMessageView.frame = messageFrame;
@@ -522,13 +535,7 @@ typedef void(^FeedDataErrorBlock)(void);
     return self.feedItemsData.count; // the number of arrays included
 }
 
-- (UIEdgeInsets)collectionView: (UICollectionView *)collectionView
-                        layout: (UICollectionViewLayout*)collectionViewLayout
-        insetForSectionAtIndex: (NSInteger)section
-{
-    
-    return UIEdgeInsetsMake(10.0, 0.0, 40.0, 0.0);
-}
+
 
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
@@ -544,11 +551,15 @@ typedef void(^FeedDataErrorBlock)(void);
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
+    // common types
     
     SYNAggregateCell *cell = nil;
+    
     FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
+    
     ChannelOwner* channelOwner;
     
+    // there are 2 types, video and channel (collection) types
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
@@ -556,26 +567,28 @@ typedef void(^FeedDataErrorBlock)(void);
                                              forIndexPath: indexPath];
         
         
-        NSMutableArray* videosArray = [NSMutableArray array];
+        NSMutableArray* videosArray = @[].mutableCopy;
         
-        VideoInstance* vi;
+        // NOTE: the data containes either an aggragate or a single item, handle both cases here
+        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
             for (FeedItem* childFeedItem in feedItem.feedItems)
             {
                 // they have also the same type (video)
-                vi = (VideoInstance*)((self.feedVideosById)[childFeedItem.resourceId]);
+                VideoInstance* vi = (VideoInstance*)((self.feedVideosById)[childFeedItem.resourceId]);
                 [videosArray addObject:vi];
+                channelOwner = vi.channel.channelOwner; // will get the last (to avoid conditionals) as a heuristic but they all should belong to the same channel
             }
         }
         else
         {
-            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
+            VideoInstance* vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
             [videosArray addObject:vi];
+            channelOwner = vi.channel.channelOwner;
         }
         
         cell.collectionData = videosArray;
-        
         
     }
     else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
@@ -587,20 +600,15 @@ typedef void(^FeedDataErrorBlock)(void);
         
         NSMutableArray* channelsMutArray = [NSMutableArray array];
         
+        // NOTE: the data containes either an aggragate or a single item, handle both cases here
+        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
-            
-            
-            
             for (FeedItem* childFeedItem in feedItem.feedItems)
             {
                 channel = (Channel*)(self.feedChannelsById[childFeedItem.resourceId]);
                 [channelsMutArray addObject:channel];
-                
             }
-            
-            
-            
         }
         else
         {
@@ -819,7 +827,7 @@ typedef void(^FeedDataErrorBlock)(void);
     return selectedFeedItem;
 }
 
-#pragma mark - Cell Actions Delegate
+#pragma mark - Social Actions Delegate
 
 - (void) addControlPressed: (UIControl*) control
 {
@@ -861,7 +869,6 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     }
     
-    
     SYNAggregateCell* cell = [self aggregateCellFromSubview:control];
     if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // only videos can have a like action (currently, remove if changed)
         return;
@@ -892,6 +899,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: ^(id response) {
+                                              
                                               self.togglingInProgress = NO;
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
                                               NSInteger previousStarCount = videoInstance.video.starCountValue;
@@ -921,13 +929,12 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.video.starCountValue = previousStarCount;
                                               }
                                               
-                                              
-                                              
                                               [self.feedCollectionView reloadData];
                                               
                                               control.enabled = YES;
-                                          }
-                                               errorHandler: ^(id error) {
+                                              
+                                          } errorHandler: ^(id error) {
+                                              
                                                    self.togglingInProgress = NO;
                                                    
                                                    DebugLog(@"Could not star video");

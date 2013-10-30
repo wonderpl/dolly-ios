@@ -28,6 +28,7 @@ typedef enum {
 @property (nonatomic, readonly) UIColor *defaultColor;
 @property (nonatomic, readonly) UIColor *highlightedColor;
 @property (nonatomic, readonly) UIColor *selectedColor;
+@property (nonatomic, readonly) UIColor *disabledColor;
 @property (nonatomic, weak) NSString *title;
 
 @end
