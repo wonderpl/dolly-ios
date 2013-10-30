@@ -41,16 +41,25 @@
                         <rect key="frame" x="94" y="260" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="likeControlPressed:" destination="aP1-jF-WwS" eventType="touchUpInside" id="bZG-fR-XFl"/>
+                        </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17f-oW-Eyn" userLabel="Control - Add" customClass="SYNSocialAddControl">
                         <rect key="frame" x="155" y="260" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="addControlPressed:" destination="aP1-jF-WwS" eventType="touchUpInside" id="vQ9-OV-G0P"/>
+                        </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2a0-ea-Q5D" userLabel="Control - Share" customClass="SYNSocialControl">
                         <rect key="frame" x="234" y="260" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="shareControlPressed:" destination="aP1-jF-WwS" eventType="touchUpInside" id="SGf-U9-m6O"/>
+                        </connections>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

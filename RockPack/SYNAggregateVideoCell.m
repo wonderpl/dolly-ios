@@ -178,40 +178,16 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     VideoInstance* videoInstance = self.collectionData[indexPath.item];
     
-    [itemCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
-                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                options: SDWebImageRetryFailed];
     
-    // set time //
-    itemCell.timeAgoComponents = videoInstance.timeAgo;
     
-    // set title //
-    itemCell.titleLabel.text = videoInstance.title;
-    [itemCell.titleLabel sizeToFit];
+    // NOTE: All fields are set through the setVideoInstance setter
+    itemCell.delegate = self;
+    itemCell.videoInstance = videoInstance;
     
     return itemCell;
 }
 
-#pragma mark - Data Retrieval
 
-- (ChannelOwner*) channelOwner
-{
-    VideoInstance* heuristic = self.videoInstanceShowing;
-    if(!heuristic)
-        return nil;
-    
-    return heuristic.channel.channelOwner;
-}
-
-- (VideoInstance*) videoInstanceShowing
-{
-    if(self.collectionData.count == 0)
-        return nil;
-    
-    // TODO: Figure out the correct video instance according to scroll offset
-    
-    return (VideoInstance*)self.collectionData[0];
-}
 
 
 

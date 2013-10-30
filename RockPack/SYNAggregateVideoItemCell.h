@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SYNSocialControl.h"
+#import "VideoInstance.h"
 #import "SYNSocialActionsDelegate.h"
 
 @interface SYNAggregateVideoItemCell : UICollectionViewCell
@@ -17,10 +18,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 
 
-@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 
-// sets the timeLabel text
-@property (nonatomic, weak) NSDateComponents* timeAgoComponents;
-
+// data related
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
+@property (nonatomic, weak) VideoInstance* videoInstance;
 @end

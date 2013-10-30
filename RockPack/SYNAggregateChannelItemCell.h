@@ -10,6 +10,7 @@
 
 #import "SYNSocialControl.h"
 #import "SYNSocialActionsDelegate.h"
+#import "Channel.h"
 
 @interface SYNAggregateChannelItemCell : UICollectionViewCell
 
@@ -18,8 +19,9 @@
 @property (nonatomic, strong) IBOutlet UILabel* followersLabel;
 @property (nonatomic, strong) IBOutlet UILabel* videosLabel;
 @property (nonatomic, strong) IBOutlet UIView* stripView;
-@property (nonatomic, weak) NSDateComponents* timeAgoComponents;
 
+// data related
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
+@property (nonatomic, weak) Channel* channel;
 
 @end

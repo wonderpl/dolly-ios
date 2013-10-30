@@ -38,68 +38,54 @@
     [self.delegate shareControlPressed: sender];
 }
 
-- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
+
+
+
+#pragma mark - Data Related
+
+
+
+
+
+-(void)setChannel:(Channel *)channel
 {
-    if(_delegate)
-    {
-        [self.followControl removeTarget: _delegate
-                                  action: @selector(likeControlPressed:)
-                        forControlEvents: UIControlEventTouchUpInside];
-        
-        [self.shareControl removeTarget: _delegate
-                                 action: @selector(addControlPressed:)
-                       forControlEvents: UIControlEventTouchUpInside];
-        
-    }
+    _channel = channel;
     
-    _delegate = delegate;
     
-    if(!_delegate)
+    self.shareControl.dataItemLinked = _channel;
+    self.followControl.dataItemLinked = _channel;
+    
+    
+    if(!_channel)
         return;
     
-    [self.followControl addTarget: _delegate
-                           action: @selector(likeControlPressed:)
-                 forControlEvents: UIControlEventTouchUpInside];
+    self.titleLabel.text = _channel.title;
     
-    [self.shareControl addTarget: _delegate
-                          action: @selector(addControlPressed:)
-                forControlEvents: UIControlEventTouchUpInside];
+    self.followersLabel.text = [NSString stringWithFormat:@"%lli followers", _channel.subscribersCountValue];
+    self.videosLabel.text = [NSString stringWithFormat:@"%i videos", _channel.videoInstances.count];
+    
+    
+    // set time ago...
+    
+    NSDateComponents* timeAgoComponents = _channel.timeAgo;
+    if (timeAgoComponents.year)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.month)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.day)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.minute)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
+    }
+    
     
 }
-
-
-#pragma mark - Date Components
-
-- (void) setTimeAgoComponents: (NSDateComponents *) timeAgoComponents
-{
-    _timeAgoComponents = timeAgoComponents;
-    
-    if (!_timeAgoComponents)
-    {
-        return;
-    }
-    
-    NSString *finalTimeString;
-    
-    if (_timeAgoComponents.year)
-    {
-        finalTimeString = [NSString stringWithFormat: @"%i year%@ ago", _timeAgoComponents.year, _timeAgoComponents.year == 1 ? @"": @"s"];
-    }
-    else if (_timeAgoComponents.month)
-    {
-        finalTimeString = [NSString stringWithFormat: @"%i month%@ ago", _timeAgoComponents.month, _timeAgoComponents.month == 1 ? @"": @"s"];
-    }
-    else if (_timeAgoComponents.day)
-    {
-        finalTimeString = [NSString stringWithFormat: @"%i day%@ ago", _timeAgoComponents.day, _timeAgoComponents.day == 1 ? @"": @"s"];
-    }
-    else if (_timeAgoComponents.minute)
-    {
-        finalTimeString = [NSString stringWithFormat: @"%i minute%@ ago", _timeAgoComponents.minute, _timeAgoComponents.minute == 1 ? @"": @"s"];
-    }
-    
-    self.timeLabel.text = finalTimeString;
-}
-
 
 @end
