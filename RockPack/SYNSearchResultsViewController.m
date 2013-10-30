@@ -44,8 +44,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 @property (nonatomic, strong) NSArray* videosArray;
 @property (nonatomic, strong) NSArray* usersArray;
 
-// Container View (Used for Positioning)
-@property (nonatomic, strong) IBOutlet UIView* containerView;
 
 @end
 
@@ -121,20 +119,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     self.searchResultsShowing = SearchResultsShowingVideos;
     
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    CGRect containerRect = self.containerView.frame;
-    
-    
-    containerRect.origin.x = (self.view.frame.size.width * 0.5f) - (self.containerView.frame.size.width * 0.5f);
-    containerRect.size.height = self.view.frame.size.height;
-    
-    
-    self.containerView.frame = CGRectIntegral(containerRect);
 }
 
 
