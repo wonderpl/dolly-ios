@@ -560,9 +560,8 @@
     
     SYNExistingCollectionsViewController* existingController = [[SYNExistingCollectionsViewController alloc] initWithViewId:kExistingChannelsViewId];
     
-    [self.masterController addChildViewController:existingController];
+    [self.masterController addOverlayController:existingController];
     
-    [self.masterController.view addSubview:existingController.view];
     
     // animate in //
     
@@ -588,11 +587,6 @@
                          
                          [existingController runAppearAnimation]; // this should animate the cells in, one by one
                          
-                         
-                         if (self.masterController.videoViewerViewController)
-                         {
-                             [self.masterController.videoViewerViewController pauseIfVideoActive];
-                         }
                      }];
 }
 

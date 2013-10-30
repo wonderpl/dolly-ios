@@ -843,11 +843,24 @@ typedef void(^FeedDataErrorBlock)(void);
                                                      action: @"select"
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: nil errorHandler: nil];
+    if(control.selected)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueRemove
+                                                            object: self
+                                                          userInfo: @{@"VideoInstance": videoInstance}];
         
+        control.selected = NO;
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
+                                                            object: self
+                                                          userInfo: @{@"VideoInstance": videoInstance}];
         
-    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
-                                                        object: self
-                                                      userInfo: @{@"VideoInstance": videoInstance}];
+        control.selected = YES;
+    }
+        
+    
     
     
     
