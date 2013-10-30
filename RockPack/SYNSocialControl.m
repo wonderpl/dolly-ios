@@ -9,6 +9,10 @@
 #import "SYNSocialControl.h"
 #import "UIFont+SYNFont.h"
 
+static NSString* kSelected = @"selected";
+static NSString* kHighlighted = @"highlighted";
+static NSString* kEnabled = @"enabled";
+
 @implementation SYNSocialControl
 
 +(id)buttonControl
@@ -40,6 +44,16 @@
         self.backgroundColor = [UIColor clearColor];
         button.backgroundColor = [UIColor whiteColor];
         
+        
+        
+        // == Register Observation == //
+        
+        
+        [button addObserver:self forKeyPath:kHighlighted
+                    options:NSKeyValueObservingOptionNew
+                    context:nil];
+        
+        
         [self addSubview:button];
         
     }
@@ -58,6 +72,22 @@
     [button removeTarget:target action:action forControlEvents:controlEvents];
 }
 
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    
+    BOOL value = (BOOL)[change objectForKey:NSKeyValueChangeNewKey]; // they are all bolleans
+    if ([keyPath isEqual:kHighlighted])
+    {
+        self.highlighted = value;
+    }
+    
+    
+    
+}
 
 
 #pragma mark - UIButton Wrappers
@@ -67,7 +97,6 @@
 -(void)setHighlighted:(BOOL)highlighted
 {
     button.layer.borderColor = [self.highlightedColor CGColor];
-    [button setHighlighted:highlighted];
 }
 
 -(BOOL)isHighlighted
@@ -127,6 +156,19 @@
                            green:(255.0f/255.0f)
                             blue:(0.0f/255.0f)
                            alpha:1.0f];
+}
+
+#pragma mark - Dealloc
+
+-(void)dealloc
+{
+    
+    
+    [button removeObserver:self
+                forKeyPath:kHighlighted];
+    
+    
+    
 }
 
 @end
