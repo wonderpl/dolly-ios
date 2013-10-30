@@ -13,10 +13,12 @@
 #import "SubGenre.h"
 #import "SYNSearchResultsViewController.h"
 #import "SYNDeviceManager.h"
+#import "AppConstants.h"
 #import "SYNDiscoverCategoriesCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAutocompleteTime 0.2
+
 
 static NSString* kCategoryCellIndetifier = @"SYNDiscoverCategoriesCell";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
@@ -93,29 +95,67 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.searchResultsController.view.frame = sResRect;
     }
     
+    // Check for existence of popular category
     
-    // == Load and Display Categories == //
+    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
-    [self fetchCategories];
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
+    
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
+    
+    NSError* error;
+    
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                      error: &error];
+    
+    // probably the database is cold so need to reload everything
+    if(genresFetchedArray.count == 0)
+    {
+        [self createPopular];
+        [self loadCategories];
+    }
+    
+    else
+    {
+        // housekeeping
+        if(genresFetchedArray.count > 1)
+        {
+            for (int i = 1; i < genresFetchedArray.count; i++)
+            {
+                Genre* popularClone = (Genre*)genresFetchedArray[i];
+                [popularClone.managedObjectContext delete:popularClone];
+                
+            }
+        }
+        [self fetchCategories];
+        [self loadCategories];
+    }
+    
     
     
     [self.categoriesCollectionView reloadData];
     
-    // == Since this is method is called once use it to update the categories == //
     
-    [self loadCategories];
+    
     
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void) createPopular
 {
-    [super viewDidAppear:animated];
-    
-    [self.categoriesCollectionView.collectionViewLayout invalidateLayout];
+    NSDictionary* popularGenreData = @{@"id":@"90", @"priority":@(1000), @"name":kPopularGenreName};
     
     
+    Genre* popularGenre = [Genre instanceFromDictionary:popularGenreData
+                              usingManagedObjectContext:appDelegate.mainManagedObjectContext];
     
+    if(!popularGenre)
+        return;
+    
+    [appDelegate saveContext:NO];
 }
+
+
 #pragma mark - Data Retrieval
 
 - (void) fetchCategories
