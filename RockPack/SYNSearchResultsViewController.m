@@ -245,6 +245,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         videoCell.titleLabel.text = vi.title;
         [videoCell.titleLabel sizeToFit];
         
+        // center
+        videoCell.titleLabel.center = CGPointMake(videoCell.frame.size.width * 0.5f, videoCell.titleLabel.center.y);
+        videoCell.titleLabel.frame = CGRectIntegral(videoCell.titleLabel.frame);
+        
         [videoCell.iconImageView setImageWithURL: [NSURL URLWithString: vi.thumbnailURL] // calls vi.video.thumbnailURL
                                 placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                          options: SDWebImageRetryFailed];

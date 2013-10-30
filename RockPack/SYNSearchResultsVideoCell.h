@@ -16,6 +16,5 @@
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 
-@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 
 @end
