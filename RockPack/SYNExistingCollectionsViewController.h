@@ -8,7 +8,7 @@
 
 #import "SYNAbstractViewController.h"
 
-@interface SYNExistingChannelsViewController : SYNAbstractViewController
+@interface SYNExistingCollectionsViewController : SYNAbstractViewController
 
 - (void) prepareForAppearAnimation;
 - (void) runAppearAnimation;

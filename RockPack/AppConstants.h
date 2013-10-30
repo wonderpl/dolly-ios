@@ -46,7 +46,7 @@
 #define kProfileViewId              @"ME"
 #define kSearchViewId               @"SEARCH"
 #define kDiscoverViewId             @"DISCOVER"
-#define kExistingChannelsViewId     @"CHANNELS"
+#define kExistingChannelsViewId     @"EXISTING CHANNELS"
 #define kChannelDetailsViewId       @"CHANNEL DETAILS"
 #define kSideNavigationViewId       @"SIDE NAVIGATION"
 #define kSubscribersListViewId      @"SUBSCRIBERS"

@@ -17,7 +17,7 @@
 #import "SYNChannelDetailViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingChannelsViewController.h"
+#import "SYNExistingCollectionsViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
