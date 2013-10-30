@@ -11,8 +11,8 @@
                 <outlet property="autopostTitleLabel" destination="30" id="31"/>
                 <outlet property="autopostView" destination="27" id="28"/>
                 <outlet property="autopostYesButton" destination="20" id="24"/>
-                <outlet property="channelThumbnailCollectionView" destination="6" id="8"/>
                 <outlet property="closeButton" destination="11" id="12"/>
+                <outlet property="collectionsCollectionView" destination="6" id="cSo-FW-ARq"/>
                 <outlet property="confirmButtom" destination="4" id="10"/>
                 <outlet property="createNewTextField" destination="Oht-ga-lNT" id="IYx-p6-gJ3"/>
                 <outlet property="titleLabel" destination="18" id="19"/>

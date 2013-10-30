@@ -57,6 +57,11 @@
 }
 */
 
+-(void)setView:(UIView *)view
+{
+    [super setView:view];
+    [self viewDidLoad];
+}
 
 
 - (void) viewDidLoad

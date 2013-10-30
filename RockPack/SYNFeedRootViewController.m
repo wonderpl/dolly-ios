@@ -843,8 +843,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                      action: @"select"
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: nil errorHandler: nil];
-        
-        
+    
     [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
                                                         object: self
                                                       userInfo: @{@"VideoInstance": videoInstance}];

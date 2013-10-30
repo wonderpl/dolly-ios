@@ -64,4 +64,6 @@ typedef enum NotificationMessageType : NSInteger {
 - (void) removeVideoOverlayController;
 
 
+-(void) addOverlayController: (SYNAbstractViewController*) abstractViewController;
+
 @end
