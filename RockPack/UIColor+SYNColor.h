@@ -20,6 +20,11 @@
 + (UIColor *) dollyButtonSelectedColor;
 + (UIColor *) dollyButtonDisabledColor;
 
++ (UIColor *) dollyAddButtonDefaultColor;
++ (UIColor *) dollyAddButtonHighlightedColor;
++ (UIColor *) dollyAddButtonSelectedColor;
++ (UIColor *) dollyAddButtonDisabledColor;
+
 + (UIColor *) colorWithHex:(NSInteger)hex;
 
 @end
