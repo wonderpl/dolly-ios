@@ -1393,7 +1393,6 @@
 		BEB31366181AB81600FAF98A /* IconVideoAddDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */; };
 		BEB31367181AB81600FAF98A /* IconVideoAddHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */; };
 		BEB31368181AB81600FAF98A /* IconVideoAddHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */; };
-		BEB31370181ABF5900FAF98A /* SYNSocialLikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3136F181ABF5900FAF98A /* SYNSocialLikeButton.m */; };
 		BEB31374181AC6DB00FAF98A /* SYNSocialAddButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */; };
 		BEB31382181ECAEA00FAF98A /* SYNSearchResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB31381181ECAE900FAF98A /* SYNSearchResultsCell.m */; };
 		BEB31385181FC5C500FAF98A /* SYNAggregateChannelCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB31384181FC5C500FAF98A /* SYNAggregateChannelCell~iphone.xib */; };
@@ -3069,8 +3068,6 @@
 		BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoAddDefault@2x.png"; path = "Assets/Images/IconVideoAddDefault@2x.png"; sourceTree = "<group>"; };
 		BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoAddHighlighted.png; path = Assets/Images/IconVideoAddHighlighted.png; sourceTree = "<group>"; };
 		BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoAddHighlighted@2x.png"; path = "Assets/Images/IconVideoAddHighlighted@2x.png"; sourceTree = "<group>"; };
-		BEB3136E181ABF5900FAF98A /* SYNSocialLikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialLikeButton.h; sourceTree = "<group>"; };
-		BEB3136F181ABF5900FAF98A /* SYNSocialLikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialLikeButton.m; sourceTree = "<group>"; };
 		BEB31372181AC6DB00FAF98A /* SYNSocialAddButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialAddButton.h; sourceTree = "<group>"; };
 		BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialAddButton.m; sourceTree = "<group>"; };
 		BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNSocialActionsDelegate.h; sourceTree = "<group>"; };
@@ -6179,8 +6176,6 @@
 		BEB31371181AC40100FAF98A /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				BEB3136E181ABF5900FAF98A /* SYNSocialLikeButton.h */,
-				BEB3136F181ABF5900FAF98A /* SYNSocialLikeButton.m */,
 				BEB31372181AC6DB00FAF98A /* SYNSocialAddButton.h */,
 				BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */,
 			);
@@ -7722,7 +7717,6 @@
 				011A162E16EF5EC5008CF25E /* GKImageCropOverlayView.m in Sources */,
 				011A162F16EF5EC5008CF25E /* GKImageCropView.m in Sources */,
 				011A163016EF5EC5008CF25E /* GKImageCropViewController.m in Sources */,
-				BEB31370181ABF5900FAF98A /* SYNSocialLikeButton.m in Sources */,
 				011A163116EF5EC5008CF25E /* GKImagePicker.m in Sources */,
 				011A163216EF5EC5008CF25E /* GKResizeableCropOverlayView.m in Sources */,
 				BE270B7F16EDE0E800CDDA6D /* SYNLoginViewController.m in Sources */,

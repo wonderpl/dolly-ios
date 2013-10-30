@@ -53,6 +53,8 @@
 - (void) setTitle: (NSString *) title
          andCount: (NSInteger) count
 {
+    // Two different ways of formatting
+#if NOT_CENTERED
     NSString *countString = @" ";
     
     if (count > 0)
@@ -62,6 +64,11 @@
     
     [self setTitle:  [NSString stringWithFormat: @"\n%@\n%@", title, countString]
                        forState: UIControlStateNormal];
+    
+#else
+    [self setTitle:  [NSString stringWithFormat: @"%@\n%d", title, count]
+          forState: UIControlStateNormal];
+#endif
 }
 
 @end

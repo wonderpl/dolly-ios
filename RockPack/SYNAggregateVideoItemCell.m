@@ -9,13 +9,12 @@
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNSocialAddButton.h"
 #import "SYNSocialButton.h"
-#import "SYNSocialLikeButton.h"
 #import "UIImageView+WebCache.h"
 
 
 @interface SYNAggregateVideoItemCell ()
 
-@property (strong, nonatomic) IBOutlet SYNSocialLikeButton *likeControl;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *likeControl;
 @property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
 
@@ -26,9 +25,10 @@
 
 - (void) awakeFromNib
 {
-    self.likeControl.title = NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell");
-    // no title for the add button
-    self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateChannelItemCell");
+    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
+                      andCount: 0];
+
+    self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateVideoItemCell");
 }
 
 

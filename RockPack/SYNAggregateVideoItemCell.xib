@@ -44,7 +44,7 @@
                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-ub-5d4" userLabel="Control - Like" customClass="SYNSocialLikeButton">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-ub-5d4" userLabel="Control - Like" customClass="SYNSocialButton">
                         <rect key="frame" x="85" y="276" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
