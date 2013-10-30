@@ -11,11 +11,7 @@
 #import "SYNSocialActionsDelegate.h"
 
 @interface SYNAggregateVideoItemCell : UICollectionViewCell
-{
-    SYNSocialControl* likeControl;
-    SYNSocialControl* addControl;
-    SYNSocialControl* shareControl;
-}
+
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;

@@ -47,6 +47,9 @@ static NSString *kEnabled = @"enabled";
 
 - (void) commonInit
 {
+    if(button)
+        return; // prevent from it being called twice
+    
     // == Set Style == //
     button = [UIButton buttonWithType: UIButtonTypeCustom];
     button.frame = self.bounds;

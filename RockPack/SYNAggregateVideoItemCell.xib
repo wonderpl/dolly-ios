@@ -37,8 +37,18 @@
                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AD9-RU-T0l" userLabel="Bottom Controls View">
-                        <rect key="frame" x="56" y="133" width="248" height="44"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-ub-5d4" userLabel="Control - Like" customClass="SYNSocialLikeControl">
+                        <rect key="frame" x="94" y="133" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17f-oW-Eyn" userLabel="Control - Add" customClass="SYNSocialAddControl">
+                        <rect key="frame" x="155" y="133" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2a0-ea-Q5D" userLabel="Control - Share" customClass="SYNSocialControl">
+                        <rect key="frame" x="234" y="133" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -47,8 +57,10 @@
             </view>
             <size key="customSize" width="307" height="175"/>
             <connections>
-                <outlet property="bottomControlsView" destination="AD9-RU-T0l" id="MdX-F6-edp"/>
+                <outlet property="addControl" destination="17f-oW-Eyn" id="ARl-Cj-RRL"/>
                 <outlet property="imageView" destination="JRy-me-y1R" id="V1P-bh-Jlu"/>
+                <outlet property="likeControl" destination="DfI-ub-5d4" id="KXv-95-aLU"/>
+                <outlet property="shareControl" destination="2a0-ea-Q5D" id="SKh-MA-ai1"/>
                 <outlet property="timeLabel" destination="xKG-at-dZF" id="FA7-wh-LGt"/>
                 <outlet property="titleLabel" destination="De9-NT-r06" id="IMB-yo-9Iw"/>
             </connections>

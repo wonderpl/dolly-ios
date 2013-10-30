@@ -36,6 +36,35 @@
     [self.delegate shareControlPressed: sender];
 }
 
+- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
+{
+    if(_delegate)
+    {
+        [self.followControl removeTarget: _delegate
+                                  action: @selector(likeControlPressed:)
+                        forControlEvents: UIControlEventTouchUpInside];
+        
+        [self.shareControl removeTarget: _delegate
+                                 action: @selector(addControlPressed:)
+                       forControlEvents: UIControlEventTouchUpInside];
+        
+    }
+    
+    _delegate = delegate;
+    
+    if(!_delegate)
+        return;
+    
+    [self.followControl addTarget: _delegate
+                           action: @selector(likeControlPressed:)
+                 forControlEvents: UIControlEventTouchUpInside];
+    
+    [self.shareControl addTarget: _delegate
+                          action: @selector(addControlPressed:)
+                forControlEvents: UIControlEventTouchUpInside];
+    
+}
+
 
 #pragma mark - Date Components
 

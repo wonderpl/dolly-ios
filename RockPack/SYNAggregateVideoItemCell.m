@@ -8,47 +8,39 @@
 
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNSocialControlFactory.h"
+#import "SYNSocialLikeControl.h"
+#import "SYNSocialAddControl.h"
+
+@interface SYNAggregateVideoItemCell ()
+
+@property (strong, nonatomic) IBOutlet SYNSocialLikeControl *likeControl;
+@property (strong, nonatomic) IBOutlet SYNSocialAddControl *addControl;
+@property (strong, nonatomic) IBOutlet SYNSocialControl *shareControl;
+
+@end
 
 @implementation SYNAggregateVideoItemCell
 
 -(void)awakeFromNib
 {
-    // == Create Buttons == //
-    
-    CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
-    
-    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                        forTitle: @"like"
-                                                                     andPosition: CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
-    
-    [self.bottomControlsView addSubview: likeControl];
-    
-    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeAdd
-                                                                       forTitle: nil
-                                                                    andPosition: CGPointMake(middlePoint.x, middlePoint.y)];
-    
-    [self.bottomControlsView addSubview: addControl];
-    
-    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                         forTitle: @"share"
-                                                                      andPosition: CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
-    
-    [self.bottomControlsView addSubview:shareControl];
+    self.likeControl.title = NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell");
+    // no title for the add button
+    self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateChannelItemCell");
 }
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
     if(_delegate)
     {
-        [likeControl removeTarget: _delegate
+        [self.likeControl removeTarget: _delegate
                            action: @selector(likeControlPressed:)
                  forControlEvents: UIControlEventTouchUpInside];
         
-        [addControl removeTarget: _delegate
+        [self.addControl removeTarget: _delegate
                           action: @selector(addControlPressed:)
                 forControlEvents: UIControlEventTouchUpInside];
         
-        [shareControl removeTarget: _delegate
+        [self.shareControl removeTarget: _delegate
                             action: @selector(shareControlPressed:)
                   forControlEvents: UIControlEventTouchUpInside];
     }
@@ -58,15 +50,15 @@
     if(!_delegate)
         return;
     
-    [likeControl addTarget: _delegate
+    [self.likeControl addTarget: _delegate
                     action: @selector(likeControlPressed:)
           forControlEvents: UIControlEventTouchUpInside];
     
-    [addControl addTarget: _delegate
+    [self.addControl addTarget: _delegate
                    action: @selector(addControlPressed:)
          forControlEvents: UIControlEventTouchUpInside];
     
-    [shareControl addTarget: _delegate
+    [self.shareControl addTarget: _delegate
                      action: @selector(shareControlPressed:)
            forControlEvents: UIControlEventTouchUpInside];
 }
