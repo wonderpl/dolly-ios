@@ -6,21 +6,17 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSocialLikeControl.h"
+#import "SYNSocialLikeButton.h"
 
-@implementation SYNSocialLikeControl
+@implementation SYNSocialLikeButton
 
--(id)initWithFrame:(CGRect)frame
+- (void) awakeFromNib
 {
-    if (self = [super initWithFrame:frame])
-    {
-        
-        numberLabel = [[UILabel alloc] init];
-        numberLabel.textColor = button.titleLabel.textColor;
-        numberLabel.font = button.titleLabel.font;
-        
-    }
-    return self;
+    [super awakeFromNib];
+    
+    numberLabel = [[UILabel alloc] init];
+    numberLabel.textColor = self.titleLabel.textColor;
+    numberLabel.font = self.titleLabel.font;
 }
 
 #pragma mark - Set Number of Likes

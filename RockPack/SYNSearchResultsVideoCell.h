@@ -8,14 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SYNSearchResultsCell.h"
-#import "SYNSocialControl.h"
 
 @interface SYNSearchResultsVideoCell : SYNSearchResultsCell
-{
-    SYNSocialControl* likeControl;
-    SYNSocialControl* addControl;
-    SYNSocialControl* shareControl;
-}
 
 @property (nonatomic, strong) IBOutlet UIImageView* overlayImageView;
 @property (nonatomic, strong) IBOutlet UIImageView* iconImageView;

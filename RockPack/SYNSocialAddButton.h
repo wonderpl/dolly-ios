@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSocialControl.h"
+#import "SYNSocialButton.h"
 
-@interface SYNSocialAddControl : SYNSocialControl
+@interface SYNSocialAddButton : SYNSocialButton
 
 @end

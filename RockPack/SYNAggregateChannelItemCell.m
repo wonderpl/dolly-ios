@@ -7,12 +7,12 @@
 //
 
 #import "SYNAggregateChannelItemCell.h"
-#import "SYNRoundButton.h"
+#import "SYNSocialButton.h"
 
 @interface SYNAggregateChannelItemCell ()
 
-@property (strong, nonatomic) IBOutlet SYNRoundButton *followControl;
-@property (strong, nonatomic) IBOutlet SYNRoundButton *shareControl;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *followControl;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
 
 @end
 

@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSocialAddControl.h"
+#import "SYNSocialAddButton.h"
 
-@implementation SYNSocialAddControl
+@implementation SYNSocialAddButton
 
 
 
-- (void) commonInit
+- (void) awakeFromNib
 {
-    [super commonInit];
+    [super awakeFromNib];
     
-    [button setImage:[UIImage imageNamed:@"IconVideoAddDefault"] forState: UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateSelected];
-    [button setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateHighlighted];
+    [self setImage:[UIImage imageNamed:@"IconVideoAddDefault"] forState: UIControlStateNormal];
+    [self setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateSelected];
+    [self setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateHighlighted];
 }
 
 -(UIColor*)defaultColor

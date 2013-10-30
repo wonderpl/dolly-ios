@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SYNSocialControl.h"
 #import "SYNSocialActionsDelegate.h"
 #import "Channel.h"
 

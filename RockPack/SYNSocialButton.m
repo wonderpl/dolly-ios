@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNRoundButton.h"
+#import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
 
-@implementation SYNRoundButton
+@implementation SYNSocialButton
 
 
 - (void) awakeFromNib

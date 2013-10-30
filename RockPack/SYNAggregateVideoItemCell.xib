@@ -37,7 +37,7 @@
                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-ub-5d4" userLabel="Control - Like" customClass="SYNSocialLikeControl">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-ub-5d4" userLabel="Control - Like" customClass="SYNSocialLikeButton">
                         <rect key="frame" x="94" y="260" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -45,7 +45,7 @@
                             <action selector="likeControlPressed:" destination="aP1-jF-WwS" eventType="touchUpInside" id="bZG-fR-XFl"/>
                         </connections>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17f-oW-Eyn" userLabel="Control - Add" customClass="SYNSocialAddControl">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17f-oW-Eyn" userLabel="Control - Add" customClass="SYNSocialAddButton">
                         <rect key="frame" x="155" y="260" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -53,7 +53,7 @@
                             <action selector="addControlPressed:" destination="aP1-jF-WwS" eventType="touchUpInside" id="vQ9-OV-G0P"/>
                         </connections>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2a0-ea-Q5D" userLabel="Control - Share" customClass="SYNSocialControl">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2a0-ea-Q5D" userLabel="Control - Share" customClass="SYNSocialButton">
                         <rect key="frame" x="234" y="260" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNRoundButton : UIButton
+@interface SYNSocialButton : UIButton
+
+@property (nonatomic, strong) NSString* title;
 
 - (void) setTitle: (NSString *) title;
 
 - (void) setTitle: (NSString *) title
          andCount: (NSInteger) count;
+
+@property (nonatomic, weak) id dataItemLinked;
 
 @end
