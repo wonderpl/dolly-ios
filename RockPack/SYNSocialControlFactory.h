@@ -12,6 +12,9 @@
 @interface SYNSocialControlFactory : NSObject
 
 + (instancetype) defaultFactory;
--(SYNSocialControl*)createControlForType:(SocialControlType)type forTitle:(NSString*)title andPosition:(CGPoint)position;
+
+- (SYNSocialControl *) createControlForType: (SocialControlType) type
+                                   forTitle: (NSString *) title
+                                andPosition: (CGPoint) position;
 
 @end
