@@ -324,8 +324,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
             
-            self.videosTabButton.backgroundColor = [UIColor dollyTextLigthGray];
-            self.usersTabButton.backgroundColor = [UIColor dollyTextLigtherGray];
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLightGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLighterGray];
             
             break;
             
@@ -337,8 +337,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
             
-            self.videosTabButton.backgroundColor = [UIColor dollyTextLigtherGray];
-            self.usersTabButton.backgroundColor = [UIColor dollyTextLigthGray];
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLighterGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLightGray];
             
             break;
     }

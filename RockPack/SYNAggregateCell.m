@@ -29,7 +29,7 @@
     
     // == Attributes == //
     self.darkTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextDarkGray]};
-    self.lightTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLigthGray]};
+    self.lightTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLightGray]};
     
     // == Round off the image == //
     self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;

@@ -8,6 +8,7 @@
 
 #import "SYNRoundButton.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
 @implementation SYNRoundButton
 
@@ -40,33 +41,22 @@
     self.titleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
     
     self.layer.cornerRadius = self.frame.size.height * 0.5;
-    self.layer.borderColor = [self.defaultColor CGColor];
+    self.layer.borderColor = [UIColor.dollyButtonDefaultColor CGColor];
     self.layer.borderWidth = 1.0f;
     
-    [self setTitleColor: self.defaultColor
-                 forState: UIControlStateNormal];
+    [self setTitleColor: UIColor.dollyButtonDefaultColor
+               forState: UIControlStateNormal];
     
-    [self setTitleColor: self.highlightedColor
-                 forState: UIControlStateHighlighted];
+    [self setTitleColor: UIColor.dollyButtonHighlightedColor
+               forState: UIControlStateHighlighted];
     
-    [self setTitleColor: self.selectedColor
-                 forState: UIControlStateSelected];
+    [self setTitleColor: UIColor.dollyButtonSelectedColor
+               forState: UIControlStateSelected];
     
-    self.backgroundColor = [UIColor redColor];
-
+    [self setTitleColor: UIColor.dollyButtonDisabledColor
+               forState: UIControlStateDisabled];
+    
+    self.backgroundColor = [UIColor whiteColor];
 }
-
-//- (void) setTitle: (NSString *) title
-//{
-//    [button setTitle: title
-//            forState: UIControlStateNormal];
-//    
-//    [button setTitle: title
-//            forState: UIControlStateSelected];
-//    
-//    [button setTitle: title
-//            forState: UIControlStateHighlighted];
-//}
-
 
 @end
