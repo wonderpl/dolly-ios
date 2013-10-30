@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aP1-jF-WwS" customClass="SYNAggregateVideoItemCell">
-            <rect key="frame" x="0.0" y="0.0" width="360" height="319"/>
+            <rect key="frame" x="0.0" y="0.0" width="360" height="339"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="360" height="319"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="339"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRy-me-y1R">
@@ -39,7 +39,7 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="360" translatesAutoresizingMaskIntoConstraints="NO" id="De9-NT-r06" userLabel="Title">
                         <rect key="frame" x="0.0" y="203" width="360" height="47"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="47" id="C1l-T8-cIp"/>
                         </constraints>
@@ -86,18 +86,18 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.67956012489999995" green="0.04504957423" blue="0.042170427740000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ChM-8B-oy3" firstAttribute="centerY" secondItem="JRy-me-y1R" secondAttribute="centerY" id="0GS-OU-rtb"/>
                 <constraint firstAttribute="centerX" secondItem="DfI-ub-5d4" secondAttribute="centerX" constant="75" id="6yx-Li-NFH"/>
-                <constraint firstAttribute="bottom" secondItem="17f-oW-Eyn" secondAttribute="bottom" constant="10" id="9Oz-MF-FUz"/>
+                <constraint firstAttribute="bottom" secondItem="17f-oW-Eyn" secondAttribute="bottom" constant="30" id="9Oz-MF-FUz"/>
                 <constraint firstItem="De9-NT-r06" firstAttribute="top" secondItem="ChM-8B-oy3" secondAttribute="bottom" id="BaH-II-9Sd"/>
                 <constraint firstItem="ChM-8B-oy3" firstAttribute="width" secondItem="JRy-me-y1R" secondAttribute="width" id="Dxs-Ep-yiS"/>
                 <constraint firstAttribute="trailing" secondItem="JRy-me-y1R" secondAttribute="trailing" id="GSs-vD-tgg"/>
                 <constraint firstItem="De9-NT-r06" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="HSJ-eu-cGl"/>
                 <constraint firstItem="ChM-8B-oy3" firstAttribute="centerX" secondItem="JRy-me-y1R" secondAttribute="centerX" id="JPK-WF-YJs"/>
-                <constraint firstAttribute="bottom" secondItem="2a0-ea-Q5D" secondAttribute="bottom" constant="10" id="KZc-jj-mAc"/>
-                <constraint firstAttribute="bottom" secondItem="DfI-ub-5d4" secondAttribute="bottom" constant="10" id="NKe-tZ-W3S"/>
+                <constraint firstAttribute="bottom" secondItem="2a0-ea-Q5D" secondAttribute="bottom" constant="30" id="KZc-jj-mAc"/>
+                <constraint firstAttribute="bottom" secondItem="DfI-ub-5d4" secondAttribute="bottom" constant="30" id="NKe-tZ-W3S"/>
                 <constraint firstItem="xKG-at-dZF" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="SHS-e9-szk"/>
                 <constraint firstItem="JRy-me-y1R" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="T8G-qL-hgG"/>
                 <constraint firstAttribute="trailing" secondItem="xKG-at-dZF" secondAttribute="trailing" id="WCZ-pK-Z0Y"/>
