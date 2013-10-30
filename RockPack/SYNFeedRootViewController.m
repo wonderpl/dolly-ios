@@ -349,6 +349,18 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     
     [self.emptyGenreMessageView removeFromSuperview];
+    
+    /* OPTIONAL
+    __weak SYNFeedRootViewController* wself = self;
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+        wself.emptyGenreMessageView.transform = CGAffineTransformScale( wself.emptyGenreMessageView.transform, 0.8f, 0.8f);
+        wself.emptyGenreMessageView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [wself.emptyGenreMessageView removeFromSuperview];
+    }];
+     */
+    
 }
 
 
@@ -815,7 +827,7 @@ typedef void(^FeedDataErrorBlock)(void);
     return selectedFeedItem;
 }
 
-#pragma mark - Cell Actions Delegate
+#pragma mark - Social Actions Delegate
 
 - (void) addControlPressed: (UIControl*) control
 {
@@ -857,7 +869,6 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     }
     
-    
     SYNAggregateCell* cell = [self aggregateCellFromSubview:control];
     if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // only videos can have a like action (currently, remove if changed)
         return;
@@ -888,6 +899,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: ^(id response) {
+                                              
                                               self.togglingInProgress = NO;
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
                                               NSInteger previousStarCount = videoInstance.video.starCountValue;
@@ -917,13 +929,12 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.video.starCountValue = previousStarCount;
                                               }
                                               
-                                              
-                                              
                                               [self.feedCollectionView reloadData];
                                               
                                               control.enabled = YES;
-                                          }
-                                               errorHandler: ^(id error) {
+                                              
+                                          } errorHandler: ^(id error) {
+                                              
                                                    self.togglingInProgress = NO;
                                                    
                                                    DebugLog(@"Could not star video");

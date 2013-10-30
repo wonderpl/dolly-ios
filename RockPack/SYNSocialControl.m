@@ -104,6 +104,7 @@ static NSString *kEnabled = @"enabled";
 - (void) setHighlighted: (BOOL) highlighted
 {
     button.layer.borderColor = [self.highlightedColor CGColor];
+    // NOTE: Do NOT set the button to highlighted because it is already so by itself and will lead to infinite reccurence
 }
 
 
@@ -115,6 +116,15 @@ static NSString *kEnabled = @"enabled";
 
 - (void) setSelected: (BOOL) selected
 {
+    if(selected)
+    {
+        button.layer.borderColor = [self.selectedColor CGColor];
+    }
+    else
+    {
+        button.layer.borderColor = [self.defaultColor CGColor];
+    }
+    
     [button setSelected: selected];
 }
 
@@ -127,6 +137,16 @@ static NSString *kEnabled = @"enabled";
 
 - (void) setEnabled: (BOOL) enabled
 {
+    
+    if(enabled)
+    {
+        button.layer.borderColor = [self.defaultColor CGColor];
+    }
+    else
+    {
+        button.layer.borderColor = [self.disabledColor CGColor];
+    }
+    
     [button setEnabled: enabled];
 }
 
@@ -183,6 +203,12 @@ static NSString *kEnabled = @"enabled";
                            alpha: 1.0f];
 }
 
+- (UIColor *) disabledColor
+{
+    // override in subclass
+    return [UIColor colorWithWhite: (152.0f / 255.0f)
+                             alpha: 0.5f];
+}
 
 #pragma mark - Dealloc
 

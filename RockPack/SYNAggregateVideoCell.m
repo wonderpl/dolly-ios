@@ -155,6 +155,10 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.actionMessageLabel.attributedText = attributedCompleteString;
     
     self.channelNameLabel.text = heuristicChannel.title;
+    
+    // handle like button state
+    
+    likeControl.selected = firstVideoInstance.starredByUserValue;
 }
 
 
