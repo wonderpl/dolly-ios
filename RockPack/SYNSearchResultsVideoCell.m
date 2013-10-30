@@ -6,16 +6,15 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSearchResultsVideoCell.h"
-#import "UIFont+SYNFont.h"
 
-#import "SYNSocialButton.h"
+#import "SYNSearchResultsVideoCell.h"
 #import "SYNSocialAddButton.h"
-#import "SYNSocialLikeButton.h"
+#import "SYNSocialButton.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNSearchResultsVideoCell ()
 
-@property (strong, nonatomic) IBOutlet SYNSocialLikeButton *likeControl;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *likeControl;
 @property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
 
@@ -27,7 +26,9 @@
 {
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
     
-    self.likeControl.title = NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell");
+    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateChannelItemCell")
+                      andCount: 0];
+    
     // no title for the add button
     self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateChannelItemCell");
     
