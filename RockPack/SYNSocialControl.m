@@ -21,43 +21,61 @@ static NSString *kEnabled = @"enabled";
 }
 
 
-- (id) initWithFrame: (CGRect) frame
+- (instancetype) initWithFrame: (CGRect) frame
 {
     self = [super initWithFrame: frame];
     
     if (self)
     {
-        // == Set Style == //
-        button = [UIButton buttonWithType: UIButtonTypeCustom];
-        button.frame = frame;
-        
-        button.titleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
-        
-        button.layer.cornerRadius = button.frame.size.height * 0.5;
-        button.layer.borderColor = [self.defaultColor CGColor];
-        button.layer.borderWidth = 1.0f;
-        
-        [button setTitleColor: self.defaultColor
-                     forState: UIControlStateNormal];
-        [button setTitleColor: self.highlightedColor
-                     forState: UIControlStateHighlighted];
-        [button setTitleColor: self.selectedColor
-                     forState: UIControlStateSelected];
-        
-        self.backgroundColor = [UIColor clearColor];
-        button.backgroundColor = [UIColor whiteColor];
-
-        // == Register Observation == //
-        [button addObserver: self
-                 forKeyPath: kHighlighted
-                    options: NSKeyValueObservingOptionNew
-                    context: nil];
-        
-        
-        [self addSubview: button];
+        [self commonInit];
     }
     
     return self;
+}
+
+
+- (instancetype) initWithCoder: (NSCoder *) coder
+{
+    if ((self = [super initWithCoder: coder]))
+    {
+        [self commonInit];
+    }
+    
+    return self;
+}
+
+
+- (void) commonInit
+{
+    // == Set Style == //
+    button = [UIButton buttonWithType: UIButtonTypeCustom];
+    button.frame = self.bounds;
+    
+    button.titleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
+    
+    button.layer.cornerRadius = button.frame.size.height * 0.5;
+    button.layer.borderColor = [self.defaultColor CGColor];
+    button.layer.borderWidth = 1.0f;
+    
+    [button setTitleColor: self.defaultColor
+                 forState: UIControlStateNormal];
+    
+    [button setTitleColor: self.highlightedColor
+                 forState: UIControlStateHighlighted];
+    
+    [button setTitleColor: self.selectedColor
+                 forState: UIControlStateSelected];
+    
+    self.backgroundColor = [UIColor clearColor];
+    button.backgroundColor = [UIColor whiteColor];
+    
+    // == Register Observation == //
+    [button addObserver: self
+             forKeyPath: kHighlighted
+                options: NSKeyValueObservingOptionNew
+                context: nil];
+    
+    [self addSubview: button];
 }
 
 
@@ -66,9 +84,9 @@ static NSString *kEnabled = @"enabled";
 - (void) addTarget: (id) target action: (SEL) action
   forControlEvents: (UIControlEvents) controlEvents
 {
-    [button	   addTarget: target
-                  action: action
-        forControlEvents: controlEvents];
+    [button	addTarget: target
+               action: action
+     forControlEvents: controlEvents];
 }
 
 

@@ -11,19 +11,12 @@
 #import "SYNSocialControl.h"
 
 @interface SYNAggregateChannelItemCell : UICollectionViewCell
-{
-    SYNSocialControl* followControl;
-    SYNSocialControl* shareControl;
-    NSDateComponents* _timeAgoComponents;
-}
+
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* followersLabel;
 @property (nonatomic, strong) IBOutlet UILabel* videosLabel;
-
 @property (nonatomic, strong) IBOutlet UIView* stripView;
-
-// sets the timeLabel text
 @property (nonatomic, weak) NSDateComponents* timeAgoComponents;
 @property (nonatomic, weak) id delegate;
 
