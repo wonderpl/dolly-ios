@@ -10,4 +10,9 @@
 
 @interface SYNRoundButton : UIButton
 
+- (void) setTitle: (NSString *) title;
+
+- (void) setTitle: (NSString *) title
+         andCount: (NSInteger) count;
+
 @end

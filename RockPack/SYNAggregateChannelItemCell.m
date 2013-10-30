@@ -20,11 +20,10 @@
 
 - (void) awakeFromNib
 {
-    [self.followControl setTitle:  NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell")
-                        forState: UIControlStateNormal];
+    [self.followControl setTitle: NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell")
+                        andCount: 666];
     
-    [self.shareControl setTitle:  NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell")
-                        forState: UIControlStateNormal];
+    self.shareControl.title = NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell");
 }
 
 

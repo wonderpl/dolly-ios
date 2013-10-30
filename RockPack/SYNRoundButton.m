@@ -12,33 +12,16 @@
 
 @implementation SYNRoundButton
 
-- (instancetype) initWithFrame: (CGRect) frame
+
+- (void) awakeFromNib
 {
-    self = [super initWithFrame: frame];
-    
-    if (self)
-    {
-        [self commonInit];
-    }
-    
-    return self;
-}
-
-
-- (instancetype) initWithCoder: (NSCoder *) coder
-{
-    if ((self = [super initWithCoder: coder]))
-    {
-        [self commonInit];
-    }
-    
-    return self;
-}
-
-
-- (void) commonInit
-{
+    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.titleLabel.numberOfLines = 0;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
+    
+    // Little hack to ensure custom font is correctly 
+    self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 2.0, 0.0, 0.0);
     
     self.layer.cornerRadius = self.frame.size.height * 0.5;
     self.layer.borderColor = [UIColor.dollyButtonDefaultColor CGColor];
@@ -57,6 +40,28 @@
                forState: UIControlStateDisabled];
     
     self.backgroundColor = [UIColor whiteColor];
+}
+
+
+- (void) setTitle: (NSString *) title
+{
+    [self setTitle: title
+          forState: UIControlStateNormal];
+}
+
+
+- (void) setTitle: (NSString *) title
+         andCount: (NSInteger) count
+{
+    NSString *countString = @" ";
+    
+    if (count > 0)
+    {
+        countString = [NSString stringWithFormat: @"%d", count];
+    }
+    
+    [self setTitle:  [NSString stringWithFormat: @"\n%@\n%@", title, countString]
+                       forState: UIControlStateNormal];
 }
 
 @end
