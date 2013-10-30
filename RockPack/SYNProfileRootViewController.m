@@ -1097,9 +1097,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
     NSLog(@"moreButtonTapped");
     
-    self.moreButton.frame;
-    
-    
 }
 
 

@@ -78,6 +78,40 @@
 }
 
 
++ (UIColor *) dollyAddButtonDefaultColor
+{
+    return [UIColor colorWithRed: (224.0f / 255.0f)
+                           green: (92.0f / 255.0f)
+                            blue: (72.0f / 255.0f)
+                           alpha: 1.0f];
+}
+
+
++ (UIColor *) dollyAddButtonHighlightedColor
+{
+    return [UIColor colorWithRed: (224.0f / 255.0f)
+                           green: (92.0f / 255.0f)
+                            blue: (72.0f / 255.0f)
+                           alpha: 1.0f];
+}
+
+
++ (UIColor *) dollyAddButtonSelectedColor
+{
+    return [UIColor colorWithRed: (224.0f / 255.0f)
+                           green: (92.0f / 255.0f)
+                            blue: (72.0f / 255.0f)
+                           alpha: 1.0f];
+}
+
+
++ (UIColor *) dollyAddButtonDisabledColor
+{
+    // override in subclass
+    return [UIColor colorWithWhite: (152.0f / 255.0f)
+                             alpha: 0.5f];
+}
+
 + (UIColor *) colorWithHex: (NSInteger) hex
 {
     return [UIColor colorWithRed: ((float) ((hex & 0xFF0000) >> 16)) / 255.0
@@ -85,6 +119,8 @@
                             blue: ((float) (hex & 0xFF)) / 255.0
                            alpha: 1.0];
 }
+
+
 
 
 @end
