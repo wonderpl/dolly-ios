@@ -62,17 +62,18 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 
 // NOTE: will be called back from the inner cell and the message should be passed to the feed controller acting as THIS cell's delegate
 
-- (void) followControlPressed: (id) control
+- (void) followControlPressed: (SYNSocialControl *) socialControl
 {
+    
     [self.delegate performSelector: @selector(followControlPressed:)
-                        withObject: self];
+                        withObject: socialControl];
 }
 
 
-- (void) shareControlPressed: (id) control
+- (void) shareControlPressed: (SYNSocialControl *) socialControl
 {
     [self.delegate performSelector: @selector(shareControlPressed:)
-                        withObject: self];
+                        withObject: socialControl];
 }
 
 - (void) setCollectionData:(NSArray *)collectionData
@@ -118,42 +119,14 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     Channel *channel = (Channel *) self.collectionData[indexPath.item];
     
-    itemCell.titleLabel.text = channel.title;
-    
-    itemCell.followersLabel.text = [NSString stringWithFormat:@"%lli followers", channel.subscribersCountValue];
-    itemCell.videosLabel.text = [NSString stringWithFormat:@"%i videos", channel.videoInstances.count];
-    
-    itemCell.timeAgoComponents = channel.timeAgo;
-    
+    // NOTE: All fields are set through the setChannel setter
     itemCell.delegate = self;
+    itemCell.channel = channel;
     
     return itemCell;
 }
 
-#pragma mark - Data Retrieval
 
-- (ChannelOwner *) channelOwner
-{
-    Channel *heuristic = self.channelShowing;
-    
-    if (!heuristic)
-    {
-        return nil;
-    }
-    
-    return heuristic.channelOwner;
-}
-
-
-- (Channel *) channelShowing
-{
-    if (self.collectionData.count == 0)
-    {
-        return nil;
-    }
-    
-    return (Channel *) self.collectionData[0];
-}
 
 
 

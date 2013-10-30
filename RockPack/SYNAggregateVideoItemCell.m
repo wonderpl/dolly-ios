@@ -10,6 +10,8 @@
 #import "SYNSocialControlFactory.h"
 #import "SYNSocialLikeControl.h"
 #import "SYNSocialAddControl.h"
+#import "UIImageView+WebCache.h"
+
 
 @interface SYNAggregateVideoItemCell ()
 
@@ -28,58 +30,51 @@
     self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateChannelItemCell");
 }
 
-- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
+- (IBAction) likeControlPressed: (id) sender
 {
-    if(_delegate)
-    {
-        [self.likeControl removeTarget: _delegate
-                           action: @selector(likeControlPressed:)
-                 forControlEvents: UIControlEventTouchUpInside];
-        
-        [self.addControl removeTarget: _delegate
-                          action: @selector(addControlPressed:)
-                forControlEvents: UIControlEventTouchUpInside];
-        
-        [self.shareControl removeTarget: _delegate
-                            action: @selector(shareControlPressed:)
-                  forControlEvents: UIControlEventTouchUpInside];
-    }
-    
-    _delegate = delegate;
-    
-    if(!_delegate)
-        return;
-    
-    [self.likeControl addTarget: _delegate
-                    action: @selector(likeControlPressed:)
-          forControlEvents: UIControlEventTouchUpInside];
-    
-    [self.addControl addTarget: _delegate
-                   action: @selector(addControlPressed:)
-         forControlEvents: UIControlEventTouchUpInside];
-    
-    [self.shareControl addTarget: _delegate
-                     action: @selector(shareControlPressed:)
-           forControlEvents: UIControlEventTouchUpInside];
+    [self.delegate followControlPressed: sender];
 }
 
--(void)setTimeAgoComponents:(NSDateComponents *)timeAgoComponents
+- (IBAction) addControlPressed: (id) sender
 {
-    _timeAgoComponents = timeAgoComponents;
-    if(!_timeAgoComponents)
+    [self.delegate shareControlPressed: sender];
+}
+
+- (IBAction) shareControlPressed: (id) sender
+{
+    [self.delegate shareControlPressed: sender];
+}
+
+- (void) setVideoInstance:(VideoInstance *)videoInstance
+{
+    _videoInstance = videoInstance;
+    
+    self.shareControl.dataItemLinked = _videoInstance;
+    self.addControl.dataItemLinked = _videoInstance;
+    self.likeControl.dataItemLinked = _videoInstance;
+    
+    if(!_videoInstance)
         return;
     
-    NSString* finalTimeString;
-    if(_timeAgoComponents.year)
-        finalTimeString = [NSString stringWithFormat:@"%i year%@ ago", _timeAgoComponents.year, _timeAgoComponents.year == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.month)
-        finalTimeString = [NSString stringWithFormat:@"%i month%@ ago", _timeAgoComponents.month, _timeAgoComponents.month == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.day)
-        finalTimeString = [NSString stringWithFormat:@"%i day%@ ago", _timeAgoComponents.day, _timeAgoComponents.day == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.minute)
-        finalTimeString = [NSString stringWithFormat:@"%i minute%@ ago", _timeAgoComponents.minute, _timeAgoComponents.minute == 1 ? @"" : @"s"];
- 
-    self.timeLabel.text = finalTimeString;
+    [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
+                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                options: SDWebImageRetryFailed];
+    
+    NSDateComponents* timeAgoComponents = videoInstance.timeAgo;
+    if(timeAgoComponents.year)
+        self.timeLabel.text = [NSString stringWithFormat:@"%i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"" : @"s"];
+    else if(timeAgoComponents.month)
+        self.timeLabel.text = [NSString stringWithFormat:@"%i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"" : @"s"];
+    else if(timeAgoComponents.day)
+        self.timeLabel.text = [NSString stringWithFormat:@"%i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"" : @"s"];
+    else if(timeAgoComponents.minute)
+        self.timeLabel.text = [NSString stringWithFormat:@"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"" : @"s"];
+    
+    
+    
+    self.titleLabel.text = videoInstance.title;
+    [self.titleLabel sizeToFit];
 }
+
 
 @end

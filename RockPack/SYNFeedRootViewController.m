@@ -829,16 +829,14 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Social Actions Delegate
 
-- (void) addControlPressed: (UIControl*) control
+- (void) addControlPressed: (SYNSocialControl*) socialControl
 {
     
-    SYNAggregateCell* cell = [self aggregateCellFromSubview: control];
-    if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // sanity check
-        return;
     
-    VideoInstance *videoInstance = ((SYNAggregateVideoCell*)cell).videoInstanceShowing;
-    if (!videoInstance)
-        return;
+    if(![socialControl.dataItemLinked isKindOfClass:[VideoInstance class]])
+        return; // only relates to video instances
+    
+    VideoInstance* videoInstance = socialControl.dataItemLinked;
         
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
@@ -861,21 +859,24 @@ typedef void(^FeedDataErrorBlock)(void);
     
 }
 
-// only relates to videos
-- (void) likeControlPressed: (UIControl*) control
+- (void) followControlPressed: (SYNSocialControl *) socialControl
+{
+    
+    
+    
+}
+- (void) likeControlPressed: (SYNSocialControl*) socialControl
 {
     if (self.togglingInProgress)
     {
         return;
     }
     
-    SYNAggregateCell* cell = [self aggregateCellFromSubview:control];
-    if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // only videos can have a like action (currently, remove if changed)
-        return;
+    if(![socialControl.dataItemLinked isKindOfClass:[VideoInstance class]])
+        return; // only relates to video instances
     
-    VideoInstance *videoInstance = ((SYNAggregateVideoCell*)cell).videoInstanceShowing;
-    if (!videoInstance)
-        return;
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
+   
     
     // Track
     
@@ -887,9 +888,9 @@ typedef void(^FeedDataErrorBlock)(void);
                                                             value: nil] build]];
     
     
-    BOOL didStar = (control.selected == NO);
+    BOOL didStar = (socialControl.selected == NO);
     
-    control.enabled = NO;
+    socialControl.enabled = NO;
     
     self.togglingInProgress = YES;
     
@@ -909,7 +910,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.starredByUserValue = YES;
                                                   videoInstance.video.starCountValue += 1;
                                                   
-                                                  control.selected = YES;
+                                                  socialControl.selected = YES;
                                                   
                                                   [videoInstance addStarrersObject: appDelegate.currentUser];
                                               }
@@ -919,7 +920,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.starredByUserValue = NO;
                                                   videoInstance.video.starCountValue -= 1;
                                                   
-                                                  control.selected = NO;
+                                                  socialControl.selected = NO;
                                               }
                                               
                                               NSError* error;
@@ -931,7 +932,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                               
                                               [self.feedCollectionView reloadData];
                                               
-                                              control.enabled = YES;
+                                              socialControl.enabled = YES;
                                               
                                           } errorHandler: ^(id error) {
                                               
@@ -939,12 +940,12 @@ typedef void(^FeedDataErrorBlock)(void);
                                                    
                                                    DebugLog(@"Could not star video");
                                                    
-                                                   control.enabled = YES;
+                                                   socialControl.enabled = YES;
                                                }];
 }
 
 
--(void)shareControlPressed:(UIControl*) control
+-(void)shareControlPressed:(SYNSocialControl*) socialControl
 {
     
 }

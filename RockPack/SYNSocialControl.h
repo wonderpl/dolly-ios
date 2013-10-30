@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+
 typedef enum {
     SocialControlTypeDefault = 0,
     SocialControlTypeLike = 1,
@@ -32,5 +33,7 @@ typedef enum {
 @property (nonatomic, readonly) UIColor *selectedColor;
 @property (nonatomic, readonly) UIColor *disabledColor;
 @property (nonatomic, weak) NSString *title;
+
+@property (nonatomic, weak) id dataItemLinked;
 
 @end

@@ -16,7 +16,6 @@
 
 
 @property (nonatomic, strong) IBOutlet UILabel* channelNameLabel;
-@property (nonatomic, readonly) VideoInstance* videoInstanceShowing;
 
 
 @end

@@ -16,7 +16,7 @@
 @interface SYNAggregateCell : UICollectionViewCell <NSObject, UICollectionViewDataSource, SYNSocialActionsDelegate>
 {
     NSArray* _collectionData;
-    __weak id<SYNSocialActionsDelegate> _delegate;
+    
 }
 
 @property (nonatomic, strong) NSArray* collectionData;
@@ -37,6 +37,8 @@
 @property (nonatomic, strong) NSDictionary *darkTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
+
+
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
 @end
