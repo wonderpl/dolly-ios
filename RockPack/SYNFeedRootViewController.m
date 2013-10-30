@@ -543,6 +543,8 @@ typedef void(^FeedDataErrorBlock)(void);
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
+    
+    
     SYNAggregateCell *cell = nil;
     FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
     ChannelOwner* channelOwner;
@@ -846,8 +848,9 @@ typedef void(^FeedDataErrorBlock)(void);
     [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
                                                         object: self
                                                       userInfo: @{@"VideoInstance": videoInstance}];
-        
-        
+    
+    
+    
     
 }
 

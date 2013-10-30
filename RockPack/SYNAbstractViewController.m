@@ -352,7 +352,7 @@
 
 - (NSString*) description
 {
-    return [NSString stringWithFormat: @"SYNAbstractViewController '%@'", viewId];
+    return [NSString stringWithFormat: @"SYNAbstractViewController of type '%@' and viewId '%@'", NSStringFromClass([self class]), viewId];
 }
 
 

@@ -16,7 +16,7 @@
 #import "SYNChannelMidCell.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingChannelsViewController.h"
+#import "SYNExistingCollectionsViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
@@ -26,7 +26,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface SYNExistingChannelsViewController ()
+@interface SYNExistingCollectionsViewController ()
 {
     BOOL hideCells;
 }
@@ -47,7 +47,7 @@
 @end
 
 
-@implementation SYNExistingChannelsViewController
+@implementation SYNExistingCollectionsViewController
 
 - (void) viewDidLoad
 {
@@ -145,7 +145,7 @@
         return;
     
     ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
-    __weak SYNExistingChannelsViewController *wself = self;
+    __weak SYNExistingCollectionsViewController *wself = self;
     __weak SYNAppDelegate *wAppDelegate = appDelegate;
     BOOL isYesButton = (sender == self.autopostYesButton);
     
