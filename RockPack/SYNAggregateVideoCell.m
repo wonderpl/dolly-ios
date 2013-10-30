@@ -153,7 +153,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     else
     {
         correctSize.width = 360.0f;
-        correctSize.height = 203.0f;
+        correctSize.height = 319.0f;
     }
     
     return correctSize;

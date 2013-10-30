@@ -39,35 +39,28 @@
 }
 
 
-
-
 #pragma mark - Data Related
 
-
-
-
-
--(void)setChannel:(Channel *)channel
+- (void) setChannel: (Channel *) channel
 {
     _channel = channel;
-    
     
     self.shareControl.dataItemLinked = _channel;
     self.followControl.dataItemLinked = _channel;
     
-    
-    if(!_channel)
+    if (!_channel)
+    {
         return;
+    }
     
     self.titleLabel.text = _channel.title;
     
-    self.followersLabel.text = [NSString stringWithFormat:@"%lli followers", _channel.subscribersCountValue];
-    self.videosLabel.text = [NSString stringWithFormat:@"%i videos", _channel.videoInstances.count];
-    
+    self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
+    self.videosLabel.text = [NSString stringWithFormat: @"%i videos", _channel.videoInstances.count];
     
     // set time ago...
+    NSDateComponents *timeAgoComponents = _channel.timeAgo;
     
-    NSDateComponents* timeAgoComponents = _channel.timeAgo;
     if (timeAgoComponents.year)
     {
         self.timeLabel.text = [NSString stringWithFormat: @"%i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
@@ -84,8 +77,6 @@
     {
         self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
     }
-    
-    
 }
 
 @end

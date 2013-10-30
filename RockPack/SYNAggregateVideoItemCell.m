@@ -73,7 +73,7 @@
     
     
     self.titleLabel.text = videoInstance.title;
-    [self.titleLabel sizeToFit];
+//    [self.titleLabel sizeToFit];
 }
 
 
