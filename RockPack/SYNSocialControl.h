@@ -19,16 +19,15 @@ typedef enum {
 
 @interface SYNSocialControl : UIControl
 {
-    @protected UIButton* button;
-    
+@protected
+    UIButton *button;
 }
 
-+(id)buttonControl;
++ (id) buttonControl;
 
-@property (nonatomic, readonly) UIColor* defaultColor;
-@property (nonatomic, readonly) UIColor* highlightedColor;
-@property (nonatomic, readonly) UIColor* selectedColor;
-
-@property (nonatomic, weak) NSString* title;
+@property (nonatomic, readonly) UIColor *defaultColor;
+@property (nonatomic, readonly) UIColor *highlightedColor;
+@property (nonatomic, readonly) UIColor *selectedColor;
+@property (nonatomic, weak) NSString *title;
 
 @end
