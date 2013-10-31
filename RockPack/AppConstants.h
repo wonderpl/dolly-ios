@@ -97,6 +97,7 @@ typedef enum : NSInteger {
 #define kAPICompleteChannels        @"/ws/complete/channels/"
 #define kAPICompleteUsers           @"/ws/complete/channels/"
 
+
 #define kAPISearchVideos            @"/ws/search/videos/"
 #define kAPISearchChannels          @"/ws/search/channels/"
 #define kAPISearchUsers             @"/ws/search/users/"
@@ -150,7 +151,7 @@ typedef enum : NSInteger {
 #define kAPIGetCoverArt             @"/ws/cover_art/"                           /* GET */
 
 // Something
-#define kAPIPopularVideos           @"ws/videos/"
+#define kAPIVideos                  @"/ws/videos/"                              /* GET */
 #define kAPIPopularChannels         @"ws/channels/"
 #define kAPIRecommendedChannels     @"/ws/USERID/channel_recommendations/"
 #define kAPICategories              @"ws/categories/"
@@ -379,16 +380,12 @@ typedef enum : NSInteger {
 #define kVideoQueueRemove           @"kVideoQueueRemove"
 #define kVideoQueueClear            @"kVideoQueueClear"
 
+static NSString* kPopularGenreName = @"popular";
 
-#define kScrollerPageChanged        @"kScrollerPageChanged"
 
 
-#define kNoteCreateButtonRequested       @"kNoteCreateButtonRequested"
 
-#define kSearchTyped      @"kSearchTyped"
-#define kSearchTerm      @"kSearchTerm"
 
-#define kCurrentPage        @"kCurrentPage"
 
 // UserDefaults
 #define kUserDefaultsNotFirstInstall @"UD_Not_First_Install"

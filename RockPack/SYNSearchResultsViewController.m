@@ -32,6 +32,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 @property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
 
+@property (nonatomic, strong) IBOutlet UIView* loadingPanelView;
+@property (nonatomic, strong) IBOutlet UILabel* loadingPanelLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loadingPanelLoader;
+
 @property (nonatomic) SearchResultsShowing searchResultsShowing;
 
 @property (nonatomic, strong) NSString *currentSearchTerm;
@@ -39,6 +43,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 // completion blocks
 @property (nonatomic, copy) SearchResultCompleteBlock videoSearchCompleteBlock;
 @property (nonatomic, copy) SearchResultCompleteBlock userSearchCompleteBlock;
+
 
 // Data Arrays
 @property (nonatomic, strong) NSArray *videosArray;
@@ -76,6 +81,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     SYNSearchResultsViewController *wself = self;
     
     self.videoSearchCompleteBlock = ^(int count) {
+        
         NSError *error;
         NSArray *fetchedObjects = [wself getSearchEntitiesByName: kVideoInstance
                                                        withError: &error];
@@ -87,6 +93,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         }
         
         wself.videosArray = [NSArray arrayWithArray: fetchedObjects];
+        
+        wself.loadingPanelView.hidden = NO;
         
         [wself.videosCollectionView reloadData];
     };
@@ -105,8 +113,12 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
         
+        wself.loadingPanelView.hidden = NO;
+        
         [wself.usersCollectionView reloadData];
     };
+    
+    self.loadingPanelView.hidden = YES;
     
     // Set Initial
     self.searchResultsShowing = SearchResultsShowingVideos;
@@ -115,10 +127,24 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 #pragma mark - Load Data
 
-- (void) searchForString: (NSString *) newSearchTerm
+- (void) searchForGenre: (NSString *) genreId
 {
-    // == Don't repeat a search == //
-    if ([_currentSearchTerm isEqualToString: newSearchTerm])
+    [self clearSearchEntities];
+    
+    self.loadingPanelView.hidden = NO;
+    [self.loadingPanelLoader startAnimating];
+    
+    self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId:genreId
+                                                          completionHandler:self.videoSearchCompleteBlock];
+    
+    self.userSearchOperation = [appDelegate.networkEngine usersForGenreId:genreId
+                                                         completionHandler:self.userSearchCompleteBlock];
+}
+
+- (void) searchForTerm: (NSString *) newSearchTerm
+{
+    
+    if ([_currentSearchTerm isEqualToString: newSearchTerm]) // == Don't repeat a search == //
     {
         return;
     }
@@ -130,35 +156,44 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         return;
     }
     
-    // == Clear search context for new search == //
-    BOOL success = [appDelegate.searchRegistry
-                    clearImportContextFromEntityName: @"VideoInstance"];
-    
-    if (!success)
+    if(![self clearSearchEntities])
     {
-        DebugLog(@"Could not clean VideoInstances from search context");
+        return;
     }
     
-    success = [appDelegate.searchRegistry
-               clearImportContextFromEntityName: @"ChannelOwner"];
-    
-    if (!success)
-    {
-        DebugLog(@"Could not clean ChannelOwner from search context");
-    }
+    self.loadingPanelView.hidden = NO;
+    [self.loadingPanelLoader startAnimating];
     
     // == Perform Search == //
     
-    self.videoSearchOperation = [appDelegate.networkEngine
-                                 searchVideosForTerm: _currentSearchTerm
-                                 inRange: self.dataRequestRange
-                                 onComplete: self.videoSearchCompleteBlock];
+    self.videoSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
+                                                                       inRange: self.dataRequestRange
+                                                                    onComplete: self.videoSearchCompleteBlock];
     
-    self.userSearchOperation = [appDelegate.networkEngine
-                                searchUsersForTerm: _currentSearchTerm
-                                andRange: self.dataRequestRange
-                                byAppending: NO
-                                onComplete: self.userSearchCompleteBlock];
+    self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
+                                                                    andRange: self.dataRequestRange
+                                                                 byAppending: NO
+                                                                  onComplete: self.userSearchCompleteBlock];
+}
+
+- (BOOL) clearSearchEntities
+{
+    BOOL success;
+    
+    if (!(success = [appDelegate.searchRegistry clearImportContextFromEntityName: @"VideoInstance"]))
+        DebugLog(@"Could not clean VideoInstances from search context");
+    
+    // Call me an amateur but I feel proud of this syntax
+    if (!(success &= [appDelegate.searchRegistry clearImportContextFromEntityName: @"ChannelOwner"]))
+        DebugLog(@"Could not clean ChannelOwner from search context");
+    
+    self.videosArray = @[];
+    self.usersArray = @[];
+    
+    [self.videosCollectionView reloadData];
+    [self.usersCollectionView reloadData];
+    
+    return success;
 }
 
 

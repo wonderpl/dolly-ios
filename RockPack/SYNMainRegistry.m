@@ -146,7 +146,7 @@
     [categoriesFetchRequest setEntity: [NSEntityDescription entityForName: @"Genre"
                                                    inManagedObjectContext: appDelegate.mainManagedObjectContext]];
     
-    
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name != %@", kPopularGenreName];
     // must not fetch SubGenres
     categoriesFetchRequest.includesSubentities = NO;
     
@@ -199,12 +199,10 @@
     }
         
     
-   
-    
     for (Genre* category in existingCategories)
     {
         if(category.markedForDeletionValue)
-            [category.managedObjectContext delete:category];
+            [category.managedObjectContext deleteObject:category];
     }
     
     

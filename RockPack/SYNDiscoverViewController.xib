@@ -48,7 +48,7 @@
                             </connections>
                         </collectionView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="s2u-9J-KS3" userLabel="Autosuggestion Table View">
-                            <rect key="frame" x="0.0" y="53" width="256" height="495"/>
+                            <rect key="frame" x="0.0" y="53" width="256" height="641"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -86,7 +86,8 @@
                                                                                                          params: params
                                                                                                      httpMethod: @"GET"];
     
-    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary){
+    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
+        
         BOOL registryResultOk = [self.registry
                                  registerCoverArtFromDictionary: dictionary
                                  forUserUpload: NO];
@@ -97,7 +98,9 @@
         }
         
         completionBlock(dictionary);
+        
     } errorHandler: ^(NSError *error) {
+        
         if (error.code >= 500 && error.code < 600)
         {
             [self showErrorPopUpForError: error];
@@ -117,6 +120,7 @@
                                                                                                          params: [self getLocaleParam]];
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
+        
         BOOL registryResultOk = [self.registry
                                  registerCoverArtFromDictionary: dictionary
                                  forUserUpload: NO];
@@ -292,6 +296,123 @@
 
 #pragma mark - Search
 
+- (MKNetworkOperation *) usersForGenreId: (NSString *) genreId
+                       completionHandler: (MKNKSearchSuccessBlock) completionBlock;
+{
+
+    
+    NSDictionary *parameters = [self getLocaleParamWithParams:@{@"category" : genreId}];
+    
+    
+    SYNNetworkOperationJsonObject *networkOperation =
+    (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPISearchUsers
+                                                       params: parameters];
+    networkOperation.shouldNotCacheResponse = YES;
+    
+    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
+        
+        if (!dictionary)
+            return;
+        
+        [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            
+            BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary
+                                                                         byAppending: NO];
+            
+            return registryResultOk;
+            
+        } completionBlock: ^(BOOL registryResultOk) {
+            
+            int itemsCount = 0;
+            
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
+            
+            if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
+            {
+                itemsCount = totalNumber.intValue;
+            }
+            
+            if (!registryResultOk)
+            {
+                return;
+            }
+            
+            completionBlock(itemsCount);
+        }];
+    } errorHandler: ^(NSError *error) {
+        
+        DebugLog(@"Update Videos Screens Request Failed");
+        
+        if (error.code >= 500 && error.code < 600)
+        {
+            [self showErrorPopUpForError: error];
+        }
+    }];
+    
+    [self enqueueOperation: networkOperation];
+    
+    return networkOperation;
+}
+
+- (MKNetworkOperation *) videosForGenreId: (NSString *) genreId
+                        completionHandler: (MKNKSearchSuccessBlock) completionBlock
+{
+    
+    if(!genreId) return nil;
+    
+    NSDictionary *parameters = [self getLocaleParamWithParams:@{@"category" : genreId}];
+    
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIVideos
+                                                                                                         params: parameters];
+    networkOperation.shouldNotCacheResponse = YES;
+    
+    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
+        
+        if (!dictionary)
+            return;
+        
+        
+        [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            
+            BOOL registryResultOk = [self.searchRegistry registerVideoInstancesFromDictionary: dictionary];
+            
+            return registryResultOk;
+            
+        } completionBlock: ^(BOOL registryResultOk) {
+            
+            int itemsCount = 0;
+            
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"videos"][@"total"];
+            
+            if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
+            {
+                itemsCount = totalNumber.intValue;
+            }
+            if (!registryResultOk)
+            {
+                return;
+            }
+            
+            completionBlock(itemsCount);
+        }];
+        
+    } errorHandler: ^(NSError *error) {
+        
+        DebugLog(@"Update Videos Screens Request Failed");
+        
+        if (error.code >= 500 && error.code < 600)
+        {
+            [self showErrorPopUpForError: error];
+        }
+    }];
+    
+    [self enqueueOperation: networkOperation];
+    
+    return networkOperation;
+    
+    
+}
 
 - (MKNetworkOperation *) searchVideosForTerm: (NSString *) searchTerm
                                      inRange: (NSRange) range
