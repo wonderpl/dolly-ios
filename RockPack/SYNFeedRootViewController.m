@@ -616,7 +616,6 @@ typedef void(^FeedDataErrorBlock)(void);
         
         channelOwner = channel.channelOwner;
         
-        cell.titleLabel.text = channel.title;
         
     }
     

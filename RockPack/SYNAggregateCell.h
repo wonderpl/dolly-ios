@@ -30,9 +30,6 @@
 // main labels from top to bottom
 @property (nonatomic, strong) IBOutlet UILabel *actionMessageLabel;
 
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
-@property (nonatomic, strong) IBOutlet UIView* backgroundView;
-@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
 
 @property (nonatomic, strong) NSDictionary *darkTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
