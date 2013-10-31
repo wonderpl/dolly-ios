@@ -32,6 +32,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 @property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
 
+@property (nonatomic, strong) IBOutlet UIView* loadingPanelView;
+@property (nonatomic, strong) IBOutlet UILabel* loadingPanelLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loadingPanelLoader;
+
 @property (nonatomic) SearchResultsShowing searchResultsShowing;
 
 @property (nonatomic, strong) NSString *currentSearchTerm;
@@ -90,6 +94,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.videosArray = [NSArray arrayWithArray: fetchedObjects];
         
+        wself.loadingPanelView.hidden = NO;
+        
         [wself.videosCollectionView reloadData];
     };
     
@@ -107,8 +113,12 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
         
+        wself.loadingPanelView.hidden = NO;
+        
         [wself.usersCollectionView reloadData];
     };
+    
+    self.loadingPanelView.hidden = YES;
     
     // Set Initial
     self.searchResultsShowing = SearchResultsShowingVideos;
@@ -119,6 +129,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 - (void) searchForGenre: (NSString *) genreId
 {
+    [self clearSearchEntities];
+    
+    self.loadingPanelView.hidden = NO;
+    [self.loadingPanelLoader startAnimating];
+    
     self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId:genreId
                                                           completionHandler:self.videoSearchCompleteBlock];
     
@@ -146,6 +161,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         return;
     }
     
+    self.loadingPanelView.hidden = NO;
+    [self.loadingPanelLoader startAnimating];
+    
     // == Perform Search == //
     
     self.videoSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
@@ -168,6 +186,12 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     // Call me an amateur but I feel proud of this syntax
     if (!(success &= [appDelegate.searchRegistry clearImportContextFromEntityName: @"ChannelOwner"]))
         DebugLog(@"Could not clean ChannelOwner from search context");
+    
+    self.videosArray = @[];
+    self.usersArray = @[];
+    
+    [self.videosCollectionView reloadData];
+    [self.usersCollectionView reloadData];
     
     return success;
 }

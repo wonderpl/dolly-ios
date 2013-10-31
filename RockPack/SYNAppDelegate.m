@@ -783,6 +783,7 @@
     if ([self.mainManagedObjectContext hasChanges])
     {
         [self.mainManagedObjectContext performBlock: ^{
+            
             NSError *error = nil;
             
             if (![self.mainManagedObjectContext save: &error])
@@ -790,8 +791,8 @@
                 AssertOrLog(@"Error saving Main moc: %@\n%@", [error localizedDescription], [error userInfo]);
             }
             
-            void (^ savePrivate) (void) = ^
-            {
+            void (^ savePrivate) (void) = ^{
+                
                 NSError *error = nil;
                 
                 if (![self.privateManagedObjectContext save: &error])
