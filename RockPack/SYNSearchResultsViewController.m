@@ -50,6 +50,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 @property (nonatomic, strong) NSArray *usersArray;
 
 
+
+
 @end
 
 
@@ -63,6 +65,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     self.videosArray = @[];
     self.usersArray = @[];
+    
     
     self.view.autoresizesSubviews = YES;
     
@@ -120,6 +123,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     };
     
     self.loadingPanelView.hidden = YES;
+    
+    
     
     // Set Initial
     self.searchResultsShowing = SearchResultsShowingVideos;
@@ -181,11 +186,12 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 {
     BOOL success;
     
-    if (!(success = [appDelegate.searchRegistry clearImportContextFromEntityName: @"VideoInstance"]))
+    
+    if (!(success = [appDelegate.searchRegistry clearImportContextFromEntityName: kVideoInstance]))
         DebugLog(@"Could not clean VideoInstances from search context");
     
     // Call me an amateur but I feel proud of this syntax
-    if (!(success &= [appDelegate.searchRegistry clearImportContextFromEntityName: @"ChannelOwner"]))
+    if (!(success &= [appDelegate.searchRegistry clearImportContextFromEntityName: kChannelOwner]))
         DebugLog(@"Could not clean ChannelOwner from search context");
     
     self.videosArray = @[];
