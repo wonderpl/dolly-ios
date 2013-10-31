@@ -116,7 +116,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     if (IS_IPHONE)
     {
         correctSize.width = 248.0f;
-        correctSize.height = 139.0f;
+        correctSize.height = 257.0f;
     }
     else
     {
