@@ -25,6 +25,8 @@
 
 // Entities
 
+#define kGenre                      @"Genre"
+#define kSubGenre                   @"SubGenre"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
 #define kVideo                      @"Video"
