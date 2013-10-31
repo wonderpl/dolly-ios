@@ -285,8 +285,7 @@
                                                       // the channel that got updated was a copy inside the ChannelDetails, so we must find the original and update it.
                                                       for (Channel * subscription in appDelegate.currentUser.subscriptions)
                                                       {
-                                                          if ([subscription.uniqueId
-                                                               isEqualToString: channelFromId.uniqueId])
+                                                          if ([subscription.uniqueId isEqualToString: channelFromId.uniqueId])
                                                           {
                                                               [appDelegate.currentUser removeSubscriptionsObject: subscription];
                                                               

@@ -90,9 +90,7 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNHomeSectionHeaderView" bundle: nil]
                         forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
                                withReuseIdentifier: @"SYNHomeSectionHeaderView"];
-    
-    
-    
+
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelFooterMoreView" bundle: nil]
               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                      withReuseIdentifier: @"SYNChannelFooterMoreView"];
@@ -114,7 +112,6 @@ typedef void(^FeedDataErrorBlock)(void);
     // We should only setup our date formatter once
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss Z";
-    
 }
 
 
@@ -356,7 +353,6 @@ typedef void(^FeedDataErrorBlock)(void);
         [wself.emptyGenreMessageView removeFromSuperview];
     }];
      */
-    
 }
 
 
@@ -388,7 +384,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) fetchAndDisplayFeedItems
 {
-    
     [self fetchVideoItems];
     
     [self fetchChannelItems];
@@ -414,7 +409,6 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     
     // sort results in categories
-    
     if(resultsArray.count == 0)
     {
         self.feedItemsData = @[];
@@ -436,13 +430,10 @@ typedef void(^FeedDataErrorBlock)(void);
         }
             
         [bucket addObject:feedItem];
-        
     }
     
     NSArray* sortedDateKeys = [[buckets allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSDate* date1, NSDate* date2) {
-        
         return [date2 compare:date1];
-        
     }];
     
     NSMutableArray* sortedItemsArray = [NSMutableArray array];
@@ -453,17 +444,16 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     self.feedItemsData = sortedItemsArray;
     
-    
     [self.feedCollectionView reloadData];
     
     // put the videos in order
-    
     self.videosInOrderArray = @[];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self sortVideosForPlaylist];
     });
     
 }
+
 
 - (void) fetchVideoItems
 {
@@ -473,14 +463,11 @@ typedef void(^FeedDataErrorBlock)(void);
     fetchRequest.entity = [NSEntityDescription entityForName: kVideoInstance
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    
     NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
     fetchRequest.predicate = predicate;
     
-    
     NSError* error;
-    
     NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
     if (!resultsArray)
         return;
@@ -493,6 +480,7 @@ typedef void(^FeedDataErrorBlock)(void);
     self.feedVideosById = [NSDictionary dictionaryWithDictionary:mutDictionary];
 }
 
+
 - (void) fetchChannelItems
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -501,14 +489,11 @@ typedef void(^FeedDataErrorBlock)(void);
     fetchRequest.entity = [NSEntityDescription entityForName: kChannel
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    
     NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
     fetchRequest.predicate = predicate;
     
-    
     NSError* error;
-    
     NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
     if (!resultsArray)
         return;
@@ -522,7 +507,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 #pragma mark - UICollectionView Delegate/Data Source
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
@@ -531,23 +515,18 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
     NSArray* sectionInfo = self.feedItemsData[section];
     return sectionInfo.count;
-    
 }
-
 
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    
     // common types
-    
     SYNAggregateCell *cell = nil;
     
     FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
@@ -560,7 +539,6 @@ typedef void(^FeedDataErrorBlock)(void);
     {
         cell = [cv dequeueReusableCellWithReuseIdentifier: @"SYNAggregateVideoCell"
                                              forIndexPath: indexPath];
-        
         
         NSMutableArray* videosArray = @[].mutableCopy;
         
@@ -584,7 +562,6 @@ typedef void(^FeedDataErrorBlock)(void);
         }
         
         cell.collectionData = videosArray;
-        
     }
     else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
     {
@@ -742,7 +719,6 @@ typedef void(^FeedDataErrorBlock)(void);
         
         supplementaryView = headerSupplementaryView;
     }
-    
     else if (kind == UICollectionElementKindSectionFooter)
     {
         self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
@@ -856,12 +832,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) followControlPressed: (SYNSocialButton *) socialControl
-{
-  
-}
-
-
 - (void) likeControlPressed: (SYNSocialButton *) socialControl
 {
     if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
@@ -934,20 +904,30 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
-    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
+    if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
     {
-        return; // only relates to video instances
+        // Get the videoinstance associated with the control pressed
+        VideoInstance *videoInstance = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"video_instance"
+                                    objectId: videoInstance.uniqueId];
+        
+        [self shareVideoInstance: videoInstance];
     }
-    
-    // Get the videoinstance associated with the control pressed
-    VideoInstance *videoInstance = socialControl.dataItemLinked;
-    
-    [self requestShareLinkWithObjectType: @"video_instance"
-                                objectId: videoInstance.uniqueId];
-    
-    
-    [self shareVideoInstance: videoInstance];
+    else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
+    {
+        // Get the videoinstance associated with the control pressed
+        Channel *channel = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"channel"
+                                    objectId: channel.uniqueId];
+        
+        [self shareChannel: channel
+                   isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
+                usingImage: nil];
+    }
 }
+
 
 #pragma mark - Aggregate Cell Delegate
 
@@ -960,6 +940,7 @@ typedef void(^FeedDataErrorBlock)(void);
     [appDelegate.viewStackManager viewProfileDetails: cell.channelOwner];
 }
 
+
 #pragma mark - Load More Footer
 
 - (void) loadMoreVideos
@@ -970,6 +951,7 @@ typedef void(^FeedDataErrorBlock)(void);
         [self loadAndUpdateFeedData];
     }
 }
+
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
@@ -988,6 +970,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     [self loadAndUpdateFeedData];
 }
+
 
 #pragma mark - Sort Method
 

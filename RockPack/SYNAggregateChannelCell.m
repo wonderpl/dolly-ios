@@ -60,22 +60,6 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 }
 
 
-// NOTE: will be called back from the inner cell and the message should be passed to the feed controller acting as THIS cell's delegate
-
-- (void) followControlPressed: (SYNSocialButton *) socialControl
-{
-    
-    [self.delegate performSelector: @selector(followControlPressed:)
-                        withObject: socialControl];
-}
-
-
-- (void) shareControlPressed: (SYNSocialButton *) socialControl
-{
-    [self.delegate performSelector: @selector(shareControlPressed:)
-                        withObject: socialControl];
-}
-
 - (void) setCollectionData:(NSArray *)collectionData
 {
     [super setCollectionData:collectionData];
@@ -121,7 +105,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     Channel *channel = (Channel *) self.collectionData[indexPath.item];
     
     // NOTE: All fields are set through the setChannel setter
-    itemCell.delegate = self;
+    itemCell.delegate = self.delegate;
     itemCell.channel = channel;
     
     return itemCell;
