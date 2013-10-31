@@ -12,7 +12,6 @@
 
 @implementation SYNSocialButton
 
-
 - (void) awakeFromNib
 {
     [super awakeFromNib];
@@ -47,14 +46,17 @@
 
 - (void) setTitle: (NSString *) title
 {
+    _title = title;
+    
     [self setTitle: title
           forState: UIControlStateNormal];
 }
 
-
 - (void) setTitle: (NSString *) title
          andCount: (NSInteger) count
 {
+        _title = title;
+    
     // Two different ways of formatting
 #if NOT_CENTERED
     NSString *countString = @" ";
@@ -64,12 +66,12 @@
         countString = [NSString stringWithFormat: @"%d", count];
     }
     
-    [self setTitle:  [NSString stringWithFormat: @"\n%@\n%@", title, countString]
-                       forState: UIControlStateNormal];
+    [self setTitle: [NSString stringWithFormat: @"\n%@\n%@", title, countString]
+          forState: UIControlStateNormal];
     
 #else
-    [self setTitle:  [NSString stringWithFormat: @"%@\n%d", title, count]
-          forState: UIControlStateNormal];
+      [self setTitle: [NSString stringWithFormat: @"%@\n%d", title, count]
+            forState: UIControlStateNormal];
 #endif
 }
 

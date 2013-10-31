@@ -10,6 +10,8 @@
 #import "SYNSocialAddButton.h"
 #import "SYNSocialButton.h"
 #import "UIImageView+WebCache.h"
+#import "Video.h"
+#import "VideoInstance.h"
 
 
 @interface SYNAggregateVideoItemCell ()
@@ -87,6 +89,10 @@
     }
     
     self.likeControl.selected = videoInstance.starredByUserValue;
+    
+    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
+                      andCount: videoInstance.video.starCountValue];
+    
     self.titleLabel.text = videoInstance.title;
 }
 

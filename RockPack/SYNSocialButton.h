@@ -12,8 +12,6 @@
 
 @property (nonatomic, strong) NSString* title;
 
-- (void) setTitle: (NSString *) title;
-
 - (void) setTitle: (NSString *) title
          andCount: (NSInteger) count;
 
