@@ -943,6 +943,10 @@ typedef void(^FeedDataErrorBlock)(void);
     // Get the videoinstance associated with the control pressed
     VideoInstance *videoInstance = socialControl.dataItemLinked;
     
+    [self requestShareLinkWithObjectType: @"video_instance"
+                                objectId: videoInstance.uniqueId];
+    
+    
     [self shareVideoInstance: videoInstance];
 }
 
