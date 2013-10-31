@@ -382,15 +382,10 @@ typedef enum : NSInteger {
 
 static NSString* kPopularGenreName = @"popular";
 
-#define kScrollerPageChanged        @"kScrollerPageChanged"
 
 
-#define kNoteCreateButtonRequested       @"kNoteCreateButtonRequested"
 
-#define kSearchTyped      @"kSearchTyped"
-#define kSearchTerm      @"kSearchTerm"
 
-#define kCurrentPage        @"kCurrentPage"
 
 // UserDefaults
 #define kUserDefaultsNotFirstInstall @"UD_Not_First_Install"

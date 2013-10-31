@@ -19,6 +19,11 @@
 
 #define kAutocompleteTime 0.2
 
+typedef enum {
+    kSearchTypeGenre = 0,
+    kSearchTypeTerm
+} kSearchType;
+
 
 static NSString* kCategoryCellIndetifier = @"SYNDiscoverCategoriesCell";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
@@ -128,8 +133,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                 
             }
         }
+        
         [self fetchCategories];
+        
         [self loadCategories];
+        
     }
     
     
@@ -264,7 +272,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     SubGenre* selectedGenre = self.genres[indexPath.item];
     
-    [self dispatchSearch:selectedGenre.name];
+    [self dispatchSearch:selectedGenre.uniqueId forType:kSearchTypeGenre];
 }
 
 
@@ -416,7 +424,20 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) dispatchSearch:(NSString*)searchTerm
 {
-    [self.searchResultsController searchForString:searchTerm];
+    [self dispatchSearch:searchTerm forType:kSearchTypeTerm];
+}
+- (void) dispatchSearch:(NSString*)searchTerm forType:(kSearchType)type
+{
+    if(type == kSearchTypeGenre)
+    {
+        
+        [self.searchResultsController searchForGenre:searchTerm];
+    }
+    else
+    {
+        [self.searchResultsController searchForTerm:searchTerm];
+    }
+    
     
     if(IS_IPHONE)
     {

@@ -24,7 +24,7 @@ typedef enum {
 
 @property (nonatomic, readonly) SearchResultsShowing searchResultsShowing;
 
-- (void) searchForString: (NSString *) newSearchTerm ;
-
+- (void) searchForTerm: (NSString *) newSearchTerm ;
+- (void) searchForGenre: (NSString *) genreId;
 
 @end
