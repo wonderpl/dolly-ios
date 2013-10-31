@@ -899,7 +899,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.video.starCountValue += 1;
                                                   
                                                   socialControl.selected = YES;
-                                                  
+                                                
                                                   [videoInstance addStarrersObject: appDelegate.currentUser];
                                               }
                                               else
@@ -917,6 +917,11 @@ typedef void(^FeedDataErrorBlock)(void);
                                               {
                                                   videoInstance.starredByUserValue = previousStarringState;
                                                   videoInstance.video.starCountValue = previousStarCount;
+                                              }
+                                              else
+                                              {
+                                                  [socialControl setTitle: socialControl.title
+                                                                 andCount: videoInstance.video.starCountValue];
                                               }
                                               
 //                                              [self.feedCollectionView reloadData];
