@@ -41,7 +41,7 @@
         return nil;
     }
     
-    __typeof(&*self) __weak weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     
     self.actionBlock = ^(OWActivity *activity, OWActivityViewController *activityViewController) {
         NSDictionary *userInfo = weakSelf.userInfo ? weakSelf.userInfo : activityViewController.userInfo;
