@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="iJN-TT-v7m" userLabel="Action Message Label">
-                        <rect key="frame" x="10" y="64" width="301" height="20"/>
+                        <rect key="frame" x="10" y="63" width="301" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Lku-bT-Rby"/>
@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="uwf-6l-aRn" userLabel="Channel Name Label">
-                        <rect key="frame" x="10" y="83" width="300" height="27"/>
+                        <rect key="frame" x="10" y="85" width="300" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="27" id="0nY-A1-yic"/>
@@ -78,10 +78,10 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="uwf-6l-aRn" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="83" id="1nE-wC-4Xd"/>
+                <constraint firstItem="uwf-6l-aRn" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="85" id="1nE-wC-4Xd"/>
                 <constraint firstAttribute="centerX" secondItem="uwf-6l-aRn" secondAttribute="centerX" id="HgE-M7-1s9"/>
                 <constraint firstItem="HQt-5K-LTL" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="10" id="MSP-ui-qy9"/>
-                <constraint firstItem="iJN-TT-v7m" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="64" id="TCu-ka-HWt"/>
+                <constraint firstItem="iJN-TT-v7m" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="63" id="TCu-ka-HWt"/>
                 <constraint firstAttribute="centerX" secondItem="HQt-5K-LTL" secondAttribute="centerX" id="bxK-9m-hb6"/>
                 <constraint firstAttribute="centerX" secondItem="iJN-TT-v7m" secondAttribute="centerX" id="yvf-aV-fAq"/>
             </constraints>

@@ -100,6 +100,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     self.actionMessageLabel.attributedText = attributedCompleteString;
     
+    
 }
 
 

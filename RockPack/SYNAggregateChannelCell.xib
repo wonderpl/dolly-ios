@@ -15,14 +15,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-wM-3Jg">
-                        <rect key="frame" x="283" y="119" width="360" height="203"/>
+                        <rect key="frame" x="0.0" y="101" width="927" height="223"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.86981997282608692" green="0.41394347934738474" blue="0.32116862732037521" alpha="0.0" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="203" id="0Zk-W8-m7f"/>
-                            <constraint firstAttribute="width" constant="360" id="byv-Cz-Ixv"/>
+                            <constraint firstAttribute="height" constant="223" id="icc-Nd-Fsa"/>
                         </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="Ho0-dD-Ple">
-                            <size key="itemSize" width="360" height="203"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="Ho0-dD-Ple" customClass="SYNAggregateFlowLayout">
+                            <size key="itemSize" width="360" height="223"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -67,16 +67,17 @@
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="Khg-wM-3Jg" secondAttribute="trailing" id="6gB-O1-vO7"/>
                 <constraint firstItem="23" firstAttribute="centerY" secondItem="13" secondAttribute="centerY" id="8Jt-OF-Phr"/>
                 <constraint firstItem="23" firstAttribute="width" secondItem="13" secondAttribute="width" id="ATF-2Z-cAS"/>
-                <constraint firstAttribute="centerX" secondItem="Khg-wM-3Jg" secondAttribute="centerX" id="D2R-Kz-Wvv"/>
                 <constraint firstItem="14" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="8" id="Djx-rf-Zfx"/>
                 <constraint firstItem="23" firstAttribute="height" secondItem="13" secondAttribute="height" id="O9h-UM-p3n"/>
-                <constraint firstAttribute="bottom" secondItem="Khg-wM-3Jg" secondAttribute="bottom" constant="8" id="Q0h-tJ-YU9"/>
                 <constraint firstItem="13" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="S2B-vX-aUh"/>
                 <constraint firstAttribute="centerX" secondItem="13" secondAttribute="centerX" id="aQX-gJ-Vym"/>
+                <constraint firstItem="Khg-wM-3Jg" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="bay-va-Fbm"/>
                 <constraint firstItem="14" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="hU7-aa-JjF"/>
                 <constraint firstItem="23" firstAttribute="centerX" secondItem="13" secondAttribute="centerX" id="qld-k2-HF9"/>
+                <constraint firstAttribute="bottom" secondItem="Khg-wM-3Jg" secondAttribute="bottom" constant="6" id="v2c-c6-8EW"/>
                 <constraint firstAttribute="trailing" secondItem="14" secondAttribute="trailing" id="wVS-s4-veG"/>
             </constraints>
             <size key="customSize" width="353" height="361"/>

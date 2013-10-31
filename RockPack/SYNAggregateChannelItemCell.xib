@@ -7,14 +7,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5ES-BZ-yAz" customClass="SYNAggregateChannelItemCell">
-            <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
+            <rect key="frame" x="0.0" y="0.0" width="360" height="223"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="223"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Jm-Ox-5xg" userLabel="BG">
-                        <rect key="frame" x="0.0" y="42" width="360" height="161"/>
+                        <rect key="frame" x="0.0" y="21" width="360" height="202"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -29,13 +29,10 @@
                         <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcp-Jw-jhh" userLabel="Label - Strip">
-                        <rect key="frame" x="0.0" y="153" width="360" height="50"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcp-Jw-jhh" userLabel="Label - Strip">
+                        <rect key="frame" x="1" y="173" width="358" height="49"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.73633730825538479" green="0.78948260497400713" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="rXF-aN-LDz"/>
-                        </constraints>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14 Followers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbZ-M4-tPZ" userLabel="Label - Followers">
@@ -53,7 +50,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9d6-Qi-TU3" userLabel="Label - Time">
-                        <rect key="frame" x="0.0" y="9" width="360" height="26"/>
+                        <rect key="frame" x="0.0" y="-4" width="360" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="XLU-gh-b9E"/>
@@ -63,7 +60,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-cb-zfw" userLabel="Button - Follow" customClass="SYNSocialButton">
-                        <rect key="frame" x="115" y="128" width="50" height="50"/>
+                        <rect key="frame" x="115" y="148" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -75,7 +72,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2GB-ND-vGv" userLabel="Button - Share" customClass="SYNSocialButton">
-                        <rect key="frame" x="195" y="128" width="50" height="50"/>
+                        <rect key="frame" x="195" y="148" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -89,20 +86,17 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="CjQ-cb-zfw" secondAttribute="centerX" constant="40" id="3Dh-oY-owd"/>
                 <constraint firstItem="Au2-6S-lR8" firstAttribute="leading" secondItem="5ES-BZ-yAz" secondAttribute="leading" id="5me-0h-tHO"/>
                 <constraint firstAttribute="trailing" secondItem="9d6-Qi-TU3" secondAttribute="trailing" id="5q2-qu-3JO"/>
                 <constraint firstAttribute="bottom" secondItem="CjQ-cb-zfw" secondAttribute="bottom" constant="25" id="7oL-71-4LP"/>
                 <constraint firstAttribute="centerX" secondItem="2GB-ND-vGv" secondAttribute="centerX" constant="-40" id="9MJ-6l-Lji"/>
-                <constraint firstItem="lcp-Jw-jhh" firstAttribute="leading" secondItem="5ES-BZ-yAz" secondAttribute="leading" id="WBQ-6z-Qjd"/>
                 <constraint firstItem="9d6-Qi-TU3" firstAttribute="leading" secondItem="5ES-BZ-yAz" secondAttribute="leading" id="ZcW-u4-l4K"/>
-                <constraint firstAttribute="bottom" secondItem="lcp-Jw-jhh" secondAttribute="bottom" id="bi7-sQ-Tah"/>
-                <constraint firstAttribute="trailing" secondItem="lcp-Jw-jhh" secondAttribute="trailing" id="bu0-N2-kGs"/>
-                <constraint firstItem="9d6-Qi-TU3" firstAttribute="top" secondItem="5ES-BZ-yAz" secondAttribute="top" constant="9" id="krW-eQ-Xde"/>
+                <constraint firstItem="9d6-Qi-TU3" firstAttribute="top" secondItem="5ES-BZ-yAz" secondAttribute="top" constant="-4" id="krW-eQ-Xde"/>
                 <constraint firstAttribute="trailing" secondItem="Au2-6S-lR8" secondAttribute="trailing" id="otW-d6-ZrT"/>
-                <constraint firstItem="Au2-6S-lR8" firstAttribute="top" secondItem="9d6-Qi-TU3" secondAttribute="bottom" constant="11" id="qRS-Fo-mGE"/>
+                <constraint firstItem="Au2-6S-lR8" firstAttribute="top" secondItem="9d6-Qi-TU3" secondAttribute="bottom" constant="24" id="qRS-Fo-mGE"/>
                 <constraint firstAttribute="bottom" secondItem="2GB-ND-vGv" secondAttribute="bottom" constant="25" id="wuL-dW-A3N"/>
             </constraints>
             <size key="customSize" width="307" height="175"/>
