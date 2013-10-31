@@ -109,6 +109,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
     
+    categoriesFetchRequest.includesSubentities = NO; // this will avoid getting both the Genre and SubGenre called 'POPULAR'
+    
     NSError* error;
     
     NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
@@ -220,7 +222,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     
     
-    
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
         
         [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
@@ -283,7 +284,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     SubGenre* selectedGenre = self.genres[indexPath.item];
     
-    [self dispatchSearch:selectedGenre.uniqueId forType:kSearchTypeGenre];
+    if([selectedGenre.name isEqualToString:kPopularGenreName])
+        [self dispatchSearch:@"" forType:kSearchTypeGenre];
+    else
+        [self dispatchSearch:selectedGenre.uniqueId forType:kSearchTypeGenre];
 }
 
 

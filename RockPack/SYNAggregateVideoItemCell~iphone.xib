@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -37,18 +37,18 @@
                         <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="itY-F3-N2F" userLabel="Control - Like" customClass="SYNSocialButton">
-                        <rect key="frame" x="99" y="45" width="50" height="50"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gRp-a5-BAk" userLabel="Control - Share" customClass="SYNSocialButton">
+                        <rect key="frame" x="168" y="81" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f51-4M-uJb" userLabel="Control - Add" customClass="SYNSocialAddButton">
-                        <rect key="frame" x="11" y="81" width="50" height="50"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k73-Lu-OvT" userLabel="Control - Like" customClass="SYNSocialButton">
+                        <rect key="frame" x="31" y="81" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z9K-pr-Uk0" userLabel="Control - Share" customClass="SYNSocialControl">
-                        <rect key="frame" x="178" y="81" width="50" height="50"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S2p-g2-PRw" userLabel="Control - Add" customClass="SYNSocialAddButton">
+                        <rect key="frame" x="99" y="81" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -57,10 +57,10 @@
             </view>
             <size key="customSize" width="307" height="175"/>
             <connections>
-                <outlet property="addControl" destination="f51-4M-uJb" id="CII-Qy-2hK"/>
+                <outlet property="addControl" destination="S2p-g2-PRw" id="7bx-S2-pDr"/>
                 <outlet property="imageView" destination="ZPQ-jB-6Su" id="2xf-ry-0hc"/>
-                <outlet property="likeControl" destination="itY-F3-N2F" id="J6A-qC-5cc"/>
-                <outlet property="shareControl" destination="z9K-pr-Uk0" id="IyH-ho-BHu"/>
+                <outlet property="likeControl" destination="k73-Lu-OvT" id="jbG-gi-Vpb"/>
+                <outlet property="shareControl" destination="gRp-a5-BAk" id="0M9-ED-P5P"/>
                 <outlet property="timeLabel" destination="1bU-ZO-Uzp" id="yiG-Lv-wHt"/>
                 <outlet property="titleLabel" destination="vVW-WR-RU9" id="fqv-O6-igg"/>
             </connections>
