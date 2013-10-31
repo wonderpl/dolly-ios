@@ -11,9 +11,9 @@
 
 @protocol SYNSocialActionsDelegate <NSObject>
 
--(void)followControlPressed:(SYNSocialButton*)socialButton;
--(void)shareControlPressed:(SYNSocialButton*)socialButton;
--(void)likeControlPressed:(SYNSocialButton*)socialButton;
--(void)addControlPressed:(SYNSocialButton*)socialButton;
+- (void) followControlPressed: (SYNSocialButton *) socialButton;
+- (void) shareControlPressed: (SYNSocialButton *) socialButton;
+- (void) likeControlPressed: (SYNSocialButton *) socialButton;
+- (void) addControlPressed: (SYNSocialButton *) socialButton;
 
 @end

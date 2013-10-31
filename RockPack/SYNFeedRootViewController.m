@@ -49,7 +49,6 @@ typedef void(^FeedDataErrorBlock)(void);
 @property (nonatomic, strong) NSDictionary* feedItemByPosition;
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
 @property (nonatomic, strong) NSArray* videosInOrderArray;
-@property (nonatomic) BOOL togglingInProgress;
 
 @end
 
@@ -164,9 +163,7 @@ typedef void(^FeedDataErrorBlock)(void);
         [self updateAnalytics];
         
         self.feedCollectionView.scrollsToTop = YES;
-        
-        self.togglingInProgress = NO;
-        
+
         // if the user has not pressed load more
         if (self.dataRequestRange.location == 0)
         {
@@ -238,9 +235,8 @@ typedef void(^FeedDataErrorBlock)(void);
     {
         return;
     }
-    
-    
-    __weak SYNFeedRootViewController *wself = self;
+
+    __weak typeof(self) wself = self;
     
     FeedDataErrorBlock errorBlock = ^{
         
@@ -367,7 +363,6 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) displayEmptyGenreMessage: (NSString*) messageKey
                         andLoader: (BOOL) isLoader
 {
-    
     if (self.emptyGenreMessageView)
     {
         [self.emptyGenreMessageView removeFromSuperview];
@@ -654,14 +649,19 @@ typedef void(^FeedDataErrorBlock)(void);
     return size;
 }
 
+
 - (CGSize) collectionView: (UICollectionView *) collectionView
-                   layout: (UICollectionViewLayout*) collectionViewLayout
-                   referenceSizeForHeaderInSection: (NSInteger) section
+                   layout: (UICollectionViewLayout *) collectionViewLayout
+           referenceSizeForHeaderInSection: (NSInteger) section
 {
     if (IS_IPAD)
+    {
         return CGSizeMake(1024, 65);
-    
-    return CGSizeMake(320, 34);
+    }
+    else
+    {
+        return CGSizeMake(320, 34);
+    }
 }
 
 
@@ -760,9 +760,8 @@ typedef void(^FeedDataErrorBlock)(void);
     }
 
     return supplementaryView;
-    
-    
 }
+
 
 - (void) videoOverlayDidDissapear
 {
@@ -772,7 +771,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Helper Methods to get AggreagateCell's Data
 
-
 - (FeedItem*) feedItemAtIndexPath: (NSIndexPath*) indexPath
 {
     NSArray* sectionArray = self.feedItemsData[indexPath.section];
@@ -780,11 +778,13 @@ typedef void(^FeedDataErrorBlock)(void);
     return feedItem;
 }
 
+
 - (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
 {
     // Same mechanism as for video cell
     return  [self indexPathForVideoCell: cell];
 }
+
 
 - (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
 {
@@ -792,10 +792,8 @@ typedef void(^FeedDataErrorBlock)(void);
     return indexPath;
 }
 
+
 #pragma mark - Click Cell Delegates
-
-
-
 
 - (SYNAggregateCell *) aggregateCellFromSubview: (UIView *) view
 {
@@ -827,19 +825,21 @@ typedef void(^FeedDataErrorBlock)(void);
     return selectedFeedItem;
 }
 
+
 #pragma mark - Social Actions Delegate
 
-- (void) addControlPressed: (SYNSocialButton*) socialControl
+- (void) addControlPressed: (SYNSocialButton *) socialControl
 {
-    
-    
-    if(![socialControl.dataItemLinked isKindOfClass:[VideoInstance class]])
+    if (![socialControl.dataItemLinked
+          isKindOfClass: [VideoInstance class]])
+    {
         return; // only relates to video instances
+    }
     
-    VideoInstance* videoInstance = socialControl.dataItemLinked;
-        
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
+    
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
+    
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"videoPlusButtonClick"
                                                             label: nil
@@ -848,62 +848,50 @@ typedef void(^FeedDataErrorBlock)(void);
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: @"select"
                                             videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: nil errorHandler: nil];
+                                          completionHandler: nil
+                                               errorHandler: nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
                                                         object: self
                                                       userInfo: @{@"VideoInstance": videoInstance}];
-    
-    
-    
-    
 }
+
 
 - (void) followControlPressed: (SYNSocialButton *) socialControl
 {
-    
-    
-    
+  
 }
-- (void) likeControlPressed: (SYNSocialButton*) socialControl
+
+
+- (void) likeControlPressed: (SYNSocialButton *) socialControl
 {
-    if (self.togglingInProgress)
+    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
     {
-        return;
+        return; // only relates to video instances
     }
     
-    if(![socialControl.dataItemLinked isKindOfClass:[VideoInstance class]])
-        return; // only relates to video instances
-    
+    // Get the videoinstance associated with the control pressed
     VideoInstance *videoInstance = socialControl.dataItemLinked;
-   
     
     // Track
-    
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"videoStarButtonClick"
                                                             label: @"feed"
                                                             value: nil] build]];
-    
-    
     BOOL didStar = (socialControl.selected == NO);
     
     socialControl.enabled = NO;
     
-    self.togglingInProgress = YES;
-    
     // Send
-    
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: ^(id response) {
-                                              
-                                              self.togglingInProgress = NO;
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
                                               NSInteger previousStarCount = videoInstance.video.starCountValue;
+                                              
                                               if (didStar)
                                               {
                                                   // Currently highlighted, so increment
@@ -923,33 +911,28 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   socialControl.selected = NO;
                                               }
                                               
-                                              NSError* error;
-                                              if(![videoInstance.managedObjectContext save:&error])
+                                              NSError *error;
+                                              
+                                              if (![videoInstance.managedObjectContext save: &error])
                                               {
                                                   videoInstance.starredByUserValue = previousStarringState;
                                                   videoInstance.video.starCountValue = previousStarCount;
                                               }
                                               
-                                              [self.feedCollectionView reloadData];
+//                                              [self.feedCollectionView reloadData];
                                               
                                               socialControl.enabled = YES;
-                                              
                                           } errorHandler: ^(id error) {
-                                              
-                                                   self.togglingInProgress = NO;
-                                                   
-                                                   DebugLog(@"Could not star video");
-                                                   
-                                                   socialControl.enabled = YES;
-                                               }];
+                                              DebugLog(@"Could not star video");
+                                              // Re-enable button anyway
+                                              socialControl.enabled = YES;
+                                          }];
 }
 
 
--(void)shareControlPressed:(SYNSocialButton *) socialControl
+- (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
-    
 }
-
 
 #pragma mark - Aggregate Cell Delegate
 

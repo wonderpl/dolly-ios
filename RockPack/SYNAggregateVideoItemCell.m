@@ -34,13 +34,13 @@
 
 - (IBAction) likeControlPressed: (id) sender
 {
-    [self.delegate followControlPressed: sender];
+    [self.delegate likeControlPressed: sender];
 }
 
 
 - (IBAction) addControlPressed: (id) sender
 {
-    [self.delegate shareControlPressed: sender];
+    [self.delegate addControlPressed: sender];
 }
 
 
@@ -86,6 +86,7 @@
         self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
     }
     
+    self.likeControl.selected = videoInstance.starredByUserValue;
     self.titleLabel.text = videoInstance.title;
 }
 
