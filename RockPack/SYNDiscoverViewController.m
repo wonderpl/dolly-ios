@@ -118,25 +118,20 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if(genresFetchedArray.count == 0)
     {
       
-        
-        
         Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
         popularGenre.uniqueId = @"9090";
         popularGenre.name = [NSString stringWithString:kPopularGenreName];
         popularGenre.priorityValue = 1000;
         
-        
         if(!popularGenre)
             return;
         
-        NSError* error;
         [appDelegate.mainManagedObjectContext save:&error];
         
-        genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                 error: &error];
         
         
         [self loadCategories];
+        
     }
     else
     {
@@ -183,7 +178,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
     
-    
+    categoriesFetchRequest.includesSubentities = NO;
     
     NSError* error;
     
@@ -193,6 +188,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
+    // create temporary colors
     NSMutableDictionary* mutDictionary = @{}.mutableCopy;
     for (Genre* genre in self.genres)
     {
