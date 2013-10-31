@@ -296,7 +296,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
          options: SDWebImageRetryFailed];
         
         userCell.userNameLabel.text = co.displayName;
-        [userCell.userNameLabel sizeToFit];
         
         userCell.delegate = self;
         

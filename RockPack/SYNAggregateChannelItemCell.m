@@ -14,6 +14,8 @@
 @property (strong, nonatomic) IBOutlet SYNSocialButton *followControl;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
 
+@property (nonatomic, strong) IBOutlet UIView* bg;
+
 @end
 
 @implementation SYNAggregateChannelItemCell
@@ -23,6 +25,9 @@
     self.followControl.title = NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell");
     
     self.shareControl.title = NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell");
+    
+    self.bg.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.bg.layer.borderWidth = 1.0f;
 }
 
 

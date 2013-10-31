@@ -13,6 +13,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="360" height="203"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Jm-Ox-5xg" userLabel="BG">
+                        <rect key="frame" x="0.0" y="42" width="360" height="161"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Au2-6S-lR8">
                         <rect key="frame" x="0.0" y="46" width="360" height="33"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -101,6 +107,7 @@
             </constraints>
             <size key="customSize" width="307" height="175"/>
             <connections>
+                <outlet property="bg" destination="0Jm-Ox-5xg" id="Kwt-Iy-EEU"/>
                 <outlet property="followControl" destination="CjQ-cb-zfw" id="wbx-05-ZJh"/>
                 <outlet property="followersLabel" destination="kbZ-M4-tPZ" id="QwD-ZG-u3G"/>
                 <outlet property="shareControl" destination="2GB-ND-vGv" id="6Gb-8j-rfe"/>

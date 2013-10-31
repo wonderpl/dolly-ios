@@ -32,7 +32,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super awakeFromNib];
     
-    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
 
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
@@ -93,20 +92,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super layoutSubviews];
     
-    CGSize viewSize = self.frame.size;
-    CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
-    
-    
-    
-    // user thumbnail
-    self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
-    self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
-    
-    // bottom controls
-    self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
-    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
-    self.actionMessageLabel.center = CGPointMake(middleOfView, self.actionMessageLabel.center.y);
-    self.channelNameLabel.center = CGPointMake(middleOfView, self.channelNameLabel.center.y);
 }
 
 
@@ -131,7 +116,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     if (IS_IPHONE)
     {
         correctSize.width = 248.0f;
-        correctSize.height = 139.0f;
+        correctSize.height = 257.0f;
     }
     else
     {
