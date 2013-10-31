@@ -382,7 +382,7 @@ typedef enum : NSInteger {
 #define kVideoQueueRemove           @"kVideoQueueRemove"
 #define kVideoQueueClear            @"kVideoQueueClear"
 
-static NSString* kPopularGenreName = @"popular";
+static NSString* kPopularGenreName = @"POPULAR";
 
 
 

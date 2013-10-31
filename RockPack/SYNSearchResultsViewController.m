@@ -94,13 +94,14 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.videosArray = [NSArray arrayWithArray: fetchedObjects];
         
-        wself.loadingPanelView.hidden = NO;
+        wself.loadingPanelView.hidden = YES;
         
         [wself.videosCollectionView reloadData];
     };
     
     
     self.userSearchCompleteBlock = ^(int count) {
+        
         NSError *error;
         NSArray *fetchedObjects = [wself getSearchEntitiesByName: kChannelOwner
                                                        withError: &error];
@@ -113,7 +114,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
         
-        wself.loadingPanelView.hidden = NO;
+        wself.loadingPanelView.hidden = YES;
         
         [wself.usersCollectionView reloadData];
     };
