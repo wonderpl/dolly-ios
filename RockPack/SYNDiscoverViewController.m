@@ -104,7 +104,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
@@ -117,10 +117,27 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // probably the database is cold so need to reload everything
     if(genresFetchedArray.count == 0)
     {
-        [self createPopular];
+      
+        
+        
+        Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
+        popularGenre.uniqueId = @"9090";
+        popularGenre.name = [NSString stringWithString:kPopularGenreName];
+        popularGenre.priorityValue = 1000;
+        
+        
+        if(!popularGenre)
+            return;
+        
+        NSError* error;
+        [appDelegate.mainManagedObjectContext save:&error];
+        
+        genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                 error: &error];
+        
+        
         [self loadCategories];
     }
-    
     else
     {
         // housekeeping
@@ -149,19 +166,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
-- (void) createPopular
-{
-    NSDictionary* popularGenreData = @{@"id":@"90", @"priority":@(1000), @"name":kPopularGenreName};
-    
-    
-    Genre* popularGenre = [Genre instanceFromDictionary:popularGenreData
-                              usingManagedObjectContext:appDelegate.mainManagedObjectContext];
-    
-    if(!popularGenre)
-        return;
-    
-    [appDelegate saveContext:NO];
-}
 
 
 #pragma mark - Data Retrieval
