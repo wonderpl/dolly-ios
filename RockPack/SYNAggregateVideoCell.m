@@ -33,11 +33,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [super awakeFromNib];
     
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
-    
-    
-    
-    
-    
+
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
@@ -45,15 +41,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     aggregateFlowLayout.itemSize = [self sizeForItemAtDefaultPath];
     
-    
     self.collectionView.collectionViewLayout = aggregateFlowLayout;
-    
-
-    
-    // Attempt to tween scroll rate (doesn't seem to work, anything less than 0.3 is jerky)
-//    CGFloat scrollCoefficient = kFeedAggregateScrollCoefficient * (UIScrollViewDecelerationRateNormal - UIScrollViewDecelerationRateFast);
-//    
-//    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast + scrollCoefficient;
     
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
     
@@ -71,23 +59,21 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 }
 
 
-
-
-
-- (void) setCollectionData:(NSArray *)collectionData
+- (void) setCollectionData: (NSArray *) collectionData
 {
-    [super setCollectionData:collectionData];
+    [super setCollectionData: collectionData];
     
-    if(collectionData.count <= 0)
+    if (collectionData.count <= 0)
+    {
         return;
+    }
     
-    VideoInstance* firstVideoInstance = collectionData[0];
+    VideoInstance *firstVideoInstance = collectionData[0];
+    
     // create string
-    
-    Channel* heuristicChannel = firstVideoInstance.channel;
+    Channel *heuristicChannel = firstVideoInstance.channel;
     NSString *nameString = heuristicChannel.channelOwner.displayName; // ex 'Dolly Proxima'
-    NSString *actionString = [NSString stringWithFormat:@" added %i videos to", _collectionData.count];
-    
+    NSString *actionString = [NSString stringWithFormat: @" added %i videos to", _collectionData.count];
     
     NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
     
@@ -100,9 +86,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.actionMessageLabel.attributedText = attributedCompleteString;
     
     self.channelNameLabel.text = heuristicChannel.title;
-    
-    // handle like button state
-    
 }
 
 
@@ -121,9 +104,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     // bottom controls
     self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
-    self.collectionView.center =CGPointMake(middleOfView, self.collectionView.center.y);
-    self.actionMessageLabel.center =CGPointMake(middleOfView, self.actionMessageLabel.center.y);
-    self.channelNameLabel.center =CGPointMake(middleOfView, self.channelNameLabel.center.y);
+    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
+    self.actionMessageLabel.center = CGPointMake(middleOfView, self.actionMessageLabel.center.y);
+    self.channelNameLabel.center = CGPointMake(middleOfView, self.channelNameLabel.center.y);
 }
 
 
@@ -163,9 +146,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
-    
     return self.collectionData.count;
-    
 }
 
 
@@ -177,18 +158,11 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     VideoInstance* videoInstance = self.collectionData[indexPath.item];
     
-    
-    
     // NOTE: All fields are set through the setVideoInstance setter
-    itemCell.delegate = self;
+    itemCell.delegate = self.delegate;
     itemCell.videoInstance = videoInstance;
     
     return itemCell;
 }
-
-
-
-
-
 
 @end

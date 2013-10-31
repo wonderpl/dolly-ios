@@ -36,12 +36,12 @@
 
 - (IBAction) likeControlPressed: (id) sender
 {
-    [self.delegate followControlPressed: sender];
+    [self.delegate likeControlPressed: sender];
 }
 
 - (IBAction) addControlPressed: (id) sender
 {
-    [self.delegate shareControlPressed: sender];
+    [self.delegate addControlPressed: sender];
 }
 
 - (IBAction) shareControlPressed: (id) sender

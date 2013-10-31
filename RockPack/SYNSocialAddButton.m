@@ -10,40 +10,48 @@
 
 @implementation SYNSocialAddButton
 
-
-
 - (void) awakeFromNib
 {
     [super awakeFromNib];
     
-    [self setImage:[UIImage imageNamed:@"IconVideoAddDefault"] forState: UIControlStateNormal];
-    [self setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateSelected];
-    [self setImage:[UIImage imageNamed:@"IconVideoAddHighlighted"] forState: UIControlStateHighlighted];
-}
-
--(UIColor*)defaultColor
-{
+    // Reset these as we are using an image
+    self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 1.0, 0.0, 0.0);
     
-    return [UIColor colorWithRed:(224.0f/255.0f)
-                           green:(92.0f/255.0f)
-                            blue:(72.0f/255.0f)
-                           alpha:1.0f];
+    [self setImage: [UIImage imageNamed: @"IconVideoAddDefault"]
+          forState: UIControlStateNormal];
+    
+    [self setImage: [UIImage imageNamed: @"IconVideoAddHighlighted"]
+          forState: UIControlStateSelected];
+    
+    [self setImage: [UIImage imageNamed: @"IconVideoAddHighlighted"]
+          forState: UIControlStateHighlighted];
 }
 
--(UIColor*)highlightedColor
+
+- (UIColor *) defaultColor
 {
-    return [UIColor colorWithRed:(224.0f/255.0f)
-                           green:(92.0f/255.0f)
-                            blue:(72.0f/255.0f)
-                           alpha:1.0f];
+    return [UIColor colorWithRed: (224.0f / 255.0f)
+                           green: (92.0f / 255.0f)
+                            blue: (72.0f / 255.0f)
+                           alpha: 1.0f];
 }
 
--(UIColor*)selectedColor
+
+- (UIColor *) highlightedColor
 {
-    return [UIColor colorWithRed:(224.0f/255.0f)
-                           green:(92.0f/255.0f)
-                            blue:(72.0f/255.0f)
-                           alpha:1.0f];
+    return [UIColor colorWithRed: (224.0f / 255.0f)
+                           green: (92.0f / 255.0f)
+                            blue: (72.0f / 255.0f)
+                           alpha: 1.0f];
+}
+
+
+- (UIColor *) selectedColor
+{
+    return [UIColor colorWithRed: (224.0f / 255.0f)
+                           green: (92.0f / 255.0f)
+                            blue: (72.0f / 255.0f)
+                           alpha: 1.0f];
 }
 
 @end

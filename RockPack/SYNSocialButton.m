@@ -15,6 +15,8 @@
 
 - (void) awakeFromNib
 {
+    [super awakeFromNib];
+    
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
