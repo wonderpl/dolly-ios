@@ -443,6 +443,19 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 - (void) dispatchSearch:(NSString*)searchTerm forType:(kSearchType)type
 {
+    // add first so as to pass the appDelegate
+    if(IS_IPHONE)
+    {
+        // this is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
+        UIView* view_hack = self.searchResultsController.view;
+        #pragma unused(view_hack)
+        
+        [self.navigationController pushViewController:self.searchResultsController
+                                             animated:YES];
+        
+        
+    }
+    
     if(type == kSearchTypeGenre)
     {
         
@@ -454,13 +467,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
     
     
-    if(IS_IPHONE)
-    {
-        [self.navigationController pushViewController:self.searchResultsController
-                                             animated:YES];
-        
-        
-    }
+    
 }
 
 
