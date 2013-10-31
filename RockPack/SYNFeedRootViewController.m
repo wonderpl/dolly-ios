@@ -923,9 +923,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   [socialControl setTitle: socialControl.title
                                                                  andCount: videoInstance.video.starCountValue];
                                               }
-                                              
-//                                              [self.feedCollectionView reloadData];
-                                              
+
                                               socialControl.enabled = YES;
                                           } errorHandler: ^(id error) {
                                               DebugLog(@"Could not star video");
@@ -937,6 +935,15 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
+    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
+    {
+        return; // only relates to video instances
+    }
+    
+    // Get the videoinstance associated with the control pressed
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
+    
+    [self shareVideoInstance: videoInstance];
 }
 
 #pragma mark - Aggregate Cell Delegate
