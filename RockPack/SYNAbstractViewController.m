@@ -629,10 +629,12 @@
 }
 
 
--(void)performAction:(NSString*)action withObject:(id)object
+- (void) performAction: (NSString *) action withObject: (id) object
 {
-    // to be implemented by subclass 
+    // to be implemented by subclass
 }
+
+
 #pragma mark - Load more footer
 
 // Load more footer
@@ -668,6 +670,7 @@
     // return the standard and overide in subclass for special cases such as the ChannelDetails Section
     return NavigationButtonsAppearanceBlack;
 }
+
 
 - (BOOL) alwaysDisplaysSearchBox
 {
@@ -716,11 +719,9 @@
     
     __weak VideoInstance *videoInstance = [self videoInstanceForIndexPath: indexPath];
     
-    
     NSString *starAction = videoInstance.starredByUserValue ? @"unstar" : @"star" ;
     
     //    int starredIndex = self.currentSelectedIndex;
-    
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: starAction
                                             videoInstanceId: videoInstance.uniqueId
@@ -738,11 +739,7 @@
                                                      [parentChannel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId])
                                                   {
                                                       // the video belonged to favorites
-                                                      
                                                       [parentChannel removeVideoInstancesObject:videoInstance];
-                                                      
-                                                      
-                                                      
                                                   }
                                               }
                                               else
@@ -838,15 +835,12 @@
 
 - (void) createAndDisplayNewChannel
 {
-    
     SYNChannelDetailViewController *channelCreationVC =
     [[SYNChannelDetailViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
-                                                  usingMode: kChannelDetailsModeCreate] ;
+                                                  usingMode: kChannelDetailsModeCreate];
     
-    
-    if(IS_IPHONE)
+    if (IS_IPHONE)
     {
-        
         CGRect newFrame = channelCreationVC.view.frame;
         newFrame.size.height = self.view.frame.size.height;
         channelCreationVC.view.frame = newFrame;
@@ -858,8 +852,9 @@
         [animation setDuration: 0.30];
         [animation setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
         
-        [self.view.window.layer addAnimation: animation
-                                      forKey: nil];
+        [self.view.window.layer
+         addAnimation: animation
+         forKey: nil];
         
         [self presentViewController: channelCreationVC
                            animated: NO
@@ -867,12 +862,12 @@
     }
     else
     {
-        [appDelegate.viewStackManager pushController:channelCreationVC];
+        [appDelegate.viewStackManager pushController: channelCreationVC];
     }
-    
 }
 
--(EntityType)associatedEntity
+
+- (EntityType) associatedEntity
 {
     return EntityTypeAny;
 }
@@ -881,57 +876,63 @@
 #pragma mark - UIScrollView delegates
 
 
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+- (void) scrollViewWillBeginDragging: (UIScrollView *) scrollView
+{
     self.startDraggingPoint = scrollView.contentOffset;
     self.startDate = [NSDate date];
-    
 }
 
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+
+- (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate
+{
     self.endDraggingPoint = scrollView.contentOffset;
-    self.endDate = [NSDate dateWithTimeIntervalSinceNow:self.startDate.timeIntervalSinceNow];
+    self.endDate = [NSDate dateWithTimeIntervalSinceNow: self.startDate.timeIntervalSinceNow];
     [self shouldHideTabBar];
 }
 
+
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
-    
-        if (self.lastContentOffset > scrollView.contentOffset.y)
-        {
-            self.scrollDirection = ScrollingDirectionUp;
-        }
-        else {
-            self.scrollDirection = ScrollingDirectionDown;
-        }
-        
-        self.lastContentOffset = scrollView.contentOffset.y;
- 
-    
-    if (scrollView.contentOffset.y<kScrollContentOff && !self.scrollerIsNearTop) {
-        self.scrollerIsNearTop = YES;
-        //Notification that tells the navigation manager to show the navigation bar
-        [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement object:[NSNumber numberWithInt:3]  userInfo:nil];
-
+    if (self.lastContentOffset > scrollView.contentOffset.y)
+    {
+        self.scrollDirection = ScrollingDirectionUp;
+    }
+    else
+    {
+        self.scrollDirection = ScrollingDirectionDown;
     }
     
+    self.lastContentOffset = scrollView.contentOffset.y;
     
-    if (scrollView.contentOffset.y>kScrollContentOff && self.scrollerIsNearTop) {
+    if (scrollView.contentOffset.y < kScrollContentOff && !self.scrollerIsNearTop)
+    {
+        self.scrollerIsNearTop = YES;
+        //Notification that tells the navigation manager to show the navigation bar
+        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                            object: [NSNumber numberWithInt: 3]
+                                                          userInfo: nil];
+    }
+    
+    if (scrollView.contentOffset.y > kScrollContentOff && self.scrollerIsNearTop)
+    {
         self.scrollerIsNearTop = NO;
     }
 }
 
--(void) shouldHideTabBar{
-    
+
+- (void) shouldHideTabBar
+{
     CGPoint difference = CGPointMake(self.startDraggingPoint.x - self.endDraggingPoint.x, self.startDraggingPoint.y - self.endDraggingPoint.y);
     
-    int check =fabsf(difference.y)/fabsf(self.startDate.timeIntervalSinceNow);
-
-    if (check > kScrollSpeedBoundary) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement object:[NSNumber numberWithInteger:self.scrollDirection]  userInfo:nil];
-    }
+    int check = fabsf(difference.y) / fabsf(self.startDate.timeIntervalSinceNow);
     
+    if (check > kScrollSpeedBoundary)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                            object: [NSNumber numberWithInteger: self.scrollDirection]
+                                                          userInfo: nil];
+    }
 }
-
 
 
 @end
