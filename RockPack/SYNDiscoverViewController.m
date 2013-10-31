@@ -121,7 +121,15 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
         popularGenre.uniqueId = @"9090";
         popularGenre.name = [NSString stringWithString:kPopularGenreName];
-        popularGenre.priorityValue = 1000;
+        popularGenre.priorityValue = 100000;
+        
+        SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
+        popularSubGenre.uniqueId = @"9091";
+        popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
+        popularSubGenre.priorityValue = 100000;
+        
+        // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
+        [popularGenre.subgenresSet addObject:popularSubGenre];
         
         if(!popularGenre)
             return;
@@ -177,6 +185,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
     
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    // this is so that empty genres are not returned since only the subgenres are displayed
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"subgenres.@count > 0"];
     
     categoriesFetchRequest.includesSubentities = NO;
     
