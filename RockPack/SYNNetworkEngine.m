@@ -195,7 +195,29 @@
     [self enqueueOperation: networkOperation];
 }
 
-
+- (void) videoForChannelGenreId: (NSString *) genreId
+              completionHandler: (MKNKUserSuccessBlock) completionBlock
+                   errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    if(!genreId)
+        return;
+    
+    
+    NSDictionary *parameters = @{@"locale" : [self getLocaleParam], @"category" : genreId};
+    
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIVideos
+                                                                                                         params: parameters
+                                                                                                     httpMethod: @"GET"
+                                                                                                            ssl: NO];
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueOperation: networkOperation];
+    
+    
+}
 - (void) videoForChannelForUserId: (NSString *) userId
                         channelId: (NSString *) channelId
                        instanceId: (NSString *) instanceId

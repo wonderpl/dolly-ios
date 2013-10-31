@@ -96,6 +96,10 @@
                 completionHandler: (MKNKUserSuccessBlock) completionBlock
                      errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+- (void) videoForChannelGenreId: (NSString *) genreId
+              completionHandler: (MKNKUserSuccessBlock) completionBlock
+                   errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 
 #pragma mark - Video player HTML update
 
