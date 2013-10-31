@@ -643,7 +643,7 @@ typedef void(^FeedDataErrorBlock)(void);
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
         size.height = IS_IPAD ? 470.0f : 369.0f;
     else
-        size.height = IS_IPAD ? 330.0f : 244.0f;
+        size.height = IS_IPAD ? 330.0f : 264.0f;
     
     return size;
 }
