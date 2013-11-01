@@ -41,7 +41,7 @@
 
 - (IBAction) followControlPressed: (id) sender
 {
-    [self.delegate shareControlPressed: sender];
+    [self.delegate followControlPressed: sender];
 }
 
 @end
