@@ -27,6 +27,8 @@
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 @property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
 
+
+
 // main labels from top to bottom
 @property (nonatomic, strong) IBOutlet UILabel *actionMessageLabel;
 

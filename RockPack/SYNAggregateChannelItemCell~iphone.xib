@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EVW-6b-LjA" customClass="SYNAggregateChannelItemCell">
-            <rect key="frame" x="0.0" y="0.0" width="248" height="159"/>
+            <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="248" height="159"/>
+                <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wE3-8D-gFQ" userLabel="Time">
@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CF3-lv-t0P" userLabel="Strip">
-                        <rect key="frame" x="0.0" y="109" width="248" height="50"/>
+                        <rect key="frame" x="1" y="109" width="246" height="49"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.73633730829999999" green="0.789482605" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -65,7 +65,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <size key="customSize" width="307" height="175"/>
             <connections>
                 <outlet property="bg" destination="Wcj-pv-jtq" id="Nns-Y0-KmP"/>
