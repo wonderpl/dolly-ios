@@ -811,6 +811,48 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
+- (void) displayVideoViewerFromView: (UIView *) view
+                          indexPath: (NSIndexPath *) indexPath
+{
+    NSMutableArray* videosArray = @[].mutableCopy;
+    FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
+    
+    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
+    {
+        // NOTE: the data containes either an aggragate or a single item, handle both cases here
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            for (FeedItem *childFeedItem in feedItem.feedItems)
+            {
+                // they have also the same type (video)
+                VideoInstance *vi = (VideoInstance *) ((self.feedVideosById)[childFeedItem.resourceId]);
+                [videosArray addObject: vi];
+            }
+        }
+        else
+        {
+            VideoInstance *vi = (VideoInstance *) ((self.feedVideosById)[feedItem.resourceId]);
+            [videosArray addObject: vi];
+        }
+
+        CGPoint center;
+        
+        if (view)
+        {
+            center = [self.view convertPoint: view.center
+                                    fromView: view.superview];
+        }
+        else
+        {
+            center = self.view.center;
+        }
+        
+        [self displayVideoViewerWithVideoInstanceArray: videosArray
+                                      andSelectedIndex: indexPath.item
+                                                center: center];
+    }
+}
+
 
 #pragma mark - Aggregate Cell Delegate
 

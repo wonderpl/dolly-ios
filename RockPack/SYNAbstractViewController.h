@@ -65,7 +65,9 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) handleNewTabSelectionWithGenre: (Genre *) name;
 
 - (void) videoOverlayDidDissapear;
-- (void) displayVideoViewerFromView: (UIButton *) videoViewButton;
+
+- (void) displayVideoViewerFromView: (UIView *) view
+                          indexPath: (NSIndexPath *) indexPath;
 
 - (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button;
 
