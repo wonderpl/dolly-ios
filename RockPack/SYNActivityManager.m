@@ -14,8 +14,9 @@
 
 @interface SYNActivityManager ()
 
-@property (nonatomic, strong) NSMutableSet *recentlyStarred;
-@property (nonatomic, strong) NSMutableSet *recentlyViewed;
+@property (nonatomic, strong) NSSet *recentlyStarred;
+@property (nonatomic, strong) NSSet *recentlyViewed;
+@property (nonatomic, strong) NSSet *subscribed;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
 
 @end
@@ -31,8 +32,6 @@
     dispatch_once(&onceQueue, ^
     {
         activityManager = [[self alloc] init];
-        activityManager.recentlyStarred = [[NSMutableSet alloc] initWithCapacity: 100];
-        activityManager.recentlyViewed = [[NSMutableSet alloc] initWithCapacity: 100];
         activityManager.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
     });
     
@@ -43,7 +42,36 @@
 {
     [self.appDelegate.oAuthNetworkEngine activityForUserId: self.appDelegate.currentOAuth2Credentials.userId
                                          completionHandler: ^(NSDictionary *responseDictionary) {
-                                             DebugLog(@"Activity updates successful");
+                                             NSArray *starredArray = responseDictionary[@"recently_starred"];
+                                             NSArray *viewedArray = responseDictionary[@"recently_viewed"];
+                                             NSArray *subscribedArray = responseDictionary[@"subscribed"];
+
+                                             if (starredArray)
+                                             {
+                                                 self.recentlyStarred = [NSSet setWithArray: starredArray];
+                                             }
+                                             else
+                                             {
+                                                 self.recentlyStarred = [NSSet setWithArray: @[]];
+                                             }
+                                             
+                                             if (viewedArray)
+                                             {
+                                                 self.recentlyViewed = [NSSet setWithArray: viewedArray];
+                                             }
+                                             else
+                                             {
+                                                 self.recentlyStarred = [NSSet setWithArray: @[]];
+                                             }
+                                             
+                                             if (subscribedArray)
+                                             {
+                                                 self.subscribed = [NSSet setWithArray: subscribedArray];
+                                             }
+                                             else
+                                             {
+                                                 self.recentlyStarred = [NSSet setWithArray: @[]];
+                                             }
                                          } errorHandler: ^(NSDictionary* error) {
                                              DebugLog(@"Activity updates failed");
                                          }];
@@ -77,6 +105,20 @@
 }
 
 
-
+- (void) updateSubscriptionsForChannel: (Channel *) channel
+{
+    // Cache the uniqueId (slight optimisation)
+    NSString *uniqueId = channel.uniqueId;
+    
+    [self.subscribed enumerateObjectsWithOptions: NSEnumerationConcurrent
+                                      usingBlock: ^(id obj, BOOL *stop)
+     {
+         if ([uniqueId isEqualToString: obj])
+         {
+             channel.subscribedByUserValue = YES;
+             *stop = YES;
+         }
+     }];
+}
 
 @end
