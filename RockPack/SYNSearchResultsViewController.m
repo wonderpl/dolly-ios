@@ -302,9 +302,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 }
 
 
-- (void) addControlPressed: (id) control
-{
-}
 
 
 #pragma mark - Tabs Delegate

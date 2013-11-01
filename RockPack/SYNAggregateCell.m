@@ -28,7 +28,7 @@
     
     
     // == Attributes == //
-    self.darkTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextDarkGray]};
+    self.strongTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextMediumGray]};
     self.lightTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLightGray]};
     
     // == Round off the image == //

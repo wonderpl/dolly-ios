@@ -497,6 +497,74 @@
 }
 
 
+- (void) addControlPressed: (SYNSocialButton *) socialControl
+{
+    if (![socialControl.dataItemLinked
+          isKindOfClass: [VideoInstance class]])
+    {
+        return; // only relates to video instances
+    }
+    
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
+    
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoPlusButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
+    
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
+                                                     action: @"select"
+                                            videoInstanceId: videoInstance.uniqueId
+                                          completionHandler: nil
+                                               errorHandler: nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
+                                                        object: self
+                                                      userInfo: @{@"VideoInstance": videoInstance}];
+}
+
+
+
+- (void) shareControlPressed: (SYNSocialButton *) socialControl
+{
+    if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
+    {
+        // Get the videoinstance associated with the control pressed
+        VideoInstance *videoInstance = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"video_instance"
+                                    objectId: videoInstance.uniqueId];
+        
+        [self shareVideoInstance: videoInstance];
+    }
+    else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
+    {
+        // Get the videoinstance associated with the control pressed
+        Channel *channel = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"channel"
+                                    objectId: channel.uniqueId];
+        
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"channelShareButtonClick"
+                                                                label: nil
+                                                                value: nil] build]];
+        
+        [self shareObjectType:  @"channel"
+                     objectId: channel.uniqueId
+                      isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
+                      isVideo: @NO
+                   usingImage: nil];
+        
+        
+    }
+}
+
+
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
@@ -516,24 +584,6 @@
                usingImage: thumbnailImage];
 }
 
-
-- (void) shareChannel: (Channel *) channel
-              isOwner: (NSNumber *) isOwner
-           usingImage: (UIImage *) image
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelShareButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    [self shareObjectType:  @"channel"
-                 objectId: channel.uniqueId
-                  isOwner: isOwner
-                  isVideo: @NO
-               usingImage: image];
-}
 
 
 - (void) shareObjectType: (NSString *) objectType
@@ -834,34 +884,6 @@
 }
 
 
-- (void) shareVideoAtIndexPath: (NSIndexPath *) indexPath
-{
-    VideoInstance *videoInstance = [self videoInstanceForIndexPath: indexPath];
-    
-    [self shareVideoInstance: videoInstance];
-}
-
-
-- (void) shareChannelAtIndexPath: (NSIndexPath *) indexPath
-               andComponentIndex: (NSInteger) componentIndex
-{
-    
-    Channel *channel = [self channelInstanceForIndexPath: indexPath
-                                       andComponentIndex: componentIndex];
-    
-    // Try and find a suitable image
-    UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: channel.channelCover.imageLargeUrl];
-    
-    if (!thumbnailImage)
-    {
-        thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: channel.channelCover.imageUrl];
-    }
-    
-    [self shareChannel: channel
-               isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
-            usingImage: thumbnailImage
-     ];
-}
 
 
 - (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath

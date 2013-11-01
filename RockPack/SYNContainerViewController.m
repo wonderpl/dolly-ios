@@ -144,6 +144,7 @@
     self.currentViewController = self.viewControllers[0];
     
     
+    
 }
 
 
@@ -190,10 +191,9 @@
     void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
         
         
-        // just make sure on right dimensions
-        toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-        
-        [fromViewController.view removeFromSuperview];
+        [[self view] addSubview: toViewController.view];
+
+        [((UIViewController*)fromViewController.viewControllers.lastObject).view removeFromSuperview];
         [fromViewController removeFromParentViewController];
         
         
