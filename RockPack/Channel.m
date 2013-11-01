@@ -3,6 +3,7 @@
 #import "ChannelCover.h"
 #import "ChannelOwner.h"
 #import "NSDictionary+Validation.h"
+#import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
 #import "VideoInstance.h"
 
@@ -110,6 +111,9 @@
     
     [instance setAttributesFromDictionary: dictionary
                       ignoringObjectTypes: ignoringObjects];
+    
+    // Update video starred & viewed
+    [SYNActivityManager.sharedInstance updateSubscriptionsForChannel: instance];
 
     return instance;
 }
