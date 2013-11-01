@@ -59,7 +59,7 @@
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
                                                        action: @selector(showChannel:)];
     self.tap.delegate = self;
-   // [self addGestureRecognizer: self.tap];
+    [self addGestureRecognizer: self.tap];
     
     // Touch for highlighting cells when the user touches them (like UIButton)
     self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self action: @selector(showGlossLowlight:)];

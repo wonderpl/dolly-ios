@@ -318,10 +318,8 @@ SYNImagePickerControllerDelegate>
         {
             // Google analytics support
             id tracker = [[GAI sharedInstance] defaultTracker];
-            
             [tracker set: kGAIScreenName
                    value: @"Own Profile"];
-            
             [tracker send: [[GAIDictionaryBuilder createAppView] build]];
         }
     }
@@ -375,13 +373,11 @@ SYNImagePickerControllerDelegate>
     if (self.isIPhone)
     {
         self.channelThumbnailCollectionView.scrollsToTop = !self.collectionsTabActive;
-        
         self.subscriptionThumbnailCollectionView.scrollsToTop = self.collectionsTabActive;
     }
     else
     {
         self.channelThumbnailCollectionView.scrollsToTop = YES;
-        
         self.subscriptionThumbnailCollectionView.scrollsToTop = YES;
     }
     
@@ -748,7 +744,6 @@ SYNImagePickerControllerDelegate>
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
         SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
-        
         cell = createCell;
     }
     /*
@@ -769,6 +764,8 @@ SYNImagePickerControllerDelegate>
         [channelThumbnailCell setChannel:channel];
         [channelThumbnailCell setTitle: channel.title];
         [channelThumbnailCell setHiddenForFollowButton:YES];
+        [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+
         cell = channelThumbnailCell;
         
     }else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView]){
@@ -777,13 +774,11 @@ SYNImagePickerControllerDelegate>
         [channelThumbnailCell setTitle: channel.title];
         [channelThumbnailCell setFollowButtonLabel:self.tmpProfile];
         
-        
         /*
          [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
          placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
          options: SDWebImageRetryFailed];
          */
-        
         [channelThumbnailCell setTitle:channel.title];
         if (channel.favouritesValue)
         {
@@ -1113,8 +1108,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
              [self didBeginPulling];
              _startingPosition = self.mainScrollView.contentOffset.y;
              _pulling = YES;
-             
-             
              }
              if (_pulling)
              {
@@ -1164,10 +1157,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     if (offset.y >FULLNAMELABEL) {
         CGAffineTransform move = CGAffineTransformMakeTranslation(0, offset.y-FULLNAMELABEL);
         
-   //     CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
-        
+        //CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
         //self.fullNameLabel.transform = CGAffineTransformConcat(move, scale);
-        
         self.fullNameLabel.transform = move;
     }
     
@@ -1344,10 +1335,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 }
 
 
-
 #pragma mark - Arc menu support
-
-
 
 - (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
                         andComponentIndex: (NSInteger) componentIndex
