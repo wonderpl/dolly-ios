@@ -290,6 +290,35 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 }
 
 
+- (void) collectionView: (UICollectionView *) collectionView
+         didDeselectItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];
+    
+    [self displayVideoViewerFromCell: cell];
+}
+
+
+- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
+{
+    NSIndexPath * indexPath = [self.videosCollectionView indexPathForCell: cell];
+    
+    CGPoint center;
+    
+    if (cell)
+    {
+        center = [self.view convertPoint: cell.center
+                                fromView: cell.superview];
+    }
+    else
+    {
+        center = self.view.center;
+    }
+    
+    [self displayVideoViewerWithVideoInstanceArray: self.videosArray
+                                  andSelectedIndex: indexPath.item
+                                            center: center];
+}
 
 
 #pragma mark - Tabs Delegate
@@ -363,6 +392,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     _userSearchOperation = runningSearchOperation;
 }
+
 
 
 @end

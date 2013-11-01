@@ -254,6 +254,11 @@
     NSLog (@"Shouldn't be calling abstract function");
 }
 
+- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
+{
+    NSLog (@"Shouldn't be calling abstract function");
+}
+
 
 - (void) displayVideoViewerWithVideoInstanceArray: (NSArray *) videoInstanceArray
                                  andSelectedIndex: (int) selectedIndex
