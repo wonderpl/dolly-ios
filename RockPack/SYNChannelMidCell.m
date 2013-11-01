@@ -67,7 +67,6 @@
    // [self addGestureRecognizer: self.touch];
     self.specialSelected = NO;
     
-    
     // Required to make cells look good when wobbling (delete)
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = UIScreen.mainScreen.scale;
@@ -80,7 +79,7 @@
         
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
         [self.boarderView.layer setBorderWidth:1.0f];
-
+        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
     }else{
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:18]];
@@ -104,6 +103,11 @@
     [self.containerView addGestureRecognizer:self.leftSwipe];
 
     
+    if (MyOwnProfile) {
+        self.followButton.hidden = YES;
+    }else{
+        self.followButton.hidden = NO;
+    }
     
 }
 
@@ -191,19 +195,39 @@
     return YES; // handle the touch
 }
 
-
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
 {
     // Just need to reference any button in the cell (as there is no longer an actual video button)
     [self.viewControllerDelegate channelTapped: self];
 }
 
-- (IBAction)showDescription:(UISwipeGestureRecognizer *)recognizer{
+-(void) setHiddenForFollowButton: (BOOL) hide{
+    self.followButton.hidden = hide;
+}
 
-    
-    NSLog(@"showDes ");
+-(void) setTitle :(NSString*) titleString
+{
+    [self.videoTitleLabel setText:titleString];
+}
+
+-(void) setFollowButtonLabel: (ProfileType) profile{
+    if (profile == MyOwnProfile)
+    {
+        [self.followButton setTitle:NSLocalizedString(@"Unfollow", @"unfollow") forState:UIControlStateNormal];
+        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
+    }
+    else if(profile == OtherUsersProfile)
+    {
+        [self.followButton setTitle:NSLocalizedString(@"Follow", @"follow") forState:UIControlStateNormal];
+        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
+    }
+}
+
+- (IBAction)showDescription:(UISwipeGestureRecognizer *)recognizer
+{
     [UIView animateWithDuration:0.5f animations:^{
-        if (self.containerView.frame.origin.x ==0) {
+        if (self.containerView.frame.origin.x ==0)
+        {
 
         CGRect tmpRect = self.containerView.frame;
         
@@ -214,12 +238,13 @@
     
 }
 
-- (IBAction)hideDescription:(UISwipeGestureRecognizer *)recognizer{
+- (IBAction)hideDescription:(UISwipeGestureRecognizer *)recognizer
+{
     
-    NSLog(@"hideDes ");
     [UIView animateWithDuration:0.5f animations:^{
         
-        if (self.containerView.frame.origin.x !=0) {
+        if (self.containerView.frame.origin.x !=0)
+        {
             CGRect tmpRect = self.containerView.frame;
             
             tmpRect.origin.x -= 245;
@@ -228,6 +253,17 @@
         }
     }];
     
+}
+- (IBAction)followChannel:(id)sender {
+    
+    if (self.channel != nil)
+    {
+        NSLog(@"%@", self.channel.title);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
+                                                            object: self
+                                                          userInfo: @{kChannel : self.channel}];
+    }
 }
 
 

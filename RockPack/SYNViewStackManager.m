@@ -22,8 +22,6 @@
 
 @implementation SYNViewStackManager
 
-
-
 + (id) manager
 {
     return [[self alloc] init];
@@ -107,14 +105,11 @@
     SYNChannelDetailViewController *channelVC =
     (SYNChannelDetailViewController *) [self topControllerMatchingTypeString: NSStringFromClass([SYNChannelDetailViewController class])];
     
-    
     if (channelVC)
     {
         channelVC.channel = channel;
         channelVC.autoplayVideoId = autoplayId;
         [navigationController popToViewController:channelVC animated:nil];
-
-
     }
     else
     {
@@ -122,9 +117,7 @@
                                                                   usingMode: kChannelDetailsModeDisplay];
         channelVC.autoplayVideoId = autoplayId;
         [navigationController pushViewController:channelVC animated:nil];
-
     }
-    
 }
 
 - (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId
@@ -147,7 +140,6 @@
     {
         channelVC = [[SYNChannelDetailViewController alloc] initWithChannel: channel
                                                                   usingMode: kChannelDetailsModeDisplay];
-        
         channelVC.autoplayVideoId = autoplayId;
         [self pushController: channelVC];
     }
@@ -175,12 +167,8 @@
                          controller.view.alpha = 1.0f;
                      }
                      completion: nil];
-    
-    
     [self.navigationController pushViewController: controller
                                          animated: YES];
-    
-
 }
 
 
@@ -202,7 +190,7 @@
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^{
                          
-                         wself.navigationController.topViewController.view.alpha = 0.0f;
+                         self.navigationController.topViewController.view.alpha = 0.0f;
                          
                          controllerToPopTo.view.alpha = 1.0f;
                      }

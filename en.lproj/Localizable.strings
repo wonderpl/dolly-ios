@@ -264,3 +264,9 @@
 "settings_popover_about_title" = "ABOUT";
 
 "attribution_list" = " Facebook SDK by Facebook Inc. \n\n GKImagePicker by Georg Kitz \n\n LXReorderableCollectionViewFlowLayout by Stan Chang Khin Boon \n\n MKNetworkKit by Mugunth Kumar \n\n REActivityViewController by Roman Efimov \n\n RegexKitLite by John Engelhart \n\n SDWebImage by Olivier Poitrey \n\n SSKeychain by Sam Soffes ";
+
+// == Channel nib text == //
+
+"Follow" = "Follow";
+"Unfollow" = "Unfollow";
+

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Channel.h"
 
 @protocol SYNChannelMidCellDelegate <NSObject>
 
@@ -18,8 +19,13 @@
 @interface SYNChannelMidCell : UICollectionViewCell
 
 @property (nonatomic) BOOL specialSelected;
-@property (nonatomic, weak) id<SYNChannelMidCellDelegate> viewControllerDelegate;
+@property (nonatomic, weak) Channel* channel;
 
+@property (nonatomic, weak) id<SYNChannelMidCellDelegate> viewControllerDelegate;
+-(void) setFollowButtonLabel: (ProfileType) profile;
+
+-(void) setTitle :(NSString*) titleString;
+-(void) setHiddenForFollowButton: (BOOL) hide;
 
 
 

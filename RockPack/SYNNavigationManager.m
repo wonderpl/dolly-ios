@@ -18,13 +18,12 @@
     return [[SYNNavigationManager alloc] init];
 }
 
-
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(scrollDetected:) name:kScrollMovement object:nil];
-
     }
     return self;
 }
@@ -37,22 +36,26 @@
 - (void)scrollDetected:(NSNotification *)notification
 {
  
-    //Worse case check for ipad
-    if (!IS_IPHONE) {
+    // == Check for ipad
+    if (!IS_IPHONE)
+    {
         return;
     }
     
     NSNumber *numOfScrollDirection = [notification object];
-        
-    if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height - _masterController.tabsView.frame.size.height) {
+    // == Scrolling down, Hide the tab bar
+    if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height - _masterController.tabsView.frame.size.height)
+    {
         [UIView animateWithDuration:0.5f animations:^{
             CGRect tmpFrame = _masterController.tabsView.frame;
             tmpFrame.origin.y += _masterController.tabsView.frame.size.height;
             _masterController.tabsView.frame = tmpFrame;
         }];
     }
-
-    if (numOfScrollDirection.intValue == ScrollingDirectionUp && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height) {
+    
+     // == Scrolling up, Show the tab bar
+    if (numOfScrollDirection.intValue == ScrollingDirectionUp && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height)
+    {
         [UIView animateWithDuration:0.5f animations:^{
             
             CGRect tmpFrame = _masterController.tabsView.frame;
@@ -84,11 +87,7 @@
     {
         return;
     }
-    
-    
     [self.containerController navigateToPage: index];
-    
-    
     
 }
 
@@ -99,7 +98,6 @@
     
     for (UIButton *tab in masterController.tabs)
     {
-        
         [tab addTarget: self
                 action: @selector(tabPressed:) 
       forControlEvents: UIControlEventTouchUpInside];
@@ -126,12 +124,5 @@
     
 }
 
-
--(void) scrollMoved: (UIScrollView *) scrollMoved{
-  //  CGRect newFrame = _masterController.tabsView.frame;
-   // NSLog(@"Navigation %@, ",scrollMoved);
-   // NSLog (@"%@",scrollMoved);
-
-}
 
 @end
