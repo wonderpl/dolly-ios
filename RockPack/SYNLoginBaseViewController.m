@@ -39,18 +39,18 @@
     if (self)
     {
         [self commonInit];
-        
     }
     
     return self;
 }
 
-        
+
 - (id) initWithNibName: (NSString *) nibNameOrNil
                 bundle: (NSBundle *) nibBundleOrNil
 {
     self = [super initWithNibName: nibNameOrNil
                            bundle: nibBundleOrNil];
+    
     if (self)
     {
         [self commonInit];
@@ -68,7 +68,7 @@
 
 - (void) commonInit
 {
-    _appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    _appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
     self.reachability = [Reachability reachabilityWithHostname: _appDelegate.networkEngine.hostName];
     
@@ -76,14 +76,16 @@
     self.currentOnBoardingPage = 0;
     
     self.loginBackgroundFrontImage.alpha = 0.0;
-
+    
     // create image array
-    NSMutableArray* imagesArray = [[NSMutableArray alloc] initWithCapacity:kLoginOnBoardingMessagesNum];
+    NSMutableArray *imagesArray = [[NSMutableArray alloc] initWithCapacity: kLoginOnBoardingMessagesNum];
+    
     for (int i = 0; i < kLoginOnBoardingMessagesNum; i++)
     {
         //[imagesArray addObject: [NSString stringWithFormat: @"login_bg_%i.jpg", (i+1)]];
         [imagesArray addObject: [NSString stringWithFormat: @"login_bg_1.jpg"]]; //Only 1 image for now...
     }
+    
     self.backgroundImagesArray = [NSArray arrayWithArray: imagesArray];
 }
 
@@ -97,11 +99,12 @@
     CGRect totalImageRect;
     
     CGPoint correctPoint;
+    
     if (IS_IPAD)
     {
         totalImageRect = CGRectMake(0.0, 0.0, 1024.0, 1024.0);
         
-        correctPoint = self.view.center; 
+        correctPoint = self.view.center;
     }
     else
     {
@@ -117,7 +120,7 @@
     self.backgroundImageView.frame = totalImageRect;
     
     [self.view insertSubview: self.backgroundImageView
-                    atIndex: 0];
+                     atIndex: 0];
     
     if (IS_IOS_7_OR_GREATER)
     {
@@ -143,20 +146,20 @@
         [self.view insertSubview: self.upperParallaxImageView
                          atIndex: 2];
     }
-
-//    self.loginBackgroundImage.center = correctPoint;
-//    self.loginBackgroundFrontImage.center = correctPoint;
-//    
+    
+    //    self.loginBackgroundImage.center = correctPoint;
+    //    self.loginBackgroundFrontImage.center = correctPoint;
+    //
     self.loginBackgroundImage.center = CGPointMake(self.view.center.x, self.loginBackgroundImage.center.y);
     
     
-//    self.loginBackgroundImage.image = [UIImage imageNamed:self.backgroundImagesArray[0]]; // get the first image
+    //    self.loginBackgroundImage.image = [UIImage imageNamed:self.backgroundImagesArray[0]]; // get the first image
     
     // localise date format for US and UK
     
-    NSString* localeFromDevice = [(NSString*)CFBridgingRelease(CFLocaleCreateCanonicalLanguageIdentifierFromString(NULL, (CFStringRef)[NSLocale.autoupdatingCurrentLocale objectForKey: NSLocaleIdentifier])) lowercaseString];
+    NSString *localeFromDevice = [(NSString *) CFBridgingRelease(CFLocaleCreateCanonicalLanguageIdentifierFromString(NULL, (CFStringRef)[NSLocale.autoupdatingCurrentLocale objectForKey: NSLocaleIdentifier])) lowercaseString];
     
-    if ([localeFromDevice isEqualToString:@"en-us"])
+    if ([localeFromDevice isEqualToString: @"en-us"])
     {
         NSInteger ddTag = self.ddInputField.tag;
         CGRect ddRect = self.ddInputField.frame;
@@ -172,8 +175,7 @@
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    [super viewWillAppear:animated];
-    
+    [super viewWillAppear: animated];
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(reachabilityChanged:)
@@ -200,23 +202,26 @@
                                                   object: nil];
 }
 
+
 - (void) setUpInitialState
 {
     //Override in subclass
-    
 }
+
 
 - (void) setUpLoginStateFromPreviousState: (kLoginScreenState) previousState
 {
     self.onBoardingController.view.hidden = YES;
 }
 
+
 - (void) setUpRegisterStateFromState: (kLoginScreenState) previousState
 {
     self.onBoardingController.view.hidden = YES;
 }
 
-- (BOOL) checkAndSaveRegisteredUser: (SYNOAuth2Credential*) credential
+
+- (BOOL) checkAndSaveRegisteredUser: (SYNOAuth2Credential *) credential
 {
     // at this point the user should have been registered
     
@@ -237,56 +242,53 @@
 
 #pragma mark - login
 
-- (void) loginForUsername: (NSString*) username
-              forPassword: (NSString*) password
+- (void) loginForUsername: (NSString *) username
+              forPassword: (NSString *) password
         completionHandler: (MKNKUserSuccessBlock) completionBlock
              errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    [self.appDelegate.oAuthNetworkEngine doSimpleLoginForUsername: username forPassword: password completionHandler: ^(SYNOAuth2Credential* credential) {
-
-        // Case where the user is a member of Rockpack but has not signing in this device
-        
-        [self.appDelegate.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: credential completionHandler: ^(NSDictionary* dictionary) {
-
-            // the dictionary contains a User dictionary //
-            
-            
-            // by this time the currentUser is set in the DB //
-            
-            if ([self checkAndSaveRegisteredUser: credential])
-            {
-                
-                DebugLog(@"User Registerd: %@", [dictionary objectForKey: @"username"]);
-                
-                _appDelegate.currentUser.loginOriginValue = LoginOriginRockpack;
-                
-                
-                // if the user has an External Account with "facebook"
-                if(_appDelegate.currentUser.facebookAccount)
-                {
-                    // Link it with the FB SDK
-                    [[SYNFacebookManager sharedFBManager] openSessionFromExistingToken: _appDelegate.currentUser.facebookAccount.token
-                                                                             onSuccess: ^{
-                                                                                 
-                                                                                 DebugLog(@"Linked FB Account");
-                                                                                 
-                                                                           } onFailure: ^(NSString *errorMessage) {
-                                                                                 
-                                                                                 DebugLog(@"");
-                                                                                 
-                                                                           }];
-                }
-                
-                completionBlock(dictionary);
-            }
-            else
-            {
-                DebugLog(@"ERROR: User not registered (User: %@)", _appDelegate.currentUser);
-            }
-        } errorHandler:errorBlock];
-        
-    } errorHandler:errorBlock];
-    
+    [self.appDelegate.oAuthNetworkEngine
+     doSimpleLoginForUsername: username
+     forPassword: password
+     completionHandler: ^(SYNOAuth2Credential *credential) {
+         // Case where the user is a member of Rockpack but has not signing in this device
+         
+         [self.appDelegate.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: credential
+                                                                   completionHandler: ^(NSDictionary *dictionary) {
+                                                                       // the dictionary contains a User dictionary //
+                                                                       
+                                                                       
+                                                                       // by this time the currentUser is set in the DB //
+                                                                       
+                                                                       if ([self checkAndSaveRegisteredUser: credential])
+                                                                       {
+                                                                           DebugLog(@"User Registerd: %@", [dictionary objectForKey: @"username"]);
+                                                                           
+                                                                           _appDelegate.currentUser.loginOriginValue = LoginOriginRockpack;
+                                                                           
+                                                                           // if the user has an External Account with "facebook"
+                                                                           if (_appDelegate.currentUser.facebookAccount)
+                                                                           {
+                                                                               // Link it with the FB SDK
+                                                                               [[SYNFacebookManager sharedFBManager] openSessionFromExistingToken: _appDelegate.currentUser.facebookAccount.token
+                                                                                                                                        onSuccess: ^{
+                                                                                                                                            DebugLog(@"Linked FB Account");
+                                                                                                                                        }
+                                                                                
+                                                                                
+                                                                                                                                        onFailure: ^(NSString *errorMessage) {
+                                                                                                                                            DebugLog(@"");
+                                                                                                                                        }];
+                                                                           }
+                                                                           
+                                                                           completionBlock(dictionary);
+                                                                       }
+                                                                       else
+                                                                       {
+                                                                           DebugLog(@"ERROR: User not registered (User: %@)", _appDelegate.currentUser);
+                                                                       }
+                                                                   } errorHandler: errorBlock];
+     } errorHandler: errorBlock];
 }
 
 
@@ -324,8 +326,7 @@
                                                           completionHandler: ^(NSDictionary* dictionary) {
                                                               [self checkAndSaveRegisteredUser: credential];
                                                               completionBlock(dictionary);
-                                                          }
-                                                               errorHandler: errorBlock];
+                                                          }  errorHandler: errorBlock];
     } errorHandler: errorBlock];
 }
 
@@ -387,63 +388,60 @@
 
 #pragma mark - login facebook
 
--(void) loginThroughFacebookWithCompletionHandler: (MKNKJSONCompleteBlock) completionBlock
-                                     errorHandler: (MKNKUserErrorBlock) errorBlock
+- (void) loginThroughFacebookWithCompletionHandler: (MKNKJSONCompleteBlock) completionBlock
+                                      errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    
     // figure out if it exists in account
     
-//    ACAccountStore* accountStore = [[ACAccountStore alloc] init];
-//    ACAccountType* facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-//    NSArray *facebookAccounts = [accountStore accountsWithAccountType:facebookAccountType];
-//    NSLog(@"Accounts:\n%@", facebookAccounts);
-//    
-//    NSDictionary *options = @{ACFacebookAppIdKey : @"217008995103822",
-//                              ACFacebookPermissionsKey : @[@"publish_stream"],
-//                              ACFacebookAudienceKey : ACFacebookAudienceEveryone};
-//    
-//    if(facebookAccountType.accessGranted)
-//    {
-//        NSLog(@"User had granted Facebook Access");
-//    }
-//    else
-//    {
-//        NSLog(@"User had revoked Facebook Access");
-//        [accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL granted, NSError *error) {
-//            if (granted)
-//            {
-//                NSLog(@"Granted!");
-//                
-//            }
-//            else
-//            {
-//                NSLog(@"NOT Granted (error: %@)", error);
-//            }
-//        }];
-//        return;
-//    }
+    //    ACAccountStore* accountStore = [[ACAccountStore alloc] init];
+    //    ACAccountType* facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    //    NSArray *facebookAccounts = [accountStore accountsWithAccountType:facebookAccountType];
+    //    NSLog(@"Accounts:\n%@", facebookAccounts);
+    //
+    //    NSDictionary *options = @{ACFacebookAppIdKey : @"217008995103822",
+    //                              ACFacebookPermissionsKey : @[@"publish_stream"],
+    //                              ACFacebookAudienceKey : ACFacebookAudienceEveryone};
+    //
+    //    if(facebookAccountType.accessGranted)
+    //    {
+    //        NSLog(@"User had granted Facebook Access");
+    //    }
+    //    else
+    //    {
+    //        NSLog(@"User had revoked Facebook Access");
+    //        [accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL granted, NSError *error) {
+    //            if (granted)
+    //            {
+    //                NSLog(@"Granted!");
+    //
+    //            }
+    //            else
+    //            {
+    //                NSLog(@"NOT Granted (error: %@)", error);
+    //            }
+    //        }];
+    //        return;
+    //    }
     
-    SYNFacebookManager* facebookManager = [SYNFacebookManager sharedFBManager];
+    SYNFacebookManager *facebookManager = [SYNFacebookManager sharedFBManager];
     
-    [facebookManager loginOnSuccess: ^(NSDictionary<FBGraphUser> *dictionary) {
-        
-        FBAccessTokenData* accessTokenData = [[FBSession activeSession] accessTokenData];
+    [facebookManager loginOnSuccess: ^(NSDictionary < FBGraphUser > *dictionary) {
+        FBAccessTokenData *accessTokenData = [[FBSession activeSession] accessTokenData];
         
         // Log our user's age in Google Analytics
         NSString *birthday = dictionary[@"birthday"];
         
         if (birthday)
         {
-            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat: @"MM/dd/yyyy"];
-            NSDate* birthdayDate = [dateFormatter dateFromString: birthday];
+            NSDate *birthdayDate = [dateFormatter dateFromString: birthday];
             
             // Calculate age, taking account of leap-years etc. (probably too accurate!)
-            NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components: NSYearCalendarUnit
-                                                                              fromDate: birthdayDate
-                                                                                toDate: NSDate.date
-                                                                               options: 0];
-            
+            NSDateComponents *ageComponents = [[NSCalendar currentCalendar]	 components: NSYearCalendarUnit
+                                                                                  fromDate: birthdayDate
+                                                                                    toDate: NSDate.date
+                                                                                   options: 0];
             NSInteger age = [ageComponents year];
             
             NSString *ageString = [NSString ageCategoryStringFromInt: age];
@@ -457,7 +455,6 @@
         
         [self doFacebookLoginAnimation];
         
-        
         // We need to check if the expiration date is valid (if the user is using the native iOS Facebook settings, it will be invalid ([NSDate distantFuture])
         NSDate *expDate = nil;
         
@@ -468,34 +465,27 @@
         
         // after the log-in with FB through its SDK, log in with the server hitting "/ws/login/external/"
         [_appDelegate.oAuthNetworkEngine doFacebookLoginWithAccessToken: accessTokenData.accessToken
-                                                                expires: expDate
-                                                            permissions: accessTokenData.permissions // @"read" at this time
-                                                      completionHandler: ^(SYNOAuth2Credential* credential) {
-                                                          
-            // get the user data
-                                                          
-            [_appDelegate.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: credential
-                                                                  completionHandler: ^(NSDictionary* dictionary) {
-                                                                  
-                if ([self checkAndSaveRegisteredUser: credential])
-                {
-                    _appDelegate.currentUser.loginOriginValue = LoginOriginFacebook;
-                }
-                else
-                {
-                    DebugLog(@"ERROR: User not registered (User: %@)", _appDelegate.currentUser);
-                    // TODO: handle user not being registered propery
-                }
-                                                                      
-                                                         
-                    
-                completionBlock(dictionary);
-                                                                  
-                                                                  
-            } errorHandler:errorBlock];
-        } errorHandler: errorBlock];
-    }
-    onFailure: ^(NSString* errorString)
+         expires: expDate
+         permissions: accessTokenData.permissions                 // @"read" at this time
+         completionHandler: ^(SYNOAuth2Credential *credential) {
+             // get the user data
+             
+             [_appDelegate.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: credential
+              completionHandler: ^(NSDictionary *dictionary) {
+                  if ([self checkAndSaveRegisteredUser: credential])
+                  {
+                      _appDelegate.currentUser.loginOriginValue = LoginOriginFacebook;
+                  }
+                  else
+                  {
+                      DebugLog(@"ERROR: User not registered (User: %@)", _appDelegate.currentUser);
+                      // TODO: handle user not being registered propery
+                  }
+                  
+                  completionBlock(dictionary);
+              } errorHandler: errorBlock];
+         } errorHandler: errorBlock];
+    } onFailure: ^(NSString *errorString)
      {
          errorBlock(errorString);
      }];
@@ -504,16 +494,23 @@
 
 #pragma mark - Reachability change
 
-- (void) reachabilityChanged: (NSNotification*) notification
+- (void) reachabilityChanged: (NSNotification *) notification
 {
-    #ifdef PRINT_REACHABILITY
-    NSString* reachabilityString;
+#ifdef PRINT_REACHABILITY
+    NSString *reachabilityString;
+    
     if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
+    {
         reachabilityString = @"WiFi";
+    }
     else if ([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
+    {
         reachabilityString = @"WWAN";
+    }
     else if ([self.reachability currentReachabilityStatus] == NotReachable)
+    {
         reachabilityString = @"None";
+    }
     
     //    DebugLog(@"Reachability == %@", reachabilityString);
 #endif
@@ -534,77 +531,92 @@
     }
     else if ([self.reachability currentReachabilityStatus] == NotReachable)
     {
-        NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil)
+        NSString *message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil)
         : NSLocalizedString(@"No_Network_iPhone", nil);
         [self presentNetworkErrorViewWithMesssage: message];
     }
 }
 
 
-- (void) applicationResume{
+- (void) applicationResume
+{
     if (!self.reachability)
     {
         self.reachability = [Reachability reachabilityWithHostname: _appDelegate.networkEngine.hostName];
     }
-    [self reachabilityChanged:nil];
+    
+    [self reachabilityChanged: nil];
 }
 
 
-- (void) presentNetworkErrorViewWithMesssage: (NSString*) message
+- (void) presentNetworkErrorViewWithMesssage: (NSString *) message
 {
     if (self.networkErrorView)
     {
-        [self.networkErrorView setText:message];
+        [self.networkErrorView
+         setText: message];
         return;
     }
     
     self.networkErrorView = [SYNNetworkMessageView errorView];
-    [self.networkErrorView setCenterVerticalOffset:18.0f];
-    self.networkErrorView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BarNetworkLogin"]];
-    self.networkErrorView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleWidth;
-    [self.networkErrorView setText:message];
+    [self.networkErrorView
+     setCenterVerticalOffset: 18.0f];
+    self.networkErrorView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarNetworkLogin"]];
+    self.networkErrorView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+    [self.networkErrorView
+     setText: message];
     
     CGRect errorViewFrame = self.networkErrorView.frame;
     errorViewFrame.origin.y = -(self.networkErrorView.height);
     self.networkErrorView.frame = errorViewFrame;
     
-    [self.view addSubview:self.networkErrorView];
+    [self.view addSubview: self.networkErrorView];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect endFrame = self.networkErrorView.frame;
-        endFrame.origin.y = 0.0f;
-        self.networkErrorView.frame = endFrame;
-    }];
+    [UIView animateWithDuration: 0.3
+                     animations: ^{
+                         CGRect endFrame = self.networkErrorView.frame;
+                         endFrame.origin.y = 0.0f;
+                         self.networkErrorView.frame = endFrame;
+                     }];
 }
 
 
 - (void) hideNetworkErrorView
 {
-    [UIView animateWithDuration:0.3
-                          delay:0.1 options:UIViewAnimationCurveEaseInOut
-                     animations:^{
-        CGRect errorViewFrame = self.networkErrorView.frame;
-        errorViewFrame.origin.y = -(self.networkErrorView.height);
-        self.networkErrorView.frame = errorViewFrame;
-    } completion: ^(BOOL finished) {
-        if (finished)
-        {
-            [self.networkErrorView removeFromSuperview];
-            self.networkErrorView = nil;
-        }
-    }];
+    [UIView animateWithDuration: 0.3
+                          delay: 0.1
+                        options: UIViewAnimationCurveEaseInOut
+                     animations: ^{
+                         CGRect errorViewFrame = self.networkErrorView.frame;
+                         errorViewFrame.origin.y = -(self.networkErrorView.height);
+                         self.networkErrorView.frame = errorViewFrame;
+                     }
+                     completion: ^(BOOL finished) {
+                         if (finished)
+                         {
+                             [self.networkErrorView removeFromSuperview];
+                             self.networkErrorView = nil;
+                         }
+                     }];
 }
 
 
 #pragma mark - check network before sending request
+
 - (BOOL) isNetworkAccessibleOtherwiseShowErrorAlert
 {
     BOOL isReachable = ![self.reachability currentReachabilityStatus] == NotReachable;
-    if (! isReachable)
+    
+    if (!isReachable)
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login_screen_form_no_connection_dialog_title",nil) message:NSLocalizedString(@"login_screen_form_no_connection_dialog_message",nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK",nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"login_screen_form_no_connection_dialog_title", nil)
+                                                        message: NSLocalizedString(@"login_screen_form_no_connection_dialog_message", nil)
+                                                       delegate: nil
+                                              cancelButtonTitle: nil
+                                              otherButtonTitles: NSLocalizedString(@"OK", nil), nil];
         [alert show];
     }
+    
     return isReachable;
 }
 
@@ -614,6 +626,7 @@
     // to be implemented by subclass
 }
 
+
 - (void) doFacebookFailAnimation
 {
     // to be implemented by subclass
@@ -622,9 +635,8 @@
 
 #pragma mark - form validation
 
-- (BOOL) registrationFormPartOneIsValidForUserName: (UITextField*) userNameInputField
+- (BOOL) registrationFormPartOneIsValidForUserName: (UITextField *) userNameInputField
 {
-    
     if (userNameInputField.text.length < 1)
     {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_username_error_empty", nil)
@@ -634,7 +646,8 @@
         
         return NO;
     }
-    if (![userNameInputField.text isMatchedByRegex:@"^[a-zA-Z0-9]+$"])
+    
+    if (![userNameInputField.text isMatchedByRegex: @"^[a-zA-Z0-9]+$"])
     {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_username_error_invalid", nil)
                    nextToView: userNameInputField];
@@ -643,6 +656,7 @@
         
         return NO;
     }
+    
     if (userNameInputField.text.length > 20)
     {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_username_error_too_long", nil)
@@ -653,21 +667,20 @@
         return NO;
     }
     
-    
     return YES;
 }
 
 
-- (BOOL) registrationFormIsValidForEmail: (UITextField*) emailInputField
-                                userName: (UITextField*) userNameInputField
-                                password: (UITextField*) passwordInputField
-                                      dd: (UITextField*) ddInputField
-                                      mm: (UITextField*) mmInputField
-                                    yyyy: (UITextField*) yyyyInputField
+- (BOOL) registrationFormIsValidForEmail: (UITextField *) emailInputField
+                                userName: (UITextField *) userNameInputField
+                                password: (UITextField *) passwordInputField
+                                      dd: (UITextField *) ddInputField
+                                      mm: (UITextField *) mmInputField
+                                    yyyy: (UITextField *) yyyyInputField
 {
     if (emailInputField.text.length < 1)
     {
-        [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_email_error_empty",nil)
+        [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_email_error_empty", nil)
                    nextToView: emailInputField];
         
         [emailInputField becomeFirstResponder];
@@ -698,10 +711,11 @@
         
         return NO;
     }
+    
     //register_screen_form_field_username_error_too_long
     // == Username must be
     
-    if (![userNameInputField.text isMatchedByRegex:@"^[a-zA-Z0-9\\._]+$"])
+    if (![userNameInputField.text isMatchedByRegex: @"^[a-zA-Z0-9\\._]+$"])
     {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_username_error_invalid", nil)
                    nextToView: userNameInputField];
@@ -739,19 +753,19 @@
 }
 
 
-- (BOOL) dateValidForDd: (UITextField*) ddInputField
-                     mm: (UITextField*) mmInputField
-                   yyyy: (UITextField*) yyyyInputField
+- (BOOL) dateValidForDd: (UITextField *) ddInputField
+                     mm: (UITextField *) mmInputField
+                   yyyy: (UITextField *) yyyyInputField
 {
     // == Check for date == //
     
-    NSArray* dobTextFields = @[mmInputField, ddInputField, yyyyInputField];
-
+    NSArray *dobTextFields = @[mmInputField, ddInputField, yyyyInputField];
+    
     // == Check wether the DOB fields contain numbers == //
     
-    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     
-    for (UITextField* dobField in dobTextFields)
+    for (UITextField *dobField in dobTextFields)
     {
         if (dobField.text.length == 0)
         {
@@ -765,7 +779,7 @@
         
         if (dobField.text.length == 1)
         {
-            dobField.text = [NSString stringWithFormat:@"0%@", dobField.text]; // add a trailing 0
+            dobField.text = [NSString stringWithFormat: @"0%@", dobField.text]; // add a trailing 0
         }
         
         if (![numberFormatter numberFromString: dobField.text])
@@ -786,9 +800,9 @@
         return NO;
     }
     
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat: @"yyyy-MM-dd"];
-    NSDate* potentialDate = [dateFormatter dateFromString: [NSString stringWithFormat:@"%@-%@-%@", yyyyInputField.text, [self zeroPadIfOneCharacter:mmInputField.text], [self zeroPadIfOneCharacter:ddInputField.text]]];
+    NSDate *potentialDate = [dateFormatter dateFromString: [NSString stringWithFormat: @"%@-%@-%@", yyyyInputField.text, [self zeroPadIfOneCharacter: mmInputField.text], [self zeroPadIfOneCharacter: ddInputField.text]]];
     
     // == Not a real date == //
     
@@ -800,11 +814,12 @@
         return NO;
     }
     
-    NSDate* nowDate = [NSDate date];
+    NSDate *nowDate = [NSDate date];
     
     // == In the future == //
     
-    if ([nowDate compare:potentialDate] == NSOrderedAscending) {
+    if ([nowDate compare: potentialDate] == NSOrderedAscending)
+    {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_error_future", nil)
                    nextToView: yyyyInputField];
         
@@ -813,14 +828,15 @@
     
     // == Yonger than 13 == //
     
-    NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents* nowDateComponents = [gregorian components:(NSYearCalendarUnit) fromDate:nowDate];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    NSDateComponents *nowDateComponents = [gregorian components: (NSYearCalendarUnit)
+                                                       fromDate: nowDate];
     nowDateComponents.year -= 13;
     
-    NSDate* tooYoungDate = [gregorian dateFromComponents:nowDateComponents];
+    NSDate *tooYoungDate = [gregorian dateFromComponents: nowDateComponents];
     
-    if ([tooYoungDate compare:potentialDate] == NSOrderedAscending) {
-        
+    if ([tooYoungDate compare: potentialDate] == NSOrderedAscending)
+    {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_error_under_13", nil)
                    nextToView: yyyyInputField];
         
@@ -831,8 +847,8 @@
 }
 
 
-- (BOOL) loginFormIsValidForUsername: (UITextField*) userNameInputField
-                            password: (UITextField*) passwordInputField
+- (BOOL) loginFormIsValidForUsername: (UITextField *) userNameInputField
+                            password: (UITextField *) passwordInputField
 {
     if (userNameInputField.text.length < 1)
     {
@@ -858,9 +874,8 @@
 }
 
 
-- (BOOL) resetPasswordFormIsValidForUsername: (UITextField*) userNameInputField
+- (BOOL) resetPasswordFormIsValidForUsername: (UITextField *) userNameInputField
 {
-    
     if (userNameInputField.text.length < 1)
     {
         [self placeErrorLabel: NSLocalizedString(@"forgot_password_screen_form_field_username_error_empty", nil)
@@ -872,22 +887,21 @@
     }
     
     return YES;
-    
 }
 
 
-- (void) placeErrorLabel: (NSString*) errorText
-              nextToView: (UIView*) view
+- (void) placeErrorLabel: (NSString *) errorText
+              nextToView: (UIView *) view
 {
     //Override in subclass
 }
 
 
-- (NSString*) zeroPadIfOneCharacter: (NSString*) inputString
+- (NSString *) zeroPadIfOneCharacter: (NSString *) inputString
 {
-    if ([inputString length]==1)
+    if ([inputString length] == 1)
     {
-        return [NSString stringWithFormat:@"0%@",inputString];
+        return [NSString stringWithFormat: @"0%@", inputString];
     }
     
     return inputString;
@@ -908,13 +922,19 @@
     if (pinnedOffsetX < 0.0) // scrolling towards right -->, pick next
     {
         if (self.currentOnBoardingPage == 3)
+        {
             shouldFade = NO;
+        }
+        
         self.scrollingDirection = ScrollingDirectionRight;
     }
-    else if(pinnedOffsetX > 0.0) // scrolling towards left <--, pick next
+    else if (pinnedOffsetX > 0.0) // scrolling towards left <--, pick next
     {
         if (self.currentOnBoardingPage == 0)
+        {
             shouldFade = NO;
+        }
+        
         self.scrollingDirection = ScrollingDirectionLeft;
     }
     else // at rest
@@ -931,34 +951,41 @@
     {
         self.loginBackgroundImage.alpha = 1.0;
         self.loginBackgroundFrontImage.alpha = 1.0;
-    }   
+    }
 }
 
 
 - (void) setScrollingDirection: (ScrollingDirection) scrollingDirection
 {
     if (_scrollingDirection == scrollingDirection)
+    {
         return;
+    }
     
     _scrollingDirection = scrollingDirection;
-
+    
     if (self.currentOnBoardingPage < 0)
+    {
         self.currentOnBoardingPage = 0;
+    }
     else if (self.currentOnBoardingPage > kLoginOnBoardingMessagesNum - 1)
+    {
         self.currentOnBoardingPage = kLoginOnBoardingMessagesNum - 1;
+    }
 }
 
 
 - (void) scrollViewDidEndDecelerating: (UIScrollView *) scrollView
 {
     CGFloat contentOffsetX = self.onBoardingController.scrollView.contentOffset.x;
-    self.currentOnBoardingPage = (NSInteger)floorf(contentOffsetX / self.onBoardingController.scrollView.frame.size.width);
+    
+    self.currentOnBoardingPage = (NSInteger) floorf(contentOffsetX / self.onBoardingController.scrollView.frame.size.width);
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
+    
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"cardSlide"
-                                                            label: [NSString stringWithFormat:@"%i", (_currentOnBoardingPage + 1)]
+                                                            label: [NSString stringWithFormat: @"%i", (_currentOnBoardingPage + 1)]
                                                             value: nil] build]];
 }
 
@@ -969,6 +996,5 @@
     self.onBoardingController.pageControl.currentPage = currentOnBoardingPage;
     self.scrollingDirection = ScrollingDirectionNone; // when we have a number we are at rest
 }
-
 
 @end

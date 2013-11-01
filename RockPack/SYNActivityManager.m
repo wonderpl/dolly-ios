@@ -20,6 +20,7 @@
 
 @end
 
+
 @implementation SYNActivityManager
 
 + (instancetype) sharedInstance
@@ -33,7 +34,6 @@
         activityManager.recentlyStarred = [[NSMutableSet alloc] initWithCapacity: 100];
         activityManager.recentlyViewed = [[NSMutableSet alloc] initWithCapacity: 100];
         activityManager.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
-
     });
     
     return activityManager;
@@ -43,9 +43,9 @@
 {
     [self.appDelegate.oAuthNetworkEngine activityForUserId: self.appDelegate.currentOAuth2Credentials.userId
                                          completionHandler: ^(NSDictionary *responseDictionary) {
-//                                             DebugLog(@"Activity updates successful");
+                                             DebugLog(@"Activity updates successful");
                                          } errorHandler: ^(NSDictionary* error) {
-//                                             DebugLog(@"Activity updates failed");
+                                             DebugLog(@"Activity updates failed");
                                          }];
 }
 
