@@ -201,7 +201,8 @@
     [self.viewControllerDelegate channelTapped: self];
 }
 
--(void) setHiddenForFollowButton: (BOOL) hide{
+-(void) setHiddenForFollowButton: (BOOL) hide
+{
     self.followButton.hidden = hide;
 }
 
@@ -210,7 +211,8 @@
     [self.videoTitleLabel setText:titleString];
 }
 
--(void) setFollowButtonLabel: (ProfileType) profile{
+-(void) setFollowButtonLabel: (ProfileType) profile
+{
     if (profile == MyOwnProfile)
     {
         [self.followButton setTitle:NSLocalizedString(@"Unfollow", @"unfollow") forState:UIControlStateNormal];
@@ -228,25 +230,20 @@
     [UIView animateWithDuration:0.5f animations:^{
         if (self.containerView.frame.origin.x ==0)
         {
-
-        CGRect tmpRect = self.containerView.frame;
-        
-        tmpRect.origin.x += 245;
-        self.containerView.frame = tmpRect;
+            CGRect tmpRect = self.containerView.frame;
+            tmpRect.origin.x += 245;
+            self.containerView.frame = tmpRect;
         }
     }];
-    
 }
 
 - (IBAction)hideDescription:(UISwipeGestureRecognizer *)recognizer
 {
-    
     [UIView animateWithDuration:0.5f animations:^{
         
         if (self.containerView.frame.origin.x !=0)
         {
             CGRect tmpRect = self.containerView.frame;
-            
             tmpRect.origin.x -= 245;
             self.containerView.frame = tmpRect;
             
@@ -254,12 +251,12 @@
     }];
     
 }
-- (IBAction)followChannel:(id)sender {
-    
+
+- (IBAction)followChannel:(id)sender
+{
     if (self.channel != nil)
     {
         NSLog(@"%@", self.channel.title);
-        
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.channel}];
