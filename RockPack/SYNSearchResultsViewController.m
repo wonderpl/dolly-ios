@@ -293,17 +293,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 - (void) collectionView: (UICollectionView *) collectionView
          didDeselectItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];
-    
-    [self displayVideoViewerFromCell: cell];
-}
-
-
-- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
-{
-    NSIndexPath * indexPath = [self.videosCollectionView indexPathForCell: cell];
-    
     CGPoint center;
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];    
     
     if (cell)
     {
