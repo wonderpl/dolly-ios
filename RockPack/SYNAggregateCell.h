@@ -33,7 +33,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *actionMessageLabel;
 
 
-@property (nonatomic, strong) NSDictionary *darkTextAttributes;
+@property (nonatomic, strong) NSDictionary *strongTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
 

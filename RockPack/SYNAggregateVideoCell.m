@@ -77,7 +77,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
     
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
-                                                                                      attributes: self.darkTextAttributes]];
+                                                                                      attributes: self.strongTextAttributes]];
     
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
                                                                                       attributes: self.lightTextAttributes]];
