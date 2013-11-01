@@ -14,7 +14,7 @@
 #import "SYNProfileRootViewController.h"
 #import "SYNViewStackManager.h"
 #import "SYNNetworkMessageView.h"
-#import "SYNExistingChannelsViewController.h"
+#import "SYNExistingCollectionsViewController.h"
 
 #define STACK_LIMIT 6
 #define BG_ALPHA_DEFAULT 0.7f
@@ -546,11 +546,10 @@
 - (void) presentExistingChannelsController
 {
     
-    SYNExistingChannelsViewController* existingController = [[SYNExistingChannelsViewController alloc] initWithViewId:kExistingChannelsViewId];
+    SYNExistingCollectionsViewController* existingController = [[SYNExistingCollectionsViewController alloc] initWithViewId:kExistingChannelsViewId];
     
-    [self.masterController addChildViewController:existingController];
+    [self.masterController addOverlayController:existingController];
     
-    [self.masterController.view addSubview:existingController.view];
     
     // animate in //
     
@@ -576,11 +575,6 @@
                          
                          [existingController runAppearAnimation]; // this should animate the cells in, one by one
                          
-                         
-                         if (self.masterController.videoViewerViewController)
-                         {
-                             [self.masterController.videoViewerViewController pauseIfVideoActive];
-                         }
                      }];
 }
 

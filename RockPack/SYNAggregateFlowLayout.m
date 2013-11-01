@@ -21,10 +21,25 @@
     [super prepareLayout];
     
     // TODO: Find a way not to hardcode these 'magic numbers'
-    self.itemSize = CGSizeMake (248, 139);
     self.minimumLineSpacing = 20;
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self.sectionInset =  UIEdgeInsetsMake (0.0f, 36.0f, 0.0f, 36.0f);
+    
+    CGFloat horizontalCenter = (CGRectGetWidth(self.collectionView.bounds) / 2.0);
+    
+    CGRect targetRect = CGRectMake(0.0, 0.0, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
+    
+    CGFloat xInset = 0;
+    
+    NSArray *array = [super layoutAttributesForElementsInRect: targetRect];
+    
+    if (array.count > 0)
+    {
+        UICollectionViewLayoutAttributes *layoutAttributes = array[0];
+        CGFloat itemWidth = layoutAttributes.size.width;
+        xInset = (int) horizontalCenter - (itemWidth / 2);
+    }
+    
+    self.sectionInset =  UIEdgeInsetsMake (0.0f, xInset, 0.0f, xInset);
 }
 
 

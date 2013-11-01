@@ -49,7 +49,6 @@ typedef void(^FeedDataErrorBlock)(void);
 @property (nonatomic, strong) NSDictionary* feedItemByPosition;
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
 @property (nonatomic, strong) NSArray* videosInOrderArray;
-@property (nonatomic) BOOL togglingInProgress;
 
 @end
 
@@ -74,17 +73,18 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
 
     self.feedItemsData = @[];
     self.videosInOrderArray = @[];
     
     
+    
+    self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 0.0f, 10.0f);
 
     [self removeEmptyGenreMessage];
-    
-    
-    // Register XIBs for Cells
 
+    // Register XIBs for Cell
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
                         forCellWithReuseIdentifier: @"SYNAggregateVideoCell"];
     
@@ -95,9 +95,7 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNHomeSectionHeaderView" bundle: nil]
                         forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
                                withReuseIdentifier: @"SYNHomeSectionHeaderView"];
-    
-    
-    
+
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelFooterMoreView" bundle: nil]
               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                      withReuseIdentifier: @"SYNChannelFooterMoreView"];
@@ -119,8 +117,8 @@ typedef void(^FeedDataErrorBlock)(void);
     // We should only setup our date formatter once
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss Z";
-    
 }
+
 
 
 - (void) viewWillAppear: (BOOL) animated
@@ -143,6 +141,9 @@ typedef void(^FeedDataErrorBlock)(void);
     {
         [self loadAndUpdateFeedData];
     }
+    
+    
+    NSLog(@"%f", self.feedCollectionView.contentInset.top);
 }
 
 
@@ -168,9 +169,7 @@ typedef void(^FeedDataErrorBlock)(void);
         [self updateAnalytics];
         
         self.feedCollectionView.scrollsToTop = YES;
-        
-        self.togglingInProgress = NO;
-        
+
         // if the user has not pressed load more
         if (self.dataRequestRange.location == 0)
         {
@@ -221,7 +220,9 @@ typedef void(^FeedDataErrorBlock)(void);
     [super willRotateToInterfaceOrientation: toInterfaceOrientation
                                    duration: duration];
     
-    [self.feedCollectionView reloadData];
+    // NOTE: WE might not need to reload, just invalidate the layout
+
+    [self.feedCollectionView.collectionViewLayout invalidateLayout];
 }
 
 
@@ -240,11 +241,11 @@ typedef void(^FeedDataErrorBlock)(void);
     {
         return;
     }
-    
-    
-    __weak SYNFeedRootViewController *wself = self;
+
+    __weak typeof(self) wself = self;
     
     FeedDataErrorBlock errorBlock = ^{
+        
         [wself handleRefreshComplete];
         
         [wself removeEmptyGenreMessage];
@@ -350,13 +351,23 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     
     [self.emptyGenreMessageView removeFromSuperview];
+    
+    /* OPTIONAL
+    __weak SYNFeedRootViewController* wself = self;
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+        wself.emptyGenreMessageView.transform = CGAffineTransformScale( wself.emptyGenreMessageView.transform, 0.8f, 0.8f);
+        wself.emptyGenreMessageView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [wself.emptyGenreMessageView removeFromSuperview];
+    }];
+     */
 }
 
 
 - (void) displayEmptyGenreMessage: (NSString*) messageKey
                         andLoader: (BOOL) isLoader
 {
-    
     if (self.emptyGenreMessageView)
     {
         [self.emptyGenreMessageView removeFromSuperview];
@@ -366,8 +377,8 @@ typedef void(^FeedDataErrorBlock)(void);
     self.emptyGenreMessageView = [SYNFeedMessagesView withMessage:NSLocalizedString(messageKey ,nil) andLoader:isLoader];
     
     CGRect messageFrame = self.emptyGenreMessageView.frame;
-    messageFrame.origin.y = ([[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5) - (messageFrame.size.height * 0.5);
-    messageFrame.origin.x = ([[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5) - (messageFrame.size.width * 0.5);
+    messageFrame.origin.x = (self.view.frame.size.width * 0.5) - (messageFrame.size.width * 0.5);
+    messageFrame.origin.y = (self.view.frame.size.height * 0.5) - (messageFrame.size.height * 0.5) - 20.0f;
     
     messageFrame = CGRectIntegral(messageFrame);
     self.emptyGenreMessageView.frame = messageFrame;
@@ -382,7 +393,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) fetchAndDisplayFeedItems
 {
-    
     [self fetchVideoItems];
     
     [self fetchChannelItems];
@@ -408,7 +418,6 @@ typedef void(^FeedDataErrorBlock)(void);
         return;
     
     // sort results in categories
-    
     if(resultsArray.count == 0)
     {
         self.feedItemsData = @[];
@@ -430,13 +439,10 @@ typedef void(^FeedDataErrorBlock)(void);
         }
             
         [bucket addObject:feedItem];
-        
     }
     
     NSArray* sortedDateKeys = [[buckets allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSDate* date1, NSDate* date2) {
-        
         return [date2 compare:date1];
-        
     }];
     
     NSMutableArray* sortedItemsArray = [NSMutableArray array];
@@ -447,17 +453,16 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     self.feedItemsData = sortedItemsArray;
     
-    
     [self.feedCollectionView reloadData];
     
     // put the videos in order
-    
     self.videosInOrderArray = @[];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self sortVideosForPlaylist];
     });
     
 }
+
 
 - (void) fetchVideoItems
 {
@@ -467,14 +472,11 @@ typedef void(^FeedDataErrorBlock)(void);
     fetchRequest.entity = [NSEntityDescription entityForName: kVideoInstance
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    
     NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
     fetchRequest.predicate = predicate;
     
-    
     NSError* error;
-    
     NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
     if (!resultsArray)
         return;
@@ -487,6 +489,7 @@ typedef void(^FeedDataErrorBlock)(void);
     self.feedVideosById = [NSDictionary dictionaryWithDictionary:mutDictionary];
 }
 
+
 - (void) fetchChannelItems
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -495,14 +498,11 @@ typedef void(^FeedDataErrorBlock)(void);
     fetchRequest.entity = [NSEntityDescription entityForName: kChannel
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    
     NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
     fetchRequest.predicate = predicate;
     
-    
     NSError* error;
-    
     NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
     if (!resultsArray)
         return;
@@ -516,7 +516,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 #pragma mark - UICollectionView Delegate/Data Source
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
@@ -524,59 +523,54 @@ typedef void(^FeedDataErrorBlock)(void);
     return self.feedItemsData.count; // the number of arrays included
 }
 
-- (UIEdgeInsets)collectionView: (UICollectionView *)collectionView
-                        layout: (UICollectionViewLayout*)collectionViewLayout
-        insetForSectionAtIndex: (NSInteger)section
-{
-    
-    return UIEdgeInsetsMake(10.0, 0.0, 40.0, 0.0);
-}
 
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
     NSArray* sectionInfo = self.feedItemsData[section];
     return sectionInfo.count;
-    
 }
-
 
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
+    // common types
     SYNAggregateCell *cell = nil;
+    
     FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
+    
     ChannelOwner* channelOwner;
     
+    // there are 2 types, video and channel (collection) types
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
         cell = [cv dequeueReusableCellWithReuseIdentifier: @"SYNAggregateVideoCell"
                                              forIndexPath: indexPath];
         
+        NSMutableArray* videosArray = @[].mutableCopy;
         
-        NSMutableArray* videosArray = [NSMutableArray array];
+        // NOTE: the data containes either an aggragate or a single item, handle both cases here
         
-        VideoInstance* vi;
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
             for (FeedItem* childFeedItem in feedItem.feedItems)
             {
                 // they have also the same type (video)
-                vi = (VideoInstance*)((self.feedVideosById)[childFeedItem.resourceId]);
+                VideoInstance* vi = (VideoInstance*)((self.feedVideosById)[childFeedItem.resourceId]);
                 [videosArray addObject:vi];
+                channelOwner = vi.channel.channelOwner; // will get the last (to avoid conditionals) as a heuristic but they all should belong to the same channel
             }
         }
         else
         {
-            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
+            VideoInstance* vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
             [videosArray addObject:vi];
+            channelOwner = vi.channel.channelOwner;
         }
         
         cell.collectionData = videosArray;
-        
-        
     }
     else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
     {
@@ -587,20 +581,15 @@ typedef void(^FeedDataErrorBlock)(void);
         
         NSMutableArray* channelsMutArray = [NSMutableArray array];
         
+        // NOTE: the data containes either an aggragate or a single item, handle both cases here
+        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
-            
-            
-            
             for (FeedItem* childFeedItem in feedItem.feedItems)
             {
                 channel = (Channel*)(self.feedChannelsById[childFeedItem.resourceId]);
                 [channelsMutArray addObject:channel];
-                
             }
-            
-            
-            
         }
         else
         {
@@ -613,7 +602,6 @@ typedef void(^FeedDataErrorBlock)(void);
         
         channelOwner = channel.channelOwner;
         
-        cell.titleLabel.text = channel.title;
         
     }
     
@@ -639,21 +627,26 @@ typedef void(^FeedDataErrorBlock)(void);
     CGSize size;
     size.width = self.feedCollectionView.frame.size.width;
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-        size.height = IS_IPAD ? 460.0f : 353.0f;
+        size.height = IS_IPAD ? 470.0f : 369.0f;
     else
-        size.height = IS_IPAD ? 330.0f : 244.0f;
+        size.height = IS_IPAD ? 330.0f : 264.0f;
     
     return size;
 }
 
+
 - (CGSize) collectionView: (UICollectionView *) collectionView
-                   layout: (UICollectionViewLayout*) collectionViewLayout
-                   referenceSizeForHeaderInSection: (NSInteger) section
+                   layout: (UICollectionViewLayout *) collectionViewLayout
+           referenceSizeForHeaderInSection: (NSInteger) section
 {
     if (IS_IPAD)
+    {
         return CGSizeMake(1024, 65);
-    
-    return CGSizeMake(320, 34);
+    }
+    else
+    {
+        return CGSizeMake(320, 34);
+    }
 }
 
 
@@ -673,6 +666,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     return footerSize;
 }
+
 
 
 // Used for the collection view header
@@ -735,7 +729,6 @@ typedef void(^FeedDataErrorBlock)(void);
         
         supplementaryView = headerSupplementaryView;
     }
-    
     else if (kind == UICollectionElementKindSectionFooter)
     {
         self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
@@ -752,9 +745,8 @@ typedef void(^FeedDataErrorBlock)(void);
     }
 
     return supplementaryView;
-    
-    
 }
+
 
 - (void) videoOverlayDidDissapear
 {
@@ -764,7 +756,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Helper Methods to get AggreagateCell's Data
 
-
 - (FeedItem*) feedItemAtIndexPath: (NSIndexPath*) indexPath
 {
     NSArray* sectionArray = self.feedItemsData[indexPath.section];
@@ -772,11 +763,13 @@ typedef void(^FeedDataErrorBlock)(void);
     return feedItem;
 }
 
+
 - (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
 {
     // Same mechanism as for video cell
     return  [self indexPathForVideoCell: cell];
 }
+
 
 - (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
 {
@@ -784,10 +777,8 @@ typedef void(^FeedDataErrorBlock)(void);
     return indexPath;
 }
 
+
 #pragma mark - Click Cell Delegates
-
-
-
 
 - (SYNAggregateCell *) aggregateCellFromSubview: (UIView *) view
 {
@@ -819,21 +810,21 @@ typedef void(^FeedDataErrorBlock)(void);
     return selectedFeedItem;
 }
 
-#pragma mark - Cell Actions Delegate
 
-- (void) addControlPressed: (UIControl*) control
+#pragma mark - Social Actions Delegate
+
+- (void) addControlPressed: (SYNSocialButton *) socialControl
 {
+    if (![socialControl.dataItemLinked
+          isKindOfClass: [VideoInstance class]])
+    {
+        return; // only relates to video instances
+    }
     
-    SYNAggregateCell* cell = [self aggregateCellFromSubview: control];
-    if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // sanity check
-        return;
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
     
-    VideoInstance *videoInstance = ((SYNAggregateVideoCell*)cell).videoInstanceShowing;
-    if (!videoInstance)
-        return;
-        
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
+    
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"videoPlusButtonClick"
                                                             label: nil
@@ -842,67 +833,52 @@ typedef void(^FeedDataErrorBlock)(void);
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: @"select"
                                             videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: nil errorHandler: nil];
-        
-        
+                                          completionHandler: nil
+                                               errorHandler: nil];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
                                                         object: self
                                                       userInfo: @{@"VideoInstance": videoInstance}];
-        
-        
-    
 }
 
-// only relates to videos
-- (void) likeControlPressed: (UIControl*) control
+
+- (void) likeControlPressed: (SYNSocialButton *) socialControl
 {
-    if (self.togglingInProgress)
+    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
     {
-        return;
+        return; // only relates to video instances
     }
     
-    
-    SYNAggregateCell* cell = [self aggregateCellFromSubview:control];
-    if(![cell isKindOfClass:[SYNAggregateVideoCell class]]) // only videos can have a like action (currently, remove if changed)
-        return;
-    
-    VideoInstance *videoInstance = ((SYNAggregateVideoCell*)cell).videoInstanceShowing;
-    if (!videoInstance)
-        return;
+    // Get the videoinstance associated with the control pressed
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
     
     // Track
-    
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"videoStarButtonClick"
                                                             label: @"feed"
                                                             value: nil] build]];
+    BOOL didStar = (socialControl.selected == NO);
     
-    
-    BOOL didStar = (control.selected == NO);
-    
-    control.enabled = NO;
-    
-    self.togglingInProgress = YES;
+    socialControl.enabled = NO;
     
     // Send
-    
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: ^(id response) {
-                                              self.togglingInProgress = NO;
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
                                               NSInteger previousStarCount = videoInstance.video.starCountValue;
+                                              
                                               if (didStar)
                                               {
                                                   // Currently highlighted, so increment
                                                   videoInstance.starredByUserValue = YES;
                                                   videoInstance.video.starCountValue += 1;
                                                   
-                                                  control.selected = YES;
-                                                  
+                                                  socialControl.selected = YES;
+                                                
                                                   [videoInstance addStarrersObject: appDelegate.currentUser];
                                               }
                                               else
@@ -911,35 +887,55 @@ typedef void(^FeedDataErrorBlock)(void);
                                                   videoInstance.starredByUserValue = NO;
                                                   videoInstance.video.starCountValue -= 1;
                                                   
-                                                  control.selected = NO;
+                                                  socialControl.selected = NO;
                                               }
                                               
-                                              NSError* error;
-                                              if(![videoInstance.managedObjectContext save:&error])
+                                              NSError *error;
+                                              
+                                              if (![videoInstance.managedObjectContext save: &error])
                                               {
                                                   videoInstance.starredByUserValue = previousStarringState;
                                                   videoInstance.video.starCountValue = previousStarCount;
                                               }
-                                              
-                                              
-                                              
-                                              [self.feedCollectionView reloadData];
-                                              
-                                              control.enabled = YES;
-                                          }
-                                               errorHandler: ^(id error) {
-                                                   self.togglingInProgress = NO;
-                                                   
-                                                   DebugLog(@"Could not star video");
-                                                   
-                                                   control.enabled = YES;
-                                               }];
+                                              else
+                                              {
+                                                  [socialControl setTitle: socialControl.title
+                                                                 andCount: videoInstance.video.starCountValue];
+                                              }
+
+                                              socialControl.enabled = YES;
+                                          } errorHandler: ^(id error) {
+                                              DebugLog(@"Could not star video");
+                                              // Re-enable button anyway
+                                              socialControl.enabled = YES;
+                                          }];
 }
 
 
--(void)shareControlPressed:(UIControl*) control
+- (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
-    
+    if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
+    {
+        // Get the videoinstance associated with the control pressed
+        VideoInstance *videoInstance = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"video_instance"
+                                    objectId: videoInstance.uniqueId];
+        
+        [self shareVideoInstance: videoInstance];
+    }
+    else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
+    {
+        // Get the videoinstance associated with the control pressed
+        Channel *channel = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"channel"
+                                    objectId: channel.uniqueId];
+        
+        [self shareChannel: channel
+                   isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
+                usingImage: nil];
+    }
 }
 
 
@@ -954,6 +950,7 @@ typedef void(^FeedDataErrorBlock)(void);
     [appDelegate.viewStackManager viewProfileDetails: cell.channelOwner];
 }
 
+
 #pragma mark - Load More Footer
 
 - (void) loadMoreVideos
@@ -965,8 +962,12 @@ typedef void(^FeedDataErrorBlock)(void);
     }
 }
 
+
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
+    
+    [super scrollViewDidScroll:scrollView];
+    
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
         && self.isLoadingMoreContent == NO)
     {
@@ -982,6 +983,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     [self loadAndUpdateFeedData];
 }
+
 
 #pragma mark - Sort Method
 

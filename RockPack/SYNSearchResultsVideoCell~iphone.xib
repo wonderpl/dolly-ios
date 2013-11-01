@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SYNSearchResultsVideoCell" id="5xM-Us-ITD" userLabel="SYNSearchResultsVideoCell" customClass="SYNSearchResultsVideoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="251"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="251"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="BASEMENT JAXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="XyR-yN-Fa4" userLabel="Video Title">
+                        <rect key="frame" x="20" y="147" width="280" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                    </label>
+                    <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpH-54-xvk">
+                        <rect key="frame" x="36" y="0.0" width="248" height="139"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="248" id="wer-Lt-Bgd"/>
+                            <constraint firstAttribute="height" constant="139" id="zLl-4R-BML"/>
+                        </constraints>
+                    </imageView>
+                    <imageView contentMode="scaleToFill" image="GlossFeedVideo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cld-sM-8Sx" userLabel="Gloss placeholder">
+                        <rect key="frame" x="36" y="0.0" width="248" height="139"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5a-Co-2Pv" userLabel="Button - Like" customClass="SYNSocialButton">
+                        <rect key="frame" x="65" y="181" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="likeControlPressed:" destination="5xM-Us-ITD" eventType="touchUpInside" id="3Ei-sF-1WX"/>
+                        </connections>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Btc-0z-Eot" userLabel="Button - Add" customClass="SYNSocialAddButton">
+                        <rect key="frame" x="135" y="181" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="JAx-jn-Jmz"/>
+                            <constraint firstAttribute="height" constant="50" id="b0f-zY-2DD"/>
+                        </constraints>
+                        <connections>
+                            <action selector="addControlPressed:" destination="5xM-Us-ITD" eventType="touchUpInside" id="MY9-YZ-No5"/>
+                        </connections>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xh7-uh-a4p" userLabel="Button - Share" customClass="SYNSocialButton">
+                        <rect key="frame" x="203" y="181" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="shareControlPressed:" destination="5xM-Us-ITD" eventType="touchUpInside" id="axF-NP-9V0"/>
+                        </connections>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="I5a-Co-2Pv" firstAttribute="top" secondItem="Btc-0z-Eot" secondAttribute="top" id="1qc-Fd-qMD"/>
+                <constraint firstItem="Xh7-uh-a4p" firstAttribute="height" secondItem="Btc-0z-Eot" secondAttribute="height" id="2f7-tt-cZf"/>
+                <constraint firstItem="I5a-Co-2Pv" firstAttribute="bottom" secondItem="Btc-0z-Eot" secondAttribute="bottom" id="7up-SE-WCS"/>
+                <constraint firstAttribute="centerX" secondItem="PpH-54-xvk" secondAttribute="centerX" id="8cy-Zc-U3p"/>
+                <constraint firstItem="Xh7-uh-a4p" firstAttribute="leading" secondItem="Btc-0z-Eot" secondAttribute="trailing" constant="18" id="Hj2-RA-SgZ"/>
+                <constraint firstItem="PpH-54-xvk" firstAttribute="height" secondItem="Cld-sM-8Sx" secondAttribute="height" id="I4A-WY-EK2"/>
+                <constraint firstItem="PpH-54-xvk" firstAttribute="centerX" secondItem="Cld-sM-8Sx" secondAttribute="centerX" id="JaJ-yh-BPN"/>
+                <constraint firstItem="Xh7-uh-a4p" firstAttribute="bottom" secondItem="Btc-0z-Eot" secondAttribute="bottom" id="KTd-DM-BRe"/>
+                <constraint firstItem="PpH-54-xvk" firstAttribute="centerY" secondItem="Cld-sM-8Sx" secondAttribute="centerY" id="Le5-xx-Xhu"/>
+                <constraint firstItem="I5a-Co-2Pv" firstAttribute="width" secondItem="Btc-0z-Eot" secondAttribute="width" id="LtH-hC-vwb"/>
+                <constraint firstItem="PpH-54-xvk" firstAttribute="top" secondItem="5xM-Us-ITD" secondAttribute="top" id="PC6-Hk-K1j"/>
+                <constraint firstAttribute="centerX" secondItem="Btc-0z-Eot" secondAttribute="centerX" id="Q1A-iG-BYH"/>
+                <constraint firstItem="PpH-54-xvk" firstAttribute="width" secondItem="Cld-sM-8Sx" secondAttribute="width" id="Qc9-2a-RCi"/>
+                <constraint firstItem="Xh7-uh-a4p" firstAttribute="width" secondItem="Btc-0z-Eot" secondAttribute="width" id="iuJ-XO-98v"/>
+                <constraint firstItem="Xh7-uh-a4p" firstAttribute="top" secondItem="Btc-0z-Eot" secondAttribute="top" id="lew-Ie-wjc"/>
+                <constraint firstAttribute="bottom" secondItem="Btc-0z-Eot" secondAttribute="bottom" constant="20" id="mYT-mK-LeC"/>
+                <constraint firstItem="Btc-0z-Eot" firstAttribute="leading" secondItem="I5a-Co-2Pv" secondAttribute="trailing" constant="20" id="pGz-zj-g1y"/>
+                <constraint firstItem="I5a-Co-2Pv" firstAttribute="height" secondItem="Btc-0z-Eot" secondAttribute="height" id="xeX-hE-Kj0"/>
+            </constraints>
+            <size key="customSize" width="353" height="216"/>
+            <connections>
+                <outlet property="addControl" destination="Btc-0z-Eot" id="noy-Zi-Qvb"/>
+                <outlet property="iconImageView" destination="PpH-54-xvk" id="anu-3T-XDH"/>
+                <outlet property="likeControl" destination="I5a-Co-2Pv" id="AbB-Qb-gn5"/>
+                <outlet property="overlayImageView" destination="Cld-sM-8Sx" id="rqF-8H-TID"/>
+                <outlet property="shareControl" destination="Xh7-uh-a4p" id="j2m-yx-XjC"/>
+                <outlet property="titleLabel" destination="XyR-yN-Fa4" id="yNg-0c-bwp"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="GlossFeedVideo.png" width="310" height="174"/>
+    </resources>
+</document>

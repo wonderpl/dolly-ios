@@ -7,85 +7,82 @@
 //
 
 #import "SYNAggregateChannelItemCell.h"
-#import "SYNSocialControlFactory.h"
+#import "SYNSocialButton.h"
+
+@interface SYNAggregateChannelItemCell ()
+
+@property (strong, nonatomic) IBOutlet SYNSocialButton *followControl;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
+
+@property (nonatomic, strong) IBOutlet UIView* bg;
+
+@end
 
 @implementation SYNAggregateChannelItemCell
 
 - (void) awakeFromNib
 {
-    CGPoint middlePoint = CGPointMake(self.frame.size.width * 0.5f, self.frame.size.height * 0.5);
+    self.followControl.title = NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell");
     
+    self.shareControl.title = NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell");
     
-    followControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                          forTitle: @"follow"
-                                                                       andPosition: CGPointMake(middlePoint.x - 40.0f, self.stripView.frame.origin.y)];
-    
-    [self addSubview: followControl];
-    
-    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                         forTitle: @"share"
-                                                                      andPosition: CGPointMake(middlePoint.x + 40.0f, self.stripView.frame.origin.y)];
-    
-    [self addSubview: shareControl];
+    self.bg.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.bg.layer.borderWidth = 1.0f;
 }
 
 
-- (void) setDelegate: (id) delegate
+- (IBAction) followControlPressed: (id) sender
 {
-    // we can remove the targets by setting the delegate to nil
+    [self.delegate followControlPressed: sender];
+}
+
+
+- (IBAction) shareControlPressed: (id) sender
+{
+    [self.delegate shareControlPressed: sender];
+}
+
+
+#pragma mark - Data Related
+
+- (void) setChannel: (Channel *) channel
+{
+    _channel = channel;
     
-    if (_delegate)
-    {
-        [followControl removeTarget: delegate
-                             action: @selector(followControlPressed:)
-                   forControlEvents: UIControlEventTouchUpInside];
-        
-        [shareControl removeTarget: delegate
-                            action: @selector(shareControlPressed:)
-                  forControlEvents: UIControlEventTouchUpInside];
-    }
+    self.shareControl.dataItemLinked = _channel;
+    self.followControl.dataItemLinked = _channel;
     
-    _delegate = delegate;
-    
-    if (!_delegate)
+    if (!_channel)
     {
         return;
     }
     
-    [followControl addTarget: delegate
-                      action: @selector(followControlPressed:)
-            forControlEvents: UIControlEventTouchUpInside];
+    self.titleLabel.text = _channel.title;
     
-    [shareControl addTarget: delegate
-                     action: @selector(shareControlPressed:)
-           forControlEvents: UIControlEventTouchUpInside];
+    self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
+    self.videosLabel.text = [NSString stringWithFormat: @"%i videos", _channel.videoInstances.count];
+    
+    // set time ago...
+    NSDateComponents *timeAgoComponents = _channel.timeAgo;
+    
+    if (timeAgoComponents.year)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.month)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.day)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.minute)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
+    }
+    
+    self.followControl.selected = channel.subscribedByUserValue;
 }
-
-#pragma mark - Date Components
-
--(NSDateComponents*)timeAgoComponents
-{
-    return _timeAgoComponents;
-}
--(void)setTimeAgoComponents:(NSDateComponents *)timeAgoComponents
-{
-    _timeAgoComponents = timeAgoComponents;
-    if(!_timeAgoComponents)
-        return;
-    
-    NSString* finalTimeString;
-    if(_timeAgoComponents.year)
-        finalTimeString = [NSString stringWithFormat:@"%i year%@ ago", _timeAgoComponents.year, _timeAgoComponents.year == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.month)
-        finalTimeString = [NSString stringWithFormat:@"%i month%@ ago", _timeAgoComponents.month, _timeAgoComponents.month == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.day)
-        finalTimeString = [NSString stringWithFormat:@"%i day%@ ago", _timeAgoComponents.day, _timeAgoComponents.day == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.minute)
-        finalTimeString = [NSString stringWithFormat:@"%i minute%@ ago", _timeAgoComponents.minute, _timeAgoComponents.minute == 1 ? @"" : @"s"];
-    
-    self.timeLabel.text = finalTimeString;
-    
-}
-
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
@@ -7,7 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchResultsViewController">
             <connections>
                 <outlet property="containerTabs" destination="NhX-A4-SLJ" id="Bw3-LY-KfJ"/>
-                <outlet property="containerView" destination="Dg2-lP-CVQ" id="4ta-Cu-sSo"/>
+                <outlet property="loadingPanelLabel" destination="KVS-zs-5Xk" id="qIM-5B-t3p"/>
+                <outlet property="loadingPanelLoader" destination="61Z-Hk-Vdl" id="6ik-ly-xFJ"/>
+                <outlet property="loadingPanelView" destination="lm0-Gj-ejj" id="dmu-l9-jra"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="QkW-ty-jhC"/>
                 <outlet property="usersTabButton" destination="XFa-4q-Brg" id="Uxk-o2-yqr"/>
                 <outlet property="videosCollectionView" destination="SgG-lq-X96" id="vcl-iZ-YZh"/>
@@ -17,81 +19,125 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2">
-            <rect key="frame" x="0.0" y="0.0" width="493" height="684"/>
+            <rect key="frame" x="0.0" y="0.0" width="654" height="694"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="Dg2-lP-CVQ" userLabel="ContainerView (Used for Positioning)">
-                    <rect key="frame" x="67" y="0.0" width="363" height="684"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhX-A4-SLJ" userLabel="Container Tabs">
+                    <rect key="frame" x="203" y="12" width="247" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="NhX-A4-SLJ" userLabel="Container Tabs">
-                            <rect key="frame" x="58" y="20" width="247" height="25"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoQ-RH-8rc" userLabel="Tab - Videos">
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yoQ-RH-8rc" userLabel="Tab - Videos">
-                                    <rect key="frame" x="0.0" y="0.0" width="124" height="25"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                    <state key="normal" title="Videos">
-                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="Te8-JC-B2V"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XFa-4q-Brg" userLabel="Tab - People">
-                                    <rect key="frame" x="123" y="0.0" width="124" height="25"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                    <state key="normal" title="People">
-                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="WXu-cn-8EN"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="4v1-Ly-eu6" userLabel="Users Collection View">
-                            <rect key="frame" x="0.0" y="63" width="363" height="621"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hqH-9q-DcO">
-                                <size key="itemSize" width="363" height="50"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <cells/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="Videos">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="pFJ-cR-UHr"/>
-                                <outlet property="delegate" destination="-1" id="U0r-Bh-voS"/>
+                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="Te8-JC-B2V"/>
                             </connections>
-                        </collectionView>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="SgG-lq-X96" userLabel="Videos Collection View">
-                            <rect key="frame" x="0.0" y="63" width="363" height="621"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFa-4q-Brg" userLabel="Tab - People">
+                            <rect key="frame" x="123" y="0.0" width="124" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N5E-Iz-Q71">
-                                <size key="itemSize" width="363" height="235"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <cells/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="People">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="NdV-1d-ucx"/>
-                                <outlet property="delegate" destination="-1" id="0ji-qZ-XOS"/>
+                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="WXu-cn-8EN"/>
                             </connections>
-                        </collectionView>
+                        </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="247" id="b53-U5-4zJ"/>
+                        <constraint firstAttribute="height" constant="25" id="gb9-cx-4iW"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-Ly-eu6" userLabel="Users Collection View">
+                    <rect key="frame" x="20" y="49" width="614" height="645"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hqH-9q-DcO">
+                        <size key="itemSize" width="184" height="120"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="pFJ-cR-UHr"/>
+                        <outlet property="delegate" destination="-1" id="U0r-Bh-voS"/>
+                    </connections>
+                </collectionView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SgG-lq-X96" userLabel="Videos Collection View">
+                    <rect key="frame" x="20" y="49" width="614" height="645"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N5E-Iz-Q71">
+                        <size key="itemSize" width="363" height="336"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="NdV-1d-ucx"/>
+                        <outlet property="delegate" destination="-1" id="0ji-qZ-XOS"/>
+                    </connections>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lm0-Gj-ejj" userLabel="Loading Panel">
+                    <rect key="frame" x="163" y="174" width="327" height="75"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Isw-Ji-ss2">
+                            <rect key="frame" x="0.0" y="0.0" width="327" height="75"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.73725490196078436" green="0.73725490196078436" blue="0.73725490196078436" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
+                        </view>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Searching..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVS-zs-5Xk">
+                            <rect key="frame" x="20" y="27" width="254" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="61Z-Hk-Vdl">
+                            <rect key="frame" x="287" y="28" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Isw-Ji-ss2" secondAttribute="trailing" id="6w6-aE-wQb"/>
+                        <constraint firstAttribute="width" constant="327" id="7Jg-ED-yZr"/>
+                        <constraint firstItem="Isw-Ji-ss2" firstAttribute="top" secondItem="lm0-Gj-ejj" secondAttribute="top" id="KOE-SK-FbU"/>
+                        <constraint firstAttribute="bottom" secondItem="Isw-Ji-ss2" secondAttribute="bottom" id="aIG-DH-a17"/>
+                        <constraint firstAttribute="height" constant="75" id="dso-ld-cCh"/>
+                        <constraint firstItem="Isw-Ji-ss2" firstAttribute="leading" secondItem="lm0-Gj-ejj" secondAttribute="leading" id="ohb-hH-Ha7"/>
+                    </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.50422127016129037" green="0.66614163306451613" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="NhX-A4-SLJ" secondAttribute="centerX" id="15i-fl-pGT"/>
+                <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" id="3cw-ZD-nUg"/>
+                <constraint firstItem="NhX-A4-SLJ" firstAttribute="top" secondItem="2" secondAttribute="top" constant="12" id="5Nw-HF-Zrz"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="centerX" secondItem="SgG-lq-X96" secondAttribute="centerX" id="GvS-O4-k19"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="OKM-6T-NW8"/>
+                <constraint firstAttribute="centerX" secondItem="lm0-Gj-ejj" secondAttribute="centerX" id="baA-a4-EqX"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="top" secondItem="NhX-A4-SLJ" secondAttribute="bottom" constant="12" id="eRq-aL-HJo"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="width" secondItem="SgG-lq-X96" secondAttribute="width" id="lNO-uD-uQg"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="height" secondItem="SgG-lq-X96" secondAttribute="height" id="qAX-8L-zzy"/>
+                <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="20" id="tY2-FH-8xw"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="centerY" secondItem="SgG-lq-X96" secondAttribute="centerY" id="tie-xB-4gF"/>
+                <constraint firstItem="lm0-Gj-ejj" firstAttribute="top" secondItem="NhX-A4-SLJ" secondAttribute="bottom" constant="137" id="vvD-Qd-CYJ"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

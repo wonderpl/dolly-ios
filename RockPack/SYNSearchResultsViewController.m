@@ -6,13 +6,19 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSearchResultsViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNSearchResultsCell.h"
-#import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsUserCell.h"
+#import "SYNSearchResultsVideoCell.h"
+#import "SYNSearchResultsViewController.h"
+#import "UIImageView+WebCache.h"
 
-typedef void(^SearchResultCompleteBlock)(int);
+#import "UIColor+SYNColor.h"
+
+#import "ChannelOwner.h"
+#import "VideoInstance.h"
+
+typedef void (^SearchResultCompleteBlock)(int);
 
 static NSString *kSearchResultVideoCell = @"SYNSearchResultsVideoCell";
 static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
@@ -20,32 +26,38 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 @interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 // UI stuff
-@property (nonatomic, strong) IBOutlet UIView* containerTabs;
+@property (nonatomic, strong) IBOutlet UIView *containerTabs;
 
 // search operations
-@property (nonatomic, strong) MKNetworkOperation* videoSearchOperation;
-@property (nonatomic, strong) MKNetworkOperation* userSearchOperation;
+@property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
+@property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
 
-@property (nonatomic, strong) NSString* currentSearchTerm;
+@property (nonatomic, strong) IBOutlet UIView* loadingPanelView;
+@property (nonatomic, strong) IBOutlet UILabel* loadingPanelLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loadingPanelLoader;
+
+@property (nonatomic) SearchResultsShowing searchResultsShowing;
+
+@property (nonatomic, strong) NSString *currentSearchTerm;
 
 // completion blocks
 @property (nonatomic, copy) SearchResultCompleteBlock videoSearchCompleteBlock;
 @property (nonatomic, copy) SearchResultCompleteBlock userSearchCompleteBlock;
 
-// Data Arrays
-@property (nonatomic, strong) NSArray* videosArray;
-@property (nonatomic, strong) NSArray* usersArray;
 
-// Container View (Used for Positioning)
-@property (nonatomic, strong) IBOutlet UIView* containerView;
+// Data Arrays
+@property (nonatomic, strong) NSArray *videosArray;
+@property (nonatomic, strong) NSArray *usersArray;
+
+
+
 
 @end
 
+
 @implementation SYNSearchResultsViewController
 
-
-
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
     
@@ -54,114 +66,109 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     self.videosArray = @[];
     self.usersArray = @[];
     
+    
     self.view.autoresizesSubviews = YES;
     
-    [self.videosCollectionView registerNib:[UINib nibWithNibName:kSearchResultVideoCell bundle:nil]
-                forCellWithReuseIdentifier:kSearchResultVideoCell];
+    [self.videosCollectionView registerNib: [UINib nibWithNibName: kSearchResultVideoCell bundle: nil]
+                forCellWithReuseIdentifier: kSearchResultVideoCell];
     
-    [self.usersCollectionView registerNib:[UINib nibWithNibName:kSearchResultUserCell bundle:nil]
-               forCellWithReuseIdentifier:kSearchResultUserCell];
+    [self.usersCollectionView registerNib: [UINib nibWithNibName: kSearchResultUserCell bundle: nil]
+               forCellWithReuseIdentifier: kSearchResultUserCell];
     
-    
-    self.containerTabs.layer.cornerRadius = 3.0f;
+    self.containerTabs.layer.cornerRadius = 8.0f;
     self.containerTabs.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.containerTabs.layer.borderWidth = 1.0f;
     
     // == Define Completion Blocks for operations == //
     
-    SYNSearchResultsViewController* wself = self;
+    SYNSearchResultsViewController *wself = self;
     
     self.videoSearchCompleteBlock = ^(int count) {
         
-        NSError* error;
-        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kVideoInstance
+        NSError *error;
+        NSArray *fetchedObjects = [wself getSearchEntitiesByName: kVideoInstance
                                                        withError: &error];
         
-        if(error)
+        if (error)
         {
             //handle error
-            return ;
+            return;
         }
         
-        wself.videosArray = [NSArray arrayWithArray:fetchedObjects];
+        wself.videosArray = [NSArray arrayWithArray: fetchedObjects];
+        
+        wself.loadingPanelView.hidden = YES;
         
         [wself.videosCollectionView reloadData];
-        
     };
     
     
     self.userSearchCompleteBlock = ^(int count) {
         
-        NSError* error;
-        NSArray* fetchedObjects = [wself getSearchEntitiesByName: kUser
+        NSError *error;
+        NSArray *fetchedObjects = [wself getSearchEntitiesByName: kChannelOwner
                                                        withError: &error];
         
-        if(error)
+        if (error)
         {
             // handle error
-            return ;
+            return;
         }
         
-        wself.usersArray = [NSArray arrayWithArray:fetchedObjects];
+        wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
+        
+        wself.loadingPanelView.hidden = YES;
         
         [wself.usersCollectionView reloadData];
-        
     };
+    
+    self.loadingPanelView.hidden = YES;
+    
     
     
     // Set Initial
-    
     self.searchResultsShowing = SearchResultsShowingVideos;
-    
-    
-    
 }
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    CGRect containerRect = self.containerView.frame;
-    
-    
-    containerRect.origin.x = (self.view.frame.size.width * 0.5f) - (self.containerView.frame.size.width * 0.5f);
-    containerRect.size.height = self.view.frame.size.height;
-    
-    
-    self.containerView.frame = CGRectIntegral(containerRect);
-}
-
-
 
 
 #pragma mark - Load Data
 
-
-- (void) searchForString: (NSString *) newSearchTerm
+- (void) searchForGenre: (NSString *) genreId
 {
-    // == Don't repeat a search == //
-    if ([_currentSearchTerm isEqualToString: newSearchTerm])
+    [self clearSearchEntities];
+    
+    self.loadingPanelView.hidden = NO;
+    [self.loadingPanelLoader startAnimating];
+    
+    self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId:genreId
+                                                          completionHandler:self.videoSearchCompleteBlock];
+    
+    self.userSearchOperation = [appDelegate.networkEngine usersForGenreId:genreId
+                                                         completionHandler:self.userSearchCompleteBlock];
+}
+
+- (void) searchForTerm: (NSString *) newSearchTerm
+{
+    
+    if ([_currentSearchTerm isEqualToString: newSearchTerm]) // == Don't repeat a search == //
+    {
         return;
+    }
     
     _currentSearchTerm = newSearchTerm;
     
     if (!_currentSearchTerm)
+    {
         return;
-    
-    // == Clear search context for new search == //
-    BOOL success = [appDelegate.searchRegistry clearImportContextFromEntityName: @"VideoInstance"];
-    
-    if (!success)
-    {
-        DebugLog(@"Could not clean VideoInstances from search context");
     }
     
-    success = [appDelegate.searchRegistry clearImportContextFromEntityName: @"ChannelOwner"];
-    
-    if (!success)
+    if(![self clearSearchEntities])
     {
-        DebugLog(@"Could not clean ChannelOwner from search context");
+        return;
     }
+    
+    self.loadingPanelView.hidden = NO;
+    [self.loadingPanelLoader startAnimating];
     
     // == Perform Search == //
     
@@ -169,16 +176,40 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
                                                                        inRange: self.dataRequestRange
                                                                     onComplete: self.videoSearchCompleteBlock];
     
-    self.userSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
-                                                                      inRange: self.dataRequestRange
-                                                                   onComplete: self.userSearchCompleteBlock];
+    self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
+                                                                    andRange: self.dataRequestRange
+                                                                 byAppending: NO
+                                                                  onComplete: self.userSearchCompleteBlock];
+}
+
+- (BOOL) clearSearchEntities
+{
+    BOOL success;
+    
+    
+    if (!(success = [appDelegate.searchRegistry clearImportContextFromEntityName: kVideoInstance]))
+        DebugLog(@"Could not clean VideoInstances from search context");
+    
+    // Call me an amateur but I feel proud of this syntax
+    if (!(success &= [appDelegate.searchRegistry clearImportContextFromEntityName: kChannelOwner]))
+        DebugLog(@"Could not clean ChannelOwner from search context");
+    
+    self.videosArray = @[];
+    self.usersArray = @[];
+    
+    [self.videosCollectionView reloadData];
+    [self.usersCollectionView reloadData];
+    
+    return success;
 }
 
 
--(NSArray*)getSearchEntitiesByName:(NSString*)entityName withError:(NSError**)error
+- (NSArray *) getSearchEntitiesByName: (NSString *) entityName withError: (NSError **) error
 {
-    if(!entityName)
+    if (!entityName)
+    {
         return nil;
+    }
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
@@ -186,17 +217,16 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     fetchRequest.entity = [NSEntityDescription entityForName: entityName
                                       inManagedObjectContext: appDelegate.searchManagedObjectContext];
     
-    
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", self.viewId]];
     
-    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
+    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position"
+                                                                 ascending: YES]];
     
-    NSArray* results = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest error: error];
-    
-    
+    NSArray *results = [appDelegate.searchManagedObjectContext
+                        executeFetchRequest: fetchRequest
+                        error: error];
     
     return results;
-    
 }
 
 
@@ -213,10 +243,14 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 {
     NSInteger count = 0;
     
-    if(collectionView == self.videosCollectionView)
+    if (collectionView == self.videosCollectionView)
+    {
         count = self.videosArray.count;
-    else if(collectionView == self.usersCollectionView)
+    }
+    else if (collectionView == self.usersCollectionView)
+    {
         count = self.usersArray.count;
+    }
     
     return count;
 }
@@ -225,24 +259,45 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNSearchResultsCell* cell;
+    SYNSearchResultsCell *cell;
     
-    if(collectionView == self.videosCollectionView)
+    if (collectionView == self.videosCollectionView)
     {
+        SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultVideoCell
+                                                                                         forIndexPath: indexPath];
         
-        SYNSearchResultsVideoCell* videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultVideoCell
-                                                                                         forIndexPath:indexPath];
+        VideoInstance *vi = self.videosArray[indexPath.item];
+        
+        videoCell.titleLabel.text = vi.title;
+        [videoCell.titleLabel sizeToFit];
+        
+        // center
+        videoCell.titleLabel.center = CGPointMake(videoCell.frame.size.width * 0.5f, videoCell.titleLabel.center.y);
+        videoCell.titleLabel.frame = CGRectIntegral(videoCell.titleLabel.frame);
+        
+        [videoCell.iconImageView setImageWithURL: [NSURL URLWithString: vi.thumbnailURL]                     // calls vi.video.thumbnailURL
+                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                         options: SDWebImageRetryFailed];
+        
+        videoCell.delegate = self;
         
         cell = videoCell;
-        
-        
     }
-    else if(collectionView == self.usersCollectionView)
+    else if (collectionView == self.usersCollectionView)
     {
+        SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultUserCell
+                                                                                       forIndexPath: indexPath];
         
-        SYNSearchResultsUserCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:kSearchResultUserCell
-                                                                                       forIndexPath:indexPath];
+        ChannelOwner *co = self.usersArray[indexPath.item];
         
+        [userCell.userThumbnailImageView
+         setImageWithURL: [NSURL URLWithString: co.thumbnailURL]                             // calls vi.video.thumbnailURL
+         placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+         options: SDWebImageRetryFailed];
+        
+        userCell.userNameLabel.text = co.displayName;
+        
+        userCell.delegate = self;
         
         cell = userCell;
     }
@@ -250,41 +305,49 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     cell.delegate = self;
     
     return cell;
-    
 }
+
+
 #pragma mark - Social Action Delegate
 
--(void)followControlPressed:(id)control
+- (void) followControlPressed: (id) control
 {
-    
 }
--(void)shareControlPressed:(id)control
+
+
+- (void) shareControlPressed: (id) control
 {
-    
 }
--(void)likeControlPressed:(id)control
+
+
+- (void) likeControlPressed: (id) control
 {
-    
 }
--(void)addControlPressed:(id)control
+
+
+- (void) addControlPressed: (id) control
 {
-    
 }
 
 
 #pragma mark - Tabs Delegate
 
--(IBAction)tabPressed:(id)sender
+- (IBAction) tabPressed: (id) sender
 {
-    if(self.videosTabButton == sender)
-        self.searchresultsShowing = SearchResultsShowingVideos;
+    if (self.videosTabButton == sender)
+    {
+        self.searchResultsShowing = SearchResultsShowingVideos;
+    }
     else if (self.usersTabButton == sender)
-        self.searchresultsShowing = SearchResultsShowingUsers;
+    {
+        self.searchResultsShowing = SearchResultsShowingUsers;
+    }
 }
 
--(void)setSearchresultsShowing:(SearchResultsShowing)searchresultsShowing
+
+- (void) setSearchResultsShowing: (SearchResultsShowing) searchResultsShowing
 {
-    _searchResultsShowing = searchresultsShowing;
+    _searchResultsShowing = searchResultsShowing;
     switch (_searchResultsShowing)
     {
         case SearchResultsShowingVideos:
@@ -294,6 +357,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
+            
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLightGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLighterGray];
+            
             break;
             
         case SearchResultsShowingUsers:
@@ -303,17 +370,19 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
+            
+            self.videosTabButton.backgroundColor = [UIColor dollyTextLighterGray];
+            self.usersTabButton.backgroundColor = [UIColor dollyTextLightGray];
+            
             break;
     }
 }
-
 
 
 #pragma mark - Accessors
 
 - (void) setVideoSearchOperation: (MKNetworkOperation *) runningSearchOperation
 {
-    
     if (_videoSearchOperation)
     {
         [_videoSearchOperation cancel];
@@ -322,9 +391,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     _videoSearchOperation = runningSearchOperation;
 }
 
+
 - (void) setUserSearchOperation: (MKNetworkOperation *) runningSearchOperation
 {
-    
     if (_userSearchOperation)
     {
         [_userSearchOperation cancel];

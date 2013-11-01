@@ -12,7 +12,6 @@
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
-#import "SYNSocialControlFactory.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "UIColor+SYNColor.h"
 #import "UIImage+Tint.h"
@@ -33,43 +32,17 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super awakeFromNib];
     
-    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
-    
-    
-    // == Create Buttons == //
-    
-    CGPoint middlePoint = CGPointMake(self.bottomControlsView.frame.size.width * 0.5f, self.bottomControlsView.frame.size.height * 0.5);
-    
-    likeControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                        forTitle: @"like"
-                                                                     andPosition: CGPointMake(middlePoint.x - 60.0f, middlePoint.y)];
-    
-    [self.bottomControlsView addSubview: likeControl];
-    
-    addControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeAdd
-                                                                       forTitle: nil
-                                                                    andPosition: CGPointMake(middlePoint.x, middlePoint.y)];
-    
-    [self.bottomControlsView addSubview: addControl];
-    
-    shareControl = [[SYNSocialControlFactory defaultFactory] createControlForType: SocialControlTypeDefault
-                                                                         forTitle: @"share"
-                                                                      andPosition: CGPointMake(middlePoint.x + 60.0f, middlePoint.y)];
-    
-    [self.bottomControlsView addSubview:shareControl];
-    
-    
+
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
     SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
+    aggregateFlowLayout.itemSize = [self sizeForItemAtDefaultPath];
+    
     self.collectionView.collectionViewLayout = aggregateFlowLayout;
     
-    // Attempt to tween scroll rate (doesn't seem to work, anything less than 0.3 is jerky)
-    CGFloat scrollCoefficient = kFeedAggregateScrollCoefficient * (UIScrollViewDecelerationRateNormal - UIScrollViewDecelerationRateFast);
-    
-    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast + scrollCoefficient;
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
     
     [self.collectionView reloadData];
 }
@@ -85,38 +58,21 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 }
 
 
-- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
+- (void) setCollectionData: (NSArray *) collectionData
 {
-    [super setDelegate: delegate];
-
-    [likeControl addTarget: self.delegate
-                    action: @selector(likeControlPressed:)
-          forControlEvents: UIControlEventTouchUpInside];
+    [super setCollectionData: collectionData];
     
-    [addControl addTarget: self.delegate
-                   action: @selector(addControlPressed:)
-         forControlEvents: UIControlEventTouchUpInside];
-    
-    [shareControl addTarget: self.delegate
-                     action: @selector(shareControlPressed:)
-           forControlEvents: UIControlEventTouchUpInside];
-}
-
-
-- (void) setCollectionData:(NSArray *)collectionData
-{
-    [super setCollectionData:collectionData];
-    
-    if(collectionData.count <= 0)
+    if (collectionData.count <= 0)
+    {
         return;
+    }
     
-    VideoInstance* firstVideoInstance = collectionData[0];
+    VideoInstance *firstVideoInstance = collectionData[0];
+    
     // create string
-    
-    Channel* heuristicChannel = firstVideoInstance.channel;
+    Channel *heuristicChannel = firstVideoInstance.channel;
     NSString *nameString = heuristicChannel.channelOwner.displayName; // ex 'Dolly Proxima'
-    NSString *actionString = [NSString stringWithFormat:@" added %i videos to", _collectionData.count];
-    
+    NSString *actionString = [NSString stringWithFormat: @" added %i videos to", _collectionData.count];
     
     NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
     
@@ -136,20 +92,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super layoutSubviews];
     
-    CGSize viewSize = self.frame.size;
-    CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
-    
-    
-    
-    // user thumbnail
-    self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
-    self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
-    
-    // bottom controls
-    self.bottomControlsView.center = CGPointMake(middleOfView, self.bottomControlsView.center.y);
-    self.collectionView.center =CGPointMake(middleOfView, self.collectionView.center.y);
-    self.actionMessageLabel.center =CGPointMake(middleOfView, self.actionMessageLabel.center.y);
-    self.channelNameLabel.center =CGPointMake(middleOfView, self.channelNameLabel.center.y);
 }
 
 
@@ -174,25 +116,22 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     if (IS_IPHONE)
     {
         correctSize.width = 248.0f;
-        correctSize.height = 139.0f;
+        correctSize.height = 257.0f;
     }
     else
     {
-        correctSize.width = 288.0f;
-        correctSize.height = 139.0f;
+        correctSize.width = 360.0f;
+        correctSize.height = 339.0f;
     }
     
     return correctSize;
-    
 }
 
 
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
-    
     return self.collectionData.count;
-    
 }
 
 
@@ -204,42 +143,11 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     VideoInstance* videoInstance = self.collectionData[indexPath.item];
     
-    [itemCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL] // calls vi.video.thumbnailURL
-                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                options: SDWebImageRetryFailed];
-    
-    // set time //
-    itemCell.timeAgoComponents = videoInstance.timeAgo;
-    
-    // set title //
-    itemCell.titleLabel.text = videoInstance.title;
-    [itemCell.titleLabel sizeToFit];
+    // NOTE: All fields are set through the setVideoInstance setter
+    itemCell.delegate = self.delegate;
+    itemCell.videoInstance = videoInstance;
     
     return itemCell;
 }
-
-#pragma mark - Data Retrieval
-
-- (ChannelOwner*) channelOwner
-{
-    VideoInstance* heuristic = self.videoInstanceShowing;
-    if(!heuristic)
-        return nil;
-    
-    return heuristic.channel.channelOwner;
-}
-
-- (VideoInstance*) videoInstanceShowing
-{
-    if(self.collectionData.count == 0)
-        return nil;
-    
-    // TODO: Figure out the correct video instance according to scroll offset
-    
-    return (VideoInstance*)self.collectionData[0];
-}
-
-
-
 
 @end

@@ -242,6 +242,13 @@
 "profile_screen_section_user_created_title" = "PACKS";
 "profile_screen_section_user_subscription_title" = "PACKS FOLLOWED";
 
+// == Social Buttons == //
+
+"follow" = "follow";
+"add" = "add";
+"like" = "like";
+"share" = "share";
+
 // == Instructions == //
 
 "instruction_packs_for_you" = "Here are some popular\nvideo packs for you";

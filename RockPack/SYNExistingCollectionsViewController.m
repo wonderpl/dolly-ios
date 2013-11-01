@@ -16,7 +16,7 @@
 #import "SYNChannelMidCell.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingChannelsViewController.h"
+#import "SYNExistingCollectionsViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
@@ -26,14 +26,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface SYNExistingChannelsViewController ()
+@interface SYNExistingCollectionsViewController ()
 {
     BOOL hideCells;
 }
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
 @property (nonatomic, strong) IBOutlet UIButton *confirmButtom;
-@property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
+@property (nonatomic, strong) IBOutlet UICollectionView *collectionsCollectionView;
 @property (nonatomic, strong) IBOutlet UILabel *autopostTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView *autopostView;
 @property (nonatomic, strong) NSArray *channels;
@@ -47,7 +47,7 @@
 @end
 
 
-@implementation SYNExistingChannelsViewController
+@implementation SYNExistingCollectionsViewController
 
 - (void) viewDidLoad
 {
@@ -62,7 +62,7 @@
     if (IS_IPAD)
     {
         // iPad layout & size
-        self.channelThumbnailCollectionView.collectionViewLayout =
+        self.collectionsCollectionView.collectionViewLayout =
         [SYNDeletionWobbleLayout layoutWithItemSize: CGSizeMake(192.0f, 192.0f)
                             minimumInterItemSpacing: 0.0f
                                  minimumLineSpacing: 5.0f
@@ -72,7 +72,7 @@
     else
     {
         // iPhone layout & size
-        self.channelThumbnailCollectionView.collectionViewLayout =
+        self.collectionsCollectionView.collectionViewLayout =
         [SYNDeletionWobbleLayout layoutWithItemSize: CGSizeMake(158.0f, 158.0f)
                             minimumInterItemSpacing: 0.0f
                                  minimumLineSpacing: 0.0f
@@ -80,16 +80,16 @@
                                        sectionInset: UIEdgeInsetsMake(2.0f, 2.0f, 0.0f, 2.0f)];
     }
     
-    [self.channelThumbnailCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelCreateNewCell"
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelCreateNewCell"
                                                                      bundle: nil]
                           forCellWithReuseIdentifier: @"SYNChannelCreateNewCell"];
     
-    [self.channelThumbnailCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelMidCell"
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelMidCell"
                                                                      bundle: nil]
                           forCellWithReuseIdentifier: @"SYNChannelMidCell"];
     
     
-    self.channelThumbnailCollectionView.scrollsToTop = NO;
+    self.collectionsCollectionView.scrollsToTop = NO;
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
@@ -145,7 +145,7 @@
         return;
     
     ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
-    __weak SYNExistingChannelsViewController *wself = self;
+    __weak SYNExistingCollectionsViewController *wself = self;
     __weak SYNAppDelegate *wAppDelegate = appDelegate;
     BOOL isYesButton = (sender == self.autopostYesButton);
     
@@ -231,7 +231,7 @@
 {
     [super viewWillAppear: animated];
     
-    self.channelThumbnailCollectionView.scrollsToTop = YES;
+    self.collectionsCollectionView.scrollsToTop = YES;
 
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -274,7 +274,7 @@
     
     [self packViewForInterfaceOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
-    [self.channelThumbnailCollectionView reloadData];
+    [self.collectionsCollectionView reloadData];
 }
 
 
@@ -282,7 +282,7 @@
 {
     [super viewWillDisappear: animated];
     
-    self.channelThumbnailCollectionView.scrollsToTop = NO;
+    self.collectionsCollectionView.scrollsToTop = NO;
     
     self.channels = nil;
 }
@@ -349,6 +349,9 @@
     self.closeButton.enabled = NO;
     self.confirmButtom.enabled = NO;
     
+    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+                                                        object: self];
+    
     [self closeAnimation: ^(BOOL finished) {
         
         // will remove itself and will be deallocated since no other reference is held
@@ -394,7 +397,7 @@
 
 - (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
 {
-    NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForCell: cell];
+    NSIndexPath *indexPath = [self.collectionsCollectionView indexPathForCell: cell];
     return  indexPath;
 }
 
@@ -410,7 +413,7 @@
     
     if (self.previouslySelectedPath)
     {
-        SYNChannelMidCell *cellToDeselect = (SYNChannelMidCell *) [self.channelThumbnailCollectionView cellForItemAtIndexPath: self.previouslySelectedPath];
+        SYNChannelMidCell *cellToDeselect = (SYNChannelMidCell *) [self.collectionsCollectionView cellForItemAtIndexPath: self.previouslySelectedPath];
         cellToDeselect.specialSelected = NO;
     }
     
@@ -489,7 +492,7 @@
 
 - (void) packViewForInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation
 {
-    CGRect collectionFrame = self.channelThumbnailCollectionView.frame;
+    CGRect collectionFrame = self.collectionsCollectionView.frame;
     
     CGRect autopostViewFrame = self.autopostView.frame;
     
@@ -532,7 +535,7 @@
     }
     
     collectionFrame.origin.x = (self.view.frame.size.width * 0.5) - (collectionFrame.size.width * 0.5);
-    self.channelThumbnailCollectionView.frame = CGRectIntegral(collectionFrame);
+    self.collectionsCollectionView.frame = CGRectIntegral(collectionFrame);
     
     CGRect selfFrame = self.view.frame;
     selfFrame.size = [SYNDeviceManager.sharedInstance currentScreenSize];
@@ -544,11 +547,11 @@
 {
     hideCells = YES;
     UICollectionViewCell *cell = nil;
-    NSArray *indexPaths = [self.channelThumbnailCollectionView indexPathsForVisibleItems];
+    NSArray *indexPaths = [self.collectionsCollectionView indexPathsForVisibleItems];
     
     for (NSIndexPath *path in indexPaths)
     {
-        cell = [self.channelThumbnailCollectionView cellForItemAtIndexPath: path];
+        cell = [self.collectionsCollectionView cellForItemAtIndexPath: path];
         cell.contentView.alpha = 0.0f;
     }
 }
@@ -559,13 +562,13 @@
     NSArray *sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"section"
                                                              ascending: YES], [[NSSortDescriptor alloc] initWithKey: @"row"
                                                                                                           ascending: YES]];
-    NSArray *indexPaths = [[self.channelThumbnailCollectionView indexPathsForVisibleItems] sortedArrayUsingDescriptors: sortDescriptors];
+    NSArray *indexPaths = [[self.collectionsCollectionView indexPathsForVisibleItems] sortedArrayUsingDescriptors: sortDescriptors];
     int count = 0;
     
     UICollectionViewCell *cell;
     for (NSIndexPath *path in indexPaths)
     {
-        cell = [self.channelThumbnailCollectionView cellForItemAtIndexPath: path];
+        cell = [self.collectionsCollectionView cellForItemAtIndexPath: path];
         
         [UIView animateWithDuration: 0.2f
                               delay: 0.05 * count

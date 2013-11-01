@@ -13,10 +13,17 @@
 #import "SubGenre.h"
 #import "SYNSearchResultsViewController.h"
 #import "SYNDeviceManager.h"
+#import "AppConstants.h"
 #import "SYNDiscoverCategoriesCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAutocompleteTime 0.2
+
+typedef enum {
+    kSearchTypeGenre = 0,
+    kSearchTypeTerm
+} kSearchType;
+
 
 static NSString* kCategoryCellIndetifier = @"SYNDiscoverCategoriesCell";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
@@ -93,29 +100,79 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.searchResultsController.view.frame = sResRect;
     }
     
+    // Check for existence of popular category
     
-    // == Load and Display Categories == //
+    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
-    [self fetchCategories];
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
+    
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
+    
+    categoriesFetchRequest.includesSubentities = NO; // this will avoid getting both the Genre and SubGenre called 'POPULAR'
+    
+    NSError* error;
+    
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                      error: &error];
+    
+    // probably the database is cold so need to reload everything
+    if(genresFetchedArray.count == 0)
+    {
+      
+        Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
+        popularGenre.uniqueId = @"9090";
+        popularGenre.name = [NSString stringWithString:kPopularGenreName];
+        popularGenre.priorityValue = 100000;
+        
+        SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
+        popularSubGenre.uniqueId = @"9091";
+        popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
+        popularSubGenre.priorityValue = 100000;
+        
+        // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
+        [popularGenre.subgenresSet addObject:popularSubGenre];
+        
+        if(!popularGenre)
+            return;
+        
+        [appDelegate.mainManagedObjectContext save:&error];
+        
+        
+        
+        [self loadCategories];
+        
+    }
+    else
+    {
+        // housekeeping
+        if(genresFetchedArray.count > 1)
+        {
+            for (int i = 1; i < genresFetchedArray.count; i++)
+            {
+                Genre* popularClone = (Genre*)genresFetchedArray[i];
+                [popularClone.managedObjectContext delete:popularClone];
+                
+            }
+        }
+        
+        [self fetchCategories];
+        
+        [self loadCategories];
+        
+    }
+    
     
     
     [self.categoriesCollectionView reloadData];
     
-    // == Since this is method is called once use it to update the categories == //
     
-    [self loadCategories];
+    
     
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self.categoriesCollectionView.collectionViewLayout invalidateLayout];
-    
-    
-    
-}
+
+
 #pragma mark - Data Retrieval
 
 - (void) fetchCategories
@@ -131,7 +188,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
     
+    // this is so that empty genres are not returned since only the subgenres are displayed
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"subgenres.@count > 0"];
     
+    categoriesFetchRequest.includesSubentities = NO;
     
     NSError* error;
     
@@ -141,6 +201,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
+    // create temporary colors
     NSMutableDictionary* mutDictionary = @{}.mutableCopy;
     for (Genre* genre in self.genres)
     {
@@ -159,7 +220,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) loadCategories
 {
-    
     
     
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
@@ -224,7 +284,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     SubGenre* selectedGenre = self.genres[indexPath.item];
     
-    [self dispatchSearch:selectedGenre.name];
+    if([selectedGenre.name isEqualToString:kPopularGenreName])
+        [self dispatchSearch:@"" forType:kSearchTypeGenre];
+    else
+        [self dispatchSearch:selectedGenre.uniqueId forType:kSearchTypeGenre];
 }
 
 
@@ -376,15 +439,35 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) dispatchSearch:(NSString*)searchTerm
 {
-    [self.searchResultsController searchForString:searchTerm];
-    
+    [self dispatchSearch:searchTerm forType:kSearchTypeTerm];
+}
+- (void) dispatchSearch:(NSString*)searchTerm forType:(kSearchType)type
+{
+    // add first so as to pass the appDelegate
     if(IS_IPHONE)
     {
+        // this is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
+        UIView* view_hack = self.searchResultsController.view;
+        #pragma unused(view_hack)
+        
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
         
         
     }
+    
+    if(type == kSearchTypeGenre)
+    {
+        
+        [self.searchResultsController searchForGenre:searchTerm];
+    }
+    else
+    {
+        [self.searchResultsController searchForTerm:searchTerm];
+    }
+    
+    
+    
 }
 
 

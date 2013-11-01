@@ -493,7 +493,6 @@
 
 - (void) applicationDidBecomeActive: (UIApplication *) application
 {
-
     [FBAppEvents activateApp];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
@@ -502,21 +501,21 @@
         [self.loginViewController applicationResume];
     }
     
+    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
+    
     [self checkForUpdatedPlayerCode];
     
     // send tracking code
     
+    NSString *message;
     
-    
-    NSString* message;
-    
-    
-    if(![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsNotFirstInstall]) // IS first install
+    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsNotFirstInstall]) // IS first install
     {
         message = @"install";
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsNotFirstInstall];
+        [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                forKey: kUserDefaultsNotFirstInstall];
     }
-    else if(enteredAppThroughNotification)
+    else if (enteredAppThroughNotification)
     {
         message = @"URL";
         enteredAppThroughNotification = NO;
@@ -525,8 +524,9 @@
     {
         message = nil;
     }
-    [self.oAuthNetworkEngine trackSessionWithMessage: message];
     
+    [self.oAuthNetworkEngine
+     trackSessionWithMessage: message];
 }
 
 
@@ -783,6 +783,7 @@
     if ([self.mainManagedObjectContext hasChanges])
     {
         [self.mainManagedObjectContext performBlock: ^{
+            
             NSError *error = nil;
             
             if (![self.mainManagedObjectContext save: &error])
@@ -790,8 +791,8 @@
                 AssertOrLog(@"Error saving Main moc: %@\n%@", [error localizedDescription], [error userInfo]);
             }
             
-            void (^ savePrivate) (void) = ^
-            {
+            void (^ savePrivate) (void) = ^{
+                
                 NSError *error = nil;
                 
                 if (![self.privateManagedObjectContext save: &error])

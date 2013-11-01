@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNExistingChannelsViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNExistingCollectionsViewController">
             <connections>
                 <outlet property="autopostNoButton" destination="21" id="23"/>
                 <outlet property="autopostTitleLabel" destination="30" id="31"/>
                 <outlet property="autopostView" destination="27" id="28"/>
                 <outlet property="autopostYesButton" destination="20" id="24"/>
-                <outlet property="channelThumbnailCollectionView" destination="6" id="8"/>
                 <outlet property="closeButton" destination="11" id="12"/>
+                <outlet property="collectionsCollectionView" destination="6" id="cSo-FW-ARq"/>
                 <outlet property="confirmButtom" destination="4" id="10"/>
                 <outlet property="createNewTextField" destination="Oht-ga-lNT" id="IYx-p6-gJ3"/>
                 <outlet property="titleLabel" destination="18" id="19"/>
@@ -21,11 +21,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+            <rect key="frame" x="0.0" y="0.0" width="927" height="748"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4" userLabel="Confirm Button">
-                    <rect key="frame" x="745" y="30" width="170" height="60"/>
+                    <rect key="frame" x="678" y="30" width="170" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" image="ButtonConfirm.png">
@@ -55,7 +55,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="6">
-                    <rect key="frame" x="127" y="163" width="769" height="585"/>
+                    <rect key="frame" x="79" y="163" width="769" height="585"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7">
@@ -71,7 +71,7 @@
                     </connections>
                 </collectionView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ADD TO A PACK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="18">
-                    <rect key="frame" x="326" y="38" width="373" height="52"/>
+                    <rect key="frame" x="277.5" y="38" width="373" height="52"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                     <color key="textColor" red="0.15686274509803921" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,7 +84,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" id="27" userLabel="Autopost View">
-                    <rect key="frame" x="0.0" y="704" width="1024" height="44"/>
+                    <rect key="frame" x="-48.5" y="704" width="1024" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="29" userLabel="BG View">

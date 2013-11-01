@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SYNSocialButton.h"
 
 @protocol SYNSocialActionsDelegate <NSObject>
 
--(void)followControlPressed:(UIControl*)control;
--(void)shareControlPressed:(UIControl*)control;
--(void)likeControlPressed:(UIControl*)control;
--(void)addControlPressed:(UIControl*)control;
+- (void) followControlPressed: (SYNSocialButton *) socialButton;
+- (void) shareControlPressed: (SYNSocialButton *) socialButton;
+- (void) likeControlPressed: (SYNSocialButton *) socialButton;
+- (void) addControlPressed: (SYNSocialButton *) socialButton;
 
 @end

@@ -16,15 +16,29 @@
     
     self.userNameLabel.font = [UIFont lightCustomFontOfSize:self.userNameLabel.font.pointSize];
     
-    
-    
+    // == Round off the image == //
+    self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
+    self.userThumbnailImageView.clipsToBounds = YES;
 }
 
 -(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
 {
+    if(_delegate)
+    {
+        [self.followButton removeTarget:_delegate
+                                 action:@selector(followControlPressed:)
+                    forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     [super setDelegate:delegate];
     
     
+    if(!_delegate)
+        return; // can set nil
+    
+    [self.followButton addTarget:_delegate
+                          action:@selector(followControlPressed:)
+                forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

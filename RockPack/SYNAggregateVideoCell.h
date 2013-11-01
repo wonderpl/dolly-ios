@@ -7,21 +7,15 @@
 //
 
 #import "SYNAggregateCell.h"
-#import "SYNSocialAddControl.h"
+#import "SYNSocialAddButton.h"
 #import "VideoInstance.h"
 #import "Video.h"
 
 @interface SYNAggregateVideoCell : SYNAggregateCell
-{
-    SYNSocialControl* likeControl;
-    SYNSocialControl* addControl;
-    SYNSocialControl* shareControl;
-}
 
 
 @property (nonatomic, strong) IBOutlet UILabel* channelNameLabel;
-@property (nonatomic, readonly) VideoInstance* videoInstanceShowing;
 
 
-@property (nonatomic, strong) IBOutlet UIView* bottomControlsView;
+
 @end

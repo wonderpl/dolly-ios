@@ -143,9 +143,11 @@
     
     // Query for existing objects
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-    [categoriesFetchRequest setEntity: [NSEntityDescription entityForName: @"Genre"
+    
+    [categoriesFetchRequest setEntity: [NSEntityDescription entityForName: kGenre
                                                    inManagedObjectContext: appDelegate.mainManagedObjectContext]];
     
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name != %@", kPopularGenreName];
     
     // must not fetch SubGenres
     categoriesFetchRequest.includesSubentities = NO;
@@ -199,12 +201,10 @@
     }
         
     
-   
-    
     for (Genre* category in existingCategories)
     {
         if(category.markedForDeletionValue)
-            [category.managedObjectContext delete:category];
+            [category.managedObjectContext deleteObject:category];
     }
     
     

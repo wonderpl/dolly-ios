@@ -25,6 +25,8 @@
 
 // Entities
 
+#define kGenre                      @"Genre"
+#define kSubGenre                   @"SubGenre"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
 #define kVideo                      @"Video"
@@ -46,7 +48,7 @@
 #define kProfileViewId              @"ME"
 #define kSearchViewId               @"SEARCH"
 #define kDiscoverViewId             @"DISCOVER"
-#define kExistingChannelsViewId     @"CHANNELS"
+#define kExistingChannelsViewId     @"EXISTING CHANNELS"
 #define kChannelDetailsViewId       @"CHANNEL DETAILS"
 #define kSideNavigationViewId       @"SIDE NAVIGATION"
 #define kSubscribersListViewId      @"SUBSCRIBERS"
@@ -96,6 +98,7 @@ typedef enum : NSInteger {
 #define kAPICompleteVideos          @"/ws/complete/videos/"
 #define kAPICompleteChannels        @"/ws/complete/channels/"
 #define kAPICompleteUsers           @"/ws/complete/channels/"
+
 
 #define kAPISearchVideos            @"/ws/search/videos/"
 #define kAPISearchChannels          @"/ws/search/channels/"
@@ -150,7 +153,7 @@ typedef enum : NSInteger {
 #define kAPIGetCoverArt             @"/ws/cover_art/"                           /* GET */
 
 // Something
-#define kAPIPopularVideos           @"ws/videos/"
+#define kAPIVideos                  @"/ws/videos/"                              /* GET */
 #define kAPIPopularChannels         @"ws/channels/"
 #define kAPIRecommendedChannels     @"/ws/USERID/channel_recommendations/"
 #define kAPICategories              @"ws/categories/"
@@ -379,16 +382,12 @@ typedef enum : NSInteger {
 #define kVideoQueueRemove           @"kVideoQueueRemove"
 #define kVideoQueueClear            @"kVideoQueueClear"
 
+static NSString* kPopularGenreName = @"POPULAR";
 
-#define kScrollerPageChanged        @"kScrollerPageChanged"
 
 
-#define kNoteCreateButtonRequested       @"kNoteCreateButtonRequested"
 
-#define kSearchTyped      @"kSearchTyped"
-#define kSearchTerm      @"kSearchTerm"
 
-#define kCurrentPage        @"kCurrentPage"
 
 // UserDefaults
 #define kUserDefaultsNotFirstInstall @"UD_Not_First_Install"

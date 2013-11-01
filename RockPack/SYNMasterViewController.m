@@ -17,7 +17,7 @@
 #import "SYNChannelDetailViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingChannelsViewController.h"
+#import "SYNExistingCollectionsViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
@@ -92,14 +92,17 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     [self addChildViewController:self.containerViewController];
     
-    self.containerViewController.view.frame = CGRectMake(0.0f, 0.0f, self.containerView.frame.size.width, self.containerView.frame.size.height);
-    [self.containerView addSubview:self.containerViewController.view];
+    // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
+    
+    self.containerViewController.view = self.containerView;
+    
     
     // == Setup Navigation Manager == (This should be done here because it is dependent on controls) == //
     
-    
     appDelegate.navigationManager.masterController = self;
     appDelegate.navigationManager.containerController = self.containerViewController; // container
+    
+    appDelegate.viewStackManager.masterController = self;
     
     
     // == Fade in from splash screen (not in AppDelegate so that the Orientation is known) == //
@@ -176,7 +179,19 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 
 
-
+-(void) addOverlayController: (SYNAbstractViewController*) abstractViewController
+{
+    [self addChildViewController:abstractViewController];
+    
+    [self.view addSubview:abstractViewController.view];
+    
+    // pause video
+    
+    if (self.videoViewerViewController)
+    {
+        [self.videoViewerViewController pauseIfVideoActive];
+    }
+}
 
 
 #pragma mark - Video Overlay View
@@ -188,8 +203,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     
     
-    // FIXME: Replace with something more elegant (i.e. anything else)
-    appDelegate.searchRefreshDisabled = YES;
+    
     
     if (self.videoViewerViewController)
     {
@@ -244,126 +258,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) removeVideoOverlayController
 {
-    // FIXME: Replace with something more elegant (i.e. anything else)
-    appDelegate.searchRefreshDisabled = FALSE;
-   /*
-    if (!self.videoViewerViewController)
-    {
-        return;
-    }
-    
-    if ([self.originViewController isKindOfClass:[SYNChannelDetailViewController class]])
-    {
-        SYNChannelDetailViewController* channelDetailViewController = (SYNChannelDetailViewController*)self.originViewController;
-        if ([channelDetailViewController isFavouritesChannel])
-        {
-            [channelDetailViewController refreshFavouritesChannel];
-        }
- 
-    }
-    
-    UIView* child = self.overlayView.subviews[0];
-    
-    [UIView animateWithDuration: kVideoOutAnimationDuration
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         self.videoViewerViewController.view.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
-                         self.videoViewerViewController.view.alpha = 0.0f;
-                     }
-                     completion: ^(BOOL finished) {
-                         self.overlayView.userInteractionEnabled = NO;
-                         [child removeFromSuperview];
-                         [self.videoViewerViewController.view removeFromSuperview];
-                         [self.videoViewerViewController removeFromParentViewController];
-                         self.videoViewerViewController = nil;
-                     }];
-    
-    */
-  //  [self.originViewController videoOverlayDidDissapear];
-    //FIXME: Nick to rework
-  //  [self.containerViewController viewWillAppear:NO];
-
-    
-    // [self.overlayView addSubview: self.videoViewerViewController.view];
 
     [self dismissViewControllerAnimated:YES completion:^{
         self.videoViewerViewController = nil;
     }];
 
 }
-
-
-#pragma mark - Search (Text Delegate) Methods
-/*
-- (IBAction) showSearchBoxField: (id) sender
-{
-    
-    if(IS_IPAD)
-    {
-        if (self.hasSearchBarOn) // if it is on stage already
-            return;
-        
-        self.darkOverlayView.alpha = 1.0;
-        
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                             
-                             self.darkOverlayView.alpha = 0.0;
-                             
-                         } completion:^(BOOL finished) {
-                             
-                             self.darkOverlayView.hidden = YES;
-                             
-                         }];
-        
-        CGRect sboxFrame = self.searchBoxController.view.frame;
-        
-        // place according to the position of the back button //
-        if (self.showingBackButton)
-        {
-            sboxFrame.origin.x = 76.0f;
-        }
-        else
-        {
-            sboxFrame.origin.x = 10.0;
-        }
-        
-        sboxFrame.size.width = self.closeSearchButton.frame.origin.x - sboxFrame.origin.x - 8.0;
-        sboxFrame.origin.y = IS_IOS_7_OR_GREATER ? 20.0f : 10.0f;
-        self.searchBoxController.view.frame = sboxFrame;
-        
-        [self.view insertSubview:self.searchBoxController.view belowSubview:self.sideNavigationContainerView];
-        
-        self.searchBoxController.searchTextField.text = @"";
-        
-        if (IS_IPAD && sender != nil)
-        {
-            [self.searchBoxController.searchTextField becomeFirstResponder];
-        }
-        
-        self.closeSearchButton.hidden = NO;
-        self.sideNavigationButton.hidden = YES;
-    }
-    else
-    {
-       [appDelegate.viewStackManager presentSearchBar];
-    }
-   
-}
-*/
-
-
-
-
-
-
-- (IBAction) cancelButtonPressed: (id) sender
-{
-    
-}
-
-
 
 
 #pragma mark - Notification Handlers
@@ -671,6 +571,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
 
 }
+
+#pragma mark - Accessors
 
 - (UINavigationController*) showingViewController
 {

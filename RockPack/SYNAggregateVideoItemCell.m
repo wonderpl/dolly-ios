@@ -7,26 +7,94 @@
 //
 
 #import "SYNAggregateVideoItemCell.h"
+#import "SYNSocialAddButton.h"
+#import "SYNSocialButton.h"
+#import "UIImageView+WebCache.h"
+#import "Video.h"
+#import "VideoInstance.h"
+
+
+@interface SYNAggregateVideoItemCell ()
+
+@property (strong, nonatomic) IBOutlet SYNSocialButton *likeControl;
+@property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
+
+@end
+
 
 @implementation SYNAggregateVideoItemCell
 
--(void)setTimeAgoComponents:(NSDateComponents *)timeAgoComponents
+- (void) awakeFromNib
 {
-    _timeAgoComponents = timeAgoComponents;
-    if(!_timeAgoComponents)
-        return;
-    
-    NSString* finalTimeString;
-    if(_timeAgoComponents.year)
-        finalTimeString = [NSString stringWithFormat:@"%i year%@ ago", _timeAgoComponents.year, _timeAgoComponents.year == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.month)
-        finalTimeString = [NSString stringWithFormat:@"%i month%@ ago", _timeAgoComponents.month, _timeAgoComponents.month == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.day)
-        finalTimeString = [NSString stringWithFormat:@"%i day%@ ago", _timeAgoComponents.day, _timeAgoComponents.day == 1 ? @"" : @"s"];
-    else if(_timeAgoComponents.minute)
-        finalTimeString = [NSString stringWithFormat:@"%i minute%@ ago", _timeAgoComponents.minute, _timeAgoComponents.minute == 1 ? @"" : @"s"];
- 
-    self.timeLabel.text = finalTimeString;
+    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
+                      andCount: 0];
+
+    self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateVideoItemCell");
 }
+
+
+- (IBAction) likeControlPressed: (id) sender
+{
+    [self.delegate likeControlPressed: sender];
+}
+
+
+- (IBAction) addControlPressed: (id) sender
+{
+    [self.delegate addControlPressed: sender];
+}
+
+
+- (IBAction) shareControlPressed: (id) sender
+{
+    [self.delegate shareControlPressed: sender];
+}
+
+
+- (void) setVideoInstance: (VideoInstance *) videoInstance
+{
+    _videoInstance = videoInstance;
+    
+    self.shareControl.dataItemLinked = _videoInstance;
+    self.addControl.dataItemLinked = _videoInstance;
+    self.likeControl.dataItemLinked = _videoInstance;
+    
+    if (!_videoInstance)
+    {
+        return;
+    }
+    
+    [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]            // calls vi.video.thumbnailURL
+                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                            options: SDWebImageRetryFailed];
+    
+    NSDateComponents *timeAgoComponents = videoInstance.timeAgo;
+    
+    if (timeAgoComponents.year)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.month)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.day)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.minute)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
+    }
+    
+    self.likeControl.selected = videoInstance.starredByUserValue;
+    
+    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
+                      andCount: videoInstance.video.starCountValue];
+    
+    self.titleLabel.text = videoInstance.title;
+}
+
 
 @end
