@@ -901,53 +901,61 @@
 {
     if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
     {
-        // Get the videoinstance associated with the control pressed
+        // Get the channel associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
+        if(!channel)
+            return;
         
-        if (channel)
+        
+        // Temporarily disable the button to prevent multiple-clicks
+        socialControl.enabled = NO;
+        
+        // toggle subscription from/to channel //
+        if (channel.subscribedByUserValue == NO)
         {
-            // Temporarily disable the button to prevent multiple-clicks
-            socialControl.enabled = NO;
-            
-            // toggle subscription from/to channel //
-            if (channel.subscribedByUserValue == NO)
-            {
-                // Subscribe
-                [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                               channelURL: channel.resourceURL
-                                                        completionHandler: ^(NSDictionary *responseDictionary) {
-                                                            
-                                                            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                                            
-                                                            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                                   action: @"userSubscription"
-                                                                                                                    label: nil
-                                                                                                                    value: nil] build]];
-                                                            channel.hasChangedSubscribeValue = YES;
-                                                            channel.subscribedByUserValue = YES;
-                                                            channel.subscribersCountValue += 1;
-                                                            socialControl.selected = YES;
-                                                            socialControl.enabled = YES;
-                                                        } errorHandler: ^(NSDictionary *errorDictionary) {
-                                                            socialControl.enabled = YES;
-                                                        }];
-            }
-            else
-            {
-                // Unsubscribe
-                [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                                  channelId: channel.uniqueId
-                                                          completionHandler: ^(NSDictionary *responseDictionary) {
-                                                              channel.hasChangedSubscribeValue = YES;
-                                                              channel.subscribedByUserValue = NO;
-                                                              channel.subscribersCountValue -= 1;
-                                                              socialControl.selected = NO;
-                                                              socialControl.enabled = YES;
-                                                          } errorHandler: ^(NSDictionary *errorDictionary) {
-                                                              socialControl.enabled = YES;
-                                                          }];
-            }
+            // Subscribe
+            [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                           channelURL: channel.resourceURL
+                                                    completionHandler: ^(NSDictionary *responseDictionary) {
+                                                        
+                                                        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+                                                        
+                                                        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                                                               action: @"userSubscription"
+                                                                                                                label: nil
+                                                                                                                value: nil] build]];
+                                                        channel.hasChangedSubscribeValue = YES;
+                                                        channel.subscribedByUserValue = YES;
+                                                        channel.subscribersCountValue += 1;
+                                                        socialControl.selected = YES;
+                                                        socialControl.enabled = YES;
+                                                    } errorHandler: ^(NSDictionary *errorDictionary) {
+                                                        socialControl.enabled = YES;
+                                                    }];
         }
+        else
+        {
+            // Unsubscribe
+            [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                              channelId: channel.uniqueId
+                                                      completionHandler: ^(NSDictionary *responseDictionary) {
+                                                          channel.hasChangedSubscribeValue = YES;
+                                                          channel.subscribedByUserValue = NO;
+                                                          channel.subscribersCountValue -= 1;
+                                                          socialControl.selected = NO;
+                                                          socialControl.enabled = YES;
+                                                      } errorHandler: ^(NSDictionary *errorDictionary) {
+                                                          socialControl.enabled = YES;
+                                                      }];
+        }
+    }
+    else if ([socialControl.dataItemLinked isKindOfClass: [ChannelOwner class]])
+    {
+        // Get the owner associated with the control pressed
+        ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
+        
+        if(!channelOwner)
+            return;
     }
 }
 

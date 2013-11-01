@@ -1096,7 +1096,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
     else
     {
-        CGFloat offset = scrollView.contentOffset.y;
+        // CGFloat offset = scrollView.contentOffset.y;
         
         if (scrollView == self.channelThumbnailCollectionView || scrollView == self.subscriptionThumbnailCollectionView)
         {
