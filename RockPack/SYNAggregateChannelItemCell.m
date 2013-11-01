@@ -81,6 +81,8 @@
     {
         self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
     }
+    
+    self.followControl.selected = channel.subscribedByUserValue;
 }
 
 @end
