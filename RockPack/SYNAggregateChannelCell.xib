@@ -32,12 +32,9 @@
                             <outlet property="dataSource" destination="2" id="3hI-5H-nEg"/>
                         </connections>
                     </collectionView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Dolly Proxima created a new channel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14" userLabel="Message Label">
-                        <rect key="frame" x="0.0" y="76" width="927" height="15"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Dolly Proxima" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14" userLabel="Action Message Label">
+                        <rect key="frame" x="20" y="72" width="887" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="15" id="W7J-KA-Z3h"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -67,18 +64,19 @@
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="14" secondAttribute="centerX" id="4zN-5j-jef"/>
                 <constraint firstAttribute="trailing" secondItem="Khg-wM-3Jg" secondAttribute="trailing" id="6gB-O1-vO7"/>
                 <constraint firstItem="23" firstAttribute="centerY" secondItem="13" secondAttribute="centerY" id="8Jt-OF-Phr"/>
+                <constraint firstAttribute="trailing" secondItem="14" secondAttribute="trailing" constant="20" id="8xG-Hj-VUL"/>
                 <constraint firstItem="23" firstAttribute="width" secondItem="13" secondAttribute="width" id="ATF-2Z-cAS"/>
-                <constraint firstItem="14" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="8" id="Djx-rf-Zfx"/>
                 <constraint firstItem="23" firstAttribute="height" secondItem="13" secondAttribute="height" id="O9h-UM-p3n"/>
                 <constraint firstItem="13" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="S2B-vX-aUh"/>
                 <constraint firstAttribute="centerX" secondItem="13" secondAttribute="centerX" id="aQX-gJ-Vym"/>
                 <constraint firstItem="Khg-wM-3Jg" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="bay-va-Fbm"/>
-                <constraint firstItem="14" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="hU7-aa-JjF"/>
+                <constraint firstItem="14" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="gPk-Sj-6br"/>
                 <constraint firstItem="23" firstAttribute="centerX" secondItem="13" secondAttribute="centerX" id="qld-k2-HF9"/>
+                <constraint firstItem="14" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="4" id="rUN-Rj-SVI"/>
                 <constraint firstAttribute="bottom" secondItem="Khg-wM-3Jg" secondAttribute="bottom" constant="6" id="v2c-c6-8EW"/>
-                <constraint firstAttribute="trailing" secondItem="14" secondAttribute="trailing" id="wVS-s4-veG"/>
             </constraints>
             <size key="customSize" width="353" height="361"/>
             <connections>

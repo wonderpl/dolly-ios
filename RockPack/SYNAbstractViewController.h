@@ -65,7 +65,9 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) handleNewTabSelectionWithGenre: (Genre *) name;
 
 - (void) videoOverlayDidDissapear;
-- (void) displayVideoViewerFromView: (UIButton *) videoViewButton;
+
+- (void) displayVideoViewerFromView: (UIView *) view
+                          indexPath: (NSIndexPath *) indexPath;
 
 - (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button;
 
@@ -95,17 +97,11 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance;
 
-- (void) shareChannel: (Channel *) channel
-              isOwner: (NSNumber *) isOwner
-           usingImage: (UIImage *) image;
 
 - (void) addVideoAtIndexPath: (NSIndexPath *) indexPath
                withOperation: (NSString *) operation;
 
-- (void) shareVideoAtIndexPath: (NSIndexPath *) indexPath;
 
-- (void) shareChannelAtIndexPath: (NSIndexPath *) indexPath
-               andComponentIndex: (NSInteger) componentIndex;
 
 // Purchase
 - (void) initiatePurchaseAtURL: (NSURL *) purchaseURL;

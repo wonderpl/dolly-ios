@@ -1426,18 +1426,7 @@
 }
 
 
-#pragma mark - Control Delegate
 
-- (IBAction) shareChannelButtonTapped: (UIButton *) shareButton
-{
-    // Get share link pre-emptively
-    [self requestShareLinkWithObjectType: @"channel"
-                                objectId: self.channel.uniqueId];
-    
-    [self shareChannel: self.channel
-               isOwner: ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
-            usingImage: nil];
-}
 
 
 // If the buy button is visible, then (hopefully) we have a valid URL

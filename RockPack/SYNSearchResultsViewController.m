@@ -290,21 +290,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 }
 
 
-#pragma mark - Social Action Delegate
-
-- (void) followControlPressed: (id) control
-{
-}
-
-
-- (void) shareControlPressed: (id) control
-{
-}
-
-
-- (void) addControlPressed: (id) control
-{
-}
 
 
 #pragma mark - Tabs Delegate

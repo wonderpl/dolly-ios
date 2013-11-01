@@ -8,6 +8,7 @@
 
 #import "SYNAggregateChannelItemCell.h"
 #import "SYNSocialButton.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNAggregateChannelItemCell ()
 
@@ -25,6 +26,10 @@
     self.followControl.title = NSLocalizedString(@"follow", @"Label for follow button on SYNAggregateChannelItemCell");
     
     self.shareControl.title = NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell");
+    
+    self.timeLabel.font = [UIFont lightCustomFontOfSize:self.timeLabel.font.pointSize];
+    self.followersLabel.font = [UIFont lightCustomFontOfSize:self.followersLabel.font.pointSize];
+    self.videosLabel.font = [UIFont lightCustomFontOfSize:self.videosLabel.font.pointSize];
     
     self.bg.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.bg.layer.borderWidth = 1.0f;

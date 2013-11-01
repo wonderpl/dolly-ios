@@ -199,8 +199,11 @@
         
         
         self.isTransitioning = NO;
-
+        
     };
+    
+    
+    
     
     
     // == Do the Transition selectively == //

@@ -247,32 +247,36 @@
 }
 
 
-- (void) displayVideoViewerFromView: (UIButton *) videoViewButton
+- (void) displayVideoViewerFromView: (UIView *) view
+                          indexPath: (NSIndexPath *) indexPath
 {
-    NSIndexPath *indexPath = [self indexPathFromVideoInstanceButton: videoViewButton];
+    id selectedVideo = [self.fetchedResultsController objectAtIndexPath: indexPath];
     
-    id selectedVideo = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSArray* videoArray =  self.fetchedResultsController.fetchedObjects;
+    NSArray *videoArray = self.fetchedResultsController.fetchedObjects;
     CGPoint center;
-    if(videoViewButton)
+    
+    if (view)
     {
-        center = [self.view convertPoint:videoViewButton.center fromView:videoViewButton.superview];
+        center = [self.view convertPoint: view.center
+                  fromView: view.superview];
     }
     else
     {
         center = self.view.center;
     }
+    
     [self displayVideoViewerWithVideoInstanceArray: videoArray
-                                  andSelectedIndex: [videoArray indexOfObject:selectedVideo] center:center];
+                                  andSelectedIndex: [videoArray indexOfObject: selectedVideo]
+                                            center: center];
 }
 
 
 - (void) displayVideoViewerWithVideoInstanceArray: (NSArray *) videoInstanceArray
-                                andSelectedIndex: (int) selectedIndex
-                                           center:(CGPoint)center
+                                 andSelectedIndex: (int) selectedIndex
+                                           center: (CGPoint) center
 {
-    SYNMasterViewController *masterViewController = (SYNMasterViewController*)appDelegate.masterViewController;
-        
+    SYNMasterViewController *masterViewController = (SYNMasterViewController *) appDelegate.masterViewController;
+    
     [masterViewController addVideoOverlayToViewController: self
                                    withVideoInstanceArray: videoInstanceArray
                                          andSelectedIndex: selectedIndex
@@ -493,6 +497,74 @@
 }
 
 
+- (void) addControlPressed: (SYNSocialButton *) socialControl
+{
+    if (![socialControl.dataItemLinked
+          isKindOfClass: [VideoInstance class]])
+    {
+        return; // only relates to video instances
+    }
+    
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
+    
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoPlusButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
+    
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
+                                                     action: @"select"
+                                            videoInstanceId: videoInstance.uniqueId
+                                          completionHandler: nil
+                                               errorHandler: nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
+                                                        object: self
+                                                      userInfo: @{@"VideoInstance": videoInstance}];
+}
+
+
+
+- (void) shareControlPressed: (SYNSocialButton *) socialControl
+{
+    if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
+    {
+        // Get the videoinstance associated with the control pressed
+        VideoInstance *videoInstance = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"video_instance"
+                                    objectId: videoInstance.uniqueId];
+        
+        [self shareVideoInstance: videoInstance];
+    }
+    else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
+    {
+        // Get the videoinstance associated with the control pressed
+        Channel *channel = socialControl.dataItemLinked;
+        
+        [self requestShareLinkWithObjectType: @"channel"
+                                    objectId: channel.uniqueId];
+        
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"channelShareButtonClick"
+                                                                label: nil
+                                                                value: nil] build]];
+        
+        [self shareObjectType:  @"channel"
+                     objectId: channel.uniqueId
+                      isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
+                      isVideo: @NO
+                   usingImage: nil];
+        
+        
+    }
+}
+
+
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
@@ -512,24 +584,6 @@
                usingImage: thumbnailImage];
 }
 
-
-- (void) shareChannel: (Channel *) channel
-              isOwner: (NSNumber *) isOwner
-           usingImage: (UIImage *) image
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelShareButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    [self shareObjectType:  @"channel"
-                 objectId: channel.uniqueId
-                  isOwner: isOwner
-                  isVideo: @NO
-               usingImage: image];
-}
 
 
 - (void) shareObjectType: (NSString *) objectType
@@ -830,34 +884,6 @@
 }
 
 
-- (void) shareVideoAtIndexPath: (NSIndexPath *) indexPath
-{
-    VideoInstance *videoInstance = [self videoInstanceForIndexPath: indexPath];
-    
-    [self shareVideoInstance: videoInstance];
-}
-
-
-- (void) shareChannelAtIndexPath: (NSIndexPath *) indexPath
-               andComponentIndex: (NSInteger) componentIndex
-{
-    
-    Channel *channel = [self channelInstanceForIndexPath: indexPath
-                                       andComponentIndex: componentIndex];
-    
-    // Try and find a suitable image
-    UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: channel.channelCover.imageLargeUrl];
-    
-    if (!thumbnailImage)
-    {
-        thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: channel.channelCover.imageUrl];
-    }
-    
-    [self shareChannel: channel
-               isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
-            usingImage: thumbnailImage
-     ];
-}
 
 
 - (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
@@ -891,53 +917,61 @@
 {
     if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
     {
-        // Get the videoinstance associated with the control pressed
+        // Get the channel associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
+        if(!channel)
+            return;
         
-        if (channel)
+        
+        // Temporarily disable the button to prevent multiple-clicks
+        socialControl.enabled = NO;
+        
+        // toggle subscription from/to channel //
+        if (channel.subscribedByUserValue == NO)
         {
-            // Temporarily disable the button to prevent multiple-clicks
-            socialControl.enabled = NO;
-            
-            // toggle subscription from/to channel //
-            if (channel.subscribedByUserValue == NO)
-            {
-                // Subscribe
-                [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                               channelURL: channel.resourceURL
-                                                        completionHandler: ^(NSDictionary *responseDictionary) {
-                                                            
-                                                            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                                            
-                                                            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                                   action: @"userSubscription"
-                                                                                                                    label: nil
-                                                                                                                    value: nil] build]];
-                                                            channel.hasChangedSubscribeValue = YES;
-                                                            channel.subscribedByUserValue = YES;
-                                                            channel.subscribersCountValue += 1;
-                                                            socialControl.selected = YES;
-                                                            socialControl.enabled = YES;
-                                                        } errorHandler: ^(NSDictionary *errorDictionary) {
-                                                            socialControl.enabled = YES;
-                                                        }];
-            }
-            else
-            {
-                // Unsubscribe
-                [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                                  channelId: channel.uniqueId
-                                                          completionHandler: ^(NSDictionary *responseDictionary) {
-                                                              channel.hasChangedSubscribeValue = YES;
-                                                              channel.subscribedByUserValue = NO;
-                                                              channel.subscribersCountValue -= 1;
-                                                              socialControl.selected = NO;
-                                                              socialControl.enabled = YES;
-                                                          } errorHandler: ^(NSDictionary *errorDictionary) {
-                                                              socialControl.enabled = YES;
-                                                          }];
-            }
+            // Subscribe
+            [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                           channelURL: channel.resourceURL
+                                                    completionHandler: ^(NSDictionary *responseDictionary) {
+                                                        
+                                                        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+                                                        
+                                                        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                                                                               action: @"userSubscription"
+                                                                                                                label: nil
+                                                                                                                value: nil] build]];
+                                                        channel.hasChangedSubscribeValue = YES;
+                                                        channel.subscribedByUserValue = YES;
+                                                        channel.subscribersCountValue += 1;
+                                                        socialControl.selected = YES;
+                                                        socialControl.enabled = YES;
+                                                    } errorHandler: ^(NSDictionary *errorDictionary) {
+                                                        socialControl.enabled = YES;
+                                                    }];
         }
+        else
+        {
+            // Unsubscribe
+            [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                              channelId: channel.uniqueId
+                                                      completionHandler: ^(NSDictionary *responseDictionary) {
+                                                          channel.hasChangedSubscribeValue = YES;
+                                                          channel.subscribedByUserValue = NO;
+                                                          channel.subscribersCountValue -= 1;
+                                                          socialControl.selected = NO;
+                                                          socialControl.enabled = YES;
+                                                      } errorHandler: ^(NSDictionary *errorDictionary) {
+                                                          socialControl.enabled = YES;
+                                                      }];
+        }
+    }
+    else if ([socialControl.dataItemLinked isKindOfClass: [ChannelOwner class]])
+    {
+        // Get the owner associated with the control pressed
+        ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
+        
+        if(!channelOwner)
+            return;
     }
 }
 

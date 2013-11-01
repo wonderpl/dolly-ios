@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIView *buttonContainerView;
 @property (nonatomic, strong) UIView *labelsContainerView;
 
+@property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
+
 @end
 
 static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
@@ -68,21 +70,32 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
         return;
     
     Channel* firstChannel = collectionData[0];
+    
     // create string
     
     NSString *nameString = firstChannel.channelOwner.displayName; // ex 'Dolly Proxima'
-    NSString *actionString = [NSString stringWithFormat:@" created %@ collection%@", _collectionData.count > 1 ? [NSString stringWithFormat:@"%i", _collectionData.count] : @"a new", _collectionData.count > 1 ? @"s" : @""];
+    NSString *actionString = [NSString stringWithFormat:@"created %@ collection%@", _collectionData.count > 1 ? [NSString stringWithFormat:@"%i", _collectionData.count] : @"a new", _collectionData.count > 1 ? @"s" : @""];
     
-    
-    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
-                                                                                      attributes: self.darkTextAttributes]];
-    
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
-                                                                                      attributes: self.lightTextAttributes]];
-    
-    self.actionMessageLabel.attributedText = attributedCompleteString;
+    if(IS_IPAD)
+    {
+        NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
+        
+        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
+                                                                                          attributes: self.strongTextAttributes]];
+        
+        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" "
+                                                                                          attributes: self.strongTextAttributes]];
+        
+        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
+                                                                                          attributes: self.lightTextAttributes]];
+        
+        self.actionMessageLabel.attributedText = attributedCompleteString;
+    }
+    else
+    {
+        self.userNameLabel.text = nameString;
+        self.actionMessageLabel.text =  actionString;
+    }
     
     
 }

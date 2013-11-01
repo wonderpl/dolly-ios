@@ -811,61 +811,45 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-#pragma mark - Social Actions Delegate
-
-- (void) addControlPressed: (SYNSocialButton *) socialControl
+- (void) displayVideoViewerFromView: (UIView *) view
+                          indexPath: (NSIndexPath *) indexPath
 {
-    if (![socialControl.dataItemLinked
-          isKindOfClass: [VideoInstance class]])
+    NSMutableArray* videosArray = @[].mutableCopy;
+    FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
+    
+    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
-        return; // only relates to video instances
-    }
-    
-    VideoInstance *videoInstance = socialControl.dataItemLinked;
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoPlusButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                     action: @"select"
-                                            videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: nil
-                                               errorHandler: nil];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
-                                                        object: self
-                                                      userInfo: @{@"VideoInstance": videoInstance}];
-}
+        // NOTE: the data containes either an aggragate or a single item, handle both cases here
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            for (FeedItem *childFeedItem in feedItem.feedItems)
+            {
+                // they have also the same type (video)
+                VideoInstance *vi = (VideoInstance *) ((self.feedVideosById)[childFeedItem.resourceId]);
+                [videosArray addObject: vi];
+            }
+        }
+        else
+        {
+            VideoInstance *vi = (VideoInstance *) ((self.feedVideosById)[feedItem.resourceId]);
+            [videosArray addObject: vi];
+        }
 
-
-
-- (void) shareControlPressed: (SYNSocialButton *) socialControl
-{
-    if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
-    {
-        // Get the videoinstance associated with the control pressed
-        VideoInstance *videoInstance = socialControl.dataItemLinked;
+        CGPoint center;
         
-        [self requestShareLinkWithObjectType: @"video_instance"
-                                    objectId: videoInstance.uniqueId];
+        if (view)
+        {
+            center = [self.view convertPoint: view.center
+                                    fromView: view.superview];
+        }
+        else
+        {
+            center = self.view.center;
+        }
         
-        [self shareVideoInstance: videoInstance];
-    }
-    else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
-    {
-        // Get the videoinstance associated with the control pressed
-        Channel *channel = socialControl.dataItemLinked;
-        
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-        
-        [self shareChannel: channel
-                   isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
-                usingImage: nil];
+        [self displayVideoViewerWithVideoInstanceArray: videosArray
+                                      andSelectedIndex: indexPath.item
+                                                center: center];
     }
 }
 
