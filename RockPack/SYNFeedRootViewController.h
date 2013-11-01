@@ -10,7 +10,7 @@
 #import "SYNSocialActionsDelegate.h"
 #import "SYNAggregateCellDelegate.h"
 
-@interface SYNFeedRootViewController : SYNAbstractViewController <SYNSocialActionsDelegate, SYNAggregateCellDelegate>
+@interface SYNFeedRootViewController : SYNAbstractViewController <SYNAggregateCellDelegate>
 
 
 - (void) removeEmptyGenreMessage;

@@ -8,6 +8,7 @@
 
 #import "SYNSearchResultsUserCell.h"
 #import "UIFont+SYNFont.h"
+#import "UIImageView+WebCache.h"
 
 @implementation SYNSearchResultsUserCell
 
@@ -21,24 +22,26 @@
     self.userThumbnailImageView.clipsToBounds = YES;
 }
 
--(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
+#pragma mark - Set Data
+
+- (void) setChannelOwner:(ChannelOwner *)channelOwner
 {
-    if(_delegate)
-    {
-        [self.followButton removeTarget:_delegate
-                                 action:@selector(followControlPressed:)
-                    forControlEvents:UIControlEventTouchUpInside];
-    }
+    _channelOwner = channelOwner;
+    if(!_channelOwner)
+        return;
     
-    [super setDelegate:delegate];
+    self.followButton.dataItemLinked = _channelOwner;
     
+    [self.userThumbnailImageView setImageWithURL: [NSURL URLWithString: _channelOwner.thumbnailURL]
+                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                         options: SDWebImageRetryFailed];
     
-    if(!_delegate)
-        return; // can set nil
-    
-    [self.followButton addTarget:_delegate
-                          action:@selector(followControlPressed:)
-                forControlEvents:UIControlEventTouchUpInside];
+    self.userNameLabel.text = _channelOwner.displayName;
+}
+
+- (IBAction) followControlPressed: (id) sender
+{
+    [self.delegate shareControlPressed: sender];
 }
 
 @end
