@@ -63,11 +63,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <size key="customSize" width="353" height="216"/>
             <connections>
-                <outlet property="addControl" destination="bzp-d3-V7P" id="I1p-Qd-HNF"/>
+                <outlet property="addSocialButton" destination="bzp-d3-V7P" id="kN5-Gc-cFz"/>
                 <outlet property="iconImageView" destination="Vdl-pp-UXn" id="PiC-Hh-HIY"/>
-                <outlet property="likeControl" destination="NrE-x8-VXC" id="Nku-XN-BWR"/>
+                <outlet property="likeSocialButton" destination="NrE-x8-VXC" id="lIQ-Gv-H37"/>
                 <outlet property="overlayImageView" destination="zQC-pE-eJd" id="plb-Ye-GcC"/>
-                <outlet property="shareControl" destination="8wk-5c-EEh" id="nYf-yf-K3m"/>
+                <outlet property="shareSocialButton" destination="8wk-5c-EEh" id="0v5-5w-czJ"/>
                 <outlet property="titleLabel" destination="gTc-au-f7f" id="qfo-93-vel"/>
             </connections>
         </collectionViewCell>

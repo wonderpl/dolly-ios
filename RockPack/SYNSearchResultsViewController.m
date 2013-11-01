@@ -11,7 +11,7 @@
 #import "SYNSearchResultsUserCell.h"
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsViewController.h"
-#import "UIImageView+WebCache.h"
+
 
 #import "UIColor+SYNColor.h"
 
@@ -266,20 +266,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultVideoCell
                                                                                          forIndexPath: indexPath];
         
-        VideoInstance *vi = self.videosArray[indexPath.item];
         
-        videoCell.titleLabel.text = vi.title;
-        [videoCell.titleLabel sizeToFit];
+        videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
         
-        // center
-        videoCell.titleLabel.center = CGPointMake(videoCell.frame.size.width * 0.5f, videoCell.titleLabel.center.y);
-        videoCell.titleLabel.frame = CGRectIntegral(videoCell.titleLabel.frame);
-        
-        [videoCell.iconImageView setImageWithURL: [NSURL URLWithString: vi.thumbnailURL]                     // calls vi.video.thumbnailURL
-                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                         options: SDWebImageRetryFailed];
-        
-        videoCell.delegate = self;
         
         cell = videoCell;
     }
@@ -288,16 +277,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultUserCell
                                                                                        forIndexPath: indexPath];
         
-        ChannelOwner *co = self.usersArray[indexPath.item];
         
-        [userCell.userThumbnailImageView
-         setImageWithURL: [NSURL URLWithString: co.thumbnailURL]                             // calls vi.video.thumbnailURL
-         placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-         options: SDWebImageRetryFailed];
+        userCell.channelOwner = (ChannelOwner*)(self.usersArray[indexPath.item]);
         
-        userCell.userNameLabel.text = co.displayName;
-        
-        userCell.delegate = self;
         
         cell = userCell;
     }
@@ -316,11 +298,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 
 - (void) shareControlPressed: (id) control
-{
-}
-
-
-- (void) likeControlPressed: (id) control
 {
 }
 

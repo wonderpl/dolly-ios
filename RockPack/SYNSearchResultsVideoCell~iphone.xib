@@ -91,11 +91,11 @@
             </constraints>
             <size key="customSize" width="353" height="216"/>
             <connections>
-                <outlet property="addControl" destination="Btc-0z-Eot" id="noy-Zi-Qvb"/>
+                <outlet property="addSocialButton" destination="Btc-0z-Eot" id="f6h-n4-yu7"/>
                 <outlet property="iconImageView" destination="PpH-54-xvk" id="anu-3T-XDH"/>
-                <outlet property="likeControl" destination="I5a-Co-2Pv" id="AbB-Qb-gn5"/>
+                <outlet property="likeSocialButton" destination="I5a-Co-2Pv" id="nYm-ba-JHe"/>
                 <outlet property="overlayImageView" destination="Cld-sM-8Sx" id="rqF-8H-TID"/>
-                <outlet property="shareControl" destination="Xh7-uh-a4p" id="j2m-yx-XjC"/>
+                <outlet property="shareSocialButton" destination="Xh7-uh-a4p" id="TXh-1u-1ul"/>
                 <outlet property="titleLabel" destination="XyR-yN-Fa4" id="yNg-0c-bwp"/>
             </connections>
         </collectionViewCell>
