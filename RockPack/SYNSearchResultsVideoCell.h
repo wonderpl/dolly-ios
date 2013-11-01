@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SYNSearchResultsCell.h"
+#import "VideoInstance.h"
 
 @interface SYNSearchResultsVideoCell : SYNSearchResultsCell
 
@@ -16,5 +17,6 @@
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 
+@property (nonatomic, weak) VideoInstance* videoInstance;
 
 @end

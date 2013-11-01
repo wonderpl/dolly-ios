@@ -421,7 +421,77 @@
         return viewId;
 }
 
-#pragma mark - Social network sharing
+#pragma mark - Social Actions Delegate
+
+- (void) likeControlPressed: (SYNSocialButton *) socialControl
+{
+    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
+    {
+        return; // only relates to video instances
+    }
+    
+    // Get the videoinstance associated with the control pressed
+    VideoInstance *videoInstance = socialControl.dataItemLinked;
+    
+    // Track
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"videoStarButtonClick"
+                                                            label: @"feed"
+                                                            value: nil] build]];
+    BOOL didStar = (socialControl.selected == NO);
+    
+    socialControl.enabled = NO;
+    
+    // Send
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
+                                                     action: (didStar ? @"star" : @"unstar")
+                                            videoInstanceId: videoInstance.uniqueId
+                                          completionHandler: ^(id response) {
+                                              BOOL previousStarringState = videoInstance.starredByUserValue;
+                                              NSInteger previousStarCount = videoInstance.video.starCountValue;
+                                              
+                                              if (didStar)
+                                              {
+                                                  // Currently highlighted, so increment
+                                                  videoInstance.starredByUserValue = YES;
+                                                  videoInstance.video.starCountValue += 1;
+                                                  
+                                                  socialControl.selected = YES;
+                                                  
+                                                  [videoInstance addStarrersObject: appDelegate.currentUser];
+                                              }
+                                              else
+                                              {
+                                                  // Currently highlighted, so decrement
+                                                  videoInstance.starredByUserValue = NO;
+                                                  videoInstance.video.starCountValue -= 1;
+                                                  
+                                                  socialControl.selected = NO;
+                                              }
+                                              
+                                              NSError *error;
+                                              
+                                              if (![videoInstance.managedObjectContext save: &error])
+                                              {
+                                                  videoInstance.starredByUserValue = previousStarringState;
+                                                  videoInstance.video.starCountValue = previousStarCount;
+                                              }
+                                              else
+                                              {
+                                                  [socialControl setTitle: socialControl.title
+                                                                 andCount: videoInstance.video.starCountValue];
+                                              }
+                                              
+                                              socialControl.enabled = YES;
+                                          } errorHandler: ^(id error) {
+                                              DebugLog(@"Could not star video");
+                                              // Re-enable button anyway
+                                              socialControl.enabled = YES;
+                                          }];
+}
+
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {

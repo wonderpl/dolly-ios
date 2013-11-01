@@ -17,6 +17,7 @@
 #import "SYNOnBoardingPopoverView.h"
 #import "SYNTabViewController.h"
 #import "SYNTabViewDelegate.h"
+#import "SYNSocialActionsDelegate.h"
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
@@ -27,6 +28,7 @@ typedef void (^SYNShareCompletionBlock)(void);
 @interface SYNAbstractViewController : UIViewController <NSFetchedResultsControllerDelegate,
                                                          UICollectionViewDataSource,
                                                          UICollectionViewDelegate,
+                                                         SYNSocialActionsDelegate,
                                                          SYNTabViewDelegate>
 {
 @protected
