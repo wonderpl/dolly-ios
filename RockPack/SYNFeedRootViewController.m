@@ -73,9 +73,14 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
 
     self.feedItemsData = @[];
     self.videosInOrderArray = @[];
+    
+    
+    
+    self.feedCollectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 0.0f, 10.0f);
 
     [self removeEmptyGenreMessage];
 
@@ -115,6 +120,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
+
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
@@ -135,6 +141,9 @@ typedef void(^FeedDataErrorBlock)(void);
     {
         [self loadAndUpdateFeedData];
     }
+    
+    
+    NSLog(@"%f", self.feedCollectionView.contentInset.top);
 }
 
 
@@ -659,6 +668,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
+
 // Used for the collection view header
 - (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
             viewForSupplementaryElementOfKind: (NSString *) kind
@@ -955,6 +965,9 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
+    
+    [super scrollViewDidScroll:scrollView];
+    
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
         && self.isLoadingMoreContent == NO)
     {
