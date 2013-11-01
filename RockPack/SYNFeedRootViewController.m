@@ -80,7 +80,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     
     
-    self.feedCollectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 0.0f, 10.0f);
+    self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 0.0f, 10.0f);
 
     [self removeEmptyGenreMessage];
 

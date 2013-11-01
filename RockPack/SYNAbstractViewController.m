@@ -133,7 +133,7 @@
     [super viewDidLoad];
     
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO; 
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(clearedLocationBoundData)
