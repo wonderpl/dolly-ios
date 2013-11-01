@@ -36,6 +36,7 @@
     // Get the unique id of this object from the dictionary that has been passed in
     NSString *uniqueId = [dictionary objectForKey: @"id"
                                       withDefault: @"Uninitialized Id"];
+    
     Video *instance = [Video insertInManagedObjectContext: managedObjectContext];
     
     // As we have a new object, we need to set all the attributes (from the dictionary passed in)

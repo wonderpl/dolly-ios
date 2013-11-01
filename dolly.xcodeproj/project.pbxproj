@@ -420,8 +420,11 @@
 		01F94F2B1761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */; };
 		01F94F2C1761EE56006C024D /* ButtonCreateDisabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */; };
 		01F94F2D1761EE56006C024D /* ButtonCreateDisabled~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */; };
+		0E19FBBF1822738A0007DF5B /* SYNChannelSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */; };
+		0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */; };
 		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
 		0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */; };
+		0EBBCF2E1822B4E800267831 /* TestCoverImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBBCF2D1822B4E800267831 /* TestCoverImage.png */; };
 		0EF07867181EAE8300667417 /* ButtonMore.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07865181EAE8300667417 /* ButtonMore.png */; };
 		0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07866181EAE8300667417 /* ButtonMore@2x.png */; };
 		0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */; };
@@ -1991,8 +1994,12 @@
 		01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x~iphone.png"; path = "Assets/Images/ButtonCreateDisabled@2x~iphone.png"; sourceTree = "<group>"; };
 		01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x.png"; path = "Assets/Images/ButtonCreateDisabled@2x.png"; sourceTree = "<group>"; };
 		01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled~iphone.png"; path = "Assets/Images/ButtonCreateDisabled~iphone.png"; sourceTree = "<group>"; };
+		0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelSearchCell.xib; sourceTree = "<group>"; };
+		0E19FBC0182273EE0007DF5B /* SYNChannelSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelSearchCell.h; sourceTree = "<group>"; };
+		0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelSearchCell.m; sourceTree = "<group>"; };
 		0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~ipad.xib"; sourceTree = "<group>"; };
 		0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~iphone.xib"; sourceTree = "<group>"; };
+		0EBBCF2D1822B4E800267831 /* TestCoverImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestCoverImage.png; sourceTree = "<group>"; };
 		0EF07865181EAE8300667417 /* ButtonMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMore.png; sourceTree = "<group>"; };
 		0EF07866181EAE8300667417 /* ButtonMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x.png"; sourceTree = "<group>"; };
 		0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x~iphone.png"; sourceTree = "<group>"; };
@@ -4268,6 +4275,9 @@
 				3862E8AF172979410066E8E7 /* SYNChannelMidCell~iphone.xib */,
 				BE285D9D172584E200D995AB /* SYNChannelCreateNewCell.h */,
 				BE285D9E172584E200D995AB /* SYNChannelCreateNewCell.m */,
+				0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */,
+				0E19FBC0182273EE0007DF5B /* SYNChannelSearchCell.h */,
+				0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */,
 				BE285DA0172584FF00D995AB /* SYNChannelCreateNewCell~iphone.xib */,
 				38BACE021734151A00406597 /* SYNChannelCreateNewCell.xib */,
 				BE7D02E8178B138B008053DC /* SYNUserThumbnailCell.h */,
@@ -5229,6 +5239,7 @@
 		38A2FFE61731607F00FB9F57 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				0EBBCF2D1822B4E800267831 /* TestCoverImage.png */,
 				38A2FFE71731607F00FB9F57 /* ButtonProfileChannels@2x~iphone.png */,
 				38A2FFE81731607F00FB9F57 /* ButtonProfileChannelsHighlighted@2x~iphone.png */,
 				38A2FFE91731607F00FB9F57 /* ButtonProfileChannelsHighlighted~iphone.png */,
@@ -6459,6 +6470,7 @@
 				BE270BE116EF3A2100CDDA6D /* ButtonRegister@2x.png in Resources */,
 				BE270BE216EF3A2100CDDA6D /* ButtonRegisterHighlighted.png in Resources */,
 				BE270BE316EF3A2100CDDA6D /* ButtonRegisterHighlighted@2x.png in Resources */,
+				0E19FBBF1822738A0007DF5B /* SYNChannelSearchCell.xib in Resources */,
 				BED4310316EF8D830051465B /* FieldDayMonth.png in Resources */,
 				BED4310416EF8D830051465B /* FieldDayMonth@2x.png in Resources */,
 				BED4310516EF8D830051465B /* FieldYear.png in Resources */,
@@ -7324,6 +7336,7 @@
 				BE3983E3176A108900EE9C7B /* onboarding_arrow_bottom@2x.png in Resources */,
 				BE3983E4176A108900EE9C7B /* onboarding_arrow_up.png in Resources */,
 				BE3983E5176A108900EE9C7B /* onboarding_arrow_up@2x.png in Resources */,
+				0EBBCF2E1822B4E800267831 /* TestCoverImage.png in Resources */,
 				BE3983EA176A129500EE9C7B /* onboarding_button_ok_highlighted.png in Resources */,
 				BEB31391181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib in Resources */,
 				BE3983EB176A129500EE9C7B /* onboarding_button_ok_highlighted@2x.png in Resources */,
@@ -7753,6 +7766,7 @@
 				01AFF99717EC91540002131A /* NSObject+LLDBQuickLook.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */,
+				0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */,
 				BEB313561817D8C400FAF98A /* SYNSearchResultsUserCell.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
 				BE285D9B1725726300D995AB /* SYNExistingCollectionsViewController.m in Sources */,

@@ -15,5 +15,6 @@
 + (instancetype) sharedInstance;
 - (void) updateActivityForCurrentUser;
 - (void) updateActivityForVideo: (Video *) video;
+- (void) updateSubscriptionsForChannel: (Channel *) channel;
 
 @end

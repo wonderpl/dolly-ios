@@ -21,6 +21,9 @@
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
+@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
+
 @property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *followerCountLabel;
@@ -30,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
 // detail label for iphone, need better logic than this!!
 @property (strong, nonatomic) IBOutlet UILabel *detailsLabel;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 @end
 
@@ -48,7 +52,7 @@
     self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
                                                                    action: @selector(showMenu:)];
     self.longPress.delegate = self;
-    [self addGestureRecognizer: self.longPress];
+  //  [self addGestureRecognizer: self.longPress];
 #endif
     
     // Tap for showing video
@@ -67,13 +71,15 @@
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = UIScreen.mainScreen.scale;
     
+    
+    
     if (IS_IPHONE) {
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
         [self.detailsLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
         [self.boarderView.layer setBorderWidth:1.0f];
-
+        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
     }else{
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:18]];
@@ -82,6 +88,25 @@
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
         [self.boarderView.layer setBorderWidth:1.0f];
         
+    }
+    
+    self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDescription:)];
+    [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    self.rightSwipe.delegate = self;
+
+    [self.containerView addGestureRecognizer:self.rightSwipe];
+
+    self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideDescription:)];
+    [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    self.leftSwipe.delegate = self;
+    
+    [self.containerView addGestureRecognizer:self.leftSwipe];
+
+    
+    if (MyOwnProfile) {
+        self.followButton.hidden = YES;
+    }else{
+        self.followButton.hidden = NO;
     }
     
 }
@@ -170,11 +195,76 @@
     return YES; // handle the touch
 }
 
-
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
 {
     // Just need to reference any button in the cell (as there is no longer an actual video button)
     [self.viewControllerDelegate channelTapped: self];
 }
+
+-(void) setHiddenForFollowButton: (BOOL) hide{
+    self.followButton.hidden = hide;
+}
+
+-(void) setTitle :(NSString*) titleString
+{
+    [self.videoTitleLabel setText:titleString];
+}
+
+-(void) setFollowButtonLabel: (ProfileType) profile{
+    if (profile == MyOwnProfile)
+    {
+        [self.followButton setTitle:NSLocalizedString(@"Unfollow", @"unfollow") forState:UIControlStateNormal];
+        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
+    }
+    else if(profile == OtherUsersProfile)
+    {
+        [self.followButton setTitle:NSLocalizedString(@"Follow", @"follow") forState:UIControlStateNormal];
+        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
+    }
+}
+
+- (IBAction)showDescription:(UISwipeGestureRecognizer *)recognizer
+{
+    [UIView animateWithDuration:0.5f animations:^{
+        if (self.containerView.frame.origin.x ==0)
+        {
+
+        CGRect tmpRect = self.containerView.frame;
+        
+        tmpRect.origin.x += 245;
+        self.containerView.frame = tmpRect;
+        }
+    }];
+    
+}
+
+- (IBAction)hideDescription:(UISwipeGestureRecognizer *)recognizer
+{
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        
+        if (self.containerView.frame.origin.x !=0)
+        {
+            CGRect tmpRect = self.containerView.frame;
+            
+            tmpRect.origin.x -= 245;
+            self.containerView.frame = tmpRect;
+            
+        }
+    }];
+    
+}
+- (IBAction)followChannel:(id)sender {
+    
+    if (self.channel != nil)
+    {
+        NSLog(@"%@", self.channel.title);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
+                                                            object: self
+                                                          userInfo: @{kChannel : self.channel}];
+    }
+}
+
 
 @end

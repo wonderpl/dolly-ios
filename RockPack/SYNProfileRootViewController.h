@@ -9,7 +9,7 @@
 #import "SYNAbstractViewController.h"
 #import "ChannelOwner.h"
 
-@interface SYNProfileRootViewController : SYNAbstractViewController
+@interface SYNProfileRootViewController : SYNAbstractViewController <UISearchBarDelegate>
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 @property (nonatomic, assign) BOOL hideUserProfile;
