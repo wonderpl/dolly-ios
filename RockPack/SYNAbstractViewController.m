@@ -247,27 +247,11 @@
 }
 
 
-- (void) displayVideoViewerFromView: (UIView *) view
-                          indexPath: (NSIndexPath *) indexPath
+- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
+                         andSubCell: (UICollectionViewCell *) subCell
+                     atSubCellIndex: (NSInteger) subCellIndex
 {
-    id selectedVideo = [self.fetchedResultsController objectAtIndexPath: indexPath];
-    
-    NSArray *videoArray = self.fetchedResultsController.fetchedObjects;
-    CGPoint center;
-    
-    if (view)
-    {
-        center = [self.view convertPoint: view.center
-                  fromView: view.superview];
-    }
-    else
-    {
-        center = self.view.center;
-    }
-    
-    [self displayVideoViewerWithVideoInstanceArray: videoArray
-                                  andSelectedIndex: [videoArray indexOfObject: selectedVideo]
-                                            center: center];
+    NSLog (@"Shouldn't be calling abstract function");
 }
 
 

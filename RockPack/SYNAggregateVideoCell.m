@@ -155,10 +155,11 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 - (void) collectionView: (UICollectionView *) collectionView
          didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];
+    UICollectionViewCell *subCell = [collectionView cellForItemAtIndexPath: indexPath];
     
-    [(SYNAbstractViewController *)self.delegate displayVideoViewerFromView: cell
-                                                                 indexPath: indexPath];
+    [(SYNAbstractViewController *)self.delegate displayVideoViewerFromCell: self
+                                                                andSubCell: subCell
+                                                            atSubCellIndex: indexPath.item];
 
 }
 

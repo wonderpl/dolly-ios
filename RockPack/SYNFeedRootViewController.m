@@ -811,10 +811,14 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) displayVideoViewerFromView: (UIView *) view
-                          indexPath: (NSIndexPath *) indexPath
+- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
+                         andSubCell: (UICollectionViewCell *) subCell
+                     atSubCellIndex: (NSInteger) subCellIndex
 {
+    
     NSMutableArray* videosArray = @[].mutableCopy;
+    
+    NSIndexPath * indexPath = [self.feedCollectionView indexPathForCell: cell];
     FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
@@ -837,10 +841,10 @@ typedef void(^FeedDataErrorBlock)(void);
 
         CGPoint center;
         
-        if (view)
+        if (subCell)
         {
-            center = [self.view convertPoint: view.center
-                                    fromView: view.superview];
+            center = [self.view convertPoint: subCell.center
+                                    fromView: subCell.superview];
         }
         else
         {
@@ -848,7 +852,7 @@ typedef void(^FeedDataErrorBlock)(void);
         }
         
         [self displayVideoViewerWithVideoInstanceArray: videosArray
-                                      andSelectedIndex: indexPath.item
+                                      andSelectedIndex: subCellIndex
                                                 center: center];
     }
 }
