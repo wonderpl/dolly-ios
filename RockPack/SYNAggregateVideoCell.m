@@ -17,6 +17,7 @@
 #import "UIImage+Tint.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "SYNAbstractViewController.h"
 
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
@@ -148,6 +149,17 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     itemCell.videoInstance = videoInstance;
     
     return itemCell;
+}
+
+
+- (void) collectionView: (UICollectionView *) collectionView
+         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];
+    
+    [(SYNAbstractViewController *)self.delegate displayVideoViewerFromView: cell
+                                                                 indexPath: indexPath];
+
 }
 
 @end

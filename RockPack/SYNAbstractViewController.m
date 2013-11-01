@@ -247,32 +247,36 @@
 }
 
 
-- (void) displayVideoViewerFromView: (UIButton *) videoViewButton
+- (void) displayVideoViewerFromView: (UIView *) view
+                          indexPath: (NSIndexPath *) indexPath
 {
-    NSIndexPath *indexPath = [self indexPathFromVideoInstanceButton: videoViewButton];
+    id selectedVideo = [self.fetchedResultsController objectAtIndexPath: indexPath];
     
-    id selectedVideo = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSArray* videoArray =  self.fetchedResultsController.fetchedObjects;
+    NSArray *videoArray = self.fetchedResultsController.fetchedObjects;
     CGPoint center;
-    if(videoViewButton)
+    
+    if (view)
     {
-        center = [self.view convertPoint:videoViewButton.center fromView:videoViewButton.superview];
+        center = [self.view convertPoint: view.center
+                  fromView: view.superview];
     }
     else
     {
         center = self.view.center;
     }
+    
     [self displayVideoViewerWithVideoInstanceArray: videoArray
-                                  andSelectedIndex: [videoArray indexOfObject:selectedVideo] center:center];
+                                  andSelectedIndex: [videoArray indexOfObject: selectedVideo]
+                                            center: center];
 }
 
 
 - (void) displayVideoViewerWithVideoInstanceArray: (NSArray *) videoInstanceArray
-                                andSelectedIndex: (int) selectedIndex
-                                           center:(CGPoint)center
+                                 andSelectedIndex: (int) selectedIndex
+                                           center: (CGPoint) center
 {
-    SYNMasterViewController *masterViewController = (SYNMasterViewController*)appDelegate.masterViewController;
-        
+    SYNMasterViewController *masterViewController = (SYNMasterViewController *) appDelegate.masterViewController;
+    
     [masterViewController addVideoOverlayToViewController: self
                                    withVideoInstanceArray: videoInstanceArray
                                          andSelectedIndex: selectedIndex
