@@ -46,8 +46,7 @@
                       ignoringObjectTypes: ignoringObjects];
     
     // Update video starred & viewed
-    [SYNActivityManager.sharedInstance
-     updateActivityForVideo: instance];
+    [SYNActivityManager.sharedInstance updateActivityForVideo: instance];
     
     return instance;
 }
