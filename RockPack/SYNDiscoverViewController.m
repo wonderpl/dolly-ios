@@ -51,6 +51,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) NSDictionary* colorMapForCells;
 
+@property (nonatomic, strong) IBOutlet UIView* loadingPanelView;
+
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
@@ -100,6 +102,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.searchResultsController.view.frame = sResRect;
     }
     
+    
+    self.loadingPanelView.layer.cornerRadius = 13.0f;
+    
+    // self.loadingPanelView.hidden = NO; // hide by default and only show when there are no categories
+    
     // Check for existence of popular category
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
@@ -115,6 +122,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
                                                                                       error: &error];
+    
+    
+    
     
     // probably the database is cold so need to reload everything
     if(genresFetchedArray.count == 0)
@@ -139,6 +149,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [appDelegate.mainManagedObjectContext save:&error];
         
         
+        self.loadingPanelView.hidden = NO;
         
         [self loadCategories];
         
@@ -166,6 +177,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [self.categoriesCollectionView reloadData];
     
+    // set the panel's round corners
     
     
     
@@ -231,6 +243,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         } completionBlock:^(BOOL success) {
             
             [self fetchCategories];
+            
+            self.loadingPanelView.hidden = YES;
             
             [self.categoriesCollectionView reloadData];
             
