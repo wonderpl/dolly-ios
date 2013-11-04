@@ -246,6 +246,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     if (collectionView == self.videosCollectionView)
     {
         count = self.videosArray.count;
+        DebugLog(@"Search video count = %d", count);
     }
     else if (collectionView == self.usersCollectionView)
     {
@@ -266,9 +267,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultVideoCell
                                                                                          forIndexPath: indexPath];
         
+        VideoInstance *vi = (VideoInstance*)(self.videosArray[indexPath.item]);
         
+        DebugLog(@"Index %@, Title %@", indexPath, vi.title);
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
-        
+        videoCell.delegate = self;        
         
         cell = videoCell;
     }
@@ -291,24 +294,35 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 
 - (void) collectionView: (UICollectionView *) collectionView
-         didDeselectItemAtIndexPath: (NSIndexPath *) indexPath
+         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    CGPoint center;
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];    
-    
-    if (cell)
+    if (collectionView == self.videosCollectionView)
     {
-        center = [self.view convertPoint: cell.center
-                                fromView: cell.superview];
+        CGPoint center;
+        UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];
+        
+        if (cell)
+        {
+            center = [self.view convertPoint: cell.center
+                                    fromView: cell.superview];
+        }
+        else
+        {
+            center = self.view.center;
+        }
+        
+        [self displayVideoViewerWithVideoInstanceArray: self.videosArray
+                                      andSelectedIndex: indexPath.item
+                                                center: center];
+    }
+    else if (collectionView == self.usersCollectionView)
+    {
+        NSLog(@"SYNSearchResultsCollectionType:didDeselectItemAtIndexPath users collection type currently unsupported") ;
     }
     else
     {
-        center = self.view.center;
+        AssertOrLog(@"SYNSearchResultsCollectionType:didDeselectItemAtIndexPath unknown collection type")
     }
-    
-    [self displayVideoViewerWithVideoInstanceArray: self.videosArray
-                                  andSelectedIndex: indexPath.item
-                                            center: center];
 }
 
 

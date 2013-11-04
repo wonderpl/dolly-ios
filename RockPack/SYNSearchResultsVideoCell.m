@@ -23,26 +23,28 @@
 
 @implementation SYNSearchResultsVideoCell
 
--(void)awakeFromNib
+- (void) awakeFromNib
 {
-    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
     [self.likeSocialButton setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateChannelItemCell")
-                      andCount: 0];
+                           andCount: 0];
     
     // no title for the add button
     self.shareSocialButton.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateChannelItemCell");
-    
 }
+
 
 #pragma mark - Setting Data
 
-- (void) setVideoInstance:(VideoInstance *)videoInstance
+- (void) setVideoInstance: (VideoInstance *) videoInstance
 {
     _videoInstance = videoInstance;
     
-    if(!_videoInstance)
+    if (!_videoInstance)
+    {
         return;
+    }
     
     self.titleLabel.text = _videoInstance.title;
     [self.titleLabel sizeToFit];
@@ -58,20 +60,23 @@
     self.titleLabel.center = CGPointMake(self.frame.size.width * 0.5f, self.titleLabel.center.y);
     self.titleLabel.frame = CGRectIntegral(self.titleLabel.frame);
     
-    [self.iconImageView setImageWithURL: [NSURL URLWithString: _videoInstance.thumbnailURL]               
+    [self.iconImageView setImageWithURL: [NSURL URLWithString: _videoInstance.thumbnailURL]
                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                 options: SDWebImageRetryFailed];
 }
+
 
 - (IBAction) likeControlPressed: (id) sender
 {
     [self.delegate likeControlPressed: sender];
 }
 
+
 - (IBAction) addControlPressed: (id) sender
 {
     [self.delegate addControlPressed: sender];
 }
+
 
 - (IBAction) shareControlPressed: (id) sender
 {

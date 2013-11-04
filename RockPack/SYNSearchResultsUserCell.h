@@ -14,11 +14,9 @@
 
 @interface SYNSearchResultsUserCell : SYNSearchResultsCell
 
+@property (nonatomic, strong) ChannelOwner* channelOwner;
+@property (nonatomic, strong) IBOutlet SYNSocialButton* followButton;
 @property (nonatomic, strong) IBOutlet UIImageView* userThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
-
-@property (nonatomic, strong) IBOutlet SYNSocialButton* followButton;
-
-@property (nonatomic, strong) ChannelOwner* channelOwner;
 
 @end

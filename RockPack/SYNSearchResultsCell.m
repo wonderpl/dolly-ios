@@ -10,18 +10,4 @@
 
 @implementation SYNSearchResultsCell
 
-
--(void)awakeFromNib
-{
-    
-}
-
--(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
-{
-    _delegate = delegate;
-    
-    // implement the rest in subclass
-}
-
-
 @end
