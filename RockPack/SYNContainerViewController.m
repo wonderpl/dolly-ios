@@ -79,22 +79,6 @@
     UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
 
     
-    // == Channels Page == //
-    
-    SYNChannelsRootViewController *channelsRootViewController = [[SYNChannelsRootViewController alloc] initWithViewId: kChannelsViewId];
-    
-    UINavigationController *navChannelsRootViewController = [[UINavigationController alloc] initWithRootViewController:channelsRootViewController];
-
-    
-    if (IS_IPAD)
-    {
-        channelsRootViewController.tabViewController = [[SYNGenreTabViewController alloc] initWithHomeButton: @"POPULAR"];
-        [channelsRootViewController addChildViewController: channelsRootViewController.tabViewController];
-    }
-    else
-    {
-        channelsRootViewController.enableCategoryTable = YES;
-    }
     
     // == Profile Page == //
 
@@ -117,7 +101,10 @@
     
     //SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
     
+    
+    
     // == Activity Page == //
+    
     SYNActivityViewController *activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];
     profileViewController.channelOwner = self.appDelegate.currentUser;
     
@@ -138,7 +125,7 @@
     // == Hold the vc locally
     self.viewControllers = @[navFeedViewController, navSearchViewController,
                              navMoodRootViewController,
-                             navProfileViewController,  navChannelsRootViewController, navActivityViewController];
+                             navProfileViewController, navActivityViewController];
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];

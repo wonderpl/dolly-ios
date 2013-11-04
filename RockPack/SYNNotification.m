@@ -11,16 +11,16 @@
 #import "ISO8601DateFormatter.h"
 #import "NSDate+RFC1123.h"
 #import "SYNAppDelegate.h"
-#import "SYNRockpackNotification.h"
+#import "SYNNotification.h"
 
-@interface SYNRockpackNotification ()
+@interface SYNNotification ()
 
 @property (nonatomic) kNotificationObjectType objectType;
 
 @end
 
 
-@implementation SYNRockpackNotification
+@implementation SYNNotification
 
 #pragma mark - Object lifecycle
 
@@ -34,6 +34,10 @@
 {
     if (self = [super init])
     {
+        
+        if(![data isKindOfClass:[NSDictionary class]])
+            return nil;
+        
         SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         NSNumber *identifierNumber = data[@"id"];
         
