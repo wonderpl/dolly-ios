@@ -1023,7 +1023,9 @@
     }
     else
     {
-        [appDelegate.viewStackManager pushController: channelCreationVC];
+        [self presentViewController: channelCreationVC
+                           animated: NO
+                         completion: nil];
     }
 }
 

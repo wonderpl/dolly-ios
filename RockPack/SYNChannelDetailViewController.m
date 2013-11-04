@@ -1701,7 +1701,8 @@
         }
         else
         {
-            [appDelegate.viewStackManager popController];
+            [self dismissViewControllerAnimated: NO
+                                     completion: nil];
         }
     }
     else
