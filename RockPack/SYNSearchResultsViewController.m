@@ -267,9 +267,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultVideoCell
                                                                                          forIndexPath: indexPath];
         
+        VideoInstance *vi = (VideoInstance*)(self.videosArray[indexPath.item]);
         
+        DebugLog(@"Index %@, Title %@", indexPath, vi.title);
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
-        
+        videoCell.delegate = self;        
         
         cell = videoCell;
     }
@@ -292,7 +294,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 
 - (void) collectionView: (UICollectionView *) collectionView
-         didDeselectItemAtIndexPath: (NSIndexPath *) indexPath
+         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     if (collectionView == self.videosCollectionView)
     {

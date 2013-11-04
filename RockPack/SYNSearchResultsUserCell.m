@@ -12,23 +12,26 @@
 
 @implementation SYNSearchResultsUserCell
 
--(void) awakeFromNib
+- (void) awakeFromNib
 {
-    
-    self.userNameLabel.font = [UIFont lightCustomFontOfSize:self.userNameLabel.font.pointSize];
+    self.userNameLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabel.font.pointSize];
     
     // == Round off the image == //
     self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
     self.userThumbnailImageView.clipsToBounds = YES;
 }
 
+
 #pragma mark - Set Data
 
-- (void) setChannelOwner:(ChannelOwner *)channelOwner
+- (void) setChannelOwner: (ChannelOwner *) channelOwner
 {
     _channelOwner = channelOwner;
-    if(!_channelOwner)
+    
+    if (!_channelOwner)
+    {
         return;
+    }
     
     self.followButton.dataItemLinked = _channelOwner;
     
@@ -38,6 +41,7 @@
     
     self.userNameLabel.text = _channelOwner.displayName;
 }
+
 
 - (IBAction) followControlPressed: (id) sender
 {
