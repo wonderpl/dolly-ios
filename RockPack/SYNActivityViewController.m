@@ -63,64 +63,70 @@
     [appDelegate.oAuthNetworkEngine notificationsFromUserId: appDelegate.currentUser.uniqueId
                                           completionHandler: ^(id response) {
                                               
-                                              if (![response isKindOfClass:[NSDictionary class]])
-                                                  return;
                                               
-                                              // == Sanity Check == //
-                                              
-                                              NSDictionary* responseDictionary = (NSDictionary*)response;
-                                              
-                                              NSDictionary* notificationsDictionary = responseDictionary[@"notifications"];
-                                              if (!notificationsDictionary)
-                                                  return;
-                                              
-                                              NSNumber* totalNumber = notificationsDictionary[@"total"];
-                                              if (!totalNumber)
-                                                  return;
-                                              
-                                              NSArray* itemsArray = (NSArray*)notificationsDictionary[@"items"];
-                                              if (!itemsArray)
-                                                  return;
-                                              
-                                              // == Get Total == //
-                                              
-                                              NSInteger total = [totalNumber integerValue];
-                                              
-                                              if (total == 0) // good responce but no notifications
-                                              {
-                                                  [self.tableView reloadData];
-                                                  
-                                                  self.notifications = @[];
-                                                  return;
-                                              }
-                                              
-                                              
-                                              NSMutableArray* inNotificationsutArray = @[].mutableCopy;
-                                              
-                                              
-                                              
-                                              for (NSDictionary* itemData in itemsArray)
-                                              {
-                                                  
-                                                  
-                                                  SYNNotification* notification = [SYNNotification notificationWithDictionary:itemData];
-                                                  
-                                                  if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
-                                                      continue;
-                                                  
-                                                  
-                                                  [inNotificationsutArray addObject:notification];
-                                                  
-                                              }
-                                              
-                                              self.notifications = [NSArray arrayWithArray:inNotificationsutArray];
-                                              
-                                              [self.tableView reloadData];
+                                              [self parseNotificationsFromDictionary:response];
                                               
                                               
                                           } errorHandler:^(id error) {
                                               DebugLog(@"Could not load notifications");
                                           }];
+}
+
+-(void)parseNotificationsFromDictionary:(NSDictionary*)response
+{
+    if (![response isKindOfClass:[NSDictionary class]])
+        return;
+    
+    // == Sanity Check == //
+    
+    NSDictionary* responseDictionary = (NSDictionary*)response;
+    
+    NSDictionary* notificationsDictionary = responseDictionary[@"notifications"];
+    if (!notificationsDictionary)
+        return;
+    
+    NSNumber* totalNumber = notificationsDictionary[@"total"];
+    if (!totalNumber)
+        return;
+    
+    NSArray* itemsArray = (NSArray*)notificationsDictionary[@"items"];
+    if (!itemsArray)
+        return;
+    
+    // == Get Total == //
+    
+    NSInteger total = [totalNumber integerValue];
+    
+    if (total == 0) // good responce but no notifications
+    {
+        [self.tableView reloadData];
+        
+        self.notifications = @[];
+        return;
+    }
+    
+    
+    NSMutableArray* inNotificationsutArray = @[].mutableCopy;
+    
+    
+    
+    for (NSDictionary* itemData in itemsArray)
+    {
+        
+        
+        SYNNotification* notification = [SYNNotification notificationWithDictionary:itemData];
+        
+        if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
+            continue;
+        
+        
+        [inNotificationsutArray addObject:notification];
+        
+    }
+    
+    self.notifications = [NSArray arrayWithArray:inNotificationsutArray];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - TableView Delegate/Data Source

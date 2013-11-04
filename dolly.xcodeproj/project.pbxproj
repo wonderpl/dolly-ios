@@ -1407,6 +1407,8 @@
 		BEB3139518216F5A00FAF98A /* SYNSearchResultsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB3139418216F5A00FAF98A /* SYNSearchResultsViewController~iphone.xib */; };
 		BEB31397182170E500FAF98A /* SYNSearchResultsUserCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB31396182170E500FAF98A /* SYNSearchResultsUserCell~iphone.xib */; };
 		BEB313991821775F00FAF98A /* SYNSearchResultsVideoCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB313981821775F00FAF98A /* SYNSearchResultsVideoCell~iphone.xib */; };
+		BEB313B0182800F000FAF98A /* NotificationsForUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB313AF182800F000FAF98A /* NotificationsForUser.json */; };
+		BEB313B11828022400FAF98A /* NotificationsForUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB313AF182800F000FAF98A /* NotificationsForUser.json */; };
 		BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */; };
 		BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */; };
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
@@ -3088,6 +3090,7 @@
 		BEB3139418216F5A00FAF98A /* SYNSearchResultsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNSearchResultsViewController~iphone.xib"; sourceTree = "<group>"; };
 		BEB31396182170E500FAF98A /* SYNSearchResultsUserCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNSearchResultsUserCell~iphone.xib"; sourceTree = "<group>"; };
 		BEB313981821775F00FAF98A /* SYNSearchResultsVideoCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNSearchResultsVideoCell~iphone.xib"; sourceTree = "<group>"; };
+		BEB313AF182800F000FAF98A /* NotificationsForUser.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotificationsForUser.json; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -3755,10 +3758,10 @@
 		01901A9A1771CCBA007DBEAC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BEB3135918182D6100FAF98A /* data */,
 				01901AA01771CCBA007DBEAC /* dollyTests.h */,
 				01901AA11771CCBA007DBEAC /* dollyTests.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
+				BEB3135918182D6100FAF98A /* data */,
 			);
 			name = Tests;
 			path = rockpackTests;
@@ -6154,6 +6157,7 @@
 		BEB3135918182D6100FAF98A /* data */ = {
 			isa = PBXGroup;
 			children = (
+				BEB313AF182800F000FAF98A /* NotificationsForUser.json */,
 				BEB3135A18182D6A00FAF98A /* SearchVideosResultsForMichael.json */,
 			);
 			name = data;
@@ -6733,6 +6737,7 @@
 				3862E8B8172979410066E8E7 /* SYNChannelThumbnailCell~iphone.xib in Resources */,
 				3862E8BA1729797F0066E8E7 /* SYNMasterViewController~iphone.xib in Resources */,
 				3862E8BC172979A40066E8E7 /* SYNVideoViewerViewController~iphone.xib in Resources */,
+				BEB313B0182800F000FAF98A /* NotificationsForUser.json in Resources */,
 				01F1B878172A9ADF005735AF /* ButtonVideoOverlayAdd.png in Resources */,
 				01F1B879172A9ADF005735AF /* ButtonVideoOverlayAdd@2x.png in Resources */,
 				01F1B87A172A9ADF005735AF /* ButtonVideoOverlayAddHighlighted.png in Resources */,
@@ -7552,6 +7557,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEB313B11828022400FAF98A /* NotificationsForUser.json in Resources */,
 				BEB3135C1818373100FAF98A /* SearchVideosResultsForMichael.json in Resources */,
 				01901A9F1771CCBA007DBEAC /* InfoPlist.strings in Resources */,
 			);
