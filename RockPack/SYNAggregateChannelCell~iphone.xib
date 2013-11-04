@@ -13,6 +13,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="264"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="divider_feed.png" translatesAutoresizingMaskIntoConstraints="NO" id="rJu-SY-YCk" userLabel="Divider">
+                        <rect key="frame" x="0.0" y="43" width="320" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="320" id="SyO-FT-TDi"/>
+                            <constraint firstAttribute="height" constant="1" id="l5M-uk-qsL"/>
+                        </constraints>
+                    </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ud6-Qb-LXB">
                         <rect key="frame" x="0.0" y="105" width="320" height="159"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -62,6 +70,10 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="rJu-SY-YCk" secondAttribute="centerX" id="J8r-WJ-olJ"/>
+                <constraint firstItem="rJu-SY-YCk" firstAttribute="top" secondItem="8eG-jP-d0H" secondAttribute="top" constant="43" id="knI-lv-pRg"/>
+            </constraints>
             <size key="customSize" width="353" height="361"/>
             <connections>
                 <outlet property="actionMessageLabel" destination="9IE-Sr-Xy2" id="9Mj-IM-yJA"/>
@@ -72,4 +84,7 @@
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="divider_feed.png" width="320" height="1"/>
+    </resources>
 </document>

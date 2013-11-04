@@ -14,6 +14,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="927" height="330"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="divider_feed.png" translatesAutoresizingMaskIntoConstraints="NO" id="w2T-qB-bHV" userLabel="Divider">
+                        <rect key="frame" x="303" y="43" width="320" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="320" id="uvW-AC-OiV"/>
+                            <constraint firstAttribute="height" constant="1" id="yat-yK-IBm"/>
+                        </constraints>
+                    </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-wM-3Jg">
                         <rect key="frame" x="0.0" y="101" width="927" height="223"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -64,6 +72,7 @@
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="w2T-qB-bHV" firstAttribute="top" secondItem="2" secondAttribute="top" constant="43" id="0xV-8S-2sG"/>
                 <constraint firstAttribute="centerX" secondItem="14" secondAttribute="centerX" id="4zN-5j-jef"/>
                 <constraint firstAttribute="trailing" secondItem="Khg-wM-3Jg" secondAttribute="trailing" id="6gB-O1-vO7"/>
                 <constraint firstItem="23" firstAttribute="centerY" secondItem="13" secondAttribute="centerY" id="8Jt-OF-Phr"/>
@@ -71,6 +80,7 @@
                 <constraint firstItem="23" firstAttribute="width" secondItem="13" secondAttribute="width" id="ATF-2Z-cAS"/>
                 <constraint firstItem="23" firstAttribute="height" secondItem="13" secondAttribute="height" id="O9h-UM-p3n"/>
                 <constraint firstItem="13" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="S2B-vX-aUh"/>
+                <constraint firstAttribute="centerX" secondItem="w2T-qB-bHV" secondAttribute="centerX" id="SRr-hl-g5U"/>
                 <constraint firstAttribute="centerX" secondItem="13" secondAttribute="centerX" id="aQX-gJ-Vym"/>
                 <constraint firstItem="Khg-wM-3Jg" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="bay-va-Fbm"/>
                 <constraint firstItem="14" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="gPk-Sj-6br"/>
@@ -87,4 +97,7 @@
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="divider_feed.png" width="320" height="1"/>
+    </resources>
 </document>

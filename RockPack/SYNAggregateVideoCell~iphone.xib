@@ -13,6 +13,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="369"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="divider_feed.png" translatesAutoresizingMaskIntoConstraints="NO" id="uo9-Lh-d7Y" userLabel="Divider">
+                        <rect key="frame" x="0.0" y="33" width="320" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="AMy-oc-6Hd"/>
+                            <constraint firstAttribute="width" constant="320" id="fm4-2q-win"/>
+                        </constraints>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQt-5K-LTL" userLabel="User Thumbnail">
                         <rect key="frame" x="136" y="10" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -79,10 +87,12 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="uwf-6l-aRn" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="80" id="1nE-wC-4Xd"/>
+                <constraint firstAttribute="centerX" secondItem="uo9-Lh-d7Y" secondAttribute="centerX" id="H1y-zC-KeQ"/>
                 <constraint firstAttribute="centerX" secondItem="uwf-6l-aRn" secondAttribute="centerX" id="HgE-M7-1s9"/>
                 <constraint firstItem="HQt-5K-LTL" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="10" id="MSP-ui-qy9"/>
                 <constraint firstItem="iJN-TT-v7m" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="63" id="TCu-ka-HWt"/>
                 <constraint firstAttribute="centerX" secondItem="HQt-5K-LTL" secondAttribute="centerX" id="bxK-9m-hb6"/>
+                <constraint firstItem="uo9-Lh-d7Y" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="33" id="gHg-nT-lFu"/>
                 <constraint firstAttribute="centerX" secondItem="iJN-TT-v7m" secondAttribute="centerX" id="yvf-aV-fAq"/>
             </constraints>
             <size key="customSize" width="353" height="261"/>
@@ -95,4 +105,7 @@
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="divider_feed.png" width="320" height="1"/>
+    </resources>
 </document>
