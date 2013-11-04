@@ -494,7 +494,6 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     [theCopy setStartPosition:0];
 
     theCopy.postDataEncoding = _postDataEncoding;
-    theCopy.postDataEncodingHandler = [self.postDataEncodingHandler copy];
     [theCopy setStringEncoding:self.stringEncoding];
     [theCopy setUniqueId:[self.uniqueId copy]];
     [theCopy setRequest:[self.request copy]];
@@ -516,6 +515,10 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     [theCopy setCachedResponse:[self.cachedResponse mutableCopy]];
     [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
     [theCopy setCredentialPersistence:self.credentialPersistence];
+    
+    // We need to not forget these
+    theCopy.postDataEncodingHandler = [self.postDataEncodingHandler copy];
+    theCopy.cacheHeaders = [self.cacheHeaders copy];
     
     return theCopy;
 }

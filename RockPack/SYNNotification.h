@@ -17,7 +17,7 @@ typedef enum : NSInteger
     kNotificationObjectTypeUnknown = 666
 } kNotificationObjectType;
 
-@interface SYNRockpackNotification : NSObject
+@interface SYNNotification : NSObject
 
 @property (nonatomic) BOOL read;
 @property (nonatomic) NSInteger identifier;
