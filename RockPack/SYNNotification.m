@@ -242,8 +242,6 @@
     if(![self.channelOwner.uniqueId isEqualToString:notificationToCompare.channelOwner.uniqueId])
         return NO;
     
-    if(![self.dateCreated isEqualToDate:notificationToCompare.dateCreated])
-        return NO;
     
     
     return YES;
