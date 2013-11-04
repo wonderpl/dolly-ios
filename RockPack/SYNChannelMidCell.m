@@ -16,6 +16,8 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define SHOW_DESCRIPTION_AMOUNT 225.0f
+
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
@@ -24,16 +26,6 @@
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 
-@property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;
-@property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *followerCountLabel;
-@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
-@property (strong, nonatomic) IBOutlet UIView *boarderView;
-
-@property (strong, nonatomic) IBOutlet UIButton *followButton;
-// detail label for iphone, need better logic than this!!
-@property (strong, nonatomic) IBOutlet UILabel *detailsLabel;
-@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 @end
 
@@ -231,7 +223,8 @@
         if (self.containerView.frame.origin.x ==0)
         {
             CGRect tmpRect = self.containerView.frame;
-            tmpRect.origin.x += 245;
+            tmpRect.origin.x += SHOW_DESCRIPTION_AMOUNT;
+
             self.containerView.frame = tmpRect;
         }
     }];
@@ -244,11 +237,13 @@
         if (self.containerView.frame.origin.x !=0)
         {
             CGRect tmpRect = self.containerView.frame;
-            tmpRect.origin.x -= 245;
+            tmpRect.origin.x -= SHOW_DESCRIPTION_AMOUNT;
+
             self.containerView.frame = tmpRect;
             
         }
     }];
+    
     
 }
 
@@ -256,7 +251,6 @@
 {
     if (self.channel != nil)
     {
-        NSLog(@"%@", self.channel.title);
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.channel}];

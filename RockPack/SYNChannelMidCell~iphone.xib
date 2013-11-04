@@ -14,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" id="hV6-6M-JIz">
-                        <rect key="frame" x="-1" y="0.0" width="322" height="72"/>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" id="hV6-6M-JIz">
+                        <rect key="frame" x="-1" y="0.0" width="321" height="72"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="A5P-th-oX8">
@@ -67,6 +67,7 @@
             <connections>
                 <outlet property="boarderView" destination="hV6-6M-JIz" id="L3r-Ss-KpG"/>
                 <outlet property="containerView" destination="UUL-SF-FNl" id="1u2-bb-DPV"/>
+                <outlet property="descriptionView" destination="A5P-th-oX8" id="zRt-95-k7j"/>
                 <outlet property="detailsLabel" destination="UQE-Qn-569" id="J57-lK-XnT"/>
                 <outlet property="followButton" destination="vfH-7e-CmQ" id="Mdu-Ge-Dis"/>
                 <outlet property="videoTitleLabel" destination="owS-vf-ZqF" id="AQJ-4i-mN2"/>
