@@ -66,8 +66,9 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (void) videoOverlayDidDissapear;
 
-- (void) displayVideoViewerFromView: (UIView *) view
-                          indexPath: (NSIndexPath *) indexPath;
+- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
+                         andSubCell: (UICollectionViewCell *) subCell
+                     atSubCellIndex: (NSInteger) subCellIndex;
 
 - (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button;
 
