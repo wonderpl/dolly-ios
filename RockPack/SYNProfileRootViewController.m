@@ -33,7 +33,7 @@
 #define PULL_THRESHOLD_IPAD 0.0f
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
-#define FULLNAMELABEL 291.0f
+#define FULLNAMELABEL 285.0f
 
 
 @interface SYNProfileRootViewController () <
@@ -75,7 +75,6 @@ SYNImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
-@property (strong, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (strong, nonatomic) IBOutlet UIView *userProfileView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -1221,15 +1220,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 }
             }
             
-        }
-        if (scrollView == self.mainScrollView)
-        {
-            
-            
-            //scale the image here
-            if (scrollView.contentOffset.y < 0)
-            {
-            }
         }
         
     }
