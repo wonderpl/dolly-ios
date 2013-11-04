@@ -3858,7 +3858,7 @@
 				0199F1371672199F00E479C6 /* Feed */,
 				BE7D02FD179D4318008053DC /* Friends */,
 				BE1B3DCC180E8FDC00DA2BD6 /* Mood */,
-				BE7D34D017159DF20085AB81 /* Activity */,
+				BE7D34D017159DF20085AB81 /* Activity (Notifications) */,
 				38015B4F174CCE1A005D3F18 /* Genres */,
 				BE270B7B16EDE0A500CDDA6D /* Login */,
 				BE0815C216D5386B00ADB1DC /* Master */,
@@ -5893,7 +5893,7 @@
 			name = Device;
 			sourceTree = "<group>";
 		};
-		BE7D34D017159DF20085AB81 /* Activity */ = {
+		BE7D34D017159DF20085AB81 /* Activity (Notifications) */ = {
 			isa = PBXGroup;
 			children = (
 				BE1B3DC7180D7F4000DA2BD6 /* Helpers */,
@@ -5906,7 +5906,7 @@
 				BE7D35031715CE440085AB81 /* SYNRockpackNotification.h */,
 				BE7D35041715CE450085AB81 /* SYNRockpackNotification.m */,
 			);
-			name = Activity;
+			name = "Activity (Notifications)";
 			sourceTree = "<group>";
 		};
 		BE7D34D71715A8E30085AB81 /* Navigation Panel */ = {

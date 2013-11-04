@@ -117,7 +117,10 @@
     
     //SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
     
+    
+    
     // == Activity Page == //
+    
     SYNActivityViewController *activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];
     profileViewController.channelOwner = self.appDelegate.currentUser;
     
@@ -138,7 +141,7 @@
     // == Hold the vc locally
     self.viewControllers = @[navFeedViewController, navSearchViewController,
                              navMoodRootViewController,
-                             navProfileViewController,  navChannelsRootViewController, navActivityViewController];
+                             navProfileViewController, navActivityViewController];
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
