@@ -1236,7 +1236,7 @@
 		BE7D35001715C68C0085AB81 /* NavArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D34FC1715C68C0085AB81 /* NavArrow@2x.png */; };
 		BE7D35011715C68C0085AB81 /* NavArrowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D34FD1715C68C0085AB81 /* NavArrowSelected.png */; };
 		BE7D35021715C68C0085AB81 /* NavArrowSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D34FE1715C68C0085AB81 /* NavArrowSelected@2x.png */; };
-		BE7D35051715CE450085AB81 /* SYNRockpackNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D35041715CE450085AB81 /* SYNRockpackNotification.m */; };
+		BE7D35051715CE450085AB81 /* SYNNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D35041715CE450085AB81 /* SYNNotification.m */; };
 		BE7D350B1715D3080085AB81 /* NavigationDot.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D35071715D3080085AB81 /* NavigationDot.png */; };
 		BE7D350C1715D3080085AB81 /* NavigationDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D35081715D3080085AB81 /* NavigationDot@2x.png */; };
 		BE7D350D1715D3080085AB81 /* NavigationDotCurrent.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7D35091715D3080085AB81 /* NavigationDotCurrent.png */; };
@@ -1448,8 +1448,6 @@
 		BEEB6F28172181FD00FEFA43 /* SearchTabHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEB6F24172181FD00FEFA43 /* SearchTabHighlighted@2x.png */; };
 		BEEC3F2B17465FAD00D8F4C4 /* BackgroundLoadMore.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEC3F2917465FAD00D8F4C4 /* BackgroundLoadMore.png */; };
 		BEEC3F2C17465FAD00D8F4C4 /* BackgroundLoadMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEC3F2A17465FAD00D8F4C4 /* BackgroundLoadMore@2x.png */; };
-		BEECE41C173A479B0042941B /* LogoNotifications.png in Resources */ = {isa = PBXBuildFile; fileRef = BEECE41A173A479B0042941B /* LogoNotifications.png */; };
-		BEECE41D173A479B0042941B /* LogoNotifications@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEECE41B173A479B0042941B /* LogoNotifications@2x.png */; };
 		BEECE424173AAFC20042941B /* NavDivider.png in Resources */ = {isa = PBXBuildFile; fileRef = BEECE422173AAFC20042941B /* NavDivider.png */; };
 		BEECE425173AAFC20042941B /* NavDivider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEECE423173AAFC20042941B /* NavDivider@2x.png */; };
 		BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0AE0616E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m */; };
@@ -2889,8 +2887,8 @@
 		BE7D34FC1715C68C0085AB81 /* NavArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavArrow@2x.png"; path = "Assets/Images/NavArrow@2x.png"; sourceTree = "<group>"; };
 		BE7D34FD1715C68C0085AB81 /* NavArrowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NavArrowSelected.png; path = Assets/Images/NavArrowSelected.png; sourceTree = "<group>"; };
 		BE7D34FE1715C68C0085AB81 /* NavArrowSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavArrowSelected@2x.png"; path = "Assets/Images/NavArrowSelected@2x.png"; sourceTree = "<group>"; };
-		BE7D35031715CE440085AB81 /* SYNRockpackNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNRockpackNotification.h; sourceTree = "<group>"; };
-		BE7D35041715CE450085AB81 /* SYNRockpackNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNRockpackNotification.m; sourceTree = "<group>"; };
+		BE7D35031715CE440085AB81 /* SYNNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNotification.h; sourceTree = "<group>"; };
+		BE7D35041715CE450085AB81 /* SYNNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNotification.m; sourceTree = "<group>"; };
 		BE7D35071715D3080085AB81 /* NavigationDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NavigationDot.png; path = Assets/Images/NavigationDot.png; sourceTree = "<group>"; };
 		BE7D35081715D3080085AB81 /* NavigationDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavigationDot@2x.png"; path = "Assets/Images/NavigationDot@2x.png"; sourceTree = "<group>"; };
 		BE7D35091715D3080085AB81 /* NavigationDotCurrent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NavigationDotCurrent.png; path = Assets/Images/NavigationDotCurrent.png; sourceTree = "<group>"; };
@@ -3141,8 +3139,6 @@
 		BEEB6F24172181FD00FEFA43 /* SearchTabHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SearchTabHighlighted@2x.png"; path = "Assets/Images/SearchTabHighlighted@2x.png"; sourceTree = "<group>"; };
 		BEEC3F2917465FAD00D8F4C4 /* BackgroundLoadMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundLoadMore.png; path = Assets/Images/BackgroundLoadMore.png; sourceTree = "<group>"; };
 		BEEC3F2A17465FAD00D8F4C4 /* BackgroundLoadMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundLoadMore@2x.png"; path = "Assets/Images/BackgroundLoadMore@2x.png"; sourceTree = "<group>"; };
-		BEECE41A173A479B0042941B /* LogoNotifications.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoNotifications.png; path = Assets/Images/LogoNotifications.png; sourceTree = "<group>"; };
-		BEECE41B173A479B0042941B /* LogoNotifications@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoNotifications@2x.png"; path = "Assets/Images/LogoNotifications@2x.png"; sourceTree = "<group>"; };
 		BEECE422173AAFC20042941B /* NavDivider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NavDivider.png; path = Assets/Images/NavDivider.png; sourceTree = "<group>"; };
 		BEECE423173AAFC20042941B /* NavDivider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavDivider@2x.png"; path = "Assets/Images/NavDivider@2x.png"; sourceTree = "<group>"; };
 		BEF0AE0516E751280094BFDA /* SYNNetworkOperationJsonObjectParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNetworkOperationJsonObjectParse.h; sourceTree = "<group>"; };
@@ -5903,8 +5899,8 @@
 				BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */,
 				BE7D34D117159E2C0085AB81 /* SYNNotificationsTableViewCell.h */,
 				BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */,
-				BE7D35031715CE440085AB81 /* SYNRockpackNotification.h */,
-				BE7D35041715CE450085AB81 /* SYNRockpackNotification.m */,
+				BE7D35031715CE440085AB81 /* SYNNotification.h */,
+				BE7D35041715CE450085AB81 /* SYNNotification.m */,
 			);
 			name = "Activity (Notifications)";
 			sourceTree = "<group>";
@@ -5944,8 +5940,6 @@
 				BE7D34FE1715C68C0085AB81 /* NavArrowSelected@2x.png */,
 				1FE4BA47174BF02A001DC49C /* NotificationBubble.png */,
 				1FE4BA48174BF02A001DC49C /* NotificationBubble@2x.png */,
-				BEECE41A173A479B0042941B /* LogoNotifications.png */,
-				BEECE41B173A479B0042941B /* LogoNotifications@2x.png */,
 				BEECE422173AAFC20042941B /* NavDivider.png */,
 				BEECE423173AAFC20042941B /* NavDivider@2x.png */,
 			);
@@ -7123,8 +7117,6 @@
 				012B4CAD17393CA10019DA4C /* ButtonTakePhotoHighlighted@2x.png in Resources */,
 				1F59ED1A17396E1D00430C24 /* GlossChannelMid.png in Resources */,
 				1F59ED1B17396E1D00430C24 /* GlossChannelMid@2x.png in Resources */,
-				BEECE41C173A479B0042941B /* LogoNotifications.png in Resources */,
-				BEECE41D173A479B0042941B /* LogoNotifications@2x.png in Resources */,
 				012B4CC6173A7B5A0019DA4C /* ButtonMoveAndScaleCancel.png in Resources */,
 				1F4E7FC2181ACBAA00F59007 /* TabProfileHighlighted~iphone.png in Resources */,
 				BE458AF717E71BE000776B0D /* InstructionBackgroundPacks~iphone.png in Resources */,
@@ -7762,7 +7754,7 @@
 				BE7D34CE1714434D0085AB81 /* SYNDeviceManager.m in Sources */,
 				BE7D34D317159E2C0085AB81 /* SYNNotificationsTableViewCell.m in Sources */,
 				BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */,
-				BE7D35051715CE450085AB81 /* SYNRockpackNotification.m in Sources */,
+				BE7D35051715CE450085AB81 /* SYNNotification.m in Sources */,
 				01AFF99717EC91540002131A /* NSObject+LLDBQuickLook.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */,

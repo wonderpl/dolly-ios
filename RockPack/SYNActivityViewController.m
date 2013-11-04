@@ -11,7 +11,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNNotificationsTableViewCell.h"
 #import "SYNActivityViewController.h"
-#import "SYNRockpackNotification.h"
+#import "SYNNotification.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
 
@@ -19,7 +19,6 @@
 
 @interface SYNActivityViewController ()
 
-@property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 
 @end
@@ -48,38 +47,83 @@
     
     appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
-    self.logoImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"LogoNotifications"]];
-
-    [self.view addSubview: self.logoImageView];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     [self.tableView registerClass: [SYNNotificationsTableViewCell class]
            forCellReuseIdentifier: kNotificationsCellIdent];
-}
-
-
-- (void) viewWillAppear: (BOOL) animated
-{
-    [super viewWillAppear: animated];
     
-    [self.tableView addObserver: self
-                     forKeyPath: @"contentSize"
-                        options: NSKeyValueObservingOptionNew
-                        context: nil];
+    [self loadNotifications];
 }
 
+#pragma mark - Get Data
 
-- (void) viewDidDisappear: (BOOL) animated
+- (void) loadNotifications
 {
-    [self.tableView removeObserver: self
-                        forKeyPath: @"contentSize"];
-    
-    [super viewDidDisappear: animated];
+    [appDelegate.oAuthNetworkEngine notificationsFromUserId: appDelegate.currentUser.uniqueId
+                                          completionHandler: ^(id response) {
+                                              
+                                              if (![response isKindOfClass:[NSDictionary class]])
+                                                  return;
+                                              
+                                              // == Sanity Check == //
+                                              
+                                              NSDictionary* responseDictionary = (NSDictionary*)response;
+                                              
+                                              NSDictionary* notificationsDictionary = responseDictionary[@"notifications"];
+                                              if (!notificationsDictionary)
+                                                  return;
+                                              
+                                              NSNumber* totalNumber = notificationsDictionary[@"total"];
+                                              if (!totalNumber)
+                                                  return;
+                                              
+                                              NSArray* itemsArray = (NSArray*)notificationsDictionary[@"items"];
+                                              if (!itemsArray)
+                                                  return;
+                                              
+                                              // == Get Total == //
+                                              
+                                              NSInteger total = [totalNumber integerValue];
+                                              
+                                              if (total == 0) // good responce but no notifications
+                                              {
+                                                  [self.tableView reloadData];
+                                                  
+                                                  self.notifications = @[];
+                                                  return;
+                                              }
+                                              
+                                              
+                                              NSMutableArray* inNotificationsutArray = @[].mutableCopy;
+                                              
+                                              
+                                              
+                                              for (NSDictionary* itemData in itemsArray)
+                                              {
+                                                  
+                                                  
+                                                  SYNNotification* notification = [SYNNotification notificationWithDictionary:itemData];
+                                                  
+                                                  if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
+                                                      continue;
+                                                  
+                                                  
+                                                  [inNotificationsutArray addObject:notification];
+                                                  
+                                              }
+                                              
+                                              self.notifications = [NSArray arrayWithArray:inNotificationsutArray];
+                                              
+                                              [self.tableView reloadData];
+                                              
+                                              
+                                          } errorHandler:^(id error) {
+                                              DebugLog(@"Could not load notifications");
+                                          }];
 }
 
-
-#pragma mark - Table view data source
+#pragma mark - TableView Delegate/Data Source
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView *) tableView
 {
@@ -100,7 +144,7 @@
     SYNNotificationsTableViewCell *notificationCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsCellIdent
                                                                                       forIndexPath: indexPath];
     
-    SYNRockpackNotification *notification = (SYNRockpackNotification *) _notifications[indexPath.row];
+    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row];
     
     NSMutableString *constructedMessage = [[NSMutableString alloc] init];
     
@@ -188,11 +232,10 @@
 - (CGFloat) tableView: (UITableView *) tableView
             heightForRowAtIndexPath: (NSIndexPath *) indexPath;
 {
-    return 77.0;
+    return 77.0f;
 }
 
 
-#pragma mark - Table view delegate
 
 - (void) tableView: (UITableView *) tableView
          didSelectRowAtIndexPath: (NSIndexPath *) indexPath
@@ -204,38 +247,10 @@
 }
 
 
-#pragma mark - KVO
-
-- (void) observeValueForKeyPath: (NSString *) keyPath
-                       ofObject: (id) object
-                         change: (NSDictionary *) change
-                        context: (void *) context
-{
-    if ([keyPath isEqualToString: @"contentSize"])
-    {
-        CGRect logoImageViewFrame = self.logoImageView.frame;
-        logoImageViewFrame.origin.y = self.tableView.contentSize.height + 20.0;
-        logoImageViewFrame.origin.x = (self.tableView.frame.size.width * 0.5) - (logoImageViewFrame.size.width * 0.5);
-        self.logoImageView.frame = logoImageViewFrame;
-    }
-}
 
 
-#pragma mark - Delegate Handler
 
--(SYNNotificationsTableViewCell*)getCellFromButton:(UIButton*)button
-{
-    
-    
-    UIView* cell = button;
-    while (![cell isKindOfClass:[SYNNotificationsTableViewCell class]])
-    {
-        cell = cell.superview;
-    }
-    
-    
-    return (SYNNotificationsTableViewCell*)cell;
-}
+
 
 // this is the user who initialed the action, goes to is profile
 - (void) mainImageTableCellPressed: (UIButton *) button
@@ -248,7 +263,7 @@
     if (indexPathForCellPressed.row > self.notifications.count)
         return;
     
-    SYNRockpackNotification *notification = self.notifications[indexPathForCellPressed.row];
+    SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
     
     
     [appDelegate.viewStackManager viewProfileDetails: notification.channelOwner];
@@ -264,7 +279,7 @@
     NSIndexPath *indexPathForCellPressed = [self.tableView
                                             indexPathForCell: cellPressed];
     
-    SYNRockpackNotification *notification = self.notifications[indexPathForCellPressed.row];
+    SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
     
     if (!notification)
     {
@@ -323,7 +338,7 @@
 }
 
 
-- (void) markAsReadForNotification: (SYNRockpackNotification *) notification
+- (void) markAsReadForNotification: (SYNNotification *) notification
 {
     if (notification == nil || notification.read) // if already read or nil, don't bother...
     {
@@ -350,10 +365,12 @@
 }
 
 
+
+
 #pragma mark - Accessors
 
 - (void) setNotifications: (NSArray *) notifications
-{   
+{
     _notifications = notifications;
     
     [self.tableView reloadData];
@@ -387,6 +404,31 @@
     }
     
     return channel;
+}
+
+-(NSInteger)unreadNotificationsCount
+{
+    __block NSInteger unread = 0;
+    [self.notifications enumerateObjectsUsingBlock:^(SYNNotification* notification, NSUInteger idx, BOOL *stop) {
+        unread += (NSInteger)(notification.read); // convert the YES, NO into a 1, 0 int and add it
+    }];
+    return unread;
+}
+
+#pragma mark - Delegate Handler
+
+-(SYNNotificationsTableViewCell*)getCellFromButton:(UIButton*)button
+{
+    
+    
+    UIView* cell = button;
+    while (![cell isKindOfClass:[SYNNotificationsTableViewCell class]])
+    {
+        cell = cell.superview;
+    }
+    
+    
+    return (SYNNotificationsTableViewCell*)cell;
 }
 
 @end
