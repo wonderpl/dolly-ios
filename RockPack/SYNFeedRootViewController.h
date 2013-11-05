@@ -13,9 +13,4 @@
 @interface SYNFeedRootViewController : SYNAbstractViewController <SYNAggregateCellDelegate>
 
 
-- (void) removeEmptyGenreMessage;
-
-- (void) displayEmptyGenreMessage: (NSString*) messageKey
-                        andLoader: (BOOL) isLoader;
-
 @end

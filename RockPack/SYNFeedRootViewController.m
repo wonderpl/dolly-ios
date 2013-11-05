@@ -14,7 +14,6 @@
 #import "NSDate-Utilities.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
-#import "SYNFeedMessagesView.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNHomeSectionHeaderView.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
@@ -40,7 +39,6 @@ typedef void(^FeedDataErrorBlock)(void);
 @property (nonatomic, strong) NSBlockOperation *blockOperation;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) SYNFeedMessagesView* emptyGenreMessageView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, weak)   SYNAggregateVideoCell* selectedVideoCell;
 @property (nonatomic, strong) NSArray* feedItemsData;
@@ -82,7 +80,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
-    [self removeEmptyGenreMessage];
+    [self removePopupMessage];
 
     // Register XIBs for Cell
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
@@ -134,8 +132,8 @@ typedef void(^FeedDataErrorBlock)(void);
 {
     [super viewDidAppear: animated];
 
-    [self displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
-                         andLoader: YES];
+    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
+                         withLoader: YES];
     
     if([self class] == [SYNFeedRootViewController class])
     {
@@ -248,17 +246,17 @@ typedef void(^FeedDataErrorBlock)(void);
         
         [wself handleRefreshComplete];
         
-        [wself removeEmptyGenreMessage];
+        [wself removePopupMessage];
         
         if (wself.feedItemsData.count == 0)
         {
-            [wself displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_loading_error", nil)
-                                  andLoader: NO];
+            [wself displayPopupMessage: NSLocalizedString(@"feed_screen_loading_error", nil)
+                            withLoader: NO];
         }
         else
         {
-            [wself displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_updating_error", nil)
-                                  andLoader: NO];
+            [wself displayPopupMessage: NSLocalizedString(@"feed_screen_updating_error", nil)
+                            withLoader: NO];
             [NSTimer scheduledTimerWithTimeInterval: 3.0f
                                              target: self
                                            selector: @selector(removeEmptyGenreMessage)
@@ -304,7 +302,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                    errorBlock();
                                                }
                                                
-                                               [wself removeEmptyGenreMessage];
+                                               [wself removePopupMessage];
                                                
                                                [wself fetchAndDisplayFeedItems];
                                                
@@ -314,8 +312,8 @@ typedef void(^FeedDataErrorBlock)(void);
                                                
                                                if (wself.dataItemsAvailable == 0)
                                                {
-                                                   [wself								   displayEmptyGenreMessage: NSLocalizedString(@"feed_screen_empty_message", nil)
-                                                                                   andLoader: NO];
+                                                   [wself displayPopupMessage: NSLocalizedString(@"feed_screen_empty_message", nil)
+                                                                   withLoader: NO];
                                                }
                                            }];
                                        } errorHandler: ^(NSDictionary *errorDictionary) {
@@ -345,48 +343,10 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Empty genre message handling
 
-- (void) removeEmptyGenreMessage
-{
-    if (!self.emptyGenreMessageView)
-        return;
-    
-    [self.emptyGenreMessageView removeFromSuperview];
-    
-    /* OPTIONAL
-    __weak SYNFeedRootViewController* wself = self;
-    [UIView animateWithDuration:0.5f
-                     animations:^{
-        wself.emptyGenreMessageView.transform = CGAffineTransformScale( wself.emptyGenreMessageView.transform, 0.8f, 0.8f);
-        wself.emptyGenreMessageView.alpha = 0.0f;
-    } completion:^(BOOL finished) {
-        [wself.emptyGenreMessageView removeFromSuperview];
-    }];
-     */
-}
 
 
-- (void) displayEmptyGenreMessage: (NSString*) messageKey
-                        andLoader: (BOOL) isLoader
-{
-    if (self.emptyGenreMessageView)
-    {
-        [self.emptyGenreMessageView removeFromSuperview];
-        self.emptyGenreMessageView = nil;
-    }
-    
-    self.emptyGenreMessageView = [SYNFeedMessagesView withMessage:NSLocalizedString(messageKey ,nil) andLoader:isLoader];
-    
-    CGRect messageFrame = self.emptyGenreMessageView.frame;
-    messageFrame.origin.x = (self.view.frame.size.width * 0.5) - (messageFrame.size.width * 0.5);
-    messageFrame.origin.y = (self.view.frame.size.height * 0.5) - (messageFrame.size.height * 0.5) - 20.0f;
-    
-    messageFrame = CGRectIntegral(messageFrame);
-    self.emptyGenreMessageView.frame = messageFrame;
-    self.emptyGenreMessageView.autoresizingMask =
-    UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-    
-    [self.view addSubview: self.emptyGenreMessageView];
-}
+
+
 
 
 #pragma mark - Fetch Feed Data

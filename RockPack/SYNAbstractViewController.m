@@ -22,6 +22,7 @@
 #import "SYNAbstractViewController.h"
 #import "SYNAppDelegate.h"
 #import "SYNChannelDetailViewController.h"
+#import "SYNPopupMessageView.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNImplicitSharingController.h"
@@ -60,6 +61,7 @@
 @property (nonatomic, assign) CGPoint endDraggingPoint;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
+@property (nonatomic, strong) SYNPopupMessageView* emptyGenreMessageView;
 @property (nonatomic, assign) ScrollingDirection *scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
 
@@ -1012,7 +1014,9 @@
     }
     else
     {
-        [appDelegate.viewStackManager pushController: channelCreationVC];
+        [self presentViewController: channelCreationVC
+                           animated: NO
+                         completion: nil];
     }
 }
 
@@ -1084,5 +1088,47 @@
     }
 }
 
+
+- (void) displayPopupMessage: (NSString*) messageKey
+                  withLoader: (BOOL) isLoader
+{
+    if (self.emptyGenreMessageView)
+    {
+        [self.emptyGenreMessageView removeFromSuperview];
+        self.emptyGenreMessageView = nil;
+    }
+    
+    self.emptyGenreMessageView = [SYNPopupMessageView withMessage:NSLocalizedString(messageKey ,nil) andLoader:isLoader];
+    
+    CGRect messageFrame = self.emptyGenreMessageView.frame;
+    messageFrame.origin.x = (self.view.frame.size.width * 0.5) - (messageFrame.size.width * 0.5);
+    messageFrame.origin.y = (self.view.frame.size.height * 0.5) - (messageFrame.size.height * 0.5) - 20.0f;
+    
+    messageFrame = CGRectIntegral(messageFrame);
+    self.emptyGenreMessageView.frame = messageFrame;
+    self.emptyGenreMessageView.autoresizingMask =
+    UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+    
+    [self.view addSubview: self.emptyGenreMessageView];
+}
+
+- (void) removePopupMessage
+{
+    if (!self.emptyGenreMessageView)
+        return;
+    
+    [self.emptyGenreMessageView removeFromSuperview];
+    
+    /* OPTIONAL
+     __weak SYNFeedRootViewController* wself = self;
+     [UIView animateWithDuration:0.5f
+     animations:^{
+     wself.emptyGenreMessageView.transform = CGAffineTransformScale( wself.emptyGenreMessageView.transform, 0.8f, 0.8f);
+     wself.emptyGenreMessageView.alpha = 0.0f;
+     } completion:^(BOOL finished) {
+     [wself.emptyGenreMessageView removeFromSuperview];
+     }];
+     */
+}
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNFeedMessagesView : UIView
+@interface SYNPopupMessageView : UIView
 
 + (id) withMessage: (NSString*) message;
 

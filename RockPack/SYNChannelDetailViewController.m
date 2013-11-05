@@ -501,6 +501,7 @@
     }
     
     self.hasAppeared = YES;
+    self.navigationController.navigationBarHidden = NO;
 }
 
 
@@ -564,6 +565,7 @@
     
     
     self.hasAppeared = NO;
+    self.navigationController.navigationBarHidden = YES;
 }
 
 
@@ -1701,7 +1703,8 @@
         }
         else
         {
-            [appDelegate.viewStackManager popController];
+            [self dismissViewControllerAnimated: NO
+                                     completion: nil];
         }
     }
     else

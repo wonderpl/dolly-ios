@@ -447,12 +447,6 @@ typedef enum : NSInteger {
 } PointingDirection;
 
 
-typedef enum : NSInteger {
-    MyOwnProfile = 0,
-    OtherUsersProfile,
-    TestUserProfile,
-} ProfileType;
-
 // Height of the bottom tab bar in pixels
 #define kBottomTabBarHeight 62
 
