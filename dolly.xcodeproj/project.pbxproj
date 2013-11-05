@@ -33,8 +33,6 @@
 		010AAEA717D9EF48001DD5FA /* ShareTwitterButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */; };
 		010AAEA817D9EF48001DD5FA /* ShareTwitterButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9C17D9EF48001DD5FA /* ShareTwitterButton@2x~iphone.png */; };
 		010AAEA917D9EF48001DD5FA /* ShareTwitterButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9D17D9EF48001DD5FA /* ShareTwitterButton~iphone.png */; };
-		010DEFD51629BDC40080F26B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD41629BDC40080F26B /* UIKit.framework */; };
-		010DEFD71629BDC40080F26B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD61629BDC40080F26B /* Foundation.framework */; };
 		010DEFD91629BDC40080F26B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD81629BDC40080F26B /* CoreGraphics.framework */; };
 		010DEFDF1629BDC40080F26B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 010DEFDD1629BDC40080F26B /* InfoPlist.strings */; };
 		010DEFE11629BDC40080F26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 010DEFE01629BDC40080F26B /* main.m */; };
@@ -94,9 +92,6 @@
 		011C1682173003E800CF50B9 /* OWSaveToCameraRollActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C1670173003E800CF50B9 /* OWSaveToCameraRollActivity.m */; };
 		011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C1672173003E800CF50B9 /* OWSinaWeiboActivity.m */; };
 		011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C1674173003E800CF50B9 /* OWTwitterActivity.m */; };
-		011C16861730043000CF50B9 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011C16851730043000CF50B9 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		011C16881730046700CF50B9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011C16871730046700CF50B9 /* MessageUI.framework */; };
-		011C168A1730047300CF50B9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011C16891730047300CF50B9 /* AssetsLibrary.framework */; };
 		011C168D173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C168C173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m */; };
 		011C16901731782800CF50B9 /* SYNDeletionWobbleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C168F1731782800CF50B9 /* SYNDeletionWobbleLayout.m */; };
 		011C16931732834F00CF50B9 /* PanelChannelCreateNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C16911732834F00CF50B9 /* PanelChannelCreateNew.png */; };
@@ -104,16 +99,12 @@
 		011C169B1732B65400CF50B9 /* NoCover184.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C16991732B65400CF50B9 /* NoCover184.png */; };
 		011C169C1732B65400CF50B9 /* NoCover184@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C169A1732B65400CF50B9 /* NoCover184@2x.png */; };
 		011CC67E164AA41800F02B6D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011CC67D164AA41700F02B6D /* CoreMedia.framework */; };
-		011CC680164AA42300F02B6D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011CC67F164AA42300F02B6D /* AVFoundation.framework */; };
 		011CC683164BB94D00F02B6D /* SYNUserCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 011CC682164BB94D00F02B6D /* SYNUserCollectionViewLayoutAttributes.m */; };
 		011CC6A9164D19D800F02B6D /* SYNPassthroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = 011CC6A8164D19D800F02B6D /* SYNPassthroughView.m */; };
 		011D42D516FFA8E600A49D50 /* DividerYou.png in Resources */ = {isa = PBXBuildFile; fileRef = 011D42CB16FFA8E600A49D50 /* DividerYou.png */; };
 		011D42D616FFA8E600A49D50 /* DividerYou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 011D42CC16FFA8E600A49D50 /* DividerYou@2x.png */; };
 		012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 012502BC16CA8FE30029C7C8 /* SYNFacebookManager.m */; };
 		012502C316CA99630029C7C8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C216CA99630029C7C8 /* AdSupport.framework */; };
-		012502C516CA99710029C7C8 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C416CA99710029C7C8 /* Accounts.framework */; };
-		012502C716CA997A0029C7C8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C616CA99790029C7C8 /* Social.framework */; };
-		0126331F162E2A060009FF9C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126331E162E2A060009FF9C /* MediaPlayer.framework */; };
 		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
 		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
 		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */; };
@@ -135,7 +126,6 @@
 		012B4CCB173A7B5A0019DA4C /* ButtonMoveAndScaleUse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4CC3173A7B5A0019DA4C /* ButtonMoveAndScaleUse@2x.png */; };
 		012B4CCC173A7B5A0019DA4C /* ButtonMoveAndScaleUseHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4CC4173A7B5A0019DA4C /* ButtonMoveAndScaleUseHighlighted.png */; };
 		012B4CCD173A7B5A0019DA4C /* ButtonMoveAndScaleUseHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4CC5173A7B5A0019DA4C /* ButtonMoveAndScaleUseHighlighted@2x.png */; };
-		012BD2C6173BE7A000BE28B6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012BD2C5173BE79F00BE28B6 /* ImageIO.framework */; };
 		012BD2E2173BE87300BE28B6 /* NSData+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 012BD2CB173BE87300BE28B6 /* NSData+GIF.m */; };
 		012BD2E3173BE87300BE28B6 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 012BD2CD173BE87300BE28B6 /* SDImageCache.m */; };
 		012BD2E4173BE87300BE28B6 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 012BD2CF173BE87300BE28B6 /* SDWebImageCompat.m */; };
@@ -152,7 +142,6 @@
 		012CDC3E17E2286C00C723BB /* DeletePackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012CDC3A17E2286C00C723BB /* DeletePackButton@2x.png */; };
 		012CDC3F17E2286C00C723BB /* DeletePackButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 012CDC3B17E2286C00C723BB /* DeletePackButton@2x~iphone.png */; };
 		012CDC4017E2286C00C723BB /* DeletePackButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 012CDC3C17E2286C00C723BB /* DeletePackButton~iphone.png */; };
-		01363EB2162F5C8A00FFAA09 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01363EB1162F5C8A00FFAA09 /* AudioToolbox.framework */; };
 		01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 01363EB4162FDEA600FFAA09 /* NSObject+Blocks.m */; };
 		01363EC116300F3A00FFAA09 /* SYNVideoThumbnailWideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01363EC016300F3A00FFAA09 /* SYNVideoThumbnailWideCell.xib */; };
 		01363F241630B81400FFAA09 /* SYNVideoThumbnailWideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01363F231630B81400FFAA09 /* SYNVideoThumbnailWideCell.m */; };
@@ -181,14 +170,11 @@
 		01677E0F16554AB500B1B1D8 /* ButtonBackHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF916554AB500B1B1D8 /* ButtonBackHighlighted@2x.png */; };
 		016AED3B1821349800DEAF7E /* SYNSocialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AED3A1821349800DEAF7E /* SYNSocialButton.m */; };
 		016B97151770C3DE00892211 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97141770C3DE00892211 /* CFNetwork.framework */; };
-		016B97171770C42200892211 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97161770C42200892211 /* StoreKit.framework */; };
 		0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717D165550A900A3C7C4 /* SystemConfiguration.framework */; };
-		01707180165550BE00A3C7C4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717F165550BE00A3C7C4 /* Security.framework */; };
 		0173F6FB16E028E4005B3ECA /* BackgroundVideoThumbnailSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6F716E028E4005B3ECA /* BackgroundVideoThumbnailSmall.png */; };
 		0173F6FC16E028E4005B3ECA /* BackgroundVideoThumbnailSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6F816E028E4005B3ECA /* BackgroundVideoThumbnailSmall@2x.png */; };
 		0173F6FD16E028E4005B3ECA /* GlossVideoThumbnailSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6F916E028E4005B3ECA /* GlossVideoThumbnailSmall.png */; };
 		0173F6FE16E028E4005B3ECA /* GlossVideoThumbnailSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6FA16E028E4005B3ECA /* GlossVideoThumbnailSmall@2x.png */; };
-		0173F70316E0B899005B3ECA /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0173F70216E0B899005B3ECA /* CoreImage.framework */; };
 		0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */; };
 		0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0173F70A16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m */; };
 		0177002717C37AF6006DE415 /* SYNTouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177002617C37AF6006DE415 /* SYNTouchGestureRecognizer.m */; };
@@ -230,7 +216,6 @@
 		019824F01629CC7600216900 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824EE1629CC7600216900 /* libTestFlight.a */; };
 		019824F21629CE1600216900 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824F11629CE1600216900 /* libz.dylib */; };
 		0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198250B1629DCF100216900 /* SYNContainerViewController.m */; };
-		01982576162AFB9700216900 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01982575162AFB9600216900 /* QuartzCore.framework */; };
 		019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 019825F0162C94A300216900 /* UIColor+SYNColor.m */; };
 		019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 019825F3162C94B500216900 /* UIFont+SYNFont.m */; };
 		0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F13916721A4500E479C6 /* SYNFeedRootViewController.m */; };
@@ -354,7 +339,6 @@
 		01D0998717439A3A00351C82 /* CategorySlideSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0998317439A3700351C82 /* CategorySlideSelected.png */; };
 		01D0998817439A3A00351C82 /* CategorySlideSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0998417439A3900351C82 /* CategorySlideSelected@2x.png */; };
 		01D0998B17452A4000351C82 /* BBCyclingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D0998A17452A4000351C82 /* BBCyclingLabel.m */; };
-		01E427BC1664C5F1009B941F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E427BB1664C5F1009B941F /* CoreData.framework */; };
 		01E427D31664C726009B941F /* Rockpack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E427D11664C726009B941F /* Rockpack.xcdatamodeld */; };
 		01E427D91664CDA5009B941F /* SYNAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E427D81664CDA5009B941F /* SYNAbstractViewController.m */; };
 		01E427E21664DF21009B941F /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E427E11664DF21009B941F /* Video.m */; };
@@ -3169,33 +3153,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */,
-				BE3574EC17CE09B80083CBB1 /* AddressBook.framework in Frameworks */,
-				016B97171770C42200892211 /* StoreKit.framework in Frameworks */,
 				01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */,
 				3854788417946630006EB38B /* libGoogleConversionTracking.a in Frameworks */,
 				C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */,
 				019824F01629CC7600216900 /* libTestFlight.a in Frameworks */,
 				019824F21629CE1600216900 /* libz.dylib in Frameworks */,
-				012502C516CA99710029C7C8 /* Accounts.framework in Frameworks */,
+				BE3574EC17CE09B80083CBB1 /* AddressBook.framework in Frameworks */,
 				012502C316CA99630029C7C8 /* AdSupport.framework in Frameworks */,
-				011C168A1730047300CF50B9 /* AssetsLibrary.framework in Frameworks */,
-				01363EB2162F5C8A00FFAA09 /* AudioToolbox.framework in Frameworks */,
-				011CC680164AA42300F02B6D /* AVFoundation.framework in Frameworks */,
 				016B97151770C3DE00892211 /* CFNetwork.framework in Frameworks */,
-				01E427BC1664C5F1009B941F /* CoreData.framework in Frameworks */,
-				0173F70316E0B899005B3ECA /* CoreImage.framework in Frameworks */,
 				010DEFD91629BDC40080F26B /* CoreGraphics.framework in Frameworks */,
 				011CC67E164AA41800F02B6D /* CoreMedia.framework in Frameworks */,
-				010DEFD71629BDC40080F26B /* Foundation.framework in Frameworks */,
-				012BD2C6173BE7A000BE28B6 /* ImageIO.framework in Frameworks */,
-				0126331F162E2A060009FF9C /* MediaPlayer.framework in Frameworks */,
-				011C16881730046700CF50B9 /* MessageUI.framework in Frameworks */,
-				01982576162AFB9700216900 /* QuartzCore.framework in Frameworks */,
-				01707180165550BE00A3C7C4 /* Security.framework in Frameworks */,
-				012502C716CA997A0029C7C8 /* Social.framework in Frameworks */,
 				0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */,
-				011C16861730043000CF50B9 /* Twitter.framework in Frameworks */,
-				010DEFD51629BDC40080F26B /* UIKit.framework in Frameworks */,
 				BE2AF28817BE33C700A20127 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

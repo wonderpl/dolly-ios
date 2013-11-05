@@ -7,7 +7,6 @@
 //
 
 #import "AppConstants.h"
-#import "AudioToolbox/AudioToolbox.h"
 #import "ChannelOwner.h"
 #import "GAI.h"
 #import "MKNetworkEngine.h"
@@ -27,6 +26,7 @@
 #import "SYNProfileRootViewController.h"
 #import "SYNTrackableFrameView.h"
 #import "UIFont+SYNFont.h"
+@import AudioToolbox;
 @import QuartzCore;
 
 
