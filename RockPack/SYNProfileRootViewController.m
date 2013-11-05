@@ -38,7 +38,10 @@
 
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
-SYNImagePickerControllerDelegate>
+SYNImagePickerControllerDelegate>{
+    ProfileType modeType;
+    
+}
 
 @property (strong, nonatomic) IBOutlet UIView *outerViewLabel;
 @property (nonatomic) BOOL deleteCellModeOn;
@@ -96,28 +99,39 @@ SYNImagePickerControllerDelegate>
 @property (nonatomic,assign) CGFloat startingPosition;
 @property (strong, nonatomic) IBOutlet UISearchBar *followingSearchBar;
 @property (strong, nonatomic) IBOutlet UIView *containerViewIPad;
-@property (nonatomic) ProfileType tmpProfile;
+@property (nonatomic) ProfileType modeType;
+
 @end
 
-@implementation SYNProfileRootViewController
 
+@implementation SYNProfileRootViewController
 #pragma mark - Object lifecycle
+@synthesize modeType;
 
 - (id) initWithViewId:(NSString *)vid
 {
     if (self = [super initWithNibName:NSStringFromClass([SYNProfileRootViewController class]) bundle:nil])
     {
+        self = [self initWithMode: MyOwnProfile];
+
         viewId = vid;
-        
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
                                                      name: NSManagedObjectContextObjectsDidChangeNotification
                                                    object: appDelegate.searchManagedObjectContext];
         self.shouldBeginEditing = YES;
+        
     }
     
     return self;
 }
+
+- (id) initWithMode: (ProfileType) mode
+{
+    modeType = mode;
+    return self;
+}
+
 
 - (void) dealloc
 {
@@ -228,20 +242,10 @@ SYNImagePickerControllerDelegate>
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
     
-    self.tmpProfile = OtherUsersProfile;
+   // self.modeType = OtherUsersProfile;
     
-    [self setProfleType:self.tmpProfile];
-    
-    for (int i=0; i<self.outerViewLabel.gestureRecognizers.count; i++)
-    {
-        ((UIGestureRecognizer*)[self.outerViewLabel.gestureRecognizers objectAtIndex:i]).cancelsTouchesInView = NO;
-    }
-    
-    for (int i=0; i<self.fullNameLabel.gestureRecognizers.count; i++)
-    {
-        
-        ((UIGestureRecognizer*)[self.outerViewLabel.gestureRecognizers objectAtIndex:i]).cancelsTouchesInView = NO;
-    }
+    [self setProfleType:self.modeType];
+
     
 }
 
@@ -629,11 +633,10 @@ SYNImagePickerControllerDelegate>
     }
     else
     {
-        self.channelThumbnailCollectionView.contentOffset = CGPointZero;
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+//        self.channelThumbnailCollectionView.contentOffset = CGPointZero;
+//        self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
 //        self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
 //        self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
-
 //        self.coverImage.transform = CGAffineTransformIdentity;
 //        self.moreButton.transform = CGAffineTransformIdentity;
 //        self.coverImage.transform = CGAffineTransformIdentity;
@@ -736,8 +739,8 @@ SYNImagePickerControllerDelegate>
     if ([view isEqual:self.subscriptionThumbnailCollectionView])
     {
         //1 for search bar
-        
-        return self.arrDisplayFollowing.count;
+        //return self.arrDisplayFollowing.count;
+        return self.channelOwner.subscriptions.count;
     }
     
     return self.channelOwner.channels.count + (self.isUserProfile ? 1 : 0); // to account for the extra 'creation' cell at the start of the collection view
@@ -745,11 +748,6 @@ SYNImagePickerControllerDelegate>
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
-    
-    if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
-    {
-        return 1;
-    }
     return 1;
 }
 
@@ -762,15 +760,10 @@ SYNImagePickerControllerDelegate>
     
     SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
     
-    
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        
-        
         SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
         cell = createCell;
-        
-        
     }
     
     else if([collectionView isEqual:self.channelThumbnailCollectionView])
@@ -788,15 +781,18 @@ SYNImagePickerControllerDelegate>
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
-        if (self.tmpProfile == MyOwnProfile) {
+        if (self.modeType == MyOwnProfile) {
             [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
         }
-        else if(self.tmpProfile == OtherUsersProfile)
+        else if(self.modeType == OtherUsersProfile)
         {
             [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
         }
      
+        if (indexPath.row < self.arrDisplayFollowing.count) {
+            
         Channel *channel = _arrDisplayFollowing[indexPath.item];
+        
         [channelThumbnailCell setChannel:channel];
         [channelThumbnailCell setTitle: channel.title];
         [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
@@ -804,6 +800,11 @@ SYNImagePickerControllerDelegate>
         [channelThumbnailCell setTitle:channel.title];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
+        }
+        else
+        {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+        }
 
     }
     
@@ -990,15 +991,14 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 #pragma mark - scroll view delegates
 
--(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
     
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self.followingSearchBar resignFirstResponder];
-    
-    
     [super scrollViewWillBeginDragging:scrollView];
 }
 
@@ -1037,8 +1037,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
             
         }
-        
-        
     
         if (IS_IPHONE) {
             
@@ -1068,6 +1066,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         }
         else
         {
+            
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
             self.coverImage.transform = move;
             self.moreButton.transform = move;
@@ -1084,10 +1083,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 
         }
-        
-        
     }
-    
     
     if (!self.isIPhone)
     {
@@ -1180,9 +1176,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             
             if (scrollView == self.channelThumbnailCollectionView || scrollView == self.subscriptionThumbnailCollectionView)
             {
-                {
-                    
-                }
+                
             }
             
         }
