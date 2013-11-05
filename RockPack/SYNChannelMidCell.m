@@ -63,22 +63,23 @@
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = UIScreen.mainScreen.scale;
     
-    
-    
-    if (IS_IPHONE) {
+    if (IS_IPHONE)
+    {
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
         [self.detailsLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-        [self.boarderView.layer setBorderWidth:1.0f];
+        [self.boarderView.layer setBorderWidth:0.5f];
         [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
-    }else{
+    }
+    else
+    {
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:18]];
         [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-        [self.boarderView.layer setBorderWidth:1.0f];
+        [self.boarderView.layer setBorderWidth:.5f];
         
     }
     
@@ -93,14 +94,6 @@
     self.leftSwipe.delegate = self;
     
     [self.containerView addGestureRecognizer:self.leftSwipe];
-
-    
-    if (MyOwnProfile) {
-        self.followButton.hidden = YES;
-    }else{
-        self.followButton.hidden = NO;
-    }
-    
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
@@ -203,18 +196,10 @@
     [self.videoTitleLabel setText:titleString];
 }
 
--(void) setFollowButtonLabel: (ProfileType) profile
+-(void) setFollowButtonLabel:(NSString*) strFollowLabel
 {
-    if (profile == MyOwnProfile)
-    {
-        [self.followButton setTitle:NSLocalizedString(@"Unfollow", @"unfollow") forState:UIControlStateNormal];
+        [self.followButton setTitle:strFollowLabel forState:UIControlStateNormal];
         [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
-    }
-    else if(profile == OtherUsersProfile)
-    {
-        [self.followButton setTitle:NSLocalizedString(@"Follow", @"follow") forState:UIControlStateNormal];
-        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
-    }
 }
 
 - (IBAction)showDescription:(UISwipeGestureRecognizer *)recognizer

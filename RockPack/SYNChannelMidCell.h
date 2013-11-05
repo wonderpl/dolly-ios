@@ -34,7 +34,7 @@
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;
 
 @property (nonatomic, weak) id<SYNChannelMidCellDelegate> viewControllerDelegate;
--(void) setFollowButtonLabel: (ProfileType) profile;
+-(void) setFollowButtonLabel:(NSString*) strFollowLabel;
 
 -(void) setTitle :(NSString*) titleString;
 -(void) setHiddenForFollowButton: (BOOL) hide;

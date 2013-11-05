@@ -8,6 +8,12 @@
 
 #import "SYNAbstractViewController.h"
 #import "ChannelOwner.h"
+typedef enum : NSInteger {
+    MyOwnProfile = 0,
+    OtherUsersProfile,
+    TestUserProfile,
+} ProfileType;
+
 
 @interface SYNProfileRootViewController : SYNAbstractViewController <UISearchBarDelegate>
 

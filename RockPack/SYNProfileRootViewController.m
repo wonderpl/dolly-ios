@@ -228,7 +228,7 @@ SYNImagePickerControllerDelegate>
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
     
-    self.tmpProfile = MyOwnProfile;
+    self.tmpProfile = OtherUsersProfile;
     
     [self setProfleType:self.tmpProfile];
     
@@ -618,6 +618,8 @@ SYNImagePickerControllerDelegate>
     
     //Setup the headers
     
+    self.navigationController.navigationBarHidden = YES;
+    
     if (self.isIPhone)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
@@ -625,25 +627,30 @@ SYNImagePickerControllerDelegate>
     }
     else
     {
-      //  self.channelThumbnailCollectionView.contentOffset = CGPointZero;
-       // self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+        self.channelThumbnailCollectionView.contentOffset = CGPointZero;
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+//        self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
+//        self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
 
+//        self.coverImage.transform = CGAffineTransformIdentity;
+//        self.moreButton.transform = CGAffineTransformIdentity;
+//        self.coverImage.transform = CGAffineTransformIdentity;
         if (UIDeviceOrientationIsPortrait(orientation))
         {
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(671, 702);
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(671, 702);
+            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(671, 722);
+            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(671, 722);
 
             //NEED DYNAMIC WAY
             // self.channelThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
             //  self.subscriptionThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
             
-            //  self.coverImage.frame = CGRectMake(0.0f, 0.0f, 670.0f, 512.0f);
-            //  self.moreButton.frame = CGRectMake(614, 512, 56, 56);
-            channelsLayout = self.channelLayoutIPad;
+//            self.coverImage.frame = CGRectMake(0.0f, 0.0f, 670.0f, 512.0f);
+//            self.moreButton.frame = CGRectMake(614, 512, 56, 56);
+//            channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
             
          //   self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
@@ -655,8 +662,8 @@ SYNImagePickerControllerDelegate>
             self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(0.0, 21.0, 0.0, 21.0);
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(1004, 700);
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(1004, 700);
+            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(1004, 600);
+            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(1004, 600);
             
            // self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
 
@@ -666,7 +673,7 @@ SYNImagePickerControllerDelegate>
             //self.moreButton.frame = CGRectMake(384, 871, 56, 56);
             channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
-            // self.coverImage.frame = CGRectMake(0.0f, 0.0f, 927.0f, 384.0f);
+           //  self.coverImage.frame = CGRectMake(0.0f, 0.0f, 927.0f, 384.0f);
             }
         
         //  self.channelThumbnailCollectionView.collectionViewLayout = channelsLayout;
@@ -758,78 +765,39 @@ SYNImagePickerControllerDelegate>
         SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
         cell = createCell;
     }
-    /*
-     else if (self.isUserProfile  && indexPath.row == 0 && [collectionView isEqual:self.subscriptionThumbnailCollectionView]) {
-     
-     SYNChannelCreateNewCell *searchCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelSearchCell" forIndexPath: indexPath];
-     cell = searchCell;
-     }*/
     
     else if([collectionView isEqual:self.channelThumbnailCollectionView])
     {
         Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-        /*
-         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
-         placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
-         options: SDWebImageRetryFailed];
-         */
+        
         [channelThumbnailCell setChannel:channel];
         [channelThumbnailCell setTitle: channel.title];
         [channelThumbnailCell setHiddenForFollowButton:YES];
-        [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
-        
-        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
-        
-     //   NSLog(@"%ld", (long)channel.totalVideosValue);
-        
+        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
         [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
-
-        
-        cell = channelThumbnailCell;
-        
-    }else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView]){
-        
+        [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+    }
+    else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
+    {
+        if (self.tmpProfile == MyOwnProfile) {
+            [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+        }
+        else if(self.tmpProfile == OtherUsersProfile)
+        {
+            [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+        }
+     
         Channel *channel = _arrDisplayFollowing[indexPath.item];
-        
-        
         [channelThumbnailCell setChannel:channel];
         [channelThumbnailCell setTitle: channel.title];
-        [channelThumbnailCell setFollowButtonLabel:self.tmpProfile];
         [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
         [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
-
-        /*
-         [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
-         placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
-         options: SDWebImageRetryFailed];
-         */
-        
-        
         [channelThumbnailCell setTitle:channel.title];
-        if (channel.favouritesValue)
-        {
-            if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
-            {
-                /*
-                 [channelThumbnailCell setChannelTitle: [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ];*/
-            }
-            else
-            {/*
-              [channelThumbnailCell setChannelTitle:
-              [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)]];*/
-            }
-        }
-        else
-        {
-            //[channelThumbnailCell setChannelTitle: channel.title];
-        }
-        
-        
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
-        cell = channelThumbnailCell;
     }
     
-    
+    cell = channelThumbnailCell;
+
     return cell;
 }
 
@@ -1105,8 +1073,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         {
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
             self.coverImage.transform = move;
-            self.containerViewIPad.transform = move;
             self.moreButton.transform = move;
+            self.containerViewIPad.transform = move;
 
             /*
              self.profileImageView.transform = move;
@@ -1547,7 +1515,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(NSArray*)arrDisplayFollowing
 {
-    
     _arrDisplayFollowing =[self.channelOwner.subscriptions array];
     
     if(self.currentSearchTerm.length > 0)
@@ -1563,7 +1530,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         }];
         
         _arrDisplayFollowing = [_arrDisplayFollowing filteredArrayUsingPredicate:searchPredicate];
-        
     }
     
     
