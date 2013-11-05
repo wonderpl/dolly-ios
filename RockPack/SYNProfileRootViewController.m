@@ -367,6 +367,8 @@ SYNImagePickerControllerDelegate>
     }
     
     self.deletionModeActive = NO;
+    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+
 }
 
 
@@ -760,10 +762,15 @@ SYNImagePickerControllerDelegate>
     
     SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
     
+    
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
+        
+        
         SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
         cell = createCell;
+        
+        
     }
     
     else if([collectionView isEqual:self.channelThumbnailCollectionView])
@@ -776,6 +783,8 @@ SYNImagePickerControllerDelegate>
         [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
         [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+        cell = channelThumbnailCell;
+
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
@@ -794,9 +803,10 @@ SYNImagePickerControllerDelegate>
         [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
         [channelThumbnailCell setTitle:channel.title];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+        cell = channelThumbnailCell;
+
     }
     
-    cell = channelThumbnailCell;
 
     return cell;
 }
@@ -1014,13 +1024,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
-
-    /*
-     NSLog(@"main %f", self.mainScrollView.contentOffset.y);
-     NSLog(@"sub %f", self.subscriptionThumbnailCollectionView.contentOffset.y);
-     NSLog(@"chan %f", self.channelThumbnailCollectionView.contentOffset.y);
-     */
-    
  
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
@@ -1061,13 +1064,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 self.coverImage.transform = move;
 
             }
-            
-
-                
                 [self moveNameLabelWithOffset:offset];
-                
-                
-
         }
         else
         {
@@ -1444,14 +1441,10 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 #pragma mark - Searchbar delegates
 -(void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"searchBarBookmarkButtonClicked");
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    
-    NSLog(@" searchBarCancelButtonClicked");
-    
     [searchBar resignFirstResponder];
 }
 
@@ -1459,7 +1452,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@" searchBarResultsListButtonClicked ");
     
 }
 
@@ -1468,14 +1460,11 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
-    
-   // NSLog(@"%@", self.currentSearchTerm);
-    
     [self.subscriptionThumbnailCollectionView reloadData];
  
     [self.followingSearchBar resignFirstResponder];
     
-    self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, self.followingSearchBar.frame.origin.x+44);
+   // self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, self.followingSearchBar.frame.origin.x+44);
     
 }
 

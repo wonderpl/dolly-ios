@@ -79,7 +79,14 @@
         [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-        [self.boarderView.layer setBorderWidth:.5f];
+        
+        if (IS_RETINA) {
+            [self.boarderView.layer setBorderWidth:0.5f];
+        }
+        else{
+            [self.boarderView.layer setBorderWidth:1.0f];
+
+        }
         
     }
     
