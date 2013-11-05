@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SYNOnBoardingPopoverView.h"
+@import UIKit;
 
 @interface SYNOnBoardingPopoverQueueController : UIViewController
 
--(void)addPopover:(SYNOnBoardingPopoverView*)popoverView;
--(void)present;
+- (void) addPopover: (SYNOnBoardingPopoverView *) popoverView;
+- (void) present;
 + (id) queueController;
 
 @end

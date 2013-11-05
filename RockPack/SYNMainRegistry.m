@@ -6,18 +6,17 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
+#import "AppConstants.h"
 #import "Channel.h"
 #import "CoverArt.h"
+#import "FeedItem.h"
+#import "Genre.h"
 #import "NSDictionary+Validation.h"
 #import "SYNAppDelegate.h"
 #import "SYNMainRegistry.h"
-#import "VideoInstance.h"
-#import "Genre.h"
-#import "AppConstants.h"
-#import <CoreData/CoreData.h>
-#import "VideoInstance.h"
-#import "FeedItem.h"
 #import "Video.h"
+#import "VideoInstance.h"
+@import CoreData;
 
 
 @interface SYNMainRegistry ()

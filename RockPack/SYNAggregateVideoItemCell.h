@@ -8,7 +8,7 @@
 
 #import "SYNSocialActionsDelegate.h"
 #import "VideoInstance.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNAggregateVideoItemCell : UICollectionViewCell
 

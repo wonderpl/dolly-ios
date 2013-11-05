@@ -9,7 +9,7 @@
 #import "SDWebImageDownloaderOperation.h"
 #import "SDWebImageDecoder.h"
 #import "UIImage+GIF.h"
-#import <ImageIO/ImageIO.h>
+@import ImageIO;
 
 @interface SDWebImageDownloaderOperation ()
 

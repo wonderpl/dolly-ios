@@ -22,21 +22,21 @@
 #import "SYNAbstractViewController.h"
 #import "SYNAppDelegate.h"
 #import "SYNChannelDetailViewController.h"
-#import "SYNPopupMessageView.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNImplicitSharingController.h"
 #import "SYNMasterViewController.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "SYNOneToOneSharingController.h"
 #import "SYNPopoverBackgroundView.h"
+#import "SYNPopupMessageView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNSocialButton.h"
 #import "SYNVideoThumbnailWideCell.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
-#import "SYNOneToOneSharingController.h"
 #import "VideoInstance.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define kScrollContentOff 100.0f
 #define kScrollSpeedBoundary 550.0f

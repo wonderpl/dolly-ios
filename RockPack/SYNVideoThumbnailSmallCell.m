@@ -11,7 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIImage+Monochrome.h"
 #import "AppConstants.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define kNextPrevVideoCellAlpha 0.8f
 #define kCurrentVideoCellAlpha 1.0f

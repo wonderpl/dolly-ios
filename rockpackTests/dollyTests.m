@@ -13,7 +13,7 @@
 #import "SYNSearchRegistry.h"
 #import "SYNActivityViewController.h"
 #import "SYNNotification.h"
-#import <CoreData/CoreData.h>
+@import CoreData;
 
 @implementation dollyTests
 

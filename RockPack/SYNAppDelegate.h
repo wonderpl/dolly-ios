@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
 //
 
+#import "AppConstants.h"
 #import "SYNChannelManager.h"
 #import "SYNMainRegistry.h"
+#import "SYNNavigationManager.h"
 #import "SYNOAuth2Credential.h"
 #import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNRegistry.h"
@@ -15,10 +17,8 @@
 #import "SYNVideoQueue.h"
 #import "SYNViewStackManager.h"
 #import "User.h"
-#import "AppConstants.h"
-#import "SYNNavigationManager.h"
-#import <CoreData/CoreData.h>
-#import <UIKit/UIKit.h>
+@import CoreData;
+@import UIKit;
 
 #define kShowLoginPhase YES
 #define kUsingProductionAPI YES

@@ -12,7 +12,7 @@
 #import "SubGenre.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 // These layout offsets and font sizes have been eyeballed to compensate for font offset. May need tweaking.
 

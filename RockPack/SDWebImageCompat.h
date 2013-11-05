@@ -26,7 +26,7 @@
 #define UIImageView NSImageView
 #endif
 #else
-#import <UIKit/UIKit.h>
+@import UIKit;
 #endif
 
 #if OS_OBJECT_USE_OBJC

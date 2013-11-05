@@ -12,7 +12,7 @@
 //  appreciated but not required.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UncaughtExceptionHandler : NSObject
 {

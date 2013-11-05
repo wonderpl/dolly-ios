@@ -4,7 +4,7 @@
  *Copyright 2009 Peter Hosey. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /*This class converts dates to and from ISO 8601 strings. A good introduction to ISO 8601: <http://www.cl.cam.ac.uk/~mgk25/iso-time.html>
  *

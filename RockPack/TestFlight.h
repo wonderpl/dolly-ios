@@ -5,7 +5,7 @@
 //  Created by Jonathan Janzen on 06/11/11.
 //  Copyright 2011 TestFlight. All rights reserved.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #define TESTFLIGHT_SDK_VERSION @"2.0.0"
 #undef TFLog
 

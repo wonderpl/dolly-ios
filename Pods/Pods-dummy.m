@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+@import Foundation;
 @interface PodsDummy_Pods : NSObject
 @end
 @implementation PodsDummy_Pods

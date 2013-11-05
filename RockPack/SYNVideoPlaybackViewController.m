@@ -18,9 +18,9 @@
 #import "SYNProgressView.h"
 #import "SYNVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
-#import <CoreData/CoreData.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import <QuartzCore/CoreAnimation.h>
+@import CoreData;
+@import MediaPlayer;
 
 #define SHOW_SHUTTLE_DEBUG_COLOURS_
 #define SHOW_DEBUG_COLOURS_

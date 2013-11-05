@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to VideoInstance.h instead.
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 #import "AbstractCommon.h"
 
 extern const struct VideoInstanceAttributes {

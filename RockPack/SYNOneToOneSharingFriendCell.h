@@ -6,12 +6,11 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNOneToOneSharingFriendCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) IBOutlet UILabel* nameLabel;
-
 
 @end

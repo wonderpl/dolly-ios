@@ -23,9 +23,9 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "OWActivityView.h"
 #import "OWActivities.h"
+#import "OWActivityView.h"
+@import UIKit;
 
 @interface OWActivityViewController : UIViewController {
     UIView *_backgroundView;

@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNSocialButton : UIButton
 
 @property (nonatomic, strong) NSString* title;
 
+@property (nonatomic, weak) id dataItemLinked;
+
 - (void) setTitle: (NSString *) title
          andCount: (NSInteger) count;
-
-@property (nonatomic, weak) id dataItemLinked;
 
 @end

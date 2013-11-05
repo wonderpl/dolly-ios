@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNDiscoverViewController.h"
-#import "UIFont+SYNFont.h"
-#import "SYNDiscoverAutocompleteCell.h"
-#import "Genre.h"
-#import "SubGenre.h"
-#import "SYNSearchResultsViewController.h"
-#import "SYNDeviceManager.h"
 #import "AppConstants.h"
+#import "Genre.h"
+#import "SYNDeviceManager.h"
+#import "SYNDiscoverAutocompleteCell.h"
 #import "SYNDiscoverCategoriesCell.h"
-#import <QuartzCore/QuartzCore.h>
+#import "SYNDiscoverViewController.h"
+#import "SYNSearchResultsViewController.h"
+#import "SubGenre.h"
+#import "UIFont+SYNFont.h"
+@import QuartzCore;
 
 #define kAutocompleteTime 0.2
 

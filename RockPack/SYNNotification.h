@@ -6,8 +6,8 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "User.h"
+@import Foundation;
 
 typedef enum : NSInteger
 {

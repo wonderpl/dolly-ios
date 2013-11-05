@@ -7,7 +7,7 @@
 //
 
 #import "SYNAbstractViewController.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 
 

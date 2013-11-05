@@ -10,7 +10,7 @@
 #import "GAI.h"
 #import "SYNAccountSettingsAbout.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 
 @interface SYNAccountSettingsAbout ()

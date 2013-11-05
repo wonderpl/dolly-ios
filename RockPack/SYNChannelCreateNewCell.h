@@ -6,7 +6,7 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNChannelCreateNewCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UIView *bottomBarView;

@@ -6,7 +6,7 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNLoginErrorArrow : UIView {
     UIImageView* backgroundImageView;

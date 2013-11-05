@@ -10,7 +10,7 @@
 #import "GKImageCropViewController.h"
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 @interface GKImageCropViewController ()
 

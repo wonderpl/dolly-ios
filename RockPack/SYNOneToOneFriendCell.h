@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNOneToOneFriendCell : UITableViewCell
 
 @property (nonatomic, strong) UIView* customSeparatorView;
 @property (nonatomic) BOOL special;
+
 @end

@@ -14,7 +14,7 @@
 #import "SYNGenreTabViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SubGenre.h"
-#import <CoreData/CoreData.h>
+@import CoreData;
 
 @interface SYNGenreTabViewController ()
 

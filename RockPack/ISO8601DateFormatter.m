@@ -4,8 +4,8 @@
  *Copyright 2009 Peter Hosey. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
 #import "ISO8601DateFormatter.h"
+@import Foundation;
 
 #ifndef DEFAULT_TIME_SEPARATOR
 #	define DEFAULT_TIME_SEPARATOR ':'

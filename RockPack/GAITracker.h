@@ -5,7 +5,7 @@
  @copyright Copyright 2013 Google Inc. All rights reserved.
 */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /*!
  Google Analytics tracking interface. Obtain instances of this interface from

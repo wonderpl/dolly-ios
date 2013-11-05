@@ -6,18 +6,17 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "Channel.h"
 
 @interface SYNVideoQueue : NSObject
 
-@property (nonatomic, strong) Channel* currentlyCreatingChannel;
+@property (nonatomic, strong) Channel *currentlyCreatingChannel;
 @property (nonatomic, readonly) BOOL isEmpty;
 
-+(id)queue;
++ (id) queue;
 
--(BOOL)videoInstanceIsAddedToChannel:(VideoInstance*)videoInstance;
-
+- (BOOL) videoInstanceIsAddedToChannel: (VideoInstance *) videoInstance;
 
 @end

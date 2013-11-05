@@ -11,7 +11,7 @@
 // iPhone Developer's Cookbook, 6.x Edition
 // BSD License, Use at your own risk
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #define IFPGA_NAMESTRING                @"iFPGA"
 

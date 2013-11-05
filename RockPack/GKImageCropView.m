@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Aurora Apps. All rights reserved.
 //
 
-#import "GKImageCropView.h"
-#import "GKImageCropOverlayView.h"
-#import "GKResizeableCropOverlayView.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "GKImageCropOverlayView.h"
+#import "GKImageCropView.h"
+#import "GKResizeableCropOverlayView.h"
+@import QuartzCore;
 
 #define rad(angle) ((angle) / 180.0 * M_PI)
 

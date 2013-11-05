@@ -1,5 +1,4 @@
-#import <UIKit/UIKit.h>
-#import <UIKit/UIPopoverBackgroundView.h>
+@import UIKit;
 
 @interface SYNAccountSettingsPopoverBackgroundView : UIPopoverBackgroundView
 {    

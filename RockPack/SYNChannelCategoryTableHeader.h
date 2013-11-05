@@ -6,7 +6,7 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNChannelCategoryTableHeader : UIView
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

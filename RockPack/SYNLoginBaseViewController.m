@@ -20,8 +20,8 @@
 #import "UIDevice+Hardware.h"
 #import "UIInterpolatingMotionEffect+DualAxis.h"
 #import "User.h"
-#import <Accounts/Accounts.h>
 #import <FacebookSDK/FacebookSDK.h>
+@import Accounts;
 
 @interface SYNLoginBaseViewController ()
 

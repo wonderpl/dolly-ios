@@ -23,8 +23,8 @@
 // THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
 #import "OWActivity.h"
+@import UIKit;
 
 @interface OWActivityView : UIView <UIScrollViewDelegate> {
     UIPageControl *_pageControl;

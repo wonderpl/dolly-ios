@@ -7,7 +7,7 @@
 //
 
 #import "SYNCaution.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNCautionMessageView : UIView
 

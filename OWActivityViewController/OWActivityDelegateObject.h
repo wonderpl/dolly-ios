@@ -23,8 +23,8 @@
 // THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import <MessageUI/MessageUI.h>
+@import Foundation;
+@import MessageUI;
 
 @interface OWActivityDelegateObject : NSObject <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 

@@ -6,11 +6,11 @@
  * file that was distributed with this source code.
  */
 
-#import "UIImageView+WebCache.h"
-#import "objc/runtime.h"
 #import "SDWebImageManager.h"
 #import "UIImage+Monochrome.h"
-#import <QuartzCore/QuartzCore.h>
+#import "UIImageView+WebCache.h"
+#import "objc/runtime.h"
+@import QuartzCore;
 
 static char operationKey;
 

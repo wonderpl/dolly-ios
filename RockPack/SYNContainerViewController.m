@@ -27,7 +27,7 @@
 #import "SYNProfileRootViewController.h"
 #import "SYNTrackableFrameView.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 
 #define VIEW_CONTROLLER_TRANSITION_DURATION 0.4

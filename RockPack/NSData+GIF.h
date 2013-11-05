@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Dailymotion. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface NSData (GIF)
 

@@ -24,7 +24,7 @@
 //
 
 #import "Appirater.h"
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class OWActivityViewController;
 @class OWActivity;

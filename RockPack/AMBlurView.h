@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Arctic Minds Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface AMBlurView : UIView
 

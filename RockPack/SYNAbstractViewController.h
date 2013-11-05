@@ -18,8 +18,8 @@
 #import "SYNTabViewController.h"
 #import "SYNTabViewDelegate.h"
 #import "SYNSocialActionsDelegate.h"
-#import <CoreData/CoreData.h>
-#import <UIKit/UIKit.h>
+@import CoreData;
+@import UIKit;
 
 typedef void (^SYNShareCompletionBlock)(void);
 

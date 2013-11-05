@@ -34,9 +34,9 @@
  * Copyright 2012 Arash Payan. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
 #import "AppiraterDelegate.h"
-#import <StoreKit/StoreKit.h>
+@import Foundation;
+@import StoreKit;
 
 extern NSString *const kAppiraterFirstUseDate;
 extern NSString *const kAppiraterUseCount;
