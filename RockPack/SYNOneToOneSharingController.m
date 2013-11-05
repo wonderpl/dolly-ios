@@ -9,6 +9,7 @@
 #import "AppConstants.h"
 #import "Channel.h"
 #import "Friend.h"
+#import "GAI.h"
 #import "OWActivities.h"
 #import "OWActivityView.h"
 #import "OWActivityViewController.h"
@@ -19,15 +20,13 @@
 #import "SYNFriendThumbnailCell.h"
 #import "SYNOneToOneFriendCell.h"
 #import "SYNOneToOneSharingController.h"
+#import "SYNOneToOneSharingFriendCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "VideoInstance.h"
-#import "SYNAppDelegate.h"
-#import "SYNOneToOneSharingFriendCell.h"
-#import <AddressBook/AddressBook.h>
-#import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
-#import "GAI.h"
+@import AddressBook;
+@import QuartzCore;
 
 #define kOneToOneSharingViewId	  @"kOneToOneSharingViewId"
 #define kNumberOfEmptyRecentSlots 5

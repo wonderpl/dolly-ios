@@ -7,7 +7,7 @@
 //
 
 #import "NSData+GIF.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UIImage (GIF)
 

@@ -6,9 +6,9 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
-@interface SYNFeedMessagesView : UIView
+@interface SYNPopupMessageView : UIView
 
 + (id) withMessage: (NSString*) message;
 

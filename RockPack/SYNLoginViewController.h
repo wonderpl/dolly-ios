@@ -8,10 +8,10 @@
 
 
 #import "GKImagePicker.h"
-#import <UIKit/UIKit.h>
-#import "SYNOAuth2Credential.h"
 #import "SYNAppDelegate.h"
 #import "SYNLoginBaseViewController.h"
+#import "SYNOAuth2Credential.h"
+@import UIKit;
 
 
 @interface SYNLoginViewController : SYNLoginBaseViewController

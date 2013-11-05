@@ -22,7 +22,7 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="Container View">
                     <rect key="frame" x="97" y="0.0" width="927" height="768"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="89" userLabel="Video Overlay View">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>

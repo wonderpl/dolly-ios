@@ -4,7 +4,7 @@
  @copyright Copyright 2011 Google Inc. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 typedef NS_ENUM(NSUInteger, GAILogLevel) {
   kGAILogLevelNone = 0,

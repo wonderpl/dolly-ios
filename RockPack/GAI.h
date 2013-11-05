@@ -5,10 +5,10 @@
  @copyright Copyright 2013 Google Inc. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
 #import "GAILogger.h"
-#import "GAITracker.h"
 #import "GAITrackedViewController.h"
+#import "GAITracker.h"
+@import Foundation;
 
 /*! Google Analytics product string.  */
 extern NSString *const kGAIProduct;

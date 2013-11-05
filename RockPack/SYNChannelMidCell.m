@@ -14,7 +14,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIImage+Tint.h"
 #import "UIImageView+WebCache.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define SHOW_DESCRIPTION_AMOUNT 225.0f
 

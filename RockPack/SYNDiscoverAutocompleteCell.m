@@ -76,6 +76,7 @@
     
     CGRect newFrame = self.textLabel.frame;
     
+    
     newFrame.size.width = 250.0f;
     
     newFrame.origin.x = 52.0f;

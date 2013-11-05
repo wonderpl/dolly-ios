@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to User.h instead.
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 #import "ChannelOwner.h"
 
 extern const struct UserAttributes {

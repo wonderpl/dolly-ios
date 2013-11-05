@@ -7,7 +7,7 @@
 //
 
 #import "AMBlurView.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 @interface AMBlurView ()
 

@@ -25,7 +25,7 @@
 //
 
 #import "OWActivity.h"
-#import <Social/Social.h>
+@import Social;
 
 @interface OWSinaWeiboActivity : OWActivity
 

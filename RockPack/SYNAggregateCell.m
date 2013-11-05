@@ -7,13 +7,11 @@
 //
 
 #import "SYNAggregateCell.h"
-#import "UIColor+SYNColor.h"
-#import "UIFont+SYNFont.h"
-
 #import "SYNAggregateChannelCell.h"
 #import "SYNAggregateVideoCell.h"
-
-#import <QuartzCore/QuartzCore.h>
+#import "UIColor+SYNColor.h"
+#import "UIFont+SYNFont.h"
+@import QuartzCore;
 
 #define STANDARD_BUTTON_CAPACITY 10
 

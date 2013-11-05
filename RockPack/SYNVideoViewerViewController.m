@@ -6,6 +6,8 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
+#import "AMBlurView.h"
+#import "Appirater.h"
 #import "BBCyclingLabel.h"
 #import "Channel.h"
 #import "ChannelCover.h"
@@ -16,6 +18,8 @@
 #import "SYNAbstractViewController.h"
 #import "SYNChannelDetailViewController.h"
 #import "SYNDeviceManager.h"
+#import "SYNFacebookManager.h"
+#import "SYNImplicitSharingController.h"
 #import "SYNMasterViewController.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPassthroughView.h"
@@ -28,12 +32,8 @@
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
-#import "SYNFacebookManager.h"
 #import "VideoInstance.h"
-#import "SYNImplicitSharingController.h"
-#import <MediaPlayer/MediaPlayer.h>
-#import "Appirater.h"
-#import "AMBlurView.h"
+@import MediaPlayer;
 
 @interface SYNVideoViewerViewController () <UIGestureRecognizerDelegate>
 

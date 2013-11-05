@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <objc/runtime.h>
 #import "UIImage+Monochrome.h"
+#import <objc/runtime.h>
+@import UIKit;
 
 static char const * const ObjectKey = "MonochromeImage";
 

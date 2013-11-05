@@ -12,7 +12,7 @@
 //  {"access_token": "948dc75279", "token_type": "bearer", "expires_in": 3600, "refresh_token": "7b4eb06f49"}
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 // Number of seconds before the actual expiry of the token to consider it expired
 // this is effectively anticipating latency in the network

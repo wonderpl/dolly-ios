@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Aurora Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface GKCropBorderView : UIView
 

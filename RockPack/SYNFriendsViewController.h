@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SYNAbstractViewController.h"
+@import UIKit;
 
 @interface SYNFriendsViewController : SYNAbstractViewController <UITextFieldDelegate>
 

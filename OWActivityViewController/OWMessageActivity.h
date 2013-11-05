@@ -24,7 +24,7 @@
 //
 
 #import "OWActivity.h"
-#import <MessageUI/MessageUI.h>
+@import MessageUI;
 
 @interface OWMessageActivity : OWActivity
 

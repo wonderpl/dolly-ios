@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SYNAppDelegate.h"
+@import UIKit;
 
 int main(int argc, char *argv[])
 {

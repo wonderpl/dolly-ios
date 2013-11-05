@@ -6,9 +6,9 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "SYNTabViewDelegate.h"
 #import "SYNTabView.h"
+#import "SYNTabViewDelegate.h"
+@import UIKit;
 
 
 @class Genre;

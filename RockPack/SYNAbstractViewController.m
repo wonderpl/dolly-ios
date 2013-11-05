@@ -10,7 +10,6 @@
 //  To keep the code as DRY as possible, we put as much common stuff in here as possible
 
 #import "AppConstants.h"
-#import "AudioToolbox/AudioToolbox.h"
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "ChannelOwner.h"
@@ -27,15 +26,17 @@
 #import "SYNImplicitSharingController.h"
 #import "SYNMasterViewController.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "SYNOneToOneSharingController.h"
 #import "SYNPopoverBackgroundView.h"
+#import "SYNPopupMessageView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNSocialButton.h"
 #import "SYNVideoThumbnailWideCell.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
-#import "SYNOneToOneSharingController.h"
 #import "VideoInstance.h"
-#import <QuartzCore/QuartzCore.h>
+@import AudioToolbox;
+@import QuartzCore;
 
 #define kScrollContentOff 100.0f
 #define kScrollSpeedBoundary 550.0f
@@ -60,6 +61,7 @@
 @property (nonatomic, assign) CGPoint endDraggingPoint;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
+@property (nonatomic, strong) SYNPopupMessageView* emptyGenreMessageView;
 @property (nonatomic, assign) ScrollingDirection *scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
 
@@ -1086,5 +1088,47 @@
     }
 }
 
+
+- (void) displayPopupMessage: (NSString*) messageKey
+                  withLoader: (BOOL) isLoader
+{
+    if (self.emptyGenreMessageView)
+    {
+        [self.emptyGenreMessageView removeFromSuperview];
+        self.emptyGenreMessageView = nil;
+    }
+    
+    self.emptyGenreMessageView = [SYNPopupMessageView withMessage:NSLocalizedString(messageKey ,nil) andLoader:isLoader];
+    
+    CGRect messageFrame = self.emptyGenreMessageView.frame;
+    messageFrame.origin.x = (self.view.frame.size.width * 0.5) - (messageFrame.size.width * 0.5);
+    messageFrame.origin.y = (self.view.frame.size.height * 0.5) - (messageFrame.size.height * 0.5) - 20.0f;
+    
+    messageFrame = CGRectIntegral(messageFrame);
+    self.emptyGenreMessageView.frame = messageFrame;
+    self.emptyGenreMessageView.autoresizingMask =
+    UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+    
+    [self.view addSubview: self.emptyGenreMessageView];
+}
+
+- (void) removePopupMessage
+{
+    if (!self.emptyGenreMessageView)
+        return;
+    
+    [self.emptyGenreMessageView removeFromSuperview];
+    
+    /* OPTIONAL
+     __weak SYNFeedRootViewController* wself = self;
+     [UIView animateWithDuration:0.5f
+     animations:^{
+     wself.emptyGenreMessageView.transform = CGAffineTransformScale( wself.emptyGenreMessageView.transform, 0.8f, 0.8f);
+     wself.emptyGenreMessageView.alpha = 0.0f;
+     } completion:^(BOOL finished) {
+     [wself.emptyGenreMessageView removeFromSuperview];
+     }];
+     */
+}
 
 @end

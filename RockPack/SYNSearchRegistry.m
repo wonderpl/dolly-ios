@@ -14,7 +14,7 @@
 #import "SYNSearchRegistry.h"
 #import "Video.h"
 #import "VideoInstance.h"
-#import <AddressBook/AddressBook.h>
+@import AddressBook;
 
 @implementation SYNSearchRegistry
 

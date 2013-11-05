@@ -37,11 +37,9 @@
 */
 
 #ifdef    __OBJC__
-#import <Foundation/NSArray.h>
-#import <Foundation/NSError.h>
-#import <Foundation/NSObjCRuntime.h>
-#import <Foundation/NSRange.h>
-#import <Foundation/NSString.h>
+
+@import Foundation;
+
 #endif // __OBJC__
 
 #include <limits.h>

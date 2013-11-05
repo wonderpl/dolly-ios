@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -14,19 +14,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CREATE NEW PACK" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VDA-cz-Gkg" userLabel="Title Label">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CREATE NEW PACK" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
                         <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="256" id="R9W-18-7Cm"/>
+                            <constraint firstAttribute="height" constant="44" id="gCT-W2-nv7"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.15686274510000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" id="p9B-3P-4cn" userLabel="Line">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9B-3P-4cn" userLabel="Line">
                         <rect key="frame" x="0.0" y="43" width="256" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.66721270161290325" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="f8s-kI-gG1"/>
+                        </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="R2U-bh-bl3" userLabel="Arrow Image View">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2U-bh-bl3" userLabel="Arrow Image View">
                         <rect key="frame" x="287" y="17" width="34" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -34,11 +41,18 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="p9B-3P-4cn" secondAttribute="trailing" id="4d8-P5-e94"/>
+                <constraint firstAttribute="bottom" secondItem="p9B-3P-4cn" secondAttribute="bottom" id="JYm-9x-3Cr"/>
+                <constraint firstItem="p9B-3P-4cn" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" id="NbB-Je-yG6"/>
+                <constraint firstAttribute="centerX" secondItem="VDA-cz-Gkg" secondAttribute="centerX" id="VLa-NM-Rp5"/>
+                <constraint firstAttribute="centerY" secondItem="VDA-cz-Gkg" secondAttribute="centerY" id="vbD-gP-aGn"/>
+            </constraints>
             <size key="customSize" width="332" height="67"/>
             <connections>
                 <outlet property="arrow" destination="R2U-bh-bl3" id="F5w-V6-8gv"/>
                 <outlet property="label" destination="VDA-cz-Gkg" id="Unb-AB-PbO"/>
-                <outlet property="line" destination="p9B-3P-4cn" id="b4b-82-amC"/>
+                <outlet property="separator" destination="p9B-3P-4cn" id="89E-GU-cSa"/>
             </connections>
         </collectionViewCell>
     </objects>

@@ -9,12 +9,12 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
+    @import UIKit;
     #import "UIDevice+Hardware.h"
     #import "GAI.h"
     #import "GAIDictionaryBuilder.h"
     #import "GAIFields.h"
-    #import <Foundation/Foundation.h>
+    @import Foundation;
 #endif
 
 #ifdef DEBUG

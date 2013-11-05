@@ -6,12 +6,12 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNGenreTabView.h"
 #import "Genre.h"
-#import "SubGenre.h"
 #import "SYNGenreItemView.h"
+#import "SYNGenreTabView.h"
+#import "SubGenre.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define kSecondaryTabsOffset 30.0
 

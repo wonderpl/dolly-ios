@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Aurora Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "GKCropBorderView.h"
 #import "GKImageCropOverlayView.h"
+@import UIKit;
 
 typedef struct {
     int widhtMultiplyer;

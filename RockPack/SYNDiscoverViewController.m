@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNDiscoverViewController.h"
-#import "UIFont+SYNFont.h"
-#import "SYNDiscoverAutocompleteCell.h"
-#import "Genre.h"
-#import "SubGenre.h"
-#import "SYNSearchResultsViewController.h"
-#import "SYNDeviceManager.h"
 #import "AppConstants.h"
+#import "Genre.h"
+#import "SYNDeviceManager.h"
+#import "SYNDiscoverAutocompleteCell.h"
 #import "SYNDiscoverCategoriesCell.h"
-#import <QuartzCore/QuartzCore.h>
+#import "SYNDiscoverViewController.h"
+#import "SYNSearchResultsViewController.h"
+#import "SubGenre.h"
+#import "UIFont+SYNFont.h"
+@import QuartzCore;
 
 #define kAutocompleteTime 0.2
 
@@ -51,10 +51,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) NSDictionary* colorMapForCells;
 
-@property (nonatomic, strong) IBOutlet UIView* loadingPanelView;
 
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
+
+@property (nonatomic, strong) Genre* popularGenre;
 
 @end
 
@@ -74,6 +75,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.autocompleteTableView.hidden = YES;
     
+    // change the BG color of the text field inside the searcBar
+    UITextField *txfSearchField = [self.searchBar valueForKey:@"_searchField"];
+    if(txfSearchField)
+        txfSearchField.backgroundColor = [UIColor colorWithRed: (224.0f / 255.0f)
+                                                         green: (224.0f / 255.0f)
+                                                          blue: (224.0f / 255.0f)
+                                                         alpha: 1.0f];
+    
     
     // == Set the Collection View's Cells == //
     
@@ -92,18 +101,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     
-    if(IS_IPAD)
-    {
-        [self addChildViewController: self.searchResultsController]; // containment
-        [self.containerView addSubview: self.searchResultsController.view];
-        
-        CGRect sResRect = self.searchResultsController.view.frame;
-        sResRect.size = self.containerView.frame.size;
-        self.searchResultsController.view.frame = sResRect;
-    }
     
     
-    self.loadingPanelView.layer.cornerRadius = 13.0f;
     
     // self.loadingPanelView.hidden = NO; // hide by default and only show when there are no categories
     
@@ -125,38 +124,41 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     
-    
+    SubGenre* popularSubGenre;
     // probably the database is cold so need to reload everything
     if(genresFetchedArray.count == 0)
     {
       
-        Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-        popularGenre.uniqueId = @"9090";
-        popularGenre.name = [NSString stringWithString:kPopularGenreName];
-        popularGenre.priorityValue = 100000;
+        _popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
+        _popularGenre.uniqueId = @"9090";
+        _popularGenre.name = [NSString stringWithString:kPopularGenreName];
+        _popularGenre.priorityValue = 100000;
         
-        SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
+        
+        popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
         popularSubGenre.uniqueId = @"9091";
         popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
         popularSubGenre.priorityValue = 100000;
         
         // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
-        [popularGenre.subgenresSet addObject:popularSubGenre];
+        [_popularGenre.subgenresSet addObject:popularSubGenre];
         
-        if(!popularGenre)
+        if(!_popularGenre)
             return;
         
         [appDelegate.mainManagedObjectContext save:&error];
         
-        
-        self.loadingPanelView.hidden = NO;
+        [self displayPopupMessage: NSLocalizedString(@"feed_screen_empty_message", nil)
+                       withLoader: YES];
         
         [self loadCategories];
         
     }
     else
     {
-        // housekeeping
+        _popularGenre = (Genre*)genresFetchedArray[0];
+        popularSubGenre = (SubGenre*)_popularGenre.subgenres[0];
+        // housekeeping (remove duplicates)
         if(genresFetchedArray.count > 1)
         {
             for (int i = 1; i < genresFetchedArray.count; i++)
@@ -167,17 +169,33 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             }
         }
         
-        [self fetchCategories];
+        [self fetchAndDisplayCategories];
         
         [self loadCategories];
         
+        
     }
     
-    
-    
-    [self.categoriesCollectionView reloadData];
-    
-    // set the panel's round corners
+    // you want to load the search display controller only for iPad, on iPhone in slides in as a navigation
+    if(IS_IPAD)
+    {
+        [self addChildViewController: self.searchResultsController];
+        [self.containerView addSubview: self.searchResultsController.view];
+        
+        CGRect sResRect = self.searchResultsController.view.frame;
+        sResRect.size = self.containerView.frame.size;
+        self.searchResultsController.view.frame = sResRect;
+        
+        // this should always be true since we are either creating it on the fly or it is in DB already
+        if(popularSubGenre)
+        {
+            [self.searchResultsController searchForGenre:popularSubGenre.name];
+        }
+        else
+        {
+            AssertOrLog(@"Popular SubGenre was not created at this stage...");
+        }
+    }
     
     
     
@@ -187,7 +205,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 #pragma mark - Data Retrieval
 
-- (void) fetchCategories
+- (void) fetchAndDisplayCategories
 {
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
@@ -228,6 +246,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
     self.colorMapForCells = [NSDictionary dictionaryWithDictionary:mutDictionary];
     
+    [self.categoriesCollectionView reloadData];
+    
+    
 }
 
 - (void) loadCategories
@@ -241,16 +262,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             
         } completionBlock:^(BOOL success) {
             
-            [self fetchCategories];
+            [self removePopupMessage];
             
-            self.loadingPanelView.hidden = YES;
+            [self fetchAndDisplayCategories];
             
-            [self.categoriesCollectionView reloadData];
+            
             
         }];
         
         
     } onError:^(NSError* error) {
+        
+        [self removePopupMessage];
         
         DebugLog(@"%@", [error debugDescription]);
         
@@ -285,6 +308,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                             forIndexPath: indexPath];
     
     
+    // if we are on the last cell of the section, hide the separator line
+    categoryCell.separator.hidden = (BOOL)(indexPath.item == (currentGenre.subgenres.count - 1));
     categoryCell.backgroundColor = self.colorMapForCells[currentGenre.name];
     
     categoryCell.label.text = subgenre.name;
@@ -358,6 +383,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     [self closeAutocomplete];
+    [self.searchBar resignFirstResponder];
 }
 
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text

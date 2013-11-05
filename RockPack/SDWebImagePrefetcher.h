@@ -6,8 +6,8 @@
  * file that was distributed with this source code.
  */
 
-#import <Foundation/Foundation.h>
 #import "SDWebImageManager.h"
+@import Foundation;
 
 /**
  * Prefetch some URLs in the cache for future use. Images are downloaded in low priority.

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIGestureRecognizerSubclass.h>
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 // FIXME: Remove when this is no longer required
 @interface SYNTouchGestureRecognizer : UIGestureRecognizer

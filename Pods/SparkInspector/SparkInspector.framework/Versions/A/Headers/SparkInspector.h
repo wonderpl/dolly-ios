@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Foundry376. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class SparkServer;
 @class ExplorerNotificationState;

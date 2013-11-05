@@ -6,7 +6,8 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
 @class ALAsset;
 @class ALAssetsLibrary;
 

@@ -23,7 +23,7 @@
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 
 @interface SYNExistingCollectionsViewController ()

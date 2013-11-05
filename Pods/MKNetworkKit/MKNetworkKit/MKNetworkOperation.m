@@ -25,7 +25,7 @@
 
 #import "MKNetworkKit.h"
 
-#import <ImageIO/ImageIO.h>
+@import ImageIO;
 
 #ifdef __OBJC_GC__
 #error MKNetworkKit does not support Objective-C Garbage Collection
@@ -518,7 +518,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     
     // We need to not forget these
     theCopy.postDataEncodingHandler = [self.postDataEncodingHandler copy];
-    theCopy.cacheHeaders = [self.cacheHeaders copy];
+    theCopy.cacheHeaders = [self.cacheHeaders mutableCopy];
     
     return theCopy;
 }

@@ -9,7 +9,7 @@
 #import "SYNSoundPlayer.h"
 
 
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
 #import <CoreAudio/CoreAudioTypes.h>
 
 @implementation SYNSoundPlayer

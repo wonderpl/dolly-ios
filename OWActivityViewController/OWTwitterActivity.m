@@ -26,7 +26,7 @@
 #import "OWActivityViewController.h"
 #import "OWTwitterActivity.h"
 #import "SYNAppDelegate.h"
-#import <Twitter/Twitter.h>
+@import Twitter;
 
 @implementation OWTwitterActivity
 

@@ -10,7 +10,7 @@
 #import "SYNCautionMessageView.h"
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define CAUTION_VIEW_WIDTH		  320.0
 #define CAUTION_TITLE_FONT_SIZE	  17.0

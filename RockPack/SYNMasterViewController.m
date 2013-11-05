@@ -26,7 +26,7 @@
 #import "SYNVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define kMovableViewOffX -58
 

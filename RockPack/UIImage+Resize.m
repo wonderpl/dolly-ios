@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+Resize.h"
-#import <ImageIO/ImageIO.h>
+@import ImageIO;
 
 @implementation UIImage (Resize)
 

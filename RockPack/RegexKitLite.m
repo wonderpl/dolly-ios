@@ -39,12 +39,7 @@
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFString.h>
-#import <Foundation/NSArray.h>
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSError.h>
-#import <Foundation/NSException.h>
-#import <Foundation/NSNotification.h>
-#import <Foundation/NSRunLoop.h>
+@import Foundation;
 #ifdef    __OBJC_GC__
 #import <Foundation/NSGarbageCollector.h>
 #define RKL_STRONG_REF __strong

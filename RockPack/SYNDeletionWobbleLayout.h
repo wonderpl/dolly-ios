@@ -6,8 +6,8 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SYNIntegralCollectionViewFlowLayout.h"
+@import UIKit;
 
 @protocol SYNDeletionWobbleLayoutDelegate <UICollectionViewDelegateFlowLayout>
 

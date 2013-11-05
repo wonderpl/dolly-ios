@@ -10,8 +10,8 @@
 #import "SYNChannelCoverImageCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
-#import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+@import AVFoundation;
+@import AssetsLibrary;
 
 
 @interface SYNChannelCoverImageCell ()

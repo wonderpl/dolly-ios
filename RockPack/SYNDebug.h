@@ -12,6 +12,6 @@
 #define SYNLog(format...)
 #endif
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 void SYNDebug (const char *fileName, int lineNumber, NSString *format, ...);

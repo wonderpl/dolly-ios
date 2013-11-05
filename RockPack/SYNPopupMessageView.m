@@ -6,12 +6,12 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNFeedMessagesView.h"
+#import "SYNPopupMessageView.h"
 #import "UIFont+SYNFont.h"
 
 #define kSpinnerTextDistance 12.0
 
-@interface SYNFeedMessagesView () 
+@interface SYNPopupMessageView () 
 
 @property (nonatomic) BOOL isLoader;
 @property (nonatomic, strong) UIActivityIndicatorView* activityIndicatorView;
@@ -20,7 +20,7 @@
 @end
 
 
-@implementation SYNFeedMessagesView
+@implementation SYNPopupMessageView
 
 + (id) withMessage: (NSString*) message
 {
@@ -31,7 +31,7 @@
 + (id) withMessage: (NSString *) message
          andLoader: (BOOL) isLoader
 {
-    SYNFeedMessagesView* instance = [self withMessage: message];
+    SYNPopupMessageView* instance = [self withMessage: message];
     instance.isLoader = isLoader;
     return instance;
 }

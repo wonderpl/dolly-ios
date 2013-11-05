@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SYNSocialActionsDelegate.h"
+@import UIKit;
 
 @interface SYNSearchResultsCell : UICollectionViewCell
 

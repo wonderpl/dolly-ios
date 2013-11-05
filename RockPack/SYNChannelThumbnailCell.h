@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "Channel.h"
+@import UIKit;
 
 @protocol SYNChannelThumbnailCellDelegate <NSObject>
 

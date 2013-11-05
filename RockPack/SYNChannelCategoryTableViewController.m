@@ -15,7 +15,7 @@
 #import "SYNNetworkEngine.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 @interface SYNChannelCategoryTableViewController ()
 {
