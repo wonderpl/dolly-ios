@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,23 +29,33 @@
                             <constraint firstAttribute="height" constant="48" id="fgl-fS-WHf"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="iJN-TT-v7m" userLabel="Action Message Label">
-                        <rect key="frame" x="10" y="63" width="301" height="20"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJI-4Q-kVG" userLabel="User Thumbnail Button">
+                        <rect key="frame" x="136" y="10" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal">
+                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="iJN-TT-v7m" userLabel="Action Message Label">
+                        <rect key="frame" x="0.0" y="63" width="320" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Lku-bT-Rby"/>
-                            <constraint firstAttribute="width" constant="301" id="RZN-JH-UmV"/>
+                            <constraint firstAttribute="height" constant="20" id="bEE-Tr-5Lj"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="uwf-6l-aRn" userLabel="Channel Name Label">
-                        <rect key="frame" x="10" y="80" width="300" height="27"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="uwf-6l-aRn" userLabel="Channel Name Label">
+                        <rect key="frame" x="0.0" y="80" width="320" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="27" id="0nY-A1-yic"/>
-                            <constraint firstAttribute="width" constant="300" id="60M-XH-k1L"/>
+                            <constraint firstAttribute="height" constant="27" id="CnL-wT-BiH"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
@@ -58,7 +68,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.88716457201086962" green="0.35937751968318593" blue="0.31627091224758919" alpha="0.0" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MgI-bn-29y">
-                            <size key="itemSize" width="248" height="257"/>
+                            <size key="itemSize" width="320" height="257"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -69,31 +79,25 @@
                             <outlet property="delegate" destination="k4G-M4-KgY" id="I8a-Kf-Upl"/>
                         </connections>
                     </collectionView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJI-4Q-kVG" userLabel="User Thumbnail Button">
-                        <rect key="frame" x="136" y="10" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <state key="normal">
-                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <state key="highlighted">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="uwf-6l-aRn" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="80" id="1nE-wC-4Xd"/>
                 <constraint firstAttribute="centerX" secondItem="uo9-Lh-d7Y" secondAttribute="centerX" id="H1y-zC-KeQ"/>
-                <constraint firstAttribute="centerX" secondItem="uwf-6l-aRn" secondAttribute="centerX" id="HgE-M7-1s9"/>
+                <constraint firstItem="CJI-4Q-kVG" firstAttribute="top" secondItem="HQt-5K-LTL" secondAttribute="top" id="IoY-cN-sMt"/>
                 <constraint firstItem="HQt-5K-LTL" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="10" id="MSP-ui-qy9"/>
-                <constraint firstItem="iJN-TT-v7m" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="63" id="TCu-ka-HWt"/>
+                <constraint firstItem="iJN-TT-v7m" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="63" id="MXJ-j6-Zx2"/>
+                <constraint firstItem="CJI-4Q-kVG" firstAttribute="height" secondItem="HQt-5K-LTL" secondAttribute="height" id="Myp-vh-R8N"/>
+                <constraint firstItem="CJI-4Q-kVG" firstAttribute="leading" secondItem="HQt-5K-LTL" secondAttribute="leading" id="RQs-yg-zfl"/>
+                <constraint firstAttribute="trailing" secondItem="uwf-6l-aRn" secondAttribute="trailing" id="U0v-DS-Rpj"/>
+                <constraint firstAttribute="trailing" secondItem="iJN-TT-v7m" secondAttribute="trailing" id="VFV-jo-Jnk"/>
+                <constraint firstItem="uwf-6l-aRn" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="80" id="aiU-zI-FTR"/>
                 <constraint firstAttribute="centerX" secondItem="HQt-5K-LTL" secondAttribute="centerX" id="bxK-9m-hb6"/>
                 <constraint firstItem="uo9-Lh-d7Y" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="33" id="gHg-nT-lFu"/>
-                <constraint firstAttribute="centerX" secondItem="iJN-TT-v7m" secondAttribute="centerX" id="yvf-aV-fAq"/>
+                <constraint firstItem="CJI-4Q-kVG" firstAttribute="width" secondItem="HQt-5K-LTL" secondAttribute="width" id="hNy-HO-MVk"/>
+                <constraint firstItem="uwf-6l-aRn" firstAttribute="leading" secondItem="k4G-M4-KgY" secondAttribute="leading" id="pa6-Hu-OXb"/>
+                <constraint firstItem="iJN-TT-v7m" firstAttribute="leading" secondItem="k4G-M4-KgY" secondAttribute="leading" id="v04-vo-8az"/>
             </constraints>
             <size key="customSize" width="353" height="261"/>
             <connections>
