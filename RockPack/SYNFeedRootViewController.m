@@ -620,13 +620,11 @@ typedef void(^FeedDataErrorBlock)(void);
 
 
 - (CGSize)	collectionView: (UICollectionView *) collectionView
-                   layout: (UICollectionViewLayout *) collectionViewLayout
-   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
+                    layout: (UICollectionViewLayout *) collectionViewLayout
+    sizeForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
     CGSize size;
-    
-//    size.width = self.feedCollectionView.frame.size.width;
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
@@ -635,6 +633,7 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     else
     {
+        size.width = IS_IPAD ? 360.0f : 248.0f;
         size.height = IS_IPAD ? 330.0f : 264.0f;
     }
     
@@ -725,9 +724,10 @@ typedef void(^FeedDataErrorBlock)(void);
         // Special case, remember the first section view
         headerSupplementaryView.viewControllerDelegate = self;
         headerSupplementaryView.sectionTitleLabel.text = sectionText.uppercaseString;
+        
         if ([SYNDeviceManager.sharedInstance isLandscape])
         {
-            headerSupplementaryView.sectionView.image = [UIImage imageNamed:@"PanelDay"];
+            headerSupplementaryView.sectionView.image = [UIImage imageNamed: @"PanelDay"];
         }
         else
         {
