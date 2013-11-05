@@ -9,7 +9,7 @@
 #import "AppConstants.h"
 #import "SYNCoverThumbnailCell.h"
 #import "UIImageView+WebCache.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 @interface SYNCoverThumbnailCell ()
 

@@ -9,7 +9,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPaddedUITextField.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 typedef enum
 {

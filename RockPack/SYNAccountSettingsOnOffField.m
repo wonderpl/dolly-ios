@@ -8,7 +8,7 @@
 
 #import "SYNAccountSettingsOnOffField.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 

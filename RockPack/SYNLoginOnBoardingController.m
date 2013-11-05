@@ -12,7 +12,7 @@
 #import "SYNLoginOnBoardingController.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 
 @interface SYNLoginOnBoardingController () <UIScrollViewDelegate>

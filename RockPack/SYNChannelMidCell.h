@@ -6,8 +6,8 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "Channel.h"
+@import UIKit;
 
 @protocol SYNChannelMidCellDelegate <NSObject>
 

@@ -8,7 +8,7 @@
 
 #import "SYNHomeSectionHeaderView.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/CoreAnimation.h>
+@import QuartzCore;
 
 
 @interface SYNHomeSectionHeaderView ()

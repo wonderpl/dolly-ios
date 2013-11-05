@@ -9,7 +9,7 @@
 #import "SYNUserThumbnailCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 @implementation SYNUserThumbnailCell
 

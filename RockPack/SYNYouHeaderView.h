@@ -6,24 +6,28 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SYNYouHeaderView : UIView {
-    UILabel* label;
-    UIView* textCompositeView;
-    UILabel* numberLabel;
-    UIImageView* backgroundImageView;
+    UILabel *label;
+    UIView *textCompositeView;
+    UILabel *numberLabel;
+    UIImageView *backgroundImageView;
 }
 
 @property (nonatomic, readonly) CGFloat currentHeight;
 @property (nonatomic, readonly) CGFloat currentWidth;
 
-+(id)headerViewForWidth:(CGFloat)width;
--(void)setTitle:(NSString *)title andNumber:(NSInteger)number;
++ (id) headerViewForWidth: (CGFloat) width;
 
--(void)setBackgroundImage:(UIImage*)backgroundImage;
+- (void) setTitle: (NSString *) title
+        andNumber: (NSInteger) number;
 
--(void)setFontSize:(CGFloat)pointSize;
+- (void) setBackgroundImage: (UIImage *) backgroundImage;
 
--(void) setColorsForText:(UIColor*)textColor parentheses:(UIColor*)parenthesesColor number:(UIColor*)numberColor;
+- (void) setFontSize: (CGFloat) pointSize;
+
+- (void) setColorsForText: (UIColor *) textColor
+              parentheses: (UIColor *) parenthesesColor
+                   number: (UIColor *) numberColor;
 @end

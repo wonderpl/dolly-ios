@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 // This class provides a way to make easy asynchronous requests to Google for
 // conversion pings. Use the code as follows:

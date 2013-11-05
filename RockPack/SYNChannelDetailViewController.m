@@ -42,9 +42,9 @@
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
-#import <AVFoundation/AVFoundation.h>
-#import <CoreImage/CoreImage.h>
-#import <QuartzCore/QuartzCore.h>
+@import AVFoundation;
+@import CoreImage;
+@import QuartzCore;
 
 @interface SYNChannelDetailViewController () <UITextViewDelegate,
                                               SYNImagePickerControllerDelegate,
@@ -52,7 +52,6 @@
                                               SYNChannelCategoryTableViewDelegate,
                                               SYNChannelCoverImageSelectorDelegate,
                                               SYNVideoThumbnailRegularCellDelegate>
-
 
 @property (nonatomic, assign)  CGPoint originalContentOffset;
 @property (nonatomic, assign)  CGPoint originalMasterControlsViewOrigin;

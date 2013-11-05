@@ -19,10 +19,10 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
-#import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <ImageIO/ImageIO.h>
-#import <QuartzCore/QuartzCore.h>
+@import AssetsLibrary;
+@import AVFoundation;
+@import ImageIO;
+@import QuartzCore;
 
 enum ChannelCoverSelectorState {
     kChannelCoverDefault = 0,

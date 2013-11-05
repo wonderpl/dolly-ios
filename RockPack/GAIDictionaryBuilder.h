@@ -4,7 +4,7 @@
  @copyright Copyright 2013 Google Inc. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /*!
  * Helper class to build a dictionary of hit parameters and values.

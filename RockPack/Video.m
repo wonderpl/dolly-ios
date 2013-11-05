@@ -2,7 +2,7 @@
 #import "NSDictionary+Validation.h"
 #import "SYNActivityManager.h"
 #import "Video.h"
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @implementation Video
 

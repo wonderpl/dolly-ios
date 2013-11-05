@@ -10,7 +10,7 @@
 #import "SYNSocialActionsDelegate.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 
 @interface SYNAggregateCell : UICollectionViewCell <NSObject, UICollectionViewDataSource, SYNSocialActionsDelegate>

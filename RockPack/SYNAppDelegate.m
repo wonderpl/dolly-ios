@@ -11,8 +11,9 @@
 #endif
 
 #import "Appirater.h"
-#import "ChannelOwner.h"
 #import "Channel.h"
+#import "ChannelOwner.h"
+#import "ExternalAccount.h"
 #import "GAI.h"
 #import "GoogleConversionPing.h"
 #import "NSObject+Blocks.h"
@@ -28,12 +29,11 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNVideoPlaybackViewController.h"
 #import "TestFlight.h"
-#import "ExternalAccount.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "UncaughtExceptionHandler.h"
-#import <sqlite3.h>
-#import <AVFoundation/AVFoundation.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <sqlite3.h>
+@import AVFoundation;
 
 @interface SYNAppDelegate () {
     BOOL enteredAppThroughNotification;

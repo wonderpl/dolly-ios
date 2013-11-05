@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "SYNSearchResultsCell.h"
 #import "SYNSocialActionsDelegate.h"
 #import "ChannelOwner.h"

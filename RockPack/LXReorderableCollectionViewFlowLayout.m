@@ -6,7 +6,7 @@
 //
 
 #import "LXReorderableCollectionViewFlowLayout.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define LX_FRAMES_PER_SECOND 60.0
 

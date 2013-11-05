@@ -25,7 +25,7 @@
 
 #import "MKNetworkKit.h"
 
-#import <ImageIO/ImageIO.h>
+@import ImageIO;
 
 #ifdef __OBJC_GC__
 #error MKNetworkKit does not support Objective-C Garbage Collection

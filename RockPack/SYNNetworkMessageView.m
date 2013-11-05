@@ -6,11 +6,10 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
+#import "SYNDeviceManager.h"
 #import "SYNNetworkMessageView.h"
-#import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
-#import "SYNDeviceManager.h"
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 @interface SYNNetworkMessageView ()
 {

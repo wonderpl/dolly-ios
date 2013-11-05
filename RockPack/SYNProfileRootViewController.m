@@ -6,15 +6,16 @@
 //  Copysubscriptions (c) Rockpack Ltd. All subscriptionss reserved.
 //
 
+#import "AppConstants.h"
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "GAI.h"
 #import "SYNChannelCreateNewCell.h"
 #import "SYNChannelDetailViewController.h"
 #import "SYNChannelMidCell.h"
+#import "SYNChannelSearchCell.h"
 #import "SYNChannelThumbnailCell.h"
 #import "SYNDeletionWobbleLayout.h"
-#import "SYNChannelSearchCell.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
@@ -25,8 +26,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
-#import <QuartzCore/QuartzCore.h>
-#import "AppConstants.h"
+@import QuartzCore;
 
 #define kInterRowMargin 1.0f
 #define PULL_THRESHOLD -285.0f

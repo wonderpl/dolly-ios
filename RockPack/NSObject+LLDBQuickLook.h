@@ -26,7 +26,7 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 // An informal protocol that objects can choose to implement if they will benefit from Quick Look debugging.
 // Default implementations are provided on NSObject to keep the debugger from barfing when it calls the selectors.

@@ -8,7 +8,7 @@
 
 #import "Video.h"
 #import "VideoInstance.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 typedef void (^SYNVideoIndexUpdater)(int);
 

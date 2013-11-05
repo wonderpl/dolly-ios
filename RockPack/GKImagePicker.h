@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Aurora Apps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @protocol GKImagePickerDelegate;
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SYNSearchResultsCell.h"
 #import "VideoInstance.h"
+@import UIKit;
 
 @interface SYNSearchResultsVideoCell : SYNSearchResultsCell
 

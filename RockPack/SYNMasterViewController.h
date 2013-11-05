@@ -7,13 +7,13 @@
 //
 
 
+
 #import "SYNAccountSettingsMainTableViewController.h"
 #import "SYNAccountSettingsPopoverBackgroundView.h"
 #import "SYNAppDelegate.h"
 #import "SYNContainerViewController.h"
-
 #import "SYNVideoViewerViewController.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 typedef void (^VideoOverlayDismissBlock)(void);
 
