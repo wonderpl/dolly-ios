@@ -1163,7 +1163,7 @@
 		BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */; };
 		BE458AF617E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */; };
 		BE458AF717E71BE000776B0D /* InstructionBackgroundPacks~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */; };
-		BE5D29EB17577E2800C00486 /* SYNFeedMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D29EA17577E2800C00486 /* SYNFeedMessagesView.m */; };
+		BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */; };
 		BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D02E9178B138B008053DC /* SYNUserThumbnailCell.m */; };
 		BE7D02EC178B13C3008053DC /* SYNUserThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7D02EB178B13C3008053DC /* SYNUserThumbnailCell.xib */; };
 		BE7D02F0178C0FEC008053DC /* SYNUserThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7D02EF178C0FEC008053DC /* SYNUserThumbnailCell~iphone.xib */; };
@@ -2795,8 +2795,8 @@
 		BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks@2x~iphone.png"; sourceTree = "<group>"; };
 		BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks~iphone.png"; sourceTree = "<group>"; };
 		BE53EE6017609587008360D2 /* Rockpack 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 4.xcdatamodel"; sourceTree = "<group>"; };
-		BE5D29E917577E2800C00486 /* SYNFeedMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedMessagesView.h; sourceTree = "<group>"; };
-		BE5D29EA17577E2800C00486 /* SYNFeedMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedMessagesView.m; sourceTree = "<group>"; };
+		BE5D29E917577E2800C00486 /* SYNPopupMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopupMessageView.h; sourceTree = "<group>"; };
+		BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopupMessageView.m; sourceTree = "<group>"; };
 		BE7D02E8178B138B008053DC /* SYNUserThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNUserThumbnailCell.h; sourceTree = "<group>"; };
 		BE7D02E9178B138B008053DC /* SYNUserThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNUserThumbnailCell.m; sourceTree = "<group>"; };
 		BE7D02EB178B13C3008053DC /* SYNUserThumbnailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNUserThumbnailCell.xib; sourceTree = "<group>"; };
@@ -5654,8 +5654,8 @@
 				BEBFD0911779F0F800C90544 /* SYNCaution.m */,
 				BEBFD0931779F25700C90544 /* SYNCautionMessageView.h */,
 				BEBFD0941779F25800C90544 /* SYNCautionMessageView.m */,
-				BE5D29E917577E2800C00486 /* SYNFeedMessagesView.h */,
-				BE5D29EA17577E2800C00486 /* SYNFeedMessagesView.m */,
+				BE5D29E917577E2800C00486 /* SYNPopupMessageView.h */,
+				BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */,
 				BE285DAE1725A23300D995AB /* SYNNetworkMessageView.h */,
 				BE285DAF1725A23300D995AB /* SYNNetworkMessageView.m */,
 			);
@@ -7834,7 +7834,7 @@
 				01D0998B17452A4000351C82 /* BBCyclingLabel.m in Sources */,
 				011BA5DD174D1EB700041A16 /* SYNCoverRightMoreView.m in Sources */,
 				BE0FF0321754C39D0088294F /* ISO8601DateFormatter.m in Sources */,
-				BE5D29EB17577E2800C00486 /* SYNFeedMessagesView.m in Sources */,
+				BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */,
 				1F356185175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m in Sources */,
 				BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */,
 				BE3983D11768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m in Sources */,

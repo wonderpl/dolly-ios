@@ -102,6 +102,11 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) addVideoAtIndexPath: (NSIndexPath *) indexPath
                withOperation: (NSString *) operation;
 
+- (void) displayPopupMessage: (NSString*) messageKey
+                  withLoader: (BOOL) isLoader;
+
+- (void) removePopupMessage;
+
 
 
 // Purchase

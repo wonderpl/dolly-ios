@@ -51,7 +51,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) NSDictionary* colorMapForCells;
 
-@property (nonatomic, strong) IBOutlet UIView* loadingPanelView;
 
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
@@ -103,8 +102,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
     
     
-    self.loadingPanelView.layer.cornerRadius = 13.0f;
-    
     // self.loadingPanelView.hidden = NO; // hide by default and only show when there are no categories
     
     // Check for existence of popular category
@@ -148,15 +145,15 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         [appDelegate.mainManagedObjectContext save:&error];
         
-        
-        self.loadingPanelView.hidden = NO;
+        [self displayPopupMessage: NSLocalizedString(@"feed_screen_empty_message", nil)
+                       withLoader: YES];
         
         [self loadCategories];
         
     }
     else
     {
-        // housekeeping
+        // housekeeping (remove duplicates)
         if(genresFetchedArray.count > 1)
         {
             for (int i = 1; i < genresFetchedArray.count; i++)
@@ -172,8 +169,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [self loadCategories];
         
     }
-    
-    
     
     [self.categoriesCollectionView reloadData];
     
@@ -241,9 +236,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             
         } completionBlock:^(BOOL success) {
             
-            [self fetchCategories];
+            [self removePopupMessage];
             
-            self.loadingPanelView.hidden = YES;
+            [self fetchCategories];
             
             [self.categoriesCollectionView reloadData];
             
@@ -251,6 +246,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         
     } onError:^(NSError* error) {
+        
+        [self removePopupMessage];
         
         DebugLog(@"%@", [error debugDescription]);
         
@@ -358,6 +355,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     [self closeAutocomplete];
+    [self.searchBar resignFirstResponder];
 }
 
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text

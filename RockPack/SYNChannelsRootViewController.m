@@ -18,7 +18,7 @@
 #import "SYNChannelThumbnailCell.h"
 #import "SYNChannelsRootViewController.h"
 #import "SYNDeviceManager.h"
-#import "SYNFeedMessagesView.h"
+#import "SYNPopupMessageView.h"
 #import "SYNGenreItemView.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNMainRegistry.h"
@@ -48,7 +48,7 @@
 @property (nonatomic, strong) NSMutableArray *channels;
 @property (nonatomic, strong) NSString *currentCategoryId;
 @property (nonatomic, strong) SYNChannelCategoryTableViewController *categoryTableViewController;
-@property (nonatomic, strong) SYNFeedMessagesView *emptyGenreMessageView;
+@property (nonatomic, strong) SYNPopupMessageView *emptyGenreMessageView;
 @property (nonatomic, strong) UIButton *categorySelectButton;
 @property (nonatomic, strong) UIControl *categorySelectDismissControl;
 @property (nonatomic, strong) UIImageView *arrowImage;
@@ -478,7 +478,7 @@
         return;
     }
     
-    self.emptyGenreMessageView = [SYNFeedMessagesView withMessage: message];
+    self.emptyGenreMessageView = [SYNPopupMessageView withMessage: message];
     
     self.emptyGenreMessageView.center = CGPointMake(self.view.center.x, 280.0);
     self.emptyGenreMessageView.frame = CGRectIntegral(self.emptyGenreMessageView.frame);
