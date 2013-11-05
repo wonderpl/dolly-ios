@@ -30,22 +30,6 @@
             <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
             <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MS7-tW-0TH">
-                    <rect key="frame" x="0.0" y="1004" width="672" height="0.0"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
-                        <size key="itemSize" width="280" height="80"/>
-                        <size key="headerReferenceSize" width="671" height="722"/>
-                        <size key="footerReferenceSize" width="671" height="50"/>
-                        <inset key="sectionInset" minX="47" minY="0.0" maxX="47" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="BC1-Su-WrO"/>
-                        <outlet property="delegate" destination="-1" id="s7b-h4-zad"/>
-                    </connections>
-                </collectionView>
                 <collectionView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0td-Z3-eno">
                     <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -60,6 +44,22 @@
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Eu1-mp-qmx"/>
                         <outlet property="delegate" destination="-1" id="H3W-Im-7ur"/>
+                    </connections>
+                </collectionView>
+                <collectionView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MS7-tW-0TH">
+                    <rect key="frame" x="0.0" y="0.0" width="672" height="1004"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
+                        <size key="itemSize" width="280" height="80"/>
+                        <size key="headerReferenceSize" width="671" height="722"/>
+                        <size key="footerReferenceSize" width="671" height="50"/>
+                        <inset key="sectionInset" minX="47" minY="0.0" maxX="47" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="BC1-Su-WrO"/>
+                        <outlet property="delegate" destination="-1" id="s7b-h4-zad"/>
                     </connections>
                 </collectionView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Oe-3pp">
@@ -93,7 +93,7 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="sadasd sadasda" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="sadasd                             sadasda" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
                             <rect key="frame" x="0.0" y="130" width="314" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -166,17 +166,17 @@
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="AJ3-8V-q2b"/>
                 <constraint firstItem="uxB-NR-Hkw" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" id="AZX-4z-XBG"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="uxB-NR-Hkw" secondAttribute="trailing" id="Af6-uL-UAL"/>
-                <constraint firstAttribute="trailing" secondItem="MS7-tW-0TH" secondAttribute="trailing" constant="-1" id="B16-kC-XVJ"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="width" secondItem="NLw-Oe-3pp" secondAttribute="width" id="I8L-mI-k1P"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="top" secondItem="1" secondAttribute="top" id="KQc-dV-JP4"/>
-                <constraint firstItem="0td-Z3-eno" firstAttribute="bottom" secondItem="MS7-tW-0TH" secondAttribute="bottom" id="LsK-Ad-oXP"/>
-                <constraint firstItem="0td-Z3-eno" firstAttribute="leading" secondItem="MS7-tW-0TH" secondAttribute="leading" id="RKW-CI-9hy"/>
+                <constraint firstItem="MS7-tW-0TH" firstAttribute="centerX" secondItem="XoE-Jb-ERN" secondAttribute="centerX" id="Phy-pf-Dbs"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Rtq-Gd-Rnj"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerY" secondItem="0td-Z3-eno" secondAttribute="centerY" constant="67" id="Wfx-uD-6Tf"/>
+                <constraint firstItem="MS7-tW-0TH" firstAttribute="top" secondItem="1" secondAttribute="top" id="bF0-s9-siM"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" constant="0.5" id="fVi-Wv-NS0"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="centerY" secondItem="uxB-NR-Hkw" secondAttribute="centerY" constant="-28" id="gbi-nM-5re"/>
+                <constraint firstAttribute="bottom" secondItem="MS7-tW-0TH" secondAttribute="bottom" id="kQy-8n-9mG"/>
                 <constraint firstAttribute="trailing" secondItem="NLw-Oe-3pp" secondAttribute="trailing" id="okj-u5-efs"/>
-                <constraint firstItem="MS7-tW-0TH" firstAttribute="top" secondItem="0td-Z3-eno" secondAttribute="bottom" id="rnq-iK-5nv"/>
+                <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="0td-Z3-eno" secondAttribute="leading" id="oqw-vP-LPj"/>
                 <constraint firstAttribute="trailing" secondItem="0td-Z3-eno" secondAttribute="trailing" id="vU3-L6-mRq"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="top" secondItem="1" secondAttribute="top" id="zdu-fH-0eI"/>
             </constraints>
