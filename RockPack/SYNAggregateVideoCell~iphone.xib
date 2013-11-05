@@ -29,13 +29,9 @@
                             <constraint firstAttribute="height" constant="48" id="fgl-fS-WHf"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="iJN-TT-v7m" userLabel="Action Message Label">
-                        <rect key="frame" x="10" y="63" width="301" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="iJN-TT-v7m" userLabel="Action Message Label">
+                        <rect key="frame" x="10" y="61" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Lku-bT-Rby"/>
-                            <constraint firstAttribute="width" constant="301" id="RZN-JH-UmV"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -54,7 +50,7 @@
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BBe-eW-NPp">
-                        <rect key="frame" x="0.0" y="112" width="320" height="257"/>
+                        <rect key="frame" x="0.0" y="100" width="320" height="257"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.88716457201086962" green="0.35937751968318593" blue="0.31627091224758919" alpha="0.0" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MgI-bn-29y">
@@ -90,10 +86,8 @@
                 <constraint firstAttribute="centerX" secondItem="uo9-Lh-d7Y" secondAttribute="centerX" id="H1y-zC-KeQ"/>
                 <constraint firstAttribute="centerX" secondItem="uwf-6l-aRn" secondAttribute="centerX" id="HgE-M7-1s9"/>
                 <constraint firstItem="HQt-5K-LTL" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="10" id="MSP-ui-qy9"/>
-                <constraint firstItem="iJN-TT-v7m" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="63" id="TCu-ka-HWt"/>
                 <constraint firstAttribute="centerX" secondItem="HQt-5K-LTL" secondAttribute="centerX" id="bxK-9m-hb6"/>
                 <constraint firstItem="uo9-Lh-d7Y" firstAttribute="top" secondItem="k4G-M4-KgY" secondAttribute="top" constant="33" id="gHg-nT-lFu"/>
-                <constraint firstAttribute="centerX" secondItem="iJN-TT-v7m" secondAttribute="centerX" id="yvf-aV-fAq"/>
             </constraints>
             <size key="customSize" width="353" height="261"/>
             <connections>
