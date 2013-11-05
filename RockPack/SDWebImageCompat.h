@@ -18,7 +18,7 @@
 #endif
 
 #if !TARGET_OS_IPHONE
-#import <AppKit/AppKit.h>
+#import AppKit;
 #ifndef UIImage
 #define UIImage NSImage
 #endif

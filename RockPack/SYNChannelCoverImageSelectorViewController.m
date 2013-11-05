@@ -19,7 +19,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
-#import <AssetsLibrary/AssetsLibrary.h>
+@import AssetsLibrary;
 @import AVFoundation;
 @import ImageIO;
 @import QuartzCore;

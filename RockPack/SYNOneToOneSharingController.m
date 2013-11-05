@@ -24,8 +24,8 @@
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "VideoInstance.h"
-#import <AddressBook/AddressBook.h>
 #import <objc/runtime.h>
+@import AddressBook;
 @import QuartzCore;
 
 #define kOneToOneSharingViewId	  @"kOneToOneSharingViewId"

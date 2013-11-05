@@ -1115,7 +1115,6 @@
 		BE2D762D1785BBB100546BFD /* SYNViewStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2D762C1785BBB100546BFD /* SYNViewStackManager.m */; };
 		BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */; };
 		BE3574EA17CE07B00083CBB1 /* SYNOneToOneSharingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */; };
-		BE3574EC17CE09B80083CBB1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3574EB17CE09B80083CBB1 /* AddressBook.framework */; };
 		BE3983D11768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3983D01768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m */; };
 		BE3983D41768B6D800EE9C7B /* SYNOnBoardingPopoverQueueController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3983D31768B6D800EE9C7B /* SYNOnBoardingPopoverQueueController.m */; };
 		BE3983DA176A0CD200EE9C7B /* onboarding_button_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3983D6176A0CD200EE9C7B /* onboarding_button_ok.png */; };
@@ -3158,7 +3157,6 @@
 				C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */,
 				019824F01629CC7600216900 /* libTestFlight.a in Frameworks */,
 				019824F21629CE1600216900 /* libz.dylib in Frameworks */,
-				BE3574EC17CE09B80083CBB1 /* AddressBook.framework in Frameworks */,
 				012502C316CA99630029C7C8 /* AdSupport.framework in Frameworks */,
 				016B97151770C3DE00892211 /* CFNetwork.framework in Frameworks */,
 				010DEFD91629BDC40080F26B /* CoreGraphics.framework in Frameworks */,
