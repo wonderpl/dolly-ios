@@ -78,7 +78,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     
     
-    self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 0.0f, 10.0f);
+    self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
     [self removePopupMessage];
 
@@ -588,12 +588,12 @@ typedef void(^FeedDataErrorBlock)(void);
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
-        size.width = IS_IPAD ? 360.0f : 248.0f;
-        size.height = IS_IPAD ? 336.0f : 257.0f;
+        size.width = IS_IPAD ? 360.0f : 320.0f;
+        size.height = IS_IPAD ? 457.0f : 369.0f;
     }
     else
     {
-        size.width = IS_IPAD ? 360.0f : 248.0f;
+        size.width = IS_IPAD ? 360.0f : 320.0f;
         size.height = IS_IPAD ? 330.0f : 264.0f;
     }
     
