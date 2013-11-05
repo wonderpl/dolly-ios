@@ -233,7 +233,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void) loadCategories
 {
     
-    
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
         
         [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {

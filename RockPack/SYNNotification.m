@@ -197,6 +197,56 @@
     return self;
 }
 
+-(BOOL)isEqual:(id)object
+{
+    if(![object isKindOfClass:[SYNNotification class]])
+        return NO;
+    
+    if(object == self)
+        return YES;
+    
+    SYNNotification* notificationToCompare = (SYNNotification*)object;
+    
+    if(self.identifier != notificationToCompare.identifier)
+        return NO;
+    
+    if(self.objectType != notificationToCompare.objectType)
+        return NO;
+    
+    if(![self.messageType isEqualToString:notificationToCompare.messageType])
+        return NO;
+    
+    // check conditioanlly for either types
+    if(self.videoId)
+    {
+        if(![self.videoId isEqualToString:notificationToCompare.videoId])
+            return NO;
+        
+        if(![self.videoThumbnailUrl isEqualToString:notificationToCompare.videoThumbnailUrl])
+            return NO;
+    }
+    else
+    {
+        if(![self.channelThumbnailUrl isEqualToString:notificationToCompare.channelThumbnailUrl])
+            return NO;
+    }
+    
+    if(![self.channelId isEqualToString:notificationToCompare.channelId])
+        return NO;
+    
+    if(![self.channelResourceUrl isEqualToString:notificationToCompare.channelResourceUrl])
+        return NO;
+    
+    
+    
+    if(![self.channelOwner.uniqueId isEqualToString:notificationToCompare.channelOwner.uniqueId])
+        return NO;
+    
+    
+    
+    return YES;
+    
+}
 
 - (NSString *) description
 {

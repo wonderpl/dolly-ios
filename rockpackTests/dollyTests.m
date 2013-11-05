@@ -11,6 +11,8 @@
 #import "SYNMainRegistry.h"
 #import "SYNAppDelegate.h"
 #import "SYNSearchRegistry.h"
+#import "SYNActivityViewController.h"
+#import "SYNNotification.h"
 #import <CoreData/CoreData.h>
 
 @implementation dollyTests
@@ -38,8 +40,85 @@
     
 }
 
--(void)test
+-(void)testNotificationCreation
 {
+    NSDictionary* notificationData = @{
+                                       @"read" : @NO,
+                                       @"id" : @80664,
+                                       @"message_type" : @"subscribed",
+                                       @"date_created" : @"2013-09-19T13:38:50.217180",
+                                       @"message" : @{
+                                               @"user" : @{
+                                                       @"display_name" : @"qwe",
+                                                       @"avatar_thumbnail_url" : @"",
+                                                       @"id" : @"Klb_4-r_5KpP0RpcySoz2A",
+                                                       @"resource_url" : @"http://api.demo.rockpack.com/ws/Klb_4-r_5KpP0RpcySoz2A/"
+                                                       },
+                                               @"channel" : @{
+                                                       @"id" : @"ch9HaxNJur3YMGUqcEB3mVSw",
+                                                       @"resource_url" : @"https://secure.demo.rockpack.com/ws/3pLbs-wsQX64ORXcO2YRYg/channels/ch9HaxNJur3YMGUqcEB3mVSw/",
+                                                       @"thumbnail_url" : @"http://media.dev.rockpack.com/images/channel/thumbnail_medium/8TQPfDOMkKfTD_1TLn_LHw.jpg"
+                                                       }
+                                               }
+                                       };
+    SYNNotification* firstNotification = [SYNNotification notificationWithDictionary:notificationData];
+    STAssertEquals(firstNotification.identifier, 80664, @"Notification Identifier not set correctly");
+    STAssertEquals(firstNotification.messageType, @"subscribed", @"Notification Identifier not set correctly"); // messageType sets the objectType below
+    STAssertEquals(firstNotification.objectType, kNotificationObjectTypeUserSubscibedToYourChannel, @"Notification 'subsribed' type not set correctly");
+    STAssertEquals(firstNotification.channelId, @"ch9HaxNJur3YMGUqcEB3mVSw", @"Notification Channel Id not set correctly");
+  
+    
+}
+
+-(void)testNotificationsResults
+{
+    
+    NSString *jsonFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"NotificationsForUser" ofType:@"json"];
+    
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath];
+    
+    STAssertNotNil(jsonData, @"NSData could not be created from JSON file: 'NotificationsForUser'");
+    
+    NSError *error;
+    
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                   options:0
+                                                                     error:&error];
+
+    
+    STAssertNotNil(jsonDictionary, @"NSDictionary was not created from JSON file 'NotificationsForUser.json'");
+    
+    
+    SYNActivityViewController* avc = [[SYNActivityViewController alloc] initWithViewId:@"TestActivityViewId"];
+    [avc parseNotificationsFromDictionary:jsonDictionary];
+    
+    NSUInteger totalC = avc.notifications.count;
+    STAssertEquals(totalC, (NSUInteger)52, [NSString stringWithFormat:@"Not all Notifications where parsed, expected 52 got %i", totalC]);
+    
+    // Fake Notification
+    NSDictionary* notificationData = @{
+        @"read" : @NO,
+        @"id" : @80664,
+        @"message_type" : @"subscribed",
+        @"date_created" : @"2013-09-19T13:38:50.217180",
+        @"message" : @{
+            @"user" : @{
+                @"display_name" : @"qwe",
+                @"avatar_thumbnail_url" : @"",
+                @"id" : @"Klb_4-r_5KpP0RpcySoz2A",
+                @"resource_url" : @"http://api.demo.rockpack.com/ws/Klb_4-r_5KpP0RpcySoz2A/"
+            },
+            @"channel" : @{
+                @"id" : @"ch9HaxNJur3YMGUqcEB3mVSw",
+                @"resource_url" : @"https://secure.demo.rockpack.com/ws/3pLbs-wsQX64ORXcO2YRYg/channels/ch9HaxNJur3YMGUqcEB3mVSw/",
+                @"thumbnail_url" : @"http://media.dev.rockpack.com/images/channel/thumbnail_medium/8TQPfDOMkKfTD_1TLn_LHw.jpg"
+            }
+        }
+    };
+    SYNNotification* firstNotification = [SYNNotification notificationWithDictionary:notificationData];
+    
+    STAssertEqualObjects(firstNotification, avc.notifications[0], @"Notifications not parsed correctly, first in array does not contain correct data");
     
 }
 

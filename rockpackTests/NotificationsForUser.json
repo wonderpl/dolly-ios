@@ -1,0 +1,1002 @@
+{
+  "notifications" : {
+    "total" : 52,
+    "items" : [
+      {
+        "read" : false,
+        "id" : 80664,
+        "message_type" : "subscribed",
+        "date_created" : "2013-09-19T13:38:50.217180",
+        "message" : {
+          "user" : {
+            "display_name" : "qwe",
+            "avatar_thumbnail_url" : "",
+            "id" : "Klb_4-r_5KpP0RpcySoz2A",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/Klb_4-r_5KpP0RpcySoz2A\/"
+          },
+          "channel" : {
+            "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+            "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/",
+            "thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/channel\/thumbnail_medium\/8TQPfDOMkKfTD_1TLn_LHw.jpg"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80582,
+        "message_type" : "starred",
+        "date_created" : "2013-09-17T11:42:47.743918",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "qwe",
+            "avatar_thumbnail_url" : "",
+            "id" : "Klb_4-r_5KpP0RpcySoz2A",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/Klb_4-r_5KpP0RpcySoz2A\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80519,
+        "message_type" : "starred",
+        "date_created" : "2013-09-10T17:09:07.256592",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "qwe",
+            "avatar_thumbnail_url" : "",
+            "id" : "Klb_4-r_5KpP0RpcySoz2A",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/Klb_4-r_5KpP0RpcySoz2A\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80518,
+        "message_type" : "starred",
+        "date_created" : "2013-09-10T17:09:04.910302",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "qwe",
+            "avatar_thumbnail_url" : "",
+            "id" : "Klb_4-r_5KpP0RpcySoz2A",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/Klb_4-r_5KpP0RpcySoz2A\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80480,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:39:39.328197",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80479,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:36:12.016755",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80478,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:36:07.447697",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80477,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:33:55.258488",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80476,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:33:51.525584",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80475,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:30:09.053613",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80474,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:30:04.949043",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80473,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:28:19.094693",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80472,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:28:00.400282",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80471,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T14:24:41.670992",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80470,
+        "message_type" : "starred",
+        "date_created" : "2013-09-06T13:15:20.341316",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80241,
+        "message_type" : "subscribed",
+        "date_created" : "2013-08-15T12:59:20.935740",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/9JzvvD0kgm_ork_EFytySQ.jpg",
+            "id" : "k-mZLdbcqfxhzB6SVIsJww",
+            "resource_url" : "http:\/\/localhost\/ws\/k-mZLdbcqfxhzB6SVIsJww\/"
+          },
+          "channel" : {
+            "id" : "cht_7tNpBlSbj4QIfNUkr_tw",
+            "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/cht_7tNpBlSbj4QIfNUkr_tw\/",
+            "thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/channel\/thumbnail_medium\/fav2.jpg"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80231,
+        "message_type" : "starred",
+        "date_created" : "2013-08-15T12:58:40.468240",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "https:\/\/secure.demo.rockpack.com\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/9JzvvD0kgm_ork_EFytySQ.jpg",
+            "id" : "k-mZLdbcqfxhzB6SVIsJww",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/k-mZLdbcqfxhzB6SVIsJww\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80236,
+        "message_type" : "joined",
+        "date_created" : "2013-08-15T12:57:11.206741",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/9JzvvD0kgm_ork_EFytySQ.jpg",
+            "id" : "k-mZLdbcqfxhzB6SVIsJww",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/k-mZLdbcqfxhzB6SVIsJww\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80220,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T21:54:22.896824",
+        "message" : {
+          "user" : {
+            "display_name" : "testuserfb",
+            "avatar_thumbnail_url" : "",
+            "id" : "CzTB8DvQaH8rWdmeHO8njQ",
+            "resource_url" : "http:\/\/api.demo.rockpack.com\/ws\/CzTB8DvQaH8rWdmeHO8njQ\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80190,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T14:51:47.015793",
+        "message" : {
+          "user" : {
+            "display_name" : "Michailidis Michael",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/0f6OO4lqPSIV3OL97WPtGA.jpg",
+            "id" : "Wl0ur90_X_WV__96XQGoiQ",
+            "resource_url" : "http:\/\/localhost\/ws\/Wl0ur90_X_WV__96XQGoiQ\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80181,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T14:50:52.957734",
+        "message" : {
+          "user" : {
+            "display_name" : "Gregory Talon",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/_8lwNs-kFmKQv8y8R5hx9Q.jpg",
+            "id" : "JyypDAq2yIUJ-mwVaJhb_w",
+            "resource_url" : "http:\/\/localhost\/ws\/JyypDAq2yIUJ-mwVaJhb_w\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80170,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T14:32:20.357572",
+        "message" : {
+          "user" : {
+            "display_name" : "Gregory Talon",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/CPy8DWO5LsRqrGnwqLGyWQ.jpg",
+            "id" : "mLW6vf7Ljt4v75aQ2qhcaA",
+            "resource_url" : "http:\/\/localhost\/ws\/mLW6vf7Ljt4v75aQ2qhcaA\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80160,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T14:27:02.236756",
+        "message" : {
+          "user" : {
+            "display_name" : "Gregory Talon",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/MjYM5WL3f6n2xJt1VHQlVg.jpg",
+            "id" : "JfMX0gnO8Y-X1MG1qkY4wQ",
+            "resource_url" : "http:\/\/localhost\/ws\/JfMX0gnO8Y-X1MG1qkY4wQ\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80156,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T13:09:21.617290",
+        "message" : {
+          "user" : {
+            "display_name" : "Michailidis Michael",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/lzgauBzzB2p5j-rv2sMlPw.jpg",
+            "id" : "V2sNKLFdiJywuHcjSqW4vQ",
+            "resource_url" : "http:\/\/localhost\/ws\/V2sNKLFdiJywuHcjSqW4vQ\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80155,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T13:04:35.708239",
+        "message" : {
+          "user" : {
+            "display_name" : "Michailidis Michael",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/q79Mkpc6bxpPNT4pMWFU1A.jpg",
+            "id" : "rzHFnmoA9fk87Bf6uB1ung",
+            "resource_url" : "http:\/\/localhost\/ws\/rzHFnmoA9fk87Bf6uB1ung\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80154,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T12:59:34.562463",
+        "message" : {
+          "user" : {
+            "display_name" : "Michailidis Michael",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/SosZ-xVDdp5R7pvTFJR-VQ.jpg",
+            "id" : "NOQH6unVTK6MTdHsuuQ5xw",
+            "resource_url" : "http:\/\/localhost\/ws\/NOQH6unVTK6MTdHsuuQ5xw\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80147,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T12:52:22.180885",
+        "message" : {
+          "user" : {
+            "display_name" : "Gregory Talon",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/JLAwKi2Q_3cxW8qc6OOCBQ.jpg",
+            "id" : "e_5GfHQnO_yTmaX0-7Uykg",
+            "resource_url" : "http:\/\/localhost\/ws\/e_5GfHQnO_yTmaX0-7Uykg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80143,
+        "message_type" : "starred",
+        "date_created" : "2013-08-14T12:26:19.471130",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80136,
+        "message_type" : "joined",
+        "date_created" : "2013-08-14T12:08:06.427095",
+        "message" : {
+          "user" : {
+            "display_name" : "Gregory Talon",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/MMa0sHBRIUuxVQlbFeITgQ.jpg",
+            "id" : "gp3Q6rSxiCe9kpGo_WW1Cg",
+            "resource_url" : "http:\/\/localhost\/ws\/gp3Q6rSxiCe9kpGo_WW1Cg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 80093,
+        "message_type" : "joined",
+        "date_created" : "2013-08-13T16:09:52.664152",
+        "message" : {
+          "user" : {
+            "display_name" : "Gregory Talon",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/u6Dfi8Hei9EjErbRD09ECg.jpg",
+            "id" : "XjQAXB4brQRy0vPDl5a92w",
+            "resource_url" : "http:\/\/localhost\/ws\/XjQAXB4brQRy0vPDl5a92w\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80081,
+        "message_type" : "starred",
+        "date_created" : "2013-08-13T15:23:59.152667",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80080,
+        "message_type" : "starred",
+        "date_created" : "2013-08-13T15:22:09.789053",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80079,
+        "message_type" : "starred",
+        "date_created" : "2013-08-13T15:20:33.077177",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80078,
+        "message_type" : "starred",
+        "date_created" : "2013-08-13T15:20:29.390635",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80077,
+        "message_type" : "starred",
+        "date_created" : "2013-08-13T15:20:25.285529",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80076,
+        "message_type" : "starred",
+        "date_created" : "2013-08-13T15:19:04.146097",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80075,
+        "message_type" : "starred",
+        "date_created" : "2013-08-13T15:18:32.537298",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80012,
+        "message_type" : "starred",
+        "date_created" : "2013-08-09T14:36:36.333993",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80011,
+        "message_type" : "starred",
+        "date_created" : "2013-08-09T14:36:33.087137",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80010,
+        "message_type" : "starred",
+        "date_created" : "2013-08-09T14:17:07.838818",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 80009,
+        "message_type" : "starred",
+        "date_created" : "2013-08-09T14:16:53.353838",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 79893,
+        "message_type" : "starred",
+        "date_created" : "2013-08-06T10:08:49.124117",
+        "message" : {
+          "video" : {
+            "resource_url" : "http:\/\/localhost\/ws\/-\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/videos\/vi_W5T92RbMlVITmotiE8u6w\/",
+            "id" : "vi_W5T92RbMlVITmotiE8u6w",
+            "thumbnail_url" : "http:\/\/i.ytimg.com\/vi\/_3Ymtg_XIUs\/mqdefault.jpg",
+            "channel" : {
+              "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+              "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/"
+            }
+          },
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 79852,
+        "message_type" : "joined",
+        "date_created" : "2013-08-01T18:49:36.199494",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/IJO-_IwL0zvNA_TXieJqnw.jpg",
+            "id" : "Ih4oeK0DkmOzukwqOOle2g",
+            "resource_url" : "http:\/\/localhost\/ws\/Ih4oeK0DkmOzukwqOOle2g\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 79845,
+        "message_type" : "joined",
+        "date_created" : "2013-08-01T18:46:44.907158",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/d8KULzO2LaAOIhnY2tQmAA.jpg",
+            "id" : "AaQOR1AMqBW_UCEz7F7K6A",
+            "resource_url" : "http:\/\/localhost\/ws\/AaQOR1AMqBW_UCEz7F7K6A\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 79831,
+        "message_type" : "joined",
+        "date_created" : "2013-08-01T18:33:24.685526",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/w_uL6mW6pYg_Gw0YTgI4PQ.jpg",
+            "id" : "r_7tXtE9pZ1GEZ1qH6Naig",
+            "resource_url" : "http:\/\/localhost\/ws\/r_7tXtE9pZ1GEZ1qH6Naig\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 79822,
+        "message_type" : "joined",
+        "date_created" : "2013-08-01T18:14:24.245340",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/9XKP7VsqGwCjCZQi7zsUmA.jpg",
+            "id" : "nqdb_6kcUYEBhWJ9YVaWyw",
+            "resource_url" : "http:\/\/localhost\/ws\/nqdb_6kcUYEBhWJ9YVaWyw\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 79818,
+        "message_type" : "joined",
+        "date_created" : "2013-08-01T18:01:23.733882",
+        "message" : {
+          "user" : {
+            "display_name" : "Al Bri",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/32IA0-51RczXVVs0F6iGpw.jpg",
+            "id" : "FnUmVjvOfzJ3i2yAUzt0Fw",
+            "resource_url" : "http:\/\/localhost\/ws\/FnUmVjvOfzJ3i2yAUzt0Fw\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 79658,
+        "message_type" : "subscribed",
+        "date_created" : "2013-08-01T13:37:58.672061",
+        "message" : {
+          "user" : {
+            "display_name" : "Jen Summer",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/pFVHDwDUwPb_1KP48O20ZQ.jpg",
+            "id" : "9h-0XOYjq7nLsk-FoC8Kjg",
+            "resource_url" : "http:\/\/localhost\/ws\/9h-0XOYjq7nLsk-FoC8Kjg\/"
+          },
+          "channel" : {
+            "id" : "ch9HaxNJur3YMGUqcEB3mVSw",
+            "resource_url" : "http:\/\/localhost\/ws\/3pLbs-wsQX64ORXcO2YRYg\/channels\/ch9HaxNJur3YMGUqcEB3mVSw\/",
+            "thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/channel\/thumbnail_medium\/8TQPfDOMkKfTD_1TLn_LHw.jpg"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 79625,
+        "message_type" : "joined",
+        "date_created" : "2013-07-30T11:28:07.242269",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/6jNkP-SqS0h4rMYR7xbi0A.jpg",
+            "id" : "-zFA_k3GlTC__oTX_DHkhg",
+            "resource_url" : "http:\/\/localhost\/ws\/-zFA_k3GlTC__oTX_DHkhg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 79617,
+        "message_type" : "joined",
+        "date_created" : "2013-07-24T11:17:22.487619",
+        "message" : {
+          "user" : {
+            "display_name" : "Michailidis Michael",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/PpeBKXdYyOxCOVR6XP6V_w.jpg",
+            "id" : "rLsh_XVehnC_Fta9jXkHcg",
+            "resource_url" : "http:\/\/localhost\/ws\/rLsh_XVehnC_Fta9jXkHcg\/"
+          }
+        }
+      },
+      {
+        "read" : true,
+        "id" : 79615,
+        "message_type" : "joined",
+        "date_created" : "2013-07-24T09:52:27.442144",
+        "message" : {
+          "user" : {
+            "display_name" : "Paul Egan",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/tUq-3FDC4j500wSB_DSkVw.jpg",
+            "id" : "hBbVqQ7ORKAVZFUGaB2CLA",
+            "resource_url" : "http:\/\/localhost\/ws\/hBbVqQ7ORKAVZFUGaB2CLA\/"
+          }
+        }
+      },
+      {
+        "read" : false,
+        "id" : 79612,
+        "message_type" : "joined",
+        "date_created" : "2013-07-24T09:50:57.355265",
+        "message" : {
+          "user" : {
+            "display_name" : "Gregory Talon",
+            "avatar_thumbnail_url" : "http:\/\/media.dev.rockpack.com\/images\/avatar\/thumbnail_medium\/eVPh8HAOEW7ld01TnRkVyQ.jpg",
+            "id" : "CVWZQDLiC8GSbAe1ZDuF-A",
+            "resource_url" : "http:\/\/localhost\/ws\/CVWZQDLiC8GSbAe1ZDuF-A\/"
+          }
+        }
+      }
+    ]
+  }
+}
