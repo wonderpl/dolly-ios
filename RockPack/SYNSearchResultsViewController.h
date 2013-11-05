@@ -27,4 +27,5 @@ typedef enum {
 - (void) searchForTerm: (NSString *) newSearchTerm ;
 - (void) searchForGenre: (NSString *) genreId;
 
+
 @end

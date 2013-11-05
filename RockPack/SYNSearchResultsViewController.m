@@ -267,9 +267,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultVideoCell
                                                                                          forIndexPath: indexPath];
         
-        VideoInstance *vi = (VideoInstance*)(self.videosArray[indexPath.item]);
-        
-        DebugLog(@"Index %@, Title %@", indexPath, vi.title);
+         
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
         videoCell.delegate = self;        
         

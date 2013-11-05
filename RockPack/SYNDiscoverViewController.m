@@ -55,6 +55,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
+@property (nonatomic, strong) Genre* popularGenre;
+
 @end
 
 @implementation SYNDiscoverViewController
@@ -91,15 +93,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     
-    if(IS_IPAD)
-    {
-        [self addChildViewController: self.searchResultsController]; // containment
-        [self.containerView addSubview: self.searchResultsController.view];
-        
-        CGRect sResRect = self.searchResultsController.view.frame;
-        sResRect.size = self.containerView.frame.size;
-        self.searchResultsController.view.frame = sResRect;
-    }
+    
     
     
     // self.loadingPanelView.hidden = NO; // hide by default and only show when there are no categories
@@ -122,25 +116,26 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     
-    
+    SubGenre* popularSubGenre;
     // probably the database is cold so need to reload everything
     if(genresFetchedArray.count == 0)
     {
       
-        Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-        popularGenre.uniqueId = @"9090";
-        popularGenre.name = [NSString stringWithString:kPopularGenreName];
-        popularGenre.priorityValue = 100000;
+        _popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
+        _popularGenre.uniqueId = @"9090";
+        _popularGenre.name = [NSString stringWithString:kPopularGenreName];
+        _popularGenre.priorityValue = 100000;
         
-        SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
+        
+        popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
         popularSubGenre.uniqueId = @"9091";
         popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
         popularSubGenre.priorityValue = 100000;
         
         // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
-        [popularGenre.subgenresSet addObject:popularSubGenre];
+        [_popularGenre.subgenresSet addObject:popularSubGenre];
         
-        if(!popularGenre)
+        if(!_popularGenre)
             return;
         
         [appDelegate.mainManagedObjectContext save:&error];
@@ -153,6 +148,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
     else
     {
+        _popularGenre = (Genre*)genresFetchedArray[0];
+        popularSubGenre = (SubGenre*)_popularGenre.subgenres[0];
         // housekeeping (remove duplicates)
         if(genresFetchedArray.count > 1)
         {
@@ -164,15 +161,33 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             }
         }
         
-        [self fetchCategories];
+        [self fetchAndDisplayCategories];
         
         [self loadCategories];
         
+        
     }
     
-    [self.categoriesCollectionView reloadData];
-    
-    // set the panel's round corners
+    // you want to load the search display controller only for iPad, on iPhone in slides in as a navigation
+    if(IS_IPAD)
+    {
+        [self addChildViewController: self.searchResultsController];
+        [self.containerView addSubview: self.searchResultsController.view];
+        
+        CGRect sResRect = self.searchResultsController.view.frame;
+        sResRect.size = self.containerView.frame.size;
+        self.searchResultsController.view.frame = sResRect;
+        
+        // this should always be true since we are either creating it on the fly or it is in DB already
+        if(popularSubGenre)
+        {
+            [self.searchResultsController searchForGenre:popularSubGenre.name];
+        }
+        else
+        {
+            AssertOrLog(@"Popular SubGenre was not created at this stage...");
+        }
+    }
     
     
     
@@ -182,7 +197,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 #pragma mark - Data Retrieval
 
-- (void) fetchCategories
+- (void) fetchAndDisplayCategories
 {
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
@@ -223,6 +238,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
     self.colorMapForCells = [NSDictionary dictionaryWithDictionary:mutDictionary];
     
+    [self.categoriesCollectionView reloadData];
+    
+    
 }
 
 - (void) loadCategories
@@ -238,9 +256,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             
             [self removePopupMessage];
             
-            [self fetchCategories];
+            [self fetchAndDisplayCategories];
             
-            [self.categoriesCollectionView reloadData];
+            
             
         }];
         
