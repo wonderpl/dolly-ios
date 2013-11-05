@@ -75,6 +75,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.autocompleteTableView.hidden = YES;
     
+    // change the BG color of the text field inside the searcBar
+    UITextField *txfSearchField = [self.searchBar valueForKey:@"_searchField"];
+    if(txfSearchField)
+        txfSearchField.backgroundColor = [UIColor colorWithRed: (224.0f / 255.0f)
+                                                         green: (224.0f / 255.0f)
+                                                          blue: (224.0f / 255.0f)
+                                                         alpha: 1.0f];
+    
     
     // == Set the Collection View's Cells == //
     
@@ -300,6 +308,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                             forIndexPath: indexPath];
     
     
+    // if we are on the last cell of the section, hide the separator line
+    categoryCell.separator.hidden = (BOOL)(indexPath.item == (currentGenre.subgenres.count - 1));
     categoryCell.backgroundColor = self.colorMapForCells[currentGenre.name];
     
     categoryCell.label.text = subgenre.name;

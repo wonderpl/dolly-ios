@@ -14,6 +14,6 @@
 
 @property (nonatomic, strong) IBOutlet UIImageView* arrow;
 
-@property (nonatomic, strong) IBOutlet UIView* line;
+@property (nonatomic, strong) IBOutlet UIView* separator;
 
 @end

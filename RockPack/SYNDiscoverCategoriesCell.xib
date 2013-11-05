@@ -28,7 +28,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9B-3P-4cn" userLabel="Line">
                         <rect key="frame" x="0.0" y="43" width="256" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.66721270161290325" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="f8s-kI-gG1"/>
                         </constraints>
@@ -52,7 +52,7 @@
             <connections>
                 <outlet property="arrow" destination="R2U-bh-bl3" id="F5w-V6-8gv"/>
                 <outlet property="label" destination="VDA-cz-Gkg" id="Unb-AB-PbO"/>
-                <outlet property="line" destination="p9B-3P-4cn" id="b4b-82-amC"/>
+                <outlet property="separator" destination="p9B-3P-4cn" id="89E-GU-cSa"/>
             </connections>
         </collectionViewCell>
     </objects>
