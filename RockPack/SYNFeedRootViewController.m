@@ -619,17 +619,24 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)	collectionView: (UICollectionView *) collectionView
+                   layout: (UICollectionViewLayout *) collectionViewLayout
+   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
+    FeedItem *feedItem = [self feedItemAtIndexPath: indexPath];
     CGSize size;
-    size.width = self.feedCollectionView.frame.size.width;
+    
+//    size.width = self.feedCollectionView.frame.size.width;
+    
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-        size.height = IS_IPAD ? 470.0f : 369.0f;
+    {
+        size.width = IS_IPAD ? 360.0f : 248.0f;
+        size.height = IS_IPAD ? 336.0f : 257.0f;
+    }
     else
+    {
         size.height = IS_IPAD ? 330.0f : 264.0f;
+    }
     
     return size;
 }
