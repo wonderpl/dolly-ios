@@ -1393,6 +1393,8 @@
 		BEB313B11828022400FAF98A /* NotificationsForUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BEB313AF182800F000FAF98A /* NotificationsForUser.json */; };
 		BEB313B518280F1200FAF98A /* divider_feed.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB313B318280F1200FAF98A /* divider_feed.png */; };
 		BEB313B618280F1200FAF98A /* divider_feed@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB313B418280F1200FAF98A /* divider_feed@x2.png */; };
+		BEB313C0182A829400FAF98A /* SYNCollectionVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB313BF182A829400FAF98A /* SYNCollectionVideoCell.m */; };
+		BEB313C2182A82B700FAF98A /* SYNCollectionVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB313C1182A82B700FAF98A /* SYNCollectionVideoCell.xib */; };
 		BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */; };
 		BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */; };
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
@@ -3076,6 +3078,9 @@
 		BEB313AF182800F000FAF98A /* NotificationsForUser.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotificationsForUser.json; sourceTree = "<group>"; };
 		BEB313B318280F1200FAF98A /* divider_feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider_feed.png; sourceTree = "<group>"; };
 		BEB313B418280F1200FAF98A /* divider_feed@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "divider_feed@x2.png"; sourceTree = "<group>"; };
+		BEB313BE182A829400FAF98A /* SYNCollectionVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCollectionVideoCell.h; sourceTree = "<group>"; };
+		BEB313BF182A829400FAF98A /* SYNCollectionVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCollectionVideoCell.m; sourceTree = "<group>"; };
+		BEB313C1182A82B700FAF98A /* SYNCollectionVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCollectionVideoCell.xib; sourceTree = "<group>"; };
 		BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginOnBoardingController.h; sourceTree = "<group>"; };
 		BEB8300B17745A0400AAA8D5 /* SYNLoginOnBoardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginOnBoardingController.m; sourceTree = "<group>"; };
 		BEB8300D177491ED00AAA8D5 /* login_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_1.jpg; path = Assets/Images/login_bg_1.jpg; sourceTree = "<group>"; };
@@ -3819,8 +3824,9 @@
 		019824E11629CAB600216900 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BEB313BC182A822900FAF98A /* Existing Collections */,
 				01982563162ADEAD00216900 /* Abstract */,
-				01B7F75B164FB7A7009C5CCD /* Channels */,
+				01B7F75B164FB7A7009C5CCD /* Collections */,
 				BEF9E5A516DBCDEF00286113 /* Components */,
 				01982562162ADE5200216900 /* Container */,
 				01D9196A178B08B400D980A7 /* Cover Art */,
@@ -4258,21 +4264,18 @@
 			name = "Channel cells";
 			sourceTree = "<group>";
 		};
-		01B7F75B164FB7A7009C5CCD /* Channels */ = {
+		01B7F75B164FB7A7009C5CCD /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				BEB313BD182A824000FAF98A /* Cells */,
 				014A456D166A39E60091E4E5 /* SYNChannelsRootViewController.h */,
 				014A456E166A39E60091E4E5 /* SYNChannelsRootViewController.m */,
-				BE285D981725726300D995AB /* SYNExistingCollectionsViewController.h */,
-				BE285D991725726300D995AB /* SYNExistingCollectionsViewController.m */,
-				BE285D9A1725726300D995AB /* SYNExistingCollectionsViewController.xib */,
-				38A201061731738F00FB9F57 /* SYNExistingCollectionsViewController~iphone.xib */,
 				01EC6234166EAAA5003154B1 /* SYNCollectionDetailsViewController.h */,
 				01EC6235166EAAA6003154B1 /* SYNCollectionDetailsViewController.m */,
 				01ABBB3317218A60007E4462 /* SYNCollectionDetailsViewController.xib */,
 				38FD441E172A9E280086B524 /* SYNCollectionDetailsViewController~iphone.xib */,
 			);
-			name = Channels;
+			name = Collections;
 			sourceTree = "<group>";
 		};
 		01B7F76C164FE464009C5CCD /* Channels */ = {
@@ -6199,6 +6202,27 @@
 			name = "Trackable View";
 			sourceTree = "<group>";
 		};
+		BEB313BC182A822900FAF98A /* Existing Collections */ = {
+			isa = PBXGroup;
+			children = (
+				BE285D981725726300D995AB /* SYNExistingCollectionsViewController.h */,
+				BE285D991725726300D995AB /* SYNExistingCollectionsViewController.m */,
+				BE285D9A1725726300D995AB /* SYNExistingCollectionsViewController.xib */,
+				38A201061731738F00FB9F57 /* SYNExistingCollectionsViewController~iphone.xib */,
+			);
+			name = "Existing Collections";
+			sourceTree = "<group>";
+		};
+		BEB313BD182A824000FAF98A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BEB313BE182A829400FAF98A /* SYNCollectionVideoCell.h */,
+				BEB313BF182A829400FAF98A /* SYNCollectionVideoCell.m */,
+				BEB313C1182A82B700FAF98A /* SYNCollectionVideoCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		BEBD09781743A1700092F527 /* CoverArt Chooser View */ = {
 			isa = PBXGroup;
 			children = (
@@ -7361,6 +7385,7 @@
 				1F4E7FB6181ACBAA00F59007 /* TabFeedHighlighted~iphone.png in Resources */,
 				BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */,
 				BEB83013177491ED00AAA8D5 /* login_bg_3.jpg in Resources */,
+				BEB313C2182A82B700FAF98A /* SYNCollectionVideoCell.xib in Resources */,
 				BEB83014177491ED00AAA8D5 /* login_bg_4.jpg in Resources */,
 				BEA216CE17E9B389007C6DF7 /* ButtonFriendsFacebookDefault~iphone.png in Resources */,
 				BEBFD0A2177A039D00C90544 /* ButtonPrivateLeft.png in Resources */,
@@ -7752,6 +7777,7 @@
 				BE285DBC1726828F00D995AB /* SYNChannelManager.m in Sources */,
 				0111CDFC1729314E00612186 /* SYNCoverThumbnailCell.m in Sources */,
 				01F1B85D17297471005735AF /* CoverArt.m in Sources */,
+				BEB313C0182A829400FAF98A /* SYNCollectionVideoCell.m in Sources */,
 				3862E8B1172979410066E8E7 /* SYNChannelCategoryTableCell.m in Sources */,
 				3862E8B3172979410066E8E7 /* SYNChannelCategoryTableHeader.m in Sources */,
 				3862E8B5172979410066E8E7 /* SYNChannelCategoryTableViewController.m in Sources */,
