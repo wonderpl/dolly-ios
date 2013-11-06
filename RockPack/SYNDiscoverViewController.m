@@ -201,6 +201,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.topItem.title = self.title;
+}
 
 
 #pragma mark - Data Retrieval
@@ -320,12 +326,16 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubGenre* selectedGenre = self.genres[indexPath.item];
+    SubGenre* selectedSubGenre = self.genres[indexPath.item];
     
-    if([selectedGenre.name isEqualToString:kPopularGenreName])
-        [self dispatchSearch:@"" forType:kSearchTypeGenre];
+    if([selectedSubGenre.name isEqualToString:kPopularGenreName])
+        [self dispatchSearch:@""
+                   withTitle:kPopularGenreName
+                     forType:kSearchTypeTerm];
     else
-        [self dispatchSearch:selectedGenre.uniqueId forType:kSearchTypeGenre];
+        [self dispatchSearch:selectedSubGenre.uniqueId
+                   withTitle:selectedSubGenre.name
+                     forType:kSearchTypeGenre];
 }
 
 
@@ -357,7 +367,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     NSString* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
     
-    [self dispatchSearch:suggestion];
+    [self dispatchSearch:suggestion
+               withTitle:suggestion
+                 forType:kSearchTypeTerm];
     
     [self closeAutocomplete];
 }
@@ -473,37 +485,46 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self dispatchSearch:searchBar.text];
+    
+    
+    [self dispatchSearch:searchBar.text
+               withTitle:searchBar.text
+                 forType:kSearchTypeTerm];
 }
 
+
 - (void) dispatchSearch:(NSString*)searchTerm
+              withTitle:(NSString*)title
+                forType:(kSearchType)type
 {
-    [self dispatchSearch:searchTerm forType:kSearchTypeTerm];
-}
-- (void) dispatchSearch:(NSString*)searchTerm forType:(kSearchType)type
-{
-    // add first so as to pass the appDelegate
+    
     if(IS_IPHONE)
     {
-        // this is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
+        // the hack below is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
         UIView* view_hack = self.searchResultsController.view;
         #pragma unused(view_hack)
+        
+        self.searchResultsController.title = title;
         
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
         
         
+        
+        
+    }
+    else // if(IS_IPAD)
+    {
+        // in the case of the iPad the navigation bar title needs to be changed manually
+        self.navigationController.navigationBar.topItem.title = title;
+        
     }
     
     if(type == kSearchTypeGenre)
-    {
-        
         [self.searchResultsController searchForGenre:searchTerm];
-    }
     else
-    {
         [self.searchResultsController searchForTerm:searchTerm];
-    }
+    
     
     
     
