@@ -50,11 +50,6 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ChannelDetailOverlayBackground.png" id="5" userLabel="Image View - Channel Cover Mask">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </imageView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="3" userLabel="Collection View - Video thumbnails">
                     <rect key="frame" x="0.0" y="58" width="320" height="490"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -442,7 +437,6 @@ CATEGORY</string>
         <image name="ButtonSubscribe.png" width="120" height="45"/>
         <image name="ButtonSubscribeHighlighted.png" width="120" height="45"/>
         <image name="ButtonSubscribeSelected.png" width="120" height="45"/>
-        <image name="ChannelDetailOverlayBackground.png" width="1024" height="748"/>
         <image name="DeletePackButton.png" width="33" height="33"/>
         <image name="LogoRockpack.png" width="148" height="27"/>
     </resources>
