@@ -130,13 +130,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
       
         _popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-        _popularGenre.uniqueId = @"9090";
+        _popularGenre.uniqueId = kPopularGenreUniqueId;
         _popularGenre.name = [NSString stringWithString:kPopularGenreName];
         _popularGenre.priorityValue = 100000;
         
         
         popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
-        popularSubGenre.uniqueId = @"9091";
+        popularSubGenre.uniqueId = kPopularGenreUniqueId;
         popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
         popularSubGenre.priorityValue = 100000;
         
@@ -307,6 +307,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
+    
     Genre* currentGenre = self.genres[indexPath.section];
     SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
@@ -326,16 +327,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubGenre* selectedSubGenre = self.genres[indexPath.item];
+    Genre* currentGenre = self.genres[indexPath.section];
+    SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
-    if([selectedSubGenre.name isEqualToString:kPopularGenreName])
-        [self dispatchSearch:@""
-                   withTitle:kPopularGenreName
-                     forType:kSearchTypeTerm];
-    else
-        [self dispatchSearch:selectedSubGenre.uniqueId
-                   withTitle:selectedSubGenre.name
-                     forType:kSearchTypeGenre];
+    [self dispatchSearch:subgenre.uniqueId
+               withTitle:subgenre.name
+                 forType:kSearchTypeGenre];
+    
 }
 
 
