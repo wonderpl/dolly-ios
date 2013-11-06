@@ -11,6 +11,7 @@
 #import "SYNSocialButton.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
+#import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 
 
@@ -31,6 +32,9 @@
                       andCount: 0];
 
     self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateVideoItemCell");
+    
+    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
+    self.timeLabel.font = [UIFont lightCustomFontOfSize:self.timeLabel.font.pointSize];
 }
 
 
