@@ -154,9 +154,9 @@
                     </constraints>
                 </view>
                 <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jew-YX-wj4" userLabel="View - Outer Full Name Label">
-                    <rect key="frame" x="0.0" y="531" width="672" height="52"/>
+                    <rect key="frame" x="0.0" y="531" width="672" height="64"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dyg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wY-iP-RPC" userLabel="Label - Full Name Label">
                     <rect key="frame" x="-1" y="552" width="672" height="24"/>
@@ -176,20 +176,20 @@
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="-1" id="7h7-FP-c93"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="jew-YX-wj4" secondAttribute="leading" constant="-1" id="GAA-en-Qie"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="top" secondItem="0td-Z3-eno" secondAttribute="top" id="Hdi-Xu-dOa"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-31" id="K3l-6A-Van"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-43" id="K3l-6A-Van"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="top" secondItem="1" secondAttribute="top" id="KQc-dV-JP4"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="uxB-NR-Hkw" secondAttribute="trailing" id="LU7-5S-iUd"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="0td-Z3-eno" secondAttribute="trailing" id="PRg-8p-DeQ"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="centerX" secondItem="XoE-Jb-ERN" secondAttribute="centerX" id="Phy-pf-Dbs"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Rtq-Gd-Rnj"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="bottom" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-7" id="TxL-pY-bsq"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="bottom" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-19" id="TxL-pY-bsq"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="VGj-qv-A8K"/>
                 <constraint firstAttribute="trailing" secondItem="3wY-iP-RPC" secondAttribute="trailing" id="WbR-ER-4kQ"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerY" secondItem="0td-Z3-eno" secondAttribute="centerY" constant="67" id="Wfx-uD-6Tf"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" constant="50" id="aYf-C1-kCH"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="top" secondItem="1" secondAttribute="top" id="bF0-s9-siM"/>
                 <constraint firstAttribute="centerX" secondItem="MS7-tW-0TH" secondAttribute="centerX" constant="-0.5" id="dZ9-eW-GDU"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="centerY" secondItem="jew-YX-wj4" secondAttribute="centerY" constant="7" id="ek5-fV-xcC"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="centerY" secondItem="jew-YX-wj4" secondAttribute="centerY" constant="1" id="ek5-fV-xcC"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" constant="0.5" id="fVi-Wv-NS0"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="centerY" secondItem="uxB-NR-Hkw" secondAttribute="centerY" constant="-28" id="gbi-nM-5re"/>
                 <constraint firstAttribute="bottom" secondItem="MS7-tW-0TH" secondAttribute="bottom" id="kQy-8n-9mG"/>
