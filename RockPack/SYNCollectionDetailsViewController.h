@@ -16,7 +16,7 @@ typedef enum : NSInteger
     kChannelDetailsModeCreate = 2
 } kChannelDetailsMode;
 
-@interface SYNChannelDetailViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout,
+@interface SYNCollectionDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout,
                                                                        UICollectionViewDataSource,
                                                                        UICollectionViewDelegateFlowLayout>
 

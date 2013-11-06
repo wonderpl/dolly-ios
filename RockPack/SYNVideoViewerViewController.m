@@ -16,7 +16,7 @@
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "NSObject+Blocks.h"
 #import "SYNAbstractViewController.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
 #import "SYNImplicitSharingController.h"

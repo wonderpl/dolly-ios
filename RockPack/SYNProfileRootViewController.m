@@ -11,7 +11,7 @@
 #import "ChannelCover.h"
 #import "GAI.h"
 #import "SYNChannelCreateNewCell.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
 #import "SYNChannelThumbnailCell.h"
@@ -833,8 +833,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             {
                 //On iPhone we want a different navigation structure. Slide the view in.
                 
-                SYNChannelDetailViewController *channelCreationVC =
-                [[SYNChannelDetailViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
+                SYNCollectionDetailsViewController *channelCreationVC =
+                [[SYNCollectionDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
                                                               usingMode: kChannelDetailsModeCreate];
                 
                 CGRect newFrame = channelCreationVC.view.frame;

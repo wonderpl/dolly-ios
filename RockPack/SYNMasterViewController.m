@@ -14,7 +14,7 @@
 #import "SYNActivityPopoverViewController.h"
 #import "SYNCaution.h"
 #import "SYNCautionMessageView.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNExistingCollectionsViewController.h"

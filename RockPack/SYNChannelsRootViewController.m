@@ -14,7 +14,7 @@
 #import "Genre.h"
 #import "SYNAppDelegate.h"
 #import "SYNChannelCategoryTableViewController.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelThumbnailCell.h"
 #import "SYNChannelsRootViewController.h"
 #import "SYNDeviceManager.h"
