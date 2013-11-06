@@ -27,4 +27,6 @@
 
 + (UIColor *) colorWithHex:(NSInteger)hex;
 
++ (UIColor *) dollyTabColorSelected;
+
 @end

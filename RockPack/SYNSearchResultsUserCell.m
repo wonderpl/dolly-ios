@@ -9,6 +9,7 @@
 #import "SYNSearchResultsUserCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SYNSearchResultsUserCell
 
@@ -19,6 +20,7 @@
     // == Round off the image == //
     self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
     self.userThumbnailImageView.clipsToBounds = YES;
+    
 }
 
 
@@ -33,7 +35,6 @@
         return;
     }
     
-    self.followButton.dataItemLinked = _channelOwner;
     
     [self.userThumbnailImageView setImageWithURL: [NSURL URLWithString: _channelOwner.thumbnailURL]
                                 placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]

@@ -12,7 +12,7 @@
 #import "ExternalAccount.h"
 #import "GAI.h"
 #import "SYNChannelCreateNewCell.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelMidCell.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"

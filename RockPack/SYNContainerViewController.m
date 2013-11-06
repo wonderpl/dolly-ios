@@ -11,7 +11,7 @@
 #import "GAI.h"
 #import "MKNetworkEngine.h"
 #import "SYNActivityPopoverViewController.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelsRootViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"

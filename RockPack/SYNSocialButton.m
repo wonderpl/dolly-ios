@@ -25,7 +25,7 @@
     self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 2.0, 0.0, 0.0);
     
     self.layer.cornerRadius = self.frame.size.height * 0.5;
-    self.layer.borderColor = [UIColor.dollyButtonDefaultColor CGColor];
+    self.layer.borderColor = self.defaultColor.CGColor;
     self.layer.borderWidth = 1.0f;
     
     [self setTitleColor: UIColor.dollyButtonDefaultColor
@@ -73,6 +73,18 @@
       [self setTitle: [NSString stringWithFormat: @"%@\n%d", title, count]
             forState: UIControlStateNormal];
 #endif
+}
+
+- (UIColor *) defaultColor
+{
+    return [UIColor colorWithWhite: (152.0f / 255.0f)
+                             alpha: 1.0f];
+}
+
+- (UIColor *) selectedColor
+{
+    return [UIColor colorWithWhite: (152.0f / 255.0f)
+                             alpha: 1.0f];
 }
 
 @end

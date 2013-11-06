@@ -17,4 +17,6 @@
 - (void) setTitle: (NSString *) title
          andCount: (NSInteger) count;
 
+- (UIColor *) defaultColor;
+- (UIColor *) selectedColor;
 @end

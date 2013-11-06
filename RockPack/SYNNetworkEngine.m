@@ -361,7 +361,7 @@
     if(!genreId) return nil;
     
     NSDictionary *parameters;
-    if([genreId isEqualToString:@""]) // POPULAR Genre passes a blank genreId so no category param should be set
+    if([genreId isEqualToString:kPopularGenreUniqueId]) // 'POPULAR' SubGenre passed, do not create a 'category' argument
         parameters = [self getLocaleParam];
     else
         parameters = [self getLocaleParamWithParams:@{@"category" : genreId}];
@@ -369,6 +369,7 @@
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIVideos
                                                                                                          params: parameters];
     networkOperation.shouldNotCacheResponse = YES;
+    
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
         

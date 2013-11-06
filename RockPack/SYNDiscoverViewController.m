@@ -71,6 +71,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.colorMapForCells = @{};
+    self.searchBar.layer.borderWidth = 1.0f;
+    self.searchBar.layer.borderColor = [[UIColor whiteColor] CGColor];
+    if(IS_IPHONE)
+    {
+        
+        
+    }
+    
     
     
     self.autocompleteTableView.hidden = YES;
@@ -130,13 +138,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
       
         _popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-        _popularGenre.uniqueId = @"9090";
+        _popularGenre.uniqueId = kPopularGenreUniqueId;
         _popularGenre.name = [NSString stringWithString:kPopularGenreName];
         _popularGenre.priorityValue = 100000;
         
         
         popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
-        popularSubGenre.uniqueId = @"9091";
+        popularSubGenre.uniqueId = kPopularGenreUniqueId;
         popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
         popularSubGenre.priorityValue = 100000;
         
@@ -189,7 +197,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         // this should always be true since we are either creating it on the fly or it is in DB already
         if(popularSubGenre)
         {
-            [self.searchResultsController searchForGenre:popularSubGenre.name];
+            [self.searchResultsController searchForGenre:popularSubGenre.uniqueId];
         }
         else
         {
@@ -201,6 +209,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.topItem.title = self.title;
+}
 
 
 #pragma mark - Data Retrieval
@@ -301,6 +315,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
+    
     Genre* currentGenre = self.genres[indexPath.section];
     SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
@@ -320,12 +335,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubGenre* selectedGenre = self.genres[indexPath.item];
+    Genre* currentGenre = self.genres[indexPath.section];
+    SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
-    if([selectedGenre.name isEqualToString:kPopularGenreName])
-        [self dispatchSearch:@"" forType:kSearchTypeGenre];
-    else
-        [self dispatchSearch:selectedGenre.uniqueId forType:kSearchTypeGenre];
+    [self dispatchSearch:subgenre.uniqueId
+               withTitle:subgenre.name
+                 forType:kSearchTypeGenre];
+    
 }
 
 
@@ -357,22 +373,25 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     NSString* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
     
-    [self dispatchSearch:suggestion];
+    [self dispatchSearch:suggestion
+               withTitle:suggestion
+                 forType:kSearchTypeTerm];
     
     [self closeAutocomplete];
 }
 
 #pragma mark - UISearchBar Delegate and Autocomplete Methods
 
-- (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchbar
+- (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchBar
 {
     //[searchbar setText: @""];
+    [searchBar setShowsCancelButton:YES animated:YES];
     return YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    
+    [searchBar setShowsCancelButton:NO animated:YES];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
@@ -473,37 +492,46 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self dispatchSearch:searchBar.text];
+    
+    
+    [self dispatchSearch:searchBar.text
+               withTitle:searchBar.text
+                 forType:kSearchTypeTerm];
 }
 
+
 - (void) dispatchSearch:(NSString*)searchTerm
+              withTitle:(NSString*)title
+                forType:(kSearchType)type
 {
-    [self dispatchSearch:searchTerm forType:kSearchTypeTerm];
-}
-- (void) dispatchSearch:(NSString*)searchTerm forType:(kSearchType)type
-{
-    // add first so as to pass the appDelegate
+    
     if(IS_IPHONE)
     {
-        // this is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
+        // the hack below is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
         UIView* view_hack = self.searchResultsController.view;
         #pragma unused(view_hack)
+        
+        self.searchResultsController.title = title;
         
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
         
         
+        
+        
+    }
+    else // if(IS_IPAD)
+    {
+        // in the case of the iPad the navigation bar title needs to be changed manually
+        self.navigationController.navigationBar.topItem.title = title;
+        
     }
     
     if(type == kSearchTypeGenre)
-    {
-        
         [self.searchResultsController searchForGenre:searchTerm];
-    }
     else
-    {
         [self.searchResultsController searchForTerm:searchTerm];
-    }
+    
     
     
     

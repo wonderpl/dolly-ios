@@ -8,7 +8,7 @@
 
 #import "ChannelOwner.h"
 #import "SYNAbstractViewController.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNProfileRootViewController.h"
@@ -102,8 +102,8 @@
         return;
     }
     
-    SYNChannelDetailViewController *channelVC =
-    (SYNChannelDetailViewController *) [self topControllerMatchingTypeString: NSStringFromClass([SYNChannelDetailViewController class])];
+    SYNCollectionDetailsViewController *channelVC =
+    (SYNCollectionDetailsViewController *) [self topControllerMatchingTypeString: NSStringFromClass([SYNCollectionDetailsViewController class])];
     
     if (channelVC)
     {
@@ -113,7 +113,7 @@
     }
     else
     {
-        channelVC = [[SYNChannelDetailViewController alloc] initWithChannel: channel
+        channelVC = [[SYNCollectionDetailsViewController alloc] initWithChannel: channel
                                                                   usingMode: kChannelDetailsModeDisplay];
         channelVC.autoplayVideoId = autoplayId;
         [navigationController pushViewController:channelVC animated:nil];
@@ -127,8 +127,8 @@
         return;
     }
     
-    SYNChannelDetailViewController *channelVC =
-    (SYNChannelDetailViewController *) [self topControllerMatchingTypeString: NSStringFromClass([SYNChannelDetailViewController class])];
+    SYNCollectionDetailsViewController *channelVC =
+    (SYNCollectionDetailsViewController *) [self topControllerMatchingTypeString: NSStringFromClass([SYNCollectionDetailsViewController class])];
     
     if (channelVC)
     {
@@ -138,7 +138,7 @@
     }
     else
     {
-        channelVC = [[SYNChannelDetailViewController alloc] initWithChannel: channel
+        channelVC = [[SYNCollectionDetailsViewController alloc] initWithChannel: channel
                                                                   usingMode: kChannelDetailsModeDisplay];
         channelVC.autoplayVideoId = autoplayId;
         [self pushController: channelVC];
