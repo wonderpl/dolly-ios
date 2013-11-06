@@ -36,8 +36,8 @@
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
 #define FULLNAMELABELIPHONE 285.0f
-#define FULLNAMELABELIPADPORTRAIT 550.0f
-#define FULLNAMELABELIPADLANDSCAPE 420.0f
+#define FULLNAMELABELIPADPORTRAIT 555.0f
+#define FULLNAMELABELIPADLANDSCAPE 430.0f
 #define SEARCHBARTOP 390.0f
 
 @interface SYNProfileRootViewController () <
@@ -1245,6 +1245,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 CGRect tmpFrame = self.outerViewFullNameLabel.frame;
                 tmpFrame.size.height = 64;
                 self.outerViewFullNameLabel.frame = tmpFrame;
+                self.outerViewFullNameLabel.alpha = 0.9;
 
                 self.outerViewFullNameLabel.transform = move;
             }
@@ -1254,8 +1255,9 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 CGRect tmpFrame = self.outerViewFullNameLabel.frame;
                 tmpFrame.size.height = 44;
                 self.outerViewFullNameLabel.frame = tmpFrame;
-
                 self.outerViewFullNameLabel.transform = move;
+                self.outerViewFullNameLabel.alpha = 1.0;
+
             }
         }
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
@@ -1278,6 +1280,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 tmpFrame.size.height = 44;
                 self.outerViewFullNameLabel.frame = tmpFrame;
                 self.outerViewFullNameLabel.transform = move;
+                self.outerViewFullNameLabel.alpha = 1.0;
+
             }
         }
     }
