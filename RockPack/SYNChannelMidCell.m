@@ -187,6 +187,11 @@
     return YES; // handle the touch
 }
 
+-(void) setBottomBarColor:(UIColor*) color
+{
+    [self.bottomBarView setBackgroundColor:color];    
+}
+
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
 {
     // Just need to reference any button in the cell (as there is no longer an actual video button)
@@ -238,6 +243,8 @@
     
     
 }
+
+
 
 - (IBAction)followChannel:(id)sender
 {
