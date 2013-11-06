@@ -43,7 +43,7 @@ SYNImagePickerControllerDelegate>{
     
 }
 
-@property (strong, nonatomic) IBOutlet UIView *outerViewLabel;
+@property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
 @property (nonatomic) BOOL deleteCellModeOn;
 @property (nonatomic) BOOL isIPhone;
 @property (nonatomic) BOOL isUserProfile;
@@ -96,10 +96,12 @@ SYNImagePickerControllerDelegate>{
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) UIColor *greyColor;
 @property (nonatomic, assign) BOOL pulling;
+@property (nonatomic, assign) BOOL searchMode;
 @property (nonatomic,assign) CGFloat startingPosition;
 @property (strong, nonatomic) IBOutlet UISearchBar *followingSearchBar;
 @property (strong, nonatomic) IBOutlet UIView *containerViewIPad;
 @property (nonatomic) ProfileType modeType;
+@property (nonatomic) CGPoint offsetBeforeSearch;
 
 @end
 
@@ -204,6 +206,7 @@ SYNImagePickerControllerDelegate>{
         [self updateTabStates];
     }
     
+    self.searchMode = NO;
     //  self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
     //  self.channelThumbnailCollectionView.scrollsToTop = NO;
     /*
@@ -633,10 +636,10 @@ SYNImagePickerControllerDelegate>{
     }
     else
     {
-//        self.channelThumbnailCollectionView.contentOffset = CGPointZero;
-//        self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
-//        self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
-//        self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
+        self.channelThumbnailCollectionView.contentOffset = CGPointZero;
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+        self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
+        self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
 //        self.coverImage.transform = CGAffineTransformIdentity;
 //        self.moreButton.transform = CGAffineTransformIdentity;
 //        self.coverImage.transform = CGAffineTransformIdentity;
@@ -923,8 +926,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.channelThumbnailCollectionView.contentOffset = CGPointZero;
     self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
 
-    self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
-    self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
+    //self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
+  //  self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
 
     
     CGSize channelViewSize = self.channelThumbnailCollectionView.collectionViewLayout.collectionViewContentSize;
@@ -998,8 +1001,13 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.followingSearchBar resignFirstResponder];
-    [super scrollViewWillBeginDragging:scrollView];
+    
+  //  [super scrollViewWillBeginDragging:scrollView];
+    if (self.searchMode) {
+        [self.followingSearchBar resignFirstResponder];
+        self.searchMode = NO;
+    }
+
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -1025,6 +1033,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
  
+
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
         
@@ -1072,6 +1081,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
 
+            [self moveNameLabelWithOffset:offset];
+
             /*
              self.profileImageView.transform = move;
             self.aboutMeTextView.transform = move;
@@ -1079,7 +1090,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.followAllButton.transform = move;
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
-            self.fullNameLabel.transform = move;*/
+            self.fullNameLabel.transform = move;
+             */
 
 
         }
@@ -1194,7 +1206,10 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             
             //CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
             //self.fullNameLabel.transform = CGAffineTransformConcat(move, scale);
-            self.outerViewLabel.transform = move;
+            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
+            tmpFrame.size.height = 43;
+            self.outerViewFullNameLabel.frame = tmpFrame;
+            self.outerViewFullNameLabel.transform = move;
         }
         
         if (offset > FULLNAMELABEL) {
@@ -1202,13 +1217,20 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULLNAMELABEL);
             
             CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
-            
-            self.outerViewLabel.transform = CGAffineTransformConcat(move, scale);
+            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
+            tmpFrame.size.height = 64;
+            self.outerViewFullNameLabel.frame = tmpFrame;
+
+            self.outerViewFullNameLabel.transform = CGAffineTransformConcat(move, scale);
             
         }
-        
-
     }
+    
+    if (IS_IPAD) {
+        
+        
+    }
+   
 }
 
 -(void) scrollingEnded{
@@ -1439,7 +1461,17 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
+    self.searchMode = NO;
+    //[self calculateOffsetForSearch];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+    }];
+    
+    [self.followingSearchBar setShowsCancelButton:NO animated:YES];
+
     [searchBar resignFirstResponder];
+
 }
 
 
@@ -1452,13 +1484,27 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     
+    self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
     [self.subscriptionThumbnailCollectionView reloadData];
- 
+
+    self.searchMode = NO;
+
     [self.followingSearchBar resignFirstResponder];
+    if (self.currentSearchTerm.length == 0) {
+        [self.followingSearchBar setShowsCancelButton:NO animated:YES];
+    }
+    else
+    {
+        [self enableCancelButton: searchBar];
+
+    }
+
     
-   // self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, self.followingSearchBar.frame.origin.x+44);
+    
+    self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 441-64);
     
 }
 
@@ -1470,6 +1516,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+
+    //To not get the keyboard to show when the x button is clicked
     if(![self.followingSearchBar isFirstResponder]) {
         self.shouldBeginEditing = NO;
     }
@@ -1477,24 +1525,72 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
     [self.subscriptionThumbnailCollectionView reloadData];
-
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
     
-    [self performSelector:@selector(searchBarCancelButtonClicked:) withObject:self.followingSearchBar afterDelay: 0.1];
-    
+    [self.followingSearchBar resignFirstResponder];
+    [self.followingSearchBar setShowsCancelButton:NO animated:YES];
+
     return YES;
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar
 {
-    // reset the shouldBeginEditing BOOL ivar to YES, but first take its value and use it to return it from the method call
+    // boolean to check if the keyboard should show
     BOOL boolToReturn = self.shouldBeginEditing;
+    self.searchMode = YES;
+
+
+    if (self.shouldBeginEditing)
+    {
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 441-64);
+            
+        }];
+        [self.followingSearchBar setShowsCancelButton:YES animated:YES];
+
+    }
+
     self.shouldBeginEditing = YES;
+
     return boolToReturn;
 }
+
+-(void) calculateOffsetForSearch
+{
+    
+    
+    if (self.searchMode)
+    {
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 441-64);
+    }
+    else
+    {
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+        
+    }
+
+}
+
+- (void)enableCancelButton:(UISearchBar *)searchBar
+{
+    for (UIView *view in searchBar.subviews)
+    {
+        for (id subview in view.subviews)
+        {
+            if ( [subview isKindOfClass:[UIButton class]] )
+            {
+                [subview setEnabled:YES];
+                NSLog(@"enableCancelButton");
+                return;
+            }
+        }
+    }
+}
+
 
 -(NSArray*)arrDisplayFollowing
 {
