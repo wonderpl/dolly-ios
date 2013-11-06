@@ -46,11 +46,6 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ChannelDetailOverlayBackground.png" id="5" userLabel="Image View - Channel Cover Mask">
-                    <rect key="frame" x="0.0" y="0.0" width="927" height="768"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </imageView>
                 <collectionView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="3" userLabel="Collection View - Video thumbnails">
                     <rect key="frame" x="20" y="80" width="887" height="688"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,6 +374,7 @@
         <image name="ButtonCoverHighlighted.png" width="295" height="45"/>
         <image name="ButtonCreate.png" width="130" height="45"/>
         <image name="ButtonCreateDisabled.png" width="130" height="45"/>
+        <image name="ButtonCreateDisabled.png" width="130" height="45"/>
         <image name="ButtonCreateHighlighted.png" width="130" height="45"/>
         <image name="ButtonEdit.png" width="120" height="45"/>
         <image name="ButtonEditHighlighted.png" width="120" height="45"/>
@@ -393,9 +389,9 @@
         <image name="ButtonShareHighlighted.png" width="61" height="61"/>
         <image name="ButtonSubscribe.png" width="120" height="45"/>
         <image name="ButtonSubscribeDisabled.png" width="120" height="45"/>
+        <image name="ButtonSubscribeDisabled.png" width="120" height="45"/>
         <image name="ButtonSubscribeHighlighted.png" width="120" height="45"/>
         <image name="ButtonSubscribeSelected.png" width="120" height="45"/>
-        <image name="ChannelDetailOverlayBackground.png" width="1024" height="748"/>
         <image name="DeletePackButton.png" width="33" height="33"/>
     </resources>
 </document>

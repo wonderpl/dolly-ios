@@ -252,8 +252,6 @@
 		01A79B9F16F32C3400B05084 /* ButtonShuttleBarPlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B9016F32C3400B05084 /* ButtonShuttleBarPlay@2x.png */; };
 		01A79BA216F32C6900B05084 /* NSString+Timecode.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A79BA116F32C6900B05084 /* NSString+Timecode.m */; };
 		01A79BA516F34BBF00B05084 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A79BA416F34BBF00B05084 /* NSString+Utils.m */; };
-		01ABBAD6172002E6007E4462 /* ChannelDetailOverlayBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01ABBAD4172002E6007E4462 /* ChannelDetailOverlayBackground.png */; };
-		01ABBAD7172002E6007E4462 /* ChannelDetailOverlayBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01ABBAD5172002E6007E4462 /* ChannelDetailOverlayBackground@2x.png */; };
 		01ABBADC17200992007E4462 /* PanelVideoFeedLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 01ABBAD817200992007E4462 /* PanelVideoFeedLandscape.png */; };
 		01ABBADD17200992007E4462 /* PanelVideoFeedLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01ABBAD917200992007E4462 /* PanelVideoFeedLandscape@2x.png */; };
 		01ABBADE17200992007E4462 /* PanelVideoFeedPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 01ABBADA17200992007E4462 /* PanelVideoFeedPortrait.png */; };
@@ -1796,8 +1794,6 @@
 		01A79BA116F32C6900B05084 /* NSString+Timecode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Timecode.m"; sourceTree = "<group>"; };
 		01A79BA316F34BBF00B05084 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		01A79BA416F34BBF00B05084 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
-		01ABBAD4172002E6007E4462 /* ChannelDetailOverlayBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ChannelDetailOverlayBackground.png; path = Assets/Images/ChannelDetailOverlayBackground.png; sourceTree = "<group>"; };
-		01ABBAD5172002E6007E4462 /* ChannelDetailOverlayBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChannelDetailOverlayBackground@2x.png"; path = "Assets/Images/ChannelDetailOverlayBackground@2x.png"; sourceTree = "<group>"; };
 		01ABBAD817200992007E4462 /* PanelVideoFeedLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelVideoFeedLandscape.png; path = Assets/Images/PanelVideoFeedLandscape.png; sourceTree = "<group>"; };
 		01ABBAD917200992007E4462 /* PanelVideoFeedLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelVideoFeedLandscape@2x.png"; path = "Assets/Images/PanelVideoFeedLandscape@2x.png"; sourceTree = "<group>"; };
 		01ABBADA17200992007E4462 /* PanelVideoFeedPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelVideoFeedPortrait.png; path = Assets/Images/PanelVideoFeedPortrait.png; sourceTree = "<group>"; };
@@ -3590,8 +3586,6 @@
 				BEA2AEE9176E043F0099DB74 /* ButtonSearchHighlightedCD@2x.png */,
 				01ABBB1217205541007E4462 /* ButtonBuyHighlighted.png */,
 				01ABBB1317205541007E4462 /* ButtonBuyHighlighted@2x.png */,
-				01ABBAD4172002E6007E4462 /* ChannelDetailOverlayBackground.png */,
-				01ABBAD5172002E6007E4462 /* ChannelDetailOverlayBackground@2x.png */,
 			);
 			name = "Channel viewer";
 			sourceTree = "<group>";
@@ -6643,8 +6637,6 @@
 				BE86BF3217201BA70006DC8A /* ButtonResetPasswordHighlighted.png in Resources */,
 				BE86BF3317201BA70006DC8A /* ButtonResetPasswordHighlighted@2x.png in Resources */,
 				1F458B0417E1C4E6003C14AC /* AppIcon60x60.png in Resources */,
-				01ABBAD6172002E6007E4462 /* ChannelDetailOverlayBackground.png in Resources */,
-				01ABBAD7172002E6007E4462 /* ChannelDetailOverlayBackground@2x.png in Resources */,
 				BEB312FE1815638700FAF98A /* TabProfile.png in Resources */,
 				1F4E7FB9181ACBAA00F59007 /* TabMoods@2x~iphone.png in Resources */,
 				01ABBADC17200992007E4462 /* PanelVideoFeedLandscape.png in Resources */,
