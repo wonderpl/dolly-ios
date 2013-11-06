@@ -778,6 +778,52 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
+- (IBAction) profileButtonTapped: (UIButton *) profileButton
+{
+   FeedItem *feedItem = [self feedItemFromView: profileButton];
+    
+    ChannelOwner* channelOwner;
+    
+    // there are 2 types, video and channel (collection) types
+    
+    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
+    {
+        VideoInstance* vi;
+        
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
+            vi = (VideoInstance*)((self.feedVideosById)[firstChildFeedItem.resourceId]);
+        }
+        else
+        {
+            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
+        }
+        
+        channelOwner = vi.channel.channelOwner;
+    }
+    else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
+    {
+        Channel* channel;
+
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
+            channel = (Channel*)(self.feedChannelsById[firstChildFeedItem.resourceId]);
+        }
+        else
+        {
+            channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
+        }
+
+        channelOwner = channel.channelOwner;
+    }
+    
+    [appDelegate.viewStackManager viewProfileDetails: channelOwner
+                            withNavigationController: self.navigationController];
+}
+
+
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex

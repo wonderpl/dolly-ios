@@ -39,6 +39,9 @@
                             <constraint firstAttribute="width" constant="50" id="HN5-Hv-ECM"/>
                             <constraint firstAttribute="height" constant="50" id="QMY-Jd-s6c"/>
                         </constraints>
+                        <connections>
+                            <action selector="likeControlPressed:" destination="G5W-z0-ioj" eventType="touchUpInside" id="mp1-Qj-ZLm"/>
+                        </connections>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-RS-b5y" userLabel="Control - Add" customClass="SYNSocialAddButton">
                         <rect key="frame" x="99" y="185" width="50" height="50"/>
@@ -48,6 +51,9 @@
                             <constraint firstAttribute="width" constant="50" id="VAF-CB-XVP"/>
                             <constraint firstAttribute="height" constant="50" id="oJo-ba-zer"/>
                         </constraints>
+                        <connections>
+                            <action selector="addControlPressed:" destination="G5W-z0-ioj" eventType="touchUpInside" id="yMl-Md-ViZ"/>
+                        </connections>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWN-5L-kuq" userLabel="Control - Share" customClass="SYNSocialButton">
                         <rect key="frame" x="174" y="185" width="50" height="50"/>
@@ -57,6 +63,9 @@
                             <constraint firstAttribute="width" constant="50" id="CjJ-Hn-7mz"/>
                             <constraint firstAttribute="height" constant="50" id="tMF-hu-IK9"/>
                         </constraints>
+                        <connections>
+                            <action selector="shareControlPressed:" destination="G5W-z0-ioj" eventType="touchUpInside" id="qdV-jK-6ba"/>
+                        </connections>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

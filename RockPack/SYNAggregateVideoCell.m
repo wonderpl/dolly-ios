@@ -169,4 +169,5 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 }
 
+
 @end

@@ -11,7 +11,7 @@
 #import "Video.h"
 #import "UIImageView+WebCache.h"
 
-@implementation SYNCollectionVideoCell
+@implementation SYNCollectionVideoCell 
 
 
 - (void) awakeFromNib
@@ -21,12 +21,28 @@
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
 }
 
-- (void) layoutSubviews
+#pragma mark - Social Callbacks
+
+
+
+- (IBAction) likeControlPressed: (SYNSocialButton *) socialButton
 {
-    [super layoutSubviews];
-    
-    NSLog(@"%@", NSStringFromCGRect(self.frame));
+    [self.delegate likeControlPressed: socialButton];
 }
+
+
+- (IBAction) addControlPressed: (SYNSocialButton *) socialButton
+{
+   
+    [self.delegate addControlPressed: socialButton];
+}
+
+- (IBAction) shareControlPressed: (SYNSocialButton *) socialButton
+{
+    [self.delegate shareControlPressed: socialButton];
+}
+
+#pragma mark - Set Video Instance
 
 - (void) setVideoInstance: (VideoInstance *) videoInstance
 {
