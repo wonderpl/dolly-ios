@@ -1282,7 +1282,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
                 self.fullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
-                self.fullNameLabel.alpha = 1.0;
+                self.outerViewFullNameLabel.transform = move;
+
                 self.outerViewFullNameLabel.hidden = YES;
 
 
