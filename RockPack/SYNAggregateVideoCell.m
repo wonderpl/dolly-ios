@@ -46,9 +46,10 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
     
-    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize:self.actionMessageLabel.font.pointSize];
+    // set fonts
     
-    self.channelNameLabel.font = [UIFont lightCustomFontOfSize:self.channelNameLabel.font.pointSize];
+    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize:self.actionMessageLabel.font.pointSize];
+    self.collectionNameLabel.font = [UIFont lightCustomFontOfSize:self.collectionNameLabel.font.pointSize];
     
     [self.collectionView reloadData];
 }
@@ -90,7 +91,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     self.actionMessageLabel.attributedText = attributedCompleteString;
     
-    self.channelNameLabel.text = heuristicChannel.title;
+    self.collectionNameLabel.text = heuristicChannel.title;
 }
 
 
