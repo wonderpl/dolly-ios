@@ -23,10 +23,10 @@
 "Password" = "Password";
 "Email" = "Email";
 
-"VIDEOS" = "VIDEOS";
+"VIDEOS" = "videos";
 "CHANNELS" = "PACKS";
 "USERS" = "PEOPLE";
-"SUBSCRIBERS" = "FOLLOWERS";
+"SUBSCRIBERS" = "followers";
 
 //Camera
 "channel_creation_screen_select_upload_photo_label" = "Select Source";
