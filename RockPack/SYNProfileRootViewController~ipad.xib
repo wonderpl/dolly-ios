@@ -157,8 +157,8 @@
                     <rect key="frame" x="0.0" y="538" width="672" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dyg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wY-iP-RPC" userLabel="Label - Full Name Label">
-                            <rect key="frame" x="0.0" y="11" width="672" height="24"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dyg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wY-iP-RPC" userLabel="Label - Full Name Label">
+                            <rect key="frame" x="0.0" y="12" width="672" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -167,7 +167,12 @@
                     </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="3wY-iP-RPC" firstAttribute="width" secondItem="jew-YX-wj4" secondAttribute="width" id="2BK-mc-sbt"/>
                         <constraint firstAttribute="height" constant="44" id="FiR-aU-BE6"/>
+                        <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="jew-YX-wj4" secondAttribute="leading" id="P8a-eb-i3Q"/>
+                        <constraint firstAttribute="trailing" secondItem="3wY-iP-RPC" secondAttribute="trailing" id="cnK-S2-m2w"/>
+                        <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="top" constant="12" id="csc-pX-tyh"/>
+                        <constraint firstAttribute="bottom" secondItem="3wY-iP-RPC" secondAttribute="bottom" constant="8" id="m3s-mP-z57"/>
                     </constraints>
                 </view>
             </subviews>
