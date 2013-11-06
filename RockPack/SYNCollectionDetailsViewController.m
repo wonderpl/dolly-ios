@@ -1137,10 +1137,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     return footerSize;
 }
 
-- (void) resetDataRequestRange
-{
-    
-}
+
 - (void) loadMoreVideos
 {
     if(!self.moreItemsToLoad)

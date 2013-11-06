@@ -10,7 +10,7 @@
 
 #import "SYNSocialButton.h"
 #import "SYNSocialAddButton.h"
-
+#import "VideoInstance.h"
 #import "SYNSocialActionsDelegate.h"
 
 @interface SYNCollectionVideoCell : UICollectionViewCell
@@ -23,5 +23,6 @@
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
+@property (nonatomic, weak) VideoInstance* videoInstance;
 
 @end
