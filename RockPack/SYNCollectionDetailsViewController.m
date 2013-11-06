@@ -231,8 +231,8 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     
     // == Video Cells == //
     
-    [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: @"SYNVideoThumbnailRegularCell" bundle: nil]
-                        forCellWithReuseIdentifier: @"SYNVideoThumbnailRegularCell"];
+    [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
+                        forCellWithReuseIdentifier: CollectionVideoCellName];
     
     // == Footer View == //
     UINib *footerViewNib = [UINib nibWithNibName: @"SYNChannelFooterMoreView"
