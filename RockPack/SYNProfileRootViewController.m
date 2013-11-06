@@ -780,6 +780,8 @@ SYNImagePickerControllerDelegate>{
         [channelThumbnailCell setChannel:channel];
         [channelThumbnailCell setTitle: channel.title];
         [channelThumbnailCell setHiddenForFollowButton:YES];
+        [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
+
         [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
         [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
@@ -802,10 +804,12 @@ SYNImagePickerControllerDelegate>{
             
             [channelThumbnailCell setChannel:channel];
             [channelThumbnailCell setTitle: channel.title];
+
             [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
             [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
             [channelThumbnailCell setTitle:channel.title];
             [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+            
             cell = channelThumbnailCell;
         }
         else

@@ -41,6 +41,11 @@
                                         <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" id="ZTg-Ce-S2r">
+                                        <rect key="frame" x="0.0" y="63" width="322" height="8"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -66,6 +71,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="boarderView" destination="hV6-6M-JIz" id="L3r-Ss-KpG"/>
+                <outlet property="bottomBarView" destination="ZTg-Ce-S2r" id="Sof-lm-tBD"/>
                 <outlet property="containerView" destination="UUL-SF-FNl" id="1u2-bb-DPV"/>
                 <outlet property="descriptionView" destination="A5P-th-oX8" id="zRt-95-k7j"/>
                 <outlet property="detailsLabel" destination="UQE-Qn-569" id="J57-lK-XnT"/>
