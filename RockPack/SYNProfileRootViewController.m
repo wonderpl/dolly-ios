@@ -35,10 +35,10 @@
 #define PULL_THRESHOLD_IPAD 0.0f
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
-#define FULLNAMELABELIPHONE 285.0f
-#define FULLNAMELABELIPADPORTRAIT 555.0f
-#define FULLNAMELABELIPADLANDSCAPE 430.0f
-#define SEARCHBARTOP 390.0f
+#define FULL_NAME_LABEL_IPHONE 285.0f
+#define FULL_NAME_LABEL_IPAD_PORTRAIT 542.0f
+#define FULLNAMELABELIPADLANDSCAPE 415.0f
+#define SEARCHBAR_Y 390.0f
 
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
@@ -118,7 +118,7 @@ SYNImagePickerControllerDelegate>{
 {
     if (self = [super initWithNibName:NSStringFromClass([SYNProfileRootViewController class]) bundle:nil])
     {
-        self = [self initWithMode: MyOwnProfile];
+        self = [self initWithViewId:vid WithMode:MyOwnProfile];
         
         viewId = vid;
         [[NSNotificationCenter defaultCenter] addObserver: self
@@ -132,7 +132,7 @@ SYNImagePickerControllerDelegate>{
     return self;
 }
 
-- (id) initWithMode: (ProfileType) mode
+- (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
 {
     modeType = mode;
     return self;
@@ -258,7 +258,7 @@ SYNImagePickerControllerDelegate>{
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
     
-    // self.modeType = OtherUsersProfile;
+     self.modeType = MyOwnProfile;
     
     [self setProfleType:self.modeType];
     
@@ -560,7 +560,6 @@ SYNImagePickerControllerDelegate>{
              return;
          }
      }];
-    
 }
 
 //Doesnt work as expected, check it out.
@@ -804,6 +803,8 @@ SYNImagePickerControllerDelegate>{
         }
         else if(self.modeType == OtherUsersProfile)
         {
+            
+            
             [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
         }
         
@@ -932,6 +933,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     return CGSizeZero;
 }
+
 
 - (void) resizeScrollViews
 {
@@ -1216,10 +1218,12 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset  {
     
+ //   NSLog(@"%f", offset);
+    
     if (IS_IPHONE)
     {
         
-        if (offset < FULLNAMELABELIPHONE)
+        if (offset < FULL_NAME_LABEL_IPHONE)
         {
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
             //CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
@@ -1230,9 +1234,9 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.outerViewFullNameLabel.transform = move;
         }
         
-        if (offset > FULLNAMELABELIPHONE)
+        if (offset > FULL_NAME_LABEL_IPHONE)
         {
-            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULLNAMELABELIPHONE);
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
             CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
             CGRect tmpFrame = self.outerViewFullNameLabel.frame;
             tmpFrame.size.height = 64;
@@ -1248,48 +1252,49 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
      //   NSLog(@"%f", offset);
         
         if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
-            if (offset > FULLNAMELABELIPADPORTRAIT)
+            if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
-                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULLNAMELABELIPADPORTRAIT);
-                CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-                tmpFrame.size.height = 64;
-                self.outerViewFullNameLabel.frame = tmpFrame;
-                self.outerViewFullNameLabel.alpha = 0.9;
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
 
+                self.fullNameLabel.alpha = 0.9;
+                self.fullNameLabel.transform = move;
                 self.outerViewFullNameLabel.transform = move;
+                self.outerViewFullNameLabel.hidden = NO;
             }
-            if (offset<FULLNAMELABELIPADPORTRAIT)
+            if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
+                
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-                CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-                tmpFrame.size.height = 44;
-                self.outerViewFullNameLabel.frame = tmpFrame;
+                self.fullNameLabel.transform = move;
                 self.outerViewFullNameLabel.transform = move;
-                self.outerViewFullNameLabel.alpha = 1.0;
+                self.fullNameLabel.alpha = 1.0;
+                self.outerViewFullNameLabel.hidden = YES;
 
             }
         }
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
         {
             
+            NSLog(@"%f", offset);
             if (offset > FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULLNAMELABELIPADLANDSCAPE);
-                CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-                tmpFrame.size.height = 64;
-                self.outerViewFullNameLabel.frame = tmpFrame;
+                self.fullNameLabel.transform = move;
+                self.fullNameLabel.alpha = 0.9;
                 self.outerViewFullNameLabel.transform = move;
-                self.outerViewFullNameLabel.alpha = 0.9;
+                self.outerViewFullNameLabel.hidden = NO;
+
             }
             
             if (offset<FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-                CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-                tmpFrame.size.height = 44;
-                self.outerViewFullNameLabel.frame = tmpFrame;
+                self.fullNameLabel.transform = move;
+                self.fullNameLabel.alpha = 1.0;
                 self.outerViewFullNameLabel.transform = move;
-                self.outerViewFullNameLabel.alpha = 1.0;
+
+                self.outerViewFullNameLabel.hidden = YES;
+
 
             }
         }
@@ -1564,10 +1569,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         [self enableCancelButton: searchBar];
         
     }
-    
-    
-    
-    self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBARTOP);
+    self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBAR_Y);
     
 }
 
@@ -1579,7 +1581,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    
     //To not get the keyboard to show when the x button is clicked
     if(![self.followingSearchBar isFirstResponder]) {
         self.shouldBeginEditing = NO;
@@ -1610,7 +1611,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     {
         
         [UIView animateWithDuration:0.2 animations:^{
-            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBARTOP);
+            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBAR_Y);
             
         }];
         [self.followingSearchBar setShowsCancelButton:YES animated:YES];
@@ -1628,7 +1629,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (self.searchMode)
     {
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBARTOP);
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBAR_Y);
     }
     else
     {
