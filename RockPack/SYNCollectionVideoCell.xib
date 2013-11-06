@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M54-bt-6WL">
-                        <rect key="frame" x="0.0" y="23" width="248" height="139"/>
+                        <rect key="frame" x="0.0" y="0.0" width="248" height="139"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -23,7 +23,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-bN-MdJ" userLabel="Title">
-                        <rect key="frame" x="0.0" y="162" width="248" height="16"/>
+                        <rect key="frame" x="0.0" y="147" width="248" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,7 +32,7 @@
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4D-AB-sGK" userLabel="Control - Like" customClass="SYNSocialButton">
-                        <rect key="frame" x="24" y="197" width="50" height="50"/>
+                        <rect key="frame" x="24" y="185" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -41,7 +41,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-RS-b5y" userLabel="Control - Add" customClass="SYNSocialAddButton">
-                        <rect key="frame" x="99" y="197" width="50" height="50"/>
+                        <rect key="frame" x="99" y="185" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -50,7 +50,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWN-5L-kuq" userLabel="Control - Share" customClass="SYNSocialButton">
-                        <rect key="frame" x="174" y="197" width="50" height="50"/>
+                        <rect key="frame" x="174" y="185" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,16 +65,16 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="OKX-RS-b5y" secondAttribute="centerX" id="2fd-MO-Q1G"/>
                 <constraint firstItem="M54-bt-6WL" firstAttribute="leading" secondItem="G5W-z0-ioj" secondAttribute="leading" id="41L-7p-Hrr"/>
-                <constraint firstItem="M54-bt-6WL" firstAttribute="top" secondItem="G5W-z0-ioj" secondAttribute="top" constant="23" id="4Sf-NS-GuN"/>
-                <constraint firstAttribute="bottom" secondItem="XWN-5L-kuq" secondAttribute="bottom" constant="10" id="9vg-nl-jZ0"/>
-                <constraint firstAttribute="bottom" secondItem="OKX-RS-b5y" secondAttribute="bottom" constant="10" id="BXY-3r-SRK"/>
+                <constraint firstItem="M54-bt-6WL" firstAttribute="top" secondItem="G5W-z0-ioj" secondAttribute="top" id="4Sf-NS-GuN"/>
+                <constraint firstAttribute="bottom" secondItem="XWN-5L-kuq" secondAttribute="bottom" constant="22" id="9vg-nl-jZ0"/>
+                <constraint firstAttribute="bottom" secondItem="OKX-RS-b5y" secondAttribute="bottom" constant="22" id="BXY-3r-SRK"/>
                 <constraint firstAttribute="trailing" secondItem="4l6-bN-MdJ" secondAttribute="trailing" id="LIE-xr-giQ"/>
-                <constraint firstItem="4l6-bN-MdJ" firstAttribute="top" secondItem="M54-bt-6WL" secondAttribute="bottom" id="OaM-1L-Hwv"/>
+                <constraint firstItem="4l6-bN-MdJ" firstAttribute="top" secondItem="M54-bt-6WL" secondAttribute="bottom" constant="8" id="OaM-1L-Hwv"/>
                 <constraint firstAttribute="centerX" secondItem="e4D-AB-sGK" secondAttribute="centerX" constant="75" id="QcL-Ju-x5G"/>
                 <constraint firstAttribute="centerX" secondItem="XWN-5L-kuq" secondAttribute="centerX" constant="-75" id="RRe-ZL-Vbu"/>
                 <constraint firstItem="4l6-bN-MdJ" firstAttribute="leading" secondItem="G5W-z0-ioj" secondAttribute="leading" id="ooE-m4-NXc"/>
                 <constraint firstAttribute="trailing" secondItem="M54-bt-6WL" secondAttribute="trailing" id="qzm-rM-1n6"/>
-                <constraint firstAttribute="bottom" secondItem="e4D-AB-sGK" secondAttribute="bottom" constant="10" id="r8j-g8-An2"/>
+                <constraint firstAttribute="bottom" secondItem="e4D-AB-sGK" secondAttribute="bottom" constant="22" id="r8j-g8-An2"/>
             </constraints>
             <size key="customSize" width="307" height="183"/>
             <connections>
