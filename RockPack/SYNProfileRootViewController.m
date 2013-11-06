@@ -920,8 +920,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         return;
     }
     
-   // self.channelThumbnailCollectionView.contentOffset = CGPointZero;
-   // self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+    self.channelThumbnailCollectionView.contentOffset = CGPointZero;
+    self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
 
     self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
     self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsZero;
