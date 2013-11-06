@@ -3870,6 +3870,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				BE06EEE517D635090028F2E3 /* Strict Interactive View */,
 				BE9071A717CCD62F00FCB320 /* Blur View iOS7 */,
@@ -4270,8 +4271,6 @@
 				01EC6235166EAAA6003154B1 /* SYNCollectionDetailsViewController.m */,
 				01ABBB3317218A60007E4462 /* SYNCollectionDetailsViewController.xib */,
 				38FD441E172A9E280086B524 /* SYNCollectionDetailsViewController~iphone.xib */,
-				BEA216E317E9ED31007C6DF7 /* SYNTrackableFrameView.h */,
-				BEA216E417E9ED31007C6DF7 /* SYNTrackableFrameView.m */,
 			);
 			name = Channels;
 			sourceTree = "<group>";
@@ -6189,6 +6188,15 @@
 				BEB3138C181FD0F300FAF98A /* SYNAggregateChannelItemCell~iphone.xib */,
 			);
 			name = Channels;
+			sourceTree = "<group>";
+		};
+		BEB313BB182A7FDF00FAF98A /* Trackable View */ = {
+			isa = PBXGroup;
+			children = (
+				BEA216E317E9ED31007C6DF7 /* SYNTrackableFrameView.h */,
+				BEA216E417E9ED31007C6DF7 /* SYNTrackableFrameView.m */,
+			);
+			name = "Trackable View";
 			sourceTree = "<group>";
 		};
 		BEBD09781743A1700092F527 /* CoverArt Chooser View */ = {
