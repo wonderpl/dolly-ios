@@ -40,7 +40,7 @@
                         <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="927" translatesAutoresizingMaskIntoConstraints="NO" id="Oo4-Rh-FoZ" userLabel="Channel Name Label">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="927" translatesAutoresizingMaskIntoConstraints="NO" id="Oo4-Rh-FoZ" userLabel="Collection Name Label">
                         <rect key="frame" x="0.0" y="92" width="927" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <constraints>
@@ -109,7 +109,7 @@
             <size key="customSize" width="353" height="261"/>
             <connections>
                 <outlet property="actionMessageLabel" destination="9" id="97m-YT-jaC"/>
-                <outlet property="channelNameLabel" destination="Oo4-Rh-FoZ" id="rVJ-vC-a19"/>
+                <outlet property="collectionNameLabel" destination="Oo4-Rh-FoZ" id="1ue-cS-TY2"/>
                 <outlet property="collectionView" destination="lMc-y5-kdQ" id="QfR-qq-uHx"/>
                 <outlet property="userThumbnailButton" destination="28" id="29"/>
                 <outlet property="userThumbnailImageView" destination="8" id="12"/>
