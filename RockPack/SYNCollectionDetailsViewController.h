@@ -8,6 +8,7 @@
 
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "SYNAbstractViewController.h"
+#import "SYNSocialActionsDelegate.h"
 
 typedef enum : NSInteger
 {
@@ -17,8 +18,9 @@ typedef enum : NSInteger
 } kChannelDetailsMode;
 
 @interface SYNCollectionDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout,
-                                                                       UICollectionViewDataSource,
-                                                                       UICollectionViewDelegateFlowLayout>
+                                                                            UICollectionViewDataSource,
+                                                                            UICollectionViewDelegateFlowLayout,
+                                                                            SYNSocialActionsDelegate>
 
 @property (nonatomic, assign) kChannelDetailsMode mode;
 
