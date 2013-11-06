@@ -14,7 +14,7 @@
 @interface SYNAggregateVideoCell : SYNAggregateCell
 
 
-@property (nonatomic, strong) IBOutlet UILabel* channelNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel* collectionNameLabel;
 
 
 

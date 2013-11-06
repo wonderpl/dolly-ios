@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRy-me-y1R">
-                        <rect key="frame" x="0.0" y="20" width="360" height="203"/>
+                        <rect key="frame" x="0.0" y="24" width="360" height="203"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <imageView contentMode="scaleToFill" image="GlossFeedVideo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ChM-8B-oy3" userLabel="Gloss placeholder">
-                        <rect key="frame" x="0.0" y="20" width="360" height="203"/>
+                        <rect key="frame" x="0.0" y="24" width="360" height="203"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="360" translatesAutoresizingMaskIntoConstraints="NO" id="De9-NT-r06" userLabel="Title">
-                        <rect key="frame" x="0.0" y="223" width="360" height="47"/>
+                        <rect key="frame" x="0.0" y="229" width="360" height="47"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -88,7 +88,7 @@
                 <constraint firstItem="ChM-8B-oy3" firstAttribute="centerY" secondItem="JRy-me-y1R" secondAttribute="centerY" id="0GS-OU-rtb"/>
                 <constraint firstAttribute="centerX" secondItem="DfI-ub-5d4" secondAttribute="centerX" constant="70" id="6yx-Li-NFH"/>
                 <constraint firstAttribute="bottom" secondItem="17f-oW-Eyn" secondAttribute="bottom" constant="10" id="9Oz-MF-FUz"/>
-                <constraint firstItem="De9-NT-r06" firstAttribute="top" secondItem="ChM-8B-oy3" secondAttribute="bottom" id="BaH-II-9Sd"/>
+                <constraint firstItem="De9-NT-r06" firstAttribute="top" secondItem="ChM-8B-oy3" secondAttribute="bottom" constant="2" id="BaH-II-9Sd"/>
                 <constraint firstItem="ChM-8B-oy3" firstAttribute="width" secondItem="JRy-me-y1R" secondAttribute="width" id="Dxs-Ep-yiS"/>
                 <constraint firstAttribute="trailing" secondItem="JRy-me-y1R" secondAttribute="trailing" id="GSs-vD-tgg"/>
                 <constraint firstItem="De9-NT-r06" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="HSJ-eu-cGl"/>
@@ -99,7 +99,7 @@
                 <constraint firstItem="ChM-8B-oy3" firstAttribute="height" secondItem="JRy-me-y1R" secondAttribute="height" id="YlH-w7-s8K"/>
                 <constraint firstAttribute="centerX" secondItem="2a0-ea-Q5D" secondAttribute="centerX" constant="-70" id="ZSZ-EF-DDQ"/>
                 <constraint firstAttribute="centerX" secondItem="17f-oW-Eyn" secondAttribute="centerX" id="peC-Xe-G8x"/>
-                <constraint firstItem="JRy-me-y1R" firstAttribute="top" secondItem="aP1-jF-WwS" secondAttribute="top" constant="20" id="qcO-vJ-tUC"/>
+                <constraint firstItem="JRy-me-y1R" firstAttribute="top" secondItem="aP1-jF-WwS" secondAttribute="top" constant="24" id="qcO-vJ-tUC"/>
                 <constraint firstAttribute="trailing" secondItem="De9-NT-r06" secondAttribute="trailing" id="zch-ff-KyU"/>
             </constraints>
             <size key="customSize" width="307" height="303"/>
