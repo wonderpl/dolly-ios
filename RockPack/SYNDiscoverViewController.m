@@ -71,6 +71,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.colorMapForCells = @{};
+    self.searchBar.layer.borderWidth = 1.0f;
+    self.searchBar.layer.borderColor = [[UIColor whiteColor] CGColor];
+    if(IS_IPHONE)
+    {
+        
+        
+    }
+    
     
     
     self.autocompleteTableView.hidden = YES;
@@ -374,15 +382,16 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 #pragma mark - UISearchBar Delegate and Autocomplete Methods
 
-- (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchbar
+- (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchBar
 {
     //[searchbar setText: @""];
+    [searchBar setShowsCancelButton:YES animated:YES];
     return YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    
+    [searchBar setShowsCancelButton:NO animated:YES];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {

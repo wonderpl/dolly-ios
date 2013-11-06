@@ -24,8 +24,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
-                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <size key="shadowOffset" width="0.0" height="1"/>
+                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUb-uC-SN1">
                         <rect key="frame" x="136" y="10" width="48" height="48"/>

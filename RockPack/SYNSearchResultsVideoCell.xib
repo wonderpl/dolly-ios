@@ -28,11 +28,6 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <imageView contentMode="scaleToFill" fixedFrame="YES" image="GlossFeedVideo.png" translatesAutoresizingMaskIntoConstraints="NO" id="zQC-pE-eJd" userLabel="Gloss placeholder">
-                        <rect key="frame" x="0.0" y="9" width="360" height="203"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NrE-x8-VXC" userLabel="Button - Like" customClass="SYNSocialButton">
                         <rect key="frame" x="86" y="263" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -66,13 +61,9 @@
                 <outlet property="addSocialButton" destination="bzp-d3-V7P" id="kN5-Gc-cFz"/>
                 <outlet property="iconImageView" destination="Vdl-pp-UXn" id="PiC-Hh-HIY"/>
                 <outlet property="likeSocialButton" destination="NrE-x8-VXC" id="lIQ-Gv-H37"/>
-                <outlet property="overlayImageView" destination="zQC-pE-eJd" id="plb-Ye-GcC"/>
                 <outlet property="shareSocialButton" destination="8wk-5c-EEh" id="0v5-5w-czJ"/>
                 <outlet property="titleLabel" destination="gTc-au-f7f" id="qfo-93-vel"/>
             </connections>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="GlossFeedVideo.png" width="310" height="174"/>
-    </resources>
 </document>

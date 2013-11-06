@@ -11,7 +11,7 @@
 #import "SYNSearchResultsUserCell.h"
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsViewController.h"
-
+#import "UIFont+SYNFont.h"
 
 #import "UIColor+SYNColor.h"
 
@@ -283,6 +283,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         userCell.channelOwner = (ChannelOwner*)(self.usersArray[indexPath.item]);
         
+        // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
+        userCell.followButton.layer.borderWidth = 0.0f;
+        userCell.followButton.backgroundColor = [UIColor clearColor];
+        userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0f];
+        // ================= // 
         
         cell = userCell;
     }
