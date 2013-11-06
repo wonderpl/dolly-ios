@@ -41,8 +41,10 @@
 {
     _collectionData = collectionData;
     
-    if(!_collectionData)
+    if (!_collectionData)
+    {
         return;
+    }
     
     [self.collectionView reloadData];
 }
@@ -80,14 +82,18 @@
     return nil; // implement in subclass
 }
 
--(CGSize)correctSize
+
+- (CGSize) correctSize
 {
     return CGSizeZero; // override in subclass
 }
 
--(NSString*)description
+
+- (NSString *) description
 {
-    return [NSString stringWithFormat:@"AggregateCell of type %@", [self isKindOfClass:[SYNAggregateCell class]] ? @"Video" : @"Channel"];
+    return [NSString stringWithFormat: @"AggregateCell of type %@", [self isKindOfClass: [SYNAggregateCell class]] ? @"Video": @"Channel"];
 }
+
+
 
 @end
