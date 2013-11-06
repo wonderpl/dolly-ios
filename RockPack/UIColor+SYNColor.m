@@ -122,5 +122,14 @@
 
 
 
++ (UIColor *) dollyTabColorSelected
+{
+    return [UIColor colorWithRed:120.0f/255.0f
+                           green:120.0f/255.0f
+                            blue:120.0f/255.0f
+                           alpha:1];
+}
+
+
 
 @end

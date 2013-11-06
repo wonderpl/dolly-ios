@@ -75,9 +75,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     [self.usersCollectionView registerNib: [UINib nibWithNibName: kSearchResultUserCell bundle: nil]
                forCellWithReuseIdentifier: kSearchResultUserCell];
     
-    self.containerTabs.layer.cornerRadius = 8.0f;
-    self.containerTabs.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.containerTabs.layer.borderWidth = 1.0f;
+    self.containerTabs.layer.cornerRadius = 4.0f;
+    self.containerTabs.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.containerTabs.layer.borderWidth = .5f;
+    self.containerTabs.layer.masksToBounds = YES;
+    
     
     // == Define Completion Blocks for operations == //
     
@@ -352,8 +354,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
             
-            self.videosTabButton.backgroundColor = [UIColor dollyTextLightGray];
-            self.usersTabButton.backgroundColor = [UIColor dollyTextLighterGray];
+            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelected];
+            self.videosTabButton.titleLabel.textColor = [UIColor whiteColor];
+            
+            self.usersTabButton.backgroundColor = [UIColor whiteColor];
+            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelected];
             
             break;
             
@@ -365,8 +370,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
             
-            self.videosTabButton.backgroundColor = [UIColor dollyTextLighterGray];
-            self.usersTabButton.backgroundColor = [UIColor dollyTextLightGray];
+            self.videosTabButton.backgroundColor = [UIColor whiteColor];
+            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelected];
+            
+            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelected];
+            self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             break;
     }

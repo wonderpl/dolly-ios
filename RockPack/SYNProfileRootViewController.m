@@ -23,9 +23,11 @@
 #import "SYNPassthroughView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNYouHeaderView.h"
+#import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
+
 @import QuartzCore;
 
 #define kInterRowMargin 1.0f
@@ -151,7 +153,7 @@ SYNImagePickerControllerDelegate>{
     self.collectionsTabActive = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
-    self.greyColor = [UIColor colorWithRed:120.0f/255.0f green:120.0f/255.0f blue:120.0f/255.0f alpha:1];
+    self.greyColor = [UIColor dollyTabColorSelected];
     
     UINib *searchCellNib = [UINib nibWithNibName: @"SYNChannelSearchCell"
                                           bundle: nil];
