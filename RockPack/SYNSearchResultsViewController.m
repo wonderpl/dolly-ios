@@ -326,7 +326,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     }
     else
     {
-        AssertOrLog(@"SYNSearchResultsCollectionType:didDeselectItemAtIndexPath unknown collection type")
+        AssertOrLog(@"SYNSearchResultsCollectionType:didDeselectItemAtIndexPath unknown collection type");
     }
 }
 
