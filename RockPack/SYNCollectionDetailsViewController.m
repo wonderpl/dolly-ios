@@ -206,26 +206,15 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     // Shadow for avatar background
     [self addShadowToLayer: self.avatarBackgroundView.layer];
     
-    // Add a custom flow layout to our thumbail collection view (with the right size and spacing)
-    LXReorderableCollectionViewFlowLayout *layout = [[LXReorderableCollectionViewFlowLayout alloc] init];
-    layout.itemSize = self.isIPhone ? CGSizeMake(310.0f, 175.0f) : CGSizeMake(249.0f, 141.0f);
-    layout.minimumInteritemSpacing = self.isIPhone ? 0.0f : 4.0f;
-    layout.minimumLineSpacing = self.isIPhone ? 4.0f : 4.0f;
-    
-    layout.footerReferenceSize = [self footerSize];
-    
-    
-    
-    self.videoThumbnailCollectionView.collectionViewLayout = layout;
     
     if (self.isIPhone)
     {
-        layout.sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+        
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake([SYNDeviceManager.sharedInstance currentScreenHeight] - 190.0f, 0.0f, 0.0f, 0.0f);
     }
     else
     {
-        layout.sectionInset = UIEdgeInsetsMake(0.0f, 5.0f, 0.0f, 5.0f);
+        
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(500.0f, 0.0f, 0.0f, 0.0f);
     }
     

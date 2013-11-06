@@ -21,6 +21,12 @@
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
 }
 
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    NSLog(@"%@", NSStringFromCGRect(self.frame));
+}
 
 - (void) setVideoInstance: (VideoInstance *) videoInstance
 {
