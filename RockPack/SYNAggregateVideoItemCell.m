@@ -69,7 +69,7 @@
         return;
     }
     
-    [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]            // calls vi.video.thumbnailURL
+    [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]     
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                             options: SDWebImageRetryFailed];
     

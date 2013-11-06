@@ -21,11 +21,6 @@
                             <constraint firstAttribute="height" constant="203" id="Bot-zG-hm9"/>
                         </constraints>
                     </imageView>
-                    <imageView contentMode="scaleToFill" image="GlossFeedVideo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ChM-8B-oy3" userLabel="Gloss placeholder">
-                        <rect key="frame" x="0.0" y="20" width="360" height="203"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKG-at-dZF" userLabel="Time">
                         <rect key="frame" x="0.0" y="0.0" width="360" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -34,12 +29,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="360" translatesAutoresizingMaskIntoConstraints="NO" id="De9-NT-r06" userLabel="Title">
-                        <rect key="frame" x="0.0" y="223" width="360" height="47"/>
+                        <rect key="frame" x="0.0" y="235" width="360" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="47" id="C1l-T8-cIp"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -85,22 +77,18 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ChM-8B-oy3" firstAttribute="centerY" secondItem="JRy-me-y1R" secondAttribute="centerY" id="0GS-OU-rtb"/>
+                <constraint firstItem="De9-NT-r06" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="4xo-A0-2jl"/>
                 <constraint firstAttribute="centerX" secondItem="DfI-ub-5d4" secondAttribute="centerX" constant="70" id="6yx-Li-NFH"/>
                 <constraint firstAttribute="bottom" secondItem="17f-oW-Eyn" secondAttribute="bottom" constant="10" id="9Oz-MF-FUz"/>
-                <constraint firstItem="De9-NT-r06" firstAttribute="top" secondItem="ChM-8B-oy3" secondAttribute="bottom" id="BaH-II-9Sd"/>
-                <constraint firstItem="ChM-8B-oy3" firstAttribute="width" secondItem="JRy-me-y1R" secondAttribute="width" id="Dxs-Ep-yiS"/>
                 <constraint firstAttribute="trailing" secondItem="JRy-me-y1R" secondAttribute="trailing" id="GSs-vD-tgg"/>
-                <constraint firstItem="De9-NT-r06" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="HSJ-eu-cGl"/>
-                <constraint firstItem="ChM-8B-oy3" firstAttribute="centerX" secondItem="JRy-me-y1R" secondAttribute="centerX" id="JPK-WF-YJs"/>
                 <constraint firstAttribute="bottom" secondItem="2a0-ea-Q5D" secondAttribute="bottom" constant="10" id="KZc-jj-mAc"/>
                 <constraint firstAttribute="bottom" secondItem="DfI-ub-5d4" secondAttribute="bottom" constant="10" id="NKe-tZ-W3S"/>
                 <constraint firstItem="JRy-me-y1R" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="T8G-qL-hgG"/>
-                <constraint firstItem="ChM-8B-oy3" firstAttribute="height" secondItem="JRy-me-y1R" secondAttribute="height" id="YlH-w7-s8K"/>
+                <constraint firstAttribute="trailing" secondItem="De9-NT-r06" secondAttribute="trailing" id="UxA-ow-dHp"/>
                 <constraint firstAttribute="centerX" secondItem="2a0-ea-Q5D" secondAttribute="centerX" constant="-70" id="ZSZ-EF-DDQ"/>
+                <constraint firstItem="De9-NT-r06" firstAttribute="top" secondItem="JRy-me-y1R" secondAttribute="bottom" constant="12" id="mdu-aQ-yv2"/>
                 <constraint firstAttribute="centerX" secondItem="17f-oW-Eyn" secondAttribute="centerX" id="peC-Xe-G8x"/>
                 <constraint firstItem="JRy-me-y1R" firstAttribute="top" secondItem="aP1-jF-WwS" secondAttribute="top" constant="20" id="qcO-vJ-tUC"/>
-                <constraint firstAttribute="trailing" secondItem="De9-NT-r06" secondAttribute="trailing" id="zch-ff-KyU"/>
             </constraints>
             <size key="customSize" width="307" height="303"/>
             <connections>
@@ -113,7 +101,4 @@
             </connections>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="GlossFeedVideo.png" width="310" height="174"/>
-    </resources>
 </document>

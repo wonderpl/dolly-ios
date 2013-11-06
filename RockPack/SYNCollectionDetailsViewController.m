@@ -35,13 +35,16 @@
 #import "SYNProfileRootViewController.h"
 #import "SYNReportConcernTableViewController.h"
 #import "SYNSubscribersViewController.h"
-#import "SYNVideoThumbnailRegularCell.h"
+#import "SYNCollectionVideoCell.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
+
+static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
+
 @import AVFoundation;
 @import CoreImage;
 @import QuartzCore;
@@ -50,8 +53,7 @@
                                               SYNImagePickerControllerDelegate,
                                               UIPopoverControllerDelegate,
                                               SYNChannelCategoryTableViewDelegate,
-                                              SYNChannelCoverImageSelectorDelegate,
-                                              SYNVideoThumbnailRegularCellDelegate>
+                                              SYNChannelCoverImageSelectorDelegate>
 
 @property (nonatomic, assign)  CGPoint originalContentOffset;
 @property (nonatomic, assign)  CGPoint originalMasterControlsViewOrigin;
@@ -228,10 +230,8 @@
     }
     
     // == Video Cells == //
-    UINib *videoThumbnailCellNib = [UINib nibWithNibName: @"SYNVideoThumbnailRegularCell"
-                                                  bundle: nil];
     
-    [self.videoThumbnailCollectionView registerNib: videoThumbnailCellNib
+    [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: @"SYNVideoThumbnailRegularCell" bundle: nil]
                         forCellWithReuseIdentifier: @"SYNVideoThumbnailRegularCell"];
     
     // == Footer View == //
@@ -1066,39 +1066,25 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    UICollectionViewCell *cell = nil;
     
-    SYNVideoThumbnailRegularCell *videoThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNVideoThumbnailRegularCell"
-                                                                                                 forIndexPath: indexPath];
     
-    // special mode for the favorite channel so we cannot delete the videos (un-heart them only)
+    SYNCollectionVideoCell *videoThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: CollectionVideoCellName
+                                                                                           forIndexPath: indexPath];
     
-    if (self.channel.favouritesValue)
-    {
-        videoThumbnailCell.displayMode = kChannelThumbnailDisplayModeDisplayFavourite;
-    }
-    else
-    {
-        videoThumbnailCell.displayMode = self.mode;
-    }
     
     VideoInstance *videoInstance = self.channel.videoInstances [indexPath.item];
     
     
-    [videoThumbnailCell.imageView
-     setImageWithURL: [NSURL URLWithString: videoInstance.video.thumbnailURL]
-     placeholderImage: [UIImage imageNamed: @"PlaceholderVideoWide.png"]
-     options: SDWebImageRetryFailed];
+    [videoThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.video.thumbnailURL]
+                                 placeholderImage: [UIImage imageNamed: @"PlaceholderVideoWide.png"]
+                                          options: SDWebImageRetryFailed];
     
     videoThumbnailCell.titleLabel.text = videoInstance.title;
-    videoThumbnailCell.viewControllerDelegate = self;
+    videoThumbnailCell.delegate = self;
     
-    videoThumbnailCell.addItButton.highlighted = NO;
-    videoThumbnailCell.addItButton.selected = [appDelegate.videoQueue videoInstanceIsAddedToChannel: videoInstance];
     
-    cell = videoThumbnailCell;
     
-    return cell;
+    return videoThumbnailCell;
 }
 
 
@@ -1203,8 +1189,7 @@
 }
 
 
-- (void)	  collectionView: (UICollectionView *) collectionView
-    didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     // the method is being replaced by the 'videoButtonPressed' because other elements on the cell migth be interactive as well
 }
@@ -1214,12 +1199,12 @@
 {
     UIView *candidateCell = videoButton;
     
-    while (![candidateCell isKindOfClass: [SYNVideoThumbnailRegularCell class]])
+    while (![candidateCell isKindOfClass: [SYNCollectionVideoCell class]])
     {
         candidateCell = candidateCell.superview;
     }
     
-    SYNVideoThumbnailRegularCell *selectedCell = (SYNVideoThumbnailRegularCell *) candidateCell;
+    SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
     
     SYNMasterViewController *masterViewController = (SYNMasterViewController *) appDelegate.masterViewController;
