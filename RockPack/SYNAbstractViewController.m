@@ -20,7 +20,7 @@
 #import "SDWebImageManager.h"
 #import "SYNAbstractViewController.h"
 #import "SYNAppDelegate.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNImplicitSharingController.h"
@@ -987,8 +987,8 @@
 
 - (void) createAndDisplayNewChannel
 {
-    SYNChannelDetailViewController *channelCreationVC =
-    [[SYNChannelDetailViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
+    SYNCollectionDetailsViewController *channelCreationVC =
+    [[SYNCollectionDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
                                                   usingMode: kChannelDetailsModeCreate];
     
     if (IS_IPHONE)

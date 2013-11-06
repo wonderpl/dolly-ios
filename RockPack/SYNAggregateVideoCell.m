@@ -16,6 +16,7 @@
 #import "UIColor+SYNColor.h"
 #import "UIImage+Tint.h"
 #import "Video.h"
+#import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 #import "SYNAbstractViewController.h"
 
@@ -44,6 +45,10 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.collectionView.collectionViewLayout = aggregateFlowLayout;
     
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
+    
+    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize:self.actionMessageLabel.font.pointSize];
+    
+    self.channelNameLabel.font = [UIFont lightCustomFontOfSize:self.channelNameLabel.font.pointSize];
     
     [self.collectionView reloadData];
 }

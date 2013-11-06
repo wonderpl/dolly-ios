@@ -19,7 +19,7 @@
 #import "SYNChannelCategoryTableViewController.h"
 #import "SYNChannelCoverImageSelectorViewController.h"
 #import "SYNChannelCreateNewCell.h"
-#import "SYNChannelDetailViewController.h"
+#import "SYNCollectionDetailsViewController.h"
 #import "SYNCoverChooserController.h"
 #import "SYNCoverThumbnailCell.h"
 #import "SYNDeviceManager.h"
@@ -46,7 +46,7 @@
 @import CoreImage;
 @import QuartzCore;
 
-@interface SYNChannelDetailViewController () <UITextViewDelegate,
+@interface SYNCollectionDetailsViewController () <UITextViewDelegate,
                                               SYNImagePickerControllerDelegate,
                                               UIPopoverControllerDelegate,
                                               SYNChannelCategoryTableViewDelegate,
@@ -124,7 +124,7 @@
 @end
 
 
-@implementation SYNChannelDetailViewController
+@implementation SYNCollectionDetailsViewController
 
 #pragma mark - Object lifecyle
 
@@ -697,7 +697,7 @@
         return;
     }
     
-    __weak SYNChannelDetailViewController *wself = self;
+    __weak SYNCollectionDetailsViewController *wself = self;
     
     if ([coverArtUrl isEqualToString: @""])
     {
@@ -2488,7 +2488,7 @@
     NSMutableArray *conditionsArray = [NSMutableArray arrayWithCapacity: 3];
     NSString *buttonString;
     int numberOfConditions = 0;
-    __weak SYNChannelDetailViewController *wself = self;
+    __weak SYNCollectionDetailsViewController *wself = self;
     
     if (channelCreated) // channelCreated will always be true in this implementation, change from self.channels to show message only on creation and not on update
     {
@@ -3072,7 +3072,7 @@ shouldChangeTextInRange: (NSRange) range
     NSString *largeImageUrlString = [imageUrlString stringByReplacingOccurrencesOfString: @"thumbnail_medium"
                                                                               withString: @"background"];
     
-    __weak SYNChannelDetailViewController *wself = self;
+    __weak SYNCollectionDetailsViewController *wself = self;
     
     [self.channelCoverImageView setImageWithURL: [NSURL URLWithString: largeImageUrlString]
                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelCreation.png"]
@@ -3211,7 +3211,7 @@ shouldChangeTextInRange: (NSRange) range
     
     CGImageRetain(imageRef);
     
-    __weak SYNChannelDetailViewController *wself = self;
+    __weak SYNCollectionDetailsViewController *wself = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.backgroundCIImage = [CIImage imageWithCGImage: imageRef];
         
@@ -3262,7 +3262,7 @@ shouldChangeTextInRange: (NSRange) range
 - (id<SDWebImageOperation>) loadBackgroundImage
 {
     __weak SDWebImageManager *shareImageManager = SDWebImageManager.sharedManager;
-    __weak SYNChannelDetailViewController *wself = self;
+    __weak SYNCollectionDetailsViewController *wself = self;
     
     // Make sure we have a valid background URL
     if (self.channel.channelCover.imageBackgroundUrl)

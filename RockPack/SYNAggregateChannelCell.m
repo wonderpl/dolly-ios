@@ -11,6 +11,7 @@
 #import "SYNAggregateChannelItemCell.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "UIImage+Tint.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNAggregateChannelCell () <UIGestureRecognizerDelegate>
 
@@ -33,6 +34,8 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     [self.collectionView registerNib: [UINib nibWithNibName: kChannelItemCellIndetifier bundle: nil]
           forCellWithReuseIdentifier: kChannelItemCellIndetifier];
+    
+    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize:self.actionMessageLabel.font.pointSize];
     
     [self.collectionView reloadData];
 }
