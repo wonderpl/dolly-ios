@@ -16,7 +16,6 @@
 #import "SSTextView.h"
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
-#import "SYNChannelCategoryTableViewController.h"
 #import "SYNChannelCoverImageSelectorViewController.h"
 #import "SYNChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
@@ -24,7 +23,6 @@
 #import "SYNCoverThumbnailCell.h"
 #import "SYNDeviceManager.h"
 #import "SYNExistingCollectionsViewController.h"
-#import "SYNGenreTabViewController.h"
 #import "SYNImagePickerController.h"
 #import "SYNMasterViewController.h"
 #import "SYNModalSubscribersController.h"
@@ -52,12 +50,10 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 @interface SYNCollectionDetailsViewController () <UITextViewDelegate,
                                               SYNImagePickerControllerDelegate,
                                               UIPopoverControllerDelegate,
-                                              SYNChannelCategoryTableViewDelegate,
+
                                               SYNChannelCoverImageSelectorDelegate>
 
 @property (nonatomic, assign)  CGPoint originalContentOffset;
-@property (nonatomic, assign)  CGPoint originalMasterControlsViewOrigin;
-@property (nonatomic, assign)  CGRect originalSubscribeButtonRect;
 @property (nonatomic, assign)  CGRect originalSubscribersLabelRect;
 @property (nonatomic, assign) BOOL hasAppeared;
 @property (nonatomic, assign) BOOL isIPhone;
@@ -91,7 +87,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 @property (nonatomic, strong) NSString *selectedCategoryId;
 @property (nonatomic, strong) NSString *selectedCoverId;
 @property (nonatomic, strong) SYNCoverChooserController *coverChooserController;
-@property (nonatomic, strong) SYNGenreTabViewController *categoriesTabViewController;
 @property (nonatomic, strong) SYNImagePickerController *imagePicker;
 @property (nonatomic, strong) SYNModalSubscribersController *modalSubscriptionsContainer;
 @property (nonatomic, strong) SYNReportConcernTableViewController *reportConcernController;
@@ -101,7 +96,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 @property (nonatomic, strong) UIPopoverController *subscribersPopover;
 @property (nonatomic, strong) UIView *coverChooserMasterView;
 @property (nonatomic, strong) UIView *noVideosMessageView;
-@property (nonatomic, strong) id<SDWebImageOperation> currentWebImageOperation;
 @property (nonatomic, weak) Channel *originalChannel;
 @property (nonatomic, weak) IBOutlet UIButton *cancelEditButton;
 @property (nonatomic, weak) IBOutlet UIButton *editButton;
@@ -114,7 +108,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
 @property (nonatomic, strong) NSString *selectedImageURL;
 @property (nonatomic, strong) SYNChannelCoverImageSelectorViewController *coverImageSelector;
-@property (strong, nonatomic) SYNChannelCategoryTableViewController *categoryTableViewController;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelTextInputButton;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
@@ -150,7 +143,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 {
     // Defensive programming
     self.channelTitleTextView.delegate = nil;
-    self.categoriesTabViewController.delegate = nil;
     self.imagePicker.delegate = nil;
     
     // This will remove the observer (in the setter)
@@ -164,34 +156,18 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 {
     [super viewDidLoad];
     
-    self.originalSubscribeButtonRect = self.playChannelButton.frame;
-    self.originalSubscribersLabelRect = self.subscribersLabel.frame;
-    
-    // Take the best guess about how many  videos we have
-    //    self.dataItemsAvailable = self.channel.videoInstances.count;
     
     
     self.isIPhone = IS_IPHONE;
     
-    // Originally the opacity was required to be 0.25f, but this appears less visible on the actual screen
-    // Set custom fonts and shadows for labels
     self.channelOwnerLabel.font = [UIFont regularCustomFontOfSize: self.channelOwnerLabel.font.pointSize];
-    [self addShadowToLayer: self.channelOwnerLabel.layer];
-    
     self.subscribersLabel.font = [UIFont regularCustomFontOfSize: self.subscribersLabel.font.pointSize];
-    [self addShadowToLayer: self.subscribersLabel.layer];
-    
     self.byLabel.font = [UIFont lightCustomFontOfSize: self.byLabel.font.pointSize];
-    [self addShadowToLayer: self.byLabel.layer];
-    
-    // Add Rockpack font and shadow to UITextView
     self.channelTitleTextView.font = [UIFont lightCustomFontOfSize: self.channelTitleTextView.font.pointSize];
-    [self addShadowToLayer: self.channelTitleTextView.layer];
     
     // Display 'Done' instead of 'Return' on Keyboard
     self.channelTitleTextView.returnKeyType = UIReturnKeyDone;
     
-    // Needed for shadows to work
     self.channelTitleTextView.backgroundColor = [UIColor clearColor];
     
     self.channelTitleTextView.placeholder = NSLocalizedString(@"channel_creation_screen_field_channeltitle_placeholder", nil);
@@ -203,20 +179,8 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     // Set delegate so that we can respond to events
     self.channelTitleTextView.delegate = self;
     
-    // Shadow for avatar background
-    [self addShadowToLayer: self.avatarBackgroundView.layer];
     
     
-    if (self.isIPhone)
-    {
-        
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake([SYNDeviceManager.sharedInstance currentScreenHeight] - 190.0f, 0.0f, 0.0f, 0.0f);
-    }
-    else
-    {
-        
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(500.0f, 0.0f, 0.0f, 0.0f);
-    }
     
     // == Video Cells == //
     
@@ -256,22 +220,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
         self.avatarImageView.image = placeholderImage;
     }
     
-    if (!self.isIPhone)
-    {
-        // Create categories tab, but make invisible (alpha = 0) for now
-        self.categoriesTabViewController = [[SYNGenreTabViewController alloc] initWithHomeButton: @"other"];
-        self.categoriesTabViewController.delegate = self;
-        CGRect tabFrame = self.categoriesTabViewController.view.frame;
-        tabFrame.origin.y = kChannelCreationCategoryTabOffsetY;
-        tabFrame.size.width = self.view.frame.size.width;
-        self.categoriesTabViewController.view.frame = tabFrame;
-        
-        self.categoriesTabViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        self.categoriesTabViewController.view.alpha = 0.0f;
-        [self addChildViewController: self.categoriesTabViewController];
-    }
-    
-    self.originalMasterControlsViewOrigin = self.masterControlsView.frame.origin;
+   
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -587,7 +536,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 }
 
 
-- (IBAction) subscribersLabelPressed: (id) sender
+- (IBAction) followersLabelPressed: (id) sender
 {
     [self releasedSubscribersLabel: sender];
     
@@ -659,92 +608,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
                                   NSLocalizedString(@"channel_screen_error_subscribe", nil)];
 }
 
-
-- (void) updateCategoryButtonText: (NSString *) buttonText
-{
-    NSMutableAttributedString *attributedCategoryString = [[NSMutableAttributedString alloc] initWithString: buttonText
-                                                                                                 attributes: @{NSForegroundColorAttributeName: [UIColor colorWithRed: 40.0f / 255.0f
-                                                                                                                                                               green: 45.0f / 255.0f
-                                                                                                                                                                blue: 51.0f / 255.0f
-                                                                                                                                                               alpha: 1.0f],
-                                                                                        NSFontAttributeName: [UIFont regularCustomFontOfSize: 18.0f]}];
-    
-    // Set text on add cover and select category buttons
-    [self.selectCategoryButton setAttributedTitle: attributedCategoryString
-                                         forState: UIControlStateNormal];
-}
-
-
-- (void) coverImageChangedHandler: (NSNotification *) notification
-{
-    NSDictionary *detailDictionary = [notification userInfo];
-    NSString *coverArtUrl = (NSString *) detailDictionary[kCoverArt];
-    UIImage *coverArtImage = (UIImage *) detailDictionary[kCoverArtImage];
-    
-    if (!coverArtUrl)
-    {
-        return;
-    }
-    
-    __weak SYNCollectionDetailsViewController *wself = self;
-    
-    if ([coverArtUrl isEqualToString: @""])
-    {
-        [self clearBackground];
-    }
-    else if ([coverArtUrl isEqualToString: @"uploading"])
-    {
-        wself.originalBackgroundImage = coverArtImage;
-        UIImage *newImage = [wself croppedImageForCurrentOrientation];
-        
-        [UIView transitionWithView: self.view
-                          duration: 0.35f
-                           options: UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowUserInteraction
-                        animations: ^{
-                            wself.channelCoverImageView.image = newImage;
-                        }
-                        completion: nil];
-    }
-    else
-    {
-        NSString *largeImageUrlString = [coverArtUrl stringByReplacingOccurrencesOfString: @"thumbnail_medium"
-                                                                               withString: @"background"];
-        
-        [self.channelCoverImageView setImageWithURL: [NSURL URLWithString: largeImageUrlString]
-                                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelCreation.png"]
-                                            options: SDWebImageRetryFailed
-                                          completed: ^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                              wself.originalBackgroundImage = wself.channelCoverImageView.image;
-                                              
-                                              wself.channelCoverImageView.image = [wself croppedImageForCurrentOrientation];
-                                          }];
-    }
-    
-    self.selectedCoverId = detailDictionary[kCoverImageReference];
-}
-
-
-#pragma mark - Orientation Methods
-
-- (void) willRotateToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
-                                 duration: (NSTimeInterval) duration
-{
-    [super willRotateToInterfaceOrientation: toInterfaceOrientation
-                                   duration: duration];
-    
-    [self.videoThumbnailCollectionView.collectionViewLayout invalidateLayout];
-}
-
-
-- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
-                                          duration: (NSTimeInterval) duration
-{
-    [super willAnimateRotationToInterfaceOrientation: toInterfaceOrientation
-                                            duration: duration];
-    
-    self.channelCoverImageView.image = [self croppedImageForOrientation: toInterfaceOrientation];
-}
-
+#pragma mark - Data Model Change
 
 - (void) handleDataModelChange: (NSNotification *) notification
 {
@@ -794,11 +658,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
         }
     }];
     
-    // Check to see if we have a background URL and we are not already loading one
-    if ((self.channel.channelCover.imageBackgroundUrl != nil) && (self.currentWebImageOperation == nil))
-    {
-        self.currentWebImageOperation = [self loadBackgroundImage];
-    }
+    
     
     if ((self.channel.channelOwner.displayName !=  nil) && (self.channelOwnerLabel.text == nil))
     {
@@ -881,81 +741,10 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     
     [self displayChannelDetails];
     
-    if (self.autoplayVideoId)
-    {
-        [self autoplayVideoIfAvailable];
-    }
-    
-    CGRect orgButtonRect = self.originalSubscribeButtonRect;
-    CGRect orgLabelRect = self.originalSubscribersLabelRect;
-    
-    float offset = IS_IPAD ? 54.0f : 48.0;
-    
-    // Whether to show play channel button
-    if (self.channel.videoInstances.count > 0)
-    {
-        
-        
-        [UIView animateWithDuration:kChannelEditModeAnimationDuration
-                              delay:0.0f
-                            options:UIViewAnimationCurveEaseOut
-                         animations:^{
-                             
-                             self.playChannelButton.alpha = 1.0f;
-                             
-                             CGRect buttonFrame = self.subscribeButton.frame;
-                             buttonFrame.origin.x = orgButtonRect.origin.x + offset;
-                             self.subscribeButton.frame = buttonFrame;
-                             self.editButton.frame = buttonFrame;
-                             
-                             
-                             CGRect labelFrame = self.subscribersLabel.frame;
-                             labelFrame.origin.x = orgLabelRect.origin.x + offset;
-                             self.subscribersLabel.frame = labelFrame;
-                             self.subscribersButton.frame = labelFrame;
-            
-                         } completion:nil];
-        
-        
-        
-        
-    }
-    else
-    {
-        
-        [UIView animateWithDuration:kChannelEditModeAnimationDuration
-                              delay:0.0f
-                            options:UIViewAnimationCurveEaseOut
-                         animations:^{
-                             
-                             self.playChannelButton.alpha = 0.0f;
-                             CGRect buttonFrame = self.subscribeButton.frame;
-                             buttonFrame.origin.x = orgButtonRect.origin.x;
-                             self.subscribeButton.frame = buttonFrame;
-                             self.editButton.frame = buttonFrame;
-                             CGRect labelFrame = self.subscribersLabel.frame;
-                             labelFrame.origin.x = orgLabelRect.origin.x;
-                             self.subscribersLabel.frame = labelFrame;
-                             self.subscribersButton.frame = labelFrame;
-                             
-                         } completion:nil];
-        
-        
-    }
     
     
 }
 
-
-#pragma mark - VIEW helper methods
-
-- (void) addShadowToLayer: (CALayer *) layer
-{
-    layer.shadowColor = [UIColor blackColor].CGColor;
-    layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-    layer.shadowOpacity = 0.3f;
-    layer.shadowRadius = 2.0f;
-}
 
 
 - (void) displayChannelDetails
@@ -1294,7 +1083,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     self.displayControlsView.alpha = (visible) ? 1.0f : 0.0f;
     self.editControlsView.alpha = (visible) ? 0.0f : 1.0f;
     self.coverChooserMasterView.hidden = (visible) ? TRUE : FALSE;
-    self.categoriesTabViewController.view.hidden = visible;
     self.profileImageButton.enabled = visible;
     
     self.subscribeButton.hidden = (visible && [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]);
@@ -1542,16 +1330,12 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     }
     
     [self.channelTitleTextView resignFirstResponder];
-    [self showCoverChooser];
-    [self hideCategoryChooser];
 }
 
 
 - (IBAction) selectCategoryButtonTapped: (UIButton *) button
 {
     [self.channelTitleTextView resignFirstResponder];
-    [self showCategoryChooser];
-    [self hideCoverChooser];
 }
 
 
@@ -1623,7 +1407,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
             
             if (!self.isIPhone)
             {
-                [self updateCategoryButtonText: newTitle];
+                
             }
             else
             {
@@ -1667,15 +1451,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
         
         [self.channel.managedObjectContext save: &error];
         
-        if (self.isIPhone)
-        {
-            [self backButtonTapped: nil];
-        }
-        else
-        {
-            [self dismissViewControllerAnimated: NO
-                                     completion: nil];
-        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else
     {
@@ -1689,7 +1465,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
         self.selectedCategoryId = nil;
         self.selectedCoverId = nil;
         
-        self.categoryTableViewController = nil;
         self.saveChannelButton.hidden = YES;
         self.cancelEditButton.hidden = YES;
         self.deleteChannelButton.hidden = YES;
@@ -1701,7 +1476,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
         
         [self displayChannelDetails];
         
-        self.currentWebImageOperation = [self loadBackgroundImage];
         
         [self.videoThumbnailCollectionView reloadData];
     }
@@ -1721,29 +1495,18 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     self.deleteChannelButton.enabled = YES;
     [self.activityIndicator startAnimating];
     
-    [self hideCategoryChooser];
     
     self.channel.channelDescription = self.channel.channelDescription ? self.channel.channelDescription : @"";
     
-    NSString *category = [self categoryIdStringForServiceCall];
-    
-    NSString *cover = [self coverIdStringForServiceCall];
     
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
                                                      title: self.channelTitleTextView.text
                                                description: (self.channel.channelDescription)
-                                                  category: category
-                                                     cover: cover
+                                                  category: @""
+                                                     cover: @""
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
-                                             
-                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                    action: @"channelEdited"
-                                                                                                     label: category
-                                                                                                     value: nil] build]];
                                              
                                              NSString *channelId = resourceCreated[@"id"];
                                              
@@ -1807,227 +1570,11 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
                                               }];
 }
 
-
-#pragma mark - Cover choice
-
-- (void) showCoverChooser
-{
-    if (!self.isIPhone)
-    {
-        // Check to see if we are already display the cover chooser
-        if (self.coverChooserMasterView.alpha == 0.0f)
-        {
-            [self.coverChooserController updateCoverArt];
-            
-            [UIView animateWithDuration: kChannelEditModeAnimationDuration
-                             animations: ^{
-                                 // Fade up the category tab controller
-                                 self.coverChooserMasterView.alpha = 1.0f;
-                                 
-                                 // slide down the video collection view a bit
-                                 self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(kChannelCreationCollectionViewOffsetY +
-                                                                                                   kChannelCreationCategoryAdditionalOffsetY, 0, 0, 0);
-                                 
-                                 self.videoThumbnailCollectionView.contentOffset = CGPointMake(0, -(kChannelCreationCollectionViewOffsetY +
-                                                                                                    kChannelCreationCategoryAdditionalOffsetY));
-                             }
-                             completion: nil];
-        }
-    }
-    else
-    {
-        self.coverImageSelector = [[SYNChannelCoverImageSelectorViewController alloc] initWithSelectedImageURL: (self.selectedImageURL) ? self.
-                                                                                              selectedImageURL: self.channel.channelCover.imageUrl];
-        self.coverImageSelector.imageSelectorDelegate = self;
-        CGRect startFrame = self.coverImageSelector.view.frame;
-        startFrame.origin.y = self.view.frame.size.height;
-        self.coverImageSelector.view.frame = startFrame;
-        [self.view addSubview: self.coverImageSelector.view];
-        
-        [UIView animateWithDuration: 0.3f
-                              delay: 0.0f
-                            options: UIViewAnimationOptionCurveEaseOut
-                         animations: ^{
-                             CGRect endFrame = self.coverImageSelector.view.frame;
-                             endFrame.origin.y = 0.0f;
-                             self.coverImageSelector.view.frame = endFrame;
-                         }
-                         completion: nil];
-    }
-}
-
-
-- (void) hideCoverChooser
-{
-    if (self.coverChooserMasterView.alpha == 1.0f)
-    {
-        [UIView animateWithDuration: kChannelEditModeAnimationDuration
-                         animations: ^{
-                             // Fade out the category tab controller
-                             self.coverChooserMasterView.alpha = 0.0f;
-                         }
-                         completion: nil];
-    }
-}
-
-
-#pragma mark - Genre Choose Bar
-
-- (void) showCategoryChooser
-{
-    if (!self.isIPhone)
-    {
-        [self.view addSubview: self.categoriesTabViewController.view];
-        
-        if (self.categoriesTabViewController.view.alpha == 0.0f)
-        {
-            [UIView animateWithDuration: kChannelEditModeAnimationDuration
-                             animations: ^{
-                                 // Fade up the category tab controller //
-                                 self.categoriesTabViewController.view.alpha = 1.0f;
-                             }
-                             completion: ^(BOOL finished) {
-                                 if ([self.selectedCategoryId isEqualToString: @""])
-                                 {
-                                     // if no category has been selected the "other" category if it exists
-                                     if (self.categoriesTabViewController.otherGenre)
-                                     {
-                                         [self handleNewTabSelectionWithGenre: self.categoriesTabViewController.otherGenre];
-                                     }
-                                 }
-                                 else
-                                 {
-                                     NSIndexPath *genreIndexPath = [self.categoriesTabViewController findIndexPathForGenreId: self.selectedCategoryId];
-                                     
-                                     if (!genreIndexPath)
-                                     {
-                                         //"Other/other" selected. Do nothing
-                                         return;
-                                     }
-                                     
-                                     Genre *genreSelected =
-                                     [self.categoriesTabViewController selectAndReturnGenreForIndexPath: genreIndexPath
-                                                                                       andSubcategories: YES];
-                                     
-                                     if (genreSelected)
-                                     {
-                                         if ([genreSelected isMemberOfClass: [Genre class]])
-                                         {
-                                             [self updateCategoryButtonText: genreSelected.name];
-                                         }
-                                         else
-                                         {
-                                             [self updateCategoryButtonText: [NSString stringWithFormat: @"%@/%@",
-                                                                              ((SubGenre *) genreSelected).genre.name, genreSelected.name]];
-                                         }
-                                     }
-                                     else
-                                     {
-                                         [self.categoriesTabViewController deselectAll];
-                                     }
-                                 }
-                                 
-                                 [UIView  animateWithDuration: 0.4f
-                                                        delay: 0.1f
-                                                      options: UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
-                                                   animations: ^{
-                                                       // slide down the video collection view a bit //
-                                                       CGFloat totalY =
-                                                       kChannelCreationCollectionViewOffsetY + kChannelCreationCategoryAdditionalOffsetY;
-                                                       self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(totalY, 0, 0, 0);
-                                                       
-                                                       CGFloat totalX =
-                                                       kChannelCreationCollectionViewOffsetY + kChannelCreationCategoryAdditionalOffsetY;
-                                                       self.videoThumbnailCollectionView.contentOffset = CGPointMake(0, -(totalX));
-                                                   }
-                                                   completion: ^(BOOL finished) {
-                                                   }];
-                             }];
-        }
-    }
-    else // isIPhone
-    {
-        if (!self.categoryTableViewController)
-        {
-            self.categoryTableViewController = [[SYNChannelCategoryTableViewController alloc] initWithNibName: @"SYNChannelCategoryTableViewControllerFullscreen~iphone"
-                                                                                                       bundle: [NSBundle mainBundle]];
-            self.categoryTableViewController.categoryTableControllerDelegate = self;
-            self.categoryTableViewController.showAllCategoriesHeader = NO;
-            
-            [self.view addSubview: self.categoryTableViewController.view];
-            
-            BOOL hasACategory = [self.selectedCategoryId length] > 0;
-            
-            [self.categoryTableViewController setSelectedCategoryForId: hasACategory ? self.
-                                                    selectedCategoryId: nil];
-            
-            if (!hasACategory)
-            {
-                // Set the default other/other subgenre
-                NSArray *filteredSubcategories = [[self.categoryTableViewController.otherGenre.subgenres array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"isDefault == YES"]];
-                
-                if ([filteredSubcategories count] == 1)
-                {
-                    SubGenre *otherSubGenre = filteredSubcategories[0];
-                    
-                    self.selectedCategoryId = otherSubGenre.uniqueId;
-                    
-                    [self.selectCategoryButton setTitle: [NSString stringWithFormat: @"%@/\n%@", otherSubGenre.genre.name, otherSubGenre.name]
-                                               forState: UIControlStateNormal];
-                }
-            }
-        }
-        else
-        {
-            // Check to see if the panel is already displayed (prevent multiple taps on choose category button)
-            if (self.categoryTableViewController.view.frame.origin.y == 0.0f)
-            {
-                return;
-            }
-        }
-        
-        CGRect startFrame = self.categoryTableViewController.view.frame;
-        startFrame.origin.y = self.view.frame.size.height;
-        startFrame.size.height = self.view.frame.size.height;
-        self.categoryTableViewController.view.frame = startFrame;
-        
-        [self.view addSubview: self.categoryTableViewController.view];
-        
-        [UIView animateWithDuration: 0.3f
-                              delay: 0.0f
-                            options: UIViewAnimationOptionCurveEaseOut
-                         animations: ^{
-                             CGRect endFrame = self.categoryTableViewController.view.frame;
-                             endFrame.origin.y = 0.0f;
-                             self.categoryTableViewController.view.frame = endFrame;
-                         }
-                         completion: nil];
-    }
-}
-
-
-- (void) hideCategoryChooser
-{
-    if (self.categoriesTabViewController.view.alpha == 1.0f)
-    {
-        [UIView animateWithDuration: kChannelEditModeAnimationDuration
-                         animations: ^{
-                             // Fade out the category tab controller
-                             self.categoriesTabViewController.view.alpha = 0.0f;
-                         }
-                         completion: ^(BOOL finished) {
-                             [self.categoriesTabViewController.view removeFromSuperview];
-                         }];
-    }
-}
-
-
 - (void) resetVideoCollectionViewPosition
 {
     [UIView animateWithDuration: kChannelEditModeAnimationDuration
                      animations: ^{
                          // Fade out the category tab controller
-                         self.categoriesTabViewController.view.alpha = 0.0f;
                          
                          // slide up the video collection view a bit ot its original position
                          self.videoThumbnailCollectionView.contentOffset = CGPointMake(0, kChannelCreationCollectionViewOffsetY);
@@ -2038,60 +1585,6 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 }
 
 
-
-
-#pragma mark - iPad Category Tab Delegate
-
-- (BOOL) showSubGenres
-{
-    return YES;
-}
-
-
-- (void) handleNewTabSelectionWithGenre: (Genre *) genre
-{
-    // the tab selector should alwaysreturn a genre. If no genre is sent, the "Othre" category is missing and we will have to make do with an empty string.
-    if (!genre)
-    {
-        self.selectedCategoryId = @"";
-        [self updateCategoryButtonText: @"OTHER"];
-        return;
-    }
-    
-    // update the text field with the format "GENRE/SUBGENRE"
-    if ([genre isMemberOfClass: [SubGenre class]])
-    {
-        [self hideCategoryChooser];
-        NSString *buttonText = [NSString stringWithFormat: @"%@/%@", ((SubGenre *) genre).genre.name, genre.name];
-        [self updateCategoryButtonText: buttonText];
-        self.selectedCategoryId = genre.uniqueId;
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"channelCategorised"
-                                                                label: buttonText
-                                                                value: nil] build]];
-    }
-    else
-    {
-        NSArray *filteredSubcategories = [[genre.subgenres array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"isDefault == YES"]];
-        
-        if ([filteredSubcategories count] == 1)
-        {
-            SubGenre *otherSubGenre = filteredSubcategories[0];
-            
-            self.selectedCategoryId = otherSubGenre.uniqueId;
-            
-            [self updateCategoryButtonText: [NSString stringWithFormat: @"%@/%@", otherSubGenre.genre.name, otherSubGenre.name]];
-        }
-        else
-        {
-            self.selectedCategoryId = genre.uniqueId;
-            [self updateCategoryButtonText: genre.name];
-        }
-    }
-}
 
 
 #pragma mark - Deleting Channels
@@ -2184,13 +1677,11 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     [self.activityIndicator startAnimating];
     self.cancelEditButton.hidden = YES;
     
-    [self hideCategoryChooser];
     
     self.channel.title = self.channelTitleTextView.text;
     
     self.channel.channelDescription = self.channel.channelDescription ? self.channel.channelDescription : @"";
     
-    NSString *category = [self categoryIdStringForServiceCall];
     
     NSString *cover = self.selectedCoverId;
     
@@ -2202,8 +1693,8 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     [appDelegate.oAuthNetworkEngine createChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                      title: self.channel.title
                                                description: self.channel.channelDescription
-                                                  category: category
-                                                     cover: cover
+                                                  category: @""
+                                                     cover: @""
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
                                              
@@ -2212,7 +1703,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
                                              
                                              [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
                                                                                                     action: @"channelCreated"
-                                                                                                     label: category
+                                                                                                     label: @""
                                                                                                      value: nil] build]];
                                              
                                              NSString *channelId = resourceCreated[@"id"];
@@ -2614,41 +2105,9 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 }
 
 
-#pragma mark - channel and cover id preparation
-
-- (NSString *) categoryIdStringForServiceCall
-{
-    NSString *category = self.selectedCategoryId;
-    
-    if ([category length] == 0)
-    {
-        category = self.channel.categoryId;
-        
-        if ([category length] == 0)
-        {
-            category = @"";
-        }
-    }
-    
-    return category;
-}
 
 
-- (NSString *) coverIdStringForServiceCall
-{
-    NSString *cover = self.selectedCoverId;
-    
-    if ([cover length] == 0)
-    {
-        cover = @"KEEP";
-    }
-    else if ([cover isEqualToString: kCoverSetNoCover])
-    {
-        cover = @"";
-    }
-    
-    return cover;
-}
+
 
 
 #pragma mark - UITextView delegate
@@ -2709,29 +2168,12 @@ shouldChangeTextInRange: (NSRange) range
     
     self.videoThumbnailCollectionView.scrollsToTop = YES;
     
-    // == Cover Image == //
-    if (self.mode == kChannelDetailsModeDisplay) // only load bg on display, creation will insert new bg
-    {
-        self.currentWebImageOperation = [self loadBackgroundImage];
-    }
 }
 
 
 - (void) checkForOnBoarding
 {
-    if (![appDelegate.viewStackManager controllerViewIsVisible: self])
-    {
-        return;
-    }
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger onBoarding1State = [defaults integerForKey: kInstruction1OnBoardingState];
-    
-    if (!onBoarding1State || onBoarding1State == 1) // has shown on channel details and can show here IF videos are present
-    {
-        [defaults setInteger: 2
-                      forKey: kInstruction1OnBoardingState];         // inc by one
-    }
 }
 
 
@@ -2741,8 +2183,6 @@ shouldChangeTextInRange: (NSRange) range
     
     self.videoThumbnailCollectionView.scrollsToTop = NO;
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kMainControlsChangeLeave
-                                                        object: self];
 }
 
 
@@ -2784,134 +2224,6 @@ shouldChangeTextInRange: (NSRange) range
 }
 
 
-#pragma mark - Report a concern
-
-- (IBAction) userTouchedReportConcernButton: (UIButton *) button
-{
-    button.selected = !button.selected;
-    
-    if (button.selected)
-    {
-        if (!self.reportConcernController)
-        {
-            self.reportConcernController = [[SYNReportConcernTableViewController alloc] init];
-            
-            [self.reportConcernController reportConcernFromView: button
-                                               inViewController: self
-                                          popOverArrowDirection: UIPopoverArrowDirectionLeft
-                                                     objectType: @"channel"
-                                                       objectId: self.channel.uniqueId
-                                                 completedBlock: ^{
-                                                     button.selected = NO;
-                                                     self.reportConcernController = nil;
-                                                 }];
-        }
-    }
-}
-
-
-#pragma mark - Cover selection and upload support
-
-- (void) userTouchedCameraButton: (UIButton *) button
-{
-    //Show imagePicker
-    self.imagePicker = [[SYNImagePickerController alloc] initWithHostViewController: self];
-    self.imagePicker.delegate = self;
-    
-    [self.imagePicker presentImagePickerAsPopupFromView: button
-                                         arrowDirection: UIPopoverArrowDirectionLeft];
-}
-
-
-#pragma mark - SYNImagePickerDelegate
-
-- (void)	   picker: (SYNImagePickerController *) picker
- finishedWithImage: (UIImage *) image
-{
-    //Imagepicker has picked an image
-    self.channelCoverImageView.image = image;
-    [self uploadChannelImage: image];
-    self.imagePicker = nil;
-}
-
-
-#pragma mark - Upload channel cover image
-
-- (void) uploadChannelImage: (UIImage *) imageToUpload
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"channelCoverUploaded"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    self.createChannelButton.enabled = FALSE;
-    self.saveChannelButton.enabled = FALSE;
-    [self.activityIndicator startAnimating];
-    
-    [self.coverChooserController createCoverPlaceholder: imageToUpload];
-    
-    // Upload the image for this user
-    [appDelegate.oAuthNetworkEngine uploadCoverArtForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                      image: imageToUpload
-                                          completionHandler: ^(NSDictionary *dictionary) {
-                                              self.createChannelButton.enabled = TRUE;
-                                              self.saveChannelButton.enabled = TRUE;
-                                              [self.activityIndicator stopAnimating];
-                                              
-                                              NSString *imageUrl = dictionary [@"thumbnail_url"];
-                                              
-                                              if (imageUrl && [imageUrl isKindOfClass: [NSString class]])
-                                              {
-                                                  if (!self.selectedImageURL)
-                                                  {
-                                                      self.selectedImageURL = imageUrl;
-                                                  }
-                                                  
-                                                  // [self.coverChooserController updateUserArtWithURL: imageUrl];
-                                                  // DebugLog(@"Success");
-                                              }
-                                              else
-                                              {
-                                                  DebugLog(@"Failed to upload wallpaper URL");
-                                              }
-                                              
-                                              self.selectedCoverId = dictionary[@"cover_ref"];
-                                          } errorHandler: ^(NSError *error) {
-                                                   self.createChannelButton.enabled = TRUE;
-                                                   self.saveChannelButton.enabled = TRUE;
-                                                   [self.activityIndicator stopAnimating];
-                                                   DebugLog(@"%@", [error debugDescription]);
-                                               }];
-    
-    NSDictionary *userInfo = @{kCoverArt: @"uploading", kCoverArtImage: imageToUpload};
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName: kCoverArtChanged
-                                                        object: self
-                                                      userInfo: userInfo];
-}
-
-
-#pragma mark - iPhone viewcontroller dismissal
-- (IBAction) backButtonTapped: (id) sender
-{
-    CATransition *animation = [CATransition animation];
-    
-    [animation setType: kCATransitionReveal];
-    [animation setSubtype: kCATransitionFromLeft];
-    
-    [animation setDuration: 0.30];
-    [animation setTimingFunction:
-     [CAMediaTimingFunction functionWithName:
-      kCAMediaTimingFunctionEaseInEaseOut]];
-    
-    [self.view.window.layer addAnimation: animation
-                                  forKey: nil];
-    
-    [self dismissViewControllerAnimated: NO
-                             completion: nil];
-}
 
 
 - (void) addSubscribeActivityIndicator
@@ -2923,353 +2235,15 @@ shouldChangeTextInRange: (NSRange) range
 }
 
 
-#pragma mark - iPhone Category Table delegate
-
-- (void) categoryTableController: (SYNChannelCategoryTableViewController *) tableController
-               didSelectCategory: (Genre *) category
-{
-    if (category)
-    {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"channelCategorised"
-                                                                label: category.name
-                                                                value: nil] build]];
-        
-        NSArray *filteredSubcategories = [[category.subgenres array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"isDefault == YES"]];
-        
-        if ([filteredSubcategories count] == 1)
-        {
-            SubGenre *otherSubGenre = filteredSubcategories[0];
-            
-            self.selectedCategoryId = otherSubGenre.uniqueId;
-            
-            [self.selectCategoryButton setTitle: [NSString stringWithFormat: @"%@/\n%@", otherSubGenre.genre.name, otherSubGenre.name]
-                                       forState: UIControlStateNormal];
-        }
-        else
-        {
-            self.selectedCategoryId = category.uniqueId;
-            
-            [self.selectCategoryButton setTitle: category.name
-                                       forState: UIControlStateNormal];
-        }
-        
-        [self hideCategoriesTable];
-    }
-}
-
-
-- (void) categoryTableController: (SYNChannelCategoryTableViewController *) tableController
-            didSelectSubCategory: (SubGenre *) subCategory
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"channelCategorised"
-                                                            label: subCategory.name
-                                                            value: nil] build]];
-    
-    self.selectedCategoryId = subCategory.uniqueId;
-    
-    [self.selectCategoryButton setTitle: [NSString stringWithFormat: @"%@/\n%@", subCategory.genre.name, subCategory.name]
-                               forState: UIControlStateNormal];
-    
-    [self hideCategoriesTable];
-}
-
-
-- (void) categoryTableControllerDeselectedAll: (SYNChannelCategoryTableViewController *) tableController
-{
-    [self hideCategoriesTable];
-}
-
-
-- (void) hideCategoriesTable
-{
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations: ^{
-                         CGRect endFrame = self.categoryTableViewController.view.frame;
-                         endFrame.origin.y = self.view.frame.size.height;
-                         self.categoryTableViewController.view.frame = endFrame;
-                     }
-                     completion: ^(BOOL finished) {
-                         [self.categoryTableViewController.view removeFromSuperview];
-                     }];
-}
-
-
-#pragma mark - iPhone Cover Chooser delegate
-
-- (void) closeImageSelector: (SYNChannelCoverImageSelectorViewController *) imageSelector
-{
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations: ^{
-                         CGRect endFrame = self.coverImageSelector.view.frame;
-                         endFrame.origin.y = self.view.frame.size.height;
-                         self.coverImageSelector.view.frame = endFrame;
-                     }
-                     completion: ^(BOOL finished) {
-                         [self.coverImageSelector.view removeFromSuperview];
-                         self.coverImageSelector = nil;
-                     }];
-    
-    self.imageSelectorOpen = FALSE;
-}
-
-
-- (void) imageSelector: (SYNChannelCoverImageSelectorViewController *) imageSelector
-      didSelectUIImage: (UIImage *) image
-{
-    [self uploadChannelImage: image];
-    [self closeImageSelector: imageSelector];
-    self.selectedImageURL = nil;
-}
-
-
-- (void) imageSelector: (SYNChannelCoverImageSelectorViewController *) imageSelector
-        didSelectImage: (NSString *) imageUrlString
-          withRemoteId: (NSString *) remoteId
-{
-    self.selectedCoverId = remoteId;
-    
-    self.selectedImageURL = imageUrlString;
-    
-    NSString *largeImageUrlString = [imageUrlString stringByReplacingOccurrencesOfString: @"thumbnail_medium"
-                                                                              withString: @"background"];
-    
-    __weak SYNCollectionDetailsViewController *wself = self;
-    
-    [self.channelCoverImageView setImageWithURL: [NSURL URLWithString: largeImageUrlString]
-                               placeholderImage: [UIImage imageNamed: @"PlaceholderChannelCreation.png"]
-                                        options: SDWebImageRetryFailed
-                                      completed: ^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                          wself.originalBackgroundImage = wself.channelCoverImageView.image;
-                                          wself.channelCoverImageView.image = [wself croppedImageForCurrentOrientation];
-                                      }];
-    
-    
-    [self closeImageSelector: imageSelector];
-}
 
 
 #pragma mark - ScrollView Delegate
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
-    if (scrollView == self.videoThumbnailCollectionView)
-    {
-        CGFloat fadeSpan = (self.isIPhone) ? kChannelDetailsFadeSpaniPhone : kChannelDetailsFadeSpan;
-        CGFloat blurOpacity;
-        
-        // Try this first
-        // when reaching far right hand side, load a new page
-        if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight)
-            && self.isLoadingMoreContent == NO)
-        {
-            [self loadMoreVideos];
-        }
-        
-        if (scrollView.contentOffset.y <= self.originalContentOffset.y)
-        {
-            self.masterControlsView.alpha = 1.0f;
-            CGRect frame = self.masterControlsView.frame;
-            frame.origin.y = self.originalMasterControlsViewOrigin.y;
-            self.masterControlsView.frame = frame;
-            self.shareButton.userInteractionEnabled = YES;
-            
-            blurOpacity = 0.0;
-        }
-        else
-        {
-            self.shareButton.userInteractionEnabled = NO;
-            CGFloat differenceInY = -(self.originalContentOffset.y - scrollView.contentOffset.y);
-            
-            CGRect frame = self.masterControlsView.frame;
-            
-            frame.origin.y = self.originalMasterControlsViewOrigin.y - (differenceInY / 1.5);
-            
-            self.masterControlsView.frame = frame;
-            
-            if (differenceInY < fadeSpan)
-            {
-                CGFloat fadeCoefficient = (differenceInY / fadeSpan);
-                self.masterControlsView.alpha = 1.0 - fadeCoefficient * fadeCoefficient;
-            }
-            else
-            {
-                self.masterControlsView.alpha = 0.0f;
-            }
-            
-            // blur background
-            blurOpacity = differenceInY > 140 ? 1.0 : differenceInY / 140.0; // 1 .. 0
-        }
-        
-        self.blurredBGImageView.alpha = 0.0 + blurOpacity;
-    }
-}
-
-
-#pragma mark - Image render
-
-- (UIImage *) croppedImageForCurrentOrientation
-{
-    return [self croppedImageForOrientation: [(SYNDeviceManager *) SYNDeviceManager.sharedInstance orientation]];
-}
-
-
-- (UIImage *) croppedImageForOrientation: (UIInterfaceOrientation) orientation
-{
-    CGRect croppingRect;
+    [super scrollViewDidScroll:scrollView];
     
-    if (UIInterfaceOrientationIsLandscape(orientation))
-    {
-        croppingRect = CGRectMake(0.0, 128.0, 1024.0, 768.0);
-    }
-    else
-    {
-        croppingRect = CGRectMake(128.0, 0.0, 768.0, 1024.0);
-    }
-    
-    if (self.originalBackgroundImage == nil) // set the bg var once
-    {
-        // in most cases this will not be called its a failsafe
-        self.originalBackgroundImage = self.channelCoverImageView.image;
-    }
-    
-    if (self.originalBackgroundImage.size.height != 1024.0f)
-    {
-        // we expect square images 1024 x 1024 px
-        // scale the crop Rect
-        // should only happen when uploading new images.
-        CGFloat scaleX = self.originalBackgroundImage.size.width / 1024.0f;
-        CGFloat scaleY = self.originalBackgroundImage.size.height / 1024.0f;
-        croppingRect = CGRectApplyAffineTransform(croppingRect, CGAffineTransformMakeScale(scaleX, scaleY));
-    }
-    
-    CGImageRef croppedImageRef = CGImageCreateWithImageInRect([self.originalBackgroundImage CGImage], croppingRect);
-    
-    UIImage *croppedImage = [UIImage imageWithCGImage: croppedImageRef];
-    
-    [self renderBlurredBackgroundWithCGImage: croppedImageRef];
-    
-    CGImageRelease(croppedImageRef);
-    
-    return croppedImage;
-}
-
-
-- (void) renderBlurredBackgroundWithCGImage: (CGImageRef) imageRef
-{
-    if (!self.blurredBGImageView)
-    {
-        self.blurredBGImageView = [[UIImageView alloc] init];
-        self.blurredBGImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.blurredBGImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.blurredBGImageView.backgroundColor = [UIColor clearColor];
-        self.blurredBGImageView.alpha = 0.0f;
-        
-        [self.view insertSubview: self.blurredBGImageView
-                    aboveSubview: self.channelCoverImageView];
-    }
-    
-    self.blurredBGImageView.frame = self.channelCoverImageView.frame;
-    
-    CGImageRetain(imageRef);
-    
-    __weak SYNCollectionDetailsViewController *wself = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.backgroundCIImage = [CIImage imageWithCGImage: imageRef];
-        
-        self.context = [CIContext contextWithOptions: nil];
-        
-        CGFloat imageWidth = CGImageGetWidth(imageRef);
-        CGFloat imageHeight = CGImageGetHeight(imageRef);
-        CGFloat largestDimension = MAX(imageWidth, imageHeight);
-        
-        CGFloat blurRadius = 7.0f;
-        
-        if (largestDimension != 1024.0f)
-        {
-            //we expect one side to be 1024 px
-            //If not we are processing a cropped image for upload.
-            //Attempt to adjust the blur scale.
-            blurRadius *= largestDimension / 1024.0f;
-            // Make min radius 1.0px if the image is really small so we do at least see some blurring
-            blurRadius = MAX(blurRadius, 1.0f);
-        }
-        
-        self.filter = [CIFilter filterWithName: @"CIGaussianBlur"];
-        
-        [self.filter setValue: self.backgroundCIImage
-                       forKey: @"inputImage"];
-        
-        [self.filter setValue: @(blurRadius)
-                       forKey: @"inputRadius"];
-        
-        CIImage *outputImage = [self.filter outputImage];
-        
-        CGImageRef cgimg = [self.context createCGImage: outputImage
-                                              fromRect: CGRectMake(0.0f, 0.0f, imageWidth, imageHeight)];
-        
-        UIImage *bgImage = [UIImage imageWithCGImage: cgimg];
-        CGImageRelease(cgimg);
-        
-        [wself.blurredBGImageView
-         performSelectorOnMainThread: @selector(setImage:)
-         withObject: bgImage
-         waitUntilDone: YES];
-        
-        CGImageRelease(imageRef);
-    });
-}
-
-
-- (id<SDWebImageOperation>) loadBackgroundImage
-{
-    __weak SDWebImageManager *shareImageManager = SDWebImageManager.sharedManager;
-    __weak SYNCollectionDetailsViewController *wself = self;
-    
-    // Make sure we have a valid background URL
-    if (self.channel.channelCover.imageBackgroundUrl)
-    {
-        return [shareImageManager downloadWithURL: [NSURL URLWithString: self.channel.channelCover.imageBackgroundUrl]
-                                          options: SDWebImageRetryFailed
-                                         progress: nil
-                                        completed: ^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                                            if (!wself || !image)
-                                            {
-                                                return;
-                                            }
-                                            
-                                            wself.originalBackgroundImage = image;
-                                            
-                                            UIImage *croppedImage = [wself croppedImageForCurrentOrientation];
-                                            
-                                            
-                                            [UIView transitionWithView: wself.view
-                                                              duration: 0.35f
-                                                               options: UIViewAnimationOptionTransitionCrossDissolve
-                                                            animations: ^{
-                                                                
-                                                                wself.channelCoverImageView.image = croppedImage;
-                                                                
-                                                            } completion: ^(BOOL finished) {
-                                                                
-                                                            }];
-                                            
-                                            [wself.channelCoverImageView setNeedsLayout];
-                                        }];
-    }
-    else
-    {
-        return nil;
-    }
+    // TODO: Implement rest if needed
 }
 
 
@@ -3430,11 +2404,6 @@ shouldChangeTextInRange: (NSRange) range
 }
 
 
-- (void) videoOverlayDidDissapear
-{
-    
-}
-
 
 - (void) headerTapped
 {
@@ -3490,16 +2459,6 @@ shouldChangeTextInRange: (NSRange) range
     self.subscribersPopover = nil;
 }
 
-
-- (NavigationButtonsAppearance) navigationAppearance
-{
-    return NavigationButtonsAppearanceWhite;
-}
-
-- (BOOL) needsHeaderButton
-{
-    return NO;
-}
 
 
 

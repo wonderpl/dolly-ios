@@ -16,7 +16,6 @@
 #import "SYNDeviceManager.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNMoodRootViewController.h"
-#import "SYNGenreTabViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNActivityViewController.h"
 #import "SYNOAuthNetworkEngine.h"

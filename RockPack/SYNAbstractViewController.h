@@ -15,8 +15,6 @@
 #import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOnBoardingPopoverView.h"
-#import "SYNTabViewController.h"
-#import "SYNTabViewDelegate.h"
 #import "SYNSocialActionsDelegate.h"
 @import CoreData;
 @import UIKit;
@@ -28,13 +26,11 @@ typedef void (^SYNShareCompletionBlock)(void);
 @interface SYNAbstractViewController : UIViewController <NSFetchedResultsControllerDelegate,
                                                          UICollectionViewDataSource,
                                                          UICollectionViewDelegate,
-                                                         SYNSocialActionsDelegate,
-                                                         SYNTabViewDelegate>
+                                                         SYNSocialActionsDelegate>
 {
 @protected
     SYNAppDelegate *appDelegate;
     BOOL tabExpanded;
-    SYNTabViewController *tabViewController;
     NSString *viewId;
     NSFetchedResultsController *fetchedResultsController;
     NSString *abstractTitle;
@@ -52,7 +48,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSIndexPath *draggedIndexPath;
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
-@property (nonatomic, strong) SYNTabViewController *tabViewController;
 @property (nonatomic, strong) UIImageView *draggedView;
 @property (nonatomic, weak) MKNetworkOperation *runningNetworkOperation;
 @property (readonly) BOOL alwaysDisplaysSearchBox;
@@ -118,7 +113,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (NavigationButtonsAppearance) navigationAppearance;
 
-- (BOOL) needsHeaderButton;
 
 - (void) createAndDisplayNewChannel;
 
