@@ -16,7 +16,7 @@
 #import "UIImageView+WebCache.h"
 @import QuartzCore;
 
-#define SHOW_DESCRIPTION_AMOUNT 225.0f
+#define SHOW_DESCRIPTION_AMOUNT 250.0f
 
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
@@ -44,7 +44,7 @@
     self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
                                                                    action: @selector(showMenu:)];
     self.longPress.delegate = self;
-  //  [self addGestureRecognizer: self.longPress];
+    //  [self addGestureRecognizer: self.longPress];
 #endif
     
     // Tap for showing video
@@ -56,7 +56,7 @@
     // Touch for highlighting cells when the user touches them (like UIButton)
     self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self action: @selector(showGlossLowlight:)];
     self.touch.delegate = self;
-   // [self addGestureRecognizer: self.touch];
+    // [self addGestureRecognizer: self.touch];
     self.specialSelected = NO;
     
     // Required to make cells look good when wobbling (delete)
@@ -85,7 +85,7 @@
         }
         else{
             [self.boarderView.layer setBorderWidth:1.0f];
-
+            
         }
         
     }
@@ -93,9 +93,9 @@
     self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDescription:)];
     [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
     self.rightSwipe.delegate = self;
-
+    
     [self.containerView addGestureRecognizer:self.rightSwipe];
-
+    
     self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideDescription:)];
     [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
     self.leftSwipe.delegate = self;
@@ -117,16 +117,16 @@
 - (void) applyLayoutAttributes: (SYNDeletionWobbleLayoutAttributes *) layoutAttributes
 {
     /*
-    if (layoutAttributes.isDeleteButtonHidden || self.deleteButton.enabled == FALSE)
-    {
-        self.deleteButton.layer.opacity = 0.0;
-        [self stopWobbling];
-    }
-    else
-    {
-        self.deleteButton.layer.opacity = 1.0;
-        [self startWobbling];
-    }*/
+     if (layoutAttributes.isDeleteButtonHidden || self.deleteButton.enabled == FALSE)
+     {
+     self.deleteButton.layer.opacity = 0.0;
+     [self stopWobbling];
+     }
+     else
+     {
+     self.deleteButton.layer.opacity = 1.0;
+     [self startWobbling];
+     }*/
 }
 
 
@@ -169,7 +169,7 @@
 {
     [self stopWobbling];
     
-   // [self.imageView.layer removeAllAnimations];
+    // [self.imageView.layer removeAllAnimations];
     //[self.imageView setImageWithURL: nil];
 }
 
@@ -189,7 +189,7 @@
 
 -(void) setBottomBarColor:(UIColor*) color
 {
-    [self.bottomBarView setBackgroundColor:color];    
+    [self.bottomBarView setBackgroundColor:color];
 }
 
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
@@ -210,8 +210,8 @@
 
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel
 {
-        [self.followButton setTitle:strFollowLabel forState:UIControlStateNormal];
-        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
+    [self.followButton setTitle:strFollowLabel forState:UIControlStateNormal];
+    [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
 }
 
 - (IBAction)showDescription:(UISwipeGestureRecognizer *)recognizer
@@ -221,7 +221,7 @@
         {
             CGRect tmpRect = self.containerView.frame;
             tmpRect.origin.x += SHOW_DESCRIPTION_AMOUNT;
-
+            
             self.containerView.frame = tmpRect;
         }
     }];
@@ -235,7 +235,7 @@
         {
             CGRect tmpRect = self.containerView.frame;
             tmpRect.origin.x -= SHOW_DESCRIPTION_AMOUNT;
-
+            
             self.containerView.frame = tmpRect;
             
         }
@@ -248,13 +248,47 @@
 
 - (IBAction)followChannel:(id)sender
 {
-    if (self.channel != nil)
+    
+    
+    [self showAlertView];
+}
+
+
+-(void) showAlertView{
+    NSString *message = @"Are you sure you want to unfollow";
+    
+    
+
+    NSLog(@"%@", self.channel.title);
+    
+    message =  [message stringByAppendingString:@" "];
+
+   message =  [message stringByAppendingString:self.channel.title];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    [alertView show];
+}
+
+- (NSString *) yesButtonTitle{
+    return @"Yes";
+}
+- (NSString *) noButtonTitle{
+    return @"Cancel";
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:[self yesButtonTitle]])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
-                                                            object: self
-                                                          userInfo: @{kChannel : self.channel}];
+        if (self.channel != nil)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
+                                                                object: self
+                                                              userInfo: @{kChannel : self.channel}];
+        }
     }
 }
+
 
 
 @end
