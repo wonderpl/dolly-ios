@@ -46,6 +46,7 @@
     }
     else
     {
+        
         profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
         
         [self pushController: profileVC];
@@ -71,8 +72,9 @@
     }
     else
     {
-        profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
         
+        profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile];
+
         [navigationController pushViewController:profileVC animated:NO];
 
     }

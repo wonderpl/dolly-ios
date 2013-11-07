@@ -123,7 +123,6 @@ SYNImagePickerControllerDelegate>{
 {
     if (self = [super initWithNibName:NSStringFromClass([SYNProfileRootViewController class]) bundle:nil])
     {
-        modeType = MyOwnProfile;
         viewId = vid;
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
@@ -141,7 +140,9 @@ SYNImagePickerControllerDelegate>{
 
 - (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
 {
-    modeType = mode;
+    
+    self.modeType = mode;
+    
     self = [self initWithViewId:vid];
 
     return self;
@@ -273,7 +274,6 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    self.modeType = MyOwnProfile;
     [self setProfleType:self.modeType];
 }
 
@@ -715,7 +715,7 @@ SYNImagePickerControllerDelegate>{
     [channelsLayout invalidateLayout];
     
     [self reloadCollectionViews];
-    [self resizeScrollViews];
+   // [self resizeScrollViews];
 }
 
 
