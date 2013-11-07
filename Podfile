@@ -3,4 +3,3 @@ pod 'Reachability', 	:head
 pod 'MKNetworkKit', 	:head
 pod 'SSKeychain', 		'~> 0.2.1'
 pod 'Appirater',		:head
-pod 'SparkInspector'

@@ -34,7 +34,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super awakeFromNib];
     
-
+    self.userThumbnailButton.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
+    self.userThumbnailButton.clipsToBounds = YES;
+    
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
