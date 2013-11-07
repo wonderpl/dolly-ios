@@ -107,7 +107,7 @@
             <size key="customSize" width="353" height="261"/>
             <connections>
                 <outlet property="actionMessageLabel" destination="9" id="97m-YT-jaC"/>
-                <outlet property="collectionNameButton" destination="4TQ-2k-gku" id="RfE-Mp-pXn"/>
+                <outlet property="channelNameButton" destination="4TQ-2k-gku" id="1Qx-UB-bCV"/>
                 <outlet property="collectionView" destination="lMc-y5-kdQ" id="QfR-qq-uHx"/>
                 <outlet property="userThumbnailButton" destination="28" id="29"/>
             </connections>
