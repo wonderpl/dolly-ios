@@ -7,28 +7,28 @@
 //
 
 #import "AppConstants.h"
+#import "Appirater.h"
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "ChannelOwner.h"
+#import "FeedItem.h"
 #import "GAI.h"
 #import "NSDate-Utilities.h"
+#import "SYNAggregateCell.h"
+#import "SYNAggregateChannelCell.h"
+#import "SYNAggregateVideoCell.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNHomeSectionHeaderView.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
+#import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNAggregateChannelCell.h"
+#import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
-#import "SYNAggregateCell.h"
-#import "UIImageView+WebCache.h"
-#import "SYNAggregateVideoCell.h"
 #import "Video.h"
-#import "FeedItem.h"
-#import "SYNMasterViewController.h"
 #import "VideoInstance.h"
-#import "Appirater.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
@@ -556,9 +556,11 @@ typedef void(^FeedDataErrorBlock)(void);
     // common for both types
     cell.delegate = self;
     
-    [cell.userThumbnailImageView setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
-                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                         options: SDWebImageRetryFailed];
+    [cell.userThumbnailButton setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
+                                     forState: UIControlStateNormal
+                             placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                      options: SDWebImageRetryFailed];
+
 
     return cell;
 }

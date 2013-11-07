@@ -115,13 +115,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 - (void) layoutSubviews
 {
     [super layoutSubviews];
-    
-}
-
-
-- (IBAction)channelNameButtonPressed:(id)sender
-{
-    
 }
 
 
@@ -189,7 +182,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [(SYNAbstractViewController *)self.delegate displayVideoViewerFromCell: self
                                                                 andSubCell: subCell
                                                             atSubCellIndex: indexPath.item];
-
 }
 
 
