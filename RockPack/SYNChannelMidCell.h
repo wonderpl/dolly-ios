@@ -29,7 +29,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
 // detail label for iphone, need better logic than this!!
-@property (strong, nonatomic) IBOutlet UILabel *detailsLabel;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;
 

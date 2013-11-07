@@ -35,7 +35,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UQE-Qn-569">
-                                        <rect key="frame" x="140" y="44" width="42" height="21"/>
+                                        <rect key="frame" x="95" y="44" width="133" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,8 +75,8 @@
                 <outlet property="bottomBarView" destination="ZTg-Ce-S2r" id="Sof-lm-tBD"/>
                 <outlet property="containerView" destination="UUL-SF-FNl" id="1u2-bb-DPV"/>
                 <outlet property="descriptionView" destination="A5P-th-oX8" id="zRt-95-k7j"/>
-                <outlet property="detailsLabel" destination="UQE-Qn-569" id="J57-lK-XnT"/>
                 <outlet property="followButton" destination="vfH-7e-CmQ" id="Mdu-Ge-Dis"/>
+                <outlet property="followerCountLabel" destination="UQE-Qn-569" id="hRG-55-M2V"/>
                 <outlet property="videoTitleLabel" destination="owS-vf-ZqF" id="AQJ-4i-mN2"/>
             </connections>
         </collectionViewCell>

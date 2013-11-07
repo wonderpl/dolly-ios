@@ -71,7 +71,7 @@
     if (IS_IPHONE)
     {
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
-        [self.detailsLabel setFont:[UIFont lightCustomFontOfSize:10]];
+        [self.followerCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
         [self.boarderView.layer setBorderWidth:0.5f];

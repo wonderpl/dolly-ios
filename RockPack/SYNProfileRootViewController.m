@@ -39,6 +39,8 @@
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 390.0f
+//delete function in channeldetails deletechannel
+
 
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
@@ -151,7 +153,12 @@ SYNImagePickerControllerDelegate>{
     // Defensive programming
     self.channelThumbnailCollectionView.delegate = nil;
     self.channelThumbnailCollectionView.dataSource = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kHideAllDesciptions object:nil];
+
+    
 }
+
 
 #pragma mark - View Lifecycle
 
@@ -261,8 +268,6 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    
-     self.modeType = MyOwnProfile;
     
     [self setProfleType:self.modeType];
     
@@ -1020,7 +1025,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     
-    //  [super scrollViewWillBeginDragging:scrollView];
+      [super scrollViewWillBeginDragging:scrollView];
     if (self.searchMode) {
         [self.followingSearchBar resignFirstResponder];
         self.searchMode = NO;
@@ -1111,6 +1116,14 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             
             [self moveNameLabelWithOffset:offset];
             
+            if (offset<0)
+            {
+                //change to make like what they wanted
+                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
+                self.coverImage.transform = scale;
+            }
+
+            
             /*
              self.profileImageView.transform = move;
              self.aboutMeTextView.transform = move;
@@ -1127,6 +1140,9 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (!self.isIPhone)
     {
+        
+
+        
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
         {
             scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
