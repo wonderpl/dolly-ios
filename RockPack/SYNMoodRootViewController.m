@@ -48,7 +48,7 @@
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
-    return self.optionNames.count;
+    return 10000;
 }
 
 
@@ -64,7 +64,8 @@
     SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: @"SYNMoodCell"
                                                                                forIndexPath: indexPath];
     
-    moodCell.label.text = self.optionNames [indexPath.item];
+    NSString* currentOptionName = self.optionNames [indexPath.item % self.optionNames.count];
+    moodCell.label.text = currentOptionName;
     
     return moodCell;
 }

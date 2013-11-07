@@ -12,6 +12,8 @@
 @protocol SYNChannelMidCellDelegate <NSObject>
 
 - (void) channelTapped: (UICollectionViewCell *) cell;
+- (void) followButtonTapped: (UICollectionViewCell *) cell;
+
 
 @end
 
@@ -28,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIView *boarderView;
 
 @property (strong, nonatomic) IBOutlet UIButton *followButton;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 // detail label for iphone, need better logic than this!!
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UIView *descriptionView;
