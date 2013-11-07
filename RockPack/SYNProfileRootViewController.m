@@ -36,8 +36,8 @@
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
 #define FULL_NAME_LABEL_IPHONE 285.0f
-#define FULL_NAME_LABEL_IPAD_PORTRAIT 542.0f
-#define FULLNAMELABELIPADLANDSCAPE 415.0f
+#define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
+#define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 390.0f
 
 @interface SYNProfileRootViewController () <
@@ -118,15 +118,17 @@ SYNImagePickerControllerDelegate>{
 {
     if (self = [super initWithNibName:NSStringFromClass([SYNProfileRootViewController class]) bundle:nil])
     {
-        self = [self initWithViewId:vid WithMode:MyOwnProfile];
-        
+        modeType = MyOwnProfile;
         viewId = vid;
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
                                                      name: NSManagedObjectContextObjectsDidChangeNotification
                                                    object: appDelegate.searchManagedObjectContext];
-        self.shouldBeginEditing = YES;
         
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDescriptionCurrentlyShowing) name:kHideAllDesciptions object:nil];
+
+        self.shouldBeginEditing = YES;
     }
     
     return self;
@@ -135,6 +137,8 @@ SYNImagePickerControllerDelegate>{
 - (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
 {
     modeType = mode;
+    self = [self initWithViewId:vid];
+
     return self;
 }
 
@@ -794,7 +798,6 @@ SYNImagePickerControllerDelegate>{
         [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
-        
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
@@ -803,8 +806,6 @@ SYNImagePickerControllerDelegate>{
         }
         else if(self.modeType == OtherUsersProfile)
         {
-            
-            
             [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
         }
         
@@ -826,13 +827,10 @@ SYNImagePickerControllerDelegate>{
         {
             cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
         }
-        
     }
-    
     
     return cell;
 }
-
 
 - (void) collectionView: (UICollectionView *) collectionView
 didSelectItemAtIndexPath: (NSIndexPath *) indexPath
@@ -935,6 +933,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 }
 
 
+
 - (void) resizeScrollViews
 {
     if (self.isIPhone)
@@ -1027,6 +1026,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         self.searchMode = NO;
     }
     
+    [self hideDescriptionCurrentlyShowing];
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -1035,10 +1035,20 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     if (decelerate)
     {
         [self scrollingEnded];
-        
         [self moveNameLabelWithOffset:scrollView.contentOffset.y];
     }
     
+    for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
+    {
+        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForCell:cell];
+        NSLog(@"sub %@",indexPath);
+    }
+    
+    for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
+    {
+        NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForCell:cell];
+        NSLog(@"channel %@",indexPath);
+    }
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -1077,7 +1087,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.moreButton.transform = move;
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
-            
             
             if (offset<0)
             {
@@ -1242,7 +1251,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             tmpFrame.size.height = 64;
             self.outerViewFullNameLabel.frame = tmpFrame;
             self.outerViewFullNameLabel.transform = CGAffineTransformConcat(move, scale);
-            
         }
     }
     
@@ -1255,16 +1263,18 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
+                CGAffineTransform moveOverView = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT-2);
 
                 self.fullNameLabel.alpha = 0.9;
                 self.fullNameLabel.transform = move;
-                self.outerViewFullNameLabel.transform = move;
+                self.outerViewFullNameLabel.transform = moveOverView;
                 self.outerViewFullNameLabel.hidden = NO;
             }
             if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+
                 self.fullNameLabel.transform = move;
                 self.outerViewFullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
@@ -1289,6 +1299,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             if (offset<FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+
                 self.fullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
                 self.outerViewFullNameLabel.transform = move;
@@ -1679,6 +1690,25 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     return _arrDisplayFollowing;
 }
 
+
+-(void) hideDescriptionCurrentlyShowing
+{
+    
+    for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
+    {
+        if ([cell respondsToSelector:@selector(moveToCentre)]) {
+            [((SYNChannelMidCell*)cell) moveToCentre];
+        }
+    }
+    
+    for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
+    {
+        if ([cell respondsToSelector:@selector(moveToCentre)]) {
+            [((SYNChannelMidCell*)cell) moveToCentre];
+        }
+    }
+    
+}
 
 
 @end

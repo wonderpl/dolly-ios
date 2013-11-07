@@ -19,6 +19,9 @@
 #define kShowDescptionIPhone 250.0f
 #define kShowDescptionIPad 230.0f
 
+#define kShowDeleteIPhone 250.0f
+#define kShowDeleteIPad 230.0f
+
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
@@ -26,10 +29,11 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
+@property (nonatomic) BOOL descriptionMode;
+@property (nonatomic) BOOL deleteMode;
 
 
 @end
-
 
 @implementation SYNChannelMidCell
 
@@ -81,27 +85,32 @@
         [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
         
-        if (IS_RETINA) {
+        if (IS_RETINA)
+        {
             [self.boarderView.layer setBorderWidth:0.5f];
         }
-        else{
+        else
+        {
             [self.boarderView.layer setBorderWidth:1.0f];
             
         }
         
     }
     
-    self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDescription:)];
+    self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDescriptionSwipe:)];
     [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
     self.rightSwipe.delegate = self;
     
     [self.containerView addGestureRecognizer:self.rightSwipe];
     
-    self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideDescription:)];
+    self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipe:)];
     [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
     self.leftSwipe.delegate = self;
     
     [self.containerView addGestureRecognizer:self.leftSwipe];
+    self.deleteMode = NO;
+    self.descriptionMode = NO;
+
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
@@ -215,58 +224,96 @@
     [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
 }
 
-- (IBAction)showDescription:(UISwipeGestureRecognizer *)recognizer
+- (IBAction)showDescriptionSwipe:(UISwipeGestureRecognizer *)recognizer
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
+
+    if (self.deleteMode || self.descriptionMode) {
+        [self moveToCentre];
+    }
+    else
+    {
+        [self showDescription];
+
+    }
+}
+
+- (IBAction)leftSwipe:(UISwipeGestureRecognizer *)recognizer
+{
+ 
+    if (self.deleteMode || self.descriptionMode) {
+        [self moveToCentre];
+    }
+    else
+    {
+       // [self showDelete];
+    }
+    
+}
+
+-(void) showDescription
 {
     [UIView animateWithDuration:0.5f animations:^{
         if (self.containerView.frame.origin.x ==0)
         {
             CGRect tmpRect = self.containerView.frame;
-            if (IS_IPHONE) {
+            if (IS_IPHONE)
+            {
                 tmpRect.origin.x += kShowDescptionIPhone;
             }
             else
             {
                 tmpRect.origin.x += kShowDescptionIPad;
-                
             }
-    
-            
             self.containerView.frame = tmpRect;
+            self.descriptionMode = YES;
+
         }
     }];
+    
+
 }
 
-- (IBAction)hideDescription:(UISwipeGestureRecognizer *)recognizer
-{
+-(void) moveToCentre {
     [UIView animateWithDuration:0.5f animations:^{
         
         if (self.containerView.frame.origin.x !=0)
         {
             CGRect tmpRect = self.containerView.frame;
             
-            if (IS_IPHONE) {
-                tmpRect.origin.x -= kShowDescptionIPhone;
-            }
-            else
-            {
-                tmpRect.origin.x -= kShowDescptionIPad;
-    
-            }
-            
+                tmpRect.origin.x = 0;
             self.containerView.frame = tmpRect;
-            
+            self.deleteMode = NO;
+            self.descriptionMode = NO;
+
         }
     }];
-    
-    
 }
 
 
 
+-(void) showDelete{
+
+    [UIView animateWithDuration:0.5f animations:^{
+        
+            CGRect tmpRect = self.containerView.frame;
+            
+            if (IS_IPHONE)
+            {
+                tmpRect.origin.x -= 50;
+            }
+            else
+            {
+                tmpRect.origin.x -= 50;
+            }
+            self.containerView.frame = tmpRect;
+        self.deleteMode = YES;
+    }];
+
+    
+}
 - (IBAction)followChannel:(id)sender
 {
-    
-    
     [self showAlertView];
 }
 
@@ -274,8 +321,6 @@
 -(void) showAlertView{
     NSString *message = @"Are you sure you want to unfollow";
     
-    
-
     NSLog(@"%@", self.channel.title);
     
     message =  [message stringByAppendingString:@" "];

@@ -230,6 +230,7 @@ typedef enum : NSInteger {
 #define kMainControlsChangeEnter @"kMainControlsChangeEnter"
 #define kMainControlsChangeLeave @"kMainControlsChangeLeave"
 #define kScrollMovement @"kScrollMovement"
+#define kHideAllDesciptions @"kHideAllDesciptions"
 
 
 // One the APIs imported some new data - we will need to be more specific at some stage.
