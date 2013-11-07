@@ -29,10 +29,6 @@
     self.strongTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextMediumGray]};
     self.lightTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLightGray]};
     
-    // == Round off the image == //
-    self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
-    self.userThumbnailImageView.clipsToBounds = YES;
-    
     self.collectionData = @[]; // set to 0
 }
 
