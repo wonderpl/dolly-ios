@@ -71,13 +71,10 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
 
     self.feedItemsData = @[];
     self.videosInOrderArray = @[];
-    
-    
-    
+
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
     [self removePopupMessage];
@@ -116,7 +113,6 @@ typedef void(^FeedDataErrorBlock)(void);
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 }
-
 
 
 - (void) viewWillAppear: (BOOL) animated
@@ -257,6 +253,7 @@ typedef void(^FeedDataErrorBlock)(void);
         {
             [wself displayPopupMessage: NSLocalizedString(@"feed_screen_updating_error", nil)
                             withLoader: NO];
+            
             [NSTimer scheduledTimerWithTimeInterval: 3.0f
                                              target: self
                                            selector: @selector(removeEmptyGenreMessage)
@@ -274,8 +271,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                     size: self.dataRequestRange.length
                                        completionHandler: ^(NSDictionary *responseDictionary) {
                                            BOOL toAppend = (self.dataRequestRange.location > 0);
-                                           
-                                           
+
                                            NSDictionary *contentItems = responseDictionary[@"content"];
                                            
                                            if (!contentItems || ![contentItems isKindOfClass: [NSDictionary class]])
@@ -332,7 +328,6 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) clearedLocationBoundData
 {
     // to clear
-    
     [self fetchAndDisplayFeedItems];
     
     [self.feedCollectionView reloadData];
@@ -342,12 +337,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 #pragma mark - Empty genre message handling
-
-
-
-
-
-
 
 #pragma mark - Fetch Feed Data
 
@@ -512,7 +501,6 @@ typedef void(^FeedDataErrorBlock)(void);
         NSMutableArray* videosArray = @[].mutableCopy;
         
         // NOTE: the data containes either an aggragate or a single item, handle both cases here
-        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
             for (FeedItem* childFeedItem in feedItem.feedItems)
@@ -566,15 +554,12 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     
     // common for both types
-    
     cell.delegate = self;
     
     [cell.userThumbnailImageView setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
                                 placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                          options: SDWebImageRetryFailed];
-    
-    
-    
+
     return cell;
 }
 
@@ -822,6 +807,50 @@ typedef void(^FeedDataErrorBlock)(void);
     [appDelegate.viewStackManager viewProfileDetails: channelOwner
                             withNavigationController: self.navigationController];
 }
+
+
+- (IBAction) channelButtonTapped: (UIButton *) channelButton
+{
+    FeedItem *feedItem = [self feedItemFromView: channelButton];
+    
+    Channel* channel;
+    
+    // there are 2 types, video and channel (collection) types
+    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
+    {
+        VideoInstance* vi;
+        
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
+            vi = (VideoInstance*)((self.feedVideosById)[firstChildFeedItem.resourceId]);
+        }
+        else
+        {
+            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
+        }
+        
+        channel = vi.channel;
+    }
+    else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
+    {
+
+        
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
+            channel = (Channel*)(self.feedChannelsById[firstChildFeedItem.resourceId]);
+        }
+        else
+        {
+            channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
+        }
+    }
+    
+    [appDelegate.viewStackManager viewChannelDetails: channel
+                            withNavigationController: self.navigationController];
+}
+
 
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell

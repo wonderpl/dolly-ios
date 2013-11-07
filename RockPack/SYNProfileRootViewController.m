@@ -36,9 +36,11 @@
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
 #define FULL_NAME_LABEL_IPHONE 285.0f
-#define FULL_NAME_LABEL_IPAD_PORTRAIT 542.0f
-#define FULLNAMELABELIPADLANDSCAPE 415.0f
+#define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
+#define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 390.0f
+//delete function in channeldetails deletechannel
+
 
 @interface SYNProfileRootViewController () <
 UIGestureRecognizerDelegate,
@@ -99,6 +101,8 @@ SYNImagePickerControllerDelegate>{
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) UIColor *greyColor;
+@property (strong, nonatomic) UIColor *tabTextColor;
+
 @property (nonatomic, assign) BOOL pulling;
 @property (nonatomic, assign) BOOL searchMode;
 @property (nonatomic,assign) CGFloat startingPosition;
@@ -118,15 +122,17 @@ SYNImagePickerControllerDelegate>{
 {
     if (self = [super initWithNibName:NSStringFromClass([SYNProfileRootViewController class]) bundle:nil])
     {
-        self = [self initWithViewId:vid WithMode:MyOwnProfile];
-        
+        modeType = MyOwnProfile;
         viewId = vid;
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
                                                      name: NSManagedObjectContextObjectsDidChangeNotification
                                                    object: appDelegate.searchManagedObjectContext];
-        self.shouldBeginEditing = YES;
         
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDescriptionCurrentlyShowing) name:kHideAllDesciptions object:nil];
+
+        self.shouldBeginEditing = YES;
     }
     
     return self;
@@ -135,6 +141,8 @@ SYNImagePickerControllerDelegate>{
 - (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
 {
     modeType = mode;
+    self = [self initWithViewId:vid];
+
     return self;
 }
 
@@ -147,7 +155,10 @@ SYNImagePickerControllerDelegate>{
     // Defensive programming
     self.channelThumbnailCollectionView.delegate = nil;
     self.channelThumbnailCollectionView.dataSource = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kHideAllDesciptions object:nil];
 }
+
 
 #pragma mark - View Lifecycle
 
@@ -158,7 +169,11 @@ SYNImagePickerControllerDelegate>{
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
     self.greyColor = [UIColor dollyTabColorSelected];
-    
+    self.tabTextColor = [UIColor colorWithRed:130.0f/255.0f
+                                              green:130.0f/255.0f
+                                               blue:130.0f/255.0f
+                                              alpha:1];
+
     UINib *searchCellNib = [UINib nibWithNibName: @"SYNChannelSearchCell"
                                           bundle: nil];
     
@@ -257,8 +272,6 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    
-     self.modeType = MyOwnProfile;
     
     [self setProfleType:self.modeType];
     
@@ -531,13 +544,11 @@ SYNImagePickerControllerDelegate>{
 {
     if (profileType == MyOwnProfile)
     {
-       // NSLog(@"my own profile");
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
     }
     if (profileType == OtherUsersProfile)
     {
-        //NSLog(@"other user profile");
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
     }
@@ -790,11 +801,10 @@ SYNImagePickerControllerDelegate>{
         [channelThumbnailCell setHiddenForFollowButton:YES];
         [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
 
-        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
-        [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"- %@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
+        [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"- %ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
-        
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
@@ -803,8 +813,6 @@ SYNImagePickerControllerDelegate>{
         }
         else if(self.modeType == OtherUsersProfile)
         {
-            
-            
             [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
         }
         
@@ -826,13 +834,10 @@ SYNImagePickerControllerDelegate>{
         {
             cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
         }
-        
     }
-    
     
     return cell;
 }
-
 
 - (void) collectionView: (UICollectionView *) collectionView
 didSelectItemAtIndexPath: (NSIndexPath *) indexPath
@@ -935,6 +940,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 }
 
 
+
 - (void) resizeScrollViews
 {
     if (self.isIPhone)
@@ -986,7 +992,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (self.collectionsTabActive)
     {
-        [self.followingTabButton.titleLabel setTextColor:self.greyColor];
+        [self.followingTabButton.titleLabel setTextColor:self.self.tabTextColor];
         self.followingTabButton.backgroundColor = [UIColor whiteColor];
         
         self.collectionsTabButton.backgroundColor = self.greyColor;
@@ -999,7 +1005,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.followingTabButton.backgroundColor = self.greyColor;
         
-        [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
+        [self.collectionsTabButton.titleLabel setTextColor:self.tabTextColor];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
     }
 }
@@ -1021,12 +1027,13 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     
-    //  [super scrollViewWillBeginDragging:scrollView];
+      [super scrollViewWillBeginDragging:scrollView];
     if (self.searchMode) {
         [self.followingSearchBar resignFirstResponder];
         self.searchMode = NO;
     }
     
+    [self hideDescriptionCurrentlyShowing];
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -1035,10 +1042,18 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     if (decelerate)
     {
         [self scrollingEnded];
-        
         [self moveNameLabelWithOffset:scrollView.contentOffset.y];
     }
     
+    for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
+    {
+        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForCell:cell];
+    }
+    
+    for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
+    {
+        NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForCell:cell];
+    }
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -1078,7 +1093,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
             
-            
             if (offset<0)
             {
                 //change to make like what they wanted
@@ -1102,6 +1116,14 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             
             [self moveNameLabelWithOffset:offset];
             
+            if (offset<0)
+            {
+                //change to make like what they wanted
+                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
+                self.coverImage.transform = scale;
+            }
+
+            
             /*
              self.profileImageView.transform = move;
              self.aboutMeTextView.transform = move;
@@ -1118,6 +1140,9 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (!self.isIPhone)
     {
+        
+
+        
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
         {
             scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
@@ -1217,9 +1242,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset  {
-    
- //   NSLog(@"%f", offset);
-    
     if (IS_IPHONE)
     {
         
@@ -1242,29 +1264,27 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             tmpFrame.size.height = 64;
             self.outerViewFullNameLabel.frame = tmpFrame;
             self.outerViewFullNameLabel.transform = CGAffineTransformConcat(move, scale);
-            
         }
     }
     
     if (IS_IPAD)
     {
-        
-     //   NSLog(@"%f", offset);
-        
         if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
             if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
+                CGAffineTransform moveOverView = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT-3);
 
                 self.fullNameLabel.alpha = 0.9;
                 self.fullNameLabel.transform = move;
-                self.outerViewFullNameLabel.transform = move;
+                self.outerViewFullNameLabel.transform = moveOverView;
                 self.outerViewFullNameLabel.hidden = NO;
             }
             if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+
                 self.fullNameLabel.transform = move;
                 self.outerViewFullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
@@ -1275,7 +1295,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
         {
             
-            NSLog(@"%f", offset);
             if (offset > FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULLNAMELABELIPADLANDSCAPE);
@@ -1289,6 +1308,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             if (offset<FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+
                 self.fullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
                 self.outerViewFullNameLabel.transform = move;
@@ -1575,7 +1595,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 - (void)searchBar:(UISearchBar *)searchBar activate:(BOOL) active
 {
-    NSLog(@"searchBar activate");
 }
 
 
@@ -1648,7 +1667,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             if ( [subview isKindOfClass:[UIButton class]] )
             {
                 [subview setEnabled:YES];
-                NSLog(@"enableCancelButton");
                 return;
             }
         }
@@ -1679,6 +1697,25 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     return _arrDisplayFollowing;
 }
 
+
+-(void) hideDescriptionCurrentlyShowing
+{
+    
+    for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
+    {
+        if ([cell respondsToSelector:@selector(moveToCentre)]) {
+            [((SYNChannelMidCell*)cell) moveToCentre];
+        }
+    }
+    
+    for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
+    {
+        if ([cell respondsToSelector:@selector(moveToCentre)]) {
+            [((SYNChannelMidCell*)cell) moveToCentre];
+        }
+    }
+    
+}
 
 
 @end
