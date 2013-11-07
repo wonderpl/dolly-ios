@@ -46,8 +46,12 @@
         return;
     }
     
+    // Methods like sizeWithFont failed so first shrink and then get the correct height
+    CGRect titleLabelFrame = self.titleLabel.frame;
     self.titleLabel.text = _videoInstance.title;
     [self.titleLabel sizeToFit];
+    titleLabelFrame.size.height = self.titleLabel.frame.size.height;
+    self.titleLabel.frame = titleLabelFrame;
     
     
     // set social buttons
@@ -56,9 +60,6 @@
     self.addSocialButton.dataItemLinked = _videoInstance;
     self.shareSocialButton.dataItemLinked = _videoInstance;
     
-    // center
-    self.titleLabel.center = CGPointMake(self.frame.size.width * 0.5f, self.titleLabel.center.y);
-    self.titleLabel.frame = CGRectIntegral(self.titleLabel.frame);
     
     [self.iconImageView setImageWithURL: [NSURL URLWithString: _videoInstance.thumbnailURL]
                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
