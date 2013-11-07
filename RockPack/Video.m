@@ -46,8 +46,6 @@
                 usingManagedObjectContext: managedObjectContext
                       ignoringObjectTypes: ignoringObjects];
     
-    // Update video starred & viewed
-    [SYNActivityManager.sharedInstance updateActivityForVideo: instance];
     
     return instance;
 }
@@ -99,6 +97,9 @@
     
     self.thumbnailURL = [dictionary objectForKey: @"thumbnail_url"
                                      withDefault: @""];
+    
+    self.starredByUserValue = [SYNActivityManager.sharedInstance isRecentlyStarred:self.uniqueId];
+    self.viewedByUserValue = [SYNActivityManager.sharedInstance isRecentlyViewed:self.uniqueId];
 }
 
 

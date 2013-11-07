@@ -109,8 +109,8 @@
 		0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */; };
 		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
 		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
-		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */; };
-		0127B88418113A1100DE2FD6 /* BackgroundMoodView.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88218113A1100DE2FD6 /* BackgroundMoodView.png */; };
+		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png */; };
+		0127B88418113A1100DE2FD6 /* BackgroundMoodView~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88218113A1100DE2FD6 /* BackgroundMoodView~iphone.png */; };
 		012B4C9D17393A080019DA4C /* SYNPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */; };
 		012B4CA617393CA10019DA4C /* ButtonChooseExistingDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4C9E17393CA10019DA4C /* ButtonChooseExistingDefault.png */; };
 		012B4CA717393CA10019DA4C /* ButtonChooseExistingDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012B4C9F17393CA10019DA4C /* ButtonChooseExistingDefault@2x.png */; };
@@ -1106,6 +1106,8 @@
 		BE2D2158171D8A4500B4B755 /* AvatarProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2156171D8A4500B4B755 /* AvatarProfile.png */; };
 		BE2D2159171D8A4500B4B755 /* AvatarProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2157171D8A4500B4B755 /* AvatarProfile@2x.png */; };
 		BE2D762D1785BBB100546BFD /* SYNViewStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2D762C1785BBB100546BFD /* SYNViewStackManager.m */; };
+		BE31EFAA182C0579006E20E2 /* BackgroundMoodView.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */; };
+		BE31EFAB182C0579006E20E2 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */; };
 		BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */; };
 		BE3574EA17CE07B00083CBB1 /* SYNOneToOneSharingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */; };
 		BE3983D11768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3983D01768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m */; };
@@ -1578,8 +1580,8 @@
 		0126331E162E2A060009FF9C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Light.otf"; path = "Assets/Fonts/ProximaNova-Light.otf"; sourceTree = "<group>"; };
 		0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Assets/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
-		0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundMoodView@2x.png"; path = "Assets/Images/BackgroundMoodView@2x.png"; sourceTree = "<group>"; };
-		0127B88218113A1100DE2FD6 /* BackgroundMoodView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundMoodView.png; path = Assets/Images/BackgroundMoodView.png; sourceTree = "<group>"; };
+		0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundMoodView@2x~iphone.png"; path = "Assets/Images/BackgroundMoodView@2x~iphone.png"; sourceTree = "<group>"; };
+		0127B88218113A1100DE2FD6 /* BackgroundMoodView~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundMoodView~iphone.png"; path = "Assets/Images/BackgroundMoodView~iphone.png"; sourceTree = "<group>"; };
 		012B4C9B17393A080019DA4C /* SYNPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopoverBackgroundView.h; sourceTree = "<group>"; };
 		012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopoverBackgroundView.m; sourceTree = "<group>"; };
 		012B4C9E17393CA10019DA4C /* ButtonChooseExistingDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonChooseExistingDefault.png; path = Assets/Images/ButtonChooseExistingDefault.png; sourceTree = "<group>"; };
@@ -2722,6 +2724,8 @@
 		BE2D2157171D8A4500B4B755 /* AvatarProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AvatarProfile@2x.png"; path = "Assets/Images/AvatarProfile@2x.png"; sourceTree = "<group>"; };
 		BE2D762B1785BBB100546BFD /* SYNViewStackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNViewStackManager.h; sourceTree = "<group>"; };
 		BE2D762C1785BBB100546BFD /* SYNViewStackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNViewStackManager.m; sourceTree = "<group>"; };
+		BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundMoodView.png; path = Assets/Images/BackgroundMoodView.png; sourceTree = "<group>"; };
+		BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundMoodView@2x.png"; path = "Assets/Images/BackgroundMoodView@2x.png"; sourceTree = "<group>"; };
 		BE3574E617CE07B00083CBB1 /* SYNOneToOneSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOneToOneSharingController.h; sourceTree = "<group>"; };
 		BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOneToOneSharingController.m; sourceTree = "<group>"; };
 		BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOneToOneSharingController.xib; sourceTree = "<group>"; };
@@ -3432,8 +3436,10 @@
 		0127B880181139F500DE2FD6 /* Mood Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */,
-				0127B88218113A1100DE2FD6 /* BackgroundMoodView.png */,
+				BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */,
+				BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */,
+				0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png */,
+				0127B88218113A1100DE2FD6 /* BackgroundMoodView~iphone.png */,
 			);
 			name = "Mood Controller";
 			sourceTree = "<group>";
@@ -6563,6 +6569,7 @@
 				BE2D2158171D8A4500B4B755 /* AvatarProfile.png in Resources */,
 				BE2D2159171D8A4500B4B755 /* AvatarProfile@2x.png in Resources */,
 				1F4E7FBB181ACBAA00F59007 /* TabMoodsHighlighted@2x~iphone.png in Resources */,
+				BE31EFAA182C0579006E20E2 /* BackgroundMoodView.png in Resources */,
 				1FFAE63417E230EB006C92CA /* ShadowPanelFriends@2x.png in Resources */,
 				01450AFA171DB4D7009F54CD /* PlaceholderVideoBottom@2x.png in Resources */,
 				01450AFB171DB4D7009F54CD /* PlaceholderVideoMiddle@2x.png in Resources */,
@@ -6721,6 +6728,7 @@
 				38A2001B1731607F00FB9F57 /* ButtonBack~iphone.png in Resources */,
 				BEB312F81815638700FAF98A /* TabActivity.png in Resources */,
 				38A2001C1731607F00FB9F57 /* ButtonEdit@2x~iphone.png in Resources */,
+				BE31EFAB182C0579006E20E2 /* BackgroundMoodView@2x.png in Resources */,
 				38A2001D1731607F00FB9F57 /* ButtonEditHighlighted@2x~iphone.png in Resources */,
 				38A2001E1731607F00FB9F57 /* ButtonEditHighlighted~iphone.png in Resources */,
 				38A2001F1731607F00FB9F57 /* ButtonEdit~iphone.png in Resources */,
@@ -7262,7 +7270,7 @@
 				BE3983DA176A0CD200EE9C7B /* onboarding_button_ok.png in Resources */,
 				BE3983DB176A0CD200EE9C7B /* onboarding_button_ok@2x.png in Resources */,
 				BE3983DC176A0CD200EE9C7B /* onboarding_button_ok@2x~iphone.png in Resources */,
-				0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x.png in Resources */,
+				0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png in Resources */,
 				BE3983DD176A0CD200EE9C7B /* onboarding_button_ok~iphone.png in Resources */,
 				BE3983E2176A108900EE9C7B /* onboarding_arrow_bottom.png in Resources */,
 				BE3983E3176A108900EE9C7B /* onboarding_arrow_bottom@2x.png in Resources */,
@@ -7285,7 +7293,7 @@
 				BEA2AEDF176E03370099DB74 /* ButtonNavHighlightedCD@2x.png in Resources */,
 				BEA2AEE0176E03370099DB74 /* ButtonNavSelectedCD.png in Resources */,
 				1F458B2A17E1CE8E003C14AC /* AppIcon-Dev-60x60.png in Resources */,
-				0127B88418113A1100DE2FD6 /* BackgroundMoodView.png in Resources */,
+				0127B88418113A1100DE2FD6 /* BackgroundMoodView~iphone.png in Resources */,
 				012CDC4017E2286C00C723BB /* DeletePackButton~iphone.png in Resources */,
 				BEA2AEE1176E03370099DB74 /* ButtonNavSelectedCD@2x.png in Resources */,
 				1F458B2817E1CE8E003C14AC /* AppIcon-Dev-57x57.png in Resources */,

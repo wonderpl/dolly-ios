@@ -13,8 +13,13 @@
 @interface SYNActivityManager : NSObject
 
 + (instancetype) sharedInstance;
+
 - (void) updateActivityForCurrentUser;
-- (void) updateActivityForVideo: (Video *) video;
-- (void) updateSubscriptionsForChannel: (Channel *) channel;
+
+- (BOOL) isRecentlyStarred:(NSString*)videoInstanceId;
+- (BOOL) isRecentlyViewed:(NSString*)videoId;
+- (BOOL) isSubscribed:(NSString*)channelId;
+
+-(void)registerActivityFromDictionary:(NSDictionary*)dictionary;
 
 @end
