@@ -16,7 +16,8 @@
 #import "UIImageView+WebCache.h"
 @import QuartzCore;
 
-#define SHOW_DESCRIPTION_AMOUNT 250.0f
+#define kShowDescptionIPhone 250.0f
+#define kShowDescptionIPad 230.0f
 
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
@@ -220,7 +221,15 @@
         if (self.containerView.frame.origin.x ==0)
         {
             CGRect tmpRect = self.containerView.frame;
-            tmpRect.origin.x += SHOW_DESCRIPTION_AMOUNT;
+            if (IS_IPHONE) {
+                tmpRect.origin.x += kShowDescptionIPhone;
+            }
+            else
+            {
+                tmpRect.origin.x += kShowDescptionIPad;
+                
+            }
+    
             
             self.containerView.frame = tmpRect;
         }
@@ -234,7 +243,15 @@
         if (self.containerView.frame.origin.x !=0)
         {
             CGRect tmpRect = self.containerView.frame;
-            tmpRect.origin.x -= SHOW_DESCRIPTION_AMOUNT;
+            
+            if (IS_IPHONE) {
+                tmpRect.origin.x -= kShowDescptionIPhone;
+            }
+            else
+            {
+                tmpRect.origin.x -= kShowDescptionIPad;
+    
+            }
             
             self.containerView.frame = tmpRect;
             

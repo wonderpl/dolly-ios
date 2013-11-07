@@ -73,7 +73,6 @@
 @synthesize fetchedResultsController = fetchedResultsController;
 @synthesize selectedIndex = _selectedIndex;
 
-@synthesize tabViewController;
 
 @synthesize viewId;
 
@@ -116,7 +115,6 @@
 - (void) dealloc
 {
     // Defensive programming
-    tabViewController.delegate = nil;
     self.activityPopoverController.delegate = nil;
     
     if (self.activityPopoverController)
@@ -352,14 +350,7 @@
 
 #pragma mark - Tab View Methods
 
-- (void) setTabViewController: (SYNTabViewController *) newTabViewController
-{
-    tabViewController = newTabViewController;
-    tabViewController.delegate = self;
-    [self.view addSubview: tabViewController.tabView];
-    
-    tabExpanded = NO;
-}
+
 
 #pragma mark - TabViewDelegate
 
@@ -964,10 +955,6 @@
 }
 
 
-- (BOOL) needsHeaderButton
-{
-    return YES;
-}
 
 
 - (void) checkForOnBoarding
