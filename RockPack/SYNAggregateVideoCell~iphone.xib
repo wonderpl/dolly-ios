@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SYNAggregateVideoCell" id="k4G-M4-KgY" userLabel=" " customClass="SYNAggregateVideoCell">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SYNAggregateVideoCell" id="k4G-M4-KgY" customClass="SYNAggregateVideoCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="369"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -102,7 +102,7 @@
             <size key="customSize" width="353" height="261"/>
             <connections>
                 <outlet property="actionMessageLabel" destination="iJN-TT-v7m" id="bUl-39-Rnt"/>
-                <outlet property="collectionNameButton" destination="GgK-aB-Hej" id="wQE-sb-Hjo"/>
+                <outlet property="channelNameButton" destination="GgK-aB-Hej" id="olp-tB-Llc"/>
                 <outlet property="collectionView" destination="BBe-eW-NPp" id="Mq0-yc-PWV"/>
                 <outlet property="userThumbnailButton" destination="CJI-4Q-kVG" id="Kia-2s-npV"/>
                 <outlet property="userThumbnailImageView" destination="HQt-5K-LTL" id="se7-iZ-d4P"/>
