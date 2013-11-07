@@ -57,11 +57,6 @@
     [self.userThumbnailButton addTarget: _delegate
                                  action: @selector(profileButtonTapped:)
                        forControlEvents: UIControlEventTouchUpInside];
-    
-//    UIImage *glossImage = [UIImage imageNamed: imageName];
-//    UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
-//                                                                                  alpha: 0.3]];
-//    [self.userThumbnailButton ]
 }
 
 

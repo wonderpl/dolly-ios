@@ -59,6 +59,17 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 }
 
 
+- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
+{
+    [super setDelegate: delegate];
+    
+    // Addtional delegate
+    [self.channelNameButton addTarget: self.delegate
+                                 action: @selector(channelButtonTapped:)
+                       forControlEvents: UIControlEventTouchUpInside];
+}
+
+
 - (void) prepareForReuse
 {
     [super prepareForReuse];
@@ -105,10 +116,12 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
 }
 
+
 - (IBAction)channelNameButtonPressed:(id)sender
 {
     NSLog(@"Pressed!");
 }
+
 
 #pragma mark - UICollectionView DataSource
 

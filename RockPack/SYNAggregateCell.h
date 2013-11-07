@@ -20,7 +20,6 @@
 }
 
 @property (nonatomic, strong) NSArray* collectionData;
-
 @property (nonatomic, readonly) CGSize sizeForItemAtDefaultPath;
 @property (nonatomic, readonly) ChannelOwner* channelOwner;
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
@@ -36,8 +35,6 @@
 @property (nonatomic, strong) NSDictionary *strongTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
-
-
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
 @end
