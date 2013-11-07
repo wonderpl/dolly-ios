@@ -101,6 +101,8 @@ SYNImagePickerControllerDelegate>{
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) UIColor *greyColor;
+@property (strong, nonatomic) UIColor *tabTextColor;
+
 @property (nonatomic, assign) BOOL pulling;
 @property (nonatomic, assign) BOOL searchMode;
 @property (nonatomic,assign) CGFloat startingPosition;
@@ -155,8 +157,6 @@ SYNImagePickerControllerDelegate>{
     self.channelThumbnailCollectionView.dataSource = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kHideAllDesciptions object:nil];
-
-    
 }
 
 
@@ -169,7 +169,11 @@ SYNImagePickerControllerDelegate>{
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
     self.greyColor = [UIColor dollyTabColorSelected];
-    
+    self.tabTextColor = [UIColor colorWithRed:130.0f/255.0f
+                                              green:130.0f/255.0f
+                                               blue:130.0f/255.0f
+                                              alpha:1];
+
     UINib *searchCellNib = [UINib nibWithNibName: @"SYNChannelSearchCell"
                                           bundle: nil];
     
@@ -540,13 +544,11 @@ SYNImagePickerControllerDelegate>{
 {
     if (profileType == MyOwnProfile)
     {
-       // NSLog(@"my own profile");
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
     }
     if (profileType == OtherUsersProfile)
     {
-        //NSLog(@"other user profile");
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
     }
@@ -799,8 +801,8 @@ SYNImagePickerControllerDelegate>{
         [channelThumbnailCell setHiddenForFollowButton:YES];
         [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
 
-        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
-        [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"- %@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
+        [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"- %ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }
@@ -990,7 +992,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (self.collectionsTabActive)
     {
-        [self.followingTabButton.titleLabel setTextColor:self.greyColor];
+        [self.followingTabButton.titleLabel setTextColor:self.self.tabTextColor];
         self.followingTabButton.backgroundColor = [UIColor whiteColor];
         
         self.collectionsTabButton.backgroundColor = self.greyColor;
@@ -1003,7 +1005,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.followingTabButton.backgroundColor = self.greyColor;
         
-        [self.collectionsTabButton.titleLabel setTextColor:self.greyColor];
+        [self.collectionsTabButton.titleLabel setTextColor:self.tabTextColor];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
     }
 }
@@ -1046,13 +1048,11 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
     {
         NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForCell:cell];
-        NSLog(@"sub %@",indexPath);
     }
     
     for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
     {
         NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForCell:cell];
-        NSLog(@"channel %@",indexPath);
     }
 }
 
@@ -1242,9 +1242,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset  {
-    
- //   NSLog(@"%f", offset);
-    
     if (IS_IPHONE)
     {
         
@@ -1272,9 +1269,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (IS_IPAD)
     {
-        
-     //   NSLog(@"%f", offset);
-        
         if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
             if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
@@ -1301,7 +1295,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
         {
             
-            NSLog(@"%f", offset);
             if (offset > FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULLNAMELABELIPADLANDSCAPE);
@@ -1602,7 +1595,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 - (void)searchBar:(UISearchBar *)searchBar activate:(BOOL) active
 {
-    NSLog(@"searchBar activate");
 }
 
 
@@ -1675,7 +1667,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             if ( [subview isKindOfClass:[UIButton class]] )
             {
                 [subview setEnabled:YES];
-                NSLog(@"enableCancelButton");
                 return;
             }
         }

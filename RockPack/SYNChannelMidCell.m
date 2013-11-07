@@ -72,9 +72,10 @@
     {
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
         [self.followerCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
-        
-        [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-        [self.boarderView.layer setBorderWidth:0.5f];
+        [self.videoCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
+
+      //  [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
+      //  [self.boarderView.layer setBorderWidth:0.5f];
         [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
     }
