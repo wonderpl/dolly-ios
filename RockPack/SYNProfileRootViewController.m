@@ -257,7 +257,7 @@ SYNImagePickerControllerDelegate>{
     
     //  self.channelThumbnailCollectionView.contentSize = CGSizeMake(self.channelThumbnailCollectionView.contentSize.width, self.channelThumbnailCollectionView.contentSize.height);
     
-    //  NSLog(@"View Did Load %f",self.mainScrollView.contentSize.height);
+    //  NSLog(@"View Did Load %f",selfs.mainScrollView.contentSize.height);
     /*
      CGRect tmpRect = self.channelThumbnailCollectionView.bounds;
      tmpRect.size.height += ADDEDBOUNDS;
@@ -275,8 +275,6 @@ SYNImagePickerControllerDelegate>{
      */
     self.modeType = MyOwnProfile;
     [self setProfleType:self.modeType];
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1753,10 +1751,20 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
     else if(modeType == OtherUsersProfile)
     {
+        
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.followCell.channel}];
-   // ((SYNChannelMidCell*)cell) followButton
+        
+        //Need to refresh the cell
+        if (self.followCell.channel.subscribedByUserValue)
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+        }
+        else
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+        }
     }
 }
 
