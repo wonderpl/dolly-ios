@@ -772,7 +772,6 @@ typedef void(^FeedDataErrorBlock)(void);
     ChannelOwner* channelOwner;
     
     // there are 2 types, video and channel (collection) types
-    
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
         VideoInstance* vi;
@@ -859,7 +858,6 @@ typedef void(^FeedDataErrorBlock)(void);
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
 {
-    
     NSMutableArray* videosArray = @[].mutableCopy;
     
     NSIndexPath * indexPath = [self.feedCollectionView indexPathForCell: cell];

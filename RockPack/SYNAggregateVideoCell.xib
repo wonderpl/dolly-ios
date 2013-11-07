@@ -63,9 +63,6 @@
                         <state key="highlighted">
                             <color key="titleColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         </state>
-                        <connections>
-                            <action selector="channelNameButtonPressed:" destination="2" eventType="touchUpInside" id="dS4-C3-Qvg"/>
-                        </connections>
                     </button>
                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lMc-y5-kdQ">
                         <rect key="frame" x="0.0" y="121" width="927" height="336"/>
