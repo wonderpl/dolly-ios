@@ -6,10 +6,6 @@
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
 //
 
-#if DEBUG
-#import <SparkInspector/SparkInspector.h>
-#endif
-
 #import "Appirater.h"
 #import "Channel.h"
 #import "ChannelOwner.h"

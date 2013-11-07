@@ -86,7 +86,6 @@
                            alpha: 1.0f];
 }
 
-
 + (UIColor *) dollyAddButtonHighlightedColor
 {
     return [UIColor colorWithRed: (224.0f / 255.0f)

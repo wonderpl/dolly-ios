@@ -228,7 +228,6 @@ typedef enum : NSInteger {
 // Notifications
 
 #define kMainControlsChangeEnter @"kMainControlsChangeEnter"
-#define kMainControlsChangeLeave @"kMainControlsChangeLeave"
 #define kScrollMovement @"kScrollMovement"
 #define kHideAllDesciptions @"kHideAllDesciptions"
 

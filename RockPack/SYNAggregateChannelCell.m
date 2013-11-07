@@ -60,8 +60,8 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
     self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
     
-    self.actionMessageLabel.center =CGPointMake(middleOfView, self.actionMessageLabel.center.y);
-    self.collectionView.center =CGPointMake(middleOfView, self.collectionView.center.y);
+    self.actionMessageLabel.center = CGPointMake(middleOfView, self.actionMessageLabel.center.y);
+    self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
 }
 
 

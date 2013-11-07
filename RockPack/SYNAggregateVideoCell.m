@@ -7,21 +7,24 @@
 //
 
 #import "ChannelOwner.h"
+#import "SYNAbstractViewController.h"
 #import "SYNAggregateFlowLayout.h"
 #import "SYNAggregateVideoCell.h"
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNAppDelegate.h"
+#import "SYNButton.h"
 #import "SYNDeviceManager.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "UIColor+SYNColor.h"
+#import "UIFont+SYNFont.h"
 #import "UIImage+Tint.h"
 #import "Video.h"
-#import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
-#import "SYNAbstractViewController.h"
 
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) IBOutlet SYNButton* collectionNameButton;
 
 @end
 
@@ -34,7 +37,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super awakeFromNib];
     
-
+    self.userThumbnailButton.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
+    self.userThumbnailButton.clipsToBounds = YES;
+    
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
@@ -48,8 +53,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     // set fonts
     
-    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize:self.actionMessageLabel.font.pointSize];
-    self.collectionNameLabel.font = [UIFont lightCustomFontOfSize:self.collectionNameLabel.font.pointSize];
+    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize: self.actionMessageLabel.font.pointSize];
     
     [self.collectionView reloadData];
 }
@@ -91,7 +95,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     self.actionMessageLabel.attributedText = attributedCompleteString;
     
-    self.collectionNameLabel.text = heuristicChannel.title;
+    self.collectionNameButton.title = heuristicChannel.title;
 }
 
 
