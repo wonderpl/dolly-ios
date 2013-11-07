@@ -108,10 +108,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
     
     
-    
-    
-    
-    
     // self.loadingPanelView.hidden = NO; // hide by default and only show when there are no categories
     
     // Check for existence of popular category
@@ -197,7 +193,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         // this should always be true since we are either creating it on the fly or it is in DB already
         if(popularSubGenre)
         {
-            [self.searchResultsController searchForGenre:popularSubGenre.uniqueId];
+            //[self.searchResultsController searchForGenre:popularSubGenre.uniqueId];
         }
         else
         {

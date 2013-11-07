@@ -16,6 +16,8 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOnBoardingPopoverView.h"
 #import "SYNSocialActionsDelegate.h"
+#import "SYNPopupMessageView.h"
+
 @import CoreData;
 @import UIKit;
 
@@ -97,8 +99,8 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) addVideoAtIndexPath: (NSIndexPath *) indexPath
                withOperation: (NSString *) operation;
 
-- (void) displayPopupMessage: (NSString*) messageKey
-                  withLoader: (BOOL) isLoader;
+- (SYNPopupMessageView*) displayPopupMessage: (NSString*) messageKey
+                                  withLoader: (BOOL) isLoader;
 
 - (void) removePopupMessage;
 

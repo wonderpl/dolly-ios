@@ -129,7 +129,7 @@ typedef void(^FeedDataErrorBlock)(void);
     [super viewDidAppear: animated];
 
     [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
-                         withLoader: YES];
+                   withLoader: YES];
     
     if([self class] == [SYNFeedRootViewController class])
     {

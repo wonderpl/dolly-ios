@@ -32,9 +32,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 @property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
 
-@property (nonatomic, strong) IBOutlet UIView* loadingPanelView;
-@property (nonatomic, strong) IBOutlet UILabel* loadingPanelLabel;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loadingPanelLoader;
 
 @property (nonatomic) SearchResultsShowing searchResultsShowing;
 
@@ -99,7 +96,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.videosArray = [NSArray arrayWithArray: fetchedObjects];
         
-        wself.loadingPanelView.hidden = YES;
+        // protection from being called twice, one for every tab and making the loader dissapear prematurely
+        if (wself.searchResultsShowing == SearchResultsShowingVideos)
+            [wself removePopupMessage];
+        
         
         [wself.videosCollectionView reloadData];
     };
@@ -119,19 +119,34 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
         wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
         
-        wself.loadingPanelView.hidden = YES;
+        // protection from being called twice, one for every tab and making the loader dissapear prematurely
+        if (wself.searchResultsShowing == SearchResultsShowingUsers)
+            [wself removePopupMessage];
         
         [wself.usersCollectionView reloadData];
     };
-    
-    self.loadingPanelView.hidden = YES;
     
     
     
     // Set Initial
     self.searchResultsShowing = SearchResultsShowingVideos;
+    
 }
 
+-(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
+{
+    SYNPopupMessageView* pMsgView = [super displayPopupMessage:messageKey
+                                                    withLoader:isLoader];
+    
+    CGRect rect = pMsgView.frame;
+    rect.origin.y = (self.view.frame.size.height * 0.5) - 100.0f;
+    pMsgView.frame = rect;
+    
+    return pMsgView;
+    
+    
+
+}
 
 #pragma mark - Load Data
 
@@ -139,8 +154,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 {
     [self clearSearchEntities];
     
-    self.loadingPanelView.hidden = NO;
-    [self.loadingPanelLoader startAnimating];
+    [self displayPopupMessage:@"Searching..." withLoader:YES];
     
     self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId:genreId
                                                           completionHandler:self.videoSearchCompleteBlock];
@@ -169,8 +183,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         return;
     }
     
-    self.loadingPanelView.hidden = NO;
-    [self.loadingPanelLoader startAnimating];
+    [self displayPopupMessage:@"Searching..." withLoader:YES];
     
     // == Perform Search == //
     
@@ -273,7 +286,6 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
         videoCell.delegate = self;
         
-        NSLog(@"-> %@", videoCell.videoInstance.title);
         
         cell = videoCell;
     }
