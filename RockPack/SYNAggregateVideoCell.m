@@ -105,6 +105,10 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
 }
 
+- (IBAction)channelNameButtonPressed:(id)sender
+{
+    NSLog(@"Pressed!");
+}
 
 #pragma mark - UICollectionView DataSource
 
