@@ -273,7 +273,7 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    self.modeType = OtherUsersProfile;
+    self.modeType = MyOwnProfile;
     [self setProfleType:self.modeType];
     
     
