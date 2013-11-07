@@ -37,7 +37,7 @@
                                     <view contentMode="scaleToFill" id="NtQ-8O-ADk" userLabel="View - Line">
                                         <rect key="frame" x="140" y="41" width="1" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="lkc-YE-xpt" userLabel="View - Bottom Bar">
                                         <rect key="frame" x="0.0" y="71" width="280" height="9"/>
@@ -59,7 +59,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IeH-F8-ivN">
-                                        <rect key="frame" x="114" y="4" width="51" height="72"/>
+                                        <rect key="frame" x="229" y="4" width="51" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <state key="normal" title="follow">

@@ -22,9 +22,10 @@
                             <constraint firstAttribute="width" constant="320" id="Zjc-q4-S9u"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28" userLabel="User Thumbnail Button">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28" userLabel="User Thumbnail Button" customClass="SYNAvatarButton">
                         <rect key="frame" x="440" y="20" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="95V-U9-Pi0"/>
                             <constraint firstAttribute="width" constant="48" id="QE5-hw-EM2"/>
@@ -62,9 +63,6 @@
                         <state key="highlighted">
                             <color key="titleColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         </state>
-                        <connections>
-                            <action selector="channelNameButtonPressed:" destination="2" eventType="touchUpInside" id="dS4-C3-Qvg"/>
-                        </connections>
                     </button>
                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lMc-y5-kdQ">
                         <rect key="frame" x="0.0" y="121" width="927" height="336"/>
