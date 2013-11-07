@@ -34,6 +34,9 @@
     
     [self setTitle: title
           forState: UIControlStateNormal];
+    
+    [self setTitle: title
+          forState: UIControlStateHighlighted];
 }
 
 
@@ -57,6 +60,9 @@
 #else
     [self setTitle: [NSString stringWithFormat: @"%@\n%d", title, count]
           forState: UIControlStateNormal];
+    
+    [self setTitle: [NSString stringWithFormat: @"%@\n%d", title, count]
+          forState: UIControlStateHighlighted];
 #endif
 }
 
