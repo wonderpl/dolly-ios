@@ -7,7 +7,7 @@
 //
 
 #import "ChannelOwner.h"
-#import "SYNButton.h"
+#import "SYNAvatarButton.h"
 #import "SYNSocialActionsDelegate.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
@@ -21,21 +21,14 @@
     
 }
 
-@property (nonatomic, strong) NSArray* collectionData;
 @property (nonatomic, readonly) CGSize sizeForItemAtDefaultPath;
 @property (nonatomic, readonly) ChannelOwner* channelOwner;
-@property (nonatomic, strong) IBOutlet SYNButton *userThumbnailButton;
+@property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
-@property (nonatomic, strong) IBOutlet UIImageView *userThumbnailImageView;
-
-
-
-// main labels from top to bottom
 @property (nonatomic, strong) IBOutlet UILabel *actionMessageLabel;
-
-
-@property (nonatomic, strong) NSDictionary *strongTextAttributes;
+@property (nonatomic, strong) NSArray* collectionData;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
+@property (nonatomic, strong) NSDictionary *strongTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 

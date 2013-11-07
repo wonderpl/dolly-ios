@@ -107,7 +107,7 @@
                 <outlet property="actionMessageLabel" destination="9" id="97m-YT-jaC"/>
                 <outlet property="channelNameButton" destination="4TQ-2k-gku" id="1Qx-UB-bCV"/>
                 <outlet property="collectionView" destination="lMc-y5-kdQ" id="QfR-qq-uHx"/>
-                <outlet property="userThumbnailButton" destination="28" id="29"/>
+                <outlet property="userThumbnailButton" destination="28" id="Ocb-WO-s3i"/>
             </connections>
         </collectionViewCell>
     </objects>
