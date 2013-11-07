@@ -923,6 +923,7 @@
                                                         channel.hasChangedSubscribeValue = YES;
                                                         channel.subscribedByUserValue = YES;
                                                         channel.subscribersCountValue += 1;
+                                                        
                                                         socialControl.selected = YES;
                                                         socialControl.enabled = YES;
                                                     } errorHandler: ^(NSDictionary *errorDictionary) {
