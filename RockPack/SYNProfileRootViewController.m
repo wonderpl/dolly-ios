@@ -1263,7 +1263,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
-                CGAffineTransform moveOverView = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT-2);
+                CGAffineTransform moveOverView = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT-3);
 
                 self.fullNameLabel.alpha = 0.9;
                 self.fullNameLabel.transform = move;
