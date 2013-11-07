@@ -7,28 +7,28 @@
 //
 
 #import "AppConstants.h"
+#import "Appirater.h"
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "ChannelOwner.h"
+#import "FeedItem.h"
 #import "GAI.h"
 #import "NSDate-Utilities.h"
+#import "SYNAggregateCell.h"
+#import "SYNAggregateChannelCell.h"
+#import "SYNAggregateVideoCell.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNHomeSectionHeaderView.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
+#import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNAggregateChannelCell.h"
+#import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
-#import "SYNAggregateCell.h"
-#import "UIImageView+WebCache.h"
-#import "SYNAggregateVideoCell.h"
 #import "Video.h"
-#import "FeedItem.h"
-#import "SYNMasterViewController.h"
 #import "VideoInstance.h"
-#import "Appirater.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
@@ -71,13 +71,10 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
 
     self.feedItemsData = @[];
     self.videosInOrderArray = @[];
-    
-    
-    
+
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
     [self removePopupMessage];
@@ -118,7 +115,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
@@ -133,7 +129,7 @@ typedef void(^FeedDataErrorBlock)(void);
     [super viewDidAppear: animated];
 
     [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
-                         withLoader: YES];
+                   withLoader: YES];
     
     if([self class] == [SYNFeedRootViewController class])
     {
@@ -257,6 +253,7 @@ typedef void(^FeedDataErrorBlock)(void);
         {
             [wself displayPopupMessage: NSLocalizedString(@"feed_screen_updating_error", nil)
                             withLoader: NO];
+            
             [NSTimer scheduledTimerWithTimeInterval: 3.0f
                                              target: self
                                            selector: @selector(removeEmptyGenreMessage)
@@ -274,8 +271,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                                     size: self.dataRequestRange.length
                                        completionHandler: ^(NSDictionary *responseDictionary) {
                                            BOOL toAppend = (self.dataRequestRange.location > 0);
-                                           
-                                           
+
                                            NSDictionary *contentItems = responseDictionary[@"content"];
                                            
                                            if (!contentItems || ![contentItems isKindOfClass: [NSDictionary class]])
@@ -332,7 +328,6 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) clearedLocationBoundData
 {
     // to clear
-    
     [self fetchAndDisplayFeedItems];
     
     [self.feedCollectionView reloadData];
@@ -342,12 +337,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 #pragma mark - Empty genre message handling
-
-
-
-
-
-
 
 #pragma mark - Fetch Feed Data
 
@@ -512,7 +501,6 @@ typedef void(^FeedDataErrorBlock)(void);
         NSMutableArray* videosArray = @[].mutableCopy;
         
         // NOTE: the data containes either an aggragate or a single item, handle both cases here
-        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
             for (FeedItem* childFeedItem in feedItem.feedItems)
@@ -566,15 +554,14 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     
     // common for both types
-    
     cell.delegate = self;
     
-    [cell.userThumbnailImageView setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
-                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                         options: SDWebImageRetryFailed];
-    
-    
-    
+    [cell.userThumbnailButton setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
+                                     forState: UIControlStateNormal
+                             placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                      options: SDWebImageRetryFailed];
+
+
     return cell;
 }
 
@@ -785,7 +772,6 @@ typedef void(^FeedDataErrorBlock)(void);
     ChannelOwner* channelOwner;
     
     // there are 2 types, video and channel (collection) types
-    
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
         VideoInstance* vi;
@@ -824,11 +810,54 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
+- (IBAction) channelButtonTapped: (UIButton *) channelButton
+{
+    FeedItem *feedItem = [self feedItemFromView: channelButton];
+    
+    Channel* channel;
+    
+    // there are 2 types, video and channel (collection) types
+    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
+    {
+        VideoInstance* vi;
+        
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
+            vi = (VideoInstance*)((self.feedVideosById)[firstChildFeedItem.resourceId]);
+        }
+        else
+        {
+            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
+        }
+        
+        channel = vi.channel;
+    }
+    else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
+    {
+
+        
+        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
+        {
+            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
+            channel = (Channel*)(self.feedChannelsById[firstChildFeedItem.resourceId]);
+        }
+        else
+        {
+            channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
+        }
+    }
+    
+    [appDelegate.viewStackManager viewChannelDetails: channel
+                            withNavigationController: self.navigationController];
+}
+
+
+
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
 {
-    
     NSMutableArray* videosArray = @[].mutableCopy;
     
     NSIndexPath * indexPath = [self.feedCollectionView indexPathForCell: cell];

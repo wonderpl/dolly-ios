@@ -28,13 +28,14 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOneToOneSharingController.h"
 #import "SYNPopoverBackgroundView.h"
-#import "SYNPopupMessageView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNSocialButton.h"
 #import "SYNVideoThumbnailWideCell.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
+
+
 @import AudioToolbox;
 @import QuartzCore;
 
@@ -61,7 +62,7 @@
 @property (nonatomic, assign) CGPoint endDraggingPoint;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
-@property (nonatomic, strong) SYNPopupMessageView* emptyGenreMessageView;
+@property (nonatomic, strong) SYNPopupMessageView* popupMessageView;
 @property (nonatomic, assign) ScrollingDirection *scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
 
@@ -1073,35 +1074,37 @@
 }
 
 
-- (void) displayPopupMessage: (NSString*) messageKey
-                  withLoader: (BOOL) isLoader
+- (SYNPopupMessageView*) displayPopupMessage: (NSString*) messageKey
+                                  withLoader: (BOOL) isLoader
 {
-    if (self.emptyGenreMessageView)
+    if (self.popupMessageView)
     {
-        [self.emptyGenreMessageView removeFromSuperview];
-        self.emptyGenreMessageView = nil;
+        [self.popupMessageView removeFromSuperview];
+        self.popupMessageView = nil;
     }
     
-    self.emptyGenreMessageView = [SYNPopupMessageView withMessage:NSLocalizedString(messageKey ,nil) andLoader:isLoader];
+    self.popupMessageView = [SYNPopupMessageView withMessage:NSLocalizedString(messageKey ,nil) andLoader:isLoader];
     
-    CGRect messageFrame = self.emptyGenreMessageView.frame;
+    CGRect messageFrame = self.popupMessageView.frame;
     messageFrame.origin.x = (self.view.frame.size.width * 0.5) - (messageFrame.size.width * 0.5);
     messageFrame.origin.y = (self.view.frame.size.height * 0.5) - (messageFrame.size.height * 0.5) - 20.0f;
     
     messageFrame = CGRectIntegral(messageFrame);
-    self.emptyGenreMessageView.frame = messageFrame;
-    self.emptyGenreMessageView.autoresizingMask =
+    self.popupMessageView.frame = messageFrame;
+    self.popupMessageView.autoresizingMask =
     UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
     
-    [self.view addSubview: self.emptyGenreMessageView];
+    [self.view addSubview: self.popupMessageView];
+    
+    return self.popupMessageView;
 }
 
 - (void) removePopupMessage
 {
-    if (!self.emptyGenreMessageView)
+    if (!self.popupMessageView)
         return;
     
-    [self.emptyGenreMessageView removeFromSuperview];
+    [self.popupMessageView removeFromSuperview];
     
     /* OPTIONAL
      __weak SYNFeedRootViewController* wself = self;

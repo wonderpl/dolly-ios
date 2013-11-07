@@ -398,20 +398,19 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     [fetchRequest setEntity: [NSEntityDescription entityForName: @"ChannelOwner"
-                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+                                         inManagedObjectContext: importManagedObjectContext]];
     
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", viewId]];
     
     
-    itemsToDelete = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                          error: &error];
+    itemsToDelete = [importManagedObjectContext executeFetchRequest: fetchRequest
+                                                              error: &error];
     
     if (append == NO)
     {
         for (NSManagedObject *objectToDelete in itemsToDelete)
         {
-            [appDelegate.searchManagedObjectContext
-             deleteObject: objectToDelete];
+            [objectToDelete.managedObjectContext deleteObject: objectToDelete];
         }
     }
     
@@ -432,7 +431,7 @@
     for (NSDictionary *itemDictionary in itemArray)
     {
         ChannelOwner *user = [ChannelOwner instanceFromDictionary: itemDictionary
-                                        usingManagedObjectContext: appDelegate.searchManagedObjectContext
+                                        usingManagedObjectContext: importManagedObjectContext
                                               ignoringObjectTypes: kIgnoreChannelObjects];
         
         if (!user)

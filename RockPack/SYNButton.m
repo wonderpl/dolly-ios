@@ -20,8 +20,7 @@
     self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    // Little hack to ensure custom font is correct
-    self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 2.0, 0.0, 0.0);
+
     
 //    [self setTitleColor: [self.titleLabel.textColor colorWithAlphaComponent: 0.8f]
 //               forState: UIControlStateHighlighted];

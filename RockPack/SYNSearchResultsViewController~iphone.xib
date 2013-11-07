@@ -7,9 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchResultsViewController">
             <connections>
                 <outlet property="containerTabs" destination="Jga-Iw-eSA" id="84Q-Ck-2JW"/>
-                <outlet property="loadingPanelLabel" destination="Cem-IN-hOm" id="uBu-QO-qDe"/>
-                <outlet property="loadingPanelLoader" destination="bpI-i2-BDW" id="pqa-Pf-6Ti"/>
-                <outlet property="loadingPanelView" destination="WLe-qf-SND" id="yGI-X6-MrK"/>
                 <outlet property="usersCollectionView" destination="Xpe-E2-vgS" id="D46-Ve-nma"/>
                 <outlet property="usersTabButton" destination="ViM-WA-q5x" id="mDL-PH-s6N"/>
                 <outlet property="videosCollectionView" destination="FGp-za-xxN" id="Ix6-S0-WBq"/>
@@ -86,30 +83,6 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLe-qf-SND" userLabel="Loading Panel">
-                    <rect key="frame" x="20" y="236" width="280" height="72"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wiE-jA-QUM" userLabel="BG">
-                            <rect key="frame" x="-20" y="-3" width="327" height="75"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.73725490199999999" green="0.73725490199999999" blue="0.73725490199999999" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
-                        </view>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Searching..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cem-IN-hOm">
-                            <rect key="frame" x="11" y="24" width="219" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bpI-i2-BDW">
-                            <rect key="frame" x="240" y="25" width="20" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>

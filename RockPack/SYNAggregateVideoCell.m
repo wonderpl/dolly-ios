@@ -61,6 +61,17 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 }
 
 
+- (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
+{
+    [super setDelegate: delegate];
+    
+    // Addtional delegate
+    [self.channelNameButton addTarget: self.delegate
+                                 action: @selector(channelButtonTapped:)
+                       forControlEvents: UIControlEventTouchUpInside];
+}
+
+
 - (void) prepareForReuse
 {
     [super prepareForReuse];
@@ -104,13 +115,8 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 - (void) layoutSubviews
 {
     [super layoutSubviews];
-    
 }
 
-- (IBAction)channelNameButtonPressed:(id)sender
-{
-    
-}
 
 #pragma mark - UICollectionView DataSource
 
@@ -176,7 +182,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [(SYNAbstractViewController *)self.delegate displayVideoViewerFromCell: self
                                                                 andSubCell: subCell
                                                             atSubCellIndex: indexPath.item];
-
 }
 
 
