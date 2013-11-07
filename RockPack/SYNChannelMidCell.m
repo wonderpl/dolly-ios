@@ -74,6 +74,8 @@
         [self.followerCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
         [self.videoCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
 
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:10]];
+        
       //  [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
       //  [self.boarderView.layer setBorderWidth:0.5f];
         [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
@@ -207,6 +209,7 @@
 {
     // Just need to reference any button in the cell (as there is no longer an actual video button)
     [self.viewControllerDelegate channelTapped: self];
+    
 }
 
 -(void) setHiddenForFollowButton: (BOOL) hide
@@ -315,7 +318,9 @@
 }
 - (IBAction)followChannel:(id)sender
 {
-    [self showAlertView];
+    [self.viewControllerDelegate followButtonTapped: self];
+
+   // [self showAlertView];
 }
 
 

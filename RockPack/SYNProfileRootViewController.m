@@ -76,6 +76,7 @@ SYNImagePickerControllerDelegate>{
 
 @property (nonatomic, strong) IBOutlet SYNYouHeaderView *headerChannelsView;
 @property (nonatomic, strong) IBOutlet SYNYouHeaderView *headerSubscriptionsView;
+@property (nonatomic, strong) SYNChannelMidCell *followCell;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPad;
 @property (strong, nonatomic) IBOutlet UIButton *followAllButton;
@@ -272,7 +273,7 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    
+    self.modeType = OtherUsersProfile;
     [self setProfleType:self.modeType];
     
     
@@ -471,7 +472,7 @@ SYNImagePickerControllerDelegate>{
 -(void) setUpUserProfile
 {
     self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
-    self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:13.0];
+    self.aboutMeTextView.font = [UIFont regularCustomFontOfSize:13.0];
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(userDataChanged:)
@@ -798,27 +799,58 @@ SYNImagePickerControllerDelegate>{
         
         [channelThumbnailCell setChannel:channel];
         [channelThumbnailCell setTitle: channel.title];
-        [channelThumbnailCell setHiddenForFollowButton:YES];
+        if (self.modeType == MyOwnProfile) {
+            [channelThumbnailCell setHiddenForFollowButton:YES];
+        }
+        else
+        {
+            if (channel.subscribedByUserValue) {
+                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+            }
+            else
+            {
+                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+            }
+    
+        }
         [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
 
-        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"- %@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
-        [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"- %ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
+        if (IS_IPHONE) {
+            [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"- %ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+        }
+        else
+        {
+            [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+
+        }
+        
+        
+        
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
+        Channel *channel = _arrDisplayFollowing[indexPath.item];
+
         if (self.modeType == MyOwnProfile) {
             [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
         }
         else if(self.modeType == OtherUsersProfile)
         {
-            [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+            if (channel.subscribedByUserValue) {
+                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+            }
+            else
+            {
+                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+            }
+            
         }
         
         if (indexPath.row < self.arrDisplayFollowing.count) {
             
-            Channel *channel = _arrDisplayFollowing[indexPath.item];
             
             [channelThumbnailCell setChannel:channel];
             [channelThumbnailCell setTitle: channel.title];
@@ -1044,16 +1076,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         [self scrollingEnded];
         [self moveNameLabelWithOffset:scrollView.contentOffset.y];
     }
-    
-    for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
-    {
-        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForCell:cell];
-    }
-    
-    for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
-    {
-        NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForCell:cell];
-    }
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -1115,15 +1137,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.containerViewIPad.transform = move;
             
             [self moveNameLabelWithOffset:offset];
-            
-            if (offset<0)
-            {
-                //change to make like what they wanted
-                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
-                self.coverImage.transform = scale;
-            }
-
-            
+        
             /*
              self.profileImageView.transform = move;
              self.aboutMeTextView.transform = move;
@@ -1533,6 +1547,13 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
 }
 
+-(void) followButtonTapped:(UICollectionViewCell *) cell
+{
+    NSLog(@"ssssss");
+    [self showAlertView: cell];
+
+}
+
 - (IBAction)editButtonTapped:(id)sender
 {
     
@@ -1715,6 +1736,49 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         }
     }
     
+}
+
+
+
+-(void) showAlertView: (UICollectionViewCell *) cell{
+    NSString *message = @"Are you sure you want to unfollow";
+    message =  [message stringByAppendingString:@" "];
+    
+    message =  [message stringByAppendingString:((SYNChannelMidCell*)cell).channel.title];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    self.followCell = ((SYNChannelMidCell*)cell);
+    
+    if (modeType == MyOwnProfile) {
+        [alertView show];
+    }
+    else if(modeType == OtherUsersProfile)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
+                                                            object: self
+                                                          userInfo: @{kChannel : self.followCell.channel}];
+   // ((SYNChannelMidCell*)cell) followButton
+    }
+}
+
+- (NSString *) yesButtonTitle{
+    return @"Yes";
+}
+- (NSString *) noButtonTitle{
+    return @"Cancel";
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:[self yesButtonTitle]])
+    {
+        if (self.followCell.channel != nil)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
+                                                                object: self
+                                                              userInfo: @{kChannel : self.followCell.channel}];
+        }
+    }
 }
 
 
