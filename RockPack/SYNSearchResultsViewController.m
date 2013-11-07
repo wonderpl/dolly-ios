@@ -271,7 +271,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         
          
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
-        videoCell.delegate = self;        
+        videoCell.delegate = self;
+        
+        NSLog(@"-> %@", videoCell.videoInstance.title);
         
         cell = videoCell;
     }
