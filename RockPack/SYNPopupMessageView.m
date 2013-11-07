@@ -83,7 +83,7 @@
 
     self.frame = [self returnMainFrame];
     
-    self.messageLabel.center = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5 + 4.0);
+    self.messageLabel.center = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5);
     self.messageLabel.frame = CGRectIntegral(self.messageLabel.frame);
 }
 

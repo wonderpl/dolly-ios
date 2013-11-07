@@ -130,8 +130,23 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     // Set Initial
     self.searchResultsShowing = SearchResultsShowingVideos;
+    
 }
 
+-(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
+{
+    SYNPopupMessageView* pMsgView = [super displayPopupMessage:messageKey
+                                                    withLoader:isLoader];
+    
+    CGRect rect = pMsgView.frame;
+    rect.origin.y = (self.view.frame.size.height * 0.5) - 100.0f;
+    pMsgView.frame = rect;
+    
+    return pMsgView;
+    
+    
+
+}
 
 #pragma mark - Load Data
 
