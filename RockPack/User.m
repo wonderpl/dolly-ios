@@ -3,6 +3,7 @@
 #import "NSDictionary+Validation.h"
 #import "User.h"
 #import "ExternalAccount.h"
+#import "SYNActivityManager.h"
 
 @implementation User
 
@@ -89,11 +90,18 @@
         [self setExternalAccountFlagsFromDictionary:dictionary[@"flags"]];
     
     
-    NSDictionary *activity_url_dict = dictionary[@"activity"];
+    NSDictionary *activity_dict = dictionary[@"activity"];
     
-    if (activity_url_dict)
+    if (activity_dict)
     {
-        self.activityUrl = activity_url_dict[@"resource_url"];
+        self.activityUrl = activity_dict[@"resource_url"];
+        
+        if(activity_dict[@"recently_starred"])
+        {
+            // if this is set it means we have activity data with the response, usually by setting '&data=activity' in the request
+            // the objects contained are 'recently_starred', 'recently_viewed' and 'subscribed'
+            [SYNActivityManager.sharedInstance registerActivityFromDictionary:activity_dict];
+        }
     }
     
     NSDictionary *coverart_url_dict = dictionary[@"cover_art"];

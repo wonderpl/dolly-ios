@@ -33,9 +33,36 @@
     {
         activityManager = [[self alloc] init];
         activityManager.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        activityManager.recentlyStarred = [NSSet setWithArray: @[]];
+        activityManager.recentlyStarred = [NSSet setWithArray: @[]];
+        activityManager.recentlyStarred = [NSSet setWithArray: @[]];
     });
     
     return activityManager;
+}
+
+-(void)registerActivityFromDictionary:(NSDictionary*)dictionary
+{
+    if (dictionary)
+    {
+        
+        if (dictionary[@"recently_starred"])
+            self.recentlyStarred = [NSSet setWithArray: dictionary[@"recently_starred"]];
+        
+        
+        if (dictionary[@"recently_viewed"])
+            self.recentlyViewed = [NSSet setWithArray: dictionary[@"recently_viewed"]];
+        
+        
+        if (dictionary[@"subscribed"])
+            self.subscribed = [NSSet setWithArray: dictionary[@"subscribed"]];
+        
+    }
+    else
+    {
+        AssertOrLog(@"SYNActivityManager:updateActivityForCurrentUser response is nil");
+    }
 }
 
 
@@ -47,43 +74,9 @@
     {
         [self.appDelegate.oAuthNetworkEngine activityForUserId: userId
                                              completionHandler: ^(NSDictionary *responseDictionary) {
-                                                 if (responseDictionary)
-                                                 {
-                                                     NSArray *starredArray = responseDictionary[@"recently_starred"];
-                                                     NSArray *viewedArray = responseDictionary[@"recently_viewed"];
-                                                     NSArray *subscribedArray = responseDictionary[@"subscribed"];
-                                                     
-                                                     if (starredArray)
-                                                     {
-                                                         self.recentlyStarred = [NSSet setWithArray: starredArray];
-                                                     }
-                                                     else
-                                                     {
-                                                         self.recentlyStarred = [NSSet setWithArray: @[]];
-                                                     }
-                                                     
-                                                     if (viewedArray)
-                                                     {
-                                                         self.recentlyViewed = [NSSet setWithArray: viewedArray];
-                                                     }
-                                                     else
-                                                     {
-                                                         self.recentlyStarred = [NSSet setWithArray: @[]];
-                                                     }
-                                                     
-                                                     if (subscribedArray)
-                                                     {
-                                                         self.subscribed = [NSSet setWithArray: subscribedArray];
-                                                     }
-                                                     else
-                                                     {
-                                                         self.recentlyStarred = [NSSet setWithArray: @[]];
-                                                     }
-                                                 }
-                                                 else
-                                                 {
-                                                     AssertOrLog(@"SYNActivityManager:updateActivityForCurrentUser response is nil");
-                                                 }
+                                                 
+                                                 [self registerActivityFromDictionary:responseDictionary];
+                                                 
                                              } errorHandler: ^(NSDictionary* error) {
                                                  DebugLog(@"Activity updates failed");
                                              }];
@@ -91,61 +84,32 @@
 }
 
 
-- (void) updateActivityForVideo: (Video *) video
+
+- (BOOL) isRecentlyStarred:(NSString*)videoId
 {
-    if (video)
-    {
-        // Cache the uniqueId (slight optimisation)
-        NSString *uniqueId = video.uniqueId;
-        
-        [self.recentlyStarred enumerateObjectsWithOptions: NSEnumerationConcurrent
-                                               usingBlock: ^(id obj, BOOL *stop)
-         {
-             if ([uniqueId isEqualToString: obj])
-             {
-                 video.starredByUserValue = YES;
-                 *stop = YES;
-             }
-         }];
-        
-        [self.recentlyViewed enumerateObjectsWithOptions: NSEnumerationConcurrent
-                                              usingBlock: ^(id obj, BOOL *stop)
-         {
-             if ([uniqueId isEqualToString: obj])
-             {
-                 video.viewedByUserValue = TRUE;
-                 *stop = YES;
-             }
-         }];
-    }
-    else
-    {
-        AssertOrLog(@"SYNActivityManager:updateActivityForVideo video is nil");
-    }
+    
+    if(!videoId)
+        return NO;
+    
+    return [self.recentlyStarred containsObject:videoId];
+
 }
 
-
-- (void) updateSubscriptionsForChannel: (Channel *) channel
+- (BOOL) isRecentlyViewed:(NSString*)videoId
 {
-    if (channel)
-    {
-        // Cache the uniqueId (slight optimisation)
-        NSString *uniqueId = channel.uniqueId;
-        
-        [self.subscribed enumerateObjectsWithOptions: NSEnumerationConcurrent
-                                          usingBlock: ^(id obj, BOOL *stop)
-         {
-             if ([uniqueId isEqualToString: obj])
-             {
-                 channel.subscribedByUserValue = YES;
-                 *stop = YES;
-             }
-         }];
-    }
-    else
-    {
-        AssertOrLog(@"SYNActivityManager:updateSubscriptionsForChannel channel is nil");
-    }
+    if(!videoId)
+        return NO;
+    
+    return [self.recentlyViewed containsObject:videoId];
+    
+}
+
+- (BOOL) isSubscribed:(NSString*)channelId
+{
+    if(!channelId)
+        return nil;
+    
+    return [self.subscribed containsObject:channelId];
 }
 
 @end
