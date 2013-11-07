@@ -57,6 +57,7 @@ SYNImagePickerControllerDelegate>{
 @property (nonatomic, assign) BOOL collectionsTabActive;
 @property (nonatomic, assign, getter = isDeletionModeActive) BOOL deletionModeActive;
 
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) NSArray *sortDescriptors;
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
 @property (nonatomic, strong) NSArray* arrFollowing;
@@ -545,11 +546,14 @@ SYNImagePickerControllerDelegate>{
     {
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
+        self.backButton.hidden = YES;
     }
     if (profileType == OtherUsersProfile)
     {
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
+        self.backButton.hidden = NO;
+
     }
 }
 
@@ -1112,7 +1116,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.moreButton.transform = move;
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
-            
+            self.backButton.transform = move;
+
             if (offset<0)
             {
                 //change to make like what they wanted
@@ -1133,7 +1138,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.coverImage.transform = move;
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
-            
+            self.backButton.transform = move;
+
             [self moveNameLabelWithOffset:offset];
         
             /*
@@ -1787,6 +1793,12 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                                                               userInfo: @{kChannel : self.followCell.channel}];
         }
     }
+}
+- (IBAction)backButtonTapped:(id)sender {
+    NSLog(@"BACK");
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 

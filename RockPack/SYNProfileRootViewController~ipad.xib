@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNProfileRootViewController">
             <connections>
                 <outlet property="aboutMeTextView" destination="uAO-BP-yje" id="SLn-Q5-J2u"/>
+                <outlet property="backButton" destination="9iH-Rl-fos" id="D9b-Jw-vrw"/>
                 <outlet property="channelLayoutIPad" destination="XH1-bA-kHd" id="YF5-u3-Kj0"/>
                 <outlet property="channelThumbnailCollectionView" destination="MS7-tW-0TH" id="JAi-QX-iX9"/>
                 <outlet property="collectionsTabButton" destination="ylf-0F-Wru" id="Zoj-al-39U"/>
@@ -38,7 +39,7 @@
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="AUe-Ip-zbd">
                         <size key="itemSize" width="280" height="80"/>
                         <size key="headerReferenceSize" width="671" height="722"/>
-                        <size key="footerReferenceSize" width="671" height="50"/>
+                        <size key="footerReferenceSize" width="671" height="150"/>
                         <inset key="sectionInset" minX="47" minY="0.0" maxX="47" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
@@ -54,7 +55,7 @@
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
                         <size key="itemSize" width="280" height="80"/>
                         <size key="headerReferenceSize" width="672" height="722"/>
-                        <size key="footerReferenceSize" width="672" height="50"/>
+                        <size key="footerReferenceSize" width="672" height="150"/>
                         <inset key="sectionInset" minX="47" minY="0.0" maxX="47" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
@@ -167,6 +168,16 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9iH-Rl-fos">
+                    <rect key="frame" x="31" y="26" width="35" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Back">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="4Gg-7c-RnN"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
