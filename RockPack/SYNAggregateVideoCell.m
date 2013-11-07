@@ -26,6 +26,8 @@
 
 @property (nonatomic, strong) IBOutlet SYNButton* channelNameButton;
 
+@property (nonatomic, weak) Channel* channel;
+
 @end
 
 static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
@@ -80,9 +82,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     VideoInstance *firstVideoInstance = collectionData[0];
     
-    // create string
-    Channel *heuristicChannel = firstVideoInstance.channel;
-    NSString *nameString = heuristicChannel.channelOwner.displayName; // ex 'Dolly Proxima'
+    // Get the Channel from the first videoInstance (as a heuristic)
+    self.channel = firstVideoInstance.channel;
+    NSString *nameString = self.channel.channelOwner.displayName; // ex 'Dolly Proxima'
     NSString *actionString = [NSString stringWithFormat: @" added %i videos to", _collectionData.count];
     
     NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
@@ -95,7 +97,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     self.actionMessageLabel.attributedText = attributedCompleteString;
     
-    self.channelNameButton.title = heuristicChannel.title;
+    self.channelNameButton.title = self.channel.title;
 }
 
 
@@ -107,7 +109,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 - (IBAction)channelNameButtonPressed:(id)sender
 {
-    NSLog(@"Pressed!");
+    
 }
 
 #pragma mark - UICollectionView DataSource
