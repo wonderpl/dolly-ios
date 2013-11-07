@@ -24,7 +24,7 @@
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet SYNButton* collectionNameButton;
+@property (nonatomic, strong) IBOutlet SYNButton* channelNameButton;
 
 @end
 
@@ -95,7 +95,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     self.actionMessageLabel.attributedText = attributedCompleteString;
     
-    self.collectionNameButton.title = heuristicChannel.title;
+    self.channelNameButton.title = heuristicChannel.title;
 }
 
 
@@ -105,6 +105,10 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
 }
 
+- (IBAction)channelNameButtonPressed:(id)sender
+{
+    NSLog(@"Pressed!");
+}
 
 #pragma mark - UICollectionView DataSource
 
