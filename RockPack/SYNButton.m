@@ -1,0 +1,63 @@
+//
+//  SYNButton.m
+//  dolly
+//
+//  Created by Nick Banks on 07/11/2013.
+//  Copyright (c) 2013 Nick Banks. All rights reserved.
+//
+
+#import "SYNButton.h"
+#import "UIFont+SYNFont.h"
+
+@implementation SYNButton
+
+- (void) awakeFromNib
+{
+    [super awakeFromNib];
+    
+    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.titleLabel.numberOfLines = 0;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
+    
+    // Little hack to ensure custom font is correctly
+    self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 2.0, 0.0, 0.0);
+    
+//    [self setTitleColor: [self.titleLabel.textColor colorWithAlphaComponent: 0.8f]
+//               forState: UIControlStateHighlighted];
+}
+
+
+- (void) setTitle: (NSString *) title
+{
+    _title = title;
+    
+    [self setTitle: title
+          forState: UIControlStateNormal];
+}
+
+
+- (void) setTitle: (NSString *) title
+         andCount: (NSInteger) count
+{
+    _title = title;
+    
+    // Two different ways of formatting
+#if NOT_CENTERED
+    NSString *countString = @" ";
+    
+    if (count > 0)
+    {
+        countString = [NSString stringWithFormat: @"%d", count];
+    }
+    
+    [self setTitle: [NSString stringWithFormat: @"\n%@\n%@", title, countString]
+          forState: UIControlStateNormal];
+    
+#else
+    [self setTitle: [NSString stringWithFormat: @"%@\n%d", title, count]
+          forState: UIControlStateNormal];
+#endif
+}
+
+@end

@@ -6,17 +6,12 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
+#import "SYNButton.h"
 @import UIKit;
 
-@interface SYNSocialButton : UIButton
-
-@property (nonatomic, strong) NSString* title;
-
-@property (nonatomic, weak) id dataItemLinked;
-
-- (void) setTitle: (NSString *) title
-         andCount: (NSInteger) count;
+@interface SYNSocialButton : SYNButton
 
 - (UIColor *) defaultColor;
 - (UIColor *) selectedColor;
+
 @end

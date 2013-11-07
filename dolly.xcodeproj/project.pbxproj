@@ -105,6 +105,7 @@
 		011D42D616FFA8E600A49D50 /* DividerYou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 011D42CC16FFA8E600A49D50 /* DividerYou@2x.png */; };
 		012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 012502BC16CA8FE30029C7C8 /* SYNFacebookManager.m */; };
 		012502C316CA99630029C7C8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C216CA99630029C7C8 /* AdSupport.framework */; };
+		0125FB6C182BB41300EC822E /* SYNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6B182BB41300EC822E /* SYNButton.m */; };
 		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
 		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
 		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x.png */; };
@@ -1569,6 +1570,8 @@
 		012502C216CA99630029C7C8 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		012502C416CA99710029C7C8 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		012502C616CA99790029C7C8 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0125FB6A182BB41300EC822E /* SYNButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNButton.h; sourceTree = "<group>"; };
+		0125FB6B182BB41300EC822E /* SYNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNButton.m; sourceTree = "<group>"; };
 		0126331E162E2A060009FF9C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Light.otf"; path = "Assets/Fonts/ProximaNova-Light.otf"; sourceTree = "<group>"; };
 		0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Assets/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
@@ -6073,6 +6076,8 @@
 		BEB3136A181ABD0D00FAF98A /* Cell Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				0125FB6A182BB41300EC822E /* SYNButton.h */,
+				0125FB6B182BB41300EC822E /* SYNButton.m */,
 				016AED391821349800DEAF7E /* SYNSocialButton.h */,
 				016AED3A1821349800DEAF7E /* SYNSocialButton.m */,
 				BEB31371181AC40100FAF98A /* Subclasses */,
@@ -7641,6 +7646,7 @@
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailSmallCell.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
+				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */,
 				011A160E16EE53A0008CF25E /* UIImage+Resize.m in Sources */,

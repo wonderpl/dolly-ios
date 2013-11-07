@@ -28,15 +28,6 @@
 }
 
 
-//- (UIColor *) defaultColor
-//{
-//    return [UIColor colorWithRed: (224.0f / 255.0f)
-//                           green: (92.0f / 255.0f)
-//                            blue: (72.0f / 255.0f)
-//                           alpha: 1.0f];
-//}
-
-
 - (UIColor *) highlightedColor
 {
     return [UIColor colorWithRed: (224.0f / 255.0f)
