@@ -11,11 +11,15 @@
 #import "UIFont+SYNFont.h"
 #import "SYNFadingFlowLayout.h"
 
+#define LARGE_AMOUNT_OF_ROWS 10000
+
 @interface SYNMoodRootViewController ()
 
 @property (nonatomic, strong) NSArray *optionNames;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
-@property (nonatomic, weak) IBOutlet UILabel *mainLabel;
+@property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
+
+@property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 
 @end
 
@@ -29,16 +33,27 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     // TODO: We need to get this list via an API
-    self.optionNames = [@[@"Laugh", @"Learn", @"Be Inspired", @"Get Healthy", @"Work Out", @"Get Cultured", @"Just Listen", @"Cook", @"Look Beautiful", @"Twerk", @"Idle Times", @"Gamer Heaven", @"Random Stuff", @"Editor's Pick", @"Cars, Planes & Trains", @"Nerd Up"] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+    self.optionNames = [@[@"Laugh", @"Learn", @"Be Inspired", @"Get Healthy",
+                          @"Work Out", @"Get Cultured", @"Just Listen", @"Cook",
+                          @"Look Beautiful", @"Twerk", @"Idle Times",
+                          @"Gamer Heaven", @"Random Stuff", @"Editor's Pick",
+                          @"Cars, Planes & Trains", @"Nerd Up"] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
     
     // Setup mood collection view
-    [self.moodCollectionView registerNib: [UINib nibWithNibName: @"SYNMoodCell" bundle: nil]
-              forCellWithReuseIdentifier: @"SYNMoodCell"];
+    [self.moodCollectionView registerClass:[SYNMoodCell class]
+                forCellWithReuseIdentifier:NSStringFromClass([SYNMoodCell class])];
     
-    SYNFadingFlowLayout *fadingFlowLayout = [[SYNFadingFlowLayout alloc] init];
-    self.moodCollectionView.collectionViewLayout = fadingFlowLayout;
 
-    self.mainLabel.font = [UIFont regularCustomFontOfSize: self.mainLabel.font.pointSize];
+    self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
+                                    atScrollPosition: UICollectionViewScrollPositionCenteredVertically
+                                            animated: NO];
 }
 
 
@@ -48,7 +63,7 @@
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
-    return 10000;
+    return LARGE_AMOUNT_OF_ROWS;
 }
 
 
@@ -57,25 +72,63 @@
     return 1;
 }
 
-
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: @"SYNMoodCell"
+    SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNMoodCell class])
                                                                                forIndexPath: indexPath];
     
     NSString* currentOptionName = self.optionNames [indexPath.item % self.optionNames.count];
-    moodCell.label.text = currentOptionName;
+    
+    moodCell.titleLabel.text = currentOptionName;
     
     return moodCell;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 78.0f : 50.0f));
+}
+
 
 - (void) collectionView: (UICollectionView *) cv
-         didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+         didSelectItemAtIndexPath: (NSIndexPath *)indexPath
 {
     NSLog (@"Selected");
 
+}
+
+- (void) positionBackgroundImageForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    
+    CGRect correctBGImageFrame = self.backgroundImageView.frame;
+    if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
+    {
+        correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
+    }
+    else // Landscape
+    {
+        correctBGImageFrame.origin.y = 64.0f;
+        
+        
+    }
+    self.backgroundImageView.frame = correctBGImageFrame;
+    
+}
+
+#pragma mark - Orientation
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    if(IS_IPAD)
+    {
+        [self positionBackgroundImageForInterfaceOrientation:toInterfaceOrientation];
+    }
+    
 }
 
 
