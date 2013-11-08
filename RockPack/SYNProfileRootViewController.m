@@ -171,11 +171,8 @@ SYNImagePickerControllerDelegate>{
     self.collectionsTabActive = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
-    self.greyColor = [UIColor dollyTabColorSelected];
-    self.tabTextColor = [UIColor colorWithRed:130.0f/255.0f
-                                              green:130.0f/255.0f
-                                               blue:130.0f/255.0f
-                                              alpha:1];
+    self.greyColor = [UIColor dollyTabColorSelectedBackground];
+    self.tabTextColor = [UIColor dollyTabColorSelectedText];
 
     UINib *searchCellNib = [UINib nibWithNibName: @"SYNChannelSearchCell"
                                           bundle: nil];
@@ -276,6 +273,16 @@ SYNImagePickerControllerDelegate>{
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
     [self setProfleType:self.modeType];
+    
+    UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
+    if(txfSearchField)
+        txfSearchField.backgroundColor = [UIColor colorWithRed: (255.0f / 255.0f)
+                                                         green: (255.0f / 255.0f)
+                                                          blue: (255.0f / 255.0f)
+                                                         alpha: 1.0f];
+    
+
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -834,28 +841,30 @@ SYNImagePickerControllerDelegate>{
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
-        Channel *channel = _arrDisplayFollowing[indexPath.item];
 
-        if (self.modeType == MyOwnProfile) {
-            [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-        }
-        else if(self.modeType == OtherUsersProfile)
-        {
-            if (channel.subscribedByUserValue) {
-                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-            }
-            else
-            {
-                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
-            }
-            
-        }
         
         if (indexPath.row < self.arrDisplayFollowing.count) {
+            Channel *channel = _arrDisplayFollowing[indexPath.item];
+
             
+            if (self.modeType == MyOwnProfile) {
+                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+            }
+            else if(self.modeType == OtherUsersProfile)
+            {
+                if (channel.subscribedByUserValue) {
+                    [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+                }
+                else
+                {
+                    [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+                }
+                
+            }
             
             [channelThumbnailCell setChannel:channel];
             [channelThumbnailCell setTitle: channel.title];
+            [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
 
             [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
             [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
@@ -1026,7 +1035,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (self.collectionsTabActive)
     {
-        [self.followingTabButton.titleLabel setTextColor:self.self.tabTextColor];
+        [self.followingTabButton.titleLabel setTextColor:self.tabTextColor];
         self.followingTabButton.backgroundColor = [UIColor whiteColor];
         
         self.collectionsTabButton.backgroundColor = self.greyColor;
@@ -1553,7 +1562,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void) followButtonTapped:(UICollectionViewCell *) cell
 {
-    NSLog(@"ssssss");
     [self showAlertView: cell];
 
 }
@@ -1795,8 +1803,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
 }
 - (IBAction)backButtonTapped:(id)sender {
-    NSLog(@"BACK");
-    
     [self.navigationController popViewControllerAnimated:YES];
     
 }

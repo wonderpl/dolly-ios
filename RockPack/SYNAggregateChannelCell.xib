@@ -40,13 +40,23 @@
                             <outlet property="dataSource" destination="2" id="3hI-5H-nEg"/>
                         </connections>
                     </collectionView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Dolly Proxima" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14" userLabel="Action Message Label">
-                        <rect key="frame" x="20" y="72" width="887" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzx-At-PL6" userLabel="Button - Action Message" customClass="SYNButton">
+                        <rect key="frame" x="0.0" y="68" width="927" height="33"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="WaD-zN-HsY"/>
+                        </constraints>
+                        <state key="normal">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Action / Profile Button2">
+                                    <attributes>
+                                        <color key="NSColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23" userLabel="User Thumbnail Button" customClass="SYNAvatarButton">
                         <rect key="frame" x="439" y="20" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -70,18 +80,18 @@
             <constraints>
                 <constraint firstItem="w2T-qB-bHV" firstAttribute="top" secondItem="2" secondAttribute="top" constant="43" id="0xV-8S-2sG"/>
                 <constraint firstAttribute="centerX" secondItem="23" secondAttribute="centerX" id="2EE-xz-0zT"/>
-                <constraint firstAttribute="centerX" secondItem="14" secondAttribute="centerX" id="4zN-5j-jef"/>
                 <constraint firstAttribute="trailing" secondItem="Khg-wM-3Jg" secondAttribute="trailing" id="6gB-O1-vO7"/>
-                <constraint firstAttribute="trailing" secondItem="14" secondAttribute="trailing" constant="20" id="8xG-Hj-VUL"/>
                 <constraint firstAttribute="centerX" secondItem="w2T-qB-bHV" secondAttribute="centerX" id="SRr-hl-g5U"/>
                 <constraint firstItem="23" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="VDc-3q-mS9"/>
                 <constraint firstItem="Khg-wM-3Jg" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="bay-va-Fbm"/>
-                <constraint firstItem="14" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="gPk-Sj-6br"/>
+                <constraint firstItem="hzx-At-PL6" firstAttribute="top" secondItem="2" secondAttribute="top" constant="68" id="cS4-C5-BYk"/>
+                <constraint firstItem="hzx-At-PL6" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="dUi-9N-Abu"/>
+                <constraint firstAttribute="trailing" secondItem="hzx-At-PL6" secondAttribute="trailing" id="k7K-km-nmg"/>
                 <constraint firstAttribute="bottom" secondItem="Khg-wM-3Jg" secondAttribute="bottom" constant="6" id="v2c-c6-8EW"/>
             </constraints>
             <size key="customSize" width="353" height="361"/>
             <connections>
-                <outlet property="actionMessageLabel" destination="14" id="nQ7-ZF-WSn"/>
+                <outlet property="actionButton" destination="hzx-At-PL6" id="vEB-1o-LLo"/>
                 <outlet property="collectionView" destination="Khg-wM-3Jg" id="Q4C-Q4-HIo"/>
                 <outlet property="userThumbnailButton" destination="23" id="cbK-Nz-bpl"/>
             </connections>

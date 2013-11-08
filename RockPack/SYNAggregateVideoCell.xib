@@ -39,17 +39,19 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Main Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="927" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="Action Message Label">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fD5-tG-Vwh" userLabel="Button - Action Message" customClass="SYNButton">
                         <rect key="frame" x="0.0" y="72" width="927" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="gd5-D8-xm4"/>
+                            <constraint firstAttribute="height" constant="20" id="ID4-Ez-7wg"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TQ-2k-gku" userLabel="Button - Collection Name" customClass="SYNButton">
+                        <state key="normal" title="Action / Profile Button">
+                            <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TQ-2k-gku" userLabel="Button - Collection Name" customClass="SYNButton">
                         <rect key="frame" x="0.0" y="92" width="927" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -89,22 +91,21 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="4TQ-2k-gku" secondAttribute="trailing" id="B6p-DO-UTz"/>
-                <constraint firstItem="9" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="COw-1j-HLt"/>
-                <constraint firstItem="4TQ-2k-gku" firstAttribute="top" secondItem="9" secondAttribute="bottom" id="EZ6-zL-XFy"/>
                 <constraint firstItem="4TQ-2k-gku" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="Feb-0h-LJD"/>
                 <constraint firstAttribute="centerX" secondItem="GYV-hD-wdq" secondAttribute="centerX" id="H9r-U2-ZqN"/>
                 <constraint firstItem="lMc-y5-kdQ" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="HtC-hq-JJn"/>
                 <constraint firstAttribute="trailing" secondItem="lMc-y5-kdQ" secondAttribute="trailing" id="LXY-sg-oUh"/>
-                <constraint firstAttribute="trailing" secondItem="9" secondAttribute="trailing" id="Mr1-gW-XK0"/>
+                <constraint firstItem="fD5-tG-Vwh" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="Mf7-Nx-w9C"/>
                 <constraint firstItem="GYV-hD-wdq" firstAttribute="top" secondItem="2" secondAttribute="top" constant="43" id="W45-n1-hQJ"/>
                 <constraint firstItem="28" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="YrK-vh-04h"/>
                 <constraint firstAttribute="bottom" secondItem="lMc-y5-kdQ" secondAttribute="bottom" id="b0a-Pa-fhF"/>
-                <constraint firstItem="9" firstAttribute="top" secondItem="28" secondAttribute="bottom" constant="4" id="gST-ZC-6xQ"/>
+                <constraint firstAttribute="trailing" secondItem="fD5-tG-Vwh" secondAttribute="trailing" id="bQC-8b-eoa"/>
                 <constraint firstAttribute="centerX" secondItem="28" secondAttribute="centerX" id="jHX-ef-rCz"/>
+                <constraint firstItem="fD5-tG-Vwh" firstAttribute="top" secondItem="2" secondAttribute="top" constant="72" id="zJN-5K-Hhy"/>
             </constraints>
             <size key="customSize" width="353" height="261"/>
             <connections>
-                <outlet property="actionMessageLabel" destination="9" id="97m-YT-jaC"/>
+                <outlet property="actionButton" destination="fD5-tG-Vwh" id="U8S-WP-6s0"/>
                 <outlet property="channelNameButton" destination="4TQ-2k-gku" id="1Qx-UB-bCV"/>
                 <outlet property="collectionView" destination="lMc-y5-kdQ" id="QfR-qq-uHx"/>
                 <outlet property="userThumbnailButton" destination="28" id="Ocb-WO-s3i"/>
