@@ -16,8 +16,16 @@
     [super awakeFromNib];
     
     
-    self.createNewButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize];
-
+    if (IS_IPHONE) {
+        [self.createLabel setFont:[UIFont lightCustomFontOfSize:15]];
+        
+    }else{
+        [self.createLabel setFont:[UIFont lightCustomFontOfSize:18]];
+        
+    }
+    [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
+    [self.boarderView.layer setBorderWidth:1.0f];
+    
 }
 
 

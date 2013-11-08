@@ -196,7 +196,6 @@ SYNImagePickerControllerDelegate>{
     [self.subscriptionThumbnailCollectionView registerNib: thumbnailCellNib
                                forCellWithReuseIdentifier: @"SYNChannelMidCell"];
     
-    
     self.isIPhone = IS_IPHONE;
     
     // Main Collection View
@@ -834,7 +833,6 @@ SYNImagePickerControllerDelegate>{
 
         }
         
-        
         [channelThumbnailCell setTitle: channel.title];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
@@ -857,13 +855,10 @@ SYNImagePickerControllerDelegate>{
                 {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
                 }
-                
             }
-            
             [channelThumbnailCell setChannel:channel];
             [channelThumbnailCell setTitle: channel.title];
             [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
-
             [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
             [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
             [channelThumbnailCell setTitle:channel.title];
@@ -873,7 +868,7 @@ SYNImagePickerControllerDelegate>{
         }
         else
         {
-            cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+             cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
             
         }
     }
@@ -978,6 +973,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             return self.subscriptionLayoutIPad.itemSize;
     }
     
+    
     return CGSizeZero;
 }
 
@@ -1068,7 +1064,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    
       [super scrollViewWillBeginDragging:scrollView];
     if (self.searchMode) {
         [self.followingSearchBar resignFirstResponder];
@@ -1166,9 +1161,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (!self.isIPhone)
     {
-        
-
-        
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
         {
             scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
@@ -1637,8 +1629,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
+    
     [self.subscriptionThumbnailCollectionView reloadData];
-    [self.channelThumbnailCollectionView reloadData];
 
 }
 
@@ -1676,8 +1668,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void) calculateOffsetForSearch
 {
-    
-    
     if (self.searchMode)
     {
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBAR_Y);
