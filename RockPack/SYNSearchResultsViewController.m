@@ -373,11 +373,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
             
-            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelected];
+            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
             self.videosTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             self.usersTabButton.backgroundColor = [UIColor whiteColor];
-            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelected];
+            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
             
             break;
             
@@ -390,9 +390,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.usersTabButton.selected = YES;
             
             self.videosTabButton.backgroundColor = [UIColor whiteColor];
-            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelected];
+            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
             
-            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelected];
+            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
             self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             break;
