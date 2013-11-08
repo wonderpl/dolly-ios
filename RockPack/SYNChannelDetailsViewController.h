@@ -15,16 +15,18 @@ typedef enum : NSInteger
     kChannelDetailsModeDisplay = 0,
     kChannelDetailsModeEdit = 1,
     kChannelDetailsModeCreate = 2
-} kChannelDetailsMode;
+} kChannelDetailsModeTemp;
 
 @interface SYNChannelDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
 SYNSocialActionsDelegate>
 
-@property (nonatomic, assign) kChannelDetailsMode mode;
+@property (nonatomic, assign) kChannelDetailsModeTemp mode;
 
 @property (nonatomic, strong) Channel *channel;
+@property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
+
 
 /**
  If set the channel will automatically play the video on view did load, or when the collection is updated depending on if the video ID
@@ -34,12 +36,14 @@ SYNSocialActionsDelegate>
 
 
 - (id) initWithChannel: (Channel *) channel
-             usingMode: (kChannelDetailsMode) mode;
+             usingMode: (kChannelDetailsModeTemp) mode;
 
 //FIXME: FAVOURITES Part of workaound for missing favourites functionality. Remove once final solution implemented.
 - (BOOL) isFavouritesChannel;
 - (void) refreshFavouritesChannel;
 
 - (IBAction) deleteChannelPressed: (UIButton *) sender;
+- (IBAction)followControlPressed:(id)sender;
+- (IBAction)shareControlPressed:(id)sender;
 
 @end

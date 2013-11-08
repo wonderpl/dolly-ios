@@ -19,7 +19,6 @@
 #import "SYNCaution.h"
 #import "SYNChannelCoverImageSelectorViewController.h"
 #import "SYNChannelCreateNewCell.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNCoverChooserController.h"
 #import "SYNCoverThumbnailCell.h"
 #import "SYNDeviceManager.h"
@@ -41,6 +40,7 @@
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "SYNAvatarButton.h"
 
 static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
@@ -55,6 +55,15 @@ UIPopoverControllerDelegate,
 SYNChannelCoverImageSelectorDelegate>
 
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
+@property (strong, nonatomic) IBOutlet SYNAvatarButton *btnAvatar;
+@property (strong, nonatomic) IBOutlet UILabel *lblFullName;
+@property (strong, nonatomic) IBOutlet UILabel *lblDescription;
+@property (strong, nonatomic) IBOutlet UILabel *lblChannelTitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblFollowersCount;
+@property (strong, nonatomic) IBOutlet UILabel *lblVideosCount;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *btnFollow;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *btnShare;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionVideoInstances;
 
 @end
 
@@ -64,7 +73,7 @@ SYNChannelCoverImageSelectorDelegate>
 #pragma mark - Object lifecyle
 
 - (id) initWithChannel: (Channel *) channel
-             usingMode: (kChannelDetailsMode) mode
+             usingMode: (kChannelDetailsModeTemp) mode
 {
     if ((self = [super initWithViewId: kChannelDetailsViewId]))
     {
@@ -89,6 +98,17 @@ SYNChannelCoverImageSelectorDelegate>
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (IS_IPHONE) {
+        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
+        
+        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
+        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
+        [self.lblFollowersCount setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.lblVideosCount setFont:[UIFont regularCustomFontOfSize:14]];
+    }
+    
+    
 }
 
 
@@ -122,8 +142,21 @@ SYNChannelCoverImageSelectorDelegate>
     return [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId] && self.channel.favouritesValue;
 }
 
+- (void) refreshFavouritesChannel
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
+                                                        object: self
+                                                      userInfo: @{kChannel: self.channel}];
+}
+- (IBAction)followControlPressed:(id)sender
+{
+    [self.delegate followControlPressed:sender];
+}
 
+- (IBAction)shareControlPressed:(id)sender
+{
+    [self.delegate shareControlPressed: sender];
 
-
+}
 
 @end
