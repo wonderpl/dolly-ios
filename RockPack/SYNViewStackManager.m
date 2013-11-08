@@ -561,7 +561,6 @@
     newFrame.origin.y = newFrame.size.height;
     existingController.view.frame = newFrame;
     
-    [existingController prepareForAppearAnimation]; // this should fade the cells out in preparation for the animation
     
     [UIView animateWithDuration: kAddToChannelAnimationDuration
                           delay: 0.0f
@@ -575,7 +574,6 @@
                      }
                      completion: ^(BOOL finished) {
                          
-                         [existingController runAppearAnimation]; // this should animate the cells in, one by one
                          
                      }];
 }
