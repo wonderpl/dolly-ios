@@ -30,6 +30,7 @@
 {
     BOOL creatingNewState;
     BOOL creatingNewAnimating;
+    
 }
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
@@ -40,6 +41,8 @@
 @property (nonatomic, strong) NSArray *channels;
 @property (nonatomic, strong) NSIndexPath *previouslySelectedPath;
 @property (nonatomic, weak) Channel *selectedChannel;
+
+@property (nonatomic, weak) SYNExistingChannelCreateNewCell *createNewChannelCell;
 
 
 // autopost stuff
@@ -282,12 +285,12 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])
+        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])
                                                                                         forIndexPath: indexPath];
-        [createCell.createNewButton addTarget:self
-                                       action:@selector(createNewButtonPressed)
-                             forControlEvents:UIControlEventTouchUpInside];
-        cell = createCell;
+        [self.createNewChannelCell.createNewButton addTarget:self
+                                                      action:@selector(createNewButtonPressed)
+                                            forControlEvents:UIControlEventTouchUpInside];
+        cell = self.createNewChannelCell;
     }
     else
     {
@@ -311,6 +314,7 @@
                    layout: (UICollectionViewLayout *) collectionViewLayout
    sizeForItemAtIndexPath: (NSIndexPath *) indexPath
 {
+    // TODO: Set for iPad as well...
     if(indexPath.row == 0 && creatingNewState)
     {
         return CGSizeMake(320.0f, 200.0f);
@@ -332,12 +336,25 @@
     
     creatingNewState = !creatingNewState; // toggle state
     
+    if(creatingNewState) // if it is opening, show the panel
+    {
+        self.createNewChannelCell.descriptionTextView.hidden = NO;
+    }
+    
+    __weak SYNExistingCollectionsViewController* wself = self;
+    
     [self.collectionsCollectionView performBatchUpdates:^{
         
-        [self.collectionsCollectionView reloadData];
+        [wself.collectionsCollectionView reloadData];
         
     } completion:^(BOOL finished) {
+        
         creatingNewAnimating = NO;
+        if(!creatingNewState) // if it has just closed, hide the panel
+        {
+            wself.createNewChannelCell.descriptionTextView.hidden = YES;
+        }
+        
     }];
 }
 
@@ -345,6 +362,7 @@
 {
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
+    // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
     if(indexPath.row == 0)
         return;
     
