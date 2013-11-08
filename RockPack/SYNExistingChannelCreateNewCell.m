@@ -16,7 +16,6 @@
 {
     [super awakeFromNib];
     
-    
     self.createNewButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize];
     self.backgroundColor = [UIColor dollyAddButtonDefaultColor];
     

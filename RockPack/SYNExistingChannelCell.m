@@ -18,4 +18,17 @@
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
 }
+
+-(void)setSelected:(BOOL)selected
+{
+    if(selected)
+    {
+        self.backgroundColor = [UIColor greenColor];
+    }
+    else
+    {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    
+}
 @end

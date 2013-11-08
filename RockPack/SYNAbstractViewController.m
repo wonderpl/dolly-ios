@@ -149,6 +149,7 @@
     
     self.view.multipleTouchEnabled = NO;
     
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated

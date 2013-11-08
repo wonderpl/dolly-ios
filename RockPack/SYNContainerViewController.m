@@ -68,6 +68,10 @@
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
+                                                           NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0f]}];
+     
+     
     
     
     // == Feed Page == //

@@ -338,6 +338,13 @@
     
     if(creatingNewState) // if it is opening, show the panel
     {
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"channelSelectionClick"
+                                                                label: @"New"
+                                                                value: nil] build]];
+        
         self.createNewChannelCell.descriptionTextView.hidden = NO;
     }
     
@@ -360,18 +367,11 @@
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
     
     // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
     if(indexPath.row == 0)
         return;
-    
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelSelectionClick"
-                                                            label: @"New"
-                                                            value: nil] build]];
-    
     
     
     
@@ -428,49 +428,6 @@
                      }
                      completion: completionBlock];
 }
-
-
-- (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
-{
-    NSIndexPath *indexPath = [self.collectionsCollectionView indexPathForCell: cell];
-    return  indexPath;
-}
-
-
-- (void) channelTapped: (UICollectionViewCell *) cell
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelSelectionClick"
-                                                            label: @"Existing"
-                                                            value: nil] build]];
-    
-    if (self.previouslySelectedPath)
-    {
-        SYNExistingChannelCell *cellToDeselect = (SYNExistingChannelCell *) [self.collectionsCollectionView cellForItemAtIndexPath: self.previouslySelectedPath];
-        
-    }
-    
-    SYNExistingChannelCell *cellToSelect = (SYNExistingChannelCell *) cell;
-    
-    
-    //Compensate for the extra "create new" cell
-    NSIndexPath *indexPath = [self indexPathForChannelCell: cell];
-    
-    self.selectedChannel = (Channel *) self.channels[indexPath.row - 1];
-    self.previouslySelectedPath = indexPath;
-    self.confirmButtom.enabled = YES;
-}
-
-
-
-
-
-
-
-
-
 
 
 
