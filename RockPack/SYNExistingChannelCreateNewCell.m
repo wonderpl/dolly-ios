@@ -19,6 +19,8 @@
     
     self.createNewButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize];
     self.backgroundColor = [UIColor dollyAddButtonDefaultColor];
+    
+    self.descriptionTextView.hidden = YES;
 }
 
 
