@@ -23,7 +23,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNVideoPlaybackViewController.h"
+#import "SYNYouTubeVideoPlaybackViewController.h"
 #import "TestFlight.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "UncaughtExceptionHandler.h"
@@ -166,7 +166,7 @@
                                              ofType: @"html"];
     
     // Now cause the playback controller to be instantiated
-    [SYNVideoPlaybackViewController sharedInstance];
+    [SYNYouTubeVideoPlaybackViewController sharedInstance];
     
     // Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
     // inlduding logout, which is the correct flow

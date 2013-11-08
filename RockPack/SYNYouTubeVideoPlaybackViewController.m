@@ -16,7 +16,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOpaqueView.h"
 #import "SYNProgressView.h"
-#import "SYNVideoPlaybackViewController.h"
+#import "SYNYouTubeVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/CoreAnimation.h>
 @import CoreData;
@@ -25,7 +25,7 @@
 #define SHOW_SHUTTLE_DEBUG_COLOURS_
 #define SHOW_DEBUG_COLOURS_
 
-@interface SYNVideoPlaybackViewController () <UIWebViewDelegate>
+@interface SYNYouTubeVideoPlaybackViewController () <UIWebViewDelegate>
 
 @property (nonatomic, assign) float percentageViewed;
 @property (nonatomic, assign) float timeViewed;
@@ -73,7 +73,7 @@
 @end
 
 
-@implementation SYNVideoPlaybackViewController
+@implementation SYNYouTubeVideoPlaybackViewController
 
 @synthesize currentVideoInstance;
 
@@ -85,9 +85,9 @@ static UIWebView* youTubeVideoWebViewInstance;
 static UIWebView* vimeoideoWebViewInstance;
 #endif
 
-+ (SYNVideoPlaybackViewController*) sharedInstance
++ (SYNYouTubeVideoPlaybackViewController*) sharedInstance
 {
-    static SYNVideoPlaybackViewController *_sharedInstance = nil;
+    static SYNYouTubeVideoPlaybackViewController *_sharedInstance = nil;
     
     if (!_sharedInstance)
     {
@@ -96,7 +96,7 @@ static UIWebView* vimeoideoWebViewInstance;
             // Create our shared intance
             _sharedInstance = [[super allocWithZone: nil] init];
             // Create the static instances of our webviews
-            youTubeVideoWebViewInstance = [SYNVideoPlaybackViewController createNewYouTubeWebView];
+            youTubeVideoWebViewInstance = [SYNYouTubeVideoPlaybackViewController createNewYouTubeWebView];
             
 #ifdef ENABLE_VIMEO_PLAYER
             vimeoideoWebViewInstance = [SYNVideoPlaybackViewController createNewVimeoWebView];
@@ -123,8 +123,8 @@ static UIWebView* vimeoideoWebViewInstance;
 {
     UIWebView *newWebViewInstance = [[UIWebView alloc] initWithFrame: CGRectMake (0,
                                                                                   0,
-                                                                                  [SYNVideoPlaybackViewController videoWidth],
-                                                                                  [SYNVideoPlaybackViewController videoHeight])];
+                                                                                  [SYNYouTubeVideoPlaybackViewController videoWidth],
+                                                                                  [SYNYouTubeVideoPlaybackViewController videoHeight])];
     
     newWebViewInstance.opaque = NO;
     newWebViewInstance.alpha = 0.0f;
@@ -152,7 +152,7 @@ static UIWebView* vimeoideoWebViewInstance;
 {
     NSError *error = nil;
     
-    UIWebView *newYouTubeWebView = [SYNVideoPlaybackViewController createNewVideoWebView];
+    UIWebView *newYouTubeWebView = [SYNYouTubeVideoPlaybackViewController createNewVideoWebView];
     
     // Get HTML from documents directory (as opposed to the bundle), so that we can update it
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -164,8 +164,8 @@ static UIWebView* vimeoideoWebViewInstance;
                                                                 error: &error];
     
     NSString *iFrameHTML = [NSString stringWithFormat: templateHTMLString,
-                                                       (int) [SYNVideoPlaybackViewController videoWidth],
-                                                       (int) [SYNVideoPlaybackViewController videoHeight]];
+                                                       (int) [SYNYouTubeVideoPlaybackViewController videoWidth],
+                                                       (int) [SYNYouTubeVideoPlaybackViewController videoHeight]];
     
     [newYouTubeWebView loadHTMLString: iFrameHTML
                               baseURL: [NSURL URLWithString: @"http://www.youtube.com"]];
@@ -188,7 +188,7 @@ static UIWebView* vimeoideoWebViewInstance;
 // Create YouTube specific webview, based on common setup
 + (UIWebView *) createNewVimeoWebView
 {
-    UIWebView *newVimeoVideoWebView = [SYNVideoPlaybackViewController createNewVideoWebView];
+    UIWebView *newVimeoVideoWebView = [SYNYouTubeVideoPlaybackViewController createNewVideoWebView];
     
     NSString *parameterString = @"";
     
@@ -202,8 +202,8 @@ static UIWebView* vimeoideoWebViewInstance;
     
     NSString *iFrameHTML = [NSString stringWithFormat: templateHTMLString,
                                                        parameterString,
-                                                       (int) [SYNVideoPlaybackViewController videoWidth],
-                                                       (int) [SYNVideoPlaybackViewController videoHeight]];
+                                                       (int) [SYNYouTubeVideoPlaybackViewController videoWidth],
+                                                       (int) [SYNYouTubeVideoPlaybackViewController videoHeight]];
     
     [newVimeoVideoWebView loadHTMLString: iFrameHTML
                                  baseURL: nil];
@@ -947,8 +947,8 @@ static UIWebView* vimeoideoWebViewInstance;
                                                                     error: &error];
         
         NSString *iFrameHTML = [NSString stringWithFormat: templateHTMLString,
-                                (int) [SYNVideoPlaybackViewController videoWidth],
-                                (int) [SYNVideoPlaybackViewController videoHeight]];
+                                (int) [SYNYouTubeVideoPlaybackViewController videoWidth],
+                                (int) [SYNYouTubeVideoPlaybackViewController videoHeight]];
         
         [self.currentVideoWebView loadHTMLString: iFrameHTML
                                          baseURL: [NSURL URLWithString: @"http://www.youtube.com"]];

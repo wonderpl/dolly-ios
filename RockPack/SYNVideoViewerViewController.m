@@ -24,7 +24,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPassthroughView.h"
 #import "SYNReportConcernTableViewController.h"
-#import "SYNVideoPlaybackViewController.h"
+#import "SYNYouTubeVideoPlaybackViewController.h"
 #import "SYNVideoThumbnailSmallCell.h"
 #import "SYNVideoViewerThumbnailLayout.h"
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
@@ -56,7 +56,7 @@
 @property (nonatomic, strong) IBOutlet SYNPassthroughView *chromeView;
 @property (nonatomic, strong) IBOutlet SYNPassthroughView *passthroughView;
 @property (nonatomic, strong) IBOutlet SYNPassthroughView *placeholderView;
-@property (nonatomic, strong) IBOutlet SYNVideoPlaybackViewController *videoPlaybackViewController;
+@property (nonatomic, strong) IBOutlet SYNYouTubeVideoPlaybackViewController *videoPlaybackViewController;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *heartActivityIndicator;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *shareActivityIndicator;
 @property (nonatomic, strong) IBOutlet UIButton *nextVideoButton;
@@ -240,7 +240,7 @@
     
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-    self.videoPlaybackViewController = [SYNVideoPlaybackViewController sharedInstance];
+    self.videoPlaybackViewController = [SYNYouTubeVideoPlaybackViewController sharedInstance];
     
     __weak typeof(self) weakSelf = self;
     

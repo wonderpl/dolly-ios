@@ -107,6 +107,7 @@
 		012502C316CA99630029C7C8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C216CA99630029C7C8 /* AdSupport.framework */; };
 		0125FB6C182BB41300EC822E /* SYNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6B182BB41300EC822E /* SYNButton.m */; };
 		0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */; };
+		0125FB72182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB71182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m */; };
 		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
 		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
 		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png */; };
@@ -153,7 +154,7 @@
 		01450AFC171DB4D7009F54CD /* PlaceholderVideoTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF9171DB4D7009F54CD /* PlaceholderVideoTop@2x.png */; };
 		014A456816691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */; };
 		014D514F16F738C500B82B00 /* SYNAbstractNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */; };
-		015487CF16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */; };
+		015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */; };
 		0154E8481768E268001C7B75 /* SYNTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0154E8461768E268001C7B75 /* SYNTimer.m */; };
 		0155FA2817A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */; };
 		01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */; };
@@ -1576,6 +1577,8 @@
 		0125FB6B182BB41300EC822E /* SYNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNButton.m; sourceTree = "<group>"; };
 		0125FB6D182BEAFB00EC822E /* SYNAvatarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAvatarButton.h; sourceTree = "<group>"; };
 		0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAvatarButton.m; sourceTree = "<group>"; };
+		0125FB70182D324700EC822E /* SYNAbstractVideoPlaybacViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractVideoPlaybacViewController.h; sourceTree = "<group>"; };
+		0125FB71182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAbstractVideoPlaybacViewController.m; sourceTree = "<group>"; };
 		0126331E162E2A060009FF9C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Light.otf"; path = "Assets/Fonts/ProximaNova-Light.otf"; sourceTree = "<group>"; };
 		0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Assets/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
@@ -1646,8 +1649,8 @@
 		014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		014D514D16F738C500B82B00 /* SYNAbstractNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractNetworkEngine.h; sourceTree = "<group>"; };
 		014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAbstractNetworkEngine.m; sourceTree = "<group>"; };
-		015487CD16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlaybackViewController.h; sourceTree = "<group>"; };
-		015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlaybackViewController.m; sourceTree = "<group>"; };
+		015487CD16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNYouTubeVideoPlaybackViewController.h; sourceTree = "<group>"; };
+		015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNYouTubeVideoPlaybackViewController.m; sourceTree = "<group>"; };
 		0154E8461768E268001C7B75 /* SYNTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimer.m; sourceTree = "<group>"; };
 		0154E8471768E268001C7B75 /* SYNTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimer.h; sourceTree = "<group>"; };
 		0155FA2617A81D7600B04B51 /* SYNSessionTokenCachingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSessionTokenCachingStrategy.h; sourceTree = "<group>"; };
@@ -4487,8 +4490,10 @@
 		01F8E77B16B039E6000D44B9 /* Video viewer */ = {
 			isa = PBXGroup;
 			children = (
-				015487CD16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.h */,
-				015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */,
+				0125FB70182D324700EC822E /* SYNAbstractVideoPlaybacViewController.h */,
+				0125FB71182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m */,
+				015487CD16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.h */,
+				015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */,
 				01F8E77C16B03A7C000D44B9 /* SYNVideoViewerViewController.h */,
 				01F8E77D16B03A7C000D44B9 /* SYNVideoViewerViewController.m */,
 				01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */,
@@ -7659,9 +7664,10 @@
 				BE0815CD16D5487B00ADB1DC /* SYNSearchRegistry.m in Sources */,
 				BEA216E517E9ED31007C6DF7 /* SYNTrackableFrameView.m in Sources */,
 				BEF9E5B016DCBAC800286113 /* SYNSoundPlayer.m in Sources */,
-				015487CF16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m in Sources */,
+				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailSmallCell.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
+				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,

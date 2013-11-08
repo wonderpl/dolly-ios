@@ -13,9 +13,9 @@
 typedef void (^SYNVideoIndexUpdater)(int);
 
 // Forward declarations
-@class SYNVideoPlaybackViewController;
+@class SYNYouTubeVideoPlaybackViewController;
 
-@interface SYNVideoPlaybackViewController : GAITrackedViewController
+@interface SYNYouTubeVideoPlaybackViewController : GAITrackedViewController
 
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
 @property (nonatomic, assign, readonly) NSTimeInterval duration;
@@ -24,7 +24,7 @@ typedef void (^SYNVideoIndexUpdater)(int);
 @property (nonatomic, strong) UIButton *shuttleBarMaxMinButton;
 @property (nonatomic, copy) void (^updateBlock) (void);
 
-+ (SYNVideoPlaybackViewController *) sharedInstance;
++ (SYNYouTubeVideoPlaybackViewController *) sharedInstance;
 
 // Initialisation
 - (void) updateWithFrame: (CGRect) frame
