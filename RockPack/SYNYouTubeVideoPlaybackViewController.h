@@ -8,6 +8,7 @@
 
 #import "Video.h"
 #import "VideoInstance.h"
+#import "SYNAbstractVideoPlaybackViewController+Private.h"
 @import UIKit;
 
 typedef void (^SYNVideoIndexUpdater)(int);
@@ -15,16 +16,15 @@ typedef void (^SYNVideoIndexUpdater)(int);
 // Forward declarations
 @class SYNYouTubeVideoPlaybackViewController;
 
-@interface SYNYouTubeVideoPlaybackViewController : GAITrackedViewController
+@interface SYNYouTubeVideoPlaybackViewController : SYNAbstractVideoPlaybackViewController
 
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
 @property (nonatomic, assign, readonly) NSTimeInterval duration;
-@property (nonatomic, strong) UIView *shuttleBarView;
 @property (nonatomic, strong) VideoInstance *currentVideoInstance;
-@property (nonatomic, strong) UIButton *shuttleBarMaxMinButton;
+
 @property (nonatomic, copy) void (^updateBlock) (void);
 
-+ (SYNYouTubeVideoPlaybackViewController *) sharedInstance;
++ (instancetype) sharedInstance;
 
 // Initialisation
 - (void) updateWithFrame: (CGRect) frame
@@ -39,7 +39,6 @@ typedef void (^SYNVideoIndexUpdater)(int);
 
 // Player control
 - (void) playVideoAtIndex: (int) index;
-- (void) resetShuttleBarFrame;
 - (void) playIfVideoActive;
 - (void) pauseIfVideoActive;
 

@@ -107,7 +107,8 @@
 		012502C316CA99630029C7C8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C216CA99630029C7C8 /* AdSupport.framework */; };
 		0125FB6C182BB41300EC822E /* SYNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6B182BB41300EC822E /* SYNButton.m */; };
 		0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */; };
-		0125FB72182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB71182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m */; };
+		0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB71182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m */; };
+		0125FB76182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */; };
 		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
 		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
 		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png */; };
@@ -1577,8 +1578,11 @@
 		0125FB6B182BB41300EC822E /* SYNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNButton.m; sourceTree = "<group>"; };
 		0125FB6D182BEAFB00EC822E /* SYNAvatarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAvatarButton.h; sourceTree = "<group>"; };
 		0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAvatarButton.m; sourceTree = "<group>"; };
-		0125FB70182D324700EC822E /* SYNAbstractVideoPlaybacViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractVideoPlaybacViewController.h; sourceTree = "<group>"; };
-		0125FB71182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAbstractVideoPlaybacViewController.m; sourceTree = "<group>"; };
+		0125FB70182D324700EC822E /* SYNAbstractVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractVideoPlaybackViewController.h; sourceTree = "<group>"; };
+		0125FB71182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAbstractVideoPlaybackViewController.m; sourceTree = "<group>"; };
+		0125FB73182D386F00EC822E /* SYNAbstractVideoPlaybackViewController+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNAbstractVideoPlaybackViewController+Private.h"; sourceTree = "<group>"; };
+		0125FB74182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOoyalaVideoPlaybackViewController.h; sourceTree = "<group>"; };
+		0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOoyalaVideoPlaybackViewController.m; sourceTree = "<group>"; };
 		0126331E162E2A060009FF9C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Light.otf"; path = "Assets/Fonts/ProximaNova-Light.otf"; sourceTree = "<group>"; };
 		0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Assets/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
@@ -4490,10 +4494,13 @@
 		01F8E77B16B039E6000D44B9 /* Video viewer */ = {
 			isa = PBXGroup;
 			children = (
-				0125FB70182D324700EC822E /* SYNAbstractVideoPlaybacViewController.h */,
-				0125FB71182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m */,
+				0125FB70182D324700EC822E /* SYNAbstractVideoPlaybackViewController.h */,
+				0125FB73182D386F00EC822E /* SYNAbstractVideoPlaybackViewController+Private.h */,
+				0125FB71182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m */,
 				015487CD16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.h */,
 				015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */,
+				0125FB74182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.h */,
+				0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */,
 				01F8E77C16B03A7C000D44B9 /* SYNVideoViewerViewController.h */,
 				01F8E77D16B03A7C000D44B9 /* SYNVideoViewerViewController.m */,
 				01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */,
@@ -7644,6 +7651,7 @@
 				01C6FD0F169DDEDB00E01AA3 /* NSDictionary+Validation.m in Sources */,
 				01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */,
 				01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */,
+				0125FB76182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m in Sources */,
 				01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */,
 				015CB01616AE039900FEB8E7 /* User.m in Sources */,
 				015CB01916AE03B200FEB8E7 /* _User.m in Sources */,
@@ -7667,7 +7675,7 @@
 				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailSmallCell.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
-				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybacViewController.m in Sources */,
+				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
