@@ -177,10 +177,22 @@
     [layer removeAnimationForKey: @"wobbling"];
 }
 
-
 - (void) prepareForReuse
 {
-    [self stopWobbling];
+    
+    self.videoCountLabel =nil;
+    self.videoTitleLabel =nil;
+    self.followerCountLabel =nil;
+    self.bottomBarView =nil;
+    self.followButton =nil;
+    self.descriptionLabel =nil;
+    self.containerView =nil;
+    self.descriptionView =nil;
+    
+    self.tap = nil;
+    //[self stopWobbling];
+    
+    
     
     // [self.imageView.layer removeAllAnimations];
     //[self.imageView setImageWithURL: nil];
