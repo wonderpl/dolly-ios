@@ -83,13 +83,11 @@
                                        sectionInset: UIEdgeInsetsMake(2.0f, 2.0f, 0.0f, 2.0f)];
     }
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelCreateNewCell"
-                                                                     bundle: nil]
-                          forCellWithReuseIdentifier: @"SYNChannelCreateNewCell"];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCreateNewCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])];
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelMidCell"
-                                                                     bundle: nil]
-                          forCellWithReuseIdentifier: @"SYNChannelMidCell"];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])];
     
     
     self.collectionsCollectionView.scrollsToTop = NO;
@@ -312,7 +310,7 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])
                                                                                         forIndexPath: indexPath];
         
         cell = createCell;
