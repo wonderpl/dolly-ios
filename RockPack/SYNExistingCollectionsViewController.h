@@ -10,7 +10,5 @@
 
 @interface SYNExistingCollectionsViewController : SYNAbstractViewController
 
-- (void) prepareForAppearAnimation;
-- (void) runAppearAnimation;
 
 @end

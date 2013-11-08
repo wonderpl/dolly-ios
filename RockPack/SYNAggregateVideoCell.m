@@ -37,7 +37,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 - (void) awakeFromNib
 {
     [super awakeFromNib];
-
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
@@ -58,7 +57,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
+    
     [super setDelegate: delegate];
+    
     
     // Addtional delegate
     [self.channelNameButton addTarget: self.delegate

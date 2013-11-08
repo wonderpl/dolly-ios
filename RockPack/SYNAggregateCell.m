@@ -58,9 +58,18 @@
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
+    if(_delegate)
+    {
+        [self.userThumbnailButton removeTarget: _delegate
+                                        action: @selector(profileButtonTapped:)
+                              forControlEvents: UIControlEventTouchUpInside];
+    }
+    
     _delegate = delegate;
     
-    // Both the avatar button and its label re-direct to the profile page
+    if(!_delegate)
+        return;
+    
     [self.userThumbnailButton addTarget: _delegate
                                  action: @selector(profileButtonTapped:)
                        forControlEvents: UIControlEventTouchUpInside];

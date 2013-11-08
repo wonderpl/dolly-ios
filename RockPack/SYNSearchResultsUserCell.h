@@ -11,12 +11,13 @@
 #import "SYNSocialActionsDelegate.h"
 #import "ChannelOwner.h"
 #import "SYNSocialButton.h"
+#import "SYNAvatarButton.h"
 
 @interface SYNSearchResultsUserCell : SYNSearchResultsCell
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 @property (nonatomic, strong) IBOutlet SYNSocialButton* followButton;
-@property (nonatomic, strong) IBOutlet UIImageView* userThumbnailImageView;
-@property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
+@property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
 
 @end

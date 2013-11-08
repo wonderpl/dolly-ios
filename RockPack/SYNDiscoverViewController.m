@@ -193,15 +193,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         // this should always be true since we are either creating it on the fly or it is in DB already
         if(popularSubGenre)
         {
-            //[self.searchResultsController searchForGenre:popularSubGenre.uniqueId];
+            [self.searchResultsController searchForGenre:popularSubGenre.uniqueId];
         }
         else
         {
             AssertOrLog(@"Popular SubGenre was not created at this stage...");
         }
     }
-    
-    
     
 }
 

@@ -8,23 +8,55 @@
 
 #import "SYNSearchResultsUserCell.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation SYNSearchResultsUserCell
 
 - (void) awakeFromNib
 {
-    self.userNameLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabel.font.pointSize];
+    self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabelButton.titleLabel.font.pointSize];
     
-    // == Round off the image == //
-    self.userThumbnailImageView.layer.cornerRadius = self.userThumbnailImageView.frame.size.height * 0.5f;
-    self.userThumbnailImageView.clipsToBounds = YES;
     
 }
 
 
 #pragma mark - Set Data
+
+-(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
+{
+    if(_delegate)
+    {
+        [self.userThumbnailButton removeTarget: self.delegate
+                                      action: @selector(profileButtonTapped:)
+                            forControlEvents: UIControlEventTouchUpInside];
+        
+        [self.userNameLabelButton removeTarget: self.delegate
+                                        action: @selector(profileButtonTapped:)
+                              forControlEvents: UIControlEventTouchUpInside];
+        
+        [self.followButton removeTarget: self.delegate
+                                        action: @selector(followControlPressed:)
+                              forControlEvents: UIControlEventTouchUpInside];
+    }
+    
+    _delegate = delegate;
+    
+    if(!_delegate)
+        return;
+    
+    [self.userThumbnailButton addTarget: self.delegate
+                                 action: @selector(profileButtonTapped:)
+                       forControlEvents: UIControlEventTouchUpInside];
+    
+    [self.userNameLabelButton addTarget: self.delegate
+                                 action: @selector(profileButtonTapped:)
+                       forControlEvents: UIControlEventTouchUpInside];
+    
+    [self.followButton addTarget: self.delegate
+                          action: @selector(followControlPressed:)
+                forControlEvents: UIControlEventTouchUpInside];
+}
 
 - (void) setChannelOwner: (ChannelOwner *) channelOwner
 {
@@ -32,21 +64,24 @@
     
     if (!_channelOwner)
     {
+        self.userThumbnailButton.imageView.image = [UIImage imageNamed: @"PlaceholderChannelSmall.png"];
+        self.userNameLabelButton.titleLabel.text = @"";
         return;
     }
     
     
-    [self.userThumbnailImageView setImageWithURL: [NSURL URLWithString: _channelOwner.thumbnailURL]
-                                placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                         options: SDWebImageRetryFailed];
+    self.followButton.dataItemLinked = _channelOwner;
     
-    self.userNameLabel.text = _channelOwner.displayName;
+    
+    [self.userThumbnailButton setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
+                                     forState: UIControlStateNormal
+                             placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                      options: SDWebImageRetryFailed];
+    
+    
+    self.userNameLabelButton.titleLabel.text = _channelOwner.displayName;
 }
 
 
-- (IBAction) followControlPressed: (id) sender
-{
-    [self.delegate followControlPressed: sender];
-}
 
 @end

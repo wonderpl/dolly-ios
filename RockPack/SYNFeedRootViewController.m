@@ -765,7 +765,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (IBAction) profileButtonTapped: (UIButton *) profileButton
+- (void) profileButtonTapped: (UIButton *) profileButton
 {
    FeedItem *feedItem = [self feedItemFromView: profileButton];
     

@@ -148,6 +148,32 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 }
 
+#pragma mark - Button Delegates
+
+- (void) profileButtonTapped: (UIButton *) profileButton
+{
+    if(!profileButton)
+    {
+        AssertOrLog(@"No profileButton passed");
+        return; // did not manage to get the cell
+    }
+    
+    id candidate = profileButton;
+    while (![candidate isKindOfClass:[SYNSearchResultsUserCell class]]) {
+        candidate = [candidate superview];
+    }
+    
+    if(![candidate isKindOfClass:[SYNSearchResultsUserCell class]])
+    {
+        AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
+        return; // did not manage to get the cell
+    }
+    SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
+    
+    [appDelegate.viewStackManager viewProfileDetails: searchUserCell.channelOwner
+                            withNavigationController: self.navigationController];
+}
+
 #pragma mark - Load Data
 
 - (void) searchForGenre: (NSString *) genreId
@@ -373,11 +399,11 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
             
-            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelected];
+            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
             self.videosTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             self.usersTabButton.backgroundColor = [UIColor whiteColor];
-            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelected];
+            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
             
             break;
             
@@ -390,9 +416,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
             self.usersTabButton.selected = YES;
             
             self.videosTabButton.backgroundColor = [UIColor whiteColor];
-            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelected];
+            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
             
-            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelected];
+            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
             self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             break;
