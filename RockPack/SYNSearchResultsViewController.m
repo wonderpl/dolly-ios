@@ -148,6 +148,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 }
 
+#pragma mark - Button Delegates
 
 - (void) profileButtonTapped: (UIButton *) profileButton
 {

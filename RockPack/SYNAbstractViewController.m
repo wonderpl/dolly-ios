@@ -953,6 +953,8 @@
         
         if(!channelOwner)
             return;
+        
+        // TODO: Follow all his channels
     }
 }
 
