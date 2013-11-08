@@ -17,7 +17,7 @@
     {
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height)];
         
-        self.titleLabel.font = [UIFont regularCustomFontOfSize:(IS_IPAD ? 33.0f : 23.0f)];
+        self.titleLabel.font = [UIFont regularCustomFontOfSize:(IS_IPAD ? 33.0f : 18.0f)];
         self.titleLabel.textColor = [UIColor blackColor];
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
         

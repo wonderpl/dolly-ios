@@ -45,6 +45,12 @@
     
 
     self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
+    
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+                                                                                 target:self
+                                                                                 action:@selector(rightBarButtonItemPressed:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -54,6 +60,12 @@
     [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
                                     atScrollPosition: UICollectionViewScrollPositionCenteredVertically
                                             animated: NO];
+}
+
+
+-(void)rightBarButtonItemPressed:(UIBarButtonItem*)rightButtonItem
+{
+    NSLog(@"Pressed...");
 }
 
 
@@ -96,8 +108,39 @@
 - (void) collectionView: (UICollectionView *) cv
          didSelectItemAtIndexPath: (NSIndexPath *)indexPath
 {
-    NSLog (@"Selected");
+    
 
+}
+
+#pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
+
+-( void ) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    // override
+}
+
+- (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    // override
+}
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // override
+}
+
+
+#pragma mark - Orientation
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    if(IS_IPAD)
+    {
+        [self positionBackgroundImageForInterfaceOrientation:toInterfaceOrientation];
+    }
+    
 }
 
 - (void) positionBackgroundImageForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -115,19 +158,6 @@
         
     }
     self.backgroundImageView.frame = correctBGImageFrame;
-    
-}
-
-#pragma mark - Orientation
-
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    if(IS_IPAD)
-    {
-        [self positionBackgroundImageForInterfaceOrientation:toInterfaceOrientation];
-    }
     
 }
 
