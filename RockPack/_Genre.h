@@ -1,10 +1,11 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to Genre.h instead.
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 #import "AbstractCommon.h"
 
 extern const struct GenreAttributes {
+	__unsafe_unretained NSString *color;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *priority;
 } GenreAttributes;
@@ -21,6 +22,7 @@ extern const struct GenreFetchedProperties {
 
 
 
+
 @interface GenreID : NSManagedObjectID {}
 @end
 
@@ -29,6 +31,20 @@ extern const struct GenreFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (GenreID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* color;
+
+
+
+@property int64_t colorValue;
+- (int64_t)colorValue;
+- (void)setColorValue:(int64_t)value_;
+
+//- (BOOL)validateColor:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -78,6 +94,15 @@ extern const struct GenreFetchedProperties {
 @end
 
 @interface _Genre (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveColor;
+- (void)setPrimitiveColor:(NSNumber*)value;
+
+- (int64_t)primitiveColorValue;
+- (void)setPrimitiveColorValue:(int64_t)value_;
+
+
 
 
 - (NSString*)primitiveName;

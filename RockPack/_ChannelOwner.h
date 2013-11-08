@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to ChannelOwner.h instead.
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 #import "AbstractCommon.h"
 
 extern const struct ChannelOwnerAttributes {

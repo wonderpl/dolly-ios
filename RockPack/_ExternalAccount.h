@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to ExternalAccount.h instead.
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 
 extern const struct ExternalAccountAttributes {

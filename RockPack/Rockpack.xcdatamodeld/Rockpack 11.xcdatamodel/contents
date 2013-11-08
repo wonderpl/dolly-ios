@@ -85,6 +85,7 @@
         <attribute name="resourceURL" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Genre" representedClassName="Genre" parentEntity="AbstractCommon" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="priority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="subgenres" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SubGenre" inverseName="genre" inverseEntity="SubGenre" syncable="YES"/>
@@ -140,7 +141,7 @@
         <element name="ExternalAccount" positionX="-299" positionY="378" width="128" height="180"/>
         <element name="FeedItem" positionX="232" positionY="-288" width="128" height="193"/>
         <element name="Friend" positionX="-470" positionY="-15" width="128" height="150"/>
-        <element name="Genre" positionX="-486" positionY="-162" width="128" height="90"/>
+        <element name="Genre" positionX="-486" positionY="-162" width="128" height="103"/>
         <element name="SubGenre" positionX="-684" positionY="-153" width="128" height="75"/>
         <element name="User" positionX="-308" positionY="93" width="128" height="240"/>
         <element name="Video" positionX="243" positionY="243" width="128" height="225"/>
