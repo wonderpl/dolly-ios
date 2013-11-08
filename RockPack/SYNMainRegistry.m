@@ -144,7 +144,7 @@
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
     [categoriesFetchRequest setEntity: [NSEntityDescription entityForName: kGenre
-                                                   inManagedObjectContext: appDelegate.mainManagedObjectContext]];
+                                                   inManagedObjectContext: importManagedObjectContext]];
     
     categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name != %@", kPopularGenreName];
     
@@ -153,8 +153,8 @@
     
     
     NSError* error;
-    NSArray *existingCategories = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                          error: &error];
+    NSArray *existingCategories = [importManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                            error: &error];
     
     NSMutableDictionary* existingCategoriesByIndex = [NSMutableDictionary dictionaryWithCapacity:existingCategories.count];
     
@@ -183,19 +183,17 @@
         if(!genre)
         {
             genre = [Genre instanceFromDictionary: categoryDictionary
-                        usingManagedObjectContext: appDelegate.mainManagedObjectContext];
+                        usingManagedObjectContext: importManagedObjectContext];
         }
         else
         {
-            [genre setAttributesFromDictionary:categoryDictionary withId:uniqueId usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+            [genre setAttributesFromDictionary:categoryDictionary withId:uniqueId usingManagedObjectContext:importManagedObjectContext];
         }
         
         genre.markedForDeletionValue = NO;
         
         genre.priority = [categoryDictionary objectForKey: @"priority"
                                               withDefault: @0];
-        
-        
         
     }
         
@@ -206,7 +204,10 @@
             [category.managedObjectContext deleteObject:category];
     }
     
+    BOOL saveResult = [self saveImportContext];
     
+    if (!saveResult)
+        return NO;
     
     [appDelegate saveContext: TRUE];
     
@@ -237,10 +238,10 @@
                            forUserUpload: userUpload]; 
     }
 
-//    BOOL saveResult = [self saveImportContext];
-//    
-//    if (!saveResult)
-//        return NO;
+    BOOL saveResult = [self saveImportContext];
+    
+    if (!saveResult)
+        return NO;
     
     [appDelegate saveContext:NO];
     
