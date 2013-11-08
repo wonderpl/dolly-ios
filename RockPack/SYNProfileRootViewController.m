@@ -414,7 +414,6 @@ SYNImagePickerControllerDelegate>{
 
 - (void) viewWillDisappear: (BOOL) animated
 {
-    self.navigationController.navigationBar.hidden = NO;
     [super viewWillDisappear: animated];
 }
 
@@ -835,20 +834,15 @@ SYNImagePickerControllerDelegate>{
         
         
         [channelThumbnailCell setTitle: channel.title];
-
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
-
-        
-        if (indexPath.row < self.arrDisplayFollowing.count) {
+        if (indexPath.row < self.arrDisplayFollowing.count)
+        {
             Channel *channel = _arrDisplayFollowing[indexPath.item];
 
-         //   NSLog(@"%@",  channel.title);
-
-            
             if (self.modeType == MyOwnProfile) {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
             }
@@ -878,6 +872,7 @@ SYNImagePickerControllerDelegate>{
         else
         {
             cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+            
         }
     }
     
@@ -1641,6 +1636,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
     [self.subscriptionThumbnailCollectionView reloadData];
+    [self.subscriptionThumbnailCollectionView reloadData];
+
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
