@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to SubGenre.h instead.
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 #import "Genre.h"
 
 extern const struct SubGenreAttributes {

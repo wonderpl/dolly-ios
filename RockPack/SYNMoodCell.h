@@ -10,6 +10,6 @@
 
 @interface SYNMoodCell : UICollectionViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *label;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @end

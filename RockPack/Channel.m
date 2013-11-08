@@ -113,7 +113,6 @@
                       ignoringObjectTypes: ignoringObjects];
     
     // Update video starred & viewed
-    [SYNActivityManager.sharedInstance updateSubscriptionsForChannel: instance];
 
     return instance;
 }
@@ -285,6 +284,9 @@
         self.channelCover = [ChannelCover instanceFromDictionary: channelCoverDictionary
                                        usingManagedObjectContext: self.managedObjectContext];
     }
+    
+    self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribed:self.uniqueId];
+    
 }
 
 
