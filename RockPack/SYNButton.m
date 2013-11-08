@@ -19,11 +19,6 @@
     self.titleLabel.numberOfLines = 0;
     self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
-    
-
-    
-//    [self setTitleColor: [self.titleLabel.textColor colorWithAlphaComponent: 0.8f]
-//               forState: UIControlStateHighlighted];
 }
 
 
@@ -33,9 +28,14 @@
     
     [self setTitle: title
           forState: UIControlStateNormal];
+}
+
+- (void) setAttributedTitle: (NSAttributedString *) attributedTitle
+{
+    _attributedTitle = attributedTitle;
     
-    [self setTitle: title
-          forState: UIControlStateHighlighted];
+    [self setAttributedTitle: attributedTitle
+          forState: UIControlStateNormal];
 }
 
 

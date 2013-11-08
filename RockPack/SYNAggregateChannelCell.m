@@ -19,8 +19,6 @@
 @property (nonatomic, strong) UIView *buttonContainerView;
 @property (nonatomic, strong) UIView *labelsContainerView;
 
-@property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
-
 @end
 
 static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
@@ -34,8 +32,6 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     [self.collectionView registerNib: [UINib nibWithNibName: kChannelItemCellIndetifier bundle: nil]
           forCellWithReuseIdentifier: kChannelItemCellIndetifier];
-    
-    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize:self.actionMessageLabel.font.pointSize];
     
     [self.collectionView reloadData];
 }
@@ -53,14 +49,6 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     CGSize viewSize = self.frame.size;
     CGFloat middleOfView = roundf(viewSize.width * 0.5f); // to avoid pixelation
     
-    
-    
-    
-    // user thumbnail
-//    self.userThumbnailImageView.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
-//    self.userThumbnailButton.center = CGPointMake(middleOfView, self.userThumbnailImageView.center.y);
-    
-    self.actionMessageLabel.center = CGPointMake(middleOfView, self.actionMessageLabel.center.y);
     self.collectionView.center = CGPointMake(middleOfView, self.collectionView.center.y);
 }
 
@@ -79,28 +67,31 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     NSString *nameString = firstChannel.channelOwner.displayName; // ex 'Dolly Proxima'
     NSString *actionString = [NSString stringWithFormat:@"created %@ collection%@", _collectionData.count > 1 ? [NSString stringWithFormat:@"%i", _collectionData.count] : @"a new", _collectionData.count > 1 ? @"s" : @""];
     
+    NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
+    NSDictionary *strong = IS_IPHONE ? self.strongCenteredTextAttributes : self.strongTextAttributes;
+    NSDictionary *light = IS_IPHONE ? self.lightCenteredTextAttributes : self.lightTextAttributes;
+    
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
+                                                                                      attributes: strong]];
     if(IS_IPAD)
     {
-        NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
-        
-        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
-                                                                                          attributes: self.strongTextAttributes]];
-        
         [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @" "
-                                                                                          attributes: self.strongTextAttributes]];
-        
-        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
-                                                                                          attributes: self.lightTextAttributes]];
-        
-        self.actionMessageLabel.attributedText = attributedCompleteString;
+                                                                                          attributes: strong]];
     }
     else
     {
-        self.userNameLabel.text = nameString;
-        self.actionMessageLabel.text =  actionString;
+        [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @"\n"
+                                                                                          attributes: strong]];
+        
+        
     }
     
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
+                                                                                      attributes: light]];
     
+    self.actionButton.attributedTitle = attributedCompleteString;
+    
+        self.actionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 }
 
 

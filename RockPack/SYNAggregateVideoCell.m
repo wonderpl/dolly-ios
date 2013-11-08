@@ -21,16 +21,15 @@
 #import "Video.h"
 #import "VideoInstance.h"
 
+static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
+
 
 @interface SYNAggregateVideoCell () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) IBOutlet SYNButton* channelNameButton;
-
 @property (nonatomic, weak) Channel* channel;
 
 @end
-
-static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 
 @implementation SYNAggregateVideoCell
@@ -38,10 +37,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 - (void) awakeFromNib
 {
     [super awakeFromNib];
-    
-//    self.userThumbnailButton.layer.cornerRadius = self.userThumbnailButton.frame.size.height * 0.5f;
-//    self.userThumbnailButton.clipsToBounds = YES;
-    
+
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
@@ -54,8 +50,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
     
     // set fonts
-    
-    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize: self.actionMessageLabel.font.pointSize];
+    self.channelNameButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.channelNameButton.titleLabel.font.pointSize];
     
     [self.collectionView reloadData];
 }
@@ -106,7 +101,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
                                                                                       attributes: self.lightTextAttributes]];
     
-    self.actionMessageLabel.attributedText = attributedCompleteString;
+    self.actionButton.titleLabel.attributedText = attributedCompleteString;
     
     self.channelNameButton.title = self.channel.title;
 }

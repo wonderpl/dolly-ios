@@ -25,10 +25,12 @@
 @property (nonatomic, readonly) ChannelOwner* channelOwner;
 @property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
-@property (nonatomic, strong) IBOutlet UILabel *actionMessageLabel;
+@property (nonatomic, strong) IBOutlet SYNButton *actionButton;
 @property (nonatomic, strong) NSArray* collectionData;
 @property (nonatomic, strong) NSDictionary *lightTextAttributes;
 @property (nonatomic, strong) NSDictionary *strongTextAttributes;
+@property (nonatomic, strong) NSDictionary *lightCenteredTextAttributes;
+@property (nonatomic, strong) NSDictionary *strongCenteredTextAttributes;
 @property (nonatomic, strong) NSMutableArray *stringButtonsArray;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
