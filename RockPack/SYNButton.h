@@ -11,6 +11,7 @@
 @interface SYNButton : UIButton
 
 @property (nonatomic, strong) NSString* title;
+@property (nonatomic, strong) NSAttributedString* attributedTitle;
 @property (nonatomic, weak) id dataItemLinked;
 
 - (void) setTitle: (NSString *) title

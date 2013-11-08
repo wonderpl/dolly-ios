@@ -4,6 +4,7 @@
 #import "_Genre.h"
 
 const struct GenreAttributes GenreAttributes = {
+	.color = @"color",
 	.name = @"name",
 	.priority = @"priority",
 };
@@ -41,6 +42,11 @@ const struct GenreFetchedProperties GenreFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"colorValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"color"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"priorityValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"priority"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -49,6 +55,32 @@ const struct GenreFetchedProperties GenreFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic color;
+
+
+
+- (int64_t)colorValue {
+	NSNumber *result = [self color];
+	return [result longLongValue];
+}
+
+- (void)setColorValue:(int64_t)value_ {
+	[self setColor:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveColorValue {
+	NSNumber *result = [self primitiveColor];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveColorValue:(int64_t)value_ {
+	[self setPrimitiveColor:[NSNumber numberWithLongLong:value_]];
+}
+
 
 
 

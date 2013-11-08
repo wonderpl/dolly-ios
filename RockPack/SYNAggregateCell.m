@@ -20,14 +20,24 @@
 
 - (void) awakeFromNib
 {
-    self.actionMessageLabel.font = [UIFont lightCustomFontOfSize: self.actionMessageLabel.font.pointSize];
-    
+    // Customise fonts
+    self.actionButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.actionButton.titleLabel.font.pointSize];
+
     self.stringButtonsArray = [[NSMutableArray alloc] initWithCapacity: STANDARD_BUTTON_CAPACITY];
     
-    
     // == Attributes == //
+    
+    NSMutableParagraphStyle *paragrapStyle = [[NSMutableParagraphStyle alloc] init];
+    paragrapStyle.alignment = NSTextAlignmentCenter;
+                                 
     self.strongTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextMediumGray]};
     self.lightTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLightGray]};
+    
+    self.strongCenteredTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextMediumGray],
+                                          NSParagraphStyleAttributeName: paragrapStyle};
+    
+    self.lightCenteredTextAttributes = @{NSForegroundColorAttributeName: [UIColor dollyTextLightGray],
+                                         NSParagraphStyleAttributeName: paragrapStyle};
     
     self.collectionData = @[]; // set to 0
 }
@@ -50,9 +60,14 @@
 {
     _delegate = delegate;
     
+    // Both the avatar button and its label re-direct to the profile page
     [self.userThumbnailButton addTarget: _delegate
                                  action: @selector(profileButtonTapped:)
                        forControlEvents: UIControlEventTouchUpInside];
+    
+    [self.actionButton addTarget: self.delegate
+                          action: @selector(profileButtonTapped:)
+                forControlEvents: UIControlEventTouchUpInside];
 }
 
 

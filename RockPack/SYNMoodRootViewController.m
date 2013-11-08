@@ -45,6 +45,12 @@
     
 
     self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
+    
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+                                                                                 target:self
+                                                                                 action:@selector(rightBarButtonItemPressed:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -54,6 +60,12 @@
     [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
                                     atScrollPosition: UICollectionViewScrollPositionCenteredVertically
                                             animated: NO];
+}
+
+
+-(void)rightBarButtonItemPressed:(UIBarButtonItem*)rightButtonItem
+{
+    NSLog(@"Pressed...");
 }
 
 
@@ -96,27 +108,27 @@
 - (void) collectionView: (UICollectionView *) cv
          didSelectItemAtIndexPath: (NSIndexPath *)indexPath
 {
-    NSLog (@"Selected");
+    
 
 }
 
-- (void) positionBackgroundImageForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+#pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
+
+-( void ) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    
-    CGRect correctBGImageFrame = self.backgroundImageView.frame;
-    if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
-    {
-        correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
-    }
-    else // Landscape
-    {
-        correctBGImageFrame.origin.y = 64.0f;
-        
-        
-    }
-    self.backgroundImageView.frame = correctBGImageFrame;
-    
+    // override
 }
+
+- (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    // override
+}
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // override
+}
+
 
 #pragma mark - Orientation
 
@@ -126,8 +138,39 @@
     
     if(IS_IPAD)
     {
-        [self positionBackgroundImageForInterfaceOrientation:toInterfaceOrientation];
+        [self positionElementsForInterfaceOrientation:toInterfaceOrientation];
     }
+    
+}
+
+- (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    
+    CGRect correctBGImageFrame = self.backgroundImageView.frame;
+    
+    if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
+    {
+        correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
+        
+    }
+    else // Landscape
+    {
+        correctBGImageFrame.origin.y = 64.0f;
+        
+        
+    }
+    
+    // == Set the Background Image == //
+    self.backgroundImageView.frame = correctBGImageFrame;
+    CGRect moodFrame = self.moodCollectionView.frame;
+    moodFrame.origin.y = correctBGImageFrame.origin.y;
+    self.moodCollectionView.frame = moodFrame;
+    
+    
+    // == Set the Label == //
+    CGRect labelFrame = self.iWantToLabel.frame;
+    labelFrame.origin.y = (self.backgroundImageView.frame.size.height * 0.5f) - (labelFrame.size.height * 0.5f) + correctBGImageFrame.origin.y;
+    self.iWantToLabel.frame = labelFrame;
     
 }
 
