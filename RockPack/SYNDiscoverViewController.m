@@ -73,11 +73,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.colorMapForCells = @{};
     self.searchBar.layer.borderWidth = 1.0f;
     self.searchBar.layer.borderColor = [[UIColor whiteColor] CGColor];
-    if(IS_IPHONE)
-    {
-        
-        
-    }
     
     
     
@@ -505,7 +500,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         UIView* view_hack = self.searchResultsController.view;
         #pragma unused(view_hack)
         
-        self.searchResultsController.title = title;
+        self.searchResultsController.navigationItem.title = title;
         
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
