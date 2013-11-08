@@ -505,6 +505,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
         
+        // hide the 'DISCOVER' text next to the back button as it appears by default
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                                 style:UIBarButtonItemStyleBordered
+                                                                                target:nil
+                                                                                action:nil];
+        
+        
+        
         
         
         
@@ -515,6 +523,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.navigationController.navigationBar.topItem.title = title;
         
     }
+    
+    
     
     if(type == kSearchTypeGenre)
         [self.searchResultsController searchForGenre:searchTerm];

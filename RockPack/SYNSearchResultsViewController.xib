@@ -6,11 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchResultsViewController">
             <connections>
-                <outlet property="containerTabs" destination="NhX-A4-SLJ" id="Bw3-LY-KfJ"/>
+                <outlet property="containerTabs" destination="Dp0-fc-7PR" id="wxR-p8-3IS"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="QkW-ty-jhC"/>
-                <outlet property="usersTabButton" destination="XFa-4q-Brg" id="Uxk-o2-yqr"/>
+                <outlet property="usersTabButton" destination="g4C-7h-KhZ" id="eni-sr-umt"/>
                 <outlet property="videosCollectionView" destination="SgG-lq-X96" id="vcl-iZ-YZh"/>
-                <outlet property="videosTabButton" destination="yoQ-RH-8rc" id="7LY-7G-f2D"/>
+                <outlet property="videosTabButton" destination="r10-qI-ad1" id="gld-dn-e91"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -19,49 +19,41 @@
             <rect key="frame" x="0.0" y="0.0" width="654" height="694"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhX-A4-SLJ" userLabel="Container Tabs">
-                    <rect key="frame" x="203" y="12" width="247" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dp0-fc-7PR" userLabel="View - Segmented Controller">
+                    <rect key="frame" x="204" y="13" width="246" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoQ-RH-8rc" userLabel="Tab - Videos">
-                            <rect key="frame" x="0.0" y="0.0" width="124" height="25"/>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r10-qI-ad1">
+                            <rect key="frame" x="0.0" y="0.0" width="123" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Videos">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="Collections">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
                             <connections>
-                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="Te8-JC-B2V"/>
+                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="639-QG-HGE"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFa-4q-Brg" userLabel="Tab - People">
-                            <rect key="frame" x="123" y="0.0" width="124" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="People">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4C-7h-KhZ">
+                            <rect key="frame" x="123" y="0.0" width="123" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Following">
+                                <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
                             <connections>
-                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="WXu-cn-8EN"/>
+                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="ikI-zu-EJg"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="247" id="b53-U5-4zJ"/>
-                        <constraint firstAttribute="height" constant="25" id="gb9-cx-4iW"/>
+                        <constraint firstAttribute="width" constant="246" id="Wsr-8q-WEi"/>
+                        <constraint firstAttribute="height" constant="25" id="rpn-1R-3bG"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-Ly-eu6" userLabel="Users Collection View">
@@ -100,16 +92,16 @@
             <color key="backgroundColor" red="0.81806216032608692" green="0.20208992986806013" blue="0.17567284063641372" alpha="0.0" colorSpace="calibratedRGB"/>
             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="NhX-A4-SLJ" secondAttribute="centerX" id="15i-fl-pGT"/>
-                <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" id="3cw-ZD-nUg"/>
-                <constraint firstItem="NhX-A4-SLJ" firstAttribute="top" secondItem="2" secondAttribute="top" constant="12" id="5Nw-HF-Zrz"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="centerX" secondItem="SgG-lq-X96" secondAttribute="centerX" id="GvS-O4-k19"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="OKM-6T-NW8"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="top" secondItem="NhX-A4-SLJ" secondAttribute="bottom" constant="12" id="eRq-aL-HJo"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="width" secondItem="SgG-lq-X96" secondAttribute="width" id="lNO-uD-uQg"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="height" secondItem="SgG-lq-X96" secondAttribute="height" id="qAX-8L-zzy"/>
-                <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="20" id="tY2-FH-8xw"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="centerY" secondItem="SgG-lq-X96" secondAttribute="centerY" id="tie-xB-4gF"/>
+                <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="20" id="B80-xC-Aez"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="top" secondItem="2" secondAttribute="top" constant="49" id="DL8-Tk-PpC"/>
+                <constraint firstItem="Dp0-fc-7PR" firstAttribute="top" secondItem="2" secondAttribute="top" constant="13" id="Dm5-HH-BTz"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="WN0-mx-oSo"/>
+                <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" id="YO5-Mv-K7A"/>
+                <constraint firstItem="SgG-lq-X96" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="a4g-1T-O5O"/>
+                <constraint firstItem="SgG-lq-X96" firstAttribute="top" secondItem="2" secondAttribute="top" constant="49" id="bY1-yc-Qjo"/>
+                <constraint firstAttribute="trailing" secondItem="SgG-lq-X96" secondAttribute="trailing" constant="20" id="eyO-uD-brE"/>
+                <constraint firstAttribute="bottom" secondItem="SgG-lq-X96" secondAttribute="bottom" id="eyR-2F-l6w"/>
+                <constraint firstAttribute="centerX" secondItem="Dp0-fc-7PR" secondAttribute="centerX" id="xq0-Qf-koO"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
