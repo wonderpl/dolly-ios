@@ -57,6 +57,7 @@ SYNImagePickerControllerDelegate>{
 @property (nonatomic, assign) BOOL collectionsTabActive;
 @property (nonatomic, assign, getter = isDeletionModeActive) BOOL deletionModeActive;
 
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) NSArray *sortDescriptors;
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
 @property (nonatomic, strong) NSArray* arrFollowing;
@@ -123,7 +124,6 @@ SYNImagePickerControllerDelegate>{
 {
     if (self = [super initWithNibName:NSStringFromClass([SYNProfileRootViewController class]) bundle:nil])
     {
-        modeType = MyOwnProfile;
         viewId = vid;
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
@@ -141,7 +141,9 @@ SYNImagePickerControllerDelegate>{
 
 - (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
 {
-    modeType = mode;
+    
+    self.modeType = mode;
+    
     self = [self initWithViewId:vid];
 
     return self;
@@ -257,7 +259,7 @@ SYNImagePickerControllerDelegate>{
     
     //  self.channelThumbnailCollectionView.contentSize = CGSizeMake(self.channelThumbnailCollectionView.contentSize.width, self.channelThumbnailCollectionView.contentSize.height);
     
-    //  NSLog(@"View Did Load %f",self.mainScrollView.contentSize.height);
+    //  NSLog(@"View Did Load %f",selfs.mainScrollView.contentSize.height);
     /*
      CGRect tmpRect = self.channelThumbnailCollectionView.bounds;
      tmpRect.size.height += ADDEDBOUNDS;
@@ -273,10 +275,7 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    self.modeType = MyOwnProfile;
     [self setProfleType:self.modeType];
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -547,11 +546,14 @@ SYNImagePickerControllerDelegate>{
     {
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
+        self.backButton.hidden = YES;
     }
     if (profileType == OtherUsersProfile)
     {
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
+        self.backButton.hidden = NO;
+
     }
 }
 
@@ -717,7 +719,7 @@ SYNImagePickerControllerDelegate>{
     [channelsLayout invalidateLayout];
     
     [self reloadCollectionViews];
-    [self resizeScrollViews];
+   // [self resizeScrollViews];
 }
 
 
@@ -1114,7 +1116,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.moreButton.transform = move;
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
-            
+            self.backButton.transform = move;
+
             if (offset<0)
             {
                 //change to make like what they wanted
@@ -1135,7 +1138,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             self.coverImage.transform = move;
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
-            
+            self.backButton.transform = move;
+
             [self moveNameLabelWithOffset:offset];
         
             /*
@@ -1753,10 +1757,20 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
     else if(modeType == OtherUsersProfile)
     {
+        
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.followCell.channel}];
-   // ((SYNChannelMidCell*)cell) followButton
+        
+        //Need to refresh the cell
+        if (self.followCell.channel.subscribedByUserValue)
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+        }
+        else
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+        }
     }
 }
 
@@ -1779,6 +1793,12 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
                                                               userInfo: @{kChannel : self.followCell.channel}];
         }
     }
+}
+- (IBAction)backButtonTapped:(id)sender {
+    NSLog(@"BACK");
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 
