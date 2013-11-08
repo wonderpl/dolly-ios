@@ -13,29 +13,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" text="BASEMENT JAXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiS-ro-bWV" userLabel="User Name">
-                        <rect key="frame" x="20" y="69" width="280" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="280" id="MBx-PE-Q50"/>
-                            <constraint firstAttribute="height" constant="17" id="w2b-eL-8jJ"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                    </label>
-                    <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUb-uC-SN1">
-                        <rect key="frame" x="136" y="10" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="48" id="0uV-pc-PQe"/>
-                            <constraint firstAttribute="height" constant="48" id="VIH-ZM-VDI"/>
-                        </constraints>
-                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-18-LaS" userLabel="follow" customClass="SYNSocialButton">
                         <rect key="frame" x="126" y="89" width="68" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -45,23 +22,40 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uc-g1-adN" userLabel="Button - Collection Name" customClass="SYNButton">
+                        <rect key="frame" x="0.0" y="58" width="320" height="36"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <state key="normal" title="User Name">
+                            <color key="titleColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted">
+                            <color key="titleColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfT-gd-Eth" userLabel="User Thumbnail Button" customClass="SYNAvatarButton">
+                        <rect key="frame" x="136" y="12" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal">
+                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="centerX" secondItem="jUb-uC-SN1" secondAttribute="centerX" id="74b-oh-6xx"/>
-                <constraint firstItem="GiS-ro-bWV" firstAttribute="top" secondItem="jUb-uC-SN1" secondAttribute="bottom" constant="11" id="AoQ-aR-d8P"/>
-                <constraint firstAttribute="centerX" secondItem="jUb-uC-SN1" secondAttribute="centerX" id="PGB-ac-Tk1"/>
-                <constraint firstItem="jUb-uC-SN1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gc6-j7-DT5" secondAttribute="top" constant="10" id="aDy-WY-x6t"/>
-                <constraint firstItem="jUb-uC-SN1" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" constant="10" id="fKk-gU-1cu"/>
-                <constraint firstAttribute="centerX" secondItem="GiS-ro-bWV" secondAttribute="centerX" id="qKV-KL-oVY"/>
-            </constraints>
             <size key="customSize" width="353" height="216"/>
             <connections>
                 <outlet property="followButton" destination="MN1-18-LaS" id="Bhy-77-2TY"/>
-                <outlet property="userNameLabel" destination="GiS-ro-bWV" id="M6a-h5-rJ8"/>
-                <outlet property="userThumbnailImageView" destination="jUb-uC-SN1" id="JvZ-8U-TKC"/>
+                <outlet property="userNameLabelButton" destination="7Uc-g1-adN" id="wUh-0x-vD4"/>
+                <outlet property="userThumbnailButton" destination="ZfT-gd-Eth" id="fqj-Gw-5p3"/>
             </connections>
         </collectionViewCell>
     </objects>

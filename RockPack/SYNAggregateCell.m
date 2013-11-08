@@ -48,7 +48,17 @@
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
+    if(_delegate)
+    {
+        [self.userThumbnailButton removeTarget: _delegate
+                                        action: @selector(profileButtonTapped:)
+                              forControlEvents: UIControlEventTouchUpInside];
+    }
+    
     _delegate = delegate;
+    
+    if(!_delegate)
+        return;
     
     [self.userThumbnailButton addTarget: _delegate
                                  action: @selector(profileButtonTapped:)

@@ -39,9 +39,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 {
     [super awakeFromNib];
     
-//    self.userThumbnailButton.layer.cornerRadius = self.userThumbnailButton.frame.size.height * 0.5f;
-//    self.userThumbnailButton.clipsToBounds = YES;
-    
     [self.collectionView registerNib: [UINib nibWithNibName: kVideoItemCellIndentifier bundle: nil]
           forCellWithReuseIdentifier: kVideoItemCellIndentifier];
     
@@ -63,7 +60,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 - (void) setDelegate: (id<SYNSocialActionsDelegate>) delegate
 {
+    
     [super setDelegate: delegate];
+    
     
     // Addtional delegate
     [self.channelNameButton addTarget: self.delegate
