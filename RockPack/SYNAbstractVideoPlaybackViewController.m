@@ -57,6 +57,26 @@
 }
 
 
+- (void) viewWillAppear: (BOOL) animated
+{
+    [super viewWillAppear: animated];
+    
+    // Handle re-starting animations when returning from background
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(applicationDidBecomeActive:)
+                                                 name: UIApplicationDidBecomeActiveNotification
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(applicationWillResignActive:)
+                                                 name: UIApplicationWillResignActiveNotification
+                                               object: nil];
+    
+    // Check to see if were playing when we left this page
+    [self playIfVideoActive];
+}
+
+
 - (void) viewDidDisappear: (BOOL) animated
 {
     // Stop observing everything (less error-prone than trying to remove observers individually

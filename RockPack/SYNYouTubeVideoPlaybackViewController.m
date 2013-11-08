@@ -23,18 +23,13 @@
 @property (nonatomic, assign) BOOL autoPlay;
 @property (nonatomic, assign) BOOL hasReloadedWebView;
 @property (nonatomic, assign) BOOL notYetPlaying;
-@property (nonatomic, assign) BOOL recordedVideoView;
 @property (nonatomic, strong) NSString *sourceIdToReload;
-@property (nonatomic, strong) NSTimer *recordVideoViewTimer;
 @property (nonatomic, strong) UIWebView *currentVideoWebView;
-
 
 @end
 
 
 @implementation SYNYouTubeVideoPlaybackViewController
-
-@synthesize currentVideoInstance;
 
 #pragma mark - Initialization
 
@@ -81,26 +76,6 @@ static UIWebView* youTubeVideoWebViewInstance;
     self.currentVideoWebView = youTubeVideoWebViewInstance;
     
     self.currentVideoView = self.currentVideoWebView;
-}
-
-
-- (void) viewWillAppear: (BOOL) animated
-{
-    [super viewWillAppear: animated];
-    
-    // Handle re-starting animations when returning from background
-     [[NSNotificationCenter defaultCenter] addObserver: self
-                                              selector: @selector(applicationDidBecomeActive:)
-                                                  name: UIApplicationDidBecomeActiveNotification
-                                                object: nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(applicationWillResignActive:)
-                                                 name: UIApplicationWillResignActiveNotification
-                                               object: nil];
-    
-    // Check to see if were playing when we left this page
-    [self playIfVideoActive];
 }
 
 
@@ -167,12 +142,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 
 #pragma mark - Timer accessors
 
-- (void) setRecordVideoViewTimer: (NSTimer *) timer
-{
-    [_recordVideoViewTimer invalidate];
-    
-}
-
 - (void) setPlaylist: (NSArray *) playlistArray
        selectedIndex: (int) selectedIndex
             autoPlay: (BOOL) autoPlay;
@@ -192,9 +161,7 @@ static UIWebView* youTubeVideoWebViewInstance;
 
 - (void) playVideoWithSourceId: (NSString *) sourceId
 {
-//    DebugLog(@"*** Playing: Load video command sent");
     self.notYetPlaying = TRUE;
-    self.recordedVideoView = FALSE;
     self.pausedByUser = NO;
     
     SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
