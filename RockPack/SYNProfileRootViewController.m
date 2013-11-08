@@ -856,6 +856,7 @@ SYNImagePickerControllerDelegate>{
             
             [channelThumbnailCell setChannel:channel];
             [channelThumbnailCell setTitle: channel.title];
+            [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
 
             [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
             [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
@@ -1553,7 +1554,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void) followButtonTapped:(UICollectionViewCell *) cell
 {
-    NSLog(@"ssssss");
     [self showAlertView: cell];
 
 }
@@ -1795,8 +1795,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
 }
 - (IBAction)backButtonTapped:(id)sender {
-    NSLog(@"BACK");
-    
     [self.navigationController popViewControllerAnimated:YES];
     
 }

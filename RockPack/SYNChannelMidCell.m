@@ -327,8 +327,6 @@
 -(void) showAlertView{
     NSString *message = @"Are you sure you want to unfollow";
     
-    NSLog(@"%@", self.channel.title);
-    
     message =  [message stringByAppendingString:@" "];
 
    message =  [message stringByAppendingString:self.channel.title];
