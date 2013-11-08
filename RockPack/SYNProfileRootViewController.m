@@ -560,7 +560,9 @@ SYNImagePickerControllerDelegate>{
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
         self.backButton.hidden = NO;
-
+//        self.followingSearchBar.hidden = YES;
+//        self.subscriptionLayoutIPhone.headerReferenceSize = CGSizeMake(self.subscriptionLayoutIPhone.headerReferenceSize.height-44, self.subscriptionLayoutIPhone.headerReferenceSize.width);
+//
     }
 }
 
@@ -830,7 +832,6 @@ SYNImagePickerControllerDelegate>{
         else
         {
             [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
-
         }
         
         [channelThumbnailCell setTitle: channel.title];
@@ -869,7 +870,6 @@ SYNImagePickerControllerDelegate>{
         else
         {
              cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
-            
         }
     }
     
