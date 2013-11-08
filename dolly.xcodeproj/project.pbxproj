@@ -3393,7 +3393,6 @@
 		012632CC162DF7B30009FF9C /* Collection Assets */ = {
 			isa = PBXGroup;
 			children = (
-				019CB69F18117CB60079DFCF /* Mood Cells */,
 				BE7D036A17A69A99008053DC /* Aggregate Cells */,
 				01B7CD9E166E163D001F4AF0 /* Channel cells */,
 				0199F12D166F95C000E479C6 /* Collections */,
@@ -4084,14 +4083,14 @@
 			name = Feed;
 			sourceTree = "<group>";
 		};
-		019CB69F18117CB60079DFCF /* Mood Cells */ = {
+		019CB69F18117CB60079DFCF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				019CB6A018117D300079DFCF /* SYNMoodCell.h */,
 				019CB6A118117D300079DFCF /* SYNMoodCell.m */,
 				019CB6A318117D450079DFCF /* SYNMoodCell.xib */,
 			);
-			name = "Mood Cells";
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		019E6A5E165FD958002B312A /* OAuth2 */ = {
@@ -5387,6 +5386,7 @@
 		BE1B3DCC180E8FDC00DA2BD6 /* Mood */ = {
 			isa = PBXGroup;
 			children = (
+				019CB69F18117CB60079DFCF /* Cells */,
 				BE1B3DCD180E8FFE00DA2BD6 /* SYNMoodRootViewController.h */,
 				BE1B3DCE180E8FFE00DA2BD6 /* SYNMoodRootViewController.m */,
 				BE1B3DCF180E8FFE00DA2BD6 /* SYNMoodRootViewController~iphone.xib */,

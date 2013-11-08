@@ -11,11 +11,15 @@
 #import "UIFont+SYNFont.h"
 #import "SYNFadingFlowLayout.h"
 
+#define LARGE_AMOUNT_OF_ROWS 10000
+
 @interface SYNMoodRootViewController ()
 
 @property (nonatomic, strong) NSArray *optionNames;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
-@property (nonatomic, weak) IBOutlet UILabel *mainLabel;
+@property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
+
+@property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 
 @end
 
@@ -35,10 +39,17 @@
     [self.moodCollectionView registerNib: [UINib nibWithNibName: @"SYNMoodCell" bundle: nil]
               forCellWithReuseIdentifier: @"SYNMoodCell"];
     
-    SYNFadingFlowLayout *fadingFlowLayout = [[SYNFadingFlowLayout alloc] init];
-    self.moodCollectionView.collectionViewLayout = fadingFlowLayout;
 
-    self.mainLabel.font = [UIFont regularCustomFontOfSize: self.mainLabel.font.pointSize];
+    self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+                                            animated:NO];
 }
 
 
@@ -48,7 +59,7 @@
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
-    return 10000;
+    return LARGE_AMOUNT_OF_ROWS;
 }
 
 
@@ -67,6 +78,7 @@
     NSString* currentOptionName = self.optionNames [indexPath.item % self.optionNames.count];
     moodCell.label.text = currentOptionName;
     
+    
     return moodCell;
 }
 
@@ -76,6 +88,35 @@
 {
     NSLog (@"Selected");
 
+}
+
+- (void) positionBackgroundImageForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    CGRect correctBGImageFrame = self.backgroundImageView.frame;
+    if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
+    {
+        correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
+    }
+    else // Landscape
+    {
+        correctBGImageFrame.origin.y = 64.0f;
+        
+        
+    }
+    self.backgroundImageView.frame = correctBGImageFrame;
+    
+}
+
+#pragma mark - Orientation
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    if(IS_IPAD)
+    {
+        [self positionBackgroundImageForInterfaceOrientation:toInterfaceOrientation];
+    }
+    
 }
 
 

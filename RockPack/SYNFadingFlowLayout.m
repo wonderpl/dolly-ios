@@ -8,7 +8,7 @@
 
 #import "SYNFadingFlowLayout.h"
 
-#define ITEM_SIZE		50.0
+#define ITEM_SIZE		78.0
 #define ACTIVE_DISTANCE 25.0
 #define FADE_DISTANCE 200.0f
 
@@ -25,7 +25,7 @@
     [super prepareLayout];
     
     // TODO: Find a way not to hardcode these
-    self.itemSize = CGSizeMake (320, 50);
+    self.itemSize = CGSizeMake (320, ITEM_SIZE);
     
     self.minimumInteritemSpacing = 0;
     self.minimumLineSpacing = 0;
