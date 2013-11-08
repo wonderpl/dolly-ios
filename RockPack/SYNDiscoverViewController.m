@@ -201,8 +201,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         }
     }
     
-    
-    
 }
 
 - (void) viewWillAppear:(BOOL)animated
