@@ -11,3 +11,4 @@
 @interface SYNFadingFlowLayout : UICollectionViewFlowLayout
 
 @end
+
