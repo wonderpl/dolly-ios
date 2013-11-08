@@ -352,7 +352,6 @@ SYNImagePickerControllerDelegate>{
          */
     }
     
-    self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
@@ -366,6 +365,8 @@ SYNImagePickerControllerDelegate>{
 
 - (void) viewDidAppear: (BOOL) animated
 {
+    self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
+    [self.subscriptionThumbnailCollectionView reloadData];
     [super viewDidAppear: animated];
     
     if (self.channelOwner == appDelegate.currentUser)
@@ -415,6 +416,7 @@ SYNImagePickerControllerDelegate>{
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
+    
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -1636,7 +1638,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
     [self.subscriptionThumbnailCollectionView reloadData];
-    [self.subscriptionThumbnailCollectionView reloadData];
+    [self.channelThumbnailCollectionView reloadData];
 
 }
 
@@ -1810,6 +1812,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
 }
 - (IBAction)backButtonTapped:(id)sender {
+    self.navigationController.navigationBarHidden = NO;
+
     [self.navigationController popViewControllerAnimated:YES];
     
 }
