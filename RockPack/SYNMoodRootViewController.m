@@ -138,18 +138,20 @@
     
     if(IS_IPAD)
     {
-        [self positionBackgroundImageForInterfaceOrientation:toInterfaceOrientation];
+        [self positionElementsForInterfaceOrientation:toInterfaceOrientation];
     }
     
 }
 
-- (void) positionBackgroundImageForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     
     CGRect correctBGImageFrame = self.backgroundImageView.frame;
+    
     if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
     {
         correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
+        
     }
     else // Landscape
     {
@@ -157,7 +159,18 @@
         
         
     }
+    
+    // == Set the Background Image == //
     self.backgroundImageView.frame = correctBGImageFrame;
+    CGRect moodFrame = self.moodCollectionView.frame;
+    moodFrame.origin.y = correctBGImageFrame.origin.y;
+    self.moodCollectionView.frame = moodFrame;
+    
+    
+    // == Set the Label == //
+    CGRect labelFrame = self.iWantToLabel.frame;
+    labelFrame.origin.y = (self.backgroundImageView.frame.size.height * 0.5f) - (labelFrame.size.height * 0.5f) + correctBGImageFrame.origin.y;
+    self.iWantToLabel.frame = labelFrame;
     
 }
 
