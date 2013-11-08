@@ -807,7 +807,6 @@ SYNImagePickerControllerDelegate>{
         Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         
         [channelThumbnailCell setChannel:channel];
-        [channelThumbnailCell setTitle: channel.title];
         if (self.modeType == MyOwnProfile) {
             [channelThumbnailCell setHiddenForFollowButton:YES];
         }
@@ -835,7 +834,8 @@ SYNImagePickerControllerDelegate>{
         }
         
         
-        
+        [channelThumbnailCell setTitle: channel.title];
+
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }
@@ -845,6 +845,8 @@ SYNImagePickerControllerDelegate>{
         
         if (indexPath.row < self.arrDisplayFollowing.count) {
             Channel *channel = _arrDisplayFollowing[indexPath.item];
+
+         //   NSLog(@"%@",  channel.title);
 
             
             if (self.modeType == MyOwnProfile) {
@@ -1552,8 +1554,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {
         NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-        
-        
         Channel *channel = self.arrDisplayFollowing[indexPath.item];
         
         [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
@@ -1766,6 +1766,16 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     else if(modeType == OtherUsersProfile)
     {
         
+        //Need to refresh the cell
+        if (self.followCell.channel.subscribedByUserValue)
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+        }
+        else
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+        }
+
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.followCell.channel}];
