@@ -409,6 +409,9 @@
 		0E26BB4D182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26BB4A182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib */; };
 		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
 		0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */; };
+		0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */; };
+		0EE380AC182D4DFC001297C7 /* SYNChannelCreateNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */; };
+		0EE380AD182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE380AA182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib */; };
 		0EF07867181EAE8300667417 /* ButtonMore.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07865181EAE8300667417 /* ButtonMore.png */; };
 		0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07866181EAE8300667417 /* ButtonMore@2x.png */; };
 		0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */; };
@@ -1985,6 +1988,10 @@
 		0E26BB4A182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNChannelDetailsViewController~iphone.xib"; sourceTree = "<group>"; };
 		0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~ipad.xib"; sourceTree = "<group>"; };
 		0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~iphone.xib"; sourceTree = "<group>"; };
+		0EE380A7182D4DFC001297C7 /* SYNChannelCreateNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelCreateNewCell.h; sourceTree = "<group>"; };
+		0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelCreateNewCell.m; sourceTree = "<group>"; };
+		0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelCreateNewCell.xib; sourceTree = "<group>"; };
+		0EE380AA182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNChannelCreateNewCell~iphone.xib"; sourceTree = "<group>"; };
 		0EF07865181EAE8300667417 /* ButtonMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMore.png; sourceTree = "<group>"; };
 		0EF07866181EAE8300667417 /* ButtonMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x.png"; sourceTree = "<group>"; };
 		0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x~iphone.png"; sourceTree = "<group>"; };
@@ -4213,6 +4220,10 @@
 		01B7CD9E166E163D001F4AF0 /* Channel cells */ = {
 			isa = PBXGroup;
 			children = (
+				0EE380A7182D4DFC001297C7 /* SYNChannelCreateNewCell.h */,
+				0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */,
+				0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */,
+				0EE380AA182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib */,
 				01B7F761164FC88A009C5CCD /* SYNChannelThumbnailCell.h */,
 				01B7F762164FC88A009C5CCD /* SYNChannelThumbnailCell.m */,
 				01B7F764164FC8A8009C5CCD /* SYNChannelThumbnailCell.xib */,
@@ -6554,6 +6565,7 @@
 				BE7D34F21715AD060085AB81 /* ButtonNavHighlighted.png in Resources */,
 				BE7D34F31715AD060085AB81 /* ButtonNavHighlighted@2x.png in Resources */,
 				BE7D34F91715C66B0085AB81 /* NavSelected.png in Resources */,
+				0EE380AC182D4DFC001297C7 /* SYNChannelCreateNewCell.xib in Resources */,
 				BE7D34FA1715C66B0085AB81 /* NavSelected@2x.png in Resources */,
 				BE7D34FF1715C68C0085AB81 /* NavArrow.png in Resources */,
 				BE7D35001715C68C0085AB81 /* NavArrow@2x.png in Resources */,
@@ -6618,6 +6630,7 @@
 				BE86BF26172011150006DC8A /* HeaderProfileChannelsLandscape.png in Resources */,
 				BE86BF27172011150006DC8A /* HeaderProfileChannelsLandscape@2x.png in Resources */,
 				BE86BF28172011150006DC8A /* HeaderProfilePortraitBoth.png in Resources */,
+				0EE380AD182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib in Resources */,
 				BE86BF29172011150006DC8A /* HeaderProfilePortraitBoth@2x.png in Resources */,
 				1F4E7F80181AC7D300F59007 /* TabMoodsSelected@2x.png in Resources */,
 				BE86BF2A172011150006DC8A /* HeaderProfileSubscriptionsLandscape.png in Resources */,
@@ -7713,6 +7726,7 @@
 				011A163116EF5EC5008CF25E /* GKImagePicker.m in Sources */,
 				011A163216EF5EC5008CF25E /* GKResizeableCropOverlayView.m in Sources */,
 				BE270B7F16EDE0E800CDDA6D /* SYNLoginViewController.m in Sources */,
+				0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */,
 				BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */,
 				BED4312B16F20CD70051465B /* RegexKitLite.m in Sources */,
 				01A79BA216F32C6900B05084 /* NSString+Timecode.m in Sources */,
