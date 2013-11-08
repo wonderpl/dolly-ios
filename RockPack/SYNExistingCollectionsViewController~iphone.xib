@@ -14,9 +14,6 @@
                 <outlet property="closeButton" destination="11" id="12"/>
                 <outlet property="collectionsCollectionView" destination="6" id="5kX-d4-OwY"/>
                 <outlet property="confirmButtom" destination="4" id="10"/>
-                <outlet property="createNewButton" destination="N9d-la-yRO" id="b98-MM-Jki"/>
-                <outlet property="createNewContainer" destination="eQW-zF-3WZ" id="8Nv-i9-N19"/>
-                <outlet property="descriptionTextView" destination="Ofk-WP-Zfl" id="eE5-3S-UzX"/>
                 <outlet property="titleLabel" destination="18" id="19"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -56,27 +53,6 @@
                         <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="13"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="eQW-zF-3WZ" userLabel="Create New Container">
-                    <rect key="frame" x="0.0" y="71" width="320" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N9d-la-yRO" userLabel="Create New">
-                            <rect key="frame" x="115" y="17" width="90" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Create New">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="Ofk-WP-Zfl" userLabel="Description TextView">
-                            <rect key="frame" x="80" y="54" width="160" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="6">
                     <rect key="frame" x="0.0" y="143" width="320" height="405"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>

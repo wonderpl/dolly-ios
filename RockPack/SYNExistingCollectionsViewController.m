@@ -39,13 +39,13 @@
 @property (nonatomic, strong) NSArray *channels;
 @property (nonatomic, strong) NSIndexPath *previouslySelectedPath;
 @property (nonatomic, weak) Channel *selectedChannel;
+
+
+// autopost stuff
 @property (strong, nonatomic) IBOutlet UIButton *autopostNoButton;
 @property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (nonatomic, strong) IBOutlet UITextView* descriptionTextView;
-@property (nonatomic, strong) IBOutlet UIView* createNewContainer;
-@property (nonatomic, strong) IBOutlet UIButton* createNewButton;
 
 @end
 

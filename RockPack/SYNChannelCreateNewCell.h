@@ -9,9 +9,8 @@
 @import UIKit;
 
 @interface SYNChannelCreateNewCell : UICollectionViewCell
-@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
-@property (strong, nonatomic) IBOutlet UIView *boarderView;
 
-@property (strong, nonatomic) IBOutlet UILabel *createLabel;
+@property (strong, nonatomic) IBOutlet UIButton *createNewButton;
+@property (strong, nonatomic) IBOutlet UITextView* descriptionTextView;
 
 @end
