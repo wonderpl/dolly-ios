@@ -28,7 +28,8 @@
 
 @interface SYNExistingCollectionsViewController ()
 {
-    BOOL hideCells;
+    BOOL creatingNewState;
+    BOOL creatingNewAnimating;
 }
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
@@ -45,6 +46,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *autopostNoButton;
 @property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+
 
 
 @end
@@ -262,7 +265,7 @@
 - (NSInteger) collectionView: (UICollectionView *) view
       numberOfItemsInSection: (NSInteger) section
 {
-    return 1; // add one for the 'create new channel' cell
+    return self.channels.count + 1; // add one for the 'create new channel' cell
 }
 
 
@@ -281,29 +284,80 @@
     {
         SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])
                                                                                         forIndexPath: indexPath];
-        
+        [createCell.createNewButton addTarget:self
+                                       action:@selector(createNewButtonPressed)
+                             forControlEvents:UIControlEventTouchUpInside];
         cell = createCell;
     }
     else
     {
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
-        SYNExistingChannelCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])
+        SYNExistingChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])
                                                                                             forIndexPath: indexPath];
         
+        existingChannel.titleLabel.text = channel.title;
         
         
         
         
-        
-        cell = channelThumbnailCell;
+        cell = existingChannel;
     }
     
-    if (hideCells)
-    {
-        cell.contentView.alpha = 0.0f;
-    }
     
     return cell;
+}
+
+- (CGSize)	collectionView: (UICollectionView *) collectionView
+                   layout: (UICollectionViewLayout *) collectionViewLayout
+   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    if(indexPath.row == 0 && creatingNewState)
+    {
+        return CGSizeMake(320.0f, 200.0f);
+    }
+    else
+    {
+        return CGSizeMake(320.0f, 60.0f);
+    }
+  
+    
+}
+
+-(void)createNewButtonPressed
+{
+    if(creatingNewAnimating)
+        return;
+    
+    creatingNewAnimating = YES;
+    
+    creatingNewState = !creatingNewState; // toggle state
+    
+    [self.collectionsCollectionView performBatchUpdates:^{
+        
+        [self.collectionsCollectionView reloadData];
+        
+    } completion:^(BOOL finished) {
+        creatingNewAnimating = NO;
+    }];
+}
+
+- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    if(indexPath.row == 0)
+        return;
+    
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelSelectionClick"
+                                                            label: @"New"
+                                                            value: nil] build]];
+    
+    
+    
+    
+    
 }
 
 
@@ -392,51 +446,7 @@
 }
 
 
-- (void) collectionView: (UICollectionView *) collectionView
-         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    if(indexPath.row != 0) // only the 'create new channel' triggers the function , the rest of the cells respond to press
-        return;
 
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelSelectionClick"
-                                                            label: @"New"
-                                                            value: nil] build]];
-    
-    //Reset any previous selection
-    self.previouslySelectedPath = nil;
-    self.selectedChannel = nil;
-    self.confirmButtom.enabled = NO;
-    
-    [self createAndDisplayNewChannel];
-    
-    if (IS_IPAD)
-    {
-        self.selectedChannel = nil;
-        
-        
-        
-        
-        [UIView animateWithDuration: 0.3
-                              delay: 0.0
-                            options: UIViewAnimationCurveLinear
-                         animations: ^{
-                             self.view.alpha = 0.0;
-                         }
-                         completion: ^(BOOL finished) {
-                             
-                             [self.view removeFromSuperview];
-                             [self removeFromParentViewController];
-                             
-                             
-                         }];
-    }
-    
-    
-    
-}
 
 
 
