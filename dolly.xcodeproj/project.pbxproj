@@ -4216,13 +4216,9 @@
 				BE86BF19171F07B10006DC8A /* SYNChannelMidCell.m */,
 				BE86BF1B171F07C70006DC8A /* SYNChannelMidCell.xib */,
 				3862E8AF172979410066E8E7 /* SYNChannelMidCell~iphone.xib */,
-				BE285D9D172584E200D995AB /* SYNChannelCreateNewCell.h */,
-				BE285D9E172584E200D995AB /* SYNChannelCreateNewCell.m */,
 				0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */,
 				0E19FBC0182273EE0007DF5B /* SYNChannelSearchCell.h */,
 				0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */,
-				BE285DA0172584FF00D995AB /* SYNChannelCreateNewCell~iphone.xib */,
-				38BACE021734151A00406597 /* SYNChannelCreateNewCell.xib */,
 				BE7D02E8178B138B008053DC /* SYNUserThumbnailCell.h */,
 				BE7D02E9178B138B008053DC /* SYNUserThumbnailCell.m */,
 				BE7D02EB178B13C3008053DC /* SYNUserThumbnailCell.xib */,
@@ -5634,6 +5630,17 @@
 			name = Layout;
 			sourceTree = "<group>";
 		};
+		BE31EFAD182D4729006E20E2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BE285D9D172584E200D995AB /* SYNChannelCreateNewCell.h */,
+				BE285D9E172584E200D995AB /* SYNChannelCreateNewCell.m */,
+				BE285DA0172584FF00D995AB /* SYNChannelCreateNewCell~iphone.xib */,
+				38BACE021734151A00406597 /* SYNChannelCreateNewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		BE3574E517CE07860083CBB1 /* One to One Sharing */ = {
 			isa = PBXGroup;
 			children = (
@@ -6172,6 +6179,7 @@
 		BEB313BC182A822900FAF98A /* Existing Collections */ = {
 			isa = PBXGroup;
 			children = (
+				BE31EFAD182D4729006E20E2 /* Cells */,
 				BE285D981725726300D995AB /* SYNExistingCollectionsViewController.h */,
 				BE285D991725726300D995AB /* SYNExistingCollectionsViewController.m */,
 				BE285D9A1725726300D995AB /* SYNExistingCollectionsViewController.xib */,
