@@ -42,7 +42,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *autopostNoButton;
 @property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) IBOutlet UITextField* createNewTextField;
+
+@property (nonatomic, strong) IBOutlet UITextView* descriptionTextView;
+@property (nonatomic, strong) IBOutlet UIView* createNewContainer;
+@property (nonatomic, strong) IBOutlet UIButton* createNewButton;
 
 @end
 
@@ -272,7 +275,6 @@
         self.confirmButtom.enabled = NO;
     }
     
-    [self packViewForInterfaceOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
     [self.collectionsCollectionView reloadData];
 }
@@ -476,112 +478,12 @@
 }
 
 
-- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
-                                          duration: (NSTimeInterval) duration
-{
-    [super willAnimateRotationToInterfaceOrientation: toInterfaceOrientation
-                                            duration: duration];
-    
-    CGRect autopostTitleFrame = self.autopostTitleLabel.frame;
-    autopostTitleFrame.origin.x = self.autopostYesButton.frame.origin.x - self.autopostTitleLabel.frame.size.width - 10;
-    self.autopostTitleLabel.frame = autopostTitleFrame;
-    
-    [self packViewForInterfaceOrientation: toInterfaceOrientation];
-}
 
 
-- (void) packViewForInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation
-{
-    CGRect collectionFrame = self.collectionsCollectionView.frame;
-    
-    CGRect autopostViewFrame = self.autopostView.frame;
-    
-    autopostViewFrame.origin.y = self.view.frame.size.height - autopostViewFrame.size.height - 15;
-    if(IS_IPHONE)
-        autopostViewFrame.origin.y += 15.0;
-    
-    self.autopostView.frame = autopostViewFrame;
-    
-    if (IS_IPAD)
-    {
-        
-        CGRect closeButtonFrame = self.closeButton.frame;
-        CGRect confirmButtonFrame = self.confirmButtom.frame;
-        
-        if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
-        {
-            collectionFrame.size.width = 580.0;
-            
-            //Portrait position of Close & Confirm buttons
-            closeButtonFrame.origin.x = 78.0f;
-            confirmButtonFrame.origin.x = 520.0f;
-        }
-        else
-        {
-            collectionFrame.size.width = 780.0;
-            
-            //Landscape position of Close & Confirm buttons
-            closeButtonFrame.origin.x = 106.0f;
-            confirmButtonFrame.origin.x = 748.0f;
-        }
-        
-        self.closeButton.frame = closeButtonFrame;
-        self.confirmButtom.frame = confirmButtonFrame;
-        
-    }
-    else
-    {
-        collectionFrame.size.width = 320.0f;
-    }
-    
-    collectionFrame.origin.x = (self.view.frame.size.width * 0.5) - (collectionFrame.size.width * 0.5);
-    self.collectionsCollectionView.frame = CGRectIntegral(collectionFrame);
-    
-    CGRect selfFrame = self.view.frame;
-    selfFrame.size = [SYNDeviceManager.sharedInstance currentScreenSize];
-    self.view.frame = selfFrame;
-}
 
 
-- (void) prepareForAppearAnimation;
-{
-    hideCells = YES;
-    UICollectionViewCell *cell = nil;
-    NSArray *indexPaths = [self.collectionsCollectionView indexPathsForVisibleItems];
-    
-    for (NSIndexPath *path in indexPaths)
-    {
-        cell = [self.collectionsCollectionView cellForItemAtIndexPath: path];
-        cell.contentView.alpha = 0.0f;
-    }
-}
 
-- (void) runAppearAnimation
-{
-    
-    NSArray *sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"section"
-                                                             ascending: YES], [[NSSortDescriptor alloc] initWithKey: @"row"
-                                                                                                          ascending: YES]];
-    NSArray *indexPaths = [[self.collectionsCollectionView indexPathsForVisibleItems] sortedArrayUsingDescriptors: sortDescriptors];
-    int count = 0;
-    
-    UICollectionViewCell *cell;
-    for (NSIndexPath *path in indexPaths)
-    {
-        cell = [self.collectionsCollectionView cellForItemAtIndexPath: path];
-        
-        [UIView animateWithDuration: 0.2f
-                              delay: 0.05 * count
-                            options: UIViewAnimationCurveEaseInOut
-                         animations: ^{
-                             cell.contentView.alpha = 1.0f;
-                         }
-                         completion: nil];
-        count++;
-    }
-    
-    hideCells = NO;
-}
+
 
 
 @end
