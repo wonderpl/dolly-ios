@@ -9,6 +9,10 @@
 #import "SYNAppDelegate.h"
 @import Foundation;
 
+#pragma mark - Block typedefs
+
+typedef void (^SYNVideoIndexUpdater)(int);
+
 @interface SYNAbstractVideoPlaybackViewController : GAITrackedViewController
 
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
@@ -16,6 +20,7 @@
 @property (nonatomic, strong) UIButton *shuttleBarMaxMinButton;
 @property (nonatomic, strong) UIView *shuttleBarView;
 @property (nonatomic, strong) VideoInstance *currentVideoInstance;
+@property (nonatomic, copy) void (^updateBlock) (void);
 
 // Player control
 - (void) playVideoAtIndex: (int) index;

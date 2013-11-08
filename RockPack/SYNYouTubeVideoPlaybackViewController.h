@@ -15,8 +15,6 @@
 
 @interface SYNYouTubeVideoPlaybackViewController : SYNAbstractVideoPlaybackViewController
 
-@property (nonatomic, copy) void (^updateBlock) (void);
-
 + (instancetype) sharedInstance;
 
 - (void) setPlaylist: (NSArray *) playlistArray

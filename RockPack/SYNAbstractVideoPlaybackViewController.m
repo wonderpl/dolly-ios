@@ -835,6 +835,201 @@
     [self.videoStallDetectionTimer invalidate], self.videoStallDetectionTimer = nil;
 }
 
+#pragma mark - User interaction
+
+- (void) togglePlayPause
+{
+    if (self.playFlag == TRUE)
+    {
+        // Reset our shuttling flag
+        self.shuttledByUser = FALSE;
+        self.pausedByUser = YES;
+        
+        [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPlay.png"]
+                                        forState: UIControlStateNormal];
+        
+        [self pauseVideo];
+    }
+    else
+    {
+        [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPause.png"]
+                                        forState: UIControlStateNormal];
+        
+        self.pausedByUser = NO;
+        [self playVideo];
+    }
+}
+
+
+- (void) updateTimeFromSlider: (UISlider *) slider
+{
+    // Indicate that a pause event may be caused by the user shuttling
+    self.shuttledByUser = TRUE;
+    self.disableTimeUpdating = TRUE;
+    
+    // Only re-enable our upating after a certain period (to stop slider jumping)
+    [self performBlock: ^{
+        self.disableTimeUpdating = FALSE;
+    } afterDelay: 1.0f
+ cancelPreviousRequest: YES];
+    
+    float newTime = slider.value * self.currentDuration;
+    
+    [self setCurrentTime: newTime];
+    //    DebugLog (@"Setting time %f", newTime);
+    
+    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: newTime];
+    
+    if (self.updateBlock)
+    {
+        self.updateBlock();
+    }
+}
+
+- (void) videoStallDetected
+{
+    SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
+    VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
+    
+    SYNMasterViewController *masterViewController = (SYNMasterViewController*)appDelegate.masterViewController;
+    
+    NSString *errorDescription =  @"Video stalled (Cellular)";
+    
+    if ([masterViewController.reachability currentReachabilityStatus] == ReachableViaWiFi)
+    {
+        errorDescription = @"Video stalled (WiFi)";
+    }
+    
+    [appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId: videoInstance.uniqueId
+                                                       errorDescription: errorDescription
+                                                      completionHandler: ^(NSDictionary * dictionary) {
+                                                          DebugLog(@"Reported video stall: %@", errorDescription);
+                                                      }
+                                                           errorHandler: ^(NSError* error) {
+                                                               DebugLog(@"Report video stall failed");
+                                                               DebugLog(@"%@", [error debugDescription]);
+                                                           }];
+}
+
+
+- (void) updateShuttleBarProgress
+{
+    float bufferLevel = [self videoLoadedFraction];
+    
+    // Update the progress bar under our slider
+    self.bufferingProgressView.progress = bufferLevel;
+    
+    // Only update the shuttle if we are playing (this should stop the shuttle bar jumping to zero
+    // just after a user shuttle event)
+    NSTimeInterval currentTime = self.currentTime;
+    
+    // We need to wait until the play time starts to increase before fading up the video
+    if (currentTime > 0.0f)
+    {
+        // Fade up the player if we haven't already
+        if (self.fadeUpScheduled == FALSE)
+        {
+            // Reset our stall count, once per video
+            self.stallCount = 0;
+            
+            // Fade up the video and fade out the placeholder
+            self.fadeUpScheduled = TRUE;
+            [self fadeUpVideoPlayer];
+        }
+        
+        // Check to see if the player has stalled (a number of instances of the same time)
+        if (currentTime == self.lastTime && self.playFlag == TRUE)
+        {
+            self.stallCount++;
+            
+            if (self.stallCount > kMaxStallCount)
+            {
+                DebugLog (@"*** Stalled: Attempting to restart player");
+                [self playVideo];
+                
+                // Reset our stall count (could make this negative to give restarts longer)
+                self.stallCount = 0;
+            }
+        }
+        else
+        {
+            self.lastTime = currentTime;
+            
+            // Reset our stall count
+            self.stallCount = 0;
+        }
+    }
+    
+    // Update current time label
+    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: currentTime];
+    
+    // Calculate the currently viewed percentage
+    float viewedPercentage = currentTime / self.currentDuration;
+    
+    self.percentageViewed = viewedPercentage;
+    self.timeViewed = currentTime;
+    
+    // and slider
+    if (self.disableTimeUpdating == FALSE)
+    {
+        self.shuttleSlider.value = viewedPercentage;
+        
+        // We should also check to see if we are in the last 0.5 seconds of a video, and if so, trigger a fadeout
+        if ((self.currentDuration - self.currentTime) < 0.5f)
+        {
+            DebugLog(@"*** In end zone");
+            
+            if (self.fadeOutScheduled == FALSE)
+            {
+                self.fadeOutScheduled = TRUE;
+                
+                [self performBlock: ^{
+                    if (self.fadeOutScheduled == TRUE)
+                    {
+                        self.fadeOutScheduled = FALSE;
+                        
+                        [self fadeOutVideoPlayer];
+                        DebugLog(@"***** Fadeout");
+                    }
+                    else
+                    {
+                        DebugLog(@"***** Failed to re-trigger fadeout");
+                    }
+                }
+                        afterDelay: 0.0f
+             cancelPreviousRequest: YES];
+            }
+        }
+    }
+    
+    // Now, if we have viewed more than kPercentageThresholdForView%, then mark as viewed
+    if (viewedPercentage > kPercentageThresholdForView && self.currentVideoViewedFlag == FALSE)
+    {
+        // Don't mark as viewed again
+        self.currentVideoViewedFlag = TRUE;
+        
+        SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
+        
+        // Just double-check that we have both params required for
+        if (self.currentVideoInstance.uniqueId && appDelegate.currentOAuth2Credentials.userId)
+        {
+            // Update the star/unstar status on the server
+            [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                             action: @"view"
+                                                    videoInstanceId: self.currentVideoInstance.uniqueId
+                                                  completionHandler: ^(NSDictionary *responseDictionary) {
+                                                  }
+                                                       errorHandler: ^(NSDictionary* errorDictionary) {
+                                                           DebugLog(@"View action failed");
+                                                       }];
+        }
+        else
+        {
+            AssertOrLog(@"We seem to be missing one of the parameters for recording video play activity");
+        }
+    }
+}
+
 
 
 #pragma mark - Abstract functions

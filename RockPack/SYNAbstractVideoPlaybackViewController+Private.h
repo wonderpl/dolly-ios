@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
+#import "NSObject+Blocks.h"
 #import "NSString+Timecode.h"
 #import "SYNAbstractVideoPlaybackViewController.h"
 #import "SYNMasterViewController.h"
@@ -15,17 +16,25 @@
 #import "VideoInstance.h"
 @import MediaPlayer;
 
-#pragma mark - Block typedefs
-
-typedef void (^SYNVideoIndexUpdater)(int);
-
 @interface SYNAbstractVideoPlaybackViewController ()
 
 #pragma mark - Private properties
 
+@property (nonatomic, assign) BOOL currentVideoViewedFlag;
+@property (nonatomic, assign) BOOL disableTimeUpdating;
+@property (nonatomic, assign) BOOL fadeOutScheduled;
+@property (nonatomic, assign) BOOL fadeUpScheduled;
+@property (nonatomic, assign) BOOL pausedByUser;
+@property (nonatomic, assign) BOOL playFlag;
+@property (nonatomic, assign) BOOL shuttledByUser;
 @property (nonatomic, assign) CGRect originalShuttleBarFrame;
 @property (nonatomic, assign) CGRect requestedFrame;
+@property (nonatomic, assign) NSTimeInterval currentDuration;
+@property (nonatomic, assign) NSTimeInterval lastTime;
+@property (nonatomic, assign) float percentageViewed;
+@property (nonatomic, assign) float timeViewed;
 @property (nonatomic, assign) int currentSelectedIndex;
+@property (nonatomic, assign) int stallCount;
 @property (nonatomic, strong) CAAnimation *bottomPlacholderAnimationViewPosition;
 @property (nonatomic, strong) CAAnimation *middlePlacholderAnimationViewPosition;
 @property (nonatomic, strong) CABasicAnimation *placeholderBottomLayerAnimation;
@@ -33,6 +42,8 @@ typedef void (^SYNVideoIndexUpdater)(int);
 @property (nonatomic, strong) NSArray *videoInstanceArray;
 @property (nonatomic, strong) NSString *channelCreator;
 @property (nonatomic, strong) NSString *previousSourceId;
+@property (nonatomic, strong) NSTimer *shuttleBarUpdateTimer;
+@property (nonatomic, strong) NSTimer *videoStallDetectionTimer;
 @property (nonatomic, strong) SYNProgressView *bufferingProgressView;
 @property (nonatomic, strong) SYNVideoIndexUpdater indexUpdater;
 @property (nonatomic, strong) UIButton *shuttleBarPlayPauseButton;
@@ -44,17 +55,7 @@ typedef void (^SYNVideoIndexUpdater)(int);
 @property (nonatomic, strong) UILabel *durationLabel;
 @property (nonatomic, strong) UISlider *shuttleSlider;
 @property (nonatomic, strong) UIView *videoPlaceholderView;
-@property (nonatomic, assign) BOOL pausedByUser;
 @property (nonatomic, strong) UIWebView *currentVideoView;
-@property (nonatomic, assign) float percentageViewed;
-@property (nonatomic, assign) BOOL shuttledByUser;
-@property (nonatomic, strong) NSTimer *shuttleBarUpdateTimer;
-@property (nonatomic, assign) float timeViewed;
-@property (nonatomic, assign) BOOL currentVideoViewedFlag;
-@property (nonatomic, assign) NSTimeInterval currentDuration;
-@property (nonatomic, strong) NSTimer *videoStallDetectionTimer;
-@property (nonatomic, assign) BOOL playFlag;
-
 
 #pragma mark - Private methods
 
