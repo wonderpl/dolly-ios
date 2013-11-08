@@ -11,15 +11,15 @@
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
 #import "GAI.h"
-#import "SYNChannelCreateNewCell.h"
+#import "SYNExistingChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
-#import "SYNChannelMidCell.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNExistingCollectionsViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "SYNExistingChannelCell.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
@@ -28,7 +28,9 @@
 
 @interface SYNExistingCollectionsViewController ()
 {
-    BOOL hideCells;
+    BOOL creatingNewState;
+    BOOL creatingNewAnimating;
+    
 }
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
@@ -39,13 +41,17 @@
 @property (nonatomic, strong) NSArray *channels;
 @property (nonatomic, strong) NSIndexPath *previouslySelectedPath;
 @property (nonatomic, weak) Channel *selectedChannel;
+
+@property (nonatomic, weak) SYNExistingChannelCreateNewCell *createNewChannelCell;
+
+
+// autopost stuff
 @property (strong, nonatomic) IBOutlet UIButton *autopostNoButton;
 @property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (nonatomic, strong) IBOutlet UITextView* descriptionTextView;
-@property (nonatomic, strong) IBOutlet UIView* createNewContainer;
-@property (nonatomic, strong) IBOutlet UIButton* createNewButton;
+
+
 
 @end
 
@@ -56,46 +62,26 @@
 {
     [super viewDidLoad];
     
+    // == TODO: Delete? == //
     self.autopostTitleLabel.font = [UIFont lightCustomFontOfSize: self.autopostTitleLabel.font.pointSize];
     
     self.autopostNoButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
     self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
+    // ================= //
     
-    // We need to use a custom layout (as due to the deletion/wobble logic used elsewhere)
-    if (IS_IPAD)
-    {
-        // iPad layout & size
-        self.collectionsCollectionView.collectionViewLayout =
-        [SYNDeletionWobbleLayout layoutWithItemSize: CGSizeMake(192.0f, 192.0f)
-                            minimumInterItemSpacing: 0.0f
-                                 minimumLineSpacing: 5.0f
-                                    scrollDirection: UICollectionViewScrollDirectionVertical
-                                       sectionInset: UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-    }
-    else
-    {
-        // iPhone layout & size
-        self.collectionsCollectionView.collectionViewLayout =
-        [SYNDeletionWobbleLayout layoutWithItemSize: CGSizeMake(158.0f, 158.0f)
-                            minimumInterItemSpacing: 0.0f
-                                 minimumLineSpacing: 0.0f
-                                    scrollDirection: UICollectionViewScrollDirectionVertical
-                                       sectionInset: UIEdgeInsetsMake(2.0f, 2.0f, 0.0f, 2.0f)];
-    }
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelCreateNewCell"
-                                                                     bundle: nil]
-                          forCellWithReuseIdentifier: @"SYNChannelCreateNewCell"];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCreateNewCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])];
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelMidCell"
-                                                                     bundle: nil]
-                          forCellWithReuseIdentifier: @"SYNChannelMidCell"];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])];
     
     
     self.collectionsCollectionView.scrollsToTop = NO;
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
+    // == TODO: Delete? == //
     ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
     
     if (facebookAccount)
@@ -116,22 +102,9 @@
     {
         self.autopostView.hidden = YES;
     }
+    // == TODO: Delete? == //
     
-    if(IS_IPHONE)
-    {
-        CGRect vFrame;
-        for (UIView* viewToMove in @[self.closeButton, self.titleLabel, self.confirmButtom])
-        {
-            vFrame = viewToMove.frame;
-            vFrame.origin.y += 10.0f;
-            if(viewToMove == self.closeButton)
-                vFrame.origin.x += 14.0f;
-            viewToMove.frame = vFrame;
-            
-        }
-        
-        
-    }
+    
 }
 
 
@@ -312,37 +285,97 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])
                                                                                         forIndexPath: indexPath];
-        
-        cell = createCell;
+        [self.createNewChannelCell.createNewButton addTarget:self
+                                                      action:@selector(createNewButtonPressed)
+                                            forControlEvents:UIControlEventTouchUpInside];
+        cell = self.createNewChannelCell;
     }
     else
     {
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
-        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell"
+        SYNExistingChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])
                                                                                             forIndexPath: indexPath];
-        //To be removed. Old cell setter.
-        /*
-        [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
-                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
-                                                options: SDWebImageRetryFailed];
         
-        [channelThumbnailCell setChannelTitle: channel.title];*/
+        existingChannel.titleLabel.text = channel.title;
         
-        channelThumbnailCell.specialSelected = (channel == self.selectedChannel);
         
-        channelThumbnailCell.viewControllerDelegate = (id<SYNChannelMidCellDelegate>) self;
         
-        cell = channelThumbnailCell;
+        
+        cell = existingChannel;
     }
     
-    if (hideCells)
-    {
-        cell.contentView.alpha = 0.0f;
-    }
     
     return cell;
+}
+
+- (CGSize)	collectionView: (UICollectionView *) collectionView
+                   layout: (UICollectionViewLayout *) collectionViewLayout
+   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    // TODO: Set for iPad as well...
+    if(indexPath.row == 0 && creatingNewState)
+    {
+        return CGSizeMake(320.0f, 200.0f);
+    }
+    else
+    {
+        return CGSizeMake(320.0f, 60.0f);
+    }
+  
+    
+}
+
+-(void)createNewButtonPressed
+{
+    if(creatingNewAnimating)
+        return;
+    
+    creatingNewAnimating = YES;
+    
+    creatingNewState = !creatingNewState; // toggle state
+    
+    if(creatingNewState) // if it is opening, show the panel
+    {
+        self.createNewChannelCell.descriptionTextView.hidden = NO;
+    }
+    
+    __weak SYNExistingCollectionsViewController* wself = self;
+    
+    [self.collectionsCollectionView performBatchUpdates:^{
+        
+        [wself.collectionsCollectionView reloadData];
+        
+    } completion:^(BOOL finished) {
+        
+        creatingNewAnimating = NO;
+        if(!creatingNewState) // if it has just closed, hide the panel
+        {
+            wself.createNewChannelCell.descriptionTextView.hidden = YES;
+        }
+        
+    }];
+}
+
+- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
+    if(indexPath.row == 0)
+        return;
+    
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelSelectionClick"
+                                                            label: @"New"
+                                                            value: nil] build]];
+    
+    
+    
+    
+    
 }
 
 
@@ -415,12 +448,12 @@
     
     if (self.previouslySelectedPath)
     {
-        SYNChannelMidCell *cellToDeselect = (SYNChannelMidCell *) [self.collectionsCollectionView cellForItemAtIndexPath: self.previouslySelectedPath];
-        cellToDeselect.specialSelected = NO;
+        SYNExistingChannelCell *cellToDeselect = (SYNExistingChannelCell *) [self.collectionsCollectionView cellForItemAtIndexPath: self.previouslySelectedPath];
+        
     }
     
-    SYNChannelMidCell *cellToSelect = (SYNChannelMidCell *) cell;
-    cellToSelect.specialSelected = YES;
+    SYNExistingChannelCell *cellToSelect = (SYNExistingChannelCell *) cell;
+    
     
     //Compensate for the extra "create new" cell
     NSIndexPath *indexPath = [self indexPathForChannelCell: cell];
@@ -431,51 +464,7 @@
 }
 
 
-- (void) collectionView: (UICollectionView *) collectionView
-         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    if(indexPath.row != 0) // only the 'create new channel' triggers the function , the rest of the cells respond to press
-        return;
 
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelSelectionClick"
-                                                            label: @"New"
-                                                            value: nil] build]];
-    
-    //Reset any previous selection
-    self.previouslySelectedPath = nil;
-    self.selectedChannel = nil;
-    self.confirmButtom.enabled = NO;
-    
-    [self createAndDisplayNewChannel];
-    
-    if (IS_IPAD)
-    {
-        self.selectedChannel = nil;
-        
-        
-        
-        
-        [UIView animateWithDuration: 0.3
-                              delay: 0.0
-                            options: UIViewAnimationCurveLinear
-                         animations: ^{
-                             self.view.alpha = 0.0;
-                         }
-                         completion: ^(BOOL finished) {
-                             
-                             [self.view removeFromSuperview];
-                             [self removeFromParentViewController];
-                             
-                             
-                         }];
-    }
-    
-    
-    
-}
 
 
 

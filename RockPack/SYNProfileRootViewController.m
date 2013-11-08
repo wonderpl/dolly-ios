@@ -10,7 +10,7 @@
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "GAI.h"
-#import "SYNChannelCreateNewCell.h"
+#import "SYNExistingChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
@@ -352,7 +352,6 @@ SYNImagePickerControllerDelegate>{
          */
     }
     
-    self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
@@ -366,6 +365,8 @@ SYNImagePickerControllerDelegate>{
 
 - (void) viewDidAppear: (BOOL) animated
 {
+    self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
+    [self.subscriptionThumbnailCollectionView reloadData];
     [super viewDidAppear: animated];
     
     if (self.channelOwner == appDelegate.currentUser)
@@ -414,8 +415,8 @@ SYNImagePickerControllerDelegate>{
 
 - (void) viewWillDisappear: (BOOL) animated
 {
-    self.navigationController.navigationBar.hidden = NO;
     [super viewWillDisappear: animated];
+    
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -798,7 +799,7 @@ SYNImagePickerControllerDelegate>{
     
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
+        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
         cell = createCell;
     }
     
@@ -835,20 +836,15 @@ SYNImagePickerControllerDelegate>{
         
         
         [channelThumbnailCell setTitle: channel.title];
-
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
         cell = channelThumbnailCell;
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
     {
-
-        
-        if (indexPath.row < self.arrDisplayFollowing.count) {
+        if (indexPath.row < self.arrDisplayFollowing.count)
+        {
             Channel *channel = _arrDisplayFollowing[indexPath.item];
 
-         //   NSLog(@"%@",  channel.title);
-
-            
             if (self.modeType == MyOwnProfile) {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
             }
@@ -878,6 +874,7 @@ SYNImagePickerControllerDelegate>{
         else
         {
             cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+            
         }
     }
     
@@ -1641,6 +1638,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
     [self.subscriptionThumbnailCollectionView reloadData];
+    [self.channelThumbnailCollectionView reloadData];
+
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -1813,6 +1812,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
 }
 - (IBAction)backButtonTapped:(id)sender {
+    self.navigationController.navigationBarHidden = NO;
+
     [self.navigationController popViewControllerAnimated:YES];
     
 }

@@ -6,10 +6,11 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNChannelCreateNewCell.h"
+#import "SYNExistingChannelCreateNewCell.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
-@implementation SYNChannelCreateNewCell
+@implementation SYNExistingChannelCreateNewCell
 
 - (void) awakeFromNib
 {
@@ -17,7 +18,9 @@
     
     
     self.createNewButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize];
-
+    self.backgroundColor = [UIColor dollyAddButtonDefaultColor];
+    
+    self.descriptionTextView.hidden = YES;
 }
 
 

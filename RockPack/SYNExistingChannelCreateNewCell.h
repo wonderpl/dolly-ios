@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface SYNChannelCreateNewCell : UICollectionViewCell
+@interface SYNExistingChannelCreateNewCell : UICollectionViewCell
 
 @property (strong, nonatomic) IBOutlet UIButton *createNewButton;
 @property (strong, nonatomic) IBOutlet UITextView* descriptionTextView;
