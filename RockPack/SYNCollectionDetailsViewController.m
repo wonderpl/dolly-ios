@@ -17,7 +17,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
 #import "SYNChannelCoverImageSelectorViewController.h"
-#import "SYNChannelCreateNewCell.h"
+#import "SYNExistingChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNCoverChooserController.h"
 #import "SYNCoverThumbnailCell.h"

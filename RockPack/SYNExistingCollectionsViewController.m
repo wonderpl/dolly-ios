@@ -11,15 +11,15 @@
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
 #import "GAI.h"
-#import "SYNChannelCreateNewCell.h"
+#import "SYNExistingChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
-#import "SYNChannelMidCell.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNExistingCollectionsViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "SYNExistingChannelCell.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
@@ -295,7 +295,7 @@
 - (NSInteger) collectionView: (UICollectionView *) view
       numberOfItemsInSection: (NSInteger) section
 {
-    return self.channels.count + 1; // add one for the 'create new channel' cell
+    return 1; // add one for the 'create new channel' cell
 }
 
 
@@ -312,7 +312,7 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
                                                                                         forIndexPath: indexPath];
         
         cell = createCell;
@@ -320,19 +320,13 @@
     else
     {
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
-        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell"
+        SYNExistingChannelCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])
                                                                                             forIndexPath: indexPath];
-        //To be removed. Old cell setter.
-        /*
-        [channelThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: channel.channelCover.imageLargeUrl]
-                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelMid.png"]
-                                                options: SDWebImageRetryFailed];
         
-        [channelThumbnailCell setChannelTitle: channel.title];*/
         
-        channelThumbnailCell.specialSelected = (channel == self.selectedChannel);
         
-        channelThumbnailCell.viewControllerDelegate = (id<SYNChannelMidCellDelegate>) self;
+        
+        
         
         cell = channelThumbnailCell;
     }
@@ -415,12 +409,12 @@
     
     if (self.previouslySelectedPath)
     {
-        SYNChannelMidCell *cellToDeselect = (SYNChannelMidCell *) [self.collectionsCollectionView cellForItemAtIndexPath: self.previouslySelectedPath];
-        cellToDeselect.specialSelected = NO;
+        SYNExistingChannelCell *cellToDeselect = (SYNExistingChannelCell *) [self.collectionsCollectionView cellForItemAtIndexPath: self.previouslySelectedPath];
+        
     }
     
-    SYNChannelMidCell *cellToSelect = (SYNChannelMidCell *) cell;
-    cellToSelect.specialSelected = YES;
+    SYNExistingChannelCell *cellToSelect = (SYNExistingChannelCell *) cell;
+    
     
     //Compensate for the extra "create new" cell
     NSIndexPath *indexPath = [self indexPathForChannelCell: cell];
