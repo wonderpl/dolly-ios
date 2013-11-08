@@ -21,30 +21,17 @@
 
 @interface SYNYouTubeVideoPlaybackViewController () <UIWebViewDelegate>
 
-@property (nonatomic, assign) float percentageViewed;
-@property (nonatomic, assign) float timeViewed;
 @property (nonatomic, assign) BOOL autoPlay;
-@property (nonatomic, assign) BOOL currentVideoViewedFlag;
 @property (nonatomic, assign) BOOL disableTimeUpdating;
 @property (nonatomic, assign) BOOL fadeOutScheduled;
 @property (nonatomic, assign) BOOL fadeUpScheduled;
 @property (nonatomic, assign) BOOL hasReloadedWebView;
 @property (nonatomic, assign) BOOL notYetPlaying;
-@property (nonatomic, assign) BOOL playFlag;
-@property (nonatomic, assign) BOOL shuttledByUser;
-@property (nonatomic, assign) BOOL pausedByUser;
 @property (nonatomic, assign) BOOL recordedVideoView;
-@property (nonatomic, assign) CGRect requestedFrame;
-@property (nonatomic, assign) NSTimeInterval currentDuration;
 @property (nonatomic, assign) NSTimeInterval lastTime;
 @property (nonatomic, assign) int stallCount;
 @property (nonatomic, strong) NSString *sourceIdToReload;
-@property (nonatomic, strong) NSString *previousSourceId;
-@property (nonatomic, strong) NSTimer *shuttleBarUpdateTimer;
 @property (nonatomic, strong) NSTimer *recordVideoViewTimer;
-@property (nonatomic, strong) NSTimer *videoStallDetectionTimer;
-@property (nonatomic, strong) SYNVideoIndexUpdater indexUpdater;
-@property (nonatomic, strong) UIView *videoPlaceholderView;
 @property (nonatomic, strong) UIWebView *currentVideoWebView;
 
 
@@ -59,7 +46,7 @@
 
 static UIWebView* youTubeVideoWebViewInstance;
 
-+ (SYNYouTubeVideoPlaybackViewController*) sharedInstance
++ (instancetype) sharedInstance
 {
     static SYNYouTubeVideoPlaybackViewController *_sharedInstance = nil;
     
@@ -83,6 +70,43 @@ static UIWebView* youTubeVideoWebViewInstance;
 - (void) dealloc
 {
     self.currentVideoWebView.delegate = nil;
+}
+
+
+#pragma mark - View lifecyle
+
+- (void) specificInit
+{
+    youTubeVideoWebViewInstance.frame = self.view.bounds;
+    youTubeVideoWebViewInstance.backgroundColor = self.view.backgroundColor;
+    
+    // Set the webview delegate so that we can received events from the JavaScript
+    youTubeVideoWebViewInstance.delegate = self;
+    
+    // Default to using YouTube player for now
+    self.currentVideoWebView = youTubeVideoWebViewInstance;
+    
+    self.currentVideoView = self.currentVideoWebView;
+}
+
+
+- (void) viewWillAppear: (BOOL) animated
+{
+    [super viewWillAppear: animated];
+    
+    // Handle re-starting animations when returning from background
+     [[NSNotificationCenter defaultCenter] addObserver: self
+                                              selector: @selector(applicationDidBecomeActive:)
+                                                  name: UIApplicationDidBecomeActiveNotification
+                                                object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(applicationWillResignActive:)
+                                                 name: UIApplicationWillResignActiveNotification
+                                               object: nil];
+    
+    // Check to see if were playing when we left this page
+    [self playIfVideoActive];
 }
 
 
@@ -129,8 +153,8 @@ static UIWebView* youTubeVideoWebViewInstance;
                                                                 error: &error];
     
     NSString *iFrameHTML = [NSString stringWithFormat: templateHTMLString,
-                                                       (int) [SYNYouTubeVideoPlaybackViewController videoWidth],
-                                                       (int) [SYNYouTubeVideoPlaybackViewController videoHeight]];
+                            (int) [SYNYouTubeVideoPlaybackViewController videoWidth],
+                            (int) [SYNYouTubeVideoPlaybackViewController videoHeight]];
     
     [newYouTubeWebView loadHTMLString: iFrameHTML
                               baseURL: [NSURL URLWithString: @"http://www.youtube.com"]];
@@ -144,142 +168,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 #endif
     
     return newYouTubeWebView;
-}
-
-
-- (void) updateWithFrame: (CGRect) frame
-          channelCreator: (NSString *) channelCreator
-            indexUpdater: (SYNVideoIndexUpdater) indexUpdater;
-{
-    self.requestedFrame = frame;
-    self.indexUpdater = indexUpdater;
-    self.channelCreator = channelCreator;
-}
-
-- (void) updateChannelCreator: (NSString *) channelCreator
-{
-    self.channelCreator = channelCreator;
-    [self setCreatorText: self.channelCreator];
-}
-
-
-#pragma mark - View lifecyle
-
-// Manually create our view
-
-- (void) viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Make sure we set the desired frame at this point
-    self.view.frame = self.requestedFrame;
-    
-    self.view.clipsToBounds = YES;
-
-    // Start off by making our view transparent
-    self.view.backgroundColor = kVideoBackgroundColour;
-    
-    // Create view containing animated subviews for the animated placeholder (displayed whilst video is loading)
-    self.videoPlaceholderView = [self createNewVideoPlaceholderView];
-    
-    self.shuttleBarView = [self createShuttleBarView];
-    UIView *blockBarView = [[UIView alloc] initWithFrame: self.shuttleBarView.frame];
-    blockBarView.userInteractionEnabled = YES;
-    blockBarView.backgroundColor = [UIColor clearColor];
-    
-    // Setup our web views
-    youTubeVideoWebViewInstance.frame = self.view.bounds;
-    youTubeVideoWebViewInstance.backgroundColor = self.view.backgroundColor;
-    
-    // Set the webview delegate so that we can received events from the JavaScript
-    youTubeVideoWebViewInstance.delegate = self;
-    
-#ifdef ENABLE_VIMEO_PLAYER
-    // Now we know our frame size, update the pre-created webview with size and colour
-    vimeoVideoWebViewInstance.frame = self.view.bounds;
-    vimeoVideoWebViewInstance.backgroundColor = self.view.backgroundColor;
-    
-    // Set the webview delegate so that we can received events from the JavaScript
-    vimeoVideoWebViewInstance.delegate = self;
-#endif
-    
-    // Default to using YouTube player for now
-    self.currentVideoWebView = youTubeVideoWebViewInstance;
-    
-    [self.view insertSubview: self.currentVideoWebView
-                belowSubview: self.shuttleBarView];
-    
-    [self.view insertSubview: blockBarView
-                belowSubview: self.shuttleBarView];
-}
-
-
-- (void) viewWillAppear: (BOOL) animated
-{
-    [super viewWillAppear: animated];
-    
-    // Handle re-starting animations when returning from background
-     [[NSNotificationCenter defaultCenter] addObserver: self
-                                              selector: @selector(applicationDidBecomeActive:)
-                                                  name: UIApplicationDidBecomeActiveNotification
-                                                object: nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(applicationWillResignActive:)
-                                                 name: UIApplicationWillResignActiveNotification
-                                               object: nil];
-    
-    // Check to see if were playing when we left this page
-    [self playIfVideoActive];
-}
-
-
-- (void) viewDidDisappear: (BOOL) animated
-{
-    // Stop observing everything (less error-prone than trying to remove observers individually
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    
-    [self logViewingStatistics];
-    
-    // Just pause the video, as we might come back to this view again (if we have pushed any views on top)
-    [self pauseIfVideoActive];
-    
-    [self stopShuttleBarUpdateTimer];
-    [self stopVideoStallDetectionTimer];
-    [super viewDidDisappear: animated];
-}
-
-
-- (void) playIfVideoActive
-{
-    if (self.isPaused == TRUE)
-    {
-        if (self.pausedByUser == NO)
-        {
-            [self playVideo];
-        }
-    }
-    else
-    {
-        // Make sure we are displaying the spinner and not the video at this stage
-        self.currentVideoWebView.alpha = 0.0f;
-        self.videoPlaceholderView.alpha = 1.0f;
-    }
-    
-    // Start animation
-    [self animateVideoPlaceholder: YES];
-}
-
-
-- (void) pauseIfVideoActive
-{
-    if (self.isPlayingOrBuffering == TRUE)
-    {
-        [self pauseVideo];
-    }
-    
-    // Start animation
-    [self animateVideoPlaceholder: NO];
 }
 
 
@@ -302,13 +190,13 @@ static UIWebView* youTubeVideoWebViewInstance;
     self.currentVideoViewedFlag = FALSE;
     self.previousSourceId = nil;
     
-    [self loadCurrentVideoWebView];
+    [self loadCurrentVideoView];
 }
 
 
 #pragma mark - YouTube player support
 
-- (void) playYouTubeVideoWithSourceId: (NSString *) sourceId
+- (void) playVideoWithSourceId: (NSString *) sourceId
 {
 //    DebugLog(@"*** Playing: Load video command sent");
     self.notYetPlaying = TRUE;
@@ -379,33 +267,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 }
 
 
-- (void) playVideoAtIndex: (int) index
-{
-    // If we are already at this index, but not playing, then play
-    if (index == self.currentSelectedIndex)
-    {
-        if (!self.isPlaying)
-        {
-            // If we are not currently playing, then start playing
-            [self playVideo];
-            self.playFlag = TRUE;
-        }
-        else
-        {
-            // If we were already playing then restart the currentl video
-            [self setCurrentTime: 0.0f];
-        }
-    }
-    else
-    {
-        // OK, we are not currently playing this index, so segue to the next video
-        [self fadeOutVideoPlayer];
-        self.currentSelectedIndex = index;
-        [self loadCurrentVideoWebView];
-    }
-}
-
-
 - (void) pauseVideo
 {
     [self stopShuttleBarUpdateTimer];
@@ -423,16 +284,6 @@ static UIWebView* youTubeVideoWebViewInstance;
     [self.currentVideoWebView stringByEvaluatingJavaScriptFromString: @"player.stopVideo();"];
     
     self.playFlag = FALSE;
-}
-
-
-- (void) loadNextVideo
-{
-    [self incrementVideoIndex];
-    [self loadCurrentVideoWebView];
-    
-    // Call index updater block
-    self.indexUpdater(self.currentSelectedIndex);
 }
 
 
@@ -487,63 +338,6 @@ static UIWebView* youTubeVideoWebViewInstance;
     int playingValue = [[self.currentVideoWebView stringByEvaluatingJavaScriptFromString: @"player.getPlayerState();"] intValue];
     
     return (playingValue == 2) ? TRUE : FALSE;
-}
-
-
-#pragma mark - Video playback HTML creation
-
-- (void) resetPlayerAttributes
-{
-    // Used to determine if a pause event is caused by shuttling or the user touching the pause button
-    self.shuttledByUser = TRUE;
-    
-    // Make sure we don't receive any shuttle bar or buffer update timer events until we have loaded the new video
-    [self stopShuttleBarUpdateTimer];
-    // Reset shuttle slider
-    self.shuttleSlider.value = 0.0f;
-    
-    // Reset progress view
-    self.bufferingProgressView.progress = 0.0f;
-    
-    // And time value
-    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: 0.0f];
-}
-
-
-- (void) loadCurrentVideoWebView
-{
-    [self resetPlayerAttributes];
-    
-    [self logViewingStatistics];
-    
-    self.currentVideoViewedFlag = FALSE;
-    self.percentageViewed = 0.0f;
-    self.timeViewed = 0.0f;
-
-    VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
-    
-    NSString *currentSource = videoInstance.video.source;
-    NSString *currentSourceId = videoInstance.video.sourceId;
-    
-    self.previousSourceId = currentSourceId;
-    
-    // Try to set the duration
-    self.currentDuration = videoInstance.video.durationValue;
-    self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
-    
-    if ([currentSource isEqualToString: @"youtube"])
-    {
-        [self playYouTubeVideoWithSourceId: currentSourceId];
-    }
-    else if ([currentSource isEqualToString: @"vimeo"])
-    {
-        // TODO: Add Vimeo support here
-    }
-    else
-    {
-        // AssertOrLog(@"Unknown video source type");
-        DebugLog(@"WARNING: No Source! ");
-    }
 }
 
 
@@ -718,12 +512,6 @@ static UIWebView* youTubeVideoWebViewInstance;
     else if ([actionName isEqualToString: @"playbackQuality"])
     {
         DebugLog (@"!!!!!!!!!! Quality: %@", actionData);
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Video Quality"
-//                                                        message: actionData
-//                                                       delegate: nil
-//                                              cancelButtonTitle: @"OK"
-//                                              otherButtonTitles: nil, nil];
-//        [alert show];
     }
     else if ([actionName isEqualToString: @"playbackRateChange"])
     {
@@ -770,27 +558,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 }
 
 
-- (void) startVideoStallDetectionTimer
-{
-    [self.videoStallDetectionTimer invalidate];
-    
-    // Schedule the timer on a different runloop so that we continue to get updates even when scrolling collection views etc.
-    self.videoStallDetectionTimer = [NSTimer timerWithTimeInterval: kVideoStallThresholdTime
-                                                         target: self
-                                                       selector: @selector(videoStallDetected)
-                                                       userInfo: nil
-                                                        repeats: NO];
-    
-    [[NSRunLoop mainRunLoop] addTimer: self.videoStallDetectionTimer forMode: NSRunLoopCommonModes];
-}
-
-
-
-- (void) stopVideoStallDetectionTimer
-{
-    [self.videoStallDetectionTimer invalidate], self.videoStallDetectionTimer = nil;
-}
-
 - (void) videoStallDetected
 {
     SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
@@ -817,27 +584,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 }
 
 
-- (void) startShuttleBarUpdateTimer
-{
-    [self.shuttleBarUpdateTimer invalidate];
-    
-    // Schedule the timer on a different runloop so that we continue to get updates even when scrolling collection views etc.
-    self.shuttleBarUpdateTimer = [NSTimer timerWithTimeInterval: kShuttleBarUpdateTimerInterval
-                                                       target: self
-                                                     selector: @selector(updateShuttleBarProgress)
-                                                     userInfo: nil
-                                                      repeats: YES];
-    
-    [[NSRunLoop mainRunLoop] addTimer: self.shuttleBarUpdateTimer forMode: NSRunLoopCommonModes];
-}
-
-
-
-
-- (void) stopShuttleBarUpdateTimer
-{
-    [self.shuttleBarUpdateTimer invalidate], self.shuttleBarUpdateTimer = nil;
-}
 
 
 - (void) updateShuttleBarProgress
@@ -1016,36 +762,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 }
 
 
-#pragma mark - View animations
-
-// Fades up the video player, fading out any placeholder
-- (void) fadeUpVideoPlayer
-{
-    // Tweaked this as the QuickTime logo seems to appear otherwise
-    [UIView animateWithDuration: 0.5f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^ {
-                         self.currentVideoWebView.alpha = 1.0f;
-                         self.videoPlaceholderView.alpha = 0.0f;
-                     }
-                     completion: ^(BOOL completed) {
-                     }];
-}
-
-
-// Fades out the video player, fading in any placeholder
-- (void) fadeOutVideoPlayer
-{    
-    [UIView animateWithDuration: 0.5f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^ {
-                         self.currentVideoWebView.alpha = 0.0f;
-                         self.videoPlaceholderView.alpha = 1.0f;
-                     }
-                     completion: nil];
-}
 
 
 #pragma mark - URL handling
@@ -1062,24 +778,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 	{
 		[[UIApplication sharedApplication] openURL: youTubeURL];
 	}
-}
-
-- (void) logViewingStatistics
-{
-    if (self.previousSourceId != nil && self.percentageViewed > 0.0f)
-    {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"videoViewed"
-                                                                label: self.previousSourceId
-                                                                value: @((int) (self.percentageViewed  * 100.0f))] build]];
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"videoViewedDuration"
-                                                                label: self.previousSourceId
-                                                                value: @((int) (self.timeViewed))] build]];
-    }
 }
 
 @end

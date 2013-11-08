@@ -18,6 +18,81 @@
     self.placeholderMiddleLayerAnimation.delegate = nil;
 }
 
+#pragma mark - View lifecycle
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Make sure we set the desired frame at this point
+    self.view.frame = self.requestedFrame;
+    
+    self.view.clipsToBounds = YES;
+    
+    // Start off by making our view transparent
+    self.view.backgroundColor = kVideoBackgroundColour;
+    
+    // Create view containing animated subviews for the animated placeholder (displayed whilst video is loading)
+    self.videoPlaceholderView = [self createNewVideoPlaceholderView];
+    
+    self.shuttleBarView = [self createShuttleBarView];
+    UIView *blockBarView = [[UIView alloc] initWithFrame: self.shuttleBarView.frame];
+    blockBarView.userInteractionEnabled = YES;
+    blockBarView.backgroundColor = [UIColor clearColor];
+    
+    // Setup our web views
+    [self specificInit];
+    
+    [self.view insertSubview: self.currentVideoView
+                belowSubview: self.shuttleBarView];
+    
+    [self.view insertSubview: blockBarView
+                belowSubview: self.shuttleBarView];
+}
+
+
+- (void) specificInit
+{
+    AssertOrLog(@"Should be defined in subclass");
+}
+
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    // Stop observing everything (less error-prone than trying to remove observers individually
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    
+    [self logViewingStatistics];
+    
+    // Just pause the video, as we might come back to this view again (if we have pushed any views on top)
+    [self pauseIfVideoActive];
+    
+    [self stopShuttleBarUpdateTimer];
+    [self stopVideoStallDetectionTimer];
+    
+    [super viewDidDisappear: animated];
+}
+
+
+- (void) updateWithFrame: (CGRect) frame
+          channelCreator: (NSString *) channelCreator
+            indexUpdater: (SYNVideoIndexUpdater) indexUpdater;
+{
+    self.requestedFrame = frame;
+    self.indexUpdater = indexUpdater;
+    self.channelCreator = channelCreator;
+}
+
+
+- (void) updateChannelCreator: (NSString *) channelCreator
+{
+    self.channelCreator = channelCreator;
+    [self setCreatorText: self.channelCreator];
+}
+
+
+
+
 + (CGFloat) videoWidth
 {
     CGFloat width = 320.0f;
@@ -358,6 +433,98 @@
 }
 
 
+- (void) resetPlayerAttributes
+{
+    // Used to determine if a pause event is caused by shuttling or the user touching the pause button
+    self.shuttledByUser = TRUE;
+    
+    // Make sure we don't receive any shuttle bar or buffer update timer events until we have loaded the new video
+    [self stopShuttleBarUpdateTimer];
+    // Reset shuttle slider
+    self.shuttleSlider.value = 0.0f;
+    
+    // Reset progress view
+    self.bufferingProgressView.progress = 0.0f;
+    
+    // And time value
+    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: 0.0f];
+}
+
+
+- (void) loadCurrentVideoView
+{
+    [self resetPlayerAttributes];
+    
+    [self logViewingStatistics];
+    
+    self.currentVideoViewedFlag = FALSE;
+    self.percentageViewed = 0.0f;
+    self.timeViewed = 0.0f;
+    
+    VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
+    
+    NSString *currentSource = videoInstance.video.source;
+    NSString *currentSourceId = videoInstance.video.sourceId;
+    
+    self.previousSourceId = currentSourceId;
+    
+    // Try to set the duration
+    self.currentDuration = videoInstance.video.durationValue;
+    self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
+    
+    if ([currentSource isEqualToString: @"youtube"])
+    {
+        [self playVideoWithSourceId: currentSourceId];
+    }
+    else if ([currentSource isEqualToString: @"vimeo"])
+    {
+        // TODO: Add Vimeo support here
+    }
+    else
+    {
+        // AssertOrLog(@"Unknown video source type");
+        DebugLog(@"WARNING: No Source! ");
+    }
+}
+
+
+- (void) playVideoAtIndex: (int) index
+{
+    // If we are already at this index, but not playing, then play
+    if (index == self.currentSelectedIndex)
+    {
+        if (!self.isPlaying)
+        {
+            // If we are not currently playing, then start playing
+            [self playVideo];
+            self.playFlag = TRUE;
+        }
+        else
+        {
+            // If we were already playing then restart the currentl video
+            [self setCurrentTime: 0.0f];
+        }
+    }
+    else
+    {
+        // OK, we are not currently playing this index, so segue to the next video
+        [self fadeOutVideoPlayer];
+        self.currentSelectedIndex = index;
+        [self loadCurrentVideoView];
+    }
+}
+
+
+- (void) loadNextVideo
+{
+    [self incrementVideoIndex];
+    [self loadCurrentVideoView];
+    
+    // Call index updater block
+    self.indexUpdater(self.currentSelectedIndex);
+}
+
+
 #pragma mark - Placeholder Animation
 
 - (void) animateVideoPlaceholder: (BOOL) animate
@@ -543,6 +710,202 @@
     layer.beginTime = timeSincePause;
 }
 
+#pragma mark - View animations
 
+// Fades up the video player, fading out any placeholder
+- (void) fadeUpVideoPlayer
+{
+    // Tweaked this as the QuickTime logo seems to appear otherwise
+    [UIView animateWithDuration: 0.5f
+                          delay: 0.0f
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations: ^ {
+                         self.currentVideoView.alpha = 1.0f;
+                         self.videoPlaceholderView.alpha = 0.0f;
+                     }
+                     completion: ^(BOOL completed) {
+                     }];
+}
+
+
+// Fades out the video player, fading in any placeholder
+- (void) fadeOutVideoPlayer
+{
+    [UIView animateWithDuration: 0.5f
+                          delay: 0.0f
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations: ^ {
+                         self.currentVideoView.alpha = 0.0f;
+                         self.videoPlaceholderView.alpha = 1.0f;
+                     }
+                     completion: nil];
+}
+
+
+- (void) logViewingStatistics
+{
+    if (self.previousSourceId != nil && self.percentageViewed > 0.0f)
+    {
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"videoViewed"
+                                                                label: self.previousSourceId
+                                                                value: @((int) (self.percentageViewed  * 100.0f))] build]];
+        
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                                               action: @"videoViewedDuration"
+                                                                label: self.previousSourceId
+                                                                value: @((int) (self.timeViewed))] build]];
+    }
+}
+
+- (void) playIfVideoActive
+{
+    if (self.isPaused == TRUE)
+    {
+        if (self.pausedByUser == NO)
+        {
+            [self playVideo];
+        }
+    }
+    else
+    {
+        // Make sure we are displaying the spinner and not the video at this stage
+        self.currentVideoView.alpha = 0.0f;
+        self.videoPlaceholderView.alpha = 1.0f;
+    }
+    
+    // Start animation
+    [self animateVideoPlaceholder: YES];
+}
+
+
+- (void) pauseIfVideoActive
+{
+    if (self.isPlayingOrBuffering == TRUE)
+    {
+        [self pauseVideo];
+    }
+    
+    // Start animation
+    [self animateVideoPlaceholder: NO];
+}
+
+- (void) startShuttleBarUpdateTimer
+{
+    [self.shuttleBarUpdateTimer invalidate];
+    
+    // Schedule the timer on a different runloop so that we continue to get updates even when scrolling collection views etc.
+    self.shuttleBarUpdateTimer = [NSTimer timerWithTimeInterval: kShuttleBarUpdateTimerInterval
+                                                         target: self
+                                                       selector: @selector(updateShuttleBarProgress)
+                                                       userInfo: nil
+                                                        repeats: YES];
+    
+    [[NSRunLoop mainRunLoop] addTimer: self.shuttleBarUpdateTimer forMode: NSRunLoopCommonModes];
+}
+
+
+
+
+- (void) stopShuttleBarUpdateTimer
+{
+    [self.shuttleBarUpdateTimer invalidate], self.shuttleBarUpdateTimer = nil;
+}
+
+- (void) startVideoStallDetectionTimer
+{
+    [self.videoStallDetectionTimer invalidate];
+    
+    // Schedule the timer on a different runloop so that we continue to get updates even when scrolling collection views etc.
+    self.videoStallDetectionTimer = [NSTimer timerWithTimeInterval: kVideoStallThresholdTime
+                                                            target: self
+                                                          selector: @selector(videoStallDetected)
+                                                          userInfo: nil
+                                                           repeats: NO];
+    
+    [[NSRunLoop mainRunLoop] addTimer: self.videoStallDetectionTimer forMode: NSRunLoopCommonModes];
+}
+
+
+
+- (void) stopVideoStallDetectionTimer
+{
+    [self.videoStallDetectionTimer invalidate], self.videoStallDetectionTimer = nil;
+}
+
+
+
+#pragma mark - Abstract functions
+
+- (NSTimeInterval) duration
+{
+    AssertOrLog(@"Abstract method called");
+    return 0.0f;
+}
+
+
+- (NSTimeInterval) currentTime
+{
+    AssertOrLog(@"Abstract method called");
+    return 0.0f;
+}
+
+
+- (void) setCurrentTime: (NSTimeInterval) newTime
+{
+        AssertOrLog(@"Abstract method called");
+}
+
+
+- (float) videoLoadedFraction
+{
+    AssertOrLog(@"Abstract method called");
+    return 0.0f;
+}
+
+
+- (BOOL) isPlaying
+{
+    AssertOrLog(@"Abstract method called");
+    return FALSE;
+}
+
+
+- (BOOL) isPlayingOrBuffering
+{
+    AssertOrLog(@"Abstract method called");
+    return FALSE;
+}
+
+
+- (BOOL) isPaused
+{
+    AssertOrLog(@"Abstract method called");
+    return FALSE;
+}
+
+
+- (void) playVideo;
+{
+     AssertOrLog(@"Abstract method called");
+}
+
+- (void) pauseVideo
+{
+     AssertOrLog(@"Abstract method called");
+}
+
+
+- (void) stopVideo
+{
+      AssertOrLog(@"Abstract method called");
+}
+
+- (void) playVideoWithSourceId: (NSString *) sourceId
+{
+        AssertOrLog(@"Abstract method called");
+}
 
 @end
