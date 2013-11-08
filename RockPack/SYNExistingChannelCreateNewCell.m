@@ -8,6 +8,7 @@
 
 #import "SYNExistingChannelCreateNewCell.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
 @implementation SYNExistingChannelCreateNewCell
 
@@ -17,7 +18,7 @@
     
     
     self.createNewButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize];
-
+    self.backgroundColor = [UIColor dollyAddButtonDefaultColor];
 }
 
 

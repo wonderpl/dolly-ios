@@ -56,46 +56,26 @@
 {
     [super viewDidLoad];
     
+    // == TODO: Delete? == //
     self.autopostTitleLabel.font = [UIFont lightCustomFontOfSize: self.autopostTitleLabel.font.pointSize];
     
     self.autopostNoButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
     self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
+    // ================= //
     
-    // We need to use a custom layout (as due to the deletion/wobble logic used elsewhere)
-    if (IS_IPAD)
-    {
-        // iPad layout & size
-        self.collectionsCollectionView.collectionViewLayout =
-        [SYNDeletionWobbleLayout layoutWithItemSize: CGSizeMake(192.0f, 192.0f)
-                            minimumInterItemSpacing: 0.0f
-                                 minimumLineSpacing: 5.0f
-                                    scrollDirection: UICollectionViewScrollDirectionVertical
-                                       sectionInset: UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-    }
-    else
-    {
-        // iPhone layout & size
-        self.collectionsCollectionView.collectionViewLayout =
-        [SYNDeletionWobbleLayout layoutWithItemSize: CGSizeMake(158.0f, 158.0f)
-                            minimumInterItemSpacing: 0.0f
-                                 minimumLineSpacing: 0.0f
-                                    scrollDirection: UICollectionViewScrollDirectionVertical
-                                       sectionInset: UIEdgeInsetsMake(2.0f, 2.0f, 0.0f, 2.0f)];
-    }
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelCreateNewCell"
-                                                                     bundle: nil]
-                          forCellWithReuseIdentifier: @"SYNChannelCreateNewCell"];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCreateNewCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])];
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelMidCell"
-                                                                     bundle: nil]
-                          forCellWithReuseIdentifier: @"SYNChannelMidCell"];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])];
     
     
     self.collectionsCollectionView.scrollsToTop = NO;
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
+    // == TODO: Delete? == //
     ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
     
     if (facebookAccount)
@@ -116,22 +96,9 @@
     {
         self.autopostView.hidden = YES;
     }
+    // == TODO: Delete? == //
     
-    if(IS_IPHONE)
-    {
-        CGRect vFrame;
-        for (UIView* viewToMove in @[self.closeButton, self.titleLabel, self.confirmButtom])
-        {
-            vFrame = viewToMove.frame;
-            vFrame.origin.y += 10.0f;
-            if(viewToMove == self.closeButton)
-                vFrame.origin.x += 14.0f;
-            viewToMove.frame = vFrame;
-            
-        }
-        
-        
-    }
+    
 }
 
 
@@ -312,7 +279,7 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])
                                                                                         forIndexPath: indexPath];
         
         cell = createCell;
