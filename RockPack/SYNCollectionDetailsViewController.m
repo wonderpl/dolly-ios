@@ -2085,7 +2085,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
                                                               userInfo: nil];
             
             //And show as if displayed from the normal master view hierarchy
-            [appDelegate.viewStackManager pushController: self];
+			[master.showingViewController pushViewController:self animated:nil];
         }
         
         [self setDisplayControlsVisibility: YES];
