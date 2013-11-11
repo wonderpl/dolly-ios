@@ -238,45 +238,6 @@
     
 }
 
-#pragma mark - Popover Managment
-
--(void)presentCoverViewController:(UIViewController*)viewController
-{
-    currentOverViewController = viewController;
-    
-    [self.masterController addChildViewController: viewController];
-    
-    currentOverViewController.view.alpha = 0.0f;
-    
-    [self.masterController.view addSubview: viewController.view];
-    
-    [UIView animateWithDuration: 0.3
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         currentOverViewController.view.alpha = 1.0f;
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                     }];
-    
-    
-}
--(void)removeCoverPopoverViewController
-{
-    [UIView animateWithDuration: 0.3
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         currentOverViewController.view.alpha = 0.0f;
-                     }
-                     completion: ^(BOOL finished) {
-                         [currentOverViewController removeFromParentViewController];
-                         [currentOverViewController.view removeFromSuperview];
-                         currentOverViewController = nil;
-                     }];
-}
-
 -(void)presentPopoverView:(UIView *)view
 {
     [self presentPopoverView:view withBackgroundAlpha:BG_ALPHA_DEFAULT];
