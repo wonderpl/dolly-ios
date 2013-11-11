@@ -166,7 +166,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [self.showingViewController headerTapped];
 }
 
-#pragma mark - Overlays
+#pragma mark - Overlays, Adding and Removing
 
 -(void)addExistingCollectionsOverlayController
 {
@@ -256,8 +256,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                              endFrame.origin.y = self.view.frame.size.height; // push to the bottom
                              self.overlayController.view.frame = endFrame;
                          }
-                         
-                         
                      }
                      completion: ^(BOOL finished) {
                          
@@ -378,7 +376,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil)
                                                                        : NSLocalizedString(@"No_Network_iPhone", nil);
-        [self presentNetworkErrorViewWithMesssage: message];
+        
+        [self presentSuccessNotificationWithMessage:message andType:NotificationMessageTypeError];
     }
 }
 
@@ -408,7 +407,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     NSString* message = IS_IPHONE ? NSLocalizedString(@"PACK SAVED", nil) : NSLocalizedString(@"YOUR PACK HAS BEEN SAVED", nil);
     
-    [self presentSuccessNotificationWithMessage: message];
+    [self presentSuccessNotificationWithMessage:message andType:NotificationMessageTypeSuccess];
 }
 
 
@@ -448,70 +447,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 
 
-#pragma mark - Account Settings
 
-- (void) showAccountSettingsPopover
-{
-    if (self.accountSettingsPopover)
-        return;
-    
-    SYNAccountSettingsMainTableViewController* accountsTableController = [[SYNAccountSettingsMainTableViewController alloc] init];
-    accountsTableController.view.backgroundColor = [UIColor clearColor];
-
-    if (IS_IPAD)
-    {
-        
-        UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: accountsTableController];
-        navigationController.view.backgroundColor = [UIColor clearColor];
-        
-        self.accountSettingsPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
-        self.accountSettingsPopover.popoverContentSize = CGSizeMake(380, 576);
-        self.accountSettingsPopover.delegate = self;
-        
-        self.accountSettingsPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
-        
-        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
-                                 [SYNDeviceManager.sharedInstance currentScreenHeight] * 0.5, 1, 1);
-        
-        [self.accountSettingsPopover presentPopoverFromRect: rect
-                                                     inView: self.view
-                                   permittedArrowDirections: 0
-                                                   animated: YES];
-    }
-    else
-    {
-        
-        UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: accountsTableController];
-        navigationController.view.backgroundColor = [UIColor clearColor];
-        navigationController.navigationBarHidden = YES;
-        
-        __weak SYNMasterViewController* weakSelf = self;
-        self.modalAccountContainer = [[SYNAccountSettingsModalContainer alloc] initWithNavigationController:navigationController andCompletionBlock:^{
-            [weakSelf modalAccountContainerDismiss];
-        }];
-        
-        CGRect modalFrame = self.modalAccountContainer.view.frame;
-        modalFrame.size.height = self.view.frame.size.height - 60.0f;
-        [self.modalAccountContainer setModalViewFrame:modalFrame];
-        
-        modalFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight];
-        self.modalAccountContainer.view.frame = modalFrame;
-        
-        self.accountSettingsCoverView.alpha = 0.0;
-        self.accountSettingsCoverView.hidden = NO;
-        [self.view addSubview:self.accountSettingsCoverView];
-        
-        [self.view addSubview:self.modalAccountContainer.view];
-        
-        modalFrame.origin.y = 60.0;
-        
-        [UIView animateWithDuration:0.3 animations:^{
-           
-            self.accountSettingsCoverView.alpha = 0.8;
-            self.modalAccountContainer.view.frame = modalFrame;
-        }];
-    }
-}
 
 
 - (void) modalAccountContainerDismiss
@@ -562,36 +498,42 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-#pragma mark - Message Bars
+#pragma mark - Message Popups (form Bottom)
 
-- (void) presentNetworkErrorViewWithMesssage: (NSString*) message
-{
-    if (self.networkErrorView)
-    {
-        [self.networkErrorView setText:message];
-        return;
-    }
-    
-    self.networkErrorView = [SYNNetworkMessageView errorView];
-    [self.networkErrorView setText:message];
-    [self.errorContainerView addSubview:self.networkErrorView];
-    
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect erroViewFrame = self.networkErrorView.frame;
-        erroViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] - erroViewFrame.size.height;
-        
-        self.networkErrorView.frame = erroViewFrame;
-    }];
-}
-
-
-- (void) presentSuccessNotificationWithMessage : (NSString*) message
+- (void) presentSuccessNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
 {
     
-    [appDelegate.viewStackManager presentSuccessNotificationWithMessage:message];
+    __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] init];
+    messageView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarSucess"]];
+    [messageView setText: message];
+    
+    [self.view addSubview: messageView];
+    
+    [UIView animateWithDuration: 0.3f
+                          delay: 0.0f
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations: ^{
+                         CGRect newFrame = messageView.frame;
+                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] - newFrame.size.height;
+                         messageView.frame = newFrame;
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                         [UIView animateWithDuration: 0.3f
+                                               delay: 4.0f
+                                             options: UIViewAnimationOptionCurveEaseIn
+                                          animations: ^{
+                                              CGRect newFrame = messageView.frame;
+                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
+                                              messageView.frame = newFrame;
+                                          }
+                                          completion: ^(BOOL finished) {
+                                              [messageView removeFromSuperview];
+                                          }];
+                     }];
 }
 
+#pragma mark - Caution Presentation
 
 - (void) presentSuccessNotificationWithCaution:(NSNotification*)notification
 {

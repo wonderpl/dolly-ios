@@ -46,8 +46,6 @@ typedef void(^ViewStackReturnBlock)(void);
 - (void) presentPopoverView:(UIView*)view withBackgroundAlpha:(CGFloat)bgAlpha;
 - (void) removePopoverView;
 
-- (void) presentSuccessNotificationWithMessage : (NSString*) message;
-- (void) presentErrorNotificationWithMessage : (NSString*) message;
 
 - (void) viewProfileDetails: (ChannelOwner *) channelOwner;
 - (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId;

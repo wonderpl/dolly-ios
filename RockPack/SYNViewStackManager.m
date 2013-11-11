@@ -468,52 +468,6 @@
 
 
 
-#pragma mark - Network Notification Messages (from the bottom)
-
--(void)presentErrorNotificationWithMessage : (NSString*)message
-{
-    [self presentNotificationWithMessage:message withType:NotificationMessageTypeError];
-}
-
-- (void) presentSuccessNotificationWithMessage : (NSString*) message
-{
-     [self presentNotificationWithMessage:message withType:NotificationMessageTypeSuccess];
-}
-
--(void)presentNotificationWithMessage:(NSString*)message withType:(NotificationMessageType)type
-{
-    __block SYNNetworkMessageView* successNotification = [[SYNNetworkMessageView alloc] init];
-    successNotification.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarSucess"]];
-    [successNotification setText: message];
-    
-    [self.masterController.view addSubview: successNotification];
-    
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         CGRect newFrame = successNotification.frame;
-                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] - newFrame.size.height;
-                         successNotification.frame = newFrame;
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         [UIView animateWithDuration: 0.3f
-                                               delay: 4.0f
-                                             options: UIViewAnimationOptionCurveEaseIn
-                                          animations: ^{
-                                              CGRect newFrame = successNotification.frame;
-                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
-                                              successNotification.frame = newFrame;
-                                          }
-                                          completion: ^(BOOL finished) {
-                                              [successNotification removeFromSuperview];
-                                          }];
-                     }];
-}
-
-
-
 #pragma mark - Helper
 
 - (UIViewController *) topControllerMatchingTypeString: (NSString *) classString

@@ -14,6 +14,7 @@
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "VideoInstance.h"
+#import "SYNMasterViewController.h"
 
 @interface SYNChannelManager ()
 
@@ -511,7 +512,8 @@
                                                                                                               label: nil
                                                                                                               value: nil] build]];
 
-                                                      [appDelegate.viewStackManager presentSuccessNotificationWithMessage:messageS];
+                                                      [appDelegate.masterViewController presentSuccessNotificationWithMessage:messageS
+                                                                                                                      andType:NotificationMessageTypeSuccess];
                                                       
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                                                                           object: self];
@@ -522,7 +524,8 @@
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                                                                           object: self];
                                                       
-                                                      [appDelegate.viewStackManager presentSuccessNotificationWithMessage:messageE];
+                                                      [appDelegate.masterViewController presentSuccessNotificationWithMessage:messageE
+                                                                                                                      andType:NotificationMessageTypeError];
                                                       
                                                   }];
 }
