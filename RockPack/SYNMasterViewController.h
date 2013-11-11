@@ -60,9 +60,9 @@ typedef enum NotificationMessageType : NSInteger {
 // Overlay
 -(void)addExistingCollectionsOverlayController;
 
--(void) addOverlayController: (SYNAbstractViewController*) abstractViewController;
+
 -(void) addOverlayController: (SYNAbstractViewController*) abstractViewController animated:(BOOL)animated;
 
--(void)removeOverlayController;
+
 -(void)removeOverlayControllerAnimated:(BOOL)animated;
 @end

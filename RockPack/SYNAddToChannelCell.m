@@ -8,6 +8,7 @@
 
 #import "SYNAddToChannelCell.h"
 #import "UIFont+SYNFont.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SYNAddToChannelCell
 
@@ -15,6 +16,9 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.layer.borderWidth = 1.0f;
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
 }

@@ -1108,6 +1108,8 @@
 		BE31EFAB182C0579006E20E2 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */; };
 		BE31EFB0182D4B00006E20E2 /* SYNAddToChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFAF182D4B00006E20E2 /* SYNAddToChannelCell.m */; };
 		BE31EFB2182D4B13006E20E2 /* SYNAddToChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFB1182D4B13006E20E2 /* SYNAddToChannelCell.xib */; };
+		BE31EFB5183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFB4183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m */; };
+		BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFB918314CE8006E20E2 /* SYNAddToChannelFlowLayout.m */; };
 		BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */; };
 		BE3574EA17CE07B00083CBB1 /* SYNOneToOneSharingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */; };
 		BE3983D11768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3983D01768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m */; };
@@ -2726,6 +2728,10 @@
 		BE31EFAE182D4B00006E20E2 /* SYNAddToChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelCell.h; sourceTree = "<group>"; };
 		BE31EFAF182D4B00006E20E2 /* SYNAddToChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelCell.m; sourceTree = "<group>"; };
 		BE31EFB1182D4B13006E20E2 /* SYNAddToChannelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAddToChannelCell.xib; sourceTree = "<group>"; };
+		BE31EFB3183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelExpandedFlowLayout.h; sourceTree = "<group>"; };
+		BE31EFB4183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelExpandedFlowLayout.m; sourceTree = "<group>"; };
+		BE31EFB818314CE8006E20E2 /* SYNAddToChannelFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelFlowLayout.h; sourceTree = "<group>"; };
+		BE31EFB918314CE8006E20E2 /* SYNAddToChannelFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelFlowLayout.m; sourceTree = "<group>"; };
 		BE3574E617CE07B00083CBB1 /* SYNOneToOneSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOneToOneSharingController.h; sourceTree = "<group>"; };
 		BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOneToOneSharingController.m; sourceTree = "<group>"; };
 		BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOneToOneSharingController.xib; sourceTree = "<group>"; };
@@ -3779,7 +3785,7 @@
 		019824E11629CAB600216900 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BEB313BC182A822900FAF98A /* Existing Collections */,
+				BEB313BC182A822900FAF98A /* Add to Channels */,
 				01982563162ADEAD00216900 /* Abstract */,
 				01B7F75B164FB7A7009C5CCD /* Collections */,
 				BEF9E5A516DBCDEF00286113 /* Components */,
@@ -5625,6 +5631,17 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		BE31EFB71831455C006E20E2 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				BE31EFB818314CE8006E20E2 /* SYNAddToChannelFlowLayout.h */,
+				BE31EFB918314CE8006E20E2 /* SYNAddToChannelFlowLayout.m */,
+				BE31EFB3183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.h */,
+				BE31EFB4183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
 		BE3574E517CE07860083CBB1 /* One to One Sharing */ = {
 			isa = PBXGroup;
 			children = (
@@ -6160,16 +6177,17 @@
 			name = "Trackable View";
 			sourceTree = "<group>";
 		};
-		BEB313BC182A822900FAF98A /* Existing Collections */ = {
+		BEB313BC182A822900FAF98A /* Add to Channels */ = {
 			isa = PBXGroup;
 			children = (
+				BE31EFB71831455C006E20E2 /* Layouts */,
 				BE31EFAD182D4729006E20E2 /* Cells */,
 				BE285D981725726300D995AB /* SYNAddToChannelViewController.h */,
 				BE285D991725726300D995AB /* SYNAddToChannelViewController.m */,
-				BE285D9A1725726300D995AB /* SYNAddToChannelViewController.xib */,
 				38A201061731738F00FB9F57 /* SYNAddToChannelViewController~iphone.xib */,
+				BE285D9A1725726300D995AB /* SYNAddToChannelViewController.xib */,
 			);
-			name = "Existing Collections";
+			name = "Add to Channels";
 			sourceTree = "<group>";
 		};
 		BEB313BD182A824000FAF98A /* Cells */ = {
@@ -7647,6 +7665,7 @@
 				01946B971683339F00354601 /* ChannelOwner.m in Sources */,
 				01946B981683339F00354601 /* VideoInstance.m in Sources */,
 				01C9CFA61697496400C42479 /* NSDate-Utilities.m in Sources */,
+				BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */,
 				01C6FD0F169DDEDB00E01AA3 /* NSDictionary+Validation.m in Sources */,
 				01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */,
 				01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */,
@@ -7743,6 +7762,7 @@
 				011C167C173003E800CF50B9 /* OWFacebookActivity.m in Sources */,
 				011C167D173003E800CF50B9 /* OWMailActivity.m in Sources */,
 				011C167E173003E800CF50B9 /* OWMapsActivity.m in Sources */,
+				BE31EFB5183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m in Sources */,
 				011C167F173003E800CF50B9 /* OWMessageActivity.m in Sources */,
 				011C1680173003E800CF50B9 /* OWPrintActivity.m in Sources */,
 				011C1681173003E800CF50B9 /* OWSafariActivity.m in Sources */,

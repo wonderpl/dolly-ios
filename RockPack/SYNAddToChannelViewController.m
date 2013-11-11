@@ -24,6 +24,11 @@
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
 #import "UIImageView+WebCache.h"
+#import "SYNAddToChannelExpandedFlowLayout.h"
+#import "SYNAddToChannelFlowLayout.h"
+#import <QuartzCore/QuartzCore.h>
+
+#define kAnimationExpansion 0.7f
 
 @import QuartzCore;
 
@@ -45,6 +50,8 @@
 @property (nonatomic, weak) Channel *selectedChannel;
 
 @property (nonatomic, weak) SYNAddToChannelCreateNewCell *createNewChannelCell;
+@property (nonatomic, strong) SYNAddToChannelFlowLayout *normalFlowLayout;
+@property (nonatomic, strong) SYNAddToChannelExpandedFlowLayout* expandedFlowLayout;
 
 
 // autopost stuff
@@ -71,6 +78,14 @@
     self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
     // ================= //
     
+    self.view.layer.cornerRadius = 8.0f;
+    
+    self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
+    self.normalFlowLayout = [[SYNAddToChannelFlowLayout alloc] init];
+    
+    self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
+    
+    creatingNewState = NO;
     
     [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
                           forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
@@ -312,61 +327,6 @@
     return cell;
 }
 
-- (CGSize)	collectionView: (UICollectionView *) collectionView
-                   layout: (UICollectionViewLayout *) collectionViewLayout
-   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    // TODO: Set for iPad as well...
-    if(indexPath.row == 0 && creatingNewState)
-    {
-        return CGSizeMake(320.0f, 200.0f);
-    }
-    else
-    {
-        return CGSizeMake(320.0f, 60.0f);
-    }
-  
-    
-}
-
--(void)createNewButtonPressed
-{
-    if(creatingNewAnimating)
-        return;
-    
-    creatingNewAnimating = YES;
-    
-    creatingNewState = !creatingNewState; // toggle state
-    
-    if(creatingNewState) // if it is opening, show the panel
-    {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"channelSelectionClick"
-                                                                label: @"New"
-                                                                value: nil] build]];
-        
-        self.createNewChannelCell.descriptionTextView.hidden = NO;
-    }
-    
-    __weak SYNAddToChannelViewController* wself = self;
-    
-    [self.currentChannelsCollectionView performBatchUpdates:^{
-        
-        [wself.currentChannelsCollectionView reloadData];
-        
-    } completion:^(BOOL finished) {
-        
-        creatingNewAnimating = NO;
-        if(!creatingNewState) // if it has just closed, hide the panel
-        {
-            wself.createNewChannelCell.descriptionTextView.hidden = YES;
-        }
-        
-    }];
-}
-
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
@@ -380,6 +340,107 @@
     
 }
 
+#pragma mark - Expansion of First Cell
+
+
+-(void)createNewButtonPressed
+{
+    if(creatingNewAnimating)
+        return;
+    
+    creatingNewAnimating = YES;
+    
+    [self.currentChannelsCollectionView.collectionViewLayout invalidateLayout];
+    
+    // 1. Loop over all the cells and animate manually
+    
+    int index = 0;
+    for (UICollectionViewCell* cell in self.currentChannelsCollectionView.visibleCells)
+    {
+        void (^animateChangeWidth)() = ^()
+        {
+            CGRect frame = cell.frame;
+            
+            
+            if(index == 0 && [cell isKindOfClass:[SYNAddToChannelCreateNewCell class]])
+            {
+                if(creatingNewState) // if in "create new" state -> contract
+                {
+                    frame.size.height = kChannelCellDefaultHeight;
+                    ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 0.0f;
+                }
+                else
+                {
+                    frame.size.height = kChannelCellExpandedHeight;
+                    ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 1.0f;
+                }
+                
+                
+            }
+            else if((IS_IPAD &&index % 2 == 0) || IS_IPHONE)
+            {
+                if(creatingNewState) // if in create new state -> contract
+                {
+                    frame.origin.y -= kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+                }
+                else
+                {
+                    frame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+                }
+                
+            }
+            cell.frame = frame;
+        };
+        index++;
+        
+        
+        [UIView transitionWithView:cell
+                          duration:kAnimationExpansion
+                           options: UIViewAnimationOptionCurveEaseInOut
+                        animations:animateChangeWidth
+                        completion:nil];
+        
+    }
+    
+    // 2. Time the completion of the animation to swap the layout
+    
+    [self performSelector:@selector(finilizeExpansionOfCell) withObject:self afterDelay:kAnimationExpansion];
+    
+    // send tracking information
+    
+    if(creatingNewState) // if it is opening, show the panel
+    {
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"channelSelectionClick"
+                                                                label: @"New"
+                                                                value: nil] build]];
+        
+        
+    }
+    
+
+}
+
+-(void)finilizeExpansionOfCell
+{
+    creatingNewAnimating = NO;
+    
+    creatingNewState = !creatingNewState;
+    
+    if(creatingNewState)
+    {
+        self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
+    }
+    else
+    {
+        self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
+    }
+}
+
+
+#pragma mark - Main Controls Callbacks
 
 - (IBAction) closeButtonPressed: (id) sender
 {

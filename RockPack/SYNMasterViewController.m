@@ -162,10 +162,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
--(void) addOverlayController: (SYNAbstractViewController*) abstractViewController
-{
-    [self addOverlayController:abstractViewController animated:NO];
-}
+
 
 - (void) addOverlayController:(SYNAbstractViewController *)abstractViewController animated:(BOOL)animated
 {
@@ -174,6 +171,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         AssertOrLog(@"Trying to add nil as an overlay controller");
         return;
     }
+    
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
+    [self.backgroundOverlayView addGestureRecognizer:tapGesture];
     
     self.backgroundOverlayView.alpha = 0.0f;
     
@@ -238,10 +238,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
 }
 
--(void)removeOverlayController
+- (void) backgroundOverlayTapped:(UITapGestureRecognizer*)recogniser
 {
-    [self removeOverlayControllerAnimated:NO];
+    
+    [self removeOverlayControllerAnimated:YES];
 }
+
+
 
 -(void)removeOverlayControllerAnimated:(BOOL)animated
 {
