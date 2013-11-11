@@ -57,11 +57,6 @@ typedef void(^ViewStackReturnBlock)(void);
 
 - (void) viewChannelDetails: (Channel *) channel;
 
-
 - (void) hideModalController;
-
-
-
--(BOOL) controllerViewIsVisible:(SYNAbstractViewController*)controllerToTest;
 
 @end

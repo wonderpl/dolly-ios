@@ -25,7 +25,6 @@
 #import "SYNExistingCollectionsViewController.h"
 #import "SYNImagePickerController.h"
 #import "SYNMasterViewController.h"
-#import "SYNModalSubscribersController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
