@@ -73,11 +73,11 @@
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
         [self.followerCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
         [self.videoCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
-
+        
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
-      //  [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-      //  [self.boarderView.layer setBorderWidth:0.5f];
+        //  [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
+        //  [self.boarderView.layer setBorderWidth:0.5f];
         [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
         
     }
@@ -87,16 +87,6 @@
         [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-        
-        if (IS_RETINA)
-        {
-            [self.boarderView.layer setBorderWidth:0.5f];
-        }
-        else
-        {
-            [self.boarderView.layer setBorderWidth:1.0f];
-            
-        }
         
     }
     
@@ -113,7 +103,7 @@
     [self.containerView addGestureRecognizer:self.leftSwipe];
     self.deleteMode = NO;
     self.descriptionMode = NO;
-
+    
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
@@ -242,26 +232,26 @@
 - (IBAction)showDescriptionSwipe:(UISwipeGestureRecognizer *)recognizer
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
-
+    
     if (self.deleteMode || self.descriptionMode) {
         [self moveToCentre];
     }
     else
     {
         [self showDescription];
-
+        
     }
 }
 
 - (IBAction)leftSwipe:(UISwipeGestureRecognizer *)recognizer
 {
- 
+    
     if (self.deleteMode || self.descriptionMode) {
         [self moveToCentre];
     }
     else
     {
-       // [self showDelete];
+        // [self showDelete];
     }
     
 }
@@ -282,11 +272,11 @@
             }
             self.containerView.frame = tmpRect;
             self.descriptionMode = YES;
-
+            
         }
     }];
     
-
+    
 }
 
 -(void) moveToCentre {
@@ -296,11 +286,11 @@
         {
             CGRect tmpRect = self.containerView.frame;
             
-                tmpRect.origin.x = 0;
+            tmpRect.origin.x = 0;
             self.containerView.frame = tmpRect;
             self.deleteMode = NO;
             self.descriptionMode = NO;
-
+            
         }
     }];
 }
@@ -308,47 +298,63 @@
 
 
 -(void) showDelete{
-
+    
     [UIView animateWithDuration:0.5f animations:^{
         
-            CGRect tmpRect = self.containerView.frame;
-            
-            if (IS_IPHONE)
-            {
-                tmpRect.origin.x -= 50;
-            }
-            else
-            {
-                tmpRect.origin.x -= 50;
-            }
-            self.containerView.frame = tmpRect;
+        CGRect tmpRect = self.containerView.frame;
+        
+        if (IS_IPHONE)
+        {
+            tmpRect.origin.x -= 50;
+        }
+        else
+        {
+            tmpRect.origin.x -= 50;
+        }
+        self.containerView.frame = tmpRect;
         self.deleteMode = YES;
     }];
-
+    
     
 }
 - (IBAction)followChannel:(id)sender
 {
     [self.viewControllerDelegate followButtonTapped: self];
-
-   // [self showAlertView];
+    
+    // [self showAlertView];
 }
 
+-(void) setBorder
+{
+    if (IS_IPAD){
+        if (IS_RETINA)
+        {
+            [self.boarderView.layer setBorderWidth:0.5f];
+        }
+        else
+        {
+            [self.boarderView.layer setBorderWidth:1.0f];
+        }
+    }
+}
 
 -(void) showAlertView{
     NSString *message = @"Are you sure you want to unfollow";
     
     message =  [message stringByAppendingString:@" "];
-
-   message =  [message stringByAppendingString:self.channel.title];
+    
+    message =  [message stringByAppendingString:self.channel.title];
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    
     [alertView show];
 }
 
-- (NSString *) yesButtonTitle{
+- (NSString *) yesButtonTitle
+{
     return @"Yes";
 }
-- (NSString *) noButtonTitle{
+- (NSString *) noButtonTitle
+{
     return @"Cancel";
 }
 
@@ -366,9 +372,8 @@
     }
 }
 
-
--(void) reset {
-    
+-(void) reset
+{
     self.videoCountLabel.text = @"";
     self.videoTitleLabel.text = @"";
     self.followerCountLabel.text = @"";
@@ -376,8 +381,6 @@
     [self.boarderView.layer setBorderWidth:0.0f];
     self.bottomBarView.backgroundColor = [UIColor clearColor];
     self.followButton.hidden = YES;
-    
 }
-
 
 @end

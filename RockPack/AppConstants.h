@@ -446,6 +446,13 @@ typedef enum : NSInteger {
     PointingDirectionRight
 } PointingDirection;
 
+typedef enum : NSInteger
+{
+    kChannelDetailsModeDisplay = 0,
+    kChannelDetailsModeEdit = 1,
+    kChannelDetailsModeCreate = 2
+} kChannelDetailsMode;
+
 
 // Height of the bottom tab bar in pixels
 #define kBottomTabBarHeight 62

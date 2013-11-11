@@ -9,12 +9,12 @@
                 <outlet property="btnAvatar" destination="fM4-Xb-Qmi" id="fcK-Rp-wxK"/>
                 <outlet property="btnFollow" destination="P7D-vs-dmA" id="evd-Ki-B6p"/>
                 <outlet property="btnShare" destination="ftS-iK-V3y" id="Xgx-Mf-ukS"/>
-                <outlet property="collectionVideoInstances" destination="8Ij-2z-UN8" id="UIv-sx-CQg"/>
                 <outlet property="lblChannelTitle" destination="Vnv-ov-6xo" id="ov8-x6-sed"/>
                 <outlet property="lblDescription" destination="irB-oP-X4O" id="BBs-Oh-cue"/>
                 <outlet property="lblFollowersCount" destination="yMO-3M-QGB" id="bCD-P6-gPU"/>
                 <outlet property="lblFullName" destination="r8Y-zW-rcS" id="0f2-uW-cCd"/>
                 <outlet property="lblVideosCount" destination="A5I-Oz-fYg" id="93e-Aa-uIY"/>
+                <outlet property="videoThumbnailCollectionView" destination="8Ij-2z-UN8" id="cwi-G1-nSN"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -38,6 +38,10 @@
                         <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                     </collectionViewFlowLayout>
                     <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Y2e-Q6-pPC"/>
+                        <outlet property="delegate" destination="-1" id="IMY-sI-KKZ"/>
+                    </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKN-Gg-iQ2" userLabel="View - Profile Container">
                     <rect key="frame" x="0.0" y="64" width="320" height="341"/>

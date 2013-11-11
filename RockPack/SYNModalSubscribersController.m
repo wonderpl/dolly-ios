@@ -52,9 +52,9 @@
 
 - (IBAction) backButtonPressed: (id) sender
 {
-    SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
     
-    [appDelegate.viewStackManager hideModalController];
 }
 
 @end

@@ -10,19 +10,13 @@
 #import "SYNAbstractViewController.h"
 #import "SYNSocialActionsDelegate.h"
 
-typedef enum : NSInteger
-{
-    kChannelDetailsModeDisplay = 0,
-    kChannelDetailsModeEdit = 1,
-    kChannelDetailsModeCreate = 2
-} kChannelDetailsModeTemp;
 
 @interface SYNChannelDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
 SYNSocialActionsDelegate>
 
-@property (nonatomic, assign) kChannelDetailsModeTemp mode;
+@property (nonatomic, assign) kChannelDetailsMode mode;
 
 @property (nonatomic, strong) Channel *channel;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
@@ -36,13 +30,12 @@ SYNSocialActionsDelegate>
 
 
 - (id) initWithChannel: (Channel *) channel
-             usingMode: (kChannelDetailsModeTemp) mode;
+             usingMode: (kChannelDetailsMode) mode;
 
 //FIXME: FAVOURITES Part of workaound for missing favourites functionality. Remove once final solution implemented.
 - (BOOL) isFavouritesChannel;
 - (void) refreshFavouritesChannel;
 
-- (IBAction) deleteChannelPressed: (UIButton *) sender;
 - (IBAction)followControlPressed:(id)sender;
 - (IBAction)shareControlPressed:(id)sender;
 
