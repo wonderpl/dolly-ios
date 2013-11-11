@@ -512,7 +512,7 @@
                                                                                                               label: nil
                                                                                                               value: nil] build]];
 
-                                                      [appDelegate.masterViewController presentSuccessNotificationWithMessage:messageS
+                                                      [appDelegate.masterViewController presentNotificationWithMessage:messageS
                                                                                                                       andType:NotificationMessageTypeSuccess];
                                                       
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
@@ -524,7 +524,7 @@
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                                                                           object: self];
                                                       
-                                                      [appDelegate.masterViewController presentSuccessNotificationWithMessage:messageE
+                                                      [appDelegate.masterViewController presentNotificationWithMessage:messageE
                                                                                                                       andType:NotificationMessageTypeError];
                                                       
                                                   }];

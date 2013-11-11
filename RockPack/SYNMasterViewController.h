@@ -52,7 +52,7 @@ typedef enum NotificationMessageType : NSInteger {
 
 - (id) initWithContainerViewController: (UIViewController*) root;
 
-- (void) presentSuccessNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
 
 - (void) addVideoOverlayToViewController: (SYNAbstractViewController *) originViewController
                   withVideoInstanceArray: (NSArray*) videoInstanceArray

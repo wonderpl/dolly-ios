@@ -377,7 +377,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil)
                                                                        : NSLocalizedString(@"No_Network_iPhone", nil);
         
-        [self presentSuccessNotificationWithMessage:message andType:NotificationMessageTypeError];
+        [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
     }
 }
 
@@ -386,7 +386,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     NSString* message = IS_IPHONE ? NSLocalizedString(@"PACK SAVED", nil) : NSLocalizedString(@"YOUR PACK HAS BEEN SAVED", nil);
     
-    [self presentSuccessNotificationWithMessage:message andType:NotificationMessageTypeSuccess];
+    [self presentNotificationWithMessage:message andType:NotificationMessageTypeSuccess];
 }
 
 
@@ -401,7 +401,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Message Popups (form Bottom)
 
-- (void) presentSuccessNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
 {
     
     __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] init];
