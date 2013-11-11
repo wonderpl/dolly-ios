@@ -196,14 +196,17 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         // push it to the bottom
         
         startFrame.origin.y = startFrame.size.height;
-        abstractViewController.view.frame = startFrame;
+        
     }
     else
     {
+        startFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - startFrame.size.width * 0.5f;
+        startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
+        
         self.overlayController.view.alpha = 0.0;
     }
     
-    
+    abstractViewController.view.frame = startFrame;
     
     [UIView animateWithDuration: 0.3f
                           delay: 0.0f
@@ -214,7 +217,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          
                          if(IS_IPHONE)
                          {
-                             
                              endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
                              abstractViewController.view.frame = endFrame;
                          }
@@ -222,8 +224,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          {
                              self.overlayController.view.alpha = 1.0;
                          }
-                         
-                         
                      }
                      completion: ^(BOOL finished) {
                          

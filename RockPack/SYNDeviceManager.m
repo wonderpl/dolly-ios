@@ -104,6 +104,12 @@
         return [[UIScreen mainScreen] bounds].size.height;
 }
 
+-(CGPoint)currentScreenMiddlePoint
+{
+    CGPoint p = CGPointMake([self currentScreenWidth] * 0.5f, [self currentScreenHeight] * 0.5f);
+    return p;
+}
+
 -(CGFloat)currentScreenHeight
 {
     if([self isIPhone])

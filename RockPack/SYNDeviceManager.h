@@ -31,6 +31,8 @@
 - (CGRect) currentScreenRect;
 - (CGSize) currentScreenSize;
 
+- (CGPoint) currentScreenMiddlePoint;
+
 - (UIInterfaceOrientation) currentOrientation;
 
 @end
