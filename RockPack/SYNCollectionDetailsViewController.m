@@ -583,7 +583,8 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     {
         self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
         
-        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
+		SYNMasterViewController *masterViewController = appDelegate.masterViewController;
+		[masterViewController addOverlayController:self.modalSubscriptionsContainer];
     }
 }
 
