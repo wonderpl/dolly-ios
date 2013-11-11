@@ -31,7 +31,6 @@
 #import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNReportConcernTableViewController.h"
-#import "SYNSubscribersViewController.h"
 #import "SYNCollectionVideoCell.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"

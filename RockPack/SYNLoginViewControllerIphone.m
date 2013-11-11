@@ -7,7 +7,6 @@
 //
 
 #import "GAI.h"
-#import "RegexKitLite.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
 #import "SYNLoginViewController.h"
