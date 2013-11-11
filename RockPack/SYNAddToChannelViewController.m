@@ -37,7 +37,7 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
 @property (nonatomic, strong) IBOutlet UIButton *confirmButtom;
-@property (nonatomic, strong) IBOutlet UICollectionView *collectionsCollectionView;
+@property (nonatomic, strong) IBOutlet UICollectionView *currentChannelsCollectionView;
 @property (nonatomic, strong) IBOutlet UILabel *autopostTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView *autopostView;
 @property (nonatomic, strong) NSArray *channels;
@@ -72,14 +72,14 @@
     // ================= //
     
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
+    [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
                           forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCell class]) bundle: nil]
+    [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCell class]) bundle: nil]
                           forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCell class])];
     
     
-    self.collectionsCollectionView.scrollsToTop = NO;
+    self.currentChannelsCollectionView.scrollsToTop = NO;
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
@@ -209,7 +209,7 @@
 {
     [super viewWillAppear: animated];
     
-    self.collectionsCollectionView.scrollsToTop = YES;
+    self.currentChannelsCollectionView.scrollsToTop = YES;
 
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -251,7 +251,7 @@
     }
     
     
-    [self.collectionsCollectionView reloadData];
+    [self.currentChannelsCollectionView reloadData];
 }
 
 
@@ -259,7 +259,7 @@
 {
     [super viewWillDisappear: animated];
     
-    self.collectionsCollectionView.scrollsToTop = NO;
+    self.currentChannelsCollectionView.scrollsToTop = NO;
     
     self.channels = nil;
 }
@@ -352,9 +352,9 @@
     
     __weak SYNAddToChannelViewController* wself = self;
     
-    [self.collectionsCollectionView performBatchUpdates:^{
+    [self.currentChannelsCollectionView performBatchUpdates:^{
         
-        [wself.collectionsCollectionView reloadData];
+        [wself.currentChannelsCollectionView reloadData];
         
     } completion:^(BOOL finished) {
         

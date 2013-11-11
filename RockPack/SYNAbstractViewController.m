@@ -30,7 +30,6 @@
 #import "SYNPopoverBackgroundView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNSocialButton.h"
-#import "SYNVideoThumbnailWideCell.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"

@@ -190,6 +190,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     
     self.backgroundOverlayView.alpha = 0.0f;
+    
     [self.view addSubview:self.backgroundOverlayView];
     
     [self addChildViewController:abstractViewController];
@@ -200,11 +201,22 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     
     
-    // animate in //
+    // == Animate == //
+    __block CGRect startFrame, endFrame;
     
-    CGRect startFrame = abstractViewController.view.frame;
-    startFrame.origin.y = startFrame.size.height; // push it to the bottom
-    abstractViewController.view.frame = startFrame;
+    startFrame = endFrame = abstractViewController.view.frame;
+    if(IS_IPHONE)
+    {
+        // push it to the bottom
+        
+        startFrame.origin.y = startFrame.size.height;
+        abstractViewController.view.frame = startFrame;
+    }
+    else
+    {
+        self.overlayController.view.alpha = 0.0;
+    }
+    
     
     
     [UIView animateWithDuration: 0.3f
@@ -216,9 +228,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          
                          if(IS_IPHONE)
                          {
-                             CGRect endFrame = abstractViewController.view.frame;
+                             
                              endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
                              abstractViewController.view.frame = endFrame;
+                         }
+                         else
+                         {
+                             self.overlayController.view.alpha = 1.0;
                          }
                          
                          
@@ -256,8 +272,16 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                              endFrame.origin.y = self.view.frame.size.height; // push to the bottom
                              self.overlayController.view.frame = endFrame;
                          }
+                         else
+                         {
+                             self.overlayController.view.alpha = 0.0f;
+                             
+                         }
                      }
                      completion: ^(BOOL finished) {
+                         
+                         [self.overlayController.view removeFromSuperview];
+                         [self.overlayController removeFromParentViewController];
                          
                          [self.backgroundOverlayView removeFromSuperview];
                          

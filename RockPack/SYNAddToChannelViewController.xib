@@ -5,14 +5,22 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNAddToChannelViewController"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNAddToChannelViewController">
+            <connections>
+                <outlet property="closeButton" destination="49o-N9-teK" id="IyV-Ky-cPq"/>
+                <outlet property="confirmButtom" destination="1ZL-Hs-93l" id="JAv-eG-TtY"/>
+                <outlet property="currentChannelsCollectionView" destination="bZV-u8-8GO" id="gUi-Ut-hbs"/>
+                <outlet property="titleLabel" destination="k2X-lF-RAf" id="HKt-hb-wpn"/>
+                <outlet property="view" destination="iLq-xh-MrU" id="fip-BP-0PJ"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="iLq-xh-MrU">
             <rect key="frame" x="0.0" y="0.0" width="598" height="453"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1ZL-Hs-93l" userLabel="Create Button">
-                    <rect key="frame" x="396" y="1" width="58" height="58"/>
+                    <rect key="frame" x="396" y="0.99999999999999989" width="58" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="Create">
@@ -22,6 +30,9 @@
                     <state key="highlighted" image="ButtonConfirmYellowHighlighted.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="confirmButtonPressed:" destination="-1" eventType="touchUpInside" id="JBd-mf-bjY"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="49o-N9-teK" userLabel="Cancel Button">
                     <rect key="frame" x="145" y="0.0" width="67" height="58"/>
@@ -34,6 +45,9 @@
                     <state key="highlighted" image="ButtonCancelAddToPackHighlighted.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="NJ6-yN-bIv"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k2X-lF-RAf">
                     <rect key="frame" x="252" y="9" width="106" height="41"/>
@@ -54,6 +68,10 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="86C-tZ-SgO"/>
+                        <outlet property="delegate" destination="-1" id="eeS-f7-hJX"/>
+                    </connections>
                 </collectionView>
                 <view hidden="YES" contentMode="scaleToFill" id="tGy-VQ-R49" userLabel="Autopost View">
                     <rect key="frame" x="97" y="469" width="320" height="44"/>
@@ -114,6 +132,6 @@
     </objects>
     <resources>
         <image name="ButtonCancelAddToPackHighlighted.png" width="30" height="30"/>
-        <image name="ButtonConfirmYellowHighlighted.png" width="30" height="30"/>
+        <image name="ButtonConfirmYellowHighlighted.png" width="64" height="49"/>
     </resources>
 </document>

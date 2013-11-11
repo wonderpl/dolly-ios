@@ -12,8 +12,8 @@
                 <outlet property="autopostView" destination="20" id="23"/>
                 <outlet property="autopostYesButton" destination="21" id="25"/>
                 <outlet property="closeButton" destination="11" id="12"/>
-                <outlet property="collectionsCollectionView" destination="6" id="5kX-d4-OwY"/>
                 <outlet property="confirmButtom" destination="4" id="10"/>
+                <outlet property="currentChannelsCollectionView" destination="6" id="iL1-9D-4u3"/>
                 <outlet property="titleLabel" destination="18" id="19"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -142,6 +142,6 @@
     </objects>
     <resources>
         <image name="ButtonCancelAddToPackHighlighted.png" width="30" height="30"/>
-        <image name="ButtonConfirmYellowHighlighted.png" width="30" height="30"/>
+        <image name="ButtonConfirmYellowHighlighted.png" width="64" height="49"/>
     </resources>
 </document>
