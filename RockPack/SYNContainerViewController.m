@@ -217,24 +217,6 @@
     }
 }
 
-- (UINavigationController *) viewControllerByPageName: (NSString *) pageName
-{
-    
-    
-    UINavigationController *child;
-    
-    for (child in self.viewControllers)
-    {
-        if ([pageName isEqualToString: child.title])
-        {
-            break;
-        }
-    }
-    
-    return child;
-}
-
-
 - (NSInteger) indexOfControllerByName: (NSString *) pageName
 {
     NSInteger index = 0;
@@ -265,13 +247,6 @@
     
 
 }
-
-
-- (void) navigateToPageByName: (NSString *) pageName
-{
-    self.currentViewController = [self viewControllerByPageName: pageName];
-}
-
 
 #pragma mark - Description
 

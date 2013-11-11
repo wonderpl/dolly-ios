@@ -23,13 +23,7 @@
 
 
 -(void)navigateToPage:(NSInteger)index;
--(void)navigateToPageByName:(NSString*)pageName;
 
--(UINavigationController*)viewControllerByPageName: (NSString *) pageName;
 -(NSInteger)indexOfControllerByName: (NSString*) pageName;
-
-
-
-
 
 @end
