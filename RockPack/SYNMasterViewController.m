@@ -91,28 +91,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     appDelegate.viewStackManager.masterController = self;
     
     
-    // == Fade in from splash screen (not in AppDelegate so that the Orientation is known) == //
-    
-    UIImageView *splashView;
-    if (IS_IPHONE)
-    {
-        if ([SYNDeviceManager.sharedInstance currentScreenHeight]>480.0f)
-        {
-            splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default-568h"]];
-        }
-        else
-        {
-            splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default"]];
-        }
-        splashView.center = CGPointMake(160.0f, splashView.center.y - 20.0f);
-    }
-    else
-    {
-        splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default"]];
-    }
-    
-    // == Listen to Reachability Notifications for no network messages == //
-    
+    // Listen to Reachability Notifications for no network messages //
     
     self.reachability = [Reachability reachabilityWithHostname:appDelegate.networkEngine.hostName];
     
@@ -152,8 +131,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     [self addOverlayController:existingController animated:YES];
 }
-
-
 
 
 - (void) addOverlayController:(SYNAbstractViewController *)abstractViewController animated:(BOOL)animated
@@ -247,33 +224,49 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 -(void)removeOverlayControllerAnimated:(BOOL)animated
 {
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         
-                         self.backgroundOverlayView.alpha = 0.0f;
-                         
-                         if(IS_IPHONE)
-                         {
-                             CGRect endFrame = self.overlayController.view.frame;
-                             endFrame.origin.y = self.view.frame.size.height; // push to the bottom
-                             self.overlayController.view.frame = endFrame;
-                         }
-                         else
-                         {
-                             self.overlayController.view.alpha = 0.0f;
-                             
-                         }
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         [self.overlayController.view removeFromSuperview];
-                         [self.overlayController removeFromParentViewController];
-                         
-                         [self.backgroundOverlayView removeFromSuperview];
-                         
-                     }];
+    
+    __weak SYNMasterViewController* wself = self;
+    
+    void(^AnimationsBlock)(void) = ^{
+        
+        wself.backgroundOverlayView.alpha = 0.0f;
+        
+        if(IS_IPHONE)
+        {
+            CGRect endFrame = self.overlayController.view.frame;
+            endFrame.origin.y = self.view.frame.size.height; // push to the bottom
+            wself.overlayController.view.frame = endFrame;
+        }
+        else
+        {
+            wself.overlayController.view.alpha = 0.0f;
+            
+        }
+        
+    };
+    
+    void (^FinishedBlock)(BOOL) = ^(BOOL finished) {
+      
+        [wself.overlayController.view removeFromSuperview];
+        [wself.overlayController removeFromParentViewController];
+        
+        [wself.backgroundOverlayView removeFromSuperview];
+    };
+    
+    if(animated)
+    {
+        [UIView animateWithDuration: 0.3f
+                              delay: 0.0f
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations: AnimationsBlock
+                         completion: FinishedBlock];
+    }
+    else
+    {
+        AnimationsBlock();
+        FinishedBlock(YES);
+    }
+    
 }
 
 
