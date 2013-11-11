@@ -362,14 +362,14 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         if (self.networkErrorView)
         {
-            [self hideNetworkErrorView];
+            //[self hideNetworkErrorView];
         }
     }
     else if ([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
     {
         if (self.networkErrorView)
         {
-            [self hideNetworkErrorView];
+            //[self hideNetworkErrorView];
         }
     }
     else if ([self.reachability currentReachabilityStatus] == NotReachable)
@@ -382,27 +382,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-
-- (void) hideNetworkErrorView
-{
-    
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationCurveEaseInOut animations:^{
-        
-        CGRect erroViewFrame = self.networkErrorView.frame;
-        erroViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight];
-        self.networkErrorView.frame = erroViewFrame;
-        
-    } completion:^(BOOL finished) {
-        
-        [self.networkErrorView removeFromSuperview];
-        self.networkErrorView = nil;
-        
-    }];
-}
-
-
-
-
 - (void) channelSuccessfullySaved: (NSNotification*) note
 {
     NSString* message = IS_IPHONE ? NSLocalizedString(@"PACK SAVED", nil) : NSLocalizedString(@"YOUR PACK HAS BEEN SAVED", nil);
@@ -411,90 +390,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) hideOrShowNetworkMessages: (NSNotification*) note
-{
-    if ([note.name isEqualToString: kNoteShowNetworkMessages])
-    {
-        self.errorContainerView.hidden = NO;
-        [UIView animateWithDuration: 0.3f
-                              delay: 0.0f
-                            options: UIViewAnimationCurveEaseOut
-                         animations: ^{
-                             CGRect newFrame = self.errorContainerView.frame;
-                             newFrame.origin.y = 0.0f;
-                             self.errorContainerView.frame = newFrame;
-                         }
-                         completion:nil];
-    }
-    else
-    {
-        [UIView animateWithDuration: 0.3f
-                              delay: 0.0f
-                            options: UIViewAnimationCurveEaseIn
-                         animations: ^{
-                             CGRect newFrame = self.errorContainerView.frame;
-                             newFrame.origin.y = 60.0f;
-                             self.errorContainerView.frame = newFrame;
-                         }
-                         completion: ^(BOOL finished){
-                             if (finished)
-                             {
-                                 self.errorContainerView.hidden = YES;
-                             }
-                         }];
-    }
-}
-
-
-
-
-
-
-- (void) modalAccountContainerDismiss
-{
-    CGRect hiddenFrame = self.modalAccountContainer.view.frame;
-    hiddenFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight];
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        self.accountSettingsCoverView.alpha = 0.0;
-        self.modalAccountContainer.view.frame = hiddenFrame;    
-    } completion:^(BOOL finished) {
-        
-        self.accountSettingsCoverView.hidden = YES;
-        
-        [self.modalAccountContainer.view removeFromSuperview];
-        self.modalAccountContainer = nil; 
-    }];
-}
-
 
 - (void) accountSettingsLogout: (NSNotification*) notification
 {
     [self.accountSettingsPopover dismissPopoverAnimated: NO];
     self.accountSettingsPopover = nil;
     [appDelegate logout];
-}
-
-
-#pragma mark - Popover Methods
-
-- (void) hideAutocompletePopover
-{
-    
-    if (!self.accountSettingsPopover)
-        return;
-    
-    [self.accountSettingsPopover dismissPopoverAnimated: YES];
-}
-
-
-- (void) popoverControllerDidDismissPopover: (UIPopoverController *) popoverController
-{
-    if (popoverController == self.accountSettingsPopover)
-    {
-        
-        self.accountSettingsPopover = nil;
-    }
 }
 
 
