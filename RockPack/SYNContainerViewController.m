@@ -6,39 +6,26 @@
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
 //
 
-#import "AppConstants.h"
-#import "ChannelOwner.h"
-#import "GAI.h"
-#import "MKNetworkEngine.h"
-#import "SYNActivityPopoverViewController.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNContainerViewController.h"
-#import "SYNDeviceManager.h"
+#import "SYNAppDelegate.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNMoodRootViewController.h"
-#import "SYNMasterViewController.h"
 #import "SYNActivityViewController.h"
-#import "SYNOAuthNetworkEngine.h"
 #import "SYNDiscoverViewController.h"
-#import "SYNFriendsViewController.h"
 #import "SYNProfileRootViewController.h"
-#import "SYNTrackableFrameView.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTrackableFrameView.h"
 @import AudioToolbox;
 @import QuartzCore;
 
 
 #define VIEW_CONTROLLER_TRANSITION_DURATION 0.4
 
-@interface SYNContainerViewController () <UIPopoverControllerDelegate, UITextViewDelegate, UIScrollViewDelegate>
+@interface SYNContainerViewController ()
 
-@property (nonatomic) BOOL didNotSwipeMessageInbox;
-@property (nonatomic, readonly) CGFloat currentScreenOffset;
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) UINavigationController *currentViewController;
-@property (nonatomic, strong) UIPopoverController *actionButtonPopover;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
-@property (nonatomic, weak) SYNProfileRootViewController *tmpProfileRootView;
 
 @end
 
