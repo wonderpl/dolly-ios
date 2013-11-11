@@ -17,12 +17,12 @@
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
 #import "SYNChannelCoverImageSelectorViewController.h"
-#import "SYNExistingChannelCreateNewCell.h"
+#import "SYNAddToChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNCoverChooserController.h"
 #import "SYNCoverThumbnailCell.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingCollectionsViewController.h"
+#import "SYNAddToChannelViewController.h"
 #import "SYNImagePickerController.h"
 #import "SYNMasterViewController.h"
 #import "SYNModalSubscribersController.h"
@@ -2063,7 +2063,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
             //Check for precense of existing channels view controller.
             UIViewController *lastController = [[master childViewControllers] lastObject];
             
-            if ([lastController isKindOfClass: [SYNExistingCollectionsViewController class]])
+            if ([lastController isKindOfClass: [SYNAddToChannelViewController class]])
             {
                 //This removes the "existing channels view controller"
                 [lastController.view removeFromSuperview];

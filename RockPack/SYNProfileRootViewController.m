@@ -10,7 +10,7 @@
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "GAI.h"
-#import "SYNExistingChannelCreateNewCell.h"
+#import "SYNAddToChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
@@ -808,7 +808,7 @@ SYNImagePickerControllerDelegate>{
     
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
+        SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
         cell = createCell;
     }
     

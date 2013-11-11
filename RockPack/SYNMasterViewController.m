@@ -17,7 +17,7 @@
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingCollectionsViewController.h"
+#import "SYNAddToChannelViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
@@ -170,7 +170,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 -(void)addExistingCollectionsOverlayController
 {
-    SYNExistingCollectionsViewController* existingController = [[SYNExistingCollectionsViewController alloc] initWithViewId:kExistingChannelsViewId];
+    SYNAddToChannelViewController* existingController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
     
     [self addOverlayController:existingController animated:YES];
 }

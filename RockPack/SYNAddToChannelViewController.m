@@ -11,15 +11,15 @@
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
 #import "GAI.h"
-#import "SYNExistingChannelCreateNewCell.h"
+#import "SYNAddToChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingCollectionsViewController.h"
+#import "SYNAddToChannelViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNExistingChannelCell.h"
+#import "SYNAddToChannelCell.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
@@ -28,7 +28,7 @@
 @import QuartzCore;
 
 
-@interface SYNExistingCollectionsViewController ()
+@interface SYNAddToChannelViewController ()
 {
     BOOL creatingNewState;
     BOOL creatingNewAnimating;
@@ -44,7 +44,7 @@
 @property (nonatomic, strong) NSIndexPath *previouslySelectedPath;
 @property (nonatomic, weak) Channel *selectedChannel;
 
-@property (nonatomic, weak) SYNExistingChannelCreateNewCell *createNewChannelCell;
+@property (nonatomic, weak) SYNAddToChannelCreateNewCell *createNewChannelCell;
 
 
 // autopost stuff
@@ -58,7 +58,7 @@
 @end
 
 
-@implementation SYNExistingCollectionsViewController
+@implementation SYNAddToChannelViewController
 
 - (void) viewDidLoad
 {
@@ -72,11 +72,11 @@
     // ================= //
     
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCreateNewCell class]) bundle: nil]
-                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
     
-    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNExistingChannelCell class]) bundle: nil]
-                          forCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])];
+    [self.collectionsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCell class]) bundle: nil]
+                          forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCell class])];
     
     
     self.collectionsCollectionView.scrollsToTop = NO;
@@ -123,7 +123,7 @@
         return;
     
     ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
-    __weak SYNExistingCollectionsViewController *wself = self;
+    __weak SYNAddToChannelViewController *wself = self;
     __weak SYNAppDelegate *wAppDelegate = appDelegate;
     BOOL isYesButton = (sender == self.autopostYesButton);
     
@@ -287,7 +287,7 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCreateNewCell class])
+        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])
                                                                                         forIndexPath: indexPath];
         [self.createNewChannelCell.createNewButton addTarget:self
                                                       action:@selector(createNewButtonPressed)
@@ -297,7 +297,7 @@
     else
     {
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
-        SYNExistingChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNExistingChannelCell class])
+        SYNAddToChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCell class])
                                                                                             forIndexPath: indexPath];
         
         existingChannel.titleLabel.text = channel.title;
@@ -350,7 +350,7 @@
         self.createNewChannelCell.descriptionTextView.hidden = NO;
     }
     
-    __weak SYNExistingCollectionsViewController* wself = self;
+    __weak SYNAddToChannelViewController* wself = self;
     
     [self.collectionsCollectionView performBatchUpdates:^{
         

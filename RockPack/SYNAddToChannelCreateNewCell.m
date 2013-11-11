@@ -6,11 +6,11 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNExistingChannelCreateNewCell.h"
+#import "SYNAddToChannelCreateNewCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
 
-@implementation SYNExistingChannelCreateNewCell
+@implementation SYNAddToChannelCreateNewCell
 
 - (void) awakeFromNib
 {

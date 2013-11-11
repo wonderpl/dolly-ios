@@ -14,7 +14,7 @@
 #import "SYNProfileRootViewController.h"
 #import "SYNViewStackManager.h"
 #import "SYNNetworkMessageView.h"
-#import "SYNExistingCollectionsViewController.h"
+#import "SYNAddToChannelViewController.h"
 
 #define STACK_LIMIT 6
 #define BG_ALPHA_DEFAULT 0.7f

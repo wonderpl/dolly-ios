@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNExistingChannelCell.h"
+#import "SYNAddToChannelCell.h"
 #import "UIFont+SYNFont.h"
 
-@implementation SYNExistingChannelCell
+@implementation SYNAddToChannelCell
 
 
 -(void)awakeFromNib
