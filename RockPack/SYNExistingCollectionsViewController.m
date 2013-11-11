@@ -22,7 +22,9 @@
 #import "SYNExistingChannelCell.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
+#import "SYNMasterViewController.h"
 #import "UIImageView+WebCache.h"
+
 @import QuartzCore;
 
 
@@ -387,13 +389,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                         object: self];
     
-    [self closeAnimation: ^(BOOL finished) {
-        
-        // will remove itself and will be deallocated since no other reference is held
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
-        
-    }];
+    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
 
 
@@ -407,27 +403,15 @@
     self.confirmButtom.enabled = NO;
     self.closeButton.enabled = NO;
     
-    [self closeAnimation: ^(BOOL finished) {
-        [self.view removeFromSuperview];
-        [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
-                                                            object: self
-                                                          userInfo: @{kChannel: self.selectedChannel}];
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
+                                                        object: self
+                                                      userInfo: @{kChannel: self.selectedChannel}];
+    
+    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
 
 
-- (void) closeAnimation: (void (^)(BOOL finished)) completionBlock
-{
-    [UIView animateWithDuration: kAddToChannelAnimationDuration
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         CGRect newFrame = self.view.frame;
-                         newFrame.origin.y = newFrame.size.height;
-                         self.view.frame = newFrame;
-                     }
-                     completion: completionBlock];
-}
+
 
 
 

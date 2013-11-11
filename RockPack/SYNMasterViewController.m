@@ -28,10 +28,8 @@
 #import "VideoInstance.h"
 @import QuartzCore;
 
-#define kMovableViewOffX -58
 
-#define kSearchBoxShrinkFactor 136.0
-
+#define kBackgroundOverlayAlpha 0.5f
 
 
 typedef void(^AnimationCompletionBlock)(BOOL finished);
@@ -50,6 +48,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
 @property (nonatomic, strong) UIView* accountSettingsCoverView;
+
+@property (nonatomic, weak) UIViewController* overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
+@property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
 
 @property (nonatomic, strong) IBOutlet UIView* headerContainerView;
@@ -136,11 +137,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     
     self.closeSearchButton.hidden = YES;
-  
-    // TODO:
-//    [self pageChanged: self.containerViewController.scrollView.page];
-    
-    self.darkOverlayView.hidden = YES;
+
     
     // == Set Up Notifications == //
     
@@ -152,6 +149,11 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
+    
+    // add background view //
+    self.backgroundOverlayView = [[UIView alloc] initWithFrame:self.view.frame];
+    self.backgroundOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.backgroundOverlayView.backgroundColor = [UIColor darkGrayColor];
     
     
 }
@@ -181,23 +183,36 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) addOverlayController:(SYNAbstractViewController *)abstractViewController animated:(BOOL)animated
 {
+    if(!abstractViewController)
+    {
+        AssertOrLog(@"Trying to add nil as an overlay controller");
+        return;
+    }
+    
+    self.backgroundOverlayView.alpha = 0.0f;
+    [self.view addSubview:self.backgroundOverlayView];
+    
     [self addChildViewController:abstractViewController];
     
     [self.view addSubview:abstractViewController.view];
     
+    self.overlayController = abstractViewController;
+    
+    
     
     // animate in //
-    
     
     CGRect startFrame = abstractViewController.view.frame;
     startFrame.origin.y = startFrame.size.height; // push it to the bottom
     abstractViewController.view.frame = startFrame;
     
     
-    [UIView animateWithDuration: kAddToChannelAnimationDuration
+    [UIView animateWithDuration: 0.3f
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^{
+                         
+                         self.backgroundOverlayView.alpha = kBackgroundOverlayAlpha;
                          
                          if(IS_IPHONE)
                          {
@@ -221,6 +236,37 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
 }
 
+-(void)removeOverlayController
+{
+    [self removeOverlayControllerAnimated:NO];
+}
+
+-(void)removeOverlayControllerAnimated:(BOOL)animated
+{
+    [UIView animateWithDuration: 0.3f
+                          delay: 0.0f
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations: ^{
+                         
+                         self.backgroundOverlayView.alpha = 0.0f;
+                         
+                         if(IS_IPHONE)
+                         {
+                             CGRect endFrame = self.overlayController.view.frame;
+                             endFrame.origin.y = self.view.frame.size.height; // push to the bottom
+                             self.overlayController.view.frame = endFrame;
+                         }
+                         
+                         
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                         [self.backgroundOverlayView removeFromSuperview];
+                         
+                     }];
+}
+
+
 
 #pragma mark - Video Overlay View
 
@@ -229,9 +275,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                         andSelectedIndex: (int) selectedIndex
                               fromCenter: (CGPoint)centerPoint
 {
-    
-    
-    
     
     if (self.videoViewerViewController)
     {

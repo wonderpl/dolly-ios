@@ -28,7 +28,6 @@ typedef enum NotificationMessageType : NSInteger {
 
 {
     SYNAppDelegate* appDelegate;
-    CGFloat originalAddButtonX;
 }
 
 
@@ -36,15 +35,12 @@ typedef enum NotificationMessageType : NSInteger {
 
 @property (nonatomic, strong) SYNAbstractViewController* originViewController;
 @property (strong, nonatomic) Reachability *reachability;
-@property (nonatomic, readonly) BOOL hasSearchBarOn;
-@property (nonatomic, readonly) BOOL isInSearchMode;
 @property (nonatomic, readonly) SYNVideoViewerViewController *videoViewerViewController;
 
 @property (nonatomic, strong) IBOutlet UIView* errorContainerView;
 
 @property (nonatomic, strong) IBOutlet UIView* tabsView;
 
-@property (nonatomic, strong) IBOutlet UIView* darkOverlayView;
 @property (nonatomic, strong) IBOutlet UIButton* closeSearchButton;
 @property (nonatomic, strong) IBOutlet UIView* overlayView;
 @property (nonatomic, strong) IBOutlet UIButton* sideNavigationButton;
@@ -52,7 +48,6 @@ typedef enum NotificationMessageType : NSInteger {
 @property (nonatomic, readonly) NSArray* tabs;
 
 
-@property (nonatomic, weak, readonly) SYNAbstractViewController* showingBaseViewController;
 @property (nonatomic, weak, readonly) SYNAbstractViewController* showingViewController;
 
 - (id) initWithContainerViewController: (UIViewController*) root;
@@ -63,8 +58,12 @@ typedef enum NotificationMessageType : NSInteger {
 
 - (void) removeVideoOverlayController;
 
+// Overlay
 -(void)addExistingCollectionsOverlayController;
+
 -(void) addOverlayController: (SYNAbstractViewController*) abstractViewController;
 -(void) addOverlayController: (SYNAbstractViewController*) abstractViewController animated:(BOOL)animated;
 
+-(void)removeOverlayController;
+-(void)removeOverlayControllerAnimated:(BOOL)animated;
 @end

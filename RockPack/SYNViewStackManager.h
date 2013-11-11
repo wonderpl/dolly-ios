@@ -57,9 +57,6 @@ typedef void(^ViewStackReturnBlock)(void);
 
 - (void) viewChannelDetails: (Channel *) channel;
 
-- (void) presentExistingChannelsController;
-
-
 
 - (void) hideModalController;
 

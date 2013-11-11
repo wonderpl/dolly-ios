@@ -216,7 +216,8 @@ SYNImagePickerControllerDelegate>{
                                                               blue: (224.0f / 255.0f)
                                                              alpha: 1.0f];
         
-    }else
+    }
+    else
     {
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPad;
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPad;
