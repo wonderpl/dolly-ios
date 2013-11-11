@@ -102,6 +102,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     [self startVideoStallDetectionTimer];
     
     [ooyalaPlayerViewController.player setEmbedCode: sourceId];
+//    [ooyalaPlayerViewController.player setEmbedCode: @"xxbjk1YjpHm4-VkWfWfEKBbyEkh358su"];
     
     self.playFlag = TRUE;
     
@@ -203,6 +204,8 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 
 - (void) notificationPlayerReceived: (NSNotification *) notification
 {
+    DebugLog(@"State = %@", notification.name);
+    
     // notification handle
     if ([notification.name isEqualToString: @"stateChanged"] && self.firstLaunch)
     {
@@ -213,19 +216,39 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
             self.firstLaunch = NO;
         }
     }
-    
-    if ([notification.name isEqualToString: @"timeChanged"])
+    else if ([notification.name isEqualToString: @"playStarted"])
     {
-//        if (activeController.player.duration - activeController.player.playheadTime <= 7.0f && !bufferedControllerSetted)
+        [self stopVideoStallDetectionTimer];
+        
+        DebugLog(@"*** Playing: Starting - Fading up player");
+        // If we are playing then out shuttle / pause / play cycle is over
+        self.shuttledByUser = TRUE;
+        self.notYetPlaying = FALSE;
+        
+        // Now cache the duration of this video for use in the progress updates
+        self.currentDuration = self.duration;
+        
+//        if (self.currentDuration > 0.0f)
+//        if (1)
 //        {
-//            [self selectNextVideo];
-//            [bufferedController.player
-//             setEmbedCode: [[relatedVideo objectAtIndex: relatedVideoIndex] objectForKey: @"embed_code"]];
-//            bufferedControllerSetted = YES;
+//            self.fadeUpScheduled = FALSE;
+//            // Only start if we have a valid duration
+//            [self startShuttleBarUpdateTimer];
+//            self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
 //        }
+        [self fadeUpVideoPlayer];
     }
-    
-    if ([notification.name isEqualToString: @"playCompleted"])
+    else if ([notification.name isEqualToString: @"timeChanged"])
+    {
+        //        if (activeController.player.duration - activeController.player.playheadTime <= 7.0f && !bufferedControllerSetted)
+        //        {
+        //            [self selectNextVideo];
+        //            [bufferedController.player
+        //             setEmbedCode: [[relatedVideo objectAtIndex: relatedVideoIndex] objectForKey: @"embed_code"]];
+        //            bufferedControllerSetted = YES;
+        //        }
+    }
+    else if ([notification.name isEqualToString: @"playCompleted"])
     {
         // Finished
     }

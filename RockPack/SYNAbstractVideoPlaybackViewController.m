@@ -496,9 +496,9 @@
     {
         [self playVideoWithSourceId: currentSourceId];
     }
-    else if ([currentSource isEqualToString: @"vimeo"])
+    else if ([currentSource isEqualToString: @"rockpack"])
     {
-        // TODO: Add Vimeo support here
+        [self playVideoWithSourceId: currentSourceId];
     }
     else
     {

@@ -23,7 +23,6 @@
 #import "SYNNetworkMessageView.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNSoundPlayer.h"
-#import "SYNYouTubeVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 @import QuartzCore;
