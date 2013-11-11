@@ -40,7 +40,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic) BOOL searchIsInProgress;
 @property (nonatomic) BOOL showingBackButton;
-@property (nonatomic) NavigationButtonsAppearance currentNavigationButtonsAppearance;
 @property (nonatomic, strong) IBOutlet UIButton* headerButton;
 
 @property (nonatomic, strong) IBOutlet UIView* containerView;
@@ -125,9 +124,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default"]];
     }
     
-    
-    self.currentNavigationButtonsAppearance = NavigationButtonsAppearanceBlack;
-    
     // == Listen to Reachability Notifications for no network messages == //
     
     
@@ -161,10 +157,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) headerSwiped:(UISwipeGestureRecognizer*) recogniser
-{
-    // TODO: figure out if swiping of header is needed
-}
 
 
 
@@ -331,10 +323,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) dotTapped: (UIGestureRecognizer*) recogniser
-{
-    // TODO: Need to implement this
-}
 
 
 - (void) channelSuccessfullySaved: (NSNotification*) note

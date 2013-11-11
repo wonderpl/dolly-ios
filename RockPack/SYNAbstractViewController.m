@@ -156,19 +156,11 @@
 {
     [super viewWillAppear:animated];
     
-    if(IS_IOS_7_OR_GREATER)
-        [self setNeedsStatusBarAppearanceUpdate];
+    [self setNeedsStatusBarAppearanceUpdate];
+        
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-    // Compensate for iOS7
-    
 
-}
 
 #pragma mark - Data Request Range
 
@@ -350,37 +342,7 @@
 }
 
 
-#pragma mark - Tab View Methods
 
-
-
-#pragma mark - TabViewDelegate
-
-- (void) handleMainTap: (UITapGestureRecognizer *) recogniser
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
-
-
-- (void) handleSecondaryTap: (UITapGestureRecognizer *) recogniser
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
-
-
-- (void) handleNewTabSelectionWithId: (NSString*) selectionId
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
-
-- (void) handleNewTabSelectionWithGenre: (Genre*) name
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
 
 -(void)clearedLocationBoundData
 {
@@ -772,11 +734,6 @@
 
 }
 
-- (NavigationButtonsAppearance) navigationAppearance
-{
-    // return the standard and overide in subclass for special cases such as the ChannelDetails Section
-    return NavigationButtonsAppearanceBlack;
-}
 
 
 - (BOOL) alwaysDisplaysSearchBox
