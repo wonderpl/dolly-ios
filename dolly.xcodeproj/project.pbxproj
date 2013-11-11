@@ -154,7 +154,6 @@
 		014A456816691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */; };
 		014D514F16F738C500B82B00 /* SYNAbstractNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */; };
 		015487CF16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */; };
-		0154E8481768E268001C7B75 /* SYNTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0154E8461768E268001C7B75 /* SYNTimer.m */; };
 		0155FA2817A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */; };
 		01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */; };
 		01578C2B17DF840800B4F498 /* LowerParallaxStars.png in Resources */ = {isa = PBXBuildFile; fileRef = 01578C2917DF840800B4F498 /* LowerParallaxStars.png */; };
@@ -1656,8 +1655,6 @@
 		014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAbstractNetworkEngine.m; sourceTree = "<group>"; };
 		015487CD16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlaybackViewController.h; sourceTree = "<group>"; };
 		015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlaybackViewController.m; sourceTree = "<group>"; };
-		0154E8461768E268001C7B75 /* SYNTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimer.m; sourceTree = "<group>"; };
-		0154E8471768E268001C7B75 /* SYNTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimer.h; sourceTree = "<group>"; };
 		0155FA2617A81D7600B04B51 /* SYNSessionTokenCachingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSessionTokenCachingStrategy.h; sourceTree = "<group>"; };
 		0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSessionTokenCachingStrategy.m; sourceTree = "<group>"; };
 		01578C2017DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIInterpolatingMotionEffect+DualAxis.h"; sourceTree = "<group>"; };
@@ -3579,15 +3576,6 @@
 			name = "Channel viewer";
 			sourceTree = "<group>";
 		};
-		0154E8451768E25B001C7B75 /* Timers */ = {
-			isa = PBXGroup;
-			children = (
-				0154E8461768E268001C7B75 /* SYNTimer.m */,
-				0154E8471768E268001C7B75 /* SYNTimer.h */,
-			);
-			name = Timers;
-			sourceTree = "<group>";
-		};
 		015C13BE173B02D8001569FE /* Report Concerns */ = {
 			isa = PBXGroup;
 			children = (
@@ -3873,7 +3861,6 @@
 				BED4312816F20CC50051465B /* RegexKitLite */,
 				012502BA16CA8FCE0029C7C8 /* Social Media */,
 				BEF9E5AD16DCBAA300286113 /* Sound */,
-				0154E8451768E25B001C7B75 /* Timers */,
 				019824ED1629CC6600216900 /* TestFlight */,
 				BEF9E5B416DD23F000286113 /* Video Queue */,
 				BE2D762A1785BB9C00546BFD /* View Stack Manager */,
@@ -7832,7 +7819,6 @@
 				BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */,
 				BE3983D11768A4AA00EE9C7B /* SYNOnBoardingPopoverView.m in Sources */,
 				BE3983D41768B6D800EE9C7B /* SYNOnBoardingPopoverQueueController.m in Sources */,
-				0154E8481768E268001C7B75 /* SYNTimer.m in Sources */,
 				01A02E76176E1EA5001F14BD /* UIImage+Monochrome.m in Sources */,
 				BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */,
 				BEBFD0921779F0F800C90544 /* SYNCaution.m in Sources */,
