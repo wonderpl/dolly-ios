@@ -200,27 +200,34 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     abstractViewController.view.frame = startFrame;
     
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         
-                         self.backgroundOverlayView.alpha = kBackgroundOverlayAlpha;
-                         
-                         if(IS_IPHONE)
-                         {
-                             endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
-                             abstractViewController.view.frame = endFrame;
-                         }
-                         else
-                         {
-                             self.overlayController.view.alpha = 1.0;
-                         }
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         
-                     }];
+    void(^AnimationsBlock)(void) = ^{
+        
+        self.backgroundOverlayView.alpha = kBackgroundOverlayAlpha;
+        
+        if(IS_IPHONE)
+        {
+            endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
+            abstractViewController.view.frame = endFrame;
+        }
+        else
+        {
+            self.overlayController.view.alpha = 1.0;
+        }
+    };
+    
+    if(animated)
+    {
+        [UIView animateWithDuration: 0.3f
+                              delay: 0.0f
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations: AnimationsBlock
+                         completion: nil];
+    }
+    else
+    {
+        AnimationsBlock();
+    }
+    
     
     // pause video
     
