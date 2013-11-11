@@ -894,46 +894,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     {
         if (self.isUserProfile && indexPath.row == 0)
         {
-            if (IS_IPAD)
-            {
-                
-                [self createAndDisplayNewChannel];
-            }
-            else
-            {
-                //On iPhone we want a different navigation structure. Slide the view in.
-                
-                SYNCollectionDetailsViewController *channelCreationVC =
-                [[SYNCollectionDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
-                                                                  usingMode: kChannelDetailsModeCreate];
-                
-                CGRect newFrame = channelCreationVC.view.frame;
-                newFrame.size.height = self.view.frame.size.height;
-                channelCreationVC.view.frame = newFrame;
-                CATransition *animation = [CATransition animation];
-                
-                [animation setType: kCATransitionMoveIn];
-                [animation setSubtype: kCATransitionFromRight];
-                
-                [animation setDuration: 0.30];
-                
-                [animation setTimingFunction: [CAMediaTimingFunction functionWithName:
-                                               kCAMediaTimingFunctionEaseInEaseOut]];
-                
-                [self.view.window.layer addAnimation: animation
-                                              forKey: nil];
-                
-                
-                //presented twice
-                /* [self presentViewController: channelCreationVC
-                 animated: NO
-                 completion: ^{
-                 
-                 */
-                [self createAndDisplayNewChannel];
-                //  }];
-            }
-            
+			[self createAndDisplayNewChannel];
+			
             return;
         }
         else

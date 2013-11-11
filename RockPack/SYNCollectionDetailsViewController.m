@@ -2048,49 +2048,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
 - (void) finaliseViewStatusAfterCreateOrUpdate: (BOOL) isIPad
 {
-    if (isIPad)
-    {
-        self.createChannelButton.hidden = YES;
-    }
-    else
-    {
-        SYNMasterViewController *master = (SYNMasterViewController *) self.presentingViewController;
-        
-        if (master)
-        {
-            //This scenario happens on channel creation only and means this channel is presented modally.
-            //After creation want to show it as if it is part of the master view hierarchy.
-            //Thus we move the view there.
-            
-            //Check for precense of existing channels view controller.
-            UIViewController *lastController = [[master childViewControllers] lastObject];
-            
-            if ([lastController isKindOfClass: [SYNAddToChannelViewController class]])
-            {
-                //This removes the "existing channels view controller"
-                [lastController.view removeFromSuperview];
-                [lastController removeFromParentViewController];
-            }
-            
-            //Now dimiss self modally (not animated)
-            [master dismissViewControllerAnimated: NO
-                                       completion: nil];
-            
-            //Change to display mode
-            self.mode = kChannelDetailsModeDisplay;
-            
-            //Don't really like this, but send notification to hide title and dots for a seamless transition.
-            [[NSNotificationCenter defaultCenter] postNotificationName: kNoteHideTitleAndDots
-                                                                object: self
-                                                              userInfo: nil];
-            
-            //And show as if displayed from the normal master view hierarchy
-			[master.showingViewController pushViewController:self animated:nil];
-        }
-        
-        [self setDisplayControlsVisibility: YES];
-        [self.activityIndicator stopAnimating];
-    }
+	self.createChannelButton.hidden = YES;
 }
 
 
