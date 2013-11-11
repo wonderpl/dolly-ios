@@ -109,19 +109,6 @@ SYNChannelCoverImageSelectorDelegate>
     
 }
 
-
-- (void) viewWillAppear: (BOOL) animated
-{
-    [super viewWillAppear: animated];
-}
-
-
-- (void) viewWillDisappear: (BOOL) animated
-{
-    [super viewWillDisappear: animated];
-}
-
-
 - (IBAction) deleteChannelPressed: (UIButton *) sender
 {
     NSString *message = [NSString stringWithFormat: NSLocalizedString(@"profile_screen_channel_delete_dialog_description", nil), self.channel.title];
