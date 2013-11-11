@@ -33,7 +33,6 @@ typedef void(^ViewStackReturnBlock)(void);
 + (id) manager;
 
 
-- (void) popToRootController;
 - (void) popToController: (UIViewController *) controller;
 - (void) popController;
 - (void) pushController: (SYNAbstractViewController *) controller;

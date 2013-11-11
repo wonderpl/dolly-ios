@@ -211,14 +211,6 @@
     
 }
 
-
-
-- (void) popToRootController
-{
-    [self popToController: self.navigationController.viewControllers[0]];
-}
-
-
 - (void) popToController: (UIViewController *) controller
 {
     NSInteger viewControllersCount = self.navigationController.viewControllers.count;
@@ -245,22 +237,6 @@
     
     
 }
-
-#pragma mark - Search Bar Animations
-
-
-
-
-
-
-// for iPhone
-
-
-
-
-
-
-
 
 #pragma mark - Popover Managment
 
