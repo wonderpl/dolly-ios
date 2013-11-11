@@ -534,24 +534,4 @@
     return lastControllerOfClass;
 }
 
--(BOOL) controllerViewIsVisible:(SYNAbstractViewController*)controllerToTest
-{
-    if(self.masterController.showingViewController == controllerToTest)
-        return YES;
-    
-    return NO;
-}
-
-
-
-
--(void)resumeVideoIfShowing
-{
-    
-    if(self.masterController.videoViewerViewController)
-    {
-        [self.masterController.videoViewerViewController playIfVideoActive];
-    }
-}
-
 @end
