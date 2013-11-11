@@ -173,44 +173,6 @@
                                          animated: YES];
 }
 
-
-- (void) popController
-{
-    NSInteger viewControllersCount = self.navigationController.viewControllers.count;
-    
-    if (viewControllersCount < 2) // we must have at least two to pop one
-        return;
-    
-    UIViewController* controllerToPopTo = ((UIViewController *) self.navigationController.viewControllers[viewControllersCount - 2]);
-    
-    __weak SYNViewStackManager* wself = self;
-    
-    
-    
-    [UIView animateWithDuration: 0.5f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         
-                         self.navigationController.topViewController.view.alpha = 0.0f;
-                         
-                         controllerToPopTo.view.alpha = 1.0f;
-                     }
-                     completion:^(BOOL finished) {
-                         
-                         if(wself.returnBlock)
-                             wself.returnBlock();
-                         
-                         wself.returnBlock = nil;
-                         
-                         
-                         
-                     }];
-    
-    [self.navigationController popViewControllerAnimated: NO];
-    
-}
-
 - (void) popToController: (UIViewController *) controller
 {
     NSInteger viewControllersCount = self.navigationController.viewControllers.count;

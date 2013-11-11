@@ -32,11 +32,6 @@ typedef void(^ViewStackReturnBlock)(void);
 
 + (id) manager;
 
-
-- (void) popToController: (UIViewController *) controller;
-- (void) popController;
-- (void) pushController: (SYNAbstractViewController *) controller;
-
 - (void) presentPopoverView: (UIView*) view;
 - (void) presentPopoverView:(UIView*)view withBackgroundAlpha:(CGFloat)bgAlpha;
 - (void) removePopoverView;

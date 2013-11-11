@@ -157,7 +157,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 {
     [super viewDidLoad];
     
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.isIPhone = IS_IPHONE;
     
@@ -378,10 +378,8 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    
-    
     [super viewWillAppear: animated];
-    
+	
     self.editedVideos = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver: self
@@ -1641,33 +1639,29 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     
     // return to previous screen as if the back button tapped
     
-    appDelegate.viewStackManager.returnBlock = ^{
-        
-        [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
-                                                     channelId: self.channel.uniqueId
-                                             completionHandler: ^(id response) {
-                                                 
-                                                 [appDelegate.currentUser.channelsSet removeObject: self.channel];
-                                                 [self.channel.managedObjectContext deleteObject: self.channel];
-                                                 [self.originalChannel.managedObjectContext deleteObject:self.originalChannel];
-                                                 
-                                                 // bring back controls
-                                                 
-                                                 
-                                                 [appDelegate saveContext: YES];
-                                                 
-                                                 
-                                                 
-                                             } errorHandler: ^(id error) {
-                                                
-                                                 DebugLog(@"Delete channel failed");
-                                                 
-                                             }];
-    };
-    
-    [appDelegate.viewStackManager popController];
+	[appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
+												 channelId: self.channel.uniqueId
+										 completionHandler: ^(id response) {
+											 
+											 [appDelegate.currentUser.channelsSet removeObject: self.channel];
+											 [self.channel.managedObjectContext deleteObject: self.channel];
+											 [self.originalChannel.managedObjectContext deleteObject:self.originalChannel];
+											 
+											 // bring back controls
+											 
+											 
+											 [appDelegate saveContext: YES];
+											 
+											 
+											 
+										 } errorHandler: ^(id error) {
+											
+											 DebugLog(@"Delete channel failed");
+											 
+										 }];
+	
+	[self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark - Channel Creation (3 steps)
 
