@@ -543,40 +543,6 @@
 }
 
 
-#pragma mark - Existing Channels
-
-- (void) presentExistingChannelsController
-{
-    
-    SYNExistingCollectionsViewController* existingController = [[SYNExistingCollectionsViewController alloc] initWithViewId:kExistingChannelsViewId];
-    
-    [self.masterController addOverlayController:existingController];
-    
-    
-    // animate in //
-    
-    existingController.view.alpha = 1.0f;
-    
-    CGRect newFrame = existingController.view.frame;
-    newFrame.origin.y = newFrame.size.height;
-    existingController.view.frame = newFrame;
-    
-    
-    [UIView animateWithDuration: kAddToChannelAnimationDuration
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         
-                         CGRect newFrame = existingController.view.frame;
-                         newFrame.origin.y = 0.0f;
-                         existingController.view.frame = newFrame;
-                         
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         
-                     }];
-}
 
 
 -(void)resumeVideoIfShowing

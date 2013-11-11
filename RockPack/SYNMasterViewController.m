@@ -167,23 +167,59 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-
-
-
-
-
 - (void) headerTapped: (UIGestureRecognizer*) recogniser
 {
     [self.showingViewController headerTapped];
 }
 
+#pragma mark - Overlays
+
+-(void)addExistingCollectionsOverlayController
+{
+    SYNExistingCollectionsViewController* existingController = [[SYNExistingCollectionsViewController alloc] initWithViewId:kExistingChannelsViewId];
+    
+    [self addOverlayController:existingController animated:YES];
+}
 
 
 -(void) addOverlayController: (SYNAbstractViewController*) abstractViewController
 {
+    [self addOverlayController:abstractViewController animated:NO];
+}
+
+- (void) addOverlayController:(SYNAbstractViewController *)abstractViewController animated:(BOOL)animated
+{
     [self addChildViewController:abstractViewController];
     
     [self.view addSubview:abstractViewController.view];
+    
+    
+    // animate in //
+    
+    
+    CGRect startFrame = abstractViewController.view.frame;
+    startFrame.origin.y = startFrame.size.height; // push it to the bottom
+    abstractViewController.view.frame = startFrame;
+    
+    
+    [UIView animateWithDuration: kAddToChannelAnimationDuration
+                          delay: 0.0f
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations: ^{
+                         
+                         if(IS_IPHONE)
+                         {
+                             CGRect endFrame = abstractViewController.view.frame;
+                             endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
+                             abstractViewController.view.frame = endFrame;
+                         }
+                         
+                         
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                         
+                     }];
     
     // pause video
     
