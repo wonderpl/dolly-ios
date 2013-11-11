@@ -113,7 +113,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (CGSize) footerSize;
 
-- (NavigationButtonsAppearance) navigationAppearance;
 
 
 - (void) createAndDisplayNewChannel;
