@@ -144,14 +144,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 }
 
-
-
-
-- (void) headerTapped: (UIGestureRecognizer*) recogniser
-{
-    [self.showingViewController headerTapped];
-}
-
 #pragma mark - Overlays, Adding and Removing
 
 -(void)addExistingCollectionsOverlayController

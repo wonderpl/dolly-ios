@@ -45,7 +45,7 @@ typedef enum NotificationMessageType : NSInteger {
 @property (nonatomic, readonly) NSArray* tabs;
 
 
-@property (nonatomic, weak, readonly) SYNAbstractViewController* showingViewController;
+@property (nonatomic, weak, readonly) UINavigationController* showingViewController;
 
 - (id) initWithContainerViewController: (UIViewController*) root;
 

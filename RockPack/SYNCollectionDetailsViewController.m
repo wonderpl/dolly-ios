@@ -157,7 +157,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 {
     [super viewDidLoad];
     
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.isIPhone = IS_IPHONE;
     
@@ -378,10 +378,8 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    
-    
     [super viewWillAppear: animated];
-    
+	
     self.editedVideos = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver: self
@@ -583,7 +581,8 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     {
         self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
         
-        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
+		SYNMasterViewController *masterViewController = appDelegate.masterViewController;
+		[masterViewController addOverlayController:self.modalSubscriptionsContainer];
     }
 }
 
@@ -1640,33 +1639,29 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
     
     // return to previous screen as if the back button tapped
     
-    appDelegate.viewStackManager.returnBlock = ^{
-        
-        [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
-                                                     channelId: self.channel.uniqueId
-                                             completionHandler: ^(id response) {
-                                                 
-                                                 [appDelegate.currentUser.channelsSet removeObject: self.channel];
-                                                 [self.channel.managedObjectContext deleteObject: self.channel];
-                                                 [self.originalChannel.managedObjectContext deleteObject:self.originalChannel];
-                                                 
-                                                 // bring back controls
-                                                 
-                                                 
-                                                 [appDelegate saveContext: YES];
-                                                 
-                                                 
-                                                 
-                                             } errorHandler: ^(id error) {
-                                                
-                                                 DebugLog(@"Delete channel failed");
-                                                 
-                                             }];
-    };
-    
-    [appDelegate.viewStackManager popController];
+	[appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
+												 channelId: self.channel.uniqueId
+										 completionHandler: ^(id response) {
+											 
+											 [appDelegate.currentUser.channelsSet removeObject: self.channel];
+											 [self.channel.managedObjectContext deleteObject: self.channel];
+											 [self.originalChannel.managedObjectContext deleteObject:self.originalChannel];
+											 
+											 // bring back controls
+											 
+											 
+											 [appDelegate saveContext: YES];
+											 
+											 
+											 
+										 } errorHandler: ^(id error) {
+											
+											 DebugLog(@"Delete channel failed");
+											 
+										 }];
+	
+	[self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark - Channel Creation (3 steps)
 
@@ -2047,49 +2042,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
 - (void) finaliseViewStatusAfterCreateOrUpdate: (BOOL) isIPad
 {
-    if (isIPad)
-    {
-        self.createChannelButton.hidden = YES;
-    }
-    else
-    {
-        SYNMasterViewController *master = (SYNMasterViewController *) self.presentingViewController;
-        
-        if (master)
-        {
-            //This scenario happens on channel creation only and means this channel is presented modally.
-            //After creation want to show it as if it is part of the master view hierarchy.
-            //Thus we move the view there.
-            
-            //Check for precense of existing channels view controller.
-            UIViewController *lastController = [[master childViewControllers] lastObject];
-            
-            if ([lastController isKindOfClass: [SYNAddToChannelViewController class]])
-            {
-                //This removes the "existing channels view controller"
-                [lastController.view removeFromSuperview];
-                [lastController removeFromParentViewController];
-            }
-            
-            //Now dimiss self modally (not animated)
-            [master dismissViewControllerAnimated: NO
-                                       completion: nil];
-            
-            //Change to display mode
-            self.mode = kChannelDetailsModeDisplay;
-            
-            //Don't really like this, but send notification to hide title and dots for a seamless transition.
-            [[NSNotificationCenter defaultCenter] postNotificationName: kNoteHideTitleAndDots
-                                                                object: self
-                                                              userInfo: nil];
-            
-            //And show as if displayed from the normal master view hierarchy
-            [appDelegate.viewStackManager pushController: self];
-        }
-        
-        [self setDisplayControlsVisibility: YES];
-        [self.activityIndicator stopAnimating];
-    }
+	self.createChannelButton.hidden = YES;
 }
 
 

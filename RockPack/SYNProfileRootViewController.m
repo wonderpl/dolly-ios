@@ -58,7 +58,6 @@ SYNImagePickerControllerDelegate>{
 @property (nonatomic, assign, getter = isDeletionModeActive) BOOL deletionModeActive;
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
-@property (nonatomic, strong) NSArray *sortDescriptors;
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
 @property (nonatomic, strong) NSArray* arrFollowing;
 
@@ -196,13 +195,6 @@ SYNImagePickerControllerDelegate>{
     self.isIPhone = IS_IPHONE;
     
     // Main Collection View
-    
-    if (!self.isIPhone)
-    {
-        self.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey: @"section"
-                                                               ascending: YES], [NSSortDescriptor sortDescriptorWithKey: @"row" ascending: YES]];
-    }
-    
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
@@ -285,6 +277,8 @@ SYNImagePickerControllerDelegate>{
 
 -(void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
+	
     self.navigationController.navigationBar.hidden = YES;
     [self updateTabStates];
     
@@ -900,46 +894,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     {
         if (self.isUserProfile && indexPath.row == 0)
         {
-            if (IS_IPAD)
-            {
-                
-                [self createAndDisplayNewChannel];
-            }
-            else
-            {
-                //On iPhone we want a different navigation structure. Slide the view in.
-                
-                SYNCollectionDetailsViewController *channelCreationVC =
-                [[SYNCollectionDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
-                                                                  usingMode: kChannelDetailsModeCreate];
-                
-                CGRect newFrame = channelCreationVC.view.frame;
-                newFrame.size.height = self.view.frame.size.height;
-                channelCreationVC.view.frame = newFrame;
-                CATransition *animation = [CATransition animation];
-                
-                [animation setType: kCATransitionMoveIn];
-                [animation setSubtype: kCATransitionFromRight];
-                
-                [animation setDuration: 0.30];
-                
-                [animation setTimingFunction: [CAMediaTimingFunction functionWithName:
-                                               kCAMediaTimingFunctionEaseInEaseOut]];
-                
-                [self.view.window.layer addAnimation: animation
-                                              forKey: nil];
-                
-                
-                //presented twice
-                /* [self presentViewController: channelCreationVC
-                 animated: NO
-                 completion: ^{
-                 
-                 */
-                [self createAndDisplayNewChannel];
-                //  }];
-            }
-            
+			[self createAndDisplayNewChannel];
+			
             return;
         }
         else
@@ -1469,33 +1425,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     [self.channelThumbnailCollectionView reloadData];
     
 }
-
-
-#pragma mark - indexpath helper method
-
-- (NSIndexPath *) topIndexPathForCollectionView: (UICollectionView *) collectionView
-{
-    //This method finds a cell that is in the first row of the collection view that is showing at least half the height of its cell.
-    NSIndexPath *result = nil;
-    NSArray *indexPaths = [[collectionView indexPathsForVisibleItems] sortedArrayUsingDescriptors: self.sortDescriptors];
-    
-    if ([indexPaths count] > 0)
-    {
-        result = indexPaths[0];
-        UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: result];
-        
-        if (cell.center.y < collectionView.contentOffset.y)
-        {
-            if ([indexPaths count] > 3)
-            {
-                result = indexPaths[3];
-            }
-        }
-    }
-    
-    return result;
-}
-
 
 #pragma mark - Arc menu support
 

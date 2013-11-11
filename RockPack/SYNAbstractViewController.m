@@ -933,24 +933,7 @@
     
     if (IS_IPHONE)
     {
-        CGRect newFrame = channelCreationVC.view.frame;
-        newFrame.size.height = self.view.frame.size.height;
-        channelCreationVC.view.frame = newFrame;
-        CATransition *animation = [CATransition animation];
-        
-        [animation setType: kCATransitionMoveIn];
-        [animation setSubtype: kCATransitionFromRight];
-        
-        [animation setDuration: 0.30];
-        [animation setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
-        
-        [self.view.window.layer
-         addAnimation: animation
-         forKey: nil];
-        
-        [self presentViewController: channelCreationVC
-                           animated: NO
-                         completion: nil];
+		[self.navigationController pushViewController:channelCreationVC animated:YES];
     }
     else
     {
