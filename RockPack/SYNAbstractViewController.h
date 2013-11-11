@@ -58,9 +58,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (void) performAction: (NSString *) action withObject: (id) object;
 
-- (void) handleNewTabSelectionWithId: (NSString *) selectionId;
-- (void) handleNewTabSelectionWithGenre: (Genre *) name;
-
 - (void) videoOverlayDidDissapear;
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
