@@ -1146,7 +1146,7 @@
          
          NSString *notificationText = [NSString stringWithFormat: NSLocalizedString(@"sharing_object_sent", nil), typeName];
          
-         [appDelegate.masterViewController presentSuccessNotificationWithMessage:notificationText
+         [appDelegate.masterViewController presentNotificationWithMessage:notificationText
                                                                          andType:NotificationMessageTypeSuccess];
          
          
