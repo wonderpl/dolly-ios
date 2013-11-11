@@ -7,6 +7,7 @@
 //
 
 #import "AppConstants.h"
+#import "Channel.h"
 #import "GAI.h"
 #import "MKNetworkOperation.h"
 #import "SYNAppDelegate.h"

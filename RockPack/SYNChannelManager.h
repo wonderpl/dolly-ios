@@ -8,8 +8,6 @@
 
 @import Foundation;
 
-#import "Channel.h"
-
 @interface SYNChannelManager : NSObject
 
 + (id) manager;
