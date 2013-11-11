@@ -141,11 +141,8 @@ SYNImagePickerControllerDelegate>{
 
 - (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
 {
-    
     self.modeType = mode;
-    
     self = [self initWithViewId:vid];
-
     return self;
 }
 
@@ -271,7 +268,6 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    [self setProfleType:self.modeType];
     
     UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
     if(txfSearchField)
@@ -280,6 +276,8 @@ SYNImagePickerControllerDelegate>{
                                                           blue: (255.0f / 255.0f)
                                                          alpha: 1.0f];
     
+    [self setProfleType:self.modeType];
+
 
 
 }
@@ -554,14 +552,23 @@ SYNImagePickerControllerDelegate>{
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
         self.backButton.hidden = YES;
+        
+        
+
     }
     if (profileType == OtherUsersProfile)
     {
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
         self.backButton.hidden = NO;
-//        self.followingSearchBar.hidden = YES;
-//        self.subscriptionLayoutIPhone.headerReferenceSize = CGSizeMake(self.subscriptionLayoutIPhone.headerReferenceSize.height-44, self.subscriptionLayoutIPhone.headerReferenceSize.width);
+        
+        
+        self.followingSearchBar.hidden = YES;
+        CGSize tmp = self.subscriptionLayoutIPhone.headerReferenceSize;
+        
+        tmp.height -= 43;
+        self.subscriptionLayoutIPhone.headerReferenceSize = tmp;
+
 //
     }
 }
@@ -861,7 +868,13 @@ SYNImagePickerControllerDelegate>{
             [channelThumbnailCell setTitle: channel.title];
             [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
             [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
-            [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
+            if (IS_IPHONE) {
+                [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"- %ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+            }
+            else
+            {
+                [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+            }
             [channelThumbnailCell setTitle:channel.title];
             [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
             
@@ -870,6 +883,7 @@ SYNImagePickerControllerDelegate>{
         else
         {
              cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+           // [((SYNChannelMidCell*)cell) reset];
         }
     }
     
@@ -1025,7 +1039,11 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.subscriptionsTabButton.selected = self.collectionsTabActive;
     self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
     self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
-    self.followingSearchBar.hidden = self.collectionsTabActive;
+    
+    if (self.modeType == MyOwnProfile) {
+        self.followingSearchBar.hidden = self.collectionsTabActive;
+        
+    }
     
     
     if (self.collectionsTabActive)

@@ -180,7 +180,7 @@
 - (void) prepareForReuse
 {
     
-    self.videoCountLabel =nil;
+    self.videoCountLabel = nil;
     self.videoTitleLabel =nil;
     self.followerCountLabel =nil;
     self.bottomBarView =nil;
@@ -188,7 +188,6 @@
     self.descriptionLabel =nil;
     self.containerView =nil;
     self.descriptionView =nil;
-    
     self.tap = nil;
     //[self stopWobbling];
     
@@ -367,6 +366,18 @@
     }
 }
 
+
+-(void) reset {
+    
+    self.videoCountLabel.text = @"";
+    self.videoTitleLabel.text = @"";
+    self.followerCountLabel.text = @"";
+    self.descriptionLabel.text = @"";
+    [self.boarderView.layer setBorderWidth:0.0f];
+    self.bottomBarView.backgroundColor = [UIColor clearColor];
+    self.followButton.hidden = YES;
+    
+}
 
 
 @end
