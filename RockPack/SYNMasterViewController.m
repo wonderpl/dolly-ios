@@ -6,26 +6,12 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-
-#import "AppConstants.h"
-#import "GAI.h"
-#import "SYNAccountSettingsMainTableViewController.h"
 #import "SYNAccountSettingsModalContainer.h"
-#import "SYNActivityPopoverViewController.h"
-#import "SYNCaution.h"
 #import "SYNCautionMessageView.h"
-#import "SYNCollectionDetailsViewController.h"
-#import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
-#import "SYNFacebookManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
-#import "SYNOAuthNetworkEngine.h"
-#import "SYNSoundPlayer.h"
-#import "SYNVideoPlaybackViewController.h"
-#import "UIFont+SYNFont.h"
-#import "VideoInstance.h"
 @import QuartzCore;
 
 

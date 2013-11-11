@@ -37,6 +37,7 @@
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
+#import "SYNAccountSettingsPopoverBackgroundView.h"
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"

@@ -14,7 +14,6 @@
 #import "SYNAppDelegate.h"
 #import "SYNButton.h"
 #import "SYNDeviceManager.h"
-#import "SYNTouchGestureRecognizer.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "UIImage+Tint.h"

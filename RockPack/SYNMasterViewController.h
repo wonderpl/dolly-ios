@@ -7,9 +7,6 @@
 //
 
 
-
-#import "SYNAccountSettingsMainTableViewController.h"
-#import "SYNAccountSettingsPopoverBackgroundView.h"
 #import "SYNAppDelegate.h"
 #import "SYNContainerViewController.h"
 #import "SYNVideoViewerViewController.h"
