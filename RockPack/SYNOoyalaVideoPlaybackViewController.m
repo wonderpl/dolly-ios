@@ -8,6 +8,7 @@
 
 #import "SYNOoyalaVideoPlaybackViewController.h"
 #import "OOOoyalaPlayer.h"
+#import "OOOoyalaError.h"
 
 @interface SYNOoyalaVideoPlaybackViewController ()
 
@@ -122,7 +123,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     else
     {
         [ooyalaPlayer pause];
-        self.playFlag = FALSE;;
+        self.playFlag = FALSE;
     }
 }
 
@@ -213,7 +214,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     // notification handle
     if ([notification.name isEqualToString: @"stateChanged"] && self.firstLaunch)
     {
-        DebugLog(@"State = %@", [OOOoyalaPlayer playerStateToString:ooyalaPlayer.state]);
+        DebugLog(@"State = %@", [OOOoyalaPlayer playerStateToString: ooyalaPlayer.state]);
         switch (ooyalaPlayer.state)
         {
             // Initial state, player is created but no content is loaded
@@ -248,7 +249,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
                     [self startShuttleBarUpdateTimer];
                     self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
                 }
-                //        [self fadeUpVideoPlayer];
+        
                 break;
             }
 
@@ -262,8 +263,24 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
                 
             // Player has encountered an error, check OOOoyalaPlayer.error
             case OOOoyalaPlayerStateError:
-                break;
+            {
+                [self fadeUpVideoPlayer];
                 
+                SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
+                VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
+                NSString *errorString = ooyalaPlayer.error.description;
+                [appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId: videoInstance.uniqueId
+                                                                   errorDescription: errorString
+                                                                  completionHandler: ^(NSDictionary * dictionary) {
+                                                                      DebugLog(@"Reported video error");
+                                                                  }
+                                                                       errorHandler: ^(NSError* error) {
+                                                                           DebugLog(@"Report concern failed");
+                                                                           DebugLog(@"%@", [error debugDescription]);
+                                                                       }];
+                break;
+            }
+
             default:
                 AssertOrLog(@"Unexpected state");
                 break;
@@ -290,7 +307,5 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
         // Finished
     }
 }
-
-
 
 @end

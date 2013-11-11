@@ -38,8 +38,7 @@ static UIWebView* youTubeVideoWebViewInstance;
     
     dispatch_once(&oncePredicate, ^{
         // Create our shared instance
-        _sharedInstance = [[self allocWithZone: nil] init];
-        
+        _sharedInstance = [[self alloc] init];
         // Create the static instances of our webviews
         youTubeVideoWebViewInstance = [SYNYouTubeVideoPlaybackViewController createNewYouTubeWebView];
     });
