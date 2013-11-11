@@ -20,10 +20,12 @@
 
 #pragma mark - Private properties
 
+@property (nonatomic, assign) BOOL autoPlay;
 @property (nonatomic, assign) BOOL currentVideoViewedFlag;
 @property (nonatomic, assign) BOOL disableTimeUpdating;
 @property (nonatomic, assign) BOOL fadeOutScheduled;
 @property (nonatomic, assign) BOOL fadeUpScheduled;
+@property (nonatomic, assign) BOOL notYetPlaying;
 @property (nonatomic, assign) BOOL pausedByUser;
 @property (nonatomic, assign) BOOL playFlag;
 @property (nonatomic, assign) BOOL shuttledByUser;
@@ -55,7 +57,7 @@
 @property (nonatomic, strong) UILabel *durationLabel;
 @property (nonatomic, strong) UISlider *shuttleSlider;
 @property (nonatomic, strong) UIView *videoPlaceholderView;
-@property (nonatomic, strong) UIWebView *currentVideoView;
+@property (nonatomic, strong) UIView *currentVideoView;
 
 #pragma mark - Private methods
 
@@ -65,6 +67,10 @@
 
 - (void) updateChannelCreator: (NSString *) channelCreator;
 
+
+- (void) setPlaylist: (NSArray *) playlistArray
+       selectedIndex: (int) selectedIndex
+            autoPlay: (BOOL) autoPlay;
 
 + (CGFloat) videoWidth;
 + (CGFloat) videoHeight;

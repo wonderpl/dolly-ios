@@ -15,14 +15,10 @@
 #import <QuartzCore/CoreAnimation.h>
 @import CoreData;
 
-#define SHOW_SHUTTLE_DEBUG_COLOURS_
-#define SHOW_DEBUG_COLOURS_
 
 @interface SYNYouTubeVideoPlaybackViewController () <UIWebViewDelegate>
 
-@property (nonatomic, assign) BOOL autoPlay;
 @property (nonatomic, assign) BOOL hasReloadedWebView;
-@property (nonatomic, assign) BOOL notYetPlaying;
 @property (nonatomic, strong) NSString *sourceIdToReload;
 @property (nonatomic, strong) UIWebView *currentVideoWebView;
 
@@ -38,17 +34,15 @@ static UIWebView* youTubeVideoWebViewInstance;
 + (instancetype) sharedInstance
 {
     static SYNYouTubeVideoPlaybackViewController *_sharedInstance = nil;
+    static dispatch_once_t oncePredicate;
     
-    if (!_sharedInstance)
-    {
-        static dispatch_once_t oncePredicate;
-        dispatch_once(&oncePredicate, ^{
-            // Create our shared intance
-            _sharedInstance = [[self allocWithZone: nil] init];
-            // Create the static instances of our webviews
-            youTubeVideoWebViewInstance = [SYNYouTubeVideoPlaybackViewController createNewYouTubeWebView];
-        });
-    }
+    dispatch_once(&oncePredicate, ^{
+        // Create our shared instance
+        _sharedInstance = [[self allocWithZone: nil] init];
+        
+        // Create the static instances of our webviews
+        youTubeVideoWebViewInstance = [SYNYouTubeVideoPlaybackViewController createNewYouTubeWebView];
+    });
     
     return _sharedInstance;
 }
@@ -137,23 +131,6 @@ static UIWebView* youTubeVideoWebViewInstance;
 #endif
     
     return newYouTubeWebView;
-}
-
-
-#pragma mark - Timer accessors
-
-- (void) setPlaylist: (NSArray *) playlistArray
-       selectedIndex: (int) selectedIndex
-            autoPlay: (BOOL) autoPlay;
-{
-    self.videoInstanceArray = playlistArray;
-    self.currentSelectedIndex = selectedIndex;
-    self.autoPlay = autoPlay;
-    
-    self.currentVideoViewedFlag = FALSE;
-    self.previousSourceId = nil;
-    
-    [self loadCurrentVideoView];
 }
 
 

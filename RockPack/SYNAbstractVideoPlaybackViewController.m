@@ -857,6 +857,21 @@
 
 #pragma mark - User interaction
 
+- (void) setPlaylist: (NSArray *) playlistArray
+       selectedIndex: (int) selectedIndex
+            autoPlay: (BOOL) autoPlay;
+{
+    self.videoInstanceArray = playlistArray;
+    self.currentSelectedIndex = selectedIndex;
+    self.autoPlay = autoPlay;
+    
+    self.currentVideoViewedFlag = FALSE;
+    self.previousSourceId = nil;
+    
+    [self loadCurrentVideoView];
+}
+
+
 - (void) togglePlayPause
 {
     if (self.playFlag == TRUE)

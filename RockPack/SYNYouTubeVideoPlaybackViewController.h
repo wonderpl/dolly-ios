@@ -17,10 +17,6 @@
 
 + (instancetype) sharedInstance;
 
-- (void) setPlaylist: (NSArray *) playlistArray
-       selectedIndex: (int) selectedIndex
-            autoPlay: (BOOL) autoPlay;
-
 
 
 @end
