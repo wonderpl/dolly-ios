@@ -86,10 +86,11 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateChannelCell" bundle: nil]
               forCellWithReuseIdentifier: @"SYNAggregateChannelCell"];
     
-    
+#ifdef SHOW_DATE_HEADERS
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNHomeSectionHeaderView" bundle: nil]
               forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
                      withReuseIdentifier: @"SYNHomeSectionHeaderView"];
+#endif
 
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelFooterMoreView" bundle: nil]
               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
@@ -566,6 +567,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
+#ifdef SHOW_DATE_HEADERS
 - (CGSize) collectionView: (UICollectionView *) collectionView
                    layout: (UICollectionViewLayout *) collectionViewLayout
            referenceSizeForHeaderInSection: (NSInteger) section
@@ -579,6 +581,7 @@ typedef void(^FeedDataErrorBlock)(void);
         return CGSizeMake(320, 34);
     }
 }
+#endif
 
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
@@ -614,7 +617,7 @@ typedef void(^FeedDataErrorBlock)(void);
     // In the 'name' attribut of the sectionInfo we have actually the keypath data (i.e in this case Date without time)
     
     // TODO: We might want to optimise this instead of creating a new date formatter each time
-    
+#ifdef SHOW_DATE_HEADERS
     if (kind == UICollectionElementKindSectionHeader)
     {
         NSDate* date = heuristicFeedItem.dateAdded;
@@ -661,7 +664,9 @@ typedef void(^FeedDataErrorBlock)(void);
         
         supplementaryView = headerSupplementaryView;
     }
-    else if (kind == UICollectionElementKindSectionFooter)
+    else
+#endif
+    if (kind == UICollectionElementKindSectionFooter)
     {
         self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                              withReuseIdentifier: @"SYNChannelFooterMoreView"
