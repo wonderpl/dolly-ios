@@ -887,8 +887,7 @@ SYNImagePickerControllerDelegate>{
         }
         else
         {
-            [channelThumbnailCell reset];
-            [channelThumbnailCell setBorder];
+            [channelThumbnailCell setTitle:@"aaaaaaa"];
 
             cell = channelThumbnailCell;
         }
@@ -1556,8 +1555,9 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         
-        SYNCollectionDetailsViewController *channelVC = [[SYNCollectionDetailsViewController alloc] initWithChannel: channel
+        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel: channel
                                                                                                                              usingMode: kChannelDetailsModeDisplay];
+        self.navigationController.navigationBarHidden = NO;
 
         [self.navigationController pushViewController:channelVC animated:nil];
 
@@ -1565,10 +1565,21 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {
-        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-        Channel *channel = self.arrDisplayFollowing[indexPath.item];
         
-        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
+        
+        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
+        
+        if (indexPath.row < self.arrDisplayFollowing.count) {
+            
+        }
+        Channel *channel = self.arrDisplayFollowing[indexPath.item];
+        self.navigationController.navigationBarHidden = NO;
+
+        
+      SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel: channel usingMode: kChannelDetailsModeDisplay];
+        [self.navigationController pushViewController:channelVC animated:nil];
+
+        //[appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
     }
 }
 

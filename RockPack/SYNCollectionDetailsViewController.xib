@@ -374,7 +374,6 @@
         <image name="ButtonCoverHighlighted.png" width="295" height="45"/>
         <image name="ButtonCreate.png" width="130" height="45"/>
         <image name="ButtonCreateDisabled.png" width="130" height="45"/>
-        <image name="ButtonCreateDisabled.png" width="130" height="45"/>
         <image name="ButtonCreateHighlighted.png" width="130" height="45"/>
         <image name="ButtonEdit.png" width="120" height="45"/>
         <image name="ButtonEditHighlighted.png" width="120" height="45"/>
@@ -388,7 +387,6 @@
         <image name="ButtonShare.png" width="61" height="61"/>
         <image name="ButtonShareHighlighted.png" width="61" height="61"/>
         <image name="ButtonSubscribe.png" width="120" height="45"/>
-        <image name="ButtonSubscribeDisabled.png" width="120" height="45"/>
         <image name="ButtonSubscribeDisabled.png" width="120" height="45"/>
         <image name="ButtonSubscribeHighlighted.png" width="120" height="45"/>
         <image name="ButtonSubscribeSelected.png" width="120" height="45"/>

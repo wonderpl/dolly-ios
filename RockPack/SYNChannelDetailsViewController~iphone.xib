@@ -8,14 +8,15 @@
             <connections>
                 <outlet property="btnAvatar" destination="fM4-Xb-Qmi" id="fcK-Rp-wxK"/>
                 <outlet property="btnFollow" destination="P7D-vs-dmA" id="evd-Ki-B6p"/>
+                <outlet property="btnFollowers" destination="sVX-iR-Htf" id="59B-Vr-fSh"/>
                 <outlet property="btnShare" destination="ftS-iK-V3y" id="Xgx-Mf-ukS"/>
+                <outlet property="btnVideos" destination="cJl-eE-YdZ" id="3Ql-eR-lhE"/>
                 <outlet property="lblChannelTitle" destination="Vnv-ov-6xo" id="ov8-x6-sed"/>
                 <outlet property="lblDescription" destination="irB-oP-X4O" id="BBs-Oh-cue"/>
-                <outlet property="lblFollowersCount" destination="yMO-3M-QGB" id="bCD-P6-gPU"/>
                 <outlet property="lblFullName" destination="r8Y-zW-rcS" id="0f2-uW-cCd"/>
-                <outlet property="lblVideosCount" destination="A5I-Oz-fYg" id="93e-Aa-uIY"/>
                 <outlet property="videoThumbnailCollectionView" destination="8Ij-2z-UN8" id="cwi-G1-nSN"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="viewIPhoneContainer" destination="pKN-Gg-iQ2" id="31Y-LE-Kgj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -68,20 +69,6 @@
                             <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Followers Count" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMO-3M-QGB" userLabel="Label - Description">
-                            <rect key="frame" x="0.0" y="194" width="145" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video Count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5I-Oz-fYg" userLabel="Label - Description">
-                            <rect key="frame" x="176" y="194" width="144" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7D-vs-dmA" customClass="SYNSocialButton">
                             <rect key="frame" x="101" y="240" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -111,6 +98,21 @@
                             <rect key="frame" x="132" y="30" width="56" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="avatar">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVX-iR-Htf" userLabel="Button - Followers button">
+                            <rect key="frame" x="0.0" y="190" width="145" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="ddddd"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJl-eE-YdZ" userLabel="Button - Videos">
+                            <rect key="frame" x="176" y="190" width="144" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="fffff">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
