@@ -73,22 +73,22 @@
     
     // == TODO: Delete? == //
     self.autopostTitleLabel.font = [UIFont lightCustomFontOfSize: self.autopostTitleLabel.font.pointSize];
-    
     self.autopostNoButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
     self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
-    // ================= //
+ 
     
-    // Set the button to 'Add' Mode since we have not yet pressed the create new button
+    // == Set the button to 'Add' Mode since we have not yet pressed the create new button
     [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
     self.confirmButtom.enabled = NO;
     
-    self.view.layer.cornerRadius = 8.0f;
+    // == On ipad the panel appears as a popup in the middle, with rounded corners
+    if(IS_IPAD)
+        self.view.layer.cornerRadius = 8.0f;
     
     self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
     self.normalFlowLayout = [[SYNAddToChannelFlowLayout alloc] init];
     
     self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
-    // self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
     
     creatingNewState = NO;
     
@@ -124,7 +124,7 @@
     {
         self.autopostView.hidden = YES;
     }
-    // == TODO: Delete? == //
+    
     
     
 }
@@ -324,8 +324,6 @@
         return;
     
     creatingNewAnimating = YES;
-    
-    
     
     // 1. Loop over all the cells and animate manually
     
