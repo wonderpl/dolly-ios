@@ -593,20 +593,6 @@ SYNChannelCoverImageSelectorDelegate>
 }
 
 
-- (void) updateFailed: (NSNotification *) notification
-{
-    self.subscribeButton.selected = self.channel.subscribedByUserValue;
-    self.subscribeButton.enabled = YES;
-    
-    if (self.subscribingIndicator)
-    {
-        [self.subscribingIndicator removeFromSuperview];
-        self.subscribingIndicator = nil;
-    }
-    
-    self.subscribersLabel.text = [NSString stringWithFormat:
-                                  NSLocalizedString(@"channel_screen_error_subscribe", nil)];
-}
 
 #pragma mark - Data Model Change
 

@@ -65,26 +65,6 @@ SYNChannelCoverImageSelectorDelegate>
 @property (nonatomic, strong) CIContext *context;
 @property (nonatomic, strong) CIFilter *filter;
 @property (nonatomic, strong) CIImage *backgroundCIImage;
-@property (nonatomic, strong) IBOutlet SSTextView *channelTitleTextView;
-@property (nonatomic, strong) IBOutlet UIButton *addCoverButton;
-@property (nonatomic, strong) IBOutlet UIButton *cameraButton;
-@property (nonatomic, strong) IBOutlet UIButton *createChannelButton;
-@property (nonatomic, strong) IBOutlet UIButton *deleteChannelButton;
-@property (nonatomic, strong) IBOutlet UIButton *playChannelButton;
-@property (nonatomic, strong) IBOutlet UIButton *profileImageButton;
-@property (nonatomic, strong) IBOutlet UIButton *reportConcernButton;
-@property (nonatomic, strong) IBOutlet UIButton *saveChannelButton;
-@property (nonatomic, strong) IBOutlet UIButton *selectCategoryButton;
-@property (nonatomic, strong) IBOutlet UIButton *shareButton;
-@property (nonatomic, strong) IBOutlet UIImageView *avatarImageView;
-@property (nonatomic, strong) IBOutlet UIImageView *channelCoverImageView;
-@property (nonatomic, strong) IBOutlet UILabel *channelOwnerLabel;
-@property (nonatomic, strong) IBOutlet UILabel *subscribersLabel;
-@property (nonatomic, strong) IBOutlet UIView *avatarBackgroundView;
-@property (nonatomic, strong) IBOutlet UIView *channelTitleTextBackgroundView;
-@property (nonatomic, strong) IBOutlet UIView *displayControlsView;
-@property (nonatomic, strong) IBOutlet UIView *editControlsView;
-@property (nonatomic, strong) IBOutlet UIView *masterControlsView;
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 @property (nonatomic, strong) NSString *selectedCategoryId;
 @property (nonatomic, strong) NSString *selectedCoverId;
@@ -123,12 +103,12 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *lblFullName;
 @property (strong, nonatomic) IBOutlet UILabel *lblDescription;
 @property (strong, nonatomic) IBOutlet UILabel *lblChannelTitle;
-@property (strong, nonatomic) IBOutlet SYNSocialButton *btnFollow;
-@property (strong, nonatomic) IBOutlet SYNSocialButton *btnShare;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *btnFollowChannel;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *btnShareChannel;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *videoThumbnailCollectionView;
-@property (strong, nonatomic) IBOutlet UIButton *btnFollowers;
-@property (strong, nonatomic) IBOutlet UIButton *btnVideos;
+@property (strong, nonatomic) IBOutlet UIButton *btnShowFollowers;
+@property (strong, nonatomic) IBOutlet UIButton *btnShowVideos;
 
 @property (strong, nonatomic) IBOutlet UIView *viewIPhoneContainer;
 @property (strong, nonatomic) IBOutlet UIView *viewIPadContainer;
@@ -137,6 +117,7 @@ SYNChannelCoverImageSelectorDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoLayoutIPad;
 
+@property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionLayoutIPad;
 
 @end
@@ -161,7 +142,7 @@ SYNChannelCoverImageSelectorDelegate>
     return self;
 }
 
-    
+
 - (void) dealloc
 {
     
@@ -177,8 +158,8 @@ SYNChannelCoverImageSelectorDelegate>
         [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
         [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
         [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
-//        [self.lblFollowersCount setFont:[UIFont regularCustomFontOfSize:14]];
-//        [self.lblVideosCount setFont:[UIFont regularCustomFontOfSize:14]];
+        //        [self.lblFollowersCount setFont:[UIFont regularCustomFontOfSize:14]];
+        //        [self.lblVideosCount setFont:[UIFont regularCustomFontOfSize:14]];
     }
     
     
@@ -194,7 +175,7 @@ SYNChannelCoverImageSelectorDelegate>
                                withReuseIdentifier: @"SYNChannelFooterMoreView"];
     
     
-
+    
     self.lblFullName.text = self.channel.channelOwner.displayName;
     
     
@@ -203,17 +184,17 @@ SYNChannelCoverImageSelectorDelegate>
     self.lblDescription.text = @"Test Description";
     
     
-    [self.btnFollowers setTitle:[NSString stringWithFormat: @"%lld %@", self.channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)] forState:UIControlStateNormal ];
+    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%lld %@", self.channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)] forState:UIControlStateNormal ];
     
-    self.btnFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
-    [self.btnVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
+    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
     
     
     
-    self.btnVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
-
+    
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -233,8 +214,11 @@ SYNChannelCoverImageSelectorDelegate>
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
     
-
+    [self setUpMode];
+    
+    
 }
+
 
 
 - (void) viewWillAppear: (BOOL) animated
@@ -255,11 +239,6 @@ SYNChannelCoverImageSelectorDelegate>
                                                  name: kVideoQueueClear
                                                object: nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(updateFailed:)
-                                                 name: kUpdateFailed
-                                               object: nil];
-    
     if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
     {
         [[NSNotificationCenter defaultCenter] addObserver: self
@@ -269,18 +248,35 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     //if it user is following already
-    self.btnFollow.selected = self.channel.subscribedByUserValue;
+    
+    
+        
+//    [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
+//    
+//    [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)] forState:UIControlStateSelected];
+
+    
+    if (self.channel.subscribedByUserValue)
+    {
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)]];
+    }
+    else
+    {
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)]];
+    }
+
+    
     
     // We set up assets depending on whether we are in display or edit mode
-    [self setDisplayControlsVisibility: (self.mode == kChannelDetailsModeDisplay)];
+//    [self setDisplayControlsVisibility: (self.mode == kChannelDetailsModeDisplay)];
     
     // Refresh our view
     [self.videoThumbnailCollectionView reloadData];
     
     if (self.channel.videoInstances.count == 0 && ![self.channel.uniqueId isEqualToString: kNewChannelPlaceholderId])
     {
-//        [self showNoVideosMessage: NSLocalizedString(@"channel_screen_loading_videos", nil)
-//                       withLoader: YES];
+        //        [self showNoVideosMessage: NSLocalizedString(@"channel_screen_loading_videos", nil)
+        //                       withLoader: YES];
     }
     
     //[self displayChannelDetails];
@@ -298,13 +294,13 @@ SYNChannelCoverImageSelectorDelegate>
                                                           userInfo: @{kChannel: self.channel}];
     }
     
-
+    
     
     [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL]
-                                     forState: UIControlStateNormal
-                             placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                      options: SDWebImageRetryFailed];
-
+                           forState: UIControlStateNormal
+                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                            options: SDWebImageRetryFailed];
+    
     
     self.hasAppeared = YES;
     self.navigationController.navigationBarHidden = NO;
@@ -331,10 +327,6 @@ SYNChannelCoverImageSelectorDelegate>
                                                     name: kVideoQueueClear
                                                   object: nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver: self
-                                                    name: kUpdateFailed
-                                                  object: nil];
-    
     if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
     {
         [[NSNotificationCenter defaultCenter] removeObserver: self
@@ -342,12 +334,6 @@ SYNChannelCoverImageSelectorDelegate>
                                                       object: nil];
     }
     
-    if (!self.isIPhone)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
-                                                            object: self
-                                                          userInfo: nil];
-    }
     
     [self.subscribersPopover dismissPopoverAnimated: NO];
     
@@ -374,6 +360,22 @@ SYNChannelCoverImageSelectorDelegate>
     self.navigationController.navigationBarHidden = YES;
 }
 
+-(void) setUpMode {
+    
+    if (self.mode == kChannelDetailsModeDisplayUser)
+    {
+        self.btnEditChannel.hidden = NO;
+        self.btnFollowChannel.hidden = YES;
+    }
+    else if (self.mode == kChannelDetailsModeDisplay)
+    {
+        self.btnEditChannel.hidden = YES;
+        self.btnFollowChannel.hidden = NO;
+
+    }
+    
+    
+}
 
 - (BOOL) isFavouritesChannel
 {
@@ -391,45 +393,54 @@ SYNChannelCoverImageSelectorDelegate>
 
 - (IBAction)followControlPressed:(id)sender
 {
-  //  [self.delegate followControlPressed:sender];
+    //   [self.delegate followControlPressed:sender];
     
     // Update google analytics
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelSubscribeButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    self.btnFollow.enabled = NO;
-    self.btnFollow.selected = FALSE;
-    
-    [self addSubscribeActivityIndicator];
     
     // Defensive programming
     if (self.channel != nil)
     {
+        NSLog(@"%@", self.channel.title);
+        
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.channel}];
     }
-
+    
+    if (self.channel.subscribedByUserValue)
+    {
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)]];
+    }
+    else
+    {
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)]];
+    }
+    
 }
 
 - (void) addSubscribeActivityIndicator
 {
-    self.subscribingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
-    self.subscribingIndicator.center = self.btnFollow.center;
-    [self.subscribingIndicator startAnimating];
-    [self.view addSubview: self.subscribingIndicator];
+//    self.subscribingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+//    self.subscribingIndicator.center = self.btnFollowChannel.center;
+//    [self.subscribingIndicator startAnimating];
+//    [self.view addSubview: self.subscribingIndicator];
 }
 
 - (IBAction)shareControlPressed:(id)sender
 {
     [self.delegate shareControlPressed: sender];
-
+    
 }
 
+
+-(void) setUpFollowButton
+{
+    self.btnFollowChannel.title = @"";
+    
+    
+    
+    
+}
 
 #pragma mark - ScrollView Delegate
 
@@ -455,7 +466,7 @@ SYNChannelCoverImageSelectorDelegate>
         CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
         
         self.viewIPadContainer.transform = move;
-
+        
         
     }
 }
@@ -563,13 +574,13 @@ SYNChannelCoverImageSelectorDelegate>
                                                      name: NSManagedObjectContextDidSaveNotification
                                                    object: self.channel.managedObjectContext];
         
-//        if (self.mode == kChannelDetailsModeDisplay && self.hasAppeared)
-//        {
-//            
-//            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
-//                                                                object: self
-//                                                              userInfo: @{kChannel: self.channel}];
-//        }
+        //        if (self.mode == kChannelDetailsModeDisplay && self.hasAppeared)
+        //        {
+        //
+        //            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
+        //                                                                object: self
+        //                                                              userInfo: @{kChannel: self.channel}];
+        //        }
     }
 }
 
@@ -599,80 +610,13 @@ SYNChannelCoverImageSelectorDelegate>
         
         if (!error)
         {
-            [self displayChannelDetails];
+            //[self displayChannelDetails];
         }
         else
         {
             DebugLog(@"%@", [error description]);
         }
     }
-}
-
-- (void) displayChannelDetails
-{
-    self.channelOwnerLabel.text = self.channel.channelOwner.displayName;
-    
-    NSString *detailsString;
-    
-    if (self.channel.publicValue)
-    {
-        detailsString = [NSString stringWithFormat: @"%lld %@", self.channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
-        self.shareButton.hidden = FALSE;
-        self.subscribersButton.hidden = FALSE;
-    }
-    else
-    {
-        detailsString = @"Private";
-        self.shareButton.hidden = TRUE;
-        self.subscribersButton.hidden = TRUE;
-    }
-    
-    self.subscribersLabel.text = detailsString;
-    
-    
-    // Set title //
-    if (self.channel.title)
-    {
-        self.channelTitleTextView.text = self.channel.title;
-    }
-    else
-    {
-        self.channelTitleTextView.text = @"";
-    }
-    
-    [self adjustTextView];
-    
-    UIImage *placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile.png"];
-    
-    NSArray *thumbnailURLItems = [self.channel.channelOwner.thumbnailURL componentsSeparatedByString: @"/"];
-    
-    if (thumbnailURLItems.count >= 6) // there is a url string with the proper format
-    {
-        // whatever is set to be the default size by the server (ex. 'thumbnail_small') //
-        NSString *thumbnailSizeString = thumbnailURLItems[5];
-        
-        
-        NSString *thumbnailUrlString = [self.channel.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString
-                                                                                                         withString: @"thumbnail_large"];
-        
-        [self.avatarImageView setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
-                             placeholderImage: placeholderImage
-                                      options: SDWebImageRetryFailed];
-    }
-    else
-    {
-        self.avatarImageView.image = placeholderImage;
-    }
-}
-
-- (void) adjustTextView
-{
-    CGFloat topCorrect = ([self.channelTitleTextView bounds].size.height - [self.channelTitleTextView contentSize].height);
-    
-    topCorrect = (topCorrect < 0.0 ? 0.0 : topCorrect);
-    
-    [self.channelTitleTextView setContentOffset: (CGPoint) { .x = 0, .y = -topCorrect}
-                                       animated: NO];
 }
 
 
@@ -696,8 +640,7 @@ SYNChannelCoverImageSelectorDelegate>
             self.dataItemsAvailable = self.channel.totalVideosValue;
             
             
-            self.btnFollow.selected = self.channel.subscribedByUserValue;
-            self.btnFollow.enabled = YES;
+            self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
             
             if (self.subscribingIndicator)
             {
@@ -709,13 +652,13 @@ SYNChannelCoverImageSelectorDelegate>
             
             if (self.channel.videoInstances.count == 0)
             {
-//                [self showNoVideosMessage: NSLocalizedString(@"channel_screen_no_videos", nil)
-//                               withLoader: NO];
+                //                [self showNoVideosMessage: NSLocalizedString(@"channel_screen_no_videos", nil)
+                //                               withLoader: NO];
             }
             else
             {
-//                [self showNoVideosMessage: nil
-//                               withLoader: NO];
+                //                [self showNoVideosMessage: nil
+                //                               withLoader: NO];
             }
             
             return;
@@ -728,10 +671,10 @@ SYNChannelCoverImageSelectorDelegate>
     
     
     
-    if ((self.channel.channelOwner.displayName !=  nil) && (self.channelOwnerLabel.text == nil))
-    {
-        [self displayChannelDetails];
-    }
+//    if ((self.channel.channelOwner.displayName !=  nil) && (self.channelOwnerLabel.text == nil))
+//    {
+//        [self displayChannelDetails];
+//    }
     
     BOOL visible = (self.mode == kChannelDetailsModeDisplay);
     
@@ -749,7 +692,7 @@ SYNChannelCoverImageSelectorDelegate>
 {
     [self.videoThumbnailCollectionView reloadData];
     
-    [self displayChannelDetails];
+   // [self displayChannelDetails];
     
     
     
@@ -907,7 +850,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 
 - (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation
-{    
+{
     if (UIDeviceOrientationIsPortrait(orientation))
     {
         self.videoCollectionLayoutIPad.headerReferenceSize = CGSizeMake(670, 557);
@@ -966,85 +909,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     }];
 }
 
-
-- (void) setDisplayControlsVisibility: (BOOL) visible
-{
-    // Support for different appearances / functionality of textview
-    self.channelTitleTextView.textColor = (visible) ? [UIColor whiteColor] : [UIColor blackColor];
-    self.channelTitleTextView.userInteractionEnabled = (visible) ? NO : YES;
-    self.channelTitleTextBackgroundView.backgroundColor = (visible) ? [UIColor clearColor] : [UIColor whiteColor];
-    self.displayControlsView.alpha = (visible) ? 1.0f : 0.0f;
-    self.editControlsView.alpha = (visible) ? 0.0f : 1.0f;
-    self.coverChooserMasterView.hidden = (visible) ? TRUE : FALSE;
-    self.profileImageButton.enabled = visible;
-    
-    self.editButton.hidden = (visible && ![self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]);
-    
-    self.logoImageView.hidden = !visible;
-    
-    // If the current user's favourites channel, hide edit button and move subscribers
-    if (self.channel.favouritesValue &&
-        [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-    {
-        self.editButton.hidden = TRUE;
-        
-        CGFloat offset = IS_IPAD ? 80.0f : 125.0f;
-        
-        CGRect frame = self.subscribersLabel.frame;
-        
-        frame.origin.x = 144.0f - offset;
-        
-        self.subscribersLabel.frame = frame;
-        
-        self.originalSubscribersLabelRect = frame;
-        
-        self.subscribersButton.center = self.subscribersLabel.center;
-    }
-    
-    
-//    [(LXReorderableCollectionViewFlowLayout *) self.videoThumbnailCollectionView.collectionViewLayout longPressGestureRecognizer].enabled = (visible) ? FALSE : TRUE;
-    
-    if (visible == NO)
-    {
-        // If we are in edit mode, then hide navigation controls
-        [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsHide
-                                                            object: self
-                                                          userInfo: nil];
-    }
-}
-
-
-// For edit controls just do the inverse of details control
-- (void) setEditControlsVisibility: (BOOL) visible
-{
-    _mode = visible;
-    
-    [self setDisplayControlsVisibility: !visible];
-    
-    [self.videoThumbnailCollectionView reloadData];
-}
-
-
-- (void) enterEditMode
-{
-    self.coverChooserController.selectedImageURL = self.channel.channelCover.imageUrl;
-    
-    [UIView animateWithDuration: kChannelEditModeAnimationDuration
-                     animations: ^{
-                         [self setEditControlsVisibility: TRUE];
-                     }
-                     completion: nil];
-}
-
-
-- (void) leaveEditMode
-{
-    [UIView animateWithDuration: kChannelEditModeAnimationDuration
-                     animations: ^{
-                         [self setDisplayControlsVisibility: TRUE];
-                     }
-                     completion: nil];
-}
 
 
 #pragma mark - KVO support
@@ -1123,13 +987,6 @@ referenceSizeForFooterInSection: (NSInteger) section
                                               [appDelegate saveContext: YES];
                                               
                                               // Complete Channel Creation //
-                                              self.channelOwnerLabel.text = [appDelegate.currentUser.displayName uppercaseString];
-                                              
-                                              [self displayChannelDetails];
-                                              
-//                                              [self reloadUserImage: nil];
-                                              
-                                              [self setDisplayControlsVisibility: YES];
                                               
                                               self.mode = kChannelDetailsModeDisplay;
                                               
@@ -1137,7 +994,7 @@ referenceSizeForFooterInSection: (NSInteger) section
                                                                                                    object: self
                                                                                                  userInfo: nil];
                                               
-                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
+//                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
                                               
                                               [[NSNotificationCenter defaultCenter]  postNotificationName: kVideoQueueClear
                                                                                                    object: nil];
@@ -1148,21 +1005,15 @@ referenceSizeForFooterInSection: (NSInteger) section
                                           } errorHandler: ^(id err) {
                                               self.isLocked = NO;
                                               
-                                              DebugLog(@"Error @ getNewlyCreatedChannelForId:");
-                                              [self	  showError: NSLocalizedString(@"Could not retrieve the uploaded channel data. Please try accessing it from your profile later.", nil)
-                                                 showErrorTitle: @"Error"];
-                                              self.channelOwnerLabel.text = [appDelegate.currentUser.displayName uppercaseString];
-                                              
-                                              [self displayChannelDetails];
-                                              
-                                              [self setDisplayControlsVisibility: YES];
+//                                              DebugLog(@"Error @ getNewlyCreatedChannelForId:");
+//                                              [self	  showError: NSLocalizedString(@"Could not retrieve the uploaded channel data. Please try accessing it from your profile later.", nil)
+//                                                 showErrorTitle: @"Error"];
                                               
                                               [[NSNotificationCenter defaultCenter]  postNotificationName: kNoteAllNavControlsShow
                                                                                                    object: self
                                                                                                  userInfo: nil];
                                               
-                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
-                                              
+//                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
                                               
                                               [[NSNotificationCenter defaultCenter]  postNotificationName: kVideoQueueClear
                                                                                                    object: nil];
@@ -1192,8 +1043,8 @@ referenceSizeForFooterInSection: (NSInteger) section
             buttonString = NSLocalizedString(@"enter_title", nil);
             actionBlock = ^{
                 [wself setMode: kChannelDetailsModeEdit];
-              //  [wself editButtonTapped: wself.editButton];
-                [wself.channelTitleTextView becomeFirstResponder];
+                //  [wself editButtonTapped: wself.editButton];
+                //[wself.channelTitleTextView becomeFirstResponder];
             };
             numberOfConditions++;
         }
@@ -1204,8 +1055,8 @@ referenceSizeForFooterInSection: (NSInteger) section
             buttonString = NSLocalizedString(@"select_category", nil);
             actionBlock = ^{
                 [wself setMode: kChannelDetailsModeEdit];
-//                [wself editButtonTapped: wself.editButton];
-//                [wself selectCategoryButtonTapped: wself.selectCategoryButton];
+                //                [wself editButtonTapped: wself.editButton];
+                //                [wself selectCategoryButtonTapped: wself.selectCategoryButton];
             };
             numberOfConditions++;
         }
@@ -1216,8 +1067,8 @@ referenceSizeForFooterInSection: (NSInteger) section
             buttonString = NSLocalizedString(@"select_cover", nil);
             actionBlock = ^{
                 [wself setMode: kChannelDetailsModeEdit];
-//                [wself editButtonTapped: wself.editButton];
-//                [wself addCoverButtonTapped: wself.addCoverButton];
+                //                [wself editButtonTapped: wself.editButton];
+                //                [wself addCoverButtonTapped: wself.addCoverButton];
             };
             numberOfConditions++;
         }
@@ -1257,8 +1108,8 @@ referenceSizeForFooterInSection: (NSInteger) section
             {
                 buttonString = @"EDIT";
                 actionBlock = ^{
-//                    [wself setMode: kChannelDetailsModeEdit];
-//                    [wself editButtonTapped: wself.editButton];
+                    //                    [wself setMode: kChannelDetailsModeEdit];
+                    //                    [wself editButtonTapped: wself.editButton];
                 };
             }
             
@@ -1276,65 +1127,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 }
 
 
-- (void) finaliseViewStatusAfterCreateOrUpdate: (BOOL) isIPad
-{
-    if (isIPad)
-    {
-        self.createChannelButton.hidden = YES;
-    }
-    else
-    {
-        SYNMasterViewController *master = (SYNMasterViewController *) self.presentingViewController;
-        
-        if (master)
-        {
-            //This scenario happens on channel creation only and means this channel is presented modally.
-            //After creation want to show it as if it is part of the master view hierarchy.
-            //Thus we move the view there.
-            
-            //Check for precense of existing channels view controller.
-            UIViewController *lastController = [[master childViewControllers] lastObject];
-            
-            if ([lastController isKindOfClass: [UICollectionViewController class]])
-            {
-                //This removes the "existing channels view controller"
-                [lastController.view removeFromSuperview];
-                [lastController removeFromParentViewController];
-            }
-            
-            //Now dimiss self modally (not animated)
-            [master dismissViewControllerAnimated: NO
-                                       completion: nil];
-            
-            //Change to display mode
-            self.mode = kChannelDetailsModeDisplay;
-            
-            //Don't really like this, but send notification to hide title and dots for a seamless transition.
-            [[NSNotificationCenter defaultCenter] postNotificationName: kNoteHideTitleAndDots
-                                                                object: self
-                                                              userInfo: nil];
-            
-            //And show as if displayed from the normal master view hierarchy
-            [self.navigationController pushViewController:self animated:YES];
-        }
-        
-        [self setDisplayControlsVisibility: YES];
-        [self.activityIndicator stopAnimating];
-    }
-}
 
-
-- (void) showError: (NSString *) errorMessage showErrorTitle: (NSString *) errorTitle
-{
-    self.createChannelButton.hidden = NO;
-    [self.activityIndicator stopAnimating];
-    
-    [[[UIAlertView alloc] initWithTitle: errorTitle
-                                message: errorMessage
-                               delegate: nil
-                      cancelButtonTitle: NSLocalizedString(@"OK", nil)
-                      otherButtonTitles: nil] show];
-}
 
 - (IBAction)avatarTapped:(id)sender {
     
@@ -1345,59 +1138,59 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self.navigationController pushViewController:profileVC animated:YES];
     
-
+    
 }
 
 
 
 - (IBAction) followersLabelPressed: (id) sender
 {
-   // [self releasedSubscribersLabel: sender];
+    // [self releasedSubscribersLabel: sender];
     
-//    if (self.subscribersPopover)
-//    {
-//        return;
-//    }
-//    
-//    // Google analytics support
-//    id tracker = [[GAI sharedInstance] defaultTracker];
-//    
-//    [tracker set: kGAIScreenName
-//           value: @"Subscribers List"];
-//    
-//    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-//    
-//    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
-//    
-//    if (IS_IPAD)
-//    {
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: subscribersViewController];
-//        navigationController.view.backgroundColor = [UIColor clearColor];
-//        
-//        
-//        self.subscribersPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
-//        
-//        self.subscribersPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
-//        
-//        self.subscribersPopover.popoverContentSize = CGSizeMake(514, 626);
-//        self.subscribersPopover.delegate = self;
-//        
-//        
-//        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
-//                                 480.0f, 1, 1);
-//        
-//        
-//        [self.subscribersPopover presentPopoverFromRect: rect
-//                                                 inView: self.view
-//                               permittedArrowDirections: 0
-//                                               animated: YES];
-//    }
-//    else
-//    {
-//        self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
-//        
-//        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
-//    }
+    //    if (self.subscribersPopover)
+    //    {
+    //        return;
+    //    }
+    //
+    //    // Google analytics support
+    //    id tracker = [[GAI sharedInstance] defaultTracker];
+    //
+    //    [tracker set: kGAIScreenName
+    //           value: @"Subscribers List"];
+    //
+    //    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+    //
+    //    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
+    //
+    //    if (IS_IPAD)
+    //    {
+    //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: subscribersViewController];
+    //        navigationController.view.backgroundColor = [UIColor clearColor];
+    //
+    //
+    //        self.subscribersPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
+    //
+    //        self.subscribersPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
+    //
+    //        self.subscribersPopover.popoverContentSize = CGSizeMake(514, 626);
+    //        self.subscribersPopover.delegate = self;
+    //
+    //
+    //        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
+    //                                 480.0f, 1, 1);
+    //
+    //
+    //        [self.subscribersPopover presentPopoverFromRect: rect
+    //                                                 inView: self.view
+    //                               permittedArrowDirections: 0
+    //                                               animated: YES];
+    //    }
+    //    else
+    //    {
+    //        self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
+    //        
+    //        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
+    //    }
 }
 
 

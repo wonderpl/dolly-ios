@@ -792,6 +792,7 @@ SYNImagePickerControllerDelegate>{
     return 1;
 }
 
+
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
@@ -1476,7 +1477,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         {
             //never gets called, first cell gets called and created in didSelectItem
             // [self createAndDisplayNewChannel];
-            
             return;
         }
         else
@@ -1485,8 +1485,17 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel: channel
-                                                                                                                             usingMode: kChannelDetailsModeDisplay];
+        SYNChannelDetailsViewController *channelVC;
+        if (self.modeType == MyOwnProfile) {
+            
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel: channel
+                                                                       usingMode: kChannelDetailsModeDisplayUser];
+        }
+        else
+        {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel: channel
+                                                             usingMode: kChannelDetailsModeDisplay];
+        }
         self.navigationController.navigationBarHidden = NO;
 
         [self.navigationController pushViewController:channelVC animated:nil];

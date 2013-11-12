@@ -445,7 +445,8 @@ typedef enum : NSInteger
 {
     kChannelDetailsModeDisplay = 0,
     kChannelDetailsModeEdit = 1,
-    kChannelDetailsModeCreate = 2
+    kChannelDetailsModeCreate = 2,
+    kChannelDetailsModeDisplayUser = 3
 } kChannelDetailsMode;
 
 

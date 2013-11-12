@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNChannelDetailsViewController">
             <connections>
                 <outlet property="btnAvatar" destination="fM4-Xb-Qmi" id="fcK-Rp-wxK"/>
-                <outlet property="btnFollow" destination="P7D-vs-dmA" id="evd-Ki-B6p"/>
-                <outlet property="btnFollowers" destination="sVX-iR-Htf" id="59B-Vr-fSh"/>
-                <outlet property="btnShare" destination="ftS-iK-V3y" id="Xgx-Mf-ukS"/>
-                <outlet property="btnVideos" destination="cJl-eE-YdZ" id="3Ql-eR-lhE"/>
+                <outlet property="btnFollowChannel" destination="P7D-vs-dmA" id="xdY-R2-Tym"/>
+                <outlet property="btnShareChannel" destination="ftS-iK-V3y" id="Pze-Em-2DI"/>
+                <outlet property="btnShowFollowers" destination="sVX-iR-Htf" id="cde-4s-nHu"/>
+                <outlet property="btnShowVideos" destination="cJl-eE-YdZ" id="d1M-U1-S7L"/>
                 <outlet property="lblChannelTitle" destination="Vnv-ov-6xo" id="ov8-x6-sed"/>
                 <outlet property="lblDescription" destination="irB-oP-X4O" id="BBs-Oh-cue"/>
                 <outlet property="lblFullName" destination="r8Y-zW-rcS" id="0f2-uW-cCd"/>
