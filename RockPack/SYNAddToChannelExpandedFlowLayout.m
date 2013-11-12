@@ -13,14 +13,6 @@
 
 
 
-- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
-{
-    return [super initialLayoutAttributesForAppearingItemAtIndexPath:itemIndexPath];
-}
-- (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
-{
-    return [super finalLayoutAttributesForDisappearingItemAtIndexPath:itemIndexPath];
-}
 
 -(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
@@ -39,7 +31,7 @@
         }
         else if ((IS_IPAD && (attributes.indexPath.item % 2 == 0)) || IS_IPHONE) // odd cells (0 indexed)
         {
-            // cellFrame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+            cellFrame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
         }
         attributes.frame = cellFrame;
     }
@@ -49,15 +41,11 @@
     return attributesArray;
 }
 
--(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+
+
+-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
-    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    
-    //[self applyLayoutAttributes:attributes];
-    
-    return attributes;
+    return YES;
 }
-
-
 
 @end

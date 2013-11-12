@@ -28,7 +28,7 @@
 #import "SYNAddToChannelFlowLayout.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kAnimationExpansion 0.7f
+#define kAnimationExpansion 0.4f
 
 @import QuartzCore;
 
@@ -83,8 +83,8 @@
     self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
     self.normalFlowLayout = [[SYNAddToChannelFlowLayout alloc] init];
     
-    // self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
-    self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
+    self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
+    // self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
     
     creatingNewState = NO;
     
@@ -304,7 +304,7 @@
     if (indexPath.row == 0) // first row (create)
     {
         self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])
-                                                                                        forIndexPath: indexPath];
+                                                                              forIndexPath: indexPath];
         [self.createNewChannelCell.createNewButton addTarget:self
                                                       action:@selector(createNewButtonPressed)
                                             forControlEvents:UIControlEventTouchUpInside];
@@ -331,13 +331,9 @@
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    
     // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
     if(indexPath.row == 0)
         return;
-    
-    
-    
     
 }
 
@@ -351,7 +347,6 @@
     
     creatingNewAnimating = YES;
     
-    [self.currentChannelsCollectionView.collectionViewLayout invalidateLayout];
     
     // 1. Loop over all the cells and animate manually
     
@@ -363,7 +358,7 @@
             CGRect frame = cell.frame;
             
             
-            if(index == 0 && [cell isKindOfClass:[SYNAddToChannelCreateNewCell class]])
+            if(cell == self.createNewChannelCell)
             {
                 if(creatingNewState) // if in "create new" state -> contract
                 {
@@ -392,6 +387,7 @@
             }
             cell.frame = frame;
         };
+        
         index++;
         
         
@@ -417,7 +413,6 @@
                                                                action: @"channelSelectionClick"
                                                                 label: @"New"
                                                                 value: nil] build]];
-        
         
     }
     
