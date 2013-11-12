@@ -39,7 +39,7 @@
         }
         else if ((IS_IPAD && (attributes.indexPath.item % 2 == 0)) || IS_IPHONE) // odd cells (0 indexed)
         {
-            // cellFrame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+            cellFrame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
         }
         attributes.frame = cellFrame;
     }

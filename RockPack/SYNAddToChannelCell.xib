@@ -13,15 +13,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xza-gf-Pq3" userLabel="Bottom Bar">
-                        <rect key="frame" x="0.0" y="52" width="320" height="10"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xza-gf-Pq3" userLabel="Bottom Bar">
+                        <rect key="frame" x="0.0" y="50" width="320" height="10"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="CJY-jV-HZw"/>
+                        </constraints>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     </view>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWg-57-uHe">
-                        <rect key="frame" x="20" y="19" width="280" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWg-57-uHe">
+                        <rect key="frame" x="20" y="18" width="280" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="q7k-FE-DIE"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -30,6 +36,14 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="tWg-57-uHe" firstAttribute="top" secondItem="JBt-Ds-SQ0" secondAttribute="top" constant="18" id="8lp-TM-1k2"/>
+                <constraint firstItem="tWg-57-uHe" firstAttribute="leading" secondItem="JBt-Ds-SQ0" secondAttribute="leading" constant="20" id="K4S-I1-fkU"/>
+                <constraint firstAttribute="trailing" secondItem="xza-gf-Pq3" secondAttribute="trailing" id="VsX-7g-CF8"/>
+                <constraint firstAttribute="trailing" secondItem="tWg-57-uHe" secondAttribute="trailing" constant="20" id="W97-6J-lU7"/>
+                <constraint firstItem="xza-gf-Pq3" firstAttribute="leading" secondItem="JBt-Ds-SQ0" secondAttribute="leading" id="keo-tq-Q2c"/>
+                <constraint firstAttribute="bottom" secondItem="xza-gf-Pq3" secondAttribute="bottom" id="v8P-Yy-PMo"/>
+            </constraints>
             <size key="customSize" width="272" height="155"/>
             <connections>
                 <outlet property="bottomStripView" destination="xza-gf-Pq3" id="H7l-ra-2AO"/>
