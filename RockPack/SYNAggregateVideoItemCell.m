@@ -97,7 +97,8 @@
     [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
                       andCount: videoInstance.video.starCountValue];
     
-    self.titleLabel.text = videoInstance.title;
+    NSString *titleString = [NSString stringWithFormat: @"%@\n\n", videoInstance.title];
+    self.titleLabel.text = titleString;
 }
 
 
