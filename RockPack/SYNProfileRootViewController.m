@@ -42,9 +42,7 @@
 //delete function in channeldetails deletechannel
 
 
-@interface SYNProfileRootViewController () <
-UIGestureRecognizerDelegate,
-SYNImagePickerControllerDelegate>{
+@interface SYNProfileRootViewController () <UIGestureRecognizerDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate> {
     ProfileType modeType;
     
 }
@@ -830,7 +828,7 @@ SYNImagePickerControllerDelegate>{
         }
         
         [channelThumbnailCell setTitle: channel.title];
-        [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+        [channelThumbnailCell setViewControllerDelegate:self];
         cell = channelThumbnailCell;
     }
     else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
@@ -864,7 +862,7 @@ SYNImagePickerControllerDelegate>{
                 [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
             }
             [channelThumbnailCell setTitle:channel.title];
-            [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+            [channelThumbnailCell setViewControllerDelegate:self];
             
             cell = channelThumbnailCell;
         }
