@@ -1225,6 +1225,7 @@
         [self.videoPlaybackViewController.shuttleBarMaxMinButton setImage: [UIImage imageNamed: @"ButtonShuttleBarMinimise.png"]
                                                                  forState: UIControlStateNormal];
         self.currentOrientation = newOrientation;
+        
         [[UIApplication sharedApplication] setStatusBarHidden: YES
                                                 withAnimation: UIStatusBarAnimationSlide];
         
