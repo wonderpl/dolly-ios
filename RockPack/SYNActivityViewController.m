@@ -272,7 +272,7 @@
     SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
     
     
-    [appDelegate.viewStackManager viewProfileDetails: notification.channelOwner];
+    [self viewProfileDetails: notification.channelOwner];
     
     [self markAsReadForNotification: notification];
 }
@@ -331,7 +331,7 @@
                 return;
             }
             
-            [appDelegate.viewStackManager viewProfileDetails: channelOwner];
+            [self viewProfileDetails: channelOwner];
             break;
         }
             

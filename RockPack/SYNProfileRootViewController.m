@@ -404,13 +404,6 @@ SYNImagePickerControllerDelegate>{
     
 }
 
-
-- (void) viewWillDisappear: (BOOL) animated
-{
-    [super viewWillDisappear: animated];
-    
-}
-
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
@@ -1452,7 +1445,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
     
-    [appDelegate.viewStackManager viewProfileDetails: channel.channelOwner];
+    [self viewProfileDetails:channel.channelOwner];
 }
 
 //Channels are the cell in the collection view

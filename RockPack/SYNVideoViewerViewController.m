@@ -978,7 +978,7 @@
     // Get the video instance for the currently selected video
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-    [appDelegate.viewStackManager viewProfileDetails: videoInstance.channel.channelOwner];
+    [self viewProfileDetails: videoInstance.channel.channelOwner];
 }
 
 - (void) userTappedVideo

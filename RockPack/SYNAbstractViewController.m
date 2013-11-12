@@ -323,7 +323,7 @@
     {
         VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
         
-        [appDelegate.viewStackManager viewProfileDetails: videoInstance.channel.channelOwner];
+        [self viewProfileDetails: videoInstance.channel.channelOwner];
     }
 }
 
@@ -1054,6 +1054,35 @@
      [wself.emptyGenreMessageView removeFromSuperview];
      }];
      */
+}
+
+
+- (void)viewProfileDetails:(ChannelOwner *)channelOwner {
+	if (!channelOwner) {
+		return;
+	}
+
+	SYNProfileRootViewController *profileVC = (SYNProfileRootViewController *)[self viewControllerOfClass:[SYNProfileRootViewController class]];
+	if (profileVC) {
+		profileVC.channelOwner = channelOwner;
+		[self.navigationController popToViewController:profileVC animated:YES];
+	} else {
+		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId];
+		profileVC.channelOwner = channelOwner;
+		[self.navigationController pushViewController:profileVC animated:YES];
+	}
+}
+
+- (UIViewController *)viewControllerOfClass:(Class)class {
+	static const NSInteger StackLimit = 6;
+	if (self.navigationController.viewControllers.count > StackLimit) {
+		for (UIViewController *viewController in self.navigationController.viewControllers) {
+			if ([viewController isMemberOfClass:class]) {
+				return viewController;
+			}
+		}
+	}
+	return nil;
 }
 
 @end

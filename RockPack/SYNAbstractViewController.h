@@ -102,6 +102,7 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (void) removePopupMessage;
 
+- (void)viewProfileDetails:(ChannelOwner *)channelOwner;
 
 
 // Purchase

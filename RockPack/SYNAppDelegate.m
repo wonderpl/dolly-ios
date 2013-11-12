@@ -1429,7 +1429,8 @@
                                                             usingManagedObjectContext: self.mainManagedObjectContext
                                                                   ignoringObjectTypes: kIgnoreChannelObjects];
                     
-                    [self.viewStackManager viewProfileDetails: channelOwner];
+					SYNAbstractViewController *viewController = (SYNAbstractViewController *)self.masterViewController.showingViewController.topViewController;
+                    [viewController viewProfileDetails: channelOwner];
                     success = TRUE;
                 }
                 
