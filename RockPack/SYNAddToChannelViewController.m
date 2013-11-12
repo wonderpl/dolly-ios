@@ -83,7 +83,8 @@
     self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
     self.normalFlowLayout = [[SYNAddToChannelFlowLayout alloc] init];
     
-    self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
+    // self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
+    self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
     
     creatingNewState = NO;
     
@@ -377,7 +378,7 @@
                 
                 
             }
-            else if((IS_IPAD &&index % 2 == 0) || IS_IPHONE)
+            else if(IS_IPHONE || (IS_IPAD && index % 2 == 0))
             {
                 if(creatingNewState) // if in create new state -> contract
                 {
