@@ -21,7 +21,6 @@
     self.itemSize = CGSizeMake(310.0f, kChannelCellDefaultHeight );
     self.headerReferenceSize = CGSizeZero;
     
-    //self.scrollDirection = (IS_IPHONE ? UICollectionViewScrollDirectionVertical : UICollectionViewScrollDirectionHorizontal);
     
     return self;
 }
