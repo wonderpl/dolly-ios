@@ -272,7 +272,7 @@
     SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
     
     
-    [appDelegate.viewStackManager viewProfileDetails: notification.channelOwner];
+    [self viewProfileDetails: notification.channelOwner];
     
     [self markAsReadForNotification: notification];
 }
@@ -304,8 +304,7 @@
                 return;
             }
             
-            [appDelegate.viewStackManager viewChannelDetails: channel
-                                              withAutoplayId: notification.videoId];
+			[self viewChannelDetails:channel withAutoplayId:notification.videoId];
             break;
         }
             
@@ -318,7 +317,7 @@
                 return;
             }
             
-            [appDelegate.viewStackManager viewChannelDetails: channel];
+			[self viewChannelDetails:channel withAutoplayId:nil];
             break;
         }
             
@@ -331,7 +330,7 @@
                 return;
             }
             
-            [appDelegate.viewStackManager viewProfileDetails: channelOwner];
+            [self viewProfileDetails: channelOwner];
             break;
         }
             

@@ -78,6 +78,10 @@
     self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
     // ================= //
     
+    // Set the button to 'Add' Mode since we have not yet pressed the create new button
+    [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+    self.confirmButtom.enabled = NO;
+    
     self.view.layer.cornerRadius = 8.0f;
     
     self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
@@ -241,31 +245,6 @@
     // Copy Channels
     self.channels = [appDelegate.currentUser.channels array];
     
-    if (self.selectedChannel)
-    {
-        int selectedIndex = [self.channels indexOfObject: self.selectedChannel];
-        
-        if (selectedIndex != NSNotFound)
-        {
-            self.selectedChannel = (self.channels)[selectedIndex];
-            self.previouslySelectedPath = [NSIndexPath indexPathForRow: selectedIndex + 1
-                                                             inSection: 0];
-            self.confirmButtom.enabled = YES;
-        }
-        else
-        {
-            self.previouslySelectedPath = nil;
-            self.selectedChannel = nil;
-            self.confirmButtom.enabled = NO;
-        }
-    }
-    else
-    {
-        self.previouslySelectedPath = nil;
-        self.selectedChannel = nil;
-        self.confirmButtom.enabled = NO;
-    }
-    
     
     [self.currentChannelsCollectionView reloadData];
 }
@@ -318,9 +297,6 @@
         
         existingChannel.titleLabel.text = channel.title;
         
-        
-        
-        
         cell = existingChannel;
     }
     
@@ -335,6 +311,8 @@
     if(indexPath.row == 0)
         return;
     
+    self.selectedChannel = self.channels[indexPath.item - 1]; // channels will be plus one due to extra first channel
+    
 }
 
 #pragma mark - Expansion of First Cell
@@ -346,6 +324,7 @@
         return;
     
     creatingNewAnimating = YES;
+    
     
     
     // 1. Loop over all the cells and animate manually
@@ -364,11 +343,15 @@
                 {
                     frame.size.height = kChannelCellDefaultHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 0.0f;
+                    
+                    [self.confirmButtom setTitle:@"Create" forState:UIControlStateNormal];
                 }
                 else
                 {
                     frame.size.height = kChannelCellExpandedHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 1.0f;
+                    
+                    [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
                 }
                 
                 
@@ -457,18 +440,25 @@
         return;
     }
     
-    self.confirmButtom.enabled = NO;
-    self.closeButton.enabled = NO;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
                                                         object: self
                                                       userInfo: @{kChannel: self.selectedChannel}];
     
+    self.selectedChannel = nil;
+    
+    self.closeButton.enabled = NO; // protect from double closing the panel
     [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
 
 
-
+-(void)setSelectedChannel:(Channel *)selectedChannel
+{
+    _selectedChannel = selectedChannel;
+    if(_selectedChannel)
+        self.confirmButtom.enabled = YES;
+    else
+        self.confirmButtom.enabled = NO;
+}
 
 
 

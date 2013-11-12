@@ -1230,7 +1230,7 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
         return;
     }
     
-    [appDelegate.viewStackManager viewProfileDetails: self.channel.channelOwner];
+    [self viewProfileDetails:self.channel.channelOwner];
 }
 
 

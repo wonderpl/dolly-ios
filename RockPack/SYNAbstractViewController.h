@@ -102,6 +102,8 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (void) removePopupMessage;
 
+- (void)viewProfileDetails:(ChannelOwner *)channelOwner;
+- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId;
 
 
 // Purchase
