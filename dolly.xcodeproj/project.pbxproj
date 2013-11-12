@@ -1143,6 +1143,7 @@
 		BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */; };
 		BE458AF617E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */; };
 		BE458AF717E71BE000776B0D /* InstructionBackgroundPacks~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */; };
+		BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */; };
 		BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */; };
 		BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D02E9178B138B008053DC /* SYNUserThumbnailCell.m */; };
 		BE7D02EC178B13C3008053DC /* SYNUserThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7D02EB178B13C3008053DC /* SYNUserThumbnailCell.xib */; };
@@ -2770,6 +2771,7 @@
 		BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x.png"; path = "Assets/Images/InstructionBackgroundPacks@2x.png"; sourceTree = "<group>"; };
 		BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks@2x~iphone.png"; sourceTree = "<group>"; };
 		BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks~iphone.png"; sourceTree = "<group>"; };
+		BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelCell~iphone.xib"; sourceTree = "<group>"; };
 		BE53EE6017609587008360D2 /* Rockpack 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 4.xcdatamodel"; sourceTree = "<group>"; };
 		BE5D29E917577E2800C00486 /* SYNPopupMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopupMessageView.h; sourceTree = "<group>"; };
 		BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopupMessageView.m; sourceTree = "<group>"; };
@@ -5627,6 +5629,7 @@
 				BE31EFAE182D4B00006E20E2 /* SYNAddToChannelCell.h */,
 				BE31EFAF182D4B00006E20E2 /* SYNAddToChannelCell.m */,
 				BE31EFB1182D4B13006E20E2 /* SYNAddToChannelCell.xib */,
+				BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -7376,6 +7379,7 @@
 				1F4DAEE11781AA2500E0DB81 /* PlaceholderSidebarAvatar@2x.png in Resources */,
 				BE7D02EC178B13C3008053DC /* SYNUserThumbnailCell.xib in Resources */,
 				BE7D02F0178C0FEC008053DC /* SYNUserThumbnailCell~iphone.xib in Resources */,
+				BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */,
 				BE7D02FC178C72DB008053DC /* SYNModalSubscribersController.xib in Resources */,
 				1F4E7FC1181ACBAA00F59007 /* TabProfileHighlighted@2x~iphone.png in Resources */,
 				BE7D0302179D5624008053DC /* SYNFriendsViewController.xib in Resources */,

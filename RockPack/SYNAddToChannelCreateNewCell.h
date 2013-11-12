@@ -9,6 +9,10 @@
 @import UIKit;
 
 @interface SYNAddToChannelCreateNewCell : UICollectionViewCell
+{
+    UIView* separatorTop;
+    UIView* separatorBottom;
+}
 
 @property (strong, nonatomic) IBOutlet UIButton *createNewButton;
 @property (strong, nonatomic) IBOutlet UITextView* descriptionTextView;
