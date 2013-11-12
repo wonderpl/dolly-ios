@@ -311,7 +311,7 @@
     if(indexPath.row == 0)
         return;
     
-    self.selectedChannel = self.channels[indexPath.item];
+    self.selectedChannel = self.channels[indexPath.item - 1]; // channels will be plus one due to extra first channel
     
 }
 
