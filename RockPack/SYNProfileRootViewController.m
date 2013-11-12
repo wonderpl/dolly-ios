@@ -859,15 +859,19 @@
         
         [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)];
         
-        [channelThumbnailCell.videoCountLabel setText:[NSString stringWithString:videoCountString]];
         
-        [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
+        channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
+        channelThumbnailCell.viewControllerDelegate = self;
         
         cell = channelThumbnailCell;
         
     }
     
-    
+    // precaution
+    if(!cell)
+    {
+        AssertOrLog(@"No Cell Created");
+    }
     
     return cell;
 }

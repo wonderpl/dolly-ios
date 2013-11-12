@@ -40,7 +40,6 @@
 -(void) setHiddenForFollowButton: (BOOL) hide;
 -(void) moveToCentre;
 -(void) showDescription;
--(void) reset;
 
 
 @end
