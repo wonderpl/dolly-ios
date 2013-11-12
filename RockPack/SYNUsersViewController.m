@@ -137,10 +137,9 @@
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    ChannelOwner *channelOwner = (ChannelOwner *) self.users[indexPath.row];
+    ChannelOwner *channelOwner = self.users[indexPath.row];
     
-    [appDelegate.viewStackManager
-     viewProfileDetails: channelOwner];
+    [self viewProfileDetails:channelOwner];
 }
 
 

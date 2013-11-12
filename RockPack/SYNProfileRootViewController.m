@@ -42,9 +42,7 @@
 //delete function in channeldetails deletechannel
 
 
-@interface SYNProfileRootViewController () <
-UIGestureRecognizerDelegate,
-SYNImagePickerControllerDelegate>{
+@interface SYNProfileRootViewController () <UIGestureRecognizerDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate> {
     ProfileType modeType;
     
 }
@@ -401,13 +399,6 @@ SYNImagePickerControllerDelegate>{
     
     self.deletionModeActive = NO;
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-    
-}
-
-
-- (void) viewWillDisappear: (BOOL) animated
-{
-    [super viewWillDisappear: animated];
     
 }
 
@@ -837,9 +828,11 @@ SYNImagePickerControllerDelegate>{
             }
         }
         
+
         // == Add Common Attributes == //
         
         if(self.modeType == OtherUsersProfile)
+
         {
             if (channel.subscribedByUserValue)
             {
@@ -849,6 +842,7 @@ SYNImagePickerControllerDelegate>{
             {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
             }
+
         }
         
         NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
@@ -900,10 +894,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     {
         channel = self.channelOwner.subscriptions[indexPath.row];
     }
-    
-    //  [self.navigationController pushViewController:channel animated:nil];
-    [appDelegate.viewStackManager viewChannelDetails: channel];
-    
+	
+    [self viewChannelDetails:channel withAutoplayId:nil];
 }
 
 
@@ -1445,7 +1437,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
     
-    [appDelegate.viewStackManager viewProfileDetails: channel.channelOwner];
+    [self viewProfileDetails:channel.channelOwner];
 }
 
 //Channels are the cell in the collection view
@@ -1478,15 +1470,14 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         
-        
-        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
+        [self viewChannelDetails:channel withAutoplayId:nil];
     }
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {
         NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
         Channel *channel = self.arrDisplayFollowing[indexPath.item];
         
-        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
+        [self viewChannelDetails:channel withAutoplayId:nil];
     }
 }
 

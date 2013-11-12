@@ -783,8 +783,7 @@ typedef void(^FeedDataErrorBlock)(void);
         channelOwner = channel.channelOwner;
     }
     
-    [appDelegate.viewStackManager viewProfileDetails: channelOwner
-                            withNavigationController: self.navigationController];
+    [self viewProfileDetails: channelOwner];
 }
 
 
@@ -826,8 +825,7 @@ typedef void(^FeedDataErrorBlock)(void);
         }
     }
     
-    [appDelegate.viewStackManager viewChannelDetails: channel
-                            withNavigationController: self.navigationController];
+	[self viewChannelDetails:channel withAutoplayId:nil];
 }
 
 
@@ -886,7 +884,7 @@ typedef void(^FeedDataErrorBlock)(void);
     if(!cell.channelOwner) // checking for both channel and channel owner
         return;
     
-    [appDelegate.viewStackManager viewProfileDetails: cell.channelOwner];
+    [self viewProfileDetails: cell.channelOwner];
 }
 
 

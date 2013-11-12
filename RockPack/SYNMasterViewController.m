@@ -24,7 +24,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic) BOOL searchIsInProgress;
 @property (nonatomic) BOOL showingBackButton;
-@property (nonatomic, strong) IBOutlet UIButton* headerButton;
 
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
@@ -33,7 +32,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
-@property (nonatomic, strong) UIView* accountSettingsCoverView;
 
 @property (nonatomic, weak) UIViewController* overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
@@ -95,12 +93,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     self.reachability = [Reachability reachabilityWithHostname:appDelegate.networkEngine.hostName];
     
-    self.accountSettingsCoverView = [[UIView alloc] initWithFrame:self.view.frame];
-    self.accountSettingsCoverView.backgroundColor = [UIColor darkGrayColor];
-    self.accountSettingsCoverView.alpha = 0.5;
-    self.accountSettingsCoverView.hidden = YES;
-    
-    
     self.closeSearchButton.hidden = YES;
 
     
@@ -109,8 +101,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountSettingsLogout) name:kAccountSettingsLogout object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteHideNetworkMessages object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteShowNetworkMessages object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteHideNetworkMessages object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteShowNetworkMessages object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
