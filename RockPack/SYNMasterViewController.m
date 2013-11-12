@@ -127,6 +127,11 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 }
 
+// temporary
+-(void)hideOrShowNetworkMessages:(NSNotification*)notifcation
+{
+    
+}
 #pragma mark - Overlays, Adding and Removing
 
 -(void)addExistingCollectionsOverlayController
