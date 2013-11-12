@@ -8,6 +8,7 @@
 
 #import "AppConstants.h"
 #import "GAI.h"
+#import "SYNAbstractVideoPlaybackViewController+Private.h"
 #import "SYNDeviceManager.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOpaqueView.h"

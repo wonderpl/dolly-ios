@@ -7,7 +7,7 @@
 //
 
 
-#import "SYNAbstractVideoPlaybackViewController+Private.h"
+#import "SYNAbstractVideoPlaybackViewController.h"
 @import UIKit;
 
 // Forward declarations

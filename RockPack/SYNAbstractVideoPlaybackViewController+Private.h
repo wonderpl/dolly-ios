@@ -61,17 +61,6 @@
 
 #pragma mark - Private methods
 
-- (void) updateWithFrame: (CGRect) frame
-          channelCreator: (NSString *) channelCreator
-            indexUpdater: (SYNVideoIndexUpdater) indexUpdater;
-
-- (void) updateChannelCreator: (NSString *) channelCreator;
-
-
-- (void) setPlaylist: (NSArray *) playlistArray
-       selectedIndex: (int) selectedIndex
-            autoPlay: (BOOL) autoPlay;
-
 + (CGFloat) videoWidth;
 + (CGFloat) videoHeight;
 - (NSString *) videoQuality;
@@ -81,7 +70,7 @@
 - (int) nextVideoIndex;
 - (int) previousVideoIndex;
 - (UIView *) createShuttleBarView;
-- (void) resetShuttleBarFrame;
+
 - (UILabel *) createTimeLabelAtXPosition: (CGFloat) xPosition
                            textAlignment: (NSTextAlignment) textAlignment;
 
@@ -105,8 +94,6 @@
 - (void) resumeLayer: (CALayer*) layer;
 
 - (void) playVideo;
-- (void) playIfVideoActive;
-- (void) pauseIfVideoActive;
 - (void) pauseVideo;
 - (void) stopVideo;
 - (void) loadNextVideo;

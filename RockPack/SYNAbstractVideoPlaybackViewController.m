@@ -276,7 +276,7 @@
     self.currentTimeLabel = [self createTimeLabelAtXPosition: shuttleBarButtonWidth
                                                textAlignment: NSTextAlignmentRight];
     
-    self.currentTimeLabel.text =  [NSString timecodeStringFromSeconds: 0.0f];
+    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: 0.0f];
     
     [shuttleBarView addSubview: self.currentTimeLabel];
     
@@ -816,7 +816,7 @@
 {
     [self.shuttleBarUpdateTimer invalidate];
     
-    // Schedule the timer on a different runloop so that we continue to get updates even when scrolling collection views etc.
+
     self.shuttleBarUpdateTimer = [NSTimer timerWithTimeInterval: kShuttleBarUpdateTimerInterval
                                                          target: self
                                                        selector: @selector(updateShuttleBarProgress)

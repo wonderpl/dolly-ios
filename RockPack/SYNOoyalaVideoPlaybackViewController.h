@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNAbstractVideoPlaybackViewController+Private.h"
+#import "SYNAbstractVideoPlaybackViewController.h"
 
 @interface SYNOoyalaVideoPlaybackViewController : SYNAbstractVideoPlaybackViewController
 

@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNOoyalaVideoPlaybackViewController.h"
-#import "OOOoyalaPlayer.h"
+
 #import "OOOoyalaError.h"
+#import "OOOoyalaPlayer.h"
+#import "SYNAbstractVideoPlaybackViewController+Private.h"
+#import "SYNOoyalaVideoPlaybackViewController.h"
 
 @interface SYNOoyalaVideoPlaybackViewController ()
 

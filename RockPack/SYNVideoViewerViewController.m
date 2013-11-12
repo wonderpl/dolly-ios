@@ -998,7 +998,7 @@
     [self scheduleFadeOutShuttleBar];
 }
 
-
+// Full screen handling
 - (void) handleMinMax
 {
     if (IS_IPAD)
