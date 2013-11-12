@@ -177,10 +177,21 @@
     [layer removeAnimationForKey: @"wobbling"];
 }
 
-
 - (void) prepareForReuse
 {
-    [self stopWobbling];
+    
+    self.videoCountLabel = nil;
+    self.videoTitleLabel =nil;
+    self.followerCountLabel =nil;
+    self.bottomBarView =nil;
+    self.followButton =nil;
+    self.descriptionLabel =nil;
+    self.containerView =nil;
+    self.descriptionView =nil;
+    self.tap = nil;
+    //[self stopWobbling];
+    
+    
     
     // [self.imageView.layer removeAllAnimations];
     //[self.imageView setImageWithURL: nil];
@@ -355,6 +366,18 @@
     }
 }
 
+
+-(void) reset {
+    
+    self.videoCountLabel.text = @"";
+    self.videoTitleLabel.text = @"";
+    self.followerCountLabel.text = @"";
+    self.descriptionLabel.text = @"";
+    [self.boarderView.layer setBorderWidth:0.0f];
+    self.bottomBarView.backgroundColor = [UIColor clearColor];
+    self.followButton.hidden = YES;
+    
+}
 
 
 @end

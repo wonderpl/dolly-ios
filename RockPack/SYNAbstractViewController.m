@@ -15,22 +15,16 @@
 #import "ChannelOwner.h"
 #import "GAI.h"
 #import "NSDictionary+Validation.h"
-#import "NSObject+Blocks.h"
 #import "OWActivityViewController.h"
 #import "SDWebImageManager.h"
 #import "SYNAbstractViewController.h"
-#import "SYNAppDelegate.h"
 #import "SYNCollectionDetailsViewController.h"
-#import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
-#import "SYNImplicitSharingController.h"
 #import "SYNMasterViewController.h"
-#import "SYNOAuthNetworkEngine.h"
 #import "SYNOneToOneSharingController.h"
 #import "SYNPopoverBackgroundView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNSocialButton.h"
-#import "SYNVideoThumbnailWideCell.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
@@ -149,25 +143,18 @@
     
     self.view.multipleTouchEnabled = NO;
     
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    if(IS_IOS_7_OR_GREATER)
-        [self setNeedsStatusBarAppearanceUpdate];
+    [self setNeedsStatusBarAppearanceUpdate];
+        
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-    // Compensate for iOS7
-    
 
-}
 
 #pragma mark - Data Request Range
 
@@ -345,37 +332,7 @@
 }
 
 
-#pragma mark - Tab View Methods
 
-
-
-#pragma mark - TabViewDelegate
-
-- (void) handleMainTap: (UITapGestureRecognizer *) recogniser
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
-
-
-- (void) handleSecondaryTap: (UITapGestureRecognizer *) recogniser
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
-
-
-- (void) handleNewTabSelectionWithId: (NSString*) selectionId
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
-
-- (void) handleNewTabSelectionWithGenre: (Genre*) name
-{
-    // to be implemented by child
-    DebugLog(@"WARNING: Abstract method called");
-}
 
 -(void)clearedLocationBoundData
 {
@@ -767,11 +724,6 @@
 
 }
 
-- (NavigationButtonsAppearance) navigationAppearance
-{
-    // return the standard and overide in subclass for special cases such as the ChannelDetails Section
-    return NavigationButtonsAppearanceBlack;
-}
 
 
 - (BOOL) alwaysDisplaysSearchBox
@@ -977,24 +929,7 @@
     
     if (IS_IPHONE)
     {
-        CGRect newFrame = channelCreationVC.view.frame;
-        newFrame.size.height = self.view.frame.size.height;
-        channelCreationVC.view.frame = newFrame;
-        CATransition *animation = [CATransition animation];
-        
-        [animation setType: kCATransitionMoveIn];
-        [animation setSubtype: kCATransitionFromRight];
-        
-        [animation setDuration: 0.30];
-        [animation setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
-        
-        [self.view.window.layer
-         addAnimation: animation
-         forKey: nil];
-        
-        [self presentViewController: channelCreationVC
-                           animated: NO
-                         completion: nil];
+		[self.navigationController pushViewController:channelCreationVC animated:YES];
     }
     else
     {

@@ -10,7 +10,7 @@
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "GAI.h"
-#import "SYNExistingChannelCreateNewCell.h"
+#import "SYNAddToChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
@@ -58,7 +58,6 @@ SYNImagePickerControllerDelegate>{
 @property (nonatomic, assign, getter = isDeletionModeActive) BOOL deletionModeActive;
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
-@property (nonatomic, strong) NSArray *sortDescriptors;
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
 @property (nonatomic, strong) NSArray* arrFollowing;
 
@@ -141,11 +140,8 @@ SYNImagePickerControllerDelegate>{
 
 - (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
 {
-    
     self.modeType = mode;
-    
     self = [self initWithViewId:vid];
-
     return self;
 }
 
@@ -196,17 +192,9 @@ SYNImagePickerControllerDelegate>{
     [self.subscriptionThumbnailCollectionView registerNib: thumbnailCellNib
                                forCellWithReuseIdentifier: @"SYNChannelMidCell"];
     
-    
     self.isIPhone = IS_IPHONE;
     
     // Main Collection View
-    
-    if (!self.isIPhone)
-    {
-        self.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey: @"section"
-                                                               ascending: YES], [NSSortDescriptor sortDescriptorWithKey: @"row" ascending: YES]];
-    }
-    
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
@@ -220,7 +208,8 @@ SYNImagePickerControllerDelegate>{
                                                               blue: (224.0f / 255.0f)
                                                              alpha: 1.0f];
         
-    }else
+    }
+    else
     {
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPad;
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPad;
@@ -272,7 +261,6 @@ SYNImagePickerControllerDelegate>{
      
      self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
      */
-    [self setProfleType:self.modeType];
     
     UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
     if(txfSearchField)
@@ -281,12 +269,16 @@ SYNImagePickerControllerDelegate>{
                                                           blue: (255.0f / 255.0f)
                                                          alpha: 1.0f];
     
+    [self setProfleType:self.modeType];
+
 
 
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
+	
     self.navigationController.navigationBar.hidden = YES;
     [self updateTabStates];
     
@@ -555,13 +547,24 @@ SYNImagePickerControllerDelegate>{
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
         self.backButton.hidden = YES;
+        
+        
+
     }
     if (profileType == OtherUsersProfile)
     {
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
         self.backButton.hidden = NO;
+        
+        
+        self.followingSearchBar.hidden = YES;
+        CGSize tmp = self.subscriptionLayoutIPhone.headerReferenceSize;
+        
+        tmp.height -= 43;
+        self.subscriptionLayoutIPhone.headerReferenceSize = tmp;
 
+//
     }
 }
 
@@ -799,7 +802,7 @@ SYNImagePickerControllerDelegate>{
     
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        SYNExistingChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
+        SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
         cell = createCell;
     }
     
@@ -831,9 +834,7 @@ SYNImagePickerControllerDelegate>{
         else
         {
             [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
-
         }
-        
         
         [channelThumbnailCell setTitle: channel.title];
         [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
@@ -857,15 +858,18 @@ SYNImagePickerControllerDelegate>{
                 {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
                 }
-                
             }
-            
             [channelThumbnailCell setChannel:channel];
             [channelThumbnailCell setTitle: channel.title];
             [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
-
             [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)]];
-            [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)]];
+            if (IS_IPHONE) {
+                [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"- %ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+            }
+            else
+            {
+                [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+            }
             [channelThumbnailCell setTitle:channel.title];
             [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
             
@@ -873,8 +877,8 @@ SYNImagePickerControllerDelegate>{
         }
         else
         {
-            cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
-            
+             cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+           // [((SYNChannelMidCell*)cell) reset];
         }
     }
     
@@ -890,46 +894,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     {
         if (self.isUserProfile && indexPath.row == 0)
         {
-            if (IS_IPAD)
-            {
-                
-                [self createAndDisplayNewChannel];
-            }
-            else
-            {
-                //On iPhone we want a different navigation structure. Slide the view in.
-                
-                SYNCollectionDetailsViewController *channelCreationVC =
-                [[SYNCollectionDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
-                                                                  usingMode: kChannelDetailsModeCreate];
-                
-                CGRect newFrame = channelCreationVC.view.frame;
-                newFrame.size.height = self.view.frame.size.height;
-                channelCreationVC.view.frame = newFrame;
-                CATransition *animation = [CATransition animation];
-                
-                [animation setType: kCATransitionMoveIn];
-                [animation setSubtype: kCATransitionFromRight];
-                
-                [animation setDuration: 0.30];
-                
-                [animation setTimingFunction: [CAMediaTimingFunction functionWithName:
-                                               kCAMediaTimingFunctionEaseInEaseOut]];
-                
-                [self.view.window.layer addAnimation: animation
-                                              forKey: nil];
-                
-                
-                //presented twice
-                /* [self presentViewController: channelCreationVC
-                 animated: NO
-                 completion: ^{
-                 
-                 */
-                [self createAndDisplayNewChannel];
-                //  }];
-            }
-            
+			[self createAndDisplayNewChannel];
+			
             return;
         }
         else
@@ -977,6 +943,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         else
             return self.subscriptionLayoutIPad.itemSize;
     }
+    
     
     return CGSizeZero;
 }
@@ -1029,7 +996,11 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     self.subscriptionsTabButton.selected = self.collectionsTabActive;
     self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
     self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
-    self.followingSearchBar.hidden = self.collectionsTabActive;
+    
+    if (self.modeType == MyOwnProfile) {
+        self.followingSearchBar.hidden = self.collectionsTabActive;
+        
+    }
     
     
     if (self.collectionsTabActive)
@@ -1068,7 +1039,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    
       [super scrollViewWillBeginDragging:scrollView];
     if (self.searchMode) {
         [self.followingSearchBar resignFirstResponder];
@@ -1166,9 +1136,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (!self.isIPhone)
     {
-        
-
-        
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
         {
             scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
@@ -1459,33 +1426,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
 }
 
-
-#pragma mark - indexpath helper method
-
-- (NSIndexPath *) topIndexPathForCollectionView: (UICollectionView *) collectionView
-{
-    //This method finds a cell that is in the first row of the collection view that is showing at least half the height of its cell.
-    NSIndexPath *result = nil;
-    NSArray *indexPaths = [[collectionView indexPathsForVisibleItems] sortedArrayUsingDescriptors: self.sortDescriptors];
-    
-    if ([indexPaths count] > 0)
-    {
-        result = indexPaths[0];
-        UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: result];
-        
-        if (cell.center.y < collectionView.contentOffset.y)
-        {
-            if ([indexPaths count] > 3)
-            {
-                result = indexPaths[3];
-            }
-        }
-    }
-    
-    return result;
-}
-
-
 #pragma mark - Arc menu support
 
 - (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
@@ -1637,8 +1577,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     self.currentSearchTerm = searchBar.text;
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
+    
     [self.subscriptionThumbnailCollectionView reloadData];
-    [self.channelThumbnailCollectionView reloadData];
 
 }
 
@@ -1676,8 +1616,6 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 
 -(void) calculateOffsetForSearch
 {
-    
-    
     if (self.searchMode)
     {
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBAR_Y);

@@ -9,6 +9,7 @@
 #import "Channel.h"
 #import "SYNSubscribersViewController.h"
 #import "UIFont+SYNFont.h"
+#import "SYNMasterViewController.h"
 
 @interface SYNSubscribersViewController ()
 
@@ -202,7 +203,7 @@
 {
     if (IS_IPHONE)
     {
-        [appDelegate.viewStackManager hideModalController];
+		[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
     }
     
     [super collectionView: collectionView

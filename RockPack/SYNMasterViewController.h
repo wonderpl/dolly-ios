@@ -7,9 +7,6 @@
 //
 
 
-
-#import "SYNAccountSettingsMainTableViewController.h"
-#import "SYNAccountSettingsPopoverBackgroundView.h"
 #import "SYNAppDelegate.h"
 #import "SYNContainerViewController.h"
 #import "SYNVideoViewerViewController.h"
@@ -28,7 +25,6 @@ typedef enum NotificationMessageType : NSInteger {
 
 {
     SYNAppDelegate* appDelegate;
-    CGFloat originalAddButtonX;
 }
 
 
@@ -36,26 +32,24 @@ typedef enum NotificationMessageType : NSInteger {
 
 @property (nonatomic, strong) SYNAbstractViewController* originViewController;
 @property (strong, nonatomic) Reachability *reachability;
-@property (nonatomic, readonly) BOOL hasSearchBarOn;
-@property (nonatomic, readonly) BOOL isInSearchMode;
 @property (nonatomic, readonly) SYNVideoViewerViewController *videoViewerViewController;
 
 @property (nonatomic, strong) IBOutlet UIView* errorContainerView;
 
 @property (nonatomic, strong) IBOutlet UIView* tabsView;
 
-@property (nonatomic, strong) IBOutlet UIView* darkOverlayView;
 @property (nonatomic, strong) IBOutlet UIButton* closeSearchButton;
-@property (nonatomic, strong) IBOutlet UIView* overlayView;
+@property (nonatomic, strong) IBOutlet UIView* videoOverlayView;
 @property (nonatomic, strong) IBOutlet UIButton* sideNavigationButton;
 
 @property (nonatomic, readonly) NSArray* tabs;
 
 
-@property (nonatomic, weak, readonly) SYNAbstractViewController* showingBaseViewController;
-@property (nonatomic, weak, readonly) SYNAbstractViewController* showingViewController;
+@property (nonatomic, weak, readonly) UINavigationController* showingViewController;
 
 - (id) initWithContainerViewController: (UIViewController*) root;
+
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
 
 - (void) addVideoOverlayToViewController: (SYNAbstractViewController *) originViewController
                   withVideoInstanceArray: (NSArray*) videoInstanceArray
@@ -63,7 +57,12 @@ typedef enum NotificationMessageType : NSInteger {
 
 - (void) removeVideoOverlayController;
 
+// Overlay
+-(void)addExistingCollectionsOverlayController;
 
--(void) addOverlayController: (SYNAbstractViewController*) abstractViewController;
 
+-(void) addOverlayController: (SYNAbstractViewController*) abstractViewController animated:(BOOL)animated;
+
+
+-(void)removeOverlayControllerAnimated:(BOOL)animated;
 @end

@@ -6,11 +6,12 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 @interface SYNChannelCreateNewCell : UICollectionViewCell
+@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
+@property (strong, nonatomic) IBOutlet UIView *boarderView;
 
-@property (strong, nonatomic) IBOutlet UIButton *createNewButton;
-@property (strong, nonatomic) IBOutlet UITextView* descriptionTextView;
+@property (strong, nonatomic) IBOutlet UILabel *createLabel;
 
 @end

@@ -9,8 +9,8 @@
             <connections>
                 <outlet property="containerView" destination="jC0-R1-iPf" id="JHj-Hj-VmE"/>
                 <outlet property="errorContainerView" destination="128" id="129"/>
-                <outlet property="overlayView" destination="89" id="91"/>
                 <outlet property="tabsView" destination="950-BM-Kmd" id="SXL-xg-y98"/>
+                <outlet property="videoOverlayView" destination="89" id="PeD-qT-eM1"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>

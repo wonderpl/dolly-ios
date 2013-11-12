@@ -73,11 +73,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.colorMapForCells = @{};
     self.searchBar.layer.borderWidth = 1.0f;
     self.searchBar.layer.borderColor = [[UIColor whiteColor] CGColor];
-    if(IS_IPHONE)
-    {
-        
-        
-    }
     
     
     
@@ -98,7 +93,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.categoriesCollectionView registerNib: [UINib nibWithNibName: kCategoryCellIndetifier bundle: nil]
                     forCellWithReuseIdentifier: kCategoryCellIndetifier];
     
-    
+    if(IS_IPHONE)
+    {
+        // to allow for full screen scroll of the categories
+        UIEdgeInsets cInset = self.categoriesCollectionView.contentInset;
+        cInset.top = 110.f;
+        self.categoriesCollectionView.contentInset = cInset;
+    }
     
     self.autocompleteSuggestionsArray = [NSArray array]; // just so we have an array to return count == 0
     
@@ -505,10 +506,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         UIView* view_hack = self.searchResultsController.view;
         #pragma unused(view_hack)
         
-        self.searchResultsController.title = title;
+        self.searchResultsController.navigationItem.title = title;
         
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
+        
+        // hide the 'DISCOVER' text next to the back button as it appears by default
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                                 style:UIBarButtonItemStyleBordered
+                                                                                target:nil
+                                                                                action:nil];
+        
+        
         
         
         
@@ -520,6 +529,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.navigationController.navigationBar.topItem.title = title;
         
     }
+    
+    
     
     if(type == kSearchTypeGenre)
         [self.searchResultsController searchForGenre:searchTerm];

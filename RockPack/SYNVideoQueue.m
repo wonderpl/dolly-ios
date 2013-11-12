@@ -11,6 +11,7 @@
 #import "SYNDeviceManager.h"
 #import "SYNVideoQueue.h"
 #import "Video.h"
+#import "SYNMasterViewController.h"
 #import "VideoInstance.h"
 
 @interface SYNVideoQueue ()
@@ -147,7 +148,7 @@
     [self.currentlyCreatingChannel addVideoInstancesObject:copyOfVideoInstance];
     
     
-    [self.appDelegate.viewStackManager presentExistingChannelsController];
+    [self.appDelegate.masterViewController addExistingCollectionsOverlayController];
     
 }
 

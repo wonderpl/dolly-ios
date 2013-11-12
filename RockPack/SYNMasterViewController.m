@@ -6,19 +6,10 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-
-#import "AppConstants.h"
-#import "GAI.h"
-#import "SYNAccountSettingsMainTableViewController.h"
 #import "SYNAccountSettingsModalContainer.h"
-#import "SYNActivityPopoverViewController.h"
-#import "SYNCaution.h"
 #import "SYNCautionMessageView.h"
-#import "SYNCollectionDetailsViewController.h"
-#import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingCollectionsViewController.h"
-#import "SYNFacebookManager.h"
+#import "SYNAddToChannelViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNOAuthNetworkEngine.h"
@@ -27,10 +18,8 @@
 #import "VideoInstance.h"
 @import QuartzCore;
 
-#define kMovableViewOffX -58
 
-#define kSearchBoxShrinkFactor 136.0
-
+#define kBackgroundOverlayAlpha 0.5f
 
 
 typedef void(^AnimationCompletionBlock)(BOOL finished);
@@ -39,7 +28,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic) BOOL searchIsInProgress;
 @property (nonatomic) BOOL showingBackButton;
-@property (nonatomic) NavigationButtonsAppearance currentNavigationButtonsAppearance;
 @property (nonatomic, strong) IBOutlet UIButton* headerButton;
 
 @property (nonatomic, strong) IBOutlet UIView* containerView;
@@ -50,6 +38,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
 @property (nonatomic, strong) UIView* accountSettingsCoverView;
+
+@property (nonatomic, weak) UIViewController* overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
+@property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
 
 @property (nonatomic, strong) IBOutlet UIView* headerContainerView;
@@ -104,31 +95,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     appDelegate.viewStackManager.masterController = self;
     
     
-    // == Fade in from splash screen (not in AppDelegate so that the Orientation is known) == //
-    
-    UIImageView *splashView;
-    if (IS_IPHONE)
-    {
-        if ([SYNDeviceManager.sharedInstance currentScreenHeight]>480.0f)
-        {
-            splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default-568h"]];
-        }
-        else
-        {
-            splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default"]];
-        }
-        splashView.center = CGPointMake(160.0f, splashView.center.y - 20.0f);
-    }
-    else
-    {
-        splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"Default"]];
-    }
-    
-    
-    self.currentNavigationButtonsAppearance = NavigationButtonsAppearanceBlack;
-    
-    // == Listen to Reachability Notifications for no network messages == //
-    
+    // Listen to Reachability Notifications for no network messages //
     
     self.reachability = [Reachability reachabilityWithHostname:appDelegate.networkEngine.hostName];
     
@@ -139,11 +106,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     
     self.closeSearchButton.hidden = YES;
-  
-    // TODO:
-//    [self pageChanged: self.containerViewController.scrollView.page];
-    
-    self.darkOverlayView.hidden = YES;
+
     
     // == Set Up Notifications == //
     
@@ -156,33 +119,96 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
     
+    // add background view //
+    self.backgroundOverlayView = [[UIView alloc] initWithFrame:self.view.frame];
+    self.backgroundOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.backgroundOverlayView.backgroundColor = [UIColor darkGrayColor];
+    
     
 }
 
+#pragma mark - Overlays, Adding and Removing
 
-- (void) headerSwiped:(UISwipeGestureRecognizer*) recogniser
+-(void)addExistingCollectionsOverlayController
 {
-    // TODO: figure out if swiping of header is needed
+    SYNAddToChannelViewController* existingController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+    
+    [self addOverlayController:existingController animated:YES];
 }
 
 
-
-
-
-
-
-- (void) headerTapped: (UIGestureRecognizer*) recogniser
+- (void) addOverlayController:(SYNAbstractViewController *)abstractViewController animated:(BOOL)animated
 {
-    [self.showingViewController headerTapped];
-}
-
-
-
--(void) addOverlayController: (SYNAbstractViewController*) abstractViewController
-{
+    if(!abstractViewController)
+    {
+        AssertOrLog(@"Trying to add nil as an overlay controller");
+        return;
+    }
+    
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
+    [self.backgroundOverlayView addGestureRecognizer:tapGesture];
+    
+    self.backgroundOverlayView.alpha = 0.0f;
+    
+    [self.view addSubview:self.backgroundOverlayView];
+    
     [self addChildViewController:abstractViewController];
     
     [self.view addSubview:abstractViewController.view];
+    
+    self.overlayController = abstractViewController;
+    
+    
+    
+    // == Animate == //
+    __block CGRect startFrame, endFrame;
+    
+    startFrame = endFrame = abstractViewController.view.frame;
+    if(IS_IPHONE)
+    {
+        // push it to the bottom
+        
+        startFrame.origin.y = startFrame.size.height;
+        
+    }
+    else
+    {
+        startFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - startFrame.size.width * 0.5f;
+        startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
+        
+        self.overlayController.view.alpha = 0.0;
+    }
+    
+    abstractViewController.view.frame = startFrame;
+    
+    void(^AnimationsBlock)(void) = ^{
+        
+        self.backgroundOverlayView.alpha = kBackgroundOverlayAlpha;
+        
+        if(IS_IPHONE)
+        {
+            endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
+            abstractViewController.view.frame = endFrame;
+        }
+        else
+        {
+            self.overlayController.view.alpha = 1.0;
+        }
+    };
+    
+    if(animated)
+    {
+        [UIView animateWithDuration: 0.3f
+                              delay: 0.0f
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations: AnimationsBlock
+                         completion: nil];
+    }
+    else
+    {
+        AnimationsBlock();
+    }
+    
     
     // pause video
     
@@ -192,6 +218,62 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
 }
 
+- (void) backgroundOverlayTapped:(UITapGestureRecognizer*)recogniser
+{
+    
+    [self removeOverlayControllerAnimated:YES];
+}
+
+
+
+-(void)removeOverlayControllerAnimated:(BOOL)animated
+{
+    
+    __weak SYNMasterViewController* wself = self;
+    
+    void(^AnimationsBlock)(void) = ^{
+        
+        wself.backgroundOverlayView.alpha = 0.0f;
+        
+        if(IS_IPHONE)
+        {
+            CGRect endFrame = self.overlayController.view.frame;
+            endFrame.origin.y = self.view.frame.size.height; // push to the bottom
+            wself.overlayController.view.frame = endFrame;
+        }
+        else
+        {
+            wself.overlayController.view.alpha = 0.0f;
+            
+        }
+        
+    };
+    
+    void (^FinishedBlock)(BOOL) = ^(BOOL finished) {
+      
+        [wself.overlayController.view removeFromSuperview];
+        [wself.overlayController removeFromParentViewController];
+        
+        [wself.backgroundOverlayView removeFromSuperview];
+    };
+    
+    if(animated)
+    {
+        [UIView animateWithDuration: 0.3f
+                              delay: 0.0f
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations: AnimationsBlock
+                         completion: FinishedBlock];
+    }
+    else
+    {
+        AnimationsBlock();
+        FinishedBlock(YES);
+    }
+    
+}
+
+
 
 #pragma mark - Video Overlay View
 
@@ -200,9 +282,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                         andSelectedIndex: (int) selectedIndex
                               fromCenter: (CGPoint)centerPoint
 {
-    
-    
-    
     
     if (self.videoViewerViewController)
     {
@@ -292,47 +371,23 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         if (self.networkErrorView)
         {
-            [self hideNetworkErrorView];
+            //[self hideNetworkErrorView];
         }
     }
     else if ([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
     {
         if (self.networkErrorView)
         {
-            [self hideNetworkErrorView];
+            //[self hideNetworkErrorView];
         }
     }
     else if ([self.reachability currentReachabilityStatus] == NotReachable)
     {
         NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil)
                                                                        : NSLocalizedString(@"No_Network_iPhone", nil);
-        [self presentNetworkErrorViewWithMesssage: message];
+        
+        [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
     }
-}
-
-
-
-- (void) hideNetworkErrorView
-{
-    
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationCurveEaseInOut animations:^{
-        
-        CGRect erroViewFrame = self.networkErrorView.frame;
-        erroViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight];
-        self.networkErrorView.frame = erroViewFrame;
-        
-    } completion:^(BOOL finished) {
-        
-        [self.networkErrorView removeFromSuperview];
-        self.networkErrorView = nil;
-        
-    }];
-}
-
-
-- (void) dotTapped: (UIGestureRecognizer*) recogniser
-{
-    // TODO: Need to implement this
 }
 
 
@@ -340,128 +395,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     NSString* message = IS_IPHONE ? NSLocalizedString(@"PACK SAVED", nil) : NSLocalizedString(@"YOUR PACK HAS BEEN SAVED", nil);
     
-    [self presentSuccessNotificationWithMessage: message];
+    [self presentNotificationWithMessage:message andType:NotificationMessageTypeSuccess];
 }
 
-
-- (void) hideOrShowNetworkMessages: (NSNotification*) note
-{
-    if ([note.name isEqualToString: kNoteShowNetworkMessages])
-    {
-        self.errorContainerView.hidden = NO;
-        [UIView animateWithDuration: 0.3f
-                              delay: 0.0f
-                            options: UIViewAnimationCurveEaseOut
-                         animations: ^{
-                             CGRect newFrame = self.errorContainerView.frame;
-                             newFrame.origin.y = 0.0f;
-                             self.errorContainerView.frame = newFrame;
-                         }
-                         completion:nil];
-    }
-    else
-    {
-        [UIView animateWithDuration: 0.3f
-                              delay: 0.0f
-                            options: UIViewAnimationCurveEaseIn
-                         animations: ^{
-                             CGRect newFrame = self.errorContainerView.frame;
-                             newFrame.origin.y = 60.0f;
-                             self.errorContainerView.frame = newFrame;
-                         }
-                         completion: ^(BOOL finished){
-                             if (finished)
-                             {
-                                 self.errorContainerView.hidden = YES;
-                             }
-                         }];
-    }
-}
-
-
-
-#pragma mark - Account Settings
-
-- (void) showAccountSettingsPopover
-{
-    if (self.accountSettingsPopover)
-        return;
-    
-    SYNAccountSettingsMainTableViewController* accountsTableController = [[SYNAccountSettingsMainTableViewController alloc] init];
-    accountsTableController.view.backgroundColor = [UIColor clearColor];
-
-    if (IS_IPAD)
-    {
-        
-        UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: accountsTableController];
-        navigationController.view.backgroundColor = [UIColor clearColor];
-        
-        self.accountSettingsPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
-        self.accountSettingsPopover.popoverContentSize = CGSizeMake(380, 576);
-        self.accountSettingsPopover.delegate = self;
-        
-        self.accountSettingsPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
-        
-        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
-                                 [SYNDeviceManager.sharedInstance currentScreenHeight] * 0.5, 1, 1);
-        
-        [self.accountSettingsPopover presentPopoverFromRect: rect
-                                                     inView: self.view
-                                   permittedArrowDirections: 0
-                                                   animated: YES];
-    }
-    else
-    {
-        
-        UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: accountsTableController];
-        navigationController.view.backgroundColor = [UIColor clearColor];
-        navigationController.navigationBarHidden = YES;
-        
-        __weak SYNMasterViewController* weakSelf = self;
-        self.modalAccountContainer = [[SYNAccountSettingsModalContainer alloc] initWithNavigationController:navigationController andCompletionBlock:^{
-            [weakSelf modalAccountContainerDismiss];
-        }];
-        
-        CGRect modalFrame = self.modalAccountContainer.view.frame;
-        modalFrame.size.height = self.view.frame.size.height - 60.0f;
-        [self.modalAccountContainer setModalViewFrame:modalFrame];
-        
-        modalFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight];
-        self.modalAccountContainer.view.frame = modalFrame;
-        
-        self.accountSettingsCoverView.alpha = 0.0;
-        self.accountSettingsCoverView.hidden = NO;
-        [self.view addSubview:self.accountSettingsCoverView];
-        
-        [self.view addSubview:self.modalAccountContainer.view];
-        
-        modalFrame.origin.y = 60.0;
-        
-        [UIView animateWithDuration:0.3 animations:^{
-           
-            self.accountSettingsCoverView.alpha = 0.8;
-            self.modalAccountContainer.view.frame = modalFrame;
-        }];
-    }
-}
-
-
-- (void) modalAccountContainerDismiss
-{
-    CGRect hiddenFrame = self.modalAccountContainer.view.frame;
-    hiddenFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight];
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        self.accountSettingsCoverView.alpha = 0.0;
-        self.modalAccountContainer.view.frame = hiddenFrame;    
-    } completion:^(BOOL finished) {
-        
-        self.accountSettingsCoverView.hidden = YES;
-        
-        [self.modalAccountContainer.view removeFromSuperview];
-        self.modalAccountContainer = nil; 
-    }];
-}
 
 
 - (void) accountSettingsLogout: (NSNotification*) notification
@@ -472,58 +408,42 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-#pragma mark - Popover Methods
+#pragma mark - Message Popups (form Bottom)
 
-- (void) hideAutocompletePopover
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
 {
     
-    if (!self.accountSettingsPopover)
-        return;
+    __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] init];
+    messageView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarSucess"]];
+    [messageView setText: message];
     
-    [self.accountSettingsPopover dismissPopoverAnimated: YES];
+    [self.view addSubview: messageView];
+    
+    [UIView animateWithDuration: 0.3f
+                          delay: 0.0f
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations: ^{
+                         CGRect newFrame = messageView.frame;
+                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] - newFrame.size.height;
+                         messageView.frame = newFrame;
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                         [UIView animateWithDuration: 0.3f
+                                               delay: 4.0f
+                                             options: UIViewAnimationOptionCurveEaseIn
+                                          animations: ^{
+                                              CGRect newFrame = messageView.frame;
+                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
+                                              messageView.frame = newFrame;
+                                          }
+                                          completion: ^(BOOL finished) {
+                                              [messageView removeFromSuperview];
+                                          }];
+                     }];
 }
 
-
-- (void) popoverControllerDidDismissPopover: (UIPopoverController *) popoverController
-{
-    if (popoverController == self.accountSettingsPopover)
-    {
-        
-        self.accountSettingsPopover = nil;
-    }
-}
-
-
-#pragma mark - Message Bars
-
-- (void) presentNetworkErrorViewWithMesssage: (NSString*) message
-{
-    if (self.networkErrorView)
-    {
-        [self.networkErrorView setText:message];
-        return;
-    }
-    
-    self.networkErrorView = [SYNNetworkMessageView errorView];
-    [self.networkErrorView setText:message];
-    [self.errorContainerView addSubview:self.networkErrorView];
-    
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect erroViewFrame = self.networkErrorView.frame;
-        erroViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] - erroViewFrame.size.height;
-        
-        self.networkErrorView.frame = erroViewFrame;
-    }];
-}
-
-
-- (void) presentSuccessNotificationWithMessage : (NSString*) message
-{
-    
-    [appDelegate.viewStackManager presentSuccessNotificationWithMessage:message];
-}
-
+#pragma mark - Caution Presentation
 
 - (void) presentSuccessNotificationWithCaution:(NSNotification*)notification
 {

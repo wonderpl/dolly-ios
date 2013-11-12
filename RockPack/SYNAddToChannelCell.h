@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNExistingChannelCell : UICollectionViewCell
+@interface SYNAddToChannelCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+@property (nonatomic, strong) IBOutlet UIView* bottomStripView;
+
 
 @end
