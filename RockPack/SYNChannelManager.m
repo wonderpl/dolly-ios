@@ -7,6 +7,7 @@
 //
 
 #import "AppConstants.h"
+#import "Channel.h"
 #import "GAI.h"
 #import "MKNetworkOperation.h"
 #import "SYNAppDelegate.h"
@@ -14,6 +15,7 @@
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "VideoInstance.h"
+#import "SYNMasterViewController.h"
 
 @interface SYNChannelManager ()
 
@@ -125,9 +127,6 @@
         //Channel select was cancelled.
         [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                             object: nil];
-        //[self resumeVideoIfShowing];
-        
-        
         
         return;
     }
@@ -514,7 +513,8 @@
                                                                                                               label: nil
                                                                                                               value: nil] build]];
 
-                                                      [appDelegate.viewStackManager presentSuccessNotificationWithMessage:messageS];
+                                                      [appDelegate.masterViewController presentNotificationWithMessage:messageS
+                                                                                                                      andType:NotificationMessageTypeSuccess];
                                                       
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                                                                           object: self];
@@ -525,7 +525,8 @@
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                                                                           object: self];
                                                       
-                                                      [appDelegate.viewStackManager presentSuccessNotificationWithMessage:messageE];
+                                                      [appDelegate.masterViewController presentNotificationWithMessage:messageE
+                                                                                                                      andType:NotificationMessageTypeError];
                                                       
                                                   }];
 }

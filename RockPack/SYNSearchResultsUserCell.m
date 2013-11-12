@@ -18,6 +18,7 @@
     self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabelButton.titleLabel.font.pointSize];
     
     
+    
 }
 
 
@@ -78,8 +79,8 @@
                              placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                       options: SDWebImageRetryFailed];
     
+    [self.userNameLabelButton setTitle:_channelOwner.displayName forState:UIControlStateNormal];
     
-    self.userNameLabelButton.titleLabel.text = _channelOwner.displayName;
 }
 
 

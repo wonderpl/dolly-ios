@@ -32,22 +32,9 @@ typedef void(^ViewStackReturnBlock)(void);
 
 + (id) manager;
 
-
-- (void) popToRootController;
-- (void) popToController: (UIViewController *) controller;
-- (void) popController;
-- (void) pushController: (SYNAbstractViewController *) controller;
-
--(void)presentCoverViewController:(UIViewController*)viewController;
--(void)removeCoverPopoverViewController;
-
-- (void) presentModallyController: (UIViewController *) controller;
 - (void) presentPopoverView: (UIView*) view;
 - (void) presentPopoverView:(UIView*)view withBackgroundAlpha:(CGFloat)bgAlpha;
 - (void) removePopoverView;
-
-- (void) presentSuccessNotificationWithMessage : (NSString*) message;
-- (void) presentErrorNotificationWithMessage : (NSString*) message;
 
 - (void) viewProfileDetails: (ChannelOwner *) channelOwner;
 - (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId;
@@ -56,15 +43,5 @@ typedef void(^ViewStackReturnBlock)(void);
 - (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId withNavigationController:(UINavigationController*) navigationController;
 
 - (void) viewChannelDetails: (Channel *) channel;
-
-- (void) presentExistingChannelsController;
-
-
-
-- (void) hideModalController;
-
-
-
--(BOOL) controllerViewIsVisible:(SYNAbstractViewController*)controllerToTest;
 
 @end

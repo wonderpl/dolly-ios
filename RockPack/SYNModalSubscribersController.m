@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNAppDelegate.h"
-#import "SYNDeviceManager.h"
 #import "SYNModalSubscribersController.h"
+#import "SYNAppDelegate.h"
 #import "UIFont+SYNFont.h"
+#import "SYNMasterViewController.h"
 
 @interface SYNModalSubscribersController ()
 

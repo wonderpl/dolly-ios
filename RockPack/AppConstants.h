@@ -267,12 +267,7 @@ typedef enum : NSInteger {
     
 } Gender;
 
-typedef enum : NSInteger {
-    
-    NavigationButtonsAppearanceBlack = 0,
-    NavigationButtonsAppearanceWhite = 1,
-    
-} NavigationButtonsAppearance;
+
 
 typedef enum : NSInteger {
     kInvalidComponentIndex = 999999

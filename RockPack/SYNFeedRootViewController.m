@@ -171,30 +171,8 @@ typedef void(^FeedDataErrorBlock)(void);
             
             [self loadAndUpdateFeedData];
         }
-        
-        [self checkForOnBoarding];
     }
 }
-
-
-- (void) checkForOnBoarding
-{
-    if (![appDelegate.viewStackManager controllerViewIsVisible: self])
-    {
-        return;
-    }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger onBoarding1State = [defaults integerForKey: kInstruction1OnBoardingState];
-    
-    // FIXME: Now we have no press and hold, I think that this logic can be simplified
-    if (onBoarding1State == 3) // has shown on channel details and can show here IF videos are present
-    {
-        [defaults setInteger: 4
-                      forKey: kInstruction1OnBoardingState];         // inc by one
-    }
-}
-
 
 - (void) updateAnalytics
 {

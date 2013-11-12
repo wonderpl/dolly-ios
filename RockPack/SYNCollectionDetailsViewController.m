@@ -17,12 +17,12 @@
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
 #import "SYNChannelCoverImageSelectorViewController.h"
-#import "SYNExistingChannelCreateNewCell.h"
+#import "SYNAddToChannelCreateNewCell.h"
 #import "SYNCollectionDetailsViewController.h"
 #import "SYNCoverChooserController.h"
 #import "SYNCoverThumbnailCell.h"
 #import "SYNDeviceManager.h"
-#import "SYNExistingCollectionsViewController.h"
+#import "SYNAddToChannelViewController.h"
 #import "SYNImagePickerController.h"
 #import "SYNMasterViewController.h"
 #import "SYNModalSubscribersController.h"
@@ -37,6 +37,7 @@
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
+#import "SYNAccountSettingsPopoverBackgroundView.h"
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
@@ -156,7 +157,7 @@ SYNChannelCoverImageSelectorDelegate>
 {
     [super viewDidLoad];
     
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.isIPhone = IS_IPHONE;
     
@@ -377,10 +378,8 @@ SYNChannelCoverImageSelectorDelegate>
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    
-    
     [super viewWillAppear: animated];
-    
+	
     self.editedVideos = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver: self
@@ -582,7 +581,8 @@ SYNChannelCoverImageSelectorDelegate>
     {
         self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
         
-        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
+		SYNMasterViewController *masterViewController = appDelegate.masterViewController;
+		[masterViewController addOverlayController:self.modalSubscriptionsContainer animated:NO];
     }
 }
 
@@ -1666,7 +1666,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     [appDelegate.viewStackManager popController];
 }
 
-
 #pragma mark - Channel Creation (3 steps)
 
 - (IBAction) createChannelPressed: (id) sender
@@ -2046,49 +2045,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 
 - (void) finaliseViewStatusAfterCreateOrUpdate: (BOOL) isIPad
 {
-    if (isIPad)
-    {
-        self.createChannelButton.hidden = YES;
-    }
-    else
-    {
-        SYNMasterViewController *master = (SYNMasterViewController *) self.presentingViewController;
-        
-        if (master)
-        {
-            //This scenario happens on channel creation only and means this channel is presented modally.
-            //After creation want to show it as if it is part of the master view hierarchy.
-            //Thus we move the view there.
-            
-            //Check for precense of existing channels view controller.
-            UIViewController *lastController = [[master childViewControllers] lastObject];
-            
-            if ([lastController isKindOfClass: [SYNExistingCollectionsViewController class]])
-            {
-                //This removes the "existing channels view controller"
-                [lastController.view removeFromSuperview];
-                [lastController removeFromParentViewController];
-            }
-            
-            //Now dimiss self modally (not animated)
-            [master dismissViewControllerAnimated: NO
-                                       completion: nil];
-            
-            //Change to display mode
-            self.mode = kChannelDetailsModeDisplay;
-            
-            //Don't really like this, but send notification to hide title and dots for a seamless transition.
-            [[NSNotificationCenter defaultCenter] postNotificationName: kNoteHideTitleAndDots
-                                                                object: self
-                                                              userInfo: nil];
-            
-            //And show as if displayed from the normal master view hierarchy
-            [appDelegate.viewStackManager pushController: self];
-        }
-        
-        [self setDisplayControlsVisibility: YES];
-        [self.activityIndicator stopAnimating];
-    }
+	self.createChannelButton.hidden = YES;
 }
 
 

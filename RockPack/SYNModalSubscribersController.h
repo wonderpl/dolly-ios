@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
+#import "SYNAbstractViewController.h"
 @import UIKit;
 
-@interface SYNModalSubscribersController : UIViewController
+@interface SYNModalSubscribersController : SYNAbstractViewController
 
 - (id) initWithContentViewController: (UIViewController *) viewController;
 

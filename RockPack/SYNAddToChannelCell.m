@@ -6,15 +6,19 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNExistingChannelCell.h"
+#import "SYNAddToChannelCell.h"
 #import "UIFont+SYNFont.h"
+#import <QuartzCore/QuartzCore.h>
 
-@implementation SYNExistingChannelCell
+@implementation SYNAddToChannelCell
 
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.layer.borderWidth = 1.0f;
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
 }

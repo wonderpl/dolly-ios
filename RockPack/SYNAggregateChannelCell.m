@@ -9,7 +9,6 @@
 #import "AppConstants.h"
 #import "SYNAggregateChannelCell.h"
 #import "SYNAggregateChannelItemCell.h"
-#import "SYNTouchGestureRecognizer.h"
 #import "UIImage+Tint.h"
 #import "UIFont+SYNFont.h"
 

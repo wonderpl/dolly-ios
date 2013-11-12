@@ -14,7 +14,7 @@
 #import "SYNProfileRootViewController.h"
 #import "SYNViewStackManager.h"
 #import "SYNNetworkMessageView.h"
-#import "SYNExistingCollectionsViewController.h"
+#import "SYNAddToChannelViewController.h"
 
 #define STACK_LIMIT 6
 #define BG_ALPHA_DEFAULT 0.7f
@@ -173,52 +173,6 @@
                                          animated: YES];
 }
 
-
-- (void) popController
-{
-    NSInteger viewControllersCount = self.navigationController.viewControllers.count;
-    
-    if (viewControllersCount < 2) // we must have at least two to pop one
-        return;
-    
-    UIViewController* controllerToPopTo = ((UIViewController *) self.navigationController.viewControllers[viewControllersCount - 2]);
-    
-    __weak SYNViewStackManager* wself = self;
-    
-    
-    
-    [UIView animateWithDuration: 0.5f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         
-                         self.navigationController.topViewController.view.alpha = 0.0f;
-                         
-                         controllerToPopTo.view.alpha = 1.0f;
-                     }
-                     completion:^(BOOL finished) {
-                         
-                         if(wself.returnBlock)
-                             wself.returnBlock();
-                         
-                         wself.returnBlock = nil;
-                         
-                         
-                         
-                     }];
-    
-    [self.navigationController popViewControllerAnimated: NO];
-    
-}
-
-
-
-- (void) popToRootController
-{
-    [self popToController: self.navigationController.viewControllers[0]];
-}
-
-
 - (void) popToController: (UIViewController *) controller
 {
     NSInteger viewControllersCount = self.navigationController.viewControllers.count;
@@ -244,61 +198,6 @@
                                           animated: NO];
     
     
-}
-
-#pragma mark - Search Bar Animations
-
-
-
-
-
-
-// for iPhone
-
-
-
-
-
-
-
-
-#pragma mark - Popover Managment
-
--(void)presentCoverViewController:(UIViewController*)viewController
-{
-    currentOverViewController = viewController;
-    
-    [self.masterController addChildViewController: viewController];
-    
-    currentOverViewController.view.alpha = 0.0f;
-    
-    [self.masterController.view addSubview: viewController.view];
-    
-    [UIView animateWithDuration: 0.3
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         currentOverViewController.view.alpha = 1.0f;
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                     }];
-    
-    
-}
--(void)removeCoverPopoverViewController
-{
-    [UIView animateWithDuration: 0.3
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         currentOverViewController.view.alpha = 0.0f;
-                     }
-                     completion: ^(BOOL finished) {
-                         [currentOverViewController removeFromParentViewController];
-                         [currentOverViewController.view removeFromSuperview];
-                         currentOverViewController = nil;
-                     }];
 }
 
 -(void)presentPopoverView:(UIView *)view
@@ -468,52 +367,6 @@
 
 
 
-#pragma mark - Network Notification Messages (from the bottom)
-
--(void)presentErrorNotificationWithMessage : (NSString*)message
-{
-    [self presentNotificationWithMessage:message withType:NotificationMessageTypeError];
-}
-
-- (void) presentSuccessNotificationWithMessage : (NSString*) message
-{
-     [self presentNotificationWithMessage:message withType:NotificationMessageTypeSuccess];
-}
-
--(void)presentNotificationWithMessage:(NSString*)message withType:(NotificationMessageType)type
-{
-    __block SYNNetworkMessageView* successNotification = [[SYNNetworkMessageView alloc] init];
-    successNotification.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarSucess"]];
-    [successNotification setText: message];
-    
-    [self.masterController.view addSubview: successNotification];
-    
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         CGRect newFrame = successNotification.frame;
-                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] - newFrame.size.height;
-                         successNotification.frame = newFrame;
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         [UIView animateWithDuration: 0.3f
-                                               delay: 4.0f
-                                             options: UIViewAnimationOptionCurveEaseIn
-                                          animations: ^{
-                                              CGRect newFrame = successNotification.frame;
-                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
-                                              successNotification.frame = newFrame;
-                                          }
-                                          completion: ^(BOOL finished) {
-                                              [successNotification removeFromSuperview];
-                                          }];
-                     }];
-}
-
-
-
 #pragma mark - Helper
 
 - (UIViewController *) topControllerMatchingTypeString: (NSString *) classString
@@ -532,60 +385,6 @@
     }
     
     return lastControllerOfClass;
-}
-
--(BOOL) controllerViewIsVisible:(SYNAbstractViewController*)controllerToTest
-{
-    if(self.masterController.showingViewController == controllerToTest)
-        return YES;
-    
-    return NO;
-}
-
-
-#pragma mark - Existing Channels
-
-- (void) presentExistingChannelsController
-{
-    
-    SYNExistingCollectionsViewController* existingController = [[SYNExistingCollectionsViewController alloc] initWithViewId:kExistingChannelsViewId];
-    
-    [self.masterController addOverlayController:existingController];
-    
-    
-    // animate in //
-    
-    existingController.view.alpha = 1.0f;
-    
-    CGRect newFrame = existingController.view.frame;
-    newFrame.origin.y = newFrame.size.height;
-    existingController.view.frame = newFrame;
-    
-    
-    [UIView animateWithDuration: kAddToChannelAnimationDuration
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         
-                         CGRect newFrame = existingController.view.frame;
-                         newFrame.origin.y = 0.0f;
-                         existingController.view.frame = newFrame;
-                         
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         
-                     }];
-}
-
-
--(void)resumeVideoIfShowing
-{
-    
-    if(self.masterController.videoViewerViewController)
-    {
-        [self.masterController.videoViewerViewController playIfVideoActive];
-    }
 }
 
 @end

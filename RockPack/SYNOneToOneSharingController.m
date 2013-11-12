@@ -23,6 +23,7 @@
 #import "SYNOneToOneSharingFriendCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
+#import "SYNMasterViewController.h"
 #import "VideoInstance.h"
 #import <objc/runtime.h>
 @import AddressBook;
@@ -1145,8 +1146,9 @@
          
          NSString *notificationText = [NSString stringWithFormat: NSLocalizedString(@"sharing_object_sent", nil), typeName];
          
-         [appDelegate.viewStackManager presentSuccessNotificationWithMessage: notificationText];
-         [appDelegate.viewStackManager removePopoverView];
+         [appDelegate.masterViewController presentNotificationWithMessage:notificationText
+                                                                         andType:NotificationMessageTypeSuccess];
+         
          
          id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
          NSString *actionType =

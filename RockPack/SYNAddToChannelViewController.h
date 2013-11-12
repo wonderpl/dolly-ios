@@ -8,7 +8,7 @@
 
 #import "SYNAbstractViewController.h"
 
-@interface SYNExistingCollectionsViewController : SYNAbstractViewController
+@interface SYNAddToChannelViewController : SYNAbstractViewController
 
 
 @end

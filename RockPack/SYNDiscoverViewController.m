@@ -93,7 +93,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.categoriesCollectionView registerNib: [UINib nibWithNibName: kCategoryCellIndetifier bundle: nil]
                     forCellWithReuseIdentifier: kCategoryCellIndetifier];
     
-    
+    if(IS_IPHONE)
+    {
+        // to allow for full screen scroll of the categories
+        UIEdgeInsets cInset = self.categoriesCollectionView.contentInset;
+        cInset.top = 110.f;
+        self.categoriesCollectionView.contentInset = cInset;
+    }
     
     self.autocompleteSuggestionsArray = [NSArray array]; // just so we have an array to return count == 0
     
