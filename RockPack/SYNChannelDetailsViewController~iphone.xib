@@ -28,7 +28,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ybs-C7-TVb" customClass="LXReorderableCollectionViewFlowLayout">
-                        <size key="itemSize" width="316" height="257"/>
+                        <size key="itemSize" width="295" height="268"/>
                         <size key="headerReferenceSize" width="320" height="405"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>

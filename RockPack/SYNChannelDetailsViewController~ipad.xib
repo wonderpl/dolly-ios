@@ -14,6 +14,7 @@
                 <outlet property="lblChannelTitle" destination="KoP-pw-j1K" id="a53-gC-oX1"/>
                 <outlet property="lblDescription" destination="DEu-Rn-eGJ" id="OEB-Xb-Azp"/>
                 <outlet property="lblFullName" destination="qVh-3B-R6Q" id="Q68-lv-nA1"/>
+                <outlet property="videoCollectionLayoutIPad" destination="mQJ-GE-Ivs" id="PYD-nu-qwN"/>
                 <outlet property="videoThumbnailCollectionView" destination="cn2-e5-XhO" id="bW1-up-cNq"/>
                 <outlet property="view" destination="1" id="FTm-ye-zz3"/>
                 <outlet property="viewIPadContainer" destination="TjS-Dr-jUj" id="R2m-Iv-7rH"/>

@@ -2128,12 +2128,6 @@ shouldChangeTextInRange: (NSRange) range
 }
 
 
-- (void) checkForOnBoarding
-{
-    
-}
-
-
 - (void) viewDidDisappear: (BOOL) animated
 {
     [super viewDidDisappear: animated];

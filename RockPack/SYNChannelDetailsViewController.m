@@ -133,6 +133,12 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UIView *viewIPhoneContainer;
 @property (strong, nonatomic) IBOutlet UIView *viewIPadContainer;
 
+@property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPhone;
+
+@property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoLayoutIPad;
+
+@property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionLayoutIPad;
+
 @end
 
 
@@ -224,17 +230,8 @@ SYNChannelCoverImageSelectorDelegate>
     
     if (IS_IPAD)
     {
-        
+        [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
-    else
-    {
-    }
-    
-    
-    [self performSelector: @selector(checkForOnBoarding)
-               withObject: nil
-               afterDelay: 1.0f];
-    
     
 
 }
@@ -902,6 +899,27 @@ referenceSizeForFooterInSection: (NSInteger) section
     // the method is being replaced by the 'videoButtonPressed' because other elements on the cell migth be interactive as well
 }
 
+- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
+                                          duration: (NSTimeInterval) duration
+{
+    [self updateLayoutForOrientation: toInterfaceOrientation];
+}
+
+
+- (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation
+{    
+    if (UIDeviceOrientationIsPortrait(orientation))
+    {
+        self.videoCollectionLayoutIPad.headerReferenceSize = CGSizeMake(670, 557);
+        self.videoCollectionLayoutIPad.sectionInset = UIEdgeInsetsMake(2, 40, 2, 40);
+    }
+    else
+    {
+        self.videoCollectionLayoutIPad.headerReferenceSize = CGSizeMake(927, 463);
+        self.videoCollectionLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    }
+    
+}
 
 - (void) videoButtonPressed: (UIButton *) videoButton
 {
@@ -924,6 +942,8 @@ referenceSizeForFooterInSection: (NSInteger) section
                                          andSelectedIndex: indexPath.item
                                                fromCenter: self.view.center];
 }
+
+
 
 #pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
 

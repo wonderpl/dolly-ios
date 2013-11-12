@@ -792,7 +792,6 @@ SYNImagePickerControllerDelegate>{
     return 1;
 }
 
-
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
@@ -882,6 +881,7 @@ SYNImagePickerControllerDelegate>{
         }
         else
         {
+            [channelThumbnailCell reset];
             [channelThumbnailCell setTitle:@"aaaaaaa"];
 
             cell = channelThumbnailCell;

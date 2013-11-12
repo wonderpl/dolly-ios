@@ -403,6 +403,10 @@
 		0E26BB4C182D1209008A57F1 /* SYNChannelDetailsViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26BB49182D1209008A57F1 /* SYNChannelDetailsViewController~ipad.xib */; };
 		0E26BB4D182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26BB4A182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib */; };
 		0E27C26A183216A1008C0DE8 /* SYNCollectionDetailsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C269183216A1008C0DE8 /* SYNCollectionDetailsViewController~iphone.xib */; };
+		0E27C26F183250F9008C0DE8 /* ButtonVideoDeleteDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26B183250F9008C0DE8 /* ButtonVideoDeleteDefault.png */; };
+		0E27C270183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */; };
+		0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */; };
+		0E27C272183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */; };
 		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
 		0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */; };
 		0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */; };
@@ -931,8 +935,6 @@
 		38BACE49173415DF00406597 /* ButtonCreateHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE1F173415DF00406597 /* ButtonCreateHighlighted~iphone.png */; };
 		38BACE4A173415DF00406597 /* ButtonCreate~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE20173415DF00406597 /* ButtonCreate~iphone.png */; };
 		38BACE4B173415DF00406597 /* ButtonVideoDelete@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE21173415DF00406597 /* ButtonVideoDelete@2x~iphone.png */; };
-		38BACE4C173415DF00406597 /* ButtonVideoDeleteHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE22173415DF00406597 /* ButtonVideoDeleteHighlighted@2x~iphone.png */; };
-		38BACE4D173415DF00406597 /* ButtonVideoDeleteHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE23173415DF00406597 /* ButtonVideoDeleteHighlighted~iphone.png */; };
 		38BACE4E173415DF00406597 /* ButtonVideoDelete~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE24173415DF00406597 /* ButtonVideoDelete~iphone.png */; };
 		38BACE4F173415DF00406597 /* ChannelCreationCoverNone@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE25173415DF00406597 /* ChannelCreationCoverNone@2x~iphone.png */; };
 		38BACE50173415DF00406597 /* ChannelCreationCoverNone~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE26173415DF00406597 /* ChannelCreationCoverNone~iphone.png */; };
@@ -954,7 +956,6 @@
 		38BACE95173AB4E600406597 /* SYNChannelCoverImageSelectorViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE91173AB4E600406597 /* SYNChannelCoverImageSelectorViewController~iphone.xib */; };
 		38C3FA7417203D6600F126B1 /* PanelDayPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C3FA7217203D6600F126B1 /* PanelDayPortrait.png */; };
 		38C3FA7517203D6600F126B1 /* PanelDayPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C3FA7317203D6600F126B1 /* PanelDayPortrait@2x.png */; };
-		38FD4421172AC9B30086B524 /* SYNVideoThumbnailRegularCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FD4420172AC9B30086B524 /* SYNVideoThumbnailRegularCell~iphone.xib */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsMainTableViewController.m */; };
 		BE03A6CC16F7697900245314 /* ButtonSettingsHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */; };
 		BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */; };
@@ -1975,6 +1976,10 @@
 		0E26BB49182D1209008A57F1 /* SYNChannelDetailsViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNChannelDetailsViewController~ipad.xib"; sourceTree = "<group>"; };
 		0E26BB4A182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNChannelDetailsViewController~iphone.xib"; sourceTree = "<group>"; };
 		0E27C269183216A1008C0DE8 /* SYNCollectionDetailsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNCollectionDetailsViewController~iphone.xib"; sourceTree = "<group>"; };
+		0E27C26B183250F9008C0DE8 /* ButtonVideoDeleteDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonVideoDeleteDefault.png; sourceTree = "<group>"; };
+		0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteDefault@2x.png"; sourceTree = "<group>"; };
+		0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonVideoDeleteHighlighted.png; sourceTree = "<group>"; };
+		0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
 		0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~ipad.xib"; sourceTree = "<group>"; };
 		0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~iphone.xib"; sourceTree = "<group>"; };
 		0EE380A7182D4DFC001297C7 /* SYNChannelCreateNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelCreateNewCell.h; sourceTree = "<group>"; };
@@ -2516,8 +2521,6 @@
 		38BACE1F173415DF00406597 /* ButtonCreateHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonCreateHighlighted~iphone.png"; sourceTree = "<group>"; };
 		38BACE20173415DF00406597 /* ButtonCreate~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonCreate~iphone.png"; sourceTree = "<group>"; };
 		38BACE21173415DF00406597 /* ButtonVideoDelete@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDelete@2x~iphone.png"; sourceTree = "<group>"; };
-		38BACE22173415DF00406597 /* ButtonVideoDeleteHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
-		38BACE23173415DF00406597 /* ButtonVideoDeleteHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteHighlighted~iphone.png"; sourceTree = "<group>"; };
 		38BACE24173415DF00406597 /* ButtonVideoDelete~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDelete~iphone.png"; sourceTree = "<group>"; };
 		38BACE25173415DF00406597 /* ChannelCreationCoverNone@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChannelCreationCoverNone@2x~iphone.png"; sourceTree = "<group>"; };
 		38BACE26173415DF00406597 /* ChannelCreationCoverNone~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChannelCreationCoverNone~iphone.png"; sourceTree = "<group>"; };
@@ -2542,7 +2545,6 @@
 		38C3FA7217203D6600F126B1 /* PanelDayPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelDayPortrait.png; path = Assets/Images/PanelDayPortrait.png; sourceTree = "<group>"; };
 		38C3FA7317203D6600F126B1 /* PanelDayPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelDayPortrait@2x.png"; path = "Assets/Images/PanelDayPortrait@2x.png"; sourceTree = "<group>"; };
 		38DC34B1175E42DF0048286C /* Rockpack 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 3.xcdatamodel"; sourceTree = "<group>"; };
-		38FD4420172AC9B30086B524 /* SYNVideoThumbnailRegularCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNVideoThumbnailRegularCell~iphone.xib"; sourceTree = "<group>"; };
 		AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rockpackTests.xcconfig"; path = "Pods/Pods-rockpackTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsMainTableViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsMainTableViewController.m; sourceTree = "<group>"; };
@@ -4871,6 +4873,10 @@
 		38A2FF1D1731607F00FB9F57 /* channelDetail */ = {
 			isa = PBXGroup;
 			children = (
+				0E27C26B183250F9008C0DE8 /* ButtonVideoDeleteDefault.png */,
+				0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */,
+				0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */,
+				0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */,
 				01EC094917AAA63100E1ACE1 /* ButtonPlayChannel@2x~iphone.png */,
 				01EC094A17AAA63100E1ACE1 /* ButtonPlayChannel~iphone.png */,
 				01EC094B17AAA63100E1ACE1 /* ButtonPlayChannelHighlighted@2x~iphone.png */,
@@ -5240,8 +5246,6 @@
 				1F22C190174500A80065D4BF /* ButtonSaveHighlighted@2x~iphone.png */,
 				1F22C191174500A80065D4BF /* ButtonSaveHighlighted~iphone.png */,
 				38BACE21173415DF00406597 /* ButtonVideoDelete@2x~iphone.png */,
-				38BACE22173415DF00406597 /* ButtonVideoDeleteHighlighted@2x~iphone.png */,
-				38BACE23173415DF00406597 /* ButtonVideoDeleteHighlighted~iphone.png */,
 				38BACE24173415DF00406597 /* ButtonVideoDelete~iphone.png */,
 				38BACE25173415DF00406597 /* ChannelCreationCoverNone@2x~iphone.png */,
 				38BACE26173415DF00406597 /* ChannelCreationCoverNone~iphone.png */,
@@ -6458,6 +6462,7 @@
 				1F4E7F7A181AC7D300F59007 /* TabFeedHighlighted@2x.png in Resources */,
 				011A164216F10014008CF25E /* PlaceholderVideoMiddle.png in Resources */,
 				1F5FAEB817E720A200205F3F /* ButtonConfirmAddToPack~iphone.png in Resources */,
+				0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */,
 				011A164316F10014008CF25E /* PlaceholderVideoTop.png in Resources */,
 				BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */,
 				BED4311A16F1F0CF0051465B /* FieldPhoto.png in Resources */,
@@ -7067,9 +7072,7 @@
 				BEB312FC1815638700FAF98A /* TabMoods.png in Resources */,
 				38BACE4A173415DF00406597 /* ButtonCreate~iphone.png in Resources */,
 				38BACE4B173415DF00406597 /* ButtonVideoDelete@2x~iphone.png in Resources */,
-				38BACE4C173415DF00406597 /* ButtonVideoDeleteHighlighted@2x~iphone.png in Resources */,
 				0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */,
-				38BACE4D173415DF00406597 /* ButtonVideoDeleteHighlighted~iphone.png in Resources */,
 				1F458B2517E1CE8E003C14AC /* AppIcon-Dev-40x40@2x.png in Resources */,
 				38BACE4E173415DF00406597 /* ButtonVideoDelete~iphone.png in Resources */,
 				38BACE4F173415DF00406597 /* ChannelCreationCoverNone@2x~iphone.png in Resources */,
@@ -7324,6 +7327,7 @@
 				BEA2AEDD176E03370099DB74 /* ButtonNavCD@2x.png in Resources */,
 				1F5FAED117E73F8700205F3F /* ButtonConfirmAddToPack.png in Resources */,
 				BEA2AEDE176E03370099DB74 /* ButtonNavHighlightedCD.png in Resources */,
+				0E27C26F183250F9008C0DE8 /* ButtonVideoDeleteDefault.png in Resources */,
 				BEA2AEDF176E03370099DB74 /* ButtonNavHighlightedCD@2x.png in Resources */,
 				BEA2AEE0176E03370099DB74 /* ButtonNavSelectedCD.png in Resources */,
 				1F458B2A17E1CE8E003C14AC /* AppIcon-Dev-60x60.png in Resources */,
@@ -7409,6 +7413,7 @@
 				BE7D034F179EA068008053DC /* ButtonInviteDefault.png in Resources */,
 				018B0D9C179EA8A400F2D3CD /* IconReportConcernBlackCheck.png in Resources */,
 				018B0D9D179EA8A400F2D3CD /* IconReportConcernBlackCheck@2x.png in Resources */,
+				0E27C272183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png in Resources */,
 				018B0D9E179EA8A400F2D3CD /* IconReportConcernWhiteCheck.png in Resources */,
 				BEA216D417E9B389007C6DF7 /* ButtonFriendsFacebookSelected@2x.png in Resources */,
 				018B0D9F179EA8A400F2D3CD /* IconReportConcernWhiteCheck@2x.png in Resources */,
@@ -7450,6 +7455,7 @@
 				BE458AF617E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png in Resources */,
 				BE82099417A95F6E00472ADD /* channelFeedCover@2x~iphone.png in Resources */,
 				BE82099517A95F6E00472ADD /* channelFeedCoverFourth.png in Resources */,
+				0E27C270183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png in Resources */,
 				BE82099617A95F6E00472ADD /* channelFeedCoverFourth@2x.png in Resources */,
 				BE82099717A95F6E00472ADD /* channelFeedCoverFourth~iphone.png in Resources */,
 				BE82099817A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png in Resources */,
