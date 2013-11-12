@@ -898,10 +898,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     {
         channel = self.channelOwner.subscriptions[indexPath.row];
     }
-    
-    //  [self.navigationController pushViewController:channel animated:nil];
-    [appDelegate.viewStackManager viewChannelDetails: channel];
-    
+	
+    [self viewChannelDetails:channel withAutoplayId:nil];
 }
 
 
@@ -1476,15 +1474,14 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         
-        
-        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
+        [self viewChannelDetails:channel withAutoplayId:nil];
     }
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {
         NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
         Channel *channel = self.arrDisplayFollowing[indexPath.item];
         
-        [appDelegate.viewStackManager viewChannelDetails:channel withNavigationController:self.navigationController];
+        [self viewChannelDetails:channel withAutoplayId:nil];
     }
 }
 

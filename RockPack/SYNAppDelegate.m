@@ -1417,6 +1417,8 @@
         }
         
         NSString *hostName = [[NSBundle mainBundle] objectForInfoDictionaryKey: ([userId isEqualToString: self.currentUser.uniqueId])? @"SecureAPIHostName" : @"APIHostName"];
+		
+		SYNAbstractViewController *currentViewController = (SYNAbstractViewController *)self.masterViewController.showingViewController.topViewController;
         
         switch (pathComponents.count)
         {
@@ -1429,8 +1431,7 @@
                                                             usingManagedObjectContext: self.mainManagedObjectContext
                                                                   ignoringObjectTypes: kIgnoreChannelObjects];
                     
-					SYNAbstractViewController *viewController = (SYNAbstractViewController *)self.masterViewController.showingViewController.topViewController;
-                    [viewController viewProfileDetails: channelOwner];
+                    [currentViewController viewProfileDetails:channelOwner];
                     success = TRUE;
                 }
                 
@@ -1448,7 +1449,7 @@
                 
                 if (channel)
                 {
-                    [self.viewStackManager viewChannelDetails: channel];
+                    [currentViewController viewChannelDetails:channel withAutoplayId:nil];
                     success = TRUE;
                 }
                 break;
@@ -1468,8 +1469,7 @@
                     // We need to remove any video overlay first
                     [self.masterViewController removeVideoOverlayController];
                     
-                    [self.viewStackManager viewChannelDetails: channel
-                                               withAutoplayId: videoId];
+                    [currentViewController viewChannelDetails:channel withAutoplayId:videoId];
                     success = TRUE;
                 }
                 break;

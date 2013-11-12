@@ -961,8 +961,7 @@
     // Get the video instance for the currently selected video
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-    [appDelegate.viewStackManager viewChannelDetails: videoInstance.channel withNavigationController:self.navigationController];
-    
+	[self viewChannelDetails:videoInstance.channel withAutoplayId:nil];
 }
 
 

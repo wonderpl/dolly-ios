@@ -303,7 +303,7 @@
     {
         VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
         
-        [appDelegate.viewStackManager viewChannelDetails:videoInstance.channel];
+		[self viewChannelDetails:videoInstance.channel withAutoplayId:nil];
     }
 }
 
@@ -1070,6 +1070,26 @@
 		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId];
 		profileVC.channelOwner = channelOwner;
 		[self.navigationController pushViewController:profileVC animated:YES];
+	}
+}
+
+- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId {
+	if (!channel) {
+		return;
+	}
+
+	SYNCollectionDetailsViewController *channelVC =
+	(SYNCollectionDetailsViewController *) [self viewControllerOfClass:[SYNCollectionDetailsViewController class]];
+
+	if (channelVC) {
+		channelVC.channel = channel;
+		channelVC.autoplayVideoId = autoplayId;
+		[self.navigationController popToViewController:channelVC animated:YES];
+	} else {
+		channelVC = [[SYNCollectionDetailsViewController alloc] initWithChannel:channel
+																	  usingMode:kChannelDetailsModeDisplay];
+		channelVC.autoplayVideoId = autoplayId;
+		[self.navigationController pushViewController:channelVC animated:YES];
 	}
 }
 

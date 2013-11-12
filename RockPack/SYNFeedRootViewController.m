@@ -825,8 +825,7 @@ typedef void(^FeedDataErrorBlock)(void);
         }
     }
     
-    [appDelegate.viewStackManager viewChannelDetails: channel
-                            withNavigationController: self.navigationController];
+	[self viewChannelDetails:channel withAutoplayId:nil];
 }
 
 

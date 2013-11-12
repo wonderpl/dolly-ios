@@ -304,8 +304,7 @@
                 return;
             }
             
-            [appDelegate.viewStackManager viewChannelDetails: channel
-                                              withAutoplayId: notification.videoId];
+			[self viewChannelDetails:channel withAutoplayId:notification.videoId];
             break;
         }
             
@@ -318,7 +317,7 @@
                 return;
             }
             
-            [appDelegate.viewStackManager viewChannelDetails: channel];
+			[self viewChannelDetails:channel withAutoplayId:nil];
             break;
         }
             

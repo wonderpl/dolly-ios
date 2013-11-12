@@ -36,10 +36,4 @@ typedef void(^ViewStackReturnBlock)(void);
 - (void) presentPopoverView:(UIView*)view withBackgroundAlpha:(CGFloat)bgAlpha;
 - (void) removePopoverView;
 
-- (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId;
-- (void) viewChannelDetails: (Channel *) channel withNavigationController:(UINavigationController*) navigationController;
-- (void) viewChannelDetails: (Channel *) channel withAutoplayId: (NSString *) autoplayId withNavigationController:(UINavigationController*) navigationController;
-
-- (void) viewChannelDetails: (Channel *) channel;
-
 @end
