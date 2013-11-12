@@ -440,8 +440,6 @@
         return;
     }
     
-    
-    
     [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
                                                         object: self
                                                       userInfo: @{kChannel: self.selectedChannel}];

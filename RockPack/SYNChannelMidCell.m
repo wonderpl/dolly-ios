@@ -213,7 +213,7 @@
 
 -(void) setBottomBarColor:(UIColor*) color
 {
-    [self.bottomBarView setBackgroundColor:color];
+    
 }
 
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
@@ -223,15 +223,28 @@
     
 }
 
+- (void) setChannel:(Channel *)channel
+{
+    _channel = channel;
+    if(!_channel)
+    {
+        self.videoTitleLabel.text = @"";
+        return;
+    }
+    
+    // TODO: figure out which color to put according to category color
+    self.bottomBarView.backgroundColor = [UIColor grayColor];
+    
+    self.videoTitleLabel.text = _channel.title;
+    
+}
+
 -(void) setHiddenForFollowButton: (BOOL) hide
 {
     self.followButton.hidden = hide;
 }
 
--(void) setTitle :(NSString*) titleString
-{
-    [self.videoTitleLabel setText:titleString];
-}
+
 
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel
 {
