@@ -336,9 +336,9 @@
     for (UICollectionViewCell* cell in self.currentChannelsCollectionView.visibleCells)
     {
         
+        NSIndexPath* indexPathForCell = [self.currentChannelsCollectionView indexPathForCell:cell];
         
-        
-        __block int iindex = index;
+        __block int iindex = indexPathForCell.item;
         void (^animateChangeWidth)(void) = ^{
             
             CGRect frame = cell.frame;
