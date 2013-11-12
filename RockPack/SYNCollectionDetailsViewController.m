@@ -2444,7 +2444,6 @@ shouldChangeTextInRange: (NSRange) range
     return [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId] && self.channel.favouritesValue;
 }
 
-
 // since this is called when video overlay is being closed it is also used for the onboarding
 - (void) refreshFavouritesChannel
 {
@@ -2452,7 +2451,6 @@ shouldChangeTextInRange: (NSRange) range
                                                         object: self
                                                       userInfo: @{kChannel: self.channel}];
 }
-
 
 - (void) popoverControllerDidDismissPopover: (UIPopoverController *) popoverController
 {

@@ -383,7 +383,37 @@ SYNChannelCoverImageSelectorDelegate>
 
 - (IBAction)followControlPressed:(id)sender
 {
-    [self.delegate followControlPressed:sender];
+  //  [self.delegate followControlPressed:sender];
+    
+    // Update google analytics
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelSubscribeButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
+    
+    self.btnFollow.enabled = NO;
+    self.btnFollow.selected = FALSE;
+    
+    [self addSubscribeActivityIndicator];
+    
+    // Defensive programming
+    if (self.channel != nil)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
+                                                            object: self
+                                                          userInfo: @{kChannel : self.channel}];
+    }
+
+}
+
+- (void) addSubscribeActivityIndicator
+{
+    self.subscribingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+    self.subscribingIndicator.center = self.btnFollow.center;
+    [self.subscribingIndicator startAnimating];
+    [self.view addSubview: self.subscribingIndicator];
 }
 
 - (IBAction)shareControlPressed:(id)sender
@@ -1267,9 +1297,69 @@ referenceSizeForFooterInSection: (NSInteger) section
                       otherButtonTitles: nil] show];
 }
 
+- (IBAction)avatarTapped:(id)sender {
+    
+    SYNProfileRootViewController *profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile];
+    
+    
+    profileVC.channelOwner = self.channel.channelOwner;
+    
+    [self.navigationController pushViewController:profileVC animated:NO];
+    
+
+}
 
 
 
+- (IBAction) followersLabelPressed: (id) sender
+{
+   // [self releasedSubscribersLabel: sender];
+    
+    if (self.subscribersPopover)
+    {
+        return;
+    }
+    
+    // Google analytics support
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set: kGAIScreenName
+           value: @"Subscribers List"];
+    
+    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+    
+    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
+    
+    if (IS_IPAD)
+    {
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: subscribersViewController];
+        navigationController.view.backgroundColor = [UIColor clearColor];
+        
+        
+        self.subscribersPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
+        
+        self.subscribersPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
+        
+        self.subscribersPopover.popoverContentSize = CGSizeMake(514, 626);
+        self.subscribersPopover.delegate = self;
+        
+        
+        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
+                                 480.0f, 1, 1);
+        
+        
+        [self.subscribersPopover presentPopoverFromRect: rect
+                                                 inView: self.view
+                               permittedArrowDirections: 0
+                                               animated: YES];
+    }
+    else
+    {
+        self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
+        
+        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
+    }
+}
 
 
 
