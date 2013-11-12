@@ -1,4 +1,4 @@
-//
+    //
 //  SYNOoyalaVideoPlaybackViewController.m
 //  dolly
 //
@@ -153,9 +153,9 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 // Get the duration of the current video
 - (NSTimeInterval) duration
 {
-    Float64 d = [ooyalaPlayer duration];
-    DebugLog(@"videoLoadedFraction %lf", d);
-    return d;
+    Float64 duration = [ooyalaPlayer duration];
+    DebugLog(@"duration %lf", duration);
+    return duration;
 }
 
 
@@ -255,10 +255,27 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 
             // Player is paused, video is showing
             case OOOoyalaPlayerStatePaused:
+                if (self.shuttledByUser == TRUE && self.playFlag == TRUE)
+                {
+                    DebugLog (@"*** Paused: Paused by shuttle and should be playing? - Attempting to play");
+                    [self playVideo];
+                }
+                else
+                {
+                    [self stopVideoStallDetectionTimer];
+                    DebugLog (@"*** Paused: Paused by user");
+                }
                 break;
                 
             // Player has finished playing content
             case OOOoyalaPlayerStateCompleted:
+                self.percentageViewed = 1.0f;
+                self.timeViewed = self.currentDuration;
+                [self stopShuttleBarUpdateTimer];
+                [self stopVideoStallDetectionTimer];
+                [self stopVideo];
+                [self resetPlayerAttributes];
+                [self loadNextVideo];
                 break;
                 
             // Player has encountered an error, check OOOoyalaPlayer.error

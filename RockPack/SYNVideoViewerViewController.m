@@ -333,9 +333,7 @@
     // likes count
     self.likesCountLabel.font = [UIFont lightCustomFontOfSize:self.likesCountLabel.font.pointSize];
     self.likesCountLabel.text = @"0";
-    
-    
-    
+
     //iOS 7 Blur
     if (IS_IOS_7_OR_GREATER)
     {
