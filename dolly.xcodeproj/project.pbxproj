@@ -2770,6 +2770,7 @@
 		BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks@2x~iphone.png"; sourceTree = "<group>"; };
 		BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks~iphone.png"; sourceTree = "<group>"; };
 		BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelCell~iphone.xib"; sourceTree = "<group>"; };
+		BE53DD811832A37500D65793 /* SYNPopoverable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNPopoverable.h; sourceTree = "<group>"; };
 		BE53EE6017609587008360D2 /* Rockpack 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 4.xcdatamodel"; sourceTree = "<group>"; };
 		BE5D29E917577E2800C00486 /* SYNPopupMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopupMessageView.h; sourceTree = "<group>"; };
 		BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopupMessageView.m; sourceTree = "<group>"; };
@@ -6180,6 +6181,7 @@
 		BEB313BC182A822900FAF98A /* Add to Channels */ = {
 			isa = PBXGroup;
 			children = (
+				BE53DD811832A37500D65793 /* SYNPopoverable.h */,
 				BE31EFB71831455C006E20E2 /* Layouts */,
 				BE31EFAD182D4729006E20E2 /* Cells */,
 				BE285D981725726300D995AB /* SYNAddToChannelViewController.h */,

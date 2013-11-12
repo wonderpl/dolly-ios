@@ -325,8 +325,8 @@
     
     creatingNewAnimating = YES;
     
-    [self.currentChannelsCollectionView.collectionViewLayout invalidateLayout];
-    [self.currentChannelsCollectionView invalidateIntrinsicContentSize];
+//    [self.currentChannelsCollectionView.collectionViewLayout invalidateLayout];
+//    [self.currentChannelsCollectionView invalidateIntrinsicContentSize];
     
     
     
@@ -335,8 +335,12 @@
     int index = 0;
     for (UICollectionViewCell* cell in self.currentChannelsCollectionView.visibleCells)
     {
-        void (^animateChangeWidth)() = ^()
-        {
+        
+        
+        
+        __block int iindex = index;
+        void (^animateChangeWidth)(void) = ^{
+            
             CGRect frame = cell.frame;
             
             
@@ -359,15 +363,17 @@
                 
                 
             }
-            else if(IS_IPHONE || (IS_IPAD && index % 2 == 0))
+            else if(IS_IPHONE || (IS_IPAD && (iindex % 2 == 0)))
             {
+                
+                CGFloat correctAmount = (kChannelCellExpandedHeight - kChannelCellDefaultHeight);
                 if(creatingNewState) // if in create new state -> contract
                 {
-                    frame.origin.y -= kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+                    frame.origin.y -= correctAmount;
                 }
                 else
                 {
-                    frame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+                    frame.origin.y += correctAmount;
                 }
                 
             }
@@ -379,7 +385,7 @@
         
         [UIView transitionWithView:cell
                           duration:kAnimationExpansion
-                           options: UIViewAnimationOptionCurveEaseInOut
+                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateChangeWidth
                         completion:nil];
         
@@ -391,7 +397,7 @@
     
     // send tracking information
     
-    if(creatingNewState) // if it is opening, show the panel
+    if(!creatingNewState) // if it is opening, show the panel
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
@@ -413,13 +419,11 @@
     
     if(creatingNewState)
     {
-        
         [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
     }
     else
     {
-        
-        [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
+        [self.currentChannelsCollectionView setCollectionViewLayout:self.normalFlowLayout animated:YES];
     }
 }
 
@@ -431,8 +435,7 @@
     self.closeButton.enabled = NO;
     self.confirmButtom.enabled = NO;
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
-                                                        object: self];
+    [self finishingPresentation];
     
     [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
@@ -465,7 +468,17 @@
         self.confirmButtom.enabled = NO;
 }
 
+#pragma mark - Popoverable
 
+-(void)startingPresentation
+{
+    
+}
+-(void)finishingPresentation
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+                                                        object: self];
+}
 
 
 @end
