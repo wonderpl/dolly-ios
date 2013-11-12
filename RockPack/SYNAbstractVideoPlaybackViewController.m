@@ -317,7 +317,7 @@
     
     if (IS_IOS_7_OR_GREATER)
     {
-        sliderYOffset = 5.0f;
+        sliderYOffset = 9.0f;
     }
     
     self.shuttleSlider = [[UISlider alloc] initWithFrame: CGRectMake(sliderOffset, sliderYOffset, shuttleBarFrame.size.width - (2 * sliderOffset), 25)];

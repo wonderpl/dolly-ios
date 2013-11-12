@@ -775,17 +775,16 @@
          
                                                           userInfo: @{@"VideoInstance": videoInstance}];
         addItButton.selected = YES;
-        [appDelegate.oAuthNetworkEngine
-         recordActivityForUserId: appDelegate.currentUser.uniqueId
-         action: @"select"
-         videoInstanceId: videoInstance.uniqueId
-         completionHandler: ^(id response) {
-         }
-         
-         
-         errorHandler: ^(id error) {
-             DebugLog(@"Acivity not recorded: Select");
-         }];
+        
+        
+        [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
+                                                         action: @"select"
+                                                videoInstanceId: videoInstance.uniqueId
+                                              completionHandler: ^(id response) {
+                                              }
+                                                   errorHandler: ^(id error) {
+                                                       DebugLog(@"Acivity not recorded: Select");
+                                                   }];
     }
     
     if (!IS_IPAD)
