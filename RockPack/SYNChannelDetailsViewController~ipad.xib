@@ -1,89 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNChannelDetailsViewController">
             <connections>
+                <outlet property="btnAvatar" destination="NYK-20-9W1" id="axv-eA-iIQ"/>
+                <outlet property="btnFollow" destination="dO0-W1-go2" id="6rZ-10-4Fi"/>
+                <outlet property="btnFollowers" destination="vWl-Sb-frk" id="TxR-YX-74k"/>
+                <outlet property="btnShare" destination="eEI-cj-XRs" id="Z6t-p2-Oar"/>
+                <outlet property="btnVideos" destination="fMb-eB-Piy" id="l6Q-9m-rMj"/>
+                <outlet property="lblChannelTitle" destination="KoP-pw-j1K" id="a53-gC-oX1"/>
+                <outlet property="lblDescription" destination="DEu-Rn-eGJ" id="OEB-Xb-Azp"/>
+                <outlet property="lblFullName" destination="qVh-3B-R6Q" id="Q68-lv-nA1"/>
+                <outlet property="videoThumbnailCollectionView" destination="cn2-e5-XhO" id="bW1-up-cNq"/>
                 <outlet property="view" destination="1" id="FTm-ye-zz3"/>
+                <outlet property="viewIPadContainer" destination="TjS-Dr-jUj" id="R2m-Iv-7rH"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <rect key="frame" x="0.0" y="0.0" width="670" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cn2-e5-XhO">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="cn2-e5-XhO">
+                    <rect key="frame" x="0.0" y="0.0" width="670" height="1024"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mQJ-GE-Ivs">
-                        <size key="itemSize" width="316" height="257"/>
-                        <size key="headerReferenceSize" width="320" height="405"/>
+                        <size key="itemSize" width="295" height="268"/>
+                        <size key="headerReferenceSize" width="670" height="557"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
+                        <inset key="sectionInset" minX="40" minY="2" maxX="40" maxY="2"/>
                     </collectionViewFlowLayout>
                     <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Hpq-YF-aIa"/>
+                        <outlet property="delegate" destination="-1" id="kK1-tE-abO"/>
+                    </connections>
                 </collectionView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TjS-Dr-jUj" userLabel="View - Profile Container">
-                    <rect key="frame" x="216" y="83" width="336" height="343"/>
+                <view contentMode="scaleToFill" id="TjS-Dr-jUj" userLabel="View - Profile Container">
+                    <rect key="frame" x="0.0" y="64" width="670" height="463"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVh-3B-R6Q" userLabel="Label - User Name">
-                            <rect key="frame" x="8" y="56" width="320" height="27"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NYK-20-9W1" customClass="SYNAvatarButton">
+                            <rect key="frame" x="291" y="70" width="96" height="96"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="avatar">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="avatarTapped:" destination="-1" eventType="touchUpInside" id="WNr-kQ-Sfq"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qVh-3B-R6Q" userLabel="Label - User Name">
+                            <rect key="frame" x="179" y="176" width="320" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Channel Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoP-pw-j1K" userLabel="Label - Channel Title">
-                            <rect key="frame" x="8" y="84" width="320" height="29"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KoP-pw-j1K" userLabel="Label - Channel Title">
+                            <rect key="frame" x="179" y="217" width="320" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                             <color key="textColor" red="0.27450981740000002" green="0.27450981740000002" blue="0.27450981740000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEu-Rn-eGJ" userLabel="Label - Description">
-                            <rect key="frame" x="8" y="120" width="320" height="24"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DEu-Rn-eGJ" userLabel="Label - Description">
+                            <rect key="frame" x="179" y="259" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dO0-W1-go2" customClass="SYNSocialButton">
-                            <rect key="frame" x="109" y="210" width="50" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dO0-W1-go2" customClass="SYNSocialButton">
+                            <rect key="frame" x="280" y="346" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="follow">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEI-cj-XRs" customClass="SYNSocialButton">
-                            <rect key="frame" x="178" y="210" width="50" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eEI-cj-XRs" customClass="SYNSocialButton">
+                            <rect key="frame" x="349" y="346" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="share">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k5g-GL-Wvz" userLabel="View - Seperator">
-                            <rect key="frame" x="168" y="164" width="1" height="16"/>
+                        <view contentMode="scaleToFill" id="k5g-GL-Wvz" userLabel="View - Seperator">
+                            <rect key="frame" x="337" y="311" width="1" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYK-20-9W1" customClass="SYNAvatarButton">
-                            <rect key="frame" x="140" y="0.0" width="56" height="56"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="avatar">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWl-Sb-frk" userLabel="Button - Followers button">
-                            <rect key="frame" x="8" y="160" width="145" height="29"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vWl-Sb-frk" userLabel="Button - Followers button">
+                            <rect key="frame" x="354" y="305" width="145" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="ddddd"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMb-eB-Piy" userLabel="Button - Videos">
-                            <rect key="frame" x="184" y="160" width="144" height="29"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fMb-eB-Piy" userLabel="Button - Videos">
+                            <rect key="frame" x="171" y="304" width="144" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="fffff">
@@ -97,6 +115,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
 </document>

@@ -1662,8 +1662,8 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                                  
                                              }];
     };
-    
-    [appDelegate.viewStackManager popController];
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Channel Creation (3 steps)

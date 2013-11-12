@@ -39,6 +39,11 @@
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNAvatarButton.h"
+#import "SYNModalSubscribersController.h"
+#import "SYNUsersViewController.h"
+#import "UIButton+WebCache.h"
+#import "objc/runtime.h"
+
 
 static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
@@ -118,8 +123,6 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *lblFullName;
 @property (strong, nonatomic) IBOutlet UILabel *lblDescription;
 @property (strong, nonatomic) IBOutlet UILabel *lblChannelTitle;
-@property (strong, nonatomic) IBOutlet UILabel *lblFollowersCount;
-@property (strong, nonatomic) IBOutlet UILabel *lblVideosCount;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnFollow;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnShare;
 
@@ -128,6 +131,7 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *btnVideos;
 
 @property (strong, nonatomic) IBOutlet UIView *viewIPhoneContainer;
+@property (strong, nonatomic) IBOutlet UIView *viewIPadContainer;
 
 @end
 
@@ -167,8 +171,8 @@ SYNChannelCoverImageSelectorDelegate>
         [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
         [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
         [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
-        [self.lblFollowersCount setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.lblVideosCount setFont:[UIFont regularCustomFontOfSize:14]];
+//        [self.lblFollowersCount setFont:[UIFont regularCustomFontOfSize:14]];
+//        [self.lblVideosCount setFont:[UIFont regularCustomFontOfSize:14]];
     }
     
     
@@ -198,6 +202,7 @@ SYNChannelCoverImageSelectorDelegate>
     self.btnFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
     [self.btnVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
+    
     
     
     self.btnVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -281,7 +286,7 @@ SYNChannelCoverImageSelectorDelegate>
 //                       withLoader: YES];
     }
     
-    [self displayChannelDetails];
+    //[self displayChannelDetails];
     
     if (self.hasAppeared)
     {
@@ -295,6 +300,14 @@ SYNChannelCoverImageSelectorDelegate>
                                                             object: self
                                                           userInfo: @{kChannel: self.channel}];
     }
+    
+
+    
+    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL]
+                                     forState: UIControlStateNormal
+                             placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                      options: SDWebImageRetryFailed];
+
     
     self.hasAppeared = YES;
     self.navigationController.navigationBarHidden = NO;
@@ -434,10 +447,18 @@ SYNChannelCoverImageSelectorDelegate>
     
     if (IS_IPHONE) {
         
-        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset*2);
         
         self.viewIPhoneContainer.transform = move;
         
+        
+    }
+    else
+    {
+        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+        
+        self.viewIPadContainer.transform = move;
+
         
     }
 }
@@ -1254,7 +1275,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             //Check for precense of existing channels view controller.
             UIViewController *lastController = [[master childViewControllers] lastObject];
             
-            if ([lastController isKindOfClass: [SYNExistingCollectionsViewController class]])
+            if ([lastController isKindOfClass: [UICollectionViewController class]])
             {
                 //This removes the "existing channels view controller"
                 [lastController.view removeFromSuperview];
@@ -1274,7 +1295,7 @@ referenceSizeForFooterInSection: (NSInteger) section
                                                               userInfo: nil];
             
             //And show as if displayed from the normal master view hierarchy
-            [appDelegate.viewStackManager pushController: self];
+            [self.navigationController pushViewController:self animated:YES];
         }
         
         [self setDisplayControlsVisibility: YES];
@@ -1302,7 +1323,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     profileVC.channelOwner = self.channel.channelOwner;
     
-    [self.navigationController pushViewController:profileVC animated:NO];
+    [self.navigationController pushViewController:profileVC animated:YES];
     
 
 }
@@ -1313,50 +1334,50 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
    // [self releasedSubscribersLabel: sender];
     
-    if (self.subscribersPopover)
-    {
-        return;
-    }
-    
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Subscribers List"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
-    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
-    
-    if (IS_IPAD)
-    {
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: subscribersViewController];
-        navigationController.view.backgroundColor = [UIColor clearColor];
-        
-        
-        self.subscribersPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
-        
-        self.subscribersPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
-        
-        self.subscribersPopover.popoverContentSize = CGSizeMake(514, 626);
-        self.subscribersPopover.delegate = self;
-        
-        
-        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
-                                 480.0f, 1, 1);
-        
-        
-        [self.subscribersPopover presentPopoverFromRect: rect
-                                                 inView: self.view
-                               permittedArrowDirections: 0
-                                               animated: YES];
-    }
-    else
-    {
-        self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
-        
-        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
-    }
+//    if (self.subscribersPopover)
+//    {
+//        return;
+//    }
+//    
+//    // Google analytics support
+//    id tracker = [[GAI sharedInstance] defaultTracker];
+//    
+//    [tracker set: kGAIScreenName
+//           value: @"Subscribers List"];
+//    
+//    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+//    
+//    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
+//    
+//    if (IS_IPAD)
+//    {
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: subscribersViewController];
+//        navigationController.view.backgroundColor = [UIColor clearColor];
+//        
+//        
+//        self.subscribersPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
+//        
+//        self.subscribersPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
+//        
+//        self.subscribersPopover.popoverContentSize = CGSizeMake(514, 626);
+//        self.subscribersPopover.delegate = self;
+//        
+//        
+//        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
+//                                 480.0f, 1, 1);
+//        
+//        
+//        [self.subscribersPopover presentPopoverFromRect: rect
+//                                                 inView: self.view
+//                               permittedArrowDirections: 0
+//                                               animated: YES];
+//    }
+//    else
+//    {
+//        self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
+//        
+//        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
+//    }
 }
 
 
