@@ -773,7 +773,7 @@
         //return self.arrDisplayFollowing.count;
         return self.channelOwner.subscriptions.count;
     }
-    NSLog(@"----------");
+    
     return self.channelOwner.channels.count + (self.isUserProfile ? 1 : 0); // to account for the extra 'creation' cell at the start of the collection view
 }
 

@@ -239,12 +239,12 @@
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
 {
-    NSLog (@"Shouldn't be calling abstract function");
+    AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
 {
-    NSLog (@"Shouldn't be calling abstract function");
+    AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
 

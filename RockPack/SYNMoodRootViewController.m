@@ -65,7 +65,7 @@
 
 -(void)rightBarButtonItemPressed:(UIBarButtonItem*)rightButtonItem
 {
-    NSLog(@"Pressed...");
+    DebugLog(@"Pressed...");
 }
 
 

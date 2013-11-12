@@ -325,6 +325,11 @@
     
     creatingNewAnimating = YES;
     
+    [self.currentChannelsCollectionView.collectionViewLayout invalidateLayout];
+    [self.currentChannelsCollectionView invalidateIntrinsicContentSize];
+    
+    
+    
     // 1. Loop over all the cells and animate manually
     
     int index = 0;
@@ -408,11 +413,13 @@
     
     if(creatingNewState)
     {
-        self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
+        
+        [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
     }
     else
     {
-        self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
+        
+        [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
     }
 }
 
