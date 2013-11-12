@@ -178,15 +178,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 // Can use this to display a video loading progress indicator
 - (float) videoLoadedFraction
 {
-    Float64 fraction = 0.0f;
-    
-    if (self.currentDuration > 0.0f)
-    {
-        fraction = ooyalaPlayer.bufferedTime / self.currentDuration;
-        DebugLog(@"videoLoadedFraction %lf", fraction);
-    }
-
-    return fraction;
+    return ooyalaPlayer.bufferedTime / self.currentDuration;
 }
 
 
@@ -200,7 +192,6 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 - (BOOL) isPlayingOrBuffering
 {
     OOOoyalaPlayerState state = [ooyalaPlayer state];
-    
     return ((state == OOOoyalaPlayerStateLoading) || (state == OOOoyalaPlayerStatePlaying)) ? TRUE : FALSE;
 }
 
@@ -208,7 +199,6 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 - (BOOL) isPaused
 {
     OOOoyalaPlayerState state = [ooyalaPlayer state];
-    
     return (state == OOOoyalaPlayerStatePaused);
 }
 

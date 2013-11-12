@@ -1085,7 +1085,7 @@
 
 - (void) setCurrentTime: (NSTimeInterval) newTime
 {
-        AssertOrLog(@"Abstract method called");
+    AssertOrLog(@"Abstract method called");
 }
 
 
@@ -1119,23 +1119,23 @@
 
 - (void) playVideo;
 {
-     AssertOrLog(@"Abstract method called");
+    AssertOrLog(@"Abstract method called");
 }
 
 - (void) pauseVideo
 {
-     AssertOrLog(@"Abstract method called");
+    AssertOrLog(@"Abstract method called");
 }
 
 
 - (void) stopVideo
 {
-      AssertOrLog(@"Abstract method called");
+    AssertOrLog(@"Abstract method called");
 }
 
 - (void) playVideoWithSourceId: (NSString *) sourceId
 {
-        AssertOrLog(@"Abstract method called");
+    AssertOrLog(@"Abstract method called");
 }
 
 @end
