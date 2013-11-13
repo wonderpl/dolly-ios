@@ -130,7 +130,7 @@
         return;
     }
     
-    if(self.isEmpty)
+    if(!self.isEmpty)
     {
         AssertOrLog(@"The Video Q is not empty and you cannot currently add more than one videos");
         return;
@@ -167,7 +167,7 @@
 }
 
 
-- (Channel*) currentlyCreatingChannel // lazy loading
+- (Channel*) currentlyCreatingChannel // Lazy Loading
 {
     if (!_currentlyCreatingChannel) // create channel if there is none
     {
