@@ -61,23 +61,11 @@
     
     if (IS_RETINA)
     {
-        [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
-        [self.followerCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
-        [self.videoCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
-        
-        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:10]];
-        
-        //  [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
-        //  [self.boarderView.layer setBorderWidth:0.5f];
-        [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
-        
+        [self.boarderView.layer setBorderWidth:0.5f];
     }
     else
     {
-        [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:18]];
-        [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.boarderView.layer setBorderColor:[[UIColor grayColor]CGColor]];
+        [self.boarderView.layer setBorderWidth:1.0f];
         
     }
     
@@ -294,19 +282,10 @@
     }
 }
 
--(void) showAlertView{
-    NSString *message = @"Are you sure you want to unfollow";
-    
-    message =  [message stringByAppendingString:@" "];
-    
-    message =  [message stringByAppendingString:self.channel.title];
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
-    
-    [alertView show];
-}
 
-- (NSString *) yesButtonTitle
-{
+
+
+- (NSString *) yesButtonTitle{
     return @"Yes";
 }
 - (NSString *) noButtonTitle
@@ -328,15 +307,6 @@
     }
 }
 
--(void) reset
-{
-    self.videoCountLabel.text = @"";
-    self.videoTitleLabel.text = @"";
-    self.followerCountLabel.text = @"";
-    self.descriptionLabel.text = @"";
-    [self.boarderView.layer setBorderWidth:0.0f];
-    self.bottomBarView.backgroundColor = [UIColor clearColor];
-    self.followButton.hidden = YES;
-}
+
 
 @end
