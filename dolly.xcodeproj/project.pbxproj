@@ -1406,6 +1406,9 @@
 		BEBFD0A9177A039D00C90544 /* ButtonPrivateRightHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD09F177A039D00C90544 /* ButtonPrivateRightHighlighted@2x.png */; };
 		BEBFD0AC177A03D200C90544 /* PanelPrivateAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD0AA177A03D200C90544 /* PanelPrivateAlert.png */; };
 		BEBFD0AD177A03D200C90544 /* PanelPrivateAlert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD0AB177A03D200C90544 /* PanelPrivateAlert@2x.png */; };
+		BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */; };
+		BED027B21833F66700636659 /* SYNOptionsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */; };
+		BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */; };
 		BED4310316EF8D830051465B /* FieldDayMonth.png in Resources */ = {isa = PBXBuildFile; fileRef = BED430FF16EF8D830051465B /* FieldDayMonth.png */; };
 		BED4310416EF8D830051465B /* FieldDayMonth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310016EF8D830051465B /* FieldDayMonth@2x.png */; };
 		BED4310516EF8D830051465B /* FieldYear.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310116EF8D830051465B /* FieldYear.png */; };
@@ -3082,6 +3085,10 @@
 		BEBFD09F177A039D00C90544 /* ButtonPrivateRightHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPrivateRightHighlighted@2x.png"; path = "Assets/Images/ButtonPrivateRightHighlighted@2x.png"; sourceTree = "<group>"; };
 		BEBFD0AA177A03D200C90544 /* PanelPrivateAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelPrivateAlert.png; path = Assets/Images/PanelPrivateAlert.png; sourceTree = "<group>"; };
 		BEBFD0AB177A03D200C90544 /* PanelPrivateAlert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelPrivateAlert@2x.png"; path = "Assets/Images/PanelPrivateAlert@2x.png"; sourceTree = "<group>"; };
+		BED027AE1833F66700636659 /* SYNOptionsOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOptionsOverlayViewController.h; sourceTree = "<group>"; };
+		BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOptionsOverlayViewController.m; sourceTree = "<group>"; };
+		BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOptionsOverlayViewController.xib; sourceTree = "<group>"; };
+		BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNOptionsOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		BED430FF16EF8D830051465B /* FieldDayMonth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldDayMonth.png; path = Assets/Images/FieldDayMonth.png; sourceTree = "<group>"; };
 		BED4310016EF8D830051465B /* FieldDayMonth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FieldDayMonth@2x.png"; path = "Assets/Images/FieldDayMonth@2x.png"; sourceTree = "<group>"; };
 		BED4310116EF8D830051465B /* FieldYear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldYear.png; path = Assets/Images/FieldYear.png; sourceTree = "<group>"; };
@@ -3777,6 +3784,7 @@
 		019824E11629CAB600216900 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BED027AD1833F64800636659 /* Options */,
 				BEB313BC182A822900FAF98A /* Add to Channels */,
 				01982563162ADEAD00216900 /* Abstract */,
 				01B7F75B164FB7A7009C5CCD /* Collections */,
@@ -6181,6 +6189,17 @@
 			name = "CoverArt Chooser View";
 			sourceTree = "<group>";
 		};
+		BED027AD1833F64800636659 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				BED027AE1833F66700636659 /* SYNOptionsOverlayViewController.h */,
+				BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */,
+				BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */,
+				BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */,
+			);
+			name = Options;
+			sourceTree = "<group>";
+		};
 		BED4312816F20CC50051465B /* RegexKitLite */ = {
 			isa = PBXGroup;
 			children = (
@@ -6871,6 +6890,7 @@
 				38A200951731607F00FB9F57 /* ButtonAccountSaveHighlighted~iphone.png in Resources */,
 				38A200961731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png in Resources */,
 				38A200971731607F00FB9F57 /* ButtonSettingsDoneHighlighted@2x~iphone.png in Resources */,
+				BED027B21833F66700636659 /* SYNOptionsOverlayViewController.xib in Resources */,
 				38A200981731607F00FB9F57 /* ButtonSettingsDoneHighlighted~iphone.png in Resources */,
 				38A200991731607F00FB9F57 /* ButtonSettingsDone~iphone.png in Resources */,
 				38A2009A1731607F00FB9F57 /* CellSettingsBottom@2x~iphone.png in Resources */,
@@ -6972,6 +6992,7 @@
 				38A200EE1731607F00FB9F57 /* ButtonVideoOverlayAdd@2x~iphone.png in Resources */,
 				38A200EF1731607F00FB9F57 /* ButtonVideoOverlayAddHighlighted@2x~iphone.png in Resources */,
 				38A200F01731607F00FB9F57 /* ButtonVideoOverlayAddHighlighted~iphone.png in Resources */,
+				BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */,
 				38A200F11731607F00FB9F57 /* ButtonVideoOverlayAddSelected@2x~iphone.png in Resources */,
 				38A200F21731607F00FB9F57 /* ButtonVideoOverlayAddSelected~iphone.png in Resources */,
 				1F4E7FB5181ACBAA00F59007 /* TabFeedHighlighted@2x~iphone.png in Resources */,
@@ -7764,6 +7785,7 @@
 				012BD2EA173BE87300BE28B6 /* UIButton+WebCache.m in Sources */,
 				012BD2EB173BE87300BE28B6 /* UIImage+GIF.m in Sources */,
 				012BD2EC173BE87300BE28B6 /* UIImageView+WebCache.m in Sources */,
+				BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */,
 				BE1B3DEA181141D600DA2BD6 /* SYNAggregateVideoItemCell.m in Sources */,
 				BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */,
 				BEB1578E173D060700DAFA2F /* _ChannelCover.m in Sources */,
