@@ -102,6 +102,8 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UITextView *txtViewDescription;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
 @property (strong, nonatomic) UICollectionViewFlowLayout *videoEditLayoutIPad;
+@property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
+@property (strong, nonatomic) UIBarButtonItem *barBtnSave;
 @end
 
 
@@ -149,6 +151,10 @@ SYNChannelCoverImageSelectorDelegate>
      [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
      [[self.txtViewDescription layer] setBorderWidth:1.0];
      [[self.txtViewDescription layer] setCornerRadius:0];
+
+    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+    
+    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(save)];
 
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
@@ -1204,12 +1210,9 @@ referenceSizeForFooterInSection: (NSInteger) section
 
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
     
-    UIBarButtonItem *barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
     
-    UIBarButtonItem *barBtnSave = [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(save)];
-    
-    self.navigationItem.leftBarButtonItem = barBtnCancel;
-    self.navigationItem.rightBarButtonItem = barBtnSave;
+    self.navigationItem.leftBarButtonItem = self.barBtnCancel;
+    self.navigationItem.rightBarButtonItem = self.barBtnSave;
     [self.videoThumbnailCollectionView reloadData];
 
 }
@@ -1227,11 +1230,12 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [UIView animateWithDuration:0.4 animations:^{
         self.viewProfileContainer.alpha = 1.0f;
-        
+        self.navigationItem.rightBarButtonItem = nil;
     }];
     
 
     self.viewEditMode.hidden = YES;
+    
     
     
     [self.txtFieldChannelName resignFirstResponder];
@@ -1325,9 +1329,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text
 {
-    
-    
-
     if ([text isEqualToString:@"\n"]) {
         
         [textView resignFirstResponder];
