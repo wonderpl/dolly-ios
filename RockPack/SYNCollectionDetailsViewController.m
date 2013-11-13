@@ -993,64 +993,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 }
 
 
-#pragma mark - Helper methods
-
-- (void) autoplayVideoIfAvailable
-{
-    __block NSArray *videoSubset = [[self.channel.videoInstances array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"uniqueId == %@", self.autoplayVideoId]];
-    
-    
-    if ([videoSubset count] == 1)
-    {
-        [self displayVideoViewerWithVideoInstanceArray: self.channel.videoInstances.array
-                                      andSelectedIndex: [self.channel.videoInstances indexOfObject: videoSubset[0]]
-                                                center: self.view.center];
-        self.autoplayVideoId = nil;
-    }
-    else
-    {
-        __weak typeof(self) weakSelf = self;
-        
-        MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
-            [weakSelf.channel addVideoInstanceFromDictionary: dictionary];
-            
-            NSError *error;
-            [weakSelf.channel.managedObjectContext save: &error];
-            
-            videoSubset = [[self.channel.videoInstances array] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"uniqueId == %@", self.autoplayVideoId]];
-            
-            if ([videoSubset count] >= 1)
-            {
-                [self displayVideoViewerWithVideoInstanceArray: self.channel.videoInstances.array
-                                              andSelectedIndex: [self.channel.videoInstances indexOfObject: videoSubset[0]]
-                                                        center: self.view.center];
-                self.autoplayVideoId = nil;
-            }
-        };
-        
-        // define success block //
-        MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
-        };
-        
-        if ([self.channel.resourceURL hasPrefix: @"https"])                          // https does not cache so it is fresh
-        {
-            [appDelegate.oAuthNetworkEngine videoForChannelForUserId: appDelegate.currentUser.uniqueId
-                                                           channelId: self.channel.uniqueId
-                                                          instanceId: self.autoplayVideoId
-                                                   completionHandler: successBlock
-                                                        errorHandler: errorBlock];
-        }
-        else
-        {
-            [appDelegate.networkEngine videoForChannelForUserId: appDelegate.currentUser.uniqueId
-                                                      channelId: self.channel.uniqueId
-                                                     instanceId: self.autoplayVideoId
-                                              completionHandler: successBlock
-                                                   errorHandler: errorBlock];
-        }
-    }
-}
-
 
 #pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
 

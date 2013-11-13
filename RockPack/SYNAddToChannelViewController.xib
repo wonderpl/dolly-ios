@@ -25,7 +25,7 @@
                     <color key="backgroundColor" red="0.73725491762161255" green="0.73725491762161255" blue="0.73725491762161255" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1ZL-Hs-93l" userLabel="Create Button">
-                    <rect key="frame" x="653.99999999999989" y="1" width="58" height="58"/>
+                    <rect key="frame" x="653.99999999999989" y="0.99999999999999989" width="58" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="done">
@@ -47,7 +47,7 @@
                         <color key="titleColor" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" image="ButtonCancelAddToPackHighlighted.png">
+                    <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -62,7 +62,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="bZV-u8-8GO">
-                    <rect key="frame" x="20" y="66" width="694" height="387"/>
+                    <rect key="frame" x="19.999999999999943" y="66" width="694" height="387"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.83865489130000004" green="0.2722337286" blue="0.15727822929999999" alpha="0.0" colorSpace="calibratedRGB"/>
                     <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="60"/>
@@ -136,7 +136,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ButtonCancelAddToPackHighlighted.png" width="30" height="30"/>
         <image name="ButtonConfirmYellowHighlighted.png" width="64" height="49"/>
     </resources>
 </document>
