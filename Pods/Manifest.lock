@@ -7,12 +7,13 @@ PODS:
 
 DEPENDENCIES:
   - Appirater
-  - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`)
+  - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`, branch `cocoapods`)
   - Reachability
   - SSKeychain (~> 0.2.1)
 
 EXTERNAL SOURCES:
   MKNetworkKit:
+    :branch: cocoapods
     :git: https://github.com/rockpack/MKNetworkKit.git
 
 SPEC CHECKSUMS:
