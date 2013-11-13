@@ -18,7 +18,7 @@
 #import "OWActivityViewController.h"
 #import "SDWebImageManager.h"
 #import "SYNAbstractViewController.h"
-#import "SYNCollectionDetailsViewController.h"
+#import "SYNChannelDetailsViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNOneToOneSharingController.h"
@@ -619,7 +619,7 @@
     
      
     
-    [appDelegate.viewStackManager presentPopoverView: self.oneToOneViewController.view];
+    [appDelegate.masterViewController addOverlayController:self.oneToOneViewController animated:YES];
 }
 
 
@@ -927,8 +927,8 @@
 
 - (void) createAndDisplayNewChannel
 {
-    SYNCollectionDetailsViewController *channelCreationVC =
-    [[SYNCollectionDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
+    SYNChannelDetailsViewController *channelCreationVC =
+    [[SYNChannelDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
                                                   usingMode: kChannelDetailsModeCreate];
     
     if (IS_IPHONE)
@@ -1058,35 +1058,44 @@
 
 
 - (void)viewProfileDetails:(ChannelOwner *)channelOwner {
-	if (!channelOwner) {
+    
+	if (!channelOwner)
 		return;
-	}
 
 	SYNProfileRootViewController *profileVC = (SYNProfileRootViewController *)[self viewControllerOfClass:[SYNProfileRootViewController class]];
-	if (profileVC) {
+    
+	if (profileVC)
+    {
 		profileVC.channelOwner = channelOwner;
 		[self.navigationController popToViewController:profileVC animated:YES];
-	} else {
+	}
+    else
+    {
 		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile];
 		profileVC.channelOwner = channelOwner;
 		[self.navigationController pushViewController:profileVC animated:YES];
 	}
 }
 
-- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId {
-	if (!channel) {
+- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId
+{
+    
+	if (!channel)
 		return;
-	}
+	
 
-	SYNCollectionDetailsViewController *channelVC =
-	(SYNCollectionDetailsViewController *) [self viewControllerOfClass:[SYNCollectionDetailsViewController class]];
+	SYNChannelDetailsViewController *channelVC =
+	(SYNChannelDetailsViewController *) [self viewControllerOfClass:[SYNChannelDetailsViewController class]];
 
-	if (channelVC) {
+	if (channelVC)
+    {
 		channelVC.channel = channel;
 		channelVC.autoplayVideoId = autoplayId;
 		[self.navigationController popToViewController:channelVC animated:YES];
-	} else {
-		channelVC = [[SYNCollectionDetailsViewController alloc] initWithChannel:channel
+	}
+    else
+    {
+		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
 																	  usingMode:kChannelDetailsModeDisplay];
 		channelVC.autoplayVideoId = autoplayId;
 		[self.navigationController pushViewController:channelVC animated:YES];

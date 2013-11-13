@@ -12,7 +12,6 @@
 #import "ExternalAccount.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
@@ -35,16 +34,16 @@
 
 @interface SYNAddToChannelViewController ()
 {
-    BOOL creatingNewState;
+    
     BOOL creatingNewAnimating;
     
 }
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
 @property (nonatomic, strong) IBOutlet UIButton *confirmButtom;
+
 @property (nonatomic, strong) IBOutlet UICollectionView *currentChannelsCollectionView;
-@property (nonatomic, strong) IBOutlet UILabel *autopostTitleLabel;
-@property (nonatomic, strong) IBOutlet UIView *autopostView;
+
 @property (nonatomic, strong) NSArray *channels;
 @property (nonatomic, strong) NSIndexPath *previouslySelectedPath;
 @property (nonatomic, weak) Channel *selectedChannel;
@@ -53,12 +52,9 @@
 @property (nonatomic, strong) SYNAddToChannelFlowLayout *normalFlowLayout;
 @property (nonatomic, strong) SYNAddToChannelExpandedFlowLayout* expandedFlowLayout;
 
-
-// autopost stuff
-@property (strong, nonatomic) IBOutlet UIButton *autopostNoButton;
-@property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (weak, nonatomic) UICollectionViewCell* selectedCell;
 
 
 
@@ -71,27 +67,20 @@
 {
     [super viewDidLoad];
     
-    // == TODO: Delete? == //
-    self.autopostTitleLabel.font = [UIFont lightCustomFontOfSize: self.autopostTitleLabel.font.pointSize];
-    self.autopostNoButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
-    self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
- 
-    
-    // == Set the button to 'Add' Mode since we have not yet pressed the create new button
-    [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
-    self.confirmButtom.enabled = NO;
+   
     
     // == On ipad the panel appears as a popup in the middle, with rounded corners
     if(IS_IPAD)
         self.view.layer.cornerRadius = 8.0f;
     
+    // == Create the two layouts that will be switched
     self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
     self.normalFlowLayout = [[SYNAddToChannelFlowLayout alloc] init];
     
+    // == Start by setting the normal layout
     self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
     
-    creatingNewState = NO;
-    
+    // == Register Xibs
     [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
                           forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
     
@@ -103,126 +92,12 @@
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    // == TODO: Delete? == //
-    ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
     
-    if (facebookAccount)
-    {
-        if ([[SYNFacebookManager sharedFBManager] hasActiveSessionWithPermissionType: FacebookPublishPermission] &&
-            (facebookAccount.flagsValue & ExternalAccountFlagAutopostAdd))
-        {
-            [self switchAutopostViewToYes: YES];
-        }
-        else
-        {
-            [self switchAutopostViewToYes: NO];
-        }
-        
-        self.autopostView.hidden = NO;
-    }
-    else
-    {
-        self.autopostView.hidden = YES;
-    }
-    
+    self.selectedChannel = nil;
     
     
 }
 
-
-- (void) switchAutopostViewToYes: (BOOL) value
-{
-    self.autopostYesButton.selected = value;
-    self.autopostNoButton.selected = !value;
-}
-
-
-- (IBAction) autopostButtonPressed: (UIButton *) sender
-{
-    if (sender.selected) // button is pressed twice
-        return;
-    
-    ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
-    __weak SYNAddToChannelViewController *wself = self;
-    __weak SYNAppDelegate *wAppDelegate = appDelegate;
-    BOOL isYesButton = (sender == self.autopostYesButton);
-    
-    // steps
-    void (^ ErrorBlock)(id) = ^(id error) {
-        [wself switchAutopostViewToYes: !isYesButton];
-    };
-    
-    void (^ CompletionBlock)(id) = ^(id no_responce) {
-        if (isYesButton)
-        {
-            [wAppDelegate.currentUser
-             setFlag: ExternalAccountFlagAutopostAdd
-             toExternalAccount: kFacebook];
-        }
-        else
-        {
-            [wAppDelegate.currentUser
-             unsetFlag: ExternalAccountFlagAutopostAdd
-             toExternalAccount: kFacebook];
-        }
-        
-        [wAppDelegate saveContext: YES];
-        
-        [wself switchAutopostViewToYes: isYesButton];
-        
-        if (isYesButton)
-        {
-            // this is a replacement for the sharing granularity
-            
-            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                   action: @"videoShared"
-                                                                    label: @"fbe"
-                                                                    value: nil] build]];
-        }
-    };
-    
-    if (isYesButton)
-    {
-        // if the SDK has already the 'publish' options on, it will just call the return function()
-        [[SYNFacebookManager sharedFBManager] openSessionWithPermissionType: kFacebookPermissionTypePublish
-                                                                  onSuccess: ^{
-                                                                      
-                        // connect to external account so as to register the new access token with extended priviledges
-                       [wAppDelegate.oAuthNetworkEngine connectFacebookAccountForUserId: wAppDelegate.currentUser.uniqueId
-                                                                     andAccessTokenData: [[FBSession activeSession] accessTokenData]
-                                                                      completionHandler: ^(id no_responce) {
-                                                                          
-                                                    if (facebookAccount.flagsValue & ExternalAccountFlagAutopostAdd)
-                                                    {
-                                                        CompletionBlock(no_responce);
-                                                    }
-                                                    else
-                                                    {
-                                                                               // set the flag on the server...
-                                                      [wAppDelegate.oAuthNetworkEngine setFlag: @"facebook_autopost_add"
-                                                                                     withValue: isYesButton
-                                                                                      forUseId: appDelegate.currentUser.uniqueId
-                                                                             completionHandler: CompletionBlock
-                                                                                  errorHandler: ErrorBlock];
-                                                    }
-                                                                          
-                                                } errorHandler: ErrorBlock];
-                        }
-         
-         
-                                    onFailure: ErrorBlock];
-    }
-    else
-    {
-        [wAppDelegate.oAuthNetworkEngine setFlag: @"facebook_autopost_add"
-                                       withValue: isYesButton // should be no
-                                        forUseId: appDelegate.currentUser.uniqueId
-                               completionHandler: CompletionBlock
-                                    errorHandler: ErrorBlock];
-    }
-}
 
 
 - (void) viewWillAppear: (BOOL) animated
@@ -284,9 +159,8 @@
     {
         self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])
                                                                               forIndexPath: indexPath];
-        [self.createNewChannelCell.createNewButton addTarget:self
-                                                      action:@selector(createNewButtonPressed)
-                                            forControlEvents:UIControlEventTouchUpInside];
+        
+        self.createNewChannelCell.delegate = self;
         cell = self.createNewChannelCell;
     }
     else
@@ -309,9 +183,15 @@
     
     // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
     if(indexPath.row == 0)
+    {
+       
         return;
-    
-    self.selectedChannel = self.channels[indexPath.item - 1]; // channels will be plus one due to extra first channel
+    }
+    else
+    {
+        self.selectedCell = [self.currentChannelsCollectionView cellForItemAtIndexPath:indexPath];
+        self.selectedChannel = self.channels[indexPath.item - 1]; // (the channel index is +1 due to extra first channel)
+    }
     
 }
 
@@ -324,11 +204,6 @@
         return;
     
     creatingNewAnimating = YES;
-    
-//    [self.currentChannelsCollectionView.collectionViewLayout invalidateLayout];
-//    [self.currentChannelsCollectionView invalidateIntrinsicContentSize];
-    
-    
     
     // 1. Loop over all the cells and animate manually
     
@@ -346,19 +221,26 @@
             
             if(cell == self.createNewChannelCell)
             {
-                if(creatingNewState) // if in "create new" state -> contract
+                if(self.createNewChannelCell.isEditing) // then contract!
                 {
                     frame.size.height = kChannelCellDefaultHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 0.0f;
                     
-                    [self.confirmButtom setTitle:@"Create" forState:UIControlStateNormal];
+                    
+                    
+                    
                 }
-                else
+                else // expand
                 {
                     frame.size.height = kChannelCellExpandedHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 1.0f;
                     
-                    [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+                    // show the button if hidden and change its title
+                    
+                    self.selectedChannel = nil;
+                    self.confirmButtom.hidden = NO;
+                    [self.confirmButtom setTitle:@"Create" forState:UIControlStateNormal];
+                    
                 }
                 
                 
@@ -367,7 +249,7 @@
             {
                 
                 CGFloat correctAmount = (kChannelCellExpandedHeight - kChannelCellDefaultHeight);
-                if(creatingNewState) // if in create new state -> contract
+                if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing) // contract
                 {
                     frame.origin.y -= correctAmount;
                 }
@@ -397,7 +279,7 @@
     
     // send tracking information
     
-    if(!creatingNewState) // if it is opening, show the panel
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden) // if it is opening, show the panel
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
@@ -415,11 +297,17 @@
 {
     creatingNewAnimating = NO;
     
-    creatingNewState = !creatingNewState;
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden)
+        self.createNewChannelCell.state = CreateNewChannelCellStateEditing;
+    else
+        self.createNewChannelCell.state = CreateNewChannelCellStateHidden; // this catches the 2 editing states, 'editing' and 'finilizing'
     
-    if(creatingNewState)
+    
+    
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing)
     {
         [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
+        [self.currentChannelsCollectionView setContentOffset:CGPointMake(0.0f, 0.0f)];
     }
     else
     {
@@ -443,6 +331,13 @@
 
 - (IBAction) confirmButtonPressed: (id) sender
 {
+    
+    if(self.createNewChannelCell.isEditing)
+    {
+        [self viewChannelDetails:nil withAutoplayId:@""];
+        
+    }
+    
     if (!self.selectedChannel)
     {
         return;
@@ -463,9 +358,16 @@
 {
     _selectedChannel = selectedChannel;
     if(_selectedChannel)
-        self.confirmButtom.enabled = YES;
-    else
-        self.confirmButtom.enabled = NO;
+    {
+        self.confirmButtom.hidden = NO;
+        [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+    }
+    else // passed nil
+    {
+        self.selectedCell.selected = NO;
+        self.confirmButtom.hidden = YES;
+    }
+    
 }
 
 #pragma mark - Popoverable

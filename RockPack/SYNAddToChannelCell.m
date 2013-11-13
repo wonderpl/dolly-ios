@@ -42,6 +42,7 @@
 
 -(void)setSelected:(BOOL)selected
 {
+    _selected = selected;
     if(selected)
     {
         self.titleLabel.textColor = [UIColor whiteColor];
@@ -56,5 +57,9 @@
         self.backgroundColor = [UIColor whiteColor];
     }
     
+}
+-(BOOL)isSelected
+{
+    return _selected;
 }
 @end
