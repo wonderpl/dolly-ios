@@ -11,7 +11,7 @@
 #import "SYNSocialActionsDelegate.h"
 
 
-@interface SYNChannelDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout,
+@interface SYNChannelDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout, UIPopoverControllerDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
 SYNSocialActionsDelegate, UITextFieldDelegate>

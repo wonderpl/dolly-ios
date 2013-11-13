@@ -67,7 +67,7 @@
                             <action selector="shareControlPressed:" destination="G5W-z0-ioj" eventType="touchUpInside" id="qdV-jK-6ba"/>
                         </connections>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A11-9p-rXG">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A11-9p-rXG" userLabel="Button - Delete">
                         <rect key="frame" x="242" y="0.0" width="44" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" backgroundImage="ButtonVideoDeleteDefault.png">
@@ -94,6 +94,7 @@
             <size key="customSize" width="307" height="183"/>
             <connections>
                 <outlet property="addControl" destination="OKX-RS-b5y" id="9jO-MS-cDV"/>
+                <outlet property="deleteButton" destination="A11-9p-rXG" id="qEw-vT-tGK"/>
                 <outlet property="imageView" destination="M54-bt-6WL" id="wVr-He-xka"/>
                 <outlet property="likeControl" destination="e4D-AB-sGK" id="Ul2-BV-efz"/>
                 <outlet property="shareControl" destination="XWN-5L-kuq" id="0I1-7l-tUL"/>
