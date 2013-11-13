@@ -16,6 +16,7 @@
 #import "SYNSoundPlayer.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
+#import "SYNPopoverable.h"
 @import QuartzCore;
 
 
@@ -35,9 +36,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
-@property (nonatomic, strong) UIPopoverController* accountSettingsPopover;
+@property (nonatomic, strong) UIPopoverController *accountSettingsPopover;
 
-@property (nonatomic, weak) UIViewController* overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
+@property (nonatomic, weak) UIViewController<SYNPopoverable> *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
 
@@ -134,7 +135,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) addOverlayController:(SYNAbstractViewController *)abstractViewController animated:(BOOL)animated
+- (void) addOverlayController:(SYNAbstractViewController<SYNPopoverable>*)abstractViewController animated:(BOOL)animated
 {
     if(!abstractViewController)
     {
@@ -248,6 +249,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     void (^FinishedBlock)(BOOL) = ^(BOOL finished) {
       
+        [wself.overlayController finishingPresentation];
+        
         [wself.overlayController.view removeFromSuperview];
         [wself.overlayController removeFromParentViewController];
         

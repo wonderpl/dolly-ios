@@ -264,7 +264,7 @@
                                                            NSError *error) {
                                           NSString *errorMessage = nil;
                                           
-                                          NSLog(@"%@", [session.accessTokenData dictionary]);
+                                          DebugLog(@"%@", [session.accessTokenData dictionary]);
                                           
                                           //We only expect this completion handler to be called once. The FBSession seems to store it
                                           //and it gets called again on logout. the hasExecuted boolean flag prevents the block from being called unless it has been
@@ -446,18 +446,18 @@
                                                       if (error)
                                                       {
                                                           // Case A: Error launching the dialog or sending request.
-                                                          NSLog(@"Error sending request: %@", error);
+                                                          DebugLog(@"Error sending request: %@", error);
                                                           failureBlock(error);
                                                       }
                                                       else
                                                       {
                                                           if (result == FBWebDialogResultDialogNotCompleted)
                                                           {
-                                                              NSLog(@"User canceled request by clicking 'X'.");
+                                                              DebugLog(@"User canceled request by clicking 'X'.");
                                                           }
                                                           else
                                                           {
-                                                              NSLog(@"Request Sent of Ok Button Pressed");
+                                                              DebugLog(@"Request Sent of Ok Button Pressed");
                                                               successBlock();
                                                           }
                                                       }

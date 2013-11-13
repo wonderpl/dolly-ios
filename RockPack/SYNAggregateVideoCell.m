@@ -101,7 +101,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: actionString
                                                                                       attributes: self.lightTextAttributes]];
     
-    self.actionButton.titleLabel.attributedText = attributedCompleteString;
+    self.actionButton.attributedTitle = attributedCompleteString;
     
     self.channelNameButton.title = self.channel.title;
 }

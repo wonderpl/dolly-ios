@@ -405,7 +405,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (granted)
             {
-                NSLog(@"Address Book Access GRANTED");
+                DebugLog(@"Address Book Access GRANTED");
                 
                 // saves the address book friends in the DB
                 [self fetchAddressBookFriends];
@@ -415,7 +415,7 @@
             }
             else
             {
-                NSLog(@"Address Book Access DENIED");
+                DebugLog(@"Address Book Access DENIED");
                 
                 if (!hasFacebookSession)
                 {
@@ -1163,7 +1163,7 @@
          NSString *reason = @"Unkown reson";
          NSDictionary *formErrors = error[@"form_errors"];
          
-         NSLog(@"%@", error);
+         DebugLog(@"%@", error);
          
          if (formErrors[@"email"])
          {

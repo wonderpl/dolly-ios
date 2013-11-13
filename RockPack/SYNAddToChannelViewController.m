@@ -35,7 +35,7 @@
 
 @interface SYNAddToChannelViewController ()
 {
-    BOOL creatingNewState;
+    
     BOOL creatingNewAnimating;
     
 }
@@ -59,6 +59,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (weak, nonatomic) UICollectionViewCell* selectedCell;
 
 
 
@@ -73,20 +74,23 @@
     
     // == TODO: Delete? == //
     self.autopostTitleLabel.font = [UIFont lightCustomFontOfSize: self.autopostTitleLabel.font.pointSize];
-    
     self.autopostNoButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
     self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
-    // ================= //
+ 
     
-    self.view.layer.cornerRadius = 8.0f;
+    // == Set the button to 'Add' Mode since we have not yet pressed the create new button
+    [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+    self.confirmButtom.enabled = NO;
+    
+    // == On ipad the panel appears as a popup in the middle, with rounded corners
+    if(IS_IPAD)
+        self.view.layer.cornerRadius = 8.0f;
     
     self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
     self.normalFlowLayout = [[SYNAddToChannelFlowLayout alloc] init];
     
     self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
-    // self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
     
-    creatingNewState = NO;
     
     [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
                           forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
@@ -120,11 +124,18 @@
     {
         self.autopostView.hidden = YES;
     }
-    // == TODO: Delete? == //
     
+    self.selectedChannel = nil;
+    
+    //[self.currentChannelsCollectionView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
 }
 
+// Testing reasons only
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"===> %@", [change objectForKey:NSKeyValueChangeNewKey]);
+}
 
 - (void) switchAutopostViewToYes: (BOOL) value
 {
@@ -241,31 +252,6 @@
     // Copy Channels
     self.channels = [appDelegate.currentUser.channels array];
     
-    if (self.selectedChannel)
-    {
-        int selectedIndex = [self.channels indexOfObject: self.selectedChannel];
-        
-        if (selectedIndex != NSNotFound)
-        {
-            self.selectedChannel = (self.channels)[selectedIndex];
-            self.previouslySelectedPath = [NSIndexPath indexPathForRow: selectedIndex + 1
-                                                             inSection: 0];
-            self.confirmButtom.enabled = YES;
-        }
-        else
-        {
-            self.previouslySelectedPath = nil;
-            self.selectedChannel = nil;
-            self.confirmButtom.enabled = NO;
-        }
-    }
-    else
-    {
-        self.previouslySelectedPath = nil;
-        self.selectedChannel = nil;
-        self.confirmButtom.enabled = NO;
-    }
-    
     
     [self.currentChannelsCollectionView reloadData];
 }
@@ -305,9 +291,8 @@
     {
         self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])
                                                                               forIndexPath: indexPath];
-        [self.createNewChannelCell.createNewButton addTarget:self
-                                                      action:@selector(createNewButtonPressed)
-                                            forControlEvents:UIControlEventTouchUpInside];
+        
+        self.createNewChannelCell.delegate = self;
         cell = self.createNewChannelCell;
     }
     else
@@ -317,9 +302,6 @@
                                                                                             forIndexPath: indexPath];
         
         existingChannel.titleLabel.text = channel.title;
-        
-        
-        
         
         cell = existingChannel;
     }
@@ -333,7 +315,15 @@
     
     // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
     if(indexPath.row == 0)
+    {
+       
         return;
+    }
+    else
+    {
+        self.selectedCell = [self.currentChannelsCollectionView cellForItemAtIndexPath:indexPath];
+        self.selectedChannel = self.channels[indexPath.item - 1]; // (the channel index is +1 due to extra first channel)
+    }
     
 }
 
@@ -347,41 +337,57 @@
     
     creatingNewAnimating = YES;
     
-    
     // 1. Loop over all the cells and animate manually
     
     int index = 0;
     for (UICollectionViewCell* cell in self.currentChannelsCollectionView.visibleCells)
     {
-        void (^animateChangeWidth)() = ^()
-        {
+        
+        NSIndexPath* indexPathForCell = [self.currentChannelsCollectionView indexPathForCell:cell];
+        
+        __block int iindex = indexPathForCell.item;
+        void (^animateChangeWidth)(void) = ^{
+            
             CGRect frame = cell.frame;
             
             
             if(cell == self.createNewChannelCell)
             {
-                if(creatingNewState) // if in "create new" state -> contract
+                if(self.createNewChannelCell.isEditing) // then contract!
                 {
                     frame.size.height = kChannelCellDefaultHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 0.0f;
+                    
+                    
+                    
+                    
                 }
-                else
+                else // expand
                 {
                     frame.size.height = kChannelCellExpandedHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 1.0f;
+                    
+                    // show the button if hidden and change its title
+                    
+                    self.selectedChannel = nil;
+                    self.confirmButtom.hidden = NO;
+                    [self.confirmButtom setTitle:@"Create" forState:UIControlStateNormal];
+                    
                 }
                 
                 
             }
-            else if(IS_IPHONE || (IS_IPAD && index % 2 == 0))
+            else if(IS_IPHONE || (IS_IPAD && (iindex % 2 == 0)))
             {
-                if(creatingNewState) // if in create new state -> contract
+                
+                CGFloat correctAmount = (kChannelCellExpandedHeight - kChannelCellDefaultHeight);
+                if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing) // contract
                 {
-                    frame.origin.y -= kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+                    frame.origin.y -= correctAmount;
                 }
                 else
                 {
-                    frame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
+                    frame.origin.y += correctAmount;
                 }
                 
             }
@@ -393,7 +399,7 @@
         
         [UIView transitionWithView:cell
                           duration:kAnimationExpansion
-                           options: UIViewAnimationOptionCurveEaseInOut
+                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateChangeWidth
                         completion:nil];
         
@@ -405,7 +411,7 @@
     
     // send tracking information
     
-    if(creatingNewState) // if it is opening, show the panel
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden) // if it is opening, show the panel
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
@@ -423,15 +429,21 @@
 {
     creatingNewAnimating = NO;
     
-    creatingNewState = !creatingNewState;
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden)
+        self.createNewChannelCell.state = CreateNewChannelCellStateEditing;
+    else
+        self.createNewChannelCell.state = CreateNewChannelCellStateHidden; // this catches the 2 editing states, 'editing' and 'finilizing'
     
-    if(creatingNewState)
+    
+    
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing)
     {
-        self.currentChannelsCollectionView.collectionViewLayout = self.expandedFlowLayout;
+        [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
+        [self.currentChannelsCollectionView setContentOffset:CGPointMake(0.0f, 0.0f)];
     }
     else
     {
-        self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
+        [self.currentChannelsCollectionView setCollectionViewLayout:self.normalFlowLayout animated:YES];
     }
 }
 
@@ -443,8 +455,7 @@
     self.closeButton.enabled = NO;
     self.confirmButtom.enabled = NO;
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
-                                                        object: self];
+    [self finishingPresentation];
     
     [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
@@ -457,20 +468,44 @@
         return;
     }
     
-    self.confirmButtom.enabled = NO;
-    self.closeButton.enabled = NO;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
                                                         object: self
                                                       userInfo: @{kChannel: self.selectedChannel}];
     
+    self.selectedChannel = nil;
+    
+    self.closeButton.enabled = NO; // protect from double closing the panel
     [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
 
 
+-(void)setSelectedChannel:(Channel *)selectedChannel
+{
+    _selectedChannel = selectedChannel;
+    if(_selectedChannel)
+    {
+        self.confirmButtom.hidden = NO;
+        [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+    }
+    else // passed nil
+    {
+        self.selectedCell.selected = NO;
+        self.confirmButtom.hidden = YES;
+    }
+    
+}
 
+#pragma mark - Popoverable
 
-
+-(void)startingPresentation
+{
+    
+}
+-(void)finishingPresentation
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+                                                        object: self];
+}
 
 
 @end

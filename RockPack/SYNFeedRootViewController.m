@@ -86,10 +86,11 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateChannelCell" bundle: nil]
               forCellWithReuseIdentifier: @"SYNAggregateChannelCell"];
     
-    
+#ifdef SHOW_DATE_HEADERS
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNHomeSectionHeaderView" bundle: nil]
               forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
                      withReuseIdentifier: @"SYNHomeSectionHeaderView"];
+#endif
 
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelFooterMoreView" bundle: nil]
               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
@@ -137,7 +138,6 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     
     
-    NSLog(@"%f", self.feedCollectionView.contentInset.top);
 }
 
 
@@ -566,6 +566,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
+#ifdef SHOW_DATE_HEADERS
 - (CGSize) collectionView: (UICollectionView *) collectionView
                    layout: (UICollectionViewLayout *) collectionViewLayout
            referenceSizeForHeaderInSection: (NSInteger) section
@@ -579,6 +580,7 @@ typedef void(^FeedDataErrorBlock)(void);
         return CGSizeMake(320, 34);
     }
 }
+#endif
 
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
@@ -614,7 +616,7 @@ typedef void(^FeedDataErrorBlock)(void);
     // In the 'name' attribut of the sectionInfo we have actually the keypath data (i.e in this case Date without time)
     
     // TODO: We might want to optimise this instead of creating a new date formatter each time
-    
+#ifdef SHOW_DATE_HEADERS
     if (kind == UICollectionElementKindSectionHeader)
     {
         NSDate* date = heuristicFeedItem.dateAdded;
@@ -661,7 +663,9 @@ typedef void(^FeedDataErrorBlock)(void);
         
         supplementaryView = headerSupplementaryView;
     }
-    else if (kind == UICollectionElementKindSectionFooter)
+    else
+#endif
+    if (kind == UICollectionElementKindSectionFooter)
     {
         self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                              withReuseIdentifier: @"SYNChannelFooterMoreView"
@@ -783,8 +787,7 @@ typedef void(^FeedDataErrorBlock)(void);
         channelOwner = channel.channelOwner;
     }
     
-    [appDelegate.viewStackManager viewProfileDetails: channelOwner
-                            withNavigationController: self.navigationController];
+    [self viewProfileDetails: channelOwner];
 }
 
 
@@ -826,8 +829,7 @@ typedef void(^FeedDataErrorBlock)(void);
         }
     }
     
-    [appDelegate.viewStackManager viewChannelDetails: channel
-                            withNavigationController: self.navigationController];
+	[self viewChannelDetails:channel withAutoplayId:nil];
 }
 
 
@@ -886,7 +888,7 @@ typedef void(^FeedDataErrorBlock)(void);
     if(!cell.channelOwner) // checking for both channel and channel owner
         return;
     
-    [appDelegate.viewStackManager viewProfileDetails: cell.channelOwner];
+    [self viewProfileDetails: cell.channelOwner];
 }
 
 

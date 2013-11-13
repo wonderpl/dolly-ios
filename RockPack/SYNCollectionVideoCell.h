@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
 
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 

@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SYNAddToChannelCell : UICollectionViewCell
+{
+    UIColor* defaultTitleColor;
+    BOOL _selected;
+}
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UIView* bottomStripView;

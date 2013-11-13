@@ -7,8 +7,9 @@
 //
 
 #import "SYNAbstractViewController.h"
+#import "SYNPopoverable.h"
 
-@interface SYNAddToChannelViewController : SYNAbstractViewController
+@interface SYNAddToChannelViewController : SYNAbstractViewController <SYNPopoverable>
 
 
 @end
