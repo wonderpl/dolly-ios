@@ -1058,34 +1058,43 @@
 
 
 - (void)viewProfileDetails:(ChannelOwner *)channelOwner {
-	if (!channelOwner) {
+    
+	if (!channelOwner)
 		return;
-	}
 
 	SYNProfileRootViewController *profileVC = (SYNProfileRootViewController *)[self viewControllerOfClass:[SYNProfileRootViewController class]];
-	if (profileVC) {
+    
+	if (profileVC)
+    {
 		profileVC.channelOwner = channelOwner;
 		[self.navigationController popToViewController:profileVC animated:YES];
-	} else {
+	}
+    else
+    {
 		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile];
 		profileVC.channelOwner = channelOwner;
 		[self.navigationController pushViewController:profileVC animated:YES];
 	}
 }
 
-- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId {
-	if (!channel) {
+- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId
+{
+    
+	if (!channel)
 		return;
-	}
+	
 
 	SYNChannelDetailsViewController *channelVC =
 	(SYNChannelDetailsViewController *) [self viewControllerOfClass:[SYNChannelDetailsViewController class]];
 
-	if (channelVC) {
+	if (channelVC)
+    {
 		channelVC.channel = channel;
 		channelVC.autoplayVideoId = autoplayId;
 		[self.navigationController popToViewController:channelVC animated:YES];
-	} else {
+	}
+    else
+    {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
 																	  usingMode:kChannelDetailsModeDisplay];
 		channelVC.autoplayVideoId = autoplayId;

@@ -126,18 +126,16 @@
 {
     if (!videoInstance)
     {
-        DebugLog(@"Trying to add a nil video instance into the queue through: 'addVideoToQueue:'");
+        AssertOrLog(@"Trying to add a nil video instance into the queue through: 'addVideoToQueue:'");
+        return;
+    }
+    
+    if(self.isEmpty)
+    {
+        AssertOrLog(@"The Video Q is not empty and you cannot currently add more than one videos");
         return;
     }
 
-    for (VideoInstance* currentVideoInstance in self.currentlyCreatingChannel.videoInstances)
-    {
-        if ([currentVideoInstance.uniqueId isEqualToString: videoInstance.uniqueId])
-        {
-            AssertOrLog(@"WARNING: Adding a video that already exists: %@", videoInstance.title);
-            return; // avoid duplicates
-        }
-    }
     
     VideoInstance* copyOfVideoInstance = [VideoInstance instanceFromVideoInstance: videoInstance
                                                         usingManagedObjectContext: self.appDelegate.channelsManagedObjectContext
@@ -173,23 +171,23 @@
 {
     if (!_currentlyCreatingChannel) // create channel if there is none
     {
-        self.currentlyCreatingChannel = [Channel insertInManagedObjectContext: self.appDelegate.channelsManagedObjectContext];
+        _currentlyCreatingChannel = [Channel insertInManagedObjectContext: self.appDelegate.channelsManagedObjectContext];
         
         User* meOnAnotherContext = [User instanceFromUser: self.appDelegate.currentUser
                                 usingManagedObjectContext: self.currentlyCreatingChannel.managedObjectContext];
         
-        self.currentlyCreatingChannel.channelOwner = (ChannelOwner*)meOnAnotherContext;
-        self.currentlyCreatingChannel.title = @"";
-        self.currentlyCreatingChannel.categoryId = @"";
+        _currentlyCreatingChannel.channelOwner = (ChannelOwner*)meOnAnotherContext;
+        _currentlyCreatingChannel.title = @"";
+        _currentlyCreatingChannel.categoryId = @"";
         
         // Set the channel's unique Id to something temporary so that we can perform queries for the videoinstances it contains
-        self.currentlyCreatingChannel.uniqueId = kNewChannelPlaceholderId;
+        _currentlyCreatingChannel.uniqueId = kNewChannelPlaceholderId;
 
         NSError *error = nil; // if we cannot save, bail
         
         if (![self.appDelegate.channelsManagedObjectContext save: &error])
         {
-            DebugLog(@"Cannot save channel to context!");
+            DebugLog(@"Cannot save channel to context!: %@", error);
         }
     }
     
@@ -199,6 +197,7 @@
 
 - (BOOL) isEmpty
 {
+    // we either do not have a channel or we have one and it is empty
     if (!_currentlyCreatingChannel)
     {
         return YES;
