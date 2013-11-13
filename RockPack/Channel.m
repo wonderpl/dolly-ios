@@ -19,6 +19,7 @@
 
 @synthesize hasChangedSubscribeValue;
 @synthesize totalVideosValue;
+@synthesize autoplayId;
 
 #pragma mark - Object factory
 

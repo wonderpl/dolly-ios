@@ -26,7 +26,7 @@
 #import "OWActivityViewController.h"
 #import "OWFacebookActivity.h"
 #import "SYNAppDelegate.h"
-
+#import "SYNMasterViewController.h"
 
 @implementation OWFacebookActivity
 
@@ -134,7 +134,7 @@
         
         SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         
-        [appDelegate.viewStackManager removePopoverView];
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
     }
     
     //    else
@@ -187,7 +187,7 @@
                                    completion: ^{
                                        SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
                                        
-                                       [appDelegate.viewStackManager removePopoverView];
+                                       [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
                                    }];
     }
 }

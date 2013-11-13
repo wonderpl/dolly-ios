@@ -12,7 +12,6 @@
 #import "ExternalAccount.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
@@ -42,9 +41,9 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
 @property (nonatomic, strong) IBOutlet UIButton *confirmButtom;
+
 @property (nonatomic, strong) IBOutlet UICollectionView *currentChannelsCollectionView;
-@property (nonatomic, strong) IBOutlet UILabel *autopostTitleLabel;
-@property (nonatomic, strong) IBOutlet UIView *autopostView;
+
 @property (nonatomic, strong) NSArray *channels;
 @property (nonatomic, strong) NSIndexPath *previouslySelectedPath;
 @property (nonatomic, weak) Channel *selectedChannel;
@@ -53,10 +52,6 @@
 @property (nonatomic, strong) SYNAddToChannelFlowLayout *normalFlowLayout;
 @property (nonatomic, strong) SYNAddToChannelExpandedFlowLayout* expandedFlowLayout;
 
-
-// autopost stuff
-@property (strong, nonatomic) IBOutlet UIButton *autopostNoButton;
-@property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (weak, nonatomic) UICollectionViewCell* selectedCell;
@@ -72,26 +67,20 @@
 {
     [super viewDidLoad];
     
-    // == TODO: Delete? == //
-    self.autopostTitleLabel.font = [UIFont lightCustomFontOfSize: self.autopostTitleLabel.font.pointSize];
-    self.autopostNoButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostNoButton.titleLabel.font.pointSize];
-    self.autopostYesButton.titleLabel.font = [UIFont regularCustomFontOfSize: self.autopostYesButton.titleLabel.font.pointSize];
- 
-    
-    // == Set the button to 'Add' Mode since we have not yet pressed the create new button
-    [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
-    self.confirmButtom.enabled = NO;
+   
     
     // == On ipad the panel appears as a popup in the middle, with rounded corners
     if(IS_IPAD)
         self.view.layer.cornerRadius = 8.0f;
     
+    // == Create the two layouts that will be switched
     self.expandedFlowLayout = [[SYNAddToChannelExpandedFlowLayout alloc] init];
     self.normalFlowLayout = [[SYNAddToChannelFlowLayout alloc] init];
     
+    // == Start by setting the normal layout
     self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
     
-    
+    // == Register Xibs
     [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
                           forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
     
@@ -103,134 +92,11 @@
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    // == TODO: Delete? == //
-    ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
-    
-    if (facebookAccount)
-    {
-        if ([[SYNFacebookManager sharedFBManager] hasActiveSessionWithPermissionType: FacebookPublishPermission] &&
-            (facebookAccount.flagsValue & ExternalAccountFlagAutopostAdd))
-        {
-            [self switchAutopostViewToYes: YES];
-        }
-        else
-        {
-            [self switchAutopostViewToYes: NO];
-        }
-        
-        self.autopostView.hidden = NO;
-    }
-    else
-    {
-        self.autopostView.hidden = YES;
-    }
     
     self.selectedChannel = nil;
     
-    //[self.currentChannelsCollectionView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
 }
-
-// Testing reasons only
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    NSLog(@"===> %@", [change objectForKey:NSKeyValueChangeNewKey]);
-}
-
-- (void) switchAutopostViewToYes: (BOOL) value
-{
-    self.autopostYesButton.selected = value;
-    self.autopostNoButton.selected = !value;
-}
-
-
-- (IBAction) autopostButtonPressed: (UIButton *) sender
-{
-    if (sender.selected) // button is pressed twice
-        return;
-    
-    ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
-    __weak SYNAddToChannelViewController *wself = self;
-    __weak SYNAppDelegate *wAppDelegate = appDelegate;
-    BOOL isYesButton = (sender == self.autopostYesButton);
-    
-    // steps
-    void (^ ErrorBlock)(id) = ^(id error) {
-        [wself switchAutopostViewToYes: !isYesButton];
-    };
-    
-    void (^ CompletionBlock)(id) = ^(id no_responce) {
-        if (isYesButton)
-        {
-            [wAppDelegate.currentUser
-             setFlag: ExternalAccountFlagAutopostAdd
-             toExternalAccount: kFacebook];
-        }
-        else
-        {
-            [wAppDelegate.currentUser
-             unsetFlag: ExternalAccountFlagAutopostAdd
-             toExternalAccount: kFacebook];
-        }
-        
-        [wAppDelegate saveContext: YES];
-        
-        [wself switchAutopostViewToYes: isYesButton];
-        
-        if (isYesButton)
-        {
-            // this is a replacement for the sharing granularity
-            
-            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                   action: @"videoShared"
-                                                                    label: @"fbe"
-                                                                    value: nil] build]];
-        }
-    };
-    
-    if (isYesButton)
-    {
-        // if the SDK has already the 'publish' options on, it will just call the return function()
-        [[SYNFacebookManager sharedFBManager] openSessionWithPermissionType: kFacebookPermissionTypePublish
-                                                                  onSuccess: ^{
-                                                                      
-                        // connect to external account so as to register the new access token with extended priviledges
-                       [wAppDelegate.oAuthNetworkEngine connectFacebookAccountForUserId: wAppDelegate.currentUser.uniqueId
-                                                                     andAccessTokenData: [[FBSession activeSession] accessTokenData]
-                                                                      completionHandler: ^(id no_responce) {
-                                                                          
-                                                    if (facebookAccount.flagsValue & ExternalAccountFlagAutopostAdd)
-                                                    {
-                                                        CompletionBlock(no_responce);
-                                                    }
-                                                    else
-                                                    {
-                                                                               // set the flag on the server...
-                                                      [wAppDelegate.oAuthNetworkEngine setFlag: @"facebook_autopost_add"
-                                                                                     withValue: isYesButton
-                                                                                      forUseId: appDelegate.currentUser.uniqueId
-                                                                             completionHandler: CompletionBlock
-                                                                                  errorHandler: ErrorBlock];
-                                                    }
-                                                                          
-                                                } errorHandler: ErrorBlock];
-                        }
-         
-         
-                                    onFailure: ErrorBlock];
-    }
-    else
-    {
-        [wAppDelegate.oAuthNetworkEngine setFlag: @"facebook_autopost_add"
-                                       withValue: isYesButton // should be no
-                                        forUseId: appDelegate.currentUser.uniqueId
-                               completionHandler: CompletionBlock
-                                    errorHandler: ErrorBlock];
-    }
-}
-
 
 - (void) viewWillAppear: (BOOL) animated
 {
@@ -463,6 +329,21 @@
 
 - (IBAction) confirmButtonPressed: (id) sender
 {
+    
+    if(self.createNewChannelCell.isEditing)
+    {
+        Channel* creatingChannelFromQ = appDelegate.videoQueue.currentlyCreatingChannel;
+        creatingChannelFromQ.title = self.createNewChannelCell.nameInputTextField.text;
+        creatingChannelFromQ.channelDescription = self.createNewChannelCell.descriptionTextView.text;
+        
+        [appDelegate.masterViewController.showingViewController viewChannelDetails:creatingChannelFromQ];
+        
+        
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+        return;
+        
+    }
+    
     if (!self.selectedChannel)
     {
         return;
@@ -478,6 +359,9 @@
     [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
 
+
+
+#pragma mark - Set Selected Channel
 
 -(void)setSelectedChannel:(Channel *)selectedChannel
 {

@@ -11,7 +11,6 @@
 #import "ChannelCover.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
 #import "SYNChannelThumbnailCell.h"
@@ -877,16 +876,16 @@
     return cell;
 }
 
-- (void) collectionView: (UICollectionView *) collectionView
-didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     Channel *channel;
     
     if (collectionView == self.channelThumbnailCollectionView)
     {
+        // The first cell is a 'create_new' cell on a user profile
         if (self.isUserProfile && indexPath.row == 0)
         {
-			[self createAndDisplayNewChannel];
+			[self viewChannelDetails:appDelegate.videoQueue.currentlyCreatingChannel];
 			
             return;
         }
@@ -900,7 +899,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         channel = self.channelOwner.subscriptions[indexPath.row];
     }
 	
-    [self viewChannelDetails:channel withAutoplayId:nil];
+    [self viewChannelDetails:channel];
 }
 
 
@@ -1445,7 +1444,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     [self viewProfileDetails:channel.channelOwner];
 }
 
-//Channels are the cell in the collection view
+// Channels are the cell in the collection view
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
     SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
@@ -1473,7 +1472,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         
         [self.navigationController pushViewController:channelVC animated:YES];
         
-//        [self viewChannelDetails:channel withAutoplayId:nil];
+        
     }
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {

@@ -46,7 +46,6 @@
 @property (nonatomic) BOOL hasAttemptedToLoadData;
 @property (nonatomic) BOOL keyboardIsOnScreen;
 @property (nonatomic) BOOL typingMode;
-@property (nonatomic, assign) CGRect originalFrame;
 @property (nonatomic, readonly) NSArray *searchedFriends;
 @property (nonatomic, strong) Friend *friendToAddEmail;
 @property (nonatomic, strong) Friend* friendHeldInQueue;
@@ -151,8 +150,6 @@
         self.searchResultsTableView.contentInset = ei;
     }
     
-    self.originalFrame = CGRectZero;
-    
     // Basic recognition
     self.loader.hidden = YES;
 
@@ -230,15 +227,6 @@
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
-
-
-- (void) viewWillDisappear: (BOOL) animated
-{
-    [super viewWillDisappear: animated];
-    
-    self.originalFrame = self.view.frame;
-}
-
 
 // Recursively, enable or disable controls contained in a view
 - (void) controlsVisibleInView: (UIView *) view

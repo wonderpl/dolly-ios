@@ -31,11 +31,11 @@
 #endif
 
 #if TARGET_OS_IPHONE
-@import Foundation;
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #elif TARGET_OS_MAC
-@import Cocoa;
-@import AppKit;
+#import <Cocoa/Cocoa.h>
+#import <AppKit/AppKit.h>
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
 #define DO_GCD_RETAIN_RELEASE 0
 #else

@@ -141,12 +141,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) videoQueueCleared
-{
-    // this will remove the '+' from the videos that where selected
-    [self.feedCollectionView reloadData];
-}
-
 
 #pragma mark - Container Scrol Delegates
 
@@ -611,7 +605,7 @@ typedef void(^FeedDataErrorBlock)(void);
     UICollectionReusableView *supplementaryView = nil;
     
     // Work out the day
-    FeedItem* heuristicFeedItem = [self feedItemAtIndexPath:indexPath];
+    
     
     // In the 'name' attribut of the sectionInfo we have actually the keypath data (i.e in this case Date without time)
     
@@ -619,6 +613,7 @@ typedef void(^FeedDataErrorBlock)(void);
 #ifdef SHOW_DATE_HEADERS
     if (kind == UICollectionElementKindSectionHeader)
     {
+        FeedItem* heuristicFeedItem = [self feedItemAtIndexPath:indexPath];
         NSDate* date = heuristicFeedItem.dateAdded;
         
         SYNHomeSectionHeaderView *headerSupplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
@@ -829,7 +824,7 @@ typedef void(^FeedDataErrorBlock)(void);
         }
     }
     
-	[self viewChannelDetails:channel withAutoplayId:nil];
+	[self viewChannelDetails:channel];
 }
 
 

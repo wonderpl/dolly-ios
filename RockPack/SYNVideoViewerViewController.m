@@ -16,7 +16,6 @@
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "NSObject+Blocks.h"
 #import "SYNAbstractViewController.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
 #import "SYNImplicitSharingController.h"
@@ -968,7 +967,7 @@
     // Get the video instance for the currently selected video
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-	[self viewChannelDetails:videoInstance.channel withAutoplayId:nil];
+	[self viewChannelDetails:videoInstance.channel];
 }
 
 

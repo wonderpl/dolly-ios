@@ -25,7 +25,7 @@
 
 #import "MKNetworkKit.h"
 
-@import ImageIO;
+#import <ImageIO/ImageIO.h>
 
 #ifdef __OBJC_GC__
 #error MKNetworkKit does not support Objective-C Garbage Collection
@@ -412,6 +412,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   MKNetworkOperation *theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
   
   theCopy.postDataEncoding = _postDataEncoding;
+  [theCopy setPostDataEncodingHandler:[self.postDataEncodingHandler copy]];
   [theCopy setStringEncoding:self.stringEncoding];
   [theCopy setUniqueId:[self.uniqueId copy]];
   
@@ -438,6 +439,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   [theCopy setDownloadStreams:[self.downloadStreams copy]];
   [theCopy setCachedResponse:[self.cachedResponse copy]];
   [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
+  [theCopy setCacheHeaders: [self.cacheHeaders copy]];
   [theCopy setStartPosition:self.startPosition];
   [theCopy setCredentialPersistence:self.credentialPersistence];
   
@@ -450,6 +452,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   MKNetworkOperation *theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
   
   theCopy.postDataEncoding = _postDataEncoding;
+  [theCopy setPostDataEncodingHandler:[self.postDataEncodingHandler mutableCopy]];
   [theCopy setStringEncoding:self.stringEncoding];
   [theCopy setUniqueId:[self.uniqueId copy]];
   
@@ -476,6 +479,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   [theCopy setDownloadStreams:[self.downloadStreams mutableCopy]];
   [theCopy setCachedResponse:[self.cachedResponse mutableCopy]];
   [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
+  [theCopy setCacheHeaders: [self.cacheHeaders mutableCopy]];
   [theCopy setStartPosition:self.startPosition];
   [theCopy setCredentialPersistence:self.credentialPersistence];
   
@@ -494,6 +498,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     [theCopy setStartPosition:0];
 
     theCopy.postDataEncoding = _postDataEncoding;
+    [theCopy setPostDataEncodingHandler:[self.postDataEncodingHandler copy]];
     [theCopy setStringEncoding:self.stringEncoding];
     [theCopy setUniqueId:[self.uniqueId copy]];
     [theCopy setRequest:[self.request copy]];
@@ -514,11 +519,8 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     [theCopy setDownloadStreams:[self.downloadStreams mutableCopy]];
     [theCopy setCachedResponse:[self.cachedResponse mutableCopy]];
     [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
+    [theCopy setCacheHeaders: [self.cacheHeaders mutableCopy]];
     [theCopy setCredentialPersistence:self.credentialPersistence];
-    
-    // We need to not forget these
-    theCopy.postDataEncodingHandler = [self.postDataEncodingHandler copy];
-    theCopy.cacheHeaders = [self.cacheHeaders mutableCopy];
     
     return theCopy;
 }

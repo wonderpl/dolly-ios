@@ -11,7 +11,6 @@
 #import "SYNAbstractVideoPlaybackViewController+Private.h"
 #import "SYNDeviceManager.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNOpaqueView.h"
 #import "SYNYouTubeVideoPlaybackViewController.h"
 #import <QuartzCore/CoreAnimation.h>
 @import CoreData;
