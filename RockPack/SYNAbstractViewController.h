@@ -69,12 +69,11 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (void) reloadCollectionViews;
 
-- (BOOL) collectionView: (UICollectionView *) cv didSelectItemAtIndexPathAbstract: (NSIndexPath *) indexPath;
 
 - (void) displayVideoViewerWithVideoInstanceArray: (NSArray *) videoInstanceArray
                                  andSelectedIndex: (int) selectedIndex
                                            center: (CGPoint) center;
-- (void) refresh;
+
 
 - (id) initWithViewId: (NSString *) vid;
 
@@ -103,7 +102,7 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) removePopupMessage;
 
 - (void)viewProfileDetails:(ChannelOwner *)channelOwner;
-- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId;
+- (void)viewChannelDetails:(Channel *)channel;
 
 
 // Purchase
@@ -113,9 +112,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 - (CGSize) footerSize;
 
-
-
-- (void) createAndDisplayNewChannel;
 
 - (EntityType) associatedEntity;
 

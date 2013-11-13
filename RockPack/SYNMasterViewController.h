@@ -45,7 +45,7 @@ typedef enum NotificationMessageType : NSInteger {
 @property (nonatomic, readonly) NSArray* tabs;
 
 
-@property (nonatomic, weak, readonly) UINavigationController* showingViewController;
+@property (nonatomic, readonly) SYNAbstractViewController* showingViewController;
 
 - (id) initWithContainerViewController: (UIViewController*) root;
 
@@ -58,11 +58,12 @@ typedef enum NotificationMessageType : NSInteger {
 - (void) removeVideoOverlayController;
 
 // Overlay
--(void)addExistingCollectionsOverlayController;
+-(void) addExistingCollectionsOverlayController;
 
 
 -(void) addOverlayController: (UIViewController*) abstractViewController animated:(BOOL)animated;
 
 
--(void)removeOverlayControllerAnimated:(BOOL)animated;
+-(void) removeOverlayControllerAnimated:(BOOL)animated;
+
 @end
