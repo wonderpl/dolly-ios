@@ -1467,8 +1467,16 @@
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
 
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
+        SYNChannelDetailsViewController *channelVC;
+        if (modeType == MyOwnProfile) {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
 
+        }
+
+        if (modeType == OtherUsersProfile) {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+
+        }
         
         [self.navigationController pushViewController:channelVC animated:YES];
         
@@ -1486,8 +1494,16 @@
         self.navigationController.navigationBarHidden = NO;
 
         
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
+        SYNChannelDetailsViewController *channelVC;
+        if (modeType == MyOwnProfile) {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
+            
+        }
         
+        if (modeType == OtherUsersProfile) {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+            
+        }
         
         [self.navigationController pushViewController:channelVC animated:YES];
     }
