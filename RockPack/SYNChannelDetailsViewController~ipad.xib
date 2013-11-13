@@ -20,7 +20,7 @@
                 <outlet property="videoThumbnailCollectionView" destination="cn2-e5-XhO" id="bW1-up-cNq"/>
                 <outlet property="view" destination="1" id="FTm-ye-zz3"/>
                 <outlet property="viewEditMode" destination="pRb-tg-CqT" id="ahZ-CD-R5N"/>
-                <outlet property="viewIPadContainer" destination="TjS-Dr-jUj" id="R2m-Iv-7rH"/>
+                <outlet property="viewProfileContainer" destination="TjS-Dr-jUj" id="lO2-v8-rQe"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

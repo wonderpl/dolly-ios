@@ -86,8 +86,7 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *btnShowFollowers;
 @property (strong, nonatomic) IBOutlet UIButton *btnShowVideos;
 
-@property (strong, nonatomic) IBOutlet UIView *viewIPhoneContainer;
-@property (strong, nonatomic) IBOutlet UIView *viewIPadContainer;
+@property (strong, nonatomic) IBOutlet UIView *viewProfileContainer;
 
 @property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPhone;
 
@@ -97,8 +96,11 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionLayoutIPad;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldDescriptionEdit;
+@property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 @property (strong, nonatomic) IBOutlet UIView *borderAboveCollection;
+@property (strong, nonatomic) IBOutlet UITextView *txtViewDescription;
+@property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
 @property (strong, nonatomic) UICollectionViewFlowLayout *videoEditLayoutIPad;
 @end
 
@@ -122,7 +124,6 @@ SYNChannelCoverImageSelectorDelegate>
     return self;
 }
 
-
 - (void) dealloc
 {
     
@@ -142,6 +143,13 @@ SYNChannelCoverImageSelectorDelegate>
         [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
     
+    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
+    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
+    
+     [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
+     [[self.txtViewDescription layer] setBorderWidth:1.0];
+     [[self.txtViewDescription layer] setCornerRadius:0];
+
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
                         forCellWithReuseIdentifier: CollectionVideoCellName];
@@ -197,6 +205,18 @@ SYNChannelCoverImageSelectorDelegate>
     [self setUpMode];
     
     
+    // == Avatar Image == //
+    
+        [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL]
+                               forState: UIControlStateNormal
+                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                                options: SDWebImageRetryFailed];
+        
+        NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
+    
+    
+    
+
     
 }
 
@@ -263,11 +283,36 @@ SYNChannelCoverImageSelectorDelegate>
     
     
     
-    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL]
-                           forState: UIControlStateNormal
-                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                            options: SDWebImageRetryFailed];
+//    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailSmallUrl]
+//                           forState: UIControlStateNormal
+//                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+//                            options: SDWebImageRetryFailed];
     
+    
+//    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+//    
+//    NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
+//    
+//    if (![self.channel.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
+//        
+//        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
+//        dispatch_async(downloadQueue, ^{
+//            
+//            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL ]];
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.btnAvatar.imageView.image = [UIImage imageWithData: imageData];
+//            });
+//        });
+//        
+//    }else{
+//        
+//        self.btnAvatar.imageView.image = placeholderImage;
+//    }
+    
+  
+
+
     
     self.navigationController.navigationBarHidden = NO;
     
@@ -431,16 +476,17 @@ SYNChannelCoverImageSelectorDelegate>
         
         CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset*2);
         
-        self.viewIPhoneContainer.transform = move;
+        self.viewProfileContainer.transform = move;
         self.borderAboveCollection.transform = move;
-        
+        self.viewEditMode.transform = move;
+
         
     }
     else
     {
         CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
         
-        self.viewIPadContainer.transform = move;
+        self.viewProfileContainer.transform = move;
         self.viewEditMode.transform = move;
         
         
@@ -1142,9 +1188,20 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (IBAction)editTapped:(id)sender
 {
-    self.viewIPadContainer.hidden = YES;
-    self.viewEditMode.hidden = NO;
+        self.viewProfileContainer.hidden = YES;
+        self.viewEditMode.alpha = 0.0f;
+        self.viewEditMode.hidden = NO;
+        
+        
+ 
+
+    [UIView animateWithDuration:0.4 animations:^{
+        self.viewEditMode.alpha = 1.0f;
+        
+    }];
     
+
+
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
     
     UIBarButtonItem *barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
@@ -1153,18 +1210,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     self.navigationItem.leftBarButtonItem = barBtnCancel;
     self.navigationItem.rightBarButtonItem = barBtnSave;
-    
-    //    [self.videoThumbnailCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-    
-    // self.videoLayoutIPad.itemSize = CGSizeMake(self.videoLayoutIPad.itemSize.width, self.videoLayoutIPad.itemSize.height);
-    
-    //    [self.videoThumbnailCollectionView performBatchUpdates:^{
-    //        [self.videoThumbnailCollectionView.collectionViewLayout invalidateLayout];
-    //
-    //    } completion:^(BOOL finished) {
-    //    }];
-    
     [self.videoThumbnailCollectionView reloadData];
+
 }
 
 -(void) cancel
@@ -1173,8 +1220,22 @@ referenceSizeForFooterInSection: (NSInteger) section
     NSLog(@"cancel");
     
     self.navigationItem.leftBarButtonItem = self.barBtnBack;
-    self.viewIPadContainer.hidden = NO;
+    self.viewProfileContainer.hidden = NO;
+    
+    self.viewProfileContainer.alpha = 0.0f;
+
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.viewProfileContainer.alpha = 1.0f;
+        
+    }];
+    
+
     self.viewEditMode.hidden = YES;
+    
+    
+    [self.txtFieldChannelName resignFirstResponder];
+    [self.txtFieldDescriptionEdit resignFirstResponder];
     
     [self.videoThumbnailCollectionView reloadData];
     
@@ -1244,6 +1305,40 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     [textField resignFirstResponder];
 }
+
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > 20) ? NO : YES;
+}
+
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
+ replacementText:(NSString *)text
+{
+    
+    
+
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+        // Return FALSE so that the final '\n' character doesn't get added
+        return NO;
+    }
+    
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    return (newLength > 120) ? NO : YES;
+}
+
 
 
 

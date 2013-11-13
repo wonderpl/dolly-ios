@@ -14,7 +14,7 @@
 @interface SYNChannelDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout, UIPopoverControllerDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
-SYNSocialActionsDelegate, UITextFieldDelegate>
+SYNSocialActionsDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, assign) kChannelDetailsMode mode;
 
