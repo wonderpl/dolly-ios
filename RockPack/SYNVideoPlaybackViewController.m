@@ -1438,7 +1438,6 @@ static UIWebView* vimeoideoWebViewInstance;
 - (void) updateShuttleBarProgress
 {
     float bufferLevel = [self videoLoadedFraction];
-//    NSLog (@"Buffer level %f", bufferLevel);
     
     // Update the progress bar under our slider
     self.bufferingProgressView.progress = bufferLevel;

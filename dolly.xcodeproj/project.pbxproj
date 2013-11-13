@@ -909,7 +909,6 @@
 		38A73D8817A0086500AD9E90 /* SYNFriendThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38A73D8617A0086500AD9E90 /* SYNFriendThumbnailCell~iphone.xib */; };
 		38BACE001732CCFB00406597 /* SYNLoginViewControllerIphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BACDFE1732CCFB00406597 /* SYNLoginViewControllerIphone.m */; };
 		38BACE011732CCFB00406597 /* SYNLoginViewControllerIphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BACDFF1732CCFB00406597 /* SYNLoginViewControllerIphone.xib */; };
-		38BACE031734151A00406597 /* SYNAddToChannelCreateNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE021734151A00406597 /* SYNAddToChannelCreateNewCell.xib */; };
 		38BACE33173415DF00406597 /* ButtonCancel@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE09173415DE00406597 /* ButtonCancel@2x~iphone.png */; };
 		38BACE34173415DF00406597 /* ButtonCancelHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE0A173415DE00406597 /* ButtonCancelHighlighted@2x~iphone.png */; };
 		38BACE35173415DF00406597 /* ButtonCancelHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE0B173415DE00406597 /* ButtonCancelHighlighted~iphone.png */; };
@@ -1067,7 +1066,7 @@
 		BE285D9B1725726300D995AB /* SYNAddToChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE285D991725726300D995AB /* SYNAddToChannelViewController.m */; };
 		BE285D9C1725726300D995AB /* SYNAddToChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE285D9A1725726300D995AB /* SYNAddToChannelViewController.xib */; };
 		BE285D9F172584E200D995AB /* SYNAddToChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE285D9E172584E200D995AB /* SYNAddToChannelCreateNewCell.m */; };
-		BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE285DA0172584FF00D995AB /* SYNAddToChannelCreateNewCell~iphone.xib */; };
+		BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE285DA0172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib */; };
 		BE285DA617258A0A00D995AB /* ButtonConfirm.png in Resources */ = {isa = PBXBuildFile; fileRef = BE285DA217258A0A00D995AB /* ButtonConfirm.png */; };
 		BE285DA717258A0A00D995AB /* ButtonConfirm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE285DA317258A0A00D995AB /* ButtonConfirm@2x.png */; };
 		BE285DA817258A0A00D995AB /* ButtonConfirmHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE285DA417258A0A00D995AB /* ButtonConfirmHighlighted.png */; };
@@ -1145,6 +1144,7 @@
 		BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */; };
 		BE458AF617E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */; };
 		BE458AF717E71BE000776B0D /* InstructionBackgroundPacks~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */; };
+		BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */; };
 		BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */; };
 		BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D02E9178B138B008053DC /* SYNUserThumbnailCell.m */; };
 		BE7D02EC178B13C3008053DC /* SYNUserThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7D02EB178B13C3008053DC /* SYNUserThumbnailCell.xib */; };
@@ -2495,7 +2495,6 @@
 		38BACDFD1732CCFB00406597 /* SYNLoginViewControllerIphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginViewControllerIphone.h; sourceTree = "<group>"; };
 		38BACDFE1732CCFB00406597 /* SYNLoginViewControllerIphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginViewControllerIphone.m; sourceTree = "<group>"; };
 		38BACDFF1732CCFB00406597 /* SYNLoginViewControllerIphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNLoginViewControllerIphone.xib; sourceTree = "<group>"; };
-		38BACE021734151A00406597 /* SYNAddToChannelCreateNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAddToChannelCreateNewCell.xib; sourceTree = "<group>"; };
 		38BACE09173415DE00406597 /* ButtonCancel@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonCancel@2x~iphone.png"; sourceTree = "<group>"; };
 		38BACE0A173415DE00406597 /* ButtonCancelHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonCancelHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
 		38BACE0B173415DE00406597 /* ButtonCancelHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonCancelHighlighted~iphone.png"; sourceTree = "<group>"; };
@@ -2685,7 +2684,7 @@
 		BE285D9A1725726300D995AB /* SYNAddToChannelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAddToChannelViewController.xib; sourceTree = "<group>"; };
 		BE285D9D172584E200D995AB /* SYNAddToChannelCreateNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelCreateNewCell.h; sourceTree = "<group>"; };
 		BE285D9E172584E200D995AB /* SYNAddToChannelCreateNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelCreateNewCell.m; sourceTree = "<group>"; };
-		BE285DA0172584FF00D995AB /* SYNAddToChannelCreateNewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelCreateNewCell~iphone.xib"; sourceTree = "<group>"; };
+		BE285DA0172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAddToChannelCreateNewCell.xib; sourceTree = "<group>"; };
 		BE285DA217258A0A00D995AB /* ButtonConfirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonConfirm.png; path = Assets/Images/ButtonConfirm.png; sourceTree = "<group>"; };
 		BE285DA317258A0A00D995AB /* ButtonConfirm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonConfirm@2x.png"; path = "Assets/Images/ButtonConfirm@2x.png"; sourceTree = "<group>"; };
 		BE285DA417258A0A00D995AB /* ButtonConfirmHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonConfirmHighlighted.png; path = Assets/Images/ButtonConfirmHighlighted.png; sourceTree = "<group>"; };
@@ -2774,6 +2773,8 @@
 		BE458AED17E71BE000776B0D /* InstructionBackgroundPacks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x.png"; path = "Assets/Images/InstructionBackgroundPacks@2x.png"; sourceTree = "<group>"; };
 		BE458AEE17E71BE000776B0D /* InstructionBackgroundPacks@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks@2x~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks@2x~iphone.png"; sourceTree = "<group>"; };
 		BE458AEF17E71BE000776B0D /* InstructionBackgroundPacks~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InstructionBackgroundPacks~iphone.png"; path = "Assets/Images/InstructionBackgroundPacks~iphone.png"; sourceTree = "<group>"; };
+		BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelCell~iphone.xib"; sourceTree = "<group>"; };
+		BE53DD811832A37500D65793 /* SYNPopoverable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNPopoverable.h; sourceTree = "<group>"; };
 		BE53EE6017609587008360D2 /* Rockpack 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 4.xcdatamodel"; sourceTree = "<group>"; };
 		BE5D29E917577E2800C00486 /* SYNPopupMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopupMessageView.h; sourceTree = "<group>"; };
 		BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopupMessageView.m; sourceTree = "<group>"; };
@@ -5628,11 +5629,11 @@
 			children = (
 				BE285D9D172584E200D995AB /* SYNAddToChannelCreateNewCell.h */,
 				BE285D9E172584E200D995AB /* SYNAddToChannelCreateNewCell.m */,
-				BE285DA0172584FF00D995AB /* SYNAddToChannelCreateNewCell~iphone.xib */,
-				38BACE021734151A00406597 /* SYNAddToChannelCreateNewCell.xib */,
+				BE285DA0172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib */,
 				BE31EFAE182D4B00006E20E2 /* SYNAddToChannelCell.h */,
 				BE31EFAF182D4B00006E20E2 /* SYNAddToChannelCell.m */,
 				BE31EFB1182D4B13006E20E2 /* SYNAddToChannelCell.xib */,
+				BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -6186,6 +6187,7 @@
 		BEB313BC182A822900FAF98A /* Add to Channels */ = {
 			isa = PBXGroup;
 			children = (
+				BE53DD811832A37500D65793 /* SYNPopoverable.h */,
 				BE31EFB71831455C006E20E2 /* Layouts */,
 				BE31EFAD182D4729006E20E2 /* Cells */,
 				BE285D981725726300D995AB /* SYNAddToChannelViewController.h */,
@@ -6679,7 +6681,7 @@
 				01BCD1DD172560FB00F459BF /* ButtonCoverHighlighted.png in Resources */,
 				01BCD1DE172560FB00F459BF /* ButtonCoverHighlighted@2x.png in Resources */,
 				BE285D9C1725726300D995AB /* SYNAddToChannelViewController.xib in Resources */,
-				BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */,
+				BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib in Resources */,
 				1F458B0617E1C4E6003C14AC /* AppIcon76x76.png in Resources */,
 				BE285DA617258A0A00D995AB /* ButtonConfirm.png in Resources */,
 				BE285DA717258A0A00D995AB /* ButtonConfirm@2x.png in Resources */,
@@ -7042,7 +7044,6 @@
 				38BACE011732CCFB00406597 /* SYNLoginViewControllerIphone.xib in Resources */,
 				1FC8FEA817340708000FF0B2 /* ShadowCategorySlide@2x~iphone.png in Resources */,
 				1FC8FEA917340708000FF0B2 /* ShadowCategorySlide~iphone.png in Resources */,
-				38BACE031734151A00406597 /* SYNAddToChannelCreateNewCell.xib in Resources */,
 				38BACE33173415DF00406597 /* ButtonCancel@2x~iphone.png in Resources */,
 				38BACE34173415DF00406597 /* ButtonCancelHighlighted@2x~iphone.png in Resources */,
 				38BACE35173415DF00406597 /* ButtonCancelHighlighted~iphone.png in Resources */,
@@ -7382,6 +7383,7 @@
 				1F4DAEE11781AA2500E0DB81 /* PlaceholderSidebarAvatar@2x.png in Resources */,
 				BE7D02EC178B13C3008053DC /* SYNUserThumbnailCell.xib in Resources */,
 				BE7D02F0178C0FEC008053DC /* SYNUserThumbnailCell~iphone.xib in Resources */,
+				BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */,
 				BE7D02FC178C72DB008053DC /* SYNModalSubscribersController.xib in Resources */,
 				1F4E7FC1181ACBAA00F59007 /* TabProfileHighlighted@2x~iphone.png in Resources */,
 				BE7D0302179D5624008053DC /* SYNFriendsViewController.xib in Resources */,
@@ -7910,6 +7912,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -7942,6 +7945,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -7967,7 +7971,6 @@
 			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
@@ -8028,7 +8031,6 @@
 			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
@@ -8156,6 +8158,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -8181,7 +8184,6 @@
 			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;

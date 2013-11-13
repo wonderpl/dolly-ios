@@ -504,14 +504,9 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     }
     else // on rockpack, go to profile
     {
-        ChannelOwner* friendAsChannelOwner = (ChannelOwner*)self.currentlySelectedFriend;
-        
-        
-        
-        
-
-        [appDelegate.viewStackManager viewProfileDetails:friendAsChannelOwner];
-        
+        ChannelOwner* friendAsChannelOwner = self.currentlySelectedFriend;
+		
+        [self viewProfileDetails:friendAsChannelOwner];
     }
     
     [self.searchField resignFirstResponder];

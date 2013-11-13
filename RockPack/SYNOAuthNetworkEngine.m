@@ -1725,7 +1725,7 @@
                                                                                                    httpMethod: @"GET"
                                                                                                           ssl: YES];
     
-    NSLog(@"%@", networkOperation.url);
+   
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];

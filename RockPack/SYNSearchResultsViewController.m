@@ -170,8 +170,7 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     }
     SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
     
-    [appDelegate.viewStackManager viewProfileDetails: searchUserCell.channelOwner
-                            withNavigationController: self.navigationController];
+    [self viewProfileDetails:searchUserCell.channelOwner];
 }
 
 #pragma mark - Load Data

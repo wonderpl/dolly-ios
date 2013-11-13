@@ -57,7 +57,6 @@
     
     nameLabelFrame.size = correctSize;
     
-    // NSLog(@"height:%f, title:%@", correctSize.height, name);
     
     nameLabelFrame.size.height = correctSize.height;
     

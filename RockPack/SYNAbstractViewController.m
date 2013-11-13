@@ -239,12 +239,12 @@
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
 {
-    NSLog (@"Shouldn't be calling abstract function");
+    AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
 {
-    NSLog (@"Shouldn't be calling abstract function");
+    AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
 
@@ -303,7 +303,7 @@
     {
         VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
         
-        [appDelegate.viewStackManager viewChannelDetails:videoInstance.channel];
+		[self viewChannelDetails:videoInstance.channel withAutoplayId:nil];
     }
 }
 
@@ -323,7 +323,7 @@
     {
         VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
         
-        [appDelegate.viewStackManager viewProfileDetails: videoInstance.channel.channelOwner];
+        [self viewProfileDetails: videoInstance.channel.channelOwner];
     }
 }
 
@@ -1054,6 +1054,55 @@
      [wself.emptyGenreMessageView removeFromSuperview];
      }];
      */
+}
+
+
+- (void)viewProfileDetails:(ChannelOwner *)channelOwner {
+	if (!channelOwner) {
+		return;
+	}
+
+	SYNProfileRootViewController *profileVC = (SYNProfileRootViewController *)[self viewControllerOfClass:[SYNProfileRootViewController class]];
+	if (profileVC) {
+		profileVC.channelOwner = channelOwner;
+		[self.navigationController popToViewController:profileVC animated:YES];
+	} else {
+		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId];
+		profileVC.channelOwner = channelOwner;
+		[self.navigationController pushViewController:profileVC animated:YES];
+	}
+}
+
+- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId {
+	if (!channel) {
+		return;
+	}
+
+	SYNCollectionDetailsViewController *channelVC =
+	(SYNCollectionDetailsViewController *) [self viewControllerOfClass:[SYNCollectionDetailsViewController class]];
+
+	if (channelVC) {
+		channelVC.channel = channel;
+		channelVC.autoplayVideoId = autoplayId;
+		[self.navigationController popToViewController:channelVC animated:YES];
+	} else {
+		channelVC = [[SYNCollectionDetailsViewController alloc] initWithChannel:channel
+																	  usingMode:kChannelDetailsModeDisplay];
+		channelVC.autoplayVideoId = autoplayId;
+		[self.navigationController pushViewController:channelVC animated:YES];
+	}
+}
+
+- (UIViewController *)viewControllerOfClass:(Class)class {
+	static const NSInteger StackLimit = 6;
+	if (self.navigationController.viewControllers.count > StackLimit) {
+		for (UIViewController *viewController in self.navigationController.viewControllers) {
+			if ([viewController isMemberOfClass:class]) {
+				return viewController;
+			}
+		}
+	}
+	return nil;
 }
 
 @end

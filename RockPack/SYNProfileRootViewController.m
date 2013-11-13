@@ -43,9 +43,7 @@
 //delete function in channeldetails deletechannel
 
 
-@interface SYNProfileRootViewController () <
-UIGestureRecognizerDelegate,
-SYNImagePickerControllerDelegate>{
+@interface SYNProfileRootViewController () <UIGestureRecognizerDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate> {
     ProfileType modeType;
     
 }
@@ -402,13 +400,6 @@ SYNImagePickerControllerDelegate>{
     
     self.deletionModeActive = NO;
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-    
-}
-
-
-- (void) viewWillDisappear: (BOOL) animated
-{
-    [super viewWillDisappear: animated];
     
 }
 
@@ -789,6 +780,7 @@ SYNImagePickerControllerDelegate>{
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
+    
     return 1;
 }
 
@@ -799,58 +791,49 @@ SYNImagePickerControllerDelegate>{
     
     UICollectionViewCell *cell = nil;
     
-    SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+    
     
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell" forIndexPath: indexPath];
+        SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+                                                                                             forIndexPath: indexPath];
         cell = createCell;
     }
-    
-    else if([collectionView isEqual:self.channelThumbnailCollectionView])
+    else
     {
-        Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell"
+                                                                                            forIndexPath: indexPath];
+        
+        Channel *channel;
+        
+        // == Add Special Attributes == //
         
         [channelThumbnailCell setChannel:channel];
         [channelThumbnailCell setBorder];
         if (self.modeType == MyOwnProfile) {
             [channelThumbnailCell setHiddenForFollowButton:YES];
         }
-        else
+        else // (collectionView == self.subscribersThumbnailCollectionView)
         {
-            if (channel.subscribedByUserValue) {
-                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-            }
-            else
+            if (indexPath.row < self.arrDisplayFollowing.count)
             {
-                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+                channel = _arrDisplayFollowing[indexPath.item];
+                
+                if (self.modeType == MyOwnProfile)
+                {
+                    [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
+                }
+                
             }
-        }
-        [channelThumbnailCell setBottomBarColor:[UIColor grayColor]];
-
-        [channelThumbnailCell.followerCountLabel setText:[NSString stringWithFormat: @"%@ %@",channel.subscribersCount, NSLocalizedString(@"SUBSCRIBERS", nil)]];
-        if (IS_IPHONE) {
-            [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"- %ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
-        }
-        else
-        {
-            [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
         }
         
-        [channelThumbnailCell setTitle: channel.title];
-        [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
-        cell = channelThumbnailCell;
-    }
-    else if ([collectionView isEqual:self.subscriptionThumbnailCollectionView])
-    {
-        if (indexPath.row < self.arrDisplayFollowing.count)
-        {
-            Channel *channel = _arrDisplayFollowing[indexPath.item];
 
-            if (self.modeType == MyOwnProfile) {
-                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-            }
-            else if(self.modeType == OtherUsersProfile)
+        // == Add Common Attributes == //
+        
+        if(self.modeType == OtherUsersProfile)
+
+        {
+            if (channel.subscribedByUserValue)
             {
                 if (channel.subscribedByUserValue) {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
@@ -873,20 +856,43 @@ SYNImagePickerControllerDelegate>{
             }
             else
             {
-                [channelThumbnailCell.videoCountLabel setText:[NSString stringWithFormat: @"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)]];
+                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
             }
             
             [channelThumbnailCell setTitle:channel.title];
             [channelThumbnailCell setViewControllerDelegate: (id<SYNChannelMidCellDelegate>) self];
             cell = channelThumbnailCell;
         }
-        else
+        
+        NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
+        [channelThumbnailCell.followerCountLabel setText:subscribersString];
+        
+        channelThumbnailCell.channel = channel;
+        
+        NSMutableString* videoCountString = [NSMutableString new];
+        if (IS_IPHONE)
         {
             [channelThumbnailCell reset];
             [channelThumbnailCell setTitle:@"aaaaaaa"];
 
             cell = channelThumbnailCell;
         }
+        
+        
+        [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)];
+        
+        
+        channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
+        channelThumbnailCell.viewControllerDelegate = self;
+        
+        cell = channelThumbnailCell;
+        
+    }
+    
+    // precaution
+    if(!cell)
+    {
+        AssertOrLog(@"No Cell Created");
     }
     
     return cell;
@@ -914,10 +920,8 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     {
         channel = self.channelOwner.subscriptions[indexPath.row];
     }
-    
-    //  [self.navigationController pushViewController:channel animated:nil];
-    [appDelegate.viewStackManager viewChannelDetails: channel];
-    
+	
+    [self viewChannelDetails:channel withAutoplayId:nil];
 }
 
 
@@ -1459,7 +1463,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
     
-    [appDelegate.viewStackManager viewProfileDetails: channel.channelOwner];
+    [self viewProfileDetails:channel.channelOwner];
 }
 
 //Channels are the cell in the collection view

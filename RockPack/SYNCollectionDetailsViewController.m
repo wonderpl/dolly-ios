@@ -1216,7 +1216,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         return;
     }
     
-    [appDelegate.viewStackManager viewProfileDetails: self.channel.channelOwner];
+    [self viewProfileDetails:self.channel.channelOwner];
 }
 
 

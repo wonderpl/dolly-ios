@@ -43,14 +43,8 @@
 {
     [super awakeFromNib];
     
-#ifdef ENABLE_ARC_MENU
-    
-    // Add long-press and tap recognizers (once only per cell)
-    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget: self
-                                                                   action: @selector(showMenu:)];
-    self.longPress.delegate = self;
-    //  [self addGestureRecognizer: self.longPress];
-#endif
+    self.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.followButton.titleLabel.font.pointSize];
+  
     
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
@@ -61,14 +55,11 @@
     // Touch for highlighting cells when the user touches them (like UIButton)
     self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self action: @selector(showGlossLowlight:)];
     self.touch.delegate = self;
-    // [self addGestureRecognizer: self.touch];
     self.specialSelected = NO;
     
-    // Required to make cells look good when wobbling (delete)
-    self.layer.shouldRasterize = YES;
-    self.layer.rasterizationScale = UIScreen.mainScreen.scale;
     
-    if (IS_IPHONE)
+    
+    if (IS_RETINA)
     {
         [self.videoTitleLabel setFont:[UIFont lightCustomFontOfSize:19]];
         [self.followerCountLabel setFont:[UIFont lightCustomFontOfSize:10]];
@@ -108,83 +99,38 @@
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
 {
+    if(_viewControllerDelegate)
+    {
+        [self.followButton removeTarget:_viewControllerDelegate
+                                 action:@selector(followButtonTapped:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     _viewControllerDelegate = viewControllerDelegate;
     
-}
-
-
-
-#pragma mark - Cell deletion support
-#pragma mark Attributes
-
-- (void) applyLayoutAttributes: (SYNDeletionWobbleLayoutAttributes *) layoutAttributes
-{
-    /*
-     if (layoutAttributes.isDeleteButtonHidden || self.deleteButton.enabled == FALSE)
-     {
-     self.deleteButton.layer.opacity = 0.0;
-     [self stopWobbling];
-     }
-     else
-     {
-     self.deleteButton.layer.opacity = 1.0;
-     [self startWobbling];
-     }*/
-}
-
-
-#pragma mark Wobble animations
-
-- (void) startWobbling
-{
-    // Rotation maths
-    CABasicAnimation *quiverAnim = [CABasicAnimation animationWithKeyPath: @"transform.rotation"];
-    float startAngle = M_PI/180.0;
-    float stopAngle = -startAngle;
+    if(!_viewControllerDelegate)
+        return;
     
-    // Setup animation
-    quiverAnim.fromValue = @(startAngle);
-    quiverAnim.toValue = @(stopAngle);
-    quiverAnim.autoreverses = YES;
-    quiverAnim.duration = 0.2;
-    quiverAnim.repeatCount = HUGE_VALF;
+    [self.followButton addTarget:_viewControllerDelegate
+                          action:@selector(followButtonTapped:)
+                forControlEvents:UIControlEventTouchUpInside];
     
-    // Add a random time offset to stop all cells wobbling in harmony
-    float timeOffset = (float)(arc4random() % 100)/100 - 0.50;
-    quiverAnim.timeOffset = timeOffset;
-    CALayer *layer = self.layer;
-    
-    // Add the animation to our layer
-    [layer addAnimation: quiverAnim
-                 forKey: @"wobbling"];
 }
 
 
-- (void) stopWobbling
-{
-    // Remove the animation from the layer
-    CALayer *layer = self.layer;
-    [layer removeAnimationForKey: @"wobbling"];
-}
+
 
 - (void) prepareForReuse
 {
     
-    self.videoCountLabel = nil;
-    self.videoTitleLabel =nil;
-    self.followerCountLabel =nil;
-    self.bottomBarView =nil;
-    self.followButton =nil;
-    self.descriptionLabel =nil;
-    self.containerView =nil;
-    self.descriptionView =nil;
-    self.tap = nil;
-    //[self stopWobbling];
+    self.videoCountLabel.text = @"";
+    self.videoTitleLabel.text = @"";
+    self.followerCountLabel.text = @"";
+    self.descriptionLabel.text = @"";
+    [self.boarderView.layer setBorderWidth:0.0f];
+    self.bottomBarView.backgroundColor = [UIColor clearColor];
+    self.followButton.hidden = YES;
     
-    
-    
-    // [self.imageView.layer removeAllAnimations];
-    //[self.imageView setImageWithURL: nil];
 }
 
 #pragma mark - Gesture regognizer support
@@ -201,10 +147,7 @@
     return YES; // handle the touch
 }
 
--(void) setBottomBarColor:(UIColor*) color
-{
-    [self.bottomBarView setBackgroundColor:color];
-}
+
 
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
 {
@@ -213,20 +156,33 @@
     
 }
 
+- (void) setChannel:(Channel *)channel
+{
+    _channel = channel;
+    if(!_channel)
+    {
+        self.videoTitleLabel.text = @"";
+        return;
+    }
+    
+    // TODO: figure out which color to put according to category color
+    self.bottomBarView.backgroundColor = [UIColor grayColor];
+    
+    self.videoTitleLabel.text = _channel.title;
+    
+}
+
 -(void) setHiddenForFollowButton: (BOOL) hide
 {
     self.followButton.hidden = hide;
 }
 
--(void) setTitle :(NSString*) titleString
-{
-    [self.videoTitleLabel setText:titleString];
-}
+
 
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel
 {
     [self.followButton setTitle:strFollowLabel forState:UIControlStateNormal];
-    [self.followButton.titleLabel setFont:[UIFont lightCustomFontOfSize:10]];
+    
 }
 
 - (IBAction)showDescriptionSwipe:(UISwipeGestureRecognizer *)recognizer

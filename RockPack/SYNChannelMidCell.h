@@ -37,8 +37,6 @@
 
 @property (nonatomic, weak) id<SYNChannelMidCellDelegate> viewControllerDelegate;
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel;
--(void) setBottomBarColor:(UIColor*) color;
--(void) setTitle :(NSString*) titleString;
 -(void) setHiddenForFollowButton: (BOOL) hide;
 -(void) moveToCentre;
 -(void) showDescription;
