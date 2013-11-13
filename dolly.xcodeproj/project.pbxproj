@@ -181,7 +181,6 @@
 		01811A5817576D2A00AFA926 /* ButtonShuttleBarMaximise.png in Resources */ = {isa = PBXBuildFile; fileRef = 01811A5417576D2A00AFA926 /* ButtonShuttleBarMaximise.png */; };
 		01811A5917576D2A00AFA926 /* ButtonShuttleBarMinimise.png in Resources */ = {isa = PBXBuildFile; fileRef = 01811A5517576D2A00AFA926 /* ButtonShuttleBarMinimise.png */; };
 		01811A5A17576D2A00AFA926 /* ButtonShuttleBarMinimise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01811A5617576D2A00AFA926 /* ButtonShuttleBarMinimise@2x.png */; };
-		0188E87E17EB4865000B9FD8 /* SYNOpaqueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0188E87D17EB4865000B9FD8 /* SYNOpaqueView.m */; };
 		018919FC1672253E00AB07BB /* SYNHomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 018919FB1672253E00AB07BB /* SYNHomeSectionHeaderView.m */; };
 		01891A001672255F00AB07BB /* SYNHomeSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018919FF1672255F00AB07BB /* SYNHomeSectionHeaderView.xib */; };
 		01891A3D16725A3400AB07BB /* PanelDay.png in Resources */ = {isa = PBXBuildFile; fileRef = 01891A3916725A3400AB07BB /* PanelDay.png */; };
@@ -1101,7 +1100,6 @@
 		BE2D2155171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2151171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png */; };
 		BE2D2158171D8A4500B4B755 /* AvatarProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2156171D8A4500B4B755 /* AvatarProfile.png */; };
 		BE2D2159171D8A4500B4B755 /* AvatarProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2157171D8A4500B4B755 /* AvatarProfile@2x.png */; };
-		BE2D762D1785BBB100546BFD /* SYNViewStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2D762C1785BBB100546BFD /* SYNViewStackManager.m */; };
 		BE31EFAA182C0579006E20E2 /* BackgroundMoodView.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */; };
 		BE31EFAB182C0579006E20E2 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */; };
 		BE31EFB0182D4B00006E20E2 /* SYNAddToChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFAF182D4B00006E20E2 /* SYNAddToChannelCell.m */; };
@@ -1695,8 +1693,6 @@
 		01811A5417576D2A00AFA926 /* ButtonShuttleBarMaximise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonShuttleBarMaximise.png; path = Assets/Images/ButtonShuttleBarMaximise.png; sourceTree = "<group>"; };
 		01811A5517576D2A00AFA926 /* ButtonShuttleBarMinimise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonShuttleBarMinimise.png; path = Assets/Images/ButtonShuttleBarMinimise.png; sourceTree = "<group>"; };
 		01811A5617576D2A00AFA926 /* ButtonShuttleBarMinimise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonShuttleBarMinimise@2x.png"; path = "Assets/Images/ButtonShuttleBarMinimise@2x.png"; sourceTree = "<group>"; };
-		0188E87C17EB4865000B9FD8 /* SYNOpaqueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOpaqueView.h; sourceTree = "<group>"; };
-		0188E87D17EB4865000B9FD8 /* SYNOpaqueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOpaqueView.m; sourceTree = "<group>"; };
 		018919FA1672253E00AB07BB /* SYNHomeSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNHomeSectionHeaderView.h; sourceTree = "<group>"; };
 		018919FB1672253E00AB07BB /* SYNHomeSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNHomeSectionHeaderView.m; sourceTree = "<group>"; };
 		018919FF1672255F00AB07BB /* SYNHomeSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNHomeSectionHeaderView.xib; sourceTree = "<group>"; };
@@ -2717,8 +2713,6 @@
 		BE2D2151171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCancelHighlighted@2x.png"; path = "Assets/Images/ButtonCancelHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE2D2156171D8A4500B4B755 /* AvatarProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AvatarProfile.png; path = Assets/Images/AvatarProfile.png; sourceTree = "<group>"; };
 		BE2D2157171D8A4500B4B755 /* AvatarProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AvatarProfile@2x.png"; path = "Assets/Images/AvatarProfile@2x.png"; sourceTree = "<group>"; };
-		BE2D762B1785BBB100546BFD /* SYNViewStackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNViewStackManager.h; sourceTree = "<group>"; };
-		BE2D762C1785BBB100546BFD /* SYNViewStackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNViewStackManager.m; sourceTree = "<group>"; };
 		BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundMoodView.png; path = Assets/Images/BackgroundMoodView.png; sourceTree = "<group>"; };
 		BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundMoodView@2x.png"; path = "Assets/Images/BackgroundMoodView@2x.png"; sourceTree = "<group>"; };
 		BE31EFAE182D4B00006E20E2 /* SYNAddToChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelCell.h; sourceTree = "<group>"; };
@@ -3825,8 +3819,6 @@
 				012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */,
 				01BE7B70173413CF00EFE0EF /* SSTextView.h */,
 				01BE7B71173413CF00EFE0EF /* SSTextView.m */,
-				0188E87C17EB4865000B9FD8 /* SYNOpaqueView.h */,
-				0188E87D17EB4865000B9FD8 /* SYNOpaqueView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -3853,7 +3845,6 @@
 				BEF9E5AD16DCBAA300286113 /* Sound */,
 				019824ED1629CC6600216900 /* TestFlight */,
 				BEF9E5B416DD23F000286113 /* Video Queue */,
-				BE2D762A1785BB9C00546BFD /* View Stack Manager */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -5585,15 +5576,6 @@
 				BEBFD0AB177A03D200C90544 /* PanelPrivateAlert@2x.png */,
 			);
 			name = "Error Messages";
-			sourceTree = "<group>";
-		};
-		BE2D762A1785BB9C00546BFD /* View Stack Manager */ = {
-			isa = PBXGroup;
-			children = (
-				BE2D762B1785BBB100546BFD /* SYNViewStackManager.h */,
-				BE2D762C1785BBB100546BFD /* SYNViewStackManager.m */,
-			);
-			name = "View Stack Manager";
 			sourceTree = "<group>";
 		};
 		BE31EFAC182CF969006E20E2 /* Layout */ = {
@@ -7707,7 +7689,6 @@
 				01AFF99A17EC91540002131A /* UIView+LLDBQuickLook.m in Sources */,
 				BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */,
 				BE21EEA616FB39030067223B /* SYNAccountSettingsOnOffField.m in Sources */,
-				0188E87E17EB4865000B9FD8 /* SYNOpaqueView.m in Sources */,
 				0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */,
 				BE21EEA916FB422A0067223B /* SYNAccountSettingsPushNotifications.m in Sources */,
 				BE21EEAC16FB4C060067223B /* SYNAccountSettingsShareSettings.m in Sources */,
@@ -7804,7 +7785,6 @@
 				BEBFD0921779F0F800C90544 /* SYNCaution.m in Sources */,
 				BEBFD0951779F25800C90544 /* SYNCautionMessageView.m in Sources */,
 				016191711782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m in Sources */,
-				BE2D762D1785BBB100546BFD /* SYNViewStackManager.m in Sources */,
 				BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */,
 				BE7D02F4178C1D3B008053DC /* SYNUsersViewController.m in Sources */,
 				BE7D02F7178C4354008053DC /* SYNSubscribersViewController.m in Sources */,

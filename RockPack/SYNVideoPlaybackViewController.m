@@ -14,16 +14,12 @@
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNOpaqueView.h"
 #import "SYNProgressView.h"
 #import "SYNVideoPlaybackViewController.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/CoreAnimation.h>
 @import CoreData;
 @import MediaPlayer;
-
-#define SHOW_SHUTTLE_DEBUG_COLOURS_
-#define SHOW_DEBUG_COLOURS_
 
 @interface SYNVideoPlaybackViewController () <UIWebViewDelegate>
 
