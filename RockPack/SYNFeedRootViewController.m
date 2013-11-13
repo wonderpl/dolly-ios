@@ -528,7 +528,6 @@ typedef void(^FeedDataErrorBlock)(void);
         
         channelOwner = channel.channelOwner;
         
-        
     }
     
     // common for both types

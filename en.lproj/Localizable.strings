@@ -29,6 +29,8 @@
 "SUBSCRIBERS" = "followers";
 "FOLLOW" = "follow";
 "UNFOLLOW" = "unfollow";
+"DELETECHANNEL" = "Delete Channel";
+"AREYOUSUREYOUWANTTODELETE" = "Are you sure you want to delete?";
 
 //Camera
 "channel_creation_screen_select_upload_photo_label" = "Select Source";

@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNChannelDetailsViewController">
             <connections>
                 <outlet property="btnAvatar" destination="NYK-20-9W1" id="axv-eA-iIQ"/>
+                <outlet property="btnDeleteChannel" destination="yla-tM-GQ1" id="Cdd-JD-aiM"/>
                 <outlet property="btnEditChannel" destination="6Uj-ma-a8W" id="LzA-gB-vz3"/>
                 <outlet property="btnFollowChannel" destination="dO0-W1-go2" id="1Hw-pJ-ehV"/>
                 <outlet property="btnShareChannel" destination="eEI-cj-XRs" id="27u-I8-ZNo"/>
@@ -15,7 +16,8 @@
                 <outlet property="lblChannelTitle" destination="KoP-pw-j1K" id="a53-gC-oX1"/>
                 <outlet property="lblDescription" destination="DEu-Rn-eGJ" id="OEB-Xb-Azp"/>
                 <outlet property="lblFullName" destination="qVh-3B-R6Q" id="Q68-lv-nA1"/>
-                <outlet property="txtFieldDescriptionEdit" destination="Kt8-Og-obE" id="mjS-N6-kYs"/>
+                <outlet property="txtFieldChannelName" destination="lUk-nV-j8P" id="8HA-WC-vqM"/>
+                <outlet property="txtViewDescription" destination="LHF-AA-xTN" id="vAV-aB-Aah"/>
                 <outlet property="videoCollectionLayoutIPad" destination="mQJ-GE-Ivs" id="PYD-nu-qwN"/>
                 <outlet property="videoThumbnailCollectionView" destination="cn2-e5-XhO" id="bW1-up-cNq"/>
                 <outlet property="view" destination="1" id="FTm-ye-zz3"/>
@@ -137,31 +139,42 @@
                     <rect key="frame" x="0.0" y="64" width="650" height="460"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Edit your description here" borderStyle="line" textAlignment="center" minimumFontSize="17" id="Kt8-Og-obE">
-                            <rect key="frame" x="150" y="216" width="350" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yla-tM-GQ1">
+                            <rect key="frame" x="188" y="326" width="274" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="bNJ-SY-2OE"/>
-                            </connections>
-                        </textField>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v9A-6z-Xs6">
-                            <rect key="frame" x="150" y="164" width="350" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Rz-Xq-xHC">
-                            <rect key="frame" x="150" y="267" width="350" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="Button">
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" title="delete">
                                 <color key="titleColor" red="1" green="0.13360003340000001" blue="0.23229262489999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" usesAttributedText="YES" id="LHF-AA-xTN">
+                            <rect key="frame" x="188" y="264" width="274" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Description test">
+                                    <attributes>
+                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="cv2-cZ-tto"/>
+                            </connections>
+                        </textView>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" id="lUk-nV-j8P">
+                            <rect key="frame" x="188" y="223" width="274" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="iGB-Z0-q4n"/>
+                            </connections>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

@@ -456,7 +456,9 @@ SYNChannelCoverImageSelectorDelegate>
 
 - (IBAction)shareControlPressed:(id)sender
 {
-    [self.delegate shareControlPressed: sender];
+    
+    
+    [super shareControlPressed: sender];
     
 }
 
@@ -773,6 +775,7 @@ SYNChannelCoverImageSelectorDelegate>
         
     }
     
+    videoThumbnailCell.delegate = self;
     
     return videoThumbnailCell;
 }
@@ -1198,7 +1201,12 @@ referenceSizeForFooterInSection: (NSInteger) section
     SYNProfileRootViewController *profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile];
     
     
+    NSLog(@"%@", self.channel);
+    
     profileVC.channelOwner = self.channel.channelOwner;
+    
+    
+    NSLog(@"%@", profileVC.channelOwner);
     
     [self.navigationController pushViewController:profileVC animated:YES];
     
@@ -1220,11 +1228,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     }];
     
     
-    
+
     [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
-    
-    
-    [self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
     
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
     self.navigationItem.leftBarButtonItem = self.barBtnCancel;
@@ -1285,6 +1290,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone animated:YES];
     
     [self.videoCollectionViewLayoutIPhone invalidateLayout];
+    
+    
     for (SYNCollectionVideoCell *videoThumbnailCell in [self.videoThumbnailCollectionView visibleCells])
     {
         [UIView animateWithDuration:0.2 animations:^{
@@ -1307,6 +1314,89 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     
 }
+
+- (IBAction)deleteTapped:(id)sender
+{
+
+    
+    NSString *message = [NSString stringWithFormat: NSLocalizedString(@"DELETECHANNEL", nil), self.channel.title];
+    NSString *title = [NSString stringWithFormat: NSLocalizedString(@"AREYOUSUREYOUWANTTODELETE", nil), self.channel.title];
+    
+    self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle: title
+                                                             message: message
+                                                            delegate: self
+                                                   cancelButtonTitle: NSLocalizedString(@"Cancel", nil)
+                                                   otherButtonTitles: NSLocalizedString(@"Delete", nil), nil];
+    [self.deleteChannelAlertView show];
+
+
+
+
+}
+
+
+- (void) alertView: (UIAlertView *) alertView
+willDismissWithButtonIndex: (NSInteger) buttonIndex
+{
+    if (alertView == self.deleteChannelAlertView)
+    {
+        if (buttonIndex == 1)
+        {
+            [self deleteChannel];
+        }
+    }
+    else
+    {
+        if (buttonIndex == 0)
+        {
+            // cancel, do nothing
+            DebugLog(@"Delete cancelled");
+        }
+        else
+        {
+          //  [self deleteVideoInstance];
+        }
+    }
+}
+
+
+- (void) deleteChannel
+{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsShow
+                                                        object: self
+                                                      userInfo: nil];
+    
+    // return to previous screen as if the back button tapped
+    
+    
+        [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
+                                                     channelId: self.channel.uniqueId
+                                             completionHandler: ^(id response) {
+                                                 
+                                                 [appDelegate.currentUser.channelsSet removeObject: self.channel];
+                                                 [self.channel.managedObjectContext deleteObject: self.channel];
+                                                 [self.originalChannel.managedObjectContext deleteObject:self.originalChannel];
+                                                 
+                                                 // bring back controls
+                                                 
+                                                 
+                                                 [appDelegate saveContext: YES];
+                                                 
+                                                 
+                                                 
+                                             } errorHandler: ^(id error) {
+                                                 
+                                                 DebugLog(@"Delete channel failed");
+                                                 
+                                             }];
+    
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    }
+
+
 
 - (IBAction) followersLabelPressed: (id) sender
 {
