@@ -9,6 +9,7 @@
 #import "SYNAddToChannelCreateNewCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
+#import "SYNAddToChannelViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -24,10 +25,10 @@
     self.descriptionTextView.alpha = 0.0f;
     
     self.createNewButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.createNewButton.layer.borderWidth = 0.5f;
+    self.createNewButton.layer.borderWidth = 1.0f;
     
     self.nameInputTextField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.nameInputTextField.layer.borderWidth = 0.5f;
+    self.nameInputTextField.layer.borderWidth = 1.0f;
     
     if(IS_IPAD)
     {
@@ -52,7 +53,7 @@
     }
     
     self.descriptionTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.descriptionTextView.layer.borderWidth = 0.5f;
+    self.descriptionTextView.layer.borderWidth = 1.0f;
     
     self.state = CreateNewChannelCellStateHidden;
     
@@ -68,10 +69,26 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if(self.state == CreateNewChannelCellStateFinilizing)
-        NSLog(@"");
+    if(self.state == CreateNewChannelCellStateFinilizing) // has been into the description text view first
+    {
+        if(self.delegate)
+            [self.delegate confirmButtonPressed:nil];
+    }
      else if(self.state == CreateNewChannelCellStateEditing)
         self.state = CreateNewChannelCellStateFinilizing;
+    
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    
+    
+    if ([text isEqualToString:@"\n"]) {
+        
+        [self.delegate confirmButtonPressed:nil];
+        return NO;
+    }  
     
     return YES;
 }
@@ -81,7 +98,7 @@
     self.descriptionTextView.text = @"";
 }
 
--(void)setDelegate:(id)delegate
+-(void)setDelegate:(SYNAddToChannelViewController*)delegate
 {
     if(_delegate)
     {
