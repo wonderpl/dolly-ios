@@ -57,19 +57,6 @@ UIPopoverControllerDelegate,
 
 SYNChannelCoverImageSelectorDelegate>
 
-@property (nonatomic, assign)  CGPoint originalContentOffset;
-@property (nonatomic, assign)  CGRect originalSubscribersLabelRect;
-@property (nonatomic, assign) BOOL hasAppeared;
-@property (nonatomic, assign) BOOL isIPhone;
-@property (nonatomic, assign, getter = isImageSelectorOpen) BOOL imageSelectorOpen;
-@property (nonatomic, strong) CIContext *context;
-@property (nonatomic, strong) CIFilter *filter;
-@property (nonatomic, strong) CIImage *backgroundCIImage;
-@property (nonatomic, strong) NSIndexPath *indexPathToDelete;
-@property (nonatomic, strong) NSString *selectedCategoryId;
-@property (nonatomic, strong) NSString *selectedCoverId;
-@property (nonatomic, strong) SYNCoverChooserController *coverChooserController;
-@property (nonatomic, strong) SYNImagePickerController *imagePicker;
 @property (nonatomic, strong) SYNModalSubscribersController *modalSubscriptionsContainer;
 @property (nonatomic, strong) SYNReportConcernTableViewController *reportConcernController;
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
@@ -79,25 +66,12 @@ SYNChannelCoverImageSelectorDelegate>
 @property (nonatomic, strong) UIView *coverChooserMasterView;
 @property (nonatomic, strong) UIView *noVideosMessageView;
 @property (nonatomic, weak) Channel *originalChannel;
-@property (nonatomic, weak) IBOutlet UIButton *cancelEditButton;
-@property (nonatomic, weak) IBOutlet UIButton *editButton;
-@property (nonatomic, weak) IBOutlet UILabel *byLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *shareActivityIndicator;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
 //iPhone specific
 
 @property (nonatomic, strong) NSString *selectedImageURL;
 @property (nonatomic, strong) SYNChannelCoverImageSelectorViewController *coverImageSelector;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIButton *cancelTextInputButton;
-@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *textBackgroundImageView;
-@property (weak, nonatomic) IBOutlet UIButton *subscribersButton;
-
-@property (nonatomic) BOOL editedVideos;
-
 
 @property (strong, nonatomic) IBOutlet SYNAvatarButton *btnAvatar;
 @property (strong, nonatomic) IBOutlet UILabel *lblFullName;
@@ -116,10 +90,13 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPhone;
 
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoLayoutIPad;
+@property (strong, nonatomic) IBOutlet UIView *viewEditMode;
 
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionLayoutIPad;
-
+@property (strong, nonatomic) IBOutlet UITextField *txtFieldDescriptionEdit;
+@property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
+@property (strong, nonatomic) UICollectionViewFlowLayout *videoEditLayoutIPad;
 @end
 
 
@@ -216,6 +193,7 @@ SYNChannelCoverImageSelectorDelegate>
     
     [self setUpMode];
     
+
     
 }
 
@@ -227,7 +205,6 @@ SYNChannelCoverImageSelectorDelegate>
     
     [super viewWillAppear: animated];
     
-    self.editedVideos = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(coverImageChangedHandler:)
@@ -281,19 +258,6 @@ SYNChannelCoverImageSelectorDelegate>
     
     //[self displayChannelDetails];
     
-    if (self.hasAppeared)
-    {
-        AssertOrLog(@"Detail View controller had viewWillAppear called twice!!!!");
-    }
-    
-    if (self.mode == kChannelDetailsModeDisplay && !self.hasAppeared)
-    {
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
-                                                            object: self
-                                                          userInfo: @{kChannel: self.channel}];
-    }
-    
     
     
     [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL]
@@ -302,8 +266,14 @@ SYNChannelCoverImageSelectorDelegate>
                             options: SDWebImageRetryFailed];
     
     
-    self.hasAppeared = YES;
     self.navigationController.navigationBarHidden = NO;
+    
+    self.videoEditLayoutIPad = [[UICollectionViewFlowLayout alloc]init];
+    self.videoEditLayoutIPad.itemSize = CGSizeMake(self.videoLayoutIPad.itemSize.width, self.videoLayoutIPad.itemSize.height-50);
+    self.videoEditLayoutIPad.headerReferenceSize = self.videoLayoutIPad.headerReferenceSize;
+    self.videoEditLayoutIPad.sectionInset = self.videoEditLayoutIPad.sectionInset;
+    
+    
 }
 
 
@@ -350,17 +320,14 @@ SYNChannelCoverImageSelectorDelegate>
                                                         object: self
                                                       userInfo: nil];
     
-    if (!self.hasAppeared)
-    {
-        AssertOrLog(@"Detail View controller had viewWillDisappear called twice!!!!");
-    }
-    
-    
-    self.hasAppeared = NO;
     self.navigationController.navigationBarHidden = YES;
 }
 
 -(void) setUpMode {
+    
+    
+    NSLog(@"%d", self.mode);
+    
     
     if (self.mode == kChannelDetailsModeDisplayUser)
     {
@@ -466,6 +433,7 @@ SYNChannelCoverImageSelectorDelegate>
         CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
         
         self.viewIPadContainer.transform = move;
+        self.viewEditMode.transform = move;
         
         
     }
@@ -676,14 +644,6 @@ SYNChannelCoverImageSelectorDelegate>
 //        [self displayChannelDetails];
 //    }
     
-    BOOL visible = (self.mode == kChannelDetailsModeDisplay);
-    
-    self.editButton.hidden = (visible && ![self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]);
-    
-    if (self.channel.favouritesValue && [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-    {
-        self.editButton.hidden = TRUE;
-    }
 }
 
 
@@ -733,6 +693,11 @@ SYNChannelCoverImageSelectorDelegate>
     videoThumbnailCell.titleLabel.text = videoInstance.title;
     videoThumbnailCell.delegate = self;
     
+    if (!self.viewEditMode.hidden) {
+        videoThumbnailCell.likeControl.hidden = YES;
+        videoThumbnailCell.shareControl.hidden = YES;
+        videoThumbnailCell.addControl.hidden = YES;
+    }
     
     
     return videoThumbnailCell;
@@ -788,6 +753,31 @@ referenceSizeForFooterInSection: (NSInteger) section
     return footerSize;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+
+
+//    if (IS_IPAD && !self.viewEditMode.hidden)
+//    {
+//        CGSize tmp = self.videoCollectionLayoutIPad.itemSize;
+//        tmp.height -= 50;
+//        
+//        return tmp;
+//    }
+    
+    if (IS_IPAD) {
+        return self.videoCollectionLayoutIPad.itemSize;
+        
+    }
+    
+    if (IS_IPHONE)
+    {
+        return self.videoCollectionViewLayoutIPhone.itemSize;
+    
+    }
+    
+
+    return CGSizeZero;
+}
 
 - (void) loadMoreVideos
 {
@@ -900,8 +890,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self.channel.videoInstancesSet insertObject: viToSwap
                                          atIndex: toIndexPath.item];
-    
-    self.editedVideos = YES;
     
     // set the new positions
     [self.channel.videoInstances enumerateObjectsUsingBlock: ^(id obj, NSUInteger index, BOOL *stop) {
@@ -1129,7 +1117,8 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 
 
-- (IBAction)avatarTapped:(id)sender {
+- (IBAction)avatarTapped:(id)sender
+{
     
     SYNProfileRootViewController *profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile];
     
@@ -1141,7 +1130,46 @@ referenceSizeForFooterInSection: (NSInteger) section
     
 }
 
+- (IBAction)editTapped:(id)sender
+{
+        self.viewIPadContainer.hidden = YES;
+        self.viewEditMode.hidden = NO;
 
+     self.barBtnBack = self.navigationItem.leftBarButtonItem;
+    
+    UIBarButtonItem *barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+
+    UIBarButtonItem *barBtnSave = [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(save)];
+    
+        self.navigationItem.leftBarButtonItem = barBtnCancel;
+        self.navigationItem.rightBarButtonItem = barBtnSave;
+    
+//    [self.videoThumbnailCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    
+   // self.videoLayoutIPad.itemSize = CGSizeMake(self.videoLayoutIPad.itemSize.width, self.videoLayoutIPad.itemSize.height);
+
+//    [self.videoThumbnailCollectionView performBatchUpdates:^{
+//        [self.videoThumbnailCollectionView.collectionViewLayout invalidateLayout];
+//
+//    } completion:^(BOOL finished) {
+//    }];
+
+    [self.videoThumbnailCollectionView reloadData];
+}
+
+-(void) cancel
+{
+    
+    NSLog(@"cancel");
+    
+        self.navigationItem.leftBarButtonItem = self.barBtnBack;
+        self.viewIPadContainer.hidden = NO;
+        self.viewEditMode.hidden = YES;
+
+    [self.videoThumbnailCollectionView reloadData];
+
+    
+}
 
 - (IBAction) followersLabelPressed: (id) sender
 {
@@ -1191,6 +1219,19 @@ referenceSizeForFooterInSection: (NSInteger) section
     //        
     //        [appDelegate.viewStackManager presentModallyController: self.modalSubscriptionsContainer];
     //    }
+}
+
+#pragma mark - Text Field Delegates
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+
+    
+    
+}
+
+-(void) textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
 }
 
 
