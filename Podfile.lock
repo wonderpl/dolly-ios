@@ -1,19 +1,23 @@
 PODS:
-  - Appirater (HEAD based on 2.0.2)
-  - MKNetworkKit (HEAD based on 0.87):
+  - Appirater (2.0.2)
+  - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
-  - Reachability (HEAD based on 3.1.1)
+  - Reachability (3.1.1)
   - SSKeychain (0.2.1)
 
 DEPENDENCIES:
-  - Appirater (HEAD)
-  - MKNetworkKit (HEAD)
-  - Reachability (HEAD)
+  - Appirater
+  - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`)
+  - Reachability
   - SSKeychain (~> 0.2.1)
+
+EXTERNAL SOURCES:
+  MKNetworkKit:
+    :git: https://github.com/rockpack/MKNetworkKit.git
 
 SPEC CHECKSUMS:
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
+  MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
 

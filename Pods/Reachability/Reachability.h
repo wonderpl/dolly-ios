@@ -25,7 +25,7 @@
  POSSIBILITY OF SUCH DAMAGE. 
  */
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #import <sys/socket.h>
