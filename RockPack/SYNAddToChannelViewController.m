@@ -35,7 +35,7 @@
 
 @interface SYNAddToChannelViewController ()
 {
-    BOOL creatingNewState;
+    
     BOOL creatingNewAnimating;
     
 }
@@ -59,6 +59,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *autopostYesButton;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (weak, nonatomic) UICollectionViewCell* selectedCell;
 
 
 
@@ -90,7 +91,6 @@
     
     self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
     
-    creatingNewState = NO;
     
     [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
                           forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
@@ -125,10 +125,17 @@
         self.autopostView.hidden = YES;
     }
     
+    self.selectedChannel = nil;
     
+    //[self.currentChannelsCollectionView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
 }
 
+// Testing reasons only
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"===> %@", [change objectForKey:NSKeyValueChangeNewKey]);
+}
 
 - (void) switchAutopostViewToYes: (BOOL) value
 {
@@ -284,9 +291,8 @@
     {
         self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])
                                                                               forIndexPath: indexPath];
-        [self.createNewChannelCell.createNewButton addTarget:self
-                                                      action:@selector(createNewButtonPressed)
-                                            forControlEvents:UIControlEventTouchUpInside];
+        
+        self.createNewChannelCell.delegate = self;
         cell = self.createNewChannelCell;
     }
     else
@@ -309,9 +315,15 @@
     
     // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
     if(indexPath.row == 0)
+    {
+       
         return;
-    
-    self.selectedChannel = self.channels[indexPath.item - 1]; // channels will be plus one due to extra first channel
+    }
+    else
+    {
+        self.selectedCell = [self.currentChannelsCollectionView cellForItemAtIndexPath:indexPath];
+        self.selectedChannel = self.channels[indexPath.item - 1]; // (the channel index is +1 due to extra first channel)
+    }
     
 }
 
@@ -324,11 +336,6 @@
         return;
     
     creatingNewAnimating = YES;
-    
-//    [self.currentChannelsCollectionView.collectionViewLayout invalidateLayout];
-//    [self.currentChannelsCollectionView invalidateIntrinsicContentSize];
-    
-    
     
     // 1. Loop over all the cells and animate manually
     
@@ -346,19 +353,26 @@
             
             if(cell == self.createNewChannelCell)
             {
-                if(creatingNewState) // if in "create new" state -> contract
+                if(self.createNewChannelCell.isEditing) // then contract!
                 {
                     frame.size.height = kChannelCellDefaultHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 0.0f;
                     
-                    [self.confirmButtom setTitle:@"Create" forState:UIControlStateNormal];
+                    
+                    
+                    
                 }
-                else
+                else // expand
                 {
                     frame.size.height = kChannelCellExpandedHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 1.0f;
                     
-                    [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+                    // show the button if hidden and change its title
+                    
+                    self.selectedChannel = nil;
+                    self.confirmButtom.hidden = NO;
+                    [self.confirmButtom setTitle:@"Create" forState:UIControlStateNormal];
+                    
                 }
                 
                 
@@ -367,7 +381,7 @@
             {
                 
                 CGFloat correctAmount = (kChannelCellExpandedHeight - kChannelCellDefaultHeight);
-                if(creatingNewState) // if in create new state -> contract
+                if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing) // contract
                 {
                     frame.origin.y -= correctAmount;
                 }
@@ -397,7 +411,7 @@
     
     // send tracking information
     
-    if(!creatingNewState) // if it is opening, show the panel
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden) // if it is opening, show the panel
     {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         
@@ -415,11 +429,17 @@
 {
     creatingNewAnimating = NO;
     
-    creatingNewState = !creatingNewState;
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden)
+        self.createNewChannelCell.state = CreateNewChannelCellStateEditing;
+    else
+        self.createNewChannelCell.state = CreateNewChannelCellStateHidden; // this catches the 2 editing states, 'editing' and 'finilizing'
     
-    if(creatingNewState)
+    
+    
+    if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing)
     {
         [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
+        [self.currentChannelsCollectionView setContentOffset:CGPointMake(0.0f, 0.0f)];
     }
     else
     {
@@ -463,9 +483,16 @@
 {
     _selectedChannel = selectedChannel;
     if(_selectedChannel)
-        self.confirmButtom.enabled = YES;
-    else
-        self.confirmButtom.enabled = NO;
+    {
+        self.confirmButtom.hidden = NO;
+        [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+    }
+    else // passed nil
+    {
+        self.selectedCell.selected = NO;
+        self.confirmButtom.hidden = YES;
+    }
+    
 }
 
 #pragma mark - Popoverable

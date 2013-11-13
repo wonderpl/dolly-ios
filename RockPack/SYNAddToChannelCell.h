@@ -11,6 +11,7 @@
 @interface SYNAddToChannelCell : UICollectionViewCell
 {
     UIColor* defaultTitleColor;
+    BOOL _selected;
 }
 
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
