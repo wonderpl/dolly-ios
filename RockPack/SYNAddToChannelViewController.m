@@ -463,6 +463,13 @@
 
 - (IBAction) confirmButtonPressed: (id) sender
 {
+    
+    if(self.createNewChannelCell.isEditing)
+    {
+        [self viewChannelDetails:nil withAutoplayId:@""];
+        
+    }
+    
     if (!self.selectedChannel)
     {
         return;

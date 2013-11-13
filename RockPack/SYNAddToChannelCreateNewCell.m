@@ -119,6 +119,7 @@
             self.nameInputTextField.returnKeyType = UIReturnKeyNext;
             
             [self.nameInputTextField becomeFirstResponder];
+            
             break;
             
         case CreateNewChannelCellStateFinilizing:
