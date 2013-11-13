@@ -90,6 +90,9 @@ SYNChannelCoverImageSelectorDelegate>
 
 @property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPhone;
 
+@property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPhoneEdit;
+
+
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoLayoutIPad;
 @property (strong, nonatomic) IBOutlet UIView *viewEditMode;
 
@@ -148,14 +151,14 @@ SYNChannelCoverImageSelectorDelegate>
     [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
     [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
     
-     [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
-     [[self.txtViewDescription layer] setBorderWidth:1.0];
-     [[self.txtViewDescription layer] setCornerRadius:0];
-
-    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+    [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.txtViewDescription layer] setBorderWidth:1.0];
+    [[self.txtViewDescription layer] setCornerRadius:0];
+    
+    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
     
     self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(save)];
-
+    
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
                         forCellWithReuseIdentifier: CollectionVideoCellName];
@@ -184,11 +187,7 @@ SYNChannelCoverImageSelectorDelegate>
     
     [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
     
-    
-    
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    
-    
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -213,16 +212,20 @@ SYNChannelCoverImageSelectorDelegate>
     
     // == Avatar Image == //
     
-        [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL]
-                               forState: UIControlStateNormal
-                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                options: SDWebImageRetryFailed];
-        
-        NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
+    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL]
+                           forState: UIControlStateNormal
+                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                            options: SDWebImageRetryFailed];
     
+    NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
     
+    self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
     
-
+    self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(self.videoCollectionViewLayoutIPhone.itemSize.width, self.videoCollectionViewLayoutIPhone.itemSize.height-70);
+    self.videoCollectionViewLayoutIPhoneEdit.headerReferenceSize = CGSizeMake(self.videoCollectionViewLayoutIPhone.headerReferenceSize.width, self.videoCollectionViewLayoutIPhone.headerReferenceSize.height);
+    
+    self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
+    
     
 }
 
@@ -289,36 +292,36 @@ SYNChannelCoverImageSelectorDelegate>
     
     
     
-//    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailSmallUrl]
-//                           forState: UIControlStateNormal
-//                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-//                            options: SDWebImageRetryFailed];
+    //    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailSmallUrl]
+    //                           forState: UIControlStateNormal
+    //                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+    //                            options: SDWebImageRetryFailed];
     
     
-//    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
-//    
-//    NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
-//    
-//    if (![self.channel.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
-//        
-//        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
-//        dispatch_async(downloadQueue, ^{
-//            
-//            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL ]];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                self.btnAvatar.imageView.image = [UIImage imageWithData: imageData];
-//            });
-//        });
-//        
-//    }else{
-//        
-//        self.btnAvatar.imageView.image = placeholderImage;
-//    }
+    //    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+    //
+    //    NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
+    //
+    //    if (![self.channel.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
+    //
+    //        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
+    //        dispatch_async(downloadQueue, ^{
+    //
+    //            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL ]];
+    //
+    //            dispatch_async(dispatch_get_main_queue(), ^{
+    //                self.btnAvatar.imageView.image = [UIImage imageWithData: imageData];
+    //            });
+    //        });
+    //
+    //    }else{
+    //
+    //        self.btnAvatar.imageView.image = placeholderImage;
+    //    }
     
-  
-
-
+    
+    
+    
     
     self.navigationController.navigationBarHidden = NO;
     
@@ -485,18 +488,20 @@ SYNChannelCoverImageSelectorDelegate>
         self.viewProfileContainer.transform = move;
         self.borderAboveCollection.transform = move;
         self.viewEditMode.transform = move;
-
+        
         
     }
     else
     {
-        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
-        
-        self.viewProfileContainer.transform = move;
-        self.viewEditMode.transform = move;
-        
+//        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+//        
+//        self.viewProfileContainer.transform = move;
+//        self.viewEditMode.transform = move;
+//        
         
     }
+    
+    NSLog(@"%f", offset);
 }
 
 #pragma mark - Tab View Methods
@@ -759,6 +764,14 @@ SYNChannelCoverImageSelectorDelegate>
         videoThumbnailCell.addControl.hidden = YES;
         videoThumbnailCell.deleteButton.hidden = NO;
     }
+    else
+    {
+        videoThumbnailCell.likeControl.hidden = NO;
+        videoThumbnailCell.shareControl.hidden = NO;
+        videoThumbnailCell.addControl.hidden = NO;
+        videoThumbnailCell.deleteButton.hidden = YES;
+        
+    }
     
     
     return videoThumbnailCell;
@@ -814,31 +827,31 @@ referenceSizeForFooterInSection: (NSInteger) section
     return footerSize;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    //    if (IS_IPAD && !self.viewEditMode.hidden)
-    //    {
-    //        CGSize tmp = self.videoCollectionLayoutIPad.itemSize;
-    //        tmp.height -= 50;
-    //
-    //        return tmp;
-    //    }
-    
-    if (IS_IPAD) {
-        return self.videoCollectionLayoutIPad.itemSize;
-        
-    }
-    
-    if (IS_IPHONE)
-    {
-        return self.videoCollectionViewLayoutIPhone.itemSize;
-        
-    }
-    
-    
-    return CGSizeZero;
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+//
+//
+//    //    if (IS_IPAD && !self.viewEditMode.hidden)
+//    //    {
+//    //        CGSize tmp = self.videoCollectionLayoutIPad.itemSize;
+//    //        tmp.height -= 50;
+//    //
+//    //        return tmp;
+//    //    }
+//
+//    if (IS_IPAD) {
+//        return self.videoCollectionLayoutIPad.itemSize;
+//
+//    }
+//
+//    if (IS_IPHONE)
+//    {
+//        return self.videoCollectionViewLayoutIPhone.itemSize;
+//
+//    }
+//
+//
+//    return CGSizeZero;
+//}
 
 - (void) loadMoreVideos
 {
@@ -1194,30 +1207,57 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (IBAction)editTapped:(id)sender
 {
-        self.viewProfileContainer.hidden = YES;
-        self.viewEditMode.alpha = 0.0f;
-        self.viewEditMode.hidden = NO;
-        
-        
- 
-
+    self.viewProfileContainer.hidden = YES;
+    self.viewEditMode.alpha = 0.0f;
+    self.viewEditMode.hidden = NO;
+    
+    
+    
+    
     [UIView animateWithDuration:0.4 animations:^{
         self.viewEditMode.alpha = 1.0f;
         
     }];
     
-
-
+    
+    
+    [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
+    
+    
+    [self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
+    
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
-    
-    
     self.navigationItem.leftBarButtonItem = self.barBtnCancel;
     self.navigationItem.rightBarButtonItem = self.barBtnSave;
+    
+    self.mode = kChannelDetailsModeEdit;
+    
+    for (SYNCollectionVideoCell *videoThumbnailCell in [self.videoThumbnailCollectionView visibleCells])
+    {
+        
+        
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            videoThumbnailCell.likeControl.alpha = 0.0f;
+            videoThumbnailCell.shareControl.alpha = 0.0f;
+            videoThumbnailCell.addControl.alpha = 0.0f;
+            videoThumbnailCell.deleteButton.alpha = 1.0f;
+            
+        }];
+        
+        videoThumbnailCell.likeControl.hidden = YES;
+        videoThumbnailCell.shareControl.hidden = YES;
+        videoThumbnailCell.addControl.hidden = YES;
+        videoThumbnailCell.deleteButton.hidden = NO;
+    }
+    
+    
     [self.videoThumbnailCollectionView reloadData];
-
+    
 }
 
--(void) cancel
+-(void) cancelTapped
 {
     
     NSLog(@"cancel");
@@ -1226,20 +1266,42 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.viewProfileContainer.hidden = NO;
     
     self.viewProfileContainer.alpha = 0.0f;
-
+    
     
     [UIView animateWithDuration:0.4 animations:^{
         self.viewProfileContainer.alpha = 1.0f;
         self.navigationItem.rightBarButtonItem = nil;
     }];
     
-
+    
     self.viewEditMode.hidden = YES;
     
+    self.mode = kChannelDetailsModeDisplayUser;
     
     
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtFieldDescriptionEdit resignFirstResponder];
+    
+    [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone animated:YES];
+    
+    [self.videoCollectionViewLayoutIPhone invalidateLayout];
+    for (SYNCollectionVideoCell *videoThumbnailCell in [self.videoThumbnailCollectionView visibleCells])
+    {
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            videoThumbnailCell.likeControl.alpha = 1.0f;
+            videoThumbnailCell.shareControl.alpha = 1.0f;
+            videoThumbnailCell.addControl.alpha = 1.0f;
+            videoThumbnailCell.deleteButton.alpha = 0.0f;
+            
+        }];
+        
+        videoThumbnailCell.likeControl.hidden = NO;
+        videoThumbnailCell.shareControl.hidden = NO;
+        videoThumbnailCell.addControl.hidden = NO;
+        videoThumbnailCell.deleteButton.hidden = YES;
+    }
+    
     
     [self.videoThumbnailCollectionView reloadData];
     
@@ -1248,7 +1310,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (IBAction) followersLabelPressed: (id) sender
 {
-   // [self releasedSubscribersLabel: sender];
+    // [self releasedSubscribersLabel: sender];
     
     if (self.subscribersPopover)
     {

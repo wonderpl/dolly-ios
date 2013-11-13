@@ -1494,16 +1494,7 @@
         self.navigationController.navigationBarHidden = NO;
 
         
-        SYNChannelDetailsViewController *channelVC;
-        if (modeType == MyOwnProfile) {
-            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
-            
-        }
-        
-        if (modeType == OtherUsersProfile) {
-            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
-            
-        }
+           SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
         
         [self.navigationController pushViewController:channelVC animated:YES];
     }
