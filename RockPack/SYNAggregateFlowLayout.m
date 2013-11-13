@@ -60,7 +60,6 @@
         {
             offsetAdjustment = itemHoizontalCenter - horizontalCenter;
             
-            NSLog(@"%@, %f", NSStringFromCGPoint(proposedContentOffset), offsetAdjustment);
         }
     }
     

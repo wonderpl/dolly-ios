@@ -728,20 +728,20 @@
                 
                 int success = sqlite3_step(check_statement);
                 
-                NSLog(@"SQL integrity_check result is %d", success);
+                DebugLog(@"SQL integrity_check result is %d", success);
                 NSString *response = nil;
                 switch (success) {
                     case SQLITE_ERROR:
                         bResult = YES;
                         break;
                     case SQLITE_DONE:
-                        NSLog(@"Result is simple DONE of the sqllite3 on isDatabaseCorrupted");
+                        DebugLog(@"Result is simple DONE of the sqllite3 on isDatabaseCorrupted");
                         break;
                     case SQLITE_BUSY:
-                        NSLog(@"Result is simple BUSY of the sqllite3 on isDatabaseCorrupted");
+                        DebugLog(@"Result is simple BUSY of the sqllite3 on isDatabaseCorrupted");
                         break;
                     case SQLITE_MISUSE:
-                        NSLog(@"Bad utilization of the sqllite3 on isDatabaseCorrupted");
+                        DebugLog(@"Bad utilization of the sqllite3 on isDatabaseCorrupted");
                         break;
                     case SQLITE_ROW:
                         response = [NSString stringWithUTF8String:(char *)sqlite3_column_text(check_statement, 0)];
@@ -749,7 +749,7 @@
                                                                                           whitespaceAndNewlineCharacterSet]] isEqualToString:@"ok"]){
                             bResult = NO;
                         } else {
-                            NSLog(@"ATTENTION: integrity_check response %@", response);
+                            DebugLog(@"ATTENTION: integrity_check response %@", response);
                             bResult = NO;
                         }
                         break;

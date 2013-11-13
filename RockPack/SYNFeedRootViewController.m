@@ -138,7 +138,6 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     
     
-    NSLog(@"%f", self.feedCollectionView.contentInset.top);
 }
 
 

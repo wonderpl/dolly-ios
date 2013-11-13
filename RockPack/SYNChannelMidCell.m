@@ -82,7 +82,7 @@
     [self.containerView addGestureRecognizer:self.leftSwipe];
     self.deleteMode = NO;
     self.descriptionMode = NO;
-
+    
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
@@ -176,26 +176,26 @@
 - (IBAction)showDescriptionSwipe:(UISwipeGestureRecognizer *)recognizer
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
-
+    
     if (self.deleteMode || self.descriptionMode) {
         [self moveToCentre];
     }
     else
     {
         [self showDescription];
-
+        
     }
 }
 
 - (IBAction)leftSwipe:(UISwipeGestureRecognizer *)recognizer
 {
- 
+    
     if (self.deleteMode || self.descriptionMode) {
         [self moveToCentre];
     }
     else
     {
-       // [self showDelete];
+        // [self showDelete];
     }
     
 }
@@ -216,11 +216,11 @@
             }
             self.containerView.frame = tmpRect;
             self.descriptionMode = YES;
-
+            
         }
     }];
     
-
+    
 }
 
 -(void) moveToCentre {
@@ -230,11 +230,11 @@
         {
             CGRect tmpRect = self.containerView.frame;
             
-                tmpRect.origin.x = 0;
+            tmpRect.origin.x = 0;
             self.containerView.frame = tmpRect;
             self.deleteMode = NO;
             self.descriptionMode = NO;
-
+            
         }
     }];
 }
@@ -242,26 +242,45 @@
 
 
 -(void) showDelete{
-
+    
     [UIView animateWithDuration:0.5f animations:^{
         
-            CGRect tmpRect = self.containerView.frame;
-            
-            if (IS_IPHONE)
-            {
-                tmpRect.origin.x -= 50;
-            }
-            else
-            {
-                tmpRect.origin.x -= 50;
-            }
-            self.containerView.frame = tmpRect;
+        CGRect tmpRect = self.containerView.frame;
+        
+        if (IS_IPHONE)
+        {
+            tmpRect.origin.x -= 50;
+        }
+        else
+        {
+            tmpRect.origin.x -= 50;
+        }
+        self.containerView.frame = tmpRect;
         self.deleteMode = YES;
     }];
-
+    
     
 }
+- (IBAction)followChannel:(id)sender
+{
+    [self.viewControllerDelegate followButtonTapped: self];
+    
+    // [self showAlertView];
+}
 
+-(void) setBorder
+{
+    if (IS_IPAD){
+        if (IS_RETINA)
+        {
+            [self.boarderView.layer setBorderWidth:0.5f];
+        }
+        else
+        {
+            [self.boarderView.layer setBorderWidth:1.0f];
+        }
+    }
+}
 
 
 
@@ -269,7 +288,8 @@
 - (NSString *) yesButtonTitle{
     return @"Yes";
 }
-- (NSString *) noButtonTitle{
+- (NSString *) noButtonTitle
+{
     return @"Cancel";
 }
 
@@ -286,7 +306,6 @@
         }
     }
 }
-
 
 
 

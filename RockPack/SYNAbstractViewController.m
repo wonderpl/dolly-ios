@@ -239,12 +239,12 @@
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
 {
-    NSLog (@"Shouldn't be calling abstract function");
+    AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
 {
-    NSLog (@"Shouldn't be calling abstract function");
+    AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
 
@@ -1067,7 +1067,7 @@
 		profileVC.channelOwner = channelOwner;
 		[self.navigationController popToViewController:profileVC animated:YES];
 	} else {
-		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId];
+		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile];
 		profileVC.channelOwner = channelOwner;
 		[self.navigationController pushViewController:profileVC animated:YES];
 	}
