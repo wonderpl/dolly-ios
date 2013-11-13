@@ -1414,7 +1414,7 @@
         
         NSString *hostName = [[NSBundle mainBundle] objectForInfoDictionaryKey: ([userId isEqualToString: self.currentUser.uniqueId])? @"SecureAPIHostName" : @"APIHostName"];
 		
-		SYNAbstractViewController *currentViewController = (SYNAbstractViewController *)self.masterViewController.showingViewController.topViewController;
+		SYNAbstractViewController *currentViewController = self.masterViewController.showingViewController;
         
         switch (pathComponents.count)
         {
@@ -1430,13 +1430,13 @@
                     [currentViewController viewProfileDetails:channelOwner];
                     success = TRUE;
                 }
-                
                 break;
             }
                 
                 // Channel
             case 3:
             {
+                
                 // Extract the channelId from the path
                 NSString *channelId = pathComponents[2];
                 NSString *resourceURL = [NSString stringWithFormat: @"%@//%@/ws/%@/channels/%@/", httpScheme, hostName, userId, channelId];
@@ -1445,7 +1445,7 @@
                 
                 if (channel)
                 {
-                    [currentViewController viewChannelDetails:channel withAutoplayId:nil];
+                    [currentViewController viewChannelDetails:channel];
                     success = TRUE;
                 }
                 break;
@@ -1465,7 +1465,8 @@
                     // We need to remove any video overlay first
                     [self.masterViewController removeVideoOverlayController];
                     
-                    [currentViewController viewChannelDetails:channel withAutoplayId:videoId];
+                    channel.autoplayId = videoId;
+                    [currentViewController viewChannelDetails:channel];
                     success = TRUE;
                 }
                 break;

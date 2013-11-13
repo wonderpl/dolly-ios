@@ -6,6 +6,8 @@
 @property (nonatomic) BOOL hasChangedSubscribeValue;
 @property (nonatomic) NSInteger totalVideosValue;
 
+@property (nonatomic, strong) NSString* autoplayId;
+
 @property (nonatomic, readonly) NSDateComponents* timeAgo;
 
 + (Channel *) instanceFromDictionary: (NSDictionary *) dictionary

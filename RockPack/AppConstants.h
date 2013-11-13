@@ -38,7 +38,6 @@
 #define kCoverArtImage              @"CoverArtImage"
 
 #define kForceRefreshValue          @"kForceRefreshValue"
-#define kAutoPlayVideoId            @"kAutoPlayVideoId"
 
 #define kDataRequestRange           @"DataRequestRange"
 

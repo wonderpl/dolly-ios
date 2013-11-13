@@ -214,10 +214,7 @@ SYNChannelCoverImageSelectorDelegate>
                                                  name: kCoverArtChanged
                                                object: nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(videoQueueCleared)
-                                                 name: kVideoQueueClear
-                                               object: nil];
+
     
     if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
     {
@@ -226,15 +223,7 @@ SYNChannelCoverImageSelectorDelegate>
                                                      name: kUserDataChanged
                                                    object: nil];
     }
-    
-    //if it user is following already
-    
-    
-    
-    //    [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
-    //
-    //    [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)] forState:UIControlStateSelected];
-    
+  
     
     if (self.channel.subscribedByUserValue)
     {
