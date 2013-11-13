@@ -12,7 +12,6 @@
 #import "ExternalAccount.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"

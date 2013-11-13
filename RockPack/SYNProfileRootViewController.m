@@ -11,7 +11,6 @@
 #import "ChannelCover.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
 #import "SYNChannelThumbnailCell.h"
@@ -877,13 +876,13 @@
     return cell;
 }
 
-- (void) collectionView: (UICollectionView *) collectionView
-didSelectItemAtIndexPath: (NSIndexPath *) indexPath
+- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     Channel *channel;
     
     if (collectionView == self.channelThumbnailCollectionView)
     {
+        // The first cell is a 'create_new' cell on a user profile
         if (self.isUserProfile && indexPath.row == 0)
         {
 			[self createAndDisplayNewChannel];

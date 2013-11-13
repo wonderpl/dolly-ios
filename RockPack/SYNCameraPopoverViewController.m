@@ -7,7 +7,6 @@
 //
 
 #import "SYNCameraPopoverViewController.h"
-#import "SYNCollectionDetailsViewController.h"
 
 @interface SYNCameraPopoverViewController ()
 
