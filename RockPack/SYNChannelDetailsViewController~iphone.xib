@@ -6,16 +6,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNChannelDetailsViewController">
             <connections>
+                <outlet property="borderAboveCollection" destination="ANz-Ae-0qP" id="21A-w2-dzl"/>
                 <outlet property="btnAvatar" destination="fM4-Xb-Qmi" id="fcK-Rp-wxK"/>
-                <outlet property="btnFollow" destination="P7D-vs-dmA" id="evd-Ki-B6p"/>
-                <outlet property="btnShare" destination="ftS-iK-V3y" id="Xgx-Mf-ukS"/>
-                <outlet property="collectionVideoInstances" destination="8Ij-2z-UN8" id="UIv-sx-CQg"/>
+                <outlet property="btnFollowChannel" destination="P7D-vs-dmA" id="xdY-R2-Tym"/>
+                <outlet property="btnShareChannel" destination="ftS-iK-V3y" id="Pze-Em-2DI"/>
+                <outlet property="btnShowFollowers" destination="sVX-iR-Htf" id="cde-4s-nHu"/>
+                <outlet property="btnShowVideos" destination="cJl-eE-YdZ" id="d1M-U1-S7L"/>
                 <outlet property="lblChannelTitle" destination="Vnv-ov-6xo" id="ov8-x6-sed"/>
                 <outlet property="lblDescription" destination="irB-oP-X4O" id="BBs-Oh-cue"/>
-                <outlet property="lblFollowersCount" destination="yMO-3M-QGB" id="bCD-P6-gPU"/>
                 <outlet property="lblFullName" destination="r8Y-zW-rcS" id="0f2-uW-cCd"/>
-                <outlet property="lblVideosCount" destination="A5I-Oz-fYg" id="93e-Aa-uIY"/>
+                <outlet property="videoCollectionViewLayoutIPhone" destination="ybs-C7-TVb" id="ZQM-NN-ArA"/>
+                <outlet property="videoThumbnailCollectionView" destination="8Ij-2z-UN8" id="cwi-G1-nSN"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="viewIPhoneContainer" destination="pKN-Gg-iQ2" id="31Y-LE-Kgj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,21 +26,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYe-qp-agf" userLabel="View - Navigation Bar">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8Ij-2z-UN8">
-                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ybs-C7-TVb">
-                        <size key="itemSize" width="316" height="257"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ybs-C7-TVb" customClass="LXReorderableCollectionViewFlowLayout">
+                        <size key="itemSize" width="295" height="268"/>
                         <size key="headerReferenceSize" width="320" height="405"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                     </collectionViewFlowLayout>
                     <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Y2e-Q6-pPC"/>
+                        <outlet property="delegate" destination="-1" id="IMY-sI-KKZ"/>
+                    </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKN-Gg-iQ2" userLabel="View - Profile Container">
                     <rect key="frame" x="0.0" y="64" width="320" height="341"/>
@@ -64,24 +67,12 @@
                             <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Followers Count" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMO-3M-QGB" userLabel="Label - Description">
-                            <rect key="frame" x="0.0" y="194" width="145" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video Count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5I-Oz-fYg" userLabel="Label - Description">
-                            <rect key="frame" x="176" y="194" width="144" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7D-vs-dmA" customClass="SYNSocialButton">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7D-vs-dmA" customClass="SYNSocialButton">
                             <rect key="frame" x="101" y="240" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="follow">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -92,6 +83,7 @@
                             <rect key="frame" x="170" y="240" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="share">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -106,12 +98,41 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM4-Xb-Qmi" customClass="SYNAvatarButton">
                             <rect key="frame" x="132" y="30" width="56" height="56"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="avatar">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="avatarTapped:" destination="-1" eventType="touchUpInside" id="LQC-NP-uO4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVX-iR-Htf" userLabel="Button - Followers button">
+                            <rect key="frame" x="0.0" y="190" width="145" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="follower count">
+                                <color key="titleColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="followersLabelPressed:" destination="-1" eventType="touchUpInside" id="dPI-RM-Pbt"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJl-eE-YdZ" userLabel="Button - Videos">
+                            <rect key="frame" x="176" y="190" width="144" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="video count">
+                                <color key="titleColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANz-Ae-0qP" userLabel="View - Line">
+                    <rect key="frame" x="0.0" y="405" width="320" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

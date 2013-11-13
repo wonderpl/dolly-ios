@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="248" translatesAutoresizingMaskIntoConstraints="NO" id="vVW-WR-RU9" userLabel="Title">
-                        <rect key="frame" x="0.0" y="162" width="248" height="28"/>
+                        <rect key="frame" x="0.0" y="165" width="248" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="22T-Ra-Ug7"/>
@@ -93,7 +93,7 @@
                 <constraint firstAttribute="centerX" secondItem="k73-Lu-OvT" secondAttribute="centerX" constant="75" id="8dY-9X-NcO"/>
                 <constraint firstAttribute="centerX" secondItem="S2p-g2-PRw" secondAttribute="centerX" id="96l-ZB-Ebu"/>
                 <constraint firstItem="ZPQ-jB-6Su" firstAttribute="top" secondItem="PxX-MJ-iMd" secondAttribute="top" constant="23" id="CY5-py-yDa"/>
-                <constraint firstItem="vVW-WR-RU9" firstAttribute="top" secondItem="ZPQ-jB-6Su" secondAttribute="bottom" id="JMe-pw-njt"/>
+                <constraint firstItem="vVW-WR-RU9" firstAttribute="top" secondItem="ZPQ-jB-6Su" secondAttribute="bottom" constant="3" id="JMe-pw-njt"/>
                 <constraint firstItem="vVW-WR-RU9" firstAttribute="leading" secondItem="PxX-MJ-iMd" secondAttribute="leading" id="P2L-QN-MLW"/>
                 <constraint firstAttribute="trailing" secondItem="vVW-WR-RU9" secondAttribute="trailing" id="Vim-T5-GbU"/>
                 <constraint firstAttribute="bottom" secondItem="gRp-a5-BAk" secondAttribute="bottom" constant="10" id="eb5-Kl-l8H"/>

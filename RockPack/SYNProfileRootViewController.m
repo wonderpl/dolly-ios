@@ -27,6 +27,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
+#import "SYNChannelDetailsViewController.h"
 
 @import QuartzCore;
 
@@ -1447,11 +1448,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 //Channels are the cell in the collection view
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
-    
-    
     SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
-    
-    
     if([cell.superview isEqual:self.channelThumbnailCollectionView])
     {
         
@@ -1463,25 +1460,37 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         {
             //never gets called, first cell gets called and created in didSelectItem
             // [self createAndDisplayNewChannel];
-            
             return;
         }
         else
         {
-            
-            
             //  self.indexPathToDelete = indexPath;
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
+
+        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+
         
-        [self viewChannelDetails:channel withAutoplayId:nil];
+        [self.navigationController pushViewController:channelVC animated:YES];
+        
+//        [self viewChannelDetails:channel withAutoplayId:nil];
     }
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {
-        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-        Channel *channel = self.arrDisplayFollowing[indexPath.item];
         
-        [self viewChannelDetails:channel withAutoplayId:nil];
+        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
+        
+        if (indexPath.row < self.arrDisplayFollowing.count) {
+            
+        }
+        Channel *channel = self.arrDisplayFollowing[indexPath.item];
+        self.navigationController.navigationBarHidden = NO;
+
+        
+        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+        
+        
+        [self.navigationController pushViewController:channelVC animated:YES];
     }
 }
 

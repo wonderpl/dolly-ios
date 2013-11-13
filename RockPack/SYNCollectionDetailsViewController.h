@@ -10,13 +10,6 @@
 #import "SYNAbstractViewController.h"
 #import "SYNSocialActionsDelegate.h"
 
-typedef enum : NSInteger
-{
-    kChannelDetailsModeDisplay = 0,
-    kChannelDetailsModeEdit = 1,
-    kChannelDetailsModeCreate = 2
-} kChannelDetailsMode;
-
 @interface SYNCollectionDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout,
                                                                             UICollectionViewDataSource,
                                                                             UICollectionViewDelegateFlowLayout,

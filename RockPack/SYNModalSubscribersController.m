@@ -52,7 +52,9 @@
 
 - (IBAction) backButtonPressed: (id) sender
 {
-	[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 @end
