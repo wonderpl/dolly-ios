@@ -304,7 +304,9 @@
                 return;
             }
             
-			[self viewChannelDetails:channel withAutoplayId:notification.videoId];
+            channel.autoplayId = notification.videoId;
+			[self viewChannelDetails:channel];
+            
             break;
         }
             
@@ -317,7 +319,7 @@
                 return;
             }
             
-			[self viewChannelDetails:channel withAutoplayId:nil];
+			[self viewChannelDetails:channel];
             break;
         }
             

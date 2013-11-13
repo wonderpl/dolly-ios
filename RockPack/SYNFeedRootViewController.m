@@ -141,12 +141,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) videoQueueCleared
-{
-    // this will remove the '+' from the videos that where selected
-    [self.feedCollectionView reloadData];
-}
-
 
 #pragma mark - Container Scrol Delegates
 
@@ -830,7 +824,7 @@ typedef void(^FeedDataErrorBlock)(void);
         }
     }
     
-	[self viewChannelDetails:channel withAutoplayId:nil];
+	[self viewChannelDetails:channel];
 }
 
 

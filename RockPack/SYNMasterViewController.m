@@ -489,9 +489,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Accessors
 
-- (UINavigationController*) showingViewController
+- (SYNAbstractViewController*) showingViewController
 {
-    return self.containerViewController.currentViewController;
+    return (SYNAbstractViewController*)(self.containerViewController.currentViewController.topViewController);
 }
 
 -(NSArray*)tabs

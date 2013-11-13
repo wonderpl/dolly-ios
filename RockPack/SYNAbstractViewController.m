@@ -261,37 +261,8 @@
 }
 
 
-#pragma mark - UICollectionView Data Source Stubs
-
-// To be implemented by subclasses
-- (NSInteger) collectionView: (UICollectionView *) cv
-      numberOfItemsInSection: (NSInteger) section
-{
-    AssertOrLog(@"Shouldn't be calling abstract class method");
-    return 0;
-}
 
 
-- (UICollectionViewCell *) collectionView: (UICollectionView *) cv
-                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    AssertOrLog(@"Shouldn't be calling abstract class method");
-    return nil;
-}
-
-
-- (BOOL) collectionView: (UICollectionView *) cv
-         didSelectItemAtIndexPathAbstract: (NSIndexPath *) indexPath
-{
-    AssertOrLog(@"Shouldn't be calling abstract class method");
-    return NO;
-}
-
-
-- (void) refresh
-{
-    AssertOrLog(@"Shouldn't be calling abstract class method");
-}
 
 
 // User pressed the channel thumbnail in a VideoCell
@@ -303,7 +274,7 @@
     {
         VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
         
-		[self viewChannelDetails:videoInstance.channel withAutoplayId:nil];
+		[self viewChannelDetails:videoInstance.channel];
     }
 }
 
@@ -925,23 +896,6 @@
 }
 
 
-- (void) createAndDisplayNewChannel
-{
-    SYNChannelDetailsViewController *channelCreationVC =
-    [[SYNChannelDetailsViewController alloc] initWithChannel: appDelegate.videoQueue.currentlyCreatingChannel
-                                                  usingMode: kChannelDetailsModeCreate];
-    
-    if (IS_IPHONE)
-    {
-		[self.navigationController pushViewController:channelCreationVC animated:YES];
-    }
-    else
-    {
-        [self presentViewController: channelCreationVC
-                           animated: NO
-                         completion: nil];
-    }
-}
 
 
 - (EntityType) associatedEntity
@@ -1077,7 +1031,7 @@
 	}
 }
 
-- (void)viewChannelDetails:(Channel *)channel withAutoplayId:(NSString *)autoplayId
+- (void)viewChannelDetails:(Channel *)channel
 {
     
 	if (!channel)
@@ -1087,17 +1041,21 @@
 	SYNChannelDetailsViewController *channelVC =
 	(SYNChannelDetailsViewController *) [self viewControllerOfClass:[SYNChannelDetailsViewController class]];
 
-	if (channelVC)
+    BOOL isChannelCreation = (BOOL)(channel == appDelegate.videoQueue.currentlyCreatingChannel);
+    kChannelDetailsMode correctMode = isChannelCreation ? kChannelDetailsModeDisplay : kChannelDetailsModeDisplay;
+    
+	if (channelVC) // we found a channelVC
     {
 		channelVC.channel = channel;
-		channelVC.autoplayVideoId = autoplayId;
+        channelVC.mode = correctMode;
+        
 		[self.navigationController popToViewController:channelVC animated:YES];
 	}
     else
     {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
-																	  usingMode:kChannelDetailsModeDisplay];
-		channelVC.autoplayVideoId = autoplayId;
+                                                                   usingMode:correctMode];
+		
 		[self.navigationController pushViewController:channelVC animated:YES];
 	}
 }

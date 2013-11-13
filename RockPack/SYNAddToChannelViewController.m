@@ -98,8 +98,6 @@
     
 }
 
-
-
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
@@ -334,7 +332,15 @@
     
     if(self.createNewChannelCell.isEditing)
     {
-        [self viewChannelDetails:nil withAutoplayId:@""];
+        Channel* creatingChannelFromQ = appDelegate.videoQueue.currentlyCreatingChannel;
+        creatingChannelFromQ.title = self.createNewChannelCell.nameInputTextField.text;
+        creatingChannelFromQ.channelDescription = self.createNewChannelCell.descriptionTextView.text;
+        
+        [appDelegate.masterViewController.showingViewController viewChannelDetails:creatingChannelFromQ];
+        
+        
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+        return;
         
     }
     
@@ -353,6 +359,9 @@
     [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
 }
 
+
+
+#pragma mark - Set Selected Channel
 
 -(void)setSelectedChannel:(Channel *)selectedChannel
 {
