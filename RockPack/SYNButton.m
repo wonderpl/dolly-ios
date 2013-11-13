@@ -18,6 +18,7 @@
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.titleLabel.numberOfLines = 0;
     self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
 }
 
