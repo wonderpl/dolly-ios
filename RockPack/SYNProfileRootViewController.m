@@ -1468,7 +1468,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
 
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
 
         
         [self.navigationController pushViewController:channelVC animated:YES];
@@ -1487,7 +1487,7 @@ didSelectItemAtIndexPath: (NSIndexPath *) indexPath
         self.navigationController.navigationBarHidden = NO;
 
         
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
         
         
         [self.navigationController pushViewController:channelVC animated:YES];
