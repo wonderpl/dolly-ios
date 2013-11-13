@@ -88,7 +88,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     appDelegate.navigationManager.masterController = self;
     appDelegate.navigationManager.containerController = self.containerViewController; // container
     
-    appDelegate.viewStackManager.masterController = self;
     
     
     // Listen to Reachability Notifications for no network messages //
@@ -132,7 +131,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) addOverlayController:(SYNAbstractViewController<SYNPopoverable>*)abstractViewController animated:(BOOL)animated
+- (void) addOverlayController:(UIViewController<SYNPopoverable>*)abstractViewController animated:(BOOL)animated
 {
     if(!abstractViewController)
     {

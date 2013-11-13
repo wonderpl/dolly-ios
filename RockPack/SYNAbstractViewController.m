@@ -619,7 +619,7 @@
     
      
     
-    [appDelegate.viewStackManager presentPopoverView: self.oneToOneViewController.view];
+    [appDelegate.masterViewController addOverlayController:self.oneToOneViewController animated:YES];
 }
 
 

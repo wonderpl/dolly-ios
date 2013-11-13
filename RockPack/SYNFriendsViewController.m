@@ -18,6 +18,7 @@
 #import "Friend.h"
 #import "GAI.h"
 #import "SYNFacebookManager.h"
+#import "SYNMasterViewController.h"
 #import <objc/runtime.h>
 
 static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
@@ -494,11 +495,11 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
                                                                                                                        label: nil
                                                                                                                        value: nil] build]];
                                                                
-                                                               [appDelegate.viewStackManager removePopoverView];
+                                                               [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
                                                                
                                                            } onFailure:^(NSError *error) {
                                                                
-                                                               [appDelegate.viewStackManager removePopoverView];
+                                                               [appDelegate. masterViewController removeOverlayControllerAnimated:YES];
                                                                
                                                            }];
     }

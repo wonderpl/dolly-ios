@@ -15,7 +15,6 @@
 #import "SYNRegistry.h"
 #import "SYNSearchRegistry.h"
 #import "SYNVideoQueue.h"
-#import "SYNViewStackManager.h"
 #import "User.h"
 @import CoreData;
 @import UIKit;
@@ -39,7 +38,6 @@
 @property (nonatomic, readonly) SYNNavigationManager* navigationManager;
 @property (nonatomic, readonly) SYNOnBoardingPopoverQueueController* onBoardingQueue;
 @property (nonatomic, readonly) SYNVideoQueue* videoQueue;
-@property (nonatomic, readonly) SYNViewStackManager* viewStackManager;
 @property (nonatomic, strong) NSTimer* tokenExpiryTimer;
 @property (nonatomic, strong) SYNOAuth2Credential* currentOAuth2Credentials;
 @property (nonatomic, strong, readonly) NSString *apnsToken;

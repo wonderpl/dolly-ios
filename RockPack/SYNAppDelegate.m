@@ -51,7 +51,6 @@
 @property (nonatomic, strong) SYNOnBoardingPopoverQueueController *onBoardingQueue;
 @property (nonatomic, strong) SYNVideoQueue *videoQueue;
 @property (nonatomic, strong) SYNNavigationManager* navigationManager;
-@property (nonatomic, strong) SYNViewStackManager *viewStackManager;
 @property (nonatomic, strong) User *currentUser;
 
 @end
@@ -131,9 +130,6 @@
     self.channelManager = [SYNChannelManager manager];
     
     self.onBoardingQueue = [SYNOnBoardingPopoverQueueController queueController];
-    
-    // ViewStack Manager //
-    self.viewStackManager = [SYNViewStackManager manager];
     
     
     // Video Queue View Controller //
