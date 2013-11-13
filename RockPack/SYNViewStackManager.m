@@ -8,7 +8,6 @@
 
 #import "ChannelOwner.h"
 #import "SYNAbstractViewController.h"
-#import "SYNCollectionDetailsViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNProfileRootViewController.h"
