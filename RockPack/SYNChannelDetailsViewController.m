@@ -39,12 +39,10 @@
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNAvatarButton.h"
-#import "SYNModalSubscribersController.h"
 #import "SYNUsersViewController.h"
 #import "UIButton+WebCache.h"
 #import "objc/runtime.h"
 #import "SYNSubscribersViewController.h"
-#import "SYNAccountSettingsPopoverBackgroundView.h"
 
 
 static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
@@ -59,12 +57,10 @@ UIPopoverControllerDelegate,
 
 SYNChannelCoverImageSelectorDelegate>
 
-@property (nonatomic, strong) SYNModalSubscribersController *modalSubscriptionsContainer;
 @property (nonatomic, strong) SYNReportConcernTableViewController *reportConcernController;
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, strong) UIImage *originalBackgroundImage;
 @property (nonatomic, strong) UIImageView *blurredBGImageView;
-@property (nonatomic, strong) UIPopoverController *subscribersPopover;
 @property (nonatomic, strong) UIView *coverChooserMasterView;
 @property (nonatomic, strong) UIView *noVideosMessageView;
 @property (nonatomic, weak) Channel *originalChannel;
@@ -301,9 +297,7 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     
-    [self.subscribersPopover dismissPopoverAnimated: NO];
     
-    self.subscribersPopover = nil;
     
     if (self.subscribingIndicator)
     {
@@ -1172,12 +1166,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (IBAction) followersLabelPressed: (id) sender
 {
-   // [self releasedSubscribersLabel: sender];
-    
-    if (self.subscribersPopover)
-    {
-        return;
-    }
+   
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -1187,38 +1176,9 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
+    // SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
     
-    if (IS_IPAD)
-    {
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: subscribersViewController];
-        navigationController.view.backgroundColor = [UIColor clearColor];
-        
-        
-        self.subscribersPopover = [[UIPopoverController alloc] initWithContentViewController: navigationController];
-        
-        self.subscribersPopover.popoverBackgroundViewClass = [SYNAccountSettingsPopoverBackgroundView class];
-        
-        self.subscribersPopover.popoverContentSize = CGSizeMake(514, 626);
-        self.subscribersPopover.delegate = self;
-        
-        
-        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
-                                 480.0f, 1, 1);
-        
-        
-        [self.subscribersPopover presentPopoverFromRect: rect
-                                                 inView: self.view
-                               permittedArrowDirections: 0
-                                               animated: YES];
-    }
-    else
-    {
-        self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
-        
-		SYNMasterViewController *masterViewController = appDelegate.masterViewController;
-		[masterViewController addOverlayController:self.modalSubscriptionsContainer animated:NO];
-    }
+    // TODO: Add Subscribers popover through the master view controller
 }
 
 #pragma mark - Text Field Delegates

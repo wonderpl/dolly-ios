@@ -8,7 +8,6 @@
 
 #import "GAI.h"
 #import "NSString+Utils.h"
-#import "SYNAccountSettingsPopoverBackgroundView.h"
 #import "SYNActivityManager.h"
 #import "SYNCameraPopoverViewController.h"
 #import "SYNDeviceManager.h"
