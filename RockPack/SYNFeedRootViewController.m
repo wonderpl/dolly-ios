@@ -143,31 +143,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - Container Scroll Delegates
 
-- (void) didMoveToParentViewController: (UIViewController *) parent
-{
-    if (parent == nil)
-    {
-        // Removed from parent
-        self.feedCollectionView.scrollsToTop = NO;
-    }
-    else
-    {
-        // Added to parent
-        [self updateAnalytics];
-        
-        self.feedCollectionView.scrollsToTop = YES;
-
-        // if the user has not pressed load more
-        if (self.dataRequestRange.location == 0)
-        {
-            [self resetDataRequestRange]; // just in case the length is less than standard
-            
-            [self loadAndUpdateFeedData];
-        }
-    }
-}
-
-
 - (void) updateAnalytics
 {
     // Google analytics support
@@ -194,6 +169,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) loadAndUpdateOriginalFeedData
 {
+    NSLog(@"-------loadAndUpdateOriginalFeedData");
     [self resetDataRequestRange];
     [self loadAndUpdateFeedData];
 }
@@ -201,6 +177,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) loadAndUpdateFeedData
 {
+    NSLog(@"-------loadAndUpdateFeedData");
     self.loadingMoreContent = YES;
     
     if (!appDelegate.currentOAuth2Credentials.userId)
@@ -305,13 +282,14 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView reloadData];
     
     [self loadAndUpdateFeedData];
-    
 }
+
 
 #pragma mark - Fetch Feed Data
 
 - (void) fetchAndDisplayFeedItems
 {
+    NSLog(@"-------fetchAndDisplayFeedItems");
     [self fetchVideoItems];
     
     [self fetchChannelItems];
@@ -895,7 +873,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
-    
     [super scrollViewDidScroll:scrollView];
     
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
