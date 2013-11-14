@@ -598,13 +598,13 @@ SYNChannelCoverImageSelectorDelegate>
                                                      name: NSManagedObjectContextDidSaveNotification
                                                    object: self.channel.managedObjectContext];
         
-        //        if (self.mode == kChannelDetailsModeDisplay && self.hasAppeared)
-        //        {
-        //
-        //            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
-        //                                                                object: self
-        //                                                              userInfo: @{kChannel: self.channel}];
-        //        }
+                if (self.mode == kChannelDetailsModeDisplay)
+                {
+        
+                    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
+                                                                        object: self
+                                                                      userInfo: @{kChannel: self.channel}];
+                }
     }
 }
 
@@ -1187,12 +1187,11 @@ referenceSizeForFooterInSection: (NSInteger) section
 - (IBAction)avatarTapped:(id)sender
 {
     
-    SYNProfileRootViewController *profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile];
+    SYNProfileRootViewController *profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile andChannelOwner:self.channel.channelOwner];
     
     
     NSLog(@"%@", self.channel);
     
-    profileVC.channelOwner = self.channel.channelOwner;
     
     
     NSLog(@"%@", profileVC.channelOwner);

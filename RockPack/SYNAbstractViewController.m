@@ -1020,13 +1020,11 @@
     
 	if (profileVC)
     {
-		profileVC.channelOwner = channelOwner;
 		[self.navigationController popToViewController:profileVC animated:YES];
 	}
     else
     {
-		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile];
-		profileVC.channelOwner = channelOwner;
+		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile andChannelOwner:channelOwner];
 		[self.navigationController pushViewController:profileVC animated:YES];
 	}
 }
