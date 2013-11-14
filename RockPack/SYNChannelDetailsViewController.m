@@ -181,13 +181,6 @@ SYNChannelCoverImageSelectorDelegate>
     self.lblDescription.text = @"Test Description";
     
     
-    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%lld %@", self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
-    
-    self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    
-    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
-    
-    self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -322,7 +315,17 @@ SYNChannelCoverImageSelectorDelegate>
         self.videoEditLayoutIPad.sectionInset = self.videoEditLayoutIPad.sectionInset;
         
     }
+ 
+    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%lld %@", self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
     
+    self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    
+    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.videoInstancesSet.count, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
+    
+    NSLog(@"video cont %lu", (unsigned long)self.channel.videoInstances.count);
+    
+    self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+
     
 }
 
@@ -492,7 +495,7 @@ SYNChannelCoverImageSelectorDelegate>
         
     }
     
-    NSLog(@"%f", offset);
+//    NSLog(@"%f", offset);
 }
 
 #pragma mark - Tab View Methods
@@ -720,6 +723,7 @@ SYNChannelCoverImageSelectorDelegate>
 
 - (NSInteger) collectionView: (UICollectionView *) collectionView numberOfItemsInSection: (NSInteger) section
 {
+    NSLog(@"number of items in section %lu",(unsigned long)self.channel.videoInstances.count);
     return self.channel.videoInstances.count;
 }
 
@@ -1219,6 +1223,8 @@ referenceSizeForFooterInSection: (NSInteger) section
 
     [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
     
+    [self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
+
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
     self.navigationItem.leftBarButtonItem = self.barBtnCancel;
     self.navigationItem.rightBarButtonItem = self.barBtnSave;
@@ -1227,9 +1233,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     for (SYNCollectionVideoCell *videoThumbnailCell in [self.videoThumbnailCollectionView visibleCells])
     {
-        
-        
-        
         [UIView animateWithDuration:0.2 animations:^{
             
             videoThumbnailCell.likeControl.alpha = 0.0f;
