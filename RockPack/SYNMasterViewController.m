@@ -33,7 +33,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController *accountSettingsPopover;
 
-@property (nonatomic, weak) UIViewController<SYNPopoverable> *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
+@property (nonatomic, weak) UIViewController *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
 
@@ -137,10 +137,14 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         return;
     }
     
+    
+    
+    
     UITapGestureRecognizer* tapGesture =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
     
     
+    // == Add Background View == //
     
     [self.backgroundOverlayView addGestureRecognizer:tapGesture];
     
@@ -152,9 +156,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     [self.view addSubview:overlayViewController.view];
     
+    
     self.overlayController = overlayViewController;
-    
-    
     
     // == Animate == //
     __block CGRect startFrame, endFrame;
@@ -249,7 +252,18 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     void (^FinishedBlock)(BOOL) = ^(BOOL finished) {
       
-        [wself.overlayController finishingPresentation];
+        UIViewController<SYNPopoverable> *popoverable;
+        if([self.overlayController isKindOfClass:[UINavigationController class]])
+        {
+            UINavigationController* navWrapper = ((UINavigationController*)wself.overlayController);
+            popoverable = (UIViewController<SYNPopoverable> *)navWrapper.viewControllers[0];
+            
+        }
+        else
+        {
+            popoverable = (UIViewController<SYNPopoverable> *)self.overlayController;
+        }
+        [popoverable finishingPresentation];
         
         [wself.overlayController.view removeFromSuperview];
         [wself.overlayController removeFromParentViewController];

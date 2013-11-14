@@ -46,13 +46,12 @@
 #pragma mark - Object lifecycle
 
 
-
-
-- (void) dealloc
+-(void)finishingPresentation
 {
-    // Defensive programming
     self.dobPopover.delegate = nil;
 }
+
+
 
 
 #pragma mark - View lifecycle

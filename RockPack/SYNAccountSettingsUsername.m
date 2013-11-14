@@ -36,6 +36,7 @@
 {
     [super viewWillAppear:animated];
     
+    
     self.errorLabel.text = @"Your username can only be changed once.";
 }
 

@@ -56,7 +56,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // on iPhone the view appears in a Navigation Controller and needs to offset from the top bar
-    lastTextFieldY = IS_IPHONE ? 84.0 : 0.0f;
+    lastTextFieldY = IS_IPHONE ? 84.0 : 64.0f;
     
 }
 
