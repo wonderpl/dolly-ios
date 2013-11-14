@@ -9,6 +9,8 @@
 #import "SYNOptionsOverlayViewController.h"
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
+#import "SYNAccountSettingsMainTableViewController.h"
+
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -66,12 +68,12 @@ typedef enum {
         {
             self.completeBlock = ^{
                 
-                
+                SYNAccountSettingsMainTableViewController* accountSettingsVC = [[SYNAccountSettingsMainTableViewController alloc] init];
                 
                 if(IS_IPAD)
-                    [appDelegate.masterViewController addOverlayController:nil animated:YES];
+                    [appDelegate.masterViewController addOverlayController:accountSettingsVC animated:YES];
                 else
-                    [wself.parentViewController.navigationController pushViewController:nil animated:YES];
+                    [wself.parentViewController.navigationController pushViewController:accountSettingsVC animated:YES];
                 
                 
             };
