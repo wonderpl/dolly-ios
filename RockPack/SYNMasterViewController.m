@@ -129,33 +129,37 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) addOverlayController:(UIViewController<SYNPopoverable>*)abstractViewController animated:(BOOL)animated
+- (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController animated:(BOOL)animated
 {
-    if(!abstractViewController)
+    if(!overlayViewController)
     {
         AssertOrLog(@"Trying to add nil as an overlay controller");
         return;
     }
     
-    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
+    UITapGestureRecognizer* tapGesture =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
+    
+    
+    
     [self.backgroundOverlayView addGestureRecognizer:tapGesture];
     
     self.backgroundOverlayView.alpha = 0.0f;
     
     [self.view addSubview:self.backgroundOverlayView];
     
-    [self addChildViewController:abstractViewController];
+    [self addChildViewController:overlayViewController];
     
-    [self.view addSubview:abstractViewController.view];
+    [self.view addSubview:overlayViewController.view];
     
-    self.overlayController = abstractViewController;
+    self.overlayController = overlayViewController;
     
     
     
     // == Animate == //
     __block CGRect startFrame, endFrame;
     
-    startFrame = endFrame = abstractViewController.view.frame;
+    startFrame = endFrame = overlayViewController.view.frame;
     if(IS_IPHONE)
     {
         // push it to the bottom
@@ -169,9 +173,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
         
         self.overlayController.view.alpha = 0.0;
+        
+        self.overlayController.view.layer.cornerRadius = 6.0f;
+        [self.overlayController.view setClipsToBounds:YES];
     }
     
-    abstractViewController.view.frame = startFrame;
+    overlayViewController.view.frame = startFrame;
     
     void(^AnimationsBlock)(void) = ^{
         
@@ -180,7 +187,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         if(IS_IPHONE)
         {
             endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
-            abstractViewController.view.frame = endFrame;
+            overlayViewController.view.frame = endFrame;
         }
         else
         {

@@ -27,7 +27,7 @@
 #import "SYNAppDelegate.h"
 #import "UIFont+SYNFont.h"
 #import "User.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface SYNAccountSettingsViewController ()
 
@@ -35,8 +35,6 @@
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (nonatomic, weak) UITableViewCell* dobTableViewCell;
 
-// only for iPad
-@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 
 @property (nonatomic, weak) User* user;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
@@ -69,12 +67,6 @@
     appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     user = appDelegate.currentUser;
-    
-    // iPhone is pushed on to the navigation stack
-    if(IS_IPAD)
-        self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
-    
-    
     
     
     self.title = NSLocalizedString (@"settings_popover_title" , nil);
@@ -317,6 +309,7 @@
                     if(self.dobPopover)
                         return;
 
+                    // wrap into a nav controller so as to display the title
                     UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: dobController];
                     
                     
@@ -326,7 +319,7 @@
                     
                     
                     [self.dobPopover presentPopoverFromRect: self.dobTableViewCell.frame
-                                                     inView: self.view
+                                                     inView: self.tableView
                                    permittedArrowDirections: UIPopoverArrowDirectionDown
                                                    animated: YES];
                 }
