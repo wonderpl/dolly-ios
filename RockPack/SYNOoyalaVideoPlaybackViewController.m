@@ -99,7 +99,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 
 - (void) playVideoWithSourceId: (NSString *) sourceId
 {
-    self.notYetPlaying = TRUE;
+    self.notYetPlaying = YES;
     self.pausedByUser = NO;
     self.firstLaunch = YES;
     
@@ -107,7 +107,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     
     [ooyalaPlayer setEmbedCode: sourceId];
     
-    self.playFlag = TRUE;
+    self.playFlag = YES;
     
     [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPause.png"]
                                     forState: UIControlStateNormal];
@@ -120,12 +120,12 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     {
         self.pausedByUser = NO;
         [ooyalaPlayer play];
-        self.playFlag = TRUE;
+        self.playFlag = YES;
     }
     else
     {
         [ooyalaPlayer pause];
-        self.playFlag = FALSE;
+        self.playFlag = NO;
     }
 }
 
@@ -136,7 +136,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     
     [ooyalaPlayer pause];
     
-    self.playFlag = FALSE;
+    self.playFlag = NO;
 }
 
 
@@ -146,7 +146,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     
     [ooyalaPlayer pause];
     
-    self.playFlag = FALSE;
+    self.playFlag = NO;
 }
 
 
@@ -234,15 +234,15 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
                 
                 DebugLog(@"*** Playing: Starting - Fading up player");
                 // If we are playing then out shuttle / pause / play cycle is over
-                self.shuttledByUser = TRUE;
-                self.notYetPlaying = FALSE;
+                self.shuttledByUser = YES;
+                self.notYetPlaying = NO;
                 
                 // Now cache the duration of this video for use in the progress updates
                 self.currentDuration = self.duration;
                 
                 if (self.currentDuration > 0.0f)
                 {
-                    self.fadeUpScheduled = FALSE;
+                    self.fadeUpScheduled = NO;
                     // Only start if we have a valid duration
                     [self startShuttleBarUpdateTimer];
                     self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
@@ -253,7 +253,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 
             // Player is paused, video is showing
             case OOOoyalaPlayerStatePaused:
-                if (self.shuttledByUser == TRUE && self.playFlag == TRUE)
+                if (self.shuttledByUser && self.playFlag)
                 {
                     DebugLog (@"*** Paused: Paused by shuttle and should be playing? - Attempting to play");
                     [self playVideo];
