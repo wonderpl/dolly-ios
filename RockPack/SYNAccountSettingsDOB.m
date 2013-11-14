@@ -27,7 +27,7 @@
     self = [super init];
     if (self)
     {
-        datePicker = [[UIDatePicker alloc] initWithFrame: CGRectMake(0.0, 0.0, 280.0, 280.0)];
+        datePicker = [[UIDatePicker alloc] initWithFrame: CGRectMake(0.0, IS_IPHONE ? 64.0 : 0.0f, 280.0, 280.0)];
         
         self.title = @"Choose a Date";
     }

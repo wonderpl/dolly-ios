@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface SYNAccountSettingsMainTableViewController : UITableViewController <UIPickerViewDelegate, UIPopoverControllerDelegate, UIAlertViewDelegate>
+@interface SYNAccountSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPopoverControllerDelegate>
 
 @end

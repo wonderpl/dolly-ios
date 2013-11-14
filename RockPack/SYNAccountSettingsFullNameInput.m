@@ -51,7 +51,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
 
-    self.inputField.tag =1 ;
+    self.inputField.tag = 1 ;
     self.inputField.delegate = self;
     
     self.lastNameInputField = [self createInputField];
@@ -63,10 +63,17 @@
     
     [self.scrollView addSubview:self.lastNameInputField];
     
-    self.tableView = [[UITableView alloc] initWithFrame: CGRectMake((IS_IPAD ? 1.0 : 0.0),
-                                                                    self.lastNameInputField.frame.origin.y + 42.0,
-                                                                    (IS_IPAD ? 378.0 : 320.0),
-                                                                    126.0) style: UITableViewStyleGrouped];
+    CGRect tableViewFrame = CGRectMake(0.0,
+                                       self.lastNameInputField.frame.origin.y + 42.0,
+                                       320.0f,
+                                       138.0);
+    if(IS_IPAD)
+    {
+        tableViewFrame.size.width = 378.0f;
+    }
+    
+    
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style: UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.opaque = NO;
     self.tableView.delegate = self;
@@ -85,37 +92,6 @@
     self.errorLabel.center = CGPointMake(self.errorLabel.center.x, self.saveButton.center.y + 60.0);
     self.errorLabel.frame = CGRectIntegral(self.errorLabel.frame);
     
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage* backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
-    UIImage* backButtonHighlightedImage = [UIImage imageNamed: @"ButtonAccountBackHighlighted.png"];
-    
-    
-    [backButton setImage: backButtonImage
-                forState: UIControlStateNormal];
-    
-    [backButton setImage: backButtonHighlightedImage
-                forState: UIControlStateHighlighted];
-    
-    [backButton addTarget:self action:@selector(didTapBackButton:) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0, 0.0, backButtonImage.size.width, backButtonImage.size.height);
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    self.navigationItem.leftBarButtonItem = backButtonItem;
-    
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
-    titleLabel.text = NSLocalizedString (@"settings_popover_fullname_title", nil);
-    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor whiteColor];
-    titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-    
-    
-    UIView * labelContentView = [[UIView alloc]init];
-    [labelContentView addSubview:titleLabel];
-    
-    self.navigationItem.titleView = labelContentView;
     
     self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
     
