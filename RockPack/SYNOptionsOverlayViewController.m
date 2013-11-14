@@ -71,7 +71,7 @@ typedef enum {
 -(void)optionButtonPressed:(UIButton*)buttonPressed
 {
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-    __weak SYNOptionsOverlayViewController* wself = self;
+    
     switch (buttonPressed.tag)
     {
         case OptionButtonTagSettings:
@@ -87,8 +87,9 @@ typedef enum {
                 }
                 else
                 {
-                    wself.parentViewController.navigationController.navigationBarHidden = NO;
-                    [wself.parentViewController.navigationController pushViewController:accountSettingsVC
+                    UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
+                    currentVC.navigationController.navigationBarHidden = NO;
+                    [currentVC.navigationController pushViewController:accountSettingsVC
                                                                                animated:YES];
                 }
                 
