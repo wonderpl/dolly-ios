@@ -10,7 +10,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
 #import "SYNAccountSettingsViewController.h"
-
+#import "SYNDeviceManager.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -28,12 +28,14 @@ typedef enum {
 
 
 @interface SYNOptionsOverlayViewController ()
-{
-    
-}
 
 @property (nonatomic, copy) TriggerActionOnCompleteBlock completeBlock;
+@property (nonatomic, strong) IBOutlet UIView* backgroundView;
+
 @end
+
+
+
 
 @implementation SYNOptionsOverlayViewController
 
@@ -56,12 +58,20 @@ typedef enum {
         }
     }
     
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
+    [self.backgroundView addGestureRecognizer:tapGesture];
+    
+}
+
+-(void)backgroundTapped:(UITapGestureRecognizer*)tapGesture
+{
+    [self removeFromScreen];
 }
 
 -(void)optionButtonPressed:(UIButton*)buttonPressed
 {
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-    __weak SYNOptionsOverlayViewController* wself = self;
+    
     switch (buttonPressed.tag)
     {
         case OptionButtonTagSettings:
@@ -77,8 +87,9 @@ typedef enum {
                 }
                 else
                 {
-                    wself.parentViewController.navigationController.navigationBarHidden = NO;
-                    [wself.parentViewController.navigationController pushViewController:accountSettingsVC
+                    UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
+                    currentVC.navigationController.navigationBarHidden = NO;
+                    [currentVC.navigationController pushViewController:accountSettingsVC
                                                                                animated:YES];
                 }
                 
@@ -132,6 +143,7 @@ typedef enum {
     }
     
     [self removeFromScreen];
+       
 }
 
 -(void)removeFromScreen
@@ -155,6 +167,19 @@ typedef enum {
         
     }];
     
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+}
+
+-(void)finishingPresentation
+{
+    if(self.completeBlock)
+        self.completeBlock();
 }
 
 -(void)dealloc

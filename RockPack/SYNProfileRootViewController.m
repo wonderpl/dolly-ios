@@ -26,6 +26,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNOptionsOverlayViewController.h"
 #import "UIImageView+WebCache.h"
+#import "SYNMasterViewController.h"
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
 #import "SYNAccountSettingsViewController.h"
@@ -1514,13 +1515,13 @@
     
     // Set frame to full screen
     CGRect vFrame = optionsVC.view.frame;
-    vFrame.size = self.view.frame.size;
+    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
     optionsVC.view.frame = vFrame;
     optionsVC.view.alpha = 0.0f;
     
     
-    [self addChildViewController:optionsVC];
-    [self.view addSubview:optionsVC.view];
+    [appDelegate.masterViewController addChildViewController:optionsVC];
+    [appDelegate.masterViewController.view addSubview:optionsVC.view];
     
     [UIView animateWithDuration:0.3 animations:^{
         optionsVC.view.alpha = 1.0f;
