@@ -82,15 +82,20 @@ typedef enum {
                 
                 if(IS_IPAD)
                 {
-                    [appDelegate.masterViewController addOverlayController:accountSettingsVC
+                    UINavigationController* wrapper =
+                    [[UINavigationController alloc] initWithRootViewController:accountSettingsVC];
+                    
+                    wrapper.view.frame = accountSettingsVC.view.frame;
+                    
+                    [appDelegate.masterViewController addOverlayController:wrapper
                                                                   animated:YES];
                 }
                 else
                 {
                     UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
                     currentVC.navigationController.navigationBarHidden = NO;
-                    [currentVC.navigationController pushViewController:accountSettingsVC
-                                                                               animated:YES];
+                    [currentVC.navigationController pushViewController: accountSettingsVC
+                                                              animated: YES];
                 }
                 
                 

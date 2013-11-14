@@ -64,27 +64,11 @@
     
     self.view.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor whiteColor];
     
-    
     // on iPhone the view appears in a Navigation Controller and needs to offset from the top bar
     lastTextFieldY = IS_IPHONE ? 84.0 : 0.0f;
     
-    // == Button == //
     
-    UIImage* buttonImage = [UIImage imageNamed: @"ButtonAccountSaveDefault.png"];
-    saveButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    saveButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    saveButton.center = CGPointMake((IS_IPAD ? 190.0 : 160.0), saveButton.center.y);
     
-    [saveButton setImage: buttonImage
-                forState: UIControlStateNormal];
-    
-    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
-                forState: UIControlStateHighlighted];
-    
-    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
-                forState: UIControlStateDisabled];
-    
-    [self.view addSubview: saveButton];
     
     inputField = [self createInputField];
     
@@ -117,15 +101,9 @@
     self.spinner.center = self.saveButton.center;
     [self.view addSubview: self.spinner];
     
-    [saveButton addTarget: self
-                   action: @selector(saveButtonPressed:)
-         forControlEvents: UIControlEventTouchUpInside];
     
     
-    errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(10.0,
-                                                            saveButton.frame.origin.y + saveButton.frame.size.height + 10.0,
-                                                            self.preferredContentSize.width - 20.0,
-                                                            50)];
+    
     
     errorLabel.textColor = [UIColor colorWithRed: (11.0/255.0)
                                            green: (166.0/255.0)
@@ -140,33 +118,58 @@
 }
 
 
-
-
-- (void) didTapBackButton: (id) sender
+-(void)viewWillAppear:(BOOL)animated
 {
-    if (self.navigationController.viewControllers.count > 1)
-    {
-        [self.navigationController popViewControllerAnimated: YES];
-    }
+    [super viewWillAppear:animated];
+    self.view.frame = self.navigationController.view.frame;
+    
+    errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(5.0,
+                                                            saveButton.frame.origin.y + saveButton.frame.size.height + 6.0,
+                                                            self.preferredContentSize.width - 10.0,
+                                                            50)];
+    
+    // == Save Button == //
+    
+    UIImage* buttonImage = [UIImage imageNamed: @"ButtonAccountSaveDefault.png"];
+    saveButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    saveButton.frame = CGRectMake(self.view.frame.size.width * 0.5f - buttonImage.size.width * 0.5f,
+                                  0.0f,
+                                  buttonImage.size.width,
+                                  buttonImage.size.height);
+    
+    
+    [saveButton setImage: buttonImage
+                forState: UIControlStateNormal];
+    
+    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
+                forState: UIControlStateHighlighted];
+    
+    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
+                forState: UIControlStateDisabled];
+    
+    
+    [saveButton addTarget: self
+                   action: @selector(saveButtonPressed:)
+         forControlEvents: UIControlEventTouchUpInside];
+    
+    
+    [self.view addSubview: saveButton];
 }
 
 
 - (SYNPaddedUITextField *) createInputField
 {
     
-    
+    // 1. Create the new text field
     SYNPaddedUITextField *newInputField = [[SYNPaddedUITextField alloc] initWithFrame: CGRectMake(5.0,
                                                                                                   lastTextFieldY,
                                                                                                   self.view.frame.size.width - 10.0f,
                                                                                                   40.0)];
     
-    newInputField.backgroundColor = [UIColor colorWithWhite:(255.0/255.0) alpha:(1.0)];
-    newInputField.layer.cornerRadius = 0.0f;
-    newInputField.layer.borderWidth = 1.0f;
-    newInputField.layer.borderColor = [UIColor colorWithWhite:(209.0/255.0) alpha:(1.0)].CGColor;
-    newInputField.textColor = [UIColor darkGrayColor];
+    
     newInputField.delegate = self;
     
+    // 2. Move the Save Button Down
     CGRect saveButtonFrame = saveButton.frame;
     saveButtonFrame.origin.y = newInputField.frame.origin.y + newInputField.frame.size.height + 10.0;
     self.saveButton.frame = saveButtonFrame;
