@@ -63,14 +63,24 @@
     
     [self.view addSubview:self.lastNameInputField];
     
+    
+    
+    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
+    
+    
+    self.inputField.placeholder = @"First Name";
+    self.lastNameInputField.placeholder = @"Last Name";
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     CGRect tableViewFrame = CGRectMake(0.0,
                                        self.lastNameInputField.frame.origin.y + 22.0,
-                                       320.0f,
+                                       self.view.frame.size.width,
                                        138.0);
-    if(IS_IPAD)
-    {
-        tableViewFrame.size.width = 378.0f;
-    }
     
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style: UITableViewStyleGrouped];
@@ -91,16 +101,7 @@
     
     self.errorLabel.center = CGPointMake(self.errorLabel.center.x, self.saveButton.center.y + 60.0);
     self.errorLabel.frame = CGRectIntegral(self.errorLabel.frame);
-    
-    
-    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
-    
-    
-    self.inputField.placeholder = @"First Name";
-    self.lastNameInputField.placeholder = @"Last Name";
-    
 }
-
 
 #pragma mark - Table view data source
 

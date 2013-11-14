@@ -28,36 +28,31 @@
 
 #pragma mark - Object lifecycle
 
-- (id) init
-{
-    if ((self = [super init]))
-    {        
-        self.preferredContentSize = CGSizeMake(380, 476);
-        
-        self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        self.tableView = [[UITableView alloc] initWithFrame: CGRectMake((IS_IPAD ? 1.0 : 0.0), 0.0, (IS_IPAD ? 378 : 320.0), 200.0) style: UITableViewStyleGrouped];
-        self.tableView.backgroundColor = [UIColor clearColor];
-        self.tableView.opaque = NO;
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-        self.tableView.backgroundView = nil;
-        self.tableView.scrollEnabled = NO;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        
-        self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge];
-        CGRect spinnerFrame = self.spinner.frame;
-        spinnerFrame.origin.y = self.tableView.frame.origin.y + self.tableView.frame.size.height + 20.0;
-        spinnerFrame.origin.x = self.tableView.frame.size.width * 0.5 - spinnerFrame.size.width * 0.5;
-        self.spinner.frame = CGRectIntegral(spinnerFrame);
-        [self.view addSubview: self.spinner];
-    }
-    
-    return self;
-}
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    self.tableView = [[UITableView alloc] initWithFrame: CGRectMake((IS_IPAD ? 1.0 : 0.0), 0.0, (IS_IPAD ? 378 : 320.0), 200.0) style: UITableViewStyleGrouped];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.opaque = NO;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundView = nil;
+    self.tableView.scrollEnabled = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+    
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge];
+    CGRect spinnerFrame = self.spinner.frame;
+    spinnerFrame.origin.y = self.tableView.frame.origin.y + self.tableView.frame.size.height + 20.0;
+    spinnerFrame.origin.x = self.tableView.frame.size.width * 0.5 - spinnerFrame.size.width * 0.5;
+    self.spinner.frame = CGRectIntegral(spinnerFrame);
+    [self.view addSubview: self.spinner];
+}
 
 - (void) dealloc
 {

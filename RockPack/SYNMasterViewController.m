@@ -163,7 +163,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     if(IS_IPHONE)
     {
         // push it to the bottom
-        
         startFrame.origin.y = startFrame.size.height;
         
     }
@@ -174,7 +173,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         self.overlayController.view.alpha = 0.0;
         
-        self.overlayController.view.layer.cornerRadius = 6.0f;
+        self.overlayController.view.layer.cornerRadius = 8.0f;
         [self.overlayController.view setClipsToBounds:YES];
     }
     

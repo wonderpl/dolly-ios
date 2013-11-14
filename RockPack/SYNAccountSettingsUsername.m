@@ -29,7 +29,7 @@
                                                             label: @"Username"
                                                             value: nil] build]];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    
 
     
     self.errorLabel.text = @"Your username can only be changed once.";
