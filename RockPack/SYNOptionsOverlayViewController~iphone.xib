@@ -14,57 +14,69 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDc-om-S33" userLabel="Settings">
-                    <rect key="frame" x="41" y="125" width="60" height="60"/>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDc-om-S33" userLabel="Settings">
+                    <rect key="frame" x="40" y="111" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="3sa-VW-JT7"/>
+                        <constraint firstAttribute="width" constant="60" id="YB7-lJ-YQu"/>
+                    </constraints>
                     <state key="normal" image="ButtonMoreSettings.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl8-D5-ycD" userLabel="Friends">
-                    <rect key="frame" x="118" y="125" width="60" height="60"/>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl8-D5-ycD" userLabel="Friends">
+                    <rect key="frame" x="130" y="111" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="ahV-o5-rTN"/>
+                        <constraint firstAttribute="height" constant="60" id="lmx-c1-5Ak"/>
+                    </constraints>
                     <state key="normal" image="ButtonMoreFriends.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvl-Tq-qqU" userLabel="About">
-                    <rect key="frame" x="207" y="125" width="60" height="60"/>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvl-Tq-qqU" userLabel="About">
+                    <rect key="frame" x="220" y="111" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="36o-Nk-qlw"/>
+                        <constraint firstAttribute="height" constant="60" id="7vB-IR-Ed5"/>
+                    </constraints>
                     <state key="normal" image="ButtonMoreAbout.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhV-Nr-PkJ" userLabel="Feedback">
-                    <rect key="frame" x="41" y="179" width="60" height="60"/>
+                    <rect key="frame" x="40" y="208" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonMoreFeedback.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67f-LU-RAg" userLabel="Rate">
-                    <rect key="frame" x="118" y="179" width="60" height="60"/>
+                    <rect key="frame" x="130" y="208" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonMoreRate.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTM-zm-rmt" userLabel="Blog">
-                    <rect key="frame" x="207" y="179" width="60" height="60"/>
+                    <rect key="frame" x="220" y="208" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonMoreBlog.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBb-D6-iHz" userLabel="Help">
-                    <rect key="frame" x="34" y="250" width="60" height="60"/>
+                    <rect key="frame" x="41" y="304" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonMoreHelp.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJF-XA-3U1" userLabel="Logout">
-                    <rect key="frame" x="111" y="250" width="60" height="60"/>
+                    <rect key="frame" x="130" y="304" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonMoreLogout.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,6 +84,14 @@
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.73725491762161255" green="0.73725491762161255" blue="0.73725491762161255" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="GDc-om-S33" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="40" id="5Ak-TG-EfO"/>
+                <constraint firstItem="GDc-om-S33" firstAttribute="top" secondItem="1" secondAttribute="top" constant="111" id="5YX-Kj-7yE"/>
+                <constraint firstItem="tvl-Tq-qqU" firstAttribute="top" secondItem="1" secondAttribute="top" constant="111" id="9XT-Vi-YCe"/>
+                <constraint firstAttribute="trailing" secondItem="tvl-Tq-qqU" secondAttribute="trailing" constant="40" id="GhP-oA-W3Q"/>
+                <constraint firstAttribute="centerX" secondItem="dl8-D5-ycD" secondAttribute="centerX" id="YTJ-1W-s8H"/>
+                <constraint firstItem="dl8-D5-ycD" firstAttribute="top" secondItem="1" secondAttribute="top" constant="111" id="cC5-hu-1mg"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

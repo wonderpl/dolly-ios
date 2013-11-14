@@ -10,6 +10,7 @@
 #import "SYNAppDelegate.h"
 
 typedef enum {
+    
     OptionButtonTagSettings = 1,
     OptionButtonTagFriends = 2,
     OptionButtonTagAbout = 3,
@@ -39,7 +40,9 @@ typedef enum {
     [super viewDidLoad];
     
     appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     for (UIView* sView in self.view.subviews) {
+        
         if([sView isKindOfClass:[UIButton class]]) // sanity check
         {
             [((UIButton*)sView) addTarget:self
