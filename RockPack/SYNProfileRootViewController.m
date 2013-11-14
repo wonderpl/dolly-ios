@@ -130,7 +130,7 @@
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDescriptionCurrentlyShowing) name:kHideAllDesciptions object:nil];
 
-        self.shouldBeginEditing = YES;
+        self.modeType = MyOwnProfile;
     }
     
     return self;
@@ -138,9 +138,10 @@
 
 - (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode andChannelOwner:(ChannelOwner*)chanOwner
 {
+    self = [self initWithViewId:vid];
     self.modeType = mode;
     self.channelOwner = chanOwner;
-    self = [self initWithViewId:vid];
+
     return self;
 }
 
@@ -163,6 +164,8 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    self.shouldBeginEditing = YES;
+
     self.collectionsTabActive = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
@@ -565,7 +568,6 @@
 - (void) handleDataModelChange: (NSNotification *) notification
 {
     NSArray *updatedObjects = [notification userInfo][NSUpdatedObjectsKey];
-    
     
     [updatedObjects enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop)
      {

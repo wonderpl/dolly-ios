@@ -13,5 +13,6 @@
 
 - (id) initWithInfo: (NSMutableDictionary *) mutableInfoDictionary;
 
+-(void)finishingPresentation;
 
 @end

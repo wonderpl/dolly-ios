@@ -102,7 +102,7 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldDescriptionEdit;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
-@property (strong, nonatomic) IBOutlet UIView *borderAboveCollection;
+@property (strong, nonatomic) IBOutlet UIView *viewCollectionSeperator;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewDescription;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
 @property (strong, nonatomic) UICollectionViewFlowLayout *videoEditLayoutIPad;
@@ -141,52 +141,11 @@ SYNChannelCoverImageSelectorDelegate>
 {
     [super viewDidLoad];
     
-    if (IS_IPHONE) {
-        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
-        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
-        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
-        [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
-    }
-    
-    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
-    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
-    
-    [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[self.txtViewDescription layer] setBorderWidth:1.0];
-    [[self.txtViewDescription layer] setCornerRadius:0];
-    
-    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
-    
-    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
-    
-    
-    [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
-                        forCellWithReuseIdentifier: CollectionVideoCellName];
-    
-    // == Footer View == //
-    UINib *footerViewNib = [UINib nibWithNibName: @"SYNChannelFooterMoreView"
-                                          bundle: nil];
-    
-    [self.videoThumbnailCollectionView registerNib: footerViewNib
-                        forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
-                               withReuseIdentifier: @"SYNChannelFooterMoreView"];
-    
-    
-    self.txtFieldChannelName.text = self.channel.title;
-    self.lblFullName.text = self.channel.channelOwner.displayName;
-    
-    
-    self.lblChannelTitle.text = self.channel.title;
-    //No cms yet
-    self.lblDescription.text = @"Test Description";
-    self.txtViewDescription.text = self.lblDescription.text;
-    
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    if (self.mode == kChannelDetailsModeDisplay)
+    //show we track users channel details mode?
+    if (self.mode == kChannelDetailsModeDisplay )
     {
         [tracker set: kGAIScreenName
                value: @"Channel details"];
@@ -269,7 +228,7 @@ SYNChannelCoverImageSelectorDelegate>
         //                       withLoader: YES];
     }
     
-    //[self displayChannelDetails];
+    [self displayChannelDetails];
     
     
     
@@ -386,7 +345,6 @@ SYNChannelCoverImageSelectorDelegate>
     
     NSLog(@"%d", self.mode);
     
-    
     if (self.mode == kChannelDetailsModeDisplayUser)
     {
         self.btnEditChannel.hidden = NO;
@@ -415,6 +373,53 @@ SYNChannelCoverImageSelectorDelegate>
 }
 
 
+-(void) displayChannelDetails
+{
+    
+    if (IS_IPHONE) {
+        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
+        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
+        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
+        [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
+    }
+    
+    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
+    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
+    
+    [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.txtViewDescription layer] setBorderWidth:1.0];
+    [[self.txtViewDescription layer] setCornerRadius:0];
+    
+    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
+    
+    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
+    
+    
+    [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
+                        forCellWithReuseIdentifier: CollectionVideoCellName];
+    
+    // == Footer View == //
+    UINib *footerViewNib = [UINib nibWithNibName: @"SYNChannelFooterMoreView"
+                                          bundle: nil];
+    
+    [self.videoThumbnailCollectionView registerNib: footerViewNib
+                        forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+                               withReuseIdentifier: @"SYNChannelFooterMoreView"];
+    
+    
+    self.txtFieldChannelName.text = self.channel.title;
+    self.lblFullName.text = self.channel.channelOwner.displayName;
+    
+    
+    self.lblChannelTitle.text = self.channel.title;
+    //No cms yet
+    self.lblDescription.text = @"Test Description";
+    self.txtViewDescription.text = self.lblDescription.text;
+    
+    
+}
+#pragma mark - Control Actions
 
 - (IBAction)followControlPressed:(id)sender
 {
@@ -488,11 +493,7 @@ SYNChannelCoverImageSelectorDelegate>
     
     if (IS_IPHONE) {
         
-        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset*2);
-        
-        self.viewProfileContainer.transform = move;
-        self.borderAboveCollection.transform = move;
-        self.viewEditMode.transform = move;
+        [self moveHeader:offset];
         
         
     }
@@ -507,6 +508,26 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
 //    NSLog(@"%f", offset);
+}
+
+-(void) moveHeader:(CGFloat) offset
+{
+    CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset*2);
+    
+    self.viewProfileContainer.transform = move;
+    self.btnAvatar.transform = move;
+    self.btnShowFollowers.transform = move;
+    self.btnShowVideos.transform =move;
+    self.btnFollowChannel.transform = move;
+    self.btnEditChannel.transform =move;
+    self.btnShareChannel.transform = move;
+    self.viewEditMode.transform = move;
+    self.viewCollectionSeperator.transform = move;
+    self.btnDeleteChannel.transform = move;
+    self.txtViewDescription.transform = move;
+    self.txtFieldChannelName.transform = move;
+    self.txtFieldDescriptionEdit.transform = move;
+    
 }
 
 #pragma mark - Tab View Methods
@@ -612,7 +633,7 @@ SYNChannelCoverImageSelectorDelegate>
                                                      name: NSManagedObjectContextDidSaveNotification
                                                    object: self.channel.managedObjectContext];
         
-                if (self.mode == kChannelDetailsModeDisplay)
+                if (self.mode == kChannelDetailsModeDisplay || self.mode == kChannelDetailsModeDisplayUser)
                 {
         
                     [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
@@ -648,7 +669,7 @@ SYNChannelCoverImageSelectorDelegate>
         
         if (!error)
         {
-            //[self displayChannelDetails];
+            [self displayChannelDetails];
         }
         else
         {
@@ -709,10 +730,10 @@ SYNChannelCoverImageSelectorDelegate>
     
     
     
-    //    if ((self.channel.channelOwner.displayName !=  nil) && (self.channelOwnerLabel.text == nil))
-    //    {
-    //        [self displayChannelDetails];
-    //    }
+        if ((self.channel.channelOwner.displayName !=  nil) && (self.txtFieldChannelName.text == nil))
+        {
+            [self displayChannelDetails];
+        }
     
 }
 
@@ -722,7 +743,7 @@ SYNChannelCoverImageSelectorDelegate>
 {
     [self.videoThumbnailCollectionView reloadData];
     
-    // [self displayChannelDetails];
+    [self displayChannelDetails];
     
     
     
@@ -1216,29 +1237,94 @@ referenceSizeForFooterInSection: (NSInteger) section
     
 }
 
-- (IBAction)editTapped:(id)sender
+
+-(void) profileMode
 {
-    self.viewProfileContainer.hidden = YES;
-    self.viewEditMode.alpha = 0.0f;
-    self.viewEditMode.hidden = NO;
+    
+    self.navigationItem.leftBarButtonItem = self.barBtnBack;
+    self.mode = kChannelDetailsModeDisplayUser;
+
+    self.viewProfileContainer.hidden = NO;
+    self.btnAvatar.hidden = NO;
+    self.btnShowFollowers.hidden = NO;
+    self.btnShowVideos.hidden = NO;
+    self.btnFollowChannel.hidden = NO;
+    self.btnEditChannel.hidden = NO;
+    self.btnShareChannel.hidden = NO;
     
     
+    //edit mode
+    self.btnDeleteChannel.hidden = YES;
+    self.txtFieldChannelName.hidden = YES;
+    self.txtViewDescription.hidden = YES;
     
+    self.btnDeleteChannel.alpha = 0.0f;
+    self.txtFieldChannelName.alpha = 0.0f;
+    
+    self.txtViewDescription.alpha = 0.0f;
     
     [UIView animateWithDuration:0.4 animations:^{
-        self.viewEditMode.alpha = 1.0f;
+        self.btnDeleteChannel.alpha = 1.0f;
+        self.txtFieldChannelName.alpha = 1.0f;
+        
+        self.txtViewDescription.alpha = 1.0f;
         
     }];
     
+
     
 
-    [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
     
-    [self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
+}
+
+
+-(void) editMode
+{
+    
+    //profile mode
+    
+    self.viewProfileContainer.hidden = YES;
+    self.btnAvatar.hidden = YES;
+    self.btnShowFollowers.hidden = YES;
+    self.btnShowVideos.hidden = YES;
+    self.btnFollowChannel.hidden = YES;
+    self.btnEditChannel.hidden = YES;
+    self.btnShareChannel.hidden = YES;
+
+    
+    //edit mode
+    self.btnDeleteChannel.hidden = NO;
+    self.txtFieldChannelName.hidden = NO;
+    self.txtViewDescription.hidden = NO;
+    
+    self.btnDeleteChannel.alpha = 0.0f;
+    self.txtFieldChannelName.alpha = 0.0f;
+
+    self.txtViewDescription.alpha = 0.0f;
+
+    [UIView animateWithDuration:0.4 animations:^{
+        self.btnDeleteChannel.alpha = 1.0f;
+        self.txtFieldChannelName.alpha = 1.0f;
+        
+        self.txtViewDescription.alpha = 1.0f;
+        
+    }];
+
+}
+
+
+- (IBAction)editTapped:(id)sender
+{
+    
+    [self editMode];
 
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
     self.navigationItem.leftBarButtonItem = self.barBtnCancel;
     self.navigationItem.rightBarButtonItem = self.barBtnSave;
+    
+    [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
+    
+    [self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
     
     self.mode = kChannelDetailsModeEdit;
     
@@ -1269,21 +1355,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     NSLog(@"cancel");
     
-    self.navigationItem.leftBarButtonItem = self.barBtnBack;
-    self.viewProfileContainer.hidden = NO;
-    
-    self.viewProfileContainer.alpha = 0.0f;
-    
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.viewProfileContainer.alpha = 1.0f;
-        self.navigationItem.rightBarButtonItem = nil;
-    }];
-    
-    
-    self.viewEditMode.hidden = YES;
-    
-    self.mode = kChannelDetailsModeDisplayUser;
+    [self profileMode];
     
     
     [self.txtFieldChannelName resignFirstResponder];
@@ -1361,6 +1433,35 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 }
 
+- (void) deleteVideoInstance
+{
+    VideoInstance *videoInstanceToDelete = (VideoInstance *) self.channel.videoInstances[self.indexPathToDelete.item];
+    
+    if (!videoInstanceToDelete)
+    {
+        return;
+    }
+    
+//    self.editedVideos = YES;
+    
+    UICollectionViewCell *cell = [self.videoThumbnailCollectionView cellForItemAtIndexPath: self.indexPathToDelete];
+    
+    [UIView animateWithDuration: 0.2
+                     animations: ^{
+                         cell.alpha = 0.0;
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                         [self.channel.videoInstancesSet removeObject: videoInstanceToDelete];
+                         
+                         [videoInstanceToDelete.managedObjectContext deleteObject: videoInstanceToDelete];
+                         
+                         [self.videoThumbnailCollectionView reloadData];
+                         
+                         [appDelegate saveContext: YES];
+                     }];
+}
+
 
 - (void) alertView: (UIAlertView *) alertView
 willDismissWithButtonIndex: (NSInteger) buttonIndex
@@ -1381,7 +1482,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
         }
         else
         {
-          //  [self deleteVideoInstance];
+            [self deleteVideoInstance];
         }
     }
 }
@@ -1621,6 +1722,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
     return (newLength > 120) ? NO : YES;
 }
+
 
 
 
