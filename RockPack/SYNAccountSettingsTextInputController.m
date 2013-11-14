@@ -136,15 +136,6 @@
                    action: @selector(saveButtonPressed:)
          forControlEvents: UIControlEventTouchUpInside];
     
-    // navigation back button
-    UIButton *backButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    UIImage *backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
-    [backButton setImage: backButtonImage forState: UIControlStateNormal];
-    [backButton addTarget: self action: @selector(didTapBackButton:) forControlEvents: UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0, 0.0, backButtonImage.size.width, backButtonImage.size.height);
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView: backButton];
-    
-    self.navigationItem.leftBarButtonItem = backButtonItem;
     
     errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(10.0,
                                                             saveButton.frame.origin.y + saveButton.frame.size.height + 10.0,
