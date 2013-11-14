@@ -30,6 +30,20 @@
 
 
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"accountPropertyChanged"
+                                                            label: @"Gender"
+                                                            value: nil] build]];
+    
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -44,7 +58,9 @@
     self.tableView.backgroundView = nil;
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.view addSubview:self.tableView];
     
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"Cell"];
     
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge];
     CGRect spinnerFrame = self.spinner.frame;
@@ -54,78 +70,14 @@
     [self.view addSubview: self.spinner];
 }
 
-- (void) dealloc
+
+
+-(void)viewWillDisappear:(BOOL)animated
 {
-    // Defensive programming
+    [super viewWillDisappear:animated];
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
 }
-
-
-#pragma mark - View lifecycle
-
-- (void) viewDidLoad
-{
-    [super viewDidLoad];
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Gender"
-                                                            value: nil] build]];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self.view addSubview:self.tableView];
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"Cell"];
-    
-    UIButton *backButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    UIImage* backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
-    UIImage* backButtonHighlightedImage = [UIImage imageNamed: @"ButtonAccountBackHighlighted.png"];
-
-    
-    [backButton setImage: backButtonImage
-                forState: UIControlStateNormal];
-    
-    [backButton setImage: backButtonHighlightedImage
-                forState: UIControlStateHighlighted];
-    
-    [backButton addTarget: self
-                   action: @selector(didTapBackButton:)
-         forControlEvents: UIControlEventTouchUpInside];
-    
-    backButton.frame = CGRectMake(0.0, 0.0, backButtonImage.size.width, backButtonImage.size.height);
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView: backButton];
-    
-    self.navigationItem.leftBarButtonItem = backButtonItem;
-    
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
-    titleLabel.text = NSLocalizedString (@"settings_popover_gender_title", nil);
-    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor whiteColor];
-    titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-    
-    
-    UIView * labelContentView = [[UIView alloc]init];
-    [labelContentView addSubview:titleLabel];
-    
-    self.navigationItem.titleView = labelContentView;
-}
-
-
-- (void) didTapBackButton: (id) sender
-{
-    if (self.navigationController.viewControllers.count > 1)
-    {
-        [self.navigationController popViewControllerAnimated: YES];
-    }
-}
-
 
 #pragma mark - TableView DataSource/Delegate
 

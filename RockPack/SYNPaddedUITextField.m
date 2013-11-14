@@ -30,7 +30,8 @@
     CGRect origValue = [super textRectForBounds: bounds];
     
     /* Just a sample offset */
-    return CGRectOffset(origValue, 10.0f, IS_IOS_7_OR_GREATER ? 2.0f : 13.0f);}
+    return CGRectOffset(origValue, 10.0f, 2.0f);
+}
 
 // text position
 - (CGRect)editingRectForBounds:(CGRect)bounds
@@ -38,16 +39,9 @@
     CGRect origValue = [super textRectForBounds: bounds];
     
     /* Just a sample offset */
-    return CGRectOffset(origValue, 10.0f, IS_IOS_7_OR_GREATER ? 2.0f : 11.0f);}
-
--(CGRect)getRectUniversal:(CGRect)bounds
-{
-    if(self.leftView) {
-        return CGRectInset( bounds , 10, 10 );
-    } else {
-        return CGRectInset( bounds , 10 , 10 );
-    }
-    
+    return CGRectOffset(origValue, 10.0f, 2.0f);
 }
+
+
 
 @end

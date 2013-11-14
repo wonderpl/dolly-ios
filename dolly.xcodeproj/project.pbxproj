@@ -1003,7 +1003,6 @@
 		BE21EE9F16FA28680067223B /* IconUsername.png in Resources */ = {isa = PBXBuildFile; fileRef = BE21EE9316FA28680067223B /* IconUsername.png */; };
 		BE21EEA016FA28680067223B /* IconUsername@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE21EE9416FA28680067223B /* IconUsername@2x.png */; };
 		BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EEA216FB1E750067223B /* SYNAccountSettingsDOB.m */; };
-		BE21EEA616FB39030067223B /* SYNAccountSettingsOnOffField.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EEA516FB39030067223B /* SYNAccountSettingsOnOffField.m */; };
 		BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EEAE16FB4ECD0067223B /* SYNAccountSettingsPassword.m */; };
 		BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21EEB116FB56080067223B /* SYNPaddedUITextField.m */; };
 		BE21EEBB16FB584C0067223B /* ButtonAccountBackDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BE21EEB316FB584C0067223B /* ButtonAccountBackDefault.png */; };
@@ -2617,8 +2616,6 @@
 		BE21EE9416FA28680067223B /* IconUsername@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconUsername@2x.png"; path = "Assets/Images/IconUsername@2x.png"; sourceTree = "<group>"; };
 		BE21EEA116FB1E750067223B /* SYNAccountSettingsDOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsDOB.h; sourceTree = "<group>"; };
 		BE21EEA216FB1E750067223B /* SYNAccountSettingsDOB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsDOB.m; sourceTree = "<group>"; };
-		BE21EEA416FB39030067223B /* SYNAccountSettingsOnOffField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsOnOffField.h; sourceTree = "<group>"; };
-		BE21EEA516FB39030067223B /* SYNAccountSettingsOnOffField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsOnOffField.m; sourceTree = "<group>"; };
 		BE21EEAD16FB4ECC0067223B /* SYNAccountSettingsPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsPassword.h; sourceTree = "<group>"; };
 		BE21EEAE16FB4ECD0067223B /* SYNAccountSettingsPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsPassword.m; sourceTree = "<group>"; };
 		BE21EEB016FB56070067223B /* SYNPaddedUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPaddedUITextField.h; sourceTree = "<group>"; };
@@ -5434,8 +5431,6 @@
 				BE21EEA216FB1E750067223B /* SYNAccountSettingsDOB.m */,
 				BE03A6D416F784B000245314 /* SYNAccountSettingsGender.h */,
 				BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */,
-				BE21EEA416FB39030067223B /* SYNAccountSettingsOnOffField.h */,
-				BE21EEA516FB39030067223B /* SYNAccountSettingsOnOffField.m */,
 				BE21EEAD16FB4ECC0067223B /* SYNAccountSettingsPassword.h */,
 				BE21EEAE16FB4ECD0067223B /* SYNAccountSettingsPassword.m */,
 				BE21EEB016FB56070067223B /* SYNPaddedUITextField.h */,
@@ -7750,7 +7745,6 @@
 				BE21EE8716FA202F0067223B /* SYNAccountSettingsFullNameInput.m in Sources */,
 				01AFF99A17EC91540002131A /* UIView+LLDBQuickLook.m in Sources */,
 				BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */,
-				BE21EEA616FB39030067223B /* SYNAccountSettingsOnOffField.m in Sources */,
 				0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
 				BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */,
