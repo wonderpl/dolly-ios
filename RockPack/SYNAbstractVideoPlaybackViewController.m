@@ -29,7 +29,6 @@
     
     self.view.clipsToBounds = YES;
     
-    // Start off by making our view transparent
     self.view.backgroundColor = kVideoBackgroundColour;
     
     // Create view containing animated subviews for the animated placeholder (displayed whilst video is loading)
@@ -496,7 +495,7 @@
     {
         [self playVideoWithSourceId: currentSourceId];
     }
-    else if ([currentSource isEqualToString: @"rockpack"])
+    else if ([currentSource isEqualToString: @"ooyala"])
     {
         [self playVideoWithSourceId: currentSourceId];
     }
