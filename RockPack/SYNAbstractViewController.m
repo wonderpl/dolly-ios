@@ -279,7 +279,7 @@
 }
 
 
-- (void) videoOverlayDidDissapear
+- (void) videoOverlayDidDisappear
 {
     // to be implemented by child
 }

@@ -141,7 +141,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-#pragma mark - Container Scrol Delegates
+#pragma mark - Container Scroll Delegates
 
 - (void) didMoveToParentViewController: (UIViewController *) parent
 {
@@ -674,7 +674,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) videoOverlayDidDissapear
+- (void) videoOverlayDidDisappear
 {
     [self.feedCollectionView reloadData];
 }
