@@ -59,7 +59,7 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) performAction: (NSString *) action withObject: (id) object;
 
 
-- (void) videoOverlayDidDissapear;
+- (void) videoOverlayDidDisappear;
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
