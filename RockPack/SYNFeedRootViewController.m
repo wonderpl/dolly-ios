@@ -77,7 +77,9 @@ typedef void(^FeedDataErrorBlock)(void);
 
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
-    [self removePopupMessage];
+//    [self removePopupMessage];
+    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
+                   withLoader: YES];
 
     // Register XIBs for Cell
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
@@ -128,11 +130,8 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
-
-    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
-                   withLoader: YES];
     
-    if([self class] == [SYNFeedRootViewController class])
+    if ([self class] == [SYNFeedRootViewController class])
     {
         [self loadAndUpdateFeedData];
     }
