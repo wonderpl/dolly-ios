@@ -28,6 +28,7 @@
 #import "UIImageView+WebCache.h"
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
+#import "SYNAccountSettingsViewController.h"
 
 @import QuartzCore;
 
@@ -1507,6 +1508,7 @@
 }
 - (IBAction)moreButtonTapped:(id)sender
 {
+    
     
     SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
     

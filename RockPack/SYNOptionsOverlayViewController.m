@@ -71,11 +71,17 @@ typedef enum {
                 SYNAccountSettingsViewController* accountSettingsVC = [[SYNAccountSettingsViewController alloc] init];
                 
                 if(IS_IPAD)
+                {
                     [appDelegate.masterViewController addOverlayController:accountSettingsVC
                                                                   animated:YES];
+                }
                 else
+                {
+                    wself.parentViewController.navigationController.navigationBarHidden = NO;
                     [wself.parentViewController.navigationController pushViewController:accountSettingsVC
                                                                                animated:YES];
+                }
+                
                 
             };
         }

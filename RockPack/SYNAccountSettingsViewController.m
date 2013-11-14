@@ -34,6 +34,10 @@
 @property (nonatomic, strong) UIPopoverController* dobPopover;
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (nonatomic, weak) UITableViewCell* dobTableViewCell;
+
+// only for iPad
+@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+
 @property (nonatomic, weak) User* user;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 
@@ -66,13 +70,10 @@
     
     user = appDelegate.currentUser;
     
+    // iPhone is pushed on to the navigation stack
+    if(IS_IPAD)
+        self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
     
-    NSMutableArray* conditionalDataItems = [[NSMutableArray alloc] initWithCapacity:3];
-    
-    if(user.loginOriginValue == LoginOriginRockpack) // only rockpack users can change their password for now
-    {
-        [conditionalDataItems addObject:NSLocalizedString (@"Change Password", nil)];
-    }
     
     
     
@@ -86,11 +87,9 @@
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    self.preferredContentSize = CGSizeMake(380, 476);
 
     self.tableView.scrollEnabled = IS_IPHONE;
     self.tableView.scrollsToTop = NO;
-    self.tableView.accessibilityLabel = @"Settings Table";
     
     
 }
@@ -154,16 +153,18 @@
         
         switch (indexPath.row)
         {
-                // first and last name
+            // First and Last Name
             case 0:
+                
                 cell.imageView.image = [UIImage imageNamed: @"IconFullname.png"];
             
                 cell.textLabel.text = ![user.fullName isEqualToString:@""] ? user.fullName : NSLocalizedString(@"full_name", nil);
                 cell.detailTextLabel.text = user.fullNameIsPublicValue ? NSLocalizedString (@"Public" , nil) : NSLocalizedString (@"Private" , nil);
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
                 break;
                 
-                // username
+            // Username
             case 1:
                 cell.imageView.image = [UIImage imageNamed: @"IconUsername.png"];
                 cell.textLabel.text = user.username;
@@ -171,7 +172,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // email
+            // Email
             case 2:
                 if ([user.emailAddress isEqualToString:@""])
                 {
@@ -186,7 +187,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // locale
+            // Locale
             case 3:
                 if ([user.locale isEqualToString:@"en-gb"])
                 {
@@ -202,7 +203,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // gender
+            // Gender
             case 4:
                 if (user.genderValue == GenderUndecided)
                 {
@@ -218,7 +219,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // DOB
+            // DOB
             case 5:
                 if (!user.dateOfBirth)
                     cell.textLabel.text = NSLocalizedString (@"Date of Birth", nil);
@@ -351,29 +352,9 @@
 }
 
 
-- (void) showLogoutAlert
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString (@"Logout", nil)
-                                                    message: NSLocalizedString (@"Are you sure you want to Logout?", nil)
-                                                   delegate: self
-                                          cancelButtonTitle: NSLocalizedString (@"Cancel", nil)
-                                          otherButtonTitles: NSLocalizedString (@"Logout", nil), nil];
-    [alert show];
-}
 
 
-- (void) alertView: (UIAlertView *) alertView
-         clickedButtonAtIndex: (NSInteger) buttonIndex
-{
-	if (buttonIndex == 0) { // cancel
-		
-	}
-	else
-    { // logout
-        [[NSNotificationCenter defaultCenter] postNotificationName: kAccountSettingsLogout
-                                                            object: self];
-	}
-}
+#pragma mark - DOB 
 
 
 - (void) datePickerValueChanged: (UIDatePicker*) datePicker
