@@ -8,7 +8,9 @@
 
 #import "SYNOptionsOverlayViewController.h"
 #import "SYNAppDelegate.h"
+#import "SYNMasterViewController.h"
 
+typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
     
     OptionButtonTagSettings = 1,
@@ -25,13 +27,14 @@ typedef enum {
 
 @interface SYNOptionsOverlayViewController ()
 {
-    SYNAppDelegate* appDelegate;
+    
 }
 
-
+@property (nonatomic, copy) TriggerActionOnCompleteBlock completeBlock;
 @end
 
 @implementation SYNOptionsOverlayViewController
+
 
 
 
@@ -39,7 +42,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     
     for (UIView* sView in self.view.subviews) {
         
@@ -50,44 +53,72 @@ typedef enum {
                          forControlEvents:UIControlEventTouchUpInside];
         }
     }
+    
 }
 
 -(void)optionButtonPressed:(UIButton*)buttonPressed
 {
-    
+    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    __weak SYNOptionsOverlayViewController* wself = self;
     switch (buttonPressed.tag)
     {
         case OptionButtonTagSettings:
-            
-            break;
+        {
+            self.completeBlock = ^{
+                
+                
+                
+                if(IS_IPAD)
+                    [appDelegate.masterViewController addOverlayController:nil animated:YES];
+                else
+                    [wself.parentViewController.navigationController pushViewController:nil animated:YES];
+                
+                
+            };
+        }
+        break;
             
         case OptionButtonTagFriends:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagAbout:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagFeedback:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagRate:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagBlog:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagHelp:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagLogout:
+        {
             [appDelegate logout];
-            break;
+        }
+        break;
             
     }
     
@@ -97,12 +128,29 @@ typedef enum {
 -(void)removeFromScreen
 {
     [UIView animateWithDuration:0.3f animations:^{
+        
         self.view.alpha = 0.0f;
+        
     } completion:^(BOOL finished) {
+        
+        
+        // trigger the nessesary action on fade out
+        if(self.completeBlock)
+            self.completeBlock();
+        
+        
+        // then remove since removing before the block call will release the instance
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
+        
+        
     }];
     
+}
+
+-(void)dealloc
+{
+    self.completeBlock = nil;
 }
 
 @end
