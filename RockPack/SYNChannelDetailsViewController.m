@@ -95,6 +95,7 @@ SYNChannelCoverImageSelectorDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoLayoutIPad;
 @property (strong, nonatomic) IBOutlet UIView *viewEditMode;
+@property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionLayoutIPad;
@@ -157,7 +158,7 @@ SYNChannelCoverImageSelectorDelegate>
     
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
     
-    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(save)];
+    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
     
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
@@ -172,14 +173,14 @@ SYNChannelCoverImageSelectorDelegate>
                                withReuseIdentifier: @"SYNChannelFooterMoreView"];
     
     
-    
+    self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
     
     
     self.lblChannelTitle.text = self.channel.title;
     //No cms yet
     self.lblDescription.text = @"Test Description";
-    
+    self.txtViewDescription.text = self.lblDescription.text;
     
     
     // Google analytics support
@@ -226,8 +227,6 @@ SYNChannelCoverImageSelectorDelegate>
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    
-    
     [super viewWillAppear: animated];
     
     
@@ -376,6 +375,12 @@ SYNChannelCoverImageSelectorDelegate>
     self.navigationController.navigationBarHidden = YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    
+    
+    
+}
+
 -(void) setUpMode {
     
     
@@ -449,9 +454,15 @@ SYNChannelCoverImageSelectorDelegate>
 - (IBAction)shareControlPressed:(id)sender
 {
     
+        
+    // Get share link pre-emptively
+    [self requestShareLinkWithObjectType: @"channel"
+                                objectId: self.channel.uniqueId];
     
-    [super shareControlPressed: sender];
-    
+    [self shareChannel: self.channel
+               isOwner: ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
+            usingImage: nil];
+
 }
 
 
@@ -1306,10 +1317,35 @@ referenceSizeForFooterInSection: (NSInteger) section
     
 }
 
+
+
+#pragma mark - Deleting Video Instances
+
+- (void) deleteVideoInstancePressed: (UIButton *) deleteButton
+{
+    UIView *v = deleteButton.superview.superview;
+    
+    self.indexPathToDelete = [self.videoThumbnailCollectionView indexPathForItemAtPoint: v.center];
+    
+    VideoInstance *videoInstanceToDelete = (VideoInstance *) self.channel.videoInstances[self.indexPathToDelete.item];
+    
+    if (!videoInstanceToDelete)
+    {
+        return;
+    }
+    
+    [[[UIAlertView alloc] initWithTitle: NSLocalizedString(@"channel_creation_screen_channel_delete_dialog_title", nil)
+                                message: NSLocalizedString(@"channel_creation_screen_video_delete_dialog_description", nil)
+                               delegate: self
+                      cancelButtonTitle: NSLocalizedString(@"Cancel", nil)
+                      otherButtonTitles: NSLocalizedString(@"Delete", nil), nil] show];
+}
+
+#pragma mark - Delete channel
+
 - (IBAction)deleteTapped:(id)sender
 {
 
-    
     NSString *message = [NSString stringWithFormat: NSLocalizedString(@"DELETECHANNEL", nil), self.channel.title];
     NSString *title = [NSString stringWithFormat: NSLocalizedString(@"AREYOUSUREYOUWANTTODELETE", nil), self.channel.title];
     
@@ -1436,8 +1472,111 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
         self.modalSubscriptionsContainer = [[SYNModalSubscribersController alloc] initWithContentViewController: subscribersViewController];
         
 		SYNMasterViewController *masterViewController = appDelegate.masterViewController;
-		[masterViewController addOverlayController:self.modalSubscriptionsContainer animated:NO];
+		[masterViewController addOverlayController:self.modalSubscriptionsContainer animated:YES];
     }
+}
+
+-(void) saveTapped
+{
+    
+//    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+//    
+//    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+//                                                           action: @"channelSaveButtonClick"
+//                                                            label: nil
+//                                                            value: nil] build]];
+//    
+//    self.saveChannelButton.enabled = NO;
+//    self.deleteChannelButton.enabled = YES;
+//    [self.activityIndicator startAnimating];
+//    
+//    [self hideCategoryChooser];
+//    
+//    self.channel.channelDescription = self.channel.channelDescription ? self.channel.channelDescription : @"";
+//    
+//    NSString *category = [self categoryIdStringForServiceCall];
+//    
+//    NSString *cover = [self coverIdStringForServiceCall];
+//    
+//    [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
+//                                                 channelId: self.channel.uniqueId
+//                                                     title: self.channelTitleTextView.text
+//                                               description: (self.channel.channelDescription)
+//                                                  category: category
+//                                                     cover: cover
+//                                                  isPublic: YES
+//                                         completionHandler: ^(NSDictionary *resourceCreated) {
+//                                             
+//                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+//                                             
+//                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+//                                                                                                    action: @"channelEdited"
+//                                                                                                     label: category
+//                                                                                                     value: nil] build]];
+//                                             
+//                                             NSString *channelId = resourceCreated[@"id"];
+//                                             
+//                                             [self setEditControlsVisibility: NO];
+//                                             self.saveChannelButton.enabled = YES;
+//                                             self.deleteChannelButton.enabled = YES;
+//                                             [self.activityIndicator stopAnimating];
+//                                             self.saveChannelButton.hidden = YES;
+//                                             self.deleteChannelButton.hidden = YES;
+//                                             self.cancelEditButton.hidden = YES;
+//                                             
+//                                             
+//                                             
+//                                             if(self.editedVideos)
+//                                                 [self setVideosForChannelById: channelId //  2nd step of the creation process
+//                                                                     isUpdated: YES];
+//                                             
+//                                             [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsShow
+//                                                                                                 object: self
+//                                                                                               userInfo: nil];
+//                                             
+//                                             // this block will also call the [self getChanelById:channelId isUpdated:YES] //
+//                                         }
+//                                              errorHandler: ^(id error) {
+//                                                  DebugLog(@"Error @ saveChannelPressed:");
+//                                                  
+//                                                  NSString *errorTitle = NSLocalizedString(@"channel_creation_screen_error_unknown_title", nil);
+//                                                  NSString *errorMessage = NSLocalizedString(@"channel_creation_screen_error_unknown_save_description", nil);
+//                                                  
+//                                                  NSArray *errorTitleArray = error[@"form_errors"][@"title"];
+//                                                  
+//                                                  if ([errorTitleArray count] > 0)
+//                                                  {
+//                                                      NSString *errorType = errorTitleArray[0];
+//                                                      
+//                                                      if ([errorType isEqualToString: @"Duplicate title."])
+//                                                      {
+//                                                          errorTitle = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_title", nil);
+//                                                          errorMessage = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_description", nil);
+//                                                      }
+//                                                      else if ([errorType isEqualToString: @"Mind your language!"])
+//                                                      {
+//                                                          errorTitle = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_title", nil);
+//                                                          errorMessage = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_description", nil);
+//                                                      }
+//                                                      else
+//                                                      {
+//                                                          errorTitle = NSLocalizedString(@"channel_creation_screen_error_unknown_title", nil);
+//                                                          errorMessage = NSLocalizedString(@"channel_creation_screen_error_unknown_save_description", nil);
+//                                                      }
+//                                                  }
+//                                                  
+//                                                  [self	showError: errorMessage showErrorTitle: errorTitle];
+//                                                  
+//                                                  self.saveChannelButton.hidden = NO;
+//                                                  self.saveChannelButton.enabled = YES;
+//                                                  self.deleteChannelButton.hidden = NO;
+//                                                  self.deleteChannelButton.enabled = YES;
+//                                                  [self.activityIndicator stopAnimating];
+//                                                  [self.activityIndicator stopAnimating];
+//                                              }];
+//
+    
+    
 }
 
 #pragma mark - Text Field Delegates

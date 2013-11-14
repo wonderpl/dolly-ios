@@ -73,6 +73,9 @@
                         <state key="normal" backgroundImage="ButtonVideoDeleteDefault.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="deleteVideoInstance:" destination="G5W-z0-ioj" eventType="touchUpInside" id="h4e-m6-PvB"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

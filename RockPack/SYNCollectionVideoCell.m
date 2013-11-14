@@ -71,4 +71,13 @@
     self.titleLabel.text = videoInstance.title;
 }
 
+#pragma mark - Delete channel
+
+
+- (IBAction)deleteVideoInstance:(id)sender
+{
+    [self.delegate deleteVideoInstancePressed: sender];
+
+}
+
 @end

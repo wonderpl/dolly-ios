@@ -646,6 +646,27 @@
      }];
 }
 
+- (void) shareChannel: (Channel *) channel
+              isOwner: (NSNumber *) isOwner
+           usingImage: (UIImage *) image
+{
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelShareButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
+    
+    [self shareObjectType:  @"channel"
+                 objectId: channel.uniqueId
+                  isOwner: isOwner
+                  isVideo: @NO
+               usingImage: image];
+}
+
+
+
+
 
 #pragma mark - Purchase
 

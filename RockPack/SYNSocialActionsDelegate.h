@@ -16,4 +16,7 @@
 - (void) likeControlPressed: (SYNSocialButton *) socialButton;
 - (void) addControlPressed: (SYNSocialButton *) socialButton;
 
+@optional
+- (void)deleteVideoInstancePressed:(id)sender;
+
 @end
