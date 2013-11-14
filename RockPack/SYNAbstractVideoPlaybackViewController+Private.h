@@ -16,6 +16,8 @@
 #import "VideoInstance.h"
 @import MediaPlayer;
 
+@class SYNVideoLoadingIndicator;
+
 @interface SYNAbstractVideoPlaybackViewController ()
 
 #pragma mark - Private properties
@@ -37,10 +39,6 @@
 @property (nonatomic, assign) float timeViewed;
 @property (nonatomic, assign) int currentSelectedIndex;
 @property (nonatomic, assign) int stallCount;
-@property (nonatomic, strong) CAAnimation *bottomPlacholderAnimationViewPosition;
-@property (nonatomic, strong) CAAnimation *middlePlacholderAnimationViewPosition;
-@property (nonatomic, strong) CABasicAnimation *placeholderBottomLayerAnimation;
-@property (nonatomic, strong) CABasicAnimation *placeholderMiddleLayerAnimation;
 @property (nonatomic, strong) NSArray *videoInstanceArray;
 @property (nonatomic, strong) NSString *channelCreator;
 @property (nonatomic, strong) NSString *previousSourceId;
@@ -49,14 +47,11 @@
 @property (nonatomic, strong) SYNProgressView *bufferingProgressView;
 @property (nonatomic, strong) SYNVideoIndexUpdater indexUpdater;
 @property (nonatomic, strong) UIButton *shuttleBarPlayPauseButton;
-@property (nonatomic, strong) UIImageView *videoPlaceholderBottomImageView;
-@property (nonatomic, strong) UIImageView *videoPlaceholderMiddleImageView;
-@property (nonatomic, strong) UIImageView *videoPlaceholderTopImageView;
 @property (nonatomic, strong) UILabel *creatorLabel;
 @property (nonatomic, strong) UILabel *currentTimeLabel;
 @property (nonatomic, strong) UILabel *durationLabel;
 @property (nonatomic, strong) UISlider *shuttleSlider;
-@property (nonatomic, strong) UIView *videoPlaceholderView;
+@property (nonatomic, strong) SYNVideoLoadingIndicator *videoLoadingIndicator;
 @property (nonatomic, strong) UIView *currentVideoView;
 
 #pragma mark - Private methods
@@ -74,24 +69,7 @@
 - (UILabel *) createTimeLabelAtXPosition: (CGFloat) xPosition
                            textAlignment: (NSTextAlignment) textAlignment;
 
-- (UIView *) createNewVideoPlaceholderView;
 - (void) setCreatorText: (NSString *) creatorText;
-- (UIImageView *) createNewVideoPlaceholderImageView: (NSString *) imageName;
-- (void) animateVideoPlaceholder: (BOOL) animate;
-- (void) spinMiddlePlaceholderImageView;
-- (void) spinBottomPlaceholderImageView;
-
-// Setup the placeholder spinning animation
-- (CABasicAnimation *) spinView: (UIView *) placeholderView
-                       duration: (float) cycleTime
-                      clockwise: (BOOL) clockwise
-                           name: (NSString *) name;
-
-- (void) animationDidStop: (CAAnimation *) animation
-                 finished: (BOOL) finished;
-
-- (void) pauseLayer: (CALayer*) layer;
-- (void) resumeLayer: (CALayer*) layer;
 
 - (void) playVideo;
 - (void) pauseVideo;

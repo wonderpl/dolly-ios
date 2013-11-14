@@ -7,16 +7,9 @@
 //
 
 #import "SYNAbstractVideoPlaybackViewController+Private.h"
+#import "SYNVideoLoadingIndicator.h"
 
 @implementation SYNAbstractVideoPlaybackViewController
-
-#pragma mark - Object lifecycle
-
-- (void) dealloc
-{
-    self.placeholderBottomLayerAnimation.delegate = nil;
-    self.placeholderMiddleLayerAnimation.delegate = nil;
-}
 
 #pragma mark - View lifecycle
 
@@ -31,8 +24,8 @@
     
     self.view.backgroundColor = kVideoBackgroundColour;
     
-    // Create view containing animated subviews for the animated placeholder (displayed whilst video is loading)
-    self.videoPlaceholderView = [self createNewVideoPlaceholderView];
+	self.videoLoadingIndicator = [[SYNVideoLoadingIndicator alloc] initWithFrame:self.view.bounds];
+	[self.view addSubview:self.videoLoadingIndicator];
     
     self.shuttleBarView = [self createShuttleBarView];
     UIView *blockBarView = [[UIView alloc] initWithFrame: self.shuttleBarView.frame];
@@ -90,6 +83,8 @@
     [self stopVideoStallDetectionTimer];
     
     [super viewDidDisappear: animated];
+	
+	[self.videoLoadingIndicator stopAnimating];
 }
 
 
@@ -415,42 +410,10 @@
     return timeLabel;
 }
 
-
-- (UIView *) createNewVideoPlaceholderView
-{
-    self.videoPlaceholderTopImageView = [self createNewVideoPlaceholderImageView: @"PlaceholderVideoTop"];
-    self.videoPlaceholderMiddleImageView = [self createNewVideoPlaceholderImageView: @"PlaceholderVideoMiddle"];
-    self.videoPlaceholderBottomImageView = [self createNewVideoPlaceholderImageView: @"PlaceholderVideoBottom"];
-    
-    // Pop them in a view to keep them together
-    UIView *videoPlaceholderView = [[UIView alloc] initWithFrame: self.view.bounds];
-    
-    // Placeholders
-    [videoPlaceholderView addSubview: self.videoPlaceholderBottomImageView];
-    [videoPlaceholderView addSubview: self.videoPlaceholderMiddleImageView];
-    [videoPlaceholderView addSubview: self.videoPlaceholderTopImageView];
-    
-    [self.view addSubview: videoPlaceholderView];
-    
-    return videoPlaceholderView;
-}
-
 - (void) setCreatorText: (NSString *) creatorText;
 {
     self.creatorLabel.text = [NSString stringWithFormat: @"Uploaded by %@", self.channelCreator];
 }
-
-
-- (UIImageView *) createNewVideoPlaceholderImageView: (NSString *) imageName
-{
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame: self.view.bounds];
-    imageView.contentMode = UIViewContentModeCenter;
-    imageView.backgroundColor = [UIColor clearColor];
-    imageView.image = [UIImage imageNamed: imageName];
-    
-    return imageView;
-}
-
 
 - (void) resetPlayerAttributes
 {
@@ -543,190 +506,14 @@
     self.indexUpdater(self.currentSelectedIndex);
 }
 
-
 #pragma mark - Placeholder Animation
 
-- (void) animateVideoPlaceholder: (BOOL) animate
-{
-    if (animate == TRUE)
-    {
-        // Start the animations
-        [self spinBottomPlaceholderImageView];
-        [self spinMiddlePlaceholderImageView];
-    }
-    else
-    {
-        // Stop the animations
-        [self.videoPlaceholderBottomImageView.layer removeAllAnimations];
-        [self.videoPlaceholderMiddleImageView.layer removeAllAnimations];
-    }
+- (void)applicationWillResignActive:(NSNotification *)notification {
+	[self.videoLoadingIndicator stopAnimating];
 }
 
-
-- (void) spinMiddlePlaceholderImageView
-{
-    self.placeholderMiddleLayerAnimation = [self spinView: self.videoPlaceholderMiddleImageView
-                                                 duration: kMiddlePlaceholderCycleTime
-                                                clockwise: TRUE
-                                                     name: kMiddlePlaceholderIdentifier];
-}
-
-
-- (void) spinBottomPlaceholderImageView
-{
-    self.placeholderBottomLayerAnimation = [self spinView: self.videoPlaceholderBottomImageView
-                                                 duration: kBottomPlaceholderCycleTime
-                                                clockwise: FALSE
-                                                     name: kBottomPlaceholderIdentifier];
-}
-
-
-// Setup the placeholder spinning animation
-- (CABasicAnimation *) spinView: (UIView *) placeholderView
-                       duration: (float) cycleTime
-                      clockwise: (BOOL) clockwise
-                           name: (NSString *) name
-{
-    CABasicAnimation *animation;
-    
-	[CATransaction begin];
-    
-	[CATransaction setValue: (id) kCFBooleanTrue
-					 forKey: kCATransactionDisableActions];
-	
-	CGRect frame = [placeholderView frame];
-	placeholderView.layer.anchorPoint = CGPointMake(0.5, 0.5);
-	placeholderView.layer.position = CGPointMake(frame.origin.x + 0.5 * frame.size.width, frame.origin.y + 0.5 * frame.size.height);
-	[CATransaction commit];
-	
-	[CATransaction begin];
-    
-	[CATransaction setValue: (id)kCFBooleanFalse
-					 forKey: kCATransactionDisableActions];
-	
-    // Set duration of spin
-	[CATransaction setValue: @(cycleTime)
-                     forKey: kCATransactionAnimationDuration];
-	
-	animation = [CABasicAnimation animationWithKeyPath: @"transform.rotation.z"];
-    
-    // We need to use set an explict key, as the animation is copied and not the same in the callback
-    [animation setValue: name
-                 forKey: @"name"];
-    
-    // Alter to/from to change spin direction
-    if (clockwise)
-    {
-        animation.fromValue = @0.0f;
-        animation.toValue = @((float)(2 * M_PI));
-    }
-    else
-    {
-        animation.fromValue = @((float)(2 * M_PI));
-        animation.toValue = @0.0f;
-    }
-    
-	animation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
-	animation.delegate = self;
-    
-	[placeholderView.layer addAnimation: animation
-                                 forKey: @"rotationAnimation"];
-	
-	[CATransaction commit];
-    
-    return animation;
-}
-
-
-// Restarts the spin animation on the button when it ends. Again, this is
-// largely irrelevant now that the audio is loaded from a local file.
-
-- (void) animationDidStop: (CAAnimation *) animation
-                 finished: (BOOL) finished
-{
-	if (finished)
-	{
-        if ([[animation valueForKey: @"name"] isEqualToString: kMiddlePlaceholderIdentifier])
-        {
-            [self spinMiddlePlaceholderImageView];
-        }
-        else
-        {
-            [self spinBottomPlaceholderImageView];
-        }
-	}
-}
-
-
-- (void) applicationWillResignActive: (id) application
-{
-#ifndef SMART_REANIMATION
-    [self animateVideoPlaceholder: FALSE];
-#else
-    self.bottomPlacholderAnimationViewPosition = [[self.videoPlaceholderBottomImageView.layer animationForKey: @"position"] copy];
-    
-    // Apple method from QA1673
-    [self pauseLayer: self.videoPlaceholderBottomImageView.layer]; // Apple method from QA1673
-    
-    self.middlePlacholderAnimationViewPosition = [[self.videoPlaceholderMiddleImageView.layer animationForKey: @"position"] copy];
-    
-    [self pauseLayer: self.videoPlaceholderBottomImageView.layer];
-#endif
-}
-
-
-- (void) applicationDidBecomeActive: (id) application
-{
-#ifndef SMART_REANIMATION
-    [self animateVideoPlaceholder: TRUE];
-#else
-    // Re-animate bottom layer
-    if (self.bottomPlacholderAnimationViewPosition != nil)
-    {
-        // re-add the core animation to the view
-        [self.videoPlaceholderBottomImageView.layer addAnimation: self.bottomPlacholderAnimationViewPosition
-                                                          forKey: @"position"];
-        self.bottomPlacholderAnimationViewPosition = nil;
-    }
-    
-    // Apple method from QA1673
-    [self resumeLayer: self.videoPlaceholderBottomImageView.layer];
-    
-    
-    // re-animate middle layer
-    if (self.middlePlacholderAnimationViewPosition != nil)
-    {
-        // re-add the core animation to the view
-        [self.videoPlaceholderMiddleImageView.layer addAnimation: self.middlePlacholderAnimationViewPosition
-                                                          forKey: @"position"];
-        self.middlePlacholderAnimationViewPosition = nil;
-    }
-    
-    // Apple method from QA1673
-    [self resumeLayer: self.videoPlaceholderMiddleImageView.layer];
-#endif
-}
-
-
-- (void) pauseLayer: (CALayer*) layer
-{
-    CFTimeInterval pausedTime = [layer convertTime: CACurrentMediaTime()
-                                         fromLayer: nil];
-    layer.speed = 0.0;
-    layer.timeOffset = pausedTime;
-}
-
-
-- (void) resumeLayer: (CALayer*) layer
-{
-    CFTimeInterval pausedTime = [layer timeOffset];
-    layer.speed = 1.0;
-    layer.timeOffset = 0.0;
-    layer.beginTime = 0.0;
-    
-    CFTimeInterval timeSincePause = [layer convertTime: CACurrentMediaTime()
-                                             fromLayer: nil] - pausedTime;
-    layer.beginTime = timeSincePause;
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+	[self.videoLoadingIndicator startAnimating];
 }
 
 #pragma mark - View animations
@@ -740,9 +527,10 @@
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^ {
                          self.currentVideoView.alpha = 1.0f;
-                         self.videoPlaceholderView.alpha = 0.0f;
+                         self.videoLoadingIndicator.alpha = 0.0f;
                      }
                      completion: ^(BOOL completed) {
+						 [self.videoLoadingIndicator stopAnimating];
                      }];
 }
 
@@ -755,7 +543,8 @@
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^ {
                          self.currentVideoView.alpha = 0.0f;
-                         self.videoPlaceholderView.alpha = 1.0f;
+                         self.videoLoadingIndicator.alpha = 1.0f;
+						 [self.videoLoadingIndicator startAnimating];
                      }
                      completion: nil];
 }
@@ -792,11 +581,11 @@
     {
         // Make sure we are displaying the spinner and not the video at this stage
         self.currentVideoView.alpha = 0.0f;
-        self.videoPlaceholderView.alpha = 1.0f;
+        self.videoLoadingIndicator.alpha = 1.0f;
+		
+		[self.videoLoadingIndicator startAnimating];
     }
     
-    // Start animation
-    [self animateVideoPlaceholder: YES];
 }
 
 
@@ -807,8 +596,7 @@
         [self pauseVideo];
     }
     
-    // Start animation
-    [self animateVideoPlaceholder: NO];
+	[self.videoLoadingIndicator stopAnimating];
 }
 
 - (void) startShuttleBarUpdateTimer
