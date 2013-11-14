@@ -6,7 +6,6 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNAccountSettingsModalContainer.h"
 #import "SYNCautionMessageView.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
@@ -29,7 +28,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
-@property (nonatomic, strong) SYNAccountSettingsModalContainer* modalAccountContainer;
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
