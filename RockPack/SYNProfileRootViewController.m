@@ -200,8 +200,10 @@
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
+
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
-        
+        [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
+        [self.subscriptionThumbnailCollectionView.collectionViewLayout invalidateLayout];
         // change the BG color of the text field inside the searcBar
         UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
         if(txfSearchField)
@@ -795,6 +797,7 @@
     
     
     
+    
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
         SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
@@ -947,18 +950,27 @@
     if (collectionView == self.channelThumbnailCollectionView)
     {
         if (IS_IPHONE)
+        {
             return self.channelLayoutIPhone.itemSize;
+        }
         else
+        {
             return self.channelLayoutIPad.itemSize;
+        }
     }
     
     if (collectionView == self.subscriptionThumbnailCollectionView)
     {
         if (IS_IPHONE)
+        {
             return self.subscriptionLayoutIPhone.itemSize;
-        else
+        }
+        else{
+            
+        
             return self.subscriptionLayoutIPad.itemSize;
-    }
+        }
+        }
     
     
     return CGSizeZero;
