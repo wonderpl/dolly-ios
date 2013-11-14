@@ -7,6 +7,7 @@
 //
 
 #import "SYNOptionsOverlayViewController.h"
+#import "SYNAppDelegate.h"
 
 typedef enum {
     OptionButtonTagSettings = 1,
@@ -22,7 +23,9 @@ typedef enum {
 
 
 @interface SYNOptionsOverlayViewController ()
-
+{
+    SYNAppDelegate* appDelegate;
+}
 
 
 @end
@@ -35,6 +38,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
+    appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     for (UIView* sView in self.view.subviews) {
         if([sView isKindOfClass:[UIButton class]]) // sanity check
         {
@@ -79,7 +83,7 @@ typedef enum {
             break;
             
         case OptionButtonTagLogout:
-            
+            [appDelegate logout];
             break;
             
     }
