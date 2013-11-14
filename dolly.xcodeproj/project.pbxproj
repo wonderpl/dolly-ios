@@ -5425,10 +5425,10 @@
 			children = (
 				BE21EE8516FA202F0067223B /* SYNAccountSettingsFullNameInput.h */,
 				BE21EE8616FA202F0067223B /* SYNAccountSettingsFullNameInput.m */,
-				BEE4A6C0170B563D008F9D05 /* SYNAccountSettingsEmail.h */,
-				BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */,
 				BEE4A6C3170B56B3008F9D05 /* SYNAccountSettingsUsername.h */,
 				BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */,
+				BEE4A6C0170B563D008F9D05 /* SYNAccountSettingsEmail.h */,
+				BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */,
 				BE03A6D416F784B000245314 /* SYNAccountSettingsGender.h */,
 				BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */,
 				BE13E38716FB85220098F23C /* SYNAccountSettingsLocation.h */,

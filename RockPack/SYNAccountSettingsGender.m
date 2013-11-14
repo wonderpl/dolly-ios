@@ -50,7 +50,8 @@
     
     self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    self.tableView = [[UITableView alloc] initWithFrame: CGRectMake((IS_IPAD ? 1.0 : 0.0), 0.0, (IS_IPAD ? 378 : 320.0), 200.0) style: UITableViewStyleGrouped];
+    CGRect tvFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 200.0);
+    self.tableView = [[UITableView alloc] initWithFrame:tvFrame  style: UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.opaque = NO;
     self.tableView.delegate = self;

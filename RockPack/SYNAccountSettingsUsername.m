@@ -30,8 +30,6 @@
                                                             value: nil] build]];
     
     
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -40,6 +38,10 @@
     
     self.errorLabel.text = @"Your username can only be changed once.";
 }
+
+
+#pragma mark - Save 
+
 -(void)saveButtonPressed:(UIButton*)button
 {
     [self.inputField resignFirstResponder];

@@ -66,6 +66,35 @@
     [super viewWillAppear:animated];
     self.view.frame = self.navigationController.view.frame;
     
+    // == Save Button (add first because subsequent calls offset it to the bottom) == //
+    
+    UIImage* buttonImage = [UIImage imageNamed: @"ButtonAccountSaveDefault.png"];
+    
+    saveButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    
+    saveButton.frame = CGRectMake(self.view.frame.size.width * 0.5f - buttonImage.size.width * 0.5f,
+                                  0.0f,
+                                  buttonImage.size.width,
+                                  buttonImage.size.height);
+    
+    [saveButton setImage: buttonImage
+                forState: UIControlStateNormal];
+    
+    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
+                forState: UIControlStateHighlighted];
+    
+    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
+                forState: UIControlStateDisabled];
+    
+    
+    [saveButton addTarget: self
+                   action: @selector(saveButtonPressed:)
+         forControlEvents: UIControlEventTouchUpInside];
+    
+    
+    [self.view addSubview: saveButton];
+    
+    
     inputField = [self createInputField];
     
     self.inputField.tag = 1 ;
@@ -102,32 +131,7 @@
                                                             self.preferredContentSize.width - 10.0,
                                                             50)];
     
-    // == Save Button == //
     
-    UIImage* buttonImage = [UIImage imageNamed: @"ButtonAccountSaveDefault.png"];
-    saveButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    saveButton.frame = CGRectMake(self.view.frame.size.width * 0.5f - buttonImage.size.width * 0.5f,
-                                  0.0f,
-                                  buttonImage.size.width,
-                                  buttonImage.size.height);
-    
-    
-    [saveButton setImage: buttonImage
-                forState: UIControlStateNormal];
-    
-    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
-                forState: UIControlStateHighlighted];
-    
-    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
-                forState: UIControlStateDisabled];
-    
-    
-    [saveButton addTarget: self
-                   action: @selector(saveButtonPressed:)
-         forControlEvents: UIControlEventTouchUpInside];
-    
-    
-    [self.view addSubview: saveButton];
     
     
     // == Spinner == //
