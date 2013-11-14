@@ -14,6 +14,8 @@
 
 @interface SYNOoyalaVideoPlaybackViewController ()
 
+@property (nonatomic, strong) OOOoyalaPlayer *ooyalaPlayer;
+
 @property (nonatomic, assign) BOOL firstLaunch;
 
 @end
@@ -21,7 +23,7 @@
 
 @implementation SYNOoyalaVideoPlaybackViewController
 
-static OOOoyalaPlayer* ooyalaPlayer;
+//static OOOoyalaPlayer* ooyalaPlayer;
 
 //NSString * const PCODE = @"YzYW8xOshpVwePawyVliU0L_tBj_";
 //NSString * const PLAYERDOMAIN = @"<domain>";
@@ -38,10 +40,6 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     dispatch_once(&oncePredicate, ^{
         // Create our shared intance
         _sharedInstance = [[self alloc] init];
-        
-        // Create the static instances of our ooyala player
-        ooyalaPlayer = [self createNewOoyalaView];
-
     });
     
     return _sharedInstance;
@@ -49,6 +47,13 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 
 
 #pragma mark - Object lifecycle
+
+- (instancetype)init {
+	if (self = [super init]) {
+		self.ooyalaPlayer = [[OOOoyalaPlayer alloc] initWithPcode:PCODE domain:PLAYERDOMAIN];
+	}
+	return self;
+}
 
 - (void) dealloc
 {
@@ -66,9 +71,9 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(notificationPlayerReceived:)
                                                  name: nil
-                                               object: ooyalaPlayer];
+                                               object: self.ooyalaPlayer];
     
-    ooyalaView = ooyalaPlayer.view;
+    ooyalaView = self.ooyalaPlayer.view;
     
 #ifdef USE_HIRES_PLAYER
     // If we are on the iPad then we need to super-size the webview so that we can scale down again
@@ -83,18 +88,6 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     self.currentVideoView = ooyalaView;
 }
 
-
-// Create YouTube specific webview, based on common setup
-+ (OOOoyalaPlayer *) createNewOoyalaView
-{
-    OOOoyalaPlayer *newOoyalaPlayer = [[OOOoyalaPlayer alloc] initWithPcode: PCODE
-                                                                     domain: PLAYERDOMAIN];
-    
-    
-    return newOoyalaPlayer;
-}
-
-
 #pragma mark - YouTube player support
 
 - (void) playVideoWithSourceId: (NSString *) sourceId
@@ -105,7 +98,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     
     [self startVideoStallDetectionTimer];
     
-    [ooyalaPlayer setEmbedCode: sourceId];
+    [self.ooyalaPlayer setEmbedCode: sourceId];
     
     self.playFlag = YES;
     
@@ -119,12 +112,12 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     if ([self.view superview])
     {
         self.pausedByUser = NO;
-        [ooyalaPlayer play];
+        [self.ooyalaPlayer play];
         self.playFlag = YES;
     }
     else
     {
-        [ooyalaPlayer pause];
+        [self.ooyalaPlayer pause];
         self.playFlag = NO;
     }
 }
@@ -134,7 +127,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 {
     [self stopShuttleBarUpdateTimer];
     
-    [ooyalaPlayer pause];
+    [self.ooyalaPlayer pause];
     
     self.playFlag = NO;
 }
@@ -144,7 +137,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 {
     [self stopShuttleBarUpdateTimer];
     
-    [ooyalaPlayer pause];
+    [self.ooyalaPlayer pause];
     
     self.playFlag = NO;
 }
@@ -155,7 +148,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 // Get the duration of the current video
 - (NSTimeInterval) duration
 {
-    Float64 duration = [ooyalaPlayer duration];
+    Float64 duration = [self.ooyalaPlayer duration];
     DebugLog(@"duration %lf", duration);
     return duration;
 }
@@ -164,13 +157,13 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 // Get the playhead time of the current video
 - (NSTimeInterval) currentTime
 {
-    return [ooyalaPlayer playheadTime];
+    return [self.ooyalaPlayer playheadTime];
 }
 
 // Get the playhead time of the current video
 - (void) setCurrentTime: (NSTimeInterval) newTime
 {
-    [ooyalaPlayer setPlayheadTime: newTime];
+    [self.ooyalaPlayer setPlayheadTime: newTime];
 }
 
 
@@ -178,27 +171,27 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 // Can use this to display a video loading progress indicator
 - (float) videoLoadedFraction
 {
-    return ooyalaPlayer.bufferedTime / self.currentDuration;
+    return self.ooyalaPlayer.bufferedTime / self.currentDuration;
 }
 
 
 // Index of currently playing video (if using a playlist)
 - (BOOL) isPlaying
 {
-    return [ooyalaPlayer isPlaying];
+    return [self.ooyalaPlayer isPlaying];
 }
 
 
 - (BOOL) isPlayingOrBuffering
 {
-    OOOoyalaPlayerState state = [ooyalaPlayer state];
+    OOOoyalaPlayerState state = [self.ooyalaPlayer state];
     return ((state == OOOoyalaPlayerStateLoading) || (state == OOOoyalaPlayerStatePlaying)) ? TRUE : FALSE;
 }
 
 
 - (BOOL) isPaused
 {
-    OOOoyalaPlayerState state = [ooyalaPlayer state];
+    OOOoyalaPlayerState state = [self.ooyalaPlayer state];
     return (state == OOOoyalaPlayerStatePaused);
 }
 
@@ -212,8 +205,8 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     // notification handle
     if ([notification.name isEqualToString: @"stateChanged"] && self.firstLaunch)
     {
-        DebugLog(@"State = %@", [OOOoyalaPlayer playerStateToString: ooyalaPlayer.state]);
-        switch (ooyalaPlayer.state)
+        DebugLog(@"State = %@", [OOOoyalaPlayer playerStateToString:self.ooyalaPlayer.state]);
+        switch (self.ooyalaPlayer.state)
         {
             // Initial state, player is created but no content is loaded
             case OOOoyalaPlayerStateInit:
@@ -225,7 +218,13 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
                 
             // Content is loaded and initialized, player is ready to begin playback
             case OOOoyalaPlayerStateReady:
+			{
+				[self playVideo];
+				
+				self.firstLaunch = NO;
+				
                 break;
+			}
                 
             // Player is playing a video
             case OOOoyalaPlayerStatePlaying:
@@ -283,7 +282,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
                 
                 SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
                 VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
-                NSString *errorString = ooyalaPlayer.error.description;
+                NSString *errorString = self.ooyalaPlayer.error.description;
                 [appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId: videoInstance.uniqueId
                                                                    errorDescription: errorString
                                                                   completionHandler: ^(NSDictionary * dictionary) {
@@ -299,12 +298,6 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
             default:
                 AssertOrLog(@"Unexpected state");
                 break;
-        }
-        if ([[OOOoyalaPlayer playerStateToString: [ooyalaPlayer state]] isEqualToString: @"ready"])
-        {
-            [self playVideo];
-            
-            self.firstLaunch = NO;
         }
     }
     else if ([notification.name isEqualToString: @"timeChanged"])
