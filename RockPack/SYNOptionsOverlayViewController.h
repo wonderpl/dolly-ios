@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNPopoverable.h"
 
-@interface SYNOptionsOverlayViewController : UIViewController
+@interface SYNOptionsOverlayViewController : UIViewController <SYNPopoverable>
 
 -(void)removeFromScreen;
 
