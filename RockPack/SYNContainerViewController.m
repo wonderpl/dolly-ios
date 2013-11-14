@@ -138,10 +138,8 @@
     if (_currentViewController == currentViewController)
         return;
 
-    __weak SYNContainerViewController* wself = self;
-    
-    __weak UINavigationController *toViewController = currentViewController;
-    __weak UINavigationController *fromViewController = _currentViewController;
+    UINavigationController *toViewController = currentViewController;
+    UINavigationController *fromViewController = _currentViewController;
     
     // We need to set this here, as effectively we have commited to the current view controller at this stage
     // and any methods that access this before the transition has completed, need to get the new view controller
@@ -150,59 +148,15 @@
     [fromViewController willMoveToParentViewController: nil]; // remove the current view controller if there is one
     
     [super addChildViewController: toViewController];
-    [[self view] addSubview: toViewController.view];
+    [self.view addSubview: toViewController.view];
     
+    // just make sure on right dimensions
+    toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
     
-    
-    
-    // == Define the Animation and Completion Blocks == // (imporove visually)
-    
-    void (^ AnimationBlock)(void) = ^{
-        
-        toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-        fromViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width * 0.5f, self.view.frame.size.height * 0.5f);
-        
-    };
-    
-    void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
-        
-        
-        // just make sure on right dimensions
-        toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-        
-        [fromViewController.view removeFromSuperview];
-        [fromViewController removeFromParentViewController];
-        
-        
-        self.isTransitioning = NO;
-        
-    };
-    
-    
-    
-    
-    
-    // == Do the Transition selectively == //
-    if (fromViewController) // if not from first time
-    {
-       
-       toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width * 0.5f, self.view.frame.size.height * 0.5f);
-
-        wself.isTransitioning = YES;
-        [wself transitionFromViewController: fromViewController
-                           toViewController: toViewController
-                                   duration: VIEW_CONTROLLER_TRANSITION_DURATION
-                                    options: UIViewAnimationOptionCurveEaseInOut
-                                 animations: AnimationBlock
-                                 completion: CompleteTransitionBlock];
-        
-    }
-    else // first time
-    {
-        
-        CompleteTransitionBlock(YES);
-    }
+    [fromViewController.view removeFromSuperview];
+    [fromViewController removeFromParentViewController];
 }
+
 
 - (NSInteger) indexOfControllerByName: (NSString *) pageName
 {
