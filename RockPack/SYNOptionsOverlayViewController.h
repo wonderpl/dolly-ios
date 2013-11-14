@@ -10,4 +10,6 @@
 
 @interface SYNOptionsOverlayViewController : UIViewController
 
+-(void)removeFromScreen;
+
 @end

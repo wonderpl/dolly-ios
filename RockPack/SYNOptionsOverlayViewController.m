@@ -90,6 +90,19 @@ typedef enum {
             break;
             
     }
+    
+    [self removeFromScreen];
+}
+
+-(void)removeFromScreen
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        self.view.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
+    }];
+    
 }
 
 @end
