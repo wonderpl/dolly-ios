@@ -7,12 +7,12 @@
 //
 
 #import "RegexKitLite.h"
-#import "SYNAccountSettingsTextInputController.h"
+#import "SYNAccountSettingBasicController.h"
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
 @import QuartzCore;
 
-@interface SYNAccountSettingsTextInputController ()
+@interface SYNAccountSettingBasicController ()
 
 @property (nonatomic) CGFloat lastTextFieldY;
 
@@ -23,13 +23,12 @@
 @end
 
 
-@implementation SYNAccountSettingsTextInputController
+@implementation SYNAccountSettingBasicController
 
 @synthesize inputField, saveButton, errorLabel;
 @synthesize appDelegate;
 @synthesize lastTextFieldY;
 @synthesize spinner;
-@synthesize sizeInContainer;
 
 #pragma mark - Object lifecycle
 
@@ -62,28 +61,14 @@
 {
     [super viewDidLoad];
     
-    // Removed in dealloc
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(keyboardWasShown:)
-                                                 name: UIKeyboardDidShowNotification
-                                               object: nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(keyboardWillBeHidden:)
-                                                 name: UIKeyboardWillHideNotification
-                                               object: nil];
-    
-    self.preferredContentSize = CGSizeMake(IS_IPAD ? 380 : [SYNDeviceManager.sharedInstance currentScreenWidth], IS_IPAD ? 476 : [SYNDeviceManager.sharedInstance currentScreenHeight]);
     
     self.view.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor whiteColor];
     
-    self.sizeInContainer = self.preferredContentSize.width - 20.0;
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0, self.preferredContentSize.width, self.preferredContentSize.height)];
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.bounces = NO;
-    [self.view addSubview:self.scrollView];
     
-    lastTextFieldY = 10.0;
+    // on iPhone the view appears in a Navigation Controller and needs to offset from the top bar
+    lastTextFieldY = IS_IPHONE ? 84.0 : 0.0f;
+    
+    // == Button == //
     
     UIImage* buttonImage = [UIImage imageNamed: @"ButtonAccountSaveDefault.png"];
     saveButton = [UIButton buttonWithType: UIButtonTypeCustom];
@@ -99,7 +84,7 @@
     [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
                 forState: UIControlStateDisabled];
     
-    [self.scrollView addSubview: saveButton];
+    [self.view addSubview: saveButton];
     
     inputField = [self createInputField];
     
@@ -127,7 +112,7 @@
             break;
     }
     
-    [self.scrollView addSubview: inputField];
+    [self.view addSubview: inputField];
     
     self.spinner.center = self.saveButton.center;
     [self.view addSubview: self.spinner];
@@ -155,28 +140,6 @@
 }
 
 
-- (void) viewWillAppear: (BOOL) animated
-{
-    [super viewWillAppear: animated];
-    saveButton.enabled = YES;
-    CGFloat maxY;
-    for (UIView* view in self.scrollView.subviews)
-    {
-        maxY = MAX(maxY,view.frame.origin.y + view.frame.size.height);
-    }
-    
-    CGRect newFrame = self.scrollView.frame;
-    newFrame.size = self.preferredContentSize;
-    self.scrollView.frame = newFrame;
-    
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, maxY);
-    if(maxY < self.scrollView.frame.size.height)
-    {
-        CGRect newFrame = self.scrollView.frame;
-        newFrame.size = self.scrollView.contentSize;
-        self.scrollView.frame = newFrame;
-    }
-}
 
 
 - (void) didTapBackButton: (id) sender
@@ -192,9 +155,9 @@
 {
     
     
-    SYNPaddedUITextField *newInputField = [[SYNPaddedUITextField alloc] initWithFrame: CGRectMake(10.0,
+    SYNPaddedUITextField *newInputField = [[SYNPaddedUITextField alloc] initWithFrame: CGRectMake(5.0,
                                                                                                   lastTextFieldY,
-                                                                                                  self.sizeInContainer,
+                                                                                                  self.view.frame.size.width - 10.0f,
                                                                                                   40.0)];
     
     newInputField.backgroundColor = [UIColor colorWithWhite:(255.0/255.0) alpha:(1.0)];
@@ -324,7 +287,6 @@
 -(BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
     self.selectedFrame = textField.frame;
-    [self.scrollView scrollRectToVisible:self.selectedFrame animated:YES];
     return YES;
 }
 
@@ -334,36 +296,14 @@
     return YES;
 }
 
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [info[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGFloat topOfKeyboard = [[SYNDeviceManager sharedInstance] currentScreenHeight] - MIN(kbSize.height,kbSize.width); //Keyboard is relative to fixed orientation. Always use smallest dimension.
-    CGPoint bottomOfScrollView = [self.view.window.rootViewController.view convertPoint:CGPointMake(0.0, self.scrollView.frame.size.height + self.scrollView.frame.origin.y) fromView:self.view];
-    bottomOfScrollView.y +=20.0f; //statusbar
-    CGFloat overlap = bottomOfScrollView.y - topOfKeyboard;
-    if(overlap > 0)
-    {
-        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, overlap, 0.0);
-        self.scrollView.contentInset = contentInsets;
-        self.scrollView.scrollIndicatorInsets = contentInsets;
-        
-        [self.scrollView scrollRectToVisible:self.selectedFrame animated:YES];
 
-
-        
-        self.scrollView.bounces = YES;
-    }
-}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    UIView* nextView = [self.scrollView viewWithTag: textField.tag + 1];
+    UIView* nextView = [self.view viewWithTag: textField.tag + 1];
     if (nextView)
     {
         [nextView becomeFirstResponder];
-        [self.scrollView scrollRectToVisible:self.selectedFrame animated:YES];
     }
     else
     {
@@ -372,13 +312,6 @@
     return YES;
 }
 
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    self.scrollView.bounces = NO;
-}
+
 
 @end
