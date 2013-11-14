@@ -67,12 +67,12 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 {
     UIView *ooyalaView;
     
-    // register for all playback notifications
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(notificationPlayerReceived:)
-                                                 name: nil
-                                               object: self.ooyalaPlayer];
-    
+	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter addObserver:self
+						   selector:@selector(playerStateChanged:)
+							   name:OOOoyalaPlayerStateChangedNotification
+							 object:self.ooyalaPlayer];
+	   
     ooyalaView = self.ooyalaPlayer.view;
     
 #ifdef USE_HIRES_PLAYER
@@ -198,122 +198,89 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 
 #pragma mark - Player state
 
-- (void) notificationPlayerReceived: (NSNotification *) notification
-{
-    DebugLog(@"Notification = %@", notification.name);
-    
-    // notification handle
-    if ([notification.name isEqualToString: @"stateChanged"] && self.firstLaunch)
-    {
-        DebugLog(@"State = %@", [OOOoyalaPlayer playerStateToString:self.ooyalaPlayer.state]);
-        switch (self.ooyalaPlayer.state)
-        {
-            // Initial state, player is created but no content is loaded
-            case OOOoyalaPlayerStateInit:
-                break;
-                
-            // Loading content
-            case OOOoyalaPlayerStateLoading:
-                break;
-                
-            // Content is loaded and initialized, player is ready to begin playback
-            case OOOoyalaPlayerStateReady:
+- (void)playerStateChanged:(NSNotification *)notification {
+	DebugLog(@"State = %@", [OOOoyalaPlayer playerStateToString:self.ooyalaPlayer.state]);
+	switch (self.ooyalaPlayer.state) {
+		// Initial state, player is created but no content is loaded
+		case OOOoyalaPlayerStateInit:
+		// Loading content
+		case OOOoyalaPlayerStateLoading:
+			break;
+		// Content is loaded and initialized, player is ready to begin playback
+		case OOOoyalaPlayerStateReady: {
+			[self playVideo];
+			
+			self.firstLaunch = NO;
+			
+			break;
+		}
+		// Player is playing a video
+		case OOOoyalaPlayerStatePlaying: {
+			[self stopVideoStallDetectionTimer];
+			
+			DebugLog(@"*** Playing: Starting - Fading up player");
+			// If we are playing then out shuttle / pause / play cycle is over
+			self.shuttledByUser = YES;
+			self.notYetPlaying = NO;
+			
+			// Now cache the duration of this video for use in the progress updates
+			self.currentDuration = self.duration;
+			
+			if (self.currentDuration > 0.0f)
 			{
-				[self playVideo];
-				
-				self.firstLaunch = NO;
-				
-                break;
+				self.fadeUpScheduled = NO;
+				// Only start if we have a valid duration
+				[self startShuttleBarUpdateTimer];
+				self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
 			}
-                
-            // Player is playing a video
-            case OOOoyalaPlayerStatePlaying:
-            {
-                [self stopVideoStallDetectionTimer];
-                
-                DebugLog(@"*** Playing: Starting - Fading up player");
-                // If we are playing then out shuttle / pause / play cycle is over
-                self.shuttledByUser = YES;
-                self.notYetPlaying = NO;
-                
-                // Now cache the duration of this video for use in the progress updates
-                self.currentDuration = self.duration;
-                
-                if (self.currentDuration > 0.0f)
-                {
-                    self.fadeUpScheduled = NO;
-                    // Only start if we have a valid duration
-                    [self startShuttleBarUpdateTimer];
-                    self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
-                }
-        
-                break;
-            }
+	
+			break;
+		}
+		// Player is paused, video is showing
+		case OOOoyalaPlayerStatePaused: {
+			if (self.shuttledByUser && self.playFlag) {
+				DebugLog (@"*** Paused: Paused by shuttle and should be playing? - Attempting to play");
+				[self playVideo];
+			} else {
+				[self stopVideoStallDetectionTimer];
+				DebugLog (@"*** Paused: Paused by user");
+			}
+			break;
+		}
+		// Player has finished playing content
+		case OOOoyalaPlayerStateCompleted: {
+			self.percentageViewed = 1.0f;
+			self.timeViewed = self.currentDuration;
+			[self stopShuttleBarUpdateTimer];
+			[self stopVideoStallDetectionTimer];
+			[self stopVideo];
+			[self resetPlayerAttributes];
+			[self loadNextVideo];
+			break;
+		}
+		// Player has encountered an error, check OOOoyalaPlayer.error
+		case OOOoyalaPlayerStateError: {
+			[self fadeUpVideoPlayer];
+			
+			SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
+			VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
+			NSString *errorString = self.ooyalaPlayer.error.description;
+			[appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId: videoInstance.uniqueId
+															   errorDescription: errorString
+															  completionHandler: ^(NSDictionary * dictionary) {
+																  DebugLog(@"Reported video error");
+															  }
+																   errorHandler: ^(NSError* error) {
+																	   DebugLog(@"Report concern failed");
+																	   DebugLog(@"%@", [error debugDescription]);
+																   }];
+			break;
+		}
 
-            // Player is paused, video is showing
-            case OOOoyalaPlayerStatePaused:
-                if (self.shuttledByUser && self.playFlag)
-                {
-                    DebugLog (@"*** Paused: Paused by shuttle and should be playing? - Attempting to play");
-                    [self playVideo];
-                }
-                else
-                {
-                    [self stopVideoStallDetectionTimer];
-                    DebugLog (@"*** Paused: Paused by user");
-                }
-                break;
-                
-            // Player has finished playing content
-            case OOOoyalaPlayerStateCompleted:
-                self.percentageViewed = 1.0f;
-                self.timeViewed = self.currentDuration;
-                [self stopShuttleBarUpdateTimer];
-                [self stopVideoStallDetectionTimer];
-                [self stopVideo];
-                [self resetPlayerAttributes];
-                [self loadNextVideo];
-                break;
-                
-            // Player has encountered an error, check OOOoyalaPlayer.error
-            case OOOoyalaPlayerStateError:
-            {
-                [self fadeUpVideoPlayer];
-                
-                SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
-                VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
-                NSString *errorString = self.ooyalaPlayer.error.description;
-                [appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId: videoInstance.uniqueId
-                                                                   errorDescription: errorString
-                                                                  completionHandler: ^(NSDictionary * dictionary) {
-                                                                      DebugLog(@"Reported video error");
-                                                                  }
-                                                                       errorHandler: ^(NSError* error) {
-                                                                           DebugLog(@"Report concern failed");
-                                                                           DebugLog(@"%@", [error debugDescription]);
-                                                                       }];
-                break;
-            }
-
-            default:
-                AssertOrLog(@"Unexpected state");
-                break;
-        }
-    }
-    else if ([notification.name isEqualToString: @"timeChanged"])
-    {
-        //        if (activeController.player.duration - activeController.player.playheadTime <= 7.0f && !bufferedControllerSetted)
-        //        {
-        //            [self selectNextVideo];
-        //            [bufferedController.player
-        //             setEmbedCode: [[relatedVideo objectAtIndex: relatedVideoIndex] objectForKey: @"embed_code"]];
-        //            bufferedControllerSetted = YES;
-        //        }
-    }
-    else if ([notification.name isEqualToString: @"playCompleted"])
-    {
-        // Finished
-    }
+		default:
+			AssertOrLog(@"Unexpected state");
+			break;
+	}
 }
 
 @end
