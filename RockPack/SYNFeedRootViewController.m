@@ -46,7 +46,6 @@ typedef void(^FeedDataErrorBlock)(void);
 @property (nonatomic, strong) NSDictionary* feedChannelsById;
 @property (nonatomic, strong) NSDictionary* feedItemByPosition;
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
-//@property (nonatomic, strong) NSArray* videosInOrderArray;
 
 @end
 
@@ -73,11 +72,9 @@ typedef void(^FeedDataErrorBlock)(void);
     [super viewDidLoad];
 
     self.feedItemsData = @[];
-//    self.videosInOrderArray = @[];
 
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
-//    [self removePopupMessage];
     [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
                    withLoader: YES];
 
