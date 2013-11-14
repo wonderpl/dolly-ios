@@ -18,7 +18,7 @@
 #import "SYNAccountSettingsFullNameInput.h"
 #import "SYNAccountSettingsGender.h"
 #import "SYNAccountSettingsLocation.h"
-#import "SYNAccountSettingsMainTableViewController.h"
+#import "SYNAccountSettingsViewController.h"
 #import "SYNAccountSettingsPassword.h"
 #import "SYNAccountSettingsPushNotifications.h"
 #import "SYNAccountSettingsShareSettings.h"
@@ -29,9 +29,8 @@
 #import "User.h"
 
 
-@interface SYNAccountSettingsMainTableViewController ()
+@interface SYNAccountSettingsViewController ()
 
-@property (nonatomic, strong) NSArray* dataItems2ndSection;
 @property (nonatomic, strong) UIPopoverController* dobPopover;
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (nonatomic, weak) UITableViewCell* dobTableViewCell;
@@ -40,9 +39,9 @@
 @end
 
 
-@implementation SYNAccountSettingsMainTableViewController
+@implementation SYNAccountSettingsViewController
 
-@synthesize dataItems2ndSection, appDelegate, user;
+@synthesize appDelegate, user;
 
 #pragma mark - Object lifecycle
 
@@ -63,9 +62,7 @@
             [conditionalDataItems addObject:NSLocalizedString (@"Change Password", nil)];
         }
         
-        [conditionalDataItems addObjectsFromArray:@[NSLocalizedString (@"About", nil), NSLocalizedString (@"Logout", nil)]];
         
-        dataItems2ndSection = [NSArray arrayWithArray:conditionalDataItems];
         
         self.title = NSLocalizedString (@"settings_popover_title" , nil);
     }
@@ -138,8 +135,8 @@
     }
     else
     {
-        // second section
-        return dataItems2ndSection.count;
+        // Change Passwork
+        return 1;
     }
     
 }
@@ -256,14 +253,11 @@
                                                          reuseIdentifier: CellIdentifier];
         }
         
-        cell.textLabel.text = (NSString*)dataItems2ndSection[indexPath.row];
+        cell.textLabel.text = NSLocalizedString (@"Change Password", nil);
         cell.textLabel.font = [UIFont lightCustomFontOfSize:16.0];
         cell.textLabel.center = CGPointMake(0, 0);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        if (indexPath.row != self.dataItems2ndSection.count - 1) // if its not the last element which is always the Logout button
-        {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
     }
     
     return cell;
@@ -355,26 +349,7 @@
     }
     else
     {
-        switch (indexPath.row)
-        { 
-            case 0:
-                if(self.dataItems2ndSection.count == 2)
-                    [self.navigationController pushViewController: [[SYNAccountSettingsAbout alloc] init] animated: YES];
-                else
-                    [self.navigationController pushViewController: [[SYNAccountSettingsPassword alloc] init] animated: YES];
-                break;
-                
-            case 1:
-                if(self.dataItems2ndSection.count == 2)
-                    [self showLogoutAlert];
-                else
-                    [self.navigationController pushViewController: [[SYNAccountSettingsAbout alloc] init] animated: YES];
-                break;
-                
-            case 2:
-                [self showLogoutAlert];
-                break;
-        }
+        [self.navigationController pushViewController: [[SYNAccountSettingsPassword alloc] init] animated: YES];
     }
     
     [self.tableView deselectRowAtIndexPath: indexPath

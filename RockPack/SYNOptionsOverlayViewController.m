@@ -9,7 +9,7 @@
 #import "SYNOptionsOverlayViewController.h"
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
-#import "SYNAccountSettingsMainTableViewController.h"
+#import "SYNAccountSettingsViewController.h"
 
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
@@ -68,13 +68,14 @@ typedef enum {
         {
             self.completeBlock = ^{
                 
-                SYNAccountSettingsMainTableViewController* accountSettingsVC = [[SYNAccountSettingsMainTableViewController alloc] init];
+                SYNAccountSettingsViewController* accountSettingsVC = [[SYNAccountSettingsViewController alloc] init];
                 
                 if(IS_IPAD)
-                    [appDelegate.masterViewController addOverlayController:accountSettingsVC animated:YES];
+                    [appDelegate.masterViewController addOverlayController:accountSettingsVC
+                                                                  animated:YES];
                 else
-                    [wself.parentViewController.navigationController pushViewController:accountSettingsVC animated:YES];
-                
+                    [wself.parentViewController.navigationController pushViewController:accountSettingsVC
+                                                                               animated:YES];
                 
             };
         }
@@ -142,7 +143,7 @@ typedef enum {
         
         
         // then remove since removing before the block call will release the instance
-        [self.view removeFromSuperview];
+        //[self.view removeFromSuperview];
         [self removeFromParentViewController];
         
         
