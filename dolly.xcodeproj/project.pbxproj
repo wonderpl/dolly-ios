@@ -1420,6 +1420,7 @@
 		BED027D31834D4CC00636659 /* ButtonMoreRate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED027C31834D4CC00636659 /* ButtonMoreRate@2x.png */; };
 		BED027D41834D4CC00636659 /* ButtonMoreSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = BED027C41834D4CC00636659 /* ButtonMoreSettings.png */; };
 		BED027D51834D4CC00636659 /* ButtonMoreSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED027C51834D4CC00636659 /* ButtonMoreSettings@2x.png */; };
+		BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027D61834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib */; };
 		BED4310316EF8D830051465B /* FieldDayMonth.png in Resources */ = {isa = PBXBuildFile; fileRef = BED430FF16EF8D830051465B /* FieldDayMonth.png */; };
 		BED4310416EF8D830051465B /* FieldDayMonth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310016EF8D830051465B /* FieldDayMonth@2x.png */; };
 		BED4310516EF8D830051465B /* FieldYear.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310116EF8D830051465B /* FieldYear.png */; };
@@ -3108,6 +3109,7 @@
 		BED027C31834D4CC00636659 /* ButtonMoreRate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreRate@2x.png"; path = "Assets/Images/ButtonMoreRate@2x.png"; sourceTree = "<group>"; };
 		BED027C41834D4CC00636659 /* ButtonMoreSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonMoreSettings.png; path = Assets/Images/ButtonMoreSettings.png; sourceTree = "<group>"; };
 		BED027C51834D4CC00636659 /* ButtonMoreSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreSettings@2x.png"; path = "Assets/Images/ButtonMoreSettings@2x.png"; sourceTree = "<group>"; };
+		BED027D61834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAccountSettingsViewController~iphone.xib"; sourceTree = "<group>"; };
 		BED430FF16EF8D830051465B /* FieldDayMonth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldDayMonth.png; path = Assets/Images/FieldDayMonth.png; sourceTree = "<group>"; };
 		BED4310016EF8D830051465B /* FieldDayMonth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FieldDayMonth@2x.png"; path = "Assets/Images/FieldDayMonth@2x.png"; sourceTree = "<group>"; };
 		BED4310116EF8D830051465B /* FieldYear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldYear.png; path = Assets/Images/FieldYear.png; sourceTree = "<group>"; };
@@ -5294,6 +5296,7 @@
 				BE03A6D016F7840800245314 /* Secondary Tables */,
 				BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */,
 				BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */,
+				BED027D61834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib */,
 				BEE4A6BF170B273F008F9D05 /* SYNAccountSettingTableViewCell.h */,
 				BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */,
 				1F356183175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.h */,
@@ -6858,6 +6861,7 @@
 				BEB3134E1817D4B500FAF98A /* SYNSearchResultsVideoCell.xib in Resources */,
 				38A200501731607F00FB9F57 /* GlossVideo@2x~iphone.png in Resources */,
 				38A200511731607F00FB9F57 /* GlossVideo~iphone.png in Resources */,
+				BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */,
 				38A200521731607F00FB9F57 /* NavigationDot@2x~iphone.png in Resources */,
 				38A200531731607F00FB9F57 /* NavigationDotCurrent@2x~iphone.png in Resources */,
 				38A200541731607F00FB9F57 /* NavigationDotCurrent~iphone.png in Resources */,

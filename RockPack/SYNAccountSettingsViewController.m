@@ -35,6 +35,7 @@
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (nonatomic, weak) UITableViewCell* dobTableViewCell;
 @property (nonatomic, weak) User* user;
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
 
 @end
 
@@ -45,30 +46,7 @@
 
 #pragma mark - Object lifecycle
 
-- (id) init
-{
-    if ((self = [super initWithStyle: UITableViewStyleGrouped]))
-    {
-        
-        appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        user = appDelegate.currentUser;
-        
-        
-        NSMutableArray* conditionalDataItems = [[NSMutableArray alloc] initWithCapacity:3];
-        
-        if(user.loginOriginValue == LoginOriginRockpack) // only rockpack users can change their password for now
-        {
-            [conditionalDataItems addObject:NSLocalizedString (@"Change Password", nil)];
-        }
-        
-        
-        
-        self.title = NSLocalizedString (@"settings_popover_title" , nil);
-    }
-    
-    return self;
-}
+
 
 
 - (void) dealloc
@@ -83,6 +61,22 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    user = appDelegate.currentUser;
+    
+    
+    NSMutableArray* conditionalDataItems = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    if(user.loginOriginValue == LoginOriginRockpack) // only rockpack users can change their password for now
+    {
+        [conditionalDataItems addObject:NSLocalizedString (@"Change Password", nil)];
+    }
+    
+    
+    
+    self.title = NSLocalizedString (@"settings_popover_title" , nil);
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
