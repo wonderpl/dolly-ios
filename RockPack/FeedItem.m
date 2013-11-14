@@ -119,7 +119,7 @@
 {
     NSString *typeString = self.itemTypeValue == FeedItemTypeAggregate ? @"AGR" : @"FDI";
     NSString *resourceString = self.resourceTypeValue == FeedItemResourceTypeChannel ? @"Channel" : @"VideoInstance";
-    NSMutableString *responceString = [NSMutableString stringWithFormat: @"[FeedItem %@ (type:'%@', rsc:'%@', count:%i)]", self.uniqueId, typeString, resourceString, self.itemCountValue];
+    NSMutableString *responceString = [NSMutableString stringWithFormat: @"[FeedItem %@ (type:'%@', rsc:'%@', count:%i, position:%i)]", self.uniqueId, typeString, resourceString, self.itemCountValue, self.positionValue];
     
     return responceString;
 }
