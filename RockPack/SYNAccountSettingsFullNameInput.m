@@ -23,16 +23,6 @@
 
 @implementation SYNAccountSettingsFullNameInput
 
-#pragma mark - Object lifecycle
-
-- (void) dealloc
-{
-    // Defensive programming
-    self.inputField.delegate = nil;
-    self.lastNameInputField.delegate = nil;
-    self.tableView.delegate = nil;
-    self.tableView.dataSource = nil;
-}
 
 
 #pragma mark - View lifecycle
@@ -49,10 +39,17 @@
                                                             label: @"Full name"
                                                             value: nil] build]];
     
-    self.view.backgroundColor = [UIColor whiteColor];
 
-    self.inputField.tag = 1 ;
-    self.inputField.delegate = self;
+    
+    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.inputField.placeholder = @"First Name";
     
     self.lastNameInputField = [self createInputField];
     self.lastNameInputField.text = self.appDelegate.currentUser.lastName;
@@ -64,18 +61,7 @@
     [self.view addSubview:self.lastNameInputField];
     
     
-    
-    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
-    
-    
-    self.inputField.placeholder = @"First Name";
     self.lastNameInputField.placeholder = @"Last Name";
-    
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     CGRect tableViewFrame = CGRectMake(0.0,
                                        self.lastNameInputField.frame.origin.y + 22.0,
@@ -101,6 +87,13 @@
     
     self.errorLabel.center = CGPointMake(self.errorLabel.center.x, self.saveButton.center.y + 60.0);
     self.errorLabel.frame = CGRectIntegral(self.errorLabel.frame);
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.lastNameInputField.delegate = nil;
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
 }
 
 #pragma mark - Table view data source

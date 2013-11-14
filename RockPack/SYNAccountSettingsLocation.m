@@ -51,15 +51,7 @@
                                                            action: @"accountPropertyChanged"
                                                             label: @"Location"
                                                             value: nil] build]];
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     
 }
@@ -71,7 +63,7 @@
     appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     // == Table View == //
-    CGRect tableViewFrame = CGRectMake((IS_IPAD ? 1.0 : 0.0), 0.0, (IS_IPAD ? 378.0 : 320.0), 200.0);
+    CGRect tableViewFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 200.0);
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.opaque = NO;

@@ -30,10 +30,15 @@
                                                             value: nil] build]];
     
     
+    
+    
+}
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     self.errorLabel.text = @"Your username can only be changed once.";
-    
 }
 -(void)saveButtonPressed:(UIButton*)button
 {

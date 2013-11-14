@@ -5292,6 +5292,8 @@
 				BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */,
 				1F356183175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.h */,
 				1F356184175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m */,
+				BE21EEB016FB56070067223B /* SYNPaddedUITextField.h */,
+				BE21EEB116FB56080067223B /* SYNPaddedUITextField.m */,
 			);
 			name = "Account Settings";
 			sourceTree = "<group>";
@@ -5427,16 +5429,14 @@
 				BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */,
 				BEE4A6C3170B56B3008F9D05 /* SYNAccountSettingsUsername.h */,
 				BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */,
-				BE21EEA116FB1E750067223B /* SYNAccountSettingsDOB.h */,
-				BE21EEA216FB1E750067223B /* SYNAccountSettingsDOB.m */,
 				BE03A6D416F784B000245314 /* SYNAccountSettingsGender.h */,
 				BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */,
-				BE21EEAD16FB4ECC0067223B /* SYNAccountSettingsPassword.h */,
-				BE21EEAE16FB4ECD0067223B /* SYNAccountSettingsPassword.m */,
-				BE21EEB016FB56070067223B /* SYNPaddedUITextField.h */,
-				BE21EEB116FB56080067223B /* SYNPaddedUITextField.m */,
 				BE13E38716FB85220098F23C /* SYNAccountSettingsLocation.h */,
 				BE13E38816FB85220098F23C /* SYNAccountSettingsLocation.m */,
+				BE21EEA116FB1E750067223B /* SYNAccountSettingsDOB.h */,
+				BE21EEA216FB1E750067223B /* SYNAccountSettingsDOB.m */,
+				BE21EEAD16FB4ECC0067223B /* SYNAccountSettingsPassword.h */,
+				BE21EEAE16FB4ECD0067223B /* SYNAccountSettingsPassword.m */,
 			);
 			name = "Specific Fields";
 			sourceTree = "<group>";

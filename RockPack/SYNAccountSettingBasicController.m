@@ -45,14 +45,6 @@
 }
 
 
-- (void) dealloc
-{
-    // Stop observing everything
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    
-    // Defensive programming
-    self.inputField.delegate = nil;
-}
 
 
 #pragma mark - View lifecycle
@@ -61,16 +53,23 @@
 {
     [super viewDidLoad];
     
-    
-    self.view.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // on iPhone the view appears in a Navigation Controller and needs to offset from the top bar
     lastTextFieldY = IS_IPHONE ? 84.0 : 0.0f;
     
-    
-    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.view.frame = self.navigationController.view.frame;
     
     inputField = [self createInputField];
+    
+    self.inputField.tag = 1 ;
+    self.inputField.delegate = self;
     
     switch (currentFieldType)
     {
@@ -97,31 +96,6 @@
     }
     
     [self.view addSubview: inputField];
-    
-    self.spinner.center = self.saveButton.center;
-    [self.view addSubview: self.spinner];
-    
-    
-    
-    
-    
-    errorLabel.textColor = [UIColor colorWithRed: (11.0/255.0)
-                                           green: (166.0/255.0)
-                                            blue: (171.0/255.0)
-                                           alpha: (1.0)];
-    
-    errorLabel.font = [UIFont lightCustomFontOfSize: 18];
-    errorLabel.numberOfLines = 0;
-    errorLabel.textAlignment = NSTextAlignmentCenter;
-    
-    [self.view addSubview: errorLabel];
-}
-
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.view.frame = self.navigationController.view.frame;
     
     errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(5.0,
                                                             saveButton.frame.origin.y + saveButton.frame.size.height + 6.0,
@@ -154,8 +128,36 @@
     
     
     [self.view addSubview: saveButton];
+    
+    
+    // == Spinner == //
+    
+    
+    self.spinner.center = self.saveButton.center;
+    [self.view addSubview: self.spinner];
+    
+    
+    // == Error == //
+    
+    errorLabel.textColor = [UIColor colorWithRed: (11.0/255.0)
+                                           green: (166.0/255.0)
+                                            blue: (171.0/255.0)
+                                           alpha: (1.0)];
+    
+    errorLabel.font = [UIFont lightCustomFontOfSize: 18];
+    errorLabel.numberOfLines = 0;
+    errorLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [self.view addSubview: errorLabel];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.inputField.delegate = nil;
+}
+
+#pragma mark - Utility Methods
 
 - (SYNPaddedUITextField *) createInputField
 {
@@ -187,7 +189,7 @@
 
 - (void) saveButtonPressed: (UIButton *) button
 {
-    
+    // to be implemented in subclass
 }
 
 #pragma mark - Validating

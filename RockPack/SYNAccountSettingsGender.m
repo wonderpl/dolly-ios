@@ -40,7 +40,7 @@
                                                            action: @"accountPropertyChanged"
                                                             label: @"Gender"
                                                             value: nil] build]];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     
 }
 
