@@ -52,12 +52,13 @@
                             <outlet property="dataSource" destination="8eG-jP-d0H" id="lwB-0a-HqD"/>
                         </connections>
                     </collectionView>
-                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ws0-AC-El3" userLabel="Button - Action Message" customClass="SYNButton">
+                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ws0-AC-El3" userLabel="Button - Action Message" customClass="SYNButton">
                         <rect key="frame" x="0.0" y="58" width="320" height="36"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="lPa-Tj-8QX"/>
                         </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal">
                             <attributedString key="attributedTitle">
                                 <fragment content="xyz">
