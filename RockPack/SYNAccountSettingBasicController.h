@@ -19,7 +19,7 @@ typedef enum
     UserFieldPassword
 } UserFieldType;
 
-@interface SYNAccountSettingsTextInputController : UIViewController <UITextFieldDelegate>
+@interface SYNAccountSettingBasicController : UIViewController <UITextFieldDelegate>
 {
     UserFieldType currentFieldType;
 }
@@ -29,8 +29,6 @@ typedef enum
 @property (nonatomic, strong) UILabel *errorLabel;
 @property (nonatomic, strong) SYNAppDelegate *appDelegate;
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
-@property (nonatomic, strong) UIScrollView* scrollView;
-@property (nonatomic, readonly) CGFloat sizeInContainer;
 
 - (id) initWithUserFieldType: (UserFieldType) userFieldType;
 

@@ -61,10 +61,10 @@
     self.lastNameInputField.tag = 2;
     self.lastNameInputField.delegate = self;
     
-    [self.scrollView addSubview:self.lastNameInputField];
+    [self.view addSubview:self.lastNameInputField];
     
     CGRect tableViewFrame = CGRectMake(0.0,
-                                       self.lastNameInputField.frame.origin.y + 42.0,
+                                       self.lastNameInputField.frame.origin.y + 22.0,
                                        320.0f,
                                        138.0);
     if(IS_IPAD)
@@ -81,7 +81,7 @@
     self.tableView.backgroundView = nil;
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    [self.scrollView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     
     
     CGRect saveButtonRect = self.saveButton.frame;

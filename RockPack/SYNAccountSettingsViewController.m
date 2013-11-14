@@ -22,7 +22,7 @@
 #import "SYNAccountSettingsPassword.h"
 #import "SYNAccountSettingsPushNotifications.h"
 #import "SYNAccountSettingsShareSettings.h"
-#import "SYNAccountSettingsTextInputController.h"
+#import "SYNAccountSettingBasicController.h"
 #import "SYNAccountSettingsUsername.h"
 #import "SYNAppDelegate.h"
 #import "UIFont+SYNFont.h"

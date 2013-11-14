@@ -55,13 +55,13 @@
     passwordField.placeholder = NSLocalizedString (@"New Password", nil);
     passwordField.secureTextEntry = YES;
     passwordField.tag = 2;
-    [self.scrollView addSubview:passwordField];
+    [self.view addSubview:passwordField];
     
     passwordConfirmField = [self createInputField];
     passwordConfirmField.secureTextEntry = YES;
     passwordConfirmField.placeholder = NSLocalizedString (@"Confirm Password", nil);
     passwordConfirmField.tag = 3;
-    [self.scrollView addSubview:passwordConfirmField];
+    [self.view addSubview:passwordConfirmField];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage* backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
