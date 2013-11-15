@@ -18,24 +18,12 @@
     
     self.nameLabel.font = [UIFont lightCustomFontOfSize:self.nameLabel.font.pointSize];
     
-    self.pressedLayerView.hidden = YES;
     
     
     
 }
 
--(void)setHighlighted:(BOOL)highlighted
-{
-    
-    if(highlighted)
-    {
-        self.pressedLayerView.hidden = NO;
-    }
-    else
-    {
-        self.pressedLayerView.hidden = YES;
-    }
-}
+
 
 - (void) setDisplayName: (NSString*)name
 {
