@@ -141,7 +141,7 @@ typedef enum {
             self.completeBlock = ^{
               
                 
-                SYNFriendsViewController* friendsVC = [[SYNFriendsViewController alloc] init];
+                SYNFriendsViewController* friendsVC = [[SYNFriendsViewController alloc] initWithViewId:kFriendsViewId];
                 
                 UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
                 

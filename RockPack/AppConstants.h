@@ -51,7 +51,7 @@
 #define kChannelDetailsViewId       @"CHANNEL DETAILS"
 #define kSideNavigationViewId       @"SIDE NAVIGATION"
 #define kSubscribersListViewId      @"SUBSCRIBERS"
-#define kFriendsViewId              @"FRIENDS"
+#define kFriendsViewId              @"My Friends"
 #define kActivityViewId             @"ACTIVITY"
 #define kMoodViewId                 @"MOOD-MINDER"
 

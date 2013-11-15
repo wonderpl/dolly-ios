@@ -45,6 +45,7 @@
     [super viewDidLoad];
     
     
+    
     onRockpackFilterOn = NO;
     
     self.currentSearchTerm = [[NSMutableString alloc] init];
@@ -304,10 +305,12 @@
     
     [self viewProfileDetails:(ChannelOwner*)selectedFriend];
     
-    
 }
 
-
+-(NSString*)title
+{
+    return viewId;
+}
 
 
 @end

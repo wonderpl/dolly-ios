@@ -535,10 +535,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                              animated:YES];
         
         // hide the 'DISCOVER' text next to the back button as it appears by default
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                 style:UIBarButtonItemStyleBordered
-                                                                                target:nil
-                                                                                action:nil];
+        
         
         
     }
