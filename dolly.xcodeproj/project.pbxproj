@@ -165,6 +165,7 @@
 		0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542A18363ADC009B161C /* SYNTextFieldLogin.m */; };
 		0165542E18363C70009B161C /* SYNTextFieldLoginiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */; };
 		01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */; };
+		01655434183680CE009B161C /* SYNFormButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655433183680CE009B161C /* SYNFormButton.m */; };
 		01677E0C16554AB500B1B1D8 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF616554AB500B1B1D8 /* ButtonBack.png */; };
 		01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */; };
 		01677E0E16554AB500B1B1D8 /* ButtonBackHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */; };
@@ -1628,6 +1629,8 @@
 		0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLoginiPhone.m; sourceTree = "<group>"; };
 		0165542F183646C8009B161C /* SYNTextFieldLoginDateiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginDateiPhone.h; sourceTree = "<group>"; };
 		01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLoginDateiPhone.m; sourceTree = "<group>"; };
+		01655432183680CE009B161C /* SYNFormButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFormButton.h; sourceTree = "<group>"; };
+		01655433183680CE009B161C /* SYNFormButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFormButton.m; sourceTree = "<group>"; };
 		01677DF616554AB500B1B1D8 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Assets/Images/ButtonBack.png; sourceTree = "<group>"; };
 		01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonBack@2x.png"; path = "Assets/Images/ButtonBack@2x.png"; sourceTree = "<group>"; };
 		01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackHighlighted.png; path = Assets/Images/ButtonBackHighlighted.png; sourceTree = "<group>"; };
@@ -5959,6 +5962,8 @@
 		BEB31371181AC40100FAF98A /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				01655432183680CE009B161C /* SYNFormButton.h */,
+				01655433183680CE009B161C /* SYNFormButton.m */,
 				0125FB6D182BEAFB00EC822E /* SYNAvatarButton.h */,
 				0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */,
 				016AED391821349800DEAF7E /* SYNSocialButton.h */,
@@ -7611,6 +7616,7 @@
 				012BD2E3173BE87300BE28B6 /* SDImageCache.m in Sources */,
 				012BD2E4173BE87300BE28B6 /* SDWebImageCompat.m in Sources */,
 				012BD2E5173BE87300BE28B6 /* SDWebImageDecoder.m in Sources */,
+				01655434183680CE009B161C /* SYNFormButton.m in Sources */,
 				012BD2E6173BE87300BE28B6 /* SDWebImageDownloader.m in Sources */,
 				01AFF99817EC91540002131A /* NSString+LLDBQuickLook.m in Sources */,
 				012BD2E7173BE87300BE28B6 /* SDWebImageDownloaderOperation.m in Sources */,
