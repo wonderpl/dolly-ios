@@ -343,7 +343,7 @@
                             </connections>
                         </textField>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="115" userLabel="Label - signup error label">
-                            <rect key="frame" x="20" y="162" width="280" height="51"/>
+                            <rect key="frame" x="20" y="192" width="280" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.8862745098" green="0.21176470589999999" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
