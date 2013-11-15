@@ -381,7 +381,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchBar
 {
-    //[searchbar setText: @""];
+    
     [searchBar setShowsCancelButton:YES animated:YES];
     return YES;
 }
@@ -389,6 +389,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:NO animated:YES];
+    
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
@@ -493,8 +494,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                              withComplete: processBlock
                                                                                  andError: errorBlock];
 }
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    
     
     
     [self dispatchSearch:searchBar.text
@@ -503,6 +506,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 
+#pragma mark - Perform Search
+
 - (void) dispatchSearch:(NSString*)searchTerm
               withTitle:(NSString*)title
                 forType:(kSearchType)type
@@ -510,8 +515,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     [self.searchBar setShowsCancelButton:NO animated:YES];
+    
     [self.searchBar resignFirstResponder];
     
+    [self.autocompleteTimer invalidate];
+    
+    [self closeAutocomplete];
     
     
     if(IS_IPHONE)
