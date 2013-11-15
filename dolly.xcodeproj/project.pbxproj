@@ -162,6 +162,7 @@
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
 		015CEE3F16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */; };
 		016191711782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542A18363ADC009B161C /* SYNTextFieldLogin.m */; };
 		01677E0C16554AB500B1B1D8 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF616554AB500B1B1D8 /* ButtonBack.png */; };
 		01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */; };
 		01677E0E16554AB500B1B1D8 /* ButtonBackHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */; };
@@ -1674,6 +1675,8 @@
 		015CEE3D16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIntegralCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIntegralCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFUIKitMainThreadGuard.m; sourceTree = "<group>"; };
+		0165542918363ADC009B161C /* SYNTextFieldLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLogin.h; sourceTree = "<group>"; };
+		0165542A18363ADC009B161C /* SYNTextFieldLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLogin.m; sourceTree = "<group>"; };
 		01677DF616554AB500B1B1D8 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Assets/Images/ButtonBack.png; sourceTree = "<group>"; };
 		01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonBack@2x.png"; path = "Assets/Images/ButtonBack@2x.png"; sourceTree = "<group>"; };
 		01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackHighlighted.png; path = Assets/Images/ButtonBackHighlighted.png; sourceTree = "<group>"; };
@@ -3589,6 +3592,15 @@
 			name = "Report Concerns";
 			sourceTree = "<group>";
 		};
+		0165542818363AC4009B161C /* Text Fields */ = {
+			isa = PBXGroup;
+			children = (
+				0165542918363ADC009B161C /* SYNTextFieldLogin.h */,
+				0165542A18363ADC009B161C /* SYNTextFieldLogin.m */,
+			);
+			name = "Text Fields";
+			sourceTree = "<group>";
+		};
 		01677DDA1655491100B1B1D8 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -4045,6 +4057,7 @@
 		0199F127166F94C400E479C6 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				0165542818363AC4009B161C /* Text Fields */,
 				BEB3136A181ABD0D00FAF98A /* Cell Buttons */,
 				BEB31369181ABCFD00FAF98A /* BBCyclingLabel */,
 			);
@@ -7801,6 +7814,7 @@
 				38BACE92173AB4E600406597 /* SYNChannelCoverImageCell.m in Sources */,
 				38BACE94173AB4E600406597 /* SYNChannelCoverImageSelectorViewController.m in Sources */,
 				015C13C1173B034C001569FE /* SYNReportConcernTableViewController.m in Sources */,
+				0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */,
 				BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */,
 				BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */,
 				012BD2E2173BE87300BE28B6 /* NSData+GIF.m in Sources */,

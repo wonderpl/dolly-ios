@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
@@ -366,7 +366,6 @@
     <resources>
         <image name="ButtonFacebookDefault.png" width="316" height="62"/>
         <image name="ButtonFacebookHighlighted.png" width="316" height="62"/>
-        <image name="ButtonFacebookHighlighted.png" width="316" height="62"/>
         <image name="ButtonLoginBigDefault.png" width="315" height="62"/>
         <image name="ButtonLoginDefault.png" width="113" height="54"/>
         <image name="ButtonLoginHighlighted.png" width="113" height="54"/>
@@ -379,9 +378,6 @@
         <image name="ButtonSignupHighlighted.png" width="123" height="62"/>
         <image name="DividerLogin.png" width="306" height="3"/>
         <image name="FieldDayMonth.png" width="72" height="57"/>
-        <image name="FieldDayMonth.png" width="72" height="57"/>
-        <image name="FieldLogin.png" width="308" height="57"/>
-        <image name="FieldLogin.png" width="308" height="57"/>
         <image name="FieldLogin.png" width="308" height="57"/>
         <image name="FieldPhoto.png" width="187" height="187"/>
         <image name="FieldYear.png" width="138" height="57"/>
