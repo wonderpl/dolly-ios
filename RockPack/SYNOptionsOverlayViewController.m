@@ -11,6 +11,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNAccountSettingsViewController.h"
 #import "SYNDeviceManager.h"
+#import "UIFont+SYNFont.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -46,12 +47,32 @@ typedef enum {
 {
     [super viewDidLoad];
     
+    // start by a blank name as the tags are 1 indexed (don't ask why... mainly superstition)
+    NSArray* labelStrings = @[@"",
+                              @"Settings",
+                              @"Friends",
+                              @"About",
+                              @"Feedback",
+                              @"Rate",
+                              @"Blog",
+                              @"Help",
+                              @"Logout"];
     
     
-    for (UIView* sView in self.view.subviews) {
+    for (UIView* sView in self.view.subviews)
+    {
         
         if([sView isKindOfClass:[UIButton class]]) // sanity check
         {
+            
+            NSString* poperName = labelStrings[sView.tag];
+            
+            UILabel* l = [self createLabelForOptionButtonWithName:poperName];
+            
+            l.center = CGPointMake(30.0f, 75.0f);
+            
+            [sView addSubview:l];
+            
             [((UIButton*)sView) addTarget:self
                                    action:@selector(optionButtonPressed:)
                          forControlEvents:UIControlEventTouchUpInside];
@@ -61,6 +82,17 @@ typedef enum {
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [self.backgroundView addGestureRecognizer:tapGesture];
     
+}
+
+-(UILabel*)createLabelForOptionButtonWithName:(NSString*)name
+{
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.font = [UIFont lightCustomFontOfSize:14.0f];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = name;
+    [label sizeToFit];
+    return label;
 }
 
 -(void)backgroundTapped:(UITapGestureRecognizer*)tapGesture
