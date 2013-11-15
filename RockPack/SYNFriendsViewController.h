@@ -17,13 +17,10 @@
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activityIndicator;
 @property (nonatomic, strong) IBOutlet UITextField* searchField;
 
-@property (nonatomic, strong) IBOutlet UIButton* onFacebookButton;
-@property (nonatomic, strong) IBOutlet UIButton* onRockpackButton;
 
 @property (nonatomic, strong) IBOutlet UILabel* followInviteLabel;
 
 -(IBAction)facebookLoginPressed:(id)sender;
 
--(void)addSearchBarToView:(UIView*)view;
 
 @end
