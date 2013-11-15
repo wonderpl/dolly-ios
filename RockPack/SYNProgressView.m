@@ -10,73 +10,72 @@
 
 @interface SYNProgressView ()
 
-@property (nonatomic, strong) UIImageView *progressIndicatorImageView;
+@property (nonatomic, strong) UIImageView *trackImageView;
+@property (nonatomic, strong) UIImageView *progressImageView;
 
 @end
 
-
 @implementation SYNProgressView
 
-- (id) initWithFrame: (CGRect) frame
-{
-    if ((self = [super initWithFrame: frame]))
-    {
-        [self initProgressViewSubviews];
-    }
-    
-    return self;
+#pragma mark - Init / Dealloc
+
+- (instancetype)initWithFrame:(CGRect)frame {
+	if (self = [super initWithFrame:frame]) {
+		[self setup];
+	}
+	return self;
 }
 
-
-- (instancetype) initWithCoder: (NSCoder *) coder
-{
-    if ((self = [super initWithCoder: coder]))
-    {
-        [self initProgressViewSubviews];
-    }
-    
-    return self;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+	if (self = [super initWithCoder:aDecoder]) {
+		[self setup];
+	}
+	return self;
 }
 
+#pragma mark - Getters / Setters
 
-- (void) initProgressViewSubviews
-{
-    // Our progress indicator is a subview of out track image view
-    self.progressIndicatorImageView = [[UIImageView alloc] initWithFrame: self.bounds];
-    
-    self.backgroundColor = [UIColor clearColor];
-    self.progressIndicatorImageView.backgroundColor = [UIColor clearColor];
-    
-    // We might want to remove this
-    [self setProgress: 0.5f];
-    
-    [self addSubview: self.progressIndicatorImageView];
+- (UIImageView *)progressImageView {
+	if (!_progressImageView) {
+		UIImage *progressImage = [[UIImage imageNamed: @"ShuttleBarBufferBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
+		
+		UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, CGRectGetHeight(self.bounds))];
+		imageView.image = progressImage;
+		
+		self.progressImageView = imageView;
+	}
+	return _progressImageView;
 }
 
-
-// Set the position of the indicator
-- (void) setProgress: (float) progress
-{
-    CGRect progressIndicatorViewRect = self.bounds;
-    
-    CGFloat progressBarWidth = progressIndicatorViewRect.size.width * progress;
-    
-    progressIndicatorViewRect.size.width = progressBarWidth;
-    
-    self.progressIndicatorImageView.frame = progressIndicatorViewRect;
+- (UIImageView *)trackImageView {
+	if (!_trackImageView) {
+		UIImage *trackImage = [[UIImage imageNamed: @"ShuttleBarPlayerBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
+		
+		UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+		imageView.image = trackImage;
+		imageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+		
+		self.trackImageView = imageView;
+	}
+	return _trackImageView;
 }
 
-
-- (void) setTrackImage: (UIImage *) trackImage
-{
-    self.image = trackImage;
+- (void)setProgress:(float)progress {
+	_progress = progress;
+	
+	self.progressImageView.frame = CGRectMake(CGRectGetMinX(self.progressImageView.frame),
+											  CGRectGetMinY(self.progressImageView.frame),
+											  round(CGRectGetWidth(self.frame) * MIN(progress, 1.0)),
+											  CGRectGetHeight(self.progressImageView.frame));
 }
 
+#pragma mark - Private
 
-- (void) setProgressImage: (UIImage *) progressImage
-{
-    self.progressIndicatorImageView.image = progressImage;
+- (void)setup {
+	self.backgroundColor = [UIColor clearColor];
+	
+	[self addSubview:self.trackImageView];
+	[self addSubview:self.progressImageView];
 }
-
 
 @end

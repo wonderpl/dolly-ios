@@ -1463,6 +1463,8 @@
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
 		C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3685246F69AA4C9B93DDEDAC /* libPods.a */; };
 		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
+		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
+		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -3203,6 +3205,9 @@
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93E10DC1834E93A00A62F64 /* SYNVideoLoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoLoadingIndicator.h; sourceTree = "<group>"; };
 		E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingIndicator.m; sourceTree = "<group>"; };
+		E9921A9218351D66001A4F3B /* SYNScrubberBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNScrubberBar.h; sourceTree = "<group>"; };
+		E9921A9318351D66001A4F3B /* SYNScrubberBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNScrubberBar.m; sourceTree = "<group>"; };
+		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3965,8 +3970,8 @@
 			isa = PBXGroup;
 			children = (
 				BE285DAD1725A20B00D995AB /* Slide In Messages */,
-				0110AE5F17DF383C00DC7724 /* SYNProgressView.m */,
 				0110AE6017DF383C00DC7724 /* SYNProgressView.h */,
+				0110AE5F17DF383C00DC7724 /* SYNProgressView.m */,
 				011CC6A7164D19D800F02B6D /* SYNPassthroughView.h */,
 				011CC6A8164D19D800F02B6D /* SYNPassthroughView.m */,
 				012B4C9B17393A080019DA4C /* SYNPopoverBackgroundView.h */,
@@ -3975,6 +3980,9 @@
 				01BE7B71173413CF00EFE0EF /* SSTextView.m */,
 				E93E10DC1834E93A00A62F64 /* SYNVideoLoadingIndicator.h */,
 				E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */,
+				E9921A9218351D66001A4F3B /* SYNScrubberBar.h */,
+				E9921A9318351D66001A4F3B /* SYNScrubberBar.m */,
+				E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -7334,6 +7342,7 @@
 				1F51A6951742A93B009907CA /* PlaceholderAvatarFeed@2x.png in Resources */,
 				1F5FAECF17E73F8700205F3F /* ButtonCancelAddToPackHighlighted.png in Resources */,
 				1F51A6961742A93B009907CA /* PlaceholderAvatarProfile.png in Resources */,
+				E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */,
 				1F51A6971742A93B009907CA /* PlaceholderAvatarProfile@2x.png in Resources */,
 				1F51A6981742A93B009907CA /* PlaceholderChannel.png in Resources */,
 				1F458AE517E1C27B003C14AC /* ButtonReportConfirm~iphone.png in Resources */,
@@ -7846,6 +7855,7 @@
 				012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */,
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
+				E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */,
 				BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */,
 				BEA1E33116CE6045000AB59D /* SYNNetworkOperationJsonObject.m in Sources */,
 				01AFF99917EC91540002131A /* UIImage+LLDBQuickLook.m in Sources */,

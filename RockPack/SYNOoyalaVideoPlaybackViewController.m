@@ -101,9 +101,8 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
     [self.ooyalaPlayer setEmbedCode: sourceId];
     
     self.playFlag = YES;
-    
-    [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPause.png"]
-                                    forState: UIControlStateNormal];
+	
+	self.scrubberBar.playing = YES;
 }
 
 
@@ -231,7 +230,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 				self.fadeUpScheduled = NO;
 				// Only start if we have a valid duration
 				[self startShuttleBarUpdateTimer];
-				self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
+				self.scrubberBar.duration = self.currentDuration;
 			}
 	
 			break;
@@ -240,7 +239,7 @@ NSString * const PLAYERDOMAIN = @"www.ooyala.com";
 		case OOOoyalaPlayerStatePaused: {
 			if (self.shuttledByUser && self.playFlag) {
 				DebugLog (@"*** Paused: Paused by shuttle and should be playing? - Attempting to play");
-				[self playVideo];
+//				[self playVideo];
 			} else {
 				[self stopVideoStallDetectionTimer];
 				DebugLog (@"*** Paused: Paused by user");

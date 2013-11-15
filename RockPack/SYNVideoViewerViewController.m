@@ -33,6 +33,7 @@
 #import "UIImageView+WebCache.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "SYNScrubberBar.h"
 @import MediaPlayer;
 
 @interface SYNVideoViewerViewController () <UIGestureRecognizerDelegate>
@@ -1202,13 +1203,10 @@
                             self.chromeView.alpha = 1.0f;
                             self.swipeView.transform = CGAffineTransformIdentity;
                             self.videoPlaybackViewController.view.transform = CGAffineTransformIdentity;
-                            self.videoPlaybackViewController.shuttleBarView.transform = CGAffineTransformIdentity;
                             self.swipeView.frame = self.originalSwipeFrame;
                             CGRect videoFrame = self.videoPlaybackViewController.view.frame;
                             videoFrame.origin = self.originalFrame.origin;
                             self.videoPlaybackViewController.view.frame = videoFrame;
-                            //                            self.videoPlaybackViewController.shuttleBarView.alpha = 1.0f;
-                            [self.videoPlaybackViewController resetShuttleBarFrame];
                             self.iPhonePanelImageView.alpha = 1.0f;
                         }
          
@@ -1266,15 +1264,15 @@
                             }
                             
                             self.videoPlaybackViewController.view.transform = CGAffineTransformScale(CGAffineTransformMakeRotation((newOrientation == UIDeviceOrientationLandscapeLeft) ? M_PI_2 : -M_PI_2), scaleFactor, scaleFactor);
-                            self.videoPlaybackViewController.shuttleBarView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f / scaleFactor, 1.0f / scaleFactor);
+                            self.videoPlaybackViewController.scrubberBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f / scaleFactor, 1.0f / scaleFactor);
                             
                             //
-                            CGRect shuttleBarFrame = self.videoPlaybackViewController.shuttleBarView.frame;
+                            CGRect shuttleBarFrame = self.videoPlaybackViewController.scrubberBar.frame;
                             shuttleBarFrame.size.width = fullScreenFrame.size.width * (1.0f / scaleFactor);
                             shuttleBarFrame.size.height = kShuttleBarHeight * (1.0f / scaleFactor);
                             shuttleBarFrame.origin.x = 0.0f;
                             shuttleBarFrame.origin.y = (self.videoPlaybackViewController.view.frame.size.width - kShuttleBarHeight) * (1.0f / scaleFactor);
-                            self.videoPlaybackViewController.shuttleBarView.frame = shuttleBarFrame;
+                            self.videoPlaybackViewController.scrubberBar.frame = shuttleBarFrame;
                             
                             self.iPhonePanelImageView.alpha = 0.0f;
                         }
@@ -1303,7 +1301,7 @@
                               delay: 0.0f
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^ {
-                             self.videoPlaybackViewController.shuttleBarView.alpha = 0.0f;
+                             self.videoPlaybackViewController.scrubberBar.alpha = 0.0f;
                          }
                          completion: nil];
     }
@@ -1324,7 +1322,7 @@
                               delay: 0.0f
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^ {
-                             self.videoPlaybackViewController.shuttleBarView.alpha = 0.0f;
+                             self.videoPlaybackViewController.scrubberBar.alpha = 0.0f;
                          }
                          completion: nil];
     }
@@ -1343,7 +1341,7 @@
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^ {
-                         self.videoPlaybackViewController.shuttleBarView.alpha = 1.0f;
+                         self.videoPlaybackViewController.scrubberBar.alpha = 1.0f;
                      }
                      completion: nil];
 

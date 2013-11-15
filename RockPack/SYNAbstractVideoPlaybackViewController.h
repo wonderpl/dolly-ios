@@ -9,6 +9,8 @@
 #import "SYNAppDelegate.h"
 @import Foundation;
 
+@class SYNScrubberBar;
+
 #pragma mark - Block typedefs
 
 typedef void (^SYNVideoIndexUpdater)(int);
@@ -18,7 +20,7 @@ typedef void (^SYNVideoIndexUpdater)(int);
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
 @property (nonatomic, assign, readonly) NSTimeInterval duration;
 @property (nonatomic, strong) UIButton *shuttleBarMaxMinButton;
-@property (nonatomic, strong) UIView *shuttleBarView;
+@property (nonatomic, strong, readonly) SYNScrubberBar *scrubberBar;
 @property (nonatomic, strong) VideoInstance *currentVideoInstance;
 @property (nonatomic, copy) void (^updateBlock) (void);
 
@@ -34,8 +36,6 @@ typedef void (^SYNVideoIndexUpdater)(int);
 - (void) updateWithFrame: (CGRect) frame
           channelCreator: (NSString *) channelCreator
             indexUpdater: (SYNVideoIndexUpdater) indexUpdater;
-
-- (void) resetShuttleBarFrame;
 
 - (void) playIfVideoActive;
 - (void) pauseIfVideoActive;

@@ -154,8 +154,7 @@ static UIWebView* youTubeVideoWebViewInstance;
         
         self.playFlag = TRUE;
         
-        [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPause.png"]
-                                        forState: UIControlStateNormal];
+		self.scrubberBar.playing = YES;
     }
     else
     {
@@ -358,8 +357,7 @@ static UIWebView* youTubeVideoWebViewInstance;
             
             self.playFlag = TRUE;
             
-            [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPause.png"]
-                                            forState: UIControlStateNormal];
+			self.scrubberBar.playing = YES;
         }
     }
     else if ([actionName isEqualToString: @"stateChange"])
@@ -406,7 +404,7 @@ static UIWebView* youTubeVideoWebViewInstance;
                 self.fadeUpScheduled = FALSE;
                 // Only start if we have a valid duration
                 [self startShuttleBarUpdateTimer];
-                self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
+				self.scrubberBar.duration = self.currentDuration;
             }
         }
         else if ([actionData isEqualToString: @"paused"])

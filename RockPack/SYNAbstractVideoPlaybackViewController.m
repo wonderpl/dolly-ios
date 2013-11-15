@@ -8,6 +8,8 @@
 
 #import "SYNAbstractVideoPlaybackViewController+Private.h"
 #import "SYNVideoLoadingIndicator.h"
+#import "SYNScrubberBar.h"
+#import "SYNAppDelegate.h"
 
 @implementation SYNAbstractVideoPlaybackViewController
 
@@ -26,20 +28,31 @@
     
 	self.videoLoadingIndicator = [[SYNVideoLoadingIndicator alloc] initWithFrame:self.view.bounds];
 	[self.view addSubview:self.videoLoadingIndicator];
-    
-    self.shuttleBarView = [self createShuttleBarView];
-    UIView *blockBarView = [[UIView alloc] initWithFrame: self.shuttleBarView.frame];
-    blockBarView.userInteractionEnabled = YES;
-    blockBarView.backgroundColor = [UIColor clearColor];
-    
+	
     // Setup our web views
     [self specificInit];
+	
+	self.scrubberBar = [[[NSBundle mainBundle] loadNibNamed:@"SYNScrubberBar" owner:self options:nil] firstObject];
+	self.scrubberBar.frame = CGRectMake(0,
+										CGRectGetHeight(self.view.frame) - CGRectGetHeight(self.scrubberBar.frame),
+										CGRectGetWidth(self.view.frame),
+										CGRectGetHeight(self.scrubberBar.frame));
+	self.scrubberBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	self.scrubberBar.delegate = self;
+	
+	self.scrubberBar.playing = YES;
+	
+    UIView *blockBarView = [[UIView alloc] initWithFrame: self.scrubberBar.frame];
+    blockBarView.userInteractionEnabled = YES;
+    blockBarView.backgroundColor = [UIColor clearColor];
+	
+	[self.view addSubview:self.scrubberBar];
     
     [self.view insertSubview: self.currentVideoView
-                belowSubview: self.shuttleBarView];
+                belowSubview: self.scrubberBar];
     
     [self.view insertSubview: blockBarView
-                belowSubview: self.shuttleBarView];
+                belowSubview: self.scrubberBar];
 }
 
 
@@ -47,7 +60,6 @@
 {
     AssertOrLog(@"Should be defined in subclass");
 }
-
 
 - (void) viewWillAppear: (BOOL) animated
 {
@@ -223,193 +235,6 @@
     return index;
 }
 
-- (UIView *) createShuttleBarView
-{
-    CGFloat shuttleBarButtonOffset = kShuttleBarButtonOffsetiPhone;
-    CGFloat shuttleBarButtonWidth = kShuttleBarButtonWidthiPhone;
-    CGFloat airplayOffset = 0;
-    
-    if (IS_IPAD)
-    {
-        shuttleBarButtonOffset = kShuttleBarButtonWidthiPad;
-        shuttleBarButtonWidth = kShuttleBarButtonWidthiPad;
-        airplayOffset = 10;
-    }
-    
-    // Create out shuttle bar view at the bottom of our video view
-    CGRect shuttleBarFrame = self.view.frame;
-    shuttleBarFrame.size.height = kShuttleBarHeight;
-    shuttleBarFrame.origin.x = 0.0f;
-    shuttleBarFrame.origin.y = self.view.frame.size.height - kShuttleBarHeight;
-    UIView *shuttleBarView = [[UIView alloc] initWithFrame: shuttleBarFrame];
-    
-    // Add transparent background view
-    UIView *shuttleBarBackgroundView = [[UIView alloc] initWithFrame: shuttleBarView.bounds];
-    shuttleBarBackgroundView.alpha = 0.5f;
-    shuttleBarBackgroundView.backgroundColor = [UIColor blackColor];
-    shuttleBarBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [shuttleBarView addSubview: shuttleBarBackgroundView];
-    
-    // Add play/pause button
-    self.shuttleBarPlayPauseButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    
-    // Set this subview to appear slightly offset from the left-hand side
-    self.shuttleBarPlayPauseButton.frame = CGRectMake(20, 0, shuttleBarButtonOffset, kShuttleBarHeight);
-    
-    [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPause.png"]
-                                    forState: UIControlStateNormal];
-    
-    [self.shuttleBarPlayPauseButton addTarget: self
-                                       action: @selector(togglePlayPause)
-                             forControlEvents: UIControlEventTouchUpInside];
-    
-    self.shuttleBarPlayPauseButton.backgroundColor = [UIColor clearColor];
-    [shuttleBarView addSubview: self.shuttleBarPlayPauseButton];
-    
-    // Add time labels
-    self.currentTimeLabel = [self createTimeLabelAtXPosition: shuttleBarButtonWidth
-                                               textAlignment: NSTextAlignmentRight];
-    
-    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: 0.0f];
-    
-    [shuttleBarView addSubview: self.currentTimeLabel];
-    
-    self.durationLabel = [self createTimeLabelAtXPosition: self.view.frame.size.width - kShuttleBarTimeLabelWidth - shuttleBarButtonWidth
-                                            textAlignment: NSTextAlignmentLeft];
-    
-    self.durationLabel.text =  [NSString timecodeStringFromSeconds: 0.0f];
-    
-    self.durationLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    [shuttleBarView addSubview: self.durationLabel];
-    
-    // Add shuttle slider
-    // Set custom slider track images
-    CGFloat sliderOffset = shuttleBarButtonWidth + kShuttleBarTimeLabelWidth + kShuttleBarSliderOffset;
-    
-    UIImage *sliderBackgroundImage = [UIImage imageNamed: @"ShuttleBarPlayerBar.png"];
-    
-    UIImageView *sliderBackgroundImageView = [[UIImageView alloc] initWithFrame: CGRectMake(sliderOffset+2, 17, shuttleBarFrame.size.width - 4 - (2 * sliderOffset), 10)];
-    
-    sliderBackgroundImageView.image = [sliderBackgroundImage resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
-    sliderBackgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [shuttleBarView addSubview: sliderBackgroundImageView];
-    
-    // Add the progress bar over the background, but underneath the slider
-    self.bufferingProgressView = [[SYNProgressView alloc] initWithFrame: CGRectMake(sliderOffset+1, 17, shuttleBarFrame.size.width - 4 -(2 * sliderOffset), 10)];
-    UIImage *progressImage = [[UIImage imageNamed: @"ShuttleBarBufferBar.png"] resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
-    
-    // Note: this image needs to be exactly the same size at the left hand-track bar, or the bar will only display as a line
-    UIImage *shuttleSliderRightTrack = [[UIImage imageNamed: @"ShuttleBarRemainingBar.png"] resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
-    
-    self.bufferingProgressView.progressImage = progressImage;
-    self.bufferingProgressView.trackImage = shuttleSliderRightTrack;
-    self.bufferingProgressView.progress = 0.0f;
-    self.bufferingProgressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [shuttleBarView addSubview: self.bufferingProgressView];
-    
-    CGFloat sliderYOffset = 9.0f;
-    
-    if (IS_IOS_7_OR_GREATER)
-    {
-        sliderYOffset = 9.0f;
-    }
-    
-    self.shuttleSlider = [[UISlider alloc] initWithFrame: CGRectMake(sliderOffset, sliderYOffset, shuttleBarFrame.size.width - (2 * sliderOffset), 25)];
-    
-    UIImage *shuttleSliderLeftTrack = [[UIImage imageNamed: @"ShuttleBarProgressBar.png"] resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
-    
-    
-    [self.shuttleSlider setMinimumTrackImage: shuttleSliderLeftTrack
-                                    forState: UIControlStateNormal];
-	
-	[self.shuttleSlider setMaximumTrackImage: shuttleSliderRightTrack
-                                    forState: UIControlStateNormal];
-	
-	// Custom slider thumb image
-    [self.shuttleSlider setThumbImage: [UIImage imageNamed: @"ShuttleBarSliderThumb.png"]
-                             forState: UIControlStateNormal];
-    
-    self.shuttleSlider.value = 0.0f;
-    
-    [self.shuttleSlider addTarget: self
-                           action: @selector(updateTimeFromSlider:)
-                 forControlEvents: UIControlEventValueChanged];
-    
-    self.shuttleSlider.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [shuttleBarView addSubview: self.shuttleSlider];
-    
-    
-    // Add max/min button
-    self.shuttleBarMaxMinButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    
-    if (IS_IPHONE)
-    {
-        // Set this subview to appear slightly offset from the left-hand side
-        self.shuttleBarMaxMinButton.frame = CGRectMake(300 - shuttleBarButtonOffset, 0, shuttleBarButtonOffset, kShuttleBarHeight);
-    }
-    else
-    {
-        self.shuttleBarMaxMinButton.frame = CGRectMake(719 - shuttleBarButtonOffset, 0, shuttleBarButtonOffset, kShuttleBarHeight);
-    }
-    
-    [self.shuttleBarMaxMinButton setImage: [UIImage imageNamed: @"ButtonShuttleBarMaximise.png"]
-                                 forState: UIControlStateNormal];
-    
-    self.shuttleBarMaxMinButton.backgroundColor = [UIColor clearColor];
-    
-    self.shuttleBarMaxMinButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    
-    [shuttleBarView addSubview: self.shuttleBarMaxMinButton];
-    
-    // Add AirPlay button
-    // This is a crafty (apple approved) hack, where we set the showVolumeSlider parameter to NO, so only the AirPlay symbol gets shown
-    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
-    volumeView.frame = CGRectMake(self.view.frame.size.width - (35 +  airplayOffset), 12, 44, kShuttleBarHeight);
-    [volumeView setShowsVolumeSlider: NO];
-    [volumeView sizeToFit];
-    volumeView.backgroundColor = [UIColor clearColor];
-    volumeView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    
-    //Airplay was messing with the maximise button
-    [shuttleBarView insertSubview:volumeView belowSubview:self.shuttleBarMaxMinButton];
-    [self.view addSubview: shuttleBarView];
-    
-    self.originalShuttleBarFrame = shuttleBarView.frame;
-    
-#if 0
-    shuttleBarView.backgroundColor = [UIColor redColor];
-    self.durationLabel.backgroundColor = [UIColor yellowColor];
-    volumeView.backgroundColor = [UIColor greenColor];
-    self.shuttleBarMaxMinButton.backgroundColor = [UIColor blueColor];
-#endif
-    
-    return shuttleBarView;
-}
-
-- (void) resetShuttleBarFrame
-{
-    self.shuttleBarView.frame = self.originalShuttleBarFrame;
-}
-
-
-- (UILabel *) createTimeLabelAtXPosition: (CGFloat) xPosition
-                           textAlignment: (NSTextAlignment) textAlignment
-{
-    CGRect timeLabelFrame = self.view.frame;
-    timeLabelFrame.size.height = kShuttleBarHeight - 4;
-    timeLabelFrame.size.width = kShuttleBarTimeLabelWidth;
-    timeLabelFrame.origin.x = xPosition;
-    timeLabelFrame.origin.y = 4;
-    
-    UILabel *timeLabel = [[UILabel alloc] initWithFrame: timeLabelFrame];
-    timeLabel.textColor = [UIColor whiteColor];
-    timeLabel.textAlignment = textAlignment;
-    timeLabel.font = [UIFont regularCustomFontOfSize: 12.0f];
-    timeLabel.backgroundColor = [UIColor clearColor];
-    
-    return timeLabel;
-}
-
 - (void) setCreatorText: (NSString *) creatorText;
 {
     self.creatorLabel.text = [NSString stringWithFormat: @"Uploaded by %@", self.channelCreator];
@@ -423,13 +248,13 @@
     // Make sure we don't receive any shuttle bar or buffer update timer events until we have loaded the new video
     [self stopShuttleBarUpdateTimer];
     // Reset shuttle slider
-    self.shuttleSlider.value = 0.0f;
-    
-    // Reset progress view
-    self.bufferingProgressView.progress = 0.0f;
-    
-    // And time value
-    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: 0.0f];
+//    self.shuttleSlider.value = 0.0f;
+//    
+//    // Reset progress view
+//    self.bufferingProgressView.progress = 0.0f;
+//    
+//    // And time value
+//    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: 0.0f];
 }
 
 
@@ -452,7 +277,9 @@
     
     // Try to set the duration
     self.currentDuration = videoInstance.video.durationValue;
-    self.durationLabel.text = [NSString timecodeStringFromSeconds: self.currentDuration];
+	
+	self.currentTime = 0.0;
+	self.scrubberBar.duration = self.currentDuration;
     
     if ([currentSource isEqualToString: @"youtube"])
     {
@@ -658,56 +485,6 @@
     [self loadCurrentVideoView];
 }
 
-
-- (void) togglePlayPause
-{
-    if (self.playFlag == TRUE)
-    {
-        // Reset our shuttling flag
-        self.shuttledByUser = FALSE;
-        self.pausedByUser = YES;
-        
-        [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPlay.png"]
-                                        forState: UIControlStateNormal];
-        
-        [self pauseVideo];
-    }
-    else
-    {
-        [self.shuttleBarPlayPauseButton setImage: [UIImage imageNamed: @"ButtonShuttleBarPause.png"]
-                                        forState: UIControlStateNormal];
-        
-        self.pausedByUser = NO;
-        [self playVideo];
-    }
-}
-
-
-- (void) updateTimeFromSlider: (UISlider *) slider
-{
-    // Indicate that a pause event may be caused by the user shuttling
-    self.shuttledByUser = TRUE;
-    self.disableTimeUpdating = TRUE;
-    
-    // Only re-enable our upating after a certain period (to stop slider jumping)
-    [self performBlock: ^{
-        self.disableTimeUpdating = FALSE;
-    } afterDelay: 1.0f
- cancelPreviousRequest: YES];
-    
-    float newTime = slider.value * self.currentDuration;
-    
-    [self setCurrentTime: newTime];
-    //    DebugLog (@"Setting time %f", newTime);
-    
-    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: newTime];
-    
-    if (self.updateBlock)
-    {
-        self.updateBlock();
-    }
-}
-
 - (void) videoStallDetected
 {
     SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
@@ -736,10 +513,7 @@
 
 - (void) updateShuttleBarProgress
 {
-    float bufferLevel = [self videoLoadedFraction];
-    
-    // Update the progress bar under our slider
-    self.bufferingProgressView.progress = bufferLevel;
+	self.scrubberBar.bufferingProgress = [self videoLoadedFraction];
     
     // Only update the shuttle if we are playing (this should stop the shuttle bar jumping to zero
     // just after a user shuttle event)
@@ -781,9 +555,8 @@
             self.stallCount = 0;
         }
     }
-    
-    // Update current time label
-    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: currentTime];
+	
+	self.scrubberBar.currentTime = currentTime;
     
     // Calculate the currently viewed percentage
     float viewedPercentage = currentTime / self.currentDuration;
@@ -794,8 +567,6 @@
     // and slider
     if (self.disableTimeUpdating == FALSE)
     {
-        self.shuttleSlider.value = viewedPercentage;
-        
         // We should also check to see if we are in the last 0.5 seconds of a video, and if so, trigger a fadeout
         if ((self.currentDuration - self.currentTime) < 0.5f)
         {
@@ -852,6 +623,40 @@
     }
 }
 
+#pragma mark - SYNScrubberBarDelegate
+
+- (void)scrubberBarPlayPauseToggled:(BOOL)playing {
+	if (playing) {
+		self.pausedByUser = NO;
+		
+		[self playVideo];
+	} else {
+		self.shuttledByUser = NO;
+		self.pausedByUser = YES;
+		
+		[self pauseVideo];
+	}
+}
+
+- (void)scrubberBarCurrentTimeWillChange {
+	//TOOD: If playing
+	self.pausedByUser = YES;
+	
+	[self pauseVideo];
+}
+
+- (void)scrubberBarCurrentTimeChanged:(NSTimeInterval)currentTime {
+	[self setCurrentTime:currentTime];
+}
+
+- (void)scrubberBarCurrentTimeDidChange {
+	[self playVideo];
+}
+
+- (void)scrubberBarFullScreenToggled:(BOOL)fullScreen {
+	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	[appDelegate.masterViewController.videoViewerViewController userTouchedMaxMinButton];
+}
 
 
 #pragma mark - Abstract functions
