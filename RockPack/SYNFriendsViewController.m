@@ -45,7 +45,6 @@
     [super viewDidLoad];
     
     
-    
     onRockpackFilterOn = NO;
     
     self.currentSearchTerm = [[NSMutableString alloc] init];
