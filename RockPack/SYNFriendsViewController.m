@@ -10,7 +10,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNFacebookManager.h"
 #import "ChannelOwner.h"
-#import "SYNFriendThumbnailCell.h"
+#import "SYNSearchResultsUserCell.h"
 #import "UIImageView+WebCache.h"
 #import "SYNAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -62,12 +62,10 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     
     
-    // Register Cells
-    UINib *thumbnailCellNib = [UINib nibWithNibName: @"SYNFriendThumbnailCell"
-                                             bundle: nil];
+    // == Register Cells == //
     
-    [self.friendsCollectionView registerNib: thumbnailCellNib
-                 forCellWithReuseIdentifier: @"SYNFriendThumbnailCell"];
+    [self.friendsCollectionView registerNib: [UINib nibWithNibName: @"SYNSearchResultsUserCell" bundle: nil]
+                 forCellWithReuseIdentifier: @"SYNSearchResultsUserCell"];
     
     self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
     
@@ -352,22 +350,21 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     Friend *friend = self.displayFriends[indexPath.row];
     
-    SYNFriendThumbnailCell *userThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNFriendThumbnailCell"
-                                                                                        forIndexPath: indexPath];
-    
-    userThumbnailCell.nameLabel.text = friend.displayName;
-    
-    [userThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: friend.thumbnailLargeUrl]
-                                placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarChannel"]
-                                         options: SDWebImageRetryFailed];
-    
-    [userThumbnailCell setDisplayName: friend.displayName];
+    SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNSearchResultsUserCell"
+                                                                                            forIndexPath: indexPath];
     
     
+    userCell.channelOwner = (ChannelOwner*)(friend);
     
-    objc_setAssociatedObject(userThumbnailCell, friend_association_key, friend, OBJC_ASSOCIATION_ASSIGN);
+    // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
+    userCell.followButton.layer.borderWidth = 0.0f;
+    userCell.followButton.backgroundColor = [UIColor clearColor];
+    userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0f];
+    // ================= //
     
-    return userThumbnailCell;
+    
+    
+    return userCell;
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -471,7 +468,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    SYNFriendThumbnailCell* cellClicked = (SYNFriendThumbnailCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    SYNSearchResultsUserCell* cellClicked = (SYNSearchResultsUserCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
     cellClicked.selected = YES;
     

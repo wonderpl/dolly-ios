@@ -133,18 +133,18 @@
         <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="videoInstances" inverseEntity="Video" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AbstractCommon" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Channel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ChannelCover" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ChannelOwner" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="CoverArt" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ExternalAccount" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="FeedItem" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Genre" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SubGenre" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Video" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="VideoInstance" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AbstractCommon" positionX="-315" positionY="-342" width="128" height="90"/>
+        <element name="Channel" positionX="-432" positionY="-75" width="128" height="300"/>
+        <element name="ChannelCover" positionX="52" positionY="-180" width="128" height="135"/>
+        <element name="ChannelOwner" positionX="-666" positionY="-72" width="128" height="150"/>
+        <element name="CoverArt" positionX="-108" positionY="-135" width="128" height="105"/>
+        <element name="ExternalAccount" positionX="-837" positionY="261" width="128" height="180"/>
+        <element name="FeedItem" positionX="-101" positionY="-522" width="128" height="195"/>
+        <element name="Friend" positionX="-891" positionY="-45" width="128" height="150"/>
+        <element name="Genre" positionX="-389" positionY="-216" width="128" height="105"/>
+        <element name="SubGenre" positionX="-603" positionY="-198" width="128" height="75"/>
+        <element name="User" positionX="-684" positionY="120" width="128" height="240"/>
+        <element name="Video" positionX="-227" positionY="81" width="128" height="225"/>
+        <element name="VideoInstance" positionX="-137" positionY="351" width="128" height="150"/>
     </elements>
 </model>
