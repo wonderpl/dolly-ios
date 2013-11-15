@@ -57,29 +57,30 @@
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
                                                            NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0f]}];
-     
-     
+    
+    
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:nil
                                                                   action:nil];
     
+    // sets the tint to gray for all navigatin controllers
+    self.view.tintColor = [UIColor grayColor];
+    
     // == Feed Page == //
     
     SYNFeedRootViewController *feedRootViewController = [[SYNFeedRootViewController alloc] initWithViewId: kFeedViewId];
-    
-    UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
     feedRootViewController.navigationItem.backBarButtonItem = backButton;
+    UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
+    
     
     
     // == Profile Page == //
 
     SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
-    
-    UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
     profileViewController.navigationItem.backBarButtonItem = backButton;
+    UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
     
-    // profileViewController.moveTabDelegate = self;
     
     if (!IS_IPAD)
     {
@@ -88,35 +89,32 @@
     
     profileViewController.channelOwner = self.appDelegate.currentUser;
     
-
-    
-    
-    
     // == Activity Page == //
     
     SYNActivityViewController *activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];
-    
-    UINavigationController *navActivityViewController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     activityViewController.navigationItem.backBarButtonItem = backButton;
+    UINavigationController *navActivityViewController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
+    
     
     // == Discovery (Search) Page == //
     SYNDiscoverViewController *discoveryViewController = [[SYNDiscoverViewController alloc] initWithViewId: kDiscoverViewId];
-    
-    UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:discoveryViewController];
     discoveryViewController.navigationItem.backBarButtonItem = backButton;
+    UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:discoveryViewController];
+    
     
     // == Feed Page == //
     
     SYNMoodRootViewController *moodRootViewController = [[SYNMoodRootViewController alloc] initWithViewId: kMoodViewId];
-    
-    
-    UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
     moodRootViewController.navigationItem.backBarButtonItem = backButton;
+    UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
+    
     
     // == Hold the vc locally
     self.viewControllers = @[navFeedViewController, navSearchViewController,
                              navMoodRootViewController,
                              navProfileViewController, navActivityViewController];
+    
+    
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
