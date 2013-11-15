@@ -642,17 +642,9 @@
     
     SYNVideoViewerThumbnailLayoutAttributes* attributes = (SYNVideoViewerThumbnailLayoutAttributes *)[self.layout layoutAttributesForItemAtIndexPath: indexPath];
     
-    BOOL thumbnailIsColour = attributes.isHighlighted;
-    
-    if (thumbnailIsColour)
-    {
-        cell.colour = TRUE;
-    }
-    else
-    {
-        cell.colour = FALSE;
-    }
-    
+	BOOL thumbnailIsColour = attributes.isHighlighted;
+	cell.colour = thumbnailIsColour;
+	
     cell.imageWithURL = videoInstance.video.thumbnailURL;
     
     return cell;
