@@ -119,13 +119,9 @@
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
     
-    
-
         // TERMS & SERVICESs
     
     [termsString addAttribute: NSForegroundColorAttributeName value: [UIColor colorWithRed:(11.0/255.0) green:(166.0/255.0) blue:(171.0/255.0) alpha:(1.0)] range: NSMakeRange(36, 17)];
-    
-        
     
     
         // PRIVACY POLICY
@@ -153,24 +149,29 @@
     signUpButtonInitialFrame = signUpButton.frame;
         
     emailInputField.keyboardType = UIKeyboardTypeEmailAddress;
-        
+    
     self.mainFormElements = @[];
         
     // == Setup Input Fields
         
     UIFont* rockpackInputFont = [UIFont lightCustomFontOfSize: 20];
+    
+    registerNewUserButton.titleLabel.font = [UIFont lightCustomFontOfSize: registerNewUserButton.titleLabel.font.pointSize];
+    
+    CGColorRef borderColour = [[UIColor colorWithWhite: 167.0f / 255.0f
+                                                 alpha: 1.0f] CGColor];
+    
     NSArray* textFieldsToSetup = @[emailInputField, userNameInputField, passwordInputField,
                                        ddInputField, mmInputField, yyyyInputField];
         
     for (UITextField* tf in textFieldsToSetup)
     {
         tf.font = rockpackInputFont;
-//        // -- this is to create the left padding for the text fields (hack) -- //
-//        tf.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 57)];
-//        tf.leftViewMode = UITextFieldViewModeAlways;
+        tf.layer.borderColor = borderColour;
+        tf.layer.borderWidth = 1.0f;
     }
     
-    if([[SYNDeviceManager sharedInstance] isPortrait])
+    if ([[SYNDeviceManager sharedInstance] isPortrait])
     {
         
         signUpButton.center = CGPointMake(facebookSignInButton.center.x + 304.0, signUpButton.center.y);
@@ -687,6 +688,8 @@
                              self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0,
                                                                   self.avatarImageView.center.y);
                              
+                             self.genderSegmentedControl.alpha = 0.0;
+                             
                              passwordForgottenButton.alpha = 1.0;
                              passwordForgottenLabel.alpha = 1.0;
                              
@@ -866,6 +869,7 @@
                                                   loginButton.alpha = 1.0;
                                                   faceImageButton.alpha = 1.0;
                                                   self.avatarImageView.alpha = 1.0;
+                                                  self.genderSegmentedControl.alpha = 1.0;
                                                   
                                                   termsAndConditionsLabelSide.alpha = 1.0;
                                               }
@@ -898,6 +902,7 @@
                              
                              faceImageButton.alpha = 1.0;
                              self.avatarImageView.alpha = 1.0;
+                             self.genderSegmentedControl.alpha = 1.0;
                              CGRect faceRect = faceImageButton.frame;
                              faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
                              faceImageButton.frame = faceRect;
