@@ -156,8 +156,6 @@
         
     UIFont* rockpackInputFont = [UIFont lightCustomFontOfSize: 20];
     
-    registerNewUserButton.titleLabel.font = [UIFont lightCustomFontOfSize: registerNewUserButton.titleLabel.font.pointSize];
-    
     CGColorRef borderColour = [[UIColor colorWithWhite: 167.0f / 255.0f
                                                  alpha: 1.0f] CGColor];
     
