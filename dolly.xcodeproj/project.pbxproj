@@ -170,7 +170,6 @@
 		015CB01616AE039900FEB8E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01516AE039900FEB8E7 /* User.m */; };
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
 		015CEE3F16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */; };
-		016191711782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		01677E0C16554AB500B1B1D8 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF616554AB500B1B1D8 /* ButtonBack.png */; };
 		01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */; };
 		01677E0E16554AB500B1B1D8 /* ButtonBackHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */; };
@@ -1717,7 +1716,6 @@
 		015CB01816AE03B200FEB8E7 /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _User.m; sourceTree = "<group>"; };
 		015CEE3D16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIntegralCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIntegralCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFUIKitMainThreadGuard.m; sourceTree = "<group>"; };
 		01677DF616554AB500B1B1D8 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Assets/Images/ButtonBack.png; sourceTree = "<group>"; };
 		01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonBack@2x.png"; path = "Assets/Images/ButtonBack@2x.png"; sourceTree = "<group>"; };
 		01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackHighlighted.png; path = Assets/Images/ButtonBackHighlighted.png; sourceTree = "<group>"; };
@@ -4127,7 +4125,6 @@
 				01A79BA116F32C6900B05084 /* NSString+Timecode.m */,
 				01A79BA316F34BBF00B05084 /* NSString+Utils.h */,
 				01A79BA416F34BBF00B05084 /* NSString+Utils.m */,
-				016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */,
 				019825EF162C94A300216900 /* UIColor+SYNColor.h */,
 				019825F0162C94A300216900 /* UIColor+SYNColor.m */,
 				019825F2162C94B500216900 /* UIFont+SYNFont.h */,
@@ -7916,7 +7913,6 @@
 				BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */,
 				BEBFD0921779F0F800C90544 /* SYNCaution.m in Sources */,
 				BEBFD0951779F25800C90544 /* SYNCautionMessageView.m in Sources */,
-				016191711782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m in Sources */,
 				BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */,
 				BE7D02F4178C1D3B008053DC /* SYNUsersViewController.m in Sources */,
 				BE7D02F7178C4354008053DC /* SYNSubscribersViewController.m in Sources */,
