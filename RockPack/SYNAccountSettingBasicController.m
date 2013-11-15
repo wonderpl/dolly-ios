@@ -7,12 +7,12 @@
 //
 
 #import "RegexKitLite.h"
-#import "SYNAccountSettingsTextInputController.h"
+#import "SYNAccountSettingBasicController.h"
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
 @import QuartzCore;
 
-@interface SYNAccountSettingsTextInputController ()
+@interface SYNAccountSettingBasicController ()
 
 @property (nonatomic) CGFloat lastTextFieldY;
 
@@ -23,13 +23,12 @@
 @end
 
 
-@implementation SYNAccountSettingsTextInputController
+@implementation SYNAccountSettingBasicController
 
 @synthesize inputField, saveButton, errorLabel;
 @synthesize appDelegate;
 @synthesize lastTextFieldY;
 @synthesize spinner;
-@synthesize sizeInContainer;
 
 #pragma mark - Object lifecycle
 
@@ -46,14 +45,6 @@
 }
 
 
-- (void) dealloc
-{
-    // Stop observing everything
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    
-    // Defensive programming
-    self.inputField.delegate = nil;
-}
 
 
 #pragma mark - View lifecycle
@@ -62,33 +53,29 @@
 {
     [super viewDidLoad];
     
-    // Removed in dealloc
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(keyboardWasShown:)
-                                                 name: UIKeyboardDidShowNotification
-                                               object: nil];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(keyboardWillBeHidden:)
-                                                 name: UIKeyboardWillHideNotification
-                                               object: nil];
+    // on iPhone the view appears in a Navigation Controller and needs to offset from the top bar
+    lastTextFieldY = IS_IPHONE ? 84.0 : 64.0f;
     
-    self.preferredContentSize = CGSizeMake(IS_IPAD ? 380 : [SYNDeviceManager.sharedInstance currentScreenWidth], IS_IPAD ? 476 : [SYNDeviceManager.sharedInstance currentScreenHeight]);
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.view.frame = self.navigationController.view.frame;
     
-    self.view.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor whiteColor];
-    
-    self.sizeInContainer = self.preferredContentSize.width - 20.0;
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0, self.preferredContentSize.width, self.preferredContentSize.height)];
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.bounces = NO;
-    [self.view addSubview:self.scrollView];
-    
-    lastTextFieldY = 10.0;
+    // == Save Button (add first because subsequent calls offset it to the bottom) == //
     
     UIImage* buttonImage = [UIImage imageNamed: @"ButtonAccountSaveDefault.png"];
+    
     saveButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    saveButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    saveButton.center = CGPointMake((IS_IPAD ? 190.0 : 160.0), saveButton.center.y);
+    
+    saveButton.frame = CGRectMake(self.view.frame.size.width * 0.5f - buttonImage.size.width * 0.5f,
+                                  0.0f,
+                                  buttonImage.size.width,
+                                  buttonImage.size.height);
     
     [saveButton setImage: buttonImage
                 forState: UIControlStateNormal];
@@ -99,9 +86,19 @@
     [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
                 forState: UIControlStateDisabled];
     
-    [self.scrollView addSubview: saveButton];
+    
+    [saveButton addTarget: self
+                   action: @selector(saveButtonPressed:)
+         forControlEvents: UIControlEventTouchUpInside];
+    
+    
+    [self.view addSubview: saveButton];
+    
     
     inputField = [self createInputField];
+    
+    self.inputField.tag = 1 ;
+    self.inputField.delegate = self;
     
     switch (currentFieldType)
     {
@@ -127,29 +124,24 @@
             break;
     }
     
-    [self.scrollView addSubview: inputField];
+    [self.view addSubview: inputField];
+    
+    errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(5.0,
+                                                            saveButton.frame.origin.y + saveButton.frame.size.height + 6.0,
+                                                            self.preferredContentSize.width - 10.0,
+                                                            50)];
+    
+    
+    
+    
+    // == Spinner == //
+    
     
     self.spinner.center = self.saveButton.center;
     [self.view addSubview: self.spinner];
     
-    [saveButton addTarget: self
-                   action: @selector(saveButtonPressed:)
-         forControlEvents: UIControlEventTouchUpInside];
     
-    // navigation back button
-    UIButton *backButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    UIImage *backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
-    [backButton setImage: backButtonImage forState: UIControlStateNormal];
-    [backButton addTarget: self action: @selector(didTapBackButton:) forControlEvents: UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0, 0.0, backButtonImage.size.width, backButtonImage.size.height);
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView: backButton];
-    
-    self.navigationItem.leftBarButtonItem = backButtonItem;
-    
-    errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(10.0,
-                                                            saveButton.frame.origin.y + saveButton.frame.size.height + 10.0,
-                                                            self.preferredContentSize.width - 20.0,
-                                                            50)];
+    // == Error == //
     
     errorLabel.textColor = [UIColor colorWithRed: (11.0/255.0)
                                            green: (166.0/255.0)
@@ -163,56 +155,27 @@
     [self.view addSubview: errorLabel];
 }
 
-
-- (void) viewWillAppear: (BOOL) animated
+-(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillAppear: animated];
-    saveButton.enabled = YES;
-    CGFloat maxY;
-    for (UIView* view in self.scrollView.subviews)
-    {
-        maxY = MAX(maxY,view.frame.origin.y + view.frame.size.height);
-    }
-    
-    CGRect newFrame = self.scrollView.frame;
-    newFrame.size = self.preferredContentSize;
-    self.scrollView.frame = newFrame;
-    
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, maxY);
-    if(maxY < self.scrollView.frame.size.height)
-    {
-        CGRect newFrame = self.scrollView.frame;
-        newFrame.size = self.scrollView.contentSize;
-        self.scrollView.frame = newFrame;
-    }
+    [super viewWillDisappear:animated];
+    self.inputField.delegate = nil;
 }
 
-
-- (void) didTapBackButton: (id) sender
-{
-    if (self.navigationController.viewControllers.count > 1)
-    {
-        [self.navigationController popViewControllerAnimated: YES];
-    }
-}
-
+#pragma mark - Utility Methods
 
 - (SYNPaddedUITextField *) createInputField
 {
     
-    
-    SYNPaddedUITextField *newInputField = [[SYNPaddedUITextField alloc] initWithFrame: CGRectMake(10.0,
+    // 1. Create the new text field
+    SYNPaddedUITextField *newInputField = [[SYNPaddedUITextField alloc] initWithFrame: CGRectMake(5.0,
                                                                                                   lastTextFieldY,
-                                                                                                  self.sizeInContainer,
+                                                                                                  self.view.frame.size.width - 10.0f,
                                                                                                   40.0)];
     
-    newInputField.backgroundColor = [UIColor colorWithWhite:(255.0/255.0) alpha:(1.0)];
-    newInputField.layer.cornerRadius = 0.0f;
-    newInputField.layer.borderWidth = 1.0f;
-    newInputField.layer.borderColor = [UIColor colorWithWhite:(209.0/255.0) alpha:(1.0)].CGColor;
-    newInputField.textColor = [UIColor darkGrayColor];
+    
     newInputField.delegate = self;
     
+    // 2. Move the Save Button Down
     CGRect saveButtonFrame = saveButton.frame;
     saveButtonFrame.origin.y = newInputField.frame.origin.y + newInputField.frame.size.height + 10.0;
     self.saveButton.frame = saveButtonFrame;
@@ -230,7 +193,7 @@
 
 - (void) saveButtonPressed: (UIButton *) button
 {
-    
+    // to be implemented in subclass
 }
 
 #pragma mark - Validating
@@ -333,7 +296,6 @@
 -(BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
     self.selectedFrame = textField.frame;
-    [self.scrollView scrollRectToVisible:self.selectedFrame animated:YES];
     return YES;
 }
 
@@ -343,36 +305,14 @@
     return YES;
 }
 
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [info[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGFloat topOfKeyboard = [[SYNDeviceManager sharedInstance] currentScreenHeight] - MIN(kbSize.height,kbSize.width); //Keyboard is relative to fixed orientation. Always use smallest dimension.
-    CGPoint bottomOfScrollView = [self.view.window.rootViewController.view convertPoint:CGPointMake(0.0, self.scrollView.frame.size.height + self.scrollView.frame.origin.y) fromView:self.view];
-    bottomOfScrollView.y +=20.0f; //statusbar
-    CGFloat overlap = bottomOfScrollView.y - topOfKeyboard;
-    if(overlap > 0)
-    {
-        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, overlap, 0.0);
-        self.scrollView.contentInset = contentInsets;
-        self.scrollView.scrollIndicatorInsets = contentInsets;
-        
-        [self.scrollView scrollRectToVisible:self.selectedFrame animated:YES];
 
-
-        
-        self.scrollView.bounces = YES;
-    }
-}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    UIView* nextView = [self.scrollView viewWithTag: textField.tag + 1];
+    UIView* nextView = [self.view viewWithTag: textField.tag + 1];
     if (nextView)
     {
         [nextView becomeFirstResponder];
-        [self.scrollView scrollRectToVisible:self.selectedFrame animated:YES];
     }
     else
     {
@@ -381,13 +321,6 @@
     return YES;
 }
 
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    self.scrollView.bounces = NO;
-}
+
 
 @end

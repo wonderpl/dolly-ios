@@ -111,10 +111,6 @@
     self.pinchRecogniser.delegate = nil;
 }
 
--(void)setFeedCollectionView:(UICollectionView*)collectionView
-{
-    NSLog(@"WTF???");
-}
 
 #pragma mark - View lifecycle
 

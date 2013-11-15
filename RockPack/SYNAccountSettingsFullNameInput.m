@@ -23,16 +23,6 @@
 
 @implementation SYNAccountSettingsFullNameInput
 
-#pragma mark - Object lifecycle
-
-- (void) dealloc
-{
-    // Defensive programming
-    self.inputField.delegate = nil;
-    self.lastNameInputField.delegate = nil;
-    self.tableView.delegate = nil;
-    self.tableView.dataSource = nil;
-}
 
 
 #pragma mark - View lifecycle
@@ -49,10 +39,17 @@
                                                             label: @"Full name"
                                                             value: nil] build]];
     
-    self.view.backgroundColor = [UIColor whiteColor];
 
-    self.inputField.tag =1 ;
-    self.inputField.delegate = self;
+    
+    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.inputField.placeholder = @"First Name";
     
     self.lastNameInputField = [self createInputField];
     self.lastNameInputField.text = self.appDelegate.currentUser.lastName;
@@ -61,12 +58,18 @@
     self.lastNameInputField.tag = 2;
     self.lastNameInputField.delegate = self;
     
-    [self.scrollView addSubview:self.lastNameInputField];
+    [self.view addSubview:self.lastNameInputField];
     
-    self.tableView = [[UITableView alloc] initWithFrame: CGRectMake((IS_IPAD ? 1.0 : 0.0),
-                                                                    self.lastNameInputField.frame.origin.y + 42.0,
-                                                                    (IS_IPAD ? 378.0 : 320.0),
-                                                                    126.0) style: UITableViewStyleGrouped];
+    
+    self.lastNameInputField.placeholder = @"Last Name";
+    
+    CGRect tableViewFrame = CGRectMake(0.0,
+                                       self.lastNameInputField.frame.origin.y + 22.0,
+                                       self.view.frame.size.width,
+                                       138.0);
+    
+    
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style: UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.opaque = NO;
     self.tableView.delegate = self;
@@ -74,7 +77,7 @@
     self.tableView.backgroundView = nil;
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    [self.scrollView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     
     
     CGRect saveButtonRect = self.saveButton.frame;
@@ -84,47 +87,14 @@
     
     self.errorLabel.center = CGPointMake(self.errorLabel.center.x, self.saveButton.center.y + 60.0);
     self.errorLabel.frame = CGRectIntegral(self.errorLabel.frame);
-    
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage* backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
-    UIImage* backButtonHighlightedImage = [UIImage imageNamed: @"ButtonAccountBackHighlighted.png"];
-    
-    
-    [backButton setImage: backButtonImage
-                forState: UIControlStateNormal];
-    
-    [backButton setImage: backButtonHighlightedImage
-                forState: UIControlStateHighlighted];
-    
-    [backButton addTarget:self action:@selector(didTapBackButton:) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0, 0.0, backButtonImage.size.width, backButtonImage.size.height);
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    self.navigationItem.leftBarButtonItem = backButtonItem;
-    
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
-    titleLabel.text = NSLocalizedString (@"settings_popover_fullname_title", nil);
-    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor whiteColor];
-    titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-    
-    
-    UIView * labelContentView = [[UIView alloc]init];
-    [labelContentView addSubview:titleLabel];
-    
-    self.navigationItem.titleView = labelContentView;
-    
-    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
-    
-    
-    self.inputField.placeholder = @"First Name";
-    self.lastNameInputField.placeholder = @"Last Name";
-    
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.lastNameInputField.delegate = nil;
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
+}
 
 #pragma mark - Table view data source
 

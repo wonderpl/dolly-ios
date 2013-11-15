@@ -14,8 +14,28 @@
 - (void) awakeFromNib
 {
     self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
+    genreColor = [UIColor clearColor]; // set a random default to avoid crashes
 }
 
+-(void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    
+    if(selected)
+    {
+        [super setBackgroundColor: [UIColor blackColor]];
+    }
+    else
+    {
+        [super setBackgroundColor: genreColor];
+    }
+}
+
+-(void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    genreColor = backgroundColor;
+    [super setBackgroundColor: backgroundColor];
+}
 
 
 @end

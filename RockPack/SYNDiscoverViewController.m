@@ -337,9 +337,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                withTitle:subgenre.name
                  forType:kSearchTypeGenre];
     
+    
+    
 }
-
-
 
 
 #pragma mark - UITableView Delegate/Data Source
@@ -372,6 +372,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                withTitle:suggestion
                  forType:kSearchTypeTerm];
     
+    
+    
     [self closeAutocomplete];
 }
 
@@ -379,7 +381,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchBar
 {
-    //[searchbar setText: @""];
+    
     [searchBar setShowsCancelButton:YES animated:YES];
     return YES;
 }
@@ -387,11 +389,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:NO animated:YES];
+    
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
     
+    if([self.searchBar.text isEqualToString:@""])
+    {
+        [self.searchBar resignFirstResponder];
+        [self closeAutocomplete];
+    }
     
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
@@ -411,7 +419,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // 2. if there are less than 3 chars currently typed do not perform search
     if ((range.location - range.length) < 2)
     {
-        // TODO: close suggestion box
+        [self closeAutocomplete];
+        
         return YES;
     }
     
@@ -485,8 +494,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                              withComplete: processBlock
                                                                                  andError: errorBlock];
 }
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    
     
     
     [self dispatchSearch:searchBar.text
@@ -495,10 +506,22 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 
+#pragma mark - Perform Search
+
 - (void) dispatchSearch:(NSString*)searchTerm
               withTitle:(NSString*)title
                 forType:(kSearchType)type
 {
+    
+    
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+    
+    [self.searchBar resignFirstResponder];
+    
+    [self.autocompleteTimer invalidate];
+    
+    [self closeAutocomplete];
+    
     
     if(IS_IPHONE)
     {
@@ -512,13 +535,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                              animated:YES];
         
         // hide the 'DISCOVER' text next to the back button as it appears by default
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                 style:UIBarButtonItemStyleBordered
-                                                                                target:nil
-                                                                                action:nil];
-        
-        
-        
         
         
         

@@ -45,11 +45,13 @@
 
 - (void) setCollectionData: (NSArray *) collectionData
 {
-    _collectionData = collectionData;
-    
-    if (!_collectionData)
+    if (!collectionData)
     {
         return;
+    }
+    else
+    {
+        _collectionData = collectionData;
     }
     
     [self.collectionView reloadData];

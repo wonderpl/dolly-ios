@@ -28,46 +28,7 @@
 
 #pragma mark - Object lifecycle
 
-- (id) init
-{
-    if ((self = [super init]))
-    {        
-        self.preferredContentSize = CGSizeMake(380, 476);
-        
-        self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        self.tableView = [[UITableView alloc] initWithFrame: CGRectMake((IS_IPAD ? 1.0 : 0.0), 0.0, (IS_IPAD ? 378 : 320.0), 200.0) style: UITableViewStyleGrouped];
-        self.tableView.backgroundColor = [UIColor clearColor];
-        self.tableView.opaque = NO;
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-        self.tableView.backgroundView = nil;
-        self.tableView.scrollEnabled = NO;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        
-        self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge];
-        CGRect spinnerFrame = self.spinner.frame;
-        spinnerFrame.origin.y = self.tableView.frame.origin.y + self.tableView.frame.size.height + 20.0;
-        spinnerFrame.origin.x = self.tableView.frame.size.width * 0.5 - spinnerFrame.size.width * 0.5;
-        self.spinner.frame = CGRectIntegral(spinnerFrame);
-        [self.view addSubview: self.spinner];
-    }
-    
-    return self;
-}
 
-
-- (void) dealloc
-{
-    // Defensive programming
-    self.tableView.delegate = nil;
-    self.tableView.dataSource = nil;
-}
-
-
-#pragma mark - View lifecycle
 
 - (void) viewDidLoad
 {
@@ -79,58 +40,45 @@
                                                            action: @"accountPropertyChanged"
                                                             label: @"Gender"
                                                             value: nil] build]];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    CGRect tvFrame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 200.0);
+    self.tableView = [[UITableView alloc] initWithFrame:tvFrame  style: UITableViewStyleGrouped];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.opaque = NO;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundView = nil;
+    self.tableView.scrollEnabled = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:self.tableView];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"Cell"];
     
-    UIButton *backButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    UIImage* backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
-    UIImage* backButtonHighlightedImage = [UIImage imageNamed: @"ButtonAccountBackHighlighted.png"];
-
-    
-    [backButton setImage: backButtonImage
-                forState: UIControlStateNormal];
-    
-    [backButton setImage: backButtonHighlightedImage
-                forState: UIControlStateHighlighted];
-    
-    [backButton addTarget: self
-                   action: @selector(didTapBackButton:)
-         forControlEvents: UIControlEventTouchUpInside];
-    
-    backButton.frame = CGRectMake(0.0, 0.0, backButtonImage.size.width, backButtonImage.size.height);
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView: backButton];
-    
-    self.navigationItem.leftBarButtonItem = backButtonItem;
-    
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
-    titleLabel.text = NSLocalizedString (@"settings_popover_gender_title", nil);
-    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor whiteColor];
-    titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-    
-    
-    UIView * labelContentView = [[UIView alloc]init];
-    [labelContentView addSubview:titleLabel];
-    
-    self.navigationItem.titleView = labelContentView;
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge];
+    CGRect spinnerFrame = self.spinner.frame;
+    spinnerFrame.origin.y = self.tableView.frame.origin.y + self.tableView.frame.size.height + 20.0;
+    spinnerFrame.origin.x = self.tableView.frame.size.width * 0.5 - spinnerFrame.size.width * 0.5;
+    self.spinner.frame = CGRectIntegral(spinnerFrame);
+    [self.view addSubview: self.spinner];
 }
 
 
-- (void) didTapBackButton: (id) sender
+
+-(void)viewWillDisappear:(BOOL)animated
 {
-    if (self.navigationController.viewControllers.count > 1)
-    {
-        [self.navigationController popViewControllerAnimated: YES];
-    }
+    [super viewWillDisappear:animated];
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
 }
-
 
 #pragma mark - TableView DataSource/Delegate
 

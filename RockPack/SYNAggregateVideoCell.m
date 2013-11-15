@@ -79,7 +79,11 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 - (void) setCollectionData: (NSArray *) collectionData
 {
-    [super setCollectionData: collectionData];
+    NSArray *sortedCollectionData = [collectionData sortedArrayUsingComparator: ^NSComparisonResult(VideoInstance* vi1, VideoInstance* vi2) {
+        return [vi1.position compare: vi2.position];
+    }];
+    
+    [super setCollectionData: sortedCollectionData];
     
     if (collectionData.count <= 0)
     {

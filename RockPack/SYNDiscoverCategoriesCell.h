@@ -9,6 +9,10 @@
 @import UIKit;
 
 @interface SYNDiscoverCategoriesCell : UICollectionViewCell
+{
+    UIColor* genreColor;
+}
+
 
 @property (nonatomic, strong) IBOutlet UILabel* label;
 

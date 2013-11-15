@@ -182,7 +182,8 @@
     // the create new cell is not direclty selectable but listens to the button callback 'createNewButtonPressed'
     if(indexPath.row == 0)
     {
-       
+       if(self.createNewChannelCell.isEditing)
+           [self.createNewChannelCell endEditing:YES];
         return;
     }
     else

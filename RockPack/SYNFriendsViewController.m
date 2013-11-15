@@ -10,7 +10,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNFacebookManager.h"
 #import "ChannelOwner.h"
-#import "SYNFriendThumbnailCell.h"
+#import "SYNSearchResultsUserCell.h"
 #import "UIImageView+WebCache.h"
 #import "SYNAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -19,9 +19,8 @@
 #import "GAI.h"
 #import "SYNFacebookManager.h"
 #import "SYNMasterViewController.h"
-#import <objc/runtime.h>
+#import <QuartzCore/QuartzCore.h>
 
-static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 
 @interface SYNFriendsViewController () <UIScrollViewDelegate> {
     BOOL hasAttemptedToLoadData;
@@ -29,56 +28,42 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 
 @property (nonatomic, strong) NSArray* friends;
 @property (nonatomic) BOOL onRockpackFilterOn;
-@property (nonatomic, strong) NSArray* displayFriends;
 @property (nonatomic, weak) Friend* currentlySelectedFriend;
 @property (nonatomic, strong) NSMutableString* currentSearchTerm;
 
 
-
-//iPhone specific
-@property (nonatomic, strong) IBOutlet UIView* searchContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *searchFieldBackground;
-@property (weak, nonatomic) IBOutlet UIButton * buttonShowSearch;
 
 @end
 
 @implementation SYNFriendsViewController
 
 @synthesize onRockpackFilterOn;
-@synthesize displayFriends = _displayFriends;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     
+    
     onRockpackFilterOn = NO;
     
     self.currentSearchTerm = [[NSMutableString alloc] init];
     
-    [self.searchField setAutocorrectionType:UITextAutocorrectionTypeNo];
     
     self.friends = [NSArray array];
     
     
     
-    // Register Cells
-    UINib *thumbnailCellNib = [UINib nibWithNibName: @"SYNFriendThumbnailCell"
-                                             bundle: nil];
+    // == Register Cells == //
     
-    [self.friendsCollectionView registerNib: thumbnailCellNib
-                 forCellWithReuseIdentifier: @"SYNFriendThumbnailCell"];
+    [self.friendsCollectionView registerNib: [UINib nibWithNibName: @"SYNSearchResultsUserCell" bundle: nil]
+                 forCellWithReuseIdentifier: @"SYNSearchResultsUserCell"];
     
     self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
     
     [self.activityIndicator hidesWhenStopped];
     
-    self.onFacebookButton.titleLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 14.0f : 12.0f];
-    self.onFacebookButton.contentEdgeInsets = UIEdgeInsetsMake(IS_IPAD ? 7.0f : 5.0, 0.0f, 0.0f, 0.0f);
-    self.onRockpackButton.titleLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 14.0f : 12.0f];
-    self.onRockpackButton.contentEdgeInsets = UIEdgeInsetsMake(IS_IPAD ? 7.0f : 5.0, 0.0f, 0.0f, 0.0f);
-    
-    self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -90,8 +75,6 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
         self.friendsCollectionView.hidden = NO;
         self.activityIndicator.hidden = NO;
         
-        self.onRockpackButton.hidden = NO;
-        self.onFacebookButton.hidden = NO;
         
         [self fetchAndDisplayFriends];
         
@@ -100,8 +83,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     }
     else
     {
-        self.onRockpackButton.hidden = YES;
-        self.onFacebookButton.hidden = YES;
+        
         self.facebookLoginButton.hidden = NO;
         self.preLoginLabel.hidden = NO;
         self.friendsCollectionView.hidden = YES;
@@ -113,61 +95,13 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    self.followInviteLabel.font = [UIFont lightCustomFontOfSize:self.followInviteLabel.font.pointSize];
     
     self.searchFieldBackground.image = [[UIImage imageNamed: @"FieldSearch"]
                                         resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
+    
+    self.facebookLoginButton.layer.cornerRadius = 8.0f;
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    CGRect bFrame = self.onRockpackButton.frame;
-    bFrame.size.height = 54.0f;
-    bFrame.origin.y -= 10.0f;
-    self.onRockpackButton.frame = bFrame;
-    
-    bFrame = self.onFacebookButton.frame;
-    bFrame.size.height = 54.0f;
-    bFrame.origin.y -= 10.0f;
-    self.onFacebookButton.frame = bFrame;
-    
-    
-}
-
-
--(IBAction)switchClicked:(UIButton*)tab
-{
-    if( tab.selected ) // do not re-select
-        return;
-    
-    [self.searchField resignFirstResponder];
-    
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    if (tab == self.onRockpackButton)
-    {
-        self.onFacebookButton.selected = NO;
-        self.followInviteLabel.text = NSLocalizedString(@"friends_follow", nil);
-        
-        [tracker set: kGAIScreenName
-               value: @"Friends RP"];
-    }
-    else
-    {
-        self.onRockpackButton.selected = NO;
-        self.followInviteLabel.text = NSLocalizedString(@"friends_invite", nil);
-        
-        [tracker set: kGAIScreenName
-               value: @"Friends All"];
-    }
-        
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
-    tab.selected = YES;
-    
-    [self.friendsCollectionView reloadData];
-}
 
 
 -(void)fetchAndDisplayFriends
@@ -182,23 +116,15 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
                                          inManagedObjectContext: appDelegate.searchManagedObjectContext]];
     
-    
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem != %@ AND hasIOSDevice == YES", kEmail];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem == %@", kFacebook];
     
     existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                  error: &error];
-    
-    
     
     if(!error)
     {
    
         self.friends = [NSArray arrayWithArray:existingFriendsArray];
-        
-        self.onRockpackButton.selected = YES;
-        self.followInviteLabel.text = NSLocalizedString(@"friends_follow", nil);
-        
-        
         
         [self.friendsCollectionView reloadData];
         
@@ -212,7 +138,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
     
     __weak SYNFriendsViewController* weakSelf = self;
     
-    [weakSelf showLoader:YES];
+    [self.activityIndicator startAnimating];
     
     [appDelegate.oAuthNetworkEngine friendsForUser:appDelegate.currentUser
                                         onlyRecent:NO
@@ -228,7 +154,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
                                      }
                                      
                                      
-                                     [weakSelf showLoader:NO];
+                                     [self.activityIndicator stopAnimating];
         
                                      
         
@@ -236,33 +162,13 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
         
         
                                  } errorHandler:^(id dictionary) {
-                                     
-                                     
-                                     
-                                     
-                                     [weakSelf showLoader:NO];
+                                     [self.activityIndicator stopAnimating];
                                      
         
                                  }];
 }
--(void)showLoader:(BOOL)show
-{
-    if(show)
-    {
-        [self.activityIndicator startAnimating];
-        
-        self.onRockpackButton.hidden = YES;
-        self.onFacebookButton.hidden = YES;
-    }
-    else
-    {
-        self.onRockpackButton.hidden = NO;
-        self.onFacebookButton.hidden = NO;
-        
-        
-        [self.activityIndicator stopAnimating];
-    }
-}
+
+
 
 
 -(IBAction)facebookLoginPressed:(id)sender
@@ -296,8 +202,6 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
                                                               weakSelf.preLoginLabel.hidden = YES;
                                                               weakSelf.facebookLoginButton.hidden = YES;
                                                               
-                                                              weakSelf.onRockpackButton.hidden = NO;
-                                                              weakSelf.onFacebookButton.hidden = NO;
                                                               
                                                               [weakSelf fetchAndDisplayFriends];
             
@@ -342,7 +246,7 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
 - (NSInteger) collectionView: (UICollectionView *) view
       numberOfItemsInSection: (NSInteger) section
 {
-    return self.displayFriends.count;
+    return self.friends.count;
 }
 
 
@@ -350,223 +254,63 @@ static char* friend_association_key = "SYNFriendThumbnailCell to Friend";
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    Friend *friend = self.displayFriends[indexPath.row];
+    Friend *friend = self.friends[indexPath.row];
     
-    SYNFriendThumbnailCell *userThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNFriendThumbnailCell"
-                                                                                        forIndexPath: indexPath];
+    SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNSearchResultsUserCell"
+                                                                                            forIndexPath: indexPath];
     
-    userThumbnailCell.nameLabel.text = friend.displayName;
+    userCell.channelOwner = (ChannelOwner*)(friend);
+    userCell.delegate = self;
     
-    [userThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: friend.thumbnailLargeUrl]
-                                placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarChannel"]
-                                         options: SDWebImageRetryFailed];
+    // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
+    userCell.followButton.layer.borderWidth = 0.0f;
+    userCell.followButton.backgroundColor = [UIColor clearColor];
+    userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0f];
+    // ================= //
     
-    [userThumbnailCell setDisplayName: friend.displayName];
     
-    
-    
-    objc_setAssociatedObject(userThumbnailCell, friend_association_key, friend, OBJC_ASSOCIATION_ASSIGN);
-    
-    return userThumbnailCell;
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [self.searchField resignFirstResponder];
+    return userCell;
 }
 
 
-#pragma mark - UITextViewDelegate
-
-- (BOOL) textField: (UITextField *) textField shouldChangeCharactersInRange: (NSRange) range replacementString: (NSString *) newCharacter
+- (void) profileButtonTapped: (UIButton *) profileButton
 {
-    
-    NSUInteger oldLength = textField.text.length;
-    NSUInteger newCharacterLength = newCharacter.length;
-    NSUInteger rangeLength = range.length;
-    
-    NSUInteger newLength = (oldLength + newCharacterLength) - rangeLength;
-    
-    
-    self.currentSearchTerm = [NSMutableString stringWithString:[self.searchField.text uppercaseString]];
-    if(oldLength < newLength)
-        [self.currentSearchTerm appendString:[newCharacter uppercaseString]];
-    else
-        [self.currentSearchTerm deleteCharactersInRange:NSMakeRange(self.currentSearchTerm.length - 1, 1)];
-    
-    
-    
-    // this will ask .displayFriends which will filter the friends array accroding to the search term
-    [self.friendsCollectionView reloadData];
-    
-    return YES;
-}
-
--(NSArray*)displayFriends
-{
-    
-    // first decide which tab we are on ...
-    if(self.onRockpackButton.selected)
+    if(!profileButton)
     {
-        _displayFriends = [self rockpackFriends];
-        
-        
-    }
-    else
-    {
-        _displayFriends = [self facebookFriends];
-        
+        AssertOrLog(@"No profileButton passed");
+        return; // did not manage to get the cell
     }
     
-    // ... then filter search according to term if present
-    if(self.currentSearchTerm.length > 0)
-    {
-        NSPredicate* searchPredicate = [NSPredicate predicateWithBlock:^BOOL(Friend* friend, NSDictionary *bindings) {
-            
-            NSString* nameToCompare = [friend.displayName uppercaseString];
-            
-            BOOL result = [nameToCompare hasPrefix:self.currentSearchTerm];
-            
-            if(self.onRockpackButton.selected) // is on the second tab
-            {
-                result = result & friend.isOnRockpack;
-            }
-            
-            return result;
-        }];
-        
-        _displayFriends = [_displayFriends filteredArrayUsingPredicate:searchPredicate];
+    id candidate = profileButton;
+    while (![candidate isKindOfClass:[SYNSearchResultsUserCell class]]) {
+        candidate = [candidate superview];
     }
     
-    if(_displayFriends.count == 0)
+    if(![candidate isKindOfClass:[SYNSearchResultsUserCell class]])
     {
-        // show message
-        self.preLoginLabel.hidden = NO;
-        self.preLoginLabel.text = NSLocalizedString(@"friends_name_not_found", nil);;
+        AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
+        return; // did not manage to get the cell
     }
-    else
-    {
-        self.preLoginLabel.hidden = YES;
-    }
+    SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
     
-    return _displayFriends;
-    
+    [self viewProfileDetails:searchUserCell.channelOwner];
 }
-
-- (BOOL) textFieldShouldReturn: (UITextField *) textField
-{
-    [self.searchField resignFirstResponder];
-    return YES;
-}
-
--(BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    [self.currentSearchTerm setString:@""];
-    [self.friendsCollectionView reloadData];
-    return YES;
-}
-
-
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    SYNFriendThumbnailCell* cellClicked = (SYNFriendThumbnailCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
-    cellClicked.selected = YES;
+    Friend* selectedFriend = self.friends[indexPath.item];
     
-    self.currentlySelectedFriend = objc_getAssociatedObject(cellClicked, friend_association_key);
     
-    if(!self.currentlySelectedFriend.isOnRockpack) // facebook friend, invite to rockpack
-    {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"friendToInvite"
-                                                                label: nil
-                                                                value: nil] build]];
-        
-        [[SYNFacebookManager sharedFBManager] sendAppRequestToFriend:self.currentlySelectedFriend
-                                                           onSuccess:^{
-                                                               id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                                               
-                                                               [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                                      action: @"friendInvited"
-                                                                                                                       label: nil
-                                                                                                                       value: nil] build]];
-                                                               
-                                                               [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
-                                                               
-                                                           } onFailure:^(NSError *error) {
-                                                               
-                                                               [appDelegate. masterViewController removeOverlayControllerAnimated:YES];
-                                                               
-                                                           }];
-    }
-    else // on rockpack, go to profile
-    {
-        ChannelOwner* friendAsChannelOwner = self.currentlySelectedFriend;
-		
-        [self viewProfileDetails:friendAsChannelOwner];
-    }
-    
-    [self.searchField resignFirstResponder];
+    [self viewProfileDetails:(ChannelOwner*)selectedFriend];
     
 }
 
-
--(void)dealloc
+-(NSString*)title
 {
-    [self.searchContainer removeFromSuperview];
-    // clean associations
-    for (UICollectionViewCell* visibleCell in self.friendsCollectionView.visibleCells) {
-        objc_removeAssociatedObjects(visibleCell);
-    }
-}
-
-#pragma mark - Search Field
-
--(void)addSearchBarToView:(UIView*)view
-{
-    CGRect searchContainerFrame = self.searchContainer.frame;
-    searchContainerFrame.origin = CGPointMake(46.0f, 0.0f);
-    self.searchContainer.frame = searchContainerFrame;
-    [view addSubview:self.searchContainer];
-}
-
-- (IBAction)closeSearchBox:(id)sender {
-    
-    self.searchField.text = @"";
-    [self.searchField resignFirstResponder];
-    
-    
+    return viewId;
 }
 
 
-
-#pragma mark - Helper Methods
-
--(NSArray*)facebookFriends
-{
-    return [self.friends filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"externalSystem == %@ AND isOnRockpack == NO", kFacebook]];
-}
-
--(NSArray*)rockpackFriends
-{
-    
-    return [self.friends filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"resourceURL != NULL"]];
-}
-
--(void)setTitleForFriendsTab:(NSString*)ftText andRockpackTab:(NSString*)rtText
-{
-    // set first tab
-    [self.onFacebookButton setTitle:ftText forState:UIControlStateNormal];
-    [self.onFacebookButton setTitle:ftText forState:UIControlStateHighlighted];
-    [self.onFacebookButton setTitle:ftText forState:UIControlStateSelected];
-    
-    // set second tab
-    [self.onRockpackButton setTitle:rtText forState:UIControlStateNormal];
-    [self.onRockpackButton setTitle:rtText forState:UIControlStateHighlighted];
-    [self.onRockpackButton setTitle:rtText forState:UIControlStateSelected];
-}
 @end

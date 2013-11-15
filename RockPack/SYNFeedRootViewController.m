@@ -46,7 +46,6 @@ typedef void(^FeedDataErrorBlock)(void);
 @property (nonatomic, strong) NSDictionary* feedChannelsById;
 @property (nonatomic, strong) NSDictionary* feedItemByPosition;
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
-@property (nonatomic, strong) NSArray* videosInOrderArray;
 
 @end
 
@@ -73,11 +72,11 @@ typedef void(^FeedDataErrorBlock)(void);
     [super viewDidLoad];
 
     self.feedItemsData = @[];
-    self.videosInOrderArray = @[];
 
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
-    [self removePopupMessage];
+    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
+                   withLoader: YES];
 
     // Register XIBs for Cell
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
@@ -128,45 +127,15 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
-
-    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
-                   withLoader: YES];
     
-    if([self class] == [SYNFeedRootViewController class])
+    if ([self class] == [SYNFeedRootViewController class])
     {
         [self loadAndUpdateFeedData];
     }
-    
-    
 }
 
 
-
-#pragma mark - Container Scrol Delegates
-
-- (void) didMoveToParentViewController: (UIViewController *) parent
-{
-    if (parent == nil)
-    {
-        // Removed from parent
-        self.feedCollectionView.scrollsToTop = NO;
-    }
-    else
-    {
-        // Added to parent
-        [self updateAnalytics];
-        
-        self.feedCollectionView.scrollsToTop = YES;
-
-        // if the user has not pressed load more
-        if (self.dataRequestRange.location == 0)
-        {
-            [self resetDataRequestRange]; // just in case the length is less than standard
-            
-            [self loadAndUpdateFeedData];
-        }
-    }
-}
+#pragma mark - Container Scroll Delegates
 
 - (void) updateAnalytics
 {
@@ -305,17 +274,14 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView reloadData];
     
     [self loadAndUpdateFeedData];
-    
 }
 
-#pragma mark - Empty genre message handling
 
 #pragma mark - Fetch Feed Data
 
 - (void) fetchAndDisplayFeedItems
 {
     [self fetchVideoItems];
-    
     [self fetchChannelItems];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -325,16 +291,17 @@ typedef void(^FeedDataErrorBlock)(void);
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     // if the aggregate has a parent FeedItem then it should NOT be displayed since it is going to be part of an aggregate...
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\" AND aggregate == nil", self.viewId]]; // kFeedViewId
+    NSPredicate* predicate = [NSPredicate predicateWithFormat: [NSString stringWithFormat: @"viewId == \"%@\" AND aggregate == nil", self.viewId]]; // kFeedViewId
  
     fetchRequest.predicate = predicate;
 
     fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"dateAdded" ascending: NO],
-                                     [[NSSortDescriptor alloc] initWithKey: @"position" ascending: NO]];
+                                     [[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
     
     NSError* error;
     
-    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
+    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                error: &error];
     if (!resultsArray)
         return;
     
@@ -375,13 +342,6 @@ typedef void(^FeedDataErrorBlock)(void);
     self.feedItemsData = sortedItemsArray;
     
     [self.feedCollectionView reloadData];
-    
-    // put the videos in order
-    self.videosInOrderArray = @[];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self sortVideosForPlaylist];
-    });
-    
 }
 
 
@@ -393,21 +353,28 @@ typedef void(^FeedDataErrorBlock)(void);
     fetchRequest.entity = [NSEntityDescription entityForName: kVideoInstance
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
+    NSPredicate* predicate = [NSPredicate predicateWithFormat: [NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
     fetchRequest.predicate = predicate;
     
+//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey: @"position"
+//                                                                     ascending: YES];
+//    fetchRequest.sortDescriptors = @[sortDescriptor];
+    
     NSError* error;
-    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
+    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                error: &error];
+    
     if (!resultsArray)
         return;
     
     NSMutableDictionary* mutDictionary = [[NSMutableDictionary alloc] initWithCapacity:resultsArray.count];
+    
     for (VideoInstance* vi in resultsArray) {
         mutDictionary[vi.uniqueId] = vi;
     }
     
-    self.feedVideosById = [NSDictionary dictionaryWithDictionary:mutDictionary];
+    self.feedVideosById = [NSDictionary dictionaryWithDictionary: mutDictionary];
 }
 
 
@@ -502,7 +469,6 @@ typedef void(^FeedDataErrorBlock)(void);
         NSMutableArray* channelsMutArray = [NSMutableArray array];
         
         // NOTE: the data containes either an aggragate or a single item, handle both cases here
-        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
             for (FeedItem* childFeedItem in feedItem.feedItems)
@@ -515,14 +481,11 @@ typedef void(^FeedDataErrorBlock)(void);
         {
             channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
             [channelsMutArray addObject:channel];
-            
         }
         
         cell.collectionData = [NSArray arrayWithArray:channelsMutArray];
         
         channelOwner = channel.channelOwner;
-        
-        
     }
     
     // common for both types
@@ -532,7 +495,6 @@ typedef void(^FeedDataErrorBlock)(void);
                                      forState: UIControlStateNormal
                              placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                       options: SDWebImageRetryFailed];
-
 
     return cell;
 }
@@ -552,8 +514,16 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     else
     {
-        size.width = IS_IPAD ? 927.0f : 320.0f;
-        size.height = IS_IPAD ? 330.0f : 264.0f;
+        if (SYNDeviceManager.sharedInstance.isPortrait)
+        {
+            size.width = IS_IPAD ? 671.0f : 320.0f;
+            size.height = IS_IPAD ? 330.0f : 264.0f;
+        }
+        else
+        {
+            size.width = IS_IPAD ? 927.0f : 320.0f;
+            size.height = IS_IPAD ? 330.0f : 264.0f;
+        }
     }
     
     return size;
@@ -583,7 +553,6 @@ typedef void(^FeedDataErrorBlock)(void);
 {
     CGSize footerSize = CGSizeZero;
     
-    
     if  (section == (self.feedItemsData.count - 1) && // only the last section can have a loader
         (self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable)) 
     {
@@ -595,18 +564,14 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 // Used for the collection view header
 - (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
             viewForSupplementaryElementOfKind: (NSString *) kind
                                   atIndexPath: (NSIndexPath *) indexPath
 {
-    
     UICollectionReusableView *supplementaryView = nil;
     
     // Work out the day
-    
-    
     // In the 'name' attribut of the sectionInfo we have actually the keypath data (i.e in this case Date without time)
     
     // TODO: We might want to optimise this instead of creating a new date formatter each time
@@ -679,7 +644,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) videoOverlayDidDissapear
+- (void) videoOverlayDidDisappear
 {
     [self.feedCollectionView reloadData];
 }
@@ -828,7 +793,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
@@ -901,7 +865,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
-    
     [super scrollViewDidScroll:scrollView];
     
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
@@ -918,45 +881,6 @@ typedef void(^FeedDataErrorBlock)(void);
     [super applicationWillEnterForeground: application];
     
     [self loadAndUpdateFeedData];
-}
-
-
-#pragma mark - Sort Method
-
-- (void) sortVideosForPlaylist
-{
-    NSMutableArray *ma = [NSMutableArray array]; // max should be the existing videos
-    
-    for (NSArray *section in self.feedItemsData)
-    {
-        for (FeedItem *fi in section)
-        {
-            if (fi.resourceTypeValue != FeedItemResourceTypeVideo)
-            {
-                continue;
-            }
-            
-            if (fi.itemTypeValue == FeedItemTypeLeaf)
-            {
-                [ma addObject: (self.feedVideosById)[fi.resourceId]];
-            }
-            else
-            {
-                for (FeedItem *cfi in fi.feedItems)
-                {
-                    // assumes that FeedItems are one level deep at the present moment (probably will not change for a while)
-                    if (cfi.resourceTypeValue != FeedItemResourceTypeVideo || cfi.itemTypeValue != FeedItemTypeLeaf)
-                    {
-                        continue;
-                    }
-                    
-                    [ma addObject: (self.feedVideosById)[cfi.resourceId]];
-                }
-            }
-        }
-    }
-    
-    self.videosInOrderArray = [NSArray arrayWithArray: ma];
 }
 
 

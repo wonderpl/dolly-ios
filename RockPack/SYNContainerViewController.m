@@ -57,25 +57,30 @@
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
                                                            NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0f]}];
-     
-     
     
+    
+    UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:nil
+                                                                  action:nil];
+    
+    // sets the tint to gray for all navigatin controllers
+    self.view.tintColor = [UIColor grayColor];
     
     // == Feed Page == //
     
     SYNFeedRootViewController *feedRootViewController = [[SYNFeedRootViewController alloc] initWithViewId: kFeedViewId];
-    
+    feedRootViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
-
+    
     
     
     // == Profile Page == //
 
     SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
-    
+    profileViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
     
-    // profileViewController.moveTabDelegate = self;
     
     if (!IS_IPAD)
     {
@@ -84,37 +89,32 @@
     
     profileViewController.channelOwner = self.appDelegate.currentUser;
     
-
-    
-    // == Friends Page == //
-    
-    //SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
-    
-    
-    
     // == Activity Page == //
     
     SYNActivityViewController *activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];
-    profileViewController.channelOwner = self.appDelegate.currentUser;
-    
+    activityViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navActivityViewController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
-
-    // == Discovery (Search) Page == //
-    SYNDiscoverViewController *searchViewController = [[SYNDiscoverViewController alloc] initWithViewId: kDiscoverViewId];
     
-    UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
-
+    
+    // == Discovery (Search) Page == //
+    SYNDiscoverViewController *discoveryViewController = [[SYNDiscoverViewController alloc] initWithViewId: kDiscoverViewId];
+    discoveryViewController.navigationItem.backBarButtonItem = backButton;
+    UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:discoveryViewController];
+    
+    
     // == Feed Page == //
     
     SYNMoodRootViewController *moodRootViewController = [[SYNMoodRootViewController alloc] initWithViewId: kMoodViewId];
-    
-    
+    moodRootViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
+    
     
     // == Hold the vc locally
     self.viewControllers = @[navFeedViewController, navSearchViewController,
                              navMoodRootViewController,
                              navProfileViewController, navActivityViewController];
+    
+    
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
@@ -138,10 +138,8 @@
     if (_currentViewController == currentViewController)
         return;
 
-    __weak SYNContainerViewController* wself = self;
-    
-    __weak UINavigationController *toViewController = currentViewController;
-    __weak UINavigationController *fromViewController = _currentViewController;
+    UINavigationController *toViewController = currentViewController;
+    UINavigationController *fromViewController = _currentViewController;
     
     // We need to set this here, as effectively we have commited to the current view controller at this stage
     // and any methods that access this before the transition has completed, need to get the new view controller
@@ -150,59 +148,15 @@
     [fromViewController willMoveToParentViewController: nil]; // remove the current view controller if there is one
     
     [super addChildViewController: toViewController];
-    [[self view] addSubview: toViewController.view];
+    [self.view addSubview: toViewController.view];
     
+    // just make sure on right dimensions
+    toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
     
-    
-    
-    // == Define the Animation and Completion Blocks == // (imporove visually)
-    
-    void (^ AnimationBlock)(void) = ^{
-        
-        toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-        fromViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width * 0.5f, self.view.frame.size.height * 0.5f);
-        
-    };
-    
-    void (^ CompleteTransitionBlock)(BOOL) = ^(BOOL finished) {
-        
-        
-        // just make sure on right dimensions
-        toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-        
-        [fromViewController.view removeFromSuperview];
-        [fromViewController removeFromParentViewController];
-        
-        
-        self.isTransitioning = NO;
-        
-    };
-    
-    
-    
-    
-    
-    // == Do the Transition selectively == //
-    if (fromViewController) // if not from first time
-    {
-       
-       toViewController.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width * 0.5f, self.view.frame.size.height * 0.5f);
-
-        wself.isTransitioning = YES;
-        [wself transitionFromViewController: fromViewController
-                           toViewController: toViewController
-                                   duration: VIEW_CONTROLLER_TRANSITION_DURATION
-                                    options: UIViewAnimationOptionCurveEaseInOut
-                                 animations: AnimationBlock
-                                 completion: CompleteTransitionBlock];
-        
-    }
-    else // first time
-    {
-        
-        CompleteTransitionBlock(YES);
-    }
+    [fromViewController.view removeFromSuperview];
+    [fromViewController removeFromParentViewController];
 }
+
 
 - (NSInteger) indexOfControllerByName: (NSString *) pageName
 {

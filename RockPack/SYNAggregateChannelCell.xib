@@ -40,12 +40,13 @@
                             <outlet property="dataSource" destination="2" id="3hI-5H-nEg"/>
                         </connections>
                     </collectionView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzx-At-PL6" userLabel="Button - Action Message" customClass="SYNButton">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzx-At-PL6" userLabel="Button - Action Message" customClass="SYNButton">
                         <rect key="frame" x="0.0" y="68" width="927" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="WaD-zN-HsY"/>
                         </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal">
                             <attributedString key="attributedTitle">
                                 <fragment content="Action / Profile Button2">

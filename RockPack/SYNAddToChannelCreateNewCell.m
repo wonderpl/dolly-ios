@@ -145,9 +145,14 @@
             self.nameInputTextField.returnKeyType = UIReturnKeyGo;
             
             [self.descriptionTextView becomeFirstResponder];
+            
+            // hack to get the cursor at the start rather than on the second line as it appears without this method.
+            [self.descriptionTextView performSelector:@selector(setText:) withObject:@"" afterDelay:0.1f];
             break;
     }
 }
+
+
 
 // returns either of the two editing states
 -(BOOL)isEditing
