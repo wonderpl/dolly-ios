@@ -28,7 +28,6 @@
 
 @property (nonatomic, strong) NSArray* friends;
 @property (nonatomic) BOOL onRockpackFilterOn;
-@property (nonatomic, strong) NSArray* displayFriends;
 @property (nonatomic, weak) Friend* currentlySelectedFriend;
 @property (nonatomic, strong) NSMutableString* currentSearchTerm;
 
@@ -40,7 +39,6 @@
 @implementation SYNFriendsViewController
 
 @synthesize onRockpackFilterOn;
-@synthesize displayFriends = _displayFriends;
 
 - (void)viewDidLoad
 {
@@ -51,7 +49,6 @@
     
     self.currentSearchTerm = [[NSMutableString alloc] init];
     
-    [self.searchField setAutocorrectionType:UITextAutocorrectionTypeNo];
     
     self.friends = [NSArray array];
     
@@ -66,8 +63,6 @@
     
     [self.activityIndicator hidesWhenStopped];
     
-    
-    self.searchField.font = [UIFont lightCustomFontOfSize: self.searchField.font.pointSize];
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -99,7 +94,6 @@
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    self.followInviteLabel.font = [UIFont lightCustomFontOfSize:self.followInviteLabel.font.pointSize];
     
     self.searchFieldBackground.image = [[UIImage imageNamed: @"FieldSearch"]
                                         resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
@@ -130,10 +124,6 @@
     {
    
         self.friends = [NSArray arrayWithArray:existingFriendsArray];
-        
-        
-        self.followInviteLabel.text = NSLocalizedString(@"friends_follow", nil);
-        
         
         [self.friendsCollectionView reloadData];
         
@@ -255,7 +245,7 @@
 - (NSInteger) collectionView: (UICollectionView *) view
       numberOfItemsInSection: (NSInteger) section
 {
-    return self.displayFriends.count;
+    return self.friends.count;
 }
 
 
@@ -263,12 +253,13 @@
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    Friend *friend = self.displayFriends[indexPath.row];
+    Friend *friend = self.friends[indexPath.row];
     
     SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNSearchResultsUserCell"
                                                                                             forIndexPath: indexPath];
     
     userCell.channelOwner = (ChannelOwner*)(friend);
+    userCell.delegate = self;
     
     // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
     userCell.followButton.layer.borderWidth = 0.0f;
@@ -280,96 +271,17 @@
     return userCell;
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [self.searchField resignFirstResponder];
-}
 
-
-#pragma mark - UITextViewDelegate
-
-- (BOOL) textField: (UITextField *) textField shouldChangeCharactersInRange: (NSRange)range replacementString: (NSString *) newCharacter
+-(void)profileButtonTapped
 {
     
-    NSUInteger oldLength = textField.text.length;
-    NSUInteger newCharacterLength = newCharacter.length;
-    NSUInteger rangeLength = range.length;
-    
-    NSUInteger newLength = (oldLength + newCharacterLength) - rangeLength;
-    
-    
-    self.currentSearchTerm = [NSMutableString stringWithString:[self.searchField.text uppercaseString]];
-    if(oldLength < newLength)
-        [self.currentSearchTerm appendString:[newCharacter uppercaseString]];
-    else
-        [self.currentSearchTerm deleteCharactersInRange:NSMakeRange(self.currentSearchTerm.length - 1, 1)];
-    
-    // this will ask .displayFriends which will filter the friends array accroding to the search term
-    [self.friendsCollectionView reloadData];
-    
-    return YES;
 }
-
--(NSArray*)displayFriends
-{
-    
-    // If there is no filter string typed
-    if(self.currentSearchTerm.length == 0)
-    {
-        _displayFriends = self.friends;
-    }
-    // There is a filter
-    else
-    {
-        NSPredicate* searchPredicate = [NSPredicate predicateWithBlock:^BOOL(Friend* friend, NSDictionary *bindings) {
-            
-            NSString* nameToCompare = [friend.displayName uppercaseString];
-            
-            return [nameToCompare hasPrefix:self.currentSearchTerm];
-            
-        }];
-        
-        _displayFriends = [self.friends filteredArrayUsingPredicate:searchPredicate];
-    }
-    
-    
-    if(_displayFriends.count == 0)
-    {
-        // show message
-        self.preLoginLabel.hidden = NO;
-        self.preLoginLabel.text = NSLocalizedString(@"friends_name_not_found", nil);;
-    }
-    else
-    {
-        self.preLoginLabel.hidden = YES;
-    }
-    
-    return _displayFriends;
-    
-}
-
-- (BOOL) textFieldShouldReturn: (UITextField *) textField
-{
-    [self.searchField resignFirstResponder];
-    return YES;
-}
-
--(BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    [self.currentSearchTerm setString:@""];
-    [self.friendsCollectionView reloadData];
-    return YES;
-}
-
-
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
     
-    [self.searchField resignFirstResponder];
-    
-    Friend* selectedFriend = self.displayFriends[indexPath.item];
+    Friend* selectedFriend = self.friends[indexPath.item];
     
     
     [self viewProfileDetails:(ChannelOwner*)selectedFriend];
@@ -378,13 +290,6 @@
 }
 
 
-- (IBAction)closeSearchBox:(id)sender {
-    
-    self.searchField.text = @"";
-    [self.searchField resignFirstResponder];
-    
-    
-}
 
 
 @end

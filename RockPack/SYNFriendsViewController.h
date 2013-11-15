@@ -9,16 +9,13 @@
 #import "SYNAbstractViewController.h"
 @import UIKit;
 
-@interface SYNFriendsViewController : SYNAbstractViewController <UITextFieldDelegate>
+@interface SYNFriendsViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView* friendsCollectionView;
 @property (nonatomic, strong) IBOutlet UILabel* preLoginLabel;
 @property (nonatomic, strong) IBOutlet UIButton* facebookLoginButton;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activityIndicator;
-@property (nonatomic, strong) IBOutlet UITextField* searchField;
 
-
-@property (nonatomic, strong) IBOutlet UILabel* followInviteLabel;
 
 -(IBAction)facebookLoginPressed:(id)sender;
 
