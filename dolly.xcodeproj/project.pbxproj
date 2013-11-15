@@ -5292,8 +5292,6 @@
 				BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */,
 				1F356183175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.h */,
 				1F356184175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m */,
-				BE21EEB016FB56070067223B /* SYNPaddedUITextField.h */,
-				BE21EEB116FB56080067223B /* SYNPaddedUITextField.m */,
 			);
 			name = "Account Settings";
 			sourceTree = "<group>";
@@ -5314,9 +5312,11 @@
 		BE03A6D016F7840800245314 /* Secondary Tables */ = {
 			isa = PBXGroup;
 			children = (
-				BE21EE8416FA200C0067223B /* Specific Fields */,
 				BE21EE7A16F9FF520067223B /* SYNAccountSettingBasicController.h */,
 				BE21EE7B16F9FF520067223B /* SYNAccountSettingBasicController.m */,
+				BE21EEB016FB56070067223B /* SYNPaddedUITextField.h */,
+				BE21EEB116FB56080067223B /* SYNPaddedUITextField.m */,
+				BE21EE8416FA200C0067223B /* Specific Fields */,
 			);
 			name = "Secondary Tables";
 			sourceTree = "<group>";

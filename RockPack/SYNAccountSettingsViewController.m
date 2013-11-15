@@ -89,6 +89,7 @@
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
+    
     [self.tableView reloadData];
     
     self.tableView.backgroundView = nil;
@@ -313,9 +314,9 @@
                     self.dobPopover.popoverContentSize = dobController.datePicker.frame.size;
                     self.dobPopover.delegate = self;
                     
-                    
+                    NSLog(@"%@", NSStringFromCGRect(self.dobTableViewCell.frame));
                     [self.dobPopover presentPopoverFromRect: self.dobTableViewCell.frame
-                                                     inView: self.tableView
+                                                     inView: self.view
                                    permittedArrowDirections: UIPopoverArrowDirectionDown
                                                    animated: YES];
                 }
