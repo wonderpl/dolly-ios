@@ -272,9 +272,27 @@
 }
 
 
--(void)profileButtonTapped
+- (void) profileButtonTapped: (UIButton *) profileButton
 {
+    if(!profileButton)
+    {
+        AssertOrLog(@"No profileButton passed");
+        return; // did not manage to get the cell
+    }
     
+    id candidate = profileButton;
+    while (![candidate isKindOfClass:[SYNSearchResultsUserCell class]]) {
+        candidate = [candidate superview];
+    }
+    
+    if(![candidate isKindOfClass:[SYNSearchResultsUserCell class]])
+    {
+        AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
+        return; // did not manage to get the cell
+    }
+    SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
+    
+    [self viewProfileDetails:searchUserCell.channelOwner];
 }
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
