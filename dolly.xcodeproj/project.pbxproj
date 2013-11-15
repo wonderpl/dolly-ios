@@ -164,6 +164,7 @@
 		016191711782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542A18363ADC009B161C /* SYNTextFieldLogin.m */; };
 		0165542E18363C70009B161C /* SYNTextFieldLoginiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */; };
+		01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */; };
 		01677E0C16554AB500B1B1D8 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF616554AB500B1B1D8 /* ButtonBack.png */; };
 		01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */; };
 		01677E0E16554AB500B1B1D8 /* ButtonBackHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */; };
@@ -1680,6 +1681,8 @@
 		0165542A18363ADC009B161C /* SYNTextFieldLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLogin.m; sourceTree = "<group>"; };
 		0165542C18363C70009B161C /* SYNTextFieldLoginiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginiPhone.h; sourceTree = "<group>"; };
 		0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLoginiPhone.m; sourceTree = "<group>"; };
+		0165542F183646C8009B161C /* SYNTextFieldLoginDateiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginDateiPhone.h; sourceTree = "<group>"; };
+		01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLoginDateiPhone.m; sourceTree = "<group>"; };
 		01677DF616554AB500B1B1D8 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Assets/Images/ButtonBack.png; sourceTree = "<group>"; };
 		01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonBack@2x.png"; path = "Assets/Images/ButtonBack@2x.png"; sourceTree = "<group>"; };
 		01677DF816554AB500B1B1D8 /* ButtonBackHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackHighlighted.png; path = Assets/Images/ButtonBackHighlighted.png; sourceTree = "<group>"; };
@@ -3602,6 +3605,8 @@
 				0165542A18363ADC009B161C /* SYNTextFieldLogin.m */,
 				0165542C18363C70009B161C /* SYNTextFieldLoginiPhone.h */,
 				0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */,
+				0165542F183646C8009B161C /* SYNTextFieldLoginDateiPhone.h */,
+				01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */,
 			);
 			name = "Text Fields";
 			sourceTree = "<group>";
@@ -7764,6 +7769,7 @@
 				01AFF99A17EC91540002131A /* UIView+LLDBQuickLook.m in Sources */,
 				BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */,
 				0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */,
+				01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
 				BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */,
 				019CB6A8181187E80079DFCF /* SYNFadingFlowLayout.m in Sources */,
