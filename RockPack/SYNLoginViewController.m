@@ -427,7 +427,7 @@
                                 areYouNewLabel, registerButton, passwordForgottenLabel,
                                 passwordForgottenButton, termsAndConditionsLabel, dobView, emailInputField,
                                 registerNewUserButton, dividerImageView, faceImageButton, self.avatarImageView, sendEmailButton,
-                                wellSendYouLabel, termsAndConditionsLabelSide];
+                                wellSendYouLabel, termsAndConditionsLabelSide, self.genderSegmentedControl];
     
     for (UIView* control in controlsToHide)
     {
@@ -437,7 +437,9 @@
     termsAndConditionsButton.enabled = NO;
 
     self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x - 50.0, self.genderSegmentedControl.center.y);
+    
     dobView.center = CGPointMake(dobView.center.x - 50.0, dobView.center.y);
+    
     emailInputField.center = CGPointMake(emailInputField.center.x - 50.0, emailInputField.center.y);
     faceImageButton.center = CGPointMake(faceImageButton.center.x - 50.0, faceImageButton.center.y);
     self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0, self.avatarImageView.center.y);
@@ -623,6 +625,7 @@
                                                                        
                                                                        emailInputField.center = CGPointMake(emailInputField.center.x,
                                                                                                             emailInputField.center.y - self.elementsOffsetY);
+                                                                       
                                                                        dobView.center = CGPointMake(dobView.center.x,
                                                                                                     dobView.center.y - self.elementsOffsetY);
                                                                        
@@ -820,15 +823,17 @@
         
         dobView.center = CGPointMake(userNameInputField.center.x,
                                      dobView.center.y);
+        
         dobView.frame = CGRectIntegral(dobView.frame);
         
         self.genderSegmentedControl.center = CGPointMake(userNameInputField.center.x,
                                      self.genderSegmentedControl.center.y);
+        
         self.genderSegmentedControl.frame = CGRectIntegral(self.genderSegmentedControl.frame);
         
         facebookSignInButton.frame = CGRectMake(userNameInputField.frame.origin.x - 4.0, 322.0, facebookSignInButton.frame.size.width, facebookSignInButton.frame.size.height);
         facebookSignInButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        NSArray* loginForControls = @[emailInputField, userNameInputField, passwordInputField, dobView, registerNewUserButton];
+        NSArray* loginForControls = @[emailInputField, userNameInputField, passwordInputField, dobView, self.genderSegmentedControl, registerNewUserButton];
         float delay = 0.05;
         for (UIView* control in loginForControls)
         {

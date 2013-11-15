@@ -103,7 +103,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="55" userLabel="Final Register UIButton" customClass="SYNFormButton">
-                    <rect key="frame" x="355" y="636" width="316" height="39"/>
+                    <rect key="frame" x="355" y="626" width="316" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.73725490196078436" green="0.73333333333333328" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -378,6 +378,7 @@
         </view>
     </objects>
     <resources>
+        <image name="ButtonFacebookHighlighted.png" width="316" height="62"/>
         <image name="ButtonFacebookHighlighted.png" width="316" height="62"/>
         <image name="ButtonLoginHighlighted.png" width="113" height="54"/>
         <image name="ButtonRegister.png" width="113" height="54"/>
