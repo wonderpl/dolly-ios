@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNFriendsViewController">
             <connections>
                 <outlet property="activityIndicator" destination="14" id="15"/>
+                <outlet property="emptyFriendsImageView" destination="Mkh-zY-jHr" id="gea-7F-Fo2"/>
                 <outlet property="facebookLoginButton" destination="4" id="9"/>
                 <outlet property="friendsCollectionView" destination="7" id="11"/>
                 <outlet property="preLoginLabel" destination="6" id="10"/>
@@ -36,7 +37,7 @@
                     </connections>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4" userLabel="Button Facebook">
-                    <rect key="frame" x="345.5" y="386" width="241" height="44"/>
+                    <rect key="frame" x="348.5" y="386" width="230" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.20282146431773193" green="0.36072901349409808" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -54,15 +55,19 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mayberry is better with friends." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6" userLabel="We ll send...">
                     <rect key="frame" x="309" y="337" width="309" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                    <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <size key="shadowOffset" width="0.0" height="1"/>
+                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" id="14">
-                    <rect key="frame" x="505" y="280" width="20" height="20"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconFriendsEmpty.png" id="Mkh-zY-jHr">
+                    <rect key="frame" x="423" y="265" width="73" height="64"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" id="14">
+                    <rect key="frame" x="449" y="301" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,5 +77,6 @@
     </objects>
     <resources>
         <image name="ButtonFacebookFriendsHighlighted.png" width="280" height="45"/>
+        <image name="IconFriendsEmpty.png" width="73" height="64"/>
     </resources>
 </document>

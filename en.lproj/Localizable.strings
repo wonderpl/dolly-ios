@@ -135,6 +135,9 @@
 "friends_invite" = "Invite your friends to Rockpack";
 "friends_name_not_found" = "This person is not a\nfacebook friend";
 
+"friends_empty" = "You have no friends on Mayberry";
+"friends_invite" = "Mayberry is better with friends";
+"friends_loading" = "Loading your friends";
 // == One to One Sharing == //
 
 "sharing_object_sent" = "Your %@ has been sent";
