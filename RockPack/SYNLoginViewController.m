@@ -435,7 +435,8 @@
     }
     
     termsAndConditionsButton.enabled = NO;
-    
+
+    self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x - 50.0, self.genderSegmentedControl.center.y);
     dobView.center = CGPointMake(dobView.center.x - 50.0, dobView.center.y);
     emailInputField.center = CGPointMake(emailInputField.center.x - 50.0, emailInputField.center.y);
     faceImageButton.center = CGPointMake(faceImageButton.center.x - 50.0, faceImageButton.center.y);
@@ -625,6 +626,9 @@
                                                                        dobView.center = CGPointMake(dobView.center.x,
                                                                                                     dobView.center.y - self.elementsOffsetY);
                                                                        
+                                                                       self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x,
+                                                                                                                        self.genderSegmentedControl.center.y - self.elementsOffsetY);
+                                                                       
                                                                        memberLabel.center = CGPointMake(memberLabel.center.x,
                                                                                                         registerButton.center.y - 57.0);
                                                                        
@@ -686,7 +690,9 @@
                              self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0,
                                                                   self.avatarImageView.center.y);
                              
-                             self.genderSegmentedControl.alpha = 0.0;
+                             self.genderSegmentedControl.alpha = 1.0;
+                             self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x - 50.0,
+                                                          self.genderSegmentedControl.center.y);
                              
                              passwordForgottenButton.alpha = 1.0;
                              passwordForgottenLabel.alpha = 1.0;
@@ -816,6 +822,10 @@
                                      dobView.center.y);
         dobView.frame = CGRectIntegral(dobView.frame);
         
+        self.genderSegmentedControl.center = CGPointMake(userNameInputField.center.x,
+                                     self.genderSegmentedControl.center.y);
+        self.genderSegmentedControl.frame = CGRectIntegral(self.genderSegmentedControl.frame);
+        
         facebookSignInButton.frame = CGRectMake(userNameInputField.frame.origin.x - 4.0, 322.0, facebookSignInButton.frame.size.width, facebookSignInButton.frame.size.height);
         facebookSignInButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         NSArray* loginForControls = @[emailInputField, userNameInputField, passwordInputField, dobView, registerNewUserButton];
@@ -898,9 +908,13 @@
                              dobRect.origin.x = self.userNameInputField.frame.origin.x;
                              dobView.frame = dobRect;
                              
+                             self.genderSegmentedControl.alpha = 1.0;
+                             CGRect genderRect = self.genderSegmentedControl.frame;
+                             genderRect.origin.x = self.userNameInputField.frame.origin.x;
+                             self.genderSegmentedControl.frame = genderRect;
+                             
                              faceImageButton.alpha = 1.0;
                              self.avatarImageView.alpha = 1.0;
-                             self.genderSegmentedControl.alpha = 1.0;
                              CGRect faceRect = faceImageButton.frame;
                              faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
                              faceImageButton.frame = faceRect;
