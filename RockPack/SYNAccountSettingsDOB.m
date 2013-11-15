@@ -33,19 +33,19 @@
                                                             value: nil] build]];
     self.view.backgroundColor = [UIColor whiteColor];
     
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    CGRect frame = CGRectMake(0.0, 0.0f, 280.0, 280.0);
     
-    datePicker = [[UIDatePicker alloc] initWithFrame: CGRectMake(0.0, IS_IPHONE ? 64.0 : 0.0f, 280.0, 280.0)];
+    self.view.frame = frame;
+    
+    datePicker = [[UIDatePicker alloc] initWithFrame: frame];
     [datePicker setDatePickerMode: UIDatePickerModeDate];
     [self.view addSubview: datePicker];
     
     self.title = @"Choose a Date";
     
 }
+
+
 
 
 

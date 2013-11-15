@@ -21,6 +21,7 @@
 #import "SYNAccountSettingsPassword.h"
 #import "SYNAccountSettingBasicController.h"
 #import "SYNAccountSettingsUsername.h"
+#import "SYNMasterViewController.h"
 #import "SYNAppDelegate.h"
 #import "UIFont+SYNFont.h"
 #import "User.h"
@@ -314,9 +315,9 @@
                     self.dobPopover.popoverContentSize = dobController.datePicker.frame.size;
                     self.dobPopover.delegate = self;
                     
-                    NSLog(@"%@", NSStringFromCGRect(self.dobTableViewCell.frame));
+                    
                     [self.dobPopover presentPopoverFromRect: self.dobTableViewCell.frame
-                                                     inView: self.view
+                                                     inView: self.tableView
                                    permittedArrowDirections: UIPopoverArrowDirectionDown
                                                    animated: YES];
                 }
