@@ -86,10 +86,6 @@
     
 
     
-    // == Friends Page == //
-    
-    //SYNFriendsViewController* friendsViewController = [[SYNFriendsViewController alloc] initWithViewId: kFriendsViewId];
-    
     
     
     // == Activity Page == //

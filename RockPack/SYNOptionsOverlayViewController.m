@@ -11,6 +11,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNAccountSettingsViewController.h"
 #import "SYNDeviceManager.h"
+#import "SYNFriendsViewController.h"
 #import "UIFont+SYNFont.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
@@ -137,7 +138,18 @@ typedef enum {
             
         case OptionButtonTagFriends:
         {
-            
+            self.completeBlock = ^{
+              
+                
+                SYNFriendsViewController* friendsVC = [[SYNFriendsViewController alloc] init];
+                
+                UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
+                
+                currentVC.navigationController.navigationBarHidden = NO;
+                [currentVC.navigationController pushViewController: friendsVC
+                                                          animated: YES];
+                
+            };
         }
         break;
             
