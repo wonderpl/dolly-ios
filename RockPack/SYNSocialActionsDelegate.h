@@ -7,6 +7,7 @@
 //
 
 #import "SYNSocialButton.h"
+
 @import Foundation;
 
 @protocol SYNSocialActionsDelegate <NSObject>
@@ -16,7 +17,7 @@
 - (void) likeControlPressed: (SYNSocialButton *) socialButton;
 - (void) addControlPressed: (SYNSocialButton *) socialButton;
 
+//need to change
 @optional
-- (void)deleteVideoInstancePressed:(id)sender;
-
+- (void) videoButtonPressed: (id) cell;
 @end

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNOptionsOverlayViewController">
             <connections>
+                <outlet property="backgroundView" destination="opR-V4-ouC" id="QY1-yF-ZPI"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -14,74 +15,134 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wr-ir-MjY" userLabel="Feedback">
-                    <rect key="frame" x="275" y="466" width="60" height="60"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="opR-V4-ouC" userLabel="Background">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="ButtonMoreFeedback.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-tg-UgW" userLabel="Settings">
-                    <rect key="frame" x="275" y="318" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                </view>
+                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rf5-51-Bdd" userLabel="Logout">
+                    <rect key="frame" x="482" y="504" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="ButtonMoreSettings.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sw7-Ky-4PG" userLabel="Friends">
-                    <rect key="frame" x="482" y="318" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="ButtonMoreFriends.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fP2-H5-IS7" userLabel="Blog">
-                    <rect key="frame" x="723" y="466" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="ButtonMoreBlog.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5O-MS-iJJ" userLabel="Rate">
-                    <rect key="frame" x="482" y="466" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="ButtonMoreRate.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Af-Md-wwq" userLabel="About">
-                    <rect key="frame" x="723" y="318" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="ButtonMoreAbout.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPS-IW-ByN" userLabel="Help">
-                    <rect key="frame" x="275" y="625" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="ButtonMoreHelp.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rf5-51-Bdd" userLabel="Logout">
-                    <rect key="frame" x="482" y="625" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="qoY-IA-aV5"/>
+                        <constraint firstAttribute="width" constant="60" id="t1G-sp-kHU"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" image="ButtonMoreLogout.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sw7-Ky-4PG" userLabel="Friends">
+                    <rect key="frame" x="482" y="204" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="RIs-CV-3eO"/>
+                        <constraint firstAttribute="height" constant="60" id="pYo-Vq-8IH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreFriends.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wr-ir-MjY" userLabel="Feedback">
+                    <rect key="frame" x="242" y="354" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="3AW-Dq-2Tf"/>
+                        <constraint firstAttribute="width" constant="60" id="9Ph-EJ-oGQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreFeedback.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BY2-tg-UgW" userLabel="Settings">
+                    <rect key="frame" x="242" y="204" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="YjL-kI-kHF"/>
+                        <constraint firstAttribute="width" constant="60" id="xkZ-LM-WEo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreSettings.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fP2-H5-IS7" userLabel="Blog">
+                    <rect key="frame" x="722" y="354" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="GgR-9z-pd7"/>
+                        <constraint firstAttribute="height" constant="60" id="YR7-cj-nYY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreBlog.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5O-MS-iJJ" userLabel="Rate">
+                    <rect key="frame" x="482" y="354" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="Neu-oY-9sG"/>
+                        <constraint firstAttribute="width" constant="60" id="Qtq-CZ-ULH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreRate.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Af-Md-wwq" userLabel="About">
+                    <rect key="frame" x="722" y="204" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="DoY-NZ-8zS"/>
+                        <constraint firstAttribute="height" constant="60" id="YYf-Uh-LlA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreAbout.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPS-IW-ByN" userLabel="Help">
+                    <rect key="frame" x="242" y="504" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="E3Z-XD-paq"/>
+                        <constraint firstAttribute="width" constant="60" id="Vuk-oF-yXO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreHelp.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="0.73725491762161255" green="0.73725491762161255" blue="0.73725491762161255" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="opR-V4-ouC" secondAttribute="trailing" id="0rH-Uf-hHE"/>
+                <constraint firstItem="opR-V4-ouC" firstAttribute="top" secondItem="2" secondAttribute="top" id="1QI-Uh-W2N"/>
+                <constraint firstItem="fP2-H5-IS7" firstAttribute="top" secondItem="3Af-Md-wwq" secondAttribute="bottom" constant="90" id="9Ue-LS-LW4"/>
+                <constraint firstAttribute="centerY" secondItem="q5O-MS-iJJ" secondAttribute="centerY" id="BS1-SD-hId"/>
+                <constraint firstItem="Sw7-Ky-4PG" firstAttribute="leading" secondItem="BY2-tg-UgW" secondAttribute="trailing" constant="180" id="BpY-IZ-l82"/>
+                <constraint firstAttribute="centerX" secondItem="rf5-51-Bdd" secondAttribute="centerX" id="FYr-iF-uRc"/>
+                <constraint firstItem="3Af-Md-wwq" firstAttribute="leading" secondItem="Sw7-Ky-4PG" secondAttribute="trailing" constant="180" id="KvL-rQ-dT6"/>
+                <constraint firstItem="q5O-MS-iJJ" firstAttribute="top" secondItem="Sw7-Ky-4PG" secondAttribute="bottom" constant="90" id="OSv-nu-zLN"/>
+                <constraint firstItem="rf5-51-Bdd" firstAttribute="top" secondItem="q5O-MS-iJJ" secondAttribute="bottom" constant="90" id="RPs-p9-YOJ"/>
+                <constraint firstAttribute="centerX" secondItem="q5O-MS-iJJ" secondAttribute="centerX" id="ZHY-21-RdS"/>
+                <constraint firstItem="q5O-MS-iJJ" firstAttribute="leading" secondItem="7wr-ir-MjY" secondAttribute="trailing" constant="180" id="eA1-n9-Xpz"/>
+                <constraint firstItem="rf5-51-Bdd" firstAttribute="leading" secondItem="aPS-IW-ByN" secondAttribute="trailing" constant="180" id="fWY-QX-2j2"/>
+                <constraint firstItem="fP2-H5-IS7" firstAttribute="leading" secondItem="q5O-MS-iJJ" secondAttribute="trailing" constant="180" id="fzK-1k-ElV"/>
+                <constraint firstItem="7wr-ir-MjY" firstAttribute="top" secondItem="BY2-tg-UgW" secondAttribute="bottom" constant="90" id="jY8-iv-qQV"/>
+                <constraint firstAttribute="centerY" secondItem="7wr-ir-MjY" secondAttribute="centerY" id="kOp-Oe-Ysy"/>
+                <constraint firstItem="aPS-IW-ByN" firstAttribute="top" secondItem="7wr-ir-MjY" secondAttribute="bottom" constant="90" id="ofx-Ft-xDW"/>
+                <constraint firstItem="opR-V4-ouC" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="sKn-O2-e86"/>
+                <constraint firstAttribute="bottom" secondItem="opR-V4-ouC" secondAttribute="bottom" id="uAa-Ya-fkc"/>
+                <constraint firstAttribute="centerY" secondItem="fP2-H5-IS7" secondAttribute="centerY" id="wVu-7y-Z1A"/>
+                <constraint firstAttribute="centerX" secondItem="Sw7-Ky-4PG" secondAttribute="centerX" id="xva-2I-Z0l"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>

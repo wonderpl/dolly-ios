@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
+
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 @property (nonatomic, weak) VideoInstance* videoInstance;

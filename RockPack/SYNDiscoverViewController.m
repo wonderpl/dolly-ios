@@ -337,9 +337,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                withTitle:subgenre.name
                  forType:kSearchTypeGenre];
     
+    
+    
 }
-
-
 
 
 #pragma mark - UITableView Delegate/Data Source
@@ -372,6 +372,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                withTitle:suggestion
                  forType:kSearchTypeTerm];
     
+    
+    
     [self closeAutocomplete];
 }
 
@@ -392,6 +394,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 {
     
     
+    if([self.searchBar.text isEqualToString:@""])
+    {
+        [self.searchBar resignFirstResponder];
+        [self closeAutocomplete];
+    }
     
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
@@ -411,7 +418,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // 2. if there are less than 3 chars currently typed do not perform search
     if ((range.location - range.length) < 2)
     {
-        // TODO: close suggestion box
+        [self closeAutocomplete];
+        
         return YES;
     }
     
@@ -500,6 +508,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                 forType:(kSearchType)type
 {
     
+    
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+    [self.searchBar resignFirstResponder];
+    
+    
+    
     if(IS_IPHONE)
     {
         // the hack below is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
@@ -516,10 +530,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                                  style:UIBarButtonItemStyleBordered
                                                                                 target:nil
                                                                                 action:nil];
-        
-        
-        
-        
         
         
     }

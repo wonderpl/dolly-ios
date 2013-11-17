@@ -31,7 +31,4 @@ SYNSocialActionsDelegate, UITextFieldDelegate, UITextViewDelegate>
 - (BOOL) isFavouritesChannel;
 - (void) refreshFavouritesChannel;
 
-- (IBAction)followControlPressed:(id)sender;
-- (IBAction)shareControlPressed:(id)sender;
-
 @end

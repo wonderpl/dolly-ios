@@ -18,7 +18,7 @@
 #import "SYNAccountSettingsFullNameInput.h"
 #import "SYNAccountSettingsGender.h"
 #import "SYNAccountSettingsLocation.h"
-#import "SYNAccountSettingsMainTableViewController.h"
+#import "SYNAccountSettingsViewController.h"
 #import "SYNAccountSettingsPassword.h"
 #import "SYNAccountSettingsPushNotifications.h"
 #import "SYNAccountSettingsShareSettings.h"
@@ -29,49 +29,28 @@
 #import "User.h"
 
 
-@interface SYNAccountSettingsMainTableViewController ()
+@interface SYNAccountSettingsViewController ()
 
-@property (nonatomic, strong) NSArray* dataItems2ndSection;
 @property (nonatomic, strong) UIPopoverController* dobPopover;
 @property (nonatomic, weak) SYNAppDelegate* appDelegate;
 @property (nonatomic, weak) UITableViewCell* dobTableViewCell;
+
+// only for iPad
+@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+
 @property (nonatomic, weak) User* user;
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
 
 @end
 
 
-@implementation SYNAccountSettingsMainTableViewController
+@implementation SYNAccountSettingsViewController
 
-@synthesize dataItems2ndSection, appDelegate, user;
+@synthesize appDelegate, user;
 
 #pragma mark - Object lifecycle
 
-- (id) init
-{
-    if ((self = [super initWithStyle: UITableViewStyleGrouped]))
-    {
-        
-        appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        user = appDelegate.currentUser;
-        
-        
-        NSMutableArray* conditionalDataItems = [[NSMutableArray alloc] initWithCapacity:3];
-        
-        if(user.loginOriginValue == LoginOriginRockpack) // only rockpack users can change their password for now
-        {
-            [conditionalDataItems addObject:NSLocalizedString (@"Change Password", nil)];
-        }
-        
-        [conditionalDataItems addObjectsFromArray:@[NSLocalizedString (@"About", nil), NSLocalizedString (@"Logout", nil)]];
-        
-        dataItems2ndSection = [NSArray arrayWithArray:conditionalDataItems];
-        
-        self.title = NSLocalizedString (@"settings_popover_title" , nil);
-    }
-    
-    return self;
-}
+
 
 
 - (void) dealloc
@@ -87,6 +66,19 @@
 {
     [super viewDidLoad];
     
+    appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    user = appDelegate.currentUser;
+    
+    // iPhone is pushed on to the navigation stack
+    if(IS_IPAD)
+        self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
+    
+    
+    
+    
+    self.title = NSLocalizedString (@"settings_popover_title" , nil);
+    
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
     
@@ -95,36 +87,15 @@
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    self.preferredContentSize = CGSizeMake(380, 476);
 
     self.tableView.scrollEnabled = IS_IPHONE;
     self.tableView.scrollsToTop = NO;
-    self.tableView.accessibilityLabel = @"Settings Table";
-    
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
-    titleLabel.text = NSLocalizedString (@"settings_popover_title", nil);
-    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor whiteColor];
-    titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
     
     
-    UIView * labelContentView = [[UIView alloc]init];
-    [labelContentView addSubview:titleLabel];
-    
-    self.navigationItem.titleView = labelContentView;
 }
 
 
-- (void) forcePopoverSize
-{
-    CGSize currentSetSizeForPopover = self.preferredContentSize;
-    CGSize fakeMomentarySize = CGSizeMake(currentSetSizeForPopover.width - 1.0f, currentSetSizeForPopover.height - 1.0f);
-    self.preferredContentSize = fakeMomentarySize;
-    self.preferredContentSize = currentSetSizeForPopover;
-}
+
 
 
 - (void) viewWillAppear: (BOOL) animated
@@ -135,15 +106,6 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    
-    
-}
-
-
-- (void) viewDidAppear: (BOOL) animated
-{
-    [super viewDidAppear: animated];
-    
     
 }
 
@@ -166,8 +128,8 @@
     }
     else
     {
-        // second section
-        return dataItems2ndSection.count;
+        // Change Passwork
+        return 1;
     }
     
 }
@@ -191,16 +153,18 @@
         
         switch (indexPath.row)
         {
-                // first and last name
+            // First and Last Name
             case 0:
+                
                 cell.imageView.image = [UIImage imageNamed: @"IconFullname.png"];
             
                 cell.textLabel.text = ![user.fullName isEqualToString:@""] ? user.fullName : NSLocalizedString(@"full_name", nil);
                 cell.detailTextLabel.text = user.fullNameIsPublicValue ? NSLocalizedString (@"Public" , nil) : NSLocalizedString (@"Private" , nil);
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
                 break;
                 
-                // username
+            // Username
             case 1:
                 cell.imageView.image = [UIImage imageNamed: @"IconUsername.png"];
                 cell.textLabel.text = user.username;
@@ -208,7 +172,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // email
+            // Email
             case 2:
                 if ([user.emailAddress isEqualToString:@""])
                 {
@@ -223,7 +187,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // locale
+            // Locale
             case 3:
                 if ([user.locale isEqualToString:@"en-gb"])
                 {
@@ -239,7 +203,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // gender
+            // Gender
             case 4:
                 if (user.genderValue == GenderUndecided)
                 {
@@ -255,7 +219,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
                 
-                // DOB
+            // DOB
             case 5:
                 if (!user.dateOfBirth)
                     cell.textLabel.text = NSLocalizedString (@"Date of Birth", nil);
@@ -284,14 +248,11 @@
                                                          reuseIdentifier: CellIdentifier];
         }
         
-        cell.textLabel.text = (NSString*)dataItems2ndSection[indexPath.row];
+        cell.textLabel.text = NSLocalizedString (@"Change Password", nil);
         cell.textLabel.font = [UIFont lightCustomFontOfSize:16.0];
         cell.textLabel.center = CGPointMake(0, 0);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        if (indexPath.row != self.dataItems2ndSection.count - 1) // if its not the last element which is always the Logout button
-        {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
     }
     
     return cell;
@@ -383,26 +344,7 @@
     }
     else
     {
-        switch (indexPath.row)
-        { 
-            case 0:
-                if(self.dataItems2ndSection.count == 2)
-                    [self.navigationController pushViewController: [[SYNAccountSettingsAbout alloc] init] animated: YES];
-                else
-                    [self.navigationController pushViewController: [[SYNAccountSettingsPassword alloc] init] animated: YES];
-                break;
-                
-            case 1:
-                if(self.dataItems2ndSection.count == 2)
-                    [self showLogoutAlert];
-                else
-                    [self.navigationController pushViewController: [[SYNAccountSettingsAbout alloc] init] animated: YES];
-                break;
-                
-            case 2:
-                [self showLogoutAlert];
-                break;
-        }
+        [self.navigationController pushViewController: [[SYNAccountSettingsPassword alloc] init] animated: YES];
     }
     
     [self.tableView deselectRowAtIndexPath: indexPath
@@ -410,29 +352,9 @@
 }
 
 
-- (void) showLogoutAlert
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString (@"Logout", nil)
-                                                    message: NSLocalizedString (@"Are you sure you want to Logout?", nil)
-                                                   delegate: self
-                                          cancelButtonTitle: NSLocalizedString (@"Cancel", nil)
-                                          otherButtonTitles: NSLocalizedString (@"Logout", nil), nil];
-    [alert show];
-}
 
 
-- (void) alertView: (UIAlertView *) alertView
-         clickedButtonAtIndex: (NSInteger) buttonIndex
-{
-	if (buttonIndex == 0) { // cancel
-		
-	}
-	else
-    { // logout
-        [[NSNotificationCenter defaultCenter] postNotificationName: kAccountSettingsLogout
-                                                            object: self];
-	}
-}
+#pragma mark - DOB 
 
 
 - (void) datePickerValueChanged: (UIDatePicker*) datePicker

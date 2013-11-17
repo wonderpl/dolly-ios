@@ -8,7 +8,11 @@
 
 #import "SYNOptionsOverlayViewController.h"
 #import "SYNAppDelegate.h"
+#import "SYNMasterViewController.h"
+#import "SYNAccountSettingsViewController.h"
+#import "SYNDeviceManager.h"
 
+typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
     
     OptionButtonTagSettings = 1,
@@ -24,14 +28,17 @@ typedef enum {
 
 
 @interface SYNOptionsOverlayViewController ()
-{
-    SYNAppDelegate* appDelegate;
-}
 
+@property (nonatomic, copy) TriggerActionOnCompleteBlock completeBlock;
+@property (nonatomic, strong) IBOutlet UIView* backgroundView;
 
 @end
 
+
+
+
 @implementation SYNOptionsOverlayViewController
+
 
 
 
@@ -39,7 +46,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     
     for (UIView* sView in self.view.subviews) {
         
@@ -50,46 +57,134 @@ typedef enum {
                          forControlEvents:UIControlEventTouchUpInside];
         }
     }
+    
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
+    [self.backgroundView addGestureRecognizer:tapGesture];
+    
+}
+
+-(void)backgroundTapped:(UITapGestureRecognizer*)tapGesture
+{
+    [self removeFromScreen];
 }
 
 -(void)optionButtonPressed:(UIButton*)buttonPressed
 {
+    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     switch (buttonPressed.tag)
     {
         case OptionButtonTagSettings:
-            
-            break;
+        {
+            self.completeBlock = ^{
+                
+                SYNAccountSettingsViewController* accountSettingsVC = [[SYNAccountSettingsViewController alloc] init];
+                
+                if(IS_IPAD)
+                {
+                    [appDelegate.masterViewController addOverlayController:accountSettingsVC
+                                                                  animated:YES];
+                }
+                else
+                {
+                    UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
+                    currentVC.navigationController.navigationBarHidden = NO;
+                    [currentVC.navigationController pushViewController:accountSettingsVC
+                                                                               animated:YES];
+                }
+                
+                
+            };
+        }
+        break;
             
         case OptionButtonTagFriends:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagAbout:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagFeedback:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagRate:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagBlog:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagHelp:
+        {
             
-            break;
+        }
+        break;
             
         case OptionButtonTagLogout:
+        {
             [appDelegate logout];
-            break;
+        }
+        break;
             
     }
+    
+    [self removeFromScreen];
+       
+}
+
+-(void)removeFromScreen
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        
+        self.view.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        
+        // trigger the nessesary action on fade out
+        if(self.completeBlock)
+            self.completeBlock();
+        
+        
+        // then remove since removing before the block call will release the instance
+        //[self.view removeFromSuperview];
+        [self removeFromParentViewController];
+        
+        
+    }];
+    
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+}
+
+-(void)finishingPresentation
+{
+    if(self.completeBlock)
+        self.completeBlock();
+}
+
+-(void)dealloc
+{
+    self.completeBlock = nil;
 }
 
 @end

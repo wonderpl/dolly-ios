@@ -24,9 +24,12 @@
 #import "SYNYouHeaderView.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
+#import "SYNOptionsOverlayViewController.h"
 #import "UIImageView+WebCache.h"
+#import "SYNMasterViewController.h"
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
+#import "SYNAccountSettingsViewController.h"
 
 @import QuartzCore;
 
@@ -99,6 +102,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
+
 @property (strong, nonatomic) UIColor *greyColor;
 @property (strong, nonatomic) UIColor *tabTextColor;
 
@@ -1553,6 +1557,23 @@
 - (IBAction)moreButtonTapped:(id)sender
 {
     
+    
+    SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
+    
+    // Set frame to full screen
+    CGRect vFrame = optionsVC.view.frame;
+    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+    optionsVC.view.frame = vFrame;
+    optionsVC.view.alpha = 0.0f;
+    
+    
+    [appDelegate.masterViewController addChildViewController:optionsVC];
+    [appDelegate.masterViewController.view addSubview:optionsVC.view];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        optionsVC.view.alpha = 1.0f;
+    }];
+    
 }
 
 #pragma mark - Searchbar delegates
@@ -1761,7 +1782,7 @@
                                                           userInfo: @{kChannel : self.followCell.channel}];
         
         //Need to refresh the cell
-        if (self.followCell.channel.subscribedByUserValue)
+        if (self.followCell.channel.subscribedByUserValue == YES)
         {
             [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
         }

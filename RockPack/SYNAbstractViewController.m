@@ -279,7 +279,7 @@
 }
 
 
-- (void) videoOverlayDidDissapear
+- (void) videoOverlayDidDisappear
 {
     // to be implemented by child
 }
@@ -437,6 +437,8 @@
 
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
+    
+    
     if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
     {
         // Get the videoinstance associated with the control pressed
@@ -508,6 +510,7 @@
             UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
             CGRect keyWindowRect = [keyWindow bounds];
             UIGraphicsBeginImageContextWithOptions(keyWindowRect.size, YES, 0.0f);
+            
             CGContextRef context = UIGraphicsGetCurrentContext();
             [keyWindow.layer
              renderInContext: context];

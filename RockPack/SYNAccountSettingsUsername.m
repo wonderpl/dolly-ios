@@ -31,37 +31,6 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
 
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage* backButtonImage = [UIImage imageNamed: @"ButtonAccountBackDefault.png"];
-    UIImage* backButtonHighlightedImage = [UIImage imageNamed: @"ButtonAccountBackHighlighted.png"];
-    
-    
-    [backButton setImage: backButtonImage
-                forState: UIControlStateNormal];
-    
-    [backButton setImage: backButtonHighlightedImage
-                forState: UIControlStateHighlighted];
-    
-    [backButton addTarget:self action:@selector(didTapBackButton:) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0, 0.0, backButtonImage.size.width, backButtonImage.size.height);
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    self.navigationItem.leftBarButtonItem = backButtonItem;
-    
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame: CGRectMake( -(self.preferredContentSize.width * 0.5), -15.0, self.preferredContentSize.width, 40.0)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor colorWithRed: (28.0/255.0) green: (31.0/255.0) blue: (33.0/255.0) alpha: (1.0)];
-    titleLabel.text = NSLocalizedString (@"settings_popover_username_title", nil);
-    titleLabel.font = [UIFont regularCustomFontOfSize:18.0];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor whiteColor];
-    titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-    
-    
-    UIView * labelContentView = [[UIView alloc]init];
-    [labelContentView addSubview:titleLabel];
-    
-    self.navigationItem.titleView = labelContentView;
     
     self.errorLabel.text = @"Your username can only be changed once.";
     

@@ -119,6 +119,8 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
+    
+//    [self.feedCollectionView.collectionViewLayout invalidateLayout];
 
     // Google analytics support
     [self updateAnalytics];
@@ -136,37 +138,10 @@ typedef void(^FeedDataErrorBlock)(void);
     {
         [self loadAndUpdateFeedData];
     }
-    
-    
 }
 
 
-
-#pragma mark - Container Scrol Delegates
-
-- (void) didMoveToParentViewController: (UIViewController *) parent
-{
-    if (parent == nil)
-    {
-        // Removed from parent
-        self.feedCollectionView.scrollsToTop = NO;
-    }
-    else
-    {
-        // Added to parent
-        [self updateAnalytics];
-        
-        self.feedCollectionView.scrollsToTop = YES;
-
-        // if the user has not pressed load more
-        if (self.dataRequestRange.location == 0)
-        {
-            [self resetDataRequestRange]; // just in case the length is less than standard
-            
-            [self loadAndUpdateFeedData];
-        }
-    }
-}
+#pragma mark - Container Scroll Delegates
 
 - (void) updateAnalytics
 {
@@ -194,6 +169,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) loadAndUpdateOriginalFeedData
 {
+    NSLog(@"-------loadAndUpdateOriginalFeedData");
     [self resetDataRequestRange];
     [self loadAndUpdateFeedData];
 }
@@ -201,6 +177,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) loadAndUpdateFeedData
 {
+    NSLog(@"-------loadAndUpdateFeedData");
     self.loadingMoreContent = YES;
     
     if (!appDelegate.currentOAuth2Credentials.userId)
@@ -305,15 +282,14 @@ typedef void(^FeedDataErrorBlock)(void);
     [self.feedCollectionView reloadData];
     
     [self loadAndUpdateFeedData];
-    
 }
 
-#pragma mark - Empty genre message handling
 
 #pragma mark - Fetch Feed Data
 
 - (void) fetchAndDisplayFeedItems
 {
+    NSLog(@"-------fetchAndDisplayFeedItems");
     [self fetchVideoItems];
     
     [self fetchChannelItems];
@@ -325,7 +301,7 @@ typedef void(^FeedDataErrorBlock)(void);
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     // if the aggregate has a parent FeedItem then it should NOT be displayed since it is going to be part of an aggregate...
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\" AND aggregate == nil", self.viewId]]; // kFeedViewId
+    NSPredicate* predicate = [NSPredicate predicateWithFormat: [NSString stringWithFormat: @"viewId == \"%@\" AND aggregate == nil", self.viewId]]; // kFeedViewId
  
     fetchRequest.predicate = predicate;
 
@@ -381,7 +357,6 @@ typedef void(^FeedDataErrorBlock)(void);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self sortVideosForPlaylist];
     });
-    
 }
 
 
@@ -502,7 +477,6 @@ typedef void(^FeedDataErrorBlock)(void);
         NSMutableArray* channelsMutArray = [NSMutableArray array];
         
         // NOTE: the data containes either an aggragate or a single item, handle both cases here
-        
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
         {
             for (FeedItem* childFeedItem in feedItem.feedItems)
@@ -515,7 +489,6 @@ typedef void(^FeedDataErrorBlock)(void);
         {
             channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
             [channelsMutArray addObject:channel];
-            
         }
         
         cell.collectionData = [NSArray arrayWithArray:channelsMutArray];
@@ -531,7 +504,6 @@ typedef void(^FeedDataErrorBlock)(void);
                                      forState: UIControlStateNormal
                              placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                       options: SDWebImageRetryFailed];
-
 
     return cell;
 }
@@ -551,8 +523,16 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     else
     {
-        size.width = IS_IPAD ? 927.0f : 320.0f;
-        size.height = IS_IPAD ? 330.0f : 264.0f;
+        if (SYNDeviceManager.sharedInstance.isPortrait)
+        {
+            size.width = IS_IPAD ? 671.0f : 320.0f;
+            size.height = IS_IPAD ? 330.0f : 264.0f;
+        }
+        else
+        {
+            size.width = IS_IPAD ? 927.0f : 320.0f;
+            size.height = IS_IPAD ? 330.0f : 264.0f;
+        }
     }
     
     return size;
@@ -582,7 +562,6 @@ typedef void(^FeedDataErrorBlock)(void);
 {
     CGSize footerSize = CGSizeZero;
     
-    
     if  (section == (self.feedItemsData.count - 1) && // only the last section can have a loader
         (self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable)) 
     {
@@ -594,18 +573,14 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 // Used for the collection view header
 - (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
             viewForSupplementaryElementOfKind: (NSString *) kind
                                   atIndexPath: (NSIndexPath *) indexPath
 {
-    
     UICollectionReusableView *supplementaryView = nil;
     
     // Work out the day
-    
-    
     // In the 'name' attribut of the sectionInfo we have actually the keypath data (i.e in this case Date without time)
     
     // TODO: We might want to optimise this instead of creating a new date formatter each time
@@ -678,7 +653,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) videoOverlayDidDissapear
+- (void) videoOverlayDidDisappear
 {
     [self.feedCollectionView reloadData];
 }
@@ -827,7 +802,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
@@ -900,7 +874,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
-    
     [super scrollViewDidScroll:scrollView];
     
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
