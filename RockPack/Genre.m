@@ -34,6 +34,20 @@
     
     self.uniqueId = uniqueId;
     
+    NSString* colourHash = [dictionary objectForKey:@"colour"
+                                        withDefault:@"#00ff00"]; // default to Green
+    
+    if(![colourHash hasPrefix:@"#"])
+        colourHash = [NSString stringWithFormat:@"0x%@", colourHash];
+    else
+        colourHash = [colourHash stringByReplacingOccurrencesOfString:@"#" withString:@"0x"];
+    
+    NSScanner* scanner = [NSScanner scannerWithString:colourHash];
+    
+    unsigned int intValue;
+    [scanner scanHexInt:&intValue];
+    
+    self.colorValue = intValue;
     
     self.name = [dictionary upperCaseStringForKey: @"name"
                                       withDefault: @"-?-"];

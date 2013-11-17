@@ -6,8 +6,8 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNAccountSettingsTextInputController.h"
+#import "SYNAccountSettingBasicController.h"
 
-@interface SYNAccountSettingsPassword : SYNAccountSettingsTextInputController
+@interface SYNAccountSettingsPassword : SYNAccountSettingBasicController
 
 @end

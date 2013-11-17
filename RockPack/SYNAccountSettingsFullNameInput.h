@@ -6,9 +6,9 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNAccountSettingsTextInputController.h"
+#import "SYNAccountSettingBasicController.h"
 
-@interface SYNAccountSettingsFullNameInput : SYNAccountSettingsTextInputController <UITableViewDataSource, UITableViewDelegate>
+@interface SYNAccountSettingsFullNameInput : SYNAccountSettingBasicController <UITableViewDataSource, UITableViewDelegate>
 
 
 

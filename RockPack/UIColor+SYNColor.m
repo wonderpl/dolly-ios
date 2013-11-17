@@ -130,7 +130,8 @@
 }
 
 
-+(UIColor *) dollyTabColorSelectedText{
++(UIColor *) dollyTabColorSelectedText
+{
    return [UIColor colorWithRed:130.0f/255.0f
                     green:130.0f/255.0f
                      blue:130.0f/255.0f

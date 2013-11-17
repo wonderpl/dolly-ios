@@ -22,7 +22,7 @@
                 <view contentMode="scaleToFill" id="tK4-qK-OGT">
                     <rect key="frame" x="0.0" y="0.0" width="734" height="57"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.73725491762161255" green="0.73725491762161255" blue="0.73725491762161255" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1ZL-Hs-93l" userLabel="Create Button">
                     <rect key="frame" x="654" y="0.99999999999999989" width="58" height="58"/>
@@ -79,11 +79,11 @@
                     </connections>
                 </collectionView>
             </subviews>
-            <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
-        <image name="ButtonConfirmYellowHighlighted.png" width="64" height="49"/>
+        <image name="ButtonConfirmYellowHighlighted.png" width="44" height="45"/>
     </resources>
 </document>

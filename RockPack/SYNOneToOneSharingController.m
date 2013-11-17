@@ -17,7 +17,6 @@
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
-#import "SYNFriendThumbnailCell.h"
 #import "SYNOneToOneFriendCell.h"
 #import "SYNOneToOneSharingController.h"
 #import "SYNOneToOneSharingFriendCell.h"

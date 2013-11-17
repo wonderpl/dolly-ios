@@ -9,6 +9,7 @@
 #import "SYNSearchResultsUserCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIButton+WebCache.h"
+#import "Friend.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation SYNSearchResultsUserCell
@@ -61,7 +62,7 @@
 
 - (void) setChannelOwner: (ChannelOwner *) channelOwner
 {
-    _channelOwner = channelOwner;
+    _channelOwner = channelOwner; // can be friend
     
     if (!_channelOwner)
     {
@@ -70,8 +71,8 @@
         return;
     }
     
-    
     self.followButton.dataItemLinked = _channelOwner;
+    
     
     
     [self.userThumbnailButton setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]

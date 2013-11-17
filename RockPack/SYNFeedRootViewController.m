@@ -46,7 +46,6 @@ typedef void(^FeedDataErrorBlock)(void);
 @property (nonatomic, strong) NSDictionary* feedChannelsById;
 @property (nonatomic, strong) NSDictionary* feedItemByPosition;
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
-@property (nonatomic, strong) NSArray* videosInOrderArray;
 
 @end
 
@@ -73,11 +72,11 @@ typedef void(^FeedDataErrorBlock)(void);
     [super viewDidLoad];
 
     self.feedItemsData = @[];
-    self.videosInOrderArray = @[];
 
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(90.0f, 0.0f, 10.0f, 0.0f);
 
-    [self removePopupMessage];
+    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
+                   withLoader: YES];
 
     // Register XIBs for Cell
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
@@ -119,8 +118,6 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
-    
-//    [self.feedCollectionView.collectionViewLayout invalidateLayout];
 
     // Google analytics support
     [self updateAnalytics];
@@ -130,11 +127,8 @@ typedef void(^FeedDataErrorBlock)(void);
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
-
-    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
-                   withLoader: YES];
     
-    if([self class] == [SYNFeedRootViewController class])
+    if ([self class] == [SYNFeedRootViewController class])
     {
         [self loadAndUpdateFeedData];
     }
@@ -169,7 +163,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) loadAndUpdateOriginalFeedData
 {
-    NSLog(@"-------loadAndUpdateOriginalFeedData");
     [self resetDataRequestRange];
     [self loadAndUpdateFeedData];
 }
@@ -177,7 +170,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) loadAndUpdateFeedData
 {
-    NSLog(@"-------loadAndUpdateFeedData");
     self.loadingMoreContent = YES;
     
     if (!appDelegate.currentOAuth2Credentials.userId)
@@ -289,9 +281,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) fetchAndDisplayFeedItems
 {
-    NSLog(@"-------fetchAndDisplayFeedItems");
     [self fetchVideoItems];
-    
     [self fetchChannelItems];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -306,11 +296,12 @@ typedef void(^FeedDataErrorBlock)(void);
     fetchRequest.predicate = predicate;
 
     fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"dateAdded" ascending: NO],
-                                     [[NSSortDescriptor alloc] initWithKey: @"position" ascending: NO]];
+                                     [[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
     
     NSError* error;
     
-    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
+    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                error: &error];
     if (!resultsArray)
         return;
     
@@ -351,12 +342,6 @@ typedef void(^FeedDataErrorBlock)(void);
     self.feedItemsData = sortedItemsArray;
     
     [self.feedCollectionView reloadData];
-    
-    // put the videos in order
-    self.videosInOrderArray = @[];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self sortVideosForPlaylist];
-    });
 }
 
 
@@ -368,21 +353,28 @@ typedef void(^FeedDataErrorBlock)(void);
     fetchRequest.entity = [NSEntityDescription entityForName: kVideoInstance
                                       inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
+    NSPredicate* predicate = [NSPredicate predicateWithFormat: [NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
     fetchRequest.predicate = predicate;
     
+//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey: @"position"
+//                                                                     ascending: YES];
+//    fetchRequest.sortDescriptors = @[sortDescriptor];
+    
     NSError* error;
-    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error: &error];
+    NSArray *resultsArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                error: &error];
+    
     if (!resultsArray)
         return;
     
     NSMutableDictionary* mutDictionary = [[NSMutableDictionary alloc] initWithCapacity:resultsArray.count];
+    
     for (VideoInstance* vi in resultsArray) {
         mutDictionary[vi.uniqueId] = vi;
     }
     
-    self.feedVideosById = [NSDictionary dictionaryWithDictionary:mutDictionary];
+    self.feedVideosById = [NSDictionary dictionaryWithDictionary: mutDictionary];
 }
 
 
@@ -890,45 +882,6 @@ typedef void(^FeedDataErrorBlock)(void);
     [super applicationWillEnterForeground: application];
     
     [self loadAndUpdateFeedData];
-}
-
-
-#pragma mark - Sort Method
-
-- (void) sortVideosForPlaylist
-{
-    NSMutableArray *ma = [NSMutableArray array]; // max should be the existing videos
-    
-    for (NSArray *section in self.feedItemsData)
-    {
-        for (FeedItem *fi in section)
-        {
-            if (fi.resourceTypeValue != FeedItemResourceTypeVideo)
-            {
-                continue;
-            }
-            
-            if (fi.itemTypeValue == FeedItemTypeLeaf)
-            {
-                [ma addObject: (self.feedVideosById)[fi.resourceId]];
-            }
-            else
-            {
-                for (FeedItem *cfi in fi.feedItems)
-                {
-                    // assumes that FeedItems are one level deep at the present moment (probably will not change for a while)
-                    if (cfi.resourceTypeValue != FeedItemResourceTypeVideo || cfi.itemTypeValue != FeedItemTypeLeaf)
-                    {
-                        continue;
-                    }
-                    
-                    [ma addObject: (self.feedVideosById)[cfi.resourceId]];
-                }
-            }
-        }
-    }
-    
-    self.videosInOrderArray = [NSArray arrayWithArray: ma];
 }
 
 

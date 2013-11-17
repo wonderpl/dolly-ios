@@ -33,7 +33,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController *accountSettingsPopover;
 
-@property (nonatomic, weak) UIViewController<SYNPopoverable> *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
+@property (nonatomic, weak) UIViewController *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
 
@@ -129,37 +129,43 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
-- (void) addOverlayController:(UIViewController<SYNPopoverable>*)abstractViewController animated:(BOOL)animated
+- (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController animated:(BOOL)animated
 {
-    if(!abstractViewController)
+    if(!overlayViewController)
     {
         AssertOrLog(@"Trying to add nil as an overlay controller");
         return;
     }
     
-    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
+    
+    
+    
+    UITapGestureRecognizer* tapGesture =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
+    
+    
+    // == Add Background View == //
+    
     [self.backgroundOverlayView addGestureRecognizer:tapGesture];
     
     self.backgroundOverlayView.alpha = 0.0f;
     
     [self.view addSubview:self.backgroundOverlayView];
     
-    [self addChildViewController:abstractViewController];
+    [self addChildViewController:overlayViewController];
     
-    [self.view addSubview:abstractViewController.view];
-    
-    self.overlayController = abstractViewController;
+    [self.view addSubview:overlayViewController.view];
     
     
+    self.overlayController = overlayViewController;
     
     // == Animate == //
     __block CGRect startFrame, endFrame;
     
-    startFrame = endFrame = abstractViewController.view.frame;
+    startFrame = endFrame = overlayViewController.view.frame;
     if(IS_IPHONE)
     {
         // push it to the bottom
-        
         startFrame.origin.y = startFrame.size.height;
         
     }
@@ -169,9 +175,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
         
         self.overlayController.view.alpha = 0.0;
+        
+        self.overlayController.view.layer.cornerRadius = 8.0f;
+        [self.overlayController.view setClipsToBounds:YES];
     }
     
-    abstractViewController.view.frame = startFrame;
+    overlayViewController.view.frame = startFrame;
     
     void(^AnimationsBlock)(void) = ^{
         
@@ -180,7 +189,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         if(IS_IPHONE)
         {
             endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
-            abstractViewController.view.frame = endFrame;
+            overlayViewController.view.frame = endFrame;
         }
         else
         {
@@ -243,7 +252,18 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     void (^FinishedBlock)(BOOL) = ^(BOOL finished) {
       
-        [wself.overlayController finishingPresentation];
+        UIViewController<SYNPopoverable> *popoverable;
+        if([self.overlayController isKindOfClass:[UINavigationController class]])
+        {
+            UINavigationController* navWrapper = ((UINavigationController*)wself.overlayController);
+            popoverable = (UIViewController<SYNPopoverable> *)navWrapper.viewControllers[0];
+            
+        }
+        else
+        {
+            popoverable = (UIViewController<SYNPopoverable> *)self.overlayController;
+        }
+        [popoverable finishingPresentation];
         
         [wself.overlayController.view removeFromSuperview];
         [wself.overlayController removeFromParentViewController];

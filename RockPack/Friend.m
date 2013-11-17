@@ -29,17 +29,13 @@
     
     instance.externalSystem = friendToCopy.externalSystem;
     
-    
     instance.externalUID = friendToCopy.externalUID;
     
-    
     instance.resourceURL = friendToCopy.resourceURL;
-    
     
     instance.hasIOSDevice = friendToCopy.hasIOSDevice;
     
     instance.email = friendToCopy.email;
-    
     
     instance.lastShareDate = friendToCopy.lastShareDate;
     

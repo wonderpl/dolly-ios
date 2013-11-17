@@ -1351,6 +1351,10 @@
                                                        fromUserId: self.currentUser.uniqueId
                                                 completionHandler: ^(id response) {
                                                     DebugLog(@"Mark as read succeeded");
+                                                    
+                                                    // TODO: Check that the bedge count is being handled correctly
+                                                    // Decrement the badge number (min zero)
+                                                    UIApplication.sharedApplication.applicationIconBadgeNumber = MAX((UIApplication.sharedApplication.applicationIconBadgeNumber - 1) , 0);
                                                 }
                                                      errorHandler: ^(id error) {
                                                     DebugLog(@"Mark as read failed");

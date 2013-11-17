@@ -29,12 +29,20 @@
                                                             label: @"Username"
                                                             value: nil] build]];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-
-    
-    self.errorLabel.text = @"Your username can only be changed once.";
     
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+    self.errorLabel.text = @"Your username can only be changed once.";
+}
+
+
+#pragma mark - Save 
+
 -(void)saveButtonPressed:(UIButton*)button
 {
     [self.inputField resignFirstResponder];

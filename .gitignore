@@ -28,3 +28,5 @@ sskeychain/
 Assets/Images/Icon\r
 
 /rockpack.xcodeproj/project.xcworkspace/xcshareddata/
+
+*.xccheckout

@@ -7,7 +7,9 @@
 //
 
 @import UIKit;
+#import "SYNPopoverable.h"
 
-@interface SYNAccountSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPopoverControllerDelegate>
+@interface SYNAccountSettingsViewController : UIViewController
+<UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPopoverControllerDelegate, SYNPopoverable>
 
 @end

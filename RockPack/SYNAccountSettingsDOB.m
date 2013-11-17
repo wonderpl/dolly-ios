@@ -21,21 +21,6 @@
 @synthesize datePicker;
 
 
-
-- (id) init
-{
-    self = [super init];
-    if (self)
-    {
-        datePicker = [[UIDatePicker alloc] initWithFrame: CGRectMake(0.0, IS_IPHONE ? 64.0 : 0.0f, 280.0, 280.0)];
-        
-        self.title = @"Choose a Date";
-    }
-    
-    return self;
-}
-
-
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -46,21 +31,22 @@
                                                            action: @"accountPropertyChanged"
                                                             label: @"Date of birth"
                                                             value: nil] build]];
-    
-    [self.view addSubview: datePicker];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
+    CGRect frame = CGRectMake(0.0, 0.0f, 280.0, 280.0);
+    
+    self.view.frame = frame;
+    
+    datePicker = [[UIDatePicker alloc] initWithFrame: frame];
     [datePicker setDatePickerMode: UIDatePickerModeDate];
+    [self.view addSubview: datePicker];
+    
+    self.title = @"Choose a Date";
+    
 }
 
 
-- (void) didTapBackButton: (id) sender
-{
-    if (self.navigationController.viewControllers.count > 1)
-    {
-        [self.navigationController popViewControllerAnimated: YES];
-    }
-}
+
+
 
 @end

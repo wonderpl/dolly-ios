@@ -15,6 +15,8 @@
 #import "SYNSearchResultsViewController.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
+
 @import QuartzCore;
 
 #define kAutocompleteTime 0.2
@@ -49,7 +51,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) SYNSearchResultsViewController* searchResultsController;
 
-@property (nonatomic, strong) NSDictionary* colorMapForCells;
 
 
 // only used on iPad
@@ -70,7 +71,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.colorMapForCells = @{};
     self.searchBar.layer.borderWidth = 1.0f;
     self.searchBar.layer.borderColor = [[UIColor whiteColor] CGColor];
     
@@ -240,20 +240,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
-    // create temporary colors
-    NSMutableDictionary* mutDictionary = @{}.mutableCopy;
-    for (Genre* genre in self.genres)
-    {
-        
-        CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-        CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-        CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-        UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-        
-        mutDictionary[genre.name] = color;
-        
-    }
-    self.colorMapForCells = [NSDictionary dictionaryWithDictionary:mutDictionary];
+    
     
     [self.categoriesCollectionView reloadData];
     
@@ -320,7 +307,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // if we are on the last cell of the section, hide the separator line
     categoryCell.separator.hidden = (BOOL)(indexPath.item == (currentGenre.subgenres.count - 1));
-    categoryCell.backgroundColor = self.colorMapForCells[currentGenre.name];
+    categoryCell.backgroundColor = [UIColor colorWithHex:currentGenre.colorValue];
     
     categoryCell.label.text = subgenre.name;
     
@@ -381,7 +368,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchBar
 {
-    //[searchbar setText: @""];
+    
     [searchBar setShowsCancelButton:YES animated:YES];
     return YES;
 }
@@ -389,6 +376,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:NO animated:YES];
+    
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
@@ -493,8 +481,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                              withComplete: processBlock
                                                                                  andError: errorBlock];
 }
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    
     
     
     [self dispatchSearch:searchBar.text
@@ -503,6 +493,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 
+#pragma mark - Perform Search
+
 - (void) dispatchSearch:(NSString*)searchTerm
               withTitle:(NSString*)title
                 forType:(kSearchType)type
@@ -510,8 +502,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     [self.searchBar setShowsCancelButton:NO animated:YES];
+    
     [self.searchBar resignFirstResponder];
     
+    [self.autocompleteTimer invalidate];
+    
+    [self closeAutocomplete];
     
     
     if(IS_IPHONE)
@@ -526,10 +522,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                              animated:YES];
         
         // hide the 'DISCOVER' text next to the back button as it appears by default
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                 style:UIBarButtonItemStyleBordered
-                                                                                target:nil
-                                                                                action:nil];
+        
         
         
     }

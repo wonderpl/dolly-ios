@@ -11,6 +11,8 @@
 #import "SYNMasterViewController.h"
 #import "SYNAccountSettingsViewController.h"
 #import "SYNDeviceManager.h"
+#import "SYNFriendsViewController.h"
+#import "UIFont+SYNFont.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -46,12 +48,32 @@ typedef enum {
 {
     [super viewDidLoad];
     
+    // start by a blank name as the tags are 1 indexed (don't ask why... mainly superstition)
+    NSArray* labelStrings = @[@"",
+                              @"Settings",
+                              @"Friends",
+                              @"About",
+                              @"Feedback",
+                              @"Rate",
+                              @"Blog",
+                              @"Help",
+                              @"Logout"];
     
     
-    for (UIView* sView in self.view.subviews) {
+    for (UIView* sView in self.view.subviews)
+    {
         
         if([sView isKindOfClass:[UIButton class]]) // sanity check
         {
+            
+            NSString* poperName = labelStrings[sView.tag];
+            
+            UILabel* l = [self createLabelForOptionButtonWithName:poperName];
+            
+            l.center = CGPointMake(30.0f, 75.0f);
+            
+            [sView addSubview:l];
+            
             [((UIButton*)sView) addTarget:self
                                    action:@selector(optionButtonPressed:)
                          forControlEvents:UIControlEventTouchUpInside];
@@ -61,6 +83,17 @@ typedef enum {
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [self.backgroundView addGestureRecognizer:tapGesture];
     
+}
+
+-(UILabel*)createLabelForOptionButtonWithName:(NSString*)name
+{
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.font = [UIFont lightCustomFontOfSize:14.0f];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = name;
+    [label sizeToFit];
+    return label;
 }
 
 -(void)backgroundTapped:(UITapGestureRecognizer*)tapGesture
@@ -82,15 +115,20 @@ typedef enum {
                 
                 if(IS_IPAD)
                 {
-                    [appDelegate.masterViewController addOverlayController:accountSettingsVC
+                    UINavigationController* wrapper =
+                    [[UINavigationController alloc] initWithRootViewController:accountSettingsVC];
+                    
+                    wrapper.view.frame = accountSettingsVC.view.frame;
+                    
+                    [appDelegate.masterViewController addOverlayController:wrapper
                                                                   animated:YES];
                 }
                 else
                 {
                     UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
                     currentVC.navigationController.navigationBarHidden = NO;
-                    [currentVC.navigationController pushViewController:accountSettingsVC
-                                                                               animated:YES];
+                    [currentVC.navigationController pushViewController: accountSettingsVC
+                                                              animated: YES];
                 }
                 
                 
@@ -100,7 +138,18 @@ typedef enum {
             
         case OptionButtonTagFriends:
         {
-            
+            self.completeBlock = ^{
+              
+                
+                SYNFriendsViewController* friendsVC = [[SYNFriendsViewController alloc] initWithViewId:kFriendsViewId];
+                
+                UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
+                
+                currentVC.navigationController.navigationBarHidden = NO;
+                [currentVC.navigationController pushViewController: friendsVC
+                                                          animated: YES];
+                
+            };
         }
         break;
             

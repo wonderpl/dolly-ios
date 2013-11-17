@@ -23,16 +23,6 @@
 
 @implementation SYNAccountSettingsFullNameInput
 
-#pragma mark - Object lifecycle
-
-- (void) dealloc
-{
-    // Defensive programming
-    self.inputField.delegate = nil;
-    self.lastNameInputField.delegate = nil;
-    self.tableView.delegate = nil;
-    self.tableView.dataSource = nil;
-}
 
 
 #pragma mark - View lifecycle
@@ -49,10 +39,17 @@
                                                             label: @"Full name"
                                                             value: nil] build]];
     
-    self.view.backgroundColor = [UIColor whiteColor];
 
-    self.inputField.tag = 1 ;
-    self.inputField.delegate = self;
+    
+    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.inputField.placeholder = @"First Name";
     
     self.lastNameInputField = [self createInputField];
     self.lastNameInputField.text = self.appDelegate.currentUser.lastName;
@@ -61,16 +58,15 @@
     self.lastNameInputField.tag = 2;
     self.lastNameInputField.delegate = self;
     
-    [self.scrollView addSubview:self.lastNameInputField];
+    [self.view addSubview:self.lastNameInputField];
+    
+    
+    self.lastNameInputField.placeholder = @"Last Name";
     
     CGRect tableViewFrame = CGRectMake(0.0,
-                                       self.lastNameInputField.frame.origin.y + 42.0,
-                                       320.0f,
+                                       self.lastNameInputField.frame.origin.y + 22.0,
+                                       self.view.frame.size.width,
                                        138.0);
-    if(IS_IPAD)
-    {
-        tableViewFrame.size.width = 378.0f;
-    }
     
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style: UITableViewStyleGrouped];
@@ -81,7 +77,7 @@
     self.tableView.backgroundView = nil;
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    [self.scrollView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     
     
     CGRect saveButtonRect = self.saveButton.frame;
@@ -91,16 +87,14 @@
     
     self.errorLabel.center = CGPointMake(self.errorLabel.center.x, self.saveButton.center.y + 60.0);
     self.errorLabel.frame = CGRectIntegral(self.errorLabel.frame);
-    
-    
-    self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
-    
-    
-    self.inputField.placeholder = @"First Name";
-    self.lastNameInputField.placeholder = @"Last Name";
-    
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.lastNameInputField.delegate = nil;
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
+}
 
 #pragma mark - Table view data source
 
