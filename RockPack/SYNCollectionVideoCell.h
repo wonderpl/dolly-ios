@@ -28,4 +28,7 @@
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
+
+-(void) setUpVideoTap;
+
 @end

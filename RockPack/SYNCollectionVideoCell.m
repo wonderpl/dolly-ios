@@ -25,6 +25,7 @@
     self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateVideoItemCell");
    
 
+    
 }
 
 #pragma mark - Social Callbacks
@@ -88,14 +89,16 @@
                           action:@selector(deleteVideoInstancePressed:)
                    forControlEvents:UIControlEventTouchUpInside];
 
+}
+
+-(void) setUpVideoTap
+{
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
                                                        action: @selector(showVideo)];
-    
     [self.imageView addGestureRecognizer: self.tap];
 
 }
-
 
 -(void)showVideo
 {
