@@ -855,8 +855,7 @@
                 [videoCountString appendString:@"- "];
             }
             
-            
-            [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)];
+            [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)];
             
             
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];

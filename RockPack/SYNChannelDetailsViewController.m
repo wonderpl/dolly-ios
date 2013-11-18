@@ -97,7 +97,6 @@ SYNChannelCoverImageSelectorDelegate>
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
-@property (strong, nonatomic) IBOutlet UITextField *txtFieldDescriptionEdit;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 @property (strong, nonatomic) IBOutlet UIView *viewCollectionSeperator;
@@ -166,20 +165,22 @@ SYNChannelCoverImageSelectorDelegate>
                    placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile.png"]
                             options: SDWebImageRetryFailed];
     
-
-    if (IS_IPHONE) {
+    
+    if (IS_IPHONE)
+    {
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(295,268-kHeightChange);
         self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
     }
     
-    if (IS_IPAD) {
-                self.videoCollectionViewLayoutIPadEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
-                self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(295, 268-kHeightChange);
-                self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
-//
+    if (IS_IPAD)
+    {
+        self.videoCollectionViewLayoutIPadEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
+        self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(295, 268-kHeightChange);
+        self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
+        //
     }
-
+    
     [self displayChannelDetails];
 }
 
@@ -200,7 +201,6 @@ SYNChannelCoverImageSelectorDelegate>
     self.btnDeleteChannel.transform = move;
     self.txtViewDescription.transform = move;
     self.txtFieldChannelName.transform = move;
-    self.txtFieldDescriptionEdit.transform = move;
     
 }
 
@@ -251,7 +251,8 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     //programmatically seting the edgeinset for iphone
-    if (IS_IPHONE) {
+    if (IS_IPHONE)
+    {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
     }
     
@@ -336,13 +337,15 @@ SYNChannelCoverImageSelectorDelegate>
     self.navigationController.navigationBarHidden = YES;
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated
+{
     
     
     
 }
 
--(void) setUpMode {
+-(void) setUpMode
+{
     
     
     NSLog(@"%d", self.mode);
@@ -377,7 +380,8 @@ SYNChannelCoverImageSelectorDelegate>
 -(void) displayChannelDetails
 {
     
-    if (IS_IPHONE) {
+    if (IS_IPHONE)
+    {
         [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
         [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
         [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
@@ -386,6 +390,10 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
+    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    [[self.txtFieldChannelName layer] setCornerRadius:0];
+    
     [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
     
     [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
@@ -511,7 +519,13 @@ SYNChannelCoverImageSelectorDelegate>
     
     // TODO: Implement rest if needed
     
-    NSLog(@"%f", scrollView.contentOffset.y);
+    
+    if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight)
+        && self.isLoadingMoreContent == NO)
+    {
+        [self loadMoreVideos];
+    }
+    
     
     [self moveHeader:scrollView.contentOffset.y];
     
@@ -545,7 +559,6 @@ SYNChannelCoverImageSelectorDelegate>
     self.btnDeleteChannel.transform = move;
     self.txtViewDescription.transform = move;
     self.txtFieldChannelName.transform = move;
-    self.txtFieldDescriptionEdit.transform = move;
     
 }
 
@@ -771,7 +784,6 @@ SYNChannelCoverImageSelectorDelegate>
 
 - (NSInteger) collectionView: (UICollectionView *) collectionView numberOfItemsInSection: (NSInteger) section
 {
-    NSLog(@"number of items in section %lu",(unsigned long)self.channel.videoInstances.count);
     return self.channel.videoInstances.count;
 }
 
@@ -829,28 +841,28 @@ SYNChannelCoverImageSelectorDelegate>
 
 
 
-//- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
-//            viewForSupplementaryElementOfKind: (NSString *) kind
-//                                  atIndexPath: (NSIndexPath *) indexPath
-//{
-//    UICollectionReusableView *supplementaryView;
-//
-//    if (kind == UICollectionElementKindSectionFooter)
-//    {
-//        self.footerView = [self.videoThumbnailCollectionView dequeueReusableSupplementaryViewOfKind: kind
-//                                                                                withReuseIdentifier: @"SYNChannelFooterMoreView"
-//                                                                                       forIndexPath: indexPath];
-//
-//        supplementaryView = self.footerView;
-//
-//        if (self.channel.videoInstances.count > 0 && self.moreItemsToLoad)
-//        {
-//            self.footerView.showsLoading = self.isLoadingMoreContent;
-//        }
-//    }
-//
-//    return supplementaryView;
-//}
+- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
+            viewForSupplementaryElementOfKind: (NSString *) kind
+                                  atIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionReusableView *supplementaryView;
+    
+    if (kind == UICollectionElementKindSectionFooter)
+    {
+        self.footerView = [self.videoThumbnailCollectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                                                withReuseIdentifier: @"SYNChannelFooterMoreView"
+                                                                                       forIndexPath: indexPath];
+        
+        supplementaryView = self.footerView;
+        
+        if (self.channel.videoInstances.count > 0 && self.moreItemsToLoad)
+        {
+            self.footerView.showsLoading = self.isLoadingMoreContent;
+        }
+    }
+    
+    return supplementaryView;
+}
 
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
@@ -947,14 +959,14 @@ referenceSizeForFooterInSection: (NSInteger) section
             //            self.videoCollectionLayoutIPad.headerReferenceSize = CGSizeMake(670, 507);
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
-
+            
         }
         else
         {
             //            self.videoCollectionLayoutIPad.headerReferenceSize = CGSizeMake(927, 507);
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-
+            
         }
     }
 }
@@ -1301,7 +1313,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     
     self.mode = kChannelDetailsModeEdit;
-
+    
     //profile mode
     
     self.viewProfileContainer.hidden = YES;
@@ -1339,80 +1351,80 @@ referenceSizeForFooterInSection: (NSInteger) section
     [self editMode];
     
     
-        for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
-        {
-            NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
-            
-            __block int index = indexPathForCell.item;
-            void (^animateEditMode)(void) = ^{
-                
-                CGRect frame = cell.frame;
-                
-                
-                if (IS_IPHONE) {
-                    frame.origin.y -= (index*kHeightChange);
-                    frame.size.height -= kHeightChange;
-                }
-                
-                if (IS_IPAD) {
-                    
-                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-                        frame.origin.y -=((index/2)*kHeightChange);
-                        frame.size.height -=kHeightChange;
-                    }
-                    else
-                    {
-                        frame.origin.y -=((index/3)*kHeightChange);
-                        frame.size.height -=kHeightChange;
-
-                        
-                    }
-                }
-                cell.frame = frame;
-                
-                cell.likeControl.alpha = 0.0f;
-                cell.shareControl.alpha = 0.0f;
-                cell.addControl.alpha = 0.0f;
-                cell.deleteButton.alpha = 1.0f;
-                
-                cell.likeControl.hidden = YES;
-                cell.shareControl.hidden = YES;
-                cell.addControl.hidden = YES;
-                cell.deleteButton.hidden = NO;
-                
-            };
-            
-            [UIView transitionWithView:cell
-                              duration:0.5f
-                               options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-                            animations:animateEditMode
-                            completion:^(BOOL finished) {
-                                
-                            }];
-            
-            [cell removeGestureRecognizer:cell.tap];
-            
-        }
+    for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
+    {
+        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
-        ////
-        //        for (int i =0; i<self.videoThumbnailCollectionView.visibleCells.count;i++
-        //             )
-        //        {
-        //            SYNCollectionVideoCell *tmpCell = [self.videoThumbnailCollectionView.visibleCells objectAtIndex:i];
-        //
-        //            [UIView animateWithDuration:2.5 animations:^{
-        //                CGRect tmpFrame = tmpCell.frame;
-        //                tmpFrame.origin.x -= i*70;
-        //
-        //                tmpCell.frame = tmpFrame;
-        //                NSLog(@"%f",tmpFrame.origin.x);
-        //
-        //            }];
-        //        }
-        //
-        //
+        __block int index = indexPathForCell.item;
+        void (^animateEditMode)(void) = ^{
+            
+            CGRect frame = cell.frame;
+            
+            
+            if (IS_IPHONE) {
+                frame.origin.y -= (index*kHeightChange);
+                frame.size.height -= kHeightChange;
+            }
+            
+            if (IS_IPAD) {
+                
+                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+                    frame.origin.y -=((index/2)*kHeightChange);
+                    frame.size.height -=kHeightChange;
+                }
+                else
+                {
+                    frame.origin.y -=((index/3)*kHeightChange);
+                    frame.size.height -=kHeightChange;
+                    
+                    
+                }
+            }
+            cell.frame = frame;
+            
+            cell.likeControl.alpha = 0.0f;
+            cell.shareControl.alpha = 0.0f;
+            cell.addControl.alpha = 0.0f;
+            cell.deleteButton.alpha = 1.0f;
+            
+            cell.likeControl.hidden = YES;
+            cell.shareControl.hidden = YES;
+            cell.addControl.hidden = YES;
+            cell.deleteButton.hidden = NO;
+            
+        };
+        
+        [UIView transitionWithView:cell
+                          duration:0.5f
+                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                        animations:animateEditMode
+                        completion:^(BOOL finished) {
+                            
+                        }];
+        
+        [cell removeGestureRecognizer:cell.tap];
+        
+    }
+    
+    ////
+    //        for (int i =0; i<self.videoThumbnailCollectionView.visibleCells.count;i++
+    //             )
+    //        {
+    //            SYNCollectionVideoCell *tmpCell = [self.videoThumbnailCollectionView.visibleCells objectAtIndex:i];
+    //
+    //            [UIView animateWithDuration:2.5 animations:^{
+    //                CGRect tmpFrame = tmpCell.frame;
+    //                tmpFrame.origin.x -= i*70;
+    //
+    //                tmpCell.frame = tmpFrame;
+    //                NSLog(@"%f",tmpFrame.origin.x);
+    //
+    //            }];
+    //        }
+    //
+    //
     self.mode = kChannelDetailsModeEdit;
-
+    
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
     
 }
@@ -1434,7 +1446,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit];
             [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-//            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
+            //            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
         }
     }
     
@@ -1445,30 +1457,35 @@ referenceSizeForFooterInSection: (NSInteger) section
         if (IS_IPHONE)
         {
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone];
+            [self.videoThumbnailCollectionView removeGestureRecognizer:self.videoCollectionViewLayoutIPhoneEdit.panGestureRecognizer];
+            
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
-
+            
             [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             [self.videoCollectionViewLayoutIPhone invalidateLayout];
-    
+            
         }
-
+        
         if (IS_IPAD)
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-          
+            
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPad];
             
             [self.videoThumbnailCollectionView removeGestureRecognizer:self.videoCollectionViewLayoutIPadEdit.panGestureRecognizer];
+            
+            self.videoThumbnailCollectionView.delegate = self;
+            self.videoThumbnailCollectionView.dataSource = self;
             [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             [self.videoCollectionViewLayoutIPad invalidateLayout];
-
+            
             
         }
     }
     
     [self.videoThumbnailCollectionView reloadData];
-
+    
 }
 
 -(void) cancelTapped
@@ -1476,7 +1493,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self profileMode];
     [self.txtFieldChannelName resignFirstResponder];
-    [self.txtFieldDescriptionEdit resignFirstResponder];
+    [self.txtViewDescription resignFirstResponder];
     
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
@@ -1489,9 +1506,9 @@ referenceSizeForFooterInSection: (NSInteger) section
             CGRect frame = cell.frame;
             
             if (IS_IPHONE) {
-
-            frame.origin.y += (index*kHeightChange);
-            frame.size.height += kHeightChange;
+                
+                frame.origin.y += (index*kHeightChange);
+                frame.size.height += kHeightChange;
             }
             
             if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
@@ -1504,9 +1521,9 @@ referenceSizeForFooterInSection: (NSInteger) section
                 frame.size.height +=kHeightChange;
                 
             }
-
+            
             cell.frame = frame;
-
+            
             cell.likeControl.alpha = 1.0f;
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
@@ -1516,7 +1533,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             cell.shareControl.hidden = NO;
             cell.addControl.hidden = NO;
             cell.deleteButton.hidden = YES;
-
+            
         };
         
         [UIView transitionWithView:cell
@@ -1530,8 +1547,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     }
     
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
-
-
+    
+    
 }
 
 
@@ -1653,7 +1670,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                              
                                              // bring back controls
                                              
-                                             
                                              [appDelegate saveContext: YES];
                                              
                                              
@@ -1736,7 +1752,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                              //
                                              
                                              
-                                             //                                             if(self.editedVideos)
+                                                                                          if(self.mode == kChannelDetailsModeEdit)
                                              [self setVideosForChannelById: channelId //  2nd step of the creation process
                                                                  isUpdated: YES];
                                              

@@ -204,7 +204,7 @@
     
     creatingNewAnimating = YES;
     
-    // 1. Loop over all the cells and animate manually
+    // 1. Loop over all the cells and ani   mate manually
     
     int index = 0;
     for (UICollectionViewCell* cell in self.currentChannelsCollectionView.visibleCells)
@@ -300,8 +300,6 @@
         self.createNewChannelCell.state = CreateNewChannelCellStateEditing;
     else
         self.createNewChannelCell.state = CreateNewChannelCellStateHidden; // this catches the 2 editing states, 'editing' and 'finilizing'
-    
-    
     
     if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing)
     {
