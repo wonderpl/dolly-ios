@@ -29,7 +29,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
-@property (nonatomic, strong) SYNNetworkMessageView* networkErrorView;
+@property (nonatomic, strong) SYNNetworkMessageView* networkErrorNotificationView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 @property (nonatomic, strong) UIPopoverController *accountSettingsPopover;
 
@@ -100,8 +100,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountSettingsLogout) name:kAccountSettingsLogout object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteHideNetworkMessages object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideOrShowNetworkMessages:) name:kNoteShowNetworkMessages object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
@@ -389,24 +387,17 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
     {
-        if (self.networkErrorView)
-        {
-            //[self hideNetworkErrorView];
-        }
+        [self hideNetworkErrorMessageView];
     }
     else if ([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
     {
-        if (self.networkErrorView)
-        {
-            //[self hideNetworkErrorView];
-        }
+        [self hideNetworkErrorMessageView];
     }
     else if ([self.reachability currentReachabilityStatus] == NotReachable)
     {
-        NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil)
-                                                                       : NSLocalizedString(@"No_Network_iPhone", nil);
+        NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil) : NSLocalizedString(@"No_Network_iPhone", nil);
         
-        [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
+        self.networkErrorNotificationView = [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
     }
 }
 
@@ -430,7 +421,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Message Popups (form Bottom)
 
-- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
+- (SYNNetworkMessageView*) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
 {
     
     __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] init];
@@ -461,7 +452,29 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                                               [messageView removeFromSuperview];
                                           }];
                      }];
+    
+    return messageView;
+    
 }
+
+-(void)hideNetworkErrorMessageView
+{
+    if(!self.networkErrorNotificationView)
+        return;
+    
+    [UIView animateWithDuration: 0.3f
+                          delay: 4.0f
+                        options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
+                     animations: ^{
+                         CGRect newFrame = self.networkErrorNotificationView.frame;
+                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
+                         self.networkErrorNotificationView.frame = newFrame;
+                     }
+                     completion: ^(BOOL finished) {
+                         [self.networkErrorNotificationView removeFromSuperview];
+                     }];
+}
+
 
 #pragma mark - Caution Presentation
 
