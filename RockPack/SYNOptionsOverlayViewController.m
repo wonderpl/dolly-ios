@@ -14,6 +14,7 @@
 #import "SYNFriendsViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNAboutViewController.h"
+#import "Appirater.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -191,19 +192,31 @@ typedef enum {
             
         case OptionButtonTagRate:
         {
+             self.completeBlock = ^{
+                 
+                 [Appirater userDidSignificantEvent: YES];
+             };
+            
             
         }
         break;
             
         case OptionButtonTagBlog:
         {
-            
+            // go to the blog section on rockpack.com
+            self.completeBlock = ^{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://blog.rockpack.com/"]];
+            };
         }
         break;
             
         case OptionButtonTagHelp:
         {
-            
+            // go to the help section on rockpack.com
+            self.completeBlock = ^{
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://help.rockpack.com/"]];
+            };
         }
         break;
             

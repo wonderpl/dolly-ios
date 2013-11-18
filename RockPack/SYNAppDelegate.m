@@ -69,7 +69,7 @@
     [Appirater setDaysUntilPrompt: 1];
     [Appirater setUsesUntilPrompt: 2];
     [Appirater setTimeBeforeReminding: 10];
-//    [Appirater setDebug: YES];
+    //[Appirater setDebug: YES];
 #endif
     
 #if USEUDID
