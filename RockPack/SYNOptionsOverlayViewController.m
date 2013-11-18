@@ -196,8 +196,6 @@ typedef enum {
                  
                  [Appirater userDidSignificantEvent: YES];
              };
-            
-            
         }
         break;
             

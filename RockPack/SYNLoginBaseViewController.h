@@ -14,9 +14,7 @@
 #import "SYNNetworkMessageView.h"
 #import "SYNNetworkOperationJsonObject.h"
 #import "SYNOAuth2Credential.h"
-
-#define kLoginTermsUrl @"http://rockpack.com/tos"
-#define kLoginPrivacyUrl @"http://rockpack.com/privacy"
+#import "AppConstants.h"
 
 typedef enum : NSInteger {
     kLoginScreenStateNull = 0,

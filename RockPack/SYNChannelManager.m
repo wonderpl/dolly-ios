@@ -344,6 +344,7 @@
     // define success block //
     
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *channelDictionary) {
+        
         NSNumber *savedPosition = channel.position;
         
         [channel setAttributesFromDictionary: channelDictionary
@@ -356,6 +357,8 @@
             {
                 [userChannel setAttributesFromDictionary: channelDictionary
                                      ignoringObjectTypes: kIgnoreChannelOwnerObject];
+                
+                channel.channelOwner = appDelegate.currentUser;
                 
                 break;
             }

@@ -9,6 +9,8 @@
 #import "SYNAboutViewController.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
+#import "SYNAppDelegate.h"
+#import "AppConstants.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SYNAboutViewController ()
@@ -104,15 +106,17 @@
 
 -(IBAction)buttonPressed:(UIButton*)sender
 {
+    
+    
     if(sender == self.termsButton)
     {
         
-        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLTermsAndConditions]];
         
     }
     else if(sender == self.policyButton)
     {
-        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLPrivacy]];
         
         
     }
