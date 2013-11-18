@@ -83,6 +83,8 @@
     self.deleteMode = NO;
     self.descriptionMode = NO;
     
+    [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
+
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
