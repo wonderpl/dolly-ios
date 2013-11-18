@@ -638,8 +638,7 @@ SYNChannelCoverImageSelectorDelegate>
         
         if (_channel)
         {
-            [_channel.managedObjectContext
-             save: &error];
+            [_channel.managedObjectContext save: &error];
             
             if (error)
             {
@@ -655,8 +654,7 @@ SYNChannelCoverImageSelectorDelegate>
         
         for (Channel *subscription in appDelegate.currentUser.subscriptions)
         {
-            if ([subscription.uniqueId
-                 isEqualToString: self.channel.uniqueId])
+            if ([subscription.uniqueId isEqualToString: self.channel.uniqueId])
             {
                 self.channel.subscribedByUserValue = YES;
             }
@@ -707,8 +705,7 @@ SYNChannelCoverImageSelectorDelegate>
     if (dateDirty) // save
     {
         NSError *error;
-        [self.channel.channelOwner.managedObjectContext
-         save: &error];
+        [self.channel.channelOwner.managedObjectContext save: &error];
         
         if (!error)
         {

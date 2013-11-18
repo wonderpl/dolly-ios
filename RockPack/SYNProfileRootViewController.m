@@ -1376,7 +1376,9 @@
         return;
     }
     
-    if (![user isMemberOfClass: [User class]]) // is a User has been passsed dont copy him OR his channels as there can be only one.
+    BOOL channelOwnerIsUser = (BOOL)[self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+    
+    if (!channelOwnerIsUser) // is a User has been passsed dont copy him OR his channels as there can be only one.
     {
         NSFetchRequest *channelOwnerFetchRequest = [[NSFetchRequest alloc] init];
         
@@ -1426,21 +1428,17 @@
             }
         }
     }
-    else
+    else // The ChannelOwner is the User!
     {
-        _channelOwner = user; // if User isKindOfClass [User class]
+        _channelOwner = user;
     }
     
-    if (self.channelOwner) // if a user has been passed or found, monitor
+    // if a user has been passed or found, monitor
+    if (self.channelOwner)
     {
-        if ([self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-        {
-            self.isUserProfile = YES;
-        }
-        else
-        {
-            self.isUserProfile = NO;
-        }
+        // isUserProfile set to YES for the current User
+        self.isUserProfile = channelOwnerIsUser;
+        
         
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
@@ -1455,7 +1453,6 @@
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
     
-    NSLog(@"%lu", (unsigned long)self.channelOwner.channels.count);
     
 }
 
