@@ -1429,6 +1429,11 @@ referenceSizeForFooterInSection: (NSInteger) section
         
         NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
+        cell.likeControl.hidden = NO;
+        cell.shareControl.hidden = NO;
+        cell.addControl.hidden = NO;
+        cell.deleteButton.hidden = YES;
+
         __block int index = indexPathForCell.item;
         void (^animateProfileMode)(void) = ^{
             
