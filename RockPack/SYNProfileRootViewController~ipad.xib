@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNProfileRootViewController">
             <connections>
                 <outlet property="aboutMeTextView" destination="uAO-BP-yje" id="SLn-Q5-J2u"/>
-                <outlet property="backButton" destination="9iH-Rl-fos" id="D9b-Jw-vrw"/>
                 <outlet property="channelLayoutIPad" destination="XH1-bA-kHd" id="YF5-u3-Kj0"/>
                 <outlet property="channelThumbnailCollectionView" destination="MS7-tW-0TH" id="JAi-QX-iX9"/>
                 <outlet property="collectionsTabButton" destination="ylf-0F-Wru" id="Zoj-al-39U"/>
@@ -168,16 +167,6 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9iH-Rl-fos">
-                    <rect key="frame" x="136" y="56" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="ButtonBack.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="4Gg-7c-RnN"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -214,7 +203,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ButtonBack.png" width="60" height="60"/>
         <image name="ButtonMore.png" width="56" height="56"/>
     </resources>
 </document>

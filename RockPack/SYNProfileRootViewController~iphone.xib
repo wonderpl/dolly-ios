@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNProfileRootViewController">
             <connections>
                 <outlet property="aboutMeTextView" destination="JUa-73-uP8" id="uVc-ZN-OmZ"/>
-                <outlet property="backButton" destination="Ha5-cZ-O1X" id="f0C-KR-4WF"/>
                 <outlet property="channelLayoutIPhone" destination="OHx-Au-cg1" id="9Hr-M7-YV6"/>
                 <outlet property="channelThumbnailCollectionView" destination="0Yx-dc-wS8" id="Fnp-Jg-2dm"/>
                 <outlet property="collectionsTabButton" destination="cbc-Sn-3Xw" id="i22-Wo-SLk"/>
@@ -186,16 +185,6 @@
                     <rect key="frame" x="320" y="-8" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ha5-cZ-O1X">
-                    <rect key="frame" x="20" y="20" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="ButtonBack.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="nlr-o6-g6u"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -203,7 +192,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ButtonBack.png" width="48" height="49"/>
         <image name="ButtonMore.png" width="38" height="38"/>
     </resources>
 </document>

@@ -160,11 +160,24 @@ SYNChannelCoverImageSelectorDelegate>
     
     // == Avatar Image == //
     
-    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
-                           forState: UIControlStateNormal
-                   placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile.png"]
-                            options: SDWebImageRetryFailed];
+    if (IS_IPAD)
+    {
+        [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
+                               forState: UIControlStateNormal
+                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile.png"]
+                                options: SDWebImageRetryFailed];
+    }
     
+    if (IS_IPHONE)
+    {
+//        //somethings up with iphone image
+        [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
+                               forState: UIControlStateNormal
+                       placeholderImage: [UIImage imageNamed: @"ABCibtactPlaceholder.png"]
+                                options: SDWebImageRetryFailed];
+        
+    }
+
     
     if (IS_IPHONE)
     {
@@ -182,6 +195,13 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     [self displayChannelDetails];
+
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
+//    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
 }
 
 
@@ -248,6 +268,7 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     //programmatically seting the edgeinset for iphone
+    //something wierd happening, not able to set within the nix
     if (IS_IPHONE)
     {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
@@ -406,7 +427,6 @@ SYNChannelCoverImageSelectorDelegate>
                                                   green: (210.0f / 255.0f)
                                                    blue: (42.0f / 255.0f)
                                                   alpha: 1.0f];
-
     
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]

@@ -133,7 +133,7 @@
         
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDescriptionCurrentlyShowing) name:kHideAllDesciptions object:nil];
-
+        
         self.modeType = MyOwnProfile;
     }
     
@@ -145,7 +145,7 @@
     self = [self initWithViewId:vid];
     self.modeType = mode;
     self.channelOwner = chanOwner;
-
+    
     return self;
 }
 
@@ -169,13 +169,13 @@
 {
     [super viewDidLoad];
     self.shouldBeginEditing = YES;
-
+    
     self.collectionsTabActive = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
     self.greyColor = [UIColor dollyTabColorSelectedBackground];
     self.tabTextColor = [UIColor dollyTabColorSelectedText];
-
+    
     UINib *searchCellNib = [UINib nibWithNibName: @"SYNChannelSearchCell"
                                           bundle: nil];
     
@@ -204,7 +204,7 @@
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
-
+        
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
         [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
         [self.subscriptionThumbnailCollectionView.collectionViewLayout invalidateLayout];
@@ -278,25 +278,32 @@
                                                          alpha: 1.0f];
     
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
-
+    
+    //This should not be needed
+    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                                 target:nil
+                                                                                                 action:nil];
+    
     [self setProfleType:self.modeType];
-
-
-
+    
+    
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
-//    self.navigationController.navigationBar.hidden = YES;
-  
-
+    //    self.navigationController.navigationBar.hidden = YES;
+    
+    
     
     [self updateTabStates];
     
@@ -560,7 +567,7 @@
         self.backButton.hidden = YES;
         
         
-
+        
     }
     if (profileType == OtherUsersProfile)
     {
@@ -573,8 +580,8 @@
         CGSize tmp = self.subscriptionLayoutIPhone.headerReferenceSize;
         tmp.height -= 43;
         self.subscriptionLayoutIPhone.headerReferenceSize = tmp;
-
-//
+        
+        //
     }
 }
 
@@ -673,7 +680,7 @@
     
     //Setup the headers
     
-//    self.navigationController.navigationBarHidden = YES;
+    //    self.navigationController.navigationBarHidden = YES;
     
     if (self.isIPhone)
     {
@@ -739,7 +746,7 @@
     [channelsLayout invalidateLayout];
     
     [self reloadCollectionViews];
-   // [self resizeScrollViews];
+    // [self resizeScrollViews];
 }
 
 
@@ -827,13 +834,13 @@
         
         // == Add Special Attributes == //
         
-      
         
-
+        
+        
         // == Add Common Attributes == //
         
         if(self.modeType == OtherUsersProfile)
-
+            
         {
             if (channel.subscribedByUserValue)
             {
@@ -843,7 +850,7 @@
             {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
             }
-
+            
         }
         
         
@@ -868,7 +875,7 @@
             
             
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
-
+            
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
@@ -897,11 +904,11 @@
                 
                 
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
-
+                
             }
         }
-
-
+        
+        
         
         channelThumbnailCell.viewControllerDelegate = self;
         
@@ -979,10 +986,10 @@
         }
         else{
             
-        
+            
             return self.subscriptionLayoutIPad.itemSize;
         }
-        }
+    }
     
     
     return CGSizeZero;
@@ -1079,7 +1086,7 @@
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-      [super scrollViewWillBeginDragging:scrollView];
+    [super scrollViewWillBeginDragging:scrollView];
     if (self.searchMode) {
         [self.followingSearchBar resignFirstResponder];
         self.searchMode = NO;
@@ -1135,7 +1142,7 @@
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
             self.backButton.transform = move;
-
+            
             if (offset<0)
             {
                 //change to make like what they wanted
@@ -1157,9 +1164,9 @@
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
             self.backButton.transform = move;
-
+            
             [self moveNameLabelWithOffset:offset];
-        
+            
             /*
              self.profileImageView.transform = move;
              self.aboutMeTextView.transform = move;
@@ -1307,7 +1314,7 @@
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
                 CGAffineTransform moveOverView = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT-3);
-
+                
                 self.fullNameLabel.alpha = 0.9;
                 self.fullNameLabel.transform = move;
                 self.outerViewFullNameLabel.transform = moveOverView;
@@ -1317,12 +1324,12 @@
             {
                 
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-
+                
                 self.fullNameLabel.transform = move;
                 self.outerViewFullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
                 self.outerViewFullNameLabel.hidden = YES;
-
+                
             }
         }
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
@@ -1335,20 +1342,20 @@
                 self.fullNameLabel.alpha = 0.9;
                 self.outerViewFullNameLabel.transform = move;
                 self.outerViewFullNameLabel.hidden = NO;
-
+                
             }
             
             if (offset<FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-
+                
                 self.fullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
                 self.outerViewFullNameLabel.transform = move;
-
+                
                 self.outerViewFullNameLabel.hidden = YES;
-
-
+                
+                
             }
         }
     }
@@ -1517,16 +1524,16 @@
             //  self.indexPathToDelete = indexPath;
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
-
+        
         SYNChannelDetailsViewController *channelVC;
         if (modeType == MyOwnProfile) {
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
-
+            
         }
-
+        
         if (modeType == OtherUsersProfile) {
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
-
+            
         }
         
         [self.navigationController pushViewController:channelVC animated:YES];
@@ -1542,10 +1549,10 @@
             
         }
         Channel *channel = self.arrDisplayFollowing[indexPath.item];
-//        self.navigationController.navigationBarHidden = NO;
-
+        //        self.navigationController.navigationBarHidden = NO;
         
-           SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+        
+        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
         
         [self.navigationController pushViewController:channelVC animated:YES];
     }
@@ -1554,7 +1561,7 @@
 -(void) followButtonTapped:(UICollectionViewCell *) cell
 {
     [self showAlertView: cell];
-
+    
 }
 
 - (IBAction)editButtonTapped:(id)sender
@@ -1650,7 +1657,7 @@
     self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
     
     [self.subscriptionThumbnailCollectionView reloadData];
-
+    
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -1783,7 +1790,7 @@
         {
             [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
         }
-
+        
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.followCell.channel}];
@@ -1821,8 +1828,8 @@
     }
 }
 - (IBAction)backButtonTapped:(id)sender {
-//    self.navigationController.navigationBarHidden = NO;
-
+    //    self.navigationController.navigationBarHidden = NO;
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 }

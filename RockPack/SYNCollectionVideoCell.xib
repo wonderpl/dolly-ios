@@ -82,15 +82,15 @@
                 <constraint firstAttribute="centerX" secondItem="OKX-RS-b5y" secondAttribute="centerX" constant="3.5" id="2fd-MO-Q1G"/>
                 <constraint firstItem="M54-bt-6WL" firstAttribute="leading" secondItem="G5W-z0-ioj" secondAttribute="leading" constant="20" id="41L-7p-Hrr"/>
                 <constraint firstItem="M54-bt-6WL" firstAttribute="top" secondItem="G5W-z0-ioj" secondAttribute="top" constant="20" id="4Sf-NS-GuN"/>
-                <constraint firstAttribute="bottom" secondItem="XWN-5L-kuq" secondAttribute="bottom" constant="13" id="9vg-nl-jZ0"/>
-                <constraint firstAttribute="bottom" secondItem="OKX-RS-b5y" secondAttribute="bottom" constant="13" id="BXY-3r-SRK"/>
+                <constraint firstItem="4l6-bN-MdJ" firstAttribute="top" secondItem="e4D-AB-sGK" secondAttribute="top" constant="-38" id="8Cv-4W-cFV"/>
+                <constraint firstItem="XWN-5L-kuq" firstAttribute="top" secondItem="4l6-bN-MdJ" secondAttribute="bottom" constant="22" id="Iaw-og-WjB"/>
                 <constraint firstAttribute="trailing" secondItem="4l6-bN-MdJ" secondAttribute="trailing" constant="27" id="LIE-xr-giQ"/>
                 <constraint firstItem="4l6-bN-MdJ" firstAttribute="top" secondItem="M54-bt-6WL" secondAttribute="bottom" constant="8" id="OaM-1L-Hwv"/>
                 <constraint firstAttribute="centerX" secondItem="e4D-AB-sGK" secondAttribute="centerX" constant="78.5" id="QcL-Ju-x5G"/>
                 <constraint firstAttribute="centerX" secondItem="XWN-5L-kuq" secondAttribute="centerX" constant="-71.5" id="RRe-ZL-Vbu"/>
                 <constraint firstItem="4l6-bN-MdJ" firstAttribute="leading" secondItem="G5W-z0-ioj" secondAttribute="leading" constant="20" id="ooE-m4-NXc"/>
+                <constraint firstItem="OKX-RS-b5y" firstAttribute="top" secondItem="4l6-bN-MdJ" secondAttribute="bottom" constant="22" id="ovF-a9-bjo"/>
                 <constraint firstAttribute="trailing" secondItem="M54-bt-6WL" secondAttribute="trailing" constant="27" id="qzm-rM-1n6"/>
-                <constraint firstAttribute="bottom" secondItem="e4D-AB-sGK" secondAttribute="bottom" constant="13" id="r8j-g8-An2"/>
             </constraints>
             <size key="customSize" width="307" height="183"/>
             <connections>
