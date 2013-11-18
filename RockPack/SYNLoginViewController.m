@@ -350,12 +350,12 @@
     NSURL* urlToGo;
     if(isLeft)
     {
-        urlToGo = [NSURL URLWithString: kLoginPrivacyUrl];
+        urlToGo = [NSURL URLWithString: kURLPrivacy];
         
     }
     else
     {
-        urlToGo = [NSURL URLWithString: kLoginTermsUrl];
+        urlToGo = [NSURL URLWithString: kURLTermsAndConditions];
     }
     
     [[UIApplication sharedApplication] openURL:urlToGo];

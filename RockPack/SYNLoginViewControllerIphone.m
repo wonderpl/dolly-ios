@@ -1086,7 +1086,7 @@
 
 -(IBAction) termsTapped : (id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kLoginTermsUrl]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kURLTermsAndConditions]];
 
 }
 
@@ -1094,7 +1094,7 @@
 - (IBAction) privacyPolicyTapped: (id) sender
 {
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kLoginPrivacyUrl]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kURLPrivacy]];
     
 }
 
