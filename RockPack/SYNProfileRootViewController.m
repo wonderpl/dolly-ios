@@ -1373,6 +1373,7 @@
 
 - (void) setChannelOwner: (ChannelOwner *) user
 {
+    
     if (self.channelOwner) // if we have an existing user
     {
         // remove the listener, even if nil is passed
@@ -1392,7 +1393,8 @@
         return;
     }
     
-    BOOL channelOwnerIsUser = (BOOL)[self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+    BOOL channelOwnerIsUser = (BOOL)[user.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+    
     
     if (!channelOwnerIsUser) // is a User has been passsed dont copy him OR his channels as there can be only one.
     {
