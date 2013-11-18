@@ -263,7 +263,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         {
             popoverable = (UIViewController<SYNPopoverable> *)self.overlayController;
         }
-        [popoverable finishingPresentation];
+        
+        // check if it really conforms to the portocol before calling to avoid crashes
+        if([popoverable conformsToProtocol:@protocol(SYNPopoverable)])
+        {
+            [popoverable finishingPresentation];
+        }
+        
         
         [wself.overlayController.view removeFromSuperview];
         [wself.overlayController removeFromParentViewController];

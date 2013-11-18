@@ -13,6 +13,7 @@
 #import "SYNDeviceManager.h"
 #import "SYNFriendsViewController.h"
 #import "UIFont+SYNFont.h"
+#import "SYNAboutViewController.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -155,7 +156,30 @@ typedef enum {
             
         case OptionButtonTagAbout:
         {
-            
+            self.completeBlock = ^{
+                
+                
+                SYNAboutViewController* aboutVC = [[SYNAboutViewController alloc] init];
+                
+                if(IS_IPAD)
+                {
+                    UINavigationController* wrapper =
+                    [[UINavigationController alloc] initWithRootViewController:aboutVC];
+                    
+                    wrapper.view.frame = aboutVC.view.frame;
+                    
+                    [appDelegate.masterViewController addOverlayController:wrapper
+                                                                  animated:YES];
+                }
+                else
+                {
+                    UIViewController* currentVC = appDelegate.masterViewController.showingViewController;
+                    currentVC.navigationController.navigationBarHidden = NO;
+                    [currentVC.navigationController pushViewController: aboutVC
+                                                              animated: YES];
+                }
+                
+            };
         }
         break;
             

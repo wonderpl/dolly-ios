@@ -1095,6 +1095,9 @@
 		BE2D2155171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2151171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png */; };
 		BE2D2158171D8A4500B4B755 /* AvatarProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2156171D8A4500B4B755 /* AvatarProfile.png */; };
 		BE2D2159171D8A4500B4B755 /* AvatarProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D2157171D8A4500B4B755 /* AvatarProfile@2x.png */; };
+		BE2D3EEE183A3C2C003B2C26 /* SYNAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2D3EEC183A3C2C003B2C26 /* SYNAboutViewController.m */; };
+		BE2D3EEF183A3C2C003B2C26 /* SYNAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2D3EED183A3C2C003B2C26 /* SYNAboutViewController.xib */; };
+		BE2D3EF1183A3E9F003B2C26 /* SYNAboutViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2D3EF0183A3E9F003B2C26 /* SYNAboutViewController~iphone.xib */; };
 		BE31EFAA182C0579006E20E2 /* BackgroundMoodView.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */; };
 		BE31EFAB182C0579006E20E2 /* BackgroundMoodView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */; };
 		BE31EFB0182D4B00006E20E2 /* SYNAddToChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFAF182D4B00006E20E2 /* SYNAddToChannelCell.m */; };
@@ -2668,6 +2671,10 @@
 		BE2D2151171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCancelHighlighted@2x.png"; path = "Assets/Images/ButtonCancelHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE2D2156171D8A4500B4B755 /* AvatarProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AvatarProfile.png; path = Assets/Images/AvatarProfile.png; sourceTree = "<group>"; };
 		BE2D2157171D8A4500B4B755 /* AvatarProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AvatarProfile@2x.png"; path = "Assets/Images/AvatarProfile@2x.png"; sourceTree = "<group>"; };
+		BE2D3EEB183A3C2C003B2C26 /* SYNAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAboutViewController.h; sourceTree = "<group>"; };
+		BE2D3EEC183A3C2C003B2C26 /* SYNAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAboutViewController.m; sourceTree = "<group>"; };
+		BE2D3EED183A3C2C003B2C26 /* SYNAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAboutViewController.xib; sourceTree = "<group>"; };
+		BE2D3EF0183A3E9F003B2C26 /* SYNAboutViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAboutViewController~iphone.xib"; sourceTree = "<group>"; };
 		BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundMoodView.png; path = Assets/Images/BackgroundMoodView.png; sourceTree = "<group>"; };
 		BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundMoodView@2x.png"; path = "Assets/Images/BackgroundMoodView@2x.png"; sourceTree = "<group>"; };
 		BE31EFAE182D4B00006E20E2 /* SYNAddToChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelCell.h; sourceTree = "<group>"; };
@@ -3710,19 +3717,18 @@
 		019824E11629CAB600216900 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BE0815C216D5386B00ADB1DC /* Master */,
+				01982563162ADEAD00216900 /* Abstract */,
 				BED027AD1833F64800636659 /* Options */,
 				BEB313BC182A822900FAF98A /* Add to Channels */,
-				01982563162ADEAD00216900 /* Abstract */,
 				01B7F75B164FB7A7009C5CCD /* Collections */,
 				BEF9E5A516DBCDEF00286113 /* Components */,
 				01982562162ADE5200216900 /* Container */,
 				01D9196A178B08B400D980A7 /* Cover Art */,
 				0199F1371672199F00E479C6 /* Feed */,
-				BE7D02FD179D4318008053DC /* Friends */,
 				BE1B3DCC180E8FDC00DA2BD6 /* Mood */,
 				BE7D34D017159DF20085AB81 /* Activity (Notifications) */,
 				BE270B7B16EDE0A500CDDA6D /* Login */,
-				BE0815C216D5386B00ADB1DC /* Master */,
 				BE3574E517CE07860083CBB1 /* One to One Sharing */,
 				01982560162ADE3300216900 /* Profile */,
 				BE08158F16D3C46800ADB1DC /* Search and Discovery */,
@@ -5502,6 +5508,13 @@
 			name = "Error Messages";
 			sourceTree = "<group>";
 		};
+		BE2D3EEA183A3BC0003B2C26 /* About */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
 		BE31EFAC182CF969006E20E2 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -6055,6 +6068,13 @@
 				BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */,
 				BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */,
 				BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */,
+				BE03A69016F7457900245314 /* Account Settings */,
+				BE7D02FD179D4318008053DC /* Friends */,
+				BE2D3EEA183A3BC0003B2C26 /* About */,
+				BE2D3EEB183A3C2C003B2C26 /* SYNAboutViewController.h */,
+				BE2D3EEC183A3C2C003B2C26 /* SYNAboutViewController.m */,
+				BE2D3EED183A3C2C003B2C26 /* SYNAboutViewController.xib */,
+				BE2D3EF0183A3E9F003B2C26 /* SYNAboutViewController~iphone.xib */,
 			);
 			name = Options;
 			sourceTree = "<group>";
@@ -6097,7 +6117,6 @@
 				BE8F938117B1110A00E7035F /* Sharing Panel */,
 				BE3983CB1768A34700EE9C7B /* OnBoarding Messages (Old) */,
 				015C13BE173B02D8001569FE /* Report Concerns */,
-				BE03A69016F7457900245314 /* Account Settings */,
 				011C1650173002D000CF50B9 /* Activity controller */,
 				01A3EC2A16AECE0F008DCE08 /* Popover */,
 			);
@@ -6597,6 +6616,7 @@
 				01F1B87F172A9ADF005735AF /* ButtonVideoOverlayLike@2x.png in Resources */,
 				01F1B880172A9ADF005735AF /* ButtonVideoOverlayLikeHighlighted.png in Resources */,
 				01F1B881172A9ADF005735AF /* ButtonVideoOverlayLikeHighlighted@2x.png in Resources */,
+				BE2D3EEF183A3C2C003B2C26 /* SYNAboutViewController.xib in Resources */,
 				01F1B882172A9ADF005735AF /* ButtonVideoOverlayLikeSelected.png in Resources */,
 				01F1B883172A9ADF005735AF /* ButtonVideoOverlayLikeSelected@2x.png in Resources */,
 				01F1B884172A9ADF005735AF /* ButtonVideoOverlayNext.png in Resources */,
@@ -6890,6 +6910,7 @@
 				38A200FA1731607F00FB9F57 /* ButtonVideoOverlayShare@2x~iphone.png in Resources */,
 				38A200FB1731607F00FB9F57 /* ButtonVideoOverlayShareHighlighted@2x~iphone.png in Resources */,
 				38A200FC1731607F00FB9F57 /* ButtonVideoOverlayShareHighlighted~iphone.png in Resources */,
+				BE2D3EF1183A3E9F003B2C26 /* SYNAboutViewController~iphone.xib in Resources */,
 				38A200FD1731607F00FB9F57 /* ButtonVideoOverlayShareSelected@2x~iphone.png in Resources */,
 				38A200FE1731607F00FB9F57 /* ButtonVideoOverlayShareSelected~iphone.png in Resources */,
 				1F4E7F82181AC7D300F59007 /* TabProfileHighlighted@2x.png in Resources */,
@@ -7637,6 +7658,7 @@
 				3864D2DC1743DB3000A90ED3 /* SYNImagePickerController.m in Sources */,
 				01D0998B17452A4000351C82 /* BBCyclingLabel.m in Sources */,
 				011BA5DD174D1EB700041A16 /* SYNCoverRightMoreView.m in Sources */,
+				BE2D3EEE183A3C2C003B2C26 /* SYNAboutViewController.m in Sources */,
 				BE0FF0321754C39D0088294F /* ISO8601DateFormatter.m in Sources */,
 				0165542E18363C70009B161C /* SYNTextFieldLoginiPhone.m in Sources */,
 				BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */,
