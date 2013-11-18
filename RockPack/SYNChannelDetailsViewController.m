@@ -1452,15 +1452,18 @@ referenceSizeForFooterInSection: (NSInteger) section
                 frame.size.height += kHeightChange;
             }
             
-            if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-                frame.origin.y +=((index/2)*kHeightChange);
-                frame.size.height +=kHeightChange;
-            }
-            else
-            {
-                frame.origin.y +=((index/3)*kHeightChange);
-                frame.size.height +=kHeightChange;
+            if (IS_IPAD) {
                 
+                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+                    frame.origin.y +=((index/2)*kHeightChange);
+                    frame.size.height +=kHeightChange;
+                }
+                else
+                {
+                    frame.origin.y +=((index/3)*kHeightChange);
+                    frame.size.height +=kHeightChange;
+                    
+                }
             }
             
             cell.frame = frame;
