@@ -401,8 +401,19 @@ SYNChannelCoverImageSelectorDelegate>
     [[self.txtViewDescription layer] setCornerRadius:0];
     
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
+    self.barBtnCancel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
+                                                             green: (66.0f / 255.0f)
+                                                              blue: (42.0f / 255.0f)
+                                                             alpha: 1.0f];
+
     
     self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
+    
+    self.barBtnSave.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
+                                                  green: (210.0f / 255.0f)
+                                                   blue: (42.0f / 255.0f)
+                                                  alpha: 1.0f];
+
     
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
@@ -1356,6 +1367,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
         __block int index = indexPathForCell.item;
+        cell.deleteButton.hidden = NO;
         void (^animateEditMode)(void) = ^{
             
             CGRect frame = cell.frame;
@@ -1363,20 +1375,19 @@ referenceSizeForFooterInSection: (NSInteger) section
             
             if (IS_IPHONE) {
                 frame.origin.y -= (index*kHeightChange);
-                frame.size.height -= kHeightChange;
+               // frame.size.height -= kHeightChange;
             }
             
             if (IS_IPAD) {
                 
                 if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
                     frame.origin.y -=((index/2)*kHeightChange);
-                    frame.size.height -=kHeightChange;
+                 //   frame.size.height -=kHeightChange;
                 }
                 else
                 {
                     frame.origin.y -=((index/3)*kHeightChange);
-                    frame.size.height -=kHeightChange;
-                    
+                   // frame.size.height -=kHeightChange;
                     
                 }
             }
@@ -1387,10 +1398,6 @@ referenceSizeForFooterInSection: (NSInteger) section
             cell.addControl.alpha = 0.0f;
             cell.deleteButton.alpha = 1.0f;
             
-            cell.likeControl.hidden = YES;
-            cell.shareControl.hidden = YES;
-            cell.addControl.hidden = YES;
-            cell.deleteButton.hidden = NO;
             
         };
         
@@ -1399,35 +1406,81 @@ referenceSizeForFooterInSection: (NSInteger) section
                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateEditMode
                         completion:^(BOOL finished) {
-                            
+
                         }];
         
         [cell removeGestureRecognizer:cell.tap];
         
     }
     
-    ////
-    //        for (int i =0; i<self.videoThumbnailCollectionView.visibleCells.count;i++
-    //             )
-    //        {
-    //            SYNCollectionVideoCell *tmpCell = [self.videoThumbnailCollectionView.visibleCells objectAtIndex:i];
-    //
-    //            [UIView animateWithDuration:2.5 animations:^{
-    //                CGRect tmpFrame = tmpCell.frame;
-    //                tmpFrame.origin.x -= i*70;
-    //
-    //                tmpCell.frame = tmpFrame;
-    //                NSLog(@"%f",tmpFrame.origin.x);
-    //
-    //            }];
-    //        }
-    //
-    //
     self.mode = kChannelDetailsModeEdit;
     
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
     
 }
+
+
+-(void) cancelTapped
+{
+    
+    [self profileMode];
+    [self.txtFieldChannelName resignFirstResponder];
+    [self.txtViewDescription resignFirstResponder];
+    
+    for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
+    {
+        
+        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
+        
+        __block int index = indexPathForCell.item;
+        void (^animateProfileMode)(void) = ^{
+            
+            CGRect frame = cell.frame;
+            
+            if (IS_IPHONE) {
+                
+                frame.origin.y += (index*kHeightChange);
+                frame.size.height += kHeightChange;
+            }
+            
+            if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+                frame.origin.y +=((index/2)*kHeightChange);
+                frame.size.height +=kHeightChange;
+            }
+            else
+            {
+                frame.origin.y +=((index/3)*kHeightChange);
+                frame.size.height +=kHeightChange;
+                
+            }
+            
+            cell.frame = frame;
+            
+            cell.likeControl.alpha = 1.0f;
+            cell.shareControl.alpha = 1.0f;
+            cell.addControl.alpha = 1.0f;
+            cell.deleteButton.alpha = 0.0f;
+            
+            
+        };
+        
+        [UIView transitionWithView:cell
+                          duration:0.5f
+                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                        animations:animateProfileMode
+                        completion:^(BOOL finished) {
+                            
+                            
+                        }];
+        
+    }
+    
+    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
+    
+    
+}
+
+
 
 -(void) updateCollectionLayout
 {
@@ -1484,73 +1537,9 @@ referenceSizeForFooterInSection: (NSInteger) section
         }
     }
     
-    [self.videoThumbnailCollectionView reloadData];
+    //[self.videoThumbnailCollectionView reloadData];
     
 }
-
--(void) cancelTapped
-{
-    
-    [self profileMode];
-    [self.txtFieldChannelName resignFirstResponder];
-    [self.txtViewDescription resignFirstResponder];
-    
-    for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
-    {
-        
-        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
-        
-        __block int index = indexPathForCell.item;
-        void (^animateProfileMode)(void) = ^{
-            
-            CGRect frame = cell.frame;
-            
-            if (IS_IPHONE) {
-                
-                frame.origin.y += (index*kHeightChange);
-                frame.size.height += kHeightChange;
-            }
-            
-            if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-                frame.origin.y +=((index/2)*kHeightChange);
-                frame.size.height +=kHeightChange;
-            }
-            else
-            {
-                frame.origin.y +=((index/3)*kHeightChange);
-                frame.size.height +=kHeightChange;
-                
-            }
-            
-            cell.frame = frame;
-            
-            cell.likeControl.alpha = 1.0f;
-            cell.shareControl.alpha = 1.0f;
-            cell.addControl.alpha = 1.0f;
-            cell.deleteButton.alpha = 0.0f;
-            
-            cell.likeControl.hidden = NO;
-            cell.shareControl.hidden = NO;
-            cell.addControl.hidden = NO;
-            cell.deleteButton.hidden = YES;
-            
-        };
-        
-        [UIView transitionWithView:cell
-                          duration:0.5f
-                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-                        animations:animateProfileMode
-                        completion:^(BOOL finished) {
-                            
-                        }];
-        
-    }
-    
-    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
-    
-    
-}
-
 
 
 #pragma mark - Deleting Video Instances
@@ -1659,7 +1648,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     
     // return to previous screen as if the back button tapped
     
-    
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: self.channel.uniqueId
                                          completionHandler: ^(id response) {
@@ -1671,7 +1659,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                              // bring back controls
                                              
                                              [appDelegate saveContext: YES];
-                                             
                                              
                                              
                                          } errorHandler: ^(id error) {
