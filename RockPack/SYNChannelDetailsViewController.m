@@ -235,9 +235,6 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     
-    NSLog(@"subscrubers counter value %lu", (unsigned long)self.channel.subscribersCountValue);
-    
-    
     // We set up assets depending on whether we are in display or edit mode
     //    [self setDisplayControlsVisibility: (self.mode == kChannelDetailsModeDisplay)];
     
@@ -287,7 +284,7 @@ SYNChannelCoverImageSelectorDelegate>
     //        self.btnAvatar.imageView.image = placeholderImage;
     //    }
     
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
 }
@@ -334,7 +331,7 @@ SYNChannelCoverImageSelectorDelegate>
                                                         object: self
                                                       userInfo: nil];
     
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -346,10 +343,6 @@ SYNChannelCoverImageSelectorDelegate>
 
 -(void) setUpMode
 {
-    
-    
-    NSLog(@"%d", self.mode);
-    
     if (self.mode == kChannelDetailsModeDisplayUser)
     {
         self.btnEditChannel.hidden = NO;
@@ -464,7 +457,6 @@ SYNChannelCoverImageSelectorDelegate>
     // Defensive programming
     if (self.channel != nil)
     {
-        NSLog(@"%@", self.channel.title);
         
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
@@ -985,8 +977,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 - (void) videoButtonPressed: (UIButton *) videoButton
 {
     
-    NSLog(@"ddddd");
-    
     UIView *candidateCell = videoButton;
     
     while (![candidateCell isKindOfClass: [SYNCollectionVideoCell class]])
@@ -1256,12 +1246,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     
     SYNProfileRootViewController *profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile andChannelOwner:self.channel.channelOwner];
-    
-    
-    NSLog(@"%@", self.channel);
-    
-    NSLog(@"%@", profileVC.channelOwner);
-    
     [self.navigationController pushViewController:profileVC animated:YES];
     
     

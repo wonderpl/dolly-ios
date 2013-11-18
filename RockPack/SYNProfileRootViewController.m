@@ -277,6 +277,13 @@
                                                           blue: (255.0f / 255.0f)
                                                          alpha: 1.0f];
     
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
     [self setProfleType:self.modeType];
 
 
@@ -287,7 +294,10 @@
 {
 	[super viewWillAppear:animated];
 	
-    self.navigationController.navigationBar.hidden = YES;
+//    self.navigationController.navigationBar.hidden = YES;
+  
+
+    
     [self updateTabStates];
     
     [self setUpUserProfile];
@@ -561,7 +571,6 @@
         
         self.followingSearchBar.hidden = YES;
         CGSize tmp = self.subscriptionLayoutIPhone.headerReferenceSize;
-        
         tmp.height -= 43;
         self.subscriptionLayoutIPhone.headerReferenceSize = tmp;
 
@@ -664,7 +673,7 @@
     
     //Setup the headers
     
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
     
     if (self.isIPhone)
     {
@@ -1455,7 +1464,6 @@
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
     
-    NSLog(@"%lu", (unsigned long)self.channelOwner.channels.count);
     
 }
 
@@ -1534,7 +1542,7 @@
             
         }
         Channel *channel = self.arrDisplayFollowing[indexPath.item];
-        self.navigationController.navigationBarHidden = NO;
+//        self.navigationController.navigationBarHidden = NO;
 
         
            SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
@@ -1813,7 +1821,7 @@
     }
 }
 - (IBAction)backButtonTapped:(id)sender {
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
 
     [self.navigationController popViewControllerAnimated:YES];
     
