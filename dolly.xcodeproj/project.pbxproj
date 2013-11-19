@@ -407,6 +407,8 @@
 		0E27C270183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */; };
 		0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */; };
 		0E27C272183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */; };
+		0E5DE3E4183BDA34009E7083 /* ButtonUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DE3E2183BDA34009E7083 /* ButtonUpload.png */; };
+		0E5DE3E5183BDA34009E7083 /* ButtonUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DE3E3183BDA34009E7083 /* ButtonUpload@2x.png */; };
 		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
 		0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */; };
 		0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */; };
@@ -1941,6 +1943,8 @@
 		0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteDefault@2x.png"; sourceTree = "<group>"; };
 		0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonVideoDeleteHighlighted.png; sourceTree = "<group>"; };
 		0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
+		0E5DE3E2183BDA34009E7083 /* ButtonUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonUpload.png; sourceTree = "<group>"; };
+		0E5DE3E3183BDA34009E7083 /* ButtonUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonUpload@2x.png"; sourceTree = "<group>"; };
 		0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~ipad.xib"; sourceTree = "<group>"; };
 		0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~iphone.xib"; sourceTree = "<group>"; };
 		0EE380A7182D4DFC001297C7 /* SYNChannelCreateNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelCreateNewCell.h; sourceTree = "<group>"; };
@@ -5080,6 +5084,8 @@
 		38A2FFE61731607F00FB9F57 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				0E5DE3E2183BDA34009E7083 /* ButtonUpload.png */,
+				0E5DE3E3183BDA34009E7083 /* ButtonUpload@2x.png */,
 				38A2FFE71731607F00FB9F57 /* ButtonProfileChannels@2x~iphone.png */,
 				38A2FFE81731607F00FB9F57 /* ButtonProfileChannelsHighlighted@2x~iphone.png */,
 				38A2FFE91731607F00FB9F57 /* ButtonProfileChannelsHighlighted~iphone.png */,
@@ -6416,6 +6422,7 @@
 				1F458B0317E1C4E6003C14AC /* AppIcon40x40@2x.png in Resources */,
 				01AEFBF61701AD2E0060467A /* SearchTabHeaderSelected.png in Resources */,
 				01AEFBF71701AD2E0060467A /* SearchTabHeaderSelected@2x.png in Resources */,
+				0E5DE3E5183BDA34009E7083 /* ButtonUpload@2x.png in Resources */,
 				BE7D342E170DD8C90085AB81 /* SYNChannelFooterMoreView.xib in Resources */,
 				BE7D34DC1715A9560085AB81 /* ButtonSettings.png in Resources */,
 				BE7D34DD1715A9560085AB81 /* ButtonSettings@2x.png in Resources */,
@@ -7014,6 +7021,7 @@
 				BEB15774173BDBD100DAFA2F /* ButtonReport@2x.png in Resources */,
 				1F4E7FC4181ACBAA00F59007 /* TabProfileSelected~iphone.png in Resources */,
 				1FFAE62B17E21BBC006C92CA /* ShadowPanelFriends@2x~iphone.png in Resources */,
+				0E5DE3E4183BDA34009E7083 /* ButtonUpload.png in Resources */,
 				BEB15775173BDBD100DAFA2F /* ButtonReportHighlighted.png in Resources */,
 				BEB15776173BDBD100DAFA2F /* ButtonReportHighlighted@2x.png in Resources */,
 				1F458B2417E1CE8E003C14AC /* AppIcon-Dev-40x40.png in Resources */,

@@ -232,7 +232,6 @@
                 <button opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYK-20-9W1" userLabel="Button - Avatar" customClass="SYNAvatarButton">
                     <rect key="frame" x="287" y="130" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="96" id="6la-ev-RM2"/>
                         <constraint firstAttribute="width" constant="96" id="KhF-Ne-YEI"/>

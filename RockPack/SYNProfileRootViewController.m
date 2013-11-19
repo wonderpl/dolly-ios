@@ -59,14 +59,15 @@
 @property (nonatomic, assign, getter = isDeletionModeActive) BOOL deletionModeActive;
 @property (strong, nonatomic) IBOutlet UIButton *followersCountButton;
 
-@property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
 @property (nonatomic, strong) NSArray* arrFollowing;
+@property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 
 @property (nonatomic, strong) NSIndexPath *channelsIndexPath;
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 @property (nonatomic, strong) NSIndexPath *subscriptionsIndexPath;
 
+@property (strong, nonatomic) IBOutlet UIButton *uploadCoverPhotoButton;
 @property (nonatomic, strong) NSString *currentSearchTerm;
 @property (nonatomic, assign) BOOL shouldBeginEditing;
 
@@ -101,6 +102,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
+@property (strong, nonatomic) IBOutlet UIButton *uploadAvatarButton;
 
 @property (strong, nonatomic) UIColor *greyColor;
 @property (strong, nonatomic) UIColor *tabTextColor;
@@ -112,6 +114,9 @@
 @property (strong, nonatomic) IBOutlet UIView *containerViewIPad;
 @property (nonatomic) ProfileType modeType;
 @property (nonatomic) CGPoint offsetBeforeSearch;
+@property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
+@property (strong, nonatomic) UIBarButtonItem *barBtnSave;
+
 
 @end
 
@@ -133,16 +138,14 @@
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDescriptionCurrentlyShowing) name:kHideAllDesciptions object:nil];
         
-        self.modeType = MyOwnProfile;
     }
     
     return self;
 }
 
-- (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode andChannelOwner:(ChannelOwner*)chanOwner
+- (id) initWithViewId:(NSString*) vid andChannelOwner:(ChannelOwner*)chanOwner
 {
     self = [self initWithViewId:vid];
-    self.modeType = mode;
     self.channelOwner = chanOwner;
     
     return self;
@@ -172,6 +175,12 @@
     self.collectionsTabActive = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
+    
+    self.uploadAvatarButton.layer.cornerRadius = self.uploadAvatarButton.frame.size.width/2;
+    self.uploadAvatarButton.layer.masksToBounds = YES;
+    self.uploadCoverPhotoButton.layer.cornerRadius = self.uploadCoverPhotoButton.frame.size.width/2;
+    self.uploadCoverPhotoButton.layer.masksToBounds = YES;
+    
     self.greyColor = [UIColor dollyTabColorSelectedBackground];
     self.tabTextColor = [UIColor dollyTabColorSelectedText];
     
@@ -231,14 +240,6 @@
     }
     
     self.searchMode = NO;
-    //  self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
-    //  self.channelThumbnailCollectionView.scrollsToTop = NO;
-    /*
-     self.channelThumbnailCollectionView.frame = CGRectMake(self.channelThumbnailCollectionView.frame.origin.x, self.channelThumbnailCollectionView.frame.origin.y, self.channelThumbnailCollectionView.frame.size.width, self.channelThumbnailCollectionView.frame.size.height);
-     
-     self.subscriptionThumbnailCollectionView.frame = CGRectMake(self.subscriptionThumbnailCollectionView.frame.origin.x, self.subscriptionThumbnai
-     lCollectionView.frame.origin.y, self.subscriptionThumbnailCollectionView.frame.size.width, self.subscriptionThumbnailCollectionView.frame.size.height);
-     */
     
     self.channelThumbnailCollectionView.hidden = YES;
     //updates the staus bar appearance
@@ -248,26 +249,6 @@
     
     self.pulling = NO;
     
-    //   self.mainScrollView.contentSize = CGSizeMake(self.mainScrollView.frame.size.width, self.mainScrollView.frame.size.height + self.channelThumbnailCollectionView.frame.size.height - TABBAR_HEIGHT);
-    
-    //  self.channelThumbnailCollectionView.contentSize = CGSizeMake(self.channelThumbnailCollectionView.contentSize.width, self.channelThumbnailCollectionView.contentSize.height);
-    
-    //  NSLog(@"View Did Load %f",selfs.mainScrollView.contentSize.height);
-    /*
-     CGRect tmpRect = self.channelThumbnailCollectionView.bounds;
-     tmpRect.size.height += ADDEDBOUNDS;
-     tmpRect.origin.y -= ADDEDBOUNDS;
-     self.channelThumbnailCollectionView.bounds = tmpRect;
-     
-     self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
-     
-     tmpRect = self.subscriptionThumbnailCollectionView.bounds;
-     tmpRect.size.height += ADDEDBOUNDS;
-     tmpRect.origin.y -= ADDEDBOUNDS;
-     self.subscriptionThumbnailCollectionView.bounds = tmpRect;
-     
-     self.subscriptionThumbnailCollectionView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
-     */
     
     UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
     if(txfSearchField)
@@ -292,7 +273,20 @@
     [self setProfleType:self.modeType];
     
     
+    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
+    self.barBtnCancel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
+                                                  green: (66.0f / 255.0f)
+                                                   blue: (42.0f / 255.0f)
+                                                  alpha: 1.0f];
     
+    
+    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
+    
+    self.barBtnSave.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
+                                                green: (210.0f / 255.0f)
+                                                 blue: (42.0f / 255.0f)
+                                                alpha: 1.0f];
+
     
 }
 
@@ -307,64 +301,7 @@
     [self setUpSegmentedControl];
     [self setNeedsStatusBarAppearanceUpdate];
     
-    
-    if (IS_IPHONE)
-    {
-        /*
-         CGRect tmpRect = self.channelThumbnailCollectionView.frame;
-         tmpRect.size.height = self.channelThumbnailCollectionView.contentSize.height;
-         self.channelThumbnailCollectionView.frame = tmpRect;
-         
-         tmpRect.origin.y -= ADDEDBOUNDS;
-         tmpRect.size.height += ADDEDBOUNDS;
-         
-         self.channelThumbnailCollctionView.bounds = tmpRect;
-         
-         NSLog(@"BOUNDS %f, %f, %f, %f", tmpRect.origin.x, tmpRect.origin.y, tmpRect.size.width, tmpRect.size.height);
-         tmpRect = self.channelThumbnailCollectionView.frame;
-         
-         NSLog(@"FRAME %f, %f, %f, %f", tmpRect.origin.x, tmpRect.origin.y, tmpRect.size.width, tmpRect.size.height);
-         
-         self.channelThumbnailCollectionView.scrollEnabled = YES;
-         
-         if (self.channelThumbnailCollectionView.contentSize.height < self.channelThumbnailCollectionView.bounds.size.height)
-         {
-         NSLog(@"error, content > bounds");
-         }
-         
-         self.channelThumbnailCollectionView.contentInset = UIEdgeInsetsMake(-PULL_THRESHOLD, 0, 0, 0);
-         
-         
-         NSLog(@"%f",[self.channelThumbnailCollectionView.collectionViewLayout collectionViewContentSize].height);
-         */
-        //self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
-        //self.channelThumbnailCollectionView.userInteractionEnabled = NO;
-        //self.subscriptionThumbnailCollectionView.userInteractionEnabled = NO;
-        
-    }
-    else
-    {
-        
-        /*   CGRect tmpRect = self.channelThumbnailCollectionView.frame;
-         tmpRect.size.height = self.channelThumbnailCollectionView.contentSize.height;
-         self.channelThumbnailCollectionView.frame = tmpRect;
-         
-         tmpRect.origin.y -= 200;
-         tmpRect.size.height += 200;
-         
-         self.channelThumbnailCollectionView.bounds = tmpRect;
-         tmpRect = self.channelThumbnailCollectionView.frame;
-         self.channelThumbnailCollectionView.scrollEnabled = YES;
-         if (self.channelThumbnailCollectionView.contentSize.height < self.channelThumbnailCollectionView.bounds.size.height)
-         {
-         NSLog(@"error, content > bounds");
-         }
-         //self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
-         //self.channelThumbnailCollectionView.userInteractionEnabled = NO;
-         //self.subscriptionThumbnailCollectionView.userInteractionEnabled = NO;
-         */
-    }
-    
+  
     
     [self.channelThumbnailCollectionView reloadData];
     [self.subscriptionThumbnailCollectionView reloadData];
@@ -556,22 +493,19 @@
 
 -(void) setProfleType: (ProfileType) profileType
 {
-    if (profileType == MyOwnProfile)
+    if (profileType == modeMyOwnProfile)
     {
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
-        self.backButton.hidden = YES;
         
         self.moreButton.hidden = NO;
         
     }
-    if (profileType == OtherUsersProfile)
+    if (profileType == modeOtherUsersProfile)
     {
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
-        self.backButton.hidden = NO;
         self.moreButton.hidden = YES;
-        
         
         self.followingSearchBar.hidden = YES;
         CGSize tmp = self.subscriptionLayoutIPhone.headerReferenceSize;
@@ -699,8 +633,8 @@
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(671, 722);
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(671, 722);
+            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(671, 732);
+            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(671, 732);
             
             //NEED DYNAMIC WAY
             // self.channelThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
@@ -720,8 +654,8 @@
             self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(0.0, 21.0, 0.0, 21.0);
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(1004, 600);
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(1004, 600);
+            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(1004, 610);
+            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(1004, 610);
             
             // self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
             
@@ -830,13 +764,9 @@
         [channelThumbnailCell setBorder];
         
         // == Add Special Attributes == //
-        
-        
-        
-        
         // == Add Common Attributes == //
         
-        if(self.modeType == OtherUsersProfile)
+        if(self.modeType == modeOtherUsersProfile)
             
         {
             if (channel.subscribedByUserValue)
@@ -855,7 +785,7 @@
         {
             channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
             
-            [channelThumbnailCell setHiddenForFollowButton:(self.modeType == MyOwnProfile)];
+            [channelThumbnailCell setHiddenForFollowButton:(self.modeType == modeMyOwnProfile)];
             
             NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
             [channelThumbnailCell.followerCountLabel setText:subscribersString];
@@ -880,7 +810,7 @@
             {
                 channel = _arrDisplayFollowing[indexPath.item];
                 
-                if (self.modeType == MyOwnProfile)
+                if (self.modeType == modeMyOwnProfile)
                 {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
                 }
@@ -1044,7 +974,7 @@
     self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
     self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
     
-    if (self.modeType == MyOwnProfile) {
+    if (self.modeType == modeMyOwnProfile) {
         self.followingSearchBar.hidden = self.collectionsTabActive;
         
     }
@@ -1141,13 +1071,15 @@
             self.moreButton.transform = move;
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
-            self.backButton.transform = move;
             self.followersCountButton.transform = move;
+            self.uploadAvatarButton.transform = move;
+            self.uploadCoverPhotoButton.transform = move;
+            
             if (offset<0)
             {
-                //change to make like what they wanted
-                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
-                self.coverImage.transform = scale;
+                //Scale the cover phote in iphone
+//                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
+//                self.coverImage.transform = scale;
             }
             else
             {
@@ -1163,22 +1095,11 @@
             self.coverImage.transform = move;
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
-            self.backButton.transform = move;
             self.followersCountButton.transform = move;
+            self.uploadAvatarButton.transform = move;
+            self.uploadCoverPhotoButton.transform = move;
 
             [self moveNameLabelWithOffset:offset];
-            
-            /*
-             self.profileImageView.transform = move;
-             self.aboutMeTextView.transform = move;
-             self.segmentedControlsView.transform = move;
-             self.followAllButton.transform = move;
-             self.editButton.transform = move;
-             self.followingSearchBar.transform = move;
-             self.fullNameLabel.transform = move;
-             */
-            
-            
         }
     }
     
@@ -1190,102 +1111,14 @@
             return;
         }
         
-        /*
-         CGFloat offset;
-         
-         if ([scrollView isEqual: self.channelThumbnailCollectionView])
-         {
-         offset = self.channelThumbnailCollectionView.contentOffset;
-         offset.y = self.channelThumbnailCollectionView.contentOffset.y;
-         [self.subscriptionThumbnailCollectionView setContentOffset: offset];
-         }
-         else if ([scrollView isEqual: self.subscriptionThumbnailCollectionView])
-         {
-         offset = self.subscriptionThumbnailCollectionView.contentOffset;
-         offset.y = self.subscriptionThumbnailCollectionView.contentOffset.y;
-         [self.channelThumbnailCollectionView setContentOffset: offset];
-         // [self.mainScrollView setScrollEnabled:NO];
-         }*/
-        /*
-         
-         offset = scrollView.contentOffset.y;
-         
-         if (scrollView == self.channelThumbnailCollectionView || scrollView == self.subscriptionThumbnailCollectionView)
-         {
-         
-         
-         if (offset  > PULL_THRESHOLD_IPAD && !_pulling)
-         {
-         [self didBeginPulling];
-         //Get the starting position of the main scroll as the
-         //child scroll starts scrolling
-         _startingPosition = self.mainScrollView.contentOffset.y;
-         
-         _pulling = YES;
-         }
-         if (_pulling)
-         {
-         //Get the off set for to set the main scroll view too
-         CGFloat pullOffSet = (offset - PULL_THRESHOLD_IPAD + _startingPosition);
-         
-         [self didChangePullOffSet:pullOffSet];
-         
-         //adjusts the child scroll view back to the right position
-         scrollView.transform = CGAffineTransformMakeTranslation(0, pullOffSet - _startingPosition);
-         //moves the fullname label with the scroll view
-         self.userNameLabel.transform = CGAffineTransformMakeTranslation(0, pullOffSet - _startingPosition);
-         }
-         }*/
-    }
-    else
-    {
-        
-        if (scrollView == self.channelThumbnailCollectionView || scrollView == self.subscriptionThumbnailCollectionView)
-        {
-            /*
-             if (offset  > PULL_THRESHOLD && !_pulling)
-             {
-             //Get the starting position of the main scroll as the
-             //child scroll starts scrolling
-             [self didBeginPulling];
-             _startingPosition = self.mainScrollView.contentOffset.y;
-             _pulling = YES;
-             }
-             if (_pulling)
-             {
-             //Get the off set for to set the main scroll view too
-             CGFloat pullOffSet = (offset - PULL_THRESHOLD + _startingPosition);
-             
-             if (_mainScrollView.contentOffset.y < 475) {
-             [self didChangePullOffSet:pullOffSet];
-             //    scrollView.transform = CGAffineTransformMakeTranslation(0, pullOffSet - _startingPosition);
-             }
-             
-             NSLog(@" Offset%f",_mainScrollView.contentOffset.y);
-             
-             NSLog(@" collections y%f",self.channelThumbnailCollectionView.frame.origin.y);
-             
-             //adjusts the child scroll view back to the right position
-             
-             //moves the fullname label with the scroll view
-             self.userNameLabel.transform = CGAffineTransformMakeTranslation(0, pullOffSet - _startingPosition);
-             }*/
-            
-            if (scrollView == self.channelThumbnailCollectionView || scrollView == self.subscriptionThumbnailCollectionView)
-            {
-                
-            }
-            
-        }
-        
     }
 }
 
 
--(void) moveNameLabelWithOffset :(CGFloat) offset  {
+-(void) moveNameLabelWithOffset :(CGFloat) offset
+{
     if (IS_IPHONE)
     {
-        
         if (offset < FULL_NAME_LABEL_IPHONE)
         {
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
@@ -1362,9 +1195,8 @@
     }
 }
 
+//Scrolling has ended
 -(void) scrollingEnded{
-    
-    
     
 }
 
@@ -1469,6 +1301,15 @@
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
     }
     
+    if(channelOwnerIsUser && self.modeType != modeEditProfile)
+    {
+        self.modeType = modeMyOwnProfile;
+    }
+    else
+    {
+        self.modeType = modeOtherUsersProfile;
+    }
+    
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
     
@@ -1527,12 +1368,12 @@
         }
         
         SYNChannelDetailsViewController *channelVC;
-        if (modeType == MyOwnProfile) {
+        if (modeType == modeMyOwnProfile) {
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
             
         }
         
-        if (modeType == OtherUsersProfile) {
+        if (modeType == modeOtherUsersProfile) {
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
             
         }
@@ -1558,39 +1399,6 @@
         [self.navigationController pushViewController:channelVC animated:YES];
     }
 }
-
--(void) followButtonTapped:(UICollectionViewCell *) cell
-{
-    [self showAlertView: cell];
-    
-}
-
-- (IBAction)editButtonTapped:(id)sender
-{
-    
-}
-- (IBAction)moreButtonTapped:(id)sender
-{
-    
-    
-    SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
-    
-    // Set frame to full screen
-    CGRect vFrame = optionsVC.view.frame;
-    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-    optionsVC.view.frame = vFrame;
-    optionsVC.view.alpha = 0.0f;
-    
-    
-    [appDelegate.masterViewController addChildViewController:optionsVC];
-    [appDelegate.masterViewController.view addSubview:optionsVC.view];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        optionsVC.view.alpha = 1.0f;
-    }];
-    
-}
-
 #pragma mark - Searchbar delegates
 -(void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
 {
@@ -1722,6 +1530,7 @@
     }
 }
 
+#pragma mark - Displayed Search
 
 -(NSArray*)arrDisplayFollowing
 {
@@ -1777,10 +1586,10 @@
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
     self.followCell = ((SYNChannelMidCell*)cell);
     
-    if (modeType == MyOwnProfile) {
+    if (modeType == modeMyOwnProfile) {
         [alertView show];
     }
-    else if(modeType == OtherUsersProfile)
+    else if(modeType == modeOtherUsersProfile)
     {
                 
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
@@ -1819,6 +1628,16 @@
         }
     }
 }
+
+#pragma mark - TextView delegates
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+}
+
+
+#pragma mark - IBActions
+
 - (IBAction)backButtonTapped:(id)sender {
     //    self.navigationController.navigationBarHidden = NO;
     
@@ -1830,5 +1649,97 @@
     //To be implemented
 }
 
+
+-(void) followButtonTapped:(UICollectionViewCell *) cell
+{
+    [self showAlertView: cell];
+    
+}
+
+- (IBAction)moreButtonTapped:(id)sender
+{
+    
+    
+    SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
+    
+    // Set frame to full screen
+    CGRect vFrame = optionsVC.view.frame;
+    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+    optionsVC.view.frame = vFrame;
+    optionsVC.view.alpha = 0.0f;
+    
+    
+    [appDelegate.masterViewController addChildViewController:optionsVC];
+    [appDelegate.masterViewController.view addSubview:optionsVC.view];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        optionsVC.view.alpha = 1.0f;
+    }];
+    
+}
+
+- (IBAction)editButtonTapped:(id)sender
+{
+    
+    self.uploadCoverPhotoButton.hidden = NO;
+    self.uploadAvatarButton.hidden = NO;
+    self.uploadCoverPhotoButton.alpha = 0.0f;
+    self.uploadAvatarButton.alpha = 0.0f;
+    
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        
+        self.coverImage.alpha = 0.5f;
+        self.segmentedControlsView.alpha = 0.5f;
+        self.editButton.alpha = 0.0f;
+        self.moreButton.alpha = 0.0f;
+        self.followersCountButton.alpha = 0.0f;
+        self.channelThumbnailCollectionView.alpha = 0.5f;
+        self.subscriptionThumbnailCollectionView.alpha = 0.05f;
+        self.barBtnBack = self.navigationItem.leftBarButtonItem;
+        self.navigationItem.leftBarButtonItem = self.barBtnCancel;
+        self.navigationItem.rightBarButtonItem = self.barBtnSave;
+        self.profileImageView.alpha = 0.0f;
+        self.aboutMeTextView.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:1.0];
+        self.uploadCoverPhotoButton.alpha = 1.0f;
+        self.uploadAvatarButton.alpha = 1.0f;
+        self.followersCountButton.alpha = 0.0f;
+
+    }];
+}
+
+//Navigation bar item cancel
+-(void) cancelTapped
+{
+
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        
+        self.coverImage.alpha = 1.0f;
+        self.segmentedControlsView.alpha = 1.0f;
+        self.editButton.alpha = 1.0f;
+        self.moreButton.alpha = 1.0f;
+        self.followersCountButton.alpha = 1.0f;
+        self.channelThumbnailCollectionView.alpha = 1.0f;
+        self.subscriptionThumbnailCollectionView.alpha = 1.0f;
+        
+        self.navigationItem.leftBarButtonItem = self.barBtnBack;
+        self.navigationItem.rightBarButtonItem = nil;
+        self.aboutMeTextView.backgroundColor = [UIColor whiteColor];
+        self.profileImageView.alpha = 1.0f;
+
+        self.uploadAvatarButton.alpha = 0.0f;
+        self.uploadCoverPhotoButton.alpha = 0.0f;
+
+    } completion:^(BOOL finished) {
+        self.uploadCoverPhotoButton.hidden = YES;
+        self.uploadAvatarButton.hidden = YES;
+
+    }];
+    
+    
+
+    
+}
 
 @end

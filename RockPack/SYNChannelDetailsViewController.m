@@ -171,6 +171,9 @@ SYNChannelCoverImageSelectorDelegate>
     
     if (IS_IPAD)
     {
+        
+        [self.btnAvatar setContentMode: UIViewContentModeScaleToFill];
+        
         [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
                                forState: UIControlStateNormal
                        placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile.png"]
@@ -1322,16 +1325,24 @@ referenceSizeForFooterInSection: (NSInteger) section
 - (IBAction)avatarTapped:(id)sender
 {
     
-    SYNProfileRootViewController *profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId WithMode:OtherUsersProfile andChannelOwner:self.channel.channelOwner];
+    User *tmpUser = [((SYNAppDelegate*)[[UIApplication sharedApplication] delegate]) currentUser];
+    
+    SYNProfileRootViewController *profileVC;
+
+    if (tmpUser.uniqueId == self.channel.channelOwner.uniqueId) {
+     profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
+    }
+    else
+    {
+        profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
+
+    }
     [self.navigationController pushViewController:profileVC animated:YES];
-    
-    
 }
 
 
 -(void) profileMode
 {
-    
     self.mode = kChannelDetailsModeDisplayUser;
     
     self.viewProfileContainer.hidden = NO;
