@@ -84,11 +84,11 @@
                     </connections>
                 </textView>
                 <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUk-nV-j8P">
-                    <rect key="frame" x="198" y="287" width="274" height="33"/>
+                    <rect key="frame" x="198" y="273" width="274" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="33" id="3vq-Jr-66h"/>
+                        <constraint firstAttribute="height" constant="44" id="3vq-Jr-66h"/>
                         <constraint firstAttribute="width" constant="274" id="8Fx-zz-eBx"/>
                     </constraints>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,7 +201,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="shareControlPressed:" destination="-1" eventType="touchUpInside" id="Nzm-nX-HgM"/>
+                        <action selector="shareChannelPressed:" destination="-1" eventType="touchUpInside" id="mRP-MU-SiN"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWl-Sb-frk" userLabel="Button - Followers button">
@@ -253,7 +253,7 @@
                 <constraint firstItem="cn2-e5-XhO" firstAttribute="top" secondItem="TjS-Dr-jUj" secondAttribute="top" constant="-220" id="7bn-S8-9Bg"/>
                 <constraint firstItem="cn2-e5-XhO" firstAttribute="centerX" secondItem="dO0-W1-go2" secondAttribute="centerX" constant="30" id="7sE-k3-bZP"/>
                 <constraint firstItem="LHF-AA-xTN" firstAttribute="centerX" secondItem="cn2-e5-XhO" secondAttribute="centerX" id="82w-NF-YNY"/>
-                <constraint firstItem="lUk-nV-j8P" firstAttribute="top" secondItem="cn2-e5-XhO" secondAttribute="top" constant="287" id="8G2-c9-gV2"/>
+                <constraint firstItem="lUk-nV-j8P" firstAttribute="top" secondItem="cn2-e5-XhO" secondAttribute="top" constant="273" id="8G2-c9-gV2"/>
                 <constraint firstItem="yla-tM-GQ1" firstAttribute="centerX" secondItem="vWl-Sb-frk" secondAttribute="centerX" constant="91.5" id="8Ze-5E-qgI"/>
                 <constraint firstItem="yla-tM-GQ1" firstAttribute="top" secondItem="6Uj-ma-a8W" secondAttribute="top" constant="-20" id="8g0-BQ-IUa"/>
                 <constraint firstAttribute="centerX" secondItem="cn2-e5-XhO" secondAttribute="centerX" id="Dcc-Dv-zkb"/>
