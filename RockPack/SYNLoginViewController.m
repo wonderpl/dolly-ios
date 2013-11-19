@@ -18,6 +18,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPopoverBackgroundView.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTextFieldLogin.h"s
 #import "User.h"
 
 @interface SYNLoginViewController ()  <UITextFieldDelegate,
@@ -1462,7 +1463,10 @@
     
     errorArrow.alpha = 0.0;
     
-    
+    if([targetView isKindOfClass:[SYNTextFieldLogin class]])
+    {
+        ((SYNTextFieldLogin*)targetView).errorMode = YES;
+    }
     [UIView animateWithDuration: 0.2
                      animations: ^{
                          errorArrow.alpha = 1.0;
@@ -1564,6 +1568,12 @@
          shouldChangeCharactersInRange: (NSRange) range
          replacementString: (NSString *) newCharacter
 {
+    
+    if([textField isKindOfClass:[SYNTextFieldLogin class]])
+    {
+        ((SYNTextFieldLogin*)textField).errorMode = NO;
+        
+    }
     
     NSUInteger oldLength = textField.text.length;
     NSUInteger replacementLength = newCharacter.length;

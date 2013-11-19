@@ -182,14 +182,14 @@
                                                green: (166.0 / 255.0)
                                                 blue: (171.0 / 255.0)
                                                alpha: (1.0)]
-                        range: NSMakeRange(36, 17)];
+                        range: NSMakeRange(35, 17)];
     
     [termsString addAttribute: NSForegroundColorAttributeName
                         value: [UIColor colorWithRed: (11.0 / 255.0)
                                                green: (166.0 / 255.0)
                                                 blue: (171.0 / 255.0)
                                                alpha: (1.0)]
-                        range: NSMakeRange(58, 14)];
+                        range: NSMakeRange(54, 15)];
     
     self.termsAndConditionsLabel.attributedText = termsString;
     self.termsAndConditionsLabel.font = [UIFont lightCustomFontOfSize: self.termsAndConditionsLabel.font.pointSize];
