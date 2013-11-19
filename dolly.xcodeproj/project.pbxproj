@@ -635,8 +635,6 @@
 		1FD12375174CD76700144374 /* NavHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD12371174CD76700144374 /* NavHighlighted@2x.png */; };
 		1FD2857717BBAD6A0094F488 /* PanelShare.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD2857517BBAD6A0094F488 /* PanelShare.png */; };
 		1FD2857817BBAD6A0094F488 /* PanelShare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD2857617BBAD6A0094F488 /* PanelShare@2x.png */; };
-		1FD8720F176F7F26009F4746 /* LoginErrorPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD8720D176F7F26009F4746 /* LoginErrorPortrait.png */; };
-		1FD87210176F7F26009F4746 /* LoginErrorPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD8720E176F7F26009F4746 /* LoginErrorPortrait@2x.png */; };
 		1FE1C6601761FFFF00EDFC0E /* IconRockpackAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE1C65E1761FFFF00EDFC0E /* IconRockpackAbout.png */; };
 		1FE1C6611761FFFF00EDFC0E /* IconRockpackAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE1C65F1761FFFF00EDFC0E /* IconRockpackAbout@2x.png */; };
 		1FE1C66617621F7400EDFC0E /* ButtonPrivacy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE1C66217621F7400EDFC0E /* ButtonPrivacy.png */; };
@@ -1377,8 +1375,6 @@
 		BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */; };
 		BED4311A16F1F0CF0051465B /* FieldPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4311816F1F0CF0051465B /* FieldPhoto.png */; };
 		BED4311B16F1F0CF0051465B /* FieldPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4311916F1F0CF0051465B /* FieldPhoto@2x.png */; };
-		BED4312216F1F12E0051465B /* LoginError.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4312016F1F12D0051465B /* LoginError.png */; };
-		BED4312316F1F12E0051465B /* LoginError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4312116F1F12D0051465B /* LoginError@2x.png */; };
 		BED4312B16F20CD70051465B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4312A16F20CD70051465B /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
@@ -2171,8 +2167,6 @@
 		1FD12371174CD76700144374 /* NavHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavHighlighted@2x.png"; path = "Assets/Images/NavHighlighted@2x.png"; sourceTree = "<group>"; };
 		1FD2857517BBAD6A0094F488 /* PanelShare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelShare.png; path = Assets/Images/PanelShare.png; sourceTree = "<group>"; };
 		1FD2857617BBAD6A0094F488 /* PanelShare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelShare@2x.png"; path = "Assets/Images/PanelShare@2x.png"; sourceTree = "<group>"; };
-		1FD8720D176F7F26009F4746 /* LoginErrorPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginErrorPortrait.png; path = Assets/Images/LoginErrorPortrait.png; sourceTree = "<group>"; };
-		1FD8720E176F7F26009F4746 /* LoginErrorPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LoginErrorPortrait@2x.png"; path = "Assets/Images/LoginErrorPortrait@2x.png"; sourceTree = "<group>"; };
 		1FE1C65E1761FFFF00EDFC0E /* IconRockpackAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconRockpackAbout.png; path = Assets/Images/IconRockpackAbout.png; sourceTree = "<group>"; };
 		1FE1C65F1761FFFF00EDFC0E /* IconRockpackAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconRockpackAbout@2x.png"; path = "Assets/Images/IconRockpackAbout@2x.png"; sourceTree = "<group>"; };
 		1FE1C66217621F7400EDFC0E /* ButtonPrivacy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPrivacy.png; path = Assets/Images/ButtonPrivacy.png; sourceTree = "<group>"; };
@@ -3016,8 +3010,6 @@
 		BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginErrorArrow.m; sourceTree = "<group>"; };
 		BED4311816F1F0CF0051465B /* FieldPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldPhoto.png; path = Assets/Images/FieldPhoto.png; sourceTree = "<group>"; };
 		BED4311916F1F0CF0051465B /* FieldPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FieldPhoto@2x.png"; path = "Assets/Images/FieldPhoto@2x.png"; sourceTree = "<group>"; };
-		BED4312016F1F12D0051465B /* LoginError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginError.png; path = Assets/Images/LoginError.png; sourceTree = "<group>"; };
-		BED4312116F1F12D0051465B /* LoginError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LoginError@2x.png"; path = "Assets/Images/LoginError@2x.png"; sourceTree = "<group>"; };
 		BED4312916F20CD70051465B /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		BED4312A16F20CD70051465B /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RegexKitLite.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BEE4A6BD170B0FD6008F9D05 /* dolly-Release-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "dolly-Release-Info.plist"; path = "RockPack/dolly-Release-Info.plist"; sourceTree = "<group>"; };
@@ -5419,10 +5411,6 @@
 				BED4311916F1F0CF0051465B /* FieldPhoto@2x.png */,
 				BED4310716EF8F7A0051465B /* ButtonRegisterBigDefault.png */,
 				BED4310816EF8F7A0051465B /* ButtonRegisterBigDefault@2x.png */,
-				BED4312016F1F12D0051465B /* LoginError.png */,
-				BED4312116F1F12D0051465B /* LoginError@2x.png */,
-				1FD8720D176F7F26009F4746 /* LoginErrorPortrait.png */,
-				1FD8720E176F7F26009F4746 /* LoginErrorPortrait@2x.png */,
 				BED430FF16EF8D830051465B /* FieldDayMonth.png */,
 				BED4310016EF8D830051465B /* FieldDayMonth@2x.png */,
 				BED4310116EF8D830051465B /* FieldYear.png */,
@@ -6351,8 +6339,6 @@
 				BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */,
 				BED4311A16F1F0CF0051465B /* FieldPhoto.png in Resources */,
 				BED4311B16F1F0CF0051465B /* FieldPhoto@2x.png in Resources */,
-				BED4312216F1F12E0051465B /* LoginError.png in Resources */,
-				BED4312316F1F12E0051465B /* LoginError@2x.png in Resources */,
 				01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */,
 				01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */,
 				01A79B9316F32C3400B05084 /* Clear.png in Resources */,
@@ -7241,8 +7227,6 @@
 				BE2AE4D5176E689C00A753E3 /* ButtonBackHighlightedCD@2x~iphone.png in Resources */,
 				BE1B3DC6180D50C700DA2BD6 /* SYNDiscoverViewController.xib in Resources */,
 				BE2AE4D6176E689C00A753E3 /* ButtonBackHighlightedCD~iphone.png in Resources */,
-				1FD8720F176F7F26009F4746 /* LoginErrorPortrait.png in Resources */,
-				1FD87210176F7F26009F4746 /* LoginErrorPortrait@2x.png in Resources */,
 				BEB83011177491ED00AAA8D5 /* login_bg_1.jpg in Resources */,
 				1F4E7FB6181ACBAA00F59007 /* TabFeedHighlighted~iphone.png in Resources */,
 				BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */,
