@@ -1771,9 +1771,10 @@
 
 
 -(void) showAlertView: (UICollectionViewCell *) cell{
+    
+    
     NSString *message = @"Are you sure you want to unfollow";
     message =  [message stringByAppendingString:@" "];
-    
     message =  [message stringByAppendingString:((SYNChannelMidCell*)cell).channel.title];
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
     self.followCell = ((SYNChannelMidCell*)cell);
@@ -1783,17 +1784,7 @@
     }
     else if(modeType == OtherUsersProfile)
     {
-        
-        //Need to refresh the cell
-        if (self.followCell.channel.subscribedByUserValue)
-        {
-            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-        }
-        else
-        {
-            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
-        }
-        
+                
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.followCell.channel}];
@@ -1811,10 +1802,10 @@
 }
 
 - (NSString *) yesButtonTitle{
-    return @"Yes";
+    return NSLocalizedString(@"YES", @"Yes to deleting a video instance");
 }
 - (NSString *) noButtonTitle{
-    return @"Cancel";
+    return NSLocalizedString(@"Cancel", @"cancel to deleting a video instance");
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
