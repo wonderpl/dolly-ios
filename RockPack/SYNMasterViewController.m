@@ -105,7 +105,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
     
     // add background view //
-    self.backgroundOverlayView = [[UIView alloc] initWithFrame:self.view.frame];
+    
+    self.backgroundOverlayView = [[UIView alloc] initWithFrame:CGRectZero];
     self.backgroundOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.backgroundOverlayView.backgroundColor = [UIColor darkGrayColor];
     
@@ -136,13 +137,15 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     
     
-    
-    
     UITapGestureRecognizer* tapGesture =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundOverlayTapped:)];
     
     
     // == Add Background View == //
+    
+    CGRect bgFrame = CGRectZero;
+    bgFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+    self.backgroundOverlayView.frame = bgFrame;
     
     [self.backgroundOverlayView addGestureRecognizer:tapGesture];
     
