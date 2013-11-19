@@ -145,14 +145,19 @@
     mmInputField.keyboardType = UIKeyboardTypeNumberPad;
     yyyyInputField.keyboardType = UIKeyboardTypeNumberPad;
     
-    loginButton.layer.borderWidth = 1.0;
-    loginButton.layer.borderColor = [[UIColor redColor] CGColor];
+    UIColor* purple = self.finalLoginButton.backgroundColor;
     
+    loginButton.layer.borderWidth = 1.0;
+    loginButton.layer.borderColor = [purple CGColor];
+    [loginButton setTitleColor:purple forState:UIControlStateNormal];
     
     signUpButton.layer.borderWidth = 1.0;
-    signUpButton.layer.borderColor = [[UIColor redColor] CGColor];
+    signUpButton.layer.borderColor = [purple CGColor];
+    [signUpButton setTitleColor:purple forState:UIControlStateNormal];
     
-    
+    registerButton.layer.borderWidth = 1.0;
+    registerButton.layer.borderColor = [purple CGColor];
+    [registerButton setTitleColor:purple forState:UIControlStateNormal];
     
     facebookButtonInitialFrame = facebookSignInButton.frame;
     signUpButtonInitialFrame = signUpButton.frame;
