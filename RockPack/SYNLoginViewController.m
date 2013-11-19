@@ -1717,8 +1717,10 @@
                                             duration: duration];
     
     [self clearAllErrorArrows];
+    
     CGRect facebookButtonFrame = facebookSignInButton.frame;
     CGRect onBoardingFrame = self.onBoardingController.view.frame;
+    
     if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
     {
         signUpButton.center = CGPointMake(524.0, signUpButton.center.y);
@@ -1740,7 +1742,7 @@
         self.avatarImageView.center = CGPointMake(254.0, self.avatarImageView.center.y);
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 370.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 370.0);
-        registerButton.center = CGPointMake(registerButton.center.x, 358.0);
+        registerButton.center = CGPointMake(registerButton.center.x, 352.0);
         onBoardingFrame.origin.y = 100.0;
     }
     
@@ -1776,21 +1778,7 @@
     else
         termsAndConditionsButton.frame = termsAndConditionsLabelSide.frame;
     
-//    for (NSValue* targetViewPointerValue in labelsToErrorArrows)
-//    {
-//        UIView* targetView = (UIView*)[targetViewPointerValue pointerValue];
-//        if(!targetView)
-//            continue;
-//        
-//        SYNLoginErrorArrow* errorArrow = (SYNLoginErrorArrow*)[labelsToErrorArrows objectForKey:targetViewPointerValue];
-//        
-//        CGPoint newPosition = targetView.center;
-//        newPosition = [self.view convertPoint:newPosition fromView:targetView.superview];
-//        newPosition.x +=  (errorArrow.frame.size.width/2.0f + targetView.frame.size.width/2.0f - 20.0);
-//        errorArrow.center = newPosition;
-//        errorArrow.frame = CGRectIntegral(errorArrow.frame);
-//        
-//    }
+
     
 }
 
@@ -1807,7 +1795,7 @@
 
 - (void) placeSecondaryElements
 {
-    CGFloat registerOffsetY = [SYNDeviceManager.sharedInstance isPortrait] ? 704.0 : 358.0;
+    CGFloat registerOffsetY = [SYNDeviceManager.sharedInstance isPortrait] ? 704.0 : 352.0;
     registerButton.center = CGPointMake(registerButton.center.x, registerOffsetY);
     areYouNewLabel.center = CGPointMake(areYouNewLabel.center.x, registerButton.center.y - 44.0);
     memberLabel.center = CGPointMake(loginButton.center.x, areYouNewLabel.center.y);
