@@ -43,6 +43,7 @@
         UIColor* bgErrorColor = [UIColor colorWithRed:(251.0f/255.0f) green:(233.0f/255.0f) blue:(233.0f/255.0f) alpha:1.0f];
         UIColor* borderErrorColor = [UIColor colorWithRed:(142.0f/255.0f) green:(22.0f/255.0f) blue:(41.0f/255.0f) alpha:1.0f];
         
+        self.textColor = borderErrorColor;
         self.backgroundColor = bgErrorColor;
         self.layer.borderColor = borderErrorColor.CGColor;
         self.tintColor = borderErrorColor;

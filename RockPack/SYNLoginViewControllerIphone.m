@@ -13,6 +13,7 @@
 #import "SYNLoginViewControllerIphone.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTextFieldLogin.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 #define kLoginAnimationTransitionDuration 0.3f
@@ -1243,6 +1244,11 @@
          shouldChangeCharactersInRange: (NSRange) range
          replacementString: (NSString *) newCharacter
 {
+    if([textField isKindOfClass:[SYNTextFieldLogin class]])
+    {
+        ((SYNTextFieldLogin*)textField).errorMode = NO;
+    }
+    
     NSUInteger oldLength = textField.text.length;
     NSUInteger replacementLength = newCharacter.length;
     NSUInteger rangeLength = range.length;
@@ -1442,6 +1448,11 @@
             
         default:
             break;
+    }
+    
+    if([view isKindOfClass:[SYNTextFieldLogin class]])
+    {
+        ((SYNTextFieldLogin*)view).errorMode = YES;
     }
     
     errorLabel.text = errorText;
