@@ -239,10 +239,10 @@
         completionHandler: (MKNKUserSuccessBlock) completionBlock
              errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    [self.appDelegate.oAuthNetworkEngine
-     doSimpleLoginForUsername: username
-     forPassword: password
-     completionHandler: ^(SYNOAuth2Credential *credential) {
+    [self.appDelegate.oAuthNetworkEngine doSimpleLoginForUsername: username
+                                                      forPassword: password
+                                                completionHandler: ^(SYNOAuth2Credential *credential) {
+                                                    
          // Case where the user is a member of Rockpack but has not signing in this device
          
          [self.appDelegate.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: credential

@@ -849,13 +849,16 @@
             [self turnOffButton: self.confirmButton];
             self.ddInputField.text = [self zeroPadIfOneCharacter: self.ddInputField.text];
             self.mmInputField.text = [self zeroPadIfOneCharacter: self.mmInputField.text];
-            NSDictionary *userData = @{
-                                       @"username": self.registeringUserNameInputField.text,
+            
+            NSString* dobString = [NSString stringWithFormat: @"%@-%@-%@", self.yyyyInputField.text, self.mmInputField.text, self.ddInputField.text];
+            NSDictionary *userData = @{@"username": self.registeringUserNameInputField.text,
                                        @"password": self.registeringUserPasswordInputField.text,
-                                       @"date_of_birth": [NSString stringWithFormat: @"%@-%@-%@", self.yyyyInputField.text, self.mmInputField.text, self.ddInputField.text],
+                                       @"date_of_birth": dobString,
                                        @"locale": @"en-US",
-                                       @"email": self.registeringUserEmailInputField.text
-                                       };
+                                       @"email": self.registeringUserEmailInputField.text,
+                                       @"gender": self.genderSegmentedControl.selectedSegmentIndex == 0 ? @"m" : @"f"};
+            
+            
             [self registerUserWithData: userData
                      completionHandler: ^(NSDictionary *dictionary) {
                          [self.activityIndicator stopAnimating];

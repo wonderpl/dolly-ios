@@ -741,6 +741,7 @@
     {
         [UIView animateWithDuration: 0.5
                          animations: ^{
+                             
                              facebookSignInButton.alpha = 1.0;
                              facebookSignInButton.enabled = YES;
                              
@@ -1315,12 +1316,13 @@
                      animations: ^{
                          registerNewUserButton.alpha = 0.0;
                      }];
-    
+   
     NSDictionary* userData = @{@"username": userNameInputField.text,
                                @"password": passwordInputField.text,
                                @"date_of_birth": [self dateStringFromCurrentInput],
                                @"locale":@"en-US",
-                               @"email": emailInputField.text};
+                               @"email": emailInputField.text,
+                               @"gender": (self.genderSegmentedControl.selectedSegmentIndex == 0) ? @"m" : @"f"};
     
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat: @"yyyy-MM-dd"];
