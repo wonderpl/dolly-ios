@@ -102,7 +102,6 @@
 -(void)fetchAndDisplayFriends
 {
     
-    
     NSError *error;
     NSArray *existingFriendsArray;
     
@@ -122,7 +121,6 @@
         self.friends = [NSArray arrayWithArray:existingFriendsArray];
         
         [self.friendsCollectionView reloadData];
-        
         
     }
     

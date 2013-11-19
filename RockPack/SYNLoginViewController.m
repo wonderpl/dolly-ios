@@ -118,19 +118,26 @@
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
-        // TERMS & SERVICESs
-    
-    [termsString addAttribute: NSForegroundColorAttributeName value: [UIColor colorWithRed:(11.0/255.0) green:(166.0/255.0) blue:(171.0/255.0) alpha:(1.0)] range: NSMakeRange(36, 17)];
     
     
-        // PRIVACY POLICY
+    UIColor* purple = self.finalLoginButton.backgroundColor;
     
-    [termsString addAttribute: NSForegroundColorAttributeName value: [UIColor colorWithRed:(11.0/255.0) green:(166.0/255.0) blue:(171.0/255.0) alpha:(1.0)] range: NSMakeRange(58, 14)];    
+    // == TERMS & SERVICESs == //
+    
+    
+    [termsString addAttribute: NSForegroundColorAttributeName value: purple
+                        range: NSMakeRange(36, 17)];
+    
+    
+    // == PRIVACY POLICY == //
+    
+    [termsString addAttribute: NSForegroundColorAttributeName value: purple
+                        range: NSMakeRange(58, 14)];
         
     
-        // add terms buttons
+    // == add terms buttons == //
     termsAndConditionsLabel.attributedText = termsString;
-    termsAndConditionsLabelSide.attributedText = termsAndConditionsLabel.attributedText;
+    termsAndConditionsLabelSide.attributedText = termsString;
     
     self.termsAndConditionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.termsAndConditionsButton.frame = self.termsAndConditionsLabel.frame;
@@ -144,7 +151,6 @@
     mmInputField.keyboardType = UIKeyboardTypeNumberPad;
     yyyyInputField.keyboardType = UIKeyboardTypeNumberPad;
     
-    UIColor* purple = self.finalLoginButton.backgroundColor;
     
     loginButton.layer.borderWidth = 1.0;
     loginButton.layer.borderColor = [purple CGColor];
