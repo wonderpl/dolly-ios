@@ -119,29 +119,39 @@
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
     
-    
     UIColor* purple = self.finalLoginButton.backgroundColor;
     
     // == TERMS & SERVICESs == //
     
     
     [termsString addAttribute: NSForegroundColorAttributeName value: purple
-                        range: NSMakeRange(36, 17)];
+                        range: NSMakeRange(35, 17)];
     
     
     // == PRIVACY POLICY == //
     
     [termsString addAttribute: NSForegroundColorAttributeName value: purple
-                        range: NSMakeRange(58, 14)];
+                        range: NSMakeRange(54, 14)];
         
     
-    // == add terms buttons == //
-    termsAndConditionsLabel.attributedText = termsString;
-    termsAndConditionsLabelSide.attributedText = termsString;
+  
+    termsAndConditionsLabel.attributedText = [[NSAttributedString alloc] initWithAttributedString:termsString];
+    
+    
+    NSMutableAttributedString* termsString2 = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
+    
+    
+    
+    
+    termsAndConditionsLabelSide.attributedText = [[NSAttributedString alloc] initWithAttributedString:termsString2];
+    
+    
     
     self.termsAndConditionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.termsAndConditionsButton.frame = self.termsAndConditionsLabel.frame;
-    [self.termsAndConditionsButton addTarget:self action:@selector(termsAndConditionsPressed:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [self.termsAndConditionsButton addTarget:self
+                                      action:@selector(termsAndConditionsPressed:withEvent:)
+                            forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:termsAndConditionsButton];
     
     
