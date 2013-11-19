@@ -63,10 +63,15 @@
 - (void)setProgress:(float)progress {
 	_progress = progress;
 	
-	self.progressImageView.frame = CGRectMake(CGRectGetMinX(self.progressImageView.frame),
-											  CGRectGetMinY(self.progressImageView.frame),
-											  round(CGRectGetWidth(self.frame) * MIN(progress, 1.0)),
-											  CGRectGetHeight(self.progressImageView.frame));
+	[self updateProgressView];
+}
+
+#pragma mark - Overridden
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	[self updateProgressView];
 }
 
 #pragma mark - Private
@@ -76,6 +81,13 @@
 	
 	[self addSubview:self.trackImageView];
 	[self addSubview:self.progressImageView];
+}
+
+- (void)updateProgressView {
+	self.progressImageView.frame = CGRectMake(CGRectGetMinX(self.progressImageView.frame),
+											  CGRectGetMinY(self.progressImageView.frame),
+											  round(CGRectGetWidth(self.frame) * MIN(self.progress, 1.0)),
+											  CGRectGetHeight(self.progressImageView.frame));
 }
 
 @end
