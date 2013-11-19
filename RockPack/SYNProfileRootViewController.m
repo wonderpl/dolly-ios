@@ -41,7 +41,7 @@
 #define FULL_NAME_LABEL_IPHONE 285.0f
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
-#define SEARCHBAR_Y 390.0f
+#define SEARCHBAR_Y 415.0f
 //delete function in channeldetails deletechannel
 
 
@@ -57,6 +57,7 @@
 @property (nonatomic) BOOL trackView;
 @property (nonatomic, assign) BOOL collectionsTabActive;
 @property (nonatomic, assign, getter = isDeletionModeActive) BOOL deletionModeActive;
+@property (strong, nonatomic) IBOutlet UIButton *followersCountButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
@@ -75,8 +76,6 @@
 
 @property (nonatomic, strong) SYNImagePickerController* imagePickerController;
 
-@property (nonatomic, strong) IBOutlet SYNYouHeaderView *headerChannelsView;
-@property (nonatomic, strong) IBOutlet SYNYouHeaderView *headerSubscriptionsView;
 @property (nonatomic, strong) SYNChannelMidCell *followCell;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPad;
@@ -303,10 +302,7 @@
 	
     //    self.navigationController.navigationBar.hidden = YES;
     
-    
-    
     [self updateTabStates];
-    
     [self setUpUserProfile];
     [self setUpSegmentedControl];
     [self setNeedsStatusBarAppearanceUpdate];
@@ -566,7 +562,7 @@
         self.followAllButton.hidden = YES;
         self.backButton.hidden = YES;
         
-        
+        self.moreButton.hidden = NO;
         
     }
     if (profileType == OtherUsersProfile)
@@ -574,6 +570,7 @@
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
         self.backButton.hidden = NO;
+        self.moreButton.hidden = YES;
         
         
         self.followingSearchBar.hidden = YES;
@@ -1145,7 +1142,7 @@
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
             self.backButton.transform = move;
-            
+            self.followersCountButton.transform = move;
             if (offset<0)
             {
                 //change to make like what they wanted
@@ -1167,7 +1164,8 @@
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
             self.backButton.transform = move;
-            
+            self.followersCountButton.transform = move;
+
             [self moveNameLabelWithOffset:offset];
             
             /*
@@ -1826,6 +1824,10 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     
+}
+- (IBAction)followersCountTapped:(id)sender {
+    
+    //To be implemented
 }
 
 
