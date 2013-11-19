@@ -254,11 +254,11 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="FieldPhoto.png" id="96" userLabel="Image View - Avatar">
-                    <rect key="frame" x="159" y="341" width="187" height="187"/>
+                    <rect key="frame" x="159" y="339" width="187" height="187"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="72" userLabel="Button - Change avatar">
-                    <rect key="frame" x="159" y="341" width="187" height="187"/>
+                    <rect key="frame" x="159" y="339" width="187" height="187"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal">

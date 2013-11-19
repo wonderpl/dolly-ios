@@ -53,7 +53,10 @@
 }
 
 
-
+-(void)startingPresentation
+{
+    
+}
 
 #pragma mark - View lifecycle
 

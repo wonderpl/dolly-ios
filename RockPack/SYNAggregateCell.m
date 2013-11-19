@@ -93,9 +93,42 @@
 
 // they all have 1 section
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    AssertOrLog(@"Abstract Method Called");
+    return 0;
+}
+
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
-    return 1;
+    AssertOrLog(@"Abstract Method Called");
+    return 0;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    AssertOrLog(@"Abstract Method Called");
+    return nil;
+}
+
+- (void) followControlPressed: (SYNSocialButton *) socialButton
+{
+    AssertOrLog(@"Abstract Method Called");
+}
+
+- (void) shareControlPressed: (SYNSocialButton *) socialButton
+{
+    AssertOrLog(@"Abstract Method Called");
+}
+
+- (void) likeControlPressed: (SYNSocialButton *) socialButton
+{
+    AssertOrLog(@"Abstract Method Called");
+}
+- (void) addControlPressed: (SYNSocialButton *) socialButton
+{
+    AssertOrLog(@"Abstract Method Called");
 }
 
 
