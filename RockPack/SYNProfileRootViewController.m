@@ -133,16 +133,18 @@
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hideDescriptionCurrentlyShowing) name:kHideAllDesciptions object:nil];
 
-        self.shouldBeginEditing = YES;
+        self.modeType = MyOwnProfile;
     }
     
     return self;
 }
 
-- (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode
+- (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode andChannelOwner:(ChannelOwner*)chanOwner
 {
-    self.modeType = mode;
     self = [self initWithViewId:vid];
+    self.modeType = mode;
+    self.channelOwner = chanOwner;
+
     return self;
 }
 
@@ -165,6 +167,8 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    self.shouldBeginEditing = YES;
+
     self.collectionsTabActive = YES;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
@@ -199,8 +203,10 @@
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
+
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
-        
+        [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
+        [self.subscriptionThumbnailCollectionView.collectionViewLayout invalidateLayout];
         // change the BG color of the text field inside the searcBar
         UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
         if(txfSearchField)
@@ -568,7 +574,6 @@
 {
     NSArray *updatedObjects = [notification userInfo][NSUpdatedObjectsKey];
     
-    
     [updatedObjects enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop)
      {
          if (obj == self.channelOwner)
@@ -795,6 +800,7 @@
     
     
     
+    
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
         SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
@@ -803,33 +809,15 @@
     }
     else
     {
-        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell"
-                                                                                            forIndexPath: indexPath];
+        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
         
         Channel *channel;
         
+        [channelThumbnailCell setBorder];
+        
         // == Add Special Attributes == //
         
-        if(collectionView == self.channelThumbnailCollectionView)
-        {
-            channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
-            
-            [channelThumbnailCell setHiddenForFollowButton:(self.modeType == MyOwnProfile)];
-           
-        }
-        else // (collectionView == self.subscribersThumbnailCollectionView)
-        {
-            if (indexPath.row < self.arrDisplayFollowing.count)
-            {
-                channel = _arrDisplayFollowing[indexPath.item];
-                
-                if (self.modeType == MyOwnProfile)
-                {
-                    [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
-                }
-                
-            }
-        }
+      
         
 
         // == Add Common Attributes == //
@@ -848,22 +836,63 @@
 
         }
         
-        NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
-        [channelThumbnailCell.followerCountLabel setText:subscribersString];
         
-        channelThumbnailCell.channel = channel;
-        
-        NSMutableString* videoCountString = [NSMutableString new];
-        if (IS_IPHONE)
+        if(collectionView == self.channelThumbnailCollectionView)
         {
-            [videoCountString appendString:@"- "];
+            channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
+            
+            [channelThumbnailCell setHiddenForFollowButton:(self.modeType == MyOwnProfile)];
+            
+            NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
+            [channelThumbnailCell.followerCountLabel setText:subscribersString];
+            
+            channelThumbnailCell.channel = channel;
+            
+            NSMutableString* videoCountString = [NSMutableString new];
+            if (IS_IPHONE)
+            {
+                [videoCountString appendString:@"- "];
+            }
+            
+            [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)];
+            
+            
+            channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
+
         }
+        else // (collectionView == self.subscribersThumbnailCollectionView)
+        {
+            if (indexPath.row < self.arrDisplayFollowing.count)
+            {
+                channel = _arrDisplayFollowing[indexPath.item];
+                
+                if (self.modeType == MyOwnProfile)
+                {
+                    [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
+                }
+                
+                NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
+                [channelThumbnailCell.followerCountLabel setText:subscribersString];
+                
+                channelThumbnailCell.channel = channel;
+                
+                NSMutableString* videoCountString = [NSMutableString new];
+                if (IS_IPHONE)
+                {
+                    [videoCountString appendString:@"- "];
+                }
+                
+                
+                [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)];
+                
+                
+                channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
+
+            }
+        }
+
+
         
-        
-        [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)];
-        
-        
-        channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
         channelThumbnailCell.viewControllerDelegate = self;
         
         cell = channelThumbnailCell;
@@ -923,18 +952,27 @@
     if (collectionView == self.channelThumbnailCollectionView)
     {
         if (IS_IPHONE)
+        {
             return self.channelLayoutIPhone.itemSize;
+        }
         else
+        {
             return self.channelLayoutIPad.itemSize;
+        }
     }
     
     if (collectionView == self.subscriptionThumbnailCollectionView)
     {
         if (IS_IPHONE)
+        {
             return self.subscriptionLayoutIPhone.itemSize;
-        else
+        }
+        else{
+            
+        
             return self.subscriptionLayoutIPad.itemSize;
-    }
+        }
+        }
     
     
     return CGSizeZero;
@@ -1318,6 +1356,7 @@
 
 - (void) setChannelOwner: (ChannelOwner *) user
 {
+    
     if (self.channelOwner) // if we have an existing user
     {
         // remove the listener, even if nil is passed
@@ -1337,7 +1376,10 @@
         return;
     }
     
-    if (![user isMemberOfClass: [User class]]) // is a User has been passsed dont copy him OR his channels as there can be only one.
+    BOOL channelOwnerIsUser = (BOOL)[user.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+    
+    
+    if (!channelOwnerIsUser) // is a User has been passsed dont copy him OR his channels as there can be only one.
     {
         NSFetchRequest *channelOwnerFetchRequest = [[NSFetchRequest alloc] init];
         
@@ -1387,21 +1429,17 @@
             }
         }
     }
-    else
+    else // The ChannelOwner is the User!
     {
-        _channelOwner = user; // if User isKindOfClass [User class]
+        _channelOwner = user;
     }
     
-    if (self.channelOwner) // if a user has been passed or found, monitor
+    // if a user has been passed or found, monitor
+    if (self.channelOwner)
     {
-        if ([self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-        {
-            self.isUserProfile = YES;
-        }
-        else
-        {
-            self.isUserProfile = NO;
-        }
+        // isUserProfile set to YES for the current User
+        self.isUserProfile = channelOwnerIsUser;
+        
         
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
@@ -1415,6 +1453,7 @@
     
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
+    
     
 }
 
@@ -1461,7 +1500,6 @@
         if (self.isUserProfile && indexPath.row == 0)
         {
             //never gets called, first cell gets called and created in didSelectItem
-            // [self createAndDisplayNewChannel];
             return;
         }
         else
@@ -1470,8 +1508,16 @@
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
 
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+        SYNChannelDetailsViewController *channelVC;
+        if (modeType == MyOwnProfile) {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
 
+        }
+
+        if (modeType == OtherUsersProfile) {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+
+        }
         
         [self.navigationController pushViewController:channelVC animated:YES];
         
@@ -1489,8 +1535,7 @@
         self.navigationController.navigationBarHidden = NO;
 
         
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
-        
+           SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
         
         [self.navigationController pushViewController:channelVC animated:YES];
     }
@@ -1734,7 +1779,7 @@
                                                           userInfo: @{kChannel : self.followCell.channel}];
         
         //Need to refresh the cell
-        if (self.followCell.channel.subscribedByUserValue)
+        if (self.followCell.channel.subscribedByUserValue == YES)
         {
             [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
         }

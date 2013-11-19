@@ -14,7 +14,7 @@
 @interface SYNChannelDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout, UIPopoverControllerDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
-SYNSocialActionsDelegate, UITextFieldDelegate>
+SYNSocialActionsDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, assign) kChannelDetailsMode mode;
 
@@ -30,8 +30,5 @@ SYNSocialActionsDelegate, UITextFieldDelegate>
 //FIXME: FAVOURITES Part of workaound for missing favourites functionality. Remove once final solution implemented.
 - (BOOL) isFavouritesChannel;
 - (void) refreshFavouritesChannel;
-
-- (IBAction)followControlPressed:(id)sender;
-- (IBAction)shareControlPressed:(id)sender;
 
 @end

@@ -118,14 +118,9 @@
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
-    
-    
-
         // TERMS & SERVICESs
     
     [termsString addAttribute: NSForegroundColorAttributeName value: [UIColor colorWithRed:(11.0/255.0) green:(166.0/255.0) blue:(171.0/255.0) alpha:(1.0)] range: NSMakeRange(36, 17)];
-    
-        
     
     
         // PRIVACY POLICY
@@ -149,28 +144,38 @@
     mmInputField.keyboardType = UIKeyboardTypeNumberPad;
     yyyyInputField.keyboardType = UIKeyboardTypeNumberPad;
     
+    UIColor* purple = self.finalLoginButton.backgroundColor;
+    
+    loginButton.layer.borderWidth = 1.0;
+    loginButton.layer.borderColor = [purple CGColor];
+    loginButton.layer.cornerRadius = 8.0f;
+    [loginButton setTitleColor:purple forState:UIControlStateNormal];
+    
+    signUpButton.layer.borderWidth = 1.0;
+    signUpButton.layer.borderColor = [purple CGColor];
+    signUpButton.layer.cornerRadius = 8.0f;
+    [signUpButton setTitleColor:purple forState:UIControlStateNormal];
+    
+    registerButton.layer.borderWidth = 1.0;
+    registerButton.layer.borderColor = [purple CGColor];
+    registerButton.layer.cornerRadius = 8.0f;
+    [registerButton setTitleColor:purple forState:UIControlStateNormal];
+    
     facebookButtonInitialFrame = facebookSignInButton.frame;
     signUpButtonInitialFrame = signUpButton.frame;
         
     emailInputField.keyboardType = UIKeyboardTypeEmailAddress;
-        
+    
     self.mainFormElements = @[];
+    
+    
         
     // == Setup Input Fields
-        
-    UIFont* rockpackInputFont = [UIFont lightCustomFontOfSize: 20];
-    NSArray* textFieldsToSetup = @[emailInputField, userNameInputField, passwordInputField,
-                                       ddInputField, mmInputField, yyyyInputField];
-        
-    for (UITextField* tf in textFieldsToSetup)
-    {
-        tf.font = rockpackInputFont;
-//        // -- this is to create the left padding for the text fields (hack) -- //
-//        tf.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 57)];
-//        tf.leftViewMode = UITextFieldViewModeAlways;
-    }
     
-    if([[SYNDeviceManager sharedInstance] isPortrait])
+        
+    
+    
+    if ([[SYNDeviceManager sharedInstance] isPortrait])
     {
         
         signUpButton.center = CGPointMake(facebookSignInButton.center.x + 304.0, signUpButton.center.y);
@@ -351,12 +356,12 @@
     NSURL* urlToGo;
     if(isLeft)
     {
-        urlToGo = [NSURL URLWithString: kLoginPrivacyUrl];
+        urlToGo = [NSURL URLWithString: kURLPrivacy];
         
     }
     else
     {
-        urlToGo = [NSURL URLWithString: kLoginTermsUrl];
+        urlToGo = [NSURL URLWithString: kURLTermsAndConditions];
     }
     
     [[UIApplication sharedApplication] openURL:urlToGo];
@@ -428,7 +433,7 @@
                                 areYouNewLabel, registerButton, passwordForgottenLabel,
                                 passwordForgottenButton, termsAndConditionsLabel, dobView, emailInputField,
                                 registerNewUserButton, dividerImageView, faceImageButton, self.avatarImageView, sendEmailButton,
-                                wellSendYouLabel, termsAndConditionsLabelSide];
+                                wellSendYouLabel, termsAndConditionsLabelSide, self.genderSegmentedControl];
     
     for (UIView* control in controlsToHide)
     {
@@ -436,8 +441,11 @@
     }
     
     termsAndConditionsButton.enabled = NO;
+
+    self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x - 50.0, self.genderSegmentedControl.center.y);
     
     dobView.center = CGPointMake(dobView.center.x - 50.0, dobView.center.y);
+    
     emailInputField.center = CGPointMake(emailInputField.center.x - 50.0, emailInputField.center.y);
     faceImageButton.center = CGPointMake(faceImageButton.center.x - 50.0, faceImageButton.center.y);
     self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0, self.avatarImageView.center.y);
@@ -504,7 +512,6 @@
                         options: UIViewAnimationCurveEaseInOut
                      animations: ^{
                          facebookSignInButton.alpha = 0.0;
-                         CGFloat diff = passwordInputField.frame.origin.y - userNameInputField.frame.origin.y;
                          userNameInputField.frame = passwordInputField.frame;
                          passwordInputField.alpha = 0.0;
                          emailInputField.alpha = 0.0;
@@ -517,10 +524,9 @@
                          memberLabel.alpha = 1.0;
                          areYouNewLabel.alpha = 0.0;
                          sendEmailButton.alpha = 1.0;
-                         dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y + diff);
                      }
                      completion: ^(BOOL finished) {
-                         dividerImageView.frame = CGRectIntegral(dividerImageView.frame);
+                         
                          [UIView animateWithDuration: 0.3
                                           animations: ^{
                                               wellSendYouLabel.alpha = 1.0;
@@ -531,6 +537,7 @@
 
 - (void) setUpLoginStateFromPreviousState: (kLoginScreenState) previousState
 {
+    
     [super setUpLoginStateFromPreviousState:previousState];
     //Fade out login background
     self.loginBackgroundImage.alpha = 1.0f;
@@ -539,6 +546,7 @@
                           delay:0.0f
                         options: UIViewAnimationCurveEaseInOut
                      animations:^{
+                         
                          self.loginBackgroundImage.alpha = 0.0f;
                          self.loginBackgroundFrontImage.alpha = 0.0f;
                          
@@ -559,8 +567,11 @@
     
     if (previousState == kLoginScreenStateInitial)
     {
-        facebookSignInButton.frame = CGRectMake(userNameInputField.frame.origin.x - 4.0, 322.0, facebookSignInButton.frame.size.width, facebookSignInButton.frame.size.height);
-        facebookSignInButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        CGRect fbBtnRect = facebookSignInButton.frame;
+        fbBtnRect.origin = CGPointMake(userNameInputField.frame.origin.x, 342.0);
+        facebookSignInButton.frame = fbBtnRect;
+        facebookSignInButton.autoresizingMask =
+        UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
         NSArray* loginForControls = @[facebookSignInButton, userNameInputField, passwordInputField, finalLoginButton];
         float delay = 0.0;
@@ -573,6 +584,7 @@
                                   delay: delay
                                 options: UIViewAnimationCurveEaseInOut
                              animations: ^{
+                                 
                                  control.alpha = 1.0;
                                  control.center = CGPointMake(control.center.x, control.center.y - self.elementsOffsetY);
                              }
@@ -584,7 +596,8 @@
         
         [UIView animateWithDuration: 0.3
                          animations: ^{
-                             signUpButton.alpha = 0.0; // right of facebook button
+                             
+                             signUpButton.alpha = 0.0;
                              signUpButton.hidden = YES;
                              
                              memberLabel.alpha = 0.0;
@@ -592,30 +605,37 @@
                              
                              titleImageView.alpha = 0.0;
                              self.whatsOnYourChannelLabel.alpha = 0.0f;
-                         }
-                         completion: ^(BOOL finished) {
+                             
+                             
+                             
+                         } completion: ^(BOOL finished) {
+                             
                              [self placeSecondaryElements];
                              
-                             dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y - self.elementsOffsetY);
                              
                              [UIView animateWithDuration: 0.2
                                               animations: ^{
+                                                  
+                                                  
+                                                  dividerImageView.alpha = 1.0;
+                                                  
                                                   passwordForgottenButton.alpha = 1.0;
                                                   passwordForgottenLabel.alpha = 1.0;
                                                   
-                                                  dividerImageView.alpha = 1.0;
-                                              }
-                                              completion: ^(BOOL finished) {
+                                                  
+                                              } completion: ^(BOOL finished) {
+                                                  
                                                   [UIView animateWithDuration: 0.2
                                                                    animations: ^{
+                                                                       
                                                                        areYouNewLabel.alpha = 1.0;
                                                                        registerButton.alpha = 1.0;
                                                                        
                                                                        termsAndConditionsLabel.alpha = 1.0;
                                                                        
-                                                                       
                                                                    }
                                                                    completion: ^(BOOL finished) {
+                                                                       
                                                                        isAnimating = NO;
                                                                        
                                                                        termsAndConditionsButton.enabled = YES;
@@ -623,8 +643,12 @@
                                                                        
                                                                        emailInputField.center = CGPointMake(emailInputField.center.x,
                                                                                                             emailInputField.center.y - self.elementsOffsetY);
+                                                                       
                                                                        dobView.center = CGPointMake(dobView.center.x,
                                                                                                     dobView.center.y - self.elementsOffsetY);
+                                                                       
+                                                                       self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x,
+                                                                                                                        self.genderSegmentedControl.center.y - self.elementsOffsetY);
                                                                        
                                                                        memberLabel.center = CGPointMake(memberLabel.center.x,
                                                                                                         registerButton.center.y - 57.0);
@@ -687,6 +711,10 @@
                              self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0,
                                                                   self.avatarImageView.center.y);
                              
+                             self.genderSegmentedControl.alpha = 0.0;
+                             self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x - 50.0,
+                                                          self.genderSegmentedControl.center.y);
+                             
                              passwordForgottenButton.alpha = 1.0;
                              passwordForgottenLabel.alpha = 1.0;
                              
@@ -713,12 +741,11 @@
     {
         [UIView animateWithDuration: 0.5
                          animations: ^{
+                             
                              facebookSignInButton.alpha = 1.0;
                              facebookSignInButton.enabled = YES;
                              
-                             CGFloat diff = userNameInputField.frame.origin.y - self.initialUsernameFrame.origin.y;
-                             dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y - diff);
-                             
+                             dividerImageView.alpha = 1.0f;
                              userNameInputField.frame = self.initialUsernameFrame;
                              
                              finalLoginButton.alpha = 1.0;
@@ -808,16 +835,28 @@
     {
         emailInputField.center = CGPointMake(userNameInputField.center.x,
                                              emailInputField.center.y);
+        
         emailInputField.frame = CGRectIntegral(emailInputField.frame);
         
         
         dobView.center = CGPointMake(userNameInputField.center.x,
                                      dobView.center.y);
+        
         dobView.frame = CGRectIntegral(dobView.frame);
         
-        facebookSignInButton.frame = CGRectMake(userNameInputField.frame.origin.x - 4.0, 322.0, facebookSignInButton.frame.size.width, facebookSignInButton.frame.size.height);
-        facebookSignInButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        NSArray* loginForControls = @[emailInputField, userNameInputField, passwordInputField, dobView, registerNewUserButton];
+        self.genderSegmentedControl.center = CGPointMake(userNameInputField.center.x,
+                                     self.genderSegmentedControl.center.y);
+        
+        self.genderSegmentedControl.frame = CGRectIntegral(self.genderSegmentedControl.frame);
+        
+        
+        CGRect fbBtnRect = facebookSignInButton.frame;
+        fbBtnRect.origin = CGPointMake(userNameInputField.frame.origin.x, 342.0);
+        facebookSignInButton.frame = fbBtnRect;
+        facebookSignInButton.autoresizingMask =
+        UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        
+        NSArray* loginForControls = @[emailInputField, userNameInputField, passwordInputField, dobView, self.genderSegmentedControl, registerNewUserButton];
         float delay = 0.05;
         for (UIView* control in loginForControls)
         {
@@ -844,6 +883,7 @@
                              signUpButton.hidden = YES;
                          }
                          completion: ^(BOOL finished) {
+                          
                              finalLoginButton.center = CGPointMake(finalLoginButton.center.x, finalLoginButton.center.y - self.elementsOffsetY);
                              
                              facebookSignInButton.center = CGPointMake(facebookSignInButton.center.x + kOffsetForRegisterForm, facebookSignInButton.center.y - self.elementsOffsetY);
@@ -866,6 +906,7 @@
                                                   loginButton.alpha = 1.0;
                                                   faceImageButton.alpha = 1.0;
                                                   self.avatarImageView.alpha = 1.0;
+                                                  self.genderSegmentedControl.alpha = 1.0;
                                                   
                                                   termsAndConditionsLabelSide.alpha = 1.0;
                                               }
@@ -881,8 +922,10 @@
         // prepare in the correct place
         
         loginButton.center = CGPointMake(registerButton.center.x, registerButton.center.y);
+        
         memberLabel.center = CGPointMake(loginButton.center.x,
                                          registerButton.center.y - 57.0);
+        
         memberLabel.frame = CGRectIntegral(memberLabel.frame);
         
         [UIView animateWithDuration: 0.5
@@ -895,6 +938,11 @@
                              CGRect dobRect = dobView.frame;
                              dobRect.origin.x = self.userNameInputField.frame.origin.x;
                              dobView.frame = dobRect;
+                             
+                             self.genderSegmentedControl.alpha = 1.0;
+                             CGRect genderRect = self.genderSegmentedControl.frame;
+                             genderRect.origin.x = self.userNameInputField.frame.origin.x;
+                             self.genderSegmentedControl.frame = genderRect;
                              
                              faceImageButton.alpha = 1.0;
                              self.avatarImageView.alpha = 1.0;
@@ -1268,12 +1316,13 @@
                      animations: ^{
                          registerNewUserButton.alpha = 0.0;
                      }];
-    
+   
     NSDictionary* userData = @{@"username": userNameInputField.text,
                                @"password": passwordInputField.text,
                                @"date_of_birth": [self dateStringFromCurrentInput],
                                @"locale":@"en-US",
-                               @"email": emailInputField.text};
+                               @"email": emailInputField.text,
+                               @"gender": (self.genderSegmentedControl.selectedSegmentIndex == 0) ? @"m" : @"f"};
     
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat: @"yyyy-MM-dd"];
@@ -1670,8 +1719,10 @@
                                             duration: duration];
     
     [self clearAllErrorArrows];
+    
     CGRect facebookButtonFrame = facebookSignInButton.frame;
     CGRect onBoardingFrame = self.onBoardingController.view.frame;
+    
     if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
     {
         signUpButton.center = CGPointMake(524.0, signUpButton.center.y);
@@ -1693,7 +1744,7 @@
         self.avatarImageView.center = CGPointMake(254.0, self.avatarImageView.center.y);
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 370.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 370.0);
-        registerButton.center = CGPointMake(registerButton.center.x, 358.0);
+        registerButton.center = CGPointMake(registerButton.center.x, 352.0);
         onBoardingFrame.origin.y = 100.0;
     }
     
@@ -1729,21 +1780,7 @@
     else
         termsAndConditionsButton.frame = termsAndConditionsLabelSide.frame;
     
-//    for (NSValue* targetViewPointerValue in labelsToErrorArrows)
-//    {
-//        UIView* targetView = (UIView*)[targetViewPointerValue pointerValue];
-//        if(!targetView)
-//            continue;
-//        
-//        SYNLoginErrorArrow* errorArrow = (SYNLoginErrorArrow*)[labelsToErrorArrows objectForKey:targetViewPointerValue];
-//        
-//        CGPoint newPosition = targetView.center;
-//        newPosition = [self.view convertPoint:newPosition fromView:targetView.superview];
-//        newPosition.x +=  (errorArrow.frame.size.width/2.0f + targetView.frame.size.width/2.0f - 20.0);
-//        errorArrow.center = newPosition;
-//        errorArrow.frame = CGRectIntegral(errorArrow.frame);
-//        
-//    }
+
     
 }
 
@@ -1760,12 +1797,11 @@
 
 - (void) placeSecondaryElements
 {
-    CGFloat registerOffsetY = [SYNDeviceManager.sharedInstance isPortrait] ? 704.0 : 358.0;
+    CGFloat registerOffsetY = [SYNDeviceManager.sharedInstance isPortrait] ? 704.0 : 352.0;
     registerButton.center = CGPointMake(registerButton.center.x, registerOffsetY);
     areYouNewLabel.center = CGPointMake(areYouNewLabel.center.x, registerButton.center.y - 44.0);
     memberLabel.center = CGPointMake(loginButton.center.x, areYouNewLabel.center.y);
     loginButton.center = registerButton.center;
-    dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y - self.elementsOffsetY);
     passwordForgottenLabel.center = CGPointMake(passwordForgottenLabel.center.x, passwordForgottenLabel.center.y - self.elementsOffsetY);
     passwordForgottenButton.center = CGPointMake(passwordForgottenButton.center.x, passwordForgottenButton.center.y - self.elementsOffsetY);
     CGFloat termsOffsetY = [SYNDeviceManager.sharedInstance isPortrait] ? 714.0 : 370.0;

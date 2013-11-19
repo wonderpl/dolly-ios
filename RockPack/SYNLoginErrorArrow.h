@@ -17,4 +17,5 @@
 -(void)setMessage:(NSString*)message;
 -(id)initWithDefault;
 +(id)withMessage:(NSString*)message;
+
 @end

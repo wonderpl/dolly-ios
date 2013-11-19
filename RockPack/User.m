@@ -206,34 +206,31 @@
 
 - (NSString *) description
 {
-    NSMutableString *userDescription = [NSMutableString stringWithFormat: @"User (%i) - username: '%@'", [self.uniqueId intValue], self.username];
+    NSMutableString *userDescription = [NSMutableString stringWithFormat: @"User (id:'%i') - username: '%@'", [self.uniqueId intValue], self.username];
     
-    [userDescription appendFormat: @"\nUser Channels (%i)", self.channels.count];
+    [userDescription appendFormat: @"\n=== Own Channels (%i): ===", self.channels.count];
     
-    [userDescription appendString: @":"];
     
     Channel *channel;
     for (channel in self.channels)
     {
-        [userDescription appendFormat: @"\n - %@ (%@)", channel.title, [channel.subscribedByUser boolValue] ? @"Subscribed": @"-"];
+        [userDescription appendFormat: @"\n * %@", channel.title];
     }
     
-    [userDescription appendFormat: @"\nUser Subscriptions (%i)", self.subscriptions.count];
+    [userDescription appendFormat: @"\n=== Subscribed Channels (%i): ===", self.subscriptions.count];
     
-    [userDescription appendString: @":"];
     
     for (channel in self.subscriptions)
     {
-        [userDescription appendFormat: @"\n - %@ (%@)", channel.title, [channel.subscribedByUser boolValue] ? @"Subscribed": @"-"];
+        [userDescription appendFormat: @"\n - %@", channel.title];
     }
     
-    [userDescription appendFormat: @"\nUser External Accounts (%i)", self.externalAccounts.count];
+    [userDescription appendFormat: @"\n=== External Accounts (%i): ===", self.externalAccounts.count];
     
-    [userDescription appendString: @":"];
     
     for (ExternalAccount *account in self.externalAccounts)
     {
-        [userDescription appendFormat: @"\n - %@ %@", account.system, account.permissionFlagsString];
+        [userDescription appendFormat: @"\n + %@ %@", account.system, account.permissionFlagsString];
     }
     
     return userDescription;

@@ -486,6 +486,7 @@ typedef void(^FeedDataErrorBlock)(void);
         cell.collectionData = [NSArray arrayWithArray:channelsMutArray];
         
         channelOwner = channel.channelOwner;
+        
     }
     
     // common for both types

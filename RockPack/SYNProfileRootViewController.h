@@ -20,7 +20,7 @@ typedef enum : NSInteger {
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 @property (nonatomic, assign) BOOL hideUserProfile;
 
-- (id)initWithViewId:(NSString*) vid WithMode: (ProfileType) mode;
+- (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode andChannelOwner:(ChannelOwner*)chanOwner;
 
 
 @end

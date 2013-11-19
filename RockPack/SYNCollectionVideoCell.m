@@ -19,17 +19,22 @@
     [super awakeFromNib];
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
+    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
+                      andCount: 0];
+    
+    self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateVideoItemCell");
+   
+
+    
 }
 
 #pragma mark - Social Callbacks
 
-
-
 - (IBAction) likeControlPressed: (SYNSocialButton *) socialButton
 {
+    NSLog(@"1111");
     [self.delegate likeControlPressed: socialButton];
 }
-
 
 - (IBAction) addControlPressed: (SYNSocialButton *) socialButton
 {
@@ -41,6 +46,7 @@
 {
     [self.delegate shareControlPressed: socialButton];
 }
+
 
 #pragma mark - Set Video Instance
 
@@ -70,5 +76,34 @@
     
     self.titleLabel.text = videoInstance.title;
 }
+
+#pragma mark - Set delegate
+
+
+-(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
+{
+    _delegate = delegate;
+    
+    //set an extra delete delegate
+    [self.deleteButton addTarget:_delegate
+                          action:@selector(deleteVideoInstancePressed:)
+                   forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+-(void) setUpVideoTap
+{
+    // Tap for showing video
+    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
+                                                       action: @selector(showVideo)];
+    [self.imageView addGestureRecognizer: self.tap];
+
+}
+
+-(void)showVideo
+{
+    [self.delegate videoButtonPressed:self];
+}
+
 
 @end

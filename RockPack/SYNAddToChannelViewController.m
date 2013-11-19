@@ -204,7 +204,7 @@
     
     creatingNewAnimating = YES;
     
-    // 1. Loop over all the cells and animate manually
+    // 1. Loop over all the cells and ani   mate manually
     
     int index = 0;
     for (UICollectionViewCell* cell in self.currentChannelsCollectionView.visibleCells)
@@ -225,7 +225,7 @@
                     frame.size.height = kChannelCellDefaultHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 0.0f;
                     
-                    
+                    self.createNewChannelCell.separatorBottom.hidden = YES;
                     
                     
                 }
@@ -301,8 +301,6 @@
     else
         self.createNewChannelCell.state = CreateNewChannelCellStateHidden; // this catches the 2 editing states, 'editing' and 'finilizing'
     
-    
-    
     if(self.createNewChannelCell.state == CreateNewChannelCellStateEditing)
     {
         [self.currentChannelsCollectionView setCollectionViewLayout:self.expandedFlowLayout animated:YES];
@@ -312,6 +310,8 @@
     {
         [self.currentChannelsCollectionView setCollectionViewLayout:self.normalFlowLayout animated:YES];
     }
+    
+    self.createNewChannelCell.separatorBottom.hidden = NO;
 }
 
 
@@ -369,6 +369,14 @@
     _selectedChannel = selectedChannel;
     if(_selectedChannel)
     {
+        // close the panel as well
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+                                                            object: self];
+        
+        if(self.createNewChannelCell.isEditing)
+            [self createNewButtonPressed];
+        
         self.confirmButtom.hidden = NO;
         [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
     }

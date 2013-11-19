@@ -122,40 +122,32 @@
     [self.view insertSubview: self.backgroundImageView
                      atIndex: 0];
     
-    if (IS_IOS_7_OR_GREATER)
-    {
-        self.lowerParallaxImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"LowerParallaxStars"]];
-        self.lowerParallaxImageView.contentMode = UIViewContentModeCenter;
-        self.lowerParallaxImageView.frame = totalImageRect;
-        
-        UIMotionEffectGroup *lowerMotionEffectGroup = [UIInterpolatingMotionEffect dualAxisMotionEffectWithMaxDisplacement: 100.0f];
-        
-        [self.lowerParallaxImageView addMotionEffect: lowerMotionEffectGroup];
-        
-        [self.view insertSubview: self.lowerParallaxImageView
-                         atIndex: 1];
-        
-        self.upperParallaxImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"UpperParallaxStars"]];
-        self.upperParallaxImageView.contentMode = UIViewContentModeCenter;
-        self.upperParallaxImageView.frame = totalImageRect;
-        
-        UIMotionEffectGroup *upperMotionEffectGroup = [UIInterpolatingMotionEffect dualAxisMotionEffectWithMaxDisplacement: 200.0f];
-        
-        [self.upperParallaxImageView addMotionEffect: upperMotionEffectGroup];
-        
-        [self.view insertSubview: self.upperParallaxImageView
-                         atIndex: 2];
-    }
     
-    //    self.loginBackgroundImage.center = correctPoint;
-    //    self.loginBackgroundFrontImage.center = correctPoint;
-    //
+    self.lowerParallaxImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"LowerParallaxStars"]];
+    self.lowerParallaxImageView.contentMode = UIViewContentModeCenter;
+    self.lowerParallaxImageView.frame = totalImageRect;
+    
+    UIMotionEffectGroup *lowerMotionEffectGroup = [UIInterpolatingMotionEffect dualAxisMotionEffectWithMaxDisplacement: 100.0f];
+    
+    [self.lowerParallaxImageView addMotionEffect: lowerMotionEffectGroup];
+    
+    [self.view insertSubview: self.lowerParallaxImageView
+                     atIndex: 1];
+    
+    self.upperParallaxImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"UpperParallaxStars"]];
+    self.upperParallaxImageView.contentMode = UIViewContentModeCenter;
+    self.upperParallaxImageView.frame = totalImageRect;
+    
+    UIMotionEffectGroup *upperMotionEffectGroup = [UIInterpolatingMotionEffect dualAxisMotionEffectWithMaxDisplacement: 200.0f];
+    
+    [self.upperParallaxImageView addMotionEffect: upperMotionEffectGroup];
+    
+    [self.view insertSubview: self.upperParallaxImageView
+                     atIndex: 2];
+    
     self.loginBackgroundImage.center = CGPointMake(self.view.center.x, self.loginBackgroundImage.center.y);
     
     
-    //    self.loginBackgroundImage.image = [UIImage imageNamed:self.backgroundImagesArray[0]]; // get the first image
-    
-    // localise date format for US and UK
     
     NSString *localeFromDevice = [(NSString *) CFBridgingRelease(CFLocaleCreateCanonicalLanguageIdentifierFromString(NULL, (CFStringRef)[NSLocale.autoupdatingCurrentLocale objectForKey: NSLocaleIdentifier])) lowercaseString];
     
@@ -247,10 +239,10 @@
         completionHandler: (MKNKUserSuccessBlock) completionBlock
              errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    [self.appDelegate.oAuthNetworkEngine
-     doSimpleLoginForUsername: username
-     forPassword: password
-     completionHandler: ^(SYNOAuth2Credential *credential) {
+    [self.appDelegate.oAuthNetworkEngine doSimpleLoginForUsername: username
+                                                      forPassword: password
+                                                completionHandler: ^(SYNOAuth2Credential *credential) {
+                                                    
          // Case where the user is a member of Rockpack but has not signing in this device
          
          [self.appDelegate.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: credential

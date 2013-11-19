@@ -96,6 +96,11 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) addVideoAtIndexPath: (NSIndexPath *) indexPath
                withOperation: (NSString *) operation;
 
+- (void) shareChannel: (Channel *) channel
+              isOwner: (NSNumber *) isOwner
+           usingImage: (UIImage *) image;
+
+
 - (SYNPopupMessageView*) displayPopupMessage: (NSString*) messageKey
                                   withLoader: (BOOL) isLoader;
 

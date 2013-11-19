@@ -9,6 +9,7 @@
 
 #import "SYNAppDelegate.h"
 #import "SYNContainerViewController.h"
+#import "SYNNetworkMessageView.h"
 #import "SYNVideoViewerViewController.h"
 @import UIKit;
 
@@ -49,7 +50,7 @@ typedef enum NotificationMessageType : NSInteger {
 
 - (id) initWithContainerViewController: (UIViewController*) root;
 
-- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
+- (SYNNetworkMessageView*) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
 
 - (void) addVideoOverlayToViewController: (SYNAbstractViewController *) originViewController
                   withVideoInstanceArray: (NSArray*) videoInstanceArray

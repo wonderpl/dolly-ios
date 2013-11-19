@@ -8,6 +8,8 @@
 
 @import UIKit;
 
-@interface SYNTextFieldLoginiPhone : UITextField
+#import "SYNTextFieldLogin.h"
+
+@interface SYNTextFieldLoginiPhone : SYNTextFieldLogin
 
 @end

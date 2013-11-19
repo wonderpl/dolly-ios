@@ -433,6 +433,8 @@
 
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
+    
+    
     if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
     {
         // Get the videoinstance associated with the control pressed
@@ -504,6 +506,7 @@
             UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
             CGRect keyWindowRect = [keyWindow bounds];
             UIGraphicsBeginImageContextWithOptions(keyWindowRect.size, YES, 0.0f);
+            
             CGContextRef context = UIGraphicsGetCurrentContext();
             [keyWindow.layer
              renderInContext: context];
@@ -641,6 +644,27 @@
          
      }];
 }
+
+- (void) shareChannel: (Channel *) channel
+              isOwner: (NSNumber *) isOwner
+           usingImage: (UIImage *) image
+{
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                           action: @"channelShareButtonClick"
+                                                            label: nil
+                                                            value: nil] build]];
+    
+    [self shareObjectType:  @"channel"
+                 objectId: channel.uniqueId
+                  isOwner: isOwner
+                  isVideo: @NO
+               usingImage: image];
+}
+
+
+
 
 
 #pragma mark - Purchase
@@ -1016,13 +1040,11 @@
     
 	if (profileVC)
     {
-		profileVC.channelOwner = channelOwner;
 		[self.navigationController popToViewController:profileVC animated:YES];
 	}
     else
     {
-		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile];
-		profileVC.channelOwner = channelOwner;
+		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile andChannelOwner:channelOwner];
 		[self.navigationController pushViewController:profileVC animated:YES];
 	}
 }

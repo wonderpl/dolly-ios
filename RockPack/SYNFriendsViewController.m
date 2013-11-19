@@ -31,8 +31,8 @@
 @property (nonatomic, weak) Friend* currentlySelectedFriend;
 @property (nonatomic, strong) NSMutableString* currentSearchTerm;
 
+@property (nonatomic, strong) IBOutlet UIImageView* emptyFriendsImageView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *searchFieldBackground;
 
 @end
 
@@ -45,7 +45,6 @@
     [super viewDidLoad];
     
     
-    
     onRockpackFilterOn = NO;
     
     self.currentSearchTerm = [[NSMutableString alloc] init];
@@ -54,14 +53,13 @@
     self.friends = [NSArray array];
     
     
-    
     // == Register Cells == //
     
     [self.friendsCollectionView registerNib: [UINib nibWithNibName: @"SYNSearchResultsUserCell" bundle: nil]
                  forCellWithReuseIdentifier: @"SYNSearchResultsUserCell"];
     
     self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
-    
+    self.preLoginLabel.text = NSLocalizedString (@"friends_invite", nil);
     [self.activityIndicator hidesWhenStopped];
     
     
@@ -71,7 +69,7 @@
     if ([[SYNFacebookManager sharedFBManager] hasActiveSession])
     {
         self.facebookLoginButton.hidden = YES;
-        self.preLoginLabel.hidden = YES;
+        
         self.friendsCollectionView.hidden = NO;
         self.activityIndicator.hidden = NO;
         
@@ -85,7 +83,7 @@
     {
         
         self.facebookLoginButton.hidden = NO;
-        self.preLoginLabel.hidden = NO;
+        
         self.friendsCollectionView.hidden = YES;
         self.activityIndicator.hidden = YES;
         
@@ -95,9 +93,6 @@
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    
-    self.searchFieldBackground.image = [[UIImage imageNamed: @"FieldSearch"]
-                                        resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f,20.0f, 0.0f, 20.0f)];
     
     self.facebookLoginButton.layer.cornerRadius = 8.0f;
 }
@@ -116,7 +111,7 @@
     [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
                                          inManagedObjectContext: appDelegate.searchManagedObjectContext]];
     
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem == %@", kFacebook];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem == %@ && resourceURL != NULL", kFacebook];
     
     existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                  error: &error];
@@ -138,7 +133,10 @@
     
     __weak SYNFriendsViewController* weakSelf = self;
     
+    self.emptyFriendsImageView.hidden = YES;
+    
     [self.activityIndicator startAnimating];
+    self.preLoginLabel.text = NSLocalizedString (@"friends_loading", nil);
     
     [appDelegate.oAuthNetworkEngine friendsForUser:appDelegate.currentUser
                                         onlyRecent:NO
@@ -160,6 +158,17 @@
         
                                      [self fetchAndDisplayFriends];
         
+                                     if(self.friends.count == 0)
+                                     {
+                                         self.emptyFriendsImageView.hidden = NO;
+                                         self.preLoginLabel.hidden = NO;
+                                         self.preLoginLabel.text = NSLocalizedString (@"friends_empty", nil);
+                                     }
+                                     else
+                                     {
+                                         self.preLoginLabel.hidden = YES;
+                                     }
+                                     
         
                                  } errorHandler:^(id dictionary) {
                                      [self.activityIndicator stopAnimating];

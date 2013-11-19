@@ -31,12 +31,12 @@
                                     </label>
                                 </subviews>
                             </view>
-                            <view contentMode="scaleToFill" id="UgH-dt-V5g">
+                            <view contentMode="scaleToFill" id="UgH-dt-V5g" userLabel="View - Bottom Line">
                                 <rect key="frame" x="0.0" y="70" width="322" height="1"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.73725490196078436" green="0.73725490196078436" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" id="UUL-SF-FNl">
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" id="UUL-SF-FNl" userLabel="View - Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
