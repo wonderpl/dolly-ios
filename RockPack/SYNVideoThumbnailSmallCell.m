@@ -30,6 +30,10 @@
 
 @synthesize colour = _colour;
 
++ (UINib *)nib {
+	return [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
+}
+
 - (void) awakeFromNib
 {
     [super awakeFromNib];
