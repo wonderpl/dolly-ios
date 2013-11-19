@@ -111,7 +111,7 @@
     [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
                                          inManagedObjectContext: appDelegate.searchManagedObjectContext]];
     
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem == %@", kFacebook];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem == %@ && resourceURL != NULL", kFacebook];
     
     existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                  error: &error];
