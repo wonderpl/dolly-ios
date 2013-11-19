@@ -29,4 +29,6 @@
 @property (nonatomic, assign) NSTimeInterval currentTime;
 @property (nonatomic, assign) NSTimeInterval duration;
 
++ (instancetype)view;
+
 @end

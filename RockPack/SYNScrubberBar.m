@@ -32,6 +32,12 @@
 
 @implementation SYNScrubberBar
 
+#pragma mark - Public class
+
++ (instancetype)view {
+	return [[[NSBundle mainBundle] loadNibNamed:@"SYNScrubberBar" owner:nil options:nil] firstObject];
+}
+
 #pragma mark - Overridden
 
 - (void)awakeFromNib {

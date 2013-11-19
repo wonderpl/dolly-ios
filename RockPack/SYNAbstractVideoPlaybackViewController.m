@@ -32,7 +32,7 @@
     // Setup our web views
     [self specificInit];
 	
-	self.scrubberBar = [[[NSBundle mainBundle] loadNibNamed:@"SYNScrubberBar" owner:self options:nil] firstObject];
+	self.scrubberBar = [SYNScrubberBar view];
 	self.scrubberBar.frame = CGRectMake(0,
 										CGRectGetHeight(self.view.frame) - CGRectGetHeight(self.scrubberBar.frame),
 										CGRectGetWidth(self.view.frame),
