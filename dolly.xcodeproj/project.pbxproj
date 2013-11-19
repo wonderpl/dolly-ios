@@ -1034,32 +1034,10 @@
 		BE22A84817A8270A0004BBF4 /* GlossFeedVideo~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE22A84617A8270A0004BBF4 /* GlossFeedVideo~iphone.png */; };
 		BE270B7F16EDE0E800CDDA6D /* SYNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE270B7D16EDE0E800CDDA6D /* SYNLoginViewController.m */; };
 		BE270B8016EDE0E800CDDA6D /* SYNLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE270B7E16EDE0E800CDDA6D /* SYNLoginViewController.xib */; };
-		BE270BB816EE493800CDDA6D /* ButtonFacebookDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BA816EE493800CDDA6D /* ButtonFacebookDefault.png */; };
-		BE270BB916EE493800CDDA6D /* ButtonFacebookDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BA916EE493800CDDA6D /* ButtonFacebookDefault@2x.png */; };
-		BE270BBA16EE493800CDDA6D /* ButtonFacebookHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BAA16EE493800CDDA6D /* ButtonFacebookHighlighted.png */; };
-		BE270BBB16EE493800CDDA6D /* ButtonFacebookHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BAB16EE493800CDDA6D /* ButtonFacebookHighlighted@2x.png */; };
-		BE270BBC16EE493800CDDA6D /* ButtonLoginDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BAC16EE493800CDDA6D /* ButtonLoginDefault.png */; };
-		BE270BBD16EE493800CDDA6D /* ButtonLoginDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BAD16EE493800CDDA6D /* ButtonLoginDefault@2x.png */; };
-		BE270BBE16EE493800CDDA6D /* ButtonLoginHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BAE16EE493800CDDA6D /* ButtonLoginHighlighted.png */; };
-		BE270BBF16EE493800CDDA6D /* ButtonLoginHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BAF16EE493800CDDA6D /* ButtonLoginHighlighted@2x.png */; };
-		BE270BC016EE493800CDDA6D /* ButtonSignupDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BB016EE493800CDDA6D /* ButtonSignupDefault.png */; };
-		BE270BC116EE493800CDDA6D /* ButtonSignupDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BB116EE493800CDDA6D /* ButtonSignupDefault@2x.png */; };
-		BE270BC216EE493800CDDA6D /* ButtonSignupHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BB216EE493800CDDA6D /* ButtonSignupHighlighted.png */; };
-		BE270BC316EE493800CDDA6D /* ButtonSignupHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BB316EE493800CDDA6D /* ButtonSignupHighlighted@2x.png */; };
 		BE270BC616EE493800CDDA6D /* LogoSignup.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BB616EE493800CDDA6D /* LogoSignup.png */; };
 		BE270BC716EE493800CDDA6D /* LogoSignup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BB716EE493800CDDA6D /* LogoSignup@2x.png */; };
 		BE270BD016EF386300CDDA6D /* DividerLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BCC16EF386300CDDA6D /* DividerLogin.png */; };
 		BE270BD116EF386300CDDA6D /* DividerLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BCD16EF386300CDDA6D /* DividerLogin@2x.png */; };
-		BE270BD216EF386300CDDA6D /* FieldLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BCE16EF386300CDDA6D /* FieldLogin.png */; };
-		BE270BD316EF386300CDDA6D /* FieldLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BCF16EF386300CDDA6D /* FieldLogin@2x.png */; };
-		BE270BD816EF39E000CDDA6D /* ButtonLoginBigDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BD416EF39DF00CDDA6D /* ButtonLoginBigDefault.png */; };
-		BE270BD916EF39E000CDDA6D /* ButtonLoginBigDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BD516EF39DF00CDDA6D /* ButtonLoginBigDefault@2x.png */; };
-		BE270BDA16EF39E000CDDA6D /* ButtonLoginBigHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BD616EF39E000CDDA6D /* ButtonLoginBigHighlighted.png */; };
-		BE270BDB16EF39E000CDDA6D /* ButtonLoginBigHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BD716EF39E000CDDA6D /* ButtonLoginBigHighlighted@2x.png */; };
-		BE270BE016EF3A2100CDDA6D /* ButtonRegister.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BDC16EF3A2100CDDA6D /* ButtonRegister.png */; };
-		BE270BE116EF3A2100CDDA6D /* ButtonRegister@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BDD16EF3A2100CDDA6D /* ButtonRegister@2x.png */; };
-		BE270BE216EF3A2100CDDA6D /* ButtonRegisterHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BDE16EF3A2100CDDA6D /* ButtonRegisterHighlighted.png */; };
-		BE270BE316EF3A2100CDDA6D /* ButtonRegisterHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE270BDF16EF3A2100CDDA6D /* ButtonRegisterHighlighted@2x.png */; };
 		BE285D9B1725726300D995AB /* SYNAddToChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE285D991725726300D995AB /* SYNAddToChannelViewController.m */; };
 		BE285D9C1725726300D995AB /* SYNAddToChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE285D9A1725726300D995AB /* SYNAddToChannelViewController.xib */; };
 		BE285D9F172584E200D995AB /* SYNAddToChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE285D9E172584E200D995AB /* SYNAddToChannelCreateNewCell.m */; };
@@ -1222,6 +1200,8 @@
 		BE82099717A95F6E00472ADD /* channelFeedCoverFourth~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82099017A95F6E00472ADD /* channelFeedCoverFourth~iphone.png */; };
 		BE82099817A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82099117A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png */; };
 		BE82099A17A95F9900472ADD /* channelFeedCover.png in Resources */ = {isa = PBXBuildFile; fileRef = BE82099917A95F9900472ADD /* channelFeedCover.png */; };
+		BE851B48183BE6BC00B8E8C6 /* ButtonUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = BE851B46183BE6BC00B8E8C6 /* ButtonUpload.png */; };
+		BE851B49183BE6BC00B8E8C6 /* ButtonUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE851B47183BE6BC00B8E8C6 /* ButtonUpload@2x.png */; };
 		BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE86BF19171F07B10006DC8A /* SYNChannelMidCell.m */; };
 		BE86BF1C171F07C70006DC8A /* SYNChannelMidCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF1B171F07C70006DC8A /* SYNChannelMidCell.xib */; };
 		BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE86BF1E171FFB980006DC8A /* SYNYouHeaderView.m */; };
@@ -1231,10 +1211,6 @@
 		BE86BF29172011150006DC8A /* HeaderProfilePortraitBoth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF23172011150006DC8A /* HeaderProfilePortraitBoth@2x.png */; };
 		BE86BF2A172011150006DC8A /* HeaderProfileSubscriptionsLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF24172011150006DC8A /* HeaderProfileSubscriptionsLandscape.png */; };
 		BE86BF2B172011150006DC8A /* HeaderProfileSubscriptionsLandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF25172011150006DC8A /* HeaderProfileSubscriptionsLandscape@2x.png */; };
-		BE86BF3017201BA70006DC8A /* ButtonResetPasswordDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF2C17201BA70006DC8A /* ButtonResetPasswordDefault.png */; };
-		BE86BF3117201BA70006DC8A /* ButtonResetPasswordDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF2D17201BA70006DC8A /* ButtonResetPasswordDefault@2x.png */; };
-		BE86BF3217201BA70006DC8A /* ButtonResetPasswordHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF2E17201BA70006DC8A /* ButtonResetPasswordHighlighted.png */; };
-		BE86BF3317201BA70006DC8A /* ButtonResetPasswordHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE86BF2F17201BA70006DC8A /* ButtonResetPasswordHighlighted@2x.png */; };
 		BE8F938517B1113600E7035F /* SYNImplicitSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F938317B1113600E7035F /* SYNImplicitSharingController.m */; };
 		BE8F938617B1113600E7035F /* SYNImplicitSharingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE8F938417B1113600E7035F /* SYNImplicitSharingController.xib */; };
 		BE8F938A17B1267900E7035F /* _ExternalAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F938917B1267900E7035F /* _ExternalAccount.m */; };
@@ -1374,15 +1350,7 @@
 		BED027D51834D4CC00636659 /* ButtonMoreSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED027C51834D4CC00636659 /* ButtonMoreSettings@2x.png */; };
 		BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027D61834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib */; };
 		BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027D81834F4EA00636659 /* SYNAccountSettingsViewController.xib */; };
-		BED4310316EF8D830051465B /* FieldDayMonth.png in Resources */ = {isa = PBXBuildFile; fileRef = BED430FF16EF8D830051465B /* FieldDayMonth.png */; };
-		BED4310416EF8D830051465B /* FieldDayMonth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310016EF8D830051465B /* FieldDayMonth@2x.png */; };
-		BED4310516EF8D830051465B /* FieldYear.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310116EF8D830051465B /* FieldYear.png */; };
-		BED4310616EF8D830051465B /* FieldYear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310216EF8D830051465B /* FieldYear@2x.png */; };
-		BED4310916EF8F7A0051465B /* ButtonRegisterBigDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310716EF8F7A0051465B /* ButtonRegisterBigDefault.png */; };
-		BED4310A16EF8F7A0051465B /* ButtonRegisterBigDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4310816EF8F7A0051465B /* ButtonRegisterBigDefault@2x.png */; };
 		BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */; };
-		BED4311A16F1F0CF0051465B /* FieldPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4311816F1F0CF0051465B /* FieldPhoto.png */; };
-		BED4311B16F1F0CF0051465B /* FieldPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED4311916F1F0CF0051465B /* FieldPhoto@2x.png */; };
 		BED4312B16F20CD70051465B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4312A16F20CD70051465B /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
@@ -2656,32 +2624,10 @@
 		BE270B7C16EDE0E800CDDA6D /* SYNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginViewController.h; sourceTree = "<group>"; };
 		BE270B7D16EDE0E800CDDA6D /* SYNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginViewController.m; sourceTree = "<group>"; };
 		BE270B7E16EDE0E800CDDA6D /* SYNLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNLoginViewController.xib; sourceTree = "<group>"; };
-		BE270BA816EE493800CDDA6D /* ButtonFacebookDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonFacebookDefault.png; path = Assets/Images/ButtonFacebookDefault.png; sourceTree = "<group>"; };
-		BE270BA916EE493800CDDA6D /* ButtonFacebookDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonFacebookDefault@2x.png"; path = "Assets/Images/ButtonFacebookDefault@2x.png"; sourceTree = "<group>"; };
-		BE270BAA16EE493800CDDA6D /* ButtonFacebookHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonFacebookHighlighted.png; path = Assets/Images/ButtonFacebookHighlighted.png; sourceTree = "<group>"; };
-		BE270BAB16EE493800CDDA6D /* ButtonFacebookHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonFacebookHighlighted@2x.png"; path = "Assets/Images/ButtonFacebookHighlighted@2x.png"; sourceTree = "<group>"; };
-		BE270BAC16EE493800CDDA6D /* ButtonLoginDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonLoginDefault.png; path = Assets/Images/ButtonLoginDefault.png; sourceTree = "<group>"; };
-		BE270BAD16EE493800CDDA6D /* ButtonLoginDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonLoginDefault@2x.png"; path = "Assets/Images/ButtonLoginDefault@2x.png"; sourceTree = "<group>"; };
-		BE270BAE16EE493800CDDA6D /* ButtonLoginHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonLoginHighlighted.png; path = Assets/Images/ButtonLoginHighlighted.png; sourceTree = "<group>"; };
-		BE270BAF16EE493800CDDA6D /* ButtonLoginHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonLoginHighlighted@2x.png"; path = "Assets/Images/ButtonLoginHighlighted@2x.png"; sourceTree = "<group>"; };
-		BE270BB016EE493800CDDA6D /* ButtonSignupDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSignupDefault.png; path = Assets/Images/ButtonSignupDefault.png; sourceTree = "<group>"; };
-		BE270BB116EE493800CDDA6D /* ButtonSignupDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSignupDefault@2x.png"; path = "Assets/Images/ButtonSignupDefault@2x.png"; sourceTree = "<group>"; };
-		BE270BB216EE493800CDDA6D /* ButtonSignupHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSignupHighlighted.png; path = Assets/Images/ButtonSignupHighlighted.png; sourceTree = "<group>"; };
-		BE270BB316EE493800CDDA6D /* ButtonSignupHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSignupHighlighted@2x.png"; path = "Assets/Images/ButtonSignupHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE270BB616EE493800CDDA6D /* LogoSignup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoSignup.png; path = Assets/Images/LogoSignup.png; sourceTree = "<group>"; };
 		BE270BB716EE493800CDDA6D /* LogoSignup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoSignup@2x.png"; path = "Assets/Images/LogoSignup@2x.png"; sourceTree = "<group>"; };
 		BE270BCC16EF386300CDDA6D /* DividerLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DividerLogin.png; path = Assets/Images/DividerLogin.png; sourceTree = "<group>"; };
 		BE270BCD16EF386300CDDA6D /* DividerLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DividerLogin@2x.png"; path = "Assets/Images/DividerLogin@2x.png"; sourceTree = "<group>"; };
-		BE270BCE16EF386300CDDA6D /* FieldLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldLogin.png; path = Assets/Images/FieldLogin.png; sourceTree = "<group>"; };
-		BE270BCF16EF386300CDDA6D /* FieldLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FieldLogin@2x.png"; path = "Assets/Images/FieldLogin@2x.png"; sourceTree = "<group>"; };
-		BE270BD416EF39DF00CDDA6D /* ButtonLoginBigDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonLoginBigDefault.png; path = Assets/Images/ButtonLoginBigDefault.png; sourceTree = "<group>"; };
-		BE270BD516EF39DF00CDDA6D /* ButtonLoginBigDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonLoginBigDefault@2x.png"; path = "Assets/Images/ButtonLoginBigDefault@2x.png"; sourceTree = "<group>"; };
-		BE270BD616EF39E000CDDA6D /* ButtonLoginBigHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonLoginBigHighlighted.png; path = Assets/Images/ButtonLoginBigHighlighted.png; sourceTree = "<group>"; };
-		BE270BD716EF39E000CDDA6D /* ButtonLoginBigHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonLoginBigHighlighted@2x.png"; path = "Assets/Images/ButtonLoginBigHighlighted@2x.png"; sourceTree = "<group>"; };
-		BE270BDC16EF3A2100CDDA6D /* ButtonRegister.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonRegister.png; path = Assets/Images/ButtonRegister.png; sourceTree = "<group>"; };
-		BE270BDD16EF3A2100CDDA6D /* ButtonRegister@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonRegister@2x.png"; path = "Assets/Images/ButtonRegister@2x.png"; sourceTree = "<group>"; };
-		BE270BDE16EF3A2100CDDA6D /* ButtonRegisterHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonRegisterHighlighted.png; path = Assets/Images/ButtonRegisterHighlighted.png; sourceTree = "<group>"; };
-		BE270BDF16EF3A2100CDDA6D /* ButtonRegisterHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonRegisterHighlighted@2x.png"; path = "Assets/Images/ButtonRegisterHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE285D981725726300D995AB /* SYNAddToChannelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelViewController.h; sourceTree = "<group>"; };
 		BE285D991725726300D995AB /* SYNAddToChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelViewController.m; sourceTree = "<group>"; };
 		BE285D9A1725726300D995AB /* SYNAddToChannelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAddToChannelViewController.xib; sourceTree = "<group>"; };
@@ -2880,6 +2826,8 @@
 		BE82099117A95F6E00472ADD /* channelFeedCoverFourth@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "channelFeedCoverFourth@2x~iphone.png"; path = "Assets/Images/channelFeedCoverFourth@2x~iphone.png"; sourceTree = "<group>"; };
 		BE82099917A95F9900472ADD /* channelFeedCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = channelFeedCover.png; path = Assets/Images/channelFeedCover.png; sourceTree = "<group>"; };
 		BE82099B17A9651900472ADD /* Rockpack 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 8.xcdatamodel"; sourceTree = "<group>"; };
+		BE851B46183BE6BC00B8E8C6 /* ButtonUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonUpload.png; path = Assets/Images/ButtonUpload.png; sourceTree = "<group>"; };
+		BE851B47183BE6BC00B8E8C6 /* ButtonUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonUpload@2x.png"; path = "Assets/Images/ButtonUpload@2x.png"; sourceTree = "<group>"; };
 		BE86BF18171F07B10006DC8A /* SYNChannelMidCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelMidCell.h; sourceTree = "<group>"; };
 		BE86BF19171F07B10006DC8A /* SYNChannelMidCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelMidCell.m; sourceTree = "<group>"; };
 		BE86BF1B171F07C70006DC8A /* SYNChannelMidCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelMidCell.xib; sourceTree = "<group>"; };
@@ -2891,10 +2839,6 @@
 		BE86BF23172011150006DC8A /* HeaderProfilePortraitBoth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HeaderProfilePortraitBoth@2x.png"; path = "Assets/Images/HeaderProfilePortraitBoth@2x.png"; sourceTree = "<group>"; };
 		BE86BF24172011150006DC8A /* HeaderProfileSubscriptionsLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HeaderProfileSubscriptionsLandscape.png; path = Assets/Images/HeaderProfileSubscriptionsLandscape.png; sourceTree = "<group>"; };
 		BE86BF25172011150006DC8A /* HeaderProfileSubscriptionsLandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HeaderProfileSubscriptionsLandscape@2x.png"; path = "Assets/Images/HeaderProfileSubscriptionsLandscape@2x.png"; sourceTree = "<group>"; };
-		BE86BF2C17201BA70006DC8A /* ButtonResetPasswordDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonResetPasswordDefault.png; path = Assets/Images/ButtonResetPasswordDefault.png; sourceTree = "<group>"; };
-		BE86BF2D17201BA70006DC8A /* ButtonResetPasswordDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonResetPasswordDefault@2x.png"; path = "Assets/Images/ButtonResetPasswordDefault@2x.png"; sourceTree = "<group>"; };
-		BE86BF2E17201BA70006DC8A /* ButtonResetPasswordHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonResetPasswordHighlighted.png; path = Assets/Images/ButtonResetPasswordHighlighted.png; sourceTree = "<group>"; };
-		BE86BF2F17201BA70006DC8A /* ButtonResetPasswordHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonResetPasswordHighlighted@2x.png"; path = "Assets/Images/ButtonResetPasswordHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE8F938217B1113600E7035F /* SYNImplicitSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNImplicitSharingController.h; sourceTree = "<group>"; };
 		BE8F938317B1113600E7035F /* SYNImplicitSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNImplicitSharingController.m; sourceTree = "<group>"; };
 		BE8F938417B1113600E7035F /* SYNImplicitSharingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNImplicitSharingController.xib; sourceTree = "<group>"; };
@@ -3062,16 +3006,8 @@
 		BED027C51834D4CC00636659 /* ButtonMoreSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreSettings@2x.png"; path = "Assets/Images/ButtonMoreSettings@2x.png"; sourceTree = "<group>"; };
 		BED027D61834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAccountSettingsViewController~iphone.xib"; sourceTree = "<group>"; };
 		BED027D81834F4EA00636659 /* SYNAccountSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAccountSettingsViewController.xib; sourceTree = "<group>"; };
-		BED430FF16EF8D830051465B /* FieldDayMonth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldDayMonth.png; path = Assets/Images/FieldDayMonth.png; sourceTree = "<group>"; };
-		BED4310016EF8D830051465B /* FieldDayMonth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FieldDayMonth@2x.png"; path = "Assets/Images/FieldDayMonth@2x.png"; sourceTree = "<group>"; };
-		BED4310116EF8D830051465B /* FieldYear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldYear.png; path = Assets/Images/FieldYear.png; sourceTree = "<group>"; };
-		BED4310216EF8D830051465B /* FieldYear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FieldYear@2x.png"; path = "Assets/Images/FieldYear@2x.png"; sourceTree = "<group>"; };
-		BED4310716EF8F7A0051465B /* ButtonRegisterBigDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonRegisterBigDefault.png; path = Assets/Images/ButtonRegisterBigDefault.png; sourceTree = "<group>"; };
-		BED4310816EF8F7A0051465B /* ButtonRegisterBigDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonRegisterBigDefault@2x.png"; path = "Assets/Images/ButtonRegisterBigDefault@2x.png"; sourceTree = "<group>"; };
 		BED4311516F0EBBB0051465B /* SYNLoginErrorArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginErrorArrow.h; sourceTree = "<group>"; };
 		BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginErrorArrow.m; sourceTree = "<group>"; };
-		BED4311816F1F0CF0051465B /* FieldPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FieldPhoto.png; path = Assets/Images/FieldPhoto.png; sourceTree = "<group>"; };
-		BED4311916F1F0CF0051465B /* FieldPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FieldPhoto@2x.png"; path = "Assets/Images/FieldPhoto@2x.png"; sourceTree = "<group>"; };
 		BED4312916F20CD70051465B /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		BED4312A16F20CD70051465B /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RegexKitLite.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BEE4A6BD170B0FD6008F9D05 /* dolly-Release-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "dolly-Release-Info.plist"; path = "RockPack/dolly-Release-Info.plist"; sourceTree = "<group>"; };
@@ -5567,44 +5503,12 @@
 			children = (
 				1FBF54EC17BD71B300B4074E /* Onboarding Images */,
 				1F320031175DED7A00310EB5 /* Background */,
-				BED4311816F1F0CF0051465B /* FieldPhoto.png */,
-				BED4311916F1F0CF0051465B /* FieldPhoto@2x.png */,
-				BED4310716EF8F7A0051465B /* ButtonRegisterBigDefault.png */,
-				BED4310816EF8F7A0051465B /* ButtonRegisterBigDefault@2x.png */,
-				BED430FF16EF8D830051465B /* FieldDayMonth.png */,
-				BED4310016EF8D830051465B /* FieldDayMonth@2x.png */,
-				BED4310116EF8D830051465B /* FieldYear.png */,
-				BED4310216EF8D830051465B /* FieldYear@2x.png */,
-				BE270BDC16EF3A2100CDDA6D /* ButtonRegister.png */,
-				BE270BDD16EF3A2100CDDA6D /* ButtonRegister@2x.png */,
-				BE270BDE16EF3A2100CDDA6D /* ButtonRegisterHighlighted.png */,
-				BE270BDF16EF3A2100CDDA6D /* ButtonRegisterHighlighted@2x.png */,
-				BE270BD416EF39DF00CDDA6D /* ButtonLoginBigDefault.png */,
-				BE270BD516EF39DF00CDDA6D /* ButtonLoginBigDefault@2x.png */,
-				BE270BD616EF39E000CDDA6D /* ButtonLoginBigHighlighted.png */,
-				BE270BD716EF39E000CDDA6D /* ButtonLoginBigHighlighted@2x.png */,
 				BE270BCC16EF386300CDDA6D /* DividerLogin.png */,
 				BE270BCD16EF386300CDDA6D /* DividerLogin@2x.png */,
-				BE270BCE16EF386300CDDA6D /* FieldLogin.png */,
-				BE270BCF16EF386300CDDA6D /* FieldLogin@2x.png */,
-				BE270BA816EE493800CDDA6D /* ButtonFacebookDefault.png */,
-				BE270BA916EE493800CDDA6D /* ButtonFacebookDefault@2x.png */,
-				BE270BAA16EE493800CDDA6D /* ButtonFacebookHighlighted.png */,
-				BE270BAB16EE493800CDDA6D /* ButtonFacebookHighlighted@2x.png */,
-				BE270BAC16EE493800CDDA6D /* ButtonLoginDefault.png */,
-				BE270BAD16EE493800CDDA6D /* ButtonLoginDefault@2x.png */,
-				BE270BAE16EE493800CDDA6D /* ButtonLoginHighlighted.png */,
-				BE270BAF16EE493800CDDA6D /* ButtonLoginHighlighted@2x.png */,
-				BE270BB016EE493800CDDA6D /* ButtonSignupDefault.png */,
-				BE270BB116EE493800CDDA6D /* ButtonSignupDefault@2x.png */,
-				BE270BB216EE493800CDDA6D /* ButtonSignupHighlighted.png */,
-				BE270BB316EE493800CDDA6D /* ButtonSignupHighlighted@2x.png */,
-				BE86BF2C17201BA70006DC8A /* ButtonResetPasswordDefault.png */,
-				BE86BF2D17201BA70006DC8A /* ButtonResetPasswordDefault@2x.png */,
-				BE86BF2E17201BA70006DC8A /* ButtonResetPasswordHighlighted.png */,
-				BE86BF2F17201BA70006DC8A /* ButtonResetPasswordHighlighted@2x.png */,
 				BE270BB616EE493800CDDA6D /* LogoSignup.png */,
 				BE270BB716EE493800CDDA6D /* LogoSignup@2x.png */,
+				BE851B46183BE6BC00B8E8C6 /* ButtonUpload.png */,
+				BE851B47183BE6BC00B8E8C6 /* ButtonUpload@2x.png */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -6423,6 +6327,7 @@
 				BE1B3DC4180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib in Resources */,
 				01F8E78316B0554B000D44B9 /* ButtonClose.png in Resources */,
 				BEB31385181FC5C500FAF98A /* SYNAggregateChannelCell~iphone.xib in Resources */,
+				BE851B49183BE6BC00B8E8C6 /* ButtonUpload@2x.png in Resources */,
 				01F8E78416B0554B000D44B9 /* ButtonClose@2x.png in Resources */,
 				01EA81BF16B8AA110069AFF9 /* ButtonLargeVideoPanelPlay.png in Resources */,
 				01EA81C016B8AA110069AFF9 /* ButtonLargeVideoPanelPlay@2x.png in Resources */,
@@ -6450,45 +6355,17 @@
 				011A161E16EF5E8E008CF25E /* PLCameraSheetDoneButtonPressed.png in Resources */,
 				011A161F16EF5E8E008CF25E /* PLCameraSheetDoneButtonPressed@2x.png in Resources */,
 				BE270B8016EDE0E800CDDA6D /* SYNLoginViewController.xib in Resources */,
-				BE270BB816EE493800CDDA6D /* ButtonFacebookDefault.png in Resources */,
-				BE270BB916EE493800CDDA6D /* ButtonFacebookDefault@2x.png in Resources */,
 				BE458AEA17E6007500776B0D /* InstructionCard2fakeVideoCell@2x~iphone.png in Resources */,
-				BE270BBA16EE493800CDDA6D /* ButtonFacebookHighlighted.png in Resources */,
-				BE270BBB16EE493800CDDA6D /* ButtonFacebookHighlighted@2x.png in Resources */,
 				0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */,
-				BE270BBC16EE493800CDDA6D /* ButtonLoginDefault.png in Resources */,
-				BE270BBD16EE493800CDDA6D /* ButtonLoginDefault@2x.png in Resources */,
-				BE270BBE16EE493800CDDA6D /* ButtonLoginHighlighted.png in Resources */,
-				BE270BBF16EE493800CDDA6D /* ButtonLoginHighlighted@2x.png in Resources */,
 				1F4E7FBD181ACBAA00F59007 /* TabMoodsSelected@2x~iphone.png in Resources */,
-				BE270BC016EE493800CDDA6D /* ButtonSignupDefault.png in Resources */,
 				1F4E7FC7181ACBAA00F59007 /* TabSearchHighlighted@2x~iphone.png in Resources */,
 				1F458B0017E1C4E6003C14AC /* AppIcon29x29.png in Resources */,
-				BE270BC116EE493800CDDA6D /* ButtonSignupDefault@2x.png in Resources */,
-				BE270BC216EE493800CDDA6D /* ButtonSignupHighlighted.png in Resources */,
-				BE270BC316EE493800CDDA6D /* ButtonSignupHighlighted@2x.png in Resources */,
 				BE270BC616EE493800CDDA6D /* LogoSignup.png in Resources */,
 				BE270BC716EE493800CDDA6D /* LogoSignup@2x.png in Resources */,
 				BE270BD016EF386300CDDA6D /* DividerLogin.png in Resources */,
 				BE270BD116EF386300CDDA6D /* DividerLogin@2x.png in Resources */,
 				01578C2C17DF840800B4F498 /* UpperParallaxStars.png in Resources */,
-				BE270BD216EF386300CDDA6D /* FieldLogin.png in Resources */,
-				BE270BD316EF386300CDDA6D /* FieldLogin@2x.png in Resources */,
-				BE270BD816EF39E000CDDA6D /* ButtonLoginBigDefault.png in Resources */,
-				BE270BD916EF39E000CDDA6D /* ButtonLoginBigDefault@2x.png in Resources */,
-				BE270BDA16EF39E000CDDA6D /* ButtonLoginBigHighlighted.png in Resources */,
-				BE270BDB16EF39E000CDDA6D /* ButtonLoginBigHighlighted@2x.png in Resources */,
-				BE270BE016EF3A2100CDDA6D /* ButtonRegister.png in Resources */,
-				BE270BE116EF3A2100CDDA6D /* ButtonRegister@2x.png in Resources */,
-				BE270BE216EF3A2100CDDA6D /* ButtonRegisterHighlighted.png in Resources */,
-				BE270BE316EF3A2100CDDA6D /* ButtonRegisterHighlighted@2x.png in Resources */,
 				0E19FBBF1822738A0007DF5B /* SYNChannelSearchCell.xib in Resources */,
-				BED4310316EF8D830051465B /* FieldDayMonth.png in Resources */,
-				BED4310416EF8D830051465B /* FieldDayMonth@2x.png in Resources */,
-				BED4310516EF8D830051465B /* FieldYear.png in Resources */,
-				BED4310616EF8D830051465B /* FieldYear@2x.png in Resources */,
-				BED4310916EF8F7A0051465B /* ButtonRegisterBigDefault.png in Resources */,
-				BED4310A16EF8F7A0051465B /* ButtonRegisterBigDefault@2x.png in Resources */,
 				0EF07867181EAE8300667417 /* ButtonMore.png in Resources */,
 				011A164116F10014008CF25E /* PlaceholderVideoBottom.png in Resources */,
 				1F4E7F7A181AC7D300F59007 /* TabFeedHighlighted@2x.png in Resources */,
@@ -6497,8 +6374,6 @@
 				0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */,
 				011A164316F10014008CF25E /* PlaceholderVideoTop.png in Resources */,
 				BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */,
-				BED4311A16F1F0CF0051465B /* FieldPhoto.png in Resources */,
-				BED4311B16F1F0CF0051465B /* FieldPhoto@2x.png in Resources */,
 				01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */,
 				01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */,
 				01A79B9316F32C3400B05084 /* Clear.png in Resources */,
@@ -6654,10 +6529,6 @@
 				1F4E7F80181AC7D300F59007 /* TabMoodsSelected@2x.png in Resources */,
 				BE86BF2A172011150006DC8A /* HeaderProfileSubscriptionsLandscape.png in Resources */,
 				BE86BF2B172011150006DC8A /* HeaderProfileSubscriptionsLandscape@2x.png in Resources */,
-				BE86BF3017201BA70006DC8A /* ButtonResetPasswordDefault.png in Resources */,
-				BE86BF3117201BA70006DC8A /* ButtonResetPasswordDefault@2x.png in Resources */,
-				BE86BF3217201BA70006DC8A /* ButtonResetPasswordHighlighted.png in Resources */,
-				BE86BF3317201BA70006DC8A /* ButtonResetPasswordHighlighted@2x.png in Resources */,
 				1F458B0417E1C4E6003C14AC /* AppIcon60x60.png in Resources */,
 				BEB312FE1815638700FAF98A /* TabProfile.png in Resources */,
 				1F4E7FB9181ACBAA00F59007 /* TabMoods@2x~iphone.png in Resources */,
@@ -7139,6 +7010,7 @@
 				BE458AF717E71BE000776B0D /* InstructionBackgroundPacks~iphone.png in Resources */,
 				012B4CC7173A7B5A0019DA4C /* ButtonMoveAndScaleCancel@2x.png in Resources */,
 				012B4CC8173A7B5A0019DA4C /* ButtonMoveAndScaleCancelHighlighted.png in Resources */,
+				BE851B48183BE6BC00B8E8C6 /* ButtonUpload.png in Resources */,
 				012B4CC9173A7B5A0019DA4C /* ButtonMoveAndScaleCancelHighlighted@2x.png in Resources */,
 				012B4CCA173A7B5A0019DA4C /* ButtonMoveAndScaleUse.png in Resources */,
 				012B4CCB173A7B5A0019DA4C /* ButtonMoveAndScaleUse@2x.png in Resources */,

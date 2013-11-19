@@ -45,7 +45,6 @@
 @property (nonatomic, strong) IBOutlet UIButton* registerNewUserButton;
 @property (nonatomic, strong) IBOutlet UIButton* sendEmailButton;
 @property (nonatomic, strong) IBOutlet UIButton* signUpButton;
-@property (nonatomic, strong) IBOutlet UIImageView* avatarImageView;
 @property (nonatomic, strong) IBOutlet UIImageView* dividerImageView;
 @property (nonatomic, strong) IBOutlet UIImageView* loginBackgroundImage;
 @property (nonatomic, strong) IBOutlet UIImageView* titleImageView;
@@ -177,6 +176,10 @@
     registerButton.layer.borderColor = [purple CGColor];
     registerButton.layer.cornerRadius = 8.0f;
     [registerButton setTitleColor:purple forState:UIControlStateNormal];
+    
+    self.faceImageButton.layer.borderColor = [UIColor colorWithRed:(167.0f/255.0f) green:(167.0f/255.0f) blue:(167.0f/255.0f) alpha:1.0f].CGColor;
+    self.faceImageButton.layer.borderWidth = 1.0f;
+    self.faceImageButton.layer.cornerRadius = self.faceImageButton.frame.size.width * 0.5f;
     
     facebookButtonInitialFrame = facebookSignInButton.frame;
     signUpButtonInitialFrame = signUpButton.frame;
@@ -449,7 +452,7 @@
     NSArray* controlsToHide = @[userNameInputField, passwordInputField, finalLoginButton, secondaryFacebookMessage,
                                 areYouNewLabel, registerButton, passwordForgottenLabel,
                                 passwordForgottenButton, termsAndConditionsLabel, dobView, emailInputField,
-                                registerNewUserButton, dividerImageView, faceImageButton, self.avatarImageView, sendEmailButton,
+                                registerNewUserButton, dividerImageView, faceImageButton, sendEmailButton,
                                 wellSendYouLabel, termsAndConditionsLabelSide, self.genderSegmentedControl];
     
     for (UIView* control in controlsToHide)
@@ -465,7 +468,6 @@
     
     emailInputField.center = CGPointMake(emailInputField.center.x - 50.0, emailInputField.center.y);
     faceImageButton.center = CGPointMake(faceImageButton.center.x - 50.0, faceImageButton.center.y);
-    self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0, self.avatarImageView.center.y);
     
     facebookSignInButton.enabled = YES;
     facebookSignInButton.alpha = 1.0;
@@ -484,7 +486,6 @@
     if ([SYNDeviceManager.sharedInstance isPortrait])
     {
         faceImageButton.center = CGPointMake(78.0, faceImageButton.center.y);
-        self.avatarImageView.center = CGPointMake(78.0, self.avatarImageView.center.y);
         passwordForgottenLabel.center = CGPointMake(115.0, passwordForgottenLabel.center.y);
         
     }
@@ -685,8 +686,6 @@
                                                                        faceImageButton.center = CGPointMake(faceImageButton.center.x,
                                                                                                             faceImageButton.center.y - self.elementsOffsetY);
                                                                        
-                                                                       self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x,
-                                                                                                            self.avatarImageView.center.y - self.elementsOffsetY);
                                                                        
                                                                        [userNameInputField becomeFirstResponder];
                                                                        
@@ -724,9 +723,6 @@
                              faceImageButton.center = CGPointMake(faceImageButton.center.x - 50.0,
                                                                   faceImageButton.center.y);
                              
-                             self.avatarImageView.alpha = 0.0;
-                             self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0,
-                                                                  self.avatarImageView.center.y);
                              
                              self.genderSegmentedControl.alpha = 0.0;
                              self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x - 50.0,
@@ -913,7 +909,6 @@
                              faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
                              faceRect.origin.y -= self.elementsOffsetY;
                              faceImageButton.frame = faceRect;
-                             self.avatarImageView.frame = faceRect;
                              
                              isAnimating = NO;
                              
@@ -922,7 +917,6 @@
                                                   memberLabel.alpha = 1.0;
                                                   loginButton.alpha = 1.0;
                                                   faceImageButton.alpha = 1.0;
-                                                  self.avatarImageView.alpha = 1.0;
                                                   self.genderSegmentedControl.alpha = 1.0;
                                                   
                                                   termsAndConditionsLabelSide.alpha = 1.0;
@@ -962,11 +956,9 @@
                              self.genderSegmentedControl.frame = genderRect;
                              
                              faceImageButton.alpha = 1.0;
-                             self.avatarImageView.alpha = 1.0;
                              CGRect faceRect = faceImageButton.frame;
                              faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
                              faceImageButton.frame = faceRect;
-                             self.avatarImageView.frame = faceRect;
                              
                              loginButton.alpha = 1.0;
                              memberLabel.alpha = 1.0;
@@ -1732,7 +1724,7 @@
     self.avatarImage = image;
     
     // And update on-screen avatar
-    self.avatarImageView.image = image;
+    [self.faceImageButton setImage:image forState:UIControlStateNormal];
 }
 
 
@@ -1755,7 +1747,6 @@
         facebookButtonFrame.origin.x = 150.0f;
         passwordForgottenLabel.center = CGPointMake(115.0, passwordForgottenLabel.center.y);
         faceImageButton.center = CGPointMake(84.0, faceImageButton.center.y);
-        self.avatarImageView.center = CGPointMake(124.0, self.avatarImageView.center.y);
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 714.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 714.0);        
         registerButton.center = CGPointMake(registerButton.center.x, 704.0);
@@ -1767,7 +1758,6 @@
         facebookButtonFrame.origin.x = 293.0f;
         passwordForgottenLabel.center = CGPointMake(248.0, passwordForgottenLabel.center.y);
         faceImageButton.center = CGPointMake(254.0, faceImageButton.center.y);
-        self.avatarImageView.center = CGPointMake(254.0, self.avatarImageView.center.y);
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 370.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 370.0);
         registerButton.center = CGPointMake(registerButton.center.x, 352.0);
@@ -1798,7 +1788,6 @@
     passwordForgottenLabel.frame = CGRectIntegral(passwordForgottenLabel.frame);
     termsAndConditionsLabelSide.frame = CGRectIntegral(termsAndConditionsLabelSide.frame);
     faceImageButton.frame = CGRectIntegral(faceImageButton.frame);
-    self.avatarImageView.frame = CGRectIntegral(self.avatarImageView.frame);
     areYouNewLabel.frame = CGRectIntegral(areYouNewLabel.frame);
     
     if(termsAndConditionsLabel.alpha > 0.0)
@@ -1839,7 +1828,6 @@
     signUpButton.frame = CGRectIntegral(signUpButton.frame);
     passwordForgottenLabel.frame = CGRectIntegral(passwordForgottenLabel.frame);
     faceImageButton.frame = CGRectIntegral(faceImageButton.frame);
-    self.avatarImageView.frame = CGRectIntegral(self.avatarImageView.frame);
     areYouNewLabel.frame = CGRectIntegral(areYouNewLabel.frame);
     termsAndConditionsLabel.frame = CGRectIntegral(termsAndConditionsLabel.frame);
     termsAndConditionsLabelSide.frame = CGRectIntegral(termsAndConditionsLabelSide.frame);

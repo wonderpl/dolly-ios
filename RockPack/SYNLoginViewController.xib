@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="activityIndicator" destination="39" id="40"/>
                 <outlet property="areYouNewLabel" destination="15" id="38"/>
-                <outlet property="avatarImageView" destination="96" id="97"/>
                 <outlet property="ddInputField" destination="45" id="49"/>
                 <outlet property="dividerImageView" destination="68" id="69"/>
                 <outlet property="dobView" destination="46" id="50"/>
@@ -253,15 +252,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="FieldPhoto.png" id="96" userLabel="Image View - Avatar">
-                    <rect key="frame" x="159" y="339" width="187" height="187"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="72" userLabel="Button - Change avatar">
-                    <rect key="frame" x="159" y="339" width="187" height="187"/>
+                    <rect key="frame" x="159" y="339" width="154" height="154"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal">
+                    <state key="normal" image="ButtonUpload.png">
                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -385,7 +380,7 @@
     </objects>
     <resources>
         <image name="ButtonResetPasswordHighlighted.png" width="315" height="62"/>
+        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="DividerLogin.png" width="306" height="3"/>
-        <image name="FieldPhoto.png" width="187" height="187"/>
     </resources>
 </document>
