@@ -34,7 +34,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <inset key="scrollIndicatorInsets" minX="0.0" minY="420" maxX="0.0" maxY="0.0"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="ybs-C7-TVb">
                         <size key="itemSize" width="295" height="268"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>

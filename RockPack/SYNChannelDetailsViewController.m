@@ -95,7 +95,7 @@ SYNChannelCoverImageSelectorDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *viewEditMode;
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
-
+@property (nonatomic) BOOL viewHasAppeared;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
@@ -106,6 +106,7 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (nonatomic) CGPoint tempContentOffset;
 @end
 
 
@@ -138,6 +139,9 @@ SYNChannelCoverImageSelectorDelegate>
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+   // NSLog(@"VDL %f",self.videoThumbnailCollectionView.contentInset.top);
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -208,6 +212,19 @@ SYNChannelCoverImageSelectorDelegate>
 //    self.navigationController.navigationBar.translucent = YES;
 //    self.navigationController.view.backgroundColor = [UIColor clearColor];
 
+    //programmatically seting the edgeinset for iphone and ipad
+    //Not able to set within the nib
+
+    if (IS_IPHONE)
+    {
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
+    }
+    
+    if (IS_IPAD)
+    {
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(520, 0, 0, 0);
+    }
+
    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
 }
 
@@ -265,8 +282,6 @@ SYNChannelCoverImageSelectorDelegate>
     // We set up assets depending on whether we are in display or edit mode
     //    [self setDisplayControlsVisibility: (self.mode == kChannelDetailsModeDisplay)];
     
-    // Refresh our view
-    [self.videoThumbnailCollectionView reloadData];
     
     if (self.channel.videoInstances.count == 0 && ![self.channel.uniqueId isEqualToString: kNewChannelPlaceholderId])
     {
@@ -274,13 +289,7 @@ SYNChannelCoverImageSelectorDelegate>
         //                       withLoader: YES];
     }
     
-    //programmatically seting the edgeinset for iphone
-    //something wierd happening, not able to set within the nib
-    if (IS_IPHONE)
-    {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
-    }
-    
+
     [self displayChannelDetails];
     
     
@@ -314,7 +323,11 @@ SYNChannelCoverImageSelectorDelegate>
     
 //    self.navigationController.navigationBarHidden = NO;
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    // Refresh our view
     
+    
+    [self.videoThumbnailCollectionView reloadData];
+
 }
 
 
@@ -360,10 +373,18 @@ SYNChannelCoverImageSelectorDelegate>
                                                       userInfo: nil];
     
 //    self.navigationController.navigationBarHidden = YES;
+    
+
+
+    self.viewHasAppeared = NO;
+    self.tempContentOffset = self.videoThumbnailCollectionView.contentOffset;
+//    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+//    NSLog(@"VDA %f",self.videoThumbnailCollectionView.contentInset.top);
     
     
     
@@ -563,11 +584,14 @@ SYNChannelCoverImageSelectorDelegate>
 
 -(void) moveHeader:(CGFloat) offset
 {
+    if (!self.viewHasAppeared) {
+        return;
+    }
     
-    if (IS_IPHONE) {
+    if (IS_IPHONE ) {
         offset *=2;
         //iphone port
-        offset +=320;
+        offset +=840;
     }
     
     if (IS_IPAD) {
@@ -987,6 +1011,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             
+                       // [self centreAllUi];
         }
         else
         {
@@ -994,8 +1019,22 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             
+         //   [self centreAllUi];
+            
         }
     }
+}
+
+
+-(void) centreAllUi
+{
+    CGRect tmpRect;
+    tmpRect = self.lblChannelTitle.frame;
+    tmpRect.origin.x = self.view.window.frame.size.width/2 - tmpRect.size.width - 45;
+    self.lblChannelTitle.frame = tmpRect;
+    
+    
+    
 }
 
 - (void) videoButtonPressed: (UIButton *) videoButton
@@ -1369,6 +1408,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self editMode];
     
+  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
     
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
@@ -1423,6 +1463,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     self.mode = kChannelDetailsModeEdit;
     
+  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
+
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
     
 }
@@ -1432,6 +1474,9 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     
     [self profileMode];
+    
+  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
+
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
     
@@ -1491,6 +1536,8 @@ referenceSizeForFooterInSection: (NSInteger) section
         
     }
     
+ //   NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
+
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
     
     
@@ -1503,6 +1550,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     if (self.mode == kChannelDetailsModeEdit )
     {
         CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
+        
         if (IS_IPHONE)
         {
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit];
@@ -1523,6 +1571,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     {
         
         CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
+//        tmpPoint.y+= (self.videoThumbnailCollectionView.visibleCells.count-1)*(kHeightChange);
+
         if (IS_IPHONE)
         {
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone];
@@ -1532,7 +1582,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoThumbnailCollectionView.dataSource = self;
             
             [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-            [self.videoCollectionViewLayoutIPhone invalidateLayout];
+//            [self.videoCollectionViewLayoutIPhone invalidateLayout];
             
         }
         
@@ -1547,7 +1597,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
             [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-            [self.videoCollectionViewLayoutIPad invalidateLayout];
+//            [self.videoCollectionViewLayoutIPad invalidateLayout];
             
             
         }
@@ -1923,7 +1973,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    
     return YES;
 }
 
