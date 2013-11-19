@@ -63,7 +63,7 @@
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="DividerLogin.png" id="68">
-                    <rect key="frame" x="358" y="390" width="320" height="2"/>
+                    <rect key="frame" x="358" y="106" width="320" height="2"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4" userLabel="Facebook UIButton" customClass="SYNFormButton">

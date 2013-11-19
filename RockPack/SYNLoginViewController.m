@@ -512,7 +512,6 @@
                         options: UIViewAnimationCurveEaseInOut
                      animations: ^{
                          facebookSignInButton.alpha = 0.0;
-                         CGFloat diff = passwordInputField.frame.origin.y - userNameInputField.frame.origin.y;
                          userNameInputField.frame = passwordInputField.frame;
                          passwordInputField.alpha = 0.0;
                          emailInputField.alpha = 0.0;
@@ -525,10 +524,9 @@
                          memberLabel.alpha = 1.0;
                          areYouNewLabel.alpha = 0.0;
                          sendEmailButton.alpha = 1.0;
-                         dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y + diff);
                      }
                      completion: ^(BOOL finished) {
-                         dividerImageView.frame = CGRectIntegral(dividerImageView.frame);
+                         
                          [UIView animateWithDuration: 0.3
                                           animations: ^{
                                               wellSendYouLabel.alpha = 1.0;
@@ -586,6 +584,7 @@
                                   delay: delay
                                 options: UIViewAnimationCurveEaseInOut
                              animations: ^{
+                                 
                                  control.alpha = 1.0;
                                  control.center = CGPointMake(control.center.x, control.center.y - self.elementsOffsetY);
                              }
@@ -598,7 +597,7 @@
         [UIView animateWithDuration: 0.3
                          animations: ^{
                              
-                             signUpButton.alpha = 0.0; // right of facebook button
+                             signUpButton.alpha = 0.0;
                              signUpButton.hidden = YES;
                              
                              memberLabel.alpha = 0.0;
@@ -607,19 +606,22 @@
                              titleImageView.alpha = 0.0;
                              self.whatsOnYourChannelLabel.alpha = 0.0f;
                              
+                             
+                             
                          } completion: ^(BOOL finished) {
                              
                              [self placeSecondaryElements];
                              
-                             dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y - self.elementsOffsetY);
                              
                              [UIView animateWithDuration: 0.2
                                               animations: ^{
                                                   
+                                                  
+                                                  dividerImageView.alpha = 1.0;
+                                                  
                                                   passwordForgottenButton.alpha = 1.0;
                                                   passwordForgottenLabel.alpha = 1.0;
                                                   
-                                                  dividerImageView.alpha = 1.0;
                                                   
                                               } completion: ^(BOOL finished) {
                                                   
@@ -742,9 +744,7 @@
                              facebookSignInButton.alpha = 1.0;
                              facebookSignInButton.enabled = YES;
                              
-                             CGFloat diff = userNameInputField.frame.origin.y - self.initialUsernameFrame.origin.y;
-                             dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y - diff);
-                             
+                             dividerImageView.alpha = 1.0f;
                              userNameInputField.frame = self.initialUsernameFrame;
                              
                              finalLoginButton.alpha = 1.0;
@@ -1800,7 +1800,6 @@
     areYouNewLabel.center = CGPointMake(areYouNewLabel.center.x, registerButton.center.y - 44.0);
     memberLabel.center = CGPointMake(loginButton.center.x, areYouNewLabel.center.y);
     loginButton.center = registerButton.center;
-    dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y - self.elementsOffsetY);
     passwordForgottenLabel.center = CGPointMake(passwordForgottenLabel.center.x, passwordForgottenLabel.center.y - self.elementsOffsetY);
     passwordForgottenButton.center = CGPointMake(passwordForgottenButton.center.x, passwordForgottenButton.center.y - self.elementsOffsetY);
     CGFloat termsOffsetY = [SYNDeviceManager.sharedInstance isPortrait] ? 714.0 : 370.0;
