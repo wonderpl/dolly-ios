@@ -105,6 +105,7 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) UICollectionViewFlowLayout *videoEditLayoutIPad;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
+@property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
 @end
 
 
@@ -155,6 +156,11 @@ SYNChannelCoverImageSelectorDelegate>
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
     
+    if (IS_IPHONE)
+    {
+        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
+    }
+    
     [self setUpMode];
     
     
@@ -202,6 +208,7 @@ SYNChannelCoverImageSelectorDelegate>
 //    self.navigationController.navigationBar.translucent = YES;
 //    self.navigationController.view.backgroundColor = [UIColor clearColor];
 
+   self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
 }
 
 
@@ -268,7 +275,7 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
     //programmatically seting the edgeinset for iphone
-    //something wierd happening, not able to set within the nix
+    //something wierd happening, not able to set within the nib
     if (IS_IPHONE)
     {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
@@ -1892,11 +1899,18 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                       otherButtonTitles: nil] show];
 }
 
+-(void) textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+
+}
 
 #pragma mark - Text Field Delegates
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
+    [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+
 }
 
 -(void) textFieldDidEndEditing:(UITextField *)textField
@@ -1936,7 +1950,13 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 
 
 
-
+-(void)dismissKeyboard
+{
+    [self.txtFieldChannelName resignFirstResponder];
+    [self.txtViewDescription resignFirstResponder];
+    
+    [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
+}
 
 
 
