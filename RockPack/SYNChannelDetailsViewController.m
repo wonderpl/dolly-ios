@@ -165,7 +165,6 @@ SYNChannelCoverImageSelectorDelegate>
         self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
     }
     
-    [self setUpMode];
     
     
     // == Avatar Image == //
@@ -203,9 +202,27 @@ SYNChannelCoverImageSelectorDelegate>
         self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
         //
     }
+    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
+    self.barBtnCancel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
+                                                  green: (66.0f / 255.0f)
+                                                   blue: (42.0f / 255.0f)
+                                                  alpha: 1.0f];
+    
+    
+    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
+    
+    self.barBtnSave.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
+                                                green: (210.0f / 255.0f)
+                                                 blue: (42.0f / 255.0f)
+                                                alpha: 1.0f];
+
+    [self setUpMode];
+
     
     [self displayChannelDetails];
 
+    self.viewHasAppeared = NO;
+  //  self.tempContentOffset = CGPointMake(0, 0);
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //    
 //    self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -232,7 +249,7 @@ SYNChannelCoverImageSelectorDelegate>
 
 -(void) iphoneMove
 {
-    CGAffineTransform move = CGAffineTransformMakeTranslation(0, -320);
+    CGAffineTransform move = CGAffineTransformMakeTranslation(0, -self.tempContentOffset.y);
     self.viewProfileContainer.transform = move;
     self.btnAvatar.transform = move;
     self.btnShowFollowers.transform = move;
@@ -320,8 +337,12 @@ SYNChannelCoverImageSelectorDelegate>
     //
     //        self.btnAvatar.imageView.image = placeholderImage;
     //    }
-    
-//    self.navigationController.navigationBarHidden = NO;
+
+    self.viewHasAppeared = YES;
+//    self.videoThumbnailCollectionView.contentOffset = self.tempContentOffset;
+
+    //[self iphoneMove];
+    //    self.navigationController.navigationBarHidden = NO;
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     // Refresh our view
     
@@ -401,7 +422,13 @@ SYNChannelCoverImageSelectorDelegate>
     {
         self.btnEditChannel.hidden = YES;
         self.btnFollowChannel.hidden = NO;
+    }
+    else if (self.mode == kChannelDetailsModeEdit)
+    {
+        [self editMode];
         
+        self.navigationItem.leftBarButtonItem = self.barBtnBack;
+
     }
     
     
@@ -442,19 +469,6 @@ SYNChannelCoverImageSelectorDelegate>
     [[self.txtViewDescription layer] setBorderWidth:1.0];
     [[self.txtViewDescription layer] setCornerRadius:0];
     
-    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
-    self.barBtnCancel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
-                                                             green: (66.0f / 255.0f)
-                                                              blue: (42.0f / 255.0f)
-                                                             alpha: 1.0f];
-
-    
-    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
-    
-    self.barBtnSave.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
-                                                  green: (210.0f / 255.0f)
-                                                   blue: (42.0f / 255.0f)
-                                                  alpha: 1.0f];
     
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
@@ -1758,12 +1772,12 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 -(void) saveTapped
 {
     
-    //    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    //
-    //    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-    //                                                           action: @"channelSaveButtonClick"
-    //                                                            label: nil
-    //                                                            value: nil] build]];
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    
+        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
+                                                               action: @"channelSaveButtonClick"
+                                                                label: nil
+                                                                value: nil] build]];
     //
     //    self.saveChannelButton.enabled = NO;
     //    self.deleteChannelButton.enabled = YES;
@@ -1805,7 +1819,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                              //
                                              
                                              
-                                                                                          if(self.mode == kChannelDetailsModeEdit)
+                                            if(self.mode == kChannelDetailsModeEdit)
                                              [self setVideosForChannelById: channelId //  2nd step of the creation process
                                                                  isUpdated: YES];
                                              

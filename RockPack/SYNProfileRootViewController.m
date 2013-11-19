@@ -322,7 +322,7 @@
          tmpRect.origin.y -= ADDEDBOUNDS;
          tmpRect.size.height += ADDEDBOUNDS;
          
-         self.channelThumbnailCollectionView.bounds = tmpRect;
+         self.channelThumbnailCollctionView.bounds = tmpRect;
          
          NSLog(@"BOUNDS %f, %f, %f, %f", tmpRect.origin.x, tmpRect.origin.y, tmpRect.size.width, tmpRect.size.height);
          tmpRect = self.channelThumbnailCollectionView.frame;
@@ -934,8 +934,11 @@
         // The first cell is a 'create_new' cell on a user profile
         if (self.isUserProfile && indexPath.row == 0)
         {
-			[self viewChannelDetails:appDelegate.videoQueue.currentlyCreatingChannel];
+            SYNChannelDetailsViewController *channelVC;
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
 			
+            [self.navigationController pushViewController:channelVC animated:YES];
+            
             return;
         }
         else
