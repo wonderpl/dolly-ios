@@ -847,6 +847,7 @@
             [self.activityIndicator startAnimating];
             [self turnOffButton: self.backButton];
             [self turnOffButton: self.confirmButton];
+            
             self.ddInputField.text = [self zeroPadIfOneCharacter: self.ddInputField.text];
             self.mmInputField.text = [self zeroPadIfOneCharacter: self.mmInputField.text];
             

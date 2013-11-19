@@ -225,7 +225,7 @@
                     frame.size.height = kChannelCellDefaultHeight;
                     ((SYNAddToChannelCreateNewCell*)cell).descriptionTextView.alpha = 0.0f;
                     
-                    
+                    self.createNewChannelCell.separatorBottom.hidden = YES;
                     
                     
                 }
@@ -310,6 +310,8 @@
     {
         [self.currentChannelsCollectionView setCollectionViewLayout:self.normalFlowLayout animated:YES];
     }
+    
+    self.createNewChannelCell.separatorBottom.hidden = NO;
 }
 
 
@@ -367,6 +369,14 @@
     _selectedChannel = selectedChannel;
     if(_selectedChannel)
     {
+        // close the panel as well
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+                                                            object: self];
+        
+        if(self.createNewChannelCell.isEditing)
+            [self createNewButtonPressed];
+        
         self.confirmButtom.hidden = NO;
         [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
     }
