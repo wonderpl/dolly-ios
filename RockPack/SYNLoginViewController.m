@@ -145,12 +145,23 @@
     mmInputField.keyboardType = UIKeyboardTypeNumberPad;
     yyyyInputField.keyboardType = UIKeyboardTypeNumberPad;
     
+    loginButton.layer.borderWidth = 1.0;
+    loginButton.layer.borderColor = [[UIColor redColor] CGColor];
+    
+    
+    signUpButton.layer.borderWidth = 1.0;
+    signUpButton.layer.borderColor = [[UIColor redColor] CGColor];
+    
+    
+    
     facebookButtonInitialFrame = facebookSignInButton.frame;
     signUpButtonInitialFrame = signUpButton.frame;
         
     emailInputField.keyboardType = UIKeyboardTypeEmailAddress;
     
     self.mainFormElements = @[];
+    
+    
         
     // == Setup Input Fields
         
@@ -561,8 +572,11 @@
     
     if (previousState == kLoginScreenStateInitial)
     {
-        facebookSignInButton.frame = CGRectMake(userNameInputField.frame.origin.x - 4.0, 322.0, facebookSignInButton.frame.size.width, facebookSignInButton.frame.size.height);
-        facebookSignInButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        CGRect fbBtnRect = facebookSignInButton.frame;
+        fbBtnRect.origin = CGPointMake(userNameInputField.frame.origin.x, 342.0);
+        facebookSignInButton.frame = fbBtnRect;
+        facebookSignInButton.autoresizingMask =
+        UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
         NSArray* loginForControls = @[facebookSignInButton, userNameInputField, passwordInputField, finalLoginButton];
         float delay = 0.0;
@@ -586,6 +600,7 @@
         
         [UIView animateWithDuration: 0.3
                          animations: ^{
+                             
                              signUpButton.alpha = 0.0; // right of facebook button
                              signUpButton.hidden = YES;
                              
@@ -693,7 +708,7 @@
                              self.avatarImageView.center = CGPointMake(self.avatarImageView.center.x - 50.0,
                                                                   self.avatarImageView.center.y);
                              
-                             self.genderSegmentedControl.alpha = 1.0;
+                             self.genderSegmentedControl.alpha = 0.0;
                              self.genderSegmentedControl.center = CGPointMake(self.genderSegmentedControl.center.x - 50.0,
                                                           self.genderSegmentedControl.center.y);
                              
@@ -831,8 +846,13 @@
         
         self.genderSegmentedControl.frame = CGRectIntegral(self.genderSegmentedControl.frame);
         
-        facebookSignInButton.frame = CGRectMake(userNameInputField.frame.origin.x - 4.0, 322.0, facebookSignInButton.frame.size.width, facebookSignInButton.frame.size.height);
-        facebookSignInButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        
+        CGRect fbBtnRect = facebookSignInButton.frame;
+        fbBtnRect.origin = CGPointMake(userNameInputField.frame.origin.x, 342.0);
+        facebookSignInButton.frame = fbBtnRect;
+        facebookSignInButton.autoresizingMask =
+        UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        
         NSArray* loginForControls = @[emailInputField, userNameInputField, passwordInputField, dobView, self.genderSegmentedControl, registerNewUserButton];
         float delay = 0.05;
         for (UIView* control in loginForControls)
