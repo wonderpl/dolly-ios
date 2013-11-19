@@ -1,0 +1,22 @@
+//
+//  SYNYoutTubeVideoViewController.h
+//  rockpack
+//
+//  Created by Nick Banks on 15/02/2013.
+//  Copyright (c) Rockpack Ltd. All rights reserved.
+//
+
+
+#import "SYNAbstractVideoPlaybackViewController.h"
+@import UIKit;
+
+// Forward declarations
+@class SYNYouTubeVideoPlaybackViewController;
+
+@interface SYNYouTubeVideoPlaybackViewController : SYNAbstractVideoPlaybackViewController
+
++ (instancetype) sharedInstance;
+
+
+
+@end

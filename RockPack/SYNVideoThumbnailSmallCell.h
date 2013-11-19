@@ -15,6 +15,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, getter = isColour) BOOL colour;
 
++ (UINib *)nib;
+
 //- (void) setVideoImageViewImage: (NSString*) imageURLString;
 
 - (void) setImageWithURL: (NSString *) urlString;

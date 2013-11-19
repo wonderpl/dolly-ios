@@ -209,10 +209,6 @@
 }
 
 
-
-
-
-
 - (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button
 {
     UIView* target = button;

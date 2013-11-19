@@ -19,7 +19,6 @@
 #import "SYNImagePickerController.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNPassthroughView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNYouHeaderView.h"
 #import "UIColor+SYNColor.h"

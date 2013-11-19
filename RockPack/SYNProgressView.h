@@ -8,10 +8,8 @@
 
 @import UIKit;
 
-@interface SYNProgressView : UIImageView
+@interface SYNProgressView : UIView
 
-- (void) setProgress: (float) progress;
-- (void) setTrackImage: (UIImage *) trackImage;
-- (void) setProgressImage: (UIImage *) progressImage;
+@property (nonatomic, assign) float progress;
 
 @end

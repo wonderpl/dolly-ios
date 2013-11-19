@@ -107,6 +107,15 @@
 		012502C316CA99630029C7C8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012502C216CA99630029C7C8 /* AdSupport.framework */; };
 		0125FB6C182BB41300EC822E /* SYNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6B182BB41300EC822E /* SYNButton.m */; };
 		0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */; };
+		0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB71182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m */; };
+		0125FB76182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */; };
+		0125FBA41831011600EC822E /* libOoyalaSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125FBA31831011500EC822E /* libOoyalaSDK.a */; };
+		0125FBA61831041E00EC822E /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125FBA51831041E00EC822E /* libc++.dylib */; };
+		0125FBA81831042600EC822E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125FBA71831042600EC822E /* libxml2.dylib */; };
+		0125FBA91831043E00EC822E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717F165550BE00A3C7C4 /* Security.framework */; };
+		0125FBAA1831044B00EC822E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126331E162E2A060009FF9C /* MediaPlayer.framework */; };
+		0125FBAC1831045400EC822E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125FBAB1831045400EC822E /* CoreText.framework */; };
+		0125FBAD1831046700EC822E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011CC67F164AA42300F02B6D /* AVFoundation.framework */; };
 		0127B87E1810479E00DE2FD6 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */; };
 		0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */; };
 		0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png */; };
@@ -151,7 +160,7 @@
 		01450AFC171DB4D7009F54CD /* PlaceholderVideoTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01450AF9171DB4D7009F54CD /* PlaceholderVideoTop@2x.png */; };
 		014A456816691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */; };
 		014D514F16F738C500B82B00 /* SYNAbstractNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */; };
-		015487CF16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */; };
+		015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */; };
 		0155FA2817A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */; };
 		01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */; };
 		01578C2B17DF840800B4F498 /* LowerParallaxStars.png in Resources */ = {isa = PBXBuildFile; fileRef = 01578C2917DF840800B4F498 /* LowerParallaxStars.png */; };
@@ -161,7 +170,6 @@
 		015CB01616AE039900FEB8E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01516AE039900FEB8E7 /* User.m */; };
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
 		015CEE3F16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */; };
-		016191711782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542A18363ADC009B161C /* SYNTextFieldLogin.m */; };
 		0165542E18363C70009B161C /* SYNTextFieldLoginiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */; };
 		01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */; };
@@ -1402,6 +1410,15 @@
 		BEFAE89917241FD5009B2F66 /* SearchTabSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEFAE89717241FD5009B2F66 /* SearchTabSelected@2x.png */; };
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
 		C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3685246F69AA4C9B93DDEDAC /* libPods.a */; };
+		E93C7F0918368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */; };
+		E93C7F0C18368E3D00FE0B65 /* SYNVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */; };
+		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
+		E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */; };
+		E93E10E6183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */; };
+		E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */; };
+		E97FCDC5183A7D2B007A9BCC /* SYNVideoViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FCDC4183A7D2B007A9BCC /* SYNVideoViewController_ipad.storyboard */; };
+		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
+		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1536,6 +1553,52 @@
 		0125FB6B182BB41300EC822E /* SYNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNButton.m; sourceTree = "<group>"; };
 		0125FB6D182BEAFB00EC822E /* SYNAvatarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAvatarButton.h; sourceTree = "<group>"; };
 		0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAvatarButton.m; sourceTree = "<group>"; };
+		0125FB70182D324700EC822E /* SYNAbstractVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractVideoPlaybackViewController.h; sourceTree = "<group>"; };
+		0125FB71182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAbstractVideoPlaybackViewController.m; sourceTree = "<group>"; };
+		0125FB73182D386F00EC822E /* SYNAbstractVideoPlaybackViewController+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNAbstractVideoPlaybackViewController+Private.h"; sourceTree = "<group>"; };
+		0125FB74182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOoyalaVideoPlaybackViewController.h; sourceTree = "<group>"; };
+		0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOoyalaVideoPlaybackViewController.m; sourceTree = "<group>"; };
+		0125FB7E1831011500EC822E /* OOAdSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOAdSpot.h; sourceTree = "<group>"; };
+		0125FB7F1831011500EC822E /* OOAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOAnalytics.h; sourceTree = "<group>"; };
+		0125FB801831011500EC822E /* OOAuthorizableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOAuthorizableItem.h; sourceTree = "<group>"; };
+		0125FB811831011500EC822E /* OOCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOCallbacks.h; sourceTree = "<group>"; };
+		0125FB821831011500EC822E /* OOCaption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOCaption.h; sourceTree = "<group>"; };
+		0125FB831831011500EC822E /* OOChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOChannel.h; sourceTree = "<group>"; };
+		0125FB841831011500EC822E /* OOChannelSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOChannelSet.h; sourceTree = "<group>"; };
+		0125FB851831011500EC822E /* OOClosedCaptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOClosedCaptions.h; sourceTree = "<group>"; };
+		0125FB861831011500EC822E /* OOClosedCaptionsStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOClosedCaptionsStyle.h; sourceTree = "<group>"; };
+		0125FB871831011500EC822E /* OOContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOContentItem.h; sourceTree = "<group>"; };
+		0125FB881831011500EC822E /* OODynamicChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OODynamicChannel.h; sourceTree = "<group>"; };
+		0125FB891831011500EC822E /* OOEmbeddedSecureURLGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOEmbeddedSecureURLGenerator.h; sourceTree = "<group>"; };
+		0125FB8A1831011500EC822E /* OOEmbeddedSignatureGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOEmbeddedSignatureGenerator.h; sourceTree = "<group>"; };
+		0125FB8B1831011500EC822E /* OOEmbedTokenGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOEmbedTokenGenerator.h; sourceTree = "<group>"; };
+		0125FB8C1831011500EC822E /* OOMoviePlayer_OOAdMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOMoviePlayer_OOAdMoviePlayer.h; sourceTree = "<group>"; };
+		0125FB8D1831011500EC822E /* OOOoyalaAdSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaAdSpot.h; sourceTree = "<group>"; };
+		0125FB8E1831011500EC822E /* OOOoyalaAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaAPIClient.h; sourceTree = "<group>"; };
+		0125FB8F1831011500EC822E /* OOOoyalaError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaError.h; sourceTree = "<group>"; };
+		0125FB901831011500EC822E /* OOOoyalaPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaPlayer.h; sourceTree = "<group>"; };
+		0125FB911831011500EC822E /* OOOoyalaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaPlayerViewController.h; sourceTree = "<group>"; };
+		0125FB921831011500EC822E /* OOOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOrderedDictionary.h; sourceTree = "<group>"; };
+		0125FB931831011500EC822E /* OOPaginatedParentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPaginatedParentItem.h; sourceTree = "<group>"; };
+		0125FB941831011500EC822E /* OOPlayableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPlayableItem.h; sourceTree = "<group>"; };
+		0125FB951831011500EC822E /* OOPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPlayer.h; sourceTree = "<group>"; };
+		0125FB961831011500EC822E /* OOPlayerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPlayerInfo.h; sourceTree = "<group>"; };
+		0125FB971831011500EC822E /* OOReturnState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOReturnState.h; sourceTree = "<group>"; };
+		0125FB981831011500EC822E /* OOSecureURLGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOSecureURLGenerator.h; sourceTree = "<group>"; };
+		0125FB991831011500EC822E /* OOSignatureGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOSignatureGenerator.h; sourceTree = "<group>"; };
+		0125FB9A1831011500EC822E /* OOStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOStream.h; sourceTree = "<group>"; };
+		0125FB9B1831011500EC822E /* OOStreamPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOStreamPlayer.h; sourceTree = "<group>"; };
+		0125FB9C1831011500EC822E /* OOTBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOTBXML.h; sourceTree = "<group>"; };
+		0125FB9D1831011500EC822E /* OOVASTAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTAd.h; sourceTree = "<group>"; };
+		0125FB9E1831011500EC822E /* OOVASTAdSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTAdSpot.h; sourceTree = "<group>"; };
+		0125FB9F1831011500EC822E /* OOVASTLinearAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTLinearAd.h; sourceTree = "<group>"; };
+		0125FBA01831011500EC822E /* OOVASTSequenceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTSequenceItem.h; sourceTree = "<group>"; };
+		0125FBA11831011500EC822E /* OOVASTStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTStream.h; sourceTree = "<group>"; };
+		0125FBA21831011500EC822E /* OOVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVideo.h; sourceTree = "<group>"; };
+		0125FBA31831011500EC822E /* libOoyalaSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOoyalaSDK.a; path = RockPack/libOoyalaSDK.a; sourceTree = "<group>"; };
+		0125FBA51831041E00EC822E /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		0125FBA71831042600EC822E /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		0125FBAB1831045400EC822E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0126331E162E2A060009FF9C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Light.otf"; path = "Assets/Fonts/ProximaNova-Light.otf"; sourceTree = "<group>"; };
 		0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Assets/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
@@ -1603,8 +1666,8 @@
 		014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		014D514D16F738C500B82B00 /* SYNAbstractNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractNetworkEngine.h; sourceTree = "<group>"; };
 		014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAbstractNetworkEngine.m; sourceTree = "<group>"; };
-		015487CD16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlaybackViewController.h; sourceTree = "<group>"; };
-		015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlaybackViewController.m; sourceTree = "<group>"; };
+		015487CD16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNYouTubeVideoPlaybackViewController.h; sourceTree = "<group>"; };
+		015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNYouTubeVideoPlaybackViewController.m; sourceTree = "<group>"; };
 		0155FA2617A81D7600B04B51 /* SYNSessionTokenCachingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSessionTokenCachingStrategy.h; sourceTree = "<group>"; };
 		0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSessionTokenCachingStrategy.m; sourceTree = "<group>"; };
 		01578C2017DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIInterpolatingMotionEffect+DualAxis.h"; sourceTree = "<group>"; };
@@ -1621,7 +1684,6 @@
 		015CB01816AE03B200FEB8E7 /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _User.m; sourceTree = "<group>"; };
 		015CEE3D16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIntegralCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIntegralCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFUIKitMainThreadGuard.m; sourceTree = "<group>"; };
 		0165542918363ADC009B161C /* SYNTextFieldLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLogin.h; sourceTree = "<group>"; };
 		0165542A18363ADC009B161C /* SYNTextFieldLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLogin.m; sourceTree = "<group>"; };
 		0165542C18363C70009B161C /* SYNTextFieldLoginiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginiPhone.h; sourceTree = "<group>"; };
@@ -3045,6 +3107,21 @@
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
 		BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoQueue.m; sourceTree = "<group>"; };
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNVideoViewController_iphone.storyboard; sourceTree = "<group>"; };
+		E93C7F0A18368E3D00FE0B65 /* SYNVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewController.h; sourceTree = "<group>"; };
+		E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewController.m; sourceTree = "<group>"; };
+		E93E10DC1834E93A00A62F64 /* SYNVideoLoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoLoadingIndicator.h; sourceTree = "<group>"; };
+		E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingIndicator.m; sourceTree = "<group>"; };
+		E93E10E11835116D00A62F64 /* SYNVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayer.h; sourceTree = "<group>"; };
+		E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayer.m; sourceTree = "<group>"; };
+		E93E10E4183512B800A62F64 /* SYNYouTubeWebVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNYouTubeWebVideoPlayer.h; sourceTree = "<group>"; };
+		E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNYouTubeWebVideoPlayer.m; sourceTree = "<group>"; };
+		E93E10E7183512D600A62F64 /* SYNOoyalaVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOoyalaVideoPlayer.h; sourceTree = "<group>"; };
+		E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOoyalaVideoPlayer.m; sourceTree = "<group>"; };
+		E97FCDC4183A7D2B007A9BCC /* SYNVideoViewController_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNVideoViewController_ipad.storyboard; sourceTree = "<group>"; };
+		E9921A9218351D66001A4F3B /* SYNScrubberBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNScrubberBar.h; sourceTree = "<group>"; };
+		E9921A9318351D66001A4F3B /* SYNScrubberBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNScrubberBar.m; sourceTree = "<group>"; };
+		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3052,7 +3129,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0125FBAD1831046700EC822E /* AVFoundation.framework in Frameworks */,
+				0125FBAC1831045400EC822E /* CoreText.framework in Frameworks */,
+				0125FBAA1831044B00EC822E /* MediaPlayer.framework in Frameworks */,
+				0125FBA91831043E00EC822E /* Security.framework in Frameworks */,
+				0125FBA81831042600EC822E /* libxml2.dylib in Frameworks */,
+				0125FBA61831041E00EC822E /* libc++.dylib in Frameworks */,
 				01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */,
+				0125FBA41831011600EC822E /* libOoyalaSDK.a in Frameworks */,
 				01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */,
 				3854788417946630006EB38B /* libGoogleConversionTracking.a in Frameworks */,
 				C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */,
@@ -3106,6 +3190,10 @@
 		010DEFD31629BDC40080F26B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0125FBAB1831045400EC822E /* CoreText.framework */,
+				0125FBA71831042600EC822E /* libxml2.dylib */,
+				0125FBA51831041E00EC822E /* libc++.dylib */,
+				0125FBA31831011500EC822E /* libOoyalaSDK.a */,
 				01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */,
 				01F7C9671748ED0B00E36994 /* libsqlite3.dylib */,
 				019824EE1629CC7600216900 /* libTestFlight.a */,
@@ -3295,6 +3383,58 @@
 				012502BC16CA8FE30029C7C8 /* SYNFacebookManager.m */,
 			);
 			name = "Social Media";
+			sourceTree = "<group>";
+		};
+		0125FB7C183100F700EC822E /* Ooyala player */ = {
+			isa = PBXGroup;
+			children = (
+				0125FB7D1831011500EC822E /* Headers */,
+			);
+			name = "Ooyala player";
+			sourceTree = "<group>";
+		};
+		0125FB7D1831011500EC822E /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				0125FB7E1831011500EC822E /* OOAdSpot.h */,
+				0125FB7F1831011500EC822E /* OOAnalytics.h */,
+				0125FB801831011500EC822E /* OOAuthorizableItem.h */,
+				0125FB811831011500EC822E /* OOCallbacks.h */,
+				0125FB821831011500EC822E /* OOCaption.h */,
+				0125FB831831011500EC822E /* OOChannel.h */,
+				0125FB841831011500EC822E /* OOChannelSet.h */,
+				0125FB851831011500EC822E /* OOClosedCaptions.h */,
+				0125FB861831011500EC822E /* OOClosedCaptionsStyle.h */,
+				0125FB871831011500EC822E /* OOContentItem.h */,
+				0125FB881831011500EC822E /* OODynamicChannel.h */,
+				0125FB891831011500EC822E /* OOEmbeddedSecureURLGenerator.h */,
+				0125FB8A1831011500EC822E /* OOEmbeddedSignatureGenerator.h */,
+				0125FB8B1831011500EC822E /* OOEmbedTokenGenerator.h */,
+				0125FB8C1831011500EC822E /* OOMoviePlayer_OOAdMoviePlayer.h */,
+				0125FB8D1831011500EC822E /* OOOoyalaAdSpot.h */,
+				0125FB8E1831011500EC822E /* OOOoyalaAPIClient.h */,
+				0125FB8F1831011500EC822E /* OOOoyalaError.h */,
+				0125FB901831011500EC822E /* OOOoyalaPlayer.h */,
+				0125FB911831011500EC822E /* OOOoyalaPlayerViewController.h */,
+				0125FB921831011500EC822E /* OOOrderedDictionary.h */,
+				0125FB931831011500EC822E /* OOPaginatedParentItem.h */,
+				0125FB941831011500EC822E /* OOPlayableItem.h */,
+				0125FB951831011500EC822E /* OOPlayer.h */,
+				0125FB961831011500EC822E /* OOPlayerInfo.h */,
+				0125FB971831011500EC822E /* OOReturnState.h */,
+				0125FB981831011500EC822E /* OOSecureURLGenerator.h */,
+				0125FB991831011500EC822E /* OOSignatureGenerator.h */,
+				0125FB9A1831011500EC822E /* OOStream.h */,
+				0125FB9B1831011500EC822E /* OOStreamPlayer.h */,
+				0125FB9C1831011500EC822E /* OOTBXML.h */,
+				0125FB9D1831011500EC822E /* OOVASTAd.h */,
+				0125FB9E1831011500EC822E /* OOVASTAdSpot.h */,
+				0125FB9F1831011500EC822E /* OOVASTLinearAd.h */,
+				0125FBA01831011500EC822E /* OOVASTSequenceItem.h */,
+				0125FBA11831011500EC822E /* OOVASTStream.h */,
+				0125FBA21831011500EC822E /* OOVideo.h */,
+			);
+			path = Headers;
 			sourceTree = "<group>";
 		};
 		012632C7162DF4C40009FF9C /* Layout Engine Support */ = {
@@ -3743,14 +3883,19 @@
 			isa = PBXGroup;
 			children = (
 				BE285DAD1725A20B00D995AB /* Slide In Messages */,
-				0110AE5F17DF383C00DC7724 /* SYNProgressView.m */,
 				0110AE6017DF383C00DC7724 /* SYNProgressView.h */,
+				0110AE5F17DF383C00DC7724 /* SYNProgressView.m */,
 				011CC6A7164D19D800F02B6D /* SYNPassthroughView.h */,
 				011CC6A8164D19D800F02B6D /* SYNPassthroughView.m */,
 				012B4C9B17393A080019DA4C /* SYNPopoverBackgroundView.h */,
 				012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */,
 				01BE7B70173413CF00EFE0EF /* SSTextView.h */,
 				01BE7B71173413CF00EFE0EF /* SSTextView.m */,
+				E93E10DC1834E93A00A62F64 /* SYNVideoLoadingIndicator.h */,
+				E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */,
+				E9921A9218351D66001A4F3B /* SYNScrubberBar.h */,
+				E9921A9318351D66001A4F3B /* SYNScrubberBar.m */,
+				E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -3758,6 +3903,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0125FB7C183100F700EC822E /* Ooyala player */,
 				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				BE06EEE517D635090028F2E3 /* Strict Interactive View */,
@@ -3935,7 +4081,6 @@
 				01A79BA116F32C6900B05084 /* NSString+Timecode.m */,
 				01A79BA316F34BBF00B05084 /* NSString+Utils.h */,
 				01A79BA416F34BBF00B05084 /* NSString+Utils.m */,
-				016191701782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m */,
 				019825EF162C94A300216900 /* UIColor+SYNColor.h */,
 				019825F0162C94A300216900 /* UIColor+SYNColor.m */,
 				019825F2162C94B500216900 /* UIFont+SYNFont.h */,
@@ -4399,12 +4544,27 @@
 		01F8E77B16B039E6000D44B9 /* Video viewer */ = {
 			isa = PBXGroup;
 			children = (
-				015487CD16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.h */,
-				015487CE16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m */,
+				0125FB70182D324700EC822E /* SYNAbstractVideoPlaybackViewController.h */,
+				0125FB73182D386F00EC822E /* SYNAbstractVideoPlaybackViewController+Private.h */,
+				0125FB71182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m */,
+				015487CD16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.h */,
+				015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */,
+				0125FB74182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.h */,
+				0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */,
 				01F8E77C16B03A7C000D44B9 /* SYNVideoViewerViewController.h */,
 				01F8E77D16B03A7C000D44B9 /* SYNVideoViewerViewController.m */,
 				01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */,
 				3862E8BB172979A40066E8E7 /* SYNVideoViewerViewController~iphone.xib */,
+				E93E10E11835116D00A62F64 /* SYNVideoPlayer.h */,
+				E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */,
+				E93E10E4183512B800A62F64 /* SYNYouTubeWebVideoPlayer.h */,
+				E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */,
+				E93E10E7183512D600A62F64 /* SYNOoyalaVideoPlayer.h */,
+				E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */,
+				E93C7F0A18368E3D00FE0B65 /* SYNVideoViewController.h */,
+				E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */,
+				E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */,
+				E97FCDC4183A7D2B007A9BCC /* SYNVideoViewController_ipad.storyboard */,
 			);
 			name = "Video viewer";
 			sourceTree = "<group>";
@@ -7048,6 +7208,7 @@
 				1F51A6951742A93B009907CA /* PlaceholderAvatarFeed@2x.png in Resources */,
 				1F5FAECF17E73F8700205F3F /* ButtonCancelAddToPackHighlighted.png in Resources */,
 				1F51A6961742A93B009907CA /* PlaceholderAvatarProfile.png in Resources */,
+				E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */,
 				1F51A6971742A93B009907CA /* PlaceholderAvatarProfile@2x.png in Resources */,
 				1F51A6981742A93B009907CA /* PlaceholderChannel.png in Resources */,
 				1F458AE517E1C27B003C14AC /* ButtonReportConfirm~iphone.png in Resources */,
@@ -7509,8 +7670,10 @@
 				01C6FD0F169DDEDB00E01AA3 /* NSDictionary+Validation.m in Sources */,
 				01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */,
 				01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */,
+				0125FB76182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m in Sources */,
 				01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */,
 				015CB01616AE039900FEB8E7 /* User.m in Sources */,
+				E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */,
 				015CB01916AE03B200FEB8E7 /* _User.m in Sources */,
 				01A3EC2E16AECE4B008DCE08 /* SYNActivityPopoverViewController.m in Sources */,
 				01F8E77F16B03A7C000D44B9 /* SYNVideoViewerViewController.m in Sources */,
@@ -7520,6 +7683,7 @@
 				012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */,
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
+				E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */,
 				BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */,
 				BEA1E33116CE6045000AB59D /* SYNNetworkOperationJsonObject.m in Sources */,
 				01AFF99917EC91540002131A /* UIImage+LLDBQuickLook.m in Sources */,
@@ -7529,9 +7693,10 @@
 				BE0815CD16D5487B00ADB1DC /* SYNSearchRegistry.m in Sources */,
 				BEA216E517E9ED31007C6DF7 /* SYNTrackableFrameView.m in Sources */,
 				BEF9E5B016DCBAC800286113 /* SYNSoundPlayer.m in Sources */,
-				015487CF16DCD2A1002A41A2 /* SYNVideoPlaybackViewController.m in Sources */,
+				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailSmallCell.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
+				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
@@ -7654,7 +7819,6 @@
 				BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */,
 				BEBFD0921779F0F800C90544 /* SYNCaution.m in Sources */,
 				BEBFD0951779F25800C90544 /* SYNCautionMessageView.m in Sources */,
-				016191711782DECD0016BD23 /* PSPDFUIKitMainThreadGuard.m in Sources */,
 				BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */,
 				BE7D02F4178C1D3B008053DC /* SYNUsersViewController.m in Sources */,
 				BE7D02F7178C4354008053DC /* SYNSubscribersViewController.m in Sources */,
@@ -7819,7 +7983,7 @@
 					"USEUDID=1",
 					"SHOWVERSIONNUMBER=1",
 				);
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
@@ -7828,6 +7992,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
+					"/Users/nick/Documents/Xcode/Working\\ Copies/iPhone/RockPack/Dolly/RockPack",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -7873,7 +8038,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RockPack/dolly-Prefix.pch";
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
@@ -7882,6 +8047,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
+					"/Users/nick/Documents/Xcode/Working\\ Copies/iPhone/RockPack/Dolly/RockPack",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -8032,7 +8198,7 @@
 					"USEUDID=1",
 					"SHOWVERSIONNUMBER=1",
 				);
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
@@ -8041,6 +8207,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
+					"/Users/nick/Documents/Xcode/Working\\ Copies/iPhone/RockPack/Dolly/RockPack",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

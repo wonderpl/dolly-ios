@@ -1,6 +1,9 @@
 #import "_Video.h"
 #import "AbstractCommon.h"
 
+extern NSString *const VideoSourceYouTube;
+extern NSString *const VideoSourceOoyala;
+
 @interface Video : _Video
 
 + (Video *) instanceFromDictionary: (NSDictionary *) dictionary
