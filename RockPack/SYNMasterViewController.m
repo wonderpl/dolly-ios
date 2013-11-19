@@ -16,6 +16,7 @@
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 #import "SYNPopoverable.h"
+#import "SYNVideoViewController.h"
 @import QuartzCore;
 
 
@@ -309,7 +310,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     // Remember the view controller that we came from
  //   self.originViewController = originViewController;
     
-    self.videoViewerViewController = [[SYNVideoViewerViewController alloc] initWithVideoInstanceArray: videoInstanceArray selectedIndex: selectedIndex];
+//	self.videoViewerViewController = [[SYNVideoViewerViewController alloc] initWithVideoInstanceArray: videoInstanceArray selectedIndex: selectedIndex];
+//	self.videoViewerViewController.overlayParent = self;
+//	[self presentViewController:self.videoViewerViewController animated:YES completion:nil];
+	
     /*
     if ([originViewController isKindOfClass:[SYNChannelDetailViewController class]])
     {
@@ -322,7 +326,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 //    self.videoViewerViewController.view.frame = self.overlayView.bounds;
  //   [self.overlayView addSubview: self.videoViewerViewController.view];
-    self.videoViewerViewController.overlayParent = self;
+	
    // [self.videoViewerViewController prepareForAppearAnimation];
 
    // CGPoint delta = [self.originViewController.view convertPoint:centerPoint toView:self.view];
@@ -332,8 +336,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
    // self.videoViewerViewController.view.alpha = 0.0f;
     
     
-    
-    [self presentViewController:self.videoViewerViewController animated:YES completion:nil];
+	UIViewController *viewController = [SYNVideoViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
+	[self presentViewController:viewController animated:YES completion:nil];
+	
     /*
     [UIView animateWithDuration: kVideoInAnimationDuration
                           delay: 0.0f
