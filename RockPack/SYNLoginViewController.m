@@ -118,7 +118,6 @@
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
-    
         // TERMS & SERVICESs
     
     [termsString addAttribute: NSForegroundColorAttributeName value: [UIColor colorWithRed:(11.0/255.0) green:(166.0/255.0) blue:(171.0/255.0) alpha:(1.0)] range: NSMakeRange(36, 17)];
@@ -149,14 +148,17 @@
     
     loginButton.layer.borderWidth = 1.0;
     loginButton.layer.borderColor = [purple CGColor];
+    loginButton.layer.cornerRadius = 8.0f;
     [loginButton setTitleColor:purple forState:UIControlStateNormal];
     
     signUpButton.layer.borderWidth = 1.0;
     signUpButton.layer.borderColor = [purple CGColor];
+    signUpButton.layer.cornerRadius = 8.0f;
     [signUpButton setTitleColor:purple forState:UIControlStateNormal];
     
     registerButton.layer.borderWidth = 1.0;
     registerButton.layer.borderColor = [purple CGColor];
+    registerButton.layer.cornerRadius = 8.0f;
     [registerButton setTitleColor:purple forState:UIControlStateNormal];
     
     facebookButtonInitialFrame = facebookSignInButton.frame;
@@ -169,21 +171,9 @@
     
         
     // == Setup Input Fields
-        
-    UIFont* rockpackInputFont = [UIFont lightCustomFontOfSize: 20];
     
-    CGColorRef borderColour = [[UIColor colorWithWhite: 167.0f / 255.0f
-                                                 alpha: 1.0f] CGColor];
-    
-    NSArray* textFieldsToSetup = @[emailInputField, userNameInputField, passwordInputField,
-                                       ddInputField, mmInputField, yyyyInputField];
         
-    for (UITextField* tf in textFieldsToSetup)
-    {
-        tf.font = rockpackInputFont;
-        tf.layer.borderColor = borderColour;
-        tf.layer.borderWidth = 1.0f;
-    }
+    
     
     if ([[SYNDeviceManager sharedInstance] isPortrait])
     {
@@ -549,6 +539,7 @@
 
 - (void) setUpLoginStateFromPreviousState: (kLoginScreenState) previousState
 {
+    
     [super setUpLoginStateFromPreviousState:previousState];
     //Fade out login background
     self.loginBackgroundImage.alpha = 1.0f;
@@ -557,6 +548,7 @@
                           delay:0.0f
                         options: UIViewAnimationCurveEaseInOut
                      animations:^{
+                         
                          self.loginBackgroundImage.alpha = 0.0f;
                          self.loginBackgroundFrontImage.alpha = 0.0f;
                          
@@ -614,30 +606,34 @@
                              
                              titleImageView.alpha = 0.0;
                              self.whatsOnYourChannelLabel.alpha = 0.0f;
-                         }
-                         completion: ^(BOOL finished) {
+                             
+                         } completion: ^(BOOL finished) {
+                             
                              [self placeSecondaryElements];
                              
                              dividerImageView.center = CGPointMake(dividerImageView.center.x, dividerImageView.center.y - self.elementsOffsetY);
                              
                              [UIView animateWithDuration: 0.2
                                               animations: ^{
+                                                  
                                                   passwordForgottenButton.alpha = 1.0;
                                                   passwordForgottenLabel.alpha = 1.0;
                                                   
                                                   dividerImageView.alpha = 1.0;
-                                              }
-                                              completion: ^(BOOL finished) {
+                                                  
+                                              } completion: ^(BOOL finished) {
+                                                  
                                                   [UIView animateWithDuration: 0.2
                                                                    animations: ^{
+                                                                       
                                                                        areYouNewLabel.alpha = 1.0;
                                                                        registerButton.alpha = 1.0;
                                                                        
                                                                        termsAndConditionsLabel.alpha = 1.0;
                                                                        
-                                                                       
                                                                    }
                                                                    completion: ^(BOOL finished) {
+                                                                       
                                                                        isAnimating = NO;
                                                                        
                                                                        termsAndConditionsButton.enabled = YES;
@@ -838,6 +834,7 @@
     {
         emailInputField.center = CGPointMake(userNameInputField.center.x,
                                              emailInputField.center.y);
+        
         emailInputField.frame = CGRectIntegral(emailInputField.frame);
         
         
@@ -885,6 +882,7 @@
                              signUpButton.hidden = YES;
                          }
                          completion: ^(BOOL finished) {
+                          
                              finalLoginButton.center = CGPointMake(finalLoginButton.center.x, finalLoginButton.center.y - self.elementsOffsetY);
                              
                              facebookSignInButton.center = CGPointMake(facebookSignInButton.center.x + kOffsetForRegisterForm, facebookSignInButton.center.y - self.elementsOffsetY);
@@ -923,8 +921,10 @@
         // prepare in the correct place
         
         loginButton.center = CGPointMake(registerButton.center.x, registerButton.center.y);
+        
         memberLabel.center = CGPointMake(loginButton.center.x,
                                          registerButton.center.y - 57.0);
+        
         memberLabel.frame = CGRectIntegral(memberLabel.frame);
         
         [UIView animateWithDuration: 0.5
