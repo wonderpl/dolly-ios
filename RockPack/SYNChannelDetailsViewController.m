@@ -170,26 +170,10 @@ SYNChannelCoverImageSelectorDelegate>
     
     // == Avatar Image == //
     
-    if (IS_IPAD)
-    {
-        
-        [self.btnAvatar setContentMode: UIViewContentModeScaleToFill];
-        
         [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
                                forState: UIControlStateNormal
                        placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile.png"]
                                 options: SDWebImageRetryFailed];
-    }
-    
-    if (IS_IPHONE)
-    {
-//        //somethings up with iphone image
-        [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
-                               forState: UIControlStateNormal
-                       placeholderImage: [UIImage imageNamed: @"ABCibtactPlaceholder.png"]
-                                options: SDWebImageRetryFailed];
-        
-    }
 
     
     if (IS_IPHONE)
@@ -857,15 +841,12 @@ SYNChannelCoverImageSelectorDelegate>
     
 }
 
-
-
 #pragma mark - Collection Delegate/Data Source Methods
 
 - (NSInteger) collectionView: (UICollectionView *) collectionView numberOfItemsInSection: (NSInteger) section
 {
     return self.channel.videoInstances.count;
 }
-
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
@@ -1335,6 +1316,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (IBAction)avatarTapped:(id)sender
 {
+    
     
     User *tmpUser = [((SYNAppDelegate*)[[UIApplication sharedApplication] delegate]) currentUser];
     
