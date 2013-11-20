@@ -3020,7 +3020,7 @@
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
 		BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoQueue.m; sourceTree = "<group>"; };
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9058166183CC77F00257E7F /* libPods-Ooyala.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "libPods-Ooyala.a"; path = "Pods/build/Debug-iphoneos/libPods-Ooyala.a"; sourceTree = "<group>"; };
+		E9058166183CC77F00257E7F /* libPods-Ooyala.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Ooyala.a"; path = "Pods/build/Debug-iphoneos/libPods-Ooyala.a"; sourceTree = "<group>"; };
 		E9058168183CC87C00257E7F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNVideoViewController_iphone.storyboard; sourceTree = "<group>"; };
 		E93C7F0A18368E3D00FE0B65 /* SYNVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewController.h; sourceTree = "<group>"; };
@@ -5667,13 +5667,12 @@
 		BE7D34D017159DF20085AB81 /* Activity (Notifications) */ = {
 			isa = PBXGroup;
 			children = (
+				BE9825A7183D1D9200617FA6 /* Cells */,
 				BE1B3DC7180D7F4000DA2BD6 /* Helpers */,
 				BE7D34D417159F3C0085AB81 /* SYNActivityViewController.h */,
 				BE7D34D517159F3C0085AB81 /* SYNActivityViewController.m */,
 				BE1B3DC8180D804A00DA2BD6 /* SYNActivityViewController.xib */,
 				BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */,
-				BE7D34D117159E2C0085AB81 /* SYNNotificationsTableViewCell.h */,
-				BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */,
 				BE7D35031715CE440085AB81 /* SYNNotification.h */,
 				BE7D35041715CE450085AB81 /* SYNNotification.m */,
 			);
@@ -5825,6 +5824,15 @@
 				BE0815B016D4FB9A00ADB1DC /* Categories */,
 			);
 			name = Tabs;
+			sourceTree = "<group>";
+		};
+		BE9825A7183D1D9200617FA6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BE7D34D117159E2C0085AB81 /* SYNNotificationsTableViewCell.h */,
+				BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		BEA1E32B16CCFF5E000AB59D /* Registries */ = {

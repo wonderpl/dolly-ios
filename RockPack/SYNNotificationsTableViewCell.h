@@ -13,7 +13,6 @@
 @interface SYNNotificationsTableViewCell : UITableViewCell
 
 @property (nonatomic) BOOL read;
-@property (nonatomic, strong) UIImageView *playSymbolImageView;
 @property (nonatomic, strong) UIImageView *thumbnailImageView;
 @property (nonatomic, weak) NSString *messageTitle;
 @property (nonatomic, weak) SYNActivityViewController *delegate;

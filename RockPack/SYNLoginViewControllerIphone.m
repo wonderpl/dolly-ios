@@ -66,7 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIView *secondSignupView;
 @property (weak, nonatomic) IBOutlet UIView *termsAndConditionsView;
 @property (weak, nonatomic) IBOutlet UIView *whiteLineView;
-@property (nonatomic, strong) IBOutlet UILabel *topTitleLabel;
+@property (nonatomic, strong) IBOutlet UIView* topNavBarView;
 
 @end
 
@@ -223,8 +223,15 @@
     self.backButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
     self.nextButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
     self.confirmButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.topTitleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.topTitleLabel.alpha = 0.0f;
+    
+    
+    // add line to to nav bar
+    CGSize toNavBarSize = self.topNavBarView.frame.size;
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0f, toNavBarSize.height - 1.0f, toNavBarSize.width, 1.0f)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [self.topNavBarView addSubview:line];
+    
+    self.topNavBarView.alpha = 0.0f;
     
     [self.view addSubview: self.onBoardingController.view];
     [self addChildViewController: self.onBoardingController];
@@ -479,7 +486,7 @@
     
     [self turnOnElement: self.cancelButton];
     [self turnOnElement: self.nextButton];
-    [self turnOnElement: self.topTitleLabel];
+    [self turnOnElement: self.topNavBarView];
     
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
@@ -532,7 +539,7 @@
     [self turnOnElement: self.confirmButton];
     
     [self.confirmButton setTitle:@"Login" forState:UIControlStateNormal];
-    [self turnOnElement: self.topTitleLabel];
+    [self turnOnElement: self.topNavBarView];
     
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
@@ -689,9 +696,10 @@
                              completion: nil];
             
             [[self.loginView subviews] makeObjectsPerformSelector: @selector(resignFirstResponder)];
+            
             [self turnOffElement: self.backButton];
             [self turnOffElement: self.confirmButton];
-            [self turnOffElement: self.topTitleLabel];
+            [self turnOffElement: self.topNavBarView];
             
             break;
         }
@@ -742,7 +750,7 @@
             
             [self turnOffElement: self.cancelButton];
             [self turnOffElement: self.nextButton];
-            [self turnOffElement: self.topTitleLabel];
+            [self turnOffElement: self.topNavBarView];
             
             [[self.firstSignupView subviews] makeObjectsPerformSelector: @selector(resignFirstResponder)];
             break;
@@ -1406,19 +1414,21 @@
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^{
+                         
                          element.alpha = 1.0f;
                      }
                      completion: nil];
 }
 
 
-- (void) turnOffElement: (UIView *) button
+- (void) turnOffElement: (UIView *) element
 {
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^{
-                         button.alpha = 0.0f;
+                         
+                         element.alpha = 0.0f;
                      }
                      completion: nil];
 }

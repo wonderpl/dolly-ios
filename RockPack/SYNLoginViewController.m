@@ -47,7 +47,6 @@
 @property (nonatomic, strong) IBOutlet UIButton* signUpButton;
 @property (nonatomic, strong) IBOutlet UIImageView* dividerImageView;
 @property (nonatomic, strong) IBOutlet UIImageView* loginBackgroundImage;
-@property (nonatomic, strong) IBOutlet UIImageView* titleImageView;
 @property (nonatomic, strong) IBOutlet UILabel* memberLabel;
 @property (nonatomic, strong) IBOutlet UILabel* passwordForgottenLabel;
 @property (nonatomic, strong) IBOutlet UILabel* secondaryFacebookMessage;
@@ -79,7 +78,6 @@
 @synthesize activityIndicator, dividerImageView, secondaryFacebookMessage;
 @synthesize isAnimating, termsAndConditionsLabelSide;
 @synthesize emailInputField, dobView, registerNewUserButton;
-@synthesize titleImageView;
 @synthesize ddInputField, mmInputField, yyyyInputField;
 @synthesize labelsToErrorArrows;
 @synthesize faceImageButton, facebookButtonInitialFrame, signUpButtonInitialFrame;
@@ -624,7 +622,6 @@
                              memberLabel.alpha = 0.0;
                              loginButton.alpha = 0.0;
                              
-                             titleImageView.alpha = 0.0;
                              self.whatsOnYourChannelLabel.alpha = 0.0f;
                              
                              
@@ -983,7 +980,6 @@
                          
                          facebookSignInButton.alpha = 0.0;
                          
-                         titleImageView.alpha = 0.0;
                          self.whatsOnYourChannelLabel.alpha = 0.0;
                          registerNewUserButton.alpha = 1.0;
                          

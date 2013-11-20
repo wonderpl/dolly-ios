@@ -213,8 +213,8 @@
                     <rect key="frame" x="355" y="518" width="320" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="DD" adjustsFontSizeToFit="NO" minimumFontSize="17" id="45" userLabel="DD TextField" customClass="SYNTextFieldLogin">
-                            <rect key="frame" x="0.0" y="0.0" width="72" height="38"/>
+                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="DD" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="45" userLabel="DD TextField" customClass="SYNTextFieldLogin">
+                            <rect key="frame" x="0.0" y="0.0" width="70" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -225,8 +225,8 @@
                                 <outlet property="delegate" destination="-1" id="77"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="MM" adjustsFontSizeToFit="NO" minimumFontSize="17" id="47" userLabel="MM TextField" customClass="SYNTextFieldLogin">
-                            <rect key="frame" x="88" y="0.0" width="72" height="38"/>
+                        <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="MM" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="47" userLabel="MM TextField" customClass="SYNTextFieldLogin">
+                            <rect key="frame" x="90" y="0.0" width="70" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -237,8 +237,8 @@
                                 <outlet property="delegate" destination="-1" id="78"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="YYYY" adjustsFontSizeToFit="NO" minimumFontSize="17" id="48" userLabel="YYYY TextField" customClass="SYNTextFieldLogin">
-                            <rect key="frame" x="182" y="0.0" width="138" height="38"/>
+                        <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="YYYY" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" id="48" userLabel="YYYY TextField" customClass="SYNTextFieldLogin">
+                            <rect key="frame" x="182" y="0.0" width="140" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
