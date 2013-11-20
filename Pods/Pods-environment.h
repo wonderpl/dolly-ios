@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_MKNetworkKit 87
 #define COCOAPODS_VERSION_PATCH_MKNetworkKit 0
 
+// Ooyala
+#define COCOAPODS_POD_AVAILABLE_Ooyala
+#define COCOAPODS_VERSION_MAJOR_Ooyala 1
+#define COCOAPODS_VERSION_MINOR_Ooyala 5
+#define COCOAPODS_VERSION_PATCH_Ooyala 1
+
 // Reachability
 #define COCOAPODS_POD_AVAILABLE_Reachability
 #define COCOAPODS_VERSION_MAJOR_Reachability 3

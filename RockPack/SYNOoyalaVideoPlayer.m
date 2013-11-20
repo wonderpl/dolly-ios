@@ -7,7 +7,7 @@
 //
 
 #import "SYNOoyalaVideoPlayer.h"
-#import "OOOoyalaPlayer.h"
+#import <OOOoyalaPlayer.h>
 #import "SYNScrubberBar.h"
 #import "Video.h"
 

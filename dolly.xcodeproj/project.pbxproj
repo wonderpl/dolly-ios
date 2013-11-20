@@ -109,7 +109,6 @@
 		0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */; };
 		0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB71182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m */; };
 		0125FB76182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */; };
-		0125FBA41831011600EC822E /* libOoyalaSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125FBA31831011500EC822E /* libOoyalaSDK.a */; };
 		0125FBA61831041E00EC822E /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125FBA51831041E00EC822E /* libc++.dylib */; };
 		0125FBA81831042600EC822E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0125FBA71831042600EC822E /* libxml2.dylib */; };
 		0125FBA91831043E00EC822E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717F165550BE00A3C7C4 /* Security.framework */; };
@@ -1378,6 +1377,7 @@
 		BEFAE89917241FD5009B2F66 /* SearchTabSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEFAE89717241FD5009B2F66 /* SearchTabSelected@2x.png */; };
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
 		C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3685246F69AA4C9B93DDEDAC /* libPods.a */; };
+		E9058169183CC87C00257E7F /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9058168183CC87C00257E7F /* libicucore.dylib */; };
 		E93C7F0918368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */; };
 		E93C7F0C18368E3D00FE0B65 /* SYNVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */; };
 		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
@@ -1387,7 +1387,18 @@
 		E97FCDC5183A7D2B007A9BCC /* SYNVideoViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FCDC4183A7D2B007A9BCC /* SYNVideoViewController_ipad.storyboard */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
+		E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2AF28717BE33C700A20127 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E9F23953183CD4DE00E64E9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 010DEFC71629BDC40080F26B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 010DEFCF1629BDC40080F26B;
+			remoteInfo = dolly;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		010AAE9217D9EF48001DD5FA /* ShareFacebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareFacebookButton.png; path = Assets/Images/ShareFacebookButton.png; sourceTree = "<group>"; };
@@ -1526,44 +1537,6 @@
 		0125FB73182D386F00EC822E /* SYNAbstractVideoPlaybackViewController+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNAbstractVideoPlaybackViewController+Private.h"; sourceTree = "<group>"; };
 		0125FB74182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOoyalaVideoPlaybackViewController.h; sourceTree = "<group>"; };
 		0125FB75182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOoyalaVideoPlaybackViewController.m; sourceTree = "<group>"; };
-		0125FB7E1831011500EC822E /* OOAdSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOAdSpot.h; sourceTree = "<group>"; };
-		0125FB7F1831011500EC822E /* OOAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOAnalytics.h; sourceTree = "<group>"; };
-		0125FB801831011500EC822E /* OOAuthorizableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOAuthorizableItem.h; sourceTree = "<group>"; };
-		0125FB811831011500EC822E /* OOCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOCallbacks.h; sourceTree = "<group>"; };
-		0125FB821831011500EC822E /* OOCaption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOCaption.h; sourceTree = "<group>"; };
-		0125FB831831011500EC822E /* OOChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOChannel.h; sourceTree = "<group>"; };
-		0125FB841831011500EC822E /* OOChannelSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOChannelSet.h; sourceTree = "<group>"; };
-		0125FB851831011500EC822E /* OOClosedCaptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOClosedCaptions.h; sourceTree = "<group>"; };
-		0125FB861831011500EC822E /* OOClosedCaptionsStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOClosedCaptionsStyle.h; sourceTree = "<group>"; };
-		0125FB871831011500EC822E /* OOContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOContentItem.h; sourceTree = "<group>"; };
-		0125FB881831011500EC822E /* OODynamicChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OODynamicChannel.h; sourceTree = "<group>"; };
-		0125FB891831011500EC822E /* OOEmbeddedSecureURLGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOEmbeddedSecureURLGenerator.h; sourceTree = "<group>"; };
-		0125FB8A1831011500EC822E /* OOEmbeddedSignatureGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOEmbeddedSignatureGenerator.h; sourceTree = "<group>"; };
-		0125FB8B1831011500EC822E /* OOEmbedTokenGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOEmbedTokenGenerator.h; sourceTree = "<group>"; };
-		0125FB8C1831011500EC822E /* OOMoviePlayer_OOAdMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOMoviePlayer_OOAdMoviePlayer.h; sourceTree = "<group>"; };
-		0125FB8D1831011500EC822E /* OOOoyalaAdSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaAdSpot.h; sourceTree = "<group>"; };
-		0125FB8E1831011500EC822E /* OOOoyalaAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaAPIClient.h; sourceTree = "<group>"; };
-		0125FB8F1831011500EC822E /* OOOoyalaError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaError.h; sourceTree = "<group>"; };
-		0125FB901831011500EC822E /* OOOoyalaPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaPlayer.h; sourceTree = "<group>"; };
-		0125FB911831011500EC822E /* OOOoyalaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOoyalaPlayerViewController.h; sourceTree = "<group>"; };
-		0125FB921831011500EC822E /* OOOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOOrderedDictionary.h; sourceTree = "<group>"; };
-		0125FB931831011500EC822E /* OOPaginatedParentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPaginatedParentItem.h; sourceTree = "<group>"; };
-		0125FB941831011500EC822E /* OOPlayableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPlayableItem.h; sourceTree = "<group>"; };
-		0125FB951831011500EC822E /* OOPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPlayer.h; sourceTree = "<group>"; };
-		0125FB961831011500EC822E /* OOPlayerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOPlayerInfo.h; sourceTree = "<group>"; };
-		0125FB971831011500EC822E /* OOReturnState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOReturnState.h; sourceTree = "<group>"; };
-		0125FB981831011500EC822E /* OOSecureURLGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOSecureURLGenerator.h; sourceTree = "<group>"; };
-		0125FB991831011500EC822E /* OOSignatureGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOSignatureGenerator.h; sourceTree = "<group>"; };
-		0125FB9A1831011500EC822E /* OOStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOStream.h; sourceTree = "<group>"; };
-		0125FB9B1831011500EC822E /* OOStreamPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOStreamPlayer.h; sourceTree = "<group>"; };
-		0125FB9C1831011500EC822E /* OOTBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOTBXML.h; sourceTree = "<group>"; };
-		0125FB9D1831011500EC822E /* OOVASTAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTAd.h; sourceTree = "<group>"; };
-		0125FB9E1831011500EC822E /* OOVASTAdSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTAdSpot.h; sourceTree = "<group>"; };
-		0125FB9F1831011500EC822E /* OOVASTLinearAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTLinearAd.h; sourceTree = "<group>"; };
-		0125FBA01831011500EC822E /* OOVASTSequenceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTSequenceItem.h; sourceTree = "<group>"; };
-		0125FBA11831011500EC822E /* OOVASTStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVASTStream.h; sourceTree = "<group>"; };
-		0125FBA21831011500EC822E /* OOVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OOVideo.h; sourceTree = "<group>"; };
-		0125FBA31831011500EC822E /* libOoyalaSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOoyalaSDK.a; path = RockPack/libOoyalaSDK.a; sourceTree = "<group>"; };
 		0125FBA51831041E00EC822E /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		0125FBA71831042600EC822E /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		0125FBAB1831045400EC822E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -3043,6 +3016,8 @@
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
 		BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoQueue.m; sourceTree = "<group>"; };
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9058166183CC77F00257E7F /* libPods-Ooyala.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "libPods-Ooyala.a"; path = "Pods/build/Debug-iphoneos/libPods-Ooyala.a"; sourceTree = "<group>"; };
+		E9058168183CC87C00257E7F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNVideoViewController_iphone.storyboard; sourceTree = "<group>"; };
 		E93C7F0A18368E3D00FE0B65 /* SYNVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewController.h; sourceTree = "<group>"; };
 		E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewController.m; sourceTree = "<group>"; };
@@ -3065,6 +3040,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9058169183CC87C00257E7F /* libicucore.dylib in Frameworks */,
 				0125FBAD1831046700EC822E /* AVFoundation.framework in Frameworks */,
 				0125FBAC1831045400EC822E /* CoreText.framework in Frameworks */,
 				0125FBAA1831044B00EC822E /* MediaPlayer.framework in Frameworks */,
@@ -3072,7 +3048,6 @@
 				0125FBA81831042600EC822E /* libxml2.dylib in Frameworks */,
 				0125FBA61831041E00EC822E /* libc++.dylib in Frameworks */,
 				01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */,
-				0125FBA41831011600EC822E /* libOoyalaSDK.a in Frameworks */,
 				01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */,
 				3854788417946630006EB38B /* libGoogleConversionTracking.a in Frameworks */,
 				C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */,
@@ -3091,6 +3066,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */,
 				BEB3135D181838BB00FAF98A /* CoreData.framework in Frameworks */,
 				01901A971771CCBA007DBEAC /* SenTestingKit.framework in Frameworks */,
 				01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */,
@@ -3126,10 +3102,11 @@
 		010DEFD31629BDC40080F26B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9058168183CC87C00257E7F /* libicucore.dylib */,
+				E9058166183CC77F00257E7F /* libPods-Ooyala.a */,
 				0125FBAB1831045400EC822E /* CoreText.framework */,
 				0125FBA71831042600EC822E /* libxml2.dylib */,
 				0125FBA51831041E00EC822E /* libc++.dylib */,
-				0125FBA31831011500EC822E /* libOoyalaSDK.a */,
 				01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */,
 				01F7C9671748ED0B00E36994 /* libsqlite3.dylib */,
 				019824EE1629CC7600216900 /* libTestFlight.a */,
@@ -3319,58 +3296,6 @@
 				012502BC16CA8FE30029C7C8 /* SYNFacebookManager.m */,
 			);
 			name = "Social Media";
-			sourceTree = "<group>";
-		};
-		0125FB7C183100F700EC822E /* Ooyala player */ = {
-			isa = PBXGroup;
-			children = (
-				0125FB7D1831011500EC822E /* Headers */,
-			);
-			name = "Ooyala player";
-			sourceTree = "<group>";
-		};
-		0125FB7D1831011500EC822E /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				0125FB7E1831011500EC822E /* OOAdSpot.h */,
-				0125FB7F1831011500EC822E /* OOAnalytics.h */,
-				0125FB801831011500EC822E /* OOAuthorizableItem.h */,
-				0125FB811831011500EC822E /* OOCallbacks.h */,
-				0125FB821831011500EC822E /* OOCaption.h */,
-				0125FB831831011500EC822E /* OOChannel.h */,
-				0125FB841831011500EC822E /* OOChannelSet.h */,
-				0125FB851831011500EC822E /* OOClosedCaptions.h */,
-				0125FB861831011500EC822E /* OOClosedCaptionsStyle.h */,
-				0125FB871831011500EC822E /* OOContentItem.h */,
-				0125FB881831011500EC822E /* OODynamicChannel.h */,
-				0125FB891831011500EC822E /* OOEmbeddedSecureURLGenerator.h */,
-				0125FB8A1831011500EC822E /* OOEmbeddedSignatureGenerator.h */,
-				0125FB8B1831011500EC822E /* OOEmbedTokenGenerator.h */,
-				0125FB8C1831011500EC822E /* OOMoviePlayer_OOAdMoviePlayer.h */,
-				0125FB8D1831011500EC822E /* OOOoyalaAdSpot.h */,
-				0125FB8E1831011500EC822E /* OOOoyalaAPIClient.h */,
-				0125FB8F1831011500EC822E /* OOOoyalaError.h */,
-				0125FB901831011500EC822E /* OOOoyalaPlayer.h */,
-				0125FB911831011500EC822E /* OOOoyalaPlayerViewController.h */,
-				0125FB921831011500EC822E /* OOOrderedDictionary.h */,
-				0125FB931831011500EC822E /* OOPaginatedParentItem.h */,
-				0125FB941831011500EC822E /* OOPlayableItem.h */,
-				0125FB951831011500EC822E /* OOPlayer.h */,
-				0125FB961831011500EC822E /* OOPlayerInfo.h */,
-				0125FB971831011500EC822E /* OOReturnState.h */,
-				0125FB981831011500EC822E /* OOSecureURLGenerator.h */,
-				0125FB991831011500EC822E /* OOSignatureGenerator.h */,
-				0125FB9A1831011500EC822E /* OOStream.h */,
-				0125FB9B1831011500EC822E /* OOStreamPlayer.h */,
-				0125FB9C1831011500EC822E /* OOTBXML.h */,
-				0125FB9D1831011500EC822E /* OOVASTAd.h */,
-				0125FB9E1831011500EC822E /* OOVASTAdSpot.h */,
-				0125FB9F1831011500EC822E /* OOVASTLinearAd.h */,
-				0125FBA01831011500EC822E /* OOVASTSequenceItem.h */,
-				0125FBA11831011500EC822E /* OOVASTStream.h */,
-				0125FBA21831011500EC822E /* OOVideo.h */,
-			);
-			path = Headers;
 			sourceTree = "<group>";
 		};
 		012632C7162DF4C40009FF9C /* Layout Engine Support */ = {
@@ -3839,7 +3764,6 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0125FB7C183100F700EC822E /* Ooyala player */,
 				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				BE06EEE517D635090028F2E3 /* Strict Interactive View */,
@@ -6229,6 +6153,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E9F23954183CD4DE00E64E9F /* PBXTargetDependency */,
 			);
 			name = dollyTests;
 			productName = rockpackTests;
@@ -7737,6 +7662,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E9F23954183CD4DE00E64E9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 010DEFCF1629BDC40080F26B /* dolly */;
+			targetProxy = E9F23953183CD4DE00E64E9F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		010DEFDD1629BDC40080F26B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -7870,21 +7803,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
-					"/Users/nick/Documents/Xcode/Working\\ Copies/iPhone/RockPack/Dolly/RockPack",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lz",
-					"-framework",
-					CFNetwork,
-					"-framework",
-					QuartzCore,
-					"-framework",
-					Security,
-					"-framework",
-					SystemConfiguration,
-					"-lsqlite3.0",
-					"-licucore",
 				);
 				PRODUCT_NAME = dolly;
 				PROVISIONING_PROFILE = "";
@@ -7925,21 +7843,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
-					"/Users/nick/Documents/Xcode/Working\\ Copies/iPhone/RockPack/Dolly/RockPack",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lz",
-					"-framework",
-					CFNetwork,
-					"-framework",
-					QuartzCore,
-					"-framework",
-					Security,
-					"-framework",
-					SystemConfiguration,
-					"-lsqlite3.0",
-					"-licucore",
 				);
 				PRODUCT_NAME = dolly;
 				PROVISIONING_PROFILE = "EB774DF8-2B22-43DA-90F5-FC72A9BCFFFA";
@@ -7960,14 +7863,11 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
-					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
-					"/Users/michaelmichailidis/Documents/Projects/dolly-ios",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
 				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -7984,14 +7884,11 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
-					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
-					"/Users/michaelmichailidis/Documents/Projects/dolly-ios",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
 				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -8008,14 +7905,11 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
-					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
-					"/Users/michaelmichailidis/Documents/Projects/dolly-ios",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
 				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -8085,21 +7979,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
-					"/Users/nick/Documents/Xcode/Working\\ Copies/iPhone/RockPack/Dolly/RockPack",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lz",
-					"-framework",
-					CFNetwork,
-					"-framework",
-					QuartzCore,
-					"-framework",
-					Security,
-					"-framework",
-					SystemConfiguration,
-					"-lsqlite3.0",
-					"-licucore",
 				);
 				PRODUCT_NAME = dolly;
 				PROVISIONING_PROFILE = "";

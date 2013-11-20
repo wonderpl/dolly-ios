@@ -2,12 +2,14 @@ PODS:
   - Appirater (2.0.2)
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
+  - Ooyala (1.5.1)
   - Reachability (3.1.1)
   - SSKeychain (0.2.1)
 
 DEPENDENCIES:
   - Appirater
   - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`, branch `cocoapods`)
+  - Ooyala
   - Reachability
   - SSKeychain (~> 0.2.1)
 
@@ -19,7 +21,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
-  Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
+  Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
 
-COCOAPODS: 0.27.1
+COCOAPODS: 0.28.0
