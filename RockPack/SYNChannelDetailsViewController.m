@@ -141,8 +141,7 @@ SYNChannelCoverImageSelectorDelegate>
 {
     [super viewDidLoad];
     
-    
-   // NSLog(@"VDL %f",self.videoThumbnailCollectionView.contentInset.top);
+    // NSLog(@"VDL %f",self.videoThumbnailCollectionView.contentInset.top);
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -210,7 +209,7 @@ SYNChannelCoverImageSelectorDelegate>
     [self displayChannelDetails];
 
     self.viewHasAppeared = NO;
-  //  self.tempContentOffset = CGPointMake(0, 0);
+  //  self.tempContentOffset = CGPointMake(0, -520);
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //    
 //    self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -239,7 +238,7 @@ SYNChannelCoverImageSelectorDelegate>
 
 -(void) iphoneMove
 {
-    CGAffineTransform move = CGAffineTransformMakeTranslation(0, -self.tempContentOffset.y);
+    CGAffineTransform move = CGAffineTransformMakeTranslation(0, self.tempContentOffset.y);
     self.viewProfileContainer.transform = move;
     self.btnAvatar.transform = move;
     self.btnShowFollowers.transform = move;
@@ -334,18 +333,18 @@ SYNChannelCoverImageSelectorDelegate>
     //    self.navigationController.navigationBarHidden = NO;
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     // Refresh our view
-    
-    
-    [self.videoThumbnailCollectionView reloadData];
 
+    
+    
+
+    [self.videoThumbnailCollectionView reloadData];
+  //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];
 }
 
 
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
-    
-    
     
     [[NSNotificationCenter defaultCenter] postNotificationName: kNoteHideAllCautions
                                                         object: self];
@@ -388,6 +387,7 @@ SYNChannelCoverImageSelectorDelegate>
 
     self.viewHasAppeared = NO;
     self.tempContentOffset = self.videoThumbnailCollectionView.contentOffset;
+    
 //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
 
 }
@@ -395,7 +395,11 @@ SYNChannelCoverImageSelectorDelegate>
 -(void)viewDidAppear:(BOOL)animated
 {
 //    NSLog(@"VDA %f",self.videoThumbnailCollectionView.contentInset.top);
-    
+    if (IS_IPAD)
+    {
+      //  [self iphoneMove];
+    }
+
     
     
 }
@@ -1311,9 +1315,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     [[NSNotificationCenter defaultCenter] postNotification: successNotification];
 }
 
-
-
-
 - (IBAction)avatarTapped:(id)sender
 {
     
@@ -1866,6 +1867,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                                   //                                                  [self.activityIndicator stopAnimating];
                                               }];
     
+    [self cancelTapped];
     
     
 }
@@ -1963,16 +1965,13 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
-    
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
-
 }
 
 #pragma mark - Text Field Delegates
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
-
 }
 
 -(void) textFieldDidEndEditing:(UITextField *)textField
@@ -2018,7 +2017,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
 }
-
 
 
 @end
