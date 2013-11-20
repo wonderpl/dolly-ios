@@ -67,6 +67,7 @@
 @property (weak, nonatomic) IBOutlet UIView *termsAndConditionsView;
 @property (weak, nonatomic) IBOutlet UIView *whiteLineView;
 @property (nonatomic, strong) IBOutlet UILabel *topTitleLabel;
+@property (nonatomic, strong) IBOutlet UIView* topNavBarView;
 
 @end
 
@@ -225,6 +226,14 @@
     self.confirmButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
     self.topTitleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
     self.topTitleLabel.alpha = 0.0f;
+    
+    // add line to to nav bar
+    CGSize toNavBarSize = self.topNavBarView.frame.size;
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0f, toNavBarSize.height - 1.0f, toNavBarSize.width, 1.0f)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [self.topNavBarView addSubview:line];
+    
+    self.topNavBarView.alpha = 0.0f;
     
     [self.view addSubview: self.onBoardingController.view];
     [self addChildViewController: self.onBoardingController];
@@ -1406,19 +1415,23 @@
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^{
+                         if(element == self.topTitleLabel)
+                             self.topNavBarView.alpha = 1.0f;
                          element.alpha = 1.0f;
                      }
                      completion: nil];
 }
 
 
-- (void) turnOffElement: (UIView *) button
+- (void) turnOffElement: (UIView *) element
 {
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^{
-                         button.alpha = 0.0f;
+                         if(element == self.topTitleLabel)
+                             self.topNavBarView.alpha = 0.0f;
+                         element.alpha = 0.0f;
                      }
                      completion: nil];
 }
