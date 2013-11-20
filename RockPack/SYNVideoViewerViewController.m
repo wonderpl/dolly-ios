@@ -23,7 +23,8 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPassthroughView.h"
 #import "SYNReportConcernTableViewController.h"
-#import "SYNVideoPlaybackViewController.h"
+#import "SYNYouTubeVideoPlaybackViewController.h"
+#import "SYNOoyalaVideoPlaybackViewController.h"
 #import "SYNVideoThumbnailSmallCell.h"
 #import "SYNVideoViewerThumbnailLayout.h"
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
@@ -32,6 +33,7 @@
 #import "UIImageView+WebCache.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "SYNScrubberBar.h"
 @import MediaPlayer;
 
 @interface SYNVideoViewerViewController () <UIGestureRecognizerDelegate>
@@ -55,7 +57,7 @@
 @property (nonatomic, strong) IBOutlet SYNPassthroughView *chromeView;
 @property (nonatomic, strong) IBOutlet SYNPassthroughView *passthroughView;
 @property (nonatomic, strong) IBOutlet SYNPassthroughView *placeholderView;
-@property (nonatomic, strong) IBOutlet SYNVideoPlaybackViewController *videoPlaybackViewController;
+@property (nonatomic, strong) IBOutlet SYNAbstractVideoPlaybackViewController *videoPlaybackViewController;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *heartActivityIndicator;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *shareActivityIndicator;
 @property (nonatomic, strong) IBOutlet UIButton *nextVideoButton;
@@ -235,7 +237,8 @@
     
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-    self.videoPlaybackViewController = [SYNVideoPlaybackViewController sharedInstance];
+//    self.videoPlaybackViewController = [SYNYouTubeVideoPlaybackViewController sharedInstance];
+        self.videoPlaybackViewController = [SYNOoyalaVideoPlaybackViewController sharedInstance];
     
     __weak typeof(self) weakSelf = self;
     
@@ -326,9 +329,7 @@
     // likes count
     self.likesCountLabel.font = [UIFont lightCustomFontOfSize:self.likesCountLabel.font.pointSize];
     self.likesCountLabel.text = @"0";
-    
-    
-    
+
     //iOS 7 Blur
     if (IS_IOS_7_OR_GREATER)
     {
@@ -578,14 +579,17 @@
     VideoInstance *videoInstance = self.videoInstanceArray [index];
     
     // In video overlay feed display BY followed by username, in video overlay search if no user name display nothing
-    if ([videoInstance.channel.channelOwner.displayName length] <= 0) {
+    if ([videoInstance.channel.channelOwner.displayName length] <= 0)
+    {
         self.channelCreatorLabel.text = @"";
-        [self.videoPlaybackViewController updateChannelCreator: videoInstance.video.sourceUsername];
+        [self.videoPlaybackViewController
+         updateChannelCreator: videoInstance.video.sourceUsername];
     }
     else
     {
-        self.channelCreatorLabel.text = [NSString stringWithFormat:@"By %@", videoInstance.channel.channelOwner.displayName];
-        [self.videoPlaybackViewController updateChannelCreator: videoInstance.video.sourceUsername];
+        self.channelCreatorLabel.text = [NSString stringWithFormat: @"By %@", videoInstance.channel.channelOwner.displayName];
+        [self.videoPlaybackViewController
+         updateChannelCreator: videoInstance.video.sourceUsername];
     }
     
     self.channelTitleLabel.text = videoInstance.channel.title;
@@ -593,8 +597,7 @@
     self.heartButton.selected = videoInstance.starredByUserValue;
     self.likesCountLabel.text = [videoInstance.video.starCount stringValue];
     
-    [self refreshAddbuttonStatus:nil];
-    
+    [self refreshAddbuttonStatus: nil];
 }
 
 
@@ -639,17 +642,9 @@
     
     SYNVideoViewerThumbnailLayoutAttributes* attributes = (SYNVideoViewerThumbnailLayoutAttributes *)[self.layout layoutAttributesForItemAtIndexPath: indexPath];
     
-    BOOL thumbnailIsColour = attributes.isHighlighted;
-    
-    if (thumbnailIsColour)
-    {
-        cell.colour = TRUE;
-    }
-    else
-    {
-        cell.colour = FALSE;
-    }
-    
+	BOOL thumbnailIsColour = attributes.isHighlighted;
+	cell.colour = thumbnailIsColour;
+	
     cell.imageWithURL = videoInstance.video.thumbnailURL;
     
     return cell;
@@ -693,10 +688,11 @@
 
 - (IBAction) userTouchedNextVideoButton: (id) sender
 {
-    if(self.isVideoExpanded)
+    if (self.isVideoExpanded)
     {
         return;
     }
+    
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
@@ -705,7 +701,7 @@
                                                             value: nil] build]];
     
     int index = (self.currentSelectedIndex + 1) % self.videoInstanceArray.count;
-
+    
     
     [self playVideoAtIndex: index];
 }
@@ -713,18 +709,19 @@
 
 - (IBAction) userTouchedPreviousVideoButton: (id) sender
 {
-    if(self.isVideoExpanded)
+    if (self.isVideoExpanded)
     {
         return;
     }
+    
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
+    
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"videoNextClick"
                                                             label: @"prev"
                                                             value: nil] build]];
     
-    int index = self.currentSelectedIndex -  1;
+    int index = self.currentSelectedIndex - 1;
     
     // wrap around if necessary
     if (index < 0)
@@ -738,12 +735,13 @@
 
 - (IBAction) userTouchedVideoAddItButton: (UIButton *) addItButton
 {
-    if(self.isVideoExpanded)
+    if (self.isVideoExpanded)
     {
         return;
     }
+    
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
+    
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"videoPlusButtonClick"
                                                             label: nil
@@ -751,11 +749,11 @@
     
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-    if (IS_IPAD && [appDelegate.videoQueue videoInstanceIsAddedToChannel:videoInstance])
+    if (IS_IPAD && [appDelegate.videoQueue videoInstanceIsAddedToChannel: videoInstance])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueRemove
-                                                        object: self
-                                                      userInfo: @{@"VideoInstance" : videoInstance}];
+                                                            object: self
+                                                          userInfo: @{@"VideoInstance": videoInstance}];
         addItButton.selected = NO;
     }
     else
@@ -763,53 +761,54 @@
         [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
                                                             object: self
          
-                                                          userInfo: @{@"VideoInstance" : videoInstance}];
+                                                          userInfo: @{@"VideoInstance": videoInstance}];
         addItButton.selected = YES;
+        
+        
         [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                          action: @"select"
                                                 videoInstanceId: videoInstance.uniqueId
                                               completionHandler: ^(id response) {
                                               }
                                                    errorHandler: ^(id error) {
-                                                       DebugLog (@"Acivity not recorded: Select");
-                                                   }]; 
+                                                       DebugLog(@"Acivity not recorded: Select");
+                                                   }];
     }
     
     if (!IS_IPAD)
     {
         addItButton.selected = NO;
     }
-    
 }
+
 
 - (IBAction) toggleStarButton: (UIButton *) button
 {
-    if(self.isVideoExpanded)
+    if (self.isVideoExpanded)
     {
         return;
     }
-
+    
     // if the user does NOT have a FB account linked, no prompt
     
-    ExternalAccount* facebookAccount = appDelegate.currentUser.facebookAccount;
+    ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
     
-    BOOL doesNotHavePublishPermissions = ![[SYNFacebookManager sharedFBManager] hasActiveSessionWithPermissionType:FacebookPublishPermission];
+    BOOL doesNotHavePublishPermissions = ![[SYNFacebookManager sharedFBManager] hasActiveSessionWithPermissionType: FacebookPublishPermission];
     BOOL doesNotHaveAutopostStarFlagSet = !(facebookAccount.flagsValue & ExternalAccountFlagAutopostStar);
     
-    if( facebookAccount && (facebookAccount.noautopostValue == NO) && (doesNotHavePublishPermissions || doesNotHaveAutopostStarFlagSet) ) 
+    if (facebookAccount && (facebookAccount.noautopostValue == NO) && (doesNotHavePublishPermissions || doesNotHaveAutopostStarFlagSet) )
     {
-        
         // then show panel, the newtork code will check for permissions in the FB Engine, is they exist then the code is triggered automatically and the flag is set,
         // if not then the flag is set after the net call
         
         
-        __weak SYNVideoViewerViewController* wself = self;
-        SYNImplicitSharingController* implicitSharingController = [SYNImplicitSharingController controllerWithBlock:^(BOOL allowedAutoSharing){
-            [wself toggleStarButton:button];
-            if(allowedAutoSharing)
+        __weak SYNVideoViewerViewController *wself = self;
+        SYNImplicitSharingController *implicitSharingController = [SYNImplicitSharingController controllerWithBlock: ^(BOOL allowedAutoSharing) {
+            [wself toggleStarButton: button];
+            
+            if (allowedAutoSharing)
             {
                 // track
-                
                 id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                 
                 [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
@@ -817,30 +816,28 @@
                                                                         label: @"fbi"
                                                                         value: nil] build]];
             }
-            
         }];
-        [self addChildViewController:implicitSharingController];
+        [self addChildViewController: implicitSharingController];
         
         implicitSharingController.view.alpha = 0.0f;
         implicitSharingController.view.center = CGPointMake(self.view.center.x, self.view.center.y);
         implicitSharingController.view.frame = CGRectIntegral(implicitSharingController.view.frame);
-        [self.view addSubview:implicitSharingController.view];
-        [UIView animateWithDuration:0.3 animations:^{
-            implicitSharingController.view.alpha = 1.0f;
-        }];
+        [self.view  addSubview: implicitSharingController.view];
         
-        UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissImplicitSharing)];
-        [self.view addGestureRecognizer:tapGesture];
+        [UIView animateWithDuration: 0.3
+                         animations: ^{
+                             implicitSharingController.view.alpha = 1.0f;
+                         }];
         
-        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget: self
+                                                                                     action: @selector(dismissImplicitSharing)];
+        [self.view addGestureRecognizer: tapGesture];
         
         return;
     }
     
-    
-    
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
+    
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
                                                            action: @"videoStarButtonClick"
                                                             label: @"Viewer"
@@ -855,9 +852,8 @@
     [self.heartActivityIndicator startAnimating];
     
     __weak VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
-    __weak SYNVideoViewerViewController* wself = self;
+    __weak SYNVideoViewerViewController *wself = self;
     MKNKUserErrorBlock finishBlock = ^(id obj) {
-        
         [wself updateVideoDetailsForIndex: self.currentSelectedIndex];
         
         [wself.heartActivityIndicator stopAnimating];
@@ -865,62 +861,64 @@
         button.enabled = YES;
     };
     
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                     action: starAction
-                                            videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: ^(id response) {
-                                              
-                                              
-                                              BOOL previousStarringState = videoInstance.starredByUserValue;
-                                              NSNumber* previousStarCount = videoInstance.video.starCount;
-                                              if (previousStarringState)
-                                              {
-                                                  // Currently highlighted, so decrement
-                                                  videoInstance.starredByUserValue = FALSE;
-                                                  videoInstance.video.starCountValue -= 1;
-                                              }
-                                              else
-                                              {
-                                                  // Currently highlighted, so increment
-                                                  videoInstance.starredByUserValue = TRUE;
-                                                  videoInstance.video.starCountValue += 1;
-                                                  [Appirater userDidSignificantEvent: FALSE];
-                                              }
-                                              
-                                              NSError* error;
-                                              if(![videoInstance.managedObjectContext save:&error]) // something went wrong
-                                              {
-                                                  // revert to previous state
-                                                  videoInstance.starredByUserValue = previousStarringState;
-                                                  videoInstance.video.starCount = previousStarCount;
-                                                  button.selected = !button.selected;
-                                              }
-                                              
-                                              
-                                              finishBlock(response);
-                                              
-                                          } errorHandler: ^(id error) {
-                                                   DebugLog(@"Could not star video");
-                                                   button.selected = !button.selected;
-                                                   finishBlock(error);
-                                               }];
-    
-    
-    
-    
+    [appDelegate.oAuthNetworkEngine
+     recordActivityForUserId: appDelegate.currentUser.uniqueId
+     action: starAction
+     videoInstanceId: videoInstance.uniqueId
+     completionHandler: ^(id response) {
+         BOOL previousStarringState = videoInstance.starredByUserValue;
+         NSNumber *previousStarCount = videoInstance.video.starCount;
+         
+         if (previousStarringState)
+         {
+             // Currently highlighted, so decrement
+             videoInstance.starredByUserValue = FALSE;
+             videoInstance.video.starCountValue -= 1;
+         }
+         else
+         {
+             // Currently highlighted, so increment
+             videoInstance.starredByUserValue = TRUE;
+             videoInstance.video.starCountValue += 1;
+             [Appirater userDidSignificantEvent: FALSE];
+         }
+         
+         NSError *error;
+         
+         if (![videoInstance.managedObjectContext
+               save: &error])                                                                       // something went wrong
+         {
+             // revert to previous state
+             videoInstance.starredByUserValue = previousStarringState;
+             videoInstance.video.starCount = previousStarCount;
+             button.selected = !button.selected;
+         }
+         
+         finishBlock(response);
+     } errorHandler: ^(id error) {
+         DebugLog(@"Could not star video");
+         button.selected = !button.selected;
+         finishBlock(error);
+     }];
 }
 
 
-
--(void)dismissImplicitSharing
+- (void) dismissImplicitSharing
 {
-    SYNImplicitSharingController* implicitSharingController;
-    for (UIViewController* child in self.childViewControllers) {
-        if([child isKindOfClass:[SYNImplicitSharingController class]])
-            implicitSharingController = (SYNImplicitSharingController*)child;
+    SYNImplicitSharingController *implicitSharingController;
+    
+    for (UIViewController *child in self.childViewControllers)
+    {
+        if ([child isKindOfClass: [SYNImplicitSharingController class]])
+        {
+            implicitSharingController = (SYNImplicitSharingController *) child;
+        }
     }
-    if(!implicitSharingController)
+    
+    if (!implicitSharingController)
+    {
         return;
+    }
     
     [implicitSharingController dismiss];
 }
@@ -928,10 +926,11 @@
 
 - (IBAction) userTouchedCloseButton: (id) sender
 {
-    if(self.isVideoExpanded)
+    if (self.isVideoExpanded)
     {
         return;
     }
+    
     // Call the close method on our parent
     [self.overlayParent removeVideoOverlayController];
 }
@@ -940,17 +939,18 @@
 // The user touched the invisible button above the channel thumbnail, taking the user to the channel page
 - (IBAction) userTouchedChannelButton: (id) sender
 {
-    
-    if(self.isVideoExpanded)
+    if (self.isVideoExpanded)
     {
         return;
     }
-    if(self.shownFromChannelScreen)
+    
+    if (self.shownFromChannelScreen)
     {
         //Don't navigate to the channel in a new view controller, instead just pop this video player
-        [self userTouchedCloseButton:nil];
+        [self userTouchedCloseButton: nil];
         return;
     }
+    
     [self.overlayParent removeVideoOverlayController];
     
     // Get the video instance for the currently selected video
@@ -963,10 +963,11 @@
 // The user touched the invisible button above the user details, taking the user to the profile page
 - (IBAction) userTouchedProfileButton: (id) sender
 {
-    if(self.isVideoExpanded)
+    if (self.isVideoExpanded)
     {
         return;
     }
+    
     [self.overlayParent removeVideoOverlayController];
     
     // Get the video instance for the currently selected video
@@ -975,13 +976,14 @@
     [self viewProfileDetails: videoInstance.channel.channelOwner];
 }
 
+
 - (void) userTappedVideo
 {
-        [self fadeUpShuttleBar];
-        [self scheduleFadeOutShuttleBar];
+    [self fadeUpShuttleBar];
+    [self scheduleFadeOutShuttleBar];
 }
 
-
+// Full screen handling
 - (void) handleMinMax
 {
     if (IS_IPAD)
@@ -1069,18 +1071,10 @@
                                     [self.videoPlaybackViewController.shuttleBarMaxMinButton setImage: [UIImage imageNamed: @"ButtonShuttleBarMinimise.png"]
                                                                                              forState: UIControlStateNormal];
                                 }];
-                                    
             }
         }
         
         self.videoExpanded = !self.videoExpanded;
-    }
-    else
-    {
-//        if (self.videoExpanded == TRUE)
-//        {
-//            [self scheduleFadeOutShuttleBar];
-//        }
     }
 }
 
@@ -1139,6 +1133,7 @@
     [self shareVideoInstance: videoInstance];
 }
 
+
 - (IBAction) userTouchedReportConcernButton: (UIButton *) button
 {
     button.selected = !button.selected;
@@ -1167,48 +1162,52 @@
 
 
 #pragma mark - orientation change iPhone
-- (void) deviceOrientationChange: (NSNotification*) note
+
+- (void) deviceOrientationChange: (NSNotification *) note
 {
     UIDeviceOrientation newOrientation = [[UIDevice currentDevice] orientation];
     
-    if (self.currentOrientation != newOrientation && (newOrientation ==  UIDeviceOrientationPortrait || UIDeviceOrientationIsLandscape(newOrientation)))
+    if (self.currentOrientation != newOrientation && (newOrientation == UIDeviceOrientationPortrait || UIDeviceOrientationIsLandscape(newOrientation)))
     {
-        [self changePlayerOrientation:newOrientation];
+        [self changePlayerOrientation: newOrientation];
     }
 }
 
--(void) changePlayerOrientation: (UIDeviceOrientation) newOrientation
+
+- (void) changePlayerOrientation: (UIDeviceOrientation) newOrientation
 {
     if (newOrientation == UIDeviceOrientationPortrait)
     {
         self.videoExpanded = FALSE;
         
-        [self.videoPlaybackViewController.shuttleBarMaxMinButton setImage: [UIImage imageNamed: @"ButtonShuttleBarMaximise.png"]
-                                                                 forState: UIControlStateNormal];
+        [self.videoPlaybackViewController.shuttleBarMaxMinButton
+         setImage: [UIImage imageNamed: @"ButtonShuttleBarMaximise.png"]
+         forState: UIControlStateNormal];
         
         self.currentOrientation = UIDeviceOrientationPortrait;
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+        [[UIApplication sharedApplication] setStatusBarHidden: NO
+                                                withAnimation: UIStatusBarAnimationSlide];
         [UIView transitionWithView: self.view
                           duration: 0.5f
                            options: UIViewAnimationOptionCurveEaseInOut
-                        animations: ^ {
+                        animations: ^{
                             self.blackPanelView.alpha = 0.0f;
                             self.chromeView.alpha = 1.0f;
                             self.swipeView.transform = CGAffineTransformIdentity;
                             self.videoPlaybackViewController.view.transform = CGAffineTransformIdentity;
-                            self.videoPlaybackViewController.shuttleBarView.transform = CGAffineTransformIdentity;
                             self.swipeView.frame = self.originalSwipeFrame;
                             CGRect videoFrame = self.videoPlaybackViewController.view.frame;
                             videoFrame.origin = self.originalFrame.origin;
                             self.videoPlaybackViewController.view.frame = videoFrame;
-//                            self.videoPlaybackViewController.shuttleBarView.alpha = 1.0f;
-                            [self.videoPlaybackViewController resetShuttleBarFrame];
                             self.iPhonePanelImageView.alpha = 1.0f;
                         }
-                        completion:^(BOOL finished) {
+         
+         
+                        completion: ^(BOOL finished) {
                             if (finished)
                             {
-                                [[NSNotificationCenter defaultCenter] postNotificationName:kNoteShowNetworkMessages object:nil];
+                                [[NSNotificationCenter defaultCenter] postNotificationName: kNoteShowNetworkMessages
+                                                                                    object: nil];
                             }
                         }];
     }
@@ -1216,8 +1215,9 @@
     {
         self.videoExpanded = TRUE;
         
-        [self.videoPlaybackViewController.shuttleBarMaxMinButton setImage: [UIImage imageNamed: @"ButtonShuttleBarMinimise.png"]
-                                                                 forState: UIControlStateNormal];
+        [self.videoPlaybackViewController.shuttleBarMaxMinButton
+         setImage: [UIImage imageNamed: @"ButtonShuttleBarMinimise.png"]
+         forState: UIControlStateNormal];
         self.currentOrientation = newOrientation;
         
         [[UIApplication sharedApplication] setStatusBarHidden: YES
@@ -1230,50 +1230,53 @@
         [UIView transitionWithView: self.view
                           duration: 0.5f
                            options: UIViewAnimationOptionCurveEaseInOut
-                        animations: ^ {
-                            CGRect fullScreenFrame = CGRectMake(0,0,[SYNDeviceManager.sharedInstance currentScreenHeight], [SYNDeviceManager.sharedInstance currentScreenWidth]);
+                        animations: ^{
+                            CGRect fullScreenFrame = CGRectMake(0, 0, [SYNDeviceManager.sharedInstance currentScreenHeight], [SYNDeviceManager.sharedInstance currentScreenWidth]);
+                            
                             if (fullScreenFrame.size.width < fullScreenFrame.size.height)
                             {
                                 //Device orientation may confuse screen dimensions. Ensure the width is always the larger dimension.
-                                fullScreenFrame = CGRectMake(0,0,[SYNDeviceManager.sharedInstance currentScreenWidth], [SYNDeviceManager.sharedInstance currentScreenHeight]);
+                                fullScreenFrame = CGRectMake(0, 0, [SYNDeviceManager.sharedInstance currentScreenWidth], [SYNDeviceManager.sharedInstance currentScreenHeight]);
                             }
                             
                             self.blackPanelView.alpha = 1.0f;
                             self.chromeView.alpha = 0.0f;
-                            self.swipeView.frame =  fullScreenFrame;
-                            self.swipeView.center = CGPointMake(fullScreenFrame.size.height/2.0f,fullScreenFrame.size.width/2.0f - self.iPhoneYOffset);
-                            self.videoPlaybackViewController.view.center = CGPointMake(fullScreenFrame.size.height/2.0f,fullScreenFrame.size.width/2.0f - self.iPhoneYOffset);
+                            self.swipeView.frame = fullScreenFrame;
+                            self.swipeView.center = CGPointMake(fullScreenFrame.size.height / 2.0f, fullScreenFrame.size.width / 2.0f - self.iPhoneYOffset);
+                            self.videoPlaybackViewController.view.center = CGPointMake(fullScreenFrame.size.height / 2.0f, fullScreenFrame.size.width / 2.0f - self.iPhoneYOffset);
                             
-                            self.swipeView.transform = CGAffineTransformMakeRotation((newOrientation==UIDeviceOrientationLandscapeLeft) ? M_PI_2 : -M_PI_2 );
+                            self.swipeView.transform = CGAffineTransformMakeRotation((newOrientation == UIDeviceOrientationLandscapeLeft) ? M_PI_2 : -M_PI_2);
                             
                             CGFloat scaleFactor = fullScreenFrame.size.width / self.videoPlaybackViewController.view.frame.size.width;
-//                            DebugLog (@"w1 = %f, w2 = %f", fullScreenFrame.size.width, self.videoPlaybackViewController.view.frame.size.width);
+                            
+                            //                            DebugLog (@"w1 = %f, w2 = %f", fullScreenFrame.size.width, self.videoPlaybackViewController.view.frame.size.width);
                             if (self.videoPlaybackViewController.view.frame.size.width < self.videoPlaybackViewController.view.frame.size.height)
                             {
                                 scaleFactor = self.videoPlaybackViewController.view.frame.size.height / fullScreenFrame.size.height;
                             }
                             
-                            self.videoPlaybackViewController.view.transform = CGAffineTransformScale(CGAffineTransformMakeRotation((newOrientation==UIDeviceOrientationLandscapeLeft) ? M_PI_2 : -M_PI_2 ),scaleFactor,scaleFactor);
-                            self.videoPlaybackViewController.shuttleBarView.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0f/scaleFactor,1.0f/scaleFactor);
-
+                            self.videoPlaybackViewController.view.transform = CGAffineTransformScale(CGAffineTransformMakeRotation((newOrientation == UIDeviceOrientationLandscapeLeft) ? M_PI_2 : -M_PI_2), scaleFactor, scaleFactor);
+                            self.videoPlaybackViewController.scrubberBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f / scaleFactor, 1.0f / scaleFactor);
+                            
                             //
-                            CGRect shuttleBarFrame = self.videoPlaybackViewController.shuttleBarView.frame;
-                            shuttleBarFrame.size.width = fullScreenFrame.size.width*(1.0f/scaleFactor);
-                            shuttleBarFrame.size.height = kShuttleBarHeight*(1.0f/scaleFactor);
+                            CGRect shuttleBarFrame = self.videoPlaybackViewController.scrubberBar.frame;
+                            shuttleBarFrame.size.width = fullScreenFrame.size.width * (1.0f / scaleFactor);
+                            shuttleBarFrame.size.height = kShuttleBarHeight * (1.0f / scaleFactor);
                             shuttleBarFrame.origin.x = 0.0f;
-                            shuttleBarFrame.origin.y = (self.videoPlaybackViewController.view.frame.size.width - kShuttleBarHeight)*(1.0f/scaleFactor);
-                            self.videoPlaybackViewController.shuttleBarView.frame = shuttleBarFrame;
+                            shuttleBarFrame.origin.y = (self.videoPlaybackViewController.view.frame.size.width - kShuttleBarHeight) * (1.0f / scaleFactor);
+                            self.videoPlaybackViewController.scrubberBar.frame = shuttleBarFrame;
                             
                             self.iPhonePanelImageView.alpha = 0.0f;
                         }
-                        completion: ^(BOOL success){
+         
+         
+                        completion: ^(BOOL success) {
                             CGFloat adjustment = ([SYNDeviceManager.sharedInstance currentScreenWidth] > 480) ? 0 : 25;
                             CGPoint currentCenter = self.swipeView.center;
-                            currentCenter.x += (newOrientation == UIDeviceOrientationLandscapeLeft) ? 44+adjustment : -(44+adjustment);
+                            currentCenter.x += (newOrientation == UIDeviceOrientationLandscapeLeft) ? 44 + adjustment : - (44 + adjustment);
                             self.swipeView.center = currentCenter;
                             
                             [self scheduleFadeOutShuttleBar];
-
                         }];
     }
 }
@@ -1290,7 +1293,7 @@
                               delay: 0.0f
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^ {
-                             self.videoPlaybackViewController.shuttleBarView.alpha = 0.0f;
+                             self.videoPlaybackViewController.scrubberBar.alpha = 0.0f;
                          }
                          completion: nil];
     }
@@ -1298,6 +1301,7 @@
  cancelPreviousRequest: YES];
 
 }
+
 
 - (void) fadeOutShuttleBar
 {
@@ -1310,7 +1314,7 @@
                               delay: 0.0f
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^ {
-                             self.videoPlaybackViewController.shuttleBarView.alpha = 0.0f;
+                             self.videoPlaybackViewController.scrubberBar.alpha = 0.0f;
                          }
                          completion: nil];
     }
@@ -1318,6 +1322,7 @@
  cancelPreviousRequest: YES];
     
 }
+
 
 - (void) fadeUpShuttleBar
 {
@@ -1328,7 +1333,7 @@
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^ {
-                         self.videoPlaybackViewController.shuttleBarView.alpha = 1.0f;
+                         self.videoPlaybackViewController.scrubberBar.alpha = 1.0f;
                      }
                      completion: nil];
 
@@ -1342,24 +1347,27 @@
     [self.videoPlaybackViewController playIfVideoActive];
 }
 
+
 - (void) pauseIfVideoActive
 {
     [self.videoPlaybackViewController pauseIfVideoActive];
 }
 
+
 #pragma mark - refresh addbutton status
--(void)refreshAddbuttonStatus:(NSNotification*)note
+
+- (void) refreshAddbuttonStatus: (NSNotification *) note
 {
     //We should only track the status of the queue on iPad since iPhone only ever adds one object at a time
-    VideoInstance* videoInstance = self.videoInstanceArray[self.currentSelectedIndex];
-    self.addVideoButton.selected = [appDelegate.videoQueue videoInstanceIsAddedToChannel:videoInstance];
+    VideoInstance *videoInstance = self.videoInstanceArray[self.currentSelectedIndex];
+    
+    self.addVideoButton.selected = [appDelegate.videoQueue
+                                    videoInstanceIsAddedToChannel: videoInstance];
 }
-
-
 
 #pragma mark - Appear animation
 
--(void)prepareForAppearAnimation
+- (void) prepareForAppearAnimation
 {
     self.addVideoButton.alpha = 0.0f;
     self.addVideoButton.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
@@ -1373,46 +1381,56 @@
     self.likesCountLabel.alpha = 0.0f;
     self.likesCountLabel.transform = CGAffineTransformMakeTranslation(-80.0f, 0.0f);
     
-    if(self.currentSelectedIndex>1 || [self.videoInstanceArray count] < 4)
+    if (self.currentSelectedIndex > 1 || [self.videoInstanceArray count] < 4)
     {
-        [self scrollToCellAtIndex:MAX(0, self.currentSelectedIndex - 3) animated:NO];
+        [self scrollToCellAtIndex: MAX(0, self.currentSelectedIndex - 3)
+                         animated: NO];
     }
     else
     {
-        [self scrollToCellAtIndex:3 animated:NO];
+        [self scrollToCellAtIndex: 3
+                         animated: NO];
     }
+    
     self.videoThumbnailCollectionView.alpha = 0.0f;
 }
 
--(void)runAppearAnimation
+
+- (void) runAppearAnimation
 {
+    [UIView animateWithDuration: 0.5f
+                          delay: 0.5f
+                        options: UIViewAnimationCurveEaseInOut
+                     animations: ^{
+                         self.addVideoButton.transform = CGAffineTransformIdentity;
+                         
+                         self.shareButton.transform = CGAffineTransformIdentity;
+                         
+                         self.heartButton.transform = CGAffineTransformIdentity;
+                         
+                         self.likesCountLabel.transform = CGAffineTransformIdentity;
+                         
+                         self.addVideoButton.alpha = 1.0f;
+                         
+                         self.likesCountLabel.alpha = 1.0f;
+                         
+                         self.shareButton.alpha = 1.0f;
+                         
+                         self.heartButton.alpha = 1.0f;
+                     }
+                     completion: nil];
     
-    [UIView animateWithDuration:0.5f delay:0.5f options:UIViewAnimationCurveEaseInOut animations:^{
-        
-        self.addVideoButton.transform = CGAffineTransformIdentity;
-        
-        self.shareButton.transform = CGAffineTransformIdentity;
-        
-        self.heartButton.transform = CGAffineTransformIdentity;
-        
-        self.likesCountLabel.transform = CGAffineTransformIdentity;
-        
-        self.addVideoButton.alpha = 1.0f;
-        
-        self.likesCountLabel.alpha = 1.0f;
-        
-        self.shareButton.alpha = 1.0f;
-        
-        self.heartButton.alpha = 1.0f;
-
-    } completion:nil];
-
     
-    [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationCurveEaseInOut animations:^{
-        self.videoThumbnailCollectionView.alpha = 1.0f;
-    } completion:nil];
+    [UIView animateWithDuration: 1.0f
+                          delay: 0.0f
+                        options: UIViewAnimationCurveEaseInOut
+                     animations: ^{
+                         self.videoThumbnailCollectionView.alpha = 1.0f;
+                     }
+                     completion: nil];
     
-    [self scrollToCellAtIndex:self.currentSelectedIndex animated:YES];
+    [self scrollToCellAtIndex: self.currentSelectedIndex
+                     animated: YES];
 }
 
 

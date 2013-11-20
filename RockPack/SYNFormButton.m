@@ -14,8 +14,9 @@
 {
     [super awakeFromNib];
     
-    self.layer.cornerRadius = 4.0f;
+    self.layer.cornerRadius = 2.0f;
     self.layer.masksToBounds = YES;
+    
 }
 
 

@@ -79,8 +79,7 @@
 "startscreen_onboard_5_ipad" = "\nA well-crafted pack is a gift that keeps on giving.\nYou wonderful person you.";
 
 
-//By Using Rockpack... sentence
-"register_screen_legal" = "By using Rockpack, you agree to our\nTerms of Services and Privacy Policy";
+"register_screen_legal" = "By using Mayberry you agree to our\nTerms of Services & Privacy Policy";
 
 
 //Placeholder for username textfield

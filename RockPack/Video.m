@@ -4,6 +4,9 @@
 #import "Video.h"
 @import Foundation;
 
+NSString *const VideoSourceYouTube = @"youtube";
+NSString *const VideoSourceOoyala = @"ooyala";
+
 @implementation Video
 
 #pragma mark - Object factory

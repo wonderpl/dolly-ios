@@ -62,6 +62,7 @@
         NSLock *lock = [NSLock new];
         @synchronized(lock) { // to protect from very rare "Collection <__NSCFSet: 0xc1e0040> was mutated while being enumerated"
         NSMutableArray *subgenresArray = [[NSMutableArray alloc] initWithCapacity:((NSArray*)dictionary[@"sub_categories"]).count];
+            
         for (NSDictionary *subgenreData in dictionary[@"sub_categories"])
         {
             SubGenre *subgenre = [SubGenre instanceFromDictionary: subgenreData
@@ -72,10 +73,7 @@
         
             self.subgenres = [NSOrderedSet orderedSetWithArray:subgenresArray];
         }
-        
     }
-    
-    
 }
 
 

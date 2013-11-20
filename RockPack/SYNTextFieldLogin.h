@@ -10,4 +10,6 @@
 
 @interface SYNTextFieldLogin : UITextField
 
+@property (nonatomic) BOOL errorMode;
+
 @end

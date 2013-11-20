@@ -209,10 +209,6 @@
 }
 
 
-
-
-
-
 - (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button
 {
     UIView* target = button;
@@ -260,10 +256,19 @@
                                                fromCenter: center];
 }
 
+#pragma mark - UICollectionViewDelegate/Data Source (to be overriden)
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    AssertOrLog(@"Abstract Method Called");
+    return 0;
+}
 
 
-
-
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    AssertOrLog(@"Abstract Method Called");
+    return nil;
+}
 
 // User pressed the channel thumbnail in a VideoCell
 - (IBAction) channelButtonTapped: (UIButton *) channelButton

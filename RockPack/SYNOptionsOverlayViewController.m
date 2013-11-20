@@ -44,7 +44,10 @@ typedef enum {
 @implementation SYNOptionsOverlayViewController
 
 
-
+-(void)startingPresentation
+{
+    
+}
 
 - (void)viewDidLoad
 {

@@ -27,4 +27,6 @@
 - (void) prepareForAppearAnimation;
 - (void) runAppearAnimation;
 
+- (void)userTouchedMaxMinButton;
+
 @end

@@ -30,6 +30,10 @@
 
 @synthesize colour = _colour;
 
++ (UINib *)nib {
+	return [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
+}
+
 - (void) awakeFromNib
 {
     [super awakeFromNib];
@@ -39,7 +43,7 @@
     self.colourImageView.image = nil;
     self.monochromeImageView.image = nil;
     self.mainView.alpha = kNextPrevVideoCellAlpha;
-    self.colour = FALSE;
+    self.colour = NO;
 }
 
 #pragma mark - Asynchronous image loading support
@@ -131,7 +135,7 @@
     self.monochromeImageView.image = nil;
     
     self.mainView.alpha = kNextPrevVideoCellAlpha;
-    self.colour = FALSE;
+    self.colour = NO;
 }
 
 #pragma mark - Monochrome support

@@ -128,6 +128,10 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
          sizeForItemAtIndexPath: [NSIndexPath indexPathForItem: 0 inSection: 0]];
 }
 
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
+{
+    return 1;
+}
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
                    layout: (UICollectionViewLayout*) collectionViewLayout

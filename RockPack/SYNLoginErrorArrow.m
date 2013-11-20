@@ -14,41 +14,25 @@
 
 - (id)initWithDefault
 {
-    self = [super init];
+    CGRect correctFrame = CGRectZero;
+    if(UIInterfaceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]))
+        correctFrame.size = CGSizeMake(233.0f, 62.0);
+    else
+        correctFrame.size = CGSizeMake(350.0f, 62.0);
+    
+    self = [super initWithFrame:correctFrame];
+    
     if (self) {
         
-
+        CGRect labelFrame = self.frame;
+        labelFrame.origin.x += 30.0;
+        labelFrame.size.width -= 30.0;
+        labelFrame.origin.y += 4.0;
+        labelFrame.size.height -= 5.0;
+        messageLabel = [[UILabel alloc] initWithFrame:labelFrame];
         
-        if(UIInterfaceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]))
-        {
-            backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LoginErrorPortrait.png"]];
-            [self addSubview:backgroundImageView];
-            self.frame = backgroundImageView.frame;
-            
-            CGRect labelFrame = self.frame;
-            labelFrame.origin.x += 30.0;
-            labelFrame.size.width -= 40.0;
-            labelFrame.origin.y += 4.0;
-            labelFrame.size.height -= 5.0;
-            messageLabel = [[UILabel alloc] initWithFrame:labelFrame];
-        }
-        
-        else
-        {
-            backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LoginError.png"]];
-            [self addSubview:backgroundImageView];
-            self.frame = backgroundImageView.frame;
-            
-            CGRect labelFrame = self.frame;
-            labelFrame.origin.x += 30.0;
-            labelFrame.size.width -= 30.0;
-            labelFrame.origin.y += 4.0;
-            labelFrame.size.height -= 5.0;
-            messageLabel = [[UILabel alloc] initWithFrame:labelFrame];
-        }
-        
-        messageLabel.font = [UIFont lightCustomFontOfSize:13.0];
-        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.font = [UIFont lightCustomFontOfSize:14.0];
+        messageLabel.textColor = [UIColor colorWithRed:(142.0f/255.0f) green:(22.0f/255.0f) blue:(41.0f/255.0f) alpha:(1.0f)];
         messageLabel.backgroundColor = [UIColor clearColor];
         messageLabel.textAlignment = NSTextAlignmentLeft;
         messageLabel.numberOfLines = 2;        
