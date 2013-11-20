@@ -14,6 +14,7 @@
 #import "SYNNotification.h"
 #import "UIImageView+WebCache.h"
 #import "Video.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
 
@@ -49,6 +50,13 @@
     
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.tableView.layer.borderColor = [[UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f] CGColor];
+    self.tableView.layer.borderWidth = 1.0f;
+    
+    UIEdgeInsets tableInsets = self.tableView.contentInset;
+    tableInsets.top = 80.0f;
+    self.tableView.contentInset = tableInsets;
 
     [self.tableView registerClass: [SYNNotificationsTableViewCell class]
            forCellReuseIdentifier: kNotificationsCellIdent];
@@ -186,14 +194,12 @@
     NSURL *thumbnaillUrl;
     UIImage *placeholder;
     
-    notificationCell.playSymbolImageView.hidden = TRUE;
 
     switch (notification.objectType)
     {
         case kNotificationObjectTypeUserLikedYourVideo:
             thumbnaillUrl = [NSURL URLWithString: notification.videoThumbnailUrl];
             placeholder = [UIImage imageNamed: @"PlaceholderNotificationVideo"];
-            notificationCell.playSymbolImageView.hidden = FALSE;
 
             break;
             
@@ -238,7 +244,7 @@
 - (CGFloat) tableView: (UITableView *) tableView
             heightForRowAtIndexPath: (NSIndexPath *) indexPath;
 {
-    return 77.0f;
+    return IS_IPAD ? 92.0f : 76.0f;
 }
 
 

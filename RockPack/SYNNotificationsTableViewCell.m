@@ -9,6 +9,7 @@
 #import "SYNNotificationsTableViewCell.h"
 #import "SYNActivityViewController.h"
 #import "UIFont+SYNFont.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SYNNotificationsTableViewCell ()
 
@@ -33,13 +34,19 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         // == frames == //
-        self.imageViewRect = CGRectMake(8.0, 8.0, 60.0, 60.0);
+        CGFloat imageViewWidth = 48.0f;
+        self.imageViewRect = CGRectMake((IS_IPAD ? 76.0 : 14.0f), (IS_IPAD ? 22.0f : 14.0f), imageViewWidth, imageViewWidth);
+        
+        
+        self.imageView.layer.cornerRadius = imageViewWidth / 2.0f;
+        self.imageView.clipsToBounds = YES;
+    
         
         // == Profile Image View == //
         self.imageView.frame = self.imageViewRect;
         
         // == Main Text == //
-        self.textLabel.frame = CGRectMake(74.0, 10.0, 0.0, 0.0); // width, height will be set below
+        
         self.textLabel.font = [UIFont lightCustomFontOfSize: 14.0];
         self.textLabel.textAlignment = NSTextAlignmentLeft;
         self.textLabel.numberOfLines = 3;
@@ -60,22 +67,26 @@
                                                          alpha: (1.0)];
         
         // == Channel image view == //
-        self.thumbnailImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, 60, 60.0)]; // x, y will be set below
-        self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
-        self.thumbnailImageView.clipsToBounds = TRUE;
+       
+        self.thumbnailImageView = [[UIImageView alloc] initWithFrame: CGRectMake(self.frame.size.width, // x will be set in layoutSubviews
+                                                                                 20.0,
+                                                                                 IS_IPAD ? 92.0f : 60.0f,
+                                                                                 IS_IPAD ? 52.0f : 34.0f)];
+        self.thumbnailImageView.backgroundColor = [UIColor greenColor];
+        self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.thumbnailImageView.clipsToBounds = YES;
         [self addSubview: self.thumbnailImageView];
         
-        self.playSymbolImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, 60, 60.0)]; 
-        self.playSymbolImageView.contentMode = UIViewContentModeCenter;
-        self.playSymbolImageView.clipsToBounds = TRUE;
-        self.playSymbolImageView.hidden = TRUE;
-        self.playSymbolImageView.image = [UIImage imageNamed: @"OverlayNotificationVideo"];
         
-        [self addSubview: self.playSymbolImageView];
         
         // == Divider Image View == //
-        self.dividerImageView = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, 362.0, 2.0)];
-        self.dividerImageView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"NavDivider"]];
+        self.dividerImageView = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.frame.size.width, 1.0)];
+        self.dividerImageView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f)
+                                                                green:(172.0f/255.0f)
+                                                                 blue:(172.0f/255.0f)
+                                                                alpha:1.0f];
+        
+        self.dividerImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
         [self addSubview: self.dividerImageView];
         
@@ -87,6 +98,8 @@
         self.secondaryImageButton = [UIButton buttonWithType: UIButtonTypeCustom];
         self.secondaryImageButton.frame = self.imageViewRect;
         [self addSubview: self.secondaryImageButton];
+        
+        
     }
     
     return self;
@@ -97,32 +110,30 @@
 {
     [super layoutSubviews];
     
-    // Image Vsiew //
+    // Avatar Image View (Left) //
     
     self.imageView.frame = self.mainImageButton.frame = self.imageViewRect;
     
     
-    self.textLabel.frame = CGRectMake(76.0,
-                                      (self.mainTextSize.height > 40.0 ? 6.0 : 12.0),
+    self.textLabel.frame = CGRectMake((IS_IPAD ? 154.0f : 90.0f),
+                                      (IS_IPAD ? 22.0f : 14.0f),
                                       self.mainTextSize.width,
                                       self.mainTextSize.height);
     
-    // Thumbnail - Place at the end
-    CGRect thumbnailImageViewFrame = self.imageView.frame;
-    thumbnailImageViewFrame.origin.x = self.frame.size.width - 68.0;
-    thumbnailImageViewFrame.origin.y = self.imageView.frame.origin.y;
     
-    self.thumbnailImageView.frame = self.secondaryImageButton.frame = thumbnailImageViewFrame;
+    // Thumbnail Image View (Right)
     
-    // Make this the same size as the other thumbnail
-    self.playSymbolImageView.frame = self.thumbnailImageView.frame;
+    CGRect thumbFrame = self.thumbnailImageView.frame;
+    thumbFrame.origin.x = self.frame.size.width - thumbFrame.size.width - (IS_IPAD ? 68.0f : 14.0f);
+    self.thumbnailImageView.frame = thumbFrame;
+    
     
     // Details
-    CGRect detailsFrame = CGRectMake(76.0, 12.0, self.mainTextSize.width, 20.0f);
+    
+    CGRect detailsFrame = CGRectMake((IS_IPAD ? 154.0f : 90.0f), 12.0, self.mainTextSize.width, 20.0f);
     detailsFrame.origin.y = self.textLabel.frame.origin.y + self.textLabel.frame.size.height - (self.mainTextSize.height > 40.0 ? 4.0 : 0.0);
     self.detailTextLabel.frame = detailsFrame;
     
-    self.dividerImageView.center = CGPointMake(self.center.x, self.frame.size.height);
     
     if (self.read)
     {
@@ -135,6 +146,7 @@
                                                 blue: (231.0 / 255.0)
                                                alpha: (1.0)];
     }
+    
 }
 
 
@@ -189,7 +201,7 @@
     
     
     CGRect textLabelFrame = self.textLabel.frame;
-    CGFloat maxWidth = IS_IPAD ? 200.0 : 170.0;
+    CGFloat maxWidth = IS_IPAD ? 260.0 : 140.0;
     
     NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: messageTitle
                                                                           attributes: @{NSFontAttributeName: self.textLabel.font}];
@@ -207,13 +219,11 @@
     self.mainTextSize = mainTSize;
     
     
-    
     textLabelFrame.size = self.mainTextSize;
     
     self.textLabel.attributedText = attributedString;
     self.textLabel.frame = textLabelFrame;
     
-    //self.textLabel.text = messageTitle;
 }
 
 
