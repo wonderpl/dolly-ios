@@ -31,8 +31,6 @@
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.rockpack.${PRODUCT_NAME:rfc1034identifier}</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
