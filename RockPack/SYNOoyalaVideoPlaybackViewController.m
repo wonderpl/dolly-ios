@@ -7,8 +7,8 @@
 //
 
 
-#import "OOOoyalaError.h"
-#import "OOOoyalaPlayer.h"
+#import <OOOoyalaPlayer.h>
+#import <OOOoyalaError.h>
 #import "SYNAbstractVideoPlaybackViewController+Private.h"
 #import "SYNOoyalaVideoPlaybackViewController.h"
 

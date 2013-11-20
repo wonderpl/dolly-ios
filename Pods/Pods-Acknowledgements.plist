@@ -47,6 +47,14 @@ THE SOFTWARE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright (c) 2012 Ooyala All rights reserved</string>
+			<key>Title</key>
+			<string>Ooyala</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2011, Tony Million.
 All rights reserved.
 

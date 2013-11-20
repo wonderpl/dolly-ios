@@ -1,0 +1,6 @@
+#include "Pods-Ooyala.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/Ooyala" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/Appirater" "${PODS_ROOT}/Headers/MKNetworkKit" "${PODS_ROOT}/Headers/MKNetworkKit/Categories" "${PODS_ROOT}/Headers/Ooyala" "${PODS_ROOT}/Headers/Reachability" "${PODS_ROOT}/Headers/SSKeychain"
+LIBRARY_SEARCH_PATHS = ${PODS_OOYALA_LIBRARY_SEARCH_PATHS}
+OTHER_LDFLAGS = -ObjC ${PODS_OOYALA_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}
