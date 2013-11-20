@@ -696,6 +696,7 @@
                              completion: nil];
             
             [[self.loginView subviews] makeObjectsPerformSelector: @selector(resignFirstResponder)];
+            
             [self turnOffElement: self.backButton];
             [self turnOffElement: self.confirmButton];
             [self turnOffElement: self.topNavBarView];
