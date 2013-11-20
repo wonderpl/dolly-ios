@@ -18,7 +18,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPopoverBackgroundView.h"
 #import "UIFont+SYNFont.h"
-#import "SYNTextFieldLogin.h"s
+#import "SYNTextFieldLogin.h"
 #import "User.h"
 
 @interface SYNLoginViewController ()  <UITextFieldDelegate,
