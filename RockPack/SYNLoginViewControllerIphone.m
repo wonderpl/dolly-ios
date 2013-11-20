@@ -530,6 +530,8 @@
     
     [self turnOnElement: self.backButton];
     [self turnOnElement: self.confirmButton];
+    
+    [self.confirmButton setTitle:@"Login" forState:UIControlStateNormal];
     [self turnOnElement: self.topTitleLabel];
     
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
@@ -690,6 +692,7 @@
             [self turnOffElement: self.backButton];
             [self turnOffElement: self.confirmButton];
             [self turnOffElement: self.topTitleLabel];
+            
             break;
         }
     }
@@ -1130,6 +1133,7 @@
     self.state = kLoginScreenStateRegisterStepTwo;
     [self turnOnElement: self.backButton];
     [self turnOnElement: self.confirmButton];
+    [self.confirmButton setTitle:@"Sign Up" forState:UIControlStateNormal];
     [self turnOffElement: self.nextButton];
     [self turnOffElement: self.cancelButton];
     
