@@ -66,6 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIView *secondSignupView;
 @property (weak, nonatomic) IBOutlet UIView *termsAndConditionsView;
 @property (weak, nonatomic) IBOutlet UIView *whiteLineView;
+@property (nonatomic, strong) IBOutlet UILabel *topTitleLabel;
 
 @end
 
@@ -213,17 +214,18 @@
     CGRect onBoardingViewFrame = self.onBoardingController.view.frame;
     onBoardingViewFrame.origin.x = 0.0;
     onBoardingViewFrame.size.width = [[SYNDeviceManager sharedInstance] currentScreenWidth];
-    
-    if (IS_IPHONE_5)
-    {
-        onBoardingViewFrame.origin.y = -100.0;
-    }
-    else
-    {
-        onBoardingViewFrame.origin.y = self.facebookButton.frame.origin.y - onBoardingViewFrame.size.height - 20.0;
-    }
+    onBoardingViewFrame.origin.y = self.facebookButton.frame.origin.y - onBoardingViewFrame.size.height - 20.0;
     
     self.onBoardingController.view.frame = CGRectIntegral(onBoardingViewFrame);
+    
+    // navigation buttons
+    self.cancelButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    self.backButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    self.nextButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    self.confirmButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    self.topTitleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    self.topTitleLabel.alpha = 0.0f;
+    
     [self.view addSubview: self.onBoardingController.view];
     [self addChildViewController: self.onBoardingController];
 }
@@ -475,8 +477,9 @@
     
     self.state = kLoginScreenStateRegister;
     
-    [self turnOnButton: self.cancelButton];
-    [self turnOnButton: self.nextButton];
+    [self turnOnElement: self.cancelButton];
+    [self turnOnElement: self.nextButton];
+    [self turnOnElement: self.topTitleLabel];
     
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
@@ -525,8 +528,9 @@
     
     self.state = kLoginScreenStateLogin;
     
-    [self turnOnButton: self.backButton];
-    [self turnOnButton: self.confirmButton];
+    [self turnOnElement: self.backButton];
+    [self turnOnElement: self.confirmButton];
+    [self turnOnElement: self.topTitleLabel];
     
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
@@ -592,10 +596,13 @@
     {
         case kLoginScreenStateRegisterStepTwo:
         {
-            [self turnOffButton: self.backButton];
-            [self turnOffButton: self.confirmButton];
-            [self turnOnButton: self.nextButton];
-            [self turnOnButton: self.cancelButton];
+            [self turnOffElement: self.backButton];
+            [self turnOffElement: self.confirmButton];
+            [self turnOnElement: self.nextButton];
+            [self turnOnElement: self.cancelButton];
+            
+            
+            
             self.state = kLoginScreenStateRegister;
             
             [UIView animateWithDuration: kLoginAnimationTransitionDuration
@@ -616,7 +623,8 @@
                              }
                              completion: ^(BOOL finished) {
                                  [self.registeringUserNameInputField becomeFirstResponder];
-                                 [self turnOffButton: self.backButton];
+                                 [self turnOffElement: self.backButton];
+                                 
                              }];
             
             break;
@@ -679,8 +687,9 @@
                              completion: nil];
             
             [[self.loginView subviews] makeObjectsPerformSelector: @selector(resignFirstResponder)];
-            [self turnOffButton: self.backButton];
-            [self turnOffButton: self.confirmButton];
+            [self turnOffElement: self.backButton];
+            [self turnOffElement: self.confirmButton];
+            [self turnOffElement: self.topTitleLabel];
             break;
         }
     }
@@ -728,8 +737,10 @@
                              }
                              completion: nil];
             
-            [self turnOffButton: self.cancelButton];
-            [self turnOffButton: self.nextButton];
+            [self turnOffElement: self.cancelButton];
+            [self turnOffElement: self.nextButton];
+            [self turnOffElement: self.topTitleLabel];
+            
             [[self.firstSignupView subviews] makeObjectsPerformSelector: @selector(resignFirstResponder)];
             break;
         }
@@ -795,8 +806,8 @@
     {
         case kLoginScreenStateLogin:
         {
-            [self turnOffButton: self.backButton];
-            [self turnOffButton: self.confirmButton];
+            [self turnOffElement: self.backButton];
+            [self turnOffElement: self.confirmButton];
             self.activityIndicator.hidden = NO;
             self.activityIndicator.center = self.confirmButton.center;
             [self.activityIndicator startAnimating];
@@ -817,8 +828,8 @@
                                                                              value: nil] build]];
                  } errorHandler: ^(NSDictionary *errorDictionary) {
                      [self.activityIndicator stopAnimating];
-                     [self turnOnButton: self.backButton];
-                     [self turnOnButton: self.confirmButton];
+                     [self turnOnElement: self.backButton];
+                     [self turnOnElement: self.confirmButton];
                      
                      NSError *networkError = [errorDictionary valueForKey: @"nserror"];
                      
@@ -846,8 +857,8 @@
             self.activityIndicator.center = self.confirmButton.center;
             self.activityIndicator.hidden = NO;
             [self.activityIndicator startAnimating];
-            [self turnOffButton: self.backButton];
-            [self turnOffButton: self.confirmButton];
+            [self turnOffElement: self.backButton];
+            [self turnOffElement: self.confirmButton];
             
             self.ddInputField.text = [self zeroPadIfOneCharacter: self.ddInputField.text];
             self.mmInputField.text = [self zeroPadIfOneCharacter: self.mmInputField.text];
@@ -884,8 +895,8 @@
                          [self completeLoginProcess];
                      } errorHandler: ^(NSDictionary *errorDictionary) {
                          [self.activityIndicator stopAnimating];
-                         [self turnOnButton: self.backButton];
-                         [self turnOnButton: self.confirmButton];
+                         [self turnOnElement: self.backButton];
+                         [self turnOnElement: self.confirmButton];
                          
                          NSError *networkError = [errorDictionary valueForKey: @"nserror"];
                          
@@ -972,15 +983,15 @@
             
         case kLoginScreenStatePasswordRetrieve:
         {
-            [self turnOffButton: self.backButton];
-            [self turnOffButton: self.confirmButton];
+            [self turnOffElement: self.backButton];
+            [self turnOffElement: self.confirmButton];
             [self doRequestPasswordResetForUsername: self.emailInputField.text
                                   completionHandler: ^(NSDictionary *completionInfo) {
                                       if ([completionInfo valueForKey: @"error"])
                                       {
                                           self.passwordResetErrorLabel.text = NSLocalizedString(@"forgot_password_screen_form_field_username_user_unknown", nil);
-                                          [self turnOnButton: self.backButton];
-                                          [self turnOnButton: self.confirmButton];
+                                          [self turnOnElement: self.backButton];
+                                          [self turnOnElement: self.confirmButton];
                                       }
                                       else
                                       {
@@ -989,12 +1000,12 @@
                                                                      delegate: nil
                                                             cancelButtonTitle: NSLocalizedString(@"OK", nil)
                                                             otherButtonTitles: nil] show];
-                                          [self turnOnButton: self.backButton];
+                                          [self turnOnElement: self.backButton];
                                       }
                                   } errorHandler: ^(NSError *error) {
                                       self.passwordResetErrorLabel.text = NSLocalizedString(@"forgot_password_screen_form_field_request_failed_error", nil);
-                                      [self turnOnButton: self.backButton];
-                                      [self turnOnButton: self.confirmButton];
+                                      [self turnOnElement: self.backButton];
+                                      [self turnOnElement: self.confirmButton];
                                   }];
             break;
         }
@@ -1040,13 +1051,13 @@
     }
     
     [self.activityIndicator startAnimating];
-    [self turnOffButton: self.cancelButton];
-    [self turnOffButton: self.nextButton];
+    [self turnOffElement: self.cancelButton];
+    [self turnOffElement: self.nextButton];
     
     [self doRequestUsernameAvailabilityForUsername: self.registeringUserNameInputField.text
                                  completionHandler: ^(NSDictionary *result) {
                                      [self.activityIndicator stopAnimating];
-                                     [self turnOnButton: self.cancelButton];
+                                     [self turnOnElement: self.cancelButton];
                                      
                                      NSNumber *availabilitynumber = result[@"available"];
                                      
@@ -1062,7 +1073,7 @@
                                          }
                                          else
                                          {
-                                             [self turnOnButton: self.nextButton];
+                                             [self turnOnElement: self.nextButton];
                                              self.registeringUserErrorLabel.text = NSLocalizedString(@"register_screen_form_field_username_already_taken", nil);
                                          }
                                      }
@@ -1078,12 +1089,12 @@
                                          
                                          self.registeringUserErrorLabel.text = errorString;
                                          
-                                         [self turnOnButton: self.nextButton];
+                                         [self turnOnElement: self.nextButton];
                                      }
                                  } errorHandler: ^(NSError *error) {
                                      [self.activityIndicator stopAnimating];
-                                     [self turnOnButton: self.cancelButton];
-                                     [self turnOnButton: self.nextButton];
+                                     [self turnOnElement: self.cancelButton];
+                                     [self turnOnElement: self.nextButton];
                                      self.registeringUserErrorLabel.text = NSLocalizedString(@"unknown_error_message", nil);
                                  }];
 }
@@ -1117,10 +1128,10 @@
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.state = kLoginScreenStateRegisterStepTwo;
-    [self turnOnButton: self.backButton];
-    [self turnOnButton: self.confirmButton];
-    [self turnOffButton: self.nextButton];
-    [self turnOffButton: self.cancelButton];
+    [self turnOnElement: self.backButton];
+    [self turnOnElement: self.confirmButton];
+    [self turnOffElement: self.nextButton];
+    [self turnOffElement: self.cancelButton];
     
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
@@ -1384,20 +1395,20 @@
 
 #pragma mark - button enabling convenience methods
 
-- (void) turnOnButton: (UIButton *) button
+- (void) turnOnElement: (UIView *) element
 {
-    button.hidden = NO;
+    element.hidden = NO;
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^{
-                         button.alpha = 1.0f;
+                         element.alpha = 1.0f;
                      }
                      completion: nil];
 }
 
 
-- (void) turnOffButton: (UIButton *) button
+- (void) turnOffElement: (UIView *) button
 {
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
                           delay: 0.0f

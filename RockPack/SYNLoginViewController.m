@@ -115,6 +115,9 @@
     termsAndConditionsLabel.font = [UIFont lightCustomFontOfSize: 14.0];
     termsAndConditionsLabelSide.font = termsAndConditionsLabel.font;
     wellSendYouLabel.font = [UIFont lightCustomFontOfSize: 16.0];
+    
+    
+    
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
