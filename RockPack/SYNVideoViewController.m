@@ -50,8 +50,6 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
-@property (nonatomic, strong) SYNReportConcernTableViewController *reportConcernTableViewController;
-
 @end
 
 @implementation SYNVideoViewController
