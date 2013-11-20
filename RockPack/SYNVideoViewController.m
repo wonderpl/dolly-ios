@@ -21,7 +21,6 @@
 #import "SYNImplicitSharingController.h"
 #import "SYNNetworkOperationJsonObject.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNReportConcernTableViewController.h"
 #import "SYNDeviceManager.h"
 #import <Appirater.h>
 
