@@ -44,6 +44,8 @@
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 415.0f
 #define ALPHA_IN_EDIT 0.4f
+#define OFFSET_DESCRIPTION_EDIT 150.0f
+
 //delete function in channeldetails deletechannel
 
 
@@ -118,6 +120,8 @@
 @property (nonatomic) CGPoint offsetBeforeSearch;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
+
+@property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
 
 
 @end
@@ -305,7 +309,8 @@
                                                  blue: (42.0f / 255.0f)
                                                 alpha: 1.0f];
 
-    
+    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+
 
     
 }
@@ -1650,11 +1655,6 @@
     }
 }
 
-#pragma mark - TextView delegates
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    
-}
 
 
 #pragma mark - IBActions
@@ -1707,7 +1707,15 @@
     self.uploadCoverPhotoButton.alpha = 0.0f;
     self.uploadAvatarButton.alpha = 0.0f;
     
+    CGRect tmpRect = self.aboutMeTextView.frame;
+    tmpRect.origin.y += 10;
+    tmpRect.size.height += 18;
     
+
+    self.subscriptionThumbnailCollectionView.scrollEnabled = NO;
+    self.channelThumbnailCollectionView.scrollEnabled = NO;
+    self.aboutMeTextView.editable = YES;
+
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = ALPHA_IN_EDIT;
@@ -1728,6 +1736,13 @@
         self.aboutMeTextView.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:1.0];
         self.uploadCoverPhotoButton.alpha = 1.0f;
         self.uploadAvatarButton.alpha = 1.0f;
+        
+        self.aboutMeTextView.frame = tmpRect;
+        [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/225.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+        [[self.aboutMeTextView layer] setBorderWidth:1.0];
+        
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
 
     }];
 }
@@ -1735,6 +1750,14 @@
 //Navigation bar item cancel
 -(void) cancelTapped
 {
+    
+    CGRect tmpRect = self.aboutMeTextView.frame;
+    tmpRect.origin.y -= 10;
+    tmpRect.size.height -= 18;
+    
+    self.aboutMeTextView.editable = NO;
+
+
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = 1.0f;
@@ -1753,17 +1776,81 @@
         self.uploadAvatarButton.alpha = 0.0f;
         self.uploadCoverPhotoButton.alpha = 0.0f;
 
+        [[self.aboutMeTextView layer] setBorderWidth:0.0];
+
+        self.aboutMeTextView.frame = tmpRect;
+
     } completion:^(BOOL finished) {
         self.uploadCoverPhotoButton.hidden = YES;
         self.uploadAvatarButton.hidden = YES;
 
     }];
+    self.subscriptionThumbnailCollectionView.scrollEnabled = YES;
+    self.channelThumbnailCollectionView.scrollEnabled = YES;
     
+    [self resetOffsetWithAnimation];
+
 }
 
 -(void) saveTapped
 {
     NSLog(@"Save profile");
 }
+
+
+
+#pragma mark - Text View Delegates
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self resetOffsetWithAnimation];
+}
+
+-(void) textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+    
+    
+    [UIView animateWithDuration:0.3f animations:^{
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
+        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
+ 
+    }];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
+ replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+        // Return FALSE so that the final '\n' character doesn't get added
+        return NO;
+    }
+    
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    return (newLength > 50) ? NO : YES;
+}
+
+-(void)dismissKeyboard
+{
+    [self.aboutMeTextView resignFirstResponder];
+    
+    [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
+    
+
+    [self resetOffsetWithAnimation];
+}
+
+-(void) resetOffsetWithAnimation
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+    }];
+
+}
+
 
 @end
