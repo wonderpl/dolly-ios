@@ -85,10 +85,12 @@
                     <rect key="frame" x="179" y="448" width="314" height="282"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="It is a long established fact that a reader will be distracted by the readable content of a page." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
-                            <rect key="frame" x="0.0" y="130" width="314" height="42"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
+                            <rect key="frame" x="27" y="134" width="260" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <string key="text">Something about
+me...</string>
                             <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
@@ -99,7 +101,6 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRR-mm-3I5">
                             <rect key="frame" x="0.0" y="200" width="314" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <state key="normal" title="edit">
                                 <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -210,27 +211,27 @@
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="trailing" secondItem="jew-YX-wj4" secondAttribute="trailing" constant="-1" id="1ay-8E-h4f"/>
                 <constraint firstAttribute="bottom" secondItem="0td-Z3-eno" secondAttribute="bottom" id="1x0-Y7-s0P"/>
                 <constraint firstItem="w5q-qP-bHl" firstAttribute="centerY" secondItem="NLw-Oe-3pp" secondAttribute="centerY" id="2s0-Zq-P2W"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="top" constant="26" id="3wc-Vp-WIm"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="top" constant="30" id="3wc-Vp-WIm"/>
                 <constraint firstItem="jew-YX-wj4" firstAttribute="leading" secondItem="3wY-iP-RPC" secondAttribute="trailing" constant="-671" id="478-eP-F5F"/>
                 <constraint firstItem="R50-Sy-iTx" firstAttribute="centerX" secondItem="jew-YX-wj4" secondAttribute="centerX" id="7BM-30-9RH"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="-1" id="7h7-FP-c93"/>
                 <constraint firstItem="R50-Sy-iTx" firstAttribute="centerY" secondItem="0td-Z3-eno" secondAttribute="centerY" id="F4Y-2a-UYZ"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="jew-YX-wj4" secondAttribute="leading" constant="-1" id="GAA-en-Qie"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="top" secondItem="0td-Z3-eno" secondAttribute="top" id="Hdi-Xu-dOa"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-38" id="K3l-6A-Van"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-34" id="K3l-6A-Van"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="top" secondItem="1" secondAttribute="top" id="KQc-dV-JP4"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="uxB-NR-Hkw" secondAttribute="trailing" id="LU7-5S-iUd"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="0td-Z3-eno" secondAttribute="trailing" id="PRg-8p-DeQ"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="centerX" secondItem="XoE-Jb-ERN" secondAttribute="centerX" id="Phy-pf-Dbs"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Rtq-Gd-Rnj"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="bottom" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-14" id="TxL-pY-bsq"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="bottom" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-10" id="TxL-pY-bsq"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="VGj-qv-A8K"/>
                 <constraint firstAttribute="trailing" secondItem="3wY-iP-RPC" secondAttribute="trailing" id="WbR-ER-4kQ"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerY" secondItem="0td-Z3-eno" secondAttribute="centerY" constant="87" id="Wfx-uD-6Tf"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" constant="50" id="aYf-C1-kCH"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" constant="54" id="aYf-C1-kCH"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="top" secondItem="1" secondAttribute="top" id="bF0-s9-siM"/>
                 <constraint firstAttribute="centerX" secondItem="MS7-tW-0TH" secondAttribute="centerX" constant="-0.5" id="dZ9-eW-GDU"/>
-                <constraint firstItem="3wY-iP-RPC" firstAttribute="centerY" secondItem="jew-YX-wj4" secondAttribute="centerY" constant="6" id="ek5-fV-xcC"/>
+                <constraint firstItem="3wY-iP-RPC" firstAttribute="centerY" secondItem="jew-YX-wj4" secondAttribute="centerY" constant="10" id="ek5-fV-xcC"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" constant="0.5" id="fVi-Wv-NS0"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="centerY" secondItem="uxB-NR-Hkw" secondAttribute="centerY" constant="-28" id="gbi-nM-5re"/>
                 <constraint firstAttribute="bottom" secondItem="MS7-tW-0TH" secondAttribute="bottom" id="kQy-8n-9mG"/>
@@ -248,7 +249,6 @@
     </objects>
     <resources>
         <image name="ButtonMore.png" width="56" height="56"/>
-        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>
 </document>

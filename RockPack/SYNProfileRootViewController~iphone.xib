@@ -114,13 +114,15 @@
                         </button>
                     </subviews>
                 </view>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="dddddddd  vqdwdqdwqqd" textAlignment="center" id="JUa-73-uP8">
-                    <rect key="frame" x="55" y="323" width="211" height="42"/>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" id="JUa-73-uP8">
+                    <rect key="frame" x="30" y="323" width="260" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                    <string key="text">Something about 
+me...</string>
                     <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="0DR-hI-wIs"/>
@@ -217,6 +219,7 @@
     </objects>
     <resources>
         <image name="ButtonMore.png" width="38" height="38"/>
+        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>
 </document>

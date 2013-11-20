@@ -44,7 +44,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 415.0f
 #define ALPHA_IN_EDIT 0.4f
-#define OFFSET_DESCRIPTION_EDIT 150.0f
+#define OFFSET_DESCRIPTION_EDIT 130.0f
 
 //delete function in channeldetails deletechannel
 
@@ -311,6 +311,11 @@
 
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
 
+    if (IS_IPAD)
+    {
+        self.aboutMeTextView.translatesAutoresizingMaskIntoConstraints = YES;
+        
+    }
 
     
 }
@@ -1788,7 +1793,7 @@
     self.subscriptionThumbnailCollectionView.scrollEnabled = YES;
     self.channelThumbnailCollectionView.scrollEnabled = YES;
     
-    [self resetOffsetWithAnimation];
+//    [self resetOffsetWithAnimation];
 
 }
 
@@ -1803,20 +1808,27 @@
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    [self resetOffsetWithAnimation];
+    [self performSelector:@selector(resetOffsetWithAnimation) withObject:nil afterDelay:0.3f];
+    //[self resetOffsetWithAnimation];
 }
 
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
-    
+    NSLog(@"ddd%f", self.aboutMeTextView.frame.size.height);
+
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
     
+//    if (IS_IPHONE)
+//    {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
+            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
+            
+        }];
+//    }
     
-    [UIView animateWithDuration:0.3f animations:^{
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
-        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
- 
-    }];
+    NSLog(@"%f", self.aboutMeTextView.frame.size.height);
+    
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
@@ -1835,11 +1847,9 @@
 
 -(void)dismissKeyboard
 {
+    NSLog(@"dismiss %f", self.aboutMeTextView.frame.size.height);
     [self.aboutMeTextView resignFirstResponder];
-    
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
-    
-
     [self resetOffsetWithAnimation];
 }
 
