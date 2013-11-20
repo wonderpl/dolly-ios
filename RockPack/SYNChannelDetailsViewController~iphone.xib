@@ -16,6 +16,7 @@
                 <outlet property="lblChannelTitle" destination="Vnv-ov-6xo" id="ov8-x6-sed"/>
                 <outlet property="lblDescription" destination="irB-oP-X4O" id="BBs-Oh-cue"/>
                 <outlet property="lblFullName" destination="r8Y-zW-rcS" id="0f2-uW-cCd"/>
+                <outlet property="lblNoVideos" destination="bdE-6E-xRu" id="Tvl-mO-hao"/>
                 <outlet property="txtFieldChannelName" destination="iJk-oO-DwC" id="kJf-Ej-qsU"/>
                 <outlet property="txtViewDescription" destination="QmE-dp-0Kj" id="eea-T0-45v"/>
                 <outlet property="videoCollectionViewLayoutIPhone" destination="ybs-C7-TVb" id="OAT-F3-2x4"/>
@@ -183,6 +184,13 @@
                         <outlet property="delegate" destination="-1" id="hiT-WX-Joe"/>
                     </connections>
                 </textField>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="There is no videos in this collection yet " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-6E-xRu">
+                    <rect key="frame" x="9" y="457" width="302" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.73725491762161255" green="0.73725491762161255" blue="0.73725491762161255" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

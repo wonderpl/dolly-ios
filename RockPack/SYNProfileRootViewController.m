@@ -31,6 +31,7 @@
 #import "SYNChannelDetailsViewController.h"
 #import "SYNAccountSettingsViewController.h"
 
+
 @import QuartzCore;
 
 #define kInterRowMargin 1.0f
@@ -38,10 +39,11 @@
 #define PULL_THRESHOLD_IPAD 0.0f
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
-#define FULL_NAME_LABEL_IPHONE 285.0f
+#define FULL_NAME_LABEL_IPHONE 272.0f // lower is down
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 415.0f
+#define ALPHA_IN_EDIT 0.4f
 //delete function in channeldetails deletechannel
 
 
@@ -272,6 +274,22 @@
     
     [self setProfleType:self.modeType];
     
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+//    [attributes setValue:[UIColor colorWithWhite:0.30 alpha:1.0] forKey:NSForegroundColorAttributeName];
+//    [attributes setValue:[UIColor whiteColor] forKey:NSShadowAttributeName];
+    
+    NSShadow *tmpShadow = [[NSShadow alloc]init];
+    tmpShadow.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    [tmpShadow setShadowOffset: CGSizeMake(0.0f, 1.0f)];
+
+    [attributes setValue:tmpShadow forKey:NSShadowAttributeName];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+
+    NSShadow *shadow = [NSShadow new];
+    [shadow setShadowColor: [UIColor colorWithWhite:0.0f alpha:0.750f]];
+    [shadow setShadowOffset: CGSizeMake(0.0f, 1.0f)];
+    
+
     
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
     self.barBtnCancel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
@@ -286,6 +304,8 @@
                                                 green: (210.0f / 255.0f)
                                                  blue: (42.0f / 255.0f)
                                                 alpha: 1.0f];
+
+    
 
     
 }
@@ -633,8 +653,8 @@
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(671, 732);
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(671, 732);
+            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(671, 752);
+            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(671, 752);
             
             //NEED DYNAMIC WAY
             // self.channelThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
@@ -654,8 +674,8 @@
             self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(0.0, 21.0, 0.0, 21.0);
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(1004, 610);
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(1004, 610);
+            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(1004, 630);
+            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(1004, 630);
             
             // self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
             
@@ -1074,18 +1094,19 @@
             self.followersCountButton.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
-            
-            if (offset<0)
-            {
-                //Scale the cover phote in iphone
+            self.coverImage.transform = move;
+
+//            if (offset<0)
+//            {
+//                //Scale the cover phote in iphone
 //                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
 //                self.coverImage.transform = scale;
-            }
-            else
-            {
-                self.coverImage.transform = move;
-                
-            }
+//            }
+//            else
+//            {
+//                self.coverImage.transform = move;
+//                
+//            }
             [self moveNameLabelWithOffset:offset];
         }
         else
@@ -1689,21 +1710,24 @@
     
     [UIView animateWithDuration:0.5f animations:^{
         
-        self.coverImage.alpha = 0.5f;
-        self.segmentedControlsView.alpha = 0.5f;
+        self.coverImage.alpha = ALPHA_IN_EDIT;
+        self.segmentedControlsView.alpha = ALPHA_IN_EDIT;
+        self.channelThumbnailCollectionView.alpha = ALPHA_IN_EDIT;
+        self.subscriptionThumbnailCollectionView.alpha = ALPHA_IN_EDIT;
+
         self.editButton.alpha = 0.0f;
         self.moreButton.alpha = 0.0f;
         self.followersCountButton.alpha = 0.0f;
-        self.channelThumbnailCollectionView.alpha = 0.5f;
-        self.subscriptionThumbnailCollectionView.alpha = 0.05f;
+        self.profileImageView.alpha = 0.0f;
+        self.followersCountButton.alpha = 0.0f;
+
         self.barBtnBack = self.navigationItem.leftBarButtonItem;
         self.navigationItem.leftBarButtonItem = self.barBtnCancel;
         self.navigationItem.rightBarButtonItem = self.barBtnSave;
-        self.profileImageView.alpha = 0.0f;
+        
         self.aboutMeTextView.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:1.0];
         self.uploadCoverPhotoButton.alpha = 1.0f;
         self.uploadAvatarButton.alpha = 1.0f;
-        self.followersCountButton.alpha = 0.0f;
 
     }];
 }
@@ -1711,8 +1735,6 @@
 //Navigation bar item cancel
 -(void) cancelTapped
 {
-
-    
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = 1.0f;
@@ -1737,9 +1759,11 @@
 
     }];
     
-    
+}
 
-    
+-(void) saveTapped
+{
+    NSLog(@"Save profile");
 }
 
 @end

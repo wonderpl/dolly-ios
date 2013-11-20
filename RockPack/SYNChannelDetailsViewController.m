@@ -92,6 +92,7 @@ SYNChannelCoverImageSelectorDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionViewLayoutIPad;
 @property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPadEdit;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblNoVideos;
 
 @property (strong, nonatomic) IBOutlet UIView *viewEditMode;
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
@@ -246,6 +247,8 @@ SYNChannelCoverImageSelectorDelegate>
     }
 
    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self displayChannelDetails];
+
 }
 
 
@@ -260,7 +263,7 @@ SYNChannelCoverImageSelectorDelegate>
     self.btnFollowChannel.transform = move;
     self.btnEditChannel.transform =move;
     self.btnShareChannel.transform = move;
-    self.viewEditMode.transform = move;
+    self.lblNoVideos.transform = move;
     self.viewCollectionSeperator.transform = move;
     self.btnDeleteChannel.transform = move;
     self.txtViewDescription.transform = move;
@@ -310,7 +313,6 @@ SYNChannelCoverImageSelectorDelegate>
     }
     
 
-    [self displayChannelDetails];
     
     
     
@@ -510,6 +512,15 @@ SYNChannelCoverImageSelectorDelegate>
         [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow")];
     }
     
+    if (self.channel.totalVideosValue == 0) {
+        self.lblNoVideos.hidden = NO;
+    }
+    else
+    {
+        self.lblNoVideos.hidden = YES;
+
+    }
+    
 }
 #pragma mark - Control Actions
 
@@ -625,7 +636,7 @@ SYNChannelCoverImageSelectorDelegate>
     self.btnFollowChannel.transform = move;
     self.btnEditChannel.transform =move;
     self.btnShareChannel.transform = move;
-    self.viewEditMode.transform = move;
+    self.lblNoVideos.transform = move;
     self.viewCollectionSeperator.transform = move;
     self.btnDeleteChannel.transform = move;
     self.txtViewDescription.transform = move;
@@ -1378,16 +1389,10 @@ referenceSizeForFooterInSection: (NSInteger) section
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
         
-        
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
         
-        
     }];
-    
-    
-    
-    
     
 }
 
@@ -1415,7 +1420,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnDeleteChannel.alpha = 0.0f;
     self.txtFieldChannelName.alpha = 0.0f;
     self.txtViewDescription.alpha = 0.0f;
-    
+    self.lblNoVideos.hidden = YES;
     [UIView animateWithDuration:0.4 animations:^{
         self.btnDeleteChannel.alpha = 1.0f;
         self.txtFieldChannelName.alpha = 1.0f;
