@@ -63,8 +63,6 @@
 	}
 }
 
-#pragma mark - SYNScrubberBarDelegate
-
 - (void)scrubberBarPlayPauseToggled:(BOOL)playing {
 	if (playing) {
 		[self play];
