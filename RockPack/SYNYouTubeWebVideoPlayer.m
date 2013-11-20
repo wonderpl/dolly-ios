@@ -34,14 +34,25 @@
 	self.youTubeWebView.delegate = nil;
 }
 
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	CGFloat horizontalScale = CGRectGetWidth(self.bounds) / CGRectGetWidth(self.youTubeWebView.bounds);
+	CGFloat verticalScale = CGRectGetHeight(self.bounds) / CGRectGetHeight(self.youTubeWebView.bounds);
+	
+	self.youTubeWebView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2.0, CGRectGetHeight(self.bounds) / 2.0);
+	self.youTubeWebView.transform = CGAffineTransformMakeScale(horizontalScale, verticalScale);
+}
+
 #pragma mark - Getters / Setters
 
 - (UIWebView *)youTubeWebView {
 	if (!_youTubeWebView) {
-		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.playerContainerView.bounds];
+		CGSize iFrameSize = [self iFrameSize];
+		
+		UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, iFrameSize.width, iFrameSize.height)];
 		webView.backgroundColor = [UIColor redColor];
 		webView.scrollView.scrollEnabled = NO;
-		webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		webView.alpha = 0.0;
 		
 		// Get HTML from documents directory (as opposed to the bundle), so that we can update it
@@ -51,14 +62,7 @@
 		NSString *templateHTMLString = [NSString stringWithContentsOfFile:fullPath
 																 encoding:NSUTF8StringEncoding
 																	error:nil];
-		
-		//TODO: Cleanup this
-		NSString *iFrameHTML = nil;
-		if (IS_IPAD) {
-			iFrameHTML = [NSString stringWithFormat:templateHTMLString, 739, 416];
-		} else {
-			iFrameHTML = [NSString stringWithFormat:templateHTMLString, 320, 180];
-		}
+		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString, (int)iFrameSize.width, (int)iFrameSize.height];
 		
 		[webView loadHTMLString:iFrameHTML baseURL:[NSURL URLWithString: @"http://www.youtube.com"]];
 		
@@ -147,6 +151,10 @@
 
 	DebugLog (@"Attempting to play quality: %@", suggestedQuality);
 	return suggestedQuality;
+}
+
+- (CGSize)iFrameSize {
+	return (IS_IPAD ? CGSizeMake(739, 416) : CGSizeMake(320, 180));
 }
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
