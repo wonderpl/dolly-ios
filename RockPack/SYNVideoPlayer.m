@@ -29,7 +29,7 @@
 
 + (instancetype)playerForVideo:(Video *)video {
 	Class videoPlayerClass = [self videoPlayerClassesForSource:video.source];
-	SYNVideoPlayer *player = [[videoPlayerClass alloc] initWithFrame:CGRectMake(0, 0, 320, 180)];
+	SYNVideoPlayer *player = [[videoPlayerClass alloc] init];
 	player.video = video;
 	
 	return player;
