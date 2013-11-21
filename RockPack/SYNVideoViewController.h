@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class SYNVideoPlayer;
+
 @interface SYNVideoViewController : UIViewController
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex;
+
+@property (nonatomic, strong, readonly) UIView *videoPlayerContainerView;
+@property (nonatomic, strong, readonly) SYNVideoPlayer *currentVideoPlayer;
 
 @end

@@ -40,7 +40,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wq-zu-2M5">
-                                        <rect key="frame" x="195" y="312" width="53" height="52"/>
+                                        <rect key="frame" x="195" y="357" width="53" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ButtonVideoOverlayShare.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +49,7 @@
                                         <state key="highlighted" image="ButtonVideoOverlayShareHighlighted.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoR-pT-nb5">
-                                        <rect key="frame" x="134" y="312" width="53" height="52"/>
+                                        <rect key="frame" x="134" y="357" width="53" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ButtonVideoOverlayAdd.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                                         <state key="selected" image="ButtonVideoOverlayAddSelected.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuI-UM-irf">
-                                        <rect key="frame" x="73" y="312" width="53" height="52"/>
+                                        <rect key="frame" x="73" y="357" width="53" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ButtonVideoOverlayLike.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,7 +66,7 @@
                                         <state key="highlighted" image="ButtonVideoOverlayLikeHighlighted.png"/>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UnA-NR-PfF">
-                                        <rect key="frame" x="0.0" y="83" width="320" height="180"/>
+                                        <rect key="frame" x="0.0" y="167" width="320" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
@@ -89,14 +89,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iA-dC-uuo">
-                                        <rect key="frame" x="65" y="330" width="8" height="17"/>
+                                        <rect key="frame" x="65" y="374" width="8" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhs-Vw-fKo" userLabel="Image View - Channel Image">
-                                        <rect key="frame" x="11" y="36" width="34" height="34"/>
+                                        <rect key="frame" x="11" y="120" width="34" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="34" id="9vK-o6-0N2"/>
@@ -104,25 +104,25 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exl-4H-uqi">
-                                        <rect key="frame" x="53" y="39" width="31" height="15"/>
+                                        <rect key="frame" x="53" y="123" width="31" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCJ-cn-ZdS">
-                                        <rect key="frame" x="53" y="54" width="26" height="12"/>
+                                        <rect key="frame" x="53" y="138" width="26" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="eIg-8p-A1C">
-                                        <rect key="frame" x="37" y="328" width="20" height="20"/>
+                                        <rect key="frame" x="37" y="373" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuq-35-BVa">
-                                        <rect key="frame" x="144" y="372" width="33" height="16"/>
+                                        <rect key="frame" x="144" y="417" width="33" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -130,7 +130,8 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="VoR-pT-nb5" firstAttribute="top" secondItem="UnA-NR-PfF" secondAttribute="bottom" constant="49" id="90p-5p-v7f"/>
+                                    <constraint firstAttribute="centerY" secondItem="UnA-NR-PfF" secondAttribute="centerY" constant="-30" id="2g9-id-NPb"/>
+                                    <constraint firstItem="VoR-pT-nb5" firstAttribute="top" secondItem="UnA-NR-PfF" secondAttribute="bottom" constant="10" id="90p-5p-v7f"/>
                                     <constraint firstItem="UnA-NR-PfF" firstAttribute="leading" secondItem="TtN-ef-18Z" secondAttribute="leading" id="AVf-im-SJn"/>
                                     <constraint firstItem="9iA-dC-uuo" firstAttribute="leading" secondItem="eIg-8p-A1C" secondAttribute="trailing" constant="8" id="D09-Wt-chM"/>
                                     <constraint firstItem="gCJ-cn-ZdS" firstAttribute="leading" secondItem="Dhs-Vw-fKo" secondAttribute="trailing" constant="8" id="DLp-Bk-iEI"/>
@@ -144,7 +145,6 @@
                                     <constraint firstItem="xuq-35-BVa" firstAttribute="top" secondItem="VoR-pT-nb5" secondAttribute="bottom" constant="8" id="cWw-Z5-hIw"/>
                                     <constraint firstItem="exl-4H-uqi" firstAttribute="leading" secondItem="Dhs-Vw-fKo" secondAttribute="trailing" constant="8" id="cbt-Pc-PPF"/>
                                     <constraint firstItem="9iA-dC-uuo" firstAttribute="centerY" secondItem="eIg-8p-A1C" secondAttribute="centerY" id="e87-aE-bTb"/>
-                                    <constraint firstItem="UnA-NR-PfF" firstAttribute="top" secondItem="TtN-ef-18Z" secondAttribute="top" constant="83" id="egi-IU-QGT"/>
                                     <constraint firstItem="VoR-pT-nb5" firstAttribute="centerY" secondItem="9wq-zu-2M5" secondAttribute="centerY" id="f2H-iK-i1x"/>
                                     <constraint firstAttribute="centerX" secondItem="xuq-35-BVa" secondAttribute="centerX" id="hwU-P0-8Hj"/>
                                     <constraint firstItem="VoR-pT-nb5" firstAttribute="leading" secondItem="SuI-UM-irf" secondAttribute="trailing" constant="8" id="snc-HA-ZjJ"/>
