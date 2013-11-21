@@ -1235,7 +1235,6 @@
 		BE8F93B617B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B217B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png */; };
 		BE8F93B717B3D00700E7035F /* ImageFacebookImplicit~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B317B3D00700E7035F /* ImageFacebookImplicit~iphone.png */; };
 		BE8F93B917B3D22500E7035F /* SYNImplicitSharingController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B817B3D22500E7035F /* SYNImplicitSharingController~iphone.xib */; };
-		BE9071AA17CCD64200FCB320 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9071A917CCD64200FCB320 /* AMBlurView.m */; };
 		BEA043E716CAA8E1005406E7 /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA043E416CAA8E1005406E7 /* Genre.m */; };
 		BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA043E616CAA8E1005406E7 /* SubGenre.m */; };
 		BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA1E32D16CCFF70000AB59D /* SYNMainRegistry.m */; };
@@ -2845,8 +2844,6 @@
 		BE8F93B317B3D00700E7035F /* ImageFacebookImplicit~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ImageFacebookImplicit~iphone.png"; path = "Assets/Images/ImageFacebookImplicit~iphone.png"; sourceTree = "<group>"; };
 		BE8F93B817B3D22500E7035F /* SYNImplicitSharingController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNImplicitSharingController~iphone.xib"; sourceTree = "<group>"; };
 		BE905DF417AABCD3004B8BD2 /* Rockpack 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 9.xcdatamodel"; sourceTree = "<group>"; };
-		BE9071A817CCD64200FCB320 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
-		BE9071A917CCD64200FCB320 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlurView.m; sourceTree = "<group>"; };
 		BEA043E316CAA8E1005406E7 /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
 		BEA043E416CAA8E1005406E7 /* Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Genre.m; sourceTree = "<group>"; };
 		BEA043E516CAA8E1005406E7 /* SubGenre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubGenre.h; sourceTree = "<group>"; };
@@ -3773,7 +3770,6 @@
 				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				BE06EEE517D635090028F2E3 /* Strict Interactive View */,
-				BE9071A717CCD62F00FCB320 /* Blur View iOS7 */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
 				012BD2C7173BE84C00BE28B6 /* Async Image load and cache */,
 				BE285DB91726826800D995AB /* Channels Manager */,
@@ -5811,15 +5807,6 @@
 			name = Sharing;
 			sourceTree = "<group>";
 		};
-		BE9071A717CCD62F00FCB320 /* Blur View iOS7 */ = {
-			isa = PBXGroup;
-			children = (
-				BE9071A817CCD64200FCB320 /* AMBlurView.h */,
-				BE9071A917CCD64200FCB320 /* AMBlurView.m */,
-			);
-			name = "Blur View iOS7";
-			sourceTree = "<group>";
-		};
 		BE95B90016CBAAD500EC2E72 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -7612,7 +7599,6 @@
 				01AFF99817EC91540002131A /* NSString+LLDBQuickLook.m in Sources */,
 				012BD2E7173BE87300BE28B6 /* SDWebImageDownloaderOperation.m in Sources */,
 				012BD2E8173BE87300BE28B6 /* SDWebImageManager.m in Sources */,
-				BE9071AA17CCD64200FCB320 /* AMBlurView.m in Sources */,
 				012BD2E9173BE87300BE28B6 /* SDWebImagePrefetcher.m in Sources */,
 				012BD2EA173BE87300BE28B6 /* UIButton+WebCache.m in Sources */,
 				012BD2EB173BE87300BE28B6 /* UIImage+GIF.m in Sources */,
