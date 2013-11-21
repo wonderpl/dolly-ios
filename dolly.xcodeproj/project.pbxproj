@@ -240,8 +240,6 @@
 		019E82031654043A00744A03 /* Select.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FD1654043A00744A03 /* Select.aif */; };
 		019E82041654043A00744A03 /* Trash.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FE1654043A00744A03 /* Trash.aif */; };
 		01A02E76176E1EA5001F14BD /* UIImage+Monochrome.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A02E75176E1EA5001F14BD /* UIImage+Monochrome.m */; };
-		01A3EC2E16AECE4B008DCE08 /* SYNActivityPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A3EC2C16AECE4B008DCE08 /* SYNActivityPopoverViewController.m */; };
-		01A3EC2F16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A3EC2D16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib */; };
 		01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8216F32C3400B05084 /* ShuttleBarRemainingBar.png */; };
 		01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8316F32C3400B05084 /* ShuttleBarRemainingBar@2x.png */; };
 		01A79B9316F32C3400B05084 /* Clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8416F32C3400B05084 /* Clear.png */; };
@@ -1726,9 +1724,6 @@
 		019E81FE1654043A00744A03 /* Trash.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trash.aif; path = Assets/Audio/Trash.aif; sourceTree = "<group>"; };
 		01A02E74176E1EA5001F14BD /* UIImage+Monochrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Monochrome.h"; sourceTree = "<group>"; };
 		01A02E75176E1EA5001F14BD /* UIImage+Monochrome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Monochrome.m"; sourceTree = "<group>"; };
-		01A3EC2B16AECE4B008DCE08 /* SYNActivityPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNActivityPopoverViewController.h; sourceTree = "<group>"; };
-		01A3EC2C16AECE4B008DCE08 /* SYNActivityPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNActivityPopoverViewController.m; sourceTree = "<group>"; };
-		01A3EC2D16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNActivityPopoverViewController.xib; sourceTree = "<group>"; };
 		01A79B8216F32C3400B05084 /* ShuttleBarRemainingBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShuttleBarRemainingBar.png; path = Assets/Images/ShuttleBarRemainingBar.png; sourceTree = "<group>"; };
 		01A79B8316F32C3400B05084 /* ShuttleBarRemainingBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShuttleBarRemainingBar@2x.png"; path = "Assets/Images/ShuttleBarRemainingBar@2x.png"; sourceTree = "<group>"; };
 		01A79B8416F32C3400B05084 /* Clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Clear.png; path = Assets/Images/Clear.png; sourceTree = "<group>"; };
@@ -4011,9 +4006,6 @@
 		01A3EC2A16AECE0F008DCE08 /* Popover */ = {
 			isa = PBXGroup;
 			children = (
-				01A3EC2B16AECE4B008DCE08 /* SYNActivityPopoverViewController.h */,
-				01A3EC2C16AECE4B008DCE08 /* SYNActivityPopoverViewController.m */,
-				01A3EC2D16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib */,
 				011A15F316EE3E9A008CF25E /* SYNCameraPopoverViewController.h */,
 				011A15F416EE3E9A008CF25E /* SYNCameraPopoverViewController.m */,
 				011A15F816EE3F05008CF25E /* SYNCameraPopoverViewController.xib */,
@@ -6197,7 +6189,6 @@
 				01B34C9816A99D6A002AD8FB /* GlossChannelThumbnail.png in Resources */,
 				01B34C9916A99D6A002AD8FB /* GlossChannelThumbnail@2x.png in Resources */,
 				BEF3E588183682FF006DECD0 /* IconFriendsEmpty.png in Resources */,
-				01A3EC2F16AECE4B008DCE08 /* SYNActivityPopoverViewController.xib in Resources */,
 				1FFAE62C17E21BBC006C92CA /* ShadowPanelFriends~iphone.png in Resources */,
 				01F8E73A16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png in Resources */,
 				01F8E73B16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png in Resources */,
@@ -7429,7 +7420,6 @@
 				015CB01616AE039900FEB8E7 /* User.m in Sources */,
 				E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */,
 				015CB01916AE03B200FEB8E7 /* _User.m in Sources */,
-				01A3EC2E16AECE4B008DCE08 /* SYNActivityPopoverViewController.m in Sources */,
 				01F8E77F16B03A7C000D44B9 /* SYNVideoViewerViewController.m in Sources */,
 				0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */,
 				015CEE3F16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m in Sources */,

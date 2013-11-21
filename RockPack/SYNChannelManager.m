@@ -413,8 +413,7 @@
     if ([channelOwner isMemberOfClass: [User class]]) // the user uses the oAuthEngine to avoid caching
     {
         [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) channelOwner)
-                                           onCompletion: ^(id dictionary)
-         {
+                                           onCompletion: ^(id dictionary) {
              NSError *error = nil;
              ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
                                                                                                        error: &error];
