@@ -9,18 +9,18 @@
 #import "SYNAbstractViewController.h"
 #import "ChannelOwner.h"
 typedef enum : NSInteger {
-    MyOwnProfile = 0,
-    OtherUsersProfile,
-    TestUserProfile,
+    modeMyOwnProfile = 0,
+    modeOtherUsersProfile,
+    modeEditProfile,
 } ProfileType;
 
 
-@interface SYNProfileRootViewController : SYNAbstractViewController <UISearchBarDelegate>
+@interface SYNProfileRootViewController : SYNAbstractViewController <UISearchBarDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 @property (nonatomic, assign) BOOL hideUserProfile;
 
-- (id) initWithViewId:(NSString*) vid WithMode: (ProfileType) mode andChannelOwner:(ChannelOwner*)chanOwner;
+- (id) initWithViewId:(NSString*) vid andChannelOwner:(ChannelOwner*)chanOwner;
 
 
 @end

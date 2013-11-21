@@ -1053,7 +1053,7 @@
 	}
     else
     {
-		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId WithMode:OtherUsersProfile andChannelOwner:channelOwner];
+		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId  andChannelOwner:channelOwner];
 		[self.navigationController pushViewController:profileVC animated:YES];
 	}
 }

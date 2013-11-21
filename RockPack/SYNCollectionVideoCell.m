@@ -32,7 +32,6 @@
 
 - (IBAction) likeControlPressed: (SYNSocialButton *) socialButton
 {
-    NSLog(@"1111");
     [self.delegate likeControlPressed: socialButton];
 }
 

@@ -89,21 +89,11 @@
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
 {
-    if(_viewControllerDelegate)
-    {
-        [self.followButton removeTarget:_viewControllerDelegate
-                                 action:@selector(followButtonTapped:)
-                       forControlEvents:UIControlEventTouchUpInside];
-    }
     
     _viewControllerDelegate = viewControllerDelegate;
     
     if(!_viewControllerDelegate)
         return;
-    
-    [self.followButton addTarget:_viewControllerDelegate
-                          action:@selector(followButtonTapped:)
-                forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -264,10 +254,8 @@
     
 }
 - (IBAction)followChannel:(id)sender
-{
+{    
     [self.viewControllerDelegate followButtonTapped: self];
-    
-    // [self showAlertView];
 }
 
 -(void) setBorder
@@ -283,32 +271,5 @@
         }
     }
 }
-
-
-
-
-- (NSString *) yesButtonTitle{
-    return @"Yes";
-}
-- (NSString *) noButtonTitle
-{
-    return @"Cancel";
-}
-
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:[self yesButtonTitle]])
-    {
-        if (self.channel != nil)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
-                                                                object: self
-                                                              userInfo: @{kChannel : self.channel}];
-        }
-    }
-}
-
-
 
 @end
