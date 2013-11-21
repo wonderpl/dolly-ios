@@ -130,7 +130,7 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
-    // defaults to one
+   
     return 1;
 }
 
