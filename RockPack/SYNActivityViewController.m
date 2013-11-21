@@ -157,7 +157,8 @@
 {
     SYNNotificationsTableViewCell *notificationCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsCellIdent
                                                                                       forIndexPath: indexPath];
-        SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row];
+    
+    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row];
     
     NSMutableString *constructedMessage = [[NSMutableString alloc] init];
     
@@ -236,7 +237,9 @@
             break;
             
         case kNotificationObjectTypeUserAddedYourVideo:
-            // TODO: Implement
+            thumbnaillUrl = [NSURL URLWithString: notification.videoThumbnailUrl];
+            placeholder = [UIImage imageNamed: @"PlaceholderNotificationVideo"];
+            
             break;
             
         case kNotificationObjectTypeYourVideoNotAvailable:
