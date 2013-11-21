@@ -196,6 +196,18 @@
                         <action selector="avatarTapped:" destination="-1" eventType="touchUpInside" id="WNr-kQ-Sfq"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" id="nWw-Du-XWt" userLabel="View - Navigation bar">
+                    <rect key="frame" x="0.0" y="0.0" width="670" height="65"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="LF5-QT-JbE" userLabel="View - Navigation Line">
+                            <rect key="frame" x="0.0" y="63.999999999054126" width="670" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qVh-3B-R6Q" userLabel="Label - User Name">
                     <rect key="frame" x="175" y="240" width="320" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>

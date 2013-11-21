@@ -674,6 +674,8 @@
             //            channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
             
+            
+    
             //   self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
             
         }

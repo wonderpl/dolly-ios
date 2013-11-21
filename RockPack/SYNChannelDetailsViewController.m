@@ -104,6 +104,9 @@ UIPopoverControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIView *viewCirleButtonContainer;
 @property (strong, nonatomic) IBOutlet UIView *viewFollowAndVideoContainer;
 @property (nonatomic) CGPoint tempContentOffset;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
+
 @end
 
 
@@ -201,16 +204,11 @@ UIPopoverControllerDelegate>
 
     [self setUpMode];
 
-    
-    [self displayChannelDetails];
+    //not used yet
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+    self.activityIndicator.frame = self.view.frame;
 
-    self.viewHasAppeared = NO;
-  //  self.tempContentOffset = CGPointMake(0, -520);
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = YES;
-//    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    [self displayChannelDetails];
 
     //programmatically seting the edgeinset for iphone and ipad
     //Not able to set within the nib
@@ -332,11 +330,18 @@ UIPopoverControllerDelegate>
 
     
     
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+    
+//    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor blackColor];
+
 
     [self.videoThumbnailCollectionView reloadData];
   //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
     
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+    
+    
 
     
 }
@@ -599,7 +604,12 @@ UIPopoverControllerDelegate>
 -(void) setUpFollowButton
 {
     self.btnFollowChannel.title = @"";
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
     
     
     
@@ -1448,6 +1458,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnShareChannel.hidden = NO;
     self.viewCirleButtonContainer.hidden = NO;
     self.viewFollowAndVideoContainer.hidden = NO;
+    self.lblFullName.hidden = NO;
     
     
     //edit mode
@@ -1455,7 +1466,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.txtFieldChannelName.hidden = YES;
     self.txtViewDescription.hidden = YES;
 
-    
+
     
     self.viewProfileContainer.alpha = 0.0f;
     self.btnAvatar.alpha = 0.0f;
@@ -1464,7 +1475,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnFollowChannel.alpha = 0.0f;
     self.btnEditChannel.alpha = 0.0f;
     self.btnShareChannel.alpha = 0.0f;
-    
+    self.lblFullName.alpha = 0.0f;
     [UIView animateWithDuration:0.4 animations:^{
         
         self.viewProfileContainer.alpha = 1.0f;
@@ -1474,6 +1485,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         self.btnFollowChannel.alpha = 1.0f;
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
+        self.lblFullName.alpha = 1.0f;
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
@@ -1499,7 +1511,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnShareChannel.hidden = YES;
     self.viewCirleButtonContainer.hidden = YES;
     self.viewFollowAndVideoContainer.hidden = YES;
-
+    self.lblFullName.hidden = YES;
     
     //edit mode
     self.btnDeleteChannel.hidden = NO;
@@ -1509,6 +1521,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.txtFieldChannelName.alpha = 0.0f;
     self.txtViewDescription.alpha = 0.0f;
     self.lblNoVideos.hidden = YES;
+    
     [UIView animateWithDuration:0.4 animations:^{
         self.btnDeleteChannel.alpha = 1.0f;
         self.txtFieldChannelName.alpha = 1.0f;
@@ -1885,7 +1898,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //
     //    self.saveChannelButton.enabled = NO;
     //    self.deleteChannelButton.enabled = YES;
-    //    [self.activityIndicator startAnimating];
+        [self.activityIndicator startAnimating];
     //
     //    [self hideCategoryChooser];
     //
@@ -1971,7 +1984,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                                   //                                                  self.saveChannelButton.enabled = YES;
                                                   //                                                  self.deleteChannelButton.hidden = NO;
                                                   //                                                  self.deleteChannelButton.enabled = YES;
-                                                  //                                                  [self.activityIndicator stopAnimating];
+                                                                                                    [self.activityIndicator stopAnimating];
                                                   //                                                  [self.activityIndicator stopAnimating];
                                               }];
     
