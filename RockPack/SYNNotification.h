@@ -14,6 +14,8 @@ typedef enum : NSInteger
     kNotificationObjectTypeUserLikedYourVideo = 0,
     kNotificationObjectTypeUserSubscibedToYourChannel = 1,
     kNotificationObjectTypeFacebookFriendJoined = 2,
+    kNotificationObjectTypeUserAddedYourVideo = 3, // Repack
+    kNotificationObjectTypeYourVideoNotAvailable = 4, // One of your videos is no longer available
     kNotificationObjectTypeUnknown = 666
 } kNotificationObjectType;
 

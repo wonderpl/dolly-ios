@@ -162,7 +162,10 @@
     
     NSMutableString *constructedMessage = [[NSMutableString alloc] init];
     
-    [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
+    if(notification.channelOwner.displayName)
+        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
+    else
+        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
     
     if ([notification.messageType isEqualToString: @"subscribed"])
     {
@@ -180,7 +183,9 @@
     }
     else
     {
-        AssertOrLog(@"Notification type unexpected");
+        // TODO: Implement Default
+        [constructedMessage appendString:NSLocalizedString(notification.messageType, nil)];
+        
     }
     
     notificationCell.messageTitle = [NSString stringWithString: constructedMessage];
@@ -209,10 +214,19 @@
             break;
             
         case kNotificationObjectTypeFacebookFriendJoined:
+            // TODO: Check if Implemented
+            break;
+            
+        case kNotificationObjectTypeUserAddedYourVideo:
+            // TODO: Implement
+            break;
+            
+        case kNotificationObjectTypeYourVideoNotAvailable:
+            // TODO: Implement
             break;
             
         default:
-            AssertOrLog(@"Unexpected notification type");
+            // TODO: Catch all code
             break;
     }
     
