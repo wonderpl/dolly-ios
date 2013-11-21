@@ -20,14 +20,14 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2">
             <rect key="frame" x="0.0" y="0.0" width="420" height="293"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="10">
-                    <rect key="frame" x="10" y="108" width="401" height="85"/>
+                    <rect key="frame" x="10" y="108" width="401" height="90"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="11">
-                        <size key="itemSize" width="70" height="85"/>
+                        <size key="itemSize" width="80" height="85"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -39,9 +39,9 @@
                     </connections>
                 </collectionView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Share with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="15">
-                    <rect key="frame" x="20" y="22" width="380" height="21"/>
+                    <rect key="frame" x="20" y="17" width="380" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -63,15 +63,18 @@
                     <rect key="frame" x="199" y="142" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
-                <searchBar clipsSubviews="YES" contentMode="redraw" id="4pr-S1-LJt">
-                    <rect key="frame" x="0.0" y="49" width="420" height="44"/>
+                <searchBar clipsSubviews="YES" contentMode="redraw" searchBarStyle="minimal" placeholder="Friends Name or Email" id="4pr-S1-LJt">
+                    <rect key="frame" x="10" y="42" width="401" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="fKI-h2-SfY"/>
+                    </connections>
                 </searchBar>
             </subviews>
-            <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
         </view>
         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="39" userLabel="Search Results Table View">
             <rect key="frame" x="0.0" y="0.0" width="419" height="184"/>

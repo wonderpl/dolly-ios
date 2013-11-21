@@ -523,7 +523,7 @@
     if (realIndex == 0 && displayEmailCell)
     {
         userThumbnailCell.imageView.image = [UIImage imageNamed: @"ShareAddEntry.jpg"];
-        userThumbnailCell.nameLabel.text = @"Add New";
+        [userThumbnailCell setDisplayName:@"Add New"];
         
         userThumbnailCell.imageView.alpha = 1.0f;
         
@@ -568,14 +568,13 @@
             
             userThumbnailCell.imageView.image = img;
         }
-        else if ([friend.thumbnailURL hasPrefix: @"http"])                                // includes https of course
+        else if ([friend.thumbnailURL hasPrefix: @"http"]) // includes https
         {
             if ([friend.thumbnailURL rangeOfString: @"localhost"].location == NSNotFound) // is not a fake URL
             {
-                [userThumbnailCell.imageView
-                 setImageWithURL: [NSURL URLWithString: friend.thumbnailURL]
-                 placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarChannel"]
-                 options: SDWebImageRetryFailed];
+                [userThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: friend.thumbnailURL]
+                                            placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarChannel"]
+                                                     options: SDWebImageRetryFailed];
             }
             else if (friend.email)
             {
@@ -595,7 +594,7 @@
             userThumbnailCell.imageView.image = [UIImage imageNamed: @"ABContactPlaceholder"];
         }
         
-        userThumbnailCell.nameLabel.text = nameToDisplay;
+        [userThumbnailCell setDisplayName:nameToDisplay];
         
         
         userThumbnailCell.imageView.alpha = 1.0f;
@@ -961,30 +960,34 @@
 
 - (IBAction) authorizeFacebookButtonPressed: (UIButton *) button
 {
+    
     button.hidden = YES;
+    
     self.facebookLoader.hidden = NO;
     [self.facebookLoader startAnimating];
+    
     __weak SYNAppDelegate *weakAppDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
     SYNFacebookManager *facebookManager = [SYNFacebookManager sharedFBManager];
     
-    [facebookManager loginOnSuccess: ^(NSDictionary < FBGraphUser > *dictionary) {
+    [facebookManager loginOnSuccess: ^(NSDictionary <FBGraphUser> *dictionary) {
+        
         FBAccessTokenData *accessTokenData = [[FBSession activeSession] accessTokenData];
         
-        [weakAppDelegate.oAuthNetworkEngine
-         connectFacebookAccountForUserId: weakAppDelegate.currentUser.uniqueId
-         andAccessTokenData: accessTokenData
-         completionHandler: ^(id noResponce) {
+        [weakAppDelegate.oAuthNetworkEngine connectFacebookAccountForUserId: weakAppDelegate.currentUser.uniqueId
+                                                         andAccessTokenData: accessTokenData
+                                                          completionHandler: ^(id noResponce) {
+      
+                                                              
              [self fetchAndDisplayFriends];
              
              self.facebookLoader.hidden = YES;
              [self.facebookLoader stopAnimating];
              
              button.hidden = NO;
-         }
-         
-         
-         errorHandler: ^(id error) {
+                                                              
+         } errorHandler: ^(id error) {
+             
              button.hidden = NO;
              
              self.facebookLoader.hidden = YES;
@@ -1001,9 +1004,12 @@
              }
              
              [[SYNFacebookManager sharedFBManager] logoutOnSuccess: ^{
+                 
              } onFailure: ^(NSString *errorMessage) {
+                 
              }];
          }];
+        
     }  onFailure: ^(NSString *errorString) {
         self.facebookLabel.text = @"Log in with Facebook was cancelled.";
         self.facebookLoader.hidden = YES;
