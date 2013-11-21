@@ -344,12 +344,11 @@
         return;
         
     }
-    // if we are simply adding a video to an existing channel
-    if (!self.selectedChannel)
-    {
-        return;
-    }
     
+    if (!self.selectedChannel)
+        return;
+    
+    // we are simply adding a video to an existing channel
     [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
                                                         object: self
                                                       userInfo: @{kChannel: self.selectedChannel}];
@@ -370,17 +369,15 @@
     if(selectedChannel)
     {
         
-        if(self.createNewChannelCell.isEditing)
-        {
-            
+        if(self.createNewChannelCell.isEditing) // if it is editing (open), close that cell
             [self createNewButtonPressed];
-        }
+        
         
         
         self.confirmButtom.hidden = NO;
         [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
     }
-    else // passed nil
+    else // passed nil probably by pressing on the "create new channel" cell
     {
         self.selectedCell.selected = NO;
         self.confirmButtom.hidden = YES;
