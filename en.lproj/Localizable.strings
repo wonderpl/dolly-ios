@@ -151,6 +151,8 @@
 "%@ has subscribed to your channel" = "%@ is now following your pack";
 
 "notification_liked_action" = "liked your video";
+"notification_unavailable_action" = "Your video has become unavailable";
+"notification_repack_action" = "has repacked your video";
 "notification_subscribed_action" = "is now following your pack";
 "notification_joined_action" = "Your Facebook friend %@ has joined Rockpack";
 "your_channel_object" = "your pack";

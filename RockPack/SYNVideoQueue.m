@@ -122,6 +122,10 @@
 
 #pragma mark - 
 
+/* 
+ A videoInstance will be added to the currentlyCreating channel as a placeholder, if we are simply adding it to an existing channel
+ it needs to be copied over to that channel...
+*/
 - (void) addVideoToQueue: (VideoInstance *) videoInstance
 {
     if (!videoInstance)

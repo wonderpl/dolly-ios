@@ -157,16 +157,26 @@
 {
     SYNNotificationsTableViewCell *notificationCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsCellIdent
                                                                                       forIndexPath: indexPath];
-    
-    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row];
+        SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row];
     
     NSMutableString *constructedMessage = [[NSMutableString alloc] init];
     
-    if(notification.channelOwner.displayName)
-        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
-    else
-        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
+    // "Your friend ..."
+    if([notification.messageType isEqualToString: @"joined"])
+    {
+        [constructedMessage appendString:@"Your friend "];
+    }
     
+    if(notification.channelOwner.displayName)
+    {
+        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
+    }
+    else
+    {
+        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
+    }
+    
+    // "... Paul Egan ..."
     if ([notification.messageType isEqualToString: @"subscribed"])
     {
         [constructedMessage appendString: NSLocalizedString(@"notification_subscribed_action", nil)];
@@ -177,14 +187,22 @@
     }
     else if ([notification.messageType isEqualToString: @"joined"])
     {
-        NSMutableString *message = [NSMutableString stringWithFormat: NSLocalizedString(@"notification_joined_action", @"Your Facebook friend (name) has joined Rockpack"), [notification.channelOwner.displayName uppercaseString]];
+        NSMutableString *message = [NSMutableString stringWithFormat: NSLocalizedString(@"notification_joined_action", @"Your friend [[displayName]] has joined Mayberry"), [notification.channelOwner.displayName uppercaseString]];
         
         constructedMessage = message;
+    }
+    else if ([notification.messageType isEqualToString: @"repack"])
+    {
+        [constructedMessage appendString: NSLocalizedString(@"notification_repack_action", nil)];
+    }
+    else if ([notification.messageType isEqualToString: @"unavailable"])
+    {
+        [constructedMessage appendString: NSLocalizedString(@"notification_unavailable_action", nil)];
     }
     else
     {
         // TODO: Implement Default
-        [constructedMessage appendString:NSLocalizedString(notification.messageType, nil)];
+        [constructedMessage appendString: NSLocalizedString(notification.messageType, nil)];
         
     }
     

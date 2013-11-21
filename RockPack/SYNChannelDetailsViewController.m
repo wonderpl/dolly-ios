@@ -1798,8 +1798,8 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 {
     self.isLocked = YES; // prevent back button from firing
     
-    [appDelegate.oAuthNetworkEngine updateVideosForChannelForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                          channelId: channelId
+    [appDelegate.oAuthNetworkEngine updateVideosForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                          forChannelID: channelId
                                                    videoInstanceSet: self.channel.videoInstances
                                                       clearPrevious: YES
                                                   completionHandler: ^(id response) {

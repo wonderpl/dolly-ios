@@ -330,7 +330,7 @@
 
 - (IBAction) confirmButtonPressed: (id) sender
 {
-    
+    // if we are creating a new channel
     if(self.createNewChannelCell.isEditing)
     {
         Channel* creatingChannelFromQ = appDelegate.videoQueue.currentlyCreatingChannel;
@@ -344,7 +344,7 @@
         return;
         
     }
-    
+    // if we are simply adding a video to an existing channel
     if (!self.selectedChannel)
     {
         return;
@@ -366,16 +366,16 @@
 
 -(void)setSelectedChannel:(Channel *)selectedChannel
 {
-    _selectedChannel = selectedChannel;
-    if(_selectedChannel)
+    
+    if(selectedChannel)
     {
-        // close the panel as well
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
-                                                            object: self];
         
         if(self.createNewChannelCell.isEditing)
+        {
+            
             [self createNewButtonPressed];
+        }
+        
         
         self.confirmButtom.hidden = NO;
         [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
@@ -385,6 +385,8 @@
         self.selectedCell.selected = NO;
         self.confirmButtom.hidden = YES;
     }
+    
+    _selectedChannel = selectedChannel;
     
 }
 

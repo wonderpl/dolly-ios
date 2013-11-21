@@ -41,7 +41,7 @@
         SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         NSNumber *identifierNumber = data[@"id"];
         
-        if (!identifierNumber || ![identifierNumber isKindOfClass: [NSNumber class]])
+        if (![identifierNumber isKindOfClass: [NSNumber class]])
         {
             DebugLog(@"Did not find a valid notification id: %@", data);
             return nil;
@@ -49,9 +49,10 @@
         
         self.identifier = [identifierNumber integerValue];
         
-        // Work out what type of object we are
+        
         self.messageType = data[@"message_type"];
         
+        // Work out what type of object we are
         if ([self.messageType isEqualToString: @"subscribed"])
         {
             [Appirater userDidSignificantEvent: FALSE];
@@ -62,6 +63,16 @@
             self.objectType = kNotificationObjectTypeUserLikedYourVideo;
         }
         else if ([self.messageType isEqualToString: @"joined"])
+        {
+            self.objectType = kNotificationObjectTypeFacebookFriendJoined;
+        }
+        
+        else if ([self.messageType isEqualToString: @"repack"])
+        {
+            self.objectType = kNotificationObjectTypeFacebookFriendJoined;
+        }
+        
+        else if ([self.messageType isEqualToString: @"unavailable"])
         {
             self.objectType = kNotificationObjectTypeFacebookFriendJoined;
         }

@@ -154,8 +154,7 @@
     
     if ([channelToUpdate.uniqueId isEqualToString: currentlyCreatingChannel.uniqueId])
     {
-        [channelToUpdate.videoInstancesSet
-         enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+        [channelToUpdate.videoInstancesSet enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
              [((VideoInstance *) obj).managedObjectContext deleteObject : obj];
          }];
         
@@ -491,10 +490,6 @@
 {
     
     
-    
-    NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL",nil);
-    NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
-    
     Channel* currentlyCreating = appDelegate.videoQueue.currentlyCreatingChannel;
     
     NSMutableOrderedSet* setOfVideosToPost = [NSMutableOrderedSet orderedSetWithOrderedSet:channel.videoInstancesSet];
@@ -502,9 +497,10 @@
     {
         [setOfVideosToPost addObject:newVideoInstance];
     }
+    
 
-    [appDelegate.oAuthNetworkEngine updateVideosForChannelForUserId: appDelegate.currentUser.uniqueId
-                                                          channelId: channel.uniqueId
+    [appDelegate.oAuthNetworkEngine updateVideosForUserId: appDelegate.currentUser.uniqueId
+                                                          forChannelID: channel.uniqueId
                                                    videoInstanceSet: setOfVideosToPost
                                                       clearPrevious: NO
                                                   completionHandler: ^(NSDictionary* result) {
@@ -516,8 +512,10 @@
                                                                                                               label: nil
                                                                                                               value: nil] build]];
 
+                                                      NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL", nil);
+                                                      
                                                       [appDelegate.masterViewController presentNotificationWithMessage:messageS
-                                                                                                                      andType:NotificationMessageTypeSuccess];
+                                                                                                               andType:NotificationMessageTypeSuccess];
                                                       
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                                                                           object: self];
@@ -528,8 +526,10 @@
                                                       [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
                                                                                                           object: self];
                                                       
+                                                      NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
+                                                      
                                                       [appDelegate.masterViewController presentNotificationWithMessage:messageE
-                                                                                                                      andType:NotificationMessageTypeError];
+                                                                                                               andType:NotificationMessageTypeError];
                                                       
                                                   }];
 }
