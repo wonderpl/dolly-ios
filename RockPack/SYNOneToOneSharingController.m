@@ -44,27 +44,29 @@
 
 @property (nonatomic) BOOL hasAttemptedToLoadData;
 @property (nonatomic) BOOL keyboardIsOnScreen;
-@property (nonatomic) BOOL typingMode;
 @property (nonatomic, readonly) NSArray *searchedFriends;
 @property (nonatomic, strong) Friend *friendToAddEmail;
 @property (nonatomic, strong) Friend* friendHeldInQueue;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loader;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* facebookLoader;
 @property (nonatomic, strong) IBOutlet UIButton *authorizeFacebookButton;
-@property (nonatomic, strong) IBOutlet UIButton *closeButton;
 @property (nonatomic, strong) IBOutlet UICollectionView *recentFriendsCollectionView;
-@property (nonatomic, strong) IBOutlet UIImageView *searchFieldFrameImageView;
+
 @property (nonatomic, strong) IBOutlet UILabel * facebookLabel;
 @property (nonatomic, strong) IBOutlet UILabel *shareLabel;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UITableView *searchResultsTableView;
-@property (nonatomic, strong) IBOutlet UITextField *searchTextField;
+
 @property (nonatomic, strong) IBOutlet UIView *activitiesContainerView;
 @property (nonatomic, strong) NSArray *recentFriends;
 @property (nonatomic, strong) NSCache *addressBookImageCache;
 @property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, strong) NSMutableString *currentSearchTerm;
 @property (nonatomic, strong) SYNNetworkOperationJsonObject* lastNetworkOperation;
+
+
+@property (nonatomic, strong) IBOutlet UISearchBar* searchBar;
+
 @property (nonatomic, strong) UIImage *imageToShare;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
@@ -120,17 +122,13 @@
     
     self.currentSearchTerm = [[NSMutableString alloc] init];
     
-    self.closeButton.hidden = YES;
-     
-    self.searchTextField.font = [UIFont lightCustomFontOfSize: self.searchTextField.font.pointSize];
+    
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     self.shareLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
     [self.recentFriendsCollectionView registerNib: [UINib nibWithNibName: @"SYNOneToOneSharingFriendCell" bundle: nil]
                        forCellWithReuseIdentifier: @"SYNOneToOneSharingFriendCell"];
     
-    self.searchFieldFrameImageView.image = [[UIImage imageNamed: @"FieldSearch"]
-                                            resizableImageWithCapInsets: UIEdgeInsetsMake(2.0f, 20.0f, 2.0f, 20.0f)];
 
     if (IS_IPHONE)
     {
@@ -140,9 +138,6 @@
         
         self.view.frame = vFrame;
         
-        CGRect cbFrame = self.closeButton.frame;
-        cbFrame.origin.x = 278.0f;
-        self.closeButton.frame = cbFrame;
         
         UIEdgeInsets ei = self.searchResultsTableView.contentInset;
         ei.bottom = 58.0f;
@@ -193,7 +188,8 @@
         
         if(!canReadAddressBook)
         {
-            self.searchTextField.placeholder = @"Type an email address";
+            //TODO: Replace below
+            //self.searchTextField.placeholder = @"Type an email address";
         }
         
         [self fetchAndDisplayFriends];
@@ -285,50 +281,12 @@
                          
                          self.view.frame = vFrame;
                          
-                         self.typingMode = _keyboardIsOnScreen; // try and set it to no when the k/bord comes down, the method will check for text
                      }
                      completion: nil];
 }
 
 
-- (void) setTypingMode: (BOOL) typingMode
-{
-    if (typingMode == _typingMode)
-    {
-        return;
-    }
-    
-    // if there is still text, do not remove the close button
-    if (!typingMode && self.searchTextField.text.length > 0)
-    {
-        return;
-    }
-    
-    _typingMode = typingMode;
-    
-    [UIView animateWithDuration: 0.2
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                         self.closeButton.alpha = _typingMode ? 1.0f : 0.0f;
-                         
-                         CGRect sfFrame = self.searchFieldFrameImageView.frame;
-                         
-                         if (IS_IPAD)
-                         {
-                             sfFrame.size.width = _typingMode ? 362.0f : 400.0f;
-                         }
-                         else
-                         {
-                             sfFrame.size.width = _typingMode ? 272.0f : 300.0f;
-                         }
-                         
-                         self.searchFieldFrameImageView.frame = sfFrame;
-                     }
-                     completion: ^(BOOL finished) {
-                         self.closeButton.hidden = !_typingMode; // hide when not in typing mode
-                     }];
-}
+
 
 
 - (void) showLoader: (BOOL) show
@@ -809,7 +767,6 @@
     
     [tableView removeFromSuperview];
     
-    self.searchTextField.text = @"";
 }
 
 
@@ -893,21 +850,48 @@
 }
 
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - UISearchBar Delegate Methods
 
-- (BOOL) textField: (UITextField *) textField shouldChangeCharactersInRange: (NSRange) range replacementString: (NSString *) newCharacter
+- (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchBar
 {
-    NSUInteger oldLength = textField.text.length;
-    NSUInteger newCharacterLength = newCharacter.length;
+    
+    [searchBar setShowsCancelButton:YES animated:YES];
+    return YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:NO animated:YES];
+    
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+    if([self.searchBar.text isEqualToString:@""])
+    {
+        [self.searchBar resignFirstResponder];
+        
+    }
+    
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    
+    [self.searchBar resignFirstResponder];
+}
+- (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
+{
+    NSUInteger oldLength = searchBar.text.length;
+    NSUInteger newCharacterLength = text.length;
     NSUInteger rangeLength = range.length;
     
     NSUInteger newLength = (oldLength + newCharacterLength) - rangeLength;
     
-    self.currentSearchTerm = [NSMutableString stringWithString: textField.text];
+    self.currentSearchTerm = [NSMutableString stringWithString: searchBar.text];
     
     if (oldLength < newLength)
     {
-        [self.currentSearchTerm appendString: newCharacter];
+        [self.currentSearchTerm appendString: text];
     }
     else
     {
@@ -919,6 +903,7 @@
     return YES;
 }
 
+#pragma mark - Helper Methods
 
 - (NSArray *) searchedFriends
 {
@@ -954,10 +939,7 @@
     
     [self.searchResultsTableView reloadData];
     
-    self.closeButton.hidden = NO;
-    self.closeButton.alpha = 0.0f;
     
-    self.typingMode = YES;
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
@@ -969,24 +951,12 @@
 }
 
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self.searchTextField resignFirstResponder];
-    
-    return YES;
-}
+
 
 
 #pragma mark - Button Delegates
 
-- (IBAction) closeButtonPressed: (id) sender
-{
-    self.searchTextField.text = @"";
-    [self.searchResultsTableView removeFromSuperview];
-    [self.searchTextField resignFirstResponder];
-    self.closeButton.hidden = YES;
-    self.typingMode = NO; // this should animate the search box back to full length
-}
+
 
 
 - (IBAction) authorizeFacebookButtonPressed: (UIButton *) button
@@ -1090,17 +1060,16 @@
     
     self.friendHeldInQueue = nil;
     
-    [self.searchTextField resignFirstResponder];
     
     SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     __weak SYNOneToOneSharingController *wself = self;
     
-    [appDelegate.oAuthNetworkEngine
-     emailShareWithObjectType: self.mutableShareDictionary[@"type"]
-     objectId: self.mutableShareDictionary[@"object_id"]
-     withFriend: friend
-     completionHandler: ^(id no_content) {
-         friend.lastShareDate = [NSDate date];                                // update the date
+    [appDelegate.oAuthNetworkEngine emailShareWithObjectType: self.mutableShareDictionary[@"type"]
+                                                    objectId: self.mutableShareDictionary[@"object_id"]
+                                                  withFriend: friend
+                                           completionHandler: ^(id no_content) {
+                                               
+         friend.lastShareDate = [NSDate date];
          
          BOOL foundFriend = NO;
          
