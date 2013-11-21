@@ -8,6 +8,7 @@
 
 #import "SYNOneToOneSharingFriendCell.h"
 #import "UIFont+SYNFont.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SYNOneToOneSharingFriendCell
 
@@ -16,14 +17,36 @@
     
     self.nameLabel.font = [UIFont lightCustomFontOfSize:self.nameLabel.font.pointSize];
     
-    if(!IS_IOS_7_OR_GREATER)
-    {
-        CGRect lFrame = self.nameLabel.frame;
-        lFrame.origin.y = 72.0f;
-        self.nameLabel.frame = lFrame;
-    }
+    self.imageView.layer.cornerRadius = self.imageView.frame.size.width * 0.5;
     
     
 }
 
+
+- (void) setDisplayName: (NSString*) displayName
+{
+    if(!displayName)
+    {
+        self.nameLabel.text = @"";
+        return;
+    }
+    CGRect currentNameLabelFrame = self.nameLabel.frame;
+    
+    self.nameLabel.text = displayName;
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:displayName
+                                                                         attributes:@{NSFontAttributeName: self.nameLabel.font}];
+    
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.frame.size.width, 26.0f}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    
+    
+  
+    
+    currentNameLabelFrame.origin.y = 56.0f;
+    currentNameLabelFrame.size.height = rect.size.height;
+    
+    self.nameLabel.frame = currentNameLabelFrame;
+}
 @end

@@ -52,6 +52,7 @@
         
         self.messageType = data[@"message_type"];
         
+        
         // Work out what type of object we are
         if ([self.messageType isEqualToString: @"subscribed"])
         {
@@ -69,7 +70,8 @@
         
         else if ([self.messageType isEqualToString: @"repack"])
         {
-            self.objectType = kNotificationObjectTypeFacebookFriendJoined;
+            
+            self.objectType = kNotificationObjectTypeUserAddedYourVideo;
         }
         
         else if ([self.messageType isEqualToString: @"unavailable"])
@@ -83,74 +85,8 @@
         }
         
         NSString *dateString = data[@"date_created"];
-        
-        if (dateString)
-        {
-            ISO8601DateFormatter *formatter = [[ISO8601DateFormatter alloc] init];
-            
-            NSDate *date = [formatter dateFromString: dateString];
-            
-            if (date)
-            {
-                // find difference from today
-                NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
-                NSInteger seconds = [timeZone secondsFromGMTForDate: date];
-                date = [NSDate dateWithTimeInterval: seconds
-                                          sinceDate: date];
-
-                NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
-                NSUInteger componentflags =
-                NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSMinuteCalendarUnit | NSHourCalendarUnit;
-                NSDateComponents *components = [calendar components: componentflags
-                                                           fromDate: date
-                                                             toDate: [NSDate date]
-                                                            options: 0];
-                
-                NSMutableString *dateDifferenceMutableString = [[NSMutableString alloc] init];
-                
-                if (components.year > 0)
-                {
-                    [dateDifferenceMutableString appendString: @"More than a year ago"];
-                }
-                else if (components.month > 0)
-                {
-                    [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i month%@", components.month, (components.month > 1 ? @"s" : @"")]];
-                    
-                    if (components.day > 0)
-                    {
-                        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i day%@ ago", components.day, (components.day > 1 ? @"s" : @"")]];
-                    }
-                }
-                else if (components.day > 0)
-                {
-                    [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i day%@", components.day, (components.day > 1 ? @"s" : @"")]];
-                    
-                    if (components.hour > 0)
-                    {
-                        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i hour%@ ago", components.hour, (components.hour > 1 ? @"s" : @"")]];
-                    }
-                }
-                else if (components.hour > 0)
-                {
-                    [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i hour%@", components.hour, (components.hour > 1 ? @"s" : @"")]];
-                    
-                    if (components.minute > 0)
-                    {
-                        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i minute%@ ago", components.minute, (components.minute > 1 ? @"s" : @"")]];
-                    }
-                }
-                else
-                {
-                    [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i minute%@ ago", components.minute, (components.minute > 1 ? @"s" : @"")]];
-                }
-                
-                self.dateDifferenceString = [NSString stringWithString: dateDifferenceMutableString];
-            }
-            else
-            {
-                self.dateDifferenceString = dateString;
-            }
-        }
+        if(dateString)
+            self.dateDifferenceString = [self parseDateString:dateString];
         
         NSNumber *readNumber = data[@"read"];
         
@@ -179,6 +115,7 @@
             
             if (videoDictionary && [videoDictionary isKindOfClass: [NSDictionary class]])
             {
+                
                 self.videoId = videoDictionary[@"id"];
                 self.videoThumbnailUrl = videoDictionary[@"thumbnail_url"];
                 
@@ -207,6 +144,77 @@
     
     return self;
 }
+
+#pragma mark - Parsing Date
+
+-(NSString*)parseDateString:(NSString*)dateString
+{
+    if(!dateString)
+        return nil;
+    
+    ISO8601DateFormatter *formatter = [[ISO8601DateFormatter alloc] init];
+    
+    NSDate *date = [formatter dateFromString: dateString];
+    
+    if(!date)
+        return dateString;
+    
+    // find difference from today
+    NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
+    NSInteger seconds = [timeZone secondsFromGMTForDate: date];
+    date = [NSDate dateWithTimeInterval: seconds
+                              sinceDate: date];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    NSUInteger componentflags =
+    NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSMinuteCalendarUnit | NSHourCalendarUnit;
+    NSDateComponents *components = [calendar components: componentflags
+                                               fromDate: date
+                                                 toDate: [NSDate date]
+                                                options: 0];
+    
+    NSMutableString *dateDifferenceMutableString = [[NSMutableString alloc] init];
+    
+    if (components.year > 0)
+    {
+        [dateDifferenceMutableString appendString: @"More than a year ago"];
+    }
+    else if (components.month > 0)
+    {
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i month%@", components.month, (components.month > 1 ? @"s" : @"")]];
+        
+        if (components.day > 0)
+        {
+            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i day%@ ago", components.day, (components.day > 1 ? @"s" : @"")]];
+        }
+    }
+    else if (components.day > 0)
+    {
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i day%@", components.day, (components.day > 1 ? @"s" : @"")]];
+        
+        if (components.hour > 0)
+        {
+            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i hour%@ ago", components.hour, (components.hour > 1 ? @"s" : @"")]];
+        }
+    }
+    else if (components.hour > 0)
+    {
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i hour%@", components.hour, (components.hour > 1 ? @"s" : @"")]];
+        
+        if (components.minute > 0)
+        {
+            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i minute%@ ago", components.minute, (components.minute > 1 ? @"s" : @"")]];
+        }
+    }
+    else
+    {
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i minute%@ ago", components.minute, (components.minute > 1 ? @"s" : @"")]];
+    }
+    
+    return [NSString stringWithString: dateDifferenceMutableString];
+}
+
+#pragma mark - Helper Methods
 
 -(BOOL)isEqual:(id)object
 {
@@ -263,8 +271,9 @@
 {
     NSMutableString *descriptionToReturn = [[NSMutableString alloc] init];
     
-    [descriptionToReturn appendFormat: @"<SYNRockpackNotification: %p (%i", self, self.identifier];
-    [descriptionToReturn appendFormat: @" channelOwner: %@)", self.channelOwner.uniqueId];
+    [descriptionToReturn appendFormat: @"<SYNRockpackNotification: %p (identifier:'%i'", self, self.identifier];
+    [descriptionToReturn appendFormat: @" channelOwner:'%@')", self.channelOwner.displayName];
+    [descriptionToReturn appendFormat: @" videoThumbnailUrl:'%@')", self.videoThumbnailUrl];
     [descriptionToReturn appendString: @">"];
     return descriptionToReturn;
 }
