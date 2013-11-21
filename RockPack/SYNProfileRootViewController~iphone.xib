@@ -202,6 +202,9 @@ me...</string>
                     <state key="normal" image="ButtonUpload.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="changeCoverImageButtonTapped:" destination="-1" eventType="touchUpInside" id="9sh-8I-XvB"/>
+                    </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Vn-mZ-fhR" userLabel="Button - Upload Avatar">
                     <rect key="frame" x="113" y="197" width="96" height="96"/>
@@ -210,6 +213,9 @@ me...</string>
                     <state key="normal" image="ButtonUpload.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="changeAvatarButtonTapped:" destination="-1" eventType="touchUpInside" id="tyv-5C-lMT"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -219,6 +225,7 @@ me...</string>
     </objects>
     <resources>
         <image name="ButtonMore.png" width="38" height="38"/>
+        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>
 </document>

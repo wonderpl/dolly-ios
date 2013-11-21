@@ -1860,6 +1860,59 @@
     }];
 
 }
+- (IBAction)changeCoverImageButtonTapped:(id)sender
+{
+    
+    
+}
+- (IBAction)changeAvatarButtonTapped:(id)sender
+{
+    
+    
+    
+    self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController:self];
+    self.imagePickerController.delegate = self;
+    
+    
+    [self.imagePickerController presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+}
+
+
+- (void) picker: (SYNImagePickerController *) picker
+finishedWithImage: (UIImage *) image
+{
+    //    DebugLog(@"Orign image width: %f, height%f", image.size.width, image.size.height);
+    self.avatarButton.enabled = NO;
+    self.profileImageView.image = image;
+  //  [self.activityIndicator startAnimating];
+    [appDelegate.oAuthNetworkEngine updateAvatarForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                         image: image
+                                             completionHandler: ^(NSDictionary* result)
+     {
+         //         self.profilePictureImageView.image = image;
+   //      [self.activityIndicator stopAnimating];
+         self.avatarButton.enabled = YES;
+     }
+                                                  errorHandler: ^(id error)
+     {
+         [self.profileImageView setImageWithURL: [NSURL URLWithString: appDelegate.currentUser.thumbnailURL]
+                                      placeholderImage: [UIImage imageNamed: @"PlaceholderSidebarAvatar"]
+                                               options: SDWebImageRetryFailed];
+         
+    //     [self.activityIndicator stopAnimating];
+         self.avatarButton.enabled = YES;
+         
+         UIAlertView* alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title",nil)
+                                                         message: NSLocalizedString(@"register_screen_form_avatar_upload_description",nil)
+                                                        delegate: nil
+                                               cancelButtonTitle: nil
+                                               otherButtonTitles: NSLocalizedString(@"OK",nil), nil];
+         [alert show];
+     }];
+    
+    self.imagePickerController = nil;
+    
+}
 
 
 @end
