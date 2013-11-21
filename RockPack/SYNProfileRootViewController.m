@@ -1383,7 +1383,8 @@
     {
         
         NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-        
+        SYNChannelDetailsViewController *channelVC;
+
         Channel *channel;
         
         if (self.isUserProfile && indexPath.row == 0)
@@ -1391,13 +1392,23 @@
             //never gets called, first cell gets called and created in didSelectItem
             return;
         }
+        else if( self.isUserProfile && indexPath.row == 1)
+        {
+            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
+
+            [self.navigationController pushViewController:channelVC animated:YES];
+
+            return;
+        }
+        
         else
         {
             //  self.indexPathToDelete = indexPath;
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         
-        SYNChannelDetailsViewController *channelVC;
         if (modeType == modeMyOwnProfile) {
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
             
@@ -1867,9 +1878,6 @@
 }
 - (IBAction)changeAvatarButtonTapped:(id)sender
 {
-    
-    
-    
     self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController:self];
     self.imagePickerController.delegate = self;
     

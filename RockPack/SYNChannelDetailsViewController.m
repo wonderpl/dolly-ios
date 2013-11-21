@@ -327,9 +327,10 @@ UIPopoverControllerDelegate>
     
 
     [self.videoThumbnailCollectionView reloadData];
-  //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];
+  //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
+    
+    
 }
-
 
 - (void) viewWillDisappear: (BOOL) animated
 {
@@ -390,6 +391,8 @@ UIPopoverControllerDelegate>
     }
 
     
+    [self setUpMode];
+
     
 }
 
@@ -410,10 +413,19 @@ UIPopoverControllerDelegate>
         [self editMode];
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
-
     }
-    
-    
+    else if (self.mode == kChannelDetailsFavourites)
+    {
+        
+        if(IS_IPHONE)
+        {
+            self.btnEditChannel.hidden = YES;
+            self.btnFollowChannel.hidden = YES;
+            
+            
+            [self centreView:self.btnShareChannel];
+        }
+    }
 }
 
 - (BOOL) isFavouritesChannel
@@ -451,8 +463,6 @@ UIPopoverControllerDelegate>
     [[self.txtViewDescription layer] setBorderWidth:1.0];
     [[self.txtViewDescription layer] setCornerRadius:0];
     
-    
-    
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
                         forCellWithReuseIdentifier: CollectionVideoCellName];
     
@@ -464,12 +474,15 @@ UIPopoverControllerDelegate>
                         forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                                withReuseIdentifier: @"SYNChannelFooterMoreView"];
     
-    
     self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
     
     self.lblChannelTitle.text = self.channel.title;
     self.lblDescription.text = self.channel.channelDescription;
+    
+    NSLog(@"CHAN DES: %@", self.channel.channelDescription);
+    
+    
     self.txtViewDescription.text = self.lblDescription.text;
     
     [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
@@ -592,9 +605,9 @@ UIPopoverControllerDelegate>
     }
     
     if (IS_IPHONE ) {
-        offset *=2;
+       // offset *=2;
         //iphone port
-        offset +=840;
+        offset +=420;
     }
     
     if (IS_IPAD) {
@@ -625,6 +638,7 @@ UIPopoverControllerDelegate>
 {
     self.originalChannel = channel;
     
+    NSLog(@"%@",    channel.channelDescription);
     
     NSError *error = nil;
     
@@ -693,6 +707,7 @@ UIPopoverControllerDelegate>
         }
     }
     
+
     if (self.channel)
     {
         // check for subscribed
@@ -720,7 +735,7 @@ UIPopoverControllerDelegate>
                                                      name: NSManagedObjectContextDidSaveNotification
                                                    object: self.channel.managedObjectContext];
         
-        if (self.mode == kChannelDetailsModeDisplay || self.mode == kChannelDetailsModeDisplayUser)
+        if (self.mode == kChannelDetailsModeDisplay || self.mode == kChannelDetailsModeDisplayUser || self.mode == kChannelDetailsFavourites)
         {
             
             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
@@ -728,6 +743,7 @@ UIPopoverControllerDelegate>
                                                               userInfo: @{kChannel: self.channel}];
         }
     }
+    
     
     
 }
@@ -1024,6 +1040,17 @@ referenceSizeForFooterInSection: (NSInteger) section
         }
     }
 }
+
+-(void) centreView : (UIView*) viewToCentre
+{
+    
+    CGPoint tmpPoint;
+    tmpPoint = viewToCentre.center;
+    tmpPoint.x = self.view.center.x;
+    viewToCentre.center = tmpPoint;
+
+}
+
 
 
 -(void) centreAllUi
@@ -1777,6 +1804,9 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //
     //    NSString *cover = [self coverIdStringForServiceCall];
     
+    
+    NSLog(@"save the des :%@", self.txtViewDescription.text );
+    
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
                                                      title: self.txtFieldChannelName.text
@@ -1854,8 +1884,12 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                                   //                                                  [self.activityIndicator stopAnimating];
                                               }];
     
-    [self cancelTapped];
     
+    
+    
+    [self performSelector:@selector(cancelTapped) withObject:nil afterDelay:0.4f];
+    
+    //[self cancelTapped];
     
 }
 

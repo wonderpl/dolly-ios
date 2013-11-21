@@ -7,12 +7,16 @@
 //
 
 @import UIKit;
+#import "UIColor+SYNColor.h"
+#import "UIFont+SYNFont.h"
 
 @protocol SYNCameraPopoverViewControllerDelegate;
 
 @interface SYNCameraPopoverViewController : UIViewController
 
 @property (nonatomic, weak) id<SYNCameraPopoverViewControllerDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
+@property (strong, nonatomic) IBOutlet UIButton *chooseExistingPhotoButton;
 
 @end
 

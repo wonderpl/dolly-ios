@@ -63,9 +63,8 @@
         
         // Need show the popover controller
         self.cameraMenuPopoverController = [[UIPopoverController alloc] initWithContentViewController: actionPopoverController];
-        self.cameraMenuPopoverController.popoverContentSize = CGSizeMake(206, 96);
+        self.cameraMenuPopoverController.popoverContentSize = CGSizeMake(206, 88);
         self.cameraMenuPopoverController.delegate = self;
-        self.cameraMenuPopoverController.popoverBackgroundViewClass = [SYNPopoverBackgroundView class];
         
         [self.cameraMenuPopoverController presentPopoverFromRect: self.popoverPresentingFrame
                                                           inView: self.hostViewController.view

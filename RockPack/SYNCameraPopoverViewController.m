@@ -15,6 +15,17 @@
 @implementation SYNCameraPopoverViewController
 
 
+
+-(void)viewDidLoad
+{
+    if (IS_IPAD) {
+        [self.takePhotoButton.titleLabel setFont:[UIFont regularCustomFontOfSize:12.0f]];
+        [self.chooseExistingPhotoButton.titleLabel setFont:[UIFont regularCustomFontOfSize:12.0f]];
+    }
+    
+    
+}
+
 - (IBAction) userTouchedTakePhotoButton: (id) sender
 {
     if ([self.delegate respondsToSelector: @selector(userTouchedTakePhotoButton)])
