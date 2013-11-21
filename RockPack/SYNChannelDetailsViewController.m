@@ -42,6 +42,11 @@
 #import "SYNSubscribersViewController.h"
 
 #define kHeightChange 70.0f
+#define FULL_NAME_LABEL_IPHONE 120.0f // lower is down
+#define FULL_NAME_LABEL_IPAD_PORTRAIT 213.0f
+
+#define FULLNAMELABELIPADLANDSCAPE 210.0f
+
 
 static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
@@ -96,6 +101,8 @@ UIPopoverControllerDelegate>
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (strong, nonatomic) IBOutlet UIView *viewCirleButtonContainer;
+@property (strong, nonatomic) IBOutlet UIView *viewFollowAndVideoContainer;
 @property (nonatomic) CGPoint tempContentOffset;
 @end
 
@@ -329,6 +336,8 @@ UIPopoverControllerDelegate>
     [self.videoThumbnailCollectionView reloadData];
   //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
     
+    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+
     
 }
 
@@ -422,10 +431,28 @@ UIPopoverControllerDelegate>
             self.btnEditChannel.hidden = YES;
             self.btnFollowChannel.hidden = YES;
             
+            [self moveView:self.btnShareChannel withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowVideos withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
             
             [self centreView:self.btnShareChannel];
         }
     }
+}
+
+-(void) moveView:(UIView*) movingView withX: (CGFloat) x
+{
+
+    CGRect tmpFrame;
+    
+    tmpFrame = movingView.frame;
+    tmpFrame.origin.x -= 100;
+    movingView.frame = tmpFrame;
+    
 }
 
 - (BOOL) isFavouritesChannel
@@ -619,17 +646,76 @@ UIPopoverControllerDelegate>
     
     self.viewProfileContainer.transform = move;
     self.btnAvatar.transform = move;
-    self.btnShowFollowers.transform = move;
-    self.btnShowVideos.transform =move;
-    self.btnFollowChannel.transform = move;
-    self.btnEditChannel.transform =move;
-    self.btnShareChannel.transform = move;
+    self.viewCirleButtonContainer.transform = move;
     self.lblNoVideos.transform = move;
     self.viewCollectionSeperator.transform = move;
+    self.viewFollowAndVideoContainer.transform = move;
     self.btnDeleteChannel.transform = move;
     self.txtViewDescription.transform = move;
     self.txtFieldChannelName.transform = move;
+    self.viewCirleButtonContainer.transform = move;
     
+    [self moveNameLabelWithOffset: offset];
+    
+}
+
+
+-(void) moveNameLabelWithOffset :(CGFloat) offset
+{
+    if (IS_IPHONE)
+    {
+        if (offset < FULL_NAME_LABEL_IPHONE)
+        {
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+            //CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
+            //self.fullNameLabel.transform = CGAffineTransformConcat(move, scale);
+//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
+//            tmpFrame.size.height = 43;
+//            self.outerViewFullNameLabel.frame = tmpFrame;
+            self.lblFullName.transform = move;
+        }
+        
+        if (offset > FULL_NAME_LABEL_IPHONE)
+        {
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
+            CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
+//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
+//            tmpFrame.size.height = 64;
+//            self.outerViewFullNameLabel.frame = tmpFrame;
+            self.lblFullName.transform = CGAffineTransformConcat(move, scale);
+        }
+    }
+    
+    if (IS_IPAD)
+    {
+        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
+            if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+                self.lblFullName.transform = move;
+            }
+
+            if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
+                self.lblFullName.transform = move;
+            }
+        }
+        else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
+        {
+            if (offset > FULLNAMELABELIPADLANDSCAPE)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
+                self.lblFullName.transform = move;
+            }
+            
+            if (offset<FULLNAMELABELIPADLANDSCAPE)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+                self.lblFullName.transform = move;
+            }
+        }
+    }
 }
 
 #pragma mark - Tab View Methods
@@ -1027,7 +1113,9 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             
-                       // [self centreAllUi];
+                        [self centreAllUi];
+            
+        
         }
         else
         {
@@ -1035,7 +1123,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             
-         //   [self centreAllUi];
+            [self centreAllUi];
             
         }
     }
@@ -1055,12 +1143,10 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 -(void) centreAllUi
 {
-    CGRect tmpRect;
-    tmpRect = self.lblChannelTitle.frame;
-    tmpRect.origin.x = self.view.window.frame.size.width/2 - tmpRect.size.width - 45;
-    self.lblChannelTitle.frame = tmpRect;
-    
-    
+
+    [self centreView:self.btnAvatar];
+//    [self centreView:self.lblNoVideos];
+//    [self centreView:self.viewProfileContainer];
     
 }
 
@@ -1360,12 +1446,15 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnFollowChannel.hidden = NO;
     self.btnEditChannel.hidden = NO;
     self.btnShareChannel.hidden = NO;
+    self.viewCirleButtonContainer.hidden = NO;
+    self.viewFollowAndVideoContainer.hidden = NO;
     
     
     //edit mode
     self.btnDeleteChannel.hidden = YES;
     self.txtFieldChannelName.hidden = YES;
     self.txtViewDescription.hidden = YES;
+
     
     
     self.viewProfileContainer.alpha = 0.0f;
@@ -1408,7 +1497,9 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnFollowChannel.hidden = YES;
     self.btnEditChannel.hidden = YES;
     self.btnShareChannel.hidden = YES;
-    
+    self.viewCirleButtonContainer.hidden = YES;
+    self.viewFollowAndVideoContainer.hidden = YES;
+
     
     //edit mode
     self.btnDeleteChannel.hidden = NO;
