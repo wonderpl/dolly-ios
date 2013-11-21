@@ -22,11 +22,13 @@
 #import "SYNNetworkOperationJsonObject.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNDeviceManager.h"
+#import "SYNFullScreenVideoAnimator.h"
+#import "SYNFullScreenVideoViewController.h"
 #import <Appirater.h>
 
 static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThumbnailSmallCell";
 
-@interface SYNVideoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, SYNVideoPlayerDelegate>
+@interface SYNVideoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
 
 @property (nonatomic, strong) NSArray *videoInstances;
 
@@ -72,6 +74,13 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	if (IS_IPHONE) {
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(deviceOrientationChanged:)
+													 name:UIDeviceOrientationDidChangeNotification
+												   object:nil];
+	}
+	
 	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:12.0f];
 	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:10.0f];
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:13.0f];
@@ -82,6 +91,19 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 				   forCellWithReuseIdentifier:SYNVideoThumbnailSmallCellReuseIdentifier];
 	
 	[self playVideoAtIndex:self.selectedIndex];
+}
+
+- (void)deviceOrientationChanged:(NSNotification *)notification {
+	UIDevice *device = [notification object];
+	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+	
+	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
+		[self videoPlayerMinimise];
+	}
+	
+	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
+		[self videoPlayerMaximise];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -173,14 +195,27 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
     return UIEdgeInsetsMake (0, insetWidth, 0, insetWidth);
 }
 
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+	return [SYNFullScreenVideoAnimator animatorForPresentating:YES];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	return [SYNFullScreenVideoAnimator animatorForPresentating:NO];
+}
+
 #pragma mark - SYNVideoPlayerDelegate
 
 - (void)videoPlayerMaximise {
+	SYNFullScreenVideoViewController *viewController = [[SYNFullScreenVideoViewController alloc] init];
+	viewController.transitioningDelegate = self;
 	
+	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)videoPlayerMinimise {
-	
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)videoPlayerFinishedPlaying {

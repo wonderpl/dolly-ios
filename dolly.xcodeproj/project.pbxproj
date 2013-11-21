@@ -1378,6 +1378,8 @@
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
 		C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3685246F69AA4C9B93DDEDAC /* libPods.a */; };
 		E9058169183CC87C00257E7F /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9058168183CC87C00257E7F /* libicucore.dylib */; };
+		E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */; };
+		E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */; };
 		E93C7F0918368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */; };
 		E93C7F0C18368E3D00FE0B65 /* SYNVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */; };
 		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
@@ -3018,6 +3020,10 @@
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9058166183CC77F00257E7F /* libPods-Ooyala.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Ooyala.a"; path = "Pods/build/Debug-iphoneos/libPods-Ooyala.a"; sourceTree = "<group>"; };
 		E9058168183CC87C00257E7F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		E914BED5183CF018001616D3 /* SYNFullScreenVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFullScreenVideoViewController.h; sourceTree = "<group>"; };
+		E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFullScreenVideoViewController.m; sourceTree = "<group>"; };
+		E914BED8183CF33A001616D3 /* SYNFullScreenVideoAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFullScreenVideoAnimator.h; sourceTree = "<group>"; };
+		E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFullScreenVideoAnimator.m; sourceTree = "<group>"; };
 		E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNVideoViewController_iphone.storyboard; sourceTree = "<group>"; };
 		E93C7F0A18368E3D00FE0B65 /* SYNVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewController.h; sourceTree = "<group>"; };
 		E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewController.m; sourceTree = "<group>"; };
@@ -4425,6 +4431,10 @@
 				E93C7F0B18368E3D00FE0B65 /* SYNVideoViewController.m */,
 				E93C7F0818368E2F00FE0B65 /* SYNVideoViewController_iphone.storyboard */,
 				E97FCDC4183A7D2B007A9BCC /* SYNVideoViewController_ipad.storyboard */,
+				E914BED5183CF018001616D3 /* SYNFullScreenVideoViewController.h */,
+				E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */,
+				E914BED8183CF33A001616D3 /* SYNFullScreenVideoAnimator.h */,
+				E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */,
 			);
 			name = "Video viewer";
 			sourceTree = "<group>";
@@ -7589,6 +7599,7 @@
 				38BACE92173AB4E600406597 /* SYNChannelCoverImageCell.m in Sources */,
 				38BACE94173AB4E600406597 /* SYNChannelCoverImageSelectorViewController.m in Sources */,
 				015C13C1173B034C001569FE /* SYNReportConcernTableViewController.m in Sources */,
+				E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */,
 				0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */,
 				BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */,
 				BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */,
@@ -7610,6 +7621,7 @@
 				BE1B3DEA181141D600DA2BD6 /* SYNAggregateVideoItemCell.m in Sources */,
 				BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */,
 				BEB1578E173D060700DAFA2F /* _ChannelCover.m in Sources */,
+				E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */,
 				BEB15791173D061700DAFA2F /* ChannelCover.m in Sources */,
 				E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */,
 				01D099721742C31000351C82 /* SYNReportConcernTableCell.m in Sources */,
