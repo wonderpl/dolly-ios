@@ -220,6 +220,5 @@ me...</string>
     <resources>
         <image name="ButtonMore.png" width="38" height="38"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
-        <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>
 </document>

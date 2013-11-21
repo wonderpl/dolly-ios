@@ -479,10 +479,8 @@ SYNChannelCoverImageSelectorDelegate>
     self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
     
-    
     self.lblChannelTitle.text = self.channel.title;
-    //No cms yet
-    self.lblDescription.text = @"Test Description";
+    self.lblDescription.text = self.channel.channelDescription;
     self.txtViewDescription.text = self.lblDescription.text;
     
     [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
