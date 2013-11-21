@@ -170,6 +170,10 @@
 			[self.delegate videoPlayerFinishedPlaying];
 		}
 	}
+	
+	if ([actionName isEqualToString:@"error"]) {
+		[self.delegate videoPlayerErrorOccurred:actionData];
+	}
 }
 
 @end

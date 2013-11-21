@@ -8,6 +8,7 @@
 
 #import "SYNOoyalaVideoPlayer.h"
 #import <OOOoyalaPlayer.h>
+#import <OOOoyalaError.h>
 #import "SYNScrubberBar.h"
 #import "Video.h"
 
@@ -39,6 +40,10 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 		[notificationCenter addObserver:self
 							   selector:@selector(ooyalaPlayerPlayCompleted:)
 								   name:OOOoyalaPlayerPlayCompletedNotification
+								 object:self.ooyalaPlayer];
+		[notificationCenter addObserver:self
+							   selector:@selector(ooyalaPlayerErrorOccurred:)
+								   name:OOOoyalaPlayerErrorNotification
 								 object:self.ooyalaPlayer];
 	}
 	return self;
@@ -99,17 +104,40 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 	return (isnan(progress) ? 0.0 : progress);
 }
 
-#pragma mark - Private
+#pragma mark - Notifications
 
 - (void)ooyalaPlayerStateChanged:(NSNotification *)notification {
 	OOOoyalaPlayer *ooyalaPlayer = [notification object];
 	if (ooyalaPlayer.state == OOOoyalaPlayerStateReady && self.state == SYNVideoPlayerStatePlaying) {
-		[self.ooyalaPlayer play];
+		[ooyalaPlayer play];
 	}
 }
 
 - (void)ooyalaPlayerPlayCompleted:(NSNotification *)notification {
 	[self.delegate videoPlayerFinishedPlaying];
+}
+
+- (void)ooyalaPlayerErrorOccurred:(NSNotification *)notification {
+	OOOoyalaPlayer *ooyalaPlayer = [notification object];
+	[self.delegate videoPlayerErrorOccurred:[self errorStringFromOoyalaError:[ooyalaPlayer error]]];
+}
+
+#pragma mark - Private
+
+- (NSString *)errorStringFromOoyalaError:(OOOoyalaError *)error {
+	NSDictionary *mapping = @{
+							  @(OOOoyalaErrorCodeAuthorizationFailed)			: @"authorization_failed",
+							  @(OOOoyalaErrorCodeAuthorizationInvalid)			: @"authorization_invalid",
+							  @(OOOoyalaErrorCodeHeartbeatFailed)				: @"hearbeat_failed",
+							  @(OOOoyalaErrorCodeContentTreeInvalid)			: @"content_tree_invalid",
+							  @(OOOoyalaErrorCodeAuthorizationSignatureInvalid)	: @"authorization_signature_invalid",
+							  @(OOOoyalaErrorCodeContentTreeNextFailed)			: @"content_tree_next_failed",
+							  @(OOOoyalaErrorCodePlaybackFailed)				: @"playback_failed",
+							  @(OOOoyalaErrorCodeAssetNotEncodedForIOS)			: @"asset_not_encoded_for_ios",
+							  @(OOOoyalaErrorCodeInternalIOS)					: @"internal_ios",
+							  @(OOOoyalaErrorCodeMetadataInvalid)				: @"metadata_invalid"
+							  };
+	return mapping[@([error code])];
 }
 
 @end
