@@ -222,6 +222,21 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 	[self playNextVideo];
 }
 
+- (void)videoPlayerErrorOccurred:(NSString *)reason {
+	SYNAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+	VideoInstance *videoInstance = self.videoInstances[self.currentIndex];
+
+	[appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId:videoInstance.uniqueId
+													   errorDescription:reason
+													  completionHandler:^(NSDictionary *dictionary) {
+														  DebugLog(@"Reported video error");
+													  }
+														   errorHandler:^(NSError* error) {
+															   DebugLog(@"Report concern failed");
+															   DebugLog(@"%@", [error debugDescription]);
+														   }];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)closeButtonPressed:(UIButton *)close {

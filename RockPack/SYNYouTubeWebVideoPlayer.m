@@ -51,7 +51,6 @@
 		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.playerContainerView.bounds];
 		webView.scrollView.scrollEnabled = NO;
 		webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		webView.alpha = 0.0;
 		
 		// Get HTML from documents directory (as opposed to the bundle), so that we can update it
 		NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -167,13 +166,13 @@
 	}
 	
 	if ([actionName isEqualToString:@"stateChange"]) {
-		if ([actionData isEqualToString:@"playing"]) {
-			self.youTubeWebView.alpha = 1.0;
-		}
-		
 		if ([actionData isEqualToString:@"ended"]) {
 			[self.delegate videoPlayerFinishedPlaying];
 		}
+	}
+	
+	if ([actionName isEqualToString:@"error"]) {
+		[self.delegate videoPlayerErrorOccurred:actionData];
 	}
 }
 

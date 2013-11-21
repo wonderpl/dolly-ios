@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 
 - (void)videoPlayerFinishedPlaying;
 
+- (void)videoPlayerErrorOccurred:(NSString *)reason;
+
 @end
 
 @interface SYNVideoPlayer : UIView
