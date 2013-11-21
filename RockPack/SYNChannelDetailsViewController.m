@@ -17,9 +17,7 @@
 #import "SSTextView.h"
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
-#import "SYNChannelCoverImageSelectorViewController.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNCoverChooserController.h"
 #import "SYNCoverThumbnailCell.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
@@ -30,7 +28,6 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNProfileRootViewController.h"
-#import "SYNReportConcernTableViewController.h"
 #import "SYNCollectionVideoCell.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
@@ -54,23 +51,15 @@ static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
 @interface SYNChannelDetailsViewController () <UITextViewDelegate,
 SYNImagePickerControllerDelegate,
-UIPopoverControllerDelegate,
+UIPopoverControllerDelegate>
 
-SYNChannelCoverImageSelectorDelegate>
-
-@property (nonatomic, strong) SYNReportConcernTableViewController *reportConcernController;
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
-@property (nonatomic, strong) UIImage *originalBackgroundImage;
-@property (nonatomic, strong) UIImageView *blurredBGImageView;
-@property (nonatomic, strong) UIView *coverChooserMasterView;
-@property (nonatomic, strong) UIView *noVideosMessageView;
 @property (nonatomic, weak) Channel *originalChannel;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
 //iPhone specific
 
 @property (nonatomic, strong) NSString *selectedImageURL;
-@property (nonatomic, strong) SYNChannelCoverImageSelectorViewController *coverImageSelector;
 
 @property (strong, nonatomic) IBOutlet SYNAvatarButton *btnAvatar;
 @property (strong, nonatomic) IBOutlet UILabel *lblFullName;
@@ -1874,8 +1863,8 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 {
     self.isLocked = YES; // prevent back button from firing
     
-    [appDelegate.oAuthNetworkEngine updateVideosForChannelForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                          channelId: channelId
+    [appDelegate.oAuthNetworkEngine updateVideosForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                          forChannelID: channelId
                                                    videoInstanceSet: self.channel.videoInstances
                                                       clearPrevious: YES
                                                   completionHandler: ^(id response) {

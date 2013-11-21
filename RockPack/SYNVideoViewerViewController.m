@@ -6,7 +6,6 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "AMBlurView.h"
 #import "Appirater.h"
 #import "BBCyclingLabel.h"
 #import "Channel.h"
@@ -48,7 +47,6 @@
 @property (nonatomic, assign) int currentSelectedIndex;
 @property (nonatomic, copy) NSArray *videoInstanceArray;
 @property (nonatomic, getter = isVideoExpanded) BOOL videoExpanded;
-@property (nonatomic, strong) AMBlurView *blurView;
 @property (nonatomic, strong) UIView *blurColourView;
 @property (nonatomic, strong) IBOutlet BBCyclingLabel *channelCreatorLabel;
 @property (nonatomic, strong) IBOutlet BBCyclingLabel *channelTitleLabel;
@@ -331,27 +329,27 @@
     self.likesCountLabel.text = @"0";
 
     //iOS 7 Blur
-    if (IS_IOS_7_OR_GREATER)
-    {
-        // Do iOS7 Tingz
-        self.blurView = [AMBlurView new];
-//        self.blurView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        
-        CGRect blurFrame = CGRectMake(0.0f, 0.0f, [[SYNDeviceManager sharedInstance] currentScreenWidth], [[SYNDeviceManager sharedInstance] currentScreenHeight] + 2.0f);
-        
-        [self.blurView setFrame: blurFrame];
-        
-        self.blurColourView = [[UIView alloc]initWithFrame: blurFrame];
-        self.blurColourView.backgroundColor = [UIColor colorWithWhite:0.0f/255.0f alpha:0.2f];
-        
-        self.view.backgroundColor = [UIColor clearColor];
-        
-        [self.view insertSubview: self.blurView
-                         atIndex: 0];
-        
-        [self.view insertSubview:self.blurColourView
-                         atIndex:1];
-    }
+//    if (IS_IOS_7_OR_GREATER)
+//    {
+//        // Do iOS7 Tingz
+//        self.blurView = [AMBlurView new];
+////        self.blurView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//        
+//        CGRect blurFrame = CGRectMake(0.0f, 0.0f, [[SYNDeviceManager sharedInstance] currentScreenWidth], [[SYNDeviceManager sharedInstance] currentScreenHeight] + 2.0f);
+//        
+//        [self.blurView setFrame: blurFrame];
+//        
+//        self.blurColourView = [[UIView alloc]initWithFrame: blurFrame];
+//        self.blurColourView.backgroundColor = [UIColor colorWithWhite:0.0f/255.0f alpha:0.2f];
+//        
+//        self.view.backgroundColor = [UIColor clearColor];
+//        
+//        [self.view insertSubview: self.blurView
+//                         atIndex: 0];
+//        
+//        [self.view insertSubview:self.blurColourView
+//                         atIndex:1];
+//    }
 }
 
 
@@ -464,7 +462,7 @@
     }
     
     self.blackPanelView.frame = blackPanelFrame;
-    self.blurView.frame = blurViewFrame;
+//    self.blurView.frame = blurViewFrame;
     self.blurColourView.frame = blurViewFrame;
 }
 

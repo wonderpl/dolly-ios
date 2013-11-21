@@ -1014,8 +1014,8 @@
 }
 
 
-- (void) updateVideosForChannelForUserId: (NSString *) userId
-                               channelId: (NSString *) channelId
+- (void) updateVideosForUserId: (NSString *) userId
+                               forChannelID: (NSString *) channelId
                         videoInstanceSet: (NSOrderedSet *) videoInstanceSet
                            clearPrevious: (BOOL) clearPrevious
                        completionHandler: (MKNKUserSuccessBlock) completionBlock
