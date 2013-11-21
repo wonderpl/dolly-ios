@@ -21,18 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		010AAE9E17D9EF48001DD5FA /* ShareFacebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9217D9EF48001DD5FA /* ShareFacebookButton.png */; };
 		010AAE9F17D9EF48001DD5FA /* ShareFacebookButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9317D9EF48001DD5FA /* ShareFacebookButton@2x.png */; };
-		010AAEA017D9EF48001DD5FA /* ShareFacebookButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9417D9EF48001DD5FA /* ShareFacebookButton@2x~iphone.png */; };
-		010AAEA117D9EF48001DD5FA /* ShareFacebookButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9517D9EF48001DD5FA /* ShareFacebookButton~iphone.png */; };
-		010AAEA217D9EF48001DD5FA /* ShareMailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9617D9EF48001DD5FA /* ShareMailButton.png */; };
 		010AAEA317D9EF48001DD5FA /* ShareMailButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9717D9EF48001DD5FA /* ShareMailButton@2x.png */; };
-		010AAEA417D9EF48001DD5FA /* ShareMailButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9817D9EF48001DD5FA /* ShareMailButton@2x~iphone.png */; };
-		010AAEA517D9EF48001DD5FA /* ShareMailButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9917D9EF48001DD5FA /* ShareMailButton~iphone.png */; };
-		010AAEA617D9EF48001DD5FA /* ShareTwitterButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9A17D9EF48001DD5FA /* ShareTwitterButton.png */; };
 		010AAEA717D9EF48001DD5FA /* ShareTwitterButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */; };
-		010AAEA817D9EF48001DD5FA /* ShareTwitterButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9C17D9EF48001DD5FA /* ShareTwitterButton@2x~iphone.png */; };
-		010AAEA917D9EF48001DD5FA /* ShareTwitterButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9D17D9EF48001DD5FA /* ShareTwitterButton~iphone.png */; };
 		010DEFD91629BDC40080F26B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD81629BDC40080F26B /* CoreGraphics.framework */; };
 		010DEFDF1629BDC40080F26B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 010DEFDD1629BDC40080F26B /* InfoPlist.strings */; };
 		010DEFE11629BDC40080F26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 010DEFE01629BDC40080F26B /* main.m */; };
@@ -640,7 +631,6 @@
 		1FD12373174CD76700144374 /* NavDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD1236F174CD76700144374 /* NavDefault@2x.png */; };
 		1FD12374174CD76700144374 /* NavHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD12370174CD76700144374 /* NavHighlighted.png */; };
 		1FD12375174CD76700144374 /* NavHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD12371174CD76700144374 /* NavHighlighted@2x.png */; };
-		1FD2857717BBAD6A0094F488 /* PanelShare.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD2857517BBAD6A0094F488 /* PanelShare.png */; };
 		1FD2857817BBAD6A0094F488 /* PanelShare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD2857617BBAD6A0094F488 /* PanelShare@2x.png */; };
 		1FE1C6601761FFFF00EDFC0E /* IconRockpackAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE1C65E1761FFFF00EDFC0E /* IconRockpackAbout.png */; };
 		1FE1C6611761FFFF00EDFC0E /* IconRockpackAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE1C65F1761FFFF00EDFC0E /* IconRockpackAbout@2x.png */; };
@@ -743,10 +733,6 @@
 		38A200571731607F00FB9F57 /* PanelDay~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF611731607F00FB9F57 /* PanelDay~iphone.png */; };
 		38A200581731607F00FB9F57 /* PanelVideoFeed@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF621731607F00FB9F57 /* PanelVideoFeed@2x~iphone.png */; };
 		38A200591731607F00FB9F57 /* PanelVideoFeed~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF631731607F00FB9F57 /* PanelVideoFeed~iphone.png */; };
-		38A2005A1731607F00FB9F57 /* ButtonFacebookDefault@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF651731607F00FB9F57 /* ButtonFacebookDefault@2x~iphone.png */; };
-		38A2005B1731607F00FB9F57 /* ButtonFacebookDefault~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF661731607F00FB9F57 /* ButtonFacebookDefault~iphone.png */; };
-		38A2005C1731607F00FB9F57 /* ButtonFacebookHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF671731607F00FB9F57 /* ButtonFacebookHighlighted@2x~iphone.png */; };
-		38A2005D1731607F00FB9F57 /* ButtonFacebookHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF681731607F00FB9F57 /* ButtonFacebookHighlighted~iphone.png */; };
 		38A2005E1731607F00FB9F57 /* ButtonLoginBack@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF691731607F00FB9F57 /* ButtonLoginBack@2x~iphone.png */; };
 		38A2005F1731607F00FB9F57 /* ButtonLoginBackHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF6A1731607F00FB9F57 /* ButtonLoginBackHighlighted@2x~iphone.png */; };
 		38A200601731607F00FB9F57 /* ButtonLoginBackHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF6B1731607F00FB9F57 /* ButtonLoginBackHighlighted~iphone.png */; };
@@ -1396,18 +1382,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		010AAE9217D9EF48001DD5FA /* ShareFacebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareFacebookButton.png; path = Assets/Images/ShareFacebookButton.png; sourceTree = "<group>"; };
 		010AAE9317D9EF48001DD5FA /* ShareFacebookButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareFacebookButton@2x.png"; path = "Assets/Images/ShareFacebookButton@2x.png"; sourceTree = "<group>"; };
-		010AAE9417D9EF48001DD5FA /* ShareFacebookButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareFacebookButton@2x~iphone.png"; path = "Assets/Images/ShareFacebookButton@2x~iphone.png"; sourceTree = "<group>"; };
-		010AAE9517D9EF48001DD5FA /* ShareFacebookButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareFacebookButton~iphone.png"; path = "Assets/Images/ShareFacebookButton~iphone.png"; sourceTree = "<group>"; };
-		010AAE9617D9EF48001DD5FA /* ShareMailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareMailButton.png; path = Assets/Images/ShareMailButton.png; sourceTree = "<group>"; };
 		010AAE9717D9EF48001DD5FA /* ShareMailButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareMailButton@2x.png"; path = "Assets/Images/ShareMailButton@2x.png"; sourceTree = "<group>"; };
-		010AAE9817D9EF48001DD5FA /* ShareMailButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareMailButton@2x~iphone.png"; path = "Assets/Images/ShareMailButton@2x~iphone.png"; sourceTree = "<group>"; };
-		010AAE9917D9EF48001DD5FA /* ShareMailButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareMailButton~iphone.png"; path = "Assets/Images/ShareMailButton~iphone.png"; sourceTree = "<group>"; };
-		010AAE9A17D9EF48001DD5FA /* ShareTwitterButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareTwitterButton.png; path = Assets/Images/ShareTwitterButton.png; sourceTree = "<group>"; };
 		010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareTwitterButton@2x.png"; path = "Assets/Images/ShareTwitterButton@2x.png"; sourceTree = "<group>"; };
-		010AAE9C17D9EF48001DD5FA /* ShareTwitterButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareTwitterButton@2x~iphone.png"; path = "Assets/Images/ShareTwitterButton@2x~iphone.png"; sourceTree = "<group>"; };
-		010AAE9D17D9EF48001DD5FA /* ShareTwitterButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareTwitterButton~iphone.png"; path = "Assets/Images/ShareTwitterButton~iphone.png"; sourceTree = "<group>"; };
 		010DEFD01629BDC40080F26B /* dolly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dolly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		010DEFD41629BDC40080F26B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		010DEFD61629BDC40080F26B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -2162,7 +2139,6 @@
 		1FD1236F174CD76700144374 /* NavDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavDefault@2x.png"; path = "Assets/Images/NavDefault@2x.png"; sourceTree = "<group>"; };
 		1FD12370174CD76700144374 /* NavHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NavHighlighted.png; path = Assets/Images/NavHighlighted.png; sourceTree = "<group>"; };
 		1FD12371174CD76700144374 /* NavHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavHighlighted@2x.png"; path = "Assets/Images/NavHighlighted@2x.png"; sourceTree = "<group>"; };
-		1FD2857517BBAD6A0094F488 /* PanelShare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelShare.png; path = Assets/Images/PanelShare.png; sourceTree = "<group>"; };
 		1FD2857617BBAD6A0094F488 /* PanelShare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelShare@2x.png"; path = "Assets/Images/PanelShare@2x.png"; sourceTree = "<group>"; };
 		1FE1C65E1761FFFF00EDFC0E /* IconRockpackAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconRockpackAbout.png; path = Assets/Images/IconRockpackAbout.png; sourceTree = "<group>"; };
 		1FE1C65F1761FFFF00EDFC0E /* IconRockpackAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconRockpackAbout@2x.png"; path = "Assets/Images/IconRockpackAbout@2x.png"; sourceTree = "<group>"; };
@@ -2295,10 +2271,6 @@
 		38A2FF611731607F00FB9F57 /* PanelDay~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanelDay~iphone.png"; sourceTree = "<group>"; };
 		38A2FF621731607F00FB9F57 /* PanelVideoFeed@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanelVideoFeed@2x~iphone.png"; sourceTree = "<group>"; };
 		38A2FF631731607F00FB9F57 /* PanelVideoFeed~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanelVideoFeed~iphone.png"; sourceTree = "<group>"; };
-		38A2FF651731607F00FB9F57 /* ButtonFacebookDefault@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonFacebookDefault@2x~iphone.png"; sourceTree = "<group>"; };
-		38A2FF661731607F00FB9F57 /* ButtonFacebookDefault~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonFacebookDefault~iphone.png"; sourceTree = "<group>"; };
-		38A2FF671731607F00FB9F57 /* ButtonFacebookHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonFacebookHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
-		38A2FF681731607F00FB9F57 /* ButtonFacebookHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonFacebookHighlighted~iphone.png"; sourceTree = "<group>"; };
 		38A2FF691731607F00FB9F57 /* ButtonLoginBack@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonLoginBack@2x~iphone.png"; sourceTree = "<group>"; };
 		38A2FF6A1731607F00FB9F57 /* ButtonLoginBackHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonLoginBackHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
 		38A2FF6B1731607F00FB9F57 /* ButtonLoginBackHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonLoginBackHighlighted~iphone.png"; sourceTree = "<group>"; };
@@ -4718,19 +4690,9 @@
 		1FD2856417BBA1640094F488 /* Share Panel */ = {
 			isa = PBXGroup;
 			children = (
-				010AAE9217D9EF48001DD5FA /* ShareFacebookButton.png */,
 				010AAE9317D9EF48001DD5FA /* ShareFacebookButton@2x.png */,
-				010AAE9417D9EF48001DD5FA /* ShareFacebookButton@2x~iphone.png */,
-				010AAE9517D9EF48001DD5FA /* ShareFacebookButton~iphone.png */,
-				010AAE9617D9EF48001DD5FA /* ShareMailButton.png */,
 				010AAE9717D9EF48001DD5FA /* ShareMailButton@2x.png */,
-				010AAE9817D9EF48001DD5FA /* ShareMailButton@2x~iphone.png */,
-				010AAE9917D9EF48001DD5FA /* ShareMailButton~iphone.png */,
-				010AAE9A17D9EF48001DD5FA /* ShareTwitterButton.png */,
 				010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */,
-				010AAE9C17D9EF48001DD5FA /* ShareTwitterButton@2x~iphone.png */,
-				010AAE9D17D9EF48001DD5FA /* ShareTwitterButton~iphone.png */,
-				1FD2857517BBAD6A0094F488 /* PanelShare.png */,
 				1FD2857617BBAD6A0094F488 /* PanelShare@2x.png */,
 			);
 			name = "Share Panel";
@@ -4914,10 +4876,6 @@
 		38A2FF641731607F00FB9F57 /* login */ = {
 			isa = PBXGroup;
 			children = (
-				38A2FF651731607F00FB9F57 /* ButtonFacebookDefault@2x~iphone.png */,
-				38A2FF661731607F00FB9F57 /* ButtonFacebookDefault~iphone.png */,
-				38A2FF671731607F00FB9F57 /* ButtonFacebookHighlighted@2x~iphone.png */,
-				38A2FF681731607F00FB9F57 /* ButtonFacebookHighlighted~iphone.png */,
 				38A2FF691731607F00FB9F57 /* ButtonLoginBack@2x~iphone.png */,
 				38A2FF6A1731607F00FB9F57 /* ButtonLoginBackHighlighted@2x~iphone.png */,
 				38A2FF6B1731607F00FB9F57 /* ButtonLoginBackHighlighted~iphone.png */,
@@ -6623,10 +6581,6 @@
 				38A200571731607F00FB9F57 /* PanelDay~iphone.png in Resources */,
 				38A200581731607F00FB9F57 /* PanelVideoFeed@2x~iphone.png in Resources */,
 				38A200591731607F00FB9F57 /* PanelVideoFeed~iphone.png in Resources */,
-				38A2005A1731607F00FB9F57 /* ButtonFacebookDefault@2x~iphone.png in Resources */,
-				38A2005B1731607F00FB9F57 /* ButtonFacebookDefault~iphone.png in Resources */,
-				38A2005C1731607F00FB9F57 /* ButtonFacebookHighlighted@2x~iphone.png in Resources */,
-				38A2005D1731607F00FB9F57 /* ButtonFacebookHighlighted~iphone.png in Resources */,
 				38A2005E1731607F00FB9F57 /* ButtonLoginBack@2x~iphone.png in Resources */,
 				38A2005F1731607F00FB9F57 /* ButtonLoginBackHighlighted@2x~iphone.png in Resources */,
 				BED027CC1834D4CC00636659 /* ButtonMoreFriends.png in Resources */,
@@ -7245,7 +7199,6 @@
 				BE8F93B717B3D00700E7035F /* ImageFacebookImplicit~iphone.png in Resources */,
 				BE8F93B917B3D22500E7035F /* SYNImplicitSharingController~iphone.xib in Resources */,
 				1F65D49417EB3D13004326A9 /* Default-Portrait-iOS7~ipad.png in Resources */,
-				1FD2857717BBAD6A0094F488 /* PanelShare.png in Resources */,
 				1F4E7FB3181ACBAA00F59007 /* TabFeed@2x~iphone.png in Resources */,
 				1FD2857817BBAD6A0094F488 /* PanelShare@2x.png in Resources */,
 				BE0B151217BC16240053E551 /* ButtonSearch@2x~iphone.png in Resources */,
@@ -7260,19 +7213,10 @@
 				BE06EEED17D759290028F2E3 /* RecentContactPlaceholder@2x.png in Resources */,
 				BE06EEF017D759390028F2E3 /* ABContactPlaceholder.png in Resources */,
 				BE06EEF117D759390028F2E3 /* ABContactPlaceholder@2x.png in Resources */,
-				010AAE9E17D9EF48001DD5FA /* ShareFacebookButton.png in Resources */,
 				010AAE9F17D9EF48001DD5FA /* ShareFacebookButton@2x.png in Resources */,
-				010AAEA017D9EF48001DD5FA /* ShareFacebookButton@2x~iphone.png in Resources */,
-				010AAEA117D9EF48001DD5FA /* ShareFacebookButton~iphone.png in Resources */,
-				010AAEA217D9EF48001DD5FA /* ShareMailButton.png in Resources */,
 				010AAEA317D9EF48001DD5FA /* ShareMailButton@2x.png in Resources */,
 				BED027CD1834D4CC00636659 /* ButtonMoreFriends@2x.png in Resources */,
-				010AAEA417D9EF48001DD5FA /* ShareMailButton@2x~iphone.png in Resources */,
-				010AAEA517D9EF48001DD5FA /* ShareMailButton~iphone.png in Resources */,
-				010AAEA617D9EF48001DD5FA /* ShareTwitterButton.png in Resources */,
 				010AAEA717D9EF48001DD5FA /* ShareTwitterButton@2x.png in Resources */,
-				010AAEA817D9EF48001DD5FA /* ShareTwitterButton@2x~iphone.png in Resources */,
-				010AAEA917D9EF48001DD5FA /* ShareTwitterButton~iphone.png in Resources */,
 				BE06EFA617DB6C810028F2E3 /* ShareUnconnectedabaccess.png in Resources */,
 				BE06EFA717DB6C810028F2E3 /* ShareUnconnectedabaccess@2x.png in Resources */,
 				BE06EFA817DB6C810028F2E3 /* ShareUnconnectedFbConnect.png in Resources */,

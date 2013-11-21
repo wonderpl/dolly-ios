@@ -55,9 +55,8 @@ static OWActivityDelegateObject *_sharedObject = nil;
 {
     [Appirater userDidSignificantEvent: FALSE];
     
-    [self.controller
-     dismissViewControllerAnimated: YES
-     completion: nil];
+    [self.controller dismissViewControllerAnimated: YES
+                                        completion: nil];
 }
 
 
@@ -65,10 +64,9 @@ static OWActivityDelegateObject *_sharedObject = nil;
 {
     [Appirater userDidSignificantEvent: FALSE];
     
-    [self.controller
-     dismissViewControllerAnimated: YES
-     completion:^{
+    [self.controller dismissViewControllerAnimated: YES
+                                        completion:^{
          
-     }];
+                                        }];
 }
 @end

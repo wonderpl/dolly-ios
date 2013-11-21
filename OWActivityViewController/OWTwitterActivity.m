@@ -90,12 +90,7 @@
         [twitterViewComposer setInitialText: text];
     }
     
-    // Never show the image
-//    if (image)
-//    {
-//        [twitterViewComposer addImage: image];
-//    }
-    
+
     if (url)
     {
         [twitterViewComposer addURL: url];

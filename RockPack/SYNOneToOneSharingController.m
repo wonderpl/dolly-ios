@@ -227,10 +227,11 @@
 - (void) controlsVisibleInView: (UIView *) view
                        visible: (BOOL) visible
 {
-    // I this is a control, then consider this a leaf
+    // If this is a control, then consider this a leaf
     if ([view isKindOfClass: [UIControl class]])
     {
         ((UIControl *) view).enabled = visible;
+        
     }
     else
     {
@@ -322,8 +323,6 @@
         // TODO: We might want to disable the email icon here if we don't have email on this device (iPod touch or non-configured email)
     }
     
-    CGRect aViewFrame = CGRectZero;
-    aViewFrame.size = self.activitiesContainerView.frame.size;
     
     self.activityViewController = [[OWActivityViewController alloc] initWithViewController: self
                                                                                 activities: activities];
@@ -523,7 +522,8 @@
     if (realIndex == 0 && displayEmailCell)
     {
         userThumbnailCell.imageView.image = [UIImage imageNamed: @"ShareAddEntry.jpg"];
-        [userThumbnailCell setDisplayName:@"Add New"];
+        
+        [userThumbnailCell setDisplayName: @"Add New"];
         
         userThumbnailCell.imageView.alpha = 1.0f;
         
