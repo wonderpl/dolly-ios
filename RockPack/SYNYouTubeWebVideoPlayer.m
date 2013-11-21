@@ -37,22 +37,20 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	CGFloat horizontalScale = CGRectGetWidth(self.bounds) / CGRectGetWidth(self.youTubeWebView.bounds);
-	CGFloat verticalScale = CGRectGetHeight(self.bounds) / CGRectGetHeight(self.youTubeWebView.bounds);
+	CGFloat videoWidth = CGRectGetWidth(self.youTubeWebView.frame);
+	CGFloat videoHeight = CGRectGetHeight(self.youTubeWebView.frame);
 	
-	self.youTubeWebView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2.0, CGRectGetHeight(self.bounds) / 2.0);
-	self.youTubeWebView.transform = CGAffineTransformMakeScale(horizontalScale, verticalScale);
+	NSString *javascript = [NSString stringWithFormat:@"player.setSize(%f, %f);", videoWidth, videoHeight];
+	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:javascript];
 }
 
 #pragma mark - Getters / Setters
 
 - (UIWebView *)youTubeWebView {
 	if (!_youTubeWebView) {
-		CGSize iFrameSize = [self iFrameSize];
-		
-		UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, iFrameSize.width, iFrameSize.height)];
-		webView.backgroundColor = [UIColor redColor];
+		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.playerContainerView.bounds];
 		webView.scrollView.scrollEnabled = NO;
+		webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		webView.alpha = 0.0;
 		
 		// Get HTML from documents directory (as opposed to the bundle), so that we can update it
@@ -62,6 +60,8 @@
 		NSString *templateHTMLString = [NSString stringWithContentsOfFile:fullPath
 																 encoding:NSUTF8StringEncoding
 																	error:nil];
+		
+		CGSize iFrameSize = [self iFrameSize];
 		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString, (int)iFrameSize.width, (int)iFrameSize.height];
 		
 		[webView loadHTMLString:iFrameHTML baseURL:[NSURL URLWithString: @"http://www.youtube.com"]];
