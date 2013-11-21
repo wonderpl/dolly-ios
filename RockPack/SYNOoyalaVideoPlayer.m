@@ -60,7 +60,6 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 	if (!_ooyalaPlayer) {
 		OOOoyalaPlayer *ooyalaPlayer = [[OOOoyalaPlayer alloc] initWithPcode:PCode domain:PlayerDomain];
 		ooyalaPlayer.view.frame = self.bounds;
-		ooyalaPlayer.view.alpha = 0.0;
 		
 		self.ooyalaPlayer = ooyalaPlayer;
 	}
@@ -105,8 +104,6 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 - (void)ooyalaPlayerStateChanged:(NSNotification *)notification {
 	OOOoyalaPlayer *ooyalaPlayer = [notification object];
 	if (ooyalaPlayer.state == OOOoyalaPlayerStateReady && self.state == SYNVideoPlayerStatePlaying) {
-		self.ooyalaPlayer.view.alpha = 1.0;
-		
 		[self.ooyalaPlayer play];
 	}
 }
