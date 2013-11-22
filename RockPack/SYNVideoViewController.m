@@ -29,8 +29,6 @@
 #import <UIImageView+WebCache.h>
 #import <Appirater.h>
 
-static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThumbnailSmallCell";
-
 @interface SYNVideoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
 
 @property (nonatomic, strong) NSArray *videoInstances;
@@ -87,7 +85,7 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 
 	UINib *videoThumbnailCellNib = [SYNVideoThumbnailSmallCell nib];
 	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
-				   forCellWithReuseIdentifier:SYNVideoThumbnailSmallCellReuseIdentifier];
+				   forCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]];
 
 	[self playVideoAtIndex:self.selectedIndex];
 }
@@ -141,7 +139,7 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SYNVideoThumbnailSmallCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SYNVideoThumbnailSmallCellReuseIdentifier
+    SYNVideoThumbnailSmallCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]
                                                                                  forIndexPath:indexPath];
     
     VideoInstance *videoInstance = self.videoInstances[indexPath.item];

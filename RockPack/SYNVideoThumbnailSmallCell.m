@@ -26,6 +26,10 @@
 	return [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
 }
 
++ (NSString *)reuseIdentifier {
+	return NSStringFromClass(self);
+}
+
 #pragma mark - Public
 
 - (void)setImageWithURL:(NSString *)urlString {
