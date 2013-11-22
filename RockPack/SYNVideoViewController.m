@@ -52,8 +52,6 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 
 @property (nonatomic, strong) IBOutlet UIView *videoUIContainerView;
 
-@property (nonatomic, assign) NSInteger currentIndex;
-
 @end
 
 @implementation SYNVideoViewController
@@ -219,7 +217,7 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {
 	SYNAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
-	VideoInstance *videoInstance = self.videoInstances[self.currentIndex];
+	VideoInstance *videoInstance = self.videoInstances[self.selectedIndex];
 
 	[appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId:videoInstance.uniqueId
 													   errorDescription:reason
