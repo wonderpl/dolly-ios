@@ -854,6 +854,8 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    [self.currentSearchTerm setString:@""];
+    [self.searchResultsTableView removeFromSuperview];
     [searchBar setShowsCancelButton:NO animated:YES];
     
 }
@@ -880,7 +882,6 @@
     
     NSUInteger newLength = (oldLength + newCharacterLength) - rangeLength;
     
-    self.currentSearchTerm = [NSMutableString stringWithString: searchBar.text];
     
     if (oldLength < newLength)
     {
@@ -896,25 +897,7 @@
     return YES;
 }
 
-#pragma mark - Helper Methods
 
-- (NSArray *) searchedFriends
-{
-    if (self.currentSearchTerm.length > 0)
-    {
-        NSPredicate *searchPredicate = [NSPredicate predicateWithBlock: ^BOOL (Friend *friend, NSDictionary *bindings) {
-            // either first or last name matches
-            return ([[friend.firstName uppercaseString] hasPrefix: [self.currentSearchTerm uppercaseString]]) ||
-            ([[friend.lastName uppercaseString] hasPrefix: [self.currentSearchTerm uppercaseString]]);
-        }];
-        
-        return [self.friends filteredArrayUsingPredicate: searchPredicate];
-    }
-    else
-    {
-        return self.friends;
-    }
-}
 
 
 - (BOOL)searchBarShouldBeginEditing: (UISearchBar *)searchBar
@@ -924,7 +907,7 @@
     [searchBar setShowsCancelButton:YES animated:YES];
     
     // clear the current search term
-    self.currentSearchTerm = [NSMutableString stringWithString:@""];
+    [self.currentSearchTerm setString:@""];
     
     CGRect sResTblFrame = self.searchResultsTableView.frame;
     
@@ -950,7 +933,25 @@
 
 
 
+#pragma mark - Helper Methods
 
+- (NSArray *) searchedFriends
+{
+    if (self.currentSearchTerm.length > 0)
+    {
+        NSPredicate *searchPredicate = [NSPredicate predicateWithBlock: ^BOOL (Friend *friend, NSDictionary *bindings) {
+            // either first or last name matches
+            return ([[friend.firstName uppercaseString] hasPrefix: [self.currentSearchTerm uppercaseString]]) ||
+            ([[friend.lastName uppercaseString] hasPrefix: [self.currentSearchTerm uppercaseString]]);
+        }];
+        
+        return [self.friends filteredArrayUsingPredicate: searchPredicate];
+    }
+    else
+    {
+        return self.friends;
+    }
+}
 
 #pragma mark - Button Delegates
 
