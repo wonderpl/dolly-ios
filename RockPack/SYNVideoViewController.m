@@ -22,8 +22,10 @@
 #import "SYNNetworkOperationJsonObject.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNDeviceManager.h"
+#import "ChannelCover.h"
 #import "SYNFullScreenVideoAnimator.h"
 #import "SYNFullScreenVideoViewController.h"
+#import <UIImageView+WebCache.h>
 #import <Appirater.h>
 
 static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThumbnailSmallCell";
@@ -297,8 +299,15 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 - (void)updateVideoDetailsForIndex:(int)index {
     VideoInstance *videoInstance = self.videoInstances[index];
 	
-	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
+	if ([videoInstance.channel.channelOwner.displayName length]) {
+		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
+									   placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
+												options:SDWebImageRetryFailed];
+	} else {
+		self.channelThumbnailImageView.image = nil;
+	}
 	
+	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
 	self.channelOwnerLabel.text = ([channelOwnerName length] ? [NSString stringWithFormat: @"By %@", channelOwnerName] : @"");
     self.channelTitleLabel.text = videoInstance.channel.title;
     self.videoTitleLabel.text = videoInstance.title;
