@@ -851,12 +851,6 @@
 
 #pragma mark - UISearchBar Delegate Methods
 
-- (BOOL) searchBarShouldBeginEditing: (UISearchBar *) searchBar
-{
-    
-    [searchBar setShowsCancelButton:YES animated:YES];
-    return YES;
-}
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
@@ -923,13 +917,18 @@
 }
 
 
-- (BOOL) textFieldShouldBeginEditing: (UITextField *) textField
+- (BOOL)searchBarShouldBeginEditing: (UISearchBar *)searchBar
 {
+    
+    // show cancel button
+    [searchBar setShowsCancelButton:YES animated:YES];
+    
+    // clear the current search term
     self.currentSearchTerm = [NSMutableString stringWithString:@""];
     
     CGRect sResTblFrame = self.searchResultsTableView.frame;
     
-    sResTblFrame.origin.y = 104.0f;
+    sResTblFrame.origin.y = 86.0f;
     sResTblFrame.size.height = self.view.frame.size.height - sResTblFrame.origin.y;
     
     self.searchResultsTableView.frame = sResTblFrame;
