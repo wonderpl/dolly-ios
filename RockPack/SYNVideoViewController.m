@@ -83,15 +83,15 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 												   object:nil];
 	}
 	
-	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:12.0f];
-	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:10.0f];
-	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:13.0f];
-    self.likesLabel.font = [UIFont lightCustomFontOfSize:self.likesLabel.font.pointSize];
-	
+	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:self.channelTitleLabel.font.pointSize];
+	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:self.channelOwnerLabel.font.pointSize];
+	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
+	self.likesLabel.font = [UIFont lightCustomFontOfSize:self.likesLabel.font.pointSize];
+
 	UINib *videoThumbnailCellNib = [SYNVideoThumbnailSmallCell nib];
 	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
 				   forCellWithReuseIdentifier:SYNVideoThumbnailSmallCellReuseIdentifier];
-	
+
 	[self playVideoAtIndex:self.selectedIndex];
 }
 
