@@ -9,51 +9,41 @@
 #import "SYNVideoThumbnailSmallCell.h"
 #import "UIFont+SYNFont.h"
 #import <UIImageView+WebCache.h>
-#import "AppConstants.h"
-@import QuartzCore;
-
-#define kNextPrevVideoCellAlpha 0.8f
-#define kCurrentVideoCellAlpha 1.0f
 
 @interface SYNVideoThumbnailSmallCell ()
 
-@property (nonatomic, strong) IBOutlet UIView *mainView;
+@property (nonatomic, strong) IBOutlet UIImageView *colourImageView;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 
 @end
 
 
 @implementation SYNVideoThumbnailSmallCell
 
+#pragma mark - Public class
+
 + (UINib *)nib {
 	return [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
 }
 
-- (void) awakeFromNib
-{
-    [super awakeFromNib];
-
-    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
-    
-    self.colourImageView.image = nil;
-    self.mainView.alpha = kNextPrevVideoCellAlpha;
-}
-
-#pragma mark - Asynchronous image loading support
+#pragma mark - Public
 
 - (void)setImageWithURL:(NSString *)urlString {
 	[self.colourImageView setImageWithURL:[NSURL URLWithString:urlString]];
 }
 
-// If this cell is going to be re-used, then clear the image and cancel any outstanding operations
-- (void) prepareForReuse {
-    // Cancel any ongoing requests
-    [self.colourImageView cancelCurrentImageLoad];
-    
-    self.colourImageView.alpha = 0.0f;
-    
-    self.colourImageView.image = nil;
-    
-    self.mainView.alpha = kNextPrevVideoCellAlpha;
+#pragma mark - Overridden
+
+- (void)awakeFromNib {
+	[super awakeFromNib];
+
+	self.titleLabel.font = [UIFont regularCustomFontOfSize:self.titleLabel.font.pointSize];
+}
+
+- (void)prepareForReuse {
+	[self.colourImageView cancelCurrentImageLoad];
+	
+	self.colourImageView.image = nil;
 }
 
 @end

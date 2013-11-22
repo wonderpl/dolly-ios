@@ -25,6 +25,7 @@
 #import "ChannelCover.h"
 #import "SYNFullScreenVideoAnimator.h"
 #import "SYNFullScreenVideoViewController.h"
+#import "SYNButton.h"
 #import <UIImageView+WebCache.h>
 #import <Appirater.h>
 
@@ -42,15 +43,11 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 @property (nonatomic, strong) IBOutlet UICollectionView *thumbnailCollectionView;
 
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *likeActivityIndicator;
-@property (nonatomic, strong) IBOutlet UILabel *likesLabel;
-@property (nonatomic, strong) IBOutlet UIButton *likeButton;
+@property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
-
-@property (nonatomic, strong) IBOutlet UIView *videoUIContainerView;
 
 @end
 
@@ -81,10 +78,12 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 												   object:nil];
 	}
 	
+	self.channelThumbnailImageView.layer.cornerRadius = CGRectGetWidth(self.channelThumbnailImageView.frame) / 2.0;
+	self.channelThumbnailImageView.layer.masksToBounds = YES;
+	
 	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:self.channelTitleLabel.font.pointSize];
 	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:self.channelOwnerLabel.font.pointSize];
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
-	self.likesLabel.font = [UIFont lightCustomFontOfSize:self.likesLabel.font.pointSize];
 
 	UINib *videoThumbnailCellNib = [SYNVideoThumbnailSmallCell nib];
 	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
@@ -148,7 +147,7 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
     VideoInstance *videoInstance = self.videoInstances[indexPath.item];
     
     cell.titleLabel.text = videoInstance.title;
-    cell.imageWithURL = videoInstance.video.thumbnailURL;
+	[cell setImageWithURL:videoInstance.video.thumbnailURL];
     
     return cell;
 }
@@ -304,8 +303,8 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 }
 
 - (void)updateVideoDetailsForIndex:(int)index {
-    VideoInstance *videoInstance = self.videoInstances[index];
-	
+	VideoInstance *videoInstance = self.videoInstances[index];
+
 	if ([videoInstance.channel.channelOwner.displayName length]) {
 		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
 									   placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
@@ -313,14 +312,14 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 	} else {
 		self.channelThumbnailImageView.image = nil;
 	}
-	
+
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
 	self.channelOwnerLabel.text = ([channelOwnerName length] ? [NSString stringWithFormat: @"By %@", channelOwnerName] : @"");
-    self.channelTitleLabel.text = videoInstance.channel.title;
-    self.videoTitleLabel.text = videoInstance.title;
-    self.likeButton.selected = videoInstance.starredByUserValue;
-    self.likesLabel.text = [videoInstance.video.starCount stringValue];
-    
+	self.channelTitleLabel.text = videoInstance.channel.title;
+	self.videoTitleLabel.text = videoInstance.title;
+	self.likeButton.selected = videoInstance.starredByUserValue;
+	[self.likeButton setTitle:@"likes" andCount:[videoInstance.video.starCount integerValue]];
+	
 //	[self refreshAddbuttonStatus:nil];
 }
 

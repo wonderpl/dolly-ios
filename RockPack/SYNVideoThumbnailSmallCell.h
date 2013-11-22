@@ -10,8 +10,7 @@
 
 @interface SYNVideoThumbnailSmallCell : UICollectionViewCell
 
-@property (nonatomic, strong) IBOutlet UIImageView *colourImageView;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
 
 + (UINib *)nib;
 
