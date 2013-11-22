@@ -154,7 +154,6 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
     VideoInstance *videoInstance = self.videoInstances[indexPath.item];
     
     cell.titleLabel.text = videoInstance.title;
-	cell.colour = (indexPath.row == self.selectedIndex);
     cell.imageWithURL = videoInstance.video.thumbnailURL;
     
     return cell;
