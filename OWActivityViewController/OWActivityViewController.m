@@ -45,7 +45,7 @@
     {
         self.presentingController = viewController;
         
-        self.view.frame = CGRectMake(0, 0, 420, 50.0f);
+        self.view.frame = CGRectMake(0, 0, 250.0f, 56.0f);
         
         _activities = activities;
         

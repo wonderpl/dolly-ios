@@ -132,7 +132,7 @@
 
     if (IS_IPHONE)
     {
-        // resize for iPhone
+        // resize panel for iPhone
         CGRect vFrame = self.view.frame;
         vFrame.size.width = 320.0f;
         
@@ -244,12 +244,12 @@
     }
 }
 
-
+// Enable the buttons when we have found a share link from the server (i.e. the network call has returned)
 - (void) reEnableShareButtons
 {
-    // Enable the buttons as we have now found a share link
+    
     [self controlsVisibleInView: self.activitiesContainerView
-                        visible: TRUE];
+                        visible: YES];
 }
 
 

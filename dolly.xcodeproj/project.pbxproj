@@ -5452,10 +5452,10 @@
 		BE3574E517CE07860083CBB1 /* One to One Sharing */ = {
 			isa = PBXGroup;
 			children = (
-				BE57C01A183F7A1F00C6444A /* Cells */,
 				BE3574E617CE07B00083CBB1 /* SYNOneToOneSharingController.h */,
 				BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */,
 				BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */,
+				BE57C01A183F7A1F00C6444A /* Cells */,
 			);
 			name = "One to One Sharing";
 			sourceTree = "<group>";
