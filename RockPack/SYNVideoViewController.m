@@ -95,17 +95,11 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 	[self playVideoAtIndex:self.selectedIndex];
 }
 
-- (void)deviceOrientationChanged:(NSNotification *)notification {
-	UIDevice *device = [notification object];
-	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
 	
-	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
-		[self videoPlayerMinimise];
-	}
-	
-	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
-		[self videoPlayerMaximise];
-	}
+	// Invalidate the layout so the section insets are recalculated when returning from full screen video
+	[self.thumbnailCollectionView.collectionViewLayout invalidateLayout];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -272,6 +266,21 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 
 - (IBAction)swipedLeft:(UISwipeGestureRecognizer *)gestureRecognizer {
 	[self playNextVideo];
+}
+
+#pragma mark - Notifications
+
+- (void)deviceOrientationChanged:(NSNotification *)notification {
+	UIDevice *device = [notification object];
+	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+	
+	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
+		[self videoPlayerMinimise];
+	}
+	
+	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
+		[self videoPlayerMaximise];
+	}
 }
 
 #pragma mark - Private
