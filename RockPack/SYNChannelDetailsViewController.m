@@ -168,10 +168,22 @@ UIPopoverControllerDelegate>
     
     // == Avatar Image == //
     
+    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+    
+    NSLog(@"Image size width:%f, height %f", placeholderImage.size.width, placeholderImage.size.height);
+    
+    // TODO: Place holder image not scaling, get bigger placeholder image can fix
+    
+    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
+    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
+    
         [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
                                forState: UIControlStateNormal
-                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile.png"]
+                       placeholderImage: placeholderImage
                                 options: SDWebImageRetryFailed];
+
+    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
+    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
 
     
     if (IS_IPHONE)
@@ -227,7 +239,6 @@ UIPopoverControllerDelegate>
     [self displayChannelDetails];
 
 }
-
 
 
 -(void) iphoneMove
@@ -335,6 +346,7 @@ UIPopoverControllerDelegate>
 //    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor blackColor];
 
+    self.navigationItem.title = @"";
 
     [self.videoThumbnailCollectionView reloadData];
   //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
@@ -442,7 +454,6 @@ UIPopoverControllerDelegate>
 //            tmpFrame.origin.y -= 4;
 //            self.viewCirleButtonContainer.frame = tmpFrame;
             
-            
 //            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(360, 0, 0, 0);
             
         }
@@ -532,7 +543,7 @@ UIPopoverControllerDelegate>
         [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow")];
     }
     
-    if (self.channel.totalVideosValue == 0) {
+    if (self.channel.videoInstances.count == 0) {
         self.lblNoVideos.hidden = NO;
     }
     else
@@ -540,6 +551,7 @@ UIPopoverControllerDelegate>
         self.lblNoVideos.hidden = YES;
 
     }
+    
     
 }
 #pragma mark - Control Actions
@@ -840,6 +852,8 @@ UIPopoverControllerDelegate>
         }
     }
     
+
+    [self displayChannelDetails];
     
     
 }

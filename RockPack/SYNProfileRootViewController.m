@@ -263,17 +263,6 @@
                                                          alpha: 1.0f];
     
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    
-    //This should not be needed
-    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                                 target:nil
-                                                                                                 action:nil];
     
     [self setProfleType:self.modeType];
     
@@ -338,6 +327,23 @@
     
     //self.channelThumbnailCollectionView.contentOffset = CGPointZero;
     //self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+    // Setting navigation bar settings
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    //    [self.navigationController setTitle:@""];
+    self.navigationItem.title = @"";
+    
+    
+    //This should not be needed
+    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                                 target:nil
+                                                                                                 action:nil];
+
     
 }
 
@@ -389,12 +395,28 @@
     self.deletionModeActive = NO;
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
+    
+
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
+    
+    //This should not be needed
+    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    
+    
+}
 
 #pragma mark - Container Scroll Delegates
 - (void) viewDidScrollToFront
@@ -777,9 +799,6 @@
     
     UICollectionViewCell *cell = nil;
     
-    
-    
-    
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
         SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
@@ -830,7 +849,7 @@
             }
             
             [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)];
-            
+           // NSLog(@"totalvideos value in pro%ld", (long)channel.totalVideosValue);
             
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
             
@@ -1812,6 +1831,46 @@
 -(void) saveTapped
 {
     NSLog(@"Save profile");
+    
+    
+//    [self updateField:@"first_name" forValue:self.aboutMeTextView.text withCompletionHandler:^{
+//        
+//        self.appDelegate.currentUser.firstName = self.inputField.text;
+//        
+//        // last name second
+//        
+//        [self updateField:@"last_name" forValue:self.lastNameInputField.text withCompletionHandler:^{
+//            
+//            self.appDelegate.currentUser.lastName = self.lastNameInputField.text;
+//            
+//            // in most cases this field won't change so its worth a quick check to avoid the API call if possible
+//            
+//            if(self.nameIsPublic != self.appDelegate.currentUser.fullNameIsPublicValue)
+//            {
+//                
+//                [self updateField:@"display_fullname" forValue:@(self.nameIsPublic) withCompletionHandler:^{
+//                    
+//                    self.appDelegate.currentUser.fullNameIsPublicValue = self.nameIsPublic;
+//                    
+//                    [self.appDelegate saveContext: YES];
+//                    
+//                    [self.navigationController popViewControllerAnimated: YES];
+//                    
+//                }];
+//            }
+//            else
+//            {
+//                [self.appDelegate saveContext: YES];
+//                
+//                [self.navigationController popViewControllerAnimated: YES];
+//            }
+//            
+//            
+//            
+//        }];
+//        
+//    }];
+    
 }
 
 
