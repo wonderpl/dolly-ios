@@ -11,7 +11,7 @@
 #import "SYNSocialAddButton.h"
 #import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 
 @interface SYNSearchResultsVideoCell ()
 

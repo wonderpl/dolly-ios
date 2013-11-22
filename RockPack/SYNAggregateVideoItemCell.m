@@ -9,7 +9,7 @@
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNSocialAddButton.h"
 #import "SYNSocialButton.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"

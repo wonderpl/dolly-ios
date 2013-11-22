@@ -8,7 +8,7 @@
 
 #import "SYNVideoThumbnailSmallCell.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "AppConstants.h"
 @import QuartzCore;
 

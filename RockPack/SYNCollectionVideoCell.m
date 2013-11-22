@@ -9,7 +9,7 @@
 #import "SYNCollectionVideoCell.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 
 @implementation SYNCollectionVideoCell 
 

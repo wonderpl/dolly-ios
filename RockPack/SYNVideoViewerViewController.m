@@ -29,7 +29,7 @@
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
 #import "SYNVideoViewerViewController.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNScrubberBar.h"
