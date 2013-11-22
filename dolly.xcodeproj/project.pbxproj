@@ -5452,14 +5452,10 @@
 		BE3574E517CE07860083CBB1 /* One to One Sharing */ = {
 			isa = PBXGroup;
 			children = (
+				BE57C01A183F7A1F00C6444A /* Cells */,
 				BE3574E617CE07B00083CBB1 /* SYNOneToOneSharingController.h */,
 				BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */,
 				BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */,
-				BE06EEF217D78DCA0028F2E3 /* SYNOneToOneFriendCell.h */,
-				BE06EEF317D78DCA0028F2E3 /* SYNOneToOneFriendCell.m */,
-				BEA216B017E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.h */,
-				BEA216B117E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m */,
-				BEA216AE17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib */,
 			);
 			name = "One to One Sharing";
 			sourceTree = "<group>";
@@ -5508,6 +5504,18 @@
 				BE4180EF176B35D800FCF994 /* onboarding_button_ok_highlighted~iphone.png */,
 			);
 			name = OnBoarding;
+			sourceTree = "<group>";
+		};
+		BE57C01A183F7A1F00C6444A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BE06EEF217D78DCA0028F2E3 /* SYNOneToOneFriendCell.h */,
+				BE06EEF317D78DCA0028F2E3 /* SYNOneToOneFriendCell.m */,
+				BEA216B017E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.h */,
+				BEA216B117E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m */,
+				BEA216AE17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		BE7C129C16EA4EF60015789B /* Search */ = {

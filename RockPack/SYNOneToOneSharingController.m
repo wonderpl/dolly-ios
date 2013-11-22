@@ -287,9 +287,6 @@
 }
 
 
-
-
-
 - (void) showLoader: (BOOL) show
 {
     if (show)
@@ -667,6 +664,7 @@
     if (indexPath.row == self.searchedFriends.count) // last 'special' cell
     {
         cell.imageView.image = [UIImage imageNamed: @"ShareAddEntrySmall.jpg"];
+        
         cell.textLabel.text = @"Add a new email address";
         cell.detailTextLabel.text = @"";
         cell.special = YES;
@@ -717,6 +715,8 @@
     {
         cell.imageView.image = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
     }
+    
+    
     
     return cell;
 }
