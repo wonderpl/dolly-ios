@@ -153,7 +153,7 @@
 }
 
 - (CGSize)iFrameSize {
-	return (IS_IPAD ? CGSizeMake(739, 416) : CGSizeMake(320, 180));
+	return (IS_IPAD ? CGSizeMake(616, 347) : CGSizeMake(320, 180));
 }
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
