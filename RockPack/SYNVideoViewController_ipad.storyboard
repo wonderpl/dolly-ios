@@ -42,7 +42,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPS-0z-gZT" userLabel="Channel Info">
-                                <rect key="frame" x="488" y="45" width="49" height="90"/>
+                                <rect key="frame" x="488" y="45" width="49" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNE-gn-6Ck" userLabel="Image View - Channel Image">
@@ -60,7 +60,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpJ-pf-0Oe">
-                                        <rect key="frame" x="0.0" y="72" width="49" height="18"/>
+                                        <rect key="frame" x="0.0" y="74" width="49" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -68,7 +68,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="OpJ-pf-0Oe" firstAttribute="top" secondItem="Vnk-m6-q4n" secondAttribute="bottom" id="BUa-Jt-NNX"/>
+                                    <constraint firstItem="OpJ-pf-0Oe" firstAttribute="top" secondItem="Vnk-m6-q4n" secondAttribute="bottom" constant="2" id="BUa-Jt-NNX"/>
                                     <constraint firstItem="OpJ-pf-0Oe" firstAttribute="leading" secondItem="cPS-0z-gZT" secondAttribute="leading" id="H8a-a6-LnP"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wNE-gn-6Ck" secondAttribute="trailing" id="JcF-ws-6N6"/>
                                     <constraint firstItem="Vnk-m6-q4n" firstAttribute="leading" secondItem="cPS-0z-gZT" secondAttribute="leading" id="Sef-dq-HDf"/>
@@ -82,7 +82,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRQ-Zn-BXl">
-                                <rect key="frame" x="204" y="145" width="616" height="347"/>
+                                <rect key="frame" x="204" y="147" width="616" height="347"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -96,7 +96,7 @@
                                 </connections>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="Dd4-m5-fwv">
-                                <rect key="frame" x="337" y="510" width="350" height="22"/>
+                                <rect key="frame" x="337" y="512" width="350" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="Zi9-nU-yW3"/>
@@ -106,7 +106,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tzb-1p-fac" userLabel="Buttons">
-                                <rect key="frame" x="423" y="549" width="179" height="49"/>
+                                <rect key="frame" x="423" y="551" width="179" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjo-Kq-j9L" customClass="SYNSocialButton">
@@ -158,7 +158,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IXk-6T-01i">
-                                <rect key="frame" x="0.0" y="652" width="1024" height="116"/>
+                                <rect key="frame" x="0.0" y="654" width="1024" height="116"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -180,11 +180,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IXk-6T-01i" firstAttribute="leading" secondItem="m3U-6p-Ozj" secondAttribute="leading" id="1fE-Ld-Wmf"/>
-                            <constraint firstAttribute="centerY" secondItem="sRQ-Zn-BXl" secondAttribute="centerY" constant="65.5" id="Amq-26-Hbk"/>
+                            <constraint firstAttribute="centerY" secondItem="sRQ-Zn-BXl" secondAttribute="centerY" constant="63.5" id="Amq-26-Hbk"/>
                             <constraint firstAttribute="centerX" secondItem="Tzb-1p-fac" secondAttribute="centerX" id="Bx0-xX-jha"/>
                             <constraint firstAttribute="trailing" secondItem="IXk-6T-01i" secondAttribute="trailing" id="DZu-3Q-o9W"/>
                             <constraint firstItem="tXd-vs-OSr" firstAttribute="top" secondItem="YV5-Gs-Jfb" secondAttribute="bottom" id="M3A-Zf-y7n"/>
-                            <constraint firstAttribute="centerX" secondItem="sRQ-Zn-BXl" secondAttribute="centerX" constant="0.5" id="PzD-SE-zts"/>
+                            <constraint firstAttribute="centerX" secondItem="sRQ-Zn-BXl" secondAttribute="centerX" id="PzD-SE-zts"/>
                             <constraint firstAttribute="centerX" secondItem="cPS-0z-gZT" secondAttribute="centerX" id="Xku-w5-Ofk"/>
                             <constraint firstAttribute="centerX" secondItem="Dd4-m5-fwv" secondAttribute="centerX" id="bUC-Gg-WfD"/>
                             <constraint firstItem="sRQ-Zn-BXl" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="bottom" constant="10" id="fPn-A6-xfP"/>
