@@ -398,9 +398,8 @@
                                          inManagedObjectContext: appDelegate.searchManagedObjectContext]];
     
     
-    existingFriendsArray = [appDelegate.searchManagedObjectContext
-                            executeFetchRequest: fetchRequest
-                            error: &error];
+    existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                 error: &error];
     
     if (!error)
     {
@@ -420,8 +419,8 @@
         
         // sort by date
         self.recentFriends = [recentlySharedFriendsMutableArray sortedArrayUsingComparator: ^NSComparisonResult (Friend *friendA, Friend *friendB) {
-            return [friendB.lastShareDate
-                    compare: friendA.lastShareDate];
+            
+            return [friendB.lastShareDate compare: friendA.lastShareDate];
         }];
 
         [self.recentFriendsCollectionView reloadData];
@@ -857,6 +856,7 @@
     [self.currentSearchTerm setString:@""];
     [self.searchResultsTableView removeFromSuperview];
     [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
     
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -876,12 +876,12 @@
 }
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
 {
+    
     NSUInteger oldLength = searchBar.text.length;
     NSUInteger newCharacterLength = text.length;
     NSUInteger rangeLength = range.length;
     
     NSUInteger newLength = (oldLength + newCharacterLength) - rangeLength;
-    
     
     if (oldLength < newLength)
     {
@@ -953,71 +953,6 @@
     }
 }
 
-#pragma mark - Button Delegates
-
-
-
-
-- (IBAction) authorizeFacebookButtonPressed: (UIButton *) button
-{
-    
-    button.hidden = YES;
-    
-    self.facebookLoader.hidden = NO;
-    [self.facebookLoader startAnimating];
-    
-    __weak SYNAppDelegate *weakAppDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
-    
-    SYNFacebookManager *facebookManager = [SYNFacebookManager sharedFBManager];
-    
-    [facebookManager loginOnSuccess: ^(NSDictionary <FBGraphUser> *dictionary) {
-        
-        FBAccessTokenData *accessTokenData = [[FBSession activeSession] accessTokenData];
-        
-        [weakAppDelegate.oAuthNetworkEngine connectFacebookAccountForUserId: weakAppDelegate.currentUser.uniqueId
-                                                         andAccessTokenData: accessTokenData
-                                                          completionHandler: ^(id noResponce) {
-      
-                                                              
-             [self fetchAndDisplayFriends];
-             
-             self.facebookLoader.hidden = YES;
-             [self.facebookLoader stopAnimating];
-             
-             button.hidden = NO;
-                                                              
-         } errorHandler: ^(id error) {
-             
-             button.hidden = NO;
-             
-             self.facebookLoader.hidden = YES;
-             [self.facebookLoader stopAnimating];
-             
-             NSString *message;
-             
-             if ([error isKindOfClass: [NSDictionary class]] && (message = error[@"message"]))
-             {
-                 if ([message isEqualToString: @"External account mismatch"])
-                 {
-                     self.facebookLabel.text = @"Log in failed. This account seems to be associated with a different User.";
-                 }
-             }
-             
-             [[SYNFacebookManager sharedFBManager] logoutOnSuccess: ^{
-                 
-             } onFailure: ^(NSString *errorMessage) {
-                 
-             }];
-         }];
-        
-    }  onFailure: ^(NSString *errorString) {
-        self.facebookLabel.text = @"Log in with Facebook was cancelled.";
-        self.facebookLoader.hidden = YES;
-        [self.facebookLoader stopAnimating];
-        button.hidden = NO;
-    }];
-}
-
 
 #pragma mark - Helper Methods
 
@@ -1075,89 +1010,81 @@
                                                   withFriend: friend
                                            completionHandler: ^(id no_content) {
                                                
-         friend.lastShareDate = [NSDate date];
+                                               friend.lastShareDate = [NSDate date];
          
-         BOOL foundFriend = NO;
+                                               
          
-         for (Friend * loadedFriend in self.friends)
-         {
-             if ([loadedFriend.email isEqualToString: friend.email])
-             {
-                 foundFriend = YES;
-                 loadedFriend.lastShareDate = friend.lastShareDate;
-             }
-         }
+                                               NSError * error;
+                                               [friend.managedObjectContext save: &error];
          
-         if (foundFriend)
-         {
-             [friend.managedObjectContext deleteObject: friend];
-         }
+                                               wself.friendToAddEmail = nil;
          
-         NSError * error;
-         [friend.managedObjectContext save: &error];
+                                               wself.view.userInteractionEnabled = YES;
+                                               
+                                               [self searchBarTextDidEndEditing:self.searchBar];
+                                               
+                                               [self fetchAndDisplayFriends];
          
-         wself.friendToAddEmail = nil;
+                                               [self showLoader: NO];
          
-         wself.view.userInteractionEnabled = YES;
+                                               NSString *typeName =
+                                               [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"Pack" : @"Video";
          
-         [self fetchAndDisplayFriends];
+                                               NSString *notificationText =
+                                               [NSString stringWithFormat: NSLocalizedString(@"sharing_object_sent", nil), typeName];
          
-         [self showLoader: NO];
-         
-         NSString *typeName = [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"Pack" : @"Video";
-         
-         NSString *notificationText = [NSString stringWithFormat: NSLocalizedString(@"sharing_object_sent", nil), typeName];
-         
-         [appDelegate.masterViewController presentNotificationWithMessage:notificationText
-                                                                         andType:NotificationMessageTypeSuccess];
+                                               [appDelegate.masterViewController presentNotificationWithMessage:notificationText
+                                                                                                        andType:NotificationMessageTypeSuccess];
          
          
-         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-         NSString *actionType =
-         [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"channelShared" : @"videoShared";
+                                               id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+                                               NSString *actionType =
+                                               [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"channelShared" : @"videoShared";
          
-         [tracker send: [[GAIDictionaryBuilder  createEventWithCategory: @"goal"
-                                                                 action: actionType
-                                                                  label: @"1to1"
-                                                                  value: nil] build]];
-     } errorHandler: ^(NSDictionary *error) {
-         NSString *title = @"Email Couldn't be Sent";
-         NSString *reason = @"Unkown reson";
-         NSDictionary *formErrors = error[@"form_errors"];
+                                               [tracker send: [[GAIDictionaryBuilder  createEventWithCategory: @"goal"
+                                                                                                       action: actionType
+                                                                                                        label: @"1to1"
+                                                                                                        value: nil] build]];
+                                           } errorHandler: ^(NSDictionary *error) {
+                                               
+                                               NSString *title = @"Email Couldn't be Sent";
+                                               NSString *reason = @"Unkown reson";
+                                               NSDictionary *formErrors = error[@"form_errors"];
          
-         DebugLog(@"%@", error);
+                                               DebugLog(@"%@", error);
          
-         if (formErrors[@"email"])
-         {
-             reason = @"The email could be wrong or the service down.";
-         }
+                                               if (formErrors[@"email"])
+                                               {
+                                                   reason = @"The email could be wrong or the service down.";
+                                               }
          
-         if (formErrors[@"external_system"])
-         {
-             reason = @"The email could be wrong or the service down.";
-         }
+                                               if (formErrors[@"external_system"])
+                                               {
+                                                   reason = @"The email could be wrong or the service down.";
+                                               }
          
-         if (formErrors[@"object_id"])
-         {
-             reason = @"The email could be wrong or the service down.";
-         }
+                                               if (formErrors[@"object_id"])
+                                               {
+                                                   reason = @"The email could be wrong or the service down.";
+                                               }
          
-         UIAlertView *prompt = [[UIAlertView alloc]	 initWithTitle: title
-                                                           message: reason
-                                                          delegate: self
-                                                 cancelButtonTitle: @"OK"
-                                                 otherButtonTitles: nil];
+                                               UIAlertView *prompt = [[UIAlertView alloc] initWithTitle: title
+                                                                                                message: reason
+                                                                                               delegate: self
+                                                                                      cancelButtonTitle: @"OK"
+                                                                                      otherButtonTitles: nil];
          
-         [prompt show];
+                                               [prompt show];
          
-         friend.email = nil;
+                                               friend.email = nil;
          
-         wself.friendToAddEmail = nil;
+                                               wself.friendToAddEmail = nil;
          
-         [self showLoader: NO];
+                                               [self showLoader: NO];
          
-         self.view.userInteractionEnabled = YES;
-     }];
+                                               self.view.userInteractionEnabled = YES;
+                                               
+                                           }];
 }
 
 
