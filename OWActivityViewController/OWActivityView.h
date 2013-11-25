@@ -27,11 +27,11 @@
 @import UIKit;
 
 @interface OWActivityView : UIView <UIScrollViewDelegate> {
-    UIPageControl *_pageControl;
+    
 }
 
 @property (strong, nonatomic) UIImageView *backgroundImageView;
-@property (strong, nonatomic) UIScrollView *scrollView;
+
 @property (strong, nonatomic) NSArray *activities;
 @property (weak, nonatomic) OWActivityViewController *activityViewController;
 @property (strong, nonatomic) UIButton *cancelButton;

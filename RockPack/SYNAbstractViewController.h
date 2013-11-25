@@ -12,9 +12,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNChannelFooterMoreView.h"
 #import "SYNNetworkEngine.h"
-#import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNOnBoardingPopoverView.h"
 #import "SYNSocialActionsDelegate.h"
 #import "SYNPopupMessageView.h"
 

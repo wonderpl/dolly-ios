@@ -37,159 +37,66 @@
         self.clipsToBounds = YES;
         _activities = activities;
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        {
-            _backgroundImageView = [[UIImageView alloc] initWithFrame: CGRectMake(0, 0, frame.size.width, 96)];
-            _backgroundImageView.image = [UIImage imageNamed: @"PanelShare.png"];
-            _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-            [self addSubview: _backgroundImageView];
-        }
-        else
-        {
-            self.backgroundColor = [UIColor clearColor];
-        }
+        self.backgroundColor = [UIColor clearColor];
         
-        _scrollView = [[UIScrollView alloc] initWithFrame: CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.delegate = self;
-        _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self addSubview: _scrollView];
+        
         
         NSInteger index = 0;
-        NSInteger row = -1;
-        NSInteger page = -1;
         
         for (OWActivity *activity in _activities)
         {
-            NSInteger col;
             
-            //4 on a line now
-            col = index % 4;
             
-            if (index % 4 == 0)
-            {
-                row++;
-            }
+            CGFloat colSize = (IS_IPAD) ? 100.0f : 100.0f;
             
-            if (index % 12 == 0)
-            {
-                row = 0;
-                page++;
-            }
             
-            CGFloat colSize = (IS_IPAD) ? 140 : 107;
-            
-            //No spacing inbetween Buttons
             UIView *view = [self viewForActivity: activity
-                                           index: index
-                                               x: col * colSize 
+                                           index: index // used as a tag...
+                                               x: index * colSize
                                                y: 0];
-            [_scrollView addSubview: view];
+            
+            [self addSubview: view];
+            
             index++;
         }
         
-        _scrollView.contentSize = CGSizeMake((page + 1) * frame.size.width, _scrollView.frame.size.height);
-        _scrollView.pagingEnabled = YES;
-        
-        _pageControl = [[UIPageControl alloc] initWithFrame: CGRectMake(0, frame.size.height - 84, frame.size.width, 10)];
-        _pageControl.numberOfPages = page + 1;
-        [_pageControl addTarget: self
-                         action: @selector(pageControlValueChanged:)
-               forControlEvents: UIControlEventValueChanged];
-        [self addSubview: _pageControl];
-        
-        if (_pageControl.numberOfPages <= 1)
-        {
-            _pageControl.hidden = YES;
-            _scrollView.scrollEnabled = NO;
-        }
-        
-        //No More Cancel Button
-        
-        //        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        //        {
-        //            _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        //            [_cancelButton setBackgroundImage:[[UIImage imageNamed:@"OWActivityViewController.bundle/Button"] stretchableImageWithLeftCapWidth:22 topCapHeight:47] forState:UIControlStateNormal];
-        //            _cancelButton.frame = CGRectMake(22, 352, 276, 47);
-        //            [_cancelButton setTitle:NSLocalizedStringFromTable(@"button.cancel", @"OWActivityViewController", @"Cancel") forState:UIControlStateNormal];
-        //            [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //            [_cancelButton setTitleShadowColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] forState:UIControlStateNormal];
-        //            [_cancelButton.titleLabel setShadowOffset:CGSizeMake(0, -1)];
-        //            [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:19]];
-        //            [_cancelButton addTarget:self action:@selector(cancelButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        //            [self addSubview:_cancelButton];
-        //        }
     }
     
     return self;
 }
 
 
-- (void) dealloc
-{
-    // Defensive programming
-    _scrollView.delegate = nil;
-}
-
-
 - (UIView *) viewForActivity: (OWActivity *) activity index: (NSInteger) index x: (NSInteger) x y: (NSInteger) y
 {
-    CGFloat colSize = (IS_IPAD) ? 140 : 107;
+    /* wraps the activity which is an NSObject into a view */
     
-    UIView *view = [[UIView alloc] initWithFrame: CGRectMake(x, y, colSize, 56)];
+    UIView *view = [[UIView alloc] initWithFrame: CGRectMake(x, y, 50.0f, 50.0f)];
+    view.layer.cornerRadius = 25.0f;
+    view.layer.borderWidth = 1.0f;
+    view.layer.borderColor = [[UIColor blackColor] CGColor];
+    view.clipsToBounds = YES;
     
     UIButton *button = [UIButton buttonWithType: UIButtonTypeCustom];
     
-    button.frame = CGRectMake(0, 0, colSize, 56);
+    
+    // bad bad hack... for some reason you need to readjust the image so as not to end up distorted...
+    button.frame = CGRectMake(0.0f - (IS_IPHONE ? 25.0f : 0.0f), 0.0f , view.frame.size.width * (IS_IPHONE ? 2.0f : 1.0f) , view.frame.size.height);
     button.tag = index;
-    [button	   addTarget: self
-                  action: @selector(buttonPressed:)
-        forControlEvents: UIControlEventTouchUpInside];
+    
+    [button	addTarget: self
+               action: @selector(buttonPressed:)
+     forControlEvents: UIControlEventTouchUpInside];
+    
     [button setBackgroundImage: activity.image
                       forState: UIControlStateNormal];
+    
     button.accessibilityLabel = activity.title;
+    
     [view addSubview: button];
-    
-    // No Labels - Leave this here incase they come back
-    
-    //    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 80, 30)];
-    //    label.textAlignment = NSTextAlignmentCenter;
-    //    label.backgroundColor = [UIColor clearColor];
-    //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    //    {
-    //        label.textColor = [UIColor whiteColor];
-    //    }
-    //    else
-    //    {
-    //        label.textColor = [UIColor blackColor];
-    //    }
-    //    label.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.75];
-    //    label.shadowOffset = CGSizeMake(0, 1);
-    //    label.text = activity.title;
-    //    label.font = [UIFont boldSystemFontOfSize:12];
-    //    label.numberOfLines = 0;
-    //    [label setNumberOfLines:0];
-    //    [label sizeToFit];
-    //    CGRect frame = label.frame;
-    //    frame.origin.x = round((view.frame.size.width - frame.size.width) / 2.0f);
-    //    label.frame = frame;
-    //    [view addSubview:label];
     
     return view;
 }
 
-
-- (void) layoutSubviews
-{
-    [super layoutSubviews];
-    
-    //No more cancel Button - it may come back
-    //    CGRect frame = _cancelButton.frame;
-    //    frame.origin.y = self.frame.size.height - 47 - 16;
-    //    frame.origin.x = (self.frame.size.width - frame.size.width) / 2.0f;
-    //    _cancelButton.frame = frame;
-}
 
 
 #pragma mark -
@@ -209,7 +116,6 @@
     activity.activityViewController = _activityViewController;
     
     // Bit of a hack, but basically ignore all button presses until we have a valid userInfo (which will happen on return from the simultaneous network call)
-    NSLog(@"%@ %@", self.activityViewController.userInfo, activity.actionBlock);
     
     if (activity.actionBlock && self.activityViewController.userInfo)
     {
@@ -218,24 +124,5 @@
 }
 
 
-#pragma mark -
-#pragma mark UIScrollViewDelegate
-
-- (void) scrollViewDidEndDecelerating: (UIScrollView *) scrollView
-{
-    _pageControl.currentPage = scrollView.contentOffset.x / scrollView.frame.size.width;
-}
-
-
-#pragma mark -
-
-- (void) pageControlValueChanged: (UIPageControl *) pageControl
-{
-    CGFloat pageWidth = _scrollView.contentSize.width / _pageControl.numberOfPages;
-    CGFloat x = _pageControl.currentPage * pageWidth;
-    
-    [_scrollView scrollRectToVisible: CGRectMake(x, 0, pageWidth, _scrollView.frame.size.height)
-                            animated: YES];
-}
 
 @end

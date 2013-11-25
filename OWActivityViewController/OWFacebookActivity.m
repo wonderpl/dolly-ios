@@ -57,6 +57,7 @@
         
         [activityViewController dismissViewControllerAnimated: YES
                                                    completion: ^{
+                                                       
                                                        [weakSelf  shareFromViewController: presenter
                                                                                      text: text
                                                                                       url: userInfo[@"url"]
@@ -137,23 +138,6 @@
         [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
     }
     
-    //    else
-    //    {
-    //        // Try the Share dialog if available
-    //        appCall = [FBDialogs presentShareDialogWithLink: url
-    //                                                   name: nil
-    //                                                caption: text
-    //                                            description: nil
-    //                                                picture: nil
-    //                                            clientState: nil
-    //                                                handler: ^(FBAppCall *call, NSDictionary *results, NSError *error) {
-    //                                                    if (error) {
-    //                                                        NSLog(@"Error: %@", error.description);
-    //                                                    } else {
-    //                                                        NSLog(@"Success!");
-    //                                                    }
-    //                                                }];
-    //    }
     
     // If neither of the above methods worked, then try the old way...
     if (appCall == nil)

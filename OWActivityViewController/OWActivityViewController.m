@@ -28,26 +28,12 @@
 
 @interface OWActivityViewController ()
 
-- (NSInteger) height;
 
 @end
 
 @implementation OWActivityViewController
 
-- (void) loadView
-{
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    {
-        UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-        self.view = [[UIView alloc] initWithFrame: rootViewController.view.bounds];
-        self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-    }
-    else
-    {
-        [super loadView];
-    }
-}
 
 
 - (id) initWithViewController: (UIViewController *) viewController
@@ -59,34 +45,13 @@
     {
         self.presentingController = viewController;
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        {
-             self.view.frame = CGRectMake(0, 0, 420, 96);
-            
-            _backgroundView = [[UIView alloc] initWithFrame: self.view.bounds];
-            _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-            _backgroundView.backgroundColor = [UIColor blackColor];
-            _backgroundView.alpha = 0;
-            
-            // Tap outside of view to close share
-            UITapGestureRecognizer *tapOutside =
-            [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                    action: @selector(dismissViewControllerOnTouch)];
-            
-            [_backgroundView addGestureRecognizer: tapOutside];
-            
-            [self.view addSubview: _backgroundView];
-        }
-        else
-        {
-            self.view.frame = CGRectMake(0, 0, 420, 96);
-        }
+        self.view.frame = CGRectMake(0, 0, 250.0f, 56.0f);
         
         _activities = activities;
         
-        _activityView = [[OWActivityView alloc] initWithFrame: CGRectMake(0, 0,
-                                                                          self.view.frame.size.width, self.height)
+        _activityView = [[OWActivityView alloc] initWithFrame: CGRectMake(0, 0, 250.0f, 50.0f)
                                                    activities: activities];
+        
         
         _activityView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
@@ -99,40 +64,8 @@
 }
 
 
-- (void) dismissViewControllerAnimated: (BOOL) flag completion: (void (^)(void)) completion
+- (void) dismissViewControllerAnimated: (BOOL) flag completion: (void(^)(void)) completion
 {
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-//    {
-//        __typeof(&*self) __weak weakSelf = self;
-//        [UIView animateWithDuration: 0.2
-//                         animations: ^{
-//                             _backgroundView.alpha = 0;
-//                             CGRect frame = _activityView.frame;
-//                             frame.origin.y = [UIScreen mainScreen].bounds.size.height;
-//                             _activityView.frame = frame;
-//                         }
-//                         completion: ^(BOOL finished) {
-//                             [weakSelf.view removeFromSuperview];
-//                             [weakSelf removeFromParentViewController];
-//                             
-//                             if (completion)
-//                             {
-//                                 completion();
-//                             }
-//                         }];
-//    }
-//    else
-//    {
-//        [self.presentingPopoverController dismissPopoverAnimated: YES];
-//        
-//        [self performBlock: ^{
-//            if (completion)
-//            {
-//                completion();
-//            }
-//        } afterDelay: 0.4];
-//    }
-    
     completion();
 }
 
@@ -166,17 +99,14 @@
                              _backgroundView.alpha = 0.4;
                              
                              CGRect frame = _activityView.frame;
-                             frame.origin.y = self.view.frame.size.height - self.height;
+                             frame.origin.y = self.view.frame.size.height - 50.0f;
                              _activityView.frame = frame;
                          }];
     }
 }
 
 
-- (NSInteger) height
-{
-    return 56;
-}
+
 
 
 - (void) viewDidLoad
@@ -221,41 +151,6 @@
 }
 
 
-//- (BOOL) shouldAutorotate
-//{
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-//    {
-//        return YES;
-//    }
-//    
-//    return NO;
-//}
-//
-//
-//- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) orientation
-//{
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-//    {
-//        return YES;
-//    }
-//    
-//    return orientation == UIInterfaceOrientationPortrait;
-//}
-
-
-//- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
-//                                          duration: (NSTimeInterval) duration
-//{
-//    [super willAnimateRotationToInterfaceOrientation: toInterfaceOrientation
-//                                            duration: duration];
-//    
-//    self.view.center = self.view.superview.center;
-//}
-//
-//- (void) updateLayoutForNewOrientation: (UIInterfaceOrientation) orientation
-//{
-//        self.view.center = self.view.superview.center;
-//}
 
 
 @end

@@ -11,7 +11,6 @@
 #import "SYNMainRegistry.h"
 #import "SYNNavigationManager.h"
 #import "SYNOAuth2Credential.h"
-#import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNRegistry.h"
 #import "SYNSearchRegistry.h"
 #import "SYNVideoQueue.h"
@@ -36,7 +35,6 @@
 @property (nonatomic, readonly) NSManagedObjectContext *searchManagedObjectContext;
 @property (nonatomic, readonly) SYNChannelManager* channelManager;
 @property (nonatomic, readonly) SYNNavigationManager* navigationManager;
-@property (nonatomic, readonly) SYNOnBoardingPopoverQueueController* onBoardingQueue;
 @property (nonatomic, readonly) SYNVideoQueue* videoQueue;
 @property (nonatomic, strong) NSTimer* tokenExpiryTimer;
 @property (nonatomic, strong) SYNOAuth2Credential* currentOAuth2Credentials;

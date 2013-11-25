@@ -49,7 +49,6 @@
 @property (nonatomic, strong) SYNMasterViewController *masterViewController;
 @property (nonatomic, strong) SYNNetworkEngine *networkEngine;
 @property (nonatomic, strong) SYNOAuthNetworkEngine *oAuthNetworkEngine;
-@property (nonatomic, strong) SYNOnBoardingPopoverQueueController *onBoardingQueue;
 @property (nonatomic, strong) SYNVideoQueue *videoQueue;
 @property (nonatomic, strong) SYNNavigationManager* navigationManager;
 @property (nonatomic, strong) User *currentUser;
@@ -130,7 +129,6 @@
     // Subscriptions Manager //
     self.channelManager = [SYNChannelManager manager];
     
-    self.onBoardingQueue = [SYNOnBoardingPopoverQueueController queueController];
     
     
     // Video Queue View Controller //

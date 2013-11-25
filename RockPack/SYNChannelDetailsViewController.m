@@ -26,18 +26,17 @@
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNOnBoardingPopoverQueueController.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNCollectionVideoCell.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNAvatarButton.h"
 #import "SYNUsersViewController.h"
-#import "UIButton+WebCache.h"
+#import <UIButton+WebCache.h>
 #import "objc/runtime.h"
 #import "SYNSubscribersViewController.h"
 
@@ -132,6 +131,8 @@ UIPopoverControllerDelegate>
 - (void) dealloc
 {
     
+    
+    
 }
 
 #pragma mark - View lifecyle
@@ -140,7 +141,6 @@ UIPopoverControllerDelegate>
 {
     [super viewDidLoad];
     
-    // NSLog(@"VDL %f",self.videoThumbnailCollectionView.contentInset.top);
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];

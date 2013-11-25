@@ -29,7 +29,7 @@
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
 #import "SYNVideoViewerViewController.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNScrubberBar.h"
@@ -532,17 +532,17 @@
     // Deselect the old thumbnail (if there is one, and it is not the same as the new one)
     if (_currentSelectedIndex != currentSelectedIndex)
     {
-        SYNVideoThumbnailSmallCell *oldCell = (SYNVideoThumbnailSmallCell *)[self.videoThumbnailCollectionView cellForItemAtIndexPath: [NSIndexPath indexPathForItem: _currentSelectedIndex
-                                                                                                                                                           inSection: 0]];
+//        SYNVideoThumbnailSmallCell *oldCell = (SYNVideoThumbnailSmallCell *)[self.videoThumbnailCollectionView cellForItemAtIndexPath: [NSIndexPath indexPathForItem: _currentSelectedIndex
+//                                                                                                                                                           inSection: 0]];
         // This will colour the cell monochrome
-        oldCell.colour = NO;
+//        oldCell.colour = NO;
     }
     
     // Now fade up the new image to full colour
-    SYNVideoThumbnailSmallCell *newCell = (SYNVideoThumbnailSmallCell *)[self.videoThumbnailCollectionView cellForItemAtIndexPath: [NSIndexPath indexPathForItem: currentSelectedIndex
-                                                                                                                                                       inSection: 0]];
+//    SYNVideoThumbnailSmallCell *newCell = (SYNVideoThumbnailSmallCell *)[self.videoThumbnailCollectionView cellForItemAtIndexPath: [NSIndexPath indexPathForItem: currentSelectedIndex
+//                                                                                                                                                       inSection: 0]];
     
-    newCell.colour = YES;
+//    newCell.colour = YES;
     
     _currentSelectedIndex = currentSelectedIndex;
     
@@ -638,10 +638,9 @@
     
     cell.titleLabel.text = videoInstance.title;
     
-    SYNVideoViewerThumbnailLayoutAttributes* attributes = (SYNVideoViewerThumbnailLayoutAttributes *)[self.layout layoutAttributesForItemAtIndexPath: indexPath];
-    
-	BOOL thumbnailIsColour = attributes.isHighlighted;
-	cell.colour = thumbnailIsColour;
+//    SYNVideoViewerThumbnailLayoutAttributes* attributes = (SYNVideoViewerThumbnailLayoutAttributes *)[self.layout layoutAttributesForItemAtIndexPath: indexPath];
+//	BOOL thumbnailIsColour = attributes.isHighlighted;
+//	cell.colour = thumbnailIsColour;
 	
     cell.imageWithURL = videoInstance.video.thumbnailURL;
     

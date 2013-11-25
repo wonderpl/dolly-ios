@@ -8,166 +8,131 @@
 
 #import "SYNVideoThumbnailSmallCell.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
-#import "UIImage+Monochrome.h"
-#import "AppConstants.h"
-@import QuartzCore;
-
-#define kNextPrevVideoCellAlpha 0.8f
-#define kCurrentVideoCellAlpha 1.0f
+#import "CIFilter+Monochrome.h"
+#import <SDWebImageManager.h>
 
 @interface SYNVideoThumbnailSmallCell ()
 
-@property (nonatomic, assign) int uniqueCount;
-@property (nonatomic, strong) IBOutlet UIView *mainView;
-@property (nonatomic, strong) IBOutlet UIImageView *selectedGlossImageView;
-@property (nonatomic, strong) IBOutlet UIImageView *defaultGlossImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *colourImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *monochromeImageView;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic, strong) id<SDWebImageOperation> downloadOperation;
+@property (nonatomic, strong) NSOperation *monochromeOperation;
 
 @end
 
 
 @implementation SYNVideoThumbnailSmallCell
 
-@synthesize colour = _colour;
+#pragma mark - Public class
 
 + (UINib *)nib {
 	return [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
 }
 
-- (void) awakeFromNib
-{
-    [super awakeFromNib];
-
-    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
-    
-    self.colourImageView.image = nil;
-    self.monochromeImageView.image = nil;
-    self.mainView.alpha = kNextPrevVideoCellAlpha;
-    self.colour = NO;
++ (NSString *)reuseIdentifier {
+	return NSStringFromClass(self);
 }
 
-#pragma mark - Asynchronous image loading support
+#pragma mark - Public
 
+- (void)setImageWithURL:(NSString *)urlString {
+	NSURL *url = [NSURL URLWithString:urlString];
+	
+	SDWebImageManager *imageManager = [SDWebImageManager sharedManager];
+	
+	NSOperationQueue *operationQueue = [[self class] monochromeOperationQueue];
+//	CIFilter *filter = [[self class] monochromeFilter];
+	
+	UIImageView *colourImageView = self.colourImageView;
+	UIImageView *monochromeImageView = self.monochromeImageView;
+	
+	__weak typeof(self) wself = self;
+	self.downloadOperation = [imageManager downloadWithURL:url
+												   options:0
+												  progress:nil
+												 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+													 __strong typeof(self) sself = wself;
+													 
+													 colourImageView.image = image;
+													 
+													 NSOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+														 // Make a unique cache key for monochromed images
+														 NSString *cacheKey = [NSString stringWithFormat:@"monochrome+%@", [url absoluteString]];
+														 
+														 UIImage *cachedImage = [imageManager.imageCache imageFromMemoryCacheForKey:cacheKey];
+														 if (cachedImage) {
+															 // It's in the cache, lets just use it
+															 dispatch_async(dispatch_get_main_queue(), ^{
+																 monochromeImageView.image = cachedImage;
+															 });
+														 } else {
+															 CIFilter *filter = [CIFilter monochromeFilter];
 
-- (void) setImageWithURL: (NSString *) urlString
-{   
-    __weak typeof(self) weakSelf = self;
-    
-    int currentCount = ++self.uniqueCount;
-    
-    [self.colourImageView setImageWithURL: [NSURL URLWithString: urlString]
-                         placeholderImage: nil
-                                  options: SDWebImageRetryFailed | SDWebImageMonochromeVersion
-                                 progress: nil
-                                completed: ^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                    if (weakSelf.uniqueCount == currentCount)
-                                    {
-                                        // Now set out monchrome view as well
-                                        weakSelf.monochromeImageView.image = image.monochromeImage;
-                                        
-                                        if (cacheType != SDImageCacheTypeMemoryMonochrome)
-                                        {
-                                            [UIView animateWithDuration: 0.35f
-                                                                  delay: 0.0f
-                                                                options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
-                                                             animations: ^{
-                                                                 weakSelf.colourImageView.alpha = kCurrentVideoCellAlpha;
-                                                                 weakSelf.monochromeImageView.alpha = kCurrentVideoCellAlpha;
-                                                             }
-                                                             completion: nil];
-                                        }
-                                        else
-                                        {
-                                            weakSelf.colourImageView.alpha = kCurrentVideoCellAlpha;
-                                            weakSelf.monochromeImageView.alpha = kCurrentVideoCellAlpha;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        weakSelf.colourImageView.image = nil;
-                                    }
-
-                                }];
+															 // We don't have it cached so we want to monochrome it
+															 [filter setValue:[CIImage imageWithCGImage:[image CGImage]] forKey:kCIInputImageKey];
+															 
+															 UIImage *monochromeImage = [UIImage imageWithCIImage:[filter outputImage]];
+															 dispatch_async(dispatch_get_main_queue(), ^{
+																 monochromeImageView.image = monochromeImage;
+															 });
+															 
+															 // Now cache it in memory
+															 [imageManager.imageCache storeImage:monochromeImage forKey:cacheKey toDisk:NO];
+														 }
+													 }];
+													 
+													 sself.monochromeOperation = operation;
+													 [operationQueue addOperation:operation];
+												 }];
 }
 
-
-- (void) displayThumbnail: (BOOL) isColour
-{
-    if (isColour)
-    {
-        self.colourImageView.hidden =  FALSE;
-        self.monochromeImageView.hidden = TRUE;
-        self.selectedGlossImageView.hidden = FALSE;
-        self.defaultGlossImageView.hidden = TRUE;
-        self.mainView.alpha = kCurrentVideoCellAlpha;
-    }
-    else
-    {
-        self.colourImageView.hidden =  TRUE;
-        self.monochromeImageView.hidden = FALSE;
-        self.mainView.alpha = kNextPrevVideoCellAlpha;
-        self.selectedGlossImageView.hidden = TRUE;
-        self.defaultGlossImageView.hidden = FALSE;
-    }
+- (void)setSelected:(BOOL)selected {
+	[super setSelected:selected];
+	
+	if (selected) {
+		self.colourImageView.hidden = NO;
+		self.monochromeImageView.hidden = YES;
+	} else {
+		self.colourImageView.hidden = YES;
+		self.monochromeImageView.hidden = NO;
+	}
 }
 
+#pragma mark - Overridden
 
-- (void) setColour: (BOOL) colour
-{
-    [self displayThumbnail: colour];
-    _colour = colour;
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
+	self.titleLabel.font = [UIFont regularCustomFontOfSize:self.titleLabel.font.pointSize];
+	
+	self.colourImageView.hidden = YES;
+	self.monochromeImageView.hidden = NO;
 }
 
-
-// If this cell is going to be re-used, then clear the image and cancel any outstanding operations
-- (void) prepareForReuse
-{
-    // Cancel any ongoing requests
-    [self.colourImageView cancelCurrentImageLoad];
-    
-//    [self.colourImageView.layer removeAllAnimations];
-//    [self.monochromeImageView.layer removeAllAnimations];
-    
-    self.colourImageView.alpha = 0.0f;
-    self.monochromeImageView.alpha = 0.0f;
-    
-    self.colourImageView.image = nil;
-    self.monochromeImageView.image = nil;
-    
-    self.mainView.alpha = kNextPrevVideoCellAlpha;
-    self.colour = NO;
+- (void)prepareForReuse {
+	[super prepareForReuse];
+	
+	self.colourImageView.image = nil;
+	self.monochromeImageView.image = nil;
+	
+	self.colourImageView.hidden = YES;
+	self.monochromeImageView.hidden = NO;
+	
+	[self.downloadOperation cancel];
+	[self.monochromeOperation cancel];
 }
 
-#pragma mark - Monochrome support
+#pragma mark - Private class
 
-+ (dispatch_queue_t) sharedImageProcessingQueue
-{
-    static dispatch_once_t pred;
-    static dispatch_queue_t imageProcessingQueue;
-    
-    dispatch_once(&pred, ^
-                  {
-                      imageProcessingQueue = dispatch_queue_create("com.rockpack.imageprocessing", DISPATCH_QUEUE_SERIAL);
-                  });
-    
-    return imageProcessingQueue;
-}
-
-
-+ (CIFilter *) sharedFilter
-{
-    static dispatch_once_t pred;
-    static CIFilter *filter;
-    
-    dispatch_once(&pred, ^
-                  {
-                      filter = [CIFilter filterWithName: @"CIColorMonochrome"
-                                          keysAndValues: @"inputIntensity", @1.0f,
-                                @"inputColor", [[CIColor alloc] initWithColor: [UIColor whiteColor]],
-                                nil];
-                  });
-    
-    return filter;
++ (NSOperationQueue *)monochromeOperationQueue {
+	static dispatch_once_t onceToken;
+	static NSOperationQueue *operationQueue;
+	dispatch_once(&onceToken, ^{
+		operationQueue = [[NSOperationQueue alloc] init];
+	});
+	return operationQueue;
 }
 
 @end

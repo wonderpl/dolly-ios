@@ -24,7 +24,7 @@
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "SYNOptionsOverlayViewController.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "SYNMasterViewController.h"
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"

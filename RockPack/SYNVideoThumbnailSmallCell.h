@@ -10,15 +10,11 @@
 
 @interface SYNVideoThumbnailSmallCell : UICollectionViewCell
 
-@property (nonatomic, strong) IBOutlet UIImageView *colourImageView;
-@property (nonatomic, strong) IBOutlet UIImageView *monochromeImageView;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
-@property (nonatomic, getter = isColour) BOOL colour;
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
 
 + (UINib *)nib;
++ (NSString *)reuseIdentifier;
 
-//- (void) setVideoImageViewImage: (NSString*) imageURLString;
-
-- (void) setImageWithURL: (NSString *) urlString;
+- (void)setImageWithURL:(NSString *)urlString;
 
 @end

@@ -25,8 +25,8 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "UIButton+WebCache.h"
-#import "UIImageView+WebCache.h"
+#import <UIButton+WebCache.h>
+#import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "VideoInstance.h"
 

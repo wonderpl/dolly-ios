@@ -22,7 +22,7 @@
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "SYNAddToChannelExpandedFlowLayout.h"
 #import "SYNAddToChannelFlowLayout.h"
 #import <QuartzCore/QuartzCore.h>
