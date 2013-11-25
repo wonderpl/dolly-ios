@@ -14,7 +14,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="146" height="116"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="103" userLabel="Image View - Colour">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ze3-Lv-Yub" userLabel="Monochrome Image View">
+                        <rect key="frame" x="0.0" y="0.0" width="146" height="82"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="82" id="hIc-2k-1eV"/>
+                            <constraint firstAttribute="width" constant="146" id="zqG-y0-9G2"/>
+                        </constraints>
+                    </imageView>
+                    <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="103" userLabel="Colour Image View">
                         <rect key="frame" x="0.0" y="0.0" width="146" height="82"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,14 +46,18 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="103" secondAttribute="trailing" id="3Y0-P2-M55"/>
                 <constraint firstItem="103" firstAttribute="leading" secondItem="99" secondAttribute="leading" id="3rf-3S-YgZ"/>
+                <constraint firstItem="Ze3-Lv-Yub" firstAttribute="top" secondItem="99" secondAttribute="top" id="5cA-Vm-jvH"/>
                 <constraint firstAttribute="trailing" secondItem="105" secondAttribute="trailing" id="7GY-kP-lSa"/>
+                <constraint firstAttribute="trailing" secondItem="Ze3-Lv-Yub" secondAttribute="trailing" id="CGe-ob-nSJ"/>
                 <constraint firstItem="105" firstAttribute="leading" secondItem="99" secondAttribute="leading" id="Cwb-2d-jz2"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="105" secondAttribute="bottom" id="ULP-xI-uhj"/>
                 <constraint firstItem="103" firstAttribute="top" secondItem="99" secondAttribute="top" id="XbM-5m-U9k"/>
+                <constraint firstItem="Ze3-Lv-Yub" firstAttribute="leading" secondItem="99" secondAttribute="leading" id="axC-Y2-xYY"/>
                 <constraint firstItem="105" firstAttribute="top" secondItem="103" secondAttribute="bottom" constant="2" id="tzR-2z-nUU"/>
             </constraints>
             <connections>
                 <outlet property="colourImageView" destination="103" id="112"/>
+                <outlet property="monochromeImageView" destination="Ze3-Lv-Yub" id="bT1-GD-7Gy"/>
                 <outlet property="titleLabel" destination="105" id="108"/>
             </connections>
         </collectionViewCell>
