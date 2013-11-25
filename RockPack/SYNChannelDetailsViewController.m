@@ -42,10 +42,10 @@
 #import "SYNSubscribersViewController.h"
 
 #define kHeightChange 70.0f
-#define FULL_NAME_LABEL_IPHONE 120.0f // lower is down
-#define FULL_NAME_LABEL_IPAD_PORTRAIT 213.0f
+#define FULL_NAME_LABEL_IPHONE 235.0f-82.0f // lower is down
+#define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 
-#define FULLNAMELABELIPADLANDSCAPE 210.0f
+#define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
 static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
@@ -182,6 +182,8 @@ UIPopoverControllerDelegate>
                        placeholderImage: placeholderImage
                                 options: SDWebImageRetryFailed];
 
+    self.btnAvatar.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.btnAvatar.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
     [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
     [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
 
@@ -649,6 +651,8 @@ UIPopoverControllerDelegate>
 
 -(void) moveHeader:(CGFloat) offset
 {
+    
+   // NSLog(@"%f", offset);
     if (!self.viewHasAppeared) {
         return;
     }
@@ -676,9 +680,22 @@ UIPopoverControllerDelegate>
     self.txtViewDescription.transform = move;
     self.txtFieldChannelName.transform = move;
     self.viewCirleButtonContainer.transform = move;
-    
+
     [self moveNameLabelWithOffset: offset];
     
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    if (decelerate)
+    {
+        [self moveNameLabelWithOffset:scrollView.contentOffset.y];
+    }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self moveNameLabelWithOffset:scrollView.contentOffset.y];
 }
 
 
@@ -686,26 +703,22 @@ UIPopoverControllerDelegate>
 {
     if (IS_IPHONE)
     {
-        if (offset < FULL_NAME_LABEL_IPHONE)
-        {
-            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
-            //CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
-            //self.fullNameLabel.transform = CGAffineTransformConcat(move, scale);
-//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-//            tmpFrame.size.height = 43;
-//            self.outerViewFullNameLabel.frame = tmpFrame;
-            self.lblFullName.transform = move;
-        }
         
-        if (offset > FULL_NAME_LABEL_IPHONE)
-        {
-            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
-            CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
-//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-//            tmpFrame.size.height = 64;
-//            self.outerViewFullNameLabel.frame = tmpFrame;
-            self.lblFullName.transform = CGAffineTransformConcat(move, scale);
-        }
+        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+        self.lblChannelTitle.transform = move;
+
+//        if (offset < FULL_NAME_LABEL_IPHONE)
+//        {
+//            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+//            self.lblChannelTitle.transform = move;
+//        }
+//
+//        if (offset > FULL_NAME_LABEL_IPHONE)
+//        {
+//            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
+//            CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
+//            self.lblChannelTitle.transform = CGAffineTransformConcat(move, scale);
+//        }
     }
     
     if (IS_IPAD)
@@ -714,13 +727,13 @@ UIPopoverControllerDelegate>
             if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
 
             if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
         }
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
@@ -728,13 +741,13 @@ UIPopoverControllerDelegate>
             if (offset > FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
             
             if (offset<FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
         }
     }
