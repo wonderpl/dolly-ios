@@ -354,6 +354,8 @@ static NSOperationQueue *_sharedNetworkQueue;
                               httpMethod:(NSString*)method
                                      ssl:(BOOL) useSSL {
   
+    
+    
   if(self.hostName == nil) {
     
     DLog(@"Hostname is nil, use operationWithURLString: method to create absolute URL operations");
@@ -399,6 +401,7 @@ static NSOperationQueue *_sharedNetworkQueue;
   MKNetworkOperation *operation = [[self.customOperationSubclass alloc] initWithURLString:urlString params:body httpMethod:method];
   operation.shouldSendAcceptLanguageHeader = self.shouldSendAcceptLanguageHeader;
   
+    
   [self prepareHeaders:operation];
   return operation;
 }

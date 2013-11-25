@@ -29,6 +29,7 @@
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
 #import "SYNAccountSettingsViewController.h"
+#import "UIImage+blur.h"
 
 
 @import QuartzCore;
@@ -123,6 +124,8 @@
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (strong, nonatomic) UIAlertView *unfollowAlertView;
+@property (strong, nonatomic) UIAlertView *followAllAlertView;
 
 
 @end
@@ -307,7 +310,12 @@
     }
     
     [self.navigationController.navigationItem.leftBarButtonItem setTitle:@""];
+ 
+    self.unfollowAlertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
     
+    self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1699,11 +1707,13 @@
     NSString *message = @"Are you sure you want to unfollow";
     message =  [message stringByAppendingString:@" "];
     message =  [message stringByAppendingString:((SYNChannelMidCell*)cell).channel.title];
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+
+    [self.unfollowAlertView setMessage:message];
+    
     self.followCell = ((SYNChannelMidCell*)cell);
     
     if (modeType == modeMyOwnProfile) {
-        [alertView show];
+        [self.unfollowAlertView show];
     }
     else if(modeType == modeOtherUsersProfile)
     {
@@ -1734,8 +1744,11 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:[self yesButtonTitle]])
+    
+    
+    if (alertView == self.unfollowAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
+        
         if (self.followCell.channel != nil)
         {
             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
@@ -1743,6 +1756,19 @@
                                                               userInfo: @{kChannel : self.followCell.channel}];
         }
     }
+    
+    if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
+    {
+     
+        
+        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
+                                                            object: self
+                                                          userInfo: @{kChannelOwner : self.channelOwner}];
+
+    }
+    
+
 }
 
 
@@ -1884,11 +1910,14 @@
 
 -(void) saveTapped
 {
-    NSLog(@"Save profile");
-    [self updateField:@"channelOwnerDescription" forValue:self.aboutMeTextView.text withCompletionHandler:^{
+
+    NSLog(@"Save Tapped");
+    
+    [self updateField:@"description" forValue:self.aboutMeTextView.text withCompletionHandler:^{
         appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
         [appDelegate saveContext: YES];
-
+        [self cancelTapped];
+    
     }];
 //
 //    
@@ -1902,11 +1931,14 @@
 withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 {
     
+    NSLog(@"updateField %@, with value %@", field, newValue);
+    
     [appDelegate.oAuthNetworkEngine changeUserField: field
                                                  forUser: appDelegate.currentUser
                                             withNewValue: newValue
                                        completionHandler: ^(NSDictionary * dictionary){
-//                                           
+
+
 //                                           [self.spinner stopAnimating];
 //                                           self.saveButton.hidden = NO;
 //                                           self.saveButton.enabled = YES;
@@ -1949,9 +1981,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
                                            }
                                        }];
 }
-
-
-
 
 #pragma mark - Text View Delegates
 
@@ -2032,32 +2061,23 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     message =  [message stringByAppendingString:@" "];
     message =  [message stringByAppendingString:self.channelOwner.username];
     
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Follow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    [self.followAllAlertView setMessage:message];
     
     if(modeType == modeOtherUsersProfile)
     {
-        
-        [alertView show];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeToUserRequest
-                                                            object: self
-                                                          userInfo: @{kChannel : self.followCell.channel}];
+        [self.followAllAlertView show];
         
         //Need to refresh the cell
-        if (self.followCell.channel.subscribedByUserValue == YES)
-        {
-            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow All", @"unfollow")];
-        }
-        else
-        {
-            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
-        }
+//        if (self.followCell.channel.channelOwner.subscribedByUserValue == NO)
+//        {
+//            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow All", @"unfollow")];
+//        }
+//        else
+//        {
+//            [self.followCell setFollowButtonLabel:NSLocalizedString(@"UnFollow All", @"follow")];
+//        }
     }
-
-    
-
 }
-
 
 - (void) picker: (SYNImagePickerController *) picker
 finishedWithImage: (UIImage *) image
