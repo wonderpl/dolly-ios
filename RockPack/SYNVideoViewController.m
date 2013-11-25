@@ -54,7 +54,8 @@
 #pragma mark - Public class
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
-	NSString *filename = (IS_IPAD ? @"SYNVideoViewController_ipad" : @"SYNVideoViewController_iphone");
+	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
+	NSString *filename = [NSString stringWithFormat:@"SYNVideoViewController_%@", suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
 	SYNVideoViewController *viewController = [storyboard instantiateInitialViewController];
@@ -302,7 +303,7 @@
 
 - (void)updateVideoDetailsForIndex:(int)index {
 	VideoInstance *videoInstance = self.videoInstances[index];
-
+	
 	if ([videoInstance.channel.channelOwner.displayName length]) {
 		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
 									   placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
@@ -310,7 +311,7 @@
 	} else {
 		self.channelThumbnailImageView.image = nil;
 	}
-
+	
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
 	self.channelOwnerLabel.text = ([channelOwnerName length] ? [NSString stringWithFormat: @"By %@", channelOwnerName] : @"");
 	self.channelTitleLabel.text = videoInstance.channel.title;
