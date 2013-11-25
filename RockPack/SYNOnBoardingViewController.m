@@ -7,6 +7,8 @@
 //
 
 #import "SYNOnBoardingViewController.h"
+#import "SYNOnBoardingCell.h"
+#import "SYNOnBoardingHeader.h"
 
 @interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -53,5 +55,7 @@
 {
     
 }
+
+
 
 @end
