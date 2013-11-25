@@ -145,8 +145,7 @@
 }
 
 
-- (NSInteger)	tableView: (UITableView *) tableView
-  numberOfRowsInSection: (NSInteger) section
+- (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section
 {
     return _notifications ? _notifications.count : 0;
 }
