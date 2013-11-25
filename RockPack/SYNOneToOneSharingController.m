@@ -21,7 +21,7 @@
 #import "SYNOneToOneSharingController.h"
 #import "SYNOneToOneSharingFriendCell.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "SYNMasterViewController.h"
 #import "VideoInstance.h"
 #import <objc/runtime.h>

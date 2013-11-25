@@ -10,7 +10,7 @@
 #import "SYNAvatarButton.h"
 #import "SYNSocialActionsDelegate.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 
 @import UIKit;
 
@@ -31,7 +31,6 @@
 @property (nonatomic, strong) NSDictionary *strongTextAttributes;
 @property (nonatomic, strong) NSDictionary *lightCenteredTextAttributes;
 @property (nonatomic, strong) NSDictionary *strongCenteredTextAttributes;
-@property (nonatomic, strong) NSMutableArray *stringButtonsArray;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
 @end

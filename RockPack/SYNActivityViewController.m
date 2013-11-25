@@ -12,7 +12,7 @@
 #import "SYNNotificationsTableViewCell.h"
 #import "SYNActivityViewController.h"
 #import "SYNNotification.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "Video.h"
 #import <QuartzCore/QuartzCore.h>
 

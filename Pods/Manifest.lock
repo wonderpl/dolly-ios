@@ -4,6 +4,9 @@ PODS:
     - Reachability (~> 3.1.0)
   - Ooyala (1.5.1)
   - Reachability (3.1.1)
+  - SDWebImage (3.5):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.5)
   - SSKeychain (0.2.1)
 
 DEPENDENCIES:
@@ -11,6 +14,7 @@ DEPENDENCIES:
   - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`, branch `cocoapods`)
   - Ooyala
   - Reachability
+  - SDWebImage
   - SSKeychain (~> 0.2.1)
 
 EXTERNAL SOURCES:
@@ -23,6 +27,7 @@ SPEC CHECKSUMS:
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
   Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  SDWebImage: f1a72472f8a2d54445f1fedafe2090593d9caf7f
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
 
 COCOAPODS: 0.28.0

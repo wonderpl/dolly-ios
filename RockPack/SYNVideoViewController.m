@@ -22,11 +22,12 @@
 #import "SYNNetworkOperationJsonObject.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNDeviceManager.h"
+#import "ChannelCover.h"
 #import "SYNFullScreenVideoAnimator.h"
 #import "SYNFullScreenVideoViewController.h"
+#import "SYNButton.h"
+#import <UIImageView+WebCache.h>
 #import <Appirater.h>
-
-static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThumbnailSmallCell";
 
 @interface SYNVideoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
 
@@ -40,17 +41,11 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 @property (nonatomic, strong) IBOutlet UICollectionView *thumbnailCollectionView;
 
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *likeActivityIndicator;
-@property (nonatomic, strong) IBOutlet UILabel *likesLabel;
-@property (nonatomic, strong) IBOutlet UIButton *likeButton;
+@property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
-
-@property (nonatomic, strong) IBOutlet UIView *videoUIContainerView;
-
-@property (nonatomic, assign) NSInteger currentIndex;
 
 @end
 
@@ -81,29 +76,25 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 												   object:nil];
 	}
 	
-	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:12.0f];
-	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:10.0f];
-	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:13.0f];
-    self.likesLabel.font = [UIFont lightCustomFontOfSize:self.likesLabel.font.pointSize];
+	self.channelThumbnailImageView.layer.cornerRadius = CGRectGetWidth(self.channelThumbnailImageView.frame) / 2.0;
+	self.channelThumbnailImageView.layer.masksToBounds = YES;
 	
+	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:self.channelTitleLabel.font.pointSize];
+	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:self.channelOwnerLabel.font.pointSize];
+	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
+
 	UINib *videoThumbnailCellNib = [SYNVideoThumbnailSmallCell nib];
 	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
-				   forCellWithReuseIdentifier:SYNVideoThumbnailSmallCellReuseIdentifier];
-	
+				   forCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]];
+
 	[self playVideoAtIndex:self.selectedIndex];
 }
 
-- (void)deviceOrientationChanged:(NSNotification *)notification {
-	UIDevice *device = [notification object];
-	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
 	
-	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
-		[self videoPlayerMinimise];
-	}
-	
-	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
-		[self videoPlayerMaximise];
-	}
+	// Invalidate the layout so the section insets are recalculated when returning from full screen video
+	[self.thumbnailCollectionView.collectionViewLayout invalidateLayout];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -148,14 +139,13 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SYNVideoThumbnailSmallCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SYNVideoThumbnailSmallCellReuseIdentifier
+    SYNVideoThumbnailSmallCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]
                                                                                  forIndexPath:indexPath];
     
     VideoInstance *videoInstance = self.videoInstances[indexPath.item];
     
     cell.titleLabel.text = videoInstance.title;
-	cell.colour = (indexPath.row == self.selectedIndex);
-    cell.imageWithURL = videoInstance.video.thumbnailURL;
+	[cell setImageWithURL:videoInstance.video.thumbnailURL];
     
     return cell;
 }
@@ -224,7 +214,7 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {
 	SYNAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
-	VideoInstance *videoInstance = self.videoInstances[self.currentIndex];
+	VideoInstance *videoInstance = self.videoInstances[self.selectedIndex];
 
 	[appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId:videoInstance.uniqueId
 													   errorDescription:reason
@@ -273,6 +263,21 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 	[self playNextVideo];
 }
 
+#pragma mark - Notifications
+
+- (void)deviceOrientationChanged:(NSNotification *)notification {
+	UIDevice *device = [notification object];
+	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+	
+	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
+		[self videoPlayerMinimise];
+	}
+	
+	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
+		[self videoPlayerMaximise];
+	}
+}
+
 #pragma mark - Private
 
 - (void)playVideoAtIndex:(NSInteger)index {
@@ -296,16 +301,23 @@ static NSString *const SYNVideoThumbnailSmallCellReuseIdentifier = @"SYNVideoThu
 }
 
 - (void)updateVideoDetailsForIndex:(int)index {
-    VideoInstance *videoInstance = self.videoInstances[index];
-	
+	VideoInstance *videoInstance = self.videoInstances[index];
+
+	if ([videoInstance.channel.channelOwner.displayName length]) {
+		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
+									   placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
+												options:SDWebImageRetryFailed];
+	} else {
+		self.channelThumbnailImageView.image = nil;
+	}
+
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
-	
 	self.channelOwnerLabel.text = ([channelOwnerName length] ? [NSString stringWithFormat: @"By %@", channelOwnerName] : @"");
-    self.channelTitleLabel.text = videoInstance.channel.title;
-    self.videoTitleLabel.text = videoInstance.title;
-    self.likeButton.selected = videoInstance.starredByUserValue;
-    self.likesLabel.text = [videoInstance.video.starCount stringValue];
-    
+	self.channelTitleLabel.text = videoInstance.channel.title;
+	self.videoTitleLabel.text = videoInstance.title;
+	self.likeButton.selected = videoInstance.starredByUserValue;
+	[self.likeButton setTitle:@"likes" andCount:[videoInstance.video.starCount integerValue]];
+	
 //	[self refreshAddbuttonStatus:nil];
 }
 

@@ -30,17 +30,22 @@
 #import "SYNCollectionVideoCell.h"
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNAvatarButton.h"
 #import "SYNUsersViewController.h"
-#import "UIButton+WebCache.h"
+#import <UIButton+WebCache.h>
 #import "objc/runtime.h"
 #import "SYNSubscribersViewController.h"
 
 #define kHeightChange 70.0f
+#define FULL_NAME_LABEL_IPHONE 120.0f // lower is down
+#define FULL_NAME_LABEL_IPAD_PORTRAIT 213.0f
+
+#define FULLNAMELABELIPADLANDSCAPE 210.0f
+
 
 static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
@@ -95,7 +100,12 @@ UIPopoverControllerDelegate>
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (strong, nonatomic) IBOutlet UIView *viewCirleButtonContainer;
+@property (strong, nonatomic) IBOutlet UIView *viewFollowAndVideoContainer;
 @property (nonatomic) CGPoint tempContentOffset;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
+
 @end
 
 
@@ -194,16 +204,11 @@ UIPopoverControllerDelegate>
 
     [self setUpMode];
 
-    
-    [self displayChannelDetails];
+    //not used yet
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+    self.activityIndicator.frame = self.view.frame;
 
-    self.viewHasAppeared = NO;
-  //  self.tempContentOffset = CGPointMake(0, -520);
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = YES;
-//    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    [self displayChannelDetails];
 
     //programmatically seting the edgeinset for iphone and ipad
     //Not able to set within the nib
@@ -325,11 +330,21 @@ UIPopoverControllerDelegate>
 
     
     
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+    
+//    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor blackColor];
+
 
     [self.videoThumbnailCollectionView reloadData];
-  //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];
-}
+  //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
+    
+    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+    
+    
 
+    
+}
 
 - (void) viewWillDisappear: (BOOL) animated
 {
@@ -390,6 +405,8 @@ UIPopoverControllerDelegate>
     }
 
     
+    [self setUpMode];
+
     
 }
 
@@ -410,9 +427,36 @@ UIPopoverControllerDelegate>
         [self editMode];
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
-
     }
+    else if (self.mode == kChannelDetailsFavourites)
+    {
+        
+        if(IS_IPHONE)
+        {
+            self.btnEditChannel.hidden = YES;
+            self.btnFollowChannel.hidden = YES;
+            
+            [self moveView:self.btnShareChannel withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowVideos withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            [self moveView:self.btnShowFollowers withX:-50];
+            
+            [self centreView:self.btnShareChannel];
+        }
+    }
+}
+
+-(void) moveView:(UIView*) movingView withX: (CGFloat) x
+{
+
+    CGRect tmpFrame;
     
+    tmpFrame = movingView.frame;
+    tmpFrame.origin.x -= 100;
+    movingView.frame = tmpFrame;
     
 }
 
@@ -451,8 +495,6 @@ UIPopoverControllerDelegate>
     [[self.txtViewDescription layer] setBorderWidth:1.0];
     [[self.txtViewDescription layer] setCornerRadius:0];
     
-    
-    
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
                         forCellWithReuseIdentifier: CollectionVideoCellName];
     
@@ -464,12 +506,15 @@ UIPopoverControllerDelegate>
                         forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                                withReuseIdentifier: @"SYNChannelFooterMoreView"];
     
-    
     self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
     
     self.lblChannelTitle.text = self.channel.title;
     self.lblDescription.text = self.channel.channelDescription;
+    
+    NSLog(@"CHAN DES: %@", self.channel.channelDescription);
+    
+    
     self.txtViewDescription.text = self.lblDescription.text;
     
     [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
@@ -559,7 +604,12 @@ UIPopoverControllerDelegate>
 -(void) setUpFollowButton
 {
     self.btnFollowChannel.title = @"";
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
     
     
     
@@ -592,9 +642,9 @@ UIPopoverControllerDelegate>
     }
     
     if (IS_IPHONE ) {
-        offset *=2;
+       // offset *=2;
         //iphone port
-        offset +=840;
+        offset +=420;
     }
     
     if (IS_IPAD) {
@@ -606,17 +656,76 @@ UIPopoverControllerDelegate>
     
     self.viewProfileContainer.transform = move;
     self.btnAvatar.transform = move;
-    self.btnShowFollowers.transform = move;
-    self.btnShowVideos.transform =move;
-    self.btnFollowChannel.transform = move;
-    self.btnEditChannel.transform =move;
-    self.btnShareChannel.transform = move;
+    self.viewCirleButtonContainer.transform = move;
     self.lblNoVideos.transform = move;
     self.viewCollectionSeperator.transform = move;
+    self.viewFollowAndVideoContainer.transform = move;
     self.btnDeleteChannel.transform = move;
     self.txtViewDescription.transform = move;
     self.txtFieldChannelName.transform = move;
+    self.viewCirleButtonContainer.transform = move;
     
+    [self moveNameLabelWithOffset: offset];
+    
+}
+
+
+-(void) moveNameLabelWithOffset :(CGFloat) offset
+{
+    if (IS_IPHONE)
+    {
+        if (offset < FULL_NAME_LABEL_IPHONE)
+        {
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+            //CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
+            //self.fullNameLabel.transform = CGAffineTransformConcat(move, scale);
+//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
+//            tmpFrame.size.height = 43;
+//            self.outerViewFullNameLabel.frame = tmpFrame;
+            self.lblFullName.transform = move;
+        }
+        
+        if (offset > FULL_NAME_LABEL_IPHONE)
+        {
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
+            CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
+//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
+//            tmpFrame.size.height = 64;
+//            self.outerViewFullNameLabel.frame = tmpFrame;
+            self.lblFullName.transform = CGAffineTransformConcat(move, scale);
+        }
+    }
+    
+    if (IS_IPAD)
+    {
+        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
+            if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+                self.lblFullName.transform = move;
+            }
+
+            if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
+                self.lblFullName.transform = move;
+            }
+        }
+        else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
+        {
+            if (offset > FULLNAMELABELIPADLANDSCAPE)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
+                self.lblFullName.transform = move;
+            }
+            
+            if (offset<FULLNAMELABELIPADLANDSCAPE)
+            {
+                CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
+                self.lblFullName.transform = move;
+            }
+        }
+    }
 }
 
 #pragma mark - Tab View Methods
@@ -625,6 +734,7 @@ UIPopoverControllerDelegate>
 {
     self.originalChannel = channel;
     
+    NSLog(@"%@",    channel.channelDescription);
     
     NSError *error = nil;
     
@@ -693,6 +803,7 @@ UIPopoverControllerDelegate>
         }
     }
     
+
     if (self.channel)
     {
         // check for subscribed
@@ -720,7 +831,7 @@ UIPopoverControllerDelegate>
                                                      name: NSManagedObjectContextDidSaveNotification
                                                    object: self.channel.managedObjectContext];
         
-        if (self.mode == kChannelDetailsModeDisplay || self.mode == kChannelDetailsModeDisplayUser)
+        if (self.mode == kChannelDetailsModeDisplay || self.mode == kChannelDetailsModeDisplayUser || self.mode == kChannelDetailsFavourites)
         {
             
             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
@@ -728,6 +839,7 @@ UIPopoverControllerDelegate>
                                                               userInfo: @{kChannel: self.channel}];
         }
     }
+    
     
     
 }
@@ -1011,7 +1123,9 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             
-                       // [self centreAllUi];
+                        [self centreAllUi];
+            
+        
         }
         else
         {
@@ -1019,21 +1133,30 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             
-         //   [self centreAllUi];
+            [self centreAllUi];
             
         }
     }
 }
 
+-(void) centreView : (UIView*) viewToCentre
+{
+    
+    CGPoint tmpPoint;
+    tmpPoint = viewToCentre.center;
+    tmpPoint.x = self.view.center.x;
+    viewToCentre.center = tmpPoint;
+
+}
+
+
 
 -(void) centreAllUi
 {
-    CGRect tmpRect;
-    tmpRect = self.lblChannelTitle.frame;
-    tmpRect.origin.x = self.view.window.frame.size.width/2 - tmpRect.size.width - 45;
-    self.lblChannelTitle.frame = tmpRect;
-    
-    
+
+    [self centreView:self.btnAvatar];
+//    [self centreView:self.lblNoVideos];
+//    [self centreView:self.viewProfileContainer];
     
 }
 
@@ -1333,13 +1456,17 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnFollowChannel.hidden = NO;
     self.btnEditChannel.hidden = NO;
     self.btnShareChannel.hidden = NO;
+    self.viewCirleButtonContainer.hidden = NO;
+    self.viewFollowAndVideoContainer.hidden = NO;
+    self.lblFullName.hidden = NO;
     
     
     //edit mode
     self.btnDeleteChannel.hidden = YES;
     self.txtFieldChannelName.hidden = YES;
     self.txtViewDescription.hidden = YES;
-    
+
+
     
     self.viewProfileContainer.alpha = 0.0f;
     self.btnAvatar.alpha = 0.0f;
@@ -1348,7 +1475,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnFollowChannel.alpha = 0.0f;
     self.btnEditChannel.alpha = 0.0f;
     self.btnShareChannel.alpha = 0.0f;
-    
+    self.lblFullName.alpha = 0.0f;
     [UIView animateWithDuration:0.4 animations:^{
         
         self.viewProfileContainer.alpha = 1.0f;
@@ -1358,6 +1485,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         self.btnFollowChannel.alpha = 1.0f;
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
+        self.lblFullName.alpha = 1.0f;
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
@@ -1381,7 +1509,9 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnFollowChannel.hidden = YES;
     self.btnEditChannel.hidden = YES;
     self.btnShareChannel.hidden = YES;
-    
+    self.viewCirleButtonContainer.hidden = YES;
+    self.viewFollowAndVideoContainer.hidden = YES;
+    self.lblFullName.hidden = YES;
     
     //edit mode
     self.btnDeleteChannel.hidden = NO;
@@ -1391,6 +1521,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.txtFieldChannelName.alpha = 0.0f;
     self.txtViewDescription.alpha = 0.0f;
     self.lblNoVideos.hidden = YES;
+    
     [UIView animateWithDuration:0.4 animations:^{
         self.btnDeleteChannel.alpha = 1.0f;
         self.txtFieldChannelName.alpha = 1.0f;
@@ -1767,7 +1898,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //
     //    self.saveChannelButton.enabled = NO;
     //    self.deleteChannelButton.enabled = YES;
-    //    [self.activityIndicator startAnimating];
+        [self.activityIndicator startAnimating];
     //
     //    [self hideCategoryChooser];
     //
@@ -1776,6 +1907,9 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //    NSString *category = [self categoryIdStringForServiceCall];
     //
     //    NSString *cover = [self coverIdStringForServiceCall];
+    
+    
+    NSLog(@"save the des :%@", self.txtViewDescription.text );
     
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
@@ -1850,12 +1984,16 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                                   //                                                  self.saveChannelButton.enabled = YES;
                                                   //                                                  self.deleteChannelButton.hidden = NO;
                                                   //                                                  self.deleteChannelButton.enabled = YES;
-                                                  //                                                  [self.activityIndicator stopAnimating];
+                                                                                                    [self.activityIndicator stopAnimating];
                                                   //                                                  [self.activityIndicator stopAnimating];
                                               }];
     
-    [self cancelTapped];
     
+    
+    
+    [self performSelector:@selector(cancelTapped) withObject:nil afterDelay:0.4f];
+    
+    //[self cancelTapped];
     
 }
 

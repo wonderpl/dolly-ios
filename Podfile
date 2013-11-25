@@ -5,4 +5,5 @@ pod 'MKNetworkKit',	:git => 'https://github.com/rockpack/MKNetworkKit.git', :bra
 pod 'SSKeychain', 	'~> 0.2.1'
 pod 'Appirater'
 pod 'Ooyala'
+pod 'SDWebImage'
 

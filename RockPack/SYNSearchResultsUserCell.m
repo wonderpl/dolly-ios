@@ -8,7 +8,7 @@
 
 #import "SYNSearchResultsUserCell.h"
 #import "UIFont+SYNFont.h"
-#import "UIButton+WebCache.h"
+#import <UIButton+WebCache.h>
 #import "Friend.h"
 #import <QuartzCore/QuartzCore.h>
 

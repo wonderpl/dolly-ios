@@ -22,9 +22,7 @@
 {
     // Customise fonts
     self.actionButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.actionButton.titleLabel.font.pointSize];
-
-    self.stringButtonsArray = [[NSMutableArray alloc] initWithCapacity: STANDARD_BUTTON_CAPACITY];
-    
+	
     // == Attributes == //
     
     NSMutableParagraphStyle *paragrapStyle = [[NSMutableParagraphStyle alloc] init];

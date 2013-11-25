@@ -11,7 +11,7 @@
 #import "SYNFacebookManager.h"
 #import "ChannelOwner.h"
 #import "SYNSearchResultsUserCell.h"
-#import "UIImageView+WebCache.h"
+#import <UIImageView+WebCache.h>
 #import "SYNAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "SYNOAuthNetworkEngine.h"
