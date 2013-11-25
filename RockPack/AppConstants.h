@@ -529,8 +529,6 @@ typedef enum : NSInteger
 #define kNoteTopRightControlsShow   @"kNoteTopRightControlsShow"
 #define kNoteTopRightControlsHide   @"kNoteTopRightControlsHide"
 
-#define kNoteAllNavControlsShow     @"kNoteAllNavControlsShow"
-#define kNoteAllNavControlsHide     @"kNoteAllNavControlsHide"
 #define kNoteHideTitleAndDots       @"kNoteAllHideTitleAndDots"
 
 #define kChannelsNavControlsHide    @"kChannelsNavControlsHide"

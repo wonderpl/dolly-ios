@@ -1304,9 +1304,6 @@ referenceSizeForFooterInSection: (NSInteger) section
                                               
                                               self.mode = kChannelDetailsModeDisplay;
                                               
-                                              [[NSNotificationCenter defaultCenter]  postNotificationName: kNoteAllNavControlsShow
-                                                                                                   object: self
-                                                                                                 userInfo: nil];
                                               
                                               //                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
                                               
@@ -1323,9 +1320,6 @@ referenceSizeForFooterInSection: (NSInteger) section
                                               //                                              [self	  showError: NSLocalizedString(@"Could not retrieve the uploaded channel data. Please try accessing it from your profile later.", nil)
                                               //                                                 showErrorTitle: @"Error"];
                                               
-                                              [[NSNotificationCenter defaultCenter]  postNotificationName: kNoteAllNavControlsShow
-                                                                                                   object: self
-                                                                                                 userInfo: nil];
                                               
                                               //                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
                                               
@@ -1845,9 +1839,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 - (void) deleteChannel
 {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsShow
-                                                        object: self
-                                                      userInfo: nil];
     
     // return to previous screen as if the back button tapped
     
@@ -1915,8 +1906,11 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //    NSString *cover = [self coverIdStringForServiceCall];
     
     
-    NSLog(@"save the des :%@", self.txtViewDescription.text );
-    
+//    NSLog(@"save the des :%@", self.txtViewDescription.text );
+//    
+//    NSLog(@"title %@", self.lblChannelTitle.text);
+//    NSLog(@"-----------------");
+//    NSLog(@"-----------------");
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
                                                      title: self.txtFieldChannelName.text
@@ -1949,9 +1943,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                              [self setVideosForChannelById: channelId //  2nd step of the creation process
                                                                  isUpdated: YES];
                                              
-                                             [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsShow
-                                                                                                 object: self
-                                                                                               userInfo: nil];
                                              
                                              // this block will also call the [self getChanelById:channelId isUpdated:YES] //
                                          }
