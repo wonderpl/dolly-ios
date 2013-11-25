@@ -1157,6 +1157,25 @@
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
 
+            
+            //scaling
+            if (offset<0)
+            {
+                //Scale the cover phote in iphone
+                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
+                
+                self.coverImage.transform = scale;
+                self.backgroundView.transform = move;
+            }
+            else
+            {
+                //parallaxing
+                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, -offset/PARALLAX_SCROLL_VALUE);
+                self.coverImage.transform = moveCoverImage;
+                self.backgroundView.transform = move;
+                
+            }
+
             [self moveNameLabelWithOffset:offset];
         }
     }

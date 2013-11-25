@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNProfileRootViewController">
             <connections>
                 <outlet property="aboutMeTextView" destination="uAO-BP-yje" id="SLn-Q5-J2u"/>
+                <outlet property="backgroundView" destination="Xag-gG-bYh" id="KWz-yN-4sR"/>
                 <outlet property="channelLayoutIPad" destination="XH1-bA-kHd" id="YF5-u3-Kj0"/>
                 <outlet property="channelThumbnailCollectionView" destination="MS7-tW-0TH" id="JAi-QX-iX9"/>
                 <outlet property="collectionsTabButton" destination="ylf-0F-Wru" id="Zoj-al-39U"/>
@@ -34,6 +35,18 @@
             <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
             <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverImageTest.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Oe-3pp">
+                    <rect key="frame" x="-123" y="0.0" width="917" height="502"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xag-gG-bYh" userLabel="View - background view">
+                    <rect key="frame" x="0.0" y="502" width="671" height="502"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="502" id="du0-k4-1lq"/>
+                    </constraints>
+                </view>
                 <collectionView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0td-Z3-eno">
                     <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -66,10 +79,6 @@
                         <outlet property="delegate" destination="-1" id="s7b-h4-zad"/>
                     </connections>
                 </collectionView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverImageTest.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Oe-3pp">
-                    <rect key="frame" x="0.0" y="0.0" width="671" height="502"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxB-NR-Hkw" userLabel="Button - More button">
                     <rect key="frame" x="615" y="502" width="56" height="56"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -256,14 +265,16 @@
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="top" constant="30" id="3wc-Vp-WIm"/>
                 <constraint firstItem="R50-Sy-iTx" firstAttribute="centerX" secondItem="jew-YX-wj4" secondAttribute="centerX" id="7BM-30-9RH"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="7h7-FP-c93"/>
+                <constraint firstItem="NLw-Oe-3pp" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" id="842-GD-Erx"/>
+                <constraint firstItem="Xag-gG-bYh" firstAttribute="leading" secondItem="jew-YX-wj4" secondAttribute="leading" id="EhR-ep-yeC"/>
                 <constraint firstItem="R50-Sy-iTx" firstAttribute="centerY" secondItem="0td-Z3-eno" secondAttribute="centerY" id="F4Y-2a-UYZ"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="jew-YX-wj4" secondAttribute="leading" id="GAA-en-Qie"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="top" secondItem="0td-Z3-eno" secondAttribute="top" id="Hdi-Xu-dOa"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-34" id="K3l-6A-Van"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="top" secondItem="1" secondAttribute="top" id="KQc-dV-JP4"/>
-                <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="uxB-NR-Hkw" secondAttribute="trailing" id="LU7-5S-iUd"/>
-                <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="0td-Z3-eno" secondAttribute="trailing" id="PRg-8p-DeQ"/>
+                <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="uxB-NR-Hkw" secondAttribute="trailing" constant="123" id="LU7-5S-iUd"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="centerX" secondItem="XoE-Jb-ERN" secondAttribute="centerX" id="Phy-pf-Dbs"/>
+                <constraint firstItem="Xag-gG-bYh" firstAttribute="top" secondItem="uxB-NR-Hkw" secondAttribute="top" id="QUD-cx-WtI"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Rtq-Gd-Rnj"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="bottom" secondItem="jew-YX-wj4" secondAttribute="bottom" constant="-10" id="TxL-pY-bsq"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="VGj-qv-A8K"/>
@@ -276,10 +287,10 @@
                 <constraint firstItem="0td-Z3-eno" firstAttribute="centerY" secondItem="uxB-NR-Hkw" secondAttribute="centerY" constant="-28" id="gbi-nM-5re"/>
                 <constraint firstAttribute="bottom" secondItem="MS7-tW-0TH" secondAttribute="bottom" id="kQy-8n-9mG"/>
                 <constraint firstAttribute="trailing" secondItem="MS7-tW-0TH" secondAttribute="trailing" constant="-1" id="lqb-rC-a4P"/>
-                <constraint firstItem="NLw-Oe-3pp" firstAttribute="leading" secondItem="MS7-tW-0TH" secondAttribute="leading" id="nTQ-TI-1hq"/>
                 <constraint firstItem="w5q-qP-bHl" firstAttribute="centerX" secondItem="jew-YX-wj4" secondAttribute="centerX" id="ooi-sQ-IG0"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="0td-Z3-eno" secondAttribute="leading" id="oqw-vP-LPj"/>
                 <constraint firstItem="uxB-NR-Hkw" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" id="pkd-xG-IdV"/>
+                <constraint firstItem="Xag-gG-bYh" firstAttribute="width" secondItem="0td-Z3-eno" secondAttribute="width" id="rSB-z5-MLK"/>
                 <constraint firstAttribute="trailing" secondItem="0td-Z3-eno" secondAttribute="trailing" id="vU3-L6-mRq"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
@@ -288,7 +299,6 @@
     </objects>
     <resources>
         <image name="ButtonMore.png" width="56" height="56"/>
-        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="coverImageTest.jpg" width="917" height="513"/>
     </resources>
