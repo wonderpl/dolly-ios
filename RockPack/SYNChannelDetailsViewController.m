@@ -1467,6 +1467,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.viewFollowAndVideoContainer.hidden = NO;
     self.lblFullName.hidden = NO;
     
+        self.lblChannelTitle. hidden = NO;
     //edit mode
     self.btnDeleteChannel.hidden = YES;
     self.txtFieldChannelName.hidden = YES;
@@ -1482,6 +1483,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnEditChannel.alpha = 0.0f;
     self.btnShareChannel.alpha = 0.0f;
     self.lblFullName.alpha = 0.0f;
+    self.lblChannelTitle.alpha = 0.0f;
+
     [UIView animateWithDuration:0.4 animations:^{
         
         self.viewProfileContainer.alpha = 1.0f;
@@ -1492,6 +1495,8 @@ referenceSizeForFooterInSection: (NSInteger) section
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
         self.lblFullName.alpha = 1.0f;
+        self.lblChannelTitle.alpha = 1.0f;
+
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
@@ -1518,7 +1523,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.viewCirleButtonContainer.hidden = YES;
     self.viewFollowAndVideoContainer.hidden = YES;
     self.lblFullName.hidden = YES;
-    
+    self.lblChannelTitle. hidden = YES;
     //edit mode
     self.btnDeleteChannel.hidden = NO;
     self.txtFieldChannelName.hidden = NO;
