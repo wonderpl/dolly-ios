@@ -1475,7 +1475,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
       
       jsonDecompressionHandler(returnValue);
         
-        NSLog(@"%@", returnValue);
+       // NSLog(@"%@", returnValue);
         
         
     });

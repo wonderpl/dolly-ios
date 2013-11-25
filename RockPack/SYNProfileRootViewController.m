@@ -1173,7 +1173,6 @@
             self.coverImage.transform = move;
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
-            self.followersCountButton.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
 
