@@ -938,6 +938,10 @@
 
 - (void) scrollViewWillBeginDragging: (UIScrollView *) scrollView
 {
+    if (scrollView.contentOffset.y<0) {
+        return;
+    }
+
     self.startDraggingPoint = scrollView.contentOffset;
     self.startDate = [NSDate date];
 }
@@ -945,6 +949,10 @@
 
 - (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate
 {
+    if (scrollView.contentOffset.y<0) {
+        return;
+    }
+
     self.endDraggingPoint = scrollView.contentOffset;
     self.endDate = [NSDate dateWithTimeIntervalSinceNow: self.startDate.timeIntervalSinceNow];
     [self shouldHideTabBar];
@@ -953,6 +961,11 @@
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
+    
+    if (scrollView.contentOffset.y<0) {
+        return;
+    }
+    
     if (self.lastContentOffset > scrollView.contentOffset.y)
     {
         self.scrollDirection = ScrollingDirectionUp;
