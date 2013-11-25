@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNSocialActionsDelegate.h"
+#import "SYNAvatarButton.h"
 
 @interface SYNOnBoardingCell : UICollectionViewCell
 
-@property (nonatomic, strong) IBOutlet UIImageView* imageView;
+@property (nonatomic, strong) IBOutlet SYNAvatarButton* avatarButton;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* descriptionLabel;
 
 @property (nonatomic, strong) IBOutlet UIButton* followButton;
+
+@property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
 @end

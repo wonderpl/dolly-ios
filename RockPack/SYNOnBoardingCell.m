@@ -7,14 +7,41 @@
 //
 
 #import "SYNOnBoardingCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SYNOnBoardingCell
 
 - (void) awakeFromNib
 {
+    // round of
     
 }
 
-
+- (void) setDelegate:(id<SYNSocialActionsDelegate>)delegate
+{
+    if(_delegate)
+    {
+        [self.followButton removeTarget: _delegate
+                                 action: @selector(followControlPressed:)
+                       forControlEvents: UIControlEventTouchUpInside];
+        
+        [self.followButton removeTarget: _delegate
+                                 action: @selector(profileButtonTapped:)
+                       forControlEvents: UIControlEventTouchUpInside];
+    }
+    
+    _delegate = delegate;
+    
+    if(_delegate)
+    {
+        [self.followButton addTarget: _delegate
+                              action: @selector(followControlPressed:)
+                    forControlEvents: UIControlEventTouchUpInside];
+        
+        [self.followButton addTarget: _delegate
+                              action: @selector(profileButtonTapped:)
+                    forControlEvents: UIControlEventTouchUpInside];
+    }
+}
 
 @end

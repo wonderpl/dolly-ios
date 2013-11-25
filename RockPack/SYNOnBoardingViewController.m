@@ -9,6 +9,7 @@
 #import "SYNOnBoardingViewController.h"
 #import "SYNOnBoardingCell.h"
 #import "SYNOnBoardingHeader.h"
+#import "ChannelOwner.h"
 
 @interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -26,6 +27,9 @@
     [super viewDidLoad];
     
     self.title = @"Welcome";
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"SYNOnBoardingCell" bundle:nil]
+          forCellWithReuseIdentifier:@"SYNOnBoardingCells"];
     
     self.data = @[]; // so as not to throw error when accessed
     
@@ -48,13 +52,42 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    return nil;
+    SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNOnBoardingCells"
+                                                                        forIndexPath: indexPath];
+    
+    ChannelOwner* co = (ChannelOwner*)self.data[indexPath.row];
+    
+    cell.titleLabel.text = co.displayName;
+    
+    
+    cell.delegate = self;
+    
+    return cell;
 }
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
+    
+    
 }
+
+#pragma mark - Social Delegate
+
+- (void) followControlPressed: (SYNSocialButton *) socialButton
+{
+    
+    
+    
+}
+
+
+- (void) shareControlPressed: (SYNSocialButton *) socialButton
+{;}
+- (void) likeControlPressed: (SYNSocialButton *) socialButton
+{;}
+- (void) addControlPressed: (SYNSocialButton *) socialButton
+{;}
 
 
 

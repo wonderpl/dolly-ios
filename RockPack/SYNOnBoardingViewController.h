@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNSocialActionsDelegate.h"
 
-@interface SYNOnBoardingViewController : UIViewController
+@interface SYNOnBoardingViewController : UIViewController <SYNSocialActionsDelegate>
 
 @end
