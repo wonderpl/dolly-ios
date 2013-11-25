@@ -42,7 +42,7 @@
 #import "SYNSubscribersViewController.h"
 
 #define kHeightChange 70.0f
-#define FULL_NAME_LABEL_IPHONE 235.0f-82.0f // lower is down
+#define FULL_NAME_LABEL_IPHONE 149.0f
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
@@ -170,9 +170,6 @@ UIPopoverControllerDelegate>
     
     UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
     
-    NSLog(@"Image size width:%f, height %f", placeholderImage.size.width, placeholderImage.size.height);
-    
-    // TODO: Place holder image not scaling, get bigger placeholder image can fix
     
     [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
     [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
@@ -184,8 +181,8 @@ UIPopoverControllerDelegate>
 
     self.btnAvatar.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     self.btnAvatar.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
-    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
-    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
+//    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
+//    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
 
     
     if (IS_IPHONE)
@@ -525,9 +522,6 @@ UIPopoverControllerDelegate>
     self.lblChannelTitle.text = self.channel.title;
     self.lblDescription.text = self.channel.channelDescription;
     
-   // NSLog(@"CHAN DES: %@", self.channel.channelDescription);
-    
-    
     self.txtViewDescription.text = self.lblDescription.text;
     
     [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
@@ -652,7 +646,6 @@ UIPopoverControllerDelegate>
 -(void) moveHeader:(CGFloat) offset
 {
     
-   // NSLog(@"%f", offset);
     if (!self.viewHasAppeared) {
         return;
     }
@@ -685,18 +678,19 @@ UIPopoverControllerDelegate>
     
 }
 
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-    if (decelerate)
-    {
-        [self moveNameLabelWithOffset:scrollView.contentOffset.y];
-    }
-}
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self moveNameLabelWithOffset:scrollView.contentOffset.y];
-}
+// Might need this as a fix for scrolling header
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+//    if (decelerate)
+//    {
+//        [self moveNameLabelWithOffset:scrollView.contentOffset.y];
+//    }
+//}
+//
+//-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+//    [self moveNameLabelWithOffset:scrollView.contentOffset.y];
+//}
 
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset
@@ -707,18 +701,18 @@ UIPopoverControllerDelegate>
         CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
         self.lblChannelTitle.transform = move;
 
-//        if (offset < FULL_NAME_LABEL_IPHONE)
-//        {
-//            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
-//            self.lblChannelTitle.transform = move;
-//        }
-//
-//        if (offset > FULL_NAME_LABEL_IPHONE)
-//        {
-//            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
-//            CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
-//            self.lblChannelTitle.transform = CGAffineTransformConcat(move, scale);
-//        }
+        if (offset < FULL_NAME_LABEL_IPHONE)
+        {
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+            self.lblChannelTitle.transform = move;
+        }
+
+        if (offset > FULL_NAME_LABEL_IPHONE)
+        {
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
+            CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
+            self.lblChannelTitle.transform = CGAffineTransformConcat(move, scale);
+        }
     }
     
     if (IS_IPAD)
@@ -758,8 +752,6 @@ UIPopoverControllerDelegate>
 - (void) setChannel: (Channel *) channel
 {
     self.originalChannel = channel;
-    
-    NSLog(@"%@",    channel.channelDescription);
     
     NSError *error = nil;
     
@@ -1559,8 +1551,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self editMode];
     
-  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
-    
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
         NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
@@ -1614,8 +1604,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     self.mode = kChannelDetailsModeEdit;
     
-  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
-
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
     
 }
@@ -1626,8 +1614,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self profileMode];
     
-  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
-
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
     
