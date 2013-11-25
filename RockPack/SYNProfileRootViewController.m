@@ -38,12 +38,13 @@
 #define PULL_THRESHOLD_IPAD 0.0f
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
-#define FULL_NAME_LABEL_IPHONE 272.0f // lower is down
+#define FULL_NAME_LABEL_IPHONE 276.0f // lower is down
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 415.0f
 #define ALPHA_IN_EDIT 0.4f
 #define OFFSET_DESCRIPTION_EDIT 130.0f
+#define PARALLAX_SCROLL_VALUE 2.0f
 
 //delete function in channeldetails deletechannel
 
@@ -119,6 +120,7 @@
 @property (nonatomic) CGPoint offsetBeforeSearch;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
+@property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
 
@@ -302,9 +304,7 @@
     if (IS_IPAD)
     {
         self.aboutMeTextView.translatesAutoresizingMaskIntoConstraints = YES;
-        
     }
-
     
 }
 
@@ -1096,7 +1096,7 @@
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
     
-    
+ //   NSLog(@"%f", offset);
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
         
@@ -1124,19 +1124,26 @@
             self.followersCountButton.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
-            self.coverImage.transform = move;
 
-//            if (offset<0)
-//            {
-//                //Scale the cover phote in iphone
-//                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
-//                self.coverImage.transform = scale;
-//            }
-//            else
-//            {
-//                self.coverImage.transform = move;
-//                
-//            }
+
+            if (offset<0)
+            {
+                //Scale the cover phote in iphone
+                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
+                self.coverImage.transform = scale;
+                
+                self.backgroundView.transform = move;
+
+            }
+            else
+            {
+                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, -offset/PARALLAX_SCROLL_VALUE);
+
+                self.coverImage.transform = moveCoverImage;
+                self.backgroundView.transform = move;
+                
+            }
+            
             [self moveNameLabelWithOffset:offset];
         }
         else
@@ -1831,47 +1838,71 @@
 -(void) saveTapped
 {
     NSLog(@"Save profile");
+    [self updateField:@"channelOwnerDescription" forValue:self.aboutMeTextView.text withCompletionHandler:^{
+        appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
+        [appDelegate saveContext: YES];
+
+    }];
+//
+//    
+//
     
-    
-//    [self updateField:@"first_name" forValue:self.aboutMeTextView.text withCompletionHandler:^{
-//        
-//        self.appDelegate.currentUser.firstName = self.inputField.text;
-//        
-//        // last name second
-//        
-//        [self updateField:@"last_name" forValue:self.lastNameInputField.text withCompletionHandler:^{
-//            
-//            self.appDelegate.currentUser.lastName = self.lastNameInputField.text;
-//            
-//            // in most cases this field won't change so its worth a quick check to avoid the API call if possible
-//            
-//            if(self.nameIsPublic != self.appDelegate.currentUser.fullNameIsPublicValue)
-//            {
-//                
-//                [self updateField:@"display_fullname" forValue:@(self.nameIsPublic) withCompletionHandler:^{
-//                    
-//                    self.appDelegate.currentUser.fullNameIsPublicValue = self.nameIsPublic;
-//                    
-//                    [self.appDelegate saveContext: YES];
-//                    
-//                    [self.navigationController popViewControllerAnimated: YES];
-//                    
-//                }];
-//            }
-//            else
-//            {
-//                [self.appDelegate saveContext: YES];
-//                
-//                [self.navigationController popViewControllerAnimated: YES];
-//            }
-//            
-//            
-//            
-//        }];
-//        
-//    }];
     
 }
+
+- (void) updateField: (NSString *) field
+            forValue: (id) newValue
+withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
+{
+    
+    [appDelegate.oAuthNetworkEngine changeUserField: field
+                                                 forUser: appDelegate.currentUser
+                                            withNewValue: newValue
+                                       completionHandler: ^(NSDictionary * dictionary){
+//                                           
+//                                           [self.spinner stopAnimating];
+//                                           self.saveButton.hidden = NO;
+//                                           self.saveButton.enabled = YES;
+                                           
+                                           successBlock();
+                                           
+                                           [[NSNotificationCenter defaultCenter]  postNotificationName: kUserDataChanged
+                                                                                                object: self
+                                                                                              userInfo: @{@"user": appDelegate.currentUser}];
+                                           
+//                                           [self.spinner stopAnimating];
+                                           
+                                       } errorHandler: ^(id errorInfo) {
+                                           
+//                                           [self.spinner stopAnimating];
+//                                           
+//                                           self.saveButton.hidden = NO;
+//                                           self.saveButton.enabled = YES;
+                                           
+                                           if (!errorInfo || ![errorInfo isKindOfClass: [NSDictionary class]])
+                                           {
+                                               return;
+                                           }
+                                           
+                                           NSString *message = errorInfo[@"message"];
+                                           
+                                           if (message)
+                                           {
+                                               if ([message isKindOfClass: [NSArray class]])
+                                               {
+//                                                   self.errorLabel.text = (NSString *) ((NSArray *) message)[0];
+                                                   
+                                                   NSLog(@"Error %@", message);
+                                               }
+                                               else if ([message isKindOfClass: [NSString class]])
+                                               {
+//                                                   self.errorLabel.text = message;
+                                                     NSLog(@"Error %@", message);
+                                               }
+                                           }
+                                       }];
+}
+
 
 
 

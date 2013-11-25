@@ -66,10 +66,9 @@
                         <outlet property="delegate" destination="-1" id="s7b-h4-zad"/>
                     </connections>
                 </collectionView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Oe-3pp">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverImageTest.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Oe-3pp">
                     <rect key="frame" x="0.0" y="0.0" width="671" height="502"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxB-NR-Hkw" userLabel="Button - More button">
                     <rect key="frame" x="615" y="502" width="56" height="56"/>
@@ -255,5 +254,6 @@
     <resources>
         <image name="ButtonMore.png" width="56" height="56"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
+        <image name="coverImageTest.jpg" width="917" height="513"/>
     </resources>
 </document>
