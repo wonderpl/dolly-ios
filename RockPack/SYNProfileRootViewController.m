@@ -1148,7 +1148,6 @@
         }
         else
         {
-            
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
             self.coverImage.transform = move;
             self.moreButton.transform = move;
@@ -1157,7 +1156,6 @@
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
 
-            
             //scaling
             if (offset<0)
             {
@@ -1166,6 +1164,13 @@
                 
                 self.coverImage.transform = scale;
                 self.backgroundView.transform = move;
+                
+                //recentre the image, root of problem is in autolayout
+                CGRect tmpRect = self.coverImage.frame;
+                CGAffineTransform move = CGAffineTransformMakeTranslation(self.view.center.x - tmpRect.size.width/2, 0);
+
+                self.coverImage.transform = CGAffineTransformConcat(scale, move);
+                
             }
             else
             {
