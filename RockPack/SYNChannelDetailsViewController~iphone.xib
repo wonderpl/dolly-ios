@@ -143,7 +143,7 @@
                         <action selector="deleteTapped:" destination="-1" eventType="touchUpInside" id="XNV-fz-h5J"/>
                     </connections>
                 </button>
-                <textView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Description test" textAlignment="center" id="QmE-dp-0Kj">
+                <textView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Description test" textAlignment="center" id="QmE-dp-0Kj" userLabel="Text View - Description">
                     <rect key="frame" x="24" y="208" width="274" height="47"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>

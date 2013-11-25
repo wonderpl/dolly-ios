@@ -306,6 +306,8 @@
         self.aboutMeTextView.translatesAutoresizingMaskIntoConstraints = YES;
     }
     
+    [self.navigationController.navigationItem.leftBarButtonItem setTitle:@""];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1129,9 +1131,20 @@
             if (offset<0)
             {
                 //Scale the cover phote in iphone
-                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
+                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/250,1+ fabsf(offset)/250);
                 self.coverImage.transform = scale;
+
+                CGRect tmpFrame = self.coverImage.frame;
+                tmpFrame.origin.y = 0;
+                self.coverImage.frame = tmpFrame;
                 
+//                self.coverImage.transform = CGAffineTransformConcat(scale, move);
+
+//NSLog(@"%f", offset);
+//Way too slow
+//[self.coverImage setImage:[self.coverImage.image blur:self.coverImage.image withBlurValue:fabsf(offset)]];
+       
+
                 self.backgroundView.transform = move;
 
             }
@@ -1160,7 +1173,17 @@
             if (offset<0)
             {
                 //Scale the cover phote in iphone
-                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
+                CGAffineTransform scale;
+                
+                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
+                {
+                
+                scale = CGAffineTransformMakeScale(1+ fabsf(offset)/530,1+ fabsf(offset)/530);
+                    
+                }else
+                {
+                    scale = CGAffineTransformMakeScale(1+ fabsf(offset)/400,1+ fabsf(offset)/400);
+                }
                 
                 self.coverImage.transform = scale;
                 self.backgroundView.transform = move;
@@ -1999,6 +2022,40 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     
     
     [self.imagePickerController presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+}
+
+
+- (IBAction)followAllTapped:(id)sender
+{
+    NSLog(@"Follow all");
+    NSString *message = @"Are you sure you want to follow all channels of this user";
+    message =  [message stringByAppendingString:@" "];
+    message =  [message stringByAppendingString:self.channelOwner.username];
+    
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Follow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    
+    if(modeType == modeOtherUsersProfile)
+    {
+        
+        [alertView show];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeToUserRequest
+                                                            object: self
+                                                          userInfo: @{kChannel : self.followCell.channel}];
+        
+        //Need to refresh the cell
+        if (self.followCell.channel.subscribedByUserValue == YES)
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow All", @"unfollow")];
+        }
+        else
+        {
+            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+        }
+    }
+
+    
+
 }
 
 

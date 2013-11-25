@@ -26,6 +26,9 @@
     
     copyChannelOwner.displayName = existingChannelOwner.displayName;
     
+    copyChannelOwner.channelOwnerDescription = existingChannelOwner.channelOwnerDescription;
+    copyChannelOwner.followersTotalCount = existingChannelOwner.followersTotalCount;
+    
     copyChannelOwner.viewId = viewId ? viewId : @"";
     
     if (!(ignoringObjects & kIgnoreChannelObjects))
@@ -112,6 +115,14 @@
     
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
+    
+    
+//    NSLog(@"%@", dictionary);
+    
+//    self.channelOwnerDescription = [dictionary objectForKey: @"description"];
+    
+//self.followersTotalCount = [dictionary objectForKey: @"description"];
+
     
     BOOL hasChannels = YES;
     

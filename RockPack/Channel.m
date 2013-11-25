@@ -311,6 +311,7 @@
     
     self.subscribersCount = [dictionary objectForKey: @"subscriber_count"
                                          withDefault: @0];
+    
 
     // this field only comes back for the favourites channel
     NSNumber *favourites = dictionary[@"favourites"];
