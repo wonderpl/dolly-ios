@@ -1761,10 +1761,10 @@
     {
      
         
-        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
-        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
-                                                            object: self
-                                                          userInfo: @{kChannelOwner : self.channelOwner}];
+//        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
+//        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
+//                                                            object: self
+//                                                          userInfo: @{kChannelOwner : self.channelOwner}];
 
     }
     
