@@ -1500,25 +1500,25 @@ referenceSizeForFooterInSection: (NSInteger) section
             
             CGRect frame = cell.frame;
             
-            
-            if (IS_IPHONE) {
-                frame.origin.y -= (index*kHeightChange);
-               // frame.size.height -= kHeightChange;
-            }
-            
-            if (IS_IPAD) {
-                
-                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-                    frame.origin.y -=((index/2)*kHeightChange);
-                 //   frame.size.height -=kHeightChange;
-                }
-                else
-                {
-                    frame.origin.y -=((index/3)*kHeightChange);
-                   // frame.size.height -=kHeightChange;
-                    
-                }
-            }
+//            
+//            if (IS_IPHONE) {
+//                frame.origin.y -= (index*kHeightChange);
+//               // frame.size.height -= kHeightChange;
+//            }
+//            
+//            if (IS_IPAD) {
+//                
+//                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+//                    frame.origin.y -=((index/2)*kHeightChange);
+//                 //   frame.size.height -=kHeightChange;
+//                }
+//                else
+//                {
+//                    frame.origin.y -=((index/3)*kHeightChange);
+//                   // frame.size.height -=kHeightChange;
+//                    
+//                }
+//            }
             cell.frame = frame;
             
             cell.likeControl.alpha = 0.0f;
@@ -1538,9 +1538,7 @@ referenceSizeForFooterInSection: (NSInteger) section
                         }];
         
         [cell removeGestureRecognizer:cell.tap];
-        
     }
-    
     self.mode = kChannelDetailsModeEdit;
     
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
@@ -1562,6 +1560,11 @@ referenceSizeForFooterInSection: (NSInteger) section
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
     
+    
+ //   NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
+
+//    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
+    [self updateCollectionLayout];
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
         
@@ -1571,33 +1574,33 @@ referenceSizeForFooterInSection: (NSInteger) section
         cell.shareControl.hidden = NO;
         cell.addControl.hidden = NO;
         cell.deleteButton.hidden = YES;
-
+        
         __block int index = indexPathForCell.item;
         void (^animateProfileMode)(void) = ^{
             
             CGRect frame = cell.frame;
-            
-            if (IS_IPHONE) {
-                
-                frame.origin.y += (index*kHeightChange);
-                frame.size.height += kHeightChange;
-            }
-            
-            if (IS_IPAD) {
-                
-                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-                    frame.origin.y +=((index/2)*kHeightChange);
-                    frame.size.height +=kHeightChange;
-                }
-                else
-                {
-                    frame.origin.y +=((index/3)*kHeightChange);
-                    frame.size.height +=kHeightChange;
-                    
-                }
-            }
-            
-            cell.frame = frame;
+            //
+            //            if (IS_IPHONE)
+            //            {
+            //                frame.origin.y += (index*kHeightChange);
+            //                frame.size.height += kHeightChange;
+            //            }
+            //
+            //            if (IS_IPAD) {
+            //
+            //                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+            //                    frame.origin.y +=((index/2)*kHeightChange);
+            //                    frame.size.height +=kHeightChange;
+            //                }
+            //                else
+            //                {
+            //                    frame.origin.y +=((index/3)*kHeightChange);
+            //                    frame.size.height +=kHeightChange;
+            //
+            //                }
+            //            }
+            //
+            //            cell.frame = frame;
             
             cell.likeControl.alpha = 1.0f;
             cell.shareControl.alpha = 1.0f;
@@ -1613,12 +1616,7 @@ referenceSizeForFooterInSection: (NSInteger) section
                         }];
         
     }
-    
- //   NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
 
-    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
-    
-    
 }
 
 
@@ -1631,7 +1629,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         
         if (IS_IPHONE)
         {
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
             [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             //[self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
             
@@ -1639,7 +1637,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         if (IS_IPAD)
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit animated:YES];
             [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             //            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
         }
@@ -1653,7 +1651,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 
         if (IS_IPHONE)
         {
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone animated:YES];
             [self.videoThumbnailCollectionView removeGestureRecognizer:self.videoCollectionViewLayoutIPhoneEdit.panGestureRecognizer];
             
             self.videoThumbnailCollectionView.delegate = self;
@@ -1668,7 +1666,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
             
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPad];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPad animated:YES];
             
             [self.videoThumbnailCollectionView removeGestureRecognizer:self.videoCollectionViewLayoutIPadEdit.panGestureRecognizer];
             
