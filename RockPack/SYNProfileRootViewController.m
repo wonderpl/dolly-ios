@@ -517,6 +517,11 @@
         
         self.profileImageView.image = placeholderImage;
     }
+    
+    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+    
+  //  NSLog(@"chan des%@", self.channelOwner.channelOwnerDescription);
+
 }
 
 
@@ -1766,10 +1771,10 @@
     {
      
         
-//        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
-//        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
-//                                                            object: self
-//                                                          userInfo: @{kChannelOwner : self.channelOwner}];
+        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
+                                                            object: self
+                                                          userInfo: @{kChannelOwner : self.channelOwner}];
 
     }
     
@@ -1905,6 +1910,7 @@
         self.uploadCoverPhotoButton.hidden = YES;
         self.uploadAvatarButton.hidden = YES;
 
+        
     }];
     self.subscriptionThumbnailCollectionView.scrollEnabled = YES;
     self.channelThumbnailCollectionView.scrollEnabled = YES;

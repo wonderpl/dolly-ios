@@ -235,13 +235,17 @@ UIPopoverControllerDelegate>
     }
 
     //not used yet
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
-    self.activityIndicator.frame = self.view.frame;
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
 
+    self.activityIndicator.frame = CGRectMake(0, 0, 100, 100);
+    self.activityIndicator.center = self.videoThumbnailCollectionView.center;
+    
+    [self.view addSubview:self.activityIndicator];
    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
 
     //    self.txtFieldChannelName.backgroundColor = [UIColor blueColor];
+
 }
 
 
@@ -305,61 +309,15 @@ UIPopoverControllerDelegate>
         //                       withLoader: YES];
     }
     
-
-    
-    
-    
-    //    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailSmallUrl]
-    //                           forState: UIControlStateNormal
-    //                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-    //                            options: SDWebImageRetryFailed];
-    
-    
-    //    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
-    //
-    //    NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
-    //
-    //    if (![self.channel.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
-    //
-    //        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
-    //        dispatch_async(downloadQueue, ^{
-    //
-    //            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL ]];
-    //
-    //            dispatch_async(dispatch_get_main_queue(), ^{
-    //                self.btnAvatar.imageView.image = [UIImage imageWithData: imageData];
-    //            });
-    //        });
-    //
-    //    }else{
-    //
-    //        self.btnAvatar.imageView.image = placeholderImage;
-    //    }
-
     self.viewHasAppeared = YES;
-//    self.videoThumbnailCollectionView.contentOffset = self.tempContentOffset;
-
-    //[self iphoneMove];
-    //    self.navigationController.navigationBarHidden = NO;
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    // Refresh our view
-
-    
-    
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
-    
-//    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor blackColor];
 
     self.navigationItem.title = @"";
 
     [self.videoThumbnailCollectionView reloadData];
-  //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
-    
-
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-    
-    
     
     [self.navigationController.navigationBar.backItem setTitle:@""];
 
@@ -809,7 +767,6 @@ UIPopoverControllerDelegate>
     
     self.originalChannel = channel;
     
-    [self.activityIndicator startAnimating];
     
     NSError *error = nil;
     
@@ -917,8 +874,6 @@ UIPopoverControllerDelegate>
     
 
     [self displayChannelDetails];
-    [self.activityIndicator stopAnimating];
-    
     
 }
 
@@ -1215,6 +1170,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         }
     }
 }
+
 //- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
 //    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
 //        ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
@@ -1628,10 +1584,10 @@ referenceSizeForFooterInSection: (NSInteger) section
     
 }
 
-
 - (IBAction)editTapped:(id)sender
 {
     
+  //  [self.activityIndicator startAnimating];
     [self editMode];
     
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
@@ -1695,6 +1651,12 @@ referenceSizeForFooterInSection: (NSInteger) section
 -(void) cancelTapped
 {
     
+    
+    if (self.activityIndicator.isAnimating)
+    {
+      //  [self.activityIndicator stopAnimating];
+    }
+
     [self profileMode];
     
     [self.txtFieldChannelName resignFirstResponder];
@@ -1741,8 +1703,6 @@ referenceSizeForFooterInSection: (NSInteger) section
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
             cell.deleteButton.alpha = 0.0f;
-            
-            
         };
         
         [UIView transitionWithView:cell
@@ -1750,8 +1710,6 @@ referenceSizeForFooterInSection: (NSInteger) section
                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateProfileMode
                         completion:^(BOOL finished) {
-                            
-                            
                         }];
         
     }
@@ -1984,7 +1942,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //
     //    self.saveChannelButton.enabled = NO;
     //    self.deleteChannelButton.enabled = YES;
-        [self.activityIndicator startAnimating];
+//        [self.activityIndicator startAnimating];
     //
     //    [self hideCategoryChooser];
     //
@@ -2070,13 +2028,12 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                                   //                                                  self.saveChannelButton.enabled = YES;
                                                   //                                                  self.deleteChannelButton.hidden = NO;
                                                   //                                                  self.deleteChannelButton.enabled = YES;
-                                                                                                    [self.activityIndicator stopAnimating];
                                                   //                                                  [self.activityIndicator stopAnimating];
                                               }];
     
     
     
-    
+
     [self performSelector:@selector(cancelTapped) withObject:nil afterDelay:0.4f];
     
     //[self cancelTapped];
