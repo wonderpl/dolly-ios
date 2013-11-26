@@ -102,7 +102,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
     
@@ -477,20 +476,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                      completion: ^(BOOL finished) {
                          [self.networkErrorNotificationView removeFromSuperview];
                      }];
-}
-
-
-#pragma mark - Caution Presentation
-
-- (void) presentSuccessNotificationWithCaution:(NSNotification*)notification
-{
-    SYNCaution* caution = [notification userInfo][kCaution];
-    if (!caution)
-        return;
-    
-    SYNCautionMessageView* cautionMessageView = [SYNCautionMessageView withCaution:caution];
-    
-    [cautionMessageView presentInView:self.view];  
 }
 
 
