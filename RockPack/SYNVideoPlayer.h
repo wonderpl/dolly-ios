@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 	SYNVideoPlayerStatePaused
 };
 
-@class Video;
+@class VideoInstance;
 @class SYNScrubberBar;
 
 @protocol SYNVideoPlayerDelegate <NSObject>
@@ -42,9 +42,9 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 
 @property (nonatomic, strong, readonly) SYNScrubberBar *scrubberBar;
 
-@property (nonatomic, strong) Video *video;
+@property (nonatomic, strong) VideoInstance *videoInstance;
 
-+ (instancetype)playerForVideo:(Video *)video;
++ (instancetype)playerForVideoInstance:(VideoInstance *)videoInstance;
 
 - (void)play;
 - (void)pause;
