@@ -96,8 +96,7 @@
     self.infoLabel.center = position;
     self.infoLabel.frame = CGRectIntegral(self.infoLabel.frame);
     
-    [self.view
-     addSubview: self.infoLabel];
+    [self.view addSubview: self.infoLabel];
     
     position.y += 40.0;
     self.activityView.center = position;
@@ -133,15 +132,18 @@
                                            forRange: self.dataRequestRange
                                         byAppending: NO
                                   completionHandler: ^(int count) {
+                                      
                                       self.dataItemsAvailable = count;
                                       
                                       [self displayUsers];
                                       
                                       [self.activityView stopAnimating];
-                                  }
-                                       errorHandler: ^{
+                                      
+                                    } errorHandler: ^{
+                                        
                                            [self.activityView stopAnimating];
-                                       }];
+                                    }];
+    
 }
 
 

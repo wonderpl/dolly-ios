@@ -1881,9 +1881,12 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    // SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
+    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
     
-    // TODO: Add Subscribers popover through the master view controller
+    if(IS_IPAD)
+        [appDelegate.masterViewController addOverlayController:subscribersViewController animated:YES];
+    else
+        [self.navigationController pushViewController:subscribersViewController animated:YES];
 }
 
 -(void) saveTapped
