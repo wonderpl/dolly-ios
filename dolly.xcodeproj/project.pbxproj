@@ -182,7 +182,6 @@
 		018B0D9F179EA8A400F2D3CD /* IconReportConcernWhiteCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 018B0D9B179EA8A400F2D3CD /* IconReportConcernWhiteCheck@2x.png */; };
 		018B0DA2179EDBD200F2D3CD /* OverlayNotificationVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 018B0DA0179EDBD200F2D3CD /* OverlayNotificationVideo.png */; };
 		018B0DA3179EDBD200F2D3CD /* OverlayNotificationVideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 018B0DA1179EDBD200F2D3CD /* OverlayNotificationVideo@2x.png */; };
-		01901A971771CCBA007DBEAC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01901A961771CCBA007DBEAC /* SenTestingKit.framework */; };
 		01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD41629BDC40080F26B /* UIKit.framework */; };
 		01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD61629BDC40080F26B /* Foundation.framework */; };
 		01901A9F1771CCBA007DBEAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01901A9D1771CCBA007DBEAC /* InfoPlist.strings */; };
@@ -1614,11 +1613,9 @@
 		018B0D9B179EA8A400F2D3CD /* IconReportConcernWhiteCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconReportConcernWhiteCheck@2x.png"; path = "Assets/Images/IconReportConcernWhiteCheck@2x.png"; sourceTree = "<group>"; };
 		018B0DA0179EDBD200F2D3CD /* OverlayNotificationVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OverlayNotificationVideo.png; path = Assets/Images/OverlayNotificationVideo.png; sourceTree = "<group>"; };
 		018B0DA1179EDBD200F2D3CD /* OverlayNotificationVideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OverlayNotificationVideo@2x.png"; path = "Assets/Images/OverlayNotificationVideo@2x.png"; sourceTree = "<group>"; };
-		01901A951771CCBA007DBEAC /* dollyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dollyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		01901A961771CCBA007DBEAC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		01901A951771CCBA007DBEAC /* dollyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dollyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01901A9C1771CCBA007DBEAC /* dollyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "dollyTests-Info.plist"; sourceTree = "<group>"; };
 		01901A9E1771CCBA007DBEAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		01901AA01771CCBA007DBEAC /* dollyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dollyTests.h; sourceTree = "<group>"; };
 		01901AA11771CCBA007DBEAC /* dollyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dollyTests.m; sourceTree = "<group>"; };
 		01901AA31771CCBA007DBEAC /* dollyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dollyTests-Prefix.pch"; sourceTree = "<group>"; };
 		01946B4D1683209600354601 /* GlossChannelSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GlossChannelSmall.png; path = Assets/Images/GlossChannelSmall.png; sourceTree = "<group>"; };
@@ -2994,7 +2991,6 @@
 			files = (
 				E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */,
 				BEB3135D181838BB00FAF98A /* CoreData.framework in Frameworks */,
-				01901A971771CCBA007DBEAC /* SenTestingKit.framework in Frameworks */,
 				01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */,
 				01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */,
 			);
@@ -3020,7 +3016,7 @@
 			isa = PBXGroup;
 			children = (
 				010DEFD01629BDC40080F26B /* dolly.app */,
-				01901A951771CCBA007DBEAC /* dollyTests.octest */,
+				01901A951771CCBA007DBEAC /* dollyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3028,6 +3024,7 @@
 		010DEFD31629BDC40080F26B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E91F04531844C4410009D610 /* XCTest.framework */,
 				E9058168183CC87C00257E7F /* libicucore.dylib */,
 				E9058166183CC77F00257E7F /* libPods-Ooyala.a */,
 				0125FBAB1831045400EC822E /* CoreText.framework */,
@@ -3055,7 +3052,6 @@
 				011C16871730046700CF50B9 /* MessageUI.framework */,
 				01982575162AFB9600216900 /* QuartzCore.framework */,
 				0170717F165550BE00A3C7C4 /* Security.framework */,
-				01901A961771CCBA007DBEAC /* SenTestingKit.framework */,
 				012502C616CA99790029C7C8 /* Social.framework */,
 				016B97161770C42200892211 /* StoreKit.framework */,
 				0170717D165550A900A3C7C4 /* SystemConfiguration.framework */,
@@ -3514,7 +3510,6 @@
 		01901A9A1771CCBA007DBEAC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				01901AA01771CCBA007DBEAC /* dollyTests.h */,
 				01901AA11771CCBA007DBEAC /* dollyTests.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
 				BEB3135918182D6100FAF98A /* data */,
@@ -6022,8 +6017,8 @@
 			);
 			name = dollyTests;
 			productName = rockpackTests;
-			productReference = 01901A951771CCBA007DBEAC /* dollyTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 01901A951771CCBA007DBEAC /* dollyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -7635,7 +7630,6 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "RockPack/dolly-Develop-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -7675,7 +7669,6 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "RockPack/dolly-Release-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -7698,15 +7691,18 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(SRCROOT)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
 				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -7719,15 +7715,18 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(SRCROOT)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
 				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -7740,15 +7739,18 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(SRCROOT)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
 				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = AdHoc;
 		};
@@ -7811,7 +7813,6 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "RockPack/dolly-Release-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
