@@ -63,6 +63,8 @@
     
     
 }
+
+
 - (void) setInfoLabelText: (NSString *) text
 {
     CGFloat width = self.infoLabel.frame.size.width;
@@ -92,7 +94,7 @@
 - (void) viewDidAppear: (BOOL) animated
 {
     
-    
+    [super viewDidAppear:animated];
     
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
     

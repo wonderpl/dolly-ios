@@ -10,7 +10,6 @@
 #import "SYNYouTubeWebVideoPlayer.h"
 #import "SYNOoyalaVideoPlayer.h"
 #import "SYNScrubberBar.h"
-#import "SYNVideoLoadingView.h"
 #import "VideoInstance.h"
 #import "Video.h"
 
