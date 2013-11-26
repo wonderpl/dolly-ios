@@ -71,24 +71,30 @@
     
     // == Save Button (add first because subsequent calls offset it to the bottom) == //
     
-    UIImage* buttonImage = [UIImage imageNamed: @"ButtonAccountSaveDefault.png"];
     
-    saveButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    saveButton = [UIButton buttonWithType: UIButtonTypeSystem];
     
-    saveButton.frame = CGRectMake(self.view.frame.size.width * 0.5f - buttonImage.size.width * 0.5f,
+    saveButton.frame = CGRectMake(self.view.frame.size.width * 0.5f - 70.0f,
                                   0.0f,
-                                  buttonImage.size.width,
-                                  buttonImage.size.height);
+                                  140.0f,
+                                  44.0f);
     
-    [saveButton setImage: buttonImage
-                forState: UIControlStateNormal];
+    [saveButton setTitle:@"Save" forState:UIControlStateNormal];
     
-    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
-                forState: UIControlStateHighlighted];
+    UIColor* color = [UIColor colorWithRed:(188.0f/255.0f)
+                                     green:(186.0f/255.0f)
+                                      blue:(212.0f/255.0f)
+                                     alpha:1.0f];
     
-    [saveButton setImage: [UIImage imageNamed: @"ButtonAccountSaveHighlighted.png"]
-                forState: UIControlStateDisabled];
     
+    saveButton.layer.borderColor = color.CGColor;
+    saveButton.layer.borderWidth = 1.0f;
+    saveButton.layer.cornerRadius = 10.0f;
+    
+    saveButton.titleLabel.font = [UIFont regularCustomFontOfSize:16.0f];
+    
+    [saveButton setTitleColor: color
+                     forState: UIControlStateNormal];
     
     [saveButton addTarget: self
                    action: @selector(saveButtonPressed:)

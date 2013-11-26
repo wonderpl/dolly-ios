@@ -420,10 +420,6 @@
 		1F22C18B1744ED0F0065D4BF /* ButtonSave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C1871744ED0F0065D4BF /* ButtonSave@2x.png */; };
 		1F22C18C1744ED0F0065D4BF /* ButtonSaveHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C1881744ED0F0065D4BF /* ButtonSaveHighlighted.png */; };
 		1F22C18D1744ED0F0065D4BF /* ButtonSaveHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C1891744ED0F0065D4BF /* ButtonSaveHighlighted@2x.png */; };
-		1F22C192174500A80065D4BF /* ButtonSave@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C18E174500A80065D4BF /* ButtonSave@2x~iphone.png */; };
-		1F22C193174500A80065D4BF /* ButtonSave~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C18F174500A80065D4BF /* ButtonSave~iphone.png */; };
-		1F22C194174500A80065D4BF /* ButtonSaveHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C190174500A80065D4BF /* ButtonSaveHighlighted@2x~iphone.png */; };
-		1F22C195174500A80065D4BF /* ButtonSaveHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C191174500A80065D4BF /* ButtonSaveHighlighted~iphone.png */; };
 		1F22C198174524350065D4BF /* BarSucess.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C196174524350065D4BF /* BarSucess.png */; };
 		1F22C199174524350065D4BF /* BarSucess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C197174524350065D4BF /* BarSucess@2x.png */; };
 		1F22C19D17452DB90065D4BF /* BarNetworkLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F22C19B17452DB90065D4BF /* BarNetworkLogin.png */; };
@@ -765,10 +761,6 @@
 		38A200891731607F00FB9F57 /* PanelSearch~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF951731607F00FB9F57 /* PanelSearch~iphone.png */; };
 		38A200901731607F00FB9F57 /* ArrowSettings@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF9D1731607F00FB9F57 /* ArrowSettings@2x~iphone.png */; };
 		38A200911731607F00FB9F57 /* ArrowSettings~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF9E1731607F00FB9F57 /* ArrowSettings~iphone.png */; };
-		38A200921731607F00FB9F57 /* ButtonAccountSaveDefault@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FF9F1731607F00FB9F57 /* ButtonAccountSaveDefault@2x~iphone.png */; };
-		38A200931731607F00FB9F57 /* ButtonAccountSaveDefault~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFA01731607F00FB9F57 /* ButtonAccountSaveDefault~iphone.png */; };
-		38A200941731607F00FB9F57 /* ButtonAccountSaveHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFA11731607F00FB9F57 /* ButtonAccountSaveHighlighted@2x~iphone.png */; };
-		38A200951731607F00FB9F57 /* ButtonAccountSaveHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFA21731607F00FB9F57 /* ButtonAccountSaveHighlighted~iphone.png */; };
 		38A200961731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFA31731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png */; };
 		38A200971731607F00FB9F57 /* ButtonSettingsDoneHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFA41731607F00FB9F57 /* ButtonSettingsDoneHighlighted@2x~iphone.png */; };
 		38A200981731607F00FB9F57 /* ButtonSettingsDoneHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFA51731607F00FB9F57 /* ButtonSettingsDoneHighlighted~iphone.png */; };
@@ -1908,10 +1900,6 @@
 		1F22C1871744ED0F0065D4BF /* ButtonSave@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSave@2x.png"; path = "Assets/Images/ButtonSave@2x.png"; sourceTree = "<group>"; };
 		1F22C1881744ED0F0065D4BF /* ButtonSaveHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSaveHighlighted.png; path = Assets/Images/ButtonSaveHighlighted.png; sourceTree = "<group>"; };
 		1F22C1891744ED0F0065D4BF /* ButtonSaveHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSaveHighlighted@2x.png"; path = "Assets/Images/ButtonSaveHighlighted@2x.png"; sourceTree = "<group>"; };
-		1F22C18E174500A80065D4BF /* ButtonSave@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSave@2x~iphone.png"; sourceTree = "<group>"; };
-		1F22C18F174500A80065D4BF /* ButtonSave~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSave~iphone.png"; sourceTree = "<group>"; };
-		1F22C190174500A80065D4BF /* ButtonSaveHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSaveHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
-		1F22C191174500A80065D4BF /* ButtonSaveHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSaveHighlighted~iphone.png"; sourceTree = "<group>"; };
 		1F22C196174524350065D4BF /* BarSucess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BarSucess.png; path = Assets/Images/BarSucess.png; sourceTree = "<group>"; };
 		1F22C197174524350065D4BF /* BarSucess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BarSucess@2x.png"; path = "Assets/Images/BarSucess@2x.png"; sourceTree = "<group>"; };
 		1F22C19B17452DB90065D4BF /* BarNetworkLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BarNetworkLogin.png; path = Assets/Images/BarNetworkLogin.png; sourceTree = "<group>"; };
@@ -2284,10 +2272,6 @@
 		38A2FF951731607F00FB9F57 /* PanelSearch~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PanelSearch~iphone.png"; sourceTree = "<group>"; };
 		38A2FF9D1731607F00FB9F57 /* ArrowSettings@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ArrowSettings@2x~iphone.png"; sourceTree = "<group>"; };
 		38A2FF9E1731607F00FB9F57 /* ArrowSettings~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ArrowSettings~iphone.png"; sourceTree = "<group>"; };
-		38A2FF9F1731607F00FB9F57 /* ButtonAccountSaveDefault@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonAccountSaveDefault@2x~iphone.png"; sourceTree = "<group>"; };
-		38A2FFA01731607F00FB9F57 /* ButtonAccountSaveDefault~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonAccountSaveDefault~iphone.png"; sourceTree = "<group>"; };
-		38A2FFA11731607F00FB9F57 /* ButtonAccountSaveHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonAccountSaveHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
-		38A2FFA21731607F00FB9F57 /* ButtonAccountSaveHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonAccountSaveHighlighted~iphone.png"; sourceTree = "<group>"; };
 		38A2FFA31731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsDone@2x~iphone.png"; sourceTree = "<group>"; };
 		38A2FFA41731607F00FB9F57 /* ButtonSettingsDoneHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsDoneHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
 		38A2FFA51731607F00FB9F57 /* ButtonSettingsDoneHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsDoneHighlighted~iphone.png"; sourceTree = "<group>"; };
@@ -4885,10 +4869,6 @@
 			children = (
 				38A2FF9D1731607F00FB9F57 /* ArrowSettings@2x~iphone.png */,
 				38A2FF9E1731607F00FB9F57 /* ArrowSettings~iphone.png */,
-				38A2FF9F1731607F00FB9F57 /* ButtonAccountSaveDefault@2x~iphone.png */,
-				38A2FFA01731607F00FB9F57 /* ButtonAccountSaveDefault~iphone.png */,
-				38A2FFA11731607F00FB9F57 /* ButtonAccountSaveHighlighted@2x~iphone.png */,
-				38A2FFA21731607F00FB9F57 /* ButtonAccountSaveHighlighted~iphone.png */,
 				38A2FFA31731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png */,
 				38A2FFA41731607F00FB9F57 /* ButtonSettingsDoneHighlighted@2x~iphone.png */,
 				38A2FFA51731607F00FB9F57 /* ButtonSettingsDoneHighlighted~iphone.png */,
@@ -5061,10 +5041,6 @@
 				38BACE1E173415DE00406597 /* ButtonCreateHighlighted@2x~iphone.png */,
 				38BACE1F173415DF00406597 /* ButtonCreateHighlighted~iphone.png */,
 				38BACE20173415DF00406597 /* ButtonCreate~iphone.png */,
-				1F22C18E174500A80065D4BF /* ButtonSave@2x~iphone.png */,
-				1F22C18F174500A80065D4BF /* ButtonSave~iphone.png */,
-				1F22C190174500A80065D4BF /* ButtonSaveHighlighted@2x~iphone.png */,
-				1F22C191174500A80065D4BF /* ButtonSaveHighlighted~iphone.png */,
 				38BACE21173415DF00406597 /* ButtonVideoDelete@2x~iphone.png */,
 				38BACE24173415DF00406597 /* ButtonVideoDelete~iphone.png */,
 				38BACE25173415DF00406597 /* ChannelCreationCoverNone@2x~iphone.png */,
@@ -6604,12 +6580,8 @@
 				38A200901731607F00FB9F57 /* ArrowSettings@2x~iphone.png in Resources */,
 				1F458B1117E1C6F8003C14AC /* AppIcon57x57@2x.png in Resources */,
 				38A200911731607F00FB9F57 /* ArrowSettings~iphone.png in Resources */,
-				38A200921731607F00FB9F57 /* ButtonAccountSaveDefault@2x~iphone.png in Resources */,
-				38A200931731607F00FB9F57 /* ButtonAccountSaveDefault~iphone.png in Resources */,
 				1F5FAEB717E720A200205F3F /* ButtonConfirmAddToPack@2x~iphone.png in Resources */,
-				38A200941731607F00FB9F57 /* ButtonAccountSaveHighlighted@2x~iphone.png in Resources */,
 				1F4E7FC8181ACBAA00F59007 /* TabSearchHighlighted~iphone.png in Resources */,
-				38A200951731607F00FB9F57 /* ButtonAccountSaveHighlighted~iphone.png in Resources */,
 				38A200961731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png in Resources */,
 				38A200971731607F00FB9F57 /* ButtonSettingsDoneHighlighted@2x~iphone.png in Resources */,
 				BED027B21833F66700636659 /* SYNOptionsOverlayViewController.xib in Resources */,
@@ -6939,10 +6911,6 @@
 				1F22C18B1744ED0F0065D4BF /* ButtonSave@2x.png in Resources */,
 				1F22C18C1744ED0F0065D4BF /* ButtonSaveHighlighted.png in Resources */,
 				1F22C18D1744ED0F0065D4BF /* ButtonSaveHighlighted@2x.png in Resources */,
-				1F22C192174500A80065D4BF /* ButtonSave@2x~iphone.png in Resources */,
-				1F22C193174500A80065D4BF /* ButtonSave~iphone.png in Resources */,
-				1F22C194174500A80065D4BF /* ButtonSaveHighlighted@2x~iphone.png in Resources */,
-				1F22C195174500A80065D4BF /* ButtonSaveHighlighted~iphone.png in Resources */,
 				1F22C198174524350065D4BF /* BarSucess.png in Resources */,
 				1F22C199174524350065D4BF /* BarSucess@2x.png in Resources */,
 				1F22C19D17452DB90065D4BF /* BarNetworkLogin.png in Resources */,

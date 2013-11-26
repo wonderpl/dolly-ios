@@ -35,13 +35,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
 @property (nonatomic, strong) SYNNetworkMessageView* networkErrorNotificationView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
-@property (nonatomic, strong) UIPopoverController *accountSettingsPopover;
 
 @property (nonatomic, weak) UIViewController *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
+@property (nonatomic) CGRect overlayControllerFrame;
 
-@property (nonatomic, strong) IBOutlet UIView* headerContainerView;
+
 
 @end
 
@@ -67,7 +67,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 {
     // Defensive programming
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    self.accountSettingsPopover.delegate = nil;
 }
 
 
@@ -102,7 +101,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     // == Set Up Notifications == //
     
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountSettingsLogout) name:kAccountSettingsLogout object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSuccessNotificationWithCaution:) name:kNoteSavingCaution object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
@@ -167,7 +165,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     // == Animate == //
     __block CGRect startFrame, endFrame;
     
-    startFrame = endFrame = overlayViewController.view.frame;
+    // keep a reference to the frame so as to use it in the rotation code and maintain the size
+    self.overlayControllerFrame = startFrame = endFrame = self.overlayController.view.frame;
     if(IS_IPHONE)
     {
         // push it to the bottom
@@ -185,7 +184,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         [self.overlayController.view setClipsToBounds:YES];
     }
     
-    overlayViewController.view.frame = startFrame;
+    self.overlayController.view.frame = startFrame;
+    
     
     void(^AnimationsBlock)(void) = ^{
         
@@ -194,7 +194,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         if(IS_IPHONE)
         {
             endFrame.origin.y = self.view.frame.size.height - startFrame.size.height;
-            overlayViewController.view.frame = endFrame;
+            self.overlayController.view.frame = endFrame;
         }
         else
         {
@@ -375,12 +375,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Notification Handlers
 
-- (void) accountSettingsLogout
-{
-    [appDelegate logout];
-}
-
-
 
 - (void) reachabilityChanged: (NSNotification*) notification
 {
@@ -424,8 +418,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) accountSettingsLogout: (NSNotification*) notification
 {
-    [self.accountSettingsPopover dismissPopoverAnimated: NO];
-    self.accountSettingsPopover = nil;
+    
     [appDelegate logout];
 }
 
@@ -516,22 +509,24 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 }
 
 
+
+
 - (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                           duration: (NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation: toInterfaceOrientation
                                             duration: duration];
-
-    if (self.accountSettingsPopover)
+    
+    
+    if(self.overlayController)
     {
-        CGRect rect = CGRectMake([SYNDeviceManager.sharedInstance currentScreenWidth] * 0.5,
-                                 [SYNDeviceManager.sharedInstance currentScreenHeight] * 0.5, 1, 1);
-        
-        [self.accountSettingsPopover presentPopoverFromRect: rect
-                                                     inView: self.view
-                                   permittedArrowDirections: 0
-                                                   animated: YES];
+        CGRect currentOverlayFrame = self.overlayController.view.frame;
+        currentOverlayFrame.size = self.overlayControllerFrame.size;
+        currentOverlayFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5f - currentOverlayFrame.size.width * 0.5;
+        self.overlayController.view.frame = currentOverlayFrame;
     }
+
+    
 
 }
 
