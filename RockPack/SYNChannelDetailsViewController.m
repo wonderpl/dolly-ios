@@ -1630,7 +1630,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         if (IS_IPHONE)
         {
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+          //  [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             //[self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
             
         }
@@ -1638,7 +1638,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit animated:YES];
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+         //   [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             //            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
         }
     }
@@ -1657,7 +1657,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
             
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+      //      [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
 //            [self.videoCollectionViewLayoutIPhone invalidateLayout];
             
         }
@@ -1672,7 +1672,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+      //      [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
 //            [self.videoCollectionViewLayoutIPad invalidateLayout];
             
             
