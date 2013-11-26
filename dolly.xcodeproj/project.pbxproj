@@ -295,7 +295,6 @@
 		01BCD1DC172560FB00F459BF /* ButtonCover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01BCD1D4172560FB00F459BF /* ButtonCover@2x.png */; };
 		01BCD1DD172560FB00F459BF /* ButtonCoverHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01BCD1D5172560FB00F459BF /* ButtonCoverHighlighted.png */; };
 		01BCD1DE172560FB00F459BF /* ButtonCoverHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01BCD1D6172560FB00F459BF /* ButtonCoverHighlighted@2x.png */; };
-		01BE7B72173413CF00EFE0EF /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BE7B71173413CF00EFE0EF /* SSTextView.m */; };
 		01C6FD0F169DDEDB00E01AA3 /* NSDictionary+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD0E169DDEDB00E01AA3 /* NSDictionary+Validation.m */; };
 		01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD11169E11B000E01AA3 /* _AbstractCommon.m */; };
 		01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD13169E11B000E01AA3 /* AbstractCommon.m */; };
@@ -1762,8 +1761,6 @@
 		01BCD1D4172560FB00F459BF /* ButtonCover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCover@2x.png"; path = "Assets/Images/ButtonCover@2x.png"; sourceTree = "<group>"; };
 		01BCD1D5172560FB00F459BF /* ButtonCoverHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCoverHighlighted.png; path = Assets/Images/ButtonCoverHighlighted.png; sourceTree = "<group>"; };
 		01BCD1D6172560FB00F459BF /* ButtonCoverHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCoverHighlighted@2x.png"; path = "Assets/Images/ButtonCoverHighlighted@2x.png"; sourceTree = "<group>"; };
-		01BE7B70173413CF00EFE0EF /* SSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTextView.h; sourceTree = "<group>"; };
-		01BE7B71173413CF00EFE0EF /* SSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTextView.m; sourceTree = "<group>"; };
 		01C6FD0D169DDEDB00E01AA3 /* NSDictionary+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Validation.h"; sourceTree = "<group>"; };
 		01C6FD0E169DDEDB00E01AA3 /* NSDictionary+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Validation.m"; sourceTree = "<group>"; };
 		01C6FD10169E11B000E01AA3 /* _AbstractCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractCommon.h; sourceTree = "<group>"; };
@@ -3663,8 +3660,6 @@
 				011CC6A8164D19D800F02B6D /* SYNPassthroughView.m */,
 				012B4C9B17393A080019DA4C /* SYNPopoverBackgroundView.h */,
 				012B4C9C17393A080019DA4C /* SYNPopoverBackgroundView.m */,
-				01BE7B70173413CF00EFE0EF /* SSTextView.h */,
-				01BE7B71173413CF00EFE0EF /* SSTextView.m */,
 				E93E10DC1834E93A00A62F64 /* SYNVideoLoadingIndicator.h */,
 				E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */,
 				E9921A9218351D66001A4F3B /* SYNScrubberBar.h */,
@@ -7459,7 +7454,6 @@
 				011C16901731782800CF50B9 /* SYNDeletionWobbleLayout.m in Sources */,
 				E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */,
 				38BACE001732CCFB00406597 /* SYNLoginViewControllerIphone.m in Sources */,
-				01BE7B72173413CF00EFE0EF /* SSTextView.m in Sources */,
 				012B4C9D17393A080019DA4C /* SYNPopoverBackgroundView.m in Sources */,
 				015C13C1173B034C001569FE /* SYNReportConcernTableViewController.m in Sources */,
 				E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */,

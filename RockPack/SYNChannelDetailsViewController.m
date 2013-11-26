@@ -14,7 +14,6 @@
 #import "CoverArt.h"
 #import "GAI.h"
 #import "Genre.h"
-#import "SSTextView.h"
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
 #import "SYNAddToChannelCreateNewCell.h"
