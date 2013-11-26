@@ -32,6 +32,7 @@
     {
         
         self.channel = channel;
+        self.title = @"Followers";
         
     }
     
@@ -55,6 +56,10 @@
     
     [self.usersThumbnailCollectionView registerNib:[UINib nibWithNibName:@"SYNSearchResultsUserCell" bundle:nil]
                         forCellWithReuseIdentifier:@"SYNSearchResultsUserCell"];
+    
+    [self.usersThumbnailCollectionView registerNib:[UINib nibWithNibName:@"SYNChannelFooterMoreView" bundle:nil]
+                        forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                               withReuseIdentifier:@"SYNChannelFooterMoreView"];
     
     
 }
@@ -253,6 +258,34 @@
     [self.usersThumbnailCollectionView reloadData];
 }
 
+- (void) profileButtonTapped: (UIButton *) profileButton
+{
+    if(!profileButton)
+    {
+        AssertOrLog(@"No profileButton passed");
+        return; // did not manage to get the cell
+    }
+    
+    id candidate = profileButton;
+    while (![candidate isKindOfClass:[SYNSearchResultsUserCell class]]) {
+        candidate = [candidate superview];
+    }
+    
+    if(![candidate isKindOfClass:[SYNSearchResultsUserCell class]])
+    {
+        AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
+        return; // did not manage to get the cell
+    }
+    SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
+    
+    if(IS_IPAD)
+    {
+        
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+    }
+    [appDelegate.masterViewController.showingViewController viewProfileDetails:searchUserCell.channelOwner];
+    
+}
 
 - (CGSize) footerSize
 {

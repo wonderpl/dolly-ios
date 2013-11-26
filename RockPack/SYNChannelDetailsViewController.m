@@ -1884,9 +1884,17 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
     
     if(IS_IPAD)
-        [appDelegate.masterViewController addOverlayController:subscribersViewController animated:YES];
+    {
+        UINavigationController* navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:subscribersViewController];
+        navigationControllerWrapper.view.frame = subscribersViewController.view.frame;
+        [appDelegate.masterViewController addOverlayController:navigationControllerWrapper animated:YES];
+    }
+    
     else
+    {
         [self.navigationController pushViewController:subscribersViewController animated:YES];
+    }
+    
 }
 
 -(void) saveTapped
