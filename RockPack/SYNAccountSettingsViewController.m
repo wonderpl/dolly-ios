@@ -83,6 +83,10 @@
     self.tableView.scrollEnabled = IS_IPHONE;
     self.tableView.scrollsToTop = NO;
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:nil
+                                                                            action:nil];
     
 }
 

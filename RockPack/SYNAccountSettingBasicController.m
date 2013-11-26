@@ -39,6 +39,9 @@
         currentFieldType = userFieldType;
         appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+        
+        
+        
     }
     
     return self;
