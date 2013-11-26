@@ -41,10 +41,10 @@
 #import "SYNSubscribersViewController.h"
 
 #define kHeightChange 70.0f
-#define FULL_NAME_LABEL_IPHONE 120.0f // lower is down
-#define FULL_NAME_LABEL_IPAD_PORTRAIT 213.0f
+#define FULL_NAME_LABEL_IPHONE 149.0f
+#define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 
-#define FULLNAMELABELIPADLANDSCAPE 210.0f
+#define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
 static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
@@ -168,10 +168,21 @@ UIPopoverControllerDelegate>
     
     // == Avatar Image == //
     
+    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+    
+    
+    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
+    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
+    
         [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
                                forState: UIControlStateNormal
-                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile.png"]
+                       placeholderImage: placeholderImage
                                 options: SDWebImageRetryFailed];
+
+    self.btnAvatar.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.btnAvatar.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+//    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
+//    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
 
     
     if (IS_IPHONE)
@@ -202,17 +213,9 @@ UIPopoverControllerDelegate>
                                                  blue: (42.0f / 255.0f)
                                                 alpha: 1.0f];
 
-    [self setUpMode];
-
-    //not used yet
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
-    self.activityIndicator.frame = self.view.frame;
-
-    [self displayChannelDetails];
-
     //programmatically seting the edgeinset for iphone and ipad
     //Not able to set within the nib
-
+    
     if (IS_IPHONE)
     {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
@@ -223,11 +226,18 @@ UIPopoverControllerDelegate>
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(520, 0, 0, 0);
     }
 
+
+    //not used yet
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+    self.activityIndicator.frame = self.view.frame;
+
+    [self displayChannelDetails];
+
+
    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
 
 }
-
 
 
 -(void) iphoneMove
@@ -335,10 +345,13 @@ UIPopoverControllerDelegate>
 //    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor blackColor];
 
+    self.navigationItem.title = @"";
 
     [self.videoThumbnailCollectionView reloadData];
   //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
     
+    [self setUpMode];
+
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
     
@@ -372,8 +385,6 @@ UIPopoverControllerDelegate>
     }
     
     
-    
-    
     if (self.subscribingIndicator)
     {
         [self.subscribingIndicator removeFromSuperview];
@@ -386,8 +397,6 @@ UIPopoverControllerDelegate>
                                                       userInfo: nil];
     
 //    self.navigationController.navigationBarHidden = YES;
-    
-
 
     self.viewHasAppeared = NO;
     self.tempContentOffset = self.videoThumbnailCollectionView.contentOffset;
@@ -403,11 +412,7 @@ UIPopoverControllerDelegate>
     {
       //  [self iphoneMove];
     }
-
-    
-    [self setUpMode];
-
-    
+//    [self setUpMode];
 }
 
 -(void) setUpMode
@@ -436,26 +441,31 @@ UIPopoverControllerDelegate>
             self.btnEditChannel.hidden = YES;
             self.btnFollowChannel.hidden = YES;
             
-            [self moveView:self.btnShareChannel withX:-50];
-            [self moveView:self.btnShowFollowers withX:-50];
-            [self moveView:self.btnShowVideos withX:-50];
-            [self moveView:self.btnShowFollowers withX:-50];
-            [self moveView:self.btnShowFollowers withX:-50];
-            [self moveView:self.btnShowFollowers withX:-50];
-            [self moveView:self.btnShowFollowers withX:-50];
+//            [self moveView:self.viewCirleButtonContainer withY:20];
+//            [self moveView:self.viewFollowAndVideoContainer withY:20];
+//            [self moveView:self.viewCollectionSeperator withY:30];
+//            [self centreView:self.btnShareChannel];
             
-            [self centreView:self.btnShareChannel];
+            CGRect tmpFrame = self.btnShareChannel.frame;
+            tmpFrame.origin.x = 55;// [self.btnShareChannel superview].center.x;
+            self.btnShareChannel.frame = tmpFrame;
+//            tmpFrame = self.viewCirleButtonContainer.frame;
+//            tmpFrame.origin.y -= 4;
+//            self.viewCirleButtonContainer.frame = tmpFrame;
+            
+//            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(360, 0, 0, 0);
+            
         }
     }
 }
 
--(void) moveView:(UIView*) movingView withX: (CGFloat) x
+-(void) moveView:(UIView*) movingView withY: (CGFloat) y
 {
 
     CGRect tmpFrame;
     
     tmpFrame = movingView.frame;
-    tmpFrame.origin.x -= 100;
+    tmpFrame.origin.y -= y;
     movingView.frame = tmpFrame;
     
 }
@@ -512,9 +522,6 @@ UIPopoverControllerDelegate>
     self.lblChannelTitle.text = self.channel.title;
     self.lblDescription.text = self.channel.channelDescription;
     
-    NSLog(@"CHAN DES: %@", self.channel.channelDescription);
-    
-    
     self.txtViewDescription.text = self.lblDescription.text;
     
     [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
@@ -532,7 +539,7 @@ UIPopoverControllerDelegate>
         [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow")];
     }
     
-    if (self.channel.totalVideosValue == 0) {
+    if (self.channel.videoInstances.count == 0) {
         self.lblNoVideos.hidden = NO;
     }
     else
@@ -540,6 +547,7 @@ UIPopoverControllerDelegate>
         self.lblNoVideos.hidden = YES;
 
     }
+    
     
 }
 #pragma mark - Control Actions
@@ -637,6 +645,7 @@ UIPopoverControllerDelegate>
 
 -(void) moveHeader:(CGFloat) offset
 {
+    
     if (!self.viewHasAppeared) {
         return;
     }
@@ -644,7 +653,7 @@ UIPopoverControllerDelegate>
     if (IS_IPHONE ) {
        // offset *=2;
         //iphone port
-        offset +=420;
+        offset +=self.videoThumbnailCollectionView.contentInset.top;
     }
     
     if (IS_IPAD) {
@@ -664,35 +673,45 @@ UIPopoverControllerDelegate>
     self.txtViewDescription.transform = move;
     self.txtFieldChannelName.transform = move;
     self.viewCirleButtonContainer.transform = move;
-    
+
     [self moveNameLabelWithOffset: offset];
     
 }
+
+// Might need this as a fix for scrolling header
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+//    if (decelerate)
+//    {
+//        [self moveNameLabelWithOffset:scrollView.contentOffset.y];
+//    }
+//}
+//
+//-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+//    [self moveNameLabelWithOffset:scrollView.contentOffset.y];
+//}
 
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset
 {
     if (IS_IPHONE)
     {
+        
+        CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+        self.lblChannelTitle.transform = move;
+
         if (offset < FULL_NAME_LABEL_IPHONE)
         {
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
-            //CGAffineTransform scale =  CGAffineTransformMakeScale(0.7, 1.5);
-            //self.fullNameLabel.transform = CGAffineTransformConcat(move, scale);
-//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-//            tmpFrame.size.height = 43;
-//            self.outerViewFullNameLabel.frame = tmpFrame;
-            self.lblFullName.transform = move;
+            self.lblChannelTitle.transform = move;
         }
-        
+
         if (offset > FULL_NAME_LABEL_IPHONE)
         {
             CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
             CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
-//            CGRect tmpFrame = self.outerViewFullNameLabel.frame;
-//            tmpFrame.size.height = 64;
-//            self.outerViewFullNameLabel.frame = tmpFrame;
-            self.lblFullName.transform = CGAffineTransformConcat(move, scale);
+            self.lblChannelTitle.transform = CGAffineTransformConcat(move, scale);
         }
     }
     
@@ -702,13 +721,13 @@ UIPopoverControllerDelegate>
             if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
 
             if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
         }
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
@@ -716,13 +735,13 @@ UIPopoverControllerDelegate>
             if (offset > FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
             
             if (offset<FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
-                self.lblFullName.transform = move;
+                self.lblChannelTitle.transform = move;
             }
         }
     }
@@ -733,8 +752,6 @@ UIPopoverControllerDelegate>
 - (void) setChannel: (Channel *) channel
 {
     self.originalChannel = channel;
-    
-    NSLog(@"%@",    channel.channelDescription);
     
     NSError *error = nil;
     
@@ -840,6 +857,8 @@ UIPopoverControllerDelegate>
         }
     }
     
+
+    [self displayChannelDetails];
     
     
 }
@@ -1141,20 +1160,16 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 -(void) centreView : (UIView*) viewToCentre
 {
-    
     CGPoint tmpPoint;
     tmpPoint = viewToCentre.center;
-    tmpPoint.x = self.view.center.x;
+    tmpPoint.x = [super view].center.x;
     viewToCentre.center = tmpPoint;
-
 }
-
-
 
 -(void) centreAllUi
 {
 
-    [self centreView:self.btnAvatar];
+ //   [self centreView:self.btnAvatar];
 //    [self centreView:self.lblNoVideos];
 //    [self centreView:self.viewProfileContainer];
     
@@ -1289,9 +1304,6 @@ referenceSizeForFooterInSection: (NSInteger) section
                                               
                                               self.mode = kChannelDetailsModeDisplay;
                                               
-                                              [[NSNotificationCenter defaultCenter]  postNotificationName: kNoteAllNavControlsShow
-                                                                                                   object: self
-                                                                                                 userInfo: nil];
                                               
                                               //                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
                                               
@@ -1308,9 +1320,6 @@ referenceSizeForFooterInSection: (NSInteger) section
                                               //                                              [self	  showError: NSLocalizedString(@"Could not retrieve the uploaded channel data. Please try accessing it from your profile later.", nil)
                                               //                                                 showErrorTitle: @"Error"];
                                               
-                                              [[NSNotificationCenter defaultCenter]  postNotificationName: kNoteAllNavControlsShow
-                                                                                                   object: self
-                                                                                                 userInfo: nil];
                                               
                                               //                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
                                               
@@ -1427,8 +1436,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (IBAction)avatarTapped:(id)sender
 {
-    
-    
     User *tmpUser = [((SYNAppDelegate*)[[UIApplication sharedApplication] delegate]) currentUser];
     
     SYNProfileRootViewController *profileVC;
@@ -1453,14 +1460,14 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnAvatar.hidden = NO;
     self.btnShowFollowers.hidden = NO;
     self.btnShowVideos.hidden = NO;
-    self.btnFollowChannel.hidden = NO;
+    self.btnFollowChannel.hidden = YES;
     self.btnEditChannel.hidden = NO;
     self.btnShareChannel.hidden = NO;
     self.viewCirleButtonContainer.hidden = NO;
     self.viewFollowAndVideoContainer.hidden = NO;
     self.lblFullName.hidden = NO;
     
-    
+        self.lblChannelTitle. hidden = NO;
     //edit mode
     self.btnDeleteChannel.hidden = YES;
     self.txtFieldChannelName.hidden = YES;
@@ -1472,20 +1479,24 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnAvatar.alpha = 0.0f;
     self.btnShowFollowers.alpha = 0.0f;
     self.btnShowVideos.alpha = 0.0f;
-    self.btnFollowChannel.alpha = 0.0f;
+   // self.btnFollowChannel.alpha = 0.0f;
     self.btnEditChannel.alpha = 0.0f;
     self.btnShareChannel.alpha = 0.0f;
     self.lblFullName.alpha = 0.0f;
+    self.lblChannelTitle.alpha = 0.0f;
+
     [UIView animateWithDuration:0.4 animations:^{
         
         self.viewProfileContainer.alpha = 1.0f;
         self.btnAvatar.alpha = 1.0f;
         self.btnShowFollowers.alpha = 1.0f;
         self.btnShowVideos.alpha = 1.0f;
-        self.btnFollowChannel.alpha = 1.0f;
+//        self.btnFollowChannel.alpha = 1.0f;
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
         self.lblFullName.alpha = 1.0f;
+        self.lblChannelTitle.alpha = 1.0f;
+
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
@@ -1506,13 +1517,13 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnAvatar.hidden = YES;
     self.btnShowFollowers.hidden = YES;
     self.btnShowVideos.hidden = YES;
-    self.btnFollowChannel.hidden = YES;
+//    self.btnFollowChannel.hidden = YES;
     self.btnEditChannel.hidden = YES;
     self.btnShareChannel.hidden = YES;
     self.viewCirleButtonContainer.hidden = YES;
     self.viewFollowAndVideoContainer.hidden = YES;
     self.lblFullName.hidden = YES;
-    
+    self.lblChannelTitle. hidden = YES;
     //edit mode
     self.btnDeleteChannel.hidden = NO;
     self.txtFieldChannelName.hidden = NO;
@@ -1538,8 +1549,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     
     [self editMode];
-    
-  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
     
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
@@ -1594,8 +1603,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     self.mode = kChannelDetailsModeEdit;
     
-  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
-
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
     
 }
@@ -1606,8 +1613,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self profileMode];
     
-  //  NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
-
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
     
@@ -1839,9 +1844,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
 - (void) deleteChannel
 {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsShow
-                                                        object: self
-                                                      userInfo: nil];
     
     // return to previous screen as if the back button tapped
     
@@ -1909,8 +1911,11 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //    NSString *cover = [self coverIdStringForServiceCall];
     
     
-    NSLog(@"save the des :%@", self.txtViewDescription.text );
-    
+//    NSLog(@"save the des :%@", self.txtViewDescription.text );
+//    
+//    NSLog(@"title %@", self.lblChannelTitle.text);
+//    NSLog(@"-----------------");
+//    NSLog(@"-----------------");
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
                                                      title: self.txtFieldChannelName.text
@@ -1943,9 +1948,6 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
                                              [self setVideosForChannelById: channelId //  2nd step of the creation process
                                                                  isUpdated: YES];
                                              
-                                             [[NSNotificationCenter defaultCenter] postNotificationName: kNoteAllNavControlsShow
-                                                                                                 object: self
-                                                                                               userInfo: nil];
                                              
                                              // this block will also call the [self getChanelById:channelId isUpdated:YES] //
                                          }

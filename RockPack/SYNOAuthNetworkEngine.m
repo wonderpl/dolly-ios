@@ -829,8 +829,10 @@
     {
         AssertOrLog(@"One or more of the required parameters is nil");
     }
-
-
+    
+    NSLog(@"des :%@ \n ,%@", description, params);
+    
+    
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
@@ -955,7 +957,6 @@
     
     [self enqueueSignedOperation: networkOperation];
 }
-
 
 // Multiple videos
 - (void) videosForChannelForUserId: (NSString *) userId
@@ -1323,6 +1324,18 @@
     [self enqueueSignedOperation: networkOperation];
 }
 
+#pragma mark - Profile cover image
+
+
+- (void) uploadCoverImageForUserId: (NSString *) userId
+                           image: (UIImage *) image
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+
+}
+
+
 
 #pragma mark - Subscriptions
 
@@ -1365,6 +1378,9 @@
 
     // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    
+    NSLog(@"api string, %@", apiString);
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: nil
@@ -1668,6 +1684,51 @@
     
     [self enqueueSignedOperation: networkOperation];
 }
+
+//To subscribe to all channels owned by a specific user POST to the activity service.
+
+
+- (void) SubscribeAllChannelsForUserId: (NSString *) userId
+                        channelURL: (NSString *) channelURL
+                 completionHandler: (MKNKUserSuccessBlock) completionBlock
+                      errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPICreateUserSubscription stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    
+    NSLog(@"api string, %@", apiString);
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: nil
+                                                                                                   httpMethod: @"POST"
+                                                                                                          ssl: YES];
+    
+    
+    [networkOperation setCustomPostDataEncodingHandler: ^NSString * (NSDictionary *postDataDict)
+     {
+         // Wrap it in quotes to make it valid JSON
+         NSString *channelURLJSONString = [NSString stringWithFormat: @"\"%@\"", channelURL];
+         return channelURLJSONString;
+     }
+                                               forType: @"application/json"];
+    
+    [networkOperation addHeaders: @{@"Content-Type" : @"application/json"}];
+    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+    
+    //    DebugLog(@"%@", networkOperation);
+}
+
 
 
 #pragma mark - Push notification token update

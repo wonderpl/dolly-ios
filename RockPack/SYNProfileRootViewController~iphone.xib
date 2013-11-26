@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNProfileRootViewController">
             <connections>
                 <outlet property="aboutMeTextView" destination="JUa-73-uP8" id="uVc-ZN-OmZ"/>
+                <outlet property="backgroundView" destination="87Q-F8-WoV" id="dgD-Q8-4R7"/>
                 <outlet property="channelLayoutIPhone" destination="OHx-Au-cg1" id="9Hr-M7-YV6"/>
                 <outlet property="channelThumbnailCollectionView" destination="0Yx-dc-wS8" id="Fnp-Jg-2dm"/>
                 <outlet property="collectionsTabButton" destination="cbc-Sn-3Xw" id="i22-Wo-SLk"/>
@@ -33,13 +34,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="q5m-iH-3Ci">
-                    <rect key="frame" x="0.0" y="-8" width="320" height="253"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverImageTest.jpg" id="q5m-iH-3Ci" userLabel="Image View - Cover image">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.30551437040000001" green="0.63401003649999998" blue="0.1675980839" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
-                <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="Gpk-go-IZt">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="584"/>
+                <view contentMode="scaleToFill" id="87Q-F8-WoV" userLabel="View - Background ">
+                    <rect key="frame" x="0.0" y="253" width="321" height="315"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="Gpk-go-IZt" userLabel="Collection View - Subscriptions Collection">
+                    <rect key="frame" x="0.0" y="8" width="320" height="584"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4RR-LR-xcl">
@@ -54,8 +59,8 @@
                         <outlet property="delegate" destination="-1" id="CxB-n2-HkS"/>
                     </connections>
                 </collectionView>
-                <searchBar contentMode="redraw" translucent="NO" id="rgJ-Mu-6Zf">
-                    <rect key="frame" x="0.0" y="473" width="320" height="44"/>
+                <searchBar contentMode="redraw" translucent="NO" id="rgJ-Mu-6Zf" userLabel="Search Bar - Subscriber Search">
+                    <rect key="frame" x="0.0" y="481" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="barTintColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits"/>
@@ -63,8 +68,17 @@
                         <outlet property="delegate" destination="-1" id="FgS-NP-jTw"/>
                     </connections>
                 </searchBar>
-                <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="584"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY" userLabel="Button - Follower Count">
+                    <rect key="frame" x="70" y="370" width="180" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="122000 followers ">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8" userLabel="Collection View - Channel collection">
+                    <rect key="frame" x="0.0" y="8" width="320" height="584"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OHx-Au-cg1">
@@ -79,8 +93,8 @@
                         <outlet property="delegate" destination="-1" id="U4k-zh-4K9"/>
                     </connections>
                 </collectionView>
-                <view contentMode="scaleToFill" id="KiH-Yk-GZo">
-                    <rect key="frame" x="37" y="428" width="246" height="25"/>
+                <view contentMode="scaleToFill" id="KiH-Yk-GZo" userLabel="View - Segmented controlelr">
+                    <rect key="frame" x="37" y="436" width="246" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="cbc-Sn-3Xw">
@@ -114,8 +128,8 @@
                         </button>
                     </subviews>
                 </view>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" id="JUa-73-uP8">
-                    <rect key="frame" x="30" y="323" width="260" height="42"/>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" id="JUa-73-uP8" userLabel="Text View - Description">
+                    <rect key="frame" x="30" y="331" width="260" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                     <string key="text">Something about 
@@ -129,7 +143,7 @@ me...</string>
                     </connections>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vH4-no-prL">
-                    <rect key="frame" x="119" y="381" width="88" height="43"/>
+                    <rect key="frame" x="119" y="389" width="88" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -137,9 +151,12 @@ me...</string>
                         <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="followAllTapped:" destination="-1" eventType="touchUpInside" id="d3P-zD-xjf"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xAT-fj-vhM">
-                    <rect key="frame" x="119" y="381" width="88" height="43"/>
+                    <rect key="frame" x="119" y="389" width="88" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -151,12 +168,12 @@ me...</string>
                         <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="g0R-BH-PZM"/>
                     </connections>
                 </button>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="zi6-5Y-tAR">
-                    <rect key="frame" x="-1" y="268" width="321" height="43"/>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="zi6-5Y-tAR" userLabel="View - Moving Header View">
+                    <rect key="frame" x="-1" y="276" width="321" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="29c-Ki-1uc">
-                            <rect key="frame" x="0.0" y="27" width="320" height="40"/>
+                            <rect key="frame" x="0.0" y="19" width="320" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <attributedString key="attributedText">
@@ -173,8 +190,8 @@ me...</string>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SOt-r8-4Fb">
-                    <rect key="frame" x="282" y="245" width="38" height="38"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SOt-r8-4Fb" userLabel="Button - More Button">
+                    <rect key="frame" x="282" y="255" width="38" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonMore.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,20 +201,11 @@ me...</string>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="5Wb-qH-nzQ" userLabel="ImageView - Avatar">
-                    <rect key="frame" x="112" y="197" width="96" height="96"/>
+                    <rect key="frame" x="112" y="205" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY">
-                    <rect key="frame" x="70" y="362" width="180" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="122000 followers ">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mqd-D1-g4D" userLabel="Button - Upload Cover Image">
-                    <rect key="frame" x="112" y="71" width="96" height="96"/>
+                    <rect key="frame" x="112" y="79" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonUpload.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -207,7 +215,7 @@ me...</string>
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Vn-mZ-fhR" userLabel="Button - Upload Avatar">
-                    <rect key="frame" x="113" y="197" width="96" height="96"/>
+                    <rect key="frame" x="113" y="205" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonUpload.png">
@@ -226,5 +234,6 @@ me...</string>
     <resources>
         <image name="ButtonMore.png" width="38" height="38"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
+        <image name="coverImageTest.jpg" width="917" height="513"/>
     </resources>
 </document>

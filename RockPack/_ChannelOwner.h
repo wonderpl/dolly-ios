@@ -5,7 +5,9 @@
 #import "AbstractCommon.h"
 
 extern const struct ChannelOwnerAttributes {
+	__unsafe_unretained NSString *channelOwnerDescription;
 	__unsafe_unretained NSString *displayName;
+	__unsafe_unretained NSString *followersTotalCount;
 	__unsafe_unretained NSString *position;
 	__unsafe_unretained NSString *thumbnailURL;
 	__unsafe_unretained NSString *username;
@@ -29,6 +31,8 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
+
+
 @interface ChannelOwnerID : NSManagedObjectID {}
 @end
 
@@ -42,11 +46,35 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* channelOwnerDescription;
+
+
+
+//- (BOOL)validateChannelOwnerDescription:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* displayName;
 
 
 
 //- (BOOL)validateDisplayName:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* followersTotalCount;
+
+
+
+@property int64_t followersTotalCountValue;
+- (int64_t)followersTotalCountValue;
+- (void)setFollowersTotalCountValue:(int64_t)value_;
+
+//- (BOOL)validateFollowersTotalCount:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -132,8 +160,23 @@ extern const struct ChannelOwnerFetchedProperties {
 @interface _ChannelOwner (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSString*)primitiveChannelOwnerDescription;
+- (void)setPrimitiveChannelOwnerDescription:(NSString*)value;
+
+
+
+
 - (NSString*)primitiveDisplayName;
 - (void)setPrimitiveDisplayName:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveFollowersTotalCount;
+- (void)setPrimitiveFollowersTotalCount:(NSNumber*)value;
+
+- (int64_t)primitiveFollowersTotalCountValue;
+- (void)setPrimitiveFollowersTotalCountValue:(int64_t)value_;
 
 
 

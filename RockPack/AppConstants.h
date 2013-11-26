@@ -201,6 +201,7 @@ typedef enum : NSInteger {
 #define kChannelUpdateRequest       @"kChannelUpdateRequest"
 #define kChannelOwnerUpdateRequest  @"kChannelOwnerUpdateRequest"
 #define kChannelDeleteRequest       @"kChannelDeleteRequest"
+#define kChannelSubscribeToUserRequest @"kChannelOwnerSubscribeToUserRequest"
 
 #define kRefreshComplete            @"kRefreshComplete"
 
@@ -529,8 +530,6 @@ typedef enum : NSInteger
 #define kNoteTopRightControlsShow   @"kNoteTopRightControlsShow"
 #define kNoteTopRightControlsHide   @"kNoteTopRightControlsHide"
 
-#define kNoteAllNavControlsShow     @"kNoteAllNavControlsShow"
-#define kNoteAllNavControlsHide     @"kNoteAllNavControlsHide"
 #define kNoteHideTitleAndDots       @"kNoteAllHideTitleAndDots"
 
 #define kChannelsNavControlsHide    @"kChannelsNavControlsHide"

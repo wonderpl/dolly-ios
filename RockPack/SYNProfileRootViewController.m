@@ -29,6 +29,7 @@
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
 #import "SYNAccountSettingsViewController.h"
+#import "UIImage+blur.h"
 
 
 @import QuartzCore;
@@ -38,12 +39,13 @@
 #define PULL_THRESHOLD_IPAD 0.0f
 #define ADDEDBOUNDS 200.0f
 #define TABBAR_HEIGHT 49.0f
-#define FULL_NAME_LABEL_IPHONE 272.0f // lower is down
+#define FULL_NAME_LABEL_IPHONE 276.0f // lower is down
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 415.0f
 #define ALPHA_IN_EDIT 0.4f
 #define OFFSET_DESCRIPTION_EDIT 130.0f
+#define PARALLAX_SCROLL_VALUE 2.0f
 
 //delete function in channeldetails deletechannel
 
@@ -119,8 +121,11 @@
 @property (nonatomic) CGPoint offsetBeforeSearch;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
+@property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (strong, nonatomic) UIAlertView *unfollowAlertView;
+@property (strong, nonatomic) UIAlertView *followAllAlertView;
 
 
 @end
@@ -263,17 +268,6 @@
                                                          alpha: 1.0f];
     
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    
-    //This should not be needed
-    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                                 target:nil
-                                                                                                 action:nil];
     
     [self setProfleType:self.modeType];
     
@@ -313,10 +307,15 @@
     if (IS_IPAD)
     {
         self.aboutMeTextView.translatesAutoresizingMaskIntoConstraints = YES;
-        
     }
-
     
+    [self.navigationController.navigationItem.leftBarButtonItem setTitle:@""];
+ 
+    self.unfollowAlertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    
+    self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -338,6 +337,23 @@
     
     //self.channelThumbnailCollectionView.contentOffset = CGPointZero;
     //self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+    // Setting navigation bar settings
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    //    [self.navigationController setTitle:@""];
+    self.navigationItem.title = @"";
+    
+    
+    //This should not be needed
+    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                                 target:nil
+                                                                                                 action:nil];
+
     
 }
 
@@ -389,12 +405,28 @@
     self.deletionModeActive = NO;
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
+    
+
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
+    
+    //This should not be needed
+    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    
+    
+}
 
 #pragma mark - Container Scroll Delegates
 - (void) viewDidScrollToFront
@@ -777,9 +809,6 @@
     
     UICollectionViewCell *cell = nil;
     
-    
-    
-    
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
         SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
@@ -830,7 +859,7 @@
             }
             
             [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)];
-            
+           // NSLog(@"totalvideos value in pro%ld", (long)channel.totalVideosValue);
             
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
             
@@ -1077,7 +1106,7 @@
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
     
-    
+ //   NSLog(@"%f", offset);
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
         
@@ -1105,24 +1134,41 @@
             self.followersCountButton.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
-            self.coverImage.transform = move;
 
-//            if (offset<0)
-//            {
-//                //Scale the cover phote in iphone
-//                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/100,1+ fabsf(offset)/100);
-//                self.coverImage.transform = scale;
-//            }
-//            else
-//            {
-//                self.coverImage.transform = move;
-//                
-//            }
+
+            if (offset<0)
+            {
+                //Scale the cover phote in iphone
+                CGAffineTransform scale = CGAffineTransformMakeScale(1+ fabsf(offset)/250,1+ fabsf(offset)/250);
+                self.coverImage.transform = scale;
+
+                CGRect tmpFrame = self.coverImage.frame;
+                tmpFrame.origin.y = 0;
+                self.coverImage.frame = tmpFrame;
+                
+//                self.coverImage.transform = CGAffineTransformConcat(scale, move);
+
+//NSLog(@"%f", offset);
+//Way too slow
+//[self.coverImage setImage:[self.coverImage.image blur:self.coverImage.image withBlurValue:fabsf(offset)]];
+       
+
+                self.backgroundView.transform = move;
+
+            }
+            else
+            {
+                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, -offset/PARALLAX_SCROLL_VALUE);
+
+                self.coverImage.transform = moveCoverImage;
+                self.backgroundView.transform = move;
+                
+            }
+            
             [self moveNameLabelWithOffset:offset];
         }
         else
         {
-            
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
             self.coverImage.transform = move;
             self.moreButton.transform = move;
@@ -1130,6 +1176,41 @@
             self.followersCountButton.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
+
+            //scaling
+            if (offset<0)
+            {
+                //Scale the cover phote in iphone
+                CGAffineTransform scale;
+                
+                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
+                {
+                
+                scale = CGAffineTransformMakeScale(1+ fabsf(offset)/530,1+ fabsf(offset)/530);
+                    
+                }else
+                {
+                    scale = CGAffineTransformMakeScale(1+ fabsf(offset)/400,1+ fabsf(offset)/400);
+                }
+                
+                self.coverImage.transform = scale;
+                self.backgroundView.transform = move;
+                
+                //recentre the image, root of problem is in autolayout
+                CGRect tmpRect = self.coverImage.frame;
+                CGAffineTransform move = CGAffineTransformMakeTranslation(self.view.center.x - tmpRect.size.width/2, 0);
+
+                self.coverImage.transform = CGAffineTransformConcat(scale, move);
+                
+            }
+            else
+            {
+                //parallaxing
+                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, -offset/PARALLAX_SCROLL_VALUE);
+                self.coverImage.transform = moveCoverImage;
+                self.backgroundView.transform = move;
+                
+            }
 
             [self moveNameLabelWithOffset:offset];
         }
@@ -1626,11 +1707,13 @@
     NSString *message = @"Are you sure you want to unfollow";
     message =  [message stringByAppendingString:@" "];
     message =  [message stringByAppendingString:((SYNChannelMidCell*)cell).channel.title];
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:message delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+
+    [self.unfollowAlertView setMessage:message];
+    
     self.followCell = ((SYNChannelMidCell*)cell);
     
     if (modeType == modeMyOwnProfile) {
-        [alertView show];
+        [self.unfollowAlertView show];
     }
     else if(modeType == modeOtherUsersProfile)
     {
@@ -1661,8 +1744,11 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:[self yesButtonTitle]])
+    
+    
+    if (alertView == self.unfollowAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
+        
         if (self.followCell.channel != nil)
         {
             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
@@ -1670,6 +1756,19 @@
                                                               userInfo: @{kChannel : self.followCell.channel}];
         }
     }
+    
+    if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
+    {
+     
+        
+//        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
+//        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
+//                                                            object: self
+//                                                          userInfo: @{kChannelOwner : self.channelOwner}];
+
+    }
+    
+
 }
 
 
@@ -1811,10 +1910,77 @@
 
 -(void) saveTapped
 {
-    NSLog(@"Save profile");
+
+    NSLog(@"Save Tapped");
+    
+    [self updateField:@"description" forValue:self.aboutMeTextView.text withCompletionHandler:^{
+        appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
+        [appDelegate saveContext: YES];
+        [self cancelTapped];
+    
+    }];
+//
+//    
+//
+    
+    
 }
 
+- (void) updateField: (NSString *) field
+            forValue: (id) newValue
+withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
+{
+    
+    NSLog(@"updateField %@, with value %@", field, newValue);
+    
+    [appDelegate.oAuthNetworkEngine changeUserField: field
+                                                 forUser: appDelegate.currentUser
+                                            withNewValue: newValue
+                                       completionHandler: ^(NSDictionary * dictionary){
 
+
+//                                           [self.spinner stopAnimating];
+//                                           self.saveButton.hidden = NO;
+//                                           self.saveButton.enabled = YES;
+                                           
+                                           successBlock();
+                                           
+                                           [[NSNotificationCenter defaultCenter]  postNotificationName: kUserDataChanged
+                                                                                                object: self
+                                                                                              userInfo: @{@"user": appDelegate.currentUser}];
+                                           
+//                                           [self.spinner stopAnimating];
+                                           
+                                       } errorHandler: ^(id errorInfo) {
+                                           
+//                                           [self.spinner stopAnimating];
+//                                           
+//                                           self.saveButton.hidden = NO;
+//                                           self.saveButton.enabled = YES;
+                                           
+                                           if (!errorInfo || ![errorInfo isKindOfClass: [NSDictionary class]])
+                                           {
+                                               return;
+                                           }
+                                           
+                                           NSString *message = errorInfo[@"message"];
+                                           
+                                           if (message)
+                                           {
+                                               if ([message isKindOfClass: [NSArray class]])
+                                               {
+//                                                   self.errorLabel.text = (NSString *) ((NSArray *) message)[0];
+                                                   
+                                                   NSLog(@"Error %@", message);
+                                               }
+                                               else if ([message isKindOfClass: [NSString class]])
+                                               {
+//                                                   self.errorLabel.text = message;
+                                                     NSLog(@"Error %@", message);
+                                               }
+                                           }
+                                       }];
+}
 
 #pragma mark - Text View Delegates
 
@@ -1887,6 +2053,31 @@
     [self.imagePickerController presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
 }
 
+
+- (IBAction)followAllTapped:(id)sender
+{
+    NSLog(@"Follow all");
+    NSString *message = @"Are you sure you want to follow all channels of this user";
+    message =  [message stringByAppendingString:@" "];
+    message =  [message stringByAppendingString:self.channelOwner.username];
+    
+    [self.followAllAlertView setMessage:message];
+    
+    if(modeType == modeOtherUsersProfile)
+    {
+        [self.followAllAlertView show];
+        
+        //Need to refresh the cell
+//        if (self.followCell.channel.channelOwner.subscribedByUserValue == NO)
+//        {
+//            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow All", @"unfollow")];
+//        }
+//        else
+//        {
+//            [self.followCell setFollowButtonLabel:NSLocalizedString(@"UnFollow All", @"follow")];
+//        }
+    }
+}
 
 - (void) picker: (SYNImagePickerController *) picker
 finishedWithImage: (UIImage *) image

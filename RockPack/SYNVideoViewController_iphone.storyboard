@@ -42,7 +42,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ed8-p3-bzl" userLabel="Channel Info">
-                                <rect key="frame" x="136" y="34" width="48" height="90"/>
+                                <rect key="frame" x="136" y="34" width="48" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhs-Vw-fKo" userLabel="Image View - Channel Image">
@@ -61,7 +61,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exl-4H-uqi">
-                                        <rect key="frame" x="0.0" y="72" width="48" height="18"/>
+                                        <rect key="frame" x="0.0" y="74" width="48" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -69,13 +69,14 @@
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="220" id="2e7-XR-bCa"/>
                                     <constraint firstAttribute="centerX" secondItem="Dhs-Vw-fKo" secondAttribute="centerX" id="2qw-hg-6fu"/>
                                     <constraint firstItem="exl-4H-uqi" firstAttribute="leading" secondItem="Ed8-p3-bzl" secondAttribute="leading" id="6Ij-mW-6aD"/>
                                     <constraint firstItem="gCJ-cn-ZdS" firstAttribute="leading" secondItem="Ed8-p3-bzl" secondAttribute="leading" id="LxS-jV-kVA"/>
                                     <constraint firstAttribute="trailing" secondItem="gCJ-cn-ZdS" secondAttribute="trailing" id="T1q-B2-O0m"/>
                                     <constraint firstItem="Dhs-Vw-fKo" firstAttribute="top" secondItem="Ed8-p3-bzl" secondAttribute="top" id="UHa-s2-Yfa"/>
                                     <constraint firstItem="Dhs-Vw-fKo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ed8-p3-bzl" secondAttribute="leading" id="Xsr-Dk-u5A"/>
-                                    <constraint firstItem="exl-4H-uqi" firstAttribute="top" secondItem="gCJ-cn-ZdS" secondAttribute="bottom" id="YM9-or-bPB"/>
+                                    <constraint firstItem="exl-4H-uqi" firstAttribute="top" secondItem="gCJ-cn-ZdS" secondAttribute="bottom" constant="2" id="YM9-or-bPB"/>
                                     <constraint firstAttribute="trailing" secondItem="exl-4H-uqi" secondAttribute="trailing" id="ddW-yb-s1H"/>
                                     <constraint firstAttribute="bottom" secondItem="exl-4H-uqi" secondAttribute="bottom" id="lLf-wh-x8u"/>
                                     <constraint firstItem="gCJ-cn-ZdS" firstAttribute="top" secondItem="Dhs-Vw-fKo" secondAttribute="bottom" constant="8" id="xu4-qp-stb"/>
@@ -83,7 +84,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UnA-NR-PfF">
-                                <rect key="frame" x="0.0" y="132" width="320" height="180"/>
+                                <rect key="frame" x="0.0" y="134" width="320" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -96,7 +97,7 @@
                                 </connections>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="xuq-35-BVa">
-                                <rect key="frame" x="69" y="320" width="180" height="16"/>
+                                <rect key="frame" x="69" y="322" width="180" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="Tho-Hp-BXx"/>
@@ -105,8 +106,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PA1-NG-xwD">
-                                <rect key="frame" x="71" y="344" width="179" height="49"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PA1-NG-xwD" userLabel="Buttons">
+                                <rect key="frame" x="71" y="374" width="179" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuI-UM-irf" customClass="SYNSocialButton">
@@ -190,7 +191,7 @@
                             <constraint firstAttribute="trailing" secondItem="BmT-79-pdy" secondAttribute="trailing" id="KVS-wE-J4G"/>
                             <constraint firstAttribute="trailing" secondItem="nix-aO-P7e" secondAttribute="trailing" constant="10" id="Spi-ws-hlf"/>
                             <constraint firstItem="xuq-35-BVa" firstAttribute="top" secondItem="UnA-NR-PfF" secondAttribute="bottom" constant="8" id="ZOn-lR-WYS"/>
-                            <constraint firstItem="PA1-NG-xwD" firstAttribute="top" secondItem="xuq-35-BVa" secondAttribute="bottom" constant="8" id="e4Y-sh-EUc"/>
+                            <constraint firstItem="PA1-NG-xwD" firstAttribute="top" secondItem="xuq-35-BVa" secondAttribute="bottom" constant="36" id="e4Y-sh-EUc"/>
                             <constraint firstItem="e7D-zG-eqc" firstAttribute="top" secondItem="Lkb-92-sI5" secondAttribute="bottom" id="eLH-jL-Dnd"/>
                             <constraint firstItem="nix-aO-P7e" firstAttribute="top" secondItem="Lkb-92-sI5" secondAttribute="bottom" id="hLb-L0-7BR"/>
                             <constraint firstAttribute="centerX" secondItem="Ed8-p3-bzl" secondAttribute="centerX" id="nXS-Y6-Tnk"/>

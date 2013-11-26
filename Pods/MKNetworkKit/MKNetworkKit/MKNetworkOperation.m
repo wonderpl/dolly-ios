@@ -201,6 +201,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   [self.request setValue:
    [NSString stringWithFormat:@"%@; charset=%@", contentType, charset]
       forHTTPHeaderField:@"Content-Type"];
+    
 }
 //===========================================================
 //  freezable
@@ -1473,6 +1474,10 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
     dispatch_async(dispatch_get_main_queue(), ^{
       
       jsonDecompressionHandler(returnValue);
+        
+        NSLog(@"%@", returnValue);
+        
+        
     });
   });
 }

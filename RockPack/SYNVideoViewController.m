@@ -54,7 +54,8 @@
 #pragma mark - Public class
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
-	NSString *filename = (IS_IPAD ? @"SYNVideoViewController_ipad" : @"SYNVideoViewController_iphone");
+	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
+	NSString *filename = [NSString stringWithFormat:@"SYNVideoViewController_%@", suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
 	SYNVideoViewController *viewController = [storyboard instantiateInitialViewController];
@@ -86,7 +87,7 @@
 	UINib *videoThumbnailCellNib = [SYNVideoThumbnailSmallCell nib];
 	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
 				   forCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]];
-
+	
 	[self playVideoAtIndex:self.selectedIndex];
 }
 
@@ -101,9 +102,9 @@
 	[super viewDidAppear:animated];
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
-	[self.thumbnailCollectionView scrollToItemAtIndexPath:indexPath
-										 atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-												 animated:YES];
+	[self.thumbnailCollectionView selectItemAtIndexPath:indexPath
+											   animated:YES
+										 scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -116,16 +117,11 @@
 #pragma mark - Getters / Setters
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
-	NSIndexPath *previousSelectedIndexPath = [NSIndexPath indexPathForRow:_selectedIndex inSection:0];
-	
 	_selectedIndex = selectedIndex;
 	
 	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
-	[self.thumbnailCollectionView scrollToItemAtIndexPath:selectedIndexPath
-										 atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-												 animated:YES];
 	
-	[self.thumbnailCollectionView reloadItemsAtIndexPaths:@[ previousSelectedIndexPath, selectedIndexPath ]];
+	[self.thumbnailCollectionView selectItemAtIndexPath:selectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -302,7 +298,7 @@
 
 - (void)updateVideoDetailsForIndex:(int)index {
 	VideoInstance *videoInstance = self.videoInstances[index];
-
+	
 	if ([videoInstance.channel.channelOwner.displayName length]) {
 		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
 									   placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
@@ -310,11 +306,12 @@
 	} else {
 		self.channelThumbnailImageView.image = nil;
 	}
-
+	
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
 	self.channelOwnerLabel.text = ([channelOwnerName length] ? [NSString stringWithFormat: @"By %@", channelOwnerName] : @"");
 	self.channelTitleLabel.text = videoInstance.channel.title;
 	self.videoTitleLabel.text = videoInstance.title;
+	
 	self.likeButton.selected = videoInstance.starredByUserValue;
 	[self.likeButton setTitle:@"likes" andCount:[videoInstance.video.starCount integerValue]];
 	

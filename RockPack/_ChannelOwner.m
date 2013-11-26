@@ -4,7 +4,9 @@
 #import "_ChannelOwner.h"
 
 const struct ChannelOwnerAttributes ChannelOwnerAttributes = {
+	.channelOwnerDescription = @"channelOwnerDescription",
 	.displayName = @"displayName",
+	.followersTotalCount = @"followersTotalCount",
 	.position = @"position",
 	.thumbnailURL = @"thumbnailURL",
 	.username = @"username",
@@ -45,6 +47,11 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"followersTotalCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"followersTotalCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"positionValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"position"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -57,8 +64,41 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 
 
 
+@dynamic channelOwnerDescription;
+
+
+
+
+
+
 @dynamic displayName;
 
+
+
+
+
+
+@dynamic followersTotalCount;
+
+
+
+- (int64_t)followersTotalCountValue {
+	NSNumber *result = [self followersTotalCount];
+	return [result longLongValue];
+}
+
+- (void)setFollowersTotalCountValue:(int64_t)value_ {
+	[self setFollowersTotalCount:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveFollowersTotalCountValue {
+	NSNumber *result = [self primitiveFollowersTotalCount];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveFollowersTotalCountValue:(int64_t)value_ {
+	[self setPrimitiveFollowersTotalCount:[NSNumber numberWithLongLong:value_]];
+}
 
 
 
