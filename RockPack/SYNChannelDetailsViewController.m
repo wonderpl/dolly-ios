@@ -1886,6 +1886,17 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     if(IS_IPAD)
     {
         UINavigationController* navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:subscribersViewController];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 30.0f)];
+        
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont lightCustomFontOfSize:25];
+        
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor blackColor];
+        label.text = @"Followers";
+        subscribersViewController.navigationItem.titleView = label;
+        
         navigationControllerWrapper.view.frame = subscribersViewController.view.frame;
         [appDelegate.masterViewController addOverlayController:navigationControllerWrapper animated:YES];
     }

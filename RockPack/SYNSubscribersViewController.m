@@ -306,12 +306,17 @@
                                                forRange: self.dataRequestRange
                                             byAppending: YES
                                       completionHandler: ^(int count) {
+                                          
+                                          
                                           self.dataItemsAvailable = count;
                                           self.loadingMoreContent = NO;
                                           [self displayUsers];
-                                      }
-                                           errorHandler: ^{
-                                           }];
+                                          
+                                          
+                                      } errorHandler: ^{
+                                          
+                                      
+                                      }];
     }
 }
 
