@@ -1883,7 +1883,7 @@
     
     self.aboutMeTextView.editable = NO;
 
-
+    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = 1.0f;
@@ -1921,8 +1921,6 @@
 
 -(void) saveTapped
 {
-
-    NSLog(@"Save Tapped");
     
     [self updateField:@"description" forValue:self.aboutMeTextView.text withCompletionHandler:^{
         appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
@@ -1941,8 +1939,6 @@
             forValue: (id) newValue
 withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 {
-    
-    NSLog(@"updateField %@, with value %@", field, newValue);
     
     [appDelegate.oAuthNetworkEngine changeUserField: field
                                                  forUser: appDelegate.currentUser
