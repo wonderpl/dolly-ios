@@ -194,12 +194,6 @@ typedef void(^FeedDataErrorBlock)(void);
         {
             [wself displayPopupMessage: NSLocalizedString(@"feed_screen_updating_error", nil)
                             withLoader: NO];
-            
-            [NSTimer scheduledTimerWithTimeInterval: 3.0f
-                                             target: self
-                                           selector: @selector(removeEmptyGenreMessage)
-                                           userInfo: nil
-                                            repeats: NO];
         }
         
         self.loadingMoreContent = NO;
