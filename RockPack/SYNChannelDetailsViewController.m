@@ -213,6 +213,8 @@ UIPopoverControllerDelegate>
                                                  blue: (42.0f / 255.0f)
                                                 alpha: 1.0f];
 
+    
+    
     //programmatically seting the edgeinset for iphone and ipad
     //Not able to set within the nib
     
@@ -231,12 +233,11 @@ UIPopoverControllerDelegate>
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
     self.activityIndicator.frame = self.view.frame;
 
-    [self displayChannelDetails];
-
-
    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
 
+    
+    
 }
 
 
@@ -261,8 +262,9 @@ UIPopoverControllerDelegate>
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
-    
-    
+    //[self.navigationItem.backBarButtonItem setTitle:@""];
+
+
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(coverImageChangedHandler:)
                                                  name: kCoverArtChanged
@@ -281,11 +283,11 @@ UIPopoverControllerDelegate>
     
     if (self.channel.subscribedByUserValue)
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Unfollow", nil)]];
     }
     else
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"follow", nil)]];
     }
     
     
@@ -355,6 +357,8 @@ UIPopoverControllerDelegate>
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
     
+    
+    [self.navigationController.navigationBar.backItem setTitle:@""];
 
     
 }
@@ -524,30 +528,35 @@ UIPopoverControllerDelegate>
     
     self.txtViewDescription.text = self.lblDescription.text;
     
-    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
+    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
     
     self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
-    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
+    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
+    
+    [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
+
+    [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
+
+    
+    NSLog(@"is subed ?, %@", self.channel.subscribedByUser);
     
     if (self.channel.subscribedByUserValue == YES)
     {
-        [self.btnFollowChannel setTitle:NSLocalizedString(@"Unfollow", @"unfollow")];
+        [self.btnFollowChannel setTitle:NSLocalizedString(@"Unfollow", @"unfollow a channel")];
     }
     else
     {
-        [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow")];
+        [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow a channel")];
     }
-    
-    if (self.channel.videoInstances.count == 0) {
+    if (self.channel.videoInstances.count == 0)
+    {
         self.lblNoVideos.hidden = NO;
     }
     else
     {
         self.lblNoVideos.hidden = YES;
-
     }
-    
     
 }
 #pragma mark - Control Actions
@@ -559,6 +568,9 @@ UIPopoverControllerDelegate>
     // Update google analytics
     
     // Defensive programming
+    
+ //   NSLog(@"Channel subscribed by user, %@", self.channel.subscribedByUser);
+    
     if (self.channel != nil)
     {
         
@@ -567,13 +579,13 @@ UIPopoverControllerDelegate>
                                                           userInfo: @{kChannel : self.channel}];
     }
     
-    if (self.channel.subscribedByUserValue)
+    if (self.channel.subscribedByUserValue == YES)
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Unfollow", nil)]];
     }
     else
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Follow", nil)]];
     }
     
 }
@@ -618,9 +630,6 @@ UIPopoverControllerDelegate>
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
 
-    
-    
-    
 }
 
 #pragma mark - ScrollView Delegate
@@ -751,7 +760,10 @@ UIPopoverControllerDelegate>
 
 - (void) setChannel: (Channel *) channel
 {
+    
     self.originalChannel = channel;
+    
+    [self.activityIndicator startAnimating];
     
     NSError *error = nil;
     
@@ -859,6 +871,7 @@ UIPopoverControllerDelegate>
     
 
     [self displayChannelDetails];
+    [self.activityIndicator stopAnimating];
     
     
 }
@@ -914,9 +927,8 @@ UIPopoverControllerDelegate>
         if (obj == self.channel)
         {
             self.dataItemsAvailable = self.channel.totalVideosValue;
-            
-            
-            self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+            //does this do anything, do i need it?
+         //   self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
             
             if (self.subscribingIndicator)
             {
@@ -1157,6 +1169,22 @@ referenceSizeForFooterInSection: (NSInteger) section
         }
     }
 }
+- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+        ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
+                                                green: (57.0f / 255.0f)
+                                                 blue: (57.0f / 255.0f)
+                                                alpha: 0.5f];
+    
+}
+
+- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = nil;
+}
+
+
+
 
 -(void) centreView : (UIView*) viewToCentre
 {
@@ -1185,6 +1213,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         candidateCell = candidateCell.superview;
     }
     
+    
     SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
     
@@ -1196,6 +1225,12 @@ referenceSizeForFooterInSection: (NSInteger) section
                                    withVideoInstanceArray: videoInstancesToPlayArray
                                          andSelectedIndex: indexPath.item
                                                fromCenter: self.view.center];
+    
+    selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
+                                                                                  green: (57.0f / 255.0f)
+                                                                                   blue: (57.0f / 255.0f)
+                                                                                  alpha: 0.5f];
+
 }
 
 //
@@ -1442,10 +1477,13 @@ referenceSizeForFooterInSection: (NSInteger) section
 
     if (tmpUser.uniqueId == self.channel.channelOwner.uniqueId) {
      profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
+        profileVC.navigationItem.backBarButtonItem.title = @"";
+        
     }
     else
     {
         profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
+        profileVC.navigationItem.backBarButtonItem.title = @"";
 
     }
     [self.navigationController pushViewController:profileVC animated:YES];
@@ -1771,8 +1809,8 @@ referenceSizeForFooterInSection: (NSInteger) section
 - (IBAction)deleteTapped:(id)sender
 {
     
-    NSString *message = [NSString stringWithFormat: NSLocalizedString(@"DELETECHANNEL", nil), self.channel.title];
-    NSString *title = [NSString stringWithFormat: NSLocalizedString(@"AREYOUSUREYOUWANTTODELETE", nil), self.channel.title];
+    NSString *message = [NSString stringWithFormat: NSLocalizedString(@"Delete_Channel", nil), self.channel.title];
+    NSString *title = [NSString stringWithFormat: NSLocalizedString(@"Are_you_sure_you_want_to_delete", nil), self.channel.title];
     
     self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle: title
                                                              message: message

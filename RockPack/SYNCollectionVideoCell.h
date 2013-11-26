@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (strong, nonatomic) IBOutlet UIView *overlayView;
 
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
@@ -30,5 +31,6 @@
 
 
 -(void) setUpVideoTap;
+
 
 @end

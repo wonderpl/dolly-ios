@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="295" height="268"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M54-bt-6WL">
+                    <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M54-bt-6WL">
                         <rect key="frame" x="20" y="20" width="248" height="139"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -22,7 +22,7 @@
                             <constraint firstAttribute="width" constant="248" id="HCF-Gj-Ikc"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-bN-MdJ" userLabel="Title">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-bN-MdJ" userLabel="Title">
                         <rect key="frame" x="20" y="167" width="248" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -74,6 +74,11 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fYX-j0-ZeU" userLabel="View - Overlay">
+                        <rect key="frame" x="20" y="20" width="248" height="139"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -98,6 +103,7 @@
                 <outlet property="deleteButton" destination="A11-9p-rXG" id="qEw-vT-tGK"/>
                 <outlet property="imageView" destination="M54-bt-6WL" id="wVr-He-xka"/>
                 <outlet property="likeControl" destination="e4D-AB-sGK" id="Ul2-BV-efz"/>
+                <outlet property="overlayView" destination="fYX-j0-ZeU" id="YsY-xX-9M1"/>
                 <outlet property="shareControl" destination="XWN-5L-kuq" id="0I1-7l-tUL"/>
                 <outlet property="titleLabel" destination="4l6-bN-MdJ" id="DX0-Ft-WHk"/>
             </connections>
