@@ -5,13 +5,12 @@
 //  Created by Michael Michailidis on 09/07/2013.
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
-
-#import "SYNUsersViewController.h"
+#import "SYNAbstractViewController.h"
 
 @class Channel;
 @class SYNMasterViewController;
 
-@interface SYNSubscribersViewController : SYNUsersViewController
+@interface SYNSubscribersViewController : SYNAbstractViewController
 
 @property (nonatomic, weak) Channel *channel;
 
