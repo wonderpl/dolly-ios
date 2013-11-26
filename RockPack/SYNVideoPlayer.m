@@ -12,10 +12,13 @@
 #import "SYNScrubberBar.h"
 #import "VideoInstance.h"
 #import "Video.h"
+#import "SYNVideoLoadingView.h"
 
 @interface SYNVideoPlayer () <SYNScrubberBarDelegate>
 
 @property (nonatomic, assign) SYNVideoPlayerState state;
+
+@property (nonatomic, strong) SYNVideoLoadingView *loadingView;
 
 @property (nonatomic, strong) SYNScrubberBar *scrubberBar;
 @property (nonatomic, strong) UIView *playerContainerView;
@@ -39,6 +42,7 @@
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		[self addSubview:self.playerContainerView];
+		[self addSubview:self.loadingView];
 		[self addSubview:self.scrubberBar];
 	}
 	return self;
@@ -109,6 +113,22 @@
 		self.scrubberBar = scrubberBar;
 	}
 	return _scrubberBar;
+}
+
+- (SYNVideoLoadingView *)loadingView {
+	if (!_loadingView) {
+		SYNVideoLoadingView *loadingView = [[SYNVideoLoadingView alloc] initWithFrame:self.bounds];
+		loadingView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+		
+		self.loadingView = loadingView;
+	}
+	return _loadingView;
+}
+
+- (void)setVideoInstance:(VideoInstance *)videoInstance {
+	_videoInstance = videoInstance;
+	
+	self.loadingView.videoInstance = videoInstance;
 }
 
 - (void)play {

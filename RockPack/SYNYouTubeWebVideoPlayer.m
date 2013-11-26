@@ -10,6 +10,7 @@
 #import "VideoInstance.h"
 #import "Video.h"
 #import "SYNScrubberBar.h"
+#import "SYNVideoLoadingView.h"
 #import <Reachability.h>
 
 @interface SYNYouTubeWebVideoPlayer () <UIWebViewDelegate>
@@ -167,12 +168,21 @@
 	}
 	
 	if ([actionName isEqualToString:@"stateChange"]) {
+		if ([actionData isEqualToString:@"playing"]) {
+			[UIView animateWithDuration:0.3 animations:^{
+				self.loadingView.alpha = 0.0;
+			}];
+		}
 		if ([actionData isEqualToString:@"ended"]) {
 			[self.delegate videoPlayerFinishedPlaying];
 		}
 	}
 	
 	if ([actionName isEqualToString:@"error"]) {
+		[UIView animateWithDuration:0.3 animations:^{
+			self.loadingView.alpha = 0.0;
+		}];
+		
 		[self.delegate videoPlayerErrorOccurred:actionData];
 	}
 }
