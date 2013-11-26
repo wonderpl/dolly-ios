@@ -77,7 +77,7 @@
     
     [self.userThumbnailButton setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
                                      forState: UIControlStateNormal
-                             placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                             placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriend"]
                                       options: SDWebImageRetryFailed];
     
     [self.userNameLabelButton setTitle:_channelOwner.displayName forState:UIControlStateNormal];

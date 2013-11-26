@@ -64,8 +64,6 @@
     NSMutableParagraphStyle *paragrapStyleCenter = [[NSMutableParagraphStyle alloc] init];
     paragrapStyleCenter.alignment = NSTextAlignmentCenter;
     
-    NSMutableParagraphStyle *paragrapStyleLeft = [[NSMutableParagraphStyle alloc] init];
-    paragrapStyleLeft.alignment = NSTextAlignmentLeft;
     
     
     [attributedMutString appendAttributedString: [[NSAttributedString alloc] initWithString: @"Mayberry v1.0.4\n"
@@ -88,7 +86,7 @@
     {
         [attributedMutString appendAttributedString: [[NSAttributedString alloc] initWithString: [NSString stringWithFormat:@"%@\n\n", credit]
                                                                                      attributes: @{NSForegroundColorAttributeName: [UIColor dollyTextMediumGray],
-                                                                                                   NSParagraphStyleAttributeName: paragrapStyleLeft,
+                                                                                                   NSParagraphStyleAttributeName: paragrapStyleCenter,
                                                                                                    NSFontAttributeName: [UIFont regularCustomFontOfSize:15]}]];
     }
     
@@ -96,6 +94,11 @@
     
     
     [self.textView sizeToFit];
+    
+    CGFloat centerScrollView = self.scrollView.frame.size.width * 0.5f;
+    self.textView.center = CGPointMake(centerScrollView, self.textView.center.y);
+    
+    self.textView.frame = CGRectIntegral(self.textView.frame);
     
     CGFloat offset = self.textView.frame.origin.y + self.textView.frame.size.height;
     
