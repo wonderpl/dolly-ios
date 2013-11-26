@@ -39,6 +39,7 @@
 #import <UIButton+WebCache.h>
 #import "objc/runtime.h"
 #import "SYNSubscribersViewController.h"
+#import "UIColor+SYNColor.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 149.0f
@@ -225,9 +226,13 @@ UIPopoverControllerDelegate>
     
     if (IS_IPAD)
     {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(520, 0, 0, 0);
+           self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(517, 0, 0, 0);
     }
 
+    if (self.mode == kChannelDetailsFavourites) {
+           // self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(490, 0, 0, 0);
+
+    }
 
     //not used yet
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
@@ -236,8 +241,7 @@ UIPopoverControllerDelegate>
    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
 
-    
-    
+    //    self.txtFieldChannelName.backgroundColor = [UIColor blueColor];
 }
 
 
@@ -352,13 +356,14 @@ UIPopoverControllerDelegate>
     [self.videoThumbnailCollectionView reloadData];
   //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
     
-    [self setUpMode];
 
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
     
     
     [self.navigationController.navigationBar.backItem setTitle:@""];
+
+    [self setUpMode];
 
     
 }
@@ -416,7 +421,7 @@ UIPopoverControllerDelegate>
     {
       //  [self iphoneMove];
     }
-//    [self setUpMode];
+    //[self setUpMode];
 }
 
 -(void) setUpMode
@@ -444,22 +449,37 @@ UIPopoverControllerDelegate>
         {
             self.btnEditChannel.hidden = YES;
             self.btnFollowChannel.hidden = YES;
-            
+//            self.lblDescription.hidden = YES;
+//
 //            [self moveView:self.viewCirleButtonContainer withY:20];
 //            [self moveView:self.viewFollowAndVideoContainer withY:20];
 //            [self moveView:self.viewCollectionSeperator withY:30];
-//            [self centreView:self.btnShareChannel];
+            [self centreView:self.btnShareChannel];
             
             CGRect tmpFrame = self.btnShareChannel.frame;
             tmpFrame.origin.x = 55;// [self.btnShareChannel superview].center.x;
             self.btnShareChannel.frame = tmpFrame;
-//            tmpFrame = self.viewCirleButtonContainer.frame;
-//            tmpFrame.origin.y -= 4;
-//            self.viewCirleButtonContainer.frame = tmpFrame;
-            
+            tmpFrame = self.viewCirleButtonContainer.frame;
+            tmpFrame.origin.y -= 4;
+            self.viewCirleButtonContainer.frame = tmpFrame;
 //            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(360, 0, 0, 0);
-            
         }
+        else
+        {
+            self.btnEditChannel.hidden = YES;
+            self.btnFollowChannel.hidden = YES;
+//            self.lblDescription.hidden = YES;
+            CGRect tmpFrame = self.btnShareChannel.frame;
+            tmpFrame.origin.x = 50;
+            self.btnShareChannel.frame = tmpFrame;
+//            [self moveView:self.viewCirleButtonContainer withY:15];
+//            [self moveView:self.viewFollowAndVideoContainer withY:10];
+
+//            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(480, 0, 0, 0);
+
+        }
+        
+        
     }
 }
 
@@ -473,6 +493,18 @@ UIPopoverControllerDelegate>
     movingView.frame = tmpFrame;
     
 }
+
+-(void) moveView:(UIView*) movingView withX: (CGFloat) x
+{
+    
+    CGRect tmpFrame;
+    
+    tmpFrame = movingView.frame;
+    tmpFrame.origin.x -= x;
+    movingView.frame = tmpFrame;
+    
+}
+
 
 - (BOOL) isFavouritesChannel
 {
@@ -499,14 +531,31 @@ UIPopoverControllerDelegate>
     }
     
     [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
-    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    
+    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    
+    if (IS_RETINA) {
+        //should be 0.5?
+        //border color turns black when set to 0.5
+        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    }
+    else
+    {
+        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    }
     [[self.txtFieldChannelName layer] setCornerRadius:0];
     
     [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
     
-    [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[self.txtViewDescription layer] setBorderWidth:1.0];
+    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    if (IS_RETINA)
+    {
+        [[self.txtViewDescription layer] setBorderWidth:0.5];
+    }
+    else
+    {
+        [[self.txtViewDescription layer] setBorderWidth:1.0];
+    }
     [[self.txtViewDescription layer] setCornerRadius:0];
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
@@ -538,9 +587,6 @@ UIPopoverControllerDelegate>
 
     [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
 
-    
-    NSLog(@"is subed ?, %@", self.channel.subscribedByUser);
-    
     if (self.channel.subscribedByUserValue == YES)
     {
         [self.btnFollowChannel setTitle:NSLocalizedString(@"Unfollow", @"unfollow a channel")];
@@ -1169,21 +1215,21 @@ referenceSizeForFooterInSection: (NSInteger) section
         }
     }
 }
-- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
-        ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
-                                                green: (57.0f / 255.0f)
-                                                 blue: (57.0f / 255.0f)
-                                                alpha: 0.5f];
-    
-}
-
-- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
-    ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = nil;
-}
-
-
+//- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+//        ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
+//                                                green: (57.0f / 255.0f)
+//                                                 blue: (57.0f / 255.0f)
+//                                                alpha: 0.5f];
+//    
+//}
+//
+//- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+//    ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = nil;
+//}
+//
+//
 
 
 -(void) centreView : (UIView*) viewToCentre
