@@ -9,7 +9,6 @@
 #import "GAI.h"
 #import "NSString+Utils.h"
 #import "SYNActivityManager.h"
-#import "SYNCameraPopoverViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNLoginErrorArrow.h"
 #import "SYNLoginViewController.h"

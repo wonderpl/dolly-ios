@@ -34,7 +34,6 @@
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNAvatarButton.h"
-#import "SYNUsersViewController.h"
 #import <UIButton+WebCache.h>
 #import "objc/runtime.h"
 #import "SYNSubscribersViewController.h"
