@@ -39,7 +39,7 @@
                                                             label: @"Full name"
                                                             value: nil] build]];
     
-
+    
     
     self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
     

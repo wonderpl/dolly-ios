@@ -14,7 +14,6 @@
 #import "CoverArt.h"
 #import "GAI.h"
 #import "Genre.h"
-#import "SSTextView.h"
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
 #import "SYNAddToChannelCreateNewCell.h"
@@ -35,7 +34,6 @@
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNAvatarButton.h"
-#import "SYNUsersViewController.h"
 #import <UIButton+WebCache.h>
 #import "objc/runtime.h"
 #import "SYNSubscribersViewController.h"
@@ -1347,18 +1345,17 @@ referenceSizeForFooterInSection: (NSInteger) section
                                               [[NSNotificationCenter defaultCenter]  postNotificationName: kVideoQueueClear
                                                                                                    object: nil];
                                               
-                                              [self notifyForChannelCreation: self.channel];
+                                              
+                                              [[NSNotificationCenter defaultCenter] postNotificationName:kNoteChannelSaved
+                                                                                                  object:self
+                                                                                                userInfo:nil];
                                               
                                               self.isLocked = NO;
+                                              
                                           } errorHandler: ^(id err) {
+                                              
                                               self.isLocked = NO;
                                               
-                                              //                                              DebugLog(@"Error @ getNewlyCreatedChannelForId:");
-                                              //                                              [self	  showError: NSLocalizedString(@"Could not retrieve the uploaded channel data. Please try accessing it from your profile later.", nil)
-                                              //                                                 showErrorTitle: @"Error"];
-                                              
-                                              
-                                              //                                              [self finaliseViewStatusAfterCreateOrUpdate: !self.isIPhone];
                                               
                                               [[NSNotificationCenter defaultCenter]  postNotificationName: kVideoQueueClear
                                                                                                    object: nil];
@@ -1366,110 +1363,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 }
 
 
-- (void) notifyForChannelCreation: (Channel *) channelCreated
-{
-    // == Decide on the success message type shown == //
-    NSNotification *successNotification = [NSNotification notificationWithName: kNoteChannelSaved
-                                                                        object: self];
-    
-    
-    SYNCaution *caution;
-    CautionCallbackBlock actionBlock;
-    NSMutableArray *conditionsArray = [NSMutableArray arrayWithCapacity: 3];
-    NSString *buttonString;
-    int numberOfConditions = 0;
-    __weak SYNChannelDetailsViewController *wself = self;
-    
-    if (channelCreated) // channelCreated will always be true in this implementation, change from self.channels to show message only on creation and not on update
-    {
-        if (self.channel.title.length > 8 && [[self.channel.title substringToIndex: 8] isEqualToString: @"UNTITLED"])                  // no title
-        {
-            [conditionsArray addObject: NSLocalizedString(@"private_condition_title", nil)];
-            buttonString = NSLocalizedString(@"enter_title", nil);
-            actionBlock = ^{
-                [wself setMode: kChannelDetailsModeEdit];
-                //  [wself editButtonTapped: wself.editButton];
-                //[wself.channelTitleTextView becomeFirstResponder];
-            };
-            numberOfConditions++;
-        }
-        
-        if ([self.channel.categoryId isEqualToString: @""])
-        {
-            [conditionsArray addObject: NSLocalizedString(@"private_condition_category", nil)];
-            buttonString = NSLocalizedString(@"select_category", nil);
-            actionBlock = ^{
-                [wself setMode: kChannelDetailsModeEdit];
-                //                [wself editButtonTapped: wself.editButton];
-                //                [wself selectCategoryButtonTapped: wself.selectCategoryButton];
-            };
-            numberOfConditions++;
-        }
-        
-        if ([self.channel.channelCover.imageUrl isEqualToString: @""])
-        {
-            [conditionsArray addObject: NSLocalizedString(@"private_condition_cover", nil)];
-            buttonString = NSLocalizedString(@"select_cover", nil);
-            actionBlock = ^{
-                [wself setMode: kChannelDetailsModeEdit];
-                //                [wself editButtonTapped: wself.editButton];
-                //                [wself addCoverButtonTapped: wself.addCoverButton];
-            };
-            numberOfConditions++;
-        }
-        
-        NSMutableString *conditionString;
-        switch (numberOfConditions)
-        {
-            case 0 :
-                
-                break;
-                
-            case 1 :
-                conditionString = [NSMutableString stringWithString: NSLocalizedString(@"channel_will_remain_private_until", nil)];
-                [conditionString appendString: conditionsArray[0]];
-                break;
-                
-            case 2:
-                conditionString = [NSMutableString stringWithString: NSLocalizedString(@"channel_will_remain_private_until", nil)];
-                [conditionString appendString: conditionsArray[0]];
-                [conditionString appendString: @" AND "];
-                [conditionString appendString: conditionsArray[1]];
-                break;
-                
-            case 3:
-                conditionString = [NSMutableString stringWithString: NSLocalizedString(@"channel_will_remain_private_until", nil)];
-                [conditionString appendString: conditionsArray[0]];
-                [conditionString appendString: @", "];
-                [conditionString appendString: conditionsArray[1]];
-                [conditionString appendString: @" AND "];
-                [conditionString appendString: conditionsArray[2]];
-                break;
-        }
-        
-        if (numberOfConditions > 0)
-        {
-            if (numberOfConditions > 1)
-            {
-                buttonString = @"EDIT";
-                actionBlock = ^{
-                    //                    [wself setMode: kChannelDetailsModeEdit];
-                    //                    [wself editButtonTapped: wself.editButton];
-                };
-            }
-            
-            caution = [SYNCaution withMessage: (NSString *) conditionString
-                                  actionTitle: buttonString
-                                  andCallback: actionBlock];
-            
-            successNotification = [NSNotification notificationWithName: kNoteSavingCaution
-                                                                object: self
-                                                              userInfo: @{kCaution: caution}];
-        }
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotification: successNotification];
-}
 
 - (IBAction)avatarTapped:(id)sender
 {
@@ -1865,8 +1758,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 }
 
 
-- (void) alertView: (UIAlertView *) alertView
-willDismissWithButtonIndex: (NSInteger) buttonIndex
+- (void) alertView: (UIAlertView *) alertView willDismissWithButtonIndex: (NSInteger) buttonIndex
 {
     if (alertView == self.deleteChannelAlertView)
     {
@@ -1932,9 +1824,31 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    // SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
+    SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
     
-    // TODO: Add Subscribers popover through the master view controller
+    if(IS_IPAD)
+    {
+        UINavigationController* navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:subscribersViewController];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 30.0f)];
+        
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont lightCustomFontOfSize:25];
+        
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor blackColor];
+        label.text = @"Followers";
+        subscribersViewController.navigationItem.titleView = label;
+        
+        navigationControllerWrapper.view.frame = subscribersViewController.view.frame;
+        [appDelegate.masterViewController addOverlayController:navigationControllerWrapper animated:YES];
+    }
+    
+    else
+    {
+        [self.navigationController pushViewController:subscribersViewController animated:YES];
+    }
+    
 }
 
 -(void) saveTapped
@@ -1959,12 +1873,7 @@ willDismissWithButtonIndex: (NSInteger) buttonIndex
     //
     //    NSString *cover = [self coverIdStringForServiceCall];
     
-    
-//    NSLog(@"save the des :%@", self.txtViewDescription.text );
-//    
-//    NSLog(@"title %@", self.lblChannelTitle.text);
-//    NSLog(@"-----------------");
-//    NSLog(@"-----------------");
+
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
                                                      title: self.txtFieldChannelName.text

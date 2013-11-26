@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "01901A941771CCBA007DBEAC"
-               BuildableName = "dollyTests.octest"
+               BuildableName = "dollyTests.xctest"
                BlueprintName = "dollyTests"
                ReferencedContainer = "container:dolly.xcodeproj">
             </BuildableReference>

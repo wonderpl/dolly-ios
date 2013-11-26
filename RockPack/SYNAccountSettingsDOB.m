@@ -33,7 +33,7 @@
                                                             value: nil] build]];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    CGRect frame = CGRectMake(0.0, 0.0f, 280.0, 280.0);
+    CGRect frame = CGRectMake(0.0, (IS_IPHONE ? 60.0f : 0.0f), 280.0, 280.0);
     
     self.view.frame = frame;
     

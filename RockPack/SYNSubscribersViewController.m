@@ -10,11 +10,15 @@
 #import "SYNSubscribersViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
+#import "SYNSearchResultsUserCell.h"
 
-@interface SYNSubscribersViewController ()
+@interface SYNSubscribersViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNSocialActionsDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UILabel *infoLabel;
+
+@property (nonatomic, strong) IBOutlet UICollectionView *usersThumbnailCollectionView;
+@property (nonatomic, strong) NSArray* users;
 
 @end
 
@@ -28,52 +32,36 @@
     {
         
         self.channel = channel;
+        self.title = @"Followers";
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame: CGRectZero];
-        
-        
-        
-        
-        titleLabel.textColor = [UIColor colorWithRed: (28.0 / 255.0)
-                                               green: (31.0 / 255.0)
-                                                blue: (33.0 / 255.0)
-                                               alpha: (1.0)];
-        
-        titleLabel.text = NSLocalizedString(@"SUBSCRIBERS", nil);
-        titleLabel.font = [UIFont lightCustomFontOfSize: 19.0];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.shadowColor = [UIColor whiteColor];
-        titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-        titleLabel.textColor = [UIColor blackColor];
-        [titleLabel sizeToFit];
-        
-        
-        CGRect tFrame = titleLabel.frame;
-        tFrame.origin.x -= tFrame.size.width * 0.5f;
-        tFrame.origin.y -= tFrame.size.height * 0.5f;
-        titleLabel.frame = tFrame;
-        
-        UIView *labelContentView = [[UIView alloc]init];
-        [labelContentView addSubview: titleLabel];
-        
-        self.navigationItem.titleView = labelContentView;
-        
-        self.infoLabel = [[UILabel alloc] initWithFrame: CGRectMake(0.0f, 0.0f, self.preferredContentSize.width, 0.0f)];
-        self.infoLabel.backgroundColor = [UIColor clearColor];
-        
-        self.infoLabel.textColor = [UIColor colorWithRed: (28.0 / 255.0)
-                                                   green: (31.0 / 255.0)
-                                                    blue: (33.0 / 255.0)
-                                                   alpha: (1.0)];
-        
-        self.infoLabel.font = [UIFont regularCustomFontOfSize: 15.0];
-        self.infoLabel.textAlignment = NSTextAlignmentCenter;
-        self.infoLabel.shadowColor = [UIColor whiteColor];
-        self.infoLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-        self.infoLabel.numberOfLines = 0;
     }
     
     return self;
+}
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.users = @[];
+    
+    if (IS_IPHONE)
+    {
+        self.usersThumbnailCollectionView.backgroundColor = [UIColor clearColor];
+    }
+    else
+    {
+        self.usersThumbnailCollectionView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    [self.usersThumbnailCollectionView registerNib:[UINib nibWithNibName:@"SYNSearchResultsUserCell" bundle:nil]
+                        forCellWithReuseIdentifier:@"SYNSearchResultsUserCell"];
+    
+    [self.usersThumbnailCollectionView registerNib:[UINib nibWithNibName:@"SYNChannelFooterMoreView" bundle:nil]
+                        forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                               withReuseIdentifier:@"SYNChannelFooterMoreView"];
+    
+    
 }
 
 
@@ -96,8 +84,7 @@
     self.infoLabel.center = position;
     self.infoLabel.frame = CGRectIntegral(self.infoLabel.frame);
     
-    [self.view
-     addSubview: self.infoLabel];
+    [self.view addSubview: self.infoLabel];
     
     position.y += 40.0;
     self.activityView.center = position;
@@ -106,15 +93,8 @@
 
 - (void) viewDidAppear: (BOOL) animated
 {
-    if (IS_IPHONE)
-    {
-        self.usersThumbnailCollectionView.backgroundColor = [UIColor clearColor];
-    }
-    else
-    {
-        self.usersThumbnailCollectionView.backgroundColor = [UIColor whiteColor];
-    }
     
+    [super viewDidAppear:animated];
     
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
     
@@ -133,16 +113,49 @@
                                            forRange: self.dataRequestRange
                                         byAppending: NO
                                   completionHandler: ^(int count) {
-                                      self.dataItemsAvailable = count;
                                       
-                                      [self displayUsers];
+                                        self.dataItemsAvailable = count;
                                       
-                                      [self.activityView stopAnimating];
-                                  }
-                                       errorHandler: ^{
-                                           [self.activityView stopAnimating];
-                                       }];
+                                        [self displayUsers];
+                                      
+                                        [self.activityView stopAnimating];
+                                      
+                                    } errorHandler: ^{
+                                        
+                                        [self.activityView stopAnimating];
+                                    }];
+    
 }
+
+
+#pragma mark - UICollectionView Delegate/Data Source
+
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
+{
+    return 1;
+}
+
+
+- (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
+{
+    return self.users.count;
+}
+
+
+- (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
+                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
+{
+    SYNSearchResultsUserCell* userCell = (SYNSearchResultsUserCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"SYNSearchResultsUserCell"
+                                                                                                              forIndexPath:indexPath];
+    ChannelOwner* channelOwner = (ChannelOwner*)self.users[indexPath.item];
+    
+    userCell.channelOwner = channelOwner;
+    userCell.delegate = self;
+    userCell.followButton.hidden = YES;
+    
+    return userCell;
+}
+
 
 
 - (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
@@ -225,9 +238,8 @@
     request.fetchBatchSize = 20;
     
     NSError *error = nil;
-    NSArray *resultsArray = [appDelegate.searchManagedObjectContext
-                             executeFetchRequest: request
-                             error: &error];
+    NSArray *resultsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: request
+                                                                                  error: &error];
     
     if (!resultsArray)
     {
@@ -238,7 +250,7 @@
     
     if (self.users.count == 0)
     {
-        [self setInfoLabelText: @"No one has subscribed\nto this pack yet"];
+        [self setInfoLabelText: @"No one has subscribed into this pack yet"];
     }
     else
     {
@@ -248,6 +260,34 @@
     [self.usersThumbnailCollectionView reloadData];
 }
 
+- (void) profileButtonTapped: (UIButton *) profileButton
+{
+    if(!profileButton)
+    {
+        AssertOrLog(@"No profileButton passed");
+        return; // did not manage to get the cell
+    }
+    
+    id candidate = profileButton;
+    while (![candidate isKindOfClass:[SYNSearchResultsUserCell class]]) {
+        candidate = [candidate superview];
+    }
+    
+    if(![candidate isKindOfClass:[SYNSearchResultsUserCell class]])
+    {
+        AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
+        return; // did not manage to get the cell
+    }
+    SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
+    
+    if(IS_IPAD)
+    {
+        
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+    }
+    [appDelegate.masterViewController.showingViewController viewProfileDetails:searchUserCell.channelOwner];
+    
+}
 
 - (CGSize) footerSize
 {
@@ -268,12 +308,17 @@
                                                forRange: self.dataRequestRange
                                             byAppending: YES
                                       completionHandler: ^(int count) {
+                                          
+                                          
                                           self.dataItemsAvailable = count;
                                           self.loadingMoreContent = NO;
                                           [self displayUsers];
-                                      }
-                                           errorHandler: ^{
-                                           }];
+                                          
+                                          
+                                      } errorHandler: ^{
+                                          
+                                      
+                                      }];
     }
 }
 

@@ -10,6 +10,7 @@
 #import "SYNYouTubeWebVideoPlayer.h"
 #import "SYNOoyalaVideoPlayer.h"
 #import "SYNScrubberBar.h"
+#import "VideoInstance.h"
 #import "Video.h"
 
 @interface SYNVideoPlayer () <SYNScrubberBarDelegate>
@@ -27,10 +28,10 @@
 
 #pragma mark - Public class
 
-+ (instancetype)playerForVideo:(Video *)video {
-	Class videoPlayerClass = [self videoPlayerClassesForSource:video.source];
++ (instancetype)playerForVideoInstance:(VideoInstance *)videoInstance {
+	Class videoPlayerClass = [self videoPlayerClassesForSource:videoInstance.video.source];
 	SYNVideoPlayer *player = [[videoPlayerClass alloc] init];
-	player.video = video;
+	player.videoInstance = videoInstance;
 	
 	return player;
 }

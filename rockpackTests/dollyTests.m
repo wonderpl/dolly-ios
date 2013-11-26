@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "dollyTests.h"
 #import "SYNNetworkEngine.h"
 #import "SYNMainRegistry.h"
 #import "SYNAppDelegate.h"
@@ -14,6 +13,12 @@
 #import "SYNActivityViewController.h"
 #import "SYNNotification.h"
 @import CoreData;
+#import <XCTest/XCTest.h>
+
+@interface dollyTests : XCTestCase
+
+@end
+
 
 @implementation dollyTests
 
@@ -62,10 +67,10 @@
                                                }
                                        };
     SYNNotification* firstNotification = [SYNNotification notificationWithDictionary:notificationData];
-    STAssertEquals(firstNotification.identifier, 80664, @"Notification Identifier not set correctly");
-    STAssertEquals(firstNotification.messageType, @"subscribed", @"Notification Identifier not set correctly"); // messageType sets the objectType below
-    STAssertEquals(firstNotification.objectType, kNotificationObjectTypeUserSubscibedToYourChannel, @"Notification 'subsribed' type not set correctly");
-    STAssertEquals(firstNotification.channelId, @"ch9HaxNJur3YMGUqcEB3mVSw", @"Notification Channel Id not set correctly");
+    XCTAssertEqual(firstNotification.identifier, 80664, @"Notification Identifier not set correctly");
+    XCTAssertEqual(firstNotification.messageType, @"subscribed", @"Notification Identifier not set correctly"); // messageType sets the objectType below
+    XCTAssertEqual(firstNotification.objectType, kNotificationObjectTypeUserSubscibedToYourChannel, @"Notification 'subsribed' type not set correctly");
+    XCTAssertEqual(firstNotification.channelId, @"ch9HaxNJur3YMGUqcEB3mVSw", @"Notification Channel Id not set correctly");
   
     
 }
@@ -78,7 +83,7 @@
     
     NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath];
     
-    STAssertNotNil(jsonData, @"NSData could not be created from JSON file: 'NotificationsForUser'");
+    XCTAssertNotNil(jsonData, @"NSData could not be created from JSON file: 'NotificationsForUser'");
     
     NSError *error;
     
@@ -87,14 +92,14 @@
                                                                      error:&error];
 
     
-    STAssertNotNil(jsonDictionary, @"NSDictionary was not created from JSON file 'NotificationsForUser.json'");
+    XCTAssertNotNil(jsonDictionary, @"NSDictionary was not created from JSON file 'NotificationsForUser.json'");
     
     
     SYNActivityViewController* avc = [[SYNActivityViewController alloc] initWithViewId:@"TestActivityViewId"];
     [avc parseNotificationsFromDictionary:jsonDictionary];
     
     NSUInteger totalC = avc.notifications.count;
-    STAssertEquals(totalC, (NSUInteger)52, [NSString stringWithFormat:@"Not all Notifications where parsed, expected 52 got %i", totalC]);
+    XCTAssertEqual(totalC, (NSUInteger)52, @"Not all Notifications where parsed, expected 52 got %i", totalC);
     
     // Fake Notification
     NSDictionary* notificationData = @{
@@ -118,7 +123,7 @@
     };
     SYNNotification* firstNotification = [SYNNotification notificationWithDictionary:notificationData];
     
-    STAssertEqualObjects(firstNotification, avc.notifications[0], @"Notifications not parsed correctly, first in array does not contain correct data");
+    XCTAssertEqualObjects(firstNotification, avc.notifications[0], @"Notifications not parsed correctly, first in array does not contain correct data");
     
 }
 
@@ -128,7 +133,7 @@
     
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    STAssertNotNil(appDelegate, @"AppDelegate does not exist...");
+    XCTAssertNotNil(appDelegate, @"AppDelegate does not exist...");
     
     NSString *jsonFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"SearchVideosResultsForMichael" ofType:@"json"];
     NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath];
@@ -159,15 +164,15 @@
     
     NSArray* fetchedObjects = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest error: &error];
     
-    STAssertNil(error, @"Error occured while fetching the data");
+    XCTAssertNil(error, @"Error occured while fetching the data");
     
-    STAssertEquals(fetchedObjects.count, (NSUInteger)10, @"Not all objects parsed");
+    XCTAssertEqual(fetchedObjects.count, (NSUInteger)10, @"Not all objects parsed");
     
     // == Clear the Search Registry == //
     
     BOOL success = [appDelegate.searchRegistry clearImportContextFromEntityName: @"VideoInstance"];
     
-    STAssertTrue(success, @"Could not clear search registry from VideoInstance");
+    XCTAssertTrue(success, @"Could not clear search registry from VideoInstance");
     
     
     // == Do it Again! == //
@@ -176,9 +181,9 @@
     
     fetchedObjects = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest error: &error];
     
-    STAssertNil(error, @"Error occured while fetching the data for the second time (after clearing db)");
+    XCTAssertNil(error, @"Error occured while fetching the data for the second time (after clearing db)");
     
-    STAssertEquals(fetchedObjects.count, (NSUInteger)10, @"Not all objects parsed for the second time (after clearing db)");
+    XCTAssertEqual(fetchedObjects.count, (NSUInteger)10, @"Not all objects parsed for the second time (after clearing db)");
     
     
     
