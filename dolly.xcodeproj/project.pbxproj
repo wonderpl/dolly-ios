@@ -439,6 +439,8 @@
 		1F2ACA68173C1D0400F2FE4F /* ButtonBuyHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F2ACA64173C1D0400F2FE4F /* ButtonBuyHighlighted~iphone.png */; };
 		1F356185175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F356184175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m */; };
 		1F3EF99F17DE2AF500EEB92F /* login_onboard_1~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F3EF99E17DE2AF500EEB92F /* login_onboard_1~iphone.png */; };
+		1F4560711844E5EF0098983B /* PlaceholderAvatarFriends.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F45606F1844E5EF0098983B /* PlaceholderAvatarFriends.png */; };
+		1F4560721844E5EF0098983B /* PlaceholderAvatarFriends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F4560701844E5EF0098983B /* PlaceholderAvatarFriends@2x.png */; };
 		1F458AE417E1C27B003C14AC /* ButtonReportConfirm@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F458AE017E1C27B003C14AC /* ButtonReportConfirm@2x~iphone.png */; };
 		1F458AE517E1C27B003C14AC /* ButtonReportConfirm~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F458AE117E1C27B003C14AC /* ButtonReportConfirm~iphone.png */; };
 		1F458AE617E1C27B003C14AC /* ButtonReportConfirmHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F458AE217E1C27B003C14AC /* ButtonReportConfirmHighlighted@2x~iphone.png */; };
@@ -1914,6 +1916,8 @@
 		1F356183175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingOtherTableViewCell.h; sourceTree = "<group>"; };
 		1F356184175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingOtherTableViewCell.m; sourceTree = "<group>"; };
 		1F3EF99E17DE2AF500EEB92F /* login_onboard_1~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login_onboard_1~iphone.png"; path = "Assets/Images/login_onboard_1~iphone.png"; sourceTree = SOURCE_ROOT; };
+		1F45606F1844E5EF0098983B /* PlaceholderAvatarFriends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceholderAvatarFriends.png; sourceTree = "<group>"; };
+		1F4560701844E5EF0098983B /* PlaceholderAvatarFriends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaceholderAvatarFriends@2x.png"; sourceTree = "<group>"; };
 		1F458AE017E1C27B003C14AC /* ButtonReportConfirm@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonReportConfirm@2x~iphone.png"; path = "reportConcern/ButtonReportConfirm@2x~iphone.png"; sourceTree = "<group>"; };
 		1F458AE117E1C27B003C14AC /* ButtonReportConfirm~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonReportConfirm~iphone.png"; path = "reportConcern/ButtonReportConfirm~iphone.png"; sourceTree = "<group>"; };
 		1F458AE217E1C27B003C14AC /* ButtonReportConfirmHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonReportConfirmHighlighted@2x~iphone.png"; path = "reportConcern/ButtonReportConfirmHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
@@ -4341,6 +4345,8 @@
 		1F1B4BDC17428536009DEB0C /* placeholders */ = {
 			isa = PBXGroup;
 			children = (
+				1F45606F1844E5EF0098983B /* PlaceholderAvatarFriends.png */,
+				1F4560701844E5EF0098983B /* PlaceholderAvatarFriends@2x.png */,
 				1F51A6A41742A959009907CA /* PlaceholderAvatarChannel@2x~iphone.png */,
 				1F51A6A51742A959009907CA /* PlaceholderAvatarChannel~iphone.png */,
 				1F51A6A61742A959009907CA /* PlaceholderAvatarFeed@2x~iphone.png */,
@@ -6771,6 +6777,7 @@
 				012B4CCA173A7B5A0019DA4C /* ButtonMoveAndScaleUse.png in Resources */,
 				012B4CCB173A7B5A0019DA4C /* ButtonMoveAndScaleUse@2x.png in Resources */,
 				012B4CCC173A7B5A0019DA4C /* ButtonMoveAndScaleUseHighlighted.png in Resources */,
+				1F4560711844E5EF0098983B /* PlaceholderAvatarFriends.png in Resources */,
 				012B4CCD173A7B5A0019DA4C /* ButtonMoveAndScaleUseHighlighted@2x.png in Resources */,
 				1F5FAECE17E73F8700205F3F /* ButtonCancelAddToPack@2x.png in Resources */,
 				1F4CF616173A98F100988034 /* AvatarChannel.png in Resources */,
@@ -7063,6 +7070,7 @@
 				BE57C0201843588A00C6444A /* SYNOnBoardingViewController.xib in Resources */,
 				BE22A84017A806490004BBF4 /* PanelFeedShort@2x.png in Resources */,
 				BE22A84317A826E10004BBF4 /* GlossFeedVideo.png in Resources */,
+				1F4560721844E5EF0098983B /* PlaceholderAvatarFriends@2x.png in Resources */,
 				BE22A84417A826E10004BBF4 /* GlossFeedVideo@2x.png in Resources */,
 				BE22A84717A8270A0004BBF4 /* GlossFeedVideo@2x~iphone.png in Resources */,
 				BE22A84817A8270A0004BBF4 /* GlossFeedVideo~iphone.png in Resources */,
