@@ -1513,13 +1513,21 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.txtFieldChannelName.hidden = YES;
     self.txtViewDescription.hidden = YES;
 
-
+    if (self.channel.videoInstances.count == 0)
+    {
+        self.lblNoVideos.hidden = NO;
+    }
+    else
+    {
+        self.lblNoVideos.hidden = YES;
+    }
+    
     
     self.viewProfileContainer.alpha = 0.0f;
     self.btnAvatar.alpha = 0.0f;
     self.btnShowFollowers.alpha = 0.0f;
     self.btnShowVideos.alpha = 0.0f;
-   // self.btnFollowChannel.alpha = 0.0f;
+//    self.btnFollowChannel.alpha = 0.0f;
     self.btnEditChannel.alpha = 0.0f;
     self.btnShareChannel.alpha = 0.0f;
     self.lblFullName.alpha = 0.0f;
@@ -1531,12 +1539,11 @@ referenceSizeForFooterInSection: (NSInteger) section
         self.btnAvatar.alpha = 1.0f;
         self.btnShowFollowers.alpha = 1.0f;
         self.btnShowVideos.alpha = 1.0f;
-//        self.btnFollowChannel.alpha = 1.0f;
+//      self.btnFollowChannel.alpha = 1.0f;
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
         self.lblFullName.alpha = 1.0f;
         self.lblChannelTitle.alpha = 1.0f;
-
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
