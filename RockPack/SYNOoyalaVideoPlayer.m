@@ -10,6 +10,7 @@
 #import <OOOoyalaPlayer.h>
 #import <OOOoyalaError.h>
 #import "SYNScrubberBar.h"
+#import "VideoInstance.h"
 #import "Video.h"
 
 static NSString * const EmbedCoded = @"xxbjk1YjpHm4-VkWfWfEKBbyEkh358su";
@@ -55,10 +56,10 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 
 #pragma mark - Getters / Setters
 
-- (void)setVideo:(Video *)video {
-	[super setVideo:video];
+- (void)setVideoInstance:(VideoInstance *)videoInstance {
+	[super setVideoInstance:videoInstance];
 	
-    [self.ooyalaPlayer setEmbedCode:video.sourceId];
+    [self.ooyalaPlayer setEmbedCode:videoInstance.video.sourceId];
 }
 
 - (OOOoyalaPlayer *)ooyalaPlayer {

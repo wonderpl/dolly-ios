@@ -286,7 +286,7 @@
 	
 	VideoInstance *videoInstance = self.videoInstances[index];
 	
-	SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideo:videoInstance.video];
+	SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 	videoPlayer.delegate = self;
 	videoPlayer.frame = self.videoPlayerContainerView.bounds;
 	
@@ -296,7 +296,7 @@
 	[videoPlayer play];
 }
 
-- (void)updateVideoDetailsForIndex:(int)index {
+- (void)updateVideoDetailsForIndex:(NSInteger)index {
 	VideoInstance *videoInstance = self.videoInstances[index];
 	
 	if ([videoInstance.channel.channelOwner.displayName length]) {

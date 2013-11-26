@@ -7,6 +7,7 @@
 //
 
 #import "SYNYouTubeWebVideoPlayer.h"
+#import "VideoInstance.h"
 #import "Video.h"
 #import "SYNScrubberBar.h"
 #import <Reachability.h>
@@ -158,7 +159,7 @@
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 	if ([actionName isEqualToString:@"ready"]) {
-		NSString *sourceId = self.video.sourceId;
+		NSString *sourceId = self.videoInstance.video.sourceId;
 		NSString *videoQuality = [self videoQuality];
 		
 		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, videoQuality];
