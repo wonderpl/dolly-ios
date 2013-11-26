@@ -1568,17 +1568,16 @@ referenceSizeForFooterInSection: (NSInteger) section
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
         
-        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
+//        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
         cell.likeControl.hidden = NO;
         cell.shareControl.hidden = NO;
         cell.addControl.hidden = NO;
         cell.deleteButton.hidden = YES;
         
-        __block int index = indexPathForCell.item;
         void (^animateProfileMode)(void) = ^{
             
-            CGRect frame = cell.frame;
+//            CGRect frame = cell.frame;
             //
             //            if (IS_IPHONE)
             //            {
@@ -1625,7 +1624,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     if (self.mode == kChannelDetailsModeEdit )
     {
-        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
+//        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
         
         if (IS_IPHONE)
         {
@@ -1646,7 +1645,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     if (self.mode == kChannelDetailsModeDisplayUser )
     {
         
-        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
+//        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
 //        tmpPoint.y+= (self.videoThumbnailCollectionView.visibleCells.count-1)*(kHeightChange);
 
         if (IS_IPHONE)
