@@ -1492,9 +1492,8 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
-        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
+//        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
-        __block int index = indexPathForCell.item;
         cell.deleteButton.hidden = NO;
         void (^animateEditMode)(void) = ^{
             
