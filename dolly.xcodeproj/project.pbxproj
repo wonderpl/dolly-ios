@@ -272,11 +272,6 @@
 		01AEFBF31701AD2E0060467A /* SearchTabDividerHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AEFBEB1701AD2E0060467A /* SearchTabDividerHeader@2x.png */; };
 		01AEFBF61701AD2E0060467A /* SearchTabHeaderSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AEFBEE1701AD2E0060467A /* SearchTabHeaderSelected.png */; };
 		01AEFBF71701AD2E0060467A /* SearchTabHeaderSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AEFBEF1701AD2E0060467A /* SearchTabHeaderSelected@2x.png */; };
-		01AFF99617EC91540002131A /* NSData+LLDBQuickLook.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AFF98D17EC91540002131A /* NSData+LLDBQuickLook.m */; };
-		01AFF99717EC91540002131A /* NSObject+LLDBQuickLook.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AFF98F17EC91540002131A /* NSObject+LLDBQuickLook.m */; };
-		01AFF99817EC91540002131A /* NSString+LLDBQuickLook.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AFF99117EC91540002131A /* NSString+LLDBQuickLook.m */; };
-		01AFF99917EC91540002131A /* UIImage+LLDBQuickLook.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AFF99317EC91540002131A /* UIImage+LLDBQuickLook.m */; };
-		01AFF99A17EC91540002131A /* UIView+LLDBQuickLook.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AFF99517EC91540002131A /* UIView+LLDBQuickLook.m */; };
 		01B0A96C166CEC4D00CAA235 /* BackgroundVideoThumbnailRegular@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B0A96A166CEC4D00CAA235 /* BackgroundVideoThumbnailRegular@2x.png */; };
 		01B0A96D166CEC4D00CAA235 /* BackgroundVideoThumbnailRegular.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B0A96B166CEC4D00CAA235 /* BackgroundVideoThumbnailRegular.png */; };
 		01B0A970166CEE0700CAA235 /* GlossVideoThumbnailRegular.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B0A96E166CEE0700CAA235 /* GlossVideoThumbnailRegular.png */; };
@@ -1719,16 +1714,6 @@
 		01AEFBEB1701AD2E0060467A /* SearchTabDividerHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SearchTabDividerHeader@2x.png"; path = "Assets/Images/SearchTabDividerHeader@2x.png"; sourceTree = "<group>"; };
 		01AEFBEE1701AD2E0060467A /* SearchTabHeaderSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SearchTabHeaderSelected.png; path = Assets/Images/SearchTabHeaderSelected.png; sourceTree = "<group>"; };
 		01AEFBEF1701AD2E0060467A /* SearchTabHeaderSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SearchTabHeaderSelected@2x.png"; path = "Assets/Images/SearchTabHeaderSelected@2x.png"; sourceTree = "<group>"; };
-		01AFF98C17EC91540002131A /* NSData+LLDBQuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+LLDBQuickLook.h"; sourceTree = "<group>"; };
-		01AFF98D17EC91540002131A /* NSData+LLDBQuickLook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+LLDBQuickLook.m"; sourceTree = "<group>"; };
-		01AFF98E17EC91540002131A /* NSObject+LLDBQuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LLDBQuickLook.h"; sourceTree = "<group>"; };
-		01AFF98F17EC91540002131A /* NSObject+LLDBQuickLook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LLDBQuickLook.m"; sourceTree = "<group>"; };
-		01AFF99017EC91540002131A /* NSString+LLDBQuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LLDBQuickLook.h"; sourceTree = "<group>"; };
-		01AFF99117EC91540002131A /* NSString+LLDBQuickLook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LLDBQuickLook.m"; sourceTree = "<group>"; };
-		01AFF99217EC91540002131A /* UIImage+LLDBQuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LLDBQuickLook.h"; sourceTree = "<group>"; };
-		01AFF99317EC91540002131A /* UIImage+LLDBQuickLook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LLDBQuickLook.m"; sourceTree = "<group>"; };
-		01AFF99417EC91540002131A /* UIView+LLDBQuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LLDBQuickLook.h"; sourceTree = "<group>"; };
-		01AFF99517EC91540002131A /* UIView+LLDBQuickLook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LLDBQuickLook.m"; sourceTree = "<group>"; };
 		01B0A96A166CEC4D00CAA235 /* BackgroundVideoThumbnailRegular@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackgroundVideoThumbnailRegular@2x.png"; path = "Assets/Images/BackgroundVideoThumbnailRegular@2x.png"; sourceTree = "<group>"; };
 		01B0A96B166CEC4D00CAA235 /* BackgroundVideoThumbnailRegular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundVideoThumbnailRegular.png; path = Assets/Images/BackgroundVideoThumbnailRegular.png; sourceTree = "<group>"; };
 		01B0A96E166CEE0700CAA235 /* GlossVideoThumbnailRegular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GlossVideoThumbnailRegular.png; path = Assets/Images/GlossVideoThumbnailRegular.png; sourceTree = "<group>"; };
@@ -3807,16 +3792,6 @@
 		019825EE162C948000216900 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				01AFF98C17EC91540002131A /* NSData+LLDBQuickLook.h */,
-				01AFF98D17EC91540002131A /* NSData+LLDBQuickLook.m */,
-				01AFF98E17EC91540002131A /* NSObject+LLDBQuickLook.h */,
-				01AFF98F17EC91540002131A /* NSObject+LLDBQuickLook.m */,
-				01AFF99017EC91540002131A /* NSString+LLDBQuickLook.h */,
-				01AFF99117EC91540002131A /* NSString+LLDBQuickLook.m */,
-				01AFF99217EC91540002131A /* UIImage+LLDBQuickLook.h */,
-				01AFF99317EC91540002131A /* UIImage+LLDBQuickLook.m */,
-				01AFF99417EC91540002131A /* UIView+LLDBQuickLook.h */,
-				01AFF99517EC91540002131A /* UIView+LLDBQuickLook.m */,
 				01C6FD0D169DDEDB00E01AA3 /* NSDictionary+Validation.h */,
 				01C6FD0E169DDEDB00E01AA3 /* NSDictionary+Validation.m */,
 				01363EB3162FDEA600FFAA09 /* NSObject+Blocks.h */,
@@ -7314,7 +7289,6 @@
 				E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */,
 				BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */,
 				BEA1E33116CE6045000AB59D /* SYNNetworkOperationJsonObject.m in Sources */,
-				01AFF99917EC91540002131A /* UIImage+LLDBQuickLook.m in Sources */,
 				016AED3B1821349800DEAF7E /* SYNSocialButton.m in Sources */,
 				BE0815C616D5389C00ADB1DC /* SYNMasterViewController.m in Sources */,
 				BE57C0311843638C00C6444A /* SYNOnBoardingHeader.m in Sources */,
@@ -7349,7 +7323,6 @@
 				014D514F16F738C500B82B00 /* SYNAbstractNetworkEngine.m in Sources */,
 				BE21EE7C16F9FF520067223B /* SYNAccountSettingBasicController.m in Sources */,
 				BE21EE8716FA202F0067223B /* SYNAccountSettingsFullNameInput.m in Sources */,
-				01AFF99A17EC91540002131A /* UIView+LLDBQuickLook.m in Sources */,
 				BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */,
 				0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */,
 				01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */,
@@ -7367,14 +7340,12 @@
 				BE7D34D317159E2C0085AB81 /* SYNNotificationsTableViewCell.m in Sources */,
 				BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */,
 				BE7D35051715CE450085AB81 /* SYNNotification.m in Sources */,
-				01AFF99717EC91540002131A /* NSObject+LLDBQuickLook.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				BE86BF1F171FFB980006DC8A /* SYNYouHeaderView.m in Sources */,
 				0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */,
 				BEB313561817D8C400FAF98A /* SYNSearchResultsUserCell.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
 				BE285D9B1725726300D995AB /* SYNAddToChannelViewController.m in Sources */,
-				01AFF99617EC91540002131A /* NSData+LLDBQuickLook.m in Sources */,
 				BE285D9F172584E200D995AB /* SYNAddToChannelCreateNewCell.m in Sources */,
 				BE285DB01725A23300D995AB /* SYNNetworkMessageView.m in Sources */,
 				BE285DBC1726828F00D995AB /* SYNChannelManager.m in Sources */,
@@ -7411,7 +7382,6 @@
 				BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */,
 				BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */,
 				01655434183680CE009B161C /* SYNFormButton.m in Sources */,
-				01AFF99817EC91540002131A /* NSString+LLDBQuickLook.m in Sources */,
 				BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */,
 				BE1B3DEA181141D600DA2BD6 /* SYNAggregateVideoItemCell.m in Sources */,
 				BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */,
