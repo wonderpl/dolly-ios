@@ -27,9 +27,10 @@
     
     self.minimumInteritemSpacing = 10;
     self.minimumLineSpacing = 10;
-    self.itemSize = CGSizeMake(300, 44);
-    self.sectionInset = UIEdgeInsetsMake(30, 10, 10, 10);
+    self.itemSize = CGSizeMake(320, 71);
+    self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
+    self.headerReferenceSize = CGSizeMake(320, 472);
     self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     self.visibleIndexPathsSet = [NSMutableSet set];
     
@@ -79,7 +80,7 @@
         UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
         
         springBehaviour.length = 1.0f;
-        springBehaviour.damping = 0.8f;
+        springBehaviour.damping = 0.4f;
         springBehaviour.frequency = 1.0f;
         
         // If our touchLocation is not (0,0), we'll need to adjust our item's center "in flight"
