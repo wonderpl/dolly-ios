@@ -1,5 +1,5 @@
 //
-//  SYNVideoViewController.h
+//  SYNChannelVideoPlayerViewController.h
 //  dolly
 //
 //  Created by Sherman Lo on 15/11/13.
@@ -10,7 +10,7 @@
 
 @class SYNVideoPlayer;
 
-@interface SYNVideoViewController : UIViewController
+@interface SYNChannelVideoPlayerViewController : UIViewController
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex;
 

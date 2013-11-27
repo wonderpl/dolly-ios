@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Video View Controller-->
+        <!--Channel Video Player View Controller-->
         <scene sceneID="Mft-eF-QQB">
             <objects>
-                <viewController id="7KU-2r-spd" customClass="SYNVideoViewController" sceneMemberID="viewController">
+                <viewController id="7KU-2r-spd" customClass="SYNChannelVideoPlayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cCn-C5-uyD"/>
                         <viewControllerLayoutGuide type="bottom" id="fb2-FU-JDP"/>

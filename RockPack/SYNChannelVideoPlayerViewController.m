@@ -1,12 +1,12 @@
 //
-//  SYNVideoViewController.m
+//  SYNChannelVideoPlayerViewController.m
 //  dolly
 //
 //  Created by Sherman Lo on 15/11/13.
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNVideoViewController.h"
+#import "SYNChannelVideoPlayerViewController.h"
 #import "SYNVideoThumbnailSmallCell.h"
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
 #import "VideoInstance.h"
@@ -29,7 +29,7 @@
 #import <UIImageView+WebCache.h>
 #import <Appirater.h>
 
-@interface SYNVideoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
+@interface SYNChannelVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
 
 @property (nonatomic, strong) NSArray *videoInstances;
 
@@ -51,7 +51,7 @@
 
 @end
 
-@implementation SYNVideoViewController
+@implementation SYNChannelVideoPlayerViewController
 
 #pragma mark - Public class
 
@@ -60,7 +60,7 @@
 	NSString *filename = [NSString stringWithFormat:@"SYNVideoViewController_%@", suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
-	SYNVideoViewController *viewController = [storyboard instantiateInitialViewController];
+	SYNChannelVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
 	viewController.videoInstances = videoInstances;
 	viewController.selectedIndex = selectedIndex;
 	
