@@ -2952,6 +2952,7 @@
 		E9921A9218351D66001A4F3B /* SYNScrubberBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNScrubberBar.h; sourceTree = "<group>"; };
 		E9921A9318351D66001A4F3B /* SYNScrubberBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNScrubberBar.m; sourceTree = "<group>"; };
 		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
+		E9F7CC73184616E40026C97D /* SYNVideoPlayer+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayer+Protected.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4285,6 +4286,7 @@
 				01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */,
 				3862E8BB172979A40066E8E7 /* SYNVideoViewerViewController~iphone.xib */,
 				E93E10E11835116D00A62F64 /* SYNVideoPlayer.h */,
+				E9F7CC73184616E40026C97D /* SYNVideoPlayer+Protected.h */,
 				E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */,
 				E93E10E4183512B800A62F64 /* SYNYouTubeWebVideoPlayer.h */,
 				E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */,
