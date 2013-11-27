@@ -82,8 +82,8 @@
     
     for (int i = 0; i < kLoginOnBoardingMessagesNum; i++)
     {
-        //[imagesArray addObject: [NSString stringWithFormat: @"login_bg_%i.jpg", (i+1)]];
-        [imagesArray addObject: [NSString stringWithFormat: @"login_bg_1.jpg"]]; //Only 1 image for now...
+        [imagesArray addObject: [NSString stringWithFormat: @"login_bg_%i.jpg", (i+1)]];
+        //[imagesArray addObject: [NSString stringWithFormat: @"login_bg_1.jpg"]]; //Only 1 image for now...
     }
     
     self.backgroundImagesArray = [NSArray arrayWithArray: imagesArray];
@@ -950,20 +950,59 @@
 - (void) setScrollingDirection: (ScrollingDirection) scrollingDirection
 {
     if (_scrollingDirection == scrollingDirection)
-    {
         return;
-    }
     
     _scrollingDirection = scrollingDirection;
+    NSString* nameOfNextImage;
     
     if (self.currentOnBoardingPage < 0)
-    {
         self.currentOnBoardingPage = 0;
-    }
     else if (self.currentOnBoardingPage > kLoginOnBoardingMessagesNum - 1)
-    {
         self.currentOnBoardingPage = kLoginOnBoardingMessagesNum - 1;
+    
+    nameOfNextImage = self.backgroundImagesArray[self.currentOnBoardingPage];
+    self.loginBackgroundImage.image = [UIImage imageNamed:nameOfNextImage];
+    
+    switch (scrollingDirection)
+    {
+        case ScrollingDirectionNone:
+            
+            nameOfNextImage = self.backgroundImagesArray[self.currentOnBoardingPage];
+            break;
+            
+        case ScrollingDirectionRight:
+            if (self.currentOnBoardingPage + 1 >= self.backgroundImagesArray.count)
+            {
+                
+                nameOfNextImage = self.backgroundImagesArray[self.currentOnBoardingPage];
+            }
+            else
+            {
+                
+                nameOfNextImage = self.backgroundImagesArray[self.currentOnBoardingPage + 1];
+            }
+            
+            
+            break;
+            
+        case ScrollingDirectionLeft:
+            if (self.currentOnBoardingPage - 1 < 0)
+            {
+                
+                nameOfNextImage = self.backgroundImagesArray[self.currentOnBoardingPage];
+            }
+            else
+            {
+                
+                nameOfNextImage = self.backgroundImagesArray[self.currentOnBoardingPage - 1];
+            }
+            break;
+            
+        default: // for up and down
+            break;
     }
+    
+    self.loginBackgroundFrontImage.image = [UIImage imageNamed: nameOfNextImage];
 }
 
 

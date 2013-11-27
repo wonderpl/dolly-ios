@@ -713,7 +713,8 @@ typedef void(^FeedDataErrorBlock)(void);
     
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight &&
         self.isLoadingMoreContent == NO &&
-        self.moreItemsToLoad == YES) {
+        self.moreItemsToLoad == YES)
+    {
         
         [self loadMoreVideos];
         

@@ -425,7 +425,6 @@
     // Reads the value of the custom key I added to the Info.plist
     NSString *facebookAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"FacebookAppID"];
     
-    //
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params addEntriesFromDictionary: @{@"app_id": facebookAppId}];
