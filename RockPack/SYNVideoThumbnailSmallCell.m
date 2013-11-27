@@ -43,7 +43,6 @@
 	SDWebImageManager *imageManager = [SDWebImageManager sharedManager];
 	
 	NSOperationQueue *operationQueue = [[self class] monochromeOperationQueue];
-//	CIFilter *filter = [[self class] monochromeFilter];
 	
 	UIImageView *colourImageView = self.colourImageView;
 	UIImageView *monochromeImageView = self.monochromeImageView;
