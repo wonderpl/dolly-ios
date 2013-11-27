@@ -428,22 +428,10 @@
         
         [self requestShareLinkWithObjectType: @"channel"
                                     objectId: channel.uniqueId];
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"channelShareButtonClick"
-                                                                label: nil
-                                                                value: nil] build]];
-        
-        [self shareObjectType:  @"channel"
-                     objectId: channel.uniqueId
-                      isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
-                      isVideo: @NO
-                   usingImage: nil];
-        
-        
-    }
+		
+		BOOL isOwner = [channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
+		[self shareChannel:channel isOwner:@(isOwner) usingImage:nil];
+	}
 }
 
 
