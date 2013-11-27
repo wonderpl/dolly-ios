@@ -37,7 +37,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 }
 
 @property (nonatomic) BOOL isAnimating;
-@property (nonatomic) BOOL isLocked;
 @property (nonatomic) NSInteger dataItemsAvailable;
 @property (nonatomic) NSRange dataRequestRange;
 @property (nonatomic, assign) BOOL inDrag;

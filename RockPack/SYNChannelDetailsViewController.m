@@ -104,6 +104,7 @@ UIPopoverControllerDelegate>
 @property (nonatomic) CGPoint tempContentOffset;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
+@property (nonatomic) BOOL isLocked;
 
 @end
 
