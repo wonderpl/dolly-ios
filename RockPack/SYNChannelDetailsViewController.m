@@ -481,7 +481,7 @@ UIPopoverControllerDelegate>
     if (IS_RETINA) {
         //should be 0.5?
         //border color turns black when set to 0.5
-        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
     }
     else
     {
