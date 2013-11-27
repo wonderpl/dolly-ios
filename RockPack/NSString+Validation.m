@@ -7,24 +7,28 @@
 //
 
 #import "NSString+Validation.h"
-#import "RegexKitLite.h"
 
 @implementation NSString (Validation)
 
 - (BOOL)isValidFullName {
-	return [self isMatchedByRegex:@"^[a-zA-Z\\.]+$"];
+	return [self matchesRegex:@"^[a-zA-Z\\.]+$"];
 }
 
 - (BOOL)isValidUsername {
-	return [self isMatchedByRegex:@"^[a-zA-Z0-9\\._]+$"];
+	return [self matchesRegex:@"^[a-zA-Z0-9\\._]+$"];
 }
 
 - (BOOL)isValidEmail {
-	return [self isMatchedByRegex:@"^([a-zA-Z0-9%_.+\\-]+)@([a-zA-Z0-9.\\-]+?\\.[a-zA-Z]{2,6})$"];
+	return [self matchesRegex:@"^([a-zA-Z0-9%_.+\\-]+)@([a-zA-Z0-9.\\-]+?\\.[a-zA-Z]{2,6})$"];
 }
 
 - (BOOL)isValidPassword {
-	return [self isMatchedByRegex:@"^[a-zA-Z0-9\\._]+$"];
+	return [self matchesRegex:@"^[a-zA-Z0-9\\._]+$"];
+}
+
+- (BOOL)matchesRegex:(NSString *)regex {
+	NSRange matchRange = [self rangeOfString:regex options:NSRegularExpressionSearch];
+	return (matchRange.location == 0 && matchRange.length == [self length]);
 }
 
 @end
