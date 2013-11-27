@@ -297,7 +297,6 @@
 		01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD11169E11B000E01AA3 /* _AbstractCommon.m */; };
 		01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD13169E11B000E01AA3 /* AbstractCommon.m */; };
 		01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */; };
-		01C9CFA61697496400C42479 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C9CFA51697496400C42479 /* NSDate-Utilities.m */; };
 		01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */; };
 		01D0996617429F4E00351C82 /* ButtonPopoverCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0995E17429F4E00351C82 /* ButtonPopoverCancel.png */; };
 		01D0996717429F4E00351C82 /* ButtonPopoverCancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0995F17429F4E00351C82 /* ButtonPopoverCancel@2x.png */; };
@@ -1756,8 +1755,6 @@
 		01C6FD13169E11B000E01AA3 /* AbstractCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractCommon.m; sourceTree = "<group>"; };
 		01C74BAB169F239800B1CA02 /* SYNNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNetworkEngine.h; sourceTree = "<group>"; };
 		01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNetworkEngine.m; sourceTree = "<group>"; };
-		01C9CFA41697496400C42479 /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
-		01C9CFA51697496400C42479 /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
 		01CDCC811806C79800CF3AE9 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		01CDCC821806C79800CF3AE9 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
 		01CDCC831806C79800CF3AE9 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
@@ -3820,8 +3817,6 @@
 				01AFF99317EC91540002131A /* UIImage+LLDBQuickLook.m */,
 				01AFF99417EC91540002131A /* UIView+LLDBQuickLook.h */,
 				01AFF99517EC91540002131A /* UIView+LLDBQuickLook.m */,
-				01C9CFA41697496400C42479 /* NSDate-Utilities.h */,
-				01C9CFA51697496400C42479 /* NSDate-Utilities.m */,
 				01C6FD0D169DDEDB00E01AA3 /* NSDictionary+Validation.h */,
 				01C6FD0E169DDEDB00E01AA3 /* NSDictionary+Validation.m */,
 				01363EB3162FDEA600FFAA09 /* NSObject+Blocks.h */,
@@ -7297,7 +7292,6 @@
 				01946B921683335400354601 /* _VideoInstance.m in Sources */,
 				01946B971683339F00354601 /* ChannelOwner.m in Sources */,
 				01946B981683339F00354601 /* VideoInstance.m in Sources */,
-				01C9CFA61697496400C42479 /* NSDate-Utilities.m in Sources */,
 				BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */,
 				01C6FD0F169DDEDB00E01AA3 /* NSDictionary+Validation.m in Sources */,
 				01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */,
