@@ -910,7 +910,6 @@
 		BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */; };
 		BE03A6D616F784B000245314 /* SYNAccountSettingsGender.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */; };
 		BE03A6D916F787CB00245314 /* SYNAccountSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */; };
-		BE06EEE417D6344E0028F2E3 /* SYNStrictInteractionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE06EEE317D6344D0028F2E3 /* SYNStrictInteractionView.m */; };
 		BE06EEEC17D759290028F2E3 /* RecentContactPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = BE06EEEA17D759290028F2E3 /* RecentContactPlaceholder.png */; };
 		BE06EEED17D759290028F2E3 /* RecentContactPlaceholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE06EEEB17D759290028F2E3 /* RecentContactPlaceholder@2x.png */; };
 		BE06EEF017D759390028F2E3 /* ABContactPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = BE06EEEE17D759390028F2E3 /* ABContactPlaceholder.png */; };
@@ -2390,8 +2389,6 @@
 		BE03A6D416F784B000245314 /* SYNAccountSettingsGender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsGender.h; sourceTree = "<group>"; };
 		BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsGender.m; sourceTree = "<group>"; };
 		BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingTableViewCell.m; sourceTree = "<group>"; };
-		BE06EEE217D6344D0028F2E3 /* SYNStrictInteractionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNStrictInteractionView.h; sourceTree = "<group>"; };
-		BE06EEE317D6344D0028F2E3 /* SYNStrictInteractionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNStrictInteractionView.m; sourceTree = "<group>"; };
 		BE06EEEA17D759290028F2E3 /* RecentContactPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RecentContactPlaceholder.png; path = Assets/Images/RecentContactPlaceholder.png; sourceTree = "<group>"; };
 		BE06EEEB17D759290028F2E3 /* RecentContactPlaceholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RecentContactPlaceholder@2x.png"; path = "Assets/Images/RecentContactPlaceholder@2x.png"; sourceTree = "<group>"; };
 		BE06EEEE17D759390028F2E3 /* ABContactPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ABContactPlaceholder.png; path = Assets/Images/ABContactPlaceholder.png; sourceTree = "<group>"; };
@@ -3637,7 +3634,6 @@
 			children = (
 				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
-				BE06EEE517D635090028F2E3 /* Strict Interactive View */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
 				BE285DB91726826800D995AB /* Channels Manager */,
 				BE7D34CB171443330085AB81 /* Device */,
@@ -5055,15 +5051,6 @@
 				BE21EE8416FA200C0067223B /* Specific Fields */,
 			);
 			name = "Secondary Tables";
-			sourceTree = "<group>";
-		};
-		BE06EEE517D635090028F2E3 /* Strict Interactive View */ = {
-			isa = PBXGroup;
-			children = (
-				BE06EEE217D6344D0028F2E3 /* SYNStrictInteractionView.h */,
-				BE06EEE317D6344D0028F2E3 /* SYNStrictInteractionView.m */,
-			);
-			name = "Strict Interactive View";
 			sourceTree = "<group>";
 		};
 		BE08158F16D3C46800ADB1DC /* Search and Discovery */ = {
@@ -7413,7 +7400,6 @@
 				0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */,
 				0177002A17C382C3006DE415 /* UIImage+Tint.m in Sources */,
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
-				BE06EEE417D6344E0028F2E3 /* SYNStrictInteractionView.m in Sources */,
 				BE06EEF417D78DCA0028F2E3 /* SYNOneToOneFriendCell.m in Sources */,
 				BEB31305181565CE00FAF98A /* SYNSearchResultsViewController.m in Sources */,
 				0110AE6117DF383C00DC7724 /* SYNProgressView.m in Sources */,
