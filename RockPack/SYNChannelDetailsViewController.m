@@ -548,6 +548,10 @@ UIPopoverControllerDelegate>
         self.lblNoVideos.hidden = YES;
     }
     
+
+    //should not have to do this, check.
+    [self.btnDeleteChannel setBackgroundColor:[UIColor whiteColor]];
+    
 }
 #pragma mark - Control Actions
 
