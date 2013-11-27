@@ -824,13 +824,6 @@
     return  nil;
 }
 
-
-- (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
-{
-    return [self.videoThumbnailCollectionView indexPathForCell: cell];
-}
-
-
 - (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
                         andComponentIndex: (NSInteger) componentIndex
 {
