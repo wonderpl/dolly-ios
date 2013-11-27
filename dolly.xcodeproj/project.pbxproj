@@ -1312,7 +1312,6 @@
 		BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027D61834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib */; };
 		BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027D81834F4EA00636659 /* SYNAccountSettingsViewController.xib */; };
 		BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */; };
-		BED4312B16F20CD70051465B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4312A16F20CD70051465B /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
 		BEEB6F1C1721713500FEFA43 /* PanelMenuBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEB6F1A1721713500FEFA43 /* PanelMenuBottom.png */; };
@@ -2894,8 +2893,6 @@
 		BED027D81834F4EA00636659 /* SYNAccountSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNAccountSettingsViewController.xib; sourceTree = "<group>"; };
 		BED4311516F0EBBB0051465B /* SYNLoginErrorArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginErrorArrow.h; sourceTree = "<group>"; };
 		BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginErrorArrow.m; sourceTree = "<group>"; };
-		BED4312916F20CD70051465B /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
-		BED4312A16F20CD70051465B /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RegexKitLite.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BEE4A6BD170B0FD6008F9D05 /* dolly-Release-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "dolly-Release-Info.plist"; path = "RockPack/dolly-Release-Info.plist"; sourceTree = "<group>"; };
 		BEE4A6BF170B273F008F9D05 /* SYNAccountSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingTableViewCell.h; sourceTree = "<group>"; };
 		BEE4A6C0170B563D008F9D05 /* SYNAccountSettingsEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsEmail.h; sourceTree = "<group>"; };
@@ -3674,7 +3671,6 @@
 				0173E6C5171822BF00EEE76B /* Google Analytics */,
 				011A162016EF5E96008CF25E /* Image Picker */,
 				019E6A5E165FD958002B312A /* OAuth2 */,
-				BED4312816F20CC50051465B /* RegexKitLite */,
 				012502BA16CA8FCE0029C7C8 /* Social Media */,
 				BEF9E5AD16DCBAA300286113 /* Sound */,
 				019824ED1629CC6600216900 /* TestFlight */,
@@ -5947,15 +5943,6 @@
 			name = Options;
 			sourceTree = "<group>";
 		};
-		BED4312816F20CC50051465B /* RegexKitLite */ = {
-			isa = PBXGroup;
-			children = (
-				BED4312916F20CD70051465B /* RegexKitLite.h */,
-				BED4312A16F20CD70051465B /* RegexKitLite.m */,
-			);
-			name = RegexKitLite;
-			sourceTree = "<group>";
-		};
 		BEF9E5A516DBCDEF00286113 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -7365,7 +7352,6 @@
 				BE270B7F16EDE0E800CDDA6D /* SYNLoginViewController.m in Sources */,
 				0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */,
 				BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */,
-				BED4312B16F20CD70051465B /* RegexKitLite.m in Sources */,
 				01A79BA216F32C6900B05084 /* NSString+Timecode.m in Sources */,
 				01A79BA516F34BBF00B05084 /* NSString+Utils.m in Sources */,
 				BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */,
