@@ -81,8 +81,6 @@
 		011C1682173003E800CF50B9 /* OWSaveToCameraRollActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C1670173003E800CF50B9 /* OWSaveToCameraRollActivity.m */; };
 		011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C1672173003E800CF50B9 /* OWSinaWeiboActivity.m */; };
 		011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C1674173003E800CF50B9 /* OWTwitterActivity.m */; };
-		011C168D173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C168C173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m */; };
-		011C16901731782800CF50B9 /* SYNDeletionWobbleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 011C168F1731782800CF50B9 /* SYNDeletionWobbleLayout.m */; };
 		011C16931732834F00CF50B9 /* PanelChannelCreateNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C16911732834F00CF50B9 /* PanelChannelCreateNew.png */; };
 		011C16941732834F00CF50B9 /* PanelChannelCreateNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C16921732834F00CF50B9 /* PanelChannelCreateNew@2x.png */; };
 		011C169B1732B65400CF50B9 /* NoCover184.png in Resources */ = {isa = PBXBuildFile; fileRef = 011C16991732B65400CF50B9 /* NoCover184.png */; };
@@ -1450,10 +1448,6 @@
 		011C16851730043000CF50B9 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		011C16871730046700CF50B9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		011C16891730047300CF50B9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		011C168B173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDeletionWobbleLayoutAttributes.h; sourceTree = "<group>"; };
-		011C168C173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDeletionWobbleLayoutAttributes.m; sourceTree = "<group>"; };
-		011C168E1731782800CF50B9 /* SYNDeletionWobbleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDeletionWobbleLayout.h; sourceTree = "<group>"; };
-		011C168F1731782800CF50B9 /* SYNDeletionWobbleLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDeletionWobbleLayout.m; sourceTree = "<group>"; };
 		011C16911732834F00CF50B9 /* PanelChannelCreateNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelChannelCreateNew.png; path = Assets/Images/PanelChannelCreateNew.png; sourceTree = "<group>"; };
 		011C16921732834F00CF50B9 /* PanelChannelCreateNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelChannelCreateNew@2x.png"; path = "Assets/Images/PanelChannelCreateNew@2x.png"; sourceTree = "<group>"; };
 		011C16991732B65400CF50B9 /* NoCover184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoCover184.png; path = Assets/Images/NoCover184.png; sourceTree = "<group>"; };
@@ -3409,8 +3403,6 @@
 				014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */,
 				0173F70616E0C56A005B3ECA /* SYNVideoViewerThumbnailLayout.h */,
 				0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */,
-				011C168E1731782800CF50B9 /* SYNDeletionWobbleLayout.h */,
-				011C168F1731782800CF50B9 /* SYNDeletionWobbleLayout.m */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -3420,8 +3412,6 @@
 			children = (
 				0173F70916E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.h */,
 				0173F70A16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m */,
-				011C168B173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.h */,
-				011C168C173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m */,
 			);
 			name = Attributes;
 			sourceTree = "<group>";
@@ -7319,8 +7309,6 @@
 				011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */,
 				011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */,
 				38A2FF1B17314B3E00FB9F57 /* SYNDiscoverAutocompleteCell.m in Sources */,
-				011C168D173176FD00CF50B9 /* SYNDeletionWobbleLayoutAttributes.m in Sources */,
-				011C16901731782800CF50B9 /* SYNDeletionWobbleLayout.m in Sources */,
 				E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */,
 				38BACE001732CCFB00406597 /* SYNLoginViewControllerIphone.m in Sources */,
 				012B4C9D17393A080019DA4C /* SYNPopoverBackgroundView.m in Sources */,

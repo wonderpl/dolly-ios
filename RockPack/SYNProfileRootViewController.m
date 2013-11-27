@@ -14,7 +14,6 @@
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
 #import "SYNChannelThumbnailCell.h"
-#import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"

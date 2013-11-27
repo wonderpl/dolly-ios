@@ -9,7 +9,6 @@
 
 #import "AppConstants.h"
 #import "SYNChannelMidCell.h"
-#import "SYNDeletionWobbleLayoutAttributes.h"
 #import "SYNTouchGestureRecognizer.h"
 #import "UIFont+SYNFont.h"
 #import "UIImage+Tint.h"
