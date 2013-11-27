@@ -83,10 +83,6 @@ typedef enum : NSInteger {
 #define kAPIPasswordReset           @"/ws/reset-password/"                      /* POST */
 #define kAPIUsernameAvailability    @"/ws/register/availability/"
 
-
-#define kCoverArtChanged            @"kCoverArtChanged"
-#define kCoverSetNoCover            @"kCoverSetNoCover"
-
 #define kCaution                    @"kCaution"
 
 // == Main WS API == //
@@ -541,7 +537,6 @@ typedef enum : NSInteger
 #define kNoteVideoAddedToExistingChannel         @"kNoteAddedToChannel"
 #define kNoteCreateNewChannel                    @"kNoteCreateNewChannel"
 
-#define kNotificationMarkedRead     @"kNotificationMarkedRead"
 
 #define kProfileRequested           @"kProfileRequested"
 #define kVideoOverlayRequested      @"kVideoOverlayRequested"

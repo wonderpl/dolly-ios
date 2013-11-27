@@ -1,5 +1,4 @@
 #import "Channel.h"
-#import "NSDate-Utilities.h"
 #import "NSDictionary+Validation.h"
 #import "Video.h"
 #import "VideoInstance.h"
@@ -188,17 +187,6 @@ static NSDateFormatter *dateFormatter = nil;
                                                                                     toDate:NSDate.date
                                                                                    options:0];
     
-}
-
-
-- (NSDate *) dateAddedIgnoringTime
-{
-    if (!self.dateOfDayAdded)
-    {
-        self.dateOfDayAdded = self.dateAdded.dateIgnoringTime;
-    }
-    
-    return self.dateOfDayAdded;
 }
 
 

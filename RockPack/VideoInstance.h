@@ -26,9 +26,4 @@
 + (VideoInstance *) instanceFromDictionary: (NSDictionary *) dictionary
                  usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
 
-
-- (NSDate *) dateAddedIgnoringTime;
-
-
-
 @end

@@ -16,7 +16,7 @@
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 #import "SYNPopoverable.h"
-#import "SYNVideoViewController.h"
+#import "SYNChannelVideoPlayerViewController.h"
 @import QuartzCore;
 
 
@@ -342,7 +342,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
    // self.videoViewerViewController.view.alpha = 0.0f;
     
     
-	UIViewController *viewController = [SYNVideoViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
+	UIViewController *viewController = [SYNChannelVideoPlayerViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
 	[self presentViewController:viewController animated:YES completion:nil];
 	
     /*
@@ -469,6 +469,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                           delay: 4.0f
                         options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                      animations: ^{
+                         
                          CGRect newFrame = self.networkErrorNotificationView.frame;
                          newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
                          self.networkErrorNotificationView.frame = newFrame;

@@ -7,7 +7,7 @@
 //
 
 #import "SYNFullScreenVideoAnimator.h"
-#import "SYNVideoViewController.h"
+#import "SYNChannelVideoPlayerViewController.h"
 #import "SYNFullScreenVideoViewController.h"
 #import "SYNVideoPlayer.h"
 #import "SYNDeviceManager.h"
@@ -54,7 +54,7 @@ static const CGFloat AnimationDuration = 0.3;
 #pragma mark - Private
 
 - (void)animatePresentingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-	SYNVideoViewController *fromViewController = (SYNVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+	SYNChannelVideoPlayerViewController *fromViewController = (SYNChannelVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	SYNFullScreenVideoViewController *toViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
 	SYNVideoPlayer *videoPlayer = fromViewController.currentVideoPlayer;
@@ -88,7 +88,7 @@ static const CGFloat AnimationDuration = 0.3;
 
 - (void)animateDismissingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 	SYNFullScreenVideoViewController *fromViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	SYNVideoViewController *toViewController = (SYNVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+	SYNChannelVideoPlayerViewController *toViewController = (SYNChannelVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
 	SYNVideoPlayer *videoPlayer = fromViewController.videoPlayer;
 	UIView *playerContainerView = toViewController.videoPlayerContainerView;
@@ -99,9 +99,9 @@ static const CGFloat AnimationDuration = 0.3;
 	
 	// This is dispatch_async is to handle the case where the iPad has been rotated while the video is playing.
 	//
-	// The SYNVideoViewController's view will still be in the same orientation as it was prior to presenting the full screen
-	// view controller and it's layout won't get updated until the end of the run loop. This means that we'd have the wrong
-	// frames for the video player container when we're animating to it
+	// The SYNChannelVideoPlayerViewController's view will still be in the same orientation as it was prior to presenting
+	// the full screen view controller and it's layout won't get updated until the end of the run loop. This means that
+	// we'd have the wrong frames for the video player container when we're animating to it
 	//
 	// Starting the animation on the next run loop means that the layout will be updated and the frames will be correct
 	dispatch_async(dispatch_get_main_queue(), ^{

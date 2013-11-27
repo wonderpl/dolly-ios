@@ -9,7 +9,6 @@
 #import "ExternalAccount.h"
 #import "GAI.h"
 #import "NSString+Utils.h"
-#import "RegexKitLite.h"
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
@@ -20,6 +19,7 @@
 #import "UIDevice+Hardware.h"
 #import "UIInterpolatingMotionEffect+DualAxis.h"
 #import "User.h"
+#import "NSString+Validation.h"
 #import <FacebookSDK/FacebookSDK.h>
 @import Accounts;
 
@@ -639,7 +639,7 @@
         return NO;
     }
     
-    if (![userNameInputField.text isMatchedByRegex: @"^[a-zA-Z0-9]+$"])
+    if (![userNameInputField.text isValidUsername])
     {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_username_error_invalid", nil)
                    nextToView: userNameInputField];
@@ -682,7 +682,7 @@
     
     // == Regular expression through RegexKitLite.h (not arc compatible) == //
     
-    if (![emailInputField.text isMatchedByRegex: @"^([a-zA-Z0-9%_.+\\-]+)@([a-zA-Z0-9.\\-]+?\\.[a-zA-Z]{2,6})$"])
+    if (![emailInputField.text isValidEmail])
     {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_email_error_empty", nil)
                    nextToView: emailInputField];
@@ -707,7 +707,7 @@
     //register_screen_form_field_username_error_too_long
     // == Username must be
     
-    if (![userNameInputField.text isMatchedByRegex: @"^[a-zA-Z0-9\\._]+$"])
+    if (![userNameInputField.text isValidUsername])
     {
         [self placeErrorLabel: NSLocalizedString(@"register_screen_form_field_username_error_invalid", nil)
                    nextToView: userNameInputField];

@@ -13,7 +13,6 @@
 #import "OWActivities.h"
 #import "OWActivityView.h"
 #import "OWActivityViewController.h"
-#import "RegexKitLite.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
@@ -24,6 +23,7 @@
 #import <UIImageView+WebCache.h>
 #import "SYNMasterViewController.h"
 #import "VideoInstance.h"
+#import "NSString+Validation.h"
 #import <objc/runtime.h>
 @import AddressBook;
 @import QuartzCore;
@@ -680,7 +680,7 @@
     {
         cell.detailTextLabel.text = @"Is on Rockpack";
     }
-    else if ([self isValidEmail: friend.email])
+    else if ([friend.email isValidEmail])
     {
         cell.detailTextLabel.text = friend.email;
     }
@@ -740,7 +740,7 @@
     {
         friend = self.searchedFriends[indexPath.row];
         
-        if ([self isValidEmail: friend.email]) // has a valid email
+        if ([friend.email isValidEmail]) // has a valid email
         {
             [self sendEmailToFriend: friend];
         }
@@ -800,7 +800,7 @@
     
     prompt.delegate = self;
     
-    if ([self isValidEmail: self.currentSearchTerm])
+    if ([self.currentSearchTerm isValidEmail])
     {
         UITextField *textField = [prompt textFieldAtIndex: 0];
         [textField setText: self.currentSearchTerm];
@@ -815,7 +815,7 @@
 {
     UITextField *textfield = [alertView textFieldAtIndex: 0];
     
-    return [self isValidEmail: textfield.text];
+    return [textfield.text isValidEmail];
 }
 
 
@@ -953,13 +953,6 @@
     }
 }
 
-
-#pragma mark - Helper Methods
-
-- (BOOL) isValidEmail: (NSString *) emailCandidate
-{
-    return [emailCandidate isMatchedByRegex: @"^([a-zA-Z0-9%_.+\\-]+)@([a-zA-Z0-9.\\-]+?\\.[a-zA-Z]{2,6})$"];
-}
 
 #pragma mark - Send Email
 - (void) shareLinkObtained

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 	SYNVideoPlayerStateInitialised,
 	SYNVideoPlayerStatePlaying,
@@ -37,13 +36,8 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 @property (nonatomic, assign) id<SYNVideoPlayerDelegate> delegate;
 
 @property (nonatomic, assign) NSTimeInterval currentTime;
-@property (nonatomic, assign, getter=isPlaying) BOOL playing;
 
 @property (nonatomic, strong, readonly) UIView *playerContainerView;
-
-@property (nonatomic, strong, readonly) SYNScrubberBar *scrubberBar;
-
-@property (nonatomic, strong, readonly) SYNVideoLoadingView *loadingView;
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
 

@@ -39,18 +39,12 @@
 @interface SYNAbstractViewController ()  <UITextFieldDelegate,
                                           UIPopoverControllerDelegate>
 
-@property (getter = isVideoQueueVisible) BOOL videoQueueVisible;
-@property (nonatomic, assign) BOOL shouldPlaySound;
 @property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
-@property (nonatomic, strong) UIView *dropZoneView;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityView *activityView;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
-@property (strong, readonly, nonatomic) NSArray *activities;
-@property (weak, nonatomic) UIPopoverController *presentingPopoverController;
-@property (weak, nonatomic) UIViewController *presentingController;
 @property (nonatomic, assign) NSInteger lastContentOffset;
 @property (nonatomic, assign) CGPoint startDraggingPoint;
 @property (nonatomic, assign) CGPoint endDraggingPoint;
@@ -184,17 +178,6 @@
 #pragma mark -
 
 
-- (void) controllerDidChangeContent: (NSFetchedResultsController *) controller
-{
-    [self reloadCollectionViews];
-}
-
-
-- (void) reloadCollectionViews
-{
-    //AssertOrLog (@"Abstract class called 'reloadCollectionViews'");
-}
-
 // This can be overridden if updating star may cause the videoFetchedResults
 - (BOOL) shouldUpdateStarStatus
 {
@@ -220,16 +203,6 @@
     
     return indexPath;
 }
-
-
-- (IBAction) userTouchedVideoShareButton: (UIButton *) videoShareButton
-{
-    NSIndexPath *indexPath = [self indexPathFromVideoInstanceButton: videoShareButton];
-    VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
-    
-    [self shareVideoInstance: videoInstance];
-}
-
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
@@ -281,12 +254,6 @@
         
 		[self viewChannelDetails:videoInstance.channel];
     }
-}
-
-
-- (void) videoOverlayDidDisappear
-{
-    // to be implemented by child
 }
 
 
@@ -678,20 +645,6 @@
 
 #pragma mark - Purchase
 
-- (void) initiatePurchaseAtURL: (NSURL *) purchaseURL
-{
-    if ([[UIApplication sharedApplication] canOpenURL: purchaseURL])
-	{
-		[[UIApplication sharedApplication] openURL: purchaseURL];
-	}
-}
-
-- (void) headerTapped
-{
-    // to be implemented by subclass
-}
-
-
 - (void) performAction: (NSString *) action withObject: (id) object
 {
     // to be implemented by subclass
@@ -729,107 +682,11 @@
 }
 
 
-
-- (BOOL) alwaysDisplaysSearchBox
-{
-    return NO;
-}
-
-
-- (void) addVideoAtIndexPath: (NSIndexPath *) indexPath
-               withOperation: (NSString *) operation
-{
-    VideoInstance *videoInstance = [self videoInstanceForIndexPath: indexPath];
-    
-    if (videoInstance)
-    {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"videoPlusButtonClick"
-                                                                label: nil
-                                                                value: nil] build]];
-        
-        [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                         action: @"select"
-                                                videoInstanceId: videoInstance.uniqueId
-                                              completionHandler: ^(id response) {
-                                              }
-                                                   errorHandler: ^(id error) {
-                                                       DebugLog(@"Could not record videoAddButtonTapped: activity");
-                                                   }];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName: operation
-                                                            object: self
-                                                          userInfo: @{@"VideoInstance": videoInstance}];
-    }
-}
-
-
-- (IBAction) toggleStarAtIndexPath: (NSIndexPath *) indexPath
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoStarButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    __weak VideoInstance *videoInstance = [self videoInstanceForIndexPath: indexPath];
-    
-    NSString *starAction = videoInstance.starredByUserValue ? @"unstar" : @"star" ;
-    
-    //    int starredIndex = self.currentSelectedIndex;
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                     action: starAction
-                                            videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: ^(id response) {
-                                              
-                                              if (videoInstance.starredByUserValue)
-                                              {
-                                                  // Currently highlighted, so decrement
-                                                  videoInstance.starredByUserValue = NO;
-                                                  videoInstance.video.starCountValue -= 1;
-                                                  
-                                                  Channel* parentChannel = videoInstance.channel;
-                                                  if(parentChannel &&
-                                                     parentChannel.favouritesValue &&
-                                                     [parentChannel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId])
-                                                  {
-                                                      // the video belonged to favorites
-                                                      [parentChannel removeVideoInstancesObject:videoInstance];
-                                                  }
-                                              }
-                                              else
-                                              {
-                                                  // Currently highlighted, so increment
-                                                  videoInstance.starredByUserValue = YES;
-                                                  videoInstance.video.starCountValue += 1;
-                                                  [Appirater userDidSignificantEvent: FALSE];
-                                              }
-
-                                              [appDelegate saveContext: YES];
-  
-                                          } errorHandler: ^(id error) {
-                                              DebugLog(@"Could not star video");
-                                          }];
-}
-
-
-
-
 - (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
 {
     AssertOrLog(@"Shouldn't be calling abstract function");
     return  nil;
 }
-
-
-- (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
-{
-    return [self.videoThumbnailCollectionView indexPathForCell: cell];
-}
-
 
 - (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
                         andComponentIndex: (NSInteger) componentIndex
@@ -922,14 +779,6 @@
 - (UIStatusBarStyle) preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
-}
-
-
-
-
-- (EntityType) associatedEntity
-{
-    return EntityTypeAny;
 }
 
 

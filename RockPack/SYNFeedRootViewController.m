@@ -13,14 +13,12 @@
 #import "ChannelOwner.h"
 #import "FeedItem.h"
 #import "GAI.h"
-#import "NSDate-Utilities.h"
 #import "SYNAggregateCell.h"
 #import "SYNAggregateChannelCell.h"
 #import "SYNAggregateVideoCell.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNFeedRootViewController.h"
-#import "SYNHomeSectionHeaderView.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
@@ -34,13 +32,8 @@ typedef void(^FeedDataErrorBlock)(void);
 
 @interface SYNFeedRootViewController () 
 
-@property (nonatomic, assign) BOOL refreshing;
-@property (nonatomic, assign) BOOL shouldReloadCollectionView;
 @property (nonatomic, strong) NSBlockOperation *blockOperation;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
-@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, weak)   SYNAggregateVideoCell* selectedVideoCell;
 @property (nonatomic, strong) NSArray* feedItemsData;
 @property (nonatomic, strong) NSDictionary* feedVideosById;
 @property (nonatomic, strong) NSDictionary* feedChannelsById;
@@ -84,13 +77,7 @@ typedef void(^FeedDataErrorBlock)(void);
     
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateChannelCell" bundle: nil]
               forCellWithReuseIdentifier: @"SYNAggregateChannelCell"];
-    
-#ifdef SHOW_DATE_HEADERS
-    [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNHomeSectionHeaderView" bundle: nil]
-              forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
-                     withReuseIdentifier: @"SYNHomeSectionHeaderView"];
-#endif
-
+	
     [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelFooterMoreView" bundle: nil]
               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                      withReuseIdentifier: @"SYNChannelFooterMoreView"];
@@ -108,10 +95,6 @@ typedef void(^FeedDataErrorBlock)(void);
                   forControlEvents: UIControlEventValueChanged];
     
     [self.feedCollectionView addSubview: self.refreshControl];
-    
-    // We should only setup our date formatter once
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 }
 
 
@@ -255,7 +238,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) handleRefreshComplete
 {
-    self.refreshing = NO;
     [self.refreshControl endRefreshing];
 }
 
@@ -278,19 +260,15 @@ typedef void(^FeedDataErrorBlock)(void);
     [self fetchVideoItems];
     [self fetchChannelItems];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    // Edit the entity name as appropriate.
-    fetchRequest.entity = [NSEntityDescription entityForName: kFeedItem
-                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
+	
     // if the aggregate has a parent FeedItem then it should NOT be displayed since it is going to be part of an aggregate...
     NSPredicate* predicate = [NSPredicate predicateWithFormat: [NSString stringWithFormat: @"viewId == \"%@\" AND aggregate == nil", self.viewId]]; // kFeedViewId
  
     fetchRequest.predicate = predicate;
 
-    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"dateAdded" ascending: NO],
-                                     [[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey: @"dateAdded" ascending: NO],
+                                     [NSSortDescriptor sortDescriptorWithKey: @"position" ascending: YES]];
     
     NSError* error;
     
@@ -298,43 +276,8 @@ typedef void(^FeedDataErrorBlock)(void);
                                                                                 error: &error];
     if (!resultsArray)
         return;
-    
-    // sort results in categories
-    if(resultsArray.count == 0)
-    {
-        self.feedItemsData = @[];
-        [self.feedCollectionView reloadData];
-        return;
-    }
-    
-    NSMutableDictionary* buckets = [NSMutableDictionary dictionary];
-    NSDate* dateNoTime;
-    
-    for (FeedItem* feedItem in resultsArray)
-    {
-        dateNoTime = [feedItem.dateAdded dateIgnoringTime];
-        
-        NSMutableArray* bucket = buckets[dateNoTime];
-        if(!bucket) { // if the bucket has not been created already, create it
-            bucket = [NSMutableArray array];
-            buckets[dateNoTime] = bucket;
-        }
-            
-        [bucket addObject:feedItem];
-    }
-    
-    NSArray* sortedDateKeys = [[buckets allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSDate* date1, NSDate* date2) {
-        return [date2 compare:date1];
-    }];
-    
-    NSMutableArray* sortedItemsArray = [NSMutableArray array];
-    for (NSDate* dateKey in sortedDateKeys)
-    {
-        [sortedItemsArray addObject:buckets[dateKey]];
-        
-    }
-    self.feedItemsData = sortedItemsArray;
-    
+	
+	self.feedItemsData = resultsArray;
     [self.feedCollectionView reloadData];
 }
 
@@ -400,17 +343,13 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - UICollectionView Delegate/Data Source
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
-{
-    return self.feedItemsData.count; // the number of arrays included
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
+	return 1;
 }
 
 
-- (NSInteger) collectionView: (UICollectionView *) collectionView
-      numberOfItemsInSection: (NSInteger) section
-{
-    NSArray* sectionInfo = self.feedItemsData[section];
-    return sectionInfo.count;
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger) section {
+	return [self.feedItemsData count];
 }
 
 
@@ -525,37 +464,14 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-#ifdef SHOW_DATE_HEADERS
-- (CGSize) collectionView: (UICollectionView *) collectionView
-                   layout: (UICollectionViewLayout *) collectionViewLayout
-           referenceSizeForHeaderInSection: (NSInteger) section
-{
-    if (IS_IPAD)
-    {
-        return CGSizeMake(1024, 65);
-    }
-    else
-    {
-        return CGSizeMake(320, 34);
-    }
-}
-#endif
-
-
 - (CGSize) collectionView: (UICollectionView *) collectionView
                    layout: (UICollectionViewLayout*) collectionViewLayout
                    referenceSizeForFooterInSection: (NSInteger) section
 {
-    CGSize footerSize = CGSizeZero;
-    
-    if  (section == (self.feedItemsData.count - 1) && // only the last section can have a loader
-        (self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable)) 
-    {
-        
-        footerSize = [self footerSize];   
-    }
-    
-    return footerSize;
+    if ((self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable)) {
+		return [self footerSize];
+	}
+    return CGSizeZero;
 }
 
 
@@ -565,72 +481,14 @@ typedef void(^FeedDataErrorBlock)(void);
                                   atIndexPath: (NSIndexPath *) indexPath
 {
     UICollectionReusableView *supplementaryView = nil;
-    
-    // Work out the day
-    // In the 'name' attribut of the sectionInfo we have actually the keypath data (i.e in this case Date without time)
-    
-    // TODO: We might want to optimise this instead of creating a new date formatter each time
-#ifdef SHOW_DATE_HEADERS
-    if (kind == UICollectionElementKindSectionHeader)
-    {
-        FeedItem* heuristicFeedItem = [self feedItemAtIndexPath:indexPath];
-        NSDate* date = heuristicFeedItem.dateAdded;
-        
-        SYNHomeSectionHeaderView *headerSupplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                                                               withReuseIdentifier: @"SYNHomeSectionHeaderView"
-                                                                                                      forIndexPath: indexPath];
-        NSString *sectionText;
-        
-        // Unavoidably long if-then-else
-        if ([date isToday])
-        {
-            sectionText = NSLocalizedString(@"TODAY", nil);
-        }
-        else if ([date isYesterday])
-        {
-            sectionText = NSLocalizedString(@"YESTERDAY", nil);
-        }
-        else if ([date isLast7Days])
-        {
-            sectionText = date.weekdayString;
-        }
-        else if ([date isThisYear])
-        {
-            sectionText = date.shortDateWithOrdinalString;
-        }
-        else
-        {
-            sectionText = date.shortDateWithOrdinalStringAndYear;
-        }
-        
-        // Special case, remember the first section view
-        headerSupplementaryView.viewControllerDelegate = self;
-        headerSupplementaryView.sectionTitleLabel.text = sectionText.uppercaseString;
-        
-        if ([SYNDeviceManager.sharedInstance isLandscape])
-        {
-            headerSupplementaryView.sectionView.image = [UIImage imageNamed: @"PanelDay"];
-        }
-        else
-        {
-            headerSupplementaryView.sectionView.image = [UIImage imageNamed:@"PanelDayPortrait"];
-        }
-        
-        supplementaryView = headerSupplementaryView;
-    }
-    else
-#endif
-    if (kind == UICollectionElementKindSectionFooter)
+	if (kind == UICollectionElementKindSectionFooter)
     {
         self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                              withReuseIdentifier: @"SYNChannelFooterMoreView"
                                                                     forIndexPath: indexPath];
         supplementaryView = self.footerView;
         
-        // Show loading spinner if we have more datasection == )
-        if ((indexPath.section == (self.feedItemsData.count - 1)) && // last item
-            (self.dataRequestRange.location + self.dataRequestRange.length) < self.dataItemsAvailable)
-        {
+        if ((self.dataRequestRange.location + self.dataRequestRange.length) < self.dataItemsAvailable) {
             self.footerView.showsLoading = self.isLoadingMoreContent;
         }
     }
@@ -639,21 +497,11 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) videoOverlayDidDisappear
-{
-    [self.feedCollectionView reloadData];
-}
-
-
 #pragma mark - Helper Methods to get AggreagateCell's Data
 
-- (FeedItem*) feedItemAtIndexPath: (NSIndexPath*) indexPath
-{
-    NSArray* sectionArray = self.feedItemsData[indexPath.section];
-    FeedItem* feedItem = sectionArray[indexPath.row];
-    return feedItem;
+- (FeedItem *)feedItemAtIndexPath:(NSIndexPath*) indexPath {
+    return self.feedItemsData[indexPath.row];
 }
-
 
 - (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
 {

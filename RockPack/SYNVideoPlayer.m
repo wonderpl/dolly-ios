@@ -13,6 +13,7 @@
 #import "VideoInstance.h"
 #import "Video.h"
 #import "SYNVideoLoadingView.h"
+#import "SYNVideoPlayer+Protected.h"
 
 @interface SYNVideoPlayer () <SYNScrubberBarDelegate>
 
@@ -152,6 +153,22 @@
 	return 0.0;
 }
 
+#pragma mark - Protected
+
+- (void)handleVideoPlayerStartedPlaying {
+	[self fadeOutLoadingView];
+}
+
+- (void)handleVideoPlayerFinishedPlaying {
+	[self.delegate videoPlayerFinishedPlaying];
+}
+
+- (void)handleVideoPlayerError:(NSString *)errorString {
+	[self fadeOutLoadingView];
+	
+	[self.delegate videoPlayerErrorOccurred:errorString];
+}
+
 #pragma mark - Private class
 
 + (Class)videoPlayerClassesForSource:(NSString *)source {
@@ -163,6 +180,12 @@
 }
 
 #pragma mark - Private
+
+- (void)fadeOutLoadingView {
+	[UIView animateWithDuration:0.3 animations:^{
+		self.loadingView.alpha = 0.0;
+	}];
+}
 
 - (void)startUpdatingScrubberProgress {
 	self.scrubberUpdateTimer = [NSTimer timerWithTimeInterval:0.1

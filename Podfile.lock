@@ -1,5 +1,10 @@
 PODS:
   - Appirater (2.0.2)
+  - Kiwi/ARC (2.2.3)
+  - Kiwi/NonARC (2.2.3)
+  - Kiwi/XCTest (2.2.3):
+    - Kiwi/ARC
+    - Kiwi/NonARC
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - Ooyala (1.5.1)
@@ -11,6 +16,7 @@ PODS:
 
 DEPENDENCIES:
   - Appirater
+  - Kiwi/XCTest
   - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`, branch `cocoapods`)
   - Ooyala
   - Reachability
@@ -24,6 +30,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
+  Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
   Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735

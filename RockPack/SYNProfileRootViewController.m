@@ -14,7 +14,6 @@
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
 #import "SYNChannelThumbnailCell.h"
-#import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
@@ -28,7 +27,6 @@
 #import "SYNMasterViewController.h"
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
-#import "SYNAccountSettingsViewController.h"
 #import "UIImage+blur.h"
 #import "SYNProfileFlowLayout.h"
 
@@ -1074,13 +1072,6 @@
         [self.collectionsTabButton.titleLabel setTextColor:self.tabTextColor];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
     }
-}
-
-
-- (void) headerTapped
-{
-    // no need to animate the subscriptions part since it observes the channels thumbnails scroll view
-    // [self.channelThumbnailCollectionView setContentOffset: CGPointZero animated: YES];
 }
 
 #pragma mark - scroll view delegates
