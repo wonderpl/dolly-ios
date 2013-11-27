@@ -114,7 +114,6 @@
 - (void) userSubscribeRequest: (NSNotification *) notification
 {
     
-    NSLog(@"userSubscribeRequest");
     
     ChannelOwner *channelOwnerToSubscribe = (ChannelOwner *) [notification userInfo][kChannelOwner];
     
@@ -359,7 +358,6 @@
 - (void) subscribeToUser: (ChannelOwner *) channelToSubscribeTo
 {
     
-    NSLog(@"SUB TO USER");
     
     //    // To prevent crashes that would occur when faulting object that have disappeared
     //    NSManagedObjectID *channelObjectId = channel.objectID;
