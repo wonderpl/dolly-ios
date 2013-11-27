@@ -7,3 +7,6 @@ pod 'Appirater'
 pod 'Ooyala'
 pod 'SDWebImage'
 
+target :dollyTests, :exclusive => true do
+	pod 'Kiwi/XCTest'
+end

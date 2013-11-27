@@ -1355,6 +1355,7 @@
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
 		E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2AF28717BE33C700A20127 /* FacebookSDK.framework */; };
+		FEA605CC5F8E4BFCA67EBDD6 /* libPods-dollyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1857,6 +1858,7 @@
 		01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x~iphone.png"; path = "Assets/Images/ButtonCreateDisabled@2x~iphone.png"; sourceTree = "<group>"; };
 		01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x.png"; path = "Assets/Images/ButtonCreateDisabled@2x.png"; sourceTree = "<group>"; };
 		01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled~iphone.png"; path = "Assets/Images/ButtonCreateDisabled~iphone.png"; sourceTree = "<group>"; };
+		0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dollyTests.xcconfig"; path = "Pods/Pods-dollyTests.xcconfig"; sourceTree = "<group>"; };
 		0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelSearchCell.xib; sourceTree = "<group>"; };
 		0E19FBC0182273EE0007DF5B /* SYNChannelSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelSearchCell.h; sourceTree = "<group>"; };
 		0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelSearchCell.m; sourceTree = "<group>"; };
@@ -2403,7 +2405,7 @@
 		38C3FA7217203D6600F126B1 /* PanelDayPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelDayPortrait.png; path = Assets/Images/PanelDayPortrait.png; sourceTree = "<group>"; };
 		38C3FA7317203D6600F126B1 /* PanelDayPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelDayPortrait@2x.png"; path = "Assets/Images/PanelDayPortrait@2x.png"; sourceTree = "<group>"; };
 		38DC34B1175E42DF0048286C /* Rockpack 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 3.xcdatamodel"; sourceTree = "<group>"; };
-		AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rockpackTests.xcconfig"; path = "Pods/Pods-rockpackTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dollyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsViewController.m; sourceTree = "<group>"; };
 		BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSettingsHighlighted.png; path = Assets/Images/ButtonSettingsHighlighted.png; sourceTree = "<group>"; };
@@ -2990,6 +2992,7 @@
 				BEB3135D181838BB00FAF98A /* CoreData.framework in Frameworks */,
 				01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */,
 				01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */,
+				FEA605CC5F8E4BFCA67EBDD6 /* libPods-dollyTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3005,7 +3008,7 @@
 				010DEFD31629BDC40080F26B /* Frameworks */,
 				010DEFD11629BDC40080F26B /* Products */,
 				276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */,
-				AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */,
+				0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3056,6 +3059,7 @@
 				010DEFD41629BDC40080F26B /* UIKit.framework */,
 				3685246F69AA4C9B93DDEDAC /* libPods.a */,
 				D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */,
+				B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3512,7 +3516,7 @@
 				BEB3135918182D6100FAF98A /* data */,
 			);
 			name = Tests;
-			path = rockpackTests;
+			path = dollyTests;
 			sourceTree = "<group>";
 		};
 		01901A9B1771CCBA007DBEAC /* Supporting Files */ = {
@@ -7234,7 +7238,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-rockpackTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-dollyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		39A52BE75A62433CAD032D95 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7677,7 +7682,7 @@
 		};
 		01901AA41771CCBA007DBEAC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */;
+			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -7690,10 +7695,9 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
-				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
+				GCC_PREFIX_HEADER = "dollyTests/dollyTests-Prefix.pch";
+				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -7701,7 +7705,7 @@
 		};
 		01901AA51771CCBA007DBEAC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */;
+			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -7714,10 +7718,9 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
-				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
+				GCC_PREFIX_HEADER = "dollyTests/dollyTests-Prefix.pch";
+				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -7725,7 +7728,7 @@
 		};
 		01901AA61771CCBA007DBEAC /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF1297D1996D408798EDDC4F /* Pods-rockpackTests.xcconfig */;
+			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -7738,10 +7741,9 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "rockpackTests/dollyTests-Prefix.pch";
-				INFOPLIST_FILE = "rockpackTests/dollyTests-Info.plist";
+				GCC_PREFIX_HEADER = "dollyTests/dollyTests-Prefix.pch";
+				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = dollyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
