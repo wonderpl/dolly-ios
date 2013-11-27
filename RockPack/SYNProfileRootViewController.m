@@ -522,6 +522,9 @@
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     
+    [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    
+    
   //  NSLog(@"chan des%@", self.channelOwner.channelOwnerDescription);
 
 }
@@ -1860,8 +1863,18 @@
         self.uploadAvatarButton.alpha = 1.0f;
         
         self.aboutMeTextView.frame = tmpRect;
-        [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/225.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-        [[self.aboutMeTextView layer] setBorderWidth:1.0];
+        [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+        if (IS_RETINA)
+        {
+            [[self.aboutMeTextView layer] setBorderWidth:0.5];
+        }
+        else
+        {
+            [[self.aboutMeTextView layer] setBorderWidth:1.0];
+        }
+        [[self.aboutMeTextView layer] setCornerRadius:0];
+
+        
         
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
         self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
