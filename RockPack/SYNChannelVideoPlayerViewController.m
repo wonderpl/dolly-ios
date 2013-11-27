@@ -231,28 +231,6 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)previousButtonPressed:(UIButton *)sender {
-	id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-	
-	[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-														   action: @"videoNextClick"
-															label: @"prev"
-															value: nil] build]];
-	
-	[self playPreviousVideo];
-}
-
-- (IBAction)nextButtonPressed:(UIButton *)sender {
-	id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-	[tracker send: [[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
-														   action:@"videoNextClick"
-															label:@"next"
-															value:nil] build]];
-	
-	[self playNextVideo];
-}
-
 - (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {
 	[self playPreviousVideo];
 }
