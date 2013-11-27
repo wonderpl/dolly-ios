@@ -6,10 +6,10 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "RegexKitLite.h"
 #import "SYNAccountSettingBasicController.h"
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
+#import "NSString+Validation.h"
 @import QuartzCore;
 
 @interface SYNAccountSettingBasicController ()
@@ -219,19 +219,19 @@
     switch (currentFieldType)
     {
         case UserFieldTypeFullName:
-            isMatched = [input isMatchedByRegex: @"^[a-zA-Z\\.]+$"];
+			isMatched = [input isValidFullName];
             break;
             
         case UserFieldTypeUsername:
-            isMatched = [input isMatchedByRegex: @"^[a-zA-Z0-9\\._]+$"];
+			isMatched = [input isValidUsername];
             break;
             
         case UserFieldTypeEmail:
-            isMatched = [input isMatchedByRegex: @"^([a-zA-Z0-9%_.+\\-]+)@([a-zA-Z0-9.\\-]+?\\.[a-zA-Z]{2,6})$"];
+			isMatched = [input isValidEmail];
             break;
             
         case UserFieldPassword:
-            isMatched = [input isMatchedByRegex: @"^[a-zA-Z0-9\\._]+$"];
+			isMatched = [input isValidPassword];
             break;
     }
     return isMatched;

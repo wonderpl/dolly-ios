@@ -1355,6 +1355,8 @@
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
 		E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2AF28717BE33C700A20127 /* FacebookSDK.framework */; };
+		E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC751846273E0026C97D /* NSString+Validation.m */; };
+		E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */; };
 		FEA605CC5F8E4BFCA67EBDD6 /* libPods-dollyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */; };
 /* End PBXBuildFile section */
 
@@ -2955,6 +2957,9 @@
 		E9921A9318351D66001A4F3B /* SYNScrubberBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNScrubberBar.m; sourceTree = "<group>"; };
 		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
 		E9F7CC73184616E40026C97D /* SYNVideoPlayer+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayer+Protected.h"; sourceTree = "<group>"; };
+		E9F7CC741846273E0026C97D /* NSString+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Validation.h"; sourceTree = "<group>"; };
+		E9F7CC751846273E0026C97D /* NSString+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Validation.m"; sourceTree = "<group>"; };
+		E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringValidationSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3512,6 +3517,7 @@
 			isa = PBXGroup;
 			children = (
 				01901AA11771CCBA007DBEAC /* dollyTests.m */,
+				E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
 				BEB3135918182D6100FAF98A /* data */,
 			);
@@ -3847,6 +3853,8 @@
 				01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */,
 				E96A4C6818439CD100ED5782 /* CIFilter+Monochrome.h */,
 				E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */,
+				E9F7CC741846273E0026C97D /* NSString+Validation.h */,
+				E9F7CC751846273E0026C97D /* NSString+Validation.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -7327,6 +7335,7 @@
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
 				E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */,
+				E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */,
 				BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */,
 				BEA1E33116CE6045000AB59D /* SYNNetworkOperationJsonObject.m in Sources */,
 				01AFF99917EC91540002131A /* UIImage+LLDBQuickLook.m in Sources */,
@@ -7486,6 +7495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01901AA21771CCBA007DBEAC /* dollyTests.m in Sources */,
+				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
