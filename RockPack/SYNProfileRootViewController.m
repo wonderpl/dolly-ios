@@ -126,6 +126,7 @@
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
 @property (strong, nonatomic) UIAlertView *unfollowAlertView;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
+@property (strong, nonatomic) NSString *tempBackString;
 
 
 @end
@@ -271,20 +272,20 @@
     
     [self setProfleType:self.modeType];
     
-    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-//    [attributes setValue:[UIColor colorWithWhite:0.30 alpha:1.0] forKey:NSForegroundColorAttributeName];
-//    [attributes setValue:[UIColor whiteColor] forKey:NSShadowAttributeName];
-    
-    NSShadow *tmpShadow = [[NSShadow alloc]init];
-    tmpShadow.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
-    [tmpShadow setShadowOffset: CGSizeMake(0.0f, 1.0f)];
-
-    [attributes setValue:tmpShadow forKey:NSShadowAttributeName];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
-
-    NSShadow *shadow = [NSShadow new];
-    [shadow setShadowColor: [UIColor colorWithWhite:0.0f alpha:0.750f]];
-    [shadow setShadowOffset: CGSizeMake(0.0f, 1.0f)];
+//    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+////    [attributes setValue:[UIColor colorWithWhite:0.30 alpha:1.0] forKey:NSForegroundColorAttributeName];
+////    [attributes setValue:[UIColor whiteColor] forKey:NSShadowAttributeName];
+//    
+//    NSShadow *tmpShadow = [[NSShadow alloc]init];
+//    tmpShadow.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+//    [tmpShadow setShadowOffset: CGSizeMake(0.0f, 1.0f)];
+//
+//    [attributes setValue:tmpShadow forKey:NSShadowAttributeName];
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+//
+//    NSShadow *shadow = [NSShadow new];
+//    [shadow setShadowColor: [UIColor colorWithWhite:0.0f alpha:0.750f]];
+//    [shadow setShadowOffset: CGSizeMake(0.0f, 1.0f)];
     
 
     
@@ -354,7 +355,9 @@
                                                                                                  target:nil
                                                                                                  action:nil];
 
+//    [self.navigationController.navigationBar.backItem setTitle:@""];
     
+
 }
 
 
@@ -405,7 +408,8 @@
     self.deletionModeActive = NO;
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
-    
+//    self.tempBackString = self.navigationController.navigationBar.backItem.title.copy;
+//    [self.navigationController.navigationBar.backItem setTitle:@""];
 
 }
 
@@ -425,7 +429,9 @@
     //This should not be needed
     self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
     
-    
+//    [self.navigationController.navigationBar.backItem setTitle: self.tempBackString];
+//    NSLog(@"back title %@", self.tempBackString);
+
 }
 
 #pragma mark - Container Scroll Delegates
@@ -511,6 +517,11 @@
         
         self.profileImageView.image = placeholderImage;
     }
+    
+    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+    
+  //  NSLog(@"chan des%@", self.channelOwner.channelOwnerDescription);
+
 }
 
 
@@ -847,7 +858,7 @@
             
             [channelThumbnailCell setHiddenForFollowButton:(self.modeType == modeMyOwnProfile)];
             
-            NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
+            NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
             [channelThumbnailCell.followerCountLabel setText:subscribersString];
             
             channelThumbnailCell.channel = channel;
@@ -858,7 +869,7 @@
                 [videoCountString appendString:@"- "];
             }
             
-            [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)];
+            [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
            // NSLog(@"totalvideos value in pro%ld", (long)channel.totalVideosValue);
             
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
@@ -875,7 +886,7 @@
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
                 }
                 
-                NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"SUBSCRIBERS", nil)];
+                NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
                 [channelThumbnailCell.followerCountLabel setText:subscribersString];
                 
                 channelThumbnailCell.channel = channel;
@@ -887,7 +898,7 @@
                 }
                 
                 
-                [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"VIDEOS", nil)];
+                [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"Videos", nil)];
                 
                 
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
@@ -1173,7 +1184,6 @@
             self.coverImage.transform = move;
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
-            self.followersCountButton.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
 
@@ -1735,7 +1745,7 @@
 }
 
 - (NSString *) yesButtonTitle{
-    return NSLocalizedString(@"YES", @"Yes to deleting a video instance");
+    return NSLocalizedString(@"Yes", @"Yes to deleting a video instance");
 }
 - (NSString *) noButtonTitle{
     return NSLocalizedString(@"Cancel", @"cancel to deleting a video instance");
@@ -1761,10 +1771,10 @@
     {
      
         
-//        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
-//        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
-//                                                            object: self
-//                                                          userInfo: @{kChannelOwner : self.channelOwner}];
+        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
+        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
+                                                            object: self
+                                                          userInfo: @{kChannelOwner : self.channelOwner}];
 
     }
     
@@ -1873,7 +1883,7 @@
     
     self.aboutMeTextView.editable = NO;
 
-
+    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = 1.0f;
@@ -1900,6 +1910,7 @@
         self.uploadCoverPhotoButton.hidden = YES;
         self.uploadAvatarButton.hidden = YES;
 
+        
     }];
     self.subscriptionThumbnailCollectionView.scrollEnabled = YES;
     self.channelThumbnailCollectionView.scrollEnabled = YES;
@@ -1910,8 +1921,6 @@
 
 -(void) saveTapped
 {
-
-    NSLog(@"Save Tapped");
     
     [self updateField:@"description" forValue:self.aboutMeTextView.text withCompletionHandler:^{
         appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
@@ -1930,8 +1939,6 @@
             forValue: (id) newValue
 withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 {
-    
-    NSLog(@"updateField %@, with value %@", field, newValue);
     
     [appDelegate.oAuthNetworkEngine changeUserField: field
                                                  forUser: appDelegate.currentUser

@@ -830,9 +830,6 @@
         AssertOrLog(@"One or more of the required parameters is nil");
     }
     
-    NSLog(@"des :%@ \n ,%@", description, params);
-    
-    
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
@@ -1380,8 +1377,6 @@
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
     
     
-    NSLog(@"api string, %@", apiString);
-    
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: nil
                                                                                                    httpMethod: @"POST"
@@ -1700,9 +1695,7 @@
     // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
     
-    
-    NSLog(@"api string, %@", apiString);
-    
+        
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: nil
                                                                                                    httpMethod: @"POST"

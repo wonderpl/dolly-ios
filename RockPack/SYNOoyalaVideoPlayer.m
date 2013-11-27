@@ -12,6 +12,7 @@
 #import "SYNScrubberBar.h"
 #import "VideoInstance.h"
 #import "Video.h"
+#import "SYNVideoLoadingView.h"
 
 static NSString * const EmbedCoded = @"xxbjk1YjpHm4-VkWfWfEKBbyEkh358su";
 static NSString * const PCode = @"Z5Mm06XeZlcDlfU_1R9v_L2KwYG6";
@@ -37,6 +38,10 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 		[notificationCenter addObserver:self
 							   selector:@selector(ooyalaPlayerStateChanged:)
 								   name:OOOoyalaPlayerStateChangedNotification
+								 object:self.ooyalaPlayer];
+		[notificationCenter addObserver:self
+							   selector:@selector(ooyalaPlayerPlayStarted:)
+								   name:OOOoyalaPlayerPlayStartedNotification
 								 object:self.ooyalaPlayer];
 		[notificationCenter addObserver:self
 							   selector:@selector(ooyalaPlayerPlayCompleted:)
@@ -114,11 +119,21 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 	}
 }
 
+- (void)ooyalaPlayerPlayStarted:(NSNotification *)notification {
+	[UIView animateWithDuration:0.3 animations:^{
+		self.loadingView.alpha = 0.0;
+	}];
+}
+
 - (void)ooyalaPlayerPlayCompleted:(NSNotification *)notification {
 	[self.delegate videoPlayerFinishedPlaying];
 }
 
 - (void)ooyalaPlayerErrorOccurred:(NSNotification *)notification {
+	[UIView animateWithDuration:0.3 animations:^{
+		self.loadingView.alpha = 0.0;
+	}];
+	
 	OOOoyalaPlayer *ooyalaPlayer = [notification object];
 	[self.delegate videoPlayerErrorOccurred:[self errorStringFromOoyalaError:[ooyalaPlayer error]]];
 }

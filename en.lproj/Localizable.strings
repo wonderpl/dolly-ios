@@ -23,14 +23,16 @@
 "Password" = "Password";
 "Email" = "Email";
 
-"VIDEOS" = "videos";
-"CHANNELS" = "PACKS";
-"USERS" = "PEOPLE";
-"SUBSCRIBERS" = "followers";
-"FOLLOW" = "follow";
-"UNFOLLOW" = "unfollow";
-"DELETECHANNEL" = "Delete Channel";
-"AREYOUSUREYOUWANTTODELETE" = "Are you sure you want to delete?";
+"Videos" = "videos";
+"Channels" = "PACKS";
+"Users" = "PEOPLE";
+"Subscribers" = "followers";
+"Follow" = "follow";
+"Follower" = "follower";
+"Followers" = "followers";
+"Unfollow" = "unfollow";
+"DeleteChannel" = "Delete Channel";
+"Are_you_sure_you_want_to_delete" = "Are you sure you want to delete?";
 
 //Camera
 "channel_creation_screen_select_upload_photo_label" = "Select Source";
@@ -282,9 +284,3 @@
 "settings_popover_about_title" = "ABOUT";
 
 "attribution_list" = " Facebook SDK by Facebook Inc. \n\n GKImagePicker by Georg Kitz \n\n LXReorderableCollectionViewFlowLayout by Stan Chang Khin Boon \n\n MKNetworkKit by Mugunth Kumar \n\n REActivityViewController by Roman Efimov \n\n RegexKitLite by John Engelhart \n\n SDWebImage by Olivier Poitrey \n\n SSKeychain by Sam Soffes ";
-
-// == Channel nib text == //
-
-"Follow" = "Follow";
-"Unfollow" = "Unfollow";
-

@@ -37,6 +37,7 @@
 #import <UIButton+WebCache.h>
 #import "objc/runtime.h"
 #import "SYNSubscribersViewController.h"
+#import "UIColor+SYNColor.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 149.0f
@@ -211,6 +212,8 @@ UIPopoverControllerDelegate>
                                                  blue: (42.0f / 255.0f)
                                                 alpha: 1.0f];
 
+    
+    
     //programmatically seting the edgeinset for iphone and ipad
     //Not able to set within the nib
     
@@ -221,19 +224,25 @@ UIPopoverControllerDelegate>
     
     if (IS_IPAD)
     {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(520, 0, 0, 0);
+           self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(517, 0, 0, 0);
     }
 
+    if (self.mode == kChannelDetailsFavourites) {
+           // self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(490, 0, 0, 0);
+
+    }
 
     //not used yet
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
-    self.activityIndicator.frame = self.view.frame;
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
 
-    [self displayChannelDetails];
-
-
+    self.activityIndicator.frame = CGRectMake(0, 0, 100, 100);
+    self.activityIndicator.center = self.videoThumbnailCollectionView.center;
+    
+    [self.view addSubview:self.activityIndicator];
    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
+
+    //    self.txtFieldChannelName.backgroundColor = [UIColor blueColor];
 
 }
 
@@ -259,8 +268,9 @@ UIPopoverControllerDelegate>
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
-    
-    
+    //[self.navigationItem.backBarButtonItem setTitle:@""];
+
+
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(coverImageChangedHandler:)
                                                  name: kCoverArtChanged
@@ -279,11 +289,11 @@ UIPopoverControllerDelegate>
     
     if (self.channel.subscribedByUserValue)
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Unfollow", nil)]];
     }
     else
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"follow", nil)]];
     }
     
     
@@ -297,62 +307,19 @@ UIPopoverControllerDelegate>
         //                       withLoader: YES];
     }
     
-
-    
-    
-    
-    //    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailSmallUrl]
-    //                           forState: UIControlStateNormal
-    //                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-    //                            options: SDWebImageRetryFailed];
-    
-    
-    //    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
-    //
-    //    NSLog(@"%@", self.channel.channelOwner.thumbnailURL);
-    //
-    //    if (![self.channel.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
-    //
-    //        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
-    //        dispatch_async(downloadQueue, ^{
-    //
-    //            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailURL ]];
-    //
-    //            dispatch_async(dispatch_get_main_queue(), ^{
-    //                self.btnAvatar.imageView.image = [UIImage imageWithData: imageData];
-    //            });
-    //        });
-    //
-    //    }else{
-    //
-    //        self.btnAvatar.imageView.image = placeholderImage;
-    //    }
-
     self.viewHasAppeared = YES;
-//    self.videoThumbnailCollectionView.contentOffset = self.tempContentOffset;
-
-    //[self iphoneMove];
-    //    self.navigationController.navigationBarHidden = NO;
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    // Refresh our view
-
-    
-    
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
-    
-//    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor blackColor];
 
     self.navigationItem.title = @"";
 
     [self.videoThumbnailCollectionView reloadData];
-  //  [self.videoThumbnailCollectionView setContentOffset:self.tempContentOffset];\
-    
-    [self setUpMode];
-
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
-    
+    [self.navigationController.navigationBar.backItem setTitle:@""];
+
+    [self setUpMode];
 
     
 }
@@ -410,7 +377,7 @@ UIPopoverControllerDelegate>
     {
       //  [self iphoneMove];
     }
-//    [self setUpMode];
+    //[self setUpMode];
 }
 
 -(void) setUpMode
@@ -438,22 +405,37 @@ UIPopoverControllerDelegate>
         {
             self.btnEditChannel.hidden = YES;
             self.btnFollowChannel.hidden = YES;
-            
+//            self.lblDescription.hidden = YES;
+//
 //            [self moveView:self.viewCirleButtonContainer withY:20];
 //            [self moveView:self.viewFollowAndVideoContainer withY:20];
 //            [self moveView:self.viewCollectionSeperator withY:30];
-//            [self centreView:self.btnShareChannel];
+            [self centreView:self.btnShareChannel];
             
             CGRect tmpFrame = self.btnShareChannel.frame;
             tmpFrame.origin.x = 55;// [self.btnShareChannel superview].center.x;
             self.btnShareChannel.frame = tmpFrame;
-//            tmpFrame = self.viewCirleButtonContainer.frame;
-//            tmpFrame.origin.y -= 4;
-//            self.viewCirleButtonContainer.frame = tmpFrame;
-            
+            tmpFrame = self.viewCirleButtonContainer.frame;
+            tmpFrame.origin.y -= 4;
+            self.viewCirleButtonContainer.frame = tmpFrame;
 //            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(360, 0, 0, 0);
-            
         }
+        else
+        {
+            self.btnEditChannel.hidden = YES;
+            self.btnFollowChannel.hidden = YES;
+//            self.lblDescription.hidden = YES;
+            CGRect tmpFrame = self.btnShareChannel.frame;
+            tmpFrame.origin.x = 50;
+            self.btnShareChannel.frame = tmpFrame;
+//            [self moveView:self.viewCirleButtonContainer withY:15];
+//            [self moveView:self.viewFollowAndVideoContainer withY:10];
+
+//            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(480, 0, 0, 0);
+
+        }
+        
+        
     }
 }
 
@@ -467,6 +449,18 @@ UIPopoverControllerDelegate>
     movingView.frame = tmpFrame;
     
 }
+
+-(void) moveView:(UIView*) movingView withX: (CGFloat) x
+{
+    
+    CGRect tmpFrame;
+    
+    tmpFrame = movingView.frame;
+    tmpFrame.origin.x -= x;
+    movingView.frame = tmpFrame;
+    
+}
+
 
 - (BOOL) isFavouritesChannel
 {
@@ -493,14 +487,31 @@ UIPopoverControllerDelegate>
     }
     
     [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
-    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    
+    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    
+    if (IS_RETINA) {
+        //should be 0.5?
+        //border color turns black when set to 0.5
+        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    }
+    else
+    {
+        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    }
     [[self.txtFieldChannelName layer] setCornerRadius:0];
     
     [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
     
-    [[self.txtViewDescription layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[self.txtViewDescription layer] setBorderWidth:1.0];
+    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    if (IS_RETINA)
+    {
+        [[self.txtViewDescription layer] setBorderWidth:0.5];
+    }
+    else
+    {
+        [[self.txtViewDescription layer] setBorderWidth:1.0];
+    }
     [[self.txtViewDescription layer] setCornerRadius:0];
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
@@ -522,30 +533,32 @@ UIPopoverControllerDelegate>
     
     self.txtViewDescription.text = self.lblDescription.text;
     
-    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"FOLLOW", nil)] forState:UIControlStateNormal ];
+    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
     
     self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
-    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.totalVideosValue, NSLocalizedString(@"VIDEOS", nil)] forState:UIControlStateNormal ];
+    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
     
+    [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
+
+    [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
+
     if (self.channel.subscribedByUserValue == YES)
     {
-        [self.btnFollowChannel setTitle:NSLocalizedString(@"Unfollow", @"unfollow")];
+        [self.btnFollowChannel setTitle:NSLocalizedString(@"Unfollow", @"unfollow a channel")];
     }
     else
     {
-        [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow")];
+        [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow a channel")];
     }
-    
-    if (self.channel.videoInstances.count == 0) {
+    if (self.channel.videoInstances.count == 0)
+    {
         self.lblNoVideos.hidden = NO;
     }
     else
     {
         self.lblNoVideos.hidden = YES;
-
     }
-    
     
 }
 #pragma mark - Control Actions
@@ -557,6 +570,9 @@ UIPopoverControllerDelegate>
     // Update google analytics
     
     // Defensive programming
+    
+ //   NSLog(@"Channel subscribed by user, %@", self.channel.subscribedByUser);
+    
     if (self.channel != nil)
     {
         
@@ -565,13 +581,13 @@ UIPopoverControllerDelegate>
                                                           userInfo: @{kChannel : self.channel}];
     }
     
-    if (self.channel.subscribedByUserValue)
+    if (self.channel.subscribedByUserValue == YES)
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"UNFOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Unfollow", nil)]];
     }
     else
     {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"FOLLOW", nil)]];
+        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Follow", nil)]];
     }
     
 }
@@ -616,9 +632,6 @@ UIPopoverControllerDelegate>
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
 
-    
-    
-    
 }
 
 #pragma mark - ScrollView Delegate
@@ -749,7 +762,9 @@ UIPopoverControllerDelegate>
 
 - (void) setChannel: (Channel *) channel
 {
+    
     self.originalChannel = channel;
+    
     
     NSError *error = nil;
     
@@ -858,7 +873,6 @@ UIPopoverControllerDelegate>
 
     [self displayChannelDetails];
     
-    
 }
 
 - (void) updateChannelOwnerWithUser
@@ -912,9 +926,8 @@ UIPopoverControllerDelegate>
         if (obj == self.channel)
         {
             self.dataItemsAvailable = self.channel.totalVideosValue;
-            
-            
-            self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+            //does this do anything, do i need it?
+         //   self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
             
             if (self.subscribingIndicator)
             {
@@ -1156,6 +1169,23 @@ referenceSizeForFooterInSection: (NSInteger) section
     }
 }
 
+//- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+//        ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
+//                                                green: (57.0f / 255.0f)
+//                                                 blue: (57.0f / 255.0f)
+//                                                alpha: 0.5f];
+//    
+//}
+//
+//- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+//    ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = nil;
+//}
+//
+//
+
+
 -(void) centreView : (UIView*) viewToCentre
 {
     CGPoint tmpPoint;
@@ -1183,6 +1213,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         candidateCell = candidateCell.superview;
     }
     
+    
     SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
     
@@ -1194,6 +1225,12 @@ referenceSizeForFooterInSection: (NSInteger) section
                                    withVideoInstanceArray: videoInstancesToPlayArray
                                          andSelectedIndex: indexPath.item
                                                fromCenter: self.view.center];
+    
+    selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
+                                                                                  green: (57.0f / 255.0f)
+                                                                                   blue: (57.0f / 255.0f)
+                                                                                  alpha: 0.5f];
+
 }
 
 //
@@ -1335,10 +1372,13 @@ referenceSizeForFooterInSection: (NSInteger) section
 
     if (tmpUser.uniqueId == self.channel.channelOwner.uniqueId) {
      profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
+        profileVC.navigationItem.backBarButtonItem.title = @"";
+        
     }
     else
     {
         profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
+        profileVC.navigationItem.backBarButtonItem.title = @"";
 
     }
     [self.navigationController pushViewController:profileVC animated:YES];
@@ -1366,13 +1406,21 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.txtFieldChannelName.hidden = YES;
     self.txtViewDescription.hidden = YES;
 
-
+    if (self.channel.videoInstances.count == 0)
+    {
+        self.lblNoVideos.hidden = NO;
+    }
+    else
+    {
+        self.lblNoVideos.hidden = YES;
+    }
+    
     
     self.viewProfileContainer.alpha = 0.0f;
     self.btnAvatar.alpha = 0.0f;
     self.btnShowFollowers.alpha = 0.0f;
     self.btnShowVideos.alpha = 0.0f;
-   // self.btnFollowChannel.alpha = 0.0f;
+//    self.btnFollowChannel.alpha = 0.0f;
     self.btnEditChannel.alpha = 0.0f;
     self.btnShareChannel.alpha = 0.0f;
     self.lblFullName.alpha = 0.0f;
@@ -1384,12 +1432,11 @@ referenceSizeForFooterInSection: (NSInteger) section
         self.btnAvatar.alpha = 1.0f;
         self.btnShowFollowers.alpha = 1.0f;
         self.btnShowVideos.alpha = 1.0f;
-//        self.btnFollowChannel.alpha = 1.0f;
+//      self.btnFollowChannel.alpha = 1.0f;
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
         self.lblFullName.alpha = 1.0f;
         self.lblChannelTitle.alpha = 1.0f;
-
         
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
@@ -1437,41 +1484,40 @@ referenceSizeForFooterInSection: (NSInteger) section
     
 }
 
-
 - (IBAction)editTapped:(id)sender
 {
     
+  //  [self.activityIndicator startAnimating];
     [self editMode];
     
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
-        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
+//        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
-        __block int index = indexPathForCell.item;
         cell.deleteButton.hidden = NO;
         void (^animateEditMode)(void) = ^{
             
             CGRect frame = cell.frame;
             
-            
-            if (IS_IPHONE) {
-                frame.origin.y -= (index*kHeightChange);
-               // frame.size.height -= kHeightChange;
-            }
-            
-            if (IS_IPAD) {
-                
-                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-                    frame.origin.y -=((index/2)*kHeightChange);
-                 //   frame.size.height -=kHeightChange;
-                }
-                else
-                {
-                    frame.origin.y -=((index/3)*kHeightChange);
-                   // frame.size.height -=kHeightChange;
-                    
-                }
-            }
+//            
+//            if (IS_IPHONE) {
+//                frame.origin.y -= (index*kHeightChange);
+//               // frame.size.height -= kHeightChange;
+//            }
+//            
+//            if (IS_IPAD) {
+//                
+//                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+//                    frame.origin.y -=((index/2)*kHeightChange);
+//                 //   frame.size.height -=kHeightChange;
+//                }
+//                else
+//                {
+//                    frame.origin.y -=((index/3)*kHeightChange);
+//                   // frame.size.height -=kHeightChange;
+//                    
+//                }
+//            }
             cell.frame = frame;
             
             cell.likeControl.alpha = 0.0f;
@@ -1491,9 +1537,7 @@ referenceSizeForFooterInSection: (NSInteger) section
                         }];
         
         [cell removeGestureRecognizer:cell.tap];
-        
     }
-    
     self.mode = kChannelDetailsModeEdit;
     
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
@@ -1504,54 +1548,62 @@ referenceSizeForFooterInSection: (NSInteger) section
 -(void) cancelTapped
 {
     
+    
+    if (self.activityIndicator.isAnimating)
+    {
+      //  [self.activityIndicator stopAnimating];
+    }
+
     [self profileMode];
     
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
     
+    
+ //   NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
+
+//    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
+    [self updateCollectionLayout];
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
         
-        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
+//        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
         cell.likeControl.hidden = NO;
         cell.shareControl.hidden = NO;
         cell.addControl.hidden = NO;
         cell.deleteButton.hidden = YES;
-
-        __block int index = indexPathForCell.item;
+        
         void (^animateProfileMode)(void) = ^{
             
-            CGRect frame = cell.frame;
-            
-            if (IS_IPHONE) {
-                
-                frame.origin.y += (index*kHeightChange);
-                frame.size.height += kHeightChange;
-            }
-            
-            if (IS_IPAD) {
-                
-                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-                    frame.origin.y +=((index/2)*kHeightChange);
-                    frame.size.height +=kHeightChange;
-                }
-                else
-                {
-                    frame.origin.y +=((index/3)*kHeightChange);
-                    frame.size.height +=kHeightChange;
-                    
-                }
-            }
-            
-            cell.frame = frame;
+//            CGRect frame = cell.frame;
+            //
+            //            if (IS_IPHONE)
+            //            {
+            //                frame.origin.y += (index*kHeightChange);
+            //                frame.size.height += kHeightChange;
+            //            }
+            //
+            //            if (IS_IPAD) {
+            //
+            //                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+            //                    frame.origin.y +=((index/2)*kHeightChange);
+            //                    frame.size.height +=kHeightChange;
+            //                }
+            //                else
+            //                {
+            //                    frame.origin.y +=((index/3)*kHeightChange);
+            //                    frame.size.height +=kHeightChange;
+            //
+            //                }
+            //            }
+            //
+            //            cell.frame = frame;
             
             cell.likeControl.alpha = 1.0f;
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
             cell.deleteButton.alpha = 0.0f;
-            
-            
         };
         
         [UIView transitionWithView:cell
@@ -1559,17 +1611,10 @@ referenceSizeForFooterInSection: (NSInteger) section
                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateProfileMode
                         completion:^(BOOL finished) {
-                            
-                            
                         }];
         
     }
-    
- //   NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
 
-    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
-    
-    
 }
 
 
@@ -1578,20 +1623,20 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     if (self.mode == kChannelDetailsModeEdit )
     {
-        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
+//        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
         
         if (IS_IPHONE)
         {
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit];
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
+          //  [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             //[self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
             
         }
         if (IS_IPAD)
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit];
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit animated:YES];
+         //   [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
             //            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
         }
     }
@@ -1599,18 +1644,18 @@ referenceSizeForFooterInSection: (NSInteger) section
     if (self.mode == kChannelDetailsModeDisplayUser )
     {
         
-        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
+//        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
 //        tmpPoint.y+= (self.videoThumbnailCollectionView.visibleCells.count-1)*(kHeightChange);
 
         if (IS_IPHONE)
         {
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone animated:YES];
             [self.videoThumbnailCollectionView removeGestureRecognizer:self.videoCollectionViewLayoutIPhoneEdit.panGestureRecognizer];
             
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
             
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+      //      [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
 //            [self.videoCollectionViewLayoutIPhone invalidateLayout];
             
         }
@@ -1619,13 +1664,13 @@ referenceSizeForFooterInSection: (NSInteger) section
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
             
-            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPad];
+            [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPad animated:YES];
             
             [self.videoThumbnailCollectionView removeGestureRecognizer:self.videoCollectionViewLayoutIPadEdit.panGestureRecognizer];
             
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
-            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+      //      [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
 //            [self.videoCollectionViewLayoutIPad invalidateLayout];
             
             
@@ -1664,8 +1709,8 @@ referenceSizeForFooterInSection: (NSInteger) section
 - (IBAction)deleteTapped:(id)sender
 {
     
-    NSString *message = [NSString stringWithFormat: NSLocalizedString(@"DELETECHANNEL", nil), self.channel.title];
-    NSString *title = [NSString stringWithFormat: NSLocalizedString(@"AREYOUSUREYOUWANTTODELETE", nil), self.channel.title];
+    NSString *message = [NSString stringWithFormat: NSLocalizedString(@"Delete_Channel", nil), self.channel.title];
+    NSString *title = [NSString stringWithFormat: NSLocalizedString(@"Are_you_sure_you_want_to_delete", nil), self.channel.title];
     
     self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle: title
                                                              message: message
@@ -1814,7 +1859,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     //
     //    self.saveChannelButton.enabled = NO;
     //    self.deleteChannelButton.enabled = YES;
-        [self.activityIndicator startAnimating];
+//        [self.activityIndicator startAnimating];
     //
     //    [self hideCategoryChooser];
     //
@@ -1895,13 +1940,12 @@ referenceSizeForFooterInSection: (NSInteger) section
                                                   //                                                  self.saveChannelButton.enabled = YES;
                                                   //                                                  self.deleteChannelButton.hidden = NO;
                                                   //                                                  self.deleteChannelButton.enabled = YES;
-                                                                                                    [self.activityIndicator stopAnimating];
                                                   //                                                  [self.activityIndicator stopAnimating];
                                               }];
     
     
     
-    
+
     [self performSelector:@selector(cancelTapped) withObject:nil afterDelay:0.4f];
     
     //[self cancelTapped];

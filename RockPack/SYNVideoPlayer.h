@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 
 @class VideoInstance;
 @class SYNScrubberBar;
+@class SYNVideoLoadingView;
 
 @protocol SYNVideoPlayerDelegate <NSObject>
 
@@ -41,6 +42,8 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 @property (nonatomic, strong, readonly) UIView *playerContainerView;
 
 @property (nonatomic, strong, readonly) SYNScrubberBar *scrubberBar;
+
+@property (nonatomic, strong, readonly) SYNVideoLoadingView *loadingView;
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
 

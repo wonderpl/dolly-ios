@@ -201,7 +201,7 @@ typedef enum : NSInteger {
 #define kChannelUpdateRequest       @"kChannelUpdateRequest"
 #define kChannelOwnerUpdateRequest  @"kChannelOwnerUpdateRequest"
 #define kChannelDeleteRequest       @"kChannelDeleteRequest"
-#define kChannelSubscribeToUserRequest @"kChannelOwnerSubscribeToUserRequest"
+#define kChannelOwnerSubscribeToUserRequest @"kChannelOwnerSubscribeToUserRequest"
 
 #define kRefreshComplete            @"kRefreshComplete"
 

@@ -43,6 +43,8 @@
 
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
+@property (nonatomic, strong) UIImageView *loadingImageView;
+
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
