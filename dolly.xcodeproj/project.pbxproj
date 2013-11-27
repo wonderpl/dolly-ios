@@ -198,7 +198,6 @@
 		01946B981683339F00354601 /* VideoInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B961683339F00354601 /* VideoInstance.m */; };
 		0194FD2216DE6FE40058A7C2 /* SYNVideoThumbnailSmallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EA81C616B9487A0069AFF9 /* SYNVideoThumbnailSmallCell.xib */; };
 		0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailSmallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EA81C416B9483D0069AFF9 /* SYNVideoThumbnailSmallCell.m */; };
-		019824E81629CB4300216900 /* SYNDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 019824E71629CB4300216900 /* SYNDebug.m */; };
 		019824EC1629CBDF00216900 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 019824EB1629CBDF00216900 /* UncaughtExceptionHandler.m */; };
 		019824F01629CC7600216900 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824EE1629CC7600216900 /* libTestFlight.a */; };
 		019824F21629CE1600216900 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824F11629CE1600216900 /* libz.dylib */; };
@@ -1624,8 +1623,6 @@
 		01946B941683339F00354601 /* ChannelOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelOwner.m; sourceTree = "<group>"; };
 		01946B951683339F00354601 /* VideoInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoInstance.h; sourceTree = "<group>"; };
 		01946B961683339F00354601 /* VideoInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoInstance.m; sourceTree = "<group>"; };
-		019824E61629CB4300216900 /* SYNDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDebug.h; sourceTree = "<group>"; };
-		019824E71629CB4300216900 /* SYNDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDebug.m; sourceTree = "<group>"; };
 		019824EA1629CBDF00216900 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		019824EB1629CBDF00216900 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		019824EE1629CC7600216900 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = RockPack/libTestFlight.a; sourceTree = "<group>"; };
@@ -3643,7 +3640,6 @@
 				BE06EEE517D635090028F2E3 /* Strict Interactive View */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
 				BE285DB91726826800D995AB /* Channels Manager */,
-				019824E51629CB1D00216900 /* Debug */,
 				BE7D34CB171443330085AB81 /* Device */,
 				019824E91629CBD000216900 /* Exception Handler */,
 				3854788117946612006EB38B /* Google Adwords */,
@@ -3656,15 +3652,6 @@
 				BEF9E5B416DD23F000286113 /* Video Queue */,
 			);
 			name = Helpers;
-			sourceTree = "<group>";
-		};
-		019824E51629CB1D00216900 /* Debug */ = {
-			isa = PBXGroup;
-			children = (
-				019824E61629CB4300216900 /* SYNDebug.h */,
-				019824E71629CB4300216900 /* SYNDebug.m */,
-			);
-			name = Debug;
 			sourceTree = "<group>";
 		};
 		019824E91629CBD000216900 /* Exception Handler */ = {
@@ -7239,7 +7226,6 @@
 				010DEFE11629BDC40080F26B /* main.m in Sources */,
 				010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */,
 				015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */,
-				019824E81629CB4300216900 /* SYNDebug.m in Sources */,
 				019824EC1629CBDF00216900 /* UncaughtExceptionHandler.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,
