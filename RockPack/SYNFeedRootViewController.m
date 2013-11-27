@@ -639,12 +639,6 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) videoOverlayDidDisappear
-{
-    [self.feedCollectionView reloadData];
-}
-
-
 #pragma mark - Helper Methods to get AggreagateCell's Data
 
 - (FeedItem*) feedItemAtIndexPath: (NSIndexPath*) indexPath

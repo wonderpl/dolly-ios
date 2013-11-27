@@ -1071,13 +1071,6 @@
     }
 }
 
-
-- (void) headerTapped
-{
-    // no need to animate the subscriptions part since it observes the channels thumbnails scroll view
-    // [self.channelThumbnailCollectionView setContentOffset: CGPointZero animated: YES];
-}
-
 #pragma mark - scroll view delegates
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset

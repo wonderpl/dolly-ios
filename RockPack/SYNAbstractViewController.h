@@ -19,8 +19,6 @@
 @import CoreData;
 @import UIKit;
 
-typedef void (^SYNShareCompletionBlock)(void);
-
 @class VideoInstance, Channel, ChannelOwner, Genre, SubGenre;
 
 @interface SYNAbstractViewController : UIViewController <NSFetchedResultsControllerDelegate,
@@ -30,7 +28,6 @@ typedef void (^SYNShareCompletionBlock)(void);
 {
 @protected
     SYNAppDelegate *appDelegate;
-    BOOL tabExpanded;
     NSString *viewId;
     NSFetchedResultsController *fetchedResultsController;
     NSString *abstractTitle;
@@ -39,33 +36,18 @@ typedef void (^SYNShareCompletionBlock)(void);
 @property (nonatomic) BOOL isAnimating;
 @property (nonatomic) NSInteger dataItemsAvailable;
 @property (nonatomic) NSRange dataRequestRange;
-@property (nonatomic, assign) BOOL inDrag;
-@property (nonatomic, assign) CGPoint initialDragCenter;
 @property (nonatomic, assign, getter = isLoadingMoreContent) BOOL loadingMoreContent;
 @property (nonatomic, readonly) NSString *viewId;
 @property (nonatomic, strong) IBOutlet UICollectionView *videoThumbnailCollectionView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSIndexPath *draggedIndexPath;
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
-@property (nonatomic, strong) UIImageView *draggedView;
-@property (nonatomic, weak) MKNetworkOperation *runningNetworkOperation;
-@property (readonly) BOOL alwaysDisplaysSearchBox;
 @property (readonly) NSManagedObjectContext *mainManagedObjectContext;
-@property (readonly, getter = isVideoQueueVisible) BOOL videoQueueVisible;
 
 - (void) performAction: (NSString *) action withObject: (id) object;
-
-
-- (void) videoOverlayDidDisappear;
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex;
-
-- (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button;
-
-- (void) reloadCollectionViews;
-
 
 - (void) displayVideoViewerWithVideoInstanceArray: (NSArray *) videoInstanceArray
                                  andSelectedIndex: (int) selectedIndex
@@ -79,19 +61,11 @@ typedef void (^SYNShareCompletionBlock)(void);
 - (void) incrementRangeForNextRequest;
 - (BOOL) moreItemsToLoad;
 
-- (void) headerTapped;
-
-- (IBAction) toggleStarAtIndexPath: (NSIndexPath *) indexPath;
-
 // Share
 - (void) requestShareLinkWithObjectType: (NSString *) objectType
                                objectId: (NSString *) objectId;
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance;
-
-
-- (void) addVideoAtIndexPath: (NSIndexPath *) indexPath
-               withOperation: (NSString *) operation;
 
 - (void) shareChannel: (Channel *) channel
               isOwner: (NSNumber *) isOwner
@@ -108,14 +82,9 @@ typedef void (^SYNShareCompletionBlock)(void);
 
 
 // Purchase
-- (void) initiatePurchaseAtURL: (NSURL *) purchaseURL;
-
 - (void) applicationWillEnterForeground: (UIApplication *) application;
 
 - (CGSize) footerSize;
-
-
-- (EntityType) associatedEntity;
 
 - (void) checkForOnBoarding;
 
