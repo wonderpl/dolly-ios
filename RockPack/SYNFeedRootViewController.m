@@ -699,7 +699,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) loadMoreVideos
 {
-    if (self.moreItemsToLoad == TRUE)
+    if (self.moreItemsToLoad == YES)
     {
         [self incrementRangeForNextRequest];
         [self loadAndUpdateFeedData];
@@ -711,10 +711,12 @@ typedef void(^FeedDataErrorBlock)(void);
 {
     [super scrollViewDidScroll:scrollView];
     
-    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
-        && self.isLoadingMoreContent == NO)
-    {
+    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight &&
+        self.isLoadingMoreContent == NO &&
+        self.moreItemsToLoad == YES) {
+        
         [self loadMoreVideos];
+        
     }
 }
 
