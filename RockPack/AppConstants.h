@@ -541,7 +541,6 @@ typedef enum : NSInteger
 #define kNoteVideoAddedToExistingChannel         @"kNoteAddedToChannel"
 #define kNoteCreateNewChannel                    @"kNoteCreateNewChannel"
 
-#define kNotificationMarkedRead     @"kNotificationMarkedRead"
 
 #define kProfileRequested           @"kProfileRequested"
 #define kVideoOverlayRequested      @"kVideoOverlayRequested"

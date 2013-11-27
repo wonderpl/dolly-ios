@@ -469,6 +469,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                           delay: 4.0f
                         options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                      animations: ^{
+                         
                          CGRect newFrame = self.networkErrorNotificationView.frame;
                          newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
                          self.networkErrorNotificationView.frame = newFrame;

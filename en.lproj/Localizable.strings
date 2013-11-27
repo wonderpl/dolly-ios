@@ -150,6 +150,9 @@
 
 "%@ has subscribed to your channel" = "%@ is now following your pack";
 
+"notification_empty" = "You have 0 notification yet";
+"notification_mark_all_as_read" = "Mark all as Read";
+
 "notification_liked_action" = "liked your video";
 "notification_unavailable_action" = "Your video has become unavailable";
 "notification_repack_action" = "has repacked your video";

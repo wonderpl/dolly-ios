@@ -14,13 +14,19 @@
 #import "SYNNotification.h"
 #import <UIImageView+WebCache.h>
 #import "Video.h"
+#import "SYNNotificationsMarkAllAsReadCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
+#define kNotificationsSpecialCellIdent @"SYNNotificationsMarkAllAsReadCell"
 
 @interface SYNActivityViewController ()
+{
+    BOOL hasUnreadNotifications;
+}
 
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
+
 
 @end
 
@@ -41,6 +47,9 @@
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
     
+    hasUnreadNotifications = NO;
+    self.notifications = @[];
+    
     [tracker set: kGAIScreenName
            value: @"Notifications"];
     
@@ -58,6 +67,9 @@
     tableInsets.top = 80.0f;
     self.tableView.contentInset = tableInsets;
 
+    [self.tableView registerClass: [SYNNotificationsMarkAllAsReadCell class]
+           forCellReuseIdentifier: kNotificationsSpecialCellIdent];
+    
     [self.tableView registerClass: [SYNNotificationsTableViewCell class]
            forCellReuseIdentifier: kNotificationsCellIdent];
     
@@ -107,9 +119,17 @@
     
     if (total == 0) // good responce but no notifications
     {
-        [self.tableView reloadData];
+        
         
         self.notifications = @[];
+        hasUnreadNotifications = NO;
+        
+        [self.tableView reloadData];
+        
+        // display no notifications message
+        
+        [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
+        
         return;
     }
     
@@ -117,7 +137,7 @@
     NSMutableArray* inNotificationsutArray = @[].mutableCopy;
     
     
-    
+    hasUnreadNotifications = NO;
     for (NSDictionary* itemData in itemsArray)
     {
         
@@ -126,6 +146,9 @@
         
         if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
             continue;
+        
+        if(!notification.read) // one is enought to display the read all button
+            hasUnreadNotifications = YES;
         
         
         [inNotificationsutArray addObject:notification];
@@ -147,17 +170,31 @@
 
 - (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return _notifications ? _notifications.count : 0;
+    NSLog(@">>> %i", _notifications.count);
+    return  _notifications.count + (NSUInteger)(hasUnreadNotifications); // if zero then return zero, else add one
 }
 
 
 - (UITableViewCell *) tableView: (UITableView *) tableView
           cellForRowAtIndexPath: (NSIndexPath *) indexPath
 {
+    
+    if(indexPath.row == 0 && hasUnreadNotifications) // it is the special 'read all' cell
+    {
+        SYNNotificationsMarkAllAsReadCell *notificationMarkAllAsReadCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsSpecialCellIdent
+                                                                                          forIndexPath: indexPath];
+        
+        
+        return notificationMarkAllAsReadCell;
+        
+        
+    }
+    
+    // else, it is a normal cell
     SYNNotificationsTableViewCell *notificationCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsCellIdent
                                                                                       forIndexPath: indexPath];
     
-    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row];
+    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
     
     NSMutableString *constructedMessage = [[NSMutableString alloc] init];
     
@@ -176,7 +213,7 @@
         [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
     }
     
-    // "... Paul Egan ..."
+ 
     if ([notification.messageType isEqualToString: @"subscribed"])
     {
         [constructedMessage appendString: NSLocalizedString(@"notification_subscribed_action", nil)];
@@ -286,7 +323,16 @@
 - (void) tableView: (UITableView *) tableView
          didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 {
-    [self markAsReadForNotification: _notifications[indexPath.row]];
+    
+    SYNNotification* notification;
+    
+    if(indexPath.row == 0 && hasUnreadNotifications)
+        notification = nil;
+    else
+        notification = _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
+    
+    
+    [self markAsReadForNotification: notification];
 }
 
 
@@ -384,29 +430,50 @@
 
 - (void) markAsReadForNotification: (SYNNotification *) notification
 {
-    if (notification == nil || notification.read) // if already read or nil, don't bother...
-    {
-        return;
-    }
     
-    
-    // Decrement the badge number (min zero)
-    UIApplication.sharedApplication.applicationIconBadgeNumber = MAX((UIApplication.sharedApplication.applicationIconBadgeNumber - 1) , 0);
-    
-    NSArray *array = @[@(notification.identifier)];
+    NSArray *array;
+    if(notification)
+        array = @[@(notification.identifier)];
+    else
+        array = @[];
     
     [appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes:array
                                                           fromUserId:appDelegate.currentUser.uniqueId
                                                    completionHandler:^(id responce) {
         
-                                                       notification.read = YES;
+                                                       
+                                                       if(notification)
+                                                       {
+                                                           // Decrement the badge number (min zero)
+                                                           UIApplication.sharedApplication.applicationIconBadgeNumber =
+                                                           MAX((UIApplication.sharedApplication.applicationIconBadgeNumber - 1) , 0);
+                                                        
+                                                           notification.read = YES;
+                                                           
+                                                           hasUnreadNotifications = NO;
+                                                           for (SYNNotification* n in self.notifications)
+                                                               if(!n.read)
+                                                                   hasUnreadNotifications = YES;
+                                                       }
+                                                       else
+                                                       {
+                                                           for (SYNNotification* n in self.notifications)
+                                                               n.read = YES;
+                                                           
+                                                           UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
+                                                           
+                                                           hasUnreadNotifications = NO;
+                                                           
+                                                       }
+                                                       
+                                                       
         
                                                        [self.tableView reloadData];
         
-                                                       [[NSNotificationCenter defaultCenter]  postNotificationName: kNotificationMarkedRead
-                                                                                                            object: self];
         
                                                    } errorHandler:^(id error) {
+                                                       
+                                                       
         
                                                    }];
     

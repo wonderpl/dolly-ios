@@ -1085,6 +1085,7 @@
 		BE57C0311843638C00C6444A /* SYNOnBoardingHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE57C0301843638C00C6444A /* SYNOnBoardingHeader.m */; };
 		BE57C0331844FA9B00C6444A /* SYNSubscribersViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C0321844FA9B00C6444A /* SYNSubscribersViewController~iphone.xib */; };
 		BE57C0351844FAB600C6444A /* SYNSubscribersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C0341844FAB600C6444A /* SYNSubscribersViewController.xib */; };
+		BE57C03818460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE57C03718460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.m */; };
 		BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */; };
 		BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7D02E9178B138B008053DC /* SYNUserThumbnailCell.m */; };
 		BE7D02EC178B13C3008053DC /* SYNUserThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7D02EB178B13C3008053DC /* SYNUserThumbnailCell.xib */; };
@@ -2610,6 +2611,8 @@
 		BE57C0301843638C00C6444A /* SYNOnBoardingHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnBoardingHeader.m; sourceTree = "<group>"; };
 		BE57C0321844FA9B00C6444A /* SYNSubscribersViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNSubscribersViewController~iphone.xib"; sourceTree = "<group>"; };
 		BE57C0341844FAB600C6444A /* SYNSubscribersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNSubscribersViewController.xib; sourceTree = "<group>"; };
+		BE57C03618460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNotificationsMarkAllAsReadCell.h; sourceTree = "<group>"; };
+		BE57C03718460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNotificationsMarkAllAsReadCell.m; sourceTree = "<group>"; };
 		BE5D29E917577E2800C00486 /* SYNPopupMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopupMessageView.h; sourceTree = "<group>"; };
 		BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopupMessageView.m; sourceTree = "<group>"; };
 		BE7D02E8178B138B008053DC /* SYNUserThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNUserThumbnailCell.h; sourceTree = "<group>"; };
@@ -5517,7 +5520,6 @@
 		BE7D34D017159DF20085AB81 /* Activity (Notifications) */ = {
 			isa = PBXGroup;
 			children = (
-				BE9825A7183D1D9200617FA6 /* Cells */,
 				BE1B3DC7180D7F4000DA2BD6 /* Helpers */,
 				BE7D34D417159F3C0085AB81 /* SYNActivityViewController.h */,
 				BE7D34D517159F3C0085AB81 /* SYNActivityViewController.m */,
@@ -5525,6 +5527,7 @@
 				BE1B3DCA180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib */,
 				BE7D35031715CE440085AB81 /* SYNNotification.h */,
 				BE7D35041715CE450085AB81 /* SYNNotification.m */,
+				BE9825A7183D1D9200617FA6 /* Cells */,
 			);
 			name = "Activity (Notifications)";
 			sourceTree = "<group>";
@@ -5672,6 +5675,8 @@
 			children = (
 				BE7D34D117159E2C0085AB81 /* SYNNotificationsTableViewCell.h */,
 				BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */,
+				BE57C03618460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.h */,
+				BE57C03718460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -7329,6 +7334,7 @@
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */,
 				011A160E16EE53A0008CF25E /* UIImage+Resize.m in Sources */,
+				BE57C03818460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.m in Sources */,
 				011A162D16EF5EC5008CF25E /* GKCropBorderView.m in Sources */,
 				011A162E16EF5EC5008CF25E /* GKImageCropOverlayView.m in Sources */,
 				011A162F16EF5EC5008CF25E /* GKImageCropView.m in Sources */,
