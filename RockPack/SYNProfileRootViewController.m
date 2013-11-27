@@ -30,7 +30,7 @@
 #import "SYNChannelDetailsViewController.h"
 #import "SYNAccountSettingsViewController.h"
 #import "UIImage+blur.h"
-
+#import "SYNProfileFlowLayout.h"
 
 @import QuartzCore;
 
@@ -128,6 +128,8 @@
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) NSString *tempBackString;
 
+@property (strong, nonatomic) SYNProfileFlowLayout *testLayoutIPhone;
+
 
 @end
 
@@ -158,7 +160,6 @@
 {
     self = [self initWithViewId:vid];
     self.channelOwner = chanOwner;
-    
     return self;
 }
 
@@ -223,6 +224,9 @@
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
+        
+        
+        self.testLayoutIPhone = [[SYNProfileFlowLayout alloc]init];
         
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
         [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
@@ -933,6 +937,7 @@
         if (self.isUserProfile && indexPath.row == 0)
         {
             SYNChannelDetailsViewController *channelVC;
+            
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
 			
             [self.navigationController pushViewController:channelVC animated:YES];
