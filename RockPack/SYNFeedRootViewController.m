@@ -19,7 +19,6 @@
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNFeedRootViewController.h"
-#import "SYNHomeSectionHeaderView.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
