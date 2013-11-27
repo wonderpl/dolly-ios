@@ -17,7 +17,6 @@
 #import "SYNAppDelegate.h"
 #import "SYNCaution.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNCoverThumbnailCell.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
 #import "SYNImagePickerController.h"
@@ -270,14 +269,6 @@ UIPopoverControllerDelegate>
 {
     [super viewWillAppear: animated];
     //[self.navigationItem.backBarButtonItem setTitle:@""];
-
-
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(coverImageChangedHandler:)
-                                                 name: kCoverArtChanged
-                                               object: nil];
-    
-    
     
     if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
     {
@@ -335,10 +326,6 @@ UIPopoverControllerDelegate>
     
     // Remove notifications individually
     // Do this rather than plain RemoveObserver call as low memory handling is based on NSNotifications.
-    [[NSNotificationCenter defaultCenter] removeObserver: self
-                                                    name: kCoverArtChanged
-                                                  object: nil];
-    
     [[NSNotificationCenter defaultCenter] removeObserver: self
                                                     name: kVideoQueueClear
                                                   object: nil];
