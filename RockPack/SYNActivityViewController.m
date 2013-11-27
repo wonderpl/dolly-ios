@@ -170,7 +170,7 @@
 
 - (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section
 {
-    NSLog(@">>> %i", _notifications.count);
+    
     return  _notifications.count + (NSUInteger)(hasUnreadNotifications); // if zero then return zero, else add one
 }
 
