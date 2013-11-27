@@ -57,7 +57,7 @@
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
 	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
-	NSString *filename = [NSString stringWithFormat:@"SYNVideoViewController_%@", suffix];
+	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
 	SYNChannelVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];

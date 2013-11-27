@@ -99,9 +99,9 @@ static const CGFloat AnimationDuration = 0.3;
 	
 	// This is dispatch_async is to handle the case where the iPad has been rotated while the video is playing.
 	//
-	// The SYNVideoViewController's view will still be in the same orientation as it was prior to presenting the full screen
-	// view controller and it's layout won't get updated until the end of the run loop. This means that we'd have the wrong
-	// frames for the video player container when we're animating to it
+	// The SYNChannelVideoPlayerViewController's view will still be in the same orientation as it was prior to presenting
+	// the full screen view controller and it's layout won't get updated until the end of the run loop. This means that
+	// we'd have the wrong frames for the video player container when we're animating to it
 	//
 	// Starting the animation on the next run loop means that the layout will be updated and the frames will be correct
 	dispatch_async(dispatch_get_main_queue(), ^{
