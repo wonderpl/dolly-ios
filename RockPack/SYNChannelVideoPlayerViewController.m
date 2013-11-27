@@ -7,7 +7,7 @@
 //
 
 #import "SYNChannelVideoPlayerViewController.h"
-#import "SYNVideoThumbnailSmallCell.h"
+#import "SYNVideoThumbnailCell.h"
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
 #import "VideoInstance.h"
 #import "Video.h"
@@ -86,9 +86,9 @@
 	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:self.channelOwnerLabel.font.pointSize];
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
 
-	UINib *videoThumbnailCellNib = [SYNVideoThumbnailSmallCell nib];
+	UINib *videoThumbnailCellNib = [SYNVideoThumbnailCell nib];
 	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
-				   forCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]];
+				   forCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]];
 	
 	[self playVideoAtIndex:self.selectedIndex];
 }
@@ -137,8 +137,8 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SYNVideoThumbnailSmallCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]
-                                                                                 forIndexPath:indexPath];
+    SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]
+																			forIndexPath:indexPath];
     
     VideoInstance *videoInstance = self.videoInstances[indexPath.item];
     

@@ -24,7 +24,7 @@
 #import "SYNReportConcernTableViewController.h"
 #import "SYNYouTubeVideoPlaybackViewController.h"
 #import "SYNOoyalaVideoPlaybackViewController.h"
-#import "SYNVideoThumbnailSmallCell.h"
+#import "SYNVideoThumbnailCell.h"
 #import "SYNVideoViewerThumbnailLayout.h"
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
 #import "SYNVideoViewerViewController.h"
@@ -631,7 +631,7 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNVideoThumbnailSmallCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNVideoThumbnailSmallCell"
+    SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNVideoThumbnailSmallCell"
                                                                                  forIndexPath: indexPath];
     
     VideoInstance *videoInstance = self.videoInstanceArray [indexPath.item];

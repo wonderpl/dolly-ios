@@ -1,5 +1,5 @@
 //
-//  SYNVideoThumbnailSmallCell.h
+//  SYNVideoThumbnailCell.h
 //  rockpack
 //
 //  Created by Nick Banks on 30/01/2013.
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface SYNVideoThumbnailSmallCell : UICollectionViewCell
+@interface SYNVideoThumbnailCell : UICollectionViewCell
 
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 
