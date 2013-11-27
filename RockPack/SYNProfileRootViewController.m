@@ -28,7 +28,6 @@
 #import "SYNMasterViewController.h"
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
-#import "SYNAccountSettingsViewController.h"
 #import "UIImage+blur.h"
 
 
