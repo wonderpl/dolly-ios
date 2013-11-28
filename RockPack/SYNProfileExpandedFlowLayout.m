@@ -35,7 +35,7 @@
         CGRect cellFrame = attributes.frame;
         if(attributes.indexPath.item == 0)
         {
-            cellFrame.size.height = 174;
+            cellFrame.size.height += 103;
         }
 //        else if ((IS_IPAD && (attributes.indexPath.item % 2 == 0)) || IS_IPHONE) // odd cells (0 indexed)
 //        {
@@ -43,7 +43,7 @@
 //        }
         else
         {
-            cellFrame.origin.y+= 103;
+            cellFrame.origin.y+= 102;
             
         }
         attributes.frame = cellFrame;

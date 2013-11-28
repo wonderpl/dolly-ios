@@ -45,8 +45,6 @@
 
     }
     
-    self.descriptionTextView.delegate = self;
-    self.createTextField.delegate = self;
 }
 
 
@@ -61,6 +59,9 @@
     [self.createCellButton addTarget:_viewControllerDelegate
                                 action:@selector(createNewButtonPressed)
                       forControlEvents:UIControlEventTouchUpInside];
+
+    self.descriptionTextView.delegate = _viewControllerDelegate;
+    self.createTextField.delegate = _viewControllerDelegate;
 
 }
 

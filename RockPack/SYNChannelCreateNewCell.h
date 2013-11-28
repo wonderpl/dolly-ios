@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SYNChannelCreateNewCelllDelegate <NSObject>
+@protocol SYNChannelCreateNewCelllDelegate <NSObject, UITextFieldDelegate, UITextViewDelegate>
 
-- (void) createCellTapped;
+- (void) createNewButtonPressed;
 - (void) followButtonTapped: (UICollectionViewCell *) cell;
 @end
 

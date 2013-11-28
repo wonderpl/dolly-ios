@@ -43,7 +43,7 @@
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
 #define SEARCHBAR_Y 415.0f
-#define ALPHA_IN_EDIT 0.4f
+#define ALPHA_IN_EDIT 0.2f
 #define OFFSET_DESCRIPTION_EDIT 130.0f
 #define PARALLAX_SCROLL_VALUE 2.0f
 #define kHeightChange 70.0f
@@ -964,11 +964,13 @@
         // The first cell is a 'create_new' cell on a user profile
         if (self.isUserProfile && indexPath.row == 0)
         {
-            SYNChannelDetailsViewController *channelVC;
             
-            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
-			
-            [self.navigationController pushViewController:channelVC animated:YES];
+#warning selectcell
+//            SYNChannelDetailsViewController *channelVC;
+//            
+//            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
+//			
+//            [self.navigationController pushViewController:channelVC animated:YES];
             
             return;
         }
@@ -1596,6 +1598,22 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+
+    NSLog(@"Started editing a textfield");
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
+
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar
 {
     // boolean to check if the keyboard should show
@@ -1996,26 +2014,26 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
+    if (self.modeType == modeEditProfile) {
+
     [self performSelector:@selector(resetOffsetWithAnimation) withObject:nil afterDelay:0.3f];
-    //[self resetOffsetWithAnimation];
+    }
+        //[self resetOffsetWithAnimation];
 }
 
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
-    NSLog(@"ddd%f", self.aboutMeTextView.frame.size.height);
 
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
     
-//    if (IS_IPHONE)
-//    {
+    if (self.modeType == modeEditProfile) {
         [UIView animateWithDuration:0.3f animations:^{
             self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
             self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
             
         }];
-//    }
+    }
     
-    NSLog(@"%f", self.aboutMeTextView.frame.size.height);
     
 }
 
@@ -2128,7 +2146,6 @@ finishedWithImage: (UIImage *) image
 -(void)createNewButtonPressed
 {
     
-    
     NSLog(@"create cell");
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
@@ -2178,7 +2195,7 @@ finishedWithImage: (UIImage *) image
         };
         
         [UIView transitionWithView:cell
-                          duration:0.5f
+                          duration:0.2f
                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateEditMode
                         completion:^(BOOL finished) {
@@ -2186,7 +2203,7 @@ finishedWithImage: (UIImage *) image
                             
                         }];
         
-        [UIView animateKeyframesWithDuration:0.2 delay:0.2 options:UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateKeyframesWithDuration:0.1 delay:0.25 options:UIViewAnimationCurveEaseInOut animations:^{
             [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
             self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
             self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
@@ -2195,7 +2212,7 @@ finishedWithImage: (UIImage *) image
         
     }
     
-    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
+    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.2f];
 }
 
 -(void) updateCollectionLayout
@@ -2203,10 +2220,12 @@ finishedWithImage: (UIImage *) image
   //  self.channelThumbnailCollectionView.collectionViewLayout = self.channelExpandedLayout;
         CGPoint tmpPoint = self.channelThumbnailCollectionView.contentOffset;
 
-    [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelExpandedLayout animated:YES];
+    [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelExpandedLayout];
     
     self.channelThumbnailCollectionView.contentOffset = tmpPoint;
     [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
 }
+
+
 
 @end
