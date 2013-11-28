@@ -6,7 +6,6 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNCautionMessageView.h"
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
 #import "SYNMasterViewController.h"

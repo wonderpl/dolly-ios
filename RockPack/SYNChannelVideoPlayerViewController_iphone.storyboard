@@ -134,6 +134,9 @@
                                         <state key="normal" image="IconVideoAddDefault.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addButtonPressed:" destination="kjH-hT-nk9" eventType="touchUpInside" id="HXf-xq-XES"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wq-zu-2M5" customClass="SYNSocialButton">
                                         <rect key="frame" x="130" y="0.0" width="49" height="49"/>
@@ -148,6 +151,9 @@
                                         </state>
                                         <state key="selected" image="ButtonVideoOverlayShareSelected.png"/>
                                         <state key="highlighted" image="ButtonVideoOverlayShareHighlighted.png"/>
+                                        <connections>
+                                            <action selector="shareButtonPressed:" destination="kjH-hT-nk9" eventType="touchUpInside" id="oi9-xB-JNK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -204,6 +210,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="VoR-pT-nb5" id="1Z1-pf-cqu"/>
                         <outlet property="channelOwnerLabel" destination="gCJ-cn-ZdS" id="4Pu-bA-VM3"/>
                         <outlet property="channelThumbnailImageView" destination="Dhs-Vw-fKo" id="kJP-9c-sVx"/>
                         <outlet property="channelTitleLabel" destination="exl-4H-uqi" id="jcZ-2E-wFF"/>

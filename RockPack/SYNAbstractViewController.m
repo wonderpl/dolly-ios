@@ -28,18 +28,13 @@
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
-
-
-@import AudioToolbox;
 @import QuartzCore;
 
 #define kScrollContentOff 100.0f
 #define kScrollSpeedBoundary 550.0f
 
-@interface SYNAbstractViewController ()  <UITextFieldDelegate,
-                                          UIPopoverControllerDelegate>
+@interface SYNAbstractViewController () <UIPopoverControllerDelegate>
 
-@property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
@@ -58,10 +53,6 @@
 
 
 @implementation SYNAbstractViewController
-
-@synthesize fetchedResultsController = fetchedResultsController;
-@synthesize selectedIndex = _selectedIndex;
-
 
 @synthesize viewId;
 
@@ -243,17 +234,10 @@
 }
 
 
-
-
 -(void)clearedLocationBoundData
 {
     // to be implemented by child
 }
-- (BOOL) showSubGenres
-{
-    return YES;
-}
-
 
 
 -(void)setTitle:(NSString *)title
@@ -380,9 +364,6 @@
         // Get the videoinstance associated with the control pressed
         VideoInstance *videoInstance = socialControl.dataItemLinked;
         
-        [self requestShareLinkWithObjectType: @"video_instance"
-                                    objectId: videoInstance.uniqueId];
-        
         [self shareVideoInstance: videoInstance];
     }
     else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
@@ -390,29 +371,17 @@
         // Get the videoinstance associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
         
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"channelShareButtonClick"
-                                                                label: nil
-                                                                value: nil] build]];
-        
-        [self shareObjectType:  @"channel"
-                     objectId: channel.uniqueId
-                      isOwner: ([channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
-                      isVideo: @NO
-                   usingImage: nil];
-        
-        
-    }
+		BOOL isOwner = [channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
+		[self shareChannel:channel isOwner:@(isOwner) usingImage:nil];
+	}
 }
 
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {
+	[self requestShareLinkWithObjectType: @"video_instance"
+								objectId: videoInstance.uniqueId];
+	
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
@@ -585,22 +554,20 @@
      }];
 }
 
-- (void) shareChannel: (Channel *) channel
-              isOwner: (NSNumber *) isOwner
-           usingImage: (UIImage *) image
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelShareButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    [self shareObjectType:  @"channel"
-                 objectId: channel.uniqueId
-                  isOwner: isOwner
-                  isVideo: @NO
-               usingImage: image];
+- (void)shareChannel:(Channel *)channel isOwner:(NSNumber *)isOwner usingImage:(UIImage *)image {
+	[self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
+
+	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
+														  action:@"channelShareButtonClick"
+														   label:nil
+														   value:nil] build]];
+
+	[self shareObjectType:@"channel"
+				 objectId:channel.uniqueId
+				  isOwner:isOwner
+				  isVideo:@NO
+			   usingImage:image];
 }
 
 

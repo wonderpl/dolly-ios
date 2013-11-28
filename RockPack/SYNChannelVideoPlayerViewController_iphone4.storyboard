@@ -125,6 +125,9 @@
                                         <state key="normal" image="IconVideoAddDefault.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addButtonPressed:" destination="7KU-2r-spd" eventType="touchUpInside" id="Bli-zU-Num"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XIc-ok-OKj" customClass="SYNSocialButton">
                                         <rect key="frame" x="130" y="0.0" width="49" height="49"/>
@@ -139,6 +142,9 @@
                                         </state>
                                         <state key="selected" image="ButtonVideoOverlayShareSelected.png"/>
                                         <state key="highlighted" image="ButtonVideoOverlayShareHighlighted.png"/>
+                                        <connections>
+                                            <action selector="shareButtonPressed:" destination="7KU-2r-spd" eventType="touchUpInside" id="abb-Xv-0Sm"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -196,6 +202,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="addButton" destination="RVq-SC-H2w" id="yff-IC-oOX"/>
                         <outlet property="channelOwnerLabel" destination="njH-EQ-te6" id="GkV-db-5rL"/>
                         <outlet property="channelTitleLabel" destination="Cad-W2-yLM" id="GDd-J9-WTz"/>
                         <outlet property="likeButton" destination="9Rr-XD-fN6" id="m2g-TS-vxl"/>

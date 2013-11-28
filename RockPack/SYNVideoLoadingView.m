@@ -122,25 +122,27 @@ static const CGFloat TextSideInset = 20.0;
 	NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	style.alignment = NSTextAlignmentCenter;
 	
-	NSDictionary *titleAttributes = @{ NSFontAttributeName : [UIFont lightCustomFontOfSize:40.0],
+	UIFont *titleFont = [self titleFont];
+	NSDictionary *titleAttributes = @{ NSFontAttributeName : titleFont,
 									   NSForegroundColorAttributeName : [UIColor blackColor],
 									   NSParagraphStyleAttributeName : style };
 	CGRect titleRect = CGRectMake(TextSideInset,
-								  (CGRectGetHeight(self.bounds) - 160.0) / 2.0,
+								  CGRectGetHeight(self.bounds) / 4.0,
 								  CGRectGetWidth(self.bounds) - TextSideInset * 2,
-								  80.0);
+								  titleFont.pointSize * 2.0);
 	[title drawWithRect:titleRect
 				options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin
 			 attributes:titleAttributes
 				context:nil];
 	
-	NSDictionary *subtitleAttributes = @{ NSFontAttributeName : [UIFont lightCustomFontOfSize:25.0],
+	UIFont *subtitleFont = [self subtitleFont];
+	NSDictionary *subtitleAttributes = @{ NSFontAttributeName : subtitleFont,
 										  NSForegroundColorAttributeName : [UIColor blackColor],
 										  NSParagraphStyleAttributeName : style };
 	CGRect subtitleRect = CGRectMake(TextSideInset,
-									 (CGRectGetHeight(self.bounds) + 100.0) / 2.0,
+									 CGRectGetHeight(self.bounds) / 2.0,
 									 CGRectGetWidth(self.bounds) - TextSideInset * 2,
-									 30.0);
+									 subtitleFont.pointSize * 2.0);
 	[subtitle drawInRect:subtitleRect withAttributes:subtitleAttributes];
 	
 	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
@@ -160,6 +162,14 @@ static const CGFloat TextSideInset = 20.0;
 	[filter setValue:image forKey:kCIInputImageKey];
 	
 	return [UIImage imageWithCGImage:[context createCGImage:[filter outputImage] fromRect:[image extent]]];
+}
+
+- (UIFont *)titleFont {
+	return (IS_IPAD ? [UIFont lightCustomFontOfSize:40.0] : [UIFont lightCustomFontOfSize:20.0]);
+}
+
+- (UIFont *)subtitleFont {
+	return (IS_IPAD ? [UIFont regularCustomFontOfSize:25.0] : [UIFont regularCustomFontOfSize:12.0]);
 }
 
 @end
