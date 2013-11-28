@@ -192,17 +192,6 @@
 }
 
 
-- (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button
-{
-    UIView* target = button;
-    while (target && ![target isKindOfClass:[UICollectionViewCell class]])
-    {
-        target = [target superview];
-    }
-    NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: target.center];
-    
-    return indexPath;
-}
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
@@ -243,32 +232,7 @@
     return nil;
 }
 
-// User pressed the channel thumbnail in a VideoCell
-- (IBAction) channelButtonTapped: (UIButton *) channelButton
-{
-    NSIndexPath *indexPath = [self indexPathFromVideoInstanceButton: channelButton];
-    
-    if (indexPath)
-    {
-        VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
-        
-		[self viewChannelDetails:videoInstance.channel];
-    }
-}
 
-
-- (IBAction) profileButtonTapped: (UIButton *) profileButton
-{
-    NSIndexPath *indexPath = [self indexPathFromVideoInstanceButton: profileButton];
-    
-    // Bail if we don't have an index path
-    if (indexPath)
-    {
-        VideoInstance *videoInstance = [self.fetchedResultsController objectAtIndexPath: indexPath];
-        
-        [self viewProfileDetails: videoInstance.channel.channelOwner];
-    }
-}
 
 
 #pragma mark - Trace
