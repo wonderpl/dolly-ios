@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNChannelCreateNewCell : UICollectionViewCell
+@protocol SYNChannelCreateNewCelllDelegate <NSObject, UITextFieldDelegate, UITextViewDelegate>
+
+- (void) createNewButtonPressed;
+- (void) followButtonTapped: (UICollectionViewCell *) cell;
+@end
+
+@interface SYNChannelCreateNewCell : UICollectionViewCell <UITextFieldDelegate, UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *bottomBarView;
 @property (strong, nonatomic) IBOutlet UIView *boarderView;
 @property (strong, nonatomic) IBOutlet UITextField *createTextField;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (strong, nonatomic) IBOutlet UIButton *createCellButton;
+@property (nonatomic, weak) id<SYNChannelCreateNewCelllDelegate> viewControllerDelegate;
 
 @end

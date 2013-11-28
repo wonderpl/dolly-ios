@@ -121,8 +121,9 @@
                                         <state key="normal" title="like">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="ButtonVideoOverlayLikeSelected.png"/>
-                                        <state key="highlighted" image="ButtonVideoOverlayLikeHighlighted.png"/>
+                                        <connections>
+                                            <action selector="likeButtonPressed:" destination="kjH-hT-nk9" eventType="touchUpInside" id="NJE-54-EYC"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoR-pT-nb5" customClass="SYNSocialAddButton">
                                         <rect key="frame" x="65" y="0.0" width="49" height="49"/>
@@ -236,8 +237,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ButtonVideoOverlayLikeHighlighted.png" width="53" height="52"/>
-        <image name="ButtonVideoOverlayLikeSelected.png" width="53" height="52"/>
         <image name="ButtonVideoOverlayShareHighlighted.png" width="53" height="52"/>
         <image name="ButtonVideoOverlayShareSelected.png" width="53" height="52"/>
         <image name="IconVideoAddDefault.png" width="49" height="49"/>

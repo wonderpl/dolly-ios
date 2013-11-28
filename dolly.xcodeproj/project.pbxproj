@@ -366,6 +366,7 @@
 		01F94F2B1761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F251761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png */; };
 		01F94F2C1761EE56006C024D /* ButtonCreateDisabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */; };
 		01F94F2D1761EE56006C024D /* ButtonCreateDisabled~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */; };
+		0E118A3818475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E118A3718475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m */; };
 		0E19FBBF1822738A0007DF5B /* SYNChannelSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */; };
 		0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */; };
 		0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E26BB48182D1209008A57F1 /* SYNChannelDetailsViewController.m */; };
@@ -1818,6 +1819,8 @@
 		01F94F261761EE56006C024D /* ButtonCreateDisabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled@2x.png"; path = "Assets/Images/ButtonCreateDisabled@2x.png"; sourceTree = "<group>"; };
 		01F94F271761EE56006C024D /* ButtonCreateDisabled~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCreateDisabled~iphone.png"; path = "Assets/Images/ButtonCreateDisabled~iphone.png"; sourceTree = "<group>"; };
 		0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dollyTests.xcconfig"; path = "Pods/Pods-dollyTests.xcconfig"; sourceTree = "<group>"; };
+		0E118A3618475EEA00A0D32A /* SYNProfileExpandedFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileExpandedFlowLayout.h; sourceTree = "<group>"; };
+		0E118A3718475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileExpandedFlowLayout.m; sourceTree = "<group>"; };
 		0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelSearchCell.xib; sourceTree = "<group>"; };
 		0E19FBC0182273EE0007DF5B /* SYNChannelSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelSearchCell.h; sourceTree = "<group>"; };
 		0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelSearchCell.m; sourceTree = "<group>"; };
@@ -3410,6 +3413,8 @@
 				0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */,
 				0E5B8EA41846007D0012F460 /* SYNProfileFlowLayout.h */,
 				0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */,
+				0E118A3618475EEA00A0D32A /* SYNProfileExpandedFlowLayout.h */,
+				0E118A3718475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -7233,6 +7238,7 @@
 				BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */,
 				01C6FD0F169DDEDB00E01AA3 /* NSDictionary+Validation.m in Sources */,
 				01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */,
+				0E118A3818475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m in Sources */,
 				01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */,
 				0125FB76182D3CDA00EC822E /* SYNOoyalaVideoPlaybackViewController.m in Sources */,
 				01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */,

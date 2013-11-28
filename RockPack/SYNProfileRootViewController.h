@@ -15,7 +15,7 @@ typedef enum : NSInteger {
 } ProfileType;
 
 
-@interface SYNProfileRootViewController : SYNAbstractViewController <UISearchBarDelegate, UITextViewDelegate>
+@interface SYNProfileRootViewController : SYNAbstractViewController <UISearchBarDelegate, UITextViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 @property (nonatomic, assign) BOOL hideUserProfile;

@@ -15,6 +15,8 @@
 #import "SYNVideoLoadingView.h"
 #import "SYNVideoPlayer+Protected.h"
 
+static CGFloat const VideoViewedThresholdPercentage = 0.1;
+
 @interface SYNVideoPlayer () <SYNScrubberBarDelegate>
 
 @property (nonatomic, assign) SYNVideoPlayerState state;
@@ -23,7 +25,9 @@
 
 @property (nonatomic, strong) SYNScrubberBar *scrubberBar;
 @property (nonatomic, strong) UIView *playerContainerView;
-@property (nonatomic, strong) NSTimer *scrubberUpdateTimer;
+@property (nonatomic, strong) NSTimer *progressUpdateTimer;
+
+@property (nonatomic, assign) BOOL videoViewed;
 
 @end
 
@@ -55,7 +59,7 @@
 	[super willMoveToSuperview:newSuperview];
 	
 	if (!newSuperview) {
-		[self stopUpdatingScrubberProgress];
+		[self stopUpdatingProgress];
 	}
 }
 
@@ -135,7 +139,7 @@
 - (void)play {
 	self.state = SYNVideoPlayerStatePlaying;
 	
-	[self startUpdatingScrubberProgress];
+	[self startUpdatingProgress];
 	self.scrubberBar.playing = YES;
 }
 
@@ -187,22 +191,30 @@
 	}];
 }
 
-- (void)startUpdatingScrubberProgress {
-	self.scrubberUpdateTimer = [NSTimer timerWithTimeInterval:0.1
+- (void)startUpdatingProgress {
+	self.progressUpdateTimer = [NSTimer timerWithTimeInterval:0.1
 													   target:self
-													 selector:@selector(updateScrubberBarProgress)
+													 selector:@selector(updateProgress)
 													 userInfo:nil
 													  repeats:YES];
 	
-	[[NSRunLoop mainRunLoop] addTimer:self.scrubberUpdateTimer forMode:NSRunLoopCommonModes];
+	[[NSRunLoop mainRunLoop] addTimer:self.progressUpdateTimer forMode:NSRunLoopCommonModes];
 }
 
-- (void)stopUpdatingScrubberProgress {
-	[self.scrubberUpdateTimer invalidate];
-	self.scrubberUpdateTimer = nil;
+- (void)stopUpdatingProgress {
+	[self.progressUpdateTimer invalidate];
+	self.progressUpdateTimer = nil;
 }
 
-- (void)updateScrubberBarProgress {
+- (void)updateProgress {
+	if (!self.videoViewed) {
+		CGFloat viewedPercentage = (self.currentTime / self.duration);
+		if (viewedPercentage > VideoViewedThresholdPercentage) {
+			self.videoViewed = YES;
+			[self.delegate videoPlayerVideoViewed];
+		}
+	}
+	
 	self.scrubberBar.duration = self.duration;
 	self.scrubberBar.currentTime = self.currentTime;
 	self.scrubberBar.bufferingProgress = self.bufferingProgress;
