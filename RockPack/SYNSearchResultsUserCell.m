@@ -18,10 +18,13 @@
 {
     self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabelButton.titleLabel.font.pointSize];
     
+    if(IS_IPHONE)
+    {
+        self.separatorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 320.0f, IS_RETINA ? 0.5f : 1.0f)];
+        self.separatorView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f];
+        [self addSubview:self.separatorView];
+    }
     
-    self.separatorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 320.0f, 15.0f)];
-    self.separatorView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f];
-    [self addSubview:self.separatorView];
 }
 
 
