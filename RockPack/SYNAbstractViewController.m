@@ -35,7 +35,6 @@
 
 @interface SYNAbstractViewController () <UIPopoverControllerDelegate>
 
-@property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
@@ -54,9 +53,6 @@
 
 
 @implementation SYNAbstractViewController
-
-@synthesize selectedIndex = _selectedIndex;
-
 
 @synthesize viewId;
 
