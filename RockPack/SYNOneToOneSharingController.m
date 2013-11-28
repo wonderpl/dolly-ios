@@ -14,7 +14,6 @@
 #import "OWActivityView.h"
 #import "OWActivityViewController.h"
 #import "SYNAppDelegate.h"
-#import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
 #import "SYNOneToOneFriendCell.h"
 #import "SYNOneToOneSharingController.h"
@@ -28,7 +27,6 @@
 @import AddressBook;
 @import QuartzCore;
 
-#define kOneToOneSharingViewId	  @"kOneToOneSharingViewId"
 #define kNumberOfEmptyRecentSlots 5
 
 

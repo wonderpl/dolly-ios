@@ -52,9 +52,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
-@property (weak, nonatomic) IBOutlet UIButton *signupButton;
 @property (weak, nonatomic) IBOutlet UILabel *loginErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *passwordResetErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *registeringUserErrorLabel;
@@ -67,6 +66,8 @@
 @property (weak, nonatomic) IBOutlet UIView *termsAndConditionsView;
 @property (weak, nonatomic) IBOutlet UIView *whiteLineView;
 @property (nonatomic, strong) IBOutlet UIView* topNavBarView;
+
+@property (nonatomic, strong) IBOutlet UILabel* weWillSendYouEmailLabel;
 
 @end
 
@@ -161,6 +162,7 @@
     self.registeringUserPasswordInputField.delegate = self;
     self.passwordInputField.font = [UIFont lightCustomFontOfSize: self.passwordInputField.font.pointSize];
     self.passwordInputField.delegate = self;
+    
     self.ddInputField.font = [UIFont lightCustomFontOfSize: self.ddInputField.font.pointSize];
     self.ddInputField.delegate = self;
     self.mmInputField.font = [UIFont lightCustomFontOfSize: self.mmInputField.font.pointSize];
@@ -170,12 +172,20 @@
     self.emailInputField.font = [UIFont lightCustomFontOfSize: self.emailInputField.font.pointSize];
     self.emailInputField.delegate = self;
     
+    self.weWillSendYouEmailLabel.font = [UIFont lightCustomFontOfSize: self.weWillSendYouEmailLabel.font.pointSize];
+    
+    self.passwordResetErrorLabel.font = [UIFont lightCustomFontOfSize: self.passwordResetErrorLabel.font.pointSize];
+    self.registeringUserErrorLabel.font = [UIFont lightCustomFontOfSize: self.registeringUserErrorLabel.font.pointSize];
+    
     self.loginErrorLabel.font = [UIFont lightCustomFontOfSize: self.loginErrorLabel.font.pointSize];
     self.passwordResetErrorLabel.font = [UIFont lightCustomFontOfSize: self.passwordResetErrorLabel.font.pointSize];
     self.signupErrorLabel.font = [UIFont lightCustomFontOfSize: self.signupErrorLabel.font.pointSize];
+    self.loginErrorLabel.font = [UIFont lightCustomFontOfSize: self.loginErrorLabel.font.pointSize];
     
-    self.signupButton.titleLabel.font = [UIFont lightCustomFontOfSize: 17.0f];
+    self.signUpButton.titleLabel.font = [UIFont lightCustomFontOfSize: 17.0f];
     self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize: 17.0f];
+    
+    self.passwordForgottenButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.passwordForgottenButton.titleLabel.font.pointSize];
     
     NSMutableAttributedString *termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
@@ -219,10 +229,10 @@
     self.onBoardingController.view.frame = CGRectIntegral(onBoardingViewFrame);
     
     // navigation buttons
-    self.cancelButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.backButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.nextButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.confirmButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    self.cancelButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
+    self.backButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
+    self.nextButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
+    self.confirmButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
     
     
     // add line to to nav bar
@@ -325,21 +335,21 @@
                          completion: ^(BOOL finished) {
                          }];
         
-        self.signupButton.alpha = 0.0f;
-        CGRect signUpButtonFrame = self.signupButton.frame;
+        self.signUpButton.alpha = 0.0f;
+        CGRect signUpButtonFrame = self.signUpButton.frame;
         
         if (!isPreIPhone5)
         {
             signUpButtonFrame.origin.y += isPreIPhone5 ? 80.0 : IS_IOS_7_OR_GREATER ? 110.0 : 90.0;
         }
         
-        self.signupButton.frame = signUpButtonFrame;
+        self.signUpButton.frame = signUpButtonFrame;
         [UIView animateWithDuration: 0.3f
                               delay: 0.1f
                             options: UIViewAnimationOptionCurveEaseOut
                          animations: ^{
-                             self.signupButton.alpha = 1.0f;
-                             self.signupButton.frame = CGRectMake(self.signupButton.frame.origin.x, self.signupButton.frame.origin.y - 20.0f, self.signupButton.frame.size.width, self.signupButton.frame.size.height);
+                             self.signUpButton.alpha = 1.0f;
+                             self.signUpButton.frame = CGRectMake(self.signUpButton.frame.origin.x, self.signUpButton.frame.origin.y - 20.0f, self.signUpButton.frame.size.width, self.signUpButton.frame.size.height);
                          }
                          completion: ^(BOOL finished) {
                          }];
@@ -1176,14 +1186,14 @@
                           delay: 0.0f
                         options: UIViewAnimationCurveEaseInOut
                      animations: ^{
-                         self.signupButton.alpha = 0.0f;
+                         self.signUpButton.alpha = 0.0f;
                          self.loginButton.alpha = 0.0f;
                          self.facebookButton.alpha = 0.0f;
                      }
                      completion: ^(BOOL finished) {
                          if (finished)
                          {
-                             self.signupButton.enabled = NO;
+                             self.signUpButton.enabled = NO;
                              self.loginButton.enabled = NO;
                              self.facebookButton.enabled = NO;
                          }
@@ -1199,14 +1209,14 @@
                           delay: 0.0f
                         options: UIViewAnimationCurveEaseInOut
                      animations: ^{
-                         self.signupButton.alpha = 1.0f;
+                         self.signUpButton.alpha = 1.0f;
                          self.loginButton.alpha = 1.0f;
                          self.facebookButton.alpha = 1.0f;
                      }
                      completion: ^(BOOL finished) {
                          if (finished)
                          {
-                             self.signupButton.enabled = YES;
+                             self.signUpButton.enabled = YES;
                              self.loginButton.enabled = YES;
                              self.facebookButton.enabled = YES;
                          }

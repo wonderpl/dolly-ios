@@ -31,10 +31,15 @@ typedef enum : NSInteger {
 @property (nonatomic) NSInteger currentOnBoardingPage;
 @property (nonatomic) ScrollingDirection scrollingDirection;
 @property (nonatomic, assign) kLoginScreenState state;
+
 @property (nonatomic, strong) IBOutlet UIImageView* loginBackgroundFrontImage;
 @property (nonatomic, strong) IBOutlet UIImageView* loginBackgroundImage;
 @property (nonatomic, strong) IBOutlet UITextField* ddInputField;
 @property (nonatomic, strong) IBOutlet UITextField* mmInputField;
+@property (nonatomic, strong) IBOutlet UITextField* yyyyInputField;
+
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (nonatomic, strong) IBOutlet UIButton* signUpButton;
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl* genderSegmentedControl;
 

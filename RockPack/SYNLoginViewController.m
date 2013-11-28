@@ -35,15 +35,14 @@
 @property (nonatomic, strong) IBOutlet UITextField* mmInputField;
 @property (nonatomic, strong) IBOutlet UITextField* passwordInputField;
 @property (nonatomic, strong) IBOutlet UITextField* userNameInputField;
-@property (nonatomic, strong) IBOutlet UITextField* yyyyInputField;
+
 @property (nonatomic, strong) IBOutlet UIButton* faceImageButton;
 @property (nonatomic, strong) IBOutlet UIButton* facebookSignInButton;
 @property (nonatomic, strong) IBOutlet UIButton* finalLoginButton;
-@property (nonatomic, strong) IBOutlet UIButton* loginButton;
 @property (nonatomic, strong) IBOutlet UIButton* registerButton;
 @property (nonatomic, strong) IBOutlet UIButton* registerNewUserButton;
 @property (nonatomic, strong) IBOutlet UIButton* sendEmailButton;
-@property (nonatomic, strong) IBOutlet UIButton* signUpButton;
+
 @property (nonatomic, strong) IBOutlet UIImageView* dividerImageView;
 @property (nonatomic, strong) IBOutlet UIImageView* loginBackgroundImage;
 @property (nonatomic, strong) IBOutlet UILabel* memberLabel;
@@ -109,11 +108,9 @@
         
     passwordForgottenLabel.font = [UIFont lightCustomFontOfSize: 14.0];
     secondaryFacebookMessage.font = [UIFont lightCustomFontOfSize: 20.0];
-    termsAndConditionsLabel.font = [UIFont lightCustomFontOfSize: 14.0];
+    termsAndConditionsLabel.font = [UIFont regularCustomFontOfSize: 15.0];
     termsAndConditionsLabelSide.font = termsAndConditionsLabel.font;
     wellSendYouLabel.font = [UIFont lightCustomFontOfSize: 16.0];
-    
-    
     
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
@@ -131,7 +128,7 @@
     // == PRIVACY POLICY == //
     
     [termsString addAttribute: NSForegroundColorAttributeName value: purple
-                        range: NSMakeRange(54, 14)];
+                        range: NSMakeRange(54, 15)];
         
     
   
@@ -146,36 +143,38 @@
     termsAndConditionsLabelSide.attributedText = [[NSAttributedString alloc] initWithAttributedString:termsString2];
     
     
-    
     self.termsAndConditionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     self.termsAndConditionsButton.frame = self.termsAndConditionsLabel.frame;
     [self.termsAndConditionsButton addTarget:self
                                       action:@selector(termsAndConditionsPressed:withEvent:)
                             forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:termsAndConditionsButton];
     
+    self.facebookSignInButton.titleLabel.font = rockpackBigLabelFont;
     
     labelsToErrorArrows = [[NSMutableDictionary alloc] init];
-        
-    ddInputField.keyboardType = UIKeyboardTypeNumberPad;
-    mmInputField.keyboardType = UIKeyboardTypeNumberPad;
-    yyyyInputField.keyboardType = UIKeyboardTypeNumberPad;
     
-    
+    loginButton.titleLabel.font = rockpackBigLabelFont;
     loginButton.layer.borderWidth = 1.0;
     loginButton.layer.borderColor = [purple CGColor];
     loginButton.layer.cornerRadius = 8.0f;
-    [loginButton setTitleColor:purple forState:UIControlStateNormal];
+    [loginButton setTitleColor: purple forState:UIControlStateNormal];
     
+    // first screen bottom
+    signUpButton.titleLabel.font = rockpackBigLabelFont;
     signUpButton.layer.borderWidth = 1.0;
     signUpButton.layer.borderColor = [purple CGColor];
     signUpButton.layer.cornerRadius = 8.0f;
-    [signUpButton setTitleColor:purple forState:UIControlStateNormal];
+    [signUpButton setTitleColor: purple forState:UIControlStateNormal];
     
+    // left button
+    registerButton.titleLabel.font = rockpackBigLabelFont;
     registerButton.layer.borderWidth = 1.0;
     registerButton.layer.borderColor = [purple CGColor];
     registerButton.layer.cornerRadius = 8.0f;
-    [registerButton setTitleColor:purple forState:UIControlStateNormal];
+    [registerButton setTitleColor: purple forState:UIControlStateNormal];
     
     self.faceImageButton.layer.borderColor = [UIColor colorWithRed:(167.0f/255.0f) green:(167.0f/255.0f) blue:(167.0f/255.0f) alpha:1.0f].CGColor;
     self.faceImageButton.layer.borderWidth = 1.0f;
@@ -191,8 +190,6 @@
     
         
     // == Setup Input Fields
-    
-        
     
     
     if ([[SYNDeviceManager sharedInstance] isPortrait])
@@ -467,7 +464,6 @@
     dobView.center = CGPointMake(dobView.center.x - 50.0, dobView.center.y);
     
     emailInputField.center = CGPointMake(emailInputField.center.x - 50.0, emailInputField.center.y);
-    faceImageButton.center = CGPointMake(faceImageButton.center.x - 50.0, faceImageButton.center.y);
     
     facebookSignInButton.enabled = YES;
     facebookSignInButton.alpha = 1.0;
@@ -483,12 +479,12 @@
     
     _facebookLoginIsInProcess = NO;
     
-    if ([SYNDeviceManager.sharedInstance isPortrait])
-    {
-        faceImageButton.center = CGPointMake(78.0, faceImageButton.center.y);
-        passwordForgottenLabel.center = CGPointMake(115.0, passwordForgottenLabel.center.y);
-        
-    }
+    
+    
+    CGRect fiRect = faceImageButton.frame;
+    fiRect.origin.x = [SYNDeviceManager.sharedInstance isPortrait] ? 32.0f : 102.0f;
+    faceImageButton.frame = fiRect;
+    
 
     signUpButton.enabled = YES;
     signUpButton.alpha = 1.0;
@@ -905,7 +901,7 @@
                              memberLabel.center = CGPointMake(loginButton.center.x, areYouNewLabel.center.y - 8.0);
                              
                              CGRect faceRect = faceImageButton.frame;
-                             faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
+                             faceRect.origin.x = [[SYNDeviceManager sharedInstance] isPortrait] ? 32.0f : 102.0f;
                              faceRect.origin.y -= self.elementsOffsetY;
                              faceImageButton.frame = faceRect;
                              
@@ -956,7 +952,7 @@
                              
                              faceImageButton.alpha = 1.0;
                              CGRect faceRect = faceImageButton.frame;
-                             faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
+                             faceRect.origin.x = [[SYNDeviceManager sharedInstance] isPortrait] ? 32.0f : 102.0f;
                              faceImageButton.frame = faceRect;
                              
                              loginButton.alpha = 1.0;
@@ -1370,8 +1366,9 @@
                  {
                      [self uploadAvatar: self.avatarImage];
                  }
-             }
-                  errorHandler: ^(NSDictionary* errorDictionary){
+                 
+             } errorHandler: ^(NSDictionary* errorDictionary) {
+                 
                       registerNewUserButton.enabled = YES;
                       
                       [activityIndicator stopAnimating];
@@ -1744,7 +1741,7 @@
         signUpButton.center = CGPointMake(524.0, signUpButton.center.y);
         facebookButtonFrame.origin.x = 150.0f;
         passwordForgottenLabel.center = CGPointMake(115.0, passwordForgottenLabel.center.y);
-        faceImageButton.center = CGPointMake(84.0, faceImageButton.center.y);
+        
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 714.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 714.0);        
         registerButton.center = CGPointMake(registerButton.center.x, 704.0);
@@ -1755,14 +1752,16 @@
         signUpButton.center = CGPointMake(670.0, signUpButton.center.y);
         facebookButtonFrame.origin.x = 293.0f;
         passwordForgottenLabel.center = CGPointMake(248.0, passwordForgottenLabel.center.y);
-        faceImageButton.center = CGPointMake(254.0, faceImageButton.center.y);
+        
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 370.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 370.0);
         registerButton.center = CGPointMake(registerButton.center.x, 352.0);
         onBoardingFrame.origin.y = 100.0;
     }
     
-    
+    CGRect faceRect = faceImageButton.frame;
+    faceRect.origin.x = [[SYNDeviceManager sharedInstance] isPortrait] ? 32.0f : 102.0f;
+    faceImageButton.frame = faceRect;
     
     self.onBoardingController.view.frame = onBoardingFrame;
     

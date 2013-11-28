@@ -5180,12 +5180,8 @@
 			children = (
 				38281F1B17439B770024DC18 /* SYNLoginBaseViewController.h */,
 				38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */,
-				38BACDFD1732CCFB00406597 /* SYNLoginViewControllerIphone.h */,
-				38BACDFE1732CCFB00406597 /* SYNLoginViewControllerIphone.m */,
-				38BACDFF1732CCFB00406597 /* SYNLoginViewControllerIphone.xib */,
-				BE270B7C16EDE0E800CDDA6D /* SYNLoginViewController.h */,
-				BE270B7D16EDE0E800CDDA6D /* SYNLoginViewController.m */,
-				BE270B7E16EDE0E800CDDA6D /* SYNLoginViewController.xib */,
+				BE57C0391847541A00C6444A /* iPad */,
+				BE57C03A1847543100C6444A /* iPhone */,
 				BED4311516F0EBBB0051465B /* SYNLoginErrorArrow.h */,
 				BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */,
 				BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */,
@@ -5379,6 +5375,26 @@
 				BE57C02D184362F800C6444A /* SYNOnboardingHeader.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		BE57C0391847541A00C6444A /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				BE270B7C16EDE0E800CDDA6D /* SYNLoginViewController.h */,
+				BE270B7D16EDE0E800CDDA6D /* SYNLoginViewController.m */,
+				BE270B7E16EDE0E800CDDA6D /* SYNLoginViewController.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		BE57C03A1847543100C6444A /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				38BACDFD1732CCFB00406597 /* SYNLoginViewControllerIphone.h */,
+				38BACDFE1732CCFB00406597 /* SYNLoginViewControllerIphone.m */,
+				38BACDFF1732CCFB00406597 /* SYNLoginViewControllerIphone.xib */,
+			);
+			name = iPhone;
 			sourceTree = "<group>";
 		};
 		BE7C129C16EA4EF60015789B /* Search */ = {

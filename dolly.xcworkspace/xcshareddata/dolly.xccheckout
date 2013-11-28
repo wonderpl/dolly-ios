@@ -5,13 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9098420C-9063-4A30-8527-33FD3B73831D</string>
+	<string>0ECC0247-B6C0-49B6-95A0-6CA39992B6CE</string>
 	<key>IDESourceControlProjectName</key>
 	<string>dolly</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D78CB946-4C97-42BB-936F-C29BFEC659E6</key>
-		<string>https://github.com/rockpack/dolly-ios.git</string>
+		<key>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</key>
+		<string>ssh://github.com/rockpack/dolly-ios.git</string>
 		<key>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</key>
 		<string>https://github.com/rockpack/ios-app.git</string>
 	</dict>
@@ -19,24 +19,24 @@
 	<string>dolly.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D78CB946-4C97-42BB-936F-C29BFEC659E6</key>
+		<key>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</key>
 		<string>..</string>
 		<key>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</key>
 		<string>../../ios-app</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/rockpack/dolly-ios.git</string>
+	<string>ssh://github.com/rockpack/dolly-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D78CB946-4C97-42BB-936F-C29BFEC659E6</string>
+	<string>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D78CB946-4C97-42BB-936F-C29BFEC659E6</string>
+			<string>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</string>
 			<key>IDESourceControlWCCName</key>
 			<string>dolly-ios</string>
 		</dict>

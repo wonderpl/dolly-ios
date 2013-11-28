@@ -37,7 +37,7 @@
 
 - (UIImageView *)progressImageView {
 	if (!_progressImageView) {
-		UIImage *progressImage = [[UIImage imageNamed: @"ShuttleBarBufferBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
+		UIImage *progressImage = [[UIImage imageNamed:@"ShuttleBarBufferBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
 		
 		UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, CGRectGetHeight(self.bounds))];
 		imageView.image = progressImage;
@@ -49,7 +49,7 @@
 
 - (UIImageView *)trackImageView {
 	if (!_trackImageView) {
-		UIImage *trackImage = [[UIImage imageNamed: @"ShuttleBarPlayerBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
+		UIImage *trackImage = [[UIImage imageNamed:@"ShuttleBarPlayerBar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
 		
 		UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
 		imageView.image = trackImage;
