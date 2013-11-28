@@ -39,6 +39,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
+
+@property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
+
 @property (nonatomic, strong) IBOutlet UICollectionView *thumbnailCollectionView;
 
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
@@ -71,6 +74,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	appDelegate = [[UIApplication sharedApplication] delegate];
 	
 	if (IS_IPHONE) {
 		[[NSNotificationCenter defaultCenter] addObserver:self
@@ -211,9 +216,8 @@
 }
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {
-	SYNAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
 	VideoInstance *videoInstance = self.videoInstances[self.selectedIndex];
-
+	
 	[appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId:videoInstance.uniqueId
 													   errorDescription:reason
 													  completionHandler:^(NSDictionary *dictionary) {
@@ -237,6 +241,10 @@
 
 - (IBAction)swipedLeft:(UISwipeGestureRecognizer *)gestureRecognizer {
 	[self playNextVideo];
+}
+
+- (IBAction)addButtonPressed:(SYNSocialButton *)button {
+	[self addControlPressed:button];
 }
 
 #pragma mark - Notifications
@@ -292,10 +300,10 @@
 	self.channelTitleLabel.text = videoInstance.channel.title;
 	self.videoTitleLabel.text = videoInstance.title;
 	
+	self.addButton.dataItemLinked = videoInstance;
+	
 	self.likeButton.selected = videoInstance.starredByUserValue;
 	[self.likeButton setTitle:@"likes" andCount:[videoInstance.video.starCount integerValue]];
-	
-//	[self refreshAddbuttonStatus:nil];
 }
 
 - (void)playNextVideo {
