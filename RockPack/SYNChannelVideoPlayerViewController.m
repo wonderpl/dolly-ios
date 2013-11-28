@@ -7,7 +7,7 @@
 //
 
 #import "SYNChannelVideoPlayerViewController.h"
-#import "SYNVideoThumbnailSmallCell.h"
+#import "SYNVideoThumbnailCell.h"
 #import "SYNVideoViewerThumbnailLayoutAttributes.h"
 #import "VideoInstance.h"
 #import "Video.h"
@@ -57,7 +57,7 @@
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
 	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
-	NSString *filename = [NSString stringWithFormat:@"SYNVideoViewController_%@", suffix];
+	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
 	SYNChannelVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
@@ -86,9 +86,9 @@
 	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:self.channelOwnerLabel.font.pointSize];
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
 
-	UINib *videoThumbnailCellNib = [SYNVideoThumbnailSmallCell nib];
+	UINib *videoThumbnailCellNib = [SYNVideoThumbnailCell nib];
 	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
-				   forCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]];
+				   forCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]];
 	
 	[self playVideoAtIndex:self.selectedIndex];
 }
@@ -137,8 +137,8 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SYNVideoThumbnailSmallCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailSmallCell reuseIdentifier]
-                                                                                 forIndexPath:indexPath];
+    SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]
+																			forIndexPath:indexPath];
     
     VideoInstance *videoInstance = self.videoInstances[indexPath.item];
     
@@ -229,28 +229,6 @@
 
 - (IBAction)closeButtonPressed:(UIButton *)close {
 	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)previousButtonPressed:(UIButton *)sender {
-	id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-	
-	[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-														   action: @"videoNextClick"
-															label: @"prev"
-															value: nil] build]];
-	
-	[self playPreviousVideo];
-}
-
-- (IBAction)nextButtonPressed:(UIButton *)sender {
-	id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-	[tracker send: [[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
-														   action:@"videoNextClick"
-															label:@"next"
-															value:nil] build]];
-	
-	[self playNextVideo];
 }
 
 - (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {

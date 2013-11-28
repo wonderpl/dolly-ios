@@ -1,17 +1,17 @@
 //
-//  SYNVideoThumbnailSmallCell.m
+//  SYNVideoThumbnailCell.m
 //  rockpack
 //
 //  Created by Nick Banks on 30/01/2013.
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNVideoThumbnailSmallCell.h"
+#import "SYNVideoThumbnailCell.h"
 #import "UIFont+SYNFont.h"
 #import "CIFilter+Monochrome.h"
 #import <SDWebImageManager.h>
 
-@interface SYNVideoThumbnailSmallCell ()
+@interface SYNVideoThumbnailCell ()
 
 @property (nonatomic, strong) IBOutlet UIImageView *colourImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *monochromeImageView;
@@ -23,7 +23,7 @@
 @end
 
 
-@implementation SYNVideoThumbnailSmallCell
+@implementation SYNVideoThumbnailCell
 
 #pragma mark - Public class
 

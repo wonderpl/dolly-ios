@@ -7,7 +7,6 @@
 //
 
 #import "SYNAbstractViewController.h"
-#import "SYNSocialActionsDelegate.h"
 #import "SYNAggregateCellDelegate.h"
 
 @interface SYNFeedRootViewController : SYNAbstractViewController <SYNAggregateCellDelegate>

@@ -14,7 +14,6 @@
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
 #import "SYNChannelThumbnailCell.h"
-#import "SYNDeletionWobbleLayout.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
 #import "SYNIntegralCollectionViewFlowLayout.h"
@@ -29,7 +28,7 @@
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
 #import "UIImage+blur.h"
-
+#import "SYNProfileFlowLayout.h"
 
 @import QuartzCore;
 
@@ -127,6 +126,8 @@
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) NSString *tempBackString;
 
+@property (strong, nonatomic) SYNProfileFlowLayout *testLayoutIPhone;
+
 
 @end
 
@@ -157,7 +158,6 @@
 {
     self = [self initWithViewId:vid];
     self.channelOwner = chanOwner;
-    
     return self;
 }
 
@@ -222,6 +222,9 @@
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
+        
+        
+        self.testLayoutIPhone = [[SYNProfileFlowLayout alloc]init];
         
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
         [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
@@ -518,6 +521,9 @@
     }
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+    
+    [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    
     
   //  NSLog(@"chan des%@", self.channelOwner.channelOwnerDescription);
 
@@ -932,6 +938,7 @@
         if (self.isUserProfile && indexPath.row == 0)
         {
             SYNChannelDetailsViewController *channelVC;
+            
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
 			
             [self.navigationController pushViewController:channelVC animated:YES];
@@ -1763,7 +1770,7 @@
     {
      
         
-        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
+//        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
                                                             object: self
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
@@ -1856,8 +1863,18 @@
         self.uploadAvatarButton.alpha = 1.0f;
         
         self.aboutMeTextView.frame = tmpRect;
-        [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/225.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-        [[self.aboutMeTextView layer] setBorderWidth:1.0];
+        [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+        if (IS_RETINA)
+        {
+            [[self.aboutMeTextView layer] setBorderWidth:0.5];
+        }
+        else
+        {
+            [[self.aboutMeTextView layer] setBorderWidth:1.0];
+        }
+        [[self.aboutMeTextView layer] setCornerRadius:0];
+
+        
         
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
         self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
