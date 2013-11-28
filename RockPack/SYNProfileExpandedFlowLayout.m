@@ -7,7 +7,7 @@
 //
 
 #import "SYNProfileExpandedFlowLayout.h"
-
+#import "SYNDeviceManager.h"
 @implementation SYNProfileExpandedFlowLayout
 
 
@@ -35,16 +35,32 @@
         CGRect cellFrame = attributes.frame;
         if(attributes.indexPath.item == 0)
         {
-            cellFrame.size.height += 103;
+            cellFrame.size.height += 94.0f;
         }
 //        else if ((IS_IPAD && (attributes.indexPath.item % 2 == 0)) || IS_IPHONE) // odd cells (0 indexed)
 //        {
 ////            cellFrame.origin.y += kChannelCellExpandedHeight - kChannelCellDefaultHeight;
 //        }
-        else
+        else if(IS_IPHONE)
         {
-            cellFrame.origin.y+= 102;
+            cellFrame.origin.y+= 94.0f;
             
+        }
+        else if (IS_IPAD)
+        {
+            if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+                if (attributes.indexPath.item%2 == 0) {
+                    cellFrame.origin.y +=94.0f;
+                }
+            }
+            else
+            {
+                if (attributes.indexPath.item%3 == 0) {
+                    cellFrame.origin.y +=94.0f;
+                }
+                
+            }
+
         }
         attributes.frame = cellFrame;
     }

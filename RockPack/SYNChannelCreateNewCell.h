@@ -14,7 +14,7 @@
 - (void) followButtonTapped: (UICollectionViewCell *) cell;
 @end
 
-@interface SYNChannelCreateNewCell : UICollectionViewCell <UITextFieldDelegate, UITextViewDelegate>
+@interface SYNChannelCreateNewCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UIView *bottomBarView;
 @property (strong, nonatomic) IBOutlet UIView *boarderView;
 @property (strong, nonatomic) IBOutlet UITextField *createTextField;

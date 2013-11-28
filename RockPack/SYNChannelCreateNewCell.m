@@ -47,7 +47,6 @@
     
 }
 
-
 - (void) setViewControllerDelegate: (id<SYNChannelCreateNewCelllDelegate>)  viewControllerDelegate
 {
     
@@ -64,46 +63,5 @@
     self.createTextField.delegate = _viewControllerDelegate;
 
 }
-
-#pragma mark - textview delegates
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if ([textView.text isEqualToString:@"placeholder text here..."]) {
-        textView.text = @"";
-        textView.textColor = [UIColor blackColor]; //optional
-    }
-    [textView becomeFirstResponder];
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    if ([textView.text isEqualToString:@""]) {
-        textView.text = @"placeholder text here...";
-        textView.textColor = [UIColor lightTextColor]; //optional
-    }
-    [textView resignFirstResponder];
-}
-
-
-#pragma mark - textfield delegates
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    return NO;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-
 
 @end
