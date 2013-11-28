@@ -964,8 +964,7 @@
         // The first cell is a 'create_new' cell on a user profile
         if (self.isUserProfile && indexPath.row == 0)
         {
-            
-#warning selectcell
+
 //            SYNChannelDetailsViewController *channelVC;
 //            
 //            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
