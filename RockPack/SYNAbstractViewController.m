@@ -28,9 +28,6 @@
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
-
-
-@import AudioToolbox;
 @import QuartzCore;
 
 #define kScrollContentOff 100.0f
@@ -176,21 +173,6 @@
 }
 
 #pragma mark -
-
-
-// This can be overridden if updating star may cause the videoFetchedResults
-- (BOOL) shouldUpdateStarStatus
-{
-    return TRUE;
-}
-
-
-// This is intended to be subclassed where other video assets (i.e. a Large video view) have information that is dependent on Video attributes
-- (void) updateOtherOnscreenVideoAssetsForIndexPath: (NSIndexPath *) indexPath
-{
-    // By default, do nothing
-}
-
 
 - (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button
 {
