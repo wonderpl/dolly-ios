@@ -503,20 +503,6 @@ typedef void(^FeedDataErrorBlock)(void);
     return self.feedItemsData[indexPath.row];
 }
 
-- (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
-{
-    // Same mechanism as for video cell
-    return  [self indexPathForVideoCell: cell];
-}
-
-
-- (NSIndexPath *) indexPathForVideoCell: (UICollectionViewCell *) cell
-{
-    NSIndexPath *indexPath = [self.feedCollectionView indexPathForItemAtPoint: cell.center];
-    return indexPath;
-}
-
-
 #pragma mark - Click Cell Delegates
 
 - (SYNAggregateCell *) aggregateCellFromSubview: (UIView *) view

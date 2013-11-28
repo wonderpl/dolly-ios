@@ -120,7 +120,9 @@
                                         <state key="normal" title="like">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="ButtonVideoOverlayLikeSelected.png"/>
+                                        <connections>
+                                            <action selector="likeButtonPressed:" destination="PB1-Bc-aL3" eventType="touchUpInside" id="a9h-7R-9gC"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9c-zp-F8k" customClass="SYNSocialAddButton">
                                         <rect key="frame" x="65" y="0.0" width="49" height="49"/>
@@ -231,7 +233,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ButtonVideoOverlayLikeSelected.png" width="70" height="69"/>
         <image name="IconVideoAddDefault.png" width="49" height="49"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

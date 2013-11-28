@@ -121,6 +121,12 @@
 	[self.thumbnailCollectionView.collectionViewLayout invalidateLayout];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	[self trackVideoViewingStatistics];
+}
+
 #pragma mark - Getters / Setters
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
@@ -211,6 +217,18 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)videoPlayerVideoViewed {
+	VideoInstance *videoInstance = self.videoInstances[self.selectedIndex];
+	
+	[appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentOAuth2Credentials.userId
+													 action:@"view"
+											videoInstanceId:videoInstance.uniqueId
+										  completionHandler:nil
+											   errorHandler:^(NSDictionary* errorDictionary) {
+												   DebugLog(@"View action failed");
+											   }];
+}
+
 - (void)videoPlayerFinishedPlaying {
 	[self playNextVideo];
 }
@@ -241,6 +259,10 @@
 
 - (IBAction)swipedLeft:(UISwipeGestureRecognizer *)gestureRecognizer {
 	[self playNextVideo];
+}
+
+- (IBAction)likeButtonPressed:(SYNSocialButton *)button {
+	[self likeControlPressed:button];
 }
 
 - (IBAction)addButtonPressed:(SYNSocialButton *)button {
@@ -306,6 +328,7 @@
 	self.channelTitleLabel.text = videoInstance.channel.title;
 	self.videoTitleLabel.text = videoInstance.title;
 	
+	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;
 	
 	self.likeButton.selected = videoInstance.starredByUserValue;
@@ -313,6 +336,8 @@
 }
 
 - (void)playNextVideo {
+	[self trackVideoViewingStatistics];
+	
 	NSInteger nextIndex = (self.selectedIndex + 1) % [self.videoInstances count];
 	[self playVideoAtIndex:nextIndex];
 	
@@ -320,10 +345,29 @@
 }
 
 - (void)playPreviousVideo {
+	[self trackVideoViewingStatistics];
+	
 	NSInteger previousIndex = ((self.selectedIndex - 1) + [self.videoInstances count]) % [self.videoInstances count];
 	[self playVideoAtIndex:previousIndex];
 	
 	self.selectedIndex = previousIndex;
+}
+
+- (void)trackVideoViewingStatistics {
+	CGFloat percentageViewed = self.currentVideoPlayer.currentTime / [self.currentVideoPlayer duration];
+	VideoInstance *videoInstance = self.videoInstances[self.selectedIndex];
+	
+	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+
+	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
+														  action:@"videoViewed"
+														   label:videoInstance.video.sourceId
+														   value:@((int)(percentageViewed  * 100.0f))] build]];
+	
+	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
+														  action:@"videoViewedDuration"
+														   label:videoInstance.video.sourceId
+														   value:@((int)(self.currentVideoPlayer.currentTime))] build]];
 }
 
 @end
