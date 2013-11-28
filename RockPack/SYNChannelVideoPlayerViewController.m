@@ -243,6 +243,10 @@
 	[self playNextVideo];
 }
 
+- (IBAction)likeButtonPressed:(SYNSocialButton *)button {
+	[self likeControlPressed:button];
+}
+
 - (IBAction)addButtonPressed:(SYNSocialButton *)button {
 	[self addControlPressed:button];
 }
@@ -306,6 +310,7 @@
 	self.channelTitleLabel.text = videoInstance.channel.title;
 	self.videoTitleLabel.text = videoInstance.title;
 	
+	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;
 	
 	self.likeButton.selected = videoInstance.starredByUserValue;
