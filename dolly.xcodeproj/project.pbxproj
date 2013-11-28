@@ -3408,8 +3408,6 @@
 				014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */,
 				0173F70616E0C56A005B3ECA /* SYNVideoViewerThumbnailLayout.h */,
 				0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */,
-				011C168E1731782800CF50B9 /* SYNDeletionWobbleLayout.h */,
-				011C168F1731782800CF50B9 /* SYNDeletionWobbleLayout.m */,
 				0E5B8EA41846007D0012F460 /* SYNProfileFlowLayout.h */,
 				0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */,
 			);
@@ -5175,10 +5173,10 @@
 		BE270B7B16EDE0A500CDDA6D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				BE57C03A1847543100C6444A /* iPhone */,
-				BE57C0391847541A00C6444A /* iPad */,
 				38281F1B17439B770024DC18 /* SYNLoginBaseViewController.h */,
 				38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */,
+				BE57C0391847541A00C6444A /* iPad */,
+				BE57C03A1847543100C6444A /* iPhone */,
 				BED4311516F0EBBB0051465B /* SYNLoginErrorArrow.h */,
 				BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */,
 				BEB8300A17745A0400AAA8D5 /* SYNLoginOnBoardingController.h */,

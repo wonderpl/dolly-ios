@@ -94,6 +94,10 @@
 {
     [super viewDidLoad];
     
+    self.ddInputField.keyboardType = UIKeyboardTypeNumberPad;
+    self.mmInputField.keyboardType = UIKeyboardTypeNumberPad;
+    self.yyyyInputField.keyboardType = UIKeyboardTypeNumberPad;
+    
     self.onBoardingController = [[SYNLoginOnBoardingController alloc] initWithDelegate: self];
     
     CGRect totalImageRect;

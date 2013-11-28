@@ -35,15 +35,14 @@
 @property (nonatomic, strong) IBOutlet UITextField* mmInputField;
 @property (nonatomic, strong) IBOutlet UITextField* passwordInputField;
 @property (nonatomic, strong) IBOutlet UITextField* userNameInputField;
-@property (nonatomic, strong) IBOutlet UITextField* yyyyInputField;
+
 @property (nonatomic, strong) IBOutlet UIButton* faceImageButton;
 @property (nonatomic, strong) IBOutlet UIButton* facebookSignInButton;
 @property (nonatomic, strong) IBOutlet UIButton* finalLoginButton;
-@property (nonatomic, strong) IBOutlet UIButton* loginButton;
 @property (nonatomic, strong) IBOutlet UIButton* registerButton;
 @property (nonatomic, strong) IBOutlet UIButton* registerNewUserButton;
 @property (nonatomic, strong) IBOutlet UIButton* sendEmailButton;
-@property (nonatomic, strong) IBOutlet UIButton* signUpButton;
+
 @property (nonatomic, strong) IBOutlet UIImageView* dividerImageView;
 @property (nonatomic, strong) IBOutlet UIImageView* loginBackgroundImage;
 @property (nonatomic, strong) IBOutlet UILabel* memberLabel;
@@ -113,8 +112,6 @@
     termsAndConditionsLabelSide.font = termsAndConditionsLabel.font;
     wellSendYouLabel.font = [UIFont lightCustomFontOfSize: 16.0];
     
-    
-    
          
     NSMutableAttributedString* termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
@@ -146,32 +143,34 @@
     termsAndConditionsLabelSide.attributedText = [[NSAttributedString alloc] initWithAttributedString:termsString2];
     
     
-    
     self.termsAndConditionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     self.termsAndConditionsButton.frame = self.termsAndConditionsLabel.frame;
     [self.termsAndConditionsButton addTarget:self
                                       action:@selector(termsAndConditionsPressed:withEvent:)
                             forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:termsAndConditionsButton];
     
+    self.facebookSignInButton.titleLabel.font = rockpackBigLabelFont;
     
     labelsToErrorArrows = [[NSMutableDictionary alloc] init];
-        
-    ddInputField.keyboardType = UIKeyboardTypeNumberPad;
-    mmInputField.keyboardType = UIKeyboardTypeNumberPad;
-    yyyyInputField.keyboardType = UIKeyboardTypeNumberPad;
     
-    
+    loginButton.titleLabel.font = rockpackBigLabelFont;
     loginButton.layer.borderWidth = 1.0;
     loginButton.layer.borderColor = [purple CGColor];
     loginButton.layer.cornerRadius = 8.0f;
     [loginButton setTitleColor:purple forState:UIControlStateNormal];
     
+    // first screen bottom
+    signUpButton.titleLabel.font = rockpackBigLabelFont;
     signUpButton.layer.borderWidth = 1.0;
     signUpButton.layer.borderColor = [purple CGColor];
     signUpButton.layer.cornerRadius = 8.0f;
     [signUpButton setTitleColor:purple forState:UIControlStateNormal];
     
+    // left button
+    registerButton.titleLabel.font = rockpackBigLabelFont;
     registerButton.layer.borderWidth = 1.0;
     registerButton.layer.borderColor = [purple CGColor];
     registerButton.layer.cornerRadius = 8.0f;
