@@ -61,7 +61,6 @@
                         forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                withReuseIdentifier:@"SYNChannelFooterMoreView"];
     
-    
 }
 
 
@@ -162,6 +161,8 @@
             viewForSupplementaryElementOfKind: (NSString *) kind
                                   atIndexPath: (NSIndexPath *) indexPath
 {
+    
+    
     UICollectionReusableView* supplementaryView;
     
     if (collectionView == self.usersThumbnailCollectionView)

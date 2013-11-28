@@ -198,14 +198,21 @@ UIPopoverControllerDelegate>
         self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
         //
     }
-    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
+    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel"
+                                                        style:UIBarButtonItemStyleBordered
+                                                       target:self
+                                                       action:@selector(cancelTapped)];
+    
     self.barBtnCancel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
                                                   green: (66.0f / 255.0f)
                                                    blue: (42.0f / 255.0f)
                                                   alpha: 1.0f];
     
     
-    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
+    self.barBtnSave= [[UIBarButtonItem alloc] initWithTitle:@"save"
+                                                      style:UIBarButtonItemStyleBordered
+                                                     target:self
+                                                     action:@selector(saveTapped)];
     
     self.barBtnSave.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
                                                 green: (210.0f / 255.0f)
