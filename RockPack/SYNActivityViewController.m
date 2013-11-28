@@ -61,7 +61,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.layer.borderColor = [[UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f] CGColor];
-    self.tableView.layer.borderWidth = 1.0f;
+    self.tableView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
     UIEdgeInsets tableInsets = self.tableView.contentInset;
     tableInsets.top = 80.0f;

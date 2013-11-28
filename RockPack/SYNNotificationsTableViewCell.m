@@ -80,7 +80,7 @@
         
         
         // == Divider Image View == //
-        self.dividerImageView = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.frame.size.width, 0.5)];
+        self.dividerImageView = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.frame.size.width, IS_RETINA ? 0.5 : 1.0f)];
         self.dividerImageView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f)
                                                                 green:(172.0f/255.0f)
                                                                  blue:(172.0f/255.0f)
