@@ -464,7 +464,6 @@
     dobView.center = CGPointMake(dobView.center.x - 50.0, dobView.center.y);
     
     emailInputField.center = CGPointMake(emailInputField.center.x - 50.0, emailInputField.center.y);
-    faceImageButton.center = CGPointMake(faceImageButton.center.x - 50.0, faceImageButton.center.y);
     
     facebookSignInButton.enabled = YES;
     facebookSignInButton.alpha = 1.0;
@@ -480,12 +479,12 @@
     
     _facebookLoginIsInProcess = NO;
     
-    if ([SYNDeviceManager.sharedInstance isPortrait])
-    {
-        faceImageButton.center = CGPointMake(78.0, faceImageButton.center.y);
-        passwordForgottenLabel.center = CGPointMake(115.0, passwordForgottenLabel.center.y);
-        
-    }
+    
+    
+    CGRect fiRect = faceImageButton.frame;
+    fiRect.origin.x = [SYNDeviceManager.sharedInstance isPortrait] ? 32.0f : 102.0f;
+    faceImageButton.frame = fiRect;
+    
 
     signUpButton.enabled = YES;
     signUpButton.alpha = 1.0;
@@ -902,7 +901,7 @@
                              memberLabel.center = CGPointMake(loginButton.center.x, areYouNewLabel.center.y - 8.0);
                              
                              CGRect faceRect = faceImageButton.frame;
-                             faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
+                             faceRect.origin.x = [[SYNDeviceManager sharedInstance] isPortrait] ? 32.0f : 102.0f;
                              faceRect.origin.y -= self.elementsOffsetY;
                              faceImageButton.frame = faceRect;
                              
@@ -1741,7 +1740,7 @@
         signUpButton.center = CGPointMake(524.0, signUpButton.center.y);
         facebookButtonFrame.origin.x = 150.0f;
         passwordForgottenLabel.center = CGPointMake(115.0, passwordForgottenLabel.center.y);
-        faceImageButton.center = CGPointMake(84.0, faceImageButton.center.y);
+        
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 714.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 714.0);        
         registerButton.center = CGPointMake(registerButton.center.x, 704.0);
@@ -1752,14 +1751,16 @@
         signUpButton.center = CGPointMake(670.0, signUpButton.center.y);
         facebookButtonFrame.origin.x = 293.0f;
         passwordForgottenLabel.center = CGPointMake(248.0, passwordForgottenLabel.center.y);
-        faceImageButton.center = CGPointMake(254.0, faceImageButton.center.y);
+        
         termsAndConditionsLabel.center = CGPointMake(termsAndConditionsLabel.center.x, 370.0);
         termsAndConditionsLabelSide.center = CGPointMake(termsAndConditionsLabelSide.center.x, 370.0);
         registerButton.center = CGPointMake(registerButton.center.x, 352.0);
         onBoardingFrame.origin.y = 100.0;
     }
     
-    
+    CGRect faceRect = faceImageButton.frame;
+    faceRect.origin.x = [[SYNDeviceManager sharedInstance] isPortrait] ? 32.0f : 102.0f;
+    faceImageButton.frame = faceRect;
     
     self.onBoardingController.view.frame = onBoardingFrame;
     

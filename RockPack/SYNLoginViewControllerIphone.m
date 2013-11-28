@@ -67,6 +67,8 @@
 @property (weak, nonatomic) IBOutlet UIView *whiteLineView;
 @property (nonatomic, strong) IBOutlet UIView* topNavBarView;
 
+@property (nonatomic, strong) IBOutlet UILabel* weWillSendYouEmailLabel;
+
 @end
 
 @implementation SYNLoginViewControllerIphone 
@@ -170,6 +172,8 @@
     self.emailInputField.font = [UIFont lightCustomFontOfSize: self.emailInputField.font.pointSize];
     self.emailInputField.delegate = self;
     
+    self.weWillSendYouEmailLabel.font = [UIFont lightCustomFontOfSize: self.weWillSendYouEmailLabel.font.pointSize];
+    
     self.passwordResetErrorLabel.font = [UIFont lightCustomFontOfSize: self.passwordResetErrorLabel.font.pointSize];
     self.registeringUserErrorLabel.font = [UIFont lightCustomFontOfSize: self.registeringUserErrorLabel.font.pointSize];
     
@@ -225,10 +229,10 @@
     self.onBoardingController.view.frame = CGRectIntegral(onBoardingViewFrame);
     
     // navigation buttons
-    self.cancelButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.backButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.nextButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
-    self.confirmButton.titleLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    self.cancelButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
+    self.backButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
+    self.nextButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
+    self.confirmButton.titleLabel.font = [UIFont regularCustomFontOfSize:15.0f];
     
     
     // add line to to nav bar
