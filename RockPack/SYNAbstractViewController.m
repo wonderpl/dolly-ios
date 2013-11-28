@@ -426,9 +426,6 @@
         // Get the videoinstance associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
         
-        [self requestShareLinkWithObjectType: @"channel"
-                                    objectId: channel.uniqueId];
-		
 		BOOL isOwner = [channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
 		[self shareChannel:channel isOwner:@(isOwner) usingImage:nil];
 	}
@@ -609,22 +606,20 @@
      }];
 }
 
-- (void) shareChannel: (Channel *) channel
-              isOwner: (NSNumber *) isOwner
-           usingImage: (UIImage *) image
-{
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelShareButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
-    [self shareObjectType:  @"channel"
-                 objectId: channel.uniqueId
-                  isOwner: isOwner
-                  isVideo: @NO
-               usingImage: image];
+- (void)shareChannel:(Channel *)channel isOwner:(NSNumber *)isOwner usingImage:(UIImage *)image {
+	[self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
+
+	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
+														  action:@"channelShareButtonClick"
+														   label:nil
+														   value:nil] build]];
+
+	[self shareObjectType:@"channel"
+				 objectId:channel.uniqueId
+				  isOwner:isOwner
+				  isVideo:@NO
+			   usingImage:image];
 }
 
 

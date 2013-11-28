@@ -590,15 +590,10 @@ UIPopoverControllerDelegate>
     //    [self.view addSubview: self.subscribingIndicator];
 }
 
-- (IBAction)shareChannelPressed:(id)sender
-{
-    // Get share link pre-emptively
-    [self requestShareLinkWithObjectType: @"channel"
-                                objectId: self.channel.uniqueId];
-    
-    [self shareChannel: self.channel
-               isOwner: ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) ? @(TRUE): @(FALSE)
-            usingImage: nil];
+- (IBAction)shareChannelPressed:(id)sender {
+    [self shareChannel:self.channel
+               isOwner:@([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
+            usingImage:nil];
     
 }
 - (void) likeControlPressed: (SYNSocialButton *) socialButton
