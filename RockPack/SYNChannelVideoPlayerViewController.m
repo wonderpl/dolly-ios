@@ -211,6 +211,18 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)videoPlayerVideoViewed {
+	VideoInstance *videoInstance = self.videoInstances[self.selectedIndex];
+	
+	[appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentOAuth2Credentials.userId
+													 action:@"view"
+											videoInstanceId:videoInstance.uniqueId
+										  completionHandler:nil
+											   errorHandler:^(NSDictionary* errorDictionary) {
+												   DebugLog(@"View action failed");
+											   }];
+}
+
 - (void)videoPlayerFinishedPlaying {
 	[self playNextVideo];
 }

@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 - (void)videoPlayerMaximise;
 - (void)videoPlayerMinimise;
 
+- (void)videoPlayerVideoViewed;
 - (void)videoPlayerFinishedPlaying;
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason;
@@ -47,8 +48,5 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 - (void)pause;
 
 - (NSTimeInterval)duration;
-- (float)bufferingProgress;
-
-- (void)startUpdatingScrubberProgress;
 
 @end
