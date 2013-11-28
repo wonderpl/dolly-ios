@@ -110,13 +110,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     self.channelNameButton.title = self.channel.title;
 }
 
-
-- (void) layoutSubviews
-{
-    [super layoutSubviews];
-}
-
-
 #pragma mark - UICollectionView DataSource
 
 // utility method (overriding abstract class)
@@ -130,7 +123,6 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
-   
     return 1;
 }
 
