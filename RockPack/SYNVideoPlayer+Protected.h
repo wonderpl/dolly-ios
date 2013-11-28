@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-@interface SYNVideoPlayer (Protected)
+@interface SYNVideoPlayer ()
+
+@property (nonatomic, strong) VideoInstance *videoInstance;
 
 - (void)handleVideoPlayerStartedPlaying;
 - (void)handleVideoPlayerFinishedPlaying;

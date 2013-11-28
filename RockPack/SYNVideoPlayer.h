@@ -40,8 +40,6 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 
 @property (nonatomic, strong, readonly) UIView *playerContainerView;
 
-@property (nonatomic, strong) VideoInstance *videoInstance;
-
 + (instancetype)playerForVideoInstance:(VideoInstance *)videoInstance;
 
 - (void)play;
