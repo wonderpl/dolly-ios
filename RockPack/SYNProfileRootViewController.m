@@ -2159,7 +2159,7 @@ finishedWithImage: (UIImage *) image
             {
                 if (IS_IPHONE)
                 {
-                    frame.origin.y += kHeightChange;
+                    frame.origin.y += kHeightChange+11;
                 }
                 
                 if (IS_IPAD)
@@ -2192,7 +2192,7 @@ finishedWithImage: (UIImage *) image
                             
                         }];
         
-        [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
             [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
             self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
             self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
@@ -2211,17 +2211,21 @@ finishedWithImage: (UIImage *) image
     
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
-    [self resignFirstResponder];
+    
+
     
     NSLog(@"create cell");
-    for (__block SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
+    for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
         NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
         
-        
         __block int index = indexPathForCell.row;
+        
+        if (index == 0)
+        {
+            [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];            [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
+        }
         void (^animateProfileMode)(void) = ^{
-            
             CGRect frame = cell.frame;
             
             if (index == 0)
@@ -2238,7 +2242,7 @@ finishedWithImage: (UIImage *) image
             {
                 if (IS_IPHONE)
                 {
-                    frame.origin.y -= kHeightChange;
+                    frame.origin.y -= kHeightChange+11;
                 }
                 
                 if (IS_IPAD)
@@ -2275,7 +2279,7 @@ finishedWithImage: (UIImage *) image
                         }];
         
         [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
-            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
+//            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
             
         } completion:Nil];
         
