@@ -416,9 +416,6 @@
         // Get the videoinstance associated with the control pressed
         VideoInstance *videoInstance = socialControl.dataItemLinked;
         
-        [self requestShareLinkWithObjectType: @"video_instance"
-                                    objectId: videoInstance.uniqueId];
-        
         [self shareVideoInstance: videoInstance];
     }
     else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
@@ -434,6 +431,9 @@
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {
+	[self requestShareLinkWithObjectType: @"video_instance"
+								objectId: videoInstance.uniqueId];
+	
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
     [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"

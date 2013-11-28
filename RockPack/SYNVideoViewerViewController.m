@@ -1122,8 +1122,8 @@
 - (IBAction) userTouchedVideoShareButton: (UIButton *) videoShareButton
 {
     // Get share link pre-emptively
-    [self requestShareLinkWithObjectType: @"video_instance"
-                                objectId: [(VideoInstance *)self.videoInstanceArray[self.currentSelectedIndex] uniqueId]];
+//    [self requestShareLinkWithObjectType: @"video_instance"
+//                                objectId: [(VideoInstance *)self.videoInstanceArray[self.currentSelectedIndex] uniqueId]];
     
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
