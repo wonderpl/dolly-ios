@@ -20,7 +20,10 @@
 
 - (CGRect) placeholderRectForBounds: (CGRect) bounds
 {
-    return CGRectOffset( bounds, 10,  0);
+    if(self.keyboardType == UIKeyboardTypeNumberPad)
+        return CGRectOffset( bounds, 0.0f,  0.0f);
+    else
+        return CGRectOffset( bounds, 10.0f,  0.0f);
 }
 
 - (CGRect) editingRectForBounds: (CGRect) bounds

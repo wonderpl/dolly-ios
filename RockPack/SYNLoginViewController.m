@@ -1366,8 +1366,9 @@
                  {
                      [self uploadAvatar: self.avatarImage];
                  }
-             }
-                  errorHandler: ^(NSDictionary* errorDictionary){
+                 
+             } errorHandler: ^(NSDictionary* errorDictionary) {
+                 
                       registerNewUserButton.enabled = YES;
                       
                       [activityIndicator stopAnimating];

@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) IBOutlet UIButton* passwordForgottenButton;
 
-@property (nonatomic, strong) IBOutlet UIImage* avatarImage;
+@property (nonatomic, strong) UIImage* avatarImage;
 
 -(void)showAutologinWithCredentials:(SYNOAuth2Credential*)credentials;
 
