@@ -52,7 +52,7 @@
     }
     else // normal mode
     {
-        float ration = (120.0f/255);
+        float ration = (167.0f/255);
         UIColor* mediumGrayColor = [UIColor colorWithRed:ration green:ration blue:ration alpha:1.0f];
         self.backgroundColor = [UIColor clearColor];
         self.layer.borderColor = mediumGrayColor.CGColor;

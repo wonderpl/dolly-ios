@@ -9,6 +9,7 @@
 #import "SYNLoginErrorArrow.h"
 #import "UIFont+SYNFont.h"
 #import "SYNDeviceManager.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SYNLoginErrorArrow
 
@@ -31,7 +32,11 @@
         labelFrame.size.height -= 5.0;
         messageLabel = [[UILabel alloc] initWithFrame:labelFrame];
         
-        messageLabel.font = [UIFont lightCustomFontOfSize:14.0];
+        messageLabel.font = [UIFont lightCustomFontOfSize:16.0];
+        
+        messageLabel.shadowColor = [UIColor whiteColor];
+        messageLabel.shadowOffset = CGSizeMake(0, 1);
+        
         messageLabel.textColor = [UIColor colorWithRed:(142.0f/255.0f) green:(22.0f/255.0f) blue:(41.0f/255.0f) alpha:(1.0f)];
         messageLabel.backgroundColor = [UIColor clearColor];
         messageLabel.textAlignment = NSTextAlignmentLeft;

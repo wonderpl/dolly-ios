@@ -108,7 +108,7 @@
         
     passwordForgottenLabel.font = [UIFont lightCustomFontOfSize: 14.0];
     secondaryFacebookMessage.font = [UIFont lightCustomFontOfSize: 20.0];
-    termsAndConditionsLabel.font = [UIFont lightCustomFontOfSize: 14.0];
+    termsAndConditionsLabel.font = [UIFont regularCustomFontOfSize: 15.0];
     termsAndConditionsLabelSide.font = termsAndConditionsLabel.font;
     wellSendYouLabel.font = [UIFont lightCustomFontOfSize: 16.0];
     
@@ -128,7 +128,7 @@
     // == PRIVACY POLICY == //
     
     [termsString addAttribute: NSForegroundColorAttributeName value: purple
-                        range: NSMakeRange(54, 14)];
+                        range: NSMakeRange(54, 15)];
         
     
   
@@ -160,21 +160,21 @@
     loginButton.layer.borderWidth = 1.0;
     loginButton.layer.borderColor = [purple CGColor];
     loginButton.layer.cornerRadius = 8.0f;
-    [loginButton setTitleColor:purple forState:UIControlStateNormal];
+    [loginButton setTitleColor: purple forState:UIControlStateNormal];
     
     // first screen bottom
     signUpButton.titleLabel.font = rockpackBigLabelFont;
     signUpButton.layer.borderWidth = 1.0;
     signUpButton.layer.borderColor = [purple CGColor];
     signUpButton.layer.cornerRadius = 8.0f;
-    [signUpButton setTitleColor:purple forState:UIControlStateNormal];
+    [signUpButton setTitleColor: purple forState:UIControlStateNormal];
     
     // left button
     registerButton.titleLabel.font = rockpackBigLabelFont;
     registerButton.layer.borderWidth = 1.0;
     registerButton.layer.borderColor = [purple CGColor];
     registerButton.layer.cornerRadius = 8.0f;
-    [registerButton setTitleColor:purple forState:UIControlStateNormal];
+    [registerButton setTitleColor: purple forState:UIControlStateNormal];
     
     self.faceImageButton.layer.borderColor = [UIColor colorWithRed:(167.0f/255.0f) green:(167.0f/255.0f) blue:(167.0f/255.0f) alpha:1.0f].CGColor;
     self.faceImageButton.layer.borderWidth = 1.0f;
@@ -190,8 +190,6 @@
     
         
     // == Setup Input Fields
-    
-        
     
     
     if ([[SYNDeviceManager sharedInstance] isPortrait])

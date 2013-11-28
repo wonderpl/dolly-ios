@@ -160,6 +160,7 @@
     self.registeringUserPasswordInputField.delegate = self;
     self.passwordInputField.font = [UIFont lightCustomFontOfSize: self.passwordInputField.font.pointSize];
     self.passwordInputField.delegate = self;
+    
     self.ddInputField.font = [UIFont lightCustomFontOfSize: self.ddInputField.font.pointSize];
     self.ddInputField.delegate = self;
     self.mmInputField.font = [UIFont lightCustomFontOfSize: self.mmInputField.font.pointSize];
@@ -169,12 +170,18 @@
     self.emailInputField.font = [UIFont lightCustomFontOfSize: self.emailInputField.font.pointSize];
     self.emailInputField.delegate = self;
     
+    self.passwordResetErrorLabel.font = [UIFont lightCustomFontOfSize: self.passwordResetErrorLabel.font.pointSize];
+    self.registeringUserErrorLabel.font = [UIFont lightCustomFontOfSize: self.registeringUserErrorLabel.font.pointSize];
+    
     self.loginErrorLabel.font = [UIFont lightCustomFontOfSize: self.loginErrorLabel.font.pointSize];
     self.passwordResetErrorLabel.font = [UIFont lightCustomFontOfSize: self.passwordResetErrorLabel.font.pointSize];
     self.signupErrorLabel.font = [UIFont lightCustomFontOfSize: self.signupErrorLabel.font.pointSize];
+    self.loginErrorLabel.font = [UIFont lightCustomFontOfSize: self.loginErrorLabel.font.pointSize];
     
     self.signUpButton.titleLabel.font = [UIFont lightCustomFontOfSize: 17.0f];
     self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize: 17.0f];
+    
+    self.passwordForgottenButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.passwordForgottenButton.titleLabel.font.pointSize];
     
     NSMutableAttributedString *termsString = [[NSMutableAttributedString alloc] initWithString: NSLocalizedString(@"register_screen_legal", nil)];
     
