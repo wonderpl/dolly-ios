@@ -952,7 +952,7 @@
                              
                              faceImageButton.alpha = 1.0;
                              CGRect faceRect = faceImageButton.frame;
-                             faceRect.origin.x = userNameInputField.frame.origin.x - 10.0 - faceRect.size.width;
+                             faceRect.origin.x = [[SYNDeviceManager sharedInstance] isPortrait] ? 32.0f : 102.0f;
                              faceImageButton.frame = faceRect;
                              
                              loginButton.alpha = 1.0;
