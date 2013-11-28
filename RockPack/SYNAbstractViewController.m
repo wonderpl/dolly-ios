@@ -227,17 +227,10 @@
 }
 
 
-
-
 -(void)clearedLocationBoundData
 {
     // to be implemented by child
 }
-- (BOOL) showSubGenres
-{
-    return YES;
-}
-
 
 
 -(void)setTitle:(NSString *)title
