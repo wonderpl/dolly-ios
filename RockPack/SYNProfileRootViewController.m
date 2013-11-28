@@ -1828,6 +1828,7 @@
 - (IBAction)editButtonTapped:(id)sender
 {
     
+    self.modeType = modeEditProfile;
     self.uploadCoverPhotoButton.hidden = NO;
     self.uploadAvatarButton.hidden = NO;
     self.uploadCoverPhotoButton.alpha = 0.0f;
@@ -1886,6 +1887,7 @@
 -(void) cancelEditModeTapped
 {
     
+        self.modeType = modeMyOwnProfile;
     CGRect tmpRect = self.aboutMeTextView.frame;
     tmpRect.origin.y -= 10;
     tmpRect.size.height -= 18;
@@ -1932,6 +1934,8 @@
 -(void) cancelEditCancelChannel
 {
     NSLog(@"cancelEditCancelChannel");
+    
+
 }
 
 -(void) saveCreateChannelTapped
