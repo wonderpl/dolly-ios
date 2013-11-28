@@ -33,8 +33,7 @@
 #define kScrollContentOff 100.0f
 #define kScrollSpeedBoundary 550.0f
 
-@interface SYNAbstractViewController ()  <UITextFieldDelegate,
-                                          UIPopoverControllerDelegate>
+@interface SYNAbstractViewController () <UIPopoverControllerDelegate>
 
 @property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
