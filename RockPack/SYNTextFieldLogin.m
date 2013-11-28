@@ -21,9 +21,9 @@
 - (CGRect) placeholderRectForBounds: (CGRect) bounds
 {
     if(self.keyboardType == UIKeyboardTypeNumberPad)
-        return CGRectOffset( bounds, 0.0f,  0.0f);
+        return CGRectOffset( bounds, 0.0f,  0.0f );
     else
-        return CGRectOffset( bounds, 10.0f,  0.0f);
+        return CGRectOffset( bounds, 10.0f,  0.0f );
 }
 
 - (CGRect) editingRectForBounds: (CGRect) bounds
@@ -43,8 +43,15 @@
     _errorMode = errorMode;
     if(_errorMode)
     {
-        UIColor* bgErrorColor = [UIColor colorWithRed:(251.0f/255.0f) green:(233.0f/255.0f) blue:(233.0f/255.0f) alpha:1.0f];
-        UIColor* borderErrorColor = [UIColor colorWithRed:(142.0f/255.0f) green:(22.0f/255.0f) blue:(41.0f/255.0f) alpha:1.0f];
+        UIColor* bgErrorColor = [UIColor colorWithRed:(251.0f/255.0f)
+                                                green:(233.0f/255.0f)
+                                                 blue:(233.0f/255.0f)
+                                                alpha:1.0f];
+        
+        UIColor* borderErrorColor = [UIColor colorWithRed:(142.0f/255.0f)
+                                                    green:(22.0f/255.0f)
+                                                     blue:(41.0f/255.0f)
+                                                    alpha:1.0f];
         
         self.textColor = borderErrorColor;
         self.backgroundColor = bgErrorColor;

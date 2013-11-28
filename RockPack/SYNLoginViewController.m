@@ -160,6 +160,7 @@
     loginButton.layer.borderWidth = 1.0;
     loginButton.layer.borderColor = [purple CGColor];
     loginButton.layer.cornerRadius = 8.0f;
+    
     [loginButton setTitleColor: purple forState:UIControlStateNormal];
     
     // first screen bottom
@@ -179,7 +180,7 @@
     self.faceImageButton.layer.borderColor = [UIColor colorWithRed:(167.0f/255.0f) green:(167.0f/255.0f) blue:(167.0f/255.0f) alpha:1.0f].CGColor;
     self.faceImageButton.layer.borderWidth = 1.0f;
     self.faceImageButton.layer.cornerRadius = self.faceImageButton.frame.size.width * 0.5f;
-    
+    self.faceImageButton.clipsToBounds = YES;
     facebookButtonInitialFrame = facebookSignInButton.frame;
     signUpButtonInitialFrame = signUpButton.frame;
         

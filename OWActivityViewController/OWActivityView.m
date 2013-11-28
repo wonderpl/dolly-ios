@@ -68,19 +68,12 @@
 
 - (UIView *) viewForActivity: (OWActivity *) activity index: (NSInteger) index x: (NSInteger) x y: (NSInteger) y
 {
-    /* wraps the activity which is an NSObject into a view */
     
-    UIView *view = [[UIView alloc] initWithFrame: CGRectMake(x, y, 50.0f, 50.0f)];
-    view.layer.cornerRadius = 25.0f;
-    view.layer.borderWidth = 1.0f;
-    view.layer.borderColor = [[UIColor blackColor] CGColor];
-    view.clipsToBounds = YES;
     
     UIButton *button = [UIButton buttonWithType: UIButtonTypeCustom];
     
     
-    // bad bad hack... for some reason you need to readjust the image so as not to end up distorted...
-    button.frame = CGRectMake(0.0f - (IS_IPHONE ? 25.0f : 0.0f), 0.0f , view.frame.size.width * (IS_IPHONE ? 2.0f : 1.0f) , view.frame.size.height);
+    button.frame = CGRectMake(x, y , 50.0f, 50.0f);
     button.tag = index;
     
     [button	addTarget: self
@@ -92,9 +85,8 @@
     
     button.accessibilityLabel = activity.title;
     
-    [view addSubview: button];
     
-    return view;
+    return button;
 }
 
 

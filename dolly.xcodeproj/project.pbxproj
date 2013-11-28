@@ -1030,6 +1030,10 @@
 		BE31EFB2182D4B13006E20E2 /* SYNAddToChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFB1182D4B13006E20E2 /* SYNAddToChannelCell.xib */; };
 		BE31EFB5183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFB4183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m */; };
 		BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFB918314CE8006E20E2 /* SYNAddToChannelFlowLayout.m */; };
+		BE35617A184786E40030CBA6 /* ShareAddEntry.png in Resources */ = {isa = PBXBuildFile; fileRef = BE356176184786E40030CBA6 /* ShareAddEntry.png */; };
+		BE35617B184786E40030CBA6 /* ShareFacebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BE356177184786E40030CBA6 /* ShareFacebookButton.png */; };
+		BE35617C184786E40030CBA6 /* ShareMailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BE356178184786E40030CBA6 /* ShareMailButton.png */; };
+		BE35617D184786E40030CBA6 /* ShareTwitterButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BE356179184786E40030CBA6 /* ShareTwitterButton.png */; };
 		BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */; };
 		BE3574EA17CE07B00083CBB1 /* SYNOneToOneSharingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */; };
 		BE3983DA176A0CD200EE9C7B /* onboarding_button_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3983D6176A0CD200EE9C7B /* onboarding_button_ok.png */; };
@@ -1181,10 +1185,6 @@
 		BE8F93AD17B3CFF400E7035F /* ButtonYesHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93A517B3CFF400E7035F /* ButtonYesHighlighted@2x.png */; };
 		BE8F93AE17B3CFF400E7035F /* ButtonYesHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93A617B3CFF400E7035F /* ButtonYesHighlighted@2x~iphone.png */; };
 		BE8F93AF17B3CFF400E7035F /* ButtonYesHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93A717B3CFF400E7035F /* ButtonYesHighlighted~iphone.png */; };
-		BE8F93B417B3D00700E7035F /* ImageFacebookImplicit.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B017B3D00700E7035F /* ImageFacebookImplicit.png */; };
-		BE8F93B517B3D00700E7035F /* ImageFacebookImplicit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B117B3D00700E7035F /* ImageFacebookImplicit@2x.png */; };
-		BE8F93B617B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B217B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png */; };
-		BE8F93B717B3D00700E7035F /* ImageFacebookImplicit~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B317B3D00700E7035F /* ImageFacebookImplicit~iphone.png */; };
 		BE8F93B917B3D22500E7035F /* SYNImplicitSharingController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE8F93B817B3D22500E7035F /* SYNImplicitSharingController~iphone.xib */; };
 		BEA043E716CAA8E1005406E7 /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA043E416CAA8E1005406E7 /* Genre.m */; };
 		BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA043E616CAA8E1005406E7 /* SubGenre.m */; };
@@ -2526,6 +2526,10 @@
 		BE31EFB4183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelExpandedFlowLayout.m; sourceTree = "<group>"; };
 		BE31EFB818314CE8006E20E2 /* SYNAddToChannelFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelFlowLayout.h; sourceTree = "<group>"; };
 		BE31EFB918314CE8006E20E2 /* SYNAddToChannelFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelFlowLayout.m; sourceTree = "<group>"; };
+		BE356176184786E40030CBA6 /* ShareAddEntry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareAddEntry.png; path = Assets/Images/ShareAddEntry.png; sourceTree = "<group>"; };
+		BE356177184786E40030CBA6 /* ShareFacebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareFacebookButton.png; path = Assets/Images/ShareFacebookButton.png; sourceTree = "<group>"; };
+		BE356178184786E40030CBA6 /* ShareMailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareMailButton.png; path = Assets/Images/ShareMailButton.png; sourceTree = "<group>"; };
+		BE356179184786E40030CBA6 /* ShareTwitterButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareTwitterButton.png; path = Assets/Images/ShareTwitterButton.png; sourceTree = "<group>"; };
 		BE3574E617CE07B00083CBB1 /* SYNOneToOneSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOneToOneSharingController.h; sourceTree = "<group>"; };
 		BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOneToOneSharingController.m; sourceTree = "<group>"; };
 		BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOneToOneSharingController.xib; sourceTree = "<group>"; };
@@ -2713,10 +2717,6 @@
 		BE8F93A517B3CFF400E7035F /* ButtonYesHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonYesHighlighted@2x.png"; path = "Assets/Images/ButtonYesHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE8F93A617B3CFF400E7035F /* ButtonYesHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonYesHighlighted@2x~iphone.png"; path = "Assets/Images/ButtonYesHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
 		BE8F93A717B3CFF400E7035F /* ButtonYesHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonYesHighlighted~iphone.png"; path = "Assets/Images/ButtonYesHighlighted~iphone.png"; sourceTree = "<group>"; };
-		BE8F93B017B3D00700E7035F /* ImageFacebookImplicit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ImageFacebookImplicit.png; path = Assets/Images/ImageFacebookImplicit.png; sourceTree = "<group>"; };
-		BE8F93B117B3D00700E7035F /* ImageFacebookImplicit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ImageFacebookImplicit@2x.png"; path = "Assets/Images/ImageFacebookImplicit@2x.png"; sourceTree = "<group>"; };
-		BE8F93B217B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ImageFacebookImplicit@2x~iphone.png"; path = "Assets/Images/ImageFacebookImplicit@2x~iphone.png"; sourceTree = "<group>"; };
-		BE8F93B317B3D00700E7035F /* ImageFacebookImplicit~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ImageFacebookImplicit~iphone.png"; path = "Assets/Images/ImageFacebookImplicit~iphone.png"; sourceTree = "<group>"; };
 		BE8F93B817B3D22500E7035F /* SYNImplicitSharingController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNImplicitSharingController~iphone.xib"; sourceTree = "<group>"; };
 		BE905DF417AABCD3004B8BD2 /* Rockpack 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 9.xcdatamodel"; sourceTree = "<group>"; };
 		BEA043E316CAA8E1005406E7 /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
@@ -4551,6 +4551,10 @@
 		1FD2856417BBA1640094F488 /* Share Panel */ = {
 			isa = PBXGroup;
 			children = (
+				BE356176184786E40030CBA6 /* ShareAddEntry.png */,
+				BE356177184786E40030CBA6 /* ShareFacebookButton.png */,
+				BE356178184786E40030CBA6 /* ShareMailButton.png */,
+				BE356179184786E40030CBA6 /* ShareTwitterButton.png */,
 				010AAE9317D9EF48001DD5FA /* ShareFacebookButton@2x.png */,
 				010AAE9717D9EF48001DD5FA /* ShareMailButton@2x.png */,
 				010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */,
@@ -5595,14 +5599,10 @@
 				BE8F93A517B3CFF400E7035F /* ButtonYesHighlighted@2x.png */,
 				BE8F93A617B3CFF400E7035F /* ButtonYesHighlighted@2x~iphone.png */,
 				BE8F93A717B3CFF400E7035F /* ButtonYesHighlighted~iphone.png */,
-				BE8F93B017B3D00700E7035F /* ImageFacebookImplicit.png */,
-				BE8F93B117B3D00700E7035F /* ImageFacebookImplicit@2x.png */,
-				BE8F93B217B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png */,
 				BE06EFA217DB6C810028F2E3 /* ShareUnconnectedabaccess.png */,
 				BE06EFA317DB6C810028F2E3 /* ShareUnconnectedabaccess@2x.png */,
 				BE06EFA417DB6C810028F2E3 /* ShareUnconnectedFbConnect.png */,
 				BE06EFA517DB6C810028F2E3 /* ShareUnconnectedFbConnect@2x.png */,
-				BE8F93B317B3D00700E7035F /* ImageFacebookImplicit~iphone.png */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -6024,6 +6024,7 @@
 				01946B5B1683209600354601 /* PanelVideoGlow.png in Resources */,
 				01946B5C1683209600354601 /* PanelVideoGlow@2x.png in Resources */,
 				01B34C9816A99D6A002AD8FB /* GlossChannelThumbnail.png in Resources */,
+				BE35617A184786E40030CBA6 /* ShareAddEntry.png in Resources */,
 				01B34C9916A99D6A002AD8FB /* GlossChannelThumbnail@2x.png in Resources */,
 				BEF3E588183682FF006DECD0 /* IconFriendsEmpty.png in Resources */,
 				1FFAE62C17E21BBC006C92CA /* ShadowPanelFriends~iphone.png in Resources */,
@@ -6135,6 +6136,7 @@
 				01AEFBD11701AC870060467A /* AccountSettingsView@2x.png in Resources */,
 				BE57C02A1843608500C6444A /* SYNOnBoardingCell~iphone.xib in Resources */,
 				01AEFBD81701ACD60060467A /* DividerSearch.png in Resources */,
+				BE35617C184786E40030CBA6 /* ShareMailButton.png in Resources */,
 				BEB31366181AB81600FAF98A /* IconVideoAddDefault@2x.png in Resources */,
 				01AEFBD91701ACD60060467A /* DividerSearch@2x.png in Resources */,
 				01AEFBE21701ACFD0060467A /* popover-black-bcg-image.png in Resources */,
@@ -6165,6 +6167,7 @@
 				1F4E7F88181AC7D300F59007 /* TabSearchSelected@2x.png in Resources */,
 				1F458B0E17E1C6F8003C14AC /* AppIcon50x50.png in Resources */,
 				BEB312FF1815638700FAF98A /* TabProfile@2x.png in Resources */,
+				BE35617B184786E40030CBA6 /* ShareFacebookButton.png in Resources */,
 				1F4E7FC5181ACBAA00F59007 /* TabSearch@2x~iphone.png in Resources */,
 				BE7D34F21715AD060085AB81 /* ButtonNavHighlighted.png in Resources */,
 				BE7D34F31715AD060085AB81 /* ButtonNavHighlighted@2x.png in Resources */,
@@ -6977,6 +6980,7 @@
 				BEBFD0A7177A039D00C90544 /* ButtonPrivateRight@2x.png in Resources */,
 				BEB3135B18182D6A00FAF98A /* SearchVideosResultsForMichael.json in Resources */,
 				BEBFD0A8177A039D00C90544 /* ButtonPrivateRightHighlighted.png in Resources */,
+				BE35617D184786E40030CBA6 /* ShareTwitterButton.png in Resources */,
 				BEBFD0A9177A039D00C90544 /* ButtonPrivateRightHighlighted@2x.png in Resources */,
 				BEBFD0AC177A03D200C90544 /* PanelPrivateAlert.png in Resources */,
 				BEBFD0AD177A03D200C90544 /* PanelPrivateAlert@2x.png in Resources */,
@@ -7064,10 +7068,6 @@
 				BE8F93AD17B3CFF400E7035F /* ButtonYesHighlighted@2x.png in Resources */,
 				BE8F93AE17B3CFF400E7035F /* ButtonYesHighlighted@2x~iphone.png in Resources */,
 				BE8F93AF17B3CFF400E7035F /* ButtonYesHighlighted~iphone.png in Resources */,
-				BE8F93B417B3D00700E7035F /* ImageFacebookImplicit.png in Resources */,
-				BE8F93B517B3D00700E7035F /* ImageFacebookImplicit@2x.png in Resources */,
-				BE8F93B617B3D00700E7035F /* ImageFacebookImplicit@2x~iphone.png in Resources */,
-				BE8F93B717B3D00700E7035F /* ImageFacebookImplicit~iphone.png in Resources */,
 				BE8F93B917B3D22500E7035F /* SYNImplicitSharingController~iphone.xib in Resources */,
 				1F65D49417EB3D13004326A9 /* Default-Portrait-iOS7~ipad.png in Resources */,
 				1F4E7FB3181ACBAA00F59007 /* TabFeed@2x~iphone.png in Resources */,
