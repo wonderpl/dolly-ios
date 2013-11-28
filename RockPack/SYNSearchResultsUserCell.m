@@ -19,7 +19,9 @@
     self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabelButton.titleLabel.font.pointSize];
     
     
-    
+    self.separatorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 320.0f, 15.0f)];
+    self.separatorView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f];
+    [self addSubview:self.separatorView];
 }
 
 
@@ -84,6 +86,19 @@
     
 }
 
-
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if(IS_IPHONE)
+    {
+        CGRect sFrame = self.separatorView.frame;
+        sFrame.origin.y = self.frame.size.height - 1.0f;
+        
+        self.separatorView.frame = sFrame;
+        
+    }
+    
+}
 
 @end

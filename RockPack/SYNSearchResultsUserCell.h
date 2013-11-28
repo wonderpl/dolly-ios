@@ -20,4 +20,6 @@
 @property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
 
+@property (nonatomic, strong) UIView* separatorView;
+
 @end

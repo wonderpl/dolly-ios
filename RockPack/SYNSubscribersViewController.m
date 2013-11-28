@@ -219,8 +219,6 @@
 		[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
     }
     
-    [super collectionView: collectionView
-           didSelectItemAtIndexPath: indexPath];
 }
 
 

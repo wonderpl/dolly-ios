@@ -508,6 +508,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         CGRect currentOverlayFrame = self.overlayController.view.frame;
         currentOverlayFrame.size = self.overlayControllerFrame.size;
         currentOverlayFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5f - currentOverlayFrame.size.width * 0.5;
+        currentOverlayFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5f - currentOverlayFrame.size.height * 0.5;
         self.overlayController.view.frame = currentOverlayFrame;
     }
 
