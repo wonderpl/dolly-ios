@@ -40,8 +40,6 @@
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
 @property (readonly) NSManagedObjectContext *mainManagedObjectContext;
 
-- (void) performAction: (NSString *) action withObject: (id) object;
-
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex;
@@ -82,7 +80,5 @@
 - (void) applicationWillEnterForeground: (UIApplication *) application;
 
 - (CGSize) footerSize;
-
-- (void) checkForOnBoarding;
 
 @end

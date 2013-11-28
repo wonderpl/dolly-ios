@@ -1426,22 +1426,6 @@
 
 #pragma mark - Arc menu support
 
-- (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
-                        andComponentIndex: (NSInteger) componentIndex
-{
-    Channel *channel = (Channel *) self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-    
-    return channel;
-}
-
-
-- (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
-{
-    NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForCell: cell];
-    return  indexPath;
-}
-
-
 - (void) displayNameButtonPressed: (UIButton *) button
 {
     SYNChannelThumbnailCell *parent = (SYNChannelThumbnailCell *) [[button superview] superview];

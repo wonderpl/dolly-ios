@@ -571,17 +571,6 @@
 }
 
 
-
-
-
-#pragma mark - Purchase
-
-- (void) performAction: (NSString *) action withObject: (id) object
-{
-    // to be implemented by subclass
-}
-
-
 #pragma mark - Load more footer
 
 // Load more footer
@@ -610,27 +599,6 @@
     
     // and then make a class appropriate data call
 
-}
-
-
-- (VideoInstance *) videoInstanceForIndexPath: (NSIndexPath *) indexPath
-{
-    AssertOrLog(@"Shouldn't be calling abstract function");
-    return  nil;
-}
-
-- (Channel *) channelInstanceForIndexPath: (NSIndexPath *) indexPath
-                        andComponentIndex: (NSInteger) componentIndex
-{
-    AssertOrLog(@"Shouldn't be calling abstract function");
-    return  nil;
-}
-
-
-- (NSIndexPath *) indexPathForChannelCell: (UICollectionViewCell *) cell
-{
-    AssertOrLog(@"Shouldn't be calling abstract function");
-    return  nil;
 }
 
 - (void) followControlPressed: (SYNSocialButton *) socialControl
@@ -697,15 +665,6 @@
         // TODO: Follow all his channels
     }
 }
-
-
-
-
-- (void) checkForOnBoarding
-{
-    // to be implemented in subclass
-}
-
 
 - (UIStatusBarStyle) preferredStatusBarStyle
 {
