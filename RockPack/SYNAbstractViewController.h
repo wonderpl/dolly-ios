@@ -37,7 +37,6 @@
 @property (nonatomic) NSRange dataRequestRange;
 @property (nonatomic, assign, getter = isLoadingMoreContent) BOOL loadingMoreContent;
 @property (nonatomic, readonly) NSString *viewId;
-@property (nonatomic, strong) IBOutlet UICollectionView *videoThumbnailCollectionView;
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
 @property (readonly) NSManagedObjectContext *mainManagedObjectContext;
 

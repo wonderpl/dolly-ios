@@ -168,18 +168,6 @@
 
 #pragma mark -
 
-- (NSIndexPath *) indexPathFromVideoInstanceButton: (UIButton *) button
-{
-    UIView* target = button;
-    while (target && ![target isKindOfClass:[UICollectionViewCell class]])
-    {
-        target = [target superview];
-    }
-    NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: target.center];
-    
-    return indexPath;
-}
-
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
