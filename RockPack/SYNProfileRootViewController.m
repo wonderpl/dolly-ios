@@ -29,6 +29,8 @@
 #import "SYNChannelDetailsViewController.h"
 #import "UIImage+blur.h"
 #import "SYNProfileFlowLayout.h"
+#import "SYNChannelCreateNewCell.h"
+#import "SYNProfileExpandedFlowLayout.h"
 
 @import QuartzCore;
 
@@ -44,11 +46,13 @@
 #define ALPHA_IN_EDIT 0.4f
 #define OFFSET_DESCRIPTION_EDIT 130.0f
 #define PARALLAX_SCROLL_VALUE 2.0f
+#define kHeightChange 70.0f
+
 
 //delete function in channeldetails deletechannel
 
 
-@interface SYNProfileRootViewController () <UIGestureRecognizerDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate> {
+@interface SYNProfileRootViewController () <UIGestureRecognizerDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate,SYNChannelCreateNewCelllDelegate> {
     ProfileType modeType;
     
 }
@@ -87,6 +91,8 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPhone;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
+@property (strong, nonatomic) SYNProfileExpandedFlowLayout *channelExpandedLayout;
+
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UIView *userProfileView;
@@ -117,8 +123,11 @@
 @property (strong, nonatomic) IBOutlet UIView *containerViewIPad;
 @property (nonatomic) ProfileType modeType;
 @property (nonatomic) CGPoint offsetBeforeSearch;
-@property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
-@property (strong, nonatomic) UIBarButtonItem *barBtnSave;
+@property (strong, nonatomic) UIBarButtonItem *barBtnCancelEditMode;
+@property (strong, nonatomic) UIBarButtonItem *barBtnCancelCreateChannel;
+@property (strong, nonatomic) UIBarButtonItem *barBtnSaveEditMode;
+@property (strong, nonatomic) UIBarButtonItem *barBtnSaveCreateChannel;
+
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
@@ -180,12 +189,14 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    self.shouldBeginEditing = YES;
     
+    
+    self.shouldBeginEditing = YES;
     self.collectionsTabActive = YES;
+    
+    // == Masking Images into a circle
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
-    
     self.uploadAvatarButton.layer.cornerRadius = self.uploadAvatarButton.frame.size.width/2;
     self.uploadAvatarButton.layer.masksToBounds = YES;
     self.uploadCoverPhotoButton.layer.cornerRadius = self.uploadCoverPhotoButton.frame.size.width/2;
@@ -193,6 +204,9 @@
     
     self.greyColor = [UIColor dollyTabColorSelectedBackground];
     self.tabTextColor = [UIColor dollyTabColorSelectedText];
+    
+    
+    // == Registering nibs
     
     UINib *searchCellNib = [UINib nibWithNibName: @"SYNChannelSearchCell"
                                           bundle: nil];
@@ -218,11 +232,14 @@
     
     self.isIPhone = IS_IPHONE;
     
-    // Main Collection View
+
+    self.channelExpandedLayout = [[SYNProfileExpandedFlowLayout alloc]init];
+
+    
+    // == Main Collection View
     if (IS_IPHONE)
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
-        
         
         self.testLayoutIPhone = [[SYNProfileFlowLayout alloc]init];
         
@@ -291,19 +308,32 @@
     
 
     
-    self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelTapped)];
-    self.barBtnCancel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
+    self.barBtnCancelEditMode = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelEditModeTapped)];
+    self.barBtnCancelEditMode.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
                                                   green: (66.0f / 255.0f)
                                                    blue: (42.0f / 255.0f)
                                                   alpha: 1.0f];
     
+    self.barBtnCancelCreateChannel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelEditCancelChannel)];
+    self.barBtnCancelCreateChannel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
+                                                          green: (66.0f / 255.0f)
+                                                           blue: (42.0f / 255.0f)
+                                                          alpha: 1.0f];
+
     
-    self.barBtnSave= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveTapped)];
+    self.barBtnSaveEditMode= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveEditModeTapped)];
     
-    self.barBtnSave.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
+    self.barBtnSaveEditMode.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
                                                 green: (210.0f / 255.0f)
                                                  blue: (42.0f / 255.0f)
                                                 alpha: 1.0f];
+    
+    self.barBtnSaveCreateChannel = [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveCreateChannelTapped)];
+    
+    self.barBtnSaveCreateChannel.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
+                                                        green: (210.0f / 255.0f)
+                                                         blue: (42.0f / 255.0f)
+                                                        alpha: 1.0f];
 
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
 
@@ -690,12 +720,7 @@
     
     //    self.navigationController.navigationBarHidden = YES;
     
-    if (self.isIPhone)
-    {
-        self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
-        self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
-    }
-    else
+    if (!self.isIPhone)
     {
         self.channelThumbnailCollectionView.contentOffset = CGPointZero;
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
@@ -827,9 +852,11 @@
     
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        SYNAddToChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+        SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
                                                                                              forIndexPath: indexPath];
         cell = createCell;
+        ((SYNChannelCreateNewCell*)cell).viewControllerDelegate = self;
+
     }
     else
     {
@@ -959,48 +986,6 @@
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    /*
-     if (self.isUserProfile  && indexPath.row == 0 && [collectionView isEqual:self.subscriptionThumbnailCollectionView])
-     {
-     return CGSizeMake(320, 44);
-     }*/
-    
-    
-    if (self.isUserProfile  && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView] && IS_IPHONE)
-    {
-        return CGSizeMake(320, 60);
-    }
-    
-    
-    if (collectionView == self.channelThumbnailCollectionView)
-    {
-        if (IS_IPHONE)
-        {
-            return self.channelLayoutIPhone.itemSize;
-        }
-        else
-        {
-            return self.channelLayoutIPad.itemSize;
-        }
-    }
-    
-    if (collectionView == self.subscriptionThumbnailCollectionView)
-    {
-        if (IS_IPHONE)
-        {
-            return self.subscriptionLayoutIPhone.itemSize;
-        }
-        else{
-            
-            
-            return self.subscriptionLayoutIPad.itemSize;
-        }
-    }
-    
-    
-    return CGSizeZero;
-}
 
 
 
@@ -1805,7 +1790,6 @@
 - (IBAction)moreButtonTapped:(id)sender
 {
     
-    
     SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
     
     // Set frame to full screen
@@ -1855,8 +1839,8 @@
         self.followersCountButton.alpha = 0.0f;
 
         self.barBtnBack = self.navigationItem.leftBarButtonItem;
-        self.navigationItem.leftBarButtonItem = self.barBtnCancel;
-        self.navigationItem.rightBarButtonItem = self.barBtnSave;
+        self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
+        self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
         
         self.aboutMeTextView.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:1.0];
         self.uploadCoverPhotoButton.alpha = 1.0f;
@@ -1874,16 +1858,15 @@
         }
         [[self.aboutMeTextView layer] setCornerRadius:0];
 
-        
-        
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
         self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
 
     }];
 }
+#pragma mark - Navigation item methods
 
 //Navigation bar item cancel
--(void) cancelTapped
+-(void) cancelEditModeTapped
 {
     
     CGRect tmpRect = self.aboutMeTextView.frame;
@@ -1928,13 +1911,24 @@
 
 }
 
--(void) saveTapped
+
+-(void) cancelEditCancelChannel
+{
+    NSLog(@"cancelEditCancelChannel");
+}
+
+-(void) saveCreateChannelTapped
+{
+    NSLog(@"saveCreateChannelTapped");
+}
+
+-(void) saveEditModeTapped
 {
     
     [self updateField:@"description" forValue:self.aboutMeTextView.text withCompletionHandler:^{
         appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
         [appDelegate saveContext: YES];
-        [self cancelTapped];
+        [self cancelEditModeTapped];
     
     }];
 //
@@ -2131,5 +2125,88 @@ finishedWithImage: (UIImage *) image
     
 }
 
+-(void)createNewButtonPressed
+{
+    
+    
+    NSLog(@"create cell");
+    for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
+    {
+        NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
+        
+
+        __block int index = indexPathForCell.row;
+        void (^animateEditMode)(void) = ^{
+            
+            CGRect frame = cell.frame;
+            
+            if (index == 0)
+            {
+                NSLog(@"index 0");
+                frame.size.height = 114;
+                ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 0.0;
+                ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 1.0;
+                
+                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                tmpBoarder.size.height+= 114;
+                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+            }
+            else
+            {
+                if (IS_IPHONE)
+                {
+                    frame.origin.y += 114;
+                }
+                
+                if (IS_IPAD)
+                {
+                    
+                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+//                        frame.origin.y +=((index/2)*kHeightChange);
+//                        frame.size.height +=kHeightChange;
+                    }
+                    else
+                    {
+//                        frame.origin.y +=((index/3)*kHeightChange);
+//                        frame.size.height +=kHeightChange;
+                        
+                    }
+                }
+            }
+            
+            cell.frame = frame;
+        };
+        
+        [UIView transitionWithView:cell
+                          duration:0.5f
+                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                        animations:animateEditMode
+                        completion:^(BOOL finished) {
+                            
+                            
+                        }];
+        
+        [UIView animateKeyframesWithDuration:0.2 delay:0.2 options:UIViewAnimationCurveEaseInOut animations:^{
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
+            self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
+            self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
+
+        } completion:Nil];
+        
+    }
+    
+    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
+}
+
+-(void) updateCollectionLayout
+{
+  //  self.channelThumbnailCollectionView.collectionViewLayout = self.channelExpandedLayout;
+        CGPoint tmpPoint = self.channelThumbnailCollectionView.contentOffset;
+
+    [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelExpandedLayout animated:YES];
+    
+    self.channelThumbnailCollectionView.contentOffset = tmpPoint;
+    [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
+}
 
 @end
