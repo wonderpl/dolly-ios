@@ -151,6 +151,9 @@
                                         </state>
                                         <state key="selected" image="ButtonVideoOverlayShareSelected.png"/>
                                         <state key="highlighted" image="ButtonVideoOverlayShareHighlighted.png"/>
+                                        <connections>
+                                            <action selector="shareButtonPressed:" destination="kjH-hT-nk9" eventType="touchUpInside" id="oi9-xB-JNK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

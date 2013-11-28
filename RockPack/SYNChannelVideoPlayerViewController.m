@@ -247,6 +247,12 @@
 	[self addControlPressed:button];
 }
 
+- (IBAction)shareButtonPressed:(UIButton *)videoShareButton {
+	VideoInstance *videoInstance = self.videoInstances[self.selectedIndex];
+	
+	[self shareVideoInstance: videoInstance];
+}
+
 #pragma mark - Notifications
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
