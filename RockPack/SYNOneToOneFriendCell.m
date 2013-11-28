@@ -33,9 +33,14 @@
                                                           blue: (170.0f / 255.0f)
                                                          alpha: 1.0f];
         
-        CGRect svFrame = CGRectMake(0.0, 0.0f, 0.0f, 1.0f);
+        
+        
+        CGRect svFrame = CGRectMake(0.0, 0.0f, 0.0f, 0.5f);
         self.customSeparatorView = [[UIView alloc] initWithFrame: svFrame];
-        self.customSeparatorView.backgroundColor = [UIColor lightGrayColor];
+        self.customSeparatorView.backgroundColor = [UIColor colorWithRed: (232.0f / 255.0f)
+                                                                   green: (232.0f / 255.0f)
+                                                                    blue: (232.0f / 255.0f)
+                                                                   alpha: 1.0f];
         
         
         [self addSubview: self.customSeparatorView];

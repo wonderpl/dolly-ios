@@ -56,6 +56,8 @@
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
+    // set general styling things
+    
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
                                                            NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0f]}];
     
@@ -64,6 +66,9 @@
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:nil
                                                                   action:nil];
+    
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont regularCustomFontOfSize:15]];
+
     
     // sets the tint to gray for all navigatin controllers
     self.view.tintColor = [UIColor grayColor];
