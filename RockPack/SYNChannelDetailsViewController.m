@@ -474,31 +474,7 @@ UIPopoverControllerDelegate>
         [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
     
-    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
-    
-    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    
-    if (IS_RETINA) {
-        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
-    }
-    else
-    {
-        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
-    }
-    [[self.txtFieldChannelName layer] setCornerRadius:0];
-    
-    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
-    
-    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    if (IS_RETINA)
-    {
-        [[self.txtViewDescription layer] setBorderWidth:0.5];
-    }
-    else
-    {
-        [[self.txtViewDescription layer] setBorderWidth:1.0];
-    }
-    [[self.txtViewDescription layer] setCornerRadius:0];
+
     
     [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
                         forCellWithReuseIdentifier: CollectionVideoCellName];
@@ -546,6 +522,31 @@ UIPopoverControllerDelegate>
         self.lblNoVideos.hidden = YES;
     }
     
+    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
+    
+    if (IS_RETINA) {
+        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
+    }
+    else
+    {
+        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    }
+    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+
+    [[self.txtFieldChannelName layer] setCornerRadius:0];
+    
+    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
+    
+    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    if (IS_RETINA)
+    {
+        [[self.txtViewDescription layer] setBorderWidth:0.5];
+    }
+    else
+    {
+        [[self.txtViewDescription layer] setBorderWidth:1.0];
+    }
+    [[self.txtViewDescription layer] setCornerRadius:0];
 
     //should not have to do this, check.
     [self.btnDeleteChannel setBackgroundColor:[UIColor whiteColor]];
