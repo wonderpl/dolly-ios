@@ -297,16 +297,22 @@
 #pragma mark - Search
 
 - (MKNetworkOperation *) usersForGenreId: (NSString *) genreId
+                                forRange: (NSRange) range
                        completionHandler: (MKNKSearchSuccessBlock) completionBlock;
 {
 
+    NSMutableDictionary *parameters = @{}.mutableCopy;
     
-    NSDictionary *parameters = [self getLocaleParamWithParams:@{@"category" : genreId}];
+    if(![genreId isEqualToString:kPopularGenreUniqueId]) // else -> 'POPULAR' SubGenre passed, do not create a 'category' argument
+        parameters[@"category"] = genreId;
     
+    
+    parameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
+    parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
     
     SYNNetworkOperationJsonObject *networkOperation =
     (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPISearchUsers
-                                                       params: parameters];
+                                                       params: [self getLocaleParamWithParams:parameters]];
     networkOperation.shouldNotCacheResponse = YES;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
@@ -355,19 +361,22 @@
 }
 
 - (MKNetworkOperation *) videosForGenreId: (NSString *) genreId
+                                 forRange: (NSRange) range
                         completionHandler: (MKNKSearchSuccessBlock) completionBlock
 {
     
     if(!genreId) return nil;
     
-    NSDictionary *parameters;
-    if([genreId isEqualToString:kPopularGenreUniqueId]) // 'POPULAR' SubGenre passed, do not create a 'category' argument
-        parameters = [self getLocaleParam];
-    else
-        parameters = [self getLocaleParamWithParams:@{@"category" : genreId}];
+    NSMutableDictionary *parameters = @{}.mutableCopy;
+    if(![genreId isEqualToString:kPopularGenreUniqueId]) // else -> 'POPULAR' SubGenre passed, do not create a 'category' argument
+        parameters[@"category"] = genreId;
+    
+    parameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
+    parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIVideos
-                                                                                                         params: parameters];
+                                                                                                         params: [self getLocaleParamWithParams:parameters]];
     networkOperation.shouldNotCacheResponse = YES;
     
     

@@ -97,9 +97,11 @@
                      errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 - (MKNetworkOperation *) videosForGenreId: (NSString *) genreId
+                                 forRange: (NSRange) range
                         completionHandler: (MKNKSearchSuccessBlock) completionBlock;
 
 - (MKNetworkOperation *) usersForGenreId: (NSString *) genreId
+                                forRange: (NSRange) range
                        completionHandler: (MKNKSearchSuccessBlock) completionBlock;
 
 

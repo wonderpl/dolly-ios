@@ -12,6 +12,7 @@
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchResultsViewController.h"
 #import "UIFont+SYNFont.h"
+#import "SYNChannelFooterMoreView.h"
 
 #import "UIColor+SYNColor.h"
 
@@ -22,6 +23,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 static NSString *kSearchResultVideoCell = @"SYNSearchResultsVideoCell";
 static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
+static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
 
 @interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -31,6 +33,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 // search operations
 @property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
+
+// @property (nonatomic) NSRange dataRequestRange; is from SYNAbstract, here we need a second for users
+@property (nonatomic) NSRange dataRequestRange2;
+@property (nonatomic) NSInteger dataItemsAvailable2;
 
 
 @property (nonatomic) SearchResultsShowing searchResultsShowing;
@@ -45,6 +51,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 // Data Arrays
 @property (nonatomic, strong) NSArray *videosArray;
 @property (nonatomic, strong) NSArray *usersArray;
+
+@property (nonatomic, strong) NSString* currentSearchGenre;
 
 
 
@@ -71,6 +79,10 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     [self.usersCollectionView registerNib: [UINib nibWithNibName: kSearchResultUserCell bundle: nil]
                forCellWithReuseIdentifier: kSearchResultUserCell];
+    
+    [self.usersCollectionView registerNib: [UINib nibWithNibName:kSearchResultChannelFooter  bundle: nil]
+               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+                      withReuseIdentifier: kSearchResultChannelFooter];
     
     self.containerTabs.layer.cornerRadius = 4.0f;
     self.containerTabs.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -100,6 +112,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         if (wself.searchResultsShowing == SearchResultsShowingVideos)
             [wself removePopupMessage];
         
+        wself.loadingMoreContent = NO;
+        
         
         [wself.videosCollectionView reloadData];
     };
@@ -123,6 +137,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         if (wself.searchResultsShowing == SearchResultsShowingUsers)
             [wself removePopupMessage];
         
+        wself.loadingMoreContent = NO;
+        
         [wself.usersCollectionView reloadData];
     };
     
@@ -130,6 +146,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     
     // Set Initial
     self.searchResultsShowing = SearchResultsShowingVideos;
+    
+    self.dataRequestRange2 = self.dataRequestRange; // they start off as (0, 48) for both...
     
 }
 
@@ -175,17 +193,52 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
 
 #pragma mark - Load Data
 
+// overload to support the second range
+- (void) resetDataRequestRange
+{
+    // sets the first range
+    [super resetDataRequestRange];
+    
+    //sets the second range
+    self.dataRequestRange2 = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
+}
+
 - (void) searchForGenre: (NSString *) genreId
 {
-    [self clearSearchEntities];
+    
+    if([_currentSearchGenre isEqualToString: genreId])
+    {
+        return;
+    }
+    
+    [self resetDataRequestRange];
+    
+    // we either store one or the other
+    _currentSearchGenre = genreId;
+    _currentSearchTerm = nil;
+    
+    if(!_currentSearchGenre)
+    {
+        return;
+    }
+    
+    
+    if(![self clearSearchEntities])
+    {
+        return;
+    }
     
     [self displayPopupMessage:@"Searching..." withLoader:YES];
     
-    self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId:genreId
-                                                          completionHandler:self.videoSearchCompleteBlock];
+    // == Perform Search for Genre == //
     
-    self.userSearchOperation = [appDelegate.networkEngine usersForGenreId:genreId
-                                                         completionHandler:self.userSearchCompleteBlock];
+    self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId: _currentSearchGenre
+                                                                   forRange: self.dataRequestRange
+                                                          completionHandler: self.videoSearchCompleteBlock];
+    
+    self.userSearchOperation = [appDelegate.networkEngine usersForGenreId: _currentSearchGenre
+                                                                 forRange: self.dataRequestRange2
+                                                        completionHandler: self.userSearchCompleteBlock];
 }
 
 - (void) searchForTerm: (NSString *) newSearchTerm
@@ -196,7 +249,9 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         return;
     }
     
+    // we either store one or the other
     _currentSearchTerm = newSearchTerm;
+    _currentSearchGenre = nil;
     
     if (!_currentSearchTerm)
     {
@@ -207,6 +262,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     {
         return;
     }
+    
+    [self resetDataRequestRange];
     
     [self displayPopupMessage:@"Searching..." withLoader:YES];
     
@@ -369,6 +426,110 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     }
 }
 
+- (CGSize) collectionView: (UICollectionView *) collectionView
+                   layout: (UICollectionViewLayout*) collectionViewLayout
+referenceSizeForFooterInSection: (NSInteger) section
+{
+    if ((self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable)) {
+		return [self footerSize];
+	}
+    return CGSizeZero;
+}
+
+- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
+            viewForSupplementaryElementOfKind: (NSString *) kind
+                                  atIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionReusableView *supplementaryView = nil;
+    
+	if (kind == UICollectionElementKindSectionFooter)
+    {
+        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                             withReuseIdentifier: kSearchResultChannelFooter
+                                                                    forIndexPath: indexPath];
+        supplementaryView = self.footerView;
+        
+        if ((self.dataRequestRange.location + self.dataRequestRange.length) < self.dataItemsAvailable)
+        {
+            self.footerView.showsLoading = self.isLoadingMoreContent;
+        }
+    }
+    
+    return supplementaryView;
+}
+
+- (void) scrollViewDidScroll: (UIScrollView *) scrollView
+{
+    [super scrollViewDidScroll:scrollView];
+    
+    if(scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight && !self.isLoadingMoreContent)
+    {
+        // Videos
+        if(scrollView == self.videosCollectionView && self.moreItemsToLoad)
+        {
+            [self incrementRangeForNextRequest];
+            
+            if(_currentSearchGenre)
+            {
+                self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId: _currentSearchGenre
+                                                                               forRange: self.dataRequestRange
+                                                                      completionHandler: self.videoSearchCompleteBlock];
+                
+                
+                
+            }
+            else if(_currentSearchTerm)
+            {
+                self.videoSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
+                                                                                   inRange: self.dataRequestRange
+                                                                                onComplete: self.videoSearchCompleteBlock];
+                
+            }
+            
+        }
+        else if (scrollView == self.usersCollectionView && self.moreItemsToLoad2)
+        {
+            [self incrementRangeForNextRequest2];
+            
+            if(_currentSearchGenre)
+            {
+                self.userSearchOperation = [appDelegate.networkEngine usersForGenreId: _currentSearchGenre
+                                                                             forRange: self.dataRequestRange2
+                                                                    completionHandler: self.userSearchCompleteBlock];
+            }
+            else if(_currentSearchTerm)
+            {
+                
+                self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
+                                                                                andRange: self.dataRequestRange
+                                                                             byAppending: NO
+                                                                              onComplete: self.userSearchCompleteBlock];
+            }
+        }
+    }
+    
+    
+   
+}
+
+// extra methods to support second range (users search range)
+
+- (BOOL) moreItemsToLoad2
+{
+    return (self.dataRequestRange2.location + self.dataRequestRange2.length < self.dataItemsAvailable2);
+}
+
+- (void) incrementRangeForNextRequest2
+{
+    if(!self.moreItemsToLoad2)
+        return;
+    
+    NSInteger nextStart = self.dataRequestRange2.location + self.dataRequestRange2.length;
+    
+    NSInteger nextSize = MIN(STANDARD_REQUEST_LENGTH, self.dataItemsAvailable2 - nextStart);
+    
+    self.dataRequestRange2 = NSMakeRange(nextStart, nextSize);
+}
 
 #pragma mark - Tabs Delegate
 
@@ -434,6 +595,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
         [_videoSearchOperation cancel];
     }
     
+    self.loadingMoreContent = YES;
+    
     _videoSearchOperation = runningSearchOperation;
 }
 
@@ -444,6 +607,8 @@ static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
     {
         [_userSearchOperation cancel];
     }
+    
+    self.loadingMoreContent = YES;
     
     _userSearchOperation = runningSearchOperation;
 }
