@@ -122,10 +122,7 @@
         return [[UIScreen mainScreen] bounds].size.width;
 }
 
--(CGFloat)currentScreenHeightWithStatusBar
-{
-    return [self currentScreenHeight]  - (IS_IOS_7_OR_GREATER ? 0.0f : 20.0f);
-}
+
 
 -(UIInterfaceOrientation)currentOrientation
 {

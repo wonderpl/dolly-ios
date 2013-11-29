@@ -437,7 +437,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                         options: UIViewAnimationOptionCurveEaseOut
                      animations: ^{
                          CGRect newFrame = messageView.frame;
-                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] - newFrame.size.height;
+                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - newFrame.size.height;
                          messageView.frame = newFrame;
                      }
                      completion: ^(BOOL finished) {
@@ -447,7 +447,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                                              options: UIViewAnimationOptionCurveEaseIn
                                           animations: ^{
                                               CGRect newFrame = messageView.frame;
-                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
+                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] + newFrame.size.height;
                                               messageView.frame = newFrame;
                                           }
                                           completion: ^(BOOL finished) {
@@ -470,7 +470,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                      animations: ^{
                          
                          CGRect newFrame = self.networkErrorNotificationView.frame;
-                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeightWithStatusBar] + newFrame.size.height;
+                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] + newFrame.size.height;
                          self.networkErrorNotificationView.frame = newFrame;
                      }
                      completion: ^(BOOL finished) {

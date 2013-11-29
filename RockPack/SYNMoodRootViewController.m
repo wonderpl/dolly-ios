@@ -10,6 +10,7 @@
 #import "SYNMoodCell.h"
 #import "UIFont+SYNFont.h"
 #import "SYNFadingFlowLayout.h"
+#import "SYNDeviceManager.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 
@@ -60,6 +61,18 @@
     [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
                                     atScrollPosition: UICollectionViewScrollPositionCenteredVertically
                                             animated: NO];
+    
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if([[SYNDeviceManager sharedInstance] isPortrait] && IS_IPAD)
+    {
+        [self positionElementsForInterfaceOrientation:UIDeviceOrientationPortrait];
+    }
 }
 
 
@@ -173,6 +186,7 @@
     self.iWantToLabel.frame = labelFrame;
     
 }
+
 
 
 @end
