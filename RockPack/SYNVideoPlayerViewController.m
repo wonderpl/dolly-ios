@@ -146,10 +146,12 @@
 	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
 	
 	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
+		self.currentVideoPlayer.maximised = NO;
 		[self videoPlayerMinimise];
 	}
 	
 	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
+		self.currentVideoPlayer.maximised = YES;
 		[self videoPlayerMaximise];
 	}
 }

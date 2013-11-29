@@ -31,7 +31,6 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 
 @end
 
-
 @implementation SYNVideoPlayer
 
 #pragma mark - Public class
@@ -134,6 +133,14 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 	_videoInstance = videoInstance;
 	
 	self.loadingView.videoInstance = videoInstance;
+}
+
+- (BOOL)maximised {
+	return self.scrubberBar.fullScreen;
+}
+
+- (void)setMaximised:(BOOL)maximised {
+	self.scrubberBar.fullScreen = maximised;
 }
 
 - (void)play {
