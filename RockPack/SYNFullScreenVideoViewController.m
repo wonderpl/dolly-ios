@@ -31,6 +31,7 @@
 	[self.view addSubview:self.backgroundView];
 	
 	if (IS_IPHONE) {
+		// For the iPhone we only officially supports portrait orientation so we have to manually transform the video on rotation
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(deviceOrientationChanged:)
 													 name:UIDeviceOrientationDidChangeNotification
