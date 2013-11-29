@@ -124,6 +124,8 @@
 @property (strong, nonatomic) UIAlertView *unfollowAlertView;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 
+@property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
+
 @property (strong, nonatomic) SYNProfileFlowLayout *testLayoutIPhone;
 
 
@@ -814,9 +816,9 @@
     
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+        self.createChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
                                                                                         forIndexPath: indexPath];
-        cell = createCell;
+        cell = self.createChannelCell;
         ((SYNChannelCreateNewCell*)cell).viewControllerDelegate = self;
         
     }
@@ -924,11 +926,11 @@
             
             #warning create new cell logic should be called from here
             
-            //            SYNChannelDetailsViewController *channelVC;
-            //
-            //            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
-            //
-            //            [self.navigationController pushViewController:channelVC animated:YES];
+//                        SYNChannelDetailsViewController *channelVC;
+//            
+//                        channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
+//            
+//                        [self.navigationController pushViewController:channelVC animated:YES];
             
             return;
         }
@@ -1411,7 +1413,6 @@
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
     
-    
 }
 
 #pragma mark - Arc menu support
@@ -1792,11 +1793,9 @@
     //To be implemented
 }
 
-
 -(void) followButtonTapped:(UICollectionViewCell *) cell
 {
     [self showAlertView: cell];
-    
 }
 
 - (IBAction)moreButtonTapped:(id)sender
@@ -1930,6 +1929,80 @@
 -(void) saveCreateChannelTapped
 {
     NSLog(@"saveCreateChannelTapped");
+    
+    
+
+    
+//    self.channel.title = self.channelTitleTextView.text;
+//    
+//    self.channel.channelDescription = self.channel.channelDescription ? self.channel.channelDescription : @"";
+//    
+//    NSString *category = [self categoryIdStringForServiceCall];
+//    
+//    NSString *cover = self.selectedCoverId;
+//    
+//    if ([cover length] == 0 || [cover isEqualToString: kCoverSetNoCover])
+//    {
+//        cover = @"";
+//    }
+    
+    [appDelegate.oAuthNetworkEngine createChannelForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                     title: self.createChannelCell.createTextField.text
+                                               description: self.createChannelCell.descriptionTextView.text
+                                                  category: @""
+                                                     cover: @""
+                                                  isPublic: YES
+                                         completionHandler: ^(NSDictionary *resourceCreated) {
+                                             
+                                             // shows the message label from the MasterViewController
+                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+                                             
+//                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+//                                                                                                    action: @"channelCreated"
+//                                                                                                     label: @""
+//                                                                                                     value: nil] build]];
+                                             
+                                             NSString *channelId = resourceCreated[@"id"];
+                                             
+                                             
+                                         } errorHandler: ^(id error) {
+                                             
+                                             
+                                             DebugLog(@"Error @ createChannelPressed:");
+                                             
+                                             NSString *errorTitle = NSLocalizedString(@"channel_creation_screen_error_unknown_title", nil);
+                                             NSString *errorMessage = NSLocalizedString(@"channel_creation_screen_error_unknown_create_description", nil);
+                                             
+                                             NSArray *errorTitleArray = error[@"form_errors"][@"title"];
+                                             
+                                             if ([errorTitleArray count] > 0)
+                                             {
+                                                 NSString *errorType = errorTitleArray[0];
+                                                 
+                                                 if ([errorType isEqualToString: @"Duplicate title."])
+                                                 {
+                                                     errorTitle = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_title", nil);
+                                                     errorMessage = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_description", nil);
+                                                 }
+                                                 else if ([errorType isEqualToString: @"Mind your language!"])
+                                                 {
+                                                     errorTitle = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_title", nil);
+                                                     errorMessage = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_description", nil);
+                                                 }
+                                                 else
+                                                 {
+                                                     errorTitle = NSLocalizedString(@"channel_creation_screen_error_unknown_title", nil);
+                                                     errorMessage = NSLocalizedString(@"channel_creation_screen_error_unknown_create_description", nil);
+                                                 }
+                                             }
+                                             
+                                             
+//                                             [self	 showError: errorMessage
+//                                               showErrorTitle: errorTitle];
+                                         }];
+
+    
+    
 }
 
 -(void) saveEditModeTapped
@@ -2137,177 +2210,177 @@ finishedWithImage: (UIImage *) image
 -(void)createNewButtonPressed
 {
     
-//    NSLog(@"create cell");
-//    for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
-//    {
-//        NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
-//        
-//        
-//        __block int index = indexPathForCell.row;
-//        
-//        if (index == 0)
-//        {
-//            NSLog(@"index 0");
-//            ((SYNChannelCreateNewCell*)cell).descriptionTextView.hidden = NO;
-//            
-//            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
-//            tmpBoarder.size.height+= kHeightChange;
-//            
-//            //iphone cell height is different by 11
-//            if (IS_IPHONE) {
-//                tmpBoarder.size.height+= 18;
-//            }
-//            ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
-//            
-//        }
-//        void (^animateEditMode)(void) = ^{
-//            
-//            CGRect frame = cell.frame;
-//            
-//            if (index == 0)
-//            {
-//                NSLog(@"index 0");
-//                ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 0.0;
-//                ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 1.0;
-//                
-//                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
-//                tmpBoarder.size.height+= kHeightChange;
-//                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
-//                [((SYNChannelCreateNewCell*)cell).createTextField becomeFirstResponder];
-//                
-//            }
-//            else
-//            {
-//                if (IS_IPHONE)
-//                {
-//                    frame.origin.y += kHeightChange+18;
-//                }
-//                
-//                if (IS_IPAD)
-//                {
-//                    
-//                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-//                        if (index%2 == 0) {
-//                            frame.origin.y +=kHeightChange;
-//                        }
-//                    }
-//                    else
-//                    {
-//                        if (index%3 == 0) {
-//                            frame.origin.y +=kHeightChange;
-//                        }
-//                        
-//                    }
-//                }
-//            }
-//            
-//            cell.frame = frame;
-//        };
-//        
-//        [UIView transitionWithView:cell
-//                          duration:0.4f
-//                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-//                        animations:animateEditMode
-//                        completion:^(BOOL finished) {
-//                            
-//                            
-//                        }];
-//        
-//        [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
-//            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
-//            self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
-//            self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
-//            
-//        } completion:Nil];
-//        
-//    }
-//    
-//    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
+    NSLog(@"create cell");
+    for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
+    {
+        NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
+        
+        
+        __block int index = indexPathForCell.row;
+        
+        if (index == 0)
+        {
+            NSLog(@"index 0");
+            ((SYNChannelCreateNewCell*)cell).descriptionTextView.hidden = NO;
+            
+            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
+            tmpBoarder.size.height+= kHeightChange;
+            
+            //iphone cell height is different by 11
+            if (IS_IPHONE) {
+                tmpBoarder.size.height+= 18;
+            }
+            ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
+            
+        }
+        void (^animateEditMode)(void) = ^{
+            
+            CGRect frame = cell.frame;
+            
+            if (index == 0)
+            {
+                NSLog(@"index 0");
+                ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 0.0;
+                ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 1.0;
+                
+                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                tmpBoarder.size.height+= kHeightChange;
+                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+                [((SYNChannelCreateNewCell*)cell).createTextField becomeFirstResponder];
+                
+            }
+            else
+            {
+                if (IS_IPHONE)
+                {
+                    frame.origin.y += kHeightChange+18;
+                }
+                
+                if (IS_IPAD)
+                {
+                    
+                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+                        if (index%2 == 0) {
+                            frame.origin.y +=kHeightChange;
+                        }
+                    }
+                    else
+                    {
+                        if (index%3 == 0) {
+                            frame.origin.y +=kHeightChange;
+                        }
+                        
+                    }
+                }
+            }
+            
+            cell.frame = frame;
+        };
+        
+        [UIView transitionWithView:cell
+                          duration:0.4f
+                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                        animations:animateEditMode
+                        completion:^(BOOL finished) {
+                            
+                            
+                        }];
+        
+        [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
+            self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
+            self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
+            
+        } completion:Nil];
+        
+    }
+    
+    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
 }
 
 
 -(void) cancelCreateChannel
 {
-//    NSLog(@"cancelCancelChannel");
-//    
-//    self.navigationItem.leftBarButtonItem = nil;
-//    self.navigationItem.rightBarButtonItem = nil;
-//    
-//
-//    
-//    NSLog(@"create cell");
-//    for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
-//    {
-//        NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
-//        
-//        __block int index = indexPathForCell.row;
-//        
-//        if (index == 0)
-//        {
-//            [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];            [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
-//        }
-//        void (^animateProfileMode)(void) = ^{
-//            CGRect frame = cell.frame;
-//            
-//            if (index == 0)
-//            {
-//                NSLog(@"index 0");
-//                ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 1.0f;
-//                ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 0.0f;
-//                
-//                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
-//                tmpBoarder.size.height-= kHeightChange;
-//                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
-//            }
-//            else
-//            {
-//                if (IS_IPHONE)
-//                {
-//                    frame.origin.y -= kHeightChange+18;
-//                }
-//                
-//                if (IS_IPAD)
-//                {
-//                    
-//                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
-//                    {
-//                        if (index%2 == 0)
-//                        {
-//                            frame.origin.y -=kHeightChange;
-//                        }
-//                    }
-//                    else
-//                    {
-//                        if (index%3 == 0)
-//                        {
-//                            frame.origin.y -=kHeightChange;
-//                        }
-//                        
-//                    }
-//                }
-//            }
-//            
-//            cell.frame = frame;
-//        };
-//        
-//        [UIView transitionWithView:cell
-//                          duration:0.4f
-//                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-//                        animations:animateProfileMode
-//                        completion:^(BOOL finished) {
-//                            
-//                            
-//                        }];
-//        
-//        [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
-////            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
-//            
-//        } completion:Nil];
-//        
-//    }
-//    
-//    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
-//    
+    NSLog(@"cancelCancelChannel");
+    
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
+    
+
+    
+    NSLog(@"create cell");
+    for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
+    {
+        NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
+        
+        __block int index = indexPathForCell.row;
+        
+        if (index == 0)
+        {
+            [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];            [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
+        }
+        void (^animateProfileMode)(void) = ^{
+            CGRect frame = cell.frame;
+            
+            if (index == 0)
+            {
+                NSLog(@"index 0");
+                ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 1.0f;
+                ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 0.0f;
+                
+                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                tmpBoarder.size.height-= kHeightChange;
+                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+            }
+            else
+            {
+                if (IS_IPHONE)
+                {
+                    frame.origin.y -= kHeightChange+18;
+                }
+                
+                if (IS_IPAD)
+                {
+                    
+                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
+                    {
+                        if (index%2 == 0)
+                        {
+                            frame.origin.y -=kHeightChange;
+                        }
+                    }
+                    else
+                    {
+                        if (index%3 == 0)
+                        {
+                            frame.origin.y -=kHeightChange;
+                        }
+                        
+                    }
+                }
+            }
+            
+            cell.frame = frame;
+        };
+        
+        [UIView transitionWithView:cell
+                          duration:0.4f
+                           options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                        animations:animateProfileMode
+                        completion:^(BOOL finished) {
+                            
+                            
+                        }];
+        
+        [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
+//            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
+            
+        } completion:Nil];
+        
+    }
+    
+    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
+    
 }
 
 -(void) updateCollectionLayout
@@ -2346,6 +2419,10 @@ finishedWithImage: (UIImage *) image
         
     }
 }
+
+
+
+#pragma mark - Save new channel
 
 
 
