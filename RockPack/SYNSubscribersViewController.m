@@ -213,7 +213,6 @@
                                   atIndexPath: (NSIndexPath *) indexPath
 {
     
-    
     UICollectionReusableView* supplementaryView;
     
     if (collectionView == self.usersThumbnailCollectionView)
@@ -234,6 +233,41 @@
     
     return supplementaryView;
 }
+
+- (CGSize) footerSize
+{
+    return CGSizeMake(100.0, 40.0);
+}
+
+- (void) loadMoreUsers
+{
+    // Check to see if we have loaded all items already
+    if (self.moreItemsToLoad == TRUE)
+    {
+        self.loadingMoreContent = YES;
+        
+        [self incrementRangeForNextRequest];
+        
+        [appDelegate.networkEngine subscribersForUserId: appDelegate.currentUser.uniqueId
+                                              channelId: self.channel.uniqueId
+                                               forRange: self.dataRequestRange
+                                            byAppending: YES
+                                      completionHandler: ^(int count) {
+                                          
+                                          
+                                          self.dataItemsAvailable = count;
+                                          self.loadingMoreContent = NO;
+                                          [self displayUsers];
+                                          
+                                          
+                                      } errorHandler: ^{
+                                          
+                                          
+                                      }];
+    }
+}
+
+#pragma mark - Displayig Data
 
 - (void) displayUsers
 {
@@ -300,37 +334,6 @@
     
 }
 
-- (CGSize) footerSize
-{
-    return CGSizeMake(100.0, 40.0);
-}
 
-- (void) loadMoreUsers
-{
-    // Check to see if we have loaded all items already
-    if (self.moreItemsToLoad == TRUE)
-    {
-        self.loadingMoreContent = YES;
-        
-        [self incrementRangeForNextRequest];
-        
-        [appDelegate.networkEngine subscribersForUserId: appDelegate.currentUser.uniqueId
-                                              channelId: self.channel.uniqueId
-                                               forRange: self.dataRequestRange
-                                            byAppending: YES
-                                      completionHandler: ^(int count) {
-                                          
-                                          
-                                          self.dataItemsAvailable = count;
-                                          self.loadingMoreContent = NO;
-                                          [self displayUsers];
-                                          
-                                          
-                                      } errorHandler: ^{
-                                          
-                                      
-                                      }];
-    }
-}
 
 @end

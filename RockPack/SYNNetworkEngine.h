@@ -33,9 +33,6 @@
                                      inRange: (NSRange) range
                                   onComplete: (MKNKSearchSuccessBlock) completeBlock;
 
-- (MKNetworkOperation *) searchChannelsForTerm: (NSString *) searchTerm
-                                      andRange: (NSRange) range
-                                    onComplete: (MKNKSearchSuccessBlock) completeBlock;
 
 - (MKNetworkOperation *) searchUsersForTerm: (NSString *) searchTerm
                                    andRange: (NSRange) range

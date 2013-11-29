@@ -146,7 +146,6 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
         
         wself.loadingMoreContent = NO;
         
-        NSLog(@">>> %i", count);
         
         wself.dataItemsAvailable2 = (NSInteger)count;
         
@@ -353,7 +352,6 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
     if (collectionView == self.videosCollectionView)
     {
         count = self.videosArray.count;
-        DebugLog(@"Search video count = %d", count);
     }
     else if (collectionView == self.usersCollectionView)
     {
@@ -440,9 +438,15 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
                    layout: (UICollectionViewLayout*) collectionViewLayout
 referenceSizeForFooterInSection: (NSInteger) section
 {
-    if ((self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable)) {
-		return [self footerSize];
-	}
+    if(collectionView == self.videosCollectionView && [self moreItemsToLoad])
+    {
+        return [self footerSize];
+    }
+    else if(collectionView == self.usersCollectionView && [self moreItemsToLoad2])
+    {
+        return [self footerSize];
+    }
+    
     return CGSizeZero;
 }
 
@@ -454,15 +458,15 @@ referenceSizeForFooterInSection: (NSInteger) section
     
 	if (kind == UICollectionElementKindSectionFooter)
     {
+        
         self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                              withReuseIdentifier: kSearchResultChannelFooter
                                                                     forIndexPath: indexPath];
         supplementaryView = self.footerView;
         
-        if ((self.dataRequestRange.location + self.dataRequestRange.length) < self.dataItemsAvailable)
-        {
-            self.footerView.showsLoading = self.isLoadingMoreContent;
-        }
+        
+        self.footerView.showsLoading = self.isLoadingMoreContent;
+        
     }
     
     return supplementaryView;
@@ -480,8 +484,6 @@ referenceSizeForFooterInSection: (NSInteger) section
         if(scrollView == self.videosCollectionView && self.moreItemsToLoad)
         {
             [self incrementRangeForNextRequest];
-            
-            
             
             if(_currentSearchGenre)
             {
@@ -506,7 +508,6 @@ referenceSizeForFooterInSection: (NSInteger) section
             [self incrementRangeForNextRequest2];
             
             
-            
             if(_currentSearchGenre)
             {
                 self.userSearchOperation = [appDelegate.networkEngine usersForGenreId: _currentSearchGenre
@@ -517,8 +518,8 @@ referenceSizeForFooterInSection: (NSInteger) section
             {
                 
                 self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
-                                                                                andRange: self.dataRequestRange
-                                                                             byAppending: NO
+                                                                                andRange: self.dataRequestRange2
+                                                                             byAppending: YES
                                                                               onComplete: self.userSearchCompleteBlock];
             }
         }
