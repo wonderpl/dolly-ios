@@ -157,32 +157,7 @@
 
 
 
-- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
-            viewForSupplementaryElementOfKind: (NSString *) kind
-                                  atIndexPath: (NSIndexPath *) indexPath
-{
-    
-    
-    UICollectionReusableView* supplementaryView;
-    
-    if (collectionView == self.usersThumbnailCollectionView)
-    {
-        if (kind == UICollectionElementKindSectionFooter)
-        {
-            self.footerView = [self.usersThumbnailCollectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                                                    withReuseIdentifier: @"SYNChannelFooterMoreView"
-                                                                                           forIndexPath: indexPath];
-            supplementaryView = self.footerView;
-            
-            if (self.users.count > 0)
-            {
-                self.footerView.showsLoading = self.isLoadingMoreContent;
-            }
-        }
-    }
-    
-    return supplementaryView;
-}
+
 
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
@@ -222,6 +197,43 @@
     
 }
 
+#pragma mark - Footer support
+
+- (void) scrollViewDidScroll: (UIScrollView *) scrollView
+{
+    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
+        && self.isLoadingMoreContent == NO)
+    {
+        [self loadMoreUsers];
+    }
+}
+
+- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
+            viewForSupplementaryElementOfKind: (NSString *) kind
+                                  atIndexPath: (NSIndexPath *) indexPath
+{
+    
+    
+    UICollectionReusableView* supplementaryView;
+    
+    if (collectionView == self.usersThumbnailCollectionView)
+    {
+        if (kind == UICollectionElementKindSectionFooter)
+        {
+            self.footerView = [self.usersThumbnailCollectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                                                    withReuseIdentifier: @"SYNChannelFooterMoreView"
+                                                                                           forIndexPath: indexPath];
+            supplementaryView = self.footerView;
+            
+            if (self.users.count > 0)
+            {
+                self.footerView.showsLoading = self.isLoadingMoreContent;
+            }
+        }
+    }
+    
+    return supplementaryView;
+}
 
 - (void) displayUsers
 {
