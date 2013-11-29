@@ -123,10 +123,6 @@
 
 #pragma mark - IBActions
 
-- (IBAction)closeButtonPressed:(UIButton *)close {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)likeButtonPressed:(SYNSocialButton *)button {
 	[self likeControlPressed:button];
 }

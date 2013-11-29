@@ -165,6 +165,10 @@
 
 #pragma mark - IBActions
 
+- (IBAction)closeButtonPressed:(UIButton *)close {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {
 	[self playPreviousVideo];
 }
