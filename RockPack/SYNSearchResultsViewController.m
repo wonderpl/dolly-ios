@@ -146,6 +146,8 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
         
         wself.loadingMoreContent = NO;
         
+        NSLog(@">>> %i", count);
+        
         wself.dataItemsAvailable2 = (NSInteger)count;
         
         [wself.usersCollectionView reloadData];
@@ -328,9 +330,8 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
     fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position"
                                                                  ascending: YES]];
     
-    NSArray *results = [appDelegate.searchManagedObjectContext
-                        executeFetchRequest: fetchRequest
-                        error: error];
+    NSArray *results = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                             error: error];
     
     return results;
 }
@@ -480,7 +481,7 @@ referenceSizeForFooterInSection: (NSInteger) section
         {
             [self incrementRangeForNextRequest];
             
-            NSLog(@"Fetching Items for Range: %@", NSStringFromRange(self.dataRequestRange));
+            
             
             if(_currentSearchGenre)
             {
@@ -503,6 +504,8 @@ referenceSizeForFooterInSection: (NSInteger) section
         else if (scrollView == self.usersCollectionView && self.moreItemsToLoad2)
         {
             [self incrementRangeForNextRequest2];
+            
+            
             
             if(_currentSearchGenre)
             {
@@ -536,6 +539,8 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     if(!self.moreItemsToLoad2)
         return;
+    
+    NSLog(@"Fetching Items for Range: %@", NSStringFromRange(self.dataRequestRange2));
     
     NSInteger nextStart = self.dataRequestRange2.location + self.dataRequestRange2.length;
     

@@ -331,7 +331,7 @@
             
             int itemsCount = 0;
             
-            NSNumber * totalNumber = (NSNumber *) dictionary[@"total"];
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
             
             if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
             {
@@ -536,7 +536,7 @@
         } completionBlock: ^(BOOL registryResultOk) {
             int itemsCount = 0;
             
-            NSNumber * totalNumber = (NSNumber *) dictionary[@"total"];
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
             
             if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
             {
