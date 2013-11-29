@@ -6,9 +6,10 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+@import UIKit;
+#import "AppConstants.h"
 @protocol SYNChannelCreateNewCelllDelegate <NSObject, UITextFieldDelegate, UITextViewDelegate>
+
 
 - (void) createNewButtonPressed;
 - (void) followButtonTapped: (UICollectionViewCell *) cell;
@@ -21,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (strong, nonatomic) IBOutlet UIButton *createCellButton;
 @property (nonatomic, weak) id<SYNChannelCreateNewCelllDelegate> viewControllerDelegate;
+@property (nonatomic) CreateNewChannelCellState state;
 
 @end

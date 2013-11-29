@@ -367,6 +367,32 @@ typedef enum : NSInteger
     kChannelDetailsFavourites = 4
 } kChannelDetailsMode;
 
+typedef enum {
+    
+    CreateNewChannelCellStateHidden = 0,
+    CreateNewChannelCellStateEditing = 1,
+    CreateNewChannelCellStateFinilizing = 2
+    
+} CreateNewChannelCellState;
+
+
+// Height of the bottom tab bar in pixels
+#define kBottomTabBarHeight 62
+
+// Height of the header bar
+#define kHeaderBarHeight 44
+
+// Height of the top tab bar
+#define kTopTabBarHeight 45
+
+// Offset from the bottom of the status bar to the bottom of the top tab bar
+#define kTabTopContentOffset (kHeaderBarHeight + kTopTabBarHeight)
+
+// Amount of overspill for top tab bar
+#define kTopTabOverspill 7
+
+#define kCategorySecondRowHeight 35.0f
+
 //
 // Tabs
 //

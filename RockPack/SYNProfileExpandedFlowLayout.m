@@ -14,11 +14,6 @@
 -(id)init {
     if (!(self = [super init])) return nil;
     
-    self.minimumInteritemSpacing = 0;
-    self.minimumLineSpacing = 0;
-    self.itemSize = CGSizeMake(320, 71);
-    self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.headerReferenceSize = CGSizeMake(320, 472);
     return self;
 }
 
@@ -47,7 +42,7 @@
 //        }
         else if(IS_IPHONE)
         {
-            cellFrame.origin.y+= 94.0f;
+            cellFrame.origin.y+= 101.0f;
             
         }
         else if (IS_IPAD)

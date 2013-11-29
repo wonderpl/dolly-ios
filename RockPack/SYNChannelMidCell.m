@@ -119,6 +119,8 @@
 
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
 {
+    
+    
     // Just need to reference any button in the cell (as there is no longer an actual video button)
     [self.viewControllerDelegate channelTapped: self];
     

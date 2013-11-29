@@ -7,15 +7,10 @@
 //
 
 @import UIKit;
+
+#import "AppConstants.h"
 @class SYNAddToChannelViewController;
 
-typedef enum {
-    
-    CreateNewChannelCellStateHidden = 0,
-    CreateNewChannelCellStateEditing = 1,
-    CreateNewChannelCellStateFinilizing = 2
-
-} CreateNewChannelCellState;
 
 @interface SYNAddToChannelCreateNewCell : UICollectionViewCell <UITextFieldDelegate, UITextViewDelegate>
 {

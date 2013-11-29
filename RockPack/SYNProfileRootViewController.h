@@ -9,9 +9,9 @@
 #import "SYNAbstractViewController.h"
 #import "ChannelOwner.h"
 typedef enum : NSInteger {
-    modeMyOwnProfile = 0,
-    modeOtherUsersProfile,
-    modeEditProfile,
+    kModeMyOwnProfile = 0,
+    kModeOtherUsersProfile,
+    kModeEditProfile,
 } ProfileType;
 
 

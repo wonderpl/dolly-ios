@@ -62,4 +62,26 @@
 
 }
 
+
+-(void)setState:(CreateNewChannelCellState)state
+{
+    
+    _state = state;
+    switch (_state)
+    {
+        case CreateNewChannelCellStateHidden:
+            break;
+            
+        case CreateNewChannelCellStateEditing:
+            
+            
+            break;
+            
+        case CreateNewChannelCellStateFinilizing:
+            
+            break;
+    }
+
+}
+
 @end
