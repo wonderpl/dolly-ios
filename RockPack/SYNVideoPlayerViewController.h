@@ -1,18 +1,19 @@
 //
-//  SYNChannelVideoPlayerViewController.h
+//  SYNVideoPlayerViewController.h
 //  dolly
 //
-//  Created by Sherman Lo on 15/11/13.
+//  Created by Sherman Lo on 27/11/13.
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
 #import "SYNAbstractViewController.h"
 
+@class VideoInstance;
 @class SYNVideoPlayer;
 
-@interface SYNChannelVideoPlayerViewController : SYNAbstractViewController
+@interface SYNVideoPlayerViewController : SYNAbstractViewController
 
-+ (instancetype)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex;
+@property (nonatomic, strong) VideoInstance *videoInstance;
 
 @property (nonatomic, strong, readonly) UIView *videoPlayerContainerView;
 @property (nonatomic, strong, readonly) SYNVideoPlayer *currentVideoPlayer;

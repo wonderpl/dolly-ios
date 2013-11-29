@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Channel Video Player View Controller-->
+        <!--Carousel Video Player View Controller-->
         <scene sceneID="ImF-1M-tfx">
             <objects>
-                <viewController id="PB1-Bc-aL3" customClass="SYNChannelVideoPlayerViewController" sceneMemberID="viewController">
+                <viewController id="PB1-Bc-aL3" customClass="SYNCarouselVideoPlayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YV5-Gs-Jfb"/>
                         <viewControllerLayoutGuide type="bottom" id="bPc-ca-XVj"/>

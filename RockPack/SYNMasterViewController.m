@@ -15,7 +15,7 @@
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 #import "SYNPopoverable.h"
-#import "SYNChannelVideoPlayerViewController.h"
+#import "SYNCarouselVideoPlayerViewController.h"
 @import QuartzCore;
 
 
@@ -341,7 +341,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
    // self.videoViewerViewController.view.alpha = 0.0f;
     
     
-	UIViewController *viewController = [SYNChannelVideoPlayerViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
+	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
 	[self presentViewController:viewController animated:YES completion:nil];
 	
     /*

@@ -40,11 +40,7 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	CGFloat videoWidth = CGRectGetWidth(self.youTubeWebView.frame);
-	CGFloat videoHeight = CGRectGetHeight(self.youTubeWebView.frame);
-	
-	NSString *javascript = [NSString stringWithFormat:@"player.setSize(%f, %f);", videoWidth, videoHeight];
-	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:javascript];
+	[self updatePlayerSize:self.youTubeWebView.frame.size];
 }
 
 #pragma mark - Getters / Setters
@@ -63,8 +59,7 @@
 																 encoding:NSUTF8StringEncoding
 																	error:nil];
 		
-		CGSize iFrameSize = [self iFrameSize];
-		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString, (int)iFrameSize.width, (int)iFrameSize.height];
+		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString, 0, 0];
 		
 		[webView loadHTMLString:iFrameHTML baseURL:[NSURL URLWithString: @"http://www.youtube.com"]];
 		
@@ -155,17 +150,16 @@
 	return suggestedQuality;
 }
 
-- (CGSize)iFrameSize {
-	return (IS_IPAD ? CGSizeMake(616, 347) : CGSizeMake(320, 180));
-}
-
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 	if ([actionName isEqualToString:@"ready"]) {
 		NSString *sourceId = self.videoInstance.video.sourceId;
 		NSString *videoQuality = [self videoQuality];
 		
+		[self updatePlayerSize:self.youTubeWebView.frame.size];
+		
 		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, videoQuality];
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
+		
 	}
 	
 	if ([actionName isEqualToString:@"stateChange"]) {
@@ -180,6 +174,11 @@
 	if ([actionName isEqualToString:@"error"]) {
 		[self handleVideoPlayerError:actionData];
 	}
+}
+
+- (void)updatePlayerSize:(CGSize)size {
+	NSString *javascript = [NSString stringWithFormat:@"player.setSize(%f, %f);", size.width, size.height];
+	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:javascript];
 }
 
 @end

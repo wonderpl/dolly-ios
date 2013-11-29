@@ -622,51 +622,46 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
-                         andSubCell: (UICollectionViewCell *) subCell
-                     atSubCellIndex: (NSInteger) subCellIndex
+- (void)displayVideoViewerFromCell:(UICollectionViewCell *)cell
+						andSubCell:(UICollectionViewCell *)subCell
+					atSubCellIndex:(NSInteger)subCellIndex
 {
-    NSMutableArray* videosArray = @[].mutableCopy;
-    
-    NSIndexPath * indexPath = [self.feedCollectionView indexPathForCell: cell];
-    FeedItem* feedItem = [self feedItemAtIndexPath: indexPath];
-    
-    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        // NOTE: the data containes either an aggragate or a single item, handle both cases here
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            for (FeedItem *childFeedItem in feedItem.feedItems)
-            {
-                // they have also the same type (video)
-                VideoInstance *vi = (VideoInstance *) ((self.feedVideosById)[childFeedItem.resourceId]);
-                [videosArray addObject: vi];
-            }
-        }
-        else
-        {
-            VideoInstance *vi = (VideoInstance *) ((self.feedVideosById)[feedItem.resourceId]);
-            [videosArray addObject: vi];
-        }
-
-        CGPoint center;
-        
-        if (subCell)
-        {
-            center = [self.view convertPoint: subCell.center
-                                    fromView: subCell.superview];
-        }
-        else
-        {
-            center = self.view.center;
-        }
-        
-        [self displayVideoViewerWithVideoInstanceArray: videosArray
-                                      andSelectedIndex: subCellIndex
-                                                center: center];
-    }
+    NSMutableArray *videosArray = [NSMutableArray array];
+	
+	NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
+	
+	for (FeedItem *feedItem in self.feedItemsData) {
+		if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+			if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
+				for (FeedItem *childFeedItem in feedItem.feedItems) {
+					[videosArray addObject:self.feedVideosById[childFeedItem.resourceId]];
+				}
+			} else {
+				[videosArray addObject:self.feedVideosById[feedItem.resourceId]];
+			}
+		}
+	}
+	
+	CGPoint center = (subCell ? [self.view convertPoint:subCell.center fromView:subCell.superview] : self.view.center);
+	
+	[self displayVideoViewerWithVideoInstanceArray:videosArray
+								  andSelectedIndex:[self videoIndexForIndexPath:indexPath subCellIndex:subCellIndex]
+											center:center];
 }
 
+- (NSInteger)videoIndexForIndexPath:(NSIndexPath *)indexPath subCellIndex:(NSInteger)subCellIndex {
+	__block NSInteger index = 0;
+	[self.feedItemsData enumerateObjectsUsingBlock:^(FeedItem *feedItem, NSUInteger idx, BOOL *stop) {
+		if (idx >= indexPath.row) {
+			*stop = YES;
+			return;
+		}
+		if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+			index += feedItem.itemCountValue;
+		}
+	}];
+	return index + subCellIndex;
+}
 
 #pragma mark - Aggregate Cell Delegate
 
