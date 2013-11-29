@@ -857,16 +857,6 @@
         else
         {
             NSLog(@"index 0");
-            ((SYNChannelCreateNewCell*)cell).descriptionTextView.hidden = NO;
-            
-            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
-            tmpBoarder.size.height+= kHeightChange;
-            
-            //iphone cell height is different by 11
-            if (IS_IPHONE) {
-                tmpBoarder.size.height+= 18;
-            }
-            ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
 
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
         }
@@ -2368,11 +2358,27 @@ finishedWithImage: (UIImage *) image
 -(void) setCreateOffset
 {
     
-    if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
-        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-        
+    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
+    {
+        if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+            
+        }
+
     }
 
+    else
+    {
+        if (self.channelThumbnailCollectionView.contentOffset.y < 370) {
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+            
+        }
+
+    }
+    
+    if (IS_IPHONE) {
+        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+    }
 }
 
 -(void) cancelCreateChannel
@@ -2394,6 +2400,11 @@ finishedWithImage: (UIImage *) image
         if (index == 0)
         {
             [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];            [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
+            
+            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+            tmpBoarder.size.height-= kHeightChange;
+            ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+
         }
         void (^animateProfileMode)(void) = ^{
             CGRect frame = cell.frame;
@@ -2403,10 +2414,6 @@ finishedWithImage: (UIImage *) image
                 NSLog(@"index 0");
                 ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 1.0f;
                 ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 0.0f;
-                
-                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
-                tmpBoarder.size.height-= kHeightChange;
-                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
                 ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
 
             }
