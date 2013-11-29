@@ -7,7 +7,7 @@
 //
 
 #import "SYNFullScreenVideoAnimator.h"
-#import "SYNCarouselVideoPlayerViewController.h"
+#import "SYNVideoPlayerViewController.h"
 #import "SYNFullScreenVideoViewController.h"
 #import "SYNVideoPlayer.h"
 #import "SYNDeviceManager.h"
@@ -54,7 +54,7 @@ static const CGFloat AnimationDuration = 0.3;
 #pragma mark - Private
 
 - (void)animatePresentingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-	SYNCarouselVideoPlayerViewController *fromViewController = (SYNCarouselVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+	SYNVideoPlayerViewController *fromViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	SYNFullScreenVideoViewController *toViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
 	SYNVideoPlayer *videoPlayer = fromViewController.currentVideoPlayer;
@@ -88,7 +88,7 @@ static const CGFloat AnimationDuration = 0.3;
 
 - (void)animateDismissingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 	SYNFullScreenVideoViewController *fromViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	SYNCarouselVideoPlayerViewController *toViewController = (SYNCarouselVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+	SYNVideoPlayerViewController *toViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
 	SYNVideoPlayer *videoPlayer = fromViewController.videoPlayer;
 	UIView *playerContainerView = toViewController.videoPlayerContainerView;
