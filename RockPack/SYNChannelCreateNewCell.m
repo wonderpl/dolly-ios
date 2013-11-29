@@ -70,10 +70,18 @@
     switch (_state)
     {
         case CreateNewChannelCellStateHidden:
+            
+            self.descriptionTextView.hidden = YES;
+            self.createTextField.hidden = YES;
+            self.createCellButton.hidden = NO;
+            
             break;
             
         case CreateNewChannelCellStateEditing:
-            
+            self.descriptionTextView.hidden = NO;
+
+            self.createTextField.hidden = NO;
+            self.createCellButton.hidden = YES;
             
             break;
             

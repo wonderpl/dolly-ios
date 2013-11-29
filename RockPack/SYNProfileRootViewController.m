@@ -128,6 +128,7 @@
 
 @property (strong, nonatomic) SYNProfileFlowLayout *testLayoutIPhone;
 
+@property  (nonatomic) BOOL creatingChannel;
 
 @end
 
@@ -221,7 +222,7 @@
     
     self.isIPhone = IS_IPHONE;
     
-    
+    self.creatingChannel = NO;
     
     
     self.channelExpandedLayout = [[SYNProfileExpandedFlowLayout alloc]init];
@@ -448,6 +449,14 @@
     
     //    [self.navigationController.navigationBar.backItem setTitle: self.tempBackString];
     //    NSLog(@"back title %@", self.tempBackString);
+
+    
+    if (self.creatingChannel) {
+        [self updateCollectionLayout];
+        self.creatingChannel = NO;
+    }
+    
+    
     
 }
 
@@ -672,7 +681,7 @@
     
     //Setup the headers
     
-    //    self.navigationController.navigationBarHidden = YES;
+    //self.navigationController.navigationBarHidden = YES;
     
     if (!self.isIPhone)
     {
@@ -744,7 +753,13 @@
 
     }
     
-    [self reloadCollectionViews];
+    if (self.creatingChannel) {
+        [self setCreateOffset];
+    }
+
+    if (!self.creatingChannel) {
+        [self reloadCollectionViews];
+    }
     // [self resizeScrollViews];
 }
 
@@ -816,10 +831,45 @@
     
     if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
     {
-        self.createChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
+        SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
                                                                                         forIndexPath: indexPath];
+        self.createChannelCell = createCell;
         cell = self.createChannelCell;
+
         ((SYNChannelCreateNewCell*)cell).viewControllerDelegate = self;
+        if (self.creatingChannel)
+        {
+            
+            NSLog(@"index 0");
+            ((SYNChannelCreateNewCell*)cell).descriptionTextView.hidden = NO;
+            
+            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
+            tmpBoarder.size.height+= kHeightChange;
+            
+            //iphone cell height is different by 11
+            if (IS_IPHONE) {
+                tmpBoarder.size.height+= 18;
+            }
+            ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
+
+            ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
+        }
+        else
+        {
+            NSLog(@"index 0");
+            ((SYNChannelCreateNewCell*)cell).descriptionTextView.hidden = NO;
+            
+            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
+            tmpBoarder.size.height+= kHeightChange;
+            
+            //iphone cell height is different by 11
+            if (IS_IPHONE) {
+                tmpBoarder.size.height+= 18;
+            }
+            ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
+
+            ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
+        }
         
     }
     else
@@ -841,7 +891,6 @@
             {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
             }
-            
         }
         
         
@@ -892,8 +941,6 @@
                 
                 
                 [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"Videos", nil)];
-                
-                
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
             }
@@ -946,7 +993,6 @@
 	
     [self viewChannelDetails:channel];
 }
-
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     /*
@@ -1041,7 +1087,6 @@
     if (self.modeType == kModeMyOwnProfile)
     {
         self.followingSearchBar.hidden = self.collectionsTabActive;
-        
     }
     
     if (self.collectionsTabActive)
@@ -1101,7 +1146,7 @@
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
     
-    //   NSLog(@"%f", offset);
+       NSLog(@"%f", offset);
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
         
@@ -1431,6 +1476,8 @@
 // Channels are the cell in the collection view
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
+    
+
     NSLog(@"before %f",     self.channelThumbnailCollectionView.contentOffset.y);
 
     SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
@@ -1454,7 +1501,7 @@
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
             
             [self.navigationController pushViewController:channelVC animated:YES];
-            
+            return;
         }
         
         else
@@ -1475,7 +1522,7 @@
         
         [self.navigationController pushViewController:channelVC animated:YES];
         
-
+        return;
     }
     if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
     {
@@ -1492,9 +1539,8 @@
         SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
         
         [self.navigationController pushViewController:channelVC animated:YES];
-
+        return;
     }
-    
     
     NSLog(@" after%f",     self.channelThumbnailCollectionView.contentOffset.y);
     return;
@@ -1582,9 +1628,11 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+        NSLog(@"add gesture reconiser");
+    [self.view addGestureRecognizer:self.tapToHideKeyoboard];
     
-    if (self.modeType == kModeEditProfile) {
-        [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+    if (self.creatingChannel) {
+        [self setCreateOffset];
     }
     
     NSLog(@"Started editing a textfield");
@@ -1594,11 +1642,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     
-    if (self.modeType == kModeEditProfile) {
-        [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
-        
-    }
-    
+    [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
     [textField resignFirstResponder];
     return YES;
 }
@@ -1606,6 +1650,7 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     
+
     NSLog(@"text field end editing");
     [textField resignFirstResponder];
 }
@@ -1821,6 +1866,10 @@
 
 - (IBAction)editButtonTapped:(id)sender
 {
+    
+    [self.createChannelCell.descriptionTextView resignFirstResponder];
+    [self.createChannelCell.createTextField resignFirstResponder];
+    
     
     self.modeType = kModeEditProfile;
     self.uploadCoverPhotoButton.hidden = NO;
@@ -2087,15 +2136,22 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
     
+    NSLog(@"add gesture reconiser");
+    [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+
     
     if (self.modeType == kModeEditProfile) {
-        [self.view addGestureRecognizer:self.tapToHideKeyoboard];
 
         [UIView animateWithDuration:0.3f animations:^{
             self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
             self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
             
         }];
+    }
+    else
+    {
+        [self setCreateOffset];
+        
     }
     
     
@@ -2117,10 +2173,17 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 -(void)dismissKeyboard
 {
+        NSLog(@"REMOVE gesture reconiser");
     NSLog(@"dismiss %f", self.aboutMeTextView.frame.size.height);
     [self.aboutMeTextView resignFirstResponder];
+    [self.createChannelCell.descriptionTextView resignFirstResponder];
+    [self.createChannelCell.createTextField resignFirstResponder];
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
-    [self resetOffsetWithAnimation];
+    
+    if (self.modeType == kModeEditProfile) {
+        [self resetOffsetWithAnimation];
+        
+    }
 }
 
 -(void) resetOffsetWithAnimation
@@ -2210,6 +2273,7 @@ finishedWithImage: (UIImage *) image
 -(void)createNewButtonPressed
 {
     
+    self.creatingChannel = YES;
     NSLog(@"create cell");
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
@@ -2227,11 +2291,13 @@ finishedWithImage: (UIImage *) image
             tmpBoarder.size.height+= kHeightChange;
             
             //iphone cell height is different by 11
-            if (IS_IPHONE) {
+            if (IS_IPHONE)
+            {
                 tmpBoarder.size.height+= 18;
             }
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
-            
+            ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
+
         }
         void (^animateEditMode)(void) = ^{
             
@@ -2247,7 +2313,7 @@ finishedWithImage: (UIImage *) image
                 tmpBoarder.size.height+= kHeightChange;
                 ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
                 [((SYNChannelCreateNewCell*)cell).createTextField becomeFirstResponder];
-                
+
             }
             else
             {
@@ -2287,7 +2353,7 @@ finishedWithImage: (UIImage *) image
                         }];
         
         [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
-            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
+            [self setCreateOffset];
             self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
             self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
             
@@ -2299,14 +2365,24 @@ finishedWithImage: (UIImage *) image
 }
 
 
+-(void) setCreateOffset
+{
+    
+    if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
+        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+        
+    }
+
+}
+
 -(void) cancelCreateChannel
 {
+    
+    self.creatingChannel = NO;
     NSLog(@"cancelCancelChannel");
     
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
-    
-
     
     NSLog(@"create cell");
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
@@ -2331,6 +2407,8 @@ finishedWithImage: (UIImage *) image
                 CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
                 tmpBoarder.size.height-= kHeightChange;
                 ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+                ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
+
             }
             else
             {
@@ -2411,8 +2489,6 @@ finishedWithImage: (UIImage *) image
         else
         {
             [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelLayoutIPad];
-            
-            
             self.channelThumbnailCollectionView.contentOffset = tmpPoint;
             [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
         }
