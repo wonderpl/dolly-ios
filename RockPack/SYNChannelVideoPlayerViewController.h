@@ -6,15 +6,12 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNAbstractViewController.h"
+#import "SYNVideoPlayerViewController.h"
 
 @class SYNVideoPlayer;
 
-@interface SYNChannelVideoPlayerViewController : SYNAbstractViewController
+@interface SYNChannelVideoPlayerViewController : SYNVideoPlayerViewController
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex;
-
-@property (nonatomic, strong, readonly) UIView *videoPlayerContainerView;
-@property (nonatomic, strong, readonly) SYNVideoPlayer *currentVideoPlayer;
 
 @end
