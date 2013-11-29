@@ -285,7 +285,6 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
     
     self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
                                                                     andRange: self.dataRequestRange
-                                                                 byAppending: NO
                                                                   onComplete: self.userSearchCompleteBlock];
 }
 
@@ -519,7 +518,6 @@ referenceSizeForFooterInSection: (NSInteger) section
                 
                 self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
                                                                                 andRange: self.dataRequestRange2
-                                                                             byAppending: YES
                                                                               onComplete: self.userSearchCompleteBlock];
             }
         }

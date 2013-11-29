@@ -36,7 +36,6 @@
 
 - (MKNetworkOperation *) searchUsersForTerm: (NSString *) searchTerm
                                    andRange: (NSRange) range
-                                byAppending: (BOOL) append
                                  onComplete: (MKNKSearchSuccessBlock) completeBlock;
 
 - (MKNetworkOperation *) getAutocompleteForHint: (NSString *) hint

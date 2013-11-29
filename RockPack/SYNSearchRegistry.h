@@ -14,11 +14,9 @@
 - (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary;
 - (BOOL) registerChannelsFromDictionary: (NSDictionary *) dictionary;
 
-- (BOOL) registerUsersFromDictionary: (NSDictionary *) dictionary
-                         byAppending: (BOOL) append;
+- (BOOL) registerUsersFromDictionary: (NSDictionary *) dictionary;
 
-- (BOOL) registerSubscribersFromDictionary: (NSDictionary *) dictionary
-                               byAppending: (BOOL) append;
+- (BOOL) registerSubscribersFromDictionary: (NSDictionary *) dictionary;
 
 - (BOOL) registerFriendsFromDictionary: (NSDictionary *) dictionary;
 

@@ -322,8 +322,7 @@
         
         [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
             
-            BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary
-                                                                         byAppending: NO];
+            BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary];
             
             return registryResultOk;
             
@@ -499,7 +498,6 @@
 
 - (MKNetworkOperation *) searchUsersForTerm: (NSString *) searchTerm
                                    andRange: (NSRange) range
-                                byAppending: (BOOL) append
                                  onComplete: (MKNKSearchSuccessBlock) completeBlock
 {
     if (searchTerm == nil || [searchTerm isEqualToString: @""])
@@ -529,8 +527,7 @@
         }
         
         [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
-            BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary
-                                                                         byAppending: append];
+            BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary];
             
             return registryResultOk;
         } completionBlock: ^(BOOL registryResultOk) {
@@ -746,8 +743,7 @@
         }
         
         [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
-            BOOL registryResultOk = [self.searchRegistry registerSubscribersFromDictionary: dictionary
-                                                                               byAppending: append];
+            BOOL registryResultOk = [self.searchRegistry registerSubscribersFromDictionary: dictionary];
             
             return registryResultOk;
         } completionBlock: ^(BOOL registryResultOk) {

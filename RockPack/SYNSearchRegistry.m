@@ -370,27 +370,22 @@
 }
 
 
-- (BOOL) registerSubscribersFromDictionary: (NSDictionary *) dictionary
-                               byAppending: (BOOL) append;
+- (BOOL) registerSubscribersFromDictionary: (NSDictionary *) dictionary;
 {
     return [self registerChannelOwnersFromDictionary: dictionary
-                                           forViewId: kSubscribersListViewId
-                                         byAppending: append];
+                                           forViewId: kSubscribersListViewId];
 }
 
 
-- (BOOL) registerUsersFromDictionary: (NSDictionary *) dictionary
-                         byAppending: (BOOL) append;
+- (BOOL) registerUsersFromDictionary: (NSDictionary *) dictionary;
 {
     return [self registerChannelOwnersFromDictionary: dictionary
-                                           forViewId: kSearchViewId
-                                         byAppending: append];
+                                           forViewId: kSearchViewId];
 }
 
 
 - (BOOL) registerChannelOwnersFromDictionary: (NSDictionary *) dictionary
-                                   forViewId: (NSString *) viewId
-                                 byAppending: (BOOL) append;
+                                   forViewId: (NSString *) viewId;
 {
     NSError *error;
     NSArray *itemsToDelete;
@@ -406,13 +401,7 @@
     itemsToDelete = [importManagedObjectContext executeFetchRequest: fetchRequest
                                                               error: &error];
     
-    if (append == NO)
-    {
-        for (NSManagedObject *objectToDelete in itemsToDelete)
-        {
-            [objectToDelete.managedObjectContext deleteObject: objectToDelete];
-        }
-    }
+    
     
     NSDictionary *channelsDictionary = dictionary[@"users"];
     
