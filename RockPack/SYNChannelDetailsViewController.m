@@ -240,6 +240,14 @@ UIPopoverControllerDelegate>
     
     //    self.txtFieldChannelName.backgroundColor = [UIColor blueColor];
     
+    
+    //Transparent navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationItem.title = @"";
+
 }
 
 

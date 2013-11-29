@@ -130,6 +130,9 @@
 
 @property  (nonatomic) BOOL creatingChannel;
 
+@property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
+@property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
+
 @end
 
 
@@ -350,14 +353,12 @@
     self.unfollowAlertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
     
     self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
-    
-    
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	
     
     [self updateTabStates];
     [self setUpUserProfile];
@@ -369,7 +370,12 @@
 
     // == Transparent navigation bar
     
+    self.tmpNavigationBarBackground = [[UIImage alloc]init];
+    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
+    
+    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
     
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
@@ -379,10 +385,6 @@
 
     //This should not be needed as the back button should take this from the view above but something was not right
     //TODO: should this be needed
-    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                                 target:nil
-                                                                                                 action:nil];
     
     
 }
@@ -390,6 +392,13 @@
 
 - (void) viewDidAppear: (BOOL) animated
 {
+    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                                 target:nil
+                                                                                                 action:nil];
+    self.navigationItem.backBarButtonItem.title = @"";
+    [self.navigationItem.backBarButtonItem setTitle:@""];
+
     self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
     [self.subscriptionThumbnailCollectionView reloadData];
     [super viewDidAppear: animated];
@@ -439,16 +448,13 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     
+    [self.navigationController.navigationBar setBackgroundImage:self.tmpNavigationBarBackground forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.shadowImage = self.tmpNavigationBarShadowImage;
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
     
-    //This should not be needed
-    self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    
-    //    [self.navigationController.navigationBar.backItem setTitle: self.tempBackString];
-    //    NSLog(@"back title %@", self.tempBackString);
 
     
     if (self.creatingChannel) {
