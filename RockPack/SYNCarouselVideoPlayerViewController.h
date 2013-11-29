@@ -1,5 +1,5 @@
 //
-//  SYNChannelVideoPlayerViewController.h
+//  SYNCarouselVideoPlayerViewController.h
 //  dolly
 //
 //  Created by Sherman Lo on 15/11/13.
@@ -10,7 +10,7 @@
 
 @class SYNVideoPlayer;
 
-@interface SYNChannelVideoPlayerViewController : SYNVideoPlayerViewController
+@interface SYNCarouselVideoPlayerViewController : SYNVideoPlayerViewController
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex;
 

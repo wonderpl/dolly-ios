@@ -1,12 +1,12 @@
 //
-//  SYNChannelVideoPlayerViewController.m
+//  SYNCarouselVideoPlayerViewController.m
 //  dolly
 //
 //  Created by Sherman Lo on 15/11/13.
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNChannelVideoPlayerViewController.h"
+#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNVideoPlayerViewController+Protected.h"
 #import "SYNVideoThumbnailCell.h"
 #import "VideoInstance.h"
@@ -21,7 +21,7 @@
 #import "SYNButton.h"
 #import <UIImageView+WebCache.h>
 
-@interface SYNChannelVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate>
+@interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *channelThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel *channelTitleLabel;
@@ -34,7 +34,7 @@
 
 @end
 
-@implementation SYNChannelVideoPlayerViewController
+@implementation SYNCarouselVideoPlayerViewController
 
 #pragma mark - Public class
 
@@ -43,7 +43,7 @@
 	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
-	SYNChannelVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
+	SYNCarouselVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
 	viewController.videoInstances = videoInstances;
 	viewController.selectedIndex = selectedIndex;
 	
