@@ -331,7 +331,7 @@
             
             int itemsCount = 0;
             
-            NSNumber * totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"total"];
             
             if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
             {
@@ -396,12 +396,14 @@
             
             int itemsCount = 0;
             
-            NSNumber * totalNumber = (NSNumber *) dictionary[@"videos"][@"total"];
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"total"];
             
             if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
             {
                 itemsCount = totalNumber.intValue;
             }
+            
+            
             if (!registryResultOk)
             {
                 return;
@@ -467,7 +469,7 @@
             
             int itemsCount = 0;
             
-            NSNumber * totalNumber = (NSNumber *) dictionary[@"videos"][@"total"];
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"total"];
             
             if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
             {
@@ -534,7 +536,7 @@
         } completionBlock: ^(BOOL registryResultOk) {
             int itemsCount = 0;
             
-            NSNumber * totalNumber = (NSNumber *) dictionary[@"users"][@"total"];
+            NSNumber * totalNumber = (NSNumber *) dictionary[@"total"];
             
             if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
             {
@@ -563,72 +565,7 @@
 }
 
 
-- (MKNetworkOperation *) searchChannelsForTerm: (NSString *) searchTerm
-                                      andRange: (NSRange) range
-                                    onComplete: (MKNKSearchSuccessBlock) completeBlock
-{
-    if (searchTerm == nil || [searchTerm isEqualToString: @""])
-    {
-        return nil;
-    }
-    
-    NSMutableDictionary *tempParameters = [NSMutableDictionary dictionary];
-    
-    tempParameters[@"q"] = searchTerm;
-    tempParameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    tempParameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
-    [tempParameters addEntriesFromDictionary: [self getLocaleParam]];
-    
-    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary: tempParameters];
-    
-    SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPISearchChannels
-                                                       params: parameters];
-    networkOperation.shouldNotCacheResponse = YES;
-    
-    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        if (!dictionary)
-        {
-            return;
-        }
 
-        
-        [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
-            BOOL registryResultOk = [self.searchRegistry registerChannelsFromDictionary: dictionary];
-            
-            return registryResultOk;
-        } completionBlock: ^(BOOL registryResultOk) {
-            int itemsCount = 0;
-            
-            NSNumber * totalNumber = (NSNumber *) dictionary[@"channels"][@"total"];
-            
-            if (totalNumber && [totalNumber isKindOfClass: [NSNumber class]])
-            {
-                itemsCount = totalNumber.intValue;
-            }
-            
-            if (!registryResultOk)
-            {
-                return;
-            }
-            
-            completeBlock(itemsCount);
-        }];
-        
-        
-    } errorHandler: ^(NSError *error) {
-        DebugLog(@"Update Videos Screens Request Failed");
-        
-        if (error.code >= 500 && error.code < 600)
-        {
-            [self showErrorPopUpForError: error];
-        }
-    }];
-    
-    [self enqueueOperation: networkOperation];
-    
-    return networkOperation;
-}
 
 
 #pragma mark - Autocomplete

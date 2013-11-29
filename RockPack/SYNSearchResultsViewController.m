@@ -77,6 +77,10 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
     [self.videosCollectionView registerNib: [UINib nibWithNibName: kSearchResultVideoCell bundle: nil]
                 forCellWithReuseIdentifier: kSearchResultVideoCell];
     
+    [self.videosCollectionView registerNib: [UINib nibWithNibName:kSearchResultChannelFooter  bundle: nil]
+                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+                       withReuseIdentifier: kSearchResultChannelFooter];
+    
     [self.usersCollectionView registerNib: [UINib nibWithNibName: kSearchResultUserCell bundle: nil]
                forCellWithReuseIdentifier: kSearchResultUserCell];
     
@@ -114,6 +118,9 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
         
         wself.loadingMoreContent = NO;
         
+        wself.dataItemsAvailable = (NSInteger)count;
+        
+        
         
         [wself.videosCollectionView reloadData];
     };
@@ -138,6 +145,8 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
             [wself removePopupMessage];
         
         wself.loadingMoreContent = NO;
+        
+        wself.dataItemsAvailable2 = (NSInteger)count;
         
         [wself.usersCollectionView reloadData];
     };
@@ -465,9 +474,13 @@ referenceSizeForFooterInSection: (NSInteger) section
     if(scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight && !self.isLoadingMoreContent)
     {
         // Videos
+        
+        
         if(scrollView == self.videosCollectionView && self.moreItemsToLoad)
         {
             [self incrementRangeForNextRequest];
+            
+            NSLog(@"Fetching Items for Range: %@", NSStringFromRange(self.dataRequestRange));
             
             if(_currentSearchGenre)
             {
