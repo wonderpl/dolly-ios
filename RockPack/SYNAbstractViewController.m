@@ -768,9 +768,12 @@
 		return;
 
 	SYNProfileRootViewController *profileVC = (SYNProfileRootViewController *)[self viewControllerOfClass:[SYNProfileRootViewController class]];
-    
+    [self.navigationController.navigationItem.backBarButtonItem setTitle:@""];
+
 	if (profileVC)
     {
+        
+
 		[self.navigationController popToViewController:profileVC animated:YES];
 	}
     else

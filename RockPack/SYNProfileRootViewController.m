@@ -361,7 +361,7 @@
 	[super viewWillAppear:animated];
     
     [self updateTabStates];
-    [self setUpUserProfile];
+  //  [self setUpUserProfile];
     [self setUpSegmentedControl];
     [self setNeedsStatusBarAppearanceUpdate];
     [self.channelThumbnailCollectionView reloadData];
@@ -399,6 +399,8 @@
     self.navigationItem.backBarButtonItem.title = @"";
     [self.navigationItem.backBarButtonItem setTitle:@""];
 
+    
+    
     self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
     [self.subscriptionThumbnailCollectionView reloadData];
     [super viewDidAppear: animated];
@@ -816,8 +818,12 @@
     {
         //1 for search bar
         //return self.arrDisplayFollowing.count;
+        NSLog(@"SUBSCRIPTIONS %lu",(unsigned long)self.channelOwner.subscriptions.count);
+
         return self.channelOwner.subscriptions.count;
     }
+    
+    NSLog(@"CHANNELS %lu",(unsigned long)self.channelOwner.channels.count);
     
     return self.channelOwner.channels.count + (self.isUserProfile ? 1 : 0); // to account for the extra 'creation' cell at the start of the collection view
 }
@@ -846,7 +852,6 @@
         if (self.creatingChannel)
         {
             
-            NSLog(@"index 0");
             ((SYNChannelCreateNewCell*)cell).descriptionTextView.hidden = NO;
             
             CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
@@ -862,7 +867,6 @@
         }
         else
         {
-            NSLog(@"index 0");
 
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
         }
@@ -987,7 +991,7 @@
         channel = self.channelOwner.subscriptions[indexPath.row];
     }
 	
-    [self viewChannelDetails:channel];
+//    [self viewChannelDetails:channel];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -1142,7 +1146,31 @@
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
     
-       NSLog(@"%f", offset);
+    [self moveViewsWithScroller:scrollView withOffset:offset];
+    
+    if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight)
+        && self.isLoadingMoreContent == NO)
+    {
+    //    [self loadMoreVideos];
+    }
+    
+
+    
+    if (!self.isIPhone)
+    {
+        if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
+        {
+            scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
+            return;
+        }
+        
+    }
+}
+
+
+-(void) moveViewsWithScroller :(UIScrollView*)scrollView withOffset:(CGFloat) offset
+{
+    //NSLog(@"%f", offset);
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
         
@@ -1251,17 +1279,7 @@
         }
     }
     
-    if (!self.isIPhone)
-    {
-        if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
-        {
-            scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
-            return;
-        }
-        
-    }
 }
-
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset
 {
@@ -1453,6 +1471,8 @@
     
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
+    
+    
     
 }
 
@@ -2000,14 +2020,14 @@
                                          completionHandler: ^(NSDictionary *resourceCreated) {
                                              
                                              // shows the message label from the MasterViewController
-                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+//                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                              
 //                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
 //                                                                                                    action: @"channelCreated"
 //                                                                                                     label: @""
 //                                                                                                     value: nil] build]];
                                              
-                                             NSString *channelId = resourceCreated[@"id"];
+//                                             NSString *channelId = resourceCreated[@"id"];
                                              
                                              
                                          } errorHandler: ^(id error) {
@@ -2052,7 +2072,6 @@
 
 -(void) saveEditModeTapped
 {
-    
     [self updateField:@"description" forValue:self.aboutMeTextView.text withCompletionHandler:^{
         appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
         [appDelegate saveContext: YES];
@@ -2082,6 +2101,8 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
                                                                                          userInfo: @{@"user": appDelegate.currentUser}];
                                       
                                       //                                           [self.spinner stopAnimating];
+                                      
+                                      
                                       
                                   } errorHandler: ^(id errorInfo) {
                                       
@@ -2280,7 +2301,6 @@ finishedWithImage: (UIImage *) image
         
         if (index == 0)
         {
-            NSLog(@"index 0");
             ((SYNChannelCreateNewCell*)cell).descriptionTextView.hidden = NO;
             
             CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
@@ -2301,7 +2321,6 @@ finishedWithImage: (UIImage *) image
             
             if (index == 0)
             {
-                NSLog(@"index 0");
                 ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 0.0;
                 ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 1.0;
                 
@@ -2417,7 +2436,6 @@ finishedWithImage: (UIImage *) image
             
             if (index == 0)
             {
-                NSLog(@"index 0");
                 ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 1.0f;
                 ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 0.0f;
                 ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
