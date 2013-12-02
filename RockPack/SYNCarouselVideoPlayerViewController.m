@@ -160,7 +160,7 @@
 	// We want to add an offset to the beginning and end of the collection view to ensure that the first and
 	// last item are centered
 	CGFloat insetWidth = (CGRectGetWidth(collectionView.frame) - collectionViewFlowLayout.itemSize.width) / 2;
-    return UIEdgeInsetsMake (0, insetWidth, 0, insetWidth);
+	return UIEdgeInsetsMake (0, insetWidth, 0, insetWidth);
 }
 
 #pragma mark - IBActions
