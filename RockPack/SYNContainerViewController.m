@@ -59,7 +59,7 @@
     // set general styling things
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
-                                                           NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0f]}];
+                                                           NSFontAttributeName:[UIFont regularCustomFontOfSize:(IS_IPAD ? 22.0f : 15.0f)]}];
     
     
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""

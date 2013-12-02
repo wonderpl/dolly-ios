@@ -12,7 +12,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
 
-@interface SYNFeedbackViewController ()
+@interface SYNFeedbackViewController () <UITextViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UISlider* slider;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
@@ -29,7 +29,7 @@
 
 @implementation SYNFeedbackViewController
 
-
+static NSString* placeholderText = @"Your feedback...";
 
 - (void)viewDidLoad
 {
@@ -49,21 +49,61 @@
                                                                             target:self
                                                                             action:@selector(closeButtonPressed:)];
     
+    
+    
     // setting fonts
     
-    self.titleLabel.font = [UIFont regularCustomFontOfSize:self.titleLabel.font.pointSize];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
     self.sliderLabel.font = [UIFont regularCustomFontOfSize:self.sliderLabel.font.pointSize];
     
     self.minValueLabel.font = [UIFont regularCustomFontOfSize:self.minValueLabel.font.pointSize];
     self.maxValueLabel.font = [UIFont regularCustomFontOfSize:self.maxValueLabel.font.pointSize];
     self.currentValueLabel.font = [UIFont regularCustomFontOfSize:self.currentValueLabel.font.pointSize];
     
+    self.textView.font = [UIFont regularCustomFontOfSize:self.textView.font.pointSize];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+    
     
     // set the initial state
     
     [self sliderMoved:self.slider];
+    
+    self.textView.text = placeholderText;
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:(128.0f/255.0f)
+                                                                          green:(128.0f/255.0f)
+                                                                           blue:(128.0f/255.0f)
+                                                                          alpha:1.0f]];
 }
 
+- (void) keyboardNotified: (NSNotification*) notification
+{
+    
+    CGRect sFrame = self.navigationController.view.frame;
+    if([notification.name isEqualToString:UIKeyboardWillShowNotification])
+    {
+        sFrame.origin.y -= 200.0f;
+    }
+    else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
+    {
+        sFrame.origin.y += 200.0f;
+    }
+    __weak SYNFeedbackViewController* wself = self;
+    [UIView animateWithDuration:0.3f animations:^{
+        wself.navigationController.view.frame = sFrame;
+    }];
+    
+}
 #pragma mark - Top Button Callbacks
 
 - (void) sendButtonPressed:(UIBarButtonItem*)buttonItem
@@ -119,7 +159,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"placeholder text here..."]) {
+    if ([textView.text isEqualToString:placeholderText]) {
         textView.text = @"";
         textView.textColor = [UIColor blackColor]; // optional
     }
@@ -129,7 +169,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"placeholder text here...";
+        textView.text = placeholderText;
         textView.textColor = [UIColor lightTextColor]; //optional
     }
     [textView resignFirstResponder];
