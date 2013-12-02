@@ -145,6 +145,11 @@
 
 "sharing_object_sent" = "Your %@ has been sent";
 
+"Feedback" = "Feedback";
+
+"Send" = "Send";
+"Close" = "Close";
+
 
 // == Notifications == //
 

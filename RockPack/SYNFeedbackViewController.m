@@ -7,6 +7,9 @@
 //
 
 #import "SYNFeedbackViewController.h"
+#import "SYNOAuthNetworkEngine.h"
+#import "SYNAppDelegate.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNFeedbackViewController ()
 
@@ -24,6 +27,54 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = NSLocalizedString(@"Feedback", nil);
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Send", nil)
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(sendButtonPressed:)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(closeButtonPressed:)];
+    
+    self.titleLabel.font = [UIFont regularCustomFontOfSize:self.titleLabel.font.pointSize];
+    self.sliderLabel.font = [UIFont regularCustomFontOfSize:self.sliderLabel.font.pointSize];
+}
+
+#pragma mark - Top Button Callbacks
+
+- (void) sendButtonPressed:(UIBarButtonItem*)buttonItem
+{
+    [self sendMessage];
+}
+
+- (void) closeButtonPressed:(UIBarButtonItem*)buttonItem
+{
+    
+    
+}
+
+- (void) sendMessage
+{
+    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    NSString* message = self.textView.text;
+    NSNumber* score = [NSNumber numberWithFloat:self.slider.value];
+    
+    [appDelegate.oAuthNetworkEngine sendFeedbackForMessage:message
+                                                  andScore:score
+                                         completionHandler:^(id responce) {
+                                             
+                                             
+                                             
+                                            } errorHandler:^(id error) {
+                                             
+                                             
+        
+                                            }];
 }
 
 #pragma mark - TextView Delegate
