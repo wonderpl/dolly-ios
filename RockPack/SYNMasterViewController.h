@@ -8,7 +8,6 @@
 
 
 #import "SYNAppDelegate.h"
-#import "SYNContainerViewController.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNVideoViewerViewController.h"
 @import UIKit;
