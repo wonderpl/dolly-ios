@@ -183,6 +183,8 @@ typedef enum : NSInteger {
 #define kGetExternalAccounts       @"/ws/USERID/external_accounts/"             /* GET */
 #define kGetExternalAccountId       @"/ws/USERID/external_accounts/ACCOUNTID/"  /* GET */
 
+#define kFeedbackUrl                @"/ws/feedback/"                            /* GET */
+
 // Set/Get Flags
 #define kFlagsGetAll                @"/ws/USERID/flags/"                      /* GET */
 #define kFlagsSet                   @"/ws/USERID/flags/FLAG/"                 /* PUT */ /* DELETE */

@@ -1277,6 +1277,9 @@
 		BEBFD0A9177A039D00C90544 /* ButtonPrivateRightHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD09F177A039D00C90544 /* ButtonPrivateRightHighlighted@2x.png */; };
 		BEBFD0AC177A03D200C90544 /* PanelPrivateAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD0AA177A03D200C90544 /* PanelPrivateAlert.png */; };
 		BEBFD0AD177A03D200C90544 /* PanelPrivateAlert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD0AB177A03D200C90544 /* PanelPrivateAlert@2x.png */; };
+		BEC39C0D184CA4F700DA8089 /* SYNFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C0B184CA4F700DA8089 /* SYNFeedbackViewController.m */; };
+		BEC39C0E184CA4F700DA8089 /* SYNFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C0C184CA4F700DA8089 /* SYNFeedbackViewController.xib */; };
+		BEC39C10184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C0F184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib */; };
 		BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */; };
 		BED027B21833F66700636659 /* SYNOptionsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */; };
 		BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */; };
@@ -2832,6 +2835,10 @@
 		BEBFD09F177A039D00C90544 /* ButtonPrivateRightHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPrivateRightHighlighted@2x.png"; path = "Assets/Images/ButtonPrivateRightHighlighted@2x.png"; sourceTree = "<group>"; };
 		BEBFD0AA177A03D200C90544 /* PanelPrivateAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelPrivateAlert.png; path = Assets/Images/PanelPrivateAlert.png; sourceTree = "<group>"; };
 		BEBFD0AB177A03D200C90544 /* PanelPrivateAlert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelPrivateAlert@2x.png"; path = "Assets/Images/PanelPrivateAlert@2x.png"; sourceTree = "<group>"; };
+		BEC39C0A184CA4F700DA8089 /* SYNFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedbackViewController.h; sourceTree = "<group>"; };
+		BEC39C0B184CA4F700DA8089 /* SYNFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedbackViewController.m; sourceTree = "<group>"; };
+		BEC39C0C184CA4F700DA8089 /* SYNFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFeedbackViewController.xib; sourceTree = "<group>"; };
+		BEC39C0F184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFeedbackViewController~iphone.xib"; sourceTree = "<group>"; };
 		BED027AE1833F66700636659 /* SYNOptionsOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOptionsOverlayViewController.h; sourceTree = "<group>"; };
 		BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOptionsOverlayViewController.m; sourceTree = "<group>"; };
 		BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOptionsOverlayViewController.xib; sourceTree = "<group>"; };
@@ -5846,9 +5853,21 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		BEC39C09184CA4C100DA8089 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				BEC39C0A184CA4F700DA8089 /* SYNFeedbackViewController.h */,
+				BEC39C0B184CA4F700DA8089 /* SYNFeedbackViewController.m */,
+				BEC39C0C184CA4F700DA8089 /* SYNFeedbackViewController.xib */,
+				BEC39C0F184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib */,
+			);
+			name = Feedback;
+			sourceTree = "<group>";
+		};
 		BED027AD1833F64800636659 /* Options */ = {
 			isa = PBXGroup;
 			children = (
+				BEC39C09184CA4C100DA8089 /* Feedback */,
 				BED027AE1833F66700636659 /* SYNOptionsOverlayViewController.h */,
 				BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */,
 				BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */,
@@ -6063,6 +6082,7 @@
 				019E6A8F16E9081D00647002 /* GlossVideoThumbnailSmallPlaying.png in Resources */,
 				019E6A9016E9081D00647002 /* GlossVideoThumbnailSmallPlaying@2x.png in Resources */,
 				011A15E116EE2F46008CF25E /* popover-black-right-arrow-image@2x.png in Resources */,
+				BEC39C10184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib in Resources */,
 				011A15E216EE2F46008CF25E /* popover-black-right-arrow-image.png in Resources */,
 				011A15F916EE3F05008CF25E /* SYNCameraPopoverViewController.xib in Resources */,
 				011A160616EE4F79008CF25E /* popover-black-left-arrow-image.png in Resources */,
@@ -6238,6 +6258,7 @@
 				BE2D2153171D5BD500B4B755 /* ButtonCancel@2x.png in Resources */,
 				1F458B0717E1C4E6003C14AC /* AppIcon76x76@2x.png in Resources */,
 				BE2D2154171D5BD500B4B755 /* ButtonCancelHighlighted.png in Resources */,
+				BEC39C0E184CA4F700DA8089 /* SYNFeedbackViewController.xib in Resources */,
 				BE2D2155171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png in Resources */,
 				BE2D2158171D8A4500B4B755 /* AvatarProfile.png in Resources */,
 				BE2D2159171D8A4500B4B755 /* AvatarProfile@2x.png in Resources */,
@@ -7266,6 +7287,7 @@
 				BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */,
 				BEA1E33116CE6045000AB59D /* SYNNetworkOperationJsonObject.m in Sources */,
 				016AED3B1821349800DEAF7E /* SYNSocialButton.m in Sources */,
+				BEC39C0D184CA4F700DA8089 /* SYNFeedbackViewController.m in Sources */,
 				BE0815C616D5389C00ADB1DC /* SYNMasterViewController.m in Sources */,
 				BE57C0311843638C00C6444A /* SYNOnBoardingHeader.m in Sources */,
 				BE0815CA16D5478B00ADB1DC /* SYNRegistry.m in Sources */,

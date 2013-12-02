@@ -1815,4 +1815,45 @@
     [self enqueueOperation: networkOperation];
 }
 
+#pragma mark - Feedback Form
+
+- (void) sendFeedbackForMessage: (NSString *) message
+                       andScore: (NSNumber*)score
+              completionHandler: (MKNKUserSuccessBlock) completionBlock
+                   errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    
+    
+    NSDictionary* messageData = @{@"message" : message, @"score" : score};
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: kFeedbackUrl
+                                                                                                       params: messageData
+                                                                                                   httpMethod: @"POST"
+                                                                                                          ssl: YES];
+    
+    
+    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
+ 
+    
+    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
+        
+                                    completionBlock(dictionary); // should be empty
+        
+                                } errorHandler: ^(NSError *error) {
+                                    
+                                    /* example: 
+                                        "form_errors": {
+                                        "message": ["Field cannot be longer than 1024 characters."],
+                                        "score": ["Number must be between 0 and 9."]
+                                        }
+                                        */
+                                    errorBlock(error);
+                                    
+                                }];
+    
+    [self enqueueSignedOperation: networkOperation];
+    
+    
+}
+
 @end

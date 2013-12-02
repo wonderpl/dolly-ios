@@ -86,41 +86,6 @@
     }];
 }
 
-//- (NSURLRequest *)connection: (NSURLConnection *)inConnection
-//             willSendRequest: (NSURLRequest *)inRequest
-//            redirectResponse: (NSURLResponse *)inRedirectResponse;
-//{
-//    
-//    if ([inRequest.URL.scheme isEqualToString: @"rockpack"])
-//    {
-//        return nil;
-//    }
-//    
-//    NSMutableURLRequest *r = [self.readonlyRequest mutableCopy];
-//    
-//    if (inRedirectResponse)
-//    {
-//        [r setURL: [inRequest URL]];
-//    }
-//        else {
-//        // Note that we need to configure the Accept-Language header this late in processing
-//        // because NSURLRequest adds a default Accept-Language header late in the day, so we
-//        // have to undo that here.
-//        // For discussion see:
-//        // http://lists.apple.com/archives/macnetworkprog/2009/Sep/msg00022.html
-//        // http://stackoverflow.com/questions/5695914/nsurlrequest-where-an-app-can-find-the-default-headers-for-http-request
-//        NSString* accept_language = self.shouldSendAcceptLanguageHeader ? [self languagesFromLocale] : nil;
-//            
-//        [r setValue: accept_language
-//           forHTTPHeaderField: @"Accept-Language"];
-//    }
-//    return r;
-//}
-//
-//- (NSString*) languagesFromLocale
-//{
-//    return [NSString stringWithFormat: @"%@, en-us", [[NSLocale preferredLanguages] componentsJoinedByString: @", "]];
-//}
 
 
 @end

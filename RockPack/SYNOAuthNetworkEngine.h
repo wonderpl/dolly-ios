@@ -272,4 +272,12 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
 
 - (void) getClientIPBasedLocation;
 
+
+#pragma mark - Feedback Form
+
+- (void) sendFeedbackForMessage: (NSString *) userId
+                       andScore: (NSNumber*)score
+              completionHandler: (MKNKUserSuccessBlock) completionBlock
+                   errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 @end
