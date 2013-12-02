@@ -12,9 +12,6 @@
 
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 
-+ (UINib *)nib;
-+ (NSString *)reuseIdentifier;
-
 - (void)setImageWithURL:(NSString *)urlString;
 
 @end

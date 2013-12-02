@@ -11,7 +11,6 @@
 #import "ChannelOwner.h"
 #import "ExternalAccount.h"
 #import "GAI.h"
-#import "GoogleConversionPing.h"
 #import "NSObject+Blocks.h"
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
@@ -23,13 +22,12 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNYouTubeVideoPlaybackViewController.h"
-#import "SYNOoyalaVideoPlaybackViewController.h"
 #import "TestFlight.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "UncaughtExceptionHandler.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <sqlite3.h>
+#import <GoogleConversionPing.h>
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
@@ -159,10 +157,6 @@
     // First we need to ensure that we have the player JS in place
     [self copyFileFromAppBundleToDocumentsDirectory: @"YouTubeIFramePlayer"
                                              ofType: @"html"];
-    
-    // Now cause the playback controller to be instantiated
-    [SYNYouTubeVideoPlaybackViewController sharedInstance];
-    [SYNOoyalaVideoPlaybackViewController sharedInstance];
     
     // Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
     // inlduding logout, which is the correct flow
@@ -1600,34 +1594,5 @@
     
     return newRequest;
 }
-
-
-- (Channel*) channelFromChannelId: (NSString*) channelId
-{
-    Channel* channel;
-    
-    NSEntityDescription* channelEntity = [NSEntityDescription entityForName: @"Channel"
-                                                     inManagedObjectContext: self.mainManagedObjectContext];
-    
-    NSFetchRequest *channelFetchRequest = [[NSFetchRequest alloc] init];
-    [channelFetchRequest setEntity: channelEntity];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", channelId];
-    
-    [channelFetchRequest setPredicate: predicate];
-    
-    NSError* error;
-    
-    NSArray *matchingChannelEntries = [self.mainManagedObjectContext executeFetchRequest: channelFetchRequest
-                                                                                   error: &error];
-    
-    if (matchingChannelEntries.count > 0)
-    {
-        channel = matchingChannelEntries[0];
-    }
-    
-    return channel;
-}
-
 
 @end

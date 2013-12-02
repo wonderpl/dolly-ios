@@ -1,5 +1,6 @@
 PODS:
   - Appirater (2.0.2)
+  - GoogleConversionTracking (2.1.0)
   - Kiwi/ARC (2.2.3)
   - Kiwi/NonARC (2.2.3)
   - Kiwi/XCTest (2.2.3):
@@ -16,6 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - Appirater
+  - GoogleConversionTracking
   - Kiwi/XCTest
   - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`, branch `cocoapods`)
   - Ooyala
@@ -30,6 +32,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
+  GoogleConversionTracking: 6196d703c8adaa42d6fb1b90e620d532b7cd4bfa
   Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
   Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869

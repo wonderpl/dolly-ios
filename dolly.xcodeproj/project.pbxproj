@@ -622,7 +622,6 @@
 		1FFAE62B17E21BBC006C92CA /* ShadowPanelFriends@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FFAE62917E21BBC006C92CA /* ShadowPanelFriends@2x~iphone.png */; };
 		1FFAE62C17E21BBC006C92CA /* ShadowPanelFriends~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FFAE62A17E21BBC006C92CA /* ShadowPanelFriends~iphone.png */; };
 		38281F1D17439B770024DC18 /* SYNLoginBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */; };
-		3854788417946630006EB38B /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3854788317946630006EB38B /* libGoogleConversionTracking.a */; };
 		3862E89F172978D10066E8E7 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3862E89C172978D10066E8E7 /* Default~iphone.png */; };
 		3862E8A0172978D10066E8E7 /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3862E89D172978D10066E8E7 /* Default-568h@2x~iphone.png */; };
 		3862E8A1172978D10066E8E7 /* Default@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3862E89E172978D10066E8E7 /* Default@2x~iphone.png */; };
@@ -1333,6 +1332,7 @@
 		E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */; };
 		E91D364B1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91D364A1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard */; };
 		E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */; };
+		E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */; };
 		E93C7F0918368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93C7F0818368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard */; };
 		E93C7F0C18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93C7F0B18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m */; };
 		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
@@ -2089,8 +2089,6 @@
 		38281F1B17439B770024DC18 /* SYNLoginBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginBaseViewController.h; sourceTree = "<group>"; };
 		38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginBaseViewController.m; sourceTree = "<group>"; };
 		3854788017940F75006EB38B /* Rockpack 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 5.xcdatamodel"; sourceTree = "<group>"; };
-		3854788217946630006EB38B /* GoogleConversionPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleConversionPing.h; path = "GoogleConversionTrackingSDK-iOS-1.2.0/GoogleConversionPing.h"; sourceTree = "<group>"; };
-		3854788317946630006EB38B /* libGoogleConversionTracking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleConversionTracking.a; path = "GoogleConversionTrackingSDK-iOS-1.2.0/libGoogleConversionTracking.a"; sourceTree = "<group>"; };
 		3862E89C172978D10066E8E7 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default~iphone.png"; path = "Assets/Images/Default~iphone.png"; sourceTree = "<group>"; };
 		3862E89D172978D10066E8E7 /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x~iphone.png"; path = "Assets/Images/Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		3862E89E172978D10066E8E7 /* Default@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x~iphone.png"; path = "Assets/Images/Default@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2906,6 +2904,8 @@
 		E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoLoadingView.h; sourceTree = "<group>"; };
 		E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingView.m; sourceTree = "<group>"; };
 		E91F04531844C4410009D610 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E92D3356184CDFEA0025D1DF /* UICollectionReusableView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionReusableView+Helpers.h"; sourceTree = "<group>"; };
+		E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionReusableView+Helpers.m"; sourceTree = "<group>"; };
 		E93C7F0818368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNCarouselVideoPlayerViewController_iphone.storyboard; sourceTree = "<group>"; };
 		E93C7F0A18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCarouselVideoPlayerViewController.h; sourceTree = "<group>"; };
 		E93C7F0B18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCarouselVideoPlayerViewController.m; sourceTree = "<group>"; };
@@ -2946,7 +2946,6 @@
 				0125FBA61831041E00EC822E /* libc++.dylib in Frameworks */,
 				01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */,
 				01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */,
-				3854788417946630006EB38B /* libGoogleConversionTracking.a in Frameworks */,
 				C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */,
 				019824F01629CC7600216900 /* libTestFlight.a in Frameworks */,
 				019824F21629CE1600216900 /* libz.dylib in Frameworks */,
@@ -3636,7 +3635,6 @@
 				BE285DB91726826800D995AB /* Channels Manager */,
 				BE7D34CB171443330085AB81 /* Device */,
 				019824E91629CBD000216900 /* Exception Handler */,
-				3854788117946612006EB38B /* Google Adwords */,
 				0173E6C5171822BF00EEE76B /* Google Analytics */,
 				011A162016EF5E96008CF25E /* Image Picker */,
 				019E6A5E165FD958002B312A /* OAuth2 */,
@@ -3797,6 +3795,8 @@
 				E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */,
 				E9F7CC741846273E0026C97D /* NSString+Validation.h */,
 				E9F7CC751846273E0026C97D /* NSString+Validation.m */,
+				E92D3356184CDFEA0025D1DF /* UICollectionReusableView+Helpers.h */,
+				E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -4598,15 +4598,6 @@
 				1FE1C66E1762236B00EDFC0E /* ButtonTermsHighlighted@2x.png */,
 			);
 			name = About;
-			sourceTree = "<group>";
-		};
-		3854788117946612006EB38B /* Google Adwords */ = {
-			isa = PBXGroup;
-			children = (
-				3854788217946630006EB38B /* GoogleConversionPing.h */,
-				3854788317946630006EB38B /* libGoogleConversionTracking.a */,
-			);
-			name = "Google Adwords";
 			sourceTree = "<group>";
 		};
 		38A2FF1C1731607F00FB9F57 /* iPhone */ = {
@@ -7240,6 +7231,7 @@
 				015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */,
 				019824EC1629CBDF00216900 /* UncaughtExceptionHandler.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
+				E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */,
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,
 				BEB31374181AC6DB00FAF98A /* SYNSocialAddButton.m in Sources */,
 				019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */,

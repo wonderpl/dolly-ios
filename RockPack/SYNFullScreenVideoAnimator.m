@@ -69,12 +69,12 @@ static const CGFloat AnimationDuration = 0.3;
 		if (IS_IPHONE) {
 			UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
 			CGFloat angle = (orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
-			videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(containerView.bounds), CGRectGetWidth(containerView.bounds));
+			videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(toViewController.view.bounds), CGRectGetWidth(toViewController.view.bounds));
 			videoPlayer.transform = CGAffineTransformMakeRotation(angle);
 		} else {
 			CGFloat aspectRatio = CGRectGetWidth(videoPlayer.bounds) / CGRectGetHeight(videoPlayer.bounds);
-			CGFloat containerWidth = CGRectGetWidth(containerView.bounds);
-			videoPlayer.bounds = CGRectMake(0, 0, containerWidth, containerWidth / aspectRatio);
+			CGFloat toViewWidth = CGRectGetWidth(toViewController.view.bounds);
+			videoPlayer.bounds = CGRectMake(0, 0, toViewWidth, toViewWidth / aspectRatio);
 		}
 		videoPlayer.center = toViewController.view.center;
 		

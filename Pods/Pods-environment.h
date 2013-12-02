@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_Appirater 0
 #define COCOAPODS_VERSION_PATCH_Appirater 2
 
+// GoogleConversionTracking
+#define COCOAPODS_POD_AVAILABLE_GoogleConversionTracking
+#define COCOAPODS_VERSION_MAJOR_GoogleConversionTracking 2
+#define COCOAPODS_VERSION_MINOR_GoogleConversionTracking 1
+#define COCOAPODS_VERSION_PATCH_GoogleConversionTracking 0
+
 // MKNetworkKit
 #define COCOAPODS_POD_AVAILABLE_MKNetworkKit
 #define COCOAPODS_VERSION_MAJOR_MKNetworkKit 0

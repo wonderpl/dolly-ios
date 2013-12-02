@@ -18,12 +18,7 @@
 @import CoreData;
 @import UIKit;
 
-#define kShowLoginPhase YES
-#define kUsingProductionAPI YES
-
 @class SYNMasterViewController;
-
-// Something new!
 
 @class SYNContainerViewController, ChannelOwner, SYNNetworkEngine, SYNOAuthNetworkEngine;
 

@@ -54,6 +54,24 @@
 
 #pragma mark - Getters / Setters
 
+- (void)setVideoPlayer:(SYNVideoPlayer *)videoPlayer {
+	_videoPlayer = videoPlayer;
+	
+	if (IS_IPHONE) {
+		UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+		CGFloat angle = (orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
+		videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds));
+		videoPlayer.transform = CGAffineTransformMakeRotation(angle);
+	} else {
+		CGFloat aspectRatio = CGRectGetWidth(videoPlayer.bounds) / CGRectGetHeight(videoPlayer.bounds);
+		CGFloat viewWidth = CGRectGetWidth(self.view.bounds);
+		videoPlayer.bounds = CGRectMake(0, 0, viewWidth, round(viewWidth / aspectRatio));
+	}
+	self.videoPlayer.center = CGPointMake(CGRectGetWidth(self.view.bounds) / 2.0, CGRectGetHeight(self.view.bounds) / 2.0);
+
+	[self.view addSubview:videoPlayer];
+}
+
 - (UIView *)backgroundView {
 	if (!_backgroundView) {
 		UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
