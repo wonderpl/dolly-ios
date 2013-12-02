@@ -72,6 +72,10 @@
 	[self trackVideoViewingStatisticsForVideoInstance:self.videoInstance withVideoPlayer:self.currentVideoPlayer];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleDefault;
+}
+
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
@@ -123,10 +127,6 @@
 
 #pragma mark - IBActions
 
-- (IBAction)closeButtonPressed:(UIButton *)close {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)likeButtonPressed:(SYNSocialButton *)button {
 	[self likeControlPressed:button];
 }
@@ -146,10 +146,12 @@
 	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
 	
 	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
+		self.currentVideoPlayer.maximised = NO;
 		[self videoPlayerMinimise];
 	}
 	
 	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
+		self.currentVideoPlayer.maximised = YES;
 		[self videoPlayerMaximise];
 	}
 }

@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 @property (nonatomic, assign) id<SYNVideoPlayerDelegate> delegate;
 
 @property (nonatomic, assign) NSTimeInterval currentTime;
+@property (nonatomic, assign) BOOL maximised;
 
 @property (nonatomic, strong, readonly) UIView *playerContainerView;
 
