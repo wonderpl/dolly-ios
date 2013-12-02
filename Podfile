@@ -6,6 +6,7 @@ pod 'SSKeychain', 	'~> 0.2.1'
 pod 'Appirater'
 pod 'Ooyala'
 pod 'SDWebImage'
+pod 'GoogleConversionTracking'
 
 target :dollyTests, :exclusive => true do
 	pod 'Kiwi/XCTest'

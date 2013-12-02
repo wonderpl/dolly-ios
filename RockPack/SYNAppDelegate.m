@@ -11,7 +11,6 @@
 #import "ChannelOwner.h"
 #import "ExternalAccount.h"
 #import "GAI.h"
-#import "GoogleConversionPing.h"
 #import "NSObject+Blocks.h"
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
@@ -30,6 +29,7 @@
 #import "UncaughtExceptionHandler.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <sqlite3.h>
+#import <GoogleConversionPing.h>
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
