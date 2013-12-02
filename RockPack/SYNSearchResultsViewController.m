@@ -15,15 +15,11 @@
 #import "SYNChannelFooterMoreView.h"
 
 #import "UIColor+SYNColor.h"
-
+#import "UICollectionReusableView+Helpers.h"
 #import "ChannelOwner.h"
 #import "VideoInstance.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
-
-static NSString *kSearchResultVideoCell = @"SYNSearchResultsVideoCell";
-static NSString *kSearchResultUserCell = @"SYNSearchResultsUserCell";
-static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
 
 @interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -74,19 +70,19 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
     
     self.view.autoresizesSubviews = YES;
     
-    [self.videosCollectionView registerNib: [UINib nibWithNibName: kSearchResultVideoCell bundle: nil]
-                forCellWithReuseIdentifier: kSearchResultVideoCell];
+    [self.videosCollectionView registerNib:[SYNSearchResultsVideoCell nib]
+                forCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]];
     
-    [self.videosCollectionView registerNib: [UINib nibWithNibName:kSearchResultChannelFooter  bundle: nil]
-                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
-                       withReuseIdentifier: kSearchResultChannelFooter];
+    [self.videosCollectionView registerNib:[SYNChannelFooterMoreView nib]
+                forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                       withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
-    [self.usersCollectionView registerNib: [UINib nibWithNibName: kSearchResultUserCell bundle: nil]
-               forCellWithReuseIdentifier: kSearchResultUserCell];
+    [self.usersCollectionView registerNib:[SYNSearchResultsUserCell nib]
+               forCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]];
     
-    [self.usersCollectionView registerNib: [UINib nibWithNibName:kSearchResultChannelFooter  bundle: nil]
-               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
-                      withReuseIdentifier: kSearchResultChannelFooter];
+    [self.usersCollectionView registerNib:[SYNChannelFooterMoreView nib]
+               forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                      withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
     self.containerTabs.layer.cornerRadius = 4.0f;
     self.containerTabs.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -368,8 +364,8 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
     
     if (collectionView == self.videosCollectionView)
     {
-        SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultVideoCell
-                                                                                         forIndexPath: indexPath];
+        SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
+                                                                                         forIndexPath:indexPath];
         
          
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
@@ -380,8 +376,8 @@ static NSString *kSearchResultChannelFooter = @"SYNChannelFooterMoreView";
     }
     else if (collectionView == self.usersCollectionView)
     {
-        SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: kSearchResultUserCell
-                                                                                       forIndexPath: indexPath];
+        SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]
+                                                                                       forIndexPath:indexPath];
         
         
         userCell.channelOwner = (ChannelOwner*)(self.usersArray[indexPath.item]);
@@ -458,9 +454,9 @@ referenceSizeForFooterInSection: (NSInteger) section
 	if (kind == UICollectionElementKindSectionFooter)
     {
         
-        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                             withReuseIdentifier: kSearchResultChannelFooter
-                                                                    forIndexPath: indexPath];
+        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                             withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
+                                                                    forIndexPath:indexPath];
         supplementaryView = self.footerView;
         
         
