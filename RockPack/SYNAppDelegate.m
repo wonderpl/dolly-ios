@@ -22,8 +22,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNYouTubeVideoPlaybackViewController.h"
-#import "SYNOoyalaVideoPlaybackViewController.h"
 #import "TestFlight.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "UncaughtExceptionHandler.h"
@@ -159,10 +157,6 @@
     // First we need to ensure that we have the player JS in place
     [self copyFileFromAppBundleToDocumentsDirectory: @"YouTubeIFramePlayer"
                                              ofType: @"html"];
-    
-    // Now cause the playback controller to be instantiated
-    [SYNYouTubeVideoPlaybackViewController sharedInstance];
-    [SYNOoyalaVideoPlaybackViewController sharedInstance];
     
     // Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
     // inlduding logout, which is the correct flow
