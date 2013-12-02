@@ -1086,13 +1086,11 @@
     [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     if (decelerate)
     {
-        [self scrollingEnded];
         [self moveNameLabelWithOffset:scrollView.contentOffset.y];
     }
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self scrollingEnded];
     [self moveNameLabelWithOffset:scrollView.contentOffset.y];
 }
 
@@ -1302,13 +1300,6 @@
         }
     }
 }
-
-//Scrolling has ended
--(void) scrollingEnded{
-    
-}
-
-
 
 #pragma mark - Accessors
 
