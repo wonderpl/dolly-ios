@@ -181,7 +181,13 @@
 	videoPlayer.frame = self.videoPlayerContainerView.bounds;
 	
 	self.currentVideoPlayer = videoPlayer;
-	[self.videoPlayerContainerView addSubview:videoPlayer];
+	if ([self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]]) {
+		videoPlayer.maximised = YES;
+		SYNFullScreenVideoViewController *fullScreenViewController = (SYNFullScreenVideoViewController *)self.presentedViewController;
+		fullScreenViewController.videoPlayer = videoPlayer;
+	} else {
+		[self.videoPlayerContainerView addSubview:videoPlayer];
+	}
 	
 	[videoPlayer play];
 }
