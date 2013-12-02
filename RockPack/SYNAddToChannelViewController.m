@@ -318,6 +318,7 @@
 
 - (IBAction) closeButtonPressed: (id) sender
 {
+    
     self.closeButton.enabled = NO;
     self.confirmButtom.enabled = NO;
     

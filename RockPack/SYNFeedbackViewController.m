@@ -11,6 +11,7 @@
 #import "SYNAppDelegate.h"
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SYNFeedbackViewController () <UITextViewDelegate>
 
@@ -24,6 +25,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* minValueLabel;
 @property (nonatomic, strong) IBOutlet UILabel* maxValueLabel;
 @property (nonatomic, strong) IBOutlet UILabel* currentValueLabel;
+
+@property (nonatomic, strong) IBOutlet UIView* containerSlider;
 
 @end
 
@@ -44,10 +47,14 @@ static NSString* placeholderText = @"Your feedback...";
                                                                              target:self
                                                                              action:@selector(sendButtonPressed:)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
-                                                                             style:UIBarButtonItemStyleBordered
-                                                                            target:self
-                                                                            action:@selector(closeButtonPressed:)];
+    if(IS_IPAD)
+    {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
+                                                                                 style:UIBarButtonItemStyleBordered
+                                                                                target:self
+                                                                                action:@selector(closeButtonPressed:)];
+    }
+    
     
     
     
@@ -74,48 +81,72 @@ static NSString* placeholderText = @"Your feedback...";
                                                object:self.view.window];
     
     
+    // add lines around container
+    
+    self.containerSlider.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.containerSlider.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
+    
+    self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.textView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
+    
+    
     // set the initial state
     
     [self sliderMoved:self.slider];
     
     self.textView.text = placeholderText;
     
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:(128.0f/255.0f)
-                                                                          green:(128.0f/255.0f)
-                                                                           blue:(128.0f/255.0f)
-                                                                          alpha:1.0f]];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed: (128.0f/255.0f)
+                                                                          green: (128.0f/255.0f)
+                                                                           blue: (128.0f/255.0f)
+                                                                          alpha: 1.0f]];
+    
+    
 }
 
 - (void) keyboardNotified: (NSNotification*) notification
 {
+    if(IS_IPAD)
+    {
+        CGRect sFrame = self.navigationController.view.frame;
+        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
+            sFrame.origin.y -= 200.0f;
+        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
+            sFrame.origin.y += 200.0f;
+        __weak SYNFeedbackViewController* wself = self;
+        [UIView animateWithDuration:0.3f animations:^{
+            wself.navigationController.view.frame = sFrame;
+        }];
+    }
+    else // is IPHONE
+    {
+        
+    }
     
-    CGRect sFrame = self.navigationController.view.frame;
-    if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-    {
-        sFrame.origin.y -= 200.0f;
-    }
-    else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-    {
-        sFrame.origin.y += 200.0f;
-    }
-    __weak SYNFeedbackViewController* wself = self;
-    [UIView animateWithDuration:0.3f animations:^{
-        wself.navigationController.view.frame = sFrame;
-    }];
     
 }
 #pragma mark - Top Button Callbacks
 
 - (void) sendButtonPressed:(UIBarButtonItem*)buttonItem
 {
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     [self sendMessage];
 }
 
 - (void) closeButtonPressed:(UIBarButtonItem*)buttonItem
 {
-    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if(IS_IPAD)
+    {
+        SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
-    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
     
 }
 
@@ -130,12 +161,12 @@ static NSString* placeholderText = @"Your feedback...";
                                                   andScore:score
                                          completionHandler:^(id responce) {
                                              
-                                             
-                                             
+                                             self.navigationItem.rightBarButtonItem.enabled = YES;
+                                             self.navigationItem.leftBarButtonItem.enabled = YES;
                                             } errorHandler:^(id error) {
                                              
-                                             
-        
+                                             self.navigationItem.rightBarButtonItem.enabled = YES;
+                                                self.navigationItem.leftBarButtonItem.enabled = YES;
                                             }];
 }
 
@@ -144,10 +175,10 @@ static NSString* placeholderText = @"Your feedback...";
 - (IBAction)sliderMoved:(UISlider*)slider
 {
     self.currentValueLabel.text = [NSString stringWithFormat:@"%0.1f", slider.value];
-    self.currentValueLabel.hidden = NO;
     
+    CGFloat ratio = self.slider.value/self.slider.maximumValue;
     
-    CGFloat xPosition = ((self.slider.frame.size.width - 34.0f) * (self.slider.value/10.0f)) + self.slider.frame.origin.x + 17.0f;
+    CGFloat xPosition = ((self.slider.frame.size.width - 34.0f) * ratio) + self.slider.frame.origin.x + 15.0f;
     
     
     self.currentValueLabel.center = CGPointMake(xPosition, self.currentValueLabel.center.y);
