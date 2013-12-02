@@ -8,10 +8,10 @@
 
 @import UIKit;
 #import "SYNSearchResultsCell.h"
-#import "SYNSocialActionsDelegate.h"
-#import "ChannelOwner.h"
-#import "SYNSocialButton.h"
-#import "SYNAvatarButton.h"
+
+@class ChannelOwner;
+@class SYNSocialButton;
+@class SYNAvatarButton;
 
 @interface SYNSearchResultsUserCell : SYNSearchResultsCell
 
