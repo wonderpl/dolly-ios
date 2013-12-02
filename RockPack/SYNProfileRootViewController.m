@@ -34,11 +34,6 @@
 
 @import QuartzCore;
 
-#define kInterRowMargin 1.0f
-#define PULL_THRESHOLD -285.0f
-#define PULL_THRESHOLD_IPAD 0.0f
-#define ADDEDBOUNDS 200.0f
-#define TABBAR_HEIGHT 49.0f
 #define FULL_NAME_LABEL_IPHONE 276.0f // lower is down
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
@@ -58,7 +53,6 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
-@property (nonatomic) BOOL deleteCellModeOn;
 @property (nonatomic) BOOL isIPhone;
 @property (nonatomic) BOOL isUserProfile;
 @property (nonatomic) BOOL trackView;
@@ -116,7 +110,6 @@
 @property (strong, nonatomic) UIColor *greyColor;
 @property (strong, nonatomic) UIColor *tabTextColor;
 
-@property (nonatomic, assign) BOOL pulling;
 @property (nonatomic, assign) BOOL searchMode;
 @property (nonatomic,assign) CGFloat startingPosition;
 @property (strong, nonatomic) IBOutlet UISearchBar *followingSearchBar;
@@ -133,7 +126,6 @@
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
 @property (strong, nonatomic) UIAlertView *unfollowAlertView;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
-@property (strong, nonatomic) NSString *tempBackString;
 
 @property (strong, nonatomic) SYNProfileFlowLayout *testLayoutIPhone;
 
@@ -276,9 +268,6 @@
     
     //[self updateMainScrollView];
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
-    
-    self.pulling = NO;
-    
     
     UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
     if(txfSearchField)
@@ -464,33 +453,6 @@
 //    [self.navigationController.navigationBar.backItem setTitle: self.tempBackString];
 //    NSLog(@"back title %@", self.tempBackString);
 
-}
-
-#pragma mark - Container Scroll Delegates
-- (void) viewDidScrollToFront
-{
-    [self updateAnalytics];
-    
-    if (self.isIPhone)
-    {
-        self.channelThumbnailCollectionView.scrollsToTop = !self.collectionsTabActive;
-        self.subscriptionThumbnailCollectionView.scrollsToTop = self.collectionsTabActive;
-    }
-    else
-    {
-        self.channelThumbnailCollectionView.scrollsToTop = YES;
-        self.subscriptionThumbnailCollectionView.scrollsToTop = YES;
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
-                                                        object: self
-                                                      userInfo: @{kChannelOwner: self.channelOwner}];
-}
-
-- (void) viewDidScrollToBack
-{
-    self.channelThumbnailCollectionView.scrollsToTop = NO;
-    self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
 }
 
 - (void) updateAnalytics
