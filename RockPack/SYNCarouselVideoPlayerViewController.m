@@ -19,6 +19,7 @@
 #import "SYNFacebookManager.h"
 #import "ChannelCover.h"
 #import "SYNButton.h"
+#import "UICollectionReusableView+Helpers.h"
 #import <UIImageView+WebCache.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate>
