@@ -16,6 +16,7 @@
 #import "SubGenre.h"
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
+#import "UICollectionReusableView+Helpers.h"
 
 @import QuartzCore;
 
@@ -27,7 +28,6 @@ typedef enum {
 } kSearchType;
 
 
-static NSString* kCategoryCellIndetifier = @"SYNDiscoverCategoriesCell";
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
@@ -90,8 +90,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // == Set the Collection View's Cells == //
     
     
-    [self.categoriesCollectionView registerNib: [UINib nibWithNibName: kCategoryCellIndetifier bundle: nil]
-                    forCellWithReuseIdentifier: kCategoryCellIndetifier];
+    [self.categoriesCollectionView registerNib:[SYNDiscoverCategoriesCell nib]
+                    forCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]];
     
     if(IS_IPHONE)
     {
@@ -301,7 +301,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     Genre* currentGenre = self.genres[indexPath.section];
     SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
-    SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier: kCategoryCellIndetifier
+    SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
     
     
