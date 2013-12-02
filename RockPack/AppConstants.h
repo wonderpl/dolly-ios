@@ -453,34 +453,9 @@ typedef enum : NSInteger
     kChannelDetailsFavourites = 4
 } kChannelDetailsMode;
 
-
-// Height of the bottom tab bar in pixels
-#define kBottomTabBarHeight 62
-
-// Height of the header bar
-#define kHeaderBarHeight 44
-
-// Height of the top tab bar
-#define kTopTabBarHeight 45
-
-// Offset from the bottom of the status bar to the bottom of the top tab bar
-#define kTabTopContentOffset (kHeaderBarHeight + kTopTabBarHeight)
-
-// Amount of overspill for top tab bar
-#define kTopTabOverspill 7
-
-#define kCategorySecondRowHeight 35.0f
-
 //
 // Tabs
 //
-
-// Used to work out what button is pressed on the bottom tab
-#define kBottomTabIndexOffset 100
-
-#define kTopTabCount 10
-
-#define kSearchBarItemWidth 100.0
 //
 // Video Overlay
 //
@@ -494,13 +469,6 @@ typedef enum : NSInteger
 // Time between shuttle bar updates
 #define kShuttleBarUpdateTimerInterval  0.1f
 
-// How long for the placeholder animations to cycle
-#define kMiddlePlaceholderCycleTime     2.0f
-#define kBottomPlaceholderCycleTime     4.0f
-#define kMiddlePlaceholderIdentifier    @"MiddlePlaceholder"
-
-#define kBottomPlaceholderIdentifier    @"BottomPlaceholder"
-
 #define kVideoBackgroundColour          [UIColor blackColor]
 
 #define kShuttleBarHeight               44.0f
@@ -510,48 +478,15 @@ typedef enum : NSInteger
 #define kShuttleBarButtonOffsetiPhone   67.0f
 #define kShuttleBarSliderOffset         5.0f
 
-#define kSYNBundleFullVersion           @"FullVersion"
-#define kSYNBundleBuildTarget           @"BuildTarget"
-
-// Channel creation
-
-#define kChannelCreationCollectionViewOffsetY           500.0f
-#define kChannelCreationCategoryTabOffsetY              444.0f
-#define kChannelCreationCategoryAdditionalOffsetY       51.0f
-
 // Notifications
 
-#define kNotePushingController      @"kNotePushingController"
-
-#define kNoteBackButtonShow         @"kNoteBackButtonShow"
-#define kNoteBackButtonHide         @"kNoteBackButtonHide"
-
-#define kNoteTopRightControlsShow   @"kNoteTopRightControlsShow"
-#define kNoteTopRightControlsHide   @"kNoteTopRightControlsHide"
-
-#define kNoteHideTitleAndDots       @"kNoteAllHideTitleAndDots"
-
-#define kChannelsNavControlsHide    @"kChannelsNavControlsHide"
-
-#define kNoteStarButtonPressed      @"kNoteStarButtonPressed"
-#define kNoteAddToChannelRequest    @"kNoteAddToChannelRequest"
-
-
 #define kNoteVideoAddedToExistingChannel         @"kNoteAddedToChannel"
-#define kNoteCreateNewChannel                    @"kNoteCreateNewChannel"
-
-
-#define kProfileRequested           @"kProfileRequested"
-#define kVideoOverlayRequested      @"kVideoOverlayRequested"
-#define kHideSideNavigationView     @"kHideSideNavigationView"
 
 #define kNoteChannelSaved           @"kNoteChannelSaved"
-#define kNoteSavingCaution          @"kNoteSavingCaution"
 #define kNoteHideAllCautions          @"kNoteHideAllCautions"
 
 #define kNoteHideNetworkMessages    @"kNoteHideNetworkMessages"
 #define kNoteShowNetworkMessages    @"kNoteShowNetworkMessages"
-#define kNotePopCurrentViewController  @"kNotePopCurrentViewController"
 
 //
 // Tracking
@@ -606,9 +541,3 @@ typedef void (^JSONResponseBlock)(id jsonObject);
 
 #define kUserIdInconsistencyError @"UserIdInconsistency"
 #define kStoredRefreshTokenNilError @"StoredRefreshTokenNil"
-
-#define kActionNone @""
-#define kActionShareVideo @"ActionShareVideo"
-#define kActionShareChannel @"ActionShareChannel"
-#define kActionLike @"ActionLike"
-#define kActionAdd @"ActionAdd"
