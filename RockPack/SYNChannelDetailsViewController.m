@@ -91,6 +91,8 @@ UIPopoverControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIView *viewFollowAndVideoContainer;
 @property (nonatomic) CGPoint tempContentOffset;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
+@property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
 
 @property (nonatomic) BOOL isLocked;
 
@@ -241,15 +243,7 @@ UIPopoverControllerDelegate>
     //    self.txtFieldChannelName.backgroundColor = [UIColor blueColor];
     
     
-    //Transparent navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    self.navigationItem.title = @"";
-
 }
-
 
 -(void) iphoneMove
 {
@@ -360,6 +354,13 @@ UIPopoverControllerDelegate>
     
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
+    [self.navigationController.navigationBar setBackgroundImage:self.tmpNavigationBarBackground forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.shadowImage = self.tmpNavigationBarShadowImage;
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
+    
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -370,6 +371,21 @@ UIPopoverControllerDelegate>
         //  [self iphoneMove];
     }
     //[self setUpMode];
+    
+    
+    //Transparent navigation bar
+    self.tmpNavigationBarBackground = [[UIImage alloc]init];
+    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
+    
+    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
+    
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationItem.title = @"";
+
 }
 
 -(void) setUpMode
