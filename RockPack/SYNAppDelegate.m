@@ -1595,33 +1595,4 @@
     return newRequest;
 }
 
-
-- (Channel*) channelFromChannelId: (NSString*) channelId
-{
-    Channel* channel;
-    
-    NSEntityDescription* channelEntity = [NSEntityDescription entityForName: @"Channel"
-                                                     inManagedObjectContext: self.mainManagedObjectContext];
-    
-    NSFetchRequest *channelFetchRequest = [[NSFetchRequest alloc] init];
-    [channelFetchRequest setEntity: channelEntity];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", channelId];
-    
-    [channelFetchRequest setPredicate: predicate];
-    
-    NSError* error;
-    
-    NSArray *matchingChannelEntries = [self.mainManagedObjectContext executeFetchRequest: channelFetchRequest
-                                                                                   error: &error];
-    
-    if (matchingChannelEntries.count > 0)
-    {
-        channel = matchingChannelEntries[0];
-    }
-    
-    return channel;
-}
-
-
 @end
