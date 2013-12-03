@@ -11,11 +11,11 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNSoundPlayer.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 #import "SYNPopoverable.h"
 #import "SYNCarouselVideoPlayerViewController.h"
+#import "SYNContainerViewController.h"
 @import QuartzCore;
 
 
