@@ -127,11 +127,11 @@
 @property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
 
 @property (strong, nonatomic) SYNProfileFlowLayout *testLayoutIPhone;
-
 @property  (nonatomic) BOOL creatingChannel;
 
 @property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
 @property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
+
 
 @end
 
@@ -598,7 +598,9 @@
      {
          if (obj == self.channelOwner)
          {
-             
+             //TODO:Get total number of channels or sub number?
+             self.dataItemsAvailable = 300;
+
              [self reloadCollectionViews];
              
              return;
@@ -957,33 +959,30 @@
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
-//    Channel *channel;
-//    
-//    if (collectionView == self.channelThumbnailCollectionView)
-//    {
-//        // The first cell is a 'create_new' cell on a user profile
-//        if (self.isUserProfile && indexPath.row == 0)
-//        {
+    Channel *channel;
+    
+    if (collectionView == self.channelThumbnailCollectionView)
+    {
+        // The first cell is a 'create_new' cell on a user profile
+        if (self.isUserProfile && indexPath.row == 0)
+        {
+//                        SYNChannelDetailsViewController *channelVC;
 //            
-//            #warning create new cell logic should be called from here
+//                        channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
 //            
-////                        SYNChannelDetailsViewController *channelVC;
-////            
-////                        channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
-////            
-////                        [self.navigationController pushViewController:channelVC animated:YES];
-//            
-//            return;
-//        }
-//        else
-//        {
-//            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-//        }
-//    }
-//    else
-//    {
-//        channel = self.channelOwner.subscriptions[indexPath.row];
-//    }
+//                        [self.navigationController pushViewController:channelVC animated:YES];
+            
+            return;
+        }
+        else
+        {
+            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+        }
+    }
+    else
+    {
+        channel = self.channelOwner.subscriptions[indexPath.row];
+    }
 	
 //    [self viewChannelDetails:channel];
 }
@@ -1140,13 +1139,21 @@
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
     
-    [self moveViewsWithScroller:scrollView withOffset:offset];
     
-    if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight)
-        && self.isLoadingMoreContent == NO)
-    {
+    if (self.channelThumbnailCollectionView == scrollView) {
+        if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO)
+        {
+            [self loadMoreChannels];
+        }
+    }
+   
+    
+    if (self.subscriptionThumbnailCollectionView == scrollView) {
+        if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO)
+        {
+//            [self loadMoreVideos];
+        }
         
-        [self loadMoreVideos];
     }
     
     if (!self.isIPhone)
@@ -1158,11 +1165,13 @@
         }
         
     }
+    
+    [self moveViewsWithScroller:scrollView withOffset:offset];
+
 }
 
-- (void) loadMoreVideos
+- (void) loadMoreChannels
 {
- //   NSLog(@"Load more data");
 
     if(!self.moreItemsToLoad)
         return;
@@ -1188,15 +1197,13 @@
     };
 //    Working load more videos for user channels
     
-    
     [appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
                                                       inRange: self.dataRequestRange
                                             completionHandler: successBlock
                                                  errorHandler: errorBlock];
-//
-//
     
     //TODO: successfor sublist
+    
     MKNKUserSuccessBlock successBlockSub = ^(NSDictionary *dictionary) {
         
             NSLog(@"returned dictionary %@", dictionary);
@@ -1213,6 +1220,38 @@
 //
     }
 
+
+- (void) loadMoreSubscriptions
+{
+    NSLog(@"Load more data");
+    
+    if(!self.moreItemsToLoad)
+        return;
+    
+    self.loadingMoreContent = YES;
+    
+    [self incrementRangeForNextRequest];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
+        NSLog(@"returned dictionary %@", dictionary);
+
+    };
+    
+    // define success block //
+    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
+        weakSelf.loadingMoreContent = NO;
+        DebugLog(@"Update action failed");
+    };
+    //    Working load more videos for user channels
+    
+        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
+                                                                       inRange: self.dataRequestRange
+                                                             completionHandler: successBlock
+                                                         errorHandler: errorBlock];
+    
+}
 
 
 -(void) moveViewsWithScroller :(UIScrollView*)scrollView withOffset:(CGFloat) offset
@@ -1511,6 +1550,8 @@
         self.modeType = kModeOtherUsersProfile;
     }
     
+    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+
     
     if (self.channelOwner.subscribedByUserValue) {
         [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
@@ -1563,10 +1604,7 @@
             
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
             
-            [self.navigationController pushViewController:channelVC animated:YES];
-            return;
         }
-        
         else
         {
             //  self.indexPathToDelete = indexPath;
@@ -1873,7 +1911,7 @@
                                                             object: self
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
         
-        if (!self.channelOwner.subscribedByUserValue) {
+        if (self.channelOwner.subscribedByUserValue) {
             [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
             
         }

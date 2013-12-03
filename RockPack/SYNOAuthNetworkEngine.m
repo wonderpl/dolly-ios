@@ -515,6 +515,7 @@
                               completionHandler: (MKNKUserSuccessBlock) completionBlock
                                    errorHandler: (MKNKUserErrorBlock) errorBlock
 {
+    
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : credentials.userId};
     
     NSString *apiString = [kAPIGetUserDetails stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -706,7 +707,6 @@
 {
     
     
-    NSLog(@"channelsForUserId in range");
     NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
     
     NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1400,30 +1400,30 @@
 
 
 - (void) subscriptionsForUserId: (NSString *) userId
-                                 inRange: (NSRange) start
+                                 inRange: (NSRange) range
                      completionHandler: (MKNKUserSuccessBlock) completionBlock
                           errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     
-    NSLog(@"SUB UPDATE IN RANGE");
-//    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+//    NSLog(@"SUB UPDATE IN RANGE");
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
-//    NSString *apiString = [kAPIUserSubscriptionUpdates stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    NSString *apiString = [kAPIUserSubscriptionUpdates stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+        
+    NSDictionary *params = [self paramsAndLocaleForStart: range.location
+                                                    size: range.length];
     
-//    NSDictionary *params = [self paramsAndLocaleForStart: start
-//                                                    size: size];
-//    
-//    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
-//                                                                                                       params: params
-//                                                                                                   httpMethod: @"GET"
-//                                                                                                          ssl: YES];
-//    
-//    
-//    [self addCommonHandlerToNetworkOperation: networkOperation
-//                           completionHandler: completionBlock
-//                                errorHandler: errorBlock];
-//    
-//    [self enqueueSignedOperation: networkOperation];
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: YES];
+    
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
 }
 
 

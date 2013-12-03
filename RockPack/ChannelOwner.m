@@ -6,6 +6,8 @@
 
 @implementation ChannelOwner
 
+@synthesize totalVideosValueChannel, totalVideosValueSubscriptions;
+
 #pragma mark - Object factory
 
 + (ChannelOwner *) instanceFromChannelOwner: (ChannelOwner *) existingChannelOwner
