@@ -20,6 +20,8 @@
 
 - (NSDictionary *) channelsDictionary;
 
-- (void) setSubscriptionsDictionary: (NSDictionary *) subscriptionsDictionary;
+- (void) setSubscriptionsDictionary : (NSDictionary *) subscriptionsDictionary;
+
+- (void) addChannelsFromDictionary : (NSDictionary *) channelsDictionary;
 
 @end

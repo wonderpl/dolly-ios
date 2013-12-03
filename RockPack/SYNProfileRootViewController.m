@@ -382,11 +382,6 @@
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationItem.title = @"";
     
-
-    //This should not be needed as the back button should take this from the view above but something was not right
-    //TODO: should this be needed
-    
-    
 }
 
 
@@ -595,7 +590,6 @@
 }
 
 #pragma mark - Core Data Callbacks
-
 - (void) handleDataModelChange: (NSNotification *) notification
 {
     NSArray *updatedObjects = [notification userInfo][NSUpdatedObjectsKey];
@@ -818,12 +812,12 @@
     {
         //1 for search bar
         //return self.arrDisplayFollowing.count;
-        NSLog(@"SUBSCRIPTIONS %lu",(unsigned long)self.channelOwner.subscriptions.count);
+     //   NSLog(@"SUBSCRIPTIONS %lu",(unsigned long)self.channelOwner.subscriptions.count);
 
         return self.channelOwner.subscriptions.count;
     }
     
-    NSLog(@"CHANNELS %lu",(unsigned long)self.channelOwner.channels.count);
+//    NSLog(@"CHANNELS %lu",(unsigned long)self.channelOwner.channels.count);
     
     return self.channelOwner.channels.count + (self.isUserProfile ? 1 : 0); // to account for the extra 'creation' cell at the start of the collection view
 }
@@ -913,7 +907,7 @@
             
             [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
             // NSLog(@"totalvideos value in pro%ld", (long)channel.totalVideosValue);
-            
+
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
             
         }
@@ -963,33 +957,33 @@
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    Channel *channel;
-    
-    if (collectionView == self.channelThumbnailCollectionView)
-    {
-        // The first cell is a 'create_new' cell on a user profile
-        if (self.isUserProfile && indexPath.row == 0)
-        {
-            
-            #warning create new cell logic should be called from here
-            
-//                        SYNChannelDetailsViewController *channelVC;
+//    Channel *channel;
+//    
+//    if (collectionView == self.channelThumbnailCollectionView)
+//    {
+//        // The first cell is a 'create_new' cell on a user profile
+//        if (self.isUserProfile && indexPath.row == 0)
+//        {
 //            
-//                        channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
+//            #warning create new cell logic should be called from here
 //            
-//                        [self.navigationController pushViewController:channelVC animated:YES];
-            
-            return;
-        }
-        else
-        {
-            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-        }
-    }
-    else
-    {
-        channel = self.channelOwner.subscriptions[indexPath.row];
-    }
+////                        SYNChannelDetailsViewController *channelVC;
+////            
+////                        channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeEdit];
+////            
+////                        [self.navigationController pushViewController:channelVC animated:YES];
+//            
+//            return;
+//        }
+//        else
+//        {
+//            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+//        }
+//    }
+//    else
+//    {
+//        channel = self.channelOwner.subscriptions[indexPath.row];
+//    }
 	
 //    [self viewChannelDetails:channel];
 }
@@ -1151,10 +1145,9 @@
     if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight)
         && self.isLoadingMoreContent == NO)
     {
-    //    [self loadMoreVideos];
+        
+        [self loadMoreVideos];
     }
-    
-
     
     if (!self.isIPhone)
     {
@@ -1166,6 +1159,60 @@
         
     }
 }
+
+- (void) loadMoreVideos
+{
+ //   NSLog(@"Load more data");
+
+    if(!self.moreItemsToLoad)
+        return;
+    
+    self.loadingMoreContent = YES;
+    
+    [self incrementRangeForNextRequest];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
+        
+    //    NSLog(@"returned dictionary %@", dictionary);
+        weakSelf.loadingMoreContent = NO;
+        [weakSelf.channelOwner addChannelsFromDictionary: dictionary];
+        [self.channelThumbnailCollectionView reloadData];
+    };
+    
+    // define success block //
+    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
+        weakSelf.loadingMoreContent = NO;
+        DebugLog(@"Update action failed");
+    };
+//    Working load more videos for user channels
+    
+    
+    [appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
+                                                      inRange: self.dataRequestRange
+                                            completionHandler: successBlock
+                                                 errorHandler: errorBlock];
+//
+//
+    
+    //TODO: successfor sublist
+    MKNKUserSuccessBlock successBlockSub = ^(NSDictionary *dictionary) {
+        
+            NSLog(@"returned dictionary %@", dictionary);
+//        weakSelf.loadingMoreContent = NO;
+//        [weakSelf.channelOwner addChannelsFromDictionary: dictionary];
+//        [self.channelThumbnailCollectionView reloadData];
+    };
+
+    
+//    [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
+//                                                                   inRange: self.dataRequestRange
+//                                                         completionHandler: successBlockSub
+//                                                     errorHandler: errorBlock];
+//
+    }
+
 
 
 -(void) moveViewsWithScroller :(UIScrollView*)scrollView withOffset:(CGFloat) offset
@@ -1322,7 +1369,6 @@
             }
             if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
-                
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
                 
                 self.fullNameLabel.transform = move;
@@ -1342,7 +1388,6 @@
                 self.fullNameLabel.alpha = 0.9;
                 self.outerViewFullNameLabel.transform = move;
                 self.outerViewFullNameLabel.hidden = NO;
-                
             }
             
             if (offset<FULLNAMELABELIPADLANDSCAPE)
@@ -1352,10 +1397,7 @@
                 self.fullNameLabel.transform = move;
                 self.fullNameLabel.alpha = 1.0;
                 self.outerViewFullNameLabel.transform = move;
-                
                 self.outerViewFullNameLabel.hidden = YES;
-                
-                
             }
         }
     }
@@ -1469,6 +1511,15 @@
         self.modeType = kModeOtherUsersProfile;
     }
     
+    
+    if (self.channelOwner.subscribedByUserValue) {
+        [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
+        
+    }
+    else
+    {
+        [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
+    }
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
     
@@ -1492,10 +1543,6 @@
 // Channels are the cell in the collection view
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
-    
-
-    NSLog(@"before %f",     self.channelThumbnailCollectionView.contentOffset.y);
-
     SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
     if([cell.superview isEqual:self.channelThumbnailCollectionView])
     {
@@ -1558,9 +1605,7 @@
         return;
     }
     
-    NSLog(@" after%f",     self.channelThumbnailCollectionView.contentOffset.y);
     return;
-
 }
 #pragma mark - Searchbar delegates
 -(void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
@@ -1644,14 +1689,11 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-        NSLog(@"add gesture reconiser");
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
     
     if (self.creatingChannel) {
         [self setCreateOffset];
     }
-    
-    NSLog(@"Started editing a textfield");
     return YES;
 }
 
@@ -1665,9 +1707,6 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    
-
-    NSLog(@"text field end editing");
     [textField resignFirstResponder];
 }
 
@@ -1819,6 +1858,7 @@
     if (alertView == self.unfollowAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
         
+        // Sub to channel
         if (self.followCell.channel != nil)
         {
             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
@@ -1829,12 +1869,19 @@
     
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
-        
-        
-        //        NSLog(@"alertView clickedButtonAtIndex FOLLOW ALL");
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
                                                             object: self
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
+        
+        if (!self.channelOwner.subscribedByUserValue) {
+            [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
+            
+        }
+        else
+        {
+            [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
+        }
+
         
     }
     
@@ -1989,15 +2036,9 @@
     
 }
 
-
-
 -(void) saveCreateChannelTapped
 {
     NSLog(@"saveCreateChannelTapped");
-    
-    
-
-    
 //    self.channel.title = self.channelTitleTextView.text;
 //    
 //    self.channel.channelDescription = self.channel.channelDescription ? self.channel.channelDescription : @"";
@@ -2066,6 +2107,9 @@
 //                                               showErrorTitle: errorTitle];
                                          }];
 
+    [self cancelCreateChannel];
+    
+    [self.channelThumbnailCollectionView reloadData];
     
     
 }

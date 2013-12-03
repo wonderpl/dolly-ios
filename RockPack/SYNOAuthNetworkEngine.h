@@ -105,6 +105,12 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                                                      onCompletion: (MKNKJSONCompleteBlock) completeBlock
                                                           onError: (MKNKJSONErrorBlock) errorBlock;
 
+- (void) channelsForUserId: (NSString *) userId
+                   inRange: (NSRange) range
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+              errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+
 - (void) videosForChannelForUserId: (NSString *) userId
                          channelId: (NSString *) channelId
                            inRange: (NSRange) range
@@ -183,6 +189,11 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
  completionHandler: (MKNKUserSuccessBlock) completionBlock
       errorHandler: (MKNKUserSuccessBlock) errorBlock;
 
+- (void) subscriptionsForUserId: (NSString *) userId
+                               inRange: (NSRange) start
+                     completionHandler: (MKNKUserSuccessBlock) completionBlock
+                          errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 
 // Sunscriptions
 
@@ -243,6 +254,11 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                                       errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 
+- (void) subscribeAllForUserId: (NSString *) userId
+                        action: (NSString *) action
+                     subUserId: (NSString *) subUserId
+             completionHandler: (MKNKUserSuccessBlock) completionBlock
+                  errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 #pragma mark - External Accounts
 
