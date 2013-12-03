@@ -10,6 +10,8 @@
 
 @class SYNOAuth2Credential, User;
 
+typedef void (^JSONResponseBlock)(id jsonObject);
+
 typedef void (^MKNKAutocompleteProcessBlock) (NSArray *);
 typedef void (^MKNKLoginCompleteBlock) (SYNOAuth2Credential *);
 typedef void (^MKNKUserCompleteBlock) (User *);
