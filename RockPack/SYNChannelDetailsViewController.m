@@ -28,15 +28,13 @@
 #import <UIButton+WebCache.h>
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
+#import "UICollectionReusableView+Helpers.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 149.0f
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
-
-
-static NSString* CollectionVideoCellName = @"SYNCollectionVideoCell";
 
 @import AVFoundation;
 @import CoreImage;
@@ -474,16 +472,13 @@ UIPopoverControllerDelegate>
     
 
     
-    [self.videoThumbnailCollectionView registerNib: [UINib nibWithNibName: CollectionVideoCellName bundle: nil]
-                        forCellWithReuseIdentifier: CollectionVideoCellName];
+    [self.videoThumbnailCollectionView registerNib:[SYNCollectionVideoCell nib]
+                        forCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]];
     
     // == Footer View == //
-    UINib *footerViewNib = [UINib nibWithNibName: @"SYNChannelFooterMoreView"
-                                          bundle: nil];
-    
-    [self.videoThumbnailCollectionView registerNib: footerViewNib
-                        forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
-                               withReuseIdentifier: @"SYNChannelFooterMoreView"];
+    [self.videoThumbnailCollectionView registerNib:[SYNChannelFooterMoreView nib]
+                        forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                               withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
     self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
@@ -976,8 +971,8 @@ UIPopoverControllerDelegate>
 {
     
     
-    SYNCollectionVideoCell *videoThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: CollectionVideoCellName
-                                                                                           forIndexPath: indexPath];
+    SYNCollectionVideoCell *videoThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]
+                                                                                           forIndexPath:indexPath];
     
     
     VideoInstance *videoInstance = self.channel.videoInstances [indexPath.item];
@@ -1026,9 +1021,9 @@ UIPopoverControllerDelegate>
     
     if (kind == UICollectionElementKindSectionFooter)
     {
-        self.footerView = [self.videoThumbnailCollectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                                                withReuseIdentifier: @"SYNChannelFooterMoreView"
-                                                                                       forIndexPath: indexPath];
+        self.footerView = [self.videoThumbnailCollectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                                withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
+                                                                                       forIndexPath:indexPath];
         
         supplementaryView = self.footerView;
         
