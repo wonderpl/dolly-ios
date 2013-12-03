@@ -27,11 +27,16 @@
 - (void) setRecomendation:(Recomendation *)recomendation
 {
     
+    if(!recomendation)
+        return;
+    
     _recomendation = recomendation;
     
     self.followButton.dataItemLinked = recomendation.channelOwner;
     
     self.nameLabel.text = recomendation.displayName;
+    
+    NSLog(@"%@", recomendation.descriptionText);
     self.descriptionLabel.text = recomendation.descriptionText;
     
     

@@ -36,9 +36,9 @@
     if([positionString isKindOfClass:[NSString class]])
         self.positionValue = [positionString integerValue];
     
-    
-    self.categoryId = [dictionary objectForKey:@"category"
-                                   withDefault:@""];
+    NSNumber* categoryNumber = [dictionary objectForKey:@"category"];
+    if([categoryNumber isKindOfClass:[NSNumber class]])
+        self.categoryId = categoryNumber.stringValue;
     
     self.displayName = [dictionary objectForKey:@"display_name"
                                     withDefault:@""];
@@ -63,6 +63,11 @@
                                         ignoringObjectTypes:kIgnoreAll];
     
     return co;
+}
+
+- (NSString*) description
+{
+    return [NSString stringWithFormat:@"[Recomendation %p <co_name:%@, categoryId:%@>]", self, self.displayName, self.categoryId];
 }
 
 @end

@@ -20,6 +20,7 @@
 #import "Genre.h"
 #import "AppConstants.h"
 #import "SubGenre.h"
+#import "UIColor+SYNColor.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
@@ -79,8 +80,6 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
     
-    // this is so that empty genres are not returned since only the subgenres are displayed
-    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"subgenres.@count > 0"];
     
     categoriesFetchRequest.includesSubentities = NO;
     
@@ -97,8 +96,11 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
         if(!s.uniqueId)
             continue;
         
+        
+        
         self.subgenresByIdString[s.uniqueId] = s;
     }
+    
     
     // =================== //
     
@@ -183,7 +185,9 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
     
+    
     cell.subGenreLabel.text = subgenre.name;
+    cell.subGenreLabel.textColor = [UIColor colorWithHex:subgenre.genre.colorValue];
     
     cell.delegate = self;
     
