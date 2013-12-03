@@ -26,7 +26,6 @@
 // Entities
 
 #define kGenre                      @"Genre"
-#define kSubGenre                   @"SubGenre"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
 #define kRecommendation             @"Recomendation"
@@ -34,13 +33,6 @@
 #define kVideoInstance              @"VideoInstance"
 #define kChannelOwner               @"ChannelOwner"
 #define kUser                       @"User"
-#define kCoverArt                   @"CoverArt"
-#define kCoverImageReference        @"CoverImageReference"
-#define kCoverArtImage              @"CoverArtImage"
-
-#define kForceRefreshValue          @"kForceRefreshValue"
-
-#define kDataRequestRange           @"DataRequestRange"
 
 // viewId
 #define kFeedViewId                 @"FEED"
