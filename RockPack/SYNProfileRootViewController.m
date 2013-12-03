@@ -1143,7 +1143,7 @@
     if (self.channelThumbnailCollectionView == scrollView) {
         if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO)
         {
-            [self loadMoreChannels];
+//            [self loadMoreChannels];
         }
     }
    
@@ -1204,13 +1204,6 @@
     
     //TODO: successfor sublist
     
-    MKNKUserSuccessBlock successBlockSub = ^(NSDictionary *dictionary) {
-        
-            NSLog(@"returned dictionary %@", dictionary);
-//        weakSelf.loadingMoreContent = NO;
-//        [weakSelf.channelOwner addChannelsFromDictionary: dictionary];
-//        [self.channelThumbnailCollectionView reloadData];
-    };
 
     
 //    [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
@@ -1551,16 +1544,17 @@
     }
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
-
+    
+    NSLog(@"subscribedByUserValue :%hhd",self.channelOwner.subscribedByUserValue);
     
     if (self.channelOwner.subscribedByUserValue) {
         [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
-        
     }
     else
     {
         [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
     }
+    
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
     
@@ -1910,17 +1904,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
                                                             object: self
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
-        
-        if (self.channelOwner.subscribedByUserValue) {
-            [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
-            
-        }
-        else
-        {
-            [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
-        }
-
-        
     }
     
     
