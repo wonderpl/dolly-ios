@@ -8,6 +8,7 @@ const struct ChannelOwnerAttributes ChannelOwnerAttributes = {
 	.displayName = @"displayName",
 	.followersTotalCount = @"followersTotalCount",
 	.position = @"position",
+	.subscribedByUser = @"subscribedByUser",
 	.thumbnailURL = @"thumbnailURL",
 	.username = @"username",
 };
@@ -54,6 +55,11 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 	}
 	if ([key isEqualToString:@"positionValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"position"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"subscribedByUserValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"subscribedByUser"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -124,6 +130,32 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 
 - (void)setPrimitivePositionValue:(int64_t)value_ {
 	[self setPrimitivePosition:[NSNumber numberWithLongLong:value_]];
+}
+
+
+
+
+
+@dynamic subscribedByUser;
+
+
+
+- (BOOL)subscribedByUserValue {
+	NSNumber *result = [self subscribedByUser];
+	return [result boolValue];
+}
+
+- (void)setSubscribedByUserValue:(BOOL)value_ {
+	[self setSubscribedByUser:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveSubscribedByUserValue {
+	NSNumber *result = [self primitiveSubscribedByUser];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveSubscribedByUserValue:(BOOL)value_ {
+	[self setPrimitiveSubscribedByUser:[NSNumber numberWithBool:value_]];
 }
 
 

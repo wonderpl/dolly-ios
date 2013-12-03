@@ -180,9 +180,11 @@ typedef enum : NSInteger {
 #define kHTMLVideoPlayerSource      @"/ws/videos/players/"                      /* GET */
 
 // Apple push notifications
-#define kRegisterExternalAccount    @"/ws/USERID/external_accounts/"                      /* POST */
+#define kRegisterExternalAccount    @"/ws/USERID/external_accounts/"            /* POST */
 #define kGetExternalAccounts       @"/ws/USERID/external_accounts/"             /* GET */
 #define kGetExternalAccountId       @"/ws/USERID/external_accounts/ACCOUNTID/"  /* GET */
+
+#define kGetRecommendations         @"/ws/USERID/user_recommendations/"         /* GET */
 
 #define kFeedbackUrl                @"/ws/feedback/"                            /* GET */
 

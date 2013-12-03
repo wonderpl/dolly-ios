@@ -1856,4 +1856,32 @@
     
 }
 
+- (void) getRecommendationsForUserId: (NSString*) userId
+                   completionHandler: (MKNKUserSuccessBlock) completionBlock
+                        errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kRegisterExternalAccount stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    // same as default values... they are here in case we need to change them in the future
+    parameters[@"start"] = @(0);
+    parameters[@"size"] = @(100);
+    parameters[@"locale"] = self.localeString;
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: parameters
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: YES];
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+    
+    
+}
+
 @end

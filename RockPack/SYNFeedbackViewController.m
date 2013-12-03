@@ -56,6 +56,7 @@ static NSString* placeholderText = @"Your feedback...";
     }
     
     
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     
     
     // setting fonts
@@ -110,9 +111,9 @@ static NSString* placeholderText = @"Your feedback...";
     {
         CGRect sFrame = self.navigationController.view.frame;
         if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-            sFrame.origin.y -= 200.0f;
+            sFrame.origin.y -= 140.0f;
         else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-            sFrame.origin.y += 200.0f;
+            sFrame.origin.y += 140.0f;
         __weak SYNFeedbackViewController* wself = self;
         [UIView animateWithDuration:0.3f animations:^{
             wself.navigationController.view.frame = sFrame;
@@ -192,6 +193,7 @@ static NSString* placeholderText = @"Your feedback...";
 {
     if ([textView.text isEqualToString:placeholderText]) {
         textView.text = @"";
+        self.navigationItem.rightBarButtonItem.enabled = YES;
         textView.textColor = [UIColor blackColor]; // optional
     }
     [textView becomeFirstResponder];
@@ -201,6 +203,7 @@ static NSString* placeholderText = @"Your feedback...";
 {
     if ([textView.text isEqualToString:@""]) {
         textView.text = placeholderText;
+        self.navigationItem.rightBarButtonItem.enabled = NO;
         textView.textColor = [UIColor lightTextColor]; //optional
     }
     [textView resignFirstResponder];

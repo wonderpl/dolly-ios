@@ -280,4 +280,10 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
               completionHandler: (MKNKUserSuccessBlock) completionBlock
                    errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+#pragma mark - Recommendations Form
+
+- (void) getRecommendationsForUserId: (NSString*) userId
+                   completionHandler: (MKNKUserSuccessBlock) completionBlock
+                        errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 @end

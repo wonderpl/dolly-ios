@@ -9,6 +9,7 @@ extern const struct ChannelOwnerAttributes {
 	__unsafe_unretained NSString *displayName;
 	__unsafe_unretained NSString *followersTotalCount;
 	__unsafe_unretained NSString *position;
+	__unsafe_unretained NSString *subscribedByUser;
 	__unsafe_unretained NSString *thumbnailURL;
 	__unsafe_unretained NSString *username;
 } ChannelOwnerAttributes;
@@ -25,6 +26,7 @@ extern const struct ChannelOwnerFetchedProperties {
 @class Channel;
 @class VideoInstance;
 @class Channel;
+
 
 
 
@@ -89,6 +91,20 @@ extern const struct ChannelOwnerFetchedProperties {
 - (void)setPositionValue:(int64_t)value_;
 
 //- (BOOL)validatePosition:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* subscribedByUser;
+
+
+
+@property BOOL subscribedByUserValue;
+- (BOOL)subscribedByUserValue;
+- (void)setSubscribedByUserValue:(BOOL)value_;
+
+//- (BOOL)validateSubscribedByUser:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -186,6 +202,15 @@ extern const struct ChannelOwnerFetchedProperties {
 
 - (int64_t)primitivePositionValue;
 - (void)setPrimitivePositionValue:(int64_t)value_;
+
+
+
+
+- (NSNumber*)primitiveSubscribedByUser;
+- (void)setPrimitiveSubscribedByUser:(NSNumber*)value;
+
+- (BOOL)primitiveSubscribedByUserValue;
+- (void)setPrimitiveSubscribedByUserValue:(BOOL)value_;
 
 
 

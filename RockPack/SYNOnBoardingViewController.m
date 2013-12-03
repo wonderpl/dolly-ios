@@ -9,6 +9,8 @@
 #import "SYNOnBoardingViewController.h"
 #import "SYNOnBoardingCell.h"
 #import "SYNOnBoardingHeader.h"
+#import "SYNAppDelegate.h"
+#import "SYNOAuthNetworkEngine.h"
 #import "ChannelOwner.h"
 
 @interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -33,6 +35,21 @@
     
     self.data = @[]; // so as not to throw error when accessed
     
+    [self getRecommendations];
+    
+}
+
+- (void) getRecommendations
+{
+    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
+                                              completionHandler:^(id responce) {
+                                                  
+                                                  
+        
+                                              } errorHandler:^(id error) {
+        
+                                              }];
 }
 
 #pragma mark - UICollectionView Delegate/Data Source

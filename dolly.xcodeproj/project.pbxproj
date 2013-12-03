@@ -1279,6 +1279,8 @@
 		BEC39C0D184CA4F700DA8089 /* SYNFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C0B184CA4F700DA8089 /* SYNFeedbackViewController.m */; };
 		BEC39C0E184CA4F700DA8089 /* SYNFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C0C184CA4F700DA8089 /* SYNFeedbackViewController.xib */; };
 		BEC39C10184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C0F184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib */; };
+		BEC39C13184D03C000DA8089 /* _Recomendation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C12184D03C000DA8089 /* _Recomendation.m */; };
+		BEC39C16184D03CF00DA8089 /* Recomendation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C15184D03CF00DA8089 /* Recomendation.m */; };
 		BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */; };
 		BED027B21833F66700636659 /* SYNOptionsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */; };
 		BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */; };
@@ -2837,6 +2839,10 @@
 		BEC39C0B184CA4F700DA8089 /* SYNFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedbackViewController.m; sourceTree = "<group>"; };
 		BEC39C0C184CA4F700DA8089 /* SYNFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFeedbackViewController.xib; sourceTree = "<group>"; };
 		BEC39C0F184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFeedbackViewController~iphone.xib"; sourceTree = "<group>"; };
+		BEC39C11184D03C000DA8089 /* _Recomendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Recomendation.h; sourceTree = "<group>"; };
+		BEC39C12184D03C000DA8089 /* _Recomendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Recomendation.m; sourceTree = "<group>"; };
+		BEC39C14184D03CF00DA8089 /* Recomendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recomendation.h; sourceTree = "<group>"; };
+		BEC39C15184D03CF00DA8089 /* Recomendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recomendation.m; sourceTree = "<group>"; };
 		BED027AE1833F66700636659 /* SYNOptionsOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOptionsOverlayViewController.h; sourceTree = "<group>"; };
 		BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOptionsOverlayViewController.m; sourceTree = "<group>"; };
 		BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOptionsOverlayViewController.xib; sourceTree = "<group>"; };
@@ -4094,6 +4100,8 @@
 				01946B901683335400354601 /* _VideoInstance.m */,
 				BE7D036017A14417008053DC /* _FeedItem.h */,
 				BE7D036117A14417008053DC /* _FeedItem.m */,
+				BEC39C11184D03C000DA8089 /* _Recomendation.h */,
+				BEC39C12184D03C000DA8089 /* _Recomendation.m */,
 			);
 			name = "Auto generated files";
 			sourceTree = "<group>";
@@ -4113,6 +4121,8 @@
 				BE8F938C17B1268500E7035F /* ExternalAccount.m */,
 				BE7D0308179D8EEC008053DC /* Friend.h */,
 				BE7D0309179D8EEC008053DC /* Friend.m */,
+				BEC39C14184D03CF00DA8089 /* Recomendation.h */,
+				BEC39C15184D03CF00DA8089 /* Recomendation.m */,
 				01F1B85B17297471005735AF /* CoverArt.h */,
 				01F1B85C17297471005735AF /* CoverArt.m */,
 				BEA043E316CAA8E1005406E7 /* Genre.h */,
@@ -5983,7 +5993,7 @@
 						DevelopmentTeam = 3M76KMT8LS;
 					};
 					01901A941771CCBA007DBEAC = {
-						TestTargetID = 010DEFCF1629BDC40080F26B;
+						TestTargetID = 01E427E61664EC9F009B941F;
 					};
 				};
 			};
@@ -7271,6 +7281,7 @@
 				0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */,
 				015CEE3F16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m in Sources */,
 				BEA043E716CAA8E1005406E7 /* Genre.m in Sources */,
+				BEC39C16184D03CF00DA8089 /* Recomendation.m in Sources */,
 				012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */,
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
@@ -7278,6 +7289,7 @@
 				E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */,
 				BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */,
 				BEA1E33116CE6045000AB59D /* SYNNetworkOperationJsonObject.m in Sources */,
+				BEC39C13184D03C000DA8089 /* _Recomendation.m in Sources */,
 				016AED3B1821349800DEAF7E /* SYNSocialButton.m in Sources */,
 				BEC39C0D184CA4F700DA8089 /* SYNFeedbackViewController.m in Sources */,
 				BE0815C616D5389C00ADB1DC /* SYNMasterViewController.m in Sources */,
@@ -7626,7 +7638,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7641,7 +7652,6 @@
 				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
 		};
@@ -7649,7 +7659,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7664,7 +7673,6 @@
 				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -7672,7 +7680,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7687,7 +7694,6 @@
 				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = AdHoc;
 		};
