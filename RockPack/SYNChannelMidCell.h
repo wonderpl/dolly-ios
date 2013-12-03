@@ -20,7 +20,6 @@
 
 @interface SYNChannelMidCell : UICollectionViewCell
 
-@property (nonatomic) BOOL specialSelected;
 @property (nonatomic, weak) Channel* channel;
 
 @property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;

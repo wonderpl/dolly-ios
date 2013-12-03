@@ -102,18 +102,13 @@
     
     CGRect totalImageRect;
     
-    CGPoint correctPoint;
-    
     if (IS_IPAD)
     {
         totalImageRect = CGRectMake(0.0, 0.0, 1024.0, 1024.0);
-        
-        correctPoint = self.view.center;
     }
     else
     {
         totalImageRect = CGRectMake(0.0, 0.0, [[SYNDeviceManager sharedInstance] currentScreenHeight], [[SYNDeviceManager sharedInstance] currentScreenHeight]);
-        correctPoint = self.view.center;
     }
     
     self.loginBackgroundImage.frame = totalImageRect;

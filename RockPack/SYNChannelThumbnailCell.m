@@ -8,7 +8,6 @@
 
 #import "AppConstants.h"
 #import "SYNChannelThumbnailCell.h"
-#import "SYNTouchGestureRecognizer.h"
 #import "UIFont+SYNFont.h"
 #import "UIImage+Tint.h"
 #import <UIImageView+WebCache.h>
@@ -89,42 +88,5 @@
     
     [self.imageView setImageWithURL: nil];
 }
-
-
-// This is used to lowlight the gloss image on touch
-- (void) showGlossLowlight: (SYNTouchGestureRecognizer *) recognizer
-{
-    // Default iPad gloss image
-    NSString *imageName = @"GlossChannelThumbnail";
-    
-    // Use different image for iPhone
-    if (IS_IPHONE)
-    {
-        imageName = @"GlossChannelProfile";
-    }
-    
-    switch (recognizer.state)
-    {
-        case UIGestureRecognizerStateBegan:
-        {
-            // Set lowlight tint
-            UIImage *glossImage = [UIImage imageNamed: imageName];
-            UIImage *lowlightImage = [glossImage tintedImageUsingColor: [UIColor colorWithWhite: 0.0
-                                                                                          alpha: 0.3]];
-            self.lowlightImageView.image = lowlightImage;
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
-            self.lowlightImageView.image = [UIImage imageNamed: imageName];
-        }
-            
-        default:
-            break;
-    }
-}
-
 
 @end

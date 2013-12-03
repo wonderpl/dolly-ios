@@ -7,9 +7,8 @@
 //
 
 #import "SYNAbstractViewController.h"
-#import "SYNAggregateCellDelegate.h"
 
-@interface SYNFeedRootViewController : SYNAbstractViewController <SYNAggregateCellDelegate>
+@interface SYNFeedRootViewController : SYNAbstractViewController
 
 
 @end

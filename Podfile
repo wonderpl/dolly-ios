@@ -7,6 +7,7 @@ pod 'Appirater'
 pod 'Ooyala'
 pod 'SDWebImage'
 pod 'GoogleConversionTracking'
+pod 'ISO8601DateFormatter'
 
 target :dollyTests, :exclusive => true do
 	pod 'Kiwi/XCTest'

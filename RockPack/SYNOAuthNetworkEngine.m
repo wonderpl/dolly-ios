@@ -515,6 +515,7 @@
                               completionHandler: (MKNKUserSuccessBlock) completionBlock
                                    errorHandler: (MKNKUserErrorBlock) errorBlock
 {
+    
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : credentials.userId};
     
     NSString *apiString = [kAPIGetUserDetails stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -697,6 +698,41 @@
     
     [self enqueueSignedOperation: networkOperation];
 }
+
+
+- (void) channelsForUserId: (NSString *) userId
+                   inRange: (NSRange) range
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+              errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    
+    
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
+    
+    NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"start"] = @(range.location);
+    parameters[@"size"] = @(range.length);
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                                                                         params: [self getLocaleParamWithParams: parameters]
+                                                                                                     httpMethod: @"GET"
+                                                                                                            ssl: TRUE];
+    
+    NSLog(@"api string%@", apiString);
+    
+    NSLog(@"param %@", parameters);
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
+
+
 
 #pragma mark - Avatars
 
@@ -1031,9 +1067,6 @@
                                                                                                    httpMethod: (clearPrevious ? @"PUT" : @"POST")
                                                                                                           ssl: TRUE];
     
-    
-    
-    
     NSArray* videoIdArray = [[videoInstanceSet array] valueForKey:@"uniqueId"];
     
     
@@ -1205,6 +1238,76 @@
 }
 
 
+- (void) subscribeAllForUserId: (NSString *) userId
+                          action: (NSString *) action
+                 subUserId: (NSString *) subUserId
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    NSDictionary *params = nil;
+    
+    if (action && subUserId)
+    {
+        params = @{@"action" : action,
+                   @"object_type": @"user",
+                       @"object_id" : subUserId };
+    }
+    else
+    {
+        AssertOrLog(@"One or more of the required parameters is nil");
+    }
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"POST"
+                                                                                                          ssl: TRUE];
+    [networkOperation addHeaders: @{@"Content-Type" : @"application/json"}];
+    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
+//just added ...
+- (void) userChannelsForUserId: (NSString *) userId
+                            credential: (SYNOAuth2Credential*)credential
+                                 start: (unsigned int) start
+                                  size: (unsigned int) size
+                     completionHandler: (MKNKUserSuccessBlock) completionBlock
+                          errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSDictionary *params = [self paramsAndLocaleForStart:start size:48];
+    
+    // we are not using the subscriptions_url returned from user info data but using a std one.
+    NSString *apiString = [kAPIGetUserSubscriptions stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: YES];
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [networkOperation setAuthorizationHeaderValue: credential.accessToken
+                                      forAuthType: @"Bearer"];
+    
+    [self enqueueOperation: networkOperation];
+}
+
+
 #pragma mark - Subscriptions
 
 - (void) channelSubscriptionsForUserId: (NSString *) userId
@@ -1288,6 +1391,34 @@
                                                                                                        params: nil
                                                                                                    httpMethod: @"DELETE"
                                                                                                           ssl: YES];
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
+
+- (void) subscriptionsForUserId: (NSString *) userId
+                                 inRange: (NSRange) range
+                     completionHandler: (MKNKUserSuccessBlock) completionBlock
+                          errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    
+//    NSLog(@"SUB UPDATE IN RANGE");
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIUserSubscriptionUpdates stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+        
+    NSDictionary *params = [self paramsAndLocaleForStart: range.location
+                                                    size: range.length];
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: YES];
+    
+    
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
@@ -1592,6 +1723,7 @@
     
     //    DebugLog(@"%@", networkOperation);
 }
+
 
 
 

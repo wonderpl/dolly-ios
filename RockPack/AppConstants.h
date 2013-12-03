@@ -14,9 +14,6 @@
 #define ENABLE_USER_RATINGS
 
 
-// Use this to remove arc menus for cells
-#define ENABLE_ARC_MENU
-
 #define kAPIInitialBatchSize 48
 
 //
@@ -26,7 +23,6 @@
 // Entities
 
 #define kGenre                      @"Genre"
-#define kSubGenre                   @"SubGenre"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
 #define kRecommendation             @"Recomendation"
@@ -34,13 +30,6 @@
 #define kVideoInstance              @"VideoInstance"
 #define kChannelOwner               @"ChannelOwner"
 #define kUser                       @"User"
-#define kCoverArt                   @"CoverArt"
-#define kCoverImageReference        @"CoverImageReference"
-#define kCoverArtImage              @"CoverArtImage"
-
-#define kForceRefreshValue          @"kForceRefreshValue"
-
-#define kDataRequestRange           @"DataRequestRange"
 
 // viewId
 #define kFeedViewId                 @"FEED"
@@ -205,6 +194,8 @@ typedef enum : NSInteger {
 #define kChannelDeleteRequest       @"kChannelDeleteRequest"
 #define kChannelOwnerSubscribeToUserRequest @"kChannelOwnerSubscribeToUserRequest"
 
+
+
 #define kRefreshComplete            @"kRefreshComplete"
 
 #define kUpdateFailed               @"kUpdateFailed"
@@ -273,12 +264,6 @@ typedef enum : NSInteger {
     
 } Gender;
 
-
-
-typedef enum : NSInteger {
-    kInvalidComponentIndex = 999999
-} kComponentIndex;
-
 //
 // Colours
 //
@@ -286,98 +271,25 @@ typedef enum : NSInteger {
 // Highlighted RockIt number text colour
 #define kHighlightedStarTextColour [UIColor colorWithRed: 0.894f green: 0.945f blue: 0.965f alpha: 1.0f]
 
-// Default
-#define kDefaultStarTextColour
-
 //
 // Animations
 //
 
-#define kFeedAggregateScrollCoefficient 0.5f
-
-
 // Text cross-fade
 #define kTextCrossfadeDuration 0.3f
-
-// Switch label
-#define kSwitchLabelAnimation 0.25f
-
-// Splash screen
-#define kSplashViewDuration 2.0f
-#define kSplashAnimationDuration  0.75f
 
 // Edit mode
 #define kChannelEditModeAnimationDuration 0.4f
 
-// Tabs
-#define kTabAnimationDuration 0.3f
-
-
-#define kChangedAccountSettingsValue        @"kChangedAccountSettingsValue"
 #define kClearedLocationBoundData           @"kClearedLocationBoundData"
 
-// Rockie-talkie
-#define kRockieTalkieAnimationDuration 0.3f
-
-// Image well
-#define kVideoQueueAnimationDuration 0.3f
-#define kVideoQueueOnScreenDuration 10.0f
-//#define kVideoQueueOnScreenDuration 10000.0f
-
-// Large Video panel
-#define kLargeVideoPanelAnimationDuration 0.3f
-
-// Camera preview animation
-#define kCameraPreviewAnimationDuration 0.3f
-
-// Large Video panel
-#define kCreateChannelPanelAnimationDuration 0.3f
-
 #define kVideoInAnimationDuration 0.3f
-#define kVideoOutAnimationDuration 0.3f
-#define kAddToChannelAnimationDuration 0.3f
 
 //
 // Dimensions
 //
 
-#define kiOS7PlusHeaderYOffset 10.0f
-
-#define kRotateThresholdX 100
-#define kRotateThresholdY 180
-#define kRotateBorderX 25
-#define kRotateBorderY 25
-
 #define kLoadMoreFooterViewHeight   50.0f
-
-#define kMinorDimension 768.0f
-#define kMajorDimension 1024.0f
-#define kStatusBarHeight 20.0f
-
-#define kFullScreenHeightPortrait kMajorDimension
-#define kFullScreenHeightPortraitMinusStatusBar (kFullScreenHeightPortrait - kStatusBarHeight)
-#define kFullScreenWidthPortrait kMinorDimension
-
-#define kFullScreenHeightLandscape kMinorDimension
-#define kFullScreenHeightLandscapeMinusStatusBar (kFullScreenHeightLandscape - kStatusBarHeight)
-#define kFullScreenWidthLandscape kMajorDimension
-
-#define kStandardCollectionViewOffsetY 90.0f
-#define kStandardCollectionViewOffsetYiPhone 60.0f
-#define kYouCollectionViewOffsetY 160.0f
-#define kChannelDetailsCollectionViewOffsetY 500.0f
-#define kChannelDetailsFadeSpan 250.0f
-#define kChannelDetailsFadeSpaniPhone 135.0f
-
-#define kImageUploadWidth 1024
-#define kImageUploadHeight 768
-
-// Effective height (exlcuding shadow) of the image well
-//#define kVideoQueueEffectiveHeight 99
-
-#define kVideoQueueWidth 490
-//#define kVideoQueueWidth 475
-#define kVideoQueueOffsetX 10
 
 #define kVideoQueueAdd              @"kVideoQueueAdd"
 #define kVideoQueueRemove           @"kVideoQueueRemove"
@@ -457,6 +369,32 @@ typedef enum : NSInteger
     kChannelDetailsFavourites = 4
 } kChannelDetailsMode;
 
+typedef enum {
+    
+    CreateNewChannelCellStateHidden = 0,
+    CreateNewChannelCellStateEditing = 1,
+    CreateNewChannelCellStateFinilizing = 2
+    
+} CreateNewChannelCellState;
+
+
+// Height of the bottom tab bar in pixels
+#define kBottomTabBarHeight 62
+
+// Height of the header bar
+#define kHeaderBarHeight 44
+
+// Height of the top tab bar
+#define kTopTabBarHeight 45
+
+// Offset from the bottom of the status bar to the bottom of the top tab bar
+#define kTabTopContentOffset (kHeaderBarHeight + kTopTabBarHeight)
+
+// Amount of overspill for top tab bar
+#define kTopTabOverspill 7
+
+#define kCategorySecondRowHeight 35.0f
+
 //
 // Tabs
 //
@@ -499,10 +437,6 @@ typedef enum : NSInteger
 // TestFlight support
 #define  kTestFlightAppToken @"350faab3-e77f-4954-aa44-b85dba25d029"
 
-
-// Block Definitions
-typedef void (^JSONResponseBlock)(id jsonObject);
-
 // Video view threshold
 #define kPercentageThresholdForView 0.1f
 
@@ -526,18 +460,6 @@ typedef void (^JSONResponseBlock)(id jsonObject);
 
 #define kChannelShareMessage NSLocalizedString (@"Take a look at this great channel I found on Rockpack", nil)
 #define kVideoShareMessage NSLocalizedString (@"Take a look at this great video I found on Rockpack", nil)
-
-// Gestures
-
-#define ALLOWS_PINCH_GESTURES__
-
-// UICollectionView reload strategy
-
-#define SMART_RELOAD__
-
-// Do we display the video provider branding
-
-#define SHOW_BRANDING 
 
 #endif
 

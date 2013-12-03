@@ -34,10 +34,9 @@
 #define kScrollContentOff 100.0f
 #define kScrollSpeedBoundary 550.0f
 
-@interface SYNAbstractViewController () <UIPopoverControllerDelegate>
+@interface SYNAbstractViewController ()
 
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
-@property (nonatomic, strong) UIPopoverController *activityPopoverController;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityView *activityView;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
@@ -95,13 +94,6 @@
 
 - (void) dealloc
 {
-    // Defensive programming
-    self.activityPopoverController.delegate = nil;
-    
-    if (self.activityPopoverController)
-    {
-        [self.activityPopoverController dismissPopoverAnimated: NO];
-    }
     // Stop observing everything
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
@@ -170,21 +162,6 @@
 #pragma mark -
 
 
-// This can be overridden if updating star may cause the videoFetchedResults
-- (BOOL) shouldUpdateStarStatus
-{
-    return TRUE;
-}
-
-
-// This is intended to be subclassed where other video assets (i.e. a Large video view) have information that is dependent on Video attributes
-- (void) updateOtherOnscreenVideoAssetsForIndexPath: (NSIndexPath *) indexPath
-{
-    // By default, do nothing
-}
-
-
-
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex
@@ -209,22 +186,6 @@
                                          andSelectedIndex: selectedIndex
                                                fromCenter: center];
 }
-
-#pragma mark - UICollectionViewDelegate/Data Source (to be overriden)
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    AssertOrLog(@"Abstract Method Called");
-    return 0;
-}
-
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    AssertOrLog(@"Abstract Method Called");
-    return nil;
-}
-
-
 
 
 #pragma mark - Trace
@@ -804,9 +765,12 @@
 		return;
 
 	SYNProfileRootViewController *profileVC = (SYNProfileRootViewController *)[self viewControllerOfClass:[SYNProfileRootViewController class]];
-    
+    [self.navigationController.navigationItem.backBarButtonItem setTitle:@""];
+
 	if (profileVC)
     {
+        
+
 		[self.navigationController popToViewController:profileVC animated:YES];
 	}
     else

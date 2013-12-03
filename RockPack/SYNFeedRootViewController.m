@@ -32,7 +32,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 @interface SYNFeedRootViewController () 
 
-@property (nonatomic, strong) NSBlockOperation *blockOperation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray* feedItemsData;
 @property (nonatomic, strong) NSDictionary* feedVideosById;
@@ -107,14 +106,10 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) viewDidAppear: (BOOL) animated
-{
-    [super viewDidAppear: animated];
-    
-    if ([self class] == [SYNFeedRootViewController class])
-    {
-        [self loadAndUpdateFeedData];
-    }
+- (void) viewDidAppear: (BOOL) animated {
+	[super viewDidAppear: animated];
+
+	[self loadAndUpdateFeedData];
 }
 
 
@@ -662,18 +657,6 @@ typedef void(^FeedDataErrorBlock)(void);
 	}];
 	return index + subCellIndex;
 }
-
-#pragma mark - Aggregate Cell Delegate
-
-- (void) profileIconPressed: (UIButton *) sender
-{
-    SYNAggregateCell* cell = [self aggregateCellFromSubview: sender];
-    if(!cell.channelOwner) // checking for both channel and channel owner
-        return;
-    
-    [self viewProfileDetails: cell.channelOwner];
-}
-
 
 #pragma mark - Load More Footer
 

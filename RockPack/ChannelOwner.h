@@ -5,6 +5,8 @@
 
 @property (nonatomic, readonly) NSString *thumbnailSmallUrl;
 @property (nonatomic, readonly) NSString *thumbnailLargeUrl;
+@property (nonatomic) NSInteger totalVideosValueChannel;
+@property (nonatomic) NSInteger totalVideosValueSubscriptions;
 
 + (ChannelOwner *) instanceFromDictionary: (NSDictionary *) dictionary
                 usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
@@ -20,6 +22,8 @@
 
 - (NSDictionary *) channelsDictionary;
 
-- (void) setSubscriptionsDictionary: (NSDictionary *) subscriptionsDictionary;
+- (void) setSubscriptionsDictionary : (NSDictionary *) subscriptionsDictionary;
+
+- (void) addChannelsFromDictionary : (NSDictionary *) channelsDictionary;
 
 @end

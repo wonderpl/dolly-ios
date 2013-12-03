@@ -9,7 +9,6 @@
 
 #import "AppConstants.h"
 #import "SYNChannelMidCell.h"
-#import "SYNTouchGestureRecognizer.h"
 #import "UIFont+SYNFont.h"
 #import "UIImage+Tint.h"
 #import <UIImageView+WebCache.h>
@@ -23,7 +22,6 @@
 
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) SYNTouchGestureRecognizer *touch;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
@@ -35,8 +33,6 @@
 @end
 
 @implementation SYNChannelMidCell
-
-@synthesize specialSelected;
 
 - (void) awakeFromNib
 {
@@ -50,13 +46,6 @@
                                                        action: @selector(showChannel:)];
     self.tap.delegate = self;
     [self addGestureRecognizer: self.tap];
-    
-    // Touch for highlighting cells when the user touches them (like UIButton)
-    self.touch = [[SYNTouchGestureRecognizer alloc] initWithTarget: self action: @selector(showGlossLowlight:)];
-    self.touch.delegate = self;
-    self.specialSelected = NO;
-    
-    
     
     if (IS_RETINA)
     {
@@ -130,6 +119,8 @@
 
 - (void) showChannel: (UITapGestureRecognizer *) recognizer
 {
+    
+    
     // Just need to reference any button in the cell (as there is no longer an actual video button)
     [self.viewControllerDelegate channelTapped: self];
     

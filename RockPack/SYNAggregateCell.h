@@ -9,7 +9,6 @@
 #import "ChannelOwner.h"
 #import "SYNAvatarButton.h"
 #import "SYNSocialActionsDelegate.h"
-#import "UIFont+SYNFont.h"
 #import <UIImageView+WebCache.h>
 
 @import UIKit;

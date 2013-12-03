@@ -80,13 +80,6 @@
 }
 
 
-- (void) setSupplementaryMessageWithDictionary: (NSDictionary *) messageDictionary
-{
-    // to be implemented in subclass
-    AssertOrLog(@"Not meant to be called, as should be overridden in derived class");
-}
-
-
 #pragma mark - UICollectionView DataSource
 
 // they all have 1 section
@@ -133,12 +126,6 @@
 - (ChannelOwner *) channelOwner
 {
     return nil; // implement in subclass
-}
-
-
-- (CGSize) correctSize
-{
-    return CGSizeZero; // override in subclass
 }
 
 

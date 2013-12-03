@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_GoogleConversionTracking 1
 #define COCOAPODS_VERSION_PATCH_GoogleConversionTracking 0
 
+// ISO8601DateFormatter
+#define COCOAPODS_POD_AVAILABLE_ISO8601DateFormatter
+#define COCOAPODS_VERSION_MAJOR_ISO8601DateFormatter 0
+#define COCOAPODS_VERSION_MINOR_ISO8601DateFormatter 7
+#define COCOAPODS_VERSION_PATCH_ISO8601DateFormatter 0
+
 // MKNetworkKit
 #define COCOAPODS_POD_AVAILABLE_MKNetworkKit
 #define COCOAPODS_VERSION_MAJOR_MKNetworkKit 0

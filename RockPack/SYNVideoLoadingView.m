@@ -161,7 +161,11 @@ static const CGFloat TextSideInset = 20.0;
 	[filter setValue:@15.0 forKey:kCIInputRadiusKey];
 	[filter setValue:image forKey:kCIInputImageKey];
 	
-	return [UIImage imageWithCGImage:[context createCGImage:[filter outputImage] fromRect:[image extent]]];
+	CGImageRef cgImage = [context createCGImage:[filter outputImage] fromRect:[image extent]];
+	UIImage *outputImage = [UIImage imageWithCGImage:cgImage];
+	CGImageRelease(cgImage);
+	
+	return outputImage;
 }
 
 - (UIFont *)titleFont {

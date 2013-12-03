@@ -15,19 +15,17 @@
 {
     [super awakeFromNib];
     
-    if (IS_IPHONE) {
+    if (IS_IPHONE)
+    {
         [self.createTextField setFont:[UIFont lightCustomFontOfSize:15]];
-        
     }else{
         [self.createTextField setFont:[UIFont lightCustomFontOfSize:18]];
-        
     }
     [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
     
     
     [self.descriptionTextView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
 
-    
     [self.createTextField.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
 
     self.descriptionTextView.alpha = 0.0f;
@@ -47,7 +45,6 @@
     
 }
 
-
 - (void) setViewControllerDelegate: (id<SYNChannelCreateNewCelllDelegate>)  viewControllerDelegate
 {
     
@@ -65,45 +62,34 @@
 
 }
 
-#pragma mark - textview delegates
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
+-(void)setState:(CreateNewChannelCellState)state
 {
-    if ([textView.text isEqualToString:@"placeholder text here..."]) {
-        textView.text = @"";
-        textView.textColor = [UIColor blackColor]; //optional
+    
+    _state = state;
+    switch (_state)
+    {
+        case CreateNewChannelCellStateHidden:
+            
+            self.descriptionTextView.hidden = YES;
+            self.createTextField.hidden = YES;
+            self.createCellButton.hidden = NO;
+            
+            break;
+            
+        case CreateNewChannelCellStateEditing:
+            self.descriptionTextView.hidden = NO;
+
+            self.createTextField.hidden = NO;
+            self.createCellButton.hidden = YES;
+            
+            break;
+            
+        case CreateNewChannelCellStateFinilizing:
+            
+            break;
     }
-    [textView becomeFirstResponder];
+
 }
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    if ([textView.text isEqualToString:@""]) {
-        textView.text = @"placeholder text here...";
-        textView.textColor = [UIColor lightTextColor]; //optional
-    }
-    [textView resignFirstResponder];
-}
-
-
-#pragma mark - textfield delegates
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    return NO;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-
 
 @end

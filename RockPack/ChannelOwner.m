@@ -6,6 +6,8 @@
 
 @implementation ChannelOwner
 
+@synthesize totalVideosValueChannel, totalVideosValueSubscriptions;
+
 #pragma mark - Object factory
 
 + (ChannelOwner *) instanceFromChannelOwner: (ChannelOwner *) existingChannelOwner
@@ -59,6 +61,7 @@
              addObject: copyChannel];
         }
     }
+    
     
     return copyChannelOwner;
 }
@@ -117,10 +120,12 @@
                                  withDefault: @0];
     
     
+    
 //    NSLog(@"%@", dictionary);
     
-//    self.channelOwnerDescription = [dictionary objectForKey: @"description"];
+    self.channelOwnerDescription = [dictionary objectForKey: @"description"];
     
+//    NSLog(@"Channel owner Description%@", self.channelOwnerDescription);
 //self.followersTotalCount = [dictionary objectForKey: @"description"];
 
     
@@ -135,6 +140,8 @@
     
     NSArray *channelItemsArray = channelsDictionary[@"items"];
     
+    
+
     if ([channelItemsArray isKindOfClass: [NSNull class]])
     {
         hasChannels = NO;
@@ -339,6 +346,7 @@
             [ownerDescription appendFormat:@"\n%@ (%@)",
              [channel.subscribedByUser boolValue] ? @"+" : @"-",  [channel.title isEqualToString:@""] ? channel.title : @"No Title"];
         }
+        
     }
     
     return ownerDescription;
@@ -362,6 +370,24 @@
 {
     return [self.thumbnailURL stringByReplacingOccurrencesOfString: kImageSizeStringReplace
                                                         withString: @"thumbnail_large"];
+}
+
+
+- (void) addChannelsFromDictionary : (NSDictionary *) channelsDictionary
+{
+    NSDictionary *itemDict = channelsDictionary[@"channels"];
+    if (!itemDict || ![itemDict isKindOfClass: [NSDictionary class]])
+    {
+        NSLog(@"not dict/nil");
+        return;
+    }
+    
+    NSArray *items = [itemDict objectForKey:@"items"];
+    
+    for (NSDictionary *tmpDict in items) {
+        
+        [self addChannelsObject:[Channel instanceFromDictionary:tmpDict usingManagedObjectContext:self.managedObjectContext]];
+    }
 }
 
 @end

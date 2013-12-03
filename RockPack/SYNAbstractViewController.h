@@ -19,12 +19,9 @@
 @import CoreData;
 @import UIKit;
 
-@class VideoInstance, Channel, ChannelOwner, Genre, SubGenre;
+@class VideoInstance, Channel, ChannelOwner;
 
-@interface SYNAbstractViewController : UIViewController <NSFetchedResultsControllerDelegate,
-                                                         UICollectionViewDataSource,
-                                                         UICollectionViewDelegate,
-                                                         SYNSocialActionsDelegate>
+@interface SYNAbstractViewController : UIViewController <UICollectionViewDelegate, SYNSocialActionsDelegate>
 {
 @protected
     SYNAppDelegate *appDelegate;
@@ -32,7 +29,6 @@
     NSString *abstractTitle;
 }
 
-@property (nonatomic) BOOL isAnimating;
 @property (nonatomic) NSInteger dataItemsAvailable;
 @property (nonatomic) NSRange dataRequestRange;
 @property (nonatomic, assign, getter = isLoadingMoreContent) BOOL loadingMoreContent;
