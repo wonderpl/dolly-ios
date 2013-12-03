@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-5L-Zdd" userLabel="Title">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-5L-Zdd" userLabel="Name Label">
                         <rect key="frame" x="76" y="14" width="184" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -52,7 +52,8 @@
             <connections>
                 <outlet property="avatarButton" destination="Rhf-2u-7gT" id="fIP-rF-piu"/>
                 <outlet property="descriptionLabel" destination="x0p-6l-BAu" id="iLO-qh-7vx"/>
-                <outlet property="titleLabel" destination="ct3-5L-Zdd" id="USG-eG-GMA"/>
+                <outlet property="followButton" destination="xUG-Xx-LHN" id="rkR-gU-s7i"/>
+                <outlet property="nameLabel" destination="ct3-5L-Zdd" id="G3i-Uz-NlJ"/>
             </connections>
         </collectionViewCell>
     </objects>

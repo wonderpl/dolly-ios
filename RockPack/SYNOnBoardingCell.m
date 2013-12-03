@@ -8,6 +8,7 @@
 
 #import "SYNOnBoardingCell.h"
 #import "UIButton+WebCache.h"
+#import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation SYNOnBoardingCell
@@ -17,15 +18,21 @@
     
     self.followButton.title = NSLocalizedString(@"follow", nil);
     
+    self.descriptionLabel.font = [UIFont regularCustomFontOfSize:self.descriptionLabel.font.pointSize];
+    
+    self.nameLabel.font = [UIFont regularCustomFontOfSize:self.nameLabel.font.pointSize];
+    
 }
 
 - (void) setRecomendation:(Recomendation *)recomendation
 {
     
-    
     _recomendation = recomendation;
     
     self.followButton.dataItemLinked = recomendation;
+    
+    self.nameLabel.text = recomendation.displayName;
+    self.descriptionLabel.text = recomendation.descriptionText;
     
     
     [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]

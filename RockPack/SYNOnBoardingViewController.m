@@ -23,6 +23,8 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 @property (nonatomic, strong) NSArray* data;
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* spinner;
+
 @end
 
 @implementation SYNOnBoardingViewController
@@ -53,21 +55,29 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 - (void) getRecommendationsFromRemote
 {
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    self.spinner.hidden = NO;
+    
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
                                               completionHandler:^(id responce) {
                                                   
                                                   if(![responce isKindOfClass:[NSDictionary class]])
                                                       return;
                                                   
+                                                  self.spinner.hidden = YES;
+                                                  
                                                   if(![appDelegate.searchRegistry registerRecommendationsFromDictionary:responce])
                                                   {
                                                       return;
                                                   }
                                                   
+                                                  
                                                   [self fetchRecommendationsFromLocal];
                                                   
         
                                               } errorHandler:^(id error) {
+                                                  
+                                                  self.spinner.hidden = YES;
         
                                               }];
 }

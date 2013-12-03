@@ -1,44 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3I8-lG-xrI" customClass="SYNOnBoardingCell">
-            <rect key="frame" x="0.0" y="0.0" width="202" height="161"/>
+            <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="202" height="161"/>
+                <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQx-0D-x5c" userLabel="Title">
-                        <rect key="frame" x="34" y="88" width="135" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdh-Yr-ubO" userLabel="Description">
-                        <rect key="frame" x="21" y="105" width="161" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGF-vT-eL5" userLabel="Follow">
-                        <rect key="frame" x="72" y="123" width="59" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <state key="normal" title="Follow">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdY-a8-daP" userLabel="User Thumbnail Button" customClass="SYNAvatarButton">
-                        <rect key="frame" x="77" y="21" width="48" height="48"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdY-a8-daP" userLabel="User Thumbnail Button" customClass="SYNAvatarButton">
+                        <rect key="frame" x="104" y="32" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="5iU-SU-Oap"/>
+                            <constraint firstAttribute="height" constant="48" id="cV0-id-X6A"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <state key="normal">
                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,15 +30,46 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQx-0D-x5c" userLabel="Name Label">
+                        <rect key="frame" x="20" y="105" width="216" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdh-Yr-ubO" userLabel="Description">
+                        <rect key="frame" x="48" y="137" width="161" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJC-PG-x7n" userLabel="Follow" customClass="SYNSocialButton">
+                        <rect key="frame" x="103" y="175" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="09v-4k-54O"/>
+                            <constraint firstAttribute="height" constant="50" id="HkU-LF-s63"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstItem="BJC-PG-x7n" firstAttribute="top" secondItem="3I8-lG-xrI" secondAttribute="top" constant="175" id="FWW-Yk-WkT"/>
+                <constraint firstAttribute="trailing" secondItem="BJC-PG-x7n" secondAttribute="trailing" constant="103" id="JKn-op-7RN"/>
+                <constraint firstItem="JdY-a8-daP" firstAttribute="top" secondItem="3I8-lG-xrI" secondAttribute="top" constant="32" id="Xaa-hw-Ae6"/>
+                <constraint firstItem="BJC-PG-x7n" firstAttribute="leading" secondItem="3I8-lG-xrI" secondAttribute="leading" constant="103" id="Y5I-TV-JY6"/>
+                <constraint firstAttribute="trailing" secondItem="JdY-a8-daP" secondAttribute="trailing" constant="104" id="gQA-ia-AeW"/>
+                <constraint firstItem="JdY-a8-daP" firstAttribute="leading" secondItem="3I8-lG-xrI" secondAttribute="leading" constant="104" id="zTp-dI-SHk"/>
+            </constraints>
             <size key="customSize" width="214" height="161"/>
             <connections>
                 <outlet property="avatarButton" destination="JdY-a8-daP" id="MMn-kS-5X7"/>
                 <outlet property="descriptionLabel" destination="Qdh-Yr-ubO" id="wv6-EA-a0f"/>
-                <outlet property="followButton" destination="uGF-vT-eL5" id="N3a-uU-xAe"/>
-                <outlet property="titleLabel" destination="HQx-0D-x5c" id="f4Z-XN-SIv"/>
+                <outlet property="followButton" destination="BJC-PG-x7n" id="JXg-4C-F0W"/>
+                <outlet property="nameLabel" destination="HQx-0D-x5c" id="vMn-hT-SUu"/>
             </connections>
         </collectionViewCell>
     </objects>
