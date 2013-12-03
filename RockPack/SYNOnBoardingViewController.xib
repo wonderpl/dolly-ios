@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNOnBoardingViewController">
             <connections>
                 <outlet property="collectionView" destination="mhE-ZL-YwO" id="dld-MZ-TIA"/>
+                <outlet property="navigationRightLabel" destination="gE7-Qn-vWe" id="0fF-Mw-IVG"/>
+                <outlet property="navigationTitleLabel" destination="F0G-sW-nXM" id="LoR-1N-oDO"/>
                 <outlet property="spinner" destination="kHx-SZ-Omg" id="9zB-DH-xm2"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -16,24 +18,6 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egW-cj-GJW" userLabel="Login UIButton">
-                    <rect key="frame" x="441" y="717" width="96" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <accessibility key="accessibilityConfiguration" label="Login Navigation"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Login">
-                        <color key="titleColor" red="0.73725490199999999" green="0.73333333329999995" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected">
-                        <color key="titleColor" red="0.83278566430000001" green="0.82134538830000003" blue="0.93503736410000005" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" red="0.83278566430000001" green="0.82134538830000003" blue="0.93503736410000005" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                </button>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="kHx-SZ-Omg" userLabel="Spinner">
                     <rect key="frame" x="493" y="366" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -41,12 +25,13 @@
                     <color key="color" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mhE-ZL-YwO">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="709"/>
+                    <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AW9-nx-I3h">
                         <size key="itemSize" width="256" height="256"/>
                         <size key="headerReferenceSize" width="1024" height="108"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="1" height="76"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
@@ -55,6 +40,34 @@
                         <outlet property="delegate" destination="-1" id="YtH-jS-lKm"/>
                     </connections>
                 </collectionView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pg-bZ-cqe" userLabel="View - Navigation bar">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="65"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wiM-fg-M36" userLabel="View - Navigation Line">
+                            <rect key="frame" x="0.0" y="64" width="1024" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0G-sW-nXM" userLabel="Title Label - Welcome">
+                            <rect key="frame" x="468" y="22" width="71" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 more" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE7-Qn-vWe" userLabel="N more...">
+                            <rect key="frame" x="895" y="22" width="54" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>

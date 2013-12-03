@@ -29,7 +29,7 @@
     
     _recomendation = recomendation;
     
-    self.followButton.dataItemLinked = recomendation;
+    self.followButton.dataItemLinked = recomendation.channelOwner;
     
     self.nameLabel.text = recomendation.displayName;
     self.descriptionLabel.text = recomendation.descriptionText;

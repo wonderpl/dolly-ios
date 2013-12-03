@@ -128,14 +128,7 @@
     
     
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsSeenOnBoarding]) // IS first install
-    {
-        
-        SYNOnBoardingViewController* onBoardingViewController = [[SYNOnBoardingViewController alloc] init];
-        [self.currentViewController pushViewController:onBoardingViewController animated:NO];
-        
-        //[[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsSeenOnBoarding];
-    }
+    
     
     
     

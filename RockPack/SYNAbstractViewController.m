@@ -655,24 +655,21 @@
                                                       }];
         }
     }
-    else if ([socialControl.dataItemLinked isKindOfClass: [Recomendation class]])
+    else
     {
-        Recomendation* recomendation = socialControl.dataItemLinked;
-        ChannelOwner *channelOwner = recomendation.channelOwner; // creates a channel owner on the fly
+        // either a ChannelOwner of a Recomendation cell will link to a ChannelOwner (see SYNOnBoardingCell.m)
         
-        if(!channelOwner)
-            return;
-    }
-    else if ([socialControl.dataItemLinked isKindOfClass: [ChannelOwner class]])
-    {
-        // Get the owner associated with the control pressed
         ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
         
+        
+        
         if(!channelOwner)
             return;
         
-        // TODO: Follow all his channels
+        
+        
     }
+    
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle

@@ -1281,6 +1281,8 @@
 		BEC39C13184D03C000DA8089 /* _Recomendation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C12184D03C000DA8089 /* _Recomendation.m */; };
 		BEC39C16184D03CF00DA8089 /* Recomendation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C15184D03CF00DA8089 /* Recomendation.m */; };
 		BEC39C18184DFF7D00DA8089 /* SYNOnBoardingHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C17184DFF7D00DA8089 /* SYNOnBoardingHeader.xib */; };
+		BEC39C1B184E360F00DA8089 /* SYNOnBoardingFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C1A184E360F00DA8089 /* SYNOnBoardingFooter.m */; };
+		BEC39C1D184E363C00DA8089 /* SYNOnBoardingFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C1C184E363C00DA8089 /* SYNOnBoardingFooter.xib */; };
 		BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */; };
 		BED027B21833F66700636659 /* SYNOptionsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */; };
 		BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */; };
@@ -2842,6 +2844,9 @@
 		BEC39C14184D03CF00DA8089 /* Recomendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recomendation.h; sourceTree = "<group>"; };
 		BEC39C15184D03CF00DA8089 /* Recomendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recomendation.m; sourceTree = "<group>"; };
 		BEC39C17184DFF7D00DA8089 /* SYNOnBoardingHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnBoardingHeader.xib; sourceTree = "<group>"; };
+		BEC39C19184E360F00DA8089 /* SYNOnBoardingFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingFooter.h; sourceTree = "<group>"; };
+		BEC39C1A184E360F00DA8089 /* SYNOnBoardingFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnBoardingFooter.m; sourceTree = "<group>"; };
+		BEC39C1C184E363C00DA8089 /* SYNOnBoardingFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnBoardingFooter.xib; sourceTree = "<group>"; };
 		BED027AE1833F66700636659 /* SYNOptionsOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOptionsOverlayViewController.h; sourceTree = "<group>"; };
 		BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOptionsOverlayViewController.m; sourceTree = "<group>"; };
 		BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOptionsOverlayViewController.xib; sourceTree = "<group>"; };
@@ -5390,6 +5395,9 @@
 				BE57C0301843638C00C6444A /* SYNOnBoardingHeader.m */,
 				BE57C02D184362F800C6444A /* SYNOnBoardingHeader~iphone.xib */,
 				BEC39C17184DFF7D00DA8089 /* SYNOnBoardingHeader.xib */,
+				BEC39C19184E360F00DA8089 /* SYNOnBoardingFooter.h */,
+				BEC39C1A184E360F00DA8089 /* SYNOnBoardingFooter.m */,
+				BEC39C1C184E363C00DA8089 /* SYNOnBoardingFooter.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -6303,6 +6311,7 @@
 				01ABBB1F17205541007E4462 /* ButtonSubscribeHighlighted@2x.png in Resources */,
 				01ABBB2017205541007E4462 /* ButtonSubscribeSelected.png in Resources */,
 				01ABBB2117205541007E4462 /* ButtonSubscribeSelected@2x.png in Resources */,
+				BEC39C1D184E363C00DA8089 /* SYNOnBoardingFooter.xib in Resources */,
 				01ABBB2217205541007E4462 /* LogoRockpack.png in Resources */,
 				01ABBB2317205541007E4462 /* LogoRockpack@2x.png in Resources */,
 				01ABBB2417205541007E4462 /* ButtonBuy.png in Resources */,
@@ -7361,6 +7370,7 @@
 				011C167A173003E800CF50B9 /* OWActivityViewController.m in Sources */,
 				011C167B173003E800CF50B9 /* OWCopyActivity.m in Sources */,
 				011C167C173003E800CF50B9 /* OWFacebookActivity.m in Sources */,
+				BEC39C1B184E360F00DA8089 /* SYNOnBoardingFooter.m in Sources */,
 				011C167D173003E800CF50B9 /* OWMailActivity.m in Sources */,
 				011C167E173003E800CF50B9 /* OWMapsActivity.m in Sources */,
 				BE31EFB5183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m in Sources */,

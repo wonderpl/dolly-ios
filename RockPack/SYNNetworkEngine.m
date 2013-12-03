@@ -364,7 +364,8 @@
                         completionHandler: (MKNKSearchSuccessBlock) completionBlock
 {
     
-    if(!genreId) return nil;
+    if(!genreId)
+        return nil;
     
     NSMutableDictionary *parameters = @{}.mutableCopy;
     if(![genreId isEqualToString:kPopularGenreUniqueId]) // else -> 'POPULAR' SubGenre passed, do not create a 'category' argument

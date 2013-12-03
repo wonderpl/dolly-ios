@@ -16,6 +16,11 @@
 #import "SYNPopoverable.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNContainerViewController.h"
+#import "SYNOnBoardingViewController.h"
+
+#import "Genre.h"
+#import "SubGenre.h"
+
 @import QuartzCore;
 
 
@@ -39,6 +44,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
 @property (nonatomic) CGRect overlayControllerFrame;
+
+@property (nonatomic) BOOL hasPopularGenre;
 
 
 
@@ -76,12 +83,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     [super viewDidLoad];
     
-    [self addChildViewController:self.containerViewController];
-    
-    // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
-    
-    self.containerViewController.view = self.containerView;
-    
     
     // == Setup Navigation Manager == (This should be done here because it is dependent on controls) == //
     
@@ -110,14 +111,122 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     self.backgroundOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.backgroundOverlayView.backgroundColor = [UIColor darkGrayColor];
     
+    // load basic data like the Genres
+    [self loadBasicDataWithComplete:^(BOOL success) {
+        
+        if(success) // Genres have loaded from the server
+        {
+            if(!self.hasPopularGenre) // we have no POPULAR Genre
+            {
+                [self createPopularGenre]; // create one
+            }
+        }
+        
+        [self addChildViewController:self.containerViewController];
+        
+        // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
+    
+        self.containerViewController.view = self.containerView;
+        
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsSeenOnBoarding]) // IS first install
+        {
+            
+            SYNOnBoardingViewController* onBoardingViewController = [[SYNOnBoardingViewController alloc] init];
+            [self addChildViewController:onBoardingViewController];
+            
+            onBoardingViewController.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+            
+            [self.view addSubview:onBoardingViewController.view];
+            
+            //[[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsSeenOnBoarding];
+            
+        }
+        
+    }];
+    
+    
+    
     
 }
+
+- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
+{
+    [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
+        
+        [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
+            
+            return [appDelegate.mainRegistry registerCategoriesFromDictionary: dictionary];
+            
+        } completionBlock:^(BOOL success) {
+            
+            CompleteBlock(success);
+            
+        }];
+        
+        
+    } onError:^(NSError* error) {
+        
+        CompleteBlock(NO);
+        
+    }];
+}
+
+#pragma mark - Popular Genre
+
+-(BOOL)hasPopularGenre
+{
+    
+    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
+    
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
+    
+    categoriesFetchRequest.includesSubentities = NO; // this will avoid getting both the Genre and SubGenre called 'POPULAR'
+    
+    NSError* error;
+    
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                      error: &error];
+    
+    return (BOOL)(genresFetchedArray.count > 0);
+}
+
+
+
+-(BOOL)createPopularGenre
+{
+    
+    // Create Genre
+    Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
+    popularGenre.uniqueId = kPopularGenreUniqueId;
+    popularGenre.name = [NSString stringWithString:kPopularGenreName];
+    popularGenre.priority = @(100000);
+    
+    // Create SubGenre
+    SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
+    popularSubGenre.uniqueId = kPopularGenreUniqueId;
+    popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
+    popularSubGenre.priority = @(100000);
+    
+    // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
+    [popularSubGenre.subgenresSet addObject:popularSubGenre];
+    
+    NSError* error;
+    return ([appDelegate.mainManagedObjectContext save:&error]);
+}
+
+
 
 // temporary
 -(void)hideOrShowNetworkMessages:(NSNotification*)notifcation
 {
     
 }
+
+
 #pragma mark - Overlays, Adding and Removing
 
 -(void)addExistingCollectionsOverlayController

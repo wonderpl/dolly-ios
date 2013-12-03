@@ -68,7 +68,5 @@ typedef enum NotificationMessageType : NSInteger {
 
 // on-boarding
 
--(void)addOnBoarding;
--(void)removeOnBoarding;
 
 @end

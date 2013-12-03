@@ -51,12 +51,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) SYNSearchResultsViewController* searchResultsController;
 
+@property (nonatomic, weak) SubGenre* popularSubGenre;
 
 
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
-
-@property (nonatomic, strong) Genre* popularGenre;
 
 @end
 
@@ -109,77 +108,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
     
     
-    // self.loadingPanelView.hidden = NO; // hide by default and only show when there are no categories
+    // this will also save popularSubGenre in the variable
     
-    // Check for existence of popular category
-    
-    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-    
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
-                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
-    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
-    
-    categoriesFetchRequest.includesSubentities = NO; // this will avoid getting both the Genre and SubGenre called 'POPULAR'
-    
-    NSError* error;
-    
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                      error: &error];
-    
-    
-    
-    SubGenre* popularSubGenre;
-    // probably the database is cold so need to reload everything
-    if(genresFetchedArray.count == 0)
-    {
-      
-        _popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-        _popularGenre.uniqueId = kPopularGenreUniqueId;
-        _popularGenre.name = [NSString stringWithString:kPopularGenreName];
-        _popularGenre.priorityValue = 100000;
-        
-        
-        popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
-        popularSubGenre.uniqueId = kPopularGenreUniqueId;
-        popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
-        popularSubGenre.priorityValue = 100000;
-        
-        // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
-        [_popularGenre.subgenresSet addObject:popularSubGenre];
-        
-        if(!_popularGenre)
-            return;
-        
-        [appDelegate.mainManagedObjectContext save:&error];
-        
-        [self displayPopupMessage: NSLocalizedString(@"feed_screen_empty_message", nil)
-                       withLoader: YES];
-        
-        [self loadCategories];
-        
-    }
-    else
-    {
-        _popularGenre = (Genre*)genresFetchedArray[0];
-        popularSubGenre = (SubGenre*)_popularGenre.subgenres[0];
-        // housekeeping (remove duplicates)
-        if(genresFetchedArray.count > 1)
-        {
-            for (int i = 1; i < genresFetchedArray.count; i++)
-            {
-                Genre* popularClone = (Genre*)genresFetchedArray[i];
-                [popularClone.managedObjectContext delete:popularClone];
-                
-            }
-        }
-        
-        [self fetchAndDisplayCategories];
-        
-        [self loadCategories];
-        
-        
-    }
+    [self fetchAndDisplayCategories];
     
     // you want to load the search display controller only for iPad, on iPhone in slides in as a navigation
     if(IS_IPAD)
@@ -191,10 +122,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         sResRect.size = self.containerView.frame.size;
         self.searchResultsController.view.frame = sResRect;
         
-        // this should always be true since we are either creating it on the fly or it is in DB already
-        if(popularSubGenre)
+        // this should always be true but go defensively
+        if(self.popularSubGenre)
         {
-            [self.searchResultsController searchForGenre:popularSubGenre.uniqueId];
+            [self.searchResultsController searchForGenre:self.popularSubGenre.uniqueId];
         }
         else
         {
@@ -240,41 +171,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
-    
+    // save the self.popularSubGenre
+    for (Genre* genre in self.genres)
+    {
+        if([genre.uniqueId isEqualToString:kPopularGenreUniqueId])
+        {
+            self.popularSubGenre = (SubGenre*)genre.subgenres[0]; // Genre POPULAR has only one SubGenre
+        }
+    }
     
     [self.categoriesCollectionView reloadData];
     
     
-}
-
-- (void) loadCategories
-{
-    
-    [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
-        
-        [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
-            
-            return [appDelegate.mainRegistry registerCategoriesFromDictionary: dictionary];
-            
-        } completionBlock:^(BOOL success) {
-            
-            [self removePopupMessage];
-            
-            [self fetchAndDisplayCategories];
-            
-            
-            
-        }];
-        
-        
-    } onError:^(NSError* error) {
-        
-        [self removePopupMessage];
-        
-        DebugLog(@"%@", [error debugDescription]);
-        
-        
-    }];
 }
 
 #pragma mark - CollectionView Delegate/Data Source
@@ -441,7 +349,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         if (suggestionsReturned.count == 0)
         {
-            
             return;
         }
         
@@ -454,7 +361,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             
             [wordsReturned addObject: suggestion[0]];
         }
-        
         
         
         wself.autocompleteSuggestionsArray =
@@ -484,8 +390,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
-    
     
     [self dispatchSearch:searchBar.text
                withTitle:searchBar.text

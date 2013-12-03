@@ -16,7 +16,8 @@
 
 @implementation SYNChannelFooterMoreView
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
 	[super awakeFromNib];
 	
 	self.activityIndicator.color = [UIColor colorWithRed: (11.0/255.0)

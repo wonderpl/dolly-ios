@@ -15,9 +15,14 @@
 #import "Recomendation.h"
 #import "SYNMasterViewController.h"
 #import "SYNOnBoardingHeader.h"
+#import "SYNOnBoardingFooter.h"
+#import "UIFont+SYNFont.h"
+#import "Genre.h"
+#import "SubGenre.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
+static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 @interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -25,6 +30,12 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 @property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* spinner;
+
+// fake navigation bar stuff
+@property (nonatomic, strong) IBOutlet UILabel* navigationTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel* navigationRightLabel;
+
+@property (nonatomic, strong) NSArray* genres;
 
 @end
 
@@ -45,6 +56,41 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
           forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
                  withReuseIdentifier: OnBoardingHeaderIndent];
     
+    [self.collectionView registerNib: [UINib nibWithNibName: OnBoardingFooterIndent bundle: nil]
+          forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+                 withReuseIdentifier: OnBoardingFooterIndent];
+    
+    self.navigationTitleLabel.font = [UIFont regularCustomFontOfSize:self.navigationTitleLabel.font.pointSize];
+    self.navigationRightLabel.font = [UIFont regularCustomFontOfSize:self.navigationRightLabel.font.pointSize];
+    
+    
+    
+    // === Fetch Genres === //
+    
+    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
+    
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
+    
+    [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    // this is so that empty genres are not returned since only the subgenres are displayed
+    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"subgenres.@count > 0"];
+    
+    categoriesFetchRequest.includesSubentities = NO;
+    
+    NSError* error;
+    
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                      error: &error];
+    
+    
+    self.genres = [NSArray arrayWithArray:genresFetchedArray];
+    
+    // =================== //
     
     
     self.data = @[]; // so as not to throw error when accessed
@@ -81,6 +127,8 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
         
                                               }];
 }
+
+
 
 - (void) fetchRecommendationsFromLocal
 {
@@ -143,8 +191,29 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
         
          
     }
+    else if (kind == UICollectionElementKindSectionFooter)
+    {
+        supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                               withReuseIdentifier: OnBoardingFooterIndent
+                                                                      forIndexPath: indexPath];
+        
+        [((SYNOnBoardingFooter*)supplementaryView).skipButton addTarget:self
+                                                                 action:@selector(skipButtonPressed:)
+                                                       forControlEvents:UIControlEventTouchUpInside];
+        
+    }
     
     return supplementaryView;
+}
+
+- (void) skipButtonPressed: (UIButton*) button
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        self.view.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
+    }];
 }
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
