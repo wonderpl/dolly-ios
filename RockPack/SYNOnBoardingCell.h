@@ -10,6 +10,7 @@
 #import "SYNSocialActionsDelegate.h"
 #import "SYNAvatarButton.h"
 #import "SYNSocialButton.h"
+#import "Recomendation.h"
 
 @interface SYNOnBoardingCell : UICollectionViewCell
 
@@ -21,5 +22,6 @@
 
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
+@property (nonatomic, weak) Recomendation* recomendation;
 
 @end

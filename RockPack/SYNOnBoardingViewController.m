@@ -12,6 +12,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "ChannelOwner.h"
+#import "Recomendation.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 
@@ -100,9 +101,9 @@ static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
     SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier: OnBoardingCellIndent
                                                                         forIndexPath: indexPath];
     
-    ChannelOwner* co = (ChannelOwner*)self.data[indexPath.row];
+    Recomendation* recomendation = (Recomendation*)self.data[indexPath.row];
     
-    cell.titleLabel.text = co.displayName;
+    cell.recomendation = recomendation;
     
     
     cell.delegate = self;

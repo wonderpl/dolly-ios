@@ -1,5 +1,6 @@
 #import "Recomendation.h"
 #import "NSDictionary+Validation.h"
+#import "ChannelOwner.h"
 
 @interface Recomendation ()
 
@@ -48,6 +49,20 @@
     self.descriptionText = [dictionary objectForKey:@"description"
                                         withDefault:@""];
     
+    
+}
+
+- (ChannelOwner*) channelOwner
+{
+    NSDictionary* coDictionary = @{@"id": self.uniqueId,
+                                   @"display_name" : self.displayName,
+                                   @"avatar_thumbnail_url" : self.avatarUrl};
+    
+    ChannelOwner* co = [ChannelOwner instanceFromDictionary:coDictionary
+                                  usingManagedObjectContext:self.managedObjectContext
+                                        ignoringObjectTypes:kIgnoreAll];
+    
+    return co;
 }
 
 @end

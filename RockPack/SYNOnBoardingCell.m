@@ -8,6 +8,7 @@
 
 #import "SYNOnBoardingCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIButton+WebCache.h"
 
 @implementation SYNOnBoardingCell
 
@@ -17,6 +18,19 @@
     
     self.followButton.title = NSLocalizedString(@"follow", nil);
     
+}
+
+- (void) setRecomendation:(Recomendation *)recomendation
+{
+    _recomendation = recomendation;
+    
+    self.followButton.dataItemLinked = recomendation;
+    
+    
+    [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]
+                              forState: UIControlStateNormal
+                      placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
+                               options: SDWebImageRetryFailed];
 }
 
 - (void) setDelegate:(id<SYNSocialActionsDelegate>)delegate
