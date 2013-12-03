@@ -19,7 +19,7 @@
 @import CoreData;
 @import UIKit;
 
-@class VideoInstance, Channel, ChannelOwner, Genre, SubGenre;
+@class VideoInstance, Channel, ChannelOwner;
 
 @interface SYNAbstractViewController : UIViewController <UICollectionViewDelegate, SYNSocialActionsDelegate>
 {
