@@ -1549,9 +1549,7 @@
     {
         self.modeType = kModeOtherUsersProfile;
     }
-    
-#warning getdata from core data
-    
+        
     self.dataRequestRangeChannel = NSMakeRange(0, MAXRANGE);
     self.dataRequestRangeSubscriptions = NSMakeRange(0, MAXRANGE);
 
