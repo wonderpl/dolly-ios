@@ -122,10 +122,15 @@
         return;
     }
     
-    // toggle subscription from/to channel //
-    //    if (channelOwnerToSubscribe.subscribedByUserValue == YES)
-    {
+    if (!channelOwnerToSubscribe.subscribedByUser) {
         [self subscribeToUser: (ChannelOwner*) channelOwnerToSubscribe ];
+
+    }
+    else
+    {
+        [self unsubscribeToUser: (ChannelOwner*) channelOwnerToSubscribe ];
+
+        
     }
     
 }
@@ -360,35 +365,35 @@
 // == follow all
 - (void) subscribeToUser: (ChannelOwner *) channelToSubscribeTo
 {
-    //if subed unfollow else follow
-    if (!channelToSubscribeTo.subscribedByUser) {
-     
-        [appDelegate.oAuthNetworkEngine subscribeAllForUserId:appDelegate.currentUser.uniqueId action:@"subscribe_all" subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
-            
-            channelToSubscribeTo.subscribedByUserValue = YES;
-            [appDelegate saveContext: YES];
-
-            
-        } errorHandler:^(id response) {
-            
-        }
-         ];
-    }
-    else
-    {
+    
+    [appDelegate.oAuthNetworkEngine subscribeAllForUserId:appDelegate.currentUser.uniqueId action:@"subscribe_all" subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
         
-        [appDelegate.oAuthNetworkEngine subscribeAllForUserId:appDelegate.currentUser.uniqueId action:@"unsubscribe_all" subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
-            channelToSubscribeTo.subscribedByUserValue = NO;
-            
-            [appDelegate saveContext: YES];
-
-        } errorHandler:^(id response) {
-            
-        }
-         ];
-
+        channelToSubscribeTo.subscribedByUserValue = YES;
+        [appDelegate saveContext: YES];
+        
+        
+    } errorHandler:^(id response) {
+        
     }
+     ];
+    
+    
+}
 
+- (void) unsubscribeToUser: (ChannelOwner *) channelToSubscribeTo
+{
+    
+    [appDelegate.oAuthNetworkEngine subscribeAllForUserId:appDelegate.currentUser.uniqueId action:@"unsubscribe_all" subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
+        channelToSubscribeTo.subscribedByUserValue = NO;
+        
+        [appDelegate saveContext: YES];
+        
+    } errorHandler:^(id response) {
+        
+    }
+     ];
+    
+    
     
 }
 
