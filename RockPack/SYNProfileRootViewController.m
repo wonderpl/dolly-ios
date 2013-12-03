@@ -265,7 +265,6 @@
     self.channelThumbnailCollectionView.hidden = YES;
     //updates the staus bar appearance
     
-    //[self updateMainScrollView];
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     
     UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
@@ -527,13 +526,6 @@
     self.segmentedControlsView.layer.borderWidth = .5f;
     self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.segmentedControlsView.layer.masksToBounds = YES;
-    
-}
-
-- (void) updateMainScrollView
-{
-    CGRect tmpFrame;
-    tmpFrame = self.channelThumbnailCollectionView.frame;
     
 }
 
