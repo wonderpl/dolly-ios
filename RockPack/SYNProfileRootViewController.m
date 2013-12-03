@@ -41,6 +41,7 @@
 #define OFFSET_DESCRIPTION_EDIT 130.0f
 #define PARALLAX_SCROLL_VALUE 2.0f
 #define kHeightChange 94.0f
+#define MAXRANGE 100.0f
 
 
 //delete function in channeldetails deletechannel
@@ -131,6 +132,9 @@
 
 @property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
 @property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
+
+@property (nonatomic) NSRange dataRequestRangeChannel;
+@property (nonatomic) NSRange dataRequestRangeSubscriptions;
 
 
 @end
@@ -599,7 +603,7 @@
          if (obj == self.channelOwner)
          {
              //TODO:Get total number of channels or sub number?
-             self.dataItemsAvailable = 300;
+             self.dataItemsAvailable = MAXRANGE;
 
              [self reloadCollectionViews];
              
@@ -1139,19 +1143,17 @@
     [super scrollViewDidScroll:scrollView];
     CGFloat offset = scrollView.contentOffset.y;
     
-    
     if (self.channelThumbnailCollectionView == scrollView) {
         if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO)
         {
-//            [self loadMoreChannels];
+            [self loadMoreChannels];
         }
     }
-   
     
     if (self.subscriptionThumbnailCollectionView == scrollView) {
         if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO)
         {
-//            [self loadMoreVideos];
+//            [self loadMoreSubscriptions];
         }
         
     }
@@ -1163,7 +1165,6 @@
             scrollView.contentOffset = [self.orientationDesicionmaker contentOffset];
             return;
         }
-        
     }
     
     [self moveViewsWithScroller:scrollView withOffset:offset];
@@ -1177,6 +1178,9 @@
         return;
     
     self.loadingMoreContent = YES;
+    
+    self.dataRequestRange = self.dataRequestRangeChannel;
+//    self.dataItemsAvailable = self.channelOwner.totalVideosValueChannel;
     
     [self incrementRangeForNextRequest];
     
@@ -1223,6 +1227,9 @@
     
     self.loadingMoreContent = YES;
     
+    self.dataRequestRange = self.dataRequestRangeSubscriptions;
+//    self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptions;
+
     [self incrementRangeForNextRequest];
     
     __weak typeof(self) weakSelf = self;
@@ -1543,6 +1550,12 @@
         self.modeType = kModeOtherUsersProfile;
     }
     
+#warning getdata from core data
+    
+    self.dataRequestRangeChannel = NSMakeRange(0, MAXRANGE);
+    self.dataRequestRangeSubscriptions = NSMakeRange(0, MAXRANGE);
+
+    
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     
     NSLog(@"subscribedByUserValue :%hhd",self.channelOwner.subscribedByUserValue);
@@ -1557,8 +1570,6 @@
     
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
-    
-    
     
 }
 
@@ -1905,8 +1916,6 @@
                                                             object: self
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
     }
-    
-    
 }
 
 #pragma mark - IBActions
@@ -2129,10 +2138,7 @@
                                          }];
 
     [self cancelCreateChannel];
-    
-    [self.channelThumbnailCollectionView reloadData];
-    
-    
+
 }
 
 -(void) saveEditModeTapped
@@ -2210,15 +2216,12 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         [self performSelector:@selector(resetOffsetWithAnimation) withObject:nil afterDelay:0.3f];
     }
     //[self resetOffsetWithAnimation];
-    NSLog(@"text view end editing");
     
     [textView resignFirstResponder];
 }
 
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
-    
-    NSLog(@"add gesture reconiser");
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
 
     
