@@ -7,14 +7,13 @@
 //
 
 #import "SYNOnBoardingCell.h"
-#import <QuartzCore/QuartzCore.h>
 #import "UIButton+WebCache.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SYNOnBoardingCell
 
 - (void) awakeFromNib
 {
-    
     
     self.followButton.title = NSLocalizedString(@"follow", nil);
     
@@ -22,6 +21,8 @@
 
 - (void) setRecomendation:(Recomendation *)recomendation
 {
+    
+    
     _recomendation = recomendation;
     
     self.followButton.dataItemLinked = recomendation;
@@ -35,6 +36,7 @@
 
 - (void) setDelegate:(id<SYNSocialActionsDelegate>)delegate
 {
+    
     if(_delegate)
     {
         [self.followButton removeTarget: _delegate

@@ -19,7 +19,6 @@
 #import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNProfileRootViewController.h"
-#import "SYNYouHeaderView.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 #import "SYNOptionsOverlayViewController.h"
