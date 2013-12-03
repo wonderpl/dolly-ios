@@ -1,5 +1,8 @@
 #import "_Recomendation.h"
 
 @interface Recomendation : _Recomendation {}
-// Custom logic goes here.
+
++ (Recomendation *) instanceFromDictionary: (NSDictionary *) dictionary
+                 usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
+
 @end

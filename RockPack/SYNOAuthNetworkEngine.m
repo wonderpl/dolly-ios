@@ -1862,7 +1862,7 @@
 {
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
-    NSString *apiString = [kRegisterExternalAccount stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    NSString *apiString = [kGetRecommendations stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     // same as default values... they are here in case we need to change them in the future

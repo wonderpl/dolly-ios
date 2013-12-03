@@ -14,6 +14,7 @@
 #import "SYNSearchRegistry.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "Recomendation.h"
 @import AddressBook;
 
 @implementation SYNSearchRegistry
@@ -381,6 +382,41 @@
 {
     return [self registerChannelOwnersFromDictionary: dictionary
                                            forViewId: kSearchViewId];
+}
+
+- (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary
+{
+    
+    NSDictionary *usersDictionary = dictionary[@"users"];
+    if (![usersDictionary isKindOfClass: [NSDictionary class]])
+        return NO;
+    
+    //NSNumber* total = usersDictionary[@"total"];
+    NSArray* itemsArray = usersDictionary[@"items"];
+    for (NSDictionary* itemDictionary in itemsArray)
+    {
+        Recomendation* recomendation = [Recomendation instanceFromDictionary:itemDictionary
+                                                   usingManagedObjectContext:importManagedObjectContext];
+        
+        if(!recomendation)
+            continue;
+        
+        
+        
+    }
+    
+    BOOL saveResult = [self saveImportContext];
+    
+    if (!saveResult)
+    {
+        return NO;
+    }
+    
+    [appDelegate saveSearchContext];
+    
+    return YES;
+    
+    
 }
 
 

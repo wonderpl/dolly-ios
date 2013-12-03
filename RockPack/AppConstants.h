@@ -29,6 +29,7 @@
 #define kSubGenre                   @"SubGenre"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
+#define kRecommendation             @"Recomendation"
 #define kVideo                      @"Video"
 #define kVideoInstance              @"VideoInstance"
 #define kChannelOwner               @"ChannelOwner"
@@ -396,6 +397,7 @@ static NSString* kPopularGenreUniqueId = @"1979";
 #define kUserDefaultsFriendsTab @"UD_OnBoaring_FriendsTab"
 #define kUserDefaultsChannels @"UD_OnBoaring_Channels"
 #define kUserDefaultsFeed @"UD_OnBoaring_Feed"
+#define kUserDefaultsSeenOnBoarding @"UD_Seen_On_Boarding"
 
 //Login Origin
 

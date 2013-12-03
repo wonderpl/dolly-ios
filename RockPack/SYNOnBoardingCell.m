@@ -13,7 +13,9 @@
 
 - (void) awakeFromNib
 {
-    // round of
+    
+    
+    self.followButton.title = NSLocalizedString(@"follow", nil);
     
 }
 

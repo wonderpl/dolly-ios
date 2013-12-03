@@ -13,6 +13,8 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "ChannelOwner.h"
 
+static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
+
 @interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray* data;
@@ -30,26 +32,52 @@
     
     self.title = @"Welcome";
     
-    [self.collectionView registerNib:[UINib nibWithNibName:@"SYNOnBoardingCell" bundle:nil]
-          forCellWithReuseIdentifier:@"SYNOnBoardingCells"];
+    [self.collectionView registerNib:[UINib nibWithNibName:OnBoardingCellIndent bundle:nil]
+          forCellWithReuseIdentifier:OnBoardingCellIndent];
     
     self.data = @[]; // so as not to throw error when accessed
     
-    [self getRecommendations];
+    [self getRecommendationsFromRemote];
     
 }
 
-- (void) getRecommendations
+- (void) getRecommendationsFromRemote
 {
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
                                               completionHandler:^(id responce) {
                                                   
+                                                  if(![responce isKindOfClass:[NSDictionary class]])
+                                                      return;
+                                                  
+                                                  if(![appDelegate.searchRegistry registerRecommendationsFromDictionary:responce])
+                                                  {
+                                                      return;
+                                                  }
+                                                  
+                                                  [self fetchRecommendationsFromLocal];
                                                   
         
                                               } errorHandler:^(id error) {
         
                                               }];
+}
+
+- (void) fetchRecommendationsFromLocal
+{
+    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    [fetchRequest setEntity: [NSEntityDescription entityForName: kRecommendation
+                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+    
+    
+    
+    NSError* error;
+    self.data = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                      error: &error];
+    
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionView Delegate/Data Source
@@ -69,7 +97,7 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNOnBoardingCells"
+    SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier: OnBoardingCellIndent
                                                                         forIndexPath: indexPath];
     
     ChannelOwner* co = (ChannelOwner*)self.data[indexPath.row];

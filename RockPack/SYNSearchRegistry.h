@@ -20,6 +20,8 @@
 
 - (BOOL) registerFriendsFromDictionary: (NSDictionary *) dictionary;
 
+- (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary;
+
 - (NSCache *) registerFriendsFromAddressBookArray: (NSArray *) abArray;
 
 @end

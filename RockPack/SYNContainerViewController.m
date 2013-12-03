@@ -15,6 +15,7 @@
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTrackableFrameView.h"
+#import "SYNOnBoardingViewController.h"
 
 @import AudioToolbox;
 @import QuartzCore;
@@ -124,6 +125,17 @@
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
+    
+    
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsSeenOnBoarding]) // IS first install
+    {
+        
+        SYNOnBoardingViewController* onBoardingViewController = [[SYNOnBoardingViewController alloc] init];
+        [self.currentViewController pushViewController:onBoardingViewController animated:NO];
+        
+        //[[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsSeenOnBoarding];
+    }
     
     
     

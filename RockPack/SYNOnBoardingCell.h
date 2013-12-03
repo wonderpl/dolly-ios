@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SYNSocialActionsDelegate.h"
 #import "SYNAvatarButton.h"
+#import "SYNSocialButton.h"
 
 @interface SYNOnBoardingCell : UICollectionViewCell
 
@@ -16,7 +17,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* descriptionLabel;
 
-@property (nonatomic, strong) IBOutlet UIButton* followButton;
+@property (nonatomic, strong) IBOutlet SYNSocialButton* followButton;
+
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 
