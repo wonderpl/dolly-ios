@@ -34,10 +34,9 @@
 #define kScrollContentOff 100.0f
 #define kScrollSpeedBoundary 550.0f
 
-@interface SYNAbstractViewController () <UIPopoverControllerDelegate>
+@interface SYNAbstractViewController ()
 
 @property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
-@property (nonatomic, strong) UIPopoverController *activityPopoverController;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityView *activityView;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
@@ -95,13 +94,6 @@
 
 - (void) dealloc
 {
-    // Defensive programming
-    self.activityPopoverController.delegate = nil;
-    
-    if (self.activityPopoverController)
-    {
-        [self.activityPopoverController dismissPopoverAnimated: NO];
-    }
     // Stop observing everything
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
