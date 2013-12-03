@@ -13,8 +13,10 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "ChannelOwner.h"
 #import "Recomendation.h"
+#import "SYNOnBoardingHeader.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
+static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 
 @interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -35,6 +37,12 @@ static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
     
     [self.collectionView registerNib:[UINib nibWithNibName:OnBoardingCellIndent bundle:nil]
           forCellWithReuseIdentifier:OnBoardingCellIndent];
+    
+    [self.collectionView registerNib: [UINib nibWithNibName: OnBoardingHeaderIndent bundle: nil]
+          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+                 withReuseIdentifier: OnBoardingHeaderIndent];
+    
+    
     
     self.data = @[]; // so as not to throw error when accessed
     
@@ -109,6 +117,24 @@ static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
     cell.delegate = self;
     
     return cell;
+}
+
+- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
+            viewForSupplementaryElementOfKind: (NSString *) kind
+                                  atIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionReusableView *supplementaryView = nil;
+	if (kind == UICollectionElementKindSectionHeader)
+    {
+        supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                             withReuseIdentifier: OnBoardingHeaderIndent
+                                                                    forIndexPath: indexPath];
+        
+        
+         
+    }
+    
+    return supplementaryView;
 }
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath

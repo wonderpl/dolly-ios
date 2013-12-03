@@ -1071,7 +1071,7 @@
 		BE57C0261843604200C6444A /* SYNOnBoardingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE57C0251843604200C6444A /* SYNOnBoardingCell.m */; };
 		BE57C02A1843608500C6444A /* SYNOnBoardingCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C0291843608500C6444A /* SYNOnBoardingCell~iphone.xib */; };
 		BE57C02C184361D300C6444A /* SYNOnBoardingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C02B184361D300C6444A /* SYNOnBoardingCell.xib */; };
-		BE57C02E184362F800C6444A /* SYNOnboardingHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C02D184362F800C6444A /* SYNOnboardingHeader.xib */; };
+		BE57C02E184362F800C6444A /* SYNOnBoardingHeader~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C02D184362F800C6444A /* SYNOnBoardingHeader~iphone.xib */; };
 		BE57C0311843638C00C6444A /* SYNOnBoardingHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE57C0301843638C00C6444A /* SYNOnBoardingHeader.m */; };
 		BE57C0331844FA9B00C6444A /* SYNSubscribersViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C0321844FA9B00C6444A /* SYNSubscribersViewController~iphone.xib */; };
 		BE57C0351844FAB600C6444A /* SYNSubscribersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE57C0341844FAB600C6444A /* SYNSubscribersViewController.xib */; };
@@ -1280,6 +1280,7 @@
 		BEC39C10184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C0F184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib */; };
 		BEC39C13184D03C000DA8089 /* _Recomendation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C12184D03C000DA8089 /* _Recomendation.m */; };
 		BEC39C16184D03CF00DA8089 /* Recomendation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC39C15184D03CF00DA8089 /* Recomendation.m */; };
+		BEC39C18184DFF7D00DA8089 /* SYNOnBoardingHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC39C17184DFF7D00DA8089 /* SYNOnBoardingHeader.xib */; };
 		BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */; };
 		BED027B21833F66700636659 /* SYNOptionsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */; };
 		BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027B31833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib */; };
@@ -2579,7 +2580,7 @@
 		BE57C0251843604200C6444A /* SYNOnBoardingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnBoardingCell.m; sourceTree = "<group>"; };
 		BE57C0291843608500C6444A /* SYNOnBoardingCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNOnBoardingCell~iphone.xib"; sourceTree = "<group>"; };
 		BE57C02B184361D300C6444A /* SYNOnBoardingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnBoardingCell.xib; sourceTree = "<group>"; };
-		BE57C02D184362F800C6444A /* SYNOnboardingHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnboardingHeader.xib; sourceTree = "<group>"; };
+		BE57C02D184362F800C6444A /* SYNOnBoardingHeader~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNOnBoardingHeader~iphone.xib"; sourceTree = "<group>"; };
 		BE57C02F1843638C00C6444A /* SYNOnBoardingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingHeader.h; sourceTree = "<group>"; };
 		BE57C0301843638C00C6444A /* SYNOnBoardingHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnBoardingHeader.m; sourceTree = "<group>"; };
 		BE57C0321844FA9B00C6444A /* SYNSubscribersViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNSubscribersViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -2840,6 +2841,7 @@
 		BEC39C12184D03C000DA8089 /* _Recomendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Recomendation.m; sourceTree = "<group>"; };
 		BEC39C14184D03CF00DA8089 /* Recomendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recomendation.h; sourceTree = "<group>"; };
 		BEC39C15184D03CF00DA8089 /* Recomendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recomendation.m; sourceTree = "<group>"; };
+		BEC39C17184DFF7D00DA8089 /* SYNOnBoardingHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnBoardingHeader.xib; sourceTree = "<group>"; };
 		BED027AE1833F66700636659 /* SYNOptionsOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOptionsOverlayViewController.h; sourceTree = "<group>"; };
 		BED027AF1833F66700636659 /* SYNOptionsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOptionsOverlayViewController.m; sourceTree = "<group>"; };
 		BED027B01833F66700636659 /* SYNOptionsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOptionsOverlayViewController.xib; sourceTree = "<group>"; };
@@ -5386,7 +5388,8 @@
 				BE57C02B184361D300C6444A /* SYNOnBoardingCell.xib */,
 				BE57C02F1843638C00C6444A /* SYNOnBoardingHeader.h */,
 				BE57C0301843638C00C6444A /* SYNOnBoardingHeader.m */,
-				BE57C02D184362F800C6444A /* SYNOnboardingHeader.xib */,
+				BE57C02D184362F800C6444A /* SYNOnBoardingHeader~iphone.xib */,
+				BEC39C17184DFF7D00DA8089 /* SYNOnBoardingHeader.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -6739,7 +6742,7 @@
 				012B4CA817393CA10019DA4C /* ButtonChooseExistingHighlighted.png in Resources */,
 				012B4CA917393CA10019DA4C /* ButtonChooseExistingHighlighted@2x.png in Resources */,
 				012B4CAA17393CA10019DA4C /* ButtonTakePhotoDefault.png in Resources */,
-				BE57C02E184362F800C6444A /* SYNOnboardingHeader.xib in Resources */,
+				BE57C02E184362F800C6444A /* SYNOnBoardingHeader~iphone.xib in Resources */,
 				012B4CAB17393CA10019DA4C /* ButtonTakePhotoDefault@2x.png in Resources */,
 				012B4CAC17393CA10019DA4C /* ButtonTakePhotoHighlighted.png in Resources */,
 				012B4CAD17393CA10019DA4C /* ButtonTakePhotoHighlighted@2x.png in Resources */,
@@ -7022,6 +7025,7 @@
 				BE7D0302179D5624008053DC /* SYNFriendsViewController.xib in Resources */,
 				1F4E7F75181AC7D300F59007 /* TabActivityHighlighted.png in Resources */,
 				1F5FAED017E73F8700205F3F /* ButtonCancelAddToPackHighlighted@2x.png in Resources */,
+				BEC39C18184DFF7D00DA8089 /* SYNOnBoardingHeader.xib in Resources */,
 				BEB313011815638700FAF98A /* TabSearch@2x.png in Resources */,
 				018B0D9C179EA8A400F2D3CD /* IconReportConcernBlackCheck.png in Resources */,
 				018B0D9D179EA8A400F2D3CD /* IconReportConcernBlackCheck@2x.png in Resources */,
