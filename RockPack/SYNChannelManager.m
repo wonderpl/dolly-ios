@@ -366,7 +366,7 @@
 - (void) subscribeToUser: (ChannelOwner *) channelToSubscribeTo
 {
     
-    [appDelegate.oAuthNetworkEngine subscribeAllForUserId:appDelegate.currentUser.uniqueId action:@"subscribe_all" subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
+    [appDelegate.oAuthNetworkEngine subscribeAllForUserId:appDelegate.currentUser.uniqueId subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
         
         channelToSubscribeTo.subscribedByUserValue = YES;
         [appDelegate saveContext: YES];
@@ -383,7 +383,7 @@
 - (void) unsubscribeToUser: (ChannelOwner *) channelToSubscribeTo
 {
     
-    [appDelegate.oAuthNetworkEngine subscribeAllForUserId:appDelegate.currentUser.uniqueId action:@"unsubscribe_all" subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
+    [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId subUserId:channelToSubscribeTo.uniqueId completionHandler:^(id response) {
         channelToSubscribeTo.subscribedByUserValue = NO;
         
         [appDelegate saveContext: YES];

@@ -255,10 +255,15 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
 
 
 - (void) subscribeAllForUserId: (NSString *) userId
-                        action: (NSString *) action
                      subUserId: (NSString *) subUserId
              completionHandler: (MKNKUserSuccessBlock) completionBlock
                   errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+- (void) unsubscribeAllForUserId: (NSString *) userId
+                       subUserId: (NSString *) subUserId
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 
 #pragma mark - External Accounts
 

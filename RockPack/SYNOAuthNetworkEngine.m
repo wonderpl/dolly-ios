@@ -1239,7 +1239,6 @@
 
 
 - (void) subscribeAllForUserId: (NSString *) userId
-                          action: (NSString *) action
                  subUserId: (NSString *) subUserId
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock
@@ -1253,9 +1252,9 @@
     
     NSDictionary *params = nil;
     
-    if (action && subUserId)
+    if (subUserId)
     {
-        params = @{@"action" : action,
+        params = @{@"action" : @"subscribe_all",
                    @"object_type": @"user",
                        @"object_id" : subUserId };
     }
@@ -1277,6 +1276,46 @@
     
     [self enqueueSignedOperation: networkOperation];
 }
+
+- (void) unsubscribeAllForUserId: (NSString *) userId
+                     subUserId: (NSString *) subUserId
+             completionHandler: (MKNKUserSuccessBlock) completionBlock
+                  errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    NSDictionary *params = nil;
+    
+    if (subUserId)
+    {
+        params = @{@"action" : @"unsubscribe_all",
+                   @"object_type": @"user",
+                   @"object_id" : subUserId };
+    }
+    else
+    {
+        AssertOrLog(@"One or more of the required parameters is nil");
+    }
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"POST"
+                                                                                                          ssl: TRUE];
+    [networkOperation addHeaders: @{@"Content-Type" : @"application/json"}];
+    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
 
 //just added ...
 - (void) userChannelsForUserId: (NSString *) userId
