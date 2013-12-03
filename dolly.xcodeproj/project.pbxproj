@@ -2792,7 +2792,6 @@
 		BEB31372181AC6DB00FAF98A /* SYNSocialAddButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialAddButton.h; sourceTree = "<group>"; };
 		BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialAddButton.m; sourceTree = "<group>"; };
 		BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNSocialActionsDelegate.h; sourceTree = "<group>"; };
-		BEB3137E181EB52400FAF98A /* SYNAggregateCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNAggregateCellDelegate.h; sourceTree = "<group>"; };
 		BEB31380181ECAE900FAF98A /* SYNSearchResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchResultsCell.h; sourceTree = "<group>"; };
 		BEB31381181ECAE900FAF98A /* SYNSearchResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchResultsCell.m; sourceTree = "<group>"; };
 		BEB31384181FC5C500FAF98A /* SYNAggregateChannelCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAggregateChannelCell~iphone.xib"; sourceTree = "<group>"; };
@@ -5779,7 +5778,6 @@
 			isa = PBXGroup;
 			children = (
 				BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */,
-				BEB3137E181EB52400FAF98A /* SYNAggregateCellDelegate.h */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";

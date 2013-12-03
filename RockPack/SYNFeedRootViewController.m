@@ -658,18 +658,6 @@ typedef void(^FeedDataErrorBlock)(void);
 	return index + subCellIndex;
 }
 
-#pragma mark - Aggregate Cell Delegate
-
-- (void) profileIconPressed: (UIButton *) sender
-{
-    SYNAggregateCell* cell = [self aggregateCellFromSubview: sender];
-    if(!cell.channelOwner) // checking for both channel and channel owner
-        return;
-    
-    [self viewProfileDetails: cell.channelOwner];
-}
-
-
 #pragma mark - Load More Footer
 
 - (void) loadMoreVideos
