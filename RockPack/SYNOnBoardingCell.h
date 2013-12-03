@@ -14,6 +14,7 @@
 
 @interface SYNOnBoardingCell : UICollectionViewCell
 
+// avatar button is currently used as an image only but can change to accomodate press events
 @property (nonatomic, strong) IBOutlet SYNAvatarButton* avatarButton;
 @property (nonatomic, strong) IBOutlet UILabel* nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* descriptionLabel;

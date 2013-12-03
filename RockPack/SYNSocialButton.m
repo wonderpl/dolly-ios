@@ -40,6 +40,21 @@
     self.backgroundColor = [UIColor whiteColor];
 }
 
+-(void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    
+    if(selected)
+    {
+        self.backgroundColor = self.selectedColor;
+        self.layer.borderColor = self.selectedColor.CGColor;
+    }
+    else
+    {
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.borderColor = self.defaultColor.CGColor;
+    }
+}
 
 - (UIColor *) defaultColor
 {
@@ -49,8 +64,10 @@
 
 - (UIColor *) selectedColor
 {
-    return [UIColor colorWithWhite: (152.0f / 255.0f)
-                             alpha: 1.0f];
+    return [UIColor colorWithRed:(182.0f/255.0f)
+                           green:(202.0f/255.0f)
+                            blue:(179.0f/255.0f)
+                           alpha:1.0f];
 }
 
 @end

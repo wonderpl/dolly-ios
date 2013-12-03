@@ -43,6 +43,7 @@
 
 - (void) setDelegate:(id<SYNSocialActionsDelegate>)delegate
 {
+    // avatar button is not set to receive press events yet...
     
     if(_delegate)
     {
@@ -50,9 +51,6 @@
                                  action: @selector(followControlPressed:)
                        forControlEvents: UIControlEventTouchUpInside];
         
-        [self.followButton removeTarget: _delegate
-                                 action: @selector(profileButtonTapped:)
-                       forControlEvents: UIControlEventTouchUpInside];
     }
     
     _delegate = delegate;
@@ -63,9 +61,6 @@
                               action: @selector(followControlPressed:)
                     forControlEvents: UIControlEventTouchUpInside];
         
-        [self.followButton addTarget: _delegate
-                              action: @selector(profileButtonTapped:)
-                    forControlEvents: UIControlEventTouchUpInside];
     }
 }
 

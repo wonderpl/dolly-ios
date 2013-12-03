@@ -13,6 +13,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "ChannelOwner.h"
 #import "Recomendation.h"
+#import "SYNMasterViewController.h"
 #import "SYNOnBoardingHeader.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
@@ -54,7 +55,6 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 
 - (void) getRecommendationsFromRemote
 {
-    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     self.spinner.hidden = NO;
     
@@ -84,7 +84,7 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 
 - (void) fetchRecommendationsFromLocal
 {
-    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     [fetchRequest setEntity: [NSEntityDescription entityForName: kRecommendation
@@ -156,20 +156,8 @@ static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 
 #pragma mark - Social Delegate
 
-- (void) followControlPressed: (SYNSocialButton *) socialButton
-{
-    
-    
-    
-}
 
 
-- (void) shareControlPressed: (SYNSocialButton *) socialButton
-{;}
-- (void) likeControlPressed: (SYNSocialButton *) socialButton
-{;}
-- (void) addControlPressed: (SYNSocialButton *) socialButton
-{;}
 
 
 

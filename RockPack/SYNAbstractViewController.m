@@ -24,6 +24,7 @@
 #import "SYNOneToOneSharingController.h"
 #import "SYNPopoverBackgroundView.h"
 #import "SYNProfileRootViewController.h"
+#import "Recomendation.h"
 #import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
@@ -653,6 +654,14 @@
                                                           socialControl.enabled = YES;
                                                       }];
         }
+    }
+    else if ([socialControl.dataItemLinked isKindOfClass: [Recomendation class]])
+    {
+        Recomendation* recomendation = socialControl.dataItemLinked;
+        ChannelOwner *channelOwner = recomendation.channelOwner; // creates a channel owner on the fly
+        
+        if(!channelOwner)
+            return;
     }
     else if ([socialControl.dataItemLinked isKindOfClass: [ChannelOwner class]])
     {

@@ -528,4 +528,15 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     return self.tabsView.subviews;
 }
 
+#pragma mark - On Boarding
+
+-(void)addOnBoarding
+{
+    
+}
+-(void)removeOnBoarding
+{
+    
+}
+
 @end

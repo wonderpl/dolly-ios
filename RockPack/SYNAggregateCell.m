@@ -74,7 +74,7 @@
                                  action: @selector(profileButtonTapped:)
                        forControlEvents: UIControlEventTouchUpInside];
     
-    [self.actionButton addTarget: self.delegate
+    [self.actionButton addTarget: _delegate
                           action: @selector(profileButtonTapped:)
                 forControlEvents: UIControlEventTouchUpInside];
 }

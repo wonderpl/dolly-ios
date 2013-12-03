@@ -66,4 +66,9 @@ typedef enum NotificationMessageType : NSInteger {
 
 -(void) removeOverlayControllerAnimated:(BOOL)animated;
 
+// on-boarding
+
+-(void)addOnBoarding;
+-(void)removeOnBoarding;
+
 @end
