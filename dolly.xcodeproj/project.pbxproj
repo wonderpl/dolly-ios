@@ -161,7 +161,6 @@
 		0173F6FE16E028E4005B3ECA /* GlossVideoThumbnailSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0173F6FA16E028E4005B3ECA /* GlossVideoThumbnailSmall@2x.png */; };
 		0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */; };
 		0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0173F70A16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m */; };
-		0177002717C37AF6006DE415 /* SYNTouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177002617C37AF6006DE415 /* SYNTouchGestureRecognizer.m */; };
 		0177002A17C382C3006DE415 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177002917C382C3006DE415 /* UIImage+Tint.m */; };
 		01811A5717576D2A00AFA926 /* ButtonShuttleBarMaximise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01811A5317576D2A00AFA926 /* ButtonShuttleBarMaximise@2x.png */; };
 		01811A5817576D2A00AFA926 /* ButtonShuttleBarMaximise.png in Resources */ = {isa = PBXBuildFile; fileRef = 01811A5417576D2A00AFA926 /* ButtonShuttleBarMaximise.png */; };
@@ -1576,8 +1575,6 @@
 		0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewerThumbnailLayout.m; sourceTree = "<group>"; };
 		0173F70916E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewerThumbnailLayoutAttributes.h; sourceTree = "<group>"; };
 		0173F70A16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewerThumbnailLayoutAttributes.m; sourceTree = "<group>"; };
-		0177002517C37AF6006DE415 /* SYNTouchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTouchGestureRecognizer.h; sourceTree = "<group>"; };
-		0177002617C37AF6006DE415 /* SYNTouchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTouchGestureRecognizer.m; sourceTree = "<group>"; };
 		0177002817C382C3006DE415 /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
 		0177002917C382C3006DE415 /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
 		01811A5317576D2A00AFA926 /* ButtonShuttleBarMaximise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonShuttleBarMaximise@2x.png"; path = "Assets/Images/ButtonShuttleBarMaximise@2x.png"; sourceTree = "<group>"; };
@@ -3048,7 +3045,6 @@
 				01982525162A02DD00216900 /* Constants */,
 				0199F127166F94C400E479C6 /* Controls */,
 				01E427D01664C701009B941F /* Data Model */,
-				0177002417C37AB4006DE415 /* Gesture Recognisers */,
 				019824E41629CAF500216900 /* Helpers */,
 				01677DDA1655491100B1B1D8 /* Networking */,
 				010DEFDB1629BDC40080F26B /* Supporting Files */,
@@ -3437,15 +3433,6 @@
 				0173F70A16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m */,
 			);
 			name = Attributes;
-			sourceTree = "<group>";
-		};
-		0177002417C37AB4006DE415 /* Gesture Recognisers */ = {
-			isa = PBXGroup;
-			children = (
-				0177002517C37AF6006DE415 /* SYNTouchGestureRecognizer.h */,
-				0177002617C37AF6006DE415 /* SYNTouchGestureRecognizer.m */,
-			);
-			name = "Gesture Recognisers";
 			sourceTree = "<group>";
 		};
 		018919F51672235000AB07BB /* Feed */ = {
@@ -7406,7 +7393,6 @@
 				BE8F938A17B1267900E7035F /* _ExternalAccount.m in Sources */,
 				BE8F938D17B1268500E7035F /* ExternalAccount.m in Sources */,
 				BE1B3DC3180D4EEB00DA2BD6 /* SYNDiscoverViewController.m in Sources */,
-				0177002717C37AF6006DE415 /* SYNTouchGestureRecognizer.m in Sources */,
 				0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */,
 				0177002A17C382C3006DE415 /* UIImage+Tint.m in Sources */,
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
