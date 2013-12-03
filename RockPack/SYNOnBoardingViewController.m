@@ -40,6 +40,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 @property (nonatomic, strong) NSMutableDictionary* subgenresByIdString;
 
+@property (nonatomic) NSInteger numberYetToFollow;
+
 @end
 
 @implementation SYNOnBoardingViewController
@@ -156,6 +158,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     self.data = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                       error: &error];
     
+    self.numberYetToFollow = self.data.count;
+    
     [self.collectionView reloadData];
 }
 
@@ -248,7 +252,61 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 #pragma mark - Social Delegate
 
 
+- (void) followControlPressed: (SYNSocialButton *) socialControl
+{
+    // either a ChannelOwner of a Recomendation cell will link to a ChannelOwner (see SYNOnBoardingCell.m)
+    
+    socialControl.enabled = NO;
+    
+    ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
+    
+    if(!channelOwner)
+        return;
+    
+    if(socialControl.selected == NO)
+    {
+        [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
+                                                    subUserId: channelOwner.uniqueId
+                                            completionHandler: ^(id responce) {
+                                                
+                                                socialControl.selected = YES;
+                                                socialControl.enabled = YES;
+                                                
+                                                self.numberYetToFollow--;
+                                                
+                                            } errorHandler: ^(id error) {
+                                                
+                                                socialControl.enabled = YES;
+                                                
+                                            }];
+    }
+    else
+    {
+        [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
+                                                      subUserId:channelOwner.uniqueId
+                                              completionHandler:^(id responce) {
+                                                  
+                                                  socialControl.selected = NO;
+                                                  socialControl.enabled = YES;
+                                                  
+                                                  self.numberYetToFollow++;
+                                                  
+                                              } errorHandler:^(id error) {
+                                                  
+                                                  socialControl.enabled = YES;
+                                                  
+                                              }];
+        
+        
+    }
+    
+}
 
+-(void)setNumberYetToFollow:(NSInteger)numberYetToFollow
+{
+    _numberYetToFollow = numberYetToFollow;
+    self.navigationRightLabel.text = [NSString stringWithFormat:@"%i more", numberYetToFollow];
+}
 
 
 
