@@ -35,7 +35,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 @property (nonatomic, strong) IBOutlet UILabel* navigationTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* navigationRightLabel;
 
-@property (nonatomic, strong) NSArray* genres;
+
+@property (nonatomic, strong) NSMutableDictionary* subgenresByIdString;
 
 @end
 
@@ -69,7 +70,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kSubGenre
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     
@@ -84,11 +85,19 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     NSError* error;
     
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+    NSArray* subGenresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
                                                                                       error: &error];
     
+    // we hold subgenres only in a dictionary
+    self.subgenresByIdString = @{}.mutableCopy;
     
-    self.genres = [NSArray arrayWithArray:genresFetchedArray];
+    for (SubGenre* s in subGenresFetchedArray)
+    {
+        if(!s.uniqueId)
+            continue;
+        
+        self.subgenresByIdString[s.uniqueId] = s;
+    }
     
     // =================== //
     
@@ -171,11 +180,15 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     cell.recomendation = recomendation;
     
+    SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
+    
+    cell.subGenreLabel.text = subgenre.name;
     
     cell.delegate = self;
     
     return cell;
 }
+
 
 - (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
             viewForSupplementaryElementOfKind: (NSString *) kind
