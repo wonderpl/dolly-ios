@@ -18,6 +18,7 @@
 #import "SYNOnBoardingFooter.h"
 #import "UIFont+SYNFont.h"
 #import "Genre.h"
+#import "AppConstants.h"
 #import "SubGenre.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
