@@ -227,10 +227,14 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 - (void) skipButtonPressed: (UIButton*) button
 {
     [UIView animateWithDuration:0.3f animations:^{
+        
         self.view.alpha = 0.0f;
+        
     } completion:^(BOOL finished) {
+        
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
+        
     }];
 }
 
