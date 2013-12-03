@@ -106,14 +106,10 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) viewDidAppear: (BOOL) animated
-{
-    [super viewDidAppear: animated];
-    
-    if ([self class] == [SYNFeedRootViewController class])
-    {
-        [self loadAndUpdateFeedData];
-    }
+- (void) viewDidAppear: (BOOL) animated {
+	[super viewDidAppear: animated];
+
+	[self loadAndUpdateFeedData];
 }
 
 
