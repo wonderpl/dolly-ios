@@ -32,7 +32,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 @interface SYNFeedRootViewController () 
 
-@property (nonatomic, strong) NSBlockOperation *blockOperation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray* feedItemsData;
 @property (nonatomic, strong) NSDictionary* feedVideosById;
