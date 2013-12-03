@@ -920,7 +920,6 @@
 		BE0815CD16D5487B00ADB1DC /* SYNSearchRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0815CC16D5487B00ADB1DC /* SYNSearchRegistry.m */; };
 		BE0B151217BC16240053E551 /* ButtonSearch@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE0B151017BC16240053E551 /* ButtonSearch@2x~iphone.png */; };
 		BE0B151317BC16240053E551 /* ButtonSearch~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE0B151117BC16240053E551 /* ButtonSearch~iphone.png */; };
-		BE0FF0321754C39D0088294F /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0311754C39D0088294F /* ISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BE13E38916FB85220098F23C /* SYNAccountSettingsLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE13E38816FB85220098F23C /* SYNAccountSettingsLocation.m */; };
 		BE1B3DC3180D4EEB00DA2BD6 /* SYNDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B3DC1180D4EEB00DA2BD6 /* SYNDiscoverViewController.m */; };
 		BE1B3DC4180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1B3DC2180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib */; };
@@ -2401,8 +2400,6 @@
 		BE0815CC16D5487B00ADB1DC /* SYNSearchRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchRegistry.m; sourceTree = "<group>"; };
 		BE0B151017BC16240053E551 /* ButtonSearch@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSearch@2x~iphone.png"; path = "Assets/Images/ButtonSearch@2x~iphone.png"; sourceTree = "<group>"; };
 		BE0B151117BC16240053E551 /* ButtonSearch~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSearch~iphone.png"; path = "Assets/Images/ButtonSearch~iphone.png"; sourceTree = "<group>"; };
-		BE0FF0301754C39D0088294F /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
-		BE0FF0311754C39D0088294F /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
 		BE13E38716FB85220098F23C /* SYNAccountSettingsLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsLocation.h; sourceTree = "<group>"; };
 		BE13E38816FB85220098F23C /* SYNAccountSettingsLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsLocation.m; sourceTree = "<group>"; };
 		BE1B3DC0180D4EEB00DA2BD6 /* SYNDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverViewController.h; sourceTree = "<group>"; };
@@ -5101,15 +5098,6 @@
 			name = Master;
 			sourceTree = "<group>";
 		};
-		BE1B3DC7180D7F4000DA2BD6 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				BE0FF0301754C39D0088294F /* ISO8601DateFormatter.h */,
-				BE0FF0311754C39D0088294F /* ISO8601DateFormatter.m */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
 		BE1B3DCC180E8FDC00DA2BD6 /* Mood */ = {
 			isa = PBXGroup;
 			children = (
@@ -5489,7 +5477,6 @@
 		BE7D34D017159DF20085AB81 /* Activity (Notifications) */ = {
 			isa = PBXGroup;
 			children = (
-				BE1B3DC7180D7F4000DA2BD6 /* Helpers */,
 				BE7D34D417159F3C0085AB81 /* SYNActivityViewController.h */,
 				BE7D34D517159F3C0085AB81 /* SYNActivityViewController.m */,
 				BE1B3DC8180D804A00DA2BD6 /* SYNActivityViewController.xib */,
@@ -7395,7 +7382,6 @@
 				01D0998B17452A4000351C82 /* BBCyclingLabel.m in Sources */,
 				E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */,
 				BE2D3EEE183A3C2C003B2C26 /* SYNAboutViewController.m in Sources */,
-				BE0FF0321754C39D0088294F /* ISO8601DateFormatter.m in Sources */,
 				0165542E18363C70009B161C /* SYNTextFieldLoginiPhone.m in Sources */,
 				BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */,
 				1F356185175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m in Sources */,
