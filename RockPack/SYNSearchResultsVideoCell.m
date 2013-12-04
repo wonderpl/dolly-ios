@@ -44,9 +44,7 @@
     _videoInstance = videoInstance;
     
     if (!_videoInstance)
-    {
         return;
-    }
     
     // == timestamp == //
     
@@ -79,8 +77,7 @@
     self.titleLabel.frame = titleLabelFrame;
     
     
-    // set social buttons
-    
+    // Set Social Buttons
     self.likeSocialButton.dataItemLinked = _videoInstance;
     self.addSocialButton.dataItemLinked = _videoInstance;
     self.shareSocialButton.dataItemLinked = _videoInstance;

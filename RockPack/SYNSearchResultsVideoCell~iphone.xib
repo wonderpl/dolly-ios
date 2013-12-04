@@ -61,10 +61,10 @@
                         </connections>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Umm-Wd-RzE" userLabel="timestamp Label">
-                        <rect key="frame" x="240" y="112" width="44" height="27"/>
+                        <rect key="frame" x="236" y="119" width="48" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
