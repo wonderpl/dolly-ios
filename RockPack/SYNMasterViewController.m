@@ -215,7 +215,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     popularSubGenre.priority = @(100000);
     
     // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
-    [popularSubGenre.subgenresSet addObject:popularSubGenre];
+    [popularGenre.subgenresSet addObject:popularSubGenre];
     
     NSError* error;
     return ([appDelegate.mainManagedObjectContext save:&error]);

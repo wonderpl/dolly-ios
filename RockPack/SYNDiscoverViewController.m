@@ -173,7 +173,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
     
-    
     [self.categoriesCollectionView reloadData];
     
     
@@ -186,7 +185,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
         NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
         
-        categoriesFetchRequest.entity = [NSEntityDescription entityForName: kSubGenre
+        categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
                                                     inManagedObjectContext: appDelegate.mainManagedObjectContext];
         
         categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
@@ -195,6 +194,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
                                                                                     error: &error];
+        
+        
         
         if(fetchedArray.count > 0)
         {
