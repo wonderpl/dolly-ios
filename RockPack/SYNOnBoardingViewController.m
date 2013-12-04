@@ -21,6 +21,7 @@
 #import "AppConstants.h"
 #import "SubGenre.h"
 #import "UIColor+SYNColor.h"
+#import "SYNDeviceManager.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
@@ -312,15 +313,26 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     self.navigationRightLabel.text = [NSString stringWithFormat:@"%i more", numberYetToFollow];
     if(_numberYetToFollow == 0)
     {
-        [UIView animateWithDuration:0.2f delay:0.3f options:UIViewAnimationCurveLinear animations:^{
-            self.skipButton.alpha = 0.0f;
-        } completion:^(BOOL finished) {
-            [self skipButtonPressed:self.skipButton];
-        }];
+        [UIView animateWithDuration:0.2f
+                              delay:0.3f
+                            options:UIViewAnimationCurveLinear
+                         animations:^{
+                             self.skipButton.alpha = 0.0f;
+                         } completion:^(BOOL finished) {
+                             [self skipButtonPressed:self.skipButton];
+                         }];
     }
     
 }
 
+#pragma mark - AutoRotation
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+}
 
 
 @end

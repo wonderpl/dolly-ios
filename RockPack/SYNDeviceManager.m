@@ -79,7 +79,7 @@
 
 -(CGRect)currentScreenRect
 {
-    CGRect currentRect = CGRectZero;
+    CGRect currentRect = CGRectZero; // screen starts at (0, 0)
     currentRect.size = [self currentScreenSize];
     return currentRect;
 }
