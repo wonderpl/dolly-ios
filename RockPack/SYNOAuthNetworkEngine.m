@@ -1447,10 +1447,12 @@
 //    NSLog(@"SUB UPDATE IN RANGE");
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
-    NSString *apiString = [kAPIUserSubscriptionUpdates stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    NSString *apiString = [kAPIGetUserSubscriptions stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
         
-    NSDictionary *params = [self paramsAndLocaleForStart: range.location
-                                                    size: range.length];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    params[@"start"] = @(range.location);
+    params[@"size"] = @(48);
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: params

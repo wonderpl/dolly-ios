@@ -123,7 +123,7 @@
     
 //    NSLog(@"%@", dictionary);
     
-    self.channelOwnerDescription = [dictionary objectForKey: @"description"];
+//    self.channelOwnerDescription = [dictionary objectForKey: @"description"];
     
 //    NSLog(@"Channel owner Description%@", self.channelOwnerDescription);
 //self.followersTotalCount = [dictionary objectForKey: @"description"];

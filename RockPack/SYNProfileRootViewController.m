@@ -604,7 +604,7 @@
          if (obj == self.channelOwner)
          {
              //TODO:Get total number of channels or sub number?
-             self.dataItemsAvailable = MAXRANGE;
+             self.dataItemsAvailable = 116;
 
              [self reloadCollectionViews];
              
@@ -1154,7 +1154,7 @@
     if (self.subscriptionThumbnailCollectionView == scrollView) {
         if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO && self.collectionsTabButton.selected)
         {
-           // [self loadMoreSubscriptions];
+            [self loadMoreSubscriptions];
         }
         
     }
@@ -1181,11 +1181,13 @@
     self.loadingMoreContent = YES;
 
     self.dataRequestRange = self.dataRequestRangeChannel;
-    //self.dataItemsAvailable = self.channelOwner.totalVideosValueChannel;
+    self.dataItemsAvailable = 200;
 
     [self incrementRangeForNextRequest];
 
+    self.dataRequestRangeChannel = self.dataRequestRange;
     
+    NSLog(@"%lu, %lu", (unsigned long)self.dataRequestRange.length, (unsigned long)self.dataRequestRange.location);
     
     __weak typeof(self) weakSelf = self;
     
@@ -1203,25 +1205,6 @@
         DebugLog(@"Update action failed");
     };
     
-    
-//    if ([self.channelOwner.resourceURL hasPrefix: @"https"]) // https does not cache so it is fresh
-//    {
-//        [appDelegate.oAuthNetworkEngine videosForChannelForUserId: appDelegate.currentUser.uniqueId
-//                                                        channelId: self.channel.uniqueId
-//                                                          inRange: self.dataRequestRange
-//                                                completionHandler: successBlock
-//                                                     errorHandler: errorBlock];
-//    }
-//    else
-//    {
-//        [appDelegate.networkEngine videosForChannelForUserId: appDelegate.currentUser.uniqueId
-//                                                   channelId: self.channel.uniqueId
-//                                                     inRange: self.dataRequestRange
-//                                           completionHandler: successBlock
-//                                                errorHandler: errorBlock];
-//    }
-
-    
     if (self.modeType == kModeMyOwnProfile) {
         [appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
                                                   inRange: self.dataRequestRange
@@ -1229,18 +1212,15 @@
                                              errorHandler: errorBlock];
         
     }
-    else
+    else if(self.modeType == kModeOtherUsersProfile)
     {
         [appDelegate.networkEngine channelsForUserId: self.channelOwner.uniqueId
                                                   inRange: self.dataRequestRange
                                         completionHandler: successBlock
                                              errorHandler: errorBlock];
-
-        
     }
     
-    }
-
+}
 
 - (void) loadMoreSubscriptions
 {
@@ -1253,8 +1233,12 @@
     
     self.dataRequestRange = self.dataRequestRangeSubscriptions;
     //self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptions;
+    self.dataItemsAvailable = 50;
 
     [self incrementRangeForNextRequest];
+    self.dataRequestRange = self.dataRequestRangeSubscriptions;
+
+    NSLog(@"%lu, %lu", (unsigned long)self.dataRequestRange.length, (unsigned long)self.dataRequestRange.location);
     
     __weak typeof(self) weakSelf = self;
     

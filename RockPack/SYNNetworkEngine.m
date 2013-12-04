@@ -671,7 +671,6 @@
               errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     
-    
     NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
     
     NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -684,7 +683,7 @@
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
                                                                                                          params: [self getLocaleParamWithParams: parameters]
                                                                                                      httpMethod: @"GET"
-                                                                                                            ssl: TRUE];
+                                                                                                            ssl: NO];
     
     NSLog(@"api string%@", apiString);
     
@@ -692,8 +691,8 @@
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
-    
-    [self enqueueSignedOperation: networkOperation];
+
+    [self enqueueOperation: networkOperation];
 }
 
 
