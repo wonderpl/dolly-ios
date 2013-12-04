@@ -252,9 +252,6 @@
 //    
 //    // Reset progress view
 //    self.bufferingProgressView.progress = 0.0f;
-//    
-//    // And time value
-//    self.currentTimeLabel.text = [NSString timecodeStringFromSeconds: 0.0f];
 }
 
 

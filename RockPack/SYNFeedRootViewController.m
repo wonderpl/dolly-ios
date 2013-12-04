@@ -27,6 +27,7 @@
 #import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "VideoInstance.h"
+#import "UICollectionReusableView+Helpers.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
@@ -71,15 +72,15 @@ typedef void(^FeedDataErrorBlock)(void);
                    withLoader: YES];
 
     // Register XIBs for Cell
-    [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateVideoCell" bundle: nil]
-              forCellWithReuseIdentifier: @"SYNAggregateVideoCell"];
+    [self.feedCollectionView registerNib:[SYNAggregateVideoCell nib]
+              forCellWithReuseIdentifier:[SYNAggregateVideoCell reuseIdentifier]];
     
-    [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNAggregateChannelCell" bundle: nil]
-              forCellWithReuseIdentifier: @"SYNAggregateChannelCell"];
+    [self.feedCollectionView registerNib:[SYNAggregateChannelCell nib]
+              forCellWithReuseIdentifier:[SYNAggregateChannelCell reuseIdentifier]];
 	
-    [self.feedCollectionView registerNib: [UINib nibWithNibName: @"SYNChannelFooterMoreView" bundle: nil]
-              forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
-                     withReuseIdentifier: @"SYNChannelFooterMoreView"];
+    [self.feedCollectionView registerNib:[SYNChannelFooterMoreView nib]
+              forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                     withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
     // Refresh control
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame: CGRectMake(0, -44, 320, 44)];
@@ -279,11 +280,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) fetchVideoItems
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    // Edit the entity name as appropriate.
-    fetchRequest.entity = [NSEntityDescription entityForName: kVideoInstance
-                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[VideoInstance entityName]];
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat: [NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
@@ -312,11 +309,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) fetchChannelItems
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    // Edit the entity name as appropriate.
-    fetchRequest.entity = [NSEntityDescription entityForName: kChannel
-                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Channel entityName]];
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
@@ -362,10 +355,10 @@ typedef void(^FeedDataErrorBlock)(void);
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
     {
-        cell = [cv dequeueReusableCellWithReuseIdentifier: @"SYNAggregateVideoCell"
-                                             forIndexPath: indexPath];
+        cell = [cv dequeueReusableCellWithReuseIdentifier:[SYNAggregateVideoCell reuseIdentifier]
+                                             forIndexPath:indexPath];
         
-        NSMutableArray* videosArray = @[].mutableCopy;
+        NSMutableArray* videosArray = [NSMutableArray array];
         
         // NOTE: the data containes either an aggragate or a single item, handle both cases here
         if (feedItem.itemTypeValue == FeedItemTypeAggregate)
@@ -389,8 +382,8 @@ typedef void(^FeedDataErrorBlock)(void);
     }
     else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
     {
-        cell = [cv dequeueReusableCellWithReuseIdentifier: @"SYNAggregateChannelCell"
-                                             forIndexPath: indexPath];
+        cell = [cv dequeueReusableCellWithReuseIdentifier:[SYNAggregateChannelCell reuseIdentifier]
+                                             forIndexPath:indexPath];
         
         Channel* channel;
         
@@ -478,9 +471,9 @@ typedef void(^FeedDataErrorBlock)(void);
     UICollectionReusableView *supplementaryView = nil;
 	if (kind == UICollectionElementKindSectionFooter)
     {
-        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                             withReuseIdentifier: @"SYNChannelFooterMoreView"
-                                                                    forIndexPath: indexPath];
+        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                             withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
+                                                                    forIndexPath:indexPath];
         supplementaryView = self.footerView;
         
         if ((self.dataRequestRange.location + self.dataRequestRange.length) < self.dataItemsAvailable) {
@@ -531,91 +524,36 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) profileButtonTapped: (UIButton *) profileButton
-{
-   FeedItem *feedItem = [self feedItemFromView: profileButton];
-    
-    ChannelOwner* channelOwner;
-    
-    // there are 2 types, video and channel (collection) types
-    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        VideoInstance* vi;
-        
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            vi = (VideoInstance*)((self.feedVideosById)[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
-        }
-        
-        channelOwner = vi.channel.channelOwner;
-    }
-    else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
-    {
-        Channel* channel;
+- (void) profileButtonTapped: (UIButton *) profileButton {
+	FeedItem *feedItem = [self feedItemFromView: profileButton];
+	
+	Channel *channel = [self channelForFeedItem:feedItem];
 
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            channel = (Channel*)(self.feedChannelsById[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
-        }
-
-        channelOwner = channel.channelOwner;
-    }
-    
-    [self viewProfileDetails: channelOwner];
+	[self viewProfileDetails:channel.channelOwner];
 }
 
 
-- (IBAction) channelButtonTapped: (UIButton *) channelButton
-{
-    FeedItem *feedItem = [self feedItemFromView: channelButton];
-    
-    Channel* channel;
-    
-    // there are 2 types, video and channel (collection) types
-    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        VideoInstance* vi;
-        
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            vi = (VideoInstance*)((self.feedVideosById)[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
-        }
-        
-        channel = vi.channel;
-    }
-    else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
-    {
-
-        
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            channel = (Channel*)(self.feedChannelsById[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
-        }
-    }
-    
-	[self viewChannelDetails:channel];
+- (IBAction) channelButtonTapped: (UIButton *) channelButton {
+	FeedItem *feedItem = [self feedItemFromView: channelButton];
+	
+	[self viewChannelDetails:[self channelForFeedItem:feedItem]];
 }
 
+- (Channel *)channelForFeedItem:(FeedItem *)feedItem {
+	FeedItem *actualFeedItem = feedItem;
+	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
+		actualFeedItem = [feedItem.feedItems anyObject];
+	}
+	
+	Channel *channel = nil;
+	if (actualFeedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+		VideoInstance *videoInstance = self.feedVideosById[actualFeedItem.resourceId];
+		channel = videoInstance.channel;
+	} else if (actualFeedItem.resourceTypeValue == FeedItemResourceTypeChannel) {
+		channel = self.feedChannelsById[actualFeedItem.resourceId];
+	}
+	return channel;
+}
 
 - (void)displayVideoViewerFromCell:(UICollectionViewCell *)cell
 						andSubCell:(UICollectionViewCell *)subCell
