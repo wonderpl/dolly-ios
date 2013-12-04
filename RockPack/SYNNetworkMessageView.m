@@ -47,12 +47,8 @@
         // Error Label
         
         _errorLabel = [[UILabel alloc] initWithFrame:self.frame];
-        _errorLabel.textColor = [UIColor colorWithRed:(223.0/255.0) green:(244.0/255.0) blue:(1.0) alpha:(1.0)];
-        _errorLabel.font = [UIFont lightCustomFontOfSize:17.0];
-        _errorLabel.layer.shadowColor = [[UIColor colorWithRed:(128.0/255.0) green:(32.0/255.0) blue:(39.0/255.0) alpha:(1.0)] CGColor];
-        _errorLabel.layer.shadowOffset = CGSizeMake(0.0, 1.0);
-        _errorLabel.layer.shadowRadius = 1.0;
-        _errorLabel.layer.shadowOpacity = 1.0;
+        _errorLabel.textColor = [UIColor whiteColor];
+        _errorLabel.font = [UIFont regularCustomFontOfSize:17.0];
         _errorLabel.backgroundColor = [UIColor clearColor];
         
         [_containerView addSubview:_errorLabel];
