@@ -16,17 +16,26 @@
     CGFloat labelYOffset;
 }
 
-@property (nonatomic, retain)UILabel* errorLabel;
-@property (nonatomic, retain)UIImageView* iconImageView;
-@property (nonatomic, retain)UIView* containerView;
+@property (nonatomic, strong) UILabel* titleLabel;
+@property (nonatomic, strong) UIImageView* iconImageView;
+@property (nonatomic, strong) UIView* containerView;
 
 @end
 
 @implementation SYNNetworkMessageView
 
-- (id)init
+- (id)initWithMessageType:(NotificationMessageType)type
 {
-    UIImage* bgImage = [UIImage imageNamed:@"BarNetwork"];
+    UIImage* bgImage;
+    if(type == NotificationMessageTypeError)
+    {
+        bgImage = [UIImage imageNamed:@"BarNetwork"];
+    }
+    else
+    {
+        bgImage = [UIImage imageNamed:@"BarSucess"];
+    }
+    
     CGRect finalFrame = CGRectMake(0.0,
                                    [SYNDeviceManager.sharedInstance currentScreenHeight],
                                    [SYNDeviceManager.sharedInstance currentScreenWidth],
@@ -34,8 +43,8 @@
     
     
     self = [super initWithFrame:finalFrame];
+    
     if (self) {
-        
         
         // BG
         
@@ -46,18 +55,29 @@
         [self addSubview:self.containerView];
         // Error Label
         
-        _errorLabel = [[UILabel alloc] initWithFrame:self.frame];
-        _errorLabel.textColor = [UIColor whiteColor];
-        _errorLabel.font = [UIFont regularCustomFontOfSize:17.0];
-        _errorLabel.backgroundColor = [UIColor clearColor];
+        CGRect titleFrame = self.frame;
+        _titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
+        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.font = [UIFont regularCustomFontOfSize:17.0];
+        _titleLabel.backgroundColor = [UIColor clearColor];
         
-        [_containerView addSubview:_errorLabel];
+        [_containerView addSubview:_titleLabel];
+        
+        
+        
+        _iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        [_containerView addSubview:_iconImageView];
         
         
         // Wifi Icon
         
-        _iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [_containerView addSubview:_iconImageView];
+        if(type == NotificationMessageTypeError)
+        {
+            [self setIconImage:[UIImage imageNamed:@"IconNetwork"]];
+            [self setText:NSLocalizedString(@"Network Error",nil)];
+            
+        }
+        
         
         
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
@@ -68,32 +88,25 @@
     return self;
 }
 
-+(id)errorView
-{
-    SYNNetworkMessageView* errorView =[[self alloc] init];
-    [errorView setIconImage:[UIImage imageNamed:@"IconNetwork"]];
-    [errorView setText:NSLocalizedString(@"Network Error",nil)];
-    return errorView;
-}
 
 
 -(void)setText:(NSString *)text
 {
     NSString* capsText = [text uppercaseString];
-    CGSize textSize = [capsText sizeWithAttributes: @{NSFontAttributeName: self.errorLabel.font}];
+    CGSize textSize = [capsText sizeWithAttributes: @{NSFontAttributeName: self.titleLabel.font}];
     
-    CGRect labelFrame = self.errorLabel.frame;
+    CGRect labelFrame = self.titleLabel.frame;
     labelFrame.size = textSize;
-    self.errorLabel.frame = labelFrame;
+    self.titleLabel.frame = labelFrame;
     
-    self.errorLabel.text = capsText;
+    self.titleLabel.text = capsText;
     
     CGRect newFrame = self.containerView.frame;
-    newFrame.size.width = self.errorLabel.frame.size.width + 2.0* (self.iconImageView.frame.size.width + 10.0);
+    newFrame.size.width = self.titleLabel.frame.size.width + 2.0 * (self.iconImageView.frame.size.width + 10.0);
     self.containerView.frame = newFrame;
-    self.containerView.center = CGPointMake(roundf(self.frame.size.width/2.0f), roundf(self.frame.size.height/2.0f));
-    self.errorLabel.center = CGPointMake(roundf(self.containerView.frame.size.width/2.0f), labelYOffset + 7.0f);
-    self.iconImageView.center = CGPointMake(roundf(self.iconImageView.frame.size.width/2.0f),labelYOffset);
+    self.containerView.center = CGPointMake(roundf(self.frame.size.width / 2.0f), roundf(self.frame.size.height / 2.0f));
+    self.titleLabel.center = CGPointMake(roundf(self.containerView.frame.size.width / 2.0f), labelYOffset + 4.0f);
+    self.iconImageView.center = CGPointMake(roundf(self.iconImageView.frame.size.width / 2.0f),labelYOffset);
 }
 
 -(void)setIconImage:(UIImage *)image
