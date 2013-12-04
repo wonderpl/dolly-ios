@@ -1303,6 +1303,7 @@
 		BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED027D81834F4EA00636659 /* SYNAccountSettingsViewController.xib */; };
 		BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */; };
 		BEE01B5A184F5868000CF681 /* SYNSocialFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */; };
+		BEE01B5C184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
 		BEEB6F1C1721713500FEFA43 /* PanelMenuBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEB6F1A1721713500FEFA43 /* PanelMenuBottom.png */; };
@@ -2865,6 +2866,7 @@
 		BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginErrorArrow.m; sourceTree = "<group>"; };
 		BEE01B58184F5868000CF681 /* SYNSocialFollowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialFollowButton.h; sourceTree = "<group>"; };
 		BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialFollowButton.m; sourceTree = "<group>"; };
+		BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNOnBoardingHeader~iphone.xib"; sourceTree = "<group>"; };
 		BEE4A6BD170B0FD6008F9D05 /* dolly-Release-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "dolly-Release-Info.plist"; path = "RockPack/dolly-Release-Info.plist"; sourceTree = "<group>"; };
 		BEE4A6BF170B273F008F9D05 /* SYNAccountSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingTableViewCell.h; sourceTree = "<group>"; };
 		BEE4A6C0170B563D008F9D05 /* SYNAccountSettingsEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsEmail.h; sourceTree = "<group>"; };
@@ -5369,6 +5371,7 @@
 				BE57C02F1843638C00C6444A /* SYNOnBoardingHeader.h */,
 				BE57C0301843638C00C6444A /* SYNOnBoardingHeader.m */,
 				BEC39C17184DFF7D00DA8089 /* SYNOnBoardingHeader.xib */,
+				BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */,
 				BEC39C19184E360F00DA8089 /* SYNOnBoardingFooter.h */,
 				BEC39C1A184E360F00DA8089 /* SYNOnBoardingFooter.m */,
 				BEC39C1C184E363C00DA8089 /* SYNOnBoardingFooter.xib */,
@@ -6835,6 +6838,7 @@
 				1F51A6BA1742A959009907CA /* PlaceholderChannelSmall@2x~iphone.png in Resources */,
 				1F51A6BB1742A959009907CA /* PlaceholderChannelSmall~iphone.png in Resources */,
 				1F51A6BE1742AB71009907CA /* PlaceholderChannelCreation@2x~iphone.png in Resources */,
+				BEE01B5C184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib in Resources */,
 				1F51A6BF1742AB71009907CA /* PlaceholderChannelCreation~iphone.png in Resources */,
 				1F51A6C21742AB86009907CA /* PlaceholderChannelCreation.png in Resources */,
 				E97FCDC5183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard in Resources */,
