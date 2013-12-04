@@ -523,91 +523,36 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (void) profileButtonTapped: (UIButton *) profileButton
-{
-   FeedItem *feedItem = [self feedItemFromView: profileButton];
-    
-    ChannelOwner* channelOwner;
-    
-    // there are 2 types, video and channel (collection) types
-    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        VideoInstance* vi;
-        
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            vi = (VideoInstance*)((self.feedVideosById)[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
-        }
-        
-        channelOwner = vi.channel.channelOwner;
-    }
-    else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
-    {
-        Channel* channel;
+- (void) profileButtonTapped: (UIButton *) profileButton {
+	FeedItem *feedItem = [self feedItemFromView: profileButton];
+	
+	Channel *channel = [self channelForFeedItem:feedItem];
 
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            channel = (Channel*)(self.feedChannelsById[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
-        }
-
-        channelOwner = channel.channelOwner;
-    }
-    
-    [self viewProfileDetails: channelOwner];
+	[self viewProfileDetails:channel.channelOwner];
 }
 
 
-- (IBAction) channelButtonTapped: (UIButton *) channelButton
-{
-    FeedItem *feedItem = [self feedItemFromView: channelButton];
-    
-    Channel* channel;
-    
-    // there are 2 types, video and channel (collection) types
-    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo)
-    {
-        VideoInstance* vi;
-        
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            vi = (VideoInstance*)((self.feedVideosById)[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            vi = (VideoInstance*)((self.feedVideosById)[feedItem.resourceId]);
-        }
-        
-        channel = vi.channel;
-    }
-    else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel)
-    {
-
-        
-        if (feedItem.itemTypeValue == FeedItemTypeAggregate)
-        {
-            FeedItem* firstChildFeedItem = feedItem.feedItems.anyObject;
-            channel = (Channel*)(self.feedChannelsById[firstChildFeedItem.resourceId]);
-        }
-        else
-        {
-            channel = (Channel*)(self.feedChannelsById)[feedItem.resourceId];
-        }
-    }
-    
-	[self viewChannelDetails:channel];
+- (IBAction) channelButtonTapped: (UIButton *) channelButton {
+	FeedItem *feedItem = [self feedItemFromView: channelButton];
+	
+	[self viewChannelDetails:[self channelForFeedItem:feedItem]];
 }
 
+- (Channel *)channelForFeedItem:(FeedItem *)feedItem {
+	FeedItem *actualFeedItem = feedItem;
+	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
+		actualFeedItem = [feedItem.feedItems anyObject];
+	}
+	
+	Channel *channel = nil;
+	if (actualFeedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+		VideoInstance *videoInstance = self.feedVideosById[actualFeedItem.resourceId];
+		channel = videoInstance.channel;
+	} else if (actualFeedItem.resourceTypeValue == FeedItemResourceTypeChannel) {
+		channel = self.feedChannelsById[actualFeedItem.resourceId];
+	}
+	return channel;
+}
 
 - (void)displayVideoViewerFromCell:(UICollectionViewCell *)cell
 						andSubCell:(UICollectionViewCell *)subCell
