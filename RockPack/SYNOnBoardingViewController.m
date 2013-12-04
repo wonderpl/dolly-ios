@@ -42,6 +42,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 @property (nonatomic) NSInteger numberYetToFollow;
 
+@property (nonatomic, weak) UIButton* skipButton;
+
 @end
 
 @implementation SYNOnBoardingViewController
@@ -97,8 +99,6 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     {
         if(!s.uniqueId)
             continue;
-        
-        
         
         self.subgenresByIdString[s.uniqueId] = s;
     }
@@ -158,7 +158,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     self.data = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                       error: &error];
     
-    self.numberYetToFollow = self.data.count;
+    self.numberYetToFollow = MIN(self.data.count, 3); // probably data.count will be much bigger than 3, so it will default to 3...
     
     [self.collectionView reloadData];
 }
@@ -219,9 +219,11 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
                                                                withReuseIdentifier: OnBoardingFooterIndent
                                                                       forIndexPath: indexPath];
         
-        [((SYNOnBoardingFooter*)supplementaryView).skipButton addTarget:self
-                                                                 action:@selector(skipButtonPressed:)
-                                                       forControlEvents:UIControlEventTouchUpInside];
+        self.skipButton = ((SYNOnBoardingFooter*)supplementaryView).skipButton;
+        
+        [self.skipButton addTarget:self
+                            action:@selector(skipButtonPressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
         
     }
     
@@ -230,6 +232,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 - (void) skipButtonPressed: (UIButton*) button
 {
+    button.enabled = NO;
+    
     [UIView animateWithDuration:0.3f animations:^{
         
         self.view.alpha = 0.0f;
@@ -306,6 +310,15 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 {
     _numberYetToFollow = numberYetToFollow;
     self.navigationRightLabel.text = [NSString stringWithFormat:@"%i more", numberYetToFollow];
+    if(_numberYetToFollow == 0)
+    {
+        [UIView animateWithDuration:0.2f delay:0.3f options:UIViewAnimationCurveLinear animations:^{
+            self.skipButton.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            [self skipButtonPressed:self.skipButton];
+        }];
+    }
+    
 }
 
 
