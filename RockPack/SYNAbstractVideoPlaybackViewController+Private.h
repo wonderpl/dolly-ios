@@ -7,7 +7,6 @@
 //
 
 #import "NSObject+Blocks.h"
-#import "NSString+Timecode.h"
 #import "SYNAbstractVideoPlaybackViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNProgressView.h"
