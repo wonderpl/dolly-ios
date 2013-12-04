@@ -15,7 +15,6 @@
 #import "SYNDeviceManager.h"
 #import "SYNAddToChannelViewController.h"
 #import "SYNFacebookManager.h"
-#import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNAddToChannelCell.h"
 #import "UIColor+SYNColor.h"

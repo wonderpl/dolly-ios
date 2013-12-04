@@ -16,7 +16,6 @@
 #import "SYNChannelThumbnailCell.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
-#import "SYNIntegralCollectionViewFlowLayout.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNProfileRootViewController.h"
 #import "UIColor+SYNColor.h"

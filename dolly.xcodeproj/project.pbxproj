@@ -143,7 +143,6 @@
 		015C13C1173B034C001569FE /* SYNReportConcernTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015C13C0173B034C001569FE /* SYNReportConcernTableViewController.m */; };
 		015CB01616AE039900FEB8E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01516AE039900FEB8E7 /* User.m */; };
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
-		015CEE3F16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */; };
 		0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542A18363ADC009B161C /* SYNTextFieldLogin.m */; };
 		0165542E18363C70009B161C /* SYNTextFieldLoginiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */; };
 		01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */; };
@@ -1545,8 +1544,6 @@
 		015CB01516AE039900FEB8E7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		015CB01716AE03B200FEB8E7 /* _User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _User.h; sourceTree = "<group>"; };
 		015CB01816AE03B200FEB8E7 /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _User.m; sourceTree = "<group>"; };
-		015CEE3D16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIntegralCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIntegralCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		0165542918363ADC009B161C /* SYNTextFieldLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLogin.h; sourceTree = "<group>"; };
 		0165542A18363ADC009B161C /* SYNTextFieldLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLogin.m; sourceTree = "<group>"; };
 		0165542C18363C70009B161C /* SYNTextFieldLoginiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginiPhone.h; sourceTree = "<group>"; };
@@ -3420,8 +3417,6 @@
 			children = (
 				015AC9FB181EB86E0020E685 /* SYNAggregateFlowLayout.h */,
 				015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */,
-				015CEE3D16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.h */,
-				015CEE3E16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m */,
 				014A456616691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.h */,
 				014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */,
 				0173F70616E0C56A005B3ECA /* SYNVideoViewerThumbnailLayout.h */,
@@ -7265,7 +7260,6 @@
 				BE57C0261843604200C6444A /* SYNOnBoardingCell.m in Sources */,
 				01F8E77F16B03A7C000D44B9 /* SYNVideoViewerViewController.m in Sources */,
 				0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */,
-				015CEE3F16B9E7DB004BC7A0 /* SYNIntegralCollectionViewFlowLayout.m in Sources */,
 				BEA043E716CAA8E1005406E7 /* Genre.m in Sources */,
 				BEC39C16184D03CF00DA8089 /* Recomendation.m in Sources */,
 				012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */,
