@@ -23,7 +23,7 @@
     // Little hack to ensure custom font is correct
     self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 2.0, 0.0, 0.0);
     
-        self.titleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
     
     [self setTitleColor: UIColor.dollyButtonDefaultColor
                forState: UIControlStateNormal];
@@ -31,7 +31,7 @@
     [self setTitleColor: UIColor.dollyButtonHighlightedColor
                forState: UIControlStateHighlighted];
     
-    [self setTitleColor: UIColor.dollyButtonSelectedColor
+    [self setTitleColor: [UIColor whiteColor]
                forState: UIControlStateSelected];
     
     [self setTitleColor: UIColor.dollyButtonDisabledColor
@@ -48,11 +48,15 @@
     {
         self.backgroundColor = self.selectedColor;
         self.layer.borderColor = self.selectedColor.CGColor;
+        
     }
     else
     {
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderColor = self.defaultColor.CGColor;
+        
+        [self setTitleColor: UIColor.dollyButtonDefaultColor
+                   forState: UIControlStateNormal];
     }
 }
 

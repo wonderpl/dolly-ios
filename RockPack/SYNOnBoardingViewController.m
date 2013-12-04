@@ -21,6 +21,7 @@
 #import "AppConstants.h"
 #import "SubGenre.h"
 #import "UIColor+SYNColor.h"
+#import "SYNDeviceManager.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
@@ -39,6 +40,10 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 
 @property (nonatomic, strong) NSMutableDictionary* subgenresByIdString;
+
+@property (nonatomic) NSInteger numberYetToFollow;
+
+@property (nonatomic, weak) UIButton* skipButton;
 
 @end
 
@@ -95,8 +100,6 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     {
         if(!s.uniqueId)
             continue;
-        
-        
         
         self.subgenresByIdString[s.uniqueId] = s;
     }
@@ -155,6 +158,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     NSError* error;
     self.data = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                       error: &error];
+    
+    self.numberYetToFollow = MIN(self.data.count, 3); // probably data.count will be much bigger than 3, so it will default to 3...
     
     [self.collectionView reloadData];
 }
@@ -215,9 +220,11 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
                                                                withReuseIdentifier: OnBoardingFooterIndent
                                                                       forIndexPath: indexPath];
         
-        [((SYNOnBoardingFooter*)supplementaryView).skipButton addTarget:self
-                                                                 action:@selector(skipButtonPressed:)
-                                                       forControlEvents:UIControlEventTouchUpInside];
+        self.skipButton = ((SYNOnBoardingFooter*)supplementaryView).skipButton;
+        
+        [self.skipButton addTarget:self
+                            action:@selector(skipButtonPressed:)
+                  forControlEvents:UIControlEventTouchUpInside];
         
     }
     
@@ -226,6 +233,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 - (void) skipButtonPressed: (UIButton*) button
 {
+    button.enabled = NO;
+    
     [UIView animateWithDuration:0.3f animations:^{
         
         self.view.alpha = 0.0f;
@@ -248,8 +257,82 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 #pragma mark - Social Delegate
 
 
+- (void) followControlPressed: (SYNSocialButton *) socialControl
+{
+    // either a ChannelOwner of a Recomendation cell will link to a ChannelOwner (see SYNOnBoardingCell.m)
+    
+    socialControl.enabled = NO;
+    
+    ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
+    
+    if(!channelOwner)
+        return;
+    
+    if(socialControl.selected == NO)
+    {
+        [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
+                                                    subUserId: channelOwner.uniqueId
+                                            completionHandler: ^(id responce) {
+                                                
+                                                socialControl.selected = YES;
+                                                socialControl.enabled = YES;
+                                                
+                                                self.numberYetToFollow--;
+                                                
+                                            } errorHandler: ^(id error) {
+                                                
+                                                socialControl.enabled = YES;
+                                                
+                                            }];
+    }
+    else
+    {
+        [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
+                                                      subUserId:channelOwner.uniqueId
+                                              completionHandler:^(id responce) {
+                                                  
+                                                  socialControl.selected = NO;
+                                                  socialControl.enabled = YES;
+                                                  
+                                                  self.numberYetToFollow++;
+                                                  
+                                              } errorHandler:^(id error) {
+                                                  
+                                                  socialControl.enabled = YES;
+                                                  
+                                              }];
+        
+        
+    }
+    
+}
 
+-(void)setNumberYetToFollow:(NSInteger)numberYetToFollow
+{
+    _numberYetToFollow = numberYetToFollow;
+    self.navigationRightLabel.text = [NSString stringWithFormat:@"%i more", numberYetToFollow];
+    if(_numberYetToFollow == 0)
+    {
+        [UIView animateWithDuration:0.2f
+                              delay:0.3f
+                            options:UIViewAnimationCurveLinear
+                         animations:^{
+                             self.skipButton.alpha = 0.0f;
+                         } completion:^(BOOL finished) {
+                             [self skipButtonPressed:self.skipButton];
+                         }];
+    }
+    
+}
 
+#pragma mark - AutoRotation
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+}
 
 
 @end

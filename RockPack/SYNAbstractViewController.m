@@ -622,10 +622,41 @@
         
         ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
         
-        
-        
         if(!channelOwner)
             return;
+        
+        if(socialControl.selected == NO)
+        {
+            [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
+                                                        subUserId: channelOwner.uniqueId
+                                                completionHandler: ^(id responce) {
+                                                    
+                                                    socialControl.selected = YES;
+                                                    socialControl.enabled = YES;
+                                                    
+                                                } errorHandler: ^(id error) {
+                                                    
+                                                    socialControl.enabled = YES;
+                                                    
+                                                }];
+        }
+        else
+        {
+            [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
+                                                          subUserId:channelOwner.uniqueId
+                                                  completionHandler:^(id responce) {
+                                                      
+                                                      socialControl.selected = NO;
+                                                      socialControl.enabled = YES;
+                                                      
+                                                  } errorHandler:^(id error) {
+                                                      
+                                                      socialControl.enabled = YES;
+                                                      
+                                                  }];
+            
+            
+        }
         
         
         

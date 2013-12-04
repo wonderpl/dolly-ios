@@ -13,6 +13,10 @@
 #import "Recomendation.h"
 
 @interface SYNOnBoardingCell : UICollectionViewCell
+{
+    CGPoint nameLabelOrigin;
+    CGPoint subGenreLabelOrigin;
+}
 
 // avatar button is currently used as an image only but can change to accomodate press events
 @property (nonatomic, strong) IBOutlet SYNAvatarButton* avatarButton;

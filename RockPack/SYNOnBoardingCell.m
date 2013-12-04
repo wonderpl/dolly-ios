@@ -22,6 +22,24 @@
     
     self.nameLabel.font = [UIFont regularCustomFontOfSize:self.nameLabel.font.pointSize];
     
+    // store the values as read from the XIB file
+    nameLabelOrigin = self.nameLabel.frame.origin;
+    subGenreLabelOrigin = self.subGenreLabel.frame.origin;
+    
+}
+
+-(void)prepareForReuse
+{
+    // labels could have been moved due to description text missing;
+    CGRect rect = self.nameLabel.frame;
+    rect.origin = nameLabelOrigin;
+    self.nameLabel.frame = rect;
+    
+    rect = self.subGenreLabel.frame;
+    rect.origin = subGenreLabelOrigin;
+    self.subGenreLabel.frame = rect;
+    
+    self.descriptionLabel.hidden = NO;
 }
 
 - (void) setRecomendation:(Recomendation *)recomendation
@@ -36,8 +54,22 @@
     
     self.nameLabel.text = recomendation.displayName;
     
-    NSLog(@"%@", recomendation.descriptionText);
-    self.descriptionLabel.text = recomendation.descriptionText;
+    recomendation.descriptionText = @"Superstar chat-show host. American TV host. Richer than you.";
+    
+    if([recomendation.descriptionText isEqualToString:@""]) // there is no description
+    {
+        // == squash the tet fields down when we have no text == //
+        
+        self.nameLabel.center = CGPointMake(self.nameLabel.center.x, self.nameLabel.center.y + 14.0f);
+        
+        self.subGenreLabel.center = CGPointMake(self.subGenreLabel.center.x, self.subGenreLabel.center.y - 14.0f);
+        
+        self.descriptionLabel.hidden = YES;
+    }
+    else
+    {
+        self.descriptionLabel.text = recomendation.descriptionText;
+    }
     
     
     [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]
