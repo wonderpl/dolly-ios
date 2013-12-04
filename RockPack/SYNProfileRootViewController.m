@@ -604,7 +604,7 @@
          if (obj == self.channelOwner)
          {
              //TODO:Get total number of channels or sub number?
-             self.dataItemsAvailable = 116;
+             self.dataItemsAvailable = 67;
 
              [self reloadCollectionViews];
              
@@ -1181,7 +1181,7 @@
     self.loadingMoreContent = YES;
 
     self.dataRequestRange = self.dataRequestRangeChannel;
-    self.dataItemsAvailable = 200;
+    self.dataItemsAvailable = MAXIMUM_REQUEST_LENGTH;
 
     [self incrementRangeForNextRequest];
 
@@ -1233,10 +1233,10 @@
     
     self.dataRequestRange = self.dataRequestRangeSubscriptions;
     //self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptions;
-    self.dataItemsAvailable = 50;
+    self.dataItemsAvailable = MAXIMUM_REQUEST_LENGTH;
 
     [self incrementRangeForNextRequest];
-    self.dataRequestRange = self.dataRequestRangeSubscriptions;
+    self.dataRequestRangeSubscriptions = self.dataRequestRange;
 
     NSLog(@"%lu, %lu", (unsigned long)self.dataRequestRange.length, (unsigned long)self.dataRequestRange.location);
     
