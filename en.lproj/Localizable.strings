@@ -260,6 +260,11 @@
 "profile_screen_section_user_created_title" = "PACKS";
 "profile_screen_section_user_subscription_title" = "PACKS FOLLOWED";
 
+//
+
+"Channel Unavailable" = "Channel Unavailable";
+"The Channel for which this notification has been issued might have been deleted" = "The Channel for which this notification has been issued might have been deleted";
+
 // == Social Buttons == //
 
 "follow" = "follow";

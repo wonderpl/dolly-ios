@@ -336,10 +336,7 @@
 }
 
 
-
-
-
-
+#pragma mark - Button Delegates
 
 // this is the user who initialed the action, goes to is profile
 - (void) mainImageTableCellPressed: (UIButton *) button
@@ -363,31 +360,42 @@
 
 - (void) itemImageTableCellPressed: (UIButton *) button
 {
+    
+    
     SYNNotificationsTableViewCell *cellPressed = [self getCellFromButton:button];
     
-    NSIndexPath *indexPathForCellPressed = [self.tableView
-                                            indexPathForCell: cellPressed];
+    NSIndexPath *indexPathForCellPressed = [self.tableView indexPathForCell: cellPressed];
     
     SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
     
     if (!notification)
-    {
         return;
-    }
-    
     
     switch (notification.objectType)
     {
         case kNotificationObjectTypeUserLikedYourVideo:
         {
+            
             Channel *channel = [self channelFromChannelId: notification.channelId];
+            
             
             if (!channel)
             {
+                // the channel is no longer in the DB, might have been deleted after the notification has been issued
+                
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Channel Unavailable", nil)
+                                            message:NSLocalizedString(@"The Channel for which this notification has been issued might have been deleted", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+              
+                
                 return;
             }
             
+            
             channel.autoplayId = notification.videoId;
+            
 			[self viewChannelDetails:channel];
             
             break;
@@ -500,18 +508,23 @@
 
 - (Channel *) channelFromChannelId: (NSString *) channelId
 {
+   
+    
     NSError *error;
     Channel *channel;
+    
+    if(!channelId)
+        return channel; // returns nil;
 
     NSFetchRequest *channelFetchRequest = [[NSFetchRequest alloc] init];
     
-    channelFetchRequest.entity = [NSEntityDescription entityForName: @"Channel"
+    channelFetchRequest.entity = [NSEntityDescription entityForName: kChannel
                                              inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     channelFetchRequest.predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", channelId];
 
     NSArray *matchingChannelEntries = [appDelegate.mainManagedObjectContext executeFetchRequest: channelFetchRequest
-                                                                                               error: &error];
+                                                                                          error: &error];
     
     if (matchingChannelEntries.count > 0)
     {
