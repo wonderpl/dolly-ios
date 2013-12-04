@@ -279,11 +279,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) fetchVideoItems
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    // Edit the entity name as appropriate.
-    fetchRequest.entity = [NSEntityDescription entityForName: kVideoInstance
-                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[VideoInstance entityName]];
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat: [NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
@@ -312,11 +308,7 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (void) fetchChannelItems
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    // Edit the entity name as appropriate.
-    fetchRequest.entity = [NSEntityDescription entityForName: kChannel
-                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Channel entityName]];
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"viewId == \"%@\"", self.viewId]]; // kFeedViewId
     
