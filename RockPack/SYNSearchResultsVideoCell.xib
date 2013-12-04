@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="BASEMENT JAXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="360" translatesAutoresizingMaskIntoConstraints="NO" id="gTc-au-f7f" userLabel="Video Title">
-                        <rect key="frame" x="0.0" y="219" width="360" height="21"/>
+                        <rect key="frame" x="0.0" y="230" width="360" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -24,7 +24,7 @@
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <imageView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vdl-pp-UXn">
-                        <rect key="frame" x="0.0" y="9" width="360" height="203"/>
+                        <rect key="frame" x="0.0" y="21" width="360" height="203"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
@@ -53,13 +53,20 @@
                         </connections>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9g-v6-RLE" userLabel="timestamp Label">
-                        <rect key="frame" x="312" y="192" width="48" height="20"/>
+                        <rect key="frame" x="312" y="203" width="48" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.72941176470588232" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EK-Dr-D4d" userLabel="Time Label">
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.72941176470588232" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -71,6 +78,7 @@
                 <outlet property="iconImageView" destination="Vdl-pp-UXn" id="PiC-Hh-HIY"/>
                 <outlet property="likeSocialButton" destination="NrE-x8-VXC" id="lIQ-Gv-H37"/>
                 <outlet property="shareSocialButton" destination="8wk-5c-EEh" id="0v5-5w-czJ"/>
+                <outlet property="timeLabel" destination="9EK-Dr-D4d" id="sY7-f5-59J"/>
                 <outlet property="timeStampLabel" destination="p9g-v6-RLE" id="kIF-i2-M91"/>
                 <outlet property="titleLabel" destination="gTc-au-f7f" id="qfo-93-vel"/>
             </connections>
