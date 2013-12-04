@@ -44,6 +44,8 @@ typedef enum NotificationMessageType : NSInteger {
 
 @property (nonatomic, readonly) NSArray* tabs;
 
+@property (nonatomic, readonly) BOOL hasCreatedPopularGenre;
+
 
 @property (nonatomic, readonly) SYNAbstractViewController* showingViewController;
 

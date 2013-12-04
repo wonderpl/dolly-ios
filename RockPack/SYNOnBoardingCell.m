@@ -16,7 +16,7 @@
 - (void) awakeFromNib
 {
     
-    self.followButton.title = NSLocalizedString(@"follow", nil);
+    
     
     self.descriptionLabel.font = [UIFont regularCustomFontOfSize:self.descriptionLabel.font.pointSize];
     

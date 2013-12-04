@@ -263,6 +263,7 @@
 // == Social Buttons == //
 
 "follow" = "follow";
+"unfollow" = "unfollow";
 "add" = "add";
 "like" = "like";
 "share" = "share";

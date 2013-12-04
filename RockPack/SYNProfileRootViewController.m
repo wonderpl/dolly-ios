@@ -883,6 +883,7 @@
         if(self.modeType == kModeOtherUsersProfile)
             
         {
+        
             if (channel.subscribedByUserValue)
             {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
@@ -2305,15 +2306,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     {
         [self.followAllAlertView show];
         
-        //Need to refresh the cell
-        //        if (self.followCell.channel.channelOwner.subscribedByUserValue == NO)
-        //        {
-        //            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow All", @"unfollow")];
-        //        }
-        //        else
-        //        {
-        //            [self.followCell setFollowButtonLabel:NSLocalizedString(@"UnFollow All", @"follow")];
-        //        }
+      
     }
 }
 

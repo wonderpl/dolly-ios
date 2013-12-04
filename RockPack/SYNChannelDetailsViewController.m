@@ -276,15 +276,8 @@ UIPopoverControllerDelegate>
                                                    object: nil];
     }
     
+    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
-    if (self.channel.subscribedByUserValue)
-    {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Unfollow", nil)]];
-    }
-    else
-    {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"follow", nil)]];
-    }
     
     
     // We set up assets depending on whether we are in display or edit mode
@@ -522,14 +515,8 @@ UIPopoverControllerDelegate>
     
     [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
     
-    if (self.channel.subscribedByUserValue == YES)
-    {
-        [self.btnFollowChannel setTitle:NSLocalizedString(@"Unfollow", @"unfollow a channel")];
-    }
-    else
-    {
-        [self.btnFollowChannel setTitle:NSLocalizedString(@"Follow", @"follow a channel")];
-    }
+    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+    
     if (self.channel.videoInstances.count == 0)
     {
         self.lblNoVideos.hidden = NO;
@@ -589,14 +576,9 @@ UIPopoverControllerDelegate>
                                                           userInfo: @{kChannel : self.channel}];
     }
     
-    if (self.channel.subscribedByUserValue == YES)
-    {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Unfollow", nil)]];
-    }
-    else
-    {
-        [self.btnFollowChannel setTitle:[NSString stringWithFormat: @"%@", NSLocalizedString(@"Follow", nil)]];
-    }
+    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+    
+    
     
 }
 

@@ -30,6 +30,9 @@
 typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @interface SYNMasterViewController ()
+{
+    
+}
 
 @property (nonatomic) BOOL searchIsInProgress;
 @property (nonatomic) BOOL showingBackButton;
@@ -45,7 +48,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic) CGRect overlayControllerFrame;
 
-@property (nonatomic) BOOL hasPopularGenre;
+
 
 
 
@@ -116,9 +119,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         if(success) // Genres have loaded from the server
         {
-            if(!self.hasPopularGenre) // we have no POPULAR Genre
+            if(!self.hasCreatedPopularGenre) // we have no POPULAR Genre
             {
                 [self createPopularGenre]; // create one
+                
             }
         }
         
@@ -174,24 +178,23 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Popular Genre
 
--(BOOL)hasPopularGenre
+-(BOOL)hasCreatedPopularGenre
 {
     
-    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+    fetchRequest.entity = [NSEntityDescription entityForName: kSubGenre
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
     
-    categoriesFetchRequest.includesSubentities = NO; // this will avoid getting both the Genre and SubGenre called 'POPULAR'
     
     NSError* error;
     
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                      error: &error];
+    NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                error: &error];
     
-    return (BOOL)(genresFetchedArray.count > 0);
+    return (BOOL)(fetchedArray.count > 0);
 }
 
 
@@ -201,13 +204,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     // Create Genre
     Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-    popularGenre.uniqueId = kPopularGenreUniqueId;
+    popularGenre.uniqueId = [NSString stringWithString:kPopularGenreUniqueId];
     popularGenre.name = [NSString stringWithString:kPopularGenreName];
     popularGenre.priority = @(100000);
     
     // Create SubGenre
     SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
-    popularSubGenre.uniqueId = kPopularGenreUniqueId;
+    popularSubGenre.uniqueId = [NSString stringWithString:kPopularGenreUniqueId];
     popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
     popularSubGenre.priority = @(100000);
     
