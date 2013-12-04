@@ -637,7 +637,7 @@
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity: 3];
     
     parameters[@"start"] = @(0);
-    parameters[@"size"] = @(1000);
+    parameters[@"size"] = @(TEMP_REQUEST_LENGTH);
     parameters[@"locale"] = self.localeString;
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
@@ -664,6 +664,38 @@
     
     [self enqueueOperation: networkOperation];
 }
+
+- (void) channelsForUserId: (NSString *) userId
+                   inRange: (NSRange) range
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+              errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    
+    
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
+    
+    NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"start"] = @(range.location);
+    parameters[@"size"] = @(48);
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                                                                         params: [self getLocaleParamWithParams: parameters]
+                                                                                                     httpMethod: @"GET"
+                                                                                                            ssl: TRUE];
+    
+    NSLog(@"api string%@", apiString);
+    
+    NSLog(@"param %@", parameters);
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
 
 
 #pragma mark - Subscriber
@@ -815,6 +847,8 @@
     
     [self enqueueOperation: networkOperation];
 }
+
+
 
 
 

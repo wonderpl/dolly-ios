@@ -1473,6 +1473,8 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
     dispatch_async(dispatch_get_main_queue(), ^{
       
       jsonDecompressionHandler(returnValue);
+        
+        NSLog(@"Returned Value from server :%@",returnValue);
     });
   });
 }

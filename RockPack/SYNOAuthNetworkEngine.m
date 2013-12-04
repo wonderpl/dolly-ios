@@ -457,7 +457,7 @@
     
     parameters[@"start"] = @(0);
     
-    parameters[@"size"] = @(1000);
+    parameters[@"size"] = @(TEMP_REQUEST_LENGTH);
     
     parameters[@"locale"] = self.localeString;
     
@@ -490,7 +490,7 @@
     
     parameters[@"start"] = @(0);
     
-    parameters[@"size"] = @(1000);
+    parameters[@"size"] = @(TEMP_REQUEST_LENGTH);
     
     
    
@@ -714,7 +714,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[@"start"] = @(range.location);
-    parameters[@"size"] = @(range.length);
+    parameters[@"size"] = @(48);
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
                                                                                                          params: [self getLocaleParamWithParams: parameters]
@@ -804,7 +804,7 @@
     
     [self channelDataForUserId:userId
                      channelId:channelId
-                       inRange: NSMakeRange(0, 1000)
+                       inRange: NSMakeRange(0, TEMP_REQUEST_LENGTH)
              completionHandler:completionBlock
                   errorHandler:errorBlock];
 

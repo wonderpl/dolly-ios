@@ -110,6 +110,7 @@ typedef enum : NSInteger {
 
 #define STANDARD_REQUEST_LENGTH 48
 #define MAXIMUM_REQUEST_LENGTH 1000
+#define TEMP_REQUEST_LENGTH 48
 
 
 #define kURLTermsAndConditions @"http://rockpack.com/tos"

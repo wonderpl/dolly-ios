@@ -390,4 +390,25 @@
     }
 }
 
+
+- (void) addSubscriptionsFromDictionary : (NSDictionary *) subscriptionsDictionary
+{
+    
+//    NSLog(@"%@", subscriptionsDictionary);
+    
+    NSDictionary *itemDict = subscriptionsDictionary[@"channels"];
+    if (!itemDict || ![itemDict isKindOfClass: [NSDictionary class]])
+    {
+        NSLog(@"not dict/nil");
+        return;
+    }
+    
+    NSArray *items = [itemDict objectForKey:@"items"];
+    
+    for (NSDictionary *tmpDict in items) {
+    //    NSLog(@"%@", tmpDict);
+        [self addSubscriptionsObject:[Channel instanceFromDictionary:tmpDict usingManagedObjectContext:self.managedObjectContext]];
+    }
+}
+
 @end

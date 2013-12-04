@@ -357,6 +357,7 @@
     self.unfollowAlertView = [[UIAlertView alloc]initWithTitle:@"Unfollow?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
     
     self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    
 }
 
 
@@ -1144,16 +1145,16 @@
     CGFloat offset = scrollView.contentOffset.y;
     
     if (self.channelThumbnailCollectionView == scrollView) {
-        if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO)
+        if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO && !self.collectionsTabButton.selected)
         {
             [self loadMoreChannels];
         }
     }
     
     if (self.subscriptionThumbnailCollectionView == scrollView) {
-        if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO)
+        if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) && self.isLoadingMoreContent == NO && self.collectionsTabButton.selected)
         {
-//            [self loadMoreSubscriptions];
+           // [self loadMoreSubscriptions];
         }
         
     }
@@ -1178,17 +1179,19 @@
         return;
     
     self.loadingMoreContent = YES;
-    
+
     self.dataRequestRange = self.dataRequestRangeChannel;
-//    self.dataItemsAvailable = self.channelOwner.totalVideosValueChannel;
-    
+    //self.dataItemsAvailable = self.channelOwner.totalVideosValueChannel;
+
     [self incrementRangeForNextRequest];
+
+    
     
     __weak typeof(self) weakSelf = self;
     
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
         
-    //    NSLog(@"returned dictionary %@", dictionary);
+      //NSLog(@"returned dictionary %@", dictionary);
         weakSelf.loadingMoreContent = NO;
         [weakSelf.channelOwner addChannelsFromDictionary: dictionary];
         [self.channelThumbnailCollectionView reloadData];
@@ -1199,28 +1202,49 @@
         weakSelf.loadingMoreContent = NO;
         DebugLog(@"Update action failed");
     };
-//    Working load more videos for user channels
     
-    [appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
-                                                      inRange: self.dataRequestRange
-                                            completionHandler: successBlock
-                                                 errorHandler: errorBlock];
     
-    //TODO: successfor sublist
-    
+//    if ([self.channelOwner.resourceURL hasPrefix: @"https"]) // https does not cache so it is fresh
+//    {
+//        [appDelegate.oAuthNetworkEngine videosForChannelForUserId: appDelegate.currentUser.uniqueId
+//                                                        channelId: self.channel.uniqueId
+//                                                          inRange: self.dataRequestRange
+//                                                completionHandler: successBlock
+//                                                     errorHandler: errorBlock];
+//    }
+//    else
+//    {
+//        [appDelegate.networkEngine videosForChannelForUserId: appDelegate.currentUser.uniqueId
+//                                                   channelId: self.channel.uniqueId
+//                                                     inRange: self.dataRequestRange
+//                                           completionHandler: successBlock
+//                                                errorHandler: errorBlock];
+//    }
 
     
-//    [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
-//                                                                   inRange: self.dataRequestRange
-//                                                         completionHandler: successBlockSub
-//                                                     errorHandler: errorBlock];
-//
+    if (self.modeType == kModeMyOwnProfile) {
+        [appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
+                                                  inRange: self.dataRequestRange
+                                        completionHandler: successBlock
+                                             errorHandler: errorBlock];
+        
+    }
+    else
+    {
+        [appDelegate.networkEngine channelsForUserId: self.channelOwner.uniqueId
+                                                  inRange: self.dataRequestRange
+                                        completionHandler: successBlock
+                                             errorHandler: errorBlock];
+
+        
+    }
+    
     }
 
 
 - (void) loadMoreSubscriptions
 {
-    NSLog(@"Load more data");
+    NSLog(@"loadMoreSubscriptions");
     
     if(!self.moreItemsToLoad)
         return;
@@ -1228,15 +1252,18 @@
     self.loadingMoreContent = YES;
     
     self.dataRequestRange = self.dataRequestRangeSubscriptions;
-//    self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptions;
+    //self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptions;
 
     [self incrementRangeForNextRequest];
     
     __weak typeof(self) weakSelf = self;
     
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
-        NSLog(@"returned dictionary %@", dictionary);
+        //NSLog(@"returned dictionary %@", dictionary);
 
+        weakSelf.loadingMoreContent = NO;
+        [weakSelf.channelOwner addSubscriptionsFromDictionary: dictionary];
+        [self.subscriptionThumbnailCollectionView reloadData];
     };
     
     // define success block //
@@ -1245,8 +1272,8 @@
         DebugLog(@"Update action failed");
     };
     //    Working load more videos for user channels
-    
-        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
+
+    [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
                                                                        inRange: self.dataRequestRange
                                                              completionHandler: successBlock
                                                          errorHandler: errorBlock];
@@ -1259,7 +1286,6 @@
     //NSLog(@"%f", offset);
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
-        
         if (self.channelThumbnailCollectionView == scrollView)
         {
             [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
@@ -1285,7 +1311,6 @@
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
             
-            
             if (offset<0)
             {
                 //Scale the cover phote in iphone
@@ -1301,7 +1326,6 @@
                 //NSLog(@"%f", offset);
                 //Way too slow
                 //[self.coverImage setImage:[self.coverImage.image blur:self.coverImage.image withBlurValue:fabsf(offset)]];
-                
                 
                 self.backgroundView.transform = move;
                 
@@ -1364,7 +1388,6 @@
             [self moveNameLabelWithOffset:offset];
         }
     }
-    
 }
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset
@@ -1549,9 +1572,10 @@
     {
         self.modeType = kModeOtherUsersProfile;
     }
-        
-    self.dataRequestRangeChannel = NSMakeRange(0, MAXRANGE);
-    self.dataRequestRangeSubscriptions = NSMakeRange(0, MAXRANGE);
+    
+#warning get from core data
+    self.dataRequestRangeChannel = NSMakeRange(0, 48);
+    self.dataRequestRangeSubscriptions = NSMakeRange(0, 48);
 
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;

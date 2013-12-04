@@ -25,5 +25,6 @@
 - (void) setSubscriptionsDictionary : (NSDictionary *) subscriptionsDictionary;
 
 - (void) addChannelsFromDictionary : (NSDictionary *) channelsDictionary;
+- (void) addSubscriptionsFromDictionary : (NSDictionary *) subscriptionsDictionary;
 
 @end
