@@ -457,7 +457,7 @@
     
     parameters[@"start"] = @(0);
     
-    parameters[@"size"] = @(TEMP_REQUEST_LENGTH);
+//    parameters[@"size"] = @(MAXIMUM_REQUEST_LENGTH);
     
     parameters[@"locale"] = self.localeString;
     
@@ -477,6 +477,8 @@
     [self enqueueSignedOperation: networkOperation];
     
     
+    
+    
 }
 
 -(void)userSubscriptionsForUser:(User*)user
@@ -490,7 +492,7 @@
     
     parameters[@"start"] = @(0);
     
-    parameters[@"size"] = @(TEMP_REQUEST_LENGTH);
+//    parameters[@"size"] = @(MAXIMUM_REQUEST_LENGTH);
     
     
    
@@ -521,7 +523,7 @@
     NSString *apiString = [kAPIGetUserDetails stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
     NSMutableString* apiMutString = [NSMutableString stringWithString:apiString];
-    [apiMutString appendFormat:@"?locale=%@&data=channels&data=external_accounts&data=flags&data=activity", self.localeString];
+    [apiMutString appendFormat:@"?locale=%@&data=external_accounts&data=flags&data=activity", self.localeString];
     
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: [NSString stringWithString:apiMutString]
@@ -537,6 +539,8 @@
         
     [networkOperation addJSONCompletionHandler:^(NSDictionary *responseDictionary)
     {
+        
+        
         
         NSString* possibleError = responseDictionary[@"error"];
          
@@ -720,10 +724,7 @@
                                                                                                          params: [self getLocaleParamWithParams: parameters]
                                                                                                      httpMethod: @"GET"
                                                                                                             ssl: TRUE];
-    
-    NSLog(@"api string%@", apiString);
-    
-    NSLog(@"param %@", parameters);
+
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
@@ -804,7 +805,7 @@
     
     [self channelDataForUserId:userId
                      channelId:channelId
-                       inRange: NSMakeRange(0, TEMP_REQUEST_LENGTH)
+                       inRange: NSMakeRange(0, MAXIMUM_REQUEST_LENGTH)
              completionHandler:completionBlock
                   errorHandler:errorBlock];
 
@@ -824,7 +825,7 @@
     
     parameters[@"start"] = @(range.location);
     
-    parameters[@"size"] = @(range.length);
+//    parameters[@"size"] = @(range.length);
     
     NSString *apiString = [kAPIGetChannelDetails stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
@@ -1443,8 +1444,6 @@
                      completionHandler: (MKNKUserSuccessBlock) completionBlock
                           errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    
-//    NSLog(@"SUB UPDATE IN RANGE");
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIGetUserSubscriptions stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];

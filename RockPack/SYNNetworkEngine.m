@@ -637,7 +637,7 @@
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity: 3];
     
     parameters[@"start"] = @(0);
-    parameters[@"size"] = @(TEMP_REQUEST_LENGTH);
+//    parameters[@"size"] = @(MAXIMUM_REQUEST_LENGTH);
     parameters[@"locale"] = self.localeString;
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
@@ -670,29 +670,51 @@
          completionHandler: (MKNKUserSuccessBlock) completionBlock
               errorHandler: (MKNKUserErrorBlock) errorBlock
 {
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     
-    NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+        parameters[@"start"] = @(range.location);
+        parameters[@"size"] = @(48);
     
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"locale"] = self.localeString;
     
-    parameters[@"start"] = @(range.location);
-    parameters[@"size"] = @(48);
+    NSString *apiString = [kAPIGetUserDetails stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
-    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
-                                                                                                         params: [self getLocaleParamWithParams: parameters]
-                                                                                                     httpMethod: @"GET"
-                                                                                                            ssl: NO];
-    
-    NSLog(@"api string%@", apiString);
-    
-    NSLog(@"param %@", parameters);
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: parameters
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: NO];
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
-
+    
+    
+    
     [self enqueueOperation: networkOperation];
+
+    
+//    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
+//    
+//    NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+//    
+//    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+//    
+//    parameters[@"start"] = @(range.location);
+//    parameters[@"size"] = @(48);
+//    
+//    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+//                                                                                                         params: [self getLocaleParamWithParams: parameters]
+//                                                                                                     httpMethod: @"GET"
+//                                                                                                            ssl: NO];
+//    
+//    
+//
+//    [self addCommonHandlerToNetworkOperation: networkOperation
+//                           completionHandler: completionBlock
+//                                errorHandler: errorBlock];
+//
+//    [self enqueueOperation: networkOperation];
 }
 
 
@@ -759,6 +781,7 @@
     NSDictionary *apiSubstitutionDictionary = @{
                                                 @"USERID": userId, @"CHANNELID": channelId
                                                 };
+    
     NSString *apiString = [kAPISubscribersForChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary: tempParameters];
     
