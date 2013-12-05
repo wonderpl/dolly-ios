@@ -65,6 +65,8 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 -(void) removeOverlayControllerAnimated:(BOOL)animated;
 
+-(void)displayNotificationsLoaded:(NSInteger)notificationsCount;
+
 // on-boarding
 
 

@@ -149,9 +149,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
     }];
     
-    
-    
-    
 }
 
 - (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
@@ -596,6 +593,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 }
 -(void)removeOnBoarding
+{
+    
+}
+
+#pragma mark - Display Notifications Number
+
+-(void)displayNotificationsLoaded:(NSInteger)notificationsCount
 {
     
 }

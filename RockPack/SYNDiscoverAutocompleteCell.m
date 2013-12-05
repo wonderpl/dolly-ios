@@ -91,7 +91,6 @@
     
     self.textLabel.frame = newFrame;
     
-    NSLog(@">>> %@", self.imageView);
     
 }
 

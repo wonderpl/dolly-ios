@@ -40,6 +40,18 @@
 
 #pragma mark - View Life Cycle
 
+- (id) initWithViewId:(NSString *)vid
+{
+    if (self = [super initWithViewId:vid])
+    {
+        appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+        hasUnreadNotifications = NO;
+        self.notifications = @[];
+        [self loadNotifications];
+    }
+    return self;
+}
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -47,15 +59,14 @@
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
     
-    hasUnreadNotifications = NO;
-    self.notifications = @[];
+    
     
     [tracker set: kGAIScreenName
            value: @"Notifications"];
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
     
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -73,7 +84,17 @@
     [self.tableView registerClass: [SYNNotificationsTableViewCell class]
            forCellReuseIdentifier: kNotificationsCellIdent];
     
-    [self loadNotifications];
+    
+    if(self.notifications.count == 0)
+    {
+        
+        // display no notifications message
+        
+        [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
+    }
+    
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Get Data
@@ -120,15 +141,8 @@
     if (total == 0) // good responce but no notifications
     {
         
-        
         self.notifications = @[];
         hasUnreadNotifications = NO;
-        
-        [self.tableView reloadData];
-        
-        // display no notifications message
-        
-        [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
         
         return;
     }
@@ -157,7 +171,8 @@
     
     self.notifications = [NSArray arrayWithArray:inNotificationsutArray];
     
-    [self.tableView reloadData];
+    [appDelegate.masterViewController displayNotificationsLoaded:self.notifications.count];
+    
 }
 
 #pragma mark - TableView Delegate/Data Source
