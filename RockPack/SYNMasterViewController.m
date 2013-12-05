@@ -509,8 +509,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          if (type == NotificationMessageTypeSuccess)
                          {
                              [self performSelector:@selector(hideNetworkErrorMessageView) withObject:nil afterDelay:4.0f];
-                             
-                             
                          }
                          
                      }];
@@ -531,10 +529,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                          CGRect messgaeViewFrame = self.networkMessageView.frame;
                          messgaeViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight]; // push to the bottom
                          self.networkMessageView.frame = messgaeViewFrame;
+                         
                      }
                      completion: ^(BOOL finished) {
+                         
                          [self.networkMessageView removeFromSuperview];
                          self.networkMessageView = nil;
+                         
                      }];
 }
 

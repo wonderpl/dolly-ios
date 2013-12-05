@@ -288,8 +288,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                withTitle:suggestion
                  forType:kSearchTypeTerm];
     
-    
-    
     [self closeAutocomplete];
 }
 

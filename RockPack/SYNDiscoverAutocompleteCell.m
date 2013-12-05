@@ -16,6 +16,7 @@
 @property (nonatomic,strong)UIColor* selectedColor;
 @property (nonatomic,strong)UIColor* defaultShadowColor;
 @property (nonatomic,strong)UIColor* selectedShadowColor;
+@property (nonatomic, strong) UIImageView* userImageView;
 
 @end
 
@@ -62,8 +63,14 @@
         self.textLabel.font = [UIFont lightCustomFontOfSize:14.0f];
         self.textLabel.textColor = self.defaultColor;
         self.textLabel.shadowColor = self.defaultShadowColor;
-        self.textLabel.shadowOffset = CGSizeMake(0.0f,1.0f);
+        self.textLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
         self.textLabel.backgroundColor = [UIColor clearColor];
+        
+        
+        self.userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
+        self.userImageView.backgroundColor = [UIColor greenColor];
+        self.userImageView.layer.cornerRadius = self.userImageView.frame.size.height * 0.5f;
+        [self addSubview:self.userImageView];
         
     }
     return self;
@@ -79,10 +86,12 @@
     
     newFrame.size.width = 250.0f;
     
-    newFrame.origin.x = 52.0f;
+    newFrame.origin.x = 72.0f;
     newFrame.origin.y += 4.0f;
     
     self.textLabel.frame = newFrame;
+    
+    NSLog(@">>> %@", self.imageView);
     
 }
 
