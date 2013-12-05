@@ -40,15 +40,14 @@ static NSString* placeholderText = @"Your feedback...";
     
     self.title = NSLocalizedString(@"Feedback", nil);
     
-    ///self.currentValueLabel.hidden = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Send", nil)
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(sendButtonPressed:)];
     
-    NSDictionary* textAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize:IS_IPAD ? 18.0f : 15.0f],
-                                     NSForegroundColorAttributeName: [UIColor colorWithWhite:128.0f/255.0f alpha:1.0f]};
+    NSDictionary* textAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize: IS_IPAD ? 18.0f : 15.0f],
+                                     NSForegroundColorAttributeName: [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f]};
     
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:textAttributes
                                                           forState:UIControlStateNormal];
@@ -71,10 +70,13 @@ static NSString* placeholderText = @"Your feedback...";
     // setting fonts
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
+    
     self.sliderLabel.font = [UIFont regularCustomFontOfSize:self.sliderLabel.font.pointSize];
     
     self.minValueLabel.font = [UIFont regularCustomFontOfSize:self.minValueLabel.font.pointSize];
+    
     self.maxValueLabel.font = [UIFont regularCustomFontOfSize:self.maxValueLabel.font.pointSize];
+    
     self.currentValueLabel.font = [UIFont regularCustomFontOfSize:self.currentValueLabel.font.pointSize];
     
     self.textView.font = [UIFont regularCustomFontOfSize:self.textView.font.pointSize];

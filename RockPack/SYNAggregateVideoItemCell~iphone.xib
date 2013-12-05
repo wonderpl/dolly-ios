@@ -118,6 +118,7 @@
                 <outlet property="likeControl" destination="k73-Lu-OvT" id="jbG-gi-Vpb"/>
                 <outlet property="shareControl" destination="gRp-a5-BAk" id="0M9-ED-P5P"/>
                 <outlet property="timeLabel" destination="1bU-ZO-Uzp" id="yiG-Lv-wHt"/>
+                <outlet property="timestampLabel" destination="AyK-gf-zRY" id="7BV-lH-dAH"/>
                 <outlet property="titleLabel" destination="vVW-WR-RU9" id="fqv-O6-igg"/>
             </connections>
         </collectionViewCell>

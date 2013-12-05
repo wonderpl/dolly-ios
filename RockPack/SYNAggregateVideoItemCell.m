@@ -98,7 +98,6 @@
     self.timestampLabel.text = [NSString stringWithString:timeStampString];
     
     
-    
     // == date components == //
     
     NSDateComponents *timeAgoComponents = videoInstance.timeAgo;
