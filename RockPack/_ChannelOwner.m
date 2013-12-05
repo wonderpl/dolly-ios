@@ -10,6 +10,8 @@ const struct ChannelOwnerAttributes ChannelOwnerAttributes = {
 	.position = @"position",
 	.subscribedByUser = @"subscribedByUser",
 	.thumbnailURL = @"thumbnailURL",
+	.totalVideosValueChannel = @"totalVideosValueChannel",
+	.totalVideosValueSubscriptions = @"totalVideosValueSubscriptions",
 	.username = @"username",
 };
 
@@ -60,6 +62,16 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 	}
 	if ([key isEqualToString:@"subscribedByUserValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"subscribedByUser"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"totalVideosValueChannelValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"totalVideosValueChannel"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"totalVideosValueSubscriptionsValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"totalVideosValueSubscriptions"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -164,6 +176,58 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 
 @dynamic thumbnailURL;
 
+
+
+
+
+
+@dynamic totalVideosValueChannel;
+
+
+
+- (int64_t)totalVideosValueChannelValue {
+	NSNumber *result = [self totalVideosValueChannel];
+	return [result longLongValue];
+}
+
+- (void)setTotalVideosValueChannelValue:(int64_t)value_ {
+	[self setTotalVideosValueChannel:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveTotalVideosValueChannelValue {
+	NSNumber *result = [self primitiveTotalVideosValueChannel];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveTotalVideosValueChannelValue:(int64_t)value_ {
+	[self setPrimitiveTotalVideosValueChannel:[NSNumber numberWithLongLong:value_]];
+}
+
+
+
+
+
+@dynamic totalVideosValueSubscriptions;
+
+
+
+- (int64_t)totalVideosValueSubscriptionsValue {
+	NSNumber *result = [self totalVideosValueSubscriptions];
+	return [result longLongValue];
+}
+
+- (void)setTotalVideosValueSubscriptionsValue:(int64_t)value_ {
+	[self setTotalVideosValueSubscriptions:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveTotalVideosValueSubscriptionsValue {
+	NSNumber *result = [self primitiveTotalVideosValueSubscriptions];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveTotalVideosValueSubscriptionsValue:(int64_t)value_ {
+	[self setPrimitiveTotalVideosValueSubscriptions:[NSNumber numberWithLongLong:value_]];
+}
 
 
 
