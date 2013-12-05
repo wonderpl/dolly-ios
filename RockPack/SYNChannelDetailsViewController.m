@@ -1097,23 +1097,22 @@ referenceSizeForFooterInSection: (NSInteger) section
         weakSelf.loadingMoreContent = NO;
         DebugLog(@"Update action failed");
     };
-    
-    if ([self.channel.resourceURL hasPrefix: @"https"]) // https does not cache so it is fresh
-    {
-        [appDelegate.oAuthNetworkEngine videosForChannelForUserId: appDelegate.currentUser.uniqueId
-                                                        channelId: self.channel.uniqueId
-                                                          inRange: self.dataRequestRange
-                                                completionHandler: successBlock
-                                                     errorHandler: errorBlock];
-    }
-    else
-    {
-        [appDelegate.networkEngine videosForChannelForUserId: appDelegate.currentUser.uniqueId
-                                                   channelId: self.channel.uniqueId
-                                                     inRange: self.dataRequestRange
-                                           completionHandler: successBlock
-                                                errorHandler: errorBlock];
-    }
+
+	// We want to load the current user's channel securely since it isn't cached and we always want to
+	// make sure we get the latest data for the user's own channel in case they've made an edit
+	if ([self.channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+		[appDelegate.oAuthNetworkEngine videosForChannelForUserId:appDelegate.currentUser.uniqueId
+														channelId:self.channel.uniqueId
+														  inRange:self.dataRequestRange
+												completionHandler:successBlock
+													 errorHandler:errorBlock];
+	} else {
+		[appDelegate.networkEngine videosForChannelForUserId:self.channel.channelOwner.uniqueId
+												   channelId:self.channel.uniqueId
+													 inRange:self.dataRequestRange
+										   completionHandler:successBlock
+												errorHandler:errorBlock];
+	}
 }
 
 
