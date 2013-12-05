@@ -40,12 +40,17 @@ static NSString* placeholderText = @"Your feedback...";
     
     self.title = NSLocalizedString(@"Feedback", nil);
     
-    ///self.currentValueLabel.hidden = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Send", nil)
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(sendButtonPressed:)];
+    
+    NSDictionary* textAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize: IS_IPAD ? 18.0f : 15.0f],
+                                     NSForegroundColorAttributeName: [UIColor colorWithWhite:(128.0f/255.0f) alpha:1.0f]};
+    
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:textAttributes
+                                                          forState:UIControlStateNormal];
     
     if(IS_IPAD)
     {
@@ -53,6 +58,9 @@ static NSString* placeholderText = @"Your feedback...";
                                                                                  style:UIBarButtonItemStyleBordered
                                                                                 target:self
                                                                                 action:@selector(closeButtonPressed:)];
+        
+        [self.navigationItem.leftBarButtonItem setTitleTextAttributes:textAttributes
+                                                             forState:UIControlStateNormal];
     }
     
     
@@ -62,10 +70,13 @@ static NSString* placeholderText = @"Your feedback...";
     // setting fonts
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
+    
     self.sliderLabel.font = [UIFont regularCustomFontOfSize:self.sliderLabel.font.pointSize];
     
     self.minValueLabel.font = [UIFont regularCustomFontOfSize:self.minValueLabel.font.pointSize];
+    
     self.maxValueLabel.font = [UIFont regularCustomFontOfSize:self.maxValueLabel.font.pointSize];
+    
     self.currentValueLabel.font = [UIFont regularCustomFontOfSize:self.currentValueLabel.font.pointSize];
     
     self.textView.font = [UIFont regularCustomFontOfSize:self.textView.font.pointSize];
@@ -83,11 +94,15 @@ static NSString* placeholderText = @"Your feedback...";
     
     
     // add lines around container
+    CGColorRef lineColorRef = [UIColor colorWithRed:(177.0f/255.0f)
+                                              green:(177.0f/255.0f)
+                                               blue:(177.0f/255.0f)
+                                              alpha:1.0f].CGColor;
     
-    self.containerSlider.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.containerSlider.layer.borderColor = lineColorRef;
     self.containerSlider.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
-    self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.textView.layer.borderColor = lineColorRef;
     self.textView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
     

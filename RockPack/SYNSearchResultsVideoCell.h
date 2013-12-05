@@ -13,8 +13,11 @@
 @interface SYNSearchResultsVideoCell : SYNSearchResultsCell
 
 @property (nonatomic, strong) IBOutlet UIImageView* iconImageView;
-@property (nonatomic, strong) IBOutlet UIImageView* overlayImageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel* timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel* timeStampLabel;
+
+
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
 @end

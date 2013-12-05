@@ -263,9 +263,15 @@
 "Follow All?" = "Follow All?";
 "Cannot have the same title?" = "Cannot have the same title?";
 
+//
+
+"Channel Unavailable" = "Channel Unavailable";
+"The Channel for which this notification has been issued might have been deleted" = "The Channel for which this notification has been issued might have been deleted";
+
 // == Social Buttons == //
 
 "follow" = "follow";
+"unfollow" = "unfollow";
 "add" = "add";
 "like" = "like";
 "share" = "share";

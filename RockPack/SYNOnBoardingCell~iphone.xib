@@ -47,7 +47,7 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <view contentMode="scaleToFill" id="xUG-Xx-LHN" userLabel="Follow" customClass="SYNSocialButton">
+                    <view contentMode="scaleToFill" id="xUG-Xx-LHN" userLabel="Follow" customClass="SYNSocialFollowButton">
                         <rect key="frame" x="250" y="14" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

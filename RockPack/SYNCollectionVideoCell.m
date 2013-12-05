@@ -55,9 +55,30 @@
     self.likeControl.dataItemLinked = _videoInstance;
     
     if (!_videoInstance)
-    {
         return;
-    }
+    
+    // == timestamp == //
+    
+    NSInteger durationSeconds = videoInstance.video.durationValue;
+    
+    NSMutableString* timeStampString = [[NSMutableString alloc] init];
+    NSInteger minutes = (NSInteger)(durationSeconds / 60.0f);
+    
+    if(minutes < 10)
+        [timeStampString appendString:@"0"];
+    
+    [timeStampString appendFormat:@"%i", minutes];
+    
+    [timeStampString appendString:@":"];
+    
+    NSInteger seconds = durationSeconds % 60;
+    
+    if(seconds < 10)
+        [timeStampString appendString:@"0"];
+    
+    [timeStampString appendFormat:@"%i", seconds];
+    
+    self.timeStampLabel.text = [NSString stringWithString:timeStampString];
     
     [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]

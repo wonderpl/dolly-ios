@@ -25,6 +25,8 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
 
+@property (nonatomic, strong) IBOutlet UILabel* timeStampLabel;
+
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 @property (nonatomic, weak) VideoInstance* videoInstance;

@@ -14,10 +14,7 @@
 
 typedef void (^VideoOverlayDismissBlock)(void);
 
-typedef enum NotificationMessageType : NSInteger {
-    NotificationMessageTypeError = 0,
-    NotificationMessageTypeSuccess = 1
-} NotificationMessageType;
+
 
 @interface SYNMasterViewController : UIViewController <UIPopoverControllerDelegate,
                                                        UIGestureRecognizerDelegate,
@@ -44,12 +41,14 @@ typedef enum NotificationMessageType : NSInteger {
 
 @property (nonatomic, readonly) NSArray* tabs;
 
+@property (nonatomic, readonly) BOOL hasCreatedPopularGenre;
+
 
 @property (nonatomic, readonly) SYNAbstractViewController* showingViewController;
 
 - (id) initWithContainerViewController: (UIViewController*) root;
 
-- (SYNNetworkMessageView*) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
 
 - (void) addVideoOverlayToViewController: (SYNAbstractViewController *) originViewController
                   withVideoInstanceArray: (NSArray*) videoInstanceArray
@@ -65,6 +64,8 @@ typedef enum NotificationMessageType : NSInteger {
 
 
 -(void) removeOverlayControllerAnimated:(BOOL)animated;
+
+-(void)displayNotificationsLoaded:(NSInteger)notificationsCount;
 
 // on-boarding
 

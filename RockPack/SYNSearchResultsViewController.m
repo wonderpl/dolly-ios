@@ -224,15 +224,10 @@ typedef void (^SearchResultCompleteBlock)(int);
     _currentSearchTerm = nil;
     
     if(!_currentSearchGenre)
-    {
         return;
-    }
-    
     
     if(![self clearSearchEntities])
-    {
         return;
-    }
     
     [self displayPopupMessage:@"Searching..." withLoader:YES];
     

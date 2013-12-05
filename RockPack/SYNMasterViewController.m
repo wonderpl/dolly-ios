@@ -30,6 +30,9 @@
 typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @interface SYNMasterViewController ()
+{
+    
+}
 
 @property (nonatomic) BOOL searchIsInProgress;
 @property (nonatomic) BOOL showingBackButton;
@@ -37,7 +40,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
-@property (nonatomic, strong) SYNNetworkMessageView* networkErrorNotificationView;
+@property (nonatomic, strong) SYNNetworkMessageView* networkMessageView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 
 @property (nonatomic, weak) UIViewController *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
@@ -45,7 +48,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic) CGRect overlayControllerFrame;
 
-@property (nonatomic) BOOL hasPopularGenre;
+
 
 
 
@@ -116,9 +119,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         if(success) // Genres have loaded from the server
         {
-            if(!self.hasPopularGenre) // we have no POPULAR Genre
+            if(!self.hasCreatedPopularGenre) // we have no POPULAR Genre
             {
                 [self createPopularGenre]; // create one
+                
             }
         }
         
@@ -144,9 +148,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         }
         
     }];
-    
-    
-    
     
 }
 
@@ -174,24 +175,23 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Popular Genre
 
--(BOOL)hasPopularGenre
+-(BOOL)hasCreatedPopularGenre
 {
     
-    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+    fetchRequest.entity = [NSEntityDescription entityForName: kSubGenre
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
     
-    categoriesFetchRequest.includesSubentities = NO; // this will avoid getting both the Genre and SubGenre called 'POPULAR'
     
     NSError* error;
     
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                      error: &error];
+    NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                error: &error];
     
-    return (BOOL)(genresFetchedArray.count > 0);
+    return (BOOL)(fetchedArray.count > 0);
 }
 
 
@@ -201,18 +201,18 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     // Create Genre
     Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-    popularGenre.uniqueId = kPopularGenreUniqueId;
+    popularGenre.uniqueId = [NSString stringWithString:kPopularGenreUniqueId];
     popularGenre.name = [NSString stringWithString:kPopularGenreName];
     popularGenre.priority = @(100000);
     
     // Create SubGenre
     SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
-    popularSubGenre.uniqueId = kPopularGenreUniqueId;
+    popularSubGenre.uniqueId = [NSString stringWithString:kPopularGenreUniqueId];
     popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
     popularSubGenre.priority = @(100000);
     
     // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
-    [popularSubGenre.subgenresSet addObject:popularSubGenre];
+    [popularGenre.subgenresSet addObject:popularSubGenre];
     
     NSError* error;
     return ([appDelegate.mainManagedObjectContext save:&error]);
@@ -415,58 +415,15 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                               fromCenter: (CGPoint)centerPoint
 {
     
-    if (self.videoViewerViewController)
-    {
-        //Prevent presenting two video players.
+    if (self.videoViewerViewController)  // Prevent presenting two video players.
         return;
-    }
-    
-    // Remember the view controller that we came from
- //   self.originViewController = originViewController;
-    
-//	self.videoViewerViewController = [[SYNVideoViewerViewController alloc] initWithVideoInstanceArray: videoInstanceArray selectedIndex: selectedIndex];
-//	self.videoViewerViewController.overlayParent = self;
-//	[self presentViewController:self.videoViewerViewController animated:YES completion:nil];
-	
-    /*
-    if ([originViewController isKindOfClass:[SYNChannelDetailViewController class]])
-    {
-        self.videoViewerViewController.shownFromChannelScreen = YES;
-        
-    }
-    */
-  //  [self addChildViewController: self.videoViewerViewController];
-    
-    
-//    self.videoViewerViewController.view.frame = self.overlayView.bounds;
- //   [self.overlayView addSubview: self.videoViewerViewController.view];
-	
-   // [self.videoViewerViewController prepareForAppearAnimation];
-
-   // CGPoint delta = [self.originViewController.view convertPoint:centerPoint toView:self.view];
-   // CGPoint originalCenter = self.videoViewerViewController.view.center;
-   // self.videoViewerViewController.view.center = delta;
-   // self.videoViewerViewController.view.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
-   // self.videoViewerViewController.view.alpha = 0.0f;
     
     
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
+    
 	[self presentViewController:viewController animated:YES completion:nil];
 	
-    /*
-    [UIView animateWithDuration: kVideoInAnimationDuration
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                                 self.videoViewerViewController.view.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-                                self.videoViewerViewController.view.center = originalCenter;
-                                self.videoViewerViewController.view.alpha = 1.0f;
-                     }
-                     completion: ^(BOOL finished) {
-                         [self.videoViewerViewController runAppearAnimation];
-                         self.overlayView.userInteractionEnabled = YES;
-    }];
-    */
+
 }
 
 
@@ -485,17 +442,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) reachabilityChanged: (NSNotification*) notification
 {
-#ifdef PRINT_REACHABILITY
-    NSString* reachabilityString;
-    if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
-        reachabilityString = @"WiFi";
-    else if ([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
-        reachabilityString = @"WWAN";
-    else if ([self.reachability currentReachabilityStatus] == NotReachable)
-        reachabilityString = @"None";
-    
-    DebugLog(@"Reachability == %@", reachabilityString);
-#endif
     
     if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
     {
@@ -509,8 +455,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil) : NSLocalizedString(@"No_Network_iPhone", nil);
         
-        self.networkErrorNotificationView = [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
+        [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
     }
+    
+    DebugLog(@"Network %@Reachable", [self.reachability currentReachabilityStatus] == NotReachable ? @"NOT " : @"");
 }
 
 
@@ -532,58 +480,59 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Message Popups (form Bottom)
 
-- (SYNNetworkMessageView*) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
 {
     
-    __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] init];
-    messageView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarSucess"]];
-    [messageView setText: message];
+    if(self.networkMessageView)
+        return;
     
-    [self.view addSubview: messageView];
+    self.networkMessageView = [[SYNNetworkMessageView alloc] initWithMessageType:type];
+    
+    
+    [self.networkMessageView setText: message];
+    
+    [self.view addSubview: self.networkMessageView];
     
     [UIView animateWithDuration: 0.3f
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseOut
                      animations: ^{
-                         CGRect newFrame = messageView.frame;
+                         CGRect newFrame = self.networkMessageView.frame;
                          newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - newFrame.size.height;
-                         messageView.frame = newFrame;
+                         self.networkMessageView.frame = newFrame;
                      }
                      completion: ^(BOOL finished) {
                          
-                         [UIView animateWithDuration: 0.3f
-                                               delay: 4.0f
-                                             options: UIViewAnimationOptionCurveEaseIn
-                                          animations: ^{
-                                              CGRect newFrame = messageView.frame;
-                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] + newFrame.size.height;
-                                              messageView.frame = newFrame;
-                                          }
-                                          completion: ^(BOOL finished) {
-                                              [messageView removeFromSuperview];
-                                          }];
+                         if (type == NotificationMessageTypeSuccess)
+                         {
+                             [self performSelector:@selector(hideNetworkErrorMessageView) withObject:nil afterDelay:4.0f];
+                         }
+                         
                      }];
     
-    return messageView;
     
 }
 
 -(void)hideNetworkErrorMessageView
 {
-    if(!self.networkErrorNotificationView)
+    if(!self.networkMessageView)
         return;
     
     [UIView animateWithDuration: 0.3f
-                          delay: 4.0f
+                          delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                      animations: ^{
                          
-                         CGRect newFrame = self.networkErrorNotificationView.frame;
-                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] + newFrame.size.height;
-                         self.networkErrorNotificationView.frame = newFrame;
+                         CGRect messgaeViewFrame = self.networkMessageView.frame;
+                         messgaeViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight]; // push to the bottom
+                         self.networkMessageView.frame = messgaeViewFrame;
+                         
                      }
                      completion: ^(BOOL finished) {
-                         [self.networkErrorNotificationView removeFromSuperview];
+                         
+                         [self.networkMessageView removeFromSuperview];
+                         self.networkMessageView = nil;
+                         
                      }];
 }
 
@@ -644,6 +593,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 }
 -(void)removeOnBoarding
+{
+    
+}
+
+#pragma mark - Display Notifications Number
+
+-(void)displayNotificationsLoaded:(NSInteger)notificationsCount
 {
     
 }

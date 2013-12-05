@@ -40,6 +40,18 @@
 
 #pragma mark - View Life Cycle
 
+- (id) initWithViewId:(NSString *)vid
+{
+    if (self = [super initWithViewId:vid])
+    {
+        appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+        hasUnreadNotifications = NO;
+        self.notifications = @[];
+        [self loadNotifications];
+    }
+    return self;
+}
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -47,15 +59,14 @@
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
     
-    hasUnreadNotifications = NO;
-    self.notifications = @[];
+    
     
     [tracker set: kGAIScreenName
            value: @"Notifications"];
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
-    appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
     
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -73,7 +84,17 @@
     [self.tableView registerClass: [SYNNotificationsTableViewCell class]
            forCellReuseIdentifier: kNotificationsCellIdent];
     
-    [self loadNotifications];
+    
+    if(self.notifications.count == 0)
+    {
+        
+        // display no notifications message
+        
+        [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
+    }
+    
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Get Data
@@ -120,15 +141,8 @@
     if (total == 0) // good responce but no notifications
     {
         
-        
         self.notifications = @[];
         hasUnreadNotifications = NO;
-        
-        [self.tableView reloadData];
-        
-        // display no notifications message
-        
-        [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
         
         return;
     }
@@ -157,7 +171,8 @@
     
     self.notifications = [NSArray arrayWithArray:inNotificationsutArray];
     
-    [self.tableView reloadData];
+    [appDelegate.masterViewController displayNotificationsLoaded:self.notifications.count];
+    
 }
 
 #pragma mark - TableView Delegate/Data Source
@@ -336,10 +351,7 @@
 }
 
 
-
-
-
-
+#pragma mark - Button Delegates
 
 // this is the user who initialed the action, goes to is profile
 - (void) mainImageTableCellPressed: (UIButton *) button
@@ -363,31 +375,42 @@
 
 - (void) itemImageTableCellPressed: (UIButton *) button
 {
+    
+    
     SYNNotificationsTableViewCell *cellPressed = [self getCellFromButton:button];
     
-    NSIndexPath *indexPathForCellPressed = [self.tableView
-                                            indexPathForCell: cellPressed];
+    NSIndexPath *indexPathForCellPressed = [self.tableView indexPathForCell: cellPressed];
     
     SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
     
     if (!notification)
-    {
         return;
-    }
-    
     
     switch (notification.objectType)
     {
         case kNotificationObjectTypeUserLikedYourVideo:
         {
+            
             Channel *channel = [self channelFromChannelId: notification.channelId];
+            
             
             if (!channel)
             {
+                // the channel is no longer in the DB, might have been deleted after the notification has been issued
+                
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Channel Unavailable", nil)
+                                            message:NSLocalizedString(@"The Channel for which this notification has been issued might have been deleted", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+              
+                
                 return;
             }
             
+            
             channel.autoplayId = notification.videoId;
+            
 			[self viewChannelDetails:channel];
             
             break;
@@ -500,18 +523,23 @@
 
 - (Channel *) channelFromChannelId: (NSString *) channelId
 {
+   
+    
     NSError *error;
     Channel *channel;
+    
+    if(!channelId)
+        return channel; // returns nil;
 
     NSFetchRequest *channelFetchRequest = [[NSFetchRequest alloc] init];
     
-    channelFetchRequest.entity = [NSEntityDescription entityForName: @"Channel"
+    channelFetchRequest.entity = [NSEntityDescription entityForName: kChannel
                                              inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     channelFetchRequest.predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", channelId];
 
     NSArray *matchingChannelEntries = [appDelegate.mainManagedObjectContext executeFetchRequest: channelFetchRequest
-                                                                                               error: &error];
+                                                                                          error: &error];
     
     if (matchingChannelEntries.count > 0)
     {

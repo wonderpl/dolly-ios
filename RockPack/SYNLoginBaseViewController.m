@@ -456,30 +456,36 @@
         
         // after the log-in with FB through its SDK, log in with the server hitting "/ws/login/external/"
         [_appDelegate.oAuthNetworkEngine doFacebookLoginWithAccessToken: accessTokenData.accessToken
-         expires: expDate
-         permissions: accessTokenData.permissions                 // @"read" at this time
-         completionHandler: ^(SYNOAuth2Credential *credential) {
+                                                                expires: expDate
+                                                            permissions: accessTokenData.permissions                 // @"read" at this time
+                                                      completionHandler: ^(SYNOAuth2Credential *credential) {
              // get the user data
              
              [_appDelegate.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: credential
-              completionHandler: ^(NSDictionary *dictionary) {
-                  if ([self checkAndSaveRegisteredUser: credential])
-                  {
-                      _appDelegate.currentUser.loginOriginValue = LoginOriginFacebook;
-                  }
-                  else
-                  {
-                      DebugLog(@"ERROR: User not registered (User: %@)", _appDelegate.currentUser);
-                      // TODO: handle user not being registered propery
-                  }
+                                                                   completionHandler: ^(NSDictionary *dictionary) {
+                                                                       
+                                                                       if ([self checkAndSaveRegisteredUser: credential])
+                                                                       {
+                                                                           _appDelegate.currentUser.loginOriginValue = LoginOriginFacebook;
+                                                                       }
+                                                                       else
+                                                                       {
+                                                                           DebugLog(@"ERROR: User not registered (User: %@)", _appDelegate.currentUser);
+                                                                           // TODO: handle user not being registered propery
+                                                                       }
                   
-                  completionBlock(dictionary);
-              } errorHandler: errorBlock];
-         } errorHandler: errorBlock];
-    } onFailure: ^(NSString *errorString)
-     {
-         errorBlock(errorString);
-     }];
+                                                                       completionBlock(dictionary);
+                                                                       
+                                                                   } errorHandler: errorBlock];
+                                                          
+                                                      } errorHandler: errorBlock];
+        
+        
+                        } onFailure: ^(NSString *errorString) {
+            
+            
+                                errorBlock(errorString);
+                        }];
 }
 
 
@@ -549,9 +555,8 @@
         return;
     }
     
-    self.networkErrorView = [SYNNetworkMessageView errorView];
-    [self.networkErrorView
-     setCenterVerticalOffset: 18.0f];
+    self.networkErrorView = [[SYNNetworkMessageView alloc] initWithMessageType:NotificationMessageTypeError];
+    [self.networkErrorView setCenterVerticalOffset: 18.0f];
     self.networkErrorView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarNetworkLogin"]];
     self.networkErrorView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     [self.networkErrorView

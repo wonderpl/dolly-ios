@@ -17,6 +17,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
+#import "SYNMasterViewController.h"
 
 @import QuartzCore;
 
@@ -150,7 +151,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: @"Genre"
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     
@@ -171,18 +172,38 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
-    // save the self.popularSubGenre
-    for (Genre* genre in self.genres)
-    {
-        if([genre.uniqueId isEqualToString:kPopularGenreUniqueId])
-        {
-            self.popularSubGenre = (SubGenre*)genre.subgenres[0]; // Genre POPULAR has only one SubGenre
-        }
-    }
     
     [self.categoriesCollectionView reloadData];
     
     
+}
+
+-(SubGenre*)popularSubGenre
+{
+    // lazy loading
+    if(!_popularSubGenre)
+    {
+        NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+        
+        categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+                                                    inManagedObjectContext: appDelegate.mainManagedObjectContext];
+        
+        categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
+        
+        NSError* error;
+        
+        NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                    error: &error];
+        
+        
+        
+        if(fetchedArray.count > 0)
+        {
+            _popularSubGenre = (SubGenre*)fetchedArray[0];
+        }
+    }
+    
+    return _popularSubGenre;
 }
 
 #pragma mark - CollectionView Delegate/Data Source
@@ -266,8 +287,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self dispatchSearch:suggestion
                withTitle:suggestion
                  forType:kSearchTypeTerm];
-    
-    
     
     [self closeAutocomplete];
 }

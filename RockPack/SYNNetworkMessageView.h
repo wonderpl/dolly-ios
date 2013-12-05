@@ -8,16 +8,25 @@
 
 @import UIKit;
 
-@interface SYNNetworkMessageView : UIView {
+typedef enum NotificationMessageType : NSInteger {
+    NotificationMessageTypeError = 0,
+    NotificationMessageTypeSuccess = 1
+} NotificationMessageType;
+
+@interface SYNNetworkMessageView : UIView
+{
+    NotificationMessageType _type;
 
 }
 
 
-+(id)errorView;
-
 -(void)setText:(NSString*)text;
 -(void)setIconImage:(UIImage*)image;
 -(void)setCenterVerticalOffset:(CGFloat)centerYOffset;
+
+
 -(CGFloat)height;
+
+- (id)initWithMessageType:(NotificationMessageType)type;
 
 @end

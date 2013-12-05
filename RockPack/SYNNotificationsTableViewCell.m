@@ -92,11 +92,11 @@
         
         // == Buttons == //
         self.mainImageButton = [UIButton buttonWithType: UIButtonTypeCustom];
-        self.mainImageButton.frame = self.imageViewRect;
+        
         [self addSubview: self.mainImageButton];
         
         self.secondaryImageButton = [UIButton buttonWithType: UIButtonTypeCustom];
-        self.secondaryImageButton.frame = self.imageViewRect;
+        
         [self addSubview: self.secondaryImageButton];
         
         
@@ -147,6 +147,11 @@
                                                alpha: (1.0)];
     }
     
+    // buttons
+    
+    self.mainImageButton.frame = self.imageViewRect;
+    self.secondaryImageButton.frame = self.thumbnailImageView.frame;
+    
 }
 
 
@@ -154,26 +159,23 @@
 
 - (void) setDelegate: (SYNActivityViewController *) delegate
 {
-    if (_delegate && delegate && _delegate == delegate) // assign once
+    if (_delegate)
     {
-        return;
+        // we can pass nil to remove observers
+        [self.mainImageButton removeTarget: _delegate
+                                    action: @selector(mainImageTableCellPressed:)
+                          forControlEvents: UIControlEventTouchUpInside];
+        
+        [self.secondaryImageButton removeTarget: _delegate
+                                         action: @selector(itemImageTableCellPressed:)
+                               forControlEvents: UIControlEventTouchUpInside];
     }
     
-    // we can pass nil to remove observers
-    [self.mainImageButton removeTarget: _delegate
-                                action: @selector(mainImageTableCellPressed:)
-                      forControlEvents: UIControlEventTouchUpInside];
-    
-    [self.secondaryImageButton removeTarget: _delegate
-                                     action: @selector(itemImageTableCellPressed:)
-                           forControlEvents: UIControlEventTouchUpInside];
     
     _delegate = delegate;
     
     if (!_delegate)
-    {
         return;
-    }
     
     [self.mainImageButton addTarget: _delegate
                              action: @selector(mainImageTableCellPressed:)
@@ -201,7 +203,7 @@
     
     
     CGRect textLabelFrame = self.textLabel.frame;
-    CGFloat maxWidth = IS_IPAD ? 260.0 : 140.0;
+    CGFloat maxWidth = IS_IPAD ? 220.0 : 140.0;
     
     NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: messageTitle
                                                                           attributes: @{NSFontAttributeName: self.textLabel.font}];

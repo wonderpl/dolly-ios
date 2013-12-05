@@ -11,6 +11,8 @@
 #import "SYNSocialAddButton.h"
 #import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
+#import "Video.h"
+#import "VideoInstance.h"
 #import <UIImageView+WebCache.h>
 
 @interface SYNSearchResultsVideoCell ()
@@ -39,14 +41,65 @@
 
 - (void) setVideoInstance: (VideoInstance *) videoInstance
 {
+    
+    
+    
     _videoInstance = videoInstance;
     
     if (!_videoInstance)
-    {
         return;
+    
+    
+    
+    
+    
+    // == timestamp == //
+    
+    NSInteger durationSeconds = videoInstance.video.durationValue;
+    
+    NSMutableString* timeStampString = [[NSMutableString alloc] init];
+    NSInteger minutes = (NSInteger)(durationSeconds / 60.0f);
+    
+    if(minutes < 10)
+        [timeStampString appendString:@"0"];
+    
+    [timeStampString appendFormat:@"%i", minutes];
+    
+    [timeStampString appendString:@":"];
+    
+    NSInteger seconds = durationSeconds % 60;
+    
+    if(seconds < 10)
+        [timeStampString appendString:@"0"];
+    
+    [timeStampString appendFormat:@"%i", seconds];
+    
+    self.timeStampLabel.text = [NSString stringWithString:timeStampString];
+    
+    
+    // == date components == //
+    
+    NSDateComponents *timeAgoComponents = videoInstance.timeAgo;
+    
+    if (timeAgoComponents.year)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.month)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.day)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"": @"s"];
+    }
+    else if (timeAgoComponents.minute)
+    {
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
     }
     
-    // Methods like sizeWithFont failed so first shrink and then get the correct height
+    
+    // == Methods like sizeWithFont failed so first shrink and then get the correct height == //
     CGRect titleLabelFrame = self.titleLabel.frame;
     self.titleLabel.text = _videoInstance.title;
     [self.titleLabel sizeToFit];
@@ -54,8 +107,7 @@
     self.titleLabel.frame = titleLabelFrame;
     
     
-    // set social buttons
-    
+    // == Set Social Buttons == //
     self.likeSocialButton.dataItemLinked = _videoInstance;
     self.addSocialButton.dataItemLinked = _videoInstance;
     self.shareSocialButton.dataItemLinked = _videoInstance;

@@ -7,6 +7,9 @@
 //
 
 #import "SYNButton.h"
+#import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
+
 @import UIKit;
 
 @interface SYNSocialButton : SYNButton
