@@ -1107,7 +1107,7 @@ referenceSizeForFooterInSection: (NSInteger) section
 												completionHandler:successBlock
 													 errorHandler:errorBlock];
 	} else {
-		[appDelegate.networkEngine videosForChannelForUserId:appDelegate.currentUser.uniqueId
+		[appDelegate.networkEngine videosForChannelForUserId:self.channel.channelOwner.uniqueId
 												   channelId:self.channel.uniqueId
 													 inRange:self.dataRequestRange
 										   completionHandler:successBlock
