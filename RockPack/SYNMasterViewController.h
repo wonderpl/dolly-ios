@@ -48,7 +48,7 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 - (id) initWithContainerViewController: (UIViewController*) root;
 
-- (SYNNetworkMessageView*) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
 
 - (void) addVideoOverlayToViewController: (SYNAbstractViewController *) originViewController
                   withVideoInstanceArray: (NSArray*) videoInstanceArray

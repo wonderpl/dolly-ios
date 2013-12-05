@@ -40,7 +40,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
-@property (nonatomic, strong) SYNNetworkMessageView* networkErrorNotificationView;
+@property (nonatomic, strong) SYNNetworkMessageView* networkMessageView;
 @property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 
 @property (nonatomic, weak) UIViewController *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
@@ -445,17 +445,6 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 - (void) reachabilityChanged: (NSNotification*) notification
 {
-#ifdef PRINT_REACHABILITY
-    NSString* reachabilityString;
-    if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
-        reachabilityString = @"WiFi";
-    else if ([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
-        reachabilityString = @"WWAN";
-    else if ([self.reachability currentReachabilityStatus] == NotReachable)
-        reachabilityString = @"None";
-    
-    DebugLog(@"Reachability == %@", reachabilityString);
-#endif
     
     if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
     {
@@ -469,8 +458,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil) : NSLocalizedString(@"No_Network_iPhone", nil);
         
-        self.networkErrorNotificationView = [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
+        [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
     }
+    
+    DebugLog(@"Network %@Reachable", [self.reachability currentReachabilityStatus] == NotReachable ? @"NOT " : @"");
 }
 
 
@@ -492,59 +483,58 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Message Popups (form Bottom)
 
-- (SYNNetworkMessageView*) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
+- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
 {
     
-    __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] initWithMessageType:type];
+    if(self.networkMessageView)
+        return;
+    
+    self.networkMessageView = [[SYNNetworkMessageView alloc] initWithMessageType:type];
     
     
-    [messageView setText: message];
+    [self.networkMessageView setText: message];
     
-    [self.view addSubview: messageView];
+    [self.view addSubview: self.networkMessageView];
     
     [UIView animateWithDuration: 0.3f
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseOut
                      animations: ^{
-                         CGRect newFrame = messageView.frame;
+                         CGRect newFrame = self.networkMessageView.frame;
                          newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - newFrame.size.height;
-                         messageView.frame = newFrame;
+                         self.networkMessageView.frame = newFrame;
                      }
                      completion: ^(BOOL finished) {
                          
-                         [UIView animateWithDuration: 0.3f
-                                               delay: 4.0f
-                                             options: UIViewAnimationOptionCurveEaseIn
-                                          animations: ^{
-                                              CGRect newFrame = messageView.frame;
-                                              newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] + newFrame.size.height;
-                                              messageView.frame = newFrame;
-                                          }
-                                          completion: ^(BOOL finished) {
-                                              [messageView removeFromSuperview];
-                                          }];
+                         if (type == NotificationMessageTypeSuccess)
+                         {
+                             [self performSelector:@selector(hideNetworkErrorMessageView) withObject:nil afterDelay:4.0f];
+                             
+                             
+                         }
+                         
                      }];
     
-    return messageView;
     
 }
 
 -(void)hideNetworkErrorMessageView
 {
-    if(!self.networkErrorNotificationView)
+    if(!self.networkMessageView)
         return;
     
     [UIView animateWithDuration: 0.3f
-                          delay: 4.0f
+                          delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                      animations: ^{
                          
-                         CGRect newFrame = self.networkErrorNotificationView.frame;
-                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] + newFrame.size.height;
-                         self.networkErrorNotificationView.frame = newFrame;
+                         CGRect messgaeViewFrame = self.networkMessageView.frame;
+                         messgaeViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight]; // push to the bottom
+                         self.networkMessageView.frame = messgaeViewFrame;
                      }
                      completion: ^(BOOL finished) {
-                         [self.networkErrorNotificationView removeFromSuperview];
+                         [self.networkMessageView removeFromSuperview];
+                         self.networkMessageView = nil;
                      }];
 }
 
