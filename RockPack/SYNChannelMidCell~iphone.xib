@@ -15,22 +15,28 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" id="hV6-6M-JIz">
-                        <rect key="frame" x="0.0" y="0.0" width="321" height="72"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="A5P-th-oX8" userLabel="View - Outer Description View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5N6-qU-QnL" userLabel="Button - Delete (OffScreen)">
+                                <rect key="frame" x="200" y="0.0" width="120" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mpo-w3-cKk" userLabel="Label - Description Label">
-                                        <rect key="frame" x="20" y="15" width="246" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </view>
+                                <color key="backgroundColor" red="0.79215686269999996" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteChannel:" destination="3" eventType="touchUpInside" id="Zc8-tX-udS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mpo-w3-cKk" userLabel="Label - Description Label">
+                                <rect key="frame" x="0.0" y="0.0" width="260" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.30551437040000001" green="0.63401003649999998" blue="0.1675980839" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" id="UgH-dt-V5g" userLabel="View - Bottom Line">
                                 <rect key="frame" x="0.0" y="70" width="322" height="1"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -94,8 +100,8 @@
                 <outlet property="boarderView" destination="hV6-6M-JIz" id="L3r-Ss-KpG"/>
                 <outlet property="bottomBarView" destination="ZTg-Ce-S2r" id="Sof-lm-tBD"/>
                 <outlet property="containerView" destination="UUL-SF-FNl" id="1u2-bb-DPV"/>
-                <outlet property="descriptionLabel" destination="Mpo-w3-cKk" id="ngR-hD-Hun"/>
-                <outlet property="descriptionView" destination="A5P-th-oX8" id="zRt-95-k7j"/>
+                <outlet property="deleteButton" destination="5N6-qU-QnL" id="Xgd-Wy-UQg"/>
+                <outlet property="descriptionLabel" destination="Mpo-w3-cKk" id="q9U-Nb-qKB"/>
                 <outlet property="followButton" destination="vfH-7e-CmQ" id="Mdu-Ge-Dis"/>
                 <outlet property="followerCountLabel" destination="UQE-Qn-569" id="hRG-55-M2V"/>
                 <outlet property="videoCountLabel" destination="9F0-KR-0sT" id="Yni-9T-iXb"/>

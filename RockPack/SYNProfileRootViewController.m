@@ -912,7 +912,7 @@
             channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
             
             [channelThumbnailCell setHiddenForFollowButton:(self.modeType == kModeMyOwnProfile)];
-            
+            [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
             NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
             [channelThumbnailCell.followerCountLabel setText:subscribersString];
             
@@ -939,7 +939,8 @@
                 {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
                 }
-                
+                [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
+
                 NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
                 [channelThumbnailCell.followerCountLabel setText:subscribersString];
                 
@@ -1546,7 +1547,7 @@
 
 - (void) displayNameButtonPressed: (UIButton *) button
 {
-    SYNChannelThumbnailCell *parent = (SYNChannelThumbnailCell *) [[button superview] superview];
+    SYNChannelMidCell *parent = (SYNChannelMidCell *) [[button superview] superview];
     
     NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForCell: parent];
     
@@ -1558,7 +1559,16 @@
 // Channels are the cell in the collection view
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
-    SYNChannelThumbnailCell *selectedCell = (SYNChannelThumbnailCell *) cell;
+    
+    
+    SYNChannelMidCell *selectedCell = (SYNChannelMidCell *) cell;
+    
+    if (selectedCell.state != ChannelMidCellStateDefault) {
+        
+        [selectedCell setState: ChannelMidCellStateDefault];
+        return;
+    }
+    
     if([cell.superview isEqual:self.channelThumbnailCollectionView])
     {
         NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
@@ -1798,15 +1808,15 @@
     
     for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
     {
-        if ([cell respondsToSelector:@selector(moveToCentre)]) {
-            [((SYNChannelMidCell*)cell) moveToCentre];
+        if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
+            ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
         }
     }
     
     for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
     {
-        if ([cell respondsToSelector:@selector(moveToCentre)]) {
-            [((SYNChannelMidCell*)cell) moveToCentre];
+        if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
+            ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
         }
     }
     
@@ -2546,6 +2556,11 @@ finishedWithImage: (UIImage *) image
 }
 
 
+-(void)deleteButtonTapped: (SYNChannelMidCell*) cell{
+    
+    NSLog(@"Delete");
+    
+}
 
 #pragma mark - Save new channel
 

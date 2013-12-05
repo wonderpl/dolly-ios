@@ -26,8 +26,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
-@property (nonatomic) BOOL descriptionMode;
-@property (nonatomic) BOOL deleteMode;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 
 
 @end
@@ -39,7 +38,7 @@
     [super awakeFromNib];
     
     self.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.followButton.titleLabel.font.pointSize];
-  
+    
     
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
@@ -57,7 +56,7 @@
         
     }
     
-    self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDescriptionSwipe:)];
+    self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipe:)];
     [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
     self.rightSwipe.delegate = self;
     
@@ -68,11 +67,17 @@
     self.leftSwipe.delegate = self;
     
     [self.containerView addGestureRecognizer:self.leftSwipe];
-    self.deleteMode = NO;
-    self.descriptionMode = NO;
     
     [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
-
+    
+    self.state = ChannelMidCellStateDefault;
+    
+    [self.deleteButton.titleLabel setFont:[UIFont lightCustomFontOfSize:19]];
+    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //    [self.deleteButton setTitle:NSLocalizedString(@"Delete?", @"Delete a channel from profile") forState:UIControlStateNormal];
+    [self.deleteButton setTitle:@"Delete?" forState:UIControlStateNormal];
+    
+    
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
@@ -155,96 +160,48 @@
     
 }
 
-- (IBAction)showDescriptionSwipe:(UISwipeGestureRecognizer *)recognizer
+- (IBAction)rightSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
     
-    if (self.deleteMode || self.descriptionMode) {
-        [self moveToCentre];
-    }
-    else
-    {
-        [self showDescription];
+    if (self.state == ChannelMidCellStateDefault) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
         
+        self.state = ChannelMidCellStateDescription;
     }
+    else {
+        
+        if (self.state == ChannelMidCellStateDescription) {
+            self.state = ChannelMidCellStateDefault;
+        }
+        else if(self.state == ChannelMidCellStateDelete){
+            self.state = ChannelMidCellStateDefault;
+            
+        }
+    }
+}
+- (IBAction)deleteChannel:(id)sender {
+    [self.viewControllerDelegate deleteButtonTapped: self];
 }
 
 - (IBAction)leftSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-    
-    if (self.deleteMode || self.descriptionMode) {
-        [self moveToCentre];
+    if (self.state == ChannelMidCellStateDefault) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
+        
+        self.state = ChannelMidCellStateDelete;
     }
-    else
-    {
-        // [self showDelete];
-    }
-    
-}
-
--(void) showDescription
-{
-    [UIView animateWithDuration:0.5f animations:^{
-        if (self.containerView.frame.origin.x ==0)
-        {
-            CGRect tmpRect = self.containerView.frame;
-            if (IS_IPHONE)
-            {
-                tmpRect.origin.x += kShowDescptionIPhone;
-            }
-            else
-            {
-                tmpRect.origin.x += kShowDescptionIPad;
-            }
-            self.containerView.frame = tmpRect;
-            self.descriptionMode = YES;
-            
-        }
-    }];
-    
-    
-}
-
--(void) moveToCentre {
-    [UIView animateWithDuration:0.5f animations:^{
+    else{
         
-        if (self.containerView.frame.origin.x !=0)
-        {
-            CGRect tmpRect = self.containerView.frame;
+        if (self.state == ChannelMidCellStateDelete) {
+            self.state = ChannelMidCellStateDefault;
+        }else if(self.state == ChannelMidCellStateDescription){
+            self.state = ChannelMidCellStateDefault;
             
-            tmpRect.origin.x = 0;
-            self.containerView.frame = tmpRect;
-            self.deleteMode = NO;
-            self.descriptionMode = NO;
-            
-        }
-    }];
-}
-
-
-
--(void) showDelete{
-    
-    [UIView animateWithDuration:0.5f animations:^{
-        
-        CGRect tmpRect = self.containerView.frame;
-        
-        if (IS_IPHONE)
-        {
-            tmpRect.origin.x -= 50;
-        }
-        else
-        {
-            tmpRect.origin.x -= 50;
-        }
-        self.containerView.frame = tmpRect;
-        self.deleteMode = YES;
-    }];
-    
+        }}
     
 }
 - (IBAction)followChannel:(id)sender
-{    
+{
     [self.viewControllerDelegate followButtonTapped: self];
 }
 
@@ -261,5 +218,72 @@
         }
     }
 }
+
+
+-(void)setState:(ChannelMidCellState)state
+{
+    _state = state;
+    switch (_state)
+    {
+        case ChannelMidCellStateDefault:
+        {
+            [UIView animateWithDuration:0.5f animations:^{
+                
+                CGRect tmpRect = self.containerView.frame;
+                tmpRect.origin.x = 0;
+                self.containerView.frame = tmpRect;
+                
+            }];
+            
+        }
+            
+            break;
+        case ChannelMidCellStateDelete:{
+            self.deleteButton.hidden = NO;
+            self.descriptionLabel.hidden = YES;
+            [UIView animateWithDuration:0.5f animations:^{
+                
+                CGRect tmpRect = self.containerView.frame;
+                
+                if (IS_IPHONE)
+                {
+                    tmpRect.origin.x = -120;
+                }
+                else
+                {
+                    tmpRect.origin.x = -120;
+                }
+                self.containerView.frame = tmpRect;
+            }];
+            
+            
+            
+        }
+            
+            break;
+        case ChannelMidCellStateDescription:
+        {
+            
+            self.deleteButton.hidden = YES;
+            self.descriptionLabel.hidden = NO;
+            [UIView animateWithDuration:0.5f animations:^{
+                CGRect tmpRect = self.containerView.frame;
+                if (IS_IPHONE)
+                {
+                    tmpRect.origin.x = kShowDescptionIPhone;
+                }
+                else
+                {
+                    tmpRect.origin.x = kShowDescptionIPad;
+                }
+                self.containerView.frame = tmpRect;
+            }];
+            
+        }
+            break;
+    }
+    
+}
+
 
 @end

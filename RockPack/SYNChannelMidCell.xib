@@ -18,11 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="280" height="80"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="Qez-y8-5Ay" userLabel="View - Description View">
-                                <rect key="frame" x="0.0" y="0.0" width="279" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HUn-aA-WSg" userLabel="Button - Delete (Offscreen)">
+                                <rect key="frame" x="160" y="0.0" width="120" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.13360003340000001" blue="0.23229262489999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <color key="backgroundColor" red="0.792156862745098" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteChannel:" destination="3" eventType="touchUpInside" id="sxk-oZ-4ax"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="96x-Ly-DNm">
+                                <rect key="frame" x="0.0" y="0.0" width="230" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.30551437040000001" green="0.63401003649999998" blue="0.1675980839" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view autoresizesSubviews="NO" contentMode="scaleToFill" id="IsZ-bf-jJ2">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -58,7 +72,7 @@
                                         <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IeH-F8-ivN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IeH-F8-ivN" userLabel="Button - Follow">
                                         <rect key="frame" x="229" y="4" width="51" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -85,7 +99,8 @@
                 <outlet property="boarderView" destination="YqO-ZS-QBX" id="qZ6-OC-S2S"/>
                 <outlet property="bottomBarView" destination="lkc-YE-xpt" id="Ae4-os-EGU"/>
                 <outlet property="containerView" destination="IsZ-bf-jJ2" id="921-X5-Yfi"/>
-                <outlet property="descriptionView" destination="Qez-y8-5Ay" id="7gx-xF-uiJ"/>
+                <outlet property="deleteButton" destination="HUn-aA-WSg" id="Qom-01-Zp4"/>
+                <outlet property="descriptionLabel" destination="96x-Ly-DNm" id="qO5-yc-vm1"/>
                 <outlet property="followButton" destination="IeH-F8-ivN" id="VA5-2Z-htv"/>
                 <outlet property="followerCountLabel" destination="3c9-8H-dtP" id="XgG-6y-DrQ"/>
                 <outlet property="videoCountLabel" destination="Qr7-Zc-JY5" id="V4m-OL-8Lb"/>
