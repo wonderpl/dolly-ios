@@ -105,20 +105,24 @@
     
     if (timeAgoComponents.year)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
     }
     else if (timeAgoComponents.month)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"": @"s"];
     }
     else if (timeAgoComponents.day)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"": @"s"];
     }
     else if (timeAgoComponents.minute)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
     }
+    
+    
+    
+    // == buttons == //
     
     self.likeControl.selected = videoInstance.starredByUserValue;
     

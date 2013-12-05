@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) IBOutlet UIImageView* iconImageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* timeStampLabel;
 
 

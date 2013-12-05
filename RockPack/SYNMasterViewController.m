@@ -418,58 +418,15 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                               fromCenter: (CGPoint)centerPoint
 {
     
-    if (self.videoViewerViewController)
-    {
-        //Prevent presenting two video players.
+    if (self.videoViewerViewController)  // Prevent presenting two video players.
         return;
-    }
-    
-    // Remember the view controller that we came from
- //   self.originViewController = originViewController;
-    
-//	self.videoViewerViewController = [[SYNVideoViewerViewController alloc] initWithVideoInstanceArray: videoInstanceArray selectedIndex: selectedIndex];
-//	self.videoViewerViewController.overlayParent = self;
-//	[self presentViewController:self.videoViewerViewController animated:YES completion:nil];
-	
-    /*
-    if ([originViewController isKindOfClass:[SYNChannelDetailViewController class]])
-    {
-        self.videoViewerViewController.shownFromChannelScreen = YES;
-        
-    }
-    */
-  //  [self addChildViewController: self.videoViewerViewController];
-    
-    
-//    self.videoViewerViewController.view.frame = self.overlayView.bounds;
- //   [self.overlayView addSubview: self.videoViewerViewController.view];
-	
-   // [self.videoViewerViewController prepareForAppearAnimation];
-
-   // CGPoint delta = [self.originViewController.view convertPoint:centerPoint toView:self.view];
-   // CGPoint originalCenter = self.videoViewerViewController.view.center;
-   // self.videoViewerViewController.view.center = delta;
-   // self.videoViewerViewController.view.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
-   // self.videoViewerViewController.view.alpha = 0.0f;
     
     
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
+    
 	[self presentViewController:viewController animated:YES completion:nil];
 	
-    /*
-    [UIView animateWithDuration: kVideoInAnimationDuration
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseInOut
-                     animations: ^{
-                                 self.videoViewerViewController.view.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-                                self.videoViewerViewController.view.center = originalCenter;
-                                self.videoViewerViewController.view.alpha = 1.0f;
-                     }
-                     completion: ^(BOOL finished) {
-                         [self.videoViewerViewController runAppearAnimation];
-                         self.overlayView.userInteractionEnabled = YES;
-    }];
-    */
+
 }
 
 
@@ -538,8 +495,9 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 - (SYNNetworkMessageView*) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
 {
     
-    __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] init];
-    messageView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"BarSucess"]];
+    __block SYNNetworkMessageView* messageView = [[SYNNetworkMessageView alloc] initWithMessageType:type];
+    
+    
     [messageView setText: message];
     
     [self.view addSubview: messageView];
