@@ -47,12 +47,21 @@ static NSString* placeholderText = @"Your feedback...";
                                                                              target:self
                                                                              action:@selector(sendButtonPressed:)];
     
+    NSDictionary* textAttributes = @{NSFontAttributeName: [UIFont regularCustomFontOfSize:IS_IPAD ? 18.0f : 15.0f],
+                                     NSForegroundColorAttributeName: [UIColor colorWithWhite:128.0f/255.0f alpha:1.0f]};
+    
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:textAttributes
+                                                          forState:UIControlStateNormal];
+    
     if(IS_IPAD)
     {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
                                                                                  style:UIBarButtonItemStyleBordered
                                                                                 target:self
                                                                                 action:@selector(closeButtonPressed:)];
+        
+        [self.navigationItem.leftBarButtonItem setTitleTextAttributes:textAttributes
+                                                             forState:UIControlStateNormal];
     }
     
     
@@ -83,11 +92,15 @@ static NSString* placeholderText = @"Your feedback...";
     
     
     // add lines around container
+    CGColorRef lineColorRef = [UIColor colorWithRed:(177.0f/255.0f)
+                                              green:(177.0f/255.0f)
+                                               blue:(177.0f/255.0f)
+                                              alpha:1.0f].CGColor;
     
-    self.containerSlider.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.containerSlider.layer.borderColor = lineColorRef;
     self.containerSlider.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
-    self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.textView.layer.borderColor = lineColorRef;
     self.textView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
     
