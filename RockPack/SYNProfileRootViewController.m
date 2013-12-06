@@ -909,12 +909,6 @@
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
             }
         }
-        else if(self.modeType == kModeMyOwnProfile && collectionView == self
-                .channelThumbnailCollectionView)
-        {
-            channelThumbnailCell.deletableCell = YES;
-        }
-        
         if(collectionView == self.channelThumbnailCollectionView)
         {
             channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
@@ -936,6 +930,13 @@
 
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
             
+            // indexPath.row == Favourites cell, which is a special case
+            if(self.modeType == kModeMyOwnProfile && indexPath.row != 1)
+            {
+                channelThumbnailCell.deletableCell = YES;
+            }
+            
+
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
