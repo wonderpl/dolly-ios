@@ -14,6 +14,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SYNFeedbackViewController () <UITextViewDelegate>
+{
+    UIColor* purpleColor;
+}
 
 @property (nonatomic, strong) IBOutlet UISlider* slider;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
@@ -30,27 +33,15 @@
 
 @property (nonatomic, strong) IBOutlet UIView* containerSlider;
 
+@property (nonatomic, readonly) NSArray* sliderElements;
+
 @end
 
 @implementation SYNFeedbackViewController
 
 static NSString* placeholderText = @"Your feedback...";
 
-- (void) setHasTouchedSlider:(BOOL)hasTouchedSlider
-{
-    _hasTouchedSlider = hasTouchedSlider;
-    
-    NSArray* relatedViews = @[self.slider, self.minValueLabel, self.maxValueLabel, self.currentValueLabel];
-    
-    [UIView animateWithDuration:0.2f animations:^{
-        
-        for (UIView* v in relatedViews)
-            v.alpha = _hasTouchedSlider ? 1.0f : 0.5f;
-        
-    }];
-    
-    
-}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -98,7 +89,7 @@ static NSString* placeholderText = @"Your feedback...";
     
     self.textView.font = [UIFont regularCustomFontOfSize:self.textView.font.pointSize];
     
-    
+    purpleColor = self.slider.tintColor;
     
     
     
@@ -175,8 +166,21 @@ static NSString* placeholderText = @"Your feedback...";
 {
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    
+    // do checks
+    
+    if(!self.hasTouchedSlider)
+    {
+        [self lightUpSlider:YES
+                   forError:YES];
+        
+        return;
+    }
+    
     [self sendMessage];
 }
+
+
 
 - (void) closeButtonPressed:(UIBarButtonItem*)buttonItem
 {
@@ -253,6 +257,63 @@ static NSString* placeholderText = @"Your feedback...";
         textView.textColor = [UIColor lightTextColor]; //optional
     }
     [textView resignFirstResponder];
+}
+
+#pragma mark - Slider Presentation States
+
+- (void) setHasTouchedSlider:(BOOL)hasTouchedSlider
+{
+    _hasTouchedSlider = hasTouchedSlider;
+    
+    if(_hasTouchedSlider)
+    {
+        [self lightUpSlider:YES];
+    }
+    else
+    {
+        [self lightUpSlider:NO];
+    }
+    
+}
+
+- (void) lightUpSlider:(BOOL)lightUp
+{
+    [self lightUpSlider:lightUp forError:NO];
+}
+
+- (void) lightUpSlider:(BOOL)lightUp forError:(BOOL)forError
+{
+    
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        
+        for (UIView* v in self.sliderElements)
+        {
+            v.alpha = lightUp ? 1.0f : 0.5f;
+            
+            if(forError)
+            {
+                v.tintColor = [UIColor redColor];
+                if([v isKindOfClass:[UILabel class]])
+                    ((UILabel*)v).textColor = [UIColor redColor];
+            }
+            else
+            {
+                v.tintColor = purpleColor;
+                if([v isKindOfClass:[UILabel class]])
+                    ((UILabel*)v).textColor = purpleColor;
+            }
+        }
+        
+        
+    }];
+    
+}
+
+
+- (NSArray*)sliderElements
+{
+    return @[self.slider, self.minValueLabel, self.maxValueLabel, self.currentValueLabel];
 }
 
 @end
