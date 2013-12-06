@@ -336,8 +336,15 @@
 //    NSLog(@"%@", dictionary);
 
     NSDictionary *videos = [dictionary objectForKey:@"videos"];
-    self.totalVideosValue = [videos objectForKey:@"total"];
-//
+    
+    if(![videos[@"total"] isKindOfClass:[NSNull class]])
+    {
+        if ([[videos objectForKey:@"total"] isKindOfClass:[NSNull class]])
+        {
+            self.totalVideosValue = [videos objectForKey:@"total"];
+        }
+    }
+        //
 //    NSLog(@"aaaaaa : %ld", (long)self.totalVideosValue);
 }
 

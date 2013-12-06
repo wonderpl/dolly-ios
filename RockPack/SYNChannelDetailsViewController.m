@@ -794,7 +794,7 @@ UIPopoverControllerDelegate>
             
             // set the request to maximum
             
-            self.dataRequestRange = NSMakeRange(0, MAXIMUM_REQUEST_LENGTH);
+            self.dataRequestRange = NSMakeRange(0, 48);
         }
         
         [[NSNotificationCenter defaultCenter] addObserver: self
@@ -1026,9 +1026,10 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (void) loadMoreVideos
 {
+    
+    self.dataItemsAvailable = self.channel.totalVideosValue;
     if(!self.moreItemsToLoad)
         return;
-    
     
     self.loadingMoreContent = YES;
     
