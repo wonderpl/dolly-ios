@@ -17,6 +17,7 @@ const struct ChannelAttributes ChannelAttributes = {
 	.subscribedByUser = @"subscribedByUser",
 	.subscribersCount = @"subscribersCount",
 	.title = @"title",
+	.totalVideosValue = @"totalVideosValue",
 };
 
 const struct ChannelRelationships ChannelRelationships = {
@@ -82,6 +83,11 @@ const struct ChannelFetchedProperties ChannelFetchedProperties = {
 	}
 	if ([key isEqualToString:@"subscribersCountValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"subscribersCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"totalVideosValueValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"totalVideosValue"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -292,6 +298,32 @@ const struct ChannelFetchedProperties ChannelFetchedProperties = {
 
 @dynamic title;
 
+
+
+
+
+
+@dynamic totalVideosValue;
+
+
+
+- (int64_t)totalVideosValueValue {
+	NSNumber *result = [self totalVideosValue];
+	return [result longLongValue];
+}
+
+- (void)setTotalVideosValueValue:(int64_t)value_ {
+	[self setTotalVideosValue:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveTotalVideosValueValue {
+	NSNumber *result = [self primitiveTotalVideosValue];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveTotalVideosValueValue:(int64_t)value_ {
+	[self setPrimitiveTotalVideosValue:[NSNumber numberWithLongLong:value_]];
+}
 
 
 

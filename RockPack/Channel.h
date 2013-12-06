@@ -4,7 +4,6 @@
 @interface Channel : _Channel
 
 @property (nonatomic) BOOL hasChangedSubscribeValue;
-@property (nonatomic) NSInteger totalVideosValue;
 
 @property (nonatomic, strong) NSString* autoplayId;
 

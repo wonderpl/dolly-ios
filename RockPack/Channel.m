@@ -18,7 +18,6 @@
 @implementation Channel
 
 @synthesize hasChangedSubscribeValue;
-@synthesize totalVideosValue;
 @synthesize autoplayId;
 
 #pragma mark - Object factory
@@ -42,6 +41,7 @@
     copyChannel.lastUpdated = channel.lastUpdated;
     copyChannel.subscribersCount = channel.subscribersCount;
     copyChannel.subscribedByUserValue = channel.subscribedByUserValue;
+    copyChannel.totalVideosValue = channel.totalVideosValue;
     copyChannel.favouritesValue = channel.favouritesValue;
     copyChannel.resourceURL = channel.resourceURL;
     copyChannel.channelDescription = channel.channelDescription;
@@ -140,15 +140,14 @@
     
     if (!(ignoringObjects & kIgnoreVideoInstanceObjects) && hasVideoInstances)
     {
-        NSNumber *totalNumber = videosDictionary[@"total"];
         
-        if ([totalNumber isKindOfClass: [NSNumber class]])
+        if (![videosDictionary[@"total"] isKindOfClass: [NSNull class]])
         {
-            self.totalVideosValue = [totalNumber integerValue];
+            self.totalVideosValue = videosDictionary[@"total"];
         }
         else
         {
-            self.totalVideosValue = itemArray.count; // if the 'total' value was not returned then pass the existing numbers fetched
+            self.totalVideosValue = [NSNumber numberWithInt:itemArray.count]; // if the 'total' value was not returned then pass the existing numbers fetched
         }
         
         NSMutableDictionary *videoInsanceByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.videoInstances.count];
@@ -293,6 +292,8 @@
 
 - (void) setBasicAttributesFromDictionary: (NSDictionary *) dictionary
 {
+    
+    
     NSNumber *categoryNumber = dictionary[@"category"];
     
     self.categoryId = (categoryNumber && [categoryNumber isKindOfClass: [NSNumber class]]) ? [categoryNumber stringValue] : @"";
@@ -331,6 +332,13 @@
     
     self.eCommerceURL = [dictionary objectForKey: @"ecommerce_url"
                                      withDefault: @""];
+    
+//    NSLog(@"%@", dictionary);
+
+    NSDictionary *videos = [dictionary objectForKey:@"videos"];
+    self.totalVideosValue = [videos objectForKey:@"total"];
+//
+//    NSLog(@"aaaaaa : %ld", (long)self.totalVideosValue);
 }
 
 
