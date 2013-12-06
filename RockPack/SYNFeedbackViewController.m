@@ -82,15 +82,7 @@ static NSString* placeholderText = @"Your feedback...";
     self.textView.font = [UIFont regularCustomFontOfSize:self.textView.font.pointSize];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardNotified:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardNotified:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:self.view.window];
     
     
     // add lines around container
@@ -118,6 +110,30 @@ static NSString* placeholderText = @"Your feedback...";
                                                                           alpha: 1.0f]];
     
     
+}
+
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) keyboardNotified: (NSNotification*) notification
