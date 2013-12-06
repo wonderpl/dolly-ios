@@ -7,12 +7,18 @@
 //
 
 #import "SYNCommentingCollectionViewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SYNCommentingCollectionViewCell
 
 - (void) awakeFromNib
 {
     [super awakeFromNib];
+    
+    self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.height * 0.5f;
+    
+    
+    
 }
 
 

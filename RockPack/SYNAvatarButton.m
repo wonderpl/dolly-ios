@@ -15,7 +15,7 @@
     [super awakeFromNib];
     
     self.layer.cornerRadius = self.frame.size.height * 0.5;
-
+    
     self.clipsToBounds = YES;
 }
 

@@ -1307,6 +1307,8 @@
 		BEE01B621851E16C000CF681 /* SYNCommentingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B601851E16C000CF681 /* SYNCommentingViewController.xib */; };
 		BEE01B641851E187000CF681 /* SYNCommentingViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B631851E187000CF681 /* SYNCommentingViewController~iphone.xib */; };
 		BEE01B681851E7B1000CF681 /* SYNCommentingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B671851E7B1000CF681 /* SYNCommentingCollectionViewCell.m */; };
+		BEE01B6A18520FA6000CF681 /* SYNCommentingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */; };
+		BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
 		BEEB6F1C1721713500FEFA43 /* PanelMenuBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEB6F1A1721713500FEFA43 /* PanelMenuBottom.png */; };
@@ -2874,6 +2876,9 @@
 		BEE01B631851E187000CF681 /* SYNCommentingViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNCommentingViewController~iphone.xib"; sourceTree = "<group>"; };
 		BEE01B661851E7B1000CF681 /* SYNCommentingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCommentingCollectionViewCell.h; sourceTree = "<group>"; };
 		BEE01B671851E7B1000CF681 /* SYNCommentingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCommentingCollectionViewCell.m; sourceTree = "<group>"; };
+		BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCommentingCollectionViewCell.xib; sourceTree = "<group>"; };
+		BEE01B6B18521418000CF681 /* SYNSocialCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialCommentButton.h; sourceTree = "<group>"; };
+		BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialCommentButton.m; sourceTree = "<group>"; };
 		BEE4A6BD170B0FD6008F9D05 /* dolly-Release-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "dolly-Release-Info.plist"; path = "RockPack/dolly-Release-Info.plist"; sourceTree = "<group>"; };
 		BEE4A6BF170B273F008F9D05 /* SYNAccountSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingTableViewCell.h; sourceTree = "<group>"; };
 		BEE4A6C0170B563D008F9D05 /* SYNAccountSettingsEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsEmail.h; sourceTree = "<group>"; };
@@ -5768,14 +5773,16 @@
 			children = (
 				01655432183680CE009B161C /* SYNFormButton.h */,
 				01655433183680CE009B161C /* SYNFormButton.m */,
-				0125FB6D182BEAFB00EC822E /* SYNAvatarButton.h */,
-				0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */,
 				016AED391821349800DEAF7E /* SYNSocialButton.h */,
 				016AED3A1821349800DEAF7E /* SYNSocialButton.m */,
+				0125FB6D182BEAFB00EC822E /* SYNAvatarButton.h */,
+				0125FB6E182BEAFB00EC822E /* SYNAvatarButton.m */,
 				BEB31372181AC6DB00FAF98A /* SYNSocialAddButton.h */,
 				BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */,
 				BEE01B58184F5868000CF681 /* SYNSocialFollowButton.h */,
 				BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */,
+				BEE01B6B18521418000CF681 /* SYNSocialCommentButton.h */,
+				BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -5913,6 +5920,7 @@
 			children = (
 				BEE01B661851E7B1000CF681 /* SYNCommentingCollectionViewCell.h */,
 				BEE01B671851E7B1000CF681 /* SYNCommentingCollectionViewCell.m */,
+				BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -6128,6 +6136,7 @@
 				0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */,
 				011A164316F10014008CF25E /* PlaceholderVideoTop.png in Resources */,
 				BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */,
+				BEE01B6A18520FA6000CF681 /* SYNCommentingCollectionViewCell.xib in Resources */,
 				01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */,
 				01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */,
 				01A79B9316F32C3400B05084 /* Clear.png in Resources */,
@@ -7317,6 +7326,7 @@
 				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
+				BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */,
 				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,

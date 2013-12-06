@@ -130,6 +130,17 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     return commentingCell;
 }
 
+//- (CGSize)collectionView:(UICollectionView *)collectionView
+//                  layout:(UICollectionViewLayout*)collectionViewLayout
+//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    
+//    
+//    
+//    
+//}
+
 
 #pragma mark - Loading Comments
 

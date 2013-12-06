@@ -10,4 +10,9 @@
 
 @interface SYNCommentingCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) IBOutlet UIImageView* avatarImageView;
+@property (nonatomic, strong) IBOutlet UILabel* nameLabel;
+@property (nonatomic, strong) IBOutlet UILabel* commentLabel;
+@property (nonatomic, strong) IBOutlet UILabel* timeLabel;
+
 @end
