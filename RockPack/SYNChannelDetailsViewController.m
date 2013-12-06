@@ -243,24 +243,6 @@ UIPopoverControllerDelegate>
     self.tmpViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
 }
 
--(void) iphoneMove
-{
-    CGAffineTransform move = CGAffineTransformMakeTranslation(0, self.tempContentOffset.y);
-    self.viewProfileContainer.transform = move;
-    self.btnAvatar.transform = move;
-    self.btnShowFollowers.transform = move;
-    self.btnShowVideos.transform =move;
-    self.btnFollowChannel.transform = move;
-    self.btnEditChannel.transform =move;
-    self.btnShareChannel.transform = move;
-    self.lblNoVideos.transform = move;
-    self.viewCollectionSeperator.transform = move;
-    self.btnDeleteChannel.transform = move;
-    self.txtViewDescription.transform = move;
-    self.txtFieldChannelName.transform = move;
-    
-}
-
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
@@ -276,10 +258,6 @@ UIPopoverControllerDelegate>
     
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
-    
-    
-    // We set up assets depending on whether we are in display or edit mode
-    //    [self setDisplayControlsVisibility: (self.mode == kChannelDetailsModeDisplay)];
     
     
     if (self.channel.videoInstances.count == 0 && ![self.channel.uniqueId isEqualToString: kNewChannelPlaceholderId])
@@ -307,9 +285,6 @@ UIPopoverControllerDelegate>
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteHideAllCautions
-                                                        object: self];
     
     
     // Remove notifications individually
@@ -396,7 +371,7 @@ UIPopoverControllerDelegate>
     }
     else if (self.mode == kChannelDetailsFavourites)
     {
-        
+        //Favourites channel is differnet
         if(IS_IPHONE)
         {
             self.btnEditChannel.hidden = YES;
@@ -435,11 +410,11 @@ UIPopoverControllerDelegate>
     }
 }
 
+
+#pragma helper methods to move views
 -(void) moveView:(UIView*) movingView withY: (CGFloat) y
 {
-    
     CGRect tmpFrame;
-    
     tmpFrame = movingView.frame;
     tmpFrame.origin.y -= y;
     movingView.frame = tmpFrame;
@@ -448,13 +423,10 @@ UIPopoverControllerDelegate>
 
 -(void) moveView:(UIView*) movingView withX: (CGFloat) x
 {
-    
     CGRect tmpFrame;
-    
     tmpFrame = movingView.frame;
     tmpFrame.origin.x -= x;
     movingView.frame = tmpFrame;
-    
 }
 
 
@@ -481,8 +453,6 @@ UIPopoverControllerDelegate>
         [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
-    
-    
     
     [self.videoThumbnailCollectionView registerNib:[SYNCollectionVideoCell nib]
                         forCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]];
@@ -553,12 +523,14 @@ UIPopoverControllerDelegate>
 }
 #pragma mark - Control Actions
 
+// == just changed ipad to this call check if okay
 - (void) followControlPressed: (SYNSocialButton *) socialControl
 {
 
     if (self.channel != nil)
     {
-        
+     
+
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.channel}];

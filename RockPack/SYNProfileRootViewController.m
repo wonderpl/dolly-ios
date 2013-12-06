@@ -871,6 +871,8 @@
         {
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
                         CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
+            
+            //Sizes of the create cell is different from ipad and iphone
             if (IS_IPAD) {
                 tmpBoarder.size.height= 80;
 
@@ -1847,6 +1849,10 @@
     else if(modeType == kModeOtherUsersProfile)
     {
         
+        
+        
+//#warning change to make the call to servers
+        
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.followCell.channel}];
@@ -1881,12 +1887,14 @@
         // Sub to channel
         if (self.followCell.channel != nil)
         {
+            
+//#warning change to server call
             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                                 object: self
                                                               userInfo: @{kChannel : self.followCell.channel}];
         }
     }
-    
+//#warning change to server call
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerSubscribeToUserRequest
@@ -2421,8 +2429,6 @@ finishedWithImage: (UIImage *) image
                 self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
                 
             } completion:Nil];
-
-        
     }
     
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];

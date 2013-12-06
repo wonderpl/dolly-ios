@@ -151,6 +151,9 @@
     {
         hasChannels = NO;
     }
+//#warning missing this subbyuservalue bit
+//    self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribed:self.uniqueId];
+
     
     if (!(ignoringObjects & kIgnoreChannelObjects) && hasChannels)
     {
