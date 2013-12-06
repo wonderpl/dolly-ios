@@ -54,7 +54,7 @@
 
 - (IBAction) commentControlPressed: (id) sender
 {
-    [self.delegate shareControlPressed: sender];
+    [self.delegate commentControlPressed: sender];
 }
 
 

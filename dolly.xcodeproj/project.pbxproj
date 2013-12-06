@@ -1313,6 +1313,8 @@
 		BEE01B681851E7B1000CF681 /* SYNCommentingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B671851E7B1000CF681 /* SYNCommentingCollectionViewCell.m */; };
 		BEE01B6A18520FA6000CF681 /* SYNCommentingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */; };
 		BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */; };
+		BEE01B7018521DB8000CF681 /* _Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6F18521DB8000CF681 /* _Comment.m */; };
+		BEE01B7318521DCF000CF681 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B7218521DCF000CF681 /* Comment.m */; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
 		BEEB6F1C1721713500FEFA43 /* PanelMenuBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEB6F1A1721713500FEFA43 /* PanelMenuBottom.png */; };
@@ -2887,6 +2889,10 @@
 		BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCommentingCollectionViewCell.xib; sourceTree = "<group>"; };
 		BEE01B6B18521418000CF681 /* SYNSocialCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialCommentButton.h; sourceTree = "<group>"; };
 		BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialCommentButton.m; sourceTree = "<group>"; };
+		BEE01B6E18521DB8000CF681 /* _Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Comment.h; sourceTree = "<group>"; };
+		BEE01B6F18521DB8000CF681 /* _Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Comment.m; sourceTree = "<group>"; };
+		BEE01B7118521DCF000CF681 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		BEE01B7218521DCF000CF681 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		BEE4A6BD170B0FD6008F9D05 /* dolly-Release-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "dolly-Release-Info.plist"; path = "RockPack/dolly-Release-Info.plist"; sourceTree = "<group>"; };
 		BEE4A6BF170B273F008F9D05 /* SYNAccountSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingTableViewCell.h; sourceTree = "<group>"; };
 		BEE4A6C0170B563D008F9D05 /* SYNAccountSettingsEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsEmail.h; sourceTree = "<group>"; };
@@ -4105,6 +4111,8 @@
 				01E427ED1664EE52009B941F /* _Channel.m */,
 				01946B8D1683335400354601 /* _ChannelOwner.h */,
 				01946B8E1683335400354601 /* _ChannelOwner.m */,
+				BEE01B6E18521DB8000CF681 /* _Comment.h */,
+				BEE01B6F18521DB8000CF681 /* _Comment.m */,
 				01E427EE1664EE52009B941F /* _Video.h */,
 				01E427EF1664EE52009B941F /* _Video.m */,
 				01946B8F1683335400354601 /* _VideoInstance.h */,
@@ -4126,6 +4134,8 @@
 				01E427E41664DF21009B941F /* Channel.m */,
 				BEB1578F173D061700DAFA2F /* ChannelCover.h */,
 				BEB15790173D061700DAFA2F /* ChannelCover.m */,
+				BEE01B7118521DCF000CF681 /* Comment.h */,
+				BEE01B7218521DCF000CF681 /* Comment.m */,
 				01946B931683339F00354601 /* ChannelOwner.h */,
 				01946B941683339F00354601 /* ChannelOwner.m */,
 				BE8F938B17B1268500E7035F /* ExternalAccount.h */,
@@ -7300,6 +7310,7 @@
 				BE1B3DE61810265700DA2BD6 /* SYNNavigationManager.m in Sources */,
 				014A456816691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				BE31EFB0182D4B00006E20E2 /* SYNAddToChannelCell.m in Sources */,
+				BEE01B7318521DCF000CF681 /* Comment.m in Sources */,
 				0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */,
 				01946B911683335400354601 /* _ChannelOwner.m in Sources */,
 				BEE01B681851E7B1000CF681 /* SYNCommentingCollectionViewCell.m in Sources */,
@@ -7369,6 +7380,7 @@
 				BE21EE8716FA202F0067223B /* SYNAccountSettingsFullNameInput.m in Sources */,
 				BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */,
 				0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */,
+				BEE01B7018521DB8000CF681 /* _Comment.m in Sources */,
 				01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */,
 				E93C7F0C18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
