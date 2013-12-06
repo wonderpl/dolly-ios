@@ -259,6 +259,9 @@
 "profile_screen_section_owner_subscription_title" = "PACKS I FOLLOW";
 "profile_screen_section_user_created_title" = "PACKS";
 "profile_screen_section_user_subscription_title" = "PACKS FOLLOWED";
+"Unfollow?" = "Unfollow?";
+"Follow All?" = "Follow All?";
+"Cannot have the same title?" = "Cannot have the same title?";
 
 //
 

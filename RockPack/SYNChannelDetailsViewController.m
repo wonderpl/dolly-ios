@@ -29,6 +29,7 @@
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
+#import "SYNProfileRootViewController.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 149.0f
@@ -93,8 +94,9 @@ UIPopoverControllerDelegate>
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
 @property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
-
+@property (nonatomic,strong) SYNProfileRootViewController *tmpViewController;
 @property (nonatomic) BOOL isLocked;
+
 
 @end
 
@@ -153,8 +155,6 @@ UIPopoverControllerDelegate>
     {
         self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
     }
-    
-    
     
     // == Avatar Image == //
     
@@ -239,28 +239,8 @@ UIPopoverControllerDelegate>
     [self.view addSubview:self.activityIndicator];
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
-    
-    //    self.txtFieldChannelName.backgroundColor = [UIColor blueColor];
-    
-    
-}
 
--(void) iphoneMove
-{
-    CGAffineTransform move = CGAffineTransformMakeTranslation(0, self.tempContentOffset.y);
-    self.viewProfileContainer.transform = move;
-    self.btnAvatar.transform = move;
-    self.btnShowFollowers.transform = move;
-    self.btnShowVideos.transform =move;
-    self.btnFollowChannel.transform = move;
-    self.btnEditChannel.transform =move;
-    self.btnShareChannel.transform = move;
-    self.lblNoVideos.transform = move;
-    self.viewCollectionSeperator.transform = move;
-    self.btnDeleteChannel.transform = move;
-    self.txtViewDescription.transform = move;
-    self.txtFieldChannelName.transform = move;
-    
+    self.tmpViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
 }
 
 - (void) viewWillAppear: (BOOL) animated
@@ -268,20 +248,16 @@ UIPopoverControllerDelegate>
     [super viewWillAppear: animated];
     //[self.navigationItem.backBarButtonItem setTitle:@""];
     
-    if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver: self
-                                                 selector: @selector(reloadUserImage:)
-                                                     name: kUserDataChanged
-                                                   object: nil];
-    }
+//    if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
+//    {
+//        [[NSNotificationCenter defaultCenter] addObserver: self
+//                                                 selector: @selector(reloadUserImage:)
+//                                                     name: kUserDataChanged
+//                                                   object: nil];
+//    }
     
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
-    
-    
-    // We set up assets depending on whether we are in display or edit mode
-    //    [self setDisplayControlsVisibility: (self.mode == kChannelDetailsModeDisplay)];
     
     
     if (self.channel.videoInstances.count == 0 && ![self.channel.uniqueId isEqualToString: kNewChannelPlaceholderId])
@@ -304,15 +280,11 @@ UIPopoverControllerDelegate>
     
     [self setUpMode];
     
-    
 }
 
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteHideAllCautions
-                                                        object: self];
     
     
     // Remove notifications individually
@@ -335,11 +307,11 @@ UIPopoverControllerDelegate>
         self.subscribingIndicator = nil;
     }
     
-    // cancel the existing request if there is one
-    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
-                                                        object: self
-                                                      userInfo: nil];
-    
+//    // cancel the existing request if there is one
+//    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
+//                                                        object: self
+//                                                      userInfo: nil];
+//    
     //    self.navigationController.navigationBarHidden = YES;
     
     self.viewHasAppeared = NO;
@@ -353,12 +325,10 @@ UIPopoverControllerDelegate>
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
     
-
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //    NSLog(@"VDA %f",self.videoThumbnailCollectionView.contentInset.top);
     if (IS_IPAD)
     {
         //  [self iphoneMove];
@@ -401,7 +371,7 @@ UIPopoverControllerDelegate>
     }
     else if (self.mode == kChannelDetailsFavourites)
     {
-        
+        //Favourites channel is differnet
         if(IS_IPHONE)
         {
             self.btnEditChannel.hidden = YES;
@@ -440,11 +410,11 @@ UIPopoverControllerDelegate>
     }
 }
 
+
+#pragma helper methods to move views
 -(void) moveView:(UIView*) movingView withY: (CGFloat) y
 {
-    
     CGRect tmpFrame;
-    
     tmpFrame = movingView.frame;
     tmpFrame.origin.y -= y;
     movingView.frame = tmpFrame;
@@ -453,13 +423,10 @@ UIPopoverControllerDelegate>
 
 -(void) moveView:(UIView*) movingView withX: (CGFloat) x
 {
-    
     CGRect tmpFrame;
-    
     tmpFrame = movingView.frame;
     tmpFrame.origin.x -= x;
     movingView.frame = tmpFrame;
-    
 }
 
 
@@ -486,8 +453,6 @@ UIPopoverControllerDelegate>
         [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
-    
-    
     
     [self.videoThumbnailCollectionView registerNib:[SYNCollectionVideoCell nib]
                         forCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]];
@@ -558,19 +523,14 @@ UIPopoverControllerDelegate>
 }
 #pragma mark - Control Actions
 
+// == just changed ipad to this call check if okay
 - (void) followControlPressed: (SYNSocialButton *) socialControl
 {
-    //   [self.delegate followControlPressed:sender];
-    
-    // Update google analytics
-    
-    // Defensive programming
-    
-    //   NSLog(@"Channel subscribed by user, %@", self.channel.subscribedByUser);
-    
+
     if (self.channel != nil)
     {
-        
+     
+
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
                                                             object: self
                                                           userInfo: @{kChannel : self.channel}];
@@ -747,9 +707,8 @@ UIPopoverControllerDelegate>
 
 - (void) setChannel: (Channel *) channel
 {
-    
+
     self.originalChannel = channel;
-    
     
     NSError *error = nil;
     
@@ -771,19 +730,18 @@ UIPopoverControllerDelegate>
     {
         return;
     }
-    
+
     // create a copy that belongs to this viewId (@"ChannelDetails")
     NSFetchRequest *channelFetchRequest = [[NSFetchRequest alloc] init];
     
-    [channelFetchRequest setEntity: [NSEntityDescription entityForName: @"Channel"
+    [channelFetchRequest setEntity: [NSEntityDescription entityForName: kChannel
                                                 inManagedObjectContext: channel.managedObjectContext]];
     
     [channelFetchRequest setPredicate: [NSPredicate predicateWithFormat: @"uniqueId == %@ AND viewId == %@", channel.uniqueId, self.viewId]];
     
     
-    NSArray *matchingChannelEntries = [channel.managedObjectContext
-                                       executeFetchRequest: channelFetchRequest
-                                       error: &error];
+    NSArray *matchingChannelEntries = [channel.managedObjectContext executeFetchRequest: channelFetchRequest
+                                                                                  error: &error];
     
     if (matchingChannelEntries.count > 0)
     {
@@ -794,8 +752,7 @@ UIPopoverControllerDelegate>
         {
             for (int i = 1; i < matchingChannelEntries.count; i++)
             {
-                [channel.managedObjectContext
-                 deleteObject: (matchingChannelEntries[i])];
+                [channel.managedObjectContext deleteObject: (matchingChannelEntries[i])];
             }
         }
     }
@@ -817,7 +774,6 @@ UIPopoverControllerDelegate>
             }
         }
     }
-    
     
     if (self.channel)
     {
@@ -956,7 +912,6 @@ UIPopoverControllerDelegate>
 {
     [self.videoThumbnailCollectionView reloadData];
     [self displayChannelDetails];
-    
 }
 
 #pragma mark - Collection Delegate/Data Source Methods
@@ -1542,11 +1497,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
-    
-    
-    //   NSLog(@"%f", self.videoThumbnailCollectionView.contentOffset.y);
-    
-    //    [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
+        
     [self updateCollectionLayout];
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
@@ -1620,8 +1571,8 @@ referenceSizeForFooterInSection: (NSInteger) section
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit animated:YES];
-            //   [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-            //            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
+//            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
+//            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
         }
     }
     
@@ -1931,8 +1882,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     
     [self performSelector:@selector(cancelTapped) withObject:nil afterDelay:0.4f];
-    
-    //[self cancelTapped];
+
     
 }
 

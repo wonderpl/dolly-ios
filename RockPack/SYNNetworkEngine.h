@@ -92,6 +92,12 @@
                 completionHandler: (MKNKUserSuccessBlock) completionBlock
                      errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+- (void) channelsForUserId: (NSString *) userId
+                   inRange: (NSRange) range
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+              errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+
 - (MKNetworkOperation *) videosForGenreId: (NSString *) genreId
                                  forRange: (NSRange) range
                         completionHandler: (MKNKSearchSuccessBlock) completionBlock;

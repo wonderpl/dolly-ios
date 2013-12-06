@@ -141,6 +141,7 @@
 
 - (void) channelOwnerUpdateRequest: (NSNotification *) notification
 {
+    
     ChannelOwner *channelOwner = (ChannelOwner *) [notification userInfo][kChannelOwner];
     
     if (!channelOwner)
@@ -397,10 +398,6 @@
     
 }
 
-
-
-
-
 #pragma mark - Updating
 
 - (void) updateChannel: (Channel *) channel
@@ -414,7 +411,7 @@
     // define success block //
     
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *channelDictionary) {
-        
+
         NSNumber *savedPosition = channel.position;
         
         [channel setAttributesFromDictionary: channelDictionary
@@ -428,7 +425,7 @@
                 [userChannel setAttributesFromDictionary: channelDictionary
                                      ignoringObjectTypes: kIgnoreChannelOwnerObject];
                 
-                channel.channelOwner = appDelegate.currentUser;
+                //channel.channelOwner = appDelegate.currentUser;
                 
                 break;
             }
@@ -473,6 +470,7 @@
 
 - (void) updateChannelsForChannelOwner: (ChannelOwner *) channelOwner
 {
+    
     // To prevent crashes that would occur when faulting object that have disappeared
     NSManagedObjectID *channelOwnerObjectId = channelOwner.objectID;
     NSManagedObjectContext *channelOwnerObjectMOC = channelOwner.managedObjectContext;

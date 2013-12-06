@@ -6,7 +6,6 @@
 
 @implementation ChannelOwner
 
-@synthesize totalVideosValueChannel, totalVideosValueSubscriptions;
 
 #pragma mark - Object factory
 
@@ -26,6 +25,9 @@
     
     copyChannelOwner.thumbnailURL = existingChannelOwner.thumbnailURL;
     
+    copyChannelOwner.totalVideosValueChannel = existingChannelOwner.totalVideosValueChannel;
+    copyChannelOwner.totalVideosValueSubscriptions = existingChannelOwner.totalVideosValueSubscriptions;
+
     copyChannelOwner.displayName = existingChannelOwner.displayName;
     
     copyChannelOwner.channelOwnerDescription = existingChannelOwner.channelOwnerDescription;
@@ -119,15 +121,14 @@
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
     
-    
-    
-//    NSLog(@"%@", dictionary);
-    
-    self.channelOwnerDescription = [dictionary objectForKey: @"description"];
-    
-//    NSLog(@"Channel owner Description%@", self.channelOwnerDescription);
-//self.followersTotalCount = [dictionary objectForKey: @"description"];
-
+    if ([[dictionary objectForKey: @"description"] isKindOfClass: [NSNull class]])
+    {
+        self.channelOwnerDescription = @"";
+    }
+    else
+    {
+        self.channelOwnerDescription = [dictionary objectForKey: @"description"];
+    }
     
     BOOL hasChannels = YES;
     
@@ -140,12 +141,19 @@
     
     NSArray *channelItemsArray = channelsDictionary[@"items"];
     
+    if (![[channelsDictionary objectForKey:@("total")] isKindOfClass: [NSNull class]])
+    {
+        self.totalVideosValueChannel =[channelsDictionary objectForKey: @"total"];
+    }
     
 
     if ([channelItemsArray isKindOfClass: [NSNull class]])
     {
         hasChannels = NO;
     }
+//#warning missing this subbyuservalue bit
+//    self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribed:self.uniqueId];
+
     
     if (!(ignoringObjects & kIgnoreChannelObjects) && hasChannels)
     {
@@ -222,6 +230,8 @@
     {
         return;
     }
+    
+    self.totalVideosValueSubscriptions = [channeslDictionary objectForKey: @"total"];
     
     NSArray *itemsArray = channeslDictionary[@"items"];
     
@@ -378,7 +388,6 @@
     NSDictionary *itemDict = channelsDictionary[@"channels"];
     if (!itemDict || ![itemDict isKindOfClass: [NSDictionary class]])
     {
-        NSLog(@"not dict/nil");
         return;
     }
     
@@ -387,6 +396,23 @@
     for (NSDictionary *tmpDict in items) {
         
         [self addChannelsObject:[Channel instanceFromDictionary:tmpDict usingManagedObjectContext:self.managedObjectContext]];
+    }
+}
+
+
+- (void) addSubscriptionsFromDictionary : (NSDictionary *) subscriptionsDictionary
+{
+    
+    NSDictionary *itemDict = subscriptionsDictionary[@"channels"];
+    if (!itemDict || ![itemDict isKindOfClass: [NSDictionary class]])
+    {
+        return;
+    }
+    
+    NSArray *items = [itemDict objectForKey:@"items"];
+    
+    for (NSDictionary *tmpDict in items) {
+        [self addSubscriptionsObject:[Channel instanceFromDictionary:tmpDict usingManagedObjectContext:self.managedObjectContext]];
     }
 }
 

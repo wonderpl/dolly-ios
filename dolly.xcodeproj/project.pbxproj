@@ -594,6 +594,10 @@
 		1FABF7AA1753EAEA00AE5CCB /* ShadowChannelThumb~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FABF7A81753EAEA00AE5CCB /* ShadowChannelThumb~iphone.png */; };
 		1FBF54EB17BD526000B4074E /* login_bg_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF54EA17BD526000B4074E /* login_bg_5.jpg */; };
 		1FBF54F217BD728B00B4074E /* login_onboard_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF54ED17BD728B00B4074E /* login_onboard_1.png */; };
+		1FC24E911851F7690022548B /* IconVideoCommentDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E8D1851F7690022548B /* IconVideoCommentDefault.png */; };
+		1FC24E921851F7690022548B /* IconVideoCommentDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E8E1851F7690022548B /* IconVideoCommentDefault@2x.png */; };
+		1FC24E931851F7690022548B /* IconVideoCommentHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E8F1851F7690022548B /* IconVideoCommentHighlighted.png */; };
+		1FC24E941851F7690022548B /* IconVideoCommentHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E901851F7690022548B /* IconVideoCommentHighlighted@2x.png */; };
 		1FC8FEA817340708000FF0B2 /* ShadowCategorySlide@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC8FEA617340708000FF0B2 /* ShadowCategorySlide@2x~iphone.png */; };
 		1FC8FEA917340708000FF0B2 /* ShadowCategorySlide~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC8FEA717340708000FF0B2 /* ShadowCategorySlide~iphone.png */; };
 		1FD12372174CD76700144374 /* NavDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD1236E174CD76700144374 /* NavDefault.png */; };
@@ -2063,6 +2067,10 @@
 		1FABF7A81753EAEA00AE5CCB /* ShadowChannelThumb~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShadowChannelThumb~iphone.png"; sourceTree = "<group>"; };
 		1FBF54EA17BD526000B4074E /* login_bg_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_5.jpg; path = Assets/Images/login_bg_5.jpg; sourceTree = "<group>"; };
 		1FBF54ED17BD728B00B4074E /* login_onboard_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_onboard_1.png; path = Assets/Images/login_onboard_1.png; sourceTree = "<group>"; };
+		1FC24E8D1851F7690022548B /* IconVideoCommentDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoCommentDefault.png; path = Assets/Images/IconVideoCommentDefault.png; sourceTree = "<group>"; };
+		1FC24E8E1851F7690022548B /* IconVideoCommentDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoCommentDefault@2x.png"; path = "Assets/Images/IconVideoCommentDefault@2x.png"; sourceTree = "<group>"; };
+		1FC24E8F1851F7690022548B /* IconVideoCommentHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoCommentHighlighted.png; path = Assets/Images/IconVideoCommentHighlighted.png; sourceTree = "<group>"; };
+		1FC24E901851F7690022548B /* IconVideoCommentHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoCommentHighlighted@2x.png"; path = "Assets/Images/IconVideoCommentHighlighted@2x.png"; sourceTree = "<group>"; };
 		1FC8FEA617340708000FF0B2 /* ShadowCategorySlide@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShadowCategorySlide@2x~iphone.png"; sourceTree = "<group>"; };
 		1FC8FEA717340708000FF0B2 /* ShadowCategorySlide~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShadowCategorySlide~iphone.png"; sourceTree = "<group>"; };
 		1FD1236E174CD76700144374 /* NavDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NavDefault.png; path = Assets/Images/NavDefault.png; sourceTree = "<group>"; };
@@ -3259,6 +3267,10 @@
 				BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */,
 				BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */,
 				BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */,
+				1FC24E8D1851F7690022548B /* IconVideoCommentDefault.png */,
+				1FC24E8E1851F7690022548B /* IconVideoCommentDefault@2x.png */,
+				1FC24E8F1851F7690022548B /* IconVideoCommentHighlighted.png */,
+				1FC24E901851F7690022548B /* IconVideoCommentHighlighted@2x.png */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -6259,6 +6271,7 @@
 				BE7D3533171700010085AB81 /* ButtonAddToChannelActiveHighlighted@2x.png in Resources */,
 				BE7D3534171700010085AB81 /* ButtonAddToChannelInactive.png in Resources */,
 				1F458AE717E1C27B003C14AC /* ButtonReportConfirmHighlighted~iphone.png in Resources */,
+				1FC24E941851F7690022548B /* IconVideoCommentHighlighted@2x.png in Resources */,
 				BE7D3535171700010085AB81 /* ButtonAddToChannelInactive@2x.png in Resources */,
 				BE7D3536171700010085AB81 /* ButtonAddToChannelInactiveHighlighted.png in Resources */,
 				BE7D3537171700010085AB81 /* ButtonAddToChannelInactiveHighlighted@2x.png in Resources */,
@@ -6397,6 +6410,7 @@
 				BED027C91834D4CC00636659 /* ButtonMoreBlog@2x.png in Resources */,
 				01F1B87C172A9ADF005735AF /* ButtonVideoOverlayAddSelected.png in Resources */,
 				01F1B87D172A9ADF005735AF /* ButtonVideoOverlayAddSelected@2x.png in Resources */,
+				1FC24E911851F7690022548B /* IconVideoCommentDefault.png in Resources */,
 				01F1B87E172A9ADF005735AF /* ButtonVideoOverlayLike.png in Resources */,
 				01F1B87F172A9ADF005735AF /* ButtonVideoOverlayLike@2x.png in Resources */,
 				01F1B880172A9ADF005735AF /* ButtonVideoOverlayLikeHighlighted.png in Resources */,
@@ -6442,6 +6456,7 @@
 				38A2001D1731607F00FB9F57 /* ButtonEditHighlighted@2x~iphone.png in Resources */,
 				38A2001E1731607F00FB9F57 /* ButtonEditHighlighted~iphone.png in Resources */,
 				38A2001F1731607F00FB9F57 /* ButtonEdit~iphone.png in Resources */,
+				1FC24E921851F7690022548B /* IconVideoCommentDefault@2x.png in Resources */,
 				38A200201731607F00FB9F57 /* ButtonShare@2x~iphone.png in Resources */,
 				38A200211731607F00FB9F57 /* ButtonShare~iphone.png in Resources */,
 				38A200221731607F00FB9F57 /* ButtonSubscribe@2x~iphone.png in Resources */,
@@ -6930,6 +6945,7 @@
 				1FE4BA42174BCF1E001DC49C /* Default-Portrait@2x~ipad.png in Resources */,
 				1FE4BA44174BCF23001DC49C /* Default-Landscape~ipad.png in Resources */,
 				1FE4BA46174BCF26001DC49C /* Default-Landscape@2x~ipad.png in Resources */,
+				1FC24E931851F7690022548B /* IconVideoCommentHighlighted.png in Resources */,
 				1FE4BA49174BF02A001DC49C /* NotificationBubble.png in Resources */,
 				1FE4BA4A174BF02A001DC49C /* NotificationBubble@2x.png in Resources */,
 				1FD12372174CD76700144374 /* NavDefault.png in Resources */,
