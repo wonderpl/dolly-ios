@@ -2370,7 +2370,7 @@ finishedWithImage: (UIImage *) image
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
             
-#warning animations
+//#warning animations
         }
             void (^animateEditMode)(void) = ^{
                 
