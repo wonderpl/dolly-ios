@@ -139,6 +139,7 @@
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
 
 @property (nonatomic) NSArray *tmpArray;
+@property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
 
 @end
@@ -905,6 +906,11 @@
             {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
             }
+        }
+        else if(self.modeType == kModeMyOwnProfile && collectionView == self
+                .channelThumbnailCollectionView)
+        {
+            channelThumbnailCell.deletableCell = YES;
         }
         
         if(collectionView == self.channelThumbnailCollectionView)
@@ -1887,7 +1893,17 @@
                                                             object: self
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
     }
+    
+
 }
+
+- (void) deleteChannel
+{
+    
+    
+    
+}
+
 
 #pragma mark - IBActions
 
@@ -2560,10 +2576,19 @@ finishedWithImage: (UIImage *) image
     
     NSLog(@"Delete");
     
+    [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
+                                                 channelId: cell.channel.uniqueId
+                                         completionHandler: ^(id response) {
+                                             
+                                             [appDelegate.currentUser.channelsSet removeObject: cell.channel];
+                                             
+                                             [cell.channel.managedObjectContext deleteObject: cell.channel];
+                                             
+                                             [appDelegate saveContext: YES];
+                                         } errorHandler: ^(id error) {
+                                             DebugLog(@"Delete channel failed");
+                                         }];
+    
 }
-
-#pragma mark - Save new channel
-
-
 
 @end

@@ -30,6 +30,7 @@ typedef enum {
 @interface SYNChannelMidCell : UICollectionViewCell
 
 @property (nonatomic, weak) Channel* channel;
+@property (nonatomic) BOOL deletableCell;
 
 @property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;

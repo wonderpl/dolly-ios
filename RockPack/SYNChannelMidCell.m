@@ -77,6 +77,7 @@
     //    [self.deleteButton setTitle:NSLocalizedString(@"Delete?", @"Delete a channel from profile") forState:UIControlStateNormal];
     [self.deleteButton setTitle:@"Delete?" forState:UIControlStateNormal];
     
+    self.deletableCell = NO;
     
 }
 
@@ -239,6 +240,9 @@
             
             break;
         case ChannelMidCellStateDelete:{
+            //Not all channels can be deleted
+            //Only channels you own are deleteable
+            if (self.deletableCell) {
             self.deleteButton.hidden = NO;
             self.descriptionLabel.hidden = YES;
             [UIView animateWithDuration:0.5f animations:^{
@@ -256,7 +260,7 @@
                 self.containerView.frame = tmpRect;
             }];
             
-            
+            }
             
         }
             
