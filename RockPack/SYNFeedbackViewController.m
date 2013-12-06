@@ -40,7 +40,7 @@
 @implementation SYNFeedbackViewController
 
 static NSString* placeholderText = @"Your feedback...";
-
+static NSString* errorText = @"Please provide your feedback here...";
 
 - (void)viewDidLoad
 {
@@ -164,8 +164,7 @@ static NSString* placeholderText = @"Your feedback...";
 
 - (void) sendButtonPressed:(UIBarButtonItem*)buttonItem
 {
-    self.navigationItem.leftBarButtonItem.enabled = NO;
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    
     
     // do checks
     
@@ -176,6 +175,21 @@ static NSString* placeholderText = @"Your feedback...";
         
         return;
     }
+    
+    if([self.textView.text isEqualToString:placeholderText] ||
+       [self.textView.text isEqualToString:@""])
+    {
+        
+        self.textView.text = errorText;
+        [self.textView resignFirstResponder];
+        self.textView.textColor = [UIColor redColor];
+        return;
+        
+    }
+    
+    
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     
     [self sendMessage];
 }
@@ -211,10 +225,16 @@ static NSString* placeholderText = @"Your feedback...";
                                              
                                              self.navigationItem.rightBarButtonItem.enabled = YES;
                                              self.navigationItem.leftBarButtonItem.enabled = YES;
+                                             
+                                             [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+                                             
+                                             
                                             } errorHandler:^(id error) {
                                              
-                                             self.navigationItem.rightBarButtonItem.enabled = YES;
+                                                self.navigationItem.rightBarButtonItem.enabled = YES;
                                                 self.navigationItem.leftBarButtonItem.enabled = YES;
+                                                
+                                                
                                             }];
 }
 
@@ -241,8 +261,9 @@ static NSString* placeholderText = @"Your feedback...";
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:placeholderText]) {
+    if ([textView.text isEqualToString:placeholderText] || [textView.text isEqualToString:errorText]) {
         textView.text = @"";
+        
         self.navigationItem.rightBarButtonItem.enabled = YES;
         textView.textColor = [UIColor blackColor]; // optional
     }
@@ -313,7 +334,10 @@ static NSString* placeholderText = @"Your feedback...";
 
 - (NSArray*)sliderElements
 {
-    return @[self.slider, self.minValueLabel, self.maxValueLabel, self.currentValueLabel];
+    return @[self.slider,
+             self.minValueLabel,
+             self.maxValueLabel,
+             self.currentValueLabel];
 }
 
 @end
