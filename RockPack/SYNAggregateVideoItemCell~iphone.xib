@@ -46,40 +46,36 @@
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k73-Lu-OvT" userLabel="Control - Like" customClass="SYNSocialButton">
-                        <rect key="frame" x="24" y="197" width="50" height="50"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k73-Lu-OvT" userLabel="Control - Like" customClass="SYNSocialButton">
+                        <rect key="frame" x="14" y="197" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="d0x-DM-MwJ"/>
-                            <constraint firstAttribute="width" constant="50" id="xa7-Jz-qak"/>
-                        </constraints>
                         <connections>
                             <action selector="likeControlPressed:" destination="PxX-MJ-iMd" eventType="touchUpInside" id="Dgu-DH-QKt"/>
                         </connections>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2p-g2-PRw" userLabel="Control - Add" customClass="SYNSocialAddButton">
-                        <rect key="frame" x="99" y="197" width="50" height="50"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S2p-g2-PRw" userLabel="Control - Add" customClass="SYNSocialAddButton">
+                        <rect key="frame" x="75" y="197" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="SF8-RL-vby"/>
-                            <constraint firstAttribute="height" constant="50" id="Xkn-e5-b5C"/>
-                        </constraints>
                         <connections>
                             <action selector="addControlPressed:" destination="PxX-MJ-iMd" eventType="touchUpInside" id="d7e-5i-DME"/>
                         </connections>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRp-a5-BAk" userLabel="Control - Share" customClass="SYNSocialButton">
-                        <rect key="frame" x="174" y="197" width="50" height="50"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gRp-a5-BAk" userLabel="Control - Share" customClass="SYNSocialButton">
+                        <rect key="frame" x="187" y="197" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="4oX-eg-AlG"/>
-                            <constraint firstAttribute="height" constant="50" id="vf0-lD-msY"/>
-                        </constraints>
                         <connections>
                             <action selector="shareControlPressed:" destination="PxX-MJ-iMd" eventType="touchUpInside" id="Kwb-Pb-Whh"/>
+                        </connections>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OuO-IP-Z5r" userLabel="Control - Comment" customClass="SYNSocialCommentButton">
+                        <rect key="frame" x="129" y="197" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="commentControlPressed:" destination="PxX-MJ-iMd" eventType="touchUpInside" id="4ru-1b-DWx"/>
                         </connections>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyK-gf-zRY" userLabel="timestamp Label">
@@ -99,21 +95,16 @@
                 <constraint firstItem="ZPQ-jB-6Su" firstAttribute="leading" secondItem="PxX-MJ-iMd" secondAttribute="leading" id="04q-Uf-DNT"/>
                 <constraint firstAttribute="trailing" secondItem="ZPQ-jB-6Su" secondAttribute="trailing" id="41B-V1-fPa"/>
                 <constraint firstItem="1bU-ZO-Uzp" firstAttribute="top" secondItem="PxX-MJ-iMd" secondAttribute="top" id="6Z1-Hp-ijk"/>
-                <constraint firstAttribute="centerX" secondItem="k73-Lu-OvT" secondAttribute="centerX" constant="75" id="8dY-9X-NcO"/>
-                <constraint firstAttribute="centerX" secondItem="S2p-g2-PRw" secondAttribute="centerX" id="96l-ZB-Ebu"/>
                 <constraint firstItem="ZPQ-jB-6Su" firstAttribute="top" secondItem="PxX-MJ-iMd" secondAttribute="top" constant="23" id="CY5-py-yDa"/>
                 <constraint firstItem="vVW-WR-RU9" firstAttribute="top" secondItem="ZPQ-jB-6Su" secondAttribute="bottom" constant="3" id="JMe-pw-njt"/>
                 <constraint firstItem="vVW-WR-RU9" firstAttribute="leading" secondItem="PxX-MJ-iMd" secondAttribute="leading" id="P2L-QN-MLW"/>
                 <constraint firstAttribute="trailing" secondItem="vVW-WR-RU9" secondAttribute="trailing" id="Vim-T5-GbU"/>
-                <constraint firstAttribute="bottom" secondItem="gRp-a5-BAk" secondAttribute="bottom" constant="10" id="eb5-Kl-l8H"/>
-                <constraint firstAttribute="bottom" secondItem="k73-Lu-OvT" secondAttribute="bottom" constant="10" id="ggc-Zv-VX8"/>
-                <constraint firstAttribute="centerX" secondItem="gRp-a5-BAk" secondAttribute="centerX" constant="-75" id="kmk-Tv-xRO"/>
                 <constraint firstAttribute="centerX" secondItem="1bU-ZO-Uzp" secondAttribute="centerX" id="kx4-Xd-kga"/>
-                <constraint firstAttribute="bottom" secondItem="S2p-g2-PRw" secondAttribute="bottom" constant="10" id="qlX-wt-aZO"/>
             </constraints>
             <size key="customSize" width="307" height="183"/>
             <connections>
                 <outlet property="addControl" destination="S2p-g2-PRw" id="7bx-S2-pDr"/>
+                <outlet property="commentControl" destination="OuO-IP-Z5r" id="dke-Ao-NaK"/>
                 <outlet property="imageView" destination="ZPQ-jB-6Su" id="2xf-ry-0hc"/>
                 <outlet property="likeControl" destination="k73-Lu-OvT" id="jbG-gi-Vpb"/>
                 <outlet property="shareControl" destination="gRp-a5-BAk" id="0M9-ED-P5P"/>
