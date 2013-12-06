@@ -1474,7 +1474,6 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
       
       jsonDecompressionHandler(returnValue);
         
-        NSLog(@"Returned Value from server :%@",returnValue);
     });
   });
 }
