@@ -20,6 +20,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* sliderLabel;
 @property (nonatomic, strong) IBOutlet UITextView* textView;
 
+@property (nonatomic) BOOL hasTouchedSlider;
+
 // label
 
 @property (nonatomic, strong) IBOutlet UILabel* minValueLabel;
@@ -34,6 +36,21 @@
 
 static NSString* placeholderText = @"Your feedback...";
 
+- (void) setHasTouchedSlider:(BOOL)hasTouchedSlider
+{
+    _hasTouchedSlider = hasTouchedSlider;
+    
+    NSArray* relatedViews = @[self.slider, self.minValueLabel, self.maxValueLabel, self.currentValueLabel];
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        
+        for (UIView* v in relatedViews)
+            v.alpha = _hasTouchedSlider ? 1.0f : 0.5f;
+        
+    }];
+    
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -109,15 +126,6 @@ static NSString* placeholderText = @"Your feedback...";
                                                                            blue: (128.0f/255.0f)
                                                                           alpha: 1.0f]];
     
-    
-}
-
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    
-    [super viewDidAppear:animated];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)
                                                  name:UIKeyboardWillShowNotification
@@ -127,11 +135,15 @@ static NSString* placeholderText = @"Your feedback...";
                                              selector:@selector(keyboardNotified:)
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
+    
+    self.hasTouchedSlider = NO;
+    
+    
 }
 
-- (void) viewDidDisappear:(BOOL)animated
+
+- (void) dealloc
 {
-    [super viewDidDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -142,9 +154,9 @@ static NSString* placeholderText = @"Your feedback...";
     {
         CGRect sFrame = self.navigationController.view.frame;
         if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-            sFrame.origin.y -= 140.0f;
+            sFrame.origin.y -= 110.0f;
         else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-            sFrame.origin.y += 140.0f;
+            sFrame.origin.y += 110.0f;
         __weak SYNFeedbackViewController* wself = self;
         [UIView animateWithDuration:0.3f animations:^{
             wself.navigationController.view.frame = sFrame;
@@ -206,11 +218,14 @@ static NSString* placeholderText = @"Your feedback...";
 
 - (IBAction)sliderMoved:(UISlider*)slider
 {
-    self.currentValueLabel.text = [NSString stringWithFormat:@"%0.1f", slider.value];
+    
+    self.hasTouchedSlider = YES;
+    
+    self.currentValueLabel.text = [NSString stringWithFormat:@"%i", (int)slider.value];
     
     CGFloat ratio = self.slider.value/self.slider.maximumValue;
     
-    CGFloat xPosition = ((self.slider.frame.size.width - 34.0f) * ratio) + self.slider.frame.origin.x + 15.0f;
+    CGFloat xPosition = ((self.slider.frame.size.width - 30.0f) * ratio) + self.slider.frame.origin.x + 15.0f;
     
     
     self.currentValueLabel.center = CGPointMake(xPosition, self.currentValueLabel.center.y);
