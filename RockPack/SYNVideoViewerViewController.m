@@ -32,6 +32,7 @@
 #import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "VideoInstance.h"
+#import "UICollectionReusableView+Helpers.h"
 #import "SYNScrubberBar.h"
 @import MediaPlayer;
 
@@ -167,11 +168,8 @@
     self.videoTitleLabel.textAlignment = NSTextAlignmentCenter;
     
     // Regster video thumbnail cell
-    UINib *videoThumbnailCellNib = [UINib nibWithNibName: @"SYNVideoThumbnailSmallCell"
-                                                  bundle: nil];
-    
-    [self.videoThumbnailCollectionView registerNib: videoThumbnailCellNib
-                        forCellWithReuseIdentifier: @"SYNVideoThumbnailSmallCell"];
+    [self.videoThumbnailCollectionView registerNib: [SYNVideoThumbnailCell nib]
+                        forCellWithReuseIdentifier: [SYNVideoThumbnailCell reuseIdentifier]];
     
     // Set custom flow layout to handle the chroma highlighting
     self.layout = [[SYNVideoViewerThumbnailLayout alloc] init];
@@ -235,8 +233,8 @@
     
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
-//    self.videoPlaybackViewController = [SYNYouTubeVideoPlaybackViewController sharedInstance];
-        self.videoPlaybackViewController = [SYNOoyalaVideoPlaybackViewController sharedInstance];
+    self.videoPlaybackViewController = [SYNYouTubeVideoPlaybackViewController sharedInstance];
+//        self.videoPlaybackViewController = [SYNOoyalaVideoPlaybackViewController sharedInstance];
     
     __weak typeof(self) weakSelf = self;
     
@@ -631,7 +629,7 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNVideoThumbnailSmallCell"
+    SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: [SYNVideoThumbnailCell reuseIdentifier]
                                                                                  forIndexPath: indexPath];
     
     VideoInstance *videoInstance = self.videoInstanceArray [indexPath.item];
