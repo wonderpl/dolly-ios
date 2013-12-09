@@ -3682,13 +3682,7 @@
 				BEF9E5AD16DCBAA300286113 /* Sound */,
 				019824ED1629CC6600216900 /* TestFlight */,
 				BEF9E5B416DD23F000286113 /* Video Queue */,
-				E92D3359184E239C0025D1DF /* SYNPagingModel.h */,
-				E9927391185090DE00982480 /* SYNPagingModel+Protected.h */,
-				E92D335A184E239C0025D1DF /* SYNPagingModel.m */,
-				E9765BA5184F9ABA005D02E9 /* SYNFeedModel.h */,
-				E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */,
-				E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */,
-				E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */,
+				E9E1E27918561BFF0051E312 /* Paging Models */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -5996,6 +5990,20 @@
 				BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */,
 			);
 			name = "Video Queue";
+			sourceTree = "<group>";
+		};
+		E9E1E27918561BFF0051E312 /* Paging Models */ = {
+			isa = PBXGroup;
+			children = (
+				E92D3359184E239C0025D1DF /* SYNPagingModel.h */,
+				E9927391185090DE00982480 /* SYNPagingModel+Protected.h */,
+				E92D335A184E239C0025D1DF /* SYNPagingModel.m */,
+				E9765BA5184F9ABA005D02E9 /* SYNFeedModel.h */,
+				E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */,
+				E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */,
+				E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */,
+			);
+			name = "Paging Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
