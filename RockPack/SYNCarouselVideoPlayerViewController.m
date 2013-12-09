@@ -20,9 +20,12 @@
 #import "ChannelCover.h"
 #import "SYNButton.h"
 #import "UICollectionReusableView+Helpers.h"
+#import "SYNFeedModel.h"
+#import "SYNStaticModel.h"
+#import "SYNChannelFooterMoreView.h"
 #import <UIImageView+WebCache.h>
 
-@interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate>
+@interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNPagingModelDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *channelThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel *channelTitleLabel;
@@ -30,8 +33,9 @@
 
 @property (nonatomic, strong) IBOutlet UICollectionView *thumbnailCollectionView;
 
-@property (nonatomic, strong) NSArray *videoInstances;
 @property (nonatomic, assign) NSInteger selectedIndex;
+
+@property (nonatomic, strong) SYNPagingModel *model;
 
 @end
 
@@ -39,13 +43,25 @@
 
 #pragma mark - Public class
 
++ (instancetype)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
+	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
+	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
+	
+	SYNCarouselVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
+	viewController.model = model;
+	viewController.selectedIndex = selectedIndex;
+	
+	return viewController;
+}
+
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
 	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
 	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
 	SYNCarouselVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
-	viewController.videoInstances = videoInstances;
+	viewController.model = [[SYNStaticModel alloc] initWithLoadedItems:videoInstances];
 	viewController.selectedIndex = selectedIndex;
 	
 	return viewController;
@@ -62,13 +78,18 @@
 	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:self.channelTitleLabel.font.pointSize];
 	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:self.channelOwnerLabel.font.pointSize];
 	
-	UINib *videoThumbnailCellNib = [SYNVideoThumbnailCell nib];
-	[self.thumbnailCollectionView registerNib:videoThumbnailCellNib
+	[self.thumbnailCollectionView registerNib:[SYNVideoThumbnailCell nib]
 				   forCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]];
+	
+	[self.thumbnailCollectionView registerNib:[SYNChannelFooterMoreView nib]
+				   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+						  withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+	self.model.delegate = self;
 	
 	if (![self isBeingPresented]) {
 		// Invalidate the layout so the section insets are recalculated when returning from full screen video
@@ -103,7 +124,7 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 	_selectedIndex = selectedIndex;
 	
-	self.videoInstance = self.videoInstances[selectedIndex];
+	self.videoInstance = [self.model itemAtIndex:selectedIndex];
 	
 	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
 	[self.thumbnailCollectionView selectItemAtIndexPath:selectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
@@ -112,7 +133,7 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.videoInstances count];
+	return [self.model itemCount];
 }
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
@@ -123,12 +144,28 @@
     SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]
 																			forIndexPath:indexPath];
     
-    VideoInstance *videoInstance = self.videoInstances[indexPath.item];
+	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
     cell.titleLabel.text = videoInstance.title;
 	[cell setImageWithURL:videoInstance.video.thumbnailURL];
     
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+	if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+		SYNChannelFooterMoreView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+																				  withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
+																						 forIndexPath:indexPath];
+		footerView.showsLoading = YES;
+		
+		if ([self.model hasMoreItems]) {
+			[self.model loadNextPage];
+		}
+		
+		return footerView;
+	}
+	return nil;
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -153,6 +190,38 @@
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+				  layout:(UICollectionViewFlowLayout *)collectionViewFlowLayout
+referenceSizeForFooterInSection:(NSInteger)section {
+	return ([self.model hasMoreItems] ? collectionViewFlowLayout.itemSize : CGSizeZero);
+}
+
+#pragma mark - UIScrollViewDelegate
+
+// These are implemented and empty to make sure that the AbstractViewController's methods aren't being called
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	
+}
+
+#pragma mark - SYNPagingModelDelegate
+
+- (void)pagingModelDataUpdated {
+	[self.thumbnailCollectionView reloadData];
+}
+
+- (void)pagingModelErrorOccurred {
+	
+}
 
 #pragma mark - IBActions
 
@@ -187,12 +256,12 @@
 }
 
 - (void)playNextVideo {
-	NSInteger nextIndex = (self.selectedIndex + 1) % [self.videoInstances count];
+	NSInteger nextIndex = (self.selectedIndex + 1) % [self.model itemCount];
 	self.selectedIndex = nextIndex;
 }
 
 - (void)playPreviousVideo {
-	NSInteger previousIndex = ((self.selectedIndex - 1) + [self.videoInstances count]) % [self.videoInstances count];
+	NSInteger previousIndex = ((self.selectedIndex - 1) + [self.model itemCount]) % [self.model itemCount];
 	self.selectedIndex = previousIndex;
 }
 

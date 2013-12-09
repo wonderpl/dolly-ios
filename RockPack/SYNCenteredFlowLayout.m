@@ -32,7 +32,6 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
 	NSMutableArray *layoutAttributes = [NSMutableArray array];
-	NSLog(@"RECT: %@ >>  %@", NSStringFromCGRect(rect), NSStringFromCGRect(CGRectInset(rect, -self.centerInsets.left, -self.centerInsets.top)));
 	for (UICollectionViewLayoutAttributes *attributes in [super layoutAttributesForElementsInRect:CGRectInset(rect, -self.centerInsets.left, -self.centerInsets.top)]) {
 		[layoutAttributes addObject:[self centeredAttributesForAttributes:attributes]];
 	}

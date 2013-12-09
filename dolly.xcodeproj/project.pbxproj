@@ -1364,6 +1364,7 @@
 		E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */; };
 		E9F7CC7C1846562F0026C97D /* SYNVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */; };
 		E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FECE681855E73D00BBE7F2 /* SYNCenteredFlowLayout.m */; };
+		E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */; };
 		FEA605CC5F8E4BFCA67EBDD6 /* libPods-dollyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */; };
 /* End PBXBuildFile section */
 
@@ -2972,6 +2973,8 @@
 		E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerViewController.m; sourceTree = "<group>"; };
 		E9FECE671855E73D00BBE7F2 /* SYNCenteredFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCenteredFlowLayout.h; sourceTree = "<group>"; };
 		E9FECE681855E73D00BBE7F2 /* SYNCenteredFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCenteredFlowLayout.m; sourceTree = "<group>"; };
+		E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNStaticModel.h; sourceTree = "<group>"; };
+		E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNStaticModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3684,6 +3687,8 @@
 				E92D335A184E239C0025D1DF /* SYNPagingModel.m */,
 				E9765BA5184F9ABA005D02E9 /* SYNFeedModel.h */,
 				E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */,
+				E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */,
+				E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -7423,6 +7428,7 @@
 				BE285DB01725A23300D995AB /* SYNNetworkMessageView.m in Sources */,
 				BE285DBC1726828F00D995AB /* SYNChannelManager.m in Sources */,
 				0111CDFC1729314E00612186 /* SYNCoverThumbnailCell.m in Sources */,
+				E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */,
 				01F1B85D17297471005735AF /* CoverArt.m in Sources */,
 				BEB313C0182A829400FAF98A /* SYNCollectionVideoCell.m in Sources */,
 				01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */,
