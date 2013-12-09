@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Channel Name" textAlignment="center" minimumFontSize="17" id="4zV-03-WCb">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Create new collection" textAlignment="center" minimumFontSize="17" id="4zV-03-WCb" userLabel="TextField - Create new title">
                         <rect key="frame" x="28" y="29" width="224" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -33,7 +33,7 @@
                             <outlet property="delegate" destination="-1" id="LwI-9x-zKo"/>
                         </connections>
                     </textField>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Description (Optional)" id="lXy-xm-fSE">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="lXy-xm-fSE" userLabel="Text View - Dexcription textview">
                         <rect key="frame" x="28" y="67" width="224" height="96"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,11 +47,18 @@
                         <rect key="frame" x="28" y="28" width="224" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <state key="normal" title="Create New Cell">
+                        <state key="normal" title="Create New Collection">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your description... (optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mjk-12-nUl">
+                        <rect key="frame" x="37" y="73" width="181" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -62,6 +69,7 @@
                 <outlet property="bottomBarView" destination="VMl-sX-Hvb" id="SpH-uJ-SB9"/>
                 <outlet property="createCellButton" destination="0Wp-0b-6D1" id="I1w-Ad-uVi"/>
                 <outlet property="createTextField" destination="4zV-03-WCb" id="ELH-1D-Ch0"/>
+                <outlet property="descriptionPlaceholderLabel" destination="Mjk-12-nUl" id="tmV-cg-LtW"/>
                 <outlet property="descriptionTextView" destination="lXy-xm-fSE" id="HWL-qk-k9n"/>
             </connections>
         </collectionViewCell>

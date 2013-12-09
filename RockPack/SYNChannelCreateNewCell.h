@@ -23,5 +23,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *createCellButton;
 @property (nonatomic, weak) id<SYNChannelCreateNewCelllDelegate> viewControllerDelegate;
 @property (nonatomic) CreateNewChannelCellState state;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionPlaceholderLabel;
 
 @end
