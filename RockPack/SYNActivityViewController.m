@@ -372,7 +372,7 @@
     [self markAsReadForNotification: notification];
 }
 
-
+// this is the secondary button to the right
 - (void) itemImageTableCellPressed: (UIButton *) button
 {
     
@@ -409,7 +409,9 @@
             }
             
             
+            
             channel.autoplayId = notification.videoId;
+            
             
 			[self viewChannelDetails:channel];
             
