@@ -9,6 +9,7 @@
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNSocialAddButton.h"
 #import "SYNSocialButton.h"
+#import "SYNSocialCommentButton.h"
 #import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "UIFont+SYNFont.h"
@@ -19,6 +20,7 @@
 
 @property (strong, nonatomic) IBOutlet SYNSocialButton *likeControl;
 @property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;
+@property (strong, nonatomic) IBOutlet SYNSocialCommentButton *commentControl;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
 
 @end
@@ -49,6 +51,12 @@
 {
     [self.delegate addControlPressed: sender];
 }
+
+- (IBAction) commentControlPressed: (id) sender
+{
+    [self.delegate commentControlPressed: sender];
+}
+
 
 
 - (IBAction) shareControlPressed: (id) sender

@@ -104,7 +104,9 @@ static NSDateFormatter *dateFormatter = nil;
     self.dateAdded = [dictionary dateFromISO6801StringForKey: @"date_added"
                                                  withDefault: [NSDate date]];
     
-    NSString *dateAdded = [dictionary objectForKey: @"date_added"];
+    NSString *dateAdded = [dictionary objectForKey: @"source_date_uploaded"];
+    
+    
     NSString *dayAdded = [dateAdded substringToIndex: [dateAdded rangeOfString: @"T"].location];
     self.dateOfDayAdded = [[VideoInstance DayOfDateFormatter] dateFromString: dayAdded];
     

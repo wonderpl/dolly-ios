@@ -81,6 +81,10 @@
     
     NSDateComponents *timeAgoComponents = videoInstance.timeAgo;
     
+    // NSLog(@"%@ -> %@", videoInstance.title, videoInstance.dateAdded);
+    
+    self.timeLabel.hidden = NO;
+    
     if (timeAgoComponents.year)
     {
         self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
@@ -97,7 +101,10 @@
     {
         self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
     }
-    
+    else
+    {
+        self.timeLabel.hidden = YES;
+    }
     
     // == Methods like sizeWithFont failed so first shrink and then get the correct height == //
     CGRect titleLabelFrame = self.titleLabel.frame;

@@ -14,11 +14,16 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SYNFeedbackViewController () <UITextViewDelegate>
+{
+    UIColor* purpleColor;
+}
 
 @property (nonatomic, strong) IBOutlet UISlider* slider;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* sliderLabel;
 @property (nonatomic, strong) IBOutlet UITextView* textView;
+
+@property (nonatomic) BOOL hasTouchedSlider;
 
 // label
 
@@ -28,11 +33,14 @@
 
 @property (nonatomic, strong) IBOutlet UIView* containerSlider;
 
+@property (nonatomic, readonly) NSArray* sliderElements;
+
 @end
 
 @implementation SYNFeedbackViewController
 
 static NSString* placeholderText = @"Your feedback...";
+static NSString* errorText = @"Please provide your feedback here...";
 
 - (void)viewDidLoad
 {
@@ -81,16 +89,8 @@ static NSString* placeholderText = @"Your feedback...";
     
     self.textView.font = [UIFont regularCustomFontOfSize:self.textView.font.pointSize];
     
+    purpleColor = self.slider.tintColor;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardNotified:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardNotified:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:self.view.window];
     
     
     // add lines around container
@@ -117,7 +117,26 @@ static NSString* placeholderText = @"Your feedback...";
                                                                            blue: (128.0f/255.0f)
                                                                           alpha: 1.0f]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+    
+    self.hasTouchedSlider = NO;
+    
+    
+}
+
+
+- (void) dealloc
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) keyboardNotified: (NSNotification*) notification
@@ -126,9 +145,9 @@ static NSString* placeholderText = @"Your feedback...";
     {
         CGRect sFrame = self.navigationController.view.frame;
         if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-            sFrame.origin.y -= 140.0f;
+            sFrame.origin.y -= 110.0f;
         else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-            sFrame.origin.y += 140.0f;
+            sFrame.origin.y += 110.0f;
         __weak SYNFeedbackViewController* wself = self;
         [UIView animateWithDuration:0.3f animations:^{
             wself.navigationController.view.frame = sFrame;
@@ -145,10 +164,37 @@ static NSString* placeholderText = @"Your feedback...";
 
 - (void) sendButtonPressed:(UIBarButtonItem*)buttonItem
 {
+    
+    
+    // do checks
+    
+    if(!self.hasTouchedSlider)
+    {
+        [self lightUpSlider:YES
+                   forError:YES];
+        
+        return;
+    }
+    
+    if([self.textView.text isEqualToString:placeholderText] ||
+       [self.textView.text isEqualToString:@""])
+    {
+        
+        self.textView.text = errorText;
+        [self.textView resignFirstResponder];
+        self.textView.textColor = [UIColor redColor];
+        return;
+        
+    }
+    
+    
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    
     [self sendMessage];
 }
+
+
 
 - (void) closeButtonPressed:(UIBarButtonItem*)buttonItem
 {
@@ -179,10 +225,16 @@ static NSString* placeholderText = @"Your feedback...";
                                              
                                              self.navigationItem.rightBarButtonItem.enabled = YES;
                                              self.navigationItem.leftBarButtonItem.enabled = YES;
+                                             
+                                             [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+                                             
+                                             
                                             } errorHandler:^(id error) {
                                              
-                                             self.navigationItem.rightBarButtonItem.enabled = YES;
+                                                self.navigationItem.rightBarButtonItem.enabled = YES;
                                                 self.navigationItem.leftBarButtonItem.enabled = YES;
+                                                
+                                                
                                             }];
 }
 
@@ -190,11 +242,14 @@ static NSString* placeholderText = @"Your feedback...";
 
 - (IBAction)sliderMoved:(UISlider*)slider
 {
-    self.currentValueLabel.text = [NSString stringWithFormat:@"%0.1f", slider.value];
+    
+    self.hasTouchedSlider = YES;
+    
+    self.currentValueLabel.text = [NSString stringWithFormat:@"%i", (int)slider.value];
     
     CGFloat ratio = self.slider.value/self.slider.maximumValue;
     
-    CGFloat xPosition = ((self.slider.frame.size.width - 34.0f) * ratio) + self.slider.frame.origin.x + 15.0f;
+    CGFloat xPosition = ((self.slider.frame.size.width - 30.0f) * ratio) + self.slider.frame.origin.x + 15.0f;
     
     
     self.currentValueLabel.center = CGPointMake(xPosition, self.currentValueLabel.center.y);
@@ -206,8 +261,9 @@ static NSString* placeholderText = @"Your feedback...";
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:placeholderText]) {
+    if ([textView.text isEqualToString:placeholderText] || [textView.text isEqualToString:errorText]) {
         textView.text = @"";
+        
         self.navigationItem.rightBarButtonItem.enabled = YES;
         textView.textColor = [UIColor blackColor]; // optional
     }
@@ -222,6 +278,66 @@ static NSString* placeholderText = @"Your feedback...";
         textView.textColor = [UIColor lightTextColor]; //optional
     }
     [textView resignFirstResponder];
+}
+
+#pragma mark - Slider Presentation States
+
+- (void) setHasTouchedSlider:(BOOL)hasTouchedSlider
+{
+    _hasTouchedSlider = hasTouchedSlider;
+    
+    if(_hasTouchedSlider)
+    {
+        [self lightUpSlider:YES];
+    }
+    else
+    {
+        [self lightUpSlider:NO];
+    }
+    
+}
+
+- (void) lightUpSlider:(BOOL)lightUp
+{
+    [self lightUpSlider:lightUp forError:NO];
+}
+
+- (void) lightUpSlider:(BOOL)lightUp forError:(BOOL)forError
+{
+    
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        
+        for (UIView* v in self.sliderElements)
+        {
+            v.alpha = lightUp ? 1.0f : 0.5f;
+            
+            if(forError)
+            {
+                v.tintColor = [UIColor redColor];
+                if([v isKindOfClass:[UILabel class]])
+                    ((UILabel*)v).textColor = [UIColor redColor];
+            }
+            else
+            {
+                v.tintColor = purpleColor;
+                if([v isKindOfClass:[UILabel class]])
+                    ((UILabel*)v).textColor = purpleColor;
+            }
+        }
+        
+        
+    }];
+    
+}
+
+
+- (NSArray*)sliderElements
+{
+    return @[self.slider,
+             self.minValueLabel,
+             self.maxValueLabel,
+             self.currentValueLabel];
 }
 
 @end

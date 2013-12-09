@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractCommon" representedClassName="AbstractCommon" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletion" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,6 +51,12 @@
         <relationship name="channels" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Channel" inverseName="channelOwner" inverseEntity="Channel" syncable="YES"/>
         <relationship name="starred" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VideoInstance" inverseName="starrers" inverseEntity="VideoInstance" syncable="YES"/>
         <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Channel" inverseName="subscribers" inverseEntity="Channel" syncable="YES"/>
+    </entity>
+    <entity name="Comment" representedClassName="Comment" parentEntity="AbstractCommon" syncable="YES">
+        <attribute name="commentText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnailUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CoverArt" representedClassName="CoverArt" parentEntity="AbstractCommon" syncable="YES">
         <attribute name="coverRef" optional="YES" attributeType="String" syncable="YES"/>
@@ -147,19 +153,20 @@
         <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="videoInstances" inverseEntity="Video" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AbstractCommon" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Channel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ChannelCover" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ChannelOwner" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="CoverArt" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ExternalAccount" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="FeedItem" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Genre" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Recomendation" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SubGenre" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Video" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="VideoInstance" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AbstractCommon" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Channel" positionX="0" positionY="0" width="128" height="300"/>
+        <element name="ChannelCover" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="ChannelOwner" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="CoverArt" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="ExternalAccount" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="FeedItem" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="Friend" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="Genre" positionX="16" positionY="-207" width="128" height="105"/>
+        <element name="Recomendation" positionX="-189" positionY="-234" width="128" height="135"/>
+        <element name="SubGenre" positionX="-162" positionY="288" width="128" height="75"/>
+        <element name="User" positionX="-468" positionY="138" width="128" height="240"/>
+        <element name="Video" positionX="-198" positionY="9" width="128" height="225"/>
+        <element name="VideoInstance" positionX="205" positionY="-9" width="128" height="150"/>
+        <element name="Comment" positionX="151" positionY="-99" width="128" height="103"/>
     </elements>
 </model>

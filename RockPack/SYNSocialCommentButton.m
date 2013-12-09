@@ -1,14 +1,14 @@
 //
-//  SYNAddControlButton.m
+//  SYNSocialCommentButton.m
 //  dolly
 //
-//  Created by Michael Michailidis on 25/10/2013.
+//  Created by Michael Michailidis on 06/12/2013.
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSocialAddButton.h"
+#import "SYNSocialCommentButton.h"
 
-@implementation SYNSocialAddButton
+@implementation SYNSocialCommentButton
 
 - (void) awakeFromNib
 {
@@ -25,8 +25,6 @@
     
     [self setImage: [UIImage imageNamed: @"IconVideoAddHighlighted"]
           forState: UIControlStateHighlighted];
-    
-    self.titleLabel.hidden = YES;
 }
 
 
@@ -45,6 +43,18 @@
                            green: (92.0f / 255.0f)
                             blue: (72.0f / 255.0f)
                            alpha: 1.0f];
+}
+
+#pragma mark - Set / Get Count
+
+- (void) setCount:(NSInteger)count
+{
+    _count = count;
+    
+    if(_count < 100)
+        [self setTitle:[NSString stringWithFormat:@"%i", count]];
+    else
+        [self setTitle:[NSString stringWithFormat:@"%i+", count]];
 }
 
 @end

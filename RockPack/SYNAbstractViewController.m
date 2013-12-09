@@ -289,8 +289,7 @@
 
 - (void) addControlPressed: (SYNSocialButton *) socialControl
 {
-    if (![socialControl.dataItemLinked
-          isKindOfClass: [VideoInstance class]])
+    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
     {
         return; // only relates to video instances
     }
@@ -313,6 +312,14 @@
     [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
                                                         object: self
                                                       userInfo: @{@"VideoInstance": videoInstance}];
+}
+
+#warning Implement Method
+- (void) commentControlPressed:(SYNSocialButton *)socialButton
+{
+    
+
+    
 }
 
 
