@@ -866,7 +866,7 @@ UIPopoverControllerDelegate>
         
         if (obj == self.channel)
         {
-            self.dataItemsAvailable = self.channel.totalVideosValue;
+            self.dataItemsAvailable = self.channel.totalVideosValueValue;
             //does this do anything, do i need it?
             //   self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
             
@@ -1026,8 +1026,10 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (void) loadMoreVideos
 {
+    //data should be up to date
+    //this should not be needed
+    self.dataItemsAvailable = self.channel.totalVideosValueValue;
     
-    self.dataItemsAvailable = self.channel.totalVideosValue;
     if(!self.moreItemsToLoad)
         return;
     
