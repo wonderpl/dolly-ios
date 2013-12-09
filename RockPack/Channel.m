@@ -141,6 +141,7 @@
     if (!(ignoringObjects & kIgnoreVideoInstanceObjects) && hasVideoInstances)
     {
         
+        //needed?
         if (![videosDictionary[@"total"] isKindOfClass: [NSNull class]])
         {
             self.totalVideosValue = videosDictionary[@"total"];
@@ -333,19 +334,18 @@
     self.eCommerceURL = [dictionary objectForKey: @"ecommerce_url"
                                      withDefault: @""];
     
-//    NSLog(@"%@", dictionary);
-
     NSDictionary *videos = [dictionary objectForKey:@"videos"];
     
-    if(![videos[@"total"] isKindOfClass:[NSNull class]])
+    if ([[videos objectForKey:@"total"] isKindOfClass:[NSNumber class]])
     {
-        if ([[videos objectForKey:@"total"] isKindOfClass:[NSNull class]])
-        {
-            self.totalVideosValue = [videos objectForKey:@"total"];
-        }
+        self.totalVideosValue = [videos objectForKey:@"total"];
+        
     }
-        //
-//    NSLog(@"aaaaaa : %ld", (long)self.totalVideosValue);
+    else
+    {
+        self.totalVideosValue = [NSNumber numberWithInt:0]; // if the 'total' value was not returned then pass the existing numbers fetched
+    }
+
 }
 
 
