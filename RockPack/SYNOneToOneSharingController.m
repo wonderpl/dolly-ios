@@ -23,7 +23,7 @@
 #import "SYNMasterViewController.h"
 #import "VideoInstance.h"
 #import "NSString+Validation.h"
-#import <objc/runtime.h>
+#import "UICollectionReusableView+Helpers.h"
 @import AddressBook;
 @import QuartzCore;
 
@@ -45,12 +45,8 @@
 @property (nonatomic, strong) Friend *friendToAddEmail;
 @property (nonatomic, strong) Friend* friendHeldInQueue;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loader;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* facebookLoader;
-@property (nonatomic, strong) IBOutlet UIButton *authorizeFacebookButton;
 @property (nonatomic, strong) IBOutlet UICollectionView *recentFriendsCollectionView;
 
-@property (nonatomic, strong) IBOutlet UILabel * facebookLabel;
-@property (nonatomic, strong) IBOutlet UILabel *shareLabel;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UITableView *searchResultsTableView;
 
@@ -64,7 +60,6 @@
 
 @property (nonatomic, strong) IBOutlet UISearchBar* searchBar;
 
-@property (nonatomic, strong) UIImage *imageToShare;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
 
@@ -109,22 +104,17 @@
 {
     [super viewDidLoad];
     
-    [self.loader hidesWhenStopped];
-    self.facebookLoader.hidden = YES;
-    
     self.friends = [NSMutableArray array];
     self.recentFriends = @[];
     
     self.addressBookImageCache = [[NSCache alloc] init];
     
-    self.currentSearchTerm = [[NSMutableString alloc] init];
-    
+    self.currentSearchTerm = [NSMutableString string];
     
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
-    self.shareLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    [self.recentFriendsCollectionView registerNib: [UINib nibWithNibName: @"SYNOneToOneSharingFriendCell" bundle: nil]
-                       forCellWithReuseIdentifier: @"SYNOneToOneSharingFriendCell"];
+    [self.recentFriendsCollectionView registerNib:[SYNOneToOneSharingFriendCell nib]
+                       forCellWithReuseIdentifier:[SYNOneToOneSharingFriendCell reuseIdentifier]];
     
 
     if (IS_IPHONE)
@@ -516,8 +506,8 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNOneToOneSharingFriendCell *userThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNOneToOneSharingFriendCell"
-                                                                                                forIndexPath: indexPath];
+    SYNOneToOneSharingFriendCell *userThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNOneToOneSharingFriendCell reuseIdentifier]
+                                                                                                forIndexPath:indexPath];
     NSInteger realIndex = indexPath.item;
     
     if (realIndex == 0 && displayEmailCell)
