@@ -39,6 +39,7 @@
     self.timeLabel.font = [UIFont lightCustomFontOfSize:self.timeLabel.font.pointSize];
 }
 
+#pragma mark - Delegate Methods
 
 - (IBAction) likeControlPressed: (id) sender
 {
@@ -57,13 +58,12 @@
     [self.delegate commentControlPressed: sender];
 }
 
-
-
 - (IBAction) shareControlPressed: (id) sender
 {
     [self.delegate shareControlPressed: sender];
 }
 
+#pragma mark - Setting Data Item
 
 - (void) setVideoInstance: (VideoInstance *) videoInstance
 {
@@ -72,11 +72,10 @@
     self.shareControl.dataItemLinked = _videoInstance;
     self.addControl.dataItemLinked = _videoInstance;
     self.likeControl.dataItemLinked = _videoInstance;
+    self.commentControl.dataItemLinked = _videoInstance;
     
     if (!_videoInstance)
-    {
         return;
-    }
     
     [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]     
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]

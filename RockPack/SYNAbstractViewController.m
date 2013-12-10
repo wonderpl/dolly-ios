@@ -26,6 +26,7 @@
 #import "SYNProfileRootViewController.h"
 #import "Recomendation.h"
 #import "SYNSocialButton.h"
+#import "SYNCommentingViewController.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
@@ -313,10 +314,12 @@
                                                       userInfo: @{@"VideoInstance": videoInstance}];
 }
 
-#warning Implement Method
+
 - (void) commentControlPressed:(SYNSocialButton *)socialButton
 {
+    SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] init];
     
+    [appDelegate.masterViewController addOverlayController:commentController animated:YES];
 
     
 }
