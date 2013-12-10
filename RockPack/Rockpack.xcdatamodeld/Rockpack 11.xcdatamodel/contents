@@ -24,6 +24,7 @@
         <attribute name="subscribedByUser" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="subscribersCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalVideosValue" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="channelCover" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelCover" inverseName="channel" inverseEntity="ChannelCover" syncable="YES"/>
         <relationship name="channelOwner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="channels" inverseEntity="ChannelOwner" syncable="YES"/>
         <relationship name="subscribers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="subscriptions" inverseEntity="ChannelOwner" syncable="YES"/>

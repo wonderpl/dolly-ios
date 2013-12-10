@@ -11,6 +11,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
 #import "SYNSearchResultsUserCell.h"
+#import "UICollectionReusableView+Helpers.h"
 
 @interface SYNSubscribersViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNSocialActionsDelegate>
 
@@ -54,12 +55,12 @@
         self.usersThumbnailCollectionView.backgroundColor = [UIColor whiteColor];
     }
     
-    [self.usersThumbnailCollectionView registerNib:[UINib nibWithNibName:@"SYNSearchResultsUserCell" bundle:nil]
-                        forCellWithReuseIdentifier:@"SYNSearchResultsUserCell"];
+    [self.usersThumbnailCollectionView registerNib:[SYNSearchResultsUserCell nib]
+                        forCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]];
     
-    [self.usersThumbnailCollectionView registerNib:[UINib nibWithNibName:@"SYNChannelFooterMoreView" bundle:nil]
+    [self.usersThumbnailCollectionView registerNib:[SYNChannelFooterMoreView nib]
                         forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                               withReuseIdentifier:@"SYNChannelFooterMoreView"];
+                               withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
 }
 
@@ -144,8 +145,8 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNSearchResultsUserCell* userCell = (SYNSearchResultsUserCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"SYNSearchResultsUserCell"
-                                                                                                              forIndexPath:indexPath];
+    SYNSearchResultsUserCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]
+																				   forIndexPath:indexPath];
     ChannelOwner* channelOwner = (ChannelOwner*)self.users[indexPath.item];
     
     userCell.channelOwner = channelOwner;
@@ -219,9 +220,9 @@
     {
         if (kind == UICollectionElementKindSectionFooter)
         {
-            self.footerView = [self.usersThumbnailCollectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                                                    withReuseIdentifier: @"SYNChannelFooterMoreView"
-                                                                                           forIndexPath: indexPath];
+            self.footerView = [self.usersThumbnailCollectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                                    withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
+                                                                                           forIndexPath:indexPath];
             supplementaryView = self.footerView;
             
             if (self.users.count > 0)

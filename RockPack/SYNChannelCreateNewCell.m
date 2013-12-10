@@ -42,7 +42,10 @@
         [self.boarderView.layer setBorderWidth:1.0f];
 
     }
-    
+    //May not be a good idea to do this
+    [self.createTextField setValue:[UIColor lightGrayColor]
+                    forKeyPath:@"_placeholderLabel.textColor"];
+
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelCreateNewCelllDelegate>)  viewControllerDelegate

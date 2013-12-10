@@ -13,8 +13,4 @@ extern NSString *const VideoSourceOoyala;
 + (Video *) instanceFromVideo: (Video *) video
     usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
 
-
-- (UIImage *) thumbnailImage;
-- (NSURL *) localVideoURL;
-
 @end

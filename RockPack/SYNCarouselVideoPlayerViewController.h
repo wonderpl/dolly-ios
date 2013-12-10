@@ -9,8 +9,11 @@
 #import "SYNVideoPlayerViewController.h"
 
 @class SYNVideoPlayer;
+@class SYNPagingModel;
 
 @interface SYNCarouselVideoPlayerViewController : SYNVideoPlayerViewController
+
++ (instancetype)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex;
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex;
 

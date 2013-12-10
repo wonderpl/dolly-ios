@@ -363,6 +363,7 @@
     
     self.sameChannelNameAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"New channels can not have the same titles", @"Unfollow a channel in profile") message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:nil];
 
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -926,7 +927,7 @@
                 [videoCountString appendString:@"- "];
             }
             
-            [videoCountString appendFormat:@"%d %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
+            [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
 
             channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
             
@@ -962,7 +963,7 @@
                 }
                 
                 
-                [videoCountString appendFormat:@"%ld %@",(long)channel.videoInstances.count, NSLocalizedString(@"Videos", nil)];
+                [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
             }
@@ -1226,6 +1227,7 @@
     self.dataRequestRange = self.dataRequestRangeSubscriptions;
     self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptionsValue;
 
+    
     if(!self.moreItemsToLoad)
         return;
     
@@ -1569,6 +1571,10 @@
 - (void) channelTapped: (UICollectionViewCell *) cell
 {
     
+    //is currently creating a channel, cancel and put it back into noncreating state
+    if (self.creatingChannel) {
+        [self cancelCreateChannel];
+    }
     
     SYNChannelMidCell *selectedCell = (SYNChannelMidCell *) cell;
     
@@ -2075,6 +2081,8 @@
     //        cover = @"";
     //    }
     
+    
+    
     [appDelegate.oAuthNetworkEngine createChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                      title: self.createChannelCell.createTextField.text
                                                description: self.createChannelCell.descriptionTextView.text
@@ -2133,6 +2141,7 @@
                                              //                                             [self	 showError: errorMessage
                                              //                                               showErrorTitle: errorTitle];
                                          }];
+    
     
     [self cancelCreateChannel];
     
@@ -2218,6 +2227,11 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     }
     //[self resetOffsetWithAnimation];
     
+    if (self.creatingChannel && self.createChannelCell.descriptionTextView == textView && [textView.text isEqualToString:@""])
+    {
+        self.createChannelCell.descriptionPlaceholderLabel.hidden = NO;
+    }
+    
     [textView resignFirstResponder];
 }
 
@@ -2225,7 +2239,14 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
     
-    textView.text = @"";
+    //Using a placeholder label to mimic placeholder text in textview
+    
+    if (self.creatingChannel && self.createChannelCell.descriptionTextView == textView )
+    {
+            self.createChannelCell.descriptionPlaceholderLabel.hidden = YES;
+    }
+
+    
     if (self.modeType == kModeEditProfile) {
         
         [UIView animateWithDuration:0.3f animations:^{
@@ -2236,7 +2257,11 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     }
     else
     {
-        [self setCreateOffset];
+        if (IS_IPAD) {
+            
+            [self setCreateOffset];
+            
+        }
     }
 }
 
@@ -2292,7 +2317,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 - (IBAction)followAllTapped:(id)sender
 {
-    //    NSLog(@"Follow all");
     NSString *message = @"Are you sure you want to follow all channels of this user";
     message =  [message stringByAppendingString:@" "];
     message =  [message stringByAppendingString:self.channelOwner.username];
@@ -2347,7 +2371,6 @@ finishedWithImage: (UIImage *) image
 {
     
     self.creatingChannel = YES;
-    //    NSLog(@"create cell");
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
         NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
@@ -2369,7 +2392,14 @@ finishedWithImage: (UIImage *) image
             }
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
-            
+            if ([((SYNChannelCreateNewCell*)cell).descriptionTextView.text isEqualToString:@""]) {
+                ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = NO;
+            }
+            else
+            {
+                ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
+
+            }
 //#warning animations
         }
             void (^animateEditMode)(void) = ^{
@@ -2385,7 +2415,6 @@ finishedWithImage: (UIImage *) image
                     tmpBoarder.size.height+= kHeightChange;
                     ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
                     [((SYNChannelCreateNewCell*)cell).createTextField becomeFirstResponder];
-                    
                 }
                 else
                 {
@@ -2466,12 +2495,10 @@ finishedWithImage: (UIImage *) image
 {
     
     self.creatingChannel = NO;
-    //    NSLog(@"cancelCancelChannel");
     
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
     
-    //    NSLog(@"create cell");
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
         NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
@@ -2480,11 +2507,15 @@ finishedWithImage: (UIImage *) image
         
         if (index == 0)
         {
-            [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];            [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
+            [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];
+            [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
             
             CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
             tmpBoarder.size.height-= kHeightChange;
             ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+            
+                ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
+
             
         }
         void (^animateProfileMode)(void) = ^{

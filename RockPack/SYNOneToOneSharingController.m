@@ -251,16 +251,8 @@
 }
 
 
-- (void) keyboardNotification: (NSNotification *) notification
-{
-    if ([[notification name] isEqualToString: UIKeyboardWillShowNotification])
-    {
-        self.keyboardIsOnScreen = YES;
-    }
-    else if ([[notification name] isEqualToString: UIKeyboardWillHideNotification])
-    {
-        self.keyboardIsOnScreen = NO;
-    }
+- (void) keyboardNotification:(NSNotification *)notification {
+	self.keyboardIsOnScreen = [[notification name] isEqualToString:UIKeyboardWillShowNotification];
     
     [UIView animateWithDuration: 0.3
                           delay: 0.0
@@ -268,20 +260,36 @@
                      animations: ^{
                          // push popup up
                          CGRect vFrame = self.view.frame;
-                         
-                         if (_keyboardIsOnScreen)
-                         {
-                             vFrame.origin.y -= 160.0f;
-                         }
-                         else
-                         {
-                             vFrame.origin.y += 160.0f;
+						 
+						 CGPoint offset = CGPointZero;
+						 if (self.presentingViewController) {
+							 // This will be set if we're using iOS7 view controller transitions, in which case the view isn't
+							 // transformed, so we have to manually offset it along the correct axis
+							 offset = [self keyboardOffsetForInterfaceOrientation:self.interfaceOrientation];
+						 } else {
+							 offset = CGPointMake(0, -160);
+						 }
+						 
+                         if (self.keyboardIsOnScreen) {
+							 vFrame = CGRectOffset(vFrame, offset.x, offset.y);
+                         } else {
+							 vFrame = CGRectOffset(vFrame, -offset.x, -offset.y);
                          }
                          
                          self.view.frame = vFrame;
                          
                      }
                      completion: nil];
+}
+
+- (CGPoint)keyboardOffsetForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	NSDictionary *mappings = @{
+							   @(UIInterfaceOrientationPortrait) : [NSValue valueWithCGPoint:CGPointMake(0, -160)],
+							   @(UIInterfaceOrientationPortraitUpsideDown) : [NSValue valueWithCGPoint:CGPointMake(0, 160)],
+							   @(UIInterfaceOrientationLandscapeLeft) : [NSValue valueWithCGPoint:CGPointMake(-160, 0)],
+							   @(UIInterfaceOrientationLandscapeRight) : [NSValue valueWithCGPoint:CGPointMake(160, 0)],
+							   };
+	return [mappings[@(interfaceOrientation)] CGPointValue];
 }
 
 

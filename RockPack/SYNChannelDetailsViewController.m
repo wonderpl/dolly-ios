@@ -474,7 +474,7 @@ UIPopoverControllerDelegate>
     
     self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
-    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%lu %@", (unsigned long)self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
+    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
     
     [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
     
@@ -482,7 +482,7 @@ UIPopoverControllerDelegate>
     
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
-    if (self.channel.videoInstances.count == 0)
+    if ([self.channel.totalVideosValue integerValue] == 0)
     {
         self.lblNoVideos.hidden = NO;
     }
@@ -794,7 +794,7 @@ UIPopoverControllerDelegate>
             
             // set the request to maximum
             
-            self.dataRequestRange = NSMakeRange(0, MAXIMUM_REQUEST_LENGTH);
+            self.dataRequestRange = NSMakeRange(0, 48);
         }
         
         [[NSNotificationCenter defaultCenter] addObserver: self
@@ -866,7 +866,7 @@ UIPopoverControllerDelegate>
         
         if (obj == self.channel)
         {
-            self.dataItemsAvailable = self.channel.totalVideosValue;
+            self.dataItemsAvailable = self.channel.totalVideosValueValue;
             //does this do anything, do i need it?
             //   self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
             
@@ -1026,9 +1026,12 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (void) loadMoreVideos
 {
+    //data should be up to date
+    //this should not be needed
+    self.dataItemsAvailable = self.channel.totalVideosValueValue;
+    
     if(!self.moreItemsToLoad)
         return;
-    
     
     self.loadingMoreContent = YES;
     
@@ -1345,7 +1348,7 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.txtFieldChannelName.hidden = YES;
     self.txtViewDescription.hidden = YES;
     
-    if (self.channel.videoInstances.count == 0)
+    if ([self.channel.totalVideosValue integerValue]== 0)
     {
         self.lblNoVideos.hidden = NO;
     }
@@ -1410,7 +1413,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     self.btnDeleteChannel.alpha = 0.0f;
     self.txtFieldChannelName.alpha = 0.0f;
     self.txtViewDescription.alpha = 0.0f;
-    self.lblNoVideos.hidden = YES;
     
     [UIView animateWithDuration:0.4 animations:^{
         self.btnDeleteChannel.alpha = 1.0f;

@@ -18,6 +18,7 @@ extern const struct ChannelAttributes {
 	__unsafe_unretained NSString *subscribedByUser;
 	__unsafe_unretained NSString *subscribersCount;
 	__unsafe_unretained NSString *title;
+	__unsafe_unretained NSString *totalVideosValue;
 } ChannelAttributes;
 
 extern const struct ChannelRelationships {
@@ -34,6 +35,7 @@ extern const struct ChannelFetchedProperties {
 @class ChannelOwner;
 @class ChannelOwner;
 @class VideoInstance;
+
 
 
 
@@ -216,6 +218,20 @@ extern const struct ChannelFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* totalVideosValue;
+
+
+
+@property int64_t totalVideosValueValue;
+- (int64_t)totalVideosValueValue;
+- (void)setTotalVideosValueValue:(int64_t)value_;
+
+//- (BOOL)validateTotalVideosValue:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) ChannelCover *channelCover;
 
 //- (BOOL)validateChannelCover:(id*)value_ error:(NSError**)error_;
@@ -356,6 +372,15 @@ extern const struct ChannelFetchedProperties {
 
 - (NSString*)primitiveTitle;
 - (void)setPrimitiveTitle:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveTotalVideosValue;
+- (void)setPrimitiveTotalVideosValue:(NSNumber*)value;
+
+- (int64_t)primitiveTotalVideosValueValue;
+- (void)setPrimitiveTotalVideosValueValue:(int64_t)value_;
 
 
 
