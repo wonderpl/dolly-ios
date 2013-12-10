@@ -14,6 +14,7 @@
 - (instancetype)initWithLoadedItems:(NSArray *)loadedItems {
 	if (self = [super init]) {
 		self.loadedItems = loadedItems;
+		self.loadedRange = NSMakeRange(0, [loadedItems count]);
 		self.totalItemCount = [loadedItems count];
 	}
 	return self;
