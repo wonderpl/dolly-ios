@@ -1086,12 +1086,6 @@
                                            }];
 }
 
-
-
--(void)finishingPresentation
-{
-}
-
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
