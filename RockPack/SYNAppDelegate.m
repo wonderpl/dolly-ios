@@ -1126,17 +1126,6 @@
                                           usingSource: youTubePlayerURLString];
              }
              
-             // Handle Vimeo player updates
-             NSString *vimeoPlayerURLString = dictionary[@"vimeo"];
-             
-             // Only update if we have valid HTML
-             if (vimeoPlayerURLString)
-             {
-                 [self saveAsFileToDocumentsDirectory: @"VimeoIFramePlayer"
-                                               asType: @"html"
-                                          usingSource: vimeoPlayerURLString];
-             }
-             
              self.playerUpdated = TRUE;
          }
          else
