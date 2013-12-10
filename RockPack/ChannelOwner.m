@@ -242,6 +242,9 @@
     
     NSMutableDictionary *subscriptionInsancesByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.subscriptions.count];
     
+//#warning Data is not initilising properly between the 2 logs ln260 - 289
+
+    
     for (Channel *su in self.subscriptions)
     {
         subscriptionInsancesByIdDictionary[su.uniqueId] = su;
