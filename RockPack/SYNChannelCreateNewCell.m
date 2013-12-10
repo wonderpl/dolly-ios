@@ -30,7 +30,8 @@
 
     self.descriptionTextView.alpha = 0.0f;
 
-    if (IS_RETINA) {
+    if (IS_RETINA)
+    {
         [self.descriptionTextView.layer setBorderWidth:0.5f];
         [self.createTextField.layer setBorderWidth:0.5f];
         [self.boarderView.layer setBorderWidth:0.5f];
@@ -40,11 +41,23 @@
         [self.descriptionTextView.layer setBorderWidth:1.0f];
         [self.createTextField.layer setBorderWidth:1.0f];
         [self.boarderView.layer setBorderWidth:1.0f];
-
     }
     //May not be a good idea to do this
     [self.createTextField setValue:[UIColor lightGrayColor]
                     forKeyPath:@"_placeholderLabel.textColor"];
+    
+    [self.createTextField setFont:[UIFont lightCustomFontOfSize:17.0f]];
+    [self.descriptionTextView setFont:[UIFont lightCustomFontOfSize:14.0f]];
+    [self.createCellButton.titleLabel setFont:[UIFont lightCustomFontOfSize:15.0f]];
+    [self.descriptionPlaceholderLabel setFont:[UIFont lightCustomFontOfSize:14.0f]];
+    
+    if (IS_IPAD) {
+        [self.createCellButton setBackgroundColor:[UIColor whiteColor]];
+    }
+    else
+    {
+        [self.createCellButton setBackgroundColor:[UIColor colorWithRed:241.0/255.0f green:241.0/255.0f blue:241.0/255.0f alpha:1.0f]];
+    }
 
 }
 
@@ -65,7 +78,6 @@
 
 }
 
-
 -(void)setState:(CreateNewChannelCellState)state
 {
     
@@ -74,6 +86,8 @@
     {
         case CreateNewChannelCellStateHidden:
             
+            self.descriptionTextView.text = @"";
+            self.createTextField.text = @"";
             self.descriptionTextView.hidden = YES;
             self.createTextField.hidden = YES;
             self.createCellButton.hidden = NO;

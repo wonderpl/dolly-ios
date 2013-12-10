@@ -990,7 +990,7 @@
     
     if (self.isUserProfile  && indexPath.row == 0 && collectionViewLayout == self.channelLayoutIPhone && IS_IPHONE)
     {
-        return CGSizeMake(320, 60);
+            return CGSizeMake(320, 60);
     }
     
     
@@ -1756,15 +1756,24 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
-    [textField resignFirstResponder];
+    if (textField == self.createChannelCell.createTextField) {
+        [self.createChannelCell.descriptionTextView becomeFirstResponder];
+        self.createChannelCell.descriptionTextView.text = @"";
+    }
+    else
+    {
+        [textField resignFirstResponder];
+    }
     return YES;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    if (textField == self.createChannelCell.createTextField) {
+        self.createChannelCell.descriptionTextView.text = @"";
+    }
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar
@@ -2268,8 +2277,6 @@
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
                                              
-
-                                             
                                              // shows the message label from the MasterViewController
                                              //                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                              
@@ -2280,6 +2287,10 @@
                                              
                                              //                                             NSString *channelId = resourceCreated[@"id"];
                                              
+                                             [self cancelCreateChannel];
+                                             
+                                             [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
+
                                              
                                          } errorHandler: ^(id error) {
                                              
@@ -2320,9 +2331,6 @@
                                          }];
     
     
-    [self cancelCreateChannel];
-    
-    [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
     
     
     
@@ -2420,7 +2428,8 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     
     if (self.creatingChannel && self.createChannelCell.descriptionTextView == textView )
     {
-            self.createChannelCell.descriptionPlaceholderLabel.hidden = YES;
+        self.createChannelCell.descriptionPlaceholderLabel.hidden = YES;
+        self.createChannelCell.descriptionTextView.text = @"dddd";
     }
 
     
@@ -2448,6 +2457,10 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     if ([text isEqualToString:@"\n"]) {
         
         [textView resignFirstResponder];
+        
+        if (textView == self.createChannelCell.descriptionTextView) {
+            [self saveCreateChannelTapped];
+        }
         // Return FALSE so that the final '\n' character doesn't get added
         return NO;
     }
@@ -2565,7 +2578,7 @@ finishedWithImage: (UIImage *) image
             //iphone cell height is different by 11
             if (IS_IPHONE)
             {
-                tmpBoarder.size.height+= 18;
+                tmpBoarder.size.height+= 19;
             }
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
@@ -2577,7 +2590,6 @@ finishedWithImage: (UIImage *) image
                 ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
 
             }
-//#warning animations
         }
             void (^animateEditMode)(void) = ^{
                 
@@ -2585,13 +2597,20 @@ finishedWithImage: (UIImage *) image
                 
                 if (index == 0)
                 {
+                    
                     ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 0.0;
                     ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 1.0;
                     
-                    CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                    CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
+
                     tmpBoarder.size.height+= kHeightChange;
-                    ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+                    ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
                     [((SYNChannelCreateNewCell*)cell).createTextField becomeFirstResponder];
+                    
+                    tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                    tmpBoarder.size.height = 172;
+                    ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+
                 }
                 else
                 {
@@ -2641,38 +2660,12 @@ finishedWithImage: (UIImage *) image
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
 }
 
-
--(void) setCreateOffset
-{
-    
-    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
-    {
-        if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
-            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-            
-        }
-        
-    }
-    
-    else
-    {
-        if (self.channelThumbnailCollectionView.contentOffset.y < 370) {
-            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-            
-        }
-        
-    }
-    
-    if (IS_IPHONE) {
-        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-    }
-}
-
 -(void) cancelCreateChannel
 {
     self.creatingChannel = NO;
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
+    
     
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
@@ -2684,14 +2677,8 @@ finishedWithImage: (UIImage *) image
         {
             [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];
             [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
-            
-            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
-            tmpBoarder.size.height-= kHeightChange;
-            ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
-            
-                ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
-
-            
+            ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
+            ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
         }
         void (^animateProfileMode)(void) = ^{
             CGRect frame = cell.frame;
@@ -2701,6 +2688,16 @@ finishedWithImage: (UIImage *) image
                 ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 1.0f;
                 ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 0.0f;
                 ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
+                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                if (IS_IPHONE) {
+                    tmpBoarder.size.height = 61;
+                }
+                else
+                {
+                    tmpBoarder.size.height = 80;
+                }
+                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+                
             }
             else
             {
@@ -2752,6 +2749,30 @@ finishedWithImage: (UIImage *) image
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
     
 }
+
+
+-(void) setCreateOffset
+{
+    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
+    {
+        if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+            
+        }
+    }
+    else
+    {
+        if (self.channelThumbnailCollectionView.contentOffset.y < 370) {
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+            
+        }
+    }
+    
+    if (IS_IPHONE) {
+        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+    }
+}
+
 
 -(void) updateCollectionLayout
 {
