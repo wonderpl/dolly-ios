@@ -181,7 +181,7 @@
     }
 }
 - (IBAction)deleteChannel:(id)sender {
-    [self.viewControllerDelegate deleteButtonTapped: self];
+    [self.viewControllerDelegate deleteChannelTapped: self];
 }
 
 - (IBAction)leftSwipe:(UISwipeGestureRecognizer *)recognizer

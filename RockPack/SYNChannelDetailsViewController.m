@@ -280,6 +280,8 @@ UIPopoverControllerDelegate>
     
     [self setUpMode];
     
+    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+    
 }
 
 - (void) viewWillDisappear: (BOOL) animated

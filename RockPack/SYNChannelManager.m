@@ -449,6 +449,8 @@
     };
     
     BOOL isUser = [channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+    
+    
     if (refresh == YES || [channel.resourceURL hasPrefix: @"https"] || isUser) // https does not cache so it is fresh
     {
         self.channelUpdateOperation = [appDelegate.oAuthNetworkEngine updateChannel: channel.resourceURL
@@ -496,32 +498,7 @@
                  DebugLog (@"Channel disappeared from underneath us");
              }
              
-             [appDelegate.oAuthNetworkEngine userSubscriptionsForUser: ((User *) channelOwner)
-                                                         onCompletion: ^(id dictionary) {
-                                                             
-                  // Transform the object ID into the object again, as it it likely to have disappeared again
-                  NSError *error2 = nil;
-                  ChannelOwner * channelOwnerFromId2 = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
-                                                                                                             error: &error2];
-                  if (channelOwnerFromId2)
-                  {
-                      // this will remove the old subscriptions
-                      [channelOwnerFromId2 setSubscriptionsDictionary: dictionary];
-                      
-                      [channelOwnerFromId2.managedObjectContext save: &error2];
-                      
-                      if (error)
-                      {
-                          NSString *errorString = [NSString stringWithFormat: @"%@ %@", [error localizedDescription], [error userInfo]];
-                          DebugLog(@"%@", errorString);
-                          errorBlock(@{@"saving_error": errorString});
-                      }
-                  }
-                  else
-                  {
-                      DebugLog (@"Channel disappeared from underneath us");
-                  }
-              }  onError: errorBlock];
+          
          } onError: errorBlock];
     }
     else // common channel owners user the public API
