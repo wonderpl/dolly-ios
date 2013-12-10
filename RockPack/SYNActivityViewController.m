@@ -93,9 +93,10 @@
         [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
     }
     
-    
     [self.tableView reloadData];
 }
+
+
 
 #pragma mark - Get Data
 

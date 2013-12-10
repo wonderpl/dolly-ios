@@ -15,6 +15,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNMainRegistry.h"
 #import "Video.h"
+#import "Mood.h"
 #import "VideoInstance.h"
 @import CoreData;
 
@@ -210,6 +211,39 @@
         return NO;
     
     [appDelegate saveContext: TRUE];
+    
+    return YES;
+}
+
+
+-(BOOL)registerMoodsFromDictionary:(NSDictionary*)dictionary
+{
+    // == Check for Validity == //
+    NSDictionary *channelCoverDictionary = dictionary[@"moods"];
+    if (![channelCoverDictionary isKindOfClass: [NSDictionary class]])
+        return NO;
+    
+    NSArray *itemArray = channelCoverDictionary[@"items"];
+    
+    if (![itemArray isKindOfClass: [NSArray class]])
+        return NO;
+    
+    for (NSDictionary *moodItemDictionary in itemArray)
+    {
+        if (![moodItemDictionary isKindOfClass: [NSDictionary class]])
+            continue;
+        
+        [Mood instanceFromDictionary:moodItemDictionary
+           usingManagedObjectContext:importManagedObjectContext];
+        
+    }
+    
+    BOOL saveResult = [self saveImportContext];
+    
+    if (!saveResult)
+        return NO;
+    
+    [appDelegate saveContext:NO];
     
     return YES;
 }

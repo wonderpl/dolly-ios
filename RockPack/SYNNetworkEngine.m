@@ -694,27 +694,7 @@
     [self enqueueOperation: networkOperation];
 
     
-//    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
-//    
-//    NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
-//    
-//    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-//    
-//    parameters[@"start"] = @(range.location);
-//    parameters[@"size"] = @(48);
-//    
-//    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
-//                                                                                                         params: [self getLocaleParamWithParams: parameters]
-//                                                                                                     httpMethod: @"GET"
-//                                                                                                            ssl: NO];
-//    
-//    
-//
-//    [self addCommonHandlerToNetworkOperation: networkOperation
-//                           completionHandler: completionBlock
-//                                errorHandler: errorBlock];
-//
-//    [self enqueueOperation: networkOperation];
+
 }
 
 
@@ -875,9 +855,9 @@
                           errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithURLString: kGetMoods
-                                                            params: [self getLocaleParam]
-                                                        httpMethod: @"GET"];
+    (SYNNetworkOperationJsonObject *) [self operationWithPath: kGetMoods
+                                                       params: [self getLocaleParam]
+                                                   httpMethod: @"GET"];
     
     
     

@@ -11,12 +11,13 @@
 #import "UIFont+SYNFont.h"
 #import "SYNFadingFlowLayout.h"
 #import "SYNDeviceManager.h"
+#import "Mood.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 
 @interface SYNMoodRootViewController ()
 
-@property (nonatomic, strong) NSArray *optionNames;
+@property (nonatomic, strong) NSArray *moods;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
 @property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
 
@@ -33,12 +34,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    // TODO: We need to get this list via an API
-    self.optionNames = [@[@"Laugh", @"Learn", @"Be Inspired", @"Get Healthy",
-                          @"Work Out", @"Get Cultured", @"Just Listen", @"Cook",
-                          @"Look Beautiful", @"Twerk", @"Idle Times",
-                          @"Gamer Heaven", @"Random Stuff", @"Editor's Pick",
-                          @"Cars, Planes & Trains", @"Nerd Up"] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+    self.moods = @[];
     
     // Setup mood collection view
     [self.moodCollectionView registerClass:[SYNMoodCell class]
@@ -52,17 +48,51 @@
                                                                                  target:self
                                                                                  action:@selector(rightBarButtonItemPressed:)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    [self loadMoods];
+    
+    [self getUpdatedMoods];
 }
 
--(void)viewWillAppear:(BOOL)animated
+#pragma mark - Getting Mood Objects
+
+- (void) loadMoods
 {
-    [super viewWillAppear:animated];
     
-    [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
-                                    atScrollPosition: UICollectionViewScrollPositionCenteredVertically
-                                            animated: NO];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Mood"];
+    
+    NSError* error;
+    self.moods = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest
+                                                                     error:&error];
+    if(self.moods == 0)
+    {
+        
+    }
+    
+    [self.moodCollectionView reloadData];
     
     
+}
+
+-(void) getUpdatedMoods
+{
+    [appDelegate.networkEngine getMoodsWithCompletionHandler:^(id responce) {
+        
+        if(![responce isKindOfClass:[NSDictionary class]])
+            return;
+        
+        if([appDelegate.mainRegistry registerMoodsFromDictionary:responce])
+        {
+            [self loadMoods];
+        }
+        
+        
+        
+    } errorHandler:^(id error) {
+        
+        
+        
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -88,7 +118,7 @@
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section
 {
-    return LARGE_AMOUNT_OF_ROWS;
+    return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
 }
 
 
@@ -103,9 +133,9 @@
     SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNMoodCell class])
                                                                                forIndexPath: indexPath];
     
-    NSString* currentOptionName = self.optionNames [indexPath.item % self.optionNames.count];
+    Mood* mood = self.moods [indexPath.item % self.moods.count];
     
-    moodCell.titleLabel.text = currentOptionName;
+    moodCell.titleLabel.text = mood.name;
     
     return moodCell;
 }
@@ -187,6 +217,21 @@
     
 }
 
+-(void)setMoods:(NSArray *)moods
+{
+    _moods = moods;
+    
+    if(moods.count > 0)
+    {
+        [self.moodCollectionView reloadData];
+        
+        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
+                                        atScrollPosition: UICollectionViewScrollPositionCenteredVertically
+                                                animated: NO];
+    }
+    
+    
+}
 
 
 @end

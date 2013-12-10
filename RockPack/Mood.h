@@ -1,5 +1,10 @@
 #import "_Mood.h"
 
 @interface Mood : _Mood {}
-// Custom logic goes here.
+
+
++ (Mood *) instanceFromDictionary: (NSDictionary *) dictionary
+        usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
+
+
 @end
