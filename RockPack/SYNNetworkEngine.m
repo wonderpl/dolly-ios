@@ -871,7 +871,21 @@
 }
 
 
-
+- (void) getMoodsWithCompletionHandler: (MKNKUserSuccessBlock) completionBlock
+                          errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    SYNNetworkOperationJsonObject *networkOperation =
+    (SYNNetworkOperationJsonObject *) [self operationWithURLString: kGetMoods
+                                                            params: [self getLocaleParam]
+                                                        httpMethod: @"GET"];
+    
+    
+    
+    [networkOperation addJSONCompletionHandler: completionBlock
+                                  errorHandler: errorBlock];
+    
+    [self enqueueOperation: networkOperation];
+}
 
 
 
