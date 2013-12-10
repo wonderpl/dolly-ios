@@ -296,14 +296,9 @@
     }
     
     VideoInstance *videoInstance = socialControl.dataItemLinked;
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoPlusButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
+	
+	[[GAI sharedInstance] trackVideoAdd];
+	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: @"select"
                                             videoInstanceId: videoInstance.uniqueId

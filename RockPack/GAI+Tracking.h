@@ -11,5 +11,6 @@
 @interface GAI (Tracking)
 
 - (void)trackVideoShare;
+- (void)trackVideoAdd;
 
 @end

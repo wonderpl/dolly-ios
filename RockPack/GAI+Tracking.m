@@ -9,12 +9,18 @@
 #import "GAI+Tracking.h"
 
 static NSString *const UIActionCategory = @"uiAction";
+
 static NSString *const VideoShareAction = @"videoShareButtonClick";
+static NSString *const VideoAddAction = @"videoPlusButtonClick";
 
 @implementation GAI (Tracking)
 
 - (void)trackVideoShare {
 	[self trackEventWithCategory:UIActionCategory action:VideoShareAction];
+}
+
+- (void)trackVideoAdd {
+	[self trackEventWithCategory:UIActionCategory action:VideoAddAction];
 }
 
 #pragma mark - Private
