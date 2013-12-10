@@ -1759,7 +1759,6 @@
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
     if (textField == self.createChannelCell.createTextField) {
         [self.createChannelCell.descriptionTextView becomeFirstResponder];
-        self.createChannelCell.descriptionTextView.text = @"";
     }
     else
     {
@@ -1772,7 +1771,6 @@
 {
     [textField resignFirstResponder];
     if (textField == self.createChannelCell.createTextField) {
-        self.createChannelCell.descriptionTextView.text = @"";
     }
 }
 
@@ -2429,7 +2427,9 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     if (self.creatingChannel && self.createChannelCell.descriptionTextView == textView )
     {
         self.createChannelCell.descriptionPlaceholderLabel.hidden = YES;
-        self.createChannelCell.descriptionTextView.text = @"dddd";
+        self.createChannelCell.descriptionTextView.text = @"";
+        [self.createChannelCell.descriptionTextView performSelector:@selector(setText:) withObject:@"" afterDelay:0.1f];
+
     }
 
     
@@ -2825,6 +2825,8 @@ finishedWithImage: (UIImage *) image
 //    }];
 
     
+    
+    
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
@@ -2842,7 +2844,8 @@ finishedWithImage: (UIImage *) image
                                                                                                  object: self
                                                                                                userInfo: @{kChannelOwner : self.channelOwner}];
 
-                                             [self hideDescriptionCurrentlyShowing];
+                                             ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
+                                          //   [self hideDescriptionCurrentlyShowing];
     
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
