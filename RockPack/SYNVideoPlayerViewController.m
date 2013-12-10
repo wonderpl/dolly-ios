@@ -78,11 +78,11 @@
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-	return [SYNFullScreenVideoAnimator animatorForPresentating:YES];
+	return [SYNFullScreenVideoAnimator animatorForPresentation:YES];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-	return [SYNFullScreenVideoAnimator animatorForPresentating:NO];
+	return [SYNFullScreenVideoAnimator animatorForPresentation:NO];
 }
 
 #pragma mark - SYNVideoPlayerDelegate
