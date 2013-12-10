@@ -167,16 +167,19 @@
     if (self.state == ChannelMidCellStateDefault) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
         
-        self.state = ChannelMidCellStateDescription;
+        [self setState:ChannelMidCellStateDescription withAnimation:YES];
+        
     }
     else {
         
         if (self.state == ChannelMidCellStateDescription) {
-            self.state = ChannelMidCellStateDefault;
+            
+            [self setState:ChannelMidCellStateDefault withAnimation:YES];
+
         }
         else if(self.state == ChannelMidCellStateDelete){
-            self.state = ChannelMidCellStateDefault;
-            
+            [self setState:ChannelMidCellStateDefault withAnimation:YES];
+
         }
     }
 }
@@ -189,14 +192,16 @@
     if (self.state == ChannelMidCellStateDefault) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
         
-        self.state = ChannelMidCellStateDelete;
+        [self setState:ChannelMidCellStateDelete withAnimation:YES];
+
     }
     else{
         
         if (self.state == ChannelMidCellStateDelete) {
-            self.state = ChannelMidCellStateDefault;
+            [self setState:ChannelMidCellStateDefault withAnimation:YES];
+
         }else if(self.state == ChannelMidCellStateDescription){
-            self.state = ChannelMidCellStateDefault;
+            [self setState:ChannelMidCellStateDefault withAnimation:YES];
             
         }}
     
@@ -223,6 +228,73 @@
 
 -(void)setState:(ChannelMidCellState)state
 {
+    _state = state;
+    switch (_state)
+    {
+        case ChannelMidCellStateDefault:
+        {
+            
+                CGRect tmpRect = self.containerView.frame;
+                tmpRect.origin.x = 0;
+                self.containerView.frame = tmpRect;
+                
+            
+        }
+            
+            break;
+        case ChannelMidCellStateDelete:{
+            //Not all channels can be deleted
+            //Only channels you own are deleteable
+            if (self.deletableCell) {
+                self.deleteButton.hidden = NO;
+                self.descriptionLabel.hidden = YES;
+                
+                    CGRect tmpRect = self.containerView.frame;
+                    
+                    if (IS_IPHONE)
+                    {
+                        tmpRect.origin.x = -120;
+                    }
+                    else
+                    {
+                        tmpRect.origin.x = -120;
+                    }
+                    self.containerView.frame = tmpRect;
+                
+            }
+            
+        }
+            
+            break;
+        case ChannelMidCellStateDescription:
+        {
+            
+            self.deleteButton.hidden = YES;
+            self.descriptionLabel.hidden = NO;
+                CGRect tmpRect = self.containerView.frame;
+                if (IS_IPHONE)
+                {
+                    tmpRect.origin.x = kShowDescptionIPhone;
+                }
+                else
+                {
+                    tmpRect.origin.x = kShowDescptionIPad;
+                }
+                self.containerView.frame = tmpRect;
+        }
+            break;
+    }
+
+    
+}
+
+-(void)setState:(ChannelMidCellState)state withAnimation:(BOOL) animated
+{
+    
+    if (!animated) {
+        
+        return;
+    }
     _state = state;
     switch (_state)
     {

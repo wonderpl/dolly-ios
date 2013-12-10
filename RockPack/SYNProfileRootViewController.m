@@ -1862,14 +1862,15 @@
     for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
     {
         if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
-            ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
+            
+            [((SYNChannelMidCell*)cell) setState:ChannelMidCellStateDefault withAnimation:YES];
         }
     }
     
     for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
     {
         if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
-            ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
+            [((SYNChannelMidCell*)cell) setState:ChannelMidCellStateDefault withAnimation:YES];
         }
     }
     
@@ -2592,6 +2593,8 @@ finishedWithImage: (UIImage *) image
             }
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
+            
+            
             if ([((SYNChannelCreateNewCell*)cell).descriptionTextView.text isEqualToString:@""]) {
                 ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = NO;
             }
@@ -2845,26 +2848,29 @@ finishedWithImage: (UIImage *) image
 {
     
     NSLog(@"Delete channel : %@", cell);
+    ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
 
+    
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
-                                             
-                                             CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
-                                             tmp.size.height = 0;
-                                             
-                                             [UIView animateWithDuration:0.3 animations:^{
-                                                 
-                                                 cell.boarderView.frame = tmp;
-                                             } completion:^(BOOL finished) {
-                                                 
-                                             }];
+//                                             
+//                                             CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
+//                                             tmp.size.height = 0;
+//                                             
+//                                             [UIView animateWithDuration:0.3 animations:^{
+//                                                 
+//                                                 cell.boarderView.frame = tmp;
+//                                             } completion:^(BOOL finished) {
+//                                                 
+//                                             }];
                                              [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
                                                                                                  object: self
                                                                                                userInfo: @{kChannelOwner : self.channelOwner}];
                                              
-                                             ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
                                              //   [self hideDescriptionCurrentlyShowing];
+                                             [self reloadCollectionViews];
+                                             [self performSelector:@selector(reloadCollectionViews) withObject:nil afterDelay:0.5f];
                                              
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
