@@ -166,6 +166,10 @@ typedef enum : NSInteger {
 #define kAPIReportSession           @"/ws/session/"                             /* GET */
 
 
+// Moods
+#define kGetMoods                   @"/ws/moods/"                               /* GET */
+
+
 // HTML player source
 #define kHTMLVideoPlayerSource      @"/ws/videos/players/"                      /* GET */
 

@@ -36,7 +36,6 @@
 
 @interface SYNAbstractViewController ()
 
-@property (nonatomic, strong) SYNOneToOneSharingController* oneToOneViewController;
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityView *activityView;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
@@ -374,100 +373,98 @@
                 objectId: (NSString *) objectId
                  isOwner: (NSNumber *) isOwner
                  isVideo: (NSNumber *) isVideo
-              usingImage: (UIImage *) usingImage
-{
-    if ([objectType isEqualToString: @"channel"])
-    {
-        if (!usingImage)
-        {
-            // Capture screen image if we weren't passed an image in
-            UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-            CGRect keyWindowRect = [keyWindow bounds];
-            UIGraphicsBeginImageContextWithOptions(keyWindowRect.size, YES, 0.0f);
-            
-            CGContextRef context = UIGraphicsGetCurrentContext();
-            [keyWindow.layer
-             renderInContext: context];
-            UIImage *capturedScreenImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            
-            UIInterfaceOrientation orientation = [SYNDeviceManager.sharedInstance orientation];
-            
-            switch (orientation)
-            {
-                case UIDeviceOrientationPortrait:
-                    orientation = UIImageOrientationUp;
-                    break;
-                    
-                case UIDeviceOrientationPortraitUpsideDown:
-                    orientation = UIImageOrientationDown;
-                    break;
-                    
-                case UIDeviceOrientationLandscapeLeft:
-                    orientation = UIImageOrientationLeft;
-                    break;
-                    
-                case UIDeviceOrientationLandscapeRight:
-                    orientation = UIImageOrientationRight;
-                    break;
-                    
-                default:
-                    orientation = UIImageOrientationRight;
-                    DebugLog(@"Unknown orientation");
-                    break;
-            }
-            
-            UIImage *fixedOrientationImage = [UIImage  imageWithCGImage: capturedScreenImage.CGImage
-                                                                  scale: capturedScreenImage.scale
-                                                            orientation: orientation];
-            usingImage = fixedOrientationImage;
-        }
-    }
-    
-    NSString *userName = nil;
-    NSString *subject = @"";
-    
-    User *user = appDelegate.currentUser;
-    
-    if (user.fullNameIsPublicValue)
-    {
-        userName = user.fullName;
-    }
-    
-    if (userName.length < 1)
-    {
-        userName = user.username;
-    }
-    
-    if (userName != nil)
-    {
-        NSString *what = @"pack of videos";
-        
-        if (isVideo.boolValue == TRUE)
-        {
-            what = @"video";
-        }
-        
-        subject = [NSString stringWithFormat: @"%@ has shared a %@ with you", userName, what];
-    }
-    
-    
-    [self.mutableShareDictionary addEntriesFromDictionary:@{@"owner": isOwner,
-                                                            @"video": isVideo,
-                                                            @"subject": subject}];
-   
-    
-    // Only add image if we have one
-    if (usingImage)
-    {
-        [self.mutableShareDictionary addEntriesFromDictionary: @{@"image": usingImage}];
-    }
- 
-    self.oneToOneViewController = [[SYNOneToOneSharingController alloc] initWithInfo: self.mutableShareDictionary];
-    
-     
-    
-    [appDelegate.masterViewController addOverlayController:self.oneToOneViewController animated:YES];
+              usingImage: (UIImage *) usingImage {
+	SYNOneToOneSharingController *viewController = [self createOneToOneViewControllerForObjectType:objectType
+																						  objectId:objectId
+																						   isOwner:[isOwner boolValue]
+																						   isVideo:[isVideo boolValue]
+																							 image:usingImage];
+	
+	[appDelegate.masterViewController addOverlayController:viewController animated:YES];
+}
+
+- (SYNOneToOneSharingController *)createOneToOneViewControllerForObjectType:(NSString *)objectType
+																   objectId:(NSString *)objectId
+																	isOwner:(BOOL)isOwner
+																	isVideo:(BOOL)isVideo
+																	  image:(UIImage *)image {
+	if ([objectType isEqualToString: @"channel"]) {
+		if (!image) {
+			// Capture screen image if we weren't passed an image in
+			UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+			CGRect keyWindowRect = [keyWindow bounds];
+			UIGraphicsBeginImageContextWithOptions(keyWindowRect.size, YES, 0.0f);
+			
+			CGContextRef context = UIGraphicsGetCurrentContext();
+			[keyWindow.layer
+			 renderInContext: context];
+			UIImage *capturedScreenImage = UIGraphicsGetImageFromCurrentImageContext();
+			UIGraphicsEndImageContext();
+			
+			UIInterfaceOrientation orientation = [SYNDeviceManager.sharedInstance orientation];
+			
+			switch (orientation) {
+				case UIDeviceOrientationPortrait:
+					orientation = UIImageOrientationUp;
+					break;
+					
+				case UIDeviceOrientationPortraitUpsideDown:
+					orientation = UIImageOrientationDown;
+					break;
+					
+				case UIDeviceOrientationLandscapeLeft:
+					orientation = UIImageOrientationLeft;
+					break;
+					
+				case UIDeviceOrientationLandscapeRight:
+					orientation = UIImageOrientationRight;
+					break;
+					
+				default:
+					orientation = UIImageOrientationRight;
+					DebugLog(@"Unknown orientation");
+					break;
+			}
+			
+			UIImage *fixedOrientationImage = [UIImage  imageWithCGImage: capturedScreenImage.CGImage
+																  scale: capturedScreenImage.scale
+															orientation: orientation];
+			image = fixedOrientationImage;
+		}
+	}
+	
+	NSString *userName = nil;
+	NSString *subject = @"";
+	
+	User *user = appDelegate.currentUser;
+	
+	if (user.fullNameIsPublicValue) {
+		userName = user.fullName;
+	}
+	
+	if (![userName length]) {
+		userName = user.username;
+	}
+	
+	if (userName != nil) {
+		NSString *what = @"pack of videos";
+		if (isVideo) {
+			what = @"video";
+		}
+		subject = [NSString stringWithFormat: @"%@ has shared a %@ with you", userName, what];
+	}
+	
+	[self.mutableShareDictionary addEntriesFromDictionary:@{@"owner": @(isOwner),
+															@"video": @(isVideo),
+															@"subject": subject}];
+	
+	
+	// Only add image if we have one
+	if (image) {
+		[self.mutableShareDictionary addEntriesFromDictionary: @{@"image": image}];
+	}
+	
+	return [[SYNOneToOneSharingController alloc] initWithInfo: self.mutableShareDictionary];
 }
 
 

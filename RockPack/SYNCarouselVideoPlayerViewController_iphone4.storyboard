@@ -167,7 +167,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="107" id="PVQ-dn-bLz"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="VEM-Yf-zHx">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="VEM-Yf-zHx" customClass="SYNCenteredFlowLayout">
                                     <size key="itemSize" width="134" height="107"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>

@@ -24,7 +24,6 @@
 @property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
-@property (nonatomic, strong) UIImageView *loadingImageView;
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
 @end

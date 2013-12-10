@@ -122,6 +122,11 @@
     AssertOrLog(@"Abstract Method Called");
 }
 
+- (void) commentControlPressed:(SYNSocialButton *)socialButton
+{
+    AssertOrLog(@"Abstract Method Called");
+}
+
 
 - (ChannelOwner *) channelOwner
 {

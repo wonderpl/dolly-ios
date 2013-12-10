@@ -32,6 +32,8 @@
 
 -(BOOL)registerExternalAccountWithCurrentUserFromDictionary:(NSDictionary*)dictionary;
 
+-(BOOL)registerMoodsFromDictionary:(NSDictionary*)dictionary;
+
 - (BOOL) registerDataForSocialFeedFromItemsDictionary: (NSDictionary *) dictionary
                                           byAppending: (BOOL) append;
 
