@@ -16,6 +16,10 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
+#import "GAI+Tracking.h"
+#import "SYNOneToOneSharingController.h"
+#import "SYNPopoverAnimator.h"
+#import <SDWebImageManager.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
 
@@ -78,11 +82,13 @@
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-	return [SYNFullScreenVideoAnimator animatorForPresentation:YES];
+	Class animationClass = [self animationClassForViewController:presented];
+	return [animationClass animatorForPresentation:YES];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-	return [SYNFullScreenVideoAnimator animatorForPresentation:NO];
+	Class animationClass = [self animationClassForViewController:dismissed];
+	return [animationClass animatorForPresentation:NO];
 }
 
 #pragma mark - SYNVideoPlayerDelegate
@@ -134,8 +140,23 @@
 	[self addControlPressed:button];
 }
 
-- (IBAction)shareButtonPressed:(UIButton *)videoShareButton {
-	[self shareVideoInstance:self.videoInstance];
+- (IBAction)shareButtonPressed:(UIButton *)button {
+	[self requestShareLinkWithObjectType:@"video_instance" objectId:self.videoInstance.uniqueId];
+	
+	[[GAI sharedInstance] trackVideoShare];
+    
+    // At this point it is safe to assume that the video thumbnail image is in the cache
+    UIImage *thumbnailImage = [[[SDWebImageManager sharedManager] imageCache] imageFromMemoryCacheForKey:self.videoInstance.video.thumbnailURL];
+	
+	SYNOneToOneSharingController *viewController = [self createSharingViewControllerForObjectType:@"video_instance"
+																						 objectId:self.videoInstance.video.thumbnailURL
+																						  isOwner:NO
+																						  isVideo:YES
+																							image:thumbnailImage];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 #pragma mark - Notifications
@@ -215,6 +236,14 @@
 														  action:@"videoViewedDuration"
 														   label:videoInstance.video.sourceId
 														   value:@((int)(videoPlayer.currentTime))] build]];
+}
+
+- (Class)animationClassForViewController:(UIViewController *)viewController {
+	NSDictionary *mapping = @{
+							  NSStringFromClass([SYNFullScreenVideoAnimator class]) : [SYNFullScreenVideoAnimator class],
+							  NSStringFromClass([SYNOneToOneSharingController class]) : [SYNPopoverAnimator class],
+							  };
+	return mapping[NSStringFromClass([viewController class])];
 }
 
 @end
