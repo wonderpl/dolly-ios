@@ -1361,6 +1361,7 @@
 		E97FCDC5183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FCDC4183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
+		E9F1921618571AFC008AC21E /* GAI+Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F1921518571AFC008AC21E /* GAI+Tracking.m */; };
 		E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2AF28717BE33C700A20127 /* FacebookSDK.framework */; };
 		E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC751846273E0026C97D /* NSString+Validation.m */; };
 		E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */; };
@@ -2971,6 +2972,8 @@
 		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
 		E9927391185090DE00982480 /* SYNPagingModel+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNPagingModel+Protected.h"; sourceTree = "<group>"; };
 		E9B75F5D1848ADB50066420E /* SYNVideoPlayerViewController+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayerViewController+Protected.h"; sourceTree = "<group>"; };
+		E9F1921418571AFC008AC21E /* GAI+Tracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+Tracking.h"; sourceTree = "<group>"; };
+		E9F1921518571AFC008AC21E /* GAI+Tracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+Tracking.m"; sourceTree = "<group>"; };
 		E9F7CC73184616E40026C97D /* SYNVideoPlayer+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayer+Protected.h"; sourceTree = "<group>"; };
 		E9F7CC741846273E0026C97D /* NSString+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Validation.h"; sourceTree = "<group>"; };
 		E9F7CC751846273E0026C97D /* NSString+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Validation.m"; sourceTree = "<group>"; };
@@ -3842,6 +3845,8 @@
 				E9F7CC751846273E0026C97D /* NSString+Validation.m */,
 				E92D3356184CDFEA0025D1DF /* UICollectionReusableView+Helpers.h */,
 				E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */,
+				E9F1921418571AFC008AC21E /* GAI+Tracking.h */,
+				E9F1921518571AFC008AC21E /* GAI+Tracking.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -7442,6 +7447,7 @@
 				0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */,
 				BEB313561817D8C400FAF98A /* SYNSearchResultsUserCell.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
+				E9F1921618571AFC008AC21E /* GAI+Tracking.m in Sources */,
 				BE285D9B1725726300D995AB /* SYNAddToChannelViewController.m in Sources */,
 				BE285D9F172584E200D995AB /* SYNAddToChannelCreateNewCell.m in Sources */,
 				BE285DB01725A23300D995AB /* SYNNetworkMessageView.m in Sources */,
