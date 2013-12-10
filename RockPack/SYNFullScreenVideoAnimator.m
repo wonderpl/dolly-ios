@@ -24,13 +24,13 @@ static const CGFloat AnimationDuration = 0.3;
 
 #pragma mark - Public class methods
 
-+ (instancetype)animatorForPresentating:(BOOL)presenting {
-	return [[self alloc] initForPresenting:presenting];
++ (instancetype)animatorForPresentation:(BOOL)presenting {
+	return [[self alloc] initForPresentation:presenting];
 }
 
 #pragma mark - Init / Dealloc
 
-- (instancetype)initForPresenting:(BOOL)presenting {
+- (instancetype)initForPresentation:(BOOL)presenting {
 	if (self = [super init]) {
 		self.presenting = presenting;
 	}

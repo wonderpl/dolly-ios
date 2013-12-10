@@ -105,6 +105,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
+@property (nonatomic, strong) SYNChannelMidCell *deleteCell;
+
 @property (strong, nonatomic) IBOutlet UIButton *uploadAvatarButton;
 
 @property (strong, nonatomic) UIColor *greyColor;
@@ -364,6 +366,7 @@
     
     self.sameChannelNameAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"New channels can not have the same titles", @"Unfollow a channel in profile") message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:nil];
 
+    self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle] , nil];
     
 }
 
@@ -990,7 +993,7 @@
     
     if (self.isUserProfile  && indexPath.row == 0 && collectionViewLayout == self.channelLayoutIPhone && IS_IPHONE)
     {
-        return CGSizeMake(320, 60);
+            return CGSizeMake(320, 60);
     }
     
     
@@ -1756,15 +1759,22 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
-    [textField resignFirstResponder];
+    if (textField == self.createChannelCell.createTextField) {
+        [self.createChannelCell.descriptionTextView becomeFirstResponder];
+    }
+    else
+    {
+        [textField resignFirstResponder];
+    }
     return YES;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    if (textField == self.createChannelCell.createTextField) {
+    }
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar
@@ -2086,6 +2096,13 @@
 
     }
     
+    if (alertView == self.deleteChannelAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
+    {
+        
+        [self deleteChannel:self.deleteCell];
+        
+    }
+    
 
 }
 
@@ -2268,8 +2285,6 @@
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
                                              
-
-                                             
                                              // shows the message label from the MasterViewController
                                              //                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                              
@@ -2280,6 +2295,10 @@
                                              
                                              //                                             NSString *channelId = resourceCreated[@"id"];
                                              
+                                             [self cancelCreateChannel];
+                                             
+                                             [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
+
                                              
                                          } errorHandler: ^(id error) {
                                              
@@ -2320,9 +2339,6 @@
                                          }];
     
     
-    [self cancelCreateChannel];
-    
-    [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
     
     
     
@@ -2420,7 +2436,10 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     
     if (self.creatingChannel && self.createChannelCell.descriptionTextView == textView )
     {
-            self.createChannelCell.descriptionPlaceholderLabel.hidden = YES;
+        self.createChannelCell.descriptionPlaceholderLabel.hidden = YES;
+        self.createChannelCell.descriptionTextView.text = @"";
+        [self.createChannelCell.descriptionTextView performSelector:@selector(setText:) withObject:@"" afterDelay:0.1f];
+
     }
 
     
@@ -2448,6 +2467,10 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     if ([text isEqualToString:@"\n"]) {
         
         [textView resignFirstResponder];
+        
+        if (textView == self.createChannelCell.descriptionTextView) {
+            [self saveCreateChannelTapped];
+        }
         // Return FALSE so that the final '\n' character doesn't get added
         return NO;
     }
@@ -2565,7 +2588,7 @@ finishedWithImage: (UIImage *) image
             //iphone cell height is different by 11
             if (IS_IPHONE)
             {
-                tmpBoarder.size.height+= 18;
+                tmpBoarder.size.height+= 19;
             }
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
@@ -2577,7 +2600,6 @@ finishedWithImage: (UIImage *) image
                 ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
 
             }
-//#warning animations
         }
             void (^animateEditMode)(void) = ^{
                 
@@ -2585,13 +2607,20 @@ finishedWithImage: (UIImage *) image
                 
                 if (index == 0)
                 {
+                    
                     ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 0.0;
                     ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 1.0;
                     
-                    CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                    CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).frame;
+
                     tmpBoarder.size.height+= kHeightChange;
-                    ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+                    ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
                     [((SYNChannelCreateNewCell*)cell).createTextField becomeFirstResponder];
+                    
+                    tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                    tmpBoarder.size.height = 172;
+                    ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+
                 }
                 else
                 {
@@ -2641,38 +2670,12 @@ finishedWithImage: (UIImage *) image
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
 }
 
-
--(void) setCreateOffset
-{
-    
-    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
-    {
-        if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
-            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-            
-        }
-        
-    }
-    
-    else
-    {
-        if (self.channelThumbnailCollectionView.contentOffset.y < 370) {
-            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-            
-        }
-        
-    }
-    
-    if (IS_IPHONE) {
-        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-    }
-}
-
 -(void) cancelCreateChannel
 {
     self.creatingChannel = NO;
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
+    
     
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
@@ -2684,14 +2687,8 @@ finishedWithImage: (UIImage *) image
         {
             [((SYNChannelCreateNewCell*)cell).createTextField resignFirstResponder];
             [((SYNChannelCreateNewCell*)cell).descriptionTextView resignFirstResponder];
-            
-            CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
-            tmpBoarder.size.height-= kHeightChange;
-            ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
-            
-                ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
-
-            
+            ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
+            ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
         }
         void (^animateProfileMode)(void) = ^{
             CGRect frame = cell.frame;
@@ -2701,6 +2698,16 @@ finishedWithImage: (UIImage *) image
                 ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 1.0f;
                 ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 0.0f;
                 ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
+                CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
+                if (IS_IPHONE) {
+                    tmpBoarder.size.height = 61;
+                }
+                else
+                {
+                    tmpBoarder.size.height = 80;
+                }
+                ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
+                
             }
             else
             {
@@ -2753,6 +2760,29 @@ finishedWithImage: (UIImage *) image
     
 }
 
+-(void) setCreateOffset
+{
+    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
+    {
+        if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+            
+        }
+    }
+    else
+    {
+        if (self.channelThumbnailCollectionView.contentOffset.y < 370) {
+            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+            
+        }
+    }
+    
+    if (IS_IPHONE) {
+        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+    }
+}
+
+
 -(void) updateCollectionLayout
 {
     //  self.channelThumbnailCollectionView.collectionViewLayout = self.channelExpandedLayout;
@@ -2787,7 +2817,6 @@ finishedWithImage: (UIImage *) image
 
 -(void)deleteChannelTapped: (SYNChannelMidCell*) cell{
     
-    NSLog(@"Delete");
 //
 //    [self.channelThumbnailCollectionView performBatchUpdates:^{
 //        
@@ -2804,30 +2833,42 @@ finishedWithImage: (UIImage *) image
 //        NSLog(@"COMPLETED!");
 //    }];
 
+    self.deleteCell = cell;
+    NSString *tmpString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete channel", "Alerview confirm to delete a Channel"), cell.channel.title];
     
+    [self.deleteChannelAlertView setMessage:tmpString];
+    [self.deleteChannelAlertView show];
+    
+}
+
+-(void) deleteChannel:(SYNChannelMidCell *)cell
+{
+    
+    NSLog(@"Delete channel : %@", cell);
+
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
                                              
                                              CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
                                              tmp.size.height = 0;
-
-//                                             [UIView animateWithDuration:0.3 animations:^{
-//                                                 
-//                                                 cell.boarderView.frame = tmp;
-//                                             } completion:^(BOOL finished) {
-                                             //    [cell.channel.managedObjectContext deleteObject: cell.channel];
                                              
-//                                             }];
+                                             [UIView animateWithDuration:0.3 animations:^{
+                                                 
+                                                 cell.boarderView.frame = tmp;
+                                             } completion:^(BOOL finished) {
+                                                 
+                                             }];
                                              [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
                                                                                                  object: self
                                                                                                userInfo: @{kChannelOwner : self.channelOwner}];
-
-    
+                                             
+                                             ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
+                                             //   [self hideDescriptionCurrentlyShowing];
+                                             
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
                                          }];
-    
 }
 
 @end

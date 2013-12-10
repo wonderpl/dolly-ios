@@ -150,14 +150,6 @@
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     
-    // Initialise our video player, which ensures that it will be fully set up by the time the first video is played.
-    // Tried doing this asynchronously, but could nto guarantee that it was initialised by the time that the first
-    // video playback occurred
-    
-    // First we need to ensure that we have the player JS in place
-    [self copyFileFromAppBundleToDocumentsDirectory: @"YouTubeIFramePlayer"
-                                             ofType: @"html"];
-    
     // Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
     // inlduding logout, which is the correct flow
     // This should realistically never happen (except after swapping between dev and prod before the fix to the keychain account (before there was only one
@@ -1134,17 +1126,6 @@
                                           usingSource: youTubePlayerURLString];
              }
              
-             // Handle Vimeo player updates
-             NSString *vimeoPlayerURLString = dictionary[@"vimeo"];
-             
-             // Only update if we have valid HTML
-             if (vimeoPlayerURLString)
-             {
-                 [self saveAsFileToDocumentsDirectory: @"VimeoIFramePlayer"
-                                               asType: @"html"
-                                          usingSource: vimeoPlayerURLString];
-             }
-             
              self.playerUpdated = TRUE;
          }
          else
@@ -1158,50 +1139,13 @@
      }];
 }
 
-
-- (void) copyFileFromAppBundleToDocumentsDirectory: (NSString *) fileName
-                                            ofType: (NSString *) type
-{
-    NSError *error;
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = paths[0];
-    NSString *pathComponent = [NSString stringWithFormat: @"%@.%@", fileName, type];
-    NSString *destinationPath = [documentsDirectory stringByAppendingPathComponent: pathComponent];
-    
-    if ([fileManager fileExistsAtPath: destinationPath] == NO)
-    {
-        NSString *sourcePath = [[NSBundle mainBundle] pathForResource: fileName
-                                                               ofType: type];
-        
-        [fileManager copyItemAtPath: sourcePath
-                             toPath: destinationPath
-                              error: &error];
-    }
-}
-
-
 - (void) saveAsFileToDocumentsDirectory: (NSString *) fileName
                                  asType: (NSString *) type
                             usingSource: (NSString *) source
 {
-    NSError *error;
-    NSString *destinationPath = [self destinationPathInDocumentsDirectoryUsingFilename: fileName
-                                                                               andType: type];
+    NSString *destinationPath = [self destinationPathInDocumentsDirectoryUsingFilename:fileName andType:type];
     
-    BOOL status = [source writeToFile: destinationPath
-                           atomically: YES
-                             encoding: NSUTF8StringEncoding
-                                error: &error];
-    
-    // If something wet wrong, then revert to the original player source
-    if (!status)
-    {
-        [self copyFileFromAppBundleToDocumentsDirectory: fileName
-                                                 ofType: type];
-    }
+	[source writeToFile:destinationPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 

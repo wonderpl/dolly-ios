@@ -10,6 +10,6 @@
 
 @interface SYNFullScreenVideoAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
-+ (instancetype)animatorForPresentating:(BOOL)presenting;
++ (instancetype)animatorForPresentation:(BOOL)presenting;
 
 @end
