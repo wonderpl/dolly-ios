@@ -105,6 +105,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
 @property (strong, nonatomic) IBOutlet UIButton *moreButton;
+@property (nonatomic, strong) SYNChannelMidCell *deleteCell;
+
 @property (strong, nonatomic) IBOutlet UIButton *uploadAvatarButton;
 
 @property (strong, nonatomic) UIColor *greyColor;
@@ -364,6 +366,7 @@
     
     self.sameChannelNameAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"New channels can not have the same titles", @"Unfollow a channel in profile") message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:nil];
 
+    self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle] , nil];
     
 }
 
@@ -2093,6 +2096,13 @@
 
     }
     
+    if (alertView == self.deleteChannelAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
+    {
+        
+        [self deleteChannel:self.deleteCell];
+        
+    }
+    
 
 }
 
@@ -2807,7 +2817,6 @@ finishedWithImage: (UIImage *) image
 
 -(void)deleteChannelTapped: (SYNChannelMidCell*) cell{
     
-    NSLog(@"Delete");
 //
 //    [self.channelThumbnailCollectionView performBatchUpdates:^{
 //        
@@ -2824,33 +2833,42 @@ finishedWithImage: (UIImage *) image
 //        NSLog(@"COMPLETED!");
 //    }];
 
+    self.deleteCell = cell;
+    NSString *tmpString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete channel", "Alerview confirm to delete a Channel"), cell.channel.title];
     
+    [self.deleteChannelAlertView setMessage:tmpString];
+    [self.deleteChannelAlertView show];
     
+}
+
+-(void) deleteChannel:(SYNChannelMidCell *)cell
+{
     
+    NSLog(@"Delete channel : %@", cell);
+
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
                                              
                                              CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
                                              tmp.size.height = 0;
-
+                                             
                                              [UIView animateWithDuration:0.3 animations:^{
                                                  
                                                  cell.boarderView.frame = tmp;
                                              } completion:^(BOOL finished) {
-                                             
+                                                 
                                              }];
                                              [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
                                                                                                  object: self
                                                                                                userInfo: @{kChannelOwner : self.channelOwner}];
-
+                                             
                                              ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
-                                          //   [self hideDescriptionCurrentlyShowing];
-    
+                                             //   [self hideDescriptionCurrentlyShowing];
+                                             
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
                                          }];
-    
 }
 
 @end
