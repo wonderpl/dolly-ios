@@ -17,13 +17,13 @@
     // Reset these as we are using an image
     self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 1.0, 0.0, 0.0);
     
-    [self setImage: [UIImage imageNamed: @"IconVideoAddDefault"]
+    [self setImage: [UIImage imageNamed: @"IconVideoCommentDefault"]
           forState: UIControlStateNormal];
     
-    [self setImage: [UIImage imageNamed: @"IconVideoAddHighlighted"]
+    [self setImage: [UIImage imageNamed: @"IconVideoCommentHighlighted"]
           forState: UIControlStateSelected];
     
-    [self setImage: [UIImage imageNamed: @"IconVideoAddHighlighted"]
+    [self setImage: [UIImage imageNamed: @"IconVideoCommentHighlighted"]
           forState: UIControlStateHighlighted];
 }
 
