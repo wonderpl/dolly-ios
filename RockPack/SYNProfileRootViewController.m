@@ -2750,7 +2750,6 @@ finishedWithImage: (UIImage *) image
     
 }
 
-
 -(void) setCreateOffset
 {
     if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
@@ -2833,17 +2832,17 @@ finishedWithImage: (UIImage *) image
                                              CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
                                              tmp.size.height = 0;
 
-//                                             [UIView animateWithDuration:0.3 animations:^{
-//                                                 
-//                                                 cell.boarderView.frame = tmp;
-//                                             } completion:^(BOOL finished) {
-                                             //    [cell.channel.managedObjectContext deleteObject: cell.channel];
+                                             [UIView animateWithDuration:0.3 animations:^{
+                                                 
+                                                 cell.boarderView.frame = tmp;
+                                             } completion:^(BOOL finished) {
                                              
-//                                             }];
+                                             }];
                                              [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
                                                                                                  object: self
                                                                                                userInfo: @{kChannelOwner : self.channelOwner}];
 
+                                             [self hideDescriptionCurrentlyShowing];
     
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
