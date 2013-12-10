@@ -50,6 +50,7 @@
 		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.playerContainerView.bounds];
 		webView.scrollView.scrollEnabled = NO;
 		webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+		webView.allowsInlineMediaPlayback = YES;
 		webView.mediaPlaybackRequiresUserAction = NO;
 		
 		NSString *templateHTMLString = [NSString stringWithContentsOfURL:[self URLForPlayerHTML] encoding:NSUTF8StringEncoding error:nil];
