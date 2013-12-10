@@ -69,7 +69,6 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
-                            <action selector="addControlPressed:" destination="aP1-jF-WwS" eventType="touchUpInside" id="bGI-2J-S14"/>
                             <action selector="commentControlPressed:" destination="aP1-jF-WwS" eventType="touchUpInside" id="kTt-qS-c62"/>
                         </connections>
                     </view>

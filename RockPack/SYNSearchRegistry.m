@@ -253,8 +253,12 @@
     return YES;
 }
 
-
 - (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary
+{
+    return [self registerVideoInstancesFromDictionary:dictionary withViewId:kSearchViewId];
+}
+
+- (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary withViewId:(NSString*)viewId
 {
     
     
@@ -263,19 +267,17 @@
     NSDictionary *videosDictionary = dictionary[@"videos"];
     
     if (!videosDictionary || ![videosDictionary isKindOfClass: [NSDictionary class]])
-    {
         return NO;
-    }
+    
     
     NSArray *itemArray = videosDictionary[@"items"];
     
     if (![itemArray isKindOfClass: [NSArray class]])
-    {
         return NO;
-    }
+    
     
     NSFetchRequest *videoFetchRequest = [[NSFetchRequest alloc] init];
-    [videoFetchRequest setEntity: [NSEntityDescription entityForName: @"Video"
+    [videoFetchRequest setEntity: [NSEntityDescription entityForName: kVideo
                                               inManagedObjectContext: importManagedObjectContext]];
     
     NSMutableArray *videoIds = [NSMutableArray array];
@@ -311,7 +313,7 @@
                                                              ignoringObjectTypes: kIgnoreChannelObjects
                                                                   existingVideos: existingVideos];
             
-            videoInstance.viewId = kSearchViewId;
+            videoInstance.viewId = viewId; // kSearchViewId and kMoodViewId usually
         }
     }
     
@@ -384,6 +386,7 @@
                                            forViewId: kSearchViewId];
 }
 
+// User Recommendations (like that on the on boarding) are registered as Recommendation Obejcts
 - (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary
 {
     
@@ -400,8 +403,6 @@
         
         if(!recomendation)
             continue;
-        
-        
         
     }
     

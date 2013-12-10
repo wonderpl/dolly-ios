@@ -2029,23 +2029,41 @@
 }
 
 - (void) getRecommendationsForUserId: (NSString*) userId
+                       andEntityName: (NSString*) entityName
+                              params: (NSDictionary*) params // aplies to the mood
                    completionHandler: (MKNKUserSuccessBlock) completionBlock
                         errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
-    NSString *apiString = [kGetRecommendations stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    NSString *apiString;
+    
+    if([entityName  isEqualToString: kChannelOwner])
+        apiString = [kGetUserRecommendations stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    else if ([entityName isEqualToString: kVideoInstance])
+        apiString = [kGetVideoRecommendations stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    else if([entityName isEqualToString: kChannel])
+        apiString = [kGetChannelRecommendations stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    else
+        return;
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
     // same as default values... they are here in case we need to change them in the future
     parameters[@"start"] = @(0);
     parameters[@"size"] = @(100);
     parameters[@"locale"] = self.localeString;
+    parameters[@"location"] = self.locationString;
+    
+    if(params)
+        [parameters addEntriesFromDictionary:params];
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: parameters
                                                                                                    httpMethod: @"GET"
                                                                                                           ssl: YES];
+    
+    NSLog(@"%@", networkOperation.url);
     
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock

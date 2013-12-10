@@ -120,6 +120,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     self.spinner.hidden = NO;
     
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
+                                                  andEntityName: kChannelOwner
+                                                         params: nil
                                               completionHandler:^(id responce) {
                                                   
                                                   if(![responce isKindOfClass:[NSDictionary class]])
@@ -128,10 +130,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
                                                   self.spinner.hidden = YES;
                                                   
                                                   if(![appDelegate.searchRegistry registerRecommendationsFromDictionary:responce])
-                                                  {
                                                       return;
-                                                  }
-                                                  
                                                   
                                                   [self fetchRecommendationsFromLocal];
                                                   

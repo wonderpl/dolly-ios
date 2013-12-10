@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNMoodRootViewController">
             <connections>
+                <outlet property="backgroundImageView" destination="Ibc-t8-jgR" id="0Dk-Sl-ew4"/>
+                <outlet property="iWantToLabel" destination="9hq-gl-M1F" id="Gtj-oQ-7sl"/>
                 <outlet property="moodCollectionView" destination="e08-ND-dpJ" id="kvt-jk-geT"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>

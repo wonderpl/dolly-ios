@@ -304,6 +304,8 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
 #pragma mark - Recommendations Form
 
 - (void) getRecommendationsForUserId: (NSString*) userId
+                       andEntityName: (NSString*) entityName
+                              params: (NSDictionary*) params // aplies to the mood
                    completionHandler: (MKNKUserSuccessBlock) completionBlock
                         errorHandler: (MKNKUserErrorBlock) errorBlock;
 

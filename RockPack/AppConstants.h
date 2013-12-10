@@ -178,7 +178,10 @@ typedef enum : NSInteger {
 #define kGetExternalAccounts       @"/ws/USERID/external_accounts/"             /* GET */
 #define kGetExternalAccountId       @"/ws/USERID/external_accounts/ACCOUNTID/"  /* GET */
 
-#define kGetRecommendations         @"/ws/USERID/user_recommendations/"         /* GET */
+#define kGetUserRecommendations    @"/ws/USERID/user_recommendations/"         /* GET */
+
+#define kGetVideoRecommendations    @"/ws/USERID/video_recommendations/"         /* GET */
+#define kGetChannelRecommendations  @"/ws/USERID/channel_recommendations/"       /* GET */
 
 #define kFeedbackUrl                @"/ws/feedback/"                            /* GET */
 
