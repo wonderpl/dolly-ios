@@ -2854,21 +2854,23 @@ finishedWithImage: (UIImage *) image
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
-                                             
-                                             CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
-                                             tmp.size.height = 0;
-                                             
-                                             [UIView animateWithDuration:0.3 animations:^{
-                                                 
-                                                 cell.boarderView.frame = tmp;
-                                             } completion:^(BOOL finished) {
-                                                 
-                                             }];
+//                                             
+//                                             CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
+//                                             tmp.size.height = 0;
+//                                             
+//                                             [UIView animateWithDuration:0.3 animations:^{
+//                                                 
+//                                                 cell.boarderView.frame = tmp;
+//                                             } completion:^(BOOL finished) {
+//                                                 
+//                                             }];
                                              [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
                                                                                                  object: self
                                                                                                userInfo: @{kChannelOwner : self.channelOwner}];
                                              
                                              //   [self hideDescriptionCurrentlyShowing];
+                                             [self reloadCollectionViews];
+                                             [self performSelector:@selector(reloadCollectionViews) withObject:nil afterDelay:0.5f];
                                              
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
