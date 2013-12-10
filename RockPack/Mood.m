@@ -18,7 +18,7 @@
     
     NSString *uniqueId = dictionary[@"id"];
     
-    if ([uniqueId isKindOfClass: [NSNull class]])
+    if (![uniqueId isKindOfClass: [NSString class]])
         return nil;
     
     Mood *instance = [Mood insertInManagedObjectContext: managedObjectContext];

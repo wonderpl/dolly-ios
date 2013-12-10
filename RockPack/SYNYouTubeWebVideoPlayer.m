@@ -50,14 +50,10 @@
 		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.playerContainerView.bounds];
 		webView.scrollView.scrollEnabled = NO;
 		webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+		webView.allowsInlineMediaPlayback = YES;
+		webView.mediaPlaybackRequiresUserAction = NO;
 		
-		// Get HTML from documents directory (as opposed to the bundle), so that we can update it
-		NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-		NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:@"YouTubeIFramePlayer.html"];
-		
-		NSString *templateHTMLString = [NSString stringWithContentsOfFile:fullPath
-																 encoding:NSUTF8StringEncoding
-																	error:nil];
+		NSString *templateHTMLString = [NSString stringWithContentsOfURL:[self URLForPlayerHTML] encoding:NSUTF8StringEncoding error:nil];
 		
 		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString, 0, 0];
 		
@@ -179,6 +175,19 @@
 - (void)updatePlayerSize:(CGSize)size {
 	NSString *javascript = [NSString stringWithFormat:@"player.setSize(%f, %f);", size.width, size.height];
 	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:javascript];
+}
+
+- (NSURL *)URLForPlayerHTML {
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
+	NSURL *documentsURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
+	NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"YouTubeIFramePlayer.html"];
+	
+	if ([fileManager fileExistsAtPath:[fileURL path]]) {
+		return fileURL;
+	}
+	
+	return [[NSBundle mainBundle] URLForResource:@"YouTubeIFramePlayer" withExtension:@"html"];
 }
 
 @end

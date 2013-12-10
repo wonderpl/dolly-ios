@@ -55,7 +55,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S2p-g2-PRw" userLabel="Control - Add" customClass="SYNSocialAddButton">
-                        <rect key="frame" x="75" y="197" width="50" height="50"/>
+                        <rect key="frame" x="71" y="197" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
@@ -63,7 +63,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gRp-a5-BAk" userLabel="Control - Share" customClass="SYNSocialButton">
-                        <rect key="frame" x="187" y="197" width="50" height="50"/>
+                        <rect key="frame" x="185" y="197" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
@@ -71,7 +71,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OuO-IP-Z5r" userLabel="Control - Comment" customClass="SYNSocialCommentButton">
-                        <rect key="frame" x="129" y="197" width="50" height="50"/>
+                        <rect key="frame" x="128" y="197" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>

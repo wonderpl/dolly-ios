@@ -29,6 +29,10 @@
 {
     self.titleLabel.font = [UIFont lightCustomFontOfSize: self.titleLabel.font.pointSize];
     
+    self.timeLabel.font = [UIFont lightCustomFontOfSize: self.timeLabel.font.pointSize];
+    
+    self.timeStampLabel.font = [UIFont lightCustomFontOfSize: self.timeStampLabel.font.pointSize];
+    
     [self.likeSocialButton setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateChannelItemCell")
                            andCount: 0];
     

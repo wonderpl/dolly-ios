@@ -374,7 +374,7 @@
                  isOwner: (NSNumber *) isOwner
                  isVideo: (NSNumber *) isVideo
               usingImage: (UIImage *) usingImage {
-	SYNOneToOneSharingController *viewController = [self createOneToOneViewControllerForObjectType:objectType
+	SYNOneToOneSharingController *viewController = [self createSharingViewControllerForObjectType:objectType
 																						  objectId:objectId
 																						   isOwner:[isOwner boolValue]
 																						   isVideo:[isVideo boolValue]
@@ -383,7 +383,7 @@
 	[appDelegate.masterViewController addOverlayController:viewController animated:YES];
 }
 
-- (SYNOneToOneSharingController *)createOneToOneViewControllerForObjectType:(NSString *)objectType
+- (SYNOneToOneSharingController *)createSharingViewControllerForObjectType:(NSString *)objectType
 																   objectId:(NSString *)objectId
 																	isOwner:(BOOL)isOwner
 																	isVideo:(BOOL)isVideo
