@@ -41,7 +41,6 @@
 }
 
 @property (nonatomic) BOOL hasAttemptedToLoadData;
-@property (nonatomic) BOOL keyboardIsOnScreen;
 @property (nonatomic, readonly) NSArray *searchedFriends;
 @property (nonatomic, strong) Friend *friendToAddEmail;
 @property (nonatomic, strong) Friend* friendHeldInQueue;
@@ -252,7 +251,7 @@
 
 
 - (void) keyboardNotification:(NSNotification *)notification {
-	self.keyboardIsOnScreen = [[notification name] isEqualToString:UIKeyboardWillShowNotification];
+	BOOL keyboardIsOnScreen = [[notification name] isEqualToString:UIKeyboardWillShowNotification];
     
     [UIView animateWithDuration: 0.3
                           delay: 0.0
@@ -270,7 +269,7 @@
 							 offset = CGPointMake(0, -160);
 						 }
 						 
-                         if (self.keyboardIsOnScreen) {
+                         if (keyboardIsOnScreen) {
 							 vFrame = CGRectOffset(vFrame, offset.x, offset.y);
                          } else {
 							 vFrame = CGRectOffset(vFrame, -offset.x, -offset.y);
