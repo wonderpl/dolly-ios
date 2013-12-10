@@ -13,7 +13,7 @@
 
 - (void) channelTapped: (UICollectionViewCell *) cell;
 - (void) followButtonTapped: (UICollectionViewCell *) cell;
-- (void) deleteButtonTapped: (UICollectionViewCell *) cell;
+- (void) deleteChannelTapped: (UICollectionViewCell *) cell;
 
 
 typedef enum {
