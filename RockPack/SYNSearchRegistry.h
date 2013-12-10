@@ -22,6 +22,8 @@
 
 - (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary;
 
+- (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary withViewId:(NSString*)viewId;
+
 - (NSCache *) registerFriendsFromAddressBookArray: (NSArray *) abArray;
 
 @end

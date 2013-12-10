@@ -10,6 +10,7 @@
 #import "SYNMoodCell.h"
 #import "UIFont+SYNFont.h"
 #import "SYNFadingFlowLayout.h"
+#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 #import "Mood.h"
 
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) NSArray *moods;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
 @property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
+
+@property (nonatomic, readonly) Mood* currentMood;
 
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 
@@ -96,6 +99,7 @@
     }];
 }
 
+
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -106,10 +110,48 @@
     }
 }
 
+#pragma mark - Control Callbacks
 
 -(void)rightBarButtonItemPressed:(UIBarButtonItem*)rightButtonItem
 {
-    DebugLog(@"Pressed...");
+    
+    
+    [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
+                                                  andEntityName: kVideoInstance
+                                                         params: @{@"mood":self.currentMood.name}
+                                              completionHandler: ^(id responce) {
+                                                  
+                                                  if(![responce isKindOfClass:[NSDictionary class]])
+                                                      return;
+                                                  
+                                                  if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:responce
+                                                                                                            withViewId:self.viewId])
+                                                      return;
+                                                  
+                                                  
+                                                  NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:kVideoInstance];
+                                                  
+                                                  NSError* error;
+                                                  
+                                                  NSArray* videosArray = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest
+                                                                                                             error:&error];
+                                                  
+                                                  
+                                                  if(videosArray.count == 0)
+                                                  {
+                                                      // implement
+                                                  }
+                                                  
+                                                  SYNCarouselVideoPlayerViewController* videoOverlay = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videosArray selectedIndex:0];
+                                                  
+                                                  [self presentViewController:videoOverlay animated:YES completion:^{
+                                                      
+                                                  }];
+                                                  
+                                              } errorHandler:^(id error) {
+                                                  
+                                                  
+                                              }];
 }
 
 
@@ -226,6 +268,7 @@
     {
         [self.moodCollectionView reloadData];
         
+        // center the moods list to the middle
         [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
                                         atScrollPosition: UICollectionViewScrollPositionCenteredVertically
                                                 animated: NO];
@@ -234,5 +277,19 @@
     
 }
 
+-(Mood*)currentMood
+{
+    
+    
+    CGPoint point = CGPointMake(self.moodCollectionView.frame.size.width * 0.5f,
+                                self.moodCollectionView.frame.size.height * 0.5f + self.moodCollectionView.contentOffset.y);
+    
+    NSIndexPath* indexPath = [self.moodCollectionView indexPathForItemAtPoint:point];
+    
+    Mood* cMood = self.moods [indexPath.item % self.moods.count];
+    
+    
+    return cMood;
+}
 
 @end
