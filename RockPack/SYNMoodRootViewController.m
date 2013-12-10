@@ -81,7 +81,8 @@
         if(![responce isKindOfClass:[NSDictionary class]])
             return;
         
-        if([appDelegate.mainRegistry registerMoodsFromDictionary:responce])
+        if([appDelegate.mainRegistry registerMoodsFromDictionary:responce
+                                               withExistingMoods:self.moods])
         {
             [self loadMoods];
         }

@@ -217,6 +217,7 @@
 
 
 -(BOOL)registerMoodsFromDictionary:(NSDictionary*)dictionary
+                 withExistingMoods:(NSArray*)moods
 {
     // == Check for Validity == //
     NSDictionary *channelCoverDictionary = dictionary[@"moods"];
@@ -228,16 +229,51 @@
     if (![itemArray isKindOfClass: [NSArray class]])
         return NO;
     
+    // create lookup
+    
+    Mood* mood;
+    
+    NSMutableDictionary* moodsById = [NSMutableDictionary dictionary];
+    for (mood in moods)
+    {
+        if(!mood.uniqueId)
+            continue;
+        
+        moodsById[mood.uniqueId] = mood;
+        mood.markedForDeletionValue = YES;
+        
+    }
+    
+    
     for (NSDictionary *moodItemDictionary in itemArray)
     {
         if (![moodItemDictionary isKindOfClass: [NSDictionary class]])
             continue;
         
-        [Mood instanceFromDictionary:moodItemDictionary
-           usingManagedObjectContext:importManagedObjectContext];
+        NSString* moodId = [moodItemDictionary objectForKey:@"id"];
+        
+        if(![moodId isKindOfClass:[NSString class]])
+            continue;
+        
+        if(!(mood = moodsById[moodId]))
+        {
+            if(!(mood = [Mood instanceFromDictionary:moodItemDictionary
+               usingManagedObjectContext:importManagedObjectContext]))
+            {
+                continue;
+            }
+        }
+        
+        mood.markedForDeletionValue = NO;
         
     }
     
+    for (NSString* key in moodsById)
+    {
+        mood = moodsById[key];
+        if(mood.markedForDeletionValue)
+           [mood.managedObjectContext deleteObject:mood];
+    }
     BOOL saveResult = [self saveImportContext];
     
     if (!saveResult)
