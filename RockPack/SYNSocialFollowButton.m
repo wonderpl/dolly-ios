@@ -7,6 +7,7 @@
 //
 
 #import "SYNSocialFollowButton.h"
+#import "UIColor+SYNColor.h"
 
 @implementation SYNSocialFollowButton
 
@@ -36,7 +37,7 @@
         
         [self setTitle:NSLocalizedString(@"follow", nil)];
         
-        [self setTitleColor: UIColor.dollyButtonDefaultColor
+        [self setTitleColor: [UIColor dollyButtonDefaultColor]
                    forState: UIControlStateNormal];
     }
 }
