@@ -1340,7 +1340,6 @@
     self.dataRequestRange = self.dataRequestRangeSubscriptions;
     self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptionsValue;
 
-    
     if(!self.moreItemsToLoad)
         return;
     
@@ -2069,12 +2068,6 @@
         // Sub to channel
         if (self.followCell.channel != nil)
         {
-            
-#warning change to server call
-//            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
-//                                                                object: self
-//                                                              userInfo: @{kChannel : self.followCell.channel}];
-//            
             
             
             NSManagedObjectID *channelOwnerObjectId = self.followCell.channel.objectID;
