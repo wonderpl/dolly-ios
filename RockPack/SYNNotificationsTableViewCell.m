@@ -47,7 +47,7 @@
         
         // == Main Text == //
         
-        self.textLabel.font = [UIFont lightCustomFontOfSize: 14.0];
+        self.textLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 14.0f : 12.0f];
         self.textLabel.textAlignment = NSTextAlignmentLeft;
         self.textLabel.numberOfLines = 3;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -58,7 +58,7 @@
                                                    alpha: (1.0)];
         
         // == Subtitle == //
-        self.detailTextLabel.font = [UIFont lightCustomFontOfSize: 12.0];
+        self.detailTextLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 12.0f : 11.0f];
         self.detailTextLabel.textAlignment = NSTextAlignmentLeft;
         
         self.detailTextLabel.textColor = [UIColor colorWithRed: (187.0 / 255.0)
@@ -212,12 +212,11 @@
                                                options: NSStringDrawingUsesLineFragmentOrigin
                                                context: nil];
     
-    CGFloat height = ceilf(rect.size.height);
-    CGFloat width  = ceilf(rect.size.width);
+    NSLog(@"%@ -> %f", messageTitle, rect.size.height);
     
-    CGSize mainTSize = (CGSize){width, height};
+    CGSize mainTSize = CGRectIntegral(rect).size;
     
-    mainTSize.height += 2.0f;
+    mainTSize.height += 6.0f;
     self.mainTextSize = mainTSize;
     
     

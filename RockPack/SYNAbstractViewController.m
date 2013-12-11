@@ -30,6 +30,7 @@
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "GAI+Tracking.h"
 @import QuartzCore;
 
 #define kScrollContentOff 100.0f
@@ -295,14 +296,9 @@
     }
     
     VideoInstance *videoInstance = socialControl.dataItemLinked;
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoPlusButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
-    
+	
+	[[GAI sharedInstance] trackVideoAdd];
+	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: @"select"
                                             videoInstanceId: videoInstance.uniqueId
@@ -353,12 +349,7 @@
 	[self requestShareLinkWithObjectType: @"video_instance"
 								objectId: videoInstance.uniqueId];
 	
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoShareButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
+	[[GAI sharedInstance] trackVideoShare];
     
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];

@@ -1361,6 +1361,11 @@
 		E97FCDC5183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FCDC4183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
+		E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */; };
+		E9E1E28118561C780051E312 /* SYNPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27D18561C780051E312 /* SYNPopoverAnimator.m */; };
+		E9E1E28218561C780051E312 /* SYNiPadPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27F18561C780051E312 /* SYNiPadPopoverAnimator.m */; };
+		E9E1E28518561CA30051E312 /* SYNTapDismissView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E28418561CA30051E312 /* SYNTapDismissView.m */; };
+		E9F1921618571AFC008AC21E /* GAI+Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F1921518571AFC008AC21E /* GAI+Tracking.m */; };
 		E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2AF28717BE33C700A20127 /* FacebookSDK.framework */; };
 		E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC751846273E0026C97D /* NSString+Validation.m */; };
 		E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */; };
@@ -2971,6 +2976,16 @@
 		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
 		E9927391185090DE00982480 /* SYNPagingModel+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNPagingModel+Protected.h"; sourceTree = "<group>"; };
 		E9B75F5D1848ADB50066420E /* SYNVideoPlayerViewController+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayerViewController+Protected.h"; sourceTree = "<group>"; };
+		E9E1E27A18561C780051E312 /* SYNiPhonePopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPhonePopoverAnimator.h; sourceTree = "<group>"; };
+		E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPhonePopoverAnimator.m; sourceTree = "<group>"; };
+		E9E1E27C18561C780051E312 /* SYNPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopoverAnimator.h; sourceTree = "<group>"; };
+		E9E1E27D18561C780051E312 /* SYNPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPopoverAnimator.m; sourceTree = "<group>"; };
+		E9E1E27E18561C780051E312 /* SYNiPadPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadPopoverAnimator.h; sourceTree = "<group>"; };
+		E9E1E27F18561C780051E312 /* SYNiPadPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadPopoverAnimator.m; sourceTree = "<group>"; };
+		E9E1E28318561CA30051E312 /* SYNTapDismissView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTapDismissView.h; sourceTree = "<group>"; };
+		E9E1E28418561CA30051E312 /* SYNTapDismissView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTapDismissView.m; sourceTree = "<group>"; };
+		E9F1921418571AFC008AC21E /* GAI+Tracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+Tracking.h"; sourceTree = "<group>"; };
+		E9F1921518571AFC008AC21E /* GAI+Tracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+Tracking.m"; sourceTree = "<group>"; };
 		E9F7CC73184616E40026C97D /* SYNVideoPlayer+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayer+Protected.h"; sourceTree = "<group>"; };
 		E9F7CC741846273E0026C97D /* NSString+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Validation.h"; sourceTree = "<group>"; };
 		E9F7CC751846273E0026C97D /* NSString+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Validation.m"; sourceTree = "<group>"; };
@@ -3654,6 +3669,8 @@
 		019824E31629CADE00216900 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E9E1E28318561CA30051E312 /* SYNTapDismissView.h */,
+				E9E1E28418561CA30051E312 /* SYNTapDismissView.m */,
 				BE285DAD1725A20B00D995AB /* Slide In Messages */,
 				0110AE6017DF383C00DC7724 /* SYNProgressView.h */,
 				0110AE5F17DF383C00DC7724 /* SYNProgressView.m */,
@@ -3675,6 +3692,12 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E9E1E27A18561C780051E312 /* SYNiPhonePopoverAnimator.h */,
+				E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */,
+				E9E1E27C18561C780051E312 /* SYNPopoverAnimator.h */,
+				E9E1E27D18561C780051E312 /* SYNPopoverAnimator.m */,
+				E9E1E27E18561C780051E312 /* SYNiPadPopoverAnimator.h */,
+				E9E1E27F18561C780051E312 /* SYNiPadPopoverAnimator.m */,
 				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
@@ -3842,6 +3865,8 @@
 				E9F7CC751846273E0026C97D /* NSString+Validation.m */,
 				E92D3356184CDFEA0025D1DF /* UICollectionReusableView+Helpers.h */,
 				E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */,
+				E9F1921418571AFC008AC21E /* GAI+Tracking.h */,
+				E9F1921518571AFC008AC21E /* GAI+Tracking.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -7390,6 +7415,7 @@
 				BEA216E517E9ED31007C6DF7 /* SYNTrackableFrameView.m in Sources */,
 				0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */,
 				BEF9E5B016DCBAC800286113 /* SYNSoundPlayer.m in Sources */,
+				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,
 				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
@@ -7442,6 +7468,7 @@
 				0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */,
 				BEB313561817D8C400FAF98A /* SYNSearchResultsUserCell.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
+				E9F1921618571AFC008AC21E /* GAI+Tracking.m in Sources */,
 				BE285D9B1725726300D995AB /* SYNAddToChannelViewController.m in Sources */,
 				BE285D9F172584E200D995AB /* SYNAddToChannelCreateNewCell.m in Sources */,
 				BE285DB01725A23300D995AB /* SYNNetworkMessageView.m in Sources */,
@@ -7464,6 +7491,7 @@
 				011C167E173003E800CF50B9 /* OWMapsActivity.m in Sources */,
 				BE31EFB5183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m in Sources */,
 				011C167F173003E800CF50B9 /* OWMessageActivity.m in Sources */,
+				E9E1E28218561C780051E312 /* SYNiPadPopoverAnimator.m in Sources */,
 				011C1680173003E800CF50B9 /* OWPrintActivity.m in Sources */,
 				011C1681173003E800CF50B9 /* OWSafariActivity.m in Sources */,
 				BEB3134A1817D46B00FAF98A /* SYNSearchResultsVideoCell.m in Sources */,
@@ -7486,6 +7514,7 @@
 				BE1B3DEA181141D600DA2BD6 /* SYNAggregateVideoItemCell.m in Sources */,
 				BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */,
 				BEB1578E173D060700DAFA2F /* _ChannelCover.m in Sources */,
+				E9E1E28518561CA30051E312 /* SYNTapDismissView.m in Sources */,
 				E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */,
 				BEB15791173D061700DAFA2F /* ChannelCover.m in Sources */,
 				BEE01B79185732A0000CF681 /* Mood.m in Sources */,
@@ -7527,6 +7556,7 @@
 				0177002A17C382C3006DE415 /* UIImage+Tint.m in Sources */,
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
 				BE06EEF417D78DCA0028F2E3 /* SYNOneToOneFriendCell.m in Sources */,
+				E9E1E28118561C780051E312 /* SYNPopoverAnimator.m in Sources */,
 				BEB31305181565CE00FAF98A /* SYNSearchResultsViewController.m in Sources */,
 				0110AE6117DF383C00DC7724 /* SYNProgressView.m in Sources */,
 			);

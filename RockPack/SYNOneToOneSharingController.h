@@ -6,13 +6,10 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNOAuthNetworkEngine.h"
 @import UIKit;
 
 @interface SYNOneToOneSharingController : UIViewController
 
 - (id) initWithInfo: (NSMutableDictionary *) mutableInfoDictionary;
-
--(void)finishingPresentation;
 
 @end

@@ -20,6 +20,7 @@
 @import UIKit;
 
 @class VideoInstance, Channel, ChannelOwner;
+@class SYNOneToOneSharingController;
 
 @interface SYNAbstractViewController : UIViewController <UICollectionViewDelegate, SYNSocialActionsDelegate>
 {
@@ -62,6 +63,11 @@
               isOwner: (NSNumber *) isOwner
            usingImage: (UIImage *) image;
 
+- (SYNOneToOneSharingController *)createSharingViewControllerForObjectType:(NSString *)objectType
+																  objectId:(NSString *)objectId
+																   isOwner:(BOOL)isOwner
+																   isVideo:(BOOL)isVideo
+																	 image:(UIImage *)image;
 
 - (SYNPopupMessageView*) displayPopupMessage: (NSString*) messageKey
                                   withLoader: (BOOL) isLoader;
