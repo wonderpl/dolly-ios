@@ -271,7 +271,7 @@
 {
     NSMutableString *descriptionToReturn = [[NSMutableString alloc] init];
     
-    [descriptionToReturn appendFormat: @"<SYNRockpackNotification: %p (identifier:'%i'", self, self.identifier];
+    [descriptionToReturn appendFormat: @"<SYNRockpackNotification: %p (identifier:'%i', type:%i,", self, self.identifier, self.objectType];
     [descriptionToReturn appendFormat: @" channelOwner:'%@')", self.channelOwner.displayName];
     [descriptionToReturn appendFormat: @" videoThumbnailUrl:'%@')", self.videoThumbnailUrl];
     [descriptionToReturn appendString: @">"];

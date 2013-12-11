@@ -13,7 +13,6 @@
 
 + (Comment *) instanceFromDictionary: (NSDictionary *) dictionary
            usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
-                 ignoringObjectTypes: (IgnoringObjects) ignoringObjects;
 {
     if (![dictionary isKindOfClass: [NSDictionary class]])
         return nil;
@@ -21,7 +20,7 @@
     
     NSString *uniqueId = dictionary[@"id"];
     
-    if ([uniqueId isKindOfClass: [NSNull class]])
+    if (![uniqueId isKindOfClass: [NSString class]])
         return nil;
     
     
@@ -30,8 +29,7 @@
     instance.uniqueId = uniqueId;
     
     
-    [instance setAttributesFromDictionary: dictionary
-                      ignoringObjectTypes: ignoringObjects];
+    [instance setAttributesFromDictionary: dictionary];
     
     
     return instance;
@@ -39,22 +37,41 @@
 
 
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
-                 ignoringObjectTypes: (IgnoringObjects) ignoringObjects
 {
     
-    self.thumbnailUrl = [dictionary objectForKey: @"avatar_thumbnail_url"
-                                     withDefault: @""];
+    self.position = [dictionary objectForKey: @"position"
+                                 withDefault: @(0)];
     
-    self.displayName = [dictionary objectForKey: @"display_name"
+    
+    self.commentText = [dictionary objectForKey: @"comment"
                                     withDefault: @""];
     
-    self.commentText = [dictionary objectForKey: @"comment_text"
-                                    withDefault: @""];
     
-    self.dateAdded = [dictionary dateFromISO6801StringForKey: @"token_expires"
+    self.dateAdded = [dictionary dateFromISO6801StringForKey: @"date_added"
                                                  withDefault: [NSDate distantPast]];
     
     
+    
+    NSDictionary* userDictionary = [dictionary objectForKey: @"user"];
+    
+    /* NOTE: Comments might be later linked to a real ChannelOwner Object, but for now we store the data in separate fields */
+    
+    // we at least want an id
+    if([userDictionary isKindOfClass:[NSDictionary class]] && [[userDictionary objectForKey: @"id"] isKindOfClass:[NSString class]])
+    {
+        self.displayName = [userDictionary objectForKey: @"display_name"
+                                            withDefault: @""];
+        
+        self.userId = [userDictionary objectForKey: @"id"
+                                       withDefault: @""];
+        
+        self.thumbnailUrl = [userDictionary objectForKey: @"avatar_thumbnail_url"
+                                             withDefault: @""];
+    }
+    
+    
+    
+    self.videoInstanceId = nil; // this is filled by the view controller which knows which one it is in...
     
 }
 

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNAbstractViewController.h"
+#import "VideoInstance.h"
 
-@interface SYNCommentingViewController : UIViewController
+@interface SYNCommentingViewController : SYNAbstractViewController
+
+
+- (id) initWithVideoInstance:(VideoInstance*)videoInstance;
 
 @end

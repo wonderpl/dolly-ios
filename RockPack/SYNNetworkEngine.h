@@ -123,5 +123,16 @@
 
 
 
+- (void) getCommentsForUsedId:(NSString*)userId
+                    channelId:(NSString*)channelId
+                   andVideoId:(NSString*)videoId
+                      inRange:(NSRange)range
+            completionHandler:(MKNKUserSuccessBlock) completionBlock
+                 errorHandler:(MKNKUserErrorBlock) errorBlock;
+
+// post comments method is in the oAuthNetworkEngine
+
+
+
 
 @end

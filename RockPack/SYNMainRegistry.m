@@ -15,6 +15,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNMainRegistry.h"
 #import "Video.h"
+#import "Comment.h"
 #import "Mood.h"
 #import "VideoInstance.h"
 @import CoreData;
@@ -215,6 +216,74 @@
     return YES;
 }
 
+- (BOOL) registerCommentsFromDictionary: (NSDictionary*) dictionary
+                           withExisting:(NSArray*)existingComments
+{
+    // == Check for Validity == //
+    NSDictionary *channelCoverDictionary = dictionary[@"comments"];
+    if (![channelCoverDictionary isKindOfClass: [NSDictionary class]])
+        return NO;
+    
+    NSArray *itemArray = channelCoverDictionary[@"items"];
+    
+    if (![itemArray isKindOfClass: [NSArray class]])
+        return NO;
+    
+    Comment* comment;
+    
+    NSMutableDictionary* commentsById = [NSMutableDictionary dictionary];
+    for (comment in existingComments)
+    {
+        if(!comment.uniqueId)
+            continue;
+        
+        commentsById[comment.uniqueId] = comment;
+        comment.markedForDeletionValue = YES;
+        
+    }
+    
+    for (NSDictionary *commentItemDictionary in itemArray)
+    {
+        if (![commentItemDictionary isKindOfClass: [NSDictionary class]])
+            continue;
+        
+        NSString* moodId = [commentItemDictionary objectForKey:@"id"];
+        
+        if(![moodId isKindOfClass:[NSString class]])
+            continue;
+        
+        if(!(comment = commentsById[moodId]))
+        {
+            if(!(comment = [Comment instanceFromDictionary:commentItemDictionary
+                                 usingManagedObjectContext:importManagedObjectContext]))
+            {
+                continue;
+            }
+        }
+        
+        comment.markedForDeletionValue = NO;
+        
+    }
+    
+    // delete old comments
+    
+    for (NSString* key in commentsById)
+    {
+        comment = commentsById[key];
+        if(comment.markedForDeletionValue)
+            [comment.managedObjectContext deleteObject:comment];
+    }
+    
+    
+    BOOL saveResult = [self saveImportContext];
+    
+    if (!saveResult)
+        return NO;
+    
+    [appDelegate saveContext:NO];
+    
+    return YES;
+}
 
 -(BOOL)registerMoodsFromDictionary:(NSDictionary*)dictionary
                  withExistingMoods:(NSArray*)moods
