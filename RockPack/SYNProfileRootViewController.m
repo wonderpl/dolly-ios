@@ -720,9 +720,6 @@
             //            self.moreButton.frame = CGRectMake(614, 512, 56, 56);
             //            channelsLayout = self.channelLayoutIPad;
             subscriptionsLayout = self.subscriptionLayoutIPad;
-            
-            
-            
             //   self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
             
         }
@@ -918,8 +915,6 @@
             {
                 channelThumbnailCell.deletableCell = YES;
             }
-            
-
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
@@ -981,6 +976,71 @@
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
+    
+    if (self.creatingChannel) {
+        [self cancelCreateChannel];
+    }
+    
+    SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    SYNChannelMidCell *selectedCell = cell;
+    
+    if (selectedCell.state != ChannelMidCellStateDefault) {
+        [selectedCell setState: ChannelMidCellStateDefault withAnimation:YES];
+        return;
+    }
+    
+    if([cell.superview isEqual:self.channelThumbnailCollectionView])
+    {
+        NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
+        SYNChannelDetailsViewController *channelVC;
+        
+        Channel *channel;
+        
+        if (self.isUserProfile && indexPath.row == 0)
+        {
+            //never gets called, first cell gets called and created in didSelectItem
+            return;
+        }
+        else if( self.isUserProfile && indexPath.row == 1)
+        {
+            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
+            [self.navigationController pushViewController:channelVC animated:YES];
+            return;
+        }
+        else
+        {
+            //  self.indexPathToDelete = indexPath;
+            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+        }
+        if (modeType == kModeMyOwnProfile)
+        {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
+        }
+        if (modeType == kModeOtherUsersProfile)
+        {
+            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+        }
+        
+        [self.navigationController pushViewController:channelVC animated:YES];
+        return;
+    }
+    if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
+    {
+        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
+        
+        if (indexPath.row < self.arrDisplayFollowing.count) {
+            Channel *channel = self.arrDisplayFollowing[indexPath.item];
+            //        self.navigationController.navigationBarHidden = NO;
+            
+            SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
+            
+            [self.navigationController pushViewController:channelVC animated:YES];
+        }
+    }
+    return;
+
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -1022,9 +1082,6 @@
     }
     return CGSizeZero;
 }
-
-
-
 
 - (void) resizeScrollViews
 {
@@ -1095,42 +1152,67 @@
         
         [self.collectionsTabButton.titleLabel setTextColor:self.tabTextColor];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
+        __weak typeof(self) weakSelf = self;
         
-        NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
-        NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
-
-        MKNKUserErrorBlock errorBlock = ^(id error) {
-            
+        MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
+            weakSelf.loadingMoreContent = NO;
+            [weakSelf.channelOwner addSubscriptionsFromDictionary: dictionary];
+            [self.subscriptionThumbnailCollectionView reloadData];
         };
-
-        
-        [appDelegate.oAuthNetworkEngine userSubscriptionsForUser: ((User *) self.channelOwner)
-                                                    onCompletion: ^(id dictionary) {
-                                                        NSError *error = nil;
-
-                                                        // Transform the object ID into the object again, as it it likely to have disappeared again
-                                                        NSError *error2 = nil;
-                                                        ChannelOwner * channelOwnerFromId2 = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
-                                                                                                                                                   error: &error2];
-                                                        if (channelOwnerFromId2)
-                                                        {
-                                                            // this will remove the old subscriptions
-                                                            [channelOwnerFromId2 setSubscriptionsDictionary: dictionary];
-                                                            
-                                                            [channelOwnerFromId2.managedObjectContext save: &error2];
-                                                            
-                                                            if (error)
-                                                            {
-                                                                NSString *errorString = [NSString stringWithFormat: @"%@ %@", [error localizedDescription], [error userInfo]];
-                                                                DebugLog(@"%@", errorString);
-                                                                errorBlock(@{@"saving_error": errorString});
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            DebugLog (@"Channel disappeared from underneath us");
-                                                        }
-                                                    }  onError: errorBlock];
+    
+        // define success block //
+        MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
+            weakSelf.loadingMoreContent = NO;
+            DebugLog(@"Update action failed");
+        };
+        //    Working load more videos for user channels
+    
+        NSRange range = NSMakeRange(0, 100);
+    
+        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
+                                                       inRange: range
+                                             completionHandler: successBlock
+                                                  errorHandler: errorBlock];
+    
+//
+//
+//
+//        NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
+//        NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
+//
+//        MKNKUserErrorBlock errorBlock = ^(id error) {
+//            
+//        };
+//
+//        
+//
+//        [appDelegate.oAuthNetworkEngine userSubscriptionsForUser: ((User *) self.channelOwner)
+//                                                    onCompletion: ^(id dictionary) {
+//                                                        NSError *error = nil;
+//
+//                                                        // Transform the object ID into the object again, as it it likely to have disappeared again
+//                                                        NSError *error2 = nil;
+//                                                        ChannelOwner * channelOwnerFromId2 = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
+//                                                                                                                                                   error: &error2];
+//                                                        if (channelOwnerFromId2)
+//                                                        {
+//                                                            // this will remove the old subscriptions
+//                                                            [channelOwnerFromId2 setSubscriptionsDictionary: dictionary];
+//                                                            
+//                                                            [channelOwnerFromId2.managedObjectContext save: &error2];
+//                                                            
+//                                                            if (error)
+//                                                            {
+//                                                                NSString *errorString = [NSString stringWithFormat: @"%@ %@", [error localizedDescription], [error userInfo]];
+//                                                                DebugLog(@"%@", errorString);
+//                                                                errorBlock(@{@"saving_error": errorString});
+//                                                            }
+//                                                        }
+//                                                        else
+//                                                        {
+//                                                            DebugLog (@"Channel disappeared from underneath us");
+//                                                        }
+//                                                    }  onError: errorBlock];
     }
 }
 
@@ -1258,7 +1340,6 @@
     self.dataRequestRange = self.dataRequestRangeSubscriptions;
     self.dataItemsAvailable = self.channelOwner.totalVideosValueSubscriptionsValue;
 
-    
     if(!self.moreItemsToLoad)
         return;
     
@@ -1603,68 +1684,6 @@
 {
     
     //is currently creating a channel, cancel and put it back into noncreating state
-    if (self.creatingChannel) {
-        [self cancelCreateChannel];
-    }
-    
-    SYNChannelMidCell *selectedCell = (SYNChannelMidCell *) cell;
-    
-    if (selectedCell.state != ChannelMidCellStateDefault) {
-        
-        [selectedCell setState: ChannelMidCellStateDefault];
-        return;
-    }
-    
-    if([cell.superview isEqual:self.channelThumbnailCollectionView])
-    {
-        NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-        SYNChannelDetailsViewController *channelVC;
-        
-        Channel *channel;
-        
-        if (self.isUserProfile && indexPath.row == 0)
-        {
-            //never gets called, first cell gets called and created in didSelectItem
-            return;
-        }
-        else if( self.isUserProfile && indexPath.row == 1)
-        {
-            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
-            [self.navigationController pushViewController:channelVC animated:YES];
-            return;
-        }
-        else
-        {
-            //  self.indexPathToDelete = indexPath;
-            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-        }
-        if (modeType == kModeMyOwnProfile)
-        {
-            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
-        }
-        if (modeType == kModeOtherUsersProfile)
-        {
-            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
-        }
-        
-        [self.navigationController pushViewController:channelVC animated:YES];
-        return;
-    }
-    if([cell.superview isEqual:self.subscriptionThumbnailCollectionView])
-    {
-        NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-        
-        if (indexPath.row < self.arrDisplayFollowing.count) {
-            Channel *channel = self.arrDisplayFollowing[indexPath.item];
-            //        self.navigationController.navigationBarHidden = NO;
-            
-            SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
-            
-            [self.navigationController pushViewController:channelVC animated:YES];
-        }
-    }
-    return;
 }
 #pragma mark - Searchbar delegates
 -(void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
@@ -2050,10 +2069,61 @@
         if (self.followCell.channel != nil)
         {
             
-//#warning change to server call
-            [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
-                                                                object: self
-                                                              userInfo: @{kChannel : self.followCell.channel}];
+            
+            NSManagedObjectID *channelOwnerObjectId = self.followCell.channel.objectID;
+            NSManagedObjectContext *channelOwnerObjectMOC = self.followCell.channel.managedObjectContext;
+            
+            [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                              channelId: self.followCell.channel.uniqueId
+                                                      completionHandler: ^(NSDictionary *responseDictionary) {
+                                                          // Find our object from it's ID
+                                                          NSError *error = nil;
+                                                          Channel *channelFromId = (Channel *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
+                                                                                                                                    error: &error];
+                                                          if (channelFromId)
+                                                          {
+                                                              // This notifies the ChannelDetails through KVO
+                                                              channelFromId.hasChangedSubscribeValue = YES;
+                                                              channelFromId.subscribedByUserValue = NO;
+                                                              channelFromId.subscribersCountValue -= 1;
+                                                              
+                                                              // the channel that got updated was a copy inside the ChannelDetails, so we must find the original and update it.
+                                                              for (Channel * subscription in appDelegate.currentUser.subscriptions)
+                                                              {
+                                                                  if ([subscription.uniqueId isEqualToString: channelFromId.uniqueId])
+                                                                  {
+                                                                      [appDelegate.currentUser removeSubscriptionsObject: subscription];
+                                                                      
+                                                                      break;
+                                                                  }
+                                                              }
+                                                              
+                                                              [channelFromId.managedObjectContext save: &error];
+                                                              
+                                                              [self.followCell setFollowButtonLabel:NSLocalizedString(@"follow", @"follow")];
+                                                              
+                                                              if (error)
+                                                              {
+                                                                  [[NSNotificationCenter defaultCenter] postNotificationName: kUpdateFailed
+                                                                                                                      object: self];
+                                                              }
+                                                              else
+                                                              {
+                                                                  [appDelegate saveContext: YES];
+                                                              }
+                                                          }
+                                                          else
+                                                          {
+                                                              DebugLog (@"Channel disappeared from underneath us");
+                                                          }
+                                                      } errorHandler: ^(NSDictionary *errorDictionary) {
+                                                          [[NSNotificationCenter defaultCenter]  postNotificationName: kUpdateFailed
+                                                                                                               object: self];
+                                                      }];
+            
+            
+
+            
         }
     }
 //#warning change to server call
@@ -2107,12 +2177,6 @@
 
 }
 
-- (void) deleteChannel
-{
-    
-    
-    
-}
 
 
 #pragma mark - IBActions
@@ -2820,6 +2884,7 @@ finishedWithImage: (UIImage *) image
 
 -(void)deleteChannelTapped: (SYNChannelMidCell*) cell{
     
+    
 //
 //    [self.channelThumbnailCollectionView performBatchUpdates:^{
 //        
@@ -2844,37 +2909,67 @@ finishedWithImage: (UIImage *) image
     
 }
 
+
+
 -(void) deleteChannel:(SYNChannelMidCell *)cell
 {
-    
-    NSLog(@"Delete channel : %@", cell);
     ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
 
+//    [self.channelThumbnailCollectionView performBatchUpdates:^{
+//        
+//
+//        NSArray* itemPaths = [self.channelThumbnailCollectionView indexPathsForSelectedItems];
+//        
+//        
+//        for (int i = 0; i<itemPaths.count; i++) {
+//            
+//            NSLog(@"**Index : %@", [itemPaths objectAtIndex:i]);
+//            
+//        }
+//        
+//        // Delete the items from the data source.
+//        [appDelegate.currentUser.channelsSet removeObject: cell.channel];
+//        
+//        // Now delete the items from the collection view.
+//        [self.channelThumbnailCollectionView deleteItemsAtIndexPaths:itemPaths];
+//    } completion:nil];
     
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
-//                                             
+
 //                                             CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
 //                                             tmp.size.height = 0;
 //                                             
-//                                             [UIView animateWithDuration:0.3 animations:^{
+//                                             [UIView animateWithDuration:0.4 animations:^{
 //                                                 
 //                                                 cell.boarderView.frame = tmp;
 //                                             } completion:^(BOOL finished) {
-//                                                 
+//                                                 CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
+//                                                 if (IS_IPHONE) {
+//                                                     tmp.size.height = 71;
+//
+//                                                 }
+//                                                 else
+//                                                 {
+//                                                 tmp.size.height = 80;
+//
+//                                                 }
+//                                                 cell.boarderView.frame = tmp;
+//                                                 [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
+//                                                                                                     object: self
+//                                                                                                   userInfo: @{kChannelOwner : self.channelOwner}];
+//
 //                                             }];
-                                             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
-                                                                                                 object: self
-                                                                                               userInfo: @{kChannelOwner : self.channelOwner}];
                                              
-                                             //   [self hideDescriptionCurrentlyShowing];
-                                             [self reloadCollectionViews];
-                                             [self performSelector:@selector(reloadCollectionViews) withObject:nil afterDelay:0.5f];
+                                             [cell.channel.managedObjectContext deleteObject: cell.channel];
+                                             [self.channelThumbnailCollectionView reloadData];
                                              
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
                                          }];
 }
+
+
 
 @end

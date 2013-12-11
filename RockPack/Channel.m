@@ -302,7 +302,7 @@
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
     
-    self.title = [dictionary upperCaseStringForKey: @"title"
+    self.title = [dictionary objectForKey: @"title"
                                        withDefault: @""];
     
     self.lastUpdated = [dictionary dateFromISO6801StringForKey: @"last_updated"

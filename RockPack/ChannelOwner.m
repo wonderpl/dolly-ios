@@ -279,6 +279,8 @@
             continue;
         }
         
+        channel.subscribedByUserValue = YES;
+        
         [self addSubscriptionsObject: channel];
         
         channel.viewId = self.viewId;
@@ -315,12 +317,16 @@
 
 - (void) addSubscriptionsObject: (Channel *) value_
 {
+    value_.subscribedByUserValue = NO;
     [self.subscriptionsSet addObject: value_];
 }
 
 
 - (void) removeSubscriptions: (NSOrderedSet *) value_
 {
+    for (Channel *tmpChannel in value_) {
+        tmpChannel.subscribedByUserValue = NO;
+    }
     [self.subscriptionsSet removeObject: value_];
 }
 

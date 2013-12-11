@@ -467,7 +467,7 @@ UIPopoverControllerDelegate>
     self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
     
-    self.lblChannelTitle.text = self.channel.title;
+    self.lblChannelTitle.text = [self.channel.title uppercaseString];
     self.lblDescription.text = self.channel.channelDescription;
     
     self.txtViewDescription.text = self.lblDescription.text;
