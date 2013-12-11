@@ -389,11 +389,13 @@
     
     switch (notification.objectType)
     {
+            
+        
+        case kNotificationObjectTypeUserAddedYourVideo:
         case kNotificationObjectTypeUserLikedYourVideo:
         {
             
             Channel *channel = [self channelFromChannelId: notification.channelId];
-            
             
             if (!channel)
             {
@@ -404,17 +406,12 @@
                                            delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil] show];
-              
-                
                 return;
             }
             
-            
-            
             channel.autoplayId = notification.videoId;
             
-            
-			[self viewChannelDetails:channel];
+			[self viewChannelDetails: channel];
             
             break;
         }
@@ -445,6 +442,7 @@
             break;
         }
             
+         
         default:
             AssertOrLog(@"Unexpected notification type");
             break;
