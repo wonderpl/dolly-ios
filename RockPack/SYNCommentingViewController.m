@@ -9,6 +9,7 @@
 #import "SYNCommentingViewController.h"
 #import "SYNCommentingCollectionViewCell.h"
 #import "UIFont+SYNFont.h"
+#import "UIImageView+WebCache.h"
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
@@ -59,16 +60,13 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     
     self.sendMessageTextField.font = [UIFont regularCustomFontOfSize:self.sendMessageTextField.font.pointSize];
     
-    [self getCommentsFromServer];
     
-}
-
-
-
-- (void) viewDidAppear:(BOOL)animated
-{
     
-    [super viewDidAppear:animated];
+    [self.sendMessageAvatarmageView setImageWithURL: [NSURL URLWithString: appDelegate.currentUser.thumbnailURL]
+                                   placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
+                                            options: SDWebImageRetryFailed];
+    
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)
@@ -79,9 +77,45 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                              selector:@selector(keyboardNotified:)
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
+    
+    [self getCommentsFromServer];
+    
 }
 
 
+
+
+- (void) keyboardNotified: (NSNotification*) notification
+{
+    if(IS_IPAD)
+    {
+        CGRect sFrame = self.navigationController.view.frame;
+        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
+            sFrame.origin.y -= 110.0f;
+        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
+            sFrame.origin.y += 110.0f;
+        
+        __weak SYNCommentingViewController* wself = self;
+        [UIView animateWithDuration:0.3f animations:^{
+            wself.navigationController.view.frame = sFrame;
+        }];
+    }
+    else // is IPHONE
+    {
+        CGRect sFrame = self.bottomContainerView.frame;
+        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
+            sFrame.origin.y -= 220.0f;
+        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
+            sFrame.origin.y += 220.0f;
+        
+        __weak SYNCommentingViewController* wself = self;
+        [UIView animateWithDuration:0.3f animations:^{
+            wself.bottomContainerView.frame = sFrame;
+        }];
+    }
+    
+    
+}
 
 - (void) viewDidDisappear:(BOOL)animated
 {
