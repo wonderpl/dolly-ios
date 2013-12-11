@@ -7,6 +7,8 @@
 //
 
 #import "SYNSocialButton.h"
+#import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
 @implementation SYNSocialButton
 
@@ -23,16 +25,16 @@
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize: 12.0f];
     
-    [self setTitleColor: UIColor.dollyButtonDefaultColor
+    [self setTitleColor: [UIColor dollyButtonDefaultColor]
                forState: UIControlStateNormal];
     
-    [self setTitleColor: UIColor.dollyButtonHighlightedColor
+    [self setTitleColor: [UIColor dollyButtonHighlightedColor]
                forState: UIControlStateHighlighted];
     
-    [self setTitleColor: [UIColor whiteColor]
+    [self setTitleColor: [UIColor dollyButtonSelectedColor]
                forState: UIControlStateSelected];
     
-    [self setTitleColor: UIColor.dollyButtonDisabledColor
+    [self setTitleColor: [UIColor dollyButtonDisabledColor]
                forState: UIControlStateDisabled];
     
     self.backgroundColor = [UIColor whiteColor];
