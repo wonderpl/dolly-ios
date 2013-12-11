@@ -2384,7 +2384,7 @@
                                                      errorTitle = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_title", nil);
                                                      errorMessage = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_description", nil);
                                                      [self.sameChannelNameAlertView show];
-                                                 
+                                                     [self.createChannelCell.createTextField becomeFirstResponder];
                                                  }
                                                  else if ([errorType isEqualToString: @"Mind your language!"])
                                                  {
