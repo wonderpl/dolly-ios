@@ -28,7 +28,6 @@
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 
-
 @end
 
 @implementation SYNChannelMidCell
@@ -41,10 +40,10 @@
     
     
     // Tap for showing video
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                       action: @selector(showChannel:)];
-    self.tap.delegate = self;
-    [self addGestureRecognizer: self.tap];
+//    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
+//                                                       action: @selector(showChannel:)];
+//    self.tap.delegate = self;
+//    [self addGestureRecognizer: self.tap];
     
     if (IS_RETINA)
     {
@@ -128,7 +127,7 @@
     
     
     // Just need to reference any button in the cell (as there is no longer an actual video button)
-    [self.viewControllerDelegate channelTapped: self];
+//    [self.viewControllerDelegate channelTapped: self];
     
 }
 
@@ -144,8 +143,8 @@
     // TODO: figure out which color to put according to category color
     self.bottomBarView.backgroundColor = [UIColor grayColor];
     
-    self.videoTitleLabel.text = _channel.title;
-    
+    self.videoTitleLabel.text = [_channel.title uppercaseString];
+    //TODO: move all the setting of text values in here from profile
 }
 
 -(void) setHiddenForFollowButton: (BOOL) hide
@@ -292,7 +291,7 @@
 {
     
     if (!animated) {
-        
+        _state = state;
         return;
     }
     _state = state;
