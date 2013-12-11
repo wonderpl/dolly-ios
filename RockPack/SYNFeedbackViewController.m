@@ -48,6 +48,8 @@ static NSString* errorText = @"Please provide your feedback here...";
     
     self.title = NSLocalizedString(@"Feedback", nil);
     
+    self.currentValueLabel.alpha = 0.0f;
+    
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Send", nil)
                                                                               style:UIBarButtonItemStyleBordered
@@ -165,9 +167,7 @@ static NSString* errorText = @"Please provide your feedback here...";
 - (void) sendButtonPressed:(UIBarButtonItem*)buttonItem
 {
     
-    
-    // do checks
-    
+    // if the user has not used the slider to rate then light it up red
     if(!self.hasTouchedSlider)
     {
         [self lightUpSlider:YES
@@ -187,14 +187,22 @@ static NSString* errorText = @"Please provide your feedback here...";
         
     }
     
-    
-    self.navigationItem.leftBarButtonItem.enabled = NO;
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    // disable controls until we get a result
+    [self enableMainControls:NO];
     
     [self sendMessage];
 }
 
-
+- (void) enableMainControls:(BOOL)enable
+{
+    self.textView.editable = enable;
+    
+    self.slider.enabled = enable;
+    
+    self.navigationItem.leftBarButtonItem.enabled = enable; // send button
+    
+    self.navigationItem.rightBarButtonItem.enabled = enable; // close button
+}
 
 - (void) closeButtonPressed:(UIBarButtonItem*)buttonItem
 {
@@ -223,16 +231,15 @@ static NSString* errorText = @"Please provide your feedback here...";
                                                   andScore:score
                                          completionHandler:^(id responce) {
                                              
-                                             self.navigationItem.rightBarButtonItem.enabled = YES;
-                                             self.navigationItem.leftBarButtonItem.enabled = YES;
-                                             
-                                             [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+                                             if(IS_IPAD)
+                                                 [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+                                             else
+                                                 [self.navigationController popViewControllerAnimated:YES];
                                              
                                              
                                             } errorHandler:^(id error) {
                                              
-                                                self.navigationItem.rightBarButtonItem.enabled = YES;
-                                                self.navigationItem.leftBarButtonItem.enabled = YES;
+                                                [self enableMainControls:YES];
                                                 
                                                 
                                             }];
@@ -310,7 +317,12 @@ static NSString* errorText = @"Please provide your feedback here...";
         
         for (UIView* v in self.sliderElements)
         {
-            v.alpha = lightUp ? 1.0f : 0.5f;
+            
+            
+            if(v == self.currentValueLabel)
+                v.alpha = lightUp ? 1.0f : 0.0f;
+            else
+                v.alpha = lightUp ? 1.0f : 0.5f;
             
             if(forError)
             {
