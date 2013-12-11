@@ -51,8 +51,8 @@
             self.recentlyStarred = [NSSet setWithArray: dictionary[@"recently_starred"]];
         
         
-        if (dictionary[@"recently_viewed"])
-            self.recentlyViewed = [NSSet setWithArray: dictionary[@"recently_viewed"]];
+//        if (dictionary[@"recently_viewed"])
+//            self.recentlyViewed = [NSSet setWithArray: dictionary[@"recently_viewed"]];
         
         
         if (dictionary[@"subscribed"])

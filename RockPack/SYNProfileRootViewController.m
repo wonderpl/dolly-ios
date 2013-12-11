@@ -1156,7 +1156,7 @@
         
         MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
             weakSelf.loadingMoreContent = NO;
-            [weakSelf.channelOwner addSubscriptionsFromDictionary: dictionary];
+            [weakSelf.channelOwner setSubscriptionsDictionary: dictionary];
             [self.subscriptionThumbnailCollectionView reloadData];
         };
     
@@ -1944,16 +1944,16 @@
                                                         channelFromId.subscribedByUserValue = YES;
                                                         channelFromId.subscribersCountValue += 1;
                                                         
-                                                        // the channel that got updated was a copy inside the ChannelDetails, so we must copy it to user
+                                                        
+                                                        NSLog(@"%@, %hhd",channelFromId.title, channelFromId.subscribedByUserValue);
+                                                        // the channel that got updated was a copy inside the ChannelDetails, so we must copy it to user@
                                                         IgnoringObjects copyFlags = kIgnoreVideoInstanceObjects;
                                                         
                                                         Channel *subscription = [Channel instanceFromChannel: channelFromId
                                                                                                    andViewId: kProfileViewId
                                                                                    usingManagedObjectContext: appDelegate.currentUser.managedObjectContext
                                                                                          ignoringObjectTypes: copyFlags];
-                                                        
-                                                        subscription.hasChangedSubscribeValue = YES;
-                                                        
+                                                        subscription.hasChangedSubscribeValue = YES;                   
                                                         [appDelegate.currentUser addSubscriptionsObject: subscription];
                                                         
                                                         // might be in search context
@@ -2384,7 +2384,7 @@
                                                      errorTitle = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_title", nil);
                                                      errorMessage = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_description", nil);
                                                      [self.sameChannelNameAlertView show];
-                                                 
+                                                     [self.createChannelCell.createTextField becomeFirstResponder];
                                                  }
                                                  else if ([errorType isEqualToString: @"Mind your language!"])
                                                  {
