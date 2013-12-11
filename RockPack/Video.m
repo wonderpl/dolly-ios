@@ -101,7 +101,7 @@ NSString *const VideoSourceOoyala = @"ooyala";
                                      withDefault: @""];
     
     self.starredByUserValue = [SYNActivityManager.sharedInstance isRecentlyStarred:self.uniqueId];
-    self.viewedByUserValue = [SYNActivityManager.sharedInstance isRecentlyViewed:self.uniqueId];
+//    self.viewedByUserValue = [SYNActivityManager.sharedInstance isRecentlyViewed:self.uniqueId];
 }
 
 @end

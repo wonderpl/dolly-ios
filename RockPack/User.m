@@ -99,7 +99,7 @@
         if(activity_dict[@"recently_starred"])
         {
             // if this is set it means we have activity data with the response, usually by setting '&data=activity' in the request
-            // the objects contained are 'recently_starred', 'recently_viewed' and 'subscribed'
+            // the objects contained are 'recently_starred', 'recently_viewed' and 'subscribed' and 'user_subscribed'
             [SYNActivityManager.sharedInstance registerActivityFromDictionary:activity_dict];
         }
     }
