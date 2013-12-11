@@ -878,7 +878,7 @@
     
     NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId, @"CHANNELID" : channelId, @"VIDEOINSTANCEID" : videoId};
     
-    NSString *apiString = [kComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    NSString *apiString = [kAPIComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];

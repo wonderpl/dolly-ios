@@ -2083,14 +2083,14 @@
 {
     NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId, @"CHANNELID" : channelId, @"VIDEOINSTANCEID" : videoId};
     
-    NSString *apiString = [kComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    NSString *apiString = [kAPIComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
     SYNNetworkOperationJsonObject *networkOperation =
     (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
                                                        params: @{@"comment":comment}
                                                    httpMethod: @"GET"];
     
-    [networkOperation setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
+    [networkOperation setPostDataEncoding: MKNKPostDataEncodingTypeJSON];
     
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock

@@ -313,7 +313,10 @@
 
 - (void) commentControlPressed:(SYNSocialButton *)socialButton
 {
-    SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] init];
+    if(!socialButton.dataItemLinked)
+        return;
+    
+    SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
     
     [appDelegate.masterViewController addOverlayController:commentController animated:YES];
 

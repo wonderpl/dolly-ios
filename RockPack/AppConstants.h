@@ -23,7 +23,8 @@
 // Entities
 
 #define kGenre                      @"Genre"
-#define kSubGenre                      @"SubGenre"
+#define kSubGenre                   @"SubGenre"
+#define kComment                    @"Comment"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
 #define kRecommendation             @"Recomendation"
@@ -35,6 +36,7 @@
 // viewId
 #define kFeedViewId                 @"FEED"
 #define kChannelsViewId             @"PACKS"
+#define kCommentsViewId             @"COMMENTS"
 #define kProfileViewId              @"ME"
 #define kSearchViewId               @"SEARCH"
 #define kDiscoverViewId             @"DISCOVER"
@@ -181,7 +183,7 @@ typedef enum : NSInteger {
 #define kGetUserRecommendations     @"/ws/USERID/user_recommendations/"         /* GET */
 
 
-#define kComments                   @"/ws/USERID/channels/CHANNELID/videos/VIDEOINSTANCEID/comments/"    /* GET */
+#define kAPIComments            @"/ws/USERID/channels/CHANNELID/videos/VIDEOINSTANCEID/comments/"    /* GET */
 
 #define kGetVideoRecommendations    @"/ws/USERID/video_recommendations/"         /* GET */
 #define kGetChannelRecommendations  @"/ws/USERID/channel_recommendations/"       /* GET */

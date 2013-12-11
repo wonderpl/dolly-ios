@@ -38,5 +38,7 @@
 - (BOOL) registerDataForSocialFeedFromItemsDictionary: (NSDictionary *) dictionary
                                           byAppending: (BOOL) append;
 
+- (BOOL) registerCommentsFromDictionary: (NSDictionary*) dictionary withExisting:(NSArray*)existingComments;
+
 
 @end

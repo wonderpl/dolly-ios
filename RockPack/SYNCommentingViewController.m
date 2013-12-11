@@ -26,13 +26,26 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 @property (nonatomic, strong) IBOutlet UIImageView* sendMessageAvatarmageView;
 @property (nonatomic, strong) IBOutlet UIButton* sendMessageButton;
 
+@property (nonatomic, weak) VideoInstance* videoInstance;
 
+@property (nonatomic, strong) NSArray* comments;
 
 @end
 
 @implementation SYNCommentingViewController
 
-
+- (id) initWithVideoInstance:(VideoInstance*)videoInstance
+{
+    if (self = [super initWithViewId:kCommentsViewId])
+    {
+        
+        self.videoInstance = videoInstance;
+        
+        
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -46,7 +59,10 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     
     self.sendMessageTextField.font = [UIFont regularCustomFontOfSize:self.sendMessageTextField.font.pointSize];
     
+    [self getCommentsFromServer];
+    
 }
+
 
 
 - (void) viewDidAppear:(BOOL)animated
@@ -65,6 +81,8 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                                object:self.view.window];
 }
 
+
+
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -72,11 +90,61 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - Get Comments 
+
+-(void)fetchCommentsFromDB
+{
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    
+    
+    fetchRequest.entity = [NSEntityDescription entityForName: kComment
+                                      inManagedObjectContext: appDelegate.searchManagedObjectContext];
+    
+    // comments relate to a specific video instance
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"videoInstanceId == %@", self.videoInstance.uniqueId]];
+    
+    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
+    
+    NSError* error;
+    self.comments = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                          error: &error];
+    
+    [self.commentsCollectionView reloadData];
+    
+}
+
+-(void)getCommentsFromServer
+{
+    [appDelegate.networkEngine getCommentsForUsedId:appDelegate.currentUser.uniqueId
+                                          channelId:self.videoInstance.channel.uniqueId
+                                         andVideoId:self.videoInstance.uniqueId
+                                            inRange:self.dataRequestRange
+                                  completionHandler:^(id dictionary) {
+                                      
+                                      if(![dictionary isKindOfClass:[NSDictionary class]])
+                                          return;
+                                      
+                                      if(![appDelegate.mainRegistry registerCommentsFromDictionary:dictionary withExisting:self.comments])
+                                      {
+                                          self.comments = @[];
+                                          
+                                      }
+                                      
+                                      [self fetchCommentsFromDB];
+        
+                                  } errorHandler:^(id error) {
+                                      
+                                      
+                                      
+        
+                                  }];
+}
+
 #pragma mark - UITextFieldDelegate
 
 -(BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
-    
     return YES;
 }
 
@@ -92,8 +160,21 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 - (void) sendComment
 {
     
-    
-    
+    [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
+                                               channelId:self.videoInstance.channel.uniqueId
+                                              andVideoId:self.videoInstance.uniqueId
+                                             withComment:self.sendMessageTextField.text
+                                       completionHandler:^(id dictionary) {
+                                           
+                                           
+                                           NSLog(@"Sucess!");
+                                           
+        
+                                       } errorHandler:^(id error) {
+                                           
+                                           
+        
+                                       }];
 }
 
 #pragma mark - Button Delegates
