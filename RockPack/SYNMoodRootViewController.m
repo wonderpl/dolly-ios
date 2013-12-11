@@ -118,7 +118,7 @@
     
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
-                                                         params: @{@"mood":self.currentMood.name}
+                                                         params: @{@"mood":self.currentMood.uniqueId}
                                               completionHandler: ^(id responce) {
                                                   
                                                   if(![responce isKindOfClass:[NSDictionary class]])
