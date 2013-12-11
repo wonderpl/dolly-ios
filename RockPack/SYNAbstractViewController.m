@@ -821,21 +821,18 @@
 
 	SYNChannelDetailsViewController *channelVC =
 	(SYNChannelDetailsViewController *) [self viewControllerOfClass:[SYNChannelDetailsViewController class]];
-
-    BOOL isChannelCreation = (BOOL)(channel == appDelegate.videoQueue.currentlyCreatingChannel);
-    kChannelDetailsMode correctMode = isChannelCreation ? kChannelDetailsModeDisplay : kChannelDetailsModeDisplay;
-    
+	
 	if (channelVC) // we found a channelVC
     {
 		channelVC.channel = channel;
-        channelVC.mode = correctMode;
+        channelVC.mode = kChannelDetailsModeDisplay;
         
 		[self.navigationController popToViewController:channelVC animated:YES];
 	}
     else
     {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
-                                                                   usingMode:correctMode];
+                                                                   usingMode:kChannelDetailsModeDisplay];
 		
 		[self.navigationController pushViewController:channelVC animated:YES];
 	}
