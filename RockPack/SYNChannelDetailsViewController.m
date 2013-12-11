@@ -431,19 +431,6 @@ UIPopoverControllerDelegate>
     movingView.frame = tmpFrame;
 }
 
-
-- (BOOL) isFavouritesChannel
-{
-    return [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId] && self.channel.favouritesValue;
-}
-
-- (void) refreshFavouritesChannel
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
-                                                        object: self
-                                                      userInfo: @{kChannel: self.channel}];
-}
-
 -(void) displayChannelDetails
 {
     
