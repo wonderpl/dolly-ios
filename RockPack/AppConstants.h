@@ -175,10 +175,13 @@ typedef enum : NSInteger {
 
 // Apple push notifications
 #define kRegisterExternalAccount    @"/ws/USERID/external_accounts/"            /* POST */
-#define kGetExternalAccounts       @"/ws/USERID/external_accounts/"             /* GET */
+#define kGetExternalAccounts        @"/ws/USERID/external_accounts/"             /* GET */
 #define kGetExternalAccountId       @"/ws/USERID/external_accounts/ACCOUNTID/"  /* GET */
 
-#define kGetUserRecommendations    @"/ws/USERID/user_recommendations/"         /* GET */
+#define kGetUserRecommendations     @"/ws/USERID/user_recommendations/"         /* GET */
+
+
+#define kComments                   @"/ws/USERID/channels/CHANNELID/videos/VIDEOINSTANCEID/comments/"    /* GET */
 
 #define kGetVideoRecommendations    @"/ws/USERID/video_recommendations/"         /* GET */
 #define kGetChannelRecommendations  @"/ws/USERID/channel_recommendations/"       /* GET */

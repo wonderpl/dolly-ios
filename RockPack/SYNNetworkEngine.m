@@ -868,5 +868,40 @@
 }
 
 
+- (void) getCommentsForUsedId:(NSString*)userId
+                    channelId:(NSString*)channelId
+                   andVideoId:(NSString*)videoId
+                      inRange:(NSRange)range
+            completionHandler: (MKNKUserSuccessBlock) completionBlock
+                 errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId, @"CHANNELID" : channelId, @"VIDEOINSTANCEID" : videoId};
+    
+    NSString *apiString = [kComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
+    parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    
+    [parameters addEntriesFromDictionary: [self getLocaleParam]];
+    
+    SYNNetworkOperationJsonObject *networkOperation =
+    (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                       params: parameters
+                                                   httpMethod: @"GET"];
+    
+    [networkOperation addJSONCompletionHandler: completionBlock
+                                  errorHandler: errorBlock];
+    
+    [self enqueueOperation: networkOperation];
+    
+}
+
+
+
+
 
 @end

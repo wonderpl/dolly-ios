@@ -309,4 +309,13 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                    completionHandler: (MKNKUserSuccessBlock) completionBlock
                         errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+// getting comments is in the NetworkEngine
+
+- (void) postCommentForUserId:(NSString*)userId
+                    channelId:(NSString*)channelId
+                   andVideoId:(NSString*)videoId
+                  withComment:(NSString*)comment
+            completionHandler:(MKNKUserSuccessBlock) completionBlock
+                 errorHandler:(MKNKUserErrorBlock) errorBlock;
+
 @end
