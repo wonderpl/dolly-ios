@@ -2081,14 +2081,16 @@
             completionHandler:(MKNKUserSuccessBlock) completionBlock
                  errorHandler:(MKNKUserErrorBlock) errorBlock
 {
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId, @"CHANNELID" : channelId, @"VIDEOINSTANCEID" : videoId};
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId,
+                                                @"CHANNELID" : channelId,
+                                                @"VIDEOINSTANCEID" : videoId};
     
     NSString *apiString = [kAPIComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
     
-    SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
-                                                       params: @{@"comment":comment}
-                                                   httpMethod: @"GET"];
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                                                                         params: @{@"comment" : comment}
+                                                                                                     httpMethod: @"POST"
+                                                                                                            ssl: YES];
     
     [networkOperation setPostDataEncoding: MKNKPostDataEncodingTypeJSON];
     

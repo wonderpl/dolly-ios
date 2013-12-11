@@ -10,15 +10,16 @@
 #import "SYNCommentingCollectionViewCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
+#import "SYNAppDelegate.h"
+#import "Comment.h"
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 @interface SYNCommentingViewController () <UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
-@property (nonatomic, strong) NSArray* commments;
 
-
+@property (nonatomic, strong) NSNumber* maxCommentPosition;
 
 // Send View
 
@@ -29,7 +30,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
-@property (nonatomic, strong) NSArray* comments;
+@property (nonatomic, strong) NSMutableArray* comments;
 
 @end
 
@@ -52,7 +53,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 {
     [super viewDidLoad];
     
-    self.commments = @[]; // avoid calling count on nil instance
+    self.comments = @[].mutableCopy; // avoid calling count on nil instance
     
     
     [self.commentsCollectionView registerNib:[UINib nibWithNibName:CommentingCellIndentifier bundle:nil]
@@ -141,8 +142,12 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
     
     NSError* error;
-    self.comments = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                          error: &error];
+    NSArray* fetchedArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                  error: &error];
+    
+    self.comments = @[].mutableCopy;
+    
+    [self.comments addObjectsFromArray:fetchedArray];
     
     [self.commentsCollectionView reloadData];
     
@@ -161,7 +166,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                       
                                       if(![appDelegate.mainRegistry registerCommentsFromDictionary:dictionary withExisting:self.comments])
                                       {
-                                          self.comments = @[];
+                                          self.comments = @[].mutableCopy;
                                           
                                       }
                                       
@@ -191,18 +196,42 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     return YES;
 }
 
+- (Comment*) createCommentFromText:(NSString*)text
+{
+    NSDictionary* dictionary = @{
+                                 @"position": @(0),
+                                 @"resource_url": @"",
+                                 @"comment": text,
+                                 @"date_added": @"2013-12-10T18:15:57.319368",
+                                 @"user": @{
+                                         @"id": appDelegate.currentUser.uniqueId,
+                                         @"resource_url": @"",
+                                         @"display_name": appDelegate.currentUser.displayName,
+                                         @"avatar_thumbnail_url": appDelegate.currentUser.thumbnailURL
+                                         }
+                                 };
+    
+    
+    Comment* adHocComment = [Comment instanceFromDictionary:dictionary
+                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+    
+    
+    return adHocComment;
+}
+
 - (void) sendComment
 {
+    NSString* commentText = self.sendMessageTextField.text;
     
     [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
                                                channelId:self.videoInstance.channel.uniqueId
                                               andVideoId:self.videoInstance.uniqueId
-                                             withComment:self.sendMessageTextField.text
+                                             withComment:commentText
                                        completionHandler:^(id dictionary) {
                                            
+                                           [self.comments addObject:[self createCommentFromText:commentText]];
                                            
-                                           NSLog(@"Sucess!");
-                                           
+                                           [self.commentsCollectionView reloadData];
         
                                        } errorHandler:^(id error) {
                                            
@@ -229,7 +258,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger) section
 {
-	return self.commments.count;
+	return self.comments.count;
 }
 
 
@@ -238,6 +267,11 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 {
     SYNCommentingCollectionViewCell* commentingCell = [cv dequeueReusableCellWithReuseIdentifier:CommentingCellIndentifier
                                                                                     forIndexPath:indexPath];
+    Comment* comment = self.comments[indexPath.item];
+    
+    if(self.maxCommentPosition.integerValue < comment.positionValue)
+        self.maxCommentPosition = @(comment.positionValue);
+    
     
     
     
