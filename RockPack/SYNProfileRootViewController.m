@@ -1152,42 +1152,67 @@
         
         [self.collectionsTabButton.titleLabel setTextColor:self.tabTextColor];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
+        __weak typeof(self) weakSelf = self;
         
-        NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
-        NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
-
-        MKNKUserErrorBlock errorBlock = ^(id error) {
-            
+        MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
+            weakSelf.loadingMoreContent = NO;
+            [weakSelf.channelOwner addSubscriptionsFromDictionary: dictionary];
+            [self.subscriptionThumbnailCollectionView reloadData];
         };
-
-        
-        [appDelegate.oAuthNetworkEngine userSubscriptionsForUser: ((User *) self.channelOwner)
-                                                    onCompletion: ^(id dictionary) {
-                                                        NSError *error = nil;
-
-                                                        // Transform the object ID into the object again, as it it likely to have disappeared again
-                                                        NSError *error2 = nil;
-                                                        ChannelOwner * channelOwnerFromId2 = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
-                                                                                                                                                   error: &error2];
-                                                        if (channelOwnerFromId2)
-                                                        {
-                                                            // this will remove the old subscriptions
-                                                            [channelOwnerFromId2 setSubscriptionsDictionary: dictionary];
-                                                            
-                                                            [channelOwnerFromId2.managedObjectContext save: &error2];
-                                                            
-                                                            if (error)
-                                                            {
-                                                                NSString *errorString = [NSString stringWithFormat: @"%@ %@", [error localizedDescription], [error userInfo]];
-                                                                DebugLog(@"%@", errorString);
-                                                                errorBlock(@{@"saving_error": errorString});
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            DebugLog (@"Channel disappeared from underneath us");
-                                                        }
-                                                    }  onError: errorBlock];
+    
+        // define success block //
+        MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
+            weakSelf.loadingMoreContent = NO;
+            DebugLog(@"Update action failed");
+        };
+        //    Working load more videos for user channels
+    
+        NSRange range = NSMakeRange(0, 100);
+    
+        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
+                                                       inRange: range
+                                             completionHandler: successBlock
+                                                  errorHandler: errorBlock];
+    
+//
+//
+//
+//        NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
+//        NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
+//
+//        MKNKUserErrorBlock errorBlock = ^(id error) {
+//            
+//        };
+//
+//        
+//
+//        [appDelegate.oAuthNetworkEngine userSubscriptionsForUser: ((User *) self.channelOwner)
+//                                                    onCompletion: ^(id dictionary) {
+//                                                        NSError *error = nil;
+//
+//                                                        // Transform the object ID into the object again, as it it likely to have disappeared again
+//                                                        NSError *error2 = nil;
+//                                                        ChannelOwner * channelOwnerFromId2 = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
+//                                                                                                                                                   error: &error2];
+//                                                        if (channelOwnerFromId2)
+//                                                        {
+//                                                            // this will remove the old subscriptions
+//                                                            [channelOwnerFromId2 setSubscriptionsDictionary: dictionary];
+//                                                            
+//                                                            [channelOwnerFromId2.managedObjectContext save: &error2];
+//                                                            
+//                                                            if (error)
+//                                                            {
+//                                                                NSString *errorString = [NSString stringWithFormat: @"%@ %@", [error localizedDescription], [error userInfo]];
+//                                                                DebugLog(@"%@", errorString);
+//                                                                errorBlock(@{@"saving_error": errorString});
+//                                                            }
+//                                                        }
+//                                                        else
+//                                                        {
+//                                                            DebugLog (@"Channel disappeared from underneath us");
+//                                                        }
+//                                                    }  onError: errorBlock];
     }
 }
 

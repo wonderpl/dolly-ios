@@ -1451,7 +1451,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
     params[@"start"] = @(range.location);
-    params[@"size"] = @(48);
+    params[@"size"] = @(range.length);
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: params
