@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNOnBoardingViewController">
             <connections>
                 <outlet property="collectionView" destination="mhE-ZL-YwO" id="dld-MZ-TIA"/>
-                <outlet property="navigationRightLabel" destination="gE7-Qn-vWe" id="0fF-Mw-IVG"/>
+                <outlet property="navigationRightLabel" destination="ywf-aW-gkn" id="sZV-38-JG5"/>
                 <outlet property="navigationTitleLabel" destination="F0G-sW-nXM" id="LoR-1N-oDO"/>
                 <outlet property="spinner" destination="kHx-SZ-Omg" id="9zB-DH-xm2"/>
                 <outlet property="view" destination="2" id="3"/>
@@ -61,24 +61,25 @@
                             <nil key="highlightedColor"/>
                             <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 more" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE7-Qn-vWe" userLabel="N more...">
-                            <rect key="frame" x="895" y="31" width="54" height="22"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywf-aW-gkn">
+                            <rect key="frame" x="943" y="27" width="61" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="54" id="PxB-LY-ksp"/>
-                                <constraint firstAttribute="height" constant="22" id="vDF-eK-iMx"/>
+                                <constraint firstAttribute="height" constant="30" id="iEd-hU-jze"/>
+                                <constraint firstAttribute="width" constant="61" id="w7j-JZ-1Nb"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                        </label>
+                            <state key="normal" title="2 More">
+                                <color key="titleColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="gE7-Qn-vWe" secondAttribute="trailing" constant="75" id="7pX-dF-J9l"/>
+                        <constraint firstAttribute="trailing" secondItem="ywf-aW-gkn" secondAttribute="trailing" constant="20" id="4W7-Dv-qmx"/>
                         <constraint firstItem="F0G-sW-nXM" firstAttribute="top" secondItem="1pg-bZ-cqe" secondAttribute="top" constant="31" id="CT4-Fx-cAm"/>
-                        <constraint firstItem="gE7-Qn-vWe" firstAttribute="top" secondItem="1pg-bZ-cqe" secondAttribute="top" constant="31" id="Ej4-Do-A5d"/>
+                        <constraint firstItem="ywf-aW-gkn" firstAttribute="top" secondItem="1pg-bZ-cqe" secondAttribute="top" constant="27" id="TsP-85-nu8"/>
                         <constraint firstAttribute="height" constant="65" id="ZYC-Wm-s5L"/>
                         <constraint firstAttribute="centerX" secondItem="F0G-sW-nXM" secondAttribute="centerX" id="oGc-rv-Zmh"/>
                     </constraints>

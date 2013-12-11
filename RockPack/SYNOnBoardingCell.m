@@ -19,12 +19,21 @@
     
     
     self.descriptionLabel.font = [UIFont regularCustomFontOfSize:self.descriptionLabel.font.pointSize];
-    
+    self.subGenreLabel.font = [UIFont regularCustomFontOfSize:self.subGenreLabel.font.pointSize];
     self.nameLabel.font = [UIFont regularCustomFontOfSize:self.nameLabel.font.pointSize];
     
     // store the values as read from the XIB file
     nameLabelOrigin = self.nameLabel.frame.origin;
     subGenreLabelOrigin = self.subGenreLabel.frame.origin;
+    
+    // only iPhone cells have the separator at the bottom
+    if(IS_IPHONE)
+    {
+        CGRect bottomBorderFrame = self.bottomBorderView.frame;
+        bottomBorderFrame.size.height = IS_RETINA ? 0.5f : 1.0f;
+        self.bottomBorderView.frame = bottomBorderFrame;
+    }
+    
     
 }
 

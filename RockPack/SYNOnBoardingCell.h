@@ -24,6 +24,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* descriptionLabel;
 @property (nonatomic, strong) IBOutlet UILabel* subGenreLabel;
 
+@property (nonatomic, strong) IBOutlet UIView* bottomBorderView;
+
 @property (nonatomic, strong) IBOutlet SYNSocialButton* followButton;
 
 

@@ -36,7 +36,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 // fake navigation bar stuff
 @property (nonatomic, strong) IBOutlet UILabel* navigationTitleLabel;
-@property (nonatomic, strong) IBOutlet UILabel* navigationRightLabel;
+@property (nonatomic, strong) IBOutlet UIButton* navigationRightLabel;
 
 
 @property (nonatomic, strong) NSMutableDictionary* subgenresByIdString;
@@ -69,7 +69,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
                  withReuseIdentifier: OnBoardingFooterIndent];
     
     self.navigationTitleLabel.font = [UIFont regularCustomFontOfSize:self.navigationTitleLabel.font.pointSize];
-    self.navigationRightLabel.font = [UIFont regularCustomFontOfSize:self.navigationRightLabel.font.pointSize];
+    self.navigationRightLabel.titleLabel.font = [UIFont regularCustomFontOfSize:self.navigationRightLabel.titleLabel.font.pointSize];
     
     
     
@@ -309,21 +309,25 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 -(void)setNumberYetToFollow:(NSInteger)numberYetToFollow
 {
     _numberYetToFollow = numberYetToFollow;
-    self.navigationRightLabel.text = [NSString stringWithFormat:@"%i more", numberYetToFollow];
+    [self.navigationRightLabel setTitle:[NSString stringWithFormat:@"%i more", numberYetToFollow]
+                               forState:UIControlStateNormal];
+    
     if(_numberYetToFollow == 0)
     {
-        [UIView animateWithDuration:0.2f
-                              delay:0.3f
-                            options:UIViewAnimationCurveLinear
-                         animations:^{
-                             self.skipButton.alpha = 0.0f;
-                         } completion:^(BOOL finished) {
-                             [self skipButtonPressed:self.skipButton];
-                         }];
+        [self.navigationRightLabel setTitle:@"GO"
+                                   forState:UIControlStateNormal];
+        
+        [self.navigationRightLabel addTarget:self
+                                      action:@selector(toRightPressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
+        
     }
     
 }
-
+-(void)toRightPressed:(UIButton*)button
+{
+    [self skipButtonPressed:self.skipButton];
+}
 #pragma mark - AutoRotation
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
