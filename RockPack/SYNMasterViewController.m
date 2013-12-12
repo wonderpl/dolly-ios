@@ -229,11 +229,12 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Overlays, Adding and Removing
 
--(void)addExistingCollectionsOverlayController
+-(void) addExistingCollectionsOverlayControllerForVideoInstance:(VideoInstance *)videoInstance
 {
-    SYNAddToChannelViewController* existingController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
-    
-    [self addOverlayController:existingController animated:YES];
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.videoInstance = videoInstance;
+
+	[self addOverlayController:viewController animated:YES];
 }
 
 

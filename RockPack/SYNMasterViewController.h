@@ -57,7 +57,7 @@ typedef void (^VideoOverlayDismissBlock)(void);
 - (void) removeVideoOverlayController;
 
 // Overlay
--(void) addExistingCollectionsOverlayController;
+-(void) addExistingCollectionsOverlayControllerForVideoInstance:(VideoInstance *)videoInstance;
 
 
 -(void) addOverlayController: (UIViewController*) abstractViewController animated:(BOOL)animated;

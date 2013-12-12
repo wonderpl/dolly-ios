@@ -64,12 +64,6 @@
                                                      name: kChannelDeleteRequest
                                                    object: nil];
         
-        
-        [[NSNotificationCenter defaultCenter] addObserver: self
-                                                 selector: @selector(addedToChannelRequest:)
-                                                     name: kNoteVideoAddedToExistingChannel
-                                                   object: nil];
-        
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(userSubscribeRequest:)
                                                      name: kChannelOwnerSubscribeToUserRequest
@@ -151,22 +145,6 @@
     
     [self updateChannelsForChannelOwner: channelOwner];
 }
-
-- (void) addedToChannelRequest: (NSNotification*) notification
-{
-    Channel* selectedChannel = (Channel*)[notification userInfo][kChannel];
-    if (!selectedChannel)
-    {
-        //Channel select was cancelled.
-        [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
-                                                            object: nil];
-        
-        return;
-    }
-    
-    [self addVideoToChannel:selectedChannel];
-}
-
 
 - (void) channelUpdateRequest: (NSNotification *) notification
 {
@@ -372,7 +350,6 @@
         channelToSubscribeTo.subscribedByUserValue = YES;
         [appDelegate saveContext: YES];
         
-        
     } errorHandler:^(id response) {
         
     }
@@ -391,11 +368,7 @@
         
     } errorHandler:^(id response) {
         
-    }
-     ];
-    
-    
-    
+    }];
 }
 
 #pragma mark - Updating
@@ -529,54 +502,6 @@
               errorHandler: errorBlock];
          } onError: errorBlock];
     }
-}
-
-- (void) addVideoToChannel:(Channel*)channel
-{
-    
-    
-    Channel* currentlyCreating = appDelegate.videoQueue.currentlyCreatingChannel;
-    
-    NSMutableOrderedSet* setOfVideosToPost = [NSMutableOrderedSet orderedSetWithOrderedSet:channel.videoInstancesSet];
-    for (VideoInstance* newVideoInstance in currentlyCreating.videoInstances)
-    {
-        [setOfVideosToPost addObject:newVideoInstance];
-    }
-    
-
-    [appDelegate.oAuthNetworkEngine updateVideosForUserId: appDelegate.currentUser.uniqueId
-                                                          forChannelID: channel.uniqueId
-                                                   videoInstanceSet: setOfVideosToPost
-                                                      clearPrevious: NO
-                                                  completionHandler: ^(NSDictionary* result) {
-                                                      
-                                                      id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-                                                      [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                             action: @"channelUpdated"
-                                                                                                              label: nil
-                                                                                                              value: nil] build]];
-
-                                                      NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL", nil);
-                                                      
-                                                      [appDelegate.masterViewController presentNotificationWithMessage:messageS
-                                                                                                               andType:NotificationMessageTypeSuccess];
-                                                      
-                                                      [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
-                                                                                                          object: self];
-                                                      
-                                                      
-                                                  } errorHandler:^(NSDictionary* errorDictionary) {
-                                                      
-                                                      [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
-                                                                                                          object: self];
-                                                      
-                                                      NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
-                                                      
-                                                      [appDelegate.masterViewController presentNotificationWithMessage:messageE
-                                                                                                               andType:NotificationMessageTypeError];
-                                                      
-                                                  }];
 }
 
 @end

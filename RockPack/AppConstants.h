@@ -434,8 +434,6 @@ typedef enum {
 
 // Notifications
 
-#define kNoteVideoAddedToExistingChannel         @"kNoteAddedToChannel"
-
 #define kNoteChannelSaved           @"kNoteChannelSaved"
 #define kNoteHideAllCautions          @"kNoteHideAllCautions"
 

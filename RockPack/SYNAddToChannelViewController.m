@@ -10,6 +10,7 @@
 #import "AppConstants.h"
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
+#import "VideoInstance.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
 #import "SYNDeviceManager.h"
@@ -315,9 +316,7 @@
 
 #pragma mark - Main Controls Callbacks
 
-- (IBAction) closeButtonPressed: (id) sender
-{
-    
+- (IBAction)closeButtonPressed:(id)sender {
     self.closeButton.enabled = NO;
     self.confirmButtom.enabled = NO;
     
@@ -327,37 +326,74 @@
 }
 
 
-- (IBAction) confirmButtonPressed: (id) sender
-{
-    // if we are creating a new channel
-    if(self.createNewChannelCell.isEditing)
-    {
-        Channel* creatingChannelFromQ = appDelegate.videoQueue.currentlyCreatingChannel;
-        creatingChannelFromQ.title = self.createNewChannelCell.nameInputTextField.text;
-        creatingChannelFromQ.channelDescription = self.createNewChannelCell.descriptionTextView.text;
-        
-        [appDelegate.masterViewController.showingViewController viewChannelDetails:creatingChannelFromQ];
-        
-        
-        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
-        return;
-        
-    }
-    
-    if (!self.selectedChannel)
-        return;
-    
-    // we are simply adding a video to an existing channel
-    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
-                                                        object: self
-                                                      userInfo: @{kChannel: self.selectedChannel}];
-    
-    self.selectedChannel = nil;
-    
-    self.closeButton.enabled = NO; // protect from double closing the panel
-    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+- (IBAction)confirmButtonPressed:(UIButton *)button {
+	button.enabled = NO;
+	
+	if (self.createNewChannelCell.isEditing) {
+		// We don't have a channel, need to create one
+		SYNAddToChannelCreateNewCell *cell = self.createNewChannelCell;
+		NSString *description = (cell.editedDescription ? cell.descriptionTextView.text : @"");
+		
+		[appDelegate.oAuthNetworkEngine createChannelForUserId:appDelegate.currentOAuth2Credentials.userId
+														 title:self.createNewChannelCell.nameInputTextField.text
+												   description:description
+													  category:@""
+														 cover:@""
+													  isPublic:YES
+											 completionHandler:^(NSDictionary *response) {
+												 NSString *channelId = response[@"id"];
+												 [self addCurrentVideoInstanceToChannel:channelId];
+												 
+												 [[NSNotificationCenter defaultCenter] postNotificationName:kChannelOwnerUpdateRequest
+																									 object:nil
+																								   userInfo: @{kChannelOwner : appDelegate.currentUser }];
+											 } errorHandler:^(NSDictionary *response) {
+												 NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
+												 
+												 [appDelegate.masterViewController presentNotificationWithMessage:messageE
+																										  andType:NotificationMessageTypeError];
+											 }];
+	}
+	
+	if (self.selectedChannel) {
+		[self addCurrentVideoInstanceToChannel:self.selectedChannel.uniqueId];
+	}
 }
 
+- (void)addCurrentVideoInstanceToChannel:(NSString *)channelId {
+    [appDelegate.oAuthNetworkEngine updateVideosForUserId:appDelegate.currentUser.uniqueId
+											 forChannelId:channelId
+										 videoInstanceIds:@[ self.videoInstance.uniqueId ]
+											clearPrevious:NO
+										completionHandler: ^(NSDictionary* result) {
+											id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+											
+											[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+																								   action: @"channelUpdated"
+																									label: nil
+																									value: nil] build]];
+											
+											NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL", nil);
+											
+											[appDelegate.masterViewController presentNotificationWithMessage:messageS
+																									 andType:NotificationMessageTypeSuccess];
+											
+											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+																								object: self];
+											
+											
+											[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+										} errorHandler:^(NSDictionary* errorDictionary) {
+											
+											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+																								object: self];
+											
+											NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
+											
+											[appDelegate.masterViewController presentNotificationWithMessage:messageE
+																									 andType:NotificationMessageTypeError];
+										}];
+}
 
 
 #pragma mark - Set Selected Channel
