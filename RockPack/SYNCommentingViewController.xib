@@ -30,6 +30,10 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="MrV-jY-64E"/>
+                        <outlet property="delegate" destination="-1" id="cFb-Mc-FgL"/>
+                    </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uyA-H8-2fC">
                     <rect key="frame" x="0.0" y="285" width="504" height="51"/>
@@ -43,7 +47,10 @@
                             <rect key="frame" x="56" y="6" width="374" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="B2A-c7-dhP"/>
+                            </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJi-Y3-1s8">
                             <rect key="frame" x="438" y="10" width="46" height="30"/>

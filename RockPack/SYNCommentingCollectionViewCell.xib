@@ -13,10 +13,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Psd-IK-sqZ">
-                        <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vy5-fE-JoI" userLabel="Avatar Button">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Johny Smith" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-lB-F0U" userLabel="Name Label">
                         <rect key="frame" x="57" y="5" width="198" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -25,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12 min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDT-Lu-WjD" userLabel="Time Label">
-                        <rect key="frame" x="263" y="15" width="57" height="21"/>
+                        <rect key="frame" x="269" y="15" width="48" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,9 +44,10 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <size key="customSize" width="326" height="50"/>
             <connections>
-                <outlet property="avatarImageView" destination="Psd-IK-sqZ" id="5Ky-14-wts"/>
+                <outlet property="avatarButton" destination="vy5-fE-JoI" id="Ewy-C0-2R2"/>
                 <outlet property="commentLabel" destination="U6n-Z6-SJ4" id="sCJ-B8-3tv"/>
                 <outlet property="nameLabel" destination="dvh-lB-F0U" id="txl-Ui-XPw"/>
                 <outlet property="timeLabel" destination="EDT-Lu-WjD" id="Jvq-Ar-V8B"/>

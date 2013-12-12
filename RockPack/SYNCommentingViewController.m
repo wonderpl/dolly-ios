@@ -15,6 +15,7 @@
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
+
 @interface SYNCommentingViewController () <UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
@@ -55,6 +56,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     
     self.comments = @[].mutableCopy; // avoid calling count on nil instance
     
+    self.maxCommentPosition = @(0);
     
     [self.commentsCollectionView registerNib:[UINib nibWithNibName:CommentingCellIndentifier bundle:nil]
                   forCellWithReuseIdentifier:CommentingCellIndentifier];
@@ -198,8 +200,11 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 - (Comment*) createCommentFromText:(NSString*)text
 {
+    
+    
     NSDictionary* dictionary = @{
-                                 @"position": @(0),
+                                 @"id" : @"13245",
+                                 @"position": self.maxCommentPosition,
                                  @"resource_url": @"",
                                  @"comment": text,
                                  @"date_added": @"2013-12-10T18:15:57.319368",
@@ -216,12 +221,23 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                   usingManagedObjectContext:appDelegate.mainManagedObjectContext];
     
     
+    
     return adHocComment;
 }
 
 - (void) sendComment
 {
     NSString* commentText = self.sendMessageTextField.text;
+    
+    [self.comments addObject:[self createCommentFromText:commentText]];
+    
+    self.sendMessageTextField.text = @"";
+    
+    [self.sendMessageTextField resignFirstResponder];
+    
+    [self.commentsCollectionView reloadData];
+    
+    return;
     
     [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
                                                channelId:self.videoInstance.channel.uniqueId
@@ -230,6 +246,10 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                        completionHandler:^(id dictionary) {
                                            
                                            [self.comments addObject:[self createCommentFromText:commentText]];
+                                           
+                                           self.sendMessageTextField.text = @"";
+                                           
+                                           [self.sendMessageTextField resignFirstResponder];
                                            
                                            [self.commentsCollectionView reloadData];
         
@@ -271,8 +291,6 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     
     if(self.maxCommentPosition.integerValue < comment.positionValue)
         self.maxCommentPosition = @(comment.positionValue);
-    
-    
     
     
     
