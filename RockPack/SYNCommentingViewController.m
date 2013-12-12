@@ -16,7 +16,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
-
+static NSString* PlaceholderText = @"Say something nice";
 
 @interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 {
@@ -70,7 +70,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     // as we reset the height to match the number of lines through KVO we need to add the differece for the white space around the active area of the TextView
     differenceBetweenHeightAndContentSizeHeight = self.sendMessageTextView.frame.size.height - oldContentSizeHeight;
     
-    
+    self.sendMessageTextView.text = PlaceholderText;
     
     UIColor* borderColor = [UIColor colorWithWhite:(170.0f/255.0f) alpha:1.0f];
     self.sendMessageTextView.layer.borderColor = borderColor.CGColor;
@@ -234,6 +234,15 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
         self.sendMessageTextView.frame = tvFrame;
         
         
+        // set image
+        
+        CGRect imgFrame = self.sendMessageAvatarmageView.frame;
+        
+        imgFrame.origin.y += diff;
+        
+        self.sendMessageAvatarmageView.frame = imgFrame;
+        
+        
         
         oldContentSizeHeight = newContentSizeHeight;
         
@@ -295,7 +304,20 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                   }];
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([self.sendMessageTextView.text isEqualToString:PlaceholderText])
+    {
+        
+        self.sendMessageTextView.text = @"";
+    }
+}
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.sendMessageTextView.text = PlaceholderText;
+}
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -432,7 +454,6 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     
     CGFloat correctHeight = rect.size.height + [SYNCommentingCollectionViewCell commentFieldFrame].origin.y + 10.0f;
     
-    NSLog(@">>> %f", rect.size.height);
     
     return CGSizeMake(self.commentsCollectionView.frame.size.width, correctHeight);
 }

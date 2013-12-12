@@ -22,7 +22,10 @@
     
     self.nameLabel.font = [UIFont regularCustomFontOfSize:self.nameLabel.font.pointSize];
     
+    
+    
     self.commentTextView.font = [SYNCommentingCollectionViewCell commentFieldFont];
+    
     
     self.timeLabel.font = [UIFont regularCustomFontOfSize:self.timeLabel.font.pointSize];
     
@@ -45,14 +48,15 @@
     
     self.commentTextView.text = commentText;
     
-    NSLog(@"%@", comment.thumbnailUrl);
     
     [self.avatarButton setImageWithURL: [NSURL URLWithString: comment.thumbnailUrl]
                               forState: UIControlStateNormal
-                      placeholderImage: nil
+                      placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile"]
                                options: SDWebImageRetryFailed];
     
     
+    // set the textColor again due to an iOS7 bug
+    self.commentTextView.textColor = self.nameLabel.textColor;
 }
 
 
