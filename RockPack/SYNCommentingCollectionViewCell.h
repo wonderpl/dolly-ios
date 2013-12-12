@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet UIButton* avatarButton;
 @property (nonatomic, strong) IBOutlet UILabel* nameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* commentLabel;
+@property (nonatomic, strong) IBOutlet UITextView* commentTextView;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 
 @property (nonatomic, weak) Comment* comment;

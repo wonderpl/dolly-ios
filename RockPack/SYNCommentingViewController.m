@@ -19,6 +19,10 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 
 @interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+{
+    CGFloat differenceBetweenHeightAndContentSizeHeight;
+    CGFloat oldContentSizeHeight;
+}
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
 
@@ -60,6 +64,12 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     
     self.maxCommentPosition = @(0);
     
+    oldContentSizeHeight = self.sendMessageTextView.contentSize.height;
+    
+    // as we reset the height to match the number of lines through KVO we need to add the differece for the white space around the active area of the TextView
+    differenceBetweenHeightAndContentSizeHeight = self.sendMessageTextView.frame.size.height - oldContentSizeHeight;
+    
+    
     
     UIColor* borderColor = [UIColor colorWithWhite:(170.0f/255.0f) alpha:1.0f];
     self.sendMessageTextView.layer.borderColor = borderColor.CGColor;
@@ -94,8 +104,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                                object:self.view.window];
     
     
-    // observer the size of the text view to set the frame accordingly
-    
+   
     
     
     [self getCommentsFromServer];
@@ -156,10 +165,13 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 }
 
 
-
+#pragma mark - KVO
 
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear: animated];
+    
+    // observer the size of the text view to set the frame accordingly
     [self.sendMessageTextView addObserver:self
                                forKeyPath:kTextViewContentSizeKey
                                   options:NSKeyValueObservingOptionNew
@@ -181,14 +193,38 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     {
         
         
-        NSLog(@"%@", change[NSKeyValueChangeNewKey]);
+        CGFloat newContentSizeHeight = self.sendMessageTextView.contentSize.height;
+        
+        CGFloat diff = newContentSizeHeight - oldContentSizeHeight;
+        
+        
+        // offset View
+        
+        CGRect bottonViewFrame = self.bottomContainerView.frame;
+        
+        bottonViewFrame.origin.y -= diff;
+        bottonViewFrame.size.height += diff;
+        
+        self.bottomContainerView.frame = bottonViewFrame;
         
         
         
+        // offset TextView
+        CGRect tvFrame = self.sendMessageTextView.frame;
         
+        //tvFrame.origin.y -= diff;
+        //tvFrame.size.height += diff;
+        
+        self.sendMessageTextView.frame = tvFrame;
+        
+        
+        
+        oldContentSizeHeight = newContentSizeHeight;
         
     }
 }
+
+
 #pragma mark - Get Comments 
 
 -(void)fetchCommentsFromDB
@@ -376,10 +412,11 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:@{ NSFontAttributeName :  correctFont}
                                                     context:nil];
+    
+    
+    CGFloat correctHeight = rect.size.height + [SYNCommentingCollectionViewCell commentFieldFrame].origin.y + 10.0f;
+    
     NSLog(@">>> %f", rect.size.height);
-    
-    CGFloat correctHeight = rect.size.height + [SYNCommentingCollectionViewCell commentFieldFrame].origin.y;
-    
     
     return CGSizeMake(self.commentsCollectionView.frame.size.width, correctHeight);
 }

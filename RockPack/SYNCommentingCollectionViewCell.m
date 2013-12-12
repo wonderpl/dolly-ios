@@ -22,9 +22,14 @@
     
     self.nameLabel.font = [UIFont regularCustomFontOfSize:self.nameLabel.font.pointSize];
     
-    self.commentLabel.font = [SYNCommentingCollectionViewCell commentFieldFont];
+    self.commentTextView.font = [SYNCommentingCollectionViewCell commentFieldFont];
     
     self.timeLabel.font = [UIFont regularCustomFontOfSize:self.timeLabel.font.pointSize];
+    
+    self.commentTextView.textContainerInset = UIEdgeInsetsZero;
+    
+    self.avatarButton.layer.cornerRadius = self.avatarButton.frame.size.height * 0.5;
+    self.avatarButton.clipsToBounds = YES;
 }
 
 - (void) setComment:(Comment *)comment
@@ -38,7 +43,7 @@
     
     self.nameLabel.text = _comment.displayName;
     
-    self.commentLabel.text = commentText;
+    self.commentTextView.text = commentText;
     
     [self.avatarButton setImageWithURL: [NSURL URLWithString: comment.thumbnailUrl]
                               forState: UIControlStateNormal
@@ -48,12 +53,7 @@
     
 }
 
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    [self.commentLabel sizeToFit];
-}
+
 
 +(UIFont*)commentFieldFont
 {
@@ -62,7 +62,7 @@
 
 +(CGRect)commentFieldFrame
 {
-    return CGRectMake(48.0f, 28.0f, 200.0f, 21.0f);
+    return CGRectMake(48.0f, 28.0f, 213.0f, 18.0f);
 }
 
 @end
