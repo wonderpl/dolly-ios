@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "SYNAppDelegate.h"
 #import "Comment.h"
+#import "SYNDeviceManager.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
@@ -92,58 +93,102 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
     
+    
+    // observer the size of the text view to set the frame accordingly
+    
+    
+    
     [self getCommentsFromServer];
     
 }
 
-
-
-
-- (void) keyboardNotified: (NSNotification*) notification
+- (void) keyboardNotified:(NSNotification*)notification
 {
+    
+    NSDictionary* userInfo = [notification userInfo];
+    NSTimeInterval animationDuration;
+    UIViewAnimationCurve animationCurve;
+    
+    
+    CGRect keyboardFrame;
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
+    
+    UIView* viewToMove;
+    CGRect targetFrame;
+    
     if(IS_IPAD)
     {
-        CGRect sFrame = self.navigationController.view.frame;
-        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-            sFrame.origin.y -= 110.0f;
-        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-            sFrame.origin.y += 110.0f;
+        viewToMove = self.navigationController.view;
         
-        __weak SYNCommentingViewController* wself = self;
-        [UIView animateWithDuration:0.3f animations:^{
-            wself.navigationController.view.frame = sFrame;
-        }];
+        targetFrame = viewToMove.frame;
+        
+        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
+        {
+            targetFrame.origin.y -= 110.0f;
+        }
+        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
+        {
+            targetFrame.origin.y += 110.0f;
+        }
+        
+       
     }
-    else // is IPHONE
+    else
     {
-        CGRect sFrame = self.bottomContainerView.frame;
-        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-            sFrame.origin.y -= 212.0f;
-        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-            sFrame.origin.y += 212.0f;
         
-        __weak SYNCommentingViewController* wself = self;
-        [UIView animateWithDuration:0.3f animations:^{
-            wself.bottomContainerView.frame = sFrame;
-        }];
+        viewToMove = self.bottomContainerView;
+        
+        targetFrame = self.bottomContainerView.frame;
+        
+        targetFrame.origin.y = 294.0f;
     }
     
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    
+    viewToMove.frame = targetFrame;
+    
+    [UIView commitAnimations];
     
 }
 
+
+
+
 -(void) viewDidAppear:(BOOL)animated
 {
-    
+    [self.sendMessageTextView addObserver:self
+                               forKeyPath:kTextViewContentSizeKey
+                                  options:NSKeyValueObservingOptionNew
+                                  context:nil];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
+    [self.sendMessageTextView removeObserver:self forKeyPath:kTextViewContentSizeKey];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString: kTextViewContentSizeKey])
+    {
+        
+        
+        NSLog(@"%@", change[NSKeyValueChangeNewKey]);
+        
+        
+        
+        
+        
+    }
+}
 #pragma mark - Get Comments 
 
 -(void)fetchCommentsFromDB
