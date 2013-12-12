@@ -6,15 +6,13 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "AppConstants.h"
+#import "SYNAddToChannelViewController.h"
 #import "AppConstants.h"
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
 #import "VideoInstance.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNDeviceManager.h"
-#import "SYNAddToChannelViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNAddToChannelCell.h"
@@ -24,6 +22,7 @@
 #import <UIImageView+WebCache.h>
 #import "SYNAddToChannelExpandedFlowLayout.h"
 #import "SYNAddToChannelFlowLayout.h"
+#import "UICollectionReusableView+Helpers.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAnimationExpansion 0.4f
@@ -66,8 +65,6 @@
 {
     [super viewDidLoad];
     
-   
-    
     // == On ipad the panel appears as a popup in the middle, with rounded corners
     if(IS_IPAD)
         self.view.layer.cornerRadius = 8.0f;
@@ -80,21 +77,18 @@
     self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
     
     // == Register Xibs
-    [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
-                          forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
+    [self.currentChannelsCollectionView registerNib:[SYNAddToChannelCreateNewCell nib]
+						 forCellWithReuseIdentifier:[SYNAddToChannelCreateNewCell reuseIdentifier]];
     
-    [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCell class]) bundle: nil]
-                          forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCell class])];
+    [self.currentChannelsCollectionView registerNib:[SYNAddToChannelCell nib]
+						 forCellWithReuseIdentifier:[SYNAddToChannelCell reuseIdentifier]];
     
     
     self.currentChannelsCollectionView.scrollsToTop = NO;
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    
     self.selectedChannel = nil;
-    
-    
 }
 
 - (void) viewWillAppear: (BOOL) animated
@@ -154,8 +148,8 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])
-                                                                              forIndexPath: indexPath];
+        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNAddToChannelCreateNewCell reuseIdentifier]
+                                                                              forIndexPath:indexPath];
         
         self.createNewChannelCell.delegate = self;
         cell = self.createNewChannelCell;
@@ -163,8 +157,8 @@
     else
     {
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
-        SYNAddToChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCell class])
-                                                                                            forIndexPath: indexPath];
+        SYNAddToChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNAddToChannelCell reuseIdentifier]
+																						 forIndexPath:indexPath];
         
         existingChannel.titleLabel.text = channel.title;
         
@@ -321,8 +315,8 @@
     self.confirmButtom.enabled = NO;
     
     [self finishingPresentation];
-    
-    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+	
+	[self handleDismiss];
 }
 
 
@@ -381,8 +375,7 @@
 											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
 																								object: self];
 											
-											
-											[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+											[self handleDismiss];
 										} errorHandler:^(NSDictionary* errorDictionary) {
 											
 											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
@@ -419,7 +412,14 @@
     }
     
     _selectedChannel = selectedChannel;
-    
+}
+
+- (void)handleDismiss {
+	if (self.presentingViewController) {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	} else {
+		[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+	}
 }
 
 #pragma mark - Popoverable

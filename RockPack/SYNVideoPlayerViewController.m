@@ -20,6 +20,7 @@
 #import "SYNOneToOneSharingController.h"
 #import "SYNPopoverAnimator.h"
 #import "SYNActivityManager.h"
+#import "SYNAddToChannelViewController.h"
 #import <SDWebImageManager.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
@@ -139,7 +140,20 @@
 }
 
 - (IBAction)addButtonPressed:(SYNSocialButton *)button {
-	[self addControlPressed:button];
+	[[GAI sharedInstance] trackVideoAdd];
+	
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
+                                                     action:@"select"
+                                            videoInstanceId:self.videoInstance.uniqueId
+                                          completionHandler:nil
+                                               errorHandler:nil];
+	
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	viewController.videoInstance = self.videoInstance;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)followButtonPressed:(UIButton *)button {
@@ -250,6 +264,7 @@
 	NSDictionary *mapping = @{
 							  NSStringFromClass([SYNFullScreenVideoAnimator class]) : [SYNFullScreenVideoAnimator class],
 							  NSStringFromClass([SYNOneToOneSharingController class]) : [SYNPopoverAnimator class],
+							  NSStringFromClass([SYNAddToChannelViewController class]) : [SYNPopoverAnimator class]
 							  };
 	return mapping[NSStringFromClass([viewController class])];
 }
