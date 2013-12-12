@@ -45,6 +45,8 @@
     
     self.commentTextView.text = commentText;
     
+    NSLog(@"%@", comment.thumbnailUrl);
+    
     [self.avatarButton setImageWithURL: [NSURL URLWithString: comment.thumbnailUrl]
                               forState: UIControlStateNormal
                       placeholderImage: nil

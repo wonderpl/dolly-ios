@@ -22,6 +22,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 {
     CGFloat differenceBetweenHeightAndContentSizeHeight;
     CGFloat oldContentSizeHeight;
+    BOOL isAnimating;
 }
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
@@ -151,16 +152,31 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
         
         targetFrame = self.bottomContainerView.frame;
         
-        targetFrame.origin.y = 294.0f;
+        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
+        {
+            targetFrame.origin.y -= 212.0f;
+        }
+        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
+        {
+            targetFrame.origin.y += 212.0f;
+        }
+        
     }
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    [UIView setAnimationCurve:animationCurve];
+    isAnimating = YES;
     
-    viewToMove.frame = targetFrame;
+    [UIView animateWithDuration:animationDuration delay:0.0f
+                        options:(animationCurve << 16) // convert AnimationCurve to AnimationOption
+                     animations:^{
+                         
+                         viewToMove.frame = targetFrame;
+                         
+                     } completion:^(BOOL finished) {
+        
+                         isAnimating = NO;
+                     }];
     
-    [UIView commitAnimations];
+    
     
 }
 
@@ -213,7 +229,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
         CGRect tvFrame = self.sendMessageTextView.frame;
         
         //tvFrame.origin.y -= diff;
-        //tvFrame.size.height += diff;
+        tvFrame.size.height += diff;
         
         self.sendMessageTextView.frame = tvFrame;
         
