@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @class Comment;
 
+#define kCommentTextSizeWidth 200.0f
+
 @interface SYNCommentingCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UIButton* avatarButton;
@@ -17,5 +19,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 
 @property (nonatomic, weak) Comment* comment;
+
++(UIFont*)commentFieldFont;
++(CGRect)commentFieldFrame;
 
 @end

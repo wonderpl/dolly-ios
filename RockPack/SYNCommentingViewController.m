@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "SYNAppDelegate.h"
 #import "Comment.h"
+#import <QuartzCore/QuartzCore.h>
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
@@ -57,6 +58,16 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     self.comments = @[].mutableCopy; // avoid calling count on nil instance
     
     self.maxCommentPosition = @(0);
+    
+    
+    UIColor* borderColor = [UIColor colorWithWhite:(170.0f/255.0f) alpha:1.0f];
+    self.sendMessageTextView.layer.borderColor = borderColor.CGColor;
+    self.sendMessageTextView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
+    self.sendMessageTextView.layer.cornerRadius = 4.0f;
+    self.sendMessageTextView.clipsToBounds = YES;
+    
+    self.bottomContainerView.layer.borderColor = [UIColor grayColor].CGColor;
+    self.bottomContainerView.clipsToBounds = YES;
     
     [self.commentsCollectionView registerNib:[UINib nibWithNibName:CommentingCellIndentifier bundle:nil]
                   forCellWithReuseIdentifier:CommentingCellIndentifier];
@@ -107,9 +118,9 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     {
         CGRect sFrame = self.bottomContainerView.frame;
         if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-            sFrame.origin.y -= 220.0f;
+            sFrame.origin.y -= 212.0f;
         else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-            sFrame.origin.y += 220.0f;
+            sFrame.origin.y += 212.0f;
         
         __weak SYNCommentingViewController* wself = self;
         [UIView animateWithDuration:0.3f animations:^{
@@ -117,6 +128,11 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
         }];
     }
     
+    
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
     
 }
 
@@ -183,9 +199,6 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 }
 
 #pragma mark - UITextFieldDelegate
-
-
-
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -302,16 +315,29 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     return commentingCell;
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView
-//                  layout:(UICollectionViewLayout*)collectionViewLayout
-//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//    
-//    
-//    
-//    
-//}
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    Comment* comment = self.comments[indexPath.item];
+    // size
+    
+    
+    
+    UIFont* correctFont = [SYNCommentingCollectionViewCell commentFieldFont];
+    
+    CGRect rect = [comment.commentText boundingRectWithSize:(CGSize){kCommentTextSizeWidth, CGFLOAT_MAX}
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                 attributes:@{ NSFontAttributeName :  correctFont}
+                                                    context:nil];
+    NSLog(@">>> %f", rect.size.height);
+    
+    CGFloat correctHeight = rect.size.height + [SYNCommentingCollectionViewCell commentFieldFrame].origin.y;
+    
+    
+    return CGSizeMake(self.commentsCollectionView.frame.size.width, correctHeight);
+}
 
 
 #pragma mark - Loading Comments

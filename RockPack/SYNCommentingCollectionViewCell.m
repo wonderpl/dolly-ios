@@ -22,7 +22,7 @@
     
     self.nameLabel.font = [UIFont regularCustomFontOfSize:self.nameLabel.font.pointSize];
     
-    self.commentLabel.font = [UIFont regularCustomFontOfSize:self.commentLabel.font.pointSize];
+    self.commentLabel.font = [SYNCommentingCollectionViewCell commentFieldFont];
     
     self.timeLabel.font = [UIFont regularCustomFontOfSize:self.timeLabel.font.pointSize];
 }
@@ -34,15 +34,35 @@
     if(!_comment)
         return;
     
+    NSString* commentText = _comment.commentText;
+    
     self.nameLabel.text = _comment.displayName;
     
-    self.commentLabel.text = _comment.commentText;
+    self.commentLabel.text = commentText;
     
     [self.avatarButton setImageWithURL: [NSURL URLWithString: comment.thumbnailUrl]
                               forState: UIControlStateNormal
                       placeholderImage: nil
                                options: SDWebImageRetryFailed];
     
+    
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self.commentLabel sizeToFit];
+}
+
++(UIFont*)commentFieldFont
+{
+    return [UIFont regularCustomFontOfSize:12.0f];
+}
+
++(CGRect)commentFieldFrame
+{
+    return CGRectMake(48.0f, 28.0f, 200.0f, 21.0f);
 }
 
 @end
