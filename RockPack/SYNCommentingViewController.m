@@ -289,6 +289,8 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                                                                     forIndexPath:indexPath];
     Comment* comment = self.comments[indexPath.item];
     
+    commentingCell.comment = comment;
+    
     if(self.maxCommentPosition.integerValue < comment.positionValue)
         self.maxCommentPosition = @(comment.positionValue);
     

@@ -39,7 +39,7 @@
                             <rect key="frame" x="165" y="93" width="319" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                            <color key="tintColor" red="0.72941176470588232" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.73725490196078436" green="0.73333333333333328" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="sliderMoved:" destination="-1" eventType="valueChanged" id="Tdx-d6-HnO"/>
                             </connections>

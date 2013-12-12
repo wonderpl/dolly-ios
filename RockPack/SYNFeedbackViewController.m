@@ -91,7 +91,10 @@ static NSString* errorText = @"Please provide your feedback here...";
     
     self.textView.font = [UIFont regularCustomFontOfSize:self.textView.font.pointSize];
     
-    purpleColor = self.slider.tintColor;
+    purpleColor = [UIColor colorWithRed:(188.0f/255.0f)
+                                  green:(187.0f/255.0f)
+                                   blue:(211.0f/255.0f)
+                                  alpha:1.0f];
     
     
     
