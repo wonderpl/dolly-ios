@@ -10,7 +10,7 @@
                 <outlet property="commentsCollectionView" destination="dnW-Ka-mTj" id="uct-wR-f53"/>
                 <outlet property="sendMessageAvatarmageView" destination="CxQ-bj-tgi" id="ODI-Xx-iiC"/>
                 <outlet property="sendMessageButton" destination="CFg-Xg-irR" id="I07-Dx-dgz"/>
-                <outlet property="sendMessageTextField" destination="5vw-1K-SSu" id="l47-rO-Xbc"/>
+                <outlet property="sendMessageTextView" destination="UWz-rP-5kl" id="uC1-UV-X59"/>
                 <outlet property="view" destination="1" id="Gkl-Ss-VdD"/>
             </connections>
         </placeholder>
@@ -43,15 +43,6 @@
                             <rect key="frame" x="6" y="10" width="32" height="32"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5vw-1K-SSu" userLabel="Send Message Text Field">
-                            <rect key="frame" x="47" y="11" width="218" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="HmY-Ht-zjQ"/>
-                            </connections>
-                        </textField>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFg-Xg-irR" userLabel="Send Message Button">
                             <rect key="frame" x="270" y="11" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -62,6 +53,18 @@
                                 <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="K3g-Vi-JwO"/>
                             </connections>
                         </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="Enter a Comment" translatesAutoresizingMaskIntoConstraints="NO" id="UWz-rP-5kl">
+                            <rect key="frame" x="47" y="10" width="215" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                            <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="BSc-Qf-5jm"/>
+                            </connections>
+                        </textView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -16,7 +16,7 @@
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 
-@interface SYNCommentingViewController () <UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
 
@@ -25,7 +25,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 // Send View
 
 @property (nonatomic, strong) IBOutlet UIView* bottomContainerView;
-@property (nonatomic, strong) IBOutlet UITextField* sendMessageTextField;
+@property (nonatomic, strong) IBOutlet UITextView* sendMessageTextView;
 @property (nonatomic, strong) IBOutlet UIImageView* sendMessageAvatarmageView;
 @property (nonatomic, strong) IBOutlet UIButton* sendMessageButton;
 
@@ -61,7 +61,7 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
     [self.commentsCollectionView registerNib:[UINib nibWithNibName:CommentingCellIndentifier bundle:nil]
                   forCellWithReuseIdentifier:CommentingCellIndentifier];
     
-    self.sendMessageTextField.font = [UIFont regularCustomFontOfSize:self.sendMessageTextField.font.pointSize];
+    self.sendMessageTextView.font = [UIFont regularCustomFontOfSize:self.sendMessageTextView.font.pointSize];
     
     
     
@@ -184,16 +184,19 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 #pragma mark - UITextFieldDelegate
 
--(BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    return YES;
-}
-
-
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self sendComment];
+    
+    if ([text isEqualToString:@"\n"])
+    {
+        
+        [self sendComment];
+        return NO;
+    }
+    
     
     return YES;
 }
@@ -227,13 +230,13 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 
 - (void) sendComment
 {
-    NSString* commentText = self.sendMessageTextField.text;
+    NSString* commentText = self.sendMessageTextView.text;
     
     [self.comments addObject:[self createCommentFromText:commentText]];
     
-    self.sendMessageTextField.text = @"";
+    self.sendMessageTextView.text = @"";
     
-    [self.sendMessageTextField resignFirstResponder];
+    [self.sendMessageTextView resignFirstResponder];
     
     [self.commentsCollectionView reloadData];
     
@@ -247,9 +250,9 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
                                            
                                            [self.comments addObject:[self createCommentFromText:commentText]];
                                            
-                                           self.sendMessageTextField.text = @"";
+                                           self.sendMessageTextView.text = @"";
                                            
-                                           [self.sendMessageTextField resignFirstResponder];
+                                           [self.sendMessageTextView resignFirstResponder];
                                            
                                            [self.commentsCollectionView reloadData];
         

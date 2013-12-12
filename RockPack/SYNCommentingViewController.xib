@@ -10,7 +10,7 @@
                 <outlet property="commentsCollectionView" destination="xHI-4t-8mN" id="SV7-Pg-mCc"/>
                 <outlet property="sendMessageAvatarmageView" destination="dQD-R9-Cwe" id="HOs-fc-pMz"/>
                 <outlet property="sendMessageButton" destination="wJi-Y3-1s8" id="TyU-7o-Bdd"/>
-                <outlet property="sendMessageTextField" destination="w3g-bh-7iS" id="ehc-N4-iqK"/>
+                <outlet property="sendMessageTextView" destination="FjY-KP-s3D" id="blI-8l-gOW"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -40,18 +40,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dQD-R9-Cwe">
-                            <rect key="frame" x="8" y="6" width="40" height="38"/>
+                            <rect key="frame" x="8" y="6" width="32" height="32"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w3g-bh-7iS">
-                            <rect key="frame" x="56" y="6" width="374" height="38"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="B2A-c7-dhP"/>
-                            </connections>
-                        </textField>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJi-Y3-1s8">
                             <rect key="frame" x="438" y="10" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -62,6 +53,17 @@
                                 <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="jaB-ls-f6B"/>
                             </connections>
                         </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="Enter a Comment" translatesAutoresizingMaskIntoConstraints="NO" id="FjY-KP-s3D">
+                            <rect key="frame" x="54" y="6" width="370" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="EGa-wJ-zkR"/>
+                            </connections>
+                        </textView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
