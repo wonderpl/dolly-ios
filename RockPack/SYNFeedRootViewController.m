@@ -112,14 +112,6 @@ typedef void(^FeedDataErrorBlock)(void);
     [self updateAnalytics];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	
-	if ([self isBeingPresented]) {
-		[self.model loadNextPage];
-	}
-}
-
 #pragma mark - Container Scroll Delegates
 
 - (void) updateAnalytics {
@@ -199,7 +191,11 @@ typedef void(^FeedDataErrorBlock)(void);
                                                                     forIndexPath:indexPath];
         supplementaryView = self.footerView;
 		
-		self.footerView.showsLoading = [self.model hasMoreItems];
+		if ([self.model hasMoreItems]) {
+			self.footerView.showsLoading = YES;
+			
+			[self.model loadNextPage];
+		}
     }
 	
     return supplementaryView;
@@ -317,19 +313,6 @@ typedef void(^FeedDataErrorBlock)(void);
 	[self.model reset];
 	[self.model loadNextPage];
 }
-
-#pragma mark - Load More Footer
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-	[super scrollViewDidScroll:scrollView];
-	
-	if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight) {
-		if ([self.model hasMoreItems]) {
-			[self.model loadNextPage];
-		}
-	}
-}
-
 
 - (void) applicationWillEnterForeground: (UIApplication *) application {
 	[super applicationWillEnterForeground: application];
