@@ -23,6 +23,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextField* nameInputTextField;
 
+@property (nonatomic, assign, readonly) BOOL editedDescription;
+
 @property (nonatomic) CreateNewChannelCellState state;
 @property (nonatomic, weak) SYNAddToChannelViewController* delegate;
 

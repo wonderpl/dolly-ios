@@ -139,19 +139,8 @@
         AssertOrLog(@"The Video Q is not empty and you cannot currently add more than one videos");
         return;
     }
-
     
-    VideoInstance* copyOfVideoInstance = [VideoInstance instanceFromVideoInstance: videoInstance
-                                                        usingManagedObjectContext: self.appDelegate.channelsManagedObjectContext
-                                                              ignoringObjectTypes: kIgnoreChannelObjects];
-    
-    
-    
-    [self.currentlyCreatingChannel addVideoInstancesObject:copyOfVideoInstance];
-    
-    
-    [self.appDelegate.masterViewController addExistingCollectionsOverlayController];
-    
+    [self.appDelegate.masterViewController addExistingCollectionsOverlayControllerForVideoInstance:videoInstance];
 }
 
 - (void) removeFromVideoQueue: (VideoInstance*) videoInstance

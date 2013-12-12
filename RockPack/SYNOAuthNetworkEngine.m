@@ -709,8 +709,6 @@
          completionHandler: (MKNKUserSuccessBlock) completionBlock
               errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    
-    
     NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId};
     
     NSString *apiString = [kAPIGetUserChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1049,6 +1047,38 @@
 }
 
 
+- (void)updateVideosForUserId:(NSString *)userId
+				 forChannelId:(NSString *)channelId
+			 videoInstanceIds:(NSString *)videoInstanceIds
+				clearPrevious:(BOOL)clearPrevious
+			completionHandler:(MKNKUserSuccessBlock)completionBlock
+				 errorHandler:(MKNKUserErrorBlock)errorBlock {
+	
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId,
+                                                @"CHANNELID" : channelId};
+    
+    NSString *apiString = [kAPIUpdateVideosForChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+	
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath:apiString
+                                                                                                       params:nil
+                                                                                                   httpMethod:(clearPrevious ? @"PUT" : @"POST")
+                                                                                                          ssl:YES];
+    
+    [networkOperation setCustomPostDataEncodingHandler:^NSString *(NSDictionary *postDataDict) {
+         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:videoInstanceIds options:0 error:nil];
+         return [[NSString alloc] initWithData:jsonData encoding: NSUTF8StringEncoding];
+     } forType:@"application/json"];
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
+
 - (void) updateVideosForUserId: (NSString *) userId
                                forChannelID: (NSString *) channelId
                         videoInstanceSet: (NSOrderedSet *) videoInstanceSet
@@ -1056,43 +1086,12 @@
                        completionHandler: (MKNKUserSuccessBlock) completionBlock
                             errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId,
-                                                @"CHANNELID" : channelId};
-    
-    NSString *apiString = [kAPIUpdateVideosForChannel stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
-
-    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
-    
-    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
-                                                                                                       params: nil
-                                                                                                   httpMethod: (clearPrevious ? @"PUT" : @"POST")
-                                                                                                          ssl: TRUE];
-    
-    NSArray* videoIdArray = [[videoInstanceSet array] valueForKey:@"uniqueId"];
-    
-    
-    [networkOperation setCustomPostDataEncodingHandler: ^ NSString * (NSDictionary *postDataDict)
-    {
-         
-         NSError *error;
-         NSData *jsonData = [NSJSONSerialization dataWithJSONObject: videoIdArray
-                                                            options: 0
-                                                              error: &error];
-         
-         NSString *jsonString = [[NSString alloc] initWithData: jsonData
-                                                      encoding: NSUTF8StringEncoding];
-        
-//        DebugLog(@"%@", jsonString);
-        
-         return jsonString;
-     }
-     forType: @"application/json"];
-    
-    [self addCommonHandlerToNetworkOperation: networkOperation
-                           completionHandler: completionBlock
-                                errorHandler: errorBlock];
-    
-    [self enqueueSignedOperation: networkOperation];
+	[self updateVideosForUserId:userId
+				   forChannelId:channelId
+			   videoInstanceIds:[[videoInstanceSet array] valueForKey:@"uniqueId"]
+				  clearPrevious:clearPrevious
+			  completionHandler:completionBlock
+				   errorHandler:errorBlock];
 }
 
 
