@@ -88,7 +88,6 @@
     {
         [self.appDelegate.oAuthNetworkEngine activityForUserId: userId
                                              completionHandler: ^(NSDictionary *responseDictionary) {
-                                                 NSLog(@"Response for updateActivityForCurrentUser%@", responseDictionary);
 
                                                  [self registerActivityFromDictionary:responseDictionary];
                                                  
