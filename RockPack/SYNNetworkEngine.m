@@ -23,8 +23,6 @@
 
 @implementation SYNNetworkEngine
 
-@synthesize shouldFirstCheckCache;
-
 - (NSString *) hostName
 {
     return hostName;

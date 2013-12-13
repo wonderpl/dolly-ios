@@ -16,8 +16,6 @@
 
 @interface SYNNetworkEngine : SYNAbstractNetworkEngine
 
-@property (nonatomic) BOOL shouldFirstCheckCache;
-
 - (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
                               onError: (MKNKErrorBlock) errorBlock;
 
