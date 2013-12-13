@@ -37,9 +37,6 @@
 
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
-@import AVFoundation;
-@import CoreImage;
-@import QuartzCore;
 
 @interface SYNChannelDetailsViewController () <UITextViewDelegate,
 SYNImagePickerControllerDelegate,
@@ -48,10 +45,6 @@ UIPopoverControllerDelegate>
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
-
-//iPhone specific
-
-@property (nonatomic, strong) NSString *selectedImageURL;
 
 @property (strong, nonatomic) IBOutlet SYNAvatarButton *btnAvatar;
 @property (strong, nonatomic) IBOutlet UILabel *lblFullName;
@@ -75,26 +68,21 @@ UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *lblNoVideos;
 
-@property (strong, nonatomic) IBOutlet UIView *viewEditMode;
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
-@property (nonatomic) BOOL viewHasAppeared;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 @property (strong, nonatomic) IBOutlet UIView *viewCollectionSeperator;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewDescription;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
-@property (strong, nonatomic) UICollectionViewFlowLayout *videoEditLayoutIPad;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
 @property (strong, nonatomic) IBOutlet UIView *viewCirleButtonContainer;
 @property (strong, nonatomic) IBOutlet UIView *viewFollowAndVideoContainer;
-@property (nonatomic) CGPoint tempContentOffset;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
 @property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
-@property (nonatomic,strong) SYNProfileRootViewController *tmpViewController;
 @property (nonatomic) BOOL isLocked;
 
 
@@ -239,8 +227,6 @@ UIPopoverControllerDelegate>
     [self.view addSubview:self.activityIndicator];
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
-
-    self.tmpViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
 }
 
 - (void) viewWillAppear: (BOOL) animated
@@ -266,7 +252,6 @@ UIPopoverControllerDelegate>
         //                       withLoader: YES];
     }
     
-    self.viewHasAppeared = YES;
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
     self.navigationController.view.backgroundColor = [UIColor blackColor];
@@ -315,9 +300,6 @@ UIPopoverControllerDelegate>
 //                                                      userInfo: nil];
 //    
     //    self.navigationController.navigationBarHidden = YES;
-    
-    self.viewHasAppeared = NO;
-    self.tempContentOffset = self.videoThumbnailCollectionView.contentOffset;
     
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
@@ -590,11 +572,6 @@ UIPopoverControllerDelegate>
 
 -(void) moveHeader:(CGFloat) offset
 {
-    
-    if (!self.viewHasAppeared) {
-        return;
-    }
-    
     if (IS_IPHONE ) {
         // offset *=2;
         //iphone port
