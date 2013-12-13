@@ -39,9 +39,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate,
-SYNImagePickerControllerDelegate,
-UIPopoverControllerDelegate>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, SYNImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
