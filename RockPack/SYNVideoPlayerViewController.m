@@ -237,9 +237,6 @@
 	self.videoTitleLabel.text = videoInstance.title;
 	
 	self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:videoInstance.channel.uniqueId];
-    NSLog(@"Video ID %@", videoInstance.channel.uniqueId);
-	
-    NSLog(@"---------");
    [[SYNActivityManager sharedInstance] subscribedList];
            
 	self.likeButton.dataItemLinked = videoInstance;
