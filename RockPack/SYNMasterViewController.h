@@ -10,6 +10,8 @@
 #import "SYNAppDelegate.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNVideoViewerViewController.h"
+#import "SYNPopoverable.h"
+
 @import UIKit;
 
 typedef void (^VideoOverlayDismissBlock)(void);
@@ -56,16 +58,23 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 - (void) removeVideoOverlayController;
 
-// Overlay
--(void) addExistingCollectionsOverlayController;
+// == Adding an Overlay == //
 
+-(void) addExistingCollectionsOverlayControllerForVideoInstance:(VideoInstance *)videoInstance;
 
--(void) addOverlayController: (UIViewController*) abstractViewController animated:(BOOL)animated;
+- (void) addOverlayController:(UIViewController*)overlayViewController animated:(BOOL)animated;
 
+- (void) addOverlayController:(UIViewController*)overlayViewController
+                     animated:(BOOL)animated
+               pointingToRect:(CGRect)rectToPoint;
+
+// ======================= //
 
 -(void) removeOverlayControllerAnimated:(BOOL)animated;
 
 -(void)displayNotificationsLoaded:(NSInteger)notificationsCount;
+
+
 
 // on-boarding
 

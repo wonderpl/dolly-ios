@@ -212,7 +212,6 @@
                                                options: NSStringDrawingUsesLineFragmentOrigin
                                                context: nil];
     
-    NSLog(@"%@ -> %f", messageTitle, rect.size.height);
     
     CGSize mainTSize = CGRectIntegral(rect).size;
     

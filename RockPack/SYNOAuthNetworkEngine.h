@@ -138,6 +138,13 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                      onCompletion: (MKNKUserSuccessBlock) completionBlock
                           onError: (MKNKUserErrorBlock) errorBlock;
 
+- (void)updateVideosForUserId:(NSString *)userId
+				 forChannelId:(NSString *)channelId
+			 videoInstanceIds:(NSArray *)videoInstanceIds
+				clearPrevious:(BOOL)clearPrevious
+			completionHandler:(MKNKUserSuccessBlock)completionBlock
+				 errorHandler:(MKNKUserErrorBlock)errorBlock;
+
 // User activity
 
 - (void) recordActivityForUserId: (NSString *) userId

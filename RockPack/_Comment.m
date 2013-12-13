@@ -10,6 +10,7 @@ const struct CommentAttributes CommentAttributes = {
 	.position = @"position",
 	.thumbnailUrl = @"thumbnailUrl",
 	.userId = @"userId",
+	.validated = @"validated",
 	.videoInstanceId = @"videoInstanceId",
 };
 
@@ -47,6 +48,11 @@ const struct CommentFetchedProperties CommentFetchedProperties = {
 	
 	if ([key isEqualToString:@"positionValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"position"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"validatedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"validated"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -113,6 +119,32 @@ const struct CommentFetchedProperties CommentFetchedProperties = {
 
 @dynamic userId;
 
+
+
+
+
+
+@dynamic validated;
+
+
+
+- (BOOL)validatedValue {
+	NSNumber *result = [self validated];
+	return [result boolValue];
+}
+
+- (void)setValidatedValue:(BOOL)value_ {
+	[self setValidated:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveValidatedValue {
+	NSNumber *result = [self primitiveValidated];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveValidatedValue:(BOOL)value_ {
+	[self setPrimitiveValidated:[NSNumber numberWithBool:value_]];
+}
 
 
 

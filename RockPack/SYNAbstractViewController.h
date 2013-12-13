@@ -83,4 +83,6 @@
 
 - (CGSize) footerSize;
 
+- (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel;
+
 @end

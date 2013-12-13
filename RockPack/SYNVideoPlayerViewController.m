@@ -19,12 +19,15 @@
 #import "GAI+Tracking.h"
 #import "SYNOneToOneSharingController.h"
 #import "SYNPopoverAnimator.h"
+#import "SYNActivityManager.h"
+#import "SYNAddToChannelViewController.h"
 #import <SDWebImageManager.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
+@property (nonatomic, strong) IBOutlet UIButton *followButton;
 @property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
@@ -137,7 +140,24 @@
 }
 
 - (IBAction)addButtonPressed:(SYNSocialButton *)button {
-	[self addControlPressed:button];
+	[[GAI sharedInstance] trackVideoAdd];
+	
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
+                                                     action:@"select"
+                                            videoInstanceId:self.videoInstance.uniqueId
+                                          completionHandler:nil
+                                               errorHandler:nil];
+	
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	viewController.videoInstance = self.videoInstance;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (IBAction)followButtonPressed:(UIButton *)button {
+	[self followButtonPressed:button withChannel:self.videoInstance.channel];
 }
 
 - (IBAction)shareButtonPressed:(UIButton *)button {
@@ -215,6 +235,8 @@
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	self.videoTitleLabel.text = videoInstance.title;
 	
+	self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribed:videoInstance.channel.uniqueId];
+	
 	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;
 	
@@ -242,6 +264,7 @@
 	NSDictionary *mapping = @{
 							  NSStringFromClass([SYNFullScreenVideoAnimator class]) : [SYNFullScreenVideoAnimator class],
 							  NSStringFromClass([SYNOneToOneSharingController class]) : [SYNPopoverAnimator class],
+							  NSStringFromClass([SYNAddToChannelViewController class]) : [SYNPopoverAnimator class]
 							  };
 	return mapping[NSStringFromClass([viewController class])];
 }

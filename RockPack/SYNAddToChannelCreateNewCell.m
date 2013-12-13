@@ -13,6 +13,12 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+@interface SYNAddToChannelCreateNewCell ()
+
+@property (nonatomic, assign) BOOL editedDescription;
+
+@end
+
 @implementation SYNAddToChannelCreateNewCell
 
 - (void) awakeFromNib
@@ -95,6 +101,7 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+	self.editedDescription = YES;
     self.descriptionTextView.text = @"";
 }
 

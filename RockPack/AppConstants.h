@@ -183,7 +183,7 @@ typedef enum : NSInteger {
 #define kGetUserRecommendations     @"/ws/USERID/user_recommendations/"         /* GET */
 
 
-#define kAPIComments            @"/ws/USERID/channels/CHANNELID/videos/VIDEOINSTANCEID/comments/"    /* GET */
+#define kAPIComments                @"/ws/USERID/channels/CHANNELID/videos/VIDEOINSTANCEID/comments/"    /* GET */
 
 #define kGetVideoRecommendations    @"/ws/USERID/video_recommendations/"         /* GET */
 #define kGetChannelRecommendations  @"/ws/USERID/channel_recommendations/"       /* GET */
@@ -433,8 +433,6 @@ typedef enum {
 #define kShuttleBarSliderOffset         5.0f
 
 // Notifications
-
-#define kNoteVideoAddedToExistingChannel         @"kNoteAddedToChannel"
 
 #define kNoteChannelSaved           @"kNoteChannelSaved"
 #define kNoteHideAllCautions          @"kNoteHideAllCautions"

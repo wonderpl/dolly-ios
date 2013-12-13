@@ -86,6 +86,10 @@
     }];
 }
 
-
+#ifdef DEBUG
+- (BOOL)shouldContinueWithInvalidCertificate {
+	return YES;
+}
+#endif
 
 @end

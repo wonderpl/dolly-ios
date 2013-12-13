@@ -6,14 +6,13 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "AppConstants.h"
+#import "SYNAddToChannelViewController.h"
 #import "AppConstants.h"
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
+#import "VideoInstance.h"
 #import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
-#import "SYNDeviceManager.h"
-#import "SYNAddToChannelViewController.h"
 #import "SYNFacebookManager.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNAddToChannelCell.h"
@@ -23,6 +22,7 @@
 #import <UIImageView+WebCache.h>
 #import "SYNAddToChannelExpandedFlowLayout.h"
 #import "SYNAddToChannelFlowLayout.h"
+#import "UICollectionReusableView+Helpers.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAnimationExpansion 0.4f
@@ -65,8 +65,6 @@
 {
     [super viewDidLoad];
     
-   
-    
     // == On ipad the panel appears as a popup in the middle, with rounded corners
     if(IS_IPAD)
         self.view.layer.cornerRadius = 8.0f;
@@ -79,21 +77,18 @@
     self.currentChannelsCollectionView.collectionViewLayout = self.normalFlowLayout;
     
     // == Register Xibs
-    [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCreateNewCell class]) bundle: nil]
-                          forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])];
+    [self.currentChannelsCollectionView registerNib:[SYNAddToChannelCreateNewCell nib]
+						 forCellWithReuseIdentifier:[SYNAddToChannelCreateNewCell reuseIdentifier]];
     
-    [self.currentChannelsCollectionView registerNib: [UINib nibWithNibName: NSStringFromClass([SYNAddToChannelCell class]) bundle: nil]
-                          forCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCell class])];
+    [self.currentChannelsCollectionView registerNib:[SYNAddToChannelCell nib]
+						 forCellWithReuseIdentifier:[SYNAddToChannelCell reuseIdentifier]];
     
     
     self.currentChannelsCollectionView.scrollsToTop = NO;
 
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
-    
     self.selectedChannel = nil;
-    
-    
 }
 
 - (void) viewWillAppear: (BOOL) animated
@@ -153,8 +148,8 @@
     
     if (indexPath.row == 0) // first row (create)
     {
-        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCreateNewCell class])
-                                                                              forIndexPath: indexPath];
+        self.createNewChannelCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNAddToChannelCreateNewCell reuseIdentifier]
+                                                                              forIndexPath:indexPath];
         
         self.createNewChannelCell.delegate = self;
         cell = self.createNewChannelCell;
@@ -162,8 +157,8 @@
     else
     {
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
-        SYNAddToChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNAddToChannelCell class])
-                                                                                            forIndexPath: indexPath];
+        SYNAddToChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNAddToChannelCell reuseIdentifier]
+																						 forIndexPath:indexPath];
         
         existingChannel.titleLabel.text = channel.title;
         
@@ -315,49 +310,83 @@
 
 #pragma mark - Main Controls Callbacks
 
-- (IBAction) closeButtonPressed: (id) sender
-{
-    
+- (IBAction)closeButtonPressed:(id)sender {
     self.closeButton.enabled = NO;
     self.confirmButtom.enabled = NO;
     
     [self finishingPresentation];
-    
-    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+	
+	[self handleDismiss];
 }
 
 
-- (IBAction) confirmButtonPressed: (id) sender
-{
-    // if we are creating a new channel
-    if(self.createNewChannelCell.isEditing)
-    {
-        Channel* creatingChannelFromQ = appDelegate.videoQueue.currentlyCreatingChannel;
-        creatingChannelFromQ.title = self.createNewChannelCell.nameInputTextField.text;
-        creatingChannelFromQ.channelDescription = self.createNewChannelCell.descriptionTextView.text;
-        
-        [appDelegate.masterViewController.showingViewController viewChannelDetails:creatingChannelFromQ];
-        
-        
-        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
-        return;
-        
-    }
-    
-    if (!self.selectedChannel)
-        return;
-    
-    // we are simply adding a video to an existing channel
-    [[NSNotificationCenter defaultCenter] postNotificationName: kNoteVideoAddedToExistingChannel
-                                                        object: self
-                                                      userInfo: @{kChannel: self.selectedChannel}];
-    
-    self.selectedChannel = nil;
-    
-    self.closeButton.enabled = NO; // protect from double closing the panel
-    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+- (IBAction)confirmButtonPressed:(UIButton *)button {
+	button.enabled = NO;
+	
+	if (self.createNewChannelCell.isEditing) {
+		// We don't have a channel, need to create one
+		SYNAddToChannelCreateNewCell *cell = self.createNewChannelCell;
+		NSString *description = (cell.editedDescription ? cell.descriptionTextView.text : @"");
+		
+		[appDelegate.oAuthNetworkEngine createChannelForUserId:appDelegate.currentOAuth2Credentials.userId
+														 title:self.createNewChannelCell.nameInputTextField.text
+												   description:description
+													  category:@""
+														 cover:@""
+													  isPublic:YES
+											 completionHandler:^(NSDictionary *response) {
+												 NSString *channelId = response[@"id"];
+												 [self addCurrentVideoInstanceToChannel:channelId];
+												 
+												 [[NSNotificationCenter defaultCenter] postNotificationName:kChannelOwnerUpdateRequest
+																									 object:nil
+																								   userInfo: @{kChannelOwner : appDelegate.currentUser }];
+											 } errorHandler:^(NSDictionary *response) {
+												 NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
+												 
+												 [appDelegate.masterViewController presentNotificationWithMessage:messageE
+																										  andType:NotificationMessageTypeError];
+											 }];
+	}
+	
+	if (self.selectedChannel) {
+		[self addCurrentVideoInstanceToChannel:self.selectedChannel.uniqueId];
+	}
 }
 
+- (void)addCurrentVideoInstanceToChannel:(NSString *)channelId {
+    [appDelegate.oAuthNetworkEngine updateVideosForUserId:appDelegate.currentUser.uniqueId
+											 forChannelId:channelId
+										 videoInstanceIds:@[ self.videoInstance.uniqueId ]
+											clearPrevious:NO
+										completionHandler: ^(NSDictionary* result) {
+											id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+											
+											[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+																								   action: @"channelUpdated"
+																									label: nil
+																									value: nil] build]];
+											
+											NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL", nil);
+											
+											[appDelegate.masterViewController presentNotificationWithMessage:messageS
+																									 andType:NotificationMessageTypeSuccess];
+											
+											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+																								object: self];
+											
+											[self handleDismiss];
+										} errorHandler:^(NSDictionary* errorDictionary) {
+											
+											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
+																								object: self];
+											
+											NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
+											
+											[appDelegate.masterViewController presentNotificationWithMessage:messageE
+																									 andType:NotificationMessageTypeError];
+										}];
+}
 
 
 #pragma mark - Set Selected Channel
@@ -383,7 +412,14 @@
     }
     
     _selectedChannel = selectedChannel;
-    
+}
+
+- (void)handleDismiss {
+	if (self.presentingViewController) {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	} else {
+		[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+	}
 }
 
 #pragma mark - Popoverable

@@ -48,7 +48,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 @property (nonatomic) CGRect overlayControllerFrame;
 
-
+@property (nonatomic, strong) UIImageView* arrowForOverlayImageView;
 
 
 
@@ -103,16 +103,18 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
     // == Set Up Notifications == //
     
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
+    
     
     // add background view //
     
     self.backgroundOverlayView = [[UIView alloc] initWithFrame:CGRectZero];
     self.backgroundOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.backgroundOverlayView.backgroundColor = [UIColor darkGrayColor];
+    
+    self.arrowForOverlayImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ArrowCommentBox"]];
     
     // load basic data like the Genres
     [self loadBasicDataWithComplete:^(BOOL success) {
@@ -229,15 +231,21 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 
 #pragma mark - Overlays, Adding and Removing
 
--(void)addExistingCollectionsOverlayController
+-(void) addExistingCollectionsOverlayControllerForVideoInstance:(VideoInstance *)videoInstance
 {
-    SYNAddToChannelViewController* existingController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
-    
-    [self addOverlayController:existingController animated:YES];
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.videoInstance = videoInstance;
+
+	[self addOverlayController:viewController animated:YES];
 }
 
-
 - (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController animated:(BOOL)animated
+{
+    [self addOverlayController:overlayViewController animated:animated pointingToRect:CGRectZero];
+}
+- (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController
+                     animated:(BOOL)animated
+               pointingToRect:(CGRect)rectToPoint
 {
     if(!overlayViewController)
     {
@@ -282,13 +290,35 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     else
     {
-        startFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - startFrame.size.width * 0.5f;
-        startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
+        
+        if(CGRectEqualToRect(rectToPoint, CGRectZero)) // CGZero is passed to diaplay in the middle of the screen
+        {
+            startFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - startFrame.size.width * 0.5f;
+            startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
+        }
+        else // make it point to a specific part of the screen
+        {
+            
+            startFrame.origin.x = rectToPoint.origin.x - startFrame.size.width - 8.0f;
+            startFrame.origin.y = rectToPoint.origin.y - MIN(startFrame.size.height - 50.0f, rectToPoint.origin.y - 20.0f);
+            
+            self.arrowForOverlayImageView.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
+            
+            CGRect arrowFrame = self.arrowForOverlayImageView.frame;
+            arrowFrame.origin.x = rectToPoint.origin.x - arrowFrame.size.width + 4.0f;
+            arrowFrame.origin.y = rectToPoint.origin.y;
+            self.arrowForOverlayImageView.frame = arrowFrame;
+            
+            self.arrowForOverlayImageView.alpha = 0.0f;
+            [self.view addSubview:self.arrowForOverlayImageView];
+            
+        }
+        
         
         self.overlayController.view.alpha = 0.0;
         
         self.overlayController.view.layer.cornerRadius = 8.0f;
-        [self.overlayController.view setClipsToBounds:YES];
+        self.overlayController.view.clipsToBounds = YES;
     }
     
     self.overlayController.view.frame = startFrame;
@@ -306,6 +336,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         else
         {
             self.overlayController.view.alpha = 1.0;
+            self.arrowForOverlayImageView.alpha = 1.0f;
         }
     };
     
@@ -358,6 +389,8 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         {
             wself.overlayController.view.alpha = 0.0f;
             
+            wself.arrowForOverlayImageView.alpha = 0.0f;
+            
         }
         
     };
@@ -382,6 +415,10 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
             [popoverable finishingPresentation];
         }
         
+        if(IS_IPAD)
+        {
+            [wself.arrowForOverlayImageView removeFromSuperview];
+        }
         
         [wself.overlayController.view removeFromSuperview];
         [wself.overlayController removeFromParentViewController];

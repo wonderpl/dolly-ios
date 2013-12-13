@@ -319,7 +319,18 @@
     
     SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
     
-    [appDelegate.masterViewController addOverlayController:commentController animated:YES];
+    // in cell coords
+    CGRect buttonFrame = socialButton.frame;
+    
+    // from in cell coords to out cell coords
+    buttonFrame = [self.view convertRect:buttonFrame fromView:socialButton.superview];
+    
+    // from current vc coords to master view coords
+    buttonFrame = [appDelegate.masterViewController.view convertRect:buttonFrame fromView:self.view];
+    
+    [appDelegate.masterViewController addOverlayController:commentController
+                                                  animated:YES
+                                            pointingToRect:buttonFrame];
 
     
 }
@@ -656,14 +667,8 @@
                                                       socialControl.enabled = YES;
                                                       
                                                   }];
-            
-            
         }
-        
-        
-        
     }
-    
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle
@@ -822,21 +827,18 @@
 
 	SYNChannelDetailsViewController *channelVC =
 	(SYNChannelDetailsViewController *) [self viewControllerOfClass:[SYNChannelDetailsViewController class]];
-
-    BOOL isChannelCreation = (BOOL)(channel == appDelegate.videoQueue.currentlyCreatingChannel);
-    kChannelDetailsMode correctMode = isChannelCreation ? kChannelDetailsModeDisplay : kChannelDetailsModeDisplay;
-    
+	
 	if (channelVC) // we found a channelVC
     {
 		channelVC.channel = channel;
-        channelVC.mode = correctMode;
+        channelVC.mode = kChannelDetailsModeDisplay;
         
 		[self.navigationController popToViewController:channelVC animated:YES];
 	}
     else
     {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
-                                                                   usingMode:correctMode];
+                                                                   usingMode:kChannelDetailsModeDisplay];
 		
 		[self.navigationController pushViewController:channelVC animated:YES];
 	}
@@ -852,6 +854,45 @@
 		}
 	}
 	return nil;
+}
+
+- (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel {
+	button.enabled = NO;
+	
+	if (channel.subscribedByUserValue) {
+		[appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:appDelegate.currentOAuth2Credentials.userId
+														  channelId:channel.uniqueId
+												  completionHandler:^(NSDictionary *responseDictionary) {
+													  channel.hasChangedSubscribeValue = YES;
+													  channel.subscribedByUserValue = NO;
+													  channel.subscribersCountValue -= 1;
+													  
+													  button.selected = NO;
+													  button.enabled = YES;
+												  } errorHandler: ^(NSDictionary *errorDictionary) {
+													  button.enabled = YES;
+												  }];
+		
+	} else {
+		[appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+													   channelURL: channel.resourceURL
+												completionHandler: ^(NSDictionary *responseDictionary) {
+													id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+													
+													[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+																										   action: @"userSubscription"
+																											label: nil
+																											value: nil] build]];
+													channel.hasChangedSubscribeValue = YES;
+													channel.subscribedByUserValue = YES;
+													channel.subscribersCountValue += 1;
+													
+													button.selected = YES;
+													button.enabled = YES;
+												} errorHandler: ^(NSDictionary *errorDictionary) {
+													button.enabled = YES;
+												}];
+	}
 }
 
 @end

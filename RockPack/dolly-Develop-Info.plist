@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>APIHostName</key>
-	<string>api.demo.rockpack.com</string>
+	<string>api.dev.wonderplc.com</string>
 	<key>BuildTarget</key>
 	<string>Develop</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -64,7 +64,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>SecureAPIHostName</key>
-	<string>secure.demo.rockpack.com</string>
+	<string>secure.dev.wonderplc.com</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ProximaNova-Light.otf</string>

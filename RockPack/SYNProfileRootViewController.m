@@ -61,11 +61,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *followersCountButton;
 
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
-@property (nonatomic, strong) NSArray* arrFollowing;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 
 @property (nonatomic, strong) NSIndexPath *channelsIndexPath;
-@property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 @property (nonatomic, strong) NSIndexPath *subscriptionsIndexPath;
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadCoverPhotoButton;
@@ -89,14 +87,12 @@
 
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
-@property (strong, nonatomic) IBOutlet UIView *userProfileView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) IBOutlet UIButton *avatarButton;
 
 @property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatiorView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 @property (strong, nonatomic) IBOutlet UITextView *aboutMeTextView;
 
@@ -113,11 +109,9 @@
 @property (strong, nonatomic) UIColor *tabTextColor;
 
 @property (nonatomic, assign) BOOL searchMode;
-@property (nonatomic,assign) CGFloat startingPosition;
 @property (strong, nonatomic) IBOutlet UISearchBar *followingSearchBar;
 @property (strong, nonatomic) IBOutlet UIView *containerViewIPad;
 @property (nonatomic) ProfileType modeType;
-@property (nonatomic) CGPoint offsetBeforeSearch;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancelEditMode;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancelCreateChannel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSaveEditMode;
@@ -132,7 +126,6 @@
 
 @property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
 
-@property (strong, nonatomic) SYNProfileFlowLayout *testLayoutIPhone;
 @property  (nonatomic) BOOL creatingChannel;
 
 @property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
@@ -141,7 +134,6 @@
 @property (nonatomic) NSRange dataRequestRangeChannel;
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
 
-@property (nonatomic) NSArray *tmpArray;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
 
@@ -620,22 +612,7 @@
     return YES;
 }
 
-
-#pragma mark - Deletion wobble layout delegate
-
-- (BOOL) isDeletionModeActiveForCollectionView: (UICollectionView *) collectionView
-                                        layout: (UICollectionViewLayout *) collectionViewLayout
-{
-    return NO;
-}
-
-
 #pragma mark - Orientation
-
-- (void) willRotateToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation duration: (NSTimeInterval) duration
-{
-}
-
 
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
 {
@@ -782,36 +759,6 @@
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
 }
-
-
-#pragma mark - Updating
-
-- (NSString *) getHeaderTitleForChannels
-{
-    if (self.isIPhone)
-    {
-        if (self.channelOwner == appDelegate.currentUser)
-        {
-            return NSLocalizedString(@"profile_screen_section_owner_created_title", nil);
-        }
-        else
-        {
-            return NSLocalizedString(@"profile_screen_section_user_created_title", nil);
-        }
-    }
-    else
-    {
-        if (self.channelOwner == appDelegate.currentUser)
-        {
-            return NSLocalizedString(@"profile_screen_section_owner_created_title", nil);
-        }
-        else
-        {
-            return NSLocalizedString(@"profile_screen_section_user_created_title", nil);
-        }
-    }
-}
-
 
 #pragma mark - UICollectionView DataSource/Delegate
 
@@ -1011,7 +958,6 @@
         }
         else
         {
-            //  self.indexPathToDelete = indexPath;
             channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         }
         if (modeType == kModeMyOwnProfile)
