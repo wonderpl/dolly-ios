@@ -173,15 +173,15 @@
 - (void) addSubscriptionsObject: (Channel *) value_
 {
     [self.subscriptionsSet addObject: value_];
-    value_.subscribedByUserValue = YES;
-    value_.subscribersCountValue++;
+//    value_.subscribedByUserValue = YES;
+//    value_.subscribersCountValue++;
 }
 
 
 - (void) removeSubscriptionsObject: (Channel *) value_
 {
-    value_.subscribedByUserValue = NO;
-    value_.subscribersCountValue--;
+//    value_.subscribedByUserValue = NO;
+//    value_.subscribersCountValue--;
     [self.subscriptionsSet removeObject: value_];
 }
 
