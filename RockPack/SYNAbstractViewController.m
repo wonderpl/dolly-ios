@@ -31,6 +31,7 @@
 #import "Video.h"
 #import "VideoInstance.h"
 #import "GAI+Tracking.h"
+#import "SYNActivityManager.h"
 @import QuartzCore;
 
 #define kScrollContentOff 100.0f
@@ -581,10 +582,9 @@
         if (channel.subscribedByUserValue == NO)
         {
             // Subscribe
-            [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                           channelURL: channel.resourceURL
-                                                    completionHandler: ^(NSDictionary *responseDictionary) {
-                                                        
+
+            [SYNActivityManager.sharedInstance subscribeToChannel:channel
+                                                completionHandler: ^(NSDictionary *responseDictionary) {
                                                         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                                         
                                                         [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
@@ -597,6 +597,8 @@
                                                         
                                                         socialControl.selected = YES;
                                                         socialControl.enabled = YES;
+                                                        
+                                                        
                                                     } errorHandler: ^(NSDictionary *errorDictionary) {
                                                         socialControl.enabled = YES;
                                                     }];
@@ -604,8 +606,7 @@
         else
         {
             // Unsubscribe
-            [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                              channelId: channel.uniqueId
+            [SYNActivityManager.sharedInstance unsubscribeToChannel:channel
                                                       completionHandler: ^(NSDictionary *responseDictionary) {
                                                           channel.hasChangedSubscribeValue = YES;
                                                           channel.subscribedByUserValue = NO;
