@@ -24,7 +24,6 @@
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
-#import "SYNAvatarButton.h"
 #import <UIButton+WebCache.h>
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
@@ -46,7 +45,7 @@ UIPopoverControllerDelegate>
 @property (nonatomic, weak) Channel *originalChannel;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
-@property (strong, nonatomic) IBOutlet SYNAvatarButton *btnAvatar;
+@property (strong, nonatomic) IBOutlet UIButton *btnAvatar;
 @property (strong, nonatomic) IBOutlet UILabel *lblFullName;
 @property (strong, nonatomic) IBOutlet UILabel *lblDescription;
 @property (strong, nonatomic) IBOutlet UILabel *lblChannelTitle;

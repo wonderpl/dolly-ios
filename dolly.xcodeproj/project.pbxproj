@@ -3698,12 +3698,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E9E1E27A18561C780051E312 /* SYNiPhonePopoverAnimator.h */,
-				E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */,
-				E9E1E27C18561C780051E312 /* SYNPopoverAnimator.h */,
-				E9E1E27D18561C780051E312 /* SYNPopoverAnimator.m */,
-				E9E1E27E18561C780051E312 /* SYNiPadPopoverAnimator.h */,
-				E9E1E27F18561C780051E312 /* SYNiPadPopoverAnimator.m */,
+				E9B8A501185B209B00F0D625 /* Animators */,
 				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
@@ -6031,6 +6026,19 @@
 				BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */,
 			);
 			name = "Video Queue";
+			sourceTree = "<group>";
+		};
+		E9B8A501185B209B00F0D625 /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				E9E1E27A18561C780051E312 /* SYNiPhonePopoverAnimator.h */,
+				E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */,
+				E9E1E27C18561C780051E312 /* SYNPopoverAnimator.h */,
+				E9E1E27D18561C780051E312 /* SYNPopoverAnimator.m */,
+				E9E1E27E18561C780051E312 /* SYNiPadPopoverAnimator.h */,
+				E9E1E27F18561C780051E312 /* SYNiPadPopoverAnimator.m */,
+			);
+			name = Animators;
 			sourceTree = "<group>";
 		};
 		E9E1E27918561BFF0051E312 /* Paging Models */ = {
