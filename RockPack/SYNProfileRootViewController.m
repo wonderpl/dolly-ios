@@ -189,7 +189,8 @@
 {
     [super viewDidLoad];
     
-    
+    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
+
     self.shouldBeginEditing = YES;
     self.collectionsTabActive = YES;
     
@@ -385,6 +386,8 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationItem.title = @"";
+    
+    [self reloadCollectionViews];
     
 }
 
@@ -886,17 +889,14 @@
                     [videoCountString appendString:@"- "];
                 }
                 
-                
                 [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
             }
         }
-        
         if(self.modeType == kModeOtherUsersProfile)
         {
-            
-            if (channel.subscribedByUserValue)
+            if ([SYNActivityManager.sharedInstance isSubscribedToChannelId:channel.uniqueId])
             {
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
             }
@@ -1102,8 +1102,23 @@
         
         MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
             weakSelf.loadingMoreContent = NO;
+            NSError *error = nil;
+            
             [weakSelf.channelOwner setSubscriptionsDictionary: dictionary];
+//#warning cache all the channels to activity manager?
+            // is there a better way?
+            // can use the range object, this should be poosible
+            if (self.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
+                for (Channel *tmpChannel in self.channelOwner.channels) {
+                    [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
+                }
+            }
+            
+            [self.channelOwner.managedObjectContext save: &error];
+
             [self.subscriptionThumbnailCollectionView reloadData];
+            
+        
         };
     
         // define success block //
@@ -1599,6 +1614,10 @@
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     
+    
+    self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
+    
+    
     if (self.channelOwner.subscribedByUserValue) {
         [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
     }
@@ -1861,17 +1880,18 @@
     {
 //#warning change to make the call to servers
         
-        if (self.followCell.channel.subscribedByUserValue == NO)
-        {
 
-        // To prevent crashes that would occur when faulting object that have disappeared
+            // To prevent crashes that would occur when faulting object that have disappeared
         NSManagedObjectID *channelObjectId = self.followCell.channel.objectID;
         NSManagedObjectContext *channelObjectMOC = self.followCell.channel.managedObjectContext;
+
         
-        [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                       channelURL: self.followCell.channel.resourceURL
-                                                completionHandler: ^(NSDictionary *responseDictionary) {
-                                                    
+        self.followCell.channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:self.followCell.channel.uniqueId];
+        
+        if (!self.followCell.channel.subscribedByUserValue) {
+            
+        [SYNActivityManager.sharedInstance subscribeToChannel:self.followCell.channel
+                                            completionHandler: ^(NSDictionary *responseDictionary) {
                                                     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                                     
                                                     NSError *error = nil;
@@ -1886,12 +1906,10 @@
                                                                                                                 value: nil] build]];
                                                         
                                                         // This notifies the ChannelDetails through KVO
-                                                        channelFromId.hasChangedSubscribeValue = YES;
-                                                        channelFromId.subscribedByUserValue = YES;
-                                                        channelFromId.subscribersCountValue += 1;
+//                                                        channelFromId.hasChangedSubscribeValue = YES;
+//                                                        channelFromId.subscribedByUserValue = YES;
+//                                                        channelFromId.subscribersCountValue += 1;
                                                         
-                                                        
-                                                        NSLog(@"%@, %hhd",channelFromId.title, channelFromId.subscribedByUserValue);
                                                         // the channel that got updated was a copy inside the ChannelDetails, so we must copy it to user@
                                                         IgnoringObjects copyFlags = kIgnoreVideoInstanceObjects;
                                                         
@@ -1899,13 +1917,13 @@
                                                                                                    andViewId: kProfileViewId
                                                                                    usingManagedObjectContext: appDelegate.currentUser.managedObjectContext
                                                                                          ignoringObjectTypes: copyFlags];
-                                                        subscription.hasChangedSubscribeValue = YES;                   
+
                                                         [appDelegate.currentUser addSubscriptionsObject: subscription];
                                                         
                                                         // might be in search context
                                                         [channelFromId.managedObjectContext save: &error];
                                                         
-                                                        [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+                                                            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
                                                         
                                                         if (error)
                                                         {
@@ -1926,15 +1944,15 @@
                                                     [[NSNotificationCenter defaultCenter] postNotificationName: kUpdateFailed
                                                                                                         object: self];
                                                 }];
-
-        }
-        else if (self.followCell.channel.subscribedByUserValue == YES)
+    }
+        else
         {
+            
             NSManagedObjectID *channelOwnerObjectId = self.followCell.channel.objectID;
             NSManagedObjectContext *channelOwnerObjectMOC = self.followCell.channel.managedObjectContext;
             
-            [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                              channelId: self.followCell.channel.uniqueId
+            
+            [SYNActivityManager.sharedInstance unsubscribeToChannel:self.followCell.channel
                                                       completionHandler: ^(NSDictionary *responseDictionary) {
                                                           // Find our object from it's ID
                                                           NSError *error = nil;
@@ -1943,9 +1961,9 @@
                                                           if (channelFromId)
                                                           {
                                                               // This notifies the ChannelDetails through KVO
-                                                              channelFromId.hasChangedSubscribeValue = YES;
-                                                              channelFromId.subscribedByUserValue = NO;
-                                                              channelFromId.subscribersCountValue -= 1;
+//                                                              channelFromId.hasChangedSubscribeValue = YES;
+//                                                              channelFromId.subscribedByUserValue = NO;
+//                                                              channelFromId.subscribersCountValue -= 1;
                                                               
                                                               // the channel that got updated was a copy inside the ChannelDetails, so we must find the original and update it.
                                                               for (Channel * subscription in appDelegate.currentUser.subscriptions)
@@ -1984,15 +2002,6 @@
             
             
         }
-//        //Need to refresh the cell
-//        if (self.followCell.channel.subscribedByUserValue == YES)
-//        {
-//            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-//        }
-//        else
-//        {
-//            [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
-//        }
     }
 }
 
@@ -2014,14 +2023,10 @@
         // Sub to channel
         if (self.followCell.channel != nil)
         {
-            
-            
             NSManagedObjectID *channelOwnerObjectId = self.followCell.channel.objectID;
             NSManagedObjectContext *channelOwnerObjectMOC = self.followCell.channel.managedObjectContext;
-            
-            [appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                              channelId: self.followCell.channel.uniqueId
-                                                      completionHandler: ^(NSDictionary *responseDictionary) {
+            //Unfollow only as in ownchannel mode!
+            [SYNActivityManager.sharedInstance unsubscribeToChannel:self.followCell.channel                                       completionHandler: ^(NSDictionary *responseDictionary) {
                                                           // Find our object from it's ID
                                                           NSError *error = nil;
                                                           Channel *channelFromId = (Channel *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
@@ -2029,9 +2034,8 @@
                                                           if (channelFromId)
                                                           {
                                                               // This notifies the ChannelDetails through KVO
-                                                              channelFromId.hasChangedSubscribeValue = YES;
-                                                              channelFromId.subscribedByUserValue = NO;
-                                                              channelFromId.subscribersCountValue -= 1;
+//                                                              channelFromId.hasChangedSubscribeValue = YES;
+//                                                              channelFromId.subscribersCountValue -= 1;
                                                               
                                                               // the channel that got updated was a copy inside the ChannelDetails, so we must find the original and update it.
                                                               for (Channel * subscription in appDelegate.currentUser.subscriptions)
@@ -2044,9 +2048,18 @@
                                                                   }
                                                               }
                                                               
-                                                              [channelFromId.managedObjectContext save: &error];
+                                                              channelFromId.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:channelFromId.uniqueId];
                                                               
-                                                              [self.followCell setFollowButtonLabel:NSLocalizedString(@"follow", @"follow")];
+                                                              [channelFromId.managedObjectContext save: &error];
+                                                              [self.channelThumbnailCollectionView reloadData];
+                                                              
+                                                              if (self.followCell.channel.subscribedByUserValue) {
+                                                                  [self.followCell setFollowButtonLabel:NSLocalizedString(@"unfollow", @"unfollow")];
+                                                              }
+                                                              else
+                                                              {
+                                                                  [self.followCell setFollowButtonLabel:NSLocalizedString(@"follow", @"follow")];
+                                                              }
                                                               
                                                               if (error)
                                                               {
@@ -2077,37 +2090,40 @@
     {
         
         
-        if(self.channelOwner.subscribedByUser == [NSNumber numberWithBool:NO])
+        self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
+        
+        
+        if(self.channelOwner.subscribedByUserValue)
         {
-            [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
-                                                        subUserId: self.channelOwner.uniqueId
-                                                completionHandler: ^(id responce) {
-                                                    
-                                                    self.channelOwner.subscribedByUser = [NSNumber numberWithBool:YES];
-                                                    [self.followAllButton setTitle:@"unfollow" forState:UIControlStateNormal];
-                                                    
-                                                    [appDelegate saveContext: YES];
-
-                                                } errorHandler: ^(id error) {
-                                                    
-                                                    
-                                                }];
+            
+            [SYNActivityManager.sharedInstance unsubscribeToUser:self.channelOwner
+                                               completionHandler:^(id responce) {
+                                                   
+                                                   self.channelOwner.subscribedByUser = [NSNumber numberWithBool:NO];
+                                                   [self.followAllButton setTitle:@"follow" forState:UIControlStateNormal];
+                                                   [appDelegate saveContext: YES];
+                                                   
+                                                   
+                                               } errorHandler:^(id error) {
+                                                   
+                                                   NSLog(@"%@",error);
+                                               }];
         }
         else
         {
-            [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
-                                                          subUserId:self.channelOwner.uniqueId
-                                                  completionHandler:^(id responce) {
-                                                      
-                                                      self.channelOwner.subscribedByUser = [NSNumber numberWithBool:NO];
-                                                      [self.followAllButton setTitle:@"follow" forState:UIControlStateNormal];
-                                                      [appDelegate saveContext: YES];
-
-                                                      
-                                                  } errorHandler:^(id error) {
-                                                      
-                                                  }];
             
+            [SYNActivityManager.sharedInstance subscribeToUser:self.channelOwner
+                                             completionHandler: ^(id responce) {
+                                                 
+                                                 [self.followAllButton setTitle:@"unfollow" forState:UIControlStateNormal];
+                                                 
+                                                 [appDelegate saveContext: YES];
+                                                 
+                                             } errorHandler: ^(id error) {
+                                                 
+                                                 
+                                             }];
+
             
         }
 
@@ -2407,7 +2423,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
                                       {
                                           if ([message isKindOfClass: [NSArray class]])
                                           {
-                                              //                                                   self.errorLabel.text = (NSString *) ((NSArray *) message)[0];
+                                              //self.errorLabel.text = (NSString *) ((NSArray *) message)[0];
                                               
                                               NSLog(@"Error %@", message);
                                           }

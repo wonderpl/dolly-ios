@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
+#import "SYNActivityManager.h"
+
 #import "SYNChannelDetailsViewController.h"
 #import "Appirater.h"
 #import "Channel.h"
@@ -29,6 +31,8 @@
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNProfileRootViewController.h"
+#import "SYNChannelVideosModel.h"
+#import "SYNCarouselVideoPlayerViewController.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 149.0f
@@ -37,9 +41,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate,
-SYNImagePickerControllerDelegate,
-UIPopoverControllerDelegate>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, SYNImagePickerControllerDelegate, SYNPagingModelDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
@@ -84,6 +86,7 @@ UIPopoverControllerDelegate>
 @property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
 @property (nonatomic) BOOL isLocked;
 
+@property (nonatomic, strong) SYNChannelVideosModel *model;
 
 @end
 
@@ -97,21 +100,18 @@ UIPopoverControllerDelegate>
 {
     if ((self = [super initWithViewId: kChannelDetailsViewId]))
     {
-        self.dataRequestRange = NSMakeRange(0, kAPIInitialBatchSize);
-        
         // mode must be set first because setChannel relies on it...
         self.mode = mode;
         self.channel = channel;
+		
+		self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
     }
     
     return self;
 }
 
-- (void) dealloc
-{
-    
-    
-    
+- (void)dealloc {
+	
 }
 
 #pragma mark - View lifecyle
@@ -120,6 +120,7 @@ UIPopoverControllerDelegate>
 {
     [super viewDidLoad];
     
+    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -266,6 +267,7 @@ UIPopoverControllerDelegate>
     
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
+	self.model.delegate = self;
 }
 
 - (void) viewWillDisappear: (BOOL) animated
@@ -393,25 +395,6 @@ UIPopoverControllerDelegate>
     }
 }
 
-
-#pragma helper methods to move views
--(void) moveView:(UIView*) movingView withY: (CGFloat) y
-{
-    CGRect tmpFrame;
-    tmpFrame = movingView.frame;
-    tmpFrame.origin.y -= y;
-    movingView.frame = tmpFrame;
-    
-}
-
--(void) moveView:(UIView*) movingView withX: (CGFloat) x
-{
-    CGRect tmpFrame;
-    tmpFrame = movingView.frame;
-    tmpFrame.origin.x -= x;
-    movingView.frame = tmpFrame;
-}
-
 -(void) displayChannelDetails
 {
     
@@ -450,6 +433,7 @@ UIPopoverControllerDelegate>
     
     [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
     
+    self.channel.subscribedByUserValue =[SYNActivityManager.sharedInstance isSubscribedToChannelId:self.channel.uniqueId];
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
     if ([self.channel.totalVideosValue integerValue] == 0)
@@ -493,22 +477,32 @@ UIPopoverControllerDelegate>
 }
 #pragma mark - Control Actions
 
-// == just changed ipad to this call check if okay
 - (void) followControlPressed: (SYNSocialButton *) socialControl
 {
-
     if (self.channel != nil)
     {
-     
+        if (self.channel.subscribedByUserValue) {
+            [SYNActivityManager.sharedInstance unsubscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
+                
+                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
 
-        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
-                                                            object: self
-                                                          userInfo: @{kChannel : self.channel}];
+            } errorHandler:^(NSDictionary *error) {
+                
+            }];
+        }
+        else
+        {
+            [SYNActivityManager.sharedInstance subscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
+                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+                
+            } errorHandler:^(NSDictionary *error) {
+                
+            }];
+        }
+        
+        
+        
     }
-    
-    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-    
-    
     
 }
 
@@ -555,18 +549,7 @@ UIPopoverControllerDelegate>
 {
     [super scrollViewDidScroll:scrollView];
     
-    // TODO: Implement rest if needed
-    
-    
-    if (scrollView.contentSize.height > 0 && (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight)
-        && self.isLoadingMoreContent == NO)
-    {
-        [self loadMoreVideos];
-    }
-    
-    
     [self moveHeader:scrollView.contentOffset.y];
-    
 }
 
 -(void) moveHeader:(CGFloat) offset
@@ -743,23 +726,22 @@ UIPopoverControllerDelegate>
     if (self.channel)
     {
         // check for subscribed
-        self.channel.subscribedByUserValue = NO;
+//        self.channel.subscribedByUserValue = NO;
+//        
+//        for (Channel *subscription in appDelegate.currentUser.subscriptions)
+//        {
+//            if ([subscription.uniqueId isEqualToString: self.channel.uniqueId])
+//            {
+//                self.channel.subscribedByUserValue = YES;
+//            }
+//        }
         
-        for (Channel *subscription in appDelegate.currentUser.subscriptions)
-        {
-            if ([subscription.uniqueId isEqualToString: self.channel.uniqueId])
-            {
-                self.channel.subscribedByUserValue = YES;
-            }
-        }
+        self.channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:self.channel.uniqueId];
+        
         
         if ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
         {
             [self updateChannelOwnerWithUser];
-            
-            // set the request to maximum
-            
-            self.dataRequestRange = NSMakeRange(0, 48);
         }
         
         [[NSNotificationCenter defaultCenter] addObserver: self
@@ -831,10 +813,6 @@ UIPopoverControllerDelegate>
         
         if (obj == self.channel)
         {
-            self.dataItemsAvailable = self.channel.totalVideosValueValue;
-            //does this do anything, do i need it?
-            //   self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-            
             if (self.subscribingIndicator)
             {
                 [self.subscribingIndicator removeFromSuperview];
@@ -862,16 +840,12 @@ UIPopoverControllerDelegate>
         }
     }];
     
-    
-    
     if ((self.channel.channelOwner.displayName !=  nil) && (self.txtFieldChannelName.text == nil))
     {
         [self displayChannelDetails];
     }
     
 }
-
-
 
 - (void) reloadCollectionViews
 {
@@ -881,32 +855,24 @@ UIPopoverControllerDelegate>
 
 #pragma mark - Collection Delegate/Data Source Methods
 
-- (NSInteger) collectionView: (UICollectionView *) collectionView numberOfItemsInSection: (NSInteger) section
-{
-    return self.channel.videoInstances.count;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+	return [self.model itemCount];
 }
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
-{
-    return 1;
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+	return 1;
 }
 
 
-- (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
-                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    
-    
+- (UICollectionViewCell *)collectionView:(UICollectionView *) collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SYNCollectionVideoCell *videoThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]
                                                                                            forIndexPath:indexPath];
     
+	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
-    VideoInstance *videoInstance = self.channel.videoInstances [indexPath.item];
-    
-    
-    [videoThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: videoInstance.video.thumbnailURL]
-                                 placeholderImage: [UIImage imageNamed: @"PlaceholderVideoWide.png"]
-                                          options: SDWebImageRetryFailed];
+    [videoThumbnailCell.imageView setImageWithURL:[NSURL URLWithString:videoInstance.video.thumbnailURL]
+                                 placeholderImage:[UIImage imageNamed:@"PlaceholderVideoWide.png"]
+                                          options:SDWebImageRetryFailed];
     
     videoThumbnailCell.titleLabel.text = videoInstance.title;
     
@@ -922,7 +888,6 @@ UIPopoverControllerDelegate>
         videoThumbnailCell.shareControl.hidden = NO;
         videoThumbnailCell.addControl.hidden = NO;
         videoThumbnailCell.deleteButton.hidden = YES;
-        
     }
     
     [videoThumbnailCell setVideoInstance:videoInstance];
@@ -932,116 +897,31 @@ UIPopoverControllerDelegate>
         [videoThumbnailCell setUpVideoTap];
     }
     
-    
-    
     return videoThumbnailCell;
 }
 
-
-
-- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
-            viewForSupplementaryElementOfKind: (NSString *) kind
-                                  atIndexPath: (NSIndexPath *) indexPath
-{
-    UICollectionReusableView *supplementaryView;
-    
-    if (kind == UICollectionElementKindSectionFooter)
-    {
-        self.footerView = [self.videoThumbnailCollectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                                                withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
-                                                                                       forIndexPath:indexPath];
-        
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+		   viewForSupplementaryElementOfKind:(NSString *)kind
+								 atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *supplementaryView = nil;
+	if (kind == UICollectionElementKindSectionFooter) {
+        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                             withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
+                                                                    forIndexPath:indexPath];
         supplementaryView = self.footerView;
-        
-        if (self.channel.videoInstances.count > 0 && self.moreItemsToLoad)
-        {
-            self.footerView.showsLoading = self.isLoadingMoreContent;
-        }
+		
+		if ([self.model hasMoreItems]) {
+			self.footerView.showsLoading = YES;
+			
+			[self.model loadNextPage];
+		}
     }
-    
+	
     return supplementaryView;
 }
 
-
-- (CGSize) collectionView: (UICollectionView *) collectionView
-                   layout: (UICollectionViewLayout *) collectionViewLayout
-referenceSizeForFooterInSection: (NSInteger) section
-{
-    CGSize footerSize;
-    
-    if (collectionView == self.videoThumbnailCollectionView &&
-        self.channel.videoInstances.count != 0)
-    {
-        footerSize = [self footerSize];
-        
-        
-        if (self.moreItemsToLoad)
-        {
-            footerSize = CGSizeMake(1.0f, 5.0f);
-        }
-    }
-    else
-    {
-        footerSize = CGSizeZero;
-    }
-    
-    return footerSize;
-}
-
-
-- (void) loadMoreVideos
-{
-    //data should be up to date
-    //this should not be needed
-    self.dataItemsAvailable = self.channel.totalVideosValueValue;
-    
-    if(!self.moreItemsToLoad)
-        return;
-    
-    self.loadingMoreContent = YES;
-    
-    
-    [self incrementRangeForNextRequest];
-    
-    __weak typeof(self) weakSelf = self;
-    
-    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
-        weakSelf.loadingMoreContent = NO;
-        
-        [weakSelf.channel addVideoInstancesFromDictionary: dictionary];
-        
-        NSError *error;
-        [weakSelf.channel.managedObjectContext
-         save: &error];
-    };
-    
-    // define success block //
-    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
-        weakSelf.loadingMoreContent = NO;
-        DebugLog(@"Update action failed");
-    };
-
-	// We want to load the current user's channel securely since it isn't cached and we always want to
-	// make sure we get the latest data for the user's own channel in case they've made an edit
-	if ([self.channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
-		[appDelegate.oAuthNetworkEngine videosForChannelForUserId:appDelegate.currentUser.uniqueId
-														channelId:self.channel.uniqueId
-														  inRange:self.dataRequestRange
-												completionHandler:successBlock
-													 errorHandler:errorBlock];
-	} else {
-		[appDelegate.networkEngine videosForChannelForUserId:self.channel.channelOwner.uniqueId
-												   channelId:self.channel.uniqueId
-													 inRange:self.dataRequestRange
-										   completionHandler:successBlock
-												errorHandler:errorBlock];
-	}
-}
-
-
-- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    // the method is being replaced by the 'videoButtonPressed' because other elements on the cell migth be interactive as well
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+	return ((collectionView == self.videoThumbnailCollectionView && [self.model hasMoreItems]) ? [self footerSize] : CGSizeZero);
 }
 
 - (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
@@ -1050,6 +930,16 @@ referenceSizeForFooterInSection: (NSInteger) section
     [self updateLayoutForOrientation: toInterfaceOrientation];
 }
 
+
+#pragma mark - SYNPagingModelDelegate
+
+- (void)pagingModelDataUpdated {
+    [self.videoThumbnailCollectionView reloadData];
+}
+
+- (void)pagingModelErrorOccurred {
+	
+}
 
 - (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation
 {
@@ -1075,23 +965,6 @@ referenceSizeForFooterInSection: (NSInteger) section
         }
     }
 }
-
-//- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
-//        ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
-//                                                green: (57.0f / 255.0f)
-//                                                 blue: (57.0f / 255.0f)
-//                                                alpha: 0.5f];
-//
-//}
-//
-//- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
-//    ((SYNCollectionVideoCell*)cell).overlayView.backgroundColor = nil;
-//}
-//
-//
-
 
 -(void) centreView : (UIView*) viewToCentre
 {
@@ -1123,27 +996,18 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
-    
-    SYNMasterViewController *masterViewController = (SYNMasterViewController *) appDelegate.masterViewController;
-    
-    NSArray *videoInstancesToPlayArray = self.channel.videoInstances.array;
-    
-    [masterViewController addVideoOverlayToViewController: self
-                                   withVideoInstanceArray: videoInstancesToPlayArray
-                                         andSelectedIndex: indexPath.item
-                                               fromCenter: self.view.center];
-    
+	
+	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
+																					   selectedIndex:indexPath.item];
+	[self presentViewController:viewController animated:YES completion:nil];
+	
     selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
                                                                green: (57.0f / 255.0f)
                                                                 blue: (57.0f / 255.0f)
                                                                alpha: 0.5f];
-    
+	
+	
 }
-
-//
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-//
-//}
 
 
 #pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods

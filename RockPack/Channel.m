@@ -286,8 +286,9 @@
                                        usingManagedObjectContext: self.managedObjectContext];
     }
     
-    self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribed:self.uniqueId];
+//    self.subscribedByUserValue = YES;
     
+    self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
 }
 
 

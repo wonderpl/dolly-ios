@@ -199,6 +199,7 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
 	if ([keyPath isEqualToString:@"videoInstance"]) {
 		VideoInstance *previousVideoInstance = change[NSKeyValueChangeOldKey];
 		[self trackVideoViewingStatisticsForVideoInstance:previousVideoInstance withVideoPlayer:self.currentVideoPlayer];
@@ -235,8 +236,8 @@
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	self.videoTitleLabel.text = videoInstance.title;
 	
-	self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribed:videoInstance.channel.uniqueId];
-	
+	self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:videoInstance.channel.uniqueId];
+           
 	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;
 	
