@@ -22,6 +22,7 @@
 #import "SubGenre.h"
 #import "UIColor+SYNColor.h"
 #import "SYNDeviceManager.h"
+#import "SYNActivityManager.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
@@ -269,10 +270,11 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     if(socialControl.selected == NO)
     {
-        [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
-                                                    subUserId: channelOwner.uniqueId
-                                            completionHandler: ^(id responce) {
-                                                
+//        [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
+//                                                    subUserId: channelOwner.uniqueId
+
+        [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
+                                           completionHandler: ^(id responce) {
                                                 socialControl.selected = YES;
                                                 socialControl.enabled = YES;
                                                 
@@ -286,8 +288,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     }
     else
     {
-        [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
-                                                      subUserId:channelOwner.uniqueId
+        [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
                                               completionHandler:^(id responce) {
                                                   
                                                   socialControl.selected = NO;
