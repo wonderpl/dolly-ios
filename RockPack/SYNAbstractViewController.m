@@ -860,33 +860,40 @@
 	button.enabled = NO;
 	
 	if (channel.subscribedByUserValue) {
-		[appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:appDelegate.currentOAuth2Credentials.userId
-														  channelId:channel.uniqueId
+        
+        
+        
+        
+//		[appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:appDelegate.currentOAuth2Credentials.userId
+//														  channelId:channel.uniqueId
+        
+        [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
 												  completionHandler:^(NSDictionary *responseDictionary) {
-													  channel.hasChangedSubscribeValue = YES;
-													  channel.subscribedByUserValue = NO;
-													  channel.subscribersCountValue -= 1;
 													  
 													  button.selected = NO;
 													  button.enabled = YES;
 												  } errorHandler: ^(NSDictionary *errorDictionary) {
 													  button.enabled = YES;
 												  }];
+        
+        
 		
 	} else {
-		[appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-													   channelURL: channel.resourceURL
-												completionHandler: ^(NSDictionary *responseDictionary) {
+//		[appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+//													   channelURL: channel.resourceURL
+        [[SYNActivityManager sharedInstance] subscribeToChannel: channel
+
+    completionHandler: ^(NSDictionary *responseDictionary) {
 													id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
 													
 													[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
 																										   action: @"userSubscription"
 																											label: nil
 																											value: nil] build]];
-													channel.hasChangedSubscribeValue = YES;
-													channel.subscribedByUserValue = YES;
-													channel.subscribersCountValue += 1;
-													
+//													channel.hasChangedSubscribeValue = YES;
+//													channel.subscribedByUserValue = YES;
+//													channel.subscribersCountValue += 1;
+								
 													button.selected = YES;
 													button.enabled = YES;
 												} errorHandler: ^(NSDictionary *errorDictionary) {
