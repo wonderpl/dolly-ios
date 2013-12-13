@@ -18,6 +18,14 @@
 @property (nonatomic, strong) IBOutlet UITextView* commentTextView;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loader;
+
+@property (nonatomic, weak) NSDate* datePosted;
+
+@property (nonatomic, strong) NSArray* mainElements; // to dim when loading
+
+@property (nonatomic) BOOL loading;
+
 @property (nonatomic, weak) Comment* comment;
 
 +(UIFont*)commentFieldFont;

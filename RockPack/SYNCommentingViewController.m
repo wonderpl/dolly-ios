@@ -14,6 +14,9 @@
 #import "Comment.h"
 #import "SYNDeviceManager.h"
 #import <QuartzCore/QuartzCore.h>
+#import <objc/runtime.h>
+
+#define kCell_2_Comment_Association_Key @"kCell_2_Comment_Association_Key"
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 static NSString* PlaceholderText = @"Say something nice";
@@ -36,6 +39,8 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, strong) IBOutlet UIImageView* sendMessageAvatarmageView;
 @property (nonatomic, strong) IBOutlet UIButton* sendMessageButton;
 
+@property (nonatomic, strong) NSMutableArray* unvalidatedCommentsQueue;
+
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
 @property (nonatomic, strong) NSMutableArray* comments;
@@ -57,6 +62,8 @@ static NSString* PlaceholderText = @"Say something nice";
     return self;
 }
 
+#pragma mark - View Life Cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -67,7 +74,8 @@ static NSString* PlaceholderText = @"Say something nice";
     
     oldContentSizeHeight = self.sendMessageTextView.contentSize.height;
     
-    // as we reset the height to match the number of lines through KVO we need to add the differece for the white space around the active area of the TextView
+    self.unvalidatedCommentsQueue = @[].mutableCopy;
+    
     differenceBetweenHeightAndContentSizeHeight = self.sendMessageTextView.frame.size.height - oldContentSizeHeight;
     
     self.sendMessageTextView.text = PlaceholderText;
@@ -112,6 +120,29 @@ static NSString* PlaceholderText = @"Say something nice";
     
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear: animated];
+    
+    // observer the size of the text view to set the frame accordingly
+    [self.sendMessageTextView addObserver:self
+                               forKeyPath:kTextViewContentSizeKey
+                                  options:NSKeyValueObservingOptionNew
+                                  context:nil];
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self.sendMessageTextView removeObserver:self forKeyPath:kTextViewContentSizeKey];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - Keyboard Animation
+
 - (void) keyboardNotified:(NSNotification*)notification
 {
     
@@ -119,6 +150,7 @@ static NSString* PlaceholderText = @"Say something nice";
     NSTimeInterval animationDuration;
     UIViewAnimationCurve animationCurve;
     
+    // Get the values from the Keyboard Animation to match it exactly
     
     CGRect keyboardFrame;
     [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
@@ -183,25 +215,7 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - KVO
 
--(void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear: animated];
-    
-    // observer the size of the text view to set the frame accordingly
-    [self.sendMessageTextView addObserver:self
-                               forKeyPath:kTextViewContentSizeKey
-                                  options:NSKeyValueObservingOptionNew
-                                  context:nil];
-}
 
-- (void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    [self.sendMessageTextView removeObserver:self forKeyPath:kTextViewContentSizeKey];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -211,30 +225,32 @@ static NSString* PlaceholderText = @"Say something nice";
         
         CGFloat newContentSizeHeight = self.sendMessageTextView.contentSize.height;
         
-        CGFloat diff = newContentSizeHeight - oldContentSizeHeight;
+        CGFloat diff = newContentSizeHeight - oldContentSizeHeight - differenceBetweenHeightAndContentSizeHeight;
         
+        // just subtract it the first time and then set to 0 (I do not know or care why it works!)
+        differenceBetweenHeightAndContentSizeHeight = 0;
         
-        // offset View
+        // = offset View = //
         
         CGRect bottonViewFrame = self.bottomContainerView.frame;
-        
         bottonViewFrame.origin.y -= diff;
         bottonViewFrame.size.height += diff;
-        
         self.bottomContainerView.frame = bottonViewFrame;
         
         
         
-        // offset TextView
-        CGRect tvFrame = self.sendMessageTextView.frame;
+        // = offset TextView = //
         
-        //tvFrame.origin.y -= diff;
+        CGRect tvFrame = self.sendMessageTextView.frame;
+    
         tvFrame.size.height += diff;
         
         self.sendMessageTextView.frame = tvFrame;
         
         
-        // set image
+        
+        
+        // = set image = //
         
         CGRect imgFrame = self.sendMessageAvatarmageView.frame;
         
@@ -342,7 +358,8 @@ static NSString* PlaceholderText = @"Say something nice";
                                  @"position": self.maxCommentPosition,
                                  @"resource_url": @"",
                                  @"comment": text,
-                                 @"date_added": @"2013-12-10T18:15:57.319368",
+                                 @"validated" : @(NO), // not yet loaded from the server
+                                 // @"date_added" : not passing the case will default to [NSDate date] which is correct
                                  @"user": @{
                                          @"id": appDelegate.currentUser.uniqueId,
                                          @"resource_url": @"",
@@ -364,15 +381,17 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     NSString* commentText = self.sendMessageTextView.text;
     
-    [self.comments addObject:[self createCommentFromText:commentText]];
+    Comment* comment = [self createCommentFromText:commentText];
+    
+    
+    [self.comments addObject:comment];
+    
     
     self.sendMessageTextView.text = @"";
     
-    [self.sendMessageTextView resignFirstResponder];
-    
     [self.commentsCollectionView reloadData];
     
-    return;
+
     
     [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
                                                channelId:self.videoInstance.channel.uniqueId
@@ -380,9 +399,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                              withComment:commentText
                                        completionHandler:^(id dictionary) {
                                            
-                                           [self.comments addObject:[self createCommentFromText:commentText]];
-                                           
-                                           self.sendMessageTextView.text = @"";
+                                           comment.validatedValue = YES;
                                            
                                            [self.sendMessageTextView resignFirstResponder];
                                            
@@ -429,6 +446,8 @@ static NSString* PlaceholderText = @"Say something nice";
     if(self.maxCommentPosition.integerValue < comment.positionValue)
         self.maxCommentPosition = @(comment.positionValue);
     
+        
+    commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
     
     
     return commentingCell;

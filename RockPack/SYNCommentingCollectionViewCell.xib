@@ -34,9 +34,13 @@
                         <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12 min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDT-Lu-WjD" userLabel="Time Label">
-                        <rect key="frame" x="269" y="15" width="48" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDT-Lu-WjD" userLabel="Time Label">
+                        <rect key="frame" x="265" y="13" width="48" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="Kz7-XN-yuQ"/>
+                            <constraint firstAttribute="height" constant="21" id="lZ1-kv-Mn7"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -61,17 +65,31 @@
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HLr-5B-E4H">
+                        <rect key="frame" x="278" y="6" width="37" height="37"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="XsG-wb-RTW"/>
+                            <constraint firstAttribute="width" constant="37" id="uh8-GD-3CW"/>
+                        </constraints>
+                        <color key="color" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="GFo-x2-1G0" secondAttribute="trailing" id="0i5-Vq-Cex"/>
+                <constraint firstAttribute="centerY" secondItem="EDT-Lu-WjD" secondAttribute="centerY" id="4fA-Oh-Mx7"/>
                 <constraint firstItem="BiN-lJ-ozS" firstAttribute="top" secondItem="dvh-lB-F0U" secondAttribute="bottom" constant="5" id="Asr-H6-Yee"/>
                 <constraint firstAttribute="centerX" secondItem="dvh-lB-F0U" secondAttribute="centerX" constant="5.5" id="MMT-wr-A79"/>
+                <constraint firstAttribute="trailing" secondItem="HLr-5B-E4H" secondAttribute="trailing" constant="5" id="SzR-jG-lLC"/>
                 <constraint firstItem="dvh-lB-F0U" firstAttribute="top" secondItem="gff-ZC-bD7" secondAttribute="top" constant="7" id="Tw5-ne-EKs"/>
                 <constraint firstAttribute="bottom" secondItem="BiN-lJ-ozS" secondAttribute="bottom" id="VJz-DC-H6n"/>
+                <constraint firstAttribute="trailing" secondItem="EDT-Lu-WjD" secondAttribute="trailing" constant="7" id="nqp-QH-Xd1"/>
                 <constraint firstAttribute="bottom" secondItem="GFo-x2-1G0" secondAttribute="bottom" id="oXi-Ib-QpR"/>
+                <constraint firstItem="HLr-5B-E4H" firstAttribute="top" secondItem="gff-ZC-bD7" secondAttribute="top" constant="6" id="oyo-id-ERx"/>
                 <constraint firstItem="GFo-x2-1G0" firstAttribute="leading" secondItem="gff-ZC-bD7" secondAttribute="leading" id="rqe-Gg-FDk"/>
                 <constraint firstAttribute="centerX" secondItem="BiN-lJ-ozS" secondAttribute="centerX" constant="10.5" id="tTO-TH-Sg7"/>
             </constraints>
@@ -79,6 +97,7 @@
             <connections>
                 <outlet property="avatarButton" destination="vy5-fE-JoI" id="6Oe-qd-M7T"/>
                 <outlet property="commentTextView" destination="BiN-lJ-ozS" id="BqT-k6-Nn6"/>
+                <outlet property="loader" destination="HLr-5B-E4H" id="D96-0o-By6"/>
                 <outlet property="nameLabel" destination="dvh-lB-F0U" id="txl-Ui-XPw"/>
                 <outlet property="timeLabel" destination="EDT-Lu-WjD" id="Jvq-Ar-V8B"/>
             </connections>

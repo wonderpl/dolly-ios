@@ -59,6 +59,7 @@
         <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbnailUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="validated" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="videoInstanceId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CoverArt" representedClassName="CoverArt" parentEntity="AbstractCommon" syncable="YES">

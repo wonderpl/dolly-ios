@@ -46,9 +46,13 @@
     self.commentText = [dictionary objectForKey: @"comment"
                                     withDefault: @""];
     
+    // comments comming from the server do not have with value so they will default to YES which is correct, comments created on the fly will have it set to NO
+    self.validated = [dictionary objectForKey: @"validated"
+                                  withDefault: @(YES)];
+    
     
     self.dateAdded = [dictionary dateFromISO6801StringForKey: @"date_added"
-                                                 withDefault: [NSDate distantPast]];
+                                                 withDefault: [NSDate date]];
     
     
     

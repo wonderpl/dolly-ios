@@ -11,6 +11,7 @@ extern const struct CommentAttributes {
 	__unsafe_unretained NSString *position;
 	__unsafe_unretained NSString *thumbnailUrl;
 	__unsafe_unretained NSString *userId;
+	__unsafe_unretained NSString *validated;
 	__unsafe_unretained NSString *videoInstanceId;
 } CommentAttributes;
 
@@ -19,6 +20,7 @@ extern const struct CommentRelationships {
 
 extern const struct CommentFetchedProperties {
 } CommentFetchedProperties;
+
 
 
 
@@ -106,6 +108,20 @@ extern const struct CommentFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* validated;
+
+
+
+@property BOOL validatedValue;
+- (BOOL)validatedValue;
+- (void)setValidatedValue:(BOOL)value_;
+
+//- (BOOL)validateValidated:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* videoInstanceId;
 
 
@@ -161,6 +177,15 @@ extern const struct CommentFetchedProperties {
 
 - (NSString*)primitiveUserId;
 - (void)setPrimitiveUserId:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveValidated;
+- (void)setPrimitiveValidated:(NSNumber*)value;
+
+- (BOOL)primitiveValidatedValue;
+- (void)setPrimitiveValidatedValue:(BOOL)value_;
 
 
 
