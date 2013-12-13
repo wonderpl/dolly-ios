@@ -44,6 +44,12 @@
 }
 
 
+- (IBAction)commentControlPressed:(SYNSocialButton*) socialButton {
+    
+    [self.delegate commentControlPressed: socialButton];
+    
+}
+
 #pragma mark - Set Video Instance
 
 - (void) setVideoInstance: (VideoInstance *) videoInstance
