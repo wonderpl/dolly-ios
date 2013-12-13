@@ -2,7 +2,7 @@
 #import "Channel.h"
 #import "ChannelOwner.h"
 #import "NSDictionary+Validation.h"
-
+#import "SYNActivityManager.h"
 
 @implementation ChannelOwner
 
@@ -151,9 +151,6 @@
     {
         hasChannels = NO;
     }
-//#warning missing this subbyuservalue bit
-//    self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribed:self.uniqueId];
-
     
     if (!(ignoringObjects & kIgnoreChannelObjects) && hasChannels)
     {
@@ -216,6 +213,8 @@
             
             [self.managedObjectContext deleteObject: ch];
         }
+        
+        self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
     }
 }
 
@@ -279,8 +278,9 @@
             continue;
         }
         
-        channel.subscribedByUserValue = YES;
         
+        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
+
         [self addSubscriptionsObject: channel];
         
         channel.viewId = self.viewId;
@@ -298,6 +298,7 @@
         [self.managedObjectContext
          deleteObject: su];
     }
+
 }
 
 
