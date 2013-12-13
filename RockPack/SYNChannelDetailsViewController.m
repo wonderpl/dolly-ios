@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
+#import "SYNActivityManager.h"
+
 #import "SYNChannelDetailsViewController.h"
 #import "Appirater.h"
 #import "Channel.h"
@@ -133,6 +135,7 @@ UIPopoverControllerDelegate>
 {
     [super viewDidLoad];
     
+    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
     
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
@@ -482,6 +485,7 @@ UIPopoverControllerDelegate>
     
     [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
     
+    self.channel.subscribedByUserValue =[SYNActivityManager.sharedInstance isSubscribedToChannelId:self.channel.uniqueId];
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
     if ([self.channel.totalVideosValue integerValue] == 0)
@@ -525,22 +529,32 @@ UIPopoverControllerDelegate>
 }
 #pragma mark - Control Actions
 
-// == just changed ipad to this call check if okay
 - (void) followControlPressed: (SYNSocialButton *) socialControl
 {
-
     if (self.channel != nil)
     {
-     
+        if (self.channel.subscribedByUserValue) {
+            [SYNActivityManager.sharedInstance unsubscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
+                
+                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
 
-        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelSubscribeRequest
-                                                            object: self
-                                                          userInfo: @{kChannel : self.channel}];
+            } errorHandler:^(NSDictionary *error) {
+                
+            }];
+        }
+        else
+        {
+            [SYNActivityManager.sharedInstance subscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
+                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+                
+            } errorHandler:^(NSDictionary *error) {
+                
+            }];
+        }
+        
+        
+        
     }
-    
-    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-    
-    
     
 }
 
@@ -780,15 +794,18 @@ UIPopoverControllerDelegate>
     if (self.channel)
     {
         // check for subscribed
-        self.channel.subscribedByUserValue = NO;
+//        self.channel.subscribedByUserValue = NO;
+//        
+//        for (Channel *subscription in appDelegate.currentUser.subscriptions)
+//        {
+//            if ([subscription.uniqueId isEqualToString: self.channel.uniqueId])
+//            {
+//                self.channel.subscribedByUserValue = YES;
+//            }
+//        }
         
-        for (Channel *subscription in appDelegate.currentUser.subscriptions)
-        {
-            if ([subscription.uniqueId isEqualToString: self.channel.uniqueId])
-            {
-                self.channel.subscribedByUserValue = YES;
-            }
-        }
+        self.channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:self.channel.uniqueId];
+        
         
         if ([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
         {
