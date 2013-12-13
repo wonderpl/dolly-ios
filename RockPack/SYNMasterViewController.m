@@ -297,7 +297,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     {
         // only iPhone has startFrame since on iPad it appears in place, here we push it to the bottom first
         startFrame.origin.y = startFrame.size.height;
-        
+        self.overlayController.view.frame = startFrame;
     }
     else
     {
@@ -330,9 +330,11 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         self.overlayController.view.layer.cornerRadius = 8.0f;
         self.overlayController.view.clipsToBounds = YES;
+        
+        self.overlayController.view.frame = self.overlayControllerFrame = endFrame;
     }
     
-    self.overlayController.view.frame = self.overlayControllerFrame = endFrame;
+    
     
     
     void(^AnimationsBlock)(void) = ^{
@@ -667,7 +669,7 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
             currentOverlayFrame.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 120.0f;
             
             CGRect arrowRect = self.arrowForOverlayImageView.frame;
-            arrowRect.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 120.0f;
+            arrowRect.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 100.0f;
             
             self.arrowForOverlayImageView.frame = arrowRect;
         }

@@ -451,6 +451,7 @@ static NSString* PlaceholderText = @"Say something nice";
         
     commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
     
+    commentingCell.deletable = [comment.userId isEqualToString:appDelegate.currentUser.uniqueId]; // only the user can delete his own comments
     
     return commentingCell;
 }

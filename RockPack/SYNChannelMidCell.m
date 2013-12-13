@@ -73,8 +73,7 @@
     
     [self.deleteButton.titleLabel setFont:[UIFont lightCustomFontOfSize:19]];
     [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    //    [self.deleteButton setTitle:NSLocalizedString(@"Delete?", @"Delete a channel from profile") forState:UIControlStateNormal];
-    [self.deleteButton setTitle:@"Delete?" forState:UIControlStateNormal];
+    [self.deleteButton setTitle:NSLocalizedString(@"Delete ?", nil) forState:UIControlStateNormal];
     
     self.deletableCell = NO;
     

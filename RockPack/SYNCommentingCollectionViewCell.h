@@ -11,12 +11,16 @@
 
 #define kCommentTextSizeWidth 200.0f
 
-@interface SYNCommentingCollectionViewCell : UICollectionViewCell
+@interface SYNCommentingCollectionViewCell : UICollectionViewCell <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton* avatarButton;
 @property (nonatomic, strong) IBOutlet UILabel* nameLabel;
 @property (nonatomic, strong) IBOutlet UITextView* commentTextView;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
+
+@property (nonatomic, strong) IBOutlet UIView* containerView;
+
+@property (nonatomic, strong) IBOutlet UIButton* deleteButton;
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loader;
 
@@ -27,6 +31,9 @@
 @property (nonatomic) BOOL loading;
 
 @property (nonatomic, weak) Comment* comment;
+
+@property (nonatomic) BOOL deletable; // only for user generated comments
+
 
 +(UIFont*)commentFieldFont;
 +(CGRect)commentFieldFrame;

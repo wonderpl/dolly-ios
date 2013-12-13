@@ -325,4 +325,11 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
             completionHandler:(MKNKUserSuccessBlock) completionBlock
                  errorHandler:(MKNKUserErrorBlock) errorBlock;
 
+- (void) deleteCommentForUserId:(NSString*)userId
+                      channelId:(NSString*)channelId
+                        videoId:(NSString*)videoId
+                   andCommentId:(NSString*)commentId
+              completionHandler:(MKNKUserSuccessBlock) completionBlock
+                   errorHandler:(MKNKUserErrorBlock) errorBlock;
+
 @end

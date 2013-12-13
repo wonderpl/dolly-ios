@@ -12,6 +12,16 @@
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
 
+
+@interface SYNCommentingCollectionViewCell () <UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
+@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
+
+@property (nonatomic) BOOL cellOpenForDeletion;
+
+@end
+
 @implementation SYNCommentingCollectionViewCell
 
 - (void) awakeFromNib
@@ -35,6 +45,20 @@
     self.loader.hidden = YES;
     
     self.mainElements = @[self.avatarButton, self.nameLabel, self.commentTextView];
+    
+    
+    // == Gesture Recognisers == //
+    
+    
+    
+    [self.containerView addGestureRecognizer:self.leftSwipe];
+    
+    [self.deleteButton.titleLabel setFont:[UIFont lightCustomFontOfSize:19]];
+    
+    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [self.deleteButton setTitle:NSLocalizedString(@"Delete ?", nil) forState:UIControlStateNormal];
+    
 }
 
 - (void) setComment:(Comment *)comment
@@ -132,6 +156,88 @@
     self.timeLabel.text = [NSString stringWithString: dateDifferenceString];
 }
 
+#pragma mark - Gesture Recogniser
 
+- (void)gestureRecogniserCallback:(UISwipeGestureRecognizer*)recogniser
+{
+    if(recogniser.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
+        
+        
+        if(self.cellOpenForDeletion)
+            return;
+        
+        self.cellOpenForDeletion = YES;
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            
+            CGRect cRect = self.containerView.frame;
+            cRect.origin.x = -(self.deleteButton.frame.size.width);
+            self.containerView.frame = cRect;
+            
+        }];
+    }
+    else
+    {
+      
+        
+        if(!self.cellOpenForDeletion)
+            return;
+        
+        self.cellOpenForDeletion = NO;
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            
+            CGRect cRect = self.containerView.frame;
+            cRect.origin.x = 0;
+            self.containerView.frame = cRect;
+            
+        }];
+    }
+    
+    
+}
+
+- (void) setDeletable:(BOOL)deletable
+{
+    _deletable = deletable;
+    if (_deletable)
+    {
+        self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecogniserCallback:)];
+        
+        [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+        
+        self.rightSwipe.delegate = self;
+        
+        [self.containerView addGestureRecognizer:self.rightSwipe];
+        
+        self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecogniserCallback:)];
+        
+        [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+        
+        self.leftSwipe.delegate = self;
+    }
+    else
+    {
+        
+        [self clearSwipeGestureRecognisers];
+    }
+}
+
+- (void) prepareForReuse
+{
+    [super prepareForReuse];
+    
+    [self clearSwipeGestureRecognisers];
+}
+
+- (void) clearSwipeGestureRecognisers
+{
+    for (UIGestureRecognizer* recogniser in self.containerView.gestureRecognizers)
+    {
+        
+        [self.containerView removeGestureRecognizer:recogniser];
+    }
+}
 
 @end
