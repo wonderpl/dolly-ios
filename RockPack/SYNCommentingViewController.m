@@ -80,6 +80,8 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.sendMessageTextView.text = PlaceholderText;
     
+    self.sendMessageButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.sendMessageButton.titleLabel.font.pointSize];
+    
     UIColor* borderColor = [UIColor colorWithWhite:(170.0f/255.0f) alpha:1.0f];
     self.sendMessageTextView.layer.borderColor = borderColor.CGColor;
     self.sendMessageTextView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;

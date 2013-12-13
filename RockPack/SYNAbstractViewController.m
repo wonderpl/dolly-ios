@@ -318,7 +318,18 @@
     
     SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
     
-    [appDelegate.masterViewController addOverlayController:commentController animated:YES];
+    // in cell coords
+    CGRect buttonFrame = socialButton.frame;
+    
+    // from in cell coords to out cell coords
+    buttonFrame = [self.view convertRect:buttonFrame fromView:socialButton.superview];
+    
+    // from current vc coords to master view coords
+    buttonFrame = [appDelegate.masterViewController.view convertRect:buttonFrame fromView:self.view];
+    
+    [appDelegate.masterViewController addOverlayController:commentController
+                                                  animated:YES
+                                            pointingToRect:buttonFrame];
 
     
 }

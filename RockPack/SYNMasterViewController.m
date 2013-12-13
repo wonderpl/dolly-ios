@@ -237,8 +237,13 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
 	[self addOverlayController:viewController animated:YES];
 }
 
-
 - (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController animated:(BOOL)animated
+{
+    [self addOverlayController:overlayViewController animated:animated pointingToRect:CGRectZero];
+}
+- (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController
+                     animated:(BOOL)animated
+               pointingToRect:(CGRect)rectToPoint
 {
     if(!overlayViewController)
     {
@@ -283,8 +288,18 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     }
     else
     {
-        startFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - startFrame.size.width * 0.5f;
-        startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
+        
+        if(CGRectEqualToRect(rectToPoint, CGRectZero)) // CGZero is passed to diaplay in the middle of the screen
+        {
+            startFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - startFrame.size.width * 0.5f;
+            startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
+        }
+        else // make it point to a specific part of the screen
+        {
+            startFrame.origin.x = rectToPoint.origin.x - startFrame.size.width - 10.0f;
+            startFrame.origin.y = rectToPoint.origin.y - MIN(startFrame.size.height - 70.0f, rectToPoint.origin.y - 20.0f);
+        }
+        
         
         self.overlayController.view.alpha = 0.0;
         
