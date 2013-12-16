@@ -18,15 +18,15 @@
         return nil;
     
     
-    NSString *uniqueId = dictionary[@"id"];
+    NSNumber *uniqueId = dictionary[@"id"];
     
-    if (![uniqueId isKindOfClass: [NSString class]])
+    if (![uniqueId isKindOfClass: [NSNumber class]])
         return nil;
     
     
     Comment *instance = [Comment insertInManagedObjectContext: managedObjectContext];
     
-    instance.uniqueId = uniqueId;
+    instance.uniqueId = [uniqueId stringValue];
     
     
     [instance setAttributesFromDictionary: dictionary];

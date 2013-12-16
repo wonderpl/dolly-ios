@@ -58,11 +58,7 @@ static NSString* PlaceholderText = @"Say something nice";
     {
         
         self.videoInstance = videoInstance;
-        
-        
-        
-        
-        
+
     }
     
     return self;
@@ -302,7 +298,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     fetchRequest.entity = [NSEntityDescription entityForName: kComment
-                                      inManagedObjectContext: appDelegate.searchManagedObjectContext];
+                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     // comments relate to a specific video instance
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"videoInstanceId == %@", self.videoInstance.uniqueId]];
@@ -310,8 +306,8 @@ static NSString* PlaceholderText = @"Say something nice";
     fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
     
     NSError* error;
-    NSArray* fetchedArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                  error: &error];
+    NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                error: &error];
     
     self.comments = @[].mutableCopy;
     
