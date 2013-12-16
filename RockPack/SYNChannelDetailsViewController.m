@@ -551,7 +551,6 @@
     
     [self moveHeader:scrollView.contentOffset.y];
     
-    NSLog(@"%f", scrollView.contentOffset.y);
 }
 
 -(void) moveHeader:(CGFloat) offset
