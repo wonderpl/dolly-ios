@@ -73,15 +73,15 @@
         }
         
         if (dictionary[@"subscribed"]){
-//            [self.channelSubscriptions unionSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
+            [self.channelSubscriptions unionSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
             
-            [self.channelSubscriptions setSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
+//            [self.channelSubscriptions setSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
         }
         
         if (dictionary[@"user_subscribed"]){
-//            [self.userSubscriptons unionSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
+            [self.userSubscriptons unionSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
             
-            [self.userSubscriptons setSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
+//            [self.userSubscriptons setSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
             
         }
     }
