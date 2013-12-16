@@ -2112,11 +2112,13 @@
                                                 @"CHANNELID" : channelId,
                                                 @"VIDEOINSTANCEID" : videoId};
     
+    
+    
+    NSString* apiString = [kAPIComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
     // url : /ws/USERID/channels/CHANNELID/videos/VIDEOINSTANCEID/comments/COMMENTID/ (need to add the commentId to the end)
     
-    NSString* apiString = [NSString stringWithFormat:@"%@%@", kAPIComments, commentId];
-    
-    apiString = [kAPIComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    apiString = [NSString stringWithFormat:@"%@%@", apiString, commentId];
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
                                                                                                          params: nil

@@ -380,7 +380,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     NSDictionary* dictionary = @{
-                                 @"id" : @"13245",
+                                 @"id" : @"12345",
                                  @"position": self.maxCommentPosition,
                                  @"resource_url": @"",
                                  @"comment": text,
@@ -417,6 +417,22 @@ static NSString* PlaceholderText = @"Say something nice";
     
     [self.commentsCollectionView reloadData];
     
+    
+    __weak SYNCommentingViewController* wself = self;
+    
+    void(^ErrorBlock)(id) = ^(id error) {
+        
+        [wself deleteComment:comment];
+        
+        [wself.commentsCollectionView reloadData];
+        
+        [[[UIAlertView alloc] initWithTitle:@"Sorry..."
+                                    message:@"An error occured when sending your message..."
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    };
+    
 
     
     [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
@@ -425,20 +441,84 @@ static NSString* PlaceholderText = @"Say something nice";
                                              withComment:commentText
                                        completionHandler:^(id dictionary) {
                                            
+                                           if(![dictionary isKindOfClass:[NSDictionary class]] || ![dictionary objectForKey:@"id"])
+                                           {
+                                               ErrorBlock(@{@"error" : @"responce is not a discionary"});
+                                           }
+                                           
                                            comment.validatedValue = YES;
+                                           
+                                           comment.uniqueId = [dictionary objectForKey:@"id"]; // save the correct url in order to be able to delete
                                            
                                            [self.sendMessageTextView resignFirstResponder];
                                            
                                            [self.commentsCollectionView reloadData];
         
-                                       } errorHandler:^(id error) {
-                                           
-                                           
-        
-                                       }];
+                                       } errorHandler:ErrorBlock];
 }
 
+-(BOOL)deleteComment:(Comment*)comment
+{
+    
+    
+    [self.comments removeObject:comment];
+    
+    [comment.managedObjectContext deleteObject:comment];
+    
+    
+    NSError* saveError;
+    if(![comment.managedObjectContext save:&saveError])
+    {
+        // if we get an error...
+        if(!comment.isDeleted)
+        {
+            [self.comments addObject:comment]; // put it back
+        }
+        DebugLog(@"%@", saveError);
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+
 #pragma mark - Button Delegates
+
+-(void)deleteButtonPressed:(UIButton*)sender
+{
+    
+    UIView* candidate = sender;
+    while (![candidate isKindOfClass:[SYNCommentingCollectionViewCell class]]) {
+        candidate = candidate.superview;
+    }
+    
+    if(![candidate isKindOfClass:[SYNCommentingCollectionViewCell class]])
+        return;
+    
+    SYNCommentingCollectionViewCell* commentingCell = (SYNCommentingCollectionViewCell*)candidate;
+    
+    commentingCell.deleting = YES;
+    commentingCell.loading = YES;
+    
+    NSIndexPath* cellIndexPath = [self.commentsCollectionView indexPathForCell:commentingCell];
+    
+    Comment* comment = self.comments [cellIndexPath.item];
+    
+    [appDelegate.oAuthNetworkEngine deleteCommentForUserId:appDelegate.currentUser.uniqueId
+                                                 channelId:self.videoInstance.channel.uniqueId
+                                                   videoId:self.videoInstance.uniqueId
+                                              andCommentId:comment.uniqueId
+                                         completionHandler:^(id responce) {
+                                             
+                                             
+                                             [self deleteComment:comment];
+                                             
+        
+                                         } errorHandler:^(id error) {
+        
+                                         }];
+}
 
 - (IBAction)sendButtonPressed:(id)sender
 {
@@ -469,13 +549,21 @@ static NSString* PlaceholderText = @"Say something nice";
     
     commentingCell.comment = comment;
     
+    
+    
     if(self.maxCommentPosition.integerValue < comment.positionValue)
         self.maxCommentPosition = @(comment.positionValue);
     
         
     commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
     
-    commentingCell.deletable = [comment.userId isEqualToString:appDelegate.currentUser.uniqueId]; // only the user can delete his own comments
+    if([comment.userId isEqualToString:appDelegate.currentUser.uniqueId])
+    {
+        // only the user can delete his own comments
+        commentingCell.deletable = YES;
+        commentingCell.delegate = self;
+    }
+    
     
     return commentingCell;
 }

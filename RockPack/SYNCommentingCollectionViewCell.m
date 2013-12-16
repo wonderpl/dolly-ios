@@ -56,8 +56,30 @@
     
     [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [self.deleteButton setTitle:NSLocalizedString(@"Delete ?", nil) forState:UIControlStateNormal];
     
+    self.deleting = NO;
+    
+    
+    
+}
+
+- (void) setDelegate:(SYNCommentingViewController *)delegate
+{
+    if(_delegate)
+    {
+        [self.deleteButton removeTarget:_delegate
+                                 action:@selector(deleteButtonPressed:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    _delegate = delegate;
+    
+    if(!_delegate)
+        return;
+    
+    [self.deleteButton addTarget:_delegate
+                          action:@selector(deleteButtonPressed:)
+                forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) setComment:(Comment *)comment
@@ -195,6 +217,21 @@
     }
     
     
+}
+
+- (void) setDeleting:(BOOL)deleting
+{
+    if(deleting)
+    {
+        self.deleteButton.enabled = NO;
+        [self.deleteButton setTitle:@"" forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.deleteButton.enabled = YES;
+        [self.deleteButton setTitle:NSLocalizedString(@"Delete ?", nil) forState:UIControlStateNormal];
+        
+    }
 }
 
 - (void) setDeletable:(BOOL)deletable

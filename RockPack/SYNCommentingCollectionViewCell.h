@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class Comment;
-
+@class SYNCommentingViewController;
 #define kCommentTextSizeWidth 200.0f
 
 @interface SYNCommentingCollectionViewCell : UICollectionViewCell <UIGestureRecognizerDelegate>
@@ -35,7 +35,13 @@
 @property (nonatomic) BOOL deletable; // only for user generated comments
 
 
+@property (nonatomic) BOOL deleting;
+
+@property (nonatomic, weak) SYNCommentingViewController* delegate;
+
+
 +(UIFont*)commentFieldFont;
 +(CGRect)commentFieldFrame;
+
 
 @end
