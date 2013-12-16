@@ -55,26 +55,23 @@
     ProfileType modeType;
 }
 
-@property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
 @property (nonatomic) BOOL isIPhone;
 @property (nonatomic) BOOL isUserProfile;
 @property (nonatomic) BOOL trackView;
 @property (nonatomic, assign) BOOL collectionsTabActive;
-@property (strong, nonatomic) IBOutlet UIButton *followersCountButton;
 
 @property (nonatomic, strong) NSArray* arrDisplayFollowing;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 
 @property (nonatomic, strong) NSIndexPath *channelsIndexPath;
 @property (nonatomic, strong) NSIndexPath *subscriptionsIndexPath;
-
-@property (strong, nonatomic) IBOutlet UIButton *uploadCoverPhotoButton;
+//used for the search bar in subscriptions tab
 @property (nonatomic, strong) NSString *currentSearchTerm;
 @property (nonatomic, assign) BOOL shouldBeginEditing;
 
-@property (nonatomic, strong) id orientationDesicionmaker;
+@property (strong, nonatomic) IBOutlet UIButton *uploadCoverPhotoButton;
 
-@property (nonatomic, weak) IBOutlet UIButton *subscriptionsTabButton;
+@property (nonatomic, strong) id orientationDesicionmaker;
 
 @property (nonatomic, strong) SYNImagePickerController* imagePickerController;
 
@@ -82,14 +79,14 @@
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPad;
 @property (strong, nonatomic) IBOutlet UIButton *followAllButton;
-
+@property (strong, nonatomic) IBOutlet UIButton *followersCountButton;
+@property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPhone;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
-@property (strong, nonatomic) SYNProfileExpandedFlowLayout *channelExpandedLayout;
 
+@property (strong, nonatomic) SYNProfileExpandedFlowLayout *channelExpandedLayout;
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
-
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) IBOutlet UIButton *avatarButton;
 
@@ -107,7 +104,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadAvatarButton;
 
-@property (strong, nonatomic) UIColor *tabTextColor;
 
 @property (nonatomic, assign) BOOL searchMode;
 @property (strong, nonatomic) IBOutlet UISearchBar *followingSearchBar;
@@ -121,9 +117,12 @@
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
+
 @property (strong, nonatomic) UIAlertView *unfollowAlertView;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) UIAlertView *sameChannelNameAlertView;
+@property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
+
 
 @property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
 
@@ -135,7 +134,6 @@
 @property (nonatomic) NSRange dataRequestRangeChannel;
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
 
-@property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
 
 @end
@@ -202,7 +200,6 @@
     self.uploadAvatarButton.layer.masksToBounds = YES;
     self.uploadCoverPhotoButton.layer.cornerRadius = self.uploadCoverPhotoButton.frame.size.width/2;
     self.uploadCoverPhotoButton.layer.masksToBounds = YES;
-    self.tabTextColor = [UIColor dollyTabColorSelectedText];
     
     // == Registering nibs
     
@@ -457,7 +454,6 @@
     }
     
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -840,9 +836,7 @@
                             tmpBoarder.size.height-= 14;
                         }
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
-
         }
-        
     }
     else
     {
@@ -1096,7 +1090,7 @@
     
     if (self.collectionsTabActive)
     {
-        [self.followingTabButton.titleLabel setTextColor:self.tabTextColor];
+        [self.followingTabButton.titleLabel setTextColor:[UIColor dollyTabColorSelectedText]];
         self.followingTabButton.backgroundColor = [UIColor whiteColor];
         
         self.collectionsTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
@@ -1109,7 +1103,7 @@
         [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.followingTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
         
-        [self.collectionsTabButton.titleLabel setTextColor:self.tabTextColor];
+        [self.collectionsTabButton.titleLabel setTextColor:[UIColor dollyTabColorSelectedText]];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
         __weak typeof(self) weakSelf = self;
         
@@ -1124,7 +1118,7 @@
             // is there a better way?
             // can use the range object, this should be poosible
             if (self.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
-                for (Channel *tmpChannel in self.channelOwner.channels) {
+                for (Channel *tmpChannel in self.channelOwner.subscriptions) {
                     [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
                 }
             }
