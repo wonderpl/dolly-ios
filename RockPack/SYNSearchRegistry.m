@@ -425,7 +425,7 @@
                                    forViewId: (NSString *) viewId;
 {
     NSError *error;
-    NSArray *itemsToDelete;
+    NSArray *existingChannelOwners;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
@@ -435,38 +435,59 @@
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", viewId]];
     
     
-    itemsToDelete = [importManagedObjectContext executeFetchRequest: fetchRequest
-                                                              error: &error];
+    existingChannelOwners = [importManagedObjectContext executeFetchRequest: fetchRequest
+                                                                      error: &error];
     
+    NSMutableDictionary* channelOwnerById = [NSMutableDictionary dictionary];
     
+    for (ChannelOwner* co in existingChannelOwners)
+    {
+        if(!co.uniqueId)
+            continue;
+        
+        co.markedForDeletionValue = YES;
+        
+        channelOwnerById[co.uniqueId] = co;
+    }
     
-    NSDictionary *channelsDictionary = dictionary[@"users"];
+    NSDictionary *channelOwnersDictionary = dictionary[@"users"];
     
-    if (!channelsDictionary || ![channelsDictionary isKindOfClass: [NSDictionary class]])
+    if (![channelOwnersDictionary isKindOfClass: [NSDictionary class]])
     {
         return NO;
     }
     
-    NSArray *itemArray = channelsDictionary[@"items"];
-    
+    NSArray *itemArray = channelOwnersDictionary[@"items"];
     if (![itemArray isKindOfClass: [NSArray class]])
-    {
         return NO;
-    }
     
+    ChannelOwner *channelOwner;
     for (NSDictionary *itemDictionary in itemArray)
     {
-        ChannelOwner *user = [ChannelOwner instanceFromDictionary: itemDictionary
-                                        usingManagedObjectContext: importManagedObjectContext
-                                              ignoringObjectTypes: kIgnoreChannelObjects];
-        
-        if (!user)
-        {
-            DebugLog(@"Could not instantiate channel with data:\n%@", itemDictionary);
+        NSString* newChannelOwnerId = itemDictionary[@"id"];
+        if(![newChannelOwnerId isKindOfClass:[NSString class]])
             continue;
+        
+        if(!(channelOwner = channelOwnerById[newChannelOwnerId]))
+        {
+            if(!(channelOwner = [ChannelOwner instanceFromDictionary: itemDictionary
+                                           usingManagedObjectContext: importManagedObjectContext
+                                                 ignoringObjectTypes: kIgnoreChannelObjects]))
+            {
+                continue;
+            }
         }
         
-        user.viewId = viewId;
+        channelOwner.markedForDeletionValue = NO;
+        channelOwner.viewId = viewId;
+    }
+    
+    
+    for (NSString* key in channelOwnerById)
+    {
+        if((channelOwner = channelOwnerById[key]) && channelOwner.markedForDeletionValue)
+            [channelOwner.managedObjectContext delete:channelOwner];
+        
     }
     
     BOOL saveResult = [self saveImportContext];

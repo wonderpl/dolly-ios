@@ -776,9 +776,11 @@
         }
         
         [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            
             BOOL registryResultOk = [self.searchRegistry registerSubscribersFromDictionary: dictionary];
             
             return registryResultOk;
+            
         } completionBlock: ^(BOOL registryResultOk) {
             int itemsCount = 0;
             
