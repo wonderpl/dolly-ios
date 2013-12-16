@@ -15,13 +15,12 @@
      [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationBar.shadowImage = [UIImage new];
         self.navigationBar.translucent = YES;
-        self.view.backgroundColor = [UIColor blackColor];
+        self.view.backgroundColor = [UIColor clearColor];
 }
 
--(UINavigationBar*) setDefault
+-(void) setDefault
 {
  //TODO: good way to return default naigation bar
-    return self.navigationBar;
 }
 
 

@@ -11,7 +11,7 @@
 @interface UINavigationController (Appearance)
 
 -(void) setTransparent;
--(UINavigationBar*) setDefault;
+-(void) setDefault;
 
 
 @end
