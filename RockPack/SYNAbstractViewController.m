@@ -576,6 +576,8 @@
 
 }
 
+
+
 - (void) followControlPressed: (SYNSocialButton *) socialControl
 {
     if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
@@ -588,6 +590,8 @@
         
         // Temporarily disable the button to prevent multiple-clicks
         socialControl.enabled = NO;
+        
+        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:channel.uniqueId];
         
         // toggle subscription from/to channel //
         if (channel.subscribedByUserValue == NO)
