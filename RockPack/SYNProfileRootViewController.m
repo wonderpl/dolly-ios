@@ -32,6 +32,8 @@
 #import "SYNChannelCreateNewCell.h"
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
+#import "UINavigationController+Appearance.h"
+
 
 @import QuartzCore;
 
@@ -105,7 +107,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *uploadAvatarButton;
 
-@property (strong, nonatomic) UIColor *greyColor;
 @property (strong, nonatomic) UIColor *tabTextColor;
 
 @property (nonatomic, assign) BOOL searchMode;
@@ -201,7 +202,6 @@
     self.uploadAvatarButton.layer.masksToBounds = YES;
     self.uploadCoverPhotoButton.layer.cornerRadius = self.uploadCoverPhotoButton.frame.size.width/2;
     self.uploadCoverPhotoButton.layer.masksToBounds = YES;
-    self.greyColor = [UIColor dollyTabColorSelectedBackground];
     self.tabTextColor = [UIColor dollyTabColorSelectedText];
     
     // == Registering nibs
@@ -352,6 +352,8 @@
     [self.navigationController.navigationItem.leftBarButtonItem setTitle:@""];
     
     
+    [self.followAllButton.titleLabel setFont:[UIFont lightCustomFontOfSize:14.0f]];
+    
     // == Init alert views, Follow and Unfollow
     self.unfollowAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Unfollow?", @"Unfollow a channel in profile") message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
     
@@ -360,6 +362,9 @@
     self.sameChannelNameAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"New channels can not have the same titles", @"Unfollow a channel in profile") message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:nil];
 
     self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle] , nil];
+    
+    
+    
     
 }
 
@@ -374,20 +379,26 @@
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
     // == Transparent navigation bar
-    
+    //TODO: create a default navigation bar in category apperance for uinavigation+apperance
+
     self.tmpNavigationBarBackground = [[UIImage alloc]init];
     self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
     
     self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
     
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
+    [self.navigationController setTransparent];
     self.navigationItem.title = @"";
     
-    [self reloadCollectionViews];
+    if (self.channelOwner.subscribedByUserValue)
+    {
+        [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
+    }
+    
     
 }
 
@@ -614,6 +625,8 @@
 
 #pragma mark - Orientation
 
+
+//#warning is this needed check ipad
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
 {
     //Ensure the collection views are scrolled so the topmost cell in the tallest viewcontroller is again at the top.
@@ -1072,7 +1085,7 @@
 {
     
     self.collectionsTabButton.selected = !self.collectionsTabActive;
-    self.subscriptionsTabButton.selected = self.collectionsTabActive;
+    
     self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
     self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
     
@@ -1086,7 +1099,7 @@
         [self.followingTabButton.titleLabel setTextColor:self.tabTextColor];
         self.followingTabButton.backgroundColor = [UIColor whiteColor];
         
-        self.collectionsTabButton.backgroundColor = self.greyColor;
+        self.collectionsTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
         [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
         
         
@@ -1094,7 +1107,7 @@
     else
     {
         [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.followingTabButton.backgroundColor = self.greyColor;
+        self.followingTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
         
         [self.collectionsTabButton.titleLabel setTextColor:self.tabTextColor];
         self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
@@ -1103,6 +1116,8 @@
         MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
             weakSelf.loadingMoreContent = NO;
             NSError *error = nil;
+            
+//            NSLog(@"Return from sub update%@", dictionary);
             
             [weakSelf.channelOwner setSubscriptionsDictionary: dictionary];
 //#warning cache all the channels to activity manager?
@@ -1859,6 +1874,8 @@
     }
     
 }
+
+
 
 
 
