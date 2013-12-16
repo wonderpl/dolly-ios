@@ -16,6 +16,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
 
+#define kMaxCommentCharacters 120
+
 #define kCell_2_Comment_Association_Key @"kCell_2_Comment_Association_Key"
 
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
@@ -261,6 +263,15 @@ static NSString* PlaceholderText = @"Say something nice";
         self.sendMessageAvatarmageView.frame = imgFrame;
         
         
+        // = set image = //
+        
+        CGRect btnFrame = self.sendMessageButton.frame;
+        
+        btnFrame.origin.y += diff;
+        
+        self.sendMessageButton.frame = btnFrame;
+        
+        
         
         oldContentSizeHeight = newContentSizeHeight;
         
@@ -332,10 +343,14 @@ static NSString* PlaceholderText = @"Say something nice";
         self.sendMessageTextView.text = @"";
     }
 }
+
+
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     self.sendMessageTextView.text = PlaceholderText;
 }
+
+
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -345,6 +360,18 @@ static NSString* PlaceholderText = @"Say something nice";
         
         [self sendComment];
         return NO;
+    }
+    
+    
+    // == Exceeded character count ? == //
+    
+    if(textView.text.length >= kMaxCommentCharacters)
+    {
+        return NO;
+    }
+    else // (should be compiled away)
+    {
+        DebugLog(@"Remaining: %i", kMaxCommentCharacters - textView.text.length);
     }
     
     
