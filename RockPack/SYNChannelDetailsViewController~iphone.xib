@@ -198,6 +198,9 @@
                                 <color key="titleColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="videoCountTapped:" destination="-1" eventType="touchUpInside" id="AAR-Se-bNR"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" id="0Cs-sl-Vwi" userLabel="View - Seperator">
                             <rect key="frame" x="159" y="4" width="1" height="16"/>

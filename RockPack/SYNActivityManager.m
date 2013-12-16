@@ -50,27 +50,39 @@
     self.recentlyViewed = [[NSMutableSet alloc]init];
     self.channelSubscriptions = [[NSMutableSet alloc]init];
     self.userSubscriptons = [[NSMutableSet alloc]init];
-
     
     return self;
 }
 
+-(void)reset
+{
+    self.recentlyStarred = [[NSMutableSet alloc]init];
+    self.recentlyViewed = [[NSMutableSet alloc]init];
+    self.channelSubscriptions = [[NSMutableSet alloc]init];
+    self.userSubscriptons = [[NSMutableSet alloc]init];
+}
 
 -(void)registerActivityFromDictionary:(NSDictionary*)dictionary
 {
     if (dictionary)
     {
-        
         //Union in the case that the activity manager or the activity service is out of sync
         
         if (dictionary[@"recently_starred"]){
-            [self.recentlyStarred unionSet:[NSSet setWithArray:dictionary[@"recently_starred"]]];         }
+            [self.recentlyStarred unionSet:[NSMutableSet setWithArray:dictionary[@"recently_starred"]]];
+        }
+        
         if (dictionary[@"subscribed"]){
-            [self.channelSubscriptions unionSet:[NSSet setWithArray: dictionary[@"subscribed"]]];
+            [self.channelSubscriptions unionSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
+            
+//            [self.channelSubscriptions setSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
         }
         
         if (dictionary[@"user_subscribed"]){
-            [self.userSubscriptons unionSet:[NSSet setWithArray:dictionary[@"user_subscribed"]]];
+            [self.userSubscriptons unionSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
+            
+//            [self.userSubscriptons setSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
+            
         }
     }
     else
@@ -182,9 +194,21 @@
           completionHandler: (MKNKUserSuccessBlock) completionBlock
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
+//    NSLog(@"before");
+//    [self subscribedList];
+//
     [self.appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
+   
         [self.channelSubscriptions removeObject:channel.uniqueId];
         channel.subscribedByUserValue = NO;
+        
+//        
+//        NSLog(@"unsubscribe");
+//        NSLog(@"%@, %hhd", channel.title, channel.subscribedByUserValue);
+//        
+//        NSLog(@"after");
+//        [self subscribedList];
+        
         
         if (completionBlock)
         {
@@ -307,9 +331,6 @@
 {
     if(!userId)
         return nil;
-    
-//    NSLog(@"User Set: %@", self.userSubscriptons);
-    
     return [self.userSubscriptons containsObject:userId];
 }
 

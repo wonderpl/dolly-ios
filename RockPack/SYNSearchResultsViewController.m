@@ -18,6 +18,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "ChannelOwner.h"
 #import "VideoInstance.h"
+#import "SYNActivityManager.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
@@ -381,7 +382,8 @@ typedef void (^SearchResultCompleteBlock)(int);
         userCell.followButton.layer.borderWidth = 0.0f;
         userCell.followButton.backgroundColor = [UIColor clearColor];
         userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0f];
-        // ================= // 
+        userCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:userCell.channelOwner.uniqueId];
+        // ================= //
         
         cell = userCell;
     }

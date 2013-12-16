@@ -590,6 +590,8 @@
 
 }
 
+
+
 - (void) followControlPressed: (SYNSocialButton *) socialControl
 {
     if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
@@ -602,6 +604,8 @@
         
         // Temporarily disable the button to prevent multiple-clicks
         socialControl.enabled = NO;
+        
+        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:channel.uniqueId];
         
         // toggle subscription from/to channel //
         if (channel.subscribedByUserValue == NO)
@@ -617,9 +621,9 @@
                                                                                                                 label: nil
                                                                                                                 value: nil] build]];
                                                         channel.hasChangedSubscribeValue = YES;
-                                                        channel.subscribedByUserValue = YES;
-                                                        channel.subscribersCountValue += 1;
-                                                        
+//                                                        channel.subscribedByUserValue = YES;
+//                                                        channel.subscribersCountValue += 1;
+                                                    
                                                         socialControl.selected = YES;
                                                         socialControl.enabled = YES;
                                                         
@@ -634,8 +638,8 @@
             [SYNActivityManager.sharedInstance unsubscribeToChannel:channel
                                                       completionHandler: ^(NSDictionary *responseDictionary) {
                                                           channel.hasChangedSubscribeValue = YES;
-                                                          channel.subscribedByUserValue = NO;
-                                                          channel.subscribersCountValue -= 1;
+//                                                          channel.subscribedByUserValue = NO;
+//                                                          channel.subscribersCountValue -= 1;
                                                           socialControl.selected = NO;
                                                           socialControl.enabled = YES;
                                                       } errorHandler: ^(NSDictionary *errorDictionary) {
@@ -654,9 +658,11 @@
         
         if(socialControl.selected == NO)
         {
-            [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
-                                                        subUserId: channelOwner.uniqueId
-                                                completionHandler: ^(id responce) {
+//            [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
+//                                                        subUserId: channelOwner.uniqueId
+            
+            [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
+                                               completionHandler: ^(id responce) {
                                                     
                                                     socialControl.selected = YES;
                                                     socialControl.enabled = YES;
@@ -669,8 +675,9 @@
         }
         else
         {
-            [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
-                                                          subUserId:channelOwner.uniqueId
+//            [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
+//                                                          subUserId:channelOwner.uniqueId
+            [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
                                                   completionHandler:^(id responce) {
                                                       
                                                       socialControl.selected = NO;
@@ -872,15 +879,14 @@
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel {
 	button.enabled = NO;
-	
+	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
+    
 	if (channel.subscribedByUserValue) {
-        
-        
-        
         
 //		[appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:appDelegate.currentOAuth2Credentials.userId
 //														  channelId:channel.uniqueId
         
+        NSLog(@"Channel URL :%@", channel.resourceURL);
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
 												  completionHandler:^(NSDictionary *responseDictionary) {
 													  

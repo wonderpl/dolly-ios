@@ -51,6 +51,7 @@
                                                                                  target:self
                                                                                  action:@selector(rightBarButtonItemPressed:)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    self.moodCollectionView.scrollsToTop = NO;
     
     [self loadMoods];
     
