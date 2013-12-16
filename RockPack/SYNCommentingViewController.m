@@ -441,14 +441,18 @@ static NSString* PlaceholderText = @"Say something nice";
                                              withComment:commentText
                                        completionHandler:^(id dictionary) {
                                            
-                                           if(![dictionary isKindOfClass:[NSDictionary class]] || ![dictionary objectForKey:@"id"])
+                                           if(![dictionary isKindOfClass:[NSDictionary class]] ||
+                                              ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]])
                                            {
                                                ErrorBlock(@{@"error" : @"responce is not a discionary"});
                                            }
                                            
                                            comment.validatedValue = YES;
                                            
-                                           comment.uniqueId = [dictionary objectForKey:@"id"]; // save the correct url in order to be able to delete
+                                           NSNumber* commentId = (NSNumber*)[dictionary objectForKey:@"id"];
+                                           
+                                           // save the correct url in order to be able to delete
+                                           comment.uniqueId = [commentId stringValue];
                                            
                                            [self.sendMessageTextView resignFirstResponder];
                                            
@@ -512,7 +516,13 @@ static NSString* PlaceholderText = @"Say something nice";
                                          completionHandler:^(id responce) {
                                              
                                              
-                                             [self deleteComment:comment];
+                                             if([self deleteComment:comment])
+                                             {
+                                                 commentingCell.deleting = NO;
+                                                 commentingCell.loading = NO;
+                                             }
+                                             
+                                             [self.commentsCollectionView reloadData];
                                              
         
                                          } errorHandler:^(id error) {
@@ -576,13 +586,11 @@ static NSString* PlaceholderText = @"Say something nice";
     Comment* comment = self.comments[indexPath.item];
     // size
     
-    
-    
     UIFont* correctFont = [SYNCommentingCollectionViewCell commentFieldFont];
     
     CGRect rect = [comment.commentText boundingRectWithSize:(CGSize){kCommentTextSizeWidth, CGFLOAT_MAX}
                                                     options:NSStringDrawingUsesLineFragmentOrigin
-                                                 attributes:@{ NSFontAttributeName :  correctFont}
+                                                 attributes:@{ NSFontAttributeName :  correctFont }
                                                     context:nil];
     
     

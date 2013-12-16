@@ -10,6 +10,7 @@
 #import "Comment.h"
 #import "UIButton+WebCache.h"
 #import "UIFont+SYNFont.h"
+#import "SYNCommentingViewController.m"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -184,7 +185,6 @@
     if(recogniser.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         
-        
         if(self.cellOpenForDeletion)
             return;
         
@@ -268,6 +268,11 @@
     [super prepareForReuse];
     
     [self clearSwipeGestureRecognisers];
+    
+    self.loading = NO;
+    self.deleting = NO;
+    
+    
 }
 
 - (void) clearSwipeGestureRecognisers

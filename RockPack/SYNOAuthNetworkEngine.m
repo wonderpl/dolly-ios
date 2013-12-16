@@ -2122,7 +2122,7 @@
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
                                                                                                          params: nil
-                                                                                                     httpMethod: @"POST"
+                                                                                                     httpMethod: @"DELETE"
                                                                                                             ssl: YES];
     
     [networkOperation setPostDataEncoding: MKNKPostDataEncodingTypeJSON];

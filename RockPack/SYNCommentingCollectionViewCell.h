@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @class Comment;
 @class SYNCommentingViewController;
+
+
 #define kCommentTextSizeWidth 200.0f
 
 @interface SYNCommentingCollectionViewCell : UICollectionViewCell <UIGestureRecognizerDelegate>
