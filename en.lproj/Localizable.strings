@@ -264,6 +264,8 @@
 "Cannot have the same title?" = "Cannot have the same title?";
 "Delete channel" = "Delete channel";
 
+"Delete ?" = "Delete ?";
+
 //
 
 "Channel Unavailable" = "Channel Unavailable";
@@ -276,6 +278,8 @@
 "add" = "add";
 "like" = "like";
 "share" = "share";
+
+"back" = "back";
 
 // == Instructions == //
 

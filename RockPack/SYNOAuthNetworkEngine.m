@@ -2101,4 +2101,36 @@
     
 }
 
+- (void) deleteCommentForUserId:(NSString*)userId
+                      channelId:(NSString*)channelId
+                        videoId:(NSString*)videoId
+                   andCommentId:(NSString*)commentId
+              completionHandler:(MKNKUserSuccessBlock) completionBlock
+                   errorHandler:(MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId,
+                                                @"CHANNELID" : channelId,
+                                                @"VIDEOINSTANCEID" : videoId};
+    
+    
+    
+    NSString* apiString = [kAPIComments stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    // url : /ws/USERID/channels/CHANNELID/videos/VIDEOINSTANCEID/comments/COMMENTID/ (need to add the commentId to the end)
+    
+    apiString = [NSString stringWithFormat:@"%@%@", apiString, commentId];
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
+                                                                                                         params: nil
+                                                                                                     httpMethod: @"DELETE"
+                                                                                                            ssl: YES];
+    
+    [networkOperation setPostDataEncoding: MKNKPostDataEncodingTypeJSON];
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
 @end

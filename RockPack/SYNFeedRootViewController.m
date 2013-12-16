@@ -246,7 +246,7 @@ typedef void(^FeedDataErrorBlock)(void);
 #pragma mark - Helper Methods to get AggreagateCell's Data
 
 - (FeedItem *)feedItemAtIndexPath:(NSIndexPath *)indexPath {
-	return [self.model itemAtIndex:indexPath];
+	return [self.model itemAtIndex:indexPath.item];
 }
 
 #pragma mark - Click Cell Delegates
@@ -282,6 +282,7 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 - (void) profileButtonTapped: (UIButton *) profileButton {
+    
 	FeedItem *feedItem = [self feedItemFromView: profileButton];
 	
 	Channel *channel = [self.model channelForFeedItem:feedItem];

@@ -16,6 +16,7 @@
 #import "SYNPopoverable.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNContainerViewController.h"
+#import "SYNCommentingViewController.h"
 #import "SYNOnBoardingViewController.h"
 
 #import "Genre.h"
@@ -107,6 +108,16 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountSettingsPopover) name:kAccountSettingsPressed object:nil];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotified:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
     
     // add background view //
     
@@ -284,23 +295,23 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     self.overlayControllerFrame = startFrame = endFrame = self.overlayController.view.frame;
     if(IS_IPHONE)
     {
-        // push it to the bottom
+        // only iPhone has startFrame since on iPad it appears in place, here we push it to the bottom first
         startFrame.origin.y = startFrame.size.height;
-        
+        self.overlayController.view.frame = startFrame;
     }
     else
     {
         
         if(CGRectEqualToRect(rectToPoint, CGRectZero)) // CGZero is passed to diaplay in the middle of the screen
         {
-            startFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - startFrame.size.width * 0.5f;
-            startFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - startFrame.size.height * 0.5f;
+            endFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - endFrame.size.width * 0.5f;
+            endFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - endFrame.size.height * 0.5f;
         }
         else // make it point to a specific part of the screen
         {
             
-            startFrame.origin.x = rectToPoint.origin.x - startFrame.size.width - 8.0f;
-            startFrame.origin.y = rectToPoint.origin.y - MIN(startFrame.size.height - 50.0f, rectToPoint.origin.y - 20.0f);
+            endFrame.origin.x = rectToPoint.origin.x - endFrame.size.width - 8.0f;
+            endFrame.origin.y = rectToPoint.origin.y - MIN(endFrame.size.height - 50.0f, rectToPoint.origin.y - 20.0f);
             
             self.arrowForOverlayImageView.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
             
@@ -319,9 +330,11 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
         
         self.overlayController.view.layer.cornerRadius = 8.0f;
         self.overlayController.view.clipsToBounds = YES;
+        
+        self.overlayController.view.frame = self.overlayControllerFrame = endFrame;
     }
     
-    self.overlayController.view.frame = startFrame;
+    
     
     
     void(^AnimationsBlock)(void) = ^{
@@ -442,7 +455,49 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
     
 }
 
-
+-(void)keyboardNotified:(NSNotification*)notification
+{
+    if(IS_IPAD)
+    {
+        
+        if(self.overlayController && [self.overlayController isKindOfClass:[SYNCommentingViewController class]])
+        {
+            NSDictionary* userInfo = [notification userInfo];
+            NSTimeInterval animationDuration;
+            UIViewAnimationCurve animationCurve;
+            
+            // Get the values from the Keyboard Animation to match it exactly
+            
+            CGRect keyboardFrame;
+            [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+            [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+            [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
+            
+            CGRect overlayFrame = self.overlayController.view.frame;
+            if([notification.name isEqualToString:UIKeyboardWillShowNotification])
+                overlayFrame.origin.y = 60.0f;
+            else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
+                overlayFrame = self.overlayControllerFrame;
+            
+            
+            
+            __weak SYNMasterViewController* wself = self;
+            [UIView animateWithDuration:animationDuration delay:0.0f
+                                options:(animationCurve << 16) // convert AnimationCurve to AnimationOption
+                             animations:^{
+                                 
+                                 wself.overlayController.view.frame = overlayFrame;
+                             } completion:nil];
+            
+        }
+        
+        
+    }
+    else // is IPHONE
+    {
+        
+    }
+}
 
 #pragma mark - Video Overlay View
 
@@ -598,13 +653,29 @@ typedef void(^AnimationCompletionBlock)(BOOL finished);
                                             duration: duration];
     
     
-    if(self.overlayController)
+    if(IS_IPAD && self.overlayController)
     {
         CGRect currentOverlayFrame = self.overlayController.view.frame;
-        currentOverlayFrame.size = self.overlayControllerFrame.size;
-        currentOverlayFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5f - currentOverlayFrame.size.width * 0.5;
-        currentOverlayFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5f - currentOverlayFrame.size.height * 0.5;
+        if(![self.overlayController isKindOfClass:[SYNCommentingViewController class]])
+        {
+            
+            currentOverlayFrame.size = self.overlayControllerFrame.size;
+            currentOverlayFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5f - currentOverlayFrame.size.width * 0.5;
+            currentOverlayFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5f - currentOverlayFrame.size.height * 0.5;
+            
+        }
+        else
+        {
+            currentOverlayFrame.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 120.0f;
+            
+            CGRect arrowRect = self.arrowForOverlayImageView.frame;
+            arrowRect.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 100.0f;
+            
+            self.arrowForOverlayImageView.frame = arrowRect;
+        }
+        
         self.overlayController.view.frame = currentOverlayFrame;
+        
     }
 
     

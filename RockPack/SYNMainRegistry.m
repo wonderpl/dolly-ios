@@ -247,12 +247,12 @@
         if (![commentItemDictionary isKindOfClass: [NSDictionary class]])
             continue;
         
-        NSString* moodId = [commentItemDictionary objectForKey:@"id"];
+        NSString* commentId = [commentItemDictionary objectForKey:@"id"];
         
-        if(![moodId isKindOfClass:[NSString class]])
+        if(![commentId isKindOfClass:[NSNumber class]])
             continue;
         
-        if(!(comment = commentsById[moodId]))
+        if(!(comment = commentsById[commentId]))
         {
             if(!(comment = [Comment instanceFromDictionary:commentItemDictionary
                                  usingManagedObjectContext:importManagedObjectContext]))
@@ -262,6 +262,8 @@
         }
         
         comment.markedForDeletionValue = NO;
+        
+        NSLog(@">> %@", comment);
         
     }
     
