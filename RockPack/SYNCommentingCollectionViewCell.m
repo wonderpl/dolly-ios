@@ -51,7 +51,6 @@
     
     
     
-    [self.containerView addGestureRecognizer:self.leftSwipe];
     
     [self.deleteButton.titleLabel setFont:[UIFont lightCustomFontOfSize:19]];
     
@@ -216,6 +215,9 @@
         [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
         
         self.leftSwipe.delegate = self;
+        
+        
+        [self.containerView addGestureRecognizer:self.leftSwipe];
     }
     else
     {

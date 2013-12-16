@@ -117,9 +117,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                                object:self.view.window];
     
     
-   
-    
-    
     [self getCommentsFromServer];
     
 }
@@ -371,7 +368,7 @@ static NSString* PlaceholderText = @"Say something nice";
     }
     else // (should be compiled away)
     {
-        DebugLog(@"Remaining: %i", kMaxCommentCharacters - textView.text.length);
+        DebugLog(@"Characters Remaining: %i", kMaxCommentCharacters - textView.text.length);
     }
     
     
