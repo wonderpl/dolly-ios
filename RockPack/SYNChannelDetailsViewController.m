@@ -30,7 +30,7 @@
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
-#import "SYNProfileRootViewController.h"
+#import "UINavigationController+Appearance.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 149.0f
@@ -323,16 +323,15 @@ UIPopoverControllerDelegate>
     
     
     //Transparent navigation bar
-    self.tmpNavigationBarBackground = [[UIImage alloc]init];
-    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
+    //TODO: create category for navigation bar
+//    self.tmpNavigationBarBackground = [[UIImage alloc]init];
+//    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
+//    
+//    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
+//    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
     
-    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
+    [self.navigationController setTransparent];
     
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationItem.title = @"";
 
 }
@@ -581,6 +580,7 @@ UIPopoverControllerDelegate>
     
     [self moveHeader:scrollView.contentOffset.y];
     
+    NSLog(@"%f", scrollView.contentOffset.y);
 }
 
 -(void) moveHeader:(CGFloat) offset
@@ -786,7 +786,6 @@ UIPopoverControllerDelegate>
         
         if (self.mode == kChannelDetailsModeDisplay || self.mode == kChannelDetailsModeDisplayUser || self.mode == kChannelDetailsFavourites)
         {
-            
             [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
                                                                 object: self
                                                               userInfo: @{kChannel: self.channel}];
@@ -1595,7 +1594,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             
         }
     }
-    
+
     //[self.videoThumbnailCollectionView reloadData];
     
 }
@@ -1763,6 +1762,36 @@ referenceSizeForFooterInSection: (NSInteger) section
     {
         [self.navigationController pushViewController:subscribersViewController animated:YES];
     }
+    
+}
+- (IBAction)videoCountTapped:(id)sender {
+    
+    
+    if (IS_IPHONE)
+    {
+        if (self.channel.videoInstances.count < 3) {
+            return;
+        }
+
+        [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0, -80.0) animated:YES];
+    }
+    else
+    {
+        if (self.channel.videoInstances.count < 8) {
+            return;
+        }
+
+        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
+        {
+            [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0, -88.0) animated:YES];
+        }
+        else
+        {
+            [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0, -79.0) animated:YES];
+
+        }
+    }
+    
     
 }
 
