@@ -279,6 +279,8 @@
 "like" = "like";
 "share" = "share";
 
+"back" = "back";
+
 // == Instructions == //
 
 "instruction_packs_for_you" = "Here are some popular\nvideo packs for you";

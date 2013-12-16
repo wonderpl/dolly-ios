@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "SYNAppDelegate.h"
 #import "Comment.h"
+#import "SYNMasterViewController.h"
 #import "SYNDeviceManager.h"
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
@@ -59,6 +60,9 @@ static NSString* PlaceholderText = @"Say something nice";
         self.videoInstance = videoInstance;
         
         
+        
+        
+        
     }
     
     return self;
@@ -66,9 +70,23 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - View Life Cycle
 
+- (void) closeButtonPressed : (UIBarButtonItem*) barButton
+{
+    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:self
+                                                                            action:@selector(closeButtonPressed:)];
+    
+    
+    
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightGrayColor];
     
     self.comments = @[].mutableCopy; // avoid calling count on nil instance
     
@@ -433,7 +451,7 @@ static NSString* PlaceholderText = @"Say something nice";
                           otherButtonTitles:nil] show];
     };
     
-
+    NSLog(@"%@", self.videoInstance.uniqueId);
     
     [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
                                                channelId:self.videoInstance.channel.uniqueId
@@ -590,7 +608,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     CGRect rect = [comment.commentText boundingRectWithSize:(CGSize){kCommentTextSizeWidth, CGFLOAT_MAX}
                                                     options:NSStringDrawingUsesLineFragmentOrigin
-                                                 attributes:@{ NSFontAttributeName :  correctFont }
+                                                 attributes:@{ NSFontAttributeName : correctFont }
                                                     context:nil];
     
     

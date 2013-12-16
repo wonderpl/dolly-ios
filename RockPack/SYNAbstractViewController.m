@@ -319,18 +319,32 @@
     
     SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
     
-    // in cell coords
-    CGRect buttonFrame = socialButton.frame;
+    if(IS_IPAD)
+    {
+        // in cell coords
+        CGRect buttonFrame = socialButton.frame;
+        
+        // from in cell coords to out cell coords
+        buttonFrame = [self.view convertRect:buttonFrame fromView:socialButton.superview];
+        
+        // from current vc coords to master view coords
+        buttonFrame = [appDelegate.masterViewController.view convertRect:buttonFrame fromView:self.view];
+        
+        // if iPhone the rect is ingored
+        [appDelegate.masterViewController addOverlayController:commentController
+                                                      animated:YES
+                                                pointingToRect:buttonFrame];
+    }
+    else
+    {
+        UINavigationController* ncWrapper = [[UINavigationController alloc] initWithRootViewController:commentController];
+        ncWrapper.view.frame = commentController.view.frame;
+        
+        
+        [appDelegate.masterViewController addOverlayController:ncWrapper
+                                                      animated:YES];
+    }
     
-    // from in cell coords to out cell coords
-    buttonFrame = [self.view convertRect:buttonFrame fromView:socialButton.superview];
-    
-    // from current vc coords to master view coords
-    buttonFrame = [appDelegate.masterViewController.view convertRect:buttonFrame fromView:self.view];
-    
-    [appDelegate.masterViewController addOverlayController:commentController
-                                                  animated:YES
-                                            pointingToRect:buttonFrame];
 
     
 }

@@ -10,7 +10,7 @@
 #import "Comment.h"
 #import "UIButton+WebCache.h"
 #import "UIFont+SYNFont.h"
-#import "SYNCommentingViewController.m"
+#import "SYNCommentingViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 
