@@ -27,7 +27,10 @@
         self.backgroundColor = self.selectedColor;
         self.layer.borderColor = self.selectedColor.CGColor;
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
-    
+        [self setTitleColor: [UIColor whiteColor]
+                   forState: UIControlStateSelected];
+
+        
         
     }
     else
