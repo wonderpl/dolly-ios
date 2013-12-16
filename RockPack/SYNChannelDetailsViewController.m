@@ -30,6 +30,9 @@
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
+#import "SYNProfileRootViewController.h"
+#import "SYNChannelVideosModel.h"
+#import "SYNCarouselVideoPlayerViewController.h"
 #import "UINavigationController+Appearance.h"
 
 #define kHeightChange 70.0f
