@@ -253,6 +253,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                withTitle:subgenre.name
                  forType:kSearchTypeGenre];
     
+    // deselect cell since on iPhone it leads to another screen
+    if(IS_IPHONE)
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     
 }
@@ -289,6 +292,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                  forType:kSearchTypeTerm];
     
     [self closeAutocomplete];
+    
 }
 
 #pragma mark - UISearchBar Delegate and Autocomplete Methods
