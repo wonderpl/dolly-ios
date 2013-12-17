@@ -571,8 +571,8 @@
     self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.segmentedControlsView.layer.masksToBounds = YES;
     
-    [self.collectionsTabButton.titleLabel setFont:[UIFont lightCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
-    [self.followingTabButton .titleLabel setFont:[UIFont lightCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    [self.followingTabButton .titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
 }
 
 - (void) userDataChanged: (NSNotification*) notification
