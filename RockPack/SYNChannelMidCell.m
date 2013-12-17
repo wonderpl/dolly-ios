@@ -118,6 +118,11 @@
         self.videoTitleLabel.text = @"";
         return;
     }
+	
+	self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscribers", nil)];
+	self.videoCountLabel.text = [NSString stringWithFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
+	
+	self.descriptionLabel.text = channel.channelDescription;
     
     // TODO: figure out which color to put according to category color
     self.bottomBarView.backgroundColor = [UIColor grayColor];

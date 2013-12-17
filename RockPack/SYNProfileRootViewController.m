@@ -909,21 +909,8 @@
                 {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
                 }
-                [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
-
-                NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
-                [channelThumbnailCell.followerCountLabel setText:subscribersString];
-                
+				
                 channelThumbnailCell.channel = channel;
-                
-                NSMutableString* videoCountString = [NSMutableString new];
-                if (IS_IPHONE)
-                {
-                    [videoCountString appendString:@"- "];
-                }
-                
-                [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
-                channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
             }
         }

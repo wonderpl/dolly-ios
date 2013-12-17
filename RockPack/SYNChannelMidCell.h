@@ -9,10 +9,12 @@
 #import "Channel.h"
 @import UIKit;
 
+@class SYNChannelMidCell;
+
 @protocol SYNChannelMidCellDelegate <NSObject>
 
-- (void) followButtonTapped: (UICollectionViewCell *) cell;
-- (void) deleteChannelTapped: (UICollectionViewCell *) cell;
+- (void)followButtonTapped:(SYNChannelMidCell *)cell;
+- (void)deleteChannelTapped:(SYNChannelMidCell *)cell;
 
 
 typedef enum {
