@@ -365,6 +365,14 @@
     
 }
 
+-(void) setFollowersCountButton
+{
+        NSString *tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
+
+    [self.followersCountButton setTitle:tmpString forState:UIControlStateNormal];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
@@ -607,7 +615,8 @@
          {
              //TODO:Get total number of channels or sub number?
              [self reloadCollectionViews];
-             
+             [self setFollowersCountButton];
+
              return;
          }
      }];
@@ -1125,9 +1134,6 @@
             
             [self.channelOwner.managedObjectContext save: &error];
 
-            [self.subscriptionThumbnailCollectionView reloadData];
-            
-        
         };
     
         // define success block //
@@ -2065,11 +2071,11 @@
                                                               [self.channelThumbnailCollectionView reloadData];
                                                               
                                                               if (self.followCell.channel.subscribedByUserValue) {
-                                                                  [self.followCell setFollowButtonLabel:NSLocalizedString(@"unfollow", @"unfollow")];
+                                                                  [self.followCell setFollowButtonLabel:NSLocalizedString(@"unfollow all", @"unfollow")];
                                                               }
                                                               else
                                                               {
-                                                                  [self.followCell setFollowButtonLabel:NSLocalizedString(@"follow", @"follow")];
+                                                                  [self.followCell setFollowButtonLabel:NSLocalizedString(@"follow all", @"follow")];
                                                               }
                                                               
                                                               if (error)
@@ -2080,6 +2086,11 @@
                                                               else
                                                               {
                                                                   [appDelegate saveContext: YES];
+                                                                  [self reloadCollectionViews];
+                                                                  
+#warning change to have success block and reload cells on success
+                                                                  [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
+
                                                               }
                                                           }
                                                           else
