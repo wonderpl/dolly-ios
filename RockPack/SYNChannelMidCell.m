@@ -151,13 +151,6 @@
 
 }
 
--(void) setHiddenForFollowButton: (BOOL) hide
-{
-    self.followButton.hidden = hide;
-}
-
-
-
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel
 {
     [self.followButton setTitle:strFollowLabel forState:UIControlStateNormal];

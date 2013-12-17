@@ -45,7 +45,6 @@ typedef enum {
 
 @property (nonatomic, weak) id<SYNChannelMidCellDelegate> viewControllerDelegate;
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel;
--(void) setHiddenForFollowButton: (BOOL) hide;
 -(void) setBorder;
 -(void) setState:(ChannelMidCellState)state withAnimation:(BOOL) animated;
 

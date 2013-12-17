@@ -877,11 +877,10 @@
         {
             channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
             
-            [channelThumbnailCell setHiddenForFollowButton:(self.modeType == kModeMyOwnProfile)];
-            [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
+			channelThumbnailCell.followButton.hidden = (self.modeType == kModeMyOwnProfile);
+			channelThumbnailCell.descriptionLabel.text = channel.channelDescription;
             NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
-            [channelThumbnailCell.followerCountLabel setText:subscribersString];
-            
+            channelThumbnailCell.followerCountLabel.text = subscribersString;
             channelThumbnailCell.channel = channel;
             
             NSMutableString* videoCountString = [NSMutableString new];
