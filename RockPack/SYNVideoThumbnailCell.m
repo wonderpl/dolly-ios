@@ -9,6 +9,7 @@
 #import "SYNVideoThumbnailCell.h"
 #import "UIFont+SYNFont.h"
 #import "CIFilter+Monochrome.h"
+#import <UIImageView+WebCache.h>
 #import <SDWebImageManager.h>
 
 @interface SYNVideoThumbnailCell ()
@@ -42,6 +43,7 @@
 	UIImage *cachedImage = [imageManager.imageCache imageFromMemoryCacheForKey:cacheKey];
 	if (cachedImage) {
 		monochromeImageView.image = cachedImage;
+		[colourImageView setImageWithURL:url];
 	} else {
 		__weak typeof(self) wself = self;
 		self.downloadOperation = [imageManager downloadWithURL:url
