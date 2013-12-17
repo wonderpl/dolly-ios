@@ -24,8 +24,7 @@
     
     self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateVideoItemCell");
     
-    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
-
+    self.timeStampLabel.font = [UIFont lightCustomFontOfSize:self.timeStampLabel.font.pointSize];
     
 }
 

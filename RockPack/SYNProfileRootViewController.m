@@ -2088,7 +2088,7 @@
                                                                   [appDelegate saveContext: YES];
                                                                   [self reloadCollectionViews];
                                                                   
-#warning change to have success block and reload cells on success
+//#warning change to have success block and reload cells on success
                                                                   [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
 
                                                               }
