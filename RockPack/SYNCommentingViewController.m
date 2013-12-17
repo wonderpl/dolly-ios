@@ -75,11 +75,20 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     [super viewDidLoad];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
-                                                                             style:UIBarButtonItemStyleBordered
-                                                                            target:self
-                                                                            action:@selector(closeButtonPressed:)];
+    // on iPhone the controller appears in a popup
+    if (IS_IPAD)
+    {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
+                                                                                 style:UIBarButtonItemStyleBordered
+                                                                                target:self
+                                                                                action:@selector(closeButtonPressed:)];
+        
+    }
     
+    
+    
+    self.sendMessageAvatarmageView.layer.cornerRadius = self.sendMessageAvatarmageView.frame.size.width * 0.5f;
+    self.sendMessageAvatarmageView.clipsToBounds = YES;
     
     
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightGrayColor];
@@ -328,7 +337,9 @@ static NSString* PlaceholderText = @"Say something nice";
                                       if(![dictionary isKindOfClass:[NSDictionary class]])
                                           return;
                                       
-                                      if(![appDelegate.mainRegistry registerCommentsFromDictionary:dictionary withExisting:self.comments])
+                                      if(![appDelegate.mainRegistry registerCommentsFromDictionary:dictionary
+                                                                                      withExisting:self.comments
+                                                                                forVideoInstanceId:self.videoInstance.uniqueId])
                                       {
                                           self.comments = @[].mutableCopy;
                                           

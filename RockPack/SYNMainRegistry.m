@@ -217,7 +217,8 @@
 }
 
 - (BOOL) registerCommentsFromDictionary: (NSDictionary*) dictionary
-                           withExisting:(NSArray*)existingComments
+                           withExisting: (NSArray*)existingComments
+                     forVideoInstanceId: (NSString*)vid
 {
     // == Check for Validity == //
     NSDictionary *channelCoverDictionary = dictionary[@"comments"];
@@ -263,7 +264,7 @@
         
         comment.markedForDeletionValue = NO;
         
-        NSLog(@">> %@", comment);
+        comment.videoInstanceId = [NSString stringWithString:vid];
         
     }
     
