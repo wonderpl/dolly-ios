@@ -319,19 +319,12 @@
     
 }
 
-- (BOOL) isSubscribedToChannelId:(NSString*)channelId
-{
-    if(!channelId)
-        return nil;
-    
-    return [self.channelSubscriptions containsObject:channelId];
+- (BOOL)isSubscribedToChannelId:(NSString*)channelId {
+	return [self.channelSubscriptions containsObject:channelId];
 }
 
-- (BOOL) isSubscribedToUserId:(NSString*)userId
-{
-    if(!userId)
-        return nil;
-    return [self.userSubscriptons containsObject:userId];
+- (BOOL)isSubscribedToUserId:(NSString*)userId {
+	return [self.userSubscriptons containsObject:userId];
 }
 
 -(void) addChannelSubscriptionsObject:(Channel *)channel

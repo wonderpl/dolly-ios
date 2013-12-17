@@ -83,43 +83,6 @@
     return [self getSysInfoByName:"hw.model"];
 }
 
-
-- (BOOL) platformCanHandleLiveBlur
-{
-    switch ([self platformType])
-    {
-        // We know the devices that can't support live blur
-        case UIDevice1GiPhone: return IPHONE_1G_NAMESTRING;
-        case UIDevice3GiPhone: return IPHONE_3G_NAMESTRING;
-        case UIDevice3GSiPhone: return IPHONE_3GS_NAMESTRING;
-        case UIDevice4iPhone: return IPHONE_4_NAMESTRING;
-            
-        case UIDevice1GiPod: return IPOD_1G_NAMESTRING;
-        case UIDevice2GiPod: return IPOD_2G_NAMESTRING;
-        case UIDevice3GiPod: return IPOD_3G_NAMESTRING;
-        case UIDevice4GiPod: return IPOD_4G_NAMESTRING; // Not 100% sure on this one, but better to be safe than sorry (NB)
-            
-        case UIDevice1GiPad : return IPAD_1G_NAMESTRING;
-        case UIDevice2GiPad : return IPAD_2G_NAMESTRING;
-        case UIDevice3GiPad : return IPAD_3G_NAMESTRING;
-            
-        case UIDeviceAppleTV2 : return APPLETV_2G_NAMESTRING;
-        case UIDeviceAppleTV3 : return APPLETV_3G_NAMESTRING;
-        case UIDeviceAppleTV4 : return APPLETV_4G_NAMESTRING;
-        case UIDeviceUnknownAppleTV: return APPLETV_UNKNOWN_NAMESTRING;
-            
-        case UIDeviceSimulatorAppleTV: return SIMULATOR_APPLETV_NAMESTRING;
-            
-        case UIDeviceIFPGA: return IFPGA_NAMESTRING;
-            return NO;
-            
-        default:
-            // Assume all future platforms will support blur (bit of a gamble, but hey...)
-            return YES;
-    }
-}
-
-
 #pragma mark platform type and name utils
 - (NSUInteger) platformType
 {
