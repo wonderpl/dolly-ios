@@ -423,6 +423,11 @@ static NSString* PlaceholderText = @"Say something nice";
     
     Comment* comment = [self createCommentFromText:commentText];
     
+    if(!comment)
+    {
+        DebugLog(@"Could not create comment");
+        return;
+    }
     
     [self.comments addObject:comment];
     
