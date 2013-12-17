@@ -337,7 +337,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if(!coSelected)
         return;
     
-    
+    [self viewProfileDetails:coSelected];
     
 }
 
