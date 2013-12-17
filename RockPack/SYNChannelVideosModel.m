@@ -38,7 +38,6 @@
 		self.loadedItems = [channel.videoInstances array];
 		self.loadedRange = NSMakeRange(0, [channel.videoInstances count]);
 		self.totalItemCount = channel.totalVideosValueValue;
-
 	}
 	return self;
 }
