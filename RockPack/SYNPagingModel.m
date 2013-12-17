@@ -61,13 +61,13 @@ static const NSInteger DefaultBatchSize = 40;
 - (void)handleDataUpdated {
 	self.loading = NO;
 	
-	[self.delegate pagingModelDataUpdated];
+	[self.delegate pagingModelDataUpdated:self];
 }
 
 - (void)handleError {
 	self.loading = NO;
 	
-	[self.delegate pagingModelErrorOccurred];
+	[self.delegate pagingModelErrorOccurred:self];
 }
 
 - (void)loadItemsForRange:(NSRange)range {

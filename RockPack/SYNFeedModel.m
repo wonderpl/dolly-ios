@@ -135,7 +135,6 @@
 											   
 											   if (!registryResultOk) {
 												   [self handleError];
-												   [sself.delegate pagingModelErrorOccurred];
 												   return;
 											   }
 											   

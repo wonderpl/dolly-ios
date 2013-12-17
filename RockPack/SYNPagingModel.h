@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class SYNPagingModel;
+
 @protocol SYNPagingModelDelegate <UICollectionViewDataSource>
 
-- (void)pagingModelDataUpdated;
-- (void)pagingModelErrorOccurred;
+- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel;
+- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel;
 
 @end
 
