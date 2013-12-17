@@ -110,6 +110,7 @@
     
     [appDelegate.searchRegistry clearImportContextFromEntityName:kChannelOwner andViewId:self.viewId];
     
+    
     [appDelegate.networkEngine subscribersForUserId: appDelegate.currentUser.uniqueId
                                           channelId: self.channel.uniqueId
                                            forRange: self.dataRequestRange
