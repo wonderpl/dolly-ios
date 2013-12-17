@@ -69,11 +69,11 @@
                         <outlet property="delegate" destination="-1" id="FgS-NP-jTw"/>
                     </connections>
                 </searchBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY" userLabel="Button - Follower Count">
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY" userLabel="Button - Follower Count">
                     <rect key="frame" x="70" y="370" width="180" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="122000 followers ">
+                    <state key="normal">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -234,6 +234,7 @@ me...</string>
     </objects>
     <resources>
         <image name="ButtonMore.png" width="38" height="38"/>
+        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="coverImageTest.jpg" width="917" height="513"/>
     </resources>

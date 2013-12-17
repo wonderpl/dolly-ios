@@ -11,7 +11,6 @@
 
 @protocol SYNChannelMidCellDelegate <NSObject>
 
-//- (void) channelTapped: (UICollectionViewCell *) cell;
 - (void) followButtonTapped: (UICollectionViewCell *) cell;
 - (void) deleteChannelTapped: (UICollectionViewCell *) cell;
 
@@ -45,7 +44,6 @@ typedef enum {
 
 @property (nonatomic, weak) id<SYNChannelMidCellDelegate> viewControllerDelegate;
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel;
--(void) setHiddenForFollowButton: (BOOL) hide;
 -(void) setBorder;
 -(void) setState:(ChannelMidCellState)state withAnimation:(BOOL) animated;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NrE-x8-VXC" userLabel="Button - Like" customClass="SYNSocialButton">
-                        <rect key="frame" x="86" y="263" width="50" height="50"/>
+                        <rect key="frame" x="39" y="263" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
@@ -37,7 +37,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzp-d3-V7P" userLabel="Button - Add" customClass="SYNSocialAddButton">
-                        <rect key="frame" x="155" y="263" width="50" height="50"/>
+                        <rect key="frame" x="108" y="263" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
@@ -45,7 +45,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8wk-5c-EEh" userLabel="Button - Share" customClass="SYNSocialButton">
-                        <rect key="frame" x="221" y="263" width="50" height="50"/>
+                        <rect key="frame" x="252" y="263" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
@@ -68,6 +68,14 @@
                         <color key="textColor" red="0.72941176470588232" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFc-cv-Ll1" userLabel="Control - Comment" customClass="SYNSocialCommentButton">
+                        <rect key="frame" x="182" y="263" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="commentControlPressed:" destination="bx7-hr-ZLz" eventType="touchUpInside" id="QgN-LY-dZ2"/>
+                        </connections>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -75,6 +83,7 @@
             <size key="customSize" width="353" height="216"/>
             <connections>
                 <outlet property="addSocialButton" destination="bzp-d3-V7P" id="kN5-Gc-cFz"/>
+                <outlet property="commentSocialButton" destination="kFc-cv-Ll1" id="Pnu-T7-HUb"/>
                 <outlet property="iconImageView" destination="Vdl-pp-UXn" id="PiC-Hh-HIY"/>
                 <outlet property="likeSocialButton" destination="NrE-x8-VXC" id="lIQ-Gv-H37"/>
                 <outlet property="shareSocialButton" destination="8wk-5c-EEh" id="0v5-5w-czJ"/>

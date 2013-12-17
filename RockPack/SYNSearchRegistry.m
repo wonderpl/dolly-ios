@@ -310,7 +310,7 @@
             // video instances on search do not have channels attached to them
             VideoInstance *videoInstance = [VideoInstance instanceFromDictionary: fullItemDictionary
                                                        usingManagedObjectContext: importManagedObjectContext
-                                                             ignoringObjectTypes: kIgnoreChannelObjects
+                                                             ignoringObjectTypes: kIgnoreNothing
                                                                   existingVideos: existingVideos];
             
             videoInstance.viewId = viewId; // kSearchViewId and kMoodViewId usually

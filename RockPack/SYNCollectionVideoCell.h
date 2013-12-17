@@ -12,12 +12,14 @@
 #import "SYNSocialAddButton.h"
 #import "VideoInstance.h"
 #import "SYNSocialActionsDelegate.h"
+#import "SYNSocialCommentButton.h"
 
 @interface SYNCollectionVideoCell : UICollectionViewCell
  
 @property (strong, nonatomic) IBOutlet SYNSocialButton *likeControl;
 @property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
+@property (strong, nonatomic) IBOutlet SYNSocialCommentButton *commentControl;
 
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;

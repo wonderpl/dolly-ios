@@ -265,7 +265,7 @@
 
 - (Class)animationClassForViewController:(UIViewController *)viewController {
 	NSDictionary *mapping = @{
-							  NSStringFromClass([SYNFullScreenVideoAnimator class]) : [SYNFullScreenVideoAnimator class],
+							  NSStringFromClass([SYNFullScreenVideoViewController class]) : [SYNFullScreenVideoAnimator class],
 							  NSStringFromClass([SYNOneToOneSharingController class]) : [SYNPopoverAnimator class],
 							  NSStringFromClass([SYNAddToChannelViewController class]) : [SYNPopoverAnimator class]
 							  };

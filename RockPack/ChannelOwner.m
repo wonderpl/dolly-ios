@@ -101,6 +101,9 @@
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects
 {
+    
+    
+    
     // Is we are not actually a dictionary, then bail
     if (![dictionary isKindOfClass: [NSDictionary class]])
     {
@@ -120,6 +123,9 @@
     
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
+    
+    self.subscribersCount =[dictionary objectForKey:@"subscriber_count"];
+    
     
     if ([[dictionary objectForKey: @"description"] isKindOfClass: [NSNull class]])
     {

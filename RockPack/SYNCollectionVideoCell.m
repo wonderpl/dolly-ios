@@ -61,6 +61,7 @@
     self.shareControl.dataItemLinked = _videoInstance;
     self.addControl.dataItemLinked = _videoInstance;
     self.likeControl.dataItemLinked = _videoInstance;
+    self.commentControl.dataItemLinked = _videoInstance;
     
     if (!_videoInstance)
         return;
@@ -99,6 +100,7 @@
     [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
                       andCount: videoInstance.video.starCountValue];
     
+
     self.titleLabel.text = videoInstance.title;
 }
 
