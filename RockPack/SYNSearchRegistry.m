@@ -419,10 +419,17 @@
     
     
 }
-
+- (BOOL) registerChannelOwnersFromDictionary: (NSDictionary *) dictionary
+                                   forViewId: (NSString *) viewId
+{
+    return [self registerChannelOwnersFromDictionary:dictionary
+                                           forViewId:viewId
+                                         byAppending:NO];
+}
 
 - (BOOL) registerChannelOwnersFromDictionary: (NSDictionary *) dictionary
-                                   forViewId: (NSString *) viewId;
+                                   forViewId: (NSString *) viewId
+                                 byAppending:(BOOL)appending
 {
     NSError *error;
     NSArray *existingChannelOwners;
@@ -483,12 +490,16 @@
     }
     
     
-    for (NSString* key in channelOwnerById)
+    if(!appending)
     {
-        if((channelOwner = channelOwnerById[key]) && channelOwner.markedForDeletionValue)
-            [channelOwner.managedObjectContext delete:channelOwner];
-        
+        for (NSString* key in channelOwnerById)
+        {
+            if((channelOwner = channelOwnerById[key]) && channelOwner.markedForDeletionValue)
+                [channelOwner.managedObjectContext deleteObject:channelOwner];
+            
+        }
     }
+    
     
     BOOL saveResult = [self saveImportContext];
     

@@ -526,6 +526,7 @@
         }
         
         [self.appDelegate.searchRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
+            
             BOOL registryResultOk = [self.searchRegistry registerUsersFromDictionary: dictionary];
             
             return registryResultOk;

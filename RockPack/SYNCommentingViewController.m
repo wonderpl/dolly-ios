@@ -76,7 +76,7 @@ static NSString* PlaceholderText = @"Say something nice";
     [super viewDidLoad];
     
     // on iPhone the controller appears in a popup
-    if (IS_IPAD)
+    if (IS_IPHONE)
     {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
                                                                                  style:UIBarButtonItemStyleBordered
