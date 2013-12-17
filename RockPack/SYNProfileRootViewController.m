@@ -189,6 +189,9 @@
     [super viewDidLoad];
     
     [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
+    
+    
+    
 
     self.shouldBeginEditing = YES;
     self.collectionsTabActive = YES;

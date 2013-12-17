@@ -68,6 +68,11 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.videosArray = @[];
     self.usersArray = @[];
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:nil
+                                                                            action:nil];
+    
     
     self.view.autoresizesSubviews = YES;
     
