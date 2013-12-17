@@ -22,8 +22,6 @@
 
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
@@ -37,13 +35,6 @@
     [super awakeFromNib];
     
     self.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.followButton.titleLabel.font.pointSize];
-    
-    
-    // Tap for showing video
-//    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-//                                                       action: @selector(showChannel:)];
-//    self.tap.delegate = self;
-//    [self addGestureRecognizer: self.tap];
     
     if (IS_RETINA)
     {
@@ -117,17 +108,6 @@
     }
     
     return YES; // handle the touch
-}
-
-
-
-- (void) showChannel: (UITapGestureRecognizer *) recognizer
-{
-    
-    
-    // Just need to reference any button in the cell (as there is no longer an actual video button)
-//    [self.viewControllerDelegate channelTapped: self];
-    
 }
 
 - (void) setChannel:(Channel *)channel

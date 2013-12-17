@@ -11,7 +11,6 @@
 
 @protocol SYNChannelMidCellDelegate <NSObject>
 
-//- (void) channelTapped: (UICollectionViewCell *) cell;
 - (void) followButtonTapped: (UICollectionViewCell *) cell;
 - (void) deleteChannelTapped: (UICollectionViewCell *) cell;
 
