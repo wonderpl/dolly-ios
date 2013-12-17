@@ -394,7 +394,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     NSDictionary* dictionary = @{
-                                 @"id" : @"12345",
+                                 @"id" : @(999),
                                  @"position": self.maxCommentPosition,
                                  @"resource_url": @"",
                                  @"comment": text,
@@ -452,7 +452,6 @@ static NSString* PlaceholderText = @"Say something nice";
                           otherButtonTitles:nil] show];
     };
     
-    NSLog(@"%@", self.videoInstance.uniqueId);
     
     [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
                                                channelId:self.videoInstance.channel.uniqueId
@@ -461,6 +460,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                        completionHandler:^(id dictionary) {
                                            
                                            if(![dictionary isKindOfClass:[NSDictionary class]] ||
+                                              ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]] ||
                                               ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]])
                                            {
                                                ErrorBlock(@{@"error" : @"responce is not a discionary"});
