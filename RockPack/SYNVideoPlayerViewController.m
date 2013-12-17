@@ -236,8 +236,10 @@
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	self.videoTitleLabel.text = videoInstance.title;
 	
+	BOOL videoOwnedByCurrentUser = [appDelegate.currentUser.uniqueId isEqualToString:videoInstance.channel.channelOwner.uniqueId];
+	self.followButton.hidden = videoOwnedByCurrentUser;
 	self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:videoInstance.channel.uniqueId];
-           
+    
 	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;
 	
