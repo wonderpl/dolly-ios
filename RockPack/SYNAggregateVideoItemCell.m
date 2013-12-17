@@ -81,6 +81,12 @@
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                             options: SDWebImageRetryFailed];
     
+    // == comment count == //
+    
+    self.commentControl.count = videoInstance.commentCountValue;
+    
+    NSLog(@"%i", videoInstance.commentCountValue );
+    
     // == timestamp == //
     
     NSInteger durationSeconds = videoInstance.video.durationValue;

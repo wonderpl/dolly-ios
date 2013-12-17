@@ -152,6 +152,7 @@
         <relationship name="videoInstances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VideoInstance" inverseName="video" inverseEntity="VideoInstance" syncable="YES"/>
     </entity>
     <entity name="VideoInstance" representedClassName="VideoInstance" parentEntity="AbstractCommon" syncable="YES">
+        <attribute name="commentCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateOfDayAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>

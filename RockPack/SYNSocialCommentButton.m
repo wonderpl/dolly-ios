@@ -17,14 +17,33 @@
     // Reset these as we are using an image
     self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 1.0, 0.0, 0.0);
     
-    [self setImage: [UIImage imageNamed: @"IconVideoCommentDefault"]
-          forState: UIControlStateNormal];
     
-    [self setImage: [UIImage imageNamed: @"IconVideoCommentHighlighted"]
-          forState: UIControlStateSelected];
+    [self setBackgroundImage: [UIImage imageNamed: @"IconVideoCommentDefault"]
+                    forState: UIControlStateNormal];
     
-    [self setImage: [UIImage imageNamed: @"IconVideoCommentHighlighted"]
-          forState: UIControlStateHighlighted];
+    [self setBackgroundImage: [UIImage imageNamed: @"IconVideoCommentHighlighted"]
+                    forState: UIControlStateSelected];
+    
+    [self setBackgroundImage: [UIImage imageNamed: @"IconVideoCommentHighlighted"]
+                    forState: UIControlStateHighlighted];
+    
+    UIColor* greenLightColor = [UIColor colorWithRed:(182.0f/255.0f)
+                                               green:(202.0f/255.0f)
+                                                blue:(177.0f/255.0f)
+                                               alpha:1.0f];
+    
+    [self setTitleColor: greenLightColor
+               forState: UIControlStateNormal];
+    
+    [self setTitleColor: greenLightColor
+               forState: UIControlStateHighlighted];
+    
+    [self setTitleColor: greenLightColor
+               forState: UIControlStateSelected];
+    
+    [self setTitleColor: greenLightColor
+               forState: UIControlStateDisabled];
+    
 }
 
 

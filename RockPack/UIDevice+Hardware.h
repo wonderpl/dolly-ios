@@ -101,7 +101,6 @@ typedef enum : NSInteger {
 - (NSString *) hwmodel;
 - (NSUInteger) platformType;
 - (NSString *) platformString;
-- (BOOL) platformCanHandleLiveBlur;
 
 - (BOOL) hasRetinaDisplay;
 - (UIDeviceFamily) deviceFamily;

@@ -4,6 +4,7 @@
 #import "_VideoInstance.h"
 
 const struct VideoInstanceAttributes VideoInstanceAttributes = {
+	.commentCount = @"commentCount",
 	.dateAdded = @"dateAdded",
 	.dateOfDayAdded = @"dateOfDayAdded",
 	.position = @"position",
@@ -45,6 +46,11 @@ const struct VideoInstanceFetchedProperties VideoInstanceFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"commentCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"commentCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"positionValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"position"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -53,6 +59,32 @@ const struct VideoInstanceFetchedProperties VideoInstanceFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic commentCount;
+
+
+
+- (int32_t)commentCountValue {
+	NSNumber *result = [self commentCount];
+	return [result intValue];
+}
+
+- (void)setCommentCountValue:(int32_t)value_ {
+	[self setCommentCount:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveCommentCountValue {
+	NSNumber *result = [self primitiveCommentCount];
+	return [result intValue];
+}
+
+- (void)setPrimitiveCommentCountValue:(int32_t)value_ {
+	[self setPrimitiveCommentCount:[NSNumber numberWithInt:value_]];
+}
+
 
 
 

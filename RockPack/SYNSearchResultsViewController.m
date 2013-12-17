@@ -91,6 +91,9 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.containerTabs.layer.masksToBounds = YES;
     
     
+    self.usersTabButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.usersTabButton.titleLabel.font.pointSize];
+    self.videosTabButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.videosTabButton.titleLabel.font.pointSize];
+    
     // == Define Completion Blocks for operations == //
     
     SYNSearchResultsViewController *wself = self;
@@ -302,28 +305,12 @@ typedef void (^SearchResultCompleteBlock)(int);
 }
 
 
-- (NSArray *) getSearchEntitiesByName: (NSString *) entityName withError: (NSError **) error
-{
-    if (!entityName)
-    {
-        return nil;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    
-    fetchRequest.entity = [NSEntityDescription entityForName: entityName
-                                      inManagedObjectContext: appDelegate.searchManagedObjectContext];
-    
+- (NSArray *)getSearchEntitiesByName:(NSString *)entityName withError:(NSError **) error {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", self.viewId]];
+    fetchRequest.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES] ];
     
-    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position"
-                                                                 ascending: YES]];
-    
-    NSArray *results = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                             error: error];
-    
-    return results;
+    return [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest error:error];
 }
 
 
