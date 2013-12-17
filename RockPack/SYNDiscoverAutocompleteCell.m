@@ -66,12 +66,12 @@
         self.textLabel.backgroundColor = [UIColor clearColor];
         
         
-        self.userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
-        self.userImageView.backgroundColor = [UIColor greenColor];
-        self.userImageView.layer.cornerRadius = self.userImageView.frame.size.height * 0.5f;
-        self.userImageView.clipsToBounds = YES;
-        self.userImageView.hidden = YES;
-        [self addSubview:self.userImageView];
+        self.userAvatarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
+        self.userAvatarButton.backgroundColor = [UIColor greenColor];
+        self.userAvatarButton.layer.cornerRadius = self.userAvatarButton.frame.size.height * 0.5f;
+        self.userAvatarButton.clipsToBounds = YES;
+        self.userAvatarButton.hidden = YES;
+        [self addSubview:self.userAvatarButton];
         
     }
     return self;
@@ -97,7 +97,7 @@
 
 - (void) prepareForReuse
 {
-    self.userImageView.hidden = YES;
+    self.userAvatarButton.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

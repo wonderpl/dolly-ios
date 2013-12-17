@@ -18,7 +18,7 @@
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNMasterViewController.h"
-#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 
 @import QuartzCore;
 
@@ -294,16 +294,51 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         NSString* type = autocompleteItem[@"type"];
         if([type isEqualToString:@"user"])
         {
-            cell.userImageView.hidden = NO;
-            NSLog(@"-> %@", autocompleteItem[@"thumbnail"]);
-            [cell.userImageView setImageWithURL: autocompleteItem[@"thumbnail"]
-                               placeholderImage: [UIImage imageNamed: @"PlaceholderNotificationAvatar.png"]
-                                        options: SDWebImageRetryFailed];
+            cell.userAvatarButton.hidden = NO;
+            
+            [cell.userAvatarButton setImageWithURL: [NSURL URLWithString: autocompleteItem[@"thumbnail"]]
+                                          forState: UIControlStateNormal
+                                  placeholderImage: [UIImage imageNamed: @"PlaceholderNotificationAvatar.png"]
+                                           options: SDWebImageRetryFailed];
+            
+            [cell.userAvatarButton addTarget:self
+                                      action:@selector(userAvatarButtonPressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
         }
         
     }
     
     return cell;
+}
+
+- (void) userAvatarButtonPressed: (UIButton*) button
+{
+    UIView* candidateCell = button;
+    while (![candidateCell isKindOfClass:[SYNDiscoverAutocompleteCell class]]) {
+        candidateCell = candidateCell.superview;
+    }
+    
+    if(![candidateCell isKindOfClass:[SYNDiscoverAutocompleteCell class]])
+    {
+        AssertOrLog(@"Could not retrieve SYNDiscoverAutocompleteCell cell from %@", button);
+        return;
+    }
+    
+    SYNDiscoverAutocompleteCell* cell = (SYNDiscoverAutocompleteCell*)candidateCell;
+    NSIndexPath* indexPath = [self.autocompleteTableView indexPathForCell:cell];
+    
+    NSDictionary* data = self.autocompleteSuggestionsArray[indexPath.row];
+
+    NSDictionary* channelOwnerData = @{@"id":data[@"id"], @"avatar_thumbnail_url":data[@"thumbnail"], @"display_name":data[@"name"]};
+    ChannelOwner* coSelected = [ChannelOwner instanceFromDictionary:channelOwnerData
+                                          usingManagedObjectContext:appDelegate.searchManagedObjectContext
+                                                ignoringObjectTypes:kIgnoreAll];
+    
+    if(!coSelected)
+        return;
+    
+    
+    
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -428,6 +463,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
               
                 NSString* userId = (NSString*)objectData[1];
                 dataDictionary[@"id"] = userId;
+                NSString* name = (NSString*)objectData[2];
+                dataDictionary[@"name"] = name;
                 NSString* avatarUrl = (NSString*)objectData[3];
                 dataDictionary[@"thumbnail"] = avatarUrl;
             }
