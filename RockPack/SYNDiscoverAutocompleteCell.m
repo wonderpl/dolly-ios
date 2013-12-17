@@ -16,7 +16,6 @@
 @property (nonatomic,strong)UIColor* selectedColor;
 @property (nonatomic,strong)UIColor* defaultShadowColor;
 @property (nonatomic,strong)UIColor* selectedShadowColor;
-@property (nonatomic, strong) UIImageView* userImageView;
 
 @end
 
@@ -70,6 +69,8 @@
         self.userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
         self.userImageView.backgroundColor = [UIColor greenColor];
         self.userImageView.layer.cornerRadius = self.userImageView.frame.size.height * 0.5f;
+        self.userImageView.clipsToBounds = YES;
+        self.userImageView.hidden = YES;
         [self addSubview:self.userImageView];
         
     }
@@ -92,6 +93,11 @@
     self.textLabel.frame = newFrame;
     
     
+}
+
+- (void) prepareForReuse
+{
+    self.userImageView.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

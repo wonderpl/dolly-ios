@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) UIView* separatorView;
 
+@property (nonatomic, strong) UIImageView* userImageView;
+
 @end
