@@ -37,6 +37,8 @@
     
     self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
     self.timeLabel.font = [UIFont lightCustomFontOfSize:self.timeLabel.font.pointSize];
+    
+    self.timestampLabel.font = [UIFont lightCustomFontOfSize:self.timestampLabel.font.pointSize];
 }
 
 #pragma mark - Delegate Methods
