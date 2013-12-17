@@ -5,6 +5,7 @@
 #import "AbstractCommon.h"
 
 extern const struct VideoInstanceAttributes {
+	__unsafe_unretained NSString *commentCount;
 	__unsafe_unretained NSString *dateAdded;
 	__unsafe_unretained NSString *dateOfDayAdded;
 	__unsafe_unretained NSString *position;
@@ -29,6 +30,7 @@ extern const struct VideoInstanceFetchedProperties {
 
 
 
+
 @interface VideoInstanceID : NSManagedObjectID {}
 @end
 
@@ -37,6 +39,20 @@ extern const struct VideoInstanceFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (VideoInstanceID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* commentCount;
+
+
+
+@property int32_t commentCountValue;
+- (int32_t)commentCountValue;
+- (void)setCommentCountValue:(int32_t)value_;
+
+//- (BOOL)validateCommentCount:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -120,6 +136,15 @@ extern const struct VideoInstanceFetchedProperties {
 @end
 
 @interface _VideoInstance (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveCommentCount;
+- (void)setPrimitiveCommentCount:(NSNumber*)value;
+
+- (int32_t)primitiveCommentCountValue;
+- (void)setPrimitiveCommentCountValue:(int32_t)value_;
+
+
 
 
 - (NSDate*)primitiveDateAdded;

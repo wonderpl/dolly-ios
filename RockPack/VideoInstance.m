@@ -113,6 +113,16 @@ static NSDateFormatter *dateFormatter = nil;
     self.title = [dictionary objectForKey: @"title"
                               withDefault: @""];
     
+    NSDictionary* commentsDictionary = [dictionary objectForKey:@"comments"];
+    if([commentsDictionary isKindOfClass:[NSDictionary class]])
+    {
+        self.commentCount = [commentsDictionary objectForKey: @"count"
+                                                 withDefault: @(0)];
+        
+        // NSLog(@">> Comment Count = %i", self.commentCountValue);
+    }
+    
+    
     NSArray *filteredVideos;
     if(existingVideos)
     {
