@@ -938,11 +938,11 @@
 
 #pragma mark - SYNPagingModelDelegate
 
-- (void)pagingModelDataUpdated {
+- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
     [self.videoThumbnailCollectionView reloadData];
 }
 
-- (void)pagingModelErrorOccurred {
+- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
 	
 }
 

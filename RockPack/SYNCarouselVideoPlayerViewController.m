@@ -215,11 +215,11 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - SYNPagingModelDelegate
 
-- (void)pagingModelDataUpdated {
+- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
 	[self.thumbnailCollectionView reloadData];
 }
 
-- (void)pagingModelErrorOccurred {
+- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
 	
 }
 

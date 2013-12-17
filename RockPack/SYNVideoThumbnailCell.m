@@ -37,26 +37,22 @@
 	UIImageView *colourImageView = self.colourImageView;
 	UIImageView *monochromeImageView = self.monochromeImageView;
 	
-	__weak typeof(self) wself = self;
-	self.downloadOperation = [imageManager downloadWithURL:url
-												   options:0
-												  progress:nil
-												 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-													 __strong typeof(self) sself = wself;
-													 
-													 colourImageView.image = image;
-													 
-													 NSOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-														 // Make a unique cache key for monochromed images
-														 NSString *cacheKey = [NSString stringWithFormat:@"monochrome+%@", [url absoluteString]];
+	// Make a unique cache key for monochromed images
+	NSString *cacheKey = [NSString stringWithFormat:@"monochrome+%@", [url absoluteString]];
+	UIImage *cachedImage = [imageManager.imageCache imageFromMemoryCacheForKey:cacheKey];
+	if (cachedImage) {
+		monochromeImageView.image = cachedImage;
+	} else {
+		__weak typeof(self) wself = self;
+		self.downloadOperation = [imageManager downloadWithURL:url
+													   options:0
+													  progress:nil
+													 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+														 __strong typeof(self) sself = wself;
 														 
-														 UIImage *cachedImage = [imageManager.imageCache imageFromMemoryCacheForKey:cacheKey];
-														 if (cachedImage) {
-															 // It's in the cache, lets just use it
-															 dispatch_async(dispatch_get_main_queue(), ^{
-																 monochromeImageView.image = cachedImage;
-															 });
-														 } else {
+														 colourImageView.image = image;
+														 
+														 NSOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
 															 CIFilter *filter = [CIFilter monochromeFilter];
 
 															 // We don't have it cached so we want to monochrome it
@@ -69,12 +65,12 @@
 															 
 															 // Now cache it in memory
 															 [imageManager.imageCache storeImage:monochromeImage forKey:cacheKey toDisk:NO];
-														 }
+														 }];
+														 
+														 sself.monochromeOperation = operation;
+														 [operationQueue addOperation:operation];
 													 }];
-													 
-													 sself.monochromeOperation = operation;
-													 [operationQueue addOperation:operation];
-												 }];
+	}
 }
 
 - (void)setSelected:(BOOL)selected {
@@ -120,6 +116,7 @@
 	static NSOperationQueue *operationQueue;
 	dispatch_once(&onceToken, ^{
 		operationQueue = [[NSOperationQueue alloc] init];
+		[operationQueue setMaxConcurrentOperationCount:5];
 	});
 	return operationQueue;
 }

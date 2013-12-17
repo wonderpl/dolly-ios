@@ -27,6 +27,9 @@ typedef BOOL (^SYNRegistryActionBlock)(NSManagedObjectContext *backgroundContext
 - (BOOL) saveImportContext;
 - (BOOL) clearImportContextFromEntityName: (NSString *) entityName;
 
+- (BOOL) clearImportContextFromEntityName: (NSString *) entityName
+                                andViewId:(NSString*)viewId;
+
 - (void) performInBackground: (SYNRegistryActionBlock) actionBlock
              completionBlock: (SYNRegistryCompletionBlock) completionBlock;
 

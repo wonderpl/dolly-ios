@@ -225,14 +225,14 @@ typedef void(^FeedDataErrorBlock)(void);
 
 #pragma mark - SYNPagingModelDelegate
 
-- (void)pagingModelDataUpdated {
+- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
 	[self.refreshControl endRefreshing];
 	[self removePopupMessage];
 
 	[self.feedCollectionView reloadData];
 }
 
-- (void)pagingModelErrorOccurred {
+- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
 	[self.refreshControl endRefreshing];
 	[self removePopupMessage];
 	

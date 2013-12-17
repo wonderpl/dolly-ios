@@ -27,6 +27,7 @@
     self.shareControl.title = NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell");
     
     self.timeLabel.font = [UIFont lightCustomFontOfSize:self.timeLabel.font.pointSize];
+    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
     self.followersLabel.font = [UIFont lightCustomFontOfSize:self.followersLabel.font.pointSize];
     self.videosLabel.font = [UIFont lightCustomFontOfSize:self.videosLabel.font.pointSize];
     
