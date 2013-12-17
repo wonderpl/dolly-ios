@@ -87,8 +87,6 @@
     
     self.commentControl.count = videoInstance.commentCountValue;
     
-    NSLog(@"%i", videoInstance.commentCountValue );
-    
     // == timestamp == //
     
     NSInteger durationSeconds = videoInstance.video.durationValue;

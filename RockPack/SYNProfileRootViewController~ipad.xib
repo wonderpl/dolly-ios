@@ -196,7 +196,7 @@
                                 <constraint firstAttribute="height" constant="32" id="uPc-JY-ALY"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="122000 followers ">
+                            <state key="normal">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>

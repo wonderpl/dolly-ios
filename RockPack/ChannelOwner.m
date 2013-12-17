@@ -126,8 +126,6 @@
     
     self.subscribersCount =[dictionary objectForKey:@"subscriber_count"];
     
-    NSLog(@"SUBCOUNT%lld", self.subscribersCountValue);
-
     
     if ([[dictionary objectForKey: @"description"] isKindOfClass: [NSNull class]])
     {

@@ -143,7 +143,12 @@
     self.bottomBarView.backgroundColor = [UIColor grayColor];
     
     self.videoTitleLabel.text = [_channel.title uppercaseString];
-    //TODO: move all the setting of text values in here from profile
+    [self.videoTitleLabel setFont:[UIFont regularCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
+    
+    [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
+    
+    [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
+
 }
 
 -(void) setHiddenForFollowButton: (BOOL) hide

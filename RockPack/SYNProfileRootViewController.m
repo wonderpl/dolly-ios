@@ -361,7 +361,7 @@
     self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle] , nil];
     
     
-    
+    [self setFollowersCountButton];
     
 }
 
@@ -370,6 +370,8 @@
         NSString *tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
 
     [self.followersCountButton setTitle:tmpString forState:UIControlStateNormal];
+    
+    [self.followersCountButton.titleLabel setFont:[UIFont  regularCustomFontOfSize:self.followersCountButton.titleLabel.font.pointSize]];
     
 }
 
@@ -392,7 +394,13 @@
     self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
     
     self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
-    [self.navigationController setTransparent];
+//    [self.navigationController setTransparent];
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
     self.navigationItem.title = @"";
     
     if (self.channelOwner.subscribedByUserValue)
@@ -544,6 +552,9 @@
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     
+    [self.editButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    
+    [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
 }
 
 //Setting up the layout for the custom segmented controller
@@ -555,6 +566,8 @@
     self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.segmentedControlsView.layer.masksToBounds = YES;
     
+    [self.collectionsTabButton.titleLabel setFont:[UIFont lightCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    [self.followingTabButton .titleLabel setFont:[UIFont lightCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
 }
 
 - (void) userDataChanged: (NSNotification*) notification
