@@ -48,7 +48,7 @@
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
 @property (nonatomic, strong) SYNPopupMessageView* popupMessageView;
-@property (nonatomic, assign) ScrollingDirection *scrollDirection;
+@property (nonatomic, assign) ScrollingDirection scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
 
 @end
