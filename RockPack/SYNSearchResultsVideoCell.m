@@ -10,6 +10,7 @@
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSocialAddButton.h"
 #import "SYNSocialButton.h"
+#import "SYNSocialCommentButton.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet SYNSocialButton *likeSocialButton;
 @property (strong, nonatomic) IBOutlet SYNSocialAddButton *addSocialButton;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareSocialButton;
+@property (strong, nonatomic) IBOutlet SYNSocialCommentButton *commentSocialButton;
 
 @end
 
@@ -122,7 +124,7 @@
     self.likeSocialButton.dataItemLinked = _videoInstance;
     self.addSocialButton.dataItemLinked = _videoInstance;
     self.shareSocialButton.dataItemLinked = _videoInstance;
-    
+    self.commentSocialButton.dataItemLinked = _videoInstance;
     
     [self.iconImageView setImageWithURL: [NSURL URLWithString: _videoInstance.thumbnailURL]
                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
@@ -146,5 +148,11 @@
 {
     [self.delegate shareControlPressed: sender];
 }
+- (IBAction)commentControlPressed:(id)sender {
+
+    [self.delegate commentControlPressed: sender];
+
+}
+
 
 @end

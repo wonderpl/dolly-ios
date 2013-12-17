@@ -382,7 +382,15 @@ typedef void (^SearchResultCompleteBlock)(int);
         userCell.followButton.layer.borderWidth = 0.0f;
         userCell.followButton.backgroundColor = [UIColor clearColor];
         userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0f];
-        userCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:userCell.channelOwner.uniqueId];
+        
+        if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:userCell.channelOwner.uniqueId]) {
+            [userCell.followButton setTitle:(NSLocalizedString(@"unfollow", "unfollow a user, search view controller"))];
+        }
+        else
+        {
+            [userCell.followButton setTitle:(NSLocalizedString(@"follow", "follow a user, search view controller"))];
+            
+        }
         // ================= //
         
         cell = userCell;
