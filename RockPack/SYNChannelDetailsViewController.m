@@ -168,7 +168,7 @@
     {
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(295,268-kHeightChange);
-        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
+//        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
     }
     
     if (IS_IPAD)
@@ -274,7 +274,6 @@
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
-    
     
     // Remove notifications individually
     // Do this rather than plain RemoveObserver call as low memory handling is based on NSNotifications.
@@ -520,16 +519,22 @@
             usingImage:nil];
     
 }
-- (void) likeControlPressed: (SYNSocialButton *) socialButton
-{
-    [super likeControlPressed:socialButton];
-    
-}
-- (void) addControlPressed: (SYNSocialButton *) socialButton
-{
-    [super addControlPressed:socialButton];
-    
-}
+//- (void) likeControlPressed: (SYNSocialButton *) socialButton
+//{
+//    [super likeControlPressed:socialButton];
+//    
+//}
+//- (void) addControlPressed: (SYNSocialButton *) socialButton
+//{
+//    [super addControlPressed:socialButton];
+//    
+//}
+//
+//- (void) commentControlPressed: (SYNSocialButton*) socialButton
+//{
+//    
+//    [super commentControlPressed: socialButton];
+//}
 
 
 -(void) setUpFollowButton
