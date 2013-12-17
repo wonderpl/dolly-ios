@@ -46,7 +46,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb131721883664256</string>
+				<string>fb573323026048639</string>
 				<string>rockpack</string>
 			</array>
 		</dict>
@@ -54,9 +54,9 @@
 	<key>CFBundleVersion</key>
 	<string>0.1.0.0</string>
 	<key>FacebookAppID</key>
-	<string>131721883664256</string>
+	<string>573323026048639</string>
 	<key>FacebookNamespace</key>
-	<string>rockpack-dev</string>
+	<string>wonderplc-dev</string>
 	<key>FullVersion</key>
 	<string>1.4.0</string>
 	<key>LSApplicationCategoryType</key>
