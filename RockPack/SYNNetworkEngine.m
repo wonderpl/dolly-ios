@@ -563,7 +563,57 @@
 
 
 
+- (void)likesForVideoId:(NSString *)videoId
+				inRange:(NSRange)range
+	  completionHandler:(MKNKUserSuccessBlock)completionBlock
+		   errorHandler:(MKNKErrorBlock)errorBlock {
+	
+    NSDictionary *apiSubstitutionDictionary = @{ @"VIDEOID": videoId};
+    
+    NSString *URLString = [kAPIVideoLikes stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+	
+	NSDictionary *parameters = @{
+								 @"start" : [NSString stringWithFormat:@"%d", range.location],
+								 @"size"  : [NSString stringWithFormat:@"%d", range.length]
+								 };
+	
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *)[self operationWithPath:URLString params:parameters];
+    networkOperation.shouldNotCacheResponse = YES;
+	
+	[networkOperation addJSONCompletionHandler:^(NSDictionary *response) {
+		completionBlock(response);
+	} errorHandler:^(NSError *error) {
+		errorBlock(error);
+	}];
+	
+	[self enqueueOperation:networkOperation];
+}
 
+- (void)channelsForVideoId:(NSString *)videoId
+				   inRange:(NSRange)range
+		 completionHandler:(MKNKUserSuccessBlock)completionBlock
+			  errorHandler:(MKNKErrorBlock)errorBlock {
+	
+    NSDictionary *apiSubstitutionDictionary = @{ @"VIDEOID": videoId};
+    
+    NSString *URLString = [kAPIVideoChannels stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+	
+	NSDictionary *parameters = @{
+								 @"start" : [NSString stringWithFormat:@"%d", range.location],
+								 @"size"  : [NSString stringWithFormat:@"%d", range.length]
+								 };
+	
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *)[self operationWithPath:URLString params:parameters];
+    networkOperation.shouldNotCacheResponse = YES;
+	
+	[networkOperation addJSONCompletionHandler:^(NSDictionary *response) {
+		completionBlock(response);
+	} errorHandler:^(NSError *error) {
+		errorBlock(error);
+	}];
+	
+	[self enqueueOperation:networkOperation];
+}
 
 #pragma mark - Autocomplete
 

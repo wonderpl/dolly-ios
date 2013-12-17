@@ -150,6 +150,10 @@ typedef enum : NSInteger {
 #define kAPIRecommendedChannels     @"/ws/USERID/channel_recommendations/"
 #define kAPICategories              @"ws/categories/"
 
+// Video info
+#define kAPIVideoLikes				@"/ws/videos/VIDEOID/starring_users/"		/* GET */
+#define kAPIVideoChannels			@"/ws/videos/VIDEOID/channels/"				/* GET */
+
 #define kLocationService            @"/ws/location/"                            /* GET */
 
 // Share link

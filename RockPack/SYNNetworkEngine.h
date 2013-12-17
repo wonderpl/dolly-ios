@@ -110,6 +110,18 @@
 - (void) updatePlayerSourceWithCompletionHandler: (MKNKUserSuccessBlock) completionBlock
                                     errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+#pragma mark - Search video player info
+
+- (void)likesForVideoId:(NSString *)videoId
+				inRange:(NSRange)range
+	  completionHandler:(MKNKUserSuccessBlock)completionBlock
+		   errorHandler:(MKNKErrorBlock)errorBlock;
+
+- (void)channelsForVideoId:(NSString *)videoId
+				   inRange:(NSRange)range
+		 completionHandler:(MKNKUserSuccessBlock)completionBlock
+			  errorHandler:(MKNKErrorBlock)errorBlock;
+
 #pragma mark - Facebook deep linking
 
 - (void) resolveFacebookLink: (NSString *) facebookLink
