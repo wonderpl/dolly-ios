@@ -419,43 +419,13 @@
     
     
 }
-- (BOOL) registerChannelOwnersFromDictionary: (NSDictionary *) dictionary
-                                   forViewId: (NSString *) viewId
-{
-    return [self registerChannelOwnersFromDictionary:dictionary
-                                           forViewId:viewId
-                                         byAppending:NO];
-}
+
+
 
 - (BOOL) registerChannelOwnersFromDictionary: (NSDictionary *) dictionary
                                    forViewId: (NSString *) viewId
-                                 byAppending:(BOOL)appending
 {
-    NSError *error;
-    NSArray *existingChannelOwners;
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    [fetchRequest setEntity: [NSEntityDescription entityForName: @"ChannelOwner"
-                                         inManagedObjectContext: importManagedObjectContext]];
-    
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", viewId]];
-    
-    
-    existingChannelOwners = [importManagedObjectContext executeFetchRequest: fetchRequest
-                                                                      error: &error];
-    
-    NSMutableDictionary* channelOwnerById = [NSMutableDictionary dictionary];
-    
-    for (ChannelOwner* co in existingChannelOwners)
-    {
-        if(!co.uniqueId)
-            continue;
-        
-        co.markedForDeletionValue = YES;
-        
-        channelOwnerById[co.uniqueId] = co;
-    }
     
     NSDictionary *channelOwnersDictionary = dictionary[@"users"];
     
@@ -471,18 +441,11 @@
     ChannelOwner *channelOwner;
     for (NSDictionary *itemDictionary in itemArray)
     {
-        NSString* newChannelOwnerId = itemDictionary[@"id"];
-        if(![newChannelOwnerId isKindOfClass:[NSString class]])
-            continue;
-        
-        if(!(channelOwner = channelOwnerById[newChannelOwnerId]))
+        if(!(channelOwner = [ChannelOwner instanceFromDictionary: itemDictionary
+                                       usingManagedObjectContext: importManagedObjectContext
+                                             ignoringObjectTypes: kIgnoreChannelObjects]))
         {
-            if(!(channelOwner = [ChannelOwner instanceFromDictionary: itemDictionary
-                                           usingManagedObjectContext: importManagedObjectContext
-                                                 ignoringObjectTypes: kIgnoreChannelObjects]))
-            {
-                continue;
-            }
+            continue;
         }
         
         channelOwner.markedForDeletionValue = NO;
@@ -490,16 +453,8 @@
     }
     
     
-    if(!appending)
-    {
-        for (NSString* key in channelOwnerById)
-        {
-            if((channelOwner = channelOwnerById[key]) && channelOwner.markedForDeletionValue)
-                [channelOwner.managedObjectContext deleteObject:channelOwner];
-            
-        }
-    }
-    
+    /* NOTE:  search registry never clears its entries upon registry because the data is always considered fresh.
+    It is the controllers responsibility to clear it when needed */
     
     BOOL saveResult = [self saveImportContext];
     

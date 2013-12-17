@@ -108,6 +108,8 @@
     
     [self.view addSubview: self.activityView];
     
+    [appDelegate.searchRegistry clearImportContextFromEntityName:kChannelOwner andViewId:self.viewId];
+    
     [appDelegate.networkEngine subscribersForUserId: appDelegate.currentUser.uniqueId
                                           channelId: self.channel.uniqueId
                                            forRange: self.dataRequestRange
@@ -126,6 +128,7 @@
                                     }];
     
 }
+
 
 
 #pragma mark - UICollectionView Delegate/Data Source
@@ -268,13 +271,15 @@
     }
 }
 
+
+
 #pragma mark - Displayig Data
 
 - (void) displayUsers
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
-    request.entity = [NSEntityDescription entityForName: @"ChannelOwner"
+    request.entity = [NSEntityDescription entityForName: kChannelOwner
                                  inManagedObjectContext: appDelegate.searchManagedObjectContext];
     
     request.predicate = [NSPredicate predicateWithFormat: @"viewId == %@", self.viewId];

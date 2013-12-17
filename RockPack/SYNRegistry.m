@@ -80,13 +80,25 @@
     return NO;
 }
 
-
 - (BOOL) clearImportContextFromEntityName: (NSString *) entityName
 {
+    return [self clearImportContextFromEntityName:entityName
+                                        andViewId:nil];
+}
+
+- (BOOL) clearImportContextFromEntityName: (NSString *) entityName
+                                andViewId:(NSString*)viewId
+{
+  
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName: entityName
                                                          inManagedObjectContext: importManagedObjectContext];
+    
+    if(viewId)
+    {
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"viewId == %@", viewId];
+    }
     
     [fetchRequest setEntity: entityDescription];
     

@@ -293,11 +293,11 @@ typedef void (^SearchResultCompleteBlock)(int);
     BOOL success;
     
     
-    if (!(success = [appDelegate.searchRegistry clearImportContextFromEntityName: kVideoInstance]))
+    if (!(success = [appDelegate.searchRegistry clearImportContextFromEntityName: kVideoInstance andViewId:self.viewId]))
         DebugLog(@"Could not clean VideoInstances from search context");
     
     // Call me an amateur but I feel proud of this syntax
-    if (!(success &= [appDelegate.searchRegistry clearImportContextFromEntityName: kChannelOwner]))
+    if (!(success &= [appDelegate.searchRegistry clearImportContextFromEntityName: kChannelOwner andViewId:self.viewId]))
         DebugLog(@"Could not clean ChannelOwner from search context");
     
     self.videosArray = @[];

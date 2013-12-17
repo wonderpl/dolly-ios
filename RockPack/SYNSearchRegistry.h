@@ -24,7 +24,6 @@
 
 - (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary withViewId:(NSString*)viewId;
 
-- (BOOL) registerChannelOwnersFromDictionary: (NSDictionary *) dictionary forViewId: (NSString *) viewId byAppending:(BOOL)appending;
 
 - (NSCache *) registerFriendsFromAddressBookArray: (NSArray *) abArray;
 
