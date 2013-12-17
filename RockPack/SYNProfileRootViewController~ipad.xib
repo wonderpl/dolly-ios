@@ -179,7 +179,7 @@
                                 <constraint firstAttribute="width" constant="246" id="zq3-DQ-hMM"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AvatarProfile.png" translatesAutoresizingMaskIntoConstraints="NO" id="lPO-sd-9aT" userLabel="ImageView - Avatar">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPO-sd-9aT" userLabel="ImageView - Avatar">
                             <rect key="frame" x="109" y="3" width="96" height="96"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="0.13360003340000001" blue="0.23229262489999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -303,7 +303,6 @@
         </view>
     </objects>
     <resources>
-        <image name="AvatarProfile.png" width="60" height="61"/>
         <image name="ButtonMore.png" width="56" height="56"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>

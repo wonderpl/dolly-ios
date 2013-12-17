@@ -533,6 +533,8 @@
     self.fullNameLabel.text = self.channelOwner.displayName;
     
     UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+    self.profileImageView.image = placeholderImage;
+
     
     if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
         
