@@ -90,7 +90,3 @@ __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS\
 #define IS_SIMULATOR ( TARGET_IPHONE_SIMULATOR )
 
 #define IS_IOS_7_OR_GREATER ([[UIApplication sharedApplication] respondsToSelector: @selector(setMinimumBackgroundFetchInterval:)])
-
-#define PLATFORM_CAN_HANDLE_LIVE_BLUR ([[UIApplication sharedApplication] respondsToSelector: @selector(setMinimumBackgroundFetchInterval:)] && [[UIDevice currentDevice] platformCanHandleLiveBlur])
-
-#define PLATFORM_CAN_HANDLE_LIVE_BLUR_OPTIONALLY PLATFORM_CAN_HANDLE_LIVE_BLUR
