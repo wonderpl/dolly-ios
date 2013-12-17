@@ -91,6 +91,9 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.containerTabs.layer.masksToBounds = YES;
     
     
+    self.usersTabButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.usersTabButton.titleLabel.font.pointSize];
+    self.videosTabButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.videosTabButton.titleLabel.font.pointSize];
+    
     // == Define Completion Blocks for operations == //
     
     SYNSearchResultsViewController *wself = self;
