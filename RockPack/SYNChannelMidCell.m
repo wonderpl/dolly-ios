@@ -144,7 +144,10 @@
 
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-    
+    if (!self.showsDescriptionOnSwipe) {
+		return;
+	}
+	
     if (self.state == ChannelMidCellStateDefault) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
         

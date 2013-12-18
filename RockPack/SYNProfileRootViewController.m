@@ -878,22 +878,10 @@
             channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
             
 			channelThumbnailCell.followButton.hidden = (self.modeType == kModeMyOwnProfile);
-			channelThumbnailCell.descriptionLabel.text = channel.channelDescription;
-            NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
-            channelThumbnailCell.followerCountLabel.text = subscribersString;
+			channelThumbnailCell.showsDescriptionOnSwipe = YES;
             channelThumbnailCell.channel = channel;
-            
-            NSMutableString* videoCountString = [NSMutableString new];
-            if (IS_IPHONE)
-            {
-                [videoCountString appendString:@"- "];
-            }
-            
-            [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
-
-            channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
-            
-            // indexPath.row == Favourites cell, which is a special case
+			
+			// indexPath.row == Favourites cell, which is a special case
             if(self.modeType == kModeMyOwnProfile && indexPath.row != 1)
             {
                 channelThumbnailCell.deletableCell = YES;

@@ -32,6 +32,7 @@ typedef enum {
 
 @property (nonatomic, weak) Channel* channel;
 @property (nonatomic) BOOL deletableCell;
+@property (nonatomic, assign) BOOL showsDescriptionOnSwipe;
 
 @property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
