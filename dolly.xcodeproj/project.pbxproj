@@ -354,7 +354,6 @@
 		01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7C9671748ED0B00E36994 /* libsqlite3.dylib */; };
 		01F8E73A16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E73816B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png */; };
 		01F8E73B16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E73916B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png */; };
-		01F8E76616B03462000D44B9 /* VimeoIFramePlayer.html in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E76316B03462000D44B9 /* VimeoIFramePlayer.html */; };
 		01F8E76716B03462000D44B9 /* YouTubeIFramePlayer.html in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E76416B03462000D44B9 /* YouTubeIFramePlayer.html */; };
 		01F8E77F16B03A7C000D44B9 /* SYNVideoViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F8E77D16B03A7C000D44B9 /* SYNVideoViewerViewController.m */; };
 		01F8E78016B03A7C000D44B9 /* SYNVideoViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */; };
@@ -1841,7 +1840,6 @@
 		01F7C9671748ED0B00E36994 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		01F8E73816B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelVideoScreenVideoMainOverlay.png; path = Assets/Images/PanelVideoScreenVideoMainOverlay.png; sourceTree = "<group>"; };
 		01F8E73916B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelVideoScreenVideoMainOverlay@2x.png"; path = "Assets/Images/PanelVideoScreenVideoMainOverlay@2x.png"; sourceTree = "<group>"; };
-		01F8E76316B03462000D44B9 /* VimeoIFramePlayer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = VimeoIFramePlayer.html; path = Assets/HTML/VimeoIFramePlayer.html; sourceTree = "<group>"; };
 		01F8E76416B03462000D44B9 /* YouTubeIFramePlayer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = YouTubeIFramePlayer.html; path = Assets/HTML/YouTubeIFramePlayer.html; sourceTree = "<group>"; };
 		01F8E77C16B03A7C000D44B9 /* SYNVideoViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewerViewController.h; sourceTree = "<group>"; };
 		01F8E77D16B03A7C000D44B9 /* SYNVideoViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewerViewController.m; sourceTree = "<group>"; };
@@ -4317,7 +4315,6 @@
 		01F8E76216B0312E000D44B9 /* HTML */ = {
 			isa = PBXGroup;
 			children = (
-				01F8E76316B03462000D44B9 /* VimeoIFramePlayer.html */,
 				01F8E76416B03462000D44B9 /* YouTubeIFramePlayer.html */,
 			);
 			name = HTML;
@@ -6212,7 +6209,6 @@
 				1FFAE62C17E21BBC006C92CA /* ShadowPanelFriends~iphone.png in Resources */,
 				01F8E73A16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay.png in Resources */,
 				01F8E73B16B010F3000D44B9 /* PanelVideoScreenVideoMainOverlay@2x.png in Resources */,
-				01F8E76616B03462000D44B9 /* VimeoIFramePlayer.html in Resources */,
 				01F8E76716B03462000D44B9 /* YouTubeIFramePlayer.html in Resources */,
 				01F8E78016B03A7C000D44B9 /* SYNVideoViewerViewController.xib in Resources */,
 				BEB31389181FCD7500FAF98A /* SYNFeedRootViewController~iphone.xib in Resources */,
