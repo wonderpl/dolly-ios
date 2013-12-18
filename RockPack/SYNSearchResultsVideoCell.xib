@@ -29,25 +29,25 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NrE-x8-VXC" userLabel="Button - Like" customClass="SYNSocialButton">
-                        <rect key="frame" x="39" y="263" width="50" height="50"/>
+                        <rect key="frame" x="53" y="259" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="likeControlPressed:" destination="bx7-hr-ZLz" eventType="touchUpInside" id="WYX-y5-FjY"/>
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzp-d3-V7P" userLabel="Button - Add" customClass="SYNSocialAddButton">
-                        <rect key="frame" x="108" y="263" width="50" height="50"/>
+                        <rect key="frame" x="121" y="259" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="addControlPressed:" destination="bx7-hr-ZLz" eventType="touchUpInside" id="2C7-zb-SK8"/>
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8wk-5c-EEh" userLabel="Button - Share" customClass="SYNSocialButton">
-                        <rect key="frame" x="252" y="263" width="50" height="50"/>
+                        <rect key="frame" x="257" y="259" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="shareControlPressed:" destination="bx7-hr-ZLz" eventType="touchUpInside" id="PfO-84-9K5"/>
                         </connections>
@@ -69,7 +69,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFc-cv-Ll1" userLabel="Control - Comment" customClass="SYNSocialCommentButton">
-                        <rect key="frame" x="182" y="263" width="50" height="50"/>
+                        <rect key="frame" x="189" y="259" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
