@@ -201,7 +201,7 @@ me...</string>
                         <action selector="moreButtonTapped:" destination="-1" eventType="touchUpInside" id="r2f-nU-hlw"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="5Wb-qH-nzQ" userLabel="ImageView - Avatar">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AvatarProfile.png" id="5Wb-qH-nzQ" userLabel="ImageView - Avatar">
                     <rect key="frame" x="112" y="205" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -233,8 +233,8 @@ me...</string>
         </view>
     </objects>
     <resources>
+        <image name="AvatarProfile.png" width="60" height="61"/>
         <image name="ButtonMore.png" width="38" height="38"/>
-        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="coverImageTest.jpg" width="917" height="513"/>
     </resources>

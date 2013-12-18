@@ -367,7 +367,6 @@
     [self setFollowersCountButton];
     
 }
-
 -(void) setFollowersCountButton
 {
         NSString *tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
@@ -534,18 +533,25 @@
     
     UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
     self.profileImageView.image = placeholderImage;
-
     
     if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
         
         dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
         dispatch_async(downloadQueue, ^{
             
-            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailURL ]];
+            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailLargeUrl ]];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.self.profileImageView.image = [UIImage imageWithData: imageData];
-            });
+            UIImage *tmpImage = [UIImage imageWithData: imageData];
+
+            //if statement for now as the db has urls for avatars that have not been uploaded
+            //should be able to get rid of it later
+            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    self.profileImageView.image = tmpImage;
+                });
+            }
+            
         });
         
     }else{

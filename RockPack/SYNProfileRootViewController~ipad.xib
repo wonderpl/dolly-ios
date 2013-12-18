@@ -65,13 +65,13 @@
                     </connections>
                 </collectionView>
                 <collectionView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MS7-tW-0TH">
-                    <rect key="frame" x="0.0" y="0.0" width="672" height="1004"/>
+                    <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="XH1-bA-kHd">
                         <size key="itemSize" width="280" height="80"/>
-                        <size key="headerReferenceSize" width="672" height="722"/>
-                        <size key="footerReferenceSize" width="672" height="150"/>
+                        <size key="headerReferenceSize" width="671" height="722"/>
+                        <size key="footerReferenceSize" width="671" height="150"/>
                         <inset key="sectionInset" minX="47" minY="0.0" maxX="47" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
@@ -179,16 +179,15 @@
                                 <constraint firstAttribute="width" constant="246" id="zq3-DQ-hMM"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPO-sd-9aT" userLabel="ImageView - Avatar">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AvatarProfile.png" translatesAutoresizingMaskIntoConstraints="NO" id="lPO-sd-9aT" userLabel="ImageView - Avatar">
                             <rect key="frame" x="109" y="3" width="96" height="96"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="1" green="0.13360003340000001" blue="0.23229262489999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="96" id="q6d-Pf-fP9"/>
                                 <constraint firstAttribute="height" constant="96" id="sgv-Xq-FCA"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mg3-SN-ejj">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mg3-SN-ejj" userLabel="Button - followers count">
                             <rect key="frame" x="108" y="170" width="99" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
@@ -287,11 +286,9 @@
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" id="ZjT-oZ-Y4K"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" constant="54" id="aYf-C1-kCH"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="top" secondItem="1" secondAttribute="top" id="bF0-s9-siM"/>
-                <constraint firstAttribute="centerX" secondItem="MS7-tW-0TH" secondAttribute="centerX" constant="-0.5" id="dZ9-eW-GDU"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" constant="0.5" id="fVi-Wv-NS0"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="centerY" secondItem="uxB-NR-Hkw" secondAttribute="centerY" constant="-28" id="gbi-nM-5re"/>
                 <constraint firstAttribute="bottom" secondItem="MS7-tW-0TH" secondAttribute="bottom" id="kQy-8n-9mG"/>
-                <constraint firstAttribute="trailing" secondItem="MS7-tW-0TH" secondAttribute="trailing" constant="-1" id="lqb-rC-a4P"/>
                 <constraint firstItem="w5q-qP-bHl" firstAttribute="centerX" secondItem="jew-YX-wj4" secondAttribute="centerX" id="ooi-sQ-IG0"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="0td-Z3-eno" secondAttribute="leading" id="oqw-vP-LPj"/>
                 <constraint firstItem="uxB-NR-Hkw" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" id="pkd-xG-IdV"/>
@@ -303,6 +300,7 @@
         </view>
     </objects>
     <resources>
+        <image name="AvatarProfile.png" width="60" height="61"/>
         <image name="ButtonMore.png" width="56" height="56"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>
