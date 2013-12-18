@@ -343,10 +343,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
+    NSDictionary* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
+	NSString *searchTerm = suggestion[@"term"];
     
-    [self dispatchSearch:suggestion
-               withTitle:suggestion
+    [self dispatchSearch:searchTerm
+               withTitle:searchTerm
                  forType:kSearchTypeTerm];
     
     [self closeAutocomplete];
