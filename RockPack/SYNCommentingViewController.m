@@ -76,6 +76,12 @@ static NSString* PlaceholderText = @"Say something nice";
                                                         object:self
                                                       userInfo:@{kScrollingDirection:@(ScrollingDirectionUp)}];
     [self.navigationController popViewControllerAnimated:YES];
+	
+	if (self.presentingViewController) {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	} else {
+		[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+	}
 }
 
 - (void)viewDidLoad
