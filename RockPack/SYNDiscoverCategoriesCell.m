@@ -23,11 +23,11 @@
     
     if(selected)
     {
-        [super setBackgroundColor: [UIColor blackColor]];
+        self.dimmingView.hidden = NO;
     }
     else
     {
-        [super setBackgroundColor: genreColor];
+        self.dimmingView.hidden = YES;
     }
 }
 

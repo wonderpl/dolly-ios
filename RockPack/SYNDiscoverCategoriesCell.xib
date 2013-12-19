@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -37,6 +37,11 @@
                         <rect key="frame" x="287" y="17" width="34" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWQ-8C-i6W" userLabel="Dimming View">
+                        <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -46,11 +51,16 @@
                 <constraint firstAttribute="bottom" secondItem="p9B-3P-4cn" secondAttribute="bottom" id="JYm-9x-3Cr"/>
                 <constraint firstItem="p9B-3P-4cn" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" id="NbB-Je-yG6"/>
                 <constraint firstAttribute="centerX" secondItem="VDA-cz-Gkg" secondAttribute="centerX" id="VLa-NM-Rp5"/>
+                <constraint firstItem="kWQ-8C-i6W" firstAttribute="top" secondItem="DiE-ts-EYH" secondAttribute="top" id="aFj-a8-IUb"/>
+                <constraint firstAttribute="trailing" secondItem="kWQ-8C-i6W" secondAttribute="trailing" id="gvV-gE-jkK"/>
+                <constraint firstAttribute="bottom" secondItem="kWQ-8C-i6W" secondAttribute="bottom" id="lqi-KR-swa"/>
+                <constraint firstItem="kWQ-8C-i6W" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" id="rse-tA-VcM"/>
                 <constraint firstAttribute="centerY" secondItem="VDA-cz-Gkg" secondAttribute="centerY" id="vbD-gP-aGn"/>
             </constraints>
             <size key="customSize" width="332" height="67"/>
             <connections>
                 <outlet property="arrow" destination="R2U-bh-bl3" id="F5w-V6-8gv"/>
+                <outlet property="dimmingView" destination="kWQ-8C-i6W" id="Qty-dw-KC8"/>
                 <outlet property="label" destination="VDA-cz-Gkg" id="Unb-AB-PbO"/>
                 <outlet property="separator" destination="p9B-3P-4cn" id="89E-GU-cSa"/>
             </connections>
