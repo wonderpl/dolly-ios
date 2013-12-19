@@ -20,4 +20,6 @@
 
 @property (nonatomic, strong) IBOutlet UIView* separator;
 
+@property (nonatomic, strong) IBOutlet UIView* dimmingView;
+
 @end
