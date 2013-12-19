@@ -9,19 +9,17 @@
 #import "SYNImagePickerController.h"
 #import "SYNCameraPopoverViewController.h"
 #import "SYNPopoverBackgroundView.h"
-#import "GKImagePicker.h"
 
 @interface SYNImagePickerController () <SYNCameraPopoverViewControllerDelegate, UIPopoverControllerDelegate, GKImagePickerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, assign) BOOL didShowModally;
 @property (nonatomic, assign) CGRect popoverPresentingFrame;
 @property (nonatomic, assign) UIPopoverArrowDirection direction;
-@property (nonatomic,strong) GKImagePicker* imagePicker;
 @property (nonatomic,strong) UIPopoverController* cameraMenuPopoverController;
 @property (nonatomic,strong) UIPopoverController* cameraPopoverController;
+@property (nonatomic) CGSize cropSize;
 
 @end
-
 
 @implementation SYNImagePickerController
 
@@ -41,6 +39,21 @@
     if (self)
     {
         _hostViewController = host;
+        self.cropSize = CGSizeMake(280, 280);
+
+    }
+    return self;
+}
+
+- (id) initWithHostViewController: (UIViewController*) host withCropSize:(CGSize) cropSize
+{
+    self = [super init];
+    if (self)
+    {
+        _hostViewController = host;
+        
+        _cropSize = cropSize;
+        
     }
     return self;
 }
@@ -136,7 +149,7 @@
     }
     
     self.imagePicker = [[GKImagePicker alloc] init];
-    self.imagePicker.cropSize = CGSizeMake(280, 280);
+    self.imagePicker.cropSize = self.cropSize;
     self.imagePicker.delegate = self;
     self.imagePicker.imagePickerController.sourceType = sourceType;
     
@@ -167,7 +180,7 @@
 {
     self.didShowModally = YES;
     self.imagePicker = [[GKImagePicker alloc] init];
-    self.imagePicker.cropSize = CGSizeMake(280, 280);
+    self.imagePicker.cropSize = self.cropSize;
     self.imagePicker.delegate = self;
     self.imagePicker.imagePickerController.sourceType = sourceType;
     

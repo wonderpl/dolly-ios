@@ -5,6 +5,7 @@
 //  Created by Mats Trovik on 15/05/2013.
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
+#import "GKImagePicker.h"
 
 @import Foundation;
 
@@ -26,6 +27,7 @@
 
 @property(nonatomic,weak) UIViewController* hostViewController; //< view controller hosting the picker. will receive commands to present the picker
 @property(nonatomic,weak) id<SYNImagePickerControllerDelegate> delegate; //< picker delegate
+@property (nonatomic,strong) GKImagePicker* imagePicker;
 
 /**
 	recommended initialiser. assigns a host view controller which will present the image picker.
@@ -34,6 +36,7 @@
 	@returns successfully initialised picker, or nil
  */
 -(id)initWithHostViewController:(UIViewController*)host;
+- (id) initWithHostViewController: (UIViewController*) host withCropSize:(CGSize) cropSize;
 
 
 /**

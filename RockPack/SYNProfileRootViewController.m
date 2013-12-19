@@ -560,25 +560,27 @@
     
     if (![self.channelOwner.coverPhotoURL isEqualToString:@""]){ // there is a url string
         
-//        NSArray *thumbnailURLItems = [self.channelOwner.thumbnailURL componentsSeparatedByString: @"/"];
-//        
-//        if (thumbnailURLItems.count >= 6)
-//        {
-//            NSString *thumbnailSizeString = thumbnailURLItems[5];
-//            NSString *thumbnailUrlString;
-//            if (IS_IPAD)
-//            {
-//                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
-//            }
-//            else
-//            {
-//                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
-//            }
-//            
-//            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
-//                            placeholderImage: placeholderImage
-//                                     options: SDWebImageRetryFailed];
-//        }
+        NSArray *thumbnailURLItems = [self.channelOwner.thumbnailURL componentsSeparatedByString: @"/"];
+        
+        if (thumbnailURLItems.count >= 6)
+        {
+            NSString *thumbnailSizeString = thumbnailURLItems[5];
+            NSString *thumbnailUrlString;
+            if (IS_IPAD)
+            {
+                thumbnailUrlString = [self.channelOwner.coverPhotoURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
+            }
+            else
+            {
+                thumbnailUrlString = [self.channelOwner.coverPhotoURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
+            }
+            
+            NSLog(@"thumbnail string : %@", thumbnailUrlString);
+            
+            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
+                            placeholderImage: placeholderImage
+                                     options: SDWebImageRetryFailed];
+        }
 
 //        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
 //        dispatch_async(downloadQueue, ^{
@@ -2607,17 +2609,20 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 - (IBAction)changeCoverImageButtonTapped:(id)sender
 {
 //#warning cover photo
-    
-    self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self];
+    //302,167 is the values for the cropping, the cover photo dimensions is 907 x 502
+    self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(302,167)];
     self.imagePickerControllerCoverphoto.delegate = self;
     [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
 
 }
 - (IBAction)changeAvatarButtonTapped:(id)sender
 {
-    self.imagePickerControllerAvatar = [[SYNImagePickerController alloc] initWithHostViewController:self];
+    self.imagePickerControllerAvatar = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(280, 280)];
+    
     self.imagePickerControllerAvatar.delegate = self;
     [self.imagePickerControllerAvatar presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+    NSLog(@"----- %f, %f", self.imagePickerControllerCoverphoto.imagePicker.cropSize.height, self.imagePickerControllerCoverphoto.imagePicker.cropSize.width);
+
 }
 
 
@@ -2651,7 +2656,7 @@ finishedWithImage: (UIImage *) image
                                                     image: image
                                         completionHandler: ^(NSDictionary* result)
      {
-         //self.profilePictureImageView.image = image;
+         self.profileImageView.image = image;
          //[self.activityIndicator stopAnimating];
          self.avatarButton.enabled = YES;
      }
