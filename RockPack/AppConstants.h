@@ -152,6 +152,10 @@ typedef enum : NSInteger {
 #define kAPIRecommendedChannels     @"/ws/USERID/channel_recommendations/"
 #define kAPICategories              @"ws/categories/"
 
+// Video info
+#define kAPIVideoLikes				@"/ws/videos/VIDEOID/starring_users/"		/* GET */
+#define kAPIVideoChannels			@"/ws/videos/VIDEOID/channels/"				/* GET */
+
 #define kLocationService            @"/ws/location/"                            /* GET */
 
 // Share link
@@ -199,7 +203,6 @@ typedef enum : NSInteger {
 #define kAPIFriends                 @"/ws/USERID/friends/"  /* GET */
 
 // Push notification
-#define kAccountSettingsPressed     @"kAccountSettingsPressed"
 #define kAccountSettingsLogout      @"kAccountSettingsLogout"
 #define kUserDataChanged            @"kUserDataChanged"
 #define kChannelSubscribeRequest    @"kChannelSubscribeRequest"

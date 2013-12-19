@@ -10,6 +10,6 @@
 
 @interface SYNSocialCommentButton : SYNSocialButton
 
-@property (nonatomic) NSInteger count;
+@property (nonatomic) NSUInteger count;
 
 @end

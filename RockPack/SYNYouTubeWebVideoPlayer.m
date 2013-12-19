@@ -121,39 +121,13 @@
 
 #pragma mark - Private
 
-- (NSString *)videoQuality {
-    // Based on empirical evidence (Youtube app), determine the appropriate quality level based on device and connectivity
-	Reachability *reachability = [Reachability reachabilityWithHostname:@"http://www.youtube.com/"];
-
-	NSString *suggestedQuality = @"default";
-
-	if ([reachability currentReachabilityStatus] == ReachableViaWiFi) {
-		if (IS_IPAD) {
-			suggestedQuality = @"hd720";
-		} else {
-			suggestedQuality = @"medium";
-		}
-	} else {
-		// Connected via cellular network
-		if (IS_IPAD) {
-			suggestedQuality = @"medium";
-		} else {
-			suggestedQuality = @"small";
-		}
-	}
-
-	DebugLog (@"Attempting to play quality: %@", suggestedQuality);
-	return suggestedQuality;
-}
-
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 	if ([actionName isEqualToString:@"ready"]) {
 		NSString *sourceId = self.videoInstance.video.sourceId;
-		NSString *videoQuality = [self videoQuality];
 		
 		[self updatePlayerSize:self.youTubeWebView.frame.size];
 		
-		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, videoQuality];
+		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
 		
 	}

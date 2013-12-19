@@ -16,7 +16,6 @@
 @property (nonatomic,strong)UIColor* selectedColor;
 @property (nonatomic,strong)UIColor* defaultShadowColor;
 @property (nonatomic,strong)UIColor* selectedShadowColor;
-@property (nonatomic, strong) UIImageView* userImageView;
 
 @end
 
@@ -67,10 +66,12 @@
         self.textLabel.backgroundColor = [UIColor clearColor];
         
         
-        self.userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
-        self.userImageView.backgroundColor = [UIColor greenColor];
-        self.userImageView.layer.cornerRadius = self.userImageView.frame.size.height * 0.5f;
-        [self addSubview:self.userImageView];
+        self.userAvatarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 6.0f, 30.0f, 30.0f)];
+        self.userAvatarButton.backgroundColor = [UIColor greenColor];
+        self.userAvatarButton.layer.cornerRadius = self.userAvatarButton.frame.size.height * 0.5f;
+        self.userAvatarButton.clipsToBounds = YES;
+        self.userAvatarButton.hidden = YES;
+        [self addSubview:self.userAvatarButton];
         
     }
     return self;
@@ -84,14 +85,22 @@
     CGRect newFrame = self.textLabel.frame;
     
     
-    newFrame.size.width = 250.0f;
     
-    newFrame.origin.x = 72.0f;
-    newFrame.origin.y += 4.0f;
+    
+    newFrame.origin.x = 50.0f;
+    
+    newFrame.size.width = self.frame.size.width - newFrame.origin.x - 10.0f;
     
     self.textLabel.frame = newFrame;
     
     
+    
+    
+}
+
+- (void) prepareForReuse
+{
+    self.userAvatarButton.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

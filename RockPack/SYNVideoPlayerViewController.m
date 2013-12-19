@@ -244,7 +244,7 @@
 	self.addButton.dataItemLinked = videoInstance;
 	
 	self.likeButton.selected = videoInstance.starredByUserValue;
-	[self.likeButton setTitle:@"likes" andCount:[videoInstance.video.starCount integerValue]];
+	[self.likeButton setTitle:@"like" andCount:[videoInstance.video.starCount integerValue]];
 }
 
 - (void)trackVideoViewingStatisticsForVideoInstance:(VideoInstance *)videoInstance withVideoPlayer:(SYNVideoPlayer *)videoPlayer {
@@ -265,7 +265,7 @@
 
 - (Class)animationClassForViewController:(UIViewController *)viewController {
 	NSDictionary *mapping = @{
-							  NSStringFromClass([SYNFullScreenVideoAnimator class]) : [SYNFullScreenVideoAnimator class],
+							  NSStringFromClass([SYNFullScreenVideoViewController class]) : [SYNFullScreenVideoAnimator class],
 							  NSStringFromClass([SYNOneToOneSharingController class]) : [SYNPopoverAnimator class],
 							  NSStringFromClass([SYNAddToChannelViewController class]) : [SYNPopoverAnimator class]
 							  };

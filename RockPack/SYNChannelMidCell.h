@@ -9,11 +9,12 @@
 #import "Channel.h"
 @import UIKit;
 
+@class SYNChannelMidCell;
+
 @protocol SYNChannelMidCellDelegate <NSObject>
 
-//- (void) channelTapped: (UICollectionViewCell *) cell;
-- (void) followButtonTapped: (UICollectionViewCell *) cell;
-- (void) deleteChannelTapped: (UICollectionViewCell *) cell;
+- (void)followButtonTapped:(SYNChannelMidCell *)cell;
+- (void)deleteChannelTapped:(SYNChannelMidCell *)cell;
 
 
 typedef enum {
@@ -31,6 +32,7 @@ typedef enum {
 
 @property (nonatomic, weak) Channel* channel;
 @property (nonatomic) BOOL deletableCell;
+@property (nonatomic, assign) BOOL showsDescriptionOnSwipe;
 
 @property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
@@ -45,7 +47,6 @@ typedef enum {
 
 @property (nonatomic, weak) id<SYNChannelMidCellDelegate> viewControllerDelegate;
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel;
--(void) setHiddenForFollowButton: (BOOL) hide;
 -(void) setBorder;
 -(void) setState:(ChannelMidCellState)state withAnimation:(BOOL) animated;
 

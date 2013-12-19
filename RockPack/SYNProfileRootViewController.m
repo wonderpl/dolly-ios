@@ -622,8 +622,8 @@
     self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.segmentedControlsView.layer.masksToBounds = YES;
     
-    [self.collectionsTabButton.titleLabel setFont:[UIFont lightCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
-    [self.followingTabButton .titleLabel setFont:[UIFont lightCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    [self.followingTabButton .titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
 }
 
 - (void) userDataChanged: (NSNotification*) notification
@@ -926,18 +926,8 @@
             [channelThumbnailCell.followerCountLabel setText:subscribersString];
             
             channelThumbnailCell.channel = channel;
-            
-            NSMutableString* videoCountString = [NSMutableString new];
-            if (IS_IPHONE)
-            {
-                [videoCountString appendString:@"- "];
-            }
-            
-            [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
-
-            channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
-            
-            // indexPath.row == Favourites cell, which is a special case
+			
+			// indexPath.row == Favourites cell, which is a special case
             if(self.modeType == kModeMyOwnProfile && indexPath.row != 1)
             {
                 channelThumbnailCell.deletableCell = YES;
@@ -954,11 +944,7 @@
                 {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
                 }
-                [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
-
-                NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
-                [channelThumbnailCell.followerCountLabel setText:subscribersString];
-                
+				
                 channelThumbnailCell.channel = channel;
                 
                 NSMutableString* videoCountString = [NSMutableString new];
@@ -2450,11 +2436,6 @@
                                                  {
                                                      errorTitle = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_title", nil);
                                                      errorMessage = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_description", nil);
-                                                 }
-                                                 else
-                                                 {
-                                                     errorTitle = NSLocalizedString(@"channel_creation_screen_error_unknown_title", nil);
-                                                     errorMessage = NSLocalizedString(@"channel_creation_screen_error_unknown_create_description", nil);
                                                  }
                                              }
                                              

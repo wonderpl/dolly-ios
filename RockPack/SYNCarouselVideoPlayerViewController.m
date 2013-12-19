@@ -56,15 +56,8 @@
 }
 
 + (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
-	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
-	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
-	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
-	
-	SYNCarouselVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
-	viewController.model = [[SYNStaticModel alloc] initWithLoadedItems:videoInstances];
-	viewController.selectedIndex = selectedIndex;
-	
-	return viewController;
+	SYNPagingModel *model = [[SYNStaticModel alloc] initWithLoadedItems:videoInstances];
+	return [self viewControllerWithModel:model selectedIndex:selectedIndex];
 }
 
 #pragma mark - UIViewController

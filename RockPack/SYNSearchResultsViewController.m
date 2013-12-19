@@ -13,7 +13,7 @@
 #import "SYNSearchResultsViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNChannelFooterMoreView.h"
-
+#import "SYNSearchVideoPlayerViewController.h"
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "ChannelOwner.h"
@@ -394,36 +394,12 @@ typedef void (^SearchResultCompleteBlock)(int);
 }
 
 
-- (void) collectionView: (UICollectionView *) collectionView
-         didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    if (collectionView == self.videosCollectionView)
-    {
-        CGPoint center;
-        UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];
-        
-        if (cell)
-        {
-            center = [self.view convertPoint: cell.center
-                                    fromView: cell.superview];
-        }
-        else
-        {
-            center = self.view.center;
-        }
-        
-        [self displayVideoViewerWithVideoInstanceArray: self.videosArray
-                                      andSelectedIndex: indexPath.item
-                                                center: center];
-    }
-    else if (collectionView == self.usersCollectionView)
-    {
-        NSLog(@"SYNSearchResultsCollectionType:didDeselectItemAtIndexPath users collection type currently unsupported") ;
-    }
-    else
-    {
-        AssertOrLog(@"SYNSearchResultsCollectionType:didDeselectItemAtIndexPath unknown collection type");
-    }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	if (collectionView == self.videosCollectionView) {
+		VideoInstance *videoInstance = self.videosArray[indexPath.item];
+		SYNSearchVideoPlayerViewController *viewController = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
+		[self presentViewController:viewController animated:YES completion:nil];
+	}
 }
 
 - (CGSize) collectionView: (UICollectionView *) collectionView

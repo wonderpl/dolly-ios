@@ -356,7 +356,7 @@
 
 - (NSString *) description
 {
-    NSMutableString *ownerDescription = [NSMutableString stringWithFormat: @"ChannelOwner id:%i, username: '%@'", [self.uniqueId intValue], self.displayName];
+    NSMutableString *ownerDescription = [NSMutableString stringWithFormat: @"ChannelOwner id:%@, username: '%@'", self.uniqueId, self.displayName];
     
     [ownerDescription appendFormat: @"has %i channels owned", self.channels.count];
     

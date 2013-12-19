@@ -11,6 +11,8 @@
 #import "SYNMasterViewController.h"
 #import "SYNNavigationManager.h"
 
+#define NAV_BAR_ANIMATION_SPEED 0.3f
+
 @implementation SYNNavigationManager
 
 + (id) manager
@@ -46,7 +48,7 @@
     // == Scrolling down, Hide the tab bar
     if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height - _masterController.tabsView.frame.size.height)
     {
-        [UIView animateWithDuration:0.5f animations:^{
+        [UIView animateWithDuration:NAV_BAR_ANIMATION_SPEED animations:^{
             CGRect tmpFrame = _masterController.tabsView.frame;
             tmpFrame.origin.y += _masterController.tabsView.frame.size.height;
             _masterController.tabsView.frame = tmpFrame;
@@ -56,7 +58,7 @@
      // == Scrolling up, Show the tab bar
     if (numOfScrollDirection.intValue == ScrollingDirectionUp && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height)
     {
-        [UIView animateWithDuration:0.5f animations:^{
+        [UIView animateWithDuration:NAV_BAR_ANIMATION_SPEED animations:^{
             
             CGRect tmpFrame = _masterController.tabsView.frame;
             tmpFrame.origin.y -= _masterController.tabsView.frame.size.height;

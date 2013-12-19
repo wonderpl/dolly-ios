@@ -35,7 +35,7 @@
 @import QuartzCore;
 
 #define kScrollContentOff 100.0f
-#define kScrollSpeedBoundary 550.0f
+#define kScrollSpeedBoundary 0.0f
 
 @interface SYNAbstractViewController ()
 

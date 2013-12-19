@@ -42,24 +42,16 @@
     return activityManager;
 }
 
--(id)init
-{
-    self.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    self.recentlyStarred = [[NSMutableSet alloc]init];
-    self.recentlyViewed = [[NSMutableSet alloc]init];
-    self.channelSubscriptions = [[NSMutableSet alloc]init];
-    self.userSubscriptons = [[NSMutableSet alloc]init];
-    
+-(id)init {
+	if (self = [super init]) {
+		self.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
+		
+		self.recentlyStarred = [[NSMutableSet alloc] init];
+		self.recentlyViewed = [[NSMutableSet alloc] init];
+		self.channelSubscriptions = [[NSMutableSet alloc] init];
+		self.userSubscriptons = [[NSMutableSet alloc] init];
+    }
     return self;
-}
-
--(void)reset
-{
-    self.recentlyStarred = [[NSMutableSet alloc]init];
-    self.recentlyViewed = [[NSMutableSet alloc]init];
-    self.channelSubscriptions = [[NSMutableSet alloc]init];
-    self.userSubscriptons = [[NSMutableSet alloc]init];
 }
 
 -(void)registerActivityFromDictionary:(NSDictionary*)dictionary
@@ -69,19 +61,19 @@
         //Union in the case that the activity manager or the activity service is out of sync
         
         if (dictionary[@"recently_starred"]){
-            [self.recentlyStarred unionSet:[NSMutableSet setWithArray:dictionary[@"recently_starred"]]];
+            [self.recentlyStarred unionSet:[NSSet setWithArray:dictionary[@"recently_starred"]]];
         }
         //cant union as unfollow all users cells wont ever be removed
         if (dictionary[@"subscribed"]){
 //            [self.channelSubscriptions unionSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
             
-            [self.channelSubscriptions setSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
+            [self.channelSubscriptions setSet:[NSSet setWithArray: dictionary[@"subscribed"]]];
         }
         
         if (dictionary[@"user_subscribed"]){
 //            [self.userSubscriptons unionSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
             
-            [self.userSubscriptons setSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
+            [self.userSubscriptons setSet:[NSSet setWithArray:dictionary[@"user_subscribed"]]];
             
         }
     }

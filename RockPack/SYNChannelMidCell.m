@@ -22,8 +22,6 @@
 
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
@@ -37,13 +35,6 @@
     [super awakeFromNib];
     
     self.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.followButton.titleLabel.font.pointSize];
-    
-    
-    // Tap for showing video
-//    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-//                                                       action: @selector(showChannel:)];
-//    self.tap.delegate = self;
-//    [self addGestureRecognizer: self.tap];
     
     if (IS_RETINA)
     {
@@ -119,17 +110,6 @@
     return YES; // handle the touch
 }
 
-
-
-- (void) showChannel: (UITapGestureRecognizer *) recognizer
-{
-    
-    
-    // Just need to reference any button in the cell (as there is no longer an actual video button)
-//    [self.viewControllerDelegate channelTapped: self];
-    
-}
-
 - (void) setChannel:(Channel *)channel
 {
     _channel = channel;
@@ -138,6 +118,11 @@
         self.videoTitleLabel.text = @"";
         return;
     }
+	
+	self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscribers", nil)];
+	self.videoCountLabel.text = [NSString stringWithFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
+	
+	self.descriptionLabel.text = channel.channelDescription;
     
     // TODO: figure out which color to put according to category color
     self.bottomBarView.backgroundColor = [UIColor grayColor];
@@ -151,13 +136,6 @@
 
 }
 
--(void) setHiddenForFollowButton: (BOOL) hide
-{
-    self.followButton.hidden = hide;
-}
-
-
-
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel
 {
     [self.followButton setTitle:strFollowLabel forState:UIControlStateNormal];
@@ -166,7 +144,10 @@
 
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-    
+    if (!self.showsDescriptionOnSwipe) {
+		return;
+	}
+	
     if (self.state == ChannelMidCellStateDefault) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
         

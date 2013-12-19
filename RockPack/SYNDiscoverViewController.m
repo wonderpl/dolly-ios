@@ -18,6 +18,7 @@
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNMasterViewController.h"
+#import "UIButton+WebCache.h"
 
 @import QuartzCore;
 
@@ -53,6 +54,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 @property (nonatomic, strong) SYNSearchResultsViewController* searchResultsController;
 
 @property (nonatomic, weak) SubGenre* popularSubGenre;
+
+
 
 
 // only used on iPad
@@ -273,23 +276,106 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
           cellForRowAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    UITableViewCell *cell;
+    SYNDiscoverAutocompleteCell *cell;
     
     if (!(cell = [tableView dequeueReusableCellWithIdentifier: kAutocompleteCellIdentifier]))
         cell = [[SYNDiscoverAutocompleteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: kAutocompleteCellIdentifier];
     
-    cell.textLabel.text = [((NSString*)self.autocompleteSuggestionsArray[indexPath.row]) capitalizedString];
+    id autocompleteItem = self.autocompleteSuggestionsArray[indexPath.row];
+    if([autocompleteItem isKindOfClass:[NSString class]])
+    {
+        cell.textLabel.text = [((NSString*)autocompleteItem) capitalizedString];
+    }
+    else if ([autocompleteItem isKindOfClass:[NSDictionary class]])
+    {
+        
+        cell.textLabel.text = autocompleteItem[@"term"];
+        
+        NSString* type = autocompleteItem[@"type"];
+        if([type isEqualToString:@"user"])
+        {
+            cell.userAvatarButton.hidden = NO;
+            
+            [cell.userAvatarButton setImageWithURL: [NSURL URLWithString: autocompleteItem[@"thumbnail"]]
+                                          forState: UIControlStateNormal
+                                  placeholderImage: [UIImage imageNamed: @"PlaceholderNotificationAvatar.png"]
+                                           options: SDWebImageRetryFailed];
+            
+            [cell.userAvatarButton addTarget:self
+                                      action:@selector(userAvatarButtonPressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+    }
     
     return cell;
 }
 
+- (void) userAvatarButtonPressed: (UIButton*) button
+{
+    UIView* candidateCell = button;
+    while (![candidateCell isKindOfClass:[SYNDiscoverAutocompleteCell class]]) {
+        candidateCell = candidateCell.superview;
+    }
+    
+    if(![candidateCell isKindOfClass:[SYNDiscoverAutocompleteCell class]])
+    {
+        AssertOrLog(@"Could not retrieve SYNDiscoverAutocompleteCell cell from %@", button);
+        return;
+    }
+    
+    SYNDiscoverAutocompleteCell* cell = (SYNDiscoverAutocompleteCell*)candidateCell;
+    NSIndexPath* indexPath = [self.autocompleteTableView indexPathForCell:cell];
+    
+    NSDictionary* data = self.autocompleteSuggestionsArray[indexPath.row];
+
+    NSDictionary* channelOwnerData = @{@"id":data[@"id"], @"avatar_thumbnail_url":data[@"thumbnail"], @"display_name":data[@"name"]};
+    ChannelOwner* coSelected = [ChannelOwner instanceFromDictionary:channelOwnerData
+                                          usingManagedObjectContext:appDelegate.searchManagedObjectContext
+                                                ignoringObjectTypes:kIgnoreAll];
+    
+    if(!coSelected)
+        return;
+    
+    [self.searchBar resignFirstResponder];
+    
+    [self viewProfileDetails:coSelected];
+    
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
+    id suggestion = self.autocompleteSuggestionsArray[indexPath.row];
+	NSString *searchTerm;
+    if([suggestion isKindOfClass:[NSString class]])
+    {
+        searchTerm = (NSString*)suggestion;
+        
+        [self dispatchSearch:searchTerm
+                   withTitle:searchTerm
+                     forType:kSearchTypeTerm];
+    }
+    else if ([suggestion isKindOfClass:[NSDictionary class]])
+    {
+        
+        searchTerm = ((NSDictionary*)suggestion)[@"term"];
+        NSString* searchType = ((NSDictionary*)suggestion)[@"type"];
+        if([searchType isEqualToString:@"user"])
+        {
+            SYNDiscoverAutocompleteCell* cellPressed = (SYNDiscoverAutocompleteCell*)[tableView cellForRowAtIndexPath:indexPath];
+            [self userAvatarButtonPressed:cellPressed.userAvatarButton];
+        }
+        else
+        {
+            [self dispatchSearch:searchTerm
+                       withTitle:searchTerm
+                         forType:kSearchTypeTerm];
+        }
+        
+        
+    }
     
-    [self dispatchSearch:suggestion
-               withTitle:suggestion
-                 forType:kSearchTypeTerm];
+    
     
     [self closeAutocomplete];
     
@@ -376,18 +462,48 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         }
         
         NSMutableArray* wordsReturned = [NSMutableArray array];
-        
+        NSString* term;
         for (NSArray* suggestion in suggestionsReturned)
         {
             if(!suggestion)
                 continue;
             
-            [wordsReturned addObject: suggestion[0]];
+            term = suggestion[0];
+            
+            
+            // parse metadata elements in array
+            
+            NSArray* objectData = (NSArray*)suggestion[1];
+            if(![objectData isKindOfClass:[NSArray class]])
+            {
+                [wordsReturned addObject: term];
+                continue;
+            }
+            
+            NSString* objectType = (NSString*)objectData[0];
+            
+            NSMutableDictionary* dataDictionary = @{@"type" : objectType , @"term" : term}.mutableCopy;
+                                                    
+            
+
+            if([objectType isEqualToString:@"user"])
+            {
+              
+                NSString* userId = (NSString*)objectData[1];
+                dataDictionary[@"id"] = userId;
+                NSString* name = (NSString*)objectData[2];
+                dataDictionary[@"name"] = name;
+                NSString* avatarUrl = (NSString*)objectData[3];
+                dataDictionary[@"thumbnail"] = avatarUrl;
+            }
+            
+            [wordsReturned addObject:dataDictionary];
+            
+            // might want to parse the rest
         }
         
         
-        wself.autocompleteSuggestionsArray =
-        [NSArray arrayWithArray:wordsReturned];
+        wself.autocompleteSuggestionsArray = [NSArray arrayWithArray:wordsReturned];
         
         
         wself.autocompleteTableView.hidden = NO;

@@ -10,9 +10,6 @@
 @import UIKit;
 
 @interface SYNSearchResultsCell : UICollectionViewCell
-{
-    __weak id<SYNSocialActionsDelegate> _delegate;
-}
 
 @property (weak, nonatomic) id<SYNSocialActionsDelegate> delegate;
 

@@ -40,30 +40,11 @@
 }
 
 
-- (void) setTitle: (NSString *) title
-         andCount: (NSInteger) count
-{
+- (void)setTitle:(NSString *)title andCount:(NSInteger)count {
     _title = title;
-    
-    // Two different ways of formatting
-#if NOT_CENTERED
-    NSString *countString = @" ";
-    
-    if (count > 0)
-    {
-        countString = [NSString stringWithFormat: @"%d", count];
-    }
-    
-    [self setTitle: [NSString stringWithFormat: @"\n%@\n%@", title, countString]
-          forState: UIControlStateNormal];
-    
-#else
-    [self setTitle: [NSString stringWithFormat: @"%@\n%d", title, count]
-          forState: UIControlStateNormal];
-    
-    [self setTitle: [NSString stringWithFormat: @"%@\n%d", title, count]
-          forState: UIControlStateHighlighted];
-#endif
+	
+	NSString *countString = (count > 0 ? [NSString stringWithFormat:@"%d", count] : @"");
+    [self setTitle:[NSString stringWithFormat:@"%@\n%@", title, countString] forState:UIControlStateNormal];
 }
 
 @end
