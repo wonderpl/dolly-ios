@@ -231,6 +231,14 @@
         self.deleteButton.enabled = YES;
         [self.deleteButton setTitle:NSLocalizedString(@"Delete ?", nil) forState:UIControlStateNormal];
         
+        // "close" the cell from Delete mode if it was there
+        CGRect cRect = self.containerView.frame;
+        cRect.origin.x = 0.0f;
+        self.containerView.frame = cRect;
+        
+        self.cellOpenForDeletion = NO;
+        
+        
     }
 }
 
@@ -274,10 +282,7 @@
     self.loading = NO;
     self.deleting = NO;
     
-    // "close" the cell from Delete mode if it was there
-    CGRect cRect = self.containerView.frame;
-    cRect.origin.x = 0.0f;
-    self.containerView.frame = cRect;
+    
     
     
 }

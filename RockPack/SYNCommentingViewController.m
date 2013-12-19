@@ -25,7 +25,7 @@
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 static NSString* PlaceholderText = @"Say something nice";
 
-@interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
 {
     CGFloat differenceBetweenHeightAndContentSizeHeight;
     CGFloat oldContentSizeHeight;
@@ -46,6 +46,10 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
 @property (nonatomic, strong) NSMutableArray* comments;
+
+// holding the values for deleting until confirmed by the alert view
+@property (nonatomic, weak) Comment* currentlyDeletingComment;
+@property (nonatomic, weak) SYNCommentingCollectionViewCell* currentlyDeletingCell;
 
 @end
 
@@ -457,7 +461,7 @@ static NSString* PlaceholderText = @"Say something nice";
         
         [[[UIAlertView alloc] initWithTitle:@"Sorry..."
                                     message:@"An error occured when sending your message..."
-                                   delegate:self
+                                   delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
     };
@@ -554,32 +558,25 @@ static NSString* PlaceholderText = @"Say something nice";
     if(![candidate isKindOfClass:[SYNCommentingCollectionViewCell class]])
         return;
     
-    SYNCommentingCollectionViewCell* commentingCell = (SYNCommentingCollectionViewCell*)candidate;
+    self.currentlyDeletingCell = (SYNCommentingCollectionViewCell*)candidate;
     
-    commentingCell.deleting = YES;
-    commentingCell.loading = YES;
+    self.currentlyDeletingCell.deleting = YES;
+    self.currentlyDeletingCell.loading = YES;
     
-    NSIndexPath* cellIndexPath = [self.commentsCollectionView indexPathForCell:commentingCell];
+    NSIndexPath* cellIndexPath = [self.commentsCollectionView indexPathForCell:self.currentlyDeletingCell];
     
-    Comment* comment = self.comments [cellIndexPath.item];
+    self.currentlyDeletingComment = self.comments [cellIndexPath.item];
     
-    [appDelegate.oAuthNetworkEngine deleteCommentForUserId:appDelegate.currentUser.uniqueId
-                                                 channelId:self.videoInstance.channel.uniqueId
-                                                   videoId:self.videoInstance.uniqueId
-                                              andCommentId:comment.uniqueId
-                                         completionHandler:^(id responce) {
-                                             
-                                             [self deleteComment:comment];
-                                             
-                                             commentingCell.deleting = NO;
-                                             commentingCell.loading = NO;
-                                             
-                                             [self.commentsCollectionView reloadData];
-                                             
-        
-                                         } errorHandler:^(id error) {
-        
-                                         }];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Delete Comment"
+                                                        message:@"Are you sure you want to delete this comment?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"OK", nil];
+    alertView.delegate = self;
+    
+    [alertView show];
+    
+    
 }
 
 -(BOOL)deleteComment:(Comment*)comment
@@ -607,6 +604,36 @@ static NSString* PlaceholderText = @"Say something nice";
                                               forKey:kUserDefaultsCommentingLastInteracted];
     
     return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        __weak SYNCommentingViewController* wself = self;
+        [appDelegate.oAuthNetworkEngine deleteCommentForUserId:appDelegate.currentUser.uniqueId
+                                                     channelId:self.videoInstance.channel.uniqueId
+                                                       videoId:self.videoInstance.uniqueId
+                                                  andCommentId:self.currentlyDeletingComment.uniqueId
+                                             completionHandler:^(id responce) {
+                                                 
+                                                 [wself deleteComment:wself.currentlyDeletingComment];
+                                                 
+                                                 wself.currentlyDeletingCell.deleting = NO;
+                                                 wself.currentlyDeletingCell.loading = NO;
+                                                 
+                                                 [wself.commentsCollectionView reloadData];
+                                                 
+                                                 
+                                             } errorHandler:^(id error) {
+                                                 
+                                             }];
+    }
+    else
+    {
+        self.currentlyDeletingCell.loading = NO;
+        self.currentlyDeletingCell.deleting = NO;
+    }
 }
 
 - (IBAction)sendButtonPressed:(id)sender
