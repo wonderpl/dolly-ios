@@ -86,9 +86,7 @@
     NSString* localisedKey;
     NSString* localisedDefault;
     
-    CGSize totalScrollSize;
-
-    totalScrollSize.height = self.scrollView.frame.size.height;
+    CGSize totalScrollSize = CGSizeMake(0, self.scrollView.frame.size.height);
     
     for (int i = 0; i < kLoginOnBoardingMessagesNum; i++)
     {
