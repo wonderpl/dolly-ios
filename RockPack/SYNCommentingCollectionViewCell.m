@@ -239,7 +239,8 @@
     _deletable = deletable;
     if (_deletable)
     {
-        self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecogniserCallback:)];
+        self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                    action:@selector(gestureRecogniserCallback:)];
         
         [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
         
@@ -247,7 +248,8 @@
         
         [self.containerView addGestureRecognizer:self.rightSwipe];
         
-        self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecogniserCallback:)];
+        self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                   action:@selector(gestureRecogniserCallback:)];
         
         [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
         
@@ -271,6 +273,11 @@
     
     self.loading = NO;
     self.deleting = NO;
+    
+    // "close" the cell from Delete mode if it was there
+    CGRect cRect = self.containerView.frame;
+    cRect.origin.x = 0.0f;
+    self.containerView.frame = cRect;
     
     
 }

@@ -18,6 +18,7 @@
 #import <objc/runtime.h>
 
 #define kMaxCommentCharacters 120
+#define kCacheTimeInMinutes 1
 
 #define kCell_2_Comment_Association_Key @"kCell_2_Comment_Association_Key"
 
@@ -326,11 +327,40 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     /* NOTE: Comments are CACHED so we need to save on the fly comments carefuly */
     
-    [appDelegate.networkEngine getCommentsForUsedId:appDelegate.currentUser.uniqueId
-                                          channelId:self.videoInstance.channel.uniqueId
-                                         andVideoId:self.videoInstance.uniqueId
-                                            inRange:self.dataRequestRange
-                                  completionHandler:^(id dictionary) {
+    SYNAbstractNetworkEngine* networkEngineToUse;
+    NSDate* lastInteractedWithCommenting = (NSDate*)[[NSUserDefaults standardUserDefaults] objectForKey: kUserDefaultsCommentingLastInteracted];
+    
+    
+    if(!lastInteractedWithCommenting) // first time we launched this section
+        lastInteractedWithCommenting = [NSDate distantPast];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSMinuteCalendarUnit
+                                               fromDate:lastInteractedWithCommenting
+                                                 toDate:[NSDate date]
+                                                options:0];
+    
+    
+    
+    if (components.minute >= kCacheTimeInMinutes)
+    {
+        
+        
+        networkEngineToUse = appDelegate.oAuthNetworkEngine;
+        
+        
+        
+    }
+    else
+    {
+        networkEngineToUse = appDelegate.networkEngine;
+    }
+    
+    [networkEngineToUse getCommentsForUsedId:appDelegate.currentUser.uniqueId
+                                   channelId:self.videoInstance.channel.uniqueId
+                                  andVideoId:self.videoInstance.uniqueId
+                                     inRange:self.dataRequestRange
+                           completionHandler:^(id dictionary) {
                                       
                                       if(![dictionary isKindOfClass:[NSDictionary class]])
                                           return;
@@ -346,11 +376,9 @@ static NSString* PlaceholderText = @"Say something nice";
                                       [self fetchCommentsFromDB];
         
                                   } errorHandler:^(id error) {
+                            
                                       
-                                      
-                                      
-        
-                                  }];
+                            }];
 }
 
 #pragma mark - UITextViewDelegate
@@ -541,12 +569,10 @@ static NSString* PlaceholderText = @"Say something nice";
                                               andCommentId:comment.uniqueId
                                          completionHandler:^(id responce) {
                                              
+                                             [self deleteComment:comment];
                                              
-                                             if([self deleteComment:comment])
-                                             {
-                                                 commentingCell.deleting = NO;
-                                                 commentingCell.loading = NO;
-                                             }
+                                             commentingCell.deleting = NO;
+                                             commentingCell.loading = NO;
                                              
                                              [self.commentsCollectionView reloadData];
                                              
@@ -576,6 +602,9 @@ static NSString* PlaceholderText = @"Say something nice";
         DebugLog(@"%@", saveError);
         return NO;
     }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:comment.dateAdded
+                                              forKey:kUserDefaultsCommentingLastInteracted];
     
     return YES;
 }

@@ -394,5 +394,15 @@
     // to be implemented in subclass
 }
 
+- (void) getCommentsForUsedId:(NSString*)userId
+                    channelId:(NSString*)channelId
+                   andVideoId:(NSString*)videoId
+                      inRange:(NSRange)range
+            completionHandler:(MKNKUserSuccessBlock) completionBlock
+                 errorHandler:(MKNKUserErrorBlock) errorBlock
+{
+    // to be implemented in subclass
+    AssertOrLog(@"Abstract Method Called from Abstract Network Engine");
+}
 
 @end

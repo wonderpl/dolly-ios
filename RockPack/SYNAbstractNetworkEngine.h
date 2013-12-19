@@ -57,6 +57,13 @@
                      completionHandler: (MKNKUserSuccessBlock) completionBlock
                           errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+- (void) getCommentsForUsedId:(NSString*)userId
+                    channelId:(NSString*)channelId
+                   andVideoId:(NSString*)videoId
+                      inRange:(NSRange)range
+            completionHandler:(MKNKUserSuccessBlock) completionBlock
+                 errorHandler:(MKNKUserErrorBlock) errorBlock;
+
 - (void) enqueueSignedOperation: (MKNetworkOperation *) request;
 
 #pragma mark - HTTP status 5xx errors

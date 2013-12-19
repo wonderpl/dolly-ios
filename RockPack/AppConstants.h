@@ -327,6 +327,7 @@ static NSString* kPopularGenreUniqueId = @"1979";
 #define kUserDefaultsChannels @"UD_OnBoaring_Channels"
 #define kUserDefaultsFeed @"UD_OnBoaring_Feed"
 #define kUserDefaultsSeenOnBoarding @"UD_Seen_On_Boarding"
+#define kUserDefaultsCommentingLastInteracted @"CMT_Interaction_Date"
 
 //Login Origin
 
