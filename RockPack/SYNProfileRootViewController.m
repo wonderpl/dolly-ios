@@ -560,25 +560,25 @@
     
     if (![self.channelOwner.coverPhotoURL isEqualToString:@""]){ // there is a url string
         
-        NSArray *thumbnailURLItems = [self.channelOwner.thumbnailURL componentsSeparatedByString: @"/"];
-        
-        if (thumbnailURLItems.count >= 6)
-        {
-            NSString *thumbnailSizeString = thumbnailURLItems[5];
-            NSString *thumbnailUrlString;
-            if (IS_IPAD)
-            {
-                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
-            }
-            else
-            {
-                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
-            }
-            
-            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
-                            placeholderImage: placeholderImage
-                                     options: SDWebImageRetryFailed];
-        }
+//        NSArray *thumbnailURLItems = [self.channelOwner.thumbnailURL componentsSeparatedByString: @"/"];
+//        
+//        if (thumbnailURLItems.count >= 6)
+//        {
+//            NSString *thumbnailSizeString = thumbnailURLItems[5];
+//            NSString *thumbnailUrlString;
+//            if (IS_IPAD)
+//            {
+//                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
+//            }
+//            else
+//            {
+//                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
+//            }
+//            
+//            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
+//                            placeholderImage: placeholderImage
+//                                     options: SDWebImageRetryFailed];
+//        }
 
 //        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
 //        dispatch_async(downloadQueue, ^{
@@ -1444,7 +1444,7 @@
             }
             else
             {
-                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, -offset/PARALLAX_SCROLL_VALUE);
+                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, (-offset/PARALLAX_SCROLL_VALUE)-1);
                 self.coverImage.transform = moveCoverImage;
                 self.backgroundView.transform = move;
             }
@@ -1452,7 +1452,7 @@
         }
         else
         {
-            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset-1);
             self.coverImage.transform = move;
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;

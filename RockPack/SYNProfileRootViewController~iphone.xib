@@ -35,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverImageTest.jpg" id="q5m-iH-3Ci" userLabel="Image View - Cover image">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.46274509800000002" green="0.55294117649999996" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
