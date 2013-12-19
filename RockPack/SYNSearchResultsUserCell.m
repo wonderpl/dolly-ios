@@ -14,97 +14,82 @@
 #import "SYNSocialButton.h"
 #import "SYNAvatarButton.h"
 
+@interface SYNSearchResultsUserCell ()
+
+@property (nonatomic, weak) id<SYNSearchResultsUserCellDelegate> delegate;
+
+@property (nonatomic, strong) UIView *separatorView;
+
+@property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
+@property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
+
+@end
 
 @implementation SYNSearchResultsUserCell
 
-- (void) awakeFromNib
-{
-    self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize: self.userNameLabelButton.titleLabel.font.pointSize];
-    
-    if(IS_IPHONE)
-    {
-        self.separatorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, 320.0f, IS_RETINA ? 0.5f : 1.0f)];
-        self.separatorView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f];
-        [self addSubview:self.separatorView];
-    }
-    
-}
+#pragma mark -
 
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
+	if (IS_IPHONE) {
+		[self addSubview:self.separatorView];
+	}
+	
+	self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.userNameLabelButton.titleLabel.font.pointSize];
+	
+	[self.userThumbnailButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	[self.userNameLabelButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	[self.followButton addTarget:self action:@selector(followButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+}
 
 #pragma mark - Set Data
 
--(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
-{
-    if(_delegate)
-    {
-        [self.userThumbnailButton removeTarget: self.delegate
-                                      action: @selector(profileButtonTapped:)
-                            forControlEvents: UIControlEventTouchUpInside];
-        
-        [self.userNameLabelButton removeTarget: self.delegate
-                                        action: @selector(profileButtonTapped:)
-                              forControlEvents: UIControlEventTouchUpInside];
-        
-        [self.followButton removeTarget: self.delegate
-                                        action: @selector(followControlPressed:)
-                              forControlEvents: UIControlEventTouchUpInside];
-    }
+- (void)setChannelOwner:(ChannelOwner *)channelOwner {
+	_channelOwner = channelOwner; // can be friend
+	
+	if (!_channelOwner) {
+		self.userThumbnailButton.imageView.image = [UIImage imageNamed: @"PlaceholderChannelSmall.png"];
+		self.userNameLabelButton.titleLabel.text = @"";
+		return;
+	}
+	
+	self.followButton.dataItemLinked = channelOwner;
     
-    _delegate = delegate;
+    [self.userThumbnailButton setImageWithURL:[NSURL URLWithString: channelOwner.thumbnailURL]
+                                     forState:UIControlStateNormal
+                             placeholderImage:[UIImage imageNamed: @"PlaceholderAvatarFriends"]
+                                      options:SDWebImageRetryFailed];
     
-    if(!_delegate)
-        return;
-    
-    [self.userThumbnailButton addTarget: self.delegate
-                                 action: @selector(profileButtonTapped:)
-                       forControlEvents: UIControlEventTouchUpInside];
-    
-    [self.userNameLabelButton addTarget: self.delegate
-                                 action: @selector(profileButtonTapped:)
-                       forControlEvents: UIControlEventTouchUpInside];
-    
-    [self.followButton addTarget: self.delegate
-                          action: @selector(followControlPressed:)
-                forControlEvents: UIControlEventTouchUpInside];
+    [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
 }
 
-- (void) setChannelOwner: (ChannelOwner *) channelOwner
-{
-    _channelOwner = channelOwner; // can be friend
-    
-    if (!_channelOwner)
-    {
-        self.userThumbnailButton.imageView.image = [UIImage imageNamed: @"PlaceholderChannelSmall.png"];
-        self.userNameLabelButton.titleLabel.text = @"";
-        return;
-    }
-    
-    self.followButton.dataItemLinked = _channelOwner;
-    
-    
-    
-    [self.userThumbnailButton setImageWithURL: [NSURL URLWithString: channelOwner.thumbnailURL]
-                                     forState: UIControlStateNormal
-                             placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
-                                      options: SDWebImageRetryFailed];
-    
-    [self.userNameLabelButton setTitle:_channelOwner.displayName forState:UIControlStateNormal];
-    
+- (UIView *)separatorView {
+	if (!_separatorView) {
+		UIView *view = [[UIView alloc] init];
+		view.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f];
+		view.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth);
+		
+		self.separatorView = view;
+	}
+	return _separatorView;
 }
 
-- (void) layoutSubviews
-{
-    [super layoutSubviews];
-    
-    if(IS_IPHONE)
-    {
-        CGRect sFrame = self.separatorView.frame;
-        sFrame.origin.y = self.frame.size.height - 1.0f;
-        
-        self.separatorView.frame = sFrame;
-        
-    }
-    
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	if (IS_IPHONE) {
+		self.separatorView.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - 0.5, CGRectGetWidth(self.bounds), 0.5);
+	}
+}
+
+- (void)profileButtonPressed:(UIButton *)button {
+	[self.delegate profileButtonTapped:button];
+}
+
+- (void)followButtonPressed:(UIButton *)button {
+	[self.delegate followControlPressed:button];
 }
 
 @end

@@ -11,15 +11,17 @@
 
 @class ChannelOwner;
 @class SYNSocialButton;
-@class SYNAvatarButton;
+
+@protocol SYNSearchResultsUserCellDelegate <SYNSocialActionsDelegate>
+
+- (void)profileButtonTapped:(UIButton *)button;
+- (void)followControlPressed:(UIButton *)button;
+
+@end
 
 @interface SYNSearchResultsUserCell : SYNSearchResultsCell
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
-@property (nonatomic, strong) IBOutlet SYNSocialButton* followButton;
-@property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
-@property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
-
-@property (nonatomic, strong) UIView* separatorView;
+@property (nonatomic, strong, readonly) SYNSocialButton *followButton;
 
 @end
