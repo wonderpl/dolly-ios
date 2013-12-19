@@ -218,8 +218,8 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - IBActions
 
-- (IBAction)closeButtonPressed:(UIButton *)close {
-	[self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)followButtonPressed:(UIButton *)button {
+	[self followButtonPressed:button withChannel:self.videoInstance.channel];
 }
 
 - (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {

@@ -135,6 +135,10 @@
 
 #pragma mark - IBActions
 
+- (IBAction)closeButtonPressed:(UIButton *)close {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)likeButtonPressed:(SYNSocialButton *)button {
 	[self likeControlPressed:button];
 }
@@ -155,11 +159,6 @@
 	
 	[self presentViewController:viewController animated:YES completion:nil];
 }
-
-- (IBAction)followButtonPressed:(UIButton *)button {
-	[self followButtonPressed:button withChannel:self.videoInstance.channel];
-}
-
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:self.videoInstance.uniqueId];
 	

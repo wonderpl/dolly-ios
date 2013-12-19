@@ -249,10 +249,6 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - IBActions
 
-- (IBAction)closeButtonPressed:(UIButton *)close {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)segmentedControl {
 	if (segmentedControl.selectedSegmentIndex == 0) {
 		self.channelsCollectionView.hidden = NO;
