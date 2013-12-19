@@ -71,8 +71,6 @@
 			   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 					  withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
 	
-	//TODO: Set likes count
-	
 	if (IS_IPHONE) {
 		self.channelsCollectionView.scrollIndicatorInsets = UIEdgeInsetsMake(CGRectGetHeight(self.headerView.frame), 0, 0, 0);
 	}
