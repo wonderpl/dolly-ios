@@ -223,6 +223,9 @@ typedef enum : NSInteger {
 
 #define kMaxSuportedImageSize       3264
 
+
+#define kScrollingDirection         @"kScrollingDirection"
+
 // Timeout for API calls
 
 #define kAPIDefaultTimout 30

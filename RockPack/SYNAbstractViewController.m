@@ -337,12 +337,7 @@
     }
     else
     {
-        UINavigationController* ncWrapper = [[UINavigationController alloc] initWithRootViewController:commentController];
-        ncWrapper.view.frame = commentController.view.frame;
-        
-        
-        [appDelegate.masterViewController addOverlayController:ncWrapper
-                                                      animated:YES];
+        [self.navigationController pushViewController:commentController animated:YES];
     }
     
 
@@ -747,8 +742,8 @@
         self.scrollerIsNearTop = YES;
         //Notification that tells the navigation manager to show the navigation bar
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                            object: [NSNumber numberWithInt: 3]
-                                                          userInfo: nil];
+                                                            object: self
+                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
     }
     
     if (scrollView.contentOffset.y > kScrollContentOff && self.scrollerIsNearTop)
@@ -767,8 +762,8 @@
     if (check > kScrollSpeedBoundary)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                            object: [NSNumber numberWithInteger: self.scrollDirection]
-                                                          userInfo: nil];
+                                                            object: self
+                                                          userInfo: @{kScrollingDirection:@(self.scrollDirection)}];
     }
 }
 

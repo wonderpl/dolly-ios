@@ -69,9 +69,12 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - View Life Cycle
 
-- (void) closeButtonPressed : (UIBarButtonItem*) barButton
+- (void) backButtonPressed : (UIBarButtonItem*) barButton
 {
-    [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement
+                                                        object:self
+                                                      userInfo:@{kScrollingDirection:@(ScrollingDirectionUp)}];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
@@ -81,10 +84,10 @@ static NSString* PlaceholderText = @"Say something nice";
     // on iPhone the controller appears in a popup
     if (IS_IPHONE)
     {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                                  style:UIBarButtonItemStyleBordered
                                                                                 target:self
-                                                                                action:@selector(closeButtonPressed:)];
+                                                                                action:@selector(backButtonPressed:)];
         
     }
     

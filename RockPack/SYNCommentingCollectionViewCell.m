@@ -140,6 +140,8 @@
     return CGRectMake(48.0f, 28.0f, 213.0f, 18.0f);
 }
 
+
+
 #pragma mark - Parsing Date
 
 -(void)setDatePosted:(NSDate *)datePosted

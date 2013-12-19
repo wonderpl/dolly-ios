@@ -13,10 +13,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snQ-uB-4o3" userLabel="Button - Delete (Offscreen)">
-                        <rect key="frame" x="200" y="-16" width="120" height="80"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snQ-uB-4o3" userLabel="Button - Delete (Offscreen)">
+                        <rect key="frame" x="200" y="0.0" width="120" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.79215686269999996" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="wbP-6t-Cdw"/>
+                        </constraints>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -66,13 +69,13 @@
                                 <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HLr-5B-E4H" userLabel="Loader">
-                                <rect key="frame" x="278" y="6" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="HLr-5B-E4H" userLabel="Loader">
+                                <rect key="frame" x="283" y="14" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="0ff-pt-oMu"/>
-                                    <constraint firstAttribute="width" constant="37" id="1yh-SU-Zv0"/>
+                                    <constraint firstAttribute="width" constant="20" id="97J-YU-U9t"/>
+                                    <constraint firstAttribute="height" constant="20" id="Rtc-5H-NLt"/>
                                 </constraints>
                                 <color key="color" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
@@ -81,18 +84,18 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="EDT-Lu-WjD" secondAttribute="trailing" constant="5" id="1hc-gB-Ll4"/>
-                            <constraint firstItem="HLr-5B-E4H" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="6" id="33s-60-gfK"/>
                             <constraint firstAttribute="bottom" secondItem="BiN-lJ-ozS" secondAttribute="bottom" constant="6" id="IXx-7V-FVo"/>
                             <constraint firstItem="dvh-lB-F0U" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="8" id="PlC-JT-QfC"/>
                             <constraint firstAttribute="trailing" secondItem="dvh-lB-F0U" secondAttribute="trailing" constant="54" id="PrI-ZO-5vf"/>
                             <constraint firstItem="dvh-lB-F0U" firstAttribute="leading" secondItem="ttY-l5-C2J" secondAttribute="leading" constant="53" id="XVD-yP-IFt"/>
                             <constraint firstAttribute="centerY" secondItem="EDT-Lu-WjD" secondAttribute="centerY" constant="-0.5" id="d1s-m4-m6d"/>
-                            <constraint firstAttribute="trailing" secondItem="HLr-5B-E4H" secondAttribute="trailing" constant="5" id="hTa-JD-Y33"/>
+                            <constraint firstAttribute="centerY" secondItem="HLr-5B-E4H" secondAttribute="centerY" id="hQQ-Cf-9Ei"/>
                             <constraint firstItem="vy5-fE-JoI" firstAttribute="leading" secondItem="ttY-l5-C2J" secondAttribute="leading" constant="8" id="hey-fh-mpm"/>
                             <constraint firstItem="BiN-lJ-ozS" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="24" id="o8F-SG-wWr"/>
                             <constraint firstAttribute="trailing" secondItem="BiN-lJ-ozS" secondAttribute="trailing" constant="59" id="rHS-3Q-kOM"/>
                             <constraint firstItem="vy5-fE-JoI" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="8" id="snU-5b-M9Y"/>
                             <constraint firstItem="BiN-lJ-ozS" firstAttribute="leading" secondItem="ttY-l5-C2J" secondAttribute="leading" constant="48" id="ttD-AB-YhF"/>
+                            <constraint firstAttribute="trailing" secondItem="HLr-5B-E4H" secondAttribute="trailing" constant="17" id="wYb-b3-W2S"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFo-x2-1G0" userLabel="Separator">
@@ -110,8 +113,11 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="GFo-x2-1G0" secondAttribute="trailing" id="0i5-Vq-Cex"/>
+                <constraint firstItem="snQ-uB-4o3" firstAttribute="top" secondItem="gff-ZC-bD7" secondAttribute="top" id="Buw-Gi-cuV"/>
+                <constraint firstAttribute="trailing" secondItem="snQ-uB-4o3" secondAttribute="trailing" id="Epe-ns-b3v"/>
                 <constraint firstItem="ttY-l5-C2J" firstAttribute="leading" secondItem="gff-ZC-bD7" secondAttribute="leading" id="Lge-L2-auA"/>
                 <constraint firstAttribute="bottom" secondItem="ttY-l5-C2J" secondAttribute="bottom" id="OaA-ti-vpg"/>
+                <constraint firstAttribute="bottom" secondItem="snQ-uB-4o3" secondAttribute="bottom" id="hkc-0n-X79"/>
                 <constraint firstItem="ttY-l5-C2J" firstAttribute="top" secondItem="gff-ZC-bD7" secondAttribute="top" id="lba-Tu-Rjf"/>
                 <constraint firstAttribute="bottom" secondItem="GFo-x2-1G0" secondAttribute="bottom" id="oXi-Ib-QpR"/>
                 <constraint firstItem="GFo-x2-1G0" firstAttribute="leading" secondItem="gff-ZC-bD7" secondAttribute="leading" id="rqe-Gg-FDk"/>
