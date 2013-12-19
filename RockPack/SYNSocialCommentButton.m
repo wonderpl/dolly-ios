@@ -66,14 +66,16 @@
 
 #pragma mark - Set / Get Count
 
-- (void) setCount:(NSInteger)count
-{
-    _count = count;
-    
-    if(_count < 100)
-        [self setTitle:[NSString stringWithFormat:@"%i", count]];
-    else
-        [self setTitle:[NSString stringWithFormat:@"%i+", count]];
+- (void)setCount:(NSUInteger)count {
+	_count = count;
+
+	if (count == 0) {
+		[self setTitle:@"" forState:UIControlStateNormal];
+	} else if (count < 100) {
+		[self setTitle:[NSString stringWithFormat:@"%i", count] forState:UIControlStateNormal];
+	} else {
+		[self setTitle:@"99+" forState:UIControlStateNormal];
+	}
 }
 
 @end
