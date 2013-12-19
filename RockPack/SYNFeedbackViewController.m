@@ -230,6 +230,8 @@ static NSString* errorText = @"Please provide your feedback here...";
     NSString* message = self.textView.text;
     NSNumber* score = [NSNumber numberWithFloat:self.slider.value];
     
+    __weak SYNFeedbackViewController* wself = self;
+    
     [appDelegate.oAuthNetworkEngine sendFeedbackForMessage:message
                                                   andScore:score
                                          completionHandler:^(id responce) {
@@ -237,12 +239,12 @@ static NSString* errorText = @"Please provide your feedback here...";
                                              if(IS_IPAD)
                                                  [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
                                              else
-                                                 [self.navigationController popViewControllerAnimated:YES];
+                                                 [wself.navigationController popViewControllerAnimated:YES];
                                              
                                              
                                             } errorHandler:^(id error) {
                                              
-                                                [self enableMainControls:YES];
+                                                [wself enableMainControls:YES];
                                                 
                                                 
                                             }];

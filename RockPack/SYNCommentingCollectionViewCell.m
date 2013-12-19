@@ -71,6 +71,10 @@
         [self.deleteButton removeTarget:_delegate
                                  action:@selector(deleteButtonPressed:)
                        forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.avatarButton removeTarget:_delegate
+                                 action:@selector(userAvatarButtonPressed:)
+                       forControlEvents:UIControlEventTouchUpInside];
     }
     
     _delegate = delegate;
@@ -80,6 +84,10 @@
     
     [self.deleteButton addTarget:_delegate
                           action:@selector(deleteButtonPressed:)
+                forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.avatarButton addTarget:_delegate
+                          action:@selector(userAvatarButtonPressed:)
                 forControlEvents:UIControlEventTouchUpInside];
 }
 

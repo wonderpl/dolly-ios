@@ -619,6 +619,51 @@ static NSString* PlaceholderText = @"Say something nice";
     return YES;
 }
 
+-(void)userAvatarButtonPressed:(UIButton*)button
+{
+    if(!button)
+        return;
+    
+    // find correct cell
+    
+    UIView* candidateCell = button;
+    while(![candidateCell isKindOfClass:[SYNCommentingCollectionViewCell class]])
+        candidateCell = candidateCell.superview;
+    
+    if(![candidateCell isKindOfClass:[SYNCommentingCollectionViewCell class]])
+        return;
+    
+    SYNCommentingCollectionViewCell* cell = (SYNCommentingCollectionViewCell*)candidateCell;
+    Comment* comment = cell.comment;
+    if(!comment)
+        return;
+    
+    
+    
+    // create a ChannelOwner
+    
+    NSDictionary* channelOwnerData = @{@"id":comment.userId,
+                                       @"avatar_thumbnail_url":comment.thumbnailUrl,
+                                       @"display_name":comment.displayName};
+    
+    ChannelOwner* co = [ChannelOwner instanceFromDictionary:channelOwnerData
+                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext
+                                        ignoringObjectTypes:kIgnoreAll];
+    
+    SYNAbstractViewController* controllerToShowProfile;
+    if(IS_IPHONE)
+    {
+        controllerToShowProfile = self;
+    }
+    else
+    {
+        controllerToShowProfile = appDelegate.masterViewController.showingViewController;
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+    }
+    
+    [controllerToShowProfile viewProfileDetails:co];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1)
