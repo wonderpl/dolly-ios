@@ -337,18 +337,45 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if(!coSelected)
         return;
     
+    [self.searchBar resignFirstResponder];
+    
     [self viewProfileDetails:coSelected];
     
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* suggestion = self.autocompleteSuggestionsArray[indexPath.row];
-	NSString *searchTerm = suggestion[@"term"];
+    id suggestion = self.autocompleteSuggestionsArray[indexPath.row];
+	NSString *searchTerm;
+    if([suggestion isKindOfClass:[NSString class]])
+    {
+        searchTerm = (NSString*)suggestion;
+        
+        [self dispatchSearch:searchTerm
+                   withTitle:searchTerm
+                     forType:kSearchTypeTerm];
+    }
+    else if ([suggestion isKindOfClass:[NSDictionary class]])
+    {
+        
+        searchTerm = ((NSDictionary*)suggestion)[@"term"];
+        NSString* searchType = ((NSDictionary*)suggestion)[@"type"];
+        if([searchType isEqualToString:@"user"])
+        {
+            SYNDiscoverAutocompleteCell* cellPressed = (SYNDiscoverAutocompleteCell*)[tableView cellForRowAtIndexPath:indexPath];
+            [self userAvatarButtonPressed:cellPressed.userAvatarButton];
+        }
+        else
+        {
+            [self dispatchSearch:searchTerm
+                       withTitle:searchTerm
+                         forType:kSearchTypeTerm];
+        }
+        
+        
+    }
     
-    [self dispatchSearch:searchTerm
-               withTitle:searchTerm
-                 forType:kSearchTypeTerm];
+    
     
     [self closeAutocomplete];
     

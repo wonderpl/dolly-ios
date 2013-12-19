@@ -66,7 +66,7 @@
         self.textLabel.backgroundColor = [UIColor clearColor];
         
         
-        self.userAvatarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 30.0f, 30.0f)];
+        self.userAvatarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 6.0f, 30.0f, 30.0f)];
         self.userAvatarButton.backgroundColor = [UIColor greenColor];
         self.userAvatarButton.layer.cornerRadius = self.userAvatarButton.frame.size.height * 0.5f;
         self.userAvatarButton.clipsToBounds = YES;
@@ -85,12 +85,15 @@
     CGRect newFrame = self.textLabel.frame;
     
     
-    newFrame.size.width = 250.0f;
     
-    newFrame.origin.x = 72.0f;
-    newFrame.origin.y += 4.0f;
+    
+    newFrame.origin.x = 50.0f;
+    
+    newFrame.size.width = self.frame.size.width - newFrame.origin.x - 10.0f;
     
     self.textLabel.frame = newFrame;
+    
+    
     
     
 }
