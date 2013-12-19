@@ -8,6 +8,7 @@ const struct CommentAttributes CommentAttributes = {
 	.dateAdded = @"dateAdded",
 	.displayName = @"displayName",
 	.position = @"position",
+	.recent = @"recent",
 	.thumbnailUrl = @"thumbnailUrl",
 	.userId = @"userId",
 	.validated = @"validated",
@@ -48,6 +49,11 @@ const struct CommentFetchedProperties CommentFetchedProperties = {
 	
 	if ([key isEqualToString:@"positionValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"position"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"recentValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"recent"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -104,6 +110,32 @@ const struct CommentFetchedProperties CommentFetchedProperties = {
 
 - (void)setPrimitivePositionValue:(int32_t)value_ {
 	[self setPrimitivePosition:[NSNumber numberWithInt:value_]];
+}
+
+
+
+
+
+@dynamic recent;
+
+
+
+- (BOOL)recentValue {
+	NSNumber *result = [self recent];
+	return [result boolValue];
+}
+
+- (void)setRecentValue:(BOOL)value_ {
+	[self setRecent:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveRecentValue {
+	NSNumber *result = [self primitiveRecent];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveRecentValue:(BOOL)value_ {
+	[self setPrimitiveRecent:[NSNumber numberWithBool:value_]];
 }
 
 

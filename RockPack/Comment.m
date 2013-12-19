@@ -54,7 +54,7 @@
     self.dateAdded = [dictionary dateFromISO6801StringForKey: @"date_added"
                                                  withDefault: [NSDate date]];
     
-    
+    self.recentValue = NO; // if it is coming from the server then it is NOT recent, otherwise we need to set the recentValue by hand after the creation of the comment
     
     NSDictionary* userDictionary = [dictionary objectForKey: @"user"];
     

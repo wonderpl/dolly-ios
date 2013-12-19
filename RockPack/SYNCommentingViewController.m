@@ -42,7 +42,6 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, strong) IBOutlet UIImageView* sendMessageAvatarmageView;
 @property (nonatomic, strong) IBOutlet UIButton* sendMessageButton;
 
-@property (nonatomic, strong) NSMutableArray* unvalidatedCommentsQueue;
 
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
@@ -99,7 +98,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     oldContentSizeHeight = self.sendMessageTextView.contentSize.height;
     
-    self.unvalidatedCommentsQueue = @[].mutableCopy;
     
     differenceBetweenHeightAndContentSizeHeight = self.sendMessageTextView.frame.size.height - oldContentSizeHeight;
     
@@ -139,6 +137,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
     
+    [self fetchCommentsFromDB];
     
     [self getCommentsFromServer];
     
@@ -316,9 +315,8 @@ static NSString* PlaceholderText = @"Say something nice";
     NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
                                                                                 error: &error];
     
-    self.comments = @[].mutableCopy;
-    
-    [self.comments addObjectsFromArray:fetchedArray];
+    self.comments = [NSMutableArray arrayWithArray:fetchedArray];
+    NSLog(@"%@", self.comments);
     
     [self.commentsCollectionView reloadData];
     
@@ -326,6 +324,8 @@ static NSString* PlaceholderText = @"Say something nice";
 
 -(void)getCommentsFromServer
 {
+    /* NOTE: Comments are CACHED so we need to save on the fly comments carefuly */
+    
     [appDelegate.networkEngine getCommentsForUsedId:appDelegate.currentUser.uniqueId
                                           channelId:self.videoInstance.channel.uniqueId
                                          andVideoId:self.videoInstance.uniqueId
@@ -419,6 +419,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                   usingManagedObjectContext:appDelegate.mainManagedObjectContext];
     
     
+    adHocComment.recentValue = YES;
     
     return adHocComment;
 }
