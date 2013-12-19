@@ -25,7 +25,10 @@
     self = [super init];
     if (self)
     {
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(scrollDetected:) name:kScrollMovement object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self
+                                                selector:@selector(scrollDetected:)
+                                                    name:kScrollMovement
+                                                  object:nil];
     }
     return self;
 }
@@ -39,12 +42,10 @@
 {
  
     // == Check for ipad
-    if (!IS_IPHONE)
-    {
+    if (IS_IPAD)
         return;
-    }
     
-    NSNumber *numOfScrollDirection = [notification object];
+    NSNumber *numOfScrollDirection = [notification.userInfo objectForKey:kScrollingDirection];
     // == Scrolling down, Hide the tab bar
     if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height - _masterController.tabsView.frame.size.height)
     {

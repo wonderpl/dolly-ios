@@ -140,6 +140,8 @@
     return CGRectMake(48.0f, 28.0f, 213.0f, 18.0f);
 }
 
+
+
 #pragma mark - Parsing Date
 
 -(void)setDatePosted:(NSDate *)datePosted
@@ -231,6 +233,14 @@
         self.deleteButton.enabled = YES;
         [self.deleteButton setTitle:NSLocalizedString(@"Delete ?", nil) forState:UIControlStateNormal];
         
+        // "close" the cell from Delete mode if it was there
+        CGRect cRect = self.containerView.frame;
+        cRect.origin.x = 0.0f;
+        self.containerView.frame = cRect;
+        
+        self.cellOpenForDeletion = NO;
+        
+        
     }
 }
 
@@ -239,7 +249,8 @@
     _deletable = deletable;
     if (_deletable)
     {
-        self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecogniserCallback:)];
+        self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                    action:@selector(gestureRecogniserCallback:)];
         
         [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
         
@@ -247,7 +258,8 @@
         
         [self.containerView addGestureRecognizer:self.rightSwipe];
         
-        self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecogniserCallback:)];
+        self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                   action:@selector(gestureRecogniserCallback:)];
         
         [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
         
@@ -271,6 +283,8 @@
     
     self.loading = NO;
     self.deleting = NO;
+    
+    
     
     
 }

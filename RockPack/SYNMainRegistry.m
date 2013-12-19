@@ -239,7 +239,9 @@
             continue;
         
         commentsById[comment.uniqueId] = comment;
-        comment.markedForDeletionValue = YES;
+        
+        if(!comment.recentValue) // only mark for deletion comments that are present in the server and not on the fly comments
+            comment.markedForDeletionValue = YES;
         
     }
     
@@ -263,6 +265,8 @@
         }
         
         comment.markedForDeletionValue = NO;
+        
+        comment.recentValue = NO;
         
         comment.videoInstanceId = [NSString stringWithString:vid];
         
