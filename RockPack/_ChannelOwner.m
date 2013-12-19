@@ -5,6 +5,7 @@
 
 const struct ChannelOwnerAttributes ChannelOwnerAttributes = {
 	.channelOwnerDescription = @"channelOwnerDescription",
+	.coverPhotoURL = @"coverPhotoURL",
 	.displayName = @"displayName",
 	.followersTotalCount = @"followersTotalCount",
 	.position = @"position",
@@ -89,6 +90,13 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 
 
 @dynamic channelOwnerDescription;
+
+
+
+
+
+
+@dynamic coverPhotoURL;
 
 
 

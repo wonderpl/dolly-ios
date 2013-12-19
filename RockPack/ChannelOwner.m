@@ -125,7 +125,8 @@
                                  withDefault: @0];
     
     self.subscribersCount =[dictionary objectForKey:@"subscriber_count"];
-    
+
+    self.coverPhotoURL = [dictionary objectForKey:@"profile_cover_url"];
     
     if ([[dictionary objectForKey: @"description"] isKindOfClass: [NSNull class]])
     {

@@ -102,6 +102,8 @@ typedef enum : NSInteger {
 // Avatar
 #define kAPIUpdateAvatar           @"/ws/USERID/avatar/"                        /* PUT */
 
+#define kAPIUpdateProfileCover     @"ws/USERID/profile_cover/"                  /* PUT */
+
 // Channel manageent
 #define kAPIGetChannelDetails       @"/ws/USERID/channels/CHANNELID/"           /* GET */
 #define kAPIGetUserChannel        @"/ws/USERID/channels/"                       /* GET */
