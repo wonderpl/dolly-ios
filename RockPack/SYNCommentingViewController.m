@@ -74,8 +74,7 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement
                                                         object:self
-                                                      userInfo:@{kScrollingDirection:@(ScrollingDirectionDown)}];
-    
+                                                      userInfo:@{kScrollingDirection:@(ScrollingDirectionUp)}];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -166,6 +165,9 @@ static NSString* PlaceholderText = @"Say something nice";
                                   options:NSKeyValueObservingOptionNew
                                   context:nil];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                        object: self
+                                                      userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
 }
 
 - (void) viewDidDisappear:(BOOL)animated

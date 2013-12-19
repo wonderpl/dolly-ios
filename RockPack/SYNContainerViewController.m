@@ -70,9 +70,16 @@
     
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont regularCustomFontOfSize:15]];
     
+    if (IS_IPHONE) {
+        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0]}    forState:UIControlStateNormal];
+    }
+else
+{
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-     @{NSFontAttributeName:[UIFont regularCustomFontOfSize:12.0]}    forState:UIControlStateNormal];
+     @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
 
+}
     
     // sets the tint to gray for all navigatin controllers
     self.view.tintColor = [UIColor grayColor];

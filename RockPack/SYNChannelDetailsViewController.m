@@ -586,6 +586,14 @@
     
 }
 
+- (void)killScroll {
+    CGPoint offset = self.videoThumbnailCollectionView.contentOffset;
+    offset.x -= 1.0;
+    offset.y -= 1.0;
+    [self.videoThumbnailCollectionView setContentOffset:offset animated:NO];
+}
+
+
 -(void) moveHeader:(CGFloat) offset
 {
     if (IS_IPHONE ) {
@@ -1289,6 +1297,9 @@
 
 - (IBAction)editTapped:(id)sender
 {
+    
+    [self killScroll];
+
     
     //  [self.activityIndicator startAnimating];
     [self editMode];

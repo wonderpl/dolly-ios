@@ -40,7 +40,6 @@
     return self;
 }
 
-
 # pragma mark -
 # pragma mark Private Methods
 
@@ -72,7 +71,6 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-
     GKImageCropViewController *cropController = [[GKImageCropViewController alloc] init];
     cropController.preferredContentSize = picker.preferredContentSize;
     UIImage* image = info[UIImagePickerControllerOriginalImage];
