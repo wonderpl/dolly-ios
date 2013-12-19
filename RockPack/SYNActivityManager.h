@@ -54,7 +54,6 @@
 
 -(void) addChannelSubscriptionsObject:(Channel *)channel;
 -(void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
--(void) reset;
 -(void) subscribedList;
 
 @end
