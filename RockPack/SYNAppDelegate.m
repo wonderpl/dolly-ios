@@ -1119,7 +1119,7 @@
              NSString *youTubePlayerURLString = dictionary[@"youtube"];
              
              // Only update if we have valid HTML
-             if (youTubePlayerURLString)
+             if ([youTubePlayerURLString length])
              {
                  [self saveAsFileToDocumentsDirectory: @"YouTubeIFramePlayer"
                                                asType: @"html"
