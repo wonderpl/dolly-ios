@@ -294,7 +294,7 @@ static NSString* PlaceholderText = @"Say something nice";
 }
 
 
-#pragma mark - Get Comments 
+#pragma mark - Get Comments
 
 -(void)fetchCommentsFromDB
 {
@@ -316,6 +316,9 @@ static NSString* PlaceholderText = @"Say something nice";
     self.comments = [NSMutableArray arrayWithArray:fetchedArray];
     
     [self.commentsCollectionView reloadData];
+    
+    CGFloat offsetValue = self.commentsCollectionView.contentSize.height - self.commentsCollectionView.frame.size.height;
+    [self.commentsCollectionView setContentOffset:CGPointMake(0.0f, offsetValue)];
     
 }
 
@@ -392,38 +395,9 @@ static NSString* PlaceholderText = @"Say something nice";
     return YES;
 }
 
-- (Comment*) createCommentFromText:(NSString*)text
-{
-    
-    
-    NSDictionary* dictionary = @{
-                                 @"id" : @(999), // temp id
-                                 @"position": @(0),
-                                 @"resource_url": @"",
-                                 @"comment": text,
-                                 @"validated" : @(NO), // not yet loaded from the server
-                                 @"date_added" : [NSDate date],
-                                 @"user": @{
-                                         @"id": appDelegate.currentUser.uniqueId,
-                                         @"resource_url": @"",
-                                         @"display_name": appDelegate.currentUser.displayName,
-                                         @"avatar_thumbnail_url": appDelegate.currentUser.thumbnailURL
-                                         }
-                                 };
-    
-    
-    Comment* adHocComment = [Comment instanceFromDictionary:dictionary
-                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext];
-    
-    adHocComment.recentValue = YES;
-    
-    adHocComment.videoInstanceId = self.videoInstance.uniqueId;
-    
-    [appDelegate saveContext:NO];
-    
-    
-    return adHocComment;
-}
+
+#pragma mark - Sending Comment
+
 
 - (void) sendComment
 {
@@ -504,33 +478,42 @@ static NSString* PlaceholderText = @"Say something nice";
                                        } errorHandler:ErrorBlock];
 }
 
--(BOOL)deleteComment:(Comment*)comment
+
+- (Comment*) createCommentFromText:(NSString*)text
 {
     
     
-    [self.comments removeObject:comment];
+    NSDictionary* dictionary = @{
+                                 @"id" : @(999), // temp id
+                                 @"position": @(0),
+                                 @"resource_url": @"",
+                                 @"comment": text,
+                                 @"validated" : @(NO), // not yet loaded from the server
+                                 @"date_added" : [NSDate date],
+                                 @"user": @{
+                                         @"id": appDelegate.currentUser.uniqueId,
+                                         @"resource_url": @"",
+                                         @"display_name": appDelegate.currentUser.displayName,
+                                         @"avatar_thumbnail_url": appDelegate.currentUser.thumbnailURL
+                                         }
+                                 };
     
-    [comment.managedObjectContext deleteObject:comment];
+    
+    Comment* adHocComment = [Comment instanceFromDictionary:dictionary
+                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+    
+    adHocComment.recentValue = YES;
+    
+    adHocComment.videoInstanceId = self.videoInstance.uniqueId;
+    
+    [appDelegate saveContext:NO];
     
     
-    NSError* saveError;
-    if(![comment.managedObjectContext save:&saveError])
-    {
-        // if we get an error...
-        if(!comment.isDeleted)
-        {
-            [self.comments addObject:comment]; // put it back
-        }
-        DebugLog(@"%@", saveError);
-        return NO;
-    }
-    
-    return YES;
+    return adHocComment;
 }
 
 
-
-#pragma mark - Button Delegates
+#pragma mark - Button Delegates (Deleting)
 
 -(void)deleteButtonPressed:(UIButton*)sender
 {
@@ -571,6 +554,30 @@ static NSString* PlaceholderText = @"Say something nice";
                                          } errorHandler:^(id error) {
         
                                          }];
+}
+
+-(BOOL)deleteComment:(Comment*)comment
+{
+    
+    
+    [self.comments removeObject:comment];
+    
+    [comment.managedObjectContext deleteObject:comment];
+    
+    
+    NSError* saveError;
+    if(![comment.managedObjectContext save:&saveError])
+    {
+        // if we get an error...
+        if(!comment.isDeleted)
+        {
+            [self.comments addObject:comment]; // put it back
+        }
+        DebugLog(@"%@", saveError);
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (IBAction)sendButtonPressed:(id)sender
@@ -639,7 +646,19 @@ static NSString* PlaceholderText = @"Say something nice";
     return CGSizeMake(self.commentsCollectionView.frame.size.width, correctHeight);
 }
 
+#pragma mark - Dealloc
 
-#pragma mark - Loading Comments
+// this controller gets destroyed and recreated every time we press the comment button so need to catch dealloc rather than viewDidUnload
+- (void) dealloc
+{
+    // delete all the comments for which we did not retrieve an OK. They might still have been saved and will appear upon load
+    // but we need to be consistent by only showing what we are certain has been received form the server
+    for (Comment* comment in self.comments)
+        if(!comment.validatedValue)
+            [comment.managedObjectContext deleteObject:comment];
+    
+}
+
+
 
 @end
