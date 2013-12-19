@@ -69,11 +69,13 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - View Life Cycle
 
+// only gets called on iPhone
 - (void) backButtonPressed : (UIBarButtonItem*) barButton
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement
                                                         object:self
                                                       userInfo:@{kScrollingDirection:@(ScrollingDirectionDown)}];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -88,6 +90,11 @@ static NSString* PlaceholderText = @"Say something nice";
                                                                                  style:UIBarButtonItemStyleBordered
                                                                                 target:self
                                                                                 action:@selector(backButtonPressed:)];
+        
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                            object: self
+                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
         
     }
     
@@ -159,9 +166,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                   options:NSKeyValueObservingOptionNew
                                   context:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                        object: self
-                                                      userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -207,8 +211,6 @@ static NSString* PlaceholderText = @"Say something nice";
         {
             targetFrame.origin.y += 110.0f;
         }
-        
-       
     }
     else
     {
@@ -241,8 +243,6 @@ static NSString* PlaceholderText = @"Say something nice";
                          isAnimating = NO;
                      }];
     
-    
-    
 }
 
 
@@ -250,7 +250,10 @@ static NSString* PlaceholderText = @"Say something nice";
 
 
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
     if ([keyPath isEqualToString: kTextViewContentSizeKey])
     {
@@ -551,6 +554,10 @@ static NSString* PlaceholderText = @"Say something nice";
     return adHocComment;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // override the abstract so that you dont send notifications to the navigation manager
+}
 
 #pragma mark - Button Delegates (Deleting)
 
@@ -579,7 +586,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                               otherButtonTitles:@"OK", nil];
-    alertView.delegate = self;
     
     [alertView show];
     
