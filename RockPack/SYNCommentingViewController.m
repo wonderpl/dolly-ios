@@ -262,7 +262,6 @@ static NSString* PlaceholderText = @"Say something nice";
         self.bottomContainerView.frame = bottonViewFrame;
         
         
-        
         // = offset TextView = //
         
         CGRect tvFrame = self.sendMessageTextView.frame;
@@ -270,7 +269,6 @@ static NSString* PlaceholderText = @"Say something nice";
         tvFrame.size.height += diff;
         
         self.sendMessageTextView.frame = tvFrame;
-        
         
         
         
@@ -312,7 +310,7 @@ static NSString* PlaceholderText = @"Say something nice";
     // comments relate to a specific video instance
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"videoInstanceId == %@", self.videoInstance.uniqueId]];
     
-    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"position" ascending: YES]];
+    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"dateAdded" ascending: YES]];
     
     NSError* error;
     NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
@@ -391,10 +389,7 @@ static NSString* PlaceholderText = @"Say something nice";
     {
         return NO;
     }
-    else // (should be compiled away)
-    {
-        DebugLog(@"Characters Remaining: %i", kMaxCommentCharacters - textView.text.length);
-    }
+    
     
     
     return YES;
@@ -405,7 +400,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     NSDictionary* dictionary = @{
-                                 @"id" : @(999),
+                                 @"id" : @(0),
                                  @"position": self.maxCommentPosition,
                                  @"resource_url": @"",
                                  @"comment": text,
@@ -471,7 +466,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                        completionHandler:^(id dictionary) {
                                            
                                            if(![dictionary isKindOfClass:[NSDictionary class]] ||
-                                              ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]] ||
                                               ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]])
                                            {
                                                ErrorBlock(@{@"error" : @"responce is not a discionary"});
@@ -480,9 +474,24 @@ static NSString* PlaceholderText = @"Say something nice";
                                            comment.validatedValue = YES;
                                            
                                            NSNumber* commentId = (NSNumber*)[dictionary objectForKey:@"id"];
+                                           if(![commentId isKindOfClass:[NSNumber class]])
+                                           {
+                                               ErrorBlock(@{@"error" : @"responce is not a discionary"});
+                                               return;
+                                           }
+                                           
                                            
                                            // save the correct url in order to be able to delete
                                            comment.uniqueId = [commentId stringValue];
+                                           
+                                           
+                                           NSError* error;
+                                           if(![comment.managedObjectContext save:&error])
+                                           {
+                                               NSLog(@"%@", error);
+                                               ErrorBlock(@{@"error" : @"could not save to managed context"});
+                                               return;
+                                           }
                                            
                                            [self.sendMessageTextView resignFirstResponder];
                                            
