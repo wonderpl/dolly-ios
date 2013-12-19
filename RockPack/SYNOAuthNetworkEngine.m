@@ -836,7 +836,7 @@
     
     
     [networkOperation addHeaders: @{@"Content-Type" : @"image/jpeg", @"Content-Length" : lengthString}];
-    SYNAppDelegate* blockAppDelegate = self.appDelegate;
+//    SYNAppDelegate* blockAppDelegate = self.appDelegate;
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: ^(NSDictionary* result) {
                                NSDictionary* headerDictionary = [networkOperation.readonlyResponse allHeaderFields];
