@@ -1318,6 +1318,19 @@
     
 }
 
+- (void)killScroll {
+    
+    CGPoint offset = self.subscriptionThumbnailCollectionView.contentOffset;
+    offset.x -= 1.0;
+    offset.y -= 1.0;
+    [self.subscriptionThumbnailCollectionView setContentOffset:offset animated:NO];
+    offset.x += 1.0;
+    offset.y += 1.0;
+    [self.subscriptionThumbnailCollectionView setContentOffset:offset animated:NO];
+
+}
+
+
 - (void) loadMoreChannels
 {
     
@@ -1779,6 +1792,9 @@
 
 - (void)searchBar:(UISearchBar *)searchBar activate:(BOOL) active
 {
+    
+    
+
 }
 
 
@@ -1841,6 +1857,7 @@
     BOOL boolToReturn = self.shouldBeginEditing;
     self.searchMode = YES;
     
+    [self killScroll];
     
     if (self.shouldBeginEditing)
     {
@@ -2610,8 +2627,12 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 - (IBAction)changeCoverImageButtonTapped:(id)sender
 {
+//#warning cover photo
     
-    
+    self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self];
+    self.imagePickerControllerCoverphoto.delegate = self;
+    [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+
 }
 - (IBAction)changeAvatarButtonTapped:(id)sender
 {
