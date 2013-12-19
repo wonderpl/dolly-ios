@@ -8,6 +8,7 @@
 
 #import "AppConstants.h"
 #import "SYNAggregateChannelCell.h"
+#import "SYNAggregateFlowLayout.h"
 #import "SYNAggregateChannelItemCell.h"
 #import "UIImage+Tint.h"
 #import "UIFont+SYNFont.h"
@@ -31,7 +32,15 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     [self.collectionView registerNib: [UINib nibWithNibName: kChannelItemCellIndetifier bundle: nil]
           forCellWithReuseIdentifier: kChannelItemCellIndetifier];
+    SYNAggregateFlowLayout *aggregateFlowLayout = [[SYNAggregateFlowLayout alloc] init];
     
+    aggregateFlowLayout.itemSize = [self sizeForItemAtDefaultPath];
+    
+    self.collectionView.collectionViewLayout = aggregateFlowLayout;
+    
+    
+    
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
     [self.collectionView reloadData];
 }
 
@@ -96,9 +105,38 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 
 #pragma mark - UICollectionView DataSource
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
+// utility method (overriding abstract class)
+- (CGSize) sizeForItemAtDefaultPath
+{
+    // TODO: Might be a good idea to cache this, as this might be (relatively) computationally expensive
+    return [self collectionView: self.collectionView
+                         layout: self.collectionView.collectionViewLayout
+         sizeForItemAtIndexPath: [NSIndexPath indexPathForItem: 0 inSection: 0]];
+}
+
+- (CGSize) collectionView: (UICollectionView *) collectionView
+                   layout: (UICollectionViewLayout*) collectionViewLayout
+   sizeForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
+    CGSize correctSize = CGSizeZero;
+    
+    if (IS_IPHONE)
+    {
+        correctSize.width = 248.0f;
+        correctSize.height = 158.0f;
+    }
+    else
+    {
+        correctSize.width = 360.0f;
+        correctSize.height = 223.0f;
+    }
+    
+    return correctSize;
+}
+
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
+{
     return 1;
 }
 
@@ -106,7 +144,6 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 {
     return self.collectionData.count;
 }
-
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
@@ -121,6 +158,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     
     return itemCell;
 }
+
 
 
 @end

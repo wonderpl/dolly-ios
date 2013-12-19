@@ -73,7 +73,8 @@
 
 @property (nonatomic, strong) id orientationDesicionmaker;
 
-@property (nonatomic, strong) SYNImagePickerController* imagePickerController;
+@property (nonatomic, strong) SYNImagePickerController* imagePickerControllerAvatar;
+@property (nonatomic, strong) SYNImagePickerController* imagePickerControllerCoverphoto;
 
 @property (nonatomic, strong) SYNChannelMidCell *followCell;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
@@ -189,9 +190,6 @@
     [super viewDidLoad];
     
     [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
-    
-    
-    
 
     self.shouldBeginEditing = YES;
     self.collectionsTabActive = YES;
@@ -367,7 +365,6 @@
     [self setFollowersCountButton];
     
 }
-
 -(void) setFollowersCountButton
 {
         NSString *tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
@@ -414,8 +411,6 @@
     {
         [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
     }
-    
-    
 }
 
 
@@ -534,24 +529,80 @@
     
     UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
     self.profileImageView.image = placeholderImage;
-
     
     if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
         
         dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
         dispatch_async(downloadQueue, ^{
             
-            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailURL ]];
+            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailLargeUrl ]];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.self.profileImageView.image = [UIImage imageWithData: imageData];
-            });
+            UIImage *tmpImage = [UIImage imageWithData: imageData];
+
+            //if statement for now as the db has urls for avatars that have not been uploaded
+            //should be able to get rid of it later
+            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    self.profileImageView.image = tmpImage;
+                });
+            }
+            
         });
         
     }else{
         
         self.profileImageView.image = placeholderImage;
     }
+//#warning set cover photo here
+
+    placeholderImage = [UIImage imageNamed: @"coverImageTest"];
+    
+    if (![self.channelOwner.coverPhotoURL isEqualToString:@""]){ // there is a url string
+        
+//        NSArray *thumbnailURLItems = [self.channelOwner.thumbnailURL componentsSeparatedByString: @"/"];
+//        
+//        if (thumbnailURLItems.count >= 6)
+//        {
+//            NSString *thumbnailSizeString = thumbnailURLItems[5];
+//            NSString *thumbnailUrlString;
+//            if (IS_IPAD)
+//            {
+//                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
+//            }
+//            else
+//            {
+//                thumbnailUrlString = [self.channelOwner.thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
+//            }
+//            
+//            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
+//                            placeholderImage: placeholderImage
+//                                     options: SDWebImageRetryFailed];
+//        }
+
+//        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
+//        dispatch_async(downloadQueue, ^{
+//            
+//            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.coverPhotoURL ]];
+//            
+//            UIImage *tmpImage = [UIImage imageWithData: imageData];
+//            
+//            //if statement for now as the db has urls for avatars that have not been uploaded
+//            //should be able to get rid of it later
+//            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    
+//                    self.coverImage.image = tmpImage;
+//                });
+//            }
+//            
+//        });
+        
+    }else{
+        
+        self.coverImage.image = placeholderImage;
+    }
+    
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     
@@ -585,15 +636,6 @@
     {
         [self setChannelOwner: currentUser];
     }
-}
-
-- (IBAction) userTouchedAvatarButton: (UIButton *) avatarButton
-{
-    self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController: self];
-    self.imagePickerController.delegate = self;
-    
-    [self.imagePickerController presentImagePickerAsPopupFromView: avatarButton
-                                                   arrowDirection: UIPopoverArrowDirectionUp];
 }
 
 
@@ -879,6 +921,11 @@
             
 			channelThumbnailCell.followButton.hidden = (self.modeType == kModeMyOwnProfile);
 			channelThumbnailCell.showsDescriptionOnSwipe = YES;
+            
+            [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
+            NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
+            [channelThumbnailCell.followerCountLabel setText:subscribersString];
+            
             channelThumbnailCell.channel = channel;
 			
 			// indexPath.row == Favourites cell, which is a special case
@@ -886,6 +933,7 @@
             {
                 channelThumbnailCell.deletableCell = YES;
             }
+
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
@@ -900,6 +948,10 @@
 				
                 channelThumbnailCell.channel = channel;
                 
+                NSMutableString* videoCountString = [NSMutableString new];
+                
+                [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
+                channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
             }
         }
         if(self.modeType == kModeOtherUsersProfile)
@@ -994,7 +1046,6 @@
         }
     }
     return;
-
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -1250,6 +1301,19 @@
     
 }
 
+- (void)killScroll {
+    
+    CGPoint offset = self.subscriptionThumbnailCollectionView.contentOffset;
+    offset.x -= 1.0;
+    offset.y -= 1.0;
+    [self.subscriptionThumbnailCollectionView setContentOffset:offset animated:NO];
+    offset.x += 1.0;
+    offset.y += 1.0;
+    [self.subscriptionThumbnailCollectionView setContentOffset:offset animated:NO];
+
+}
+
+
 - (void) loadMoreChannels
 {
     
@@ -1380,7 +1444,7 @@
             }
             else
             {
-                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, -offset/PARALLAX_SCROLL_VALUE);
+                CGAffineTransform moveCoverImage = CGAffineTransformMakeTranslation(0, (-offset/PARALLAX_SCROLL_VALUE)-1);
                 self.coverImage.transform = moveCoverImage;
                 self.backgroundView.transform = move;
             }
@@ -1388,7 +1452,7 @@
         }
         else
         {
-            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
+            CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset-1);
             self.coverImage.transform = move;
             self.moreButton.transform = move;
             self.containerViewIPad.transform = move;
@@ -1594,8 +1658,7 @@
     {
         // isUserProfile set to YES for the current User
         self.isUserProfile = channelOwnerIsUser;
-        
-        
+
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
                                                      name: NSManagedObjectContextDidSaveNotification
@@ -1712,6 +1775,9 @@
 
 - (void)searchBar:(UISearchBar *)searchBar activate:(BOOL) active
 {
+    
+    
+
 }
 
 
@@ -1774,6 +1840,7 @@
     BOOL boolToReturn = self.shouldBeginEditing;
     self.searchMode = YES;
     
+    [self killScroll];
     
     if (self.shouldBeginEditing)
     {
@@ -2538,16 +2605,18 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 - (IBAction)changeCoverImageButtonTapped:(id)sender
 {
+//#warning cover photo
     
-    
+    self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self];
+    self.imagePickerControllerCoverphoto.delegate = self;
+    [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+
 }
 - (IBAction)changeAvatarButtonTapped:(id)sender
 {
-    self.imagePickerController = [[SYNImagePickerController alloc] initWithHostViewController:self];
-    self.imagePickerController.delegate = self;
-    
-    
-    [self.imagePickerController presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+    self.imagePickerControllerAvatar = [[SYNImagePickerController alloc] initWithHostViewController:self];
+    self.imagePickerControllerAvatar.delegate = self;
+    [self.imagePickerControllerAvatar presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
 }
 
 
@@ -2574,7 +2643,10 @@ finishedWithImage: (UIImage *) image
     self.avatarButton.enabled = NO;
     self.profileImageView.image = image;
     //  [self.activityIndicator startAnimating];
-    [appDelegate.oAuthNetworkEngine updateAvatarForUserId: appDelegate.currentOAuth2Credentials.userId
+    
+    if (picker == self.imagePickerControllerAvatar) {
+
+        [appDelegate.oAuthNetworkEngine updateAvatarForUserId: appDelegate.currentOAuth2Credentials.userId
                                                     image: image
                                         completionHandler: ^(NSDictionary* result)
      {
@@ -2584,22 +2656,57 @@ finishedWithImage: (UIImage *) image
      }
                                              errorHandler: ^(id error)
      {
-         [self.profileImageView setImageWithURL: [NSURL URLWithString: appDelegate.currentUser.thumbnailURL]
-                               placeholderImage: [UIImage imageNamed: @"PlaceholderSidebarAvatar"]
-                                        options: SDWebImageRetryFailed];
-         
-         //     [self.activityIndicator stopAnimating];
-         self.avatarButton.enabled = YES;
-         
-         UIAlertView* alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title",nil)
-                                                         message: NSLocalizedString(@"register_screen_form_avatar_upload_description",nil)
-                                                        delegate: nil
-                                               cancelButtonTitle: nil
-                                               otherButtonTitles: NSLocalizedString(@"OK",nil), nil];
-         [alert show];
+//         [self.profileImageView setImageWithURL: [NSURL URLWithString: appDelegate.currentUser.thumbnailURL]
+//                               placeholderImage: [UIImage imageNamed: @"PlaceholderSidebarAvatar"]
+//                                        options: SDWebImageRetryFailed];
+//         
+//         //     [self.activityIndicator stopAnimating];
+//         self.avatarButton.enabled = YES;
+//         
+//         UIAlertView* alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title",nil)
+//                                                         message: NSLocalizedString(@"register_screen_form_avatar_upload_description",nil)
+//                                                        delegate: nil
+//                                               cancelButtonTitle: nil
+//                                               otherButtonTitles: NSLocalizedString(@"OK",nil), nil];
+//         [alert show];
      }];
     
-    self.imagePickerController = nil;
+    self.imagePickerControllerAvatar = nil;
+    
+            }
+    else
+    {
+        [appDelegate.oAuthNetworkEngine updateProfileCoverForUserId: appDelegate.currentOAuth2Credentials.userId
+                                                        image: image
+                                            completionHandler: ^(NSDictionary* result)
+         {
+             self.coverImage.image = image;
+//             [self.activityIndicator stopAnimating];
+//             self.avatarButton.enabled = YES;
+         }
+                                                 errorHandler: ^(id error)
+         {
+//             [self.coverImage setImageWithURL: [NSURL URLWithString: appDelegate.currentUser.coverartUrl]
+//                                   placeholderImage: [UIImage imageNamed: @"PlaceholderSidebarAvatar"]
+//                                            options: SDWebImageRetryFailed];
+//             
+//             //     [self.activityIndicator stopAnimating];
+////             self.avatarButton.enabled = YES;
+//             
+//             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title",nil)
+//                                                             message: NSLocalizedString(@"register_screen_form_avatar_upload_description",nil)
+//                                                            delegate: nil
+//                                                   cancelButtonTitle: nil
+//                                                   otherButtonTitles: NSLocalizedString(@"OK",nil), nil];
+//             [alert show];
+         }];
+        
+        self.imagePickerControllerCoverphoto = nil;
+        
+
+        
+    }
+    
     
 }
 

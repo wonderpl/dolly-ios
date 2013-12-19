@@ -6,6 +6,7 @@
 
 extern const struct ChannelOwnerAttributes {
 	__unsafe_unretained NSString *channelOwnerDescription;
+	__unsafe_unretained NSString *coverPhotoURL;
 	__unsafe_unretained NSString *displayName;
 	__unsafe_unretained NSString *followersTotalCount;
 	__unsafe_unretained NSString *position;
@@ -41,6 +42,7 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
+
 @interface ChannelOwnerID : NSManagedObjectID {}
 @end
 
@@ -59,6 +61,16 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 //- (BOOL)validateChannelOwnerDescription:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* coverPhotoURL;
+
+
+
+//- (BOOL)validateCoverPhotoURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -226,6 +238,12 @@ extern const struct ChannelOwnerFetchedProperties {
 
 - (NSString*)primitiveChannelOwnerDescription;
 - (void)setPrimitiveChannelOwnerDescription:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveCoverPhotoURL;
+- (void)setPrimitiveCoverPhotoURL:(NSString*)value;
 
 
 

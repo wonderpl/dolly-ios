@@ -268,6 +268,10 @@
     
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
+    
+    [self setupFonts];
+    
+
 	self.model.delegate = self;
 }
 
@@ -323,16 +327,82 @@
     
     //Transparent navigation bar
     //TODO: create category for navigation bar
-//    self.tmpNavigationBarBackground = [[UIImage alloc]init];
-//    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
-//    
-//    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
-//    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
+    self.tmpNavigationBarBackground = [[UIImage alloc]init];
+    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
+    
+    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
+    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
     
     [self.navigationController setTransparent];
     
     self.navigationItem.title = @"";
 
+}
+
+-(void) setupFonts
+{
+    
+    if (IS_IPHONE)
+    {
+        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
+        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
+        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
+        [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:self.lblNoVideos.font.pointSize]];
+    }
+    else
+    {
+        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:self.lblFullName.font.pointSize]];
+        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:self.lblChannelTitle.font.pointSize]];
+        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:self.lblDescription.font.pointSize]];
+        [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:self.btnShowFollowers.titleLabel.font.pointSize]];
+        [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:self.btnShowVideos.titleLabel.font.pointSize]];
+        [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:self.lblNoVideos.font.pointSize]];
+    }
+
+    
+    
+    [self.videoThumbnailCollectionView registerNib:[SYNCollectionVideoCell nib]
+                        forCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]];
+    
+    // == Footer View == //
+    [self.videoThumbnailCollectionView registerNib:[SYNChannelFooterMoreView nib]
+                        forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                               withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
+
+    self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
+
+    
+    if (IS_RETINA) {
+        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
+    }
+    else
+    {
+        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+    }
+
+    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    
+    [[self.txtFieldChannelName layer] setCornerRadius:0];
+    
+    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
+    
+    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    if (IS_RETINA)
+    {
+        [[self.txtViewDescription layer] setBorderWidth:0.5];
+    }
+    else
+    {
+        [[self.txtViewDescription layer] setBorderWidth:1.0];
+    }
+    
+    [[self.txtViewDescription layer] setCornerRadius:0];
+    
+
+    
 }
 
 -(void) setUpMode
@@ -397,22 +467,6 @@
 -(void) displayChannelDetails
 {
     
-    if (IS_IPHONE)
-    {
-        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
-        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
-        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
-        [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
-    }
-    
-    [self.videoThumbnailCollectionView registerNib:[SYNCollectionVideoCell nib]
-                        forCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]];
-    
-    // == Footer View == //
-    [self.videoThumbnailCollectionView registerNib:[SYNChannelFooterMoreView nib]
-                        forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                               withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
     self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
@@ -424,7 +478,6 @@
     
     [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
     
-    self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
     [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
     
@@ -444,31 +497,6 @@
         self.lblNoVideos.hidden = YES;
     }
     
-    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
-    
-    if (IS_RETINA) {
-        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
-    }
-    else
-    {
-        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
-    }
-    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    
-    [[self.txtFieldChannelName layer] setCornerRadius:0];
-    
-    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
-    
-    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    if (IS_RETINA)
-    {
-        [[self.txtViewDescription layer] setBorderWidth:0.5];
-    }
-    else
-    {
-        [[self.txtViewDescription layer] setBorderWidth:1.0];
-    }
-    [[self.txtViewDescription layer] setCornerRadius:0];
     
     //should not have to do this, check.
     [self.btnDeleteChannel setBackgroundColor:[UIColor whiteColor]];

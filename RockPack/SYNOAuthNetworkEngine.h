@@ -54,6 +54,14 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
              completionHandler: (MKNKUserSuccessBlock) completionBlock
                   errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+//Profile Cover
+
+- (void) updateProfileCoverForUserId: (NSString *) userId
+                               image: (UIImage *) image
+                   completionHandler: (MKNKUserSuccessBlock) completionBlock
+                        errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+
 // Channel creation
 
 

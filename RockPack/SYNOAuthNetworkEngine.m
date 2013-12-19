@@ -794,6 +794,74 @@
 }
 
 
+#pragma mark - Profile cover
+
+- (void) updateProfileCoverForUserId: (NSString *) userId
+                         image: (UIImage *) image
+             completionHandler: (MKNKUserSuccessBlock) completionBlock
+                  errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIUpdateProfileCover stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: nil
+                                                                                                   httpMethod: @"PUT"
+                                                                                                          ssl: TRUE];
+    
+    
+    UIImage *newImage = [UIImage scaleAndRotateImage: image
+                                         withMaxSize: 1200];
+    
+    
+
+    
+    //        DebugLog(@"New image width: %f, height%f", newImage.size.width, newImage.size.height);
+    // We have to perform the image upload with an input stream
+    
+    NSData *imageData = UIImageJPEGRepresentation(newImage, 0.10);
+    
+    // Other attempts at performing scaling
+    //    NSData *imageData = UIImagePNGRepresentation(newImage);
+    //    NSData *imageData = UIImageJPEGRepresentation(image, 0.70);
+    //    NSData *imageData = [image jpegDataForResizedImageWithMaxDimension: 600];
+    
+    NSString *lengthString = [NSString stringWithFormat: @"%@", @(imageData.length)];
+    NSInputStream *inputStream = [NSInputStream inputStreamWithData: imageData];
+    networkOperation.uploadStream = inputStream;
+    
+    NSLog(@"length string :%@", lengthString);
+    
+    
+    [networkOperation addHeaders: @{@"Content-Type" : @"image/jpeg", @"Content-Length" : lengthString}];
+//    SYNAppDelegate* blockAppDelegate = self.appDelegate;
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: ^(NSDictionary* result) {
+                               NSDictionary* headerDictionary = [networkOperation.readonlyResponse allHeaderFields];
+//                               User* currentUser = blockAppDelegate.currentUser;
+//                               
+//                               if (currentUser)
+//                               {
+//                                   NSString *newThumbnailURL = headerDictionary[@"Location"];
+//                                   currentUser.coverartUrl = newThumbnailURL;
+//                                   [blockAppDelegate saveContext: YES];
+////                                   [[NSNotificationCenter defaultCenter] postNotificationName: kUserDataChanged
+////                                                                                       object: nil
+////                                                                                     userInfo: @{@"user":currentUser}];
+//                               }
+                               if(completionBlock) //Important to nil check blocks - otherwise crash may ensue!
+                               {
+                                   completionBlock(headerDictionary);
+                               }
+                           }
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
+
 #pragma mark - Channel management
 
 - (void) channelCreatedForUserId: (NSString *) userId
