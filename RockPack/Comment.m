@@ -75,7 +75,7 @@
     
     
     
-    self.videoInstanceId = nil; // this is filled by the view controller which knows which one it is in...
+    self.videoInstanceId = nil; // this is filled by the view controller or registry which knows which one it is in associated with...
     
 }
 

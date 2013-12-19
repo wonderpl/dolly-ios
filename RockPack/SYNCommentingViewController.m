@@ -33,7 +33,6 @@ static NSString* PlaceholderText = @"Say something nice";
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
 
-@property (nonatomic, strong) NSNumber* maxCommentPosition;
 
 // Send View
 
@@ -94,7 +93,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.comments = @[].mutableCopy; // avoid calling count on nil instance
     
-    self.maxCommentPosition = @(0);
     
     oldContentSizeHeight = self.sendMessageTextView.contentSize.height;
     
@@ -316,7 +314,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                                                                 error: &error];
     
     self.comments = [NSMutableArray arrayWithArray:fetchedArray];
-    NSLog(@"%@", self.comments);
     
     [self.commentsCollectionView reloadData];
     
@@ -385,7 +382,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     // == Exceeded character count ? == //
     
-    if(textView.text.length >= kMaxCommentCharacters)
+    if(range.location >= kMaxCommentCharacters)
     {
         return NO;
     }
@@ -400,12 +397,12 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     NSDictionary* dictionary = @{
-                                 @"id" : @(0),
-                                 @"position": self.maxCommentPosition,
+                                 @"id" : @(999), // temp id
+                                 @"position": @(0),
                                  @"resource_url": @"",
                                  @"comment": text,
                                  @"validated" : @(NO), // not yet loaded from the server
-                                 // @"date_added" : not passing the case will default to [NSDate date] which is correct
+                                 @"date_added" : [NSDate date],
                                  @"user": @{
                                          @"id": appDelegate.currentUser.uniqueId,
                                          @"resource_url": @"",
@@ -418,8 +415,12 @@ static NSString* PlaceholderText = @"Say something nice";
     Comment* adHocComment = [Comment instanceFromDictionary:dictionary
                                   usingManagedObjectContext:appDelegate.mainManagedObjectContext];
     
-    
     adHocComment.recentValue = YES;
+    
+    adHocComment.videoInstanceId = self.videoInstance.uniqueId;
+    
+    [appDelegate saveContext:NO];
+    
     
     return adHocComment;
 }
@@ -436,7 +437,7 @@ static NSString* PlaceholderText = @"Say something nice";
         return;
     }
     
-    [self.comments addObject:comment];
+    [self fetchCommentsFromDB];
     
     
     self.sendMessageTextView.text = @"";
@@ -493,6 +494,8 @@ static NSString* PlaceholderText = @"Say something nice";
                                                ErrorBlock(@{@"error" : @"could not save to managed context"});
                                                return;
                                            }
+                                           
+                                           
                                            
                                            [self.sendMessageTextView resignFirstResponder];
                                            
@@ -599,10 +602,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     commentingCell.comment = comment;
     
-    
-    
-    if(self.maxCommentPosition.integerValue < comment.positionValue)
-        self.maxCommentPosition = @(comment.positionValue);
     
         
     commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
