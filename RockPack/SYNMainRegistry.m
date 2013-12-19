@@ -481,8 +481,6 @@
     FeedItem* leafFeedItem;
     AbstractCommon* object;
     
-    ChannelOwner* co;
-    
     // == Parse Items == //
     
     
@@ -497,10 +495,6 @@
                 if(!(object = [VideoInstance instanceFromDictionary:itemDictionary
                                           usingManagedObjectContext:importManagedObjectContext]))
                        continue;
-                   
-            co = ((VideoInstance*)object).channel.channelOwner;
-            
-            
         }
         else if (itemDictionary[@"cover"]) // channel object
         {
@@ -509,9 +503,6 @@
                 if(!(object = [Channel instanceFromDictionary:itemDictionary
                                     usingManagedObjectContext:importManagedObjectContext]))
                     continue;
-            
-            
-            co = ((Channel*)object).channelOwner;
         }
         
         

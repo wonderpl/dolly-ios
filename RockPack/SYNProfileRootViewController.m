@@ -2367,11 +2367,6 @@
                                                      errorTitle = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_title", nil);
                                                      errorMessage = NSLocalizedString(@"channel_creation_screen_error_inappropriate_dialog_description", nil);
                                                  }
-                                                 else
-                                                 {
-                                                     errorTitle = NSLocalizedString(@"channel_creation_screen_error_unknown_title", nil);
-                                                     errorMessage = NSLocalizedString(@"channel_creation_screen_error_unknown_create_description", nil);
-                                                 }
                                              }
                                              
                                              
