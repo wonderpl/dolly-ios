@@ -327,11 +327,11 @@
     
     //Transparent navigation bar
     //TODO: create category for navigation bar
-//    self.tmpNavigationBarBackground = [[UIImage alloc]init];
-//    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
-//    
-//    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
-//    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
+    self.tmpNavigationBarBackground = [[UIImage alloc]init];
+    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
+    
+    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
+    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
     
     [self.navigationController setTransparent];
     
