@@ -217,6 +217,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="follow" id="OIO-ik-Gr7">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="followButtonPressed:" destination="PB1-Bc-aL3" id="McE-w3-dR0"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -225,6 +228,7 @@
                         <outlet property="channelOwnerLabel" destination="Vnk-m6-q4n" id="vfb-UQ-4bd"/>
                         <outlet property="channelThumbnailImageView" destination="wNE-gn-6Ck" id="3eL-Eh-v0x"/>
                         <outlet property="channelTitleLabel" destination="OpJ-pf-0Oe" id="NfZ-ik-hPb"/>
+                        <outlet property="followBarButton" destination="OIO-ik-Gr7" id="eDw-ZG-wlc"/>
                         <outlet property="likeButton" destination="sjo-Kq-j9L" id="eiG-EK-HZx"/>
                         <outlet property="thumbnailCollectionView" destination="IXk-6T-01i" id="FfV-dA-109"/>
                         <outlet property="videoPlayerContainerView" destination="sRQ-Zn-BXl" id="gbw-RP-BOx"/>

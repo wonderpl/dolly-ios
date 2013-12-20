@@ -24,10 +24,12 @@
 #import "SYNStaticModel.h"
 #import "SYNChannelFooterMoreView.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNActivityManager.h"
 #import <UIImageView+WebCache.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNPagingModelDelegate>
 
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *followBarButton;
 @property (nonatomic, strong) IBOutlet UIImageView *channelThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel *channelTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *channelOwnerLabel;
@@ -231,8 +233,37 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - IBActions
 
-- (IBAction)followButtonPressed:(UIButton *)button {
-	[self followButtonPressed:button withChannel:self.videoInstance.channel];
+- (IBAction)followButtonPressed:(UIBarButtonItem *)barButton {
+	barButton.enabled = NO;
+	
+	Channel *channel = self.videoInstance.channel;
+	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
+	if (channel.subscribedByUserValue) {
+        [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
+												completionHandler:^(NSDictionary *responseDictionary) {
+													barButton.title = @"follow";
+													barButton.enabled = YES;
+												} errorHandler: ^(NSDictionary *errorDictionary) {
+													barButton.enabled = YES;
+												}];
+	} else {
+        [[SYNActivityManager sharedInstance] subscribeToChannel: channel
+		 
+											  completionHandler: ^(NSDictionary *responseDictionary) {
+												  id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+												  
+												  [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+																										 action: @"userSubscription"
+																										  label: nil
+																										  value: nil] build]];
+												  barButton.title = @"unfollow";
+												  barButton.enabled = YES;
+											  } errorHandler: ^(NSDictionary *errorDictionary) {
+												  barButton.enabled = YES;
+											  }];
+	}
+//
+//	[self followButtonPressed:button withChannel:self.videoInstance.channel];
 }
 
 - (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {
@@ -247,6 +278,12 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[super updateVideoInstanceDetails:(VideoInstance *)videoInstance];
+	
+	BOOL videoOwnedByCurrentUser = [appDelegate.currentUser.uniqueId isEqualToString:videoInstance.channel.channelOwner.uniqueId];
+	self.navigationItem.rightBarButtonItem = (videoOwnedByCurrentUser ? nil : self.followBarButton);
+	
+	BOOL isSubscribed = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:videoInstance.channel.uniqueId];
+	self.followBarButton.title = (isSubscribed ? @"unfollow" : @"follow");
 	
 	if ([videoInstance.channel.channelOwner.displayName length]) {
 		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
