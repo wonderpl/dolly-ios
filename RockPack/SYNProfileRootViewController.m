@@ -2628,7 +2628,6 @@ finishedWithImage: (UIImage *) image
 {
     //DebugLog(@"Orign image width: %f, height%f", image.size.width, image.size.height);
     self.avatarButton.enabled = NO;
-    self.profileImageView.image = image;
     //  [self.activityIndicator startAnimating];
     
     if (picker == self.imagePickerControllerAvatar) {
