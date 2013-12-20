@@ -105,6 +105,7 @@
                             <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
+                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="Zuf-oa-2Pa"/>
                             </connections>
