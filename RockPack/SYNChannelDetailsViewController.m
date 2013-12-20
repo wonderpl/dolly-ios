@@ -306,8 +306,6 @@
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
-    self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
