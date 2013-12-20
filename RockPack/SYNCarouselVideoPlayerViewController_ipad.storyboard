@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="PB1-Bc-aL3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4w-lx-HXi">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="0Th-hp-Q6s">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="M4w-lx-HXi" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HNG-jj-ViW">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PB1-Bc-aL3" kind="relationship" relationship="rootViewController" id="zat-8f-id7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="078-n5-oSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1073" y="-254"/>
+        </scene>
         <!--Carousel Video Player View Controller-->
         <scene sceneID="ImF-1M-tfx">
             <objects>
@@ -16,38 +32,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXd-vs-OSr">
-                                <rect key="frame" x="20" y="20" width="37" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="lZ0-iV-648"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="close">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeButtonPressed:" destination="PB1-Bc-aL3" eventType="touchUpInside" id="8YJ-uL-n3B"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZi-VM-MX4">
-                                <rect key="frame" x="939" y="20" width="60" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="CnJ-d1-KOz"/>
-                                    <constraint firstAttribute="height" constant="44" id="e9L-ZU-Wfy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="follow">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" title="unfollow"/>
-                                <connections>
-                                    <action selector="followButtonPressed:" destination="PB1-Bc-aL3" eventType="touchUpInside" id="7PJ-qT-w3K"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPS-0z-gZT" userLabel="Channel Info">
                                 <rect key="frame" x="488" y="45" width="49" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -214,27 +198,33 @@
                             <constraint firstAttribute="centerY" secondItem="sRQ-Zn-BXl" secondAttribute="centerY" constant="63.5" id="Amq-26-Hbk"/>
                             <constraint firstAttribute="centerX" secondItem="Tzb-1p-fac" secondAttribute="centerX" id="Bx0-xX-jha"/>
                             <constraint firstAttribute="trailing" secondItem="IXk-6T-01i" secondAttribute="trailing" id="DZu-3Q-o9W"/>
-                            <constraint firstItem="tXd-vs-OSr" firstAttribute="top" secondItem="YV5-Gs-Jfb" secondAttribute="bottom" id="M3A-Zf-y7n"/>
                             <constraint firstAttribute="centerX" secondItem="sRQ-Zn-BXl" secondAttribute="centerX" id="PzD-SE-zts"/>
                             <constraint firstAttribute="centerX" secondItem="cPS-0z-gZT" secondAttribute="centerX" id="Xku-w5-Ofk"/>
                             <constraint firstAttribute="centerX" secondItem="Dd4-m5-fwv" secondAttribute="centerX" id="bUC-Gg-WfD"/>
                             <constraint firstItem="sRQ-Zn-BXl" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="bottom" constant="10" id="fPn-A6-xfP"/>
-                            <constraint firstItem="LZi-VM-MX4" firstAttribute="top" secondItem="YV5-Gs-Jfb" secondAttribute="bottom" id="hMe-Ao-S4O"/>
-                            <constraint firstItem="tXd-vs-OSr" firstAttribute="leading" secondItem="m3U-6p-Ozj" secondAttribute="leading" constant="20" id="k81-Sn-cFA"/>
                             <constraint firstItem="Tzb-1p-fac" firstAttribute="top" secondItem="sRQ-Zn-BXl" secondAttribute="bottom" constant="76" id="koo-oI-ncI"/>
                             <constraint firstItem="IXk-6T-01i" firstAttribute="top" secondItem="sRQ-Zn-BXl" secondAttribute="bottom" constant="160" id="kzv-o4-lOg"/>
-                            <constraint firstAttribute="trailing" secondItem="LZi-VM-MX4" secondAttribute="trailing" constant="25" id="xb3-O6-ZhG"/>
                             <constraint firstItem="Dd4-m5-fwv" firstAttribute="top" secondItem="sRQ-Zn-BXl" secondAttribute="bottom" constant="18" id="yZx-FM-lbe"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="bff-ah-Wve">
+                        <barButtonItem key="leftBarButtonItem" title="close" id="OX4-VZ-Y7J">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="PB1-Bc-aL3" id="Q2u-og-4vp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="follow" id="OIO-ik-Gr7">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="addButton" destination="s9c-zp-F8k" id="ci6-bc-O1f"/>
                         <outlet property="channelOwnerLabel" destination="Vnk-m6-q4n" id="vfb-UQ-4bd"/>
                         <outlet property="channelThumbnailImageView" destination="wNE-gn-6Ck" id="3eL-Eh-v0x"/>
                         <outlet property="channelTitleLabel" destination="OpJ-pf-0Oe" id="NfZ-ik-hPb"/>
-                        <outlet property="followButton" destination="LZi-VM-MX4" id="Cvu-9q-a6F"/>
                         <outlet property="likeButton" destination="sjo-Kq-j9L" id="eiG-EK-HZx"/>
                         <outlet property="thumbnailCollectionView" destination="IXk-6T-01i" id="FfV-dA-109"/>
                         <outlet property="videoPlayerContainerView" destination="sRQ-Zn-BXl" id="gbw-RP-BOx"/>

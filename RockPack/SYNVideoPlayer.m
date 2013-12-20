@@ -43,6 +43,8 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 	return player;
 }
 
+#pragma mark - Init / Dealloc
+
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		self.backgroundColor = [UIColor blackColor];

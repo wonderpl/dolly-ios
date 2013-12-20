@@ -68,7 +68,7 @@
 	
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
-	if ([self isBeingPresented]) {
+	if ([self.parentViewController isBeingPresented]) {
 		[self playVideo];
 	}
 }
@@ -136,7 +136,7 @@
 
 #pragma mark - IBActions
 
-- (IBAction)closeButtonPressed:(UIButton *)close {
+- (IBAction)closeButtonPressed:(UIBarButtonItem *)barButton {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -160,6 +160,7 @@
 	
 	[self presentViewController:viewController animated:YES completion:nil];
 }
+
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:self.videoInstance.uniqueId];
 	

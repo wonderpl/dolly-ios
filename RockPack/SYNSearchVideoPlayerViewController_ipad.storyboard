@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="AqW-yM-AnN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="3Qp-Ud-Tfe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="egB-BO-8ib">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="3Qp-Ud-Tfe" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2wX-5t-4v6">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="AqW-yM-AnN" kind="relationship" relationship="rootViewController" id="D5D-4J-wSN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eFP-ay-XXc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-906" y="-310"/>
+        </scene>
         <!--Search Video Player View Controller-->
         <scene sceneID="Wyq-Vy-UmU">
             <objects>
@@ -89,20 +105,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dt1-Fv-0fi">
-                                <rect key="frame" x="20" y="20" width="37" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="lIN-3g-AcD"/>
-                                </constraints>
-                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="close">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeButtonPressed:" destination="AqW-yM-AnN" eventType="touchUpInside" id="1Dg-Bl-mDt"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxl-rT-Inc" userLabel="Buttons">
                                 <rect key="frame" x="390" y="489" width="244" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -191,10 +193,8 @@
                             <constraint firstAttribute="trailing" secondItem="AA9-Jg-1Xw" secondAttribute="trailing" id="QEE-tk-MsS"/>
                             <constraint firstItem="2Tw-f0-wtP" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="170" id="QvV-BW-53s"/>
                             <constraint firstAttribute="centerX" secondItem="tma-bZ-MtG" secondAttribute="centerX" id="RDH-QJ-2YK"/>
-                            <constraint firstItem="Dt1-Fv-0fi" firstAttribute="top" secondItem="bz7-RC-a0A" secondAttribute="bottom" id="RgS-sv-X6I"/>
                             <constraint firstAttribute="centerY" secondItem="tma-bZ-MtG" secondAttribute="centerY" constant="144.5" id="ViZ-4c-d8i"/>
                             <constraint firstItem="AA9-Jg-1Xw" firstAttribute="leading" secondItem="oXA-7r-uHj" secondAttribute="leading" id="WaY-hK-XEs"/>
-                            <constraint firstItem="Dt1-Fv-0fi" firstAttribute="leading" secondItem="oXA-7r-uHj" secondAttribute="leading" constant="20" id="dDv-Js-etp"/>
                             <constraint firstAttribute="trailing" secondItem="om0-Aw-JzZ" secondAttribute="trailing" id="ha6-bm-ap0"/>
                             <constraint firstItem="NAF-Dm-QGA" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="18" id="l1p-W3-yQu"/>
                             <constraint firstItem="om0-Aw-JzZ" firstAttribute="leading" secondItem="oXA-7r-uHj" secondAttribute="leading" id="lJq-pH-4Ip"/>
@@ -202,6 +202,14 @@
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="cQN-rh-Ses">
+                        <barButtonItem key="leftBarButtonItem" title="close" id="SBD-h1-zMP">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="AqW-yM-AnN" id="sqB-0v-wSj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="addButton" destination="XNp-JD-eH4" id="Bhd-iq-3ll"/>

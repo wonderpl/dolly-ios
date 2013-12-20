@@ -23,6 +23,7 @@
 #import "SYNFeedModel.h"
 #import "SYNStaticModel.h"
 #import "SYNChannelFooterMoreView.h"
+#import "UINavigationBar+Appearance.h"
 #import <UIImageView+WebCache.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNPagingModelDelegate>
@@ -43,19 +44,20 @@
 
 #pragma mark - Public class
 
-+ (instancetype)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
++ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
 	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
 	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
-	SYNCarouselVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
+	UINavigationController *navigationController = [storyboard instantiateInitialViewController];
+	SYNCarouselVideoPlayerViewController *viewController = (SYNCarouselVideoPlayerViewController *)navigationController.topViewController;
 	viewController.model = model;
 	viewController.selectedIndex = selectedIndex;
 	
-	return viewController;
+	return navigationController;
 }
 
-+ (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
++ (UIViewController *)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
 	SYNPagingModel *model = [[SYNStaticModel alloc] initWithLoadedItems:videoInstances];
 	return [self viewControllerWithModel:model selectedIndex:selectedIndex];
 }
@@ -84,6 +86,8 @@
 	
 	self.model.delegate = self;
 	
+	[self.navigationController.navigationBar setBackgroundTransparent:YES];
+	
 	if (![self isBeingPresented]) {
 		// Invalidate the layout so the section insets are recalculated when returning from full screen video
 		[self.thumbnailCollectionView.collectionViewLayout invalidateLayout];
@@ -93,12 +97,18 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	if ([self isBeingPresented]) {
+	if ([self.parentViewController isBeingPresented]) {
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
 		[self.thumbnailCollectionView selectItemAtIndexPath:indexPath
 												   animated:YES
 											 scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

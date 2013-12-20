@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7ZJ-uv-6JN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="URo-9c-cnu">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="lnE-qg-TDk">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="URo-9c-cnu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hkT-Xt-fc6">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7ZJ-uv-6JN" kind="relationship" relationship="rootViewController" id="6Yl-Ip-5tz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="deh-jV-Whk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-329" y="-165"/>
+        </scene>
         <!--Search Video Player View Controller-->
         <scene sceneID="cL5-IK-XTd">
             <objects>
@@ -178,41 +193,33 @@
                                     <constraint firstAttribute="height" constant="180" id="ZWP-YW-1nq"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTU-Z7-QhD">
-                                <rect key="frame" x="10" y="20" width="37" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="i3S-6L-WUl"/>
-                                </constraints>
-                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="close">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeButtonPressed:" destination="7ZJ-uv-6JN" eventType="touchUpInside" id="5he-MR-By5"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gju-Ii-lA2" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="29b-0z-AQ8"/>
                             <constraint firstAttribute="trailing" secondItem="Rhp-E8-3MI" secondAttribute="trailing" id="3az-1N-fsT"/>
-                            <constraint firstItem="Rhp-E8-3MI" firstAttribute="top" secondItem="Djx-2e-f1i" secondAttribute="bottom" constant="44" id="4fu-YQ-bEP"/>
+                            <constraint firstItem="Rhp-E8-3MI" firstAttribute="top" secondItem="Djx-2e-f1i" secondAttribute="bottom" id="4fu-YQ-bEP"/>
                             <constraint firstItem="6GN-FX-Evf" firstAttribute="top" secondItem="OGz-pp-K5R" secondAttribute="bottom" id="4rH-2r-WfH"/>
                             <constraint firstItem="2yo-aq-LCf" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="9Ap-OB-142"/>
                             <constraint firstItem="2yo-aq-LCf" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="Ibb-Sf-jKc"/>
                             <constraint firstAttribute="trailing" secondItem="gju-Ii-lA2" secondAttribute="trailing" id="LFC-Wk-Ezj"/>
-                            <constraint firstItem="fTU-Z7-QhD" firstAttribute="top" secondItem="Djx-2e-f1i" secondAttribute="bottom" id="VHy-Hr-gOC"/>
                             <constraint firstItem="OGz-pp-K5R" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="X0g-dN-DFA"/>
                             <constraint firstItem="OGz-pp-K5R" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="icI-5v-FH2"/>
                             <constraint firstAttribute="trailing" secondItem="2yo-aq-LCf" secondAttribute="trailing" id="ktw-Xr-cS0"/>
                             <constraint firstAttribute="trailing" secondItem="OGz-pp-K5R" secondAttribute="trailing" id="mNp-hL-8EN"/>
-                            <constraint firstItem="fTU-Z7-QhD" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" constant="10" id="ppf-Hh-w8Q"/>
                             <constraint firstItem="gju-Ii-lA2" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="rH7-XX-2os"/>
                             <constraint firstItem="6GN-FX-Evf" firstAttribute="top" secondItem="gju-Ii-lA2" secondAttribute="bottom" id="sTO-Jr-dEO"/>
                             <constraint firstItem="Rhp-E8-3MI" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="yxP-fH-b6g"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ihY-CS-AXQ">
+                        <barButtonItem key="leftBarButtonItem" title="close" id="iQc-iJ-Hjp">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="7ZJ-uv-6JN" id="dq4-5a-Mba"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="tOP-cC-WDg" id="eCt-Z4-C7t"/>
                         <outlet property="channelsCollectionView" destination="OGz-pp-K5R" id="St4-00-GMb"/>

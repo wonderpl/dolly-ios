@@ -10,6 +10,6 @@
 
 @interface SYNSearchVideoPlayerViewController : SYNVideoPlayerViewController
 
-+ (instancetype)viewControllerWithVideoInstance:(VideoInstance *)videoInstance;
++ (UIViewController *)viewControllerWithVideoInstance:(VideoInstance *)videoInstance;
 
 @end
