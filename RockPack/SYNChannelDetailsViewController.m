@@ -85,7 +85,6 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
 @property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
-@property (nonatomic) BOOL isLocked;
 
 @property (nonatomic, strong) SYNChannelVideosModel *model;
 
@@ -1161,14 +1160,7 @@
                                               [[NSNotificationCenter defaultCenter] postNotificationName:kNoteChannelSaved
                                                                                                   object:self
                                                                                                 userInfo:nil];
-                                              
-                                              self.isLocked = NO;
-                                              
                                           } errorHandler: ^(id err) {
-                                              
-                                              self.isLocked = NO;
-                                              
-                                              
                                               [[NSNotificationCenter defaultCenter]  postNotificationName: kVideoQueueClear
                                                                                                    object: nil];
                                           }];
@@ -1793,8 +1785,6 @@
 
 - (void) setVideosForChannelById: (NSString *) channelId isUpdated: (BOOL) isUpdated
 {
-    self.isLocked = YES; // prevent back button from firing
-    
     [appDelegate.oAuthNetworkEngine updateVideosForUserId: appDelegate.currentOAuth2Credentials.userId
                                              forChannelID: channelId
                                          videoInstanceSet: self.channel.videoInstances
@@ -1806,9 +1796,6 @@
                                                                           isUpdate: isUpdated];
                                         } errorHandler: ^(id err) {
                                             // this is also called when trying to save a video that has just been deleted
-                                            
-                                            self.isLocked = NO;
-                                            
                                             NSString *errorMessage = nil;
                                             
                                             NSString *errorTitle = nil;
