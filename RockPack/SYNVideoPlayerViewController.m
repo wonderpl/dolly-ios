@@ -28,6 +28,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 @property (nonatomic, strong) IBOutlet UIButton *followButton;
+@property (nonatomic, strong) IBOutlet UIButton *commentButton;
 @property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
@@ -178,6 +179,10 @@
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
+- (IBAction)commentButtonPressed:(UIButton *)button {
+
+}
+
 #pragma mark - Notifications
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
@@ -198,7 +203,6 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
 	if ([keyPath isEqualToString:@"videoInstance"]) {
 		VideoInstance *previousVideoInstance = change[NSKeyValueChangeOldKey];
 		[self trackVideoViewingStatisticsForVideoInstance:previousVideoInstance withVideoPlayer:self.currentVideoPlayer];
