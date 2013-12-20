@@ -108,7 +108,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05D-hL-8Fp" userLabel="Buttons">
-                                <rect key="frame" x="71" y="301" width="179" height="49"/>
+                                <rect key="frame" x="38" y="301" width="244" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rr-XD-fN6" customClass="SYNSocialButton">
@@ -141,8 +141,23 @@
                                             <action selector="addButtonPressed:" destination="7KU-2r-spd" eventType="touchUpInside" id="Bli-zU-Num"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XIc-ok-OKj" customClass="SYNSocialButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RY9-o7-yo0" customClass="SYNSocialCommentButton">
                                         <rect key="frame" x="130" y="0.0" width="49" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="49" id="Qcm-Pk-6YO"/>
+                                            <constraint firstAttribute="height" constant="49" id="um3-eU-IGB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="commentButtonPressed:" destination="7KU-2r-spd" eventType="touchUpInside" id="ThJ-bm-VFf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XIc-ok-OKj" customClass="SYNSocialButton">
+                                        <rect key="frame" x="195" y="0.0" width="49" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="49" id="7pn-P7-ZPH"/>
@@ -161,12 +176,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="RY9-o7-yo0" firstAttribute="leading" secondItem="RVq-SC-H2w" secondAttribute="trailing" constant="16" id="3jj-Ce-PPP"/>
                                     <constraint firstAttribute="centerY" secondItem="RVq-SC-H2w" secondAttribute="centerY" id="Drh-gF-z9w"/>
                                     <constraint firstAttribute="centerY" secondItem="XIc-ok-OKj" secondAttribute="centerY" id="TNB-kt-cse"/>
+                                    <constraint firstItem="XIc-ok-OKj" firstAttribute="leading" secondItem="RY9-o7-yo0" secondAttribute="trailing" constant="16" id="VdH-tE-0Nt"/>
+                                    <constraint firstAttribute="centerY" secondItem="RY9-o7-yo0" secondAttribute="centerY" id="cxX-tl-DBd"/>
                                     <constraint firstItem="RVq-SC-H2w" firstAttribute="leading" secondItem="9Rr-XD-fN6" secondAttribute="trailing" constant="16" id="eS2-G0-vAm"/>
                                     <constraint firstAttribute="centerY" secondItem="9Rr-XD-fN6" secondAttribute="centerY" id="hlP-6t-jue"/>
                                     <constraint firstAttribute="trailing" secondItem="XIc-ok-OKj" secondAttribute="trailing" id="kuf-AW-9cq"/>
-                                    <constraint firstItem="XIc-ok-OKj" firstAttribute="leading" secondItem="RVq-SC-H2w" secondAttribute="trailing" constant="16" id="loG-oL-pR0"/>
                                     <constraint firstItem="RVq-SC-H2w" firstAttribute="top" secondItem="05D-hL-8Fp" secondAttribute="top" id="rR4-24-ZgM"/>
                                     <constraint firstItem="9Rr-XD-fN6" firstAttribute="leading" secondItem="05D-hL-8Fp" secondAttribute="leading" id="zBf-yt-e3h"/>
                                 </constraints>

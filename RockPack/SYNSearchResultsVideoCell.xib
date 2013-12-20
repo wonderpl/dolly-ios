@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NrE-x8-VXC" userLabel="Button - Like" customClass="SYNSocialButton">
-                        <rect key="frame" x="53" y="259" width="50" height="50"/>
+                        <rect key="frame" x="53" y="266" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -37,7 +37,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzp-d3-V7P" userLabel="Button - Add" customClass="SYNSocialAddButton">
-                        <rect key="frame" x="121" y="259" width="50" height="50"/>
+                        <rect key="frame" x="121" y="266" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -45,7 +45,7 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8wk-5c-EEh" userLabel="Button - Share" customClass="SYNSocialButton">
-                        <rect key="frame" x="257" y="259" width="50" height="50"/>
+                        <rect key="frame" x="257" y="266" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -69,7 +69,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFc-cv-Ll1" userLabel="Control - Comment" customClass="SYNSocialCommentButton">
-                        <rect key="frame" x="189" y="259" width="50" height="50"/>
+                        <rect key="frame" x="189" y="266" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>

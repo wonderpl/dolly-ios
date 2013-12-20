@@ -14,6 +14,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTextFieldLogin.h"
+#import "UIImageView+RoundImage.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 #define kLoginAnimationTransitionDuration 0.3f
@@ -100,6 +101,7 @@
     
     self.isPreIPhone5 = [SYNDeviceManager.sharedInstance currentScreenHeight] < 500;
     
+    [self.avatarImageView roundImage];
     //Move all subviews offscreen
     CGPoint newCenter = self.loginView.center;
     newCenter.x = 480.0f;

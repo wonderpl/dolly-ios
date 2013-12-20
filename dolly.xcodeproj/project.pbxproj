@@ -380,11 +380,11 @@
 		0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */; };
 		0EE380AC182D4DFC001297C7 /* SYNChannelCreateNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */; };
 		0EE380AD182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE380AA182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib */; };
-		0EF05BE2185F0D4100EC93D2 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF05BE1185F0D4100EC93D2 /* UINavigationController+Appearance.m */; };
 		0EF07867181EAE8300667417 /* ButtonMore.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07865181EAE8300667417 /* ButtonMore.png */; };
 		0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07866181EAE8300667417 /* ButtonMore@2x.png */; };
 		0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */; };
 		0EF0786C181EAE9100667417 /* ButtonMore~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0786A181EAE9100667417 /* ButtonMore~iphone.png */; };
+		0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */; };
 		1F003B42174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B3E174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png */; };
 		1F003B43174A782100BBAE2F /* ButtonSettingsSave~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B3F174A782100BBAE2F /* ButtonSettingsSave~iphone.png */; };
 		1F003B44174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B40174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png */; };
@@ -1364,6 +1364,7 @@
 		E97FCDC5183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FCDC4183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
+		E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */; };
 		E9B068E7185B62F500C98AEB /* SYNSearchVideoPlayerViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9B068E3185B62F500C98AEB /* SYNSearchVideoPlayerViewController_ipad.storyboard */; };
 		E9B068E8185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B068E5185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m */; };
 		E9B068E9185B62F500C98AEB /* SYNSearchVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9B068E6185B62F500C98AEB /* SYNSearchVideoPlayerViewController_iphone.storyboard */; };
@@ -1873,12 +1874,12 @@
 		0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelCreateNewCell.m; sourceTree = "<group>"; };
 		0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelCreateNewCell.xib; sourceTree = "<group>"; };
 		0EE380AA182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNChannelCreateNewCell~iphone.xib"; sourceTree = "<group>"; };
-		0EF05BE0185F0D4100EC93D2 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
-		0EF05BE1185F0D4100EC93D2 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
 		0EF07865181EAE8300667417 /* ButtonMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMore.png; sourceTree = "<group>"; };
 		0EF07866181EAE8300667417 /* ButtonMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x.png"; sourceTree = "<group>"; };
 		0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x~iphone.png"; sourceTree = "<group>"; };
 		0EF0786A181EAE9100667417 /* ButtonMore~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore~iphone.png"; sourceTree = "<group>"; };
+		0EFE39AE186458DE0006FA78 /* UIImageView+RoundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RoundImage.h"; sourceTree = "<group>"; };
+		0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RoundImage.m"; sourceTree = "<group>"; };
 		1F003B3E174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSave@2x~iphone.png"; sourceTree = "<group>"; };
 		1F003B3F174A782100BBAE2F /* ButtonSettingsSave~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSave~iphone.png"; sourceTree = "<group>"; };
 		1F003B40174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSaveHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
@@ -2988,6 +2989,8 @@
 		E9921A9318351D66001A4F3B /* SYNScrubberBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNScrubberBar.m; sourceTree = "<group>"; };
 		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
 		E9927391185090DE00982480 /* SYNPagingModel+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNPagingModel+Protected.h"; sourceTree = "<group>"; };
+		E9A4E5301864623E00972F09 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
+		E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
 		E9B068E3185B62F500C98AEB /* SYNSearchVideoPlayerViewController_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNSearchVideoPlayerViewController_ipad.storyboard; sourceTree = "<group>"; };
 		E9B068E4185B62F500C98AEB /* SYNSearchVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoPlayerViewController.h; sourceTree = "<group>"; };
 		E9B068E5185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoPlayerViewController.m; sourceTree = "<group>"; };
@@ -3857,8 +3860,8 @@
 		019825EE162C948000216900 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				0EF05BE0185F0D4100EC93D2 /* UINavigationController+Appearance.h */,
-				0EF05BE1185F0D4100EC93D2 /* UINavigationController+Appearance.m */,
+				E9A4E5301864623E00972F09 /* UINavigationBar+Appearance.h */,
+				E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */,
 				01C6FD0D169DDEDB00E01AA3 /* NSDictionary+Validation.h */,
 				01C6FD0E169DDEDB00E01AA3 /* NSDictionary+Validation.m */,
 				01363EB3162FDEA600FFAA09 /* NSObject+Blocks.h */,
@@ -3887,6 +3890,8 @@
 				E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */,
 				E9F1921418571AFC008AC21E /* GAI+Tracking.h */,
 				E9F1921518571AFC008AC21E /* GAI+Tracking.m */,
+				0EFE39AE186458DE0006FA78 /* UIImageView+RoundImage.h */,
+				0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -7447,6 +7452,7 @@
 				BEC39C16184D03CF00DA8089 /* Recomendation.m in Sources */,
 				012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */,
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
+				E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
 				E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */,
 				E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */,
@@ -7471,6 +7477,7 @@
 				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
+				0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */,
 				011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */,
@@ -7503,7 +7510,6 @@
 				BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */,
 				019CB6A8181187E80079DFCF /* SYNFadingFlowLayout.m in Sources */,
 				E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */,
-				0EF05BE2185F0D4100EC93D2 /* UINavigationController+Appearance.m in Sources */,
 				BE13E38916FB85220098F23C /* SYNAccountSettingsLocation.m in Sources */,
 				01AEFBCD1701AC460060467A /* SYNActivityManager.m in Sources */,
 				BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */,

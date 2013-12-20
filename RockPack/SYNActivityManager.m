@@ -65,15 +65,15 @@
         }
         //cant union as unfollow all users cells wont ever be removed
         if (dictionary[@"subscribed"]){
-//            [self.channelSubscriptions unionSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
+            [self.channelSubscriptions unionSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
             
-            [self.channelSubscriptions setSet:[NSSet setWithArray: dictionary[@"subscribed"]]];
+//            [self.channelSubscriptions setSet:[NSSet setWithArray: dictionary[@"subscribed"]]];
         }
         
         if (dictionary[@"user_subscribed"]){
-//            [self.userSubscriptons unionSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
+            [self.userSubscriptons unionSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
             
-            [self.userSubscriptons setSet:[NSSet setWithArray:dictionary[@"user_subscribed"]]];
+//            [self.userSubscriptons setSet:[NSSet setWithArray:dictionary[@"user_subscribed"]]];
             
         }
     }

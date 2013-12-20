@@ -63,7 +63,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tpa-aa-3hg" userLabel="Buttons">
-                                        <rect key="frame" x="71" y="36" width="179" height="49"/>
+                                        <rect key="frame" x="38" y="36" width="244" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rq4-ap-neN" customClass="SYNSocialButton">
@@ -97,7 +97,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUP-zu-lgK" customClass="SYNSocialButton">
-                                                <rect key="frame" x="130" y="0.0" width="49" height="49"/>
+                                                <rect key="frame" x="195" y="0.0" width="49" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="49" id="RBX-As-eeB"/>
@@ -113,12 +113,29 @@
                                                     <action selector="shareButtonPressed:" destination="7ZJ-uv-6JN" eventType="touchUpInside" id="9cd-jX-xYn"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbd-g4-3Lg" customClass="SYNSocialCommentButton">
+                                                <rect key="frame" x="130" y="-2" width="49" height="49"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="49" id="3x6-EM-66f"/>
+                                                    <constraint firstAttribute="height" constant="49" id="8al-tj-GzJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="commentButtonPressed:" destination="7ZJ-uv-6JN" eventType="touchUpInside" id="KgG-ac-yCv"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="centerY" secondItem="XUP-zu-lgK" secondAttribute="centerY" id="1NX-uR-ggc"/>
-                                            <constraint firstItem="XUP-zu-lgK" firstAttribute="leading" secondItem="tOP-cC-WDg" secondAttribute="trailing" constant="16" id="F5C-yD-ahQ"/>
                                             <constraint firstItem="tOP-cC-WDg" firstAttribute="leading" secondItem="Rq4-ap-neN" secondAttribute="trailing" constant="16" id="HHa-69-tJx"/>
                                             <constraint firstItem="Rq4-ap-neN" firstAttribute="leading" secondItem="Tpa-aa-3hg" secondAttribute="leading" id="I2g-R6-Xoh"/>
+                                            <constraint firstItem="Fbd-g4-3Lg" firstAttribute="leading" secondItem="tOP-cC-WDg" secondAttribute="trailing" constant="16" id="RN2-f3-tOG"/>
+                                            <constraint firstItem="XUP-zu-lgK" firstAttribute="leading" secondItem="Fbd-g4-3Lg" secondAttribute="trailing" constant="16" id="UbH-kn-mWI"/>
+                                            <constraint firstAttribute="centerY" secondItem="Fbd-g4-3Lg" secondAttribute="centerY" constant="2" id="aHO-bj-1Ve"/>
                                             <constraint firstAttribute="trailing" secondItem="XUP-zu-lgK" secondAttribute="trailing" id="doK-pT-5Hx"/>
                                             <constraint firstAttribute="centerY" secondItem="tOP-cC-WDg" secondAttribute="centerY" id="jXm-OY-90j"/>
                                             <constraint firstItem="tOP-cC-WDg" firstAttribute="top" secondItem="Tpa-aa-3hg" secondAttribute="top" id="ruw-ow-OGd"/>
@@ -199,6 +216,7 @@
                     <connections>
                         <outlet property="addButton" destination="tOP-cC-WDg" id="eCt-Z4-C7t"/>
                         <outlet property="channelsCollectionView" destination="OGz-pp-K5R" id="St4-00-GMb"/>
+                        <outlet property="commentButton" destination="Fbd-g4-3Lg" id="gWM-HP-SOL"/>
                         <outlet property="headerView" destination="2yo-aq-LCf" id="Hfl-U7-UJf"/>
                         <outlet property="likeButton" destination="Rq4-ap-neN" id="fqq-bX-bLL"/>
                         <outlet property="likesCollectionView" destination="gju-Ii-lA2" id="1vy-CS-fiX"/>

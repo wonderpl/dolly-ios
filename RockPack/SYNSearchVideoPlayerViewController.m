@@ -71,8 +71,6 @@
 			   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 					  withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
 	
-	//TODO: Set likes count
-	
 	if (IS_IPHONE) {
 		self.channelsCollectionView.scrollIndicatorInsets = UIEdgeInsetsMake(CGRectGetHeight(self.headerView.frame), 0, 0, 0);
 	}
@@ -250,10 +248,6 @@ referenceSizeForFooterInSection:(NSInteger)section {
 }
 
 #pragma mark - IBActions
-
-- (IBAction)closeButtonPressed:(UIButton *)close {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)segmentedControl {
 	if (segmentedControl.selectedSegmentIndex == 0) {

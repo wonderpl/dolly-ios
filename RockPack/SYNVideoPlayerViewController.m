@@ -28,6 +28,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 @property (nonatomic, strong) IBOutlet UIButton *followButton;
+@property (nonatomic, strong) IBOutlet UIButton *commentButton;
 @property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
@@ -135,6 +136,10 @@
 
 #pragma mark - IBActions
 
+- (IBAction)closeButtonPressed:(UIButton *)close {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)likeButtonPressed:(SYNSocialButton *)button {
 	[self likeControlPressed:button];
 }
@@ -155,11 +160,6 @@
 	
 	[self presentViewController:viewController animated:YES completion:nil];
 }
-
-- (IBAction)followButtonPressed:(UIButton *)button {
-	[self followButtonPressed:button withChannel:self.videoInstance.channel];
-}
-
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:self.videoInstance.uniqueId];
 	
@@ -177,6 +177,10 @@
 	viewController.transitioningDelegate = self;
 	
 	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (IBAction)commentButtonPressed:(UIButton *)button {
+
 }
 
 #pragma mark - Notifications
@@ -199,7 +203,6 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
 	if ([keyPath isEqualToString:@"videoInstance"]) {
 		VideoInstance *previousVideoInstance = change[NSKeyValueChangeOldKey];
 		[self trackVideoViewingStatisticsForVideoInstance:previousVideoInstance withVideoPlayer:self.currentVideoPlayer];

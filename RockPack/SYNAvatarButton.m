@@ -17,6 +17,10 @@
     self.layer.cornerRadius = self.frame.size.height * 0.5;
     
     self.clipsToBounds = YES;
+
+    self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+
 }
 
 @end
