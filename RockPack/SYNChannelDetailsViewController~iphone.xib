@@ -60,8 +60,8 @@
                             <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="irB-oP-X4O" userLabel="Label - Description">
-                            <rect key="frame" x="23" y="214" width="274" height="24"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="irB-oP-X4O" userLabel="Label - Description">
+                            <rect key="frame" x="23" y="214" width="274" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
