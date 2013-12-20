@@ -32,7 +32,7 @@
 #import "SYNChannelCreateNewCell.h"
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
-#import "UINavigationController+Appearance.h"
+#import "UINavigationBar+Appearance.h"
 
 
 @import QuartzCore;
@@ -128,9 +128,6 @@
 @property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
 
 @property  (nonatomic) BOOL creatingChannel;
-
-@property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
-@property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
 
 @property (nonatomic) NSRange dataRequestRangeChannel;
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
@@ -386,19 +383,8 @@
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
     // == Transparent navigation bar
-    //TODO: create a default navigation bar in category apperance for uinavigation+apperance
-
-    self.tmpNavigationBarBackground = [[UIImage alloc]init];
-    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
-    
-    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
-    
-    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
-//    [self.navigationController setTransparent];
-
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+	[self.navigationController.navigationBar setBackgroundTransparent:YES];
+	
     self.navigationController.view.backgroundColor = [UIColor clearColor];
 
     self.navigationItem.title = @"";
@@ -472,10 +458,9 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.navigationController.navigationBar setBackgroundImage:self.tmpNavigationBarBackground forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationController.navigationBar.shadowImage = self.tmpNavigationBarShadowImage;
-    self.navigationController.navigationBar.translucent = YES;
+	[super viewWillDisappear:animated];
+	
+	[self.navigationController.navigationBar setBackgroundTransparent:NO];
     self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
     
     if (self.creatingChannel) {
