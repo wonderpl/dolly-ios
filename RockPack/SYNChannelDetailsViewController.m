@@ -921,6 +921,7 @@
         videoThumbnailCell.likeControl.hidden = YES;
         videoThumbnailCell.shareControl.hidden = YES;
         videoThumbnailCell.addControl.hidden = YES;
+        videoThumbnailCell.commentControl.hidden = YES;
         videoThumbnailCell.deleteButton.hidden = NO;
     }
     else
@@ -928,6 +929,8 @@
         videoThumbnailCell.likeControl.hidden = NO;
         videoThumbnailCell.shareControl.hidden = NO;
         videoThumbnailCell.addControl.hidden = NO;
+        videoThumbnailCell.commentControl.hidden = NO;
+
         videoThumbnailCell.deleteButton.hidden = YES;
     }
     
@@ -1269,7 +1272,6 @@
     self.btnAvatar.hidden = YES;
     self.btnShowFollowers.hidden = YES;
     self.btnShowVideos.hidden = YES;
-    //    self.btnFollowChannel.hidden = YES;
     self.btnEditChannel.hidden = YES;
     self.btnShareChannel.hidden = YES;
     self.viewCirleButtonContainer.hidden = YES;
@@ -1337,6 +1339,7 @@
             cell.likeControl.alpha = 0.0f;
             cell.shareControl.alpha = 0.0f;
             cell.addControl.alpha = 0.0f;
+            cell.commentControl.alpha = 0.0f;
             cell.deleteButton.alpha = 1.0f;
             
             
@@ -1353,7 +1356,8 @@
         [cell removeGestureRecognizer:cell.tap];
     }
     self.mode = kChannelDetailsModeEdit;
-    
+    // not clear why its 0.5f delay
+    //TODO:pass blocks on success/fail do stuff.
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.5f];
     
 }
@@ -1382,6 +1386,8 @@
         cell.likeControl.hidden = NO;
         cell.shareControl.hidden = NO;
         cell.addControl.hidden = NO;
+        cell.commentControl.hidden = NO;
+
         cell.deleteButton.hidden = YES;
         
         void (^animateProfileMode)(void) = ^{
@@ -1413,6 +1419,8 @@
             cell.likeControl.alpha = 1.0f;
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
+            cell.commentControl.hidden = 1.0f;
+
             cell.deleteButton.alpha = 0.0f;
         };
         

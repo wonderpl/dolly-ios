@@ -575,8 +575,6 @@
                 thumbnailUrlString = [self.channelOwner.coverPhotoURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
             }
             
-            NSLog(@"thumbnail string : %@", thumbnailUrlString);
-            
             [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
                             placeholderImage: placeholderImage
                                      options: SDWebImageRetryFailed];
@@ -2621,7 +2619,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     
     self.imagePickerControllerAvatar.delegate = self;
     [self.imagePickerControllerAvatar presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
-    NSLog(@"----- %f, %f", self.imagePickerControllerCoverphoto.imagePicker.cropSize.height, self.imagePickerControllerCoverphoto.imagePicker.cropSize.width);
 
 }
 
