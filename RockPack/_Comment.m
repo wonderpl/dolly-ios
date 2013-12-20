@@ -7,8 +7,8 @@ const struct CommentAttributes CommentAttributes = {
 	.commentText = @"commentText",
 	.dateAdded = @"dateAdded",
 	.displayName = @"displayName",
+	.localData = @"localData",
 	.position = @"position",
-	.recent = @"recent",
 	.thumbnailUrl = @"thumbnailUrl",
 	.userId = @"userId",
 	.validated = @"validated",
@@ -47,13 +47,13 @@ const struct CommentFetchedProperties CommentFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
-	if ([key isEqualToString:@"positionValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"position"];
+	if ([key isEqualToString:@"localDataValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"localData"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
-	if ([key isEqualToString:@"recentValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"recent"];
+	if ([key isEqualToString:@"positionValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"position"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -90,6 +90,32 @@ const struct CommentFetchedProperties CommentFetchedProperties = {
 
 
 
+@dynamic localData;
+
+
+
+- (BOOL)localDataValue {
+	NSNumber *result = [self localData];
+	return [result boolValue];
+}
+
+- (void)setLocalDataValue:(BOOL)value_ {
+	[self setLocalData:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveLocalDataValue {
+	NSNumber *result = [self primitiveLocalData];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveLocalDataValue:(BOOL)value_ {
+	[self setPrimitiveLocalData:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
 @dynamic position;
 
 
@@ -110,32 +136,6 @@ const struct CommentFetchedProperties CommentFetchedProperties = {
 
 - (void)setPrimitivePositionValue:(int32_t)value_ {
 	[self setPrimitivePosition:[NSNumber numberWithInt:value_]];
-}
-
-
-
-
-
-@dynamic recent;
-
-
-
-- (BOOL)recentValue {
-	NSNumber *result = [self recent];
-	return [result boolValue];
-}
-
-- (void)setRecentValue:(BOOL)value_ {
-	[self setRecent:[NSNumber numberWithBool:value_]];
-}
-
-- (BOOL)primitiveRecentValue {
-	NSNumber *result = [self primitiveRecent];
-	return [result boolValue];
-}
-
-- (void)setPrimitiveRecentValue:(BOOL)value_ {
-	[self setPrimitiveRecent:[NSNumber numberWithBool:value_]];
 }
 
 

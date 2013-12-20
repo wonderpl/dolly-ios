@@ -134,8 +134,10 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]
 																			forIndexPath:indexPath];
+    
     
 	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
@@ -152,7 +154,8 @@
 																						 forIndexPath:indexPath];
 		footerView.showsLoading = YES;
 		
-		if ([self.model hasMoreItems]) {
+		if ([self.model hasMoreItems])
+        {
 			[self.model loadNextPage];
 		}
 		

@@ -8,8 +8,8 @@ extern const struct CommentAttributes {
 	__unsafe_unretained NSString *commentText;
 	__unsafe_unretained NSString *dateAdded;
 	__unsafe_unretained NSString *displayName;
+	__unsafe_unretained NSString *localData;
 	__unsafe_unretained NSString *position;
-	__unsafe_unretained NSString *recent;
 	__unsafe_unretained NSString *thumbnailUrl;
 	__unsafe_unretained NSString *userId;
 	__unsafe_unretained NSString *validated;
@@ -76,6 +76,20 @@ extern const struct CommentFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* localData;
+
+
+
+@property BOOL localDataValue;
+- (BOOL)localDataValue;
+- (void)setLocalDataValue:(BOOL)value_;
+
+//- (BOOL)validateLocalData:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSNumber* position;
 
 
@@ -85,20 +99,6 @@ extern const struct CommentFetchedProperties {
 - (void)setPositionValue:(int32_t)value_;
 
 //- (BOOL)validatePosition:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* recent;
-
-
-
-@property BOOL recentValue;
-- (BOOL)recentValue;
-- (void)setRecentValue:(BOOL)value_;
-
-//- (BOOL)validateRecent:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -176,20 +176,20 @@ extern const struct CommentFetchedProperties {
 
 
 
+- (NSNumber*)primitiveLocalData;
+- (void)setPrimitiveLocalData:(NSNumber*)value;
+
+- (BOOL)primitiveLocalDataValue;
+- (void)setPrimitiveLocalDataValue:(BOOL)value_;
+
+
+
+
 - (NSNumber*)primitivePosition;
 - (void)setPrimitivePosition:(NSNumber*)value;
 
 - (int32_t)primitivePositionValue;
 - (void)setPrimitivePositionValue:(int32_t)value_;
-
-
-
-
-- (NSNumber*)primitiveRecent;
-- (void)setPrimitiveRecent:(NSNumber*)value;
-
-- (BOOL)primitiveRecentValue;
-- (void)setPrimitiveRecentValue:(BOOL)value_;
 
 
 

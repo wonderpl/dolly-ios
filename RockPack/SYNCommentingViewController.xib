@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="bottomContainerView" destination="uyA-H8-2fC" id="oOe-2E-kaO"/>
                 <outlet property="commentsCollectionView" destination="xHI-4t-8mN" id="SV7-Pg-mCc"/>
+                <outlet property="generalLoader" destination="MKx-RD-ja4" id="ce8-1H-yCK"/>
                 <outlet property="sendMessageAvatarmageView" destination="dQD-R9-Cwe" id="HOs-fc-pMz"/>
                 <outlet property="sendMessageButton" destination="wJi-Y3-1s8" id="TyU-7o-Bdd"/>
                 <outlet property="sendMessageTextView" destination="FjY-KP-s3D" id="blI-8l-gOW"/>
@@ -19,7 +20,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="xHI-4t-8mN">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="MKx-RD-ja4" userLabel="Loader">
+                    <rect key="frame" x="142" y="149" width="37" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="xHI-4t-8mN">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
