@@ -385,6 +385,7 @@
 		0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07866181EAE8300667417 /* ButtonMore@2x.png */; };
 		0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */; };
 		0EF0786C181EAE9100667417 /* ButtonMore~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0786A181EAE9100667417 /* ButtonMore~iphone.png */; };
+		0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */; };
 		1F003B42174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B3E174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png */; };
 		1F003B43174A782100BBAE2F /* ButtonSettingsSave~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B3F174A782100BBAE2F /* ButtonSettingsSave~iphone.png */; };
 		1F003B44174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F003B40174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png */; };
@@ -1879,6 +1880,8 @@
 		0EF07866181EAE8300667417 /* ButtonMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x.png"; sourceTree = "<group>"; };
 		0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore@2x~iphone.png"; sourceTree = "<group>"; };
 		0EF0786A181EAE9100667417 /* ButtonMore~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore~iphone.png"; sourceTree = "<group>"; };
+		0EFE39AE186458DE0006FA78 /* UIImageView+RoundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RoundImage.h"; sourceTree = "<group>"; };
+		0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RoundImage.m"; sourceTree = "<group>"; };
 		1F003B3E174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSave@2x~iphone.png"; sourceTree = "<group>"; };
 		1F003B3F174A782100BBAE2F /* ButtonSettingsSave~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSave~iphone.png"; sourceTree = "<group>"; };
 		1F003B40174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsSaveHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
@@ -3887,6 +3890,8 @@
 				E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */,
 				E9F1921418571AFC008AC21E /* GAI+Tracking.h */,
 				E9F1921518571AFC008AC21E /* GAI+Tracking.m */,
+				0EFE39AE186458DE0006FA78 /* UIImageView+RoundImage.h */,
+				0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -7471,6 +7476,7 @@
 				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
+				0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */,
 				011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */,
