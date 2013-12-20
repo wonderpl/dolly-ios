@@ -41,11 +41,6 @@
                          andSubCell: (UICollectionViewCell *) subCell
                      atSubCellIndex: (NSInteger) subCellIndex;
 
-- (void) displayVideoViewerWithVideoInstanceArray: (NSArray *) videoInstanceArray
-                                 andSelectedIndex: (int) selectedIndex
-                                           center: (CGPoint) center;
-
-
 - (id) initWithViewId: (NSString *) vid;
 
 - (void) resetDataRequestRange;
