@@ -120,7 +120,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PA1-NG-xwD" userLabel="Buttons">
-                                <rect key="frame" x="71" y="374" width="179" height="49"/>
+                                <rect key="frame" x="38" y="374" width="244" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuI-UM-irf" customClass="SYNSocialButton">
@@ -152,8 +152,22 @@
                                             <action selector="addButtonPressed:" destination="kjH-hT-nk9" eventType="touchUpInside" id="HXf-xq-XES"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wq-zu-2M5" customClass="SYNSocialButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkE-i6-gQu" customClass="SYNSocialCommentButton">
                                         <rect key="frame" x="130" y="0.0" width="49" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="49" id="Ruy-AS-gdu"/>
+                                            <constraint firstAttribute="height" constant="49" id="uuY-kF-wnV"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="commentButtonPressed:" destination="kjH-hT-nk9" eventType="touchUpInside" id="lym-bh-QHm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wq-zu-2M5" customClass="SYNSocialButton">
+                                        <rect key="frame" x="195" y="0.0" width="49" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="h8W-kk-HM7"/>
@@ -173,11 +187,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="VoR-pT-nb5" firstAttribute="leading" secondItem="SuI-UM-irf" secondAttribute="trailing" constant="16" id="1TZ-qB-luh"/>
+                                    <constraint firstAttribute="centerY" secondItem="gkE-i6-gQu" secondAttribute="centerY" id="4sj-ft-Vmx"/>
                                     <constraint firstItem="VoR-pT-nb5" firstAttribute="top" secondItem="PA1-NG-xwD" secondAttribute="top" id="7za-ne-5nz"/>
+                                    <constraint firstItem="gkE-i6-gQu" firstAttribute="leading" secondItem="VoR-pT-nb5" secondAttribute="trailing" constant="16" id="L0E-Zq-2XC"/>
                                     <constraint firstAttribute="trailing" secondItem="9wq-zu-2M5" secondAttribute="trailing" id="QTM-rl-n8g"/>
+                                    <constraint firstItem="9wq-zu-2M5" firstAttribute="leading" secondItem="gkE-i6-gQu" secondAttribute="trailing" constant="16" id="RXA-Jy-bSA"/>
                                     <constraint firstAttribute="centerY" secondItem="SuI-UM-irf" secondAttribute="centerY" id="SBe-90-f4P"/>
                                     <constraint firstAttribute="centerY" secondItem="VoR-pT-nb5" secondAttribute="centerY" id="aH3-fe-JnH"/>
-                                    <constraint firstItem="9wq-zu-2M5" firstAttribute="leading" secondItem="VoR-pT-nb5" secondAttribute="trailing" constant="16" id="mTt-zt-Rrc"/>
                                     <constraint firstItem="SuI-UM-irf" firstAttribute="leading" secondItem="PA1-NG-xwD" secondAttribute="leading" id="wfQ-3j-rEa"/>
                                     <constraint firstAttribute="centerY" secondItem="9wq-zu-2M5" secondAttribute="centerY" id="xhp-x0-g2a"/>
                                 </constraints>

@@ -176,20 +176,6 @@
     AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
-
-- (void) displayVideoViewerWithVideoInstanceArray: (NSArray *) videoInstanceArray
-                                 andSelectedIndex: (int) selectedIndex
-                                           center: (CGPoint) center
-{
-    SYNMasterViewController *masterViewController = (SYNMasterViewController *) appDelegate.masterViewController;
-    
-    [masterViewController addVideoOverlayToViewController: self
-                                   withVideoInstanceArray: videoInstanceArray
-                                         andSelectedIndex: selectedIndex
-                                               fromCenter: center];
-}
-
-
 #pragma mark - Trace
 
 - (NSString*) description

@@ -33,7 +33,7 @@
 #import "SYNProfileRootViewController.h"
 #import "SYNChannelVideosModel.h"
 #import "SYNCarouselVideoPlayerViewController.h"
-#import "UINavigationController+Appearance.h"
+#import "UINavigationBar+Appearance.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 149.0f
@@ -83,9 +83,6 @@
 @property (strong, nonatomic) IBOutlet UIView *viewCirleButtonContainer;
 @property (strong, nonatomic) IBOutlet UIView *viewFollowAndVideoContainer;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, strong) UIImage *tmpNavigationBarBackground;
-@property (nonatomic, strong) UIImage *tmpNavigationBarShadowImage;
-@property (nonatomic) BOOL isLocked;
 
 @property (nonatomic, strong) SYNChannelVideosModel *model;
 
@@ -308,35 +305,14 @@
     
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
-    [self.navigationController.navigationBar setBackgroundImage:self.tmpNavigationBarBackground forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationController.navigationBar.shadowImage = self.tmpNavigationBarShadowImage;
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.33 brightness:0.69 alpha:0];
-    
+	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    if (IS_IPAD)
-    {
-        //  [self iphoneMove];
-    }
-    //[self setUpMode];
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
     
-    
-    //Transparent navigation bar
-    //TODO: create category for navigation bar
-    self.tmpNavigationBarBackground = [[UIImage alloc]init];
-    self.tmpNavigationBarShadowImage = [[UIImage alloc]init];
-    
-    self.tmpNavigationBarBackground = self.navigationController.navigationBar.backIndicatorImage;
-    self.tmpNavigationBarShadowImage = self.navigationController.navigationBar.shadowImage;
-    
-    [self.navigationController setTransparent];
-    
+    [self.navigationController.navigationBar setBackgroundTransparent:YES];
     self.navigationItem.title = @"";
-
 }
 
 -(void) setupFonts
@@ -563,18 +539,6 @@
 //    
 //    [super commentControlPressed: socialButton];
 //}
-
-
--(void) setUpFollowButton
-{
-    self.btnFollowChannel.title = @"";
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    
-}
 
 #pragma mark - ScrollView Delegate
 
@@ -1164,14 +1128,7 @@
                                               [[NSNotificationCenter defaultCenter] postNotificationName:kNoteChannelSaved
                                                                                                   object:self
                                                                                                 userInfo:nil];
-                                              
-                                              self.isLocked = NO;
-                                              
                                           } errorHandler: ^(id err) {
-                                              
-                                              self.isLocked = NO;
-                                              
-                                              
                                               [[NSNotificationCenter defaultCenter]  postNotificationName: kVideoQueueClear
                                                                                                    object: nil];
                                           }];
@@ -1801,8 +1758,6 @@
 
 - (void) setVideosForChannelById: (NSString *) channelId isUpdated: (BOOL) isUpdated
 {
-    self.isLocked = YES; // prevent back button from firing
-    
     [appDelegate.oAuthNetworkEngine updateVideosForUserId: appDelegate.currentOAuth2Credentials.userId
                                              forChannelID: channelId
                                          videoInstanceSet: self.channel.videoInstances
@@ -1814,9 +1769,6 @@
                                                                           isUpdate: isUpdated];
                                         } errorHandler: ^(id err) {
                                             // this is also called when trying to save a video that has just been deleted
-                                            
-                                            self.isLocked = NO;
-                                            
                                             NSString *errorMessage = nil;
                                             
                                             NSString *errorTitle = nil;

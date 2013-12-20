@@ -104,7 +104,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxl-rT-Inc" userLabel="Buttons">
-                                <rect key="frame" x="423" y="489" width="179" height="49"/>
+                                <rect key="frame" x="390" y="489" width="244" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5m-YE-w6C" customClass="SYNSocialButton">
@@ -136,8 +136,22 @@
                                             <action selector="addButtonPressed:" destination="AqW-yM-AnN" eventType="touchUpInside" id="Nlh-pl-8ad"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-hu-ILH" customClass="SYNSocialButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5h-6I-xyr" customClass="SYNSocialCommentButton">
                                         <rect key="frame" x="130" y="0.0" width="49" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="49" id="UcZ-Tr-gPB"/>
+                                            <constraint firstAttribute="width" constant="49" id="V7s-qA-Nae"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="commentButtonPressed:" destination="AqW-yM-AnN" eventType="touchUpInside" id="vgd-wv-BVa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-hu-ILH" customClass="SYNSocialButton">
+                                        <rect key="frame" x="195" y="0.0" width="49" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="JiT-8i-GGa"/>
@@ -153,13 +167,16 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="H5h-6I-xyr" secondAttribute="bottom" id="1LK-nE-DfE"/>
                                     <constraint firstAttribute="centerY" secondItem="b5m-YE-w6C" secondAttribute="centerY" id="EIs-60-dFU"/>
-                                    <constraint firstItem="hi9-hu-ILH" firstAttribute="leading" secondItem="XNp-JD-eH4" secondAttribute="trailing" constant="16" id="FZb-Dq-on1"/>
+                                    <constraint firstItem="H5h-6I-xyr" firstAttribute="leading" secondItem="XNp-JD-eH4" secondAttribute="trailing" constant="16" id="JpX-fd-Ur7"/>
                                     <constraint firstAttribute="trailing" secondItem="hi9-hu-ILH" secondAttribute="trailing" id="KC3-iH-Vc8"/>
                                     <constraint firstItem="b5m-YE-w6C" firstAttribute="leading" secondItem="nxl-rT-Inc" secondAttribute="leading" id="O50-sE-1Wt"/>
                                     <constraint firstItem="XNp-JD-eH4" firstAttribute="top" secondItem="nxl-rT-Inc" secondAttribute="top" id="RmU-4e-8tS"/>
                                     <constraint firstAttribute="centerY" secondItem="hi9-hu-ILH" secondAttribute="centerY" id="WfH-i2-ysl"/>
                                     <constraint firstAttribute="centerY" secondItem="XNp-JD-eH4" secondAttribute="centerY" id="Yio-Xa-bbP"/>
+                                    <constraint firstItem="H5h-6I-xyr" firstAttribute="top" secondItem="nxl-rT-Inc" secondAttribute="top" id="ZFd-9H-7bR"/>
+                                    <constraint firstItem="hi9-hu-ILH" firstAttribute="leading" secondItem="H5h-6I-xyr" secondAttribute="trailing" constant="16" id="kSb-n5-O5O"/>
                                     <constraint firstItem="XNp-JD-eH4" firstAttribute="leading" secondItem="b5m-YE-w6C" secondAttribute="trailing" constant="16" id="neC-Ag-Cjq"/>
                                 </constraints>
                             </view>
@@ -181,7 +198,7 @@
                             <constraint firstAttribute="trailing" secondItem="om0-Aw-JzZ" secondAttribute="trailing" id="ha6-bm-ap0"/>
                             <constraint firstItem="NAF-Dm-QGA" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="18" id="l1p-W3-yQu"/>
                             <constraint firstItem="om0-Aw-JzZ" firstAttribute="leading" secondItem="oXA-7r-uHj" secondAttribute="leading" id="lJq-pH-4Ip"/>
-                            <constraint firstAttribute="centerX" secondItem="nxl-rT-Inc" secondAttribute="centerX" constant="-0.5" id="vkq-he-Oys"/>
+                            <constraint firstAttribute="centerX" secondItem="nxl-rT-Inc" secondAttribute="centerX" id="vkq-he-Oys"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -189,6 +206,7 @@
                     <connections>
                         <outlet property="addButton" destination="XNp-JD-eH4" id="Bhd-iq-3ll"/>
                         <outlet property="channelsCollectionView" destination="AA9-Jg-1Xw" id="xXh-gL-WvD"/>
+                        <outlet property="commentButton" destination="H5h-6I-xyr" id="ZKb-Mm-9Vc"/>
                         <outlet property="likeButton" destination="b5m-YE-w6C" id="31u-F6-qcX"/>
                         <outlet property="likesCollectionView" destination="om0-Aw-JzZ" id="4pp-d6-emq"/>
                         <outlet property="segmentedControl" destination="2Tw-f0-wtP" id="Mkl-Ce-CIL"/>
