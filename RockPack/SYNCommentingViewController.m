@@ -769,9 +769,13 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     // delete all the comments for which we did not retrieve an OK. They might still have been saved and will appear upon load
     // but we need to be consistent by only showing what we are certain has been received form the server
-    for (Comment* comment in self.comments)
+    Comment* comment;
+    for (comment in self.comments)
         if(!comment.validatedValue)
             [comment.managedObjectContext deleteObject:comment];
+    
+    NSError* error;
+    [comment.managedObjectContext save:&error];
     
 }
 

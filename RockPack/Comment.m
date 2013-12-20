@@ -81,7 +81,7 @@
 
 - (NSString*) description
 {
-    return [NSString stringWithFormat:@"[Comment %p (displayName:'%@', comment:'%@')]", self, self.displayName, self.commentText];
+    return [NSString stringWithFormat:@"[Comment %p (id:'%@', displayName:'%@', comment:'%@')]", self, self.uniqueId, self.displayName, self.commentText];
 }
 
 
