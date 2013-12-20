@@ -231,6 +231,7 @@
                         <outlet property="channelOwnerLabel" destination="gCJ-cn-ZdS" id="4Pu-bA-VM3"/>
                         <outlet property="channelThumbnailImageView" destination="Dhs-Vw-fKo" id="kJP-9c-sVx"/>
                         <outlet property="channelTitleLabel" destination="exl-4H-uqi" id="jcZ-2E-wFF"/>
+                        <outlet property="commentButton" destination="gkE-i6-gQu" id="TMl-c2-1zP"/>
                         <outlet property="followBarButton" destination="38L-CO-sHW" id="NbW-ld-qG7"/>
                         <outlet property="likeButton" destination="SuI-UM-irf" id="dZp-I1-jCf"/>
                         <outlet property="thumbnailCollectionView" destination="BmT-79-pdy" id="LCt-mn-UEa"/>
