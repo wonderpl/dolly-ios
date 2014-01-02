@@ -6059,6 +6059,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 010DEFF41629BDC40080F26B /* Build configuration list for PBXNativeTarget "dolly" */;
 			buildPhases = (
+				E99805C118756CA200E4A98A /* ShellScript */,
 				010DEFCC1629BDC40080F26B /* Sources */,
 				010DEFCD1629BDC40080F26B /* Frameworks */,
 				010DEFCE1629BDC40080F26B /* Resources */,
@@ -7344,6 +7345,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		E99805C118756CA200E4A98A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "commit=`git rev-parse --short HEAD`\nbranch=`git rev-parse --abbrev-ref HEAD`\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\"`\n\nfunction processIcon() {\n    export PATH=$PATH:/usr/local/bin\n    base_file=$1\n    base_path=`find \"${SRCROOT}/Assets/Images\" -name $base_file`\n    \n    echo \"Processing $base_path\"\n    \n    if [[ ! -f ${base_path} || -z ${base_path} ]]; then\n    return;\n    fi\n    \n    target_file=$base_file\n    target_path=\"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${target_file}\"\n    \n    if [ $CONFIGURATION = \"Release\" ]; then\n    cp \"${base_path}\" \"$target_path\"\n    return\n    fi\n    \n    width=`identify -format %w \"${base_path}\"`\n    \n    convert -background '#0008' -fill white -gravity center -size ${width}x40\\\n    caption:\"${version} ${branch} ${commit}\"\\\n    \"${base_path}\" +swap -gravity south -composite \"${target_path}\"\n    \n    echo \"Overlayed ${target_path}\"\n}\n\nprocessIcon \"AppIcon-Dev-29x29.png\"\nprocessIcon \"AppIcon-Dev-29x29@2x.png\"\nprocessIcon \"AppIcon-Dev-40x40.png\"\nprocessIcon \"AppIcon-Dev-40x40@2x.png\"\nprocessIcon \"AppIcon-Dev-60x60.png\"\nprocessIcon \"AppIcon-Dev-60x60@2x.png\"\nprocessIcon \"AppIcon-Dev-76x76.png\"\nprocessIcon \"AppIcon-Dev-76x76@2x.png\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
