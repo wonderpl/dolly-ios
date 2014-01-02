@@ -20,8 +20,6 @@
 #define kMaxCommentCharacters 120
 #define kCacheTimeInMinutes 1
 
-#define kCell_2_Comment_Association_Key @"kCell_2_Comment_Association_Key"
-
 static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 static NSString* PlaceholderText = @"Say something nice";
 
