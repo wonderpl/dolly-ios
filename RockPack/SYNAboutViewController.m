@@ -64,9 +64,11 @@
     NSMutableParagraphStyle *paragrapStyleCenter = [[NSMutableParagraphStyle alloc] init];
     paragrapStyleCenter.alignment = NSTextAlignmentCenter;
     
+	NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString *)kCFBundleNameKey];
+	NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString *)kCFBundleVersionKey];
+    NSString *appInfo = [NSString stringWithFormat:@"%@ v%@\n", appName, appVersion];
     
-    
-    [attributedMutString appendAttributedString: [[NSAttributedString alloc] initWithString: @"Mayberry v1.0.4\n"
+    [attributedMutString appendAttributedString: [[NSAttributedString alloc] initWithString: appInfo
                                                                                  attributes: @{NSForegroundColorAttributeName: [UIColor blackColor],
                                                                                                NSParagraphStyleAttributeName: paragrapStyleCenter,
                                                                                                NSFontAttributeName: [UIFont regularCustomFontOfSize:20]}]];
