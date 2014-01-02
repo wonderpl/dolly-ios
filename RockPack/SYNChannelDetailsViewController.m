@@ -1384,7 +1384,7 @@
             cell.likeControl.alpha = 1.0f;
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
-            cell.commentControl.hidden = 1.0f;
+            cell.commentControl.alpha = 1.0f;
 
             cell.deleteButton.alpha = 0.0f;
         };
