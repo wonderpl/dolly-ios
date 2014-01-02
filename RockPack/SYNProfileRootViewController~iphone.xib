@@ -236,7 +236,6 @@ me...</string>
         <image name="AvatarProfile.png" width="60" height="61"/>
         <image name="ButtonMore.png" width="38" height="38"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
-        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="coverImageTest.jpg" width="917" height="513"/>
     </resources>
 </document>

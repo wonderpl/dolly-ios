@@ -75,7 +75,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 @property (strong, nonatomic) IBOutlet UIView *viewCollectionSeperator;
-@property (strong, nonatomic) IBOutlet UITextView *txtViewDescription;
+@property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *txtViewDescription;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
@@ -197,7 +197,6 @@
                                                 alpha: 1.0f];
     
     
-    
     //programmatically seting the edgeinset for iphone and ipad
     //Not able to set within the nib
     
@@ -288,7 +287,6 @@
                                                         name: kUserDataChanged
                                                       object: nil];
     }
-    
     
     if (self.subscribingIndicator)
     {
@@ -459,6 +457,9 @@
     
     self.txtViewDescription.text = self.lblDescription.text;
     
+    if ([self.txtViewDescription.text isEqualToString:@""]) {
+        [self.txtViewDescription setText:@"Description (Optional)"];
+    }
     
     if (self.channel.subscribersCountValue == 1) {
         [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Follower", @"followers count in channeldetail")] forState:UIControlStateNormal ];
@@ -469,7 +470,6 @@
         [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
     }
     
-
     if (self.channel.totalVideosValueValue == 1) {
         [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Video", nil)] forState:UIControlStateNormal ];
     }
@@ -493,7 +493,6 @@
     {
         self.lblNoVideos.hidden = YES;
     }
-    
     
     //should not have to do this, check.
     [self.btnDeleteChannel setBackgroundColor:[UIColor whiteColor]];
@@ -523,9 +522,6 @@
                 
             }];
         }
-        
-        
-        
     }
     
 }
@@ -1399,7 +1395,6 @@
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
             cell.commentControl.alpha = 1.0f;
-
             cell.deleteButton.alpha = 0.0f;
         };
         
@@ -1867,6 +1862,22 @@
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+    
+    if ([textView.text isEqualToString:@"Description (Optional)"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor dollyTextDarkGray]; //optional
+    }
+
+    
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = @"Description (Optional)";
+        textView.textColor = [UIColor dollyTextDarkGray]; //optional
+    }
+    [textView resignFirstResponder];
 }
 
 #pragma mark - Text Field Delegates
@@ -1898,6 +1909,7 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text
 {
+    
     if ([text isEqualToString:@"\n"]) {
         
         [textView resignFirstResponder];
