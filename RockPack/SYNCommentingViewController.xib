@@ -12,6 +12,7 @@
                 <outlet property="sendMessageAvatarmageView" destination="dQD-R9-Cwe" id="HOs-fc-pMz"/>
                 <outlet property="sendMessageButton" destination="wJi-Y3-1s8" id="TyU-7o-Bdd"/>
                 <outlet property="sendMessageTextView" destination="FjY-KP-s3D" id="blI-8l-gOW"/>
+                <outlet property="sendMessageTextViewHeight" destination="blh-E1-NQv" id="F3e-lS-Ybv"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
