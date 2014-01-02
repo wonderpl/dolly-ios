@@ -364,8 +364,16 @@
 }
 -(void) setFollowersCountButton
 {
-        NSString *tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
-
+    NSString *tmpString;
+    if (self.channelOwner.subscribersCountValue == 1) {
+        tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"follower", "follower count in profile")];
+    }
+    else
+    {
+        tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
+    }
+    
+    
     [self.followersCountButton setTitle:tmpString forState:UIControlStateNormal];
     
     [self.followersCountButton.titleLabel setFont:[UIFont  regularCustomFontOfSize:self.followersCountButton.titleLabel.font.pointSize]];
