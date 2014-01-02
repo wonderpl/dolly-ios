@@ -61,21 +61,6 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - View Life Cycle
 
-// only gets called on iPhone
-- (void) backButtonPressed : (UIBarButtonItem*) barButton
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:kScrollMovement
-                                                        object:self
-                                                      userInfo:@{kScrollingDirection:@(ScrollingDirectionUp)}];
-    [self.navigationController popViewControllerAnimated:YES];
-	
-	if (self.presentingViewController) {
-		[self dismissViewControllerAnimated:YES completion:nil];
-	} else {
-		[appDelegate.masterViewController removeOverlayControllerAnimated:YES];
-	}
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -83,19 +68,11 @@ static NSString* PlaceholderText = @"Say something nice";
     // on iPhone the controller appears in a popup
     if (IS_IPHONE)
     {
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                 style:UIBarButtonItemStyleBordered
-                                                                                target:self
-                                                                                action:@selector(backButtonPressed:)];
-        
-        
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                             object: self
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
         
     }
-    
-    
     
     self.sendMessageAvatarmageView.layer.cornerRadius = self.sendMessageAvatarmageView.frame.size.width * 0.5f;
     self.sendMessageAvatarmageView.clipsToBounds = YES;
