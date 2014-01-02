@@ -454,7 +454,7 @@ typedef enum {
 //
 
 // TestFlight support
-#define  kTestFlightAppToken @"350faab3-e77f-4954-aa44-b85dba25d029"
+#define  kTestFlightAppToken @"06088ae8-9f37-4fc5-aa05-2598b3a86bca"
 
 // Video view threshold
 #define kPercentageThresholdForView 0.1f
