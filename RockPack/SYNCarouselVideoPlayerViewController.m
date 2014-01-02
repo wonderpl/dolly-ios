@@ -166,8 +166,7 @@
 																						 forIndexPath:indexPath];
 		footerView.showsLoading = YES;
 		
-		if ([self.model hasMoreItems])
-        {
+		if ([self.model hasMoreItems]) {
 			[self.model loadNextPage];
 		}
 		
@@ -262,8 +261,6 @@ referenceSizeForFooterInSection:(NSInteger)section {
 												  barButton.enabled = YES;
 											  }];
 	}
-//
-//	[self followButtonPressed:button withChannel:self.videoInstance.channel];
 }
 
 - (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {

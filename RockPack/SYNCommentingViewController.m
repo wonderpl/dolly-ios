@@ -51,7 +51,7 @@ static NSString* PlaceholderText = @"Say something nice";
 
 @implementation SYNCommentingViewController
 
-- (id)initWithVideoInstance:(VideoInstance*)videoInstance {
+- (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance {
 	if (self = [super initWithViewId:kCommentsViewId]) {
 		self.videoInstance = videoInstance;
 	}
@@ -676,7 +676,5 @@ static NSString* PlaceholderText = @"Say something nice";
     [comment.managedObjectContext save:&error];
     
 }
-
-
 
 @end
