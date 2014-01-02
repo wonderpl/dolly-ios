@@ -40,7 +40,7 @@
 #pragma mark - Init / Dealloc
 
 - (void)dealloc {
-	[self removeObserver:self forKeyPath:@"videoInstance"];
+	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(videoInstance))];
 }
 
 #pragma mark - UIViewController
@@ -49,6 +49,11 @@
 	[super viewDidLoad];
 	
 	appDelegate = [[UIApplication sharedApplication] delegate];
+	
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+																			 style:UIBarButtonItemStylePlain
+																			target:nil
+																			action:nil];
 	
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
 	
@@ -59,7 +64,10 @@
 												   object:nil];
 	}
 	
-	[self addObserver:self forKeyPath:@"videoInstance" options:NSKeyValueObservingOptionOld context:nil];
+	[self addObserver:self
+		   forKeyPath:NSStringFromSelector(@selector(videoInstance))
+			  options:NSKeyValueObservingOptionOld
+			  context:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -203,7 +211,7 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:@"videoInstance"]) {
+	if ([keyPath isEqualToString:NSStringFromSelector(@selector(videoInstance))]) {
 		VideoInstance *previousVideoInstance = change[NSKeyValueChangeOldKey];
 		[self trackVideoViewingStatisticsForVideoInstance:previousVideoInstance withVideoPlayer:self.currentVideoPlayer];
 		

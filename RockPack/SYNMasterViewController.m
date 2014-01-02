@@ -27,9 +27,6 @@
 
 #define kBackgroundOverlayAlpha 0.5f
 
-
-typedef void(^AnimationCompletionBlock)(BOOL finished);
-
 @interface SYNMasterViewController ()
 {
     

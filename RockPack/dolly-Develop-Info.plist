@@ -18,14 +18,8 @@
 		<string>AppIcon-Dev-29x29@2x.png</string>
 		<string>AppIcon-Dev-40x40.png</string>
 		<string>AppIcon-Dev-40x40@2x.png</string>
-		<string>AppIcon-Dev-50x50.png</string>
-		<string>AppIcon-Dev-50x50@2x.png</string>
-		<string>AppIcon-Dev-57x57.png</string>
-		<string>AppIcon-Dev-57x57@2x.png</string>
 		<string>AppIcon-Dev-60x60.png</string>
 		<string>AppIcon-Dev-60x60@2x.png</string>
-		<string>AppIcon-Dev-72x72.png</string>
-		<string>AppIcon-Dev-72x72@2x.png</string>
 		<string>AppIcon-Dev-76x76.png</string>
 		<string>AppIcon-Dev-76x76@2x.png</string>
 	</array>
@@ -38,7 +32,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.0.0</string>
+	<string>0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -52,7 +46,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.1.0.0</string>
+	<string>0.1</string>
 	<key>FacebookAppID</key>
 	<string>573323026048639</string>
 	<key>FacebookNamespace</key>

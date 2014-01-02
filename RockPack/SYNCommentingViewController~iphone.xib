@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -7,11 +7,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNCommentingViewController">
             <connections>
                 <outlet property="bottomContainerView" destination="RwK-Zh-8aD" id="H52-IE-Y5x"/>
+                <outlet property="bottomContainerViewBottom" destination="Rvd-sV-938" id="J31-E7-c5O"/>
                 <outlet property="commentsCollectionView" destination="dnW-Ka-mTj" id="uct-wR-f53"/>
                 <outlet property="generalLoader" destination="sXy-pr-7bU" id="4M8-K1-m7s"/>
                 <outlet property="sendMessageAvatarmageView" destination="CxQ-bj-tgi" id="ODI-Xx-iiC"/>
                 <outlet property="sendMessageButton" destination="CFg-Xg-irR" id="I07-Dx-dgz"/>
                 <outlet property="sendMessageTextView" destination="UWz-rP-5kl" id="uC1-UV-X59"/>
+                <outlet property="sendMessageTextViewHeight" destination="hfj-Ks-BVb" id="JNM-0H-Ibn"/>
                 <outlet property="view" destination="1" id="Gkl-Ss-VdD"/>
             </connections>
         </placeholder>
@@ -20,12 +22,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="sXy-pr-7bU" userLabel="Loader">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sXy-pr-7bU" userLabel="Loader">
                     <rect key="frame" x="142" y="267" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="dnW-Ka-mTj">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dnW-Ka-mTj">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="feE-b5-yXT">
@@ -40,17 +42,25 @@
                         <outlet property="delegate" destination="-1" id="Kil-x6-ZXe"/>
                     </connections>
                 </collectionView>
-                <view autoresizesSubviews="NO" contentMode="scaleToFill" id="RwK-Zh-8aD" userLabel="Bottom Container">
-                    <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RwK-Zh-8aD" userLabel="Bottom Container">
+                    <rect key="frame" x="0.0" y="510" width="320" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="CxQ-bj-tgi" userLabel="Avatar Image View">
-                            <rect key="frame" x="6" y="14" width="32" height="32"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CxQ-bj-tgi" userLabel="Avatar Image View">
+                            <rect key="frame" x="6" y="12" width="32" height="32"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="EUS-7A-xN8"/>
+                                <constraint firstAttribute="width" constant="32" id="X70-JH-WKM"/>
+                            </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CFg-Xg-irR" userLabel="Send Message Button">
-                            <rect key="frame" x="270" y="15" width="46" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFg-Xg-irR" userLabel="Send Message Button">
+                            <rect key="frame" x="270" y="13" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="Srz-cg-bqv"/>
+                                <constraint firstAttribute="height" constant="30" id="tKj-9X-7jj"/>
+                            </constraints>
                             <state key="normal" title="Send">
                                 <color key="titleColor" red="0.71372549019607845" green="0.792156862745098" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,10 +69,13 @@
                                 <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="K3g-Vi-JwO"/>
                             </connections>
                         </button>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Enter a Comment" id="UWz-rP-5kl">
-                            <rect key="frame" x="46" y="14" width="215" height="32"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Enter a Comment" translatesAutoresizingMaskIntoConstraints="NO" id="UWz-rP-5kl">
+                            <rect key="frame" x="46" y="14" width="215" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="hfj-Ks-BVb"/>
+                            </constraints>
                             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                             <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -73,10 +86,29 @@
                         </textView>
                     </subviews>
                     <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="UWz-rP-5kl" firstAttribute="leading" secondItem="CxQ-bj-tgi" secondAttribute="trailing" constant="8" id="3je-jg-oGR"/>
+                        <constraint firstItem="CFg-Xg-irR" firstAttribute="leading" secondItem="UWz-rP-5kl" secondAttribute="trailing" constant="9" id="Bg6-kK-3IB"/>
+                        <constraint firstAttribute="trailing" secondItem="CFg-Xg-irR" secondAttribute="trailing" constant="4" id="LxC-j9-8P2"/>
+                        <constraint firstItem="UWz-rP-5kl" firstAttribute="top" secondItem="RwK-Zh-8aD" secondAttribute="top" constant="14" id="auT-42-faC"/>
+                        <constraint firstAttribute="bottom" secondItem="UWz-rP-5kl" secondAttribute="bottom" constant="14" id="dLr-Oi-JiV"/>
+                        <constraint firstItem="CxQ-bj-tgi" firstAttribute="leading" secondItem="RwK-Zh-8aD" secondAttribute="leading" constant="6" id="qCX-n1-kqW"/>
+                        <constraint firstAttribute="bottom" secondItem="CxQ-bj-tgi" secondAttribute="bottom" constant="14" id="taI-EJ-2aX"/>
+                        <constraint firstAttribute="bottom" secondItem="CFg-Xg-irR" secondAttribute="bottom" constant="15" id="wx0-Er-eWp"/>
+                    </constraints>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="RwK-Zh-8aD" secondAttribute="trailing" id="CO1-i3-qjs"/>
+                <constraint firstItem="dnW-Ka-mTj" firstAttribute="top" secondItem="1" secondAttribute="top" id="Fqr-a2-Mbo"/>
+                <constraint firstAttribute="bottom" secondItem="RwK-Zh-8aD" secondAttribute="bottom" id="Rvd-sV-938"/>
+                <constraint firstAttribute="trailing" secondItem="dnW-Ka-mTj" secondAttribute="trailing" id="XFM-hM-YVx"/>
+                <constraint firstItem="RwK-Zh-8aD" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ctN-4q-KCR"/>
+                <constraint firstItem="dnW-Ka-mTj" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ge0-uW-MbS"/>
+                <constraint firstItem="RwK-Zh-8aD" firstAttribute="top" secondItem="dnW-Ka-mTj" secondAttribute="bottom" id="xyJ-dL-MGn"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
