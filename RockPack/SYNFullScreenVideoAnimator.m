@@ -54,48 +54,50 @@ static const CGFloat AnimationDuration = 0.3;
 #pragma mark - Private
 
 - (void)animatePresentingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-	SYNVideoPlayerViewController *fromViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	SYNFullScreenVideoViewController *toViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+	UINavigationController *navigationController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+	SYNVideoPlayerViewController *videoViewController = (SYNVideoPlayerViewController *)navigationController.topViewController;
+	SYNFullScreenVideoViewController *fullScreenViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
-	SYNVideoPlayer *videoPlayer = fromViewController.currentVideoPlayer;
+	SYNVideoPlayer *videoPlayer = videoViewController.currentVideoPlayer;
 	
-	videoPlayer.frame = [fromViewController.view convertRect:videoPlayer.frame fromView:videoPlayer.superview];
-	[toViewController.view addSubview:videoPlayer];
+	videoPlayer.frame = [navigationController.view convertRect:videoPlayer.frame fromView:videoPlayer.superview];
+	[fullScreenViewController.view addSubview:videoPlayer];
 	
-	toViewController.backgroundView.alpha = 0.0;
-	[containerView addSubview:toViewController.view];
+	fullScreenViewController.backgroundView.alpha = 0.0;
+	[containerView addSubview:fullScreenViewController.view];
 	
 	[UIView animateWithDuration:AnimationDuration animations:^{
 		if (IS_IPHONE) {
 			UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
 			CGFloat angle = (orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
-			videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(toViewController.view.bounds), CGRectGetWidth(toViewController.view.bounds));
+			videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(fullScreenViewController.view.bounds), CGRectGetWidth(fullScreenViewController.view.bounds));
 			videoPlayer.transform = CGAffineTransformMakeRotation(angle);
 		} else {
 			CGFloat aspectRatio = CGRectGetWidth(videoPlayer.bounds) / CGRectGetHeight(videoPlayer.bounds);
-			CGFloat toViewWidth = CGRectGetWidth(toViewController.view.bounds);
+			CGFloat toViewWidth = CGRectGetWidth(fullScreenViewController.view.bounds);
 			videoPlayer.bounds = CGRectMake(0, 0, toViewWidth, toViewWidth / aspectRatio);
 		}
-		videoPlayer.center = toViewController.view.center;
+		videoPlayer.center = fullScreenViewController.view.center;
 		
-		toViewController.backgroundView.alpha = 1.0;
+		fullScreenViewController.backgroundView.alpha = 1.0;
 	} completion:^(BOOL finished) {
-		toViewController.videoPlayer = videoPlayer;
+		fullScreenViewController.videoPlayer = videoPlayer;
 		
 		[transitionContext completeTransition:YES];
 	}];
 }
 
 - (void)animateDismissingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-	SYNFullScreenVideoViewController *fromViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	SYNVideoPlayerViewController *toViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+	SYNFullScreenVideoViewController *fullScreenViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+	UINavigationController *navigationController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+	SYNVideoPlayerViewController *videoViewController = (SYNVideoPlayerViewController *)navigationController.topViewController;
 	UIView *containerView = [transitionContext containerView];
-	SYNVideoPlayer *videoPlayer = fromViewController.videoPlayer;
-	UIView *playerContainerView = toViewController.videoPlayerContainerView;
+	SYNVideoPlayer *videoPlayer = fullScreenViewController.videoPlayer;
+	UIView *playerContainerView = videoViewController.videoPlayerContainerView;
 	
-	[containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
+	[containerView insertSubview:navigationController.view belowSubview:fullScreenViewController.view];
 	
-	fromViewController.backgroundView.alpha = 1.0;
+	fullScreenViewController.backgroundView.alpha = 1.0;
 	
 	// This is dispatch_async is to handle the case where the iPad has been rotated while the video is playing.
 	//
@@ -110,10 +112,10 @@ static const CGFloat AnimationDuration = 0.3;
 				videoPlayer.transform = CGAffineTransformIdentity;
 			}
 			
-			CGRect videoPlayerFrame = [toViewController.view convertRect:playerContainerView.frame fromView:playerContainerView.superview];
+			CGRect videoPlayerFrame = [navigationController.view convertRect:playerContainerView.frame fromView:playerContainerView.superview];
 			videoPlayer.frame = videoPlayerFrame;
 			
-			fromViewController.backgroundView.alpha = 0.0;
+			fullScreenViewController.backgroundView.alpha = 0.0;
 		} completion:^(BOOL finished) {
 			videoPlayer.frame = playerContainerView.bounds;
 			[playerContainerView addSubview:videoPlayer];

@@ -143,11 +143,9 @@
                                                       // implement
                                                   }
                                                   
-                                                  SYNCarouselVideoPlayerViewController* videoOverlay = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videosArray selectedIndex:0];
+                                                  UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videosArray selectedIndex:0];
                                                   
-                                                  [self presentViewController:videoOverlay animated:YES completion:^{
-                                                      
-                                                  }];
+                                                  [self presentViewController:viewController animated:YES completion:nil];
                                                   
                                               } errorHandler:^(id error) {
                                                   

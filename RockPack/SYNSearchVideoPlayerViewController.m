@@ -18,6 +18,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNSearchVideoChannelsModel.h"
 #import "SYNSearchVideoLikesModel.h"
+#import "UINavigationBar+Appearance.h"
 @import MediaPlayer;
 
 @interface SYNSearchVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate>
@@ -40,15 +41,15 @@
 
 #pragma mark - Public class
 
-+ (instancetype)viewControllerWithVideoInstance:(VideoInstance *)videoInstance {
++ (UIViewController *)viewControllerWithVideoInstance:(VideoInstance *)videoInstance {
 	NSString *suffix = (IS_IPAD ? @"ipad" : @"iphone");
 	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
-	SYNSearchVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
+	UINavigationController *navigationController = [storyboard instantiateInitialViewController];
+	SYNSearchVideoPlayerViewController *viewController = (SYNSearchVideoPlayerViewController *)navigationController.topViewController;
 	viewController.videoInstance = videoInstance;
-	
-	return viewController;
+	return navigationController;
 }
 
 #pragma mark - UIViewController
@@ -74,6 +75,18 @@
 	if (IS_IPHONE) {
 		self.channelsCollectionView.scrollIndicatorInsets = UIEdgeInsetsMake(CGRectGetHeight(self.headerView.frame), 0, 0, 0);
 	}
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	[self.navigationController.navigationBar setBackgroundTransparent:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

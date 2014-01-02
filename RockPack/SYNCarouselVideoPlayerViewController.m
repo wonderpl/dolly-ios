@@ -23,10 +23,13 @@
 #import "SYNFeedModel.h"
 #import "SYNStaticModel.h"
 #import "SYNChannelFooterMoreView.h"
+#import "UINavigationBar+Appearance.h"
+#import "SYNActivityManager.h"
 #import <UIImageView+WebCache.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNPagingModelDelegate>
 
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *followBarButton;
 @property (nonatomic, strong) IBOutlet UIImageView *channelThumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel *channelTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *channelOwnerLabel;
@@ -43,19 +46,20 @@
 
 #pragma mark - Public class
 
-+ (instancetype)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
++ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
 	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
 	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
 	
-	SYNCarouselVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
+	UINavigationController *navigationController = [storyboard instantiateInitialViewController];
+	SYNCarouselVideoPlayerViewController *viewController = (SYNCarouselVideoPlayerViewController *)navigationController.topViewController;
 	viewController.model = model;
 	viewController.selectedIndex = selectedIndex;
 	
-	return viewController;
+	return navigationController;
 }
 
-+ (instancetype)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
++ (UIViewController *)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
 	SYNPagingModel *model = [[SYNStaticModel alloc] initWithLoadedItems:videoInstances];
 	return [self viewControllerWithModel:model selectedIndex:selectedIndex];
 }
@@ -84,6 +88,8 @@
 	
 	self.model.delegate = self;
 	
+	[self.navigationController.navigationBar setBackgroundTransparent:YES];
+	
 	if (![self isBeingPresented]) {
 		// Invalidate the layout so the section insets are recalculated when returning from full screen video
 		[self.thumbnailCollectionView.collectionViewLayout invalidateLayout];
@@ -93,12 +99,18 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	if ([self isBeingPresented]) {
+	if ([self.parentViewController isBeingPresented]) {
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
 		[self.thumbnailCollectionView selectItemAtIndexPath:indexPath
 												   animated:YES
 											 scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -134,8 +146,10 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]
 																			forIndexPath:indexPath];
+    
     
 	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
@@ -152,7 +166,8 @@
 																						 forIndexPath:indexPath];
 		footerView.showsLoading = YES;
 		
-		if ([self.model hasMoreItems]) {
+		if ([self.model hasMoreItems])
+        {
 			[self.model loadNextPage];
 		}
 		
@@ -218,8 +233,37 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - IBActions
 
-- (IBAction)followButtonPressed:(UIButton *)button {
-	[self followButtonPressed:button withChannel:self.videoInstance.channel];
+- (IBAction)followButtonPressed:(UIBarButtonItem *)barButton {
+	barButton.enabled = NO;
+	
+	Channel *channel = self.videoInstance.channel;
+	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
+	if (channel.subscribedByUserValue) {
+        [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
+												completionHandler:^(NSDictionary *responseDictionary) {
+													barButton.title = @"follow";
+													barButton.enabled = YES;
+												} errorHandler: ^(NSDictionary *errorDictionary) {
+													barButton.enabled = YES;
+												}];
+	} else {
+        [[SYNActivityManager sharedInstance] subscribeToChannel: channel
+		 
+											  completionHandler: ^(NSDictionary *responseDictionary) {
+												  id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+												  
+												  [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+																										 action: @"userSubscription"
+																										  label: nil
+																										  value: nil] build]];
+												  barButton.title = @"unfollow";
+												  barButton.enabled = YES;
+											  } errorHandler: ^(NSDictionary *errorDictionary) {
+												  barButton.enabled = YES;
+											  }];
+	}
+//
+//	[self followButtonPressed:button withChannel:self.videoInstance.channel];
 }
 
 - (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {
@@ -234,6 +278,12 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[super updateVideoInstanceDetails:(VideoInstance *)videoInstance];
+	
+	BOOL videoOwnedByCurrentUser = [appDelegate.currentUser.uniqueId isEqualToString:videoInstance.channel.channelOwner.uniqueId];
+	self.navigationItem.rightBarButtonItem = (videoOwnedByCurrentUser ? nil : self.followBarButton);
+	
+	BOOL isSubscribed = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:videoInstance.channel.uniqueId];
+	self.followBarButton.title = (isSubscribed ? @"unfollow" : @"follow");
 	
 	if ([videoInstance.channel.channelOwner.displayName length]) {
 		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]

@@ -27,7 +27,6 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
-@property (nonatomic, strong) IBOutlet UIButton *followButton;
 @property (nonatomic, strong) IBOutlet UIButton *commentButton;
 @property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
@@ -68,7 +67,7 @@
 	
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
-	if ([self isBeingPresented]) {
+	if ([self.parentViewController isBeingPresented]) {
 		[self playVideo];
 	}
 }
@@ -136,7 +135,7 @@
 
 #pragma mark - IBActions
 
-- (IBAction)closeButtonPressed:(UIButton *)close {
+- (IBAction)closeButtonPressed:(UIBarButtonItem *)barButton {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -160,6 +159,7 @@
 	
 	[self presentViewController:viewController animated:YES completion:nil];
 }
+
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:self.videoInstance.uniqueId];
 	
@@ -238,10 +238,6 @@
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	self.videoTitleLabel.text = videoInstance.title;
-	
-	BOOL videoOwnedByCurrentUser = [appDelegate.currentUser.uniqueId isEqualToString:videoInstance.channel.channelOwner.uniqueId];
-	self.followButton.hidden = videoOwnedByCurrentUser;
-	self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:videoInstance.channel.uniqueId];
     
 	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;

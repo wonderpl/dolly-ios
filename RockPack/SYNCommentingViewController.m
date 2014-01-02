@@ -42,6 +42,8 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, strong) IBOutlet UIImageView* sendMessageAvatarmageView;
 @property (nonatomic, strong) IBOutlet UIButton* sendMessageButton;
 
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* generalLoader;
+
 
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
@@ -155,7 +157,11 @@ static NSString* PlaceholderText = @"Say something nice";
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
     
-    [self fetchCommentsFromDB];
+    self.generalLoader.hidden = YES;
+    
+    // gets the comments from the DB
+    
+    [self refreshCollectionView];
     
     [self getCommentsFromServer];
     
@@ -338,10 +344,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.comments = [NSMutableArray arrayWithArray:fetchedArray];
     
-    [self.commentsCollectionView reloadData];
-    
-    CGFloat offsetValue = self.commentsCollectionView.contentSize.height - self.commentsCollectionView.frame.size.height;
-    [self.commentsCollectionView setContentOffset:CGPointMake(0.0f, offsetValue)];
     
 }
 
@@ -364,18 +366,20 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     
-    if (components.minute >= kCacheTimeInMinutes)
+    if (components.minute <= kCacheTimeInMinutes)
     {
-        
-        
         networkEngineToUse = appDelegate.oAuthNetworkEngine;
-        
-        
-        
     }
     else
     {
         networkEngineToUse = appDelegate.networkEngine;
+    }
+    
+    
+    if(self.comments.count == 0)
+    {
+        self.generalLoader.hidden = NO;
+        [self.generalLoader startAnimating];
     }
     
     [networkEngineToUse getCommentsForUsedId:appDelegate.currentUser.uniqueId
@@ -393,9 +397,13 @@ static NSString* PlaceholderText = @"Say something nice";
                                       {
                                           self.comments = @[].mutableCopy;
                                           
+                                
                                       }
-                                      
-                                      [self fetchCommentsFromDB];
+                               
+                               self.generalLoader.hidden = YES;
+                               
+                            
+                               [self refreshCollectionView];
         
                                   } errorHandler:^(id error) {
                             
@@ -445,6 +453,28 @@ static NSString* PlaceholderText = @"Say something nice";
     return YES;
 }
 
+- (void) refreshCollectionView
+{
+    
+    [self fetchCommentsFromDB];
+    
+    
+    [self.commentsCollectionView reloadData];
+    
+#warning Decide upon the correct method
+    // hack to reposition the collection view, otherwise the change gets overriden
+    [self performSelector:@selector(positionCollectionView) withObject:nil afterDelay:0.01f];
+    
+//    [self.commentsCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.comments.count - 1 inSection:0]
+//                                        atScrollPosition:UICollectionViewScrollPositionBottom
+//                                                animated:NO];
+}
+
+-(void)positionCollectionView
+{
+    CGFloat offsetValue = self.commentsCollectionView.contentSize.height - self.commentsCollectionView.frame.size.height;
+    [self.commentsCollectionView setContentOffset:CGPointMake(0.0f, offsetValue)];
+}
 
 #pragma mark - Sending Comment
 
@@ -461,12 +491,10 @@ static NSString* PlaceholderText = @"Say something nice";
         return;
     }
     
-    [self fetchCommentsFromDB];
-    
     
     self.sendMessageTextView.text = @"";
     
-    [self.commentsCollectionView reloadData];
+    [self refreshCollectionView];
     
     
     __weak SYNCommentingViewController* wself = self;
@@ -475,7 +503,7 @@ static NSString* PlaceholderText = @"Say something nice";
         
         [wself deleteComment:comment];
         
-        [wself.commentsCollectionView reloadData];
+        [wself refreshCollectionView];
         
         [[[UIAlertView alloc] initWithTitle:@"Sorry..."
                                     message:@"An error occured when sending your message..."
@@ -506,7 +534,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                                return;
                                            }
                                            
-                                           
                                            // save the correct url in order to be able to delete
                                            comment.uniqueId = [commentId stringValue];
                                            
@@ -514,16 +541,14 @@ static NSString* PlaceholderText = @"Say something nice";
                                            NSError* error;
                                            if(![comment.managedObjectContext save:&error])
                                            {
-                                               NSLog(@"%@", error);
+                                               DebugLog(@"%@", error);
                                                ErrorBlock(@{@"error" : @"could not save to managed context"});
                                                return;
                                            }
                                            
+                                           [wself.sendMessageTextView resignFirstResponder];
                                            
-                                           
-                                           [self.sendMessageTextView resignFirstResponder];
-                                           
-                                           [self.commentsCollectionView reloadData];
+                                           [wself refreshCollectionView];
         
                                        } errorHandler:ErrorBlock];
 }
@@ -552,7 +577,7 @@ static NSString* PlaceholderText = @"Say something nice";
     Comment* adHocComment = [Comment instanceFromDictionary:dictionary
                                   usingManagedObjectContext:appDelegate.mainManagedObjectContext];
     
-    adHocComment.recentValue = YES;
+    adHocComment.localDataValue = YES;
     
     adHocComment.videoInstanceId = self.videoInstance.uniqueId;
     
@@ -688,7 +713,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                                  wself.currentlyDeletingCell.deleting = NO;
                                                  wself.currentlyDeletingCell.loading = NO;
                                                  
-                                                 [wself.commentsCollectionView reloadData];
+                                                 [wself refreshCollectionView];
                                                  
                                                  
                                              } errorHandler:^(id error) {
@@ -775,9 +800,20 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     // delete all the comments for which we did not retrieve an OK. They might still have been saved and will appear upon load
     // but we need to be consistent by only showing what we are certain has been received form the server
-    for (Comment* comment in self.comments)
+    Comment* comment;
+    for (comment in self.comments)
+    {
         if(!comment.validatedValue)
+        {
+            DebugLog(@"Deleting unvalidated comment: %@", comment);
             [comment.managedObjectContext deleteObject:comment];
+        }
+    }
+    
+    
+    
+    NSError* error;
+    [comment.managedObjectContext save:&error];
     
 }
 
