@@ -145,7 +145,7 @@
                         <action selector="deleteTapped:" destination="-1" eventType="touchUpInside" id="XNV-fz-h5J"/>
                     </connections>
                 </button>
-                <textView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Description test" textAlignment="center" id="QmE-dp-0Kj" userLabel="Text View - Description" customClass="UIPlaceHolderTextView">
+                <textView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Description test" textAlignment="center" id="QmE-dp-0Kj" userLabel="Text View - Description">
                     <rect key="frame" x="24" y="208" width="274" height="47"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
@@ -167,8 +167,8 @@
                         <outlet property="delegate" destination="-1" id="hiT-WX-Joe"/>
                     </connections>
                 </textField>
-                <label hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no videos in this collection yet " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdE-6E-xRu">
-                    <rect key="frame" x="4" y="457" width="313" height="21"/>
+                <label hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no videos in this collection yet " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdE-6E-xRu">
+                    <rect key="frame" x="9" y="457" width="302" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

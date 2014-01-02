@@ -176,12 +176,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
     
-    NSLog(@"genresgenres, %@", self.genres);
-    
-    for (int i = 0; i<self.genres.count; i++) {
-        NSLog(@"object  :%@", [self.genres objectAtIndex:i]);
-    }
-    
     [self.categoriesCollectionView reloadData];
     
     
@@ -241,10 +235,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
-
+    
+    
     // if we are on the last cell of the section, hide the separator line
     categoryCell.separator.hidden = (BOOL)(indexPath.item == (currentGenre.subgenres.count - 1));
     categoryCell.backgroundColor = [UIColor colorWithHex:currentGenre.colorValue];
+    
     categoryCell.label.text = subgenre.name;
     
     

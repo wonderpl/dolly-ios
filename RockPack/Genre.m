@@ -1,7 +1,7 @@
 #import "Genre.h"
 #import "NSDictionary+Validation.h"
 #import "SubGenre.h"
-#import "SYNCategoryManager.h"
+
 
 @implementation Genre
 
@@ -33,10 +33,9 @@
     
     
     self.uniqueId = uniqueId;
-
+    
     NSString* colourHash = [dictionary objectForKey:@"colour"
                                         withDefault:@"#00ff00"]; // default to Green
-    
     
     if(![colourHash hasPrefix:@"#"])
         colourHash = [NSString stringWithFormat:@"0x%@", colourHash];
@@ -75,8 +74,6 @@
             self.subgenres = [NSOrderedSet orderedSetWithArray:subgenresArray];
         }
     }
-    
-    
 }
 
 

@@ -373,7 +373,9 @@
         tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
     }
     
+    
     [self.followersCountButton setTitle:tmpString forState:UIControlStateNormal];
+    
     [self.followersCountButton.titleLabel setFont:[UIFont  regularCustomFontOfSize:self.followersCountButton.titleLabel.font.pointSize]];
     
 }
