@@ -24,14 +24,8 @@ static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 static NSString* PlaceholderText = @"Say something nice";
 
 @interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
-{
-    CGFloat differenceBetweenHeightAndContentSizeHeight;
-    CGFloat oldContentSizeHeight;
-    BOOL isAnimating;
-}
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
-
 
 // Send View
 
@@ -39,6 +33,9 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, strong) IBOutlet UITextView* sendMessageTextView;
 @property (nonatomic, strong) IBOutlet UIImageView* sendMessageAvatarmageView;
 @property (nonatomic, strong) IBOutlet UIButton* sendMessageButton;
+
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *sendMessageTextViewHeight;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomContainerViewBottom;
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* generalLoader;
 
@@ -55,16 +52,11 @@ static NSString* PlaceholderText = @"Say something nice";
 
 @implementation SYNCommentingViewController
 
-- (id) initWithVideoInstance:(VideoInstance*)videoInstance
-{
-    if (self = [super initWithViewId:kCommentsViewId])
-    {
-        
-        self.videoInstance = videoInstance;
-
-    }
-    
-    return self;
+- (id)initWithVideoInstance:(VideoInstance*)videoInstance {
+	if (self = [super initWithViewId:kCommentsViewId]) {
+		self.videoInstance = videoInstance;
+	}
+	return self;
 }
 
 #pragma mark - View Life Cycle
@@ -112,12 +104,6 @@ static NSString* PlaceholderText = @"Say something nice";
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightGrayColor];
     
     self.comments = @[].mutableCopy; // avoid calling count on nil instance
-    
-    
-    oldContentSizeHeight = self.sendMessageTextView.contentSize.height;
-    
-    
-    differenceBetweenHeightAndContentSizeHeight = self.sendMessageTextView.frame.size.height - oldContentSizeHeight;
     
     self.sendMessageTextView.text = PlaceholderText;
     
@@ -192,134 +178,44 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - Keyboard Animation
 
-- (void) keyboardNotified:(NSNotification*)notification
-{
-    
-    NSDictionary* userInfo = [notification userInfo];
-    NSTimeInterval animationDuration;
-    UIViewAnimationCurve animationCurve;
-    
-    // Get the values from the Keyboard Animation to match it exactly
-    
-    CGRect keyboardFrame;
-    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
-    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
-    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
-    
-    UIView* viewToMove;
-    CGRect targetFrame;
-    
-    if(IS_IPAD)
-    {
-        viewToMove = self.navigationController.view;
-        
-        targetFrame = viewToMove.frame;
-        
-        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-        {
-            targetFrame.origin.y -= 110.0f;
-        }
-        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-        {
-            targetFrame.origin.y += 110.0f;
-        }
+- (void)keyboardNotified:(NSNotification*)notification {
+    if (IS_IPHONE) {
+		NSDictionary* userInfo = [notification userInfo];
+		NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+		UIViewAnimationCurve animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+		CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+		
+		BOOL isShowing = [[notification name] isEqualToString:UIKeyboardWillShowNotification];
+		
+		self.bottomContainerViewBottom.constant = (isShowing ? CGRectGetHeight(keyboardFrame) : 0.0);
+		
+		[UIView animateWithDuration:animationDuration
+							  delay:0.0f
+							options:(animationCurve << 16) // convert AnimationCurve to AnimationOption
+						 animations:^{
+							 [self.view layoutIfNeeded];
+						 } completion:^(BOOL finished) {
+							 
+						 }];
     }
-    else
-    {
-        
-        viewToMove = self.bottomContainerView;
-        
-        targetFrame = self.bottomContainerView.frame;
-        
-        if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-        {
-            targetFrame.origin.y -= 212.0f;
-        }
-        else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-        {
-            targetFrame.origin.y += 212.0f;
-        }
-        
-    }
-    
-    isAnimating = YES;
-    
-    [UIView animateWithDuration:animationDuration delay:0.0f
-                        options:(animationCurve << 16) // convert AnimationCurve to AnimationOption
-                     animations:^{
-                         
-                         viewToMove.frame = targetFrame;
-                         
-                     } completion:^(BOOL finished) {
-        
-                         isAnimating = NO;
-                     }];
-    
 }
 
 
 #pragma mark - KVO
 
-
-
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
-                       context:(void *)context
-{
-    if ([keyPath isEqualToString: kTextViewContentSizeKey])
-    {
-        
-        
-        CGFloat newContentSizeHeight = self.sendMessageTextView.contentSize.height;
-        
-        CGFloat diff = newContentSizeHeight - oldContentSizeHeight - differenceBetweenHeightAndContentSizeHeight;
-        
-        // just subtract it the first time and then set to 0 (I do not know or care why it works!)
-        differenceBetweenHeightAndContentSizeHeight = 0;
-        
-        // = offset View = //
-        
-        CGRect bottonViewFrame = self.bottomContainerView.frame;
-        bottonViewFrame.origin.y -= diff;
-        bottonViewFrame.size.height += diff;
-        self.bottomContainerView.frame = bottonViewFrame;
-        
-        
-        // = offset TextView = //
-        
-        CGRect tvFrame = self.sendMessageTextView.frame;
-    
-        tvFrame.size.height += diff;
-        
-        self.sendMessageTextView.frame = tvFrame;
-        
-        
-        
-        // = set image = //
-        
-        CGRect imgFrame = self.sendMessageAvatarmageView.frame;
-        
-        imgFrame.origin.y += diff;
-        
-        self.sendMessageAvatarmageView.frame = imgFrame;
-        
-        
-        // = set image = //
-        
-        CGRect btnFrame = self.sendMessageButton.frame;
-        
-        btnFrame.origin.y += diff;
-        
-        self.sendMessageButton.frame = btnFrame;
-        
-        
-        
-        oldContentSizeHeight = newContentSizeHeight;
-        
+                       context:(void *)context {
+    if ([keyPath isEqualToString:kTextViewContentSizeKey]) {
+		CGSize contentSize = [change[NSKeyValueChangeNewKey] CGSizeValue];
+		self.sendMessageTextViewHeight.constant = contentSize.height;
+		
+		[UIView animateWithDuration:0.2f animations:^{
+			[self.view layoutIfNeeded];
+		}];
     }
 }
-
 
 #pragma mark - Get Comments
 
@@ -461,18 +357,18 @@ static NSString* PlaceholderText = @"Say something nice";
     
 #warning Decide upon the correct method
     // hack to reposition the collection view, otherwise the change gets overriden
-    [self performSelector:@selector(positionCollectionView) withObject:nil afterDelay:0.01f];
+//    [self performSelector:@selector(positionCollectionView) withObject:nil afterDelay:0.01f];
     
 //    [self.commentsCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.comments.count - 1 inSection:0]
 //                                        atScrollPosition:UICollectionViewScrollPositionBottom
 //                                                animated:NO];
 }
 
--(void)positionCollectionView
-{
-    CGFloat offsetValue = self.commentsCollectionView.contentSize.height - self.commentsCollectionView.frame.size.height;
-    [self.commentsCollectionView setContentOffset:CGPointMake(0.0f, offsetValue)];
-}
+//-(void)positionCollectionView
+//{
+//    CGFloat offsetValue = self.commentsCollectionView.contentSize.height - self.commentsCollectionView.frame.size.height;
+//    [self.commentsCollectionView setContentOffset:CGPointMake(0.0f, offsetValue)];
+//}
 
 #pragma mark - Sending Comment
 
