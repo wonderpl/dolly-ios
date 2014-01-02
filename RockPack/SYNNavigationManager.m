@@ -44,15 +44,17 @@
     // == Check for ipad
     if (IS_IPAD)
         return;
+	
+	SYNMasterViewController *masterViewController = self.masterController;
     
     NSNumber *numOfScrollDirection = [notification.userInfo objectForKey:kScrollingDirection];
     // == Scrolling down, Hide the tab bar
     if (numOfScrollDirection.intValue == ScrollingDirectionDown && _masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height - _masterController.tabsView.frame.size.height)
     {
         [UIView animateWithDuration:NAV_BAR_ANIMATION_SPEED animations:^{
-            CGRect tmpFrame = _masterController.tabsView.frame;
-            tmpFrame.origin.y += _masterController.tabsView.frame.size.height;
-            _masterController.tabsView.frame = tmpFrame;
+            CGRect tmpFrame = masterViewController.tabsView.frame;
+            tmpFrame.origin.y += masterViewController.tabsView.frame.size.height;
+            masterViewController.tabsView.frame = tmpFrame;
         }];
     }
     
@@ -61,9 +63,9 @@
     {
         [UIView animateWithDuration:NAV_BAR_ANIMATION_SPEED animations:^{
             
-            CGRect tmpFrame = _masterController.tabsView.frame;
-            tmpFrame.origin.y -= _masterController.tabsView.frame.size.height;
-            _masterController.tabsView.frame = tmpFrame;
+            CGRect tmpFrame = masterViewController.tabsView.frame;
+            tmpFrame.origin.y -= masterViewController.tabsView.frame.size.height;
+            masterViewController.tabsView.frame = tmpFrame;
         }];
     }
 
