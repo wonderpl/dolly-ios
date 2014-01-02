@@ -6075,7 +6075,12 @@
 			attributes = {
 				CLASSPREFIX = SYN;
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Nick Banks";
+				ORGANIZATIONNAME = "Rockpack Ltd";
+				TargetAttributes = {
+					010DEFCF1629BDC40080F26B = {
+						DevelopmentTeam = 3M76KMT8LS;
+					};
+				};
 			};
 			buildConfigurationList = 010DEFCA1629BDC40080F26B /* Build configuration list for PBXProject "rockpack" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -7759,8 +7764,8 @@
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = NO;
 				CODE_SIGN_ENTITLEMENTS = RockPack/RockPack.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rockpack Ltd. (3M76KMT8LS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rockpack Ltd. (3M76KMT8LS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7795,7 +7800,7 @@
 					"-licucore",
 				);
 				PRODUCT_NAME = rockpack;
-				PROVISIONING_PROFILE = "EB774DF8-2B22-43DA-90F5-FC72A9BCFFFA";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EB774DF8-2B22-43DA-90F5-FC72A9BCFFFA";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -7951,7 +7956,7 @@
 				);
 				PRODUCT_NAME = rockpack;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14206831-7D10-4634-AEC6-61408CE651AA";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
