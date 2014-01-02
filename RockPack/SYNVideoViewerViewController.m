@@ -21,7 +21,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPassthroughView.h"
-#import "SYNReportConcernTableViewController.h"
 #import "SYNYouTubeVideoPlaybackViewController.h"
 #import "SYNOoyalaVideoPlaybackViewController.h"
 #import "SYNVideoThumbnailCell.h"
@@ -68,7 +67,6 @@
 @property (nonatomic, strong) IBOutlet UIView *panelView;
 @property (nonatomic, strong) IBOutlet UILabel* likesCountLabel;
 @property (nonatomic, strong) IBOutlet UIView *swipeView;
-@property (nonatomic, strong) SYNReportConcernTableViewController *reportConcernTableViewController;
 @property (nonatomic, strong) SYNVideoViewerThumbnailLayout *layout;
 @property (nonatomic, strong) UISwipeGestureRecognizer* leftSwipeRecogniser;
 @property (nonatomic, strong) UISwipeGestureRecognizer* rightSwipeRecogniser;
@@ -1127,34 +1125,6 @@
     
     [self shareVideoInstance: videoInstance];
 }
-
-
-- (IBAction) userTouchedReportConcernButton: (UIButton *) button
-{
-    button.selected = !button.selected;
-    
-    if (button.selected)
-    {
-        if (!self.reportConcernTableViewController)
-        {
-            // Create out concerns table view controller
-            self.reportConcernTableViewController = [[SYNReportConcernTableViewController alloc] init];
-            
-            VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
-            
-            [self.reportConcernTableViewController reportConcernFromView: button
-                                                        inViewController: self
-                                                   popOverArrowDirection: UIPopoverArrowDirectionDown
-                                                              objectType: @"video"
-                                                                objectId: videoInstance.video.uniqueId
-                                                          completedBlock: ^{
-                                                              button.selected = NO;
-                                                              self.reportConcernTableViewController = nil;
-                                                          }];
-        }
-    }
-}
-
 
 #pragma mark - orientation change iPhone
 
