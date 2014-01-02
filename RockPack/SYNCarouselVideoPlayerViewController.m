@@ -150,7 +150,6 @@
     SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]
 																			forIndexPath:indexPath];
     
-    
 	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
     cell.titleLabel.text = videoInstance.title;
@@ -223,7 +222,13 @@ referenceSizeForFooterInSection:(NSInteger)section {
 #pragma mark - SYNPagingModelDelegate
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
+	NSIndexPath *selectedIndexPath = [[self.thumbnailCollectionView indexPathsForSelectedItems] firstObject];
+	
 	[self.thumbnailCollectionView reloadData];
+	
+	[self.thumbnailCollectionView selectItemAtIndexPath:selectedIndexPath
+											   animated:NO
+										 scrollPosition:UICollectionViewScrollPositionNone];
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
