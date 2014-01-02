@@ -50,6 +50,11 @@
 	
 	appDelegate = [[UIApplication sharedApplication] delegate];
 	
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+																			 style:UIBarButtonItemStylePlain
+																			target:nil
+																			action:nil];
+	
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
 	
 	if (IS_IPHONE) {
