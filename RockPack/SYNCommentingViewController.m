@@ -14,13 +14,12 @@
 #import "Comment.h"
 #import "SYNMasterViewController.h"
 #import "SYNDeviceManager.h"
+#import "UICollectionReusableView+Helpers.h"
 #import <QuartzCore/QuartzCore.h>
-#import <objc/runtime.h>
 
 #define kMaxCommentCharacters 120
 #define kCacheTimeInMinutes 1
 
-static NSString* CommentingCellIndentifier = @"SYNCommentingCollectionViewCell";
 static NSString* PlaceholderText = @"Say something nice";
 
 @interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
@@ -80,8 +79,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightGrayColor];
     
-    self.comments = @[].mutableCopy; // avoid calling count on nil instance
-    
     self.sendMessageTextView.text = PlaceholderText;
     
     self.sendMessageButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.sendMessageButton.titleLabel.font.pointSize];
@@ -95,8 +92,8 @@ static NSString* PlaceholderText = @"Say something nice";
     self.bottomContainerView.layer.borderColor = [UIColor grayColor].CGColor;
     self.bottomContainerView.clipsToBounds = YES;
     
-    [self.commentsCollectionView registerNib:[UINib nibWithNibName:CommentingCellIndentifier bundle:nil]
-                  forCellWithReuseIdentifier:CommentingCellIndentifier];
+    [self.commentsCollectionView registerNib:[SYNCommentingCollectionViewCell nib]
+                  forCellWithReuseIdentifier:[SYNCommentingCollectionViewCell reuseIdentifier]];
     
     self.sendMessageTextView.font = [UIFont regularCustomFontOfSize:self.sendMessageTextView.font.pointSize];
     
@@ -196,26 +193,18 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - Get Comments
 
--(void)fetchCommentsFromDB
-{
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    
-    
-    fetchRequest.entity = [NSEntityDescription entityForName: kComment
-                                      inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
-    // comments relate to a specific video instance
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"videoInstanceId == %@", self.videoInstance.uniqueId]];
-    
-    fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"dateAdded" ascending: YES]];
-    
-    NSError* error;
-    NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                error: &error];
-    
-    self.comments = [NSMutableArray arrayWithArray:fetchedArray];
-    
-    
+- (void)fetchCommentsFromDB {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Comment entityName]];
+	
+	[fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"videoInstanceId == %@", self.videoInstance.uniqueId]];
+	[fetchRequest setSortDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES] ]];
+
+	NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest
+																				error:nil];
+
+	self.comments = [NSMutableArray arrayWithArray:fetchedArray];
+
+
 }
 
 -(void)getCommentsFromServer
@@ -621,7 +610,7 @@ static NSString* PlaceholderText = @"Say something nice";
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNCommentingCollectionViewCell* commentingCell = [cv dequeueReusableCellWithReuseIdentifier:CommentingCellIndentifier
+    SYNCommentingCollectionViewCell* commentingCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNCommentingCollectionViewCell reuseIdentifier]
                                                                                     forIndexPath:indexPath];
     Comment* comment = self.comments[indexPath.item];
     
