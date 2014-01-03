@@ -33,6 +33,7 @@
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNGenreColorManager.h"
 
 
 @import QuartzCore;
@@ -131,7 +132,6 @@
 
 @property (nonatomic) NSRange dataRequestRangeChannel;
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
-@property (nonatomic, strong)     NSMutableDictionary *genreColors;
 
 @end
 
@@ -361,9 +361,6 @@
     [self setFollowersCountButton];
     
     
-    self.genreColors = [[NSMutableDictionary alloc] init];
-
-    [self fetchGenreColors];
     
 }
 -(void) setFollowersCountButton
@@ -933,8 +930,8 @@
                 channelThumbnailCell.deletableCell = YES;
             }
             
-            [channelThumbnailCell setCategoryColor: [ self.genreColors objectForKey:channel.categoryId]];
-
+            
+           [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
         
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
@@ -955,9 +952,8 @@
                 [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
-
-                [channelThumbnailCell setCategoryColor: [ self.genreColors objectForKey:channel.categoryId]];
-            }
+                [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
+                }
         }
         if(self.modeType == kModeOtherUsersProfile)
         {
@@ -3049,34 +3045,5 @@ finishedWithImage: (UIImage *) image
                                          }];
 }
 
-
-- (void) fetchGenreColors
-{
-    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
-                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
-    categoriesFetchRequest.includesSubentities = NO;
-    
-    NSError* error;
-    
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest error: &error];
-    
-    NSArray* genres = [NSArray arrayWithArray:genresFetchedArray];
-
-    for (Genre *tmpGenre in genres)
-    {
-        [self.genreColors setObject:[UIColor colorWithHex: [tmpGenre.color integerValue]] forKey:tmpGenre.uniqueId];
-        for (Genre *tmpSubGenre in tmpGenre.subgenres) {
-            [self.genreColors setObject:[UIColor colorWithHex: [tmpGenre.color integerValue]] forKey:tmpSubGenre.uniqueId];
-        }
-    }
-    
-    //Default color
-    
-    [self.genreColors setObject:[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] forKey:@""];
-
-}
 
 @end
