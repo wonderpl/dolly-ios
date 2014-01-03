@@ -90,6 +90,15 @@
     self.followControl.selected = channel.subscribedByUserValue;
    
     [self.stripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
+    
+    if (channel.subscribedByUser) {
+        self.followControl.title = @"follow";
+    }
+    else
+    {
+        self.followControl.title = @"unfollow";
+
+    }
 }
 
 @end
