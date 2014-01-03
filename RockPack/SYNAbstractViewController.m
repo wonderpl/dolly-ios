@@ -588,7 +588,7 @@
         // Temporarily disable the button to prevent multiple-clicks
         socialControl.enabled = NO;
         
-        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:channel.uniqueId];
+        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:channel.uniqueId];
         
         // toggle subscription from/to channel //
         if (channel.subscribedByUserValue == NO)
