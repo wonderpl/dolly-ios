@@ -64,8 +64,6 @@
 		<string>ProximaNova-Light.otf</string>
 		<string>ProximaNova-Regular.otf</string>
 	</array>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
