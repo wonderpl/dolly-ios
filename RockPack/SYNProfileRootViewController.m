@@ -33,6 +33,7 @@
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNCategoryColorManager.h"
 
 
 @import QuartzCore;
@@ -906,13 +907,14 @@
         Channel *channel;
         
         [channelThumbnailCell setBorder];
-        
+
+        channelThumbnailCell.showsDescriptionOnSwipe = YES;
+
         if(collectionView == self.channelThumbnailCollectionView)
         {
             channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
             
 			channelThumbnailCell.followButton.hidden = (self.modeType == kModeMyOwnProfile);
-			channelThumbnailCell.showsDescriptionOnSwipe = YES;
             
             [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
             NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
@@ -925,7 +927,9 @@
             {
                 channelThumbnailCell.deletableCell = YES;
             }
-
+#warning set color here
+            
+            [channelThumbnailCell setCategoryColor: [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId]];
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
@@ -944,6 +948,13 @@
                 
                 [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
+                
+                UIColor *tmpColor = [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId];
+                
+                NSLog(@"tmp color %@", tmpColor);
+                
+                [channelThumbnailCell setCategoryColor: tmpColor];
+
             }
         }
         if(self.modeType == kModeOtherUsersProfile)

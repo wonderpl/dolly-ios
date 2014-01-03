@@ -345,5 +345,11 @@
     
 }
 
+-(void) setCategoryColor: (UIColor*) color
+{
+    [self.bottomBarView setBackgroundColor:color];
+    [self.descriptionLabel setBackgroundColor:color];
+}
+
 
 @end
