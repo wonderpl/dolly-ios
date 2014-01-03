@@ -33,7 +33,6 @@
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
 #import "UINavigationBar+Appearance.h"
-#import "SYNCategoryColorManager.h"
 
 
 @import QuartzCore;
@@ -132,8 +131,7 @@
 
 @property (nonatomic) NSRange dataRequestRangeChannel;
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
-
-
+@property (nonatomic, strong)     NSMutableDictionary *genreColors;
 
 @end
 
@@ -361,6 +359,11 @@
     
     
     [self setFollowersCountButton];
+    
+    
+    self.genreColors = [[NSMutableDictionary alloc] init];
+
+    [self fetchGenreColors];
     
 }
 -(void) setFollowersCountButton
@@ -928,7 +931,9 @@
                 channelThumbnailCell.deletableCell = YES;
             }
             
-            [channelThumbnailCell setCategoryColor: [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId]];
+            [channelThumbnailCell setCategoryColor: [ self.genreColors objectForKey:channel.categoryId]];
+
+        
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
@@ -948,10 +953,8 @@
                 [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
-                UIColor *tmpColor = [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId];
-                
-                [channelThumbnailCell setCategoryColor: tmpColor];
 
+                [channelThumbnailCell setCategoryColor: [ self.genreColors objectForKey:channel.categoryId]];
             }
         }
         if(self.modeType == kModeOtherUsersProfile)
@@ -2704,12 +2707,7 @@ finishedWithImage: (UIImage *) image
          }];
         
         self.imagePickerControllerCoverphoto = nil;
-        
-
-        
     }
-    
-    
 }
 
 -(void)createNewButtonPressed
@@ -2737,7 +2735,6 @@ finishedWithImage: (UIImage *) image
             }
             ((SYNChannelCreateNewCell*)cell).frame = tmpBoarder;
             ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateEditing;
-            
             
             if ([((SYNChannelCreateNewCell*)cell).descriptionTextView.text isEqualToString:@""]) {
                 ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = NO;
@@ -3051,5 +3048,28 @@ finishedWithImage: (UIImage *) image
 }
 
 
+- (void) fetchGenreColors
+{
+    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
+    
+    categoriesFetchRequest.includesSubentities = NO;
+    
+    NSError* error;
+    
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest error: &error];
+    
+    NSArray* genres = [NSArray arrayWithArray:genresFetchedArray];
+
+    for (Genre *tmpGenre in genres)
+    {
+        [self.genreColors setObject:[UIColor colorWithHex: [tmpGenre.color integerValue]] forKey:tmpGenre.uniqueId];
+        for (Genre *tmpSubGenre in tmpGenre.subgenres) {
+            [self.genreColors setObject:[UIColor colorWithHex: [tmpGenre.color integerValue]] forKey:tmpSubGenre.uniqueId];
+        }
+    }
+}
 
 @end
