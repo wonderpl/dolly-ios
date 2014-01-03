@@ -65,11 +65,17 @@
                         <rect key="frame" x="135" y="84" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="shareControlPressed:" destination="EVW-6b-LjA" eventType="valueChanged" id="fnR-Bq-GXc"/>
+                        </connections>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1E-d7-TbR" userLabel="Button - Follow" customClass="SYNSocialButton">
                         <rect key="frame" x="64" y="84" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="followControlPressed:" destination="EVW-6b-LjA" eventType="valueChanged" id="WhA-de-Sc4"/>
+                        </connections>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
