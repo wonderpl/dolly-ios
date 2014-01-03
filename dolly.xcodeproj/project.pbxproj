@@ -6064,11 +6064,8 @@
 			attributes = {
 				CLASSPREFIX = SYN;
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Nick Banks";
+				ORGANIZATIONNAME = "Rockpack Ltd";
 				TargetAttributes = {
-					010DEFCF1629BDC40080F26B = {
-						DevelopmentTeam = 3M76KMT8LS;
-					};
 					01901A941771CCBA007DBEAC = {
 						TestTargetID = 01E427E61664EC9F009B941F;
 					};
