@@ -9,6 +9,7 @@
 #import "SYNAggregateChannelItemCell.h"
 #import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
+#import "SYNGenreColorManager.h"
 
 @interface SYNAggregateChannelItemCell ()
 
@@ -63,7 +64,6 @@
     }
     
     self.titleLabel.text = _channel.title;
-    
     self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
     self.videosLabel.text = [NSString stringWithFormat: @"%i videos", _channel.videoInstances.count];
     
@@ -88,6 +88,8 @@
     }
     
     self.followControl.selected = channel.subscribedByUserValue;
+   
+    [self.stripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
 }
 
 @end
