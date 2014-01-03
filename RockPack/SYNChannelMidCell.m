@@ -68,6 +68,16 @@
     
     self.deletableCell = NO;
     
+    
+    if (IS_IPHONE)
+    {
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:12]];
+    }
+    else
+    {
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:17]];
+    }
+    
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
