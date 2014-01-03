@@ -52,7 +52,6 @@
 @property (nonatomic, strong) IBOutlet UILabel* wellSendYouLabel;
 @property (nonatomic, strong) IBOutlet UILabel* whatsOnYourChannelLabel;
 @property (nonatomic, strong) IBOutlet UIView* dobView;
-@property (nonatomic, strong) NSArray* mainFormElements;
 @property (nonatomic, strong) NSMutableDictionary* labelsToErrorArrows;
 @property (nonatomic, strong) UIButton* termsAndConditionsButton;
 @property (nonatomic, strong) UIPopoverController* cameraMenuPopoverController;
@@ -184,10 +183,6 @@
         
     emailInputField.keyboardType = UIKeyboardTypeEmailAddress;
     
-    self.mainFormElements = @[];
-    
-    
-        
     // == Setup Input Fields
     
     
@@ -219,12 +214,6 @@
     
 }
 
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-}
 
 - (void) viewDidAppear: (BOOL) animated
 {

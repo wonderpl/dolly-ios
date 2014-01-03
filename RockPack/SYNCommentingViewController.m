@@ -60,13 +60,13 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - View Life Cycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
+	
     // on iPhone the controller appears in a popup
-    if (IS_IPHONE)
-    {
+    if (IS_IPHONE) {
+		self.commentsCollectionView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+		
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                             object: self
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
@@ -125,8 +125,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
 }
 
--(void) viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     
     // observer the size of the text view to set the frame accordingly
@@ -161,13 +160,26 @@ static NSString* PlaceholderText = @"Say something nice";
 		
 		BOOL isShowing = [[notification name] isEqualToString:UIKeyboardWillShowNotification];
 		
-		self.bottomContainerViewBottom.constant = (isShowing ? CGRectGetHeight(keyboardFrame) : 0.0);
+		CGFloat keyboardHeight = CGRectGetHeight(keyboardFrame);
+		CGFloat keyboardHeightChange = (isShowing ? keyboardHeight : 0.0);
 		
+		self.bottomContainerViewBottom.constant = keyboardHeightChange;
+		
+		CGFloat newYOffset = self.commentsCollectionView.contentOffset.y + (isShowing ? keyboardHeight : -keyboardHeight);
+		
+		UICollectionView *collectionView = self.commentsCollectionView;
+		UIView *view = self.view;
 		[UIView animateWithDuration:animationDuration
 							  delay:0.0f
 							options:(animationCurve << 16) // convert AnimationCurve to AnimationOption
 						 animations:^{
-							 [self.view layoutIfNeeded];
+							 collectionView.contentInset = UIEdgeInsetsMake(collectionView.contentInset.top,
+																			collectionView.contentInset.left,
+																			keyboardHeightChange,
+																			collectionView.contentInset.right);
+							 collectionView.contentOffset = CGPointMake(0, newYOffset);
+							 
+							 [view layoutIfNeeded];
 						 } completion:^(BOOL finished) {
 							 
 						 }];
@@ -320,21 +332,14 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     [self.commentsCollectionView reloadData];
-    
-#warning Decide upon the correct method
-    // hack to reposition the collection view, otherwise the change gets overriden
-//    [self performSelector:@selector(positionCollectionView) withObject:nil afterDelay:0.01f];
-    
-//    [self.commentsCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.comments.count - 1 inSection:0]
-//                                        atScrollPosition:UICollectionViewScrollPositionBottom
-//                                                animated:NO];
+	
+	if ([self.comments count]) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.comments count] - 1 inSection:0];
+		[self.commentsCollectionView scrollToItemAtIndexPath:indexPath
+											atScrollPosition:UICollectionViewScrollPositionBottom
+													animated:NO];
+	}
 }
-
-//-(void)positionCollectionView
-//{
-//    CGFloat offsetValue = self.commentsCollectionView.contentSize.height - self.commentsCollectionView.frame.size.height;
-//    [self.commentsCollectionView setContentOffset:CGPointMake(0.0f, offsetValue)];
-//}
 
 #pragma mark - Sending Comment
 
