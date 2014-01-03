@@ -3530,6 +3530,7 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1F65D48F17EB3C8B004326A9 /* Images.xcassets */,
 				1F076B60185B398100618B0C /* ArrowCommentBox.png */,
 				1F076B61185B398100618B0C /* ArrowCommentBox@2x.png */,
 				BED027B51834D4BF00636659 /* Options */,
@@ -3554,7 +3555,6 @@
 				01B7F76C164FE464009C5CCD /* Channels */,
 				018919F51672235000AB07BB /* Feed */,
 				011A160F16EF5E4F008CF25E /* Image Picker */,
-				019824F31629CE9900216900 /* Launch Images */,
 				BE270B8516EE485200CDDA6D /* Login */,
 				01A3EC3416AED7F6008DCE08 /* Popover */,
 				BE03A69716F7691B00245314 /* Profile */,
@@ -3683,14 +3683,6 @@
 				0131D25517C3706600D983D2 /* TestFlight+ManualSessions.h */,
 			);
 			name = TestFlight;
-			sourceTree = "<group>";
-		};
-		019824F31629CE9900216900 /* Launch Images */ = {
-			isa = PBXGroup;
-			children = (
-				1F65D48F17EB3C8B004326A9 /* Images.xcassets */,
-			);
-			name = "Launch Images";
 			sourceTree = "<group>";
 		};
 		019824F41629CEA200216900 /* App Icons */ = {
