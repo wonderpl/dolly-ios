@@ -48,9 +48,7 @@
     
     NSDictionary *categories = [dictionary objectForKey:@"categories"];
     NSArray *items = [categories objectForKey:@"items"];
-    
-    NSLog(@"dddd%@", items);
-    
+        
     for (NSDictionary *tmpDict in items)
     {
         NSNumber *color = [self numberFromColor:[tmpDict objectForKey:@"colour"]];
@@ -81,6 +79,10 @@
 
 -(UIColor *) colorFromID : (NSString *) categoryId
 {
+    
+    if ([categoryId isEqualToString:@""]) {
+        return [UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f];
+    }
     
     return [UIColor colorWithHex: [((NSNumber*)[self.colorsDictionary objectForKey:categoryId]) integerValue]];
 }

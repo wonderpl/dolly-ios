@@ -927,7 +927,6 @@
             {
                 channelThumbnailCell.deletableCell = YES;
             }
-#warning set color here
             
             [channelThumbnailCell setCategoryColor: [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId]];
         }
@@ -950,8 +949,6 @@
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
                 UIColor *tmpColor = [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId];
-                
-                NSLog(@"tmp color %@", tmpColor);
                 
                 [channelThumbnailCell setCategoryColor: tmpColor];
 
