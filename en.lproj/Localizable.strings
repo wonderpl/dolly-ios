@@ -184,6 +184,7 @@
 "channel_screen_no_videos" = "There are no videos in this pack.";
 "channel_screen_error_subscribe" = "Something went wrong. Please try again.";
 "channel_screen_loading_videos" = "Loading videos...";
+"no_videos" = "There are no videos in this collection yet";
 
 // == Messages for creating a private channel == //
 
@@ -271,6 +272,7 @@
 
 "Delete ?" = "Delete ?";
 
+"edit" = "edit";
 //
 
 "Channel Unavailable" = "Channel Unavailable";

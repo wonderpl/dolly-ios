@@ -376,9 +376,8 @@
     }
     
     [[self.txtViewDescription layer] setCornerRadius:0];
-    
 
-    
+    self.lblNoVideos.text = NSLocalizedString(@"no_videos", "No videos in the channel details colleciton");
 }
 
 -(void) setUpMode
