@@ -10,11 +10,8 @@
 #import "SYNAbstractViewController.h"
 #import "VideoInstance.h"
 
-
 @interface SYNCommentingViewController : SYNAbstractViewController
 
-
-- (id) initWithVideoInstance:(VideoInstance*)videoInstance;
-
+- (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance;
 
 @end

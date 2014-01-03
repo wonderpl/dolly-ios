@@ -21,9 +21,10 @@
 #import "SYNPopoverAnimator.h"
 #import "SYNActivityManager.h"
 #import "SYNAddToChannelViewController.h"
+#import "SYNCommentingViewController.h"
 #import <SDWebImageManager.h>
 
-@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, SYNVideoPlayerDelegate>
+@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
@@ -32,6 +33,8 @@
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
+
+@property (nonatomic, strong) UIPopoverController *commentPopoverController;
 
 @end
 
@@ -100,6 +103,14 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
 	Class animationClass = [self animationClassForViewController:dismissed];
 	return [animationClass animatorForPresentation:NO];
+}
+
+#pragma mark - UIPopoverControllerDelegate
+
+- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view {
+	CGRect buttonRect = [self.view convertRect:self.commentButton.bounds fromView:self.commentButton];
+	
+	*rect = buttonRect;
 }
 
 #pragma mark - SYNVideoPlayerDelegate
@@ -188,7 +199,22 @@
 }
 
 - (IBAction)commentButtonPressed:(UIButton *)button {
-
+	SYNCommentingViewController *viewController = [[SYNCommentingViewController alloc] initWithVideoInstance:self.videoInstance];
+	if (IS_IPHONE) {
+		[self.navigationController pushViewController:viewController animated:YES];
+	} else {
+		CGRect buttonRect = [self.view convertRect:button.bounds fromView:button];
+		
+		UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+		popoverController.delegate = self;
+		
+		[popoverController presentPopoverFromRect:buttonRect
+										   inView:self.view
+						 permittedArrowDirections:UIPopoverArrowDirectionRight
+										 animated:YES];
+		
+		self.commentPopoverController = popoverController;
+	}
 }
 
 #pragma mark - Notifications

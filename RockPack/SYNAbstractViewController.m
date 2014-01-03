@@ -225,6 +225,8 @@
     BOOL didStar = (socialControl.selected == NO);
     
     socialControl.enabled = NO;
+	
+	SYNAppDelegate *localAppDelegate = appDelegate;
     
     // Send
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
@@ -242,7 +244,7 @@
                                                   
                                                   socialControl.selected = YES;
                                                   
-                                                  [videoInstance addStarrersObject: appDelegate.currentUser];
+                                                  [videoInstance addStarrersObject:localAppDelegate.currentUser];
                                               }
                                               else
                                               {

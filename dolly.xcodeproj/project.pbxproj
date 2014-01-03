@@ -140,12 +140,10 @@
 		01578C2B17DF840800B4F498 /* LowerParallaxStars.png in Resources */ = {isa = PBXBuildFile; fileRef = 01578C2917DF840800B4F498 /* LowerParallaxStars.png */; };
 		01578C2C17DF840800B4F498 /* UpperParallaxStars.png in Resources */ = {isa = PBXBuildFile; fileRef = 01578C2A17DF840800B4F498 /* UpperParallaxStars.png */; };
 		015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */; };
-		015C13C1173B034C001569FE /* SYNReportConcernTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015C13C0173B034C001569FE /* SYNReportConcernTableViewController.m */; };
 		015CB01616AE039900FEB8E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01516AE039900FEB8E7 /* User.m */; };
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
 		0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542A18363ADC009B161C /* SYNTextFieldLogin.m */; };
 		0165542E18363C70009B161C /* SYNTextFieldLoginiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */; };
-		01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */; };
 		01655434183680CE009B161C /* SYNFormButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655433183680CE009B161C /* SYNFormButton.m */; };
 		01677E0C16554AB500B1B1D8 /* ButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF616554AB500B1B1D8 /* ButtonBack.png */; };
 		01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01677DF716554AB500B1B1D8 /* ButtonBack@2x.png */; };
@@ -291,10 +289,6 @@
 		01D0996B17429F4E00351C82 /* ButtonPopoverReport@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0996317429F4E00351C82 /* ButtonPopoverReport@2x.png */; };
 		01D0996C17429F4E00351C82 /* ButtonPopoverReportHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0996417429F4E00351C82 /* ButtonPopoverReportHighlighted.png */; };
 		01D0996D17429F4E00351C82 /* ButtonPopoverReportHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0996517429F4E00351C82 /* ButtonPopoverReportHighlighted@2x.png */; };
-		01D099721742C31000351C82 /* SYNReportConcernTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D099711742C31000351C82 /* SYNReportConcernTableCell.m */; };
-		01D099741742C32B00351C82 /* SYNReportConcernTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D099731742C32B00351C82 /* SYNReportConcernTableCell.xib */; };
-		01D0997E1742F9F700351C82 /* SYNReportConcernTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0997D1742F9F700351C82 /* SYNReportConcernTableViewController.xib */; };
-		01D099801742FA0D00351C82 /* SYNReportConcernTableViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0997F1742FA0D00351C82 /* SYNReportConcernTableViewController~iphone.xib */; };
 		01D0998517439A3A00351C82 /* CategorySlide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0998117439A3500351C82 /* CategorySlide@2x.png */; };
 		01D0998617439A3A00351C82 /* CategorySlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0998217439A3600351C82 /* CategorySlide.png */; };
 		01D0998717439A3A00351C82 /* CategorySlideSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0998317439A3700351C82 /* CategorySlideSelected.png */; };
@@ -1559,8 +1553,6 @@
 		01578C2A17DF840800B4F498 /* UpperParallaxStars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UpperParallaxStars.png; path = Assets/Images/UpperParallaxStars.png; sourceTree = "<group>"; };
 		015AC9FB181EB86E0020E685 /* SYNAggregateFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAggregateFlowLayout.h; sourceTree = "<group>"; };
 		015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAggregateFlowLayout.m; sourceTree = "<group>"; };
-		015C13BF173B034C001569FE /* SYNReportConcernTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNReportConcernTableViewController.h; sourceTree = "<group>"; };
-		015C13C0173B034C001569FE /* SYNReportConcernTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNReportConcernTableViewController.m; sourceTree = "<group>"; };
 		015CB01416AE039900FEB8E7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		015CB01516AE039900FEB8E7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		015CB01716AE03B200FEB8E7 /* _User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _User.h; sourceTree = "<group>"; };
@@ -1569,8 +1561,6 @@
 		0165542A18363ADC009B161C /* SYNTextFieldLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLogin.m; sourceTree = "<group>"; };
 		0165542C18363C70009B161C /* SYNTextFieldLoginiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginiPhone.h; sourceTree = "<group>"; };
 		0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLoginiPhone.m; sourceTree = "<group>"; };
-		0165542F183646C8009B161C /* SYNTextFieldLoginDateiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLoginDateiPhone.h; sourceTree = "<group>"; };
-		01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLoginDateiPhone.m; sourceTree = "<group>"; };
 		01655432183680CE009B161C /* SYNFormButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFormButton.h; sourceTree = "<group>"; };
 		01655433183680CE009B161C /* SYNFormButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFormButton.m; sourceTree = "<group>"; };
 		01677DF616554AB500B1B1D8 /* ButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBack.png; path = Assets/Images/ButtonBack.png; sourceTree = "<group>"; };
@@ -1755,11 +1745,6 @@
 		01D0996317429F4E00351C82 /* ButtonPopoverReport@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPopoverReport@2x.png"; path = "Assets/Images/ButtonPopoverReport@2x.png"; sourceTree = "<group>"; };
 		01D0996417429F4E00351C82 /* ButtonPopoverReportHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPopoverReportHighlighted.png; path = Assets/Images/ButtonPopoverReportHighlighted.png; sourceTree = "<group>"; };
 		01D0996517429F4E00351C82 /* ButtonPopoverReportHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPopoverReportHighlighted@2x.png"; path = "Assets/Images/ButtonPopoverReportHighlighted@2x.png"; sourceTree = "<group>"; };
-		01D099701742C31000351C82 /* SYNReportConcernTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNReportConcernTableCell.h; sourceTree = "<group>"; };
-		01D099711742C31000351C82 /* SYNReportConcernTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNReportConcernTableCell.m; sourceTree = "<group>"; };
-		01D099731742C32B00351C82 /* SYNReportConcernTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNReportConcernTableCell.xib; sourceTree = "<group>"; };
-		01D0997D1742F9F700351C82 /* SYNReportConcernTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNReportConcernTableViewController.xib; sourceTree = "<group>"; };
-		01D0997F1742FA0D00351C82 /* SYNReportConcernTableViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNReportConcernTableViewController~iphone.xib"; sourceTree = "<group>"; };
 		01D0998117439A3500351C82 /* CategorySlide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CategorySlide@2x.png"; sourceTree = "<group>"; };
 		01D0998217439A3600351C82 /* CategorySlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CategorySlide.png; sourceTree = "<group>"; };
 		01D0998317439A3700351C82 /* CategorySlideSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CategorySlideSelected.png; sourceTree = "<group>"; };
@@ -3119,7 +3104,6 @@
 				019824E41629CAF500216900 /* Helpers */,
 				01677DDA1655491100B1B1D8 /* Networking */,
 				010DEFDB1629BDC40080F26B /* Supporting Files */,
-				01D0996F1742C29100351C82 /* Table Assets */,
 				019824E11629CAB600216900 /* View Controllers */,
 				019824E31629CADE00216900 /* Views */,
 			);
@@ -3418,17 +3402,6 @@
 			name = "Channel viewer";
 			sourceTree = "<group>";
 		};
-		015C13BE173B02D8001569FE /* Report Concerns */ = {
-			isa = PBXGroup;
-			children = (
-				015C13BF173B034C001569FE /* SYNReportConcernTableViewController.h */,
-				015C13C0173B034C001569FE /* SYNReportConcernTableViewController.m */,
-				01D0997D1742F9F700351C82 /* SYNReportConcernTableViewController.xib */,
-				01D0997F1742FA0D00351C82 /* SYNReportConcernTableViewController~iphone.xib */,
-			);
-			name = "Report Concerns";
-			sourceTree = "<group>";
-		};
 		0165542818363AC4009B161C /* Text Fields */ = {
 			isa = PBXGroup;
 			children = (
@@ -3436,8 +3409,6 @@
 				0165542A18363ADC009B161C /* SYNTextFieldLogin.m */,
 				0165542C18363C70009B161C /* SYNTextFieldLoginiPhone.h */,
 				0165542D18363C70009B161C /* SYNTextFieldLoginiPhone.m */,
-				0165542F183646C8009B161C /* SYNTextFieldLoginDateiPhone.h */,
-				01655430183646C8009B161C /* SYNTextFieldLoginDateiPhone.m */,
 			);
 			name = "Text Fields";
 			sourceTree = "<group>";
@@ -4088,16 +4059,6 @@
 				01D0996517429F4E00351C82 /* ButtonPopoverReportHighlighted@2x.png */,
 			);
 			name = "Report Concern";
-			sourceTree = "<group>";
-		};
-		01D0996F1742C29100351C82 /* Table Assets */ = {
-			isa = PBXGroup;
-			children = (
-				01D099701742C31000351C82 /* SYNReportConcernTableCell.h */,
-				01D099711742C31000351C82 /* SYNReportConcernTableCell.m */,
-				01D099731742C32B00351C82 /* SYNReportConcernTableCell.xib */,
-			);
-			name = "Table Assets";
 			sourceTree = "<group>";
 		};
 		01D8C6AC16820AB1000059D1 /* VideoThumbnailWide */ = {
@@ -6007,7 +5968,6 @@
 			isa = PBXGroup;
 			children = (
 				BE8F938117B1110A00E7035F /* Sharing Panel */,
-				015C13BE173B02D8001569FE /* Report Concerns */,
 				011C1650173002D000CF50B9 /* Activity controller */,
 				01A3EC2A16AECE0F008DCE08 /* Popover */,
 			);
@@ -6989,9 +6949,6 @@
 				1F51A6C21742AB86009907CA /* PlaceholderChannelCreation.png in Resources */,
 				E97FCDC5183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard in Resources */,
 				1F51A6C31742AB86009907CA /* PlaceholderChannelCreation@2x.png in Resources */,
-				01D099741742C32B00351C82 /* SYNReportConcernTableCell.xib in Resources */,
-				01D0997E1742F9F700351C82 /* SYNReportConcernTableViewController.xib in Resources */,
-				01D099801742FA0D00351C82 /* SYNReportConcernTableViewController~iphone.xib in Resources */,
 				01D0998517439A3A00351C82 /* CategorySlide@2x.png in Resources */,
 				01D0998617439A3A00351C82 /* CategorySlide.png in Resources */,
 				01D0998717439A3A00351C82 /* CategorySlideSelected.png in Resources */,
@@ -7483,7 +7440,6 @@
 				BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */,
 				0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */,
 				BEE01B7018521DB8000CF681 /* _Comment.m in Sources */,
-				01655431183646C8009B161C /* SYNTextFieldLoginDateiPhone.m in Sources */,
 				E93C7F0C18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m in Sources */,
 				E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
@@ -7540,7 +7496,6 @@
 				E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */,
 				38BACE001732CCFB00406597 /* SYNLoginViewControllerIphone.m in Sources */,
 				012B4C9D17393A080019DA4C /* SYNPopoverBackgroundView.m in Sources */,
-				015C13C1173B034C001569FE /* SYNReportConcernTableViewController.m in Sources */,
 				E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */,
 				0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */,
 				BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */,
@@ -7555,7 +7510,6 @@
 				BEB15791173D061700DAFA2F /* ChannelCover.m in Sources */,
 				BEE01B79185732A0000CF681 /* Mood.m in Sources */,
 				E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */,
-				01D099721742C31000351C82 /* SYNReportConcernTableCell.m in Sources */,
 				38281F1D17439B770024DC18 /* SYNLoginBaseViewController.m in Sources */,
 				3864D2DC1743DB3000A90ED3 /* SYNImagePickerController.m in Sources */,
 				E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */,

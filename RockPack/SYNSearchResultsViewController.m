@@ -104,13 +104,9 @@ typedef void (^SearchResultCompleteBlock)(int);
     SYNSearchResultsViewController *wself = self;
     
     self.videoSearchCompleteBlock = ^(int count) {
+        NSArray *fetchedObjects = [wself getSearchEntitiesByName:[VideoInstance entityName]];
         
-        NSError *error;
-        NSArray *fetchedObjects = [wself getSearchEntitiesByName: kVideoInstance
-                                                       withError: &error];
-        
-        if (error)
-        {
+        if (!fetchedObjects) {
             //handle error
             return;
         }
@@ -132,13 +128,9 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     
     self.userSearchCompleteBlock = ^(int count) {
+        NSArray *fetchedObjects = [wself getSearchEntitiesByName:[ChannelOwner entityName]];
         
-        NSError *error;
-        NSArray *fetchedObjects = [wself getSearchEntitiesByName: kChannelOwner
-                                                       withError: &error];
-        
-        if (error)
-        {
+        if (!fetchedObjects) {
             // handle error
             return;
         }
@@ -310,12 +302,12 @@ typedef void (^SearchResultCompleteBlock)(int);
 }
 
 
-- (NSArray *)getSearchEntitiesByName:(NSString *)entityName withError:(NSError **) error {
+- (NSArray *)getSearchEntitiesByName:(NSString *)entityName {
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"viewId == %@", self.viewId]];
     fetchRequest.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES] ];
     
-    return [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest error:error];
+    return [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest error:nil];
 }
 
 
