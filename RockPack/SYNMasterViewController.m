@@ -18,7 +18,7 @@
 #import "SYNContainerViewController.h"
 #import "SYNCommentingViewController.h"
 #import "SYNOnBoardingViewController.h"
-
+#import "SYNCategoryColorManager.h"
 #import "Genre.h"
 #import "SubGenre.h"
 
@@ -161,8 +161,10 @@
 
 - (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
 {
+    
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
         
+        [[SYNCategoryColorManager sharedInstance] registerCategoryColorsFromDictionary:dictionary];
         [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
             
             return [appDelegate.mainRegistry registerCategoriesFromDictionary: dictionary];
@@ -172,8 +174,6 @@
             CompleteBlock(success);
             
         }];
-        
-        
     } onError:^(NSError* error) {
         
         CompleteBlock(NO);

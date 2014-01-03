@@ -459,10 +459,24 @@
     
     self.txtViewDescription.text = self.lblDescription.text;
     
-    [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
     
+    if (self.channel.subscribersCountValue == 1) {
+        [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Follower", @"followers count in channeldetail")] forState:UIControlStateNormal ];
+
+    }
+    else
+    {
+        [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
+    }
     
-    [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
+
+    if (self.channel.totalVideosValueValue == 1) {
+        [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Video", nil)] forState:UIControlStateNormal ];
+    }
+    else
+    {
+        [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
+    }
     
     [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
     
@@ -1384,7 +1398,7 @@
             cell.likeControl.alpha = 1.0f;
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
-            cell.commentControl.hidden = 1.0f;
+            cell.commentControl.alpha = 1.0f;
 
             cell.deleteButton.alpha = 0.0f;
         };

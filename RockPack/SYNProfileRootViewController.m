@@ -33,6 +33,7 @@
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNCategoryColorManager.h"
 
 
 @import QuartzCore;
@@ -364,8 +365,16 @@
 }
 -(void) setFollowersCountButton
 {
-        NSString *tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
-
+    NSString *tmpString;
+    if (self.channelOwner.subscribersCountValue == 1) {
+        tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"follower", "follower count in profile")];
+    }
+    else
+    {
+        tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
+    }
+    
+    
     [self.followersCountButton setTitle:tmpString forState:UIControlStateNormal];
     
     [self.followersCountButton.titleLabel setFont:[UIFont  regularCustomFontOfSize:self.followersCountButton.titleLabel.font.pointSize]];
@@ -898,13 +907,14 @@
         Channel *channel;
         
         [channelThumbnailCell setBorder];
-        
+
+        channelThumbnailCell.showsDescriptionOnSwipe = YES;
+
         if(collectionView == self.channelThumbnailCollectionView)
         {
             channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
             
 			channelThumbnailCell.followButton.hidden = (self.modeType == kModeMyOwnProfile);
-			channelThumbnailCell.showsDescriptionOnSwipe = YES;
             
             [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
             NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
@@ -917,7 +927,8 @@
             {
                 channelThumbnailCell.deletableCell = YES;
             }
-
+            
+            [channelThumbnailCell setCategoryColor: [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId]];
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
@@ -936,6 +947,11 @@
                 
                 [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
                 channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
+                
+                UIColor *tmpColor = [[SYNCategoryColorManager sharedInstance] colorFromID:channel.categoryId];
+                
+                [channelThumbnailCell setCategoryColor: tmpColor];
+
             }
         }
         if(self.modeType == kModeOtherUsersProfile)
@@ -2628,7 +2644,6 @@ finishedWithImage: (UIImage *) image
 {
     //DebugLog(@"Orign image width: %f, height%f", image.size.width, image.size.height);
     self.avatarButton.enabled = NO;
-    self.profileImageView.image = image;
     //  [self.activityIndicator startAnimating];
     
     if (picker == self.imagePickerControllerAvatar) {
