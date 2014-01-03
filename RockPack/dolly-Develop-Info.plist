@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Rockpack</string>
+	<string>Wonder PL</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -50,7 +50,7 @@
 	<key>FacebookAppID</key>
 	<string>573323026048639</string>
 	<key>FacebookNamespace</key>
-	<string>wonderplc-dev</string>
+	<string>wonderpl-dev</string>
 	<key>FullVersion</key>
 	<string>0.1.0</string>
 	<key>LSApplicationCategoryType</key>
