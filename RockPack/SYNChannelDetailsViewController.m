@@ -1614,6 +1614,10 @@
 - (IBAction) followersLabelPressed: (id) sender
 {
     // Google analytics support
+    if (self.channel.subscribersCountValue == 0) {
+        return;
+    }
+    
     id tracker = [[GAI sharedInstance] defaultTracker];
     
     [tracker set: kGAIScreenName
