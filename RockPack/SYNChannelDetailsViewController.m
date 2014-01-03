@@ -459,6 +459,11 @@
     
     self.txtViewDescription.text = self.lblDescription.text;
     
+    // placeholder text for empty string
+    
+    if ([self.lblDescription.text isEqualToString:@""]) {
+        self.txtViewDescription.text = NSLocalizedString(@"description_placeholder", @"placeholder for editing");
+    }
     
     if (self.channel.subscribersCountValue == 1) {
         [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Follower", @"followers count in channeldetail")] forState:UIControlStateNormal ];
@@ -1700,7 +1705,7 @@
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
                                                      title: self.txtFieldChannelName.text
-                                               description: self.txtViewDescription.text
+                                               description: [self.txtViewDescription.text isEqualToString:NSLocalizedString(@"description_placeholder", nil)] ? @"" : self.txtViewDescription.text
                                                   category: @""
                                                      cover: @""
                                                   isPublic: YES
@@ -1867,7 +1872,26 @@
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
+    if (textView == self.txtViewDescription) {
+        
+        if ([textView.text isEqualToString:NSLocalizedString(@"description_placeholder", @"placeholder for editing")]) {
+            textView.text = @"";
+            textView.textColor = [UIColor dollyTextMediumGray];         }
+    }
+
 }
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if (textView == self.txtViewDescription) {
+        
+        if ([textView.text isEqualToString:@""]) {
+            textView.text = NSLocalizedString(@"description_placeholder", @"placeholder for editing");
+            textView.textColor = [UIColor dollyTextDarkGray];
+        }
+    }
+}
+
 
 #pragma mark - Text Field Delegates
 -(void)textFieldDidBeginEditing:(UITextField *)textField
@@ -1893,8 +1917,6 @@
     return (newLength > 20) ? NO : YES;
 }
 
-
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text
 {
@@ -1908,8 +1930,6 @@
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
     return (newLength > 120) ? NO : YES;
 }
-
-
 
 -(void)dismissKeyboard
 {

@@ -202,6 +202,10 @@
 // Channel Title text view placeholder
 "channel_creation_screen_field_channeltitle_placeholder" = "PACK NAME";
 
+// Description placeholder
+
+"description_placeholder" = "Description (Optional)";
+
 // Select Cover / Category
 "channel_creation_screen_button_selectcover_label" = "CHOOSE A COVER";
 "channel_creation_screen_button_selectcat_label" = "CHOOSE A CATEGORY";
