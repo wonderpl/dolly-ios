@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>APIHostName</key>
-	<string>api.rockpack.com</string>
+	<string>api.dev.wonderplc.com</string>
 	<key>BuildTarget</key>
 	<string>Release</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Rockpack</string>
+	<string>Wonder PL</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -32,7 +32,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4.0</string>
+	<string>0.1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -40,32 +40,30 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb517447921656577</string>
+				<string>fb573323026048639</string>
 				<string>rockpack</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.4.0</string>
+	<string>0.1.0</string>
 	<key>FacebookAppID</key>
-	<string>517447921656577</string>
+	<string>573323026048639</string>
 	<key>FacebookNamespace</key>
-	<string>wonderplc</string>
+	<string>wonderpl-dev</string>
 	<key>FullVersion</key>
-	<string>1.4.0</string>
+	<string>0.1.0</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>SecureAPIHostName</key>
-	<string>secure.rockpack.com</string>
+	<string>secure.dev.wonderplc.com</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ProximaNova-Light.otf</string>
 		<string>ProximaNova-Regular.otf</string>
 	</array>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -76,21 +76,6 @@
     }
 }
 
-
-- (NSString *) getSQLForSubGenresSelector
-{
-    NSMutableString *subquery = [[NSMutableString alloc] init];
-    int count = 0;
-    
-    for (SubGenre *subgenre in self.subgenres)
-    {
-        [subquery appendFormat: @"'%@'%@", subgenre.uniqueId, (++count < self.subgenres.count ? @", " : @"")];
-    }
-    
-    return subquery;
-}
-
-
 - (NSArray *) getSubGenreIdArray
 {
     NSMutableArray *subGenreIds = [[NSMutableArray alloc] initWithCapacity: self.subgenres.count];

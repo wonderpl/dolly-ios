@@ -9,7 +9,6 @@
                               withId: (NSString *) uniqueId
            usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
 
-- (NSString *) getSQLForSubGenresSelector;
 - (NSArray *) getSubGenreIdArray;
 
 

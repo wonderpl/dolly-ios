@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Rockpack</string>
+	<string>Wonder PL</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -32,7 +32,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1</string>
+	<string>0.1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -46,13 +46,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.1</string>
+	<string>0.1.0</string>
 	<key>FacebookAppID</key>
 	<string>573323026048639</string>
 	<key>FacebookNamespace</key>
-	<string>wonderplc-dev</string>
+	<string>wonderpl-dev</string>
 	<key>FullVersion</key>
-	<string>1.4.0</string>
+	<string>0.1.0</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -64,8 +64,6 @@
 		<string>ProximaNova-Light.otf</string>
 		<string>ProximaNova-Regular.otf</string>
 	</array>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
