@@ -3070,6 +3070,11 @@ finishedWithImage: (UIImage *) image
             [self.genreColors setObject:[UIColor colorWithHex: [tmpGenre.color integerValue]] forKey:tmpSubGenre.uniqueId];
         }
     }
+    
+    //Default color
+    
+    [self.genreColors setObject:[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] forKey:@""];
+
 }
 
 @end
