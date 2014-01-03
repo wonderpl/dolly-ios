@@ -367,7 +367,7 @@
 		0E27C270183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */; };
 		0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */; };
 		0E27C272183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */; };
-		0E3AE6901875DE8C008A8D00 /* SYNCategoryColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNCategoryColorManager.m */; };
+		0E3AE6901875DE8C008A8D00 /* SYNGenreColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */; };
 		0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */; };
 		0E5B8EE918465C420012F460 /* coverImageTest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E5B8EE818465C420012F460 /* coverImageTest.jpg */; };
 		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
@@ -1839,8 +1839,8 @@
 		0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteDefault@2x.png"; sourceTree = "<group>"; };
 		0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonVideoDeleteHighlighted.png; sourceTree = "<group>"; };
 		0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
-		0E3AE68E1875DE8C008A8D00 /* SYNCategoryColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCategoryColorManager.h; sourceTree = "<group>"; };
-		0E3AE68F1875DE8C008A8D00 /* SYNCategoryColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCategoryColorManager.m; sourceTree = "<group>"; };
+		0E3AE68E1875DE8C008A8D00 /* SYNGenreColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGenreColorManager.h; sourceTree = "<group>"; };
+		0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGenreColorManager.m; sourceTree = "<group>"; };
 		0E5B8EA41846007D0012F460 /* SYNProfileFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileFlowLayout.h; sourceTree = "<group>"; };
 		0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileFlowLayout.m; sourceTree = "<group>"; };
 		0E5B8EE818465C420012F460 /* coverImageTest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coverImageTest.jpg; sourceTree = "<group>"; };
@@ -4309,8 +4309,8 @@
 		0E3AE68D1875DE5D008A8D00 /* Color Manager */ = {
 			isa = PBXGroup;
 			children = (
-				0E3AE68E1875DE8C008A8D00 /* SYNCategoryColorManager.h */,
-				0E3AE68F1875DE8C008A8D00 /* SYNCategoryColorManager.m */,
+				0E3AE68E1875DE8C008A8D00 /* SYNGenreColorManager.h */,
+				0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */,
 			);
 			name = "Color Manager";
 			sourceTree = "<group>";
@@ -7390,7 +7390,7 @@
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
 				E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
-				0E3AE6901875DE8C008A8D00 /* SYNCategoryColorManager.m in Sources */,
+				0E3AE6901875DE8C008A8D00 /* SYNGenreColorManager.m in Sources */,
 				E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */,
 				E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */,
 				BEA1E32E16CCFF70000AB59D /* SYNMainRegistry.m in Sources */,
