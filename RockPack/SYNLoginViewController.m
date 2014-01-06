@@ -621,7 +621,8 @@
                                                   dividerImageView.alpha = 1.0;
                                                   
                                                   passwordForgottenButton.alpha = 1.0;
-                                                  passwordForgottenLabel.alpha = 1.0;
+                                                  //clashing against password label, needed?
+//                                                  passwordForgottenLabel.alpha = 1.0;
                                                   
                                                   
                                               } completion: ^(BOOL finished) {
