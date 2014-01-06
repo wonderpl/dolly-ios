@@ -16,6 +16,7 @@
 #import "SYNVideoPlayer+Protected.h"
 
 static CGFloat const VideoViewedThresholdPercentage = 0.1;
+static CGFloat const ControlsFadeTimer = 5.0;
 
 @interface SYNVideoPlayer () <SYNScrubberBarDelegate>
 
@@ -26,6 +27,10 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 @property (nonatomic, strong) SYNScrubberBar *scrubberBar;
 @property (nonatomic, strong) UIView *playerContainerView;
 @property (nonatomic, strong) NSTimer *progressUpdateTimer;
+
+@property (nonatomic, strong) UIView *controlsFadeTapView;
+@property (nonatomic, strong) NSTimer *controlsFadeTimer;
+@property (nonatomic, assign) BOOL controlsVisible;
 
 @property (nonatomic, assign) BOOL videoViewed;
 
@@ -50,6 +55,7 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 		self.backgroundColor = [UIColor blackColor];
 		
 		[self addSubview:self.playerContainerView];
+		[self addSubview:self.controlsFadeTapView];
 		[self addSubview:self.loadingView];
 		[self addSubview:self.scrubberBar];
 	}
@@ -111,6 +117,7 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 - (SYNScrubberBar *)scrubberBar {
 	if (!_scrubberBar) {
 		SYNScrubberBar *scrubberBar = [SYNScrubberBar view];
+		scrubberBar.alpha = 0.0;
 		scrubberBar.frame = CGRectMake(0,
 									   CGRectGetHeight(self.frame) - CGRectGetHeight(scrubberBar.frame),
 									   CGRectGetWidth(self.frame),
@@ -131,6 +138,19 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 		self.loadingView = loadingView;
 	}
 	return _loadingView;
+}
+
+- (UIView *)controlsFadeTapView {
+	if (!_controlsFadeTapView) {
+		UIView *view = [[UIView alloc] initWithFrame:self.bounds];
+		view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+		
+		UIGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(controlsFadeViewTapped:)];
+		[view addGestureRecognizer:gestureRecognizer];
+		
+		self.controlsFadeTapView = view;
+	}
+	return _controlsFadeTapView;
 }
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
@@ -172,6 +192,8 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 
 - (void)handleVideoPlayerStartedPlaying {
 	[self fadeOutLoadingView];
+	
+	[self fadeInControls];
 }
 
 - (void)handleVideoPlayerFinishedPlaying {
@@ -196,9 +218,41 @@ static CGFloat const VideoViewedThresholdPercentage = 0.1;
 
 #pragma mark - Private
 
+- (void)controlsFadeViewTapped:(UITapGestureRecognizer *)tapGestureRecognizer {
+	if (self.controlsVisible) {
+		[self fadeOutControls];
+	} else {
+		[self fadeInControls];
+	}
+}
+
 - (void)fadeOutLoadingView {
 	[UIView animateWithDuration:0.3 animations:^{
 		self.loadingView.alpha = 0.0;
+	}];
+}
+
+- (void)fadeInControls {
+	[self.controlsFadeTimer invalidate];
+	self.controlsFadeTimer = [NSTimer scheduledTimerWithTimeInterval:ControlsFadeTimer
+																	target:self
+																  selector:@selector(fadeOutControls)
+																  userInfo:nil
+																   repeats:NO];
+	
+	self.controlsVisible = YES;
+	[UIView animateWithDuration:0.3 animations:^{
+		self.scrubberBar.alpha = 1.0;
+	}];
+}
+
+- (void)fadeOutControls {
+	[self.controlsFadeTimer invalidate];
+	self.controlsFadeTimer = nil;
+	
+	self.controlsVisible = NO;
+	[UIView animateWithDuration:0.3 animations:^{
+		self.scrubberBar.alpha = 0.0;
 	}];
 }
 
