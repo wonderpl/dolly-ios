@@ -1332,6 +1332,7 @@
 		E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */; };
 		E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */; };
 		E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */ = {isa = PBXBuildFile; fileRef = E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */; };
+		E972DFAC187AEF4B00CB9C78 /* SYNTimecodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E972DFAB187AEF4B00CB9C78 /* SYNTimecodeLabel.m */; };
 		E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */; };
 		E97FCDC5183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FCDC4183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
@@ -2924,6 +2925,8 @@
 		E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoLikesModel.m; sourceTree = "<group>"; };
 		E96A4C6818439CD100ED5782 /* CIFilter+Monochrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIFilter+Monochrome.h"; sourceTree = "<group>"; };
 		E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIFilter+Monochrome.m"; sourceTree = "<group>"; };
+		E972DFAA187AEF4B00CB9C78 /* SYNTimecodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimecodeLabel.h; sourceTree = "<group>"; };
+		E972DFAB187AEF4B00CB9C78 /* SYNTimecodeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimecodeLabel.m; sourceTree = "<group>"; };
 		E9765BA5184F9ABA005D02E9 /* SYNFeedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedModel.h; sourceTree = "<group>"; };
 		E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedModel.m; sourceTree = "<group>"; };
 		E97FCDC4183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNCarouselVideoPlayerViewController_ipad.storyboard; sourceTree = "<group>"; };
@@ -3637,6 +3640,8 @@
 				E9921A9218351D66001A4F3B /* SYNScrubberBar.h */,
 				E9921A9318351D66001A4F3B /* SYNScrubberBar.m */,
 				E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */,
+				E972DFAA187AEF4B00CB9C78 /* SYNTimecodeLabel.h */,
+				E972DFAB187AEF4B00CB9C78 /* SYNTimecodeLabel.m */,
 				E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */,
 				E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */,
 			);
@@ -7436,6 +7441,7 @@
 				011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */,
 				E9F7CC7C1846562F0026C97D /* SYNVideoPlayerViewController.m in Sources */,
 				011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */,
+				E972DFAC187AEF4B00CB9C78 /* SYNTimecodeLabel.m in Sources */,
 				38A2FF1B17314B3E00FB9F57 /* SYNDiscoverAutocompleteCell.m in Sources */,
 				E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */,
 				E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */,

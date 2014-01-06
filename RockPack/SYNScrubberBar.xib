@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -42,14 +42,14 @@
                         <action selector="playPauseButtonPressed:" destination="1" eventType="touchUpInside" id="CFD-sx-asp"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9w-7m-qRt">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9w-7m-qRt" customClass="SYNTimecodeLabel">
                     <rect key="frame" x="51" y="15" width="24" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rem-G5-66n">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rem-G5-66n" customClass="SYNTimecodeLabel">
                     <rect key="frame" x="205" y="15" width="24" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -87,7 +87,6 @@
                 <constraint firstAttribute="trailing" secondItem="Kmx-LH-wU8" secondAttribute="trailing" constant="4" id="A1f-Ar-Reh"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="X9w-7m-qRt" secondAttribute="trailing" constant="14" id="FvN-w8-MnU"/>
                 <constraint firstAttribute="centerY" secondItem="1TK-HE-31a" secondAttribute="centerY" id="HcR-XS-nMI"/>
-                <constraint firstItem="Rem-G5-66n" firstAttribute="width" secondItem="X9w-7m-qRt" secondAttribute="width" id="Sgt-2q-bDg"/>
                 <constraint firstItem="2HY-ng-bdK" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="V9l-Ok-PU8"/>
                 <constraint firstItem="Rem-G5-66n" firstAttribute="leading" secondItem="1TK-HE-31a" secondAttribute="trailing" constant="9" id="ZAU-Pz-Uvf"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="UPL-IY-mRy" secondAttribute="leading" id="bFK-vf-WoG"/>

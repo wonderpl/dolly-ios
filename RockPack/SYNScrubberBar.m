@@ -10,6 +10,7 @@
 #import "SYNProgressView.h"
 #import "UIFont+SYNFont.h"
 #import "NSString+Timecode.h"
+#import "SYNTimecodeLabel.h"
 @import MediaPlayer;
 
 @interface SYNScrubberBar ()
@@ -18,8 +19,8 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *fullScreenButton;
 
-@property (nonatomic, strong) IBOutlet UILabel *currentTimeLabel;
-@property (nonatomic, strong) IBOutlet UILabel *durationLabel;
+@property (nonatomic, strong) IBOutlet SYNTimecodeLabel *currentTimeLabel;
+@property (nonatomic, strong) IBOutlet SYNTimecodeLabel *durationLabel;
 
 @property (nonatomic, strong) IBOutlet SYNProgressView *bufferingProgressView;
 @property (nonatomic, strong) IBOutlet UISlider *progressSlider;
@@ -66,14 +67,15 @@
 - (void)setCurrentTime:(NSTimeInterval)currentTime {
 	_currentTime = currentTime;
 	
-	self.currentTimeLabel.text = [NSString timecodeStringFromSeconds:currentTime];
+	self.currentTimeLabel.timecode = currentTime;
 	self.progressSlider.value = currentTime / self.duration;
 }
 
 - (void)setDuration:(NSTimeInterval)duration {
 	_duration = duration;
 	
-	self.durationLabel.text = [NSString timecodeStringFromSeconds:duration];
+	self.durationLabel.timecode = duration;
+	self.currentTimeLabel.maxTimecode = duration;
 }
 
 - (void)setPlaying:(BOOL)playing {
