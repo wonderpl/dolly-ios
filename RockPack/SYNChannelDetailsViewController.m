@@ -157,9 +157,6 @@
     
     self.btnAvatar.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     self.btnAvatar.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
-    //    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
-    //    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
-    
     
     if (IS_IPHONE)
     {
@@ -196,11 +193,6 @@
                                                  blue: (42.0f / 255.0f)
                                                 alpha: 1.0f];
     
-    
-    
-    //programmatically seting the edgeinset for iphone and ipad
-    //Not able to set within the nib
-    
     if (IS_IPHONE)
     {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
@@ -208,12 +200,11 @@
     
     if (IS_IPAD)
     {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(517, 0, 0, 0);
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(494, 0, 0, 0);
     }
     
     if (self.mode == kChannelDetailsFavourites) {
         // self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(490, 0, 0, 0);
-        
     }
     
     //not used yet
@@ -230,25 +221,8 @@
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
-    //[self.navigationItem.backBarButtonItem setTitle:@""];
-    
-//    if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
-//    {
-//        [[NSNotificationCenter defaultCenter] addObserver: self
-//                                                 selector: @selector(reloadUserImage:)
-//                                                     name: kUserDataChanged
-//                                                   object: nil];
-//    }
     
     self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-    
-    
-    
-    if (self.channel.videoInstances.count == 0 && ![self.channel.uniqueId isEqualToString: kNewChannelPlaceholderId])
-    {
-        //        [self showNoVideosMessage: NSLocalizedString(@"channel_screen_loading_videos", nil)
-        //                       withLoader: YES];
-    }
     
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
@@ -323,6 +297,7 @@
         [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
         [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
         [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
+        [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
         [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:self.lblNoVideos.font.pointSize]];
@@ -332,13 +307,13 @@
         [self.lblFullName setFont:[UIFont regularCustomFontOfSize:self.lblFullName.font.pointSize]];
         [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:self.lblChannelTitle.font.pointSize]];
         [self.lblDescription setFont:[UIFont lightCustomFontOfSize:self.lblDescription.font.pointSize]];
+        [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:self.lblDescription.font.pointSize]];
+
         [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:self.btnShowFollowers.titleLabel.font.pointSize]];
         [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:self.btnShowVideos.titleLabel.font.pointSize]];
         [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:self.lblNoVideos.font.pointSize]];
     }
 
-    
-    
     [self.videoThumbnailCollectionView registerNib:[SYNCollectionVideoCell nib]
                         forCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]];
     
@@ -361,9 +336,9 @@
 
     [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     
-    [[self.txtFieldChannelName layer] setCornerRadius:0];
+    [self.txtViewDescription setTextColor:[UIColor dollyTextMediumGray]];
     
-    [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
+    [[self.txtFieldChannelName layer] setCornerRadius:0];
     
     [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     if (IS_RETINA)
@@ -586,14 +561,11 @@
 -(void) moveHeader:(CGFloat) offset
 {
     if (IS_IPHONE ) {
-        // offset *=2;
-        //iphone port
         offset +=self.videoThumbnailCollectionView.contentInset.top;
     }
     
     if (IS_IPAD) {
-        //ipad port
-        offset +=520;
+        offset +=self.videoThumbnailCollectionView.contentInset.top;
         
     }
     CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
@@ -1581,8 +1553,6 @@
 
 - (void) deleteChannel
 {
-    
-    
     // return to previous screen as if the back button tapped
     
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
@@ -1733,6 +1703,7 @@
                                              //
                                              
                                              
+                                            
                                              if(self.mode == kChannelDetailsModeEdit)
                                                  [self setVideosForChannelById: channelId //  2nd step of the creation process
                                                                      isUpdated: YES];
@@ -1879,9 +1850,9 @@
         
         if ([textView.text isEqualToString:NSLocalizedString(@"description_placeholder", @"placeholder for editing")]) {
             textView.text = @"";
-            textView.textColor = [UIColor dollyTextMediumGray];         }
+//            textView.textColor = [UIColor dollyTextLightGray];
+        }
     }
-
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
@@ -1890,7 +1861,7 @@
         
         if ([textView.text isEqualToString:@""]) {
             textView.text = NSLocalizedString(@"description_placeholder", @"placeholder for editing");
-            textView.textColor = [UIColor dollyTextDarkGray];
+//            textView.textColor = [UIColor dollyTextDarkGray];
         }
     }
 }
