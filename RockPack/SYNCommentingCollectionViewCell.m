@@ -181,7 +181,7 @@
     else if (components.hour > 0)
          dateDifferenceString =  [NSString stringWithFormat: @"%i hour%@", components.hour, (components.hour > 1 ? @"s" : @"")];
     else if (components.minute > 0)
-         dateDifferenceString =  [NSString stringWithFormat: @"%i min%@ ago", components.minute, (components.minute > 1 ? @"s" : @"")];
+         dateDifferenceString =  [NSString stringWithFormat: @"%i min%@", components.minute, (components.minute > 1 ? @"s" : @"")];
     else
         dateDifferenceString = @"now";
     
