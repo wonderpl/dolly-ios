@@ -19,6 +19,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNMasterViewController.h"
 #import "UIButton+WebCache.h"
+#import "SYNGenreColorManager.h"
 
 @import QuartzCore;
 
@@ -175,7 +176,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
-    
+
     [self.categoriesCollectionView reloadData];
     
     
@@ -239,10 +240,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // if we are on the last cell of the section, hide the separator line
     categoryCell.separator.hidden = (BOOL)(indexPath.item == (currentGenre.subgenres.count - 1));
-    categoryCell.backgroundColor = [UIColor colorWithHex:currentGenre.colorValue];
-    
+    categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
     categoryCell.label.text = subgenre.name;
-    
     
     return categoryCell;
 }
