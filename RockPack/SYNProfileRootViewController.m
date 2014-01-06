@@ -2291,11 +2291,11 @@
         self.segmentedControlsView.alpha = ALPHA_IN_EDIT;
         self.channelThumbnailCollectionView.alpha = ALPHA_IN_EDIT;
         self.subscriptionThumbnailCollectionView.alpha = ALPHA_IN_EDIT;
+        self.profileImageView.alpha = ALPHA_IN_EDIT;
         
         self.editButton.alpha = 0.0f;
         self.moreButton.alpha = 0.0f;
         self.followersCountButton.alpha = 0.0f;
-        self.profileImageView.alpha = 0.0f;
         self.followersCountButton.alpha = 0.0f;
         
         self.barBtnBack = self.navigationItem.leftBarButtonItem;
@@ -2340,6 +2340,7 @@
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = 1.0f;
+        self.profileImageView.alpha = 1.0f;
         self.segmentedControlsView.alpha = 1.0f;
         self.editButton.alpha = 1.0f;
         self.moreButton.alpha = 1.0f;
@@ -2350,7 +2351,6 @@
         self.navigationItem.leftBarButtonItem = self.barBtnBack;
         self.navigationItem.rightBarButtonItem = nil;
         self.aboutMeTextView.backgroundColor = [UIColor whiteColor];
-        self.profileImageView.alpha = 1.0f;
         
         self.uploadAvatarButton.alpha = 0.0f;
         self.uploadCoverPhotoButton.alpha = 0.0f;

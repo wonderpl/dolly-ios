@@ -206,18 +206,18 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Mg3-SN-ejj" secondAttribute="trailing" constant="107" id="0dN-PM-G1A"/>
                         <constraint firstItem="R5e-8b-TEg" firstAttribute="top" secondItem="XoE-Jb-ERN" secondAttribute="top" constant="247" id="3cI-b9-9my"/>
-                        <constraint firstItem="lPO-sd-9aT" firstAttribute="centerY" secondItem="uAO-BP-yje" secondAttribute="centerY" constant="-100" id="Dbt-bC-ozU"/>
+                        <constraint firstItem="lPO-sd-9aT" firstAttribute="top" secondItem="XoE-Jb-ERN" secondAttribute="top" constant="3" id="Bj2-uH-JwQ"/>
                         <constraint firstAttribute="width" constant="314" id="DyS-gW-BsP"/>
                         <constraint firstItem="TRR-mm-3I5" firstAttribute="top" secondItem="XoE-Jb-ERN" secondAttribute="top" constant="200" id="DzC-u7-5u1"/>
-                        <constraint firstItem="uAO-BP-yje" firstAttribute="top" secondItem="lPO-sd-9aT" secondAttribute="bottom" constant="31" id="NLN-Js-mH5"/>
                         <constraint firstAttribute="trailing" secondItem="TRR-mm-3I5" secondAttribute="trailing" id="Tkx-YG-etA"/>
+                        <constraint firstAttribute="trailing" secondItem="lPO-sd-9aT" secondAttribute="trailing" constant="109" id="Ua6-hM-5em"/>
                         <constraint firstAttribute="bottom" secondItem="uAO-BP-yje" secondAttribute="bottom" constant="110" id="X08-1Q-Kc1"/>
                         <constraint firstItem="EYi-UE-pTE" firstAttribute="top" secondItem="XoE-Jb-ERN" secondAttribute="top" constant="200" id="ZPK-Ih-ISt"/>
                         <constraint firstItem="uAO-BP-yje" firstAttribute="leading" secondItem="XoE-Jb-ERN" secondAttribute="leading" id="c0M-lO-Z7h"/>
                         <constraint firstAttribute="trailing" secondItem="R5e-8b-TEg" secondAttribute="trailing" constant="34" id="hdw-WT-j0O"/>
-                        <constraint firstItem="lPO-sd-9aT" firstAttribute="leading" secondItem="uAO-BP-yje" secondAttribute="trailing" constant="-205" id="i6C-iN-RsS"/>
                         <constraint firstItem="uAO-BP-yje" firstAttribute="top" secondItem="XoE-Jb-ERN" secondAttribute="top" constant="130" id="jxv-IM-7oi"/>
                         <constraint firstAttribute="height" constant="282" id="kOb-0F-jBo"/>
+                        <constraint firstItem="lPO-sd-9aT" firstAttribute="leading" secondItem="XoE-Jb-ERN" secondAttribute="leading" constant="109" id="kpm-47-Ore"/>
                         <constraint firstAttribute="trailing" secondItem="EYi-UE-pTE" secondAttribute="trailing" id="mbF-oM-xc1"/>
                         <constraint firstAttribute="bottom" secondItem="Mg3-SN-ejj" secondAttribute="bottom" constant="80" id="ovJ-bK-2cN"/>
                     </constraints>
@@ -238,7 +238,6 @@
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R50-Sy-iTx" userLabel="Button - Upload Avatar">
                     <rect key="frame" x="288" y="454" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonUpload.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
