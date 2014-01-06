@@ -35,7 +35,7 @@
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSFetchRequest *categoriesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Genre entityName]];
-	
+    categoriesFetchRequest.includesSubentities = NO;
     NSArray* genres = [appDelegate.mainManagedObjectContext executeFetchRequest:categoriesFetchRequest error:nil];
 	
 	NSMutableDictionary *genreColors = [NSMutableDictionary dictionary];
@@ -44,10 +44,10 @@
 		genreColors[genre.uniqueId] = [UIColor colorWithHex:genre.colorValue];
 		
         for (Genre *subGenre in genre.subgenres) {
-			genreColors[subGenre.uniqueId] = [UIColor colorWithHex:subGenre.colorValue];
+			genreColors[subGenre.uniqueId] = [UIColor colorWithHex: genre.colorValue];
         }
     }
-	
+
 	self.genreColors = genreColors;
 }
 
