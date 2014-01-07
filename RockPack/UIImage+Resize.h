@@ -13,5 +13,7 @@
 // TODO: Remove this category once we have replaced avatar capture
 + (UIImage*) scaleAndRotateImage: (UIImage*) image
                      withMaxSize: (int) newSize;
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
+
 
 @end
