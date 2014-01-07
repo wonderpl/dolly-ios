@@ -632,17 +632,14 @@
     }
     else
     {
-        // either a ChannelOwner of a Recomendation cell will link to a ChannelOwner (see SYNOnBoardingCell.m)
         
         ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
         
         if(!channelOwner)
             return;
         
-        if(socialControl.selected == NO)
+        if(channelOwner.subscribedByUserValue == NO)
         {
-//            [appDelegate.oAuthNetworkEngine subscribeAllForUserId: appDelegate.currentUser.uniqueId
-//                                                        subUserId: channelOwner.uniqueId
             
             [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
                                                completionHandler: ^(id responce) {
@@ -658,8 +655,6 @@
         }
         else
         {
-//            [appDelegate.oAuthNetworkEngine unsubscribeAllForUserId:appDelegate.currentUser.uniqueId
-//                                                          subUserId:channelOwner.uniqueId
             [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
                                                   completionHandler:^(id responce) {
                                                       
