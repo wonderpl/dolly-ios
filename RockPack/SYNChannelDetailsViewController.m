@@ -47,7 +47,6 @@
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
-
 @property (strong, nonatomic) IBOutlet UIButton *btnAvatar;
 @property (strong, nonatomic) IBOutlet UILabel *lblFullName;
 @property (strong, nonatomic) IBOutlet UILabel *lblDescription;
@@ -300,7 +299,7 @@
         [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
         [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
         [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:self.lblNoVideos.font.pointSize]];
+        [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:13]];
     }
     else
     {
