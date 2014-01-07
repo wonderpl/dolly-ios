@@ -234,6 +234,18 @@
 
 -(void) setBorder
 {
+    
+    if (IS_IPAD){
+        if (IS_RETINA)
+        {
+            [self.boarderView.layer setBorderWidth:0.5f];
+        }
+        else
+        {
+            [self.boarderView.layer setBorderWidth:1.0f];
+        }
+    }
+
 }
 
 

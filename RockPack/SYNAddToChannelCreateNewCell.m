@@ -30,8 +30,8 @@
     self.descriptionTextView.hidden = NO;
     self.descriptionTextView.alpha = 0.0f;
     
-    self.createNewButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.createNewButton.layer.borderWidth = 1.0f;
+//    self.createNewButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+//    self.createNewButton.layer.borderWidth = 1.0f;
     
     self.nameInputTextField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.nameInputTextField.layer.borderWidth = 1.0f;
@@ -60,6 +60,7 @@
     
     self.descriptionTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.descriptionTextView.layer.borderWidth = 1.0f;
+    self.descriptionTextView.backgroundColor = [ UIColor lightGrayColor];
     
     self.state = CreateNewChannelCellStateHidden;
     

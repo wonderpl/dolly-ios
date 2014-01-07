@@ -51,13 +51,8 @@
     [self.createCellButton.titleLabel setFont:[UIFont lightCustomFontOfSize:15.0f]];
     [self.descriptionPlaceholderLabel setFont:[UIFont lightCustomFontOfSize:14.0f]];
     
-    if (IS_IPAD) {
-        [self.createCellButton setBackgroundColor:[UIColor whiteColor]];
-    }
-    else
-    {
-        [self.createCellButton setBackgroundColor:[UIColor colorWithRed:241.0/255.0f green:241.0/255.0f blue:241.0/255.0f alpha:1.0f]];
-    }
+    [self.createCellButton setBackgroundColor:[UIColor whiteColor]];
+
 
 }
 
