@@ -932,20 +932,8 @@
                 {
                     [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", nil)];
                 }
-				
+				//text is set in the channelmidcell setChannel method
                 channelThumbnailCell.channel = channel;
-                
-                NSMutableString* videoCountString = [NSMutableString new];
-                
-//                if ([channel.totalVideosValue intValue] == 1) {
-//                    [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Video", nil)];
-//                    
-//                }
-//                else
-//                {
-//                    [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
-//                }
-//                    channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
                 [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
                 }
