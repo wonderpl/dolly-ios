@@ -73,7 +73,7 @@
                                         <color key="highlightedColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="ZTg-Ce-S2r" userLabel="View - Bottom Bar">
-                                        <rect key="frame" x="0.0" y="63" width="322" height="8"/>
+                                        <rect key="frame" x="0.0" y="63" width="320" height="8"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
