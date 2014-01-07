@@ -36,7 +36,7 @@
 #import "UINavigationBar+Appearance.h"
 
 #define kHeightChange 70.0f
-#define FULL_NAME_LABEL_IPHONE 149.0f
+#define FULL_NAME_LABEL_IPHONE 147.0f
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
