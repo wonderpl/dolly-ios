@@ -821,7 +821,7 @@
     //        DebugLog(@"New image width: %f, height%f", newImage.size.width, newImage.size.height);
     // We have to perform the image upload with an input stream
     
-    NSData *imageData = UIImageJPEGRepresentation(newImage, 0.10);
+    NSData *imageData = UIImageJPEGRepresentation(newImage, 0.70);
     
     // Other attempts at performing scaling
     //    NSData *imageData = UIImagePNGRepresentation(newImage);
