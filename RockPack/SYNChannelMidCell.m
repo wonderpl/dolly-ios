@@ -78,6 +78,17 @@
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:17]];
     }
     
+    if (IS_IPAD){
+        if (IS_RETINA)
+        {
+            [self.boarderView.layer setBorderWidth:0.5f];
+        }
+        else
+        {
+            [self.boarderView.layer setBorderWidth:1.0f];
+        }
+    }
+
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
@@ -132,7 +143,7 @@
     
     
     if (channel.subscribersCountValue == 1) {
-        self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscriber", nil)];
+        self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Follower", nil)];
 
     }
     else
@@ -223,16 +234,6 @@
 
 -(void) setBorder
 {
-    if (IS_IPAD){
-        if (IS_RETINA)
-        {
-            [self.boarderView.layer setBorderWidth:0.5f];
-        }
-        else
-        {
-            [self.boarderView.layer setBorderWidth:1.0f];
-        }
-    }
 }
 
 
