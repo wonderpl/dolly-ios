@@ -158,6 +158,15 @@ typedef void (^SearchResultCompleteBlock)(int);
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	NSIndexPath *selectedIndexPath = [[self.videosCollectionView indexPathsForSelectedItems] firstObject];
+	if (selectedIndexPath) {
+		[self.videosCollectionView deselectItemAtIndexPath:selectedIndexPath animated:YES];
+	}
+}
+
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
 {
     SYNPopupMessageView* pMsgView = [super displayPopupMessage:messageKey
