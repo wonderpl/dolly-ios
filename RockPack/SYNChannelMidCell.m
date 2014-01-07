@@ -129,9 +129,25 @@
         return;
     }
 	
-	self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscribers", nil)];
-	self.videoCountLabel.text = [NSString stringWithFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
-	
+    
+    
+    if (channel.subscribersCountValue == 1) {
+        self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscriber", nil)];
+
+    }
+    else
+    {
+        self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscribers", nil)];
+    }
+    
+    if (channel.totalVideosValueValue == 1) {
+        self.videoCountLabel.text = [NSString stringWithFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Video", nil)];
+        
+    }
+    else
+    {
+        self.videoCountLabel.text = [NSString stringWithFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
+	}
 	self.descriptionLabel.text = channel.channelDescription;
     
     // TODO: figure out which color to put according to category color
