@@ -520,82 +520,9 @@
     self.userNameLabel.text = self.channelOwner.username;
     self.fullNameLabel.text = self.channelOwner.displayName;
     
-    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
-    self.profileImageView.image = placeholderImage;
     
-    if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
-        
-        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
-        dispatch_async(downloadQueue, ^{
-            
-            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailLargeUrl ]];
-            
-            UIImage *tmpImage = [UIImage imageWithData: imageData];
-
-            //if statement for now as the db has urls for avatars that have not been uploaded
-            //should be able to get rid of it later
-            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    self.profileImageView.image = tmpImage;
-                });
-            }
-            
-        });
-        
-    }else{
-        
-        self.profileImageView.image = placeholderImage;
-    }
-//#warning set cover photo here
-
-    placeholderImage = [UIImage imageNamed: @"coverImageTest"];
-    
-    if (![self.channelOwner.coverPhotoURL isEqualToString:@""]){ // there is a url string
-        
-        NSArray *thumbnailURLItems = [self.channelOwner.thumbnailURL componentsSeparatedByString: @"/"];
-        
-        if (thumbnailURLItems.count >= 6)
-        {
-            NSString *thumbnailSizeString = thumbnailURLItems[5];
-            NSString *thumbnailUrlString;
-            if (IS_IPAD)
-            {
-                thumbnailUrlString = [self.channelOwner.coverPhotoURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
-            }
-            else
-            {
-                thumbnailUrlString = [self.channelOwner.coverPhotoURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
-            }
-            
-            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
-                            placeholderImage: placeholderImage
-                                     options: SDWebImageRetryFailed];
-        }
-
-//        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
-//        dispatch_async(downloadQueue, ^{
-//            
-//            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.coverPhotoURL ]];
-//            
-//            UIImage *tmpImage = [UIImage imageWithData: imageData];
-//            
-//            //if statement for now as the db has urls for avatars that have not been uploaded
-//            //should be able to get rid of it later
-//            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    
-//                    self.coverImage.image = tmpImage;
-//                });
-//            }
-//            
-//        });
-        
-    }else{
-        
-        self.coverImage.image = placeholderImage;
-    }
-    
+    [self setProfileImage:self.channelOwner.thumbnailURL];
+    [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     
@@ -619,6 +546,69 @@
     
     [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
     [self.followingTabButton .titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+}
+
+-(void) setProfileImage : (NSString*) thumbnailURL
+{
+    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+    self.profileImageView.image = placeholderImage;
+    
+    if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
+        
+        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailLargeUrl ]];
+            
+            UIImage *tmpImage = [UIImage imageWithData: imageData];
+            
+            //if statement for now as the db has urls for avatars that have not been uploaded
+            //should be able to get rid of it later
+            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    self.profileImageView.image = tmpImage;
+                });
+            }
+            
+        });
+    }else{
+        self.profileImageView.image = placeholderImage;
+    }
+}
+
+-(void) setCoverphotoImage: (NSString*) thumbnailURL
+{
+    
+   UIImage* placeholderImage = [UIImage imageNamed: @"coverImageTest"];
+    
+    if (![thumbnailURL isEqualToString:@""]){ // there is a url string
+        
+        NSArray *thumbnailURLItems = [thumbnailURL componentsSeparatedByString: @"/"];
+        
+        if (thumbnailURLItems.count >= 6)
+        {
+            NSString *thumbnailSizeString = thumbnailURLItems[5];
+            NSString *thumbnailUrlString;
+            if (IS_IPAD)
+            {
+                thumbnailUrlString = [thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
+            }
+            else
+            {
+                thumbnailUrlString = [thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
+            }
+            
+            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
+                            placeholderImage: placeholderImage
+                                     options: SDWebImageRetryFailed];
+        }
+        
+    }else{
+        
+        self.coverImage.image = placeholderImage;
+    }
+    
 }
 
 - (void) userDataChanged: (NSNotification*) notification
@@ -919,8 +909,6 @@
 			channelThumbnailCell.followButton.hidden = (self.modeType == kModeMyOwnProfile);
             
             [channelThumbnailCell.descriptionLabel setText:channel.channelDescription];
-            NSString* subscribersString = [NSString stringWithFormat: @"%lld %@",channel.subscribersCountValue, NSLocalizedString(@"Subscribers", nil)];
-            [channelThumbnailCell.followerCountLabel setText:subscribersString];
             
             channelThumbnailCell.channel = channel;
 			
@@ -949,8 +937,15 @@
                 
                 NSMutableString* videoCountString = [NSMutableString new];
                 
-                [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
-                channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
+//                if ([channel.totalVideosValue intValue] == 1) {
+//                    [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Video", nil)];
+//                    
+//                }
+//                else
+//                {
+//                    [videoCountString appendFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
+//                }
+//                    channelThumbnailCell.videoCountLabel.text = [NSString stringWithString:videoCountString];
                 
                 [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
                 }
@@ -1163,8 +1158,6 @@
         MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
             weakSelf.loadingMoreContent = NO;
             NSError *error = nil;
-            
-//            NSLog(@"Return from sub update%@", dictionary);
             
             [weakSelf.channelOwner setSubscriptionsDictionary: dictionary];
 //#warning cache all the channels to activity manager?
@@ -2653,9 +2646,11 @@ finishedWithImage: (UIImage *) image
                                                     image: image
                                         completionHandler: ^(NSDictionary* result)
      {
-         self.profileImageView.image = image;
+
+         [self setProfileImage:result[@"thumbnail_url"]];
          //[self.activityIndicator stopAnimating];
          self.avatarButton.enabled = YES;
+         
      }
                                              errorHandler: ^(id error)
      {
@@ -2683,7 +2678,9 @@ finishedWithImage: (UIImage *) image
                                                         image: image
                                             completionHandler: ^(NSDictionary* result)
          {
-             self.coverImage.image = image;
+             [self setCoverphotoImage:result[@"Location"]];
+
+
 //             [self.activityIndicator stopAnimating];
 //             self.avatarButton.enabled = YES;
          }
