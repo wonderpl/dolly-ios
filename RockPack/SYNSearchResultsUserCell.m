@@ -13,6 +13,7 @@
 #import "ChannelOwner.h"
 #import "SYNSocialButton.h"
 #import "SYNAvatarButton.h"
+#import "SYNActivityManager.h"
 
 @interface SYNSearchResultsUserCell ()
 
@@ -63,6 +64,16 @@
                                       options:SDWebImageRetryFailed];
     
     [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
+    
+    channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
+    
+    if (channelOwner.subscribedByUserValue == NO) {
+        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.followButton setTitle:@"Unfollow" forState:UIControlStateSelected];
+    }
 }
 
 - (UIView *)separatorView {
