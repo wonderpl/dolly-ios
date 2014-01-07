@@ -24,6 +24,7 @@
 #import "SYNAddToChannelFlowLayout.h"
 #import "UICollectionReusableView+Helpers.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SYNGenreColorManager.h"
 
 #define kAnimationExpansion 0.4f
 
@@ -161,6 +162,8 @@
 																						 forIndexPath:indexPath];
         
         existingChannel.titleLabel.text = channel.title;
+        
+        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
         
         cell = existingChannel;
     }

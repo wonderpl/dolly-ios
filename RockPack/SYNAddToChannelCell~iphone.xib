@@ -23,17 +23,30 @@
                         <color key="textColor" red="0.27450981740000002" green="0.27450981740000002" blue="0.27450981740000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHg-D9-N6c" userLabel="Bottom Bar">
+                        <rect key="frame" x="0.0" y="50" width="320" height="10"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="yD2-t0-jYF"/>
+                        </constraints>
+                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="xTe-zO-KuT" firstAttribute="leading" secondItem="PrB-3U-hnc" secondAttribute="leading" constant="20" id="McM-8h-Bce"/>
+                <constraint firstItem="qHg-D9-N6c" firstAttribute="centerX" secondItem="xTe-zO-KuT" secondAttribute="centerX" id="OBe-5i-xhy"/>
+                <constraint firstItem="qHg-D9-N6c" firstAttribute="leading" secondItem="PrB-3U-hnc" secondAttribute="leading" id="b9V-0a-Trq"/>
                 <constraint firstAttribute="centerY" secondItem="xTe-zO-KuT" secondAttribute="centerY" id="j4s-cc-GD4"/>
                 <constraint firstAttribute="trailing" secondItem="xTe-zO-KuT" secondAttribute="trailing" constant="20" id="pTb-Oy-yzi"/>
+                <constraint firstAttribute="bottom" secondItem="qHg-D9-N6c" secondAttribute="bottom" id="t3t-zS-qHV"/>
             </constraints>
             <size key="customSize" width="272" height="155"/>
             <connections>
+                <outlet property="bottomStripView" destination="qHg-D9-N6c" id="fHQ-ie-t9a"/>
                 <outlet property="titleLabel" destination="xTe-zO-KuT" id="c3z-jY-C1J"/>
             </connections>
         </collectionViewCell>
