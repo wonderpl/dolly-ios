@@ -19,8 +19,11 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-IY-mRy" customClass="UISlider">
-                    <rect key="frame" x="89" y="16" width="107" height="10"/>
+                    <rect key="frame" x="89" y="4" width="107" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="oQs-3a-YDo"/>
+                    </constraints>
                     <connections>
                         <action selector="sliderTouchDown:" destination="1" eventType="touchDown" id="T2J-rI-xQZ"/>
                         <action selector="sliderTouchUp:" destination="1" eventType="touchUpOutside" id="1xs-g8-Rxt"/>
@@ -82,7 +85,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="2HY-ng-bdK" secondAttribute="centerY" id="1uY-Kv-the"/>
-                <constraint firstItem="1TK-HE-31a" firstAttribute="bottom" secondItem="UPL-IY-mRy" secondAttribute="bottom" constant="1" id="4DP-nx-Sfq"/>
                 <constraint firstItem="X9w-7m-qRt" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" constant="-3" id="9ID-BT-QAo"/>
                 <constraint firstAttribute="trailing" secondItem="Kmx-LH-wU8" secondAttribute="trailing" constant="4" id="A1f-Ar-Reh"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="X9w-7m-qRt" secondAttribute="trailing" constant="14" id="FvN-w8-MnU"/>
@@ -92,12 +94,12 @@
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="UPL-IY-mRy" secondAttribute="leading" id="bFK-vf-WoG"/>
                 <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="9Bb-Gq-cae" secondAttribute="trailing" id="bZA-Af-Ba5"/>
                 <constraint firstAttribute="centerY" secondItem="X9w-7m-qRt" secondAttribute="centerY" id="cdJ-VL-SRo"/>
+                <constraint firstAttribute="centerY" secondItem="UPL-IY-mRy" secondAttribute="centerY" constant="1" id="dgA-9y-rvw"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="trailing" secondItem="UPL-IY-mRy" secondAttribute="trailing" id="eiy-UR-iBX"/>
                 <constraint firstAttribute="centerY" secondItem="9Bb-Gq-cae" secondAttribute="centerY" id="nMv-Wb-rB5"/>
                 <constraint firstAttribute="centerY" secondItem="Kmx-LH-wU8" secondAttribute="centerY" id="oAE-WV-mJz"/>
                 <constraint firstAttribute="centerY" secondItem="Rem-G5-66n" secondAttribute="centerY" id="oRO-1z-QW6"/>
                 <constraint firstItem="9Bb-Gq-cae" firstAttribute="leading" secondItem="Rem-G5-66n" secondAttribute="trailing" constant="5" id="qBT-ik-T2X"/>
-                <constraint firstItem="1TK-HE-31a" firstAttribute="top" secondItem="UPL-IY-mRy" secondAttribute="top" constant="1" id="tog-K2-y2T"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
