@@ -52,7 +52,7 @@ static const CGFloat TextSideInset = 20.0;
 		self.textLayer.frame = self.bounds;
 		self.textOverlayLayer.frame = self.bounds;
 		
-		NSString *title = [self.videoInstance.title uppercaseString];
+		NSString *title = self.videoInstance.title;
 		self.textLayer.mask = [self createOverlayMaskWithTitle:title subtitle:LoadingMessage];
 		self.textOverlayLayer.mask = [self createOverlayMaskWithTitle:title subtitle:LoadingMessage];
 	}
