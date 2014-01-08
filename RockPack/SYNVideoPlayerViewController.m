@@ -22,6 +22,7 @@
 #import "SYNActivityManager.h"
 #import "SYNAddToChannelViewController.h"
 #import "SYNCommentingViewController.h"
+#import "SYNRotatingPopoverController.h"
 #import <SDWebImageManager.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
@@ -34,7 +35,7 @@
 
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
-@property (nonatomic, strong) UIPopoverController *commentPopoverController;
+@property (nonatomic, strong) SYNRotatingPopoverController *commentPopoverController;
 
 @end
 
@@ -103,14 +104,6 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
 	Class animationClass = [self animationClassForViewController:dismissed];
 	return [animationClass animatorForPresentation:NO];
-}
-
-#pragma mark - UIPopoverControllerDelegate
-
-- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view {
-	CGRect buttonRect = [self.view convertRect:self.commentButton.bounds fromView:self.commentButton];
-	
-	*rect = buttonRect;
 }
 
 #pragma mark - SYNVideoPlayerDelegate
@@ -203,15 +196,11 @@
 	if (IS_IPHONE) {
 		[self.navigationController pushViewController:viewController animated:YES];
 	} else {
-		CGRect buttonRect = [self.view convertRect:button.bounds fromView:button];
-		
-		UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
-		popoverController.delegate = self;
-		
-		[popoverController presentPopoverFromRect:buttonRect
-										   inView:self.view
-						 permittedArrowDirections:UIPopoverArrowDirectionRight
-										 animated:YES];
+		SYNRotatingPopoverController *popoverController = [[SYNRotatingPopoverController alloc] initWithContentViewController:viewController];
+		[popoverController presentPopoverFromButton:button
+											 inView:self.view
+						   permittedArrowDirections:UIPopoverArrowDirectionRight
+										   animated:YES];
 		
 		self.commentPopoverController = popoverController;
 	}
