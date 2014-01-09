@@ -82,8 +82,8 @@
     
     [self.navigationController popViewControllerAnimated: YES];
     
-    [self dismissViewControllerAnimated: YES
-                             completion: nil];
+//    [self dismissViewControllerAnimated: YES
+//                             completion: nil];
 }
 
 
@@ -281,7 +281,7 @@
 
 - (NSUInteger) supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskAll;
 }
 
 @end
