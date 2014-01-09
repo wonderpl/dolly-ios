@@ -55,7 +55,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = NSLocalizedString(@"MOVE AND SCALE", @"");
+    self.title = NSLocalizedString(@"Move and Scale", @"");
     
     [self _setupNavigationBar];
     [self _setupCropView];
@@ -105,49 +105,21 @@
     UIView *containerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 200, 28)];
     
     containerView.backgroundColor = [UIColor clearColor];
-    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(-10, 0, 180, 28)];
+    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 3, 200, 28)];
     label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = NSTextAlignmentLeft;
+    
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     label.text = self.navigationItem.title;
     [containerView addSubview: label];
     self.navigationItem.titleView = containerView;
     
-    UIButton *customCancelButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    UIImage *customCancelButtonImage = [UIImage imageNamed: @"ButtonMoveAndScaleCancel.png"];
-    UIImage *customCancelButtonHighlightedImage = [UIImage imageNamed: @"ButtonMoveAndScaleCancelHighlighted.png"];
+    UIBarButtonItem *customCancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"cancel" style:UIBarButtonSystemItemCancel target:self action:@selector(_actionCancel)];
     
-    [customCancelButton setImage: customCancelButtonImage
-                        forState: UIControlStateNormal];
-    
-    [customCancelButton setImage: customCancelButtonHighlightedImage
-                        forState: UIControlStateHighlighted];
-    
-    [customCancelButton addTarget: self
-                           action: @selector(_actionCancel)
-                 forControlEvents: UIControlEventTouchUpInside];
-    
-    customCancelButton.frame = CGRectMake(0.0, 0.0, customCancelButtonImage.size.width, customCancelButtonImage.size.height);
-    UIBarButtonItem *customCancelButtonItem = [[UIBarButtonItem alloc] initWithCustomView: customCancelButton];
-    
+
+    UIBarButtonItem *customUseButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"use" style:UIBarButtonItemStylePlain target:self action:@selector(_actionUse)];
+
     self.navigationItem.leftBarButtonItem = customCancelButtonItem;
-    
-    UIButton *customUseButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    UIImage *customUseButtonImage = [UIImage imageNamed: @"ButtonMoveAndScaleUse.png"];
-    UIImage *customUseButtonHighlightedImage = [UIImage imageNamed: @"ButtonMoveAndScaleUseHighlighted.png"];
-    
-    [customUseButton setImage: customUseButtonImage
-                     forState: UIControlStateNormal];
-    
-    [customUseButton setImage: customUseButtonHighlightedImage
-                     forState: UIControlStateHighlighted];
-    
-    [customUseButton addTarget: self
-                        action: @selector(_actionUse)
-              forControlEvents: UIControlEventTouchUpInside];
-    
-    customUseButton.frame = CGRectMake(0.0, 0.0, customUseButtonImage.size.width, customUseButtonImage.size.height);
-    UIBarButtonItem *customUseButtonItem = [[UIBarButtonItem alloc] initWithCustomView: customUseButton];
     
     self.navigationItem.rightBarButtonItem = customUseButtonItem;
 }
