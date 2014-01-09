@@ -27,7 +27,9 @@
 
 @property(nonatomic,weak) UIViewController* hostViewController; //< view controller hosting the picker. will receive commands to present the picker
 @property(nonatomic,weak) id<SYNImagePickerControllerDelegate> delegate; //< picker delegate
-@property (nonatomic,strong) GKImagePicker* imagePicker;
+@property (nonatomic,strong) GKImagePicker* gkImagePicker;
+@property (nonatomic,strong) UIPopoverController* cameraPopoverController;
+
 
 /**
 	recommended initialiser. assigns a host view controller which will present the image picker.
