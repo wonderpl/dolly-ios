@@ -36,6 +36,9 @@
         _imagePickerController = [[UIImagePickerController alloc] init];
         _imagePickerController.delegate = self;
         _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+#warning uirectedgenone
+        //        [_imagePickerController setEdgesForExtendedLayout: UIRectEdgeNone];
+
     }
     return self;
 }
@@ -71,7 +74,15 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
     GKImageCropViewController *cropController = [[GKImageCropViewController alloc] init];
+
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera && IS_IPAD) {
+        self.cropSize = CGSizeMake(self.cropSize.width*1.6, self.cropSize.height*1.6);
+    }
+    
+    cropController.cropSize = self.cropSize;
+
     cropController.preferredContentSize = picker.preferredContentSize;
     UIImage* image = info[UIImagePickerControllerOriginalImage];
 
@@ -86,7 +97,6 @@
     }
     cropController.sourceImage = image;
     cropController.resizeableCropArea = self.resizeableCropArea;
-    cropController.cropSize = self.cropSize;
     cropController.delegate = self;
     [picker pushViewController:cropController animated:YES];
     
