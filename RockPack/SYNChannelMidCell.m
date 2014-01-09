@@ -12,6 +12,9 @@
 #import "UIFont+SYNFont.h"
 #import "UIImage+Tint.h"
 #import <UIImageView+WebCache.h>
+#import "ChannelOwner.h"
+#import "SYNAppDelegate.h"
+
 @import QuartzCore;
 
 #define kShowDescptionIPhone 250.0f
@@ -161,11 +164,25 @@
 	}
 	self.descriptionLabel.text = channel.channelDescription;
     
-    // TODO: figure out which color to put according to category color
-    self.bottomBarView.backgroundColor = [UIColor grayColor];
     
-    self.videoTitleLabel.text = [_channel.title uppercaseString];
-    [self.videoTitleLabel setFont:[UIFont regularCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
+    if (channel.favouritesValue)
+    {
+        SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+        if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
+        {
+            self.videoTitleLabel.text = [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ;
+        }
+        else
+        {
+            self.videoTitleLabel.text =
+            [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
+        }
+    }
+    else
+    {
+        self.videoTitleLabel.text =  channel.title;
+    }    [self.videoTitleLabel setFont:[UIFont regularCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
     
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     

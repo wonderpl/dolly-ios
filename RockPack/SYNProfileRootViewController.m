@@ -935,8 +935,12 @@
 				//text is set in the channelmidcell setChannel method
                 channelThumbnailCell.channel = channel;
                 
+                
                 [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
-                }
+                
+                channelThumbnailCell.followButton.hidden = NO;
+                
+            }
         }
         if(self.modeType == kModeOtherUsersProfile)
         {
@@ -949,6 +953,9 @@
                 [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
             }
         }
+        
+       
+
 
         channelThumbnailCell.viewControllerDelegate = self;
         
@@ -1422,7 +1429,6 @@
                 tmpFrame.origin.y = 0;
                 self.coverImage.frame = tmpFrame;
                 self.backgroundView.transform = move;
-                
             }
             else
             {
