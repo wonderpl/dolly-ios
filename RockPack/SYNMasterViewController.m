@@ -104,16 +104,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardNotified:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardNotified:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:self.view.window];
-    
     // add background view //
     
     self.backgroundOverlayView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -449,50 +439,6 @@
         FinishedBlock(YES);
     }
     
-}
-
--(void)keyboardNotified:(NSNotification*)notification
-{
-    if(IS_IPAD)
-    {
-        
-        if(self.overlayController && [self.overlayController isKindOfClass:[SYNCommentingViewController class]])
-        {
-            NSDictionary* userInfo = [notification userInfo];
-            NSTimeInterval animationDuration;
-            UIViewAnimationCurve animationCurve;
-            
-            // Get the values from the Keyboard Animation to match it exactly
-            
-            CGRect keyboardFrame;
-            [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
-            [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
-            [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
-            
-            CGRect overlayFrame = self.overlayController.view.frame;
-            if([notification.name isEqualToString:UIKeyboardWillShowNotification])
-                overlayFrame.origin.y = 60.0f;
-            else if ([notification.name isEqualToString:UIKeyboardWillHideNotification])
-                overlayFrame = self.overlayControllerFrame;
-            
-            
-            
-            __weak SYNMasterViewController* wself = self;
-            [UIView animateWithDuration:animationDuration delay:0.0f
-                                options:(animationCurve << 16) // convert AnimationCurve to AnimationOption
-                             animations:^{
-                                 
-                                 wself.overlayController.view.frame = overlayFrame;
-                             } completion:nil];
-            
-        }
-        
-        
-    }
-    else // is IPHONE
-    {
-        
-    }
 }
 
 #pragma mark - Video Overlay View

@@ -61,6 +61,7 @@
         {
             [self showErrorPopUpForError: error];
         }
+		errorBlock(error);
         
         DebugLog(@"API request failed");
     }];

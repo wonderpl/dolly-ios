@@ -39,7 +39,7 @@
 }
 
 @property (nonatomic, strong) IBOutlet UIButton *closeButton;
-@property (nonatomic, strong) IBOutlet UIButton *confirmButtom;
+@property (nonatomic, strong) IBOutlet UIButton *confirmButton;
 
 @property (nonatomic, strong) IBOutlet UICollectionView *currentChannelsCollectionView;
 
@@ -87,6 +87,8 @@
     
     self.currentChannelsCollectionView.scrollsToTop = NO;
 
+	self.closeButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.closeButton.titleLabel.font.pointSize];
+	self.confirmButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.confirmButton.titleLabel.font.pointSize];
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     self.selectedChannel = nil;
@@ -107,7 +109,7 @@
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.closeButton.enabled = YES;
-    self.confirmButtom.enabled = YES;
+    self.confirmButton.enabled = YES;
     
     // Copy Channels
     self.channels = [appDelegate.currentUser.channels array];
@@ -233,8 +235,8 @@
                     // show the button if hidden and change its title
                     
                     self.selectedChannel = nil;
-                    self.confirmButtom.hidden = NO;
-                    [self.confirmButtom setTitle:@"Create" forState:UIControlStateNormal];
+                    self.confirmButton.hidden = NO;
+                    [self.confirmButton setTitle:@"Create" forState:UIControlStateNormal];
                     
                 }
                 
@@ -315,7 +317,7 @@
 
 - (IBAction)closeButtonPressed:(id)sender {
     self.closeButton.enabled = NO;
-    self.confirmButtom.enabled = NO;
+    self.confirmButton.enabled = NO;
     
     [self finishingPresentation];
 	
@@ -405,13 +407,13 @@
         
         
         
-        self.confirmButtom.hidden = NO;
-        [self.confirmButtom setTitle:@"Add" forState:UIControlStateNormal];
+        self.confirmButton.hidden = NO;
+        [self.confirmButton setTitle:@"Add" forState:UIControlStateNormal];
     }
     else // passed nil probably by pressing on the "create new channel" cell
     {
         self.selectedCell.selected = NO;
-        self.confirmButtom.hidden = YES;
+        self.confirmButton.hidden = YES;
     }
     
     _selectedChannel = selectedChannel;

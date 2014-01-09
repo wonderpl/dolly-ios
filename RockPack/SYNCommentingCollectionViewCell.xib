@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -43,15 +43,15 @@
                                 </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Johny Smith" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-lB-F0U" userLabel="Name Label">
-                                <rect key="frame" x="53" y="8" width="213" height="18"/>
+                                <rect key="frame" x="53" y="7" width="213" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiN-lJ-ozS" userLabel="Comments Text View">
-                                <rect key="frame" x="48" y="24" width="213" height="18"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiN-lJ-ozS" userLabel="Comments Text View">
+                                <rect key="frame" x="48" y="25" width="213" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,11 +59,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDT-Lu-WjD" userLabel="Time Label">
-                                <rect key="frame" x="267" y="14" width="48" height="21"/>
+                                <rect key="frame" x="277" y="14" width="38" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="d7c-ve-bOK"/>
-                                    <constraint firstAttribute="width" constant="48" id="eEN-we-BY0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,16 +83,16 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="EDT-Lu-WjD" secondAttribute="trailing" constant="5" id="1hc-gB-Ll4"/>
-                            <constraint firstAttribute="bottom" secondItem="BiN-lJ-ozS" secondAttribute="bottom" constant="6" id="IXx-7V-FVo"/>
-                            <constraint firstItem="dvh-lB-F0U" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="8" id="PlC-JT-QfC"/>
+                            <constraint firstItem="BiN-lJ-ozS" firstAttribute="top" secondItem="dvh-lB-F0U" secondAttribute="bottom" id="9hu-RU-j34"/>
+                            <constraint firstAttribute="bottom" secondItem="BiN-lJ-ozS" secondAttribute="bottom" constant="7" id="IXx-7V-FVo"/>
+                            <constraint firstAttribute="centerY" secondItem="vy5-fE-JoI" secondAttribute="centerY" constant="-1" id="O5s-yU-InZ"/>
+                            <constraint firstItem="dvh-lB-F0U" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="7" id="PlC-JT-QfC"/>
                             <constraint firstAttribute="trailing" secondItem="dvh-lB-F0U" secondAttribute="trailing" constant="54" id="PrI-ZO-5vf"/>
                             <constraint firstItem="dvh-lB-F0U" firstAttribute="leading" secondItem="ttY-l5-C2J" secondAttribute="leading" constant="53" id="XVD-yP-IFt"/>
                             <constraint firstAttribute="centerY" secondItem="EDT-Lu-WjD" secondAttribute="centerY" constant="-0.5" id="d1s-m4-m6d"/>
                             <constraint firstAttribute="centerY" secondItem="HLr-5B-E4H" secondAttribute="centerY" id="hQQ-Cf-9Ei"/>
                             <constraint firstItem="vy5-fE-JoI" firstAttribute="leading" secondItem="ttY-l5-C2J" secondAttribute="leading" constant="8" id="hey-fh-mpm"/>
-                            <constraint firstItem="BiN-lJ-ozS" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="24" id="o8F-SG-wWr"/>
                             <constraint firstAttribute="trailing" secondItem="BiN-lJ-ozS" secondAttribute="trailing" constant="59" id="rHS-3Q-kOM"/>
-                            <constraint firstItem="vy5-fE-JoI" firstAttribute="top" secondItem="ttY-l5-C2J" secondAttribute="top" constant="8" id="snU-5b-M9Y"/>
                             <constraint firstItem="BiN-lJ-ozS" firstAttribute="leading" secondItem="ttY-l5-C2J" secondAttribute="leading" constant="48" id="ttD-AB-YhF"/>
                             <constraint firstAttribute="trailing" secondItem="HLr-5B-E4H" secondAttribute="trailing" constant="17" id="wYb-b3-W2S"/>
                         </constraints>

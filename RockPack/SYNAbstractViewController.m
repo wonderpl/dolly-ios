@@ -32,6 +32,7 @@
 #import "VideoInstance.h"
 #import "GAI+Tracking.h"
 #import "SYNActivityManager.h"
+#import "SYNRotatingPopoverController.h"
 @import QuartzCore;
 
 #define kScrollContentOff 100.0f
@@ -50,6 +51,7 @@
 @property (nonatomic, strong) SYNPopupMessageView* popupMessageView;
 @property (nonatomic, assign) ScrollingDirection scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
+@property (nonatomic, strong) SYNRotatingPopoverController *commentingPopoverController;
 
 @end
 
@@ -300,39 +302,26 @@
 }
 
 
-- (void) commentControlPressed:(SYNSocialButton *)socialButton
-{
-    if(!socialButton.dataItemLinked)
-        return;
-    
-    SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
-    
-    if(IS_IPAD)
-    {
-        // in cell coords
-        CGRect buttonFrame = socialButton.frame;
-        
-        // from in cell coords to out cell coords
-        buttonFrame = [self.view convertRect:buttonFrame fromView:socialButton.superview];
-        
-        // from current vc coords to master view coords
-        buttonFrame = [appDelegate.masterViewController.view convertRect:buttonFrame fromView:self.view];
-        
-        // if iPhone the rect is ingored
-        [appDelegate.masterViewController addOverlayController:commentController
-                                                      animated:YES
-                                                pointingToRect:buttonFrame];
-    }
-    else
-    {
-        [self.navigationController pushViewController:commentController animated:YES];
-    }
-    
+- (void) commentControlPressed:(SYNSocialButton *)socialButton {
+	if (!socialButton.dataItemLinked) {
+		return;
+	}
 
-    
+	SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
+
+	if (IS_IPAD) {
+		SYNRotatingPopoverController *popoverController = [[SYNRotatingPopoverController alloc] initWithContentViewController:commentController];
+		
+		[popoverController presentPopoverFromButton:socialButton
+										   inView:self.view
+						 permittedArrowDirections:UIPopoverArrowDirectionRight
+										 animated:YES];
+		
+		self.commentingPopoverController = popoverController;
+	} else {
+		[self.navigationController pushViewController:commentController animated:YES];
+	}
 }
-
-
 
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
