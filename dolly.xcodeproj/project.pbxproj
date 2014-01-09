@@ -2907,6 +2907,7 @@
 		E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoLoadingView.h; sourceTree = "<group>"; };
 		E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingView.m; sourceTree = "<group>"; };
 		E91F04531844C4410009D610 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E92A2C5D187F0A7C002A6447 /* SYNVideoCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoCellDelegate.h; sourceTree = "<group>"; };
 		E92D3356184CDFEA0025D1DF /* UICollectionReusableView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionReusableView+Helpers.h"; sourceTree = "<group>"; };
 		E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionReusableView+Helpers.m"; sourceTree = "<group>"; };
 		E92D3359184E239C0025D1DF /* SYNPagingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPagingModel.h; sourceTree = "<group>"; };
@@ -5797,6 +5798,7 @@
 			isa = PBXGroup;
 			children = (
 				BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */,
+				E92A2C5D187F0A7C002A6447 /* SYNVideoCellDelegate.h */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";

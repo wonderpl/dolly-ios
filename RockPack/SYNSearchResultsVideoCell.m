@@ -14,14 +14,22 @@
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "Channel.h"
+#import "ChannelOwner.h"
+#import "SYNVideoCellDelegate.h"
 #import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
 
 @interface SYNSearchResultsVideoCell ()
 
-@property (strong, nonatomic) IBOutlet SYNSocialButton *likeSocialButton;
-@property (strong, nonatomic) IBOutlet SYNSocialAddButton *addSocialButton;
-@property (strong, nonatomic) IBOutlet SYNSocialButton *shareSocialButton;
-@property (strong, nonatomic) IBOutlet SYNSocialCommentButton *commentSocialButton;
+@property (nonatomic, strong) IBOutlet UIButton *ownerThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton *ownerNameButton;
+@property (nonatomic, strong) IBOutlet UIButton *channelNameButton;
+
+@property (nonatomic, strong) IBOutlet SYNSocialButton *likeSocialButton;
+@property (nonatomic, strong) IBOutlet SYNSocialAddButton *addSocialButton;
+@property (nonatomic, strong) IBOutlet SYNSocialButton *shareSocialButton;
+@property (nonatomic, strong) IBOutlet SYNSocialCommentButton *commentSocialButton;
 
 @end
 
@@ -55,9 +63,15 @@
     if (!_videoInstance)
         return;
     
-    
-    
-    
+	NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.channel.channelOwner.thumbnailURL];
+	[self.ownerThumbnailButton setImageWithURL:thumbnailURL
+									  forState:UIControlStateNormal
+							  placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
+									   options:SDWebImageRetryFailed];
+	
+	[self.ownerNameButton setTitle:videoInstance.channel.channelOwner.displayName
+						  forState:UIControlStateNormal];
+    [self.channelNameButton setTitle:videoInstance.channel.title forState:UIControlStateNormal];
     
     // == timestamp == //
     
@@ -131,6 +145,13 @@
                                 options: SDWebImageRetryFailed];
 }
 
+- (IBAction)channelButtonTapped:(UIButton *)button {
+	[self.delegate channelButtonPressedForCell:self];
+}
+
+- (IBAction)profileButtonTapped:(UIButton *)button {
+	[self.delegate profileButtonPressedForCell:self];
+}
 
 - (IBAction) likeControlPressed: (id) sender
 {

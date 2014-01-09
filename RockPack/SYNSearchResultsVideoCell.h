@@ -10,6 +10,8 @@
 #import "VideoInstance.h"
 @import UIKit;
 
+@protocol SYNVideoCellDelegate;
+
 @interface SYNSearchResultsVideoCell : SYNSearchResultsCell
 
 @property (nonatomic, strong) IBOutlet UIImageView* iconImageView;
@@ -17,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* timeStampLabel;
 
+@property (nonatomic, weak) id<SYNSocialActionsDelegate, SYNVideoCellDelegate> delegate;
 
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
