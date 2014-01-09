@@ -36,8 +36,6 @@
         _imagePickerController = [[UIImagePickerController alloc] init];
         _imagePickerController.delegate = self;
         _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-#warning uirectedgenone
-        //        [_imagePickerController setEdgesForExtendedLayout: UIRectEdgeNone];
 
     }
     return self;

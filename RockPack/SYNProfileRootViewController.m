@@ -2588,11 +2588,19 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 - (IBAction)changeCoverImageButtonTapped:(id)sender
 {
-//#warning cover photo
+
     //302,167 is the values for the cropping, the cover photo dimensions is 907 x 502
     self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(302,167)];
     self.imagePickerControllerCoverphoto.delegate = self;
-    [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+    
+    if (UIDeviceOrientationIsLandscape([[SYNDeviceManager sharedInstance] isLandscape])) {
+        [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionAny];
+    }
+    else {
+     
+        [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
+        
+    }
 
 }
 - (IBAction)changeAvatarButtonTapped:(id)sender
@@ -3030,5 +3038,20 @@ finishedWithImage: (UIImage *) image
                                          }];
 }
 
+
+- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView **)view
+{
+    
+    
+    if (popoverController == self.imagePickerControllerCoverphoto.cameraPopoverController) {
+        CGRect tmpRect =self.uploadCoverPhotoButton.frame;
+        *rect = tmpRect;
+    }
+    
+    if (popoverController == self.imagePickerControllerAvatar.cameraPopoverController) {
+        CGRect tmpRect =self.uploadAvatarButton.frame;
+        *rect = tmpRect;
+    }
+}
 
 @end
