@@ -31,7 +31,7 @@
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" image="ButtonTakePhotoHighlighted.png">
+                    <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -47,7 +47,7 @@
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" image="ButtonChooseExistingHighlighted.png">
+                    <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -55,12 +55,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.30551437040000001" green="0.63401003649999998" blue="0.1675980839" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
         </view>
     </objects>
-    <resources>
-        <image name="ButtonChooseExistingHighlighted.png" width="206" height="48"/>
-        <image name="ButtonTakePhotoHighlighted.png" width="206" height="48"/>
-    </resources>
 </document>
