@@ -858,7 +858,6 @@
 //		[appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:appDelegate.currentOAuth2Credentials.userId
 //														  channelId:channel.uniqueId
         
-        NSLog(@"Channel URL :%@", channel.resourceURL);
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
 												  completionHandler:^(NSDictionary *responseDictionary) {
 													  

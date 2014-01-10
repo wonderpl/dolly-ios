@@ -167,7 +167,6 @@
     
     self.videoTitleLabel.text =  [channel.title uppercaseString];
     
-    NSLog(@"%@", channel.title);
     [self.videoTitleLabel setFont:[UIFont regularCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
     
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];

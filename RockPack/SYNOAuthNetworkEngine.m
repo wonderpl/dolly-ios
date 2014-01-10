@@ -832,9 +832,7 @@
     NSInputStream *inputStream = [NSInputStream inputStreamWithData: imageData];
     networkOperation.uploadStream = inputStream;
     
-    NSLog(@"length string :%@", lengthString);
-    
-    
+        
     [networkOperation addHeaders: @{@"Content-Type" : @"image/jpeg", @"Content-Length" : lengthString}];
 //    SYNAppDelegate* blockAppDelegate = self.appDelegate;
     [self addCommonHandlerToNetworkOperation: networkOperation
