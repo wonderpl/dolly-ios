@@ -163,7 +163,7 @@
         // viewId is @"Profile" because this is the only place it is passed
         
         NSMutableDictionary *channelInsanceByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.channels.count];
-#warning here is th start
+
         for (Channel *ch in self.channels)
         {
             channelInsanceByIdDictionary[ch.uniqueId] = ch;

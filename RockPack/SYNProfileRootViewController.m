@@ -939,7 +939,6 @@
                 
                 [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
                 
-                channelThumbnailCell.followButton.hidden = NO;
                 
             }
         }
@@ -1254,9 +1253,8 @@
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
-    
-    
     [super scrollViewDidScroll:scrollView];
+    
     CGFloat offset = scrollView.contentOffset.y;
     
     if (self.channelThumbnailCollectionView == scrollView) {
