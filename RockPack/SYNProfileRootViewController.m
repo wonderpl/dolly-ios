@@ -900,7 +900,6 @@
         
         Channel *channel;
         
-
         channelThumbnailCell.showsDescriptionOnSwipe = YES;
 
         if(collectionView == self.channelThumbnailCollectionView)
@@ -1244,10 +1243,22 @@
     {
         [self moveNameLabelWithOffset:scrollView.contentOffset.y];
     }
+    
+    
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self moveNameLabelWithOffset:scrollView.contentOffset.y];
+    
+    if (self.channelThumbnailCollectionView == scrollView)
+    {
+        [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+    }
+    if (self.subscriptionThumbnailCollectionView == scrollView)
+    {
+        [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+    }
+
 }
 
 
@@ -1390,14 +1401,6 @@
 {
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
-        if (self.channelThumbnailCollectionView == scrollView)
-        {
-            [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
-        }
-        if (self.subscriptionThumbnailCollectionView == scrollView)
-        {
-            [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
-        }
         
         if (IS_IPHONE) {
             
