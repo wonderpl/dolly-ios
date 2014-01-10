@@ -90,11 +90,11 @@
                         <action selector="moreButtonTapped:" destination="-1" eventType="touchUpInside" id="YBp-b2-AfD"/>
                     </connections>
                 </button>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XoE-Jb-ERN" userLabel="View - Container View">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XoE-Jb-ERN" userLabel="View - Container View" customClass="SYNPassthroughView">
                     <rect key="frame" x="179" y="448" width="314" height="282"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="It is a long established fact that a reader will be distracted by the readable content of a page." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
+                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="It is a long established fact that a reader will be distracted by the readable content of a page." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
                             <rect key="frame" x="0.0" y="130" width="314" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -105,7 +105,6 @@
                             <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
-                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="Zuf-oa-2Pa"/>
                             </connections>

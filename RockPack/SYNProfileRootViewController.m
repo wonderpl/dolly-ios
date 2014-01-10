@@ -2249,7 +2249,8 @@
     [self killScroll];
     [self.createChannelCell.descriptionTextView resignFirstResponder];
     [self.createChannelCell.createTextField resignFirstResponder];
-    
+	
+	self.aboutMeTextView.userInteractionEnabled = YES;
     
     self.modeType = kModeEditProfile;
     self.uploadCoverPhotoButton.hidden = NO;
@@ -2316,6 +2317,7 @@
     tmpRect.size.height -= 18;
     
     self.aboutMeTextView.editable = NO;
+	self.aboutMeTextView.userInteractionEnabled = NO;
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     [UIView animateWithDuration:0.5f animations:^{
