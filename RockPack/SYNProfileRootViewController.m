@@ -525,6 +525,8 @@
     [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
+	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     
@@ -1665,7 +1667,8 @@
     
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
-    
+	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
+	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     
     self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
     
@@ -2249,7 +2252,8 @@
     [self killScroll];
     [self.createChannelCell.descriptionTextView resignFirstResponder];
     [self.createChannelCell.createTextField resignFirstResponder];
-    
+	
+	self.aboutMeTextView.userInteractionEnabled = YES;
     
     self.modeType = kModeEditProfile;
     self.uploadCoverPhotoButton.hidden = NO;
@@ -2316,6 +2320,7 @@
     tmpRect.size.height -= 18;
     
     self.aboutMeTextView.editable = NO;
+	self.aboutMeTextView.userInteractionEnabled = NO;
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     [UIView animateWithDuration:0.5f animations:^{

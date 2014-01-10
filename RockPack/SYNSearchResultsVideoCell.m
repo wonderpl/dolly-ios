@@ -16,6 +16,7 @@
 #import "VideoInstance.h"
 #import "Channel.h"
 #import "ChannelOwner.h"
+#import "NSString+Timecode.h"
 #import "SYNVideoCellDelegate.h"
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
@@ -75,27 +76,7 @@
     
     // == timestamp == //
     
-    NSInteger durationSeconds = videoInstance.video.durationValue;
-    
-    NSMutableString* timeStampString = [[NSMutableString alloc] init];
-    NSInteger minutes = (NSInteger)(durationSeconds / 60.0f);
-    
-    if(minutes < 10)
-        [timeStampString appendString:@"0"];
-    
-    [timeStampString appendFormat:@"%i", minutes];
-    
-    [timeStampString appendString:@":"];
-    
-    NSInteger seconds = durationSeconds % 60;
-    
-    if(seconds < 10)
-        [timeStampString appendString:@"0"];
-    
-    [timeStampString appendFormat:@"%i", seconds];
-    
-    self.timeStampLabel.text = [NSString stringWithString:timeStampString];
-    
+	self.timeStampLabel.text = [NSString paddedTimecodeStringFromSeconds:videoInstance.video.durationValue];
     
     // == date components == //
     
