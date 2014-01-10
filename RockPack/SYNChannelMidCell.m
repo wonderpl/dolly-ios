@@ -165,30 +165,17 @@
 	self.descriptionLabel.text = channel.channelDescription;
     
     
-    if (channel.favouritesValue)
-    {
-        SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-
-        if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
-        {
-            self.videoTitleLabel.text = [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)] ;
-        }
-        else
-        {
-            self.videoTitleLabel.text =
-            [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
-        }
-    }
-    else
-    {
-        self.videoTitleLabel.text =  [channel.title uppercaseString];
-    }
+    self.videoTitleLabel.text =  [channel.title uppercaseString];
     
+    NSLog(@"%@", channel.title);
     [self.videoTitleLabel setFont:[UIFont regularCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
     
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
+    
+    [self setBorder];
+
 
 }
 

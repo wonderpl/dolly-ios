@@ -3,6 +3,7 @@
 #import "ChannelOwner.h"
 #import "NSDictionary+Validation.h"
 #import "SYNActivityManager.h"
+#import "SYNAppDelegate.h"
 
 @implementation ChannelOwner
 
@@ -92,8 +93,6 @@
     
     [instance setAttributesFromDictionary: dictionary
                       ignoringObjectTypes: ignoringObjects];
-    
-    
     return instance;
 }
 
@@ -101,9 +100,7 @@
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects
 {
-    
-    
-    
+        
     // Is we are not actually a dictionary, then bail
     if (![dictionary isKindOfClass: [NSDictionary class]])
     {
@@ -141,12 +138,14 @@
     
     NSDictionary *channelsDictionary = dictionary[@"channels"];
     
+    
     if ([channelsDictionary isKindOfClass: [NSNull class]])
     {
         hasChannels = NO;
     }
     
     NSArray *channelItemsArray = channelsDictionary[@"items"];
+    
     
     if (![[channelsDictionary objectForKey:@("total")] isKindOfClass: [NSNull class]])
     {
@@ -164,7 +163,7 @@
         // viewId is @"Profile" because this is the only place it is passed
         
         NSMutableDictionary *channelInsanceByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.channels.count];
-        
+#warning here is th start
         for (Channel *ch in self.channels)
         {
             channelInsanceByIdDictionary[ch.uniqueId] = ch;
@@ -205,6 +204,23 @@
             
             channel.position = [dictionary objectForKey: @"position"
                                             withDefault: @0];
+
+            if (channel.favouritesValue)
+            {
+                SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+                
+                if ([appDelegate.currentUser.uniqueId isEqualToString:self.uniqueId])
+                {
+                    channel.title = [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)];
+                }
+                else
+                {
+                    channel.title =
+                    [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
+                }
+            }
+
+            
 
             [self.channelsSet addObject: channel];
         }
@@ -284,6 +300,24 @@
         {
             continue;
         }
+        
+        if (channel.favouritesValue)
+        {
+            
+            SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            
+            if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
+            {
+                channel.title = [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)];
+            }
+            else
+            {
+                channel.title =
+                [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
+            }
+        }
+
+        
         
         
         channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];

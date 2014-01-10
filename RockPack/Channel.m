@@ -94,6 +94,7 @@
            usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects
 {
+    
     if (![dictionary isKindOfClass: [NSDictionary class]])
     {
         return nil;
@@ -289,6 +290,23 @@
 //    self.subscribedByUserValue = YES;
     
     self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
+    
+    if (self.favouritesValue)
+    {
+        SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        if ([appDelegate.currentUser.uniqueId isEqualToString:self.channelOwner.uniqueId])
+        {
+            self.title = [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)];
+        }
+        else
+        {
+            self.title =
+            [NSString stringWithFormat:@"%@'S %@", [self.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
+            
+            
+        }
+    }
 }
 
 
@@ -347,6 +365,7 @@
         self.totalVideosValue = [NSNumber numberWithInt:0]; // if the 'total' value was not returned then pass the existing numbers fetched
     }
 
+ 
 }
 
 
