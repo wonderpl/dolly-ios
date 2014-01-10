@@ -525,6 +525,7 @@
     [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     
@@ -1665,7 +1666,7 @@
     
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
-    
+	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
     
     self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
     
