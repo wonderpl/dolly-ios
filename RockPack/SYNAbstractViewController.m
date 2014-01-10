@@ -33,12 +33,13 @@
 #import "GAI+Tracking.h"
 #import "SYNActivityManager.h"
 #import "SYNRotatingPopoverController.h"
+#import "SYNPopoverAnimator.h"
 @import QuartzCore;
 
 #define kScrollContentOff 100.0f
 #define kScrollSpeedBoundary 0.0f
 
-@interface SYNAbstractViewController ()
+@interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityView *activityView;
@@ -375,12 +376,14 @@
                  isVideo: (NSNumber *) isVideo
               usingImage: (UIImage *) usingImage {
 	SYNOneToOneSharingController *viewController = [self createSharingViewControllerForObjectType:objectType
-																						  objectId:objectId
-																						   isOwner:[isOwner boolValue]
-																						   isVideo:[isVideo boolValue]
-																							 image:usingImage];
+																						 objectId:objectId
+																						  isOwner:[isOwner boolValue]
+																						  isVideo:[isVideo boolValue]
+																							image:usingImage];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
 	
-	[appDelegate.masterViewController addOverlayController:viewController animated:YES];
+	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (SYNOneToOneSharingController *)createSharingViewControllerForObjectType:(NSString *)objectType
@@ -891,6 +894,18 @@
 													button.enabled = YES;
 												}];
 	}
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	return [SYNPopoverAnimator animatorForPresentation:YES];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	return [SYNPopoverAnimator animatorForPresentation:NO];
 }
 
 @end
