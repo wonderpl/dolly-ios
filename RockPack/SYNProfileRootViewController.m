@@ -898,7 +898,6 @@
         
         Channel *channel;
         
-        [channelThumbnailCell setBorder];
 
         channelThumbnailCell.showsDescriptionOnSwipe = YES;
 
