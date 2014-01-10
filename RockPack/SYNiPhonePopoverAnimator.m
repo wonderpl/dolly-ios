@@ -21,6 +21,7 @@
 	if (self.presenting) {
 		SYNTapDismissView *tapDismissView = [[SYNTapDismissView alloc] initWithFrame:containerView.frame];
 		tapDismissView.parentViewController = fromViewController;
+		tapDismissView.alpha = 0.0;
 		tapDismissView.center = containerView.center;
 		
 		CGRect startFrame = CGRectMake(CGRectGetMinX(toViewController.view.frame),
@@ -33,6 +34,7 @@
 		[containerView addSubview:toViewController.view];
 		
 		[UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+			tapDismissView.alpha = 1.0;
 			
 			toViewController.view.frame = CGRectMake(CGRectGetMinX(startFrame),
 													 CGRectGetMinY(startFrame) - CGRectGetHeight(startFrame),
