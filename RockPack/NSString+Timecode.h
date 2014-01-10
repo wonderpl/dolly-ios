@@ -12,4 +12,6 @@
 
 + (NSString *) timecodeStringFromSeconds: (float) timeSeconds;
 
++ (NSString *)paddedTimecodeStringFromSeconds:(NSTimeInterval)seconds;
+
 @end

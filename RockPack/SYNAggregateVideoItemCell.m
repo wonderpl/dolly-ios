@@ -14,6 +14,7 @@
 #import "Video.h"
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
+#import "NSString+Timecode.h"
 
 
 @interface SYNAggregateVideoItemCell ()
@@ -89,26 +90,7 @@
     
     // == timestamp == //
     
-    NSInteger durationSeconds = videoInstance.video.durationValue;
-    
-    NSMutableString* timeStampString = [[NSMutableString alloc] init];
-    NSInteger minutes = (NSInteger)(durationSeconds / 60.0f);
-    
-    if(minutes < 10)
-        [timeStampString appendString:@"0"];
-    
-    [timeStampString appendFormat:@"%i", minutes];
-    
-    [timeStampString appendString:@":"];
-    
-    NSInteger seconds = durationSeconds % 60;
-    
-    if(seconds < 10)
-        [timeStampString appendString:@"0"];
-    
-    [timeStampString appendFormat:@"%i", seconds];
-    
-    self.timestampLabel.text = [NSString stringWithString:timeStampString];
+    self.timestampLabel.text = [NSString paddedTimecodeStringFromSeconds:videoInstance.video.durationValue];
     
     
     // == date components == //

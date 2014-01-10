@@ -3,7 +3,6 @@
 
 @interface ChannelOwner : _ChannelOwner
 
-@property (nonatomic, readonly) NSString *thumbnailSmallUrl;
 @property (nonatomic, readonly) NSString *thumbnailLargeUrl;
 
 + (ChannelOwner *) instanceFromDictionary: (NSDictionary *) dictionary

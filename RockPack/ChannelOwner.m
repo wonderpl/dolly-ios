@@ -380,19 +380,6 @@
 }
 
 
-- (NSString *) thumbnailSmallUrl
-{
-    return [self.thumbnailURL stringByReplacingOccurrencesOfString: kImageSizeStringReplace
-                                                        withString: @"thumbnail_small"];
-}
-
-
-- (NSString *) thumbnailMediumUrl
-{
-    return self.thumbnailURL; // by default it is set for medium
-}
-
-
 - (NSString *) thumbnailLargeUrl
 {
     return [self.thumbnailURL stringByReplacingOccurrencesOfString: kImageSizeStringReplace
