@@ -154,8 +154,6 @@
                                         <state key="normal" title="share">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="ButtonVideoOverlayShareSelected.png"/>
-                                        <state key="highlighted" image="ButtonVideoOverlayShareHighlighted.png"/>
                                         <connections>
                                             <action selector="shareButtonPressed:" destination="kjH-hT-nk9" eventType="touchUpInside" id="oi9-xB-JNK"/>
                                         </connections>
@@ -255,8 +253,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ButtonVideoOverlayShareHighlighted.png" width="53" height="52"/>
-        <image name="ButtonVideoOverlayShareSelected.png" width="53" height="52"/>
         <image name="IconVideoAddDefault.png" width="49" height="49"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

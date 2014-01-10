@@ -30,7 +30,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="6hy-Hf-wx9" userLabel="Tabs">
+                <view contentMode="scaleToFill" id="6hy-Hf-wx9" userLabel="Tabs" customClass="SYNTabBar">
                     <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <subviews>
