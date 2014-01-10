@@ -128,11 +128,15 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    if (IS_IPHONE) {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                            object: self
+                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
         
 }
 

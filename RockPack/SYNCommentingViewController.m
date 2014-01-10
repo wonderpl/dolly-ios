@@ -15,6 +15,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNDeviceManager.h"
 #import "UICollectionReusableView+Helpers.h"
+#import "SYNNavigationManager.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kMaxCommentCharacters 120
@@ -67,9 +68,6 @@ static NSString* PlaceholderText = @"Say something nice";
     if (IS_IPHONE) {
 		self.commentsCollectionView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 		
-        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                            object: self
-                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
         
     }
     
@@ -455,10 +453,18 @@ static NSString* PlaceholderText = @"Say something nice";
     
     return adHocComment;
 }
+// override the abstract so that you dont send notifications to the navigation manager
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // override the abstract so that you dont send notifications to the navigation manager
+}
+
+- (void) scrollViewWillBeginDragging: (UIScrollView *) scrollView
+{
+}
+
+- (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate
+{
 }
 
 #pragma mark - Button Delegates (Deleting)
