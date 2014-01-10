@@ -1226,11 +1226,6 @@
 
 #pragma mark - scroll view delegates
 
--(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    
-}
-
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [super scrollViewWillBeginDragging:scrollView];
