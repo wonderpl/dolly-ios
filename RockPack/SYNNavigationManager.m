@@ -13,7 +13,14 @@
 
 #define NAV_BAR_ANIMATION_SPEED 0.3f
 
+@interface SYNNavigationManager ()
+
+@property (nonatomic) BOOL isTabBarHidden;
+
+@end
+
 @implementation SYNNavigationManager
+
 
 + (id) manager
 {
@@ -29,6 +36,7 @@
                                                 selector:@selector(scrollDetected:)
                                                     name:kScrollMovement
                                                   object:nil];
+        self.isTabBarHidden = NO;
     }
     return self;
 }
@@ -55,6 +63,8 @@
             CGRect tmpFrame = masterViewController.tabsView.frame;
             tmpFrame.origin.y += masterViewController.tabsView.frame.size.height;
             masterViewController.tabsView.frame = tmpFrame;
+        } completion:^(BOOL finished) {
+            self.isTabBarHidden = YES;
         }];
     }
     
@@ -66,10 +76,49 @@
             CGRect tmpFrame = masterViewController.tabsView.frame;
             tmpFrame.origin.y -= masterViewController.tabsView.frame.size.height;
             masterViewController.tabsView.frame = tmpFrame;
+        } completion:^(BOOL finished) {
+            self.isTabBarHidden = NO;
         }];
     }
 
 }
+
+- (void)hideTabBar
+{
+    SYNMasterViewController *masterViewController = self.masterController;
+    // == Scrolling down, Hide the tab bar
+    if (_masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height - _masterController.tabsView.frame.size.height)
+    {
+        [UIView animateWithDuration:NAV_BAR_ANIMATION_SPEED animations:^{
+            CGRect tmpFrame = masterViewController.tabsView.frame;
+            tmpFrame.origin.y += masterViewController.tabsView.frame.size.height;
+            masterViewController.tabsView.frame = tmpFrame;
+        } completion:^(BOOL finished) {
+            self.isTabBarHidden = YES;
+
+        }];
+    }
+}
+
+- (void)showTabBar
+{
+    SYNMasterViewController *masterViewController = self.masterController;
+
+    if (_masterController.tabsView.frame.origin.y == _masterController.view.frame.size.height)
+    {
+        [UIView animateWithDuration:NAV_BAR_ANIMATION_SPEED animations:^{
+            
+            CGRect tmpFrame = masterViewController.tabsView.frame;
+            tmpFrame.origin.y -= masterViewController.tabsView.frame.size.height;
+            masterViewController.tabsView.frame = tmpFrame;
+        }completion:^(BOOL finished) {
+            self.isTabBarHidden = NO;
+        }];
+    }
+}
+
+
+
 - (void) navigateToPageByName: (NSString *) pageName
 {
     if (!pageName)
@@ -116,8 +165,13 @@
 
 - (void) tabPressed: (UIButton *) tabPressed
 {
+    
     for (UIButton *tab in self.masterController.tabs)
     {
+        
+        if (tab == tabPressed && tab.selected) {
+            //TODO:Pop to root here
+        }
         tab.highlighted = (BOOL) (tab == tabPressed);
         tab.selected = (BOOL) (tab == tabPressed);
     }

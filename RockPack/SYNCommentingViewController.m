@@ -102,7 +102,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                             options: SDWebImageRetryFailed];
     
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)
                                                  name:UIKeyboardWillShowNotification
@@ -120,6 +119,17 @@ static NSString* PlaceholderText = @"Say something nice";
     [self refreshCollectionView];
     
     [self getCommentsFromServer];
+    
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                        object: self
+                                                      userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
+    
     
 }
 

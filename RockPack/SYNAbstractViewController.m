@@ -137,7 +137,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                             object: self
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
-        
+    }
+    
 }
 
 
