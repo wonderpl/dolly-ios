@@ -1244,6 +1244,14 @@
         [self moveNameLabelWithOffset:scrollView.contentOffset.y];
     }
     
+    if (self.channelThumbnailCollectionView == scrollView)
+    {
+        [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+    }
+    if (self.subscriptionThumbnailCollectionView == scrollView)
+    {
+        [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+    }
     
 }
 
@@ -1258,7 +1266,7 @@
     {
         [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
     }
-
+    
 }
 
 
@@ -1401,7 +1409,7 @@
 {
     if (scrollView == self.channelThumbnailCollectionView||scrollView == self.subscriptionThumbnailCollectionView)
     {
-        
+       
         if (IS_IPHONE) {
             
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);

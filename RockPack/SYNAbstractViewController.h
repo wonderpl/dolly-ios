@@ -71,6 +71,7 @@
 
 - (void)viewProfileDetails:(ChannelOwner *)channelOwner;
 - (void)viewChannelDetails:(Channel *)channel;
+- (void) shouldHideTabBar;
 
 
 // Purchase
