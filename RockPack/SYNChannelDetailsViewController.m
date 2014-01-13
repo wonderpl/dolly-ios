@@ -419,14 +419,7 @@
     
     self.txtFieldChannelName.text = self.channel.title;
     self.lblFullName.text = self.channel.channelOwner.displayName;
-    
-    CGRect titleLabelFrame = self.lblChannelTitle.frame;
     self.lblChannelTitle.text = [self.channel.title uppercaseString];
-    [self.lblChannelTitle sizeToFit];
-    titleLabelFrame.size.height = self.lblChannelTitle.frame.size.height;
-    self.lblChannelTitle.frame = titleLabelFrame;
-    
-    
     
     self.lblDescription.text = self.channel.channelDescription;
     
