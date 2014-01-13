@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNWebViewViewController">
+            <connections>
+                <outlet property="view" destination="1" id="3"/>
+                <outlet property="webView" destination="6B0-D7-xuL" id="Nb0-rR-VhV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6B0-D7-xuL">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Thr-Y7-6ne"/>
+                    </connections>
+                </webView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cma-cX-dPX">
+                    <rect key="frame" x="20" y="30" width="40" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Close">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="vuq-Mc-bYx"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apb-nt-WQj">
+                    <rect key="frame" x="13" y="527" width="35" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Back">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backTapped:" destination="-1" eventType="touchUpInside" id="NW2-db-nYP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecX-QM-bew">
+                    <rect key="frame" x="75" y="527" width="57" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Forward">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="forawrdTapped:" destination="-1" eventType="touchUpInside" id="68S-5P-PDZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ecX-QM-bew" secondAttribute="bottom" constant="11" id="21Z-C8-cm6"/>
+                <constraint firstAttribute="bottom" secondItem="apb-nt-WQj" secondAttribute="bottom" constant="11" id="7O3-Ue-7aj"/>
+                <constraint firstItem="cma-cX-dPX" firstAttribute="top" secondItem="1" secondAttribute="top" constant="30" id="8tt-0a-Z7e"/>
+                <constraint firstItem="ecX-QM-bew" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="75" id="EZM-tV-fEj"/>
+                <constraint firstAttribute="bottom" secondItem="6B0-D7-xuL" secondAttribute="bottom" id="Krn-HA-aTN"/>
+                <constraint firstItem="apb-nt-WQj" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="13" id="ZNp-tl-THP"/>
+                <constraint firstItem="6B0-D7-xuL" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="eJf-XR-1cW"/>
+                <constraint firstAttribute="trailing" secondItem="6B0-D7-xuL" secondAttribute="trailing" id="tYy-LN-sNf"/>
+                <constraint firstItem="6B0-D7-xuL" firstAttribute="top" secondItem="1" secondAttribute="top" id="vMx-WV-K2p"/>
+                <constraint firstItem="cma-cX-dPX" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="wKm-Jc-mkH"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>
