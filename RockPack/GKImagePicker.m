@@ -74,12 +74,12 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     GKImageCropViewController *cropController = [[GKImageCropViewController alloc] init];
+    cropController.cropSize = self.cropSize;
 
     if (picker.sourceType == UIImagePickerControllerSourceTypeCamera && IS_IPAD) {
-        self.cropSize = CGSizeMake(self.cropSize.width*1.6, self.cropSize.height*1.6);
+        cropController.cropSize = CGSizeMake(self.cropSize.width*1.6, self.cropSize.height*1.6);
     }
     
-    cropController.cropSize = self.cropSize;
 
     cropController.preferredContentSize = picker.preferredContentSize;
     UIImage* image = info[UIImagePickerControllerOriginalImage];
