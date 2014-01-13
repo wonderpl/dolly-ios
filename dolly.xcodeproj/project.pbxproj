@@ -366,6 +366,8 @@
 		0E27C270183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */; };
 		0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */; };
 		0E27C272183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */; };
+		0E2AB166188462DD004557A4 /* SYNWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */; };
+		0E2AB167188462DD004557A4 /* SYNWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */; };
 		0E3AE6901875DE8C008A8D00 /* SYNGenreColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */; };
 		0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */; };
 		0E5B8EE918465C420012F460 /* coverImageTest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E5B8EE818465C420012F460 /* coverImageTest.jpg */; };
@@ -1829,6 +1831,9 @@
 		0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteDefault@2x.png"; sourceTree = "<group>"; };
 		0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonVideoDeleteHighlighted.png; sourceTree = "<group>"; };
 		0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
+		0E2AB163188462DD004557A4 /* SYNWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWebViewViewController.h; sourceTree = "<group>"; };
+		0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWebViewViewController.m; sourceTree = "<group>"; };
+		0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNWebViewViewController.xib; sourceTree = "<group>"; };
 		0E3AE68E1875DE8C008A8D00 /* SYNGenreColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGenreColorManager.h; sourceTree = "<group>"; };
 		0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGenreColorManager.m; sourceTree = "<group>"; };
 		0E5B8EA41846007D0012F460 /* SYNProfileFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileFlowLayout.h; sourceTree = "<group>"; };
@@ -3613,6 +3618,7 @@
 				BE3574E517CE07860083CBB1 /* One to One Sharing */,
 				01982560162ADE3300216900 /* Profile */,
 				BE08158F16D3C46800ADB1DC /* Search and Discovery */,
+				0E2AB16818846391004557A4 /* WebView */,
 				BE7D02F1178C1D13008053DC /* Users */,
 				01F8E77B16B039E6000D44B9 /* Video viewer */,
 			);
@@ -4273,6 +4279,16 @@
 				0E26BB4A182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib */,
 			);
 			name = ChannelDetails;
+			sourceTree = "<group>";
+		};
+		0E2AB16818846391004557A4 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				0E2AB163188462DD004557A4 /* SYNWebViewViewController.h */,
+				0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */,
+				0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		0E3AE68D1875DE5D008A8D00 /* Color Manager */ = {
@@ -6271,6 +6287,7 @@
 				BE7D350B1715D3080085AB81 /* NavigationDot.png in Resources */,
 				BE7D350C1715D3080085AB81 /* NavigationDot@2x.png in Resources */,
 				BE7D350D1715D3080085AB81 /* NavigationDotCurrent.png in Resources */,
+				0E2AB167188462DD004557A4 /* SYNWebViewViewController.xib in Resources */,
 				BE7D350E1715D3080085AB81 /* NavigationDotCurrent@2x.png in Resources */,
 				BE7D35131716D27A0085AB81 /* SubCategoryBar.png in Resources */,
 				BE7D35141716D27A0085AB81 /* SubCategoryBar@2x.png in Resources */,
@@ -7292,6 +7309,7 @@
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */,
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,
+				0E2AB166188462DD004557A4 /* SYNWebViewViewController.m in Sources */,
 				BEB31374181AC6DB00FAF98A /* SYNSocialAddButton.m in Sources */,
 				019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */,
 				01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */,
