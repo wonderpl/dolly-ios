@@ -67,7 +67,7 @@
     
     [self.deleteButton.titleLabel setFont:[UIFont lightCustomFontOfSize:19]];
     [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.deleteButton setTitle:NSLocalizedString(@"Delete ?", nil) forState:UIControlStateNormal];
+    [self.deleteButton setTitle:NSLocalizedString(@"Delete?", nil) forState:UIControlStateNormal];
     
     self.deletableCell = NO;
     
@@ -117,6 +117,7 @@
     [self.boarderView.layer setBorderWidth:0.0f];
     self.bottomBarView.backgroundColor = [UIColor clearColor];
     self.followButton.hidden = YES;
+    self.deletableCell = NO;
     
 }
 
