@@ -44,15 +44,18 @@
     if (self)
     {
         // Custom initialization
+        
     }
     
     return self;
 }
 
 
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     
     self.title = NSLocalizedString(@"Move and Scale", @"");
@@ -69,6 +72,8 @@
     {
         [self.navigationController setNavigationBarHidden: NO];
     }
+
+    self.view.clipsToBounds = YES;
 }
 
 
@@ -129,12 +134,15 @@
 {
     self.imageCropView = [[GKImageCropView alloc] initWithFrame: self.view.bounds];
     
+    
     [self.imageCropView setImageToCrop: sourceImage];
     
     [self.imageCropView setResizableCropArea: self.resizeableCropArea];
     
     [self.imageCropView setCropSize: cropSize];
-    
+    self.imageCropView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+
+    [self.imageCropView setContentMode:UIViewContentModeRedraw];
     [self.view addSubview: self.imageCropView];
 }
 

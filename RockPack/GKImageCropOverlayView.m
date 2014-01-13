@@ -30,6 +30,8 @@
 
         self.backgroundColor = [UIColor clearColor];
         self.userInteractionEnabled = YES;
+        [self setContentMode:UIViewContentModeRedraw];
+
     }
     return self;
 }
