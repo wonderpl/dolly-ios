@@ -27,7 +27,8 @@ typedef enum {
     OptionButtonTagRate = 5,
     OptionButtonTagBlog = 6,
     OptionButtonTagHelp = 7,
-    OptionButtonTagLogout = 8
+    OptionButtonTagLogout = 8,
+    OptionButtonTagHints = 9
 
 } OptionButtonTag;
 
@@ -250,6 +251,12 @@ typedef enum {
             [appDelegate logout];
         }
         break;
+            
+        case OptionButtonTagHints:
+        {
+            //TODO: go to hints webview
+            
+        }
             
     }
     
