@@ -99,7 +99,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	if ([self.parentViewController isBeingPresented]) {
+	if ([self.navigationController isBeingPresented]) {
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
 		[self.thumbnailCollectionView selectItemAtIndexPath:indexPath
 												   animated:YES

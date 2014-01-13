@@ -79,13 +79,17 @@
 	
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
-	if ([self.parentViewController isBeingPresented]) {
+	if ([self.navigationController isBeingPresented]) {
 		[self playVideo];
 	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+	
+	if ([self.navigationController isBeingDismissed]) {
+		[self.currentVideoPlayer pause];
+	}
 	
 	[self trackVideoViewingStatisticsForVideoInstance:self.videoInstance withVideoPlayer:self.currentVideoPlayer];
 }
