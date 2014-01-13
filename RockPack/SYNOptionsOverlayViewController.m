@@ -64,7 +64,8 @@ typedef enum {
                               @"Rate",
                               @"Blog",
                               @"Help",
-                              @"Logout"];
+                              @"Logout",
+                              @"Hints"];
     
     
     for (UIView* sView in self.view.subviews)

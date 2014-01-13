@@ -18,28 +18,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="opR-V4-ouC" userLabel="Background">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOC-R5-l1K" userLabel="Logout">
-                            <rect key="frame" x="482" y="504" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" image="ButtonMoreHints.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rf5-51-Bdd" userLabel="Logout">
-                            <rect key="frame" x="722" y="504" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="60" id="qoY-IA-aV5"/>
-                                <constraint firstAttribute="width" constant="60" id="t1G-sp-kHU"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" image="ButtonMoreLogout.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                 </view>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sw7-Ky-4PG" userLabel="Friends">
@@ -63,6 +41,30 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" image="ButtonMoreFeedback.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rf5-51-Bdd" userLabel="Logout">
+                    <rect key="frame" x="722" y="504" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="qoY-IA-aV5"/>
+                        <constraint firstAttribute="width" constant="60" id="t1G-sp-kHU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreLogout.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOC-R5-l1K" userLabel="Hints">
+                    <rect key="frame" x="482" y="504" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="3cN-fp-YJl"/>
+                        <constraint firstAttribute="width" constant="60" id="AVS-Mo-wPs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="ButtonMoreHints.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -131,24 +133,24 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="opR-V4-ouC" secondAttribute="trailing" id="0rH-Uf-hHE"/>
                 <constraint firstItem="opR-V4-ouC" firstAttribute="top" secondItem="2" secondAttribute="top" id="1QI-Uh-W2N"/>
+                <constraint firstItem="rf5-51-Bdd" firstAttribute="centerX" secondItem="fP2-H5-IS7" secondAttribute="centerX" id="6vB-bY-Kg4"/>
                 <constraint firstItem="fP2-H5-IS7" firstAttribute="top" secondItem="3Af-Md-wwq" secondAttribute="bottom" constant="90" id="9Ue-LS-LW4"/>
                 <constraint firstAttribute="centerY" secondItem="q5O-MS-iJJ" secondAttribute="centerY" id="BS1-SD-hId"/>
                 <constraint firstItem="Sw7-Ky-4PG" firstAttribute="leading" secondItem="BY2-tg-UgW" secondAttribute="trailing" constant="180" id="BpY-IZ-l82"/>
-                <constraint firstItem="rf5-51-Bdd" firstAttribute="top" secondItem="fP2-H5-IS7" secondAttribute="bottom" constant="90" id="FaO-0O-Elw"/>
                 <constraint firstItem="aPS-IW-ByN" firstAttribute="leading" secondItem="7wr-ir-MjY" secondAttribute="leading" id="Ibg-cb-yIQ"/>
                 <constraint firstItem="3Af-Md-wwq" firstAttribute="leading" secondItem="Sw7-Ky-4PG" secondAttribute="trailing" constant="180" id="KvL-rQ-dT6"/>
                 <constraint firstItem="q5O-MS-iJJ" firstAttribute="top" secondItem="Sw7-Ky-4PG" secondAttribute="bottom" constant="90" id="OSv-nu-zLN"/>
+                <constraint firstItem="jOC-R5-l1K" firstAttribute="centerY" secondItem="aPS-IW-ByN" secondAttribute="centerY" id="XBW-sv-RED"/>
                 <constraint firstAttribute="centerX" secondItem="q5O-MS-iJJ" secondAttribute="centerX" id="ZHY-21-RdS"/>
                 <constraint firstItem="q5O-MS-iJJ" firstAttribute="leading" secondItem="7wr-ir-MjY" secondAttribute="trailing" constant="180" id="eA1-n9-Xpz"/>
                 <constraint firstItem="fP2-H5-IS7" firstAttribute="leading" secondItem="q5O-MS-iJJ" secondAttribute="trailing" constant="180" id="fzK-1k-ElV"/>
-                <constraint firstItem="jOC-R5-l1K" firstAttribute="top" secondItem="q5O-MS-iJJ" secondAttribute="bottom" constant="90" id="iO2-fS-bM4"/>
+                <constraint firstItem="rf5-51-Bdd" firstAttribute="top" secondItem="fP2-H5-IS7" secondAttribute="bottom" constant="90" id="h78-kj-h6a"/>
                 <constraint firstItem="7wr-ir-MjY" firstAttribute="top" secondItem="BY2-tg-UgW" secondAttribute="bottom" constant="90" id="jY8-iv-qQV"/>
                 <constraint firstAttribute="centerY" secondItem="7wr-ir-MjY" secondAttribute="centerY" id="kOp-Oe-Ysy"/>
                 <constraint firstItem="aPS-IW-ByN" firstAttribute="top" secondItem="7wr-ir-MjY" secondAttribute="bottom" constant="90" id="ofx-Ft-xDW"/>
                 <constraint firstItem="opR-V4-ouC" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="sKn-O2-e86"/>
-                <constraint firstItem="rf5-51-Bdd" firstAttribute="centerX" secondItem="fP2-H5-IS7" secondAttribute="centerX" id="tID-Zu-nUA"/>
                 <constraint firstAttribute="bottom" secondItem="opR-V4-ouC" secondAttribute="bottom" id="uAa-Ya-fkc"/>
-                <constraint firstItem="jOC-R5-l1K" firstAttribute="centerX" secondItem="q5O-MS-iJJ" secondAttribute="centerX" id="uCz-bD-Zpi"/>
+                <constraint firstItem="jOC-R5-l1K" firstAttribute="centerX" secondItem="q5O-MS-iJJ" secondAttribute="centerX" id="wMN-YF-Grg"/>
                 <constraint firstAttribute="centerY" secondItem="fP2-H5-IS7" secondAttribute="centerY" id="wVu-7y-Z1A"/>
                 <constraint firstAttribute="centerX" secondItem="Sw7-Ky-4PG" secondAttribute="centerX" id="xva-2I-Z0l"/>
             </constraints>
