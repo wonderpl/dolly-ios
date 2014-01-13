@@ -34,7 +34,7 @@
 #define kUser                       @"User"
 
 // viewId
-#define kFeedViewId                 @"FEED"
+#define kFeedViewId                 @"MY WONDERS"
 #define kChannelsViewId             @"PACKS"
 #define kCommentsViewId             @"COMMENTS"
 #define kProfileViewId              @"ME"
