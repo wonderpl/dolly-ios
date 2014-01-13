@@ -874,6 +874,8 @@
 		38BACE88173AB49F00406597 /* ButtonCameraHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BACE84173AB49F00406597 /* ButtonCameraHighlighted~iphone.png */; };
 		38C3FA7417203D6600F126B1 /* PanelDayPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C3FA7217203D6600F126B1 /* PanelDayPortrait.png */; };
 		38C3FA7517203D6600F126B1 /* PanelDayPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C3FA7317203D6600F126B1 /* PanelDayPortrait@2x.png */; };
+		44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC631884384900B70139 /* ButtonMoreHints.png */; };
+		44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */; };
 		BE03A6CC16F7697900245314 /* ButtonSettingsHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */; };
 		BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */; };
@@ -2350,6 +2352,8 @@
 		38C3FA7217203D6600F126B1 /* PanelDayPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PanelDayPortrait.png; path = Assets/Images/PanelDayPortrait.png; sourceTree = "<group>"; };
 		38C3FA7317203D6600F126B1 /* PanelDayPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PanelDayPortrait@2x.png"; path = "Assets/Images/PanelDayPortrait@2x.png"; sourceTree = "<group>"; };
 		38DC34B1175E42DF0048286C /* Rockpack 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 3.xcdatamodel"; sourceTree = "<group>"; };
+		44CAFC631884384900B70139 /* ButtonMoreHints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonMoreHints.png; path = Assets/Images/ButtonMoreHints.png; sourceTree = "<group>"; };
+		44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreHints@2x.png"; path = "Assets/Images/ButtonMoreHints@2x.png"; sourceTree = "<group>"; };
 		B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dollyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsViewController.m; sourceTree = "<group>"; };
@@ -5890,6 +5894,8 @@
 		BED027B51834D4BF00636659 /* Options */ = {
 			isa = PBXGroup;
 			children = (
+				44CAFC631884384900B70139 /* ButtonMoreHints.png */,
+				44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */,
 				BED027B61834D4CC00636659 /* ButtonMoreAbout.png */,
 				BED027B71834D4CC00636659 /* ButtonMoreAbout@2x.png */,
 				BED027B81834D4CC00636659 /* ButtonMoreBlog.png */,
@@ -6185,6 +6191,7 @@
 				01A79B9A16F32C3400B05084 /* ShuttleBarProgressBar.png in Resources */,
 				01A79B9B16F32C3400B05084 /* ShuttleBarProgressBar@2x.png in Resources */,
 				01A79B9C16F32C3400B05084 /* ButtonShuttleBarPause.png in Resources */,
+				44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */,
 				01A79B9D16F32C3400B05084 /* ButtonShuttleBarPause@2x.png in Resources */,
 				01A79B9E16F32C3400B05084 /* ButtonShuttleBarPlay.png in Resources */,
 				01A79B9F16F32C3400B05084 /* ButtonShuttleBarPlay@2x.png in Resources */,
@@ -6989,6 +6996,7 @@
 				BE458AE817E6007500776B0D /* InstructionCard2fakeVideoCell.png in Resources */,
 				BE3983DA176A0CD200EE9C7B /* onboarding_button_ok.png in Resources */,
 				BE3983DB176A0CD200EE9C7B /* onboarding_button_ok@2x.png in Resources */,
+				44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */,
 				BE3983DC176A0CD200EE9C7B /* onboarding_button_ok@2x~iphone.png in Resources */,
 				0127B88318113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png in Resources */,
 				BE3983DD176A0CD200EE9C7B /* onboarding_button_ok~iphone.png in Resources */,
