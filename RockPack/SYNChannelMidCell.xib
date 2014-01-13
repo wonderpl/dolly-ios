@@ -71,7 +71,7 @@
                                         <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GARDENING TIPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="qfg-Af-VXr" userLabel="Label - Pack name">
-                                        <rect key="frame" x="0.0" y="18" width="280" height="21"/>
+                                        <rect key="frame" x="4" y="18" width="272" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0039215686274509803" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
