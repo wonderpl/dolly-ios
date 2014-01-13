@@ -317,7 +317,7 @@
                                                                alpha: 1.0f];
     
     
-    self.barBtnSaveEditMode= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveEditModeTapped)];
+    self.barBtnSaveEditMode= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveDescription)];
     
     self.barBtnSaveEditMode.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
                                                         green: (210.0f / 255.0f)
@@ -1813,6 +1813,7 @@
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
     if (textField == self.createChannelCell.createTextField) {
         [self.createChannelCell.descriptionTextView becomeFirstResponder];
+        [self saveDescription];
     }
     else
     {
@@ -2294,7 +2295,7 @@
         
         self.barBtnBack = self.navigationItem.leftBarButtonItem;
         self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
-        self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
+//        self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
         
         self.aboutMeTextView.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:1.0];
         self.uploadCoverPhotoButton.alpha = 1.0f;
@@ -2444,7 +2445,7 @@
     
 }
 
--(void) saveEditModeTapped
+-(void) saveDescription
 {
     [self updateField:@"description" forValue:self.aboutMeTextView.text withCompletionHandler:^{
         appDelegate.currentUser.channelOwnerDescription = self.aboutMeTextView.text;
@@ -2660,6 +2661,9 @@ finishedWithImage: (UIImage *) image
          [self setProfileImage:result[@"thumbnail_url"]];
          //[self.activityIndicator stopAnimating];
          self.avatarButton.enabled = YES;
+
+         [self cancelEditModeTapped];
+
          
      }
                                              errorHandler: ^(id error)
@@ -2681,7 +2685,7 @@ finishedWithImage: (UIImage *) image
     
     self.imagePickerControllerAvatar = nil;
     
-            }
+    }
     else
     {
         [appDelegate.oAuthNetworkEngine updateProfileCoverForUserId: appDelegate.currentOAuth2Credentials.userId
@@ -2690,6 +2694,8 @@ finishedWithImage: (UIImage *) image
          {
              [self setCoverphotoImage:result[@"Location"]];
 
+
+             [self cancelEditModeTapped];
 
 //             [self.activityIndicator stopAnimating];
 //             self.avatarButton.enabled = YES;
