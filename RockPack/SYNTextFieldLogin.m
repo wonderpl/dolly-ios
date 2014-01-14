@@ -62,12 +62,12 @@
     }
     else // normal mode
     {
-        float ration = (167.0f/255);
-        UIColor* mediumGrayColor = [UIColor colorWithRed:ration green:ration blue:ration alpha:1.0f];
+        UIColor* mediumGrayColor = [UIColor colorWithWhite:167/255.0 alpha:1.0f];
+		UIColor *textColor = [UIColor colorWithWhite:117/255.0 alpha:1.0];
         self.backgroundColor = [UIColor clearColor];
         self.layer.borderColor = mediumGrayColor.CGColor;
         self.tintColor = mediumGrayColor;
-        self.textColor = mediumGrayColor;
+        self.textColor = textColor;
         self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{ NSForegroundColorAttributeName: mediumGrayColor}];
     }
 }
