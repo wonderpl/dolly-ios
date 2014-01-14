@@ -1343,6 +1343,8 @@
 		E99AA425188035F100330ABB /* LoginLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E99AA423188035F100330ABB /* LoginLogo@2x.png */; };
 		E9A465FE187FFA76007511B3 /* SYNTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A465FD187FFA76007511B3 /* SYNTabBar.m */; };
 		E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */; };
+		E9AD5B68187D6B9600298D95 /* ButtonFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AD5B66187D6B9600298D95 /* ButtonFacebook.png */; };
+		E9AD5B69187D6B9600298D95 /* ButtonFacebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AD5B67187D6B9600298D95 /* ButtonFacebook@2x.png */; };
 		E9B068E7185B62F500C98AEB /* SYNSearchVideoPlayerViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9B068E3185B62F500C98AEB /* SYNSearchVideoPlayerViewController_ipad.storyboard */; };
 		E9B068E8185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B068E5185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m */; };
 		E9B068E9185B62F500C98AEB /* SYNSearchVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9B068E6185B62F500C98AEB /* SYNSearchVideoPlayerViewController_iphone.storyboard */; };
@@ -2950,6 +2952,8 @@
 		E9A465FD187FFA76007511B3 /* SYNTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTabBar.m; sourceTree = "<group>"; };
 		E9A4E5301864623E00972F09 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
 		E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
+		E9AD5B66187D6B9600298D95 /* ButtonFacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonFacebook.png; path = Assets/Images/ButtonFacebook.png; sourceTree = "<group>"; };
+		E9AD5B67187D6B9600298D95 /* ButtonFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonFacebook@2x.png"; path = "Assets/Images/ButtonFacebook@2x.png"; sourceTree = "<group>"; };
 		E9B068E3185B62F500C98AEB /* SYNSearchVideoPlayerViewController_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNSearchVideoPlayerViewController_ipad.storyboard; sourceTree = "<group>"; };
 		E9B068E4185B62F500C98AEB /* SYNSearchVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoPlayerViewController.h; sourceTree = "<group>"; };
 		E9B068E5185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoPlayerViewController.m; sourceTree = "<group>"; };
@@ -5240,6 +5244,8 @@
 				BE270BCD16EF386300CDDA6D /* DividerLogin@2x.png */,
 				BE851B46183BE6BC00B8E8C6 /* ButtonUpload.png */,
 				BE851B47183BE6BC00B8E8C6 /* ButtonUpload@2x.png */,
+				E9AD5B66187D6B9600298D95 /* ButtonFacebook.png */,
+				E9AD5B67187D6B9600298D95 /* ButtonFacebook@2x.png */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -6728,6 +6734,7 @@
 				38A200E71731607F00FB9F57 /* PanelChannelProfile~iphone.png in Resources */,
 				38A200E81731607F00FB9F57 /* BackgroundVideoThumbnailSmall@2x~iphone.png in Resources */,
 				38A200E91731607F00FB9F57 /* BackgroundVideoThumbnailSmall~iphone.png in Resources */,
+				E9AD5B69187D6B9600298D95 /* ButtonFacebook@2x.png in Resources */,
 				38A200EA1731607F00FB9F57 /* ButtonClose@2x~iphone.png in Resources */,
 				38A200EB1731607F00FB9F57 /* ButtonCloseHighlighted@2x~iphone.png in Resources */,
 				38A200EC1731607F00FB9F57 /* ButtonCloseHighlighted~iphone.png in Resources */,
@@ -7067,6 +7074,7 @@
 				BE2AE4CC176E64D300A753E3 /* ButtonNavHighlightedCD~iphone.png in Resources */,
 				BE2AE4CD176E64D300A753E3 /* ButtonNavSelectedCD@2x~iphone.png in Resources */,
 				BE2AE4CE176E64D300A753E3 /* ButtonNavSelectedCD~iphone.png in Resources */,
+				E9AD5B68187D6B9600298D95 /* ButtonFacebook.png in Resources */,
 				BE2AE4D3176E689C00A753E3 /* ButtonBackCD@2x~iphone.png in Resources */,
 				BE2AE4D4176E689C00A753E3 /* ButtonBackCD~iphone.png in Resources */,
 				BE2AE4D5176E689C00A753E3 /* ButtonBackHighlightedCD@2x~iphone.png in Resources */,
