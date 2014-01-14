@@ -135,12 +135,12 @@
 
 // == Core Navigation == //
 
-"friends_follow" = "Follow your friends on Rockpack";
-"friends_invite" = "Invite your friends to Rockpack";
+"friends_follow" = "Follow your friends on Wonder PL";
+"friends_invite" = "Invite your friends to Wonder PL";
 "friends_name_not_found" = "This person is not a\nfacebook friend";
 
-"friends_empty" = "You have no friends on Mayberry";
-"friends_invite" = "Mayberry is better with friends";
+"friends_empty" = "You have no friends on Wonder PL";
+"friends_invite" = "Wonder PL is better with friends";
 "friends_loading" = "Loading your friends";
 // == One to One Sharing == //
 
