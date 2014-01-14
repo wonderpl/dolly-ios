@@ -125,6 +125,7 @@
 @property (strong, nonatomic) UIAlertView *sameChannelNameAlertView;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
+@property (nonatomic) CGPoint contentOffset;
 
 @property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
 
@@ -419,6 +420,26 @@
     {
         [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
     }
+
+    self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
+
+    [self.subscriptionThumbnailCollectionView reloadData];
+    [self.channelThumbnailCollectionView reloadData];
+
+    self.channelThumbnailCollectionView.contentOffset = CGPointZero;
+    self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
+
+    if (IS_IPHONE) {
+        if (self.collectionsTabActive) {
+            self.subscriptionThumbnailCollectionView.contentOffset = self.contentOffset;
+            self.channelThumbnailCollectionView.contentOffset = self.contentOffset;
+        } else {
+            self.channelThumbnailCollectionView.contentOffset = self.contentOffset;
+            [self.subscriptionThumbnailCollectionView setContentOffset:self.contentOffset animated:NO];
+        }
+        
+    }
+    
 }
 
 
@@ -433,9 +454,6 @@
     self.navigationItem.backBarButtonItem.title = @"";
     [self.navigationItem.backBarButtonItem setTitle:@""];
     
-    self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
-    [self.subscriptionThumbnailCollectionView reloadData];
-    [self.channelThumbnailCollectionView reloadData];
     
     if (self.channelOwner == appDelegate.currentUser)
     {
@@ -474,8 +492,10 @@
         
         [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     }
-    
-    [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+
+    if (IS_IPAD) {
+        [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -488,6 +508,11 @@
         [self updateCollectionLayout];
         self.creatingChannel = NO;
     }
+    
+    if (IS_IPHONE) {
+        self.contentOffset = self.collectionsTabActive ? self.channelThumbnailCollectionView.contentOffset : self.subscriptionThumbnailCollectionView.contentOffset;
+    }
+    
 }
 
 - (void) updateAnalytics
@@ -948,27 +973,21 @@
 				//text is set in the channelmidcell setChannel method
                 channelThumbnailCell.channel = channel;
                 
-                
                 [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
-                
-                
             }
         }
-        if(self.modeType == kModeOtherUsersProfile)
-        {
-            if ([SYNActivityManager.sharedInstance isSubscribedToChannelId:channel.uniqueId])
-            {
-                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-            }
-            else
-            {
-                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
-            }
-        }
-        
-       
-
-
+//        if(self.modeType == kModeOtherUsersProfile)
+//        {
+//            if ([SYNActivityManager.sharedInstance isSubscribedToChannelId:channel.uniqueId])
+//            {
+//                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
+//            }
+//            else
+//            {
+//                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
+//            }
+//        }
+//       
         channelThumbnailCell.viewControllerDelegate = self;
         
         cell = channelThumbnailCell;
@@ -1193,47 +1212,7 @@
                                                        inRange: range
                                              completionHandler: successBlock
                                                   errorHandler: errorBlock];
-    
-//
-//
-//
-//        NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
-//        NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
-//
-//        MKNKUserErrorBlock errorBlock = ^(id error) {
-//            
-//        };
-//
-//        
-//
-//        [appDelegate.oAuthNetworkEngine userSubscriptionsForUser: ((User *) self.channelOwner)
-//                                                    onCompletion: ^(id dictionary) {
-//                                                        NSError *error = nil;
-//
-//                                                        // Transform the object ID into the object again, as it it likely to have disappeared again
-//                                                        NSError *error2 = nil;
-//                                                        ChannelOwner * channelOwnerFromId2 = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
-//                                                                                                                                                   error: &error2];
-//                                                        if (channelOwnerFromId2)
-//                                                        {
-//                                                            // this will remove the old subscriptions
-//                                                            [channelOwnerFromId2 setSubscriptionsDictionary: dictionary];
-//                                                            
-//                                                            [channelOwnerFromId2.managedObjectContext save: &error2];
-//                                                            
-//                                                            if (error)
-//                                                            {
-//                                                                NSString *errorString = [NSString stringWithFormat: @"%@ %@", [error localizedDescription], [error userInfo]];
-//                                                                DebugLog(@"%@", errorString);
-//                                                                errorBlock(@{@"saving_error": errorString});
-//                                                            }
-//                                                        }
-//                                                        else
-//                                                        {
-//                                                            DebugLog (@"Channel disappeared from underneath us");
-//                                                        }
-//                                                    }  onError: errorBlock];
-    }
+        }
 }
 
 #pragma mark - scroll view delegates
@@ -1252,33 +1231,35 @@
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-    if (decelerate)
-    {
-        [self moveNameLabelWithOffset:scrollView.contentOffset.y];
-    }
-    
-    if (self.channelThumbnailCollectionView == scrollView)
-    {
-        [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
-    }
-    if (self.subscriptionThumbnailCollectionView == scrollView)
-    {
-        [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
-    }
+//TODO:FIX AMOUNT NEEDED TO SCROLL
+//    if (decelerate)
+//    {
+//        [self moveNameLabelWithOffset:scrollView.contentOffset.y];
+//    }
+//    
+//    if (self.channelThumbnailCollectionView == scrollView)
+//    {
+//        [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+//    }
+//    if (self.subscriptionThumbnailCollectionView == scrollView)
+//    {
+//        [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+//    }
     
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self moveNameLabelWithOffset:scrollView.contentOffset.y];
     
-    if (self.channelThumbnailCollectionView == scrollView)
-    {
-        [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
-    }
-    if (self.subscriptionThumbnailCollectionView == scrollView)
-    {
-        [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
-    }
+    
+//    if (self.channelThumbnailCollectionView == scrollView)
+//    {
+//        [self.subscriptionThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+//    }
+//    if (self.subscriptionThumbnailCollectionView == scrollView)
+//    {
+//        [self.channelThumbnailCollectionView setContentOffset:scrollView.contentOffset];
+//    }
     
 }
 
@@ -1287,6 +1268,16 @@
 {
     [super scrollViewDidScroll:scrollView];
     
+    if (self.channelThumbnailCollectionView == scrollView)
+    {
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+    }
+    if (self.subscriptionThumbnailCollectionView == scrollView)
+    {
+        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+    }
+
     CGFloat offset = scrollView.contentOffset.y;
     
     if (self.channelThumbnailCollectionView == scrollView) {
