@@ -96,6 +96,13 @@ typedef void(^FeedDataErrorBlock)(void);
                   forControlEvents: UIControlEventValueChanged];
     
     [self.feedCollectionView addSubview: self.refreshControl];
+    
+    if (!IS_IPHONE_5) {
+        UIEdgeInsets tmpInsets = self.feedCollectionView.contentInset;
+        tmpInsets.bottom += 88;
+        [self.feedCollectionView setContentInset: tmpInsets];
+    }
+
 }
 
 

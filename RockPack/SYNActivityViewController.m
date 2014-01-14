@@ -90,6 +90,13 @@
     }
     
     [self.tableView reloadData];
+    
+    if (!IS_IPHONE_5) {
+        UIEdgeInsets tmpInsets = self.tableView.contentInset;
+        tmpInsets.bottom += 88;
+        [self.tableView setContentInset: tmpInsets];
+    }
+
 }
 
 

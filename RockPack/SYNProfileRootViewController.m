@@ -360,6 +360,19 @@
     
     [self setFollowersCountButton];
     
+    if (!IS_IPHONE_5) {
+        UIEdgeInsets tmpInsets = self.subscriptionThumbnailCollectionView.contentInset;
+        tmpInsets.bottom += 88;
+        [self.subscriptionThumbnailCollectionView setContentInset: tmpInsets];
+     
+        tmpInsets = self.channelThumbnailCollectionView.contentInset;
+        tmpInsets.bottom += 88;
+        
+        [self.channelThumbnailCollectionView setContentInset: tmpInsets];
+
+    }
+
+    
     
     
 }

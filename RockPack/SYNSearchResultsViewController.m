@@ -149,13 +149,20 @@ typedef void (^SearchResultCompleteBlock)(int);
         [wself.usersCollectionView reloadData];
     };
     
-    
-    
     // Set Initial
     self.searchResultsShowing = SearchResultsShowingVideos;
     
     self.dataRequestRange2 = self.dataRequestRange; // they start off as (0, 48) for both...
     
+    if (!IS_IPHONE_5) {
+        UIEdgeInsets tmpInsets = self.usersCollectionView.contentInset;
+        tmpInsets.bottom += 88;
+        self.usersCollectionView.contentInset = tmpInsets;
+        
+        tmpInsets = self.videosCollectionView.contentInset;
+        tmpInsets.bottom += 88;
+        self.videosCollectionView.contentInset = tmpInsets;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

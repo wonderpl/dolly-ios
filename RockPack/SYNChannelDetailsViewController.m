@@ -215,6 +215,12 @@
     [self.view addSubview:self.activityIndicator];
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
+    
+    if (!IS_IPHONE_5) {
+        UIEdgeInsets tmpInsets = self.videoThumbnailCollectionView.contentInset;
+        tmpInsets.bottom += 88;
+        [self.videoThumbnailCollectionView setContentInset: tmpInsets];
+    }
 }
 
 - (void) viewWillAppear: (BOOL) animated
