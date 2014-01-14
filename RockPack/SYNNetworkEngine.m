@@ -952,7 +952,24 @@
     
 }
 
-
+- (void)exampleUsersWithCompletionHandler:(MKNKUserSuccessBlock)completionBlock
+							 errorHandler:(MKNKUserErrorBlock)errorBlock {
+	SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *)[self operationWithPath:kExampleUsers
+																										params:nil
+																									httpMethod:@"GET"];
+    
+    networkOperation.ignoreCachedResponse = YES;
+    
+    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
+		NSArray *users = dictionary[@"users"][@"items"];
+        completionBlock(users);
+    } errorHandler: ^(NSError *error) {
+        DebugLog(@"API request failed");
+		errorBlock(error);
+    }];
+    
+    [self enqueueOperation:networkOperation];
+}
 
 
 
