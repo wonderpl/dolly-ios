@@ -110,7 +110,6 @@
 		
 		//TODO: Network Error stuff
 		
-		
 		UINavigationItem *navigationItem = self.navigationBar.topItem;
 		[navigationItem setLeftBarButtonItem:nil animated:YES];
 		[navigationItem setRightBarButtonItem:nil animated:YES];
@@ -131,16 +130,7 @@
 				 completionHandler: ^(NSDictionary *dictionary) {
 					 
 					 if (self.avatarImage) {
-						 [[SYNLoginManager sharedManager] uploadAvatarImage: self.avatarImage
-							   completionHandler: ^(id dummy) {
-							   }
-									errorHandler: ^(id dictionary) {
-										[[[UIAlertView alloc]  initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title", nil)
-																	 message: NSLocalizedString(@"register_screen_form_avatar_upload_description", nil)
-																	delegate: nil
-														   cancelButtonTitle: NSLocalizedString(@"OK", nil)
-														   otherButtonTitles: nil] show];
-									}];
+						 [self uploadAvatar:self.avatarImage];
 					 }
 					 
 					 [[NSNotificationCenter defaultCenter] postNotificationName: kLoginCompleted
@@ -217,19 +207,23 @@
 							 }
 						 }
 						 
-						 if (errorString) {
-							 //TODO: NO AUTOLAYOUT@!!!!)(
-							 
-							 self.errorLabel.text = errorString;
-							 CGFloat width = self.errorLabel.frame.size.width;
-							 [self.errorLabel sizeToFit];
-							 CGRect newFrame = self.errorLabel.frame;
-							 newFrame.size.width = width;
-							 self.errorLabel.frame = newFrame;
-						 }
+						 self.errorLabel.text = errorString;
 					 }
 				 }];
 	}
+}
+
+- (void)uploadAvatar:(UIImage *)avatarImage {
+	[[SYNLoginManager sharedManager] uploadAvatarImage:avatarImage
+									 completionHandler: ^(id dummy) {
+									 }
+										  errorHandler: ^(id dictionary) {
+											  [[[UIAlertView alloc]  initWithTitle: NSLocalizedString(@"register_screen_form_avatar_upload_title", nil)
+																		   message: NSLocalizedString(@"register_screen_form_avatar_upload_description", nil)
+																		  delegate: nil
+																 cancelButtonTitle: NSLocalizedString(@"OK", nil)
+																 otherButtonTitles: nil] show];
+										  }];
 }
 
 - (BOOL)registrationFormIsValidForEmail:(SYNTextFieldLogin *)emailInputField
