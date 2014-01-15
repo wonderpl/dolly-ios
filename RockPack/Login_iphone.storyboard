@@ -389,6 +389,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="next"/>
                                         <connections>
+                                            <action selector="textFieldDidChange:" destination="hNy-rk-sTx" eventType="editingChanged" id="dsY-UL-fbZ"/>
                                             <outlet property="delegate" destination="hNy-rk-sTx" id="303-fV-GGe"/>
                                         </connections>
                                     </textField>
@@ -419,6 +420,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="next"/>
                                         <connections>
+                                            <action selector="textFieldDidChange:" destination="hNy-rk-sTx" eventType="editingChanged" id="fea-Gm-c4J"/>
                                             <outlet property="delegate" destination="hNy-rk-sTx" id="p3p-3h-iQu"/>
                                         </connections>
                                     </textField>
@@ -452,6 +454,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="send"/>
                                         <connections>
+                                            <action selector="textFieldDidChange:" destination="hNy-rk-sTx" eventType="editingChanged" id="XAB-Qo-Kvn"/>
                                             <outlet property="delegate" destination="hNy-rk-sTx" id="3GD-ML-fxh"/>
                                         </connections>
                                     </textField>

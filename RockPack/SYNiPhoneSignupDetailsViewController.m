@@ -70,12 +70,11 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	NSInteger index = [self.textFields indexOfObject:textField];
-	if (index == [self.textFields count] - 1) {
-		[self submitSignUp];
-	} else {
-		UITextField *nextTextField = self.textFields[index + 1];
+	UITextField *nextTextField = [self nextTextFieldAfter:textField];
+	if (nextTextField) {
 		[nextTextField becomeFirstResponder];
+	} else {
+		[self submitSignUp];
 	}
 	
 	return YES;
@@ -395,6 +394,7 @@
 - (BOOL)textField:(SYNTextFieldLogin *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 	
 	textField.errorMode = NO;
+	self.errorLabel.text = nil;
 	
 	NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
 	NSUInteger newLength = [newString length];
@@ -414,8 +414,48 @@
             return NO;
         }
     }
-    
+	
     return YES;
+}
+
+- (IBAction)textFieldDidChange:(SYNTextFieldLogin *)textField {
+	if (textField == self.dayTextField && [textField.text length] == 2) {
+		[[self nextTextFieldAfter:textField] becomeFirstResponder];
+		
+		if ([self.monthTextField.text length] && [self.yearTextField.text length]) {
+			[self dateValidForDd: self.dayTextField
+							  mm: self.monthTextField
+							yyyy: self.yearTextField];
+		}
+	}
+	
+	if (textField == self.monthTextField && [textField.text length] == 2) {
+		[[self nextTextFieldAfter:textField] becomeFirstResponder];
+		
+		if ([self.dayTextField.text length] && [self.yearTextField.text length]) {
+			[self dateValidForDd: self.dayTextField
+							  mm: self.monthTextField
+							yyyy: self.yearTextField];
+		}
+	}
+	
+	if (textField == self.yearTextField && [textField.text length] == 4) {
+		[textField resignFirstResponder];
+		
+		if ([self.dayTextField.text length] && [self.monthTextField.text length]) {
+			[self dateValidForDd: self.dayTextField
+							  mm: self.monthTextField
+							yyyy: self.yearTextField];
+		}
+    }
+}
+
+- (UITextField *)nextTextFieldAfter:(UITextField *)textField {
+	NSInteger index = [self.textFields indexOfObject:textField];
+	if (index < [self.textFields count] - 1) {
+		return self.textFields[index + 1];
+	}
+	return nil;
 }
 
 @end
