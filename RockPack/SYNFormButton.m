@@ -14,9 +14,11 @@
 {
     [super awakeFromNib];
     
-    self.layer.cornerRadius = 2.0f;
     self.layer.masksToBounds = YES;
-    
+	
+	self.layer.borderWidth = 1.0;
+    self.layer.borderColor = [[UIColor colorWithWhite:167/255.0 alpha:1.0] CGColor];
+    self.layer.cornerRadius = 8.0f;
 }
 
 
