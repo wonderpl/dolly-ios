@@ -139,9 +139,9 @@
             
             onBoardingViewController.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
             
-            // [self.view addSubview:onBoardingViewController.view];
+             [self.view addSubview:onBoardingViewController.view];
             
-            // [[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsSeenOnBoarding];
+             [[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsSeenOnBoarding];
             
         }
         
