@@ -1152,6 +1152,8 @@
 - (void) updateTabStates
 {
     
+    [self killScroll];
+    
     self.collectionsTabButton.selected = !self.collectionsTabActive;
     
     self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
@@ -1270,12 +1272,12 @@
     
     if (self.channelThumbnailCollectionView == scrollView)
     {
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+        self.subscriptionThumbnailCollectionView.bounds = self.channelThumbnailCollectionView.bounds;
     }
     if (self.subscriptionThumbnailCollectionView == scrollView)
     {
-        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
+        
+        self.channelThumbnailCollectionView.bounds = self.subscriptionThumbnailCollectionView.bounds;
     }
 
     CGFloat offset = scrollView.contentOffset.y;
