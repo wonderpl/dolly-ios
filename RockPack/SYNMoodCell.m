@@ -8,6 +8,7 @@
 
 #import "SYNMoodCell.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
 @implementation SYNMoodCell
 
@@ -17,8 +18,9 @@
     {
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height)];
         
-        self.titleLabel.font = [UIFont regularCustomFontOfSize:(IS_IPAD ? 33.0f : 18.0f)];
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.font = [UIFont regularCustomFontOfSize:(IS_IPAD ? 20.0f : 20.0f)];
+        self.titleLabel.textColor = [UIColor dollyMoodColor];
+        
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
         
         [self addSubview:self.titleLabel];

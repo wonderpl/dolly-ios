@@ -9,5 +9,4 @@
 #import "SYNAbstractViewController.h"
 
 @interface SYNMoodRootViewController : SYNAbstractViewController
-
 @end

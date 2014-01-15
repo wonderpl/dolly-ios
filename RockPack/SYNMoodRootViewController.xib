@@ -18,24 +18,30 @@
             <rect key="frame" x="0.0" y="0.0" width="927" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BackgroundMoodView.png" translatesAutoresizingMaskIntoConstraints="NO" id="GCP-yk-7gu">
-                    <rect key="frame" x="0.0" y="64" width="927" height="703"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MoodBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="GCP-yk-7gu">
+                    <rect key="frame" x="0.0" y="217" width="927" height="334"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="334" id="1LZ-Lu-Dv2"/>
+                    </constraints>
                 </imageView>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41P-4L-9Er">
                     <rect key="frame" x="417" y="644" width="94" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="36" id="aSN-0k-Zjc"/>
-                        <constraint firstAttribute="width" constant="94" id="eL3-bN-upl"/>
+                        <constraint firstAttribute="height" constant="36" id="Ems-eS-Ylp"/>
+                        <constraint firstAttribute="width" constant="94" id="Iln-bs-qFK"/>
                     </constraints>
                     <state key="normal" title="watch">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="watchButtonTapped:" destination="-1" eventType="touchUpInside" id="dff-M8-n32"/>
+                    </connections>
                 </button>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ICd-hC-jBC">
-                    <rect key="frame" x="447" y="244" width="480" height="280"/>
+                    <rect key="frame" x="447.00000000000006" y="244" width="480" height="280"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -54,40 +60,44 @@
                     </connections>
                 </collectionView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfI-8D-ccz">
-                    <rect key="frame" x="320" y="375" width="97" height="40"/>
+                    <rect key="frame" x="320" y="364" width="97" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="97" id="TOE-4h-jie"/>
                         <constraint firstAttribute="height" constant="40" id="x1v-02-zyX"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.53333333329999999" green="0.52549019610000003" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the perfect video for your mood" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="227" translatesAutoresizingMaskIntoConstraints="NO" id="g4j-4B-VWQ">
-                    <rect key="frame" x="350" y="116" width="227" height="48"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the perfect video for your mood" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="279" translatesAutoresizingMaskIntoConstraints="NO" id="g4j-4B-VWQ">
+                    <rect key="frame" x="324" y="102" width="279" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="4pF-qk-okY"/>
-                        <constraint firstAttribute="width" constant="227" id="Ycv-LT-leJ"/>
+                        <constraint firstAttribute="height" constant="62" id="4pF-qk-okY"/>
+                        <constraint firstAttribute="width" constant="279" id="Ycv-LT-leJ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <color key="textColor" red="0.53333333329999999" green="0.52549019610000003" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="41P-4L-9Er" secondAttribute="bottom" constant="88" id="5fQ-tp-CCr"/>
+                <constraint firstAttribute="centerY" secondItem="GCP-yk-7gu" secondAttribute="centerY" id="0e6-hs-Y2F"/>
                 <constraint firstAttribute="centerX" secondItem="jfI-8D-ccz" secondAttribute="centerX" constant="95" id="8la-bA-Rxf"/>
                 <constraint firstAttribute="centerY" secondItem="ICd-hC-jBC" secondAttribute="centerY" id="IMK-a0-juJ"/>
-                <constraint firstAttribute="centerY" secondItem="jfI-8D-ccz" secondAttribute="centerY" constant="-11" id="K4I-eo-GIf"/>
+                <constraint firstAttribute="centerY" secondItem="jfI-8D-ccz" secondAttribute="centerY" id="K4I-eo-GIf"/>
                 <constraint firstItem="jfI-8D-ccz" firstAttribute="leading" secondItem="ICd-hC-jBC" secondAttribute="leading" constant="-127" id="Kbe-ZM-Rr4"/>
                 <constraint firstAttribute="centerX" secondItem="g4j-4B-VWQ" secondAttribute="centerX" id="L0p-uX-65w"/>
-                <constraint firstAttribute="centerX" secondItem="41P-4L-9Er" secondAttribute="centerX" constant="-0.5" id="NKe-z2-7oY"/>
-                <constraint firstItem="jfI-8D-ccz" firstAttribute="top" secondItem="1" secondAttribute="top" constant="375" id="dRy-US-n6T"/>
-                <constraint firstItem="g4j-4B-VWQ" firstAttribute="top" secondItem="1" secondAttribute="top" constant="116" id="tAm-4z-4Wr"/>
+                <constraint firstItem="41P-4L-9Er" firstAttribute="top" secondItem="ICd-hC-jBC" secondAttribute="top" constant="400" id="RAP-FW-F3e"/>
+                <constraint firstAttribute="centerX" secondItem="GCP-yk-7gu" secondAttribute="centerX" id="Wd6-ep-bXm"/>
+                <constraint firstAttribute="centerX" secondItem="41P-4L-9Er" secondAttribute="centerX" constant="-0.5" id="Y02-A9-3Pc"/>
+                <constraint firstItem="jfI-8D-ccz" firstAttribute="top" secondItem="1" secondAttribute="top" constant="364" id="dRy-US-n6T"/>
+                <constraint firstAttribute="trailing" secondItem="GCP-yk-7gu" secondAttribute="trailing" id="qZV-A0-Dti"/>
+                <constraint firstItem="g4j-4B-VWQ" firstAttribute="top" secondItem="1" secondAttribute="top" constant="102" id="tAm-4z-4Wr"/>
                 <constraint firstAttribute="trailing" secondItem="ICd-hC-jBC" secondAttribute="trailing" id="tht-yV-fbB"/>
+                <constraint firstItem="GCP-yk-7gu" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="tuM-Ha-iaf"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -95,6 +105,6 @@
         </view>
     </objects>
     <resources>
-        <image name="BackgroundMoodView.png" width="927" height="702"/>
+        <image name="MoodBackground.png" width="927" height="353"/>
     </resources>
 </document>

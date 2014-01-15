@@ -14,6 +14,7 @@
 #import "SYNDeviceManager.h"
 #import "Mood.h"
 #import "UINavigationBar+Appearance.h"
+#import "UIColor+SYNColor.h"
 
 
 #define LARGE_AMOUNT_OF_ROWS 10000
@@ -26,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *watchButton;
 
 @property (nonatomic, readonly) Mood* currentMood;
+@property (strong, nonatomic) IBOutlet UIPickerView *testPicker;
 
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 
@@ -50,10 +52,6 @@
     self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
     
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-                                                                                 target:self
-                                                                                 action:@selector(rightBarButtonItemPressed:)];
-//    self.navigationItem.rightBarButtonItem = rightButton;
     self.moodCollectionView.scrollsToTop = NO;
     
     [self loadMoods];
@@ -64,14 +62,14 @@
     self.navigationController.title = @"";
     [self.navigationItem setTitle:@""];
 
-    self.watchButton.layer.cornerRadius = 15.0f;
+    self.watchButton.layer.cornerRadius = 18.0f;
     self.watchButton.layer.masksToBounds = YES;
     
     self.watchButton.layer.borderWidth = 2.0f;
-    self.watchButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
     if (!IS_IPHONE_5) {
-        
+        //TODO: need to move views for 3.5
     }
     
 }
@@ -292,8 +290,6 @@
                                         atScrollPosition: UICollectionViewScrollPositionCenteredVertically
                                                 animated: NO];
     }
-    
-    
 }
 
 -(Mood*)currentMood

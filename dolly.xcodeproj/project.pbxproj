@@ -368,6 +368,8 @@
 		0E27C272183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */; };
 		0E2AB166188462DD004557A4 /* SYNWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */; };
 		0E2AB167188462DD004557A4 /* SYNWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */; };
+		0E2AB16B1886CBE3004557A4 /* MoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB1691886CBE3004557A4 /* MoodBackground.png */; };
+		0E2AB16C1886CBE4004557A4 /* MoodBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB16A1886CBE3004557A4 /* MoodBackground@2x.png */; };
 		0E3AE6901875DE8C008A8D00 /* SYNGenreColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */; };
 		0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */; };
 		0E5B8EE918465C420012F460 /* coverImageTest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E5B8EE818465C420012F460 /* coverImageTest.jpg */; };
@@ -1834,6 +1836,8 @@
 		0E2AB163188462DD004557A4 /* SYNWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWebViewViewController.h; sourceTree = "<group>"; };
 		0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWebViewViewController.m; sourceTree = "<group>"; };
 		0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNWebViewViewController.xib; sourceTree = "<group>"; };
+		0E2AB1691886CBE3004557A4 /* MoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MoodBackground.png; path = Assets/Images/MoodBackground.png; sourceTree = "<group>"; };
+		0E2AB16A1886CBE3004557A4 /* MoodBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MoodBackground@2x.png"; path = "Assets/Images/MoodBackground@2x.png"; sourceTree = "<group>"; };
 		0E3AE68E1875DE8C008A8D00 /* SYNGenreColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGenreColorManager.h; sourceTree = "<group>"; };
 		0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGenreColorManager.m; sourceTree = "<group>"; };
 		0E5B8EA41846007D0012F460 /* SYNProfileFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileFlowLayout.h; sourceTree = "<group>"; };
@@ -3298,6 +3302,8 @@
 		0127B880181139F500DE2FD6 /* Mood Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0E2AB1691886CBE3004557A4 /* MoodBackground.png */,
+				0E2AB16A1886CBE3004557A4 /* MoodBackground@2x.png */,
 				BE31EFA8182C0579006E20E2 /* BackgroundMoodView.png */,
 				BE31EFA9182C0579006E20E2 /* BackgroundMoodView@2x.png */,
 				0127B88118113A1100DE2FD6 /* BackgroundMoodView@2x~iphone.png */,
@@ -6252,6 +6258,7 @@
 				01AEFBE41701ACFE0060467A /* popover-black-top-arrow-image.png in Resources */,
 				1F458B0217E1C4E6003C14AC /* AppIcon40x40.png in Resources */,
 				01AEFBE51701ACFE0060467A /* popover-black-top-arrow-image@2x.png in Resources */,
+				0E2AB16C1886CBE4004557A4 /* MoodBackground@2x.png in Resources */,
 				01AEFBF21701AD2E0060467A /* SearchTabDividerHeader.png in Resources */,
 				01AEFBF31701AD2E0060467A /* SearchTabDividerHeader@2x.png in Resources */,
 				1F4E7F79181AC7D300F59007 /* TabFeedHighlighted.png in Resources */,
@@ -6551,6 +6558,7 @@
 				38A200491731607F00FB9F57 /* ButtonNav~iphone.png in Resources */,
 				38A2004A1731607F00FB9F57 /* ButtonRefresh@2x~iphone.png in Resources */,
 				38A2004B1731607F00FB9F57 /* ButtonRefreshArrow@2x~iphone.png in Resources */,
+				0E2AB16B1886CBE3004557A4 /* MoodBackground.png in Resources */,
 				38A2004C1731607F00FB9F57 /* ButtonRefreshArrow~iphone.png in Resources */,
 				38A2004D1731607F00FB9F57 /* ButtonRefreshHighlighted@2x~iphone.png in Resources */,
 				38A2004E1731607F00FB9F57 /* ButtonRefreshHighlighted~iphone.png in Resources */,
