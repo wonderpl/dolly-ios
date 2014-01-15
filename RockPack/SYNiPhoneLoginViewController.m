@@ -11,6 +11,7 @@
 #import "GAI+Tracking.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTextFieldLogin.h"
+#import "GAI+Tracking.h"
 
 @interface SYNiPhoneLoginViewController () <UITextFieldDelegate, UIBarPositioningDelegate>
 
@@ -49,6 +50,12 @@
 	[super viewWillAppear:animated];
 	
 	[self.emailUsernameTextField becomeFirstResponder];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[GAI sharedInstance] trackLoginScreenView];
 }
 
 - (BOOL)textField:(SYNTextFieldLogin *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

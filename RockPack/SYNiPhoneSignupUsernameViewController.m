@@ -13,6 +13,7 @@
 #import "NSString+Validation.h"
 #import "SYNImagePickerController.h"
 #import "SYNiPhoneSignupDetailsViewController.h"
+#import "GAI+Tracking.h"
 
 @interface SYNiPhoneSignupUsernameViewController () <UIBarPositioningDelegate, UITextFieldDelegate, SYNImagePickerControllerDelegate>
 
@@ -52,10 +53,10 @@
 	self.errorLabel.font = [UIFont lightCustomFontOfSize:self.errorLabel.font.pointSize];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 	
-	
+	[[GAI sharedInstance] trackRegisterScreenView];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

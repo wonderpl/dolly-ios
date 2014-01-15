@@ -11,6 +11,7 @@
 #import "NSString+Validation.h"
 #import "SYNTextFieldLogin.h"
 #import "SYNLoginManager.h"
+#import "GAI+Tracking.h"
 
 @interface SYNiPhoneSignupDetailsViewController () <UIBarPositioningDelegate, UITextFieldDelegate>
 
@@ -60,6 +61,12 @@
 	[super viewWillAppear:animated];
 	
 	[self.emailTextField becomeFirstResponder];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[GAI sharedInstance] trackRegisterStep2ScreenView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

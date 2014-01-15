@@ -16,6 +16,7 @@
 #import "SYNiPhoneLoginViewController.h"
 #import "SYNiPhoneLoginAnimator.h"
 #import "SYNLoginManager.h"
+#import "GAI+Tracking.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Reachability.h>
 
@@ -52,6 +53,12 @@
 	self.facebookButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
 	self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
 	self.signupButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[GAI sharedInstance] trackStartScreenView];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
