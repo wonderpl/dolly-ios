@@ -13,6 +13,8 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 #import "Mood.h"
+#import "UINavigationBar+Appearance.h"
+
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 
@@ -21,6 +23,7 @@
 @property (nonatomic, strong) NSArray *moods;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
 @property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
+@property (strong, nonatomic) IBOutlet UIButton *watchButton;
 
 @property (nonatomic, readonly) Mood* currentMood;
 
@@ -50,12 +53,27 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
                                                                                  target:self
                                                                                  action:@selector(rightBarButtonItemPressed:)];
-    self.navigationItem.rightBarButtonItem = rightButton;
+//    self.navigationItem.rightBarButtonItem = rightButton;
     self.moodCollectionView.scrollsToTop = NO;
     
     [self loadMoods];
     
     [self getUpdatedMoods];
+    
+    [self.navigationController.navigationBar setBackgroundTransparent:YES];
+    self.navigationController.title = @"";
+    [self.navigationItem setTitle:@""];
+
+    self.watchButton.layer.cornerRadius = 15.0f;
+    self.watchButton.layer.masksToBounds = YES;
+    
+    self.watchButton.layer.borderWidth = 2.0f;
+    self.watchButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    if (!IS_IPHONE_5) {
+        
+    }
+    
 }
 
 #pragma mark - Getting Mood Objects
@@ -112,9 +130,9 @@
 }
 
 #pragma mark - Control Callbacks
-
--(void)rightBarButtonItemPressed:(UIBarButtonItem*)rightButtonItem
+- (IBAction)watchButtonTapped:(id)sender
 {
+
     
     
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
@@ -186,7 +204,7 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 78.0f : 50.0f));
+    return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 40.0f :40.0f));
 }
 
 
@@ -219,43 +237,45 @@
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    if(IS_IPAD)
-    {
-        [self positionElementsForInterfaceOrientation:toInterfaceOrientation];
-    }
+    [self.moodCollectionView reloadData];
+//    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+//    
+//    if(IS_IPAD)
+//    {
+//        [self positionElementsForInterfaceOrientation:toInterfaceOrientation];
+//    }
     
 }
 
 - (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     
-    CGRect correctBGImageFrame = self.backgroundImageView.frame;
-    
-    if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
-    {
-        correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
-        
-    }
-    else // Landscape
-    {
-        correctBGImageFrame.origin.y = 64.0f;
-        
-        
-    }
-    
-    // == Set the Background Image == //
-    self.backgroundImageView.frame = correctBGImageFrame;
-    CGRect moodFrame = self.moodCollectionView.frame;
-    moodFrame.origin.y = correctBGImageFrame.origin.y;
-    self.moodCollectionView.frame = moodFrame;
-    
-    
-    // == Set the Label == //
-    CGRect labelFrame = self.iWantToLabel.frame;
-    labelFrame.origin.y = (self.backgroundImageView.frame.size.height * 0.5f) - (labelFrame.size.height * 0.5f) + correctBGImageFrame.origin.y;
-    self.iWantToLabel.frame = labelFrame;
+//    CGRect correctBGImageFrame = self.backgroundImageView.frame;
+//    
+//    if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
+//    {
+//        correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
+//        
+//    }
+//    else // Landscape
+//    {
+//        correctBGImageFrame.origin.y = 64.0f;
+//        
+//        
+//    }
+//    
+//    // == Set the Background Image == //
+//    self.backgroundImageView.frame = correctBGImageFrame;
+//    CGRect moodFrame = self.moodCollectionView.frame;
+//    moodFrame.origin.y = correctBGImageFrame.origin.y;
+//    self.moodCollectionView.frame = moodFrame;
+//    
+//    
+//    // == Set the Label == //
+//    CGRect labelFrame = self.iWantToLabel.frame;
+//    labelFrame.origin.y = (self.backgroundImageView.frame.size.height * 0.5f) - (labelFrame.size.height * 0.5f) + correctBGImageFrame.origin.y;
+//    self.iWantToLabel.frame = labelFrame;
     
 }
 

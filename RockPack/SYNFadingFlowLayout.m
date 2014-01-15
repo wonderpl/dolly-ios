@@ -25,7 +25,11 @@
     [super prepareLayout];
     
     // TODO: Find a way not to hardcode these
-    self.itemSize = CGSizeMake (320, (IS_IPAD ? 78.0f : 50.0f));
+    self.itemSize = CGSizeMake (320, (IS_IPAD ? 40.0f : 40.0f));
+    
+    if (!IS_IPHONE_5) {
+        self.itemSize = CGSizeMake(320, 30);
+    }
     
     self.minimumInteritemSpacing = 0;
     self.minimumLineSpacing = 0;
@@ -41,8 +45,8 @@
     {
         UICollectionViewLayoutAttributes *firstLayoutAttribute = attributesArray[0];
         
-         self.sectionInset =  UIEdgeInsetsMake (verticalCenter - (firstLayoutAttribute.size.height / 2), 0,
-                                                verticalCenter - (firstLayoutAttribute.size.height / 2), 0);
+        self.sectionInset =  UIEdgeInsetsMake (verticalCenter - (firstLayoutAttribute.size.height / 2), 0,
+                                               verticalCenter - (firstLayoutAttribute.size.height / 2), 0);
     }
 }
 
@@ -68,7 +72,14 @@
             }
             else
             {
-                CGFloat fadeDistance = ((normalizedDistance - ACTIVE_DISTANCE) / FADE_DISTANCE) * 0.9;
+                CGFloat fadeDistance = ((normalizedDistance - ACTIVE_DISTANCE) / FADE_DISTANCE) * 1.2;
+                attributes.transform = CGAffineTransformMakeScale(1, 1 - fadeDistance/1.1);
+                //                CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
+                //
+                //                rotationAndPerspectiveTransform.m34 = 1.0 / -1000.0;
+                //
+                //                attributes.transform3D = CATransform3DRotate(rotationAndPerspectiveTransform, M_PI * 0.6, 1.0f, 0.0f, 0.0f);
+                
                 attributes.alpha = 1 - fadeDistance ;
             }
         }
