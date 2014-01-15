@@ -29,6 +29,7 @@
 
 + (UIColor *) dollyTabColorSelectedBackground;
 + (UIColor *) dollyTabColorSelectedText;
++(UIColor *) dollyMoodColor;
 
 
 @end
