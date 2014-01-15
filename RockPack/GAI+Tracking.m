@@ -15,6 +15,12 @@ static NSString *const VideoShareAction = @"videoShareButtonClick";
 static NSString *const VideoAddAction = @"videoPlusButtonClick";
 static NSString *const FacebookLoginAction = @"facebookLogin";
 
+static NSString *const StartScreenView = @"Start";
+static NSString *const LoginScreenView = @"Login";
+static NSString *const RegisterScreenView = @"Register";
+static NSString *const RegisterStep2ScreenView = @"Register 2";
+static NSString *const ForgotPasswordScreenView = @"Forgot password";
+
 static NSString *const GoalCategory = @"goal";
 
 static NSString *const UserLoginGoal = @"userLogin";
@@ -42,6 +48,26 @@ static const NSInteger TrackingDimensionAge = 1;
 						   value:nil];
 }
 
+- (void)trackStartScreenView {
+	[self trackScreenViewWithName:StartScreenView];
+}
+
+- (void)trackLoginScreenView {
+	[self trackScreenViewWithName:LoginScreenView];
+}
+
+- (void)trackForgotPasswordScreenView {
+	[self trackScreenViewWithName:ForgotPasswordScreenView];
+}
+
+- (void)trackRegisterScreenView {
+	[self trackScreenViewWithName:RegisterScreenView];
+}
+
+- (void)trackRegisterStep2ScreenView {
+	[self trackScreenViewWithName:RegisterStep2ScreenView];
+}
+
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate {
 	NSDateComponents *ageComponents = [[NSCalendar currentCalendar]	 components: NSYearCalendarUnit
 																	   fromDate: birthDate
@@ -64,6 +90,11 @@ static const NSInteger TrackingDimensionAge = 1;
 																		action:action
 																		 label:label
 																		 value:value] build]];
+}
+
+- (void)trackScreenViewWithName:(NSString *)name {
+	[[self defaultTracker] set:kGAIScreenName value:name];
+    [[self defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 @end
