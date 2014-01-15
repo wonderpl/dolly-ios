@@ -12,5 +12,9 @@
 
 - (void)trackVideoShare;
 - (void)trackVideoAdd;
+- (void)trackFacebookLogin;
+- (void)trackUserLoginFromOrigin:(NSString *)origin;
+
+- (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate;
 
 @end
