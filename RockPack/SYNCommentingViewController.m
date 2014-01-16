@@ -600,6 +600,9 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     if(buttonIndex == 1)
     {
+        
+        
+        
         __weak SYNCommentingViewController* wself = self;
         [appDelegate.oAuthNetworkEngine deleteCommentForUserId:appDelegate.currentUser.uniqueId
                                                      channelId:self.videoInstance.channel.uniqueId
@@ -612,7 +615,23 @@ static NSString* PlaceholderText = @"Say something nice";
                                                  wself.currentlyDeletingCell.deleting = NO;
                                                  wself.currentlyDeletingCell.loading = NO;
                                                  
-                                                 [wself refreshCollectionView];
+                                                 
+                                                 
+                                                 
+                                                 [wself.commentsCollectionView performBatchUpdates:^{
+                                                     //            [self.comments removeObject:self.currentlyDeletingComment];
+                                                     
+                                                     UIView *v = wself.currentlyDeletingCell;
+                                                     
+                                                     NSIndexPath *indexPathToDelete = [wself.commentsCollectionView indexPathForItemAtPoint: v.center];
+                                                     
+                                                     [wself.commentsCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete]];
+                                                 } completion:^(BOOL finished) {
+                                                     [wself refreshCollectionView];
+
+                                                     
+                                                 }];
+
                                                  
                                                  
                                              } errorHandler:^(id error) {
