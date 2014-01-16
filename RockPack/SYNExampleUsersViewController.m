@@ -13,6 +13,8 @@
 #import "SYNNetworkEngine.h"
 #import "SYNGradientMaskView.h"
 
+static const CGFloat ScrollAnimationDuration = 1.0;
+
 @interface SYNExampleUsersViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
@@ -37,9 +39,11 @@
 		
 		// Scroll to the middle to indicate that the list is scrollable
 		NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:[users count] / 2 inSection:0];
-		[self.collectionView scrollToItemAtIndexPath:centerIndexPath
+		[UIView animateWithDuration:ScrollAnimationDuration animations:^{
+			[self.collectionView scrollToItemAtIndexPath:centerIndexPath
 										atScrollPosition:UICollectionViewScrollPositionCenteredVertically
-												animated:YES];
+												animated:NO];
+		}];
 	} errorHandler:^(NSError *error) {
 		
 	}];
