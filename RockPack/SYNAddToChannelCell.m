@@ -43,18 +43,20 @@
 -(void)setSelected:(BOOL)selected
 {
     _selected = selected;
-    if(selected)
-    {
-        self.titleLabel.textColor = [UIColor whiteColor];
-        self.backgroundColor = [UIColor colorWithRed: (182.0f/255.0f)
-                                               green: (202.0f/255.0f)
-                                                blue: (178.0f/255.0f)
-                                               alpha: 1.0f];
-    }
-    else
-    {
-        self.titleLabel.textColor = defaultTitleColor;
-        self.backgroundColor = [UIColor whiteColor];
+	
+    if (selected) {
+		[UIView animateWithDuration:0.2 animations:^{
+			self.titleLabel.textColor = [UIColor whiteColor];
+			self.backgroundColor = [UIColor colorWithRed: (182.0f/255.0f)
+												   green: (202.0f/255.0f)
+													blue: (178.0f/255.0f)
+												   alpha: 1.0f];
+		}];
+    } else {
+		[UIView animateWithDuration:0.2 animations:^{
+			self.titleLabel.textColor = defaultTitleColor;
+			self.backgroundColor = [UIColor whiteColor];
+		}];
     }
     
 }
