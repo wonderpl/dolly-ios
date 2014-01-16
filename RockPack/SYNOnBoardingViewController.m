@@ -313,7 +313,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     [self.navigationRightLabel setTitle:[NSString stringWithFormat:@"%i more", numberYetToFollow]
                                forState:UIControlStateNormal];
     
-    if(_numberYetToFollow == 0)
+    if(_numberYetToFollow <= 0)
     {
         [self.navigationRightLabel setTitle:@"GO"
                                    forState:UIControlStateNormal];
