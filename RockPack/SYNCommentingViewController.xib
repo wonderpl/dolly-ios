@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNCommentingViewController">
             <connections>
                 <outlet property="bottomContainerView" destination="uyA-H8-2fC" id="oOe-2E-kaO"/>
+                <outlet property="charactersLeftLabel" destination="g7w-Wi-7jW" id="6EL-gV-vYE"/>
                 <outlet property="commentsCollectionView" destination="xHI-4t-8mN" id="SV7-Pg-mCc"/>
                 <outlet property="generalLoader" destination="MKx-RD-ja4" id="ce8-1H-yCK"/>
                 <outlet property="sendMessageAvatarmageView" destination="dQD-R9-Cwe" id="HOs-fc-pMz"/>
@@ -82,17 +83,26 @@
                                 <outlet property="delegate" destination="-1" id="EGa-wJ-zkR"/>
                             </connections>
                         </textView>
+                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7w-Wi-7jW">
+                            <rect key="frame" x="273" y="-7" width="31" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.65490196078431373" green="0.65490196078431373" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="FjY-KP-s3D" secondAttribute="bottom" constant="10" id="09m-lK-Eed"/>
                         <constraint firstItem="FjY-KP-s3D" firstAttribute="leading" secondItem="dQD-R9-Cwe" secondAttribute="trailing" constant="14" id="AU0-sP-Bh6"/>
                         <constraint firstItem="wJi-Y3-1s8" firstAttribute="leading" secondItem="FjY-KP-s3D" secondAttribute="trailing" constant="11" id="ECi-02-wur"/>
+                        <constraint firstItem="wJi-Y3-1s8" firstAttribute="trailing" secondItem="g7w-Wi-7jW" secondAttribute="trailing" constant="7" id="LHm-G8-Guo"/>
                         <constraint firstAttribute="trailing" secondItem="wJi-Y3-1s8" secondAttribute="trailing" constant="9" id="RZc-VA-td1"/>
                         <constraint firstAttribute="bottom" secondItem="dQD-R9-Cwe" secondAttribute="bottom" constant="10" id="S9k-t4-qWJ"/>
                         <constraint firstItem="FjY-KP-s3D" firstAttribute="top" secondItem="uyA-H8-2fC" secondAttribute="top" constant="9" id="Y3a-hk-V2L"/>
                         <constraint firstAttribute="bottom" secondItem="wJi-Y3-1s8" secondAttribute="bottom" constant="11" id="ixg-Ip-st2"/>
                         <constraint firstItem="dQD-R9-Cwe" firstAttribute="leading" secondItem="uyA-H8-2fC" secondAttribute="leading" constant="8" id="tb9-ML-b8r"/>
+                        <constraint firstItem="wJi-Y3-1s8" firstAttribute="top" secondItem="g7w-Wi-7jW" secondAttribute="bottom" id="xME-DA-taM"/>
                     </constraints>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>

@@ -131,7 +131,8 @@
 - (void) getMoodsWithCompletionHandler: (MKNKUserSuccessBlock) completionBlock
                           errorHandler: (MKNKUserErrorBlock) errorBlock;
 
-
+- (void)exampleUsersWithCompletionHandler:(MKNKUserSuccessBlock)completionBlock
+							 errorHandler:(MKNKUserErrorBlock)errorBlock;
 
 
 

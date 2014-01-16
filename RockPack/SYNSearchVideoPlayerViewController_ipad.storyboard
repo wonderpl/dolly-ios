@@ -11,6 +11,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2wX-5t-4v6">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.3921568627" green="0.38823529410000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="AqW-yM-AnN" kind="relationship" relationship="rootViewController" id="D5D-4J-wSN"/>
@@ -204,7 +205,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="cQN-rh-Ses">
                         <barButtonItem key="leftBarButtonItem" title="close" id="SBD-h1-zMP">
-                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="closeButtonPressed:" destination="AqW-yM-AnN" id="sqB-0v-wSj"/>
                             </connections>

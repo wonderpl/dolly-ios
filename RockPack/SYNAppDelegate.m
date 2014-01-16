@@ -366,11 +366,15 @@
 {
     if (IS_IPAD)
     {
-        self.loginViewController = [[SYNLoginViewController alloc] init];
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login_ipad" bundle:nil];
+		self.loginViewController = [storyboard instantiateInitialViewController];
+//        self.loginViewController = [[SYNLoginViewController alloc] init];
     }
     else
     {
-        self.loginViewController = [[SYNLoginViewControllerIphone alloc] init];
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login_iphone" bundle:nil];
+		self.loginViewController = [storyboard instantiateInitialViewController];
+//        self.loginViewController = [[SYNLoginViewControllerIphone alloc] init];
     }
     
     return self.loginViewController;
@@ -439,15 +443,15 @@
 {
     if (self.loginViewController)
     {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        if (self.loginViewController.state == kLoginScreenStateInitial)
-        {
-            [self.loginViewController setUpInitialState];
-        }
-        else if (self.loginViewController.state == kLoginScreenStateLogin)
-        {
-            [self.loginViewController reEnableLoginControls];
-        }
+//        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+//        if (self.loginViewController.state == kLoginScreenStateInitial)
+//        {
+//            [self.loginViewController setUpInitialState];
+//        }
+//        else if (self.loginViewController.state == kLoginScreenStateLogin)
+//        {
+//            [self.loginViewController reEnableLoginControls];
+//        }
     }
     else
     {
@@ -473,10 +477,10 @@
     [FBAppEvents activateApp];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    if (self.loginViewController)
-    {
-        [self.loginViewController applicationResume];
-    }
+//    if (self.loginViewController)
+//    {
+//        [self.loginViewController applicationResume];
+//    }
     
     [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
     

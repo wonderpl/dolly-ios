@@ -21,6 +21,7 @@
 #define kMaxCommentCharacters 120
 #define kCacheTimeInMinutes 1
 
+static const CGFloat CharacterCountThreshold = 30.0;
 static NSString* PlaceholderText = @"Say something nice";
 
 @interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
@@ -39,6 +40,7 @@ static NSString* PlaceholderText = @"Say something nice";
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* generalLoader;
 
+@property (nonatomic, strong) IBOutlet UILabel *charactersLeftLabel;
 
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
@@ -67,8 +69,6 @@ static NSString* PlaceholderText = @"Say something nice";
     // on iPhone the controller appears in a popup
     if (IS_IPHONE) {
 		self.commentsCollectionView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-		
-        
     }
     
     self.sendMessageAvatarmageView.layer.cornerRadius = self.sendMessageAvatarmageView.frame.size.width * 0.5f;
@@ -139,7 +139,7 @@ static NSString* PlaceholderText = @"Say something nice";
     // observer the size of the text view to set the frame accordingly
     [self.sendMessageTextView addObserver:self
                                forKeyPath:kTextViewContentSizeKey
-                                  options:NSKeyValueObservingOptionNew
+                                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                                   context:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
@@ -202,10 +202,22 @@ static NSString* PlaceholderText = @"Say something nice";
                         change:(NSDictionary *)change
                        context:(void *)context {
     if ([keyPath isEqualToString:kTextViewContentSizeKey]) {
-		CGSize contentSize = [change[NSKeyValueChangeNewKey] CGSizeValue];
-		self.sendMessageTextViewHeight.constant = contentSize.height;
+		CGSize oldContentSize = [change[NSKeyValueChangeOldKey] CGSizeValue];
+		CGSize newContentSize = [change[NSKeyValueChangeNewKey] CGSizeValue];
+		
+		self.sendMessageTextViewHeight.constant = newContentSize.height;
+		self.charactersLeftLabel.hidden = (newContentSize.height == CharacterCountThreshold);
+		
+		UICollectionView *collectionView = self.commentsCollectionView;
+		CGFloat heightDifference = (newContentSize.height - oldContentSize.height);
 		
 		[UIView animateWithDuration:0.2f animations:^{
+			collectionView.contentInset = UIEdgeInsetsMake(collectionView.contentInset.top,
+														   collectionView.contentInset.left,
+														   collectionView.contentInset.bottom + heightDifference,
+														   collectionView.contentInset.right);
+			collectionView.contentOffset = CGPointMake(0, collectionView.contentOffset.y + heightDifference);
+			
 			[self.view layoutIfNeeded];
 		}];
     }
@@ -328,7 +340,9 @@ static NSString* PlaceholderText = @"Say something nice";
         return NO;
     }
     
-    
+	NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+	NSInteger charactersLeft = kMaxCommentCharacters - [newString length];
+	self.charactersLeftLabel.text = [NSString stringWithFormat:@"%d", charactersLeft];
     
     return YES;
 }

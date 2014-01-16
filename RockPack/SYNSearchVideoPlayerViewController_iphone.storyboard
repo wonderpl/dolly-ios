@@ -10,6 +10,7 @@
                 <navigationController definesPresentationContext="YES" id="URo-9c-cnu" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hkT-Xt-fc6">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.3921568627" green="0.38823529410000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="7ZJ-uv-6JN" kind="relationship" relationship="rootViewController" id="6Yl-Ip-5tz"/>
@@ -212,7 +213,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="ihY-CS-AXQ">
                         <barButtonItem key="leftBarButtonItem" title="close" id="iQc-iJ-Hjp">
-                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="closeButtonPressed:" destination="7ZJ-uv-6JN" id="dq4-5a-Mba"/>
                             </connections>

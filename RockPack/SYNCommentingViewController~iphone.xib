@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="bottomContainerView" destination="RwK-Zh-8aD" id="H52-IE-Y5x"/>
                 <outlet property="bottomContainerViewBottom" destination="Rvd-sV-938" id="J31-E7-c5O"/>
+                <outlet property="charactersLeftLabel" destination="XfH-Sf-uWI" id="Ped-7H-LHm"/>
                 <outlet property="commentsCollectionView" destination="dnW-Ka-mTj" id="uct-wR-f53"/>
                 <outlet property="generalLoader" destination="sXy-pr-7bU" id="4M8-K1-m7s"/>
                 <outlet property="sendMessageAvatarmageView" destination="CxQ-bj-tgi" id="ODI-Xx-iiC"/>
@@ -69,6 +70,13 @@
                                 <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="K3g-Vi-JwO"/>
                             </connections>
                         </button>
+                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfH-Sf-uWI">
+                            <rect key="frame" x="278" y="-2" width="31" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Enter a Comment" translatesAutoresizingMaskIntoConstraints="NO" id="UWz-rP-5kl">
                             <rect key="frame" x="46" y="14" width="215" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -90,7 +98,9 @@
                         <constraint firstItem="UWz-rP-5kl" firstAttribute="leading" secondItem="CxQ-bj-tgi" secondAttribute="trailing" constant="8" id="3je-jg-oGR"/>
                         <constraint firstItem="CFg-Xg-irR" firstAttribute="leading" secondItem="UWz-rP-5kl" secondAttribute="trailing" constant="9" id="Bg6-kK-3IB"/>
                         <constraint firstAttribute="trailing" secondItem="CFg-Xg-irR" secondAttribute="trailing" constant="4" id="LxC-j9-8P2"/>
+                        <constraint firstItem="CFg-Xg-irR" firstAttribute="trailing" secondItem="XfH-Sf-uWI" secondAttribute="trailing" constant="7" id="X3d-K1-DZq"/>
                         <constraint firstItem="UWz-rP-5kl" firstAttribute="top" secondItem="RwK-Zh-8aD" secondAttribute="top" constant="14" id="auT-42-faC"/>
+                        <constraint firstItem="CFg-Xg-irR" firstAttribute="top" secondItem="XfH-Sf-uWI" secondAttribute="bottom" id="bld-Tq-f0C"/>
                         <constraint firstAttribute="bottom" secondItem="UWz-rP-5kl" secondAttribute="bottom" constant="14" id="dLr-Oi-JiV"/>
                         <constraint firstItem="CxQ-bj-tgi" firstAttribute="leading" secondItem="RwK-Zh-8aD" secondAttribute="leading" constant="6" id="qCX-n1-kqW"/>
                         <constraint firstAttribute="bottom" secondItem="CxQ-bj-tgi" secondAttribute="bottom" constant="14" id="taI-EJ-2aX"/>
