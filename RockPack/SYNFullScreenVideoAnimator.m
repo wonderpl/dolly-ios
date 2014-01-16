@@ -97,32 +97,26 @@ static const CGFloat AnimationDuration = 0.3;
 	
 	[containerView insertSubview:navigationController.view belowSubview:fullScreenViewController.view];
 	
+	// Make sure we relayout the view controller so that we're animating to the right position
+	[navigationController.view layoutIfNeeded];
+	
 	fullScreenViewController.backgroundView.alpha = 1.0;
 	
-	// This is dispatch_async is to handle the case where the iPad has been rotated while the video is playing.
-	//
-	// The SYNChannelVideoPlayerViewController's view will still be in the same orientation as it was prior to presenting
-	// the full screen view controller and it's layout won't get updated until the end of the run loop. This means that
-	// we'd have the wrong frames for the video player container when we're animating to it
-	//
-	// Starting the animation on the next run loop means that the layout will be updated and the frames will be correct
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[UIView animateWithDuration:AnimationDuration animations:^{
-			if (IS_IPHONE) {
-				videoPlayer.transform = CGAffineTransformIdentity;
-			}
-			
-			CGRect videoPlayerFrame = [navigationController.view convertRect:playerContainerView.frame fromView:playerContainerView.superview];
-			videoPlayer.frame = videoPlayerFrame;
-			
-			fullScreenViewController.backgroundView.alpha = 0.0;
-		} completion:^(BOOL finished) {
-			videoPlayer.frame = playerContainerView.bounds;
-			[playerContainerView addSubview:videoPlayer];
-			
-			[transitionContext completeTransition:YES];
-		}];
-	});
+	[UIView animateWithDuration:AnimationDuration animations:^{
+		if (IS_IPHONE) {
+			videoPlayer.transform = CGAffineTransformIdentity;
+		}
+		
+		CGRect videoPlayerFrame = [navigationController.view convertRect:playerContainerView.frame fromView:playerContainerView.superview];
+		videoPlayer.frame = videoPlayerFrame;
+		
+		fullScreenViewController.backgroundView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		videoPlayer.frame = playerContainerView.bounds;
+		[playerContainerView addSubview:videoPlayer];
+		
+		[transitionContext completeTransition:YES];
+	}];
 }
 
 @end
