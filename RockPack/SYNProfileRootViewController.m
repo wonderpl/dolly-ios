@@ -306,30 +306,30 @@
     // TODO: get rid of 2 of the bar buttons and refactor into 2 methods
     
     self.barBtnCancelEditMode = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelEditModeTapped)];
-    self.barBtnCancelEditMode.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
-                                                          green: (66.0f / 255.0f)
-                                                           blue: (42.0f / 255.0f)
+    self.barBtnCancelEditMode.tintColor = [UIColor colorWithRed: (100 / 255.0f)
+                                                          green: (99 / 255.0f)
+                                                           blue: (112 / 255.0f)
                                                           alpha: 1.0f];
     
     self.barBtnCancelCreateChannel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelCreateChannel)];
-    self.barBtnCancelCreateChannel.tintColor = [UIColor colorWithRed: (210.0f / 255.0f)
-                                                               green: (66.0f / 255.0f)
-                                                                blue: (42.0f / 255.0f)
+    self.barBtnCancelCreateChannel.tintColor = [UIColor colorWithRed: (100 / 255.0f)
+                                                               green: (99 / 255.0f)
+                                                                blue: (112 / 255.0f)
                                                                alpha: 1.0f];
     
     
     self.barBtnSaveEditMode= [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveDescription)];
     
-    self.barBtnSaveEditMode.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
-                                                        green: (210.0f / 255.0f)
-                                                         blue: (42.0f / 255.0f)
+    self.barBtnSaveEditMode.tintColor = [UIColor colorWithRed: (100 / 255.0f)
+                                                        green: (99 / 255.0f)
+                                                         blue: (112 / 255.0f)
                                                         alpha: 1.0f];
     
     self.barBtnSaveCreateChannel = [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveCreateChannelTapped)];
     
-    self.barBtnSaveCreateChannel.tintColor = [UIColor colorWithRed: (78.0f / 255.0f)
-                                                             green: (210.0f / 255.0f)
-                                                              blue: (42.0f / 255.0f)
+    self.barBtnSaveCreateChannel.tintColor = [UIColor colorWithRed: (100 / 255.0f)
+                                                             green: (99 / 255.0f)
+                                                              blue: (112 / 255.0f)
                                                              alpha: 1.0f];
     
     
