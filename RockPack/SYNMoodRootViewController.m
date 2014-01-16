@@ -65,7 +65,7 @@
     self.watchButton.layer.cornerRadius = 18.0f;
     self.watchButton.layer.masksToBounds = YES;
     
-    self.watchButton.layer.borderWidth = 2.0f;
+    self.watchButton.layer.borderWidth = 1.5f;
     self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
     if (!IS_IPHONE_5) {
@@ -202,6 +202,11 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // == first of last item
+    if (indexPath.row == 0 || (indexPath.row % self.moods.count == self.moods.count-1)) {
+        return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 35.0f :35.0f));
+    }
+
     return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 40.0f :40.0f));
 }
 
@@ -294,7 +299,6 @@
 
 -(Mood*)currentMood
 {
-    
     
     CGPoint point = CGPointMake(self.moodCollectionView.frame.size.width * 0.5f,
                                 self.moodCollectionView.frame.size.height * 0.5f + self.moodCollectionView.contentOffset.y);

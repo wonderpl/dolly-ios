@@ -66,34 +66,44 @@
             CGFloat distance = CGRectGetMidY(visibleRect) - attributes.center.y;
             CGFloat normalizedDistance = ABS(distance);
             
-            //            if (normalizedDistance < ACTIVE_DISTANCE)
-            //            {
-            //                attributes.alpha = 1.0f;
-            //            }
-            CGFloat fadeDistance = ((normalizedDistance - ACTIVE_DISTANCE) / FADE_DISTANCE) * 1.2;
-            
-            //                NSLog(@"fade distance :%f", fadeDistance);
-            //                float scaleFactor = 10;
-            //                attributes.transform = CGAffineTransformMakeScale(1, scaleFactor);
+            CGFloat fadeDistance = ((normalizedDistance - ACTIVE_DISTANCE) / FADE_DISTANCE) * 1.8;
             
             
-            double degrees = sqrt( abs(distance))*7.5;
+            // == Equation takes the distance and changes it into a angle
             
-            double radians = (degrees / 180) * M_PI;
+            double angle = sqrt( abs(distance))*7.5;
+            
+            double radians = (angle / 180) * M_PI;
+            
             
             if (distance<0) {
-                degrees*=-1;
-            }
+                // == Bottom Half of the wheel
+                
+                
+                radians*=-1;
+                CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
+                rotationAndPerspectiveTransform.m34 = 1.0 / -2000;
+                rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, radians, 1.0f, 0.0f, 0.0f);
+                
+                attributes.transform3D = rotationAndPerspectiveTransform;
+
+            } else {
+            // == Top half
+                
+                if (radians>1.45) {
+                    radians = 1.571;
+                }
             
             CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
             rotationAndPerspectiveTransform.m34 = 1.0 / -2000;
             rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, radians, 1.0f, 0.0f, 0.0f);
             
-            CATransform3D scale = CATransform3DMakeScale(1.0f, 1.0f, 1.0f);
+                
+                // x and y seem to work but not z
+            CATransform3D tranlate = CATransform3DTranslate(rotationAndPerspectiveTransform, 0.0f, 0.0f, 0.0f);
             
-            //CATransform3D tranlate = CATransform3DMakeTranslation(0.0f, 0.0f, 0.0f);
-            
-            attributes.transform3D = CATransform3DConcat(rotationAndPerspectiveTransform, scale);
+                attributes.transform3D = tranlate;
+            }
             
             attributes.alpha = 1 - fadeDistance ;
         }
