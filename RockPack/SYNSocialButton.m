@@ -31,7 +31,7 @@
     [self setTitleColor: [UIColor dollyButtonHighlightedColor]
                forState: UIControlStateHighlighted];
     
-    [self setTitleColor: [UIColor dollyButtonSelectedColor]
+    [self setTitleColor: [UIColor dollyButtonDefaultColor]
                forState: UIControlStateSelected];
     
     [self setTitleColor: [UIColor dollyButtonDisabledColor]
