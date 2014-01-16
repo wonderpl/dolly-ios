@@ -161,7 +161,7 @@
 "notification_empty" = "You have 0 notification yet";
 "notification_mark_all_as_read" = "Mark all as Read";
 
-"notification_liked_action" = "liked your video";
+"notification_liked_action" = "loved your video";
 "notification_unavailable_action" = "Your video has become unavailable";
 "notification_repack_action" = "has repacked your video";
 "notification_subscribed_action" = "is now following your pack";
@@ -283,7 +283,7 @@
 "follow" = "follow";
 "unfollow" = "unfollow";
 "add" = "add";
-"like" = "like";
+"like" = "love";
 "share" = "share";
 
 "back" = "back";
