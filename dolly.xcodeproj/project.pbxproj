@@ -3688,7 +3688,7 @@
 				BE08158F16D3C46800ADB1DC /* Search and Discovery */,
 				0E2AB16818846391004557A4 /* WebView */,
 				BE7D02F1178C1D13008053DC /* Users */,
-				01F8E77B16B039E6000D44B9 /* Video viewer */,
+				01F8E77B16B039E6000D44B9 /* Video Player */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -4297,7 +4297,7 @@
 			name = HTML;
 			sourceTree = "<group>";
 		};
-		01F8E77B16B039E6000D44B9 /* Video viewer */ = {
+		01F8E77B16B039E6000D44B9 /* Video Player */ = {
 			isa = PBXGroup;
 			children = (
 				E9B068E4185B62F500C98AEB /* SYNSearchVideoPlayerViewController.h */,
@@ -4335,7 +4335,7 @@
 				E9B75F5D1848ADB50066420E /* SYNVideoPlayerViewController+Protected.h */,
 				E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */,
 			);
-			name = "Video viewer";
+			name = "Video Player";
 			sourceTree = "<group>";
 		};
 		0E26BB4E182D1214008A57F1 /* ChannelDetails */ = {
