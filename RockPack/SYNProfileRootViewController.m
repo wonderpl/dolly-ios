@@ -437,7 +437,6 @@
             self.channelThumbnailCollectionView.contentOffset = self.contentOffset;
             [self.subscriptionThumbnailCollectionView setContentOffset:self.contentOffset animated:NO];
         }
-        
     }
     
 }
@@ -1270,14 +1269,28 @@
 {
     [super scrollViewDidScroll:scrollView];
     
-    if (self.channelThumbnailCollectionView == scrollView)
-    {
-        self.subscriptionThumbnailCollectionView.bounds = self.channelThumbnailCollectionView.bounds;
+    
+    if (IS_IPAD) {
+        if (self.channelThumbnailCollectionView == scrollView)
+        {
+            self.subscriptionThumbnailCollectionView.contentOffset = self.channelThumbnailCollectionView.contentOffset;
+        }
+        if (self.subscriptionThumbnailCollectionView == scrollView)
+        {
+            self.channelThumbnailCollectionView.contentOffset = self.subscriptionThumbnailCollectionView.contentOffset;
+        }
     }
-    if (self.subscriptionThumbnailCollectionView == scrollView)
-    {
-        
-        self.channelThumbnailCollectionView.bounds = self.subscriptionThumbnailCollectionView.bounds;
+    else {
+        // == setting the content off caused problems with the hiding and showing of tab bar, so set bounds instead.
+
+        if (self.channelThumbnailCollectionView == scrollView)
+        {
+            self.subscriptionThumbnailCollectionView.bounds = self.channelThumbnailCollectionView.bounds;
+        }
+        if (self.subscriptionThumbnailCollectionView == scrollView)
+        {
+            self.channelThumbnailCollectionView.bounds = self.subscriptionThumbnailCollectionView.bounds;
+        }
     }
 
     CGFloat offset = scrollView.contentOffset.y;
@@ -1310,6 +1323,7 @@
 }
 
 - (void)killScroll {
+    //  == stop the scrollview from scrolling
     
     CGPoint offset = self.subscriptionThumbnailCollectionView.contentOffset;
     offset.x -= 1.0;
@@ -2301,7 +2315,7 @@
         
         self.barBtnBack = self.navigationItem.leftBarButtonItem;
         self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
-//        self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
+        self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
         
         self.aboutMeTextView.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:1.0];
         self.uploadCoverPhotoButton.alpha = 1.0f;
