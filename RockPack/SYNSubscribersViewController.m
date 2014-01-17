@@ -62,8 +62,54 @@
                         forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
     
+    self.activityView.center = CGPointMake(self.view.frame.size.width * 0.5, self.view.frame.size.height * 0.5);
     
+    [self.activityView hidesWhenStopped];
+    
+    [self.activityView startAnimating];
+    
+    [self setInfoLabelText: @"LOADING"];
+    
+    [self.view addSubview: self.activityView];
+    
+    [appDelegate.searchRegistry clearImportContextFromEntityName:kChannelOwner andViewId:self.viewId];
+    
+    [appDelegate.networkEngine subscribersForUserId: appDelegate.currentUser.uniqueId
+                                          channelId: self.channel.uniqueId
+                                           forRange: self.dataRequestRange
+                                        byAppending: NO
+                                  completionHandler: ^(int count) {
+                                      
+                                      self.dataItemsAvailable = count;
+                                      
+                                      [self displayUsers];
+                                      
+                                      [self.activityView stopAnimating];
+                                      
+                                      
+                                      if (IS_IPHONE) {
+                                          CGRect tmp = self.usersThumbnailCollectionView.frame;
+                                          tmp.origin.y+=self.view.frame.size.height;
+                                          self.usersThumbnailCollectionView.frame = tmp;
+                                          
+                                          tmp = self.usersThumbnailCollectionView.frame;
+                                          tmp.origin.y -= self.view.frame.size.height;
+                                          
+                                          [UIView animateWithDuration:0.8f animations:^{
+                                              
+                                              self.usersThumbnailCollectionView.frame = tmp;
+                                              
+                                          }];
+                                          
+                                      }
+                                      
+                                  } errorHandler: ^{
+                                      
+                                      [self.activityView stopAnimating];
+                                  }];
+
 }
 
 
@@ -98,53 +144,6 @@
     
     [super viewDidAppear:animated];
     
-    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
-    
-    self.activityView.center = CGPointMake(self.view.frame.size.width * 0.5, self.view.frame.size.height * 0.5);
-    
-    [self.activityView hidesWhenStopped];
-    
-    [self.activityView startAnimating];
-    
-    [self setInfoLabelText: @"LOADING"];
-    
-    [self.view addSubview: self.activityView];
-    
-    [appDelegate.searchRegistry clearImportContextFromEntityName:kChannelOwner andViewId:self.viewId];
-    
-    [appDelegate.networkEngine subscribersForUserId: appDelegate.currentUser.uniqueId
-                                          channelId: self.channel.uniqueId
-                                           forRange: self.dataRequestRange
-                                        byAppending: NO
-                                  completionHandler: ^(int count) {
-                                      
-                                        self.dataItemsAvailable = count;
-                                      
-                                        [self displayUsers];
-                                      
-                                        [self.activityView stopAnimating];
-                                      
-
-                                      if (IS_IPHONE) {
-                                          CGRect tmp = self.usersThumbnailCollectionView.frame;
-                                          tmp.origin.y+=self.view.frame.size.height;
-                                          self.usersThumbnailCollectionView.frame = tmp;
-
-                                        tmp = self.usersThumbnailCollectionView.frame;
-                                          tmp.origin.y -= self.view.frame.size.height;
-                                          
-                                          [UIView animateWithDuration:0.8f animations:^{
-                                              
-                                              self.usersThumbnailCollectionView.frame = tmp;
-                                              
-                                          }];
-                                          
-                                      }
-                                  
-                                    } errorHandler: ^{
-                                        
-                                        [self.activityView stopAnimating];
-                                    }];
     
 }
 
