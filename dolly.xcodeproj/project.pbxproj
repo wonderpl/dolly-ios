@@ -6196,6 +6196,14 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Rockpack Ltd";
 				TargetAttributes = {
+					010DEFCF1629BDC40080F26B = {
+						DevelopmentTeam = 55U2NK549A;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
+					};
 					01901A941771CCBA007DBEAC = {
 						TestTargetID = 01E427E61664EC9F009B941F;
 					};
@@ -7804,7 +7812,6 @@
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = NO;
-				CODE_SIGN_ENTITLEMENTS = RockPack/dolly.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
@@ -7845,9 +7852,8 @@
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = NO;
-				CODE_SIGN_ENTITLEMENTS = RockPack/dolly.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rockpack Ltd. (3M76KMT8LS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7863,8 +7869,8 @@
 					"$(SRCROOT)/**",
 				);
 				PRODUCT_NAME = dolly;
-				PROVISIONING_PROFILE = "EB774DF8-2B22-43DA-90F5-FC72A9BCFFFA";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EB774DF8-2B22-43DA-90F5-FC72A9BCFFFA";
+				PROVISIONING_PROFILE = "A16D3FE9-7216-49C7-80E4-5900BF1336AF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -7972,9 +7978,8 @@
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = NO;
-				CODE_SIGN_ENTITLEMENTS = RockPack/dolly.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rockpack Ltd. (3M76KMT8LS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7996,7 +8001,7 @@
 					"$(SRCROOT)/**",
 				);
 				PRODUCT_NAME = dolly;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "CFC1781F-4631-4B2E-9621-644DB4D999D7";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
