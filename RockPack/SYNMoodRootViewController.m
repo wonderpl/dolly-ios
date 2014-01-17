@@ -15,9 +15,11 @@
 #import "Mood.h"
 #import "UINavigationBar+Appearance.h"
 #import "UIColor+SYNColor.h"
+#include <stdlib.h>
 
 
 #define LARGE_AMOUNT_OF_ROWS 10000
+#define WATCH_BUTTON_ANIMATION_TIME 1.5f
 
 @interface SYNMoodRootViewController ()
 
@@ -27,10 +29,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *watchButton;
 
 @property (nonatomic, readonly) Mood* currentMood;
-@property (strong, nonatomic) IBOutlet UIPickerView *testPicker;
-
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
-
 @end
 
 
@@ -68,10 +67,31 @@
     self.watchButton.layer.borderWidth = 1.5f;
     self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
+    
+    
+    
     if (!IS_IPHONE_5) {
         //TODO: need to move views for 3.5
     }
     
+//TODO: animate the initial scrolling
+    
+//    int randomRow = arc4random() % 10;
+//
+//    NSLog(@"rand : %d", randomRow);
+//
+//    
+//    [UIView animateWithDuration:3.0f animations:^{
+//        
+//        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForRow:randomRow inSection:0]
+//                                        atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+//                                                animated:YES];
+//
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+    
+
 }
 
 #pragma mark - Getting Mood Objects
@@ -125,14 +145,12 @@
     {
         [self positionElementsForInterfaceOrientation:UIDeviceOrientationPortrait];
     }
+    
 }
 
 #pragma mark - Control Callbacks
 - (IBAction)watchButtonTapped:(id)sender
 {
-
-    
-    
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
                                                          params: @{@"mood":self.currentMood.uniqueId}
@@ -220,19 +238,47 @@
 
 #pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
 
--( void ) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     // override
+    
+    [self stoppedScrolling];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate) {
+        [self stoppedScrolling];
+    }
 }
 
 - (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     // override
+    [self stoppedScrolling];
+
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
     // override
+    self.watchButton.hidden = YES;
+
+}
+
+- (void)stoppedScrolling
+{
+    // done, do whatever
+    
+    self.watchButton.hidden = NO;
+    self.watchButton.alpha = 0.0f;
+    
+    [UIView animateWithDuration:WATCH_BUTTON_ANIMATION_TIME animations:^{
+        self.watchButton.alpha = 1.0f;
+    }];
+
 }
 
 
