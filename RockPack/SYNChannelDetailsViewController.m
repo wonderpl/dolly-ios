@@ -1024,7 +1024,7 @@
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
-	return [self.videoThumbnailCollectionView cellForItemAtIndexPath:indexPath];
+	return (SYNCollectionVideoCell *)[self.videoThumbnailCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 
