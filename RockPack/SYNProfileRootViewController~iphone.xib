@@ -50,9 +50,9 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4RR-LR-xcl">
                         <size key="itemSize" width="320" height="71"/>
-                        <size key="headerReferenceSize" width="320" height="517"/>
-                        <size key="footerReferenceSize" width="320" height="150"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="517" maxX="0.0" maxY="150"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -70,10 +70,10 @@
                     </connections>
                 </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY" userLabel="Button - Follower Count">
-                    <rect key="frame" x="70" y="370" width="180" height="30"/>
+                    <rect key="frame" x="70" y="372" width="180" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal">
+                    <state key="normal" title="followers">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -84,9 +84,9 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OHx-Au-cg1">
                         <size key="itemSize" width="320" height="71"/>
-                        <size key="headerReferenceSize" width="320" height="472"/>
-                        <size key="footerReferenceSize" width="320" height="150"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="473" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -130,7 +130,7 @@
                     </subviews>
                 </view>
                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" id="JUa-73-uP8" userLabel="Text View - Description">
-                    <rect key="frame" x="30" y="331" width="260" height="42"/>
+                    <rect key="frame" x="30" y="338" width="260" height="47"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                     <string key="text">Something about 
@@ -143,7 +143,7 @@ me...</string>
                     </connections>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vH4-no-prL" userLabel="Button - follow all">
-                    <rect key="frame" x="116" y="389" width="88" height="43"/>
+                    <rect key="frame" x="116" y="392" width="88" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -156,7 +156,7 @@ me...</string>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xAT-fj-vhM">
-                    <rect key="frame" x="116" y="389" width="88" height="43"/>
+                    <rect key="frame" x="116" y="392" width="88" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -169,7 +169,7 @@ me...</string>
                     </connections>
                 </button>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="zi6-5Y-tAR" userLabel="View - Moving Header View">
-                    <rect key="frame" x="-1" y="276" width="321" height="43"/>
+                    <rect key="frame" x="0.0" y="276" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="29c-Ki-1uc">
@@ -224,6 +224,13 @@ me...</string>
                         <action selector="changeAvatarButtonTapped:" destination="-1" eventType="touchUpInside" id="tyv-5C-lMT"/>
                     </connections>
                 </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MAB-M9-oAo" userLabel="Label - Username">
+                    <rect key="frame" x="133" y="323" width="55" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

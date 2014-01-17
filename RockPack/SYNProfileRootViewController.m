@@ -85,6 +85,7 @@
 @property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPhone;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
+@property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 
 @property (strong, nonatomic) SYNProfileExpandedFlowLayout *channelExpandedLayout;
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
@@ -234,6 +235,7 @@
     {
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPhone;
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPhone;
+        
         [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
         [self.subscriptionThumbnailCollectionView.collectionViewLayout invalidateLayout];
         // == BG Colour of the search bar that is only found in iphone for channals that are being followed
@@ -248,8 +250,7 @@
         self.channelExpandedLayout.minimumInteritemSpacing = 0;
         self.channelExpandedLayout.minimumLineSpacing = 0;
         self.channelExpandedLayout.itemSize = CGSizeMake(320, 71);
-        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        self.channelExpandedLayout.headerReferenceSize = CGSizeMake(320, 472);
+        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(472, 0, 70, 0);
         
     }
     else
@@ -642,9 +643,10 @@
                             placeholderImage: placeholderImage
                                      options: SDWebImageRetryFailed];
         }
-        
-    }else{
-        
+
+    }
+    else
+    {
         self.coverImage.image = placeholderImage;
     }
     
@@ -680,9 +682,9 @@
         self.moreButton.hidden = YES;
         
         self.followingSearchBar.hidden = YES;
-        CGSize tmp = self.subscriptionLayoutIPhone.headerReferenceSize;
-        tmp.height -= 43;
-        self.subscriptionLayoutIPhone.headerReferenceSize = tmp;
+        UIEdgeInsets tmp = self.subscriptionLayoutIPhone.sectionInset;
+        tmp.top -= 43;
+        self.subscriptionLayoutIPhone.sectionInset = tmp;
         
         //
     }
@@ -784,15 +786,12 @@
         if (UIDeviceOrientationIsPortrait(orientation))
         {
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(671, 752);
+            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 7.0, 47.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-            self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(671, 752);
+            self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 70.0, 47.0);
             
             self.channelExpandedLayout.minimumLineSpacing = 14.0f;
-            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0.0, 47.0, 0.0, 47.0);
-            self.channelExpandedLayout.headerReferenceSize = CGSizeMake(671, 752);
+            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 70.0, 47.0);
             
             //NEED DYNAMIC WAY
             // self.channelThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
@@ -807,17 +806,13 @@
         }
         else
         {
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(0.0, 21.0, 0.0, 21.0);
+            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(630.0, 21.0, 70.0, 21.0);
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
-            self.channelLayoutIPad.headerReferenceSize = CGSizeMake(1004, 630);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-            self.subscriptionLayoutIPad.headerReferenceSize = CGSizeMake(1004, 630);
-            self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(0.0, 21.0, 0.0, 21.0);
+            self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(630, 21.0, 70.0, 21.0);
             
-            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0.0, 21.0, 0.0, 21.0);
+            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(630.0, 21.0, 70.0, 21.0);
             self.channelExpandedLayout.minimumLineSpacing = 14.0f;
-            self.channelExpandedLayout.headerReferenceSize = CGSizeMake(1004, 630);
-            
             
             // self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
             
@@ -871,10 +866,10 @@
     {
         //1 for search bar
         
-        return self.channelOwner.subscriptions.count;
+        return self.channelOwner.subscriptionsSet.count;
     }
     
-    return self.channelOwner.channels.count + (self.isUserProfile ? 1 : 0); // to account for the extra 'creation' cell at the start of the collection view
+    return self.channelOwner.channelsSet.count + (self.isUserProfile ? 1 : 0); // to account for the extra 'creation' cell at the start of the collection view
 }
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
@@ -941,7 +936,7 @@
 
         if(collectionView == self.channelThumbnailCollectionView)
         {
-            channel = (Channel *) self.channelOwner.channels[indexPath.item - (self.isUserProfile ? 1 : 0)];
+            channel = (Channel *) self.channelOwner.channelsSet[indexPath.item - (self.isUserProfile ? 1 : 0)];
             
 			channelThumbnailCell.followButton.hidden = (self.modeType == kModeMyOwnProfile);
             
@@ -954,9 +949,8 @@
             {
                 channelThumbnailCell.deletableCell = YES;
             }
-            
-            
-           [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
+
+            [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
         
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
@@ -2773,7 +2767,6 @@ finishedWithImage: (UIImage *) image
             else
             {
                 ((SYNChannelCreateNewCell*)cell).descriptionPlaceholderLabel.hidden = YES;
-
             }
         }
             void (^animateEditMode)(void) = ^{
@@ -3017,61 +3010,36 @@ finishedWithImage: (UIImage *) image
     
 }
 
-
-
 -(void) deleteChannel:(SYNChannelMidCell *)cell
 {
     ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
 
-//    [self.channelThumbnailCollectionView performBatchUpdates:^{
-//        
-//
-//        NSArray* itemPaths = [self.channelThumbnailCollectionView indexPathsForSelectedItems];
-//        
-//        
-//        for (int i = 0; i<itemPaths.count; i++) {
-//            
-//            NSLog(@"**Index : %@", [itemPaths objectAtIndex:i]);
-//            
-//        }
-//        
-//        // Delete the items from the data source.
-//        [appDelegate.currentUser.channelsSet removeObject: cell.channel];
-//        
-//        // Now delete the items from the collection view.
-//        [self.channelThumbnailCollectionView deleteItemsAtIndexPaths:itemPaths];
-//    } completion:nil];
-    
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
-
-//                                             CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
-//                                             tmp.size.height = 0;
-//                                             
-//                                             [UIView animateWithDuration:0.4 animations:^{
-//                                                 
-//                                                 cell.boarderView.frame = tmp;
-//                                             } completion:^(BOOL finished) {
-//                                                 CGRect tmp = ((SYNChannelMidCell*)cell).boarderView.frame;
-//                                                 if (IS_IPHONE) {
-//                                                     tmp.size.height = 71;
-//
-//                                                 }
-//                                                 else
-//                                                 {
-//                                                 tmp.size.height = 80;
-//
-//                                                 }
-//                                                 cell.boarderView.frame = tmp;
-//                                                 [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
-//                                                                                                     object: self
-//                                                                                                   userInfo: @{kChannelOwner : self.channelOwner}];
-//
-//                                             }];
                                              
-                                             [cell.channel.managedObjectContext deleteObject: cell.channel];
-                                             [self.channelThumbnailCollectionView reloadData];
+                                            [self.channelThumbnailCollectionView performBatchUpdates:^{
+                                                [self.channelOwner.channelsSet removeObject:cell.channel];
+
+                                                 UIView *v = cell;
+                                                 
+                                                 self.indexPathToDelete = [self.channelThumbnailCollectionView indexPathForItemAtPoint: v.center];
+
+                                                 [self.channelThumbnailCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject: self.indexPathToDelete]];
+                                                 
+                                                 
+//                                                 [appDelegate saveContext:YES];
+//                                                 [self.channelThumbnailCollectionView reloadData];
+                                                
+                                                 
+//                                                 NSLog(@"%@", self.channelOwner);
+                                                
+                                             } completion:^(BOOL finished) {
+                                                 [cell.channel.managedObjectContext deleteObject:cell.channel];
+
+                                                 
+                                             }];
+
                                              
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
@@ -3081,7 +3049,6 @@ finishedWithImage: (UIImage *) image
 
 - (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView **)view
 {
-    
     
     if (popoverController == self.imagePickerControllerCoverphoto.cameraPopoverController) {
         CGRect tmpRect =self.uploadCoverPhotoButton.frame;
