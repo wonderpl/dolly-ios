@@ -24,7 +24,7 @@
 		<string>AppIcon-Dev-76x76@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.rockpack.dev.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.wonderpl.dev.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

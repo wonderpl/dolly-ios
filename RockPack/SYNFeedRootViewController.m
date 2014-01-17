@@ -29,16 +29,20 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNPagingModel.h"
 #import "SYNFeedModel.h"
+#import "SYNAggregateVideoItemCell.h"
 #import "SYNCarouselVideoPlayerViewController.h"
+#import "SYNVideoPlayerAnimator.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
-@interface SYNFeedRootViewController () <SYNPagingModelDelegate>
+@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
 
 @property (nonatomic, strong) SYNFeedModel *model;
+
+@property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 @end
 
@@ -314,7 +318,21 @@ typedef void(^FeedDataErrorBlock)(void);
 	self.model.mode = SYNFeedModelModeVideo;
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
 																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]];
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	
 	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	NSIndexPath *feedIndexPath = [NSIndexPath indexPathForItem:indexPath.section inSection:0];
+	SYNAggregateCell *aggregateCell = (SYNAggregateCell *)[self.feedCollectionView cellForItemAtIndexPath:feedIndexPath];
+	
+	NSIndexPath *cellIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:0];
+	return (SYNAggregateVideoItemCell *)[aggregateCell.collectionView cellForItemAtIndexPath:cellIndexPath];
 }
 
 - (void)resetData {
@@ -327,6 +345,5 @@ typedef void(^FeedDataErrorBlock)(void);
 	
 	[self resetData];
 }
-
 
 @end

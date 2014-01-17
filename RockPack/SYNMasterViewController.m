@@ -443,24 +443,6 @@
 
 #pragma mark - Video Overlay View
 
-- (void) addVideoOverlayToViewController: (SYNAbstractViewController *) originViewController
-                  withVideoInstanceArray: (NSArray*) videoInstanceArray
-                        andSelectedIndex: (int) selectedIndex
-                              fromCenter: (CGPoint)centerPoint
-{
-    
-    if (self.videoViewerViewController)  // Prevent presenting two video players.
-        return;
-    
-    
-	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videoInstanceArray selectedIndex:selectedIndex];
-    
-	[self presentViewController:viewController animated:YES completion:nil];
-	
-
-}
-
-
 - (void) removeVideoOverlayController
 {
 

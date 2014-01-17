@@ -19,10 +19,11 @@
 #import "ChannelOwner.h"
 #import "VideoInstance.h"
 #import "SYNActivityManager.h"
+#import "SYNVideoPlayerAnimator.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
-@interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNVideoPlayerAnimatorDelegate>
 
 // UI stuff
 @property (nonatomic, strong) IBOutlet UIView *containerTabs;
@@ -51,7 +52,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 @property (nonatomic, strong) NSString* currentSearchGenre;
 
-
+@property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 
 @end
@@ -422,8 +423,19 @@ typedef void (^SearchResultCompleteBlock)(int);
 	if (collectionView == self.videosCollectionView) {
 		VideoInstance *videoInstance = self.videosArray[indexPath.item];
 		UIViewController *viewController = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
+		
+		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+		animator.delegate = self;
+		animator.cellIndexPath = indexPath;
+		self.videoPlayerAnimator = animator;
+		viewController.transitioningDelegate = animator;
+		
 		[self presentViewController:viewController animated:YES completion:nil];
 	}
+}
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	return (SYNSearchResultsVideoCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 - (CGSize) collectionView: (UICollectionView *) collectionView

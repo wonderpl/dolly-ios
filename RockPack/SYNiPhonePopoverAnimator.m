@@ -47,7 +47,7 @@
 		NSUInteger index = [containerView.subviews indexOfObjectPassingTest:^BOOL(UIView *view, NSUInteger idx, BOOL *stop) {
 			return [view isMemberOfClass:[SYNTapDismissView class]];
 		}];
-		SYNTapDismissView *tapDismissView = containerView.subviews[index];
+		SYNTapDismissView *tapDismissView = (index == NSNotFound ? nil : containerView.subviews[index]);
 		
 		[UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
 			tapDismissView.alpha = 0.0;

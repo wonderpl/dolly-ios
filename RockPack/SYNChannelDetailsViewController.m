@@ -26,6 +26,7 @@
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "SYNVideoPlayerAnimator.h"
 #import <UIButton+WebCache.h>
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
@@ -42,7 +43,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate, SYNImagePickerControllerDelegate, SYNPagingModelDelegate>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
@@ -84,6 +85,8 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) SYNChannelVideosModel *model;
+
+@property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 @end
 
@@ -1003,6 +1006,13 @@
 	
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
 																					   selectedIndex:indexPath.item];
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	
 	[self presentViewController:viewController animated:YES completion:nil];
 	
     selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
@@ -1011,6 +1021,10 @@
                                                                alpha: 0.5f];
 	
 	
+}
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	return (SYNCollectionVideoCell *)[self.videoThumbnailCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 

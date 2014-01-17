@@ -52,10 +52,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 - (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
 
-- (void) addVideoOverlayToViewController: (SYNAbstractViewController *) originViewController
-                  withVideoInstanceArray: (NSArray*) videoInstanceArray
-                        andSelectedIndex: (int) selectedIndex fromCenter:(CGPoint)centerPoint;
-
 - (void) removeVideoOverlayController;
 
 // == Adding an Overlay == //
