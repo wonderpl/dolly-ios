@@ -11,7 +11,6 @@
 #import "AppConstants.h"
 #import "SYNTextFieldLogin.h"
 #import "SYNLoginManager.h"
-#import "UIFont+SYNFont.h"
 #import "SYNiPadLoginToForgotPasswordAnimator.h"
 #import "SYNiPadPasswordForgotViewController.h"
 
@@ -32,9 +31,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
-	self.facebookButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.facebookButton.titleLabel.font.pointSize];
-	self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.loginButton.titleLabel.font.pointSize];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -8,10 +8,9 @@
 
 #import "SYNSocialActionsDelegate.h"
 #import "VideoInstance.h"
-#import "SYNVideoInfoCell.h"
 @import UIKit;
 
-@interface SYNAggregateVideoItemCell : UICollectionViewCell <SYNVideoInfoCell>
+@interface SYNAggregateVideoItemCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;

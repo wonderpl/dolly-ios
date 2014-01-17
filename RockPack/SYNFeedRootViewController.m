@@ -29,20 +29,16 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNPagingModel.h"
 #import "SYNFeedModel.h"
-#import "SYNAggregateVideoItemCell.h"
 #import "SYNCarouselVideoPlayerViewController.h"
-#import "SYNVideoPlayerAnimator.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
-@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate>
+@interface SYNFeedRootViewController () <SYNPagingModelDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
 
 @property (nonatomic, strong) SYNFeedModel *model;
-
-@property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 @end
 
@@ -318,11 +314,6 @@ typedef void(^FeedDataErrorBlock)(void);
 	self.model.mode = SYNFeedModelModeVideo;
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
 																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]];
-	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-	animator.videoInfoCell = (SYNAggregateVideoItemCell *)subCell;
-	self.videoPlayerAnimator = animator;
-	viewController.transitioningDelegate = animator;
-	
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
@@ -336,5 +327,6 @@ typedef void(^FeedDataErrorBlock)(void);
 	
 	[self resetData];
 }
+
 
 @end

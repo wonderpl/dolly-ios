@@ -134,7 +134,7 @@
                 <outlet property="addSocialButton" destination="Btc-0z-Eot" id="f6h-n4-yu7"/>
                 <outlet property="channelNameButton" destination="dFm-b8-aQy" id="NBD-Lh-Y4n"/>
                 <outlet property="commentSocialButton" destination="1Zc-4p-ema" id="NF4-ak-CN0"/>
-                <outlet property="imageView" destination="PpH-54-xvk" id="5L9-Wk-E6Y"/>
+                <outlet property="iconImageView" destination="PpH-54-xvk" id="anu-3T-XDH"/>
                 <outlet property="likeSocialButton" destination="I5a-Co-2Pv" id="nYm-ba-JHe"/>
                 <outlet property="ownerNameButton" destination="b4X-HI-NZq" id="b17-VP-OiL"/>
                 <outlet property="ownerThumbnailButton" destination="q0R-Kh-vXs" id="jgr-R8-g3j"/>

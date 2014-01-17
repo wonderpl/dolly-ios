@@ -23,7 +23,6 @@
 #import "SYNAddToChannelViewController.h"
 #import "SYNCommentingViewController.h"
 #import "SYNRotatingPopoverController.h"
-#import "UINavigationBar+Appearance.h"
 #import <SDWebImageManager.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
@@ -78,8 +77,6 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	[self.navigationController.navigationBar setBackgroundTransparent:YES];
-	
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
 	if ([self.navigationController isBeingPresented]) {
@@ -89,10 +86,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-	
-	if (IS_IPHONE && ![self.navigationController isBeingDismissed]) {
-		[self.navigationController.navigationBar setBackgroundTransparent:NO];
-	}
 	
 	if ([self.navigationController isBeingDismissed]) {
 		[self.currentVideoPlayer pause];

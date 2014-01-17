@@ -139,7 +139,7 @@
                 <outlet property="addSocialButton" destination="bzp-d3-V7P" id="kN5-Gc-cFz"/>
                 <outlet property="channelNameButton" destination="umo-Kk-v0Q" id="NMI-sz-Giw"/>
                 <outlet property="commentSocialButton" destination="kFc-cv-Ll1" id="Pnu-T7-HUb"/>
-                <outlet property="imageView" destination="Vdl-pp-UXn" id="dFh-hs-ByF"/>
+                <outlet property="iconImageView" destination="Vdl-pp-UXn" id="PiC-Hh-HIY"/>
                 <outlet property="likeSocialButton" destination="NrE-x8-VXC" id="lIQ-Gv-H37"/>
                 <outlet property="ownerNameButton" destination="rmd-sp-AGY" id="G96-0p-5gi"/>
                 <outlet property="ownerThumbnailButton" destination="Xps-u0-6Jr" id="hM1-tw-nxI"/>

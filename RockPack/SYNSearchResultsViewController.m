@@ -19,7 +19,6 @@
 #import "ChannelOwner.h"
 #import "VideoInstance.h"
 #import "SYNActivityManager.h"
-#import "SYNVideoPlayerAnimator.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
@@ -52,7 +51,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 @property (nonatomic, strong) NSString* currentSearchGenre;
 
-@property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
+
 
 
 @end
@@ -423,15 +422,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 	if (collectionView == self.videosCollectionView) {
 		VideoInstance *videoInstance = self.videosArray[indexPath.item];
 		UIViewController *viewController = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
-		
-		SYNSearchResultsVideoCell *videoCell = (SYNSearchResultsVideoCell *)[collectionView cellForItemAtIndexPath:indexPath];
-		
-		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-		animator.videoInfoCell = videoCell;
-		self.videoPlayerAnimator = animator;
-		viewController.transitioningDelegate = animator;
-
-		
 		[self presentViewController:viewController animated:YES completion:nil];
 	}
 }
