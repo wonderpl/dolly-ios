@@ -77,18 +77,6 @@
 	}
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	
-	[self.navigationController.navigationBar setBackgroundTransparent:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	
-	[self.navigationController.navigationBar setBackgroundTransparent:NO];
-}
-
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	

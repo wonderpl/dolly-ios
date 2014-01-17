@@ -1325,6 +1325,7 @@
 		E91D364B1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91D364A1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard */; };
 		E91D4105187DAE5D00E712CC /* SYNLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91D4104187DAE5D00E712CC /* SYNLoginManager.m */; };
 		E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */; };
+		E92CBAEE1887E29500A07070 /* SYNVideoPlayerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */; };
 		E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */; };
 		E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D335A184E239C0025D1DF /* SYNPagingModel.m */; };
 		E93C7F0918368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93C7F0818368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard */; };
@@ -2943,6 +2944,8 @@
 		E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingView.m; sourceTree = "<group>"; };
 		E91F04531844C4410009D610 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E92A2C5D187F0A7C002A6447 /* SYNVideoCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoCellDelegate.h; sourceTree = "<group>"; };
+		E92CBAEC1887E29500A07070 /* SYNVideoPlayerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerAnimator.h; sourceTree = "<group>"; };
+		E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerAnimator.m; sourceTree = "<group>"; };
 		E92D3356184CDFEA0025D1DF /* UICollectionReusableView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionReusableView+Helpers.h"; sourceTree = "<group>"; };
 		E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionReusableView+Helpers.m"; sourceTree = "<group>"; };
 		E92D3359184E239C0025D1DF /* SYNPagingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPagingModel.h; sourceTree = "<group>"; };
@@ -2972,6 +2975,7 @@
 		E97FCDC4183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNCarouselVideoPlayerViewController_ipad.storyboard; sourceTree = "<group>"; };
 		E98369D4188937B300363709 /* ButtonLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonLogin.png; path = Assets/Images/ButtonLogin.png; sourceTree = "<group>"; };
 		E98369D5188937B300363709 /* ButtonLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonLogin@2x.png"; path = "Assets/Images/ButtonLogin@2x.png"; sourceTree = "<group>"; };
+		E98369D81889457500363709 /* SYNVideoInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoInfoCell.h; sourceTree = "<group>"; };
 		E9921A9218351D66001A4F3B /* SYNScrubberBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNScrubberBar.h; sourceTree = "<group>"; };
 		E9921A9318351D66001A4F3B /* SYNScrubberBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNScrubberBar.m; sourceTree = "<group>"; };
 		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
@@ -4343,6 +4347,9 @@
 				E9F7CC7A1846562F0026C97D /* SYNVideoPlayerViewController.h */,
 				E9B75F5D1848ADB50066420E /* SYNVideoPlayerViewController+Protected.h */,
 				E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */,
+				E92CBAEC1887E29500A07070 /* SYNVideoPlayerAnimator.h */,
+				E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */,
+				E98369D81889457500363709 /* SYNVideoInfoCell.h */,
 			);
 			name = "Video Player";
 			sourceTree = "<group>";
@@ -7612,6 +7619,7 @@
 				BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */,
 				BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */,
 				01655434183680CE009B161C /* SYNFormButton.m in Sources */,
+				E92CBAEE1887E29500A07070 /* SYNVideoPlayerAnimator.m in Sources */,
 				BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */,
 				BE1B3DEA181141D600DA2BD6 /* SYNAggregateVideoItemCell.m in Sources */,
 				BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */,
