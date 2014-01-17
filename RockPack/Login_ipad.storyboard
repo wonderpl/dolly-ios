@@ -463,7 +463,7 @@
                                     <constraint firstAttribute="height" constant="38" id="7eY-Po-jEF"/>
                                     <constraint firstAttribute="width" constant="320" id="NRe-pR-Rmu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Login" backgroundImage="ButtonLogin.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
