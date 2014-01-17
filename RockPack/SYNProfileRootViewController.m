@@ -377,13 +377,20 @@
     }
 
     
+    //Right transform for the segmented control animations
     CGAffineTransform translateRight = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
     
-    NSLog(@"width : %f :", self.view.frame.size.width);
     self.subscriptionThumbnailCollectionView.transform = translateRight;
+
+    self.followingSearchBar.transform = CGAffineTransformTranslate(self.followingSearchBar.transform, self.view.frame.size.width, 0);
     
+    CGRect tmp = self.followingSearchBar.frame;
+    tmp.origin.x+=320;
+    self.followingSearchBar.frame = tmp;
     
+    NSLog(@"after : frame %f",self.followingSearchBar.frame.origin.x);
 }
+
 -(void) setFollowersCountButton
 {
     NSString *tmpString;
@@ -709,6 +716,8 @@
         self.followAllButton.hidden = YES;
         
         self.moreButton.hidden = NO;
+        self.followingSearchBar.hidden = NO;
+
         
     }
     if (profileType == kModeOtherUsersProfile)
@@ -1174,11 +1183,23 @@
     
     CGAffineTransform translateLeftSubscription = CGAffineTransformTranslate(self.subscriptionThumbnailCollectionView.transform,self.view.frame.size.width, 0);
     
-    
+        CGRect tmp = self.followingSearchBar.frame;
+        tmp.origin.x+=320;
+
+        
+        // == using the position of the search bar to determine if the the animation should animate or not
+        if (self.followingSearchBar.frame.origin.x == 0) {
+            
+        
     [UIView animateWithDuration:SEGMENTED_CONTROLLER_ANIMATION animations:^{
         self.channelThumbnailCollectionView.transform = translateLeftChannel;
         self.subscriptionThumbnailCollectionView.transform = translateLeftSubscription;
+    
+        self.followingSearchBar.frame = tmp;
+
     }];
+            
+        }
     }
     
     [self updateTabStates];
@@ -1192,12 +1213,19 @@
         
         CGAffineTransform translateLeftSubscription = CGAffineTransformTranslate(self.subscriptionThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
         
-        
+        CGRect tmp = self.followingSearchBar.frame;
+        tmp.origin.x-=320;
+
+        if (self.followingSearchBar.frame.origin.x == 320) {
+
         [UIView animateWithDuration:SEGMENTED_CONTROLLER_ANIMATION animations:^{
             self.channelThumbnailCollectionView.transform = translateLeftChannel;
             self.subscriptionThumbnailCollectionView.transform = translateLeftSubscription;
+            
+            self.followingSearchBar.frame = tmp;
+
         }];
-        
+        }
     }
 
     [self updateTabStates];
@@ -1218,7 +1246,7 @@
     
     if (self.modeType == kModeMyOwnProfile)
     {
-        self.followingSearchBar.hidden = self.collectionsTabActive;
+        self.followingSearchBar.hidden = NO;
     }
     
     if (self.collectionsTabActive)
