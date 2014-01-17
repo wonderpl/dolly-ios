@@ -47,7 +47,7 @@
 #define PARALLAX_SCROLL_VALUE 2.0f
 #define kHeightChange 94.0f
 #define MAXRANGE 1000.0f
-
+#define SEGMENTED_CONTROLLER_ANIMATION 0.35f
 
 //alertview for channels with same name
 //alertview for channels with no name
@@ -275,7 +275,7 @@
     self.searchMode = NO;
     
     //hide the channel collectionview
-    self.channelThumbnailCollectionView.hidden = YES;
+//    self.channelThumbnailCollectionView.hidden = YES;
     
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     
@@ -375,6 +375,10 @@
     }
 
     
+    CGAffineTransform translateRight = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
+    
+    NSLog(@"width : %f :", self.view.frame.size.width);
+    self.subscriptionThumbnailCollectionView.transform = translateRight;
     
     
 }
@@ -558,7 +562,7 @@
     self.userNameLabel.text = self.channelOwner.username;
     self.fullNameLabel.text = self.channelOwner.displayName;
     
-    
+
     [self setProfileImage:self.channelOwner.thumbnailURL];
     [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     
@@ -1162,11 +1166,34 @@
 #pragma mark - tab button actions
 - (IBAction)collectionsTabTapped:(id)sender {
     self.collectionsTabActive = YES;
+    
+    CGAffineTransform translateLeftChannel = CGAffineTransformTranslate(self.channelThumbnailCollectionView.transform,self.view.frame.size.width, 0);
+    
+    CGAffineTransform translateLeftSubscription = CGAffineTransformTranslate(self.subscriptionThumbnailCollectionView.transform,self.view.frame.size.width, 0);
+    
+    
+    [UIView animateWithDuration:SEGMENTED_CONTROLLER_ANIMATION animations:^{
+        self.channelThumbnailCollectionView.transform = translateLeftChannel;
+        self.subscriptionThumbnailCollectionView.transform = translateLeftSubscription;
+    }];
+    
+    
     [self updateTabStates];
     
 }
 - (IBAction)followingsTabTapped:(id)sender {
     self.collectionsTabActive = NO;
+//    
+    CGAffineTransform translateLeftChannel = CGAffineTransformTranslate(self.channelThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
+    
+    CGAffineTransform translateLeftSubscription = CGAffineTransformTranslate(self.subscriptionThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
+
+    
+    [UIView animateWithDuration:SEGMENTED_CONTROLLER_ANIMATION animations:^{
+        self.channelThumbnailCollectionView.transform = translateLeftChannel;
+        self.subscriptionThumbnailCollectionView.transform = translateLeftSubscription;
+    }];
+
     [self updateTabStates];
     
 }
@@ -1178,8 +1205,8 @@
     
     self.collectionsTabButton.selected = !self.collectionsTabActive;
     
-    self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
-    self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
+//    self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
+//    self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
     
     if (self.modeType == kModeMyOwnProfile)
     {
@@ -1193,7 +1220,6 @@
         
         self.collectionsTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
         [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
-        
         
     }
     else
