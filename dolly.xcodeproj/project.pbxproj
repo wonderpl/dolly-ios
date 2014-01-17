@@ -366,8 +366,8 @@
 		0E27C270183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */; };
 		0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */; };
 		0E27C272183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */; };
-		0E2AB166188462DD004557A4 /* SYNWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */; };
-		0E2AB167188462DD004557A4 /* SYNWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */; };
+		0E2AB166188462DD004557A4 /* SYNWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AB164188462DD004557A4 /* SYNWebViewController.m */; };
+		0E2AB167188462DD004557A4 /* SYNWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB165188462DD004557A4 /* SYNWebViewController.xib */; };
 		0E2AB16B1886CBE3004557A4 /* MoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB1691886CBE3004557A4 /* MoodBackground.png */; };
 		0E2AB16C1886CBE4004557A4 /* MoodBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB16A1886CBE3004557A4 /* MoodBackground@2x.png */; };
 		0E3AE6901875DE8C008A8D00 /* SYNGenreColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */; };
@@ -1859,9 +1859,9 @@
 		0E27C26C183250F9008C0DE8 /* ButtonVideoDeleteDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteDefault@2x.png"; sourceTree = "<group>"; };
 		0E27C26D183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonVideoDeleteHighlighted.png; sourceTree = "<group>"; };
 		0E27C26E183250F9008C0DE8 /* ButtonVideoDeleteHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonVideoDeleteHighlighted@2x.png"; sourceTree = "<group>"; };
-		0E2AB163188462DD004557A4 /* SYNWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWebViewViewController.h; sourceTree = "<group>"; };
-		0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWebViewViewController.m; sourceTree = "<group>"; };
-		0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNWebViewViewController.xib; sourceTree = "<group>"; };
+		0E2AB163188462DD004557A4 /* SYNWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWebViewController.h; sourceTree = "<group>"; };
+		0E2AB164188462DD004557A4 /* SYNWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWebViewController.m; sourceTree = "<group>"; };
+		0E2AB165188462DD004557A4 /* SYNWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNWebViewController.xib; sourceTree = "<group>"; };
 		0E2AB1691886CBE3004557A4 /* MoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MoodBackground.png; path = Assets/Images/MoodBackground.png; sourceTree = "<group>"; };
 		0E2AB16A1886CBE3004557A4 /* MoodBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MoodBackground@2x.png"; path = "Assets/Images/MoodBackground@2x.png"; sourceTree = "<group>"; };
 		0E3AE68E1875DE8C008A8D00 /* SYNGenreColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGenreColorManager.h; sourceTree = "<group>"; };
@@ -4368,9 +4368,9 @@
 		0E2AB16818846391004557A4 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				0E2AB163188462DD004557A4 /* SYNWebViewViewController.h */,
-				0E2AB164188462DD004557A4 /* SYNWebViewViewController.m */,
-				0E2AB165188462DD004557A4 /* SYNWebViewViewController.xib */,
+				0E2AB163188462DD004557A4 /* SYNWebViewController.h */,
+				0E2AB164188462DD004557A4 /* SYNWebViewController.m */,
+				0E2AB165188462DD004557A4 /* SYNWebViewController.xib */,
 			);
 			name = WebView;
 			sourceTree = "<group>";
@@ -6422,7 +6422,7 @@
 				BE7D350B1715D3080085AB81 /* NavigationDot.png in Resources */,
 				BE7D350C1715D3080085AB81 /* NavigationDot@2x.png in Resources */,
 				BE7D350D1715D3080085AB81 /* NavigationDotCurrent.png in Resources */,
-				0E2AB167188462DD004557A4 /* SYNWebViewViewController.xib in Resources */,
+				0E2AB167188462DD004557A4 /* SYNWebViewController.xib in Resources */,
 				BE7D350E1715D3080085AB81 /* NavigationDotCurrent@2x.png in Resources */,
 				BE7D35131716D27A0085AB81 /* SubCategoryBar.png in Resources */,
 				BE7D35141716D27A0085AB81 /* SubCategoryBar@2x.png in Resources */,
@@ -7451,7 +7451,7 @@
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */,
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,
-				0E2AB166188462DD004557A4 /* SYNWebViewViewController.m in Sources */,
+				0E2AB166188462DD004557A4 /* SYNWebViewController.m in Sources */,
 				BEB31374181AC6DB00FAF98A /* SYNSocialAddButton.m in Sources */,
 				019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */,
 				01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */,
