@@ -121,9 +121,9 @@
     self.shareSocialButton.dataItemLinked = _videoInstance;
     self.commentSocialButton.dataItemLinked = _videoInstance;
     
-    [self.iconImageView setImageWithURL: [NSURL URLWithString: _videoInstance.thumbnailURL]
-                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                options: SDWebImageRetryFailed];
+    [self.imageView setImageWithURL:[NSURL URLWithString: _videoInstance.thumbnailURL]
+				   placeholderImage:[UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+							options:SDWebImageRetryFailed];
 }
 
 - (IBAction)channelButtonTapped:(UIButton *)button {

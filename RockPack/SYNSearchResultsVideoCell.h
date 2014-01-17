@@ -8,13 +8,14 @@
 
 #import "SYNSearchResultsCell.h"
 #import "VideoInstance.h"
+#import "SYNVideoInfoCell.h"
 @import UIKit;
 
 @protocol SYNVideoCellDelegate;
 
-@interface SYNSearchResultsVideoCell : SYNSearchResultsCell
+@interface SYNSearchResultsVideoCell : SYNSearchResultsCell <SYNVideoInfoCell>
 
-@property (nonatomic, strong) IBOutlet UIImageView* iconImageView;
+@property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* timeStampLabel;

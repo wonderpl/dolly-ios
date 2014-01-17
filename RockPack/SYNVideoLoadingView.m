@@ -10,6 +10,7 @@
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 #import "Video.h"
+#import "UIImage+Blur.h"
 #import <SDWebImageManager.h>
 
 static NSString *const LoadingMessage = @"Your video is loading...";
@@ -105,7 +106,7 @@ static const CGFloat TextSideInset = 20.0;
 											   options:0
 											  progress:nil
 											 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-												 UIImage *blurredImage = [self blurredImageFromImage:image];
+												 UIImage *blurredImage = [UIImage blurredImageFromImage:image];
 												 self.imageLayer.contents = (__bridge id)blurredImage.CGImage;
 												 self.textLayer.contents = (__bridge id)blurredImage.CGImage;
 											 }];
@@ -151,21 +152,6 @@ static const CGFloat TextSideInset = 20.0;
 	UIGraphicsEndImageContext();
 	
 	return layer;
-}
-
-- (UIImage *)blurredImageFromImage:(UIImage *)inputImage {
-	CIContext *context = [CIContext contextWithOptions:nil];
-	CIImage *image = [CIImage imageWithCGImage:[inputImage CGImage]];
-	
-	CIFilter *filter = [CIFilter filterWithName: @"CIGaussianBlur"];
-	[filter setValue:@15.0 forKey:kCIInputRadiusKey];
-	[filter setValue:image forKey:kCIInputImageKey];
-	
-	CGImageRef cgImage = [context createCGImage:[filter outputImage] fromRect:[image extent]];
-	UIImage *outputImage = [UIImage imageWithCGImage:cgImage];
-	CGImageRelease(cgImage);
-	
-	return outputImage;
 }
 
 - (UIFont *)titleFont {

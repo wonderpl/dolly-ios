@@ -88,8 +88,6 @@
 	
 	self.model.delegate = self;
 	
-	[self.navigationController.navigationBar setBackgroundTransparent:YES];
-	
 	if (![self isBeingPresented]) {
 		// Invalidate the layout so the section insets are recalculated when returning from full screen video
 		[self.thumbnailCollectionView.collectionViewLayout invalidateLayout];
@@ -105,12 +103,6 @@
 												   animated:YES
 											 scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 	}
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	
-	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
