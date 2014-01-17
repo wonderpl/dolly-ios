@@ -618,7 +618,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2Z3-B6-plQ" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="30" y="160" width="260" height="38"/>
+                                        <rect key="frame" x="30" y="120" width="260" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <accessibility key="accessibilityConfiguration" label="Username Field"/>
                                         <constraints>
@@ -633,7 +633,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oOg-9M-mq7" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="30" y="213" width="260" height="38"/>
+                                        <rect key="frame" x="30" y="173" width="260" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <accessibility key="accessibilityConfiguration" label="Password Field"/>
                                         <constraints>
@@ -648,7 +648,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5db-Xi-O3w">
-                                        <rect key="frame" x="108" y="264" width="182" height="40"/>
+                                        <rect key="frame" x="108" y="224" width="182" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="SD9-Rk-2OY"/>
@@ -668,7 +668,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="BK3-FY-6iA" userLabel="Label - login error">
-                                        <rect key="frame" x="160" y="312" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="160" y="272" width="0.0" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.5568627451" green="0.086274509799999996" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -682,7 +682,7 @@
                                     <constraint firstAttribute="centerX" secondItem="2Z3-B6-plQ" secondAttribute="centerX" id="242-Y6-vUO"/>
                                     <constraint firstItem="BK3-FY-6iA" firstAttribute="top" secondItem="5db-Xi-O3w" secondAttribute="bottom" constant="8" id="PZQ-Uv-r0n"/>
                                     <constraint firstAttribute="trailing" secondItem="5db-Xi-O3w" secondAttribute="trailing" constant="30" id="QTr-9r-w0K"/>
-                                    <constraint firstItem="2Z3-B6-plQ" firstAttribute="top" secondItem="VzH-Vd-QSC" secondAttribute="top" constant="160" id="ZrJ-Ty-KXG"/>
+                                    <constraint firstItem="2Z3-B6-plQ" firstAttribute="top" secondItem="VzH-Vd-QSC" secondAttribute="top" constant="120" id="ZrJ-Ty-KXG"/>
                                     <constraint firstItem="oOg-9M-mq7" firstAttribute="top" secondItem="2Z3-B6-plQ" secondAttribute="bottom" constant="15" id="oO4-rq-HnD"/>
                                     <constraint firstAttribute="centerX" secondItem="BK3-FY-6iA" secondAttribute="centerX" id="qkq-I1-2eq"/>
                                     <constraint firstItem="5db-Xi-O3w" firstAttribute="top" secondItem="oOg-9M-mq7" secondAttribute="bottom" constant="13" id="zFb-cd-Jqx"/>
