@@ -595,7 +595,7 @@
     
     if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
         
-        dispatch_queue_t downloadQueue = dispatch_queue_create("com.rockpack.avatarloadingqueue", NULL);
+        dispatch_queue_t downloadQueue = dispatch_queue_create("com.dolly.avatarloadingqueue", NULL);
         dispatch_async(downloadQueue, ^{
             
             NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailLargeUrl ]];
@@ -606,8 +606,15 @@
             //should be able to get rid of it later
             if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    self.profileImageView.alpha = 0.0;
                     
                     self.profileImageView.image = tmpImage;
+                    
+                    [UIView animateWithDuration:0.5f animations:^{
+                        self.profileImageView.alpha=1.0f;
+                    }];
+                    
+                    
                 });
             }
             
@@ -639,9 +646,32 @@
                 thumbnailUrlString = [thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
             }
             
-            [self.coverImage setImageWithURL: [NSURL URLWithString: thumbnailUrlString]
-                            placeholderImage: placeholderImage
-                                     options: SDWebImageRetryFailed];
+            dispatch_queue_t downloadQueue = dispatch_queue_create("com.dolly.coverphotoloadingqueue", NULL);
+            dispatch_async(downloadQueue, ^{
+                
+                NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: thumbnailUrlString]
+];
+                
+                UIImage *tmpImage = [UIImage imageWithData: imageData];
+                
+                //if statement for now as the db has urls for avatars that have not been uploaded
+                //should be able to get rid of it later
+                if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.coverImage.alpha = 0.0;
+                        
+                        self.coverImage.image = tmpImage;
+                        
+                        [UIView animateWithDuration:1.5f animations:^{
+                            self.coverImage.alpha=1.0f;
+                        }];
+                        
+                        
+                    });
+                }
+                
+            });
+
         }
 
     }
@@ -686,7 +716,6 @@
         tmp.top -= 43;
         self.subscriptionLayoutIPhone.sectionInset = tmp;
         
-        //
     }
 }
 
@@ -786,7 +815,7 @@
         if (UIDeviceOrientationIsPortrait(orientation))
         {
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 7.0, 47.0);
+            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 70.0, 47.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 70.0, 47.0);
             
@@ -3037,6 +3066,9 @@ finishedWithImage: (UIImage *) image
                                              } completion:^(BOOL finished) {
                                                  [cell.channel.managedObjectContext deleteObject:cell.channel];
 
+                                                 CGPoint tmp = self.channelThumbnailCollectionView.contentOffset;
+                                                 tmp.y+=1;
+                                                 [self.channelThumbnailCollectionView setContentOffset:tmp animated:YES];
                                                  
                                              }];
 
