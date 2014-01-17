@@ -275,7 +275,9 @@
     self.searchMode = NO;
     
     //hide the channel collectionview
-//    self.channelThumbnailCollectionView.hidden = YES;
+    if (IS_IPAD) {
+        self.channelThumbnailCollectionView.hidden = YES;
+    }
     
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     
@@ -1166,7 +1168,8 @@
 #pragma mark - tab button actions
 - (IBAction)collectionsTabTapped:(id)sender {
     self.collectionsTabActive = YES;
-    
+    if (IS_IPHONE) {
+
     CGAffineTransform translateLeftChannel = CGAffineTransformTranslate(self.channelThumbnailCollectionView.transform,self.view.frame.size.width, 0);
     
     CGAffineTransform translateLeftSubscription = CGAffineTransformTranslate(self.subscriptionThumbnailCollectionView.transform,self.view.frame.size.width, 0);
@@ -1176,23 +1179,26 @@
         self.channelThumbnailCollectionView.transform = translateLeftChannel;
         self.subscriptionThumbnailCollectionView.transform = translateLeftSubscription;
     }];
-    
+    }
     
     [self updateTabStates];
     
 }
 - (IBAction)followingsTabTapped:(id)sender {
     self.collectionsTabActive = NO;
-//    
-    CGAffineTransform translateLeftChannel = CGAffineTransformTranslate(self.channelThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
-    
-    CGAffineTransform translateLeftSubscription = CGAffineTransformTranslate(self.subscriptionThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
-
-    
-    [UIView animateWithDuration:SEGMENTED_CONTROLLER_ANIMATION animations:^{
-        self.channelThumbnailCollectionView.transform = translateLeftChannel;
-        self.subscriptionThumbnailCollectionView.transform = translateLeftSubscription;
-    }];
+//
+    if (IS_IPHONE) {
+        CGAffineTransform translateLeftChannel = CGAffineTransformTranslate(self.channelThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
+        
+        CGAffineTransform translateLeftSubscription = CGAffineTransformTranslate(self.subscriptionThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
+        
+        
+        [UIView animateWithDuration:SEGMENTED_CONTROLLER_ANIMATION animations:^{
+            self.channelThumbnailCollectionView.transform = translateLeftChannel;
+            self.subscriptionThumbnailCollectionView.transform = translateLeftSubscription;
+        }];
+        
+    }
 
     [self updateTabStates];
     
@@ -1205,8 +1211,10 @@
     
     self.collectionsTabButton.selected = !self.collectionsTabActive;
     
-//    self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
-//    self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
+    if (IS_IPAD) {
+            self.channelThumbnailCollectionView.hidden = !self.collectionsTabActive;
+            self.subscriptionThumbnailCollectionView.hidden = self.collectionsTabActive;
+    }
     
     if (self.modeType == kModeMyOwnProfile)
     {
