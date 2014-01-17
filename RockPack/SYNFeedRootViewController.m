@@ -319,9 +319,8 @@ typedef void(^FeedDataErrorBlock)(void);
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
 																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]];
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-	SYNAggregateCell *aggregateCell = (SYNAggregateCell *)cell;
 	animator.delegate = self;
-	animator.cellIndexPath = [aggregateCell.collectionView indexPathForCell:subCell];
+	animator.cellIndexPath = indexPath;
 	self.videoPlayerAnimator = animator;
 	viewController.transitioningDelegate = animator;
 	
