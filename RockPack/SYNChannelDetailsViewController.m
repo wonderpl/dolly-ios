@@ -43,7 +43,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate, SYNImagePickerControllerDelegate, SYNPagingModelDelegate>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
@@ -1007,7 +1007,9 @@
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
 																					   selectedIndex:indexPath.item];
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-	animator.videoInfoCell = selectedCell;
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	
 	self.videoPlayerAnimator = animator;
 	viewController.transitioningDelegate = animator;
 	
@@ -1019,6 +1021,10 @@
                                                                alpha: 0.5f];
 	
 	
+}
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	return [self.videoThumbnailCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 

@@ -36,7 +36,7 @@ static const CGFloat AnimationDuration = 0.3;
 		UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 		UINavigationController *videoPlayerNavController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 		
-		id<SYNVideoInfoCell> infoCell = self.videoInfoCell;
+		id<SYNVideoInfoCell> infoCell = (id<SYNVideoInfoCell>)[self.delegate videoCellForIndexPath:self.cellIndexPath];
 		
 		[containerView addSubview:videoPlayerNavController.view];
 		[videoPlayerNavController.view layoutIfNeeded];
@@ -102,19 +102,26 @@ static const CGFloat AnimationDuration = 0.3;
 		UINavigationController *videoPlayerNavController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 		SYNVideoPlayerViewController *videoPlayerViewController = (SYNVideoPlayerViewController *)videoPlayerNavController.topViewController;
 		
-		id<SYNVideoInfoCell> infoCell = self.videoInfoCell;
-		
-		CGRect cellImageFrame = [toViewController.view convertRect:infoCell.imageView.bounds
-														  fromView:infoCell.imageView];
-		
 		[containerView insertSubview:toViewController.view belowSubview:videoPlayerNavController.view];
+		[toViewController.view layoutIfNeeded];
+		
+		id<SYNVideoInfoCell> infoCell = (id<SYNVideoInfoCell>)[self.delegate videoCellForIndexPath:self.cellIndexPath];
+		
+		CGRect cellImageFrame = CGRectZero;
+		if (infoCell) {
+			cellImageFrame = [toViewController.view convertRect:infoCell.imageView.bounds
+													   fromView:infoCell.imageView];
+		}
 		
 		UIImageView *blurredImageView = self.blurredImageView;
 		blurredImageView.alpha = 0.0;
+		blurredImageView.frame = [videoPlayerNavController.view convertRect:videoPlayerViewController.videoPlayerContainerView.bounds
+																   fromView:videoPlayerViewController.videoPlayerContainerView];
 		
 		[containerView addSubview:blurredImageView];
 		
 		videoPlayerViewController.videoPlayerContainerView.alpha = 0.0;
+		infoCell.imageView.alpha = 0.0;
 		
 		[UIView animateKeyframesWithDuration:AnimationDuration
 									   delay:0.0
@@ -130,13 +137,16 @@ static const CGFloat AnimationDuration = 0.3;
 															  relativeDuration:0.9
 																	animations:^{
 																		videoPlayerNavController.view.alpha = 0.0;
-																		blurredImageView.frame = cellImageFrame;
+																		if (!CGRectIsEmpty(cellImageFrame)) {
+																			blurredImageView.frame = cellImageFrame;
+																		}
 																	}];
 									  
 									  [UIView addKeyframeWithRelativeStartTime:0.9
 															  relativeDuration:1.0
 																	animations:^{
 																		blurredImageView.alpha = 0.0;
+																		infoCell.imageView.alpha = 1.0;
 																	}];
 								  } completion:^(BOOL finished) {
 									  [transitionContext completeTransition:YES];

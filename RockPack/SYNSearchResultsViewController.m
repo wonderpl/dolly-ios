@@ -23,7 +23,7 @@
 
 typedef void (^SearchResultCompleteBlock)(int);
 
-@interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNVideoPlayerAnimatorDelegate>
 
 // UI stuff
 @property (nonatomic, strong) IBOutlet UIView *containerTabs;
@@ -424,16 +424,18 @@ typedef void (^SearchResultCompleteBlock)(int);
 		VideoInstance *videoInstance = self.videosArray[indexPath.item];
 		UIViewController *viewController = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
 		
-		SYNSearchResultsVideoCell *videoCell = (SYNSearchResultsVideoCell *)[collectionView cellForItemAtIndexPath:indexPath];
-		
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-		animator.videoInfoCell = videoCell;
+		animator.delegate = self;
+		animator.cellIndexPath = indexPath;
 		self.videoPlayerAnimator = animator;
 		viewController.transitioningDelegate = animator;
-
 		
 		[self presentViewController:viewController animated:YES completion:nil];
 	}
+}
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	return (SYNSearchResultsVideoCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 - (CGSize) collectionView: (UICollectionView *) collectionView

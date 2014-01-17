@@ -10,8 +10,16 @@
 
 @protocol SYNVideoInfoCell;
 
+@protocol SYNVideoPlayerAnimatorDelegate <NSObject>
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface SYNVideoPlayerAnimator : NSObject <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
-@property (nonatomic, strong) id<SYNVideoInfoCell> videoInfoCell;
+@property (nonatomic, strong) NSIndexPath *cellIndexPath;
+
+@property (nonatomic, weak) id<SYNVideoPlayerAnimatorDelegate> delegate;
 
 @end
