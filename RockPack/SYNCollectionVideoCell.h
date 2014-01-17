@@ -13,8 +13,9 @@
 #import "VideoInstance.h"
 #import "SYNSocialActionsDelegate.h"
 #import "SYNSocialCommentButton.h"
+#import "SYNVideoInfoCell.h"
 
-@interface SYNCollectionVideoCell : UICollectionViewCell
+@interface SYNCollectionVideoCell : UICollectionViewCell <SYNVideoInfoCell>
  
 @property (strong, nonatomic) IBOutlet SYNSocialButton *likeControl;
 @property (strong, nonatomic) IBOutlet SYNSocialAddButton *addControl;

@@ -26,6 +26,7 @@
 #import "User.h"
 #import "Video.h"
 #import "VideoInstance.h"
+#import "SYNVideoPlayerAnimator.h"
 #import <UIButton+WebCache.h>
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
@@ -84,6 +85,8 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) SYNChannelVideosModel *model;
+
+@property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 @end
 
@@ -1003,6 +1006,11 @@
 	
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
 																					   selectedIndex:indexPath.item];
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.videoInfoCell = selectedCell;
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	
 	[self presentViewController:viewController animated:YES completion:nil];
 	
     selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
