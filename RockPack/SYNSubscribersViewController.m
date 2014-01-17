@@ -62,6 +62,8 @@
                         forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
+    
+    
 }
 
 
@@ -110,7 +112,6 @@
     
     [appDelegate.searchRegistry clearImportContextFromEntityName:kChannelOwner andViewId:self.viewId];
     
-    
     [appDelegate.networkEngine subscribersForUserId: appDelegate.currentUser.uniqueId
                                           channelId: self.channel.uniqueId
                                            forRange: self.dataRequestRange
@@ -123,6 +124,23 @@
                                       
                                         [self.activityView stopAnimating];
                                       
+
+                                      if (IS_IPHONE) {
+                                          CGRect tmp = self.usersThumbnailCollectionView.frame;
+                                          tmp.origin.y+=self.view.frame.size.height;
+                                          self.usersThumbnailCollectionView.frame = tmp;
+
+                                        tmp = self.usersThumbnailCollectionView.frame;
+                                          tmp.origin.y -= self.view.frame.size.height;
+                                          
+                                          [UIView animateWithDuration:0.8f animations:^{
+                                              
+                                              self.usersThumbnailCollectionView.frame = tmp;
+                                              
+                                          }];
+                                          
+                                      }
+                                  
                                     } errorHandler: ^{
                                         
                                         [self.activityView stopAnimating];
