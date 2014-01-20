@@ -288,9 +288,15 @@ referenceSizeForFooterInSection:(NSInteger)section {
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[super updateVideoInstanceDetails:(VideoInstance *)videoInstance];
 	
+	if (self.previousVideoPlayer) {
+		[self.previousVideoPlayer removeFromSuperview];
+	}
 	self.previousVideoPlayer = [self createPreviousVideoPlayer];
 	[self.previousVideoPlayerContainerView addSubview:self.previousVideoPlayer];
 	
+	if (self.nextVideoPlayer) {
+		[self.nextVideoPlayer removeFromSuperview];
+	}
 	self.nextVideoPlayer = [self createNextVideoPlayer];
 	[self.nextVideoPlayerContainerView addSubview:self.nextVideoPlayer];
 	
