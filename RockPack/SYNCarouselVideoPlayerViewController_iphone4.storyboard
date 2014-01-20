@@ -61,19 +61,58 @@
                                     <constraint firstItem="Cad-W2-yLM" firstAttribute="top" secondItem="njH-EQ-te6" secondAttribute="bottom" constant="4" id="ukQ-Bo-phL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-zI-2J4">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgW-oH-qeU">
                                 <rect key="frame" x="0.0" y="82" width="320" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-zI-2J4" userLabel="Previous Video Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="0pv-IL-UUt"/>
+                                            <constraint firstAttribute="width" constant="320" id="sN5-lV-APF"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6I-OJ-slL" userLabel="Current Video Container View">
+                                        <rect key="frame" x="320" y="0.0" width="320" height="180"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="RYF-jc-aGK"/>
+                                            <constraint firstAttribute="width" constant="320" id="TC5-22-Q3l"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPv-AK-RcC" userLabel="Next Video Container View">
+                                        <rect key="frame" x="640" y="0.0" width="320" height="180"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="Rpw-s4-otn"/>
+                                            <constraint firstAttribute="height" constant="180" id="sAw-Ek-n3O"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="0pv-IL-UUt"/>
+                                    <constraint firstItem="Jlb-zI-2J4" firstAttribute="leading" secondItem="wgW-oH-qeU" secondAttribute="leading" id="AUG-Ms-9Bk"/>
+                                    <constraint firstAttribute="width" constant="320" id="Aj7-GL-GjH"/>
+                                    <constraint firstAttribute="centerY" secondItem="Jlb-zI-2J4" secondAttribute="centerY" id="FTD-Wm-yVg"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jlb-zI-2J4" secondAttribute="bottom" id="G2I-0P-2Z2"/>
+                                    <constraint firstItem="GPv-AK-RcC" firstAttribute="leading" secondItem="c6I-OJ-slL" secondAttribute="trailing" id="IkB-iK-h2e"/>
+                                    <constraint firstAttribute="centerY" secondItem="c6I-OJ-slL" secondAttribute="centerY" id="PRw-w6-WAJ"/>
+                                    <constraint firstAttribute="height" constant="180" id="Wpb-Cw-rIB"/>
+                                    <constraint firstItem="Jlb-zI-2J4" firstAttribute="top" secondItem="wgW-oH-qeU" secondAttribute="top" id="YRF-f7-066"/>
+                                    <constraint firstAttribute="centerY" secondItem="GPv-AK-RcC" secondAttribute="centerY" id="dAo-DK-6Xm"/>
+                                    <constraint firstAttribute="trailing" secondItem="GPv-AK-RcC" secondAttribute="trailing" id="hNk-OP-wl1"/>
+                                    <constraint firstItem="c6I-OJ-slL" firstAttribute="leading" secondItem="Jlb-zI-2J4" secondAttribute="trailing" id="qbc-Oc-U5w"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="bKq-hf-gg5" appends="YES" id="2ZI-VQ-X9n"/>
-                                    <outletCollection property="gestureRecognizers" destination="83j-Z9-pLj" appends="YES" id="fpz-J2-8bN"/>
+                                    <outlet property="delegate" destination="7KU-2r-spd" id="OTE-DL-FNu"/>
                                 </connections>
-                            </view>
+                            </scrollView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="0bo-cA-bbH">
                                 <rect key="frame" x="70" y="272" width="180" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -185,19 +224,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="wgW-oH-qeU" secondAttribute="centerX" id="33K-b3-yCN"/>
                             <constraint firstAttribute="centerX" secondItem="05D-hL-8Fp" secondAttribute="centerX" id="5Hm-GP-nzN"/>
                             <constraint firstAttribute="trailing" secondItem="1QE-kV-UIQ" secondAttribute="trailing" id="6q7-vU-jnC"/>
+                            <constraint firstItem="0bo-cA-bbH" firstAttribute="top" secondItem="wgW-oH-qeU" secondAttribute="bottom" constant="10" id="AgI-Gm-Gwg"/>
+                            <constraint firstItem="05D-hL-8Fp" firstAttribute="top" secondItem="wgW-oH-qeU" secondAttribute="bottom" constant="39" id="C4X-kA-hci"/>
                             <constraint firstItem="1QE-kV-UIQ" firstAttribute="leading" secondItem="oU7-9S-lMK" secondAttribute="leading" id="C69-n6-BAW"/>
                             <constraint firstAttribute="centerX" secondItem="hPb-go-E2L" secondAttribute="centerX" id="Fva-hc-MPr"/>
                             <constraint firstItem="fb2-FU-JDP" firstAttribute="top" secondItem="1QE-kV-UIQ" secondAttribute="bottom" id="JMV-ta-fcD"/>
-                            <constraint firstItem="0bo-cA-bbH" firstAttribute="top" secondItem="Jlb-zI-2J4" secondAttribute="bottom" constant="10" id="OlG-UG-qLm"/>
-                            <constraint firstAttribute="centerX" secondItem="Jlb-zI-2J4" secondAttribute="centerX" id="Q2b-PP-ztE"/>
-                            <constraint firstAttribute="trailing" secondItem="Jlb-zI-2J4" secondAttribute="trailing" id="aXB-kV-5Ml"/>
                             <constraint firstItem="hPb-go-E2L" firstAttribute="top" secondItem="cCn-C5-uyD" secondAttribute="bottom" constant="-28" id="d2b-k7-jeO"/>
-                            <constraint firstItem="Jlb-zI-2J4" firstAttribute="top" secondItem="hPb-go-E2L" secondAttribute="bottom" constant="8" id="kI5-UV-0Dv"/>
+                            <constraint firstItem="wgW-oH-qeU" firstAttribute="top" secondItem="hPb-go-E2L" secondAttribute="bottom" constant="8" id="iHq-x5-Mf6"/>
                             <constraint firstAttribute="centerX" secondItem="0bo-cA-bbH" secondAttribute="centerX" id="l2Q-Pt-WS2"/>
-                            <constraint firstItem="05D-hL-8Fp" firstAttribute="top" secondItem="0bo-cA-bbH" secondAttribute="bottom" constant="13" id="oqN-6r-5uo"/>
-                            <constraint firstItem="Jlb-zI-2J4" firstAttribute="leading" secondItem="oU7-9S-lMK" secondAttribute="leading" id="v1r-SF-2GV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="X4j-SZ-NDb">
@@ -220,22 +257,15 @@
                         <outlet property="commentButton" destination="RY9-o7-yo0" id="GHd-lT-60L"/>
                         <outlet property="followBarButton" destination="x59-4C-6va" id="Tbn-fi-Rrf"/>
                         <outlet property="likeButton" destination="9Rr-XD-fN6" id="m2g-TS-vxl"/>
+                        <outlet property="nextVideoPlayerContainerView" destination="GPv-AK-RcC" id="srn-g0-p7W"/>
+                        <outlet property="previousVideoPlayerContainerView" destination="Jlb-zI-2J4" id="3LK-u6-I9x"/>
                         <outlet property="thumbnailCollectionView" destination="1QE-kV-UIQ" id="d2P-kw-kZ9"/>
-                        <outlet property="videoPlayerContainerView" destination="Jlb-zI-2J4" id="8lS-YF-Eb2"/>
+                        <outlet property="videoPlayerContainerView" destination="c6I-OJ-slL" id="ocz-qB-exB"/>
+                        <outlet property="videoScrollView" destination="wgW-oH-qeU" id="Yo9-EW-uCG"/>
                         <outlet property="videoTitleLabel" destination="0bo-cA-bbH" id="F12-Yi-CvL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grr-2V-f90" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="83j-Z9-pLj">
-                    <connections>
-                        <action selector="swipedLeft:" destination="7KU-2r-spd" id="2lA-NP-J9h"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="bKq-hf-gg5">
-                    <connections>
-                        <action selector="swipedRight:" destination="7KU-2r-spd" id="0wH-DO-BWs"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="362" y="-401"/>
         </scene>
