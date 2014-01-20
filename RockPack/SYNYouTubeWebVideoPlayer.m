@@ -91,7 +91,11 @@
 - (void)play {
 	[super play];
 	
-	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
+	if (self.playerReady) {
+		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
+	} else {
+		[self loadPlayer];
+	}
 }
 
 - (void)pause {
@@ -123,13 +127,13 @@
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 	if ([actionName isEqualToString:@"ready"]) {
-		NSString *sourceId = self.videoInstance.video.sourceId;
-		
 		[self updatePlayerSize:self.youTubeWebView.frame.size];
 		
-		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
-		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
+		self.playerReady = YES;
 		
+		if (self.state == SYNVideoPlayerStatePlaying) {
+			[self loadPlayer];
+		}
 	}
 	
 	if ([actionName isEqualToString:@"stateChange"]) {
@@ -162,6 +166,12 @@
 	}
 	
 	return [[NSBundle mainBundle] URLForResource:@"YouTubeIFramePlayer" withExtension:@"html"];
+}
+
+- (void)loadPlayer {
+	NSString *sourceId = self.videoInstance.video.sourceId;
+	NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
+	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
 }
 
 @end
