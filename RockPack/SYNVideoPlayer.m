@@ -68,6 +68,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	[super willMoveToSuperview:newSuperview];
 	
 	if (!newSuperview) {
+		[self stopControlsTimer];
 		[self stopUpdatingProgress];
 	}
 }
@@ -91,6 +92,9 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)scrubberBarCurrentTimeWillChange {
+	// We don't want the controls to fade out while they're interacting with them
+	[self stopControlsTimer];
+	
 	[self pause];
 }
 
@@ -99,6 +103,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)scrubberBarCurrentTimeDidChange {
+	[self startControlsTimer];
+	
 	[self play];
 }
 
@@ -233,27 +239,35 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)fadeInControls {
-	[self.controlsFadeTimer invalidate];
-	self.controlsFadeTimer = [NSTimer scheduledTimerWithTimeInterval:ControlsFadeTimer
-																	target:self
-																  selector:@selector(fadeOutControls)
-																  userInfo:nil
-																   repeats:NO];
-	
+	[self startControlsTimer];
 	self.controlsVisible = YES;
+	
 	[UIView animateWithDuration:0.3 animations:^{
 		self.scrubberBar.alpha = 1.0;
 	}];
 }
 
 - (void)fadeOutControls {
-	[self.controlsFadeTimer invalidate];
-	self.controlsFadeTimer = nil;
-	
+	[self stopControlsTimer];
 	self.controlsVisible = NO;
+	
 	[UIView animateWithDuration:0.3 animations:^{
 		self.scrubberBar.alpha = 0.0;
 	}];
+}
+
+- (void)stopControlsTimer {
+	[self.controlsFadeTimer invalidate];
+	self.controlsFadeTimer = nil;
+}
+
+- (void)startControlsTimer {
+	[self.controlsFadeTimer invalidate];
+	self.controlsFadeTimer = [NSTimer scheduledTimerWithTimeInterval:ControlsFadeTimer
+															  target:self
+															selector:@selector(fadeOutControls)
+															userInfo:nil
+															 repeats:NO];
 }
 
 - (void)startUpdatingProgress {
