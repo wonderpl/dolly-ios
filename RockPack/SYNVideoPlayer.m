@@ -203,7 +203,11 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)handleVideoPlayerFinishedPlaying {
-	[self.delegate videoPlayerFinishedPlaying];
+	if (self.state != SYNVideoPlayerStateEnded) {
+		self.state = SYNVideoPlayerStateEnded;
+		
+		[self.delegate videoPlayerFinishedPlaying];
+	}
 }
 
 - (void)handleVideoPlayerError:(NSString *)errorString {
