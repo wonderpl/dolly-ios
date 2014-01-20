@@ -251,6 +251,7 @@
 - (void)playVideo {
 	if (self.currentVideoPlayer) {
 		[self.currentVideoPlayer removeFromSuperview];
+		self.currentVideoPlayer.delegate = nil;
 		self.currentVideoPlayer = nil;
 	}
 	
