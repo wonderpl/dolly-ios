@@ -16,7 +16,7 @@
 #import "SYNAboutViewController.h"
 #import "SYNFeedbackViewController.h"
 #import "Appirater.h"
-#import "SYNWebViewViewController.h"
+#import "SYNWebViewController.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -38,7 +38,7 @@ typedef enum {
 
 @property (nonatomic, copy) TriggerActionOnCompleteBlock completeBlock;
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
-@property (nonatomic, strong) SYNWebViewViewController *webViewController;
+@property (nonatomic, strong) SYNWebViewController *webViewController;
 
 @end
 
@@ -93,7 +93,7 @@ typedef enum {
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [self.backgroundView addGestureRecognizer:tapGesture];
     
-    self.webViewController = [[SYNWebViewViewController alloc]init];
+    self.webViewController = [[SYNWebViewController alloc]init];
     
 }
 
