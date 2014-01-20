@@ -1384,6 +1384,7 @@
 		E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC751846273E0026C97D /* NSString+Validation.m */; };
 		E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */; };
 		E9F7CC7C1846562F0026C97D /* SYNVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */; };
+		E9FDCD96188D7C4700C31CC1 /* UILabel+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FDCD95188D7C4700C31CC1 /* UILabel+Animation.m */; };
 		E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FECE681855E73D00BBE7F2 /* SYNCenteredFlowLayout.m */; };
 		E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */; };
 		FEA605CC5F8E4BFCA67EBDD6 /* libPods-dollyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */; };
@@ -3050,6 +3051,8 @@
 		E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringValidationSpec.m; sourceTree = "<group>"; };
 		E9F7CC7A1846562F0026C97D /* SYNVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerViewController.h; sourceTree = "<group>"; };
 		E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerViewController.m; sourceTree = "<group>"; };
+		E9FDCD94188D7C4700C31CC1 /* UILabel+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Animation.h"; sourceTree = "<group>"; };
+		E9FDCD95188D7C4700C31CC1 /* UILabel+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Animation.m"; sourceTree = "<group>"; };
 		E9FECE671855E73D00BBE7F2 /* SYNCenteredFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCenteredFlowLayout.h; sourceTree = "<group>"; };
 		E9FECE681855E73D00BBE7F2 /* SYNCenteredFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCenteredFlowLayout.m; sourceTree = "<group>"; };
 		E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNStaticModel.h; sourceTree = "<group>"; };
@@ -3887,6 +3890,8 @@
 				0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */,
 				E9A75E7F18882D8200B7F55F /* UIImage+Blur.h */,
 				E9A75E8018882D8200B7F55F /* UIImage+Blur.m */,
+				E9FDCD94188D7C4700C31CC1 /* UILabel+Animation.h */,
+				E9FDCD95188D7C4700C31CC1 /* UILabel+Animation.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -7536,6 +7541,7 @@
 				BE57C03818460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.m in Sources */,
 				E9A465FE187FFA76007511B3 /* SYNTabBar.m in Sources */,
 				E9F6257318868AE0000EF6A2 /* SYNiPadIntroToLoginAnimator.m in Sources */,
+				E9FDCD96188D7C4700C31CC1 /* UILabel+Animation.m in Sources */,
 				011A162D16EF5EC5008CF25E /* GKCropBorderView.m in Sources */,
 				E9CE7A2D1887057500023A86 /* SYNiPadLoginToSignupAnimator.m in Sources */,
 				011A162E16EF5EC5008CF25E /* GKImageCropOverlayView.m in Sources */,

@@ -24,6 +24,7 @@
 #import "SYNCommentingViewController.h"
 #import "SYNRotatingPopoverController.h"
 #import "UINavigationBar+Appearance.h"
+#import "UILabel+Animation.h"
 #import <SDWebImageManager.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
@@ -272,7 +273,7 @@
 }
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
-	self.videoTitleLabel.text = videoInstance.title;
+	[self.videoTitleLabel setText:videoInstance.title animated:YES];
     
 	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;

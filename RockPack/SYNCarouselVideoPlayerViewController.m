@@ -25,6 +25,7 @@
 #import "SYNChannelFooterMoreView.h"
 #import "UINavigationBar+Appearance.h"
 #import "SYNActivityManager.h"
+#import "UILabel+Animation.h"
 #import <UIImageView+WebCache.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UIScrollViewDelegate, SYNPagingModelDelegate>
@@ -308,8 +309,9 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	}
 
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
-	self.channelOwnerLabel.text = ([channelOwnerName length] ? [NSString stringWithFormat: @"By %@", channelOwnerName] : @"");
-	self.channelTitleLabel.text = videoInstance.channel.title;
+	NSString *byText = ([channelOwnerName length] ? [NSString stringWithFormat:@"By %@", channelOwnerName] : @"");
+	[self.channelOwnerLabel setText:byText animated:YES];
+	[self.channelTitleLabel setText:videoInstance.channel.title animated:YES];
 }
 
 - (NSInteger)nextVideoIndex {
