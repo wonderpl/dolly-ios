@@ -10,6 +10,7 @@
                 <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="Fz7-z7-xOx" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hf1-rL-n1y">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.3921568627" green="0.38823529410000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0rt-s3-PEC">
                         <rect key="frame" x="0.0" y="524" width="320" height="44"/>
