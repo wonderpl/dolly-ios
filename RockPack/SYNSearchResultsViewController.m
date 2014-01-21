@@ -20,6 +20,7 @@
 #import "VideoInstance.h"
 #import "SYNActivityManager.h"
 #import "SYNVideoPlayerAnimator.h"
+#import "SYNGenreColorManager.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
@@ -169,9 +170,22 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
+	if (IS_IPHONE && self.currentSearchGenre) {
+		SYNGenreColorManager *colorManager = [SYNGenreColorManager sharedInstance];
+		self.navigationController.navigationBar.barTintColor = [colorManager colorFromID:self.currentSearchGenre];
+	}
+	
 	NSIndexPath *selectedIndexPath = [[self.videosCollectionView indexPathsForSelectedItems] firstObject];
 	if (selectedIndexPath) {
 		[self.videosCollectionView deselectItemAtIndexPath:selectedIndexPath animated:YES];
+	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	if (IS_IPHONE && self.currentSearchGenre) {
+		self.navigationController.navigationBar.barTintColor = nil;
 	}
 }
 
@@ -250,7 +264,7 @@ typedef void (^SearchResultCompleteBlock)(int);
     {
         return;
     }
-    
+	
     [self resetDataRequestRange];
     
     // we either store one or the other
