@@ -10,6 +10,8 @@
 
 @interface SYNWebViewController : UIViewController <UIWebViewDelegate>
 
++ (UIViewController *)webViewControllerForURL:(NSURL *)URL;
+
 @property (nonatomic, strong, readonly) UIWebView *webView;
 
 @end
