@@ -6,6 +6,8 @@ extern NSString *const VideoSourceOoyala;
 
 @interface Video : _Video
 
+@property (nonatomic, assign, readonly) BOOL hasLink;
+
 + (Video *) instanceFromDictionary: (NSDictionary *) dictionary
          usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
                ignoringObjectTypes: (IgnoringObjects) ignoringObjects;

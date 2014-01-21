@@ -7,6 +7,8 @@ const struct VideoAttributes VideoAttributes = {
 	.categoryId = @"categoryId",
 	.dateUploaded = @"dateUploaded",
 	.duration = @"duration",
+	.linkTitle = @"linkTitle",
+	.linkURL = @"linkURL",
 	.source = @"source",
 	.sourceId = @"sourceId",
 	.sourceUsername = @"sourceUsername",
@@ -117,6 +119,20 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 - (void)setPrimitiveDurationValue:(int64_t)value_ {
 	[self setPrimitiveDuration:[NSNumber numberWithLongLong:value_]];
 }
+
+
+
+
+
+@dynamic linkTitle;
+
+
+
+
+
+
+@dynamic linkURL;
+
 
 
 

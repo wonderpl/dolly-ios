@@ -25,6 +25,7 @@
 #import "SYNRotatingPopoverController.h"
 #import "UINavigationBar+Appearance.h"
 #import "UILabel+Animation.h"
+#import "SYNWebViewController.h"
 #import <SDWebImageManager.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
@@ -34,6 +35,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *commentButton;
 @property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
+@property (nonatomic, strong) IBOutlet UIButton *linkButton;
 
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
@@ -62,6 +64,13 @@
 																			action:nil];
 	
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
+	
+	self.linkButton.backgroundColor = [UIColor colorWithWhite:241/255.0 alpha:1.0];
+	self.linkButton.layer.borderColor = [[UIColor colorWithWhite:212/255.0 alpha:1.0] CGColor];
+	self.linkButton.layer.borderWidth = 1.0;
+	self.linkButton.layer.cornerRadius = CGRectGetHeight(self.linkButton.frame) / 2.0;
+	
+	self.linkButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.linkButton.titleLabel.font.pointSize];
 	
 	if (IS_IPHONE) {
 		[[NSNotificationCenter defaultCenter] addObserver:self
@@ -218,6 +227,14 @@
 	}
 }
 
+- (IBAction)linkButtonPressed:(UIButton *)button {
+	[self.currentVideoPlayer pause];
+	
+	NSURL *URL = [NSURL URLWithString:self.videoInstance.video.linkURL];
+	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+	[self presentViewController:viewController animated:YES completion:nil];
+}
+
 #pragma mark - Notifications
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
@@ -274,6 +291,11 @@
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
+	
+	[self.linkButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
+	[UIView animateWithDuration:0.3 animations:^{
+		self.linkButton.alpha = (self.videoInstance.video.hasLink ? 1.0 : 0.0);
+	}];
     
 	self.likeButton.dataItemLinked = videoInstance;
 	self.addButton.dataItemLinked = videoInstance;
