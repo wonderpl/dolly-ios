@@ -1919,7 +1919,7 @@
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
     if (textField == self.createChannelCell.createTextField) {
         [self.createChannelCell.descriptionTextView becomeFirstResponder];
-        [self saveDescription];
+
     }
     else
     {
@@ -2695,7 +2695,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     
     if (self.modeType == kModeEditProfile) {
         [self resetOffsetWithAnimation];
-        
     }
 }
 
