@@ -7,7 +7,7 @@
         <!--Navigation Controller-->
         <scene sceneID="FLj-pp-F3A">
             <objects>
-                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="Fz7-z7-xOx" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="Fz7-z7-xOx" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hf1-rL-n1y">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.3921568627" green="0.38823529410000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
