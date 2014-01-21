@@ -1560,7 +1560,8 @@
             self.containerViewIPad.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
-            
+            self.uploadAvatar.transform = move;
+
             //scaling
             if (offset<0)
             {
@@ -3161,8 +3162,8 @@ finishedWithImage: (UIImage *) image
 }
 - (IBAction)uploadPicture:(id)sender {
     
-    [self editButtonTapped:nil];
-    [self changeAvatarButtonTapped:nil];
+    [self editButtonTapped:sender];
+    [self changeAvatarButtonTapped:sender];
     self.uploadAvatar.hidden=YES;
     
 }

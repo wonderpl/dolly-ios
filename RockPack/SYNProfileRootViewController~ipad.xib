@@ -273,10 +273,10 @@
                         <action selector="changeCoverImageButtonTapped:" destination="-1" eventType="touchUpInside" id="6ra-MV-g3s"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3o-il-Afg">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3o-il-Afg" userLabel="Button - Upload Avatar">
                     <rect key="frame" x="288" y="451" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button">
+                    <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -294,8 +294,10 @@
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="width" secondItem="0td-Z3-eno" secondAttribute="width" id="5K5-4x-YDk"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="centerX" secondItem="jew-YX-wj4" secondAttribute="centerX" id="9Df-wx-oSR"/>
                 <constraint firstItem="w5q-qP-bHl" firstAttribute="centerX" secondItem="R50-Sy-iTx" secondAttribute="centerX" id="9K1-ML-kIR"/>
+                <constraint firstItem="D3o-il-Afg" firstAttribute="trailing" secondItem="R50-Sy-iTx" secondAttribute="trailing" id="9rq-3r-CuR"/>
                 <constraint firstItem="R50-Sy-iTx" firstAttribute="centerY" secondItem="0td-Z3-eno" secondAttribute="centerY" id="F4Y-2a-UYZ"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="top" secondItem="0td-Z3-eno" secondAttribute="top" id="Hdi-Xu-dOa"/>
+                <constraint firstItem="D3o-il-Afg" firstAttribute="centerX" secondItem="R50-Sy-iTx" secondAttribute="centerX" id="JG0-21-qcc"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="top" secondItem="1" secondAttribute="top" id="KQc-dV-JP4"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="trailing" secondItem="uxB-NR-Hkw" secondAttribute="trailing" id="LU7-5S-iUd"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Mfp-5Z-omg"/>
@@ -304,6 +306,7 @@
                 <constraint firstItem="Xag-gG-bYh" firstAttribute="top" secondItem="uxB-NR-Hkw" secondAttribute="top" id="QUD-cx-WtI"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Rtq-Gd-Rnj"/>
                 <constraint firstAttribute="trailing" secondItem="3wY-iP-RPC" secondAttribute="trailing" constant="-1" id="Se0-0K-Ydm"/>
+                <constraint firstItem="D3o-il-Afg" firstAttribute="height" secondItem="R50-Sy-iTx" secondAttribute="height" id="Uhx-yS-M2S"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="VGj-qv-A8K"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerY" secondItem="0td-Z3-eno" secondAttribute="centerY" constant="87" id="Wfx-uD-6Tf"/>
                 <constraint firstItem="NLw-Oe-3pp" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" id="ZjT-oZ-Y4K"/>
@@ -311,14 +314,18 @@
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="centerY" secondItem="R50-Sy-iTx" secondAttribute="centerY" constant="59" id="e1d-DK-mwa"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="leading" secondItem="jew-YX-wj4" secondAttribute="trailing" constant="-672" id="eCi-cT-LWh"/>
                 <constraint firstItem="XoE-Jb-ERN" firstAttribute="centerX" secondItem="0td-Z3-eno" secondAttribute="centerX" constant="0.5" id="fVi-Wv-NS0"/>
+                <constraint firstItem="D3o-il-Afg" firstAttribute="leading" secondItem="R50-Sy-iTx" secondAttribute="leading" id="fX5-iO-l66"/>
                 <constraint firstItem="0td-Z3-eno" firstAttribute="centerY" secondItem="uxB-NR-Hkw" secondAttribute="centerY" constant="-28" id="gbi-nM-5re"/>
                 <constraint firstItem="jew-YX-wj4" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="hE8-Kn-4zM"/>
                 <constraint firstAttribute="bottom" secondItem="MS7-tW-0TH" secondAttribute="bottom" id="kQy-8n-9mG"/>
+                <constraint firstItem="D3o-il-Afg" firstAttribute="centerY" secondItem="R50-Sy-iTx" secondAttribute="centerY" constant="-3" id="lQG-V2-vbA"/>
+                <constraint firstItem="D3o-il-Afg" firstAttribute="width" secondItem="R50-Sy-iTx" secondAttribute="width" id="lWQ-cN-WQk"/>
                 <constraint firstItem="Xag-gG-bYh" firstAttribute="leading" secondItem="jew-YX-wj4" secondAttribute="leading" id="ll3-V2-QHL"/>
                 <constraint firstItem="MS7-tW-0TH" firstAttribute="leading" secondItem="0td-Z3-eno" secondAttribute="leading" id="oqw-vP-LPj"/>
                 <constraint firstItem="uxB-NR-Hkw" firstAttribute="top" secondItem="NLw-Oe-3pp" secondAttribute="bottom" id="pkd-xG-IdV"/>
                 <constraint firstItem="Xag-gG-bYh" firstAttribute="width" secondItem="0td-Z3-eno" secondAttribute="width" id="rSB-z5-MLK"/>
                 <constraint firstItem="3wY-iP-RPC" firstAttribute="centerY" secondItem="jew-YX-wj4" secondAttribute="centerY" constant="3" id="uRG-Xn-8Sj"/>
+                <constraint firstItem="D3o-il-Afg" firstAttribute="top" secondItem="R50-Sy-iTx" secondAttribute="top" constant="-3" id="ulL-er-hFx"/>
                 <constraint firstAttribute="trailing" secondItem="0td-Z3-eno" secondAttribute="trailing" id="vU3-L6-mRq"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
