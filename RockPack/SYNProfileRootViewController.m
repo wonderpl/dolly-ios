@@ -134,6 +134,7 @@
 
 @property (nonatomic) NSRange dataRequestRangeChannel;
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
+@property (strong, nonatomic) IBOutlet UIButton *uploadAvatar;
 
 @end
 
@@ -1529,6 +1530,7 @@
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
             self.userNameLabel.transform = move;
+            self.uploadAvatarButton.transform = move;
             
             if (offset<0)
             {
@@ -2430,6 +2432,7 @@
 -(void) cancelEditModeTapped
 {
     
+    self.uploadAvatarButton.hidden = NO;
     self.modeType = kModeMyOwnProfile;
     CGRect tmpRect = self.aboutMeTextView.frame;
     tmpRect.origin.y -= 10;
@@ -3153,6 +3156,13 @@ finishedWithImage: (UIImage *) image
         CGRect tmpRect =self.uploadAvatarButton.frame;
         *rect = tmpRect;
     }
+}
+- (IBAction)uploadPicture:(id)sender {
+    
+    [self editButtonTapped:nil];
+    [self changeAvatarButtonTapped:nil];
+    self.uploadAvatarButton.hidden = YES;
+    
 }
 
 @end

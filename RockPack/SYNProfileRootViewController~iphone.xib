@@ -24,7 +24,7 @@
                 <outlet property="segmentedControlsView" destination="KiH-Yk-GZo" id="qsX-g1-p3r"/>
                 <outlet property="subscriptionLayoutIPhone" destination="4RR-LR-xcl" id="WDG-c9-7JK"/>
                 <outlet property="subscriptionThumbnailCollectionView" destination="Gpk-go-IZt" id="aG2-t4-yQi"/>
-                <outlet property="uploadAvatarButton" destination="2Vn-mZ-fhR" id="lR9-EI-8NS"/>
+                <outlet property="uploadAvatarButton" destination="1O9-a7-e6q" id="FLZ-zP-xWm"/>
                 <outlet property="uploadCoverPhotoButton" destination="mqd-D1-g4D" id="KnR-3c-he8"/>
                 <outlet property="userNameLabel" destination="xcO-ZG-K1B" id="49x-lY-P3N"/>
                 <outlet property="view" destination="1" id="pyK-q3-LNM"/>
@@ -200,6 +200,16 @@
                         <action selector="moreButtonTapped:" destination="-1" eventType="touchUpInside" id="r2f-nU-hlw"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1O9-a7-e6q" userLabel="Button - Upload Avatar">
+                    <rect key="frame" x="112" y="205" width="96" height="96"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="uploadPicture:" destination="-1" eventType="touchUpInside" id="ZOJ-m1-beK"/>
+                    </connections>
+                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="5Wb-qH-nzQ" userLabel="ImageView - Avatar">
                     <rect key="frame" x="112" y="205" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -215,7 +225,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Vn-mZ-fhR" userLabel="Button - Upload Avatar">
-                    <rect key="frame" x="112" y="205" width="96" height="96"/>
+                    <rect key="frame" x="112" y="206" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonUpload.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -240,6 +250,7 @@
     </objects>
     <resources>
         <image name="ButtonMore.png" width="56" height="56"/>
+        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>
 </document>

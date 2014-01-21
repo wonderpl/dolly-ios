@@ -25,6 +25,7 @@
                 <outlet property="segmentedControlsView" destination="R5e-8b-TEg" id="FYz-15-bxH"/>
                 <outlet property="subscriptionLayoutIPad" destination="AUe-Ip-zbd" id="b3T-XB-9Ti"/>
                 <outlet property="subscriptionThumbnailCollectionView" destination="0td-Z3-eno" id="xKN-cx-zOO"/>
+                <outlet property="uploadAvatar" destination="D3o-il-Afg" id="IWF-5u-am5"/>
                 <outlet property="uploadAvatarButton" destination="R50-Sy-iTx" id="dQV-S6-ZF1"/>
                 <outlet property="uploadCoverPhotoButton" destination="w5q-qP-bHl" id="Fx5-MW-s5Y"/>
                 <outlet property="userNameLabel" destination="yWC-as-NQM" id="7hd-VC-Zxe"/>
@@ -272,6 +273,16 @@
                         <action selector="changeCoverImageButtonTapped:" destination="-1" eventType="touchUpInside" id="6ra-MV-g3s"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3o-il-Afg">
+                    <rect key="frame" x="288" y="451" width="96" height="96"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="uploadPicture:" destination="-1" eventType="touchUpInside" id="FzV-97-78I"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -315,7 +326,7 @@
         </view>
     </objects>
     <resources>
-        <image name="AvatarProfile.png" width="60" height="61"/>
+        <image name="AvatarProfile.png" width="90" height="90"/>
         <image name="ButtonMore.png" width="56" height="56"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
     </resources>
