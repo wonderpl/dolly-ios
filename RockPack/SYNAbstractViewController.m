@@ -272,7 +272,7 @@
                                               }
                                               else
                                               {
-                                                  [socialControl setTitle: socialControl.title
+                                                  [socialControl setTitle: NSLocalizedString(@"like", nil)
                                                                  andCount: videoInstance.video.starCountValue];
                                               }
                                               

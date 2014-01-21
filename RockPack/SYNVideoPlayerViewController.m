@@ -301,7 +301,7 @@
 	self.addButton.dataItemLinked = videoInstance;
 	
 	self.likeButton.selected = videoInstance.starredByUserValue;
-	[self.likeButton setTitle:@"like" andCount:[videoInstance.video.starCount integerValue]];
+	[self.likeButton setTitle:NSLocalizedString(@"like", nil) andCount:[videoInstance.video.starCount integerValue]];
 }
 
 - (void)trackVideoViewingStatisticsForVideoInstance:(VideoInstance *)videoInstance withVideoPlayer:(SYNVideoPlayer *)videoPlayer {

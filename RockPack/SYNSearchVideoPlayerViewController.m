@@ -201,7 +201,7 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
 	if (pagingModel == self.likesModel) {
-		NSString *segmentedControlTitle = [NSString stringWithFormat:@"Liked by (%d)", [pagingModel totalItemCount]];
+		NSString *segmentedControlTitle = [NSString stringWithFormat:@"%@ by (%d)", NSLocalizedString(@"liked", nil), [pagingModel totalItemCount]];
 		[self.segmentedControl setTitle:segmentedControlTitle forSegmentAtIndex:1];
 		[self.likesCollectionView reloadData];
 	}
