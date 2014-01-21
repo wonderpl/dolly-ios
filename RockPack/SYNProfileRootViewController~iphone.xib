@@ -26,6 +26,7 @@
                 <outlet property="subscriptionThumbnailCollectionView" destination="Gpk-go-IZt" id="aG2-t4-yQi"/>
                 <outlet property="uploadAvatarButton" destination="2Vn-mZ-fhR" id="lR9-EI-8NS"/>
                 <outlet property="uploadCoverPhotoButton" destination="mqd-D1-g4D" id="KnR-3c-he8"/>
+                <outlet property="userNameLabel" destination="xcO-ZG-K1B" id="49x-lY-P3N"/>
                 <outlet property="view" destination="1" id="pyK-q3-LNM"/>
             </connections>
         </placeholder>
@@ -69,11 +70,11 @@
                         <outlet property="delegate" destination="-1" id="FgS-NP-jTw"/>
                     </connections>
                 </searchBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY" userLabel="Button - Follower Count">
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY" userLabel="Button - Follower Count">
                     <rect key="frame" x="70" y="370" width="180" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal">
+                    <state key="normal" title="Followers count">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -129,7 +130,7 @@
                     </subviews>
                 </view>
                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" id="JUa-73-uP8" userLabel="Text View - Description">
-                    <rect key="frame" x="30" y="331" width="260" height="42"/>
+                    <rect key="frame" x="30" y="335" width="260" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                     <string key="text">Something about
@@ -223,6 +224,14 @@
                         <action selector="changeAvatarButtonTapped:" destination="-1" eventType="touchUpInside" id="tyv-5C-lMT"/>
                     </connections>
                 </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xcO-ZG-K1B" userLabel="Label - User name">
+                    <rect key="frame" x="101" y="320" width="118" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

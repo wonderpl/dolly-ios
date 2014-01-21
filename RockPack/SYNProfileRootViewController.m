@@ -386,9 +386,7 @@
     
     CGRect tmp = self.followingSearchBar.frame;
     tmp.origin.x+=320;
-    self.followingSearchBar.frame = tmp;
-    
-    NSLog(@"after : frame %f",self.followingSearchBar.frame.origin.x);
+    self.followingSearchBar.frame = tmp;    
 }
 
 -(void) setFollowersCountButton
@@ -569,9 +567,11 @@
                                                object: nil];
     
     self.userNameLabel.text = self.channelOwner.username;
+    [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:12.0]];
+    self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
+    
     self.fullNameLabel.text = self.channelOwner.displayName;
     
-
     [self setProfileImage:self.channelOwner.thumbnailURL];
     [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     
@@ -1528,6 +1528,7 @@
             self.followersCountButton.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
+            self.userNameLabel.transform = move;
             
             if (offset<0)
             {
