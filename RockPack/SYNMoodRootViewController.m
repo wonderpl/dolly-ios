@@ -22,6 +22,8 @@
 #define WATCH_BUTTON_ANIMATION_TIME 1.5f
 
 @interface SYNMoodRootViewController ()
+@property (strong, nonatomic) IBOutlet UIPickerView *defaultPicker;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @property (nonatomic, strong) NSArray *moods;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
@@ -68,6 +70,8 @@
     self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
     
+    self.defaultPicker.transform = CGAffineTransformScale(self.defaultPicker.transform, 1.3f, 1.40f);
+    
     
     
     if (!IS_IPHONE_5) {
@@ -91,8 +95,36 @@
 //        
 //    }];
     
+    double tmp = arc4random() % 1000+500;
+    float delay = 0.35f;
+    
+    // no way to extend the animation time of the default picker
+    // so chained together to animate longer
+    
+    [self performSelector:@selector(spinAnimationWithRow:) withObject:@100 afterDelay:delay];
+    [self performSelector:@selector(spinAnimationWithRow:) withObject:@200 afterDelay:delay*2];
+    [self performSelector:@selector(spinAnimationWithRow:) withObject:[NSNumber numberWithLong:tmp] afterDelay:delay*3];
+
+    // show watch button after the final spin
+    [self performSelector:@selector(showWatchButton) withObject:[NSNumber numberWithLong:tmp] afterDelay:delay*4];
+
+
 
 }
+
+
+-(void) spinAnimationWithRow : (NSNumber*) row
+{
+    [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:YES];
+}
+
+-(void) spinAnimation : (NSNumber*) row
+{
+    [UIView animateWithDuration:2.0f animations:^{
+        [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:NO];
+    }];
+}
+
 
 #pragma mark - Getting Mood Objects
 
@@ -146,6 +178,9 @@
         [self positionElementsForInterfaceOrientation:UIDeviceOrientationPortrait];
     }
     
+    [[self.defaultPicker.subviews objectAtIndex:1] setHidden:TRUE];
+    [[self.defaultPicker.subviews objectAtIndex:2] setHidden:TRUE];
+
 }
 
 #pragma mark - Control Callbacks
@@ -243,21 +278,21 @@
 {
     // override
     
-    [self stoppedScrolling];
+    [self showWatchButton];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
                   willDecelerate:(BOOL)decelerate
 {
     if (!decelerate) {
-        [self stoppedScrolling];
+        [self showWatchButton];
     }
 }
 
 - (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     // override
-    [self stoppedScrolling];
+    [self showWatchButton];
 
 }
 
@@ -268,10 +303,8 @@
 
 }
 
-- (void)stoppedScrolling
+- (void)showWatchButton
 {
-    // done, do whatever
-    
     self.watchButton.hidden = NO;
     self.watchButton.alpha = 0.0f;
     
@@ -356,5 +389,59 @@
     
     return cMood;
 }
+
+#pragma mark - UIPicker Delegates
+
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [self.moods count]*LARGE_AMOUNT_OF_ROWS;
+}
+
+#pragma mark - UIPickerView Delegate
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 24.0;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    // not gtting called
+    Mood* mood = self.moods [row % self.moods.count];
+
+    return mood.name;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    [self showWatchButton];
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* tmpLabel = (UILabel*)view;
+    if (!tmpLabel){
+        tmpLabel = [[UILabel alloc] init];
+        tmpLabel.adjustsFontSizeToFitWidth = YES;
+        tmpLabel.textAlignment = NSTextAlignmentCenter;
+        tmpLabel.font = [tmpLabel.font fontWithSize:14];
+        tmpLabel.textColor = [UIColor colorWithRed: 136.0f / 255.0f
+                                            green: 134.0f / 255.0f
+                                             blue: 168.0f / 255.0f
+                                            alpha: 1.0f];
+        tmpLabel.alpha = 1.0f;
+//        tmpLabel.backgroundColor = [UIColor dollyMoodColor];
+    }
+    self.watchButton.hidden = YES;
+    
+    Mood* mood = self.moods [row % self.moods.count];
+    tmpLabel.text = mood.name;
+    return tmpLabel;
+}
+
 
 @end

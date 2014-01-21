@@ -8,5 +8,5 @@
 
 #import "SYNAbstractViewController.h"
 
-@interface SYNMoodRootViewController : SYNAbstractViewController
+@interface SYNMoodRootViewController : SYNAbstractViewController <UIPickerViewDelegate,  UIPickerViewDataSource>
 @end
