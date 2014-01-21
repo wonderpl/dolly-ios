@@ -23,10 +23,13 @@
 #import "UIColor+SYNColor.h"
 #import "SYNDeviceManager.h"
 #import "SYNActivityManager.h"
+#import "SYNOnBoardingSectionHeader.h"
+#import "SYNGenreColorManager.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
+static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 
 @interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -45,6 +48,10 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 @property (nonatomic) NSInteger numberYetToFollow;
 
 @property (nonatomic, weak) UIButton* skipButton;
+
+@property (nonatomic, strong) NSMutableArray *usersByCategory;
+@property (nonatomic, strong) NSMutableArray *categories;
+
 
 @end
 
@@ -65,6 +72,12 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
           forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
                  withReuseIdentifier: OnBoardingHeaderIndent];
     
+    
+    
+    [self.collectionView registerNib: [UINib nibWithNibName: OnBoardingSectionHeader bundle: nil]
+          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+                 withReuseIdentifier: OnBoardingSectionHeader];
+
     [self.collectionView registerNib: [UINib nibWithNibName: OnBoardingFooterIndent bundle: nil]
           forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                  withReuseIdentifier: OnBoardingFooterIndent];
@@ -72,7 +85,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     self.navigationTitleLabel.font = [UIFont regularCustomFontOfSize:self.navigationTitleLabel.font.pointSize];
     self.navigationRightLabel.titleLabel.font = [UIFont regularCustomFontOfSize:self.navigationRightLabel.titleLabel.font.pointSize];
     
-    
+    self.usersByCategory = [[NSMutableArray alloc]init];
+    self.categories = [[NSMutableArray alloc]init];
     
     // === Fetch Genres === //
     
@@ -128,6 +142,8 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
                                                   if(![responce isKindOfClass:[NSDictionary class]])
                                                       return;
                                                   
+                                                  NSLog(@"Onboarding response :%@", responce);
+                                                  
                                                   self.spinner.hidden = YES;
                                                   
                                                   if(![appDelegate.searchRegistry registerRecommendationsFromDictionary:responce])
@@ -152,14 +168,62 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     [fetchRequest setEntity: [NSEntityDescription entityForName: kRecommendation
                                          inManagedObjectContext: appDelegate.searchManagedObjectContext]];
-    
-    
-    
     NSError* error;
     self.data = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                       error: &error];
     
     self.numberYetToFollow = MIN(self.data.count, 3); // probably data.count will be much bigger than 3, so it will default to 3...
+    
+    
+    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Change to subgenre when the proper recomendations are up
+    //will greatly improve this
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
+
+    [categoriesFetchRequest setResultType:NSDictionaryResultType];
+    
+    [categoriesFetchRequest setReturnsDistinctResults:YES];
+    [categoriesFetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"uniqueId", @"priority", @"name", nil]];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
+    
+    [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
+
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                      error: &error];
+    // == Gets the data from core data in order of priority and then adds its to the displayed data by that order aswell as groups users with common genres.
+    
+    
+        NSArray *genres = [NSArray arrayWithArray:genresFetchedArray];
+    NSMutableArray *tmpData = [NSMutableArray arrayWithArray:self.data];
+    
+    NSMutableArray *tmpArr = [[NSMutableArray alloc]init];
+    NSString *tmpString = [[NSString alloc]init];
+    for (NSDictionary *tmpGenre in genres) {
+        tmpString = [[NSString alloc]init];
+        tmpArr = [[NSMutableArray alloc]init];
+
+        for (int i = 0; i<tmpData.count; i++) {
+            Recomendation *tmpRecomendation = [tmpData objectAtIndex:i];
+            
+            if ([tmpRecomendation.categoryId isEqualToString:tmpGenre[@"uniqueId"]]) {
+                [tmpArr addObject:tmpRecomendation];
+                [tmpData removeObject:tmpRecomendation];
+                i--;
+                
+                tmpString = tmpGenre[@"name"];
+            }
+            
+        }
+        
+        if (tmpArr.count>0) {
+            [self.usersByCategory addObject:tmpArr];
+            [self.categories addObject:tmpString];
+        }
+    }
+    
     
     [self.collectionView reloadData];
 }
@@ -168,13 +232,17 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
 {
-    return 1;
+    return self.usersByCategory.count+1;
 }
 
 
 - (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
 {
-    return self.data.count;
+    if (section == 0) {
+        return 0;
+    }
+    
+    return ((NSArray*)[self.usersByCategory objectAtIndex:section-1]).count;
 }
 
 
@@ -184,7 +252,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier: OnBoardingCellIndent
                                                                         forIndexPath: indexPath];
     
-    Recomendation* recomendation = (Recomendation*)self.data[indexPath.row];
+    Recomendation* recomendation = (Recomendation*)self.usersByCategory[indexPath.section-1][indexPath.row];
     
     cell.recomendation = recomendation;
     
@@ -199,6 +267,30 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     return cell;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (section==0) {
+        return CGSizeMake(320, 90);
+
+    }
+    else
+    {
+        return CGSizeMake(320, 30);
+    }
+    
+    return CGSizeZero;
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    if(section!=self.usersByCategory.count)
+    {
+        return CGSizeZero;
+    }
+    
+    return CGSizeMake(320, 76);
+}
 
 - (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
             viewForSupplementaryElementOfKind: (NSString *) kind
@@ -207,15 +299,29 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     UICollectionReusableView *supplementaryView = nil;
 	if (kind == UICollectionElementKindSectionHeader)
     {
-        supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                             withReuseIdentifier: OnBoardingHeaderIndent
-                                                                    forIndexPath: indexPath];
         
+        if (indexPath.section == 0) {
+            supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                                   withReuseIdentifier: OnBoardingHeaderIndent
+                                                                          forIndexPath: indexPath];
+            
+        } else {
+            supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                                   withReuseIdentifier: OnBoardingSectionHeader
+                                                                          forIndexPath: indexPath];
+            
+            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:((Recomendation*)[((NSArray*)[self.usersByCategory objectAtIndex:indexPath.section-1]) objectAtIndex:indexPath.row]).categoryId]];
+            
+            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:[self.categories objectAtIndex:indexPath.section-1]];
+        }
+
         
-         
+
+        
     }
     else if (kind == UICollectionElementKindSectionFooter)
     {
+        
         supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                                withReuseIdentifier: OnBoardingFooterIndent
                                                                       forIndexPath: indexPath];
@@ -337,6 +443,7 @@ static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
     
     self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
 }
+
 
 
 @end
