@@ -50,7 +50,7 @@
     
 
     self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
-    
+    self.iWantToLabel.textColor = [UIColor dollyMoodColor];
     
     self.moodCollectionView.scrollsToTop = NO;
     
@@ -58,11 +58,8 @@
     
     [self getUpdatedMoods];
     
-    [self.navigationController.navigationBar setBackgroundTransparent:YES];
-    self.navigationController.title = @"";
-    [self.navigationItem setTitle:@""];
 
-    self.watchButton.layer.cornerRadius = 18.0f;
+    self.watchButton.layer.cornerRadius = 15.5f;
     self.watchButton.layer.masksToBounds = YES;
     
     self.watchButton.layer.borderWidth = 1.5f;
@@ -375,6 +372,7 @@
         tmpLabel = [[UILabel alloc] init];
         tmpLabel.adjustsFontSizeToFitWidth = YES;
         tmpLabel.textAlignment = NSTextAlignmentCenter;
+//        tmpLabel.font = [UIFont lightCustomFontOfSize:14];
         tmpLabel.font = [tmpLabel.font fontWithSize:14];
         if (IS_IPAD) {
             tmpLabel.font = [tmpLabel.font fontWithSize:25];
