@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Fz7-z7-xOx">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="FLj-pp-F3A">
+            <objects>
+                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="Fz7-z7-xOx" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hf1-rL-n1y">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0rt-s3-PEC">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="O4s-kn-sYz" kind="relationship" relationship="rootViewController" id="JuF-Ze-hCA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Khp-ik-O4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="345" y="-386"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="y7K-MQ-nNG">
+            <objects>
+                <viewController id="O4s-kn-sYz" customClass="SYNWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DRj-Dd-3NW"/>
+                        <viewControllerLayoutGuide type="bottom" id="imL-Wy-jBb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BpX-yv-Agx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDU-zb-h4X">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="O4s-kn-sYz" id="WOI-eN-1fo"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UDU-zb-h4X" firstAttribute="leading" secondItem="BpX-yv-Agx" secondAttribute="leading" id="4u5-dX-mWr"/>
+                            <constraint firstAttribute="trailing" secondItem="UDU-zb-h4X" secondAttribute="trailing" id="9TG-HB-qWo"/>
+                            <constraint firstItem="UDU-zb-h4X" firstAttribute="top" secondItem="BpX-yv-Agx" secondAttribute="top" id="KfM-I1-jgG"/>
+                            <constraint firstAttribute="bottom" secondItem="UDU-zb-h4X" secondAttribute="bottom" id="TbI-qk-7oZ"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem enabled="NO" image="BackButton.png" id="r3S-iW-Faw">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="O4s-kn-sYz" id="in7-OV-RZn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="A24-12-wgl"/>
+                        <barButtonItem enabled="NO" image="ForwardButton.png" id="oPf-lA-e5W">
+                            <connections>
+                                <action selector="forwardButtonPressed:" destination="O4s-kn-sYz" id="mIb-nR-lC1"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="wDy-8E-6PT">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="cJt-qu-Ann">
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="O4s-kn-sYz" id="lcc-fI-OSS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="backButton" destination="r3S-iW-Faw" id="eHm-1n-M9A"/>
+                        <outlet property="forwardButton" destination="oPf-lA-e5W" id="WK5-gh-aFL"/>
+                        <outlet property="webView" destination="UDU-zb-h4X" id="G1I-jm-EaE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4n7-Hx-xQS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="767" y="-386"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BackButton.png" width="12" height="20"/>
+        <image name="ForwardButton.png" width="12" height="20"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

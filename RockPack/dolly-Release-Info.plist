@@ -41,10 +41,12 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb517447921656577</string>
-				<string>rockpack</string>
+				<string>wonderpl</string>
 			</array>
 		</dict>
 	</array>
+	<key>AppURLScheme</key>
+	<string>wonderpl</string>
 	<key>CFBundleVersion</key>
 	<string>0.1.0</string>
 	<key>FacebookAppID</key>

@@ -16,7 +16,7 @@
 #import "SYNAboutViewController.h"
 #import "SYNFeedbackViewController.h"
 #import "Appirater.h"
-#import "SYNWebViewViewController.h"
+#import "SYNWebViewController.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -38,7 +38,6 @@ typedef enum {
 
 @property (nonatomic, copy) TriggerActionOnCompleteBlock completeBlock;
 @property (nonatomic, strong) IBOutlet UIView* backgroundView;
-@property (nonatomic, strong) SYNWebViewViewController *webViewController;
 
 @end
 
@@ -92,8 +91,6 @@ typedef enum {
     
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [self.backgroundView addGestureRecognizer:tapGesture];
-    
-    self.webViewController = [[SYNWebViewViewController alloc]init];
     
 }
 
@@ -261,11 +258,9 @@ typedef enum {
         {
             //TODO: go to hints webview
             
-            
-            
-            [self presentViewController:self.webViewController animated:YES completion:^{
-                [self.webViewController.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
-            }];
+            NSURL *URL = [NSURL URLWithString:@"http://www.google.com"];
+            UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+            [self presentViewController:viewController animated:YES completion:nil];
 
         }
             

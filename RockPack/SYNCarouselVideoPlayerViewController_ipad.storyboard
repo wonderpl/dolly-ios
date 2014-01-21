@@ -72,20 +72,58 @@
                                     <constraint firstAttribute="centerX" secondItem="wNE-gn-6Ck" secondAttribute="centerX" id="sgA-zW-mvH"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRQ-Zn-BXl">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh8-En-Apv">
                                 <rect key="frame" x="204" y="147" width="616" height="347"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ryf-Kc-beB" userLabel="Previous Video Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="616" height="347"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="347" id="X7l-Sf-DaW"/>
+                                            <constraint firstAttribute="width" constant="616" id="ug4-QX-Kr1"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRQ-Zn-BXl" userLabel="Current Video Container View">
+                                        <rect key="frame" x="616" y="0.0" width="616" height="347"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="616" id="5HB-En-KMB"/>
+                                            <constraint firstAttribute="height" constant="347" id="Dea-nI-lyS"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTi-BD-d5T" userLabel="Next Video Container View">
+                                        <rect key="frame" x="1232" y="0.0" width="616" height="347"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="616" id="Ex5-J3-RFX"/>
+                                            <constraint firstAttribute="height" constant="347" id="nzy-MZ-OP9"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="616" id="5HB-En-KMB"/>
-                                    <constraint firstAttribute="height" constant="347" id="Dea-nI-lyS"/>
+                                    <constraint firstItem="Ryf-Kc-beB" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="top" id="0OE-v3-dWG"/>
+                                    <constraint firstAttribute="height" constant="347" id="4lz-QZ-SRX"/>
+                                    <constraint firstItem="Ryf-Kc-beB" firstAttribute="leading" secondItem="yh8-En-Apv" secondAttribute="leading" id="8uG-EE-d4d"/>
+                                    <constraint firstItem="HTi-BD-d5T" firstAttribute="leading" secondItem="sRQ-Zn-BXl" secondAttribute="trailing" id="9Uc-bf-p2d"/>
+                                    <constraint firstAttribute="width" constant="616" id="IrM-KM-00P"/>
+                                    <constraint firstAttribute="centerY" secondItem="HTi-BD-d5T" secondAttribute="centerY" id="WYW-wM-6h3"/>
+                                    <constraint firstAttribute="trailing" secondItem="HTi-BD-d5T" secondAttribute="trailing" id="X7e-Tn-SsT"/>
+                                    <constraint firstItem="sRQ-Zn-BXl" firstAttribute="leading" secondItem="Ryf-Kc-beB" secondAttribute="trailing" id="eMh-Vd-5u0"/>
+                                    <constraint firstAttribute="centerY" secondItem="Ryf-Kc-beB" secondAttribute="centerY" id="enK-oj-pqL"/>
+                                    <constraint firstAttribute="centerY" secondItem="sRQ-Zn-BXl" secondAttribute="centerY" id="r40-G5-c6d"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ryf-Kc-beB" secondAttribute="bottom" id="sss-0M-oeJ"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="C43-Hj-HYq" appends="YES" id="9K8-vf-CUr"/>
-                                    <outletCollection property="gestureRecognizers" destination="3p6-xL-nVt" appends="YES" id="saJ-Cf-Msy"/>
+                                    <outlet property="delegate" destination="PB1-Bc-aL3" id="CX4-oy-al0"/>
                                 </connections>
-                            </view>
+                            </scrollView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="Dd4-m5-fwv">
                                 <rect key="frame" x="337" y="512" width="350" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -195,16 +233,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IXk-6T-01i" firstAttribute="leading" secondItem="m3U-6p-Ozj" secondAttribute="leading" id="1fE-Ld-Wmf"/>
-                            <constraint firstAttribute="centerY" secondItem="sRQ-Zn-BXl" secondAttribute="centerY" constant="63.5" id="Amq-26-Hbk"/>
+                            <constraint firstItem="yh8-En-Apv" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="bottom" constant="10" id="4aW-8i-Xar"/>
                             <constraint firstAttribute="centerX" secondItem="Tzb-1p-fac" secondAttribute="centerX" id="Bx0-xX-jha"/>
                             <constraint firstAttribute="trailing" secondItem="IXk-6T-01i" secondAttribute="trailing" id="DZu-3Q-o9W"/>
-                            <constraint firstAttribute="centerX" secondItem="sRQ-Zn-BXl" secondAttribute="centerX" id="PzD-SE-zts"/>
+                            <constraint firstItem="Tzb-1p-fac" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="76" id="KY6-SW-woT"/>
                             <constraint firstAttribute="centerX" secondItem="cPS-0z-gZT" secondAttribute="centerX" id="Xku-w5-Ofk"/>
                             <constraint firstAttribute="centerX" secondItem="Dd4-m5-fwv" secondAttribute="centerX" id="bUC-Gg-WfD"/>
-                            <constraint firstItem="sRQ-Zn-BXl" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="bottom" constant="10" id="fPn-A6-xfP"/>
-                            <constraint firstItem="Tzb-1p-fac" firstAttribute="top" secondItem="sRQ-Zn-BXl" secondAttribute="bottom" constant="76" id="koo-oI-ncI"/>
-                            <constraint firstItem="IXk-6T-01i" firstAttribute="top" secondItem="sRQ-Zn-BXl" secondAttribute="bottom" constant="160" id="kzv-o4-lOg"/>
-                            <constraint firstItem="Dd4-m5-fwv" firstAttribute="top" secondItem="sRQ-Zn-BXl" secondAttribute="bottom" constant="18" id="yZx-FM-lbe"/>
+                            <constraint firstItem="IXk-6T-01i" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="160" id="gPQ-QI-hDl"/>
+                            <constraint firstAttribute="centerX" secondItem="yh8-En-Apv" secondAttribute="centerX" id="lgC-eB-ewY"/>
+                            <constraint firstItem="Dd4-m5-fwv" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="18" id="pFz-Vp-6bv"/>
+                            <constraint firstItem="yh8-En-Apv" firstAttribute="top" secondItem="YV5-Gs-Jfb" secondAttribute="bottom" constant="83" id="wlU-sc-glE"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -229,22 +267,15 @@
                         <outlet property="commentButton" destination="smU-Ia-agd" id="HzP-cu-nRB"/>
                         <outlet property="followBarButton" destination="OIO-ik-Gr7" id="eDw-ZG-wlc"/>
                         <outlet property="likeButton" destination="sjo-Kq-j9L" id="eiG-EK-HZx"/>
+                        <outlet property="nextVideoPlayerContainerView" destination="HTi-BD-d5T" id="q0R-WK-G43"/>
+                        <outlet property="previousVideoPlayerContainerView" destination="Ryf-Kc-beB" id="mE3-m1-ezt"/>
                         <outlet property="thumbnailCollectionView" destination="IXk-6T-01i" id="FfV-dA-109"/>
                         <outlet property="videoPlayerContainerView" destination="sRQ-Zn-BXl" id="gbw-RP-BOx"/>
+                        <outlet property="videoScrollView" destination="yh8-En-Apv" id="GNG-Ih-xw5"/>
                         <outlet property="videoTitleLabel" destination="Dd4-m5-fwv" id="Yy9-ik-t7b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z0f-0T-ymI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="C43-Hj-HYq">
-                    <connections>
-                        <action selector="swipedLeft:" destination="PB1-Bc-aL3" id="kRJ-0R-z2W"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="3p6-xL-nVt">
-                    <connections>
-                        <action selector="swipedRight:" destination="PB1-Bc-aL3" id="rU9-H0-yUC"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="73" y="-254"/>
         </scene>

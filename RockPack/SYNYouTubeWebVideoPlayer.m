@@ -14,11 +14,20 @@
 #import "SYNVideoPlayer+Protected.h"
 #import <Reachability.h>
 
+typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
+	SYNYouTubeVideoPlayerStateInitialised,
+	SYNYouTubeVideoPlayerStateReady,
+	SYNYouTubeVideoPlayerStateLoaded
+};
+
 @interface SYNYouTubeWebVideoPlayer () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *youTubeWebView;
 
+@property (nonatomic, assign) SYNYouTubeVideoPlayerState youTubePlayerState;
+
 @property (nonatomic, assign) BOOL playerReady;
+@property (nonatomic, assign) BOOL playerLoaded;
 
 @end
 
@@ -91,13 +100,17 @@
 - (void)play {
 	[super play];
 	
-	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
+	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
+		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
+	} else {
+		[self loadPlayer];
+	}
 }
 
 - (void)pause {
 	[super pause];
 	
-    [self.youTubeWebView stringByEvaluatingJavaScriptFromString: @"player.pauseVideo();"];
+    [self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.pauseVideo();"];
 }
 
 - (NSTimeInterval)duration {
@@ -123,13 +136,13 @@
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 	if ([actionName isEqualToString:@"ready"]) {
-		NSString *sourceId = self.videoInstance.video.sourceId;
-		
 		[self updatePlayerSize:self.youTubeWebView.frame.size];
 		
-		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
-		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
+		self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
 		
+		if (self.state == SYNVideoPlayerStatePlaying) {
+			[self loadPlayer];
+		}
 	}
 	
 	if ([actionName isEqualToString:@"stateChange"]) {
@@ -162,6 +175,16 @@
 	}
 	
 	return [[NSBundle mainBundle] URLForResource:@"YouTubeIFramePlayer" withExtension:@"html"];
+}
+
+- (void)loadPlayer {
+	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateReady) {
+		NSString *sourceId = self.videoInstance.video.sourceId;
+		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
+		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
+		
+		self.youTubePlayerState = SYNYouTubeVideoPlayerStateLoaded;
+	}
 }
 
 @end

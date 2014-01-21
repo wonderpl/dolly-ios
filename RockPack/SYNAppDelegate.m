@@ -1383,8 +1383,10 @@
     sourceApplication: (NSString *) sourceApplication
            annotation: (id) annotation
 {
+	NSString *appURLScheme = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppURLScheme"];
+	
     // Is it one of our own custom 'rockpack' URL schemes
-    if ([url.scheme isEqualToString: @"rockpack"])
+    if ([url.scheme isEqualToString:appURLScheme])
     {
         return [self parseAndActionRockpackURL: url];
     }
@@ -1454,12 +1456,13 @@
 {
     NSURLRequest *newRequest = request;
     
+	NSString *appURLScheme = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppURLScheme"];
     
     if (redirectResponse && !self.rockpackURL)
     {
         NSString *urlString = [(NSHTTPURLResponse *) redirectResponse allHeaderFields][@"Location"];
         
-        if ([urlString hasPrefix: @"rockpack"])
+        if ([urlString hasPrefix: appURLScheme])
         {
             self.rockpackURL = urlString;
             newRequest = nil;

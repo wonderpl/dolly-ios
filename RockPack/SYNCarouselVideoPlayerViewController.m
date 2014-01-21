@@ -25,9 +25,10 @@
 #import "SYNChannelFooterMoreView.h"
 #import "UINavigationBar+Appearance.h"
 #import "SYNActivityManager.h"
+#import "UILabel+Animation.h"
 #import <UIImageView+WebCache.h>
 
-@interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNPagingModelDelegate>
+@interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UIScrollViewDelegate, SYNPagingModelDelegate>
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *followBarButton;
 @property (nonatomic, strong) IBOutlet UIImageView *channelThumbnailImageView;
@@ -38,7 +39,14 @@
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 
+@property (nonatomic, strong) IBOutlet UIView *previousVideoPlayerContainerView;
+@property (nonatomic, strong) SYNVideoPlayer *previousVideoPlayer;
+
+@property (nonatomic, strong) IBOutlet UIView *nextVideoPlayerContainerView;
+@property (nonatomic, strong) SYNVideoPlayer *nextVideoPlayer;
+
 @property (nonatomic, strong) SYNPagingModel *model;
+@property (nonatomic, strong) IBOutlet UIScrollView *videoScrollView;
 
 @end
 
@@ -68,6 +76,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	self.videoScrollView.contentOffset = CGPointMake(CGRectGetWidth(self.videoScrollView.frame), 0);
 	
 	self.channelThumbnailImageView.layer.cornerRadius = CGRectGetWidth(self.channelThumbnailImageView.frame) / 2.0;
 	self.channelThumbnailImageView.layer.masksToBounds = YES;
@@ -207,6 +217,19 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+	if (scrollView == self.videoScrollView) {
+		CGFloat pageWidth = CGRectGetWidth(scrollView.frame);
+		NSInteger pageOffset = (scrollView.contentOffset.x - pageWidth) / pageWidth;
+
+		if (pageOffset) {
+			self.selectedIndex = (pageOffset < 0 ? [self previousVideoIndex] : [self nextVideoIndex]);
+			
+			scrollView.contentOffset = CGPointMake(pageWidth, 0);
+		}
+	}
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
 }
@@ -260,18 +283,22 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	}
 }
 
-- (IBAction)swipedRight:(UISwipeGestureRecognizer *)gestureRecognizer {
-	[self playPreviousVideo];
-}
-
-- (IBAction)swipedLeft:(UISwipeGestureRecognizer *)gestureRecognizer {
-	[self playNextVideo];
-}
-
 #pragma mark - Private
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[super updateVideoInstanceDetails:(VideoInstance *)videoInstance];
+	
+	if (self.previousVideoPlayer) {
+		[self.previousVideoPlayer removeFromSuperview];
+	}
+	self.previousVideoPlayer = [self createPreviousVideoPlayer];
+	[self.previousVideoPlayerContainerView addSubview:self.previousVideoPlayer];
+	
+	if (self.nextVideoPlayer) {
+		[self.nextVideoPlayer removeFromSuperview];
+	}
+	self.nextVideoPlayer = [self createNextVideoPlayer];
+	[self.nextVideoPlayerContainerView addSubview:self.nextVideoPlayer];
 	
 	BOOL videoOwnedByCurrentUser = [appDelegate.currentUser.uniqueId isEqualToString:videoInstance.channel.channelOwner.uniqueId];
 	self.navigationItem.rightBarButtonItem = (videoOwnedByCurrentUser ? nil : self.followBarButton);
@@ -288,18 +315,50 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	}
 
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
-	self.channelOwnerLabel.text = ([channelOwnerName length] ? [NSString stringWithFormat: @"By %@", channelOwnerName] : @"");
-	self.channelTitleLabel.text = videoInstance.channel.title;
+	NSString *byText = ([channelOwnerName length] ? [NSString stringWithFormat:@"By %@", channelOwnerName] : @"");
+	[self.channelOwnerLabel setText:byText animated:YES];
+	[self.channelTitleLabel setText:videoInstance.channel.title animated:YES];
+}
+
+- (NSInteger)nextVideoIndex {
+	return ((self.selectedIndex + 1) % [self.model itemCount]);
+}
+
+- (NSInteger)previousVideoIndex {
+	return (((self.selectedIndex - 1) + [self.model itemCount]) % [self.model itemCount]);
+}
+
+- (VideoInstance *)nextVideoInstance {
+	return [self.model itemAtIndex:[self nextVideoIndex]];
+}
+
+- (VideoInstance *)previousVideoInstance {
+	return [self.model itemAtIndex:[self previousVideoIndex]];
+}
+
+- (SYNVideoPlayer *)createPreviousVideoPlayer {
+	SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:[self previousVideoInstance]];
+	videoPlayer.frame = self.previousVideoPlayerContainerView.bounds;
+	
+	return videoPlayer;
+}
+
+- (SYNVideoPlayer *)createNextVideoPlayer {
+	SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:[self nextVideoInstance]];
+	videoPlayer.frame = self.nextVideoPlayerContainerView.bounds;
+	
+	return videoPlayer;
 }
 
 - (void)playNextVideo {
-	NSInteger nextIndex = (self.selectedIndex + 1) % [self.model itemCount];
-	self.selectedIndex = nextIndex;
-}
-
-- (void)playPreviousVideo {
-	NSInteger previousIndex = ((self.selectedIndex - 1) + [self.model itemCount]) % [self.model itemCount];
-	self.selectedIndex = previousIndex;
+	UIScrollView *scrollView = self.videoScrollView;
+	CGFloat scrollViewWidth = CGRectGetWidth(scrollView.frame);
+	[UIView animateWithDuration:0.3 animations:^{
+		scrollView.contentOffset = CGPointMake(scrollViewWidth * 2, 0);
+	} completion:^(BOOL finished) {
+		self.selectedIndex = [self nextVideoIndex];
+		scrollView.contentOffset = CGPointMake(scrollViewWidth, 0);
+	}];
 }
 
 @end
