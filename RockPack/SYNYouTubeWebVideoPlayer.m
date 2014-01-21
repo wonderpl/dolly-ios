@@ -14,11 +14,20 @@
 #import "SYNVideoPlayer+Protected.h"
 #import <Reachability.h>
 
+typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
+	SYNYouTubeVideoPlayerStateInitialised,
+	SYNYouTubeVideoPlayerStateReady,
+	SYNYouTubeVideoPlayerStateLoaded
+};
+
 @interface SYNYouTubeWebVideoPlayer () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *youTubeWebView;
 
+@property (nonatomic, assign) SYNYouTubeVideoPlayerState youTubePlayerState;
+
 @property (nonatomic, assign) BOOL playerReady;
+@property (nonatomic, assign) BOOL playerLoaded;
 
 @end
 
@@ -91,7 +100,7 @@
 - (void)play {
 	[super play];
 	
-	if (self.playerReady) {
+	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
 	} else {
 		[self loadPlayer];
@@ -101,7 +110,7 @@
 - (void)pause {
 	[super pause];
 	
-    [self.youTubeWebView stringByEvaluatingJavaScriptFromString: @"player.pauseVideo();"];
+    [self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.pauseVideo();"];
 }
 
 - (NSTimeInterval)duration {
@@ -129,7 +138,7 @@
 	if ([actionName isEqualToString:@"ready"]) {
 		[self updatePlayerSize:self.youTubeWebView.frame.size];
 		
-		self.playerReady = YES;
+		self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
 		
 		if (self.state == SYNVideoPlayerStatePlaying) {
 			[self loadPlayer];
@@ -169,9 +178,13 @@
 }
 
 - (void)loadPlayer {
-	NSString *sourceId = self.videoInstance.video.sourceId;
-	NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
-	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
+	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateReady) {
+		NSString *sourceId = self.videoInstance.video.sourceId;
+		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
+		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
+		
+		self.youTubePlayerState = SYNYouTubeVideoPlayerStateLoaded;
+	}
 }
 
 @end
