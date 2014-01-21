@@ -731,6 +731,7 @@
         UIEdgeInsets tmp = self.subscriptionLayoutIPhone.sectionInset;
         tmp.top -= 43;
         self.subscriptionLayoutIPhone.sectionInset = tmp;
+        self.uploadAvatar.hidden=YES;
         
     }
 }
@@ -1530,7 +1531,7 @@
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
             self.userNameLabel.transform = move;
-            self.uploadAvatarButton.transform = move;
+            self.uploadAvatar.transform = move;
             
             if (offset<0)
             {
@@ -2374,6 +2375,7 @@
 	self.aboutMeTextView.userInteractionEnabled = YES;
     
     self.modeType = kModeEditProfile;
+    self.uploadAvatar.hidden =YES;
     self.uploadCoverPhotoButton.hidden = NO;
     self.uploadAvatarButton.hidden = NO;
     self.uploadCoverPhotoButton.alpha = 0.0f;
@@ -2432,7 +2434,7 @@
 -(void) cancelEditModeTapped
 {
     
-    self.uploadAvatarButton.hidden = NO;
+    self.uploadAvatar.hidden = NO;
     self.modeType = kModeMyOwnProfile;
     CGRect tmpRect = self.aboutMeTextView.frame;
     tmpRect.origin.y -= 10;
@@ -3161,7 +3163,7 @@ finishedWithImage: (UIImage *) image
     
     [self editButtonTapped:nil];
     [self changeAvatarButtonTapped:nil];
-    self.uploadAvatarButton.hidden = YES;
+    self.uploadAvatar.hidden=YES;
     
 }
 
