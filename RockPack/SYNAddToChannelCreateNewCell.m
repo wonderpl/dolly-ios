@@ -26,20 +26,22 @@
     [super awakeFromNib];
     
     self.createNewButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize];
-    
+	
+    self.descriptionTextView.font = [UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize];
     self.descriptionTextView.hidden = NO;
     self.descriptionTextView.alpha = 0.0f;
+	self.descriptionTextView.textColor = [UIColor lightGrayColor];
+    self.descriptionTextView.layer.borderColor = [[UIColor colorWithWhite:172/255.0 alpha:1.0] CGColor];
+    self.descriptionTextView.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0f);
     
-//    self.createNewButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-//    self.createNewButton.layer.borderWidth = 1.0f;
-    
-    self.nameInputTextField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.nameInputTextField.layer.borderWidth = 1.0f;
+    self.nameInputTextField.font = [UIFont regularCustomFontOfSize:self.nameInputTextField.font.pointSize];
+    self.nameInputTextField.layer.borderColor = [[UIColor colorWithWhite:172/255.0 alpha:1.0] CGColor];
+    self.nameInputTextField.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0f);
     
     if(IS_IPAD)
     {
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        self.layer.borderWidth = 1.0f;
+        self.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0f);
     }
     else // IS_IPHONE
     {
@@ -55,12 +57,7 @@
         
         [self addSubview:separatorTop];
         [self addSubview:self.separatorBottom];
-        
     }
-    
-    self.descriptionTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.descriptionTextView.layer.borderWidth = 1.0f;
-    self.descriptionTextView.backgroundColor = [ UIColor lightGrayColor];
     
     self.state = CreateNewChannelCellStateHidden;
     
@@ -103,6 +100,7 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
 	self.editedDescription = YES;
+	self.descriptionTextView.textColor = [UIColor blackColor];
     self.descriptionTextView.text = @"";
 }
 

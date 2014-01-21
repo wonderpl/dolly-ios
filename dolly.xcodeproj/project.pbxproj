@@ -1349,6 +1349,7 @@
 		E9A465FE187FFA76007511B3 /* SYNTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A465FD187FFA76007511B3 /* SYNTabBar.m */; };
 		E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */; };
 		E9A75E8118882D8200B7F55F /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A75E8018882D8200B7F55F /* UIImage+Blur.m */; };
+		E9AB7E05188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9AB7E04188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib */; };
 		E9AD5B68187D6B9600298D95 /* ButtonFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AD5B66187D6B9600298D95 /* ButtonFacebook.png */; };
 		E9AD5B69187D6B9600298D95 /* ButtonFacebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AD5B67187D6B9600298D95 /* ButtonFacebook@2x.png */; };
 		E9AD5B6C187D767200298D95 /* SYNiPhoneLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AD5B6B187D767200298D95 /* SYNiPhoneLoginViewController.m */; };
@@ -2992,6 +2993,7 @@
 		E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
 		E9A75E7F18882D8200B7F55F /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		E9A75E8018882D8200B7F55F /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
+		E9AB7E04188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelCreateNewCell~iphone.xib"; sourceTree = "<group>"; };
 		E9AD5B66187D6B9600298D95 /* ButtonFacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonFacebook.png; path = Assets/Images/ButtonFacebook.png; sourceTree = "<group>"; };
 		E9AD5B67187D6B9600298D95 /* ButtonFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonFacebook@2x.png"; path = "Assets/Images/ButtonFacebook@2x.png"; sourceTree = "<group>"; };
 		E9AD5B6A187D767200298D95 /* SYNiPhoneLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPhoneLoginViewController.h; sourceTree = "<group>"; };
@@ -5447,6 +5449,7 @@
 				BE285D9D172584E200D995AB /* SYNAddToChannelCreateNewCell.h */,
 				BE285D9E172584E200D995AB /* SYNAddToChannelCreateNewCell.m */,
 				BE285DA0172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib */,
+				E9AB7E04188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib */,
 				BE31EFAE182D4B00006E20E2 /* SYNAddToChannelCell.h */,
 				BE31EFAF182D4B00006E20E2 /* SYNAddToChannelCell.m */,
 				BE31EFB1182D4B13006E20E2 /* SYNAddToChannelCell.xib */,
@@ -6568,6 +6571,7 @@
 				01BCD1DE172560FB00F459BF /* ButtonCoverHighlighted@2x.png in Resources */,
 				BE285D9C1725726300D995AB /* SYNAddToChannelViewController.xib in Resources */,
 				BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib in Resources */,
+				E9AB7E05188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */,
 				1F458B0617E1C4E6003C14AC /* AppIcon76x76.png in Resources */,
 				BE285DA617258A0A00D995AB /* ButtonConfirm.png in Resources */,
 				BE285DA717258A0A00D995AB /* ButtonConfirm@2x.png in Resources */,
