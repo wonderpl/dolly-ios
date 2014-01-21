@@ -37,8 +37,7 @@
 
 @implementation SYNMoodRootViewController
 
-- (void) viewDidLoad
-{
+- (void) viewDidLoad {
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -69,8 +68,11 @@
     self.watchButton.layer.borderWidth = 1.5f;
     self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
-    
-    self.defaultPicker.transform = CGAffineTransformScale(self.defaultPicker.transform, 1.3f, 1.40f);
+    if (IS_IPHONE) {
+        self.defaultPicker.transform = CGAffineTransformScale(self.defaultPicker.transform, 1.3f, 1.40f);
+    } else {
+        self.defaultPicker.transform = CGAffineTransformScale(self.defaultPicker.transform, 1.0f, 1.10f);
+    }
     
     
     
@@ -96,6 +98,8 @@
 //    }];
     
     double tmp = arc4random() % 1000+500;
+    
+    //the delay time for the picker animation
     float delay = 0.35f;
     
     // no way to extend the animation time of the default picker
@@ -107,19 +111,14 @@
 
     // show watch button after the final spin
     [self performSelector:@selector(showWatchButton) withObject:[NSNumber numberWithLong:tmp] afterDelay:delay*4];
-
-
-
 }
 
 
--(void) spinAnimationWithRow : (NSNumber*) row
-{
+-(void) spinAnimationWithRow : (NSNumber*) row {
     [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:YES];
 }
 
--(void) spinAnimation : (NSNumber*) row
-{
+-(void) spinAnimation : (NSNumber*) row {
     [UIView animateWithDuration:2.0f animations:^{
         [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:NO];
     }];
@@ -128,16 +127,14 @@
 
 #pragma mark - Getting Mood Objects
 
-- (void) loadMoods
-{
+- (void) loadMoods {
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Mood"];
     
     NSError* error;
     self.moods = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest
                                                                      error:&error];
-    if(self.moods == 0)
-    {
+    if(self.moods == 0) {
         
     }
     
@@ -146,16 +143,14 @@
     
 }
 
--(void) getUpdatedMoods
-{
+-(void) getUpdatedMoods {
     [appDelegate.networkEngine getMoodsWithCompletionHandler:^(id responce) {
         
         if(![responce isKindOfClass:[NSDictionary class]])
             return;
         
         if([appDelegate.mainRegistry registerMoodsFromDictionary:responce
-                                               withExistingMoods:self.moods])
-        {
+                                               withExistingMoods:self.moods]) {
             [self loadMoods];
         }
         
@@ -169,14 +164,14 @@
 }
 
 
-- (void) viewDidAppear:(BOOL)animated
-{
+- (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if([[SYNDeviceManager sharedInstance] isPortrait] && IS_IPAD)
-    {
+    if([[SYNDeviceManager sharedInstance] isPortrait] && IS_IPAD) {
         [self positionElementsForInterfaceOrientation:UIDeviceOrientationPortrait];
     }
+    
+    // Hides the 2 lines in the default picker
     
     [[self.defaultPicker.subviews objectAtIndex:1] setHidden:TRUE];
     [[self.defaultPicker.subviews objectAtIndex:2] setHidden:TRUE];
@@ -184,8 +179,7 @@
 }
 
 #pragma mark - Control Callbacks
-- (IBAction)watchButtonTapped:(id)sender
-{
+- (IBAction)watchButtonTapped:(id)sender {
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
                                                          params: @{@"mood":self.currentMood.uniqueId}
@@ -207,8 +201,7 @@
                                                                                                              error:&error];
                                                   
                                                   
-                                                  if(videosArray.count == 0)
-                                                  {
+                                                  if(videosArray.count == 0) {
                                                       // implement
                                                   }
                                                   
@@ -227,20 +220,17 @@
 
 // To be implemented by subclasses
 - (NSInteger) collectionView: (UICollectionView *) collectionView
-      numberOfItemsInSection: (NSInteger) section
-{
+      numberOfItemsInSection: (NSInteger) section {
     return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
 }
 
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
-{
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
     return 1;
 }
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
-                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
-{
+                   cellForItemAtIndexPath: (NSIndexPath *) indexPath {
     SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNMoodCell class])
                                                                                forIndexPath: indexPath];
     
@@ -265,8 +255,7 @@
 
 
 - (void) collectionView: (UICollectionView *) cv
-         didSelectItemAtIndexPath: (NSIndexPath *)indexPath
-{
+         didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
 
 }
@@ -274,8 +263,7 @@
 #pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
 
 
--(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // override
     
     [self showWatchButton];
@@ -289,22 +277,19 @@
     }
 }
 
-- (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
+- (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     // override
     [self showWatchButton];
 
 }
 
--(void) scrollViewDidScroll:(UIScrollView *)scrollView
-{
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView {
     // override
     self.watchButton.hidden = YES;
 
 }
 
-- (void)showWatchButton
-{
+- (void)showWatchButton {
     self.watchButton.hidden = NO;
     self.watchButton.alpha = 0.0f;
     
@@ -317,56 +302,19 @@
 
 #pragma mark - Orientation
 
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     
     [self.moodCollectionView reloadData];
-//    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-//    
-//    if(IS_IPAD)
-//    {
-//        [self positionElementsForInterfaceOrientation:toInterfaceOrientation];
-//    }
-    
 }
 
-- (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    
-//    CGRect correctBGImageFrame = self.backgroundImageView.frame;
-//    
-//    if(UIInterfaceOrientationIsPortrait(interfaceOrientation))
-//    {
-//        correctBGImageFrame.origin.y = (self.view.frame.size.height * 0.5f) - (correctBGImageFrame.size.height * 0.5f);
-//        
-//    }
-//    else // Landscape
-//    {
-//        correctBGImageFrame.origin.y = 64.0f;
-//        
-//        
-//    }
-//    
-//    // == Set the Background Image == //
-//    self.backgroundImageView.frame = correctBGImageFrame;
-//    CGRect moodFrame = self.moodCollectionView.frame;
-//    moodFrame.origin.y = correctBGImageFrame.origin.y;
-//    self.moodCollectionView.frame = moodFrame;
-//    
-//    
-//    // == Set the Label == //
-//    CGRect labelFrame = self.iWantToLabel.frame;
-//    labelFrame.origin.y = (self.backgroundImageView.frame.size.height * 0.5f) - (labelFrame.size.height * 0.5f) + correctBGImageFrame.origin.y;
-//    self.iWantToLabel.frame = labelFrame;
-    
+- (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+
 }
 
--(void)setMoods:(NSArray *)moods
-{
+-(void)setMoods:(NSArray *)moods {
     _moods = moods;
     
-    if(moods.count > 0)
-    {
+    if(moods.count > 0) {
         [self.moodCollectionView reloadData];
         
         // center the moods list to the middle
@@ -376,8 +324,7 @@
     }
 }
 
--(Mood*)currentMood
-{
+-(Mood*)currentMood {
     
     CGPoint point = CGPointMake(self.moodCollectionView.frame.size.width * 0.5f,
                                 self.moodCollectionView.frame.size.height * 0.5f + self.moodCollectionView.contentOffset.y);
@@ -393,42 +340,47 @@
 #pragma mark - UIPicker Delegates
 
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return [self.moods count]*LARGE_AMOUNT_OF_ROWS;
 }
 
 #pragma mark - UIPickerView Delegate
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
-{
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    
+    if (IS_IPAD) {
+        return 30.0;
+    }
+    
     return 24.0;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     // not gtting called
     Mood* mood = self.moods [row % self.moods.count];
 
     return mood.name;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self showWatchButton];
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel* tmpLabel = (UILabel*)view;
     if (!tmpLabel){
         tmpLabel = [[UILabel alloc] init];
         tmpLabel.adjustsFontSizeToFitWidth = YES;
         tmpLabel.textAlignment = NSTextAlignmentCenter;
         tmpLabel.font = [tmpLabel.font fontWithSize:14];
+        if (IS_IPAD) {
+            tmpLabel.font = [tmpLabel.font fontWithSize:25];
+        }
+
+        
         tmpLabel.textColor = [UIColor colorWithRed: 136.0f / 255.0f
                                             green: 134.0f / 255.0f
                                              blue: 168.0f / 255.0f
