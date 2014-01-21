@@ -114,7 +114,7 @@
                                 </connections>
                             </scrollView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="0bo-cA-bbH">
-                                <rect key="frame" x="70" y="272" width="180" height="16"/>
+                                <rect key="frame" x="70" y="269" width="180" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="uMI-ng-CFk"/>
@@ -124,7 +124,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05D-hL-8Fp" userLabel="Buttons">
-                                <rect key="frame" x="38" y="301" width="244" height="49"/>
+                                <rect key="frame" x="38" y="297" width="244" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rr-XD-fN6" customClass="SYNSocialButton">
@@ -221,18 +221,37 @@
                                     <outlet property="delegate" destination="7KU-2r-spd" id="n5m-Q2-8hZ"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUb-EJ-U4J">
+                                <rect key="frame" x="124" y="348" width="72" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="244" id="0J2-ku-w5F"/>
+                                    <constraint firstAttribute="height" constant="28" id="w6x-rU-RXT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="contentEdgeInsets" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.46274509800000002" green="0.46274509800000002" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="linkButtonPressed:" destination="7KU-2r-spd" eventType="touchUpInside" id="2CN-qf-hGe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="wgW-oH-qeU" secondAttribute="centerX" id="33K-b3-yCN"/>
                             <constraint firstAttribute="centerX" secondItem="05D-hL-8Fp" secondAttribute="centerX" id="5Hm-GP-nzN"/>
                             <constraint firstAttribute="trailing" secondItem="1QE-kV-UIQ" secondAttribute="trailing" id="6q7-vU-jnC"/>
-                            <constraint firstItem="0bo-cA-bbH" firstAttribute="top" secondItem="wgW-oH-qeU" secondAttribute="bottom" constant="10" id="AgI-Gm-Gwg"/>
-                            <constraint firstItem="05D-hL-8Fp" firstAttribute="top" secondItem="wgW-oH-qeU" secondAttribute="bottom" constant="39" id="C4X-kA-hci"/>
+                            <constraint firstItem="0bo-cA-bbH" firstAttribute="top" secondItem="wgW-oH-qeU" secondAttribute="bottom" constant="7" id="AgI-Gm-Gwg"/>
+                            <constraint firstItem="05D-hL-8Fp" firstAttribute="top" secondItem="wgW-oH-qeU" secondAttribute="bottom" constant="35" id="C4X-kA-hci"/>
                             <constraint firstItem="1QE-kV-UIQ" firstAttribute="leading" secondItem="oU7-9S-lMK" secondAttribute="leading" id="C69-n6-BAW"/>
                             <constraint firstAttribute="centerX" secondItem="hPb-go-E2L" secondAttribute="centerX" id="Fva-hc-MPr"/>
                             <constraint firstItem="fb2-FU-JDP" firstAttribute="top" secondItem="1QE-kV-UIQ" secondAttribute="bottom" id="JMV-ta-fcD"/>
+                            <constraint firstAttribute="centerX" secondItem="HUb-EJ-U4J" secondAttribute="centerX" id="NWm-O1-65s"/>
                             <constraint firstItem="hPb-go-E2L" firstAttribute="top" secondItem="cCn-C5-uyD" secondAttribute="bottom" constant="-28" id="d2b-k7-jeO"/>
+                            <constraint firstItem="HUb-EJ-U4J" firstAttribute="top" secondItem="05D-hL-8Fp" secondAttribute="bottom" constant="2" id="d4g-CK-k7P"/>
                             <constraint firstItem="wgW-oH-qeU" firstAttribute="top" secondItem="hPb-go-E2L" secondAttribute="bottom" constant="8" id="iHq-x5-Mf6"/>
                             <constraint firstAttribute="centerX" secondItem="0bo-cA-bbH" secondAttribute="centerX" id="l2Q-Pt-WS2"/>
                         </constraints>
@@ -257,6 +276,7 @@
                         <outlet property="commentButton" destination="RY9-o7-yo0" id="GHd-lT-60L"/>
                         <outlet property="followBarButton" destination="x59-4C-6va" id="Tbn-fi-Rrf"/>
                         <outlet property="likeButton" destination="9Rr-XD-fN6" id="m2g-TS-vxl"/>
+                        <outlet property="linkButton" destination="HUb-EJ-U4J" id="yRP-e3-Bkg"/>
                         <outlet property="nextVideoPlayerContainerView" destination="GPv-AK-RcC" id="srn-g0-p7W"/>
                         <outlet property="previousVideoPlayerContainerView" destination="Jlb-zI-2J4" id="3LK-u6-I9x"/>
                         <outlet property="thumbnailCollectionView" destination="1QE-kV-UIQ" id="d2P-kw-kZ9"/>

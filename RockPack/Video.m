@@ -26,6 +26,8 @@ NSString *const VideoSourceOoyala = @"ooyala";
     instance.starCount = video.starCount;
     instance.starredByUserValue = video.starredByUserValue;
     instance.thumbnailURL = video.thumbnailURL;
+	instance.linkTitle = video.linkTitle;
+	instance.linkURL = video.linkURL;
     
     return instance;
 }
@@ -52,6 +54,9 @@ NSString *const VideoSourceOoyala = @"ooyala";
     return instance;
 }
 
+- (BOOL)hasLink {
+	return ([self.linkTitle length] && [self.linkURL length]);
+}
 
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
                               withId: (NSString *) uniqueId
@@ -99,6 +104,9 @@ NSString *const VideoSourceOoyala = @"ooyala";
     
     self.thumbnailURL = [dictionary objectForKey: @"thumbnail_url"
                                      withDefault: @""];
+	
+	self.linkTitle = [dictionary objectForKey:@"link_title" withDefault:@""];
+	self.linkURL = [dictionary objectForKey:@"link_url" withDefault:@""];
     
     self.starredByUserValue = [SYNActivityManager.sharedInstance isRecentlyStarred:self.uniqueId];
 //    self.viewedByUserValue = [SYNActivityManager.sharedInstance isRecentlyViewed:self.uniqueId];

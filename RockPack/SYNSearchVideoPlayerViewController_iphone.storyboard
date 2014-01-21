@@ -65,11 +65,11 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2yo-aq-LCf" userLabel="Header View" customClass="SYNPassthroughView">
-                                <rect key="frame" x="0.0" y="244" width="320" height="138"/>
+                                <rect key="frame" x="0.0" y="244" width="320" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="LCg-U6-Fr5">
-                                        <rect key="frame" x="70" y="10" width="180" height="16"/>
+                                        <rect key="frame" x="70" y="6" width="180" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="180" id="w5m-Ps-V21"/>
@@ -157,7 +157,7 @@
                                         </constraints>
                                     </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="j4e-Kv-apz">
-                                        <rect key="frame" x="41" y="95" width="240" height="29"/>
+                                        <rect key="frame" x="41" y="125" width="240" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="gwD-YV-mc9"/>
@@ -171,16 +171,33 @@
                                             <action selector="segmentedControlValueChanged:" destination="7ZJ-uv-6JN" eventType="valueChanged" id="2bz-II-DcM"/>
                                         </connections>
                                     </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0M-52-iQT">
+                                        <rect key="frame" x="124" y="89" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="72S-2R-8El"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="244" id="Xkr-Ym-zEe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="contentEdgeInsets" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="linkButtonPressed:" destination="7ZJ-uv-6JN" eventType="touchUpInside" id="Taz-s4-dxo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="Tpa-aa-3hg" secondAttribute="centerX" id="61z-NT-Apf"/>
+                                    <constraint firstItem="v0M-52-iQT" firstAttribute="top" secondItem="Tpa-aa-3hg" secondAttribute="bottom" constant="4" id="6Si-di-am5"/>
                                     <constraint firstAttribute="bottom" secondItem="j4e-Kv-apz" secondAttribute="bottom" constant="15" id="6Xl-XK-fuT"/>
-                                    <constraint firstItem="j4e-Kv-apz" firstAttribute="top" secondItem="Tpa-aa-3hg" secondAttribute="bottom" constant="10" id="7NJ-aq-iyO"/>
-                                    <constraint firstItem="LCg-U6-Fr5" firstAttribute="top" secondItem="2yo-aq-LCf" secondAttribute="top" constant="10" id="j3i-Ik-hpg"/>
+                                    <constraint firstItem="LCg-U6-Fr5" firstAttribute="top" secondItem="2yo-aq-LCf" secondAttribute="top" constant="6" id="j3i-Ik-hpg"/>
                                     <constraint firstAttribute="centerX" secondItem="j4e-Kv-apz" secondAttribute="centerX" constant="-0.5" id="mHc-tP-S4o"/>
                                     <constraint firstAttribute="centerX" secondItem="LCg-U6-Fr5" secondAttribute="centerX" id="pND-xP-q9A"/>
-                                    <constraint firstItem="Tpa-aa-3hg" firstAttribute="top" secondItem="LCg-U6-Fr5" secondAttribute="bottom" constant="10" id="wiw-4o-4HW"/>
+                                    <constraint firstAttribute="centerX" secondItem="v0M-52-iQT" secondAttribute="centerX" id="tkd-2n-kD5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rhp-E8-3MI">
@@ -202,12 +219,14 @@
                             <constraint firstItem="2yo-aq-LCf" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="9Ap-OB-142"/>
                             <constraint firstItem="2yo-aq-LCf" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="Ibb-Sf-jKc"/>
                             <constraint firstAttribute="trailing" secondItem="gju-Ii-lA2" secondAttribute="trailing" id="LFC-Wk-Ezj"/>
+                            <constraint firstItem="j4e-Kv-apz" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" constant="125" id="Ul0-vm-kZf"/>
                             <constraint firstItem="OGz-pp-K5R" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="X0g-dN-DFA"/>
                             <constraint firstItem="OGz-pp-K5R" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="icI-5v-FH2"/>
                             <constraint firstAttribute="trailing" secondItem="2yo-aq-LCf" secondAttribute="trailing" id="ktw-Xr-cS0"/>
                             <constraint firstAttribute="trailing" secondItem="OGz-pp-K5R" secondAttribute="trailing" id="mNp-hL-8EN"/>
                             <constraint firstItem="gju-Ii-lA2" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="rH7-XX-2os"/>
                             <constraint firstItem="6GN-FX-Evf" firstAttribute="top" secondItem="gju-Ii-lA2" secondAttribute="bottom" id="sTO-Jr-dEO"/>
+                            <constraint firstItem="Tpa-aa-3hg" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" constant="36" id="x8J-5W-zUU"/>
                             <constraint firstItem="Rhp-E8-3MI" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="yxP-fH-b6g"/>
                         </constraints>
                     </view>
@@ -225,6 +244,7 @@
                         <outlet property="headerView" destination="2yo-aq-LCf" id="Hfl-U7-UJf"/>
                         <outlet property="likeButton" destination="Rq4-ap-neN" id="fqq-bX-bLL"/>
                         <outlet property="likesCollectionView" destination="gju-Ii-lA2" id="1vy-CS-fiX"/>
+                        <outlet property="linkButton" destination="v0M-52-iQT" id="23r-lc-5SQ"/>
                         <outlet property="segmentedControl" destination="j4e-Kv-apz" id="qdD-2u-m9o"/>
                         <outlet property="videoPlayerContainerView" destination="Rhp-E8-3MI" id="COs-1Q-VwJ"/>
                         <outlet property="videoTitleLabel" destination="LCg-U6-Fr5" id="tQx-bS-cWp"/>

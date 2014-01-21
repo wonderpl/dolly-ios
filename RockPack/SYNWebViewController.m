@@ -46,6 +46,11 @@
 	NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 	self.navigationItem.title = title;
 	
+	BOOL canNavigateWebView = ([webView canGoBack] || [webView canGoForward]);
+	if (canNavigateWebView) {
+		[self.navigationController setToolbarHidden:NO animated:YES];
+	}
+	
 	self.backButton.enabled = [webView canGoBack];
 	self.forwardButton.enabled = [webView canGoForward];
 }

@@ -183,6 +183,23 @@
                                     <constraint firstItem="XNp-JD-eH4" firstAttribute="leading" secondItem="b5m-YE-w6C" secondAttribute="trailing" constant="16" id="neC-Ag-Cjq"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D74-Mn-HJi">
+                                <rect key="frame" x="476" y="544" width="72" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="W2a-ra-rxU"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="244" id="ZhM-OU-pjp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="contentEdgeInsets" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="linkButtonPressed:" destination="AqW-yM-AnN" eventType="touchUpInside" id="ALA-5Z-KaZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -199,7 +216,9 @@
                             <constraint firstAttribute="trailing" secondItem="om0-Aw-JzZ" secondAttribute="trailing" id="ha6-bm-ap0"/>
                             <constraint firstItem="NAF-Dm-QGA" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="18" id="l1p-W3-yQu"/>
                             <constraint firstItem="om0-Aw-JzZ" firstAttribute="leading" secondItem="oXA-7r-uHj" secondAttribute="leading" id="lJq-pH-4Ip"/>
+                            <constraint firstItem="D74-Mn-HJi" firstAttribute="top" secondItem="nxl-rT-Inc" secondAttribute="bottom" constant="6" id="vQU-wB-aRb"/>
                             <constraint firstAttribute="centerX" secondItem="nxl-rT-Inc" secondAttribute="centerX" id="vkq-he-Oys"/>
+                            <constraint firstAttribute="centerX" secondItem="D74-Mn-HJi" secondAttribute="centerX" id="wV3-wh-KrB"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -217,6 +236,7 @@
                         <outlet property="commentButton" destination="H5h-6I-xyr" id="ZKb-Mm-9Vc"/>
                         <outlet property="likeButton" destination="b5m-YE-w6C" id="31u-F6-qcX"/>
                         <outlet property="likesCollectionView" destination="om0-Aw-JzZ" id="4pp-d6-emq"/>
+                        <outlet property="linkButton" destination="D74-Mn-HJi" id="QQt-En-AVk"/>
                         <outlet property="segmentedControl" destination="2Tw-f0-wtP" id="Mkl-Ce-CIL"/>
                         <outlet property="videoPlayerContainerView" destination="tma-bZ-MtG" id="YAU-LI-0Ba"/>
                         <outlet property="videoTitleLabel" destination="NAF-Dm-QGA" id="xic-Nm-iky"/>
