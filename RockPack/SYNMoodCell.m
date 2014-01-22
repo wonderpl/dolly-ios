@@ -20,8 +20,8 @@
         
         self.titleLabel.font = [UIFont regularCustomFontOfSize:(IS_IPAD ? 25.0f : 20.0f)];
         self.titleLabel.textColor = [UIColor dollyMoodColor];
-        
-        self.titleLabel.textAlignment = NSTextAlignmentLeft;
+    
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
         
         [self addSubview:self.titleLabel];
         

@@ -7,7 +7,10 @@
 //
 
 #import "SYNFadingFlowLayout.h"
+#import <math.h>
 
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
 #define ACTIVE_DISTANCE 25.0
 #define FADE_DISTANCE 200.0f
@@ -68,44 +71,59 @@
             
             CGFloat fadeDistance = ((normalizedDistance - ACTIVE_DISTANCE) / FADE_DISTANCE) * 1.8;
             
-            
-            // == Equation takes the distance and changes it into a angle
-            
-            double angle = sqrt( abs(distance))*7.5;
-            
-            double radians = (angle / 180) * M_PI;
-            
+            long radius = 60;
             
             if (distance<0) {
-                // == Bottom Half of the wheel
                 
+                CATransform3D translateToMiddle = CATransform3DMakeTranslation(0, distance, 0);
                 
-                radians*=-1;
+                CATransform3D translateToOut = CATransform3DMakeTranslation(0, 0, -radius);
+                
                 CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
                 rotationAndPerspectiveTransform.m34 = 1.0 / -2000;
-                rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, radians, 1.0f, 0.0f, 0.0f);
+                rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, atan(distance/60), 1.0f, 0.0f, 0.0f);
                 
-                attributes.transform3D = rotationAndPerspectiveTransform;
-
+                CATransform3D translateBackIn = CATransform3DMakeTranslation(0, 0, radius);
+                
+                CATransform3D translateToOriginal = CATransform3DMakeTranslation(0, -distance, 0);
+                
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToOriginal);
+                //
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateBackIn);
+                //
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, rotationAndPerspectiveTransform);
+                //
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToOut);
+                
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToMiddle);
+                
             } else {
-            // == Top half
+                // == Top half
                 
-                if (radians>1.45) {
-                    radians = 1.571;
-                }
-            
-            CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
-            rotationAndPerspectiveTransform.m34 = 1.0 / -2000;
-            rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, radians, 1.0f, 0.0f, 0.0f);
-            
+                CATransform3D translateToMiddle = CATransform3DMakeTranslation(0, distance, 0);
                 
-                // x and y seem to work but not z
-            CATransform3D tranlate = CATransform3DTranslate(rotationAndPerspectiveTransform, 0.0f, 0.0f, 0.0f);
-            
-                attributes.transform3D = tranlate;
+                CATransform3D translateToOut = CATransform3DMakeTranslation(0, 0, -radius);
+                
+                CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
+                rotationAndPerspectiveTransform.m34 = 1.0 / -2000;
+                rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, atan(distance/radius), 1.0f, 0.0f, 0.0f);
+                
+                CATransform3D translateBackIn = CATransform3DMakeTranslation(0, 0, radius);
+
+                CATransform3D translateToOriginal = CATransform3DMakeTranslation(0, -distance, 0);
+                
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToOriginal);
+                
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateBackIn);
+                
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, rotationAndPerspectiveTransform);
+                
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToOut);
+                
+                attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToMiddle);
             }
+            attributes.alpha = 1 - fadeDistance;
             
-            attributes.alpha = 1 - fadeDistance ;
         }
     }
     

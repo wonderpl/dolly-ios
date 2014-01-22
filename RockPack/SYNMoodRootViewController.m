@@ -19,7 +19,7 @@
 
 
 #define LARGE_AMOUNT_OF_ROWS 10000
-#define WATCH_BUTTON_ANIMATION_TIME 1.5f
+#define WATCH_BUTTON_ANIMATION_TIME 0.8f
 
 @interface SYNMoodRootViewController ()
 @property (strong, nonatomic) IBOutlet UIPickerView *defaultPicker;
@@ -79,35 +79,29 @@
     
 //TODO: animate the initial scrolling
     
-//    int randomRow = arc4random() % 10;
-//
-//    NSLog(@"rand : %d", randomRow);
-//
-//    
-//    [UIView animateWithDuration:3.0f animations:^{
-//        
-//        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForRow:randomRow inSection:0]
-//                                        atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-//                                                animated:YES];
-//
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-    
-    double tmp = arc4random() % 1000+500;
-    
-    //the delay time for the picker animation
-    float delay = 0.35f;
-    
-    // no way to extend the animation time of the default picker
-    // so chained together to animate longer
-    
-    [self performSelector:@selector(spinAnimationWithRow:) withObject:@100 afterDelay:delay];
-    [self performSelector:@selector(spinAnimationWithRow:) withObject:@200 afterDelay:delay*2];
-    [self performSelector:@selector(spinAnimationWithRow:) withObject:[NSNumber numberWithLong:tmp] afterDelay:delay*3];
+    double randomRow = arc4random() % 1000+500;
 
-    // show watch button after the final spin
-    [self performSelector:@selector(showWatchButton) withObject:[NSNumber numberWithLong:tmp] afterDelay:delay*4];
+    NSLog(@"rand : %f", randomRow);
+
+    
+        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForRow:randomRow inSection:0]
+                                        atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+                                                animated:YES];
+
+    
+//
+//    //the delay time for the picker animation
+//    float delay = 0.35f;
+//    
+//    // no way to extend the animation time of the default picker
+//    // so chained together to animate longer
+//    
+//    [self performSelector:@selector(spinAnimationWithRow:) withObject:@100 afterDelay:delay];
+//    [self performSelector:@selector(spinAnimationWithRow:) withObject:@200 afterDelay:delay*2];
+//    [self performSelector:@selector(spinAnimationWithRow:) withObject:[NSNumber numberWithLong:tmp] afterDelay:delay*3];
+//
+//    // show watch button after the final spin
+//    [self performSelector:@selector(showWatchButton) withObject:[NSNumber numberWithLong:randomRow] afterDelay:delay*4];
 }
 
 
@@ -132,7 +126,7 @@
     self.moods = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest
                                                                      error:&error];
     if(self.moods == 0) {
-        
+        //TODO: No moods what do??
     }
     
     [self.moodCollectionView reloadData];
