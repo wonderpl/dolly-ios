@@ -72,7 +72,11 @@
     }
     
     self.descriptionLabel.text = recomendation.descriptionText;
-
+    
+    if ([self.descriptionLabel.text isEqualToString:@""]) {
+        self.descriptionLabel.text = @"Test Description ----------------dddddddddddaaaaaaa";
+    }
+    
     [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]
                               forState: UIControlStateNormal
                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
