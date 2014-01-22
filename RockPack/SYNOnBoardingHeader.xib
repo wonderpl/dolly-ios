@@ -33,13 +33,23 @@
                     <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A7E-PI-M6R" userLabel="View - Bottom border">
+                    <rect key="frame" x="0.0" y="107" width="980" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="A7E-PI-M6R" firstAttribute="leading" secondItem="Imy-BM-GLl" secondAttribute="leading" id="32R-tf-iMw"/>
                 <constraint firstAttribute="centerX" secondItem="4B7-Fl-WtH" secondAttribute="centerX" id="60u-kA-jYe"/>
+                <constraint firstAttribute="centerX" secondItem="A7E-PI-M6R" secondAttribute="centerX" id="6qy-b9-zPc"/>
                 <constraint firstAttribute="centerX" secondItem="Pj8-bT-0Do" secondAttribute="centerX" id="HPn-zR-QEp"/>
+                <constraint firstAttribute="trailing" secondItem="A7E-PI-M6R" secondAttribute="trailing" id="LbC-Ju-QmK"/>
+                <constraint firstAttribute="bottom" secondItem="A7E-PI-M6R" secondAttribute="bottom" id="M2j-6o-jXm"/>
                 <constraint firstItem="4B7-Fl-WtH" firstAttribute="top" secondItem="Imy-BM-GLl" secondAttribute="top" constant="37" id="dgt-sm-GAB"/>
                 <constraint firstItem="Pj8-bT-0Do" firstAttribute="top" secondItem="Imy-BM-GLl" secondAttribute="top" constant="11" id="vqR-5M-nvM"/>
+                <constraint firstAttribute="centerY" secondItem="A7E-PI-M6R" secondAttribute="centerY" constant="-53.5" id="wpY-b3-yC3"/>
             </constraints>
             <connections>
                 <outlet property="textLabel" destination="4B7-Fl-WtH" id="HaP-ve-vKi"/>

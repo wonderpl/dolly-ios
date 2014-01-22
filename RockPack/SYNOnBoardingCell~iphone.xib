@@ -45,10 +45,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" id="juX-I0-BR1" userLabel="Border">
-                        <rect key="frame" x="0.0" y="77" width="320" height="1"/>
+                    <view contentMode="scaleToFill" id="1Ka-kP-S0e" userLabel="Top Border">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -56,7 +56,6 @@
             <size key="customSize" width="332" height="73"/>
             <connections>
                 <outlet property="avatarButton" destination="Rhf-2u-7gT" id="fIP-rF-piu"/>
-                <outlet property="bottomBorderView" destination="juX-I0-BR1" id="BmY-Mx-3i2"/>
                 <outlet property="descriptionLabel" destination="x0p-6l-BAu" id="iLO-qh-7vx"/>
                 <outlet property="followButton" destination="xUG-Xx-LHN" id="rkR-gU-s7i"/>
                 <outlet property="nameLabel" destination="ct3-5L-Zdd" id="G3i-Uz-NlJ"/>
