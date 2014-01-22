@@ -67,7 +67,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="wDy-8E-6PT">
-                        <barButtonItem key="rightBarButtonItem" title="Close" id="cJt-qu-Ann">
+                        <barButtonItem key="rightBarButtonItem" title="close" id="cJt-qu-Ann">
                             <connections>
                                 <action selector="closeButtonPressed:" destination="O4s-kn-sYz" id="lcc-fI-OSS"/>
                             </connections>
