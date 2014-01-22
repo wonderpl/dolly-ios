@@ -125,6 +125,13 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     }
 
+    
+    if (!IS_IPHONE_5) {
+        UIEdgeInsets tmpInsets = self.collectionView.contentInset;
+        tmpInsets.bottom += 88;
+        [self.collectionView setContentInset: tmpInsets];
+    }
+
 }
 
 - (void) getRecommendationsFromRemote {
