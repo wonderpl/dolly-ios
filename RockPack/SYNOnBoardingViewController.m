@@ -381,6 +381,11 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         
     } completion:^(BOOL finished) {
         
+        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                            object: self
+                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
+
+        
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
         
