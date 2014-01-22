@@ -189,7 +189,7 @@
 												  NSArray *videoInstances = response[@"videos"][@"items"];
 												  NSArray *videoInstanceIds = [videoInstances valueForKey:@"id"];
 												  
-                                                  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[VideoInstance entityName]];
+                                                  NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[VideoInstance entityName]];
 												  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueId IN %@", videoInstanceIds];
 												  [fetchRequest setPredicate:predicate];
                                                   
