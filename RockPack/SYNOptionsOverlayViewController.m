@@ -113,6 +113,8 @@ typedef enum {
 -(void)optionButtonPressed:(UIButton*)buttonPressed
 {
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
+	
+	UIViewController *parentViewController = self.parentViewController;
     
     switch (buttonPressed.tag)
     {
@@ -231,20 +233,17 @@ typedef enum {
             
         case OptionButtonTagBlog:
         {
-            // go to the blog section on rockpack.com
-            self.completeBlock = ^{
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://blog.rockpack.com/"]];
-            };
+			NSURL *URL = [NSURL URLWithString:@"http://blog.wonderpl.com/"];
+			UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+			[parentViewController presentViewController:viewController animated:YES completion:nil];
         }
         break;
             
         case OptionButtonTagHelp:
         {
-            // go to the help section on rockpack.com
-            self.completeBlock = ^{
-                
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://help.rockpack.com/"]];
-            };
+			NSURL *URL = [NSURL URLWithString:@"http://help.wonderpl.com/"];
+			UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+			[parentViewController presentViewController:viewController animated:YES completion:nil];
         }
         break;
             
@@ -256,12 +255,9 @@ typedef enum {
             
         case OptionButtonTagHints:
         {
-            //TODO: go to hints webview
-            
-            NSURL *URL = [NSURL URLWithString:@"http://www.google.com"];
+            NSURL *URL = [NSURL URLWithString:@"http://wonderpl.com/hints"];
             UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
-            [self presentViewController:viewController animated:YES completion:nil];
-
+            [parentViewController presentViewController:viewController animated:YES completion:nil];
         }
             
     }
