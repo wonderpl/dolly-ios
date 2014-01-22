@@ -71,6 +71,8 @@
             
             CGFloat fadeDistance = ((normalizedDistance - ACTIVE_DISTANCE) / FADE_DISTANCE) * 1.8;
             
+            
+            //Radius of the centre of the circle on the Z axis
             long radius = 60;
             
             if (distance<0) {
@@ -81,18 +83,18 @@
                 
                 CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
                 rotationAndPerspectiveTransform.m34 = 1.0 / -2000;
-                rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, atan(distance/60), 1.0f, 0.0f, 0.0f);
+                rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, atan(distance/radius), 1.0f, 0.0f, 0.0f);
                 
                 CATransform3D translateBackIn = CATransform3DMakeTranslation(0, 0, radius);
                 
                 CATransform3D translateToOriginal = CATransform3DMakeTranslation(0, -distance, 0);
                 
                 attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToOriginal);
-                //
+                
                 attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateBackIn);
-                //
+            
                 attributes.transform3D = CATransform3DConcat(attributes.transform3D, rotationAndPerspectiveTransform);
-                //
+                
                 attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToOut);
                 
                 attributes.transform3D = CATransform3DConcat(attributes.transform3D, translateToMiddle);
