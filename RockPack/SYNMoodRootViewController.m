@@ -76,31 +76,7 @@
         //TODO: need to move views for 3.5
     }
     
-//TODO: animate the initial scrolling
     
-    double randomRow = arc4random() % 1000+500;
-
-    NSLog(@"rand : %f", randomRow);
-
-    
-        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForRow:randomRow inSection:0]
-                                        atScrollPosition:UICollectionViewScrollPositionCenteredVertically
-                                                animated:YES];
-
-    
-//
-//    //the delay time for the picker animation
-//    float delay = 0.35f;
-//    
-//    // no way to extend the animation time of the default picker
-//    // so chained together to animate longer
-//    
-//    [self performSelector:@selector(spinAnimationWithRow:) withObject:@100 afterDelay:delay];
-//    [self performSelector:@selector(spinAnimationWithRow:) withObject:@200 afterDelay:delay*2];
-//    [self performSelector:@selector(spinAnimationWithRow:) withObject:[NSNumber numberWithLong:tmp] afterDelay:delay*3];
-//
-//    // show watch button after the final spin
-//    [self performSelector:@selector(showWatchButton) withObject:[NSNumber numberWithLong:randomRow] afterDelay:delay*4];
 }
 
 
