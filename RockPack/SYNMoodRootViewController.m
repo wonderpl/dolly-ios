@@ -170,8 +170,8 @@
     
     // Hides the 2 lines in the default picker
     
-    [[self.defaultPicker.subviews objectAtIndex:1] setHidden:TRUE];
-    [[self.defaultPicker.subviews objectAtIndex:2] setHidden:TRUE];
+    [[self.defaultPicker.subviews objectAtIndex:1] setHidden:YES];
+    [[self.defaultPicker.subviews objectAtIndex:2] setHidden:YES];
 
 }
 
