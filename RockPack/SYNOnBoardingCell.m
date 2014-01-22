@@ -71,22 +71,8 @@
         [self.subGenreLabel setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
     }
     
-    if([recomendation.descriptionText isEqualToString:@""]) // there is no description
-    {
-        // == squash the tet fields down when we have no text == //
-        
-        self.nameLabel.center = CGPointMake(self.nameLabel.center.x, self.nameLabel.center.y + 14.0f);
-        
-        self.subGenreLabel.center = CGPointMake(self.subGenreLabel.center.x, self.subGenreLabel.center.y - 14.0f);
-        
-        self.descriptionLabel.hidden = YES;
-    }
-    else
-    {
-        self.descriptionLabel.text = recomendation.descriptionText;
-    }
-    
-    
+    self.descriptionLabel.text = recomendation.descriptionText;
+
     [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]
                               forState: UIControlStateNormal
                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]

@@ -139,8 +139,6 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
                                                   if(![responce isKindOfClass:[NSDictionary class]])
                                                       return;
                                                   
-                                                  NSLog(@"Onboarding response :%@", responce);
-                                                  
                                                   self.spinner.hidden = YES;
                                                   
                                                   if(![appDelegate.searchRegistry registerRecommendationsFromDictionary:responce])
@@ -207,7 +205,8 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         for (int i = 0; i<tmpData.count; i++) {
             Recomendation *tmpRecomendation = [tmpData objectAtIndex:i];
             
-            if ([tmpRecomendation.categoryId isEqualToString:tmpGenre[@"uniqueId"]]) {
+            SubGenre* subgenre = self.subgenresByIdString[tmpRecomendation.categoryId];
+            if ([subgenre.genre.name isEqualToString:tmpGenre[@"name"]]) {
                 
                 [tmpArr addObject:tmpRecomendation];
                 [tmpData removeObject:tmpRecomendation];
@@ -228,7 +227,6 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         [self.usersByCategory addObject:tmpArr];
     }
     
-    NSLog(@"self.usersByCategory :%@", self.usersByCategory);
     [self.collectionView reloadData];
 }
 
@@ -271,9 +269,10 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
     
-    
-    cell.subGenreLabel.text = subgenre.genre.name;
-    
+    if (IS_IPAD) {
+        cell.subGenreLabel.text = subgenre.genre.name;
+    }
+        
     cell.delegate = self;
     
     return cell;
@@ -330,10 +329,17 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                                    withReuseIdentifier: OnBoardingSectionHeader
                                                                           forIndexPath: indexPath];
+            Recomendation* recomendation = (Recomendation*)self.usersByCategory[indexPath.section-1][indexPath.row];
+
+            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
             
-            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:((Recomendation*)[((NSArray*)[self.usersByCategory objectAtIndex:indexPath.section-1]) objectAtIndex:indexPath.row]).categoryId]];
+            SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
+
             
-            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:[self.categories objectAtIndex:indexPath.section-1]];
+            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:subgenre.genre.name];
+            
+            
+            
         }
         
         
