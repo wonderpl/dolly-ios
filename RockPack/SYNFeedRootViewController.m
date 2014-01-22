@@ -1,4 +1,4 @@
-    //
+//
 //  SYNHomeTopTabViewController.m
 //  rockpack
 //
@@ -76,7 +76,6 @@ typedef void(^FeedDataErrorBlock)(void);
     [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
                    withLoader: YES];
 
-    // Register XIBs for Cell
     [self.feedCollectionView registerNib:[SYNAggregateVideoCell nib]
               forCellWithReuseIdentifier:[SYNAggregateVideoCell reuseIdentifier]];
     

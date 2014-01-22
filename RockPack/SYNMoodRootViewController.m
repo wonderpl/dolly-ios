@@ -13,10 +13,9 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 #import "Mood.h"
+#import "VideoInstance.h"
 #import "UINavigationBar+Appearance.h"
 #import "UIColor+SYNColor.h"
-#include <stdlib.h>
-
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 #define WATCH_BUTTON_ANIMATION_TIME 0.8f
@@ -164,8 +163,8 @@
     
     // Hides the 2 lines in the default picker
     
-    [[self.defaultPicker.subviews objectAtIndex:1] setHidden:TRUE];
-    [[self.defaultPicker.subviews objectAtIndex:2] setHidden:TRUE];
+    [[self.defaultPicker.subviews objectAtIndex:1] setHidden:YES];
+    [[self.defaultPicker.subviews objectAtIndex:2] setHidden:YES];
 
 }
 
@@ -174,17 +173,17 @@
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
                                                          params: @{@"mood":self.currentMood.uniqueId}
-                                              completionHandler: ^(id responce) {
+                                              completionHandler: ^(id response) {
                                                   
-                                                  if(![responce isKindOfClass:[NSDictionary class]])
+                                                  if(![response isKindOfClass:[NSDictionary class]])
                                                       return;
                                                   
-                                                  if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:responce
+                                                  if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:response
                                                                                                             withViewId:self.viewId])
                                                       return;
                                                   
                                                   
-                                                  NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:kVideoInstance];
+                                                  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[VideoInstance entityName]];
                                                   
                                                   NSError* error;
                                                   
