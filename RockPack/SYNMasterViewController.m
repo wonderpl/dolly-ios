@@ -21,6 +21,7 @@
 #import "SYNGenreColorManager.h"
 #import "Genre.h"
 #import "SubGenre.h"
+#import "SYNLoginManager.h"
 
 @import QuartzCore;
 
@@ -129,21 +130,24 @@
         // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
     
         self.containerViewController.view = self.containerView;
+      
+        //Check if the user registed and then show onboarding screen
+        if ([SYNLoginManager sharedManager].registrationCheck == YES) {
         
-        
-        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsSeenOnBoarding]) // IS first install
-        {
             
             SYNOnBoardingViewController* onBoardingViewController = [[SYNOnBoardingViewController alloc] init];
             [self addChildViewController:onBoardingViewController];
             
             onBoardingViewController.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
             
-             [self.view addSubview:onBoardingViewController.view];
-            
-             [[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsSeenOnBoarding];
-            
+            [self.view addSubview:onBoardingViewController.view];
+            [SYNLoginManager sharedManager].registrationCheck = NO;
         }
+        
+        
+
+        
+        
         
     }];
     

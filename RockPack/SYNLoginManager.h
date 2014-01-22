@@ -11,6 +11,8 @@
 
 @interface SYNLoginManager : NSObject
 
+@property (nonatomic, assign) BOOL registrationCheck;
+
 + (instancetype)sharedManager;
 
 - (void)loginThroughFacebookWithCompletionHandler:(MKNKJSONCompleteBlock)completionBlock

@@ -330,7 +330,9 @@
 		
 		[[SYNLoginManager sharedManager] registerUserWithData: userData
 											completionHandler: ^(NSDictionary *dictionary) {
-												
+                                                //Onboarding registration check
+                                                [SYNLoginManager sharedManager].registrationCheck = YES;
+
 												if (self.avatarImage) {
 													[self uploadAvatar:self.avatarImage];
 												}
