@@ -170,10 +170,14 @@
 
 #pragma mark - Control Callbacks
 - (IBAction)watchButtonTapped:(id)sender {
+	__weak typeof(self) weakSelf = self;
+	
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
                                                          params: @{@"mood":self.currentMood.uniqueId}
                                               completionHandler: ^(id response) {
+												  
+												  __strong typeof(self) strongSelf = weakSelf;
                                                   
                                                   if(![response isKindOfClass:[NSDictionary class]])
                                                       return;
@@ -181,26 +185,26 @@
                                                   if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:response
                                                                                                             withViewId:self.viewId])
                                                       return;
-                                                  
-                                                  
+												  
+												  NSArray *videoInstances = response[@"videos"][@"items"];
+												  NSArray *videoInstanceIds = [videoInstances valueForKey:@"id"];
+												  
                                                   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[VideoInstance entityName]];
+												  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueId IN %@", videoInstanceIds];
+												  [fetchRequest setPredicate:predicate];
                                                   
-                                                  NSError* error;
-                                                  
-                                                  NSArray* videosArray = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest
-                                                                                                             error:&error];
-                                                  
-                                                  
-                                                  if(videosArray.count == 0) {
+                                                  NSArray* videosArray = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest
+                                                                                                             error:NULL];
+												  
+                                                  if (![videosArray count]) {
                                                       // implement
                                                   }
-                                                  
-                                                  UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:videosArray selectedIndex:0];
-                                                  
-                                                  [self presentViewController:viewController animated:YES completion:nil];
-                                                  
+												  
+												  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
+												  
+                                                  UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
+                                                  [strongSelf presentViewController:viewController animated:YES completion:nil];
                                               } errorHandler:^(id error) {
-                                                  
                                                   
                                               }];
 }
@@ -386,5 +390,17 @@
     return tmpLabel;
 }
 
+- (NSArray *)sortedVideoInstances:(NSArray *)videoInstances inIdOrder:(NSArray *)videoInstanceIds {
+	NSMutableArray *sortedVideoInstances = [NSMutableArray array];
+	
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:videoInstances
+														   forKeys:[videoInstances valueForKey:@"uniqueId"]];
+	
+	for (NSString *videoInstanceId in videoInstanceIds) {
+		[sortedVideoInstances addObject:dictionary[videoInstanceId]];
+	}
+	
+	return sortedVideoInstances;
+}
 
 @end
