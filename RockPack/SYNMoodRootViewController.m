@@ -13,10 +13,9 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 #import "Mood.h"
+#import "VideoInstance.h"
 #import "UINavigationBar+Appearance.h"
 #import "UIColor+SYNColor.h"
-#include <stdlib.h>
-
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 #define WATCH_BUTTON_ANIMATION_TIME 1.5f
@@ -180,17 +179,17 @@
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
                                                          params: @{@"mood":self.currentMood.uniqueId}
-                                              completionHandler: ^(id responce) {
+                                              completionHandler: ^(id response) {
                                                   
-                                                  if(![responce isKindOfClass:[NSDictionary class]])
+                                                  if(![response isKindOfClass:[NSDictionary class]])
                                                       return;
                                                   
-                                                  if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:responce
+                                                  if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:response
                                                                                                             withViewId:self.viewId])
                                                       return;
                                                   
                                                   
-                                                  NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:kVideoInstance];
+                                                  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[VideoInstance entityName]];
                                                   
                                                   NSError* error;
                                                   
