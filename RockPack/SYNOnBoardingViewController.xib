@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNOnBoardingViewController">
             <connections>
                 <outlet property="collectionView" destination="mhE-ZL-YwO" id="dld-MZ-TIA"/>
-                <outlet property="navigationRightLabel" destination="ywf-aW-gkn" id="sZV-38-JG5"/>
                 <outlet property="navigationTitleLabel" destination="F0G-sW-nXM" id="LoR-1N-oDO"/>
                 <outlet property="spinner" destination="kHx-SZ-Omg" id="9zB-DH-xm2"/>
                 <outlet property="view" destination="2" id="3"/>
@@ -28,11 +27,11 @@
                     <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AW9-nx-I3h">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="AW9-nx-I3h">
                         <size key="itemSize" width="256" height="256"/>
                         <size key="headerReferenceSize" width="1024" height="108"/>
                         <size key="footerReferenceSize" width="1" height="76"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="sectionInset" minX="100" minY="10" maxX="100" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -61,25 +60,10 @@
                             <nil key="highlightedColor"/>
                             <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywf-aW-gkn">
-                            <rect key="frame" x="943" y="27" width="61" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="iEd-hU-jze"/>
-                                <constraint firstAttribute="width" constant="61" id="w7j-JZ-1Nb"/>
-                            </constraints>
-                            <state key="normal" title="2 More">
-                                <color key="titleColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="ywf-aW-gkn" secondAttribute="trailing" constant="20" id="4W7-Dv-qmx"/>
                         <constraint firstItem="F0G-sW-nXM" firstAttribute="top" secondItem="1pg-bZ-cqe" secondAttribute="top" constant="31" id="CT4-Fx-cAm"/>
-                        <constraint firstItem="ywf-aW-gkn" firstAttribute="top" secondItem="1pg-bZ-cqe" secondAttribute="top" constant="27" id="TsP-85-nu8"/>
                         <constraint firstAttribute="height" constant="65" id="ZYC-Wm-s5L"/>
                         <constraint firstAttribute="centerX" secondItem="F0G-sW-nXM" secondAttribute="centerX" id="oGc-rv-Zmh"/>
                     </constraints>

@@ -8,7 +8,7 @@
 
 #import "SYNOnBoardingFooter.h"
 #import "UIFont+SYNFont.h"
-
+#import "UIColor+SYNColor.h"
 @implementation SYNOnBoardingFooter
 
 -(void)awakeFromNib
@@ -18,8 +18,11 @@
     
     self.skipButton.layer.borderWidth = 1.0;
     self.skipButton.layer.borderColor = [UIColor colorWithRed:(188.0f/255.0f) green:(186.0f/255.0f) blue:(212.0f/255.0f) alpha:1.0f].CGColor;
-    self.skipButton.layer.cornerRadius = 8.0f;
+    self.skipButton.layer.cornerRadius = 15.5f;
     
+    [self.border.layer setBorderColor:[UIColor colorWithRed:(188.0f/255.0f) green:(186.0f/255.0f) blue:(212.0f/255.0f) alpha:1.0f].CGColor];
+    [self.border.layer setBorderWidth:1.0f];
+
 }
 
 

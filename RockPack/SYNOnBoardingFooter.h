@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SYNOnBoardingFooter : UICollectionReusableView
+@property (strong, nonatomic) IBOutlet UIView *border;
 
 @property (nonatomic, strong) IBOutlet UIButton* skipButton;
 

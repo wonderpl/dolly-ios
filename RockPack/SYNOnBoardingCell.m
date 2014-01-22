@@ -10,6 +10,7 @@
 #import "UIButton+WebCache.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SYNGenreColorManager.h"
 
 @implementation SYNOnBoardingCell
 
@@ -47,6 +48,7 @@
     rect = self.subGenreLabel.frame;
     rect.origin = subGenreLabelOrigin;
     self.subGenreLabel.frame = rect;
+    [self.subGenreLabel setBackgroundColor:[UIColor clearColor]];
     
     self.descriptionLabel.hidden = NO;
 }
@@ -63,7 +65,11 @@
     
     self.nameLabel.text = recomendation.displayName;
     
-    recomendation.descriptionText = @"Superstar chat-show host. American TV host. Richer than you.";
+    recomendation.descriptionText = recomendation.descriptionText;
+    
+    if (IS_IPAD) {
+        [self.subGenreLabel setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
+    }
     
     if([recomendation.descriptionText isEqualToString:@""]) // there is no description
     {

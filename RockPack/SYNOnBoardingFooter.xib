@@ -10,18 +10,23 @@
             <rect key="frame" x="0.0" y="0.0" width="464" height="76"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2O-oG-nNw" userLabel="View - Boarder">
+                    <rect key="frame" x="0.0" y="0.0" width="464" height="76"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMy-0Y-9JM" userLabel="Login UIButton">
-                    <rect key="frame" x="191" y="22" width="82" height="36"/>
+                    <rect key="frame" x="170" y="22" width="124" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                     <accessibility key="accessibilityConfiguration" label="Login Navigation"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="RMA-Po-rhz"/>
-                        <constraint firstAttribute="width" constant="82" id="wdc-pa-d6Z"/>
+                        <constraint firstAttribute="width" constant="124" id="wdc-pa-d6Z"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Next">
+                    <state key="normal" title="Continue">
                         <color key="titleColor" red="0.73725490199999999" green="0.73333333329999995" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -35,10 +40,17 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="centerY" secondItem="G2O-oG-nNw" secondAttribute="centerY" id="HCU-OK-uqX"/>
+                <constraint firstAttribute="centerX" secondItem="G2O-oG-nNw" secondAttribute="centerX" id="HMj-A9-EPj"/>
+                <constraint firstAttribute="trailing" secondItem="G2O-oG-nNw" secondAttribute="trailing" id="MIm-v9-uwv"/>
+                <constraint firstItem="G2O-oG-nNw" firstAttribute="top" secondItem="hyq-WX-iiS" secondAttribute="top" id="MMJ-Yx-Ldq"/>
+                <constraint firstAttribute="bottom" secondItem="G2O-oG-nNw" secondAttribute="bottom" id="O0w-Mj-uhr"/>
+                <constraint firstItem="G2O-oG-nNw" firstAttribute="leading" secondItem="hyq-WX-iiS" secondAttribute="leading" id="Utq-vL-cFc"/>
                 <constraint firstAttribute="centerX" secondItem="aMy-0Y-9JM" secondAttribute="centerX" id="diM-r9-jvj"/>
                 <constraint firstItem="aMy-0Y-9JM" firstAttribute="top" secondItem="hyq-WX-iiS" secondAttribute="top" constant="22" id="t9l-B1-4wk"/>
             </constraints>
             <connections>
+                <outlet property="border" destination="G2O-oG-nNw" id="2pC-rj-Gk4"/>
                 <outlet property="skipButton" destination="aMy-0Y-9JM" id="jzt-v6-fru"/>
             </connections>
         </collectionReusableView>
