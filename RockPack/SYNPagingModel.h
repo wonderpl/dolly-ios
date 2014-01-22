@@ -19,7 +19,6 @@
 
 @interface SYNPagingModel : NSObject
 
-@property (nonatomic, assign, readonly) NSInteger batchSize;
 @property (nonatomic, assign, readonly) NSRange loadedRange;
 
 @property (nonatomic, assign, readonly) NSInteger itemCount;
