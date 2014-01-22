@@ -18,7 +18,7 @@
 #import "UIColor+SYNColor.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
-#define WATCH_BUTTON_ANIMATION_TIME 0.8f
+#define WATCH_BUTTON_ANIMATION_TIME 0.4
 
 @interface SYNMoodRootViewController ()
 @property (strong, nonatomic) IBOutlet UIPickerView *defaultPicker;
