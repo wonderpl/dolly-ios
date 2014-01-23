@@ -151,21 +151,18 @@
 {
     self.cancelButton = [UIButton buttonWithType: UIButtonTypeCustom];
     
-    [self.cancelButton setBackgroundImage: [UIImage imageNamed: @"ButtonCancel~iphone.png"]
-                                 forState: UIControlStateNormal];
-    
-    [self.cancelButton setBackgroundImage: [UIImage imageNamed: @"ButtonCancelHighlighted~iphone.png"]
-                                 forState: UIControlStateHighlighted];
-    
-    [[self.cancelButton titleLabel] setFont: [UIFont regularCustomFontOfSize: 11.0]];
+    [[self.cancelButton titleLabel] setFont: [UIFont regularCustomFontOfSize: 17.0f]];
     [[self.cancelButton titleLabel] setShadowOffset: CGSizeMake(0, 1)];
-    [self.cancelButton setFrame: CGRectMake(0, 0, 48, 49)];
+    [self.cancelButton setFrame: CGRectMake(0, 0, 65, 49)];
     
-    [self.cancelButton  setTitle: nil
+    [self.cancelButton  setTitle: @"cancel"
                         forState: UIControlStateNormal];
     
-    [self.cancelButton setTitleShadowColor: [UIColor colorWithRed: 0.827 green: 0.831 blue: 0.839 alpha: 1]
-                                  forState: UIControlStateNormal];
+    [self.cancelButton.titleLabel setTextColor: [UIColor colorWithRed: 34.0f / 255.0f
+                                                             green: 135.0f / 255.0f
+                                                              blue: 255.0f / 255.0f
+                                                             alpha: 1.0f]];
+    
     
     [self.cancelButton addTarget: self
                           action: @selector(_actionCancel)
@@ -177,21 +174,18 @@
 {
     self.useButton = [UIButton buttonWithType: UIButtonTypeCustom];
     
-    [self.useButton setBackgroundImage: [UIImage imageNamed: @"ButtonConfirmYellow~iphone.png"]
-                              forState: UIControlStateNormal];
     
-    [self.useButton setBackgroundImage: [UIImage imageNamed: @"ButtonConfirmYellowHighlighted~iphone.png"]
-                              forState: UIControlStateHighlighted];
-    
-    [[self.useButton titleLabel] setFont: [UIFont regularCustomFontOfSize: 11]];
+    [[self.useButton titleLabel] setFont: [UIFont regularCustomFontOfSize: 17.0f]];
     [[self.useButton titleLabel] setShadowOffset: CGSizeMake(0, -1)];
     [self.useButton setFrame: CGRectMake(0, 0, 48, 49)];
     
-    [self.useButton setTitle: nil
+    [self.useButton setTitle: @"use"
                     forState: UIControlStateNormal];
     
-    [self.useButton setTitleShadowColor: [UIColor colorWithRed: 0.118 green: 0.247 blue: 0.455 alpha: 1]
-                               forState: UIControlStateNormal];
+    [self.useButton.titleLabel setTextColor: [UIColor colorWithRed: 34.0f / 255.0f
+                                                                green: 135.0f / 255.0f
+                                                                 blue: 255.0f / 255.0f
+                                                                alpha: 1.0f]];
     
     [self.useButton addTarget: self
                        action: @selector(_actionUse)
