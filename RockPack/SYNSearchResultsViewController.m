@@ -116,7 +116,7 @@ typedef void (^SearchResultCompleteBlock)(int);
         wself.videosArray = [NSArray arrayWithArray: fetchedObjects];
         
         // protection from being called twice, one for every tab and making the loader dissapear prematurely
-        if (wself.searchResultsShowing == SearchResultsShowingVideos)
+//        if (wself.searchResultsShowing == SearchResultsShowingVideos)
             [wself removePopupMessage];
         
         wself.loadingMoreContent = NO;
@@ -132,6 +132,8 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.userSearchCompleteBlock = ^(int count) {
         NSArray *fetchedObjects = [wself getSearchEntitiesByName:[ChannelOwner entityName]];
         
+        
+        
         if (!fetchedObjects) {
             // handle error
             return;
@@ -140,7 +142,7 @@ typedef void (^SearchResultCompleteBlock)(int);
         wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
         
         // protection from being called twice, one for every tab and making the loader dissapear prematurely
-        if (wself.searchResultsShowing == SearchResultsShowingUsers)
+//        if (wself.searchResultsShowing == SearchResultsShowingUsers)
             [wself removePopupMessage];
         
         wself.loadingMoreContent = NO;

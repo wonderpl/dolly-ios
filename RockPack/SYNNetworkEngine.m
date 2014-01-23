@@ -310,7 +310,7 @@
     parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
     
     SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPISearchUsers
+    (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIUsers
                                                        params: [self getLocaleParamWithParams:parameters]];
     networkOperation.shouldNotCacheResponse = YES;
     
@@ -521,6 +521,7 @@
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
         
+
         if (!dictionary)
         {
             return;

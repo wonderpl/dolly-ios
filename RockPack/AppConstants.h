@@ -91,6 +91,7 @@ typedef enum : NSInteger {
 #define kAPISearchVideos            @"/ws/search/videos/"
 #define kAPISearchChannels          @"/ws/search/channels/"
 #define kAPISearchUsers             @"/ws/search/users/"
+#define kAPIUsers                   @"/ws/users/"
 
 // User details
 #define kAPIGetUserDetails          @"/ws/USERID/"                              /* GET */
