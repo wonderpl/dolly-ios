@@ -51,6 +51,9 @@
     [self.subGenreLabel setBackgroundColor:[UIColor clearColor]];
     
     self.descriptionLabel.hidden = NO;
+    self.followButton.selected = NO;
+    self.followButton.userInteractionEnabled = YES;
+
 }
 
 - (void) setRecomendation:(Recomendation *)recomendation
@@ -74,7 +77,7 @@
     self.descriptionLabel.text = recomendation.descriptionText;
     
     if ([self.descriptionLabel.text isEqualToString:@""]) {
-        self.descriptionLabel.text = @"Test Description ----------------dddddddddddaaaaaaa";
+        self.descriptionLabel.text = @"Test Description ----------------d 123456";
     }
     
     [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]

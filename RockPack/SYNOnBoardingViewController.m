@@ -43,6 +43,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 
 
 @property (nonatomic, strong) NSMutableDictionary* subgenresByIdString;
+@property (nonatomic, strong) NSMutableDictionary* genresByIdString;
 
 @property (nonatomic, weak) UIButton* skipButton;
 
@@ -87,7 +88,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kSubGenre
+    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
     
@@ -100,18 +101,29 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     NSError* error;
     
-    NSArray* subGenresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
                                                                                          error: &error];
+
     
     // we hold subgenres only in a dictionary
     self.subgenresByIdString = @{}.mutableCopy;
+    self.genresByIdString = @{}.mutableCopy;
     
-    for (SubGenre* s in subGenresFetchedArray)
-    {
-        if(!s.uniqueId)
+    for (Genre* g in genresFetchedArray) {
+
+        if(!g.uniqueId)
             continue;
         
-        self.subgenresByIdString[s.uniqueId] = s;
+        self.genresByIdString[g.uniqueId] = g;
+
+        for (SubGenre* s in g.subgenres)
+        {
+            if(!s.uniqueId)
+                continue;
+            
+            self.subgenresByIdString[s.uniqueId] = s;
+        }
+
     }
     
     
@@ -145,7 +157,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
                                                   
                                                   if(![responce isKindOfClass:[NSDictionary class]])
                                                       return;
-                                                  
+
                                                   self.spinner.hidden = YES;
                                                   
                                                   if(![appDelegate.searchRegistry registerRecommendationsFromDictionary:responce])
@@ -174,18 +186,8 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
                                                                       error: &error];
     
     
+    NSFetchRequest *categoriesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Genre entityName]];
     
-    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-    
-    //Change to subgenre when the proper recomendations are up
-    //will greatly improve this
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
-                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
-    [categoriesFetchRequest setResultType:NSDictionaryResultType];
-    
-    [categoriesFetchRequest setReturnsDistinctResults:YES];
-    [categoriesFetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"uniqueId", @"priority", @"name", nil]];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
     
@@ -195,7 +197,6 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
                                                                                       error: &error];
     // == Gets the data from core data in order of priority and then adds its to the displayed data by that order aswell as groups users with common genres.
     
-        
     NSArray *genres = [NSArray arrayWithArray:genresFetchedArray];
     NSMutableArray *tmpData = [NSMutableArray arrayWithArray:self.data];
     
@@ -203,7 +204,8 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     NSString *tmpString = [[NSString alloc]init];
     
     
-    for (NSDictionary *tmpGenre in genres) {
+    
+    for (Genre *tmpGenre in genres) {
         tmpString = [[NSString alloc]init];
         if (IS_IPHONE) {
             tmpArr = [[NSMutableArray alloc]init];
@@ -213,14 +215,14 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             Recomendation *tmpRecomendation = [tmpData objectAtIndex:i];
             
             SubGenre* subgenre = self.subgenresByIdString[tmpRecomendation.categoryId];
-            if ([subgenre.genre.name isEqualToString:tmpGenre[@"name"]]) {
+            
+            if ([subgenre.genre.name isEqualToString:tmpGenre.name]) {
                 
                 [tmpArr addObject:tmpRecomendation];
                 [tmpData removeObject:tmpRecomendation];
                 i--;
-                tmpString = tmpGenre[@"name"];
+                tmpString = tmpGenre.name;
             }
-            
         }
         
         if (tmpArr.count>0 && IS_IPHONE) {
@@ -230,7 +232,18 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         }
     }
     
+
+    if (IS_IPHONE) {
+        [self.usersByCategory insertObject: tmpData atIndex:0];
+    }
+    
     if (IS_IPAD) {
+        // assuming the list is ordered in the backend
+        for (int i = tmpData.count; i>0; i--) {
+            Recomendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
+            [tmpArr insertObject:tmpRecomendation atIndex:0];
+        }
+        
         [self.usersByCategory addObject:tmpArr];
     }
     
@@ -274,12 +287,19 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     cell.recomendation = recomendation;
     
-    SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
+    if (self.genresByIdString[recomendation.categoryId]) {
+        Genre* genre = self.genresByIdString[recomendation.categoryId];
+        cell.subGenreLabel.text = genre.name;
+        
+        cell.followButton.selected = YES;
+        cell.followButton.userInteractionEnabled = NO;
+    }
     
-    if (IS_IPAD) {
+    if(self.subgenresByIdString[recomendation.categoryId]){
+        SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
         cell.subGenreLabel.text = subgenre.genre.name;
     }
-        
+
     cell.delegate = self;
     
     return cell;
@@ -340,12 +360,17 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 
             [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
             
-            SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
-
-            
-            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:subgenre.genre.name];
-            
-            
+            // special case for editors picks as its a genre not a subgenre
+            if (indexPath.section == 1) {
+                Genre* genre = self.genresByIdString[recomendation.categoryId];
+                
+                [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:genre.name];
+                
+            } else {
+                SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
+                
+                [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:subgenre.genre.name];
+            }
             
         }
         
