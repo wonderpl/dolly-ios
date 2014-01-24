@@ -25,10 +25,12 @@
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @property (nonatomic, strong) NSArray *moods;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topWatchConstraint;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
 @property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
 @property (strong, nonatomic) IBOutlet UIButton *watchButton;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topTitleConstraint;
 @property (nonatomic, readonly) Mood* currentMood;
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 @end
@@ -70,15 +72,22 @@
         self.defaultPicker.transform = CGAffineTransformScale(self.defaultPicker.transform, 1.0f, 1.10f);
     }
     
-    
-    
     if (!IS_IPHONE_5) {
         //TODO: need to move views for 3.5
-    }
+        self.topTitleConstraint.constant -= 24.0f;
+        self.topWatchConstraint.constant += 34.0f;
     
+    }
     
 }
 
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    
+    
+    
+}
 
 -(void) spinAnimationWithRow : (NSNumber*) row {
     [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:YES];
@@ -138,6 +147,7 @@
     }
     
     // Hides the 2 lines in the default picker
+
     
     [[self.defaultPicker.subviews objectAtIndex:1] setHidden:YES];
     [[self.defaultPicker.subviews objectAtIndex:2] setHidden:YES];
