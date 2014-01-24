@@ -24,6 +24,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 @property (nonatomic, strong) SYNVideoLoadingView *loadingView;
 
+@property (nonatomic, strong) UITapGestureRecognizer *maximiseMinimiseGestureRecognizer;
+
 @property (nonatomic, strong) SYNScrubberBar *scrubberBar;
 @property (nonatomic, strong) UIView *playerContainerView;
 @property (nonatomic, strong) NSTimer *progressUpdateTimer;
@@ -58,6 +60,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		[self addSubview:self.controlsFadeTapView];
 		[self addSubview:self.loadingView];
 		[self addSubview:self.scrubberBar];
+		
+		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
 	}
 	return self;
 }
@@ -159,18 +163,21 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	return _controlsFadeTapView;
 }
 
+- (UITapGestureRecognizer *)maximiseMinimiseGestureRecognizer {
+	if (!_maximiseMinimiseGestureRecognizer) {
+		UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+																						 action:@selector(maximiseMinimiseGestureRecognizerTapped:)];
+		gestureRecognizer.numberOfTapsRequired = 2;
+		
+		self.maximiseMinimiseGestureRecognizer = gestureRecognizer;
+	}
+	return _maximiseMinimiseGestureRecognizer;
+}
+
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
 	_videoInstance = videoInstance;
 	
 	self.loadingView.videoInstance = videoInstance;
-}
-
-- (BOOL)maximised {
-	return self.scrubberBar.fullScreen;
-}
-
-- (void)setMaximised:(BOOL)maximised {
-	self.scrubberBar.fullScreen = maximised;
 }
 
 - (void)play {
@@ -208,6 +215,10 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		
 		[self.delegate videoPlayerFinishedPlaying];
 	}
+}
+
+- (void)handleVideoPlayerResolutionChanged:(BOOL)highDefinition {
+	self.scrubberBar.highDefinition = highDefinition;
 }
 
 - (void)handleVideoPlayerError:(NSString *)errorString {
@@ -301,6 +312,16 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.scrubberBar.duration = self.duration;
 	self.scrubberBar.currentTime = self.currentTime;
 	self.scrubberBar.bufferingProgress = self.bufferingProgress;
+}
+
+- (void)maximiseMinimiseGestureRecognizerTapped:(UITapGestureRecognizer *)gestureRecognizer {
+	if (self.maximised) {
+		self.maximised = NO;
+		[self.delegate videoPlayerMinimise];
+	} else {
+		self.maximised = YES;
+		[self.delegate videoPlayerMaximise];
+	}
 }
 
 @end

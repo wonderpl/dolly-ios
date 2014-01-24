@@ -12,6 +12,7 @@
 
 - (void)handleVideoPlayerStartedPlaying;
 - (void)handleVideoPlayerFinishedPlaying;
+- (void)handleVideoPlayerResolutionChanged:(BOOL)highDefinition;
 - (void)handleVideoPlayerError:(NSString *)errorString;
 
 @end

@@ -1329,6 +1329,8 @@
 		E92CBAEE1887E29500A07070 /* SYNVideoPlayerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */; };
 		E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */; };
 		E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D335A184E239C0025D1DF /* SYNPagingModel.m */; };
+		E93122FB18916A43008ADBEB /* SYNTimestampView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93122FA18916A43008ADBEB /* SYNTimestampView.m */; };
+		E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93122FC18916A52008ADBEB /* SYNTimestampView.xib */; };
 		E93C7F0918368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93C7F0818368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard */; };
 		E93C7F0C18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93C7F0B18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m */; };
 		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
@@ -1337,7 +1339,6 @@
 		E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */; };
 		E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */; };
 		E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */ = {isa = PBXBuildFile; fileRef = E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */; };
-		E972DFAC187AEF4B00CB9C78 /* SYNTimecodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E972DFAB187AEF4B00CB9C78 /* SYNTimecodeLabel.m */; };
 		E972DFAF187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E972DFAE187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m */; };
 		E972DFB1187C6FD900CB9C78 /* Login_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E972DFB0187C6FD900CB9C78 /* Login_iphone.storyboard */; };
 		E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */; };
@@ -1348,6 +1349,8 @@
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
 		E99AA424188035F100330ABB /* LoginLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E99AA422188035F100330ABB /* LoginLogo.png */; };
 		E99AA425188035F100330ABB /* LoginLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E99AA423188035F100330ABB /* LoginLogo@2x.png */; };
+		E99B8D3E1892AD9500E08ABD /* ScrubberBarHD.png in Resources */ = {isa = PBXBuildFile; fileRef = E99B8D3C1892AD9500E08ABD /* ScrubberBarHD.png */; };
+		E99B8D3F1892AD9500E08ABD /* ScrubberBarHD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E99B8D3D1892AD9500E08ABD /* ScrubberBarHD@2x.png */; };
 		E9A465FE187FFA76007511B3 /* SYNTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A465FD187FFA76007511B3 /* SYNTabBar.m */; };
 		E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */; };
 		E9A75E8118882D8200B7F55F /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A75E8018882D8200B7F55F /* UIImage+Blur.m */; };
@@ -2960,6 +2963,9 @@
 		E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionReusableView+Helpers.m"; sourceTree = "<group>"; };
 		E92D3359184E239C0025D1DF /* SYNPagingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPagingModel.h; sourceTree = "<group>"; };
 		E92D335A184E239C0025D1DF /* SYNPagingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNPagingModel.m; sourceTree = "<group>"; };
+		E93122F918916A43008ADBEB /* SYNTimestampView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimestampView.h; sourceTree = "<group>"; };
+		E93122FA18916A43008ADBEB /* SYNTimestampView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimestampView.m; sourceTree = "<group>"; };
+		E93122FC18916A52008ADBEB /* SYNTimestampView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNTimestampView.xib; sourceTree = "<group>"; };
 		E93C7F0818368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNCarouselVideoPlayerViewController_iphone.storyboard; sourceTree = "<group>"; };
 		E93C7F0A18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCarouselVideoPlayerViewController.h; sourceTree = "<group>"; };
 		E93C7F0B18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCarouselVideoPlayerViewController.m; sourceTree = "<group>"; };
@@ -2975,8 +2981,6 @@
 		E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoLikesModel.m; sourceTree = "<group>"; };
 		E96A4C6818439CD100ED5782 /* CIFilter+Monochrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIFilter+Monochrome.h"; sourceTree = "<group>"; };
 		E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIFilter+Monochrome.m"; sourceTree = "<group>"; };
-		E972DFAA187AEF4B00CB9C78 /* SYNTimecodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimecodeLabel.h; sourceTree = "<group>"; };
-		E972DFAB187AEF4B00CB9C78 /* SYNTimecodeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimecodeLabel.m; sourceTree = "<group>"; };
 		E972DFAD187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPhoneIntroViewController.h; sourceTree = "<group>"; };
 		E972DFAE187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPhoneIntroViewController.m; sourceTree = "<group>"; };
 		E972DFB0187C6FD900CB9C78 /* Login_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login_iphone.storyboard; sourceTree = "<group>"; };
@@ -2992,6 +2996,8 @@
 		E9927391185090DE00982480 /* SYNPagingModel+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNPagingModel+Protected.h"; sourceTree = "<group>"; };
 		E99AA422188035F100330ABB /* LoginLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginLogo.png; path = Assets/Images/LoginLogo.png; sourceTree = "<group>"; };
 		E99AA423188035F100330ABB /* LoginLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LoginLogo@2x.png"; path = "Assets/Images/LoginLogo@2x.png"; sourceTree = "<group>"; };
+		E99B8D3C1892AD9500E08ABD /* ScrubberBarHD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScrubberBarHD.png; path = Assets/Images/ScrubberBarHD.png; sourceTree = "<group>"; };
+		E99B8D3D1892AD9500E08ABD /* ScrubberBarHD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ScrubberBarHD@2x.png"; path = "Assets/Images/ScrubberBarHD@2x.png"; sourceTree = "<group>"; };
 		E9A465FC187FFA76007511B3 /* SYNTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTabBar.h; sourceTree = "<group>"; };
 		E9A465FD187FFA76007511B3 /* SYNTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTabBar.m; sourceTree = "<group>"; };
 		E9A4E5301864623E00972F09 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
@@ -3749,10 +3755,11 @@
 				E9921A9218351D66001A4F3B /* SYNScrubberBar.h */,
 				E9921A9318351D66001A4F3B /* SYNScrubberBar.m */,
 				E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */,
-				E972DFAA187AEF4B00CB9C78 /* SYNTimecodeLabel.h */,
-				E972DFAB187AEF4B00CB9C78 /* SYNTimecodeLabel.m */,
 				E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */,
 				E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */,
+				E93122F918916A43008ADBEB /* SYNTimestampView.h */,
+				E93122FA18916A43008ADBEB /* SYNTimestampView.m */,
+				E93122FC18916A52008ADBEB /* SYNTimestampView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -4296,6 +4303,8 @@
 				01A79B8216F32C3400B05084 /* ShuttleBarRemainingBar.png */,
 				01A79B8316F32C3400B05084 /* ShuttleBarRemainingBar@2x.png */,
 				01A79B8416F32C3400B05084 /* Clear.png */,
+				E99B8D3C1892AD9500E08ABD /* ScrubberBarHD.png */,
+				E99B8D3D1892AD9500E08ABD /* ScrubberBarHD@2x.png */,
 				01A79B8516F32C3400B05084 /* ShuttleBarSliderThumb.png */,
 				01A79B8616F32C3400B05084 /* ShuttleBarSliderThumb@2x.png */,
 				01A79B8716F32C3400B05084 /* ShuttleBarBufferBar.png */,
@@ -6361,6 +6370,7 @@
 				011A164216F10014008CF25E /* PlaceholderVideoMiddle.png in Resources */,
 				1F5FAEB817E720A200205F3F /* ButtonConfirmAddToPack~iphone.png in Resources */,
 				0E27C271183250F9008C0DE8 /* ButtonVideoDeleteHighlighted.png in Resources */,
+				E99B8D3F1892AD9500E08ABD /* ScrubberBarHD@2x.png in Resources */,
 				011A164316F10014008CF25E /* PlaceholderVideoTop.png in Resources */,
 				BE458AF517E71BE000776B0D /* InstructionBackgroundPacks@2x.png in Resources */,
 				BEE01B6A18520FA6000CF681 /* SYNCommentingCollectionViewCell.xib in Resources */,
@@ -6979,6 +6989,7 @@
 				1F4E7FB8181ACBAA00F59007 /* TabFeedSelected~iphone.png in Resources */,
 				1F458B2F17E1CE8E003C14AC /* AppIcon-Dev-76x76@2x.png in Resources */,
 				38BACE51173415DF00406597 /* FieldChannelTitle@2x~iphone.png in Resources */,
+				E99B8D3E1892AD9500E08ABD /* ScrubberBarHD.png in Resources */,
 				38BACE52173415DF00406597 /* FieldChannelTitle~iphone.png in Resources */,
 				38BACE53173415DF00406597 /* OverlayCoverAlbum@2x~iphone.png in Resources */,
 				38BACE54173415DF00406597 /* OverlayCoverAlbum~iphone.png in Resources */,
@@ -7027,6 +7038,7 @@
 				38BACE87173AB49F00406597 /* ButtonCameraHighlighted@2x~iphone.png in Resources */,
 				38BACE88173AB49F00406597 /* ButtonCameraHighlighted~iphone.png in Resources */,
 				BEB15773173BDBD100DAFA2F /* ButtonReport.png in Resources */,
+				E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */,
 				BEB15774173BDBD100DAFA2F /* ButtonReport@2x.png in Resources */,
 				1F4E7FC4181ACBAA00F59007 /* TabProfileSelected~iphone.png in Resources */,
 				1FFAE62B17E21BBC006C92CA /* ShadowPanelFriends@2x~iphone.png in Resources */,
@@ -7571,6 +7583,7 @@
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */,
+				E93122FB18916A43008ADBEB /* SYNTimestampView.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */,
 				011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */,
@@ -7659,7 +7672,6 @@
 				011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */,
 				E9F7CC7C1846562F0026C97D /* SYNVideoPlayerViewController.m in Sources */,
 				011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */,
-				E972DFAC187AEF4B00CB9C78 /* SYNTimecodeLabel.m in Sources */,
 				38A2FF1B17314B3E00FB9F57 /* SYNDiscoverAutocompleteCell.m in Sources */,
 				E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */,
 				E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */,

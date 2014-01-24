@@ -154,6 +154,12 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 		}
 	}
 	
+	if ([actionName isEqualToString:@"playbackQuality"]) {
+		NSString *quality = actionData;
+		BOOL isHighDefinition = [@[ @"hd720", @"hd1080", @"highres" ] containsObject:quality];
+		[self handleVideoPlayerResolutionChanged:isHighDefinition];
+	}
+	
 	if ([actionName isEqualToString:@"error"]) {
 		[self handleVideoPlayerError:actionData];
 	}

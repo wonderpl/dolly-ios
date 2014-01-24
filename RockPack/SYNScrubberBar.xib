@@ -7,11 +7,22 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1" customClass="SYNScrubberBar">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="24"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HY-ng-bdK">
+                    <rect key="frame" x="10" y="0.0" width="24" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" image="ButtonShuttleBarPlay.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="playPauseButtonPressed:" destination="1" eventType="touchUpInside" id="CFD-sx-asp"/>
+                    </connections>
+                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TK-HE-31a" customClass="SYNProgressView">
-                    <rect key="frame" x="89" y="17" width="107" height="10"/>
+                    <rect key="frame" x="42" y="7" width="190" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
@@ -19,7 +30,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-IY-mRy" customClass="UISlider">
-                    <rect key="frame" x="89" y="4" width="107" height="34"/>
+                    <rect key="frame" x="42" y="-6" width="190" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="oQs-3a-YDo"/>
@@ -31,50 +42,15 @@
                         <action selector="sliderValueChanged:" destination="1" eventType="valueChanged" id="81h-LW-a6F"/>
                     </connections>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HY-ng-bdK">
-                    <rect key="frame" x="10" y="0.0" width="44" height="44"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScrubberBarHD.png" translatesAutoresizingMaskIntoConstraints="NO" id="GtO-iW-TPz">
+                    <rect key="frame" x="242" y="6" width="26" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="yUp-ki-Rgf"/>
+                        <constraint firstAttribute="width" constant="26" id="jlD-jx-yCU"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" image="ButtonShuttleBarPlay.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="playPauseButtonPressed:" destination="1" eventType="touchUpInside" id="CFD-sx-asp"/>
-                    </connections>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9w-7m-qRt" customClass="SYNTimecodeLabel">
-                    <rect key="frame" x="51" y="15" width="24" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rem-G5-66n" customClass="SYNTimecodeLabel">
-                    <rect key="frame" x="205" y="15" width="24" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bb-Gq-cae">
-                    <rect key="frame" x="234" y="0.0" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="Yks-KL-k76"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" image="ButtonShuttleBarMaximise.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="fullScreenButtonPressed:" destination="1" eventType="touchUpInside" id="EAe-Wr-Jgh"/>
-                    </connections>
-                </button>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmx-LH-wU8" customClass="MPVolumeView">
-                    <rect key="frame" x="278" y="10" width="38" height="24"/>
+                    <rect key="frame" x="278" y="0.0" width="38" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="5q7-NK-7ah"/>
@@ -82,39 +58,35 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.47843137254901957" green="0.50196078431372548" blue="0.52156862745098043" alpha="0.38" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="2HY-ng-bdK" secondAttribute="centerY" id="1uY-Kv-the"/>
-                <constraint firstItem="X9w-7m-qRt" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" constant="-3" id="9ID-BT-QAo"/>
                 <constraint firstAttribute="trailing" secondItem="Kmx-LH-wU8" secondAttribute="trailing" constant="4" id="A1f-Ar-Reh"/>
-                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="X9w-7m-qRt" secondAttribute="trailing" constant="14" id="FvN-w8-MnU"/>
+                <constraint firstItem="GtO-iW-TPz" firstAttribute="leading" secondItem="1TK-HE-31a" secondAttribute="trailing" constant="10" id="DYi-JV-OWg"/>
                 <constraint firstAttribute="centerY" secondItem="1TK-HE-31a" secondAttribute="centerY" id="HcR-XS-nMI"/>
+                <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="GtO-iW-TPz" secondAttribute="trailing" constant="10" id="MxH-Fa-Rll"/>
                 <constraint firstItem="2HY-ng-bdK" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="V9l-Ok-PU8"/>
-                <constraint firstItem="Rem-G5-66n" firstAttribute="leading" secondItem="1TK-HE-31a" secondAttribute="trailing" constant="9" id="ZAU-Pz-Uvf"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="UPL-IY-mRy" secondAttribute="leading" id="bFK-vf-WoG"/>
-                <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="9Bb-Gq-cae" secondAttribute="trailing" id="bZA-Af-Ba5"/>
-                <constraint firstAttribute="centerY" secondItem="X9w-7m-qRt" secondAttribute="centerY" id="cdJ-VL-SRo"/>
                 <constraint firstAttribute="centerY" secondItem="UPL-IY-mRy" secondAttribute="centerY" constant="1" id="dgA-9y-rvw"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="trailing" secondItem="UPL-IY-mRy" secondAttribute="trailing" id="eiy-UR-iBX"/>
-                <constraint firstAttribute="centerY" secondItem="9Bb-Gq-cae" secondAttribute="centerY" id="nMv-Wb-rB5"/>
+                <constraint firstAttribute="centerY" secondItem="GtO-iW-TPz" secondAttribute="centerY" id="fxQ-TQ-QCH"/>
                 <constraint firstAttribute="centerY" secondItem="Kmx-LH-wU8" secondAttribute="centerY" id="oAE-WV-mJz"/>
-                <constraint firstAttribute="centerY" secondItem="Rem-G5-66n" secondAttribute="centerY" id="oRO-1z-QW6"/>
-                <constraint firstItem="9Bb-Gq-cae" firstAttribute="leading" secondItem="Rem-G5-66n" secondAttribute="trailing" constant="5" id="qBT-ik-T2X"/>
+                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" constant="8" id="v2q-dp-Ntm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bufferingProgressView" destination="1TK-HE-31a" id="GhL-Fq-4cm"/>
-                <outlet property="currentTimeLabel" destination="X9w-7m-qRt" id="Pv1-gN-Fag"/>
-                <outlet property="durationLabel" destination="Rem-G5-66n" id="wB7-14-qCa"/>
-                <outlet property="fullScreenButton" destination="9Bb-Gq-cae" id="3rq-Ab-HLG"/>
+                <outlet property="highDefinitionTrailingSpace" destination="MxH-Fa-Rll" id="K4v-m0-9MK"/>
+                <outlet property="highDefinitionWidth" destination="jlD-jx-yCU" id="qui-ec-Kze"/>
                 <outlet property="playPauseButton" destination="2HY-ng-bdK" id="VHc-Dp-nzo"/>
                 <outlet property="progressSlider" destination="UPL-IY-mRy" id="Ap2-P6-ftg"/>
                 <outlet property="volumeView" destination="Kmx-LH-wU8" id="4LJ-vJ-lkM"/>
+                <outlet property="volumeViewTrailingSpace" destination="A1f-Ar-Reh" id="6Ce-gx-a5C"/>
             </connections>
         </view>
     </objects>
     <resources>
-        <image name="ButtonShuttleBarMaximise.png" width="44" height="44"/>
-        <image name="ButtonShuttleBarPlay.png" width="40" height="44"/>
+        <image name="ButtonShuttleBarPlay.png" width="24" height="24"/>
+        <image name="ScrubberBarHD.png" width="26" height="12"/>
     </resources>
 </document>
