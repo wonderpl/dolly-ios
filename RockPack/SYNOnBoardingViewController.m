@@ -211,8 +211,8 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             tmpArr = [[NSMutableArray alloc]init];
         }
         
-        for (int i = 0; i<tmpData.count; i++) {
-            Recomendation *tmpRecomendation = [tmpData objectAtIndex:i];
+        for (int i = tmpData.count; i>0; i--) {
+            Recomendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
             
             SubGenre* subgenre = self.subgenresByIdString[tmpRecomendation.categoryId];
             
@@ -220,7 +220,6 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
                 
                 [tmpArr addObject:tmpRecomendation];
                 [tmpData removeObject:tmpRecomendation];
-                i--;
                 tmpString = tmpGenre.name;
             }
         }
@@ -233,7 +232,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     }
     
 
-    if (IS_IPHONE) {
+    if (IS_IPHONE && tmpData.count >0) {
         [self.usersByCategory insertObject: tmpData atIndex:0];
     }
     
@@ -356,17 +355,18 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                                    withReuseIdentifier: OnBoardingSectionHeader
                                                                           forIndexPath: indexPath];
+            
             Recomendation* recomendation = (Recomendation*)self.usersByCategory[indexPath.section-1][indexPath.row];
 
             [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
             
             // special case for editors picks as its a genre not a subgenre
-            if (indexPath.section == 1) {
+            if (self.genresByIdString[recomendation.categoryId]) {
                 Genre* genre = self.genresByIdString[recomendation.categoryId];
                 
                 [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:genre.name];
                 
-            } else {
+            } else if(self.subgenresByIdString[recomendation.categoryId]) {
                 SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
                 
                 [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:subgenre.genre.name];
