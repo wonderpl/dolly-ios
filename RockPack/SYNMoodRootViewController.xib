@@ -49,7 +49,7 @@
                         <constraint firstAttribute="width" constant="215" id="2NG-6T-UFy"/>
                         <constraint firstAttribute="height" constant="280" id="sz1-oR-B5J"/>
                     </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1Cg-GM-zpv">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1Cg-GM-zpv" customClass="SYNFadingFlowLayout">
                         <size key="itemSize" width="320" height="78"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
