@@ -98,17 +98,6 @@
 	}];
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-	if ([presented isKindOfClass:[SYNiPadLoginViewController class]]) {
-		return [[SYNiPadIntroToLoginAnimator alloc] init];
-	}
-	return nil;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-	return nil;
-}
-
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
 	[self enableLoginButtons];
 }

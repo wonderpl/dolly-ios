@@ -11,7 +11,6 @@
 @protocol SYNScrubberBarDelegate <NSObject>
 
 - (void)scrubberBarPlayPauseToggled:(BOOL)playing;
-- (void)scrubberBarFullScreenToggled:(BOOL)fullScreen;
 
 - (void)scrubberBarCurrentTimeWillChange;
 - (void)scrubberBarCurrentTimeChanged:(NSTimeInterval)currentTime;
@@ -25,6 +24,7 @@
 
 @property (nonatomic, assign) BOOL playing;
 @property (nonatomic, assign) BOOL fullScreen;
+@property (nonatomic, assign) BOOL highDefinition;
 @property (nonatomic, assign) float bufferingProgress;
 @property (nonatomic, assign) NSTimeInterval currentTime;
 @property (nonatomic, assign) NSTimeInterval duration;

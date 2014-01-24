@@ -1,0 +1,40 @@
+{
+  "images" : [
+    {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1
+        },
+        "capInsets" : {
+          "right" : 4,
+          "left" : 1
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "TimestampBackgroundRight.png",
+      "scale" : "1x"
+    },
+    {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1
+        },
+        "capInsets" : {
+          "right" : 9,
+          "left" : 1
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "TimestampBackgroundRight@2x.png",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
