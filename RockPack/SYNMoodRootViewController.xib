@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNMoodRootViewController">
@@ -19,10 +19,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MoodBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="GCP-yk-7gu">
-                    <rect key="frame" x="311" y="217" width="334" height="334"/>
+                    <rect key="frame" x="268" y="217" width="420" height="334"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="334" id="hKS-YX-awS"/>
+                        <constraint firstAttribute="width" constant="420" id="hKS-YX-awS"/>
                         <constraint firstAttribute="height" constant="334" id="nzG-vZ-ILq"/>
                     </constraints>
                 </imageView>
@@ -42,7 +42,7 @@
                     </connections>
                 </button>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ICd-hC-jBC">
-                    <rect key="frame" x="453" y="246" width="215" height="280"/>
+                    <rect key="frame" x="453.00000215408409" y="246" width="215" height="280"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
