@@ -36,7 +36,7 @@
 #import "SYNPopoverAnimator.h"
 @import QuartzCore;
 
-#define kScrollContentOff 100.0f
+#define kScrollContentOff 40.0f
 #define kScrollSpeedBoundary 0.0f
 
 @interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate>

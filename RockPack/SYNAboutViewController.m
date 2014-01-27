@@ -19,7 +19,6 @@
 @property (nonatomic, strong) IBOutlet UITextView* textView;
 @property (nonatomic, strong) IBOutlet UIButton* termsButton;
 @property (nonatomic, strong) IBOutlet UIButton* policyButton;
-
 @property (nonatomic, strong) IBOutlet UIScrollView* scrollView;
 
 @end
