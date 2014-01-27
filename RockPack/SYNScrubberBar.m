@@ -101,7 +101,7 @@
 - (void)setHighDefinition:(BOOL)highDefinition {
 	_highDefinition = highDefinition;
 	
-	[self updateHighDefinitionDisplay];
+//	[self updateHighDefinitionDisplay];
 }
 
 - (CALayer *)topLineLayer {
