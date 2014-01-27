@@ -583,7 +583,7 @@
     
     [self.editButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
     
-    [self.editButton setTitle:NSLocalizedString(@"edit", nil) forState:UIControlStateNormal];
+    [self.editButton setTitle:NSLocalizedString(@"Edit my profile", nil) forState:UIControlStateNormal];
     
     [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
 }
