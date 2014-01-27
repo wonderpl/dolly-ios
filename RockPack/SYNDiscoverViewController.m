@@ -402,16 +402,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [searchBar setShowsCancelButton:NO animated:YES];
     
 }
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    
-    
-    if([self.searchBar.text isEqualToString:@""])
-    {
-        [self.searchBar resignFirstResponder];
-        [self closeAutocomplete];
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (![self.searchBar.text length]) {
+		[self closeAutocomplete];
     }
-    
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {

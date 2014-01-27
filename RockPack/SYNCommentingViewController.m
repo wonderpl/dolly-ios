@@ -698,10 +698,12 @@ static NSString* PlaceholderText = @"Say something nice";
     // size
     
     UIFont* correctFont = [SYNCommentingCollectionViewCell commentFieldFont];
+	NSParagraphStyle *paragraphStyle = [SYNCommentingCollectionViewCell paragraphStyle];
     
     CGRect rect = [comment.commentText boundingRectWithSize:(CGSize){kCommentTextSizeWidth, CGFLOAT_MAX}
                                                     options:NSStringDrawingUsesLineFragmentOrigin
-                                                 attributes:@{ NSFontAttributeName : correctFont }
+                                                 attributes:@{ NSFontAttributeName : correctFont,
+															   NSParagraphStyleAttributeName : paragraphStyle}
                                                     context:nil];
     
     

@@ -11,7 +11,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNAppDelegate.h"
 #import "AppConstants.h"
-#import <QuartzCore/QuartzCore.h>
+#import "SYNWebViewController.h"
 
 @interface SYNAboutViewController ()
 
@@ -35,8 +35,8 @@
     
     // Button Styling
     
-    self.termsButton.layer.cornerRadius = 10.0f;
-    self.policyButton.layer.cornerRadius = 10.0f;
+    self.termsButton.layer.cornerRadius = 18.0f;
+    self.policyButton.layer.cornerRadius = 18.0f;
     
     UIColor* color = [UIColor colorWithRed:(188.0f/255.0f)
                                      green:(186.0f/255.0f)
@@ -109,22 +109,11 @@
     
 }
 
--(IBAction)buttonPressed:(UIButton*)sender
-{
+-(IBAction)buttonPressed:(UIButton*)sender {
+    NSURL *url = [NSURL URLWithString:(sender == self.termsButton ? kURLTermsAndConditions : kURLPrivacy)];
     
-    
-    if(sender == self.termsButton)
-    {
-        
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLTermsAndConditions]];
-        
-    }
-    else if(sender == self.policyButton)
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kURLPrivacy]];
-        
-        
-    }
-    
+	UIViewController *webViewController = [SYNWebViewController webViewControllerForURL:url];
+	[self presentViewController:webViewController animated:YES completion:nil];
 }
+
 @end

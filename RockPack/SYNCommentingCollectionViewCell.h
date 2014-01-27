@@ -44,6 +44,7 @@
 
 +(UIFont*)commentFieldFont;
 +(CGRect)commentFieldFrame;
++ (NSParagraphStyle *)paragraphStyle;
 
 
 @end

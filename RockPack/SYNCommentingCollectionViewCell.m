@@ -98,11 +98,12 @@
     if(!_comment)
         return;
     
-    NSString* commentText = _comment.commentText;
+	NSParagraphStyle *paragraphStyle = [[self class] paragraphStyle];
+	NSAttributedString *commentText = [[NSAttributedString alloc] initWithString:_comment.commentText attributes:@{ NSParagraphStyleAttributeName: paragraphStyle }];
     
     self.nameLabel.text = _comment.displayName;
     
-    self.commentTextView.text = commentText;
+    self.commentTextView.attributedText = commentText;
     
     self.datePosted = _comment.dateAdded;
     
@@ -146,6 +147,13 @@
 +(CGRect)commentFieldFrame
 {
     return CGRectMake(48.0f, 28.0f, 213.0f, 18.0f);
+}
+
++ (NSParagraphStyle *)paragraphStyle {
+	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	paragraphStyle.minimumLineHeight = 15.0;
+	
+	return paragraphStyle;
 }
 
 
