@@ -640,7 +640,7 @@
 -(void) setCoverphotoImage: (NSString*) thumbnailURL
 {
     
-//    UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto"];
+    UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto.jpg"];
     
     if (![thumbnailURL isEqualToString:@""]){ // there is a url string
         
@@ -690,7 +690,13 @@
     }
     else
     {
-//        self.coverImage.image = placeholderImage;
+        self.coverImage.image = placeholderImage;
+        self.coverImage.alpha = 0.0;
+
+        [UIView animateWithDuration:1.5f animations:^{
+            self.coverImage.alpha=1.0f;
+        }];
+        
     }
     
 }
