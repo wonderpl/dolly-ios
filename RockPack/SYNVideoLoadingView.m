@@ -159,7 +159,7 @@ static const CGFloat TextSideInset = 20.0;
 }
 
 - (UIFont *)subtitleFont {
-	return (IS_IPAD ? [UIFont regularCustomFontOfSize:25.0] : [UIFont regularCustomFontOfSize:12.0]);
+	return (IS_IPAD ? [UIFont regularCustomFontOfSize:25.0] : [UIFont regularCustomFontOfSize:14.0]);
 }
 
 @end
