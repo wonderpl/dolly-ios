@@ -61,7 +61,7 @@
 @property (nonatomic) BOOL trackView;
 @property (nonatomic, assign) BOOL collectionsTabActive;
 
-@property (nonatomic, strong) NSArray* arrDisplayFollowing;
+@property (nonatomic, strong) NSArray *filteredSubscriptions;
 @property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 
 @property (nonatomic, strong) NSIndexPath *channelsIndexPath;
@@ -177,8 +177,7 @@
     self.subscriptionThumbnailCollectionView.dataSource =nil;
     self.channelThumbnailCollectionView.delegate = nil;
     self.channelThumbnailCollectionView.dataSource = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kHideAllDesciptions object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -336,7 +335,6 @@
                                                               blue: (112 / 255.0f)
                                                              alpha: 1.0f];
     
-    
     // == Tap gesture do dismiss the keyboard
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
@@ -434,7 +432,7 @@
         [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
     }
     
-    self.arrDisplayFollowing = [self.channelOwner.subscriptions array];
+    self.filteredSubscriptions = [self.channelOwner.subscriptions array];
     
     [self.subscriptionThumbnailCollectionView reloadData];
     [self.channelThumbnailCollectionView reloadData];
@@ -911,8 +909,6 @@
     
     if ([view isEqual:self.subscriptionThumbnailCollectionView])
     {
-        //1 for search bar
-        
         return self.channelOwner.subscriptionsSet.count;
     }
     
@@ -1002,9 +998,9 @@
         }
         else // (collectionView == self.subscribersThumbnailCollectionView)
         {
-            if (indexPath.row < self.arrDisplayFollowing.count)
+            if (indexPath.row < [self.filteredSubscriptions count])
             {
-                channel = _arrDisplayFollowing[indexPath.item];
+                channel = self.filteredSubscriptions[indexPath.item];
                 
                 if (self.modeType == kModeMyOwnProfile)
                 {
@@ -1014,7 +1010,9 @@
                 channelThumbnailCell.channel = channel;
                 
                 [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
-            }
+            } else {
+				channelThumbnailCell.channel = nil;
+			}
         }
         //        if(self.modeType == kModeOtherUsersProfile)
         //        {
@@ -1033,13 +1031,7 @@
         cell = channelThumbnailCell;
         
     }
-    
-    // precaution
-    if(!cell)
-    {
-        AssertOrLog(@"No Cell Created");
-    }
-    
+	
     return cell;
 }
 
@@ -1098,8 +1090,8 @@
     {
         NSIndexPath *indexPath = [self.subscriptionThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
         
-        if (indexPath.row < self.arrDisplayFollowing.count) {
-            Channel *channel = self.arrDisplayFollowing[indexPath.item];
+        if (indexPath.row < [self.filteredSubscriptions count]) {
+            Channel *channel = self.filteredSubscriptions[indexPath.item];
             //        self.navigationController.navigationBarHidden = NO;
             
             SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
@@ -1859,7 +1851,6 @@
     self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
     
     self.currentSearchTerm = searchBar.text;
-    self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
     [self.subscriptionThumbnailCollectionView reloadData];
     
     self.searchMode = NO;
@@ -1894,10 +1885,10 @@
     }
     
     self.currentSearchTerm = searchBar.text;
-    self.currentSearchTerm = [self.currentSearchTerm uppercaseString];
-    
+	
+	self.filteredSubscriptions = [self filteredSubscriptionsForSearchTerm:searchBar.text];
+	
     [self.subscriptionThumbnailCollectionView reloadData];
-    
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -1995,30 +1986,6 @@
 }
 
 #pragma mark - Displayed Search
-
--(NSArray*)arrDisplayFollowing
-{
-    _arrDisplayFollowing =[self.channelOwner.subscriptions array];
-    
-    if(self.currentSearchTerm.length > 0)
-    {
-        
-        NSPredicate* searchPredicate = [NSPredicate predicateWithBlock:^BOOL(Channel* channel, NSDictionary *bindings) {
-            
-            NSString* nameToCompare = [channel.title uppercaseString];
-            
-            BOOL result = [nameToCompare hasPrefix:self.currentSearchTerm];
-            
-            return result;
-        }];
-        
-        _arrDisplayFollowing = [_arrDisplayFollowing filteredArrayUsingPredicate:searchPredicate];
-    }
-    
-    
-    return _arrDisplayFollowing;
-}
-
 
 -(void) hideDescriptionCurrentlyShowing
 {
@@ -3191,6 +3158,14 @@ finishedWithImage: (UIImage *) image
     [self changeAvatarButtonTapped:sender];
     self.uploadAvatar.hidden=YES;
     
+}
+
+- (NSArray *)filteredSubscriptionsForSearchTerm:(NSString *)searchTerm {
+	if ([searchTerm length]) {
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title BEGINSWITH[cd] %@", searchTerm];
+		return [[self.channelOwner.subscriptions array] filteredArrayUsingPredicate:predicate];
+	}
+	return [self.channelOwner.subscriptions array];
 }
 
 @end

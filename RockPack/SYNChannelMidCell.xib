@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -103,6 +103,7 @@
                 <outlet property="descriptionLabel" destination="96x-Ly-DNm" id="qO5-yc-vm1"/>
                 <outlet property="followButton" destination="IeH-F8-ivN" id="VA5-2Z-htv"/>
                 <outlet property="followerCountLabel" destination="3c9-8H-dtP" id="XgG-6y-DrQ"/>
+                <outlet property="separatorView" destination="NtQ-8O-ADk" id="Vi3-yT-SVL"/>
                 <outlet property="videoCountLabel" destination="Qr7-Zc-JY5" id="V4m-OL-8Lb"/>
                 <outlet property="videoTitleLabel" destination="qfg-Af-VXr" id="dg1-RQ-v8l"/>
             </connections>
