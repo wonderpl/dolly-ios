@@ -35,8 +35,8 @@
     
     // Button Styling
     
-    self.termsButton.layer.cornerRadius = 10.0f;
-    self.policyButton.layer.cornerRadius = 10.0f;
+    self.termsButton.layer.cornerRadius = 18.0f;
+    self.policyButton.layer.cornerRadius = 18.0f;
     
     UIColor* color = [UIColor colorWithRed:(188.0f/255.0f)
                                      green:(186.0f/255.0f)
