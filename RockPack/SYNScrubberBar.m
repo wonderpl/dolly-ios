@@ -154,7 +154,7 @@
 	
 	CGFloat sliderValue = self.progressSlider.value;
 	CGFloat xPosition = CGRectGetMinX(self.progressSlider.frame) + (CGRectGetWidth(self.progressSlider.frame) - 14) * sliderValue;
-	self.timestampView.center = CGPointMake(xPosition, -5);
+	self.timestampView.center = CGPointMake(xPosition, -(5 + (CGRectGetHeight(self.frame) / 2.0)));
 }
 
 - (void)updateHighDefinitionDisplay {
