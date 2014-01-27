@@ -1,6 +1,6 @@
 /*
  Localizable.strings
- rockpack
+ Wonder PL
  
  Created by Michael Michailidis on 09/05/2013.
  Copyright (c) Rockpack Ltd. All rights reserved.
@@ -111,7 +111,7 @@
 "register_screen_form_field_username_error_too_long" = "Username must be shorter than 20 letters";
 "register_screen_form_error_invalid_date" = "Sorry, invalid date";
 "register_screen_form_error_future" = "Looks like you're born in the future!";
-"register_screen_form_error_under_13" = "Rockpack is not available for under 13's yet";
+"register_screen_form_error_under_13" = "Wonder PL is not available for under 13's yet";
 "register_screen_form_avatar_upload_title" = "Oops";
 "register_screen_form_avatar_upload_description" = "We're having trouble uploading your photo. Please try again.";
 "register_screen_form_field_username_already_taken" = "This username is already taken.";
@@ -165,7 +165,7 @@
 "notification_unavailable_action" = "Your video has become unavailable";
 "notification_repack_action" = "has repacked your video";
 "notification_subscribed_action" = "is now following your pack";
-"notification_joined_action" = "Your Facebook friend %@ has joined Rockpack";
+"notification_joined_action" = "Your Facebook friend %@ has joined Wonder PL";
 "your_channel_object" = "your pack";
 "your_video_object" = "your video";
 "video_object"  = "video";
@@ -174,7 +174,7 @@
 "onboarding_channels" = "Browse packs of videos by category or search for any video.\n ";
 "onboarding_subscription" = "Follow to get video updates in your feed.\n ";
 "onboarding_video" = "Press and hold anywhere on the video and see what happens!";
-"onboarding_friends" = "Find your friends on Rockpack";
+"onboarding_friends" = "Find your friends on Wonder PL";
 "onboarding_feed_iphone" = "Hard to believe, but this dull space will soon be bursting with video excitement. Just start following some packs.";
 "onboarding_feed" = "Hard to believe, but this dull space will soon be bursting with video excitement. Just start following some packs.";
 
@@ -226,10 +226,10 @@
 "channel_creation_screen_error_unknown_create_description" = "We couldn't create your pack. Please try again.";
 "channel_creation_screen_error_unknown_save_description" = "We couldn't save your pack. Please try again.";
 
-"500_error_message" = "Something went wrong with Rockpack. Please try again.";
-"503_error_message" = "Something went wrong with Rockpack. Please try again.";
-"504_error_message" = "Something went wrong with Rockpack. Please try again.";
-"unknown_error_message" = "Something went wrong with Rockpack. Please try again.";
+"500_error_message" = "Something went wrong with Wonder PL. Please try again.";
+"503_error_message" = "Something went wrong with Wonder PL. Please try again.";
+"504_error_message" = "Something went wrong with Wonder PL. Please try again.";
+"unknown_error_message" = "Something went wrong with Wonder PL. Please try again.";
 
 "500_error_title" = "Oops...";
 "503_error_title" = "Oops...";
