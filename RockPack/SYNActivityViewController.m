@@ -243,7 +243,7 @@
     }
     else if ([notification.messageType isEqualToString: @"joined"])
     {
-        NSMutableString *message = [NSMutableString stringWithFormat: NSLocalizedString(@"notification_joined_action", @"Your friend [[displayName]] has joined Mayberry"), [notification.channelOwner.displayName uppercaseString]];
+        NSMutableString *message = [NSMutableString stringWithFormat: NSLocalizedString(@"notification_joined_action", @"Your friend [[displayName]] has joined Wonder PL"), [notification.channelOwner.displayName uppercaseString]];
         
         constructedMessage = message;
     }
