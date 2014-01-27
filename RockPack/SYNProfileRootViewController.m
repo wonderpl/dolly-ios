@@ -3101,7 +3101,7 @@ finishedWithImage: (UIImage *) image
 //    }];
 
     self.deleteCell = cell;
-    NSString *tmpString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete channel", "Alerview confirm to delete a Channel"), cell.channel.title];
+    NSString *tmpString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete Collection", "Alerview confirm to delete a Channel"), cell.channel.title];
     
     [self.deleteChannelAlertView setMessage:tmpString];
     [self.deleteChannelAlertView show];
