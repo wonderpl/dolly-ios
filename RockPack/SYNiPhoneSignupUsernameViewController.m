@@ -14,6 +14,7 @@
 #import "SYNImagePickerController.h"
 #import "SYNiPhoneSignupDetailsViewController.h"
 #import "GAI+Tracking.h"
+#import "UIImageView+RoundImage.h"
 
 @interface SYNiPhoneSignupUsernameViewController () <UIBarPositioningDelegate, UITextFieldDelegate, SYNImagePickerControllerDelegate>
 
@@ -51,6 +52,8 @@
 	
 	self.usernameTextField.font = [UIFont lightCustomFontOfSize:self.usernameTextField.font.pointSize];
 	self.errorLabel.font = [UIFont lightCustomFontOfSize:self.errorLabel.font.pointSize];
+    
+    [self.avatarImageView roundImage];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
