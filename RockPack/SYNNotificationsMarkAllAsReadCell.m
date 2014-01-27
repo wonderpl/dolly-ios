@@ -8,37 +8,18 @@
 
 #import "SYNNotificationsMarkAllAsReadCell.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
 @implementation SYNNotificationsMarkAllAsReadCell
 
-
--(void)awakeFromNib
-{
-    [super awakeFromNib];
-
-    self.textLabel.text = NSLocalizedString(@"notification_mark_all_as_read", nil);
-    self.textLabel.font = [UIFont lightCustomFontOfSize:25.0f];
-    self.textLabel.textColor = [UIColor blackColor];
-    self.textLabel.textAlignment = NSTextAlignmentCenter;
+-(void)awakeFromNib{
     
-    self.readButton.layer.cornerRadius = 15.5f;
-
+    self.readButton.layer.borderWidth = 1.0f;
+    self.readButton.layer.cornerRadius = 15.0f;
+    self.readButton.titleLabel.textColor = [UIColor dollyMoodColor];
     
+    self.readButton.layer.borderColor = [UIColor colorWithRed:(188.0f/255.0f) green:(186.0f/255.0f) blue:(212.0f/255.0f) alpha:1.0f].CGColor;
 }
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        
-        self.textLabel.text = NSLocalizedString(@"notification_mark_all_as_read", nil);
-        self.textLabel.font = [UIFont lightCustomFontOfSize:25.0f];
-        self.textLabel.textColor = [UIColor blackColor];
-        self.textLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return self;
-}
-
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
