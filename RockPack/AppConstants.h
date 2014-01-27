@@ -480,8 +480,8 @@ typedef enum {
 
 // Sharing messages
 
-#define kChannelShareMessage NSLocalizedString (@"Take a look at this great channel I found on Rockpack", nil)
-#define kVideoShareMessage NSLocalizedString (@"Take a look at this great video I found on Rockpack", nil)
+#define kChannelShareMessage NSLocalizedString (@"Take a look at this great channel I found on Wonder PL", nil)
+#define kVideoShareMessage NSLocalizedString (@"Take a look at this great video I found on Wonder PL", nil)
 
 #endif
 
