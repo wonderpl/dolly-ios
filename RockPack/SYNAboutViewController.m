@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Information";
+    self.title = @"ABOUT";
     
     // Button Styling
     

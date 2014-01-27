@@ -40,7 +40,7 @@
                     </connections>
                 </button>
                 <scrollView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Kux-wO-pgk">
-                    <rect key="frame" x="167" y="0.0" width="320" height="415"/>
+                    <rect key="frame" x="165" y="0.0" width="320" height="415"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconWonderAbout.png" id="BaA-7C-ayz">
