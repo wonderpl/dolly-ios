@@ -28,12 +28,12 @@
                         <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hK0-7z-olf" userLabel="timestamp Label">
-                        <rect key="frame" x="312" y="207" width="48" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hK0-7z-olf" userLabel="timestamp Label" customClass="SYNTimestampLabel">
+                        <rect key="frame" x="322" y="198" width="38" height="19"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.72941176470588232" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     </label>
@@ -87,8 +87,10 @@
             <constraints>
                 <constraint firstItem="De9-NT-r06" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="4xo-A0-2jl"/>
                 <constraint firstAttribute="trailing" secondItem="JRy-me-y1R" secondAttribute="trailing" id="GSs-vD-tgg"/>
+                <constraint firstAttribute="trailing" secondItem="hK0-7z-olf" secondAttribute="trailing" id="QKb-NI-C7T"/>
                 <constraint firstItem="JRy-me-y1R" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="T8G-qL-hgG"/>
                 <constraint firstAttribute="trailing" secondItem="De9-NT-r06" secondAttribute="trailing" id="UxA-ow-dHp"/>
+                <constraint firstAttribute="bottom" secondItem="hK0-7z-olf" secondAttribute="bottom" constant="119" id="Vet-yH-Hcm"/>
                 <constraint firstItem="De9-NT-r06" firstAttribute="top" secondItem="JRy-me-y1R" secondAttribute="bottom" constant="10" id="mdu-aQ-yv2"/>
                 <constraint firstItem="JRy-me-y1R" firstAttribute="top" secondItem="aP1-jF-WwS" secondAttribute="top" constant="24" id="qcO-vJ-tUC"/>
             </constraints>

@@ -78,12 +78,12 @@
                             <action selector="commentControlPressed:" destination="PxX-MJ-iMd" eventType="touchUpInside" id="4ru-1b-DWx"/>
                         </connections>
                     </view>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyK-gf-zRY" userLabel="timestamp Label">
-                        <rect key="frame" x="200" y="142" width="48" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyK-gf-zRY" userLabel="timestamp Label" customClass="SYNTimestampLabel">
+                        <rect key="frame" x="215" y="135" width="33" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.72941176470588232" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     </label>
@@ -96,9 +96,11 @@
                 <constraint firstAttribute="trailing" secondItem="ZPQ-jB-6Su" secondAttribute="trailing" id="41B-V1-fPa"/>
                 <constraint firstItem="1bU-ZO-Uzp" firstAttribute="top" secondItem="PxX-MJ-iMd" secondAttribute="top" id="6Z1-Hp-ijk"/>
                 <constraint firstItem="ZPQ-jB-6Su" firstAttribute="top" secondItem="PxX-MJ-iMd" secondAttribute="top" constant="23" id="CY5-py-yDa"/>
+                <constraint firstAttribute="trailing" secondItem="AyK-gf-zRY" secondAttribute="trailing" id="HKj-Nj-0Xa"/>
                 <constraint firstItem="vVW-WR-RU9" firstAttribute="top" secondItem="ZPQ-jB-6Su" secondAttribute="bottom" constant="3" id="JMe-pw-njt"/>
                 <constraint firstItem="vVW-WR-RU9" firstAttribute="leading" secondItem="PxX-MJ-iMd" secondAttribute="leading" id="P2L-QN-MLW"/>
                 <constraint firstAttribute="trailing" secondItem="vVW-WR-RU9" secondAttribute="trailing" id="Vim-T5-GbU"/>
+                <constraint firstAttribute="bottom" secondItem="AyK-gf-zRY" secondAttribute="bottom" constant="105" id="krV-ET-csx"/>
                 <constraint firstAttribute="centerX" secondItem="1bU-ZO-Uzp" secondAttribute="centerX" id="kx4-Xd-kga"/>
             </constraints>
             <size key="customSize" width="307" height="183"/>
