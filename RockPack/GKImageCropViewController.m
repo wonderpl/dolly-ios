@@ -10,6 +10,7 @@
 #import "GKImageCropViewController.h"
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 @import QuartzCore;
 
 @interface GKImageCropViewController ()
@@ -114,7 +115,7 @@
     label.backgroundColor = [UIColor clearColor];
     
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor dollyTextMediumGray];
     label.text = self.navigationItem.title;
     [containerView addSubview: label];
     self.navigationItem.titleView = containerView;
@@ -234,10 +235,6 @@
         
         UILabel *info = [[UILabel alloc] initWithFrame: CGRectMake((self.view.frame.size.width - 250) / 2, 0, 320, 40)];
         info.text = NSLocalizedString(@"MOVE AND SCALE", nil);
-        info.textColor = [UIColor colorWithRed: 255.0 / 255.0
-                                         green: 255.0 / 255.0
-                                          blue: 255.0 / 255.0
-                                         alpha: 1];
         
         info.font = [UIFont lightCustomFontOfSize: 18];
         
