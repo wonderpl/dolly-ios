@@ -1173,6 +1173,7 @@
 		E98369D6188937B300363709 /* ButtonLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D4188937B300363709 /* ButtonLogin.png */; };
 		E98369D7188937B300363709 /* ButtonLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D5188937B300363709 /* ButtonLogin@2x.png */; };
 		E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C1518967BA500767BBD /* SYNTimestampLabel.m */; };
+		E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C18189681BC00767BBD /* SYNTermsViewController.m */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
 		E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */; };
 		E99AA424188035F100330ABB /* LoginLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E99AA422188035F100330ABB /* LoginLogo.png */; };
@@ -2647,6 +2648,8 @@
 		E98369D81889457500363709 /* SYNVideoInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoInfoCell.h; sourceTree = "<group>"; };
 		E9918C1418967BA500767BBD /* SYNTimestampLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimestampLabel.h; sourceTree = "<group>"; };
 		E9918C1518967BA500767BBD /* SYNTimestampLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimestampLabel.m; sourceTree = "<group>"; };
+		E9918C17189681BC00767BBD /* SYNTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTermsViewController.h; sourceTree = "<group>"; };
+		E9918C18189681BC00767BBD /* SYNTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTermsViewController.m; sourceTree = "<group>"; };
 		E9921A9218351D66001A4F3B /* SYNScrubberBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNScrubberBar.h; sourceTree = "<group>"; };
 		E9921A9318351D66001A4F3B /* SYNScrubberBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNScrubberBar.m; sourceTree = "<group>"; };
 		E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNScrubberBar.xib; sourceTree = "<group>"; };
@@ -4854,6 +4857,8 @@
 				E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */,
 				E9CE7A2E1887161B00023A86 /* SYNiPadIntroToSignupAnimator.h */,
 				E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */,
+				E9918C17189681BC00767BBD /* SYNTermsViewController.h */,
+				E9918C18189681BC00767BBD /* SYNTermsViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -6826,6 +6831,7 @@
 				015CB01616AE039900FEB8E7 /* User.m in Sources */,
 				E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */,
 				015CB01916AE03B200FEB8E7 /* _User.m in Sources */,
+				E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */,
 				E9D99DD018608F3000212AC5 /* SYNSearchVideoChannelsModel.m in Sources */,
 				E9F6257018868A2B000EF6A2 /* SYNiPadPasswordForgotViewController.m in Sources */,
 				BE57C0261843604200C6444A /* SYNOnBoardingCell.m in Sources */,
