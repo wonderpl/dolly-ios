@@ -752,6 +752,9 @@
 		44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC631884384900B70139 /* ButtonMoreHints.png */; };
 		44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */; };
 		4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */; };
+		4CE8AAD51896AE1300D7E373 /* DefaultCoverPhoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD21896AE1300D7E373 /* DefaultCoverPhoto.jpg */; };
+		4CE8AAD61896AE1300D7E373 /* IconWonderAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD31896AE1300D7E373 /* IconWonderAbout.png */; };
+		4CE8AAD71896AE1300D7E373 /* IconWonderAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD41896AE1300D7E373 /* IconWonderAbout@2x.png */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */; };
 		BE03A6CC16F7697900245314 /* ButtonSettingsHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */; };
 		BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */; };
@@ -2102,6 +2105,9 @@
 		44CAFC631884384900B70139 /* ButtonMoreHints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonMoreHints.png; path = Assets/Images/ButtonMoreHints.png; sourceTree = "<group>"; };
 		44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreHints@2x.png"; path = "Assets/Images/ButtonMoreHints@2x.png"; sourceTree = "<group>"; };
 		4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNNotificationsMarkAllAsReadCell.xib; sourceTree = "<group>"; };
+		4CE8AAD21896AE1300D7E373 /* DefaultCoverPhoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = DefaultCoverPhoto.jpg; path = ../../Downloads/DefaultCoverPhoto.jpg; sourceTree = "<group>"; };
+		4CE8AAD31896AE1300D7E373 /* IconWonderAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconWonderAbout.png; path = ../../Downloads/IconWonderAbout.png; sourceTree = "<group>"; };
+		4CE8AAD41896AE1300D7E373 /* IconWonderAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconWonderAbout@2x.png"; path = "../../Downloads/IconWonderAbout@2x.png"; sourceTree = "<group>"; };
 		B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dollyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsViewController.m; sourceTree = "<group>"; };
@@ -4291,6 +4297,9 @@
 		1FE1C66A17621F7900EDFC0E /* About */ = {
 			isa = PBXGroup;
 			children = (
+				4CE8AAD21896AE1300D7E373 /* DefaultCoverPhoto.jpg */,
+				4CE8AAD31896AE1300D7E373 /* IconWonderAbout.png */,
+				4CE8AAD41896AE1300D7E373 /* IconWonderAbout@2x.png */,
 				1FE1C65E1761FFFF00EDFC0E /* IconRockpackAbout.png */,
 				1FE1C65F1761FFFF00EDFC0E /* IconRockpackAbout@2x.png */,
 				01AEFBCE1701AC870060467A /* AccountSettingsView.png */,
@@ -5958,6 +5967,7 @@
 				BE86BF2B172011150006DC8A /* HeaderProfileSubscriptionsLandscape@2x.png in Resources */,
 				1F458B0417E1C4E6003C14AC /* AppIcon60x60.png in Resources */,
 				BEB312FE1815638700FAF98A /* TabProfile.png in Resources */,
+				4CE8AAD61896AE1300D7E373 /* IconWonderAbout.png in Resources */,
 				1F4E7FB9181ACBAA00F59007 /* TabMoods@2x~iphone.png in Resources */,
 				E9FDCD98188D902A00C31CC1 /* WebView.storyboard in Resources */,
 				0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */,
@@ -6049,6 +6059,7 @@
 				01F1B886172A9ADF005735AF /* ButtonVideoOverlayNextHighlighted.png in Resources */,
 				01F1B887172A9ADF005735AF /* ButtonVideoOverlayNextHighlighted@2x.png in Resources */,
 				01F1B888172A9ADF005735AF /* ButtonVideoOverlayPrevious.png in Resources */,
+				4CE8AAD51896AE1300D7E373 /* DefaultCoverPhoto.jpg in Resources */,
 				01F1B889172A9ADF005735AF /* ButtonVideoOverlayPrevious@2x.png in Resources */,
 				01F1B88A172A9ADF005735AF /* ButtonVideoOverlayPreviousHighlighted.png in Resources */,
 				1F4E7FB0181ACBAA00F59007 /* TabActivityHighlighted~iphone.png in Resources */,
@@ -6133,6 +6144,7 @@
 				1F076B62185B398100618B0C /* ArrowCommentBox.png in Resources */,
 				38A200611731607F00FB9F57 /* ButtonLoginBack~iphone.png in Resources */,
 				38A200621731607F00FB9F57 /* ButtonLoginCancel@2x~iphone.png in Resources */,
+				4CE8AAD71896AE1300D7E373 /* IconWonderAbout@2x.png in Resources */,
 				38A200631731607F00FB9F57 /* ButtonLoginCancelHighlighted@2x~iphone.png in Resources */,
 				38A200641731607F00FB9F57 /* ButtonLoginCancelHighlighted~iphone.png in Resources */,
 				38A200651731607F00FB9F57 /* ButtonLoginCancel~iphone.png in Resources */,

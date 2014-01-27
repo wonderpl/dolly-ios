@@ -642,7 +642,7 @@
 -(void) setCoverphotoImage: (NSString*) thumbnailURL
 {
     
-    UIImage* placeholderImage = [UIImage imageNamed: @"coverImageTest"];
+//    UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto"];
     
     if (![thumbnailURL isEqualToString:@""]){ // there is a url string
         
@@ -692,7 +692,7 @@
     }
     else
     {
-        self.coverImage.image = placeholderImage;
+//        self.coverImage.image = placeholderImage;
     }
     
 }
