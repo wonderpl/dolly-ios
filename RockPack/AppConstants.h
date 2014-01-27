@@ -116,8 +116,8 @@ typedef enum : NSInteger {
 #define STANDARD_REQUEST_LENGTH 48
 #define MAXIMUM_REQUEST_LENGTH 1000
 
-#define kURLTermsAndConditions @"http://rockpack.com/tos"
-#define kURLPrivacy @"http://rockpack.com/privacy"
+#define kURLTermsAndConditions @"http://wonderpl.com/tos"
+#define kURLPrivacy @"http://wonderpl.com/privacy"
 
 // Videos for channel
 #define kAPIGetVideosForChannel     @"/ws/USERID/channels/CHANNELID/videos/"    /* GET */

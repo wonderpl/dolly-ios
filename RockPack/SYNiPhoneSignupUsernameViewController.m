@@ -196,12 +196,4 @@
 	return YES;
 }
 
-- (IBAction)termsAndConditionsButtonPressed:(UIButton *)button {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: kURLTermsAndConditions]];
-}
-
-- (IBAction)privacyPolicyButtonPressed:(UIButton *)button {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: kURLPrivacy]];
-}
-
 @end
