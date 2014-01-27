@@ -88,7 +88,7 @@
     if(MAX(image.size.width, image.size.height)>kMaxSuportedImageSize)
     {
         //Image too large
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"This picture is too large", nil) message:[NSString stringWithFormat:NSLocalizedString(@"The maximum size allowed for pictures is %d pixels * %d pixels. Please choose another picture.", nil), kMaxSuportedImageSize, kMaxSuportedImageSize] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"This picture is too large", nil) message:[NSString stringWithFormat:NSLocalizedString(@"The maximum size allowed for pictures is %d pixels x %d pixels. Please choose another picture.", nil), kMaxSuportedImageSize, kMaxSuportedImageSize] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [self imagePickerControllerDidCancel:picker];
         return;
