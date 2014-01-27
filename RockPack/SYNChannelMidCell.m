@@ -29,6 +29,8 @@
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 
+@property (nonatomic, strong) IBOutlet UIView *separatorView;
+
 @end
 
 @implementation SYNChannelMidCell
@@ -143,6 +145,7 @@
     if(!_channel)
     {
         self.videoTitleLabel.text = @"";
+		self.separatorView.hidden = YES;
         return;
     }
 	
@@ -178,6 +181,7 @@
     
     [self setBorder];
 
+	self.separatorView.hidden = NO;
 
 }
 

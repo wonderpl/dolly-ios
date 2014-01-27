@@ -108,6 +108,7 @@
                 <outlet property="descriptionLabel" destination="Mpo-w3-cKk" id="q9U-Nb-qKB"/>
                 <outlet property="followButton" destination="vfH-7e-CmQ" id="Mdu-Ge-Dis"/>
                 <outlet property="followerCountLabel" destination="UQE-Qn-569" id="hRG-55-M2V"/>
+                <outlet property="separatorView" destination="3uo-7D-Fjg" id="SAd-DW-Syz"/>
                 <outlet property="videoCountLabel" destination="9F0-KR-0sT" id="Yni-9T-iXb"/>
                 <outlet property="videoTitleLabel" destination="owS-vf-ZqF" id="AQJ-4i-mN2"/>
             </connections>
