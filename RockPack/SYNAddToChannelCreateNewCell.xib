@@ -36,7 +36,7 @@
                             <outlet property="delegate" destination="3" id="LW2-fk-OZK"/>
                         </connections>
                     </textView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Collection Name" textAlignment="center" minimumFontSize="17" id="s9F-QH-eIJ" userLabel="Name Input TF">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Collection Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="s9F-QH-eIJ" userLabel="Name Input TF">
                         <rect key="frame" x="5" y="5" width="310" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
