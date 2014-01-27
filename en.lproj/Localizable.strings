@@ -158,7 +158,7 @@
 
 "%@ has subscribed to your channel" = "%@ is now following your pack";
 
-"notification_empty" = "You have 0 notification yet";
+"notification_empty" = "Notifications will appear here when you have some";
 "notification_mark_all_as_read" = "Mark all as Read";
 
 "notification_liked_action" = "loved your video";
