@@ -73,7 +73,7 @@
                                                                                                NSParagraphStyleAttributeName: paragrapStyleCenter,
                                                                                                NSFontAttributeName: [UIFont regularCustomFontOfSize:20]}]];
     
-    [attributedMutString appendAttributedString: [[NSAttributedString alloc] initWithString: @"@ 2013 Rockpack Ltd.\n\n\n"
+    [attributedMutString appendAttributedString: [[NSAttributedString alloc] initWithString: @"© 2014 Wonder Place Limited\n\n\n"
                                                                                  attributes: @{NSForegroundColorAttributeName: [UIColor dollyTextMediumGray],
                                                                                                NSParagraphStyleAttributeName: paragrapStyleCenter,
                                                                                                NSFontAttributeName: [UIFont regularCustomFontOfSize:15]}]];
