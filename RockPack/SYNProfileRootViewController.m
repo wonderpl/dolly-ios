@@ -336,6 +336,7 @@
                                                               blue: (112 / 255.0f)
                                                              alpha: 1.0f];
     
+
     
     // == Tap gesture do dismiss the keyboard
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -451,7 +452,6 @@
             [self.subscriptionThumbnailCollectionView setContentOffset:self.contentOffset animated:NO];
         }
     }
-    
 }
 
 
@@ -579,7 +579,6 @@
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
-    self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     
@@ -2392,6 +2391,18 @@
     self.channelThumbnailCollectionView.scrollEnabled = NO;
     self.aboutMeTextView.editable = YES;
     
+    //TODO: Find better solution wierd.
+    if (IS_IPHONE) {
+        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
+    }
+    else
+    {
+        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:19.0]}    forState:UIControlStateNormal];
+        
+    }
+
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = ALPHA_IN_EDIT;
@@ -2690,7 +2701,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     }
     
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
-    return (newLength > 75) ? NO : YES;
+    return (newLength > 50) ? NO : YES;
 }
 
 -(void)dismissKeyboard
@@ -2924,6 +2935,16 @@ finishedWithImage: (UIImage *) image
                                 
                                 
                             }];
+        //TODO: Find better solution wierd.
+
+        if (IS_IPHONE) {
+            [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
+             @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
+        }
+        else
+        {
+            [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
+             @{NSFontAttributeName:[UIFont regularCustomFontOfSize:19.0]}    forState:UIControlStateNormal];
             
             [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
                 [self setCreateOffset];
