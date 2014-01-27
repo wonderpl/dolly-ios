@@ -245,9 +245,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
     
-    
-    // if we are on the last cell of the section, hide the separator line
-    categoryCell.separator.hidden = (BOOL)(indexPath.item == (currentGenre.subgenres.count - 1));
     categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
     categoryCell.label.text = subgenre.name;
     
