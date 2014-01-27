@@ -230,15 +230,15 @@
                                         <rect key="frame" x="0.0" y="484" width="320" height="84"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="195" translatesAutoresizingMaskIntoConstraints="NO" id="9Fr-cL-F6g">
-                                                <rect key="frame" x="62" y="28" width="195" height="28"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="210" translatesAutoresizingMaskIntoConstraints="NO" id="9Fr-cL-F6g">
+                                                <rect key="frame" x="54" y="28" width="210" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="0S2-19-dqz"/>
-                                                    <constraint firstAttribute="width" constant="195" id="jks-jy-Gx2"/>
+                                                    <constraint firstAttribute="width" constant="210" id="jks-jy-Gx2"/>
                                                 </constraints>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="By using Mayberry you agree to our ">
+                                                    <fragment content="By using Wonder PL you agree to our ">
                                                         <attributes>
                                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
@@ -247,7 +247,7 @@
                                                     </fragment>
                                                     <fragment content="Terms of Services">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -261,7 +261,7 @@
                                                     </fragment>
                                                     <fragment content="Privacy Policy">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -462,15 +462,15 @@
                                         <rect key="frame" x="0.0" y="484" width="320" height="84"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="195" translatesAutoresizingMaskIntoConstraints="NO" id="ivF-vQ-0qR">
-                                                <rect key="frame" x="62" y="28" width="195" height="28"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="210" translatesAutoresizingMaskIntoConstraints="NO" id="ivF-vQ-0qR">
+                                                <rect key="frame" x="54" y="28" width="210" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="195" id="TI5-Yd-lEv"/>
+                                                    <constraint firstAttribute="width" constant="210" id="TI5-Yd-lEv"/>
                                                     <constraint firstAttribute="height" constant="28" id="XBm-kT-cJw"/>
                                                 </constraints>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="By using Mayberry you agree to our ">
+                                                    <fragment content="By using Wonder PL you agree to our ">
                                                         <attributes>
                                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
@@ -479,7 +479,7 @@
                                                     </fragment>
                                                     <fragment content="Terms of Services">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -493,7 +493,7 @@
                                                     </fragment>
                                                     <fragment content="Privacy Policy">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.043137254901960784" green="0.65098039215686276" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
