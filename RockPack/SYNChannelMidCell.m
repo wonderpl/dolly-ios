@@ -119,6 +119,8 @@
     self.followButton.hidden = YES;
     self.deletableCell = NO;
     
+    
+    
 }
 
 #pragma mark - Gesture regognizer support
@@ -241,15 +243,13 @@
 -(void) setBorder
 {
     
-    if (IS_IPAD){
-        if (IS_RETINA)
-        {
-            [self.boarderView.layer setBorderWidth:0.5f];
-        }
-        else
-        {
-            [self.boarderView.layer setBorderWidth:1.0f];
-        }
+    if (IS_RETINA)
+    {
+        [self.boarderView.layer setBorderWidth:0.5f];
+    }
+    else
+    {
+        [self.boarderView.layer setBorderWidth:1.0f];
     }
 
 }
