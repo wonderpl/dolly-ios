@@ -11,6 +11,21 @@
 
 @implementation SYNNotificationsMarkAllAsReadCell
 
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+
+    self.textLabel.text = NSLocalizedString(@"notification_mark_all_as_read", nil);
+    self.textLabel.font = [UIFont lightCustomFontOfSize:25.0f];
+    self.textLabel.textColor = [UIColor blackColor];
+    self.textLabel.textAlignment = NSTextAlignmentCenter;
+    
+    self.readButton.layer.cornerRadius = 15.5f;
+
+    
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -36,5 +51,6 @@
 {
     [super layoutSubviews];
 }
+
 
 @end

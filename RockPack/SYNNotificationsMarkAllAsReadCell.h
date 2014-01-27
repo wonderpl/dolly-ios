@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SYNNotificationsMarkAllAsReadCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *readButton;
 
 @end
