@@ -204,7 +204,7 @@
         SYNNotificationsMarkAllAsReadCell *notificationMarkAllAsReadCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsSpecialCellIdent
                                                                                           forIndexPath: indexPath];
         
-        
+        [notificationMarkAllAsReadCell.readButton addTarget:self action:@selector(markAllAsRead) forControlEvents:UIControlEventTouchUpInside];
         return notificationMarkAllAsReadCell;
         
         
@@ -454,7 +454,18 @@
     
     [self markAsReadForNotification: notification];
 }
+-(void) markAllAsRead
+{
+    
+    SYNNotification* notification;
 
+    if( hasUnreadNotifications)
+        notification = nil;
+    
+    [self markAsReadForNotification: notification];
+
+
+}
 
 - (void) markAsReadForNotification: (SYNNotification *) notification
 {
