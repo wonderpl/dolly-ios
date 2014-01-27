@@ -751,6 +751,8 @@
 		38C3FA7517203D6600F126B1 /* PanelDayPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C3FA7317203D6600F126B1 /* PanelDayPortrait@2x.png */; };
 		44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC631884384900B70139 /* ButtonMoreHints.png */; };
 		44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */; };
+		4CE8AACF18967E3700D7E373 /* SYNNotificationsMarkAllAsReadCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AACE18967E3700D7E373 /* SYNNotificationsMarkAllAsReadCell~iphone.xib */; };
+		4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */; };
 		BE03A6CC16F7697900245314 /* ButtonSettingsHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */; };
 		BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */; };
@@ -2098,6 +2100,8 @@
 		38DC34B1175E42DF0048286C /* Rockpack 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 3.xcdatamodel"; sourceTree = "<group>"; };
 		44CAFC631884384900B70139 /* ButtonMoreHints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonMoreHints.png; path = Assets/Images/ButtonMoreHints.png; sourceTree = "<group>"; };
 		44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreHints@2x.png"; path = "Assets/Images/ButtonMoreHints@2x.png"; sourceTree = "<group>"; };
+		4CE8AACE18967E3700D7E373 /* SYNNotificationsMarkAllAsReadCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNNotificationsMarkAllAsReadCell~iphone.xib"; sourceTree = "<group>"; };
+		4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNNotificationsMarkAllAsReadCell.xib; sourceTree = "<group>"; };
 		B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dollyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsViewController.m; sourceTree = "<group>"; };
@@ -5267,6 +5271,8 @@
 				BE7D34D217159E2C0085AB81 /* SYNNotificationsTableViewCell.m */,
 				BE57C03618460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.h */,
 				BE57C03718460DED00C6444A /* SYNNotificationsMarkAllAsReadCell.m */,
+				4CE8AACE18967E3700D7E373 /* SYNNotificationsMarkAllAsReadCell~iphone.xib */,
+				4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -5924,6 +5930,7 @@
 				1F458B0717E1C4E6003C14AC /* AppIcon76x76@2x.png in Resources */,
 				BE2D2154171D5BD500B4B755 /* ButtonCancelHighlighted.png in Resources */,
 				BEC39C0E184CA4F700DA8089 /* SYNFeedbackViewController.xib in Resources */,
+				4CE8AACF18967E3700D7E373 /* SYNNotificationsMarkAllAsReadCell~iphone.xib in Resources */,
 				BE2D2155171D5BD500B4B755 /* ButtonCancelHighlighted@2x.png in Resources */,
 				BE2D2158171D8A4500B4B755 /* AvatarProfile.png in Resources */,
 				BE2D2159171D8A4500B4B755 /* AvatarProfile@2x.png in Resources */,
@@ -6183,6 +6190,7 @@
 				1F4E7FAD181ACBAA00F59007 /* TabActivity@2x~iphone.png in Resources */,
 				38A200A01731607F00FB9F57 /* CellSettingsMiddleHighlighted~iphone.png in Resources */,
 				38A200A11731607F00FB9F57 /* CellSettingsMiddle~iphone.png in Resources */,
+				4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */,
 				38A200A21731607F00FB9F57 /* CellSettingsSingle@2x~iphone.png in Resources */,
 				38A200A31731607F00FB9F57 /* CellSettingsSingleHighlighted@2x~iphone.png in Resources */,
 				38A200A41731607F00FB9F57 /* CellSettingsSingleHighlighted~iphone.png in Resources */,
