@@ -2690,7 +2690,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     }
     
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
-    return (newLength > 50) ? NO : YES;
+    return (newLength > 75) ? NO : YES;
 }
 
 -(void)dismissKeyboard
