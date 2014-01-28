@@ -81,11 +81,24 @@
     
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    int randomNumber = (arc4random() * self.moods.count)+5000;
+    
+    NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:randomNumber inSection:0];
+
+    [self.moodCollectionView scrollToItemAtIndexPath:centerIndexPath
+                                    atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+                                            animated:YES];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated {
     
     
-    
+
     
 }
 
@@ -298,9 +311,9 @@
         [self.moodCollectionView reloadData];
         
         // center the moods list to the middle
-        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
-                                        atScrollPosition: UICollectionViewScrollPositionCenteredVertically
-                                                animated: NO];
+//        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
+//                                        atScrollPosition: UICollectionViewScrollPositionCenteredVertically
+//                                                animated: NO];
     }
 }
 
@@ -388,5 +401,7 @@
 	
 	return sortedVideoInstances;
 }
+
+
 
 @end
