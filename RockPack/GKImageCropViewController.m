@@ -233,9 +233,9 @@
         [self _setupCancelButton];
         [self _setupUseButton];
         
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-250/2, 0, 320, 40)];
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
         
-        UILabel *info = [[UILabel alloc] initWithFrame: CGRectMake(0, 1, 320, 40)];
+        UILabel *info = [[UILabel alloc] initWithFrame: CGRectMake(-1, 1, 320, 40)];
         info.text = NSLocalizedString(@"MOVE AND SCALE", nil);
         info.textColor = [UIColor colorWithRed: 255.0 / 255.0
                                          green: 255.0 / 255.0
@@ -253,7 +253,7 @@
         info.layer.shadowRadius = 1.0;
         info.layer.shadowOpacity = 1.0;
         info.backgroundColor = [UIColor clearColor];
-        info.textAlignment = NSTextAlignmentCenter;
+        info.textAlignment = NSTextAlignmentLeft;
         //[info sizeToFit];
         [titleView addSubview:info];
         
@@ -267,7 +267,7 @@
         UIBarButtonItem *use = [[UIBarButtonItem alloc] initWithCustomView: self.useButton];
         
         
-        [self.toolbar setItems: @[cancel, flex, lbl, flex, use]];
+        [self.toolbar setItems: @[cancel, lbl, flex, use]];
     }
 }
 
