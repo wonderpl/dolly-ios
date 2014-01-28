@@ -111,7 +111,7 @@
     UIView *containerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 200, 28)];
     
     containerView.backgroundColor = [UIColor clearColor];
-    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 3, 200, 28)];
+    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 200, 28)];
     label.backgroundColor = [UIColor clearColor];
     
     label.textAlignment = NSTextAlignmentCenter;
@@ -235,7 +235,10 @@
         
         UILabel *info = [[UILabel alloc] initWithFrame: CGRectMake((self.view.frame.size.width - 250) / 2, 0, 320, 40)];
         info.text = NSLocalizedString(@"MOVE AND SCALE", nil);
-        info.textColor = [UIColor dollyTextMediumGray];
+        info.textColor = [UIColor colorWithRed: 255.0 / 255.0
+                                         green: 255.0 / 255.0
+                                          blue: 255.0 / 255.0
+                                         alpha: 1];
 
         info.font = [UIFont lightCustomFontOfSize: 18];
         
