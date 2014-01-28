@@ -8,6 +8,7 @@
 
 #import "SYNPopupMessageView.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
 #define kSpinnerTextDistance 12.0
 
@@ -41,14 +42,14 @@
 {
     if (self = [super init])
     {
-        UIFont* fontToUse = [UIFont lightCustomFontOfSize: IS_IPHONE ? 14.0f : 18.0f ];
+        UIFont* fontToUse = [UIFont regularCustomFontOfSize:16.0];
         
         CGRect labelFrame = CGRectZero;
         
         UILabel* label = [[UILabel alloc] initWithFrame: labelFrame];
         label.font = fontToUse;
         label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor colorWithWhite:170.0f/255.0f alpha:1.0f];
+        label.textColor = [UIColor dollyTextMediumGray];
         label.textAlignment = NSTextAlignmentCenter;
         label.shadowColor = [UIColor whiteColor];
         label.shadowOffset = CGSizeMake(0.0f, 1.0f);
