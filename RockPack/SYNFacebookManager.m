@@ -436,7 +436,7 @@
     }
     
     [FBWebDialogs presentRequestsDialogModallyWithSession: [FBSession activeSession]
-                                                  message: @"Join me on Rockpack so we can share videos"
+                                                  message: @"Join me on Wonder PL so we can share videos"
                                                     title: @"Invite Friend"
                                                parameters: params
                                                   handler: ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {

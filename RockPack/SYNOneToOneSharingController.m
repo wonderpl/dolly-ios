@@ -673,7 +673,7 @@
     
     if (friend.isOnRockpack)
     {
-        cell.detailTextLabel.text = @"Is on Rockpack";
+        cell.detailTextLabel.text = @"Is on Wonder PL";
     }
     else if ([friend.email isValidEmail])
     {
