@@ -94,14 +94,6 @@
                                             animated:YES];
 }
 
-
--(void)viewWillAppear:(BOOL)animated {
-    
-    
-
-    
-}
-
 -(void) spinAnimationWithRow : (NSNumber*) row {
     [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:YES];
 }
