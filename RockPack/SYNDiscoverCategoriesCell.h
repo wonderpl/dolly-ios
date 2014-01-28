@@ -9,17 +9,7 @@
 @import UIKit;
 
 @interface SYNDiscoverCategoriesCell : UICollectionViewCell
-{
-    UIColor* genreColor;
-}
 
-
-@property (nonatomic, strong) IBOutlet UILabel* label;
-
-@property (nonatomic, strong) IBOutlet UIImageView* arrow;
-
-@property (nonatomic, strong) IBOutlet UIView* separator;
-
-@property (nonatomic, strong) IBOutlet UIView* dimmingView;
+@property (nonatomic, strong, readonly) UILabel *label;
 
 @end

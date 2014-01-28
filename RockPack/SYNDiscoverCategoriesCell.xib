@@ -59,7 +59,6 @@
             </constraints>
             <size key="customSize" width="332" height="67"/>
             <connections>
-                <outlet property="arrow" destination="R2U-bh-bl3" id="F5w-V6-8gv"/>
                 <outlet property="dimmingView" destination="kWQ-8C-i6W" id="Qty-dw-KC8"/>
                 <outlet property="label" destination="VDA-cz-Gkg" id="Unb-AB-PbO"/>
                 <outlet property="separator" destination="p9B-3P-4cn" id="89E-GU-cSa"/>
