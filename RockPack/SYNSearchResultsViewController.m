@@ -193,11 +193,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	if (IS_IPHONE && self.currentSearchGenre) {
-		SYNGenreColorManager *colorManager = [SYNGenreColorManager sharedInstance];
-		self.navigationController.navigationBar.barTintColor = [colorManager colorFromID:self.currentSearchGenre];
-	}
-	
 	NSIndexPath *selectedIndexPath = [[self.videosCollectionView indexPathsForSelectedItems] firstObject];
 	if (selectedIndexPath) {
 		[self.videosCollectionView deselectItemAtIndexPath:selectedIndexPath animated:YES];
@@ -205,14 +200,6 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     self.noVideosLabel.hidden = YES;
     self.noUsersLabel.hidden = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	
-	if (IS_IPHONE && self.currentSearchGenre) {
-		self.navigationController.navigationBar.barTintColor = nil;
-	}
 }
 
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
