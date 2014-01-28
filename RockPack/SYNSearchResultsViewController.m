@@ -21,6 +21,7 @@
 #import "SYNActivityManager.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "SYNGenreColorManager.h"
+#import "UIFont+SYNFont.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
@@ -187,6 +188,8 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.noVideosLabel.text = NSLocalizedString(@"no_videos", @"no videos in search");
     self.noUsersLabel.text = NSLocalizedString(@"no_users", @"no users in search");
 
+    self.noUsersLabel.font = [UIFont regularCustomFontOfSize:18.0f];
+    self.noVideosLabel.font = [UIFont regularCustomFontOfSize:18.0f];
     
 }
 
