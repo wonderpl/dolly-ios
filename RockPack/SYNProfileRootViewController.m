@@ -634,6 +634,12 @@
         });
     }else{
         self.profileImageView.image = placeholderImage;
+        self.profileImageView.alpha = 0.0;
+        
+        [UIView animateWithDuration:1.5f animations:^{
+            self.profileImageView.alpha=1.0f;
+        }];
+
     }
 }
 
