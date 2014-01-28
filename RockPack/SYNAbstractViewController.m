@@ -15,7 +15,6 @@
 #import "ChannelOwner.h"
 #import "GAI.h"
 #import "NSDictionary+Validation.h"
-#import "OWActivityViewController.h"
 #import "SDWebImageManager.h"
 #import "SYNAbstractViewController.h"
 #import "SYNChannelDetailsViewController.h"
@@ -42,8 +41,6 @@
 @interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
-@property (strong, nonatomic) OWActivityView *activityView;
-@property (strong, nonatomic) OWActivityViewController *activityViewController;
 @property (nonatomic, assign) NSInteger lastContentOffset;
 @property (nonatomic, assign) CGPoint startDraggingPoint;
 @property (nonatomic, assign) CGPoint endDraggingPoint;
