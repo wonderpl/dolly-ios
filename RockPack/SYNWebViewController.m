@@ -10,6 +10,8 @@
 
 @interface SYNWebViewController () <UIWebViewDelegate>
 
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *closeButton;
+
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *backButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *forwardButton;
 
@@ -28,6 +30,17 @@
 	webViewController.URL = URL;
 	
 	return navController;
+}
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	// We want to increase the gap between the title and the cancel button by 30 pixels
+	UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+																			target:nil
+																			action:nil];
+	spacer.width = 30.0;
+	self.navigationItem.rightBarButtonItems = @[ self.closeButton, spacer ];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

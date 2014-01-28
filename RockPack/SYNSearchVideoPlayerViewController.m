@@ -165,10 +165,23 @@
 		// Leave room for our header view
 		return UIEdgeInsetsMake(CGRectGetHeight(self.headerView.frame), 0, 0, 0);
 	} else {
-		// We want to add an offset to the beginning and end of the collection view to ensure that the first and
-		// last item are centered
-		CGFloat insetWidth = (CGRectGetWidth(collectionView.frame) - collectionViewFlowLayout.itemSize.width) / 2;
-		return UIEdgeInsetsMake (0, insetWidth, 0, insetWidth);
+		CGFloat cellWidth = collectionViewFlowLayout.itemSize.width;
+		CGFloat separatorWidth = collectionViewFlowLayout.minimumLineSpacing;
+		NSInteger numberOfCells = [collectionView numberOfItemsInSection:0];
+		
+		CGFloat sectionWidth = 0.0;
+		if (numberOfCells) {
+			sectionWidth = (numberOfCells * cellWidth) + ((numberOfCells - 1) * separatorWidth);
+			
+			if (sectionWidth < CGRectGetWidth(collectionView.frame)) {
+				// Since the cells are taking up less room than the width of collection view we want to
+				// center them by adding insets before/after
+				CGFloat insetWidth = (CGRectGetWidth(collectionView.frame) - sectionWidth) / 2;
+				return UIEdgeInsetsMake(0, insetWidth, 0, insetWidth);
+			}
+		}
+		
+		return UIEdgeInsetsMake(0, separatorWidth, 0, separatorWidth);
 	}
 }
 
