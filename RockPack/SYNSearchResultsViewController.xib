@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchResultsViewController">
             <connections>
                 <outlet property="containerTabs" destination="Dp0-fc-7PR" id="wxR-p8-3IS"/>
+                <outlet property="noUsersLabel" destination="6aJ-Lk-c1F" id="lgn-Ck-lkS"/>
+                <outlet property="noVideosLabel" destination="yYG-XK-TiE" id="qpQ-th-IdZ"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="QkW-ty-jhC"/>
                 <outlet property="usersTabButton" destination="g4C-7h-KhZ" id="eni-sr-umt"/>
                 <outlet property="videosCollectionView" destination="SgG-lq-X96" id="vcl-iZ-YZh"/>
@@ -91,6 +93,27 @@
                         <outlet property="delegate" destination="-1" id="0ji-qZ-XOS"/>
                     </connections>
                 </collectionView>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Videos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="yYG-XK-TiE" userLabel="Label - No Videos Label">
+                    <rect key="frame" x="178" y="142" width="300" height="75"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="kGc-aR-uS8"/>
+                        <constraint firstAttribute="height" constant="75" id="zmy-MG-YaO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Users" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="6aJ-Lk-c1F" userLabel="Label - No Users Label">
+                    <rect key="frame" x="178" y="142" width="300" height="75"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="NF9-TT-za1"/>
+                        <constraint firstAttribute="width" constant="300" id="owF-ql-cUv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -99,11 +122,17 @@
                 <constraint firstItem="4v1-Ly-eu6" firstAttribute="top" secondItem="2" secondAttribute="top" constant="49" id="DL8-Tk-PpC"/>
                 <constraint firstItem="Dp0-fc-7PR" firstAttribute="top" secondItem="2" secondAttribute="top" constant="13" id="Dm5-HH-BTz"/>
                 <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="WN0-mx-oSo"/>
+                <constraint firstAttribute="centerX" secondItem="yYG-XK-TiE" secondAttribute="centerX" constant="-0.5" id="WTx-uu-f0W"/>
+                <constraint firstItem="6aJ-Lk-c1F" firstAttribute="top" secondItem="2" secondAttribute="top" constant="142" id="YFW-Sc-z8i"/>
                 <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" id="YO5-Mv-K7A"/>
                 <constraint firstItem="SgG-lq-X96" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="a4g-1T-O5O"/>
                 <constraint firstItem="SgG-lq-X96" firstAttribute="top" secondItem="2" secondAttribute="top" constant="49" id="bY1-yc-Qjo"/>
                 <constraint firstAttribute="trailing" secondItem="SgG-lq-X96" secondAttribute="trailing" constant="20" id="eyO-uD-brE"/>
                 <constraint firstAttribute="bottom" secondItem="SgG-lq-X96" secondAttribute="bottom" id="eyR-2F-l6w"/>
+                <constraint firstItem="yYG-XK-TiE" firstAttribute="top" secondItem="2" secondAttribute="top" constant="142" id="iIl-RS-clz"/>
+                <constraint firstAttribute="centerY" secondItem="yYG-XK-TiE" secondAttribute="centerY" constant="167.5" id="nE7-EB-fvl"/>
+                <constraint firstAttribute="centerX" secondItem="6aJ-Lk-c1F" secondAttribute="centerX" constant="-0.5" id="q1x-dt-iXE"/>
+                <constraint firstAttribute="centerY" secondItem="6aJ-Lk-c1F" secondAttribute="centerY" constant="167.5" id="u2s-Ep-3Bc"/>
                 <constraint firstAttribute="centerX" secondItem="Dp0-fc-7PR" secondAttribute="centerX" id="xq0-Qf-koO"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>

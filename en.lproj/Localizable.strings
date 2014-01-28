@@ -246,6 +246,11 @@
 "search_screen_no_videos" = "No Videos where found for this Search";
 "search_screen_searching_videos" = "Searching for Videos";
 
+// == Discovery/Search == //
+
+"no_videos" = "We couldn't find any videos that matched what you typed in. Please try searching for something else";
+"no_users" = "We couldn't find anyone that matched what you typed in. Please try searching for something else";
+
 // == Channels == //
 
 "channels_screen_section_title" = "PACKS";

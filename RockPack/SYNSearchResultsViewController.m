@@ -31,7 +31,9 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 // search operations
 @property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
+@property (strong, nonatomic) IBOutlet UILabel *noVideosLabel;
 @property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
+@property (strong, nonatomic) IBOutlet UILabel *noUsersLabel;
 
 // @property (nonatomic) NSRange dataRequestRange; is from SYNAbstract, here we need a second for users
 @property (nonatomic) NSRange dataRequestRange2;
@@ -114,7 +116,14 @@ typedef void (^SearchResultCompleteBlock)(int);
         }
         
         wself.videosArray = [NSArray arrayWithArray: fetchedObjects];
-        
+
+        if (wself.searchResultsShowing == SearchResultsShowingVideos) {
+            if (wself.videosArray.count == 0) {
+                wself.noVideosLabel.hidden = NO;
+            } else {
+                wself.noVideosLabel.hidden = YES;
+            }
+        }
         // protection from being called twice, one for every tab and making the loader dissapear prematurely
 //        if (wself.searchResultsShowing == SearchResultsShowingVideos)
             [wself removePopupMessage];
@@ -140,7 +149,13 @@ typedef void (^SearchResultCompleteBlock)(int);
         }
         
         wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
-        
+        if (wself.searchResultsShowing == SearchResultsShowingUsers) {
+            if (wself.usersArray.count == 0) {
+                wself.noUsersLabel.hidden = NO;
+            } else {
+                wself.noUsersLabel.hidden = YES;
+            }
+        }
         // protection from being called twice, one for every tab and making the loader dissapear prematurely
 //        if (wself.searchResultsShowing == SearchResultsShowingUsers)
             [wself removePopupMessage];
@@ -167,6 +182,12 @@ typedef void (^SearchResultCompleteBlock)(int);
         tmpInsets.bottom += 88;
         self.videosCollectionView.contentInset = tmpInsets;
     }
+    
+    
+    self.noVideosLabel.text = NSLocalizedString(@"no_videos", @"no videos in search");
+    self.noUsersLabel.text = NSLocalizedString(@"no_users", @"no users in search");
+
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -181,6 +202,9 @@ typedef void (^SearchResultCompleteBlock)(int);
 	if (selectedIndexPath) {
 		[self.videosCollectionView deselectItemAtIndexPath:selectedIndexPath animated:YES];
 	}
+    
+    self.noVideosLabel.hidden = YES;
+    self.noUsersLabel.hidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -603,6 +627,15 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.usersTabButton.backgroundColor = [UIColor whiteColor];
             self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
             
+            if (self.videosArray.count == 0) {
+                self.noVideosLabel.hidden = NO;
+            } else {
+                self.noVideosLabel.hidden = YES;
+            }
+            
+            self.noUsersLabel.hidden = YES;
+            
+            
             break;
             
         case SearchResultsShowingUsers:
@@ -619,7 +652,13 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
             self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
             
-            break;
+            if (self.usersArray.count == 0) {
+                self.noUsersLabel.hidden = NO;
+            } else {
+                self.noUsersLabel.hidden = YES;
+            }
+            
+            self.noVideosLabel.hidden = YES;
     }
 }
 
