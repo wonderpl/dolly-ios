@@ -49,7 +49,7 @@
     [self.moodCollectionView registerClass:[SYNMoodCell class]
                 forCellWithReuseIdentifier:NSStringFromClass([SYNMoodCell class])];
     
-
+    
     self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
     self.iWantToLabel.textColor = [UIColor dollyMoodColor];
     
@@ -59,7 +59,7 @@
     
     [self getUpdatedMoods];
     
-
+    
     self.watchButton.layer.cornerRadius = 15.5f;
     self.watchButton.layer.masksToBounds = YES;
     
@@ -76,23 +76,24 @@
         //TODO: need to move views for 3.5
         self.topTitleConstraint.constant -= 24.0f;
         self.topWatchConstraint.constant += 34.0f;
-    
+        
     }
     
+    NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:10 inSection:0];
+    
+    if (self.moods.count>0) {
+        [self.moodCollectionView scrollToItemAtIndexPath:centerIndexPath
+                                        atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+                                                animated:YES];
+    }
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    int randomNumber = (arc4random() % self.moods.count)+5000;
-
-    NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:randomNumber inSection:0];
-
-    [self.moodCollectionView scrollToItemAtIndexPath:centerIndexPath
-                                    atScrollPosition:UICollectionViewScrollPositionCenteredVertically
-                                            animated:YES];
 }
+
 
 -(void) spinAnimationWithRow : (NSNumber*) row {
     [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:YES];
@@ -119,8 +120,7 @@
     }
     
     [self.moodCollectionView reloadData];
-    
-    
+
 }
 
 -(void) getUpdatedMoods {
@@ -152,11 +152,11 @@
     }
     
     // Hides the 2 lines in the default picker
-
+    
     
     [[self.defaultPicker.subviews objectAtIndex:1] setHidden:YES];
     [[self.defaultPicker.subviews objectAtIndex:2] setHidden:YES];
-
+    
 }
 
 #pragma mark - Control Callbacks
@@ -185,7 +185,7 @@
 												  [fetchRequest setPredicate:predicate];
                                                   
                                                   NSArray* videosArray = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest
-                                                                                                             error:NULL];
+                                                                                                                               error:NULL];
 												  
                                                   if (![videosArray count]) {
                                                       // implement
@@ -234,15 +234,15 @@
     if (indexPath.row == 0 || (indexPath.row % self.moods.count == self.moods.count-1)) {
         return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 35.0f :35.0f));
     }
-
+    
     return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 40.0f :40.0f));
 }
 
 
 - (void) collectionView: (UICollectionView *) cv
-         didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
+didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
-
+    
 }
 
 #pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
@@ -265,13 +265,13 @@
 - (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     // override
     [self showWatchButton];
-
+    
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView {
     // override
     self.watchButton.hidden = YES;
-
+    
 }
 
 - (void)showWatchButton {
@@ -281,7 +281,7 @@
     [UIView animateWithDuration:WATCH_BUTTON_ANIMATION_TIME animations:^{
         self.watchButton.alpha = 1.0f;
     }];
-
+    
 }
 
 
@@ -293,7 +293,7 @@
 }
 
 - (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-
+    
 }
 
 -(void)setMoods:(NSArray *)moods {
@@ -303,9 +303,8 @@
         [self.moodCollectionView reloadData];
         
         // center the moods list to the middle
-//        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0]
-//                                        atScrollPosition: UICollectionViewScrollPositionCenteredVertically
-//                                                animated: NO];
+        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0] atScrollPosition: UICollectionViewScrollPositionCenteredVertically animated: NO];
+        [self showWatchButton];
     }
 }
 
@@ -346,7 +345,7 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     // not gtting called
     Mood* mood = self.moods [row % self.moods.count];
-
+    
     return mood.name;
 }
 
@@ -360,19 +359,19 @@
         tmpLabel = [[UILabel alloc] init];
         tmpLabel.adjustsFontSizeToFitWidth = YES;
         tmpLabel.textAlignment = NSTextAlignmentCenter;
-//        tmpLabel.font = [UIFont lightCustomFontOfSize:14];
+        //        tmpLabel.font = [UIFont lightCustomFontOfSize:14];
         tmpLabel.font = [tmpLabel.font fontWithSize:14];
         if (IS_IPAD) {
             tmpLabel.font = [tmpLabel.font fontWithSize:25];
         }
-
+        
         
         tmpLabel.textColor = [UIColor colorWithRed: 136.0f / 255.0f
-                                            green: 134.0f / 255.0f
-                                             blue: 168.0f / 255.0f
-                                            alpha: 1.0f];
+                                             green: 134.0f / 255.0f
+                                              blue: 168.0f / 255.0f
+                                             alpha: 1.0f];
         tmpLabel.alpha = 1.0f;
-//        tmpLabel.backgroundColor = [UIColor dollyMoodColor];
+        //        tmpLabel.backgroundColor = [UIColor dollyMoodColor];
     }
     self.watchButton.hidden = YES;
     
