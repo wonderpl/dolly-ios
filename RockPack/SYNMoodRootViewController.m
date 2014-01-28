@@ -85,13 +85,13 @@
 {
     [super viewDidLayoutSubviews];
     
-    int randomNumber = (arc4random() % self.moods.count)+5000;
-        
-    NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:randomNumber inSection:0];
-
-    [self.moodCollectionView scrollToItemAtIndexPath:centerIndexPath
-                                    atScrollPosition:UICollectionViewScrollPositionCenteredVertically
-                                            animated:YES];
+//    int randomNumber = (arc4random() % self.moods.count)+5000;
+//        
+//    NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:randomNumber inSection:0];
+//
+//    [self.moodCollectionView scrollToItemAtIndexPath:centerIndexPath
+//                                    atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+//                                            animated:YES];
 }
 
 -(void) spinAnimationWithRow : (NSNumber*) row {

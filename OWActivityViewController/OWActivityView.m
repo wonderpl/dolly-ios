@@ -34,7 +34,7 @@
     
     if (self)
     {
-        self.clipsToBounds = YES;
+        self.clipsToBounds = NO;
         _activities = activities;
         
         self.backgroundColor = [UIColor clearColor];

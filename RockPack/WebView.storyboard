@@ -75,6 +75,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backButton" destination="r3S-iW-Faw" id="eHm-1n-M9A"/>
+                        <outlet property="closeButton" destination="cJt-qu-Ann" id="BRJ-Wx-uwQ"/>
                         <outlet property="forwardButton" destination="oPf-lA-e5W" id="WK5-gh-aFL"/>
                         <outlet property="webView" destination="UDU-zb-h4X" id="G1I-jm-EaE"/>
                     </connections>
