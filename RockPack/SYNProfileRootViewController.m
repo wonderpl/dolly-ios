@@ -3016,6 +3016,12 @@ finishedWithImage: (UIImage *) image
                         completion:^(BOOL finished) {
                             
                             
+                            
+                            if (self.channelOwner.channelsSet.count<3 && IS_IPHONE) {
+                                [UIView animateWithDuration:0.4f animations:^{
+                                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];                                    
+                                }];
+                            }
                         }];
         
         [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
