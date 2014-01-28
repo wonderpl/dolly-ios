@@ -85,8 +85,8 @@
 {
     [super viewDidLayoutSubviews];
     
-    int randomNumber = (arc4random() * self.moods.count)+5000;
-    
+    int randomNumber = (arc4random() % self.moods.count)+5000;
+        
     NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:randomNumber inSection:0];
 
     [self.moodCollectionView scrollToItemAtIndexPath:centerIndexPath
