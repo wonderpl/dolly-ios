@@ -111,7 +111,7 @@
     UIView *containerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 200, 28)];
     
     containerView.backgroundColor = [UIColor clearColor];
-    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 200, 28)];
+    UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(-8, 0, 200, 28)];
     label.backgroundColor = [UIColor clearColor];
     
     label.textAlignment = NSTextAlignmentCenter;
@@ -233,7 +233,9 @@
         [self _setupCancelButton];
         [self _setupUseButton];
         
-        UILabel *info = [[UILabel alloc] initWithFrame: CGRectMake((self.view.frame.size.width - 250) / 2, 0, 320, 40)];
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-250/2, 0, 320, 40)];
+        
+        UILabel *info = [[UILabel alloc] initWithFrame: CGRectMake(0, 1, 320, 40)];
         info.text = NSLocalizedString(@"MOVE AND SCALE", nil);
         info.textColor = [UIColor colorWithRed: 255.0 / 255.0
                                          green: 255.0 / 255.0
@@ -253,6 +255,7 @@
         info.backgroundColor = [UIColor clearColor];
         info.textAlignment = NSTextAlignmentCenter;
         //[info sizeToFit];
+        [titleView addSubview:info];
         
         UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithCustomView: self.cancelButton];
         
@@ -260,7 +263,7 @@
                                                                               target: nil
                                                                               action: nil];
         
-        UIBarButtonItem *lbl = [[UIBarButtonItem alloc] initWithCustomView: info];
+        UIBarButtonItem *lbl = [[UIBarButtonItem alloc] initWithCustomView: titleView];
         UIBarButtonItem *use = [[UIBarButtonItem alloc] initWithCustomView: self.useButton];
         
         
