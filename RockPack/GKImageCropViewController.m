@@ -235,7 +235,8 @@
         
         UILabel *info = [[UILabel alloc] initWithFrame: CGRectMake((self.view.frame.size.width - 250) / 2, 0, 320, 40)];
         info.text = NSLocalizedString(@"MOVE AND SCALE", nil);
-        
+        info.textColor = [UIColor dollyTextMediumGray];
+
         info.font = [UIFont lightCustomFontOfSize: 18];
         
         info.layer.shadowColor = [[UIColor colorWithRed: (1.0 / 255.0)
