@@ -696,12 +696,17 @@
     }
     else
     {
-        self.coverImage.image = placeholderImage;
-        self.coverImage.alpha = 0.0;
-
-        [UIView animateWithDuration:1.5f animations:^{
-            self.coverImage.alpha=1.0f;
-        }];
+       
+        //Default cover photo only displayed in your own profile
+        //Other user cover photo are blank if nothing is uploaded
+        if (self.modeType == kModeMyOwnProfile) {
+            self.coverImage.image = placeholderImage;
+            self.coverImage.alpha = 0.0;
+            
+            [UIView animateWithDuration:1.5f animations:^{
+                self.coverImage.alpha=1.0f;
+            }];
+        }
         
     }
     
