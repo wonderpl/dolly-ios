@@ -17,8 +17,8 @@
 
 @import QuartzCore;
 
-#define kShowDescptionIPhone 250.0f
-#define kShowDescptionIPad 230.0f
+#define kShowDescptionIPhone 320.0f
+#define kShowDescptionIPad 280.0f
 
 #define kShowDeleteIPhone 250.0f
 #define kShowDeleteIPad 230.0f
@@ -397,6 +397,7 @@
 -(void) setCategoryColor: (UIColor*) color
 {
     [self.bottomBarView setBackgroundColor:color];
+    [self.boarderView setBackgroundColor:color];
     [self.descriptionLabel setBackgroundColor:color];
 }
 
