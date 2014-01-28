@@ -37,7 +37,7 @@
             <rect key="frame" x="0.0" y="0.0" width="671" height="1004"/>
             <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultCoverPhoto.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Oe-3pp" userLabel="Image View - Cover photo">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Oe-3pp" userLabel="Image View - Cover photo">
                     <rect key="frame" x="0.0" y="0.0" width="671" height="502"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -333,9 +333,7 @@
         </view>
     </objects>
     <resources>
-        <image name="AvatarProfile.png" width="90" height="90"/>
         <image name="ButtonMore.png" width="56" height="56"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
-        <image name="DefaultCoverPhoto.jpg" width="2048" height="1024"/>
     </resources>
 </document>
