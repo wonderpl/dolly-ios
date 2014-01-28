@@ -9,32 +9,51 @@
 #import "SYNDiscoverCategoriesCell.h"
 #import "UIFont+SYNFont.h"
 
+@interface SYNDiscoverCategoriesCell ()
+
+@property (nonatomic, strong) IBOutlet UILabel *label;
+@property (nonatomic, strong) IBOutlet UIView* dimmingView;
+@property (nonatomic, strong) IBOutlet UIView *separator;
+
+@property (nonatomic, strong) CALayer *separatorLayerMask;
+
+@end
+
 @implementation SYNDiscoverCategoriesCell
 
-- (void) awakeFromNib
-{
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
     self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
-    genreColor = [UIColor clearColor]; // set a random default to avoid crashes
+	
+	self.separator.layer.mask = self.separatorLayerMask;
 }
 
--(void)setSelected:(BOOL)selected
-{
+- (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
-    if(selected)
-    {
-        self.dimmingView.hidden = NO;
-    }
-    else
-    {
-        self.dimmingView.hidden = YES;
-    }
+	self.dimmingView.hidden = !selected;
 }
 
--(void)setBackgroundColor:(UIColor *)backgroundColor
-{
-    genreColor = backgroundColor;
-    [super setBackgroundColor: backgroundColor];
+- (CALayer *)separatorLayerMask {
+	if (!_separatorLayerMask) {
+		CAGradientLayer *mask = [CAGradientLayer layer];
+		mask.colors = @[ (id) [[UIColor clearColor] CGColor],
+						 (id) [[UIColor whiteColor] CGColor],
+						 (id) [[UIColor clearColor] CGColor] ];
+		mask.locations = @[ @0.0, @0.5, @1.0 ];
+		mask.startPoint = CGPointMake(0.0, 0.5);
+		mask.endPoint = CGPointMake(1.0, 0.5);
+		
+		self.separatorLayerMask = mask;
+	}
+	return _separatorLayerMask;
+}
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+	[super layoutSublayersOfLayer:layer];
+	
+	self.separatorLayerMask.frame = self.separator.bounds;
 }
 
 
