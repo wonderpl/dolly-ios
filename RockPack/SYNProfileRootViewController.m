@@ -710,7 +710,6 @@
                 self.coverImage.alpha=1.0f;
             }];
         }
-        
     }
     
 }
@@ -1795,6 +1794,30 @@
         [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
                                                             object: self
                                                           userInfo: @{kChannelOwner : self.channelOwner}];
+        NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
+        NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
+        
+
+        [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                           onCompletion: ^(id dictionary) {
+                                               NSError *error = nil;
+                                               ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
+                                                                                                                                         error: &error];
+                                               if (channelOwnerFromId)
+                                               {
+                                                   [channelOwnerFromId setAttributesFromDictionary: dictionary
+                                                                               ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
+                                                   
+                                                   [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
+                                               }
+                                               else
+                                               {
+                                                   DebugLog (@"Channel disappeared from underneath us");
+                                               }
+                                               
+                                               
+                                           } onError: nil];
+
     }
     
     if(channelOwnerIsUser && self.modeType != kModeEditProfile)
