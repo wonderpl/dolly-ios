@@ -11,7 +11,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HY-ng-bdK">
-                    <rect key="frame" x="10" y="0.0" width="24" height="24"/>
+                    <rect key="frame" x="0.0" y="0.0" width="38" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" image="ButtonShuttleBarPlay.png">
@@ -65,13 +65,13 @@
                 <constraint firstItem="GtO-iW-TPz" firstAttribute="leading" secondItem="1TK-HE-31a" secondAttribute="trailing" constant="10" id="DYi-JV-OWg"/>
                 <constraint firstAttribute="centerY" secondItem="1TK-HE-31a" secondAttribute="centerY" id="HcR-XS-nMI"/>
                 <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="GtO-iW-TPz" secondAttribute="trailing" constant="10" id="MxH-Fa-Rll"/>
-                <constraint firstItem="2HY-ng-bdK" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="10" id="V9l-Ok-PU8"/>
+                <constraint firstItem="2HY-ng-bdK" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="V9l-Ok-PU8"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="UPL-IY-mRy" secondAttribute="leading" id="bFK-vf-WoG"/>
                 <constraint firstAttribute="centerY" secondItem="UPL-IY-mRy" secondAttribute="centerY" constant="1" id="dgA-9y-rvw"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="trailing" secondItem="UPL-IY-mRy" secondAttribute="trailing" id="eiy-UR-iBX"/>
                 <constraint firstAttribute="centerY" secondItem="GtO-iW-TPz" secondAttribute="centerY" id="fxQ-TQ-QCH"/>
                 <constraint firstAttribute="centerY" secondItem="Kmx-LH-wU8" secondAttribute="centerY" id="oAE-WV-mJz"/>
-                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" constant="8" id="v2q-dp-Ntm"/>
+                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" constant="4" id="v2q-dp-Ntm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -86,7 +86,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ButtonShuttleBarPlay.png" width="24" height="24"/>
+        <image name="ButtonShuttleBarPlay.png" width="38" height="24"/>
         <image name="ScrubberBarHD.png" width="26" height="12"/>
     </resources>
 </document>
