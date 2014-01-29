@@ -14,11 +14,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CREATE NEW PACK" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CREATE NEW PACK" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="16" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
                         <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="256" id="R9W-18-7Cm"/>
                             <constraint firstAttribute="height" constant="44" id="gCT-W2-nv7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -53,7 +52,9 @@
                 <constraint firstAttribute="centerX" secondItem="VDA-cz-Gkg" secondAttribute="centerX" id="VLa-NM-Rp5"/>
                 <constraint firstItem="kWQ-8C-i6W" firstAttribute="top" secondItem="DiE-ts-EYH" secondAttribute="top" id="aFj-a8-IUb"/>
                 <constraint firstAttribute="trailing" secondItem="kWQ-8C-i6W" secondAttribute="trailing" id="gvV-gE-jkK"/>
+                <constraint firstItem="VDA-cz-Gkg" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" id="lkf-Ob-NaB"/>
                 <constraint firstAttribute="bottom" secondItem="kWQ-8C-i6W" secondAttribute="bottom" id="lqi-KR-swa"/>
+                <constraint firstAttribute="trailing" secondItem="VDA-cz-Gkg" secondAttribute="trailing" id="qix-jn-0fG"/>
                 <constraint firstItem="kWQ-8C-i6W" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" id="rse-tA-VcM"/>
                 <constraint firstAttribute="centerY" secondItem="VDA-cz-Gkg" secondAttribute="centerY" id="vbD-gP-aGn"/>
             </constraints>
