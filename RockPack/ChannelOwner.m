@@ -216,7 +216,7 @@
                 else
                 {
                     channel.title =
-                    [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
+                    [NSString stringWithFormat:@"%@'S %@", [dictionary[@"display_name"] uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
                 }
             }
 
