@@ -172,7 +172,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0M-52-iQT">
-                                        <rect key="frame" x="124" y="106" width="72" height="30"/>
+                                        <rect key="frame" x="124" y="104" width="72" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="72S-2R-8El"/>
@@ -192,7 +192,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="Tpa-aa-3hg" secondAttribute="centerX" id="61z-NT-Apf"/>
-                                    <constraint firstItem="v0M-52-iQT" firstAttribute="top" secondItem="Tpa-aa-3hg" secondAttribute="bottom" constant="21" id="6Si-di-am5"/>
+                                    <constraint firstItem="v0M-52-iQT" firstAttribute="top" secondItem="Tpa-aa-3hg" secondAttribute="bottom" constant="19" id="6Si-di-am5"/>
                                     <constraint firstAttribute="bottom" secondItem="j4e-Kv-apz" secondAttribute="bottom" constant="15" id="6Xl-XK-fuT"/>
                                     <constraint firstItem="LCg-U6-Fr5" firstAttribute="top" secondItem="2yo-aq-LCf" secondAttribute="top" constant="6" id="j3i-Ik-hpg"/>
                                     <constraint firstAttribute="centerX" secondItem="j4e-Kv-apz" secondAttribute="centerX" constant="-0.5" id="mHc-tP-S4o"/>
