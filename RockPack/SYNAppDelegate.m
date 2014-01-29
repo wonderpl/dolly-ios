@@ -22,11 +22,11 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "TestFlight.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "UncaughtExceptionHandler.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <GoogleConversionPing.h>
+#import <TestFlight.h>
 @import AVFoundation;
 
 @interface SYNAppDelegate () {

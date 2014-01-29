@@ -1387,8 +1387,6 @@
 		012CDC3A17E2286C00C723BB /* DeletePackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DeletePackButton@2x.png"; path = "Assets/Images/DeletePackButton@2x.png"; sourceTree = "<group>"; };
 		012CDC3B17E2286C00C723BB /* DeletePackButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DeletePackButton@2x~iphone.png"; path = "Assets/Images/DeletePackButton@2x~iphone.png"; sourceTree = "<group>"; };
 		012CDC3C17E2286C00C723BB /* DeletePackButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DeletePackButton~iphone.png"; path = "Assets/Images/DeletePackButton~iphone.png"; sourceTree = "<group>"; };
-		0131D25417C3706600D983D2 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		0131D25517C3706600D983D2 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		01363EB1162F5C8A00FFAA09 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		01363EB3162FDEA600FFAA09 /* NSObject+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Blocks.h"; sourceTree = "<group>"; };
 		01363EB4162FDEA600FFAA09 /* NSObject+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Blocks.m"; sourceTree = "<group>"; };
@@ -1472,7 +1470,6 @@
 		019824EA1629CBDF00216900 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		019824EB1629CBDF00216900 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		019824EE1629CC7600216900 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = RockPack/libTestFlight.a; sourceTree = "<group>"; };
-		019824EF1629CC7600216900 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		019824F11629CE1600216900 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0198250A1629DCF100216900 /* SYNContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNContainerViewController.h; sourceTree = "<group>"; };
 		0198250B1629DCF100216900 /* SYNContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNContainerViewController.m; sourceTree = "<group>"; };
@@ -3399,7 +3396,6 @@
 				019E6A5E165FD958002B312A /* OAuth2 */,
 				012502BA16CA8FCE0029C7C8 /* Social Media */,
 				BEF9E5AD16DCBAA300286113 /* Sound */,
-				019824ED1629CC6600216900 /* TestFlight */,
 				BEF9E5B416DD23F000286113 /* Video Queue */,
 				E9E1E27918561BFF0051E312 /* Paging Models */,
 			);
@@ -3413,16 +3409,6 @@
 				019824EB1629CBDF00216900 /* UncaughtExceptionHandler.m */,
 			);
 			name = "Exception Handler";
-			sourceTree = "<group>";
-		};
-		019824ED1629CC6600216900 /* TestFlight */ = {
-			isa = PBXGroup;
-			children = (
-				019824EF1629CC7600216900 /* TestFlight.h */,
-				0131D25417C3706600D983D2 /* TestFlight+AsyncLogging.h */,
-				0131D25517C3706600D983D2 /* TestFlight+ManualSessions.h */,
-			);
-			name = TestFlight;
 			sourceTree = "<group>";
 		};
 		019824F41629CEA200216900 /* App Icons */ = {
