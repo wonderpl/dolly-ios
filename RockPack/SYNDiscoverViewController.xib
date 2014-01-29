@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -13,25 +13,26 @@
                 <outlet property="searchBar" destination="whA-6D-loW" id="sF5-4c-a8h"/>
                 <outlet property="searchDisplayController" destination="EaQ-KT-miL" id="hax-py-jLk"/>
                 <outlet property="sideContainerView" destination="r19-QH-EUb" id="bn0-SA-nlf"/>
+                <outlet property="sideContainerWidth" destination="MIN-f5-dFA" id="haq-CZ-5hZ"/>
                 <outlet property="view" destination="1" id="9g5-gS-N94"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="927" height="768"/>
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="fzQ-bP-TKm" userLabel="Container View">
-                    <rect key="frame" x="256" y="64" width="671" height="704"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzQ-bP-TKm" userLabel="Container View">
+                    <rect key="frame" x="223" y="64" width="545" height="960"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" id="r19-QH-EUb" userLabel="Side Container (Used for Resize)">
-                    <rect key="frame" x="0.0" y="64" width="256" height="704"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r19-QH-EUb" userLabel="Side Container (Used for Resize)">
+                    <rect key="frame" x="0.0" y="64" width="223" height="960"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <subviews>
-                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="voe-PP-I8e">
-                            <rect key="frame" x="0.0" y="44" width="256" height="660"/>
+                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="voe-PP-I8e">
+                            <rect key="frame" x="0.0" y="44" width="223" height="916"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -47,8 +48,8 @@
                                 <outlet property="delegate" destination="-1" id="B7h-Rg-UO2"/>
                             </connections>
                         </collectionView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="s2u-9J-KS3" userLabel="Autosuggestion Table View">
-                            <rect key="frame" x="0.0" y="44" width="256" height="660"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="s2u-9J-KS3" userLabel="Autosuggestion Table View">
+                            <rect key="frame" x="0.0" y="44" width="223" height="916"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -59,9 +60,12 @@
                                 <outlet property="delegate" destination="-1" id="Fna-7B-iUZ"/>
                             </connections>
                         </tableView>
-                        <searchBar contentMode="redraw" id="whA-6D-loW">
-                            <rect key="frame" x="-1" y="0.0" width="258" height="44"/>
+                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="whA-6D-loW">
+                            <rect key="frame" x="0.0" y="0.0" width="223" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="yuf-ge-KjT"/>
+                            </constraints>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="zrC-31-atE"/>
@@ -69,13 +73,34 @@
                         </searchBar>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="s2u-9J-KS3" secondAttribute="bottom" id="3mz-iq-1C0"/>
+                        <constraint firstItem="voe-PP-I8e" firstAttribute="top" secondItem="whA-6D-loW" secondAttribute="bottom" id="8Ns-cO-Lzz"/>
+                        <constraint firstItem="whA-6D-loW" firstAttribute="top" secondItem="r19-QH-EUb" secondAttribute="top" id="DC5-0J-ANI"/>
+                        <constraint firstItem="whA-6D-loW" firstAttribute="leading" secondItem="r19-QH-EUb" secondAttribute="leading" id="L1O-uv-OxU"/>
+                        <constraint firstAttribute="width" constant="223" id="MIN-f5-dFA"/>
+                        <constraint firstAttribute="trailing" secondItem="whA-6D-loW" secondAttribute="trailing" id="Pl8-34-a04"/>
+                        <constraint firstAttribute="trailing" secondItem="s2u-9J-KS3" secondAttribute="trailing" id="TPL-aO-L7M"/>
+                        <constraint firstItem="s2u-9J-KS3" firstAttribute="leading" secondItem="r19-QH-EUb" secondAttribute="leading" id="eeH-XQ-2kf"/>
+                        <constraint firstItem="voe-PP-I8e" firstAttribute="leading" secondItem="r19-QH-EUb" secondAttribute="leading" id="lcq-iq-enf"/>
+                        <constraint firstAttribute="bottom" secondItem="voe-PP-I8e" secondAttribute="bottom" id="rBw-vk-rkY"/>
+                        <constraint firstItem="s2u-9J-KS3" firstAttribute="top" secondItem="whA-6D-loW" secondAttribute="bottom" id="tns-y1-wz3"/>
+                        <constraint firstAttribute="trailing" secondItem="voe-PP-I8e" secondAttribute="trailing" id="ve5-s9-sIR"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="fzQ-bP-TKm" firstAttribute="leading" secondItem="r19-QH-EUb" secondAttribute="trailing" id="IGf-Ql-jhe"/>
+                <constraint firstItem="r19-QH-EUb" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="Lpp-Th-wQl"/>
+                <constraint firstAttribute="bottom" secondItem="r19-QH-EUb" secondAttribute="bottom" id="Pln-oS-f24"/>
+                <constraint firstAttribute="trailing" secondItem="fzQ-bP-TKm" secondAttribute="trailing" id="ayI-J4-P47"/>
+                <constraint firstItem="r19-QH-EUb" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="gQh-UL-TxC"/>
+                <constraint firstItem="fzQ-bP-TKm" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="pae-Q9-HuS"/>
+                <constraint firstAttribute="bottom" secondItem="fzQ-bP-TKm" secondAttribute="bottom" id="vdA-jA-i5y"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <searchDisplayController id="EaQ-KT-miL">
             <connections>

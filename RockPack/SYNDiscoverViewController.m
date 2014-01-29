@@ -33,7 +33,7 @@ typedef enum {
 
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
-@interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate,
+@interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,
                                         UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 
@@ -61,6 +61,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
+
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *sideContainerWidth;
 
 @end
 
@@ -153,6 +155,19 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.topItem.title = self.title;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	if (IS_IPAD) {
+		CGFloat width = CGRectGetWidth(self.view.bounds);
+		CGFloat sideWidth = (int)(width / 3.0);
+		
+		self.sideContainerWidth.constant = sideWidth;
+		
+		[self.categoriesCollectionView.collectionViewLayout invalidateLayout];
+	}
 }
 
 
@@ -265,6 +280,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+				  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	return CGSizeMake(CGRectGetWidth(collectionView.frame), 44);
 }
 
 
