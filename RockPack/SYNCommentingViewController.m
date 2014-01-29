@@ -50,6 +50,7 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, weak) Comment* currentlyDeletingComment;
 @property (nonatomic, weak) SYNCommentingCollectionViewCell* currentlyDeletingCell;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *commentBottomConstraint;
 @end
 
 @implementation SYNCommentingViewController
@@ -121,6 +122,7 @@ static NSString* PlaceholderText = @"Say something nice";
     [self getCommentsFromServer];
     
     
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -129,7 +131,11 @@ static NSString* PlaceholderText = @"Say something nice";
     [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
+    if (!IS_IPHONE_5) {
+        [self.commentBottomConstraint setConstant:88];
+    }
     
+
     
 }
 
