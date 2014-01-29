@@ -178,6 +178,11 @@ static NSString* PlaceholderText = @"Say something nice";
 		CGFloat keyboardHeightChange = (isShowing ? keyboardHeight : 0.0);
 		
 		self.bottomContainerViewBottom.constant = keyboardHeightChange;
+        
+        if (!IS_IPHONE_5) {
+            self.bottomContainerViewBottom.constant = keyboardHeightChange+88;
+
+        }
 		
 		CGFloat newYOffset = self.commentsCollectionView.contentOffset.y + (isShowing ? keyboardHeight : -keyboardHeight);
 		

@@ -69,17 +69,17 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     if(collectionData.count <= 0)
         return;
     
-    Channel* firstChannel = collectionData[0];
+//    Channel* firstChannel = collectionData[0];
     
     // create string
-    NSString *nameString = firstChannel.channelOwner.displayName; // ex 'Dolly Proxima'
+//    NSString *nameString = firstChannel.channelOwner.displayName; // ex 'Dolly Proxima'
     NSString *actionString = [NSString stringWithFormat:@"created %@ collection%@", _collectionData.count > 1 ? [NSString stringWithFormat:@"%i", _collectionData.count] : @"a new", _collectionData.count > 1 ? @"s" : @""];
     
     NSMutableAttributedString *attributedCompleteString = [[NSMutableAttributedString alloc] init];
     NSDictionary *strong = IS_IPHONE ? self.strongCenteredTextAttributes : self.strongTextAttributes;
     NSDictionary *light = IS_IPHONE ? self.lightCenteredTextAttributes : self.lightTextAttributes;
     
-    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: nameString
+    [attributedCompleteString appendAttributedString: [[NSAttributedString alloc] initWithString: @""
                                                                                       attributes: strong]];
     if(IS_IPAD)
     {
