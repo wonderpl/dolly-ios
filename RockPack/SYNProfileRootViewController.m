@@ -1300,7 +1300,7 @@
                     [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
                 }
             }
-            
+            [weakSelf.subscriptionThumbnailCollectionView reloadData];
             [self.channelOwner.managedObjectContext save: &error];
             
         };
