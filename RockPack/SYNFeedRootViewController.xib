@@ -19,7 +19,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="927" height="768"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.52026909498342255" green="0.77704653532608692" blue="0.45777956813050119" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="xNI-le-qs7">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="0.0" id="xNI-le-qs7">
                         <size key="itemSize" width="927" height="336"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
