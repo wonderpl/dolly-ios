@@ -21,10 +21,10 @@
                             <constraint firstAttribute="height" constant="44" id="gCT-W2-nv7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <color key="textColor" red="0.15686274510000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.15686274510000001" green="0.1764705882" blue="0.20000000000000001" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9B-3P-4cn" userLabel="Line">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9B-3P-4cn" userLabel="Line" customClass="SYNGradientSeparatorView">
                         <rect key="frame" x="0.0" y="43" width="256" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>

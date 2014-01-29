@@ -15,8 +15,6 @@
 @property (nonatomic, strong) IBOutlet UIView* dimmingView;
 @property (nonatomic, strong) IBOutlet UIView *separator;
 
-@property (nonatomic, strong) CALayer *separatorLayerMask;
-
 @end
 
 @implementation SYNDiscoverCategoriesCell
@@ -25,8 +23,6 @@
 	[super awakeFromNib];
 	
     self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
-	
-	self.separator.layer.mask = self.separatorLayerMask;
 }
 
 - (void)setSelected:(BOOL)selected {
@@ -34,27 +30,5 @@
     
 	self.dimmingView.hidden = !selected;
 }
-
-- (CALayer *)separatorLayerMask {
-	if (!_separatorLayerMask) {
-		CAGradientLayer *mask = [CAGradientLayer layer];
-		mask.colors = @[ (id) [[UIColor clearColor] CGColor],
-						 (id) [[UIColor whiteColor] CGColor],
-						 (id) [[UIColor clearColor] CGColor] ];
-		mask.locations = @[ @0.0, @0.5, @1.0 ];
-		mask.startPoint = CGPointMake(0.0, 0.5);
-		mask.endPoint = CGPointMake(1.0, 0.5);
-		
-		self.separatorLayerMask = mask;
-	}
-	return _separatorLayerMask;
-}
-
-- (void)layoutSublayersOfLayer:(CALayer *)layer {
-	[super layoutSublayersOfLayer:layer];
-	
-	self.separatorLayerMask.frame = self.separator.bounds;
-}
-
 
 @end

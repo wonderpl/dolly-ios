@@ -155,19 +155,15 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.topItem.title = self.title;
+	
+	[self updateContainerWidths];
 }
+
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
-	if (IS_IPAD) {
-		CGFloat width = CGRectGetWidth(self.view.bounds);
-		CGFloat sideWidth = (int)(width / 3.0);
-		
-		self.sideContainerWidth.constant = sideWidth;
-		
-		[self.categoriesCollectionView.collectionViewLayout invalidateLayout];
-	}
+	[self updateContainerWidths];
 }
 
 
@@ -616,6 +612,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     self.autocompleteTableView.hidden = YES;
     self.autocompleteSuggestionsArray = @[];
     [self.autocompleteTableView reloadData];
+}
+
+
+- (void)updateContainerWidths {
+	if (IS_IPAD) {
+		CGFloat width = CGRectGetWidth(self.view.bounds);
+		CGFloat sideWidth = (int)(width / 3.0);
+		
+		self.sideContainerWidth.constant = sideWidth;
+		
+		[self.categoriesCollectionView.collectionViewLayout invalidateLayout];
+	}
 }
 
 @end

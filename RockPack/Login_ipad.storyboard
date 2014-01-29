@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djh-wF-rJq" userLabel="Facebook UIButton">
-                                <rect key="frame" x="151" y="909" width="280" height="39"/>
+                                <rect key="frame" x="138" y="909" width="280" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="6pe-M4-A1b"/>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYE-YL-Gus" userLabel="Sign-Up UIButton" customClass="SYNFormButton">
-                                <rect key="frame" x="480" y="910" width="96" height="38"/>
+                                <rect key="frame" x="468" y="910" width="96" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -115,14 +115,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iS9-hS-oFd" firstAttribute="top" secondItem="zXj-H4-kWP" secondAttribute="bottom" constant="8" id="24c-gc-Pam"/>
-                            <constraint firstItem="iS9-hS-oFd" firstAttribute="leading" secondItem="hYE-YL-Gus" secondAttribute="trailing" constant="38" id="8WV-8g-p0g"/>
+                            <constraint firstItem="iS9-hS-oFd" firstAttribute="leading" secondItem="hYE-YL-Gus" secondAttribute="trailing" constant="50" id="8WV-8g-p0g"/>
                             <constraint firstItem="iS9-hS-oFd" firstAttribute="centerX" secondItem="zXj-H4-kWP" secondAttribute="centerX" constant="-0.5" id="ABO-YC-5nC"/>
                             <constraint firstAttribute="trailing" secondItem="iS9-hS-oFd" secondAttribute="trailing" constant="58" id="KVM-ub-IHI"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="iS9-hS-oFd" secondAttribute="bottom" constant="76" id="LjO-lD-aFT"/>
                             <constraint firstAttribute="centerY" secondItem="j6u-Ab-nE9" secondAttribute="centerY" id="OIG-Ph-ptg"/>
                             <constraint firstItem="kcf-dV-8Oi" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="94" id="PJa-vZ-rEf"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="djh-wF-rJq" secondAttribute="bottom" constant="76" id="RNF-y1-1U1"/>
-                            <constraint firstItem="hYE-YL-Gus" firstAttribute="leading" secondItem="djh-wF-rJq" secondAttribute="trailing" constant="49" id="Rmu-hF-fhF"/>
+                            <constraint firstItem="hYE-YL-Gus" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="djh-wF-rJq" secondAttribute="trailing" constant="50" id="Rmu-hF-fhF"/>
+                            <constraint firstAttribute="centerX" secondItem="djh-wF-rJq" secondAttribute="centerX" priority="900" id="Zml-Ik-FE8"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="hYE-YL-Gus" secondAttribute="bottom" constant="76" id="cz7-Cj-gLB"/>
                             <constraint firstAttribute="centerX" secondItem="kcf-dV-8Oi" secondAttribute="centerX" constant="-0.5" id="hY1-yE-VUI"/>
                             <constraint firstAttribute="centerX" secondItem="j6u-Ab-nE9" secondAttribute="centerX" id="zQ4-iK-0oo"/>
@@ -1026,8 +1027,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="ahx-Sv-3Mj"/>
+        <segue reference="oHh-i9-djB"/>
         <segue reference="a0x-hG-aBP"/>
-        <segue reference="fNr-jN-dIg"/>
-        <segue reference="8dQ-Bm-dYZ"/>
     </inferredMetricsTieBreakers>
 </document>
