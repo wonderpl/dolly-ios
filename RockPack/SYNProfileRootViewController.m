@@ -572,7 +572,12 @@
     self.fullNameLabel.text = self.channelOwner.displayName;
     
     [self setProfileImage:self.channelOwner.thumbnailURL];
-    [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
+    
+    //other user cover photos are set in set channel owner succcess block as
+    //places such as the cover photo set yet
+    if (modeType == kModeMyOwnProfile) {
+        [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
+    }
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
