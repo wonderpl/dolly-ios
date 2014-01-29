@@ -1272,6 +1272,11 @@
         self.collectionsTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
         [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
         
+        if (self.modeType == kModeOtherUsersProfile) {
+            self.followersCountButton.hidden = NO;
+            self.followAllButton.hidden = NO;
+        }
+        
     }
     else
     {
@@ -1313,6 +1318,13 @@
                                                        inRange: range
                                              completionHandler: successBlock
                                                   errorHandler: errorBlock];
+        
+        if (self.modeType == kModeOtherUsersProfile) {
+            self.followersCountButton.hidden = YES;
+            self.followAllButton.hidden = YES;
+            
+        }
+
     }
 }
 
