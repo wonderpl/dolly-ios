@@ -414,7 +414,6 @@
 	[super viewWillAppear:animated];
     
     [self updateTabStates];
-    //  [self setUpUserProfile];
     [self setUpSegmentedControl];
     [self setNeedsStatusBarAppearanceUpdate];
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
@@ -648,6 +647,10 @@
 
 -(void) setCoverphotoImage: (NSString*) thumbnailURL
 {
+    
+    if ([thumbnailURL isEqualToString:@""]) {
+        return;
+    }
     
     UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto.jpg"];
     
@@ -1791,9 +1794,6 @@
                                                      name: NSManagedObjectContextDidSaveNotification
                                                    object: self.channelOwner.managedObjectContext];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName: kChannelOwnerUpdateRequest
-                                                            object: self
-                                                          userInfo: @{kChannelOwner : self.channelOwner}];
         NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
         NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
         
