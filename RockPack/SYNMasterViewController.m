@@ -529,13 +529,17 @@
     [self.networkMessageView setText: message];
     
     [self.view addSubview: self.networkMessageView];
+    CGRect newFrame = self.networkMessageView.frame;
+    newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - newFrame.size.height;
     
+    if (IS_IPHONE) {
+        newFrame.origin.y-=newFrame.size.height-2;
+    }
+
     [UIView animateWithDuration: 0.3f
                           delay: 0.0f
                         options: UIViewAnimationOptionCurveEaseOut
                      animations: ^{
-                         CGRect newFrame = self.networkMessageView.frame;
-                         newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - newFrame.size.height;
                          self.networkMessageView.frame = newFrame;
                      }
                      completion: ^(BOOL finished) {
