@@ -377,15 +377,18 @@
     
     
     //Right transform for the segmented control animations
-    CGAffineTransform translateRight = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
     
-    self.subscriptionThumbnailCollectionView.transform = translateRight;
-    
-    self.followingSearchBar.transform = CGAffineTransformTranslate(self.followingSearchBar.transform, self.view.frame.size.width, 0);
-    
-    CGRect tmp = self.followingSearchBar.frame;
-    tmp.origin.x+=320;
-    self.followingSearchBar.frame = tmp;
+    if (IS_IPHONE) {
+        CGAffineTransform translateRight = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
+        
+        self.subscriptionThumbnailCollectionView.transform = translateRight;
+        
+        self.followingSearchBar.transform = CGAffineTransformTranslate(self.followingSearchBar.transform, self.view.frame.size.width, 0);
+        
+        CGRect tmp = self.followingSearchBar.frame;
+        tmp.origin.x+=320;
+        self.followingSearchBar.frame = tmp;
+    }
 }
 
 -(void) setFollowersCountButton
