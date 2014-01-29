@@ -560,8 +560,6 @@
 
 -(void) setUpUserProfile
 {
-    self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
-    self.aboutMeTextView.font = [UIFont regularCustomFontOfSize:13.0];
     
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(userDataChanged:)
@@ -583,7 +581,9 @@
     self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    
+    self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:13.0];
+    self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
+
     [self.editButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
     
     [self.editButton setTitle:NSLocalizedString(@"Edit my profile", nil) forState:UIControlStateNormal];
