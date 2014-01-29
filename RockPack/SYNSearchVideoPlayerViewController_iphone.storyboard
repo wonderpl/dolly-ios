@@ -65,7 +65,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2yo-aq-LCf" userLabel="Header View" customClass="SYNPassthroughView">
-                                <rect key="frame" x="0.0" y="244" width="320" height="168"/>
+                                <rect key="frame" x="0.0" y="244" width="320" height="195"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="LCg-U6-Fr5">
@@ -157,7 +157,7 @@
                                         </constraints>
                                     </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="j4e-Kv-apz">
-                                        <rect key="frame" x="41" y="125" width="240" height="29"/>
+                                        <rect key="frame" x="41" y="152" width="240" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="gwD-YV-mc9"/>
@@ -172,7 +172,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0M-52-iQT">
-                                        <rect key="frame" x="124" y="89" width="72" height="30"/>
+                                        <rect key="frame" x="124" y="104" width="72" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="72S-2R-8El"/>
@@ -192,7 +192,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="Tpa-aa-3hg" secondAttribute="centerX" id="61z-NT-Apf"/>
-                                    <constraint firstItem="v0M-52-iQT" firstAttribute="top" secondItem="Tpa-aa-3hg" secondAttribute="bottom" constant="4" id="6Si-di-am5"/>
+                                    <constraint firstItem="v0M-52-iQT" firstAttribute="top" secondItem="Tpa-aa-3hg" secondAttribute="bottom" constant="19" id="6Si-di-am5"/>
                                     <constraint firstAttribute="bottom" secondItem="j4e-Kv-apz" secondAttribute="bottom" constant="15" id="6Xl-XK-fuT"/>
                                     <constraint firstItem="LCg-U6-Fr5" firstAttribute="top" secondItem="2yo-aq-LCf" secondAttribute="top" constant="6" id="j3i-Ik-hpg"/>
                                     <constraint firstAttribute="centerX" secondItem="j4e-Kv-apz" secondAttribute="centerX" constant="-0.5" id="mHc-tP-S4o"/>
@@ -219,7 +219,7 @@
                             <constraint firstItem="2yo-aq-LCf" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="9Ap-OB-142"/>
                             <constraint firstItem="2yo-aq-LCf" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="Ibb-Sf-jKc"/>
                             <constraint firstAttribute="trailing" secondItem="gju-Ii-lA2" secondAttribute="trailing" id="LFC-Wk-Ezj"/>
-                            <constraint firstItem="j4e-Kv-apz" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" constant="125" id="Ul0-vm-kZf"/>
+                            <constraint firstItem="j4e-Kv-apz" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" constant="152" id="Ul0-vm-kZf"/>
                             <constraint firstItem="OGz-pp-K5R" firstAttribute="leading" secondItem="I22-Oy-0aZ" secondAttribute="leading" id="X0g-dN-DFA"/>
                             <constraint firstItem="OGz-pp-K5R" firstAttribute="top" secondItem="Rhp-E8-3MI" secondAttribute="bottom" id="icI-5v-FH2"/>
                             <constraint firstAttribute="trailing" secondItem="2yo-aq-LCf" secondAttribute="trailing" id="ktw-Xr-cS0"/>

@@ -15,6 +15,7 @@ PODS:
     - SDWebImage/Core
   - SDWebImage/Core (3.5)
   - SSKeychain (0.2.1)
+  - TestFlightSDK (2.2.1-beta)
 
 DEPENDENCIES:
   - Appirater
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - Reachability
   - SDWebImage
   - SSKeychain (~> 0.2.1)
+  - TestFlightSDK
 
 EXTERNAL SOURCES:
   MKNetworkKit:
@@ -42,5 +44,6 @@ SPEC CHECKSUMS:
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SDWebImage: f1a72472f8a2d54445f1fedafe2090593d9caf7f
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
+  TestFlightSDK: 4249c2f70e621bcfbdebf019073169c8fe36be13
 
-COCOAPODS: 0.28.0
+COCOAPODS: 0.29.0
