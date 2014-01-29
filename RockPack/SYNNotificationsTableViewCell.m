@@ -18,6 +18,7 @@
 @property (nonatomic, assign) UIButton *secondaryImageButton;
 @property (nonatomic, strong) UIButton *mainImageButton;
 @property (nonatomic, strong) UIView *dividerImageView;
+@property (nonatomic, strong) CALayer *dividerLayerMask;
 
 @end
 
@@ -80,14 +81,15 @@
         
         
         // == Divider Image View == //
-        self.dividerImageView = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.frame.size.width, IS_RETINA ? 0.5 : 1.0f)];
+        self.dividerImageView = [[UIView alloc] initWithFrame: CGRectMake(30, 0.0, 256, IS_RETINA ? 0.5 : 1.0f)];
         self.dividerImageView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f)
                                                                 green:(172.0f/255.0f)
                                                                  blue:(172.0f/255.0f)
                                                                 alpha:1.0f];
         
         self.dividerImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        
+        self.dividerImageView.layer.mask = self.dividerLayerMask;
+
         [self addSubview: self.dividerImageView];
         
         // == Buttons == //
@@ -230,6 +232,29 @@
 - (NSString *) messageTitle
 {
     return self.textLabel.text;
+}
+
+- (CALayer *)dividerLayerMask {
+    
+    
+	if (!_dividerLayerMask) {
+		CAGradientLayer *mask = [CAGradientLayer layer];
+		mask.colors = @[ (id) [[UIColor clearColor] CGColor],
+						 (id) [[UIColor whiteColor] CGColor],
+						 (id) [[UIColor clearColor] CGColor] ];
+		mask.locations = @[ @0.0, @0.5, @1.0 ];
+		mask.startPoint = CGPointMake(0.0, 0.5);
+		mask.endPoint = CGPointMake(1.0, 0.5);
+		
+		self.dividerLayerMask = mask;
+	}
+	return _dividerLayerMask;
+}
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+	[super layoutSublayersOfLayer:layer];
+	
+	self.dividerLayerMask.frame = self.dividerImageView.bounds;
 }
 
 
