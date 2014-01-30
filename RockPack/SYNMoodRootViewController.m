@@ -192,9 +192,12 @@
                                                   }
 												  
 												  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
-												  
-                                                  UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
-                                                  [strongSelf presentViewController:viewController animated:YES completion:nil];
+												  if (sortedVideos.count > 0) {
+                                                      
+                                                      UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
+                                                      [strongSelf presentViewController:viewController animated:YES completion:nil];
+                                                      
+                                                  }
                                               } errorHandler:^(id error) {
                                                   
                                               }];
