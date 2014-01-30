@@ -479,6 +479,7 @@
         [appDelegate.networkEngine channelOwnerDataForChannelOwner: channelOwner
                                                         onComplete: ^(id dictionary)
          {
+             
              [channelOwner setAttributesFromDictionary: dictionary
                                    ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
              

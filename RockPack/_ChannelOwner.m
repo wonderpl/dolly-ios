@@ -11,6 +11,7 @@ const struct ChannelOwnerAttributes ChannelOwnerAttributes = {
 	.position = @"position",
 	.subscribedByUser = @"subscribedByUser",
 	.subscribersCount = @"subscribersCount",
+	.subscriptionCount = @"subscriptionCount",
 	.thumbnailURL = @"thumbnailURL",
 	.totalVideosValueChannel = @"totalVideosValueChannel",
 	.totalVideosValueSubscriptions = @"totalVideosValueSubscriptions",
@@ -69,6 +70,11 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 	}
 	if ([key isEqualToString:@"subscribersCountValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"subscribersCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"subscriptionCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"subscriptionCount"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -208,6 +214,32 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 
 - (void)setPrimitiveSubscribersCountValue:(int64_t)value_ {
 	[self setPrimitiveSubscribersCount:[NSNumber numberWithLongLong:value_]];
+}
+
+
+
+
+
+@dynamic subscriptionCount;
+
+
+
+- (int64_t)subscriptionCountValue {
+	NSNumber *result = [self subscriptionCount];
+	return [result longLongValue];
+}
+
+- (void)setSubscriptionCountValue:(int64_t)value_ {
+	[self setSubscriptionCount:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveSubscriptionCountValue {
+	NSNumber *result = [self primitiveSubscriptionCount];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveSubscriptionCountValue:(int64_t)value_ {
+	[self setPrimitiveSubscriptionCount:[NSNumber numberWithLongLong:value_]];
 }
 
 

@@ -569,8 +569,6 @@
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:12.0]];
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     
-    self.fullNameLabel.text = self.channelOwner.displayName;
-    
     [self setProfileImage:self.channelOwner.thumbnailURL];
     
     //other user cover photos are set in set channel owner succcess block as
@@ -578,7 +576,7 @@
     if (modeType == kModeMyOwnProfile) {
         [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     }
-    
+
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
@@ -593,6 +591,10 @@
     [self.editButton setTitle:NSLocalizedString(@"Edit my profile", nil) forState:UIControlStateNormal];
     
     [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    self.fullNameLabel.text = self.channelOwner.displayName;
+    self.userNameLabel.text = self.channelOwner.username;
+    
+
 }
 
 //Setting up the layout for the custom segmented controller
@@ -1333,6 +1335,10 @@
         }
 
     }
+    
+    [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
+    [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
+
 }
 
 #pragma mark - scroll view delegates
@@ -1805,6 +1811,8 @@
 
         [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                            onCompletion: ^(id dictionary) {
+                                               
+                                               NSLog(@"dictionarydictionary%@", dictionary);
                                                NSError *error = nil;
                                                ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
                                                                                                                                          error: &error];
@@ -1813,9 +1821,8 @@
                                                    [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
-                                                   if (![self.channelOwner.coverPhotoURL isEqualToString:channelOwnerFromId.coverPhotoURL]) {
                                                        [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
-                                                   }
+                                                   self.userNameLabel.text = self.channelOwner.username;
                                                }
                                                else
                                                {
@@ -1840,7 +1847,10 @@
     self.dataRequestRangeSubscriptions = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
     
     
-    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+
+    
+    
+    self.userNameLabel.text = self.channelOwner.username;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     
@@ -1854,6 +1864,8 @@
     {
         [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
     }
+    
+    
     
     //    [self.subscriptionThumbnailCollectionView reloadData];
     //    [self.channelThumbnailCollectionView reloadData];
@@ -2339,8 +2351,6 @@
                                                  
                                                  
                                              }];
-            
-            
         }
         
     }
@@ -2553,7 +2563,7 @@
                                              //                                                                                                     label: @""
                                              //                                                                                                     value: nil] build]];
                                              
-                                             //                                             NSString *channelId = resourceCreated[@"id"];
+                                             //NSString *channelId = resourceCreated[@"id"];
                                              
                                              [self cancelCreateChannel];
                                              
@@ -2791,14 +2801,18 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         message = @"Are you sure you want to unfollow all";
         message =  [message stringByAppendingString:@" "];
         message =  [message stringByAppendingString:self.channelOwner.displayName];
+        
+        
         message =  [message stringByAppendingString:@"'s collections"];
 
     } else {
-        
+
         self.followAllAlertView.title = @"Follow All?";
         message = @"Are you sure you want to follow all";
         message =  [message stringByAppendingString:@" "];
         message =  [message stringByAppendingString:self.channelOwner.displayName];
+        
+        
         message =  [message stringByAppendingString:@"'s collections"];
 
     }
