@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_Appirater 0
 #define COCOAPODS_VERSION_PATCH_Appirater 2
 
+// Facebook-iOS-SDK
+#define COCOAPODS_POD_AVAILABLE_Facebook_iOS_SDK
+#define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
+#define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 11
+#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
+
 // GoogleConversionTracking
 #define COCOAPODS_POD_AVAILABLE_GoogleConversionTracking
 #define COCOAPODS_VERSION_MAJOR_GoogleConversionTracking 2
