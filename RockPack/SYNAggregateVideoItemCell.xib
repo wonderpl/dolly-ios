@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -37,8 +37,8 @@
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="360" translatesAutoresizingMaskIntoConstraints="NO" id="De9-NT-r06" userLabel="Title">
-                        <rect key="frame" x="0.0" y="237" width="360" height="34"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="De9-NT-r06" userLabel="Title">
+                        <rect key="frame" x="30" y="237" width="300" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -85,11 +85,11 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="De9-NT-r06" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="4xo-A0-2jl"/>
+                <constraint firstItem="De9-NT-r06" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" constant="30" id="4xo-A0-2jl"/>
                 <constraint firstAttribute="trailing" secondItem="JRy-me-y1R" secondAttribute="trailing" id="GSs-vD-tgg"/>
                 <constraint firstAttribute="trailing" secondItem="hK0-7z-olf" secondAttribute="trailing" id="QKb-NI-C7T"/>
                 <constraint firstItem="JRy-me-y1R" firstAttribute="leading" secondItem="aP1-jF-WwS" secondAttribute="leading" id="T8G-qL-hgG"/>
-                <constraint firstAttribute="trailing" secondItem="De9-NT-r06" secondAttribute="trailing" id="UxA-ow-dHp"/>
+                <constraint firstAttribute="trailing" secondItem="De9-NT-r06" secondAttribute="trailing" constant="30" id="UxA-ow-dHp"/>
                 <constraint firstAttribute="bottom" secondItem="hK0-7z-olf" secondAttribute="bottom" constant="119" id="Vet-yH-Hcm"/>
                 <constraint firstItem="De9-NT-r06" firstAttribute="top" secondItem="JRy-me-y1R" secondAttribute="bottom" constant="10" id="mdu-aQ-yv2"/>
                 <constraint firstItem="JRy-me-y1R" firstAttribute="top" secondItem="aP1-jF-WwS" secondAttribute="top" constant="24" id="qcO-vJ-tUC"/>
