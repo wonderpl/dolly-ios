@@ -86,7 +86,7 @@
 	}
     
 	[[SYNLoginManager sharedManager] loginThroughFacebookWithCompletionHandler:^(NSDictionary* dictionary) {
-		
+		[[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted object:self];
 	} errorHandler:^(id error) {
 		if ([error isKindOfClass:[NSDictionary class]]) {
 			NSDictionary *formErrors = error[@"form_errors"];
