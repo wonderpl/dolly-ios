@@ -140,7 +140,7 @@
 	[self.delegate scrubberBarCurrentTimeChanged:self.currentTime];
 }
 
-- (IBAction)sliderTouchUp:(UISlider *)sender {
+- (IBAction)sliderTouchUp:(UISlider *)slider {
 	[self.timestampView removeFromSuperview];
 	self.timestampView = nil;
 	

@@ -72,7 +72,7 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dhs-Vw-fKo" secondAttribute="trailing" id="xvG-pL-Xr8"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIQ-uy-kLY">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIQ-uy-kLY" customClass="SYNCarouselVideoScrollView">
                                 <rect key="frame" x="0.0" y="134" width="320" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>

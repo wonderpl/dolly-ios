@@ -39,6 +39,7 @@
                         <action selector="sliderTouchDown:" destination="1" eventType="touchDown" id="T2J-rI-xQZ"/>
                         <action selector="sliderTouchUp:" destination="1" eventType="touchUpOutside" id="1xs-g8-Rxt"/>
                         <action selector="sliderTouchUp:" destination="1" eventType="touchUpInside" id="aoR-sR-Y6C"/>
+                        <action selector="sliderTouchUp:" destination="1" eventType="touchCancel" id="rI3-87-zup"/>
                         <action selector="sliderValueChanged:" destination="1" eventType="valueChanged" id="81h-LW-a6F"/>
                     </connections>
                 </view>
