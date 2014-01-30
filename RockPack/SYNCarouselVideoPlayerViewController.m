@@ -286,7 +286,7 @@ referenceSizeForFooterInSection:(NSInteger)section {
 #pragma mark - Private
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
-	[super updateVideoInstanceDetails:(VideoInstance *)videoInstance];
+	[super updateVideoInstanceDetails:videoInstance];
 	
 	if (self.previousVideoPlayer) {
 		[self.previousVideoPlayer removeFromSuperview];
