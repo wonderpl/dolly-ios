@@ -61,7 +61,7 @@
                                     <constraint firstItem="Cad-W2-yLM" firstAttribute="top" secondItem="njH-EQ-te6" secondAttribute="bottom" constant="4" id="ukQ-Bo-phL"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgW-oH-qeU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgW-oH-qeU" customClass="SYNCarouselVideoScrollView">
                                 <rect key="frame" x="0.0" y="82" width="320" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
