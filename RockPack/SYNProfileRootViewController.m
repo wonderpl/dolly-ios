@@ -1811,8 +1811,7 @@
 
         [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                            onCompletion: ^(id dictionary) {
-                                               
-                                               NSLog(@"dictionarydictionary%@", dictionary);
+                                            
                                                NSError *error = nil;
                                                ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
                                                                                                                                          error: &error];
