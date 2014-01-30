@@ -1813,7 +1813,9 @@
                                                    [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
-                                                   [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
+                                                   if (![self.channelOwner.coverPhotoURL isEqualToString:channelOwnerFromId.coverPhotoURL]) {
+                                                       [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
+                                                   }
                                                }
                                                else
                                                {
