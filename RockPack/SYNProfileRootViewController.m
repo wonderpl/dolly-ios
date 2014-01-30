@@ -653,10 +653,6 @@
 -(void) setCoverphotoImage: (NSString*) thumbnailURL
 {
     
-    if ([thumbnailURL isEqualToString:@""]) {
-        return;
-    }
-    
     UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto.jpg"];
     
     if (![thumbnailURL isEqualToString:@""]){ // there is a url string
@@ -711,12 +707,16 @@
         //Default cover photo only displayed in your own profile
         //Other user cover photo are blank if nothing is uploaded
         if (self.modeType == kModeMyOwnProfile) {
-            self.coverImage.image = placeholderImage;
-            self.coverImage.alpha = 0.0;
-            
-            [UIView animateWithDuration:1.5f animations:^{
-                self.coverImage.alpha=1.0f;
-            }];
+            if (self.coverImage.image != placeholderImage) {
+                self.coverImage.image = placeholderImage;
+                self.coverImage.alpha = 0.0;
+                
+                
+                
+                [UIView animateWithDuration:1.5f animations:^{
+                    self.coverImage.alpha=1.0f;
+                }];                
+            }
         }
     }
     
