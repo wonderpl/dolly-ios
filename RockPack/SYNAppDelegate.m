@@ -1229,9 +1229,12 @@
                                                 }];
         
         // Now actually handle the rockpack:// url
-        NSURL *rockpackURL = [NSURL URLWithString: [@"rockpack://" stringByAppendingString: urlString]];
+		NSString *appURLScheme = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppURLScheme"];
+		
+		NSString *dollyURLString = [NSString stringWithFormat:@"%@://%@", appURLScheme, urlString];
+        NSURL *dollyURL = [NSURL URLWithString:dollyURLString];
         
-        [self parseAndActionRockpackURL: rockpackURL];
+        [self parseAndActionRockpackURL:dollyURL];
         
         
     }
