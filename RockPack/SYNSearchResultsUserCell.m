@@ -24,6 +24,8 @@
 @property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
 @property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
+@property (strong, nonatomic) UIAlertView *followAllAlertView;
+@property (strong, nonatomic) UIButton* alertViewButton;
 
 @end
 
@@ -100,7 +102,59 @@
 }
 
 - (void)followButtonPressed:(UIButton *)button {
-	[self.delegate followControlPressed:button];
+    
+    self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
+    
+    NSString *message;
+    
+    if (self.channelOwner.subscribedByUserValue) {
+        self.followAllAlertView.title = @"Unfollow All?";
+        message = @"Are you sure you want to unfollow all";
+        message =  [message stringByAppendingString:@" "];
+        message =  [message stringByAppendingString:[self.channelOwner.displayName stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        
+        
+        message =  [message stringByAppendingString:@"'s collections"];
+        
+    } else {
+        NSLog(@"display name:%@.", self.channelOwner.displayName);
+        
+        self.followAllAlertView.title = @"Follow All?";
+        message = @"Are you sure you want to follow all";
+        message =  [message stringByAppendingString:@" "];
+        
+        
+        //        message =  [message stringByAppendingString:self.channelOwner.displayName];
+        
+        message =  [message stringByAppendingString:[self.channelOwner.username stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        
+        
+        message =  [message stringByAppendingString:@"'s collections"];
+        
+    }
+    
+    
+    self.alertViewButton = button;
+    [self.followAllAlertView setMessage:message];
+    [self.followAllAlertView show];
+
+}
+
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView == self.followAllAlertView)
+    {
+        [self.delegate followControlPressed:self.alertViewButton];
+        
+    }
+}
+
+- (NSString *) yesButtonTitle{
+    return NSLocalizedString(@"Yes", @"Yes to following/unfollowing a user");
+}
+- (NSString *) noButtonTitle{
+    return NSLocalizedString(@"Cancel", @"cancel following/unfollowing a user");
 }
 
 @end
