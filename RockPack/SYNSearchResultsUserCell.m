@@ -111,7 +111,7 @@
         self.followAllAlertView.title = @"Unfollow All?";
         message = @"Are you sure you want to unfollow all";
         message =  [message stringByAppendingString:@" "];
-        message =  [message stringByAppendingString:[self.channelOwner.displayName stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        message =  [message stringByAppendingString:self.channelOwner.displayName];
         
         
         message =  [message stringByAppendingString:@"'s collections"];
@@ -122,13 +122,7 @@
         self.followAllAlertView.title = @"Follow All?";
         message = @"Are you sure you want to follow all";
         message =  [message stringByAppendingString:@" "];
-        
-        
-        //        message =  [message stringByAppendingString:self.channelOwner.displayName];
-        
-        message =  [message stringByAppendingString:[self.channelOwner.username stringByReplacingOccurrencesOfString:@" " withString:@""]];
-        
-        
+        message =  [message stringByAppendingString:self.channelOwner.displayName];
         message =  [message stringByAppendingString:@"'s collections"];
         
     }
@@ -143,7 +137,9 @@
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView == self.followAllAlertView)
+    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
+
+    if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
         [self.delegate followControlPressed:self.alertViewButton];
         
