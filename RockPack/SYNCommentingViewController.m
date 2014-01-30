@@ -103,6 +103,16 @@ static NSString* PlaceholderText = @"Say something nice";
                                             options: SDWebImageRetryFailed];
     
     
+    
+    self.generalLoader.hidden = YES;
+    
+    // gets the comments from the DB
+    
+    [self refreshCollectionView];
+    
+    [self getCommentsFromServer];
+
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)
                                                  name:UIKeyboardWillShowNotification
@@ -112,15 +122,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                              selector:@selector(keyboardNotified:)
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
-    
-    self.generalLoader.hidden = YES;
-    
-    // gets the comments from the DB
-    
-    [self refreshCollectionView];
-    
-    [self getCommentsFromServer];
-    
+
     
     
 }
@@ -136,30 +138,29 @@ static NSString* PlaceholderText = @"Say something nice";
     }
     
 
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     
     // observer the size of the text view to set the frame accordingly
-    [self.sendMessageTextView addObserver:self
-                               forKeyPath:kTextViewContentSizeKey
-                                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                                  context:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
+    
+    
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+
+}
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
-    [self.sendMessageTextView removeObserver:self forKeyPath:kTextViewContentSizeKey];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+   
 }
 
 
@@ -567,6 +568,8 @@ static NSString* PlaceholderText = @"Say something nice";
     if(!button)
         return;
     
+    [self.sendMessageTextView resignFirstResponder];
+
     // find correct cell
     
     UIView* candidateCell = button;
@@ -741,7 +744,8 @@ static NSString* PlaceholderText = @"Say something nice";
         }
     }
     
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     
     NSError* error;
     [comment.managedObjectContext save:&error];

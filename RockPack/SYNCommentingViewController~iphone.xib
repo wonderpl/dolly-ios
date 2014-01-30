@@ -114,11 +114,11 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="RwK-Zh-8aD" secondAttribute="trailing" id="CO1-i3-qjs"/>
                 <constraint firstItem="dnW-Ka-mTj" firstAttribute="top" secondItem="1" secondAttribute="top" id="Fqr-a2-Mbo"/>
+                <constraint firstItem="RwK-Zh-8aD" firstAttribute="bottom" secondItem="dnW-Ka-mTj" secondAttribute="bottom" constant="58" id="KDC-jZ-cRQ"/>
                 <constraint firstAttribute="bottom" secondItem="RwK-Zh-8aD" secondAttribute="bottom" id="Rvd-sV-938"/>
                 <constraint firstAttribute="trailing" secondItem="dnW-Ka-mTj" secondAttribute="trailing" id="XFM-hM-YVx"/>
                 <constraint firstItem="RwK-Zh-8aD" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ctN-4q-KCR"/>
                 <constraint firstItem="dnW-Ka-mTj" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ge0-uW-MbS"/>
-                <constraint firstAttribute="bottom" secondItem="dnW-Ka-mTj" secondAttribute="bottom" constant="58" id="sRS-Um-yB7"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
