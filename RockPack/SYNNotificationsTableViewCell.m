@@ -8,254 +8,136 @@
 
 #import "SYNNotificationsTableViewCell.h"
 #import "SYNActivityViewController.h"
+#import "SYNNotification.h"
 #import "UIFont+SYNFont.h"
-#import <QuartzCore/QuartzCore.h>
+#import <UIButton+WebCache.h>
+#import <UIImageView+WebCache.h>
+
+typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
+	SYNNotificationsTableViewCellThumbnailTypeNone,
+	SYNNotificationsTableViewCellThumbnailTypeChannel,
+	SYNNotificationsTableViewCellThumbnailTypeVideo
+};
 
 @interface SYNNotificationsTableViewCell ()
 
-@property (nonatomic, assign) CGRect imageViewRect;
-@property (nonatomic, assign) CGSize mainTextSize;
-@property (nonatomic, assign) UIButton *secondaryImageButton;
-@property (nonatomic, strong) UIButton *mainImageButton;
-@property (nonatomic, strong) UIView *dividerImageView;
-@property (nonatomic, strong) CALayer *dividerLayerMask;
+@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
+@property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+
+@property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton *videoThumbnailButton;
 
 @end
 
 
 @implementation SYNNotificationsTableViewCell
 
-- (id) initWithStyle: (UITableViewCellStyle) style reuseIdentifier: (NSString *) reuseIdentifier
-{
-    self = [super initWithStyle: UITableViewCellStyleSubtitle
-                reuseIdentifier: reuseIdentifier];
-    
-    if (self)
-    {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        // == frames == //
-        CGFloat imageViewWidth = 48.0f;
-        self.imageViewRect = CGRectMake((IS_IPAD ? 76.0 : 14.0f), (IS_IPAD ? 22.0f : 14.0f), imageViewWidth, imageViewWidth);
-        
-        
-        self.imageView.layer.cornerRadius = imageViewWidth / 2.0f;
-        self.imageView.clipsToBounds = YES;
-    
-        
-        // == Profile Image View == //
-        self.imageView.frame = self.imageViewRect;
-        
-        // == Main Text == //
-        
-        self.textLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 14.0f : 12.0f];
-        self.textLabel.textAlignment = NSTextAlignmentLeft;
-        self.textLabel.numberOfLines = 3;
-        self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        
-        self.textLabel.textColor = [UIColor colorWithRed: (40.0 / 255.0)
-                                                   green: (45.0 / 255.0)
-                                                    blue: (51.0 / 255.0)
-                                                   alpha: (1.0)];
-        
-        // == Subtitle == //
-        self.detailTextLabel.font = [UIFont lightCustomFontOfSize: IS_IPAD ? 12.0f : 11.0f];
-        self.detailTextLabel.textAlignment = NSTextAlignmentLeft;
-        
-        self.detailTextLabel.textColor = [UIColor colorWithRed: (187.0 / 255.0)
-                                                         green: (187.0 / 255.0)
-                                                          blue: (187.0 / 255.0)
-                                                         alpha: (1.0)];
-        
-        // == Channel image view == //
-       
-        self.thumbnailImageView = [[UIImageView alloc] initWithFrame: CGRectMake(self.frame.size.width, // x will be set in layoutSubviews
-                                                                                 20.0,
-                                                                                 IS_IPAD ? 92.0f : 60.0f,
-                                                                                 IS_IPAD ? 52.0f : 34.0f)];
-        self.thumbnailImageView.backgroundColor = [UIColor greenColor];
-        self.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.thumbnailImageView.clipsToBounds = YES;
-        [self addSubview: self.thumbnailImageView];
-        
-        
-        
-        // == Divider Image View == //
-        self.dividerImageView = [[UIView alloc] initWithFrame: CGRectMake(30, 0.0, 256, IS_RETINA ? 0.5 : 1.0f)];
-        self.dividerImageView.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f)
-                                                                green:(172.0f/255.0f)
-                                                                 blue:(172.0f/255.0f)
-                                                                alpha:1.0f];
-        
-        self.dividerImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        self.dividerImageView.layer.mask = self.dividerLayerMask;
-
-        [self addSubview: self.dividerImageView];
-        
-        // == Buttons == //
-        self.mainImageButton = [UIButton buttonWithType: UIButtonTypeCustom];
-        
-        [self addSubview: self.mainImageButton];
-        
-        self.secondaryImageButton = [UIButton buttonWithType: UIButtonTypeCustom];
-        
-        [self addSubview: self.secondaryImageButton];
-        
-        
-    }
-    
-    return self;
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
+	self.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	self.messageLabel.font = [UIFont lightCustomFontOfSize:self.messageLabel.font.pointSize];
+	self.timeLabel.font = [UIFont lightCustomFontOfSize:self.timeLabel.font.pointSize];
+	
+	self.userThumbnailButton.contentMode = UIViewContentModeScaleAspectFill;
+	self.videoThumbnailButton.contentMode = UIViewContentModeScaleAspectFill;
 }
 
-
-- (void) layoutSubviews
-{
-    [super layoutSubviews];
-    
-    // Avatar Image View (Left) //
-    
-    self.imageView.frame = self.mainImageButton.frame = self.imageViewRect;
-    
-    
-    self.textLabel.frame = CGRectMake((IS_IPAD ? 154.0f : 90.0f),
-                                      (IS_IPAD ? 22.0f : 14.0f),
-                                      self.mainTextSize.width,
-                                      self.mainTextSize.height);
-    
-    
-    // Thumbnail Image View (Right)
-    
-    CGRect thumbFrame = self.thumbnailImageView.frame;
-    thumbFrame.origin.x = self.frame.size.width - thumbFrame.size.width - (IS_IPAD ? 68.0f : 14.0f);
-    self.thumbnailImageView.frame = thumbFrame;
-    
-    
-    // Details
-    
-    CGRect detailsFrame = CGRectMake((IS_IPAD ? 154.0f : 90.0f), 12.0, self.mainTextSize.width, 20.0f);
-    detailsFrame.origin.y = self.textLabel.frame.origin.y + self.textLabel.frame.size.height - (self.mainTextSize.height > 40.0 ? 4.0 : 0.0);
-    self.detailTextLabel.frame = detailsFrame;
-    
-    
-    if (self.read)
-    {
-        self.backgroundColor = [UIColor clearColor];
-    }
-    else
-    {
-        self.backgroundColor = [UIColor colorWithRed: (226.0 / 255.0)
-                                               green: (231.0 / 255.0)
-                                                blue: (231.0 / 255.0)
-                                               alpha: (1.0)];
-    }
-    
-    // buttons
-    
-    self.mainImageButton.frame = self.imageViewRect;
-    self.secondaryImageButton.frame = self.thumbnailImageView.frame;
-    
+- (void)prepareForReuse {
+	[super prepareForReuse];
+	
+	[self.userThumbnailButton setImage:nil forState:UIControlStateNormal];
+	[self.userThumbnailButton cancelCurrentImageLoad];
+	
+	[self.videoThumbnailButton setImage:nil forState:UIControlStateNormal];
+	[self.videoThumbnailButton cancelCurrentImageLoad];
 }
 
+- (void)setNotification:(SYNNotification *)notification {
+	_notification = notification;
+	
+	NSURL *userThumbnailURL = [NSURL URLWithString:notification.channelOwner.thumbnailLargeUrl];
+	[self.userThumbnailButton setImageWithURL:userThumbnailURL
+									 forState:UIControlStateNormal
+							 placeholderImage:[UIImage imageNamed:@"PlaceholderNotificationAvatar"]
+									  options:SDWebImageRetryFailed];
+	
+	NSString *messageString = [self messageFromNotification:notification];
+	self.messageLabel.attributedText = [self attributedMessageString:messageString];
+	
+    self.timeLabel.text = notification.dateDifferenceString;
+	
+	NSURL *videoThumbnailURL = [NSURL URLWithString:notification.videoThumbnailUrl];
+	[self.videoThumbnailButton setImageWithURL:videoThumbnailURL
+									  forState:UIControlStateNormal
+							  placeholderImage:[UIImage imageNamed:@"PlaceholderNotificationVideo"]
+									   options:SDWebImageRetryFailed];
+	
+	UIColor *readColor = [UIColor colorWithWhite:249.0/255.0 alpha:1.0];
+	UIColor *unreadColor = [UIColor clearColor];
+	self.backgroundColor = (notification.read ? readColor : unreadColor);
+}
 
 #pragma mark - Accesssors
 
-- (void) setDelegate: (SYNActivityViewController *) delegate
-{
-    if (_delegate)
-    {
-        // we can pass nil to remove observers
-        [self.mainImageButton removeTarget: _delegate
-                                    action: @selector(mainImageTableCellPressed:)
-                          forControlEvents: UIControlEventTouchUpInside];
-        
-        [self.secondaryImageButton removeTarget: _delegate
-                                         action: @selector(itemImageTableCellPressed:)
-                               forControlEvents: UIControlEventTouchUpInside];
-    }
-    
-    
-    _delegate = delegate;
-    
-    if (!_delegate)
-        return;
-    
-    [self.mainImageButton addTarget: _delegate
-                             action: @selector(mainImageTableCellPressed:)
-                   forControlEvents: UIControlEventTouchUpInside];
-    
-    [self.secondaryImageButton addTarget: _delegate
-                                  action: @selector(itemImageTableCellPressed:)
-                        forControlEvents: UIControlEventTouchUpInside];
-}
-
-
-- (void) setMessageTitle: (NSString *) messageTitle
-{
-    
-    // == main text label == //
-    
-    NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
-    
-    [paragrahStyle setLineSpacing: 2];
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: messageTitle];
-    
-    [attributedString addAttribute: NSParagraphStyleAttributeName
-                             value: paragrahStyle
-                             range: NSMakeRange(0, [messageTitle length])];
-    
-    
-    CGRect textLabelFrame = self.textLabel.frame;
-    CGFloat maxWidth = IS_IPAD ? 220.0 : 140.0;
-    
-    NSAttributedString *attributedText =  [[NSAttributedString alloc] initWithString: messageTitle
-                                                                          attributes: @{NSFontAttributeName: self.textLabel.font}];
-    
-    CGRect rect = [attributedText boundingRectWithSize: (CGSize){maxWidth, CGFLOAT_MAX}
-                                               options: NSStringDrawingUsesLineFragmentOrigin
-                                               context: nil];
-    
-    
-    CGSize mainTSize = CGRectIntegral(rect).size;
-    
-    mainTSize.height += 6.0f;
-    self.mainTextSize = mainTSize;
-    
-    
-    textLabelFrame.size = self.mainTextSize;
-    
-    self.textLabel.attributedText = attributedString;
-    self.textLabel.frame = textLabelFrame;
-    
-}
-
-
-- (NSString *) messageTitle
-{
-    return self.textLabel.text;
-}
-
-- (CALayer *)dividerLayerMask {
-    
-    
-	if (!_dividerLayerMask) {
-		CAGradientLayer *mask = [CAGradientLayer layer];
-		mask.colors = @[ (id) [[UIColor clearColor] CGColor],
-						 (id) [[UIColor whiteColor] CGColor],
-						 (id) [[UIColor clearColor] CGColor] ];
-		mask.locations = @[ @0.0, @0.5, @1.0 ];
-		mask.startPoint = CGPointMake(0.0, 0.5);
-		mask.endPoint = CGPointMake(1.0, 0.5);
+- (void) setDelegate: (SYNActivityViewController *) delegate {
+	if (_delegate) {
+		// we can pass nil to remove observers
+		[self.userThumbnailButton removeTarget: _delegate
+									action: @selector(mainImageTableCellPressed:)
+						  forControlEvents: UIControlEventTouchUpInside];
 		
-		self.dividerLayerMask = mask;
+		[self.videoThumbnailButton removeTarget: _delegate
+										 action: @selector(itemImageTableCellPressed:)
+							   forControlEvents: UIControlEventTouchUpInside];
 	}
-	return _dividerLayerMask;
+
+
+	_delegate = delegate;
+
+	if (!_delegate)
+		return;
+
+	[self.userThumbnailButton addTarget: _delegate
+							 action: @selector(mainImageTableCellPressed:)
+				   forControlEvents: UIControlEventTouchUpInside];
+
+	[self.videoThumbnailButton addTarget: _delegate
+								  action: @selector(itemImageTableCellPressed:)
+						forControlEvents: UIControlEventTouchUpInside];
 }
 
-- (void)layoutSublayersOfLayer:(CALayer *)layer {
-	[super layoutSublayersOfLayer:layer];
+#pragma mark - Private
+
+- (NSAttributedString *)attributedMessageString:(NSString *)messageString {
 	
-	self.dividerLayerMask.frame = self.dividerImageView.bounds;
+	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	paragraphStyle.lineSpacing = 2.0;
+	
+	NSDictionary *attributes = @{ NSParagraphStyleAttributeName : paragraphStyle,
+								  NSFontAttributeName : self.messageLabel.font };
+	
+	NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:messageString
+																		   attributes:attributes];
+	
+	return attributedString;
 }
 
+- (NSString *)messageFromNotification:(SYNNotification *)notification {
+	NSDictionary *stringMapping = @{ @(kNotificationObjectTypeFacebookFriendJoined) : @"notification_joined_action",
+									 @(kNotificationObjectTypeUserSubscibedToYourChannel) : @"notification_subscribed_action",
+									 @(kNotificationObjectTypeUserLikedYourVideo) : @"notification_liked_action",
+									 @(kNotificationObjectTypeUserAddedYourVideo) : @"notification_repack_action",
+									 @(kNotificationObjectTypeYourVideoNotAvailable) : @"notification_unavailable_action" };
+	
+	NSString *mappedKey = stringMapping[@(notification.objectType)];
+	if (mappedKey) {
+		NSString *displayName = [notification.channelOwner.displayName uppercaseString];
+		return [NSString stringWithFormat:NSLocalizedString(mappedKey, nil), displayName];
+	} else {
+		return NSLocalizedString(notification.messageType, nil);
+	}
+}
 
 @end

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="SQv-Za-bVX" customClass="SYNNotificationsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SQv-Za-bVX" id="kbE-TM-mFD">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enw-2L-Yep" customClass="SYNAvatarButton">
+                        <rect key="frame" x="14" y="14" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="IKI-iF-mP2"/>
+                            <constraint firstAttribute="width" constant="48" id="soK-8m-BLZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="156" translatesAutoresizingMaskIntoConstraints="NO" id="zP4-dw-vyR">
+                        <rect key="frame" x="76" y="18" width="156" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1r-Xc-tzg">
+                        <rect key="frame" x="246" y="21" width="60" height="34"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="oqD-Kp-yx2"/>
+                            <constraint firstAttribute="height" constant="34" id="sfB-Ra-tIT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eer-qS-5Zo">
+                        <rect key="frame" x="76" y="35" width="156" height="14"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2L-rV-0LA" customClass="SYNGradientSeparatorView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="nfH-hb-WvM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="c1r-Xc-tzg" firstAttribute="leading" secondItem="eer-qS-5Zo" secondAttribute="trailing" constant="14" id="2Bb-Pi-eLq"/>
+                    <constraint firstAttribute="trailing" secondItem="c1r-Xc-tzg" secondAttribute="trailing" constant="14" id="2LW-ln-SBs"/>
+                    <constraint firstItem="T2L-rV-0LA" firstAttribute="leading" secondItem="kbE-TM-mFD" secondAttribute="leading" id="Dvg-sp-K3y"/>
+                    <constraint firstItem="eer-qS-5Zo" firstAttribute="leading" secondItem="enw-2L-Yep" secondAttribute="trailing" constant="14" id="LH8-4k-mYL"/>
+                    <constraint firstAttribute="centerY" secondItem="enw-2L-Yep" secondAttribute="centerY" id="M9h-Q0-Ipd"/>
+                    <constraint firstItem="c1r-Xc-tzg" firstAttribute="leading" secondItem="zP4-dw-vyR" secondAttribute="trailing" constant="14" id="MbK-nW-gLS"/>
+                    <constraint firstItem="eer-qS-5Zo" firstAttribute="top" secondItem="zP4-dw-vyR" secondAttribute="bottom" constant="2" id="OZL-gP-C9U"/>
+                    <constraint firstItem="zP4-dw-vyR" firstAttribute="top" secondItem="kbE-TM-mFD" secondAttribute="top" constant="18" id="OeX-eM-fbM"/>
+                    <constraint firstItem="zP4-dw-vyR" firstAttribute="leading" secondItem="enw-2L-Yep" secondAttribute="trailing" constant="14" id="Qnb-Nd-qVc"/>
+                    <constraint firstAttribute="centerY" secondItem="c1r-Xc-tzg" secondAttribute="centerY" id="WyQ-XE-zVt"/>
+                    <constraint firstAttribute="trailing" secondItem="T2L-rV-0LA" secondAttribute="trailing" id="dxj-v4-e14"/>
+                    <constraint firstItem="T2L-rV-0LA" firstAttribute="top" secondItem="kbE-TM-mFD" secondAttribute="top" id="o7g-7Y-9Rt"/>
+                    <constraint firstItem="enw-2L-Yep" firstAttribute="leading" secondItem="kbE-TM-mFD" secondAttribute="leading" constant="14" id="yni-NM-yUH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="messageLabel" destination="zP4-dw-vyR" id="ZW9-ZU-KLA"/>
+                <outlet property="timeLabel" destination="eer-qS-5Zo" id="M3r-WV-IC6"/>
+                <outlet property="userThumbnailButton" destination="enw-2L-Yep" id="w8x-QM-Vmr"/>
+                <outlet property="videoThumbnailButton" destination="c1r-Xc-tzg" id="k4e-lh-7lw"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -9,12 +9,12 @@
 @import UIKit;
 
 @class SYNActivityViewController;
+@class SYNNotification;
 
 @interface SYNNotificationsTableViewCell : UITableViewCell
 
-@property (nonatomic) BOOL read;
-@property (nonatomic, strong) UIImageView *thumbnailImageView;
-@property (nonatomic, weak) NSString *messageTitle;
 @property (nonatomic, weak) SYNActivityViewController *delegate;
+
+@property (nonatomic, strong) SYNNotification *notification;
 
 @end

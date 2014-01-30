@@ -12,10 +12,8 @@
 #import "SYNNotificationsTableViewCell.h"
 #import "SYNActivityViewController.h"
 #import "SYNNotification.h"
-#import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "SYNNotificationsMarkAllAsReadCell.h"
-#import <QuartzCore/QuartzCore.h>
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
 #define kNotificationsSpecialCellIdent @"SYNNotificationsMarkAllAsReadCell"
@@ -74,8 +72,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:kNotificationsSpecialCellIdent bundle:nil] forCellReuseIdentifier:kNotificationsSpecialCellIdent];
     
     
-    [self.tableView registerClass: [SYNNotificationsTableViewCell class]
-           forCellReuseIdentifier: kNotificationsCellIdent];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SYNNotificationsTableViewCell" bundle:nil]
+           forCellReuseIdentifier:kNotificationsCellIdent];
     
     
     if(self.notifications.count == 0)
@@ -211,118 +209,9 @@
                                                                                       forIndexPath: indexPath];
     
     SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
-    
-    NSMutableString *constructedMessage = [[NSMutableString alloc] init];
-    
-    // "Your friend ..."
-    if([notification.messageType isEqualToString: @"joined"])
-    {
-        [constructedMessage appendString:@"Your friend "];
-    }
-    
-    if(notification.channelOwner.displayName)
-    {
-        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
-    }
-    else
-    {
-        [constructedMessage appendFormat: @"%@ ", [notification.channelOwner.displayName uppercaseString]];
-    }
-    
- 
-    if ([notification.messageType isEqualToString: @"subscribed"])
-    {
-        [constructedMessage appendString: NSLocalizedString(@"notification_subscribed_action", nil)];
-    }
-    else if ([notification.messageType isEqualToString: @"starred"])
-    {
-        [constructedMessage appendString: NSLocalizedString(@"notification_liked_action", nil)];
-    }
-    else if ([notification.messageType isEqualToString: @"joined"])
-    {
-        NSMutableString *message = [NSMutableString stringWithFormat: NSLocalizedString(@"notification_joined_action", @"Your friend [[displayName]] has joined Wonder PL"), [notification.channelOwner.displayName uppercaseString]];
-        
-        constructedMessage = message;
-    }
-    else if ([notification.messageType isEqualToString: @"repack"])
-    {
-        [constructedMessage appendString: NSLocalizedString(@"notification_repack_action", nil)];
-    }
-    else if ([notification.messageType isEqualToString: @"unavailable"])
-    {
-        [constructedMessage appendString: NSLocalizedString(@"notification_unavailable_action", nil)];
-    }
-    else
-    {
-        // TODO: Implement Default
-        [constructedMessage appendString: NSLocalizedString(notification.messageType, nil)];
-        
-    }
-    
-    notificationCell.messageTitle = [NSString stringWithString: constructedMessage];
-    
-    NSURL *userThumbnailUrl = [NSURL URLWithString: notification.channelOwner.thumbnailLargeUrl];
-    
-    [notificationCell.imageView setImageWithURL: userThumbnailUrl
-                               placeholderImage: [UIImage imageNamed: @"PlaceholderNotificationAvatar.png"]
-                                        options: SDWebImageRetryFailed];
-    
-    NSURL *thumbnaillUrl;
-    UIImage *placeholder;
-    
-
-    switch (notification.objectType)
-    {
-        case kNotificationObjectTypeUserLikedYourVideo:
-            thumbnaillUrl = [NSURL URLWithString: notification.videoThumbnailUrl];
-            placeholder = [UIImage imageNamed: @"PlaceholderNotificationVideo"];
-
-            break;
-            
-        case kNotificationObjectTypeUserSubscibedToYourChannel:
-            thumbnaillUrl = [NSURL URLWithString: notification.channelThumbnailUrl];
-            placeholder = [UIImage imageNamed: @"PlaceholderNotificationChannel"];
-            break;
-            
-        case kNotificationObjectTypeFacebookFriendJoined:
-            // TODO: Check if Implemented
-            break;
-            
-        case kNotificationObjectTypeUserAddedYourVideo:
-            thumbnaillUrl = [NSURL URLWithString: notification.videoThumbnailUrl];
-            placeholder = [UIImage imageNamed: @"PlaceholderNotificationVideo"];
-            
-            break;
-            
-        case kNotificationObjectTypeYourVideoNotAvailable:
-            // TODO: Implement
-            break;
-            
-        default:
-            // TODO: Catch all code
-            break;
-    }
-    
-    // If we have a righthand image then load it
-    if (thumbnaillUrl && placeholder)
-    {
-        notificationCell.thumbnailImageView.hidden = FALSE;
-        
-        [notificationCell.thumbnailImageView setImageWithURL: thumbnaillUrl
-                                            placeholderImage: placeholder
-                                                     options: SDWebImageRetryFailed];
-    }
-    else
-    {
-        // Otherwse hide it
-        notificationCell.thumbnailImageView.hidden = TRUE;
-    }
-    
+	
+	notificationCell.notification = notification;
     notificationCell.delegate = self;
-    notificationCell.read = notification.read;
-    
-    notificationCell.detailTextLabel.text = notification.dateDifferenceString;
-    
     
     return notificationCell;
 }
