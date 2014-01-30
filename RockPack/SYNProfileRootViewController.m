@@ -2783,17 +2783,32 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 - (IBAction)followAllTapped:(id)sender
 {
-    NSString *message = @"Are you sure you want to follow all channels of this user";
-    message =  [message stringByAppendingString:@" "];
-    message =  [message stringByAppendingString:self.channelOwner.username];
+    NSString *message;
+    
+    
+    if (self.channelOwner.subscribedByUserValue) {
+        self.followAllAlertView.title = @"Unfollow All?";
+        message = @"Are you sure you want to unfollow all";
+        message =  [message stringByAppendingString:@" "];
+        message =  [message stringByAppendingString:self.channelOwner.displayName];
+        message =  [message stringByAppendingString:@"'s collections"];
+
+    } else {
+        
+        self.followAllAlertView.title = @"Follow All?";
+        message = @"Are you sure you want to follow all";
+        message =  [message stringByAppendingString:@" "];
+        message =  [message stringByAppendingString:self.channelOwner.displayName];
+        message =  [message stringByAppendingString:@"'s collections"];
+
+    }
+
     
     [self.followAllAlertView setMessage:message];
     
     if(modeType == kModeOtherUsersProfile)
     {
         [self.followAllAlertView show];
-        
-        
     }
 }
 
