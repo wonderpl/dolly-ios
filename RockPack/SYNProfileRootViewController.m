@@ -195,6 +195,8 @@
     // == Masking Images into a circle
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
+	self.profileImageView.layer.borderColor = [[UIColor colorWithWhite:219/255.0 alpha:1.0] CGColor];
+	self.profileImageView.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0);
     self.uploadAvatarButton.layer.cornerRadius = self.uploadAvatarButton.frame.size.width/2;
     self.uploadAvatarButton.layer.masksToBounds = YES;
     self.uploadCoverPhotoButton.layer.cornerRadius = self.uploadCoverPhotoButton.frame.size.width/2;
