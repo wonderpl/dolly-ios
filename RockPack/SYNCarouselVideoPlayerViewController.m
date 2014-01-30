@@ -26,12 +26,12 @@
 #import "UINavigationBar+Appearance.h"
 #import "SYNActivityManager.h"
 #import "UILabel+Animation.h"
-#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UIScrollViewDelegate, SYNPagingModelDelegate>
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *followBarButton;
-@property (nonatomic, strong) IBOutlet UIImageView *channelThumbnailImageView;
+@property (nonatomic, strong) IBOutlet UIButton *channelThumbnailButton;
 @property (nonatomic, strong) IBOutlet UILabel *channelTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *channelOwnerLabel;
 
@@ -78,9 +78,6 @@
 	[super viewDidLoad];
 	
 	self.videoScrollView.contentOffset = CGPointMake(CGRectGetWidth(self.videoScrollView.frame), 0);
-	
-	self.channelThumbnailImageView.layer.cornerRadius = CGRectGetWidth(self.channelThumbnailImageView.frame) / 2.0;
-	self.channelThumbnailImageView.layer.masksToBounds = YES;
 	
 	self.channelTitleLabel.font = [UIFont lightCustomFontOfSize:self.channelTitleLabel.font.pointSize];
 	self.channelOwnerLabel.font = [UIFont lightCustomFontOfSize:self.channelOwnerLabel.font.pointSize];
@@ -307,11 +304,12 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	self.followBarButton.title = (isSubscribed ? @"unfollow" : @"follow");
 	
 	if ([videoInstance.channel.channelOwner.displayName length]) {
-		[self.channelThumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
-									   placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
-												options:SDWebImageRetryFailed];
+		[self.channelThumbnailButton setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
+											forState:UIControlStateNormal
+									placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
+											 options:SDWebImageRetryFailed];
 	} else {
-		self.channelThumbnailImageView.image = nil;
+		[self.channelThumbnailButton setImage:nil forState:UIControlStateNormal];
 	}
 
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
