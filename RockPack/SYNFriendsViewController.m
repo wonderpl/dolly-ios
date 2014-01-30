@@ -218,7 +218,7 @@
                                                               
                                                               weakSelf.facebookLoginButton.hidden = NO;
                                                               
-                                                              weakSelf.preLoginLabel.text = @"We could not Log you in becuase this FB account seems to be associated with a different User.";
+                                                              weakSelf.preLoginLabel.text = @"We could not log you in because this FB account seems to be associated with a different User.";
                                                               
                                                               [[SYNFacebookManager sharedFBManager] logoutOnSuccess:^{
                                                                   
