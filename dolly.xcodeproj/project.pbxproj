@@ -854,7 +854,6 @@
 		BE2AE4C2176E0F2E00A753E3 /* ButtonCancelCD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2AE4C0176E0F2E00A753E3 /* ButtonCancelCD@2x.png */; };
 		BE2AE4D3176E689C00A753E3 /* ButtonBackCD@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2AE4CF176E689B00A753E3 /* ButtonBackCD@2x~iphone.png */; };
 		BE2AE4D4176E689C00A753E3 /* ButtonBackCD~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2AE4D0176E689B00A753E3 /* ButtonBackCD~iphone.png */; };
-		BE2AF28817BE33C700A20127 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2AF28717BE33C700A20127 /* FacebookSDK.framework */; };
 		BE2D213F171C527B00B4B755 /* ButtonBackLabel.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D213B171C527A00B4B755 /* ButtonBackLabel.png */; };
 		BE2D2140171C527B00B4B755 /* ButtonBackLabel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D213C171C527B00B4B755 /* ButtonBackLabel@2x.png */; };
 		BE2D2152171D5BD500B4B755 /* ButtonCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = BE2D214E171D5BD500B4B755 /* ButtonCancel.png */; };
@@ -1206,7 +1205,6 @@
 		E9E1E28218561C780051E312 /* SYNiPadPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27F18561C780051E312 /* SYNiPadPopoverAnimator.m */; };
 		E9E1E28518561CA30051E312 /* SYNTapDismissView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E28418561CA30051E312 /* SYNTapDismissView.m */; };
 		E9F1921618571AFC008AC21E /* GAI+Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F1921518571AFC008AC21E /* GAI+Tracking.m */; };
-		E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2AF28717BE33C700A20127 /* FacebookSDK.framework */; };
 		E9F62550188404A8000EF6A2 /* SYNiPhoneLoginAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6254F188404A8000EF6A2 /* SYNiPhoneLoginAnimator.m */; };
 		E9F6255318845EF9000EF6A2 /* SYNiPhonePasswordForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6255218845EF9000EF6A2 /* SYNiPhonePasswordForgotViewController.m */; };
 		E9F6255618854A3D000EF6A2 /* SYNiPhoneSignupUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6255518854A3D000EF6A2 /* SYNiPhoneSignupUsernameViewController.m */; };
@@ -2229,7 +2227,6 @@
 		BE2AE4C0176E0F2E00A753E3 /* ButtonCancelCD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonCancelCD@2x.png"; path = "Assets/Images/ButtonCancelCD@2x.png"; sourceTree = "<group>"; };
 		BE2AE4CF176E689B00A753E3 /* ButtonBackCD@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBackCD@2x~iphone.png"; sourceTree = "<group>"; };
 		BE2AE4D0176E689B00A753E3 /* ButtonBackCD~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBackCD~iphone.png"; sourceTree = "<group>"; };
-		BE2AF28717BE33C700A20127 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		BE2D213B171C527A00B4B755 /* ButtonBackLabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackLabel.png; path = Assets/Images/ButtonBackLabel.png; sourceTree = "<group>"; };
 		BE2D213C171C527B00B4B755 /* ButtonBackLabel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonBackLabel@2x.png"; path = "Assets/Images/ButtonBackLabel@2x.png"; sourceTree = "<group>"; };
 		BE2D214E171D5BD500B4B755 /* ButtonCancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonCancel.png; path = Assets/Images/ButtonCancel.png; sourceTree = "<group>"; };
@@ -2768,7 +2765,6 @@
 				010DEFD91629BDC40080F26B /* CoreGraphics.framework in Frameworks */,
 				011CC67E164AA41800F02B6D /* CoreMedia.framework in Frameworks */,
 				0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */,
-				BE2AF28817BE33C700A20127 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2776,7 +2772,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9F23950183CD48700E64E9F /* FacebookSDK.framework in Frameworks */,
 				BEB3135D181838BB00FAF98A /* CoreData.framework in Frameworks */,
 				01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */,
 				01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */,
@@ -2833,7 +2828,6 @@
 				0173F70216E0B899005B3ECA /* CoreImage.framework */,
 				010DEFD81629BDC40080F26B /* CoreGraphics.framework */,
 				011CC67D164AA41700F02B6D /* CoreMedia.framework */,
-				BE2AF28717BE33C700A20127 /* FacebookSDK.framework */,
 				010DEFD61629BDC40080F26B /* Foundation.framework */,
 				012BD2C5173BE79F00BE28B6 /* ImageIO.framework */,
 				0126331E162E2A060009FF9C /* MediaPlayer.framework */,
