@@ -501,7 +501,7 @@
 
 - (void) channelSuccessfullySaved: (NSNotification*) note
 {
-    NSString* message = IS_IPHONE ? NSLocalizedString(@"PACK SAVED", nil) : NSLocalizedString(@"YOUR PACK HAS BEEN SAVED", nil);
+    NSString* message = IS_IPHONE ? NSLocalizedString(@"COLLECTION_SAVED", nil) : NSLocalizedString(@"YOUR_COLLECTION_HAS_BEEN_SAVED", nil);
     
     [self presentNotificationWithMessage:message andType:NotificationMessageTypeSuccess];
 }

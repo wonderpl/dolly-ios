@@ -175,6 +175,8 @@
 "channel_screen_error_subscribe" = "Something went wrong. Please try again.";
 "channel_screen_loading_videos" = "Loading videos...";
 "no_videos" = "There are no videos in this collection yet";
+"COLLECTION_SAVED" = "COLLECTION SAVED";
+"YOUR_COLLECTION_HAS_BEEN_SAVED" = "YOUR COLLECTION HAS BEEN SAVED";
 
 // == Messages for creating a private channel == //
 
