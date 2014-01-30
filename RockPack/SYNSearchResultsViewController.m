@@ -96,7 +96,7 @@ typedef void (^SearchResultCompleteBlock)(int);
                       withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
     self.containerTabs.layer.cornerRadius = 4.0f;
-    self.containerTabs.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.containerTabs.layer.borderColor = [[UIColor colorWithWhite:152/255.0 alpha:1.0] CGColor];
     self.containerTabs.layer.borderWidth = .5f;
     self.containerTabs.layer.masksToBounds = YES;
     
