@@ -62,9 +62,6 @@
     self.preLoginLabel.text = NSLocalizedString (@"friends_invite", nil);
     [self.activityIndicator hidesWhenStopped];
 	
-	self.facebookLoginButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.facebookLoginButton.titleLabel.font.pointSize];
-    
-    
     // Google analytics support
     id tracker = [[GAI sharedInstance] defaultTracker];
     
@@ -94,9 +91,6 @@
     }
     
     [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
-    
-    self.facebookLoginButton.layer.cornerRadius = 8.0f;
 }
 
 

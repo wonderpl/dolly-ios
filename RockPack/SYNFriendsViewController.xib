@@ -36,20 +36,19 @@
                         <outlet property="delegate" destination="-1" id="13"/>
                     </connections>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="Button Facebook">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="Button Facebook" customClass="SYNFacebookButton">
                     <rect key="frame" x="349" y="379" width="230" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="230" id="7v9-fJ-NF6"/>
                         <constraint firstAttribute="height" constant="44" id="us7-gI-G6G"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Find my Facebook friends">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" image="ButtonFacebookFriendsHighlighted.png">
+                    <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -95,7 +94,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ButtonFacebookFriendsHighlighted.png" width="265" height="91"/>
         <image name="IconFriendsEmpty.png" width="73" height="64"/>
     </resources>
 </document>

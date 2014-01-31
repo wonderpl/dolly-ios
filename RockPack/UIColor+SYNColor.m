@@ -8,6 +8,8 @@
 
 #import "UIColor+SYNColor.h"
 
+#define RGB(r,g,b) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:1.f]
+
 @implementation UIColor (SYNColor)
 
 
@@ -143,4 +145,9 @@ return [UIColor colorWithRed: 136.0f / 255.0f
                  blue: 168.0f / 255.0f
                 alpha: 1.0f];
 }
+
++ (UIColor *)facebookColor {
+	return RGB(61, 90, 151);
+}
+
 @end

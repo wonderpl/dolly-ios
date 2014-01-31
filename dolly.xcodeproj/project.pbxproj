@@ -1150,6 +1150,7 @@
 		E91D4105187DAE5D00E712CC /* SYNLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91D4104187DAE5D00E712CC /* SYNLoginManager.m */; };
 		E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */; };
 		E92837AC189C022E005D5108 /* SYNCommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837AB189C022E005D5108 /* SYNCommentsModel.m */; };
+		E92837B2189C0BE9005D5108 /* SYNFacebookButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */; };
 		E92CBAEE1887E29500A07070 /* SYNVideoPlayerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */; };
 		E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */; };
 		E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D335A184E239C0025D1DF /* SYNPagingModel.m */; };
@@ -2608,6 +2609,8 @@
 		E91F04531844C4410009D610 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E92837AA189C022E005D5108 /* SYNCommentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCommentsModel.h; sourceTree = "<group>"; };
 		E92837AB189C022E005D5108 /* SYNCommentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCommentsModel.m; sourceTree = "<group>"; };
+		E92837B0189C0BE9005D5108 /* SYNFacebookButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFacebookButton.h; sourceTree = "<group>"; };
+		E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFacebookButton.m; sourceTree = "<group>"; };
 		E92A2C5D187F0A7C002A6447 /* SYNVideoCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoCellDelegate.h; sourceTree = "<group>"; };
 		E92CBAEC1887E29500A07070 /* SYNVideoPlayerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerAnimator.h; sourceTree = "<group>"; };
 		E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerAnimator.m; sourceTree = "<group>"; };
@@ -4843,6 +4846,8 @@
 				E905A943189BCD1500FED785 /* SYNSignupViewController.h */,
 				E905A946189BE9F200FED785 /* SYNSignupViewController+Protected.h */,
 				E905A944189BCD1500FED785 /* SYNSignupViewController.m */,
+				E92837B0189C0BE9005D5108 /* SYNFacebookButton.h */,
+				E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -6787,6 +6792,7 @@
 				BE1B3DD6180EA2EF00DA2BD6 /* SYNDiscoverCategoriesCell.m in Sources */,
 				01E427E21664DF21009B941F /* Video.m in Sources */,
 				01E427E51664DF21009B941F /* Channel.m in Sources */,
+				E92837B2189C0BE9005D5108 /* SYNFacebookButton.m in Sources */,
 				01E427F01664EE52009B941F /* _Channel.m in Sources */,
 				E905A945189BCD1500FED785 /* SYNSignupViewController.m in Sources */,
 				E92837AC189C022E005D5108 /* SYNCommentsModel.m in Sources */,

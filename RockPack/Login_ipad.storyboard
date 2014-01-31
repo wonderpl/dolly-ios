@@ -20,17 +20,17 @@
                                 <rect key="frame" x="252" y="114" width="265" height="91"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djh-wF-rJq" userLabel="Facebook UIButton">
-                                <rect key="frame" x="138" y="909" width="280" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djh-wF-rJq" userLabel="Facebook UIButton" customClass="SYNFacebookButton">
+                                <rect key="frame" x="138" y="906" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="6pe-M4-A1b"/>
+                                    <constraint firstAttribute="height" constant="44" id="6pe-M4-A1b"/>
                                     <constraint firstAttribute="width" constant="280" id="Fvd-kN-4d7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Login with Facebook" backgroundImage="ButtonFacebook.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Login with Facebook">
+                                    <color key="titleColor" red="0.23921568627450979" green="0.3529411764705882" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -121,7 +121,7 @@
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="iS9-hS-oFd" secondAttribute="bottom" constant="76" id="LjO-lD-aFT"/>
                             <constraint firstAttribute="centerY" secondItem="j6u-Ab-nE9" secondAttribute="centerY" id="OIG-Ph-ptg"/>
                             <constraint firstItem="kcf-dV-8Oi" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="94" id="PJa-vZ-rEf"/>
-                            <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="djh-wF-rJq" secondAttribute="bottom" constant="76" id="RNF-y1-1U1"/>
+                            <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="djh-wF-rJq" secondAttribute="bottom" constant="74" id="RNF-y1-1U1"/>
                             <constraint firstItem="hYE-YL-Gus" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="djh-wF-rJq" secondAttribute="trailing" constant="50" id="Rmu-hF-fhF"/>
                             <constraint firstAttribute="centerX" secondItem="djh-wF-rJq" secondAttribute="centerX" priority="900" id="Zml-Ik-FE8"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="hYE-YL-Gus" secondAttribute="bottom" constant="76" id="cz7-Cj-gLB"/>
@@ -518,7 +518,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LU7-FI-6lq" userLabel="Login (Final) UIButton">
-                                <rect key="frame" x="224" y="262" width="320" height="38"/>
+                                <rect key="frame" x="224" y="267" width="320" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label="Login Action"/>
                                 <constraints>
@@ -539,7 +539,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="DividerLogin.png" translatesAutoresizingMaskIntoConstraints="NO" id="dtu-dE-Wvo">
-                                <rect key="frame" x="224" y="123" width="320" height="2"/>
+                                <rect key="frame" x="224" y="128" width="320" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="K0G-Ra-Vh1"/>
@@ -547,7 +547,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09T-Q7-qQz" userLabel="Password Forgot Button">
-                                <rect key="frame" x="20" y="200" width="188" height="44"/>
+                                <rect key="frame" x="20" y="205" width="188" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="188" id="3z7-qK-PnP"/>
@@ -566,7 +566,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ips-Hk-5BW" userLabel="UName TextField" customClass="SYNTextFieldLogin">
-                                <rect key="frame" x="224" y="141" width="320" height="38"/>
+                                <rect key="frame" x="224" y="146" width="320" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label="Username Field"/>
@@ -582,7 +582,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uo1-hb-pgy" userLabel="Password TextField" customClass="SYNTextFieldLogin">
-                                <rect key="frame" x="224" y="200" width="320" height="38"/>
+                                <rect key="frame" x="224" y="205" width="320" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label="Password Field"/>
@@ -597,17 +597,17 @@
                                     <outlet property="delegate" destination="ahm-cM-pmF" id="RAD-2x-rep"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXr-lz-tE0" userLabel="Facebook UIButton">
-                                <rect key="frame" x="224" y="75" width="320" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXr-lz-tE0" userLabel="Facebook UIButton" customClass="SYNFacebookButton">
+                                <rect key="frame" x="224" y="75" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="V39-MZ-DAs"/>
+                                    <constraint firstAttribute="height" constant="44" id="V39-MZ-DAs"/>
                                     <constraint firstAttribute="width" constant="320" id="dwF-Ie-8Uo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Login with Facebook" backgroundImage="ButtonFacebook.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Login with Facebook">
+                                    <color key="titleColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -650,14 +650,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="184" translatesAutoresizingMaskIntoConstraints="NO" id="2cm-fd-TIG">
-                                <rect key="frame" x="564" y="160" width="184" height="0.0"/>
+                                <rect key="frame" x="564" y="165" width="184" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.55686274509803924" green="0.086274509803921567" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="178" translatesAutoresizingMaskIntoConstraints="NO" id="NWg-9S-Z5b">
-                                <rect key="frame" x="564" y="222" width="178" height="0.0"/>
+                                <rect key="frame" x="564" y="227" width="178" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.5568627451" green="0.086274509799999996" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1063,7 +1063,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ButtonFacebook.png" width="280" height="44"/>
         <image name="ButtonLogin.png" width="280" height="44"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="DividerLogin.png" width="306" height="3"/>
@@ -1076,7 +1075,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="oHh-i9-djB"/>
-        <segue reference="7Bv-VN-bSo"/>
-        <segue reference="fNr-jN-dIg"/>
+        <segue reference="ahx-Sv-3Mj"/>
+        <segue reference="a0x-hG-aBP"/>
     </inferredMetricsTieBreakers>
 </document>

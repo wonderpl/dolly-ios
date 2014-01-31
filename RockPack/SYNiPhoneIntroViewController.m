@@ -50,7 +50,6 @@
 	
 	self.subtitleLabel.font = [UIFont lightCustomFontOfSize:15.0];
 	
-	self.facebookButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
 	self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
 	self.signupButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
 }

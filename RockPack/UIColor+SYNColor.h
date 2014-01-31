@@ -31,5 +31,6 @@
 + (UIColor *) dollyTabColorSelectedText;
 +(UIColor *) dollyMoodColor;
 
++ (UIColor *)facebookColor;
 
 @end
