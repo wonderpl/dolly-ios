@@ -161,6 +161,10 @@
 
 #pragma mark - Control Callbacks
 - (IBAction)watchButtonTapped:(id)sender {
+    
+    
+    self.watchButton.userInteractionEnabled = NO;
+    
 	__weak typeof(self) weakSelf = self;
 	
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
@@ -197,7 +201,11 @@
                                                       UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
                                                       [strongSelf presentViewController:viewController animated:YES completion:nil];
                                                       
+                                                      
                                                   }
+                                                  
+                                                  strongSelf.watchButton.userInteractionEnabled = YES;
+
                                               } errorHandler:^(id error) {
                                                   
                                               }];
