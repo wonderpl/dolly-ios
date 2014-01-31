@@ -159,10 +159,10 @@
 "notification_empty" = "Notifications will appear here when you have some";
 "notification_mark_all_as_read" = "Mark all as Read";
 
-"notification_liked_action" = "loved your video";
+"notification_liked_action" = "%@ loved your video";
 "notification_unavailable_action" = "Your video has become unavailable";
-"notification_repack_action" = "has added your video to a collection";
-"notification_subscribed_action" = "is now following your collection";
+"notification_repack_action" = "%@ has added your video to a collection";
+"notification_subscribed_action" = "%@ is now following your collection";
 "notification_joined_action" = "Your Facebook friend %@ has joined Wonder PL";
 "your_channel_object" = "your collection";
 "your_video_object" = "your video";

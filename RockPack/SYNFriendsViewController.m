@@ -61,6 +61,8 @@
     self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
     self.preLoginLabel.text = NSLocalizedString (@"friends_invite", nil);
     [self.activityIndicator hidesWhenStopped];
+	
+	self.facebookLoginButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.facebookLoginButton.titleLabel.font.pointSize];
     
     
     // Google analytics support
@@ -218,7 +220,7 @@
                                                               
                                                               weakSelf.facebookLoginButton.hidden = NO;
                                                               
-                                                              weakSelf.preLoginLabel.text = @"We could not Log you in becuase this FB account seems to be associated with a different User.";
+                                                              weakSelf.preLoginLabel.text = @"We could not log you in because this FB account seems to be associated with a different User.";
                                                               
                                                               [[SYNFacebookManager sharedFBManager] logoutOnSuccess:^{
                                                                   

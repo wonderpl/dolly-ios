@@ -123,10 +123,7 @@
 
 + (UIColor *) dollyTabColorSelectedBackground
 {
-    return [UIColor colorWithRed:194.0f/255.0f
-                           green:194.0f/255.0f
-                            blue:194.0f/255.0f
-                           alpha:1];
+    return [UIColor colorWithWhite:152/255.0f alpha:1.0];
 }
 
 

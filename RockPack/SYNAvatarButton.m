@@ -10,17 +10,18 @@
 
 @implementation SYNAvatarButton
 
-- (void) awakeFromNib
-{
-    [super awakeFromNib];
-    
-    self.layer.cornerRadius = self.frame.size.height * 0.5;
-    
-    self.clipsToBounds = YES;
+- (void) awakeFromNib {
+	[super awakeFromNib];
 
-    self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
-    self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+	self.layer.cornerRadius = self.frame.size.height * 0.5;
 
+	self.layer.masksToBounds = YES;
+	
+	self.layer.borderColor = [[UIColor colorWithWhite:219.0/255.0 alpha:1.0] CGColor];
+	self.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0);
+
+	self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+	self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
 }
 
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNFriendsViewController">
@@ -37,14 +37,14 @@
                     </connections>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="Button Facebook">
-                    <rect key="frame" x="349" y="386" width="230" height="44"/>
+                    <rect key="frame" x="349" y="379" width="230" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="230" id="7v9-fJ-NF6"/>
                         <constraint firstAttribute="height" constant="44" id="us7-gI-G6G"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Find my Facebook friends">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,12 +56,11 @@
                         <action selector="facebookLoginPressed:" destination="-1" eventType="touchUpInside" id="16"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Wonder PL is better with friends." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="309" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="We ll send...">
-                    <rect key="frame" x="309" y="337" width="309" height="38"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Wonder PL is better with friends." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="263" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="We ll send...">
+                    <rect key="frame" x="332" y="337" width="263" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="38" id="Ilr-wN-oqH"/>
-                        <constraint firstAttribute="width" constant="309" id="b5V-By-KYO"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="b5V-By-KYO"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,8 +84,8 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="Mkh-zY-jHr" secondAttribute="centerX" constant="4" id="781-VD-9dP"/>
-                <constraint firstItem="4" firstAttribute="top" secondItem="1" secondAttribute="top" constant="386" id="DZI-42-qfr"/>
                 <constraint firstItem="Mkh-zY-jHr" firstAttribute="top" secondItem="1" secondAttribute="top" constant="265" id="NYN-sT-pwo"/>
+                <constraint firstItem="4" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="20" id="fDy-VE-6JG"/>
                 <constraint firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="n6C-K9-nWn"/>
                 <constraint firstItem="6" firstAttribute="top" secondItem="1" secondAttribute="top" constant="337" id="sKq-RW-lZS"/>
                 <constraint firstAttribute="centerX" secondItem="4" secondAttribute="centerX" constant="-0.5" id="t65-Ei-18I"/>
@@ -96,7 +95,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ButtonFacebookFriendsHighlighted.png" width="280" height="45"/>
+        <image name="ButtonFacebookFriendsHighlighted.png" width="265" height="91"/>
         <image name="IconFriendsEmpty.png" width="73" height="64"/>
     </resources>
 </document>

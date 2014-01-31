@@ -34,25 +34,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPS-0z-gZT" userLabel="Channel Info">
-                                <rect key="frame" x="488" y="45" width="49" height="92"/>
+                                <rect key="frame" x="488" y="45" width="48" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNE-gn-6Ck" userLabel="Image View - Channel Image">
-                                        <rect key="frame" x="1" y="0.0" width="48" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9KO-Ak-5b5" customClass="SYNAvatarButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="JRS-a3-s0B"/>
-                                            <constraint firstAttribute="width" constant="48" id="cyr-J1-rSi"/>
+                                            <constraint firstAttribute="height" constant="48" id="7vZ-Zt-akY"/>
+                                            <constraint firstAttribute="width" constant="48" id="bVH-U7-ae3"/>
                                         </constraints>
-                                    </imageView>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnk-m6-q4n">
-                                        <rect key="frame" x="0.0" y="56" width="49" height="16"/>
+                                        <rect key="frame" x="0.0" y="56" width="48" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpJ-pf-0Oe">
-                                        <rect key="frame" x="0.0" y="74" width="49" height="18"/>
+                                        <rect key="frame" x="0.0" y="74" width="48" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="highlightedColor"/>
@@ -60,16 +63,16 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="OpJ-pf-0Oe" firstAttribute="top" secondItem="Vnk-m6-q4n" secondAttribute="bottom" constant="2" id="BUa-Jt-NNX"/>
+                                    <constraint firstItem="9KO-Ak-5b5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cPS-0z-gZT" secondAttribute="leading" id="CaJ-oN-vHe"/>
+                                    <constraint firstItem="9KO-Ak-5b5" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="top" id="DDl-Fl-FvY"/>
                                     <constraint firstItem="OpJ-pf-0Oe" firstAttribute="leading" secondItem="cPS-0z-gZT" secondAttribute="leading" id="H8a-a6-LnP"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wNE-gn-6Ck" secondAttribute="trailing" id="JcF-ws-6N6"/>
+                                    <constraint firstAttribute="centerX" secondItem="9KO-Ak-5b5" secondAttribute="centerX" id="OOJ-0O-mt6"/>
                                     <constraint firstItem="Vnk-m6-q4n" firstAttribute="leading" secondItem="cPS-0z-gZT" secondAttribute="leading" id="Sef-dq-HDf"/>
                                     <constraint firstAttribute="trailing" secondItem="Vnk-m6-q4n" secondAttribute="trailing" id="ULa-S4-hNL"/>
-                                    <constraint firstItem="wNE-gn-6Ck" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="top" id="VSk-rW-KBd"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9KO-Ak-5b5" secondAttribute="trailing" id="bpf-xC-em2"/>
                                     <constraint firstAttribute="bottom" secondItem="OpJ-pf-0Oe" secondAttribute="bottom" id="hba-nP-Xuj"/>
-                                    <constraint firstItem="wNE-gn-6Ck" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cPS-0z-gZT" secondAttribute="leading" id="heX-zf-jyd"/>
                                     <constraint firstAttribute="trailing" secondItem="OpJ-pf-0Oe" secondAttribute="trailing" id="opL-xH-nY3"/>
-                                    <constraint firstItem="Vnk-m6-q4n" firstAttribute="top" secondItem="wNE-gn-6Ck" secondAttribute="bottom" constant="8" symbolic="YES" id="rZN-HJ-YBf"/>
-                                    <constraint firstAttribute="centerX" secondItem="wNE-gn-6Ck" secondAttribute="centerX" id="sgA-zW-mvH"/>
+                                    <constraint firstItem="Vnk-m6-q4n" firstAttribute="top" secondItem="9KO-Ak-5b5" secondAttribute="bottom" constant="8" id="sBc-Yg-Zkd"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh8-En-Apv" customClass="SYNCarouselVideoScrollView">
@@ -281,7 +284,7 @@
                     <connections>
                         <outlet property="addButton" destination="s9c-zp-F8k" id="ci6-bc-O1f"/>
                         <outlet property="channelOwnerLabel" destination="Vnk-m6-q4n" id="vfb-UQ-4bd"/>
-                        <outlet property="channelThumbnailImageView" destination="wNE-gn-6Ck" id="3eL-Eh-v0x"/>
+                        <outlet property="channelThumbnailButton" destination="9KO-Ak-5b5" id="zIY-ro-mrO"/>
                         <outlet property="channelTitleLabel" destination="OpJ-pf-0Oe" id="NfZ-ik-hPb"/>
                         <outlet property="commentButton" destination="smU-Ia-agd" id="HzP-cu-nRB"/>
                         <outlet property="followBarButton" destination="OIO-ik-Gr7" id="eDw-ZG-wlc"/>

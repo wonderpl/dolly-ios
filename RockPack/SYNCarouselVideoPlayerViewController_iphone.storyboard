@@ -36,14 +36,17 @@
                                 <rect key="frame" x="136" y="34" width="48" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhs-Vw-fKo" userLabel="Image View - Channel Image">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Vx-Q3-bfF" customClass="SYNAvatarButton">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="48" id="9vK-o6-0N2"/>
-                                            <constraint firstAttribute="height" constant="48" id="Kgx-Ns-aFt"/>
+                                            <constraint firstAttribute="width" constant="48" id="1oa-mV-ZdP"/>
+                                            <constraint firstAttribute="height" constant="48" id="ueW-By-wcD"/>
                                         </constraints>
-                                    </imageView>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCJ-cn-ZdS">
                                         <rect key="frame" x="0.0" y="56" width="48" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -59,17 +62,17 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="220" id="2e7-XR-bCa"/>
-                                    <constraint firstAttribute="centerX" secondItem="Dhs-Vw-fKo" secondAttribute="centerX" id="2qw-hg-6fu"/>
                                     <constraint firstItem="exl-4H-uqi" firstAttribute="leading" secondItem="Ed8-p3-bzl" secondAttribute="leading" id="6Ij-mW-6aD"/>
+                                    <constraint firstAttribute="centerX" secondItem="5Vx-Q3-bfF" secondAttribute="centerX" id="8ja-9w-MOk"/>
+                                    <constraint firstItem="gCJ-cn-ZdS" firstAttribute="top" secondItem="5Vx-Q3-bfF" secondAttribute="bottom" constant="8" id="Kbu-w8-LD7"/>
                                     <constraint firstItem="gCJ-cn-ZdS" firstAttribute="leading" secondItem="Ed8-p3-bzl" secondAttribute="leading" id="LxS-jV-kVA"/>
+                                    <constraint firstItem="5Vx-Q3-bfF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ed8-p3-bzl" secondAttribute="leading" id="Oug-OD-a3Y"/>
+                                    <constraint firstItem="5Vx-Q3-bfF" firstAttribute="top" secondItem="Ed8-p3-bzl" secondAttribute="top" id="Qlq-77-2aB"/>
                                     <constraint firstAttribute="trailing" secondItem="gCJ-cn-ZdS" secondAttribute="trailing" id="T1q-B2-O0m"/>
-                                    <constraint firstItem="Dhs-Vw-fKo" firstAttribute="top" secondItem="Ed8-p3-bzl" secondAttribute="top" id="UHa-s2-Yfa"/>
-                                    <constraint firstItem="Dhs-Vw-fKo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ed8-p3-bzl" secondAttribute="leading" id="Xsr-Dk-u5A"/>
                                     <constraint firstItem="exl-4H-uqi" firstAttribute="top" secondItem="gCJ-cn-ZdS" secondAttribute="bottom" constant="2" id="YM9-or-bPB"/>
                                     <constraint firstAttribute="trailing" secondItem="exl-4H-uqi" secondAttribute="trailing" id="ddW-yb-s1H"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5Vx-Q3-bfF" secondAttribute="trailing" id="dfB-sN-qld"/>
                                     <constraint firstAttribute="bottom" secondItem="exl-4H-uqi" secondAttribute="bottom" id="lLf-wh-x8u"/>
-                                    <constraint firstItem="gCJ-cn-ZdS" firstAttribute="top" secondItem="Dhs-Vw-fKo" secondAttribute="bottom" constant="8" id="xu4-qp-stb"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dhs-Vw-fKo" secondAttribute="trailing" id="xvG-pL-Xr8"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIQ-uy-kLY" customClass="SYNCarouselVideoScrollView">
@@ -280,7 +283,7 @@
                     <connections>
                         <outlet property="addButton" destination="VoR-pT-nb5" id="1Z1-pf-cqu"/>
                         <outlet property="channelOwnerLabel" destination="gCJ-cn-ZdS" id="4Pu-bA-VM3"/>
-                        <outlet property="channelThumbnailImageView" destination="Dhs-Vw-fKo" id="kJP-9c-sVx"/>
+                        <outlet property="channelThumbnailButton" destination="5Vx-Q3-bfF" id="NHr-Yd-n1M"/>
                         <outlet property="channelTitleLabel" destination="exl-4H-uqi" id="jcZ-2E-wFF"/>
                         <outlet property="commentButton" destination="gkE-i6-gQu" id="TMl-c2-1zP"/>
                         <outlet property="followBarButton" destination="38L-CO-sHW" id="NbW-ld-qG7"/>
