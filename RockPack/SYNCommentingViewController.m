@@ -691,12 +691,12 @@ static NSString* PlaceholderText = @"Say something nice";
     
         
     commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
-    
+    commentingCell.delegate = self;
+
     if([comment.userId isEqualToString:appDelegate.currentUser.uniqueId])
     {
         // only the user can delete his own comments
         commentingCell.deletable = YES;
-        commentingCell.delegate = self;
     }
     
     

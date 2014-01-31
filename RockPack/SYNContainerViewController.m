@@ -203,7 +203,13 @@ else
     {
         self.currentViewController = nil; // will be caught by the setter
     }
-    
+    if (self.currentViewController == self.viewControllers[index]) {
+        [((UINavigationController*)self.viewControllers[index]) popToRootViewControllerAnimated:YES];
+    }
+
+    if(((UINavigationController*)self.viewControllers[1]).viewControllers.count > 1){        [((UINavigationController*)self.viewControllers[1]) popToRootViewControllerAnimated:NO];
+
+    }
     
     self.currentViewController = self.viewControllers[index];
     

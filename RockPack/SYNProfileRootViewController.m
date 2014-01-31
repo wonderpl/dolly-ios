@@ -229,6 +229,11 @@
     
     self.creatingChannel = NO;
     
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(userDataChanged:)
+                                                 name: kUserDataChanged
+                                               object: nil];
+
     
     self.channelExpandedLayout = [[SYNProfileExpandedFlowLayout alloc]init];
     
@@ -263,16 +268,6 @@
         
     }
     
-    // == set up views
-    [self setUpUserProfile];
-    // == set up the segmented controller
-    [self setUpSegmentedControl];
-    
-    // == updates the segmented controllers functionality
-    if (self.isIPhone)
-    {
-        [self updateTabStates];
-    }
     
     self.searchMode = NO;
     
@@ -391,6 +386,18 @@
         tmp.origin.x+=320;
         self.followingSearchBar.frame = tmp;
     }
+    
+    // == set up views
+    [self setUpUserProfile];
+    // == set up the segmented controller
+    [self setUpSegmentedControl];
+    
+    // == updates the segmented controllers functionality
+    if (self.isIPhone)
+    {
+        [self updateTabStates];
+    }
+
 }
 
 -(void) setFollowersCountButton
@@ -512,8 +519,7 @@
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
+-(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
@@ -526,7 +532,16 @@
     if (IS_IPHONE) {
         self.contentOffset = self.collectionsTabActive ? self.channelThumbnailCollectionView.contentOffset : self.subscriptionThumbnailCollectionView.contentOffset;
     }
-    
+    if (IS_IPHONE) {
+        self.channelThumbnailCollectionView.hidden=YES;
+    }
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    if (IS_IPHONE) {
+        self.channelThumbnailCollectionView.hidden=NO;
+    }
+
 }
 
 - (void) updateAnalytics
@@ -562,10 +577,6 @@
 -(void) setUpUserProfile
 {
     
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(userDataChanged:)
-                                                 name: kUserDataChanged
-                                               object: nil];
     
     self.userNameLabel.text = self.channelOwner.username;
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:12.0]];
@@ -595,7 +606,10 @@
     [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
     self.fullNameLabel.text = self.channelOwner.displayName;
     self.userNameLabel.text = self.channelOwner.username;
-    
+
+    [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
+    [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
+
 
 }
 
@@ -1337,10 +1351,6 @@
         }
 
     }
-    
-    [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
-    [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
-
 }
 
 #pragma mark - scroll view delegates
@@ -1823,7 +1833,8 @@
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
                                                        [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
-                                                   self.userNameLabel.text = self.channelOwner.username;
+                                                
+                                                   [self setUpUserProfile];
                                                }
                                                else
                                                {
