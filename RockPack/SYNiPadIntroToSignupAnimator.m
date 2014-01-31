@@ -7,7 +7,7 @@
 //
 
 #import "SYNiPadIntroToSignupAnimator.h"
-#import "SYNiPadSignupViewController.h"
+#import "SYNIPadSignupViewController.h"
 
 static const CGFloat AnimationDuration = 0.3;
 
@@ -23,7 +23,7 @@ static const CGFloat AnimationDuration = 0.3;
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 	UIView *containerView = [transitionContext containerView];
-	SYNiPadSignupViewController *signupViewController = (SYNiPadSignupViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+	SYNIPadSignupViewController *signupViewController = (SYNIPadSignupViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	
 	[containerView addSubview:signupViewController.view];
 	

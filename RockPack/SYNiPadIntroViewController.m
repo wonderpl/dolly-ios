@@ -9,7 +9,7 @@
 #import "SYNiPadIntroViewController.h"
 #import "SYNiPadLoginViewController.h"
 #import "SYNiPadIntroToLoginAnimator.h"
-#import "SYNiPadSignupViewController.h"
+#import "SYNIPadSignupViewController.h"
 #import "SYNiPadLoginToSignupAnimator.h"
 #import "SYNiPadLoginToForgotPasswordAnimator.h"
 #import "SYNiPadPasswordForgotViewController.h"
@@ -59,13 +59,13 @@
 	if ([fromVC isKindOfClass:[SYNiPadPasswordForgotViewController class]] && [toVC isKindOfClass:[SYNiPadLoginViewController class]]) {
 		return [SYNiPadLoginToForgotPasswordAnimator animatorForPresentation:NO];
 	}
-	if ([fromVC isKindOfClass:[SYNiPadLoginViewController class]] && [toVC isKindOfClass:[SYNiPadSignupViewController class]]) {
+	if ([fromVC isKindOfClass:[SYNiPadLoginViewController class]] && [toVC isKindOfClass:[SYNIPadSignupViewController class]]) {
 		return [SYNiPadLoginToSignupAnimator animatorForPresentation:YES];
 	}
-	if ([fromVC isKindOfClass:[SYNiPadSignupViewController class]] && [toVC isKindOfClass:[SYNiPadLoginViewController class]]) {
+	if ([fromVC isKindOfClass:[SYNIPadSignupViewController class]] && [toVC isKindOfClass:[SYNiPadLoginViewController class]]) {
 		return [SYNiPadLoginToSignupAnimator animatorForPresentation:NO];
 	}
-	if ([fromVC isKindOfClass:[SYNiPadIntroViewController class]] && [toVC isKindOfClass:[SYNiPadSignupViewController class]]) {
+	if ([fromVC isKindOfClass:[SYNiPadIntroViewController class]] && [toVC isKindOfClass:[SYNIPadSignupViewController class]]) {
 		return [[SYNiPadIntroToSignupAnimator alloc] init];
 	}
 	return nil;

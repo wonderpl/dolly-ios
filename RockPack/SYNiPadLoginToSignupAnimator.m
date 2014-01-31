@@ -8,7 +8,7 @@
 
 #import "SYNiPadLoginToSignupAnimator.h"
 #import "SYNiPadLoginViewController.h"
-#import "SYNiPadSignupViewController.h"
+#import "SYNIPadSignupViewController.h"
 #import "SYNTextFieldLogin.h"
 
 static const CGFloat AnimationDuration = 0.3;
@@ -41,7 +41,7 @@ static const CGFloat FieldOffset = 60.0;
 	if (self.presenting) {
 		UIView *containerView = [transitionContext containerView];
 		SYNiPadLoginViewController *loginViewController = (SYNiPadLoginViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-		SYNiPadSignupViewController *signupViewController = (SYNiPadSignupViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+		SYNIPadSignupViewController *signupViewController = (SYNIPadSignupViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 		
 		[containerView addSubview:signupViewController.view];
 		[signupViewController.view setNeedsLayout];
@@ -80,7 +80,7 @@ static const CGFloat FieldOffset = 60.0;
 						 }];
 	} else {
 		UIView *containerView = [transitionContext containerView];
-		SYNiPadSignupViewController *signupViewController = (SYNiPadSignupViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+		SYNIPadSignupViewController *signupViewController = (SYNIPadSignupViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 		SYNiPadLoginViewController *loginViewController = (SYNiPadLoginViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 		
 		[containerView addSubview:loginViewController.view];
