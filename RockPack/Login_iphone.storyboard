@@ -165,10 +165,10 @@
             </objects>
             <point key="canvasLocation" x="344" y="-139"/>
         </scene>
-        <!--Ni Phone Signup Username View Controller-->
+        <!--Phone Signup Username View Controller-->
         <scene sceneID="QSU-en-BdW">
             <objects>
-                <viewController id="qWp-Co-vD8" customClass="SYNiPhoneSignupUsernameViewController" sceneMemberID="viewController">
+                <viewController id="qWp-Co-vD8" customClass="SYNIPhoneSignupUsernameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bnA-VJ-QcA"/>
                         <viewControllerLayoutGuide type="bottom" id="rqf-cv-ynZ"/>
@@ -186,8 +186,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJf-c6-72A" userLabel="Button photo">
-                                        <rect key="frame" x="106" y="97" width="108" height="108"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJf-c6-72A" userLabel="Button photo">
+                                        <rect key="frame" x="106" y="76" width="108" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="ButtonUpload.png">
@@ -201,18 +201,26 @@
                                             <action selector="photoButtonTapped:" destination="qWp-Co-vD8" eventType="touchUpInside" id="CsS-nm-KmZ"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EQP-Lj-nBZ" userLabel="Avatar">
-                                        <rect key="frame" x="106" y="97" width="108" height="108"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQP-Lj-nBZ" userLabel="Avatar">
+                                        <rect key="frame" x="106" y="76" width="108" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="108" id="R5n-Zu-hkb"/>
+                                            <constraint firstAttribute="width" constant="108" id="aOm-ky-Nr5"/>
+                                        </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YTM-1r-Zpl" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="30" y="234" width="260" height="38"/>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YTM-1r-Zpl" userLabel="First Name Text Field" customClass="SYNTextFieldLogin">
+                                        <rect key="frame" x="30" y="192" width="260" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="KEq-0T-HSh"/>
+                                            <constraint firstAttribute="width" constant="260" id="mtv-gU-LaM"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                                         <connections>
                                             <outlet property="delegate" destination="qWp-Co-vD8" id="NV7-6O-jnb"/>
                                         </connections>
@@ -226,6 +234,21 @@
                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JPL-Qb-onL" userLabel="Username Text Field" customClass="SYNTextFieldLogin">
+                                        <rect key="frame" x="30" y="284" width="260" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="260" id="YKZ-zj-Fhm"/>
+                                            <constraint firstAttribute="height" constant="38" id="Yea-v6-5CZ"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="qWp-Co-vD8" id="D5e-Hq-QCq"/>
+                                        </connections>
+                                    </textField>
                                     <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aB2-qR-1JB">
                                         <rect key="frame" x="55" y="484" width="210" height="84"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -237,10 +260,37 @@
                                             <segue destination="xFz-iu-19e" kind="embed" id="uhx-wm-F66"/>
                                         </connections>
                                     </containerView>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x7X-da-tl9" userLabel="Last Name Text Field" customClass="SYNTextFieldLogin">
+                                        <rect key="frame" x="30" y="238" width="260" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="260" id="nOp-4G-agz"/>
+                                            <constraint firstAttribute="height" constant="38" id="zJ7-9D-dag"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="qWp-Co-vD8" id="YSW-RE-POh"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="aB2-qR-1JB" secondAttribute="centerX" id="4zT-oh-1SB"/>
+                                    <constraint firstAttribute="centerX" secondItem="YTM-1r-Zpl" secondAttribute="centerX" id="5HE-WH-hD7"/>
+                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="centerY" secondItem="OJf-c6-72A" secondAttribute="centerY" id="5wy-K0-gGT"/>
+                                    <constraint firstAttribute="centerX" secondItem="x7X-da-tl9" secondAttribute="centerX" id="8ZV-NH-shi"/>
+                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="width" secondItem="OJf-c6-72A" secondAttribute="width" id="H0C-L8-LHI"/>
+                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="top" secondItem="PqI-FD-gXl" secondAttribute="top" constant="76" id="IJy-uP-UcD"/>
+                                    <constraint firstItem="JPL-Qb-onL" firstAttribute="top" secondItem="x7X-da-tl9" secondAttribute="bottom" constant="8" id="Xcv-VG-Ip3"/>
+                                    <constraint firstItem="YTM-1r-Zpl" firstAttribute="top" secondItem="EQP-Lj-nBZ" secondAttribute="bottom" constant="8" id="coO-Hu-bsV"/>
                                     <constraint firstAttribute="bottom" secondItem="aB2-qR-1JB" secondAttribute="bottom" id="e69-YK-J20"/>
+                                    <constraint firstAttribute="centerX" secondItem="JPL-Qb-onL" secondAttribute="centerX" id="fsZ-hF-7T1"/>
+                                    <constraint firstItem="x7X-da-tl9" firstAttribute="top" secondItem="YTM-1r-Zpl" secondAttribute="bottom" constant="8" id="hvq-WE-vyM"/>
+                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="height" secondItem="OJf-c6-72A" secondAttribute="height" id="o75-dd-HPj"/>
+                                    <constraint firstAttribute="centerX" secondItem="EQP-Lj-nBZ" secondAttribute="centerX" id="vCY-Ta-8Ya"/>
+                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="centerX" secondItem="OJf-c6-72A" secondAttribute="centerX" id="yXO-yO-h4u"/>
                                 </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bja-Qd-fQZ">
@@ -279,9 +329,11 @@
                         <outlet property="backgroundView" destination="BNj-x8-ORr" id="K00-iZ-Suv"/>
                         <outlet property="containerView" destination="PqI-FD-gXl" id="LFs-ao-5eu"/>
                         <outlet property="errorLabel" destination="Gk4-sP-JFJ" id="oXA-wt-bea"/>
+                        <outlet property="firstNameTextField" destination="YTM-1r-Zpl" id="uqI-eh-CHt"/>
+                        <outlet property="lastNameTextField" destination="x7X-da-tl9" id="BjS-Ud-8lA"/>
                         <outlet property="navigationBar" destination="Bja-Qd-fQZ" id="fmZ-ea-dTh"/>
                         <outlet property="nextBarButton" destination="2kZ-qJ-f4F" id="JJ2-R0-eQv"/>
-                        <outlet property="usernameTextField" destination="YTM-1r-Zpl" id="CYh-of-joi"/>
+                        <outlet property="usernameTextField" destination="JPL-Qb-onL" id="RCg-4W-1SY"/>
                         <segue destination="hNy-rk-sTx" kind="push" identifier="SignupDetails" id="Aze-3S-NiD"/>
                     </connections>
                 </viewController>
@@ -289,10 +341,10 @@
             </objects>
             <point key="canvasLocation" x="939" y="114"/>
         </scene>
-        <!--Ni Phone Signup Details View Controller-->
+        <!--Phone Signup Details View Controller-->
         <scene sceneID="XnZ-t5-iu2">
             <objects>
-                <viewController id="hNy-rk-sTx" customClass="SYNiPhoneSignupDetailsViewController" sceneMemberID="viewController">
+                <viewController id="hNy-rk-sTx" customClass="SYNIPhoneSignupDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AcI-1c-jua"/>
                         <viewControllerLayoutGuide type="bottom" id="bnW-YR-7gs"/>
@@ -921,6 +973,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1fQ-HG-P1W"/>
+        <segue reference="uhx-wm-F66"/>
     </inferredMetricsTieBreakers>
 </document>

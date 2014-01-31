@@ -105,10 +105,14 @@
 
 //Errors - Registration
 "register_screen_form_field_email_error_empty" = "Please enter a valid email address";
+"register_screen_form_field_first_name_error_empty" = "Please enter your first name";
+"register_screen_form_field_last_name_error_empty" = "Please enter your last name";
 "register_screen_form_field_username_error_empty" = "Please choose a username";
 "register_screen_form_field_password_error_empty" =  "Please choose a password";
 "register_screen_form_field_username_error_invalid" = "Sorry, invalid characters";
 "register_screen_form_field_username_error_too_long" = "Username must be shorter than 20 letters";
+"register_screen_form_field_first_name_error_too_long" = "First name must be shorter than 32 letters";
+"register_screen_form_field_last_name_error_too_long" = "Last name must be shorter than 32 letters";
 "register_screen_form_error_invalid_date" = "Sorry, invalid date";
 "register_screen_form_error_future" = "Looks like you're born in the future!";
 "register_screen_form_error_under_13" = "Wonder PL is not available for under 13's yet";
