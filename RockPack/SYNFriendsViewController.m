@@ -61,6 +61,8 @@
     self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
     self.preLoginLabel.text = NSLocalizedString (@"friends_invite", nil);
     [self.activityIndicator hidesWhenStopped];
+	
+	self.facebookLoginButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.facebookLoginButton.titleLabel.font.pointSize];
     
     
     // Google analytics support
