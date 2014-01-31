@@ -16,6 +16,7 @@
 #import "SYNDeviceManager.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNNavigationManager.h"
+#import "SYNCommentsModel.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kMaxCommentCharacters 120
@@ -24,7 +25,7 @@
 static const CGFloat CharacterCountThreshold = 30.0;
 static NSString* PlaceholderText = @"Say something nice";
 
-@interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
+@interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, SYNPagingModelDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
 
@@ -51,6 +52,9 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, weak) SYNCommentingCollectionViewCell* currentlyDeletingCell;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *commentBottomConstraint;
+
+@property (nonatomic, strong) SYNPagingModel *model;
+
 @end
 
 @implementation SYNCommentingViewController
@@ -58,6 +62,8 @@ static NSString* PlaceholderText = @"Say something nice";
 - (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance {
 	if (self = [super initWithViewId:kCommentsViewId]) {
 		self.videoInstance = videoInstance;
+		self.model = [SYNCommentsModel modelWithVideoInstance:videoInstance];
+		self.model.delegate = self;
 	}
 	return self;
 }
@@ -108,10 +114,11 @@ static NSString* PlaceholderText = @"Say something nice";
     
     // gets the comments from the DB
     
-    [self refreshCollectionView];
-    
-    [self getCommentsFromServer];
-
+//    [self refreshCollectionView];
+//    
+//    [self getCommentsFromServer];
+	
+	[self.model loadNextPage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)
@@ -152,17 +159,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
 }
-
--(void)viewWillDisappear:(BOOL)animated
-{
-
-}
-- (void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-   
-}
-
 
 #pragma mark - Keyboard Animation
 
@@ -206,6 +202,13 @@ static NSString* PlaceholderText = @"Say something nice";
     }
 }
 
+- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
+	[self.commentsCollectionView reloadData];
+}
+
+- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
+	
+}
 
 #pragma mark - KVO
 
@@ -667,38 +670,38 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - UICollectionView Delegate/Data Source
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
-{
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 	return 1;
 }
 
 
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger) section
-{
-	return self.comments.count;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+	return self.model.itemCount;
 }
 
 
-- (UICollectionViewCell *) collectionView: (UICollectionView *) cv
-                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *) cv
+                   cellForItemAtIndexPath:(NSIndexPath *) indexPath
 {
     SYNCommentingCollectionViewCell* commentingCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNCommentingCollectionViewCell reuseIdentifier]
                                                                                     forIndexPath:indexPath];
-    Comment* comment = self.comments[indexPath.item];
-    
-    commentingCell.comment = comment;
+//    Comment* comment = self.comments[indexPath.item];
+	
+	NSDictionary *comment = [self.model itemAtIndex:indexPath.item];
+	
+//    commentingCell.comment = comment;
     
     
         
-    commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
-    commentingCell.delegate = self;
-
-    if([comment.userId isEqualToString:appDelegate.currentUser.uniqueId])
-    {
-        // only the user can delete his own comments
-        commentingCell.deletable = YES;
-    }
-    
+//    commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
+//    commentingCell.delegate = self;
+//
+//    if([comment.userId isEqualToString:appDelegate.currentUser.uniqueId])
+//    {
+//        // only the user can delete his own comments
+//        commentingCell.deletable = YES;
+//    }
+//    
     
     return commentingCell;
 }

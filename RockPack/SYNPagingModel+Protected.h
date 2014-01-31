@@ -11,11 +11,12 @@
 @interface SYNPagingModel ()
 
 @property (nonatomic, assign) BOOL loading;
-@property (nonatomic, assign) NSRange loadedRange;
 @property (nonatomic, strong) NSArray *loadedItems;
 @property (nonatomic, assign) NSInteger totalItemCount;
 
-- (void)handleDataUpdated;
+- (instancetype)initWithLoadedRange:(NSRange)range;
+
+- (void)handleDataUpdatedForRange:(NSRange)range;
 - (void)handleError;
 
 - (void)loadItemsForRange:(NSRange)range;

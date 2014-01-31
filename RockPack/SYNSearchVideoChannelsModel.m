@@ -53,10 +53,9 @@
 									}
 									
 									sself.loadedItems = channels;
-									sself.loadedRange = range;
 									sself.totalItemCount = [response[@"channels"][@"total"] integerValue];
 									
-									[sself handleDataUpdated];
+									[sself handleDataUpdatedForRange:range];
 								} errorHandler:^(NSError *error) {
 									__strong typeof(self) sself = wself;
 

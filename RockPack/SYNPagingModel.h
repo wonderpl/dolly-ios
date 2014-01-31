@@ -10,7 +10,7 @@
 
 @class SYNPagingModel;
 
-@protocol SYNPagingModelDelegate <UICollectionViewDataSource>
+@protocol SYNPagingModelDelegate
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel;
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel;

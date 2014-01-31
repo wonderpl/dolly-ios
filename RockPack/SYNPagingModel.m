@@ -11,13 +11,23 @@
 
 static const NSInteger DefaultBatchSize = 40;
 
+@interface SYNPagingModel ()
+
+@property (nonatomic, assign) NSRange loadedRange;
+
+@end
+
 @implementation SYNPagingModel
 
 #pragma mark - Init / Dealloc
 
-- (id)init {
+- (instancetype)init {
+	return [self initWithLoadedRange:NSMakeRange(NSNotFound, 0)];
+}
+
+- (instancetype)initWithLoadedRange:(NSRange)range {
 	if (self = [super init]) {
-		self.loadedRange = NSMakeRange(NSNotFound, 0);
+		self.loadedRange = range;
 	}
 	return self;
 }
@@ -42,6 +52,7 @@ static const NSInteger DefaultBatchSize = 40;
 
 - (void)reset {
 	self.totalItemCount = 0;
+	
 	self.loadedRange = NSMakeRange(NSNotFound, 0);
 }
 
@@ -58,8 +69,9 @@ static const NSInteger DefaultBatchSize = 40;
 
 #pragma mark - Protected
 
-- (void)handleDataUpdated {
+- (void)handleDataUpdatedForRange:(NSRange)range {
 	self.loading = NO;
+	self.loadedRange = range;
 	
 	[self.delegate pagingModelDataUpdated:self];
 }

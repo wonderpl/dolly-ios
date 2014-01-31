@@ -32,11 +32,10 @@
 #pragma mark - Init / Dealloc
 
 - (instancetype)initWithChannel:(Channel *)channel {
-	if (self = [super init]) {
+	if (self = [super initWithLoadedRange:NSMakeRange(0, [channel.videoInstances count])]) {
 		self.channel = channel;
 		
 		self.loadedItems = [channel.videoInstances array];
-		self.loadedRange = NSMakeRange(0, [channel.videoInstances count]);
 		self.totalItemCount = channel.totalVideosValueValue;
 	}
 	return self;
@@ -54,11 +53,10 @@
 		[sself.channel addVideoInstancesFromDictionary:response];
 		[sself.channel.managedObjectContext save:nil];
 		
-		sself.loadedRange = range;
 		sself.loadedItems = [self.channel.videoInstances array];
 		sself.totalItemCount = sself.channel.totalVideosValueValue;
 		
-		[sself handleDataUpdated];
+		[sself handleDataUpdatedForRange:range];
 	};
 
 	// define success block //

@@ -149,11 +149,10 @@
 											   NSArray *videoInstances = [sself videoInstancesForFeedItems:feedItems];
 											   sself.videoInstances = videoInstances;
 											   
-											   sself.loadedRange = range;
 											   sself.loadedItems = (sself.mode == SYNFeedModelModeFeed ? feedItems : videoInstances);
 											   sself.totalItemCount = [total integerValue];
 											   
-											   [sself handleDataUpdated];
+											   [sself handleDataUpdatedForRange:range];
 										   }];
                                        } errorHandler:^(NSDictionary *errorDictionary) {
 										   [self handleError];
