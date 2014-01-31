@@ -73,7 +73,8 @@
 	[self.ownerNameButton setTitle:videoInstance.channel.channelOwner.displayName
 						  forState:UIControlStateNormal];
     [self.channelNameButton setTitle:videoInstance.channel.title forState:UIControlStateNormal];
-    
+    [self.commentSocialButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
+
     // == timestamp == //
     
 	self.timeStampLabel.text = [NSString paddedTimecodeStringFromSeconds:videoInstance.video.durationValue];

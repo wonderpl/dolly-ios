@@ -71,7 +71,9 @@
 	self.linkButton.layer.cornerRadius = CGRectGetHeight(self.linkButton.frame) / 2.0;
 	
 	self.linkButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.linkButton.titleLabel.font.pointSize];
-	
+    
+    [self.commentButton setTitle:@"0" forState:UIControlStateNormal];
+    
 	if (IS_IPHONE) {
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(deviceOrientationChanged:)
@@ -302,6 +304,8 @@
 	
 	self.likeButton.selected = videoInstance.starredByUserValue;
 	[self.likeButton setTitle:NSLocalizedString(@"like", nil) andCount:[videoInstance.video.starCount integerValue]];
+    
+    [self.commentButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
 }
 
 - (void)trackVideoViewingStatisticsForVideoInstance:(VideoInstance *)videoInstance withVideoPlayer:(SYNVideoPlayer *)videoPlayer {

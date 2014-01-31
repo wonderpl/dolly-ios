@@ -98,6 +98,9 @@ static NSDateFormatter *dateFormatter = nil;
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects
                       existingVideos: (NSArray *) existingVideos
 {
+    
+    
+//    NSLog(@"dictionarydictionarydictionary%@", dictionary);
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
     
@@ -113,14 +116,13 @@ static NSDateFormatter *dateFormatter = nil;
     self.title = [dictionary objectForKey: @"title"
                               withDefault: @""];
     
+    
+    
+//    NSLog(@"+++++ %@", dictionary);
+    
     NSDictionary* commentsDictionary = [dictionary objectForKey:@"comments"];
-    if([commentsDictionary isKindOfClass:[NSDictionary class]])
-    {
-        self.commentCount = [commentsDictionary objectForKey: @"count"
+        self.commentCount = [commentsDictionary objectForKey: @"total"
                                                  withDefault: @(0)];
-        
-        // NSLog(@">> Comment Count = %i", self.commentCountValue);
-    }
     
     
     NSArray *filteredVideos;
