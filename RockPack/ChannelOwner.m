@@ -123,8 +123,6 @@
     
     self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
                                           withDefault:@0];
-
-    self.subscriptionCount = [dictionary objectForKey:@"subscription_count" withDefault:@0];
     
     self.subscribersCount =[dictionary objectForKey:@"subscriber_count"
                                         withDefault:@0];

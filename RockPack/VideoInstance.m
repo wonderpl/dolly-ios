@@ -26,6 +26,7 @@ static NSDateFormatter *dateFormatter = nil;
     instance.dateAdded = existingInstance.dateAdded;
     instance.dateOfDayAdded = existingInstance.dateOfDayAdded;
     instance.title = existingInstance.title;
+    instance.commentCount = existingInstance.commentCount;
     
     instance.video = [Video	instanceFromVideo: existingInstance.video
                     usingManagedObjectContext: managedObjectContext];
@@ -72,7 +73,6 @@ static NSDateFormatter *dateFormatter = nil;
     {
         return nil;
     }
-    
     NSString *uniqueId = dictionary[@"id"];
     
     if (!uniqueId || ![uniqueId isKindOfClass: [NSString class]])
@@ -100,7 +100,6 @@ static NSDateFormatter *dateFormatter = nil;
 {
     
     
-//    NSLog(@"dictionarydictionarydictionary%@", dictionary);
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
     
@@ -115,10 +114,6 @@ static NSDateFormatter *dateFormatter = nil;
     
     self.title = [dictionary objectForKey: @"title"
                               withDefault: @""];
-    
-    
-    
-//    NSLog(@"+++++ %@", dictionary);
     
     NSDictionary* commentsDictionary = [dictionary objectForKey:@"comments"];
         self.commentCount = [commentsDictionary objectForKey: @"total"

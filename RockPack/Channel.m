@@ -239,8 +239,7 @@
             SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
             if(self.favouritesValue && [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId])
                 videoInstance.starredByUserValue = YES;
-                
-            
+            videoInstance.commentCount =  channelDictionary[@"comments"][@"count"];
             [importArray addObject: videoInstance];
         }
         
@@ -441,6 +440,7 @@
     
     for (NSDictionary *channelDictionary in itemArray)
     {
+        
         VideoInstance *videoInstance = videoInstance = [VideoInstance instanceFromDictionary: channelDictionary
                                                                    usingManagedObjectContext: self.managedObjectContext
                                                                          ignoringObjectTypes: kIgnoreChannelObjects
