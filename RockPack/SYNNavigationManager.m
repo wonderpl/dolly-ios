@@ -168,10 +168,6 @@
     
     for (UIButton *tab in self.masterController.tabs)
     {
-        
-        if (tab == tabPressed && tab.selected) {
-            //TODO:Pop to root here
-        }
         tab.highlighted = (BOOL) (tab == tabPressed);
         tab.selected = (BOOL) (tab == tabPressed);
     }
