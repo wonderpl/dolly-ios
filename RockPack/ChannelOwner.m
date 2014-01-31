@@ -121,23 +121,20 @@
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
     
-    self.subscribersCount =[dictionary objectForKey:@"subscriber_count"];
-    
-    if (![[dictionary objectForKey: @"subscription_count"] isKindOfClass: [NSNull class]])
-    {
-        self.subscriptionCount = [dictionary objectForKey:@"subscription_count"];
-    }
+    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
+                                          withDefault:@0];
 
-    self.coverPhotoURL = [dictionary objectForKey:@"profile_cover_url"];
+    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"];
     
-    if ([[dictionary objectForKey: @"description"] isKindOfClass: [NSNull class]])
-    {
-        self.channelOwnerDescription = @"";
-    }
-    else
-    {
-        self.channelOwnerDescription = [dictionary objectForKey: @"description"];
-    }
+    self.subscribersCount =[dictionary objectForKey:@"subscriber_count"
+                                        withDefault:@0];
+    
+    self.coverPhotoURL = [dictionary objectForKey:@"profile_cover_url"
+                                      withDefault:@""];
+    
+    self.channelOwnerDescription = [dictionary objectForKey:@"description"
+                                                withDefault:@""];
+    
     
     BOOL hasChannels = YES;
     
@@ -152,10 +149,7 @@
     NSArray *channelItemsArray = channelsDictionary[@"items"];
     
     
-    if (![[channelsDictionary objectForKey:@("total")] isKindOfClass: [NSNull class]])
-    {
-        self.totalVideosValueChannel =[channelsDictionary objectForKey: @"total"];
-    }
+    self.totalVideosValueChannel =[channelsDictionary objectForKey: @"total" withDefault:@0];
     
 
     if ([channelItemsArray isKindOfClass: [NSNull class]])
