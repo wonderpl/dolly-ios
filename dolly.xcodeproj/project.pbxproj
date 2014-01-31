@@ -647,8 +647,6 @@
 		38A200B81731607F00FB9F57 /* ButtonMenuBackHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFC61731607F00FB9F57 /* ButtonMenuBackHighlighted~iphone.png */; };
 		38A200B91731607F00FB9F57 /* ButtonMenuBack~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFC71731607F00FB9F57 /* ButtonMenuBack~iphone.png */; };
 		38A200BA1731607F00FB9F57 /* ButtonSettings@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFC81731607F00FB9F57 /* ButtonSettings@2x~iphone.png */; };
-		38A200BB1731607F00FB9F57 /* ButtonSettingsHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFC91731607F00FB9F57 /* ButtonSettingsHighlighted@2x~iphone.png */; };
-		38A200BC1731607F00FB9F57 /* ButtonSettingsHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFCA1731607F00FB9F57 /* ButtonSettingsHighlighted~iphone.png */; };
 		38A200BD1731607F00FB9F57 /* ButtonSettings~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFCB1731607F00FB9F57 /* ButtonSettings~iphone.png */; };
 		38A200BE1731607F00FB9F57 /* FallbackNotificationsChannel@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFCC1731607F00FB9F57 /* FallbackNotificationsChannel@2x~iphone.png */; };
 		38A200BF1731607F00FB9F57 /* FallbackNotificationsChannel~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2FFCD1731607F00FB9F57 /* FallbackNotificationsChannel~iphone.png */; };
@@ -750,8 +748,6 @@
 		4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */; };
 		4CE8AB381896B78900D7E373 /* DefaultCoverPhoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */; };
-		BE03A6CC16F7697900245314 /* ButtonSettingsHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */; };
-		BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */; };
 		BE03A6D616F784B000245314 /* SYNAccountSettingsGender.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */; };
 		BE03A6D916F787CB00245314 /* SYNAccountSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */; };
 		BE06EEEC17D759290028F2E3 /* RecentContactPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = BE06EEEA17D759290028F2E3 /* RecentContactPlaceholder.png */; };
@@ -2017,8 +2013,6 @@
 		38A2FFC61731607F00FB9F57 /* ButtonMenuBackHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMenuBackHighlighted~iphone.png"; sourceTree = "<group>"; };
 		38A2FFC71731607F00FB9F57 /* ButtonMenuBack~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMenuBack~iphone.png"; sourceTree = "<group>"; };
 		38A2FFC81731607F00FB9F57 /* ButtonSettings@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettings@2x~iphone.png"; sourceTree = "<group>"; };
-		38A2FFC91731607F00FB9F57 /* ButtonSettingsHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
-		38A2FFCA1731607F00FB9F57 /* ButtonSettingsHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettingsHighlighted~iphone.png"; sourceTree = "<group>"; };
 		38A2FFCB1731607F00FB9F57 /* ButtonSettings~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonSettings~iphone.png"; sourceTree = "<group>"; };
 		38A2FFCC1731607F00FB9F57 /* FallbackNotificationsChannel@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FallbackNotificationsChannel@2x~iphone.png"; sourceTree = "<group>"; };
 		38A2FFCD1731607F00FB9F57 /* FallbackNotificationsChannel~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FallbackNotificationsChannel~iphone.png"; sourceTree = "<group>"; };
@@ -2104,8 +2098,6 @@
 		B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dollyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsViewController.m; sourceTree = "<group>"; };
-		BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSettingsHighlighted.png; path = Assets/Images/ButtonSettingsHighlighted.png; sourceTree = "<group>"; };
-		BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSettingsHighlighted@2x.png"; path = "Assets/Images/ButtonSettingsHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE03A6D416F784B000245314 /* SYNAccountSettingsGender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsGender.h; sourceTree = "<group>"; };
 		BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsGender.m; sourceTree = "<group>"; };
 		BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingTableViewCell.m; sourceTree = "<group>"; };
@@ -2338,8 +2330,6 @@
 		BE7D34D517159F3C0085AB81 /* SYNActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNActivityViewController.m; sourceTree = "<group>"; };
 		BE7D34D81715A9560085AB81 /* ButtonSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSettings.png; path = Assets/Images/ButtonSettings.png; sourceTree = "<group>"; };
 		BE7D34D91715A9560085AB81 /* ButtonSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSettings@2x.png"; path = "Assets/Images/ButtonSettings@2x.png"; sourceTree = "<group>"; };
-		BE7D34DA1715A9560085AB81 /* ButtonSettingsHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSettingsHighlighted.png; path = Assets/Images/ButtonSettingsHighlighted.png; sourceTree = "<group>"; };
-		BE7D34DB1715A9560085AB81 /* ButtonSettingsHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSettingsHighlighted@2x.png"; path = "Assets/Images/ButtonSettingsHighlighted@2x.png"; sourceTree = "<group>"; };
 		BE7D34E41715AC890085AB81 /* ButtonSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSearch.png; path = Assets/Images/ButtonSearch.png; sourceTree = "<group>"; };
 		BE7D34E51715AC890085AB81 /* ButtonSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonSearch@2x.png"; path = "Assets/Images/ButtonSearch@2x.png"; sourceTree = "<group>"; };
 		BE7D34E61715AC890085AB81 /* ButtonSearchHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonSearchHighlighted.png; path = Assets/Images/ButtonSearchHighlighted.png; sourceTree = "<group>"; };
@@ -4510,8 +4500,6 @@
 				38A2FFC61731607F00FB9F57 /* ButtonMenuBackHighlighted~iphone.png */,
 				38A2FFC71731607F00FB9F57 /* ButtonMenuBack~iphone.png */,
 				38A2FFC81731607F00FB9F57 /* ButtonSettings@2x~iphone.png */,
-				38A2FFC91731607F00FB9F57 /* ButtonSettingsHighlighted@2x~iphone.png */,
-				38A2FFCA1731607F00FB9F57 /* ButtonSettingsHighlighted~iphone.png */,
 				38A2FFCB1731607F00FB9F57 /* ButtonSettings~iphone.png */,
 				38A2FFCC1731607F00FB9F57 /* FallbackNotificationsChannel@2x~iphone.png */,
 				38A2FFCD1731607F00FB9F57 /* FallbackNotificationsChannel~iphone.png */,
@@ -4650,8 +4638,6 @@
 			children = (
 				011D42CB16FFA8E600A49D50 /* DividerYou.png */,
 				011D42CC16FFA8E600A49D50 /* DividerYou@2x.png */,
-				BE03A6BE16F7697900245314 /* ButtonSettingsHighlighted.png */,
-				BE03A6BF16F7697900245314 /* ButtonSettingsHighlighted@2x.png */,
 				0EF07865181EAE8300667417 /* ButtonMore.png */,
 				0EF07866181EAE8300667417 /* ButtonMore@2x.png */,
 			);
@@ -5172,8 +5158,6 @@
 			children = (
 				BE7D34D81715A9560085AB81 /* ButtonSettings.png */,
 				BE7D34D91715A9560085AB81 /* ButtonSettings@2x.png */,
-				BE7D34DA1715A9560085AB81 /* ButtonSettingsHighlighted.png */,
-				BE7D34DB1715A9560085AB81 /* ButtonSettingsHighlighted@2x.png */,
 				BE7D34E61715AC890085AB81 /* ButtonSearchHighlighted.png */,
 				BE7D34E71715AC890085AB81 /* ButtonSearchHighlighted@2x.png */,
 			);
@@ -5836,8 +5820,6 @@
 				01A79B9D16F32C3400B05084 /* ButtonShuttleBarPause@2x.png in Resources */,
 				01A79B9E16F32C3400B05084 /* ButtonShuttleBarPlay.png in Resources */,
 				01A79B9F16F32C3400B05084 /* ButtonShuttleBarPlay@2x.png in Resources */,
-				BE03A6CC16F7697900245314 /* ButtonSettingsHighlighted.png in Resources */,
-				BE03A6CD16F7697900245314 /* ButtonSettingsHighlighted@2x.png in Resources */,
 				BE21EE9516FA28680067223B /* IconBirthday.png in Resources */,
 				BE21EE9616FA28680067223B /* IconBirthday@2x.png in Resources */,
 				BE21EE9716FA28680067223B /* IconEmail.png in Resources */,
@@ -6228,8 +6210,6 @@
 				38A200B81731607F00FB9F57 /* ButtonMenuBackHighlighted~iphone.png in Resources */,
 				38A200B91731607F00FB9F57 /* ButtonMenuBack~iphone.png in Resources */,
 				38A200BA1731607F00FB9F57 /* ButtonSettings@2x~iphone.png in Resources */,
-				38A200BB1731607F00FB9F57 /* ButtonSettingsHighlighted@2x~iphone.png in Resources */,
-				38A200BC1731607F00FB9F57 /* ButtonSettingsHighlighted~iphone.png in Resources */,
 				38A200BD1731607F00FB9F57 /* ButtonSettings~iphone.png in Resources */,
 				38A200BE1731607F00FB9F57 /* FallbackNotificationsChannel@2x~iphone.png in Resources */,
 				BED027D01834D4CC00636659 /* ButtonMoreLogout.png in Resources */,
