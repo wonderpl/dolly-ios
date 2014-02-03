@@ -25,7 +25,7 @@
 
 "Video" = "video";
 "Videos" = "videos";
-"Channels" = "PACKS";
+"Channels" = "COLLECTIONS";
 "Users" = "PEOPLE";
 "Subscribers" = "followers";
 "Follow" = "follow";
@@ -175,7 +175,7 @@
 
 // == Channel Detail == //
 
-"channel_screen_no_videos" = "There are no videos in this pack.";
+"channel_screen_no_videos" = "There are no videos in this collection.";
 "channel_screen_error_subscribe" = "Something went wrong. Please try again.";
 "channel_screen_loading_videos" = "Loading videos...";
 "no_videos" = "There are no videos in this collection yet";
@@ -188,8 +188,8 @@
 "select_category" = "CHOOSE A CATEGORY";
 "enter_title" = "ENTER A TITLE";
 "select_cover" = "CHOOSE A COVER";
-"channel_created_succesfully" = "PACK CREATED";
-"channel_will_remain_private_until" = "PACKS STAY PRIVATE UNTIL YOU ";
+"channel_created_succesfully" = "COLLECTION CREATED";
+"channel_will_remain_private_until" = "COLLECTIONS STAY PRIVATE UNTIL YOU ";
 "private_condition_category" = "CHOOSE A RELEVANT CATEGORY";
 "private_condition_title" = "ENTER A TITLE";
 "private_condition_cover" = "CHOOSE A COVER";
@@ -197,7 +197,7 @@
 // == Channel Creation/Editing == //
 
 // Channel Title text view placeholder
-"channel_creation_screen_field_channeltitle_placeholder" = "PACK NAME";
+"channel_creation_screen_field_channeltitle_placeholder" = "COLLECTION NAME";
 
 // Description placeholder
 
@@ -213,14 +213,14 @@
 
 // Error AlertViews
 "channel_creation_screen_error_existing_dialog_title" = "Title Already Exists";
-"channel_creation_screen_error_existing_dialog_description" = "You've already created a pack with this title. Please choose another.";
+"channel_creation_screen_error_existing_dialog_description" = "You've already created a collection with this title. Please choose another.";
 
 "channel_creation_screen_error_inappropriate_dialog_title" = "Mind your language!";
-"channel_creation_screen_error_inappropriate_dialog_description" = "This pack title may include inappropriate words.";
+"channel_creation_screen_error_inappropriate_dialog_description" = "This collection title may include inappropriate words.";
 
 "channel_creation_screen_error_unknown_title" = "Oops";
-"channel_creation_screen_error_unknown_create_description" = "We couldn't create your pack. Please try again.";
-"channel_creation_screen_error_unknown_save_description" = "We couldn't save your pack. Please try again.";
+"channel_creation_screen_error_unknown_create_description" = "We couldn't create your collection. Please try again.";
+"channel_creation_screen_error_unknown_save_description" = "We couldn't save your collection. Please try again.";
 
 "500_error_message" = "Something went wrong with Wonder PL. Please try again.";
 "503_error_message" = "Something went wrong with Wonder PL. Please try again.";
@@ -235,7 +235,7 @@
 // == Feed == //
 
 "feed_screen_section_title" = "FEED";
-"feed_screen_empty_message" = "Hard to believe, but this dull space will soon be bursting with video excitement.\nJust start following some packs.";
+"feed_screen_empty_message" = "Hard to believe, but this dull space will soon be bursting with video excitement.\nJust start following some collections.";
 "feed_screen_loading_error" = "There was a problem while loading your feed, please try again.";
 "feed_screen_updating_error" = "There was a problem while refreshing your feed, please try again.";
 "feed_screen_loading_message" = "Your Video Feed is Being Refreshed, Please Wait...";
@@ -249,9 +249,9 @@
 
 // == Channels == //
 
-"channels_screen_section_title" = "PACKS";
+"channels_screen_section_title" = "COLLECTIONS";
 
-"channels_screen_loading_categories" = "Loading Pack Categories...";
+"channels_screen_loading_categories" = "Loading categories...";
 
 "FAVORITES" = "FAVORITES";
 
@@ -260,12 +260,12 @@
 "profile_screen_section_title" = "PROFILE";
 
 "profile_screen_channel_delete_dialog_title" = "Delete %@";
-"profile_screen_channel_delete_dialog_description" = "Are you sure you want to delete this pack?";
+"profile_screen_channel_delete_dialog_description" = "Are you sure you want to delete this collection?";
 
-"profile_screen_section_owner_created_title" = "MY PACKS";
-"profile_screen_section_owner_subscription_title" = "PACKS I FOLLOW";
-"profile_screen_section_user_created_title" = "PACKS";
-"profile_screen_section_user_subscription_title" = "PACKS FOLLOWED";
+"profile_screen_section_owner_created_title" = "MY COLLECTIONS";
+"profile_screen_section_owner_subscription_title" = "COLLECTIONS I FOLLOW";
+"profile_screen_section_user_created_title" = "COLLECTIONS";
+"profile_screen_section_user_subscription_title" = "COLLECTIONS FOLLOWED";
 "Unfollow?" = "Unfollow?";
 "Follow All?" = "Follow All?";
 "Cannot have the same title?" = "Cannot have the same title?";
@@ -292,7 +292,7 @@
 
 // == Instructions == //
 
-"instruction_packs_for_you" = "Here are some popular\nvideo packs for you";
+"instruction_packs_for_you" = "Here are some popular\ncollections for you";
 "instruction_packs_choose_one" = "Choose one to get started";
 
 "instruction_press_hold" = "Press and hold the video.\n(Go on, try it!)";
