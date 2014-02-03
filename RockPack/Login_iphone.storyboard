@@ -157,7 +157,7 @@
                         <outlet property="containerView" destination="LER-5Z-EXM" id="rFR-0k-A22"/>
                         <outlet property="facebookButton" destination="pbj-Ru-j0Q" id="hM0-jU-0Of"/>
                         <outlet property="loginButton" destination="m39-9A-UIQ" id="ViL-sr-bFS"/>
-                        <outlet property="logoImage" destination="dHb-gc-rUo" id="JFG-GF-OXe"/>
+                        <outlet property="logoImageView" destination="dHb-gc-rUo" id="kqE-Au-ddm"/>
                         <outlet property="signupButton" destination="H6u-lu-1jq" id="Ihy-6i-i1A"/>
                         <outlet property="subtitleLabel" destination="8Mn-sf-8SW" id="u87-5Y-akK"/>
                         <outlet property="userContainerView" destination="uoL-Va-ZNo" id="p3x-WD-AJd"/>

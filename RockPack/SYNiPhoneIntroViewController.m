@@ -32,7 +32,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIView *userContainerView;
 @property (nonatomic, strong) IBOutlet UIButton *signupButton;
-@property (strong, nonatomic) IBOutlet UIImageView *logoImage;
+@property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @property (strong, nonatomic) IBOutlet UILabel *sloganView;
 
@@ -65,41 +65,34 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-    CGRect tmpFrame = self.logoImage.frame;
-    CGRect finalFrame = self.logoImage.frame;
+    CGRect tmpFrame = self.logoImageView.frame;
+    CGRect finalFrame = self.logoImageView.frame;
+    tmpFrame = CGRectMake(self.view.center.x-(self.logoImageView.frame.size.width/2), self.view.center.y-(self.logoImageView.frame.size.height/2), tmpFrame.size.width, tmpFrame.size.height);
+    self.logoImageView.frame = tmpFrame;
+    self.logoImageView.alpha = 0.0f;
+    
+    [UIView animateWithDuration:1.0f animations:^{
+        self.logoImageView.alpha = 1.0f;
+    }];
     
     
-    tmpFrame = CGRectMake(self.view.center.x-(self.logoImage.frame.size.width/2), self.view.center.y-(self.logoImage.frame.size.height/2), tmpFrame.size.width, tmpFrame.size.height);
-    self.logoImage.frame = tmpFrame;
-
-    self.logoImage.alpha = 0.0f;
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        self.logoImage.alpha = 1.0f;
+    [UIView animateWithDuration:1.2f delay:1.1f options:UIViewAnimationCurveEaseInOut animations:^{
+        self.logoImageView.frame = finalFrame;
         
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:1.5f animations:^{
-            self.logoImage.frame = finalFrame;
-        } completion:^(BOOL finished) {
-            self.subtitleLabel.hidden=NO;
-            self.containerView.hidden = NO;
-            self.subtitleLabel.alpha = 0.0f;
-            self.containerView.alpha = 0.0f;
+        self.containerView.hidden = NO;
+        self.containerView.alpha = 0.0f;
+        
+        [UIView animateWithDuration:1.0 animations:^{
             
-            [UIView animateWithDuration:0.5 animations:^{
-                //                self.subtitleLabel.alpha = 1.0f;
-                
-                self.containerView.alpha = 1.0f;
-                
-            } completion:^(BOOL finished) {
-                self.userContainerView.hidden = NO;
-                
-            }];
+            self.containerView.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            self.userContainerView.hidden = NO;
+            
             
         }];
         
-
     }];
 
 	[[GAI sharedInstance] trackStartScreenView];
