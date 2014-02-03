@@ -36,12 +36,6 @@
 	[super viewDidLoad];
 	
 	self.navigationController.delegate = self;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-
-    
     
     
     CGRect tmpFrame = self.logoImageView.frame;
@@ -50,14 +44,14 @@
     self.logoImageView.frame = tmpFrame;
     self.logoImageView.alpha = 0.0f;
     
-[UIView animateWithDuration:1.0f animations:^{
-    self.logoImageView.alpha = 1.0f;
-}];
-
+    [UIView animateWithDuration:1.0f animations:^{
+        self.logoImageView.alpha = 1.0f;
+    }];
+    
     
     [UIView animateWithDuration:1.2f delay:1.1f options:UIViewAnimationCurveEaseInOut animations:^{
         self.logoImageView.frame = finalFrame;
-
+        
     } completion:^(BOOL finished) {
         self.buttonContainerView.hidden = NO;
         self.buttonContainerView.alpha = 0.0f;
@@ -71,9 +65,16 @@
             
             
         }];
-
+        
     }];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+
+    
+    
 	[[GAI sharedInstance] trackStartScreenView];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self

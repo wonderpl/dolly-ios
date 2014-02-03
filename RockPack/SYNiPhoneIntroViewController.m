@@ -58,12 +58,6 @@
 	
 	self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
 	self.signupButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
-    
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
 	
     CGRect tmpFrame = self.logoImageView.frame;
     CGRect finalFrame = self.logoImageView.frame;
@@ -94,6 +88,12 @@
         }];
         
     }];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	
+    [super viewWillAppear:animated];
 
 	[[GAI sharedInstance] trackStartScreenView];
 }
