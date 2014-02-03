@@ -62,8 +62,8 @@ static NSString* PlaceholderText = @"Say something nice";
 - (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance {
 	if (self = [super initWithViewId:kCommentsViewId]) {
 		self.videoInstance = videoInstance;
-		self.model = [SYNCommentsModel modelWithVideoInstance:videoInstance];
-		self.model.delegate = self;
+//		self.model = [SYNCommentsModel modelWithVideoInstance:videoInstance];
+//		self.model.delegate = self;
 	}
 	return self;
 }
@@ -114,11 +114,10 @@ static NSString* PlaceholderText = @"Say something nice";
     
     // gets the comments from the DB
     
-//    [self refreshCollectionView];
-//    
-//    [self getCommentsFromServer];
+    [self refreshCollectionView];
+    [self getCommentsFromServer];
 	
-	[self.model loadNextPage];
+//	[self.model loadNextPage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)
@@ -203,7 +202,7 @@ static NSString* PlaceholderText = @"Say something nice";
 }
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
-	[self.commentsCollectionView reloadData];
+//	[self.commentsCollectionView reloadData];
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
@@ -251,6 +250,7 @@ static NSString* PlaceholderText = @"Say something nice";
 
 	self.comments = [NSMutableArray arrayWithArray:fetchedArray];
 
+    self.videoInstance.commentCount = [NSNumber numberWithInt: self.comments.count];
 
 }
 
@@ -583,14 +583,18 @@ static NSString* PlaceholderText = @"Say something nice";
         return;
     
     SYNCommentingCollectionViewCell* cell = (SYNCommentingCollectionViewCell*)candidateCell;
+//    NSDictionary* comment = cell.comment;
     Comment* comment = cell.comment;
+
     if(!comment)
         return;
     
-    
-    
     // create a ChannelOwner
     
+//    NSDictionary* channelOwnerData = @{@"id":comment[@"user"][@"id"],
+//                                       @"avatar_thumbnail_url":comment[@"user"][@"avatar_thumbnail_url"],
+//                                       @"display_name":comment[@"user"][@"display_name"]};
+
     NSDictionary* channelOwnerData = @{@"id":comment.userId,
                                        @"avatar_thumbnail_url":comment.thumbnailUrl,
                                        @"display_name":comment.displayName};
@@ -676,7 +680,8 @@ static NSString* PlaceholderText = @"Say something nice";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	return self.model.itemCount;
+//	return self.model.itemCount;
+    return self.comments.count;
 }
 
 
@@ -685,23 +690,22 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     SYNCommentingCollectionViewCell* commentingCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNCommentingCollectionViewCell reuseIdentifier]
                                                                                     forIndexPath:indexPath];
-//    Comment* comment = self.comments[indexPath.item];
+    Comment* comment = self.comments[indexPath.item];
 	
-	NSDictionary *comment = [self.model itemAtIndex:indexPath.item];
-	
-//    commentingCell.comment = comment;
+//	NSDictionary *comment = [self.model itemAtIndex:indexPath.item];
+
+    commentingCell.comment = comment;
     
     
-        
-//    commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
-//    commentingCell.delegate = self;
-//
-//    if([comment.userId isEqualToString:appDelegate.currentUser.uniqueId])
-//    {
-//        // only the user can delete his own comments
-//        commentingCell.deletable = YES;
-//    }
-//    
+    commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
+    commentingCell.delegate = self;
+
+    if([comment.userId isEqualToString:appDelegate.currentUser.uniqueId])
+    {
+        // only the user can delete his own comments
+        commentingCell.deletable = YES;
+    }
+
     
     return commentingCell;
 }
