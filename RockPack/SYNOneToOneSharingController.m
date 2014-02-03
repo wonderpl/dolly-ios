@@ -1016,7 +1016,7 @@
                                                [self showLoader: NO];
          
                                                NSString *typeName =
-                                               [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"Pack" : @"Video";
+                                               [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"Collection" : @"Video";
          
                                                NSString *notificationText =
                                                [NSString stringWithFormat: NSLocalizedString(@"sharing_object_sent", nil), typeName];
