@@ -252,8 +252,9 @@
 
 - (void) collectionView: (UICollectionView *) cv
 didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
-    
-    
+    if (self.currentMood == self.moods [indexPath.item % self.moods.count]) {
+        [self watchButtonTapped:nil];
+    }
 }
 
 #pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
