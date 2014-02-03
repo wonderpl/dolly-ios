@@ -30,7 +30,12 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [self performSelector:@selector(getUsersAndAnimate) withObject:self afterDelay:3.4f];
+
+}
+
+- (void) getUsersAndAnimate {
+    SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
 	[appDelegate.networkEngine exampleUsersWithCompletionHandler:^(NSArray *users) {
 		self.exampleUsers = users;
@@ -47,6 +52,8 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 	} errorHandler:^(NSError *error) {
 		
 	}];
+
+    
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

@@ -24,6 +24,9 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
 @property (nonatomic, strong) IBOutlet UILabel *loginLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
+@property (strong, nonatomic) IBOutlet UIView *buttonContainerView;
+@property (strong, nonatomic) IBOutlet UIView *userContainerView;
 
 @end
 
@@ -35,9 +38,42 @@
 	self.navigationController.delegate = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+
+    
+    
+    
+    CGRect tmpFrame = self.logoImageView.frame;
+    CGRect finalFrame = self.logoImageView.frame;
+    tmpFrame = CGRectMake(self.view.center.x-(self.logoImageView.frame.size.width/2), self.view.center.y-(self.logoImageView.frame.size.height/2), tmpFrame.size.width, tmpFrame.size.height);
+    self.logoImageView.frame = tmpFrame;
+    self.logoImageView.alpha = 0.0f;
+    
+[UIView animateWithDuration:1.0f animations:^{
+    self.logoImageView.alpha = 1.0f;
+}];
+
+    
+    [UIView animateWithDuration:1.2f delay:1.1f options:UIViewAnimationCurveEaseInOut animations:^{
+        self.logoImageView.frame = finalFrame;
+
+    } completion:^(BOOL finished) {
+        self.buttonContainerView.hidden = NO;
+        self.buttonContainerView.alpha = 0.0f;
+        
+        [UIView animateWithDuration:1.0 animations:^{
+            
+            self.buttonContainerView.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            self.userContainerView.hidden = NO;
+            
+            
+        }];
+
+    }];
+
 	[[GAI sharedInstance] trackStartScreenView];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self

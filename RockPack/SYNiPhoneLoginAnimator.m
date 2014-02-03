@@ -48,6 +48,8 @@ static const CGFloat AnimationDuration = 0.3;
 		toViewController.containerView.center = CGPointMake(fieldsCenter.x + CGRectGetWidth(containerView.frame),
 																  fieldsCenter.y);
 		
+        
+        
 		[containerView addSubview:toViewController.view];
 		
 		[UIView animateWithDuration:AnimationDuration animations:^{
@@ -58,6 +60,8 @@ static const CGFloat AnimationDuration = 0.3;
 			
 			toViewController.backgroundView.alpha = 1.0;
 			toViewController.containerView.center = fieldsCenter;
+            
+            
 		} completion:^(BOOL finished) {
 			[transitionContext completeTransition:YES];
 		}];
