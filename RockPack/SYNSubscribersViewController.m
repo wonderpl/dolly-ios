@@ -319,7 +319,7 @@
     
     if (self.users.count == 0)
     {
-        [self setInfoLabelText: @"No one has subscribed into this pack yet"];
+        [self setInfoLabelText: @"No one has subscribed into this collection yet"];
     }
     else
     {

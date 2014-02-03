@@ -447,7 +447,7 @@
 	}
 	
 	if (userName != nil) {
-		NSString *what = @"pack of videos";
+		NSString *what = @"collection";
 		if (isVideo) {
 			what = @"video";
 		}
