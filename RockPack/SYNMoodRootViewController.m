@@ -16,6 +16,10 @@
 #import "VideoInstance.h"
 #import "UINavigationBar+Appearance.h"
 #import "UIColor+SYNColor.h"
+#import "SYNCarouselVideoPlayerViewController.h"
+#import "UICollectionReusableView+Helpers.h"
+
+#import "SYNSearchResultsVideoCell.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 #define WATCH_BUTTON_ANIMATION_TIME 0.4
@@ -30,9 +34,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
 @property (strong, nonatomic) IBOutlet UIButton *watchButton;
 
+@property (strong, nonatomic) IBOutlet UICollectionView *videoCollectionView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topTitleConstraint;
 @property (nonatomic, readonly) Mood* currentMood;
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
+@property (nonatomic, strong) NSArray* videoArray;
 @end
 
 
@@ -48,7 +54,9 @@
     // Setup mood collection view
     [self.moodCollectionView registerClass:[SYNMoodCell class]
                 forCellWithReuseIdentifier:NSStringFromClass([SYNMoodCell class])];
-    
+    [self.videoCollectionView registerNib:[SYNSearchResultsVideoCell nib]
+                forCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]];
+
     
     self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
     self.iWantToLabel.textColor = [UIColor dollyMoodColor];
@@ -86,6 +94,9 @@
                                         atScrollPosition:UICollectionViewScrollPositionCenteredVertically
                                                 animated:YES];
     }
+
+    self.videoArray = @[];
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -163,6 +174,7 @@
 - (IBAction)watchButtonTapped:(id)sender {
     
     
+    
     self.watchButton.userInteractionEnabled = NO;
     
 	__weak typeof(self) weakSelf = self;
@@ -198,8 +210,21 @@
 												  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
 												  if (sortedVideos.count > 0) {
                                                       
-                                                      UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
-                                                      [strongSelf presentViewController:viewController animated:YES completion:nil];
+
+                                                      if (IS_IPHONE) {
+                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
+
+                                                          [strongSelf presentViewController:viewController animated:YES completion:nil];
+                                                          
+                                                      } else {
+                                                          
+                                                          
+                                                          
+                                                          self.videoArray = @[[sortedVideos objectAtIndex:0]];
+                                                          
+                                                          [self.videoCollectionView reloadData];
+                                                          
+                                                      }
                                                       
                                                       
                                                   }
@@ -217,7 +242,12 @@
 // To be implemented by subclasses
 - (NSInteger) collectionView: (UICollectionView *) collectionView
       numberOfItemsInSection: (NSInteger) section {
-    return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
+    
+    if (collectionView == self.moodCollectionView) {
+        return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
+        
+    }
+    return self.videoArray.count;
 }
 
 
@@ -227,33 +257,68 @@
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) cv
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath {
-    SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNMoodCell class])
-                                                                               forIndexPath: indexPath];
     
-    Mood* mood = self.moods [indexPath.item % self.moods.count];
-    
-    moodCell.titleLabel.text = mood.name;
-    
-    return moodCell;
+    if (cv == self.moodCollectionView) {
+        SYNMoodCell *moodCell = [self.moodCollectionView dequeueReusableCellWithReuseIdentifier: NSStringFromClass([SYNMoodCell class])
+                                                                                   forIndexPath: indexPath];
+        
+        Mood* mood = self.moods [indexPath.item % self.moods.count];
+        
+        moodCell.titleLabel.text = mood.name;
+        
+        return moodCell;
+
+    }
+
+    if (cv == self.videoCollectionView) {
+        
+        
+        SYNSearchResultsVideoCell *videoCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
+                                                                                         forIndexPath:indexPath];
+        
+        
+        videoCell.videoInstance = (VideoInstance*)(self.videoArray[indexPath.item]);
+        videoCell.delegate = self;
+        
+        
+        return videoCell;
+
+        
+    }
+
+    return nil;
+
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // == first of last item
-    if (indexPath.row == 0 || (indexPath.row % self.moods.count == self.moods.count-1)) {
-        return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 35.0f :35.0f));
-    }
-    
-    return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 40.0f :40.0f));
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView
+//                  layout:(UICollectionViewLayout*)collectionViewLayout
+//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // == first of last item
+//    if (indexPath.row == 0 || (indexPath.row % self.moods.count == self.moods.count-1)) {
+//        return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 35.0f :35.0f));
+//    }
+//    
+//    return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 40.0f :40.0f));
+//}
 
 
 - (void) collectionView: (UICollectionView *) cv
 didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
-    if (self.currentMood == self.moods [indexPath.item % self.moods.count]) {
-        [self watchButtonTapped:nil];
+    
+    if (cv == self.moodCollectionView) {
+        if (self.currentMood == self.moods [indexPath.item % self.moods.count]) {
+            [self watchButtonTapped:nil];
+        }
+    }
+    
+    if (cv == self.videoCollectionView) {
+        
+//            VideoInstance *videoInstance = self.videoArray[indexPath.item];
+//        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
+//        
+//        [strongSelf presentViewController:viewController animated:YES completion:nil];
+        
     }
 }
 
@@ -293,6 +358,10 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     [UIView animateWithDuration:WATCH_BUTTON_ANIMATION_TIME animations:^{
         self.watchButton.alpha = 1.0f;
     }];
+    
+    if (IS_IPAD) {
+        [self watchButtonTapped:nil];
+    }
     
 }
 

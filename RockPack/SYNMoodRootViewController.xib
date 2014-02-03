@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -9,6 +9,7 @@
                 <outlet property="backgroundImageView" destination="GCP-yk-7gu" id="EdX-lq-e5J"/>
                 <outlet property="iWantToLabel" destination="jfI-8D-ccz" id="zzM-vU-LaY"/>
                 <outlet property="moodCollectionView" destination="ICd-hC-jBC" id="FPB-0X-rN5"/>
+                <outlet property="videoCollectionView" destination="XNW-8z-Hgx" id="luT-2j-aUZ"/>
                 <outlet property="view" destination="1" id="nZ5-Pv-9HS"/>
                 <outlet property="watchButton" destination="41P-4L-9Er" id="AKZ-ex-9iE"/>
             </connections>
@@ -18,22 +19,14 @@
             <rect key="frame" x="0.0" y="0.0" width="927" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MoodBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="GCP-yk-7gu">
-                    <rect key="frame" x="268" y="217" width="420" height="334"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MoodBackground.png" id="GCP-yk-7gu">
+                    <rect key="frame" x="-38" y="192" width="420" height="334"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="420" id="hKS-YX-awS"/>
-                        <constraint firstAttribute="height" constant="334" id="nzG-vZ-ILq"/>
-                    </constraints>
                 </imageView>
-                <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41P-4L-9Er">
-                    <rect key="frame" x="417" y="644" width="94" height="36"/>
+                <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="41P-4L-9Er">
+                    <rect key="frame" x="66" y="655" width="94" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="94" id="B5t-FV-IrJ"/>
-                        <constraint firstAttribute="height" constant="36" id="fb4-o3-RWn"/>
-                    </constraints>
                     <state key="normal" title="Watch">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -41,14 +34,10 @@
                         <action selector="watchButtonTapped:" destination="-1" eventType="touchUpInside" id="dff-M8-n32"/>
                     </connections>
                 </button>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ICd-hC-jBC">
-                    <rect key="frame" x="453" y="246" width="215.00000215408406" height="280"/>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="ICd-hC-jBC">
+                    <rect key="frame" x="147.00002026654775" y="221" width="215" height="280"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="215" id="2NG-6T-UFy"/>
-                        <constraint firstAttribute="height" constant="280" id="sz1-oR-B5J"/>
-                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1Cg-GM-zpv" customClass="SYNFadingFlowLayout">
                         <size key="itemSize" width="320" height="78"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -61,43 +50,37 @@
                         <outlet property="delegate" destination="-1" id="F0w-UD-Ioz"/>
                     </connections>
                 </collectionView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfI-8D-ccz">
-                    <rect key="frame" x="310" y="366" width="135" height="40"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jfI-8D-ccz">
+                    <rect key="frame" x="4" y="341" width="135" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="DcL-Nd-ZLV"/>
-                        <constraint firstAttribute="width" constant="135" id="OZn-5q-hYk"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <color key="textColor" red="0.53333333329999999" green="0.52549019610000003" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the perfect video for your mood" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="279" translatesAutoresizingMaskIntoConstraints="NO" id="g4j-4B-VWQ">
-                    <rect key="frame" x="324" y="102" width="279" height="62"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the perfect video for your mood" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g4j-4B-VWQ">
+                    <rect key="frame" x="18" y="77" width="279" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="279" id="3bg-n0-bWE"/>
-                        <constraint firstAttribute="height" constant="62" id="efk-N9-fHt"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <color key="textColor" red="0.53333333329999999" green="0.52549019610000003" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="XNW-8z-Hgx">
+                    <rect key="frame" x="422" y="68" width="464" height="649"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5T9-ox-gpR">
+                        <size key="itemSize" width="360" height="465"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Ykf-8u-7NW"/>
+                        <outlet property="delegate" destination="-1" id="zkG-kw-fqe"/>
+                    </connections>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="centerX" secondItem="jfI-8D-ccz" secondAttribute="centerX" constant="86" id="1wK-K6-s6n"/>
-                <constraint firstAttribute="centerX" secondItem="GCP-yk-7gu" secondAttribute="centerX" constant="-14.5" id="ECB-vJ-2qr"/>
-                <constraint firstAttribute="centerY" secondItem="GCP-yk-7gu" secondAttribute="centerY" id="ErM-kR-pRz"/>
-                <constraint firstItem="ICd-hC-jBC" firstAttribute="leading" secondItem="jfI-8D-ccz" secondAttribute="leading" constant="143" id="O0A-yv-4JS"/>
-                <constraint firstAttribute="centerY" secondItem="ICd-hC-jBC" secondAttribute="centerY" constant="-2" id="Ofh-nT-6he"/>
-                <constraint firstItem="g4j-4B-VWQ" firstAttribute="top" secondItem="1" secondAttribute="top" constant="102" id="PcZ-5I-PX1"/>
-                <constraint firstAttribute="centerX" secondItem="g4j-4B-VWQ" secondAttribute="centerX" id="PeC-JT-jF9"/>
-                <constraint firstAttribute="centerY" secondItem="jfI-8D-ccz" secondAttribute="centerY" constant="-2" id="bRN-sD-htk"/>
-                <constraint firstAttribute="centerY" secondItem="41P-4L-9Er" secondAttribute="centerY" constant="-278" id="lr8-Ev-lTt"/>
-                <constraint firstAttribute="centerX" secondItem="ICd-hC-jBC" secondAttribute="centerX" constant="-97" id="tgf-3C-7IA"/>
-                <constraint firstAttribute="centerX" secondItem="41P-4L-9Er" secondAttribute="centerX" constant="-0.5" id="u7d-fS-oR8"/>
-            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
