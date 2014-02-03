@@ -748,7 +748,11 @@
     
     if ([self.channelOwner.uniqueId isEqualToString: currentUser.uniqueId])
     {
+        
+        
         [self setChannelOwner: currentUser];
+        
+        
     }
 }
 
@@ -789,7 +793,9 @@
      {
          if (obj == self.channelOwner)
          {
-             //TODO:Get total number of channels or sub number?
+             [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
+             [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
+
              [self reloadCollectionViews];
              [self setFollowersCountButton];
              
@@ -972,7 +978,8 @@
     
     UICollectionViewCell *cell = nil;
     
-    if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView]) // first row for a user profile only (create)
+    if (self.isUserProfile && indexPath.row == 0 && [collectionView isEqual:self.channelThumbnailCollectionView])
+        // first row for a user profile only (create)
     {
         SYNChannelCreateNewCell *createCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelCreateNewCell"
                                                                                         forIndexPath: indexPath];
@@ -1039,9 +1046,8 @@
             }
             
             [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
-            
         }
-        else // (collectionView == self.subscribersThumbnailCollectionView)
+        else
         {
             if (indexPath.row < [self.filteredSubscriptions count])
             {
@@ -1059,18 +1065,6 @@
 				channelThumbnailCell.channel = nil;
 			}
         }
-        //        if(self.modeType == kModeOtherUsersProfile)
-        //        {
-        //            if ([SYNActivityManager.sharedInstance isSubscribedToChannelId:channel.uniqueId])
-        //            {
-        //                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Unfollow", @"unfollow")];
-        //            }
-        //            else
-        //            {
-        //                [channelThumbnailCell setFollowButtonLabel:NSLocalizedString(@"Follow", @"follow")];
-        //            }
-        //        }
-        //
         channelThumbnailCell.viewControllerDelegate = self;
         
         cell = channelThumbnailCell;
@@ -1327,7 +1321,6 @@
             }
             [weakSelf.subscriptionThumbnailCollectionView reloadData];
             [self.channelOwner.managedObjectContext save: &error];
-            
         };
         
         // define success block //
@@ -1731,6 +1724,9 @@
 
 - (void) setChannelOwner: (ChannelOwner *) user
 {
+    
+    
+    
     if (self.channelOwner) // if we have an existing user
     {
         [[NSNotificationCenter defaultCenter] removeObserver: self
@@ -1876,8 +1872,6 @@
     {
         [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
     }
-    
-    
     
     //    [self.subscriptionThumbnailCollectionView reloadData];
     //    [self.channelThumbnailCollectionView reloadData];
@@ -2581,7 +2575,7 @@
                                              
                                              [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
                                              
-                                             
+
                                          } errorHandler: ^(id error) {
                                              
                                              
@@ -3230,8 +3224,8 @@ finishedWithImage: (UIImage *) image
                                                  //                                                 [self.channelThumbnailCollectionView reloadData];
                                                  
                                                  
-                                                 //                                                 NSLog(@"%@", self.channelOwner);
                                                  
+                                                 [self updateChannelOwner];
                                              } completion:^(BOOL finished) {
                                                  [cell.channel.managedObjectContext deleteObject:cell.channel];
                                                  
@@ -3239,9 +3233,11 @@ finishedWithImage: (UIImage *) image
                                                  tmp.y+=1;
                                                  [self.channelThumbnailCollectionView setContentOffset:tmp animated:YES];
                                                  
+                                                 
+                                                 
                                              }];
                                              
-                                             
+
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
                                          }];
