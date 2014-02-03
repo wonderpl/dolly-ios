@@ -308,7 +308,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                       }
                                
                                self.generalLoader.hidden = YES;
-                               
+                               self.videoInstance.commentCount = dictionary[@"comments"][@"total"];
                             
                                [self refreshCollectionView];
         
