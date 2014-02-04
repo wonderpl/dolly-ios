@@ -13,7 +13,7 @@
 #import "SYNNetworkEngine.h"
 #import "SYNGradientMaskView.h"
 
-static const CGFloat ScrollAnimationDuration = 2.0;
+static const CGFloat ScrollAnimationDuration = 1.0;
 
 @interface SYNExampleUsersViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -22,6 +22,8 @@ static const CGFloat ScrollAnimationDuration = 2.0;
 @property (nonatomic, strong) NSArray *exampleUsers;
 
 @property (nonatomic, strong) IBOutlet SYNGradientMaskView *gradientView;
+@property (nonatomic, assign) CGPoint scrollingPoint, endPoint;
+@property (nonatomic, strong) NSTimer *scrollingTimer;
 
 @end
 
@@ -30,7 +32,7 @@ static const CGFloat ScrollAnimationDuration = 2.0;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-    [self performSelector:@selector(getUsersAndAnimate) withObject:self afterDelay:4.0f];
+    [self performSelector:@selector(getUsersAndAnimate) withObject:self afterDelay:2.5f];
 
 }
 
@@ -41,25 +43,18 @@ static const CGFloat ScrollAnimationDuration = 2.0;
 		self.exampleUsers = users;
 		
 		[self.collectionView reloadData];
-		
+        [self scrollSlowly];
         
-        
-        [self.collectionView setContentOffset:CGPointMake(0, -200)];
-
-        
-		// Scroll to the middle to indicate that the list is scrollable
-		NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:[users count] / 2 inSection:0];
-        
-		[UIView animateWithDuration:ScrollAnimationDuration animations:^{
-			[self.collectionView scrollToItemAtIndexPath:centerIndexPath
-										atScrollPosition:UICollectionViewScrollPositionCenteredVertically
-												animated:NO];
-		}];
 	} errorHandler:^(NSError *error) {
 		
 	}];
 
     
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -88,5 +83,32 @@ static const CGFloat ScrollAnimationDuration = 2.0;
 	
 	return cell;
 }
+
+
+- (void)scrollSlowly {
+    if (self.exampleUsers.count>1) {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
+    }
+        
+    // 230 == height of the cell
+    
+    self.endPoint = CGPointMake(0, (self.exampleUsers.count * 230));
+    
+    //Start off screen
+    self.scrollingPoint = CGPointMake(0, -400);
+    self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
+}
+
+- (void)scrollSlowlyToPoint {
+    self.collectionView.contentOffset = self.scrollingPoint;
+    if (self.scrollingPoint.y> self.endPoint.y) {
+        
+        [self.scrollingTimer invalidate];
+    }
+    
+    self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+2);
+}
+
+
 
 @end

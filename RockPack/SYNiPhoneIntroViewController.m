@@ -76,17 +76,13 @@
     } completion:^(BOOL finished) {
         self.containerView.hidden = NO;
         self.containerView.alpha = 0.0f;
-        
+        self.userContainerView.hidden = NO;
+
         [UIView animateWithDuration:1.0 animations:^{
             
             self.containerView.alpha = 1.0f;
             
-        } completion:^(BOOL finished) {
-            self.userContainerView.hidden = NO;
-            
-            
         }];
-        
     }];
     
 }
