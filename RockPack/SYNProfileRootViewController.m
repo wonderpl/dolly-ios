@@ -434,11 +434,11 @@
     
     if (self.channelOwner.subscribedByUserValue)
     {
-        [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
+        [self.followAllButton setTitle:@"Unfollow all" forState:UIControlStateNormal];
     }
     else
     {
-        [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
+        [self.followAllButton setTitle:@"Follow all" forState:UIControlStateNormal];
     }
     
     self.filteredSubscriptions = [self.channelOwner.subscriptions array];
@@ -2374,7 +2374,7 @@
                                                completionHandler:^(id responce) {
                                                    
                                                    self.channelOwner.subscribedByUser = [NSNumber numberWithBool:NO];
-                                                   [self.followAllButton setTitle:@"follow" forState:UIControlStateNormal];
+                                                   [self.followAllButton setTitle:@"Follow all" forState:UIControlStateNormal];
                                                    [appDelegate saveContext: YES];
                                                    
                                                    
@@ -2389,7 +2389,7 @@
             [SYNActivityManager.sharedInstance subscribeToUser:self.channelOwner
                                              completionHandler: ^(id responce) {
                                                  
-                                                 [self.followAllButton setTitle:@"unfollow" forState:UIControlStateNormal];
+                                                 [self.followAllButton setTitle:@"Unfollow all" forState:UIControlStateNormal];
                                                  
                                                  [appDelegate saveContext: YES];
                                                  
