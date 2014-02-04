@@ -303,15 +303,11 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	BOOL isSubscribed = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:videoInstance.channel.uniqueId];
 	self.followBarButton.title = (isSubscribed ? @"unfollow" : @"follow");
 	
-	if ([videoInstance.channel.channelOwner.displayName length]) {
-		[self.channelThumbnailButton setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelCover.imageSmallUrl]
+    [self.channelThumbnailButton setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelOwner.thumbnailURL]
 											forState:UIControlStateNormal
 									placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
 											 options:SDWebImageRetryFailed];
-	} else {
-		[self.channelThumbnailButton setImage:nil forState:UIControlStateNormal];
-	}
-
+    
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
 	NSString *byText = ([channelOwnerName length] ? [NSString stringWithFormat:@"By %@", channelOwnerName] : @"");
 	[self.channelOwnerLabel setText:byText animated:YES];
