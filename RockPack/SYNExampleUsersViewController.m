@@ -13,7 +13,7 @@
 #import "SYNNetworkEngine.h"
 #import "SYNGradientMaskView.h"
 
-static const CGFloat ScrollAnimationDuration = 3.0;
+static const CGFloat ScrollAnimationDuration = 2.0;
 
 @interface SYNExampleUsersViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -30,7 +30,7 @@ static const CGFloat ScrollAnimationDuration = 3.0;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-    [self performSelector:@selector(getUsersAndAnimate) withObject:self afterDelay:3.4f];
+    [self performSelector:@selector(getUsersAndAnimate) withObject:self afterDelay:4.0f];
 
 }
 
@@ -42,6 +42,11 @@ static const CGFloat ScrollAnimationDuration = 3.0;
 		
 		[self.collectionView reloadData];
 		
+        
+        
+        [self.collectionView setContentOffset:CGPointMake(0, -200)];
+
+        
 		// Scroll to the middle to indicate that the list is scrollable
 		NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:[users count] / 2 inSection:0];
         

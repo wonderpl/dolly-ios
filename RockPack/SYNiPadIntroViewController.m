@@ -62,8 +62,6 @@
             
         } completion:^(BOOL finished) {
             self.userContainerView.hidden = NO;
-            
-            
         }];
         
     }];
