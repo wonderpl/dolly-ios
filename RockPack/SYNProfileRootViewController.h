@@ -21,6 +21,7 @@ typedef enum : NSInteger {
 @property (nonatomic, assign) BOOL hideUserProfile;
 
 - (id) initWithViewId:(NSString*) vid andChannelOwner:(ChannelOwner*)chanOwner;
+- (IBAction)editButtonTapped:(id)sender;
 
 
 @end

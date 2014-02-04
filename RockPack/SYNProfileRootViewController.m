@@ -2455,6 +2455,8 @@
 - (IBAction)editButtonTapped:(id)sender
 {
     
+    
+    
     [self killScroll];
     [self.createChannelCell.descriptionTextView resignFirstResponder];
     [self.createChannelCell.createTextField resignFirstResponder];

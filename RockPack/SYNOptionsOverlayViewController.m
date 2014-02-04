@@ -17,6 +17,7 @@
 #import "SYNFeedbackViewController.h"
 #import "Appirater.h"
 #import "SYNWebViewController.h"
+#import "SYNProfileRootViewController.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -29,7 +30,8 @@ typedef enum {
     OptionButtonTagBlog = 6,
     OptionButtonTagHelp = 7,
     OptionButtonTagLogout = 8,
-    OptionButtonTagHints = 9
+    OptionButtonTagHints = 9,
+    OptionButtonTagEdit = 10
 
 } OptionButtonTag;
 
@@ -66,7 +68,8 @@ typedef enum {
                               @"Blog",
                               @"Help",
                               @"Logout",
-                              @"Hints"];
+                              @"Hints",
+                              @""];
     
     
     for (UIView* sView in self.view.subviews)
@@ -258,6 +261,18 @@ typedef enum {
             NSURL *URL = [NSURL URLWithString:@"http://wonderpl.com/hints"];
             UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
             [parentViewController presentViewController:viewController animated:YES completion:nil];
+        }
+            
+        case OptionButtonTagEdit:
+        {
+            [self removeFromScreen];
+            
+            [((SYNProfileRootViewController*)[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2]) editButtonTapped:nil];
+            
+            
+            
+            
+            
         }
             
     }

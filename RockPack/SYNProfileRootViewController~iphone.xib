@@ -70,18 +70,6 @@
                         <outlet property="delegate" destination="-1" id="FgS-NP-jTw"/>
                     </connections>
                 </searchBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vH4-no-prL" userLabel="Button - follow all">
-                    <rect key="frame" x="116" y="447" width="88" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <state key="normal" title="Follow All">
-                        <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="followAllTapped:" destination="-1" eventType="touchUpInside" id="d3P-zD-xjf"/>
-                    </connections>
-                </button>
                 <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8" userLabel="Collection View - Channel collection">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="584"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,6 +133,18 @@
                         <outlet property="delegate" destination="-1" id="0DR-hI-wIs"/>
                     </connections>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vH4-no-prL" userLabel="Button - follow all">
+                    <rect key="frame" x="116" y="452" width="88" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <state key="normal" title="Follow All">
+                        <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="followAllTapped:" destination="-1" eventType="touchUpInside" id="d3P-zD-xjf"/>
+                    </connections>
+                </button>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="zi6-5Y-tAR" userLabel="View - Moving Header View">
                     <rect key="frame" x="-1" y="364" width="321" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
