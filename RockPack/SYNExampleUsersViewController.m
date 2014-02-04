@@ -100,7 +100,7 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 }
 
 - (void)scrollSlowlyToPoint {
-    self.collectionView.contentOffset = self.scrollingPoint;
+    self.collectionView.bounds = CGRectMake(self.scrollingPoint.x, self.scrollingPoint.y, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
     if (self.scrollingPoint.y> self.endPoint.y) {
         
         [self.scrollingTimer invalidate];
@@ -109,6 +109,11 @@ static const CGFloat ScrollAnimationDuration = 1.0;
     self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+2);
 }
 
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (self.scrollingTimer) {
+        [self.scrollingTimer invalidate];
+    }
+}
 
 @end
