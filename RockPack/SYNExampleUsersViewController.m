@@ -95,7 +95,7 @@ static const CGFloat ScrollAnimationDuration = 1.0;
     self.endPoint = CGPointMake(0, (self.exampleUsers.count * 230));
     
     //Start off screen
-    self.scrollingPoint = CGPointMake(0, -400);
+    self.scrollingPoint = CGPointMake(0, -600);
     self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
 }
 
