@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -12,9 +12,8 @@
                 <outlet property="channelThumbnailCollectionView" destination="0Yx-dc-wS8" id="Fnp-Jg-2dm"/>
                 <outlet property="collectionsTabButton" destination="cbc-Sn-3Xw" id="i22-Wo-SLk"/>
                 <outlet property="coverImage" destination="q5m-iH-3Ci" id="oEa-Yb-xDy"/>
-                <outlet property="editButton" destination="xAT-fj-vhM" id="aBJ-HS-lXz"/>
                 <outlet property="followAllButton" destination="vH4-no-prL" id="fmo-Ly-CWJ"/>
-                <outlet property="followersCountButton" destination="7Mw-VY-HgY" id="zeW-wd-xUc"/>
+                <outlet property="followersCountLabel" destination="Rc9-xd-QR7" id="lxg-eW-avF"/>
                 <outlet property="followingSearchBar" destination="rgJ-Mu-6Zf" id="6CH-uL-YOb"/>
                 <outlet property="followingTabButton" destination="55i-48-sal" id="RFy-8Z-R5x"/>
                 <outlet property="fullNameLabel" destination="29c-Ki-1uc" id="55S-Wa-o38"/>
@@ -37,24 +36,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="q5m-iH-3Ci" userLabel="Image View - Cover image">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="338"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <view contentMode="scaleToFill" id="87Q-F8-WoV" userLabel="View - Background ">
-                    <rect key="frame" x="0.0" y="253" width="321" height="315"/>
+                    <rect key="frame" x="0.0" y="338" width="321" height="315"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="Gpk-go-IZt" userLabel="Collection View - Subscriptions Collection">
-                    <rect key="frame" x="0.0" y="8" width="320" height="584"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="584"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4RR-LR-xcl">
                         <size key="itemSize" width="320" height="71"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="517" maxX="0.0" maxY="150"/>
+                        <inset key="sectionInset" minX="0.0" minY="538" maxX="0.0" maxY="150"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -63,7 +62,7 @@
                     </connections>
                 </collectionView>
                 <searchBar contentMode="redraw" translucent="NO" id="rgJ-Mu-6Zf" userLabel="Search Bar - Subscriber Search">
-                    <rect key="frame" x="0.0" y="481" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="494" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="barTintColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits"/>
@@ -71,24 +70,27 @@
                         <outlet property="delegate" destination="-1" id="FgS-NP-jTw"/>
                     </connections>
                 </searchBar>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Mw-VY-HgY" userLabel="Button - Follower Count">
-                    <rect key="frame" x="70" y="370" width="180" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vH4-no-prL" userLabel="Button - follow all">
+                    <rect key="frame" x="116" y="453" width="88" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="Followers count">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <state key="normal" title="Follow All">
+                        <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="followAllTapped:" destination="-1" eventType="touchUpInside" id="d3P-zD-xjf"/>
+                    </connections>
                 </button>
                 <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8" userLabel="Collection View - Channel collection">
-                    <rect key="frame" x="0.0" y="8" width="320" height="584"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="584"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OHx-Au-cg1">
                         <size key="itemSize" width="320" height="71"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="472" maxX="0.0" maxY="150"/>
+                        <inset key="sectionInset" minX="0.0" minY="494" maxX="0.0" maxY="150"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -97,16 +99,16 @@
                     </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" id="KiH-Yk-GZo" userLabel="View - Segmented controlelr">
-                    <rect key="frame" x="37" y="436" width="246" height="25"/>
+                    <rect key="frame" x="37" y="456" width="246" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="cbc-Sn-3Xw" userLabel="Button - Collections">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="cbc-Sn-3Xw">
                             <rect key="frame" x="0.0" y="-3" width="123" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal">
+                            <state key="normal" title="Collections">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -114,13 +116,13 @@
                                 <action selector="collectionsTabTapped:" destination="-1" eventType="touchUpInside" id="wYg-dO-CCY"/>
                             </connections>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="55i-48-sal" userLabel="Button - Following">
-                            <rect key="frame" x="123" y="-3" width="123" height="30"/>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="55i-48-sal">
+                            <rect key="frame" x="123" y="0.0" width="123" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal">
+                            <state key="normal" title="Following">
                                 <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -131,7 +133,7 @@
                     </subviews>
                 </view>
                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" id="JUa-73-uP8" userLabel="Text View - Description">
-                    <rect key="frame" x="30" y="335" width="260" height="45"/>
+                    <rect key="frame" x="30" y="409" width="260" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                     <string key="text">Something about
@@ -143,34 +145,8 @@
                         <outlet property="delegate" destination="-1" id="0DR-hI-wIs"/>
                     </connections>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vH4-no-prL" userLabel="Button - follow all">
-                    <rect key="frame" x="116" y="389" width="88" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <state key="normal">
-                        <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="followAllTapped:" destination="-1" eventType="touchUpInside" id="d3P-zD-xjf"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xAT-fj-vhM">
-                    <rect key="frame" x="105" y="389" width="110" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <state key="normal" title="Edit my profile">
-                        <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="g0R-BH-PZM"/>
-                    </connections>
-                </button>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="zi6-5Y-tAR" userLabel="View - Moving Header View">
-                    <rect key="frame" x="-1" y="276" width="321" height="43"/>
+                    <rect key="frame" x="-1" y="364" width="321" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="29c-Ki-1uc">
@@ -192,7 +168,7 @@
                     <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SOt-r8-4Fb" userLabel="Button - More Button">
-                    <rect key="frame" x="282" y="255" width="38" height="38"/>
+                    <rect key="frame" x="282" y="347" width="38" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonMore.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -202,7 +178,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1O9-a7-e6q" userLabel="Button - Upload Avatar">
-                    <rect key="frame" x="112" y="205" width="96" height="96"/>
+                    <rect key="frame" x="112" y="290" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,11 +188,11 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="5Wb-qH-nzQ" userLabel="ImageView - Avatar">
-                    <rect key="frame" x="112" y="205" width="96" height="96"/>
+                    <rect key="frame" x="112" y="290" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mqd-D1-g4D" userLabel="Button - Upload Cover Image">
-                    <rect key="frame" x="112" y="79" width="96" height="96"/>
+                    <rect key="frame" x="112" y="123" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonUpload.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -226,7 +202,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Vn-mZ-fhR" userLabel="Button - Upload Avatar">
-                    <rect key="frame" x="112" y="206" width="96" height="96"/>
+                    <rect key="frame" x="112" y="290" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ButtonUpload.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -236,12 +212,19 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xcO-ZG-K1B" userLabel="Label - User name">
-                    <rect key="frame" x="101" y="320" width="118" height="26"/>
+                    <rect key="frame" x="101" y="414" width="118" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rc9-xd-QR7" userLabel="Label - Followers Count">
+                    <rect key="frame" x="9" y="338" width="84" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -45,6 +45,7 @@
 	[self.userThumbnailButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.userNameLabelButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.followButton addTarget:self action:@selector(followButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 #pragma mark - Set Data
@@ -66,6 +67,12 @@
                                       options:SDWebImageRetryFailed];
     
     [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
+    self.userNameLabelButton.titleLabel.numberOfLines = 3;
+    self.userNameLabelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.userNameLabelButton.titleLabel.minimumScaleFactor = 20.0;
+//    self.userNameLabelButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
+//    self.userNameLabelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [self.userNameLabelButton sizeToFit];
     
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     

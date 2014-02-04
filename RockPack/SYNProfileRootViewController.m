@@ -38,10 +38,10 @@
 
 @import QuartzCore;
 
-#define FULL_NAME_LABEL_IPHONE 276.0f // lower is down
+#define FULL_NAME_LABEL_IPHONE 364.0f // lower is down
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
 #define FULLNAMELABELIPADLANDSCAPE 412.0f
-#define SEARCHBAR_Y 415.0f
+#define SEARCHBAR_Y 430.0f
 #define ALPHA_IN_EDIT 0.2f
 #define OFFSET_DESCRIPTION_EDIT 130.0f
 #define PARALLAX_SCROLL_VALUE 2.0f
@@ -49,8 +49,6 @@
 #define MAXRANGE 1000.0f
 #define SEGMENTED_CONTROLLER_ANIMATION 0.35f
 
-//alertview for channels with same name
-//alertview for channels with no name
 
 @interface SYNProfileRootViewController () <UIGestureRecognizerDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate,SYNChannelCreateNewCelllDelegate> {
     ProfileType modeType;
@@ -81,7 +79,6 @@
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPad;
 @property (strong, nonatomic) IBOutlet UIButton *followAllButton;
-@property (strong, nonatomic) IBOutlet UIButton *followersCountButton;
 @property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPhone;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
@@ -129,6 +126,7 @@
 @property (nonatomic) CGPoint contentOffset;
 
 @property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
+@property (strong, nonatomic) IBOutlet UILabel *followersCountLabel;
 
 @property  (nonatomic) BOOL creatingChannel;
 
@@ -346,7 +344,6 @@
     [self.navigationController.navigationItem.leftBarButtonItem setTitle:@""];
     
     
-    [self.followAllButton.titleLabel setFont:[UIFont lightCustomFontOfSize:14.0f]];
     
     // == Init alert views, Follow and Unfollow
     self.unfollowAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Unfollow?", @"Unfollow a channel in profile") message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
@@ -358,7 +355,7 @@
     self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle] , nil];
     
     
-    [self setFollowersCountButton];
+    [self setFollowersCountLabel];
     
     if (!IS_IPHONE_5) {
         UIEdgeInsets tmpInsets = self.subscriptionThumbnailCollectionView.contentInset;
@@ -400,7 +397,7 @@
 
 }
 
--(void) setFollowersCountButton
+-(void) setFollowersCountLabel
 {
     NSString *tmpString;
     if (self.channelOwner.subscribersCountValue == 1) {
@@ -412,10 +409,9 @@
     }
     
     
-    [self.followersCountButton setTitle:tmpString forState:UIControlStateNormal];
+    [self.followersCountLabel setText:tmpString];
     
-    [self.followersCountButton.titleLabel setFont:[UIFont  regularCustomFontOfSize:self.followersCountButton.titleLabel.font.pointSize]];
-    
+    [self.followersCountLabel setFont:[UIFont  regularCustomFontOfSize:self.followersCountLabel.font.pointSize]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -603,7 +599,7 @@
     
     [self.editButton setTitle:NSLocalizedString(@"Edit my profile", nil) forState:UIControlStateNormal];
     
-    [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.followAllButton.titleLabel.font.pointSize]];
     self.fullNameLabel.text = self.channelOwner.displayName;
     self.userNameLabel.text = self.channelOwner.username;
 
@@ -622,8 +618,8 @@
     self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.segmentedControlsView.layer.masksToBounds = YES;
     
-    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
-    [self.followingTabButton .titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
+    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.collectionsTabButton.titleLabel.font.pointSize]];
+    [self.followingTabButton .titleLabel setFont:[UIFont regularCustomFontOfSize:self.followingTabButton.titleLabel.font.pointSize]];
 }
 
 -(void) setProfileImage : (NSString*) thumbnailURL
@@ -766,7 +762,7 @@
         
         self.moreButton.hidden = NO;
         self.followingSearchBar.hidden = NO;
-        
+        self.userNameLabel.hidden = YES;
         
     }
     if (profileType == kModeOtherUsersProfile)
@@ -775,11 +771,33 @@
         self.followAllButton.hidden = NO;
         self.moreButton.hidden = YES;
         
+        CGRect tmpFrame = self.aboutMeTextView.frame;
+        tmpFrame.origin.y += 14;
+        self.aboutMeTextView.frame = tmpFrame;
+
+        tmpFrame = self.segmentedControlsView.frame;
+        tmpFrame.origin.y +=22;
+        self.segmentedControlsView.frame = tmpFrame;
+        
         self.followingSearchBar.hidden = YES;
-        UIEdgeInsets tmp = self.subscriptionLayoutIPhone.sectionInset;
-        tmp.top -= 43;
-        self.subscriptionLayoutIPhone.sectionInset = tmp;
+        UIEdgeInsets tmpEdgeInset = self.subscriptionLayoutIPhone.sectionInset;
+        tmpEdgeInset.top -= 43;
+        self.subscriptionLayoutIPhone.sectionInset = tmpEdgeInset;
         self.uploadAvatar.hidden=YES;
+        
+        
+        UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)self.channelThumbnailCollectionView.collectionViewLayout);
+        UIEdgeInsets tmpInset = tmpLayout.sectionInset;
+        tmpInset.top +=22;
+        
+        tmpLayout.sectionInset = tmpInset;
+        self.channelThumbnailCollectionView.collectionViewLayout = tmpLayout;
+        
+        tmpLayout = ((UICollectionViewFlowLayout*)self.subscriptionThumbnailCollectionView.collectionViewLayout);
+        tmpInset = tmpLayout.sectionInset;
+        tmpInset.top +=22;
+        tmpLayout.sectionInset = tmpInset;
+        self.subscriptionThumbnailCollectionView.collectionViewLayout = tmpLayout;
         
     }
 }
@@ -797,7 +815,7 @@
              [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
 
              [self reloadCollectionViews];
-             [self setFollowersCountButton];
+             [self setFollowersCountLabel];
              
              return;
          }
@@ -1292,7 +1310,7 @@
         [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
         
         if (self.modeType == kModeOtherUsersProfile) {
-            self.followersCountButton.hidden = NO;
+            self.followersCountLabel.hidden = NO;
             self.followAllButton.hidden = NO;
         }
         
@@ -1338,7 +1356,7 @@
                                                   errorHandler: errorBlock];
         
         if (self.modeType == kModeOtherUsersProfile) {
-            self.followersCountButton.hidden = YES;
+            self.followersCountLabel.hidden = YES;
             self.followAllButton.hidden = YES;
             
         }
@@ -1570,7 +1588,7 @@
             self.moreButton.transform = move;
             self.editButton.transform = move;
             self.followingSearchBar.transform = move;
-            self.followersCountButton.transform = move;
+            self.followersCountLabel.transform = move;
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
             self.userNameLabel.transform = move;
@@ -1866,11 +1884,11 @@
     
     
     if (self.channelOwner.subscribedByUserValue) {
-        [self.followAllButton setTitle:@"unfollow all" forState:UIControlStateNormal];
+        [self.followAllButton setTitle:@"Unfollow all" forState:UIControlStateNormal];
     }
     else
     {
-        [self.followAllButton setTitle:@"follow all" forState:UIControlStateNormal];
+        [self.followAllButton setTitle:@"Follow all" forState:UIControlStateNormal];
     }
     
     //    [self.subscriptionThumbnailCollectionView reloadData];
@@ -2283,11 +2301,11 @@
                     [self.channelThumbnailCollectionView reloadData];
                     
                     if (self.followCell.channel.subscribedByUserValue) {
-                        [self.followCell setFollowButtonLabel:NSLocalizedString(@"unfollow all", @"unfollow")];
+                        [self.followCell setFollowButtonLabel:NSLocalizedString(@"Unfollow all", @"unfollow")];
                     }
                     else
                     {
-                        [self.followCell setFollowButtonLabel:NSLocalizedString(@"follow all", @"follow")];
+                        [self.followCell setFollowButtonLabel:NSLocalizedString(@"Follow all", @"follow")];
                     }
                     
                     if (error)
@@ -2459,8 +2477,7 @@
         
         self.editButton.alpha = 0.0f;
         self.moreButton.alpha = 0.0f;
-        self.followersCountButton.alpha = 0.0f;
-        self.followersCountButton.alpha = 0.0f;
+        self.followersCountLabel.alpha = 0.0f;
         
         self.barBtnBack = self.navigationItem.leftBarButtonItem;
         self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
@@ -2510,7 +2527,7 @@
         self.segmentedControlsView.alpha = 1.0f;
         self.editButton.alpha = 1.0f;
         self.moreButton.alpha = 1.0f;
-        self.followersCountButton.alpha = 1.0f;
+        self.followersCountLabel.alpha = 1.0f;
         self.channelThumbnailCollectionView.alpha = 1.0f;
         self.subscriptionThumbnailCollectionView.alpha = 1.0f;
         
