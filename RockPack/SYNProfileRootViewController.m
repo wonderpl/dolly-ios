@@ -71,6 +71,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *uploadCoverPhotoButton;
 
 @property (nonatomic, strong) id orientationDesicionmaker;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topSegmentedConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topTextViewConstraint;
 
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerAvatar;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerCoverphoto;
@@ -231,7 +233,7 @@
                                              selector: @selector(userDataChanged:)
                                                  name: kUserDataChanged
                                                object: nil];
-
+    
     
     self.channelExpandedLayout = [[SYNProfileExpandedFlowLayout alloc]init];
     
@@ -394,7 +396,7 @@
     {
         [self updateTabStates];
     }
-
+    
 }
 
 -(void) setFollowersCountLabel
@@ -537,7 +539,7 @@
     if (IS_IPHONE) {
         self.channelThumbnailCollectionView.hidden=NO;
     }
-
+    
 }
 
 - (void) updateAnalytics
@@ -585,7 +587,7 @@
     if (modeType == kModeMyOwnProfile) {
         [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     }
-
+    
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
@@ -594,7 +596,7 @@
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:13.0];
     self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
-
+    
     [self.editButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
     
     [self.editButton setTitle:NSLocalizedString(@"Edit my profile", nil) forState:UIControlStateNormal];
@@ -602,11 +604,11 @@
     [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.followAllButton.titleLabel.font.pointSize]];
     self.fullNameLabel.text = self.channelOwner.displayName;
     self.userNameLabel.text = self.channelOwner.username;
-
+    
     [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
     [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
-
-
+    
+    
 }
 
 //Setting up the layout for the custom segmented controller
@@ -660,7 +662,7 @@
         [UIView animateWithDuration:1.5f animations:^{
             self.profileImageView.alpha=1.0f;
         }];
-
+        
     }
 }
 
@@ -717,7 +719,7 @@
     }
     else
     {
-       
+        
         //Default cover photo only displayed in your own profile
         //Other user cover photo are blank if nothing is uploaded
         if (self.modeType == kModeMyOwnProfile) {
@@ -729,7 +731,7 @@
                 
                 [UIView animateWithDuration:1.5f animations:^{
                     self.coverImage.alpha=1.0f;
-                }];                
+                }];
             }
         }
     }
@@ -770,35 +772,43 @@
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
         self.moreButton.hidden = YES;
+        if (IS_IPHONE) {
+            CGRect tmpFrame = self.aboutMeTextView.frame;
+            tmpFrame.origin.y += 14;
+            self.aboutMeTextView.frame = tmpFrame;
+            
+            tmpFrame = self.segmentedControlsView.frame;
+            tmpFrame.origin.y +=22;
+            self.segmentedControlsView.frame = tmpFrame;
+            
+            self.followingSearchBar.hidden = YES;
+            UIEdgeInsets tmpEdgeInset = self.subscriptionLayoutIPhone.sectionInset;
+            tmpEdgeInset.top -= 43;
+            self.subscriptionLayoutIPhone.sectionInset = tmpEdgeInset;
+            self.uploadAvatar.hidden=YES;
+            
+            
+            UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)self.channelThumbnailCollectionView.collectionViewLayout);
+            UIEdgeInsets tmpInset = tmpLayout.sectionInset;
+            tmpInset.top +=22;
+            
+            tmpLayout.sectionInset = tmpInset;
+            self.channelThumbnailCollectionView.collectionViewLayout = tmpLayout;
+            
+            tmpLayout = ((UICollectionViewFlowLayout*)self.subscriptionThumbnailCollectionView.collectionViewLayout);
+            tmpInset = tmpLayout.sectionInset;
+            tmpInset.top +=22;
+            tmpLayout.sectionInset = tmpInset;
+            self.subscriptionThumbnailCollectionView.collectionViewLayout = tmpLayout;
+        }
         
-        CGRect tmpFrame = self.aboutMeTextView.frame;
-        tmpFrame.origin.y += 14;
-        self.aboutMeTextView.frame = tmpFrame;
-
-        tmpFrame = self.segmentedControlsView.frame;
-        tmpFrame.origin.y +=22;
-        self.segmentedControlsView.frame = tmpFrame;
-        
-        self.followingSearchBar.hidden = YES;
-        UIEdgeInsets tmpEdgeInset = self.subscriptionLayoutIPhone.sectionInset;
-        tmpEdgeInset.top -= 43;
-        self.subscriptionLayoutIPhone.sectionInset = tmpEdgeInset;
-        self.uploadAvatar.hidden=YES;
-        
-        
-        UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)self.channelThumbnailCollectionView.collectionViewLayout);
-        UIEdgeInsets tmpInset = tmpLayout.sectionInset;
-        tmpInset.top +=22;
-        
-        tmpLayout.sectionInset = tmpInset;
-        self.channelThumbnailCollectionView.collectionViewLayout = tmpLayout;
-        
-        tmpLayout = ((UICollectionViewFlowLayout*)self.subscriptionThumbnailCollectionView.collectionViewLayout);
-        tmpInset = tmpLayout.sectionInset;
-        tmpInset.top +=22;
-        tmpLayout.sectionInset = tmpInset;
-        self.subscriptionThumbnailCollectionView.collectionViewLayout = tmpLayout;
-        
+        if (IS_IPAD) {
+            
+            [self.topSegmentedConstraint setConstant:self.topSegmentedConstraint.constant+25];
+            
+            [self.topTextViewConstraint setConstant:self.topTextViewConstraint.constant+10];
+            [self.containerViewIPad layoutIfNeeded];
+        }
     }
 }
 
@@ -813,7 +823,7 @@
          {
              [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
              [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
-
+             
              [self reloadCollectionViews];
              [self setFollowersCountLabel];
              
@@ -899,13 +909,20 @@
         //        self.coverImage.transform = CGAffineTransformIdentity;
         if (UIDeviceOrientationIsPortrait(orientation))
         {
+            
+            
+            float sectionHeader = 691.0f;
+            
+            if (self.modeType == kModeOtherUsersProfile) {
+                sectionHeader+=25.0f;
+            }
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 70.0, 47.0);
+            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(sectionHeader, 47.0, 70.0, 47.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-            self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 70.0, 47.0);
+            self.subscriptionLayoutIPad.sectionInset = UIEdgeInsetsMake(sectionHeader, 47.0, 70.0, 47.0);
             
             self.channelExpandedLayout.minimumLineSpacing = 14.0f;
-            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(752.0, 47.0, 70.0, 47.0);
+            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(sectionHeader, 47.0, 70.0, 47.0);
             
             //NEED DYNAMIC WAY
             // self.channelThumbnailCollectionView.frame = CGRectMake(37.0f, 747.0f, 592.0f, 260.0f);
@@ -920,12 +937,18 @@
         }
         else
         {
-            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(630.0, 21.0, 70.0, 21.0);
+            float sectionHeader = 574.0f;
+
+            if (self.modeType == kModeOtherUsersProfile) {
+                sectionHeader+=25.0f;
+            }
+
+            self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(sectionHeader, 21.0, 70.0, 21.0);
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
-            self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(630, 21.0, 70.0, 21.0);
+            self.subscriptionLayoutIPad.sectionInset =  UIEdgeInsetsMake(sectionHeader, 21.0, 70.0, 21.0);
             
-            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(630.0, 21.0, 70.0, 21.0);
+            self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(sectionHeader, 21.0, 70.0, 21.0);
             self.channelExpandedLayout.minimumLineSpacing = 14.0f;
             
             // self.containerViewIPad.frame = CGRectMake(179, 449, 314, 237);
@@ -1310,7 +1333,6 @@
         [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
         
         if (self.modeType == kModeOtherUsersProfile) {
-            self.followersCountLabel.hidden = NO;
             self.followAllButton.hidden = NO;
         }
         
@@ -1356,11 +1378,10 @@
                                                   errorHandler: errorBlock];
         
         if (self.modeType == kModeOtherUsersProfile) {
-            self.followersCountLabel.hidden = YES;
             self.followAllButton.hidden = YES;
             
         }
-
+        
     }
 }
 
@@ -1622,6 +1643,7 @@
             self.uploadAvatarButton.transform = move;
             self.uploadCoverPhotoButton.transform = move;
             self.uploadAvatar.transform = move;
+            self.followersCountLabel.transform = move;
             
             //scaling
             if (offset<0)
@@ -1834,10 +1856,10 @@
         NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
         NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
         
-
+        
         [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                            onCompletion: ^(id dictionary) {
-                                            
+                                               
                                                NSError *error = nil;
                                                ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
                                                                                                                                          error: &error];
@@ -1846,8 +1868,8 @@
                                                    [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
-                                                       [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
-                                                
+                                                   [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
+                                                   
                                                    [self setUpUserProfile];
                                                }
                                                else
@@ -1857,7 +1879,7 @@
                                                
                                                
                                            } onError: nil];
-
+        
     }
     
     if(channelOwnerIsUser && self.modeType != kModeEditProfile)
@@ -1873,7 +1895,7 @@
     self.dataRequestRangeSubscriptions = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
     
     
-
+    
     
     
     self.userNameLabel.text = self.channelOwner.username;
@@ -2466,7 +2488,7 @@
          @{NSFontAttributeName:[UIFont regularCustomFontOfSize:19.0]}    forState:UIControlStateNormal];
         
     }
-
+    
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = ALPHA_IN_EDIT;
@@ -2592,7 +2614,7 @@
                                              
                                              [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
                                              
-
+                                             
                                          } errorHandler: ^(id error) {
                                              
                                              
@@ -2827,9 +2849,9 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         
         
         message =  [message stringByAppendingString:@"'s collections"];
-
+        
     } else {
-
+        
         self.followAllAlertView.title = @"Follow All?";
         message = @"Are you sure you want to follow all";
         message =  [message stringByAppendingString:@" "];
@@ -2837,9 +2859,9 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         
         
         message =  [message stringByAppendingString:@"'s collections"];
-
+        
     }
-
+    
     
     [self.followAllAlertView setMessage:message];
     
@@ -3029,7 +3051,7 @@ finishedWithImage: (UIImage *) image
              @{NSFontAttributeName:[UIFont regularCustomFontOfSize:19.0]}    forState:UIControlStateNormal];
             
         }
-
+        
         [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
             [self setCreateOffset];
             self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
@@ -3121,7 +3143,7 @@ finishedWithImage: (UIImage *) image
                             
                             if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
                                 [UIView animateWithDuration:0.4f animations:^{
-                                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];                                    
+                                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
                                 }];
                             }
                         }];
@@ -3254,7 +3276,7 @@ finishedWithImage: (UIImage *) image
                                                  
                                              }];
                                              
-
+                                             
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
                                          }];
