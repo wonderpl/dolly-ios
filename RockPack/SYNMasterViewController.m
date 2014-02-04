@@ -116,15 +116,16 @@
     // load basic data like the Genres
     [self loadBasicDataWithComplete:^(BOOL success) {
         
-        if(success) // Genres have loaded from the server
-        {
-            if(!self.hasCreatedPopularGenre) // we have no POPULAR Genre
-            {
-                [self createPopularGenre]; // create one
-                
-            }
-        }
-        
+        // No more ALL category
+//        if(success) // Genres have loaded from the server
+//        {
+//            if(!self.hasCreatedPopularGenre) // we have no POPULAR Genre
+//            {
+//                [self createPopularGenre]; // create one
+//                
+//            }
+//        }
+//        
         [self addChildViewController:self.containerViewController];
         
         // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
@@ -201,7 +202,6 @@
 
 -(BOOL)createPopularGenre
 {
-    
     // Create Genre
     Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
     popularGenre.uniqueId = [NSString stringWithString:kPopularGenreUniqueId];

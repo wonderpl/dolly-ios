@@ -129,15 +129,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         sResRect.size = self.containerView.frame.size;
         self.searchResultsController.view.frame = sResRect;
         
-        // this should always be true but go defensively
-        if(self.popularSubGenre)
-        {
-            [self.searchResultsController searchForGenre:self.popularSubGenre.uniqueId];
-        }
-        else
-        {
-            AssertOrLog(@"Popular SubGenre was not created at this stage...");
-        }
+        [self.searchResultsController searchForGenre:self.popularSubGenre.uniqueId];
     }
     
     
