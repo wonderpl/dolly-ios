@@ -16,6 +16,7 @@
 #import "SYNiPadIntroToSignupAnimator.h"
 #import "SYNLoginManager.h"
 #import "GAI+Tracking.h"
+#import "SYNDeviceManager.h"
 
 @interface SYNiPadIntroViewController () <UINavigationControllerDelegate>
 
@@ -39,10 +40,18 @@
     
     
     CGRect tmpFrame = self.logoImageView.frame;
+    
+    
+    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
+        tmpFrame = CGRectMake(self.view.center.x-(self.logoImageView.frame.size.width/2), self.view.center.y-(self.logoImageView.frame.size.height/2), tmpFrame.size.width, tmpFrame.size.height);
+    } else {
+        
+        tmpFrame = CGRectMake(self.view.frame.size.height/2-(self.logoImageView.frame.size.width/2), self.view.frame.size.height/2-(self.logoImageView.frame.size.height)*2, tmpFrame.size.width, tmpFrame.size.height);
+    }
     CGRect finalFrame = self.logoImageView.frame;
-    tmpFrame = CGRectMake(self.view.center.x-(self.logoImageView.frame.size.width/2), self.view.center.y-(self.logoImageView.frame.size.height/2), tmpFrame.size.width, tmpFrame.size.height);
     self.logoImageView.frame = tmpFrame;
     self.logoImageView.alpha = 0.0f;
+
     
     [UIView animateWithDuration:1.0f animations:^{
         self.logoImageView.alpha = 1.0f;
@@ -62,6 +71,12 @@
             
         } completion:^(BOOL finished) {
             self.userContainerView.hidden = NO;
+            self.userContainerView.alpha = 0.0f;
+            [UIView animateWithDuration:0.2 animations:^{
+             
+                self.userContainerView.alpha = 1.0f;
+            }];
+            
         }];
         
     }];
