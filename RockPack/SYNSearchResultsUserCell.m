@@ -67,13 +67,11 @@
                                       options:SDWebImageRetryFailed];
     
     [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
-    self.userNameLabelButton.titleLabel.numberOfLines = 3;
-    self.userNameLabelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.userNameLabelButton.titleLabel.minimumScaleFactor = 20.0;
-//    self.userNameLabelButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
-//    self.userNameLabelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [self.userNameLabelButton sizeToFit];
+
+    self.userNameLabelButton.titleLabel.lineBreakMode =  NSLineBreakByTruncatingTail;
+    self.userNameLabelButton.titleLabel.numberOfLines = 2;
     
+
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     
     if (channelOwner.subscribedByUserValue == NO) {
