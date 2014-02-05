@@ -29,18 +29,23 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *defaultPicker;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 
+@property (strong, nonatomic) IBOutlet UIView *viewContainer;
 @property (nonatomic, strong) NSArray *moods;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topWatchConstraint;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
 @property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
 @property (strong, nonatomic) IBOutlet UIButton *watchButton;
 
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UICollectionView *videoCollectionView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topTitleConstraint;
 @property (nonatomic, readonly) Mood* currentMood;
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, strong) NSArray* videoArray;
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
+@property (strong, nonatomic) IBOutlet UIImageView *moodBackground;
+@property (nonatomic, assign) CGPoint scrollingPoint, endPoint;
+@property (nonatomic, strong) NSTimer *scrollingTimer;
 
 @end
 
@@ -69,7 +74,7 @@
     [self loadMoods];
     
     [self getUpdatedMoods];
-    
+
     
     
     self.watchButton.layer.cornerRadius = 15.5f;
@@ -100,14 +105,22 @@
     }
 
     self.videoArray = @[];
+    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     
+
 }
 
-- (void)viewDidLayoutSubviews
+-(void) viewDidDisAppear:(BOOL)animated
 {
-    [super viewDidLayoutSubviews];
     
+    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
 }
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
+}
+
 
 
 -(void) spinAnimationWithRow : (NSNumber*) row {
@@ -147,6 +160,8 @@
         if([appDelegate.mainRegistry registerMoodsFromDictionary:responce
                                                withExistingMoods:self.moods]) {
             [self loadMoods];
+            [self scrollSlowly];
+
         }
         
         
@@ -167,11 +182,8 @@
     }
     
     // Hides the 2 lines in the default picker
-    
-    
-    [[self.defaultPicker.subviews objectAtIndex:1] setHidden:YES];
-    [[self.defaultPicker.subviews objectAtIndex:2] setHidden:YES];
-    
+    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
+
 }
 
 #pragma mark - Control Callbacks
@@ -223,22 +235,17 @@
                                                       } else {
                                                           
                                                           
-                                                          self.videoArray = @[[sortedVideos objectAtIndex:0]];
+                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videoArray selectedIndex:0];
                                                           
-                                                          [self.videoCollectionView reloadData];
+                                                          SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+                                                          animator.delegate = self;
+                                                          animator.cellIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+                                                          self.videoPlayerAnimator = animator;
+                                                          viewController.transitioningDelegate = animator;
                                                           
-                                                          
-                                                          if (self.videoArray.count==1) {
-                                                              self.videoCollectionView.hidden = NO;
-                                                              self.videoCollectionView.alpha = 0.0f;
-                                                              
-                                                              [UIView animateWithDuration:0.5 animations:^{
-                                                                  self.videoCollectionView.alpha = 1.0f;
-                                                              }];
-                                                          }
+                                                          [self presentViewController:viewController animated:YES completion:nil];
+
                                                       }
-                                                      
-                                                      
                                                   }
                                                   
                                                   strongSelf.watchButton.userInteractionEnabled = YES;
@@ -374,6 +381,12 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     // override
     self.watchButton.hidden = YES;
     self.videoCollectionView.hidden = YES;
+    
+    
+    if (self.scrollingTimer) {
+        [self.scrollingTimer invalidate];
+    }
+
 }
 
 - (void)showWatchButton {
@@ -386,7 +399,67 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     }];
     
     if (IS_IPAD) {
-        [self watchButtonTapped:nil];
+        
+        
+        self.watchButton.userInteractionEnabled = NO;
+        
+        __weak typeof(self) weakSelf = self;
+        
+        [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
+                                                      andEntityName: kVideoInstance
+                                                             params: @{@"mood":self.currentMood.uniqueId}
+                                                  completionHandler: ^(id response) {
+                                                      
+                                                      __strong typeof(self) strongSelf = weakSelf;
+                                                      
+                                                      if(![response isKindOfClass:[NSDictionary class]])
+                                                          return;
+                                                      
+                                                      if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:response
+                                                                                                                withViewId:self.viewId])
+                                                          return;
+                                                      
+                                                      NSArray *videoInstances = response[@"videos"][@"items"];
+                                                      NSArray *videoInstanceIds = [videoInstances valueForKey:@"id"];
+                                                      
+                                                      NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[VideoInstance entityName]];
+                                                      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueId IN %@", videoInstanceIds];
+                                                      [fetchRequest setPredicate:predicate];
+                                                      
+                                                      NSArray* videosArray = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest
+                                                                                                                                   error:NULL];
+                                                      
+                                                      if (![videosArray count]) {
+                                                          // implement
+                                                      }
+                                                      
+                                                      NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
+                                                      if (sortedVideos.count > 0) {
+                                                          
+                                                          
+                                                          
+                                                              
+                                                              self.videoArray = @[[sortedVideos objectAtIndex:0]];
+                                                              
+                                                              [self.videoCollectionView reloadData];
+                                                              
+                                                              
+                                                              if (self.videoArray.count==1) {
+                                                                  self.videoCollectionView.hidden = NO;
+                                                                  self.videoCollectionView.alpha = 0.0f;
+                                                                  
+                                                                  [UIView animateWithDuration:0.5 animations:^{
+                                                                      self.videoCollectionView.alpha = 1.0f;
+                                                                  }];
+                                                              }
+                                                          
+                                                      }
+                                                      
+                                                      strongSelf.watchButton.userInteractionEnabled = YES;
+                                                      
+                                                  } errorHandler:^(id error) {
+                                                      
+                                                  }];
     }
     
 }
@@ -396,11 +469,19 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     
+    
+    self.videoCollectionView.alpha = 0.0;
+    self.moodCollectionView.alpha = 0.0;
+//    self.watchButton.alpha = 0.0;
+//    self.moodBackground.alpha = 0.0;
+//    self.iWantToLabel.alpha = 0.0;
+    
     [self.moodCollectionView reloadData];
+    [self.videoCollectionView reloadData];
 }
 
 - (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    
+
 }
 
 -(void)setMoods:(NSArray *)moods {
@@ -411,7 +492,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         
         // center the moods list to the middle
         [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0] atScrollPosition: UICollectionViewScrollPositionCenteredVertically animated: NO];
-        [self showWatchButton];
+//        [self showWatchButton];
     }
 }
 
@@ -444,31 +525,91 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 #pragma mark - Orientation change
 
+-(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [UIView animateWithDuration:0.15 animations:^{
+        self.videoCollectionView.alpha = 0.0;
+        self.moodCollectionView.alpha = 0.0;
+        self.watchButton.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        
+    }];
+
+    
+}
+
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
 {
     
+    [self updateLayoutForOrientation:fromInterfaceOrientation];
+   
+    [UIView animateWithDuration:0.3 animations:^{
+        self.videoCollectionView.alpha = 1.0;
+        self.moodCollectionView.alpha = 1.0;
+        self.watchButton.alpha = 1.0;
+        self.moodBackground.alpha = 1.0;
+        self.iWantToLabel.alpha = 1.0;
+    } completion:^(BOOL finished) {
+ 
+    }];
 
+}
+
+- (void) updateLayoutForOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
+{
     
     if (IS_IPAD) {
         // land scape
-        if (UIDeviceOrientationIsPortrait(fromInterfaceOrientation)) {
+        if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+            self.videoCollectionView.frame = CGRectMake(403, 136, 436, 459);
+            self.watchButton.frame = CGRectMake(109, 662, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
             
-//            NSLog(@"video frame, %@,", NSStringFromCGRect(self.videoCollectionView.frame));
-//            self.videoCollectionView.frame = CGRectMake(403, 136, 436, 459);
+            self.moodCollectionView.frame = CGRectMake(118, 312, self.moodCollectionView.frame.size.width, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-25, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+//            self.titleLabel.frame = CGRectMake(17, 176, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height);
+            self.moodBackground.frame = CGRectMake(1, 270, self.moodBackground.frame.size.width, self.moodBackground.frame.size.height);
             
         } else {
+            self.videoCollectionView.frame = CGRectMake(246, 248, 436, 459);
+            self.watchButton.frame = CGRectMake(80, 800, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
+            self.moodCollectionView.frame = CGRectMake(118, 372, self.moodCollectionView.frame.size.width, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-25, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+            self.moodBackground.frame = CGRectMake(1, 330, self.moodBackground.frame.size.width, self.moodBackground.frame.size.height);
             
-//            NSLog(@"video frame, %@,", NSStringFromCGRect(self.videoCollectionView.frame));
-
-//            self.videoCollectionView.frame = CGRectMake(236, 248, 436, 459);
-
-            
-
         }
         
     }
+    
 }
 
+
+- (void)scrollSlowly {
+    if (self.moods.count>1) {
+        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:200 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
+    } else  {
+        return;
+    }
+    
+    // 230 == height of the cell
+    
+    
+    self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+(self.moods.count * 40.0f)+floorf(arc4random()%10)*40.0f);
+    
+    //Start off screen
+    self.scrollingPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y);
+    self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
+}
+
+- (void)scrollSlowlyToPoint {
+    self.moodCollectionView.bounds = CGRectMake(self.scrollingPoint.x, self.scrollingPoint.y, self.moodCollectionView.bounds.size.width, self.moodCollectionView.bounds.size.height);
+    if (self.scrollingPoint.y> self.endPoint.y) {
+        
+        [self.scrollingTimer invalidate];
+        [self showWatchButton];
+    }
+    
+    self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+4);
+}
 
 
 @end
