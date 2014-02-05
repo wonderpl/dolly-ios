@@ -611,5 +611,12 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+4);
 }
 
+- (void) profileButtonPressedForCell:(UICollectionViewCell *)cell {
+    
+}
+
+-(void) channelButtonPressedForCell:(UICollectionViewCell *)cell {
+    
+}
 
 @end
