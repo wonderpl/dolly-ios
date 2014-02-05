@@ -15,7 +15,6 @@
                 <outlet property="containerViewIPad" destination="XoE-Jb-ERN" id="qMQ-pm-BlK"/>
                 <outlet property="coverImage" destination="NLw-Oe-3pp" id="KxP-B7-hBe"/>
                 <outlet property="followAllButton" destination="EYi-UE-pTE" id="PJB-io-1ZR"/>
-                <outlet property="followersCountLabel" destination="Fyk-8M-xJf" id="zVJ-fQ-c13"/>
                 <outlet property="followingTabButton" destination="QFb-tH-WdG" id="iNt-7y-ACk"/>
                 <outlet property="fullNameLabel" destination="3wY-iP-RPC" id="Z8q-oT-Sfa"/>
                 <outlet property="moreButton" destination="uxB-NR-Hkw" id="gKc-Uc-4KY"/>
@@ -97,7 +96,7 @@
                     <rect key="frame" x="179" y="448" width="314" height="282"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="It is a long established fact that a reader will be distracted by the readable content of a page." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
+                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="It is a long established fact that a reader will be distracted by the readable content of a page." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAO-BP-yje">
                             <rect key="frame" x="0.0" y="125" width="314" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

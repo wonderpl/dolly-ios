@@ -18,6 +18,7 @@
 #import "Appirater.h"
 #import "SYNWebViewController.h"
 #import "SYNProfileRootViewController.h"
+#import "SYNContainerViewController.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -69,7 +70,7 @@ typedef enum {
                               @"Help",
                               @"Logout",
                               @"Hints",
-                              @""];
+                              @"Edit my profile"];
     
     
     for (UIView* sView in self.view.subviews)
@@ -269,7 +270,12 @@ typedef enum {
             
             [((SYNProfileRootViewController*)[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2]) editButtonTapped:nil];
             
+           UINavigationController *tmpNav = appDelegate.navigationManager.containerController.currentViewController;
             
+            
+            NSLog(@"tmpNavtmpNav%@", tmpNav);
+            
+            [((SYNProfileRootViewController*)[tmpNav.viewControllers objectAtIndex:tmpNav.viewControllers.count-1]) editButtonTapped:nil];
             
             
             

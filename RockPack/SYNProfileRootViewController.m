@@ -257,7 +257,7 @@
         self.channelExpandedLayout.minimumInteritemSpacing = 0;
         self.channelExpandedLayout.minimumLineSpacing = 0;
         self.channelExpandedLayout.itemSize = CGSizeMake(320, 71);
-        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(472, 0, 70, 0);
+        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(494, 0, 70, 0);
         
     }
     else
@@ -2462,7 +2462,7 @@
     [self.createChannelCell.createTextField resignFirstResponder];
 	
 	self.aboutMeTextView.userInteractionEnabled = YES;
-    
+    self.aboutMeTextView.editable = YES;
     self.modeType = kModeEditProfile;
     self.uploadAvatar.hidden =YES;
     self.uploadCoverPhotoButton.hidden = NO;

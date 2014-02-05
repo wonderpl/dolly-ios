@@ -32,6 +32,17 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4p3-mf-amY" userLabel="Edit Profile">
+                    <rect key="frame" x="482" y="44" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="cTH-UJ-Nff"/>
+                        <constraint firstAttribute="height" constant="60" id="mHf-cR-Qme"/>
+                    </constraints>
+                    <state key="normal" image="ButtonMoreRate.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wr-ir-MjY" userLabel="Feedback">
                     <rect key="frame" x="242" y="354" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -133,10 +144,12 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="opR-V4-ouC" secondAttribute="trailing" id="0rH-Uf-hHE"/>
                 <constraint firstItem="opR-V4-ouC" firstAttribute="top" secondItem="2" secondAttribute="top" id="1QI-Uh-W2N"/>
+                <constraint firstItem="opR-V4-ouC" firstAttribute="centerX" secondItem="4p3-mf-amY" secondAttribute="centerX" id="2dF-h2-Cwk"/>
                 <constraint firstItem="rf5-51-Bdd" firstAttribute="centerX" secondItem="fP2-H5-IS7" secondAttribute="centerX" id="6vB-bY-Kg4"/>
                 <constraint firstItem="fP2-H5-IS7" firstAttribute="top" secondItem="3Af-Md-wwq" secondAttribute="bottom" constant="90" id="9Ue-LS-LW4"/>
                 <constraint firstAttribute="centerY" secondItem="q5O-MS-iJJ" secondAttribute="centerY" id="BS1-SD-hId"/>
                 <constraint firstItem="Sw7-Ky-4PG" firstAttribute="leading" secondItem="BY2-tg-UgW" secondAttribute="trailing" constant="180" id="BpY-IZ-l82"/>
+                <constraint firstItem="opR-V4-ouC" firstAttribute="centerY" secondItem="4p3-mf-amY" secondAttribute="centerY" constant="310" id="HV5-AE-kUH"/>
                 <constraint firstItem="aPS-IW-ByN" firstAttribute="leading" secondItem="7wr-ir-MjY" secondAttribute="leading" id="Ibg-cb-yIQ"/>
                 <constraint firstItem="3Af-Md-wwq" firstAttribute="leading" secondItem="Sw7-Ky-4PG" secondAttribute="trailing" constant="180" id="KvL-rQ-dT6"/>
                 <constraint firstItem="q5O-MS-iJJ" firstAttribute="top" secondItem="Sw7-Ky-4PG" secondAttribute="bottom" constant="90" id="OSv-nu-zLN"/>
