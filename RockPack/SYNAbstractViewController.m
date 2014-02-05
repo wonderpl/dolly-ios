@@ -150,7 +150,6 @@
 
 - (BOOL) moreItemsToLoad
 {
-    
     return (self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable);
 }
 
@@ -832,8 +831,10 @@
     {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                    usingMode:kChannelDetailsModeDisplay];
-		
+        channelVC.autoplayId = channel.autoplayId;
+
 		[self.navigationController pushViewController:channelVC animated:YES];
+
 	}
 }
 

@@ -103,6 +103,7 @@
         // mode must be set first because setChannel relies on it...
         self.mode = mode;
         self.channel = channel;
+        
 		
 		self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
     }
@@ -446,6 +447,7 @@
         [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
     }
     
+    self.dataItemsAvailable = self.channel.totalVideosValueValue;
     [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
     
     [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
@@ -891,6 +893,8 @@
     if (self.mode != kChannelDetailsModeEdit) {
         [videoThumbnailCell setUpVideoTap];
     }
+    
+//    NSLog(@"videoInstance.uniqueId : %@", videoInstance.uniqueId);
     
     return videoThumbnailCell;
 }
@@ -1763,6 +1767,7 @@
 
 - (void) setVideosForChannelById: (NSString *) channelId isUpdated: (BOOL) isUpdated
 {
+    
     [appDelegate.oAuthNetworkEngine updateVideosForUserId: appDelegate.currentOAuth2Credentials.userId
                                              forChannelID: channelId
                                          videoInstanceSet: self.channel.videoInstances
@@ -1916,6 +1921,29 @@
     
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
 }
+
+
+-(void) setAutoplayId:(NSString *)autoplayId
+{
+    
+    _autoplayId = autoplayId;
+    
+    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:self.channel.uniqueId instanceId:autoplayId completionHandler:^(id dictionary) {
+        
+        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:dictionary usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+        
+        
+        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:@[vidToPlay] selectedIndex:0];
+
+        [self presentViewController:viewController animated:YES completion:nil];
+        
+    } errorHandler: nil];
+    
+    
+    
+}
+
+
 
 
 @end
