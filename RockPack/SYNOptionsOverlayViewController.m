@@ -245,7 +245,7 @@ typedef enum {
             
         case OptionButtonTagHelp:
         {
-			NSURL *URL = [NSURL URLWithString:@"http://help.wonderpl.com/"];
+			NSURL *URL = [NSURL URLWithString:@"http://wonderpl.com/help"];
 			UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
 			[parentViewController presentViewController:viewController animated:YES completion:nil];
         }
