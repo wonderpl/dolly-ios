@@ -15,6 +15,7 @@
                 <outlet property="containerViewIPad" destination="XoE-Jb-ERN" id="qMQ-pm-BlK"/>
                 <outlet property="coverImage" destination="NLw-Oe-3pp" id="KxP-B7-hBe"/>
                 <outlet property="followAllButton" destination="EYi-UE-pTE" id="PJB-io-1ZR"/>
+                <outlet property="followersCountLabel" destination="Fyk-8M-xJf" id="vJm-nn-dcQ"/>
                 <outlet property="followingTabButton" destination="QFb-tH-WdG" id="iNt-7y-ACk"/>
                 <outlet property="fullNameLabel" destination="3wY-iP-RPC" id="Z8q-oT-Sfa"/>
                 <outlet property="moreButton" destination="uxB-NR-Hkw" id="gKc-Uc-4KY"/>
