@@ -9,8 +9,9 @@
 #import "SYNAbstractViewController.h"
 #import "SYNSocialActionsDelegate.h"
 #import "SYNVideoCellDelegate.h"
+#import "SYNVideoPlayerAnimator.h"
 
-@interface SYNMoodRootViewController : SYNAbstractViewController <UIPickerViewDelegate,  UIPickerViewDataSource,SYNSocialActionsDelegate, SYNVideoCellDelegate>
+@interface SYNMoodRootViewController : SYNAbstractViewController <UIPickerViewDelegate,  UIPickerViewDataSource,SYNSocialActionsDelegate, SYNVideoCellDelegate,SYNVideoPlayerAnimatorDelegate>
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate, SYNVideoCellDelegate> delegate;
 

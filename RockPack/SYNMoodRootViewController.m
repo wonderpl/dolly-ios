@@ -18,8 +18,9 @@
 #import "UIColor+SYNColor.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "UICollectionReusableView+Helpers.h"
-
+#import "SYNVideoPlayerAnimator.h"
 #import "SYNSearchResultsVideoCell.h"
+#import "SYNSearchVideoPlayerViewController.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 #define WATCH_BUTTON_ANIMATION_TIME 0.4
@@ -39,6 +40,8 @@
 @property (nonatomic, readonly) Mood* currentMood;
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, strong) NSArray* videoArray;
+@property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
+
 @end
 
 
@@ -66,6 +69,7 @@
     [self loadMoods];
     
     [self getUpdatedMoods];
+    
     
     
     self.watchButton.layer.cornerRadius = 15.5f;
@@ -219,11 +223,19 @@
                                                       } else {
                                                           
                                                           
-                                                          
                                                           self.videoArray = @[[sortedVideos objectAtIndex:0]];
                                                           
                                                           [self.videoCollectionView reloadData];
                                                           
+                                                          
+                                                          if (self.videoArray.count==1) {
+                                                              self.videoCollectionView.hidden = NO;
+                                                              self.videoCollectionView.alpha = 0.0f;
+                                                              
+                                                              [UIView animateWithDuration:0.5 animations:^{
+                                                                  self.videoCollectionView.alpha = 1.0f;
+                                                              }];
+                                                          }
                                                       }
                                                       
                                                       
@@ -247,6 +259,8 @@
         return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
         
     }
+    
+    
     return self.videoArray.count;
 }
 
@@ -314,12 +328,23 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (cv == self.videoCollectionView) {
         
-//            VideoInstance *videoInstance = self.videoArray[indexPath.item];
-//        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
-//        
-//        [strongSelf presentViewController:viewController animated:YES completion:nil];
-        
+        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videoArray selectedIndex:0];
+		
+		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+		animator.delegate = self;
+		animator.cellIndexPath = indexPath;
+		self.videoPlayerAnimator = animator;
+		viewController.transitioningDelegate = animator;
+		
+		[self presentViewController:viewController animated:YES completion:nil];
+    
     }
+
+}
+
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	return (SYNSearchResultsVideoCell *)[self.videoCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 #pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
@@ -348,11 +373,12 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView {
     // override
     self.watchButton.hidden = YES;
-    
+    self.videoCollectionView.hidden = YES;
 }
 
 - (void)showWatchButton {
     self.watchButton.hidden = NO;
+
     self.watchButton.alpha = 0.0f;
     
     [UIView animateWithDuration:WATCH_BUTTON_ANIMATION_TIME animations:^{
@@ -402,64 +428,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     return cMood;
 }
 
-#pragma mark - UIPicker Delegates
-
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [self.moods count]*LARGE_AMOUNT_OF_ROWS;
-}
-
-#pragma mark - UIPickerView Delegate
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    
-    if (IS_IPAD) {
-        return 30.0;
-    }
-    
-    return 24.0;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    // not gtting called
-    Mood* mood = self.moods [row % self.moods.count];
-    
-    return mood.name;
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [self showWatchButton];
-}
-
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-    UILabel* tmpLabel = (UILabel*)view;
-    if (!tmpLabel){
-        tmpLabel = [[UILabel alloc] init];
-        tmpLabel.adjustsFontSizeToFitWidth = YES;
-        tmpLabel.textAlignment = NSTextAlignmentCenter;
-        //        tmpLabel.font = [UIFont lightCustomFontOfSize:14];
-        tmpLabel.font = [tmpLabel.font fontWithSize:14];
-        if (IS_IPAD) {
-            tmpLabel.font = [tmpLabel.font fontWithSize:25];
-        }
-        
-        
-        tmpLabel.textColor = [UIColor colorWithRed: 136.0f / 255.0f
-                                             green: 134.0f / 255.0f
-                                              blue: 168.0f / 255.0f
-                                             alpha: 1.0f];
-        tmpLabel.alpha = 1.0f;
-        //        tmpLabel.backgroundColor = [UIColor dollyMoodColor];
-    }
-    self.watchButton.hidden = YES;
-    
-    Mood* mood = self.moods [row % self.moods.count];
-    tmpLabel.text = mood.name;
-    return tmpLabel;
-}
 
 - (NSArray *)sortedVideoInstances:(NSArray *)videoInstances inIdOrder:(NSArray *)videoInstanceIds {
 	NSMutableArray *sortedVideoInstances = [NSMutableArray array];
@@ -472,6 +440,33 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 	}
 	
 	return sortedVideoInstances;
+}
+
+#pragma mark - Orientation change
+
+- (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
+{
+    
+
+    
+    if (IS_IPAD) {
+        // land scape
+        if (UIDeviceOrientationIsPortrait(fromInterfaceOrientation)) {
+            
+//            NSLog(@"video frame, %@,", NSStringFromCGRect(self.videoCollectionView.frame));
+//            self.videoCollectionView.frame = CGRectMake(403, 136, 436, 459);
+            
+        } else {
+            
+//            NSLog(@"video frame, %@,", NSStringFromCGRect(self.videoCollectionView.frame));
+
+//            self.videoCollectionView.frame = CGRectMake(236, 248, 436, 459);
+
+            
+
+        }
+        
+    }
 }
 
 
