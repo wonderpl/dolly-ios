@@ -33,6 +33,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 @property (nonatomic, strong) UIView *controlsFadeTapView;
 @property (nonatomic, strong) NSTimer *controlsFadeTimer;
 @property (nonatomic, assign) BOOL controlsVisible;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, assign) BOOL videoViewed;
 
@@ -60,7 +61,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		[self addSubview:self.controlsFadeTapView];
 		[self addSubview:self.loadingView];
 		[self addSubview:self.scrubberBar];
-		
+        [self.loadingView addSubview:self.activityIndicator];
+
 		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
 	}
 	return self;
@@ -150,6 +152,21 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	return _loadingView;
 }
 
+- (UIActivityIndicatorView*) activityIndicator {
+    if (!_activityIndicator) {
+        
+        UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+        [activityIndicator startAnimating];
+        self.activityIndicator = activityIndicator;
+        
+        
+        
+    }
+    
+    return _activityIndicator;
+}
+
+
 - (UIView *)controlsFadeTapView {
 	if (!_controlsFadeTapView) {
 		UIView *view = [[UIView alloc] initWithFrame:self.bounds];
@@ -182,7 +199,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)play {
 	self.state = SYNVideoPlayerStatePlaying;
-	
+    self.activityIndicator.frame = CGRectMake(self.loadingView.center.x-12.5, (self.loadingView.center.y+self.loadingView.frame.size.height*0.2)-12.5, 25, 25);
+
 	[self startUpdatingProgress];
 	self.scrubberBar.playing = YES;
 }
@@ -205,7 +223,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)handleVideoPlayerStartedPlaying {
 	[self fadeOutLoadingView];
-	
+    [self.activityIndicator stopAnimating];
+
 	[self fadeInControls];
 }
 
