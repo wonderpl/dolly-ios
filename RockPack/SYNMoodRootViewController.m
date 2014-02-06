@@ -344,6 +344,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 
 - (void)showWatchButton {
+    
+    NSLog(@"off set%f", self.moodCollectionView.contentOffset.y);
+
     self.watchButton.hidden = NO;
     self.watchButton.alpha = 0.0f;
     
@@ -548,12 +551,14 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 #pragma mark - Scrolling animation logic
 - (void)scrollSlowly {
     if (self.moods.count>1) {
-        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:200 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
+        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
     } else  {
         return;
     }
-    
-    self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+(self.moods.count * 40.0f)+floorf(arc4random()%10)*40.0f);
+
+    // 30 is the middle of the cell
+    //this ensures the animation ends with the ell entered 
+    self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+(self.moods.count * 30)+floorf(arc4random()%10)*30);
     
     //Start off screen
     self.scrollingPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y);
@@ -566,6 +571,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     if (self.scrollingPoint.y> self.endPoint.y) {
         [self.scrollingTimer invalidate];
         [self showWatchButton];
+
+        [self.moodCollectionView.collectionViewLayout invalidateLayout];
     }
     
     self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+4);
