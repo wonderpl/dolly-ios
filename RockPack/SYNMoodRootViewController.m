@@ -189,10 +189,10 @@
 												  
 												  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
                                                   
-                                                  int rand = floorf(arc4random()%sortedVideos.count);
 
 												  if (sortedVideos.count > 0) {
-                                                      
+                                                      int rand = floorf(arc4random()+1%sortedVideos.count);
+
                                                       
                                                       if (IS_IPHONE) {
                                                           UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand];
@@ -289,13 +289,11 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     if (cv == self.videoCollectionView) {
         
         UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videoArray selectedIndex:0];
-		
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
 		animator.cellIndexPath = indexPath;
 		self.videoPlayerAnimator = animator;
 		viewController.transitioningDelegate = animator;
-		
 		[self presentViewController:viewController animated:YES completion:nil];
         
     }
