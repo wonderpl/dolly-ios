@@ -95,7 +95,7 @@
                         </label>
                     </subviews>
                 </view>
-                <view contentMode="scaleToFill" id="wAD-PS-jWs">
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="wAD-PS-jWs">
                     <rect key="frame" x="335" y="0.0" width="1" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>

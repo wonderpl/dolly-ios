@@ -528,11 +528,20 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             self.moodBackground.frame = CGRectMake(1, 330, 254, self.moodBackground.frame.size.height);
             self.titleLabel.font = [UIFont systemFontOfSize:19];
             
-            self.divider.frame = CGRectMake(255, 0, 1, 1024);
+            self.divider.frame = CGRectMake(255, 64, 1, 960);
         }
-        
+        [self setDividerGradient];
+   
     }
     
+}
+
+- (void) setDividerGradient {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    gradient.frame = screenRect;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor dollyMediumGray] CGColor],[(id)[UIColor whiteColor] CGColor], nil];
+    [self.divider.layer setSublayers:@[gradient]];
 }
 
 #pragma mark - Scrolling animation logic

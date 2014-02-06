@@ -24,6 +24,7 @@
 + (UIColor *) dollyAddButtonHighlightedColor;
 + (UIColor *) dollyAddButtonSelectedColor;
 + (UIColor *) dollyAddButtonDisabledColor;
++ (UIColor *) dollyMediumGray;
 
 + (UIColor *) colorWithHex:(NSInteger)hex;
 
