@@ -34,19 +34,19 @@
 #define kUser                       @"User"
 
 // viewId
-#define kFeedViewId                 @"MY WONDERS"
+#define kFeedViewId                 @""
 #define kChannelsViewId             @"PACKS"
 #define kCommentsViewId             @"COMMENTS"
 #define kProfileViewId              @"ME"
 #define kSearchViewId               @"SEARCH"
-#define kDiscoverViewId             @"DISCOVER"
+#define kDiscoverViewId             @""
 #define kExistingChannelsViewId     @"EXISTING CHANNELS"
 #define kChannelDetailsViewId       @"CHANNEL DETAILS"
 #define kSideNavigationViewId       @"SIDE NAVIGATION"
 #define kSubscribersListViewId      @"SUBSCRIBERS"
 #define kFriendsViewId              @"My Friends"
-#define kActivityViewId             @"ACTIVITY"
-#define kMoodViewId                 @"MOOD-MINDER"
+#define kActivityViewId             @""
+#define kMoodViewId                 @""
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"
 
