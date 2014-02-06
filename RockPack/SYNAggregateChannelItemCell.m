@@ -10,11 +10,12 @@
 #import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
 #import "SYNGenreColorManager.h"
-
+#import "SYNActivityManager.h"
 @interface SYNAggregateChannelItemCell ()
 
 @property (strong, nonatomic) IBOutlet SYNSocialButton *followControl;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *shareControl;
+@property (strong, nonatomic) IBOutlet UIButton *channelButton;
 
 @property (nonatomic, strong) IBOutlet UIView* bg;
 
@@ -28,7 +29,7 @@
     self.shareControl.title = NSLocalizedString(@"share", @"Label for follow button on SYNAggregateChannelItemCell");
     
     self.timeLabel.font = [UIFont lightCustomFontOfSize:self.timeLabel.font.pointSize];
-    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
+    self.channelButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.channelButton.titleLabel.font.pointSize];
     self.followersLabel.font = [UIFont lightCustomFontOfSize:self.followersLabel.font.pointSize];
     self.videosLabel.font = [UIFont lightCustomFontOfSize:self.videosLabel.font.pointSize];
     
@@ -36,6 +37,10 @@
     self.bg.layer.borderWidth = 1.0f;
 }
 
+- (IBAction)channelControlPressed:(id)sender {
+    [self.delegate channelControlPressed: sender];
+
+}
 
 - (IBAction) followControlPressed: (id) sender
 {
@@ -63,7 +68,7 @@
         return;
     }
     
-    self.titleLabel.text = _channel.title;
+    [self.channelButton setTitle:_channel.title forState:UIControlStateNormal];
     self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
     self.videosLabel.text = [NSString stringWithFormat: @"%i videos", _channel.videoInstances.count];
     
@@ -86,7 +91,8 @@
     {
         self.timeLabel.text = [NSString stringWithFormat: @"Uploaded %i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
     }
-    
+    channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:channel.uniqueId];
+
     self.followControl.selected = channel.subscribedByUserValue;
    
     [self.stripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];

@@ -21,4 +21,5 @@
 //need to change
 @optional
 - (void) videoButtonPressed: (id) cell;
+- (void) channelControlPressed: (UICollectionViewCell *) cell;
 @end

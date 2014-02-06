@@ -301,10 +301,14 @@ typedef void(^FeedDataErrorBlock)(void);
 }
 
 
-- (IBAction) channelButtonTapped: (UIButton *) channelButton {
-	FeedItem *feedItem = [self feedItemFromView: channelButton];
+
+
+- (void)channelControlPressed:(UICollectionViewCell*)sender {
 	
-	[self viewChannelDetails:[self.model channelForFeedItem:feedItem]];
+    FeedItem *feedItem = [self feedItemFromView: sender];
+	Channel *channel = [self.model channelForFeedItem:feedItem];
+	[self viewChannelDetails:channel];
+    
 }
 
 - (void)displayVideoViewerFromCell:(UICollectionViewCell *)cell

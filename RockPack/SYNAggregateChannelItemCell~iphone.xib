@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -30,13 +30,6 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4V5-I8-f6N" userLabel="Title">
-                        <rect key="frame" x="20" y="29" width="208" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                        <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIz-wt-2Rs" userLabel="Line">
@@ -77,6 +70,18 @@
                             <action selector="followControlPressed:" destination="EVW-6b-LjA" eventType="touchUpInside" id="BUc-pa-aHU"/>
                         </connections>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1I-ZA-mIl" userLabel="Button - Title Button">
+                        <rect key="frame" x="20" y="29" width="208" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.59607843140000005" green="0.59607843140000005" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="channelControlPressed:" destination="EVW-6b-LjA" eventType="touchUpInside" id="NUA-Cd-HQk"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -88,12 +93,12 @@
             <size key="customSize" width="307" height="175"/>
             <connections>
                 <outlet property="bg" destination="Wcj-pv-jtq" id="Nns-Y0-KmP"/>
+                <outlet property="channelButton" destination="k1I-ZA-mIl" id="8Ci-AV-SAN"/>
                 <outlet property="followControl" destination="N1E-d7-TbR" id="rA5-ST-t1k"/>
                 <outlet property="followersLabel" destination="lz5-MW-Poc" id="BQC-a7-snx"/>
                 <outlet property="shareControl" destination="1YU-ZR-b5A" id="fEn-cg-h3L"/>
                 <outlet property="stripView" destination="CF3-lv-t0P" id="5wm-2H-mWZ"/>
                 <outlet property="timeLabel" destination="wE3-8D-gFQ" id="Tth-v4-YbD"/>
-                <outlet property="titleLabel" destination="4V5-I8-f6N" id="dHR-fE-0PP"/>
                 <outlet property="videosLabel" destination="yPw-rY-sDs" id="HLU-mN-9y5"/>
             </connections>
         </collectionViewCell>
