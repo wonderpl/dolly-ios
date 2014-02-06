@@ -1911,7 +1911,7 @@
     }
     
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
-    return (newLength > 120) ? NO : YES;
+    return (newLength > 100) ? NO : YES;
 }
 
 -(void)dismissKeyboard
@@ -1925,7 +1925,6 @@
 
 -(void) setAutoplayId:(NSString *)autoplayId
 {
-    
     _autoplayId = autoplayId;
     
     [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:self.channel.uniqueId instanceId:autoplayId completionHandler:^(id dictionary) {

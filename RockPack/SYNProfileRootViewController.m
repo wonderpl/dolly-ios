@@ -591,7 +591,7 @@
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
-    self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
+    self.aboutMeTextView.textContainer.maximumNumberOfLines = 3;
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:13.0];
@@ -2789,7 +2789,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     }
     
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
-    return (newLength > 50) ? NO : YES;
+    return (newLength > 100) ? NO : YES;
 }
 
 -(void)dismissKeyboard
