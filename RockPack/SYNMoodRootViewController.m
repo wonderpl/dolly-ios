@@ -188,11 +188,14 @@
                                                   }
 												  
 												  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
+                                                  
+                                                  int rand = floorf(arc4random()%sortedVideos.count);
+
 												  if (sortedVideos.count > 0) {
                                                       
                                                       
                                                       if (IS_IPHONE) {
-                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
+                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand];
                                                           
                                                           [strongSelf presentViewController:viewController animated:YES completion:nil];
                                                           
@@ -387,9 +390,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                       if (sortedVideos.count > 0) {
                                                           
                                                           
+                                                          int rand = floorf(arc4random()%sortedVideos.count);
                                                           
-                                                          
-                                                          weakSelf.videoArray = @[[sortedVideos objectAtIndex:0]];
+                                                          weakSelf.videoArray = @[[sortedVideos objectAtIndex:rand]];
                                                           
                                                           [weakSelf.videoCollectionView reloadData];
                                                           
@@ -531,9 +534,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             self.divider.frame = CGRectMake(255, 64, 1, 960);
         }
         [self setDividerGradient];
-   
     }
-    
 }
 
 - (void) setDividerGradient {
