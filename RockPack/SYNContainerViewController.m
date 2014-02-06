@@ -16,6 +16,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNTrackableFrameView.h"
 #import "SYNOnBoardingViewController.h"
+#import "UINavigationBar+Appearance.h"
 
 @import AudioToolbox;
 @import QuartzCore;
@@ -92,6 +93,8 @@ else
     
     
     
+    
+    
     // == Profile Page == //
 
     SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
@@ -112,12 +115,10 @@ else
     activityViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navActivityViewController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     
-    
     // == Discovery (Search) Page == //
     SYNDiscoverViewController *discoveryViewController = [[SYNDiscoverViewController alloc] initWithViewId: kDiscoverViewId];
     discoveryViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:discoveryViewController];
-    
     
     // == Feed Page == //
     
@@ -132,6 +133,11 @@ else
                              navProfileViewController, navActivityViewController];
     
     
+    if (IS_IPAD) {
+        for (UINavigationController *tmpNav in self.viewControllers) {
+            [tmpNav.navigationBar setBackgroundTransparent:YES];
+        }
+    }
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
