@@ -67,10 +67,10 @@
                                       options:SDWebImageRetryFailed];
     
     [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
-
-    self.userNameLabelButton.titleLabel.lineBreakMode =  NSLineBreakByTruncatingTail;
+    self.userNameLabelButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.userNameLabelButton.titleLabel.numberOfLines = 2;
     
+    [self setButtonTitleAndResizeText:channelOwner.displayName forLabel:self.userNameLabelButton.titleLabel];
 
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     
@@ -81,6 +81,37 @@
     {
         [self.followButton setTitle:@"Unfollow" forState:UIControlStateSelected];
     }
+}
+
+// Could not set word wrapping for a UILabel with multiple lines and set linebreak as NSLineBreakByTruncatingTail so this method calculates a good font size according to the optimal font size and works it way down
+
+-(void) setButtonTitleAndResizeText:(NSString*) text forLabel:(UILabel*) label
+{
+    
+    UIFont *font = [UIFont lightCustomFontOfSize:label.font.pointSize];
+    
+    //i starts at the ideal font size and shrinks down
+    int i;
+    for(i = label.font.pointSize; i > 10; i=i-2)
+    {
+        // Set the new font size.
+        font = [font fontWithSize:i];
+        CGSize constraintSize = CGSizeMake(self.userNameLabelButton.frame.size.width
+                                           , MAXFLOAT);
+        
+        CGRect textRect = [text boundingRectWithSize:constraintSize
+                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                               attributes:@{NSFontAttributeName:font}
+                                                  context:nil];
+        
+        CGSize labelSize = textRect.size;
+        //need to set the height of the label
+        if(labelSize.height <= 33.0f)
+            break;
+    }
+    label.font = font;
+    [label setText:text];
+
 }
 
 - (UIView *)separatorView {
@@ -147,7 +178,6 @@
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
         [self.delegate followControlPressed:self.alertViewButton];
-        
     }
 }
 
