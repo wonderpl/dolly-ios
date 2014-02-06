@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNMoodRootViewController">
             <connections>
                 <outlet property="backgroundImageView" destination="GCP-yk-7gu" id="EdX-lq-e5J"/>
+                <outlet property="divider" destination="wAD-PS-jWs" id="Qhh-6u-FfC"/>
                 <outlet property="iWantToLabel" destination="jfI-8D-ccz" id="zzM-vU-LaY"/>
                 <outlet property="moodBackground" destination="GCP-yk-7gu" id="NN2-pS-Ln6"/>
                 <outlet property="moodCollectionView" destination="ICd-hC-jBC" id="FPB-0X-rN5"/>
@@ -93,6 +94,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                </view>
+                <view contentMode="scaleToFill" id="wAD-PS-jWs">
+                    <rect key="frame" x="335" y="0.0" width="1" height="768"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

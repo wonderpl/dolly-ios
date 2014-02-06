@@ -46,6 +46,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *moodBackground;
 @property (nonatomic, assign) CGPoint scrollingPoint, endPoint;
 @property (nonatomic, strong) NSTimer *scrollingTimer;
+@property (strong, nonatomic) IBOutlet UIView *divider;
 
 @end
 
@@ -63,8 +64,8 @@
     [self.moodCollectionView registerClass:[SYNMoodCell class]
                 forCellWithReuseIdentifier:NSStringFromClass([SYNMoodCell class])];
     [self.videoCollectionView registerNib:[SYNSearchResultsVideoCell nib]
-                forCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]];
-
+               forCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]];
+    
     
     self.iWantToLabel.font = [UIFont regularCustomFontOfSize: self.iWantToLabel.font.pointSize];
     self.iWantToLabel.textColor = [UIColor dollyMoodColor];
@@ -74,7 +75,7 @@
     [self loadMoods];
     
     [self getUpdatedMoods];
-
+    
     
     
     self.watchButton.layer.cornerRadius = 15.5f;
@@ -103,11 +104,11 @@
                                         atScrollPosition:UICollectionViewScrollPositionCenteredVertically
                                                 animated:YES];
     }
-
+    
     self.videoArray = @[];
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     
-
+    
 }
 
 -(void) viewDidDisAppear:(BOOL)animated
@@ -148,7 +149,7 @@
     }
     
     [self.moodCollectionView reloadData];
-
+    
 }
 
 -(void) getUpdatedMoods {
@@ -161,14 +162,14 @@
                                                withExistingMoods:self.moods]) {
             [self loadMoods];
             [self scrollSlowly];
-
+            
         }
         
         
         
     } errorHandler:^(id error) {
         
-
+        
         
         
     }];
@@ -184,7 +185,7 @@
     
     // Hides the 2 lines in the default picker
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
-
+    
 }
 
 #pragma mark - Control Callbacks
@@ -227,10 +228,10 @@
 												  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
 												  if (sortedVideos.count > 0) {
                                                       
-
+                                                      
                                                       if (IS_IPHONE) {
                                                           UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:0];
-
+                                                          
                                                           [strongSelf presentViewController:viewController animated:YES completion:nil];
                                                           
                                                       } else {
@@ -245,12 +246,12 @@
                                                           viewController.transitioningDelegate = animator;
                                                           
                                                           [self presentViewController:viewController animated:YES completion:nil];
-
+                                                          
                                                       }
                                                   }
                                                   
                                                   strongSelf.watchButton.userInteractionEnabled = YES;
-
+                                                  
                                               } errorHandler:^(id error) {
                                                   
                                               }];
@@ -296,17 +297,17 @@
             }
         }
         moodCell.titleLabel.text = mood.name;
-
+        
         
         return moodCell;
-
+        
     }
-
+    
     if (cv == self.videoCollectionView) {
         
         
         SYNSearchResultsVideoCell *videoCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
-                                                                                         forIndexPath:indexPath];
+                                                                             forIndexPath:indexPath];
         
         
         videoCell.videoInstance = (VideoInstance*)(self.videoArray[indexPath.item]);
@@ -314,12 +315,12 @@
         
         
         return videoCell;
-
+        
         
     }
-
+    
     return nil;
-
+    
 }
 
 //- (CGSize)collectionView:(UICollectionView *)collectionView
@@ -330,7 +331,7 @@
 //    if (indexPath.row == 0 || (indexPath.row % self.moods.count == self.moods.count-1)) {
 //        return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 35.0f :35.0f));
 //    }
-//    
+//
 //    return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 40.0f :40.0f));
 //}
 
@@ -355,9 +356,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 		viewController.transitioningDelegate = animator;
 		
 		[self presentViewController:viewController animated:YES completion:nil];
-    
+        
     }
-
+    
 }
 
 
@@ -398,8 +399,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     if (self.scrollingTimer) {
         [self.scrollingTimer invalidate];
     }
-
+    
 }
+
 
 - (void)showWatchButton {
     self.watchButton.hidden = NO;
@@ -449,20 +451,20 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                           
                                                           
                                                           
+                                                          
+                                                          weakSelf.videoArray = @[[sortedVideos objectAtIndex:0]];
+                                                          
+                                                          [weakSelf.videoCollectionView reloadData];
+                                                          
+                                                          
+                                                          if (weakSelf.videoArray.count>0) {
+                                                              weakSelf.videoCollectionView.alpha = 0.0f;
+                                                              weakSelf.videoCollectionView.hidden = NO;
                                                               
-                                                              weakSelf.videoArray = @[[sortedVideos objectAtIndex:0]];
-                                                              
-                                                              [weakSelf.videoCollectionView reloadData];
-                                                              
-                                                              
-                                                              if (weakSelf.videoArray.count>0) {
-                                                                  weakSelf.videoCollectionView.alpha = 0.0f;
-                                                                  weakSelf.videoCollectionView.hidden = NO;
-
-                                                                  [UIView animateWithDuration:0.2 animations:^{
-                                                                      weakSelf.videoCollectionView.alpha = 1.0f;
-                                                                  }];
-                                                              }
+                                                              [UIView animateWithDuration:0.2 animations:^{
+                                                                  weakSelf.videoCollectionView.alpha = 1.0f;
+                                                              }];
+                                                          }
                                                           
                                                       }
                                                       
@@ -483,16 +485,17 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     self.videoCollectionView.alpha = 0.0;
     self.moodCollectionView.alpha = 0.0;
-//    self.watchButton.alpha = 0.0;
-//    self.moodBackground.alpha = 0.0;
-//    self.iWantToLabel.alpha = 0.0;
+    self.divider.alpha = 0.0;
+    //    self.watchButton.alpha = 0.0;
+    //    self.moodBackground.alpha = 0.0;
+    //    self.iWantToLabel.alpha = 0.0;
     
     [self.moodCollectionView reloadData];
     [self.videoCollectionView reloadData];
 }
 
 - (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-
+    
 }
 
 -(void)setMoods:(NSArray *)moods {
@@ -503,7 +506,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         
         // center the moods list to the middle
         [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0] atScrollPosition: UICollectionViewScrollPositionCenteredVertically animated: NO];
-//        [self showWatchButton];
+        //        [self showWatchButton];
     }
 }
 
@@ -542,10 +545,12 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         self.videoCollectionView.alpha = 0.0;
         self.moodCollectionView.alpha = 0.0;
         self.watchButton.alpha = 0.0f;
+        self.divider.alpha = 0.0;
+        
     } completion:^(BOOL finished) {
         
     }];
-
+    
     
 }
 
@@ -553,17 +558,19 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 {
     
     [self updateLayoutForOrientation:fromInterfaceOrientation];
-   
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.videoCollectionView.alpha = 1.0;
         self.moodCollectionView.alpha = 1.0;
         self.watchButton.alpha = 1.0;
         self.moodBackground.alpha = 1.0;
         self.iWantToLabel.alpha = 1.0;
+        self.divider.alpha = 1.0;
+        
     } completion:^(BOOL finished) {
- 
+        
     }];
-
+    
 }
 
 - (void) updateLayoutForOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
@@ -579,25 +586,28 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             self.moodCollectionView.frame = CGRectMake(118, 312, 215, self.moodCollectionView.frame.size.height);
             self.iWantToLabel.frame = CGRectMake(-15, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
             self.moodBackground.frame = CGRectMake(1, 270, 334, self.moodBackground.frame.size.height);
-
+            
             self.titleLabel.font = [UIFont systemFontOfSize:23];
+            self.divider.frame = CGRectMake(335, 0, 1, 768);
+            NSLog(@"landscape %@", NSStringFromCGRect(self.divider.frame));
         } else {
-
+            
             self.videoCollectionView.frame = CGRectMake(245, 248, 436, 459);
             self.watchButton.frame = CGRectMake(80, 800, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
             self.moodCollectionView.frame = CGRectMake(120, 372, 131, self.moodCollectionView.frame.size.height);
             self.iWantToLabel.frame = CGRectMake(-25, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
             self.moodBackground.frame = CGRectMake(1, 330, 254, self.moodBackground.frame.size.height);
             self.titleLabel.font = [UIFont systemFontOfSize:19];
-
-
+            
+            self.divider.frame = CGRectMake(255, 0, 1, 1024);
+            NSLog(@"portrait %@", NSStringFromCGRect(self.divider.frame));
         }
         
     }
     
 }
 
-
+#pragma mark - Scrolling animation logic
 - (void)scrollSlowly {
     if (self.moods.count>1) {
         [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:200 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
