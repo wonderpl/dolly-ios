@@ -106,7 +106,7 @@
         
         CGSize labelSize = textRect.size;
         //need to set the height of the label
-        if(labelSize.height <= 28.0f)
+        if(labelSize.height <= 33.0f)
             break;
     }
     label.font = font;
