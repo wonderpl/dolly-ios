@@ -11,7 +11,7 @@
 #import "SYNVideoCellDelegate.h"
 #import "SYNVideoPlayerAnimator.h"
 
-@interface SYNMoodRootViewController : SYNAbstractViewController <UIPickerViewDelegate,SYNSocialActionsDelegate, SYNVideoCellDelegate,SYNVideoPlayerAnimatorDelegate>
+@interface SYNMoodRootViewController : SYNAbstractViewController <SYNSocialActionsDelegate, SYNVideoCellDelegate,SYNVideoPlayerAnimatorDelegate>
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 

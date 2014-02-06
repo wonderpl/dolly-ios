@@ -26,15 +26,13 @@
 #define WATCH_BUTTON_ANIMATION_TIME 0.4
 
 @interface SYNMoodRootViewController ()
-@property (strong, nonatomic) IBOutlet UIPickerView *defaultPicker;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
-
 @property (strong, nonatomic) IBOutlet UIView *viewContainer;
-@property (nonatomic, strong) NSArray *moods;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topWatchConstraint;
 @property (nonatomic, weak) IBOutlet UICollectionView *moodCollectionView;
 @property (nonatomic, weak) IBOutlet UILabel *iWantToLabel;
 @property (strong, nonatomic) IBOutlet UIButton *watchButton;
+@property (nonatomic, strong) NSArray *moods;
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UICollectionView *videoCollectionView;
@@ -84,17 +82,10 @@
     self.watchButton.layer.borderWidth = 1.5f;
     self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
-    if (IS_IPHONE) {
-        self.defaultPicker.transform = CGAffineTransformScale(self.defaultPicker.transform, 1.3f, 1.40f);
-    } else {
-        self.defaultPicker.transform = CGAffineTransformScale(self.defaultPicker.transform, 1.0f, 1.10f);
-    }
     
     if (!IS_IPHONE_5) {
-        //TODO: need to move views for 3.5
         self.topTitleConstraint.constant -= 24.0f;
         self.topWatchConstraint.constant += 34.0f;
-        
     }
     
     NSIndexPath *centerIndexPath = [NSIndexPath indexPathForItem:10 inSection:0];
@@ -121,19 +112,6 @@
 {
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
 }
-
-
-
--(void) spinAnimationWithRow : (NSNumber*) row {
-    [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:YES];
-}
-
--(void) spinAnimation : (NSNumber*) row {
-    [UIView animateWithDuration:2.0f animations:^{
-        [self.defaultPicker selectRow:[row integerValue] inComponent:0 animated:NO];
-    }];
-}
-
 
 #pragma mark - Getting Mood Objects
 
@@ -164,34 +142,18 @@
             [self scrollSlowly];
             
         }
-        
-        
-        
     } errorHandler:^(id error) {
-        
-        
-        
-        
     }];
 }
 
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    if([[SYNDeviceManager sharedInstance] isPortrait] && IS_IPAD) {
-        [self positionElementsForInterfaceOrientation:UIDeviceOrientationPortrait];
-    }
-    
-    // Hides the 2 lines in the default picker
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
-    
 }
 
 #pragma mark - Control Callbacks
 - (IBAction)watchButtonTapped:(id)sender {
-    
-    
     
     self.watchButton.userInteractionEnabled = NO;
     
@@ -257,7 +219,6 @@
                                               }];
 }
 
-
 #pragma mark - UICollectionView Data Source Stubs
 
 // To be implemented by subclasses
@@ -268,8 +229,6 @@
         return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
         
     }
-    
-    
     return self.videoArray.count;
 }
 
@@ -304,36 +263,15 @@
     }
     
     if (cv == self.videoCollectionView) {
-        
-        
         SYNSearchResultsVideoCell *videoCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
                                                                              forIndexPath:indexPath];
-        
-        
         videoCell.videoInstance = (VideoInstance*)(self.videoArray[indexPath.item]);
         videoCell.delegate = self;
-        
-        
         return videoCell;
         
-        
     }
-    
     return nil;
-    
 }
-
-//- (CGSize)collectionView:(UICollectionView *)collectionView
-//                  layout:(UICollectionViewLayout*)collectionViewLayout
-//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // == first of last item
-//    if (indexPath.row == 0 || (indexPath.row % self.moods.count == self.moods.count-1)) {
-//        return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 35.0f :35.0f));
-//    }
-//
-//    return CGSizeMake(self.moodCollectionView.frame.size.width, (IS_IPAD ? 40.0f :40.0f));
-//}
 
 
 - (void) collectionView: (UICollectionView *) cv
@@ -360,7 +298,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     }
     
 }
-
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
 	return (SYNSearchResultsVideoCell *)[self.videoCollectionView cellForItemAtIndexPath:indexPath];
@@ -486,17 +423,11 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     self.videoCollectionView.alpha = 0.0;
     self.moodCollectionView.alpha = 0.0;
     self.divider.alpha = 0.0;
-    //    self.watchButton.alpha = 0.0;
-    //    self.moodBackground.alpha = 0.0;
-    //    self.iWantToLabel.alpha = 0.0;
     
     [self.moodCollectionView reloadData];
     [self.videoCollectionView reloadData];
 }
 
-- (void) positionElementsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    
-}
 
 -(void)setMoods:(NSArray *)moods {
     _moods = moods;
@@ -506,7 +437,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         
         // center the moods list to the middle
         [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0] atScrollPosition: UICollectionViewScrollPositionCenteredVertically animated: NO];
-        //        [self showWatchButton];
     }
 }
 
@@ -589,7 +519,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             
             self.titleLabel.font = [UIFont systemFontOfSize:23];
             self.divider.frame = CGRectMake(335, 0, 1, 768);
-            NSLog(@"landscape %@", NSStringFromCGRect(self.divider.frame));
         } else {
             
             self.videoCollectionView.frame = CGRectMake(245, 248, 436, 459);
@@ -600,7 +529,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             self.titleLabel.font = [UIFont systemFontOfSize:19];
             
             self.divider.frame = CGRectMake(255, 0, 1, 1024);
-            NSLog(@"portrait %@", NSStringFromCGRect(self.divider.frame));
         }
         
     }
@@ -614,9 +542,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     } else  {
         return;
     }
-    
-    // 230 == height of the cell
-    
     
     self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+(self.moods.count * 40.0f)+floorf(arc4random()%10)*40.0f);
     
@@ -636,6 +561,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+4);
 }
 
+// TODO: profile/channel delegates
 - (void) profileButtonPressedForCell:(UICollectionViewCell *)cell {
     
 }
