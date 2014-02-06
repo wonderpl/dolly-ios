@@ -263,7 +263,8 @@ typedef enum {
             UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
             [parentViewController presentViewController:viewController animated:YES completion:nil];
         }
-            
+        break;
+  
         case OptionButtonTagEdit:
         {
             [self removeFromScreen];
