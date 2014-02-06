@@ -92,7 +92,7 @@
     
     //i starts at the ideal font size and shrinks down
     int i;
-    for(i = label.font.pointSize; i > 10; i=i-2)
+    for(i = label.font.pointSize; i > 10; i=i-1)
     {
         // Set the new font size.
         font = [font fontWithSize:i];
@@ -106,7 +106,7 @@
         
         CGSize labelSize = textRect.size;
         //need to set the height of the label
-        if(labelSize.height <= 33.0f)
+        if(labelSize.height <= 28.0f)
             break;
     }
     label.font = font;
