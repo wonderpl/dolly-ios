@@ -97,20 +97,6 @@
     }
     
     self.videoArray = @[];
-    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
-    
-    
-}
-
--(void) viewDidDisAppear:(BOOL)animated
-{
-    
-    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
-}
-
--(void) viewWillAppear:(BOOL)animated
-{
-    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
 }
 
 #pragma mark - Getting Mood Objects
@@ -144,12 +130,6 @@
         }
     } errorHandler:^(id error) {
     }];
-}
-
-
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
 }
 
 #pragma mark - Control Callbacks
@@ -340,6 +320,38 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
 }
 
+- (void)viewWillLayoutSubviews
+{
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+            
+            
+            self.videoCollectionView.frame = CGRectMake(413, 136, 436, 459);
+            self.watchButton.frame = CGRectMake(109, 662, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
+            
+            self.moodCollectionView.frame = CGRectMake(118, 312, 215, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-15, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+            self.moodBackground.frame = CGRectMake(1, 270, 334, self.moodBackground.frame.size.height);
+            
+            self.titleLabel.font = [UIFont systemFontOfSize:23];
+            self.divider.frame = CGRectMake(335, 0, 1, 768);
+        } else {
+            
+            self.videoCollectionView.frame = CGRectMake(245, 248, 436, 459);
+            self.watchButton.frame = CGRectMake(80, 800, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
+            self.moodCollectionView.frame = CGRectMake(120, 372, 131, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-25, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+            self.moodBackground.frame = CGRectMake(1, 330, 254, self.moodBackground.frame.size.height);
+            self.titleLabel.font = [UIFont systemFontOfSize:19];
+            
+            self.divider.frame = CGRectMake(255, 64, 1, 960);
+        }
+        [self setDividerGradient];
+    }
+
+    
+}
+
 
 - (void)showWatchButton {
     
@@ -422,10 +434,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     
     
-    self.videoCollectionView.alpha = 0.0;
-    self.moodCollectionView.alpha = 0.0;
-    self.divider.alpha = 0.0;
-    
     [self.moodCollectionView reloadData];
     [self.videoCollectionView reloadData];
 }
@@ -467,73 +475,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 	}
 	
 	return sortedVideoInstances;
-}
-
-#pragma mark - Orientation change
-
--(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [UIView animateWithDuration:0.15 animations:^{
-        self.videoCollectionView.alpha = 0.0;
-        self.moodCollectionView.alpha = 0.0;
-        self.watchButton.alpha = 0.0f;
-        self.divider.alpha = 0.0;
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    
-}
-
-- (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
-{
-    
-    [self updateLayoutForOrientation:fromInterfaceOrientation];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.videoCollectionView.alpha = 1.0;
-        self.moodCollectionView.alpha = 1.0;
-        self.watchButton.alpha = 1.0;
-        self.moodBackground.alpha = 1.0;
-        self.iWantToLabel.alpha = 1.0;
-        self.divider.alpha = 1.0;
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-}
-
-- (void) updateLayoutForOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
-{
-    
-    if (IS_IPAD) {
-        if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
-            
-            
-            self.videoCollectionView.frame = CGRectMake(413, 136, 436, 459);
-            self.watchButton.frame = CGRectMake(109, 662, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
-            
-            self.moodCollectionView.frame = CGRectMake(118, 312, 215, self.moodCollectionView.frame.size.height);
-            self.iWantToLabel.frame = CGRectMake(-15, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
-            self.moodBackground.frame = CGRectMake(1, 270, 334, self.moodBackground.frame.size.height);
-            
-            self.titleLabel.font = [UIFont systemFontOfSize:23];
-            self.divider.frame = CGRectMake(335, 0, 1, 768);
-        } else {
-            
-            self.videoCollectionView.frame = CGRectMake(245, 248, 436, 459);
-            self.watchButton.frame = CGRectMake(80, 800, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
-            self.moodCollectionView.frame = CGRectMake(120, 372, 131, self.moodCollectionView.frame.size.height);
-            self.iWantToLabel.frame = CGRectMake(-25, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
-            self.moodBackground.frame = CGRectMake(1, 330, 254, self.moodBackground.frame.size.height);
-            self.titleLabel.font = [UIFont systemFontOfSize:19];
-            
-            self.divider.frame = CGRectMake(255, 64, 1, 960);
-        }
-        [self setDividerGradient];
-    }
 }
 
 - (void) setDividerGradient {
