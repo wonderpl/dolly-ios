@@ -345,8 +345,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 - (void)showWatchButton {
     
-    NSLog(@"off set%f", self.moodCollectionView.contentOffset.y);
-
     self.watchButton.hidden = NO;
     self.watchButton.alpha = 0.0f;
     
@@ -551,18 +549,18 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 #pragma mark - Scrolling animation logic
 - (void)scrollSlowly {
     if (self.moods.count>1) {
-        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
+        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:LARGE_AMOUNT_OF_ROWS/4 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
     } else  {
         return;
     }
 
     // 30 is the middle of the cell
-    //this ensures the animation ends with the ell entered 
-    self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+(self.moods.count * 30)+floorf(arc4random()%10)*30);
+    //this ensures the animation ends with the ell entered
+    self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+(self.moods.count * 30)+floorf(arc4random()%8)*30);
     
     //Start off screen
     self.scrollingPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y);
-    self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
+    self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
 }
 
 - (void)scrollSlowlyToPoint {
@@ -572,10 +570,10 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         [self.scrollingTimer invalidate];
         [self showWatchButton];
 
+        
         [self.moodCollectionView.collectionViewLayout invalidateLayout];
     }
-    
-    self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+4);
+    self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+2.5);
 }
 
 // TODO: profile/channel delegates
