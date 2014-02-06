@@ -168,6 +168,7 @@
         
     } errorHandler:^(id error) {
         
+
         
         
     }];
@@ -285,7 +286,17 @@
         
         Mood* mood = self.moods [indexPath.item % self.moods.count];
         
+        
+        if (IS_IPAD) {
+            
+            if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+                moodCell.titleLabel.font = [UIFont regularCustomFontOfSize:(20.0f)];
+            } else {
+                moodCell.titleLabel.font = [UIFont regularCustomFontOfSize:(18.0f)];
+            }
+        }
         moodCell.titleLabel.text = mood.name;
+
         
         return moodCell;
 
@@ -366,6 +377,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
                   willDecelerate:(BOOL)decelerate
 {
+    
     if (!decelerate) {
         [self showWatchButton];
     }
@@ -391,7 +403,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 - (void)showWatchButton {
     self.watchButton.hidden = NO;
-
     self.watchButton.alpha = 0.0f;
     
     [UIView animateWithDuration:WATCH_BUTTON_ANIMATION_TIME animations:^{
@@ -439,17 +450,17 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                           
                                                           
                                                               
-                                                              self.videoArray = @[[sortedVideos objectAtIndex:0]];
+                                                              weakSelf.videoArray = @[[sortedVideos objectAtIndex:0]];
                                                               
-                                                              [self.videoCollectionView reloadData];
+                                                              [weakSelf.videoCollectionView reloadData];
                                                               
                                                               
-                                                              if (self.videoArray.count==1) {
-                                                                  self.videoCollectionView.hidden = NO;
-                                                                  self.videoCollectionView.alpha = 0.0f;
-                                                                  
-                                                                  [UIView animateWithDuration:0.5 animations:^{
-                                                                      self.videoCollectionView.alpha = 1.0f;
+                                                              if (weakSelf.videoArray.count>0) {
+                                                                  weakSelf.videoCollectionView.alpha = 0.0f;
+                                                                  weakSelf.videoCollectionView.hidden = NO;
+
+                                                                  [UIView animateWithDuration:0.2 animations:^{
+                                                                      weakSelf.videoCollectionView.alpha = 1.0f;
                                                                   }];
                                                               }
                                                           
@@ -559,23 +570,27 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 {
     
     if (IS_IPAD) {
-        // land scape
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
-            self.videoCollectionView.frame = CGRectMake(403, 136, 436, 459);
+            
+            
+            self.videoCollectionView.frame = CGRectMake(413, 136, 436, 459);
             self.watchButton.frame = CGRectMake(109, 662, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
             
-            self.moodCollectionView.frame = CGRectMake(118, 312, self.moodCollectionView.frame.size.width, self.moodCollectionView.frame.size.height);
-            self.iWantToLabel.frame = CGRectMake(-25, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
-//            self.titleLabel.frame = CGRectMake(17, 176, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height);
-            self.moodBackground.frame = CGRectMake(1, 270, self.moodBackground.frame.size.width, self.moodBackground.frame.size.height);
-            
+            self.moodCollectionView.frame = CGRectMake(118, 312, 215, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-15, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+            self.moodBackground.frame = CGRectMake(1, 270, 334, self.moodBackground.frame.size.height);
+
+            self.titleLabel.font = [UIFont systemFontOfSize:23];
         } else {
-            self.videoCollectionView.frame = CGRectMake(246, 248, 436, 459);
+
+            self.videoCollectionView.frame = CGRectMake(245, 248, 436, 459);
             self.watchButton.frame = CGRectMake(80, 800, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
-            self.moodCollectionView.frame = CGRectMake(118, 372, self.moodCollectionView.frame.size.width, self.moodCollectionView.frame.size.height);
+            self.moodCollectionView.frame = CGRectMake(120, 372, 131, self.moodCollectionView.frame.size.height);
             self.iWantToLabel.frame = CGRectMake(-25, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
-            self.moodBackground.frame = CGRectMake(1, 330, self.moodBackground.frame.size.width, self.moodBackground.frame.size.height);
-            
+            self.moodBackground.frame = CGRectMake(1, 330, 254, self.moodBackground.frame.size.height);
+            self.titleLabel.font = [UIFont systemFontOfSize:19];
+
+
         }
         
     }
@@ -602,8 +617,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 - (void)scrollSlowlyToPoint {
     self.moodCollectionView.bounds = CGRectMake(self.scrollingPoint.x, self.scrollingPoint.y, self.moodCollectionView.bounds.size.width, self.moodCollectionView.bounds.size.height);
+    self.videoCollectionView.hidden = YES;
     if (self.scrollingPoint.y> self.endPoint.y) {
-        
         [self.scrollingTimer invalidate];
         [self showWatchButton];
     }
