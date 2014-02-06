@@ -761,7 +761,7 @@
     {
         self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
-        
+        self.uploadAvatar.hidden = NO;
         self.moreButton.hidden = NO;
         self.followingSearchBar.hidden = NO;
         self.userNameLabel.hidden = YES;
@@ -772,6 +772,7 @@
         self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
         self.moreButton.hidden = YES;
+        self.uploadAvatar.hidden = YES;
         if (IS_IPHONE) {
             CGRect tmpFrame = self.aboutMeTextView.frame;
             tmpFrame.origin.y += 14;
