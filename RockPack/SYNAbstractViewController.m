@@ -33,6 +33,7 @@
 #import "SYNActivityManager.h"
 #import "SYNRotatingPopoverController.h"
 #import "SYNPopoverAnimator.h"
+#import "SYNCarouselVideoPlayerViewController.h"
 @import QuartzCore;
 
 #define kScrollContentOff 40.0f
@@ -835,6 +836,30 @@
 		[self.navigationController pushViewController:channelVC animated:YES];
 
 	}
+}
+
+- (void) viewVideoInstance:(Channel*) channel withVideoId:videoId
+{
+    
+    
+    // The Overlay must be removed if there is ont alreaedy displaying 
+    [appDelegate.masterViewController removeVideoOverlayController];
+
+    __block UIViewController *viewController =
+	(SYNCarouselVideoPlayerViewController *) [self viewControllerOfClass:[SYNCarouselVideoPlayerViewController class]];
+    
+    
+    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:channel.uniqueId instanceId:videoId completionHandler:^(id response) {
+        
+        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+        
+        viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:@[vidToPlay] selectedIndex:0];
+        
+
+		[appDelegate.masterViewController.showingViewController.navigationController presentViewController:viewController animated:YES completion:nil];
+         
+    } errorHandler: nil];
+
 }
 
 - (UIViewController *)viewControllerOfClass:(Class)class {
