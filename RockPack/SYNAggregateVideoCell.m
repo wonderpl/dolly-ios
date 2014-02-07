@@ -59,10 +59,9 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     
     [super setDelegate: delegate];
     
-    
     // Addtional delegate
     [self.channelNameButton addTarget: self.delegate
-                                 action: @selector(channelButtonTapped:)
+                                 action: @selector(channelControlPressed:)
                        forControlEvents: UIControlEventTouchUpInside];
 }
 

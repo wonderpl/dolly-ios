@@ -300,14 +300,9 @@ typedef void(^FeedDataErrorBlock)(void);
 	[self viewProfileDetails:channel.channelOwner];
 }
 
-
-
-
 - (void)channelControlPressed:(UICollectionViewCell*)sender {
-	
     FeedItem *feedItem = [self feedItemFromView: sender];
-	Channel *channel = [self.model channelForFeedItem:feedItem];
-	[self viewChannelDetails:channel withAnimation:YES];
+	[self viewChannelDetails:[self.model channelForFeedItem:feedItem] withAnimation:YES];
     
 }
 
