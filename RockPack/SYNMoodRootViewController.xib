@@ -49,7 +49,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MoodBackground.png" id="GCP-yk-7gu">
-                            <rect key="frame" x="0.0" y="211" width="336" height="334"/>
+                            <rect key="frame" x="0.0" y="211" width="311" height="334"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </imageView>
                         <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="41P-4L-9Er">
@@ -96,7 +96,7 @@
                     </subviews>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="wAD-PS-jWs">
-                    <rect key="frame" x="335" y="0.0" width="1" height="768"/>
+                    <rect key="frame" x="311" y="0.0" width="1" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                 </view>

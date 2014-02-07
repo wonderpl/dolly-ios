@@ -332,16 +332,16 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     if (IS_IPAD) {
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
             
-            
+            self.moodCollectionView.frame = CGRectMake(117, 253, 215, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-5, 373, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+            self.moodBackground.frame = CGRectMake(0, 211, 336, self.moodBackground.frame.size.height);
             self.videoCollectionView.frame = CGRectMake(413, 136, 436, 459);
             self.chooseAnotherButton.frame = CGRectMake(94, 662, self.chooseAnotherButton.frame.size.width, self.chooseAnotherButton.frame.size.height);
             
-            self.moodCollectionView.frame = CGRectMake(118, 312, 215, self.moodCollectionView.frame.size.height);
-            self.iWantToLabel.frame = CGRectMake(-15, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
-            self.moodBackground.frame = CGRectMake(1, 270, 334, self.moodBackground.frame.size.height);
+            self.moodBackground.frame = CGRectMake(1, 270, 311, self.moodBackground.frame.size.height);
             
             self.titleLabel.font = [UIFont systemFontOfSize:23];
-            self.divider.frame = CGRectMake(335, 0, 1, 768);
+            self.divider.frame = CGRectMake(311, 0, 1, 768);
             
             
         } else {
