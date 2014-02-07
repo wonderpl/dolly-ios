@@ -300,7 +300,7 @@
             
             channel.autoplayId = notification.videoId;
             
-			[self viewChannelDetails: channel];
+			[self viewChannelDetails: channel withAnimation:YES];
             
             break;
         }
@@ -314,7 +314,7 @@
                 return;
             }
             
-			[self viewChannelDetails:channel];
+			[self viewChannelDetails:channel withAnimation:YES];
             break;
         }
             

@@ -233,7 +233,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 	NSIndexPath *indexPath = [self.videosCollectionView indexPathForCell:cell];
 	VideoInstance *videoInstance = self.videosArray[indexPath.row];
 	
-	[self viewChannelDetails:videoInstance.channel];
+	[self viewChannelDetails:videoInstance.channel withAnimation:YES];
 }
 
 #pragma mark - Button Delegates

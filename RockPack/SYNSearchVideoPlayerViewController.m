@@ -143,7 +143,7 @@
 		SYNMasterViewController *masterViewController = (SYNMasterViewController *)self.presentingViewController;
 		SYNAbstractViewController *abstractViewController = masterViewController.showingViewController;
 		[self dismissViewControllerAnimated:YES completion:^{
-			[abstractViewController viewChannelDetails:channel];
+			[abstractViewController viewChannelDetails:channel withAnimation:YES];
 		}];
 	}
 	if (collectionView == self.likesCollectionView) {

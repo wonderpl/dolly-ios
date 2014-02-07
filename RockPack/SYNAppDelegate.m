@@ -1322,7 +1322,7 @@
                 
                 if (channel)
                 {
-                    [currentViewController viewChannelDetails:channel];
+                    [currentViewController viewChannelDetails:channel withAnimation:YES];
                     success = TRUE;
                 }
                 break;

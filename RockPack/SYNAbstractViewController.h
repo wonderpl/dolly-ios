@@ -70,8 +70,8 @@
 - (void) removePopupMessage;
 
 - (void)viewProfileDetails:(ChannelOwner *)channelOwner;
-- (void)viewChannelDetails:(Channel *)channel;
-- (void) viewVideoInstance:(Channel*) channel withVideoId:videoId;
+- (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated;
+- (void)viewVideoInstance:(Channel*) channel withVideoId:videoId;
 
 - (void) shouldHideTabBar;
 

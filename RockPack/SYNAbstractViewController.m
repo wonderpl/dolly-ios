@@ -815,13 +815,11 @@
 	}
 }
 
-- (void)viewChannelDetails:(Channel *)channel
-{
-    
-	if (!channel)
+- (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated {
+    if (!channel)
 		return;
 	
-
+    
 	SYNChannelDetailsViewController *channelVC =
 	(SYNChannelDetailsViewController *) [self viewControllerOfClass:[SYNChannelDetailsViewController class]];
 	
@@ -830,28 +828,25 @@
 		channelVC.channel = channel;
         channelVC.mode = kChannelDetailsModeDisplay;
         
-		[self.navigationController popToViewController:channelVC animated:YES];
+		[self.navigationController popToViewController:channelVC animated:animated];
 	}
     else
     {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                    usingMode:kChannelDetailsModeDisplay];
-
-		[self.navigationController pushViewController:channelVC animated:YES];
-
+		[self.navigationController pushViewController:channelVC animated:animated];
 	}
 }
 
 - (void) viewVideoInstance:(Channel*) channel withVideoId:videoId
 {
-    
-    
-    // The Overlay must be removed if there is ont alreaedy displaying 
+    // The Overlay must be removed if there is ont alreaedy displaying
     [appDelegate.masterViewController removeVideoOverlayController];
 
     __block UIViewController *viewController =
 	(SYNCarouselVideoPlayerViewController *) [self viewControllerOfClass:[SYNCarouselVideoPlayerViewController class]];
     
+    [self viewChannelDetails:channel withAnimation:NO];
     
     [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:channel.uniqueId instanceId:videoId completionHandler:^(id response) {
         

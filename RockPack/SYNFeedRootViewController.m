@@ -307,7 +307,7 @@ typedef void(^FeedDataErrorBlock)(void);
 	
     FeedItem *feedItem = [self feedItemFromView: sender];
 	Channel *channel = [self.model channelForFeedItem:feedItem];
-	[self viewChannelDetails:channel];
+	[self viewChannelDetails:channel withAnimation:YES];
     
 }
 
