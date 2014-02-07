@@ -520,7 +520,6 @@
 -(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	
-	[self.navigationController.navigationBar setBackgroundTransparent:NO];
     
     if (self.creatingChannel) {
         [self updateCollectionLayout];
