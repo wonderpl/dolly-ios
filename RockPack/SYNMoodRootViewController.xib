@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNMoodRootViewController">
             <connections>
                 <outlet property="backgroundImageView" destination="GCP-yk-7gu" id="EdX-lq-e5J"/>
+                <outlet property="chooseAnotherButton" destination="41P-4L-9Er" id="4QW-Yu-JHW"/>
                 <outlet property="divider" destination="wAD-PS-jWs" id="Qhh-6u-FfC"/>
                 <outlet property="iWantToLabel" destination="jfI-8D-ccz" id="zzM-vU-LaY"/>
                 <outlet property="moodBackground" destination="GCP-yk-7gu" id="NN2-pS-Ln6"/>
@@ -15,7 +16,6 @@
                 <outlet property="videoCollectionView" destination="XNW-8z-Hgx" id="luT-2j-aUZ"/>
                 <outlet property="view" destination="1" id="nZ5-Pv-9HS"/>
                 <outlet property="viewContainer" destination="wU8-lX-P03" id="hKh-eS-dh3"/>
-                <outlet property="watchButton" destination="41P-4L-9Er" id="AKZ-ex-9iE"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -49,29 +49,29 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MoodBackground.png" id="GCP-yk-7gu">
-                            <rect key="frame" x="1" y="270" width="309" height="334"/>
+                            <rect key="frame" x="0.0" y="211" width="336" height="334"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </imageView>
                         <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="41P-4L-9Er">
-                            <rect key="frame" x="109" y="662" width="94" height="36"/>
+                            <rect key="frame" x="94" y="662" width="125" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="Watch">
+                            <state key="normal" title="Choose another">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="watchButtonTapped:" destination="-1" eventType="touchUpInside" id="dff-M8-n32"/>
+                                <action selector="watchButtonTapped:" destination="-1" eventType="touchUpInside" id="gwE-5M-zwa"/>
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jfI-8D-ccz">
-                            <rect key="frame" x="-25" y="432" width="135" height="40"/>
+                            <rect key="frame" x="-26" y="373" width="135" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <color key="textColor" red="0.53333333329999999" green="0.52549019610000003" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="ICd-hC-jBC">
-                            <rect key="frame" x="118" y="312" width="215" height="280"/>
+                            <rect key="frame" x="117" y="253" width="215" height="280"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1Cg-GM-zpv" customClass="SYNFadingFlowLayout">
@@ -86,7 +86,7 @@
                                 <outlet property="delegate" destination="-1" id="F0w-UD-Ioz"/>
                             </connections>
                         </collectionView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the perfect video for your mood" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g4j-4B-VWQ">
+                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find the perfect video for your mood" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g4j-4B-VWQ">
                             <rect key="frame" x="21" y="172" width="298" height="62"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>

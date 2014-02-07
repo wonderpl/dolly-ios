@@ -45,6 +45,7 @@
 @property (nonatomic, assign) CGPoint scrollingPoint, endPoint;
 @property (nonatomic, strong) NSTimer *scrollingTimer;
 @property (strong, nonatomic) IBOutlet UIView *divider;
+@property (strong, nonatomic) IBOutlet UIButton *chooseAnotherButton;
 
 @end
 
@@ -81,6 +82,12 @@
     
     self.watchButton.layer.borderWidth = 1.5f;
     self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
+    
+    self.chooseAnotherButton.layer.cornerRadius = 15.5f;
+    self.chooseAnotherButton.layer.masksToBounds = YES;
+    
+    self.chooseAnotherButton.layer.borderWidth = 1.5f;
+    self.chooseAnotherButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
     
     if (!IS_IPHONE_5) {
@@ -125,10 +132,8 @@
         if([appDelegate.mainRegistry registerMoodsFromDictionary:responce
                                                withExistingMoods:self.moods]) {
             [self loadMoods];
-            //May crash app is no moods
-            if (self.moods.count>0) {
-                [self scrollSlowly];
-            }
+            [self scrollSlowly];
+            
         }
     } errorHandler:^(id error) {
     }];
@@ -171,14 +176,11 @@
 												  
 												  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
                                                   
-
+                                                  
 												  if (sortedVideos.count > 0) {
-                                                      int rand = floorf(arc4random()%sortedVideos.count);
-
-                                                      //Just encase something went wrong with arc4random
-                                                      if (rand>sortedVideos.count) {
-                                                          rand = sortedVideos.count/2;
-                                                      }
+                                                      int rand = floorf(arc4random()+1%sortedVideos.count);
+                                                      
+                                                      
                                                       if (IS_IPHONE) {
                                                           UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand];
                                                           
@@ -317,7 +319,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     // override
     self.watchButton.hidden = YES;
     self.videoCollectionView.hidden = YES;
-    
+    self.chooseAnotherButton.hidden = YES;
     
     if (self.scrollingTimer) {
         [self.scrollingTimer invalidate];
@@ -332,7 +334,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             
             
             self.videoCollectionView.frame = CGRectMake(413, 136, 436, 459);
-            self.watchButton.frame = CGRectMake(109, 662, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
+            self.chooseAnotherButton.frame = CGRectMake(94, 662, self.chooseAnotherButton.frame.size.width, self.chooseAnotherButton.frame.size.height);
             
             self.moodCollectionView.frame = CGRectMake(118, 312, 215, self.moodCollectionView.frame.size.height);
             self.iWantToLabel.frame = CGRectMake(-15, 432, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
@@ -340,10 +342,12 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             
             self.titleLabel.font = [UIFont systemFontOfSize:23];
             self.divider.frame = CGRectMake(335, 0, 1, 768);
+            
+            
         } else {
             
             self.videoCollectionView.frame = CGRectMake(245, 248, 436, 459);
-            self.watchButton.frame = CGRectMake(80, 800, self.watchButton.frame.size.width, self.watchButton.frame.size.height);
+            self.chooseAnotherButton.frame = CGRectMake(64, 800, self.chooseAnotherButton.frame.size.width, self.chooseAnotherButton.frame.size.height);
             self.moodCollectionView.frame = CGRectMake(120, 372, 131, self.moodCollectionView.frame.size.height);
             self.iWantToLabel.frame = CGRectMake(-25, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
             self.moodBackground.frame = CGRectMake(1, 330, 254, self.moodBackground.frame.size.height);
@@ -353,7 +357,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         }
         [self setDividerGradient];
     }
-
+    
     
 }
 
@@ -361,10 +365,14 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 - (void)showWatchButton {
     
     self.watchButton.hidden = NO;
+    self.chooseAnotherButton. hidden = NO;
     self.watchButton.alpha = 0.0f;
+    self.chooseAnotherButton.alpha = 0.0f;
     
     [UIView animateWithDuration:WATCH_BUTTON_ANIMATION_TIME animations:^{
         self.watchButton.alpha = 1.0f;
+        self.chooseAnotherButton.alpha = 1.0f;
+
     }];
     
     if (IS_IPAD) {
@@ -407,11 +415,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                           
                                                           
                                                           int rand = floorf(arc4random()%sortedVideos.count);
-                                                          //Just encase something went wrong with arc4random
-                                                          if (rand>sortedVideos.count) {
-                                                              rand = sortedVideos.count/2;
-                                                          }
-
+                                                          
                                                           weakSelf.videoArray = @[[sortedVideos objectAtIndex:rand]];
                                                           
                                                           [weakSelf.videoCollectionView reloadData];
@@ -428,7 +432,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                           
                                                       }
                                                       
-                                                      strongSelf.watchButton.userInteractionEnabled = YES;
+                                                      strongSelf.chooseAnotherButton.userInteractionEnabled = YES;
                                                       
                                                   } errorHandler:^(id error) {
                                                       
@@ -497,15 +501,15 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 #pragma mark - Scrolling animation logic
 - (void)scrollSlowly {
     if (self.moods.count>1) {
-        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:LARGE_AMOUNT_OF_ROWS/2 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
+        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:LARGE_AMOUNT_OF_ROWS/4 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
     } else  {
         return;
     }
-
+    
     // 30 is the middle of the cell
     //this ensures the animation ends with the ell entered
     self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+floorf(arc4random()%6+5)*40);
-    
+
     //Start off screen
     self.scrollingPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y);
     self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
@@ -514,11 +518,10 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 - (void)scrollSlowlyToPoint {
     self.moodCollectionView.bounds = CGRectMake(self.scrollingPoint.x, self.scrollingPoint.y, self.moodCollectionView.bounds.size.width, self.moodCollectionView.bounds.size.height);
     self.videoCollectionView.hidden = YES;
-    
     if (self.scrollingPoint.y>= self.endPoint.y &&(int)self.scrollingPoint.y%40 == 0) {
         [self.scrollingTimer invalidate];
         [self showWatchButton];
-
+        
         
         [self.moodCollectionView.collectionViewLayout invalidateLayout];
     }
