@@ -1923,26 +1923,4 @@
 }
 
 
--(void) setAutoplayId:(NSString *)autoplayId
-{
-    _autoplayId = autoplayId;
-    
-    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:self.channel.uniqueId instanceId:autoplayId completionHandler:^(id dictionary) {
-        
-        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:dictionary usingManagedObjectContext:appDelegate.mainManagedObjectContext];
-        
-        
-        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:@[vidToPlay] selectedIndex:0];
-
-        [self presentViewController:viewController animated:YES completion:nil];
-        
-    } errorHandler: nil];
-    
-    
-    
-}
-
-
-
-
 @end

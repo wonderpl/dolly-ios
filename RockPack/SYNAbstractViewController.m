@@ -831,7 +831,6 @@
     {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                    usingMode:kChannelDetailsModeDisplay];
-        channelVC.autoplayId = channel.autoplayId;
 
 		[self.navigationController pushViewController:channelVC animated:YES];
 
