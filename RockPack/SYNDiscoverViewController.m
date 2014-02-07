@@ -270,8 +270,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     Genre* currentGenre = self.genres[indexPath.section];
     SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
     
+    
+    NSString *title = (IS_IPHONE ? subgenre.name : @"");
+
+    
     [self dispatchSearch:subgenre.uniqueId
-               withTitle:@""
+               withTitle:title
                  forType:kSearchTypeGenre];
     
     // deselect cell since on iPhone it leads to another screen
