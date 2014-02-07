@@ -61,6 +61,8 @@
 - (BOOL) application: (UIApplication *) application
          didFinishLaunchingWithOptions: (NSDictionary *) launchOptions
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
 #ifdef ENABLE_USER_RATINGS
     [Appirater setAppId: @"660697542"];
     [Appirater setDaysUntilPrompt: 1];
@@ -1337,11 +1339,8 @@
                 
                 if (channel)
                 {
-                    // We need to remove any video overlay first
-                    [self.masterViewController removeVideoOverlayController];
                     
-                    channel.autoplayId = videoId;
-                    [currentViewController viewChannelDetails:channel];
+                    [currentViewController viewVideoInstance:channel withVideoId:videoId];
                     success = TRUE;
                 }
                 break;
@@ -1449,7 +1448,6 @@
             [self parseAndActionRockpackURL: url];
         }
     }
-    
 }
 
 
