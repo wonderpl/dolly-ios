@@ -569,24 +569,12 @@
     self.txtFieldChannelName.transform = move;
     self.viewCirleButtonContainer.transform = move;
     
-    [self moveNameLabelWithOffset: offset];
-    
+    if (IS_IPHONE) {
+        [self moveNameLabelWithOffset: offset];
+    } else {
+        self.lblChannelTitle.transform = move;
+    }
 }
-
-// Might need this as a fix for scrolling header
-//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-//{
-//    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-//    if (decelerate)
-//    {
-//        [self moveNameLabelWithOffset:scrollView.contentOffset.y];
-//    }
-//}
-//
-//-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-//    [self moveNameLabelWithOffset:scrollView.contentOffset.y];
-//}
-
 
 -(void) moveNameLabelWithOffset :(CGFloat) offset
 {
