@@ -30,9 +30,6 @@
     // TODO: Find a way not to hardcode these
     self.itemSize = CGSizeMake (320, (IS_IPAD ? 40.0f : 40.0f));
     
-    if (!IS_IPHONE_5) {
-        self.itemSize = CGSizeMake(320, 30);
-    }
     
     self.minimumInteritemSpacing = 0;
     self.minimumLineSpacing = 0;

@@ -125,8 +125,10 @@
         if([appDelegate.mainRegistry registerMoodsFromDictionary:responce
                                                withExistingMoods:self.moods]) {
             [self loadMoods];
-            [self scrollSlowly];
-            
+            //May crash app is no moods
+            if (self.moods.count>0) {
+                [self scrollSlowly];
+            }
         }
     } errorHandler:^(id error) {
     }];
@@ -171,9 +173,12 @@
                                                   
 
 												  if (sortedVideos.count > 0) {
-                                                      int rand = floorf(arc4random()+1%sortedVideos.count);
+                                                      int rand = floorf(arc4random()%sortedVideos.count);
 
-                                                      
+                                                      //Just encase something went wrong with arc4random
+                                                      if (rand>sortedVideos.count) {
+                                                          rand = sortedVideos.count/2;
+                                                      }
                                                       if (IS_IPHONE) {
                                                           UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand];
                                                           
@@ -402,7 +407,11 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                           
                                                           
                                                           int rand = floorf(arc4random()%sortedVideos.count);
-                                                          
+                                                          //Just encase something went wrong with arc4random
+                                                          if (rand>sortedVideos.count) {
+                                                              rand = sortedVideos.count/2;
+                                                          }
+
                                                           weakSelf.videoArray = @[[sortedVideos objectAtIndex:rand]];
                                                           
                                                           [weakSelf.videoCollectionView reloadData];
@@ -488,14 +497,14 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 #pragma mark - Scrolling animation logic
 - (void)scrollSlowly {
     if (self.moods.count>1) {
-        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:LARGE_AMOUNT_OF_ROWS/4 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
+        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:LARGE_AMOUNT_OF_ROWS/2 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
     } else  {
         return;
     }
 
     // 30 is the middle of the cell
     //this ensures the animation ends with the ell entered
-    self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+(self.moods.count * 30)+floorf(arc4random()%8)*30);
+    self.endPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y+floorf(arc4random()%6+5)*40);
     
     //Start off screen
     self.scrollingPoint = CGPointMake(0, self.moodCollectionView.bounds.origin.y);
@@ -505,7 +514,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 - (void)scrollSlowlyToPoint {
     self.moodCollectionView.bounds = CGRectMake(self.scrollingPoint.x, self.scrollingPoint.y, self.moodCollectionView.bounds.size.width, self.moodCollectionView.bounds.size.height);
     self.videoCollectionView.hidden = YES;
-    if (self.scrollingPoint.y> self.endPoint.y) {
+    
+    if (self.scrollingPoint.y>= self.endPoint.y &&(int)self.scrollingPoint.y%40 == 0) {
         [self.scrollingTimer invalidate];
         [self showWatchButton];
 
