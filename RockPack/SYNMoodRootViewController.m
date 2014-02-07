@@ -520,6 +520,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     self.videoCollectionView.hidden = YES;
     if (self.scrollingPoint.y>= self.endPoint.y &&(int)self.scrollingPoint.y%40 == 0) {
         [self.scrollingTimer invalidate];
+        
+        self.scrollingTimer = nil;
         [self showWatchButton];
         
         
