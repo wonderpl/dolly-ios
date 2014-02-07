@@ -74,8 +74,8 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 							  placeholderImage:[UIImage imageNamed:@"PlaceholderNotificationVideo"]
 									   options:SDWebImageRetryFailed];
 	
-	UIColor *readColor = [UIColor colorWithWhite:249.0/255.0 alpha:1.0];
-	UIColor *unreadColor = [UIColor clearColor];
+	UIColor *unreadColor = [UIColor colorWithWhite:249.0/255.0 alpha:1.0];
+	UIColor *readColor = [UIColor whiteColor];
 	self.backgroundColor = (notification.read ? readColor : unreadColor);
 }
 
