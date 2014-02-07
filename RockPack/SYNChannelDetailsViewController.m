@@ -238,7 +238,8 @@
     
     
     [self setupFonts];
-    
+    self.navigationItem.title = @"";
+
 
 	self.model.delegate = self;
 }
@@ -281,7 +282,6 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     
-    self.navigationItem.title = @"";
 }
 
 -(void) setupFonts
@@ -347,7 +347,7 @@
     
     [[self.txtViewDescription layer] setCornerRadius:0];
 
-    self.lblNoVideos.text = NSLocalizedString(@"no_videos", "No videos in the channel details colleciton");
+    self.lblNoVideos.text = NSLocalizedString(@"channel_screen_no_videos", "No videos in the channel details colleciton");
 }
 
 -(void) setUpMode
