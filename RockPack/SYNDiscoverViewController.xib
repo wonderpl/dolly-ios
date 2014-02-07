@@ -23,16 +23,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzQ-bP-TKm" userLabel="Container View">
-                    <rect key="frame" x="223" y="64" width="545" height="960"/>
+                    <rect key="frame" x="223" y="32" width="545" height="992"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r19-QH-EUb" userLabel="Side Container (Used for Resize)">
-                    <rect key="frame" x="0.0" y="64" width="223" height="960"/>
+                    <rect key="frame" x="0.0" y="32" width="223" height="992"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <subviews>
                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="voe-PP-I8e">
-                            <rect key="frame" x="0.0" y="44" width="223" height="916"/>
+                            <rect key="frame" x="0.0" y="44" width="223" height="948"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -48,8 +48,8 @@
                                 <outlet property="delegate" destination="-1" id="B7h-Rg-UO2"/>
                             </connections>
                         </collectionView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="s2u-9J-KS3" userLabel="Autosuggestion Table View">
-                            <rect key="frame" x="0.0" y="44" width="223" height="916"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="s2u-9J-KS3" userLabel="Autosuggestion Table View">
+                            <rect key="frame" x="0.0" y="44" width="223" height="948"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -92,14 +92,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="fzQ-bP-TKm" firstAttribute="leading" secondItem="r19-QH-EUb" secondAttribute="trailing" id="IGf-Ql-jhe"/>
-                <constraint firstItem="r19-QH-EUb" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="Lpp-Th-wQl"/>
+                <constraint firstItem="r19-QH-EUb" firstAttribute="top" secondItem="1" secondAttribute="top" constant="32" id="Lpp-Th-wQl"/>
                 <constraint firstAttribute="bottom" secondItem="r19-QH-EUb" secondAttribute="bottom" id="Pln-oS-f24"/>
                 <constraint firstAttribute="trailing" secondItem="fzQ-bP-TKm" secondAttribute="trailing" id="ayI-J4-P47"/>
                 <constraint firstItem="r19-QH-EUb" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="gQh-UL-TxC"/>
-                <constraint firstItem="fzQ-bP-TKm" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="pae-Q9-HuS"/>
+                <constraint firstItem="fzQ-bP-TKm" firstAttribute="top" secondItem="1" secondAttribute="top" constant="32" id="pae-Q9-HuS"/>
                 <constraint firstAttribute="bottom" secondItem="fzQ-bP-TKm" secondAttribute="bottom" id="vdA-jA-i5y"/>
             </constraints>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
         </view>
         <searchDisplayController id="EaQ-KT-miL">
             <connections>

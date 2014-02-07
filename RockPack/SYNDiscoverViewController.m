@@ -140,14 +140,28 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
     }
     
+    if (IS_IPAD) {
+        self.navigationController.navigationBarHidden = YES;        
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    if (IS_IPAD) {
+        self.navigationController.navigationBarHidden = YES;
+    }
+
     [super viewWillAppear:animated];
 	[self updateContainerWidths];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (IS_IPAD) {
+        self.navigationController.navigationBarHidden = NO;
+    }
+
+}
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
