@@ -34,19 +34,19 @@
 #define kUser                       @"User"
 
 // viewId
-#define kFeedViewId                 @""
+#define kFeedViewId                 @"MY WONDERS"
 #define kChannelsViewId             @"PACKS"
 #define kCommentsViewId             @"COMMENTS"
 #define kProfileViewId              @"ME"
 #define kSearchViewId               @"SEARCH"
-#define kDiscoverViewId             @""
+#define kDiscoverViewId             @"DISCOVER"
 #define kExistingChannelsViewId     @"EXISTING CHANNELS"
 #define kChannelDetailsViewId       @"CHANNEL DETAILS"
 #define kSideNavigationViewId       @"SIDE NAVIGATION"
 #define kSubscribersListViewId      @"SUBSCRIBERS"
 #define kFriendsViewId              @"My Friends"
-#define kActivityViewId             @""
-#define kMoodViewId                 @""
+#define kActivityViewId             @"ACTIVITY"
+#define kMoodViewId                 @"MOOD-MINDER"
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"
 
@@ -136,9 +136,9 @@ typedef enum : NSInteger {
 #define kAPIDeleteUserCoverArt      @"/ws/USERID/cover_art/COVERID"             /* DELETE */
 
 // User subscriptions
-#define kAPIGetUserSubscriptions    @"/ws/USERID/subscriptions/"                /* GET */ 
+#define kAPIGetUserSubscriptions    @"/ws/USERID/subscriptions/"                /* GET */
 #define kAPICreateUserSubscription  @"/ws/USERID/subscriptions/"                /* POST */
-#define kAPIDeleteUserSubscription  @"/ws/USERID/subscriptions/SUBSCRIPTION/"   /* DELETE */  
+#define kAPIDeleteUserSubscription  @"/ws/USERID/subscriptions/SUBSCRIPTION/"   /* DELETE */
 
 // Subscription updates
 
@@ -275,7 +275,7 @@ typedef enum : NSInteger {
 
 #define kOAuth2ClientId @"c8fe5f6rock873dpack19Q"
 
-// Enable full screen thumbnail view 
+// Enable full screen thumbnail view
 #define FULL_SCREEN_THUMBNAILS__
 
 

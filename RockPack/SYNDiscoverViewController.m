@@ -145,9 +145,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.topItem.title = self.title;
-	
 	[self updateContainerWidths];
 }
 

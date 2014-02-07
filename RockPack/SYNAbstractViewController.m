@@ -125,6 +125,10 @@
     self.view.multipleTouchEnabled = NO;
     
     
+    //IPad has no navigation titles
+    if (IS_IPAD) {
+        self.navigationItem.title = @"";
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {

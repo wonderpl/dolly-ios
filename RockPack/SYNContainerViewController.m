@@ -126,13 +126,14 @@ else
     moodRootViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
     
-    
     // == Hold the vc locally
     self.viewControllers = @[navFeedViewController, navSearchViewController,
                              navMoodRootViewController,
                              navProfileViewController, navActivityViewController];
     
     
+    
+    // == Set all navigation bars transparent, the navigation titles are set to @"" in the abstract
     if (IS_IPAD) {
         for (UINavigationController *tmpNav in self.viewControllers) {
             [tmpNav.navigationBar setBackgroundTransparent:YES];
