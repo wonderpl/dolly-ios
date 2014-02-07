@@ -215,6 +215,8 @@
         tmpInsets.bottom += 88;
         [self.videoThumbnailCollectionView setContentInset: tmpInsets];
     }
+    [self.navigationController.navigationBar setBackgroundTransparent:YES];
+
 }
 
 - (void) viewWillAppear: (BOOL) animated
@@ -274,13 +276,11 @@
     
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
-	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     
-    [self.navigationController.navigationBar setBackgroundTransparent:YES];
     self.navigationItem.title = @"";
 }
 
