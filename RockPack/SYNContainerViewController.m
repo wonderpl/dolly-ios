@@ -63,22 +63,10 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
                                                            NSFontAttributeName:[UIFont regularCustomFontOfSize:(IS_IPAD ? 22.0f : 15.0f)]}];
     
-//    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"TabProfile"]];
-//    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"TabProfile"]];
-//    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
-//
-//    [[UINavigationBar appearance] setTintColor:[UIColor redColor]];
-    
-    
-    UIImage *temp = [[UIImage imageNamed:@"backButtonApp"] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:temp style:UIBarButtonItemStyleBordered target:self action:nil];
-
-//    UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
-//                                                                   style:UIBarButtonItemStyleBordered
-//                                                                  target:nil
-//                                                                  action:nil];
-    
-//    backButton.image = [UIImage imageNamed:@"BackButtonApp.png"];
+    UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:nil
+                                                                  action:nil];
     
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont regularCustomFontOfSize:15]];
     
