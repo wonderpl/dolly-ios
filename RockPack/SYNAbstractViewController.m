@@ -679,9 +679,6 @@
 
 - (void) scrollViewWillBeginDragging: (UIScrollView *) scrollView
 {
-    if (scrollView.contentOffset.y<0) {
-        return;
-    }
 
     self.startDraggingPoint = scrollView.contentOffset;
     self.startDate = [NSDate date];
@@ -690,9 +687,6 @@
 
 - (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate
 {
-    if (scrollView.contentOffset.y<0) {
-        return;
-    }
 
     self.endDraggingPoint = scrollView.contentOffset;
     self.endDate = [NSDate dateWithTimeIntervalSinceNow: self.startDate.timeIntervalSinceNow];
@@ -703,11 +697,9 @@
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
     
-    if (scrollView.contentOffset.y<0) {
-        return;
-    }
+    int offset = scrollView.contentOffset.y + self.offsetValue;
     
-    if (self.lastContentOffset > scrollView.contentOffset.y)
+    if (self.lastContentOffset > offset)
     {
         self.scrollDirection = ScrollingDirectionUp;
     }
@@ -716,7 +708,7 @@
         self.scrollDirection = ScrollingDirectionDown;
     }
     
-    self.lastContentOffset = scrollView.contentOffset.y;
+    self.lastContentOffset = offset;
     
     if (scrollView.contentOffset.y < kScrollContentOff && !self.scrollerIsNearTop)
     {

@@ -189,11 +189,13 @@
     if (IS_IPHONE)
     {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
+        self.offsetValue = 420;
     }
     
     if (IS_IPAD)
     {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(494, 0, 0, 0);
+        self.offsetValue = 494;
     }
     
     if (self.mode == kChannelDetailsFavourites) {

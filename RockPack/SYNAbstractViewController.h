@@ -32,6 +32,7 @@
 
 @property (nonatomic) NSInteger dataItemsAvailable;
 @property (nonatomic) NSRange dataRequestRange;
+@property (nonatomic) int offsetValue;
 @property (nonatomic, assign, getter = isLoadingMoreContent) BOOL loadingMoreContent;
 @property (nonatomic, readonly) NSString *viewId;
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
