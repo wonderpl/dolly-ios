@@ -23,9 +23,6 @@
 
 @interface SYNSearchResultsVideoCell ()
 
-@property (nonatomic, strong) IBOutlet UIButton *ownerThumbnailButton;
-@property (nonatomic, strong) IBOutlet UIButton *ownerNameButton;
-@property (nonatomic, strong) IBOutlet UIButton *channelNameButton;
 
 @property (nonatomic, strong) IBOutlet SYNSocialButton *likeSocialButton;
 @property (nonatomic, strong) IBOutlet SYNSocialAddButton *addSocialButton;

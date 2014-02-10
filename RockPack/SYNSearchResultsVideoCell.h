@@ -19,6 +19,9 @@
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* timeStampLabel;
+@property (nonatomic, strong) IBOutlet UIButton *ownerThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton *ownerNameButton;
+@property (nonatomic, strong) IBOutlet UIButton *channelNameButton;
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate, SYNVideoCellDelegate> delegate;
 
