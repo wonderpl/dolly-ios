@@ -39,7 +39,10 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topTitleConstraint;
 @property (nonatomic, readonly) Mood* currentMood;
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
-@property (nonatomic, strong) NSArray* videoArray;
+@property (nonatomic, strong) NSArray* randomVideoArray;
+@property (nonatomic, assign) int randomVideoIndex;
+@property (nonatomic, strong) NSArray* videosArray;
+
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 @property (strong, nonatomic) IBOutlet UIImageView *moodBackground;
 @property (nonatomic, assign) CGPoint scrollingPoint, endPoint;
@@ -103,7 +106,8 @@
                                                 animated:YES];
     }
     
-    self.videoArray = @[];
+    self.randomVideoArray = @[];
+    self.videosArray = @[];
 }
 
 #pragma mark - Getting Mood Objects
@@ -180,13 +184,13 @@
 												  if (sortedVideos.count > 0) {
                                                       int rand = floorf((NSInteger)arc4random_uniform(sortedVideos.count)-1);
                                                       
-                                                      
                                                       if (IS_IPHONE) {
                                                           UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand];
                                                           
                                                           [strongSelf presentViewController:viewController animated:YES completion:nil];
                                                           
-                                                      }                                                  }
+                                                      }
+                                                  }
                                                   
                                                   strongSelf.watchButton.userInteractionEnabled = YES;
                                                   
@@ -205,7 +209,7 @@
         return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
         
     }
-    return self.videoArray.count;
+    return self.randomVideoArray.count;
 }
 
 
@@ -241,7 +245,7 @@
     if (cv == self.videoCollectionView) {
         SYNSearchResultsVideoCell *videoCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
                                                                              forIndexPath:indexPath];
-        videoCell.videoInstance = (VideoInstance*)(self.videoArray[indexPath.item]);
+        videoCell.videoInstance = (VideoInstance*)(self.randomVideoArray[indexPath.item]);
         videoCell.delegate = self;
         return videoCell;
         
@@ -261,7 +265,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (cv == self.videoCollectionView) {
         
-        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videoArray selectedIndex:0];
+        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex];
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
 		animator.cellIndexPath = indexPath;
@@ -499,16 +503,17 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                   }
                                                   
                                                   NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
+                                                  self.videosArray = sortedVideos;
                                                   if (sortedVideos.count > 0) {
                                                       
                                                       
-                                                      int rand = floorf(arc4random_uniform(sortedVideos.count)-1);
+                                                      self.randomVideoIndex = floorf(arc4random_uniform(sortedVideos.count)-1);
                                                       
-                                                      weakSelf.videoArray = @[[sortedVideos objectAtIndex:rand]];
+                                                      weakSelf.randomVideoArray = @[[sortedVideos objectAtIndex:self.randomVideoIndex]];
                                                       
                                                       [weakSelf.videoCollectionView reloadData];
                                                       
-                                                      if (weakSelf.videoArray.count>0) {
+                                                      if (weakSelf.randomVideoArray.count>0) {
                                                           weakSelf.videoCollectionView.alpha = 0.0f;
                                                           weakSelf.videoCollectionView.hidden = NO;
                                                           
