@@ -265,7 +265,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (cv == self.videoCollectionView) {
         
-        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex];
+        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
 		animator.cellIndexPath = indexPath;
