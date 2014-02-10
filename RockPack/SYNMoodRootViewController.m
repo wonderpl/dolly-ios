@@ -184,6 +184,11 @@
 												  if (sortedVideos.count > 0) {
                                                       int rand = floorf((NSInteger)arc4random_uniform(sortedVideos.count)-1);
                                                       
+                                                      
+                                                      if (rand > sortedVideos.count) {
+                                                          rand = 0;
+                                                      }
+                                                      
                                                       if (IS_IPHONE) {
                                                           UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand];
                                                           
@@ -246,6 +251,9 @@
         SYNSearchResultsVideoCell *videoCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
                                                                              forIndexPath:indexPath];
         videoCell.videoInstance = (VideoInstance*)(self.randomVideoArray[indexPath.item]);
+        videoCell.ownerThumbnailButton.userInteractionEnabled = NO;
+        videoCell.ownerThumbnailButton.userInteractionEnabled = NO;
+        videoCell.channelNameButton.userInteractionEnabled = NO;
         videoCell.delegate = self;
         return videoCell;
         
@@ -503,11 +511,15 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                   }
                                                   
                                                   NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
-                                                  self.videosArray = sortedVideos;
+                                                  weakSelf.videosArray = sortedVideos;
                                                   if (sortedVideos.count > 0) {
                                                       
 
-                                                      self.randomVideoIndex = [NSNumber numberWithUnsignedInt: floorf(arc4random_uniform(sortedVideos.count)-1)];
+                                                      weakSelf.randomVideoIndex = [NSNumber numberWithUnsignedInt: floorf(arc4random_uniform(sortedVideos.count)-1)];
+                                                      
+                                                      if (weakSelf.randomVideoIndex.intValue > sortedVideos.count) {
+                                                          weakSelf.randomVideoIndex = 0;
+                                                      }
                                                       
                                                       weakSelf.randomVideoArray = @[[sortedVideos objectAtIndex:self.randomVideoIndex.intValue]];
                                                       
