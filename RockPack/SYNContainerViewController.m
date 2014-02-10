@@ -63,11 +63,22 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
                                                            NSFontAttributeName:[UIFont regularCustomFontOfSize:(IS_IPAD ? 22.0f : 15.0f)]}];
     
+//    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"TabProfile"]];
+//    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"TabProfile"]];
+//    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
+//
+//    [[UINavigationBar appearance] setTintColor:[UIColor redColor]];
     
-    UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:nil
-                                                                  action:nil];
+    
+    UIImage *temp = [[UIImage imageNamed:@"backButtonApp"] imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:temp style:UIBarButtonItemStyleBordered target:self action:nil];
+
+//    UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
+//                                                                   style:UIBarButtonItemStyleBordered
+//                                                                  target:nil
+//                                                                  action:nil];
+    
+//    backButton.image = [UIImage imageNamed:@"BackButtonApp.png"];
     
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont regularCustomFontOfSize:15]];
     
@@ -75,12 +86,12 @@
         [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
          @{NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0]}    forState:UIControlStateNormal];
     }
-else
-{
-    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-     @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
-
-}
+    else
+    {
+        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
+        
+    }
     
     // sets the tint to gray for all navigatin controllers
     self.view.tintColor = [UIColor grayColor];
@@ -137,6 +148,7 @@ else
     if (IS_IPAD) {
         for (UINavigationController *tmpNav in self.viewControllers) {
             [tmpNav.navigationBar setBackgroundTransparent:YES];
+
         }
     }
     
