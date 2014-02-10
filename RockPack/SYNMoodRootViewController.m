@@ -178,7 +178,7 @@
                                                   
                                                   
 												  if (sortedVideos.count > 0) {
-                                                      int rand = floorf(arc4random()+1%sortedVideos.count);
+                                                      int rand = floorf((NSInteger)arc4random_uniform(sortedVideos.count)-1);
                                                       
                                                       
                                                       if (IS_IPHONE) {
@@ -186,21 +186,7 @@
                                                           
                                                           [strongSelf presentViewController:viewController animated:YES completion:nil];
                                                           
-                                                      } else {
-                                                          
-                                                          
-                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videoArray selectedIndex:0];
-                                                          
-                                                          SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-                                                          animator.delegate = self;
-                                                          animator.cellIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-                                                          self.videoPlayerAnimator = animator;
-                                                          viewController.transitioningDelegate = animator;
-                                                          
-                                                          [self presentViewController:viewController animated:YES completion:nil];
-                                                          
-                                                      }
-                                                  }
+                                                      }                                                  }
                                                   
                                                   strongSelf.watchButton.userInteractionEnabled = YES;
                                                   
@@ -377,66 +363,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (IS_IPAD) {
         
-        
-        self.watchButton.userInteractionEnabled = NO;
-        
-        __weak typeof(self) weakSelf = self;
-        
-        [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
-                                                      andEntityName: kVideoInstance
-                                                             params: @{@"mood":self.currentMood.uniqueId}
-                                                  completionHandler: ^(id response) {
-                                                      
-                                                      __strong typeof(self) strongSelf = weakSelf;
-                                                      
-                                                      if(![response isKindOfClass:[NSDictionary class]])
-                                                          return;
-                                                      
-                                                      if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:response
-                                                                                                                withViewId:self.viewId])
-                                                          return;
-                                                      
-                                                      NSArray *videoInstances = response[@"videos"][@"items"];
-                                                      NSArray *videoInstanceIds = [videoInstances valueForKey:@"id"];
-                                                      
-                                                      NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[VideoInstance entityName]];
-                                                      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueId IN %@", videoInstanceIds];
-                                                      [fetchRequest setPredicate:predicate];
-                                                      
-                                                      NSArray* videosArray = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest
-                                                                                                                                   error:NULL];
-                                                      
-                                                      if (![videosArray count]) {
-                                                          // implement
-                                                      }
-                                                      
-                                                      NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
-                                                      if (sortedVideos.count > 0) {
-                                                          
-                                                          
-                                                          int rand = floorf(arc4random()%sortedVideos.count);
-                                                          
-                                                          weakSelf.videoArray = @[[sortedVideos objectAtIndex:rand]];
-                                                          
-                                                          [weakSelf.videoCollectionView reloadData];
-                                                          
-                                                          
-                                                          if (weakSelf.videoArray.count>0) {
-                                                              weakSelf.videoCollectionView.alpha = 0.0f;
-                                                              weakSelf.videoCollectionView.hidden = NO;
-                                                              
-                                                              [UIView animateWithDuration:0.2 animations:^{
-                                                                  weakSelf.videoCollectionView.alpha = 1.0f;
-                                                              }];
-                                                          }
-                                                          
-                                                      }
-                                                      
-                                                      strongSelf.chooseAnotherButton.userInteractionEnabled = YES;
-                                                      
-                                                  } errorHandler:^(id error) {
-                                                      
-                                                  }];
+        [self showRandomVideoInstance];
     }
     
 }
@@ -528,6 +455,76 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         [self.moodCollectionView.collectionViewLayout invalidateLayout];
     }
     self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+2.5);
+}
+- (IBAction)chooseAnotherTapped:(id)sender {
+    
+    [self showRandomVideoInstance];
+
+
+}
+
+
+- (void) showRandomVideoInstance {
+    
+    self.watchButton.userInteractionEnabled = NO;
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
+                                                  andEntityName: kVideoInstance
+                                                         params: @{@"mood":self.currentMood.uniqueId}
+                                              completionHandler: ^(id response) {
+                                                  
+                                                  __strong typeof(self) strongSelf = weakSelf;
+                                                  
+                                                  if(![response isKindOfClass:[NSDictionary class]])
+                                                      return;
+                                                  
+                                                  if(![appDelegate.searchRegistry registerVideoInstancesFromDictionary:response
+                                                                                                            withViewId:self.viewId])
+                                                      return;
+                                                  
+                                                  NSArray *videoInstances = response[@"videos"][@"items"];
+                                                  NSArray *videoInstanceIds = [videoInstances valueForKey:@"id"];
+                                                  
+                                                  NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[VideoInstance entityName]];
+                                                  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueId IN %@", videoInstanceIds];
+                                                  [fetchRequest setPredicate:predicate];
+                                                  
+                                                  NSArray* videosArray = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest
+                                                                                                                               error:NULL];
+                                                  
+                                                  if (![videosArray count]) {
+                                                      // implement
+                                                  }
+                                                  
+                                                  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
+                                                  if (sortedVideos.count > 0) {
+                                                      
+                                                      
+                                                      int rand = floorf(arc4random_uniform(sortedVideos.count)-1);
+                                                      
+                                                      weakSelf.videoArray = @[[sortedVideos objectAtIndex:rand]];
+                                                      
+                                                      [weakSelf.videoCollectionView reloadData];
+                                                      
+                                                      if (weakSelf.videoArray.count>0) {
+                                                          weakSelf.videoCollectionView.alpha = 0.0f;
+                                                          weakSelf.videoCollectionView.hidden = NO;
+                                                          
+                                                          [UIView animateWithDuration:0.2 animations:^{
+                                                              weakSelf.videoCollectionView.alpha = 1.0f;
+                                                          }];
+                                                      }
+                                                      
+                                                  }
+                                                  
+                                                  strongSelf.chooseAnotherButton.userInteractionEnabled = YES;
+                                                  
+                                              } errorHandler:^(id error) {
+                                                  
+                                              }];
+    
 }
 
 // TODO: profile/channel delegates

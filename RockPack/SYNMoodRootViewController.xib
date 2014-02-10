@@ -60,7 +60,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="watchButtonTapped:" destination="-1" eventType="touchUpInside" id="gwE-5M-zwa"/>
+                                <action selector="chooseAnotherTapped:" destination="-1" eventType="touchUpInside" id="tXy-b4-H1z"/>
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jfI-8D-ccz">
@@ -95,7 +95,7 @@
                         </label>
                     </subviews>
                 </view>
-                <view clipsSubviews="YES" contentMode="scaleToFill" id="wAD-PS-jWs">
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="wAD-PS-jWs" userLabel="View - Divider">
                     <rect key="frame" x="311" y="0.0" width="1" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
