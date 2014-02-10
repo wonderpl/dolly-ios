@@ -40,7 +40,7 @@
 @property (nonatomic, readonly) Mood* currentMood;
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, strong) NSArray* randomVideoArray;
-@property (nonatomic, assign) int randomVideoIndex;
+@property (nonatomic, assign) NSNumber* randomVideoIndex;
 @property (nonatomic, strong) NSArray* videosArray;
 
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
@@ -506,10 +506,10 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                   self.videosArray = sortedVideos;
                                                   if (sortedVideos.count > 0) {
                                                       
+
+                                                      self.randomVideoIndex = [NSNumber numberWithUnsignedInt: floorf(arc4random_uniform(sortedVideos.count)-1)];
                                                       
-                                                      self.randomVideoIndex = floorf(arc4random_uniform(sortedVideos.count)-1);
-                                                      
-                                                      weakSelf.randomVideoArray = @[[sortedVideos objectAtIndex:self.randomVideoIndex]];
+                                                      weakSelf.randomVideoArray = @[[sortedVideos objectAtIndex:self.randomVideoIndex.intValue]];
                                                       
                                                       [weakSelf.videoCollectionView reloadData];
                                                       
