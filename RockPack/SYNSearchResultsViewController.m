@@ -22,6 +22,7 @@
 #import "SYNVideoPlayerAnimator.h"
 #import "SYNGenreColorManager.h"
 #import "UIFont+SYNFont.h"
+#import "SYNCarouselVideoPlayerViewController.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
@@ -29,12 +30,12 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 // UI stuff
 @property (nonatomic, strong) IBOutlet UIView *containerTabs;
+@property (strong, nonatomic) IBOutlet UILabel *noVideosLabel;
+@property (strong, nonatomic) IBOutlet UILabel *noUsersLabel;
 
 // search operations
 @property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
-@property (strong, nonatomic) IBOutlet UILabel *noVideosLabel;
 @property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
-@property (strong, nonatomic) IBOutlet UILabel *noUsersLabel;
 
 // @property (nonatomic) NSRange dataRequestRange; is from SYNAbstract, here we need a second for users
 @property (nonatomic) NSRange dataRequestRange2;
@@ -42,7 +43,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 
 @property (nonatomic) SearchResultsShowing searchResultsShowing;
-
 @property (nonatomic, strong) NSString *currentSearchTerm;
 
 // completion blocks
@@ -53,9 +53,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 // Data Arrays
 @property (nonatomic, strong) NSArray *videosArray;
 @property (nonatomic, strong) NSArray *usersArray;
-
 @property (nonatomic, strong) NSString* currentSearchGenre;
-
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 
@@ -452,8 +450,16 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (collectionView == self.videosCollectionView) {
 		VideoInstance *videoInstance = self.videosArray[indexPath.item];
-		UIViewController *viewController = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
+		UIViewController *viewController;
+        
+        if (!self.currentSearchTerm) {
+            viewController  = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
+
+        } else {
+//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
+        }
 		
+        
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
 		animator.cellIndexPath = indexPath;
