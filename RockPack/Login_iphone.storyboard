@@ -802,18 +802,15 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omV-zI-krC">
                                                     <rect key="frame" x="141" y="162" width="38" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="2tj-Ma-OVo"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="26" translatesAutoresizingMaskIntoConstraints="NO" id="b0w-KD-st9">
-                                                    <rect key="frame" x="147" y="190" width="26" height="12"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="b0w-KD-st9">
+                                                    <rect key="frame" x="60" y="190" width="200" height="12"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="Dnk-xf-AL5"/>
+                                                        <constraint firstAttribute="width" constant="200" id="dpH-jA-wlB"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="highlightedColor"/>
@@ -822,10 +819,10 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="b0w-KD-st9" secondAttribute="centerX" id="1LF-MY-sOj"/>
                                             <constraint firstItem="omV-zI-krC" firstAttribute="top" secondItem="Mzn-NV-u7f" secondAttribute="bottom" constant="10" id="Way-u8-N6a"/>
+                                            <constraint firstItem="b0w-KD-st9" firstAttribute="centerX" secondItem="omV-zI-krC" secondAttribute="centerX" id="cYb-K4-dJh"/>
                                             <constraint firstItem="Mzn-NV-u7f" firstAttribute="top" secondItem="sMW-q7-0Qk" secondAttribute="top" constant="32" id="eSY-70-wjJ"/>
-                                            <constraint firstItem="b0w-KD-st9" firstAttribute="top" secondItem="omV-zI-krC" secondAttribute="bottom" constant="10" id="rKi-jl-OUD"/>
+                                            <constraint firstItem="b0w-KD-st9" firstAttribute="top" secondItem="omV-zI-krC" secondAttribute="bottom" constant="10" id="fX4-7n-uMY"/>
                                             <constraint firstAttribute="centerX" secondItem="omV-zI-krC" secondAttribute="centerX" id="ush-vi-zeW"/>
                                             <constraint firstAttribute="centerX" secondItem="Mzn-NV-u7f" secondAttribute="centerX" id="zEz-RR-r6U"/>
                                         </constraints>

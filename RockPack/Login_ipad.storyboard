@@ -1017,12 +1017,9 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="33" translatesAutoresizingMaskIntoConstraints="NO" id="2ab-Nn-F7R">
-                                                    <rect key="frame" x="144" y="218" width="33" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="2ab-Nn-F7R">
+                                                    <rect key="frame" x="31" y="218" width="260" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="KZI-B8-1iL"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1030,10 +1027,11 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="2ab-Nn-F7R" firstAttribute="top" secondItem="xG7-0o-nTO" secondAttribute="bottom" constant="8" symbolic="YES" id="3oi-hC-PCF"/>
                                             <constraint firstItem="xG7-0o-nTO" firstAttribute="top" secondItem="erL-fy-LJN" secondAttribute="bottom" constant="8" id="62B-ll-tiw"/>
-                                            <constraint firstItem="2ab-Nn-F7R" firstAttribute="top" secondItem="xG7-0o-nTO" secondAttribute="bottom" constant="8" id="BYl-MX-fK9"/>
-                                            <constraint firstAttribute="centerX" secondItem="2ab-Nn-F7R" secondAttribute="centerX" id="HYr-Ij-A03"/>
                                             <constraint firstItem="erL-fy-LJN" firstAttribute="top" secondItem="Ib9-ej-BmC" secondAttribute="top" constant="30" id="Njh-J3-Ws4"/>
+                                            <constraint firstAttribute="trailing" secondItem="2ab-Nn-F7R" secondAttribute="trailing" constant="29" id="TvD-1s-cdA"/>
+                                            <constraint firstItem="2ab-Nn-F7R" firstAttribute="leading" secondItem="Ib9-ej-BmC" secondAttribute="leading" constant="31" id="X8A-ja-hAF"/>
                                             <constraint firstAttribute="centerX" secondItem="xG7-0o-nTO" secondAttribute="centerX" id="lbH-Ct-EGR"/>
                                             <constraint firstAttribute="centerX" secondItem="erL-fy-LJN" secondAttribute="centerX" id="m46-RY-fLz"/>
                                         </constraints>
