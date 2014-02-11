@@ -7,7 +7,7 @@
 //
 
 #import "SYNChannelFooterMoreView.h"
-
+#import "UIColor+SYNColor.h"
 @interface SYNChannelFooterMoreView ()
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activityIndicator;
@@ -20,10 +20,7 @@
 {
 	[super awakeFromNib];
 	
-	self.activityIndicator.color = [UIColor colorWithRed: (11.0/255.0)
-												   green: (166.0/255.0)
-													blue: (171.0/255.0)
-												   alpha: (1.0)];
+	self.activityIndicator.color = [UIColor dollyActivityIndicator];
 }
 
 - (void)setShowsLoading:(BOOL)showsLoading {

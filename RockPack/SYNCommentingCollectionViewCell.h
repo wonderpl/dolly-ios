@@ -24,8 +24,6 @@
 
 @property (nonatomic, strong) IBOutlet UIButton* deleteButton;
 
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loader;
-
 @property (nonatomic, weak) NSDate* datePosted;
 
 @property (nonatomic, strong) NSArray* mainElements; // to dim when loading

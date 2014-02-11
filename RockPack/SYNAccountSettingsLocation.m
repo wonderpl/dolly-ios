@@ -12,6 +12,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 #import "User.h"
 
 @interface SYNAccountSettingsLocation ()
@@ -84,6 +85,7 @@
     CGRect spinnerFrame = self.spinner.frame;
     spinnerFrame.origin.y = self.tableView.frame.origin.y + self.tableView.frame.size.height + 20.0;
     spinnerFrame.origin.x = self.tableView.frame.size.width * 0.5 - spinnerFrame.size.width * 0.5;
+    [self.spinner setColor:[UIColor dollyActivityIndicator]];
     self.spinner.frame = CGRectIntegral(spinnerFrame);
     [self.view addSubview:self.spinner];
 }

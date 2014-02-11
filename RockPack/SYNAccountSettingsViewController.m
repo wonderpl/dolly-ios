@@ -26,6 +26,7 @@
 #import "UIFont+SYNFont.h"
 #import "User.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIColor+SYNColor.h"
 
 @interface SYNAccountSettingsViewController ()
 
@@ -361,6 +362,7 @@
     
     UIActivityIndicatorView* dobLoader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
+    [dobLoader setColor:[UIColor dollyActivityIndicator]];
     self.dobTableViewCell.accessoryView = dobLoader;
     
     [dobLoader startAnimating];

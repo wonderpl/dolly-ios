@@ -10,6 +10,7 @@
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
 #import "NSString+Validation.h"
+#import "UIColor+SYNColor.h"
 @import QuartzCore;
 
 @interface SYNAccountSettingBasicController ()
@@ -40,7 +41,7 @@
         appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
         
-        
+        [self.spinner setColor:[UIColor dollyActivityIndicator]];
         
     }
     

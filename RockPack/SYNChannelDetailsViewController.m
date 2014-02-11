@@ -204,7 +204,7 @@
     
     //not used yet
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
-    
+    [self.activityIndicator setColor:[UIColor dollyActivityIndicator]];
     self.activityIndicator.frame = CGRectMake(0, 0, 100, 100);
     self.activityIndicator.center = self.videoThumbnailCollectionView.center;
     
@@ -502,6 +502,7 @@
 - (void) addSubscribeActivityIndicator
 {
     //    self.subscribingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+//    [self.subscribingIndicator setColor:[UIColor dollyActivityIndicator]];
     //    self.subscribingIndicator.center = self.btnFollowChannel.center;
     //    [self.subscribingIndicator startAnimating];
     //    [self.view addSubview: self.subscribingIndicator];

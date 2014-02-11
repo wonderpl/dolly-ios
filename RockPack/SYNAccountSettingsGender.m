@@ -13,6 +13,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNAccountSettingOtherTableViewCell.h"
 #import "UIFont+SYNFont.h"
+#import "UIColor+SYNColor.h"
 
 @interface SYNAccountSettingsGender ()
 
@@ -68,6 +69,7 @@
     spinnerFrame.origin.y = self.tableView.frame.origin.y + self.tableView.frame.size.height + 20.0;
     spinnerFrame.origin.x = self.tableView.frame.size.width * 0.5 - spinnerFrame.size.width * 0.5;
     self.spinner.frame = CGRectIntegral(spinnerFrame);
+    [self.spinner setColor:[UIColor dollyActivityIndicator]];
     [self.view addSubview: self.spinner];
 }
 
