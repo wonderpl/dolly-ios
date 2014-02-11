@@ -244,12 +244,15 @@
 
 
 	self.model.delegate = self;
+    [self.navigationController.navigationBar setBackgroundTransparent:YES];
+
 }
 
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
-    
+    [self.navigationController.navigationBar setBackgroundTransparent:NO];
+
     // Remove notifications individually
     // Do this rather than plain RemoveObserver call as low memory handling is based on NSNotifications.
     [[NSNotificationCenter defaultCenter] removeObserver: self
