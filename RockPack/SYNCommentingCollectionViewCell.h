@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
 @property (nonatomic, strong) IBOutlet UIButton* deleteButton;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* loader;
 
 @property (nonatomic, weak) NSDate* datePosted;
 
