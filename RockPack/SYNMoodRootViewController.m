@@ -270,7 +270,11 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (cv == self.moodCollectionView) {
         if (self.currentMood == self.moods [indexPath.item % self.moods.count]) {
-            [self watchButtonTapped:nil];
+            if (IS_IPHONE) {
+                [self watchButtonTapped:nil];
+            } else {
+                [self showVideoForIndexPath:indexPath];
+            }
         }
     }
     
@@ -282,18 +286,30 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             NSLog(@"This should never be called");
             return;
         }
-        UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
-		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-		animator.delegate = self;
-		animator.cellIndexPath = indexPath;
-		self.videoPlayerAnimator = animator;
-		viewController.transitioningDelegate = animator;
-		[self presentViewController:viewController animated:YES completion:^{
-            self.videoCollectionView.userInteractionEnabled = YES;
-        }];
+        
+        [self showVideoForIndexPath:indexPath];
         
     }
     
+}
+
+
+- (void) showVideoForIndexPath: (NSIndexPath *)indexPath {
+    //Dont create the video player unless there is a video
+    if (self.videosArray<=0) {
+        return;
+    }
+    
+    UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
+    SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+    animator.delegate = self;
+    animator.cellIndexPath = indexPath;
+    self.videoPlayerAnimator = animator;
+    viewController.transitioningDelegate = animator;
+    [self presentViewController:viewController animated:YES completion:^{
+        self.videoCollectionView.userInteractionEnabled = YES;
+    }];
+
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
@@ -320,7 +336,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 - (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     // override
-    [self showWatchButton];
+//    [self showWatchButton];
     
 }
 
@@ -366,8 +382,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         }
         [self setDividerGradient];
     }
-    
-    
 }
 
 
@@ -472,8 +486,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         [self.scrollingTimer invalidate];
         
         self.scrollingTimer = nil;
-        [self showWatchButton];
-        
+        self.chooseAnotherButton. hidden = NO;
+        [self showRandomVideoInstance];
         
         [self.moodCollectionView.collectionViewLayout invalidateLayout];
     }
@@ -489,7 +503,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 - (void) showRandomVideoInstance {
     
-    self.watchButton.userInteractionEnabled = NO;
     
     __weak typeof(self) weakSelf = self;
     
@@ -535,15 +548,13 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                       
                                                       [weakSelf.videoCollectionView reloadData];
                                                       
-                                                      if (weakSelf.randomVideoArray.count>0) {
-                                                          weakSelf.videoCollectionView.alpha = 0.0f;
                                                           weakSelf.videoCollectionView.hidden = NO;
-                                                          
-                                                          [UIView animateWithDuration:0.2 animations:^{
-                                                              weakSelf.videoCollectionView.alpha = 1.0f;
-                                                          }];
-                                                      }
+
                                                       
+                                                      
+                                                  } else {
+                                                      weakSelf.videosArray = nil;
+                                                      [weakSelf.videoCollectionView reloadData];
                                                   }
                                                   
                                                   weakSelf.chooseAnotherButton.userInteractionEnabled = YES;
