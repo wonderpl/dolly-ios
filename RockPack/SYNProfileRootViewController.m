@@ -519,8 +519,10 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-	
-    
+    if (IS_IPHONE) {
+        [self.navigationController.navigationBar setBackgroundTransparent:NO];
+    }
+
     if (self.creatingChannel) {
         [self updateCollectionLayout];
         self.creatingChannel = NO;
