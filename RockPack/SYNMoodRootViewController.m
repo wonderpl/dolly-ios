@@ -254,9 +254,6 @@
         SYNSearchResultsVideoCell *videoCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
                                                                              forIndexPath:indexPath];
         videoCell.videoInstance = (VideoInstance*)(self.randomVideoArray[indexPath.item]);
-        videoCell.ownerThumbnailButton.userInteractionEnabled = NO;
-        videoCell.ownerThumbnailButton.userInteractionEnabled = NO;
-        videoCell.channelNameButton.userInteractionEnabled = NO;
         videoCell.delegate = self;
         return videoCell;
         
@@ -288,6 +285,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 		animator.cellIndexPath = indexPath;
 		self.videoPlayerAnimator = animator;
 		viewController.transitioningDelegate = animator;
+        [self presentViewController:viewController animated:YES completion:nil];
+
         
     }
     
