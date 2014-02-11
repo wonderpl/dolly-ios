@@ -40,7 +40,7 @@
 @property (nonatomic, readonly) Mood* currentMood;
 @property (nonatomic, strong) IBOutlet UIImageView* backgroundImageView;
 @property (nonatomic, strong) NSArray* randomVideoArray;
-@property (nonatomic, assign) NSNumber* randomVideoIndex;
+@property (nonatomic, strong) __block NSNumber* randomVideoIndex;
 @property (nonatomic, strong) NSArray* videosArray;
 
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
@@ -108,6 +108,7 @@
     
     self.randomVideoArray = @[];
     self.videosArray = @[];
+    self.randomVideoIndex = 0;
 }
 
 #pragma mark - Getting Mood Objects
@@ -149,6 +150,8 @@
     self.watchButton.userInteractionEnabled = NO;
     
 	__weak typeof(self) weakSelf = self;
+    
+    __block int rand = 0;
 	
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
@@ -182,7 +185,7 @@
                                                   
                                                   
 												  if (sortedVideos.count > 0) {
-                                                      int rand = floorf((NSInteger)arc4random_uniform(sortedVideos.count)-1);
+                                                      rand = floorf((NSInteger)arc4random_uniform(sortedVideos.count)-1);
                                                       
                                                       
                                                       if (rand > sortedVideos.count) {
@@ -273,13 +276,24 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (cv == self.videoCollectionView) {
         
+        self.videoCollectionView.userInteractionEnabled = NO;
+        
+        if (IS_IPHONE) {
+            NSLog(@"This should never be called");
+            return;
+        }
+        NSLog(@"HERE!!!!");
+
+        NSLog(@"RANDOM INDEX %@", self.randomVideoIndex);
         UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
 		animator.cellIndexPath = indexPath;
 		self.videoPlayerAnimator = animator;
 		viewController.transitioningDelegate = animator;
-		[self presentViewController:viewController animated:YES completion:nil];
+		[self presentViewController:viewController animated:YES completion:^{
+            self.videoCollectionView.userInteractionEnabled = YES;
+        }];
         
     }
     
@@ -487,7 +501,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                          params: @{@"mood":self.currentMood.uniqueId}
                                               completionHandler: ^(id response) {
                                                   
-                                                  __strong typeof(self) strongSelf = weakSelf;
                                                   
                                                   if(![response isKindOfClass:[NSDictionary class]])
                                                       return;
@@ -510,7 +523,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                       // implement
                                                   }
                                                   
-                                                  NSArray *sortedVideos = [strongSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
+                                                  NSArray *sortedVideos = [weakSelf sortedVideoInstances:videosArray inIdOrder:videoInstanceIds];
                                                   weakSelf.videosArray = sortedVideos;
                                                   if (sortedVideos.count > 0) {
                                                       
@@ -536,7 +549,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                       
                                                   }
                                                   
-                                                  strongSelf.chooseAnotherButton.userInteractionEnabled = YES;
+                                                  weakSelf.chooseAnotherButton.userInteractionEnabled = YES;
                                                   
                                               } errorHandler:^(id error) {
                                                   
