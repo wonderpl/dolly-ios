@@ -282,9 +282,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             NSLog(@"This should never be called");
             return;
         }
-        NSLog(@"HERE!!!!");
-
-        NSLog(@"RANDOM INDEX %@", self.randomVideoIndex);
         UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
