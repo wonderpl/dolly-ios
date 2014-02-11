@@ -467,9 +467,12 @@
 - (void) removeVideoOverlayController
 {
 
-    [self dismissViewControllerAnimated:YES completion:^{
-        self.videoViewerViewController = nil;
-    }];
+    if (!self.videoViewerViewController) {
+        [self dismissViewControllerAnimated:NO completion:^{
+            self.videoViewerViewController = nil;
+        }];
+    }
+    
 
 }
 

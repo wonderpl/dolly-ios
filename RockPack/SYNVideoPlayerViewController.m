@@ -48,7 +48,13 @@
 #pragma mark - Init / Dealloc
 
 - (void)dealloc {
-	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(videoInstance))];
+    //This shouldnt be needed, need to fix. 
+    @try{
+        [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(videoInstance))];
+    }@catch(id anException){
+        //do nothing, obviously it wasn't attached because an exception was thrown
+    }
+
 }
 
 #pragma mark - UIViewController
@@ -81,10 +87,6 @@
 												   object:nil];
 	}
 	
-	[self addObserver:self
-		   forKeyPath:NSStringFromSelector(@selector(videoInstance))
-			  options:NSKeyValueObservingOptionOld
-			  context:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
