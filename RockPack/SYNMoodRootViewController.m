@@ -276,21 +276,18 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (cv == self.videoCollectionView) {
         
-        self.videoCollectionView.userInteractionEnabled = NO;
         
         if (IS_IPHONE) {
             NSLog(@"This should never be called");
             return;
         }
+        
         UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
 		animator.cellIndexPath = indexPath;
 		self.videoPlayerAnimator = animator;
 		viewController.transitioningDelegate = animator;
-		[self presentViewController:viewController animated:YES completion:^{
-            self.videoCollectionView.userInteractionEnabled = YES;
-        }];
         
     }
     
