@@ -63,6 +63,12 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
                                                            NSFontAttributeName:[UIFont regularCustomFontOfSize:(IS_IPAD ? 22.0f : 15.0f)]}];
     
+    [[UINavigationBar appearance] setTintColor:[UIColor grayColor]];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault]; // Takes out title
+    
+    UIImage *backButtonImage = [UIImage imageNamed:@"BackButtonApp"];
+    [[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:nil
@@ -81,8 +87,6 @@
         
     }
     
-    // sets the tint to gray for all navigatin controllers
-    self.view.tintColor = [UIColor grayColor];
     
     // == Feed Page == //
     
@@ -136,7 +140,6 @@
     if (IS_IPAD) {
         for (UINavigationController *tmpNav in self.viewControllers) {
             [tmpNav.navigationBar setBackgroundTransparent:YES];
-
         }
     }
     
@@ -229,5 +232,11 @@
 {
     return NSStringFromClass([self class]);
 }
+
+-(void) popBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
