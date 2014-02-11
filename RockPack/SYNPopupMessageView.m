@@ -59,7 +59,7 @@
         self.messageLabel = label;
         
         // BG
-        self.backgroundColor = [UIColor colorWithWhite:IS_IPHONE ? 237.0f/255.0f : 242.0f/255.0f alpha:0.9f];
+//        self.backgroundColor = [UIColor colorWithWhite:IS_IPHONE ? 237.0f/255.0f : 242.0f/255.0f alpha:0.9f];
 
         // Add
         [self addSubview: label];
@@ -106,6 +106,7 @@
     if (_isLoader)
     {
         self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+        [self.activityIndicatorView setColor:[UIColor dollyActivityIndicator]];
         self.activityIndicatorView.hidesWhenStopped = YES;
         CGRect activityFrame = self.activityIndicatorView.frame;
         activityFrame.origin.x = kSpinnerTextDistance + self.messageLabel.frame.origin.x + self.messageLabel.frame.size.width;
