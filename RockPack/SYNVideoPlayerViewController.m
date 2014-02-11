@@ -86,7 +86,12 @@
 													 name:UIDeviceOrientationDidChangeNotification
 												   object:nil];
 	}
-	
+
+		[self addObserver:self
+         		   forKeyPath:NSStringFromSelector(@selector(videoInstance))
+         			  options:NSKeyValueObservingOptionOld
+                        context:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
