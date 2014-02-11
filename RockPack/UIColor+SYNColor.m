@@ -146,6 +146,14 @@
     
 }
 
++(UIColor *) dollyActivityIndicator
+{
+    return [UIColor colorWithRed: 188.0f / 255.0f
+                           green: 186.0f / 255.0f
+                            blue: 212.0f / 255.0f
+                           alpha: 1.0f];
+}
+
 +(UIColor *) dollyMoodColor
 {
 return [UIColor colorWithRed: 136.0f / 255.0f

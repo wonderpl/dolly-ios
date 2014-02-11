@@ -27,10 +27,11 @@
 + (UIColor *) dollyMediumGray;
 
 + (UIColor *) colorWithHex:(NSInteger)hex;
++ (UIColor *) dollyActivityIndicator;
 
 + (UIColor *) dollyTabColorSelectedBackground;
 + (UIColor *) dollyTabColorSelectedText;
-+(UIColor *) dollyMoodColor;
++ (UIColor *) dollyMoodColor;
 
 + (UIColor *)facebookColor;
 
