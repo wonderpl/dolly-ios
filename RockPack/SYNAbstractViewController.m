@@ -859,8 +859,7 @@
     // The Overlay must be removed if there is ont alreaedy displaying
     [appDelegate.masterViewController removeVideoOverlayController];
 
-    __block UIViewController *viewController =
-	(SYNCarouselVideoPlayerViewController *) [self viewControllerOfClass:[SYNCarouselVideoPlayerViewController class]];
+    __block UIViewController *viewController = [self viewControllerOfClass:[SYNCarouselVideoPlayerViewController class]];
     
     [self viewChannelDetails:channel withAnimation:NO];
     
