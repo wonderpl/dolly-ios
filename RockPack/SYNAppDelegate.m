@@ -1247,13 +1247,6 @@
 
 #pragma mark - Social deep linking
 
-- (BOOL) application: (UIApplication *) application
-       handleOpenURL: (NSURL *) url
-{
-    return YES;
-}
-
-
 - (NSDictionary *) parseURLParams: (NSString *) query
 {
     NSArray *pairs = [query componentsSeparatedByString: @"&"];
