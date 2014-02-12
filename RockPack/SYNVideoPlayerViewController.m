@@ -27,6 +27,7 @@
 #import "UILabel+Animation.h"
 #import "SYNWebViewController.h"
 #import <SDWebImageManager.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
 
@@ -86,6 +87,9 @@
 	if ([self.navigationController isBeingPresented]) {
 		[self playCurrentVideo];
 	}
+	
+	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+	[audioSession setActive:YES withOptions:0 error:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -100,6 +104,13 @@
 	}
 	
 	[self trackViewingStatisticsForCurrentVideo];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	
+	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+	[audioSession setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -260,6 +271,7 @@
 
 - (void)playCurrentVideo {
 	if (self.currentVideoPlayer) {
+		[self.currentVideoPlayer pause];
 		[self.currentVideoPlayer removeFromSuperview];
 		self.currentVideoPlayer.delegate = nil;
 		self.currentVideoPlayer = nil;
