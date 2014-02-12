@@ -1,1 +1,1 @@
-../../GoogleConversionTracking/GoogleConversionPing.h
+../../GoogleConversionTracking/Deprecated/GoogleConversionPing.h

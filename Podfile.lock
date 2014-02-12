@@ -1,7 +1,7 @@
 PODS:
   - Appirater (2.0.2)
-  - Facebook-iOS-SDK (3.11.1)
-  - GoogleConversionTracking (2.1.0)
+  - Facebook-iOS-SDK (3.12.0)
+  - GoogleConversionTracking (3.0.0)
   - ISO8601DateFormatter (0.7)
   - Kiwi/ARC (2.2.3)
   - Kiwi/NonARC (2.2.3)
@@ -12,11 +12,11 @@ PODS:
     - Reachability (~> 3.1.0)
   - Ooyala (1.5.1)
   - Reachability (3.1.1)
-  - SDWebImage (3.5):
+  - SDWebImage (3.5.2):
     - SDWebImage/Core
-  - SDWebImage/Core (3.5)
+  - SDWebImage/Core (3.5.2)
   - SSKeychain (0.2.1)
-  - TestFlightSDK (2.2.1-beta)
+  - TestFlightSDK (2.2.1)
 
 DEPENDENCIES:
   - Appirater
@@ -38,15 +38,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  Facebook-iOS-SDK: 42a1de39170b858d675c2453d8aace55c51be2bb
-  GoogleConversionTracking: 6196d703c8adaa42d6fb1b90e620d532b7cd4bfa
+  Facebook-iOS-SDK: c09f7d80db5c48170ff834bc03ebe774c49d1f5b
+  GoogleConversionTracking: cb1368fb8c3229ca374a3554a2a9ce50dfa1fa9d
   ISO8601DateFormatter: 00944e437ea647f4244454ce8809d313861d08de
   Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
   Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SDWebImage: f1a72472f8a2d54445f1fedafe2090593d9caf7f
+  SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
-  TestFlightSDK: 4249c2f70e621bcfbdebf019073169c8fe36be13
+  TestFlightSDK: 030fa8a1bc8aa9ba5c9ae1be05ceaba775368c0c
 
 COCOAPODS: 0.29.0

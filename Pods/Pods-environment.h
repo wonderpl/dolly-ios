@@ -15,13 +15,13 @@
 // Facebook-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Facebook_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
-#define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 11
-#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
+#define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 12
+#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 0
 
 // GoogleConversionTracking
 #define COCOAPODS_POD_AVAILABLE_GoogleConversionTracking
-#define COCOAPODS_VERSION_MAJOR_GoogleConversionTracking 2
-#define COCOAPODS_VERSION_MINOR_GoogleConversionTracking 1
+#define COCOAPODS_VERSION_MAJOR_GoogleConversionTracking 3
+#define COCOAPODS_VERSION_MINOR_GoogleConversionTracking 0
 #define COCOAPODS_VERSION_PATCH_GoogleConversionTracking 0
 
 // ISO8601DateFormatter
@@ -52,13 +52,13 @@
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
 #define COCOAPODS_VERSION_MAJOR_SDWebImage 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage 5
-#define COCOAPODS_VERSION_PATCH_SDWebImage 0
+#define COCOAPODS_VERSION_PATCH_SDWebImage 2
 
 // SDWebImage/Core
 #define COCOAPODS_POD_AVAILABLE_SDWebImage_Core
 #define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 5
-#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 0
+#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
 
 // SSKeychain
 #define COCOAPODS_POD_AVAILABLE_SSKeychain
