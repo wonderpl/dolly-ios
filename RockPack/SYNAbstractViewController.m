@@ -102,11 +102,35 @@
 }
 
 
+#pragma mark - Back button
+
+-(UIBarButtonItem*) backButton {
+
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [backButton setBackgroundImage:[UIImage imageNamed:@"BackButtonApp"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    backButton.frame = CGRectMake(0.0f, 0.0f, 29.0f, 39.0f);
+    
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    return backButtonItem;
+}
+
 #pragma mark - View lifecycle
 
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    if (self.navigationController.viewControllers.firstObject != self) {
+        [self.navigationItem setLeftBarButtonItem:[self backButton]];
+        self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+        [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+    }
+    
+    
     
     
     self.automaticallyAdjustsScrollViewInsets = NO; 
@@ -907,6 +931,12 @@
 													button.enabled = YES;
 												}];
 	}
+}
+
+
+-(void) goBack {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

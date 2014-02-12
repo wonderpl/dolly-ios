@@ -64,11 +64,7 @@
                                                            NSFontAttributeName:[UIFont regularCustomFontOfSize:(IS_IPAD ? 22.0f : 15.0f)]}];
     
     [[UINavigationBar appearance] setTintColor:[UIColor grayColor]];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault]; // Takes out title
     
-    UIImage *backButtonImage = [UIImage imageNamed:@"BackButtonApp"];
-    [[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:nil
@@ -94,8 +90,7 @@
     feedRootViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
     
-    
-    
+
     
     
     // == Profile Page == //
@@ -103,6 +98,7 @@
     SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
     profileViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
+    
     
     
     if (!IS_IPAD)
