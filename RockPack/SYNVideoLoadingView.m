@@ -30,7 +30,7 @@ static const CGFloat TextSideInset = 20.0;
 
 #pragma mark - Init / Dealloc
 
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		[self.layer addSublayer:self.imageLayer]; // The actual image
 		[self.layer addSublayer:self.overlayLayer]; // The grey overlay over the image

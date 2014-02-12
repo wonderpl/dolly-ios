@@ -10,7 +10,6 @@
 #import "VideoInstance.h"
 #import "Video.h"
 #import "SYNScrubberBar.h"
-#import "SYNVideoLoadingView.h"
 #import "SYNVideoPlayer+Protected.h"
 #import <Reachability.h>
 
