@@ -45,18 +45,6 @@
 
 @implementation SYNVideoPlayerViewController
 
-#pragma mark - Init / Dealloc
-
-- (void)dealloc {
-    //This shouldnt be needed, need to fix. 
-    @try{
-        [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(videoInstance))];
-    }@catch(id anException){
-        //do nothing, obviously it wasn't attached because an exception was thrown
-    }
-
-}
-
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
@@ -86,12 +74,6 @@
 													 name:UIDeviceOrientationDidChangeNotification
 												   object:nil];
 	}
-
-		[self addObserver:self
-         		   forKeyPath:NSStringFromSelector(@selector(videoInstance))
-         			  options:NSKeyValueObservingOptionOld
-                        context:nil];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,7 +84,7 @@
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
 	if ([self.navigationController isBeingPresented]) {
-		[self playVideo];
+		[self playCurrentVideo];
 	}
 }
 
@@ -117,11 +99,22 @@
 		[self.currentVideoPlayer pause];
 	}
 	
-	[self trackVideoViewingStatisticsForVideoInstance:self.videoInstance withVideoPlayer:self.currentVideoPlayer];
+	[self trackViewingStatisticsForCurrentVideo];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
 	return UIStatusBarStyleDefault;
+}
+
+#pragma mark - Getters / Setters
+
+- (void)setVideoInstance:(VideoInstance *)videoInstance {
+	[self trackViewingStatisticsForCurrentVideo];
+	
+	_videoInstance = videoInstance;
+	
+	[self updateVideoInstanceDetails:videoInstance];
+	[self playCurrentVideo];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
@@ -261,21 +254,9 @@
 	}
 }
 
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:NSStringFromSelector(@selector(videoInstance))]) {
-		VideoInstance *previousVideoInstance = change[NSKeyValueChangeOldKey];
-		[self trackVideoViewingStatisticsForVideoInstance:previousVideoInstance withVideoPlayer:self.currentVideoPlayer];
-		
-		[self updateVideoInstanceDetails:self.videoInstance];
-		[self playVideo];
-	}
-}
-
 #pragma mark - Private
 
-- (void)playVideo {
+- (void)playCurrentVideo {
 	if (self.currentVideoPlayer) {
 		[self.currentVideoPlayer removeFromSuperview];
 		self.currentVideoPlayer.delegate = nil;
@@ -315,20 +296,23 @@
     [self.commentButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
 }
 
-- (void)trackVideoViewingStatisticsForVideoInstance:(VideoInstance *)videoInstance withVideoPlayer:(SYNVideoPlayer *)videoPlayer {
-	CGFloat percentageViewed = videoPlayer.currentTime / [videoPlayer duration];
+- (void)trackViewingStatisticsForCurrentVideo {
+	CGFloat currentTime = self.currentVideoPlayer.currentTime;
+	CGFloat duration = self.currentVideoPlayer.duration;
+	CGFloat percentageViewed = currentTime / duration;
 	
 	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
 	
 	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
 														  action:@"videoViewed"
-														   label:videoInstance.video.sourceId
+														   label:self.videoInstance.video.sourceId
 														   value:@((int)(percentageViewed  * 100.0f))] build]];
 	
 	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
 														  action:@"videoViewedDuration"
-														   label:videoInstance.video.sourceId
-														   value:@((int)(videoPlayer.currentTime))] build]];
+														   label:self.videoInstance.video.sourceId
+														   value:@((int)(currentTime))] build]];
+
 }
 
 - (Class)animationClassForViewController:(UIViewController *)viewController {
