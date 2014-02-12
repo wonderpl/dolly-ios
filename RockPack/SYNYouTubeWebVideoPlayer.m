@@ -26,9 +26,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 @property (nonatomic, assign) SYNYouTubeVideoPlayerState youTubePlayerState;
 
-@property (nonatomic, assign) BOOL playerReady;
-@property (nonatomic, assign) BOOL playerLoaded;
-
 @end
 
 @implementation SYNYouTubeWebVideoPlayer
