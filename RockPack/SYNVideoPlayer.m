@@ -284,6 +284,9 @@ static CGFloat const ControlsFadeTimer = 5.0;
 - (void)fadeOutLoadingView {
 	[UIView animateWithDuration:0.3 animations:^{
 		self.loadingView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		[self.loadingView removeFromSuperview];
+		self.loadingView = nil;
 	}];
 }
 
