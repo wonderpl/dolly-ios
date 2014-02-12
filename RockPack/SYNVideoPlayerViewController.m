@@ -113,8 +113,10 @@
 	
 	_videoInstance = videoInstance;
 	
-	[self updateVideoInstanceDetails:videoInstance];
-	[self playCurrentVideo];
+	if ([self isViewLoaded]) {
+		[self updateVideoInstanceDetails:videoInstance];
+		[self playCurrentVideo];
+	}
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
