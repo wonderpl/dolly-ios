@@ -58,10 +58,12 @@
         UIImage *image = userInfo[@"image"];
         NSURL *url = userInfo[@"url"];
         
-        [activityViewController dismissViewControllerAnimated: YES
-                                                   completion: ^{
+		UIViewController *shareViewController = activityViewController.presentingController;
+		UIViewController *presentingViewController = shareViewController.presentingViewController;
+        [shareViewController dismissViewControllerAnimated: YES
+												completion: ^{
                                                        MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
-                                                       [OWActivityDelegateObject sharedObject].controller = activityViewController.presentingController;
+                                                       [OWActivityDelegateObject sharedObject].controller = presentingViewController;
                                                        mailComposeViewController.mailComposeDelegate = [OWActivityDelegateObject sharedObject];
                                                        
                                                        if (text && !url)
@@ -99,13 +101,9 @@
                                                            return;
                                                        }
                                                        
-                                                       [activityViewController.presentingController presentViewController: mailComposeViewController
-                                                                                                                 animated: YES
-                                                                                                               completion: ^{
-                                                                                                                   SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
-                                                                                                                   
-                                                                                                                   [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
-                                                                                                               }];
+                                                       [presentingViewController presentViewController: mailComposeViewController
+																							  animated: YES
+																							completion: nil];
                                                    }];
     };
     
