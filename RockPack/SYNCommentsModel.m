@@ -57,15 +57,20 @@ static const NSInteger MinutesCacheLength = 1;
     
     if (components.minute <= MinutesCacheLength) {
         networkEngineToUse = appDelegate.oAuthNetworkEngine;
+        
+        NSLog(@"OAUTHHHH");
+        
     } else {
+        
         networkEngineToUse = appDelegate.networkEngine;
+        
     }
     
 //    if(self.comments.count == 0)
 //    {
 //        self.generalLoader.hidden = NO;
 //        [self.generalLoader startAnimating];
-//    }
+//    } 
     
     [networkEngineToUse getCommentsForUsedId:appDelegate.currentUser.uniqueId
                                    channelId:self.videoInstance.channel.uniqueId
@@ -73,9 +78,13 @@ static const NSInteger MinutesCacheLength = 1;
                                      inRange:range
                            completionHandler:^(NSDictionary	*dictionary) {
 							   
+//                               NSLog(@"ALL COMMENTS RETURNED%@", dictionary);
+//                               NSLog(@"COMMENTS RETURNEDED");
+                               
 							   NSArray *comments = dictionary[@"comments"][@"items"];
-							   
-							   self.loadedItems = comments;
+							   NSMutableArray * tmpArray = [NSMutableArray arrayWithArray:self.loadedItems];
+                               [tmpArray addObjectsFromArray:comments];
+							   self.loadedItems =  tmpArray;
 							   self.totalItemCount = [dictionary[@"comments"][@"total"] integerValue];
 							   
 							   [self handleDataUpdatedForRange:range];
@@ -98,7 +107,7 @@ static const NSInteger MinutesCacheLength = 1;
 //                               
 //							   
 //                               [self refreshCollectionView];
-//							   
+//
 						   } errorHandler:^(id error) {
 							   
 							   

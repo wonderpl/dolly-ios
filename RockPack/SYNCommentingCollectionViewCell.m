@@ -7,7 +7,6 @@
 //
 
 #import "SYNCommentingCollectionViewCell.h"
-#import "Comment.h"
 #import "UIButton+WebCache.h"
 #import "UIFont+SYNFont.h"
 #import "SYNCommentingViewController.h"
@@ -91,23 +90,29 @@
                 forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void) setComment:(Comment *)comment
+- (void) setComment:(NSDictionary *)comment
 {
     _comment = comment;
     
     if(!_comment)
         return;
     
-	NSParagraphStyle *paragraphStyle = [[self class] paragraphStyle];
-	NSAttributedString *commentText = [[NSAttributedString alloc] initWithString:_comment.commentText attributes:@{ NSParagraphStyleAttributeName: paragraphStyle }];
     
-    self.nameLabel.text = _comment.displayName;
+    NSString *commentString = _comment[@"comment"];
+    
+	NSParagraphStyle *paragraphStyle = [[self class] paragraphStyle];
+    
+	NSAttributedString *commentText = [[NSAttributedString alloc] initWithString:commentString attributes:@{ NSParagraphStyleAttributeName: paragraphStyle }];
+    
+    
+    self.nameLabel.text = _comment[@"user"][@"display_name"];
     
     self.commentTextView.attributedText = commentText;
     
-    self.datePosted = _comment.dateAdded;
+    self.datePosted = [_comment dateFromISO6801StringForKey: @"date_added"
+                                                withDefault: [NSDate date]];
     
-    [self.avatarButton setImageWithURL: [NSURL URLWithString: comment.thumbnailUrl]
+    [self.avatarButton setImageWithURL: [NSURL URLWithString: comment[@"User"][@"avatar_thumbnail_url"]]
                               forState: UIControlStateNormal
                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile"]
                                options: SDWebImageRetryFailed];
@@ -183,13 +188,13 @@
     if (components.year > 0)
         dateDifferenceString = [NSString stringWithFormat: @"%i year%@", components.year, (components.year > 1 ? @"s" : @"")];
     else if (components.month > 0)
-         dateDifferenceString =  [NSString stringWithFormat: @"%i month%@", components.month, (components.month > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%i month%@", components.month, (components.month > 1 ? @"s" : @"")];
     else if (components.day > 0)
-         dateDifferenceString =  [NSString stringWithFormat: @"%i day%@", components.day, (components.day > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%i day%@", components.day, (components.day > 1 ? @"s" : @"")];
     else if (components.hour > 0)
-         dateDifferenceString =  [NSString stringWithFormat: @"%i hour%@", components.hour, (components.hour > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%i hour%@", components.hour, (components.hour > 1 ? @"s" : @"")];
     else if (components.minute > 0)
-         dateDifferenceString =  [NSString stringWithFormat: @"%i min%@", components.minute, (components.minute > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%i min%@", components.minute, (components.minute > 1 ? @"s" : @"")];
     else
         dateDifferenceString = @"now";
     
@@ -218,7 +223,7 @@
     }
     else
     {
-      
+        
         
         if(!self.cellOpenForDeletion)
             return;

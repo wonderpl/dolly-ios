@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Comment;
 @class SYNCommentingViewController;
+#import "NSDictionary+Validation.h"
 
 
 #define kCommentTextSizeWidth 200.0f
@@ -31,7 +31,7 @@
 
 @property (nonatomic) BOOL loading;
 
-@property (nonatomic, weak) Comment* comment;
+@property (nonatomic, weak) NSDictionary* comment;
 
 @property (nonatomic) BOOL deletable; // only for user generated comments
 

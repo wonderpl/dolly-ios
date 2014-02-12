@@ -11,7 +11,6 @@
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
 #import "SYNAppDelegate.h"
-#import "Comment.h"
 #import "SYNMasterViewController.h"
 #import "SYNDeviceManager.h"
 #import "UICollectionReusableView+Helpers.h"
@@ -44,11 +43,12 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, strong) IBOutlet UILabel *charactersLeftLabel;
 
 @property (nonatomic, weak) VideoInstance* videoInstance;
+@property (nonatomic) BOOL loadedComments;
 
 @property (nonatomic, strong) NSMutableArray* comments;
 
 // holding the values for deleting until confirmed by the alert view
-@property (nonatomic, weak) Comment* currentlyDeletingComment;
+@property (nonatomic, weak) NSDictionary* currentlyDeletingComment;
 @property (nonatomic, weak) SYNCommentingCollectionViewCell* currentlyDeletingCell;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *commentBottomConstraint;
@@ -62,8 +62,8 @@ static NSString* PlaceholderText = @"Say something nice";
 - (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance {
 	if (self = [super initWithViewId:kCommentsViewId]) {
 		self.videoInstance = videoInstance;
-//		self.model = [SYNCommentsModel modelWithVideoInstance:videoInstance];
-//		self.model.delegate = self;
+		self.model = [SYNCommentsModel modelWithVideoInstance:videoInstance];
+		self.model.delegate = self;
 	}
 	return self;
 }
@@ -109,15 +109,10 @@ static NSString* PlaceholderText = @"Say something nice";
                                             options: SDWebImageRetryFailed];
     
     
-    
     self.generalLoader.hidden = YES;
     
-    // gets the comments from the DB
-    
-    [self refreshCollectionView];
-    [self getCommentsFromServer];
 	
-//	[self.model loadNextPage];
+	[self.model loadNextPage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)
@@ -129,8 +124,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
 
-    
-    
+    self.loadedComments = NO;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -202,7 +196,7 @@ static NSString* PlaceholderText = @"Say something nice";
 }
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
-//	[self.commentsCollectionView reloadData];
+	[self.commentsCollectionView reloadData];
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
@@ -237,22 +231,6 @@ static NSString* PlaceholderText = @"Say something nice";
     }
 }
 
-#pragma mark - Get Comments
-
-- (void)fetchCommentsFromDB {
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Comment entityName]];
-	
-	[fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"videoInstanceId == %@", self.videoInstance.uniqueId]];
-	[fetchRequest setSortDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES] ]];
-
-	NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest
-																				error:nil];
-
-	self.comments = [NSMutableArray arrayWithArray:fetchedArray];
-
-    self.videoInstance.commentCount = [NSNumber numberWithInt: self.comments.count];
-
-}
 
 -(void)getCommentsFromServer
 {
@@ -289,33 +267,35 @@ static NSString* PlaceholderText = @"Say something nice";
         [self.generalLoader startAnimating];
     }
     
+    
     [networkEngineToUse getCommentsForUsedId:appDelegate.currentUser.uniqueId
                                    channelId:self.videoInstance.channel.uniqueId
                                   andVideoId:self.videoInstance.uniqueId
                                      inRange:self.dataRequestRange
                            completionHandler:^(id dictionary) {
-                                      
-                                      if(![dictionary isKindOfClass:[NSDictionary class]])
-                                          return;
-                                      
-                                      if(![appDelegate.mainRegistry registerCommentsFromDictionary:dictionary
-                                                                                      withExisting:self.comments
-                                                                                forVideoInstanceId:self.videoInstance.uniqueId])
-                                      {
-                                          self.comments = @[].mutableCopy;
-                                          
-                                
-                                      }
+                               
+                               if(![dictionary isKindOfClass:[NSDictionary class]])
+                                   return;
+                               
+                               if(![appDelegate.mainRegistry registerCommentsFromDictionary:dictionary
+                                                                               withExisting:self.comments
+                                                                         forVideoInstanceId:self.videoInstance.uniqueId])
+                               {
+                                   self.comments = @[].mutableCopy;
+                                   
+                                   
+                               }
+                               self.videoInstance.commentCount = dictionary[@"comments"][@"total"];
                                
                                self.generalLoader.hidden = YES;
-                               self.videoInstance.commentCount = dictionary[@"comments"][@"total"];
-                            
+                               
+                               
                                [self refreshCollectionView];
-        
-                                  } errorHandler:^(id error) {
-                            
-                                      
-                            }];
+                               
+                           } errorHandler:^(id error) {
+                               
+                               
+                           }];
 }
 
 #pragma mark - UITextViewDelegate
@@ -365,8 +345,8 @@ static NSString* PlaceholderText = @"Say something nice";
 - (void) refreshCollectionView
 {
     
-    [self fetchCommentsFromDB];
-    
+    [self.model reset];
+    [self.model loadNextPage];
     
     [self.commentsCollectionView reloadData];
 	
@@ -389,7 +369,7 @@ static NSString* PlaceholderText = @"Say something nice";
 		return;
 	}
     
-    Comment* comment = [self createCommentFromText:commentText];
+    NSDictionary* comment = [self createCommentFromText:commentText];
     
     if(!comment)
     {
@@ -400,7 +380,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.sendMessageTextView.text = @"";
     
-    [self refreshCollectionView];
     
     
     __weak SYNCommentingViewController* wself = self;
@@ -431,36 +410,15 @@ static NSString* PlaceholderText = @"Say something nice";
                                                ErrorBlock(@{@"error" : @"responce is not a discionary"});
                                            }
                                            
-                                           comment.validatedValue = YES;
-                                           
-                                           NSNumber* commentId = (NSNumber*)[dictionary objectForKey:@"id"];
-                                           if(![commentId isKindOfClass:[NSNumber class]])
-                                           {
-                                               ErrorBlock(@{@"error" : @"responce is not a discionary"});
-                                               return;
-                                           }
-                                           
-                                           // save the correct url in order to be able to delete
-                                           comment.uniqueId = [commentId stringValue];
-                                           
-                                           
-                                           NSError* error;
-                                           if(![comment.managedObjectContext save:&error])
-                                           {
-                                               DebugLog(@"%@", error);
-                                               ErrorBlock(@{@"error" : @"could not save to managed context"});
-                                               return;
-                                           }
-                                           
                                            [wself.sendMessageTextView resignFirstResponder];
                                            
                                            [wself refreshCollectionView];
-        
+
                                        } errorHandler:ErrorBlock];
 }
 
 
-- (Comment*) createCommentFromText:(NSString*)text
+- (NSDictionary*) createCommentFromText:(NSString*)text
 {
     
     
@@ -480,31 +438,43 @@ static NSString* PlaceholderText = @"Say something nice";
                                  };
     
     
-    Comment* adHocComment = [Comment instanceFromDictionary:dictionary
-                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+    //    Comment* adHocComment = [Comment instanceFromDictionary:dictionary
+    //                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+    //
+    //    adHocComment.localDataValue = YES;
+    //
+    //    adHocComment.videoInstanceId = self.videoInstance.uniqueId;
+    //
+    //    [appDelegate saveContext:NO];
     
-    adHocComment.localDataValue = YES;
     
-    adHocComment.videoInstanceId = self.videoInstance.uniqueId;
-    
-    [appDelegate saveContext:NO];
-    
-    
-    return adHocComment;
+    return dictionary;
 }
 // override the abstract so that you dont send notifications to the navigation manager
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-}
-
-- (void) scrollViewWillBeginDragging: (UIScrollView *) scrollView
-{
+    
+    
+    if ([self.model hasMoreItems] && scrollView.contentOffset.y<-60 && !self.loadedComments) {
+        [self.model loadNextPage];
+        
+        self.loadedComments = YES;
+    }
 }
 
 - (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate
 {
 }
+
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    // override
+    
+    self.loadedComments = NO;
+}
+
+
+
 
 #pragma mark - Button Delegates (Deleting)
 
@@ -539,28 +509,13 @@ static NSString* PlaceholderText = @"Say something nice";
     
 }
 
--(BOOL)deleteComment:(Comment*)comment
+-(BOOL)deleteComment:(NSDictionary*)comment
 {
     
     
     [self.comments removeObject:comment];
     
-    [comment.managedObjectContext deleteObject:comment];
-    
-    
-    NSError* saveError;
-    if(![comment.managedObjectContext save:&saveError])
-    {
-        // if we get an error...
-        if(!comment.isDeleted)
-        {
-            [self.comments addObject:comment]; // put it back
-        }
-        DebugLog(@"%@", saveError);
-        return NO;
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:comment.dateAdded
+    [[NSUserDefaults standardUserDefaults] setObject:comment[@"date_added"]
                                               forKey:kUserDefaultsCommentingLastInteracted];
     
     return YES;
@@ -583,21 +538,17 @@ static NSString* PlaceholderText = @"Say something nice";
         return;
     
     SYNCommentingCollectionViewCell* cell = (SYNCommentingCollectionViewCell*)candidateCell;
-//    NSDictionary* comment = cell.comment;
-    Comment* comment = cell.comment;
-
+    NSDictionary* comment = cell.comment;
     if(!comment)
         return;
     
+    
+    
     // create a ChannelOwner
     
-//    NSDictionary* channelOwnerData = @{@"id":comment[@"user"][@"id"],
-//                                       @"avatar_thumbnail_url":comment[@"user"][@"avatar_thumbnail_url"],
-//                                       @"display_name":comment[@"user"][@"display_name"]};
-
-    NSDictionary* channelOwnerData = @{@"id":comment.userId,
-                                       @"avatar_thumbnail_url":comment.thumbnailUrl,
-                                       @"display_name":comment.displayName};
+    NSDictionary* channelOwnerData = @{@"id":comment[@"user"][@"id"],
+                                       @"avatar_thumbnail_url":comment[@"user"][@"avatar_thumbnail_url"],
+                                       @"display_name":comment[@"user"][@"display_name"]};
     
     ChannelOwner* co = [ChannelOwner instanceFromDictionary:channelOwnerData
                                   usingManagedObjectContext:appDelegate.mainManagedObjectContext
@@ -622,13 +573,11 @@ static NSString* PlaceholderText = @"Say something nice";
     if(buttonIndex == 1)
     {
         
-        
-        
         __weak SYNCommentingViewController* wself = self;
         [appDelegate.oAuthNetworkEngine deleteCommentForUserId:appDelegate.currentUser.uniqueId
                                                      channelId:self.videoInstance.channel.uniqueId
                                                        videoId:self.videoInstance.uniqueId
-                                                  andCommentId:self.currentlyDeletingComment.uniqueId
+                                                  andCommentId:self.currentlyDeletingComment[@"id"]
                                              completionHandler:^(id responce) {
                                                  
                                                  [wself deleteComment:wself.currentlyDeletingComment];
@@ -649,10 +598,10 @@ static NSString* PlaceholderText = @"Say something nice";
                                                      [wself.commentsCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete]];
                                                  } completion:^(BOOL finished) {
                                                      [wself refreshCollectionView];
-
+                                                     
                                                      
                                                  }];
-
+                                                 
                                                  
                                                  
                                              } errorHandler:^(id error) {
@@ -680,27 +629,25 @@ static NSString* PlaceholderText = @"Say something nice";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//	return self.model.itemCount;
-    return self.comments.count;
+	return self.model.itemCount;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *) cv
-                   cellForItemAtIndexPath:(NSIndexPath *) indexPath
+                  cellForItemAtIndexPath:(NSIndexPath *) indexPath
 {
     SYNCommentingCollectionViewCell* commentingCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNCommentingCollectionViewCell reuseIdentifier]
                                                                                     forIndexPath:indexPath];
-    Comment* comment = self.comments[indexPath.item];
 	
-//	NSDictionary *comment = [self.model itemAtIndex:indexPath.item];
-
+	NSDictionary *comment = [self.model itemAtIndex:indexPath.item];
+    
     commentingCell.comment = comment;
     
     
-    commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
+    
     commentingCell.delegate = self;
 
-    if([comment.userId isEqualToString:appDelegate.currentUser.uniqueId])
+    if([comment[@"user"][@"id"] isEqualToString:appDelegate.currentUser.uniqueId])
     {
         // only the user can delete his own comments
         commentingCell.deletable = YES;
@@ -710,18 +657,19 @@ static NSString* PlaceholderText = @"Say something nice";
     return commentingCell;
 }
 
+
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    Comment* comment = self.comments[indexPath.item];
+    NSDictionary* comment = [self.model itemAtIndex:indexPath.item];
     // size
     
     UIFont* correctFont = [SYNCommentingCollectionViewCell commentFieldFont];
 	NSParagraphStyle *paragraphStyle = [SYNCommentingCollectionViewCell paragraphStyle];
     
-    CGRect rect = [comment.commentText boundingRectWithSize:(CGSize){kCommentTextSizeWidth, CGFLOAT_MAX}
+    CGRect rect = [comment[@"comment"] boundingRectWithSize:(CGSize){kCommentTextSizeWidth, CGFLOAT_MAX}
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:@{ NSFontAttributeName : correctFont,
 															   NSParagraphStyleAttributeName : paragraphStyle}
@@ -739,23 +687,23 @@ static NSString* PlaceholderText = @"Say something nice";
 // this controller gets destroyed and recreated every time we press the comment button so need to catch dealloc rather than viewDidUnload
 - (void) dealloc
 {
-    // delete all the comments for which we did not retrieve an OK. They might still have been saved and will appear upon load
-    // but we need to be consistent by only showing what we are certain has been received form the server
-    Comment* comment;
-    for (comment in self.comments)
-    {
-        if(!comment.validatedValue)
-        {
-            DebugLog(@"Deleting unvalidated comment: %@", comment);
-            [comment.managedObjectContext deleteObject:comment];
-        }
-    }
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    
-    NSError* error;
-    [comment.managedObjectContext save:&error];
+    //    // delete all the comments for which we did not retrieve an OK. They might still have been saved and will appear upon load
+    //    // but we need to be consistent by only showing what we are certain has been received form the server
+    //    Comment* comment;
+    //    for (comment in self.comments)
+    //    {
+    //        if(!comment.validatedValue)
+    //        {
+    //            DebugLog(@"Deleting unvalidated comment: %@", comment);
+    //            [comment.managedObjectContext deleteObject:comment];
+    //        }
+    //    }
+    //
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //    
+    //    
+    //    NSError* error;
+    //    [comment.managedObjectContext save:&error];
     
 }
 
