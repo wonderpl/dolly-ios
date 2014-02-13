@@ -925,8 +925,9 @@
                     channelId:(NSString*)channelId
                    andVideoId:(NSString*)videoId
                       inRange:(NSRange)range
-            completionHandler: (MKNKUserSuccessBlock) completionBlock
-                 errorHandler: (MKNKUserErrorBlock) errorBlock
+              withForceReload:(BOOL)forceReload
+            completionHandler:(MKNKUserSuccessBlock) completionBlock
+                 errorHandler:(MKNKUserErrorBlock) errorBlock
 {
     
     NSDictionary *apiSubstitutionDictionary = @{@"USERID": userId, @"CHANNELID" : channelId, @"VIDEOINSTANCEID" : videoId};

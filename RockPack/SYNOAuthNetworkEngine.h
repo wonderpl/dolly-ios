@@ -18,6 +18,7 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
 @interface SYNOAuthNetworkEngine : SYNAbstractNetworkEngine
 
 - (void) enqueueSignedOperation: (MKNetworkOperation *) request;
+- (void) enqueueSignedOperation: (MKNetworkOperation *) request withForceReload:(BOOL) relaod;
 
 - (void) registerUserWithData: (NSDictionary *) userData
             completionHandler: (MKNKLoginCompleteBlock) completionBlock

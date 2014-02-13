@@ -79,6 +79,25 @@
 	}
 }
 
+- (void) enqueueSignedOperation: (MKNetworkOperation *) request withForceReload:(BOOL) relaod
+{
+	// If we're not authenticated, and this is not part of the OAuth process,
+	if (!self.oAuth2Credential)
+    {
+		AssertOrLog(@"enqueueSignedOperation - Not authenticated");
+	}
+	else
+    {
+        [request setAuthorizationHeaderValue: self.oAuth2Credential.accessToken
+                                 forAuthType: @"Bearer"];
+        
+        request.shouldCacheResponseEvenIfProtocolIsHTTPS = TRUE;
+        
+        [self enqueueOperation:request forceReload:relaod];
+	}
+}
+
+
 
 #pragma mark - Loggin-In and Signing-Up
 
@@ -2205,6 +2224,7 @@
                     channelId:(NSString*)channelId
                    andVideoId:(NSString*)videoId
                       inRange:(NSRange)range
+              withForceReload:(BOOL)forceReload
             completionHandler:(MKNKUserSuccessBlock) completionBlock
                  errorHandler:(MKNKUserErrorBlock) errorBlock
 {
@@ -2230,6 +2250,6 @@
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
     
-    [self enqueueSignedOperation: networkOperation];
+    [self enqueueSignedOperation: networkOperation withForceReload:forceReload];
 }
 @end

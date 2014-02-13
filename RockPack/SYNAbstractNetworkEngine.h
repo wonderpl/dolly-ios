@@ -61,6 +61,7 @@
                     channelId:(NSString*)channelId
                    andVideoId:(NSString*)videoId
                       inRange:(NSRange)range
+              withForceReload:(BOOL)forceReload
             completionHandler:(MKNKUserSuccessBlock) completionBlock
                  errorHandler:(MKNKUserErrorBlock) errorBlock;
 
