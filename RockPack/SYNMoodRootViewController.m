@@ -487,7 +487,11 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         
         self.scrollingTimer = nil;
         self.chooseAnotherButton. hidden = NO;
-        [self showRandomVideoInstance];
+        if (IS_IPAD) {
+            [self showRandomVideoInstance];
+        } else {
+            [self showWatchButton];
+        }
         
         [self.moodCollectionView.collectionViewLayout invalidateLayout];
     }
