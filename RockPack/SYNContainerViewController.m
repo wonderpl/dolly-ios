@@ -209,10 +209,12 @@
     {
         self.currentViewController = nil; // will be caught by the setter
     }
+    //If the user taps the current tab they are on, pop to root
     if (self.currentViewController == self.viewControllers[index]) {
         [((UINavigationController*)self.viewControllers[index]) popToRootViewControllerAnimated:YES];
     }
 
+    //Always pop the discovery screen to root
     if(((UINavigationController*)self.viewControllers[1]).viewControllers.count > 1){        [((UINavigationController*)self.viewControllers[1]) popToRootViewControllerAnimated:NO];
 
     }
