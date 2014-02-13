@@ -77,7 +77,7 @@
     self.descriptionLabel.text = recomendation.descriptionText;
     
     if ([self.descriptionLabel.text isEqualToString:@""]) {
-        self.descriptionLabel.text = @"Test Description ----------------d 123456";
+        self.descriptionLabel.text = @"";
     }
     
     [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]
