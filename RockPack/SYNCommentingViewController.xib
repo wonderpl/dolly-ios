@@ -114,10 +114,10 @@
                 <constraint firstAttribute="centerX" secondItem="MKx-RD-ja4" secondAttribute="centerX" id="Nmw-Lf-n1Q"/>
                 <constraint firstItem="uyA-H8-2fC" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="ZyG-CG-1VA"/>
                 <constraint firstAttribute="trailing" secondItem="uyA-H8-2fC" secondAttribute="trailing" id="aao-D1-sr4"/>
+                <constraint firstItem="xHI-4t-8mN" firstAttribute="bottom" secondItem="uyA-H8-2fC" secondAttribute="bottom" constant="-49" id="dca-oV-bQZ"/>
                 <constraint firstAttribute="bottom" secondItem="uyA-H8-2fC" secondAttribute="bottom" id="fIw-Uy-61g"/>
                 <constraint firstItem="xHI-4t-8mN" firstAttribute="top" secondItem="2" secondAttribute="top" id="fup-c3-Wkx"/>
                 <constraint firstItem="xHI-4t-8mN" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="oQV-Am-Psa"/>
-                <constraint firstItem="uyA-H8-2fC" firstAttribute="top" secondItem="xHI-4t-8mN" secondAttribute="bottom" id="ohV-U5-UR9"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

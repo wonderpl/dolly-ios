@@ -14,4 +14,8 @@
 
 + (instancetype)modelWithVideoInstance:(VideoInstance *)videoInstance;
 
+- (void)removeObjectAtIndex:(NSInteger)index;
+- (void)loadNewComments;
+- (void)resetLoadedData;
+
 @end

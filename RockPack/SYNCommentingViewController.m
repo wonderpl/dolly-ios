@@ -17,6 +17,7 @@
 #import "SYNNavigationManager.h"
 #import "SYNCommentsModel.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIColor+SYNColor.h"
 
 #define kMaxCommentCharacters 120
 #define kCacheTimeInMinutes 1
@@ -29,6 +30,7 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
 
 // Send View
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @property (nonatomic, strong) IBOutlet UIView* bottomContainerView;
 @property (nonatomic, strong) IBOutlet UITextView* sendMessageTextView;
@@ -53,7 +55,7 @@ static NSString* PlaceholderText = @"Say something nice";
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *commentBottomConstraint;
 
-@property (nonatomic, strong) SYNPagingModel *model;
+@property (nonatomic, strong) SYNCommentsModel *model;
 
 @end
 
@@ -111,7 +113,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.generalLoader.hidden = YES;
     
-	
+	[self.model reset];
 	[self.model loadNextPage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -123,7 +125,22 @@ static NSString* PlaceholderText = @"Say something nice";
                                              selector:@selector(keyboardNotified:)
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date]
+                                              forKey:kUserDefaultsCommentingLastInteracted];
+    
+    
+    self.refreshControl = [[UIRefreshControl alloc] initWithFrame: CGRectMake(0, 0, 320, 44)];
+    
+    [self.refreshControl setTintColor:[UIColor dollyActivityIndicator]];
+    
+    [self.refreshControl addTarget: self
+                            action: @selector(resetData)
+                  forControlEvents: UIControlEventValueChanged];
 
+    [self.commentsCollectionView addSubview: self.refreshControl];
+
+    
     self.loadedComments = NO;
 }
 
@@ -137,8 +154,8 @@ static NSString* PlaceholderText = @"Say something nice";
         [self.commentBottomConstraint setConstant:88];
     }
     
-
-
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -152,6 +169,14 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
 }
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+
+    self.videoInstance.commentCountValue = [self.model totalItemCount];
+    self.sendMessageTextView.text = @"";
+}
+
 
 #pragma mark - Keyboard Animation
 
@@ -171,7 +196,7 @@ static NSString* PlaceholderText = @"Say something nice";
         
         if (!IS_IPHONE_5) {
             self.bottomContainerViewBottom.constant = keyboardHeightChange+88;
-
+            
         }
 		
 		CGFloat newYOffset = self.commentsCollectionView.contentOffset.y + (isShowing ? keyboardHeight : -keyboardHeight);
@@ -195,12 +220,26 @@ static NSString* PlaceholderText = @"Say something nice";
     }
 }
 
+#pragma mark - Paging Delegates
+
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
-	[self.commentsCollectionView reloadData];
+    [self.refreshControl endRefreshing];
+    [self.commentsCollectionView reloadData];
+    
+    if ([self.model itemCount]) {
+        
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model itemCount]-1 inSection:0];
+		[self.commentsCollectionView scrollToItemAtIndexPath:indexPath
+											atScrollPosition:UICollectionViewScrollPositionBottom
+													animated:YES];
+	}
+
+    
+    
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
-	
+    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - KVO
@@ -231,72 +270,6 @@ static NSString* PlaceholderText = @"Say something nice";
     }
 }
 
-
--(void)getCommentsFromServer
-{
-    /* NOTE: Comments are CACHED so we need to save on the fly comments carefuly */
-    
-    SYNAbstractNetworkEngine* networkEngineToUse;
-    NSDate* lastInteractedWithCommenting = (NSDate*)[[NSUserDefaults standardUserDefaults] objectForKey: kUserDefaultsCommentingLastInteracted];
-    
-    
-    if(!lastInteractedWithCommenting) // first time we launched this section
-        lastInteractedWithCommenting = [NSDate distantPast];
-    
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [calendar components:NSMinuteCalendarUnit
-                                               fromDate:lastInteractedWithCommenting
-                                                 toDate:[NSDate date]
-                                                options:0];
-    
-    
-    
-    if (components.minute <= kCacheTimeInMinutes)
-    {
-        networkEngineToUse = appDelegate.oAuthNetworkEngine;
-    }
-    else
-    {
-        networkEngineToUse = appDelegate.networkEngine;
-    }
-    
-    
-    if(self.comments.count == 0)
-    {
-        self.generalLoader.hidden = NO;
-        [self.generalLoader startAnimating];
-    }
-    
-    
-    [networkEngineToUse getCommentsForUsedId:appDelegate.currentUser.uniqueId
-                                   channelId:self.videoInstance.channel.uniqueId
-                                  andVideoId:self.videoInstance.uniqueId
-                                     inRange:self.dataRequestRange
-                           completionHandler:^(id dictionary) {
-                               
-                               if(![dictionary isKindOfClass:[NSDictionary class]])
-                                   return;
-                               
-                               if(![appDelegate.mainRegistry registerCommentsFromDictionary:dictionary
-                                                                               withExisting:self.comments
-                                                                         forVideoInstanceId:self.videoInstance.uniqueId])
-                               {
-                                   self.comments = @[].mutableCopy;
-                                   
-                                   
-                               }
-                               self.videoInstance.commentCount = dictionary[@"comments"][@"total"];
-                               
-                               self.generalLoader.hidden = YES;
-                               
-                               
-                               [self refreshCollectionView];
-                               
-                           } errorHandler:^(id error) {
-                               
-                               
-                           }];
-}
 
 #pragma mark - UITextViewDelegate
 
@@ -345,13 +318,12 @@ static NSString* PlaceholderText = @"Say something nice";
 - (void) refreshCollectionView
 {
     
-    [self.model reset];
-    [self.model loadNextPage];
+    [self.model loadNewComments];
     
     [self.commentsCollectionView reloadData];
 	
 	if ([self.comments count]) {
-		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.comments count] - 1 inSection:0];
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.comments count] inSection:0];
 		[self.commentsCollectionView scrollToItemAtIndexPath:indexPath
 											atScrollPosition:UICollectionViewScrollPositionBottom
 													animated:NO];
@@ -380,8 +352,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.sendMessageTextView.text = @"";
     
-    
-    
     __weak SYNCommentingViewController* wself = self;
     
     void(^ErrorBlock)(id) = ^(id error) {
@@ -404,6 +374,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                              withComment:commentText
                                        completionHandler:^(id dictionary) {
                                            
+                                           
                                            if(![dictionary isKindOfClass:[NSDictionary class]] ||
                                               ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]])
                                            {
@@ -413,6 +384,10 @@ static NSString* PlaceholderText = @"Say something nice";
                                            [wself.sendMessageTextView resignFirstResponder];
                                            
                                            [wself refreshCollectionView];
+                                           
+                                           
+                                           [[NSUserDefaults standardUserDefaults] setObject:[NSDate date]
+                                                                                     forKey:kUserDefaultsCommentingLastInteracted];
 
                                        } errorHandler:ErrorBlock];
 }
@@ -455,16 +430,21 @@ static NSString* PlaceholderText = @"Say something nice";
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
-    
-    if ([self.model hasMoreItems] && scrollView.contentOffset.y<-60 && !self.loadedComments) {
-        [self.model loadNextPage];
-        
-        self.loadedComments = YES;
-    }
-}
-
-- (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate
-{
+//    int contentOffSet = scrollView.contentOffset.y;
+//    //For the nav bar
+//    if (IS_IPHONE) {
+//        contentOffSet += 65;
+//    }
+//    
+//    
+//    
+//    if ([self.model hasMoreItems] && scrollView.contentOffset.y<=-60 && !self.loadedComments) {
+//        [self.model loadNextPage];
+//        
+//        self.loadedComments = YES;
+//        
+//        NSLog(@"LOADING COMMENTS ");
+//    }
 }
 
 -(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -496,7 +476,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
     NSIndexPath* cellIndexPath = [self.commentsCollectionView indexPathForCell:self.currentlyDeletingCell];
     
-    self.currentlyDeletingComment = self.comments [cellIndexPath.item];
+    self.currentlyDeletingComment = [self.model itemAtIndex:cellIndexPath.item];
     
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Delete Comment"
                                                         message:@"Are you sure you want to delete this comment?"
@@ -510,11 +490,7 @@ static NSString* PlaceholderText = @"Say something nice";
 }
 
 -(BOOL)deleteComment:(NSDictionary*)comment
-{
-    
-    
-    [self.comments removeObject:comment];
-    
+{    
     [[NSUserDefaults standardUserDefaults] setObject:comment[@"date_added"]
                                               forKey:kUserDefaultsCommentingLastInteracted];
     
@@ -527,7 +503,7 @@ static NSString* PlaceholderText = @"Say something nice";
         return;
     
     [self.sendMessageTextView resignFirstResponder];
-
+    
     // find correct cell
     
     UIView* candidateCell = button;
@@ -572,7 +548,6 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     if(buttonIndex == 1)
     {
-        
         __weak SYNCommentingViewController* wself = self;
         [appDelegate.oAuthNetworkEngine deleteCommentForUserId:appDelegate.currentUser.uniqueId
                                                      channelId:self.videoInstance.channel.uniqueId
@@ -580,7 +555,8 @@ static NSString* PlaceholderText = @"Say something nice";
                                                   andCommentId:self.currentlyDeletingComment[@"id"]
                                              completionHandler:^(id responce) {
                                                  
-                                                 [wself deleteComment:wself.currentlyDeletingComment];
+                                                 
+                                                 [wself.model removeObjectAtIndex:[self.commentsCollectionView indexPathForCell:self.currentlyDeletingCell].row];
                                                  
                                                  wself.currentlyDeletingCell.deleting = NO;
                                                  wself.currentlyDeletingCell.loading = NO;
@@ -597,9 +573,8 @@ static NSString* PlaceholderText = @"Say something nice";
                                                      
                                                      [wself.commentsCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete]];
                                                  } completion:^(BOOL finished) {
-                                                     [wself refreshCollectionView];
-                                                     
-                                                     
+                                                     [wself.commentsCollectionView reloadData];
+                                                
                                                  }];
                                                  
                                                  
@@ -638,6 +613,7 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     SYNCommentingCollectionViewCell* commentingCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNCommentingCollectionViewCell reuseIdentifier]
                                                                                     forIndexPath:indexPath];
+    //    Comment* comment = self.comments[indexPath.item];
 	
 	NSDictionary *comment = [self.model itemAtIndex:indexPath.item];
     
@@ -645,14 +621,16 @@ static NSString* PlaceholderText = @"Say something nice";
     
     
     
+    //    commentingCell.loading = !comment.validatedValue; // if it is NOT validated, show loading state
     commentingCell.delegate = self;
-
+    
+    //
     if([comment[@"user"][@"id"] isEqualToString:appDelegate.currentUser.uniqueId])
     {
         // only the user can delete his own comments
         commentingCell.deletable = YES;
     }
-
+    
     
     return commentingCell;
 }
@@ -674,6 +652,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                                  attributes:@{ NSFontAttributeName : correctFont,
 															   NSParagraphStyleAttributeName : paragraphStyle}
                                                     context:nil];
+    
     
     
     CGFloat correctHeight = rect.size.height + [SYNCommentingCollectionViewCell commentFieldFrame].origin.y + 10.0f;
@@ -706,5 +685,10 @@ static NSString* PlaceholderText = @"Say something nice";
     //    [comment.managedObjectContext save:&error];
     
 }
+
+- (void)resetData {
+	[self.model loadNextPage];
+}
+
 
 @end
