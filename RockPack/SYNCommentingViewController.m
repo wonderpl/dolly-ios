@@ -176,7 +176,9 @@ static NSString* PlaceholderText = @"Say something nice";
 -(void)viewWillDisappear:(BOOL)animated {
 
     self.videoInstance.commentCountValue = [self.model totalItemCount];
+    [appDelegate saveContext:YES];
     self.sendMessageTextView.text = @"";
+
 }
 
 
