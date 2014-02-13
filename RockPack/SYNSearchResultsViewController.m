@@ -452,12 +452,12 @@ typedef void (^SearchResultCompleteBlock)(int);
 		VideoInstance *videoInstance = self.videosArray[indexPath.item];
 		UIViewController *viewController;
         
-        if (!self.currentSearchTerm) {
+//        if (!self.currentSearchTerm) {
             viewController  = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
 
-        } else {
-//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
-        }
+//        } else {
+////            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue];
+//        }
 		
         
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
