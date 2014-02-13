@@ -13,6 +13,8 @@
 #import "SYNVideoPlayer+Protected.h"
 #import <Reachability.h>
 
+static const CGFloat VideoAspectRatio = 16.0 / 9.0;;
+
 typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStateInitialised,
 	SYNYouTubeVideoPlayerStateReady,
@@ -45,22 +47,36 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	[self updatePlayerSize:self.youTubeWebView.frame.size];
+	CGRect playerBounds = self.youTubeWebView.bounds;
+	CGRect containerBounds = self.playerContainerView.bounds;
+	
+	CGFloat scaleFactor = CGRectGetWidth(containerBounds) / CGRectGetWidth(playerBounds);
+	
+	self.youTubeWebView.center = self.playerContainerView.center;
+	self.youTubeWebView.transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 }
 
 #pragma mark - Getters / Setters
 
 - (UIWebView *)youTubeWebView {
 	if (!_youTubeWebView) {
-		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.playerContainerView.bounds];
+		CGRect screenBounds = [[UIScreen mainScreen] bounds];
+		
+		CGSize videoPlayerSize = CGSizeMake(round(CGRectGetHeight(screenBounds)),
+											round(CGRectGetHeight(screenBounds) / VideoAspectRatio));
+		
+		CGRect videoPlayerRect = CGRectMake(0, 0, videoPlayerSize.width, videoPlayerSize.height);
+		
+		UIWebView *webView = [[UIWebView alloc] initWithFrame:videoPlayerRect];
 		webView.scrollView.scrollEnabled = NO;
-		webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		webView.allowsInlineMediaPlayback = YES;
 		webView.mediaPlaybackRequiresUserAction = NO;
 		
 		NSString *templateHTMLString = [NSString stringWithContentsOfURL:[self URLForPlayerHTML] encoding:NSUTF8StringEncoding error:nil];
 		
-		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString, 0, 0];
+		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString,
+								(int)videoPlayerSize.width,
+								(int)videoPlayerSize.height];
 		
 		[webView loadHTMLString:iFrameHTML baseURL:[NSURL URLWithString: @"http://www.youtube.com"]];
 		
@@ -132,8 +148,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 	if ([actionName isEqualToString:@"ready"]) {
-		[self updatePlayerSize:self.youTubeWebView.frame.size];
-		
 		self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
 		
 		if (self.state == SYNVideoPlayerStatePlaying) {
