@@ -56,6 +56,7 @@ static NSString* PlaceholderText = @"Say something nice";
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *commentBottomConstraint;
 
 @property (nonatomic, strong) SYNCommentsModel *model;
+@property (nonatomic) BOOL loadingNewComments;
 
 @end
 
@@ -142,6 +143,7 @@ static NSString* PlaceholderText = @"Say something nice";
 
     
     self.loadedComments = NO;
+    self.loadingNewComments = NO;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -226,16 +228,15 @@ static NSString* PlaceholderText = @"Say something nice";
     [self.refreshControl endRefreshing];
     [self.commentsCollectionView reloadData];
     
-    if ([self.model itemCount]) {
-        
+    
+    if ([self.model itemCount] && !self.loadingNewComments) {
 		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model itemCount]-1 inSection:0];
 		[self.commentsCollectionView scrollToItemAtIndexPath:indexPath
 											atScrollPosition:UICollectionViewScrollPositionBottom
 													animated:YES];
-	}
+        self.loadingNewComments = NO;
 
-    
-    
+    }
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
@@ -277,7 +278,6 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     if ([self.sendMessageTextView.text isEqualToString:PlaceholderText])
     {
-        
         self.sendMessageTextView.text = @"";
     }
 }
@@ -295,7 +295,6 @@ static NSString* PlaceholderText = @"Say something nice";
     
     if ([text isEqualToString:@"\n"])
     {
-        
         [self sendComment];
         return NO;
     }
@@ -317,17 +316,10 @@ static NSString* PlaceholderText = @"Say something nice";
 
 - (void) refreshCollectionView
 {
-    
+    self.loadingNewComments = NO;
     [self.model loadNewComments];
     
     [self.commentsCollectionView reloadData];
-	
-	if ([self.comments count]) {
-		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.comments count] inSection:0];
-		[self.commentsCollectionView scrollToItemAtIndexPath:indexPath
-											atScrollPosition:UICollectionViewScrollPositionBottom
-													animated:NO];
-	}
 }
 
 #pragma mark - Sending Comment
@@ -358,8 +350,6 @@ static NSString* PlaceholderText = @"Say something nice";
         
         [wself deleteComment:comment];
         
-        [wself refreshCollectionView];
-        
         [[[UIAlertView alloc] initWithTitle:@"Sorry..."
                                     message:@"An error occured when sending your message..."
                                    delegate:nil
@@ -374,7 +364,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                              withComment:commentText
                                        completionHandler:^(id dictionary) {
                                            
-                                           
                                            if(![dictionary isKindOfClass:[NSDictionary class]] ||
                                               ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]])
                                            {
@@ -385,10 +374,8 @@ static NSString* PlaceholderText = @"Say something nice";
                                            
                                            [wself refreshCollectionView];
                                            
-                                           
                                            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date]
                                                                                      forKey:kUserDefaultsCommentingLastInteracted];
-
                                        } errorHandler:ErrorBlock];
 }
 
@@ -687,6 +674,7 @@ static NSString* PlaceholderText = @"Say something nice";
 }
 
 - (void)resetData {
+    self.loadingNewComments = YES;
 	[self.model loadNextPage];
 }
 
