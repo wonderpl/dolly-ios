@@ -19,6 +19,8 @@ static const CGFloat TextSideInset = 20.0;
 
 @interface SYNVideoLoadingView ()
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
 @property (nonatomic, strong) CALayer *imageLayer;
 @property (nonatomic, strong) CALayer *overlayLayer;
 @property (nonatomic, strong) CALayer *textLayer;
@@ -30,24 +32,33 @@ static const CGFloat TextSideInset = 20.0;
 
 #pragma mark - Init / Dealloc
 
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
+		self.backgroundColor = [UIColor whiteColor];
+		
 		[self.layer addSublayer:self.imageLayer]; // The actual image
 		[self.layer addSublayer:self.overlayLayer]; // The grey overlay over the image
 		[self.layer addSublayer:self.textLayer]; // The image masked by the text
 		[self.layer addSublayer:self.textOverlayLayer]; // The overlay over the masked text to make it more legible
+		
+		[self addSubview:self.activityIndicator];
+		[self.activityIndicator startAnimating];
 	}
 	return self;
 }
 
 #pragma mark - UIView
 
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	self.activityIndicator.center = CGPointMake(self.center.x, self.center.y * 1.4);
+}
+
 - (void)layoutSublayersOfLayer:(CALayer *)layer {
 	[super layoutSublayersOfLayer:layer];
 	
 	if (layer == self.layer) {
-		self.backgroundColor = [UIColor whiteColor];
-		
 		self.imageLayer.frame = self.bounds;
 		self.overlayLayer.frame = self.bounds;
 		self.textLayer.frame = self.bounds;
@@ -60,6 +71,17 @@ static const CGFloat TextSideInset = 20.0;
 }
 
 #pragma mark - Getters / Setters
+
+- (UIActivityIndicatorView *)activityIndicator {
+	if (!_activityIndicator) {
+		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+		activityIndicator.alpha = 0.5;
+		activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin);
+		
+		self.activityIndicator = activityIndicator;
+	}
+	return _activityIndicator;
+}
 
 - (CALayer *)imageLayer {
 	if (!_imageLayer) {

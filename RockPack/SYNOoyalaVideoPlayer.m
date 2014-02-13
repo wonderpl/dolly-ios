@@ -12,7 +12,6 @@
 #import "SYNScrubberBar.h"
 #import "VideoInstance.h"
 #import "Video.h"
-#import "SYNVideoLoadingView.h"
 #import "SYNVideoPlayer+Protected.h"
 
 static NSString * const EmbedCoded = @"xxbjk1YjpHm4-VkWfWfEKBbyEkh358su";

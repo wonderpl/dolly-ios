@@ -10,7 +10,6 @@
 #import "VideoInstance.h"
 #import "Video.h"
 #import "SYNScrubberBar.h"
-#import "SYNVideoLoadingView.h"
 #import "SYNVideoPlayer+Protected.h"
 #import <Reachability.h>
 
@@ -25,9 +24,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 @property (nonatomic, strong) UIWebView *youTubeWebView;
 
 @property (nonatomic, assign) SYNYouTubeVideoPlayerState youTubePlayerState;
-
-@property (nonatomic, assign) BOOL playerReady;
-@property (nonatomic, assign) BOOL playerLoaded;
 
 @end
 
