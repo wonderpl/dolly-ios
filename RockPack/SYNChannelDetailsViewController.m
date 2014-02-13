@@ -893,8 +893,6 @@
         [videoThumbnailCell setUpVideoTap];
     }
     
-//    NSLog(@"videoInstance.uniqueId : %@", videoInstance.uniqueId);
-    
     return videoThumbnailCell;
 }
 
@@ -908,6 +906,9 @@
                                                                     forIndexPath:indexPath];
         supplementaryView = self.footerView;
 		
+        
+        
+        
 		if ([self.model hasMoreItems]) {
 			self.footerView.showsLoading = YES;
 			
@@ -1919,6 +1920,46 @@
     [self.txtViewDescription resignFirstResponder];
     
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
+}
+
+
+-(void) setAutoplayId:(NSString *)autoplayId
+{
+    
+    __block UIViewController *viewController;
+    
+    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:self.channel.uniqueId instanceId:autoplayId completionHandler:^(id response) {
+        
+        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+        
+        
+        int tmpPosition = -1;
+        
+        // Check if the video instance is in the first set of videos
+        for (int i = 0; i<self.model.itemCount; i++) {
+            VideoInstance *videoInstance = [self.model itemAtIndex:i];
+                //If the video is found, set the position
+                if ([videoInstance.uniqueId isEqual:vidToPlay.uniqueId]) {
+                tmpPosition = videoInstance.positionValue;
+            }
+        }
+        
+        //If the Video was not found, add the video instance to th end.
+        if (tmpPosition == -1) {
+            NSMutableArray *tmpArray = [[NSMutableArray alloc]initWithArray:[self.channel.videoInstancesSet array]];
+            [tmpArray addObject:vidToPlay];
+            [vidToPlay setChannel:self.channel];
+            
+            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:tmpArray selectedIndex:tmpArray.count-1];
+        } else {
+            //If found put the video, display the player with the correct position
+            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array] selectedIndex:tmpPosition];
+        }
+        
+		[self.navigationController presentViewController:viewController animated:YES completion:nil];
+        
+    } errorHandler: nil];
+
 }
 
 

@@ -863,20 +863,18 @@
     // The Overlay must be removed if there is ont alreaedy displaying
     [appDelegate.masterViewController removeVideoOverlayController];
 
-    __block UIViewController *viewController = [self viewControllerOfClass:[SYNCarouselVideoPlayerViewController class]];
     
-    [self viewChannelDetails:channel withAnimation:NO];
+//    [self viewChannelDetails:channel withAnimation:NO];
+    SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
+                                                               usingMode:kChannelDetailsModeDisplay];
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.navigationController pushViewController:channelVC animated:NO];
+        
+    } completion:^(BOOL finished) {
+        channelVC.autoplayId = videoId;
+    }];
     
-    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:channel.uniqueId instanceId:videoId completionHandler:^(id response) {
-        
-        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
-        
-        viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:@[vidToPlay] selectedIndex:0];
-        
 
-		[appDelegate.masterViewController.showingViewController.navigationController presentViewController:viewController animated:YES completion:nil];
-         
-    } errorHandler: nil];
 
 }
 
