@@ -837,7 +837,9 @@
     {
         [self displayChannelDetails];
     }
-    
+    // Model out of sync with the initial channel details call
+    //Reset the model when the update channel details notification is sent
+    self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
 }
 
 - (void) reloadCollectionViews
