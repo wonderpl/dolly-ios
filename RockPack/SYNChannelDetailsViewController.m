@@ -1946,11 +1946,11 @@
         
         //If the Video was not found, add the video instance to th end.
         if (tmpPosition == -1) {
-            NSMutableArray *tmpArray = [[NSMutableArray alloc]initWithArray:[self.channel.videoInstancesSet array]];
-            [tmpArray addObject:vidToPlay];
-            [vidToPlay setChannel:self.channel];
             
-            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:tmpArray selectedIndex:tmpArray.count-1];
+            [self.channel addVideoInstancesObject:vidToPlay];
+            //[vidToPlay setChannel:self.channel];
+            
+            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array] selectedIndex:[self.channel.videoInstancesSet array].count-1];
         } else {
             //If found put the video, display the player with the correct position
             viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array] selectedIndex:tmpPosition];

@@ -361,7 +361,6 @@
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
     
-    
     if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
     {
         // Get the videoinstance associated with the control pressed
@@ -867,7 +866,8 @@
 //    [self viewChannelDetails:channel withAnimation:NO];
     SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                usingMode:kChannelDetailsModeDisplay];
-    [UIView animateWithDuration:0.1 animations:^{
+    
+    [UIView animateWithDuration:0.5 animations:^{
         [self.navigationController pushViewController:channelVC animated:NO];
         
     } completion:^(BOOL finished) {
