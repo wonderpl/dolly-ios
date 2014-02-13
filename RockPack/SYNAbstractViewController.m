@@ -125,7 +125,11 @@
     
     
     if (self.navigationController.viewControllers.firstObject != self) {
-        [self.navigationItem setLeftBarButtonItem:[self backButton]];
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        [negativeSpacer setWidth:-10];
+        
+        self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer,[self backButton],nil];
+        
         self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
         [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
     }
