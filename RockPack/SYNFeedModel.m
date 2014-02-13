@@ -12,6 +12,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "FeedItem.h"
 #import "VideoInstance.h"
+#import <TestFlight.h>
 
 @interface SYNFeedModel ()
 
@@ -45,8 +46,11 @@
 - (NSArray *)videoInstancesForFeedItem:(FeedItem *)feedItem {
 	NSMutableArray* videoInstances = [NSMutableArray array];
 	
+	TFLog(@"Video instance ids: %@", [self.videoInstancesById allKeys]);
+	
 	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
 		for (FeedItem* childFeedItem in feedItem.feedItems) {
+			TFLog(@"Adding video instance for resource id: %@", childFeedItem.resourceId);
 			[videoInstances addObject:self.videoInstancesById[childFeedItem.resourceId]];
 		}
 	} else {
