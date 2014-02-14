@@ -1033,6 +1033,12 @@
                                                                                                        action: actionType
                                                                                                         label: @"1to1"
                                                                                                         value: nil] build]];
+											   
+											   [self dismissViewControllerAnimated:YES completion:^{
+												   [appDelegate.masterViewController presentNotificationWithMessage:notificationText
+																											andType:NotificationMessageTypeSuccess];
+											   }];
+											   
                                            } errorHandler: ^(NSDictionary *error) {
                                                
                                                NSString *title = @"Email Couldn't be Sent";
