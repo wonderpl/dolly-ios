@@ -112,7 +112,9 @@
     self.datePosted = [_comment dateFromISO6801StringForKey: @"date_added"
                                                 withDefault: [NSDate date]];
     
-    [self.avatarButton setImageWithURL: [NSURL URLWithString: comment[@"User"][@"avatar_thumbnail_url"]]
+        
+    
+    [self.avatarButton setImageWithURL: [NSURL URLWithString: comment[@"user"][@"avatar_thumbnail_url"]]
                               forState: UIControlStateNormal
                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarProfile"]
                                options: SDWebImageRetryFailed];
