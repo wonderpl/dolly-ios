@@ -4,6 +4,7 @@
 #import "NSDictionary+Validation.h"
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
+#import "NSString+Utils.h"
 
 @implementation ChannelOwner
 
@@ -212,8 +213,8 @@
                 }
                 else
                 {
-                    channel.title =
-                    [NSString stringWithFormat:@"%@'S %@", [dictionary[@"display_name"] uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
+					NSString *displayName = [[dictionary[@"display_name"] apostrophisedString] uppercaseString];
+                    channel.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"FAVORITES", nil)];
                 }
             }
 
@@ -309,8 +310,8 @@
             }
             else
             {
-                channel.title =
-                [NSString stringWithFormat:@"%@'S %@", [channel.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
+				NSString *displayName = [[channel.channelOwner.displayName apostrophisedString] uppercaseString];
+				channel.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"FAVORITES", nil)];
             }
         }
 

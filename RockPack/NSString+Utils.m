@@ -56,4 +56,15 @@
     return ageString;
 }
 
+- (NSString *)apostrophisedString {
+	if (![self length]) {
+		return self;
+	}
+	if ([[self lowercaseString] hasSuffix:@"s"]) {
+		return [NSString stringWithFormat:@"%@ʼ", self];
+	} else {
+		return [NSString stringWithFormat:@"%@ʼs", self];
+	}
+}
+
 @end
