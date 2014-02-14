@@ -20,10 +20,14 @@
 #import "SYNMasterViewController.h"
 #import "UIButton+WebCache.h"
 #import "SYNGenreColorManager.h"
+#import "SYNDiscoverSectionView.h"
+#import "SYNOnBoardingHeader.h"
 
 @import QuartzCore;
 
 #define kAutocompleteTime 0.2
+static NSString* DiscoverSectionView = @"SYNDiscoverSectionView";
+static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 
 typedef enum {
     kSearchTypeGenre = 0,
@@ -99,6 +103,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.categoriesCollectionView registerNib:[SYNDiscoverCategoriesCell nib]
                     forCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]];
     
+    [self.categoriesCollectionView registerNib: [UINib nibWithNibName: OnBoardingHeaderIndent bundle: nil]
+          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+                 withReuseIdentifier: OnBoardingHeaderIndent];
+
     if(IS_IPHONE)
     {
         // to allow for full screen scroll of the categories
@@ -143,6 +151,32 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = YES;        
     }
+
+	[self.categoriesCollectionView registerNib:[SYNDiscoverSectionView nib]
+				   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+						  withReuseIdentifier:[SYNDiscoverSectionView reuseIdentifier]];
+
+    self.categoriesCollectionView.layer.borderColor = [[UIColor dollyTextLightGray] CGColor];
+    if (IS_RETINA) {
+        self.categoriesCollectionView.layer.borderWidth = 0.5f;
+    } else {
+        self.categoriesCollectionView.layer.borderWidth = 1.0f;
+    }
+    
+    
+    // Load a initial category
+    
+    if (self.genres.count > 0) {
+        Genre* currentGenre = self.genres[0];
+        SubGenre* subgenre = currentGenre.subgenres[0];
+        
+        NSString *title = (IS_IPHONE ? subgenre.name : @"");
+        
+        [self dispatchSearch:subgenre.uniqueId
+                   withTitle:title
+                     forType:kSearchTypeGenre];
+    }
+
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -259,7 +293,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
     
-    categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+    //Editors picks still get there color
+    if (indexPath.section == 0) {
+        categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+    } else {
+        categoryCell.backgroundColor = [UIColor whiteColor];
+
+    }
     categoryCell.label.text = subgenre.name;
     
     return categoryCell;
@@ -285,10 +325,45 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return CGSizeMake(0, 0);
+    }else {
+        return CGSizeMake(self.categoriesCollectionView.bounds.size.width, 14);
+    }
+}
+
+
 - (CGSize)collectionView:(UICollectionView *)collectionView
 				  layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	return CGSizeMake(CGRectGetWidth(collectionView.frame), 44);
+}
+
+
+- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
+            viewForSupplementaryElementOfKind: (NSString *) kind
+                                  atIndexPath: (NSIndexPath *) indexPath
+{
+    UICollectionReusableView *supplementaryView = nil;
+    
+    if (kind == UICollectionElementKindSectionFooter)
+    {
+        
+        Genre* currentGenre = self.genres[indexPath.section];
+
+        
+        supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                               withReuseIdentifier: DiscoverSectionView
+                                                                      forIndexPath: indexPath];
+        SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
+        ((SYNDiscoverSectionView*)supplementaryView).background.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+        
+        
+    }
+    
+    return supplementaryView;
 }
 
 
@@ -605,6 +680,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [self.searchResultsController searchForGenre:searchTerm];
     else
         [self.searchResultsController searchForTerm:searchTerm];
+    
+    
     
     
     

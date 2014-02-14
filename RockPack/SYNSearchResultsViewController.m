@@ -189,6 +189,7 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.noUsersLabel.font = [UIFont regularCustomFontOfSize:18.0f];
     self.noVideosLabel.font = [UIFont regularCustomFontOfSize:18.0f];
     
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -511,6 +512,11 @@ referenceSizeForFooterInSection: (NSInteger) section
     
     return supplementaryView;
 }
+
+
+
+
+#pragma mark - Scroll view delegates
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
