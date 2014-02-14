@@ -32,7 +32,7 @@
 "Follower" = "follower";
 "Followers" = "followers";
 "Unfollow" = "unfollow";
-"DeleteChannel" = "Delete Channel";
+"Delete_Channel" = "Delete Channel";
 "Are_you_sure_you_want_to_delete" = "Are you sure you want to delete?";
 
 //Camera
