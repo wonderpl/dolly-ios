@@ -166,7 +166,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // Load a initial category
     
-    if (self.genres.count > 0 && IS_IPHONE) {
+    if (self.genres.count > 0 && IS_IPAD) {
         Genre* currentGenre = self.genres[0];
         SubGenre* subgenre = currentGenre.subgenres[0];
         
