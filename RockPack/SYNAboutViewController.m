@@ -105,6 +105,17 @@
     
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.contentSize.width, offset)];
     
+    if (IS_IPHONE) {
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        [negativeSpacer setWidth:-10];
+        
+        self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer,[self backButton],nil];
+        
+        self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+        [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+        
+    }
+
     
 }
 
@@ -114,5 +125,26 @@
 	UIViewController *webViewController = [SYNWebViewController webViewControllerForURL:url];
 	[self presentViewController:webViewController animated:YES completion:nil];
 }
+
+#pragma mark - Back button
+
+-(UIBarButtonItem*) backButton {
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [backButton setBackgroundImage:[UIImage imageNamed:@"BackButtonApp"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    backButton.frame = CGRectMake(0.0f, 0.0f, 29.0f, 39.0f);
+    
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    return backButtonItem;
+}
+
+-(void) goBack {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end

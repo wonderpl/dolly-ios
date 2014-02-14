@@ -62,15 +62,15 @@ static NSString* errorText = @"Please provide your feedback here...";
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:textAttributes
                                                           forState:UIControlStateNormal];
     
-    if(IS_IPAD)
-    {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
-                                                                                 style:UIBarButtonItemStyleBordered
-                                                                                target:self
-                                                                                action:@selector(closeButtonPressed:)];
+    if (IS_IPHONE) {        
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        [negativeSpacer setWidth:-10];
         
-        [self.navigationItem.leftBarButtonItem setTitleTextAttributes:textAttributes
-                                                             forState:UIControlStateNormal];
+        self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer,[self backButton],nil];
+        
+        self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+        [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+
     }
     
     
@@ -356,5 +356,24 @@ static NSString* errorText = @"Please provide your feedback here...";
              self.maxValueLabel,
              self.currentValueLabel];
 }
+
+-(UIBarButtonItem*) backButton {
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [backButton setBackgroundImage:[UIImage imageNamed:@"BackButtonApp"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    backButton.frame = CGRectMake(0.0f, 0.0f, 29.0f, 39.0f);
+    
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    return backButtonItem;
+}
+
+-(void) goBack {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
