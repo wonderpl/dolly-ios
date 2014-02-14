@@ -10,7 +10,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNFacebookManager.h"
 #import "ChannelOwner.h"
-#import "SYNSearchResultsUserCell.h"
+#import "SYNFriendCell.h"
 #import <UIImageView+WebCache.h>
 #import "SYNAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -55,8 +55,8 @@
     
     // == Register Cells == //
     
-    [self.friendsCollectionView registerNib: [UINib nibWithNibName: @"SYNSearchResultsUserCell" bundle: nil]
-                 forCellWithReuseIdentifier: @"SYNSearchResultsUserCell"];
+    [self.friendsCollectionView registerNib: [UINib nibWithNibName: @"SYNFriendCell" bundle: nil]
+                 forCellWithReuseIdentifier: @"SYNFriendCell"];
     
     self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
     self.preLoginLabel.text = NSLocalizedString (@"friends_invite", nil);
@@ -259,7 +259,7 @@
     
     Friend *friend = self.friends[indexPath.row];
     
-    SYNSearchResultsUserCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNSearchResultsUserCell"
+    SYNFriendCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNFriendCell"
                                                                                             forIndexPath: indexPath];
     
     userCell.channelOwner = (ChannelOwner*)(friend);
@@ -285,16 +285,16 @@
     }
     
     id candidate = profileButton;
-    while (![candidate isKindOfClass:[SYNSearchResultsUserCell class]]) {
+    while (![candidate isKindOfClass:[SYNFriendCell class]]) {
         candidate = [candidate superview];
     }
     
-    if(![candidate isKindOfClass:[SYNSearchResultsUserCell class]])
+    if(![candidate isKindOfClass:[SYNFriendCell class]])
     {
         AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
         return; // did not manage to get the cell
     }
-    SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
+    SYNFriendCell* searchUserCell = (SYNFriendCell*)candidate;
     
     [self viewProfileDetails:searchUserCell.channelOwner];
 }
