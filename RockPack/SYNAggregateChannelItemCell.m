@@ -8,6 +8,7 @@
 
 #import "SYNAggregateChannelItemCell.h"
 #import "SYNSocialButton.h"
+#import "SYNSocialFollowButton.h"
 #import "UIFont+SYNFont.h"
 #import "SYNGenreColorManager.h"
 #import "SYNActivityManager.h"

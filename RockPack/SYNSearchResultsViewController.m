@@ -23,6 +23,7 @@
 #import "SYNGenreColorManager.h"
 #import "UIFont+SYNFont.h"
 #import "SYNCarouselVideoPlayerViewController.h"
+#import "SYNDeviceManager.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
@@ -424,17 +425,28 @@ typedef void (^SearchResultCompleteBlock)(int);
         
         userCell.channelOwner = (ChannelOwner*)(self.usersArray[indexPath.item]);
         
+        
+        if (IS_IPAD) {
+            if (indexPath.row>2) {
+                userCell.descriptionLabel.hidden = YES;
+            }
+        } else {
+            if (indexPath.row>1) {
+                userCell.descriptionLabel.hidden = YES;
+            }
+        }
         // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
-        userCell.followButton.layer.borderWidth = 0.0f;
-        userCell.followButton.backgroundColor = [UIColor clearColor];
-        userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0f];
+        userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:12.0f];
         
         if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:userCell.channelOwner.uniqueId]) {
             [userCell.followButton setTitle:(NSLocalizedString(@"unfollow", "unfollow a user, search view controller"))];
+            userCell.followButton.selected = YES;
         }
         else
         {
             [userCell.followButton setTitle:(NSLocalizedString(@"follow", "follow a user, search view controller"))];
+            userCell.followButton.selected = NO;
+
             
         }
         // ================= //
@@ -469,10 +481,54 @@ typedef void (^SearchResultCompleteBlock)(int);
 		
 		[self presentViewController:viewController animated:YES completion:nil];
 	}
+    
+    if (collectionView == self.usersCollectionView) {
+        ChannelOwner *channelOwner = (ChannelOwner*)(self.usersArray[indexPath.item]);
+        [self viewProfileDetails:channelOwner];
+    }
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
 	return (SYNSearchResultsVideoCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (collectionView == self.usersCollectionView) {
+    
+        if (IS_IPHONE) {
+            if (indexPath.row<2) {
+                return CGSizeMake(320, 195);
+            } else {
+                return CGSizeMake(320, 113);
+            }
+        }
+        
+        if (IS_IPAD) {
+            
+            if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+                if (indexPath.row == 0) {
+                    return CGSizeMake(434, 240);
+                } else if (indexPath.row == 1 || indexPath.row == 2) {
+                    return CGSizeMake(434, 194);
+                } else {
+                    return CGSizeMake(434, 113);
+                }
+            } else {
+                
+                if (indexPath.row == 0) {
+                    return CGSizeMake(616, 240);
+                } else if (indexPath.row == 1 || indexPath.row == 2) {
+                    return CGSizeMake(300, 194);
+                } else {
+                    return CGSizeMake(300, 113);
+                }
+            }
+        }
+    } else {
+        return ((UICollectionViewFlowLayout*)self.videosCollectionView.collectionViewLayout).itemSize;
+    }    
+    return CGSizeZero;
 }
 
 - (CGSize) collectionView: (UICollectionView *) collectionView
@@ -515,6 +571,12 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 
 
+- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
+                                          duration: (NSTimeInterval) duration
+{
+    [self.usersCollectionView.collectionViewLayout invalidateLayout];
+    
+}
 
 #pragma mark - Scroll view delegates
 

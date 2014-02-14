@@ -62,10 +62,10 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-Ly-eu6" userLabel="Users Collection View">
-                    <rect key="frame" x="20" y="49" width="614" height="645"/>
+                    <rect key="frame" x="5" y="49" width="644" height="645"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="hqH-9q-DcO">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="hqH-9q-DcO">
                         <size key="itemSize" width="184" height="120"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -119,10 +119,10 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="20" id="B80-xC-Aez"/>
+                <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="5" id="B80-xC-Aez"/>
                 <constraint firstItem="4v1-Ly-eu6" firstAttribute="top" secondItem="2" secondAttribute="top" constant="49" id="DL8-Tk-PpC"/>
                 <constraint firstItem="Dp0-fc-7PR" firstAttribute="top" secondItem="2" secondAttribute="top" constant="13" id="Dm5-HH-BTz"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="WN0-mx-oSo"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="5" id="WN0-mx-oSo"/>
                 <constraint firstAttribute="centerX" secondItem="yYG-XK-TiE" secondAttribute="centerX" constant="-0.5" id="WTx-uu-f0W"/>
                 <constraint firstItem="6aJ-Lk-c1F" firstAttribute="top" secondItem="2" secondAttribute="top" constant="309" id="YFW-Sc-z8i"/>
                 <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" id="YO5-Mv-K7A"/>

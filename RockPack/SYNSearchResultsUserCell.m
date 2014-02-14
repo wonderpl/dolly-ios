@@ -14,6 +14,8 @@
 #import "SYNSocialButton.h"
 #import "SYNAvatarButton.h"
 #import "SYNActivityManager.h"
+#import "UIImageView+WebCache.h"
+
 
 @interface SYNSearchResultsUserCell ()
 
@@ -23,8 +25,10 @@
 
 @property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
 @property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
+@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
+@property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 @property (strong, nonatomic) UIButton* alertViewButton;
 
 @end
@@ -45,7 +49,13 @@
 	[self.userThumbnailButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.userNameLabelButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.followButton addTarget:self action:@selector(followButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+ 
+    self.followButton.layer.cornerRadius = self.followButton.frame.size.width/2;
+    self.followButton.layer.masksToBounds = YES;
     
+    
+    [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:20.0f]];
+    [self.descriptionLabel setFont:[UIFont regularCustomFontOfSize:15.0f]];
 }
 
 #pragma mark - Set Data
@@ -66,9 +76,22 @@
                              placeholderImage:[UIImage imageNamed: @"PlaceholderAvatarFriends"]
                                       options:SDWebImageRetryFailed];
     
-    [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
-    self.userNameLabelButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    self.userNameLabelButton.titleLabel.numberOfLines = 2;
+//    [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
+//    self.userNameLabelButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//    self.userNameLabelButton.titleLabel.numberOfLines = 2;
+    
+    [self.userNameLabel setText: channelOwner.displayName];
+    
+    [self.descriptionLabel setText:channelOwner.channelOwnerDescription];
+    
+    NSString *coverPhotoURL = _channelOwner.coverPhotoURL;
+    NSLog(@"coverPhotoURL %@", coverPhotoURL);
+    
+    coverPhotoURL = [coverPhotoURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"
+                                                        withString: @"thumbnail_large"];
+    [self.coverImage setImageWithURL: [NSURL URLWithString: _channelOwner.coverPhotoURL]
+                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                            options: SDWebImageRetryFailed];
     
     [self setButtonTitleAndResizeText:channelOwner.displayName forLabel:self.userNameLabelButton.titleLabel];
 
@@ -187,5 +210,7 @@
 - (NSString *) noButtonTitle{
     return NSLocalizedString(@"Cancel", @"cancel following/unfollowing a user");
 }
+
+
 
 @end
