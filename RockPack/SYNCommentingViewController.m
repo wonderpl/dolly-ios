@@ -224,27 +224,6 @@ static NSString* PlaceholderText = @"Say something nice";
     }
 }
 
-#pragma mark - Paging Delegates
-
-- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
-    [self.refreshControl endRefreshing];
-    [self.commentsCollectionView reloadData];
-    
-    
-    if ([self.model itemCount] && !self.loadingNewComments) {
-		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model itemCount]-1 inSection:0];
-		[self.commentsCollectionView scrollToItemAtIndexPath:indexPath
-											atScrollPosition:UICollectionViewScrollPositionBottom
-													animated:YES];
-        self.loadingNewComments = NO;
-
-    }
-}
-
-- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
-    [self.refreshControl endRefreshing];
-}
-
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -678,6 +657,33 @@ static NSString* PlaceholderText = @"Say something nice";
 - (void)resetData {
     self.loadingNewComments = YES;
 	[self.model loadNextPage];
+}
+
+
+#pragma mark - Paging Delegates
+
+- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
+    [self.refreshControl endRefreshing];
+    [self.commentsCollectionView reloadData];
+    
+    
+    if ([self.model itemCount] && !self.loadingNewComments) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model itemCount]-1 inSection:0];
+		[self.commentsCollectionView scrollToItemAtIndexPath:indexPath
+											atScrollPosition:UICollectionViewScrollPositionBottom
+													animated:YES];
+        
+    }else if (self.loadingNewComments) {
+        
+        
+    }
+    self.loadingNewComments = NO;
+    
+    
+}
+
+- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
+    [self.refreshControl endRefreshing];
 }
 
 
