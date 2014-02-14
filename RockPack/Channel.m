@@ -6,7 +6,7 @@
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
 #import "VideoInstance.h"
-
+#import "NSString+Utils.h"
 
 @interface Channel ()
 
@@ -300,10 +300,8 @@
         }
         else
         {
-            self.title =
-            [NSString stringWithFormat:@"%@'S %@", [self.channelOwner.displayName uppercaseString], NSLocalizedString(@"FAVORITES", nil)];
-            
-            
+			NSString *displayName = [[self.channelOwner.displayName apostrophisedString] uppercaseString];
+			self.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"FAVORITES", nil)];
         }
     }
 }

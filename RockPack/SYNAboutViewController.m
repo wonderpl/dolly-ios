@@ -134,7 +134,7 @@
     
     [backButton setBackgroundImage:[UIImage imageNamed:@"BackButtonApp"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0f, 0.0f, 29.0f, 39.0f);
+    backButton.frame = CGRectMake(0.0f, 0.0f, 30.0f, 40.0f);
     
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     

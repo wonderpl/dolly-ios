@@ -14,4 +14,6 @@
 
 + (NSString *) ageCategoryStringFromInt: (int) age;
 
+- (NSString *)apostrophisedString;
+
 @end
