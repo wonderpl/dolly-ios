@@ -45,7 +45,6 @@
     
     __typeof(&*self) __weak weakSelf = self;
     self.actionBlock = ^(OWActivity *activity, OWActivityViewController *activityViewController) {
-        UIViewController *presenter = activityViewController.presentingController;
         NSDictionary *userInfo = weakSelf.userInfo ? weakSelf.userInfo : activityViewController.userInfo;
         
         NSString *text = userInfo[@"text_twitter"];
@@ -56,12 +55,14 @@
             text = userInfo[@"text"];
         }
         
-        [activityViewController dismissViewControllerAnimated: YES
-                                                   completion: ^{
-                                                       [weakSelf  shareFromViewController: presenter
-                                                                                     text: text
-                                                                                      url: userInfo[@"url"]
-                                                                                    image: userInfo[@"image"]];
+		UIViewController *shareViewController = activityViewController.presentingController;
+		UIViewController *presentingViewController = shareViewController.presentingViewController;
+        [presentingViewController dismissViewControllerAnimated: YES
+													 completion: ^{
+														 [weakSelf  shareFromViewController: presentingViewController
+																					   text: text
+																						url: userInfo[@"url"]
+																					  image: userInfo[@"image"]];
                                                    }];
     };
     
