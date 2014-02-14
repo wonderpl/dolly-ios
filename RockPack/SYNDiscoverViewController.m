@@ -156,7 +156,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 				   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 						  withReuseIdentifier:[SYNDiscoverSectionView reuseIdentifier]];
 
-    self.categoriesCollectionView.layer.borderColor = [[UIColor dollyTextLightGray] CGColor];
+    self.categoriesCollectionView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
     if (IS_RETINA) {
         self.categoriesCollectionView.layer.borderWidth = 0.5f;
     } else {
