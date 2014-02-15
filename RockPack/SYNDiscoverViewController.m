@@ -673,7 +673,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     else // if(IS_IPAD)
     {
         // in the case of the iPad the navigation bar title needs to be changed manually
-        self.navigationController.navigationBar.topItem.title = title;
+//        self.navigationController.navigationBar.topItem.title = title;
     }
     
     if(type == kSearchTypeGenre)

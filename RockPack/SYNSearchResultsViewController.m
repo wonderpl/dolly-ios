@@ -475,10 +475,11 @@ typedef void (^SearchResultCompleteBlock)(int);
 		UIViewController *viewController;
         
         if (!self.currentSearchTerm) {
-            viewController  = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
+            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:indexPath.item];
 
         } else {
-            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:indexPath.item];
+            viewController  = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
+
         }
 		
         
