@@ -106,6 +106,10 @@
     
     // We just want the bit in-between the first set of brackets
     NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString: @"()"];
+	
+	UIImage *backButtonImage = [[UIImage imageNamed:@"BackButtonApp.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	[[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
+	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
     
     NSArray *agentSubStrings = [completeUserAgentString componentsSeparatedByCharactersInSet: separatorSet];
     
