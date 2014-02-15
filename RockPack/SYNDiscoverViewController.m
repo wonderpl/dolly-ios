@@ -301,6 +301,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         categoryCell.backgroundColor = [UIColor whiteColor];
 
     }
+    [categoryCell setSubgenre:subgenre];
     categoryCell.label.text = subgenre.name;
     
     return categoryCell;
@@ -320,7 +321,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     UICollectionViewCell* cell = [collectionView  cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        cell.backgroundColor = [UIColor darkerColorForColor:[[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId]] ;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -328,10 +332,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     Genre* currentGenre = self.genres[indexPath.section];
     SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
 
-    if (indexPath.section == 0) {
-        cell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
-    } else {
-        cell.backgroundColor = [UIColor whiteColor];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        cell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId] ;
     }
 }
 
