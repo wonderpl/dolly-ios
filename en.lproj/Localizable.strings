@@ -26,7 +26,6 @@
 "Video" = "video";
 "Videos" = "videos";
 "Channels" = "COLLECTIONS";
-"Users" = "PEOPLE";
 "Subscribers" = "followers";
 "Follow" = "follow";
 "Follower" = "follower";
@@ -246,6 +245,8 @@
 
 "no_videos" = "We couldn't find any videos that matched what you typed in. Please try searching for something else";
 "no_users" = "We couldn't find anyone that matched what you typed in. Please try searching for something else";
+"users" = "Users";
+"highlights" = "Highlights";
 
 // == Channels == //
 

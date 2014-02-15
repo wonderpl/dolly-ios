@@ -85,7 +85,6 @@
     [self.descriptionLabel setText:channelOwner.channelOwnerDescription];
     
     NSString *coverPhotoURL = _channelOwner.coverPhotoURL;
-    NSLog(@"coverPhotoURL %@", coverPhotoURL);
     
     coverPhotoURL = [coverPhotoURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"
                                                         withString: @"thumbnail_large"];

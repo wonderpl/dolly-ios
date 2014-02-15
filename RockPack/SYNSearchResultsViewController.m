@@ -276,6 +276,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void) searchForGenre: (NSString *) genreId
 {
     
+    [self.usersTabButton setTitle:(NSLocalizedString(@"highlights", @"Highlight, discover tab")) forState:UIControlStateNormal];
+    
     if([_currentSearchGenre isEqualToString: genreId])
     {
         return;
@@ -309,6 +311,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void) searchForTerm: (NSString *) newSearchTerm
 {
     
+    [self.usersTabButton setTitle:NSLocalizedString(@"users", @"Users in discover tab") forState:UIControlStateNormal];
+
     if ([_currentSearchTerm isEqualToString: newSearchTerm]) // == Don't repeat a search == //
     {
         return;
