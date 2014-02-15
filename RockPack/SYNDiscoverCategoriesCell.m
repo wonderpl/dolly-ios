@@ -24,6 +24,11 @@
     self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
 }
 
+-(void)prepareForReuse
+{
+    self.backgroundColor = [UIColor clearColor];
+}
+
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
