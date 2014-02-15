@@ -166,7 +166,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     // Load a initial category
-    
+    if (self.genres.count > 0 && IS_IPAD) {
+        [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        
+        [self selectCategoryForCollection:self.categoriesCollectionView AtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
+
 
 }
 
@@ -190,11 +195,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 
 -(void)viewDidAppear:(BOOL)animated {
-    if (self.genres.count > 0 && IS_IPAD) {
-        [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-        
-        [self selectCategoryForCollection:self.categoriesCollectionView AtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    }
 
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -690,6 +690,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     else
         [self.searchResultsController searchForTerm:searchTerm];
     
+   
 }
 
 
