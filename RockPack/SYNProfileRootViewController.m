@@ -50,7 +50,7 @@
 #define SEGMENTED_CONTROLLER_ANIMATION 0.35f
 
 
-@interface SYNProfileRootViewController () <UIGestureRecognizerDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate,SYNChannelCreateNewCelllDelegate> {
+@interface SYNProfileRootViewController () <UISearchBarDelegate, UITextViewDelegate, UITextFieldDelegate, SYNImagePickerControllerDelegate, SYNChannelMidCellDelegate,SYNChannelCreateNewCelllDelegate> {
     ProfileType modeType;
 }
 
