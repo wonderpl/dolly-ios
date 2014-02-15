@@ -2277,7 +2277,7 @@
 }
 
 - (NSString *) yesButtonTitle{
-    return NSLocalizedString(@"Yes", @"Yes to deleting a video instance");
+    return NSLocalizedString(@"Delete", @"Yes to deleting a video instance");
 }
 - (NSString *) noButtonTitle{
     return NSLocalizedString(@"Cancel", @"cancel to deleting a video instance");
@@ -3240,7 +3240,7 @@ finishedWithImage: (UIImage *) image
     self.deleteCell = cell;
     NSString *tmpString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete Collection", "Alerview confirm to delete a Channel"), cell.channel.title];
     
-    [self.deleteChannelAlertView setMessage:tmpString];
+    [self.deleteChannelAlertView setTitle:tmpString];
     [self.deleteChannelAlertView show];
     
 }
