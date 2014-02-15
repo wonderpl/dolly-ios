@@ -84,7 +84,6 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) SYNChannelVideosModel *model;
-@property (strong, nonatomic) IBOutlet UIView *navigationBarView;
 
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
@@ -612,14 +611,12 @@
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
                 self.lblChannelTitle.transform = move;
-                self.navigationBarView.hidden = YES;
             }
             
             if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
                 self.lblChannelTitle.transform = move;
-                self.navigationBarView.hidden = NO;
             }
         }
         else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
@@ -628,16 +625,12 @@
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
                 self.lblChannelTitle.transform = move;
-                self.navigationBarView.hidden = NO;
-
             }
             
             if (offset<FULLNAMELABELIPADLANDSCAPE)
             {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
                 self.lblChannelTitle.transform = move;
-                self.navigationBarView.hidden = YES;
-
             }
         }
     }
