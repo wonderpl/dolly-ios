@@ -318,10 +318,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                withTitle:title
                  forType:kSearchTypeGenre];
     
-    // deselect cell since on iPhone it leads to another screen
-    if(IS_IPHONE)
-        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
     
 }
 
