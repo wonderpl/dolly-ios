@@ -172,6 +172,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         NSString *title = (IS_IPHONE ? subgenre.name : @"");
         
+        [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionTop];
         [self dispatchSearch:subgenre.uniqueId
                    withTitle:title
                      forType:kSearchTypeGenre];
@@ -312,6 +313,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     NSString *title = (IS_IPHONE ? subgenre.name : @"");
+    
 
     
     [self dispatchSearch:subgenre.uniqueId
