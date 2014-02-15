@@ -1488,12 +1488,10 @@
 
 - (IBAction)deleteTapped:(id)sender
 {
-    
-    NSString *message = [NSString stringWithFormat: NSLocalizedString(@"Delete_Channel", nil), self.channel.title];
-    NSString *title = [NSString stringWithFormat: NSLocalizedString(@"Are_you_sure_you_want_to_delete", nil), self.channel.title];
-    
+	NSString *title = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete Collection", "Alerview confirm to delete a Channel"), self.channel.title];
+	
     self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle: title
-                                                             message: message
+                                                             message: nil
                                                             delegate: self
                                                    cancelButtonTitle: NSLocalizedString(@"Cancel", nil)
                                                    otherButtonTitles: NSLocalizedString(@"Delete", nil), nil];
