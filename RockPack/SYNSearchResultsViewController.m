@@ -465,7 +465,13 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (collectionView == self.videosCollectionView) {
+        
+        
+        
 		VideoInstance *videoInstance = self.videosArray[indexPath.item];
+        
+        
+        
 		UIViewController *viewController;
         
         if (!self.currentSearchTerm) {

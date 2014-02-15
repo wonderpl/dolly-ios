@@ -25,10 +25,4 @@
     self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
 }
 
-- (void)setSelected:(BOOL)selected {
-    [super setSelected:selected];
-    
-	self.dimmingView.hidden = !selected;
-}
-
 @end

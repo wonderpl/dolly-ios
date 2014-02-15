@@ -314,14 +314,27 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     NSString *title = (IS_IPHONE ? subgenre.name : @"");
     
-
-    
     [self dispatchSearch:subgenre.uniqueId
                withTitle:title
                  forType:kSearchTypeGenre];
     
     
+    UICollectionViewCell* cell = [collectionView  cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell* cell = [collectionView  cellForItemAtIndexPath:indexPath];
+    Genre* currentGenre = self.genres[indexPath.section];
+    SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
+
+    if (indexPath.section == 0) {
+        cell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
@@ -610,9 +623,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     
     MKNKErrorBlock errorBlock = ^(NSError* error) {
-        
-        
-        
     };
     
     // == Make and Save the Request == //
@@ -639,7 +649,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                 forType:(kSearchType)type
 {
     
-    
     [self.searchBar setShowsCancelButton:NO animated:YES];
     
     [self.searchBar resignFirstResponder];
@@ -647,7 +656,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.autocompleteTimer invalidate];
     
     [self closeAutocomplete];
-    
     
     if(IS_IPHONE)
     {
@@ -661,28 +669,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                              animated:YES];
         
         // hide the 'DISCOVER' text next to the back button as it appears by default
-        
-        
-        
     }
     else // if(IS_IPAD)
     {
         // in the case of the iPad the navigation bar title needs to be changed manually
         self.navigationController.navigationBar.topItem.title = title;
-        
     }
-    
-    
     
     if(type == kSearchTypeGenre)
         [self.searchResultsController searchForGenre:searchTerm];
     else
         [self.searchResultsController searchForTerm:searchTerm];
-    
-    
-    
-    
-    
     
 }
 
