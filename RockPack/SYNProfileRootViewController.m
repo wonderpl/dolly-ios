@@ -424,7 +424,6 @@
 	[super viewWillAppear:animated];
     
     [self updateTabStates];
-    [self setUpSegmentedControl];
     [self setNeedsStatusBarAppearanceUpdate];
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
@@ -615,8 +614,6 @@
     
 }
 
-//Setting up the layout for the custom segmented controller
-//TODO: Abstract segmented controller out, used in multiple places in the app
 -(void) setUpSegmentedControl{
     
     self.segmentedControlsView.layer.cornerRadius = 4;
@@ -624,8 +621,6 @@
     self.segmentedControlsView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.segmentedControlsView.layer.masksToBounds = YES;
     
-    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.collectionsTabButton.titleLabel.font.pointSize]];
-    [self.followingTabButton .titleLabel setFont:[UIFont regularCustomFontOfSize:self.followingTabButton.titleLabel.font.pointSize]];
 }
 
 -(void) setProfileImage : (NSString*) thumbnailURL
@@ -1331,24 +1326,35 @@
     
     if (self.collectionsTabActive)
     {
-        [self.followingTabButton.titleLabel setTextColor:[UIColor dollyTabColorSelectedText]];
-        self.followingTabButton.backgroundColor = [UIColor whiteColor];
+        [self.followingTabButton setTitleColor:[UIColor dollyTabColorSelectedText] forState:UIControlStateNormal];
+        [self.followingTabButton setTitleColor:[UIColor dollyTabColorSelectedText] forState:UIControlStateHighlighted];
+
         
-        self.collectionsTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
-        [self.collectionsTabButton.titleLabel setTextColor:[UIColor whiteColor]];
+        [self.followingTabButton setBackgroundColor: [UIColor whiteColor]];
+        
+        [self.collectionsTabButton setBackgroundColor: [UIColor dollyTabColorSelectedBackground]];
+        
+        [self.collectionsTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.collectionsTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         
         if (self.modeType == kModeOtherUsersProfile) {
             self.followAllButton.hidden = NO;
-        }
-        
+        }        
     }
     else
     {
         [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.followingTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
+        [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+
+        [self.followingTabButton setBackgroundColor: [UIColor dollyTabColorSelectedBackground]];
         
-        [self.collectionsTabButton.titleLabel setTextColor:[UIColor dollyTabColorSelectedText]];
-        self.collectionsTabButton.backgroundColor = [UIColor whiteColor];
+        [self.collectionsTabButton setTitleColor:[UIColor dollyTabColorSelectedText] forState:UIControlStateNormal];
+        [self.collectionsTabButton setTitleColor:[UIColor dollyTabColorSelectedText] forState:UIControlStateHighlighted];
+
+        [self.collectionsTabButton setBackgroundColor: [UIColor whiteColor]];
+        
+        
+        
         __weak typeof(self) weakSelf = self;
         
         MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
@@ -1359,13 +1365,13 @@
             //#warning cache all the channels to activity manager?
             // is there a better way?
             // can use the range object, this should be poosible
-            if (self.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
-                for (Channel *tmpChannel in self.channelOwner.subscriptions) {
+            if (weakSelf.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
+                for (Channel *tmpChannel in weakSelf.channelOwner.subscriptions) {
                     [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
                 }
             }
             [weakSelf.subscriptionThumbnailCollectionView reloadData];
-            [self.channelOwner.managedObjectContext save: &error];
+            [weakSelf.channelOwner.managedObjectContext save: &error];
         };
         
         // define success block //
@@ -1377,7 +1383,7 @@
         
         NSRange range = NSMakeRange(0, 100);
         
-        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
+        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: weakSelf.channelOwner.uniqueId
                                                        inRange: range
                                              completionHandler: successBlock
                                                   errorHandler: errorBlock];
