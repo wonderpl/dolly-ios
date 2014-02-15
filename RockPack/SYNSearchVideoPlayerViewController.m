@@ -104,8 +104,6 @@
 		SYNChannelMidCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNChannelMidCell reuseIdentifier]
 																			forIndexPath:indexPath];
 		cell.channel = [self.channelsModel itemAtIndex:indexPath.item];
-		cell.followButton.hidden = NO;
-		[cell setFollowButtonLabel:@"follow"];
 		
 		return cell;
 	} else {
