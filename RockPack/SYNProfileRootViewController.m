@@ -177,6 +177,9 @@
     self.subscriptionThumbnailCollectionView.dataSource =nil;
     self.channelThumbnailCollectionView.delegate = nil;
     self.channelThumbnailCollectionView.dataSource = nil;
+	
+	self.followingSearchBar.delegate = nil;
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
