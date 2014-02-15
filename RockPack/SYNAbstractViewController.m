@@ -183,14 +183,6 @@
     AssertOrLog (@"Shouldn't be calling abstract function");
 }
 
-#pragma mark - Trace
-
-- (NSString*) description
-{
-    return [NSString stringWithFormat: @"SYNAbstractViewController of type '%@' and viewId '%@'", NSStringFromClass([self class]), viewId];
-}
-
-
 -(void)clearedLocationBoundData
 {
     // to be implemented by child
