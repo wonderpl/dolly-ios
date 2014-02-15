@@ -304,16 +304,19 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                             forIndexPath: indexPath];
     
     //Editors picks still get there color
-    categoryCell.backgroundColor = [UIColor whiteColor];
     
     if (indexPath.section == 0 && indexPath.row == 0) {
         categoryCell.selectedColor = [UIColor darkerColorForColor:[[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId]] ;
         categoryCell.deSelectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
-
+        categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
     } else {
         categoryCell.selectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
         categoryCell.deSelectedColor = [UIColor whiteColor];
+
+        
     }
+
+    [categoryCell setSelected:categoryCell.selected];
     
     categoryCell.label.text = subgenre.name;
     
