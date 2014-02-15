@@ -8,7 +8,6 @@
 
 #import "SYNDiscoverCategoriesCell.h"
 #import "UIFont+SYNFont.h"
-#import "SYNGenreColorManager.h"
 
 @interface SYNDiscoverCategoriesCell ()
 
@@ -25,20 +24,13 @@
     self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
 }
 
--(void)setSubGenre:(SubGenre *)subgenre {
-    
-    self.subgenre = _subgenre;
-}
-
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
-//	self.dimmingView.hidden = !selected;
-    
     if (selected) {
-        self.backgroundColor =  [[SYNGenreColorManager sharedInstance] colorFromID:self.subgenre.uniqueId];
+        self.backgroundColor =  self.selectedColor;
     } else {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = self.deSelectedColor;
     }
 }
 

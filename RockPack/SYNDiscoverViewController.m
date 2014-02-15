@@ -166,30 +166,28 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     // Load a initial category
     
-    if (self.genres.count > 0 && IS_IPAD) {
-        Genre* currentGenre = self.genres[0];
-        SubGenre* subgenre = currentGenre.subgenres[0];
-        
-        NSString *title = (IS_IPHONE ? subgenre.name : @"");
-        
-        [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionTop];
-        [self dispatchSearch:subgenre.uniqueId
-                   withTitle:title
-                     forType:kSearchTypeGenre];
-    }
 
 }
 
-- (void) viewWillAppear:(BOOL)animated
-{
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = YES;
     }
+    
 
-    [super viewWillAppear:animated];
 	[self updateContainerWidths];
 }
 
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (self.genres.count > 0 && IS_IPAD) {
+        [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        
+        [self selectCategoryForCollection:self.categoriesCollectionView withRow:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
+
+}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (IS_IPAD) {
@@ -266,6 +264,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     return _popularSubGenre;
 }
+- (void) selectCategoryForCollection:(UICollectionView *)collectionView withRow: (NSIndexPath *)indexPath{
+        Genre* currentGenre = self.genres[indexPath.section];
+        SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
+        
+        
+        NSString *title = (IS_IPHONE ? subgenre.name : @"");
+        
+        [self dispatchSearch:subgenre.uniqueId
+                   withTitle:title
+                     forType:kSearchTypeGenre];
+}
 
 #pragma mark - CollectionView Delegate/Data Source
 
@@ -295,13 +304,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                             forIndexPath: indexPath];
     
     //Editors picks still get there color
-    if (indexPath.section == 0) {
-        categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
-    } else {
-        categoryCell.backgroundColor = [UIColor whiteColor];
+    categoryCell.backgroundColor = [UIColor whiteColor];
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        categoryCell.selectedColor = [UIColor darkerColorForColor:[[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId]] ;
+        categoryCell.deSelectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
 
+    } else {
+        categoryCell.selectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+        categoryCell.deSelectedColor = [UIColor whiteColor];
     }
-    [categoryCell setSubgenre:subgenre];
+    
     categoryCell.label.text = subgenre.name;
     
     return categoryCell;
@@ -309,33 +322,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Genre* currentGenre = self.genres[indexPath.section];
-    SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
-    
-    
-    NSString *title = (IS_IPHONE ? subgenre.name : @"");
-    
-    [self dispatchSearch:subgenre.uniqueId
-               withTitle:title
-                 forType:kSearchTypeGenre];
-    
-    
-    UICollectionViewCell* cell = [collectionView  cellForItemAtIndexPath:indexPath];
-    
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        cell.backgroundColor = [UIColor darkerColorForColor:[[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId]] ;
-    }
+    [self selectCategoryForCollection:collectionView withRow:indexPath];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell* cell = [collectionView  cellForItemAtIndexPath:indexPath];
-    Genre* currentGenre = self.genres[indexPath.section];
-    SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
 
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        cell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId] ;
-    }
-}
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section

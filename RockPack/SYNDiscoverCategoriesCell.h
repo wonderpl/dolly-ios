@@ -11,6 +11,7 @@
 @interface SYNDiscoverCategoriesCell : UICollectionViewCell
 
 @property (nonatomic, strong, readonly) UILabel *label;
-@property (nonatomic, strong) SubGenre *subgenre;
+@property (nonatomic, strong) UIColor *selectedColor;
+@property (nonatomic, strong) UIColor *deSelectedColor;
 
 @end
