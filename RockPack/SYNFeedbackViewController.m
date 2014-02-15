@@ -61,20 +61,8 @@ static NSString* errorText = @"Please provide your feedback here...";
     
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:textAttributes
                                                           forState:UIControlStateNormal];
-    
-    if (IS_IPHONE) {        
-        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        [negativeSpacer setWidth:-10];
-        
-        self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer,[self backButton],nil];
-        
-        self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
-        [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
-
-    }
-    
-    
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+	
+	self.navigationItem.rightBarButtonItem.enabled = NO;
     
     
     // setting fonts
@@ -356,24 +344,5 @@ static NSString* errorText = @"Please provide your feedback here...";
              self.maxValueLabel,
              self.currentValueLabel];
 }
-
--(UIBarButtonItem*) backButton {
-    
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [backButton setBackgroundImage:[UIImage imageNamed:@"BackButtonApp"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0f, 0.0f, 30.0f, 40.0f);
-    
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    return backButtonItem;
-}
-
--(void) goBack {
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 @end

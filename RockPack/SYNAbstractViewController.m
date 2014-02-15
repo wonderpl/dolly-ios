@@ -101,41 +101,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
-
-#pragma mark - Back button
-
--(UIBarButtonItem*) backButton {
-
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [backButton setBackgroundImage:[UIImage imageNamed:@"BackButtonApp"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    backButton.frame = CGRectMake(0.0f, 0.0f, 30.0f, 40.0f);
-    
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    return backButtonItem;
-}
-
 #pragma mark - View lifecycle
 
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    if (self.navigationController.viewControllers.firstObject != self) {
-        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        [negativeSpacer setWidth:-10];
-        
-        self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer,[self backButton],nil];
-        
-        self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
-        [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
-    }
-    
-    
-    
     
     self.automaticallyAdjustsScrollViewInsets = NO; 
     
@@ -932,12 +902,6 @@
 													button.enabled = YES;
 												}];
 	}
-}
-
-
--(void) goBack {
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
