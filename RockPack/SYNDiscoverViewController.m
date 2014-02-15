@@ -309,27 +309,32 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         categoryCell.selectedColor = [UIColor darkerColorForColor:[[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId]] ;
         categoryCell.deSelectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
         categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+        
     } else {
         categoryCell.selectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
         categoryCell.deSelectedColor = [UIColor whiteColor];
-
-        
     }
 
-    [categoryCell setSelected:categoryCell.selected];
     
     categoryCell.label.text = subgenre.name;
-    
+            
     return categoryCell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self selectCategoryForCollection:collectionView AtIndexPath:indexPath];
 }
-
-
-
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {

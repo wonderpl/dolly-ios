@@ -24,14 +24,17 @@
     self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
 }
 
+
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    
     if (selected) {
         self.backgroundColor =  self.selectedColor;
     } else {
         self.backgroundColor = self.deSelectedColor;
     }
+    
 }
+
+
 
 @end
