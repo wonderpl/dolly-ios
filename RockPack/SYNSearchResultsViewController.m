@@ -169,11 +169,7 @@ typedef void (^SearchResultCompleteBlock)(int);
     };
     
     // Set Initial
-    if(IS_IPHONE ) {
-        self.searchResultsShowing = SearchResultsShowingVideos;
-    } else {
-        self.searchResultsShowing = SearchResultsShowingUsers;
-    }
+    self.searchResultsShowing = SearchResultsShowingUsers;
     self.dataRequestRange2 = self.dataRequestRange; // they start off as (0, 48) for both...
     
     if (!IS_IPHONE_5) {
