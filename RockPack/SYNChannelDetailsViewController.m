@@ -73,7 +73,6 @@
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
-@property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 @property (strong, nonatomic) IBOutlet UIView *viewCollectionSeperator;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewDescription;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
@@ -373,7 +372,7 @@
     {
         [self editMode];
         
-        self.navigationItem.leftBarButtonItem = self.barBtnBack;
+        self.navigationItem.leftBarButtonItem = nil;
     }
     else if (self.mode == kChannelDetailsFavourites)
     {
@@ -1202,6 +1201,8 @@
     self.lblFullName.alpha = 0.0f;
     self.lblChannelTitle.alpha = 0.0f;
     
+	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
+	[self.navigationItem setRightBarButtonItem:nil animated:YES];
     [UIView animateWithDuration:0.4 animations:^{
         
         self.viewProfileContainer.alpha = 1.0f;
@@ -1213,9 +1214,6 @@
         self.btnShareChannel.alpha = 1.0f;
         self.lblFullName.alpha = 1.0f;
         self.lblChannelTitle.alpha = 1.0f;
-        
-        self.navigationItem.leftBarButtonItem = self.barBtnBack;
-        self.navigationItem.rightBarButtonItem = nil;
         
     }];
     
@@ -1247,13 +1245,12 @@
     self.txtFieldChannelName.alpha = 0.0f;
     self.txtViewDescription.alpha = 0.0f;
     
+	[self.navigationItem setLeftBarButtonItem:self.barBtnCancel animated:YES];
+	[self.navigationItem setRightBarButtonItem:self.barBtnSave animated:YES];
     [UIView animateWithDuration:0.4 animations:^{
         self.btnDeleteChannel.alpha = 1.0f;
         self.txtFieldChannelName.alpha = 1.0f;
         self.txtViewDescription.alpha = 1.0f;
-        self.barBtnBack = self.navigationItem.leftBarButtonItem;
-        self.navigationItem.leftBarButtonItem = self.barBtnCancel;
-        self.navigationItem.rightBarButtonItem = self.barBtnSave;
     }];
     
 }
