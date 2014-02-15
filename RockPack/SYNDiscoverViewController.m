@@ -171,6 +171,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         [self selectCategoryForCollection:self.categoriesCollectionView AtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     }
+    
+    [self fetchAndDisplayCategories];
+
 
 
 }
@@ -189,8 +192,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	}
 
 	[self updateContainerWidths];
-	
-    [self fetchAndDisplayCategories];
+
 }
 
 
@@ -333,11 +335,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    if (!cell.selected) {
+        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    }
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
