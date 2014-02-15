@@ -13,6 +13,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
+#import "SYNMasterViewController.h"
 #import "User.h"
 
 @interface SYNAccountSettingsLocation ()
@@ -184,12 +185,13 @@
                                            
                                            appDelegate.currentUser.locale = newLocale;
                                            
-                                           [spinner stopAnimating];
-                                           
                                            [appDelegate clearCoreDataMainEntities:NO];
                                            
-                                           
-                                           [wself.navigationController popViewControllerAnimated:YES];
+										   [appDelegate.masterViewController loadBasicDataWithComplete:^(BOOL success) {
+											   [spinner stopAnimating];
+											   
+											   [wself.navigationController popViewControllerAnimated:YES];
+										   }];
                                            
                                        } errorHandler:^(id errorInfo) {
                                            

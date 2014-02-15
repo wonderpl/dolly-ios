@@ -22,6 +22,7 @@
 #import "SYNGenreColorManager.h"
 #import "SYNDiscoverSectionView.h"
 #import "SYNOnBoardingHeader.h"
+#import "UINavigationBar+Appearance.h"
 
 @import QuartzCore;
 
@@ -174,9 +175,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = YES;
     }
-    
+	
+	// This is to handle the case where we're on the profile page and popToRootViewControllerAnimated is called.
+	// For some reason viewWillDisappear isn't being called on the SYNProfileRootViewController so the
+	// navigation bar is left with a transparent background.
+	if (IS_IPHONE) {
+		[self.navigationController.navigationBar setBackgroundTransparent:NO];
+	}
 
 	[self updateContainerWidths];
+	
+    [self fetchAndDisplayCategories];
 }
 
 
@@ -192,7 +201,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [super viewWillDisappear:animated];
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = NO;
-    }
+	}
 
 }
 
