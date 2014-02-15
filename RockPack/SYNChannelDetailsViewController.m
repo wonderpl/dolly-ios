@@ -19,7 +19,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNProfileRootViewController.h"
 #import "SYNCollectionVideoCell.h"
 #import "UIFont+SYNFont.h"
 #import <UIImageView+WebCache.h>
