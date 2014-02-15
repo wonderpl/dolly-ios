@@ -10,7 +10,7 @@
 #import "SYNSubscribersViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
-#import "SYNSearchResultsUserCell.h"
+#import "SYNFriendCell.h"
 #import "UICollectionReusableView+Helpers.h"
 
 @interface SYNSubscribersViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNSocialActionsDelegate>
@@ -55,8 +55,8 @@
         self.usersThumbnailCollectionView.backgroundColor = [UIColor whiteColor];
     }
     
-    [self.usersThumbnailCollectionView registerNib:[SYNSearchResultsUserCell nib]
-                        forCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]];
+    [self.usersThumbnailCollectionView registerNib:[SYNFriendCell nib]
+                        forCellWithReuseIdentifier:[SYNFriendCell reuseIdentifier]];
     
     [self.usersThumbnailCollectionView registerNib:[SYNChannelFooterMoreView nib]
                         forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
@@ -166,7 +166,7 @@
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
-    SYNSearchResultsUserCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]
+    SYNFriendCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFriendCell reuseIdentifier]
 																				   forIndexPath:indexPath];
     ChannelOwner* channelOwner = (ChannelOwner*)self.users[indexPath.item];
     
@@ -338,16 +338,16 @@
     }
     
     id candidate = profileButton;
-    while (![candidate isKindOfClass:[SYNSearchResultsUserCell class]]) {
+    while (![candidate isKindOfClass:[SYNFriendCell class]]) {
         candidate = [candidate superview];
     }
     
-    if(![candidate isKindOfClass:[SYNSearchResultsUserCell class]])
+    if(![candidate isKindOfClass:[SYNFriendCell class]])
     {
         AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
         return; // did not manage to get the cell
     }
-    SYNSearchResultsUserCell* searchUserCell = (SYNSearchResultsUserCell*)candidate;
+    SYNFriendCell* searchUserCell = (SYNFriendCell*)candidate;
     
     if(IS_IPAD)
     {

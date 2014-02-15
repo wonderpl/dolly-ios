@@ -12,7 +12,7 @@
 #import "Video.h"
 #import "SYNChannelMidCell.h"
 #import "UICollectionReusableView+Helpers.h"
-#import "SYNSearchResultsUserCell.h"
+#import "SYNFriendCell.h"
 #import "UIFont+SYNFont.h"
 #import "SYNNetworkEngine.h"
 #import "SYNMasterViewController.h"
@@ -66,8 +66,8 @@
 				  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 						 withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
 	
-	[self.likesCollectionView registerNib:[SYNSearchResultsUserCell nib]
-			   forCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]];
+	[self.likesCollectionView registerNib:[SYNFriendCell nib]
+			   forCellWithReuseIdentifier:[SYNFriendCell reuseIdentifier]];
 	[self.likesCollectionView registerNib:[SYNChannelFooterMoreView nib]
 			   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 					  withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
@@ -107,7 +107,7 @@
 		
 		return cell;
 	} else {
-		SYNSearchResultsUserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]
+		SYNFriendCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFriendCell reuseIdentifier]
 																				   forIndexPath:indexPath];
 		
 		cell.channelOwner = [self.likesModel itemAtIndex:indexPath.item];
