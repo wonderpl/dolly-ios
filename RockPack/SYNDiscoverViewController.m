@@ -184,7 +184,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     if (self.genres.count > 0 && IS_IPAD) {
         [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
         
-        [self selectCategoryForCollection:self.categoriesCollectionView withRow:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [self selectCategoryForCollection:self.categoriesCollectionView AtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     }
 
 }
@@ -264,7 +264,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     return _popularSubGenre;
 }
-- (void) selectCategoryForCollection:(UICollectionView *)collectionView withRow: (NSIndexPath *)indexPath{
+- (void) selectCategoryForCollection:(UICollectionView *)collectionView AtIndexPath: (NSIndexPath *)indexPath{
         Genre* currentGenre = self.genres[indexPath.section];
         SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
         
@@ -322,7 +322,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self selectCategoryForCollection:collectionView withRow:indexPath];
+    [self selectCategoryForCollection:collectionView AtIndexPath:indexPath];
 }
 
 
