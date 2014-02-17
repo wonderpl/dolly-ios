@@ -145,6 +145,10 @@
     return self;
 }
 
+- (NSString *)thumbnailUrl {
+	return (self.videoThumbnailUrl ? self.videoThumbnailUrl : self.channelThumbnailUrl);
+}
+
 #pragma mark - Parsing Date
 
 -(NSString*)parseDateString:(NSString*)dateString

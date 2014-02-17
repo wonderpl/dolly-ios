@@ -31,6 +31,7 @@
     copyChannelOwner.totalVideosValueSubscriptions = existingChannelOwner.totalVideosValueSubscriptions;
 
     copyChannelOwner.displayName = existingChannelOwner.displayName;
+	copyChannelOwner.username = existingChannelOwner.username;
     
     copyChannelOwner.channelOwnerDescription = existingChannelOwner.channelOwnerDescription;
     copyChannelOwner.followersTotalCount = existingChannelOwner.followersTotalCount;
@@ -95,6 +96,22 @@
     [instance setAttributesFromDictionary: dictionary
                       ignoringObjectTypes: ignoringObjects];
     return instance;
+}
+
++ (ChannelOwner *)channelOwnerWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[ChannelOwner entityName]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"username ==[c] %@", username]];
+	
+	ChannelOwner *channelOwner = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] firstObject];
+	if (!channelOwner) {
+		SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+		
+		channelOwner = [self instanceFromDictionary:@{ @"username" : username }
+						  usingManagedObjectContext:managedObjectContext
+								ignoringObjectTypes:kIgnoreNothing];
+	}
+	
+	return channelOwner;
 }
 
 

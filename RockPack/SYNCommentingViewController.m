@@ -25,7 +25,7 @@
 static const CGFloat CharacterCountThreshold = 30.0;
 static NSString* PlaceholderText = @"Say something nice";
 
-@interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, SYNPagingModelDelegate>
+@interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, SYNPagingModelDelegate, SYNCommentingCollectionViewCellDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView* commentsCollectionView;
 
@@ -75,6 +75,11 @@ static NSString* PlaceholderText = @"Say something nice";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+																			 style:UIBarButtonItemStylePlain
+																			target:nil
+																			action:nil];
 	
     // on iPhone the controller appears in a popup
     if (IS_IPHONE) {
@@ -174,6 +179,7 @@ static NSString* PlaceholderText = @"Say something nice";
 
 
 -(void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
 
     self.videoInstance.commentCountValue = [self.model totalItemCount];
     [appDelegate saveContext:YES];
@@ -426,90 +432,11 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - Button Delegates (Deleting)
 
--(void)deleteButtonPressed:(UIButton*)sender
-{
-    
-    UIView* candidate = sender;
-    while (![candidate isKindOfClass:[SYNCommentingCollectionViewCell class]]) {
-        candidate = candidate.superview;
-    }
-    
-    if(![candidate isKindOfClass:[SYNCommentingCollectionViewCell class]])
-        return;
-    
-    self.currentlyDeletingCell = (SYNCommentingCollectionViewCell*)candidate;
-    
-    self.currentlyDeletingCell.deleting = YES;
-    self.currentlyDeletingCell.loading = YES;
-    
-    NSIndexPath* cellIndexPath = [self.commentsCollectionView indexPathForCell:self.currentlyDeletingCell];
-    
-    self.currentlyDeletingComment = [self.model itemAtIndex:cellIndexPath.item];
-    
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Delete Comment"
-                                                        message:@"Are you sure you want to delete this comment?"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:@"OK", nil];
-    
-    [alertView show];
-    
-    
-}
-
--(BOOL)deleteComment:(NSDictionary*)comment
-{    
+-(BOOL)deleteComment:(NSDictionary*)comment {
     [[NSUserDefaults standardUserDefaults] setObject:comment[@"date_added"]
                                               forKey:kUserDefaultsCommentingLastInteracted];
     
     return YES;
-}
-
--(void)userAvatarButtonPressed:(UIButton*)button
-{
-    if(!button)
-        return;
-    
-    [self.sendMessageTextView resignFirstResponder];
-    
-    // find correct cell
-    
-    UIView* candidateCell = button;
-    while(![candidateCell isKindOfClass:[SYNCommentingCollectionViewCell class]])
-        candidateCell = candidateCell.superview;
-    
-    if(![candidateCell isKindOfClass:[SYNCommentingCollectionViewCell class]])
-        return;
-    
-    SYNCommentingCollectionViewCell* cell = (SYNCommentingCollectionViewCell*)candidateCell;
-    NSDictionary* comment = cell.comment;
-    if(!comment)
-        return;
-    
-    
-    
-    // create a ChannelOwner
-    
-    NSDictionary* channelOwnerData = @{@"id":comment[@"user"][@"id"],
-                                       @"avatar_thumbnail_url":comment[@"user"][@"avatar_thumbnail_url"],
-                                       @"display_name":comment[@"user"][@"display_name"]};
-    
-    ChannelOwner* co = [ChannelOwner instanceFromDictionary:channelOwnerData
-                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext
-                                        ignoringObjectTypes:kIgnoreAll];
-    
-    SYNAbstractViewController* controllerToShowProfile;
-    if(IS_IPHONE)
-    {
-        controllerToShowProfile = self;
-    }
-    else
-    {
-        controllerToShowProfile = appDelegate.masterViewController.showingViewController;
-        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
-    }
-    
-    [controllerToShowProfile viewProfileDetails:co];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -686,5 +613,68 @@ static NSString* PlaceholderText = @"Say something nice";
     [self.refreshControl endRefreshing];
 }
 
+- (void)commentCell:(SYNCommentingCollectionViewCell *)cell usernameSelected:(NSString *)username {
+	ChannelOwner *channelOwner = [ChannelOwner channelOwnerWithUsername:username
+												 inManagedObjectContext:[appDelegate mainManagedObjectContext]];
+	
+	NSLog(@"Channel owner: %@", channelOwner);
+
+    SYNAbstractViewController* controllerToShowProfile;
+    if (IS_IPHONE) {
+        controllerToShowProfile = self;
+    } else {
+        controllerToShowProfile = appDelegate.masterViewController.showingViewController;
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+    }
+	
+    [controllerToShowProfile viewProfileDetails:channelOwner];
+}
+
+- (void)commentCellDeleteButtonPressed:(SYNCommentingCollectionViewCell *)cell {
+    self.currentlyDeletingCell = cell;
+    
+    self.currentlyDeletingCell.deleting = YES;
+    self.currentlyDeletingCell.loading = YES;
+    
+    NSIndexPath* cellIndexPath = [self.commentsCollectionView indexPathForCell:self.currentlyDeletingCell];
+    
+    self.currentlyDeletingComment = [self.model itemAtIndex:cellIndexPath.item];
+    
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Delete Comment"
+                                                        message:@"Are you sure you want to delete this comment?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"OK", nil];
+    
+    [alertView show];
+}
+
+- (void)commentCellUserAvatarButtonPressed:(SYNCommentingCollectionViewCell *)cell {
+	[self.sendMessageTextView resignFirstResponder];
+    
+    NSDictionary* comment = cell.comment;
+    if(!comment)
+        return;
+    
+    // create a ChannelOwner
+    
+    NSDictionary* channelOwnerData = @{@"id":comment[@"user"][@"id"],
+                                       @"avatar_thumbnail_url":comment[@"user"][@"avatar_thumbnail_url"],
+                                       @"display_name":comment[@"user"][@"display_name"]};
+    
+    ChannelOwner* co = [ChannelOwner instanceFromDictionary:channelOwnerData
+                                  usingManagedObjectContext:appDelegate.mainManagedObjectContext
+                                        ignoringObjectTypes:kIgnoreAll];
+    
+    SYNAbstractViewController* controllerToShowProfile;
+    if (IS_IPHONE) {
+        controllerToShowProfile = self;
+    } else {
+        controllerToShowProfile = appDelegate.masterViewController.showingViewController;
+        [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
+    }
+    
+    [controllerToShowProfile viewProfileDetails:co];
+}
 
 @end

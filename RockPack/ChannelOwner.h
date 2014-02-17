@@ -14,6 +14,8 @@
                   usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
                         ignoringObjectTypes: (IgnoringObjects) ignoringObjects;
 
++ (ChannelOwner *)channelOwnerWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects;
 
