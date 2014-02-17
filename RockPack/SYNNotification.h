@@ -40,7 +40,7 @@ typedef enum : NSInteger
 @property (nonatomic, strong) ChannelOwner *channelOwner;
 @property (nonatomic, strong) Channel *channel;
 
-
+@property (nonatomic, strong, readonly) NSString *thumbnailUrl;
 
 @property (nonatomic) NSInteger timeElapsesd;
 

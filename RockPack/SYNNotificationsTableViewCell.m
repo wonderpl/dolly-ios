@@ -68,8 +68,8 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 	
     self.timeLabel.text = notification.dateDifferenceString;
 	
-	NSURL *videoThumbnailURL = [NSURL URLWithString:notification.videoThumbnailUrl];
-	[self.videoThumbnailButton setImageWithURL:videoThumbnailURL
+	NSURL *thumbnailURL = [NSURL URLWithString:notification.thumbnailUrl];
+	[self.videoThumbnailButton setImageWithURL:thumbnailURL
 									  forState:UIControlStateNormal
 							  placeholderImage:[UIImage imageNamed:@"PlaceholderNotificationVideo"]
 									   options:SDWebImageRetryFailed];
