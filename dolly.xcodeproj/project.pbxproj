@@ -1176,6 +1176,7 @@
 		E97FCDC5183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FCDC4183A7D2B007A9BCC /* SYNCarouselVideoPlayerViewController_ipad.storyboard */; };
 		E98369D6188937B300363709 /* ButtonLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D4188937B300363709 /* ButtonLogin.png */; };
 		E98369D7188937B300363709 /* ButtonLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D5188937B300363709 /* ButtonLogin@2x.png */; };
+		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
 		E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C1518967BA500767BBD /* SYNTimestampLabel.m */; };
 		E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C18189681BC00767BBD /* SYNTermsViewController.m */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
@@ -2659,6 +2660,8 @@
 		E98369D4188937B300363709 /* ButtonLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonLogin.png; path = Assets/Images/ButtonLogin.png; sourceTree = "<group>"; };
 		E98369D5188937B300363709 /* ButtonLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonLogin@2x.png"; path = "Assets/Images/ButtonLogin@2x.png"; sourceTree = "<group>"; };
 		E98369D81889457500363709 /* SYNVideoInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoInfoCell.h; sourceTree = "<group>"; };
+		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
+		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
 		E9918C1418967BA500767BBD /* SYNTimestampLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimestampLabel.h; sourceTree = "<group>"; };
 		E9918C1518967BA500767BBD /* SYNTimestampLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimestampLabel.m; sourceTree = "<group>"; };
 		E9918C17189681BC00767BBD /* SYNTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTermsViewController.h; sourceTree = "<group>"; };
@@ -4992,6 +4995,8 @@
 				BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */,
 				BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */,
 				BE57C01A183F7A1F00C6444A /* Cells */,
+				E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */,
+				E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */,
 			);
 			name = "One to One Sharing";
 			sourceTree = "<group>";
@@ -6830,6 +6835,7 @@
 				01E427F01664EE52009B941F /* _Channel.m in Sources */,
 				E905A945189BCD1500FED785 /* SYNSignupViewController.m in Sources */,
 				E92837AC189C022E005D5108 /* SYNCommentsModel.m in Sources */,
+				E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */,
 				E9F6255318845EF9000EF6A2 /* SYNiPhonePasswordForgotViewController.m in Sources */,
 				BEE01B5A184F5868000CF681 /* SYNSocialFollowButton.m in Sources */,
 				01E427F11664EE52009B941F /* _Video.m in Sources */,

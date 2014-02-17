@@ -24,6 +24,7 @@
 #import "VideoInstance.h"
 #import "NSString+Validation.h"
 #import "UICollectionReusableView+Helpers.h"
+#import "SYNWonderMailActivity.h"
 @import AddressBook;
 @import QuartzCore;
 
@@ -304,17 +305,9 @@
     // load activities
     OWFacebookActivity *facebookActivity = [[OWFacebookActivity alloc] init];
     OWTwitterActivity *twitterActivity = [[OWTwitterActivity alloc] init];
+	SYNWonderMailActivity *mailActivity = [[SYNWonderMailActivity alloc] init];
     
-    NSMutableArray *activities = @[facebookActivity, twitterActivity].mutableCopy;
-    
-    if ([MFMailComposeViewController canSendMail])
-    {
-        OWMailActivity *mailActivity = [[OWMailActivity alloc] init];
-        [activities addObject: mailActivity];
-        
-        // TODO: We might want to disable the email icon here if we don't have email on this device (iPod touch or non-configured email)
-    }
-    
+    NSArray *activities = @[ facebookActivity, twitterActivity, mailActivity ];
     
     self.activityViewController = [[OWActivityViewController alloc] initWithViewController: self
                                                                                 activities: activities];

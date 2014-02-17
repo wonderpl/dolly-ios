@@ -113,7 +113,7 @@
         return NO;
     }
     
-    for (id basket in result)
+    for (id basket in [result copy])
     {
         [importManagedObjectContext deleteObject: basket];
     }

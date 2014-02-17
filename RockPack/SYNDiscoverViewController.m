@@ -129,8 +129,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // you want to load the search display controller only for iPad, on iPhone in slides in as a navigation
     if(IS_IPAD)
     {
-		
-		self.searchResultsController.view.backgroundColor = [UIColor greenColor];
         [self addChildViewController: self.searchResultsController];
         [self.containerView addSubview: self.searchResultsController.view];
         
@@ -316,31 +314,34 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         categoryCell.deSelectedColor = [UIColor whiteColor];
     }
 
+    [categoryCell setSelected:categoryCell.selected];
     
     categoryCell.label.text = subgenre.name;
             
     return categoryCell;
 }
 
+-(BOOL) collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-    
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    
-    if (!cell.selected) {
-        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    }
+    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    cell.selected = cell.selected;
+    
     [self selectCategoryForCollection:collectionView atIndexPath:indexPath];
 }
 
