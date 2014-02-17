@@ -191,6 +191,8 @@
 											   [spinner stopAnimating];
 											   
 											   [wself.navigationController popViewControllerAnimated:YES];
+											   
+											   [[NSNotificationCenter defaultCenter] postNotificationName:CategoriesReloadedNotification object:nil];
 										   }];
                                            
                                        } errorHandler:^(id errorInfo) {

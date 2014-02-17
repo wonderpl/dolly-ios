@@ -446,6 +446,8 @@ typedef enum {
 
 // Notifications
 
+#define CategoriesReloadedNotification @"CategoriesReloadedNotification"
+
 #define kNoteChannelSaved           @"kNoteChannelSaved"
 #define kNoteHideAllCautions          @"kNoteHideAllCautions"
 

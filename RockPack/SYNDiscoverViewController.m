@@ -73,10 +73,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @implementation SYNDiscoverViewController
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)viewDidLoad
 {
-    
     
     [super viewDidLoad];
     
@@ -123,14 +126,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
     
-    
-    // this will also save popularSubGenre in the variable
-    
-    [self fetchAndDisplayCategories];
-    
     // you want to load the search display controller only for iPad, on iPhone in slides in as a navigation
     if(IS_IPAD)
     {
+		
+		self.searchResultsController.view.backgroundColor = [UIColor greenColor];
         [self addChildViewController: self.searchResultsController];
         [self.containerView addSubview: self.searchResultsController.view];
         
@@ -164,18 +164,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.categoriesCollectionView.layer.borderWidth = 1.0f;
     }
     
-    
-    // Load a initial category
-    if (self.genres.count > 0 && IS_IPAD) {
-        [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-        
-        [self selectCategoryForCollection:self.categoriesCollectionView AtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    }
-    
-    [self fetchAndDisplayCategories];
-
-
-
+    [self reloadCategories];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(reloadCategories)
+												 name:CategoriesReloadedNotification
+											   object:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -271,7 +265,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     return _popularSubGenre;
 }
-- (void) selectCategoryForCollection:(UICollectionView *)collectionView AtIndexPath: (NSIndexPath *)indexPath{
+- (void) selectCategoryForCollection:(UICollectionView *)collectionView atIndexPath: (NSIndexPath *)indexPath{
         Genre* currentGenre = self.genres[indexPath.section];
         SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
         
@@ -347,7 +341,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self selectCategoryForCollection:collectionView AtIndexPath:indexPath];
+    [self selectCategoryForCollection:collectionView atIndexPath:indexPath];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
@@ -718,6 +712,16 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 		
 		[self.categoriesCollectionView.collectionViewLayout invalidateLayout];
 	}
+}
+
+- (void)reloadCategories {
+    [self fetchAndDisplayCategories];
+	
+    if (self.genres.count > 0 && IS_IPAD) {
+        [self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        
+        [self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
 }
 
 @end
