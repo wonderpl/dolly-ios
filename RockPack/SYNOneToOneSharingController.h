@@ -10,6 +10,8 @@
 
 @interface SYNOneToOneSharingController : UIViewController
 
+@property (nonatomic, readonly) UISearchBar* searchBar;
+
 - (id) initWithInfo: (NSMutableDictionary *) mutableInfoDictionary;
 
 @end

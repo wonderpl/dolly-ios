@@ -199,9 +199,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 	if (selectedIndexPath) {
 		[self.videosCollectionView deselectItemAtIndexPath:selectedIndexPath animated:YES];
 	}
-    
-    self.noVideosLabel.hidden = YES;
-    self.noUsersLabel.hidden = YES;
 }
 
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
@@ -282,6 +279,9 @@ typedef void (^SearchResultCompleteBlock)(int);
         return;
     }
 	
+    self.noVideosLabel.hidden = YES;
+    self.noUsersLabel.hidden = YES;
+	
     [self resetDataRequestRange];
     
     // we either store one or the other
@@ -316,6 +316,9 @@ typedef void (^SearchResultCompleteBlock)(int);
     {
         return;
     }
+	
+    self.noVideosLabel.hidden = YES;
+    self.noUsersLabel.hidden = YES;
     
     // we either store one or the other
     _currentSearchTerm = newSearchTerm;

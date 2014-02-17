@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4w-lx-HXi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4w-lx-HXi">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -34,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPS-0z-gZT" userLabel="Channel Info">
-                                <rect key="frame" x="488" y="45" width="48" height="92"/>
+                                <rect key="frame" x="488" y="38" width="48" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9KO-Ak-5b5" customClass="SYNAvatarButton">
@@ -77,46 +77,46 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh8-En-Apv" customClass="SYNCarouselVideoScrollView">
-                                <rect key="frame" x="204" y="147" width="616" height="347"/>
+                                <rect key="frame" x="192" y="138" width="640" height="360"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ryf-Kc-beB" userLabel="Previous Video Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="616" height="347"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="640" height="360"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="347" id="X7l-Sf-DaW"/>
-                                            <constraint firstAttribute="width" constant="616" id="ug4-QX-Kr1"/>
+                                            <constraint firstAttribute="height" constant="360" id="X7l-Sf-DaW"/>
+                                            <constraint firstAttribute="width" constant="640" id="ug4-QX-Kr1"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRQ-Zn-BXl" userLabel="Current Video Container View">
-                                        <rect key="frame" x="616" y="0.0" width="616" height="347"/>
+                                        <rect key="frame" x="640" y="0.0" width="640" height="360"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="616" id="5HB-En-KMB"/>
-                                            <constraint firstAttribute="height" constant="347" id="Dea-nI-lyS"/>
+                                            <constraint firstAttribute="width" constant="640" id="5HB-En-KMB"/>
+                                            <constraint firstAttribute="height" constant="360" id="Dea-nI-lyS"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTi-BD-d5T" userLabel="Next Video Container View">
-                                        <rect key="frame" x="1232" y="0.0" width="616" height="347"/>
+                                        <rect key="frame" x="1280" y="0.0" width="640" height="360"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="616" id="Ex5-J3-RFX"/>
-                                            <constraint firstAttribute="height" constant="347" id="nzy-MZ-OP9"/>
+                                            <constraint firstAttribute="width" constant="640" id="Ex5-J3-RFX"/>
+                                            <constraint firstAttribute="height" constant="360" id="nzy-MZ-OP9"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Ryf-Kc-beB" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="top" id="0OE-v3-dWG"/>
-                                    <constraint firstAttribute="height" constant="347" id="4lz-QZ-SRX"/>
+                                    <constraint firstAttribute="height" constant="360" id="4lz-QZ-SRX"/>
                                     <constraint firstItem="Ryf-Kc-beB" firstAttribute="leading" secondItem="yh8-En-Apv" secondAttribute="leading" id="8uG-EE-d4d"/>
                                     <constraint firstItem="HTi-BD-d5T" firstAttribute="leading" secondItem="sRQ-Zn-BXl" secondAttribute="trailing" id="9Uc-bf-p2d"/>
-                                    <constraint firstAttribute="width" constant="616" id="IrM-KM-00P"/>
+                                    <constraint firstAttribute="width" constant="640" id="IrM-KM-00P"/>
                                     <constraint firstAttribute="centerY" secondItem="HTi-BD-d5T" secondAttribute="centerY" id="WYW-wM-6h3"/>
                                     <constraint firstAttribute="trailing" secondItem="HTi-BD-d5T" secondAttribute="trailing" id="X7e-Tn-SsT"/>
                                     <constraint firstItem="sRQ-Zn-BXl" firstAttribute="leading" secondItem="Ryf-Kc-beB" secondAttribute="trailing" id="eMh-Vd-5u0"/>
@@ -139,7 +139,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tzb-1p-fac" userLabel="Buttons">
-                                <rect key="frame" x="390" y="550" width="244" height="49"/>
+                                <rect key="frame" x="390" y="554" width="244" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjo-Kq-j9L" customClass="SYNSocialButton">
@@ -215,7 +215,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IXk-6T-01i">
-                                <rect key="frame" x="0.0" y="654" width="1024" height="116"/>
+                                <rect key="frame" x="0.0" y="652" width="1024" height="116"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -254,18 +254,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IXk-6T-01i" firstAttribute="leading" secondItem="m3U-6p-Ozj" secondAttribute="leading" id="1fE-Ld-Wmf"/>
-                            <constraint firstItem="yh8-En-Apv" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="bottom" constant="10" id="4aW-8i-Xar"/>
+                            <constraint firstItem="yh8-En-Apv" firstAttribute="top" secondItem="cPS-0z-gZT" secondAttribute="bottom" constant="8" id="4aW-8i-Xar"/>
                             <constraint firstAttribute="centerX" secondItem="Tzb-1p-fac" secondAttribute="centerX" id="Bx0-xX-jha"/>
                             <constraint firstAttribute="trailing" secondItem="IXk-6T-01i" secondAttribute="trailing" id="DZu-3Q-o9W"/>
                             <constraint firstAttribute="centerX" secondItem="thn-Zi-jMg" secondAttribute="centerX" id="EAn-s7-wpj"/>
                             <constraint firstItem="Tzb-1p-fac" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="56" id="KY6-SW-woT"/>
-                            <constraint firstItem="thn-Zi-jMg" firstAttribute="top" secondItem="Tzb-1p-fac" secondAttribute="bottom" constant="14" id="UDq-I6-T6o"/>
+                            <constraint firstItem="thn-Zi-jMg" firstAttribute="top" secondItem="Tzb-1p-fac" secondAttribute="bottom" constant="10" id="UDq-I6-T6o"/>
                             <constraint firstAttribute="centerX" secondItem="cPS-0z-gZT" secondAttribute="centerX" id="Xku-w5-Ofk"/>
                             <constraint firstAttribute="centerX" secondItem="Dd4-m5-fwv" secondAttribute="centerX" id="bUC-Gg-WfD"/>
-                            <constraint firstItem="IXk-6T-01i" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="160" id="gPQ-QI-hDl"/>
+                            <constraint firstItem="IXk-6T-01i" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="154" id="gPQ-QI-hDl"/>
                             <constraint firstAttribute="centerX" secondItem="yh8-En-Apv" secondAttribute="centerX" id="lgC-eB-ewY"/>
-                            <constraint firstItem="Dd4-m5-fwv" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="14" id="pFz-Vp-6bv"/>
-                            <constraint firstItem="yh8-En-Apv" firstAttribute="top" secondItem="YV5-Gs-Jfb" secondAttribute="bottom" constant="83" id="wlU-sc-glE"/>
+                            <constraint firstItem="Dd4-m5-fwv" firstAttribute="top" secondItem="yh8-En-Apv" secondAttribute="bottom" constant="10" id="pFz-Vp-6bv"/>
+                            <constraint firstItem="yh8-En-Apv" firstAttribute="top" secondItem="YV5-Gs-Jfb" secondAttribute="bottom" constant="74" id="wlU-sc-glE"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>

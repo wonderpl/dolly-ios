@@ -15,11 +15,6 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
-	self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2.0;
-	
-	self.layer.borderColor = [[UIColor facebookColor] CGColor];
-	self.layer.borderWidth = 2.0;
-	
 	self.titleLabel.font = [UIFont regularCustomFontOfSize:self.titleLabel.font.pointSize];
 }
 

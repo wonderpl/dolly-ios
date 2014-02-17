@@ -34,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2Tw-f0-wtP">
-                                <rect key="frame" x="382" y="598" width="260" height="29"/>
+                                <rect key="frame" x="382" y="600" width="260" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="ksb-A6-61A"/>
@@ -87,17 +87,17 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tma-bZ-MtG">
-                                <rect key="frame" x="204" y="66" width="616" height="347"/>
+                                <rect key="frame" x="192" y="60" width="640" height="360"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="347" id="A7n-yY-Ane"/>
-                                    <constraint firstAttribute="width" constant="616" id="TRj-iD-UOt"/>
+                                    <constraint firstAttribute="height" constant="360" id="A7n-yY-Ane"/>
+                                    <constraint firstAttribute="width" constant="640" id="TRj-iD-UOt"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="NAF-Dm-QGA">
-                                <rect key="frame" x="337" y="431" width="350" height="22"/>
+                                <rect key="frame" x="337" y="438" width="350" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="CCD-31-pnB"/>
@@ -107,7 +107,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxl-rT-Inc" userLabel="Buttons">
-                                <rect key="frame" x="390" y="489" width="244" height="49"/>
+                                <rect key="frame" x="390" y="496" width="244" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5m-YE-w6C" customClass="SYNSocialButton">
@@ -184,7 +184,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D74-Mn-HJi">
-                                <rect key="frame" x="476" y="553" width="72" height="30"/>
+                                <rect key="frame" x="476" y="559" width="72" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="W2a-ra-rxU"/>
@@ -205,18 +205,18 @@
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="2Tw-f0-wtP" secondAttribute="centerX" id="18r-6F-A3d"/>
                             <constraint firstAttribute="centerX" secondItem="NAF-Dm-QGA" secondAttribute="centerX" id="4Wd-TS-j3d"/>
-                            <constraint firstItem="om0-Aw-JzZ" firstAttribute="top" secondItem="2Tw-f0-wtP" secondAttribute="bottom" constant="22" id="6cc-0I-iW7"/>
-                            <constraint firstItem="AA9-Jg-1Xw" firstAttribute="top" secondItem="2Tw-f0-wtP" secondAttribute="bottom" constant="22" id="EyT-TG-TEb"/>
+                            <constraint firstItem="om0-Aw-JzZ" firstAttribute="top" secondItem="2Tw-f0-wtP" secondAttribute="bottom" constant="20" id="6cc-0I-iW7"/>
+                            <constraint firstItem="AA9-Jg-1Xw" firstAttribute="top" secondItem="2Tw-f0-wtP" secondAttribute="bottom" constant="20" id="EyT-TG-TEb"/>
                             <constraint firstItem="nxl-rT-Inc" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="76" id="N93-JS-Dqt"/>
                             <constraint firstAttribute="trailing" secondItem="AA9-Jg-1Xw" secondAttribute="trailing" id="QEE-tk-MsS"/>
-                            <constraint firstItem="2Tw-f0-wtP" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="185" id="QvV-BW-53s"/>
+                            <constraint firstItem="2Tw-f0-wtP" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="180" id="QvV-BW-53s"/>
                             <constraint firstAttribute="centerX" secondItem="tma-bZ-MtG" secondAttribute="centerX" id="RDH-QJ-2YK"/>
                             <constraint firstAttribute="centerY" secondItem="tma-bZ-MtG" secondAttribute="centerY" constant="144.5" id="ViZ-4c-d8i"/>
                             <constraint firstItem="AA9-Jg-1Xw" firstAttribute="leading" secondItem="oXA-7r-uHj" secondAttribute="leading" id="WaY-hK-XEs"/>
                             <constraint firstAttribute="trailing" secondItem="om0-Aw-JzZ" secondAttribute="trailing" id="ha6-bm-ap0"/>
                             <constraint firstItem="NAF-Dm-QGA" firstAttribute="top" secondItem="tma-bZ-MtG" secondAttribute="bottom" constant="18" id="l1p-W3-yQu"/>
                             <constraint firstItem="om0-Aw-JzZ" firstAttribute="leading" secondItem="oXA-7r-uHj" secondAttribute="leading" id="lJq-pH-4Ip"/>
-                            <constraint firstItem="D74-Mn-HJi" firstAttribute="top" secondItem="nxl-rT-Inc" secondAttribute="bottom" constant="15" id="vQU-wB-aRb"/>
+                            <constraint firstItem="D74-Mn-HJi" firstAttribute="top" secondItem="nxl-rT-Inc" secondAttribute="bottom" constant="14" id="vQU-wB-aRb"/>
                             <constraint firstAttribute="centerX" secondItem="nxl-rT-Inc" secondAttribute="centerX" id="vkq-he-Oys"/>
                             <constraint firstAttribute="centerX" secondItem="D74-Mn-HJi" secondAttribute="centerX" id="wV3-wh-KrB"/>
                         </constraints>

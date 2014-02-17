@@ -29,6 +29,10 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 
 @implementation SYNExampleUsersViewController
 
+- (void)dealloc {
+	self.collectionView.delegate = nil;
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -50,11 +54,6 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 	}];
 
     
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
