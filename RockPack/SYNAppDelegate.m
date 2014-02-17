@@ -24,6 +24,8 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "UncaughtExceptionHandler.h"
+#import "SYNLoginManager.h"
+#import "SYNOnBoardingViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <ACTReporter.h>
 #import <TestFlight.h>
@@ -43,6 +45,7 @@
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) SYNChannelManager *channelManager;
 @property (nonatomic, strong) SYNLoginBaseViewController *loginViewController;
+@property (nonatomic, strong) SYNOnBoardingViewController *onBoardingViewController;
 @property (nonatomic, strong) SYNMasterViewController *masterViewController;
 @property (nonatomic, strong) SYNNetworkEngine *networkEngine;
 @property (nonatomic, strong) SYNOAuthNetworkEngine *oAuthNetworkEngine;
@@ -145,6 +148,11 @@
                                                  name: kLoginCompleted
                                                object: nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(onBoardingCompleted:)
+                                                 name: kOnboardingCompleted
+                                               object: nil];
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // Create a dictionary of defaults to add and register them (if they have not already been set)
@@ -416,12 +424,24 @@
 
 - (void) loginCompleted: (NSNotification *) notification
 {
-    self.window.rootViewController = [self createAndReturnRootViewController];
+    if ([SYNLoginManager sharedManager].registrationCheck == YES) {
+        self.onBoardingViewController = [[SYNOnBoardingViewController alloc]init];
+        self.window.rootViewController = self.onBoardingViewController;
+    } else {
+        self.window.rootViewController = [self createAndReturnRootViewController];
+    }
     
     self.loginViewController = nil;
-    
 }
 
+
+- (void) onBoardingCompleted: (NSNotification *) notification
+{
+    
+    self.window.rootViewController = [self createAndReturnRootViewController];
+    self.onBoardingViewController = nil;
+    
+}
 
 #pragma mark - App Delegate Methods
 

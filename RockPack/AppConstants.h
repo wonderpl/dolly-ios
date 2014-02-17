@@ -357,6 +357,7 @@ typedef enum : NSInteger {
 } LoginOrigin;
 
 #define kLoginCompleted @"kLoginCompleted"
+#define kOnboardingCompleted @"kOnboardingCompleted"
 
 typedef enum : NSInteger {
     EntityTypeAny = 0,

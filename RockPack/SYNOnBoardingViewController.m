@@ -86,45 +86,51 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     // === Fetch Genres === //
     
-    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
-                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
+    [self loadBasicDataWithComplete:^(BOOL success) {
     
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
-    
-    [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
-    
-    
-    categoriesFetchRequest.includesSubentities = NO;
-    
-    NSError* error;
-    
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                         error: &error];
-
-    
-    // we hold subgenres only in a dictionary
-    self.subgenresByIdString = @{}.mutableCopy;
-    self.genresByIdString = @{}.mutableCopy;
-    
-    for (Genre* g in genresFetchedArray) {
-
-        if(!g.uniqueId)
-            continue;
+        NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
         
-        self.genresByIdString[g.uniqueId] = g;
-
-        for (SubGenre* s in g.subgenres)
-        {
-            if(!s.uniqueId)
+        categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
+                                                    inManagedObjectContext: appDelegate.mainManagedObjectContext];
+        
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
+        
+        [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
+        
+        
+        categoriesFetchRequest.includesSubentities = NO;
+        
+        NSError* error;
+        
+        NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
+                                                                                          error: &error];
+        
+        
+        // we hold subgenres only in a dictionary
+        self.subgenresByIdString = @{}.mutableCopy;
+        self.genresByIdString = @{}.mutableCopy;
+        
+        for (Genre* g in genresFetchedArray) {
+            
+            if(!g.uniqueId)
                 continue;
             
-            self.subgenresByIdString[s.uniqueId] = s;
+            self.genresByIdString[g.uniqueId] = g;
+            
+            for (SubGenre* s in g.subgenres)
+            {
+                if(!s.uniqueId)
+                    continue;
+                
+                self.subgenresByIdString[s.uniqueId] = s;
+            }
+            
         }
 
-    }
+    }];
+
     
     
     // =================== //
@@ -144,6 +150,30 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         [self.collectionView setContentInset: tmpInsets];
     }
 
+    
+}
+
+- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
+{
+    
+    [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
+        
+        [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
+            
+            return [appDelegate.mainRegistry registerCategoriesFromDictionary: dictionary];
+            
+        } completionBlock:^(BOOL success) {
+            
+            CompleteBlock(success);
+            
+            [[SYNGenreColorManager sharedInstance] registerGenreColorsFromCoreData];
+            
+            [appDelegate.mainManagedObjectContext save:nil];
+            
+        }];
+    } onError:^(NSError* error) {
+        
+    }];
 }
 
 - (void) getRecommendationsFromRemote {
@@ -400,21 +430,16 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 {
     button.enabled = NO;
     
-    [UIView animateWithDuration:0.3f animations:^{
-        
-        self.view.alpha = 0.0f;
-        
-    } completion:^(BOOL finished) {
-        
+    
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                             object: self
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
 
         
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
-        
-    }];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kOnboardingCompleted
+															object:self];
+
 }
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
@@ -473,7 +498,6 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
 
 }

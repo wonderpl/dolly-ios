@@ -15,7 +15,6 @@
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTrackableFrameView.h"
-#import "SYNOnBoardingViewController.h"
 #import "UINavigationBar+Appearance.h"
 
 @import AudioToolbox;

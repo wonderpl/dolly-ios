@@ -17,7 +17,6 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNCommentingViewController.h"
-#import "SYNOnBoardingViewController.h"
 #import "SYNGenreColorManager.h"
 #import "Genre.h"
 #import "SubGenre.h"
@@ -113,45 +112,36 @@
     
     self.arrowForOverlayImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ArrowCommentBox"]];
     
-    // load basic data like the Genres
-    [self loadBasicDataWithComplete:^(BOOL success) {
-        
-        // No more ALL category
-//        if(success) // Genres have loaded from the server
-//        {
-//            if(!self.hasCreatedPopularGenre) // we have no POPULAR Genre
-//            {
-//                [self createPopularGenre]; // create one
-//                
-//            }
-//        }
-//        
+    //This call is not being made, the data is in cor data as there is also a call in the onboarding view controller
+    //Need a solution that wouldnt require this check.
+    
+    if ([SYNLoginManager sharedManager].registrationCheck == NO) {
+        [self loadBasicDataWithComplete:^(BOOL success) {
+            
+            // No more ALL category
+            //        if(success) // Genres have loaded from the server
+            //        {
+            //            if(!self.hasCreatedPopularGenre) // we have no POPULAR Genre
+            //            {
+            //                [self createPopularGenre]; // create one
+            //
+            //            }
+            //        }
+            //
+            [self addChildViewController:self.containerViewController];
+            
+            // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
+            
+            self.containerViewController.view = self.containerView;
+            
+        } ];
+    } else {
         [self addChildViewController:self.containerViewController];
-        
-        // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
-    
         self.containerViewController.view = self.containerView;
-      
-        //Check if the user registed and then show onboarding screen
-        if ([SYNLoginManager sharedManager].registrationCheck == YES) {
-        
-            
-            SYNOnBoardingViewController* onBoardingViewController = [[SYNOnBoardingViewController alloc] init];
-            [self addChildViewController:onBoardingViewController];
-            
-            onBoardingViewController.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
-            
-            [self.view addSubview:onBoardingViewController.view];
-            [SYNLoginManager sharedManager].registrationCheck = NO;
-        }
-        
-        
-
-        
-        
-        
-    }];
-    
+        [SYNLoginManager sharedManager].registrationCheck = NO;
+    }
+    // load basic data like the Genres
+   
 }
 
 - (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
@@ -646,16 +636,6 @@
     return self.tabsView.subviews;
 }
 
-#pragma mark - On Boarding
-
--(void)addOnBoarding
-{
-    
-}
--(void)removeOnBoarding
-{
-    
-}
 
 #pragma mark - Display Notifications Number
 
