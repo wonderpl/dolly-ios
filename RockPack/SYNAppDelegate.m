@@ -532,6 +532,7 @@
 {
     InstallUncaughtExceptionHandler();
 
+    [TestFlight addCustomEnvironmentInformation:[NSString stringWithFormat:@"Current User: %@", self.currentUser.username] forKey:@"User Name"];
 
     [TestFlight takeOff: kTestFlightAppToken];
     
