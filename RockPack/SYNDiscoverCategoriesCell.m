@@ -26,20 +26,37 @@
 
 -(void)prepareForReuse
 {
+    [super prepareForReuse];
     self.backgroundColor = [UIColor clearColor];
 }
 
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    if (selected) {
+    
+    [self updateBackgroundColor];
+}
+
+- (void)setSelectedColor:(UIColor *)selectedColor {
+    _selectedColor = selectedColor;
+    
+    [self updateBackgroundColor];
+}
+
+- (void)setDeSelectedColor:(UIColor *)deSelectedColor {
+    _deSelectedColor = deSelectedColor;
+    
+    [self updateBackgroundColor];
+}
+
+
+- (void)updateBackgroundColor {
+    if (self.selected) {
         self.backgroundColor =  self.selectedColor;
     } else {
         self.backgroundColor = self.deSelectedColor;
     }
-    
+
 }
-
-
 
 @end

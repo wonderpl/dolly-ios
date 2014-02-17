@@ -313,8 +313,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         categoryCell.selectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
         categoryCell.deSelectedColor = [UIColor whiteColor];
     }
-
-    [categoryCell setSelected:categoryCell.selected];
     
     categoryCell.label.text = subgenre.name;
             
@@ -338,10 +336,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    cell.selected = cell.selected;
-    
     [self selectCategoryForCollection:collectionView atIndexPath:indexPath];
 }
 
