@@ -76,6 +76,9 @@
                              placeholderImage:[UIImage imageNamed: @"PlaceholderAvatarFriends"]
                                       options:SDWebImageRetryFailed];
     
+    
+    
+    
 //    [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
 //    self.userNameLabelButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 //    self.userNameLabelButton.titleLabel.numberOfLines = 2;
@@ -86,8 +89,14 @@
     
     NSString *coverPhotoURL = _channelOwner.coverPhotoURL;
     
-    coverPhotoURL = [coverPhotoURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"
-                                                        withString: @"thumbnail_large"];
+    if (IS_IPAD) {
+        coverPhotoURL = [coverPhotoURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"
+                                                                 withString: @"ipad"];
+    } else {
+        coverPhotoURL = [coverPhotoURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"
+                                                                 withString: @"thumbnail_medium"];
+    }
+
     [self.coverImage setImageWithURL: [NSURL URLWithString: _channelOwner.coverPhotoURL]
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                             options: SDWebImageRetryFailed];
