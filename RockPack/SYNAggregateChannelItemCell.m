@@ -71,7 +71,7 @@
     
     [self.channelButton setTitle:_channel.title forState:UIControlStateNormal];
     self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
-    self.videosLabel.text = [NSString stringWithFormat: @"%i videos", _channel.videoInstances.count];
+    self.videosLabel.text = [NSString stringWithFormat: @"%lli videos", _channel.totalVideosValueValue];
     
     // set time ago...
     NSDateComponents *timeAgoComponents = _channel.timeAgo;
@@ -98,14 +98,9 @@
    
     [self.stripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
     
-    if (channel.subscribedByUser) {
-        self.followControl.title = @"follow";
-    }
-    else
-    {
-        self.followControl.title = @"unfollow";
-
-    }
+    [self.followControl setTitle:@"follow" forState:UIControlStateNormal];
+    [self.followControl setTitle:@"unfollow" forState:UIControlStateSelected];
+    
 }
 
 @end
