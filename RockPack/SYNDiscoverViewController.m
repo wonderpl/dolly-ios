@@ -326,6 +326,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         categoryCell.deSelectedColor = [UIColor whiteColor];
     }
 
+    [categoryCell setSelected:categoryCell.selected];
     
     categoryCell.label.text = subgenre.name;
             
@@ -335,18 +336,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-    
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    
-    if (!cell.selected) {
-        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    }
+    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
