@@ -199,6 +199,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 	if (selectedIndexPath) {
 		[self.videosCollectionView deselectItemAtIndexPath:selectedIndexPath animated:YES];
 	}
+    
+    [self.usersCollectionView.collectionViewLayout invalidateLayout];
 }
 
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
