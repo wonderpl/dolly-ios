@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 @class SYNCommentingViewController;
-#import "NSDictionary+Validation.h"
-
+@class SYNCommentingCollectionViewCell;
 
 #define kCommentTextSizeWidth 200.0f
+
+@protocol SYNCommentingCollectionViewCellDelegate <NSObject>
+
+- (void)commentCell:(SYNCommentingCollectionViewCell *)cell usernameSelected:(NSString *)username;
+- (void)commentCellDeleteButtonPressed:(SYNCommentingCollectionViewCell *)cell;
+- (void)commentCellUserAvatarButtonPressed:(SYNCommentingCollectionViewCell *)cell;
+
+@end
 
 @interface SYNCommentingCollectionViewCell : UICollectionViewCell <UIGestureRecognizerDelegate>
 
@@ -38,8 +45,7 @@
 
 @property (nonatomic) BOOL deleting;
 
-@property (nonatomic, weak) SYNCommentingViewController* delegate;
-
+@property (nonatomic, weak) id<SYNCommentingCollectionViewCellDelegate> delegate;
 
 +(UIFont*)commentFieldFont;
 +(CGRect)commentFieldFrame;

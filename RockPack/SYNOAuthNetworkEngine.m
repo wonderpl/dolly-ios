@@ -464,13 +464,7 @@
           onCompletion:(MKNKUserSuccessBlock) completionBlock
                onError: (MKNKUserErrorBlock) errorBlock
 {
-    if(!user || !user.uniqueId || ![user.uniqueId isKindOfClass:[NSString class]]) {
-        errorBlock(@{@"parameter_error":@"the user passed has no unique id or is null"});
-        return;
-    }
-        
-    
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : user.uniqueId};
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : user.uniqueId ?: user.username};
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     

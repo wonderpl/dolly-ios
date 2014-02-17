@@ -10,10 +10,11 @@
 #import "UIButton+WebCache.h"
 #import "UIFont+SYNFont.h"
 #import "SYNCommentingViewController.h"
-#import <QuartzCore/QuartzCore.h>
+#import "NSRegularExpression+Username.h"
+#import "SYNProfileRootViewController.h"
+#import "NSDictionary+Validation.h"
 
-
-@interface SYNCommentingCollectionViewCell () <UIGestureRecognizerDelegate>
+@interface SYNCommentingCollectionViewCell () <UIGestureRecognizerDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
@@ -46,7 +47,6 @@
     
     self.mainElements = @[self.avatarButton, self.nameLabel, self.commentTextView];
     
-    
     // == Gesture Recognisers == //
     
     
@@ -63,33 +63,6 @@
     
 }
 
-- (void) setDelegate:(SYNCommentingViewController *)delegate
-{
-    if(_delegate)
-    {
-        [self.deleteButton removeTarget:_delegate
-                                 action:@selector(deleteButtonPressed:)
-                       forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.avatarButton removeTarget:_delegate
-                                 action:@selector(userAvatarButtonPressed:)
-                       forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    _delegate = delegate;
-    
-    if(!_delegate)
-        return;
-    
-    [self.deleteButton addTarget:_delegate
-                          action:@selector(deleteButtonPressed:)
-                forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.avatarButton addTarget:_delegate
-                          action:@selector(userAvatarButtonPressed:)
-                forControlEvents:UIControlEventTouchUpInside];
-}
-
 - (void) setComment:(NSDictionary *)comment
 {
     _comment = comment;
@@ -100,14 +73,9 @@
     
     NSString *commentString = _comment[@"comment"];
     
-	NSParagraphStyle *paragraphStyle = [[self class] paragraphStyle];
-    
-	NSAttributedString *commentText = [[NSAttributedString alloc] initWithString:commentString attributes:@{ NSParagraphStyleAttributeName: paragraphStyle }];
-    
-    
     self.nameLabel.text = _comment[@"user"][@"display_name"];
     
-    self.commentTextView.attributedText = commentText;
+    self.commentTextView.attributedText = [self attributedComment:commentString];
     
     self.datePosted = [_comment dateFromISO6801StringForKey: @"date_added"
                                                 withDefault: [NSDate date]];
@@ -306,10 +274,14 @@
     
     self.loading = NO;
     self.deleting = NO;
-    
-    
-    
-    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+	NSString *username = [URL absoluteString];
+	
+	[self.delegate commentCell:self usernameSelected:username];
+	
+	return NO;
 }
 
 - (void) clearSwipeGestureRecognisers
@@ -319,6 +291,29 @@
         
         [self.containerView removeGestureRecognizer:recogniser];
     }
+}
+
+- (IBAction)deleteButtonPressed:(UIButton *)button {
+	[self.delegate commentCellDeleteButtonPressed:self];
+}
+
+- (IBAction)userAvatarButtonPressed:(UIButton *)button {
+	[self.delegate commentCellUserAvatarButtonPressed:self];
+}
+
+- (NSAttributedString *)attributedComment:(NSString *)comment {
+	NSParagraphStyle *paragraphStyle = [[self class] paragraphStyle];
+	
+	NSMutableAttributedString *attributedComment = [[NSMutableAttributedString alloc] initWithString:comment attributes:@{ NSParagraphStyleAttributeName: paragraphStyle }];
+	
+	NSRegularExpression *regex = [NSRegularExpression usernameRegex];
+	[regex enumerateMatchesInString:comment options:0 range:NSMakeRange(0, [comment length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		
+		NSString *username = [comment substringWithRange:[result rangeAtIndex:1]];
+		[attributedComment addAttributes:@{ NSLinkAttributeName : username } range:[result range]];
+	}];
+	
+	return attributedComment;
 }
 
 @end

@@ -1797,8 +1797,8 @@
     
     BOOL channelOwnerIsUser = (BOOL)[user.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
     
-    
-    if (!channelOwnerIsUser) // is a User has been passsed dont copy him OR his channels as there can be only one.
+     // is a User has been passsed dont copy him OR his channels as there can be only one.
+    if (!channelOwnerIsUser && user.uniqueId)
     {
         NSFetchRequest *channelOwnerFetchRequest = [[NSFetchRequest alloc] init];
         
@@ -1836,8 +1836,8 @@
                                                          andViewId: self.viewId
                                          usingManagedObjectContext: user.managedObjectContext
                                                ignoringObjectTypes: flags];
-            
-            if (self.channelOwner)
+			
+            if (_channelOwner)
             {
                 [self.channelOwner.managedObjectContext save: &error];
                 
@@ -1852,9 +1852,9 @@
     {
         _channelOwner = user;
     }
-    
+	
     // if a user has been passed or found, monitor
-    if (self.channelOwner)
+    if (_channelOwner)
     {
         // isUserProfile set to YES for the current User
         self.isUserProfile = channelOwnerIsUser;

@@ -1177,6 +1177,7 @@
 		E98369D6188937B300363709 /* ButtonLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D4188937B300363709 /* ButtonLogin.png */; };
 		E98369D7188937B300363709 /* ButtonLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D5188937B300363709 /* ButtonLogin@2x.png */; };
 		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
+		E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */; };
 		E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C1518967BA500767BBD /* SYNTimestampLabel.m */; };
 		E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C18189681BC00767BBD /* SYNTermsViewController.m */; };
 		E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9921A9318351D66001A4F3B /* SYNScrubberBar.m */; };
@@ -2662,6 +2663,8 @@
 		E98369D81889457500363709 /* SYNVideoInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoInfoCell.h; sourceTree = "<group>"; };
 		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
 		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
+		E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Username.h"; sourceTree = "<group>"; };
+		E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRegularExpression+Username.m"; sourceTree = "<group>"; };
 		E9918C1418967BA500767BBD /* SYNTimestampLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimestampLabel.h; sourceTree = "<group>"; };
 		E9918C1518967BA500767BBD /* SYNTimestampLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimestampLabel.m; sourceTree = "<group>"; };
 		E9918C17189681BC00767BBD /* SYNTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTermsViewController.h; sourceTree = "<group>"; };
@@ -3534,6 +3537,8 @@
 				E9A75E8018882D8200B7F55F /* UIImage+Blur.m */,
 				E9FDCD94188D7C4700C31CC1 /* UILabel+Animation.h */,
 				E9FDCD95188D7C4700C31CC1 /* UILabel+Animation.m */,
+				E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */,
+				E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -7024,6 +7029,7 @@
 				E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */,
 				BE2D3EEE183A3C2C003B2C26 /* SYNAboutViewController.m in Sources */,
 				BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */,
+				E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */,
 				1F356185175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m in Sources */,
 				E9D71AD7187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m in Sources */,
 				BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */,
