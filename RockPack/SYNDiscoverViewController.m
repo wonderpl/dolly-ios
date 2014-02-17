@@ -129,8 +129,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // you want to load the search display controller only for iPad, on iPhone in slides in as a navigation
     if(IS_IPAD)
     {
-		
-		self.searchResultsController.view.backgroundColor = [UIColor greenColor];
         [self addChildViewController: self.searchResultsController];
         [self.containerView addSubview: self.searchResultsController.view];
         
