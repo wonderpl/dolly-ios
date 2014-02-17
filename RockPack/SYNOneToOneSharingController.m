@@ -55,7 +55,7 @@
 @property (nonatomic, strong) NSArray *recentFriends;
 @property (nonatomic, strong) NSCache *addressBookImageCache;
 @property (nonatomic, strong) NSMutableArray *friends;
-@property (nonatomic, strong) NSMutableString *currentSearchTerm;
+@property (nonatomic, strong) NSString *currentSearchTerm;
 @property (nonatomic, strong) SYNNetworkOperationJsonObject* lastNetworkOperation;
 
 
@@ -110,7 +110,7 @@
     
     self.addressBookImageCache = [[NSCache alloc] init];
     
-    self.currentSearchTerm = [NSMutableString string];
+    self.currentSearchTerm = @"";
     
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
@@ -841,7 +841,7 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    [self.currentSearchTerm setString:@""];
+	self.currentSearchTerm = @"";
     [self.searchResultsTableView removeFromSuperview];
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
@@ -864,21 +864,7 @@
 }
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
 {
-    
-    NSUInteger oldLength = searchBar.text.length;
-    NSUInteger newCharacterLength = text.length;
-    NSUInteger rangeLength = range.length;
-    
-    NSUInteger newLength = (oldLength + newCharacterLength) - rangeLength;
-    
-    if (oldLength < newLength)
-    {
-        [self.currentSearchTerm appendString: text];
-    }
-    else
-    {
-        [self.currentSearchTerm deleteCharactersInRange: NSMakeRange(self.currentSearchTerm.length - 1, 1)];
-    }
+	self.currentSearchTerm = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
 
     [self.searchResultsTableView reloadData];
     
@@ -895,7 +881,7 @@
     [searchBar setShowsCancelButton:YES animated:YES];
     
     // clear the current search term
-    [self.currentSearchTerm setString:@""];
+	self.currentSearchTerm = @"";
     
     CGRect sResTblFrame = self.searchResultsTableView.frame;
     
@@ -927,13 +913,10 @@
 {
     if (self.currentSearchTerm.length > 0)
     {
-        NSPredicate *searchPredicate = [NSPredicate predicateWithBlock: ^BOOL (Friend *friend, NSDictionary *bindings) {
-            // either first or last name matches
-            return ([[friend.firstName uppercaseString] hasPrefix: [self.currentSearchTerm uppercaseString]]) ||
-            ([[friend.lastName uppercaseString] hasPrefix: [self.currentSearchTerm uppercaseString]]);
-        }];
+		NSString *searchTerm = self.currentSearchTerm;
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstName BEGINSWITH[cd] %@ OR lastName BEGINSWITH[cd] %@ OR email BEGINSWITH[cd] %@", searchTerm, searchTerm, searchTerm];
         
-        return [self.friends filteredArrayUsingPredicate: searchPredicate];
+        return [self.friends filteredArrayUsingPredicate: predicate];
     }
     else
     {
