@@ -66,9 +66,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
-
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *sideContainerWidth;
 
+@property (nonatomic, strong) NSIndexPath *selectedCellIndex;
 @end
 
 @implementation SYNDiscoverViewController
@@ -332,11 +332,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    [collectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self selectCategoryForCollection:collectionView atIndexPath:indexPath];
+    self.selectedCellIndex = indexPath;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
