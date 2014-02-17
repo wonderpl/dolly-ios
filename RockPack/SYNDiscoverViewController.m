@@ -195,10 +195,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 }
 
-
--(void)viewDidAppear:(BOOL)animated {
-
-}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (IS_IPAD) {
