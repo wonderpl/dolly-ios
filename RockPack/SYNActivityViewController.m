@@ -210,7 +210,7 @@
     
     SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
 	
-	notificationCell.notification = notification;
+    notificationCell.notification = notification;
     notificationCell.delegate = self;
     
     return notificationCell;
@@ -254,7 +254,7 @@
     if (indexPathForCellPressed.row > self.notifications.count)
         return;
     
-    SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
+    SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(hasUnreadNotifications)];
     
     
     [self viewProfileDetails: notification.channelOwner];
@@ -271,7 +271,7 @@
     
     NSIndexPath *indexPathForCellPressed = [self.tableView indexPathForCell: cellPressed];
     
-    SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
+    SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(hasUnreadNotifications)];
     
     if (!notification)
         return;
@@ -331,6 +331,20 @@
             break;
         }
             
+            
+        case kNotificationObjectTypeCommentMention:
+        {
+            ChannelOwner *channelOwner = notification.channelOwner;
+            
+            if (!channelOwner)
+            {
+                return;
+            }
+            
+            [self viewProfileDetails: channelOwner];
+            break;
+        }
+
          
         default:
             AssertOrLog(@"Unexpected notification type");
