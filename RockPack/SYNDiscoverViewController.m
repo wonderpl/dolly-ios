@@ -686,6 +686,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         }
         [self.searchResultsController searchForGenre:searchTerm];
     } else {
+        [self.categoriesCollectionView deselectItemAtIndexPath:self.selectedCellIndex animated:YES];
         [self.searchResultsController searchForTerm:searchTerm];
     }
    
