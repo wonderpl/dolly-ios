@@ -680,11 +680,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 //        self.navigationController.navigationBar.topItem.title = title;
     }
     
-    if(type == kSearchTypeGenre)
+    if(type == kSearchTypeGenre) {
+        if (![searchTerm isEqualToString:@""]) {
+            self.searchBar.text = @"";
+        }
         [self.searchResultsController searchForGenre:searchTerm];
-    else
+    } else {
         [self.searchResultsController searchForTerm:searchTerm];
-    
+    }
    
 }
 
