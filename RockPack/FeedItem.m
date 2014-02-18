@@ -3,6 +3,7 @@
 #import "ChannelOwner.h"
 #import "FeedItem.h"
 #import "VideoInstance.h"
+#import <TestFlight.h>
 
 @implementation FeedItem
 
@@ -54,6 +55,8 @@
     {
         return nil;
     }
+	
+	TFLog(@"Creating feed item from dictionary: %@", dictionary);
     
     FeedItem *instance = [FeedItem insertInManagedObjectContext: managedObjectContext];
     
