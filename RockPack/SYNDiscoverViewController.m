@@ -490,10 +490,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                        withTitle:searchTerm
                          forType:kSearchTypeTerm];
         }
-        
-        
     }
     
+    self.searchBar.text = searchTerm;
     
     
     [self closeAutocomplete];
