@@ -8,7 +8,8 @@
 
 #import "UIColor+SYNColor.h"
 
-#define RGB(r,g,b) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:1.f]
+#define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define WA(w,a) [UIColor colorWithWhite:w/255.0 alpha:a]
 
 @implementation UIColor (SYNColor)
 
@@ -186,6 +187,10 @@ return [UIColor colorWithRed: 136.0f / 255.0f
                                 blue:MAX(b - 0.1, 0.0)
                                alpha:a];
     return nil;
+}
+
++ (UIColor *)defaultCategoryColor {
+	return WA(172, 1);
 }
 
 @end
