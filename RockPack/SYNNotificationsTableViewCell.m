@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 	NSURL *thumbnailURL = [NSURL URLWithString:notification.thumbnailUrl];
 	[self.videoThumbnailButton setImageWithURL:thumbnailURL
 									  forState:UIControlStateNormal
-							  placeholderImage:[UIImage imageNamed:@"PlaceholderNotificationVideo"]
+							  placeholderImage:[UIImage new]
 									   options:SDWebImageRetryFailed];
 	
 	UIColor *unreadColor = [UIColor colorWithWhite:249.0/255.0 alpha:1.0];

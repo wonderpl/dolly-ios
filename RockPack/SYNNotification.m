@@ -153,7 +153,7 @@
 }
 
 - (NSString *)thumbnailUrl {
-	return (self.videoThumbnailUrl ? self.videoThumbnailUrl : self.channelThumbnailUrl);
+    return (self.videoThumbnailUrl ? self.videoThumbnailUrl : self.channelThumbnailUrl);
 }
 
 #pragma mark - Parsing Date
