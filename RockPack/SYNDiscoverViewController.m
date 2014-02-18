@@ -331,7 +331,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    [collectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    if (self.selectedCellIndex) {
+        [collectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        
+    }
 
 }
 
@@ -687,6 +690,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [self.searchResultsController searchForGenre:searchTerm];
     } else {
         [self.categoriesCollectionView deselectItemAtIndexPath:self.selectedCellIndex animated:YES];
+        self.selectedCellIndex = nil;
         [self.searchResultsController searchForTerm:searchTerm];
     }
    
