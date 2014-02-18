@@ -25,11 +25,11 @@
     if(selected)
     {
         self.backgroundColor = self.selectedColor;
-        self.layer.borderColor = self.selectedColor.CGColor;
+        self.layer.borderColor = [[self selectedBorderColor] CGColor];
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
         [self setTitleColor: [UIColor whiteColor]
                    forState: UIControlStateSelected];
-
+    
         
         
     }
@@ -47,9 +47,16 @@
 
 - (UIColor *) selectedColor
 {
-    return [UIColor colorWithRed:(149.0f/255.0f)
-                           green:(147.0f/255.0f)
-                            blue:(180.0f/255.0f)
+    return [UIColor colorWithRed:(188.0f/255.0f)
+                           green:(186.0f/255.0f)
+                            blue:(212.0f/255.0f)
+                           alpha:1.0f];
+}
+- (UIColor *) selectedBorderColor
+{
+    return [UIColor colorWithRed:(146.0f/255.0f)
+                           green:(143.0f/255.0f)
+                            blue:(183.0f/255.0f)
                            alpha:1.0f];
 }
 
