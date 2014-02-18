@@ -2281,10 +2281,10 @@
 }
 
 - (NSString *) yesButtonTitle{
-    return NSLocalizedString(@"Delete", @"Yes to deleting a video instance");
+    return NSLocalizedString(@"Yes", @"Yes to alert view");
 }
 - (NSString *) noButtonTitle{
-    return NSLocalizedString(@"Cancel", @"cancel to deleting a video instance");
+    return NSLocalizedString(@"No", @"No to alert view");
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
