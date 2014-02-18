@@ -89,15 +89,15 @@
     
     NSString *coverPhotoURL = _channelOwner.coverPhotoURL;
     
+    
+    //Default is thumbnail_medium, which is the url used in iphone
     if (IS_IPAD) {
         coverPhotoURL = [coverPhotoURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"
-                                                                 withString: @"ipad"];
-    } else {
-        coverPhotoURL = [coverPhotoURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"
-                                                                 withString: @"thumbnail_medium"];
+                                                                 withString: @"ipad_highlight"];
+        
     }
 
-    [self.coverImage setImageWithURL: [NSURL URLWithString: _channelOwner.coverPhotoURL]
+    [self.coverImage setImageWithURL: [NSURL URLWithString: coverPhotoURL]
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                             options: SDWebImageRetryFailed];
     
