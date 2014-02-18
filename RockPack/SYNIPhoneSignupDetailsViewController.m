@@ -12,7 +12,7 @@
 #import "NSString+Validation.h"
 #import "SYNTextFieldLogin.h"
 #import "SYNLoginManager.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNIPhoneSignupDetailsViewController () <UIBarPositioningDelegate, UITextFieldDelegate>
 
@@ -67,7 +67,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[GAI sharedInstance] trackRegisterStep2ScreenView];
+	[[SYNTrackingManager sharedManager] trackRegisterStep2ScreenView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

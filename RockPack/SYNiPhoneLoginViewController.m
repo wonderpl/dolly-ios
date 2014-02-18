@@ -8,10 +8,9 @@
 
 #import "SYNiPhoneLoginViewController.h"
 #import "SYNLoginManager.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTextFieldLogin.h"
-#import "GAI+Tracking.h"
 
 @interface SYNiPhoneLoginViewController () <UITextFieldDelegate, UIBarPositioningDelegate>
 
@@ -55,7 +54,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[GAI sharedInstance] trackLoginScreenView];
+	[[SYNTrackingManager sharedManager] trackLoginScreenView];
 }
 
 - (BOOL)textField:(SYNTextFieldLogin *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -139,7 +138,7 @@
 											[[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted
 																								object:self];
 											
-											[[GAI sharedInstance] trackUserLoginFromOrigin:kOriginRockpack];
+											[[SYNTrackingManager sharedManager] trackUserLoginFromOrigin:kOriginRockpack];
 										} errorHandler:^(NSDictionary *errorDictionary) {
 											[navigationItem setLeftBarButtonItem:self.backBarButton animated:YES];
 											[navigationItem setRightBarButtonItem:self.loginBarButton animated:YES];

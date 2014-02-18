@@ -8,7 +8,7 @@
 
 #import "SYNiPadPasswordForgotViewController.h"
 #import "UIFont+SYNFont.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "SYNTextFieldLogin.h"
 #import "SYNLoginManager.h"
 
@@ -41,7 +41,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[GAI sharedInstance] trackForgotPasswordScreenView];
+	[[SYNTrackingManager sharedManager] trackForgotPasswordScreenView];
 }
 
 - (IBAction)loginButtonPressed:(UIButton *)button {

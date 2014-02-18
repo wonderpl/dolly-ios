@@ -14,7 +14,7 @@
 #import "NSString+Validation.h"
 #import "SYNImagePickerController.h"
 #import "SYNIPhoneSignupDetailsViewController.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "UIImageView+RoundImage.h"
 
 static const NSInteger NameMaxLength = 32;
@@ -65,7 +65,7 @@ static const NSInteger UsernameMaxLength = 20;
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[GAI sharedInstance] trackRegisterScreenView];
+	[[SYNTrackingManager sharedManager] trackRegisterScreenView];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

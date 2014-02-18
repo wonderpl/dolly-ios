@@ -16,7 +16,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "SYNOneToOneSharingController.h"
 #import "SYNPopoverAnimator.h"
 #import "SYNActivityManager.h"
@@ -192,7 +192,7 @@
 }
 
 - (IBAction)addButtonPressed:(SYNSocialButton *)button {
-	[[GAI sharedInstance] trackVideoAdd];
+	[[SYNTrackingManager sharedManager] trackVideoAdd];
 	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
                                                      action:@"select"
@@ -211,7 +211,7 @@
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:self.videoInstance.uniqueId];
 	
-	[[GAI sharedInstance] trackVideoShare];
+	[[SYNTrackingManager sharedManager] trackVideoShare];
     
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [[[SDWebImageManager sharedManager] imageCache] imageFromMemoryCacheForKey:self.videoInstance.video.thumbnailURL];

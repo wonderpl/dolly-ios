@@ -1,14 +1,16 @@
 //
-//  GAI+Tracking.h
+//  SYNTrackingManager.h
 //  dolly
 //
-//  Created by Sherman Lo on 10/12/13.
-//  Copyright (c) 2013 Nick Banks. All rights reserved.
+//  Created by Sherman Lo on 18/02/14.
+//  Copyright (c) 2014 Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
+#import <Foundation/Foundation.h>
 
-@interface GAI (Tracking)
+@interface SYNTrackingManager : NSObject
+
++ (instancetype)sharedManager;
 
 - (void)trackVideoShare;
 - (void)trackVideoAdd;
@@ -22,5 +24,6 @@
 - (void)trackRegisterStep2ScreenView;
 
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate;
+
 
 @end

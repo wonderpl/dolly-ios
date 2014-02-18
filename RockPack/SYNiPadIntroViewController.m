@@ -15,7 +15,7 @@
 #import "SYNiPadPasswordForgotViewController.h"
 #import "SYNiPadIntroToSignupAnimator.h"
 #import "SYNLoginManager.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "SYNDeviceManager.h"
 
 @interface SYNiPadIntroViewController () <UINavigationControllerDelegate>
@@ -86,7 +86,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	[[GAI sharedInstance] trackStartScreenView];
+	[[SYNTrackingManager sharedManager] trackStartScreenView];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(applicationWillEnterForeground:)
