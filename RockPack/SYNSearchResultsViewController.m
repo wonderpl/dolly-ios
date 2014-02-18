@@ -273,6 +273,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForGenre: (NSString *) genreId
 {
+    //When searching for category, default to show users/highlights
+    self.searchResultsShowing = SearchResultsShowingUsers;
     
     [self.usersTabButton setTitle:(NSLocalizedString(@"highlights", @"Highlight, discover tab")) forState:UIControlStateNormal];
     
@@ -313,6 +315,10 @@ typedef void (^SearchResultCompleteBlock)(int);
 {
     
     [self.usersTabButton setTitle:NSLocalizedString(@"users", @"Users in discover tab") forState:UIControlStateNormal];
+    
+    //searching a term defaults to videos
+    self.searchResultsShowing = SearchResultsShowingVideos;
+
 
     if ([_currentSearchTerm isEqualToString: newSearchTerm]) // == Don't repeat a search == //
     {
