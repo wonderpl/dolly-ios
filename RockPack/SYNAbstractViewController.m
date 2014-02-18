@@ -29,7 +29,7 @@
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "SYNActivityManager.h"
 #import "SYNRotatingPopoverController.h"
 #import "SYNPopoverAnimator.h"
@@ -285,7 +285,7 @@
     
     VideoInstance *videoInstance = socialControl.dataItemLinked;
 	
-	[[GAI sharedInstance] trackVideoAdd];
+	[[SYNTrackingManager sharedManager] trackVideoAdd];
 	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: @"select"
@@ -346,7 +346,7 @@
 	[self requestShareLinkWithObjectType: @"video_instance"
 								objectId: videoInstance.uniqueId];
 	
-	[[GAI sharedInstance] trackVideoShare];
+	[[SYNTrackingManager sharedManager] trackVideoShare];
     
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];

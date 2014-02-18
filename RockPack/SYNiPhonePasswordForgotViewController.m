@@ -10,7 +10,7 @@
 #import "SYNTextFieldLogin.h"
 #import "SYNLoginManager.h"
 #import "UIFont+SYNFont.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNiPhonePasswordForgotViewController () <UIBarPositioningDelegate, UITextFieldDelegate>
 
@@ -47,7 +47,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[GAI sharedInstance] trackForgotPasswordScreenView];
+	[[SYNTrackingManager sharedManager] trackForgotPasswordScreenView];
 }
 
 #pragma mark - UIBarPositioningDelegate

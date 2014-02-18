@@ -1,13 +1,14 @@
 //
-//  GAI+Tracking.m
+//  SYNTrackingManager.m
 //  dolly
 //
-//  Created by Sherman Lo on 10/12/13.
-//  Copyright (c) 2013 Nick Banks. All rights reserved.
+//  Created by Sherman Lo on 18/02/14.
+//  Copyright (c) 2014 Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "NSString+Utils.h"
+#import <GAI.h>
 
 static NSString *const UIActionCategory = @"uiAction";
 
@@ -27,7 +28,28 @@ static NSString *const UserLoginGoal = @"userLogin";
 
 static const NSInteger TrackingDimensionAge = 1;
 
-@implementation GAI (Tracking)
+@interface SYNTrackingManager ()
+
+@end
+
+@implementation SYNTrackingManager
+
++ (instancetype)sharedManager {
+	static SYNTrackingManager *manager;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		manager = [[SYNTrackingManager alloc] init];
+	});
+	return manager;
+}
+
+- (id)init {
+	if (self = [super init]) {
+		
+	}
+	return self;
+}
+
 
 - (void)trackVideoShare {
 	[self trackEventWithCategory:UIActionCategory action:VideoShareAction];
@@ -69,10 +91,10 @@ static const NSInteger TrackingDimensionAge = 1;
 }
 
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate {
-	NSDateComponents *ageComponents = [[NSCalendar currentCalendar]	 components: NSYearCalendarUnit
-																	   fromDate: birthDate
-																		 toDate: NSDate.date
-																		options: 0];
+	NSDateComponents *ageComponents = [[NSCalendar currentCalendar]	components:NSYearCalendarUnit
+																	  fromDate:birthDate
+																		toDate:NSDate.date
+																	   options:0];
 	NSInteger age = [ageComponents year];
 	NSString *ageString = [NSString ageCategoryStringFromInt:age];
 	
@@ -80,6 +102,10 @@ static const NSInteger TrackingDimensionAge = 1;
 }
 
 #pragma mark - Private
+
+- (id<GAITracker>)defaultTracker {
+	return [[GAI sharedInstance] defaultTracker];
+}
 
 - (void)trackEventWithCategory:(NSString *)category action:(NSString *)action {
 	[self trackEventWithCategory:category action:action label:nil value:nil];

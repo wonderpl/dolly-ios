@@ -7,7 +7,7 @@
 //
 
 #import "SYNiPadLoginViewController.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "AppConstants.h"
 #import "SYNTextFieldLogin.h"
 #import "SYNLoginManager.h"
@@ -45,7 +45,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[GAI sharedInstance] trackLoginScreenView];
+	[[SYNTrackingManager sharedManager] trackLoginScreenView];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(applicationWillEnterForeground:)
@@ -120,7 +120,7 @@
 }
 
 - (void)submitLogin {
-	[[GAI sharedInstance] trackUserLoginFromOrigin:kOriginRockpack];
+	[[SYNTrackingManager sharedManager] trackUserLoginFromOrigin:kOriginRockpack];
 	
 //    [self clearAllErrorArrows];
 //    

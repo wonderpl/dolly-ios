@@ -24,10 +24,9 @@
     
     if(selected)
     {
-        self.backgroundColor = self.selectedColor;
         self.layer.borderColor = [[self selectedBorderColor] CGColor];
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
-        [self setTitleColor: [UIColor whiteColor]
+        [self setTitleColor: [self selectedBorderColor]
                    forState: UIControlStateSelected];
     
         
@@ -35,7 +34,6 @@
     }
     else
     {
-        self.backgroundColor = [UIColor whiteColor];
         self.layer.borderColor = self.defaultColor.CGColor;
         
         [self setTitle:NSLocalizedString(@"follow", nil)];

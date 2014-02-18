@@ -12,7 +12,7 @@
 #import "SYNFacebookManager.h"
 #import "SYNActivityManager.h"
 #import "SYNOAuth2Credential.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import <MKNetworkKit.h>
 
 @implementation SYNLoginManager
@@ -98,7 +98,7 @@
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat: @"MM/dd/yyyy"];
 			
-			[[GAI sharedInstance] setAgeDimensionFromBirthDate:[dateFormatter dateFromString:birthday]];
+			[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:[dateFormatter dateFromString:birthday]];
         }
 		
 		// We need to check if the expiration date is valid (if the user is using the native iOS Facebook settings, it will be invalid ([NSDate distantFuture])

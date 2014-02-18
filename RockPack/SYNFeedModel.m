@@ -81,8 +81,10 @@
 		if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
 			if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
 				for (FeedItem *childFeedItem in [feedItem.feedItems sortedArrayUsingDescriptors:sortDescriptors]) {
-					TFLog(@"Adding video instance for resource id: %@", childFeedItem.resourceId);
-					[videoInstances addObject:self.videoInstancesById[childFeedItem.resourceId]];
+					TFLog(@"Adding video instance for resource id: (%@) %@", childFeedItem.resourceType, childFeedItem.resourceId);
+					if (childFeedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+						[videoInstances addObject:self.videoInstancesById[childFeedItem.resourceId]];
+					}
 				}
 			} else {
 				[videoInstances addObject:self.videoInstancesById[feedItem.resourceId]];

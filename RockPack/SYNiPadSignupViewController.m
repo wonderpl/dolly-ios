@@ -10,7 +10,7 @@
 #import "SYNSignupViewController+Protected.h"
 #import "SYNTextFieldLogin.h"
 #import "UIFont+SYNFont.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import "SYNImagePickerController.h"
 #import "NSString+Validation.h"
 #import "SYNLoginManager.h"
@@ -102,7 +102,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[GAI sharedInstance] trackRegisterScreenView];
+	[[SYNTrackingManager sharedManager] trackRegisterScreenView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

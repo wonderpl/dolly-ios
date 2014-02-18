@@ -16,7 +16,7 @@
 #import "SYNiPhoneLoginViewController.h"
 #import "SYNiPhoneLoginAnimator.h"
 #import "SYNLoginManager.h"
-#import "GAI+Tracking.h"
+#import "SYNTrackingManager.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Reachability.h>
 #import "SYNExampleUsersViewController.h"
@@ -90,7 +90,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	[[GAI sharedInstance] trackStartScreenView];
+	[[SYNTrackingManager sharedManager] trackStartScreenView];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
