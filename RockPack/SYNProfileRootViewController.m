@@ -594,7 +594,7 @@
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
-    self.aboutMeTextView.textContainer.maximumNumberOfLines = 3;
+    self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:13.0];
@@ -2616,7 +2616,7 @@
                                              // shows the message label from the MasterViewController
                                              //                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
                                              
-                                             //                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
+                                            //                                            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
                                              //                                                                                                    action: @"channelCreated"
                                              //                                                                                                     label: @""
                                              //                                                                                                     value: nil] build]];
