@@ -95,11 +95,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // change the BG color of the text field inside the searcBar
     UITextField *txfSearchField = [self.searchBar valueForKey:@"_searchField"];
     if(txfSearchField)
-        txfSearchField.backgroundColor = [UIColor colorWithRed: (224.0f / 255.0f)
-                                                         green: (224.0f / 255.0f)
-                                                          blue: (224.0f / 255.0f)
+        txfSearchField.backgroundColor = [UIColor colorWithRed: (255.0f / 255.0f)
+                                                         green: (255.0f / 255.0f)
+                                                          blue: (255.0f / 255.0f)
                                                          alpha: 1.0f];
-    
     
     // == Set the Collection View's Cells == //
     

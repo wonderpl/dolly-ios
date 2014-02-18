@@ -66,6 +66,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="yuf-ge-KjT"/>
                             </constraints>
+                            <color key="barTintColor" red="0.76078431369999999" green="0.76078431369999999" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="zrC-31-atE"/>
