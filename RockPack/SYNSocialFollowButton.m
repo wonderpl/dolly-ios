@@ -47,9 +47,9 @@
 
 - (UIColor *) selectedColor
 {
-    return [UIColor colorWithRed:(182.0f/255.0f)
-                           green:(202.0f/255.0f)
-                            blue:(179.0f/255.0f)
+    return [UIColor colorWithRed:(149.0f/255.0f)
+                           green:(147.0f/255.0f)
+                            blue:(180.0f/255.0f)
                            alpha:1.0f];
 }
 
