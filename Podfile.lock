@@ -1,6 +1,7 @@
 PODS:
   - Appirater (2.0.2)
   - Facebook-iOS-SDK (3.12.0)
+  - GoogleAnalytics-iOS-SDK (3.0.3)
   - GoogleConversionTracking (3.0.0)
   - ISO8601DateFormatter (0.7)
   - Kiwi/ARC (2.2.3)
@@ -16,11 +17,12 @@ PODS:
     - SDWebImage/Core
   - SDWebImage/Core (3.5.2)
   - SSKeychain (0.2.1)
-  - TestFlightSDK (2.2.1)
+  - TestFlightSDK (2.2.3-beta)
 
 DEPENDENCIES:
   - Appirater
   - Facebook-iOS-SDK
+  - GoogleAnalytics-iOS-SDK
   - GoogleConversionTracking
   - ISO8601DateFormatter
   - Kiwi/XCTest
@@ -39,6 +41,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
   Facebook-iOS-SDK: c09f7d80db5c48170ff834bc03ebe774c49d1f5b
+  GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
   GoogleConversionTracking: cb1368fb8c3229ca374a3554a2a9ce50dfa1fa9d
   ISO8601DateFormatter: 00944e437ea647f4244454ce8809d313861d08de
   Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
@@ -47,6 +50,6 @@ SPEC CHECKSUMS:
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
-  TestFlightSDK: 030fa8a1bc8aa9ba5c9ae1be05ceaba775368c0c
+  TestFlightSDK: a959afdd20fd2a43a198bab1e6aa81f9469e5423
 
 COCOAPODS: 0.29.0

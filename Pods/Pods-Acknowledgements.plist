@@ -231,6 +231,15 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright 2009 - 2014 Google, Inc. All rights reserved.
+</string>
+			<key>Title</key>
+			<string>GoogleAnalytics-iOS-SDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2011 Google Inc.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -373,7 +382,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>All text and design is copyright © 2010-2014 TestFlight App, Inc.
+			<string>All text and design is copyright © 2010-2013 TestFlight App, Inc.
 
 All rights reserved.
 

@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 12
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 0
 
+// GoogleAnalytics-iOS-SDK
+#define COCOAPODS_POD_AVAILABLE_GoogleAnalytics_iOS_SDK
+#define COCOAPODS_VERSION_MAJOR_GoogleAnalytics_iOS_SDK 3
+#define COCOAPODS_VERSION_MINOR_GoogleAnalytics_iOS_SDK 0
+#define COCOAPODS_VERSION_PATCH_GoogleAnalytics_iOS_SDK 3
+
 // GoogleConversionTracking
 #define COCOAPODS_POD_AVAILABLE_GoogleConversionTracking
 #define COCOAPODS_VERSION_MAJOR_GoogleConversionTracking 3
@@ -70,5 +76,5 @@
 #define COCOAPODS_POD_AVAILABLE_TestFlightSDK
 #define COCOAPODS_VERSION_MAJOR_TestFlightSDK 2
 #define COCOAPODS_VERSION_MINOR_TestFlightSDK 2
-#define COCOAPODS_VERSION_PATCH_TestFlightSDK 1
+#define COCOAPODS_VERSION_PATCH_TestFlightSDK 3
 

@@ -241,7 +241,6 @@
 		01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD11169E11B000E01AA3 /* _AbstractCommon.m */; };
 		01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD13169E11B000E01AA3 /* AbstractCommon.m */; };
 		01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */; };
-		01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */; };
 		01D0996617429F4E00351C82 /* ButtonPopoverCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0995E17429F4E00351C82 /* ButtonPopoverCancel.png */; };
 		01D0996717429F4E00351C82 /* ButtonPopoverCancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0995F17429F4E00351C82 /* ButtonPopoverCancel@2x.png */; };
 		01D0996817429F4E00351C82 /* ButtonPopoverCancelHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0996017429F4E00351C82 /* ButtonPopoverCancelHighlighted.png */; };
@@ -1434,9 +1433,6 @@
 		016B97161770C42200892211 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0170717D165550A900A3C7C4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0170717F165550BE00A3C7C4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		0173E6C6171822F000EEE76B /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		0173E6C7171822F000EEE76B /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		0173E6C8171822F000EEE76B /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		0173F70216E0B899005B3ECA /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		0173F70616E0C56A005B3ECA /* SYNVideoViewerThumbnailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewerThumbnailLayout.h; sourceTree = "<group>"; };
 		0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewerThumbnailLayout.m; sourceTree = "<group>"; };
@@ -1562,10 +1558,6 @@
 		01C6FD13169E11B000E01AA3 /* AbstractCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractCommon.m; sourceTree = "<group>"; };
 		01C74BAB169F239800B1CA02 /* SYNNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNetworkEngine.h; sourceTree = "<group>"; };
 		01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNetworkEngine.m; sourceTree = "<group>"; };
-		01CDCC811806C79800CF3AE9 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		01CDCC821806C79800CF3AE9 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		01CDCC831806C79800CF3AE9 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = RockPack/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		01D0995E17429F4E00351C82 /* ButtonPopoverCancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPopoverCancel.png; path = Assets/Images/ButtonPopoverCancel.png; sourceTree = "<group>"; };
 		01D0995F17429F4E00351C82 /* ButtonPopoverCancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPopoverCancel@2x.png"; path = "Assets/Images/ButtonPopoverCancel@2x.png"; sourceTree = "<group>"; };
 		01D0996017429F4E00351C82 /* ButtonPopoverCancelHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPopoverCancelHighlighted.png; path = Assets/Images/ButtonPopoverCancelHighlighted.png; sourceTree = "<group>"; };
@@ -2780,7 +2772,6 @@
 				0125FBA91831043E00EC822E /* Security.framework in Frameworks */,
 				0125FBA81831042600EC822E /* libxml2.dylib in Frameworks */,
 				0125FBA61831041E00EC822E /* libc++.dylib in Frameworks */,
-				01CDCC851806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a in Frameworks */,
 				01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */,
 				C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */,
 				019824F01629CC7600216900 /* libTestFlight.a in Frameworks */,
@@ -2838,7 +2829,6 @@
 				0125FBAB1831045400EC822E /* CoreText.framework */,
 				0125FBA71831042600EC822E /* libxml2.dylib */,
 				0125FBA51831041E00EC822E /* libc++.dylib */,
-				01CDCC841806C7EE00CF3AE9 /* libGoogleAnalyticsServices.a */,
 				01F7C9671748ED0B00E36994 /* libsqlite3.dylib */,
 				019824EE1629CC7600216900 /* libTestFlight.a */,
 				019824F11629CE1600216900 /* libz.dylib */,
@@ -3168,19 +3158,6 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
-		0173E6C5171822BF00EEE76B /* Google Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				01CDCC811806C79800CF3AE9 /* GAIDictionaryBuilder.h */,
-				01CDCC821806C79800CF3AE9 /* GAIFields.h */,
-				01CDCC831806C79800CF3AE9 /* GAILogger.h */,
-				0173E6C6171822F000EEE76B /* GAI.h */,
-				0173E6C7171822F000EEE76B /* GAITrackedViewController.h */,
-				0173E6C8171822F000EEE76B /* GAITracker.h */,
-			);
-			name = "Google Analytics";
-			sourceTree = "<group>";
-		};
 		0173F70416E0C498005B3ECA /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
@@ -3412,7 +3389,6 @@
 				BE285DB91726826800D995AB /* Channels Manager */,
 				BE7D34CB171443330085AB81 /* Device */,
 				019824E91629CBD000216900 /* Exception Handler */,
-				0173E6C5171822BF00EEE76B /* Google Analytics */,
 				011A162016EF5E96008CF25E /* Image Picker */,
 				019E6A5E165FD958002B312A /* OAuth2 */,
 				012502BA16CA8FCE0029C7C8 /* Social Media */,
