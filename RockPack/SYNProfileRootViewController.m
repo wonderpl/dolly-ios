@@ -33,7 +33,6 @@
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
 #import "UINavigationBar+Appearance.h"
-#import "SYNGenreColorManager.h"
 
 
 @import QuartzCore;
@@ -1085,8 +1084,6 @@
             {
                 channelThumbnailCell.deletableCell = YES;
             }
-            
-            [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
         }
         else
         {
@@ -1100,8 +1097,6 @@
                 }
 				//text is set in the channelmidcell setChannel method
                 channelThumbnailCell.channel = channel;
-                
-                [channelThumbnailCell setCategoryColor: [[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
             } else {
 				channelThumbnailCell.channel = nil;
 			}

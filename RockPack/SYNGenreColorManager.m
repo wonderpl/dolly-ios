@@ -10,6 +10,7 @@
 #import "UIColor+SYNColor.h"
 #import "AppConstants.h"
 #import "SYNAppDelegate.h"
+#import "UIColor+SYNColor.h"
 
 @interface SYNGenreColorManager ()
 
@@ -52,9 +53,7 @@
 }
 
 - (UIColor *)colorFromID:(NSString *)categoryId {
-	UIColor *defaultColor = [UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f];
-	
-	return (self.genreColors[categoryId] ?: defaultColor);
+	return (self.genreColors[categoryId] ?: [UIColor defaultCategoryColor]);
 }
 
 @end

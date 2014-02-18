@@ -14,6 +14,7 @@
 #import <UIImageView+WebCache.h>
 #import "ChannelOwner.h"
 #import "SYNAppDelegate.h"
+#import "SYNGenreColorManager.h"
 
 @import QuartzCore;
 
@@ -180,6 +181,8 @@
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     
     [self setBorder];
+	
+	[self setCategoryColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
 
 	self.separatorView.hidden = NO;
 

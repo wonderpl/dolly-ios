@@ -37,4 +37,6 @@
 + (UIColor *)lighterColorForColor:(UIColor *)c;
 + (UIColor *)darkerColorForColor:(UIColor *)c;
 
++ (UIColor *)defaultCategoryColor;
+
 @end

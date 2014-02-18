@@ -104,8 +104,6 @@
 	
 	ChannelOwner *channelOwner = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] firstObject];
 	if (!channelOwner) {
-		SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-		
 		channelOwner = [self instanceFromDictionary:@{ @"username" : username }
 						  usingManagedObjectContext:managedObjectContext
 								ignoringObjectTypes:kIgnoreNothing];
