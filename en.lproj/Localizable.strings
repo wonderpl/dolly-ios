@@ -167,6 +167,7 @@
 "notification_repack_action" = "%@ has added your video to a collection";
 "notification_subscribed_action" = "%@ is now following your collection";
 "notification_joined_action" = "Your Facebook friend %@ has joined Wonder PL";
+"notification_comment_action" = "%@ mentioned you in a comment.";
 "your_channel_object" = "your collection";
 "your_video_object" = "your video";
 "video_object"  = "video";

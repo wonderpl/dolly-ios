@@ -35,6 +35,8 @@
     if (self = [super init])
     {
         
+        
+//        NSLog(@"DataDataData :%@", data);
         if(![data isKindOfClass:[NSDictionary class]])
             return nil;
         
@@ -77,6 +79,9 @@
         else if ([self.messageType isEqualToString: @"unavailable"])
         {
             self.objectType = kNotificationObjectTypeFacebookFriendJoined;
+        } else if ([self.messageType isEqualToString: @"comment_mention"])
+        {
+            self.objectType = kNotificationObjectTypeCommentMention;
         }
         else
         {
@@ -133,9 +138,14 @@
             
             if (userDictionary && [userDictionary isKindOfClass: [NSDictionary class]])
             {
+                
+                NSLog(@"userDictionaryuserDictionaryuserDictionary%@", userDictionary);
                 self.channelOwner = [ChannelOwner instanceFromDictionary: userDictionary
                                                usingManagedObjectContext: appDelegate.mainManagedObjectContext
                                                      ignoringObjectTypes: kIgnoreChannelObjects];
+                
+                
+                NSLog(@"channelOwner : %@", self.channelOwner);
                 
                 self.channelOwner.viewId = kSideNavigationViewId;
             }

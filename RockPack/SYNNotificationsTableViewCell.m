@@ -129,9 +129,11 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 									 @(kNotificationObjectTypeUserSubscibedToYourChannel) : @"notification_subscribed_action",
 									 @(kNotificationObjectTypeUserLikedYourVideo) : @"notification_liked_action",
 									 @(kNotificationObjectTypeUserAddedYourVideo) : @"notification_repack_action",
-									 @(kNotificationObjectTypeYourVideoNotAvailable) : @"notification_unavailable_action" };
+									 @(kNotificationObjectTypeYourVideoNotAvailable) : @"notification_unavailable_action",
+                                     @(kNotificationObjectTypeCommentMention) : @"notification_comment_action" };
 	
 	NSString *mappedKey = stringMapping[@(notification.objectType)];
+    
 	if (mappedKey) {
 		NSString *displayName = [notification.channelOwner.displayName uppercaseString];
 		return [NSString stringWithFormat:NSLocalizedString(mappedKey, nil), displayName];
