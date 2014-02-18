@@ -22,8 +22,8 @@
 @property (nonatomic, strong) UIView *separatorView;
 
 @property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
-@property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
-@property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
+@property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton *userNameLabelButton;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) UIButton* alertViewButton;
 

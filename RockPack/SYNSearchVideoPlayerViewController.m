@@ -111,6 +111,8 @@
 																				   forIndexPath:indexPath];
 		
 		cell.channelOwner = [self.likesModel itemAtIndex:indexPath.item];
+		cell.userNameLabelButton.userInteractionEnabled = NO;
+		cell.userThumbnailButton.userInteractionEnabled = NO;
 		cell.followButton.hidden = YES;
 		
 		return cell;
