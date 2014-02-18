@@ -139,13 +139,10 @@
             if (userDictionary && [userDictionary isKindOfClass: [NSDictionary class]])
             {
                 
-                NSLog(@"userDictionaryuserDictionaryuserDictionary%@", userDictionary);
                 self.channelOwner = [ChannelOwner instanceFromDictionary: userDictionary
                                                usingManagedObjectContext: appDelegate.mainManagedObjectContext
                                                      ignoringObjectTypes: kIgnoreChannelObjects];
                 
-                
-                NSLog(@"channelOwner : %@", self.channelOwner);
                 
                 self.channelOwner.viewId = kSideNavigationViewId;
             }
