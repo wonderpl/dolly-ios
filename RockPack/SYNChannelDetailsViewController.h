@@ -6,12 +6,11 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "LXReorderableCollectionViewFlowLayout.h"
 #import "SYNAbstractViewController.h"
 #import "SYNSocialActionsDelegate.h"
 
 
-@interface SYNChannelDetailsViewController : SYNAbstractViewController <LXReorderableCollectionViewDelegateFlowLayout, UIPopoverControllerDelegate,
+@interface SYNChannelDetailsViewController : SYNAbstractViewController <UIPopoverControllerDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
 SYNSocialActionsDelegate, UITextFieldDelegate, UITextViewDelegate>

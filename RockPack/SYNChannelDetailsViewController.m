@@ -34,6 +34,7 @@
 #import "SYNChannelVideosModel.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "UINavigationBar+Appearance.h"
+#import "LXReorderableCollectionViewFlowLayout.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -42,7 +43,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
