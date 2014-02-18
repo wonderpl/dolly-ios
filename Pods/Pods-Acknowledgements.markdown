@@ -210,6 +210,11 @@ Copyright 2013. Arash Payan. This library is distributed under the terms of the 
    limitations under the License.
 
 
+## GoogleAnalytics-iOS-SDK
+
+Copyright 2009 - 2014 Google, Inc. All rights reserved.
+
+
 ## GoogleConversionTracking
 
 Copyright (c) 2011 Google Inc.
@@ -326,7 +331,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## TestFlightSDK
 
-All text and design is copyright © 2010-2014 TestFlight App, Inc.
+All text and design is copyright © 2010-2013 TestFlight App, Inc.
 
 All rights reserved.
 
