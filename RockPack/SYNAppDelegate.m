@@ -1359,7 +1359,7 @@
                 if (channel)
                 {
                     
-                    [currentViewController viewVideoInstance:channel withVideoId:videoId];
+                    [currentViewController viewVideoInstanceInChannel:channel withVideoId:videoId];
                     success = TRUE;
                 }
                 break;

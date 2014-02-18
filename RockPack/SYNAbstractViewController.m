@@ -821,6 +821,21 @@
 
 - (void) viewVideoInstance:(Channel*) channel withVideoId:videoId
 {
+    __block UIViewController *viewController;
+    
+    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:channel.uniqueId instanceId:videoId completionHandler:^(id response) {
+        
+        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:@[vidToPlay] selectedIndex:0];
+        
+		[self.navigationController presentViewController:viewController animated:YES completion:nil];
+        
+    } errorHandler: nil];
+    
+}
+
+- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId
+{
     // The Overlay must be removed if there is ont alreaedy displaying
     [appDelegate.masterViewController removeVideoOverlayController];
 

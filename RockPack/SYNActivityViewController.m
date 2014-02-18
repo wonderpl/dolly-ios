@@ -298,9 +298,7 @@
                 return;
             }
             
-            channel.autoplayId = notification.videoId;
-            
-			[self viewChannelDetails: channel withAnimation:YES];
+            [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             
             break;
         }
@@ -334,14 +332,20 @@
             
         case kNotificationObjectTypeCommentMention:
         {
-            ChannelOwner *channelOwner = notification.channelOwner;
-            
-            if (!channelOwner)
+            Channel *channel = [self channelFromChannelId: notification.channelId];
+            if (!channel)
             {
+                
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Video Unavailable", nil)
+                                            message:NSLocalizedString(@"The Video for which this notification has been issued might have been deleted", nil)
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+
                 return;
             }
             
-            [self viewProfileDetails: channelOwner];
+            [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             break;
         }
 

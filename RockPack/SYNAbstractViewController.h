@@ -73,6 +73,7 @@
 - (void)viewProfileDetails:(ChannelOwner *)channelOwner;
 - (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated;
 - (void)viewVideoInstance:(Channel*) channel withVideoId:videoId;
+- (void)viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId;
 
 - (void) shouldHideTabBar;
 
