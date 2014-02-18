@@ -23,7 +23,7 @@
                         <color key="backgroundColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-18-LaS" userLabel="follow" customClass="SYNSocialFollowButton">
-                        <rect key="frame" x="253" y="139" width="50" height="50"/>
+                        <rect key="frame" x="253" y="135" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -72,7 +72,7 @@
                 <constraint firstAttribute="trailing" secondItem="fkX-vS-KN8" secondAttribute="trailing" id="nrS-fB-Bzi"/>
                 <constraint firstAttribute="bottom" secondItem="sTy-g0-GXP" secondAttribute="bottom" constant="33" id="rDG-Oa-xDw"/>
                 <constraint firstItem="ufw-e6-HaY" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" constant="12" id="xGA-ZQ-Z01"/>
-                <constraint firstAttribute="bottom" secondItem="MN1-18-LaS" secondAttribute="bottom" constant="6" id="xSd-wJ-1c1"/>
+                <constraint firstAttribute="bottom" secondItem="MN1-18-LaS" secondAttribute="bottom" constant="10" id="xSd-wJ-1c1"/>
             </constraints>
             <size key="customSize" width="353" height="216"/>
             <connections>
