@@ -219,7 +219,7 @@ referenceSizeForFooterInSection:(NSInteger)section {
 		[self.likesCollectionView reloadData];
 	}
 	if (pagingModel == self.channelsModel) {
-		NSString *segmentedControlTitle = [NSString stringWithFormat:@"appears in (%d)", [pagingModel totalItemCount]];
+		NSString *segmentedControlTitle = [NSString stringWithFormat:@"Appears in (%d)", [pagingModel totalItemCount]];
 		[self.segmentedControl setTitle:segmentedControlTitle forSegmentAtIndex:0];
 		[self.channelsCollectionView reloadData];
 	}
