@@ -220,7 +220,7 @@
     switch (currentFieldType)
     {
         case UserFieldTypeFullName:
-			isMatched = [input isValidFullName];
+			isMatched = YES;
             break;
             
         case UserFieldTypeUsername:

@@ -5,26 +5,6 @@ SPEC_BEGIN(NSStringValidation)
 
 describe(@"The NSString Validation category", ^{
 	
-	context(@"when validating full names", ^{
-		
-		it(@"should return yes for valid ones", ^{
-			[[theValue([@"OneNameAllowed" isValidFullName]) should] beYes];
-			[[theValue([@"Hello.World" isValidFullName]) should] beYes];
-			[[theValue([@"." isValidFullName]) should] beYes];
-		});
-		
-		it(@"should return no for invalid ones", ^{
-			[[theValue([@"Garry O'Neil" isValidFullName]) should] beNo];
-			[[theValue([@"Two Names" isValidFullName]) should] beNo];
-			[[theValue([@"OneNameWithNumber1" isValidFullName]) should] beNo];
-			[[theValue([@"" isValidUsername]) should] beNo];
-			[[theValue([@"JohnBlog#" isValidUsername]) should] beNo];
-			[[theValue([@"#" isValidUsername]) should] beNo];
-			[[theValue([@"Blah!" isValidUsername]) should] beNo];
-		});
-		
-	});
-	
 	context(@"when validating usernames", ^{
 		
 		it(@"should return yes for valid ones", ^{

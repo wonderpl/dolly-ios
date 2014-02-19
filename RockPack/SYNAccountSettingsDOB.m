@@ -13,16 +13,13 @@
 
 @interface SYNAccountSettingsDOB ()
 
+@property (nonatomic, strong) UIDatePicker* datePicker;
 
 @end
 
 @implementation SYNAccountSettingsDOB
 
-@synthesize datePicker;
-
-
-- (void) viewDidLoad
-{
+- (void) viewDidLoad {
     [super viewDidLoad];
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
@@ -37,16 +34,22 @@
     
     self.view.frame = frame;
     
-    datePicker = [[UIDatePicker alloc] initWithFrame: frame];
-    [datePicker setDatePickerMode: UIDatePickerModeDate];
-    [self.view addSubview: datePicker];
+    [self.view addSubview:self.datePicker];
     
     self.title = @"Choose a Date";
     
 }
 
-
-
+- (UIDatePicker *)datePicker {
+	if (!_datePicker) {
+		CGRect frame = CGRectMake(0.0, (IS_IPHONE ? 60.0f : 0.0f), 280.0, 280.0);
+		UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame: frame];
+		[datePicker setDatePickerMode: UIDatePickerModeDate];
+		
+		self.datePicker = datePicker;
+	}
+	return _datePicker;
+}
 
 
 @end

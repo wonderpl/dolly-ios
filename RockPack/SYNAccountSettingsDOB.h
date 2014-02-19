@@ -10,6 +10,6 @@
 
 @interface SYNAccountSettingsDOB : UIViewController
 
-@property (nonatomic, strong) UIDatePicker* datePicker;
+@property (nonatomic, strong, readonly) UIDatePicker* datePicker;
 
 @end

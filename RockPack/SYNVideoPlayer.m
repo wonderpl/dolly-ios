@@ -25,7 +25,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 @property (nonatomic, strong) SYNVideoLoadingView *loadingView;
 
 @property (nonatomic, strong) UITapGestureRecognizer *maximiseMinimiseGestureRecognizer;
-@property (nonatomic, strong) UIPinchGestureRecognizer *maximiseMinimisePintchGestureRecognizer;
+@property (nonatomic, strong) UIPinchGestureRecognizer *maximiseMinimisePinchGestureRecognizer;
 @property (nonatomic, strong) SYNScrubberBar *scrubberBar;
 @property (nonatomic, strong) UIView *playerContainerView;
 @property (nonatomic, strong) NSTimer *progressUpdateTimer;
@@ -33,9 +33,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 @property (nonatomic, strong) UIView *controlsFadeTapView;
 @property (nonatomic, strong) NSTimer *controlsFadeTimer;
 @property (nonatomic, assign) BOOL controlsVisible;
-
-@property (nonatomic, assign) BOOL userPinchedIn;
-@property (nonatomic, assign) BOOL userPinchedOut;
 
 @property (nonatomic, assign) BOOL videoViewed;
 
@@ -65,7 +62,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		[self addSubview:self.scrubberBar];
         
 		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
-        [self addGestureRecognizer:self.maximiseMinimisePintchGestureRecognizer];
+        [self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
 	}
 	return self;
 }
@@ -82,14 +79,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 #pragma mark - SYNScrubberBarDelegate
-
-- (void)scrubberBarFullScreenToggled:(BOOL)fullScreen {
-	if (fullScreen) {
-		[self.delegate videoPlayerMaximise];
-	} else {
-		[self.delegate videoPlayerMinimise];
-	}
-}
 
 - (void)scrubberBarPlayPauseToggled:(BOOL)playing {
 	if (playing) {
@@ -178,14 +167,14 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	return _maximiseMinimiseGestureRecognizer;
 }
 
-- (UIPinchGestureRecognizer *)maximiseMinimisePintchGestureRecognizer {
-	if (!_maximiseMinimisePintchGestureRecognizer) {
+- (UIPinchGestureRecognizer *)maximiseMinimisePinchGestureRecognizer {
+	if (!_maximiseMinimisePinchGestureRecognizer) {
 		UIPinchGestureRecognizer *gestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self
-                                                                                                action:@selector(maximiseMinimisePintchGestureRecognizerTapped:)];
+                                                                                                action:@selector(maximiseMinimisePinchGestureRecognizerTapped:)];
         
-		self.maximiseMinimisePintchGestureRecognizer = gestureRecognizer;
+		self.maximiseMinimisePinchGestureRecognizer = gestureRecognizer;
 	}
-	return _maximiseMinimisePintchGestureRecognizer;
+	return _maximiseMinimisePinchGestureRecognizer;
 }
 
 
@@ -332,58 +321,33 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.scrubberBar.bufferingProgress = self.bufferingProgress;
 }
 
-- (void)maximiseMinimisePintchGestureRecognizerTapped:(UIPinchGestureRecognizer *)gestureRecognizer {
-    
-    
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
-    {
-        self.userPinchedOut = NO;
-        self.userPinchedIn = NO;
-        
-    }
-    else if (gestureRecognizer.state == UIGestureRecognizerStateChanged)
-    {
-        float scale = gestureRecognizer.scale;
-        
-        if (scale < 1.0)
-        {
-            self.userPinchedIn = YES;
-        }
-        else
-        {
-            self.userPinchedOut = YES;
-        }
-    }
-    else if (gestureRecognizer.state == UIGestureRecognizerStateEnded)
-    {
-        if (self.userPinchedOut == YES)
-        {
-            
-            if (!self.maximised) {
-                self.maximised = YES;
-                [self.delegate videoPlayerMaximise];
-            }
-        }
-        else if (self.userPinchedIn == YES)
-        {
-            if (self.maximised) {
-                self.maximised = NO;
-                [self.delegate videoPlayerMinimise];
-            }
-        }
-    }    
+- (void)maximiseMinimisePinchGestureRecognizerTapped:(UIPinchGestureRecognizer *)gestureRecognizer {
+	if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+		BOOL pinchedIn = (gestureRecognizer.scale < 1.0);
+		if (pinchedIn && self.maximised) {
+			[self handleVideoPlayerMinimise];
+		} else if (!pinchedIn && !self.maximised) {
+			[self handleVideoPlayerMaximise];
+		}
+	}
 }
-
 
 - (void)maximiseMinimiseGestureRecognizerTapped:(UITapGestureRecognizer *)gestureRecognizer {
 	if (self.maximised) {
-		self.maximised = NO;
-		[self.delegate videoPlayerMinimise];
+		[self handleVideoPlayerMinimise];
 	} else {
-		self.maximised = YES;
-		[self.delegate videoPlayerMaximise];
+		[self handleVideoPlayerMaximise];
 	}
+}
+
+- (void)handleVideoPlayerMaximise {
+	self.maximised = YES;
+	[self.delegate videoPlayerMaximise];
+}
+
+- (void)handleVideoPlayerMinimise {
+	self.maximised = NO;
+	[self.delegate videoPlayerMinimise];
 }
 
 @end
