@@ -214,13 +214,8 @@
     // Get the videoinstance associated with the control pressed
     VideoInstance *videoInstance = socialControl.dataItemLinked;
     
-    // Track
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoStarButtonClick"
-                                                            label: @"feed"
-                                                            value: nil] build]];
+	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
+	
     BOOL didStar = (socialControl.selected == NO);
     
     socialControl.enabled = NO;
@@ -285,7 +280,7 @@
     
     VideoInstance *videoInstance = socialControl.dataItemLinked;
 	
-	[[SYNTrackingManager sharedManager] trackVideoAdd];
+	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
 	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: @"select"
@@ -346,8 +341,6 @@
 	[self requestShareLinkWithObjectType: @"video_instance"
 								objectId: videoInstance.uniqueId];
 	
-	[[SYNTrackingManager sharedManager] trackVideoShare];
-    
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];
     
@@ -562,24 +555,20 @@
 
 
 
-- (void) followControlPressed: (SYNSocialButton *) socialControl
-{
-    if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
-    {
+- (void) followControlPressed: (SYNSocialButton *) socialControl {
+    if ([socialControl.dataItemLinked isKindOfClass: [Channel class]]) {
         // Get the channel associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
-        if(!channel)
-            return;
-        
-		[self followButtonPressed:socialControl withChannel:channel];
-    }
-    else
-    {
-        
+        if (channel) {
+			[self followButtonPressed:socialControl withChannel:channel];
+		}
+    } else {
         ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
         
         if(!channelOwner)
             return;
+		
+		[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
         
         if(channelOwner.subscribedByUserValue == NO)
         {
@@ -670,6 +659,9 @@
     }
 }
 
+- (NSString *)trackingScreenName {
+	return nil;
+}
 
 - (void) shouldHideTabBar
 {
@@ -825,6 +817,9 @@
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel {
 	button.enabled = NO;
+	
+	[[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+	
 	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
     
 	if (channel.subscribedByUserValue) {

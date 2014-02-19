@@ -6,7 +6,6 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAccountSettingOtherTableViewCell.h"
 #import "SYNAccountSettingsLocation.h"
 #import "SYNAppDelegate.h"
@@ -14,6 +13,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
 #import "SYNMasterViewController.h"
+#import "SYNTrackingManager.h"
 #import "User.h"
 
 @interface SYNAccountSettingsLocation ()
@@ -47,15 +47,7 @@
 {
     [super viewDidLoad];
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Location"
-                                                            value: nil] build]];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -99,10 +91,7 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
-    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
 }
 
@@ -175,8 +164,9 @@
     [self.spinner startAnimating];
 }
 
--(void)changeUserLocaleForValue:(NSString*)newLocale
-{
+- (void)changeUserLocaleForValue:(NSString*)newLocale {
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Location"];
+	
     __weak SYNAccountSettingsLocation* wself = self;
     [self.appDelegate.oAuthNetworkEngine changeUserField:@"locale"
                                                  forUser:appDelegate.currentUser

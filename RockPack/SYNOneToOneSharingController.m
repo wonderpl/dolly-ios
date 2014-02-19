@@ -9,7 +9,6 @@
 #import "AppConstants.h"
 #import "Channel.h"
 #import "Friend.h"
-#import "GAI.h"
 #import "OWActivities.h"
 #import "OWActivityView.h"
 #import "OWActivityViewController.h"
@@ -25,6 +24,7 @@
 #import "NSString+Validation.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNWonderMailActivity.h"
+#import "SYNTrackingManager.h"
 @import AddressBook;
 @import QuartzCore;
 
@@ -201,14 +201,14 @@
                                                    object: nil];
         return;
     }
+	
+	[[SYNTrackingManager sharedManager] trackShareScreenView];
+}
 
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Share"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackShareScreenView];
 }
 
 // Recursively, enable or disable controls contained in a view
@@ -365,6 +365,9 @@
     });
 }
 
+- (NSString *)shareType {
+	return self.mutableShareDictionary[@"type"];
+}
 
 #pragma mark - Data Retrieval
 
@@ -965,10 +968,9 @@
     
     self.friendHeldInQueue = nil;
     
-    
     SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     __weak SYNOneToOneSharingController *wself = self;
-    
+	
     [appDelegate.oAuthNetworkEngine emailShareWithObjectType: self.mutableShareDictionary[@"type"]
                                                     objectId: self.mutableShareDictionary[@"object_id"]
                                                   withFriend: friend

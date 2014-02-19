@@ -19,6 +19,7 @@
 #import "SYNSearchVideoChannelsModel.h"
 #import "SYNSearchVideoLikesModel.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNTrackingManager.h"
 @import MediaPlayer;
 
 @interface SYNSearchVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate>
@@ -77,6 +78,12 @@
 	}
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackSearchVideoPlayerScreenView];
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
@@ -86,6 +93,12 @@
 		[self.channelsCollectionView.collectionViewLayout invalidateLayout];
 		[self.likesCollectionView.collectionViewLayout invalidateLayout];
 	}
+}
+
+#pragma mark - Overridden
+
+- (NSString *)trackingScreenName {
+	return @"Viewer2";
 }
 
 #pragma mark - UICollectionViewDataSource

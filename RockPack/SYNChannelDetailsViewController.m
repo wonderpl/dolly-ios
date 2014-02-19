@@ -12,7 +12,6 @@
 #import "Appirater.h"
 #import "Channel.h"
 #import "ChannelOwner.h"
-#import "GAI.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
@@ -35,6 +34,7 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "UINavigationBar+Appearance.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
+#import "SYNTrackingManager.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -110,10 +110,6 @@
     return self;
 }
 
-- (void)dealloc {
-	
-}
-
 #pragma mark - View lifecyle
 
 - (void) viewDidLoad
@@ -121,18 +117,6 @@
     [super viewDidLoad];
     
     [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
-    
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    //show we track users channel details mode?
-    if (self.mode == kChannelDetailsModeDisplay )
-    {
-        [tracker set: kGAIScreenName
-               value: @"Channel details"];
-        
-        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    }
-    
     
     if (IS_IPAD)
     {
@@ -282,6 +266,20 @@
     
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+    
+	if ([self.channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+		[[SYNTrackingManager sharedManager] trackOwnCollectionScreenView];
+	} else {
+		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
+	}
+}
+
+- (NSString *)trackingScreenName {
+	return @"Collection";
 }
 
 -(void) setupFonts
@@ -469,33 +467,8 @@
 }
 #pragma mark - Control Actions
 
-- (void) followControlPressed: (SYNSocialButton *) socialControl
-{
-    if (self.channel != nil)
-    {
-        if (self.channel.subscribedByUserValue) {
-            [SYNActivityManager.sharedInstance unsubscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
-                
-                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-
-            } errorHandler:^(NSDictionary *error) {
-                
-            }];
-        }
-        else
-        {
-            [SYNActivityManager.sharedInstance subscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
-                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-                
-            } errorHandler:^(NSDictionary *error) {
-                
-            }];
-        }
-        
-        
-        
-    }
-    
+- (void) followControlPressed: (SYNSocialButton *) socialControl {
+	[self followButtonPressed:socialControl withChannel:self.channel];
 }
 
 - (void) addSubscribeActivityIndicator
@@ -1246,6 +1219,8 @@
 
 - (IBAction)editTapped:(id)sender
 {
+	
+	[[SYNTrackingManager sharedManager] trackEditCollectionScreenView];
     
     [self killScroll];
 
@@ -1571,19 +1546,10 @@
 
 
 
-- (IBAction) followersLabelPressed: (id) sender
-{
-    // Google analytics support
+- (IBAction) followersLabelPressed: (id) sender {
     if (self.channel.subscribersCountValue == 0) {
         return;
     }
-    
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Subscribers List"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
     

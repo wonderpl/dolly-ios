@@ -26,6 +26,7 @@
 #import "UINavigationBar+Appearance.h"
 #import "SYNActivityManager.h"
 #import "UILabel+Animation.h"
+#import "SYNTrackingManager.h"
 #import <UIButton+WebCache.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UIScrollViewDelegate, SYNPagingModelDelegate>
@@ -110,6 +111,8 @@
 												   animated:YES
 											 scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 	}
+	
+	[[SYNTrackingManager sharedManager] trackCarouselVideoPlayerScreenView];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -121,6 +124,12 @@
 
 - (void)videoPlayerFinishedPlaying {
 	[self playNextVideo];
+}
+
+#pragma mark - Overridden
+
+- (NSString *)trackingScreenName {
+	return @"Viewer1";
 }
 
 #pragma mark - Getters / Setters
@@ -252,8 +261,10 @@ referenceSizeForFooterInSection:(NSInteger)section {
 - (IBAction)followButtonPressed:(UIBarButtonItem *)barButton {
 	barButton.enabled = NO;
 	
+	[[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+	
 	Channel *channel = self.videoInstance.channel;
-	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
+	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId];
 	if (channel.subscribedByUserValue) {
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
 												completionHandler:^(NSDictionary *responseDictionary) {

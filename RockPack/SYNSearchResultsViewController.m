@@ -25,6 +25,12 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 
+typedef NS_ENUM(NSInteger, SYNSearchType) {
+	SYNSearchTypeUndefined,
+	SYNSearchTypeBrowse,
+	SYNSearchTypeSearch
+};
+
 typedef void (^SearchResultCompleteBlock)(int);
 
 @interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNVideoPlayerAnimatorDelegate>
@@ -57,6 +63,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 @property (nonatomic, strong) NSString* currentSearchGenre;
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
+@property (nonatomic, assign) SYNSearchType searchType;
 
 @end
 
@@ -218,6 +225,16 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 }
 
+- (NSString *)trackingScreenName {
+	if (self.searchType == SYNSearchTypeBrowse) {
+		return @"Browse";
+	}
+	if (self.searchType == SYNSearchTypeSearch) {
+		return @"Search";
+	}
+	return nil;
+}
+
 #pragma mark - SYNVideoCellDelegate
 
 - (void)profileButtonPressedForCell:(UICollectionViewCell *)cell {
@@ -275,6 +292,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 {
     //When searching for category, default to show users/highlights
     self.searchResultsShowing = SearchResultsShowingUsers;
+	self.searchType = SYNSearchTypeBrowse;
     
     [self.usersTabButton setTitle:(NSLocalizedString(@"highlights", @"Highlight, discover tab")) forState:UIControlStateNormal];
     
@@ -313,7 +331,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForTerm: (NSString *) newSearchTerm
 {
-    
+	self.searchType = SYNSearchTypeSearch;
+
     [self.usersTabButton setTitle:NSLocalizedString(@"users", @"Users in discover tab") forState:UIControlStateNormal];
     
     //searching a term defaults to videos

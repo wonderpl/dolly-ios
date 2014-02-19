@@ -22,6 +22,7 @@
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchVideoPlayerViewController.h"
 #import "SYNMoodOverlayViewController.h"
+#import "SYNTrackingManager.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 #define WATCH_BUTTON_ANIMATION_TIME 0.4
@@ -112,6 +113,11 @@
     self.randomVideoIndex = 0;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackMoodMinderScreenView];
+}
 
 #pragma mark - Getting Mood Objects
 

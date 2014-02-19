@@ -19,6 +19,7 @@
 #import "SYNWebViewController.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNContainerViewController.h"
+#import "SYNTrackingManager.h"
 
 typedef void(^TriggerActionOnCompleteBlock)(void);
 typedef enum {
@@ -96,6 +97,12 @@ typedef enum {
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [self.backgroundView addGestureRecognizer:tapGesture];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackProfileOverlayScreenView];
 }
 
 -(UILabel*)createLabelForOptionButtonWithName:(NSString*)name

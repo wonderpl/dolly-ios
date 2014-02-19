@@ -14,4 +14,6 @@
 
 - (id) initWithInfo: (NSMutableDictionary *) mutableInfoDictionary;
 
+- (NSString *)shareType;
+
 @end

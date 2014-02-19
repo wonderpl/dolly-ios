@@ -468,7 +468,7 @@ typedef enum {
 // Google Analytics
 #ifdef DEBUG
 // Id to use for debug
-#define kGoogleAnalyticsId @"UA-39188851-3"
+#define kGoogleAnalyticsId @"UA-46534300-1"
 #else
 // Id to use for production
 #define kGoogleAnalyticsId @"UA-38220268-4"

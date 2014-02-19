@@ -454,6 +454,10 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
 }
 
+- (NSString *)trackingScreenName {
+	return @"Onboarding";
+}
+
 #pragma mark - AutoRotation
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

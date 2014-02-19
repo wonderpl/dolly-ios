@@ -65,7 +65,7 @@ static const NSInteger UsernameMaxLength = 20;
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[SYNTrackingManager sharedManager] trackRegisterScreenView];
+	[[SYNTrackingManager sharedManager] trackRegistrationScreenView];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

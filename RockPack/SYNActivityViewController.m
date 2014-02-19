@@ -6,13 +6,13 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
 #import "SYNNotificationsTableViewCell.h"
 #import "SYNActivityViewController.h"
 #import "SYNNotification.h"
 #import "Video.h"
+#import "SYNTrackingManager.h"
 #import "SYNNotificationsMarkAllAsReadCell.h"
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
@@ -54,18 +54,7 @@
 {
     [super viewDidLoad];
 
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
 	self.automaticallyAdjustsScrollViewInsets = YES;
-    
-    [tracker set: kGAIScreenName
-           value: @"Notifications"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
-    
-    
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -94,7 +83,11 @@
 
 }
 
-
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackActivityScreenView];
+}
 
 #pragma mark - Get Data
 

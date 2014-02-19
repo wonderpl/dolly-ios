@@ -9,6 +9,7 @@
 #import "SYNWonderMailActivity.h"
 #import "OWActivityViewController.h"
 #import "SYNOneToOneSharingController.h"
+#import "SYNTrackingManager.h"
 
 @implementation SYNWonderMailActivity
 
@@ -23,6 +24,14 @@
 	
     self.actionBlock = ^(OWActivity *activity, OWActivityViewController *activityViewController) {
 		SYNOneToOneSharingController *shareViewController = (SYNOneToOneSharingController *)activityViewController.presentingController;
+		
+		if ([[shareViewController shareType] isEqualToString:@"video_instance"]) {
+			[[SYNTrackingManager sharedManager] trackVideoShareWithService:@"email"];
+		}
+		if ([[shareViewController shareType] isEqualToString:@"channel"]) {
+			[[SYNTrackingManager sharedManager] trackCollectionShareWithService:@"email"];
+		}
+		
 		[shareViewController.searchBar becomeFirstResponder];
     };
     

@@ -67,7 +67,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[SYNTrackingManager sharedManager] trackRegisterStep2ScreenView];
+	[[SYNTrackingManager sharedManager] trackRegistrationStep2ScreenView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

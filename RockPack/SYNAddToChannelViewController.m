@@ -99,21 +99,12 @@
     [super viewWillAppear: animated];
     
     self.currentChannelsCollectionView.scrollsToTop = YES;
-
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Channels - Create - Select"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.closeButton.enabled = YES;
     self.confirmButton.enabled = YES;
     
     // Copy Channels
     self.channels = [appDelegate.currentUser.channels array];
-    
     
     [self.currentChannelsCollectionView reloadData];
 }

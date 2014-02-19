@@ -27,6 +27,8 @@
 #import "OWTwitterActivity.h"
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
+#import "SYNOneToOneSharingController.h"
+#import "SYNTrackingManager.h"
 
 @import Twitter;
 
@@ -55,7 +57,15 @@
             text = userInfo[@"text"];
         }
         
-		UIViewController *shareViewController = activityViewController.presentingController;
+		SYNOneToOneSharingController *shareViewController = (SYNOneToOneSharingController *)activityViewController.presentingController;
+		
+		if ([[shareViewController shareType] isEqualToString:@"video_instance"]) {
+			[[SYNTrackingManager sharedManager] trackVideoShareWithService:@"twitter"];
+		}
+		if ([[shareViewController shareType] isEqualToString:@"channel"]) {
+			[[SYNTrackingManager sharedManager] trackCollectionShareWithService:@"twitter"];
+		}
+		
 		UIViewController *presentingViewController = shareViewController.presentingViewController;
         [presentingViewController dismissViewControllerAnimated: YES
 													 completion: ^{

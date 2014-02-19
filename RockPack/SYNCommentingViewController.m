@@ -18,6 +18,7 @@
 #import "SYNCommentsModel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+SYNColor.h"
+#import "SYNTrackingManager.h"
 
 #define kMaxCommentCharacters 120
 #define kCacheTimeInMinutes 1
@@ -174,7 +175,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
     
-    
+    [[SYNTrackingManager sharedManager] trackCommentingScreenView];
 }
 
 

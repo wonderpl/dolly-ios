@@ -16,11 +16,10 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "SYNOAuthNetworkEngine.h"
 #import "Friend.h"
-#import "GAI.h"
 #import "SYNFacebookManager.h"
 #import "SYNMasterViewController.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "SYNTrackingManager.h"
 
 @interface SYNFriendsViewController () <UIScrollViewDelegate> {
     BOOL hasAttemptedToLoadData;
@@ -62,38 +61,29 @@
     self.preLoginLabel.text = NSLocalizedString (@"friends_invite", nil);
     [self.activityIndicator hidesWhenStopped];
 	
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    if ([[SYNFacebookManager sharedFBManager] hasActiveSession])
-    {
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+    if ([[SYNFacebookManager sharedFBManager] hasActiveSession]) {
         self.facebookLoginButton.hidden = YES;
         
         self.friendsCollectionView.hidden = NO;
         self.activityIndicator.hidden = NO;
-        
-        
+		
         [self fetchAndDisplayFriends];
         
-        [tracker set: kGAIScreenName
-               value: @"Friends All"];
-    }
-    else
-    {
-        
+		[[SYNTrackingManager sharedManager] trackFriendsScreenView];
+    } else {
         self.facebookLoginButton.hidden = NO;
         
         self.friendsCollectionView.hidden = YES;
         self.activityIndicator.hidden = YES;
         
-        [tracker set: kGAIScreenName
-               value: @"Friends Fb Connect"];
+		[[SYNTrackingManager sharedManager] trackFriendsFBConnectScreenView];
     }
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
 }
-
-
 
 -(void)fetchAndDisplayFriends
 {

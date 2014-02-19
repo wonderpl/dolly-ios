@@ -6,11 +6,11 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAccountSettingOtherTableViewCell.h"
 #import "SYNAccountSettingsFullNameInput.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAccountSettingsFullNameInput () <UITextFieldDelegate>
 
@@ -30,16 +30,6 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Full name"
-                                                            value: nil] build]];
-    
-    
     
     self.nameIsPublic = self.appDelegate.currentUser.fullNameIsPublicValue;
     
@@ -166,6 +156,8 @@
         self.saveButton.hidden = NO;
         return;
     }
+	
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Full name"];
     
     // must be done in steps as it is a series of API calls, first name first
     

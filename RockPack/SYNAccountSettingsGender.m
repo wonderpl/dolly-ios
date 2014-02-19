@@ -14,6 +14,7 @@
 #import "SYNAccountSettingOtherTableViewCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAccountSettingsGender ()
 
@@ -35,14 +36,7 @@
 {
     [super viewDidLoad];
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Gender"
-                                                            value: nil] build]];
     self.view.backgroundColor = [UIColor whiteColor];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -162,6 +156,8 @@
 
 - (void) changeUserGenderForValue: (NSString*) newGender
 {
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Gender"];
+	
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     
     [self.appDelegate.oAuthNetworkEngine changeUserField: @"gender"
