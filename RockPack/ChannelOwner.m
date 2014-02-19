@@ -125,6 +125,10 @@
     }
     
     // Simple objects
+    
+    self.uniqueId = [dictionary objectForKey:@"id"
+                        withDefault: @""];
+    
     self.thumbnailURL = [dictionary objectForKey: @"avatar_thumbnail_url"
                                      withDefault: @""];
     
