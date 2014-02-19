@@ -247,10 +247,7 @@
         // == BG Colour of the search bar that is only found in iphone for channals that are being followed
         UITextField *txfSearchField = [self.followingSearchBar valueForKey:@"_searchField"];
         if(txfSearchField)
-            txfSearchField.backgroundColor = [UIColor colorWithRed: (255.0f / 255.0f)
-                                                             green: (255.0f / 255.0f)
-                                                              blue: (255.0f / 255.0f)
-                                                             alpha: 1.0f];
+            txfSearchField.backgroundColor = [UIColor dollySearchBarColor];
         
         // == Layout for the expanded create new channel cell
         self.channelExpandedLayout.minimumInteritemSpacing = 0;
@@ -396,6 +393,12 @@
         [self updateTabStates];
     }
     
+    
+    if (IS_IPAD) {
+        self.followingSearchBar.layer.borderWidth = 1.0f;
+        self.followingSearchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
+    }
+
 }
 
 -(void) setFollowersCountLabel

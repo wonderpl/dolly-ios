@@ -33,9 +33,11 @@
 + (UIColor *) dollyTabColorSelectedText;
 + (UIColor *) dollyMoodColor;
 
-+ (UIColor *)facebookColor;
-+ (UIColor *)lighterColorForColor:(UIColor *)c;
-+ (UIColor *)darkerColorForColor:(UIColor *)c;
++ (UIColor *) dollySearchBarColor;
+
++ (UIColor *) facebookColor;
++ (UIColor *) lighterColorForColor:(UIColor *)c;
++ (UIColor *) darkerColorForColor:(UIColor *)c;
 
 + (UIColor *)defaultCategoryColor;
 

@@ -85,8 +85,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.searchBar.layer.borderWidth = 1.0f;
-    self.searchBar.layer.borderColor = [[UIColor whiteColor] CGColor];
+    if (IS_IPAD) {
+        self.searchBar.layer.borderWidth = 1.0f;
+        self.searchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
+    }
     
     
     
@@ -95,10 +97,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     // change the BG color of the text field inside the searcBar
     UITextField *txfSearchField = [self.searchBar valueForKey:@"_searchField"];
     if(txfSearchField)
-        txfSearchField.backgroundColor = [UIColor colorWithRed: (255.0f / 255.0f)
-                                                         green: (255.0f / 255.0f)
-                                                          blue: (255.0f / 255.0f)
-                                                         alpha: 1.0f];
+        txfSearchField.backgroundColor = [UIColor dollySearchBarColor];
     
     // == Set the Collection View's Cells == //
     
@@ -114,7 +113,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
         // to allow for full screen scroll of the categories
         UIEdgeInsets cInset = self.categoriesCollectionView.contentInset;
-        cInset.top = 109.f;
+        cInset.top = 108.f;
         self.categoriesCollectionView.contentInset = cInset;
     }
     
@@ -154,11 +153,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 				   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 						  withReuseIdentifier:[SYNDiscoverSectionView reuseIdentifier]];
 
-    self.categoriesCollectionView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
+    self.sideContainerView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
     if (IS_RETINA) {
-        self.categoriesCollectionView.layer.borderWidth = 0.5f;
+        self.sideContainerView.layer.borderWidth = 0.5f;
     } else {
-        self.categoriesCollectionView.layer.borderWidth = 1.0f;
+        self.sideContainerView.layer.borderWidth = 1.0f;
     }
     
     [self reloadCategories];

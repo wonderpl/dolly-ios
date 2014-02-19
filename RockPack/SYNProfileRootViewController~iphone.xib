@@ -14,7 +14,7 @@
                 <outlet property="coverImage" destination="q5m-iH-3Ci" id="oEa-Yb-xDy"/>
                 <outlet property="followAllButton" destination="vH4-no-prL" id="fmo-Ly-CWJ"/>
                 <outlet property="followersCountLabel" destination="Rc9-xd-QR7" id="lxg-eW-avF"/>
-                <outlet property="followingSearchBar" destination="rgJ-Mu-6Zf" id="6CH-uL-YOb"/>
+                <outlet property="followingSearchBar" destination="vCT-E4-L9p" id="o4n-Yq-caX"/>
                 <outlet property="followingTabButton" destination="55i-48-sal" id="RFy-8Z-R5x"/>
                 <outlet property="fullNameLabel" destination="29c-Ki-1uc" id="55S-Wa-o38"/>
                 <outlet property="moreButton" destination="SOt-r8-4Fb" id="kgc-rr-xHh"/>
@@ -53,7 +53,7 @@
                         <size key="itemSize" width="320" height="71"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="538" maxX="0.0" maxY="150"/>
+                        <inset key="sectionInset" minX="0.0" minY="536" maxX="0.0" maxY="150"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -61,13 +61,14 @@
                         <outlet property="delegate" destination="-1" id="CxB-n2-HkS"/>
                     </connections>
                 </collectionView>
-                <searchBar contentMode="redraw" translucent="NO" id="rgJ-Mu-6Zf" userLabel="Search Bar - Subscriber Search">
+                <searchBar contentMode="redraw" id="vCT-E4-L9p">
                     <rect key="frame" x="0.0" y="494" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="barTintColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" white="0.4972912864963504" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="FgS-NP-jTw"/>
+                        <outlet property="delegate" destination="-1" id="cIK-nM-xi0"/>
                     </connections>
                 </searchBar>
                 <collectionView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="0Yx-dc-wS8" userLabel="Collection View - Channel collection">

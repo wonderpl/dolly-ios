@@ -167,6 +167,14 @@ return [UIColor colorWithRed: 136.0f / 255.0f
 	return RGB(61, 90, 151);
 }
 
++ (UIColor *) dollySearchBarColor
+{
+   return [UIColor colorWithRed: (196.0f / 255.0f)
+                    green: (196.0f / 255.0f)
+                     blue: (196.0f / 255.0f)
+                    alpha: 1.0f];
+}
+
 + (UIColor *)lighterColorForColor:(UIColor *)c
 {
     CGFloat r, g, b, a;
