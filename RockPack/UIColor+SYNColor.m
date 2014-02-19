@@ -190,7 +190,7 @@ return [UIColor colorWithRed: 136.0f / 255.0f
 }
 
 + (UIColor *)defaultCategoryColor {
-	return WA(172, 1);
+	return WA(200, 1);
 }
 
 @end
