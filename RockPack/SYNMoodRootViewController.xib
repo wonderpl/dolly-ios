@@ -53,11 +53,11 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </imageView>
                         <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="41P-4L-9Er">
-                            <rect key="frame" x="94" y="662" width="125" height="36"/>
+                            <rect key="frame" x="89.5" y="662" width="134" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" title="Choose another">
-                                <color key="titleColor" red="0.73725490199999999" green="0.73333333329999995" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.53333336114883423" green="0.52549022436141968" blue="0.65882354974746704" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
