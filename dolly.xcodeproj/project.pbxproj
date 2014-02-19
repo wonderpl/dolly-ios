@@ -7249,6 +7249,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7263,6 +7264,7 @@
 				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
 		};
@@ -7270,6 +7272,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7284,6 +7287,7 @@
 				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -7291,6 +7295,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -7305,6 +7310,7 @@
 				INFOPLIST_FILE = "dollyTests/dollyTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = dollyTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = AdHoc;
 		};
