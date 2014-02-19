@@ -114,7 +114,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
         // to allow for full screen scroll of the categories
         UIEdgeInsets cInset = self.categoriesCollectionView.contentInset;
-        cInset.top = 110.f;
+        cInset.top = 109.f;
         self.categoriesCollectionView.contentInset = cInset;
     }
     
