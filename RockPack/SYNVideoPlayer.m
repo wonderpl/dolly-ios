@@ -325,24 +325,29 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
 		BOOL pinchedIn = (gestureRecognizer.scale < 1.0);
 		if (pinchedIn && self.maximised) {
-			self.maximised = NO;
-			[self.delegate videoPlayerMinimise];
+			[self handleVideoPlayerMinimise];
 		} else if (!pinchedIn && !self.maximised) {
-			self.maximised = YES;
-			[self.delegate videoPlayerMaximise];
+			[self handleVideoPlayerMaximise];
 		}
 	}
 }
 
-
 - (void)maximiseMinimiseGestureRecognizerTapped:(UITapGestureRecognizer *)gestureRecognizer {
 	if (self.maximised) {
-		self.maximised = NO;
-		[self.delegate videoPlayerMinimise];
+		[self handleVideoPlayerMinimise];
 	} else {
-		self.maximised = YES;
-		[self.delegate videoPlayerMaximise];
+		[self handleVideoPlayerMaximise];
 	}
+}
+
+- (void)handleVideoPlayerMaximise {
+	self.maximised = YES;
+	[self.delegate videoPlayerMaximise];
+}
+
+- (void)handleVideoPlayerMinimise {
+	self.maximised = NO;
+	[self.delegate videoPlayerMinimise];
 }
 
 @end
