@@ -448,51 +448,6 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
 }
 
-#pragma mark - Social Delegate
-
-
-- (void) followControlPressed: (SYNSocialButton *) socialControl {
-    // either a ChannelOwner of a Recomendation cell will link to a ChannelOwner (see SYNOnBoardingCell.m)
-    
-    socialControl.enabled = NO;
-    
-    ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
-    
-    if(!channelOwner)
-        return;
-    
-    if(socialControl.selected == NO)
-    {
-        [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
-                                           completionHandler: ^(id responce) {
-                                               socialControl.selected = YES;
-                                               socialControl.enabled = YES;
-                                               
-                                               
-                                           } errorHandler: ^(id error) {
-                                               
-                                               socialControl.enabled = YES;
-                                               
-                                           }];
-    }
-    else
-    {
-        [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
-                                             completionHandler:^(id responce) {
-                                                 
-                                                 socialControl.selected = NO;
-                                                 socialControl.enabled = YES;
-                                                 
-                                                 
-                                             } errorHandler:^(id error) {
-                                                 
-                                                 socialControl.enabled = YES;
-                                                 
-                                             }];
-    }
-    
-}
-
 #pragma mark - AutoRotation
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
