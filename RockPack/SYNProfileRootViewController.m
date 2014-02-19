@@ -5,8 +5,6 @@
 //  Created by Nick Banks on 24/01/2013.
 //  Copysubscriptions (c) Rockpack Ltd. All subscriptionss reserved.
 //
-//Alertview to 2 channels create with the same name
-
 
 #import "AppConstants.h"
 #import "Channel.h"
@@ -575,9 +573,7 @@
 
 -(void) setUpUserProfile
 {
-    
-    
-    self.userNameLabel.text = self.channelOwner.username;
+    self.userNameLabel.text = [NSString stringWithFormat:@"@%@", self.channelOwner.username];
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:12.0]];
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     
@@ -600,7 +596,6 @@
     
     [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.followAllButton.titleLabel.font.pointSize]];
     self.fullNameLabel.text = self.channelOwner.displayName;
-    self.userNameLabel.text = self.channelOwner.username;
     
     [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
     [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
@@ -1892,11 +1887,7 @@
     self.dataRequestRangeChannel = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
     self.dataRequestRangeSubscriptions = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
     
-    
-    
-    
-    
-    self.userNameLabel.text = self.channelOwner.username;
+    self.userNameLabel.text = [NSString stringWithFormat:@"@%@", self.channelOwner.username];
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     
@@ -2071,21 +2062,6 @@
     self.shouldBeginEditing = YES;
     
     return boolToReturn;
-}
-
--(void) calculateOffsetForSearch
-{
-    if (self.searchMode)
-    {
-        
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBAR_Y);
-    }
-    else
-    {
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
-        
-    }
-    
 }
 
 - (void)enableCancelButton:(UISearchBar *)searchBar

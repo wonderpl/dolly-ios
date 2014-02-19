@@ -617,8 +617,6 @@ static NSString* PlaceholderText = @"Say something nice";
 	ChannelOwner *channelOwner = [ChannelOwner channelOwnerWithUsername:username
 												 inManagedObjectContext:[appDelegate mainManagedObjectContext]];
 	
-	NSLog(@"Channel owner: %@", channelOwner);
-
     SYNAbstractViewController* controllerToShowProfile;
     if (IS_IPHONE) {
         controllerToShowProfile = self;
