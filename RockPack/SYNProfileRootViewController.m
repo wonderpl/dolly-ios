@@ -96,7 +96,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 @property (strong, nonatomic) IBOutlet UITextView *aboutMeTextView;
 
-@property (strong, nonatomic) IBOutlet UIButton *editButton;
 @property (strong, nonatomic) IBOutlet UIButton *collectionsTabButton;
 @property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
 @property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
@@ -599,10 +598,6 @@
     self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:13.0];
     self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
     
-    [self.editButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.editButton.titleLabel.font.pointSize]];
-    
-    [self.editButton setTitle:NSLocalizedString(@"Edit my profile", nil) forState:UIControlStateNormal];
-    
     [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.followAllButton.titleLabel.font.pointSize]];
     self.fullNameLabel.text = self.channelOwner.displayName;
     self.userNameLabel.text = self.channelOwner.username;
@@ -757,7 +752,6 @@
 {
     if (profileType == kModeMyOwnProfile)
     {
-        self.editButton.hidden = NO;
         self.followAllButton.hidden = YES;
         self.uploadAvatar.hidden = NO;
         self.moreButton.hidden = NO;
@@ -767,7 +761,6 @@
     }
     if (profileType == kModeOtherUsersProfile)
     {
-        self.editButton.hidden = YES;
         self.followAllButton.hidden = NO;
         self.moreButton.hidden = YES;
         self.uploadAvatar.hidden = YES;
@@ -1613,7 +1606,6 @@
             self.segmentedControlsView.transform = move;
             self.followAllButton.transform = move;
             self.moreButton.transform = move;
-            self.editButton.transform = move;
             self.followingSearchBar.transform = move;
             self.followersCountLabel.transform = move;
             self.uploadAvatarButton.transform = move;
@@ -2461,8 +2453,6 @@
 - (IBAction)editButtonTapped:(id)sender
 {
     
-    
-    
     [self killScroll];
     [self.createChannelCell.descriptionTextView resignFirstResponder];
     [self.createChannelCell.createTextField resignFirstResponder];
@@ -2505,7 +2495,6 @@
         self.subscriptionThumbnailCollectionView.alpha = ALPHA_IN_EDIT;
         self.profileImageView.alpha = ALPHA_IN_EDIT;
         
-        self.editButton.alpha = 0.0f;
         self.moreButton.alpha = 0.0f;
         self.followersCountLabel.alpha = 0.0f;
         
@@ -2555,7 +2544,6 @@
         self.coverImage.alpha = 1.0f;
         self.profileImageView.alpha = 1.0f;
         self.segmentedControlsView.alpha = 1.0f;
-        self.editButton.alpha = 1.0f;
         self.moreButton.alpha = 1.0f;
         self.followersCountLabel.alpha = 1.0f;
         self.channelThumbnailCollectionView.alpha = 1.0f;
