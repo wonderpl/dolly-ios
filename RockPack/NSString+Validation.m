@@ -10,10 +10,6 @@
 
 @implementation NSString (Validation)
 
-- (BOOL)isValidFullName {
-	return [self matchesRegex:@"^[a-zA-Z\\.]+$"];
-}
-
 - (BOOL)isValidUsername {
 	return [self matchesRegex:@"^[a-zA-Z0-9\\._]+$"];
 }

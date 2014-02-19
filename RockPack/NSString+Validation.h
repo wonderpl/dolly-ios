@@ -10,7 +10,6 @@
 
 @interface NSString (Validation)
 
-- (BOOL)isValidFullName;
 - (BOOL)isValidUsername;
 - (BOOL)isValidEmail;
 - (BOOL)isValidPassword;
