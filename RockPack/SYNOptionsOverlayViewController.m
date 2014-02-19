@@ -273,9 +273,7 @@ typedef enum {
             
            UINavigationController *tmpNav = appDelegate.navigationManager.containerController.currentViewController;
             
-            
-            NSLog(@"tmpNavtmpNav%@", tmpNav);
-            
+                    
             [((SYNProfileRootViewController*)[tmpNav.viewControllers objectAtIndex:tmpNav.viewControllers.count-1]) editButtonTapped:nil];
             
             
