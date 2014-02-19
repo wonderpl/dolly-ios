@@ -2598,7 +2598,14 @@
                                              
                                              [self cancelCreateChannel];
                                              //takes 0.6f for the cancel animation to end
-                                             [self performSelector:@selector(createNewCollection) withObject:nil afterDelay:0.6f];
+                                             
+                                             if (IS_IPHONE) {
+                                                 [self performSelector:@selector(createNewCollection) withObject:nil afterDelay:0.6f];
+                                                 
+                                             } else {
+                                                 [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
+
+                                             }
 
                                              
                                          } errorHandler: ^(id error) {
