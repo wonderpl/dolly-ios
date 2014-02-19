@@ -2596,20 +2596,10 @@
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
                                              
-                                             // shows the message label from the MasterViewController
-                                             //                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                             
-                                            //                                            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                             //                                                                                                    action: @"channelCreated"
-                                             //                                                                                                     label: @""
-                                             //                                                                                                     value: nil] build]];
-                                             
-                                             //NSString *channelId = resourceCreated[@"id"];
-                                             
                                              [self cancelCreateChannel];
-                                             
-                                             [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
-                                             
+                                             //takes 0.6f for the cancel animation to end
+                                             [self performSelector:@selector(createNewCollection) withObject:nil afterDelay:0.6f];
+
                                              
                                          } errorHandler: ^(id error) {
                                              
@@ -2647,6 +2637,56 @@
     
     
     
+    
+}
+
+- (void) createNewCollection {
+    
+    
+    NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
+    NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
+    MKNKUserErrorBlock errorBlock = ^(id error) {
+        
+    };
+
+    __block float oldCount = self.channelOwner.channelsSet.count+1;
+    
+
+    [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                       onCompletion: ^(id dictionary) {
+                                           NSError *error = nil;
+                                           ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
+                                                                                                                                     error: &error];
+                                           
+                                           
+                                    
+                                           if (channelOwnerFromId)
+                                           {
+                                               [channelOwnerFromId setAttributesFromDictionary: dictionary
+                                                                           ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
+                                               if (self.channelOwner.channelsSet.count+1 > oldCount) {
+                                            
+                                                   [self.channelThumbnailCollectionView performBatchUpdates:^{
+
+                                                   [self.channelThumbnailCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:2 inSection:0]]];
+                                                   } completion:^(BOOL finished) {
+                                                       CGPoint tmp = self.channelThumbnailCollectionView.contentOffset;
+                                                       tmp.y+=1;
+                                                       [self.channelThumbnailCollectionView setContentOffset:tmp animated:YES];
+                                                   }];
+                                                   
+                                               }
+                                           }
+                                           else
+                                           {
+                                               DebugLog (@"Channel disappeared from underneath us");
+                                           }
+                                           
+                                           
+                                           
+                                       } onError: errorBlock];
+    
+
     
 }
 
@@ -3128,14 +3168,12 @@ finishedWithImage: (UIImage *) image
             
             cell.frame = frame;
         };
-        
+
         [UIView transitionWithView:cell
                           duration:0.4f
                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateProfileMode
                         completion:^(BOOL finished) {
-                            
-                            
                             
                             if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
                                 [UIView animateWithDuration:0.4f animations:^{
@@ -3143,15 +3181,14 @@ finishedWithImage: (UIImage *) image
                                 }];
                             }
                         }];
-        
-        [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
-            //            [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414)];
-            
-        } completion:Nil];
-        
     }
-    
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
+}
+
+-(void) cancelCreateChannelWithNoTime
+{
+    [self updateCollectionLayout];
+    
     
 }
 
@@ -3180,6 +3217,8 @@ finishedWithImage: (UIImage *) image
 
 -(void) updateCollectionLayout
 {
+    
+    NSLog(@")))))))))))))");
     //  self.channelThumbnailCollectionView.collectionViewLayout = self.channelExpandedLayout;
     CGPoint tmpPoint = self.channelThumbnailCollectionView.contentOffset;
     
