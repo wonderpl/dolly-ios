@@ -2486,7 +2486,10 @@
          @{NSFontAttributeName:[UIFont regularCustomFontOfSize:19.0]}    forState:UIControlStateNormal];
         
     }
-    
+    self.barBtnBack = self.navigationItem.leftBarButtonItem;
+    self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
+    self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
+
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = ALPHA_IN_EDIT;
@@ -2498,9 +2501,6 @@
         self.moreButton.alpha = 0.0f;
         self.followersCountLabel.alpha = 0.0f;
         
-        self.barBtnBack = self.navigationItem.leftBarButtonItem;
-        self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
-        self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
         
         self.aboutMeTextView.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:1.0];
         self.uploadCoverPhotoButton.alpha = 1.0f;
@@ -2539,6 +2539,9 @@
 	self.aboutMeTextView.userInteractionEnabled = NO;
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+    self.navigationItem.leftBarButtonItem = self.barBtnBack;
+    self.navigationItem.rightBarButtonItem = nil;
+
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = 1.0f;
@@ -2549,8 +2552,6 @@
         self.channelThumbnailCollectionView.alpha = 1.0f;
         self.subscriptionThumbnailCollectionView.alpha = 1.0f;
         
-        self.navigationItem.leftBarButtonItem = self.barBtnBack;
-        self.navigationItem.rightBarButtonItem = nil;
         self.aboutMeTextView.backgroundColor = [UIColor whiteColor];
         
         self.uploadAvatarButton.alpha = 0.0f;
@@ -3099,10 +3100,11 @@ finishedWithImage: (UIImage *) image
             
         }
         
+        self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
+        self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
+
         [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
             [self setCreateOffset];
-            self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
-            self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
             
         } completion:Nil];
     }
