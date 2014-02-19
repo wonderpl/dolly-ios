@@ -457,6 +457,10 @@
         }
     }
     
+    //View gets hidden in view will dissapear because the ios 7 swipe gesture to go back, the collection covered the last screen
+    self.channelThumbnailCollectionView.hidden=NO;
+    self.subscriptionThumbnailCollectionView.hidden=NO;
+    
 }
 
 
