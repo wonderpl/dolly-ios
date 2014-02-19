@@ -379,8 +379,11 @@
         self.followingSearchBar.frame = tmp;
     }
     
-    // == set up views
-    [self setUpUserProfile];
+//    // == set up views
+
+    if (self.modeType == kModeMyOwnProfile) {
+        [self setUpUserProfile];
+    }
     // == set up the segmented controller
     [self setUpSegmentedControl];
     
@@ -586,10 +589,8 @@
     
     //other user cover photos are set in set channel owner succcess block as
     //places such as the cover photo set yet
-//    if (modeType == kModeMyOwnProfile) {
-        [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
-        [self setProfileImage:self.channelOwner.thumbnailURL];
-//    }
+    [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
+    [self setProfileImage:self.channelOwner.thumbnailURL];
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
@@ -620,8 +621,12 @@
 
 -(void) setProfileImage : (NSString*) thumbnailURL
 {
+    
+    if (self.profileImageView.image) {
+        return;
+    }
+
     UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
-    self.profileImageView.image = placeholderImage;
     
     if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
         
@@ -663,6 +668,10 @@
 -(void) setCoverphotoImage: (NSString*) thumbnailURL
 {
     
+    
+    if (self.coverImage.image) {
+        return;
+    }
     UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto.jpg"];
     
     if (![thumbnailURL isEqualToString:@""]){ // there is a url string
@@ -1867,7 +1876,6 @@
                                                    [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
-
                                                    [self setUpUserProfile];
                                                }
                                                else
