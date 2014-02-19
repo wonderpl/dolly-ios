@@ -284,11 +284,6 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-    
-}
-
 -(void) setupFonts
 {
     
@@ -418,6 +413,7 @@
 {
     
     self.txtFieldChannelName.text = self.channel.title;
+
     self.lblFullName.text = self.channel.channelOwner.displayName;
     self.lblChannelTitle.text = [self.channel.title uppercaseString];
     
