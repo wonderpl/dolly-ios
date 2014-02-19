@@ -27,6 +27,8 @@ static NSDateFormatter *dateFormatter = nil;
     instance.dateOfDayAdded = existingInstance.dateOfDayAdded;
     instance.title = existingInstance.title;
     instance.commentCount = existingInstance.commentCount;
+    instance.commentCountValue = existingInstance.commentCountValue;
+    instance.starredByUserValue = existingInstance.starredByUserValue;
     
     instance.video = [Video	instanceFromVideo: existingInstance.video
                     usingManagedObjectContext: managedObjectContext];
