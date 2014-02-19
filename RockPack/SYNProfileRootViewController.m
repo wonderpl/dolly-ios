@@ -595,7 +595,7 @@
     self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
     
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:13.0];
+    self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:11.0];
     self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
     
     [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.followAllButton.titleLabel.font.pointSize]];
