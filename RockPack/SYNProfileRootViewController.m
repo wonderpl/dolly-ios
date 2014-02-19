@@ -5,8 +5,6 @@
 //  Created by Nick Banks on 24/01/2013.
 //  Copysubscriptions (c) Rockpack Ltd. All subscriptionss reserved.
 //
-//Alertview to 2 channels create with the same name
-
 
 #import "AppConstants.h"
 #import "Channel.h"
@@ -2072,21 +2070,6 @@
     self.shouldBeginEditing = YES;
     
     return boolToReturn;
-}
-
--(void) calculateOffsetForSearch
-{
-    if (self.searchMode)
-    {
-        
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, SEARCHBAR_Y);
-    }
-    else
-    {
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
-        
-    }
-    
 }
 
 - (void)enableCancelButton:(UISearchBar *)searchBar
