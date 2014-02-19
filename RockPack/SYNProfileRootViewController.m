@@ -3233,7 +3233,6 @@ finishedWithImage: (UIImage *) image
 -(void) updateCollectionLayout
 {
     
-    NSLog(@")))))))))))))");
     //  self.channelThumbnailCollectionView.collectionViewLayout = self.channelExpandedLayout;
     CGPoint tmpPoint = self.channelThumbnailCollectionView.contentOffset;
     
