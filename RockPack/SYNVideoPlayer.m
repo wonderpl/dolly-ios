@@ -83,14 +83,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 #pragma mark - SYNScrubberBarDelegate
 
-- (void)scrubberBarFullScreenToggled:(BOOL)fullScreen {
-	if (fullScreen) {
-		[self.delegate videoPlayerMaximise];
-	} else {
-		[self.delegate videoPlayerMinimise];
-	}
-}
-
 - (void)scrubberBarPlayPauseToggled:(BOOL)playing {
 	if (playing) {
 		[self play];
