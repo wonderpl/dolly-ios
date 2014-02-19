@@ -146,7 +146,7 @@
                     </connections>
                 </button>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="zi6-5Y-tAR" userLabel="View - Moving Header View">
-                    <rect key="frame" x="-1" y="364" width="321" height="43"/>
+                    <rect key="frame" x="0.0" y="364" width="321" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="29c-Ki-1uc">
