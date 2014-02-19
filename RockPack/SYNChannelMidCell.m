@@ -77,11 +77,11 @@
     
     if (IS_IPHONE)
     {
-        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:12]];
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:14]];
     }
     else
     {
-        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:17]];
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:14]];
     }
     
     if (IS_IPAD){
