@@ -2659,6 +2659,7 @@
     __block float oldCount = self.channelOwner.channelsSet.count+1;
     
 
+    
     [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                        onCompletion: ^(id dictionary) {
                                            NSError *error = nil;
@@ -3072,6 +3073,9 @@ finishedWithImage: (UIImage *) image
             }
             
             cell.frame = frame;
+            
+            self.coverImage.alpha = ALPHA_IN_EDIT;
+
         };
         
         [UIView transitionWithView:cell
@@ -3174,6 +3178,8 @@ finishedWithImage: (UIImage *) image
             }
             
             cell.frame = frame;
+            self.coverImage.alpha = 1.0f;
+
         };
 
         [UIView transitionWithView:cell
