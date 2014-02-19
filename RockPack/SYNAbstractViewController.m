@@ -571,51 +571,7 @@
         if(!channel)
             return;
         
-        
-        // Temporarily disable the button to prevent multiple-clicks
-        socialControl.enabled = NO;
-        
-        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:channel.uniqueId];
-        
-        // toggle subscription from/to channel //
-        if (channel.subscribedByUserValue == NO)
-        {
-            // Subscribe
-
-            [SYNActivityManager.sharedInstance subscribeToChannel:channel
-                                                completionHandler: ^(NSDictionary *responseDictionary) {
-                                                        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                                        
-                                                        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                               action: @"userSubscription"
-                                                                                                                label: nil
-                                                                                                                value: nil] build]];
-                                                        channel.hasChangedSubscribeValue = YES;
-//                                                        channel.subscribedByUserValue = YES;
-//                                                        channel.subscribersCountValue += 1;
-                                                    
-                                                        socialControl.selected = YES;
-                                                        socialControl.enabled = YES;
-                                                        
-                                                        
-                                                    } errorHandler: ^(NSDictionary *errorDictionary) {
-                                                        socialControl.enabled = YES;
-                                                    }];
-        }
-        else
-        {
-            // Unsubscribe
-            [SYNActivityManager.sharedInstance unsubscribeToChannel:channel
-                                                      completionHandler: ^(NSDictionary *responseDictionary) {
-                                                          channel.hasChangedSubscribeValue = YES;
-//                                                          channel.subscribedByUserValue = NO;
-//                                                          channel.subscribersCountValue -= 1;
-                                                          socialControl.selected = NO;
-                                                          socialControl.enabled = YES;
-                                                      } errorHandler: ^(NSDictionary *errorDictionary) {
-                                                          socialControl.enabled = YES;
-                                                      }];
-        }
+		[self followButtonPressed:socialControl withChannel:channel];
     }
     else
     {
@@ -872,10 +828,6 @@
 	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
     
 	if (channel.subscribedByUserValue) {
-        
-//		[appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:appDelegate.currentOAuth2Credentials.userId
-//														  channelId:channel.uniqueId
-        
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
 												  completionHandler:^(NSDictionary *responseDictionary) {
 													  
@@ -888,21 +840,14 @@
         
 		
 	} else {
-//		[appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-//													   channelURL: channel.resourceURL
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
-
-    completionHandler: ^(NSDictionary *responseDictionary) {
+											  completionHandler: ^(NSDictionary *responseDictionary) {
 													id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
 													
 													[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
 																										   action: @"userSubscription"
 																											label: nil
 																											value: nil] build]];
-//													channel.hasChangedSubscribeValue = YES;
-//													channel.subscribedByUserValue = YES;
-//													channel.subscribersCountValue += 1;
-								
 													button.selected = YES;
 													button.enabled = YES;
 												} errorHandler: ^(NSDictionary *errorDictionary) {
