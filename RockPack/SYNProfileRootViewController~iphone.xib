@@ -184,7 +184,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="uploadPicture:" destination="-1" eventType="touchUpInside" id="ZOJ-m1-beK"/>
+                        <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="IJp-fL-DR8"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="5Wb-qH-nzQ" userLabel="ImageView - Avatar">
