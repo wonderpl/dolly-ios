@@ -458,8 +458,10 @@
     }
     
     //View gets hidden in view will dissapear because the ios 7 swipe gesture to go back, the collection covered the last screen
-    self.channelThumbnailCollectionView.hidden=NO;
-    self.subscriptionThumbnailCollectionView.hidden=NO;
+    if (IS_IPHONE) {
+        self.channelThumbnailCollectionView.hidden=NO;
+        self.subscriptionThumbnailCollectionView.hidden=NO;
+    }
     
 }
 
@@ -581,13 +583,13 @@
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:12.0]];
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     
-    [self setProfileImage:self.channelOwner.thumbnailURL];
     
     //other user cover photos are set in set channel owner succcess block as
     //places such as the cover photo set yet
-    if (modeType == kModeMyOwnProfile) {
+//    if (modeType == kModeMyOwnProfile) {
         [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
-    }
+        [self setProfileImage:self.channelOwner.thumbnailURL];
+//    }
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
@@ -1865,8 +1867,7 @@
                                                    [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
-                                                   [self setCoverphotoImage:channelOwnerFromId.coverPhotoURL];
-                                                   
+
                                                    [self setUpUserProfile];
                                                }
                                                else
