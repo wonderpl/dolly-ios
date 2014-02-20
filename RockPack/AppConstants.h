@@ -471,7 +471,7 @@ typedef enum {
 #define kGoogleAnalyticsId @"UA-46534300-1"
 #else
 // Id to use for production
-#define kGoogleAnalyticsId @"UA-38220268-4"
+#define kGoogleAnalyticsId @"UA-46520786-1"
 #endif
 
 // Custom GA Dimensions
