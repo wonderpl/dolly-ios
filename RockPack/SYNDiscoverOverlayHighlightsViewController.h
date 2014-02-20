@@ -1,5 +1,5 @@
 //
-//  SYNDiscoverOverlayViewController.h
+//  SYNDiscoverOverlayHighlightsViewController.h
 //  dolly
 //
 //  Created by Cong Le on 20/02/2014.
@@ -8,6 +8,6 @@
 
 #import "SYNInBoardingViewController.h"
 
-@interface SYNDiscoverOverlayViewController : SYNInBoardingViewController
+@interface SYNDiscoverOverlayHighlightsViewController : SYNInBoardingViewController
 
 @end

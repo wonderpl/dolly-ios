@@ -6,13 +6,15 @@
 //  Copyright (c) 2014 Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNDiscoverOverlayViewController.h"
+#import "SYNDiscoverOverlayVideoViewController.h"
+#import "SYNDeviceManager.h"
 
-@interface SYNDiscoverOverlayViewController ()
+@interface SYNDiscoverOverlayVideoViewController ()
+@property (strong, nonatomic) IBOutlet UIView *container;
 
 @end
 
-@implementation SYNDiscoverOverlayViewController
+@implementation SYNDiscoverOverlayVideoViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,5 +36,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    if (IS_IPAD) {
+        
+        if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+            self.container.frame = CGRectMake(330, 437, 343, 114);
+        } else {
+            self.container.frame = CGRectMake(226, 437, 343, 114);
+        }
+    }
+}
+
+
 
 @end
