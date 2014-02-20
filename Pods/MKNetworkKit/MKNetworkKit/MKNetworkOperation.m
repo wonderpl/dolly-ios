@@ -663,8 +663,6 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
       return nil;
     }
       
-      NSLog(@"finalURL : %@", finalURL);
-    
     self.request = [NSMutableURLRequest requestWithURL:finalURL
                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                        timeoutInterval:kMKNetworkKitRequestTimeOutInSeconds];
@@ -1475,7 +1473,6 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
     dispatch_async(dispatch_get_main_queue(), ^{
       
       jsonDecompressionHandler(returnValue);
-        NSLog(@"returnValue : %@", returnValue);
     });
   });
 }

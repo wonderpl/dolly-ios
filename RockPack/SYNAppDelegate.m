@@ -425,7 +425,6 @@
 
 - (void) loginCompleted: (NSNotification *) notification
 {
-    [SYNLoginManager sharedManager].registrationCheck = YES;
     
     if ([SYNLoginManager sharedManager].registrationCheck == YES) {
         self.onBoardingViewController = [[SYNOnBoardingViewController alloc]init];

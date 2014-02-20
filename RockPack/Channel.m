@@ -51,8 +51,6 @@
     
     if (!(ignoringObjects & kIgnoreChannelOwnerObject))
     {
-        
-#warning did not go through
         copyChannel.channelOwner = [ChannelOwner instanceFromChannelOwner: channel.channelOwner
                                                                 andViewId: viewId
                                                 usingManagedObjectContext: managedObjectContext

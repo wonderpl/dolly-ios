@@ -2929,15 +2929,11 @@ finishedWithImage: (UIImage *) image
                         completion:^(BOOL finished) {
 
                             
-                            [UIView animateWithDuration:0.5 animations:^{
-                                
-                            } completion:^(BOOL finished) {
-                                if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
-                                    [UIView animateWithDuration:0.4f animations:^{
-                                        [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
-                                    }];
-                                }
-                            }];
+                            if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
+                                [UIView animateWithDuration:0.4f animations:^{
+                                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
+                                }];
+                            }
                         }];
     }
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
