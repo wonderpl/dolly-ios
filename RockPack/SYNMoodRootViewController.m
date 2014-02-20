@@ -21,6 +21,7 @@
 #import "SYNVideoPlayerAnimator.h"
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchVideoPlayerViewController.h"
+#import "SYNMoodOverlayViewController.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 #define WATCH_BUTTON_ANIMATION_TIME 0.4
@@ -109,6 +110,27 @@
     self.randomVideoArray = @[];
     self.videosArray = @[];
     self.randomVideoIndex = 0;
+}
+
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    SYNMoodOverlayViewController* moodOverlay = [[SYNMoodOverlayViewController alloc] init];
+    
+    // Set frame to full screen
+    CGRect vFrame = moodOverlay.view.frame;
+    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+    moodOverlay.view.frame = vFrame;
+    moodOverlay.view.alpha = 0.0f;
+    
+    [self addChildViewController:moodOverlay];
+    [self.view addSubview:moodOverlay.view];
+
+    [UIView animateWithDuration:0.3 animations:^{
+        moodOverlay.view.alpha = 0.4f;
+    }];
+
+    
 }
 
 #pragma mark - Getting Mood Objects

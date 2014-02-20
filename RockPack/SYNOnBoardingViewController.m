@@ -176,6 +176,12 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     }];
 }
 
+- (UIStatusBarStyle) preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+
 - (void) getRecommendationsFromRemote {
     
     self.spinner.hidden = NO;

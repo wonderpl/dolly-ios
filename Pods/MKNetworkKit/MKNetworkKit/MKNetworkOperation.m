@@ -662,6 +662,8 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
       DLog(@"Cannot create a URL with %@ and parameters %@ and method %@", aURLString, self.fieldsToBePosted, method);
       return nil;
     }
+      
+      NSLog(@"finalURL : %@", finalURL);
     
     self.request = [NSMutableURLRequest requestWithURL:finalURL
                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
@@ -1473,6 +1475,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
     dispatch_async(dispatch_get_main_queue(), ^{
       
       jsonDecompressionHandler(returnValue);
+        NSLog(@"returnValue : %@", returnValue);
     });
   });
 }

@@ -118,16 +118,6 @@
     if ([SYNLoginManager sharedManager].registrationCheck == NO) {
         [self loadBasicDataWithComplete:^(BOOL success) {
             
-            // No more ALL category
-            //        if(success) // Genres have loaded from the server
-            //        {
-            //            if(!self.hasCreatedPopularGenre) // we have no POPULAR Genre
-            //            {
-            //                [self createPopularGenre]; // create one
-            //
-            //            }
-            //        }
-            //
             [self addChildViewController:self.containerViewController];
             
             // set the view programmatically, this will call the viewDidLoad of the container through its custom setter

@@ -51,6 +51,8 @@
     
     if (!(ignoringObjects & kIgnoreChannelOwnerObject))
     {
+        
+#warning did not go through
         copyChannel.channelOwner = [ChannelOwner instanceFromChannelOwner: channel.channelOwner
                                                                 andViewId: viewId
                                                 usingManagedObjectContext: managedObjectContext
@@ -238,7 +240,14 @@
             
             SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
             if(self.favouritesValue && [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId])
-                videoInstance.starredByUserValue = YES;            
+                videoInstance.starredByUserValue = YES;
+            
+            if (channelDictionary[@"comments"][@"count"]) {
+                videoInstance.commentCount = channelDictionary[@"comments"][@"count"];
+            }
+            
+            
+            
             [importArray addObject: videoInstance];
         }
         

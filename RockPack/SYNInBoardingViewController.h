@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNAbstractViewController.h"
 
-@interface SYNInBoardingViewController : UIViewController
+@interface SYNInBoardingViewController : SYNAbstractViewController
 
 @end

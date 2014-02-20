@@ -26,6 +26,7 @@
 #import "UncaughtExceptionHandler.h"
 #import "SYNLoginManager.h"
 #import "SYNOnBoardingViewController.h"
+#import "SYNOnBoardingOverlayViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <ACTReporter.h>
 #import <TestFlight.h>
@@ -424,9 +425,29 @@
 
 - (void) loginCompleted: (NSNotification *) notification
 {
+    [SYNLoginManager sharedManager].registrationCheck = YES;
+    
     if ([SYNLoginManager sharedManager].registrationCheck == YES) {
         self.onBoardingViewController = [[SYNOnBoardingViewController alloc]init];
         self.window.rootViewController = self.onBoardingViewController;
+        
+        
+        SYNOnBoardingOverlayViewController* onboardingOverlay = [[SYNOnBoardingOverlayViewController alloc] init];
+        
+        // Set frame to full screen
+        CGRect vFrame = onboardingOverlay.view.frame;
+        vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+        onboardingOverlay.view.frame = vFrame;
+        onboardingOverlay.view.alpha = 0.0f;
+        
+        
+        [self.window.rootViewController addChildViewController:onboardingOverlay];
+        [self.window.rootViewController.view addSubview:onboardingOverlay.view];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            onboardingOverlay.view.alpha = 0.4f;
+        }];
+
     } else {
         self.window.rootViewController = [self createAndReturnRootViewController];
     }

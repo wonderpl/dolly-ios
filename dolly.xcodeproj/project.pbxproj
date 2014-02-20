@@ -752,8 +752,15 @@
 		4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */; };
 		4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */; };
 		4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */; };
-		4C5E85F118B620A200D0E937 /* SYNInBoardingViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85EF18B620A200D0E937 /* SYNInBoardingViewController~iphone.xib */; };
-		4C5E85F318B620D000D0E937 /* SYNInBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85F218B620D000D0E937 /* SYNInBoardingViewController.xib */; };
+		4C5E85FE18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85FC18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m */; };
+		4C5E85FF18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85FD18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib */; };
+		4C5E860118B630A000D0E937 /* SYNOnBoardingOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E860018B630A000D0E937 /* SYNOnBoardingOverlayViewController.xib */; };
+		4C5E860718B6334500D0E937 /* SYNMoodOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E860518B6334500D0E937 /* SYNMoodOverlayViewController.m */; };
+		4C5E860818B6334500D0E937 /* SYNMoodOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E860618B6334500D0E937 /* SYNMoodOverlayViewController~iphone.xib */; };
+		4C5E860C18B6338800D0E937 /* SYNMoodOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E860B18B6338800D0E937 /* SYNMoodOverlayViewController.xib */; };
+		4C5E861018B6353900D0E937 /* SYNDiscoverOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E860E18B6353900D0E937 /* SYNDiscoverOverlayViewController.m */; };
+		4C5E861118B6353900D0E937 /* SYNDiscoverOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E860F18B6353900D0E937 /* SYNDiscoverOverlayViewController~iphone.xib */; };
+		4C5E861518B6357300D0E937 /* SYNDiscoverOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E861418B6357300D0E937 /* SYNDiscoverOverlayViewController.xib */; };
 		4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */; };
 		4CE8AB381896B78900D7E373 /* DefaultCoverPhoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */; };
 		4CE8AE5718A901560031CE1C /* BackButtonApp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AE5518A901560031CE1C /* BackButtonApp.png */; };
@@ -2111,8 +2118,18 @@
 		4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconWonderAbout@2x.png"; sourceTree = "<group>"; };
 		4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNInBoardingViewController.h; sourceTree = "<group>"; };
 		4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNInBoardingViewController.m; sourceTree = "<group>"; };
-		4C5E85EF18B620A200D0E937 /* SYNInBoardingViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNInBoardingViewController~iphone.xib"; sourceTree = "<group>"; };
-		4C5E85F218B620D000D0E937 /* SYNInBoardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNInBoardingViewController.xib; sourceTree = "<group>"; };
+		4C5E85FB18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingOverlayViewController.h; sourceTree = "<group>"; };
+		4C5E85FC18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnBoardingOverlayViewController.m; sourceTree = "<group>"; };
+		4C5E85FD18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNOnBoardingOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
+		4C5E860018B630A000D0E937 /* SYNOnBoardingOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnBoardingOverlayViewController.xib; sourceTree = "<group>"; };
+		4C5E860418B6334500D0E937 /* SYNMoodOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNMoodOverlayViewController.h; sourceTree = "<group>"; };
+		4C5E860518B6334500D0E937 /* SYNMoodOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNMoodOverlayViewController.m; sourceTree = "<group>"; };
+		4C5E860618B6334500D0E937 /* SYNMoodOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNMoodOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
+		4C5E860B18B6338800D0E937 /* SYNMoodOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNMoodOverlayViewController.xib; sourceTree = "<group>"; };
+		4C5E860D18B6353900D0E937 /* SYNDiscoverOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverOverlayViewController.h; sourceTree = "<group>"; };
+		4C5E860E18B6353900D0E937 /* SYNDiscoverOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverOverlayViewController.m; sourceTree = "<group>"; };
+		4C5E860F18B6353900D0E937 /* SYNDiscoverOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNDiscoverOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
+		4C5E861418B6357300D0E937 /* SYNDiscoverOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverOverlayViewController.xib; sourceTree = "<group>"; };
 		4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNNotificationsMarkAllAsReadCell.xib; sourceTree = "<group>"; };
 		4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DefaultCoverPhoto.jpg; sourceTree = "<group>"; };
 		4CE8AE5518A901560031CE1C /* BackButtonApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButtonApp.png; sourceTree = "<group>"; };
@@ -4650,12 +4667,54 @@
 		4C5E85EC18B6203600D0E937 /* In Boarding */ = {
 			isa = PBXGroup;
 			children = (
-				4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */,
-				4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */,
-				4C5E85EF18B620A200D0E937 /* SYNInBoardingViewController~iphone.xib */,
-				4C5E85F218B620D000D0E937 /* SYNInBoardingViewController.xib */,
+				4C5E860318B6332100D0E937 /* Mood */,
+				4C5E860218B6331800D0E937 /* Discover */,
+				4C5E85F518B62F3400D0E937 /* Onboarding */,
+				4C5E85F418B62F2500D0E937 /* Abstract */,
 			);
 			name = "In Boarding";
+			sourceTree = "<group>";
+		};
+		4C5E85F418B62F2500D0E937 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */,
+				4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */,
+			);
+			name = Abstract;
+			sourceTree = "<group>";
+		};
+		4C5E85F518B62F3400D0E937 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				4C5E85FB18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.h */,
+				4C5E85FC18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m */,
+				4C5E85FD18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib */,
+				4C5E860018B630A000D0E937 /* SYNOnBoardingOverlayViewController.xib */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		4C5E860218B6331800D0E937 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				4C5E860D18B6353900D0E937 /* SYNDiscoverOverlayViewController.h */,
+				4C5E860E18B6353900D0E937 /* SYNDiscoverOverlayViewController.m */,
+				4C5E860F18B6353900D0E937 /* SYNDiscoverOverlayViewController~iphone.xib */,
+				4C5E861418B6357300D0E937 /* SYNDiscoverOverlayViewController.xib */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
+		4C5E860318B6332100D0E937 /* Mood */ = {
+			isa = PBXGroup;
+			children = (
+				4C5E860418B6334500D0E937 /* SYNMoodOverlayViewController.h */,
+				4C5E860518B6334500D0E937 /* SYNMoodOverlayViewController.m */,
+				4C5E860618B6334500D0E937 /* SYNMoodOverlayViewController~iphone.xib */,
+				4C5E860B18B6338800D0E937 /* SYNMoodOverlayViewController.xib */,
+			);
+			name = Mood;
 			sourceTree = "<group>";
 		};
 		BE03A69016F7457900245314 /* Account Settings */ = {
@@ -5942,6 +6001,7 @@
 				1F4E7FBF181ACBAA00F59007 /* TabProfile@2x~iphone.png in Resources */,
 				BE7D35191716D28E0085AB81 /* IconCategoryAll.png in Resources */,
 				BE7D351A1716D28E0085AB81 /* IconCategoryAll@2x.png in Resources */,
+				4C5E861518B6357300D0E937 /* SYNDiscoverOverlayViewController.xib in Resources */,
 				BE7D35211716D29B0085AB81 /* CategoryBar.png in Resources */,
 				BE7D35221716D29B0085AB81 /* CategoryBar@2x.png in Resources */,
 				E91D364B1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard in Resources */,
@@ -5979,6 +6039,7 @@
 				4CE8AB381896B78900D7E373 /* DefaultCoverPhoto.jpg in Resources */,
 				01450AFA171DB4D7009F54CD /* PlaceholderVideoBottom@2x.png in Resources */,
 				01450AFB171DB4D7009F54CD /* PlaceholderVideoMiddle@2x.png in Resources */,
+				4C5E860818B6334500D0E937 /* SYNMoodOverlayViewController~iphone.xib in Resources */,
 				01450AFC171DB4D7009F54CD /* PlaceholderVideoTop@2x.png in Resources */,
 				BE86BF1C171F07C70006DC8A /* SYNChannelMidCell.xib in Resources */,
 				BE86BF26172011150006DC8A /* HeaderProfileChannelsLandscape.png in Resources */,
@@ -6005,7 +6066,6 @@
 				01ABBB1E17205541007E4462 /* ButtonSubscribeHighlighted.png in Resources */,
 				01ABBB1F17205541007E4462 /* ButtonSubscribeHighlighted@2x.png in Resources */,
 				01ABBB2017205541007E4462 /* ButtonSubscribeSelected.png in Resources */,
-				4C5E85F318B620D000D0E937 /* SYNInBoardingViewController.xib in Resources */,
 				01ABBB2117205541007E4462 /* ButtonSubscribeSelected@2x.png in Resources */,
 				BEC39C1D184E363C00DA8089 /* SYNOnBoardingFooter.xib in Resources */,
 				BED027CA1834D4CC00636659 /* ButtonMoreFeedback.png in Resources */,
@@ -6155,6 +6215,7 @@
 				38A200431731607F00FB9F57 /* SubCategorySlideSelected@2x~iphone.png in Resources */,
 				38A200441731607F00FB9F57 /* SubCategorySlideSelected~iphone.png in Resources */,
 				38A200451731607F00FB9F57 /* SubCategorySlide~iphone.png in Resources */,
+				4C5E860118B630A000D0E937 /* SYNOnBoardingOverlayViewController.xib in Resources */,
 				0E2AB16B1886CBE3004557A4 /* MoodBackground.png in Resources */,
 				BEB3134E1817D4B500FAF98A /* SYNSearchResultsVideoCell.xib in Resources */,
 				BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */,
@@ -6306,6 +6367,7 @@
 				1F4E7FB5181ACBAA00F59007 /* TabFeedHighlighted@2x~iphone.png in Resources */,
 				38A200F31731607F00FB9F57 /* ButtonVideoOverlayAdd~iphone.png in Resources */,
 				38A200F41731607F00FB9F57 /* ButtonVideoOverlayLike@2x~iphone.png in Resources */,
+				4C5E861118B6353900D0E937 /* SYNDiscoverOverlayViewController~iphone.xib in Resources */,
 				38A200F51731607F00FB9F57 /* ButtonVideoOverlayLikeHighlighted@2x~iphone.png in Resources */,
 				38A200F61731607F00FB9F57 /* ButtonVideoOverlayLikeHighlighted~iphone.png in Resources */,
 				38A200F71731607F00FB9F57 /* ButtonVideoOverlayLikeSelected@2x~iphone.png in Resources */,
@@ -6324,6 +6386,7 @@
 				1F458AE417E1C27B003C14AC /* ButtonReportConfirm@2x~iphone.png in Resources */,
 				38A201041731607F00FB9F57 /* PanelVideoScreenVideoMainOverlay@2x~iphone.png in Resources */,
 				38A201051731607F00FB9F57 /* PanelVideoScreenVideoMainOverlay~iphone.png in Resources */,
+				4C5E860C18B6338800D0E937 /* SYNMoodOverlayViewController.xib in Resources */,
 				BEB313B618280F1200FAF98A /* divider_feed@x2.png in Resources */,
 				38A201071731738F00FB9F57 /* SYNAddToChannelViewController~iphone.xib in Resources */,
 				011C16931732834F00CF50B9 /* PanelChannelCreateNew.png in Resources */,
@@ -6671,6 +6734,7 @@
 				4C03237718AE3F8700E168EF /* SYNDiscoverSectionView.xib in Resources */,
 				BE458AF417E71BE000776B0D /* InstructionBackgroundPacks.png in Resources */,
 				1F4E7FCA181ACBAA00F59007 /* TabSearchSelected~iphone.png in Resources */,
+				4C5E85FF18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib in Resources */,
 				BEB31306181565CE00FAF98A /* SYNSearchResultsViewController.xib in Resources */,
 				BE8F938617B1113600E7035F /* SYNImplicitSharingController.xib in Resources */,
 				BE8F939817B3CFD100E7035F /* ButtonNotNow.png in Resources */,
@@ -6695,7 +6759,6 @@
 				BE0B151217BC16240053E551 /* ButtonSearch@2x~iphone.png in Resources */,
 				BE0B151317BC16240053E551 /* ButtonSearch~iphone.png in Resources */,
 				0E26BB4D182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib in Resources */,
-				4C5E85F118B620A200D0E937 /* SYNInBoardingViewController~iphone.xib in Resources */,
 				4CE8AE5718A901560031CE1C /* BackButtonApp.png in Resources */,
 				E93C7F0918368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard in Resources */,
 				1FBF54EB17BD526000B4074E /* login_bg_5.jpg in Resources */,
@@ -6833,6 +6896,7 @@
 				0E2AB166188462DD004557A4 /* SYNWebViewController.m in Sources */,
 				BEB31374181AC6DB00FAF98A /* SYNSocialAddButton.m in Sources */,
 				019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */,
+				4C5E861018B6353900D0E937 /* SYNDiscoverOverlayViewController.m in Sources */,
 				01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */,
 				011CC6A9164D19D800F02B6D /* SYNPassthroughView.m in Sources */,
 				01B7F763164FC88A009C5CCD /* SYNChannelThumbnailCell.m in Sources */,
@@ -6897,6 +6961,7 @@
 				BEC39C13184D03C000DA8089 /* _Recomendation.m in Sources */,
 				016AED3B1821349800DEAF7E /* SYNSocialButton.m in Sources */,
 				BEC39C0D184CA4F700DA8089 /* SYNFeedbackViewController.m in Sources */,
+				4C5E860718B6334500D0E937 /* SYNMoodOverlayViewController.m in Sources */,
 				BE0815C616D5389C00ADB1DC /* SYNMasterViewController.m in Sources */,
 				BE57C0311843638C00C6444A /* SYNOnBoardingHeader.m in Sources */,
 				E972DFAF187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m in Sources */,
@@ -6963,6 +7028,7 @@
 				BE7D3431170DDB310085AB81 /* SYNChannelFooterMoreView.m in Sources */,
 				BE7D34CE1714434D0085AB81 /* SYNDeviceManager.m in Sources */,
 				BE7D34D317159E2C0085AB81 /* SYNNotificationsTableViewCell.m in Sources */,
+				4C5E85FE18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m in Sources */,
 				BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */,
 				BE7D35051715CE450085AB81 /* SYNNotification.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
