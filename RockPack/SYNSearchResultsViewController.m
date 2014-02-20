@@ -688,8 +688,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     if(!self.moreItemsToLoad2)
         return;
     
-    NSLog(@"Fetching Items for Range: %@", NSStringFromRange(self.dataRequestRange2));
-    
     NSInteger nextStart = self.dataRequestRange2.location + self.dataRequestRange2.length;
     
     NSInteger nextSize = MIN(STANDARD_REQUEST_LENGTH, self.dataItemsAvailable2 - nextStart);
