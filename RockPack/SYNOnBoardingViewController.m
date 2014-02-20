@@ -179,7 +179,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         }];
     } onError:^(NSError* error) {
         
-    }];
+    } forceReload:NO];
 }
 
 - (void) getRecommendationsFromRemote {

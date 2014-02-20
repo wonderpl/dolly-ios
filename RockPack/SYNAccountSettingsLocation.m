@@ -183,7 +183,7 @@
 											   [wself.navigationController popViewControllerAnimated:YES];
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:CategoriesReloadedNotification object:nil];
-										   }];
+										   } forceReload:YES];
                                            
                                        } errorHandler:^(id errorInfo) {
                                            
