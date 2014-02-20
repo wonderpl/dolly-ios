@@ -538,7 +538,7 @@
     if (IS_IPHONE) {
         self.contentOffset = self.collectionsTabActive ? self.channelThumbnailCollectionView.contentOffset : self.subscriptionThumbnailCollectionView.contentOffset;
     }
-    if (IS_IPHONE) {
+    if (IS_IPHONE && !self.collectionsTabActive) {
         self.channelThumbnailCollectionView.hidden=YES;
     }
 }
