@@ -3044,13 +3044,6 @@ finishedWithImage: (UIImage *) image
         *rect = tmpRect;
     }
 }
-- (IBAction)uploadPicture:(id)sender {
-    
-    [self editButtonTapped:sender];
-    [self changeAvatarButtonTapped:sender];
-    self.uploadAvatar.hidden=YES;
-    
-}
 
 - (NSArray *)filteredSubscriptionsForSearchTerm:(NSString *)searchTerm {
 	if ([searchTerm length]) {
