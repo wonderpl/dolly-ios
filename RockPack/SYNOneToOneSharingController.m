@@ -36,7 +36,8 @@
                                             UITextFieldDelegate,
                                             UITableViewDataSource,
                                             UITableViewDelegate,
-                                            UIScrollViewDelegate>
+                                            UIScrollViewDelegate,
+											UISearchBarDelegate>
 {
     BOOL displayEmailCell;
 }
@@ -743,16 +744,10 @@
         [self presentAlertToFillEmailForFriend: nil];
     }
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"SearchFriendtoShare"
-                                                            label: (lastCellPressed ? @"New" : ([friend.externalSystem
-                                                                                                 isEqualToString: kFacebook] ? @"fromFB" : @"fromAB"))
-                                                            value: nil] build]];
-    
+	NSString *origin = (lastCellPressed ? @"New" : ([friend.externalSystem isEqualToString: kFacebook] ? @"fromFB" : @"fromAB"));
+	[[SYNTrackingManager sharedManager] trackShareFriendSearchSelect:origin];
+	
     [tableView removeFromSuperview];
-    
 }
 
 
@@ -864,8 +859,9 @@
     return YES;
 }
 
-
-
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [[SYNTrackingManager sharedManager] trackShareFriendSearch];
+}
 
 - (BOOL)searchBarShouldBeginEditing: (UISearchBar *)searchBar
 {
@@ -887,14 +883,6 @@
     
     [self.searchResultsTableView reloadData];
     
-    
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"SearchFriendtoShare"
-                                                            label: nil
-                                                            value: nil] build]];
     return YES;
 }
 
@@ -975,8 +963,6 @@
          
                                                wself.friendToAddEmail = nil;
          
-                                               wself.view.userInteractionEnabled = YES;
-                                               
                                                [self searchBarTextDidEndEditing:self.searchBar];
                                                
                                                [self fetchAndDisplayFriends];
@@ -992,15 +978,11 @@
                                                [appDelegate.masterViewController presentNotificationWithMessage:notificationText
                                                                                                         andType:NotificationMessageTypeSuccess];
          
-         
-                                               id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                               NSString *actionType =
-                                               [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"channelShared" : @"videoShared";
-         
-                                               [tracker send: [[GAIDictionaryBuilder  createEventWithCategory: @"goal"
-                                                                                                       action: actionType
-                                                                                                        label: @"1to1"
-                                                                                                        value: nil] build]];
+											   if ([self.mutableShareDictionary[@"type"] isEqualToString:@"channel"]) {
+												   [[SYNTrackingManager sharedManager] trackCollectionShareCompletedWithService:@"1to1"];
+											   } else {
+												   [[SYNTrackingManager sharedManager] trackVideoShareCompletedWithService:@"1to1"];
+											   }
 											   
 											   [self dismissViewControllerAnimated:YES completion:^{
 												   [appDelegate.masterViewController presentNotificationWithMessage:notificationText

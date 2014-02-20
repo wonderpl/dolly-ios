@@ -120,7 +120,7 @@
 }
 
 - (void)submitLogin {
-	[[SYNTrackingManager sharedManager] trackUserLoginFromOrigin:kOriginRockpack];
+	[[SYNTrackingManager sharedManager] trackUserLoginFromOrigin:kOriginWonderPL];
 	
 //    [self clearAllErrorArrows];
 //    

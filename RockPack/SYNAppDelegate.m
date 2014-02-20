@@ -1392,16 +1392,8 @@
                 break;
         }
         
-        
-        // track
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"openDeepLink"
-                                                                label: url.absoluteString
-                                                                value: nil] build]];
-        
+        [[SYNTrackingManager sharedManager] trackExternalLinkOpened:[url absoluteString]];
+		
         enteredAppThroughNotification = YES;
     }
     else
@@ -1457,14 +1449,9 @@
         }
         
         enteredAppThroughNotification = YES;
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"openDeepLink"
-                                                                label: targetURLString
-                                                                value: nil] build]];
-        
+		
+        [[SYNTrackingManager sharedManager] trackExternalLinkOpened:targetURLString];
+		
         return [FBSession.activeSession
                 handleOpenURL: url];
     }

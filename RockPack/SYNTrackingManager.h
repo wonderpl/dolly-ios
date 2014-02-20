@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AppConstants.h"
 
+typedef NS_ENUM(NSInteger, kNotificationObjectType);
+
 @interface SYNTrackingManager : NSObject
 
 + (instancetype)sharedManager;
@@ -20,6 +22,7 @@
 - (void)trackVideoCommentFromScreenName:(NSString *)screenName;
 - (void)trackFacebookLogin;
 - (void)trackUserLoginFromOrigin:(NSString *)origin;
+- (void)trackUserRegistrationFromOrigin:(NSString *)origin;
 - (void)trackVideoShareWithService:(NSString *)service;
 - (void)trackCollectionShareWithService:(NSString *)service;
 - (void)trackCollectionFollowFromScreenName:(NSString *)screenName;
@@ -33,22 +36,41 @@
 - (void)trackVideoMaximiseViaRotation;
 - (void)trackVideoMaximise;
 
+- (void)trackCreateChannelScreenView;
+
 - (void)trackCarouselVideoSelected;
 - (void)trackSearchVideoPlayerAppearsInSelected;
 - (void)trackSearchVideoPlayerLovedBySelected;
 
 - (void)trackCollectionSelectedIsNew:(BOOL)isNew;
-- (void)trackCollectionSelectionSaved;
+- (void)trackCollectionSaved;
 
 - (void)trackSearchInitiated;
 
 - (void)trackMarkAllNotificationAsRead;
-- (void)trackSelectedNotificationOfType:(NSString *)type;
+- (void)trackSelectedNotificationOfType:(kNotificationObjectType)type;
 
 - (void)trackOnboardingCompletedWithFollowedCount:(NSInteger)followedCount;
 
-//- (void)trackMoodSelected:(NSString *)name;
-//- (void)trackMoodChooseAnotherSelected:(NSString *)moodName;
+- (void)trackCoverPhotoUploadCompleted;
+- (void)trackAvatarPhotoUploadCompleted;
+
+- (void)trackCollectionFollowCompleted;
+- (void)trackVideoAddedToCollectionCompleted:(BOOL)isFavouritesChannel;
+
+- (void)trackShareFriendSearch;
+- (void)trackShareFriendSearchSelect:(NSString *)origin;
+
+- (void)trackCommentPostedWithTaggedUsers:(BOOL)hasTaggedUsers;
+
+- (void)trackCollectionEdited:(NSString *)name;
+
+- (void)trackIPhoneScrolledToMood:(NSString *)name;
+- (void)trackIPadScrolledToMood:(NSString *)name;
+- (void)trackMoodChooseAnother:(NSString *)name;
+- (void)trackIPhoneMoodWatchSelected:(NSString *)name;
+- (void)trackMoodSelected:(NSString *)name;
+- (void)trackIPadMoodVideoSelected:(NSString *)name;
 
 - (void)trackVideoView:(NSString *)videoId currentTime:(CGFloat)currentTime duration:(CGFloat)duration;
 
@@ -67,6 +89,11 @@
 - (void)trackFeedScreenView;
 - (void)trackOwnProfileScreenView;
 - (void)trackActivityScreenView;
+
+- (void)trackVideoBrowseScreenView;
+- (void)trackUserBrowseScreenView;
+- (void)trackVideoSearchScreenView;
+- (void)trackUserSearchScreenView;
 
 - (void)trackProfileOverlayScreenView;
 - (void)trackAccountSettingsScreenView;
@@ -97,6 +124,13 @@
 - (void)trackSearchVideoPlayerScreenView;
 
 - (void)trackShareScreenView;
+
+- (void)trackCollectionShareCompletedWithService:(NSString *)service;
+- (void)trackVideoShareCompletedWithService:(NSString *)service;
+
+- (void)trackNetworkErrorCode:(NSInteger)code forURL:(NSString *)url;
+
+- (void)trackExternalLinkOpened:(NSString *)url;
 
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate;
 

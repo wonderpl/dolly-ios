@@ -6,12 +6,12 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAccountSettingsPassword.h"
 #import "SYNAppDelegate.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNOAuth2Credential.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAccountSettingsPassword ()
 
@@ -29,14 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Password"
-                                                            value: nil] build]];
-    
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -70,6 +62,7 @@
 
 -(void)saveButtonPressed:(UIButton*)button
 {
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Password"];
     
     if([self.inputField.text isEqualToString:@""] || [self.passwordField isEqual:@""] || [self.passwordConfirmField isEqual:@""]) {
         self.errorLabel.text = NSLocalizedString (@"Please Fill All Fields", nil);

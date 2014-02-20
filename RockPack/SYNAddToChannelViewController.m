@@ -271,6 +271,8 @@
     
     if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden) // if it is opening, show the panel
     {
+		[[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
+		
 		[[SYNTrackingManager sharedManager] trackCollectionSelectedIsNew:YES];
     }
     
@@ -315,7 +317,7 @@
 - (IBAction)confirmButtonPressed:(UIButton *)button {
 	button.enabled = NO;
 	
-	[[SYNTrackingManager sharedManager] trackCollectionSelectionSaved];
+	[[SYNTrackingManager sharedManager] trackCollectionSaved];
 	
 	if (self.createNewChannelCell.isEditing) {
 		// We don't have a channel, need to create one
@@ -330,7 +332,7 @@
 													  isPublic:YES
 											 completionHandler:^(NSDictionary *response) {
 												 NSString *channelId = response[@"id"];
-												 [self addCurrentVideoInstanceToChannel:channelId];
+												 [self addCurrentVideoInstanceToChannel:channelId isFavourites:NO];
 												 
 												 [[NSNotificationCenter defaultCenter] postNotificationName:kChannelOwnerUpdateRequest
 																									 object:nil
@@ -344,22 +346,17 @@
 	}
 	
 	if (self.selectedChannel) {
-		[self addCurrentVideoInstanceToChannel:self.selectedChannel.uniqueId];
+		[self addCurrentVideoInstanceToChannel:self.selectedChannel.uniqueId isFavourites:self.selectedChannel.favouritesValue];
 	}
 }
 
-- (void)addCurrentVideoInstanceToChannel:(NSString *)channelId {
+- (void)addCurrentVideoInstanceToChannel:(NSString *)channelId isFavourites:(BOOL)isFavourites {
     [appDelegate.oAuthNetworkEngine updateVideosForUserId:appDelegate.currentUser.uniqueId
 											 forChannelId:channelId
 										 videoInstanceIds:@[ self.videoInstance.uniqueId ]
 											clearPrevious:NO
 										completionHandler: ^(NSDictionary* result) {
-											id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-											
-											[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-																								   action: @"channelUpdated"
-																									label: nil
-																									value: nil] build]];
+											[[SYNTrackingManager sharedManager] trackVideoAddedToCollectionCompleted:isFavourites];
 											
 											NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL", nil);
 											

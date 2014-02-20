@@ -8,10 +8,14 @@
 
 #import "SYNTrackingManager.h"
 #import "NSString+Utils.h"
+#import "SYNNotification.h"
 #import <GAI.h>
+#import <Reachability.h>
+@import CoreTelephony;
 
 static NSString *const UIActionCategory = @"uiAction";
 static NSString *const GoalCategory = @"goal";
+static NSString *const NetworkCategory = @"network";
 
 static const NSInteger TrackingDimensionAge = 1;
 static const NSInteger TrackingDimensionGender = 3;
@@ -65,6 +69,14 @@ static const NSInteger TrackingDimensionLocale = 4;
 	[self trackScreenViewWithName:@"Discover"];
 }
 
+- (void)trackShareFriendSearch {
+	[self trackEventWithCategory:UIActionCategory action:@"searchFriendtoShare"];
+}
+
+- (void)trackShareFriendSearchSelect:(NSString *)origin {
+	[self trackEventWithCategory:UIActionCategory action:@"selectFriendtoShare" label:origin value:nil];
+}
+
 - (void)trackVideoSwipeToVideo:(BOOL)isPrevious {
 	NSString *label = (isPrevious ? @"prev" : @"next");
 	[self trackEventWithCategory:UIActionCategory action:@"videoSwipe" label:label value:nil];
@@ -72,6 +84,10 @@ static const NSInteger TrackingDimensionLocale = 4;
 
 - (void)trackUserLoginFromOrigin:(NSString *)origin {
 	[self trackEventWithCategory:GoalCategory action:@"userLogin" label:origin value:nil];
+}
+
+- (void)trackUserRegistrationFromOrigin:(NSString *)origin {
+	[self trackEventWithCategory:GoalCategory action:@"userRegistration" label:origin value:nil];
 }
 
 - (void)trackShareEmailEnteredIsNew:(BOOL)isNew {
@@ -100,12 +116,29 @@ static const NSInteger TrackingDimensionLocale = 4;
 	[self trackEventWithCategory:UIActionCategory action:@"collectionSelectionClick" label:label value:nil];
 }
 
-- (void)trackCollectionSelectionSaved {
+- (void)trackVideoAddedToCollectionCompleted:(BOOL)isFavouritesChannel {
+	NSString *label = (isFavouritesChannel ? @"favouties" : @"notfavourites");
+	[self trackEventWithCategory:GoalCategory action:@"collectionUpdated" label:label value:nil];
+}
+
+- (void)trackIPhoneScrolledToMood:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"moodSelectediPhone" label:name value:nil];
+}
+
+- (void)trackIPadScrolledToMood:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"moodSelectediPad" label:name value:nil];
+}
+
+- (void)trackCollectionSaved {
 	[self trackEventWithCategory:UIActionCategory action:@"collectionSaveButtonClick"];
 }
 
 - (void)trackAvatarUploadFromScreen:(NSString *)screenName {
 	[self trackEventWithCategory:UIActionCategory action:@"avatarUpload" label:screenName value:nil];
+}
+
+- (void)trackCollectionEdited:(NSString *)name {
+	[self trackEventWithCategory:GoalCategory action:@"collectionEdited" label:name value:nil];
 }
 
 - (void)trackCoverPhotoUpload {
@@ -136,13 +169,38 @@ static const NSInteger TrackingDimensionLocale = 4;
 	[self trackEventWithCategory:UIActionCategory action:@"searchInitiate"];
 }
 
-//- (void)trackMoodSelected:(NSString *)moodName {
-//	[self trackEventWithCategory:UIActionCategory action:MoodSelectedAction label:moodName value:nil];
-//}
-//
-//- (void)trackMoodChooseAnotherSelected:(NSString *)moodName {
-//	[self trackEventWithCategory:UIActionCategory action:MoodChooseAnotherSelectedAction label:moodName value:nil];
-//}
+- (void)trackCommentPostedWithTaggedUsers:(BOOL)hasTaggedUsers {
+	NSString *label = (hasTaggedUsers ? @"taggeduser" : @"notags");
+	[self trackEventWithCategory:GoalCategory action:@"CommentPosted" label:label value:nil];
+}
+
+- (void)trackCoverPhotoUploadCompleted {
+	[self trackEventWithCategory:GoalCategory action:@"userCoverUploaded"];
+}
+
+- (void)trackAvatarPhotoUploadCompleted {
+	[self trackEventWithCategory:GoalCategory action:@"userAvatarUpload"];
+}
+
+- (void)trackCollectionFollowCompleted {
+	[self trackEventWithCategory:GoalCategory action:@"userFollowCollection"];
+}
+
+- (void)trackMoodChooseAnother:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"moodVideoChooseAnotherClick" label:name value:nil];
+}
+
+- (void)trackIPhoneMoodWatchSelected:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"moodVideoWatchClickiPhone" label:name value:nil];
+}
+
+- (void)trackMoodSelected:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"moodVideoMoodClick" label:name value:nil];
+}
+
+- (void)trackIPadMoodVideoSelected:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"moodVideoWatchClickiPad" label:name value:nil];
+}
 
 - (void)trackAccountPropertyChanged:(NSString *)property {
 	[self trackEventWithCategory:UIActionCategory action:@"accountPropertyChanged" label:property value:nil];
@@ -151,6 +209,10 @@ static const NSInteger TrackingDimensionLocale = 4;
 - (void)trackAddressBookPermission:(BOOL)granted {
 	NSString *label = (granted ? @"accepted" : @"rejected");
 	[self trackEventWithCategory:UIActionCategory action:@"AddressBookPerm" label:label value:nil];
+}
+
+- (void)trackCreateChannelScreenView {
+	[self trackScreenViewWithName:@"Create Channel"];
 }
 
 - (void)trackStartScreenView {
@@ -191,6 +253,22 @@ static const NSInteger TrackingDimensionLocale = 4;
 
 - (void)trackActivityScreenView {
 	[self trackScreenViewWithName:@"Activity"];
+}
+
+- (void)trackVideoBrowseScreenView {
+	[self trackScreenViewWithName:@"Category Videos"];
+}
+
+- (void)trackUserBrowseScreenView {
+	[self trackScreenViewWithName:@"Category Highlights"];
+}
+
+- (void)trackVideoSearchScreenView {
+	[self trackScreenViewWithName:@"Video Search"];
+}
+
+- (void)trackUserSearchScreenView {
+	[self trackScreenViewWithName:@"User Search"];
 }
 
 - (void)trackProfileOverlayScreenView {
@@ -277,8 +355,13 @@ static const NSInteger TrackingDimensionLocale = 4;
 	[self trackEventWithCategory:UIActionCategory action:@"markAllAsRead"];
 }
 
-- (void)trackSelectedNotificationOfType:(NSString *)type {
-	[self trackEventWithCategory:UIActionCategory action:@"notificationTap" label:type value:nil];
+- (void)trackSelectedNotificationOfType:(kNotificationObjectType)type {
+	NSString *label = @{ @(kNotificationObjectTypeUserLikedYourVideo)         : @"like",
+						 @(kNotificationObjectTypeUserSubscibedToYourChannel) : @"follow",
+						 @(kNotificationObjectTypeFacebookFriendJoined)       : @"fbfriend",
+						 @(kNotificationObjectTypeYourVideoNotAvailable)      : @"unavailable",
+						 @(kNotificationObjectTypeCommentMention)             : @"comment" }[@(type)];
+	[self trackEventWithCategory:UIActionCategory action:@"notificationTap" label:label value:nil];
 }
 
 - (void)trackOnboardingCompletedWithFollowedCount:(NSInteger)followedCount {
@@ -291,6 +374,23 @@ static const NSInteger TrackingDimensionLocale = 4;
 	
 	[self trackEventWithCategory:GoalCategory action:@"videoViewed" label:videoId value:@(percentageViewed)];
 	[self trackEventWithCategory:GoalCategory action:@"videoViewedDuration" label:videoId value:@((int)currentTime)];
+}
+
+- (void)trackNetworkErrorCode:(NSInteger)code forURL:(NSString *)url {
+	NSString *action = [NSString stringWithFormat:@"Error %d", code];
+	[self trackEventWithCategory:NetworkCategory action:action label:url value:nil];
+}
+
+- (void)trackExternalLinkOpened:(NSString *)url {
+	[self trackEventWithCategory:GoalCategory action:@"openDeepLink" label:url value:nil];
+}
+
+- (void)trackCollectionShareCompletedWithService:(NSString *)service {
+	[self trackEventWithCategory:GoalCategory action:@"collectionShared" label:service value:nil];
+}
+
+- (void)trackVideoShareCompletedWithService:(NSString *)service {
+	[self trackEventWithCategory:GoalCategory action:@"videoShared" label:service value:nil];
 }
 
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate {
@@ -308,8 +408,8 @@ static const NSInteger TrackingDimensionLocale = 4;
 }
 
 - (void)setGenderDimension:(Gender)gender {
-	NSString *value = @{ @(GenderMale) : @"male",
-						 @(GenderFemale) : @"female",
+	NSString *value = @{ @(GenderMale)      : @"male",
+						 @(GenderFemale)    : @"female",
 						 @(GenderUndecided) : @"unknown" }[@(gender)];
 	[[self defaultTracker] set:[GAIFields customDimensionForIndex:TrackingDimensionGender] value:value];
 }

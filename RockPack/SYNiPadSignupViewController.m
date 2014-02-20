@@ -244,6 +244,9 @@
 	
 	[[SYNLoginManager sharedManager] registerUserWithData: userData
 										completionHandler: ^(NSDictionary *dictionary) {
+											
+											[[SYNTrackingManager sharedManager] trackUserRegistrationFromOrigin:kOriginWonderPL];
+											
 											//Onboarding registration check
 											[SYNLoginManager sharedManager].registrationCheck = YES;
 

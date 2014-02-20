@@ -1611,12 +1611,8 @@
 -(void) saveTapped
 {
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelSaveButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
+	[[SYNTrackingManager sharedManager] trackCollectionSaved];
+	
     //
     //    self.saveChannelButton.enabled = NO;
     //    self.deleteChannelButton.enabled = YES;
@@ -1642,12 +1638,7 @@
                                              
                                              self.lblDescription.text = self.txtViewDescription.text;
                                              
-                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                             
-                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                    action: @"channelEdited"
-                                                                                                     label: @""
-                                                                                                     value: nil] build]];
+											 [[SYNTrackingManager sharedManager] trackCollectionEdited:[self.txtFieldChannelName.text uppercaseString]];
                                              
                                             
                                              

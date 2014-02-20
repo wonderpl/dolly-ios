@@ -6,12 +6,12 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAbstractNetworkEngine.h"
 #import "SYNAppDelegate.h"
 #import "SYNNetworkOperationJsonObjectParse.h"
 #import "SYNAppDelegate.h"
 #import "User.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAbstractNetworkEngine ()<UIAlertViewDelegate>
 {
@@ -239,15 +239,8 @@
              NSError *responseError = (NSError *) response;
              NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %i", responseError.domain, responseError.code], @"nserror" : responseError};
              DebugLog(@"API Call failed: %@", customErrorDictionary);
-             
-             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-             
-             NSString *errorCodeString = [NSString stringWithFormat: @"Error %d", responseError.code];
-             
-             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"network"
-                                                                    action: errorCodeString
-                                                                     label: weakNetworkOperation.url
-                                                                     value: nil] build]];
+			 
+			 [[SYNTrackingManager sharedManager] trackNetworkErrorCode:responseError.code forURL:weakNetworkOperation.url];
              
              if (responseError.code >=500 && responseError.code < 600)
              {
