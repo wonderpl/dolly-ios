@@ -7,8 +7,11 @@
 //
 
 #import "SYNMoodOverlayViewController.h"
+#import "SYNPopoverable.h"
+#import "SYNDeviceManager.h"
 
 @interface SYNMoodOverlayViewController ()
+@property (strong, nonatomic) IBOutlet UIView *container;
 
 @end
 
@@ -34,5 +37,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    if (IS_IPAD) {
+        
+        if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+            self.container.frame = CGRectMake(383, 488, 384, 126);
+        } else {
+            self.container.frame = CGRectMake(215, 601, 384, 126);
+        }
+    }
+}
+
 
 @end
