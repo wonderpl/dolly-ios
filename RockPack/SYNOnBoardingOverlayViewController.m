@@ -7,8 +7,9 @@
 //
 
 #import "SYNOnBoardingOverlayViewController.h"
-
+#import "SYNDeviceManager.h"
 @interface SYNOnBoardingOverlayViewController ()
+@property (strong, nonatomic) IBOutlet UIView *container;
 
 @end
 
@@ -26,6 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -33,6 +36,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)viewWillLayoutSubviews
+{
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+            self.container.frame = CGRectMake(204, 353, 353, 78);
+            
+        } else {
+            
+            self.container.frame = CGRectMake(211, 353, 353, 78);
+        }
+    }
 }
 
 @end

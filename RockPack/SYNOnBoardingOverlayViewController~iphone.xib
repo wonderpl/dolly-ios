@@ -18,12 +18,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ButtonMoreSettings.png" translatesAutoresizingMaskIntoConstraints="NO" id="9NH-7N-2lY">
-                            <rect key="frame" x="163" y="303" width="52" height="50"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="followbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="9NH-7N-2lY">
+                            <rect key="frame" x="250" y="306" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="follow great content and check your feed daily" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="181" translatesAutoresizingMaskIntoConstraints="NO" id="Xyc-ge-9Xx">
+                            <rect key="frame" x="61" y="301" width="181" height="59"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.26659443430656932" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.27000000000000002" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -32,6 +39,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ButtonMoreSettings.png" width="60" height="60"/>
+        <image name="followbutton.png" width="50" height="50"/>
     </resources>
 </document>

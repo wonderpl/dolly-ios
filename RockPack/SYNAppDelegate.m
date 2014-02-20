@@ -444,7 +444,7 @@
         [self.window.rootViewController.view addSubview:onboardingOverlay.view];
         
         [UIView animateWithDuration:0.3 animations:^{
-            onboardingOverlay.view.alpha = 0.4f;
+            onboardingOverlay.view.alpha = 1.0f;
         }];
 
     } else {
