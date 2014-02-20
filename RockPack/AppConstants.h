@@ -334,6 +334,10 @@ static NSString* kPopularGenreUniqueId = @"1979";
 #define kUserDefaultsFeed @"UD_OnBoaring_Feed"
 #define kUserDefaultsSeenOnBoarding @"UD_Seen_On_Boarding"
 #define kUserDefaultsCommentingLastInteracted @"CMT_Interaction_Date"
+#define kUserDefaultsMoodFirstTime @"UD_Mood_First_Time"
+#define kUserDefaultsCollectionDetailsFirstTime @"UD_CollectionDetails_First_Time"
+#define kUserDefaultsDiscoverVideoFirstTime @"UD_Discover_Video_First_Time"
+#define kUserDefaultsDiscoverUserFirstTime @"UD_Discover_User_First_Time"
 
 //Login Origin
 
@@ -401,6 +405,12 @@ typedef enum {
     CreateNewChannelCellStateFinilizing = 2
     
 } CreateNewChannelCellState;
+
+typedef enum : NSInteger {
+    kModeMyOwnProfile = 0,
+    kModeOtherUsersProfile,
+    kModeEditProfile,
+} ProfileType;
 
 
 // Height of the bottom tab bar in pixels

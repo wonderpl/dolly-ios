@@ -13,8 +13,10 @@
 
 @protocol SYNChannelMidCellDelegate <NSObject>
 
-- (void)followButtonTapped:(SYNChannelMidCell *)cell;
 - (void)deleteChannelTapped:(SYNChannelMidCell *)cell;
+
+@optional
+- (void)followButtonTapped:(SYNChannelMidCell *)cell;
 
 
 typedef enum {
@@ -50,6 +52,7 @@ typedef enum {
 -(void) setBorder;
 -(void) setState:(ChannelMidCellState)state withAnimation:(BOOL) animated;
 -(void) setCategoryColor: (UIColor*) color;
+-(void) inboardingAnimationFromMode:(ProfileType) type;
 
 
 @end

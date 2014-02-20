@@ -12,7 +12,6 @@
 
 
 - (void) createNewButtonPressed;
-- (void) followButtonTapped: (UICollectionViewCell *) cell;
 @end
 
 @interface SYNChannelCreateNewCell : UICollectionViewCell
