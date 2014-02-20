@@ -11,6 +11,7 @@
 
 @interface SYNLoginManager : NSObject
 
+//registrationCheck is set to yes, when a user registers an account
 @property (nonatomic, assign) BOOL registrationCheck;
 
 + (instancetype)sharedManager;

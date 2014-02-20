@@ -192,4 +192,18 @@
     } errorHandler: errorBlock];
 }
 
+
+- (void) setRegistrationCheck:(BOOL)registrationCheck
+{
+    if (registrationCheck) {
+        
+    
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsDiscoverVideoFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsDiscoverUserFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsMoodFirstTime];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsCollectionDetailsFirstTime];
+        
+        
+    }
+}
 @end
