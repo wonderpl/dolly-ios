@@ -2630,6 +2630,7 @@ finishedWithImage: (UIImage *) image
                                                         image: image
                                             completionHandler: ^(NSDictionary* result)
          {
+			 [[SYNTrackingManager sharedManager] trackAvatarPhotoUploadCompleted];
              
              [self setProfileImage:result[@"thumbnail_url"]];
              //[self.activityIndicator stopAnimating];
@@ -2665,6 +2666,8 @@ finishedWithImage: (UIImage *) image
                                                               image: image
                                                   completionHandler: ^(NSDictionary* result)
          {
+			 [[SYNTrackingManager sharedManager] trackCoverPhotoUploadCompleted];
+			 
              [self setCoverphotoImage:result[@"Location"]];
              
              
@@ -2696,7 +2699,8 @@ finishedWithImage: (UIImage *) image
 
 -(void)createNewButtonPressed
 {
-    
+	[[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
+	
     self.creatingChannel = YES;
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {

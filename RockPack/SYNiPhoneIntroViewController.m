@@ -103,12 +103,7 @@
 #pragma mark - button IBActions
 
 - (IBAction)fadebookButtonPressed:(UIButton *)button {
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"facebookLogin"
-                                                            label: nil
-                                                            value: nil] build]];
+	[[SYNTrackingManager sharedManager] trackFacebookLogin];
 	
 	Reachability *reachability = [Reachability reachabilityWithHostname:self.appDelegate.networkEngine.hostName];
     BOOL isReachable = ([reachability currentReachabilityStatus] != NotReachable);

@@ -24,6 +24,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
+#import "SYNTrackingManager.h"
 
 typedef NS_ENUM(NSInteger, SYNSearchType) {
 	SYNSearchTypeUndefined,
@@ -688,8 +689,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     if(!self.moreItemsToLoad2)
         return;
     
-    NSLog(@"Fetching Items for Range: %@", NSStringFromRange(self.dataRequestRange2));
-    
     NSInteger nextStart = self.dataRequestRange2.location + self.dataRequestRange2.length;
     
     NSInteger nextSize = MIN(STANDARD_REQUEST_LENGTH, self.dataItemsAvailable2 - nextStart);
@@ -714,6 +713,20 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (void) setSearchResultsShowing: (SearchResultsShowing) searchResultsShowing
 {
+	if (self.searchType == SYNSearchTypeBrowse) {
+		if (searchResultsShowing == SearchResultsShowingVideos) {
+			[[SYNTrackingManager sharedManager] trackVideoBrowseScreenView];
+		} else {
+			[[SYNTrackingManager sharedManager] trackUserBrowseScreenView];
+		}
+	} else if (self.searchType == SYNSearchTypeSearch) {
+		if (searchResultsShowing == SearchResultsShowingVideos) {
+			[[SYNTrackingManager sharedManager] trackVideoSearchScreenView];
+		} else {
+			[[SYNTrackingManager sharedManager] trackUserSearchScreenView];
+		}
+	}
+	
     _searchResultsShowing = searchResultsShowing;
     switch (_searchResultsShowing)
     {

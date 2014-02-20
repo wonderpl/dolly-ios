@@ -276,12 +276,8 @@ referenceSizeForFooterInSection:(NSInteger)section {
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 		 
 											  completionHandler: ^(NSDictionary *responseDictionary) {
-												  id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
 												  
-												  [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-																										 action: @"userSubscription"
-																										  label: nil
-																										  value: nil] build]];
 												  barButton.title = @"unfollow";
 												  barButton.enabled = YES;
 											  } errorHandler: ^(NSDictionary *errorDictionary) {

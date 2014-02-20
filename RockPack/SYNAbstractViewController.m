@@ -510,13 +510,7 @@
 
 - (void)shareChannel:(Channel *)channel isOwner:(NSNumber *)isOwner usingImage:(UIImage *)image {
 	[self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
-
-	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
-														  action:@"channelShareButtonClick"
-														   label:nil
-														   value:nil] build]];
-
+	
 	[self shareObjectType:@"channel"
 				 objectId:channel.uniqueId
 				  isOwner:isOwner
@@ -839,12 +833,8 @@
 	} else {
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 											  completionHandler: ^(NSDictionary *responseDictionary) {
-													id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-													
-													[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-																										   action: @"userSubscription"
-																											label: nil
-																											value: nil] build]];
+												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
+												  
 													button.selected = YES;
 													button.enabled = YES;
 												} errorHandler: ^(NSDictionary *errorDictionary) {

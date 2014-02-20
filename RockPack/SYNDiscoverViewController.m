@@ -182,15 +182,20 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	}
 
 	[self updateContainerWidths];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackDiscoverScreenView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+	
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = NO;
 	}
-
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

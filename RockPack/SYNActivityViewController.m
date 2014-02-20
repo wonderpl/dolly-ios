@@ -267,6 +267,8 @@
     NSIndexPath *indexPathForCellPressed = [self.tableView indexPathForCell: cellPressed];
     
     SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(hasUnreadNotifications)];
+	
+	[[SYNTrackingManager sharedManager] trackSelectedNotificationOfType:notification.objectType];
     
     if (!notification)
         return;

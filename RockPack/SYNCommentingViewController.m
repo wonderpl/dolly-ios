@@ -19,6 +19,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+SYNColor.h"
 #import "SYNTrackingManager.h"
+#import "NSRegularExpression+Username.h"
 
 #define kMaxCommentCharacters 120
 #define kCacheTimeInMinutes 1
@@ -344,13 +345,17 @@ static NSString* PlaceholderText = @"Say something nice";
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
     };
-    
+	
+	NSRegularExpression *usernameRegex = [NSRegularExpression usernameRegex];
+	BOOL hasTaggedUsers = !![[usernameRegex matchesInString:commentText options:0 range:NSMakeRange(0, [commentText length])] count];
     
     [appDelegate.oAuthNetworkEngine postCommentForUserId:appDelegate.currentUser.uniqueId
                                                channelId:self.videoInstance.channel.uniqueId
                                               andVideoId:self.videoInstance.uniqueId
                                              withComment:commentText
                                        completionHandler:^(id dictionary) {
+										   
+										   [[SYNTrackingManager sharedManager] trackCommentPostedWithTaggedUsers:hasTaggedUsers];
                                            
                                            if(![dictionary isKindOfClass:[NSDictionary class]] ||
                                               ![[dictionary objectForKey:@"id"] isKindOfClass:[NSNumber class]])

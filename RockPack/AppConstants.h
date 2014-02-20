@@ -338,7 +338,7 @@ static NSString* kPopularGenreUniqueId = @"1979";
 //Login Origin
 
 #define kOriginFacebook @"Facebook"
-#define kOriginRockpack @"Rockpack"
+#define kOriginWonderPL @"WonderPL"
 
 // Accounts
 

@@ -9,8 +9,7 @@
 #import "User.h"
 @import Foundation;
 
-typedef enum : NSInteger
-{
+typedef NS_ENUM(NSInteger, kNotificationObjectType) {
     kNotificationObjectTypeUserLikedYourVideo = 0,
     kNotificationObjectTypeUserSubscibedToYourChannel = 1,
     kNotificationObjectTypeFacebookFriendJoined = 2,
@@ -19,7 +18,7 @@ typedef enum : NSInteger
     kNotificationObjectTypeCommentMention = 5, // Comment
 
     kNotificationObjectTypeUnknown = 666
-} kNotificationObjectType;
+};
 
 @interface SYNNotification : NSObject
 

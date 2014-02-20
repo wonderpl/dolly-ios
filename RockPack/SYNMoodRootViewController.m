@@ -52,6 +52,8 @@
 @property (strong, nonatomic) IBOutlet UIView *divider;
 @property (strong, nonatomic) IBOutlet UIButton *chooseAnotherButton;
 
+@property (nonatomic, assign) BOOL userScrolling;
+
 @end
 
 
@@ -79,8 +81,6 @@
     [self loadMoods];
     
     [self getUpdatedMoods];
-    
-    
     
     self.watchButton.layer.cornerRadius = 15.5f;
     self.watchButton.layer.masksToBounds = YES;
@@ -154,7 +154,13 @@
 
 #pragma mark - Control Callbacks
 - (IBAction)watchButtonTapped:(id)sender {
-    
+	[[SYNTrackingManager sharedManager] trackIPhoneMoodWatchSelected:self.currentMood.name];
+	
+	[self watchVideo];
+}
+
+
+- (void)watchVideo {
     self.watchButton.userInteractionEnabled = NO;
     
 	__weak typeof(self) weakSelf = self;
@@ -278,8 +284,11 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     if (cv == self.moodCollectionView) {
         if (self.currentMood == self.moods [indexPath.item % self.moods.count]) {
+			
+			[[SYNTrackingManager sharedManager] trackMoodSelected:self.currentMood.name];
+			
             if (IS_IPHONE) {
-                [self watchButtonTapped:nil];
+				[self watchVideo];
             } else {
                 [self showVideoForIndexPath:indexPath];
             }
@@ -294,6 +303,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             NSLog(@"This should never be called");
             return;
         }
+		
+#warning moodVideoWatchClickiPad
+		[[SYNTrackingManager sharedManager] trackIPadMoodVideoSelected:self.currentMood.name];
         
         [self showVideoForIndexPath:indexPath];
         
@@ -326,6 +338,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 #pragma mark - ScrollView Delegate (Override to avoid tab bar animating)
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	self.userScrolling = YES;
+}
 
 -(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // override
@@ -407,9 +422,16 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     }];
     
     if (IS_IPAD) {
+		if (self.userScrolling) {
+			[[SYNTrackingManager sharedManager] trackIPadScrolledToMood:self.currentMood.name];
+		}
         
         [self showRandomVideoInstance];
-    }
+    } else {
+		if (self.userScrolling) {
+			[[SYNTrackingManager sharedManager] trackIPhoneScrolledToMood:self.currentMood.name];
+		}
+	}
     
 }
 
@@ -506,10 +528,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     self.scrollingPoint = CGPointMake(self.scrollingPoint.x, self.scrollingPoint.y+2.5);
 }
 - (IBAction)chooseAnotherTapped:(id)sender {
-    
+	[[SYNTrackingManager sharedManager] trackMoodChooseAnother:self.currentMood.name];
+	
     [self showRandomVideoInstance];
-
-
 }
 
 

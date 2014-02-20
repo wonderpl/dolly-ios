@@ -48,6 +48,10 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 - (void) prepareForReuse
 {
     [super prepareForReuse];
+	
+    self.collectionData = @[];
+	
+    [self.collectionView reloadData];
 }
 
 
