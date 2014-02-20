@@ -100,10 +100,10 @@
 	}
 	
 	if ([self.navigationController isBeingDismissed]) {
+		[self trackViewingStatisticsForCurrentVideo];
+		
 		[self.currentVideoPlayer pause];
 	}
-	
-	[self trackViewingStatisticsForCurrentVideo];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -321,22 +321,9 @@
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {
-	CGFloat currentTime = self.currentVideoPlayer.currentTime;
-	CGFloat duration = self.currentVideoPlayer.duration;
-	CGFloat percentageViewed = currentTime / duration;
-	
-	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-	
-	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
-														  action:@"videoViewed"
-														   label:self.videoInstance.video.sourceId
-														   value:@((int)(percentageViewed  * 100.0f))] build]];
-	
-	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
-														  action:@"videoViewedDuration"
-														   label:self.videoInstance.video.sourceId
-														   value:@((int)(currentTime))] build]];
-
+	[[SYNTrackingManager sharedManager] trackVideoView:self.videoInstance.video.sourceId
+										   currentTime:self.currentVideoPlayer.currentTime
+											  duration:self.currentVideoPlayer.duration];
 }
 
 - (Class)animationClassForViewController:(UIViewController *)viewController {

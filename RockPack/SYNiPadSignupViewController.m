@@ -50,7 +50,6 @@
 
 @implementation SYNIPadSignupViewController
 
-
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -78,6 +77,8 @@
 
 
 - (IBAction)uploadPhotoButtonPressed:(UIButton *) button {
+	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:@"Registration"];
+	
     self.imagePicker = [[SYNImagePickerController alloc] initWithHostViewController:self];
     self.imagePicker.delegate = self;
     [self.imagePicker presentImagePickerAsPopupFromView:button arrowDirection:UIPopoverArrowDirectionLeft];

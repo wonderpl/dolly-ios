@@ -23,7 +23,7 @@
 #import "SYNDiscoverSectionView.h"
 #import "SYNOnBoardingHeader.h"
 #import "UINavigationBar+Appearance.h"
-
+#import "SYNTrackingManager.h"
 @import QuartzCore;
 
 #define kAutocompleteTime 0.2
@@ -688,6 +688,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         }
         [self.searchResultsController searchForGenre:searchTerm];
     } else {
+		[[SYNTrackingManager sharedManager] trackSearchInitiated];
+		
         [self.categoriesCollectionView deselectItemAtIndexPath:self.selectedCellIndex animated:YES];
         self.selectedCellIndex = nil;
         [self.searchResultsController searchForTerm:searchTerm];

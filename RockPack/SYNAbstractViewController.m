@@ -298,6 +298,8 @@
 	if (!socialButton.dataItemLinked) {
 		return;
 	}
+	
+	[[SYNTrackingManager sharedManager] trackVideoCommentFromScreenName:[self trackingScreenName]];
 
 	SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
 

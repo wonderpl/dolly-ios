@@ -2554,6 +2554,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 - (IBAction)changeCoverImageButtonTapped:(id)sender
 {
+	[[SYNTrackingManager sharedManager] trackCoverPhotoUpload];
     
     //302,167 is the values for the cropping, the cover photo dimensions is 907 x 502
     self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(302,167)];
@@ -2571,6 +2572,8 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 - (IBAction)changeAvatarButtonTapped:(id)sender
 {
+	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:[self trackingScreenName]];
+	
     self.imagePickerControllerAvatar = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(280, 280)];
     
     self.imagePickerControllerAvatar.delegate = self;
@@ -3051,6 +3054,10 @@ finishedWithImage: (UIImage *) image
 		return [[self.channelOwner.subscriptions array] filteredArrayUsingPredicate:predicate];
 	}
 	return [self.channelOwner.subscriptions array];
+}
+
+- (NSString *)trackingScreenName {
+	return @"Profile";
 }
 
 @end

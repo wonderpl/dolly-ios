@@ -11,7 +11,6 @@
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
 #import "VideoInstance.h"
-#import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
 #import "SYNFacebookManager.h"
 #import "SYNOAuthNetworkEngine.h"
@@ -25,6 +24,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SYNGenreColorManager.h"
+#import "SYNTrackingManager.h"
 
 #define kAnimationExpansion 0.4f
 
@@ -177,6 +177,8 @@
     }
     else
     {
+		[[SYNTrackingManager sharedManager] trackCollectionSelectedIsNew:NO];
+		
         self.selectedCell = [self.currentChannelsCollectionView cellForItemAtIndexPath:indexPath];
         self.selectedChannel = self.channels[indexPath.item - 1]; // (the channel index is +1 due to extra first channel)
     }
@@ -269,13 +271,7 @@
     
     if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden) // if it is opening, show the panel
     {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"channelSelectionClick"
-                                                                label: @"New"
-                                                                value: nil] build]];
-        
+		[[SYNTrackingManager sharedManager] trackCollectionSelectedIsNew:YES];
     }
     
 
@@ -318,6 +314,8 @@
 
 - (IBAction)confirmButtonPressed:(UIButton *)button {
 	button.enabled = NO;
+	
+	[[SYNTrackingManager sharedManager] trackCollectionSelectionSaved];
 	
 	if (self.createNewChannelCell.isEditing) {
 		// We don't have a channel, need to create one

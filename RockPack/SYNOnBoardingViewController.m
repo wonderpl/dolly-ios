@@ -25,6 +25,7 @@
 #import "SYNActivityManager.h"
 #import "SYNOnBoardingSectionHeader.h"
 #import "SYNGenreColorManager.h"
+#import "SYNTrackingManager.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
@@ -50,6 +51,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 @property (nonatomic, strong) NSMutableArray *usersByCategory;
 @property (nonatomic, strong) NSMutableArray *categories;
 
+@property (nonatomic, assign) NSInteger followedCount;
 
 @end
 
@@ -151,6 +153,10 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     }
 
     
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleDefault;
 }
 
 - (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
@@ -432,10 +438,22 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     return supplementaryView;
 }
 
+- (void)followControlPressed:(SYNSocialButton *)socialButton {
+	// Track the number of people followed
+	if (socialButton.selected) {
+		self.followedCount--;
+	} else {
+		self.followedCount++;
+	}
+	
+	[super followControlPressed:socialButton];
+}
+
 - (void) skipButtonPressed: (UIButton*) button
 {
     button.enabled = NO;
     
+	[[SYNTrackingManager sharedManager] trackOnboardingCompletedWithFollowedCount:self.followedCount];
     
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                             object: self

@@ -332,6 +332,9 @@
     
     ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[[SYNTrackingManager sharedManager] trackAddressBookPermission:granted];
+			
             if (granted)
             {
                 DebugLog(@"Address Book Access GRANTED");
@@ -351,12 +354,6 @@
                 }
             }
             
-            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-            
-            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                   action: @"AddressBookPerm"
-                                                                    label: granted ? @"accepted": @"rejected"
-                                                                    value: nil] build]];
             if (addressBookRef)
             {
                 CFRelease(addressBookRef);
@@ -825,16 +822,9 @@
         self.friendToAddEmail.uniqueId = self.friendToAddEmail.email;
         self.friendToAddEmail.externalUID = self.friendToAddEmail.email; // workaround the fact that we do not have a UID for this new user
     }
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    NSString* whereFrom = [self.friendToAddEmail.externalSystem isEqualToString:kFacebook] ? @"fromFB" : @"New";
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"ProvideEmailtoShare"
-                                                            label: whereFrom
-                                                            value: nil] build]];
-    
+	
+	[[SYNTrackingManager sharedManager] trackShareEmailEnteredIsNew:![self.friendToAddEmail.externalSystem isEqualToString:kFacebook]];
+	
     [self sendEmailToFriend: self.friendToAddEmail];
 }
 

@@ -28,6 +28,7 @@
 #import "UILabel+Animation.h"
 #import "SYNTrackingManager.h"
 #import <UIButton+WebCache.h>
+#import "SYNTrackingManager.h"
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UIScrollViewDelegate, SYNPagingModelDelegate>
 
@@ -185,12 +186,7 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-	
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
-                                                           action:@"videoBarClick"
-                                                            label:nil
-                                                            value:nil] build]];
+	[[SYNTrackingManager sharedManager] trackCarouselVideoSelected];
 	
 	if (indexPath.row == self.selectedIndex) {
 		if (self.currentVideoPlayer.state == SYNVideoPlayerStatePlaying) {
@@ -229,7 +225,10 @@ referenceSizeForFooterInSection:(NSInteger)section {
 		NSInteger pageOffset = (scrollView.contentOffset.x - pageWidth) / pageWidth;
 
 		if (pageOffset) {
-			self.selectedIndex = (pageOffset < 0 ? [self previousVideoIndex] : [self nextVideoIndex]);
+			BOOL previousVideo = (pageOffset < 0);
+			[[SYNTrackingManager sharedManager] trackVideoSwipeToVideo:previousVideo];
+			
+			self.selectedIndex = (previousVideo ? [self previousVideoIndex] : [self nextVideoIndex]);
 			
 			scrollView.contentOffset = CGPointMake(pageWidth, 0);
 		}

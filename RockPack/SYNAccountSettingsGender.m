@@ -158,8 +158,6 @@
 {
 	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Gender"];
 	
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
     [self.appDelegate.oAuthNetworkEngine changeUserField: @"gender"
                                                  forUser: self.appDelegate.currentUser
                                             withNewValue: newGender
@@ -167,24 +165,17 @@
                                            if([newGender isEqualToString: @"m"])
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderMale);
-
-                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
-                                                      value: @"male"];
                                            }
                                            else if([newGender isEqualToString: @"f"])
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderFemale);
-                                               
-                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
-                                                      value: @"female"];
                                            }
                                            else
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderUndecided);
-                                               
-                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
-                                                      value: @"unknown"];
                                            }
+										   
+										   [[SYNTrackingManager sharedManager] setGenderDimension:self.appDelegate.currentUser.genderValue];
                                            
                                            [self.appDelegate saveContext: YES];
                                            

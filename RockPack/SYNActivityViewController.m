@@ -224,11 +224,13 @@
     
     SYNNotification* notification;
     
-    if(indexPath.row == 0 && hasUnreadNotifications)
+    if(indexPath.row == 0 && hasUnreadNotifications) {
+		[[SYNTrackingManager sharedManager] trackMarkAllNotificationAsRead];
+		
         notification = nil;
-    else
+    } else {
         notification = _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
-    
+	}
     
     [self markAsReadForNotification: notification];
 }
@@ -350,8 +352,9 @@
     
     [self markAsReadForNotification: notification];
 }
--(void) markAllAsRead
-{
+
+- (void) markAllAsRead {
+	[[SYNTrackingManager sharedManager] trackMarkAllNotificationAsRead];
     
     SYNNotification* notification;
 
@@ -367,10 +370,11 @@
 {
     
     NSArray *array;
-    if(notification)
+    if (notification) {
         array = @[@(notification.identifier)];
-    else
+	} else {
         array = @[];
+	}
     
     [appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes:array
                                                           fromUserId:appDelegate.currentUser.uniqueId

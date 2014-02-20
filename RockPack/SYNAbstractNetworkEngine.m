@@ -42,11 +42,6 @@
         
         // This engine is about requesting JSON objects and uses the appropriate operation type
         [self registerOperationSubclass: [SYNNetworkOperationJsonObject class]];
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker set: [GAIFields customDimensionForIndex: kGADimensionLocale]
-               value: self.localeString];
     }
     
     return self;
