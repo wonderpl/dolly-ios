@@ -38,7 +38,6 @@ static const NSInteger TrackingDimensionLocale = 4;
 	GAI *gai = [GAI sharedInstance];
 	
     [gai trackerWithTrackingId:kGoogleAnalyticsId];
-	[gai.logger setLogLevel:kGAILogLevelVerbose];
 	
 	gai.trackUncaughtExceptions = YES;
     gai.dispatchInterval = 30;
