@@ -112,8 +112,8 @@
     
     self.arrowForOverlayImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ArrowCommentBox"]];
     
-    //This call is not being made, the data is in cor data as there is also a call in the onboarding view controller
-    //Need a solution that wouldnt require this check.
+    //This call is not being made, the data is in core data as there is also a call in the onboarding view controller
+    //Need a solution that wouldnt require this check. The sucess block is not getting called when the same call was made earlier. Could be something to do with cacheing 
     
     if ([SYNLoginManager sharedManager].registrationCheck == NO) {
         [self loadBasicDataWithComplete:^(BOOL success) {
@@ -633,5 +633,13 @@
 {
     
 }
+
+- (BOOL)shouldAutomaticallyForwardRotationMethods {
+    return YES;
+}
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods {
+    return YES;
+}
+
 
 @end
