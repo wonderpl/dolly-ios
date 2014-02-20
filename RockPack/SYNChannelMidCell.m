@@ -405,4 +405,89 @@
 }
 
 
+-(void) inboardingAnimationFromMode:(ProfileType) type {
+    
+    if (type == kModeOtherUsersProfile) {
+        [UIView animateWithDuration:0.3f animations:^{
+            CGRect tmpRect = self.containerView.frame;
+            if (IS_IPHONE)
+            {
+                tmpRect.origin.x += 30;
+            }
+            else
+            {
+                tmpRect.origin.x += 30;
+            }
+            self.containerView.frame = tmpRect;
+        } completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                CGRect tmpRect = self.containerView.frame;
+                if (IS_IPHONE)
+                {
+                    tmpRect.origin.x -= 30;
+                }
+                else
+                {
+                    tmpRect.origin.x -= 30;
+                }
+                self.containerView.frame = tmpRect;
+                
+            }];
+            
+        }];
+
+    } else if (type == kModeMyOwnProfile) {
+        [UIView animateWithDuration:0.3f animations:^{
+            CGRect tmpRect = self.containerView.frame;
+            
+            if (IS_IPHONE)
+            {
+                tmpRect.origin.x += 30;
+            }
+            else
+            {
+                tmpRect.origin.x += 30;
+            }
+            self.containerView.frame = tmpRect;
+        } completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                CGRect tmpRect = self.containerView.frame;
+                if (IS_IPHONE)
+                {
+                    tmpRect.origin.x -= 60;
+                }
+                else
+                {
+                    tmpRect.origin.x -= 60;
+                }
+                self.containerView.frame = tmpRect;
+                
+                self.descriptionLabel.hidden=YES;
+            } completion:^(BOOL finished) {
+                
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    CGRect tmpRect = self.containerView.frame;
+                    if (IS_IPHONE)
+                    {
+                        tmpRect.origin.x += 30;
+                    }
+                    else
+                    {
+                        tmpRect.origin.x += 30;
+                    }
+                    self.containerView.frame = tmpRect;
+                } completion:^(BOOL finished) {
+                    self.descriptionLabel.hidden=YES;
+                }];
+            }];
+            
+        }];
+    }
+    
+}
+
+
 @end
