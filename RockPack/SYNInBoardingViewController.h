@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SYNAbstractViewController.h"
+#import "SYNDeviceManager.h"
 
 @interface SYNInBoardingViewController : SYNAbstractViewController
 

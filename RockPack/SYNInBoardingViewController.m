@@ -7,6 +7,7 @@
 //
 
 #import "SYNInBoardingViewController.h"
+#import "SYNDeviceManager.h"
 
 @interface SYNInBoardingViewController ()
 
