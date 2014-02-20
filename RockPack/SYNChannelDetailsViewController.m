@@ -35,6 +35,8 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "UINavigationBar+Appearance.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
+#import "SYNCollectectionDetailsOverlayViewController.h"
+
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -243,6 +245,32 @@
 
 	self.model.delegate = self;
     [self.navigationController.navigationBar setBackgroundTransparent:YES];
+
+    NSInteger viewCount = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime];
+    
+    if ([[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime]<2)
+    {
+        if (self.mode == kChannelDetailsModeDisplay) {
+            
+            SYNCollectectionDetailsOverlayViewController* channeldetailsOverlay = [[SYNCollectectionDetailsOverlayViewController alloc] init];
+            
+            // Set frame to full screen
+            CGRect vFrame = channeldetailsOverlay.view.frame;
+            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+            channeldetailsOverlay.view.frame = vFrame;
+            channeldetailsOverlay.view.alpha = 0.0f;
+            
+            [appDelegate.masterViewController addChildViewController:channeldetailsOverlay];
+            [appDelegate.masterViewController.view addSubview:channeldetailsOverlay.view];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                channeldetailsOverlay.view.alpha = 1.0f;
+            }];
+        }
+        viewCount+=1;
+        [[NSUserDefaults standardUserDefaults] setInteger: viewCount
+                                                forKey: kUserDefaultsCollectionDetailsFirstTime];
+    }
 
 }
 
