@@ -11,62 +11,7 @@
 #import <GAI.h>
 
 static NSString *const UIActionCategory = @"uiAction";
-
-static NSString *const VideoAddAction = @"videoPlusButtonClick";
-static NSString *const VideoLikeAction = @"videoLoveButtonClick";
-static NSString *const FacebookLoginAction = @"facebookLogin";
-static NSString *const VideoShareAction = @"videoShareButtonClick";
-static NSString *const CollectionShareAction = @"collectionShareButtonClick";
-static NSString *const CollectionFollowAction = @"collectionFollowButtonClick";
-static NSString *const UserCollectionsFollowAction = @"collectionFollowAllButtonClick";
-
-static NSString *const VideoMaximiseViaRotationAction = @"videoMaximizeTurn";
-static NSString *const VideoMaximiseAction = @"videoMaximizeClick";
-
-static NSString *const AccountPropertyChangedAction = @"accountPropertyChanged";
-
-static NSString *const StartScreenView = @"Start";
-static NSString *const LoginScreenView = @"Login";
-static NSString *const RegisterScreenView = @"Registration";
-static NSString *const RegisterStep2ScreenView = @"Registration 2";
-static NSString *const ForgotPasswordScreenView = @"Forgot password";
-
-static NSString *const MoodMinderScreenView = @"Mood-Minder";
-static NSString *const FeedScreenView = @"My Wonders";
-static NSString *const OwnProfileScreenView = @"Own Profile";
-static NSString *const ActivityScreenView = @"Activity";
-
-static NSString *const ProfileOverlayScreenView = @"More";
-static NSString *const AccountSettingsScreenView = @"Account";
-static NSString *const AboutScreenView = @"About";
-static NSString *const FeedbackScreenView = @"Feedback";
-static NSString *const HintsScreenView = @"Hints";
-static NSString *const FriendsScreenView = @"Friends";
-static NSString *const FriendsFBConnectScreenView = @"Friends Fb Connect";
-static NSString *const BlogScreenView = @"Blog";
-static NSString *const HelpScreenView = @"Help";
-
-static NSString *const EditProfileScreenView = @"Edit Profile";
-static NSString *const OwnProfileFollowingScreenView = @"Own Profile Following";
-
-static NSString *const OwnCollectionScreenView = @"Own Collection";
-static NSString *const EditCollectionScreenView = @"Edit Collection";
-
-static NSString *const CollectionFollowersScreenView = @"Subscriber list";
-
-static NSString *const OtherUserProfileScreenView = @"User Profile";
-static NSString *const OtherUserCollectionScreenView = @"User Collection";
-static NSString *const OtherUsersProfileFollowingScreenView = @"User Profile's following";
-static NSString *const CommentingScreenView = @"Commenting";
-
-static NSString *const CarouselVideoPlayerScreenView = @"Video 1";
-static NSString *const SearchVideoPlayerScreenView = @"Video 2";
-
-static NSString *const ShareScreenView = @"Share";
-
 static NSString *const GoalCategory = @"goal";
-
-static NSString *const UserLoginGoal = @"userLogin";
 
 static const NSInteger TrackingDimensionAge = 1;
 
@@ -90,167 +35,167 @@ static const NSInteger TrackingDimensionAge = 1;
 #pragma mark - Public
 
 - (void)trackVideoAddFromScreenName:(NSString *)screenName {
-	[self trackEventWithCategory:UIActionCategory action:VideoAddAction label:screenName value:nil];
+	[self trackEventWithCategory:UIActionCategory action:@"videoPlusButtonClick" label:screenName value:nil];
 }
 
 - (void)trackVideoLikeFromScreenName:(NSString *)screenName {
-	[self trackEventWithCategory:UIActionCategory action:VideoLikeAction label:screenName value:nil];
+	[self trackEventWithCategory:UIActionCategory action:@"videoLoveButtonClick" label:screenName value:nil];
 }
 
 - (void)trackFacebookLogin {
-	[self trackEventWithCategory:UIActionCategory action:FacebookLoginAction];
+	[self trackEventWithCategory:UIActionCategory action:@"facebookLogin"];
 }
 
 - (void)trackUserLoginFromOrigin:(NSString *)origin {
-	[self trackEventWithCategory:GoalCategory action:UserLoginGoal label:origin value:nil];
+	[self trackEventWithCategory:GoalCategory action:@"userLogin" label:origin value:nil];
 }
 
 - (void)trackVideoShareWithService:(NSString *)service {
-	[self trackEventWithCategory:UIActionCategory action:VideoShareAction label:service value:nil];
+	[self trackEventWithCategory:UIActionCategory action:@"videoShareButtonClick" label:service value:nil];
 }
 
 - (void)trackCollectionShareWithService:(NSString *)service {
-	[self trackEventWithCategory:UIActionCategory action:CollectionShareAction label:service value:nil];
+	[self trackEventWithCategory:UIActionCategory action:@"collectionShareButtonClick" label:service value:nil];
 }
 
 - (void)trackCollectionFollowFromScreenName:(NSString *)screenName {
-	[self trackEventWithCategory:UIActionCategory action:CollectionFollowAction label:screenName value:nil];
+	[self trackEventWithCategory:UIActionCategory action:@"collectionFollowButtonClick" label:screenName value:nil];
 }
 
 - (void)trackUserCollectionsFollowFromScreenName:(NSString *)screenName {
-	[self trackEventWithCategory:UIActionCategory action:UserCollectionsFollowAction label:screenName value:nil];
+	[self trackEventWithCategory:UIActionCategory action:@"collectionFollowAllButtonClick" label:screenName value:nil];
 }
 
 - (void)trackVideoMaximiseViaRotation {
-	[self trackEventWithCategory:UIActionCategory action:VideoMaximiseViaRotationAction];
+	[self trackEventWithCategory:UIActionCategory action:@"videoMaximizeTurn"];
 }
 
 - (void)trackVideoMaximise {
-	[self trackEventWithCategory:UIActionCategory action:VideoMaximiseAction];
+	[self trackEventWithCategory:UIActionCategory action:@"videoMaximizeClick"];
 }
 
 - (void)trackAccountPropertyChanged:(NSString *)property {
-	[self trackEventWithCategory:UIActionCategory action:AccountPropertyChangedAction label:property value:nil];
+	[self trackEventWithCategory:UIActionCategory action:@"accountPropertyChanged" label:property value:nil];
 }
 
 - (void)trackStartScreenView {
-	[self trackScreenViewWithName:StartScreenView];
+	[self trackScreenViewWithName:@"Start"];
 }
 
 - (void)trackLoginScreenView {
-	[self trackScreenViewWithName:LoginScreenView];
+	[self trackScreenViewWithName:@"Login"];
 }
 
 - (void)trackForgotPasswordScreenView {
-	[self trackScreenViewWithName:ForgotPasswordScreenView];
+	[self trackScreenViewWithName:@"Forgot password"];
 }
 
 - (void)trackRegistrationScreenView {
-	[self trackScreenViewWithName:RegisterScreenView];
+	[self trackScreenViewWithName:@"Registration"];
 }
 
 - (void)trackRegistrationStep2ScreenView {
-	[self trackScreenViewWithName:RegisterStep2ScreenView];
+	[self trackScreenViewWithName:@"Registration 2"];
 }
 
 - (void)trackMoodMinderScreenView {
-	[self trackScreenViewWithName:MoodMinderScreenView];
+	[self trackScreenViewWithName:@"Mood-Minder"];
 }
 
 - (void)trackFeedScreenView {
-	[self trackScreenViewWithName:FeedScreenView];
+	[self trackScreenViewWithName:@"My Wonders"];
 }
 
 - (void)trackShareScreenView {
-	[self trackScreenViewWithName:ShareScreenView];
+	[self trackScreenViewWithName:@"Share"];
 }
 
 - (void)trackOwnProfileScreenView {
-	[self trackScreenViewWithName:OwnProfileScreenView];
+	[self trackScreenViewWithName:@"Own Profile"];
 }
 
 - (void)trackActivityScreenView {
-	[self trackScreenViewWithName:ActivityScreenView];
+	[self trackScreenViewWithName:@"Activity"];
 }
 
 - (void)trackProfileOverlayScreenView {
-	[self trackScreenViewWithName:ProfileOverlayScreenView];
+	[self trackScreenViewWithName:@"More"];
 }
 
 - (void)trackEditProfileScreenView {
-	[self trackScreenViewWithName:EditProfileScreenView];
+	[self trackScreenViewWithName:@"Edit Profile"];
 }
 
 - (void)trackOwnProfileFollowingScreenView {
-	[self trackScreenViewWithName:OwnProfileFollowingScreenView];
+	[self trackScreenViewWithName:@"Own Profile Following"];
 }
 
 - (void)trackOwnCollectionScreenView {
-	[self trackScreenViewWithName:OwnCollectionScreenView];
+	[self trackScreenViewWithName:@"Own Collection"];
 }
 
 - (void)trackEditCollectionScreenView {
-	[self trackScreenViewWithName:EditCollectionScreenView];
+	[self trackScreenViewWithName:@"Edit Collection"];
 }
 
 - (void)trackOtherUserProfileScreenView {
-	[self trackScreenViewWithName:OtherUserProfileScreenView];
+	[self trackScreenViewWithName:@"User Profile"];
 }
 
 - (void)trackOtherUserCollectionScreenView {
-	[self trackScreenViewWithName:OtherUserCollectionScreenView];
+	[self trackScreenViewWithName:@"User Collection"];
 }
 
 - (void)trackOtherUserCollectionFollowingScreenView {
-	[self trackScreenViewWithName:OtherUsersProfileFollowingScreenView];
+	[self trackScreenViewWithName:@"User Profile's following"];
 }
 
 - (void)trackCollectionFollowersScreenView {
-	[self trackScreenViewWithName:CollectionFollowersScreenView];
+	[self trackScreenViewWithName:@"Subscriber list"];
 }
 
 - (void)trackCommentingScreenView {
-	[self trackScreenViewWithName:CommentingScreenView];
+	[self trackScreenViewWithName:@"Commenting"];
 }
 
 - (void)trackAccountSettingsScreenView {
-	[self trackScreenViewWithName:AccountSettingsScreenView];
+	[self trackScreenViewWithName:@"Account"];
 }
 
 - (void)trackAboutScreenView {
-	[self trackScreenViewWithName:AboutScreenView];
+	[self trackScreenViewWithName:@"About"];
 }
 
 - (void)trackFeedbackScreenView {
-	[self trackScreenViewWithName:FeedbackScreenView];
+	[self trackScreenViewWithName:@"Feedback"];
 }
 
 - (void)trackHintsScreenView {
-	[self trackScreenViewWithName:HintsScreenView];
+	[self trackScreenViewWithName:@"Hints"];
 }
 
 - (void)trackFriendsScreenView {
-	[self trackScreenViewWithName:FriendsScreenView];
+	[self trackScreenViewWithName:@"Friends"];
 }
 
 - (void)trackFriendsFBConnectScreenView {
-	[self trackScreenViewWithName:FriendsFBConnectScreenView];
+	[self trackScreenViewWithName:@"Friends Fb Connect"];
 }
 
 - (void)trackBlogScreenView {
-	[self trackScreenViewWithName:BlogScreenView];
+	[self trackScreenViewWithName:@"Blog"];
 }
 
 - (void)trackHelpScreenView {
-	[self trackScreenViewWithName:HelpScreenView];
+	[self trackScreenViewWithName:@"Help"];
 }
 
 - (void)trackCarouselVideoPlayerScreenView {
-	[self trackScreenViewWithName:CarouselVideoPlayerScreenView];
+	[self trackScreenViewWithName:@"Video 1"];
 }
 
 - (void)trackSearchVideoPlayerScreenView {
-	[self trackScreenViewWithName:SearchVideoPlayerScreenView];
+	[self trackScreenViewWithName:@"Video 2"];
 }
 
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate {
