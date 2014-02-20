@@ -20,8 +20,12 @@ static NSString *const NetworkCategory = @"network";
 static const NSInteger TrackingDimensionAge = 1;
 static const NSInteger TrackingDimensionGender = 3;
 static const NSInteger TrackingDimensionLocale = 4;
+static const NSInteger TrackingDimensionConnection = 6;
 
 @interface SYNTrackingManager ()
+
+@property (nonatomic, strong) Reachability *reachability;
+@property (nonatomic, strong) CTTelephonyNetworkInfo *networkInfo;
 
 @end
 
@@ -38,13 +42,35 @@ static const NSInteger TrackingDimensionLocale = 4;
 	return manager;
 }
 
+- (instancetype)init {
+	if (self = [super init]) {
+		NSString *hostname = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"APIHostName"];
+		self.reachability = [Reachability reachabilityWithHostname:hostname];
+		[self.reachability startNotifier];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(reachabilityChanged:)
+													 name:kReachabilityChangedNotification
+												   object:self.reachability];
+		
+		self.networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(radioAccessTechnologyChanged:)
+													 name:CTRadioAccessTechnologyDidChangeNotification
+												   object:self.networkInfo];
+	}
+	return self;
+}
+
 - (void)setup {
 	GAI *gai = [GAI sharedInstance];
 	
     [gai trackerWithTrackingId:kGoogleAnalyticsId];
+	[gai.logger setLogLevel:kGAILogLevelVerbose];
 	
 	gai.trackUncaughtExceptions = YES;
     gai.dispatchInterval = 30;
+	
+	[self setConnectionDimension:[self currentConnectionString]];
 }
 
 #pragma mark - Public
@@ -343,6 +369,10 @@ static const NSInteger TrackingDimensionLocale = 4;
 	[self trackScreenViewWithName:@"Help"];
 }
 
+- (void)trackRateScreenView {
+	[self trackScreenViewWithName:@"Rate"];
+}
+
 - (void)trackCarouselVideoPlayerScreenView {
 	[self trackScreenViewWithName:@"Video 1"];
 }
@@ -419,6 +449,15 @@ static const NSInteger TrackingDimensionLocale = 4;
 	[[self defaultTracker] set:[GAIFields customDimensionForIndex:TrackingDimensionLocale] value:languageIdentifier];
 }
 
+- (void)setConnectionDimension:(NSString *)connection {
+	[[self defaultTracker] set:[GAIFields customDimensionForIndex:TrackingDimensionConnection] value:connection];
+}
+
+- (void)trackScreenViewWithName:(NSString *)name {
+	[[self defaultTracker] set:kGAIScreenName value:name];
+    [[self defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 #pragma mark - Private
 
 - (id<GAITracker>)defaultTracker {
@@ -436,9 +475,36 @@ static const NSInteger TrackingDimensionLocale = 4;
 																		 value:value] build]];
 }
 
-- (void)trackScreenViewWithName:(NSString *)name {
-	[[self defaultTracker] set:kGAIScreenName value:name];
-    [[self defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
+- (void)reachabilityChanged:(NSNotification *)notification {
+	[self setConnectionDimension:[self currentConnectionString]];
+}
+
+- (void)radioAccessTechnologyChanged:(NSNotification *)notification {
+	[self setConnectionDimension:[self currentConnectionString]];
+}
+
+- (NSString *)currentConnectionString {
+	if ([self.reachability isReachableViaWiFi]) {
+		return @"wifi";
+	}
+	if ([self.reachability isReachableViaWWAN]) {
+		return [self cellTechnologyGeneration:self.networkInfo.currentRadioAccessTechnology];
+	}
+	return @"none";
+}
+
+- (NSString *)cellTechnologyGeneration:(NSString *)technology {
+	return (@{ CTRadioAccessTechnologyGPRS         : @"2g",
+			   CTRadioAccessTechnologyEdge         : @"2g",
+			   CTRadioAccessTechnologyWCDMA        : @"3g",
+			   CTRadioAccessTechnologyHSDPA        : @"3g",
+			   CTRadioAccessTechnologyHSUPA        : @"3g",
+			   CTRadioAccessTechnologyCDMA1x       : @"3g",
+			   CTRadioAccessTechnologyCDMAEVDORev0 : @"3g",
+			   CTRadioAccessTechnologyCDMAEVDORevA : @"3g",
+			   CTRadioAccessTechnologyCDMAEVDORevB : @"3g",
+			   CTRadioAccessTechnologyeHRPD        : @"3g",
+			   CTRadioAccessTechnologyLTE          : @"4g" }[technology] ?: @"unknown");
 }
 
 @end

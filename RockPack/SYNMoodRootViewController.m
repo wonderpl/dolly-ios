@@ -304,7 +304,6 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
             return;
         }
 		
-#warning moodVideoWatchClickiPad
 		[[SYNTrackingManager sharedManager] trackIPadMoodVideoSelected:self.currentMood.name];
         
         [self showVideoForIndexPath:indexPath];

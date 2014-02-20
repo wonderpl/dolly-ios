@@ -125,6 +125,8 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)trackShareScreenView;
 
+- (void)trackRateScreenView;
+
 - (void)trackCollectionShareCompletedWithService:(NSString *)service;
 - (void)trackVideoShareCompletedWithService:(NSString *)service;
 
@@ -136,5 +138,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)setGenderDimension:(Gender)gender;
 - (void)setLocaleDimension:(NSLocale *)locale;
+
+- (void)trackScreenViewWithName:(NSString *)name;
 
 @end

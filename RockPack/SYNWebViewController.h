@@ -11,6 +11,7 @@
 @interface SYNWebViewController : UIViewController <UIWebViewDelegate>
 
 + (UIViewController *)webViewControllerForURL:(NSURL *)URL;
++ (UIViewController *)webViewControllerForURL:(NSURL *)URL withTrackingName:(NSString *)trackingName;
 
 @property (nonatomic, strong, readonly) UIWebView *webView;
 

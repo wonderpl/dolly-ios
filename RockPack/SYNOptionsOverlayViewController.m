@@ -236,8 +236,11 @@ typedef enum {
         case OptionButtonTagRate:
         {
              self.completeBlock = ^{
+				 
+				 [[SYNTrackingManager sharedManager] trackRateScreenView];
                  
                  [Appirater userDidSignificantEvent: YES];
+				 
              };
         }
         break;
@@ -245,7 +248,7 @@ typedef enum {
         case OptionButtonTagBlog:
         {
 			NSURL *URL = [NSURL URLWithString:@"http://blog.wonderpl.com/"];
-			UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+			UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL withTrackingName:@"Blog"];
 			[parentViewController presentViewController:viewController animated:YES completion:nil];
         }
         break;
@@ -253,7 +256,7 @@ typedef enum {
         case OptionButtonTagHelp:
         {
 			NSURL *URL = [NSURL URLWithString:@"http://wonderpl.com/help"];
-			UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+			UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL withTrackingName:@"Help"];
 			[parentViewController presentViewController:viewController animated:YES completion:nil];
         }
         break;
@@ -267,7 +270,7 @@ typedef enum {
         case OptionButtonTagHints:
         {
             NSURL *URL = [NSURL URLWithString:@"http://wonderpl.com/hints"];
-            UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+            UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL withTrackingName:@"Hints"];
             [parentViewController presentViewController:viewController animated:YES completion:nil];
         }
         break;
