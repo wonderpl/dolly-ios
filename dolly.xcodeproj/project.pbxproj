@@ -744,6 +744,8 @@
 		4425147718B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4425147518B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png */; };
 		44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC631884384900B70139 /* ButtonMoreHints.png */; };
 		44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */; };
+		44D66FDF18B67832009BC910 /* ButtonMoreEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */; };
+		44D66FE018B67832009BC910 /* ButtonMoreEdit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */; };
 		4C03237518AE3F4D00E168EF /* SYNDiscoverSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */; };
 		4C03237718AE3F8700E168EF /* SYNDiscoverSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */; };
 		4C03237A18AE6F8300E168EF /* SYNFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03237918AE6F8300E168EF /* SYNFriendCell.m */; };
@@ -2107,6 +2109,8 @@
 		4425147518B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaceholderNotificationVideo@2x.png"; sourceTree = "<group>"; };
 		44CAFC631884384900B70139 /* ButtonMoreHints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonMoreHints.png; path = Assets/Images/ButtonMoreHints.png; sourceTree = "<group>"; };
 		44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreHints@2x.png"; path = "Assets/Images/ButtonMoreHints@2x.png"; sourceTree = "<group>"; };
+		44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMoreEdit.png; sourceTree = "<group>"; };
+		44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMoreEdit@2x.png"; sourceTree = "<group>"; };
 		4C03237318AE3F4D00E168EF /* SYNDiscoverSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionView.h; sourceTree = "<group>"; };
 		4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionView.m; sourceTree = "<group>"; };
 		4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionView.xib; sourceTree = "<group>"; };
@@ -5620,6 +5624,8 @@
 		BED027B51834D4BF00636659 /* Options */ = {
 			isa = PBXGroup;
 			children = (
+				44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */,
+				44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */,
 				44CAFC631884384900B70139 /* ButtonMoreHints.png */,
 				44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */,
 				BED027B61834D4CC00636659 /* ButtonMoreAbout.png */,
@@ -6277,6 +6283,7 @@
 				38A200881731607F00FB9F57 /* PanelSearchSuggestion~iphone.png in Resources */,
 				38A200891731607F00FB9F57 /* PanelSearch~iphone.png in Resources */,
 				38A200901731607F00FB9F57 /* ArrowSettings@2x~iphone.png in Resources */,
+				44D66FE018B67832009BC910 /* ButtonMoreEdit@2x.png in Resources */,
 				38A200911731607F00FB9F57 /* ArrowSettings~iphone.png in Resources */,
 				1F4E7FC8181ACBAA00F59007 /* TabSearchHighlighted~iphone.png in Resources */,
 				38A200961731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png in Resources */,
@@ -6584,6 +6591,7 @@
 				1F4E7FAF181ACBAA00F59007 /* TabActivityHighlighted@2x~iphone.png in Resources */,
 				BEEC3F2C17465FAD00D8F4C4 /* BackgroundLoadMore@2x.png in Resources */,
 				1F003B42174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png in Resources */,
+				44D66FDF18B67832009BC910 /* ButtonMoreEdit.png in Resources */,
 				1F003B43174A782100BBAE2F /* ButtonSettingsSave~iphone.png in Resources */,
 				1F003B44174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png in Resources */,
 				1F003B45174A782100BBAE2F /* ButtonSettingsSaveHighlighted~iphone.png in Resources */,
