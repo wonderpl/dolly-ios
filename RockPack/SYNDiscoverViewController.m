@@ -666,9 +666,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [self closeAutocomplete];
     
-    
-#warning iphone woverlay here!!! 
-    
     if(IS_IPHONE)
     {
         // the hack below is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
