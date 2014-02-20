@@ -238,8 +238,7 @@
             
             SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
             if(self.favouritesValue && [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId])
-                videoInstance.starredByUserValue = YES;
-            videoInstance.commentCount =  channelDictionary[@"comments"][@"count"];
+                videoInstance.starredByUserValue = YES;            
             [importArray addObject: videoInstance];
         }
         
