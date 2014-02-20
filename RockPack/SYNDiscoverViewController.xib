@@ -28,7 +28,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r19-QH-EUb" userLabel="Side Container (Used for Resize)">
-                    <rect key="frame" x="0.0" y="32" width="223" height="992"/>
+                    <rect key="frame" x="-1" y="32" width="223" height="992"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <subviews>
                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="voe-PP-I8e">
@@ -93,11 +93,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="fzQ-bP-TKm" firstAttribute="leading" secondItem="r19-QH-EUb" secondAttribute="trailing" id="IGf-Ql-jhe"/>
+                <constraint firstItem="fzQ-bP-TKm" firstAttribute="leading" secondItem="r19-QH-EUb" secondAttribute="trailing" constant="1" id="IGf-Ql-jhe"/>
                 <constraint firstItem="r19-QH-EUb" firstAttribute="top" secondItem="1" secondAttribute="top" constant="32" id="Lpp-Th-wQl"/>
                 <constraint firstAttribute="bottom" secondItem="r19-QH-EUb" secondAttribute="bottom" id="Pln-oS-f24"/>
                 <constraint firstAttribute="trailing" secondItem="fzQ-bP-TKm" secondAttribute="trailing" id="ayI-J4-P47"/>
-                <constraint firstItem="r19-QH-EUb" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="gQh-UL-TxC"/>
+                <constraint firstItem="r19-QH-EUb" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="-1" id="gQh-UL-TxC"/>
                 <constraint firstItem="fzQ-bP-TKm" firstAttribute="top" secondItem="1" secondAttribute="top" constant="32" id="pae-Q9-HuS"/>
                 <constraint firstAttribute="bottom" secondItem="fzQ-bP-TKm" secondAttribute="bottom" id="vdA-jA-i5y"/>
             </constraints>

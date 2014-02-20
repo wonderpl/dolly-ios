@@ -23,6 +23,8 @@
 #import "SYNDiscoverSectionView.h"
 #import "SYNOnBoardingHeader.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNDiscoverOverlayVideoViewController.h"
+#import "SYNDiscoverOverlayHighlightsViewController.h"
 
 @import QuartzCore;
 
@@ -182,6 +184,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	}
 
 	[self updateContainerWidths];
+    
 
 }
 
@@ -663,6 +666,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [self closeAutocomplete];
     
+    
+#warning iphone woverlay here!!! 
+    
     if(IS_IPHONE)
     {
         // the hack below is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
@@ -673,13 +679,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
+   
         
-        // hide the 'DISCOVER' text next to the back button as it appears by default
-    }
-    else // if(IS_IPAD)
-    {
-        // in the case of the iPad the navigation bar title needs to be changed manually
-//        self.navigationController.navigationBar.topItem.title = title;
+        
+        
+    
     }
     
     if(type == kSearchTypeGenre) {
@@ -687,10 +691,13 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             self.searchBar.text = @"";
         }
         [self.searchResultsController searchForGenre:searchTerm];
+        
     } else {
         [self.categoriesCollectionView deselectItemAtIndexPath:self.selectedCellIndex animated:YES];
         self.selectedCellIndex = nil;
         [self.searchResultsController searchForTerm:searchTerm];
+        
+       
     }
    
 }
