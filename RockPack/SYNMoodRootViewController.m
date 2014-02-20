@@ -22,6 +22,7 @@
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchVideoPlayerViewController.h"
 #import "SYNMoodOverlayViewController.h"
+#import "SYNMasterViewController.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
 #define WATCH_BUTTON_ANIMATION_TIME 0.4
@@ -356,6 +357,9 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 
 - (void)viewWillLayoutSubviews
 {
+    
+    [super viewWillLayoutSubviews];
+    
     if (IS_IPAD) {
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
             
@@ -557,6 +561,32 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                           weakSelf.videoCollectionView.hidden = NO;
 
                                                       
+                                                      if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsMoodFirstTime])
+                                                      {
+
+                                                          
+
+                                                      if (IS_IPAD) {
+                                                          SYNMoodOverlayViewController* moodOverlay = [[SYNMoodOverlayViewController alloc] init];
+                                                          
+                                                          // Set frame to full screen
+                                                          CGRect vFrame = moodOverlay.view.frame;
+                                                          vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+                                                          moodOverlay.view.frame = vFrame;
+                                                          moodOverlay.view.alpha = 0.0f;
+                                                          
+                                                          [appDelegate.masterViewController addChildViewController:moodOverlay];
+                                                          [appDelegate.masterViewController.view addSubview:moodOverlay.view];
+                                                          
+                                                          [UIView animateWithDuration:0.3 animations:^{
+                                                              moodOverlay.view.alpha = 1.0f;
+                                                          }];
+                                                      }
+
+                                                          [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                                                                  forKey: kUserDefaultsMoodFirstTime];
+                                                      }
+
                                                       
                                                   } else {
                                                       weakSelf.videosArray = nil;
@@ -579,5 +609,10 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 -(void) channelButtonPressedForCell:(UICollectionViewCell *)cell {
     
 }
-
+- (BOOL)shouldAutomaticallyForwardRotationMethods {
+    return YES;
+}
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods {
+    return YES;
+}
 @end
