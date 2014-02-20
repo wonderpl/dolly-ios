@@ -260,7 +260,6 @@
         // == IPad collectionview layouts
         self.channelThumbnailCollectionView.collectionViewLayout = self.channelLayoutIPad;
         self.subscriptionThumbnailCollectionView.collectionViewLayout = self.subscriptionLayoutIPad;
-        
     }
     
     
@@ -2326,20 +2325,6 @@
 
 -(void) saveCreateChannelTapped
 {
-    //    self.channel.title = self.channelTitleTextView.text;
-    //
-    //    self.channel.channelDescription = self.channel.channelDescription ? self.channel.channelDescription : @"";
-    //
-    //    NSString *category = [self categoryIdStringForServiceCall];
-    //
-    //    NSString *cover = self.selectedCoverId;
-    //
-    //    if ([cover length] == 0 || [cover isEqualToString: kCoverSetNoCover])
-    //    {
-    //        cover = @"";
-    //    }
-    
-    
     
     [appDelegate.oAuthNetworkEngine createChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                      title: self.createChannelCell.createTextField.text
@@ -2357,9 +2342,10 @@
                                                  
                                              } else {
                                                  [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
-
                                              }
 
+                                             
+                                             
                                              
                                          } errorHandler: ^(id error) {
                                              
@@ -2942,11 +2928,11 @@ finishedWithImage: (UIImage *) image
                         animations:animateProfileMode
                         completion:^(BOOL finished) {
                             
-                            if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
-                                [UIView animateWithDuration:0.4f animations:^{
-                                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
-                                }];
-                            }
+//                            if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
+//                                [UIView animateWithDuration:0.4f animations:^{
+//                                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
+//                                }];
+//                            }
                         }];
     }
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
