@@ -113,26 +113,6 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated {
-    
-    SYNMoodOverlayViewController* moodOverlay = [[SYNMoodOverlayViewController alloc] init];
-    
-    // Set frame to full screen
-    CGRect vFrame = moodOverlay.view.frame;
-    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-    moodOverlay.view.frame = vFrame;
-    moodOverlay.view.alpha = 0.0f;
-    
-    [self addChildViewController:moodOverlay];
-    [self.view addSubview:moodOverlay.view];
-
-    [UIView animateWithDuration:0.3 animations:^{
-        moodOverlay.view.alpha = 0.4f;
-    }];
-
-    
-}
-
 #pragma mark - Getting Mood Objects
 
 - (void) loadMoods {
