@@ -24,6 +24,9 @@
 #import "UIFont+SYNFont.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
+#import "SYNMasterViewController.h"
+#import "SYNDiscoverOverlayVideoViewController.h"
+#import "SYNDiscoverOverlayHighlightsViewController.h"
 
 typedef void (^SearchResultCompleteBlock)(int);
 
@@ -132,8 +135,6 @@ typedef void (^SearchResultCompleteBlock)(int);
         
         wself.dataItemsAvailable = (NSInteger)count;
         
-        
-        
         [wself.videosCollectionView reloadData];
     };
     
@@ -201,6 +202,12 @@ typedef void (^SearchResultCompleteBlock)(int);
 	}
     
     [self.usersCollectionView.collectionViewLayout invalidateLayout];
+    
+    if (self.searchResultsShowing == SearchResultsShowingVideos) {
+        [self showVideoOverlay];
+    } else {
+        [self showUserOverLay];
+    }
 }
 
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
@@ -308,7 +315,11 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     self.userSearchOperation = [appDelegate.networkEngine usersForGenreId: _currentSearchGenre
                                                                  forRange: self.dataRequestRange2
-                                                        completionHandler: self.userSearchCompleteBlock];
+                                                        completionHandler:^(int value) {
+                                                            self.userSearchCompleteBlock(value);
+                                                            [self showUserOverLay];
+                                                        }];
+    
 }
 
 - (void) searchForTerm: (NSString *) newSearchTerm
@@ -350,11 +361,16 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     self.videoSearchOperation = [appDelegate.networkEngine searchVideosForTerm: _currentSearchTerm
                                                                        inRange: self.dataRequestRange
-                                                                    onComplete: self.videoSearchCompleteBlock];
+                                                                    onComplete:^(int value) {
+                                                                        self.videoSearchCompleteBlock(value);
+                                                                        [self showVideoOverlay];
+                                                                    }];
     
     self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
                                                                     andRange: self.dataRequestRange
                                                                   onComplete: self.userSearchCompleteBlock];
+    
+
 }
 
 - (BOOL) clearSearchEntities
@@ -685,13 +701,18 @@ referenceSizeForFooterInSection: (NSInteger) section
     if (self.videosTabButton == sender)
     {
         self.searchResultsShowing = SearchResultsShowingVideos;
+        
+        [self showVideoOverlay];
+
     }
     else if (self.usersTabButton == sender)
     {
+        
+        [self showUserOverLay];
+
         self.searchResultsShowing = SearchResultsShowingUsers;
     }
 }
-
 
 - (void) setSearchResultsShowing: (SearchResultsShowing) searchResultsShowing
 {
@@ -776,5 +797,66 @@ referenceSizeForFooterInSection: (NSInteger) section
 }
 
 
+-(void) showUserOverLay {
+    
+
+    
+        if (self.usersArray.count>=1) {
+            if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsDiscoverUserFirstTime])
+            {
+
+            
+            SYNDiscoverOverlayHighlightsViewController* overlay = [[SYNDiscoverOverlayHighlightsViewController alloc] init];
+            
+            // Set frame to full screen
+            CGRect vFrame = overlay.view.frame;
+            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+            overlay.view.frame = vFrame;
+            overlay.view.alpha = 0.0f;
+            
+            [appDelegate.masterViewController addChildViewController:overlay];
+            [appDelegate.masterViewController.view addSubview:overlay.view];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                overlay.view.alpha = 1.0f;
+            }];
+                [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                        forKey: kUserDefaultsDiscoverUserFirstTime];
+                
+            }
+
+        }
+        
+}
+
+- (void) showVideoOverlay {
+    
+    if (self.videosArray.count>=1) {
+        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsDiscoverVideoFirstTime])
+        {
+
+        SYNDiscoverOverlayVideoViewController* overlay = [[SYNDiscoverOverlayVideoViewController alloc] init];
+        
+        // Set frame to full screen
+        CGRect vFrame = overlay.view.frame;
+        vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+        overlay.view.frame = vFrame;
+        overlay.view.alpha = 0.0f;
+        
+        [appDelegate.masterViewController addChildViewController:overlay];
+        [appDelegate.masterViewController.view addSubview:overlay.view];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            overlay.view.alpha = 1.0f;
+        }];
+            [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                    forKey: kUserDefaultsDiscoverVideoFirstTime];
+        }
+
+    }
+        
+    
+
+}
 
 @end
