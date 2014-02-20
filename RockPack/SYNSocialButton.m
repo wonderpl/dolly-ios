@@ -20,9 +20,6 @@
     self.layer.borderColor = self.defaultColor.CGColor;
     self.layer.borderWidth = 1.0f;
     
-    // Little hack to ensure custom font is correct
-    self.contentEdgeInsets = UIEdgeInsetsMake(0.0, 2.0, 0.0, 0.0);
-    
     self.titleLabel.font = [UIFont lightCustomFontOfSize:13.0f];
     
     [self setTitleColor: [UIColor dollyButtonDefaultColor]
