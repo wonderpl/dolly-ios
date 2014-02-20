@@ -26,6 +26,7 @@
 #import "UINavigationBar+Appearance.h"
 #import "UILabel+Animation.h"
 #import "SYNWebViewController.h"
+#import "SYNGenreManager.h"
 #import <SDWebImageManager.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -90,6 +91,13 @@
 	
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	[audioSession setActive:YES withOptions:0 error:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:self.videoInstance.channel.categoryId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

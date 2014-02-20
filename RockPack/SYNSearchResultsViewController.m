@@ -20,7 +20,7 @@
 #import "VideoInstance.h"
 #import "SYNActivityManager.h"
 #import "SYNVideoPlayerAnimator.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "UIFont+SYNFont.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
@@ -291,9 +291,13 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForGenre: (NSString *) genreId
 {
+	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:genreId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	
+	self.searchType = SYNSearchTypeBrowse;
+
     //When searching for category, default to show users/highlights
     self.searchResultsShowing = SearchResultsShowingUsers;
-	self.searchType = SYNSearchTypeBrowse;
     
     [self.usersTabButton setTitle:(NSLocalizedString(@"highlights", @"Highlight, discover tab")) forState:UIControlStateNormal];
     
@@ -332,6 +336,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForTerm: (NSString *) newSearchTerm
 {
+	[[SYNTrackingManager sharedManager] setCategoryDimension:nil];
+	
 	self.searchType = SYNSearchTypeSearch;
 
     [self.usersTabButton setTitle:NSLocalizedString(@"users", @"Users in discover tab") forState:UIControlStateNormal];

@@ -2293,6 +2293,9 @@
                                                      cover: @""
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
+											 
+											 NSString *name = [self.createChannelCell.createTextField.text uppercaseString];
+											 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
                                              
                                              [self cancelCreateChannel];
                                              //takes 0.6f for the cancel animation to end

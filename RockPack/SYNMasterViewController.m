@@ -17,7 +17,7 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNCommentingViewController.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "Genre.h"
 #import "SubGenre.h"
 #import "SYNLoginManager.h"
@@ -147,7 +147,7 @@
             
             CompleteBlock(success);
             
-            [[SYNGenreColorManager sharedInstance] registerGenreColorsFromCoreData];
+            [[SYNGenreManager sharedInstance] registerGenreColorsFromCoreData];
             
         }];
     } onError:^(NSError* error) {

@@ -1,5 +1,5 @@
 //
-//  SYNGenreColorManager.h
+//  SYNGenreManager.h
 //  dolly
 //
 //  Created by Cong on 02/01/2014.
@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SYNGenreColorManager : NSObject
+@interface SYNGenreManager : NSObject
 
 
 + (instancetype) sharedInstance;
 
 -(void)registerGenreColorsFromCoreData;
 -(UIColor *) colorFromID : (NSString *) genreId;
+- (NSString *)nameFromID:(NSString *)genreId;
 
 @end

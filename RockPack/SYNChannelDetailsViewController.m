@@ -35,6 +35,7 @@
 #import "UINavigationBar+Appearance.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "SYNTrackingManager.h"
+#import "SYNGenreManager.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -230,13 +231,29 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+    
+	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:self.channel.categoryId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	
+	if ([self.channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+		[[SYNTrackingManager sharedManager] setChannelRelationDimension:@"own"];
+		[[SYNTrackingManager sharedManager] trackOwnCollectionScreenView];
+	} else {
+		NSString *subscriptionStatus = (self.channel.subscribedByUserValue ? @"subscribed" : @"unsubscribed");
+		[[SYNTrackingManager sharedManager] setChannelRelationDimension:subscriptionStatus];
+		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
+	}
+}
+
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
     }
-
+	
     // Remove notifications individually
     // Do this rather than plain RemoveObserver call as low memory handling is based on NSNotifications.
     [[NSNotificationCenter defaultCenter] removeObserver: self
@@ -266,16 +283,6 @@
     
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-    
-	if ([self.channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
-		[[SYNTrackingManager sharedManager] trackOwnCollectionScreenView];
-	} else {
-		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
-	}
 }
 
 - (NSString *)trackingScreenName {

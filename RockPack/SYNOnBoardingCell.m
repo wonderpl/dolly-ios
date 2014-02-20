@@ -10,7 +10,7 @@
 #import "UIButton+WebCache.h"
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 
 @implementation SYNOnBoardingCell
 
@@ -71,7 +71,7 @@
     recomendation.descriptionText = recomendation.descriptionText;
     
     if (IS_IPAD) {
-        [self.subGenreLabel setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
+        [self.subGenreLabel setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recomendation.categoryId]];
     }
     
     self.descriptionLabel.text = recomendation.descriptionText;

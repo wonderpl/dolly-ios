@@ -139,6 +139,12 @@
                                                                }
                                                                else
                                                                {
+																   if ([isVideo boolValue]) {
+																	   [[SYNTrackingManager sharedManager] trackVideoShareCompletedWithService:@"fb"];
+																   } else {
+																	   [[SYNTrackingManager sharedManager] trackCollectionShareCompletedWithService:@"fb"];
+																   }
+																   
                                                                    NSLog(@"Success!");
                                                                    [self updateAPIRater];
                                                                }
@@ -160,6 +166,12 @@
         facebookViewComposer.completionHandler = ^(SLComposeViewControllerResult result) {
             if (result == SLComposeViewControllerResultDone)
             {
+				if ([isVideo boolValue]) {
+					[[SYNTrackingManager sharedManager] trackVideoShareCompletedWithService:@"fb"];
+				} else {
+					[[SYNTrackingManager sharedManager] trackCollectionShareCompletedWithService:@"fb"];
+				}
+				
                 [self updateAPIRater];
             }
         };

@@ -18,8 +18,10 @@ static NSString *const GoalCategory = @"goal";
 static NSString *const NetworkCategory = @"network";
 
 static const NSInteger TrackingDimensionAge = 1;
+static const NSInteger TrackingDimensionCategory = 2;
 static const NSInteger TrackingDimensionGender = 3;
 static const NSInteger TrackingDimensionLocale = 4;
+static const NSInteger TrackingDimensionChannelRelation = 5;
 static const NSInteger TrackingDimensionConnection = 6;
 
 @interface SYNTrackingManager ()
@@ -237,6 +239,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:UIActionCategory action:@"AddressBookPerm" label:label value:nil];
 }
 
+- (void)trackCollectionCreatedWithName:(NSString *)name {
+	[self trackEventWithCategory:GoalCategory action:@"collectionCreated" label:name value:nil];
+}
+
 - (void)trackCreateChannelScreenView {
 	[self trackScreenViewWithName:@"Create Channel"];
 }
@@ -451,6 +457,14 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 - (void)setConnectionDimension:(NSString *)connection {
 	[[self defaultTracker] set:[GAIFields customDimensionForIndex:TrackingDimensionConnection] value:connection];
+}
+
+- (void)setCategoryDimension:(NSString *)name {
+	[[self defaultTracker] set:[GAIFields customDimensionForIndex:TrackingDimensionCategory] value:name];
+}
+
+- (void)setChannelRelationDimension:(NSString *)relationship {
+	[[self defaultTracker] set:[GAIFields customDimensionForIndex:TrackingDimensionChannelRelation] value:relationship];
 }
 
 - (void)trackScreenViewWithName:(NSString *)name {

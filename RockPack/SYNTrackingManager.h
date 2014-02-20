@@ -45,6 +45,8 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackCollectionSelectedIsNew:(BOOL)isNew;
 - (void)trackCollectionSaved;
 
+- (void)trackCollectionCreatedWithName:(NSString *)name;
+
 - (void)trackSearchInitiated;
 
 - (void)trackMarkAllNotificationAsRead;
@@ -135,9 +137,10 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackExternalLinkOpened:(NSString *)url;
 
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate;
-
+- (void)setCategoryDimension:(NSString *)name;
 - (void)setGenderDimension:(Gender)gender;
 - (void)setLocaleDimension:(NSLocale *)locale;
+- (void)setChannelRelationDimension:(NSString *)relationship;
 
 - (void)trackScreenViewWithName:(NSString *)name;
 

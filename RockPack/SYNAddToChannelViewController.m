@@ -23,7 +23,7 @@
 #import "SYNAddToChannelFlowLayout.h"
 #import "UICollectionReusableView+Helpers.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "SYNTrackingManager.h"
 
 #define kAnimationExpansion 0.4f
@@ -156,7 +156,7 @@
         
         existingChannel.titleLabel.text = channel.title;
         
-        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
+        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
         
         cell = existingChannel;
     }
@@ -331,6 +331,10 @@
 														 cover:@""
 													  isPublic:YES
 											 completionHandler:^(NSDictionary *response) {
+												 
+												 NSString *name = [self.createNewChannelCell.nameInputTextField.text uppercaseString];
+												 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
+												 
 												 NSString *channelId = response[@"id"];
 												 [self addCurrentVideoInstanceToChannel:channelId isFavourites:NO];
 												 

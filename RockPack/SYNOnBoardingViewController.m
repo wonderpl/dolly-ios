@@ -24,7 +24,7 @@
 #import "SYNDeviceManager.h"
 #import "SYNActivityManager.h"
 #import "SYNOnBoardingSectionHeader.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "SYNTrackingManager.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
@@ -172,7 +172,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             
             CompleteBlock(success);
             
-            [[SYNGenreColorManager sharedInstance] registerGenreColorsFromCoreData];
+            [[SYNGenreManager sharedInstance] registerGenreColorsFromCoreData];
             
             [appDelegate.mainManagedObjectContext save:nil];
             
@@ -394,7 +394,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             
             Recomendation* recomendation = (Recomendation*)self.usersByCategory[indexPath.section-1][indexPath.row];
 
-            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
+            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recomendation.categoryId]];
             
             // special case for editors picks as its a genre not a subgenre
             if (self.genresByIdString[recomendation.categoryId]) {
