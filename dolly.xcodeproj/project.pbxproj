@@ -751,6 +751,9 @@
 		4C03237E18AE6FBD00E168EF /* SYNFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */; };
 		4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */; };
 		4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */; };
+		4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */; };
+		4C5E85F118B620A200D0E937 /* SYNInBoardingViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85EF18B620A200D0E937 /* SYNInBoardingViewController~iphone.xib */; };
+		4C5E85F318B620D000D0E937 /* SYNInBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85F218B620D000D0E937 /* SYNInBoardingViewController.xib */; };
 		4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */; };
 		4CE8AB381896B78900D7E373 /* DefaultCoverPhoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */; };
 		4CE8AE5718A901560031CE1C /* BackButtonApp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AE5518A901560031CE1C /* BackButtonApp.png */; };
@@ -2106,6 +2109,10 @@
 		4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFriendCell.xib; sourceTree = "<group>"; };
 		4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconWonderAbout.png; sourceTree = "<group>"; };
 		4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconWonderAbout@2x.png"; sourceTree = "<group>"; };
+		4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNInBoardingViewController.h; sourceTree = "<group>"; };
+		4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNInBoardingViewController.m; sourceTree = "<group>"; };
+		4C5E85EF18B620A200D0E937 /* SYNInBoardingViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNInBoardingViewController~iphone.xib"; sourceTree = "<group>"; };
+		4C5E85F218B620D000D0E937 /* SYNInBoardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNInBoardingViewController.xib; sourceTree = "<group>"; };
 		4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNNotificationsMarkAllAsReadCell.xib; sourceTree = "<group>"; };
 		4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DefaultCoverPhoto.jpg; sourceTree = "<group>"; };
 		4CE8AE5518A901560031CE1C /* BackButtonApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButtonApp.png; sourceTree = "<group>"; };
@@ -3322,6 +3329,7 @@
 			isa = PBXGroup;
 			children = (
 				BEE01B5D1851E121000CF681 /* Commenting */,
+				4C5E85EC18B6203600D0E937 /* In Boarding */,
 				BE57C01B1843585E00C6444A /* On Boarding */,
 				BE0815C216D5386B00ADB1DC /* Master */,
 				01982563162ADEAD00216900 /* Abstract */,
@@ -4637,6 +4645,17 @@
 				4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */,
 			);
 			name = UICollectionReusableView;
+			sourceTree = "<group>";
+		};
+		4C5E85EC18B6203600D0E937 /* In Boarding */ = {
+			isa = PBXGroup;
+			children = (
+				4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */,
+				4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */,
+				4C5E85EF18B620A200D0E937 /* SYNInBoardingViewController~iphone.xib */,
+				4C5E85F218B620D000D0E937 /* SYNInBoardingViewController.xib */,
+			);
+			name = "In Boarding";
 			sourceTree = "<group>";
 		};
 		BE03A69016F7457900245314 /* Account Settings */ = {
@@ -5986,6 +6005,7 @@
 				01ABBB1E17205541007E4462 /* ButtonSubscribeHighlighted.png in Resources */,
 				01ABBB1F17205541007E4462 /* ButtonSubscribeHighlighted@2x.png in Resources */,
 				01ABBB2017205541007E4462 /* ButtonSubscribeSelected.png in Resources */,
+				4C5E85F318B620D000D0E937 /* SYNInBoardingViewController.xib in Resources */,
 				01ABBB2117205541007E4462 /* ButtonSubscribeSelected@2x.png in Resources */,
 				BEC39C1D184E363C00DA8089 /* SYNOnBoardingFooter.xib in Resources */,
 				BED027CA1834D4CC00636659 /* ButtonMoreFeedback.png in Resources */,
@@ -6675,6 +6695,7 @@
 				BE0B151217BC16240053E551 /* ButtonSearch@2x~iphone.png in Resources */,
 				BE0B151317BC16240053E551 /* ButtonSearch~iphone.png in Resources */,
 				0E26BB4D182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib in Resources */,
+				4C5E85F118B620A200D0E937 /* SYNInBoardingViewController~iphone.xib in Resources */,
 				4CE8AE5718A901560031CE1C /* BackButtonApp.png in Resources */,
 				E93C7F0918368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard in Resources */,
 				1FBF54EB17BD526000B4074E /* login_bg_5.jpg in Resources */,
@@ -6858,6 +6879,7 @@
 				E9D99DD018608F3000212AC5 /* SYNSearchVideoChannelsModel.m in Sources */,
 				E9F6257018868A2B000EF6A2 /* SYNiPadPasswordForgotViewController.m in Sources */,
 				BE57C0261843604200C6444A /* SYNOnBoardingCell.m in Sources */,
+				4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */,
 				01F8E77F16B03A7C000D44B9 /* SYNVideoViewerViewController.m in Sources */,
 				0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */,
 				BEA043E716CAA8E1005406E7 /* Genre.m in Sources */,
