@@ -5797,7 +5797,7 @@
 			attributes = {
 				CLASSPREFIX = SYN;
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Rockpack Ltd";
+				ORGANIZATIONNAME = "Wonder PL Ltd";
 				TargetAttributes = {
 					010DEFCF1629BDC40080F26B = {
 						DevelopmentTeam = 55U2NK549A;
