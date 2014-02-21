@@ -27,6 +27,13 @@
 #import "SYNMasterViewController.h"
 #import "SYNDiscoverOverlayVideoViewController.h"
 #import "SYNDiscoverOverlayHighlightsViewController.h"
+#import "SYNTrackingManager.h"
+
+typedef NS_ENUM(NSInteger, SYNSearchType) {
+	SYNSearchTypeUndefined,
+	SYNSearchTypeBrowse,
+	SYNSearchTypeSearch
+};
 
 typedef void (^SearchResultCompleteBlock)(int);
 

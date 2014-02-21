@@ -71,12 +71,6 @@
 	
 	self.followButton.dataItemLinked = channelOwner;
     
-    [self.userThumbnailButton setImageWithURL:[NSURL URLWithString: channelOwner.thumbnailURL]
-                                     forState:UIControlStateNormal
-                             placeholderImage:[UIImage imageNamed: @"PlaceholderAvatarFriends"]
-                                      options:SDWebImageRetryFailed];
-    
-    
     
     
 //    [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
@@ -96,10 +90,20 @@
                                                                  withString: @"ipad_highlight"];
         
     }
+    
+ __weak SYNSearchResultsUserCell *weakSelf = self;
+    [self.coverImage setImageWithURL:[NSURL URLWithString: coverPhotoURL]
+                    placeholderImage:[UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                               if (image && cacheType == SDImageCacheTypeNone)
+                               {
+                                   weakSelf.coverImage.alpha = 0.0;
+                                   [UIView animateWithDuration:2.0 animations:^{
+                                       weakSelf.coverImage.alpha = 1.0;
+                                   }];
+                               }
+                           }];
 
-    [self.coverImage setImageWithURL: [NSURL URLWithString: coverPhotoURL]
-                   placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                            options: SDWebImageRetryFailed];
     
     [self setButtonTitleAndResizeText:channelOwner.displayName forLabel:self.userNameLabelButton.titleLabel];
 
@@ -111,6 +115,39 @@
     else
     {
         [self.followButton setTitle:@"Unfollow" forState:UIControlStateSelected];
+    }
+}
+
+
+-(void) setCoverphoto:(NSString*) photoUrl {
+    
+    if (![photoUrl isEqualToString:@""]){ // there is a url string
+        
+        
+        
+        dispatch_queue_t downloadQueue = dispatch_queue_create("com.dolly.coverphotoloadingqueue", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: photoUrl]
+                                  ];
+            
+            UIImage *tmpImage = [UIImage imageWithData: imageData];
+
+
+//            //if statement for now as the db has urls for avatars that have not been uploaded
+//            //should be able to get rid of it later
+//            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    self.coverImage.alpha = 0.0;
+//                    
+//                    self.coverImage.image = tmpImage;
+//                    
+//                    [UIView animateWithDuration:1.5f animations:^{
+//                        self.coverImage.alpha=1.0f;
+//                    }];
+//                });
+//            }
+        });
     }
 }
 
