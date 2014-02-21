@@ -8,11 +8,6 @@
 
 #import "SYNAbstractViewController.h"
 #import "ChannelOwner.h"
-typedef enum : NSInteger {
-    kModeMyOwnProfile = 0,
-    kModeOtherUsersProfile,
-    kModeEditProfile,
-} ProfileType;
 
 
 @interface SYNProfileRootViewController : SYNAbstractViewController

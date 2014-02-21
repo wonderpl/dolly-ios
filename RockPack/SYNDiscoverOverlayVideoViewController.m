@@ -8,9 +8,10 @@
 
 #import "SYNDiscoverOverlayVideoViewController.h"
 #import "SYNDeviceManager.h"
-
+#import "UIFont+SYNFont.h"
 @interface SYNDiscoverOverlayVideoViewController ()
 @property (strong, nonatomic) IBOutlet UIView *container;
+@property (strong, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -28,7 +29,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    if (IS_IPHONE) {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    } else {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:23.0f];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,9 +48,13 @@
     if (IS_IPAD) {
         
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
-            self.container.frame = CGRectMake(330, 437, 343, 114);
+            self.container.frame = CGRectMake(207, 311, 465, 239);
+            NSLog(@"%@", NSStringFromCGRect(self.container.frame));
+
         } else {
-            self.container.frame = CGRectMake(226, 437, 343, 114);
+            self.container.frame = CGRectMake(103, 311, 465, 239);
+            NSLog(@"%@", NSStringFromCGRect(self.container.frame));
+
         }
     }
 }

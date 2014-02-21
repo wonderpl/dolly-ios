@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNDiscoverOverlayHighlightsViewController">
             <connections>
                 <outlet property="container" destination="awX-4I-cbO" id="8cP-jr-dwh"/>
+                <outlet property="textLabel" destination="vdw-rJ-j5Y" id="UY9-Ql-uVK"/>
                 <outlet property="view" destination="1" id="TZF-Cs-z49"/>
             </connections>
         </placeholder>
@@ -16,18 +17,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="awX-4I-cbO" userLabel="View - container">
-                    <rect key="frame" x="405" y="214" width="363" height="122"/>
+                    <rect key="frame" x="206" y="145" width="562" height="191"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="followbutton.png" id="HGw-gw-php">
-                            <rect key="frame" x="288" y="46" width="50" height="50"/>
+                            <rect key="frame" x="487" y="115" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vdw-rJ-j5Y">
-                            <rect key="frame" x="74" y="39" width="194" height="63"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="here is a collection of videos you can follow to receive updates in your feed" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vdw-rJ-j5Y">
+                            <rect key="frame" x="33" y="82" width="435" height="113"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">Labelqwdwqdwq
-qwdsfsdfsddfsdsfdsf</string>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>

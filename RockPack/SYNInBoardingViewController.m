@@ -8,7 +8,7 @@
 
 #import "SYNInBoardingViewController.h"
 #import "SYNDeviceManager.h"
-
+#import "UIFont+SYNFont.h"
 @interface SYNInBoardingViewController ()
 
 @end
@@ -22,6 +22,8 @@
     // Do any additional setup after loading the view from its nib.
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
     [self.view addGestureRecognizer:tapGesture];
+    
+
 
 }
 

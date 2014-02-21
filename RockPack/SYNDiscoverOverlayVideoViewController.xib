@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNDiscoverOverlayVideoViewController">
             <connections>
                 <outlet property="container" destination="naK-NA-cFF" id="M59-zu-dZB"/>
+                <outlet property="textLabel" destination="Qmr-gr-eeF" id="Wts-nB-Twq"/>
                 <outlet property="view" destination="1" id="lhd-Eg-CCf"/>
             </connections>
         </placeholder>
@@ -16,17 +17,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="naK-NA-cFF" userLabel="View - Container">
-                    <rect key="frame" x="226" y="436" width="342" height="114"/>
+                    <rect key="frame" x="103" y="311" width="465" height="239"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="In_AddButton.png" id="bWR-We-gA7">
-                            <rect key="frame" x="258" y="38" width="50" height="50"/>
+                            <rect key="frame" x="381" y="163" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label sadas da" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qmr-gr-eeF">
-                            <rect key="frame" x="52" y="33" width="166" height="60"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="build your own video collection to share with friends" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qmr-gr-eeF">
+                            <rect key="frame" x="38" y="130" width="335" height="116"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>

@@ -521,6 +521,11 @@
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
+    
+    
+    [self performSelector:@selector(showInboardingAnimationDescription) withObject:nil afterDelay:1.2f];
+    
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -748,11 +753,7 @@
     
     if ([self.channelOwner.uniqueId isEqualToString: currentUser.uniqueId])
     {
-        
-        
         [self setChannelOwner: currentUser];
-        
-        
     }
 }
 
@@ -2183,6 +2184,7 @@
 - (IBAction)moreButtonTapped:(id)sender
 {
     
+
     SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
     
     // Set frame to full screen
@@ -2345,6 +2347,8 @@
                                              }
 
                                              
+                                             [self performSelector:@selector(showInboardingAnimationAfterCreate) withObject:nil afterDelay:1.5f];
+                                             
                                              
                                              
                                          } errorHandler: ^(id error) {
@@ -2420,6 +2424,10 @@
                                                        CGPoint tmp = self.channelThumbnailCollectionView.contentOffset;
                                                        tmp.y+=1;
                                                        [self.channelThumbnailCollectionView setContentOffset:tmp animated:YES];
+                                                       
+                                                
+                                                       
+                                                       
                                                    }];
                                                    
                                                }
@@ -3099,5 +3107,73 @@ finishedWithImage: (UIImage *) image
 	}
 	return [self.channelOwner.subscriptions array];
 }
+
+
+- (void) showInboardingAnimationAfterCreate{
+    SYNChannelMidCell *cell;
+    
+    
+    
+    NSLog(@"kUserDefaultsCreateChannelFirstTime : %hhd", [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]);
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
+        
+        
+        if (modeType == kModeMyOwnProfile) {
+            cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0]]);
+            if (cell) {
+                [cell descriptionAndDeleteAnimation];
+            }
+        } else {
+            return;
+        }
+
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsCreateChannelFirstTime];
+        
+    }
+    
+}
+
+- (void) showInboardingAnimationDescription{
+    SYNChannelMidCell *cell;
+    
+    if (self.modeType == kModeOtherUsersProfile) {
+        cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]]);
+        
+        NSInteger value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsOtherPersonsProfile];
+        if (value<=2)
+        {
+            
+           
+        if (cell) {
+            [cell descriptionAnimation];
+        }
+
+            value+=1;
+            [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsOtherPersonsProfile];
+        }
+        
+    }
+    else if (self.modeType == kModeMyOwnProfile) {
+        
+    
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsYourProfileFirstTime])
+        {
+            
+            cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:0]]);
+            
+            if (cell) {
+                [cell descriptionAnimation];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                    forKey: kUserDefaultsYourProfileFirstTime];
+        }
+
+    }
+
+}
+
+
 
 @end

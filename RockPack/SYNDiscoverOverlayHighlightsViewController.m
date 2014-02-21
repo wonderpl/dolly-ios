@@ -8,9 +8,10 @@
 
 #import "SYNDiscoverOverlayHighlightsViewController.h"
 #import "SYNDeviceManager.h"
-
+#import "UIFont+SYNFont.h"
 @interface SYNDiscoverOverlayHighlightsViewController ()
 @property (strong, nonatomic) IBOutlet UIView *container;
+@property (strong, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -28,7 +29,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    if (IS_IPHONE) {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    } else {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:23.0f];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,12 +50,9 @@
     if (IS_IPAD) {
         
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
-            NSLog(@"%@", NSStringFromCGRect(self.container.frame));
-            
-            self.container.frame = CGRectMake(668, 214, 363, 122);
+            self.container.frame = CGRectMake(469, 145, 562, 191);
         } else {
-            self.container.frame = CGRectMake(405, 214, 363, 122);
-            NSLog(@"%@", NSStringFromCGRect(self.container.frame));
+            self.container.frame = CGRectMake(206, 145, 562, 191);
 
         }
     }

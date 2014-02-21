@@ -9,9 +9,11 @@
 #import "SYNMoodOverlayViewController.h"
 #import "SYNPopoverable.h"
 #import "SYNDeviceManager.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNMoodOverlayViewController ()
 @property (strong, nonatomic) IBOutlet UIView *container;
+@property (strong, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -29,7 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    if (IS_IPHONE) {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    } else {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:23.0f];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,9 +58,11 @@
     if (IS_IPAD) {
         
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
-            self.container.frame = CGRectMake(383, 488, 384, 126);
+            self.container.frame = CGRectMake(283, 488, 484, 126);
+
         } else {
-            self.container.frame = CGRectMake(215, 601, 384, 126);
+            self.container.frame = CGRectMake(115, 601, 484, 126);
+            
         }
     }
 }

@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNOnBoardingOverlayViewController">
             <connections>
                 <outlet property="container" destination="sAD-L4-eH1" id="ruU-0e-IyR"/>
+                <outlet property="textLabel" destination="kED-99-Uld" id="McR-6B-MXu"/>
                 <outlet property="view" destination="1" id="pJX-Ta-M1E"/>
             </connections>
         </placeholder>

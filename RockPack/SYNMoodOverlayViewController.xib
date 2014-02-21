@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNMoodOverlayViewController">
             <connections>
                 <outlet property="container" destination="Hev-n2-y7u" id="LG5-y6-mgK"/>
+                <outlet property="textLabel" destination="tnq-PR-2gl" id="1tl-Ye-s06"/>
                 <outlet property="view" destination="1" id="eW7-aV-OpI"/>
             </connections>
         </placeholder>
@@ -16,16 +17,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="Hev-n2-y7u">
-                    <rect key="frame" x="215" y="601" width="384" height="126"/>
+                    <rect key="frame" x="115" y="601" width="484" height="126"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="In_AddButton.png" id="kyp-r9-z0r">
-                            <rect key="frame" x="286" y="43" width="50" height="50"/>
+                            <rect key="frame" x="386" y="43" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sasdsdsaadsas dsadads" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tnq-PR-2gl">
-                            <rect key="frame" x="64" y="36" width="214" height="64"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="build your own video collection to share with friends" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tnq-PR-2gl">
+                            <rect key="frame" x="5" y="16" width="369" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

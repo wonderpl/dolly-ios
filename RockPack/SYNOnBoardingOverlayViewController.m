@@ -8,8 +8,11 @@
 
 #import "SYNOnBoardingOverlayViewController.h"
 #import "SYNDeviceManager.h"
+#import "UIFont+SYNFont.h"
+
 @interface SYNOnBoardingOverlayViewController ()
 @property (strong, nonatomic) IBOutlet UIView *container;
+@property (strong, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -27,6 +30,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (IS_IPHONE) {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    } else {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:23.0f];
+    }
     
     
     // Do any additional setup after loading the view from its nib.
