@@ -26,6 +26,7 @@
 #import "SYNDiscoverOverlayVideoViewController.h"
 #import "SYNDiscoverOverlayHighlightsViewController.h"
 
+#import "SYNTrackingManager.h"
 @import QuartzCore;
 
 #define kAutocompleteTime 0.2
@@ -185,6 +186,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 	[self updateContainerWidths];
     
+}
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
@@ -217,7 +219,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
                                                 inManagedObjectContext: appDelegate.mainManagedObjectContext];
     
-    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
     
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
@@ -229,16 +230,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     NSError* error;
     
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                      error: &error];
-    
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest error: &error];
     
     self.genres = [NSArray arrayWithArray:genresFetchedArray];
     
-
     [self.categoriesCollectionView reloadData];
-    
-    
+
 }
 
 -(SubGenre*)popularSubGenre

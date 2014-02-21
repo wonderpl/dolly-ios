@@ -93,7 +93,7 @@
     
  __weak SYNSearchResultsUserCell *weakSelf = self;
     [self.coverImage setImageWithURL:[NSURL URLWithString: coverPhotoURL]
-                    placeholderImage:[UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+                    placeholderImage:[UIImage imageNamed: @"PlaceholderVideoBottom"]
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                                if (image && cacheType == SDImageCacheTypeNone)
                                {
