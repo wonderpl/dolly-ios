@@ -420,20 +420,9 @@
                                               inManagedObjectContext: self.managedObjectContext]];
     
     NSArray *existingVideos = nil;
-    NSMutableArray *videoIds = [NSMutableArray array];
+	NSArray *videoIds = [itemArray valueForKeyPath:@"video.id"];
     
-    for (NSDictionary *itemDictionary in itemArray)
-    {
-        id uniqueId = (itemDictionary[@"video"])[@"id"];
-        
-        if (uniqueId)
-        {
-            [videoIds addObject: uniqueId];
-        }
-    }
-    
-    if ([videoIds count] > 0)
-    {
+    if ([videoIds count] > 0) {
         NSPredicate *videoPredicate = [NSPredicate predicateWithFormat: @"uniqueId IN %@", videoIds];
         
         videoFetchRequest.predicate = videoPredicate;
@@ -441,14 +430,13 @@
         existingVideos = [self.managedObjectContext executeFetchRequest: videoFetchRequest
                                                                   error: nil];
     }
-    
+	
     for (NSDictionary *channelDictionary in itemArray)
     {
-        
-        VideoInstance *videoInstance = videoInstance = [VideoInstance instanceFromDictionary: channelDictionary
-                                                                   usingManagedObjectContext: self.managedObjectContext
-                                                                         ignoringObjectTypes: kIgnoreChannelObjects
-                                                                              existingVideos: existingVideos];
+        VideoInstance *videoInstance = [VideoInstance instanceFromDictionary: channelDictionary
+												   usingManagedObjectContext: self.managedObjectContext
+														 ignoringObjectTypes: kIgnoreChannelObjects
+															  existingVideos: existingVideos];
         
         if (!videoInstance)
         {
@@ -456,7 +444,7 @@
         }
         
         videoInstance.viewId = self.viewId;
-        
+		
         [self.videoInstancesSet addObject: videoInstance];
     }
 }
