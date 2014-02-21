@@ -495,7 +495,17 @@
     }
     
     
-    [self performSelector:@selector(showInboardingAnimationDescription) withObject:nil afterDelay:1.2f];
+    if (IS_IPAD) {
+        [self performSelector:@selector(showInboardingAnimationDescription) withObject:nil afterDelay:1.2f];
+    } else {
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsYourProfileFirstTime])
+        {
+
+            [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
+            [self performSelector:@selector(showInboardingAnimationDescription) withObject:nil afterDelay:0.9f];
+        }
+    }
     
     
 }
@@ -2310,10 +2320,9 @@
                                              }
 
                                              
-                                             [self performSelector:@selector(showInboardingAnimationAfterCreate) withObject:nil afterDelay:1.5f];
-                                             
-                                             
-                                             
+                                             if (IS_IPAD) {
+                                                 [self performSelector:@selector(showInboardingAnimationAfterCreate) withObject:nil afterDelay:1.5f];
+                                             }
                                          } errorHandler: ^(id error) {
                                              
                                              
@@ -2905,16 +2914,28 @@ finishedWithImage: (UIImage *) image
                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                         animations:animateProfileMode
                         completion:^(BOOL finished) {
-
+                            float time = 0.4;
                             
-                            if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
-                                [UIView animateWithDuration:0.4f animations:^{
-                                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
-                                }];
+                            if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
+                                time= 2.8f;
                             }
+                            [self performSelector:@selector(showInboardingAnimationAfterCreate) withObject:self afterDelay:1.4f];
+
+                            [self performSelector:@selector(scrollUpWithTime) withObject:self afterDelay:time];
+
                         }];
     }
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
+}
+
+
+-(void) scrollUpWithTime{
+    if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
+        [UIView animateWithDuration:0.4 animations:^{
+            [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
+        }];
+    }
+
 }
 
 -(void) cancelCreateChannelWithNoTime
@@ -3037,12 +3058,7 @@ finishedWithImage: (UIImage *) image
                                                  CGPoint tmp = self.channelThumbnailCollectionView.contentOffset;
                                                  tmp.y+=1;
                                                  [self.channelThumbnailCollectionView setContentOffset:tmp animated:YES];
-                                                 
-                                                 
-                                                 
                                              }];
-                                             
-                                             
                                          } errorHandler: ^(id error) {
                                              DebugLog(@"Delete channel failed");
                                          }];
@@ -3072,12 +3088,15 @@ finishedWithImage: (UIImage *) image
 }
 
 
+    
+- (NSString *)trackingScreenName {
+	return @"Profile";
+}
+
+
 - (void) showInboardingAnimationAfterCreate{
     SYNChannelMidCell *cell;
     
-    
-    
-    NSLog(@"kUserDefaultsCreateChannelFirstTime : %hhd", [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]);
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
         
         
@@ -3089,11 +3108,9 @@ finishedWithImage: (UIImage *) image
         } else {
             return;
         }
-
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsCreateChannelFirstTime];
         
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsCreateChannelFirstTime];
     }
-    
 }
 
 - (void) showInboardingAnimationDescription{
@@ -3105,24 +3122,15 @@ finishedWithImage: (UIImage *) image
         NSInteger value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsOtherPersonsProfile];
         if (value<=2)
         {
-            
-           
-        if (cell) {
-            [cell descriptionAnimation];
-        }
-
+            if (cell) {
+                [cell descriptionAnimation];
+            }
             value+=1;
             [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsOtherPersonsProfile];
         }
-        
     }
     else if (self.modeType == kModeMyOwnProfile) {
-        
-    
-        
-        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsYourProfileFirstTime])
-        {
-            
+        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsYourProfileFirstTime]) {
             cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:0]]);
             
             if (cell) {
@@ -3132,9 +3140,7 @@ finishedWithImage: (UIImage *) image
             [[NSUserDefaults standardUserDefaults] setBool: YES
                                                     forKey: kUserDefaultsYourProfileFirstTime];
         }
-
     }
-
 }
 
 

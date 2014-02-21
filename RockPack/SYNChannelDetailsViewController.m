@@ -35,6 +35,8 @@
 #import "UINavigationBar+Appearance.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "SYNCollectectionDetailsOverlayViewController.h"
+#import "SYNTrackingManager.h"
+#import "SYNGenreManager.h"
 
 
 #define kHeightChange 70.0f

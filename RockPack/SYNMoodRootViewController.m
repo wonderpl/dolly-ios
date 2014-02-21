@@ -22,6 +22,7 @@
 #import "SYNSearchResultsVideoCell.h"
 #import "SYNSearchVideoPlayerViewController.h"
 #import "SYNMoodOverlayViewController.h"
+#import "SYNTrackingManager.h"
 #import "SYNMasterViewController.h"
 
 #define LARGE_AMOUNT_OF_ROWS 10000
