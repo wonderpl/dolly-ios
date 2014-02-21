@@ -154,7 +154,7 @@
         SYNAddToChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNAddToChannelCell reuseIdentifier]
 																						 forIndexPath:indexPath];
         
-        existingChannel.titleLabel.text = channel.title;
+        existingChannel.titleLabel.text = [channel.title uppercaseString];
         
         [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
         
