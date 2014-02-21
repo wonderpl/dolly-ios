@@ -206,70 +206,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 #pragma mark - Data Retrieval
 
-- (void) fetchAndDisplayCategories
-{
+- (void)selectCategoryForCollection:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath {
+    SubGenre *subGenre = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
+    NSString *title = (IS_IPHONE ? subGenre.name : @"");
     
-    categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
-                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
-    
-    [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
-    
-    // this is so that empty genres are not returned since only the subgenres are displayed
-    categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"subgenres.@count > 0"];
-    
-    categoriesFetchRequest.includesSubentities = NO;
-    
-    NSError* error;
-    
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest error: &error];
-    
-    self.genres = [NSArray arrayWithArray:genresFetchedArray];
-    
-    [self.categoriesCollectionView reloadData];
-
-}
-
--(SubGenre*)popularSubGenre
-{
-    // lazy loading
-    if(!_popularSubGenre)
-    {
-        NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-        
-        categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
-                                                    inManagedObjectContext: appDelegate.mainManagedObjectContext];
-        
-        categoriesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
-        
-        NSError* error;
-        
-        NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                    error: &error];
-        
-        
-        
-        if(fetchedArray.count > 0)
-        {
-            _popularSubGenre = (SubGenre*)fetchedArray[0];
-        }
-    }
-    
-    return _popularSubGenre;
-}
-- (void) selectCategoryForCollection:(UICollectionView *)collectionView atIndexPath: (NSIndexPath *)indexPath{
-        Genre* currentGenre = self.genres[indexPath.section];
-        SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
-        
-        
-        NSString *title = (IS_IPHONE ? subgenre.name : @"");
-        
-        [self dispatchSearch:subgenre.uniqueId
-                   withTitle:title
-                     forType:kSearchTypeGenre];
+    [self dispatchSearch:subGenre.uniqueId
+               withTitle:title
+                 forType:kSearchTypeGenre];
 }
 
 #pragma mark - CollectionView Delegate/Data Source
@@ -724,7 +668,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.categoriesCollectionView reloadData];
     
     if ([[self.fetchedResultsController fetchedObjects] count] > 0 && IS_IPAD) {
-		NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         [self.categoriesCollectionView selectItemAtIndexPath:firstIndexPath
 													animated:NO
 											  scrollPosition:UICollectionViewScrollPositionNone];
