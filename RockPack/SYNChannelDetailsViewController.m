@@ -1695,6 +1695,7 @@
                                                                      isUpdated: YES];
                                              
                                              
+											 [self cancelTapped];
                                              // this block will also call the [self getChanelById:channelId isUpdated:YES] //
                                          }
                                               errorHandler: ^(id error) {
@@ -1734,13 +1735,6 @@
                                                   //                                                  self.deleteChannelButton.enabled = YES;
                                                   //                                                  [self.activityIndicator stopAnimating];
                                               }];
-    
-    
-    
-    
-    [self performSelector:@selector(cancelTapped) withObject:nil afterDelay:0.4f];
-
-    
 }
 
 - (void) setVideosForChannelById: (NSString *) channelId isUpdated: (BOOL) isUpdated
