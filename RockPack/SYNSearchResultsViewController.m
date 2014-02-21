@@ -840,9 +840,14 @@ referenceSizeForFooterInSection: (NSInteger) section
 
     
         if (self.usersArray.count>=1) {
-            if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsDiscoverUserFirstTime])
+            
+            float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverUserFirstTime];
+            // display overlay only on the second time they view the highlights overlay
+            
+            if (value==1)
             {
 
+                
             
             SYNDiscoverOverlayHighlightsViewController* overlay = [[SYNDiscoverOverlayHighlightsViewController alloc] init];
             
@@ -858,9 +863,14 @@ referenceSizeForFooterInSection: (NSInteger) section
             [UIView animateWithDuration:0.3 animations:^{
                 overlay.view.alpha = 1.0f;
             }];
-                [[NSUserDefaults standardUserDefaults] setBool: YES
-                                                        forKey: kUserDefaultsDiscoverUserFirstTime];
                 
+                value+=1;
+                [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverUserFirstTime];
+
+            } else {
+                value+=1;
+                [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverUserFirstTime];
+
             }
 
         }
@@ -870,26 +880,37 @@ referenceSizeForFooterInSection: (NSInteger) section
 - (void) showVideoOverlay {
     
     if (self.videosArray.count>=1) {
-        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsDiscoverVideoFirstTime])
-        {
+        
+        
+        float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverVideoFirstTime];
+        
+        // display Video overlay only on the third time they view the highlights overlay
 
-        SYNDiscoverOverlayVideoViewController* overlay = [[SYNDiscoverOverlayVideoViewController alloc] init];
-        
-        // Set frame to full screen
-        CGRect vFrame = overlay.view.frame;
-        vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-        overlay.view.frame = vFrame;
-        overlay.view.alpha = 0.0f;
-        
-        [appDelegate.masterViewController addChildViewController:overlay];
-        [appDelegate.masterViewController.view addSubview:overlay.view];
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            overlay.view.alpha = 1.0f;
-        }];
-            [[NSUserDefaults standardUserDefaults] setBool: YES
-                                                    forKey: kUserDefaultsDiscoverVideoFirstTime];
+        if (value==2)
+        {
+            SYNDiscoverOverlayVideoViewController* overlay = [[SYNDiscoverOverlayVideoViewController alloc] init];
+            
+            // Set frame to full screen
+            CGRect vFrame = overlay.view.frame;
+            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+            overlay.view.frame = vFrame;
+            overlay.view.alpha = 0.0f;
+            
+            [appDelegate.masterViewController addChildViewController:overlay];
+            [appDelegate.masterViewController.view addSubview:overlay.view];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                overlay.view.alpha = 1.0f;
+            }];
+            value+=1;
+            [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverVideoFirstTime];
+
+        } else if ( value <2){
+            value+=1;
+            [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverVideoFirstTime];
         }
+        
+        
 
     }
         

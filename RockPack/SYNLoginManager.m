@@ -198,8 +198,8 @@
     if (registrationCheck) {
         
     
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsDiscoverVideoFirstTime];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsDiscoverUserFirstTime];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverVideoFirstTime];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsMoodFirstTime];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsCollectionDetailsFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
