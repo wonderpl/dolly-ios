@@ -52,7 +52,7 @@ typedef enum {
 -(void) setBorder;
 -(void) setState:(ChannelMidCellState)state withAnimation:(BOOL) animated;
 -(void) setCategoryColor: (UIColor*) color;
--(void) inboardingAnimationFromMode:(ProfileType) type;
-
+-(void) descriptionAndDeleteAnimation;
+-(void) descriptionAnimation;
 
 @end

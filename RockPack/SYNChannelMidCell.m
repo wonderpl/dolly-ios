@@ -23,6 +23,9 @@
 
 #define kShowDeleteIPhone 250.0f
 #define kShowDeleteIPad 230.0f
+#define kShowInboardingAnimationDistance 30.0f
+#define kShowInboardingAnimationTime 0.3f
+
 
 @interface SYNChannelMidCell () <UIGestureRecognizerDelegate>
 
@@ -405,89 +408,90 @@
 }
 
 
--(void) inboardingAnimationFromMode:(ProfileType) type {
-    
-    if (type == kModeOtherUsersProfile) {
-        [UIView animateWithDuration:0.3f animations:^{
-            CGRect tmpRect = self.containerView.frame;
-            if (IS_IPHONE)
-            {
-                tmpRect.origin.x += 30;
-            }
-            else
-            {
-                tmpRect.origin.x += 30;
-            }
-            self.containerView.frame = tmpRect;
-        } completion:^(BOOL finished) {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                CGRect tmpRect = self.containerView.frame;
-                if (IS_IPHONE)
-                {
-                    tmpRect.origin.x -= 30;
-                }
-                else
-                {
-                    tmpRect.origin.x -= 30;
-                }
-                self.containerView.frame = tmpRect;
-                
-            }];
-            
-        }];
 
-    } else if (type == kModeMyOwnProfile) {
-        [UIView animateWithDuration:0.3f animations:^{
+
+-(void) descriptionAnimation {
+
+    [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
+        CGRect tmpRect = self.containerView.frame;
+        if (IS_IPHONE)
+        {
+            tmpRect.origin.x += kShowInboardingAnimationDistance;
+        }
+        else
+        {
+            tmpRect.origin.x += kShowInboardingAnimationDistance;
+        }
+        self.containerView.frame = tmpRect;
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
             CGRect tmpRect = self.containerView.frame;
-            
             if (IS_IPHONE)
             {
-                tmpRect.origin.x += 30;
+                tmpRect.origin.x -= kShowInboardingAnimationDistance;
             }
             else
             {
-                tmpRect.origin.x += 30;
+                tmpRect.origin.x -= kShowInboardingAnimationDistance;
             }
             self.containerView.frame = tmpRect;
-        } completion:^(BOOL finished) {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                CGRect tmpRect = self.containerView.frame;
-                if (IS_IPHONE)
-                {
-                    tmpRect.origin.x -= 60;
-                }
-                else
-                {
-                    tmpRect.origin.x -= 60;
-                }
-                self.containerView.frame = tmpRect;
-                
-                self.descriptionLabel.hidden=YES;
-            } completion:^(BOOL finished) {
-                
-                
-                [UIView animateWithDuration:0.3 animations:^{
-                    CGRect tmpRect = self.containerView.frame;
-                    if (IS_IPHONE)
-                    {
-                        tmpRect.origin.x += 30;
-                    }
-                    else
-                    {
-                        tmpRect.origin.x += 30;
-                    }
-                    self.containerView.frame = tmpRect;
-                } completion:^(BOOL finished) {
-                    self.descriptionLabel.hidden=YES;
-                }];
-            }];
             
         }];
-    }
-    
+        
+    }];
 }
 
+
+-(void) descriptionAndDeleteAnimation {
+    
+    [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
+        CGRect tmpRect = self.containerView.frame;
+        
+        if (IS_IPHONE)
+        {
+            tmpRect.origin.x += kShowInboardingAnimationDistance;
+        }
+        else
+        {
+            tmpRect.origin.x += kShowInboardingAnimationDistance;
+        }
+        self.containerView.frame = tmpRect;
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
+            CGRect tmpRect = self.containerView.frame;
+            if (IS_IPHONE)
+            {
+                tmpRect.origin.x -= kShowInboardingAnimationDistance*2;
+            }
+            else
+            {
+                tmpRect.origin.x -= kShowInboardingAnimationDistance*2;
+            }
+            self.containerView.frame = tmpRect;
+            
+            self.descriptionLabel.hidden=YES;
+        } completion:^(BOOL finished) {
+            
+            
+            [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
+                CGRect tmpRect = self.containerView.frame;
+                if (IS_IPHONE)
+                {
+                    tmpRect.origin.x += kShowInboardingAnimationDistance;
+                }
+                else
+                {
+                    tmpRect.origin.x += kShowInboardingAnimationDistance;
+                }
+                self.containerView.frame = tmpRect;
+            } completion:^(BOOL finished) {
+                self.descriptionLabel.hidden=YES;
+            }];
+        }];
+        
+    }];
+}
 
 @end
