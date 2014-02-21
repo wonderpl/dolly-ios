@@ -36,7 +36,6 @@
     {
         
         
-//        NSLog(@"DataDataData :%@", data);
         if(![data isKindOfClass:[NSDictionary class]])
             return nil;
         
