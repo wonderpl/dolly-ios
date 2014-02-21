@@ -145,16 +145,11 @@
     }
     
     if (IS_IPAD) {
-        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-            CGRect tmpFrame = self.tabsViewIPad.frame;
-            tmpFrame.origin.x -= self.tabsViewIPad.frame.size.width;
-            self.tabsViewIPad.frame = tmpFrame;
-            
-        } else {
-            CGRect tmpFrame = self.tabsViewIPad.frame;
-            tmpFrame.origin.x -= self.tabsViewIPad.frame.size.width;
-            self.tabsViewIPad.frame = tmpFrame;
-        }
+        CGRect tmpFrame = self.tabsViewIPad.frame;
+        tmpFrame.origin.x -= self.tabsViewIPad.frame.size.width;
+        self.tabsViewIPad.frame = tmpFrame;
+        
+        
     }
 }
 
@@ -166,23 +161,11 @@
     }
 
     if (IS_IPAD) {
-        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect tmpFrame = self.tabsViewIPad.frame;
-                tmpFrame.origin.x += self.tabsViewIPad.frame.size.width;
-                self.tabsViewIPad.frame = tmpFrame;
-
-            
-            }];
-        } else {
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect tmpFrame = self.tabsViewIPad.frame;
-                tmpFrame.origin.x += self.tabsViewIPad.frame.size.width;
-                self.tabsViewIPad.frame = tmpFrame;
- 
-            }];
-        }
-
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect tmpFrame = self.tabsViewIPad.frame;
+            tmpFrame.origin.x += self.tabsViewIPad.frame.size.width;
+            self.tabsViewIPad.frame = tmpFrame;
+        }];
     }
 }
 
