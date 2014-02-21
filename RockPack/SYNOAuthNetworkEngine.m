@@ -2001,7 +2001,7 @@
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
     
-    [self enqueueSignedOperation: networkOperation];
+    [self enqueueSignedOperation: networkOperation withForceReload:YES];
     
     return networkOperation;
 }
