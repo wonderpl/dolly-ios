@@ -10,6 +10,7 @@
                 <outlet property="containerView" destination="jC0-R1-iPf" id="JHj-Hj-VmE"/>
                 <outlet property="errorContainerView" destination="128" id="129"/>
                 <outlet property="tabsView" destination="950-BM-Kmd" id="SXL-xg-y98"/>
+                <outlet property="tabsViewIPad" destination="tNm-DH-njZ" id="SZ2-DW-0on"/>
                 <outlet property="videoOverlayView" destination="89" id="PeD-qT-eM1"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -22,7 +23,7 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="jC0-R1-iPf" userLabel="Container View">
                     <rect key="frame" x="97" y="0.0" width="927" height="768"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="89" userLabel="Video Overlay View">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -99,7 +100,7 @@
                     <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
         </view>

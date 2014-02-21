@@ -44,6 +44,7 @@
 @property (nonatomic, weak) UIViewController *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
 
+@property (strong, nonatomic) IBOutlet UIView *tabsViewIPad;
 @property (nonatomic) CGRect overlayControllerFrame;
 
 @property (nonatomic, strong) UIImageView* arrowForOverlayImageView;
@@ -134,12 +135,54 @@
    
     
     
-    // Hiding the tab bar on load, This bar is animated in the feed view controller in viewdidload
+    //Hiding the tab bar before a animation to show it
+    //Hiding here to keep the nib more clean
+    //Animation is done in ViewDidAppear
     if(IS_IPHONE) {
         CGRect tmpFrame = self.tabsView.frame;
         tmpFrame.origin.y += self.tabsView.frame.size.height;
         self.tabsView.frame = tmpFrame;
-        
+    }
+    
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+            CGRect tmpFrame = self.tabsViewIPad.frame;
+            tmpFrame.origin.x -= self.tabsViewIPad.frame.size.width;
+            self.tabsViewIPad.frame = tmpFrame;
+            
+        } else {
+            CGRect tmpFrame = self.tabsViewIPad.frame;
+            tmpFrame.origin.x -= self.tabsViewIPad.frame.size.width;
+            self.tabsViewIPad.frame = tmpFrame;
+        }
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (IS_IPHONE) {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                            object: self
+                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
+    }
+
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect tmpFrame = self.tabsViewIPad.frame;
+                tmpFrame.origin.x += self.tabsViewIPad.frame.size.width;
+                self.tabsViewIPad.frame = tmpFrame;
+
+            
+            }];
+        } else {
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect tmpFrame = self.tabsViewIPad.frame;
+                tmpFrame.origin.x += self.tabsViewIPad.frame.size.width;
+                self.tabsViewIPad.frame = tmpFrame;
+ 
+            }];
+        }
+
     }
 }
 
