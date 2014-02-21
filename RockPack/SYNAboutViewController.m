@@ -12,6 +12,7 @@
 #import "SYNAppDelegate.h"
 #import "AppConstants.h"
 #import "SYNWebViewController.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAboutViewController ()
 
@@ -104,6 +105,12 @@
     CGFloat offset = self.textView.frame.origin.y + self.textView.frame.size.height;
     
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.contentSize.width, offset)];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackAboutScreenView];
 }
 
 -(IBAction)buttonPressed:(UIButton*)sender {

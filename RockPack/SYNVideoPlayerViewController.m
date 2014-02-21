@@ -26,6 +26,7 @@
 #import "UINavigationBar+Appearance.h"
 #import "UILabel+Animation.h"
 #import "SYNWebViewController.h"
+#import "SYNGenreManager.h"
 #import <SDWebImageManager.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -92,6 +93,13 @@
 	[audioSession setActive:YES withOptions:0 error:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:self.videoInstance.channel.categoryId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	
@@ -100,10 +108,10 @@
 	}
 	
 	if ([self.navigationController isBeingDismissed]) {
+		[self trackViewingStatisticsForCurrentVideo];
+		
 		[self.currentVideoPlayer pause];
 	}
-	
-	[self trackViewingStatisticsForCurrentVideo];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -145,14 +153,13 @@
 #pragma mark - SYNVideoPlayerDelegate
 
 - (void)videoPlayerMaximise {
-	SYNFullScreenVideoViewController *viewController = [[SYNFullScreenVideoViewController alloc] init];
-	viewController.transitioningDelegate = self;
+	[[SYNTrackingManager sharedManager] trackVideoMaximise];
 	
-	[self presentViewController:viewController animated:YES completion:nil];
+	[self maximiseVideoPlayer];
 }
 
 - (void)videoPlayerMinimise {
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self minimiseVideoPlayer];
 }
 
 - (void)videoPlayerVideoViewed {
@@ -192,7 +199,7 @@
 }
 
 - (IBAction)addButtonPressed:(SYNSocialButton *)button {
-	[[SYNTrackingManager sharedManager] trackVideoAdd];
+	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
 	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
                                                      action:@"select"
@@ -211,8 +218,6 @@
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:self.videoInstance.uniqueId];
 	
-	[[SYNTrackingManager sharedManager] trackVideoShare];
-    
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [[[SDWebImageManager sharedManager] imageCache] imageFromMemoryCacheForKey:self.videoInstance.video.thumbnailURL];
 	
@@ -258,12 +263,14 @@
 	
 	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
 		self.currentVideoPlayer.maximised = NO;
-		[self videoPlayerMinimise];
+		[self minimiseVideoPlayer];
 	}
 	
 	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
+		[[SYNTrackingManager sharedManager] trackVideoMaximiseViaRotation];
+		
 		self.currentVideoPlayer.maximised = YES;
-		[self videoPlayerMaximise];
+		[self maximiseVideoPlayer];
 	}
 }
 
@@ -293,6 +300,17 @@
 	[videoPlayer play];
 }
 
+- (void)maximiseVideoPlayer {
+	SYNFullScreenVideoViewController *viewController = [[SYNFullScreenVideoViewController alloc] init];
+	viewController.transitioningDelegate = self;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (void)minimiseVideoPlayer {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
 	
@@ -311,22 +329,9 @@
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {
-	CGFloat currentTime = self.currentVideoPlayer.currentTime;
-	CGFloat duration = self.currentVideoPlayer.duration;
-	CGFloat percentageViewed = currentTime / duration;
-	
-	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-	
-	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
-														  action:@"videoViewed"
-														   label:self.videoInstance.video.sourceId
-														   value:@((int)(percentageViewed  * 100.0f))] build]];
-	
-	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"goal"
-														  action:@"videoViewedDuration"
-														   label:self.videoInstance.video.sourceId
-														   value:@((int)(currentTime))] build]];
-
+	[[SYNTrackingManager sharedManager] trackVideoView:self.videoInstance.video.sourceId
+										   currentTime:self.currentVideoPlayer.currentTime
+											  duration:self.currentVideoPlayer.duration];
 }
 
 - (Class)animationClassForViewController:(UIViewController *)viewController {

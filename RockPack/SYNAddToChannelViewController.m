@@ -11,7 +11,6 @@
 #import "ChannelCover.h"
 #import "ExternalAccount.h"
 #import "VideoInstance.h"
-#import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
 #import "SYNFacebookManager.h"
 #import "SYNOAuthNetworkEngine.h"
@@ -24,7 +23,8 @@
 #import "SYNAddToChannelFlowLayout.h"
 #import "UICollectionReusableView+Helpers.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
+#import "SYNTrackingManager.h"
 
 #define kAnimationExpansion 0.4f
 
@@ -99,21 +99,12 @@
     [super viewWillAppear: animated];
     
     self.currentChannelsCollectionView.scrollsToTop = YES;
-
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Channels - Create - Select"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     self.closeButton.enabled = YES;
     self.confirmButton.enabled = YES;
     
     // Copy Channels
     self.channels = [appDelegate.currentUser.channels array];
-    
     
     [self.currentChannelsCollectionView reloadData];
 }
@@ -165,7 +156,7 @@
         
         existingChannel.titleLabel.text = channel.title;
         
-        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
+        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
         
         cell = existingChannel;
     }
@@ -186,6 +177,8 @@
     }
     else
     {
+		[[SYNTrackingManager sharedManager] trackCollectionSelectedIsNew:NO];
+		
         self.selectedCell = [self.currentChannelsCollectionView cellForItemAtIndexPath:indexPath];
         self.selectedChannel = self.channels[indexPath.item - 1]; // (the channel index is +1 due to extra first channel)
     }
@@ -278,13 +271,9 @@
     
     if(self.createNewChannelCell.state == CreateNewChannelCellStateHidden) // if it is opening, show the panel
     {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"channelSelectionClick"
-                                                                label: @"New"
-                                                                value: nil] build]];
-        
+		[[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
+		
+		[[SYNTrackingManager sharedManager] trackCollectionSelectedIsNew:YES];
     }
     
 
@@ -328,6 +317,8 @@
 - (IBAction)confirmButtonPressed:(UIButton *)button {
 	button.enabled = NO;
 	
+	[[SYNTrackingManager sharedManager] trackCollectionSaved];
+	
 	if (self.createNewChannelCell.isEditing) {
 		// We don't have a channel, need to create one
 		SYNAddToChannelCreateNewCell *cell = self.createNewChannelCell;
@@ -340,8 +331,12 @@
 														 cover:@""
 													  isPublic:YES
 											 completionHandler:^(NSDictionary *response) {
+												 
+												 NSString *name = [self.createNewChannelCell.nameInputTextField.text uppercaseString];
+												 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
+												 
 												 NSString *channelId = response[@"id"];
-												 [self addCurrentVideoInstanceToChannel:channelId];
+												 [self addCurrentVideoInstanceToChannel:channelId isFavourites:NO];
 												 
 												 [[NSNotificationCenter defaultCenter] postNotificationName:kChannelOwnerUpdateRequest
 																									 object:nil
@@ -355,22 +350,17 @@
 	}
 	
 	if (self.selectedChannel) {
-		[self addCurrentVideoInstanceToChannel:self.selectedChannel.uniqueId];
+		[self addCurrentVideoInstanceToChannel:self.selectedChannel.uniqueId isFavourites:self.selectedChannel.favouritesValue];
 	}
 }
 
-- (void)addCurrentVideoInstanceToChannel:(NSString *)channelId {
+- (void)addCurrentVideoInstanceToChannel:(NSString *)channelId isFavourites:(BOOL)isFavourites {
     [appDelegate.oAuthNetworkEngine updateVideosForUserId:appDelegate.currentUser.uniqueId
 											 forChannelId:channelId
 										 videoInstanceIds:@[ self.videoInstance.uniqueId ]
 											clearPrevious:NO
 										completionHandler: ^(NSDictionary* result) {
-											id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-											
-											[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-																								   action: @"channelUpdated"
-																									label: nil
-																									value: nil] build]];
+											[[SYNTrackingManager sharedManager] trackVideoAddedToCollectionCompleted:isFavourites];
 											
 											NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL", nil);
 											

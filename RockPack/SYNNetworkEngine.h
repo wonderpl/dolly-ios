@@ -17,7 +17,8 @@
 @interface SYNNetworkEngine : SYNAbstractNetworkEngine
 
 - (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
-                              onError: (MKNKErrorBlock) errorBlock;
+                              onError: (MKNKErrorBlock) errorBlock
+						  forceReload: (BOOL)forceReload;
 
 - (MKNetworkOperation *) collectionsForCategory: (NSString *) categoryId
                                                 forRange: (NSRange) range

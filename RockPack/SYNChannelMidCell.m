@@ -14,7 +14,7 @@
 #import <UIImageView+WebCache.h>
 #import "ChannelOwner.h"
 #import "SYNAppDelegate.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 
 @import QuartzCore;
 
@@ -185,7 +185,7 @@
     
     [self setBorder];
 	
-	[self setCategoryColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
+	[self setCategoryColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
 
 	self.separatorView.hidden = NO;
 

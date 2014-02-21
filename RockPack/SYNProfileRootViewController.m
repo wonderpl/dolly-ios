@@ -9,7 +9,6 @@
 #import "AppConstants.h"
 #import "Channel.h"
 #import "ChannelCover.h"
-#import "GAI.h"
 #import "SYNAddToChannelCreateNewCell.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
@@ -31,6 +30,7 @@
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNTrackingManager.h"
 
 
 @import QuartzCore;
@@ -51,9 +51,7 @@
     ProfileType modeType;
 }
 
-@property (nonatomic) BOOL isIPhone;
 @property (nonatomic) BOOL isUserProfile;
-@property (nonatomic) BOOL trackView;
 @property (nonatomic, assign) BOOL collectionsTabActive;
 
 @property (nonatomic, strong) NSArray *filteredSubscriptions;
@@ -223,8 +221,6 @@
     [self.subscriptionThumbnailCollectionView registerNib: thumbnailCellNib
                                forCellWithReuseIdentifier: @"SYNChannelMidCell"];
     
-    self.isIPhone = IS_IPHONE;
-    
     self.creatingChannel = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver: self
@@ -387,7 +383,7 @@
     [self setUpSegmentedControl];
     
     // == updates the segmented controllers functionality
-    if (self.isIPhone)
+    if (IS_IPHONE)
     {
         [self updateTabStates];
     }
@@ -480,43 +476,19 @@
     [self.navigationItem.backBarButtonItem setTitle:@""];
     
     
-    if (self.channelOwner == appDelegate.currentUser)
-    {
-        // Don't track the very first user view
-        if (self.trackView == false)
-        {
-            self.trackView = TRUE;
-        }
-        else
-        {
-            // Google analytics support
-            id tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker set: kGAIScreenName
-                   value: @"Own Profile"];
-            [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-        }
-    }
-    else
-    {
-        if (self.isIPhone)
-        {
+    if (self.channelOwner == appDelegate.currentUser) {
+		[[SYNTrackingManager sharedManager] trackOwnProfileScreenView];
+    } else {
+        if (IS_IPHONE) {
             self.channelThumbnailCollectionView.scrollsToTop = !self.collectionsTabActive;
             self.subscriptionThumbnailCollectionView.scrollsToTop = self.collectionsTabActive;
-        }
-        else
-        {
+        } else {
             self.channelThumbnailCollectionView.scrollsToTop = YES;
             self.subscriptionThumbnailCollectionView.scrollsToTop = NO;
         }
-        
-        // Google analytics support
-        id tracker = [[GAI sharedInstance] defaultTracker];
-        
-        [tracker set: kGAIScreenName
-               value: @"User Profile"];
-        
-        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    }
+		
+		[[SYNTrackingManager sharedManager] trackOtherUserProfileScreenView];
+	}
     
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
@@ -548,32 +520,12 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	
     if (IS_IPHONE) {
         self.channelThumbnailCollectionView.hidden=NO;
     }
-    
 }
-
-- (void) updateAnalytics
-{
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    // Google analytics support
-    if (self.channelOwner == appDelegate.currentUser)
-    {
-        [tracker set: kGAIScreenName
-               value: @"Own Profile"];
-    }
-    else
-    {
-        [tracker set: kGAIScreenName
-               value: @"User Profile"];
-    }
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-}
-
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
@@ -900,7 +852,7 @@
     
     //self.navigationController.navigationBarHidden = YES;
     
-    if (!self.isIPhone)
+    if (!IS_IPHONE)
     {
         self.channelThumbnailCollectionView.contentOffset = CGPointZero;
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
@@ -1222,8 +1174,7 @@
 
 - (void) resizeScrollViews
 {
-    if (self.isIPhone)
-    {
+    if (IS_IPHONE) {
         return;
     }
     
@@ -1280,6 +1231,13 @@
 }
 - (IBAction)followingsTabTapped:(id)sender {
     self.collectionsTabActive = NO;
+	
+	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
+	} else {
+		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
+	}
+	
     //
     if (IS_IPHONE) {
         CGAffineTransform translateLeftChannel = CGAffineTransformTranslate(self.channelThumbnailCollectionView.transform,-self.view.frame.size.width, 0);
@@ -1487,7 +1445,7 @@
         }
     }
     
-    if (!self.isIPhone)
+    if (!IS_IPHONE)
     {
         if (self.orientationDesicionmaker && scrollView != self.orientationDesicionmaker)
         {
@@ -2124,6 +2082,8 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
+	
+	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
     
     //#warning change to server call
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
@@ -2203,8 +2163,8 @@
     
 }
 
-- (IBAction)editButtonTapped:(id)sender
-{
+- (IBAction)editButtonTapped:(id)sender {
+    [[SYNTrackingManager sharedManager] trackEditProfileScreenView];
     
     [self killScroll];
     [self.createChannelCell.descriptionTextView resignFirstResponder];
@@ -2335,6 +2295,9 @@
                                                      cover: @""
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
+											 
+											 NSString *name = [self.createChannelCell.createTextField.text uppercaseString];
+											 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
                                              
                                              [self cancelCreateChannel];
                                              //takes 0.6f for the cancel animation to end
@@ -2602,6 +2565,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 - (IBAction)changeCoverImageButtonTapped:(id)sender
 {
+	[[SYNTrackingManager sharedManager] trackCoverPhotoUpload];
     
     //302,167 is the values for the cropping, the cover photo dimensions is 907 x 502
     self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(302,167)];
@@ -2619,6 +2583,8 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 - (IBAction)changeAvatarButtonTapped:(id)sender
 {
+	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:[self trackingScreenName]];
+	
     self.imagePickerControllerAvatar = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(280, 280)];
     
     self.imagePickerControllerAvatar.delegate = self;
@@ -2675,6 +2641,7 @@ finishedWithImage: (UIImage *) image
                                                         image: image
                                             completionHandler: ^(NSDictionary* result)
          {
+			 [[SYNTrackingManager sharedManager] trackAvatarPhotoUploadCompleted];
              
              [self setProfileImage:result[@"thumbnail_url"]];
              //[self.activityIndicator stopAnimating];
@@ -2710,6 +2677,8 @@ finishedWithImage: (UIImage *) image
                                                               image: image
                                                   completionHandler: ^(NSDictionary* result)
          {
+			 [[SYNTrackingManager sharedManager] trackCoverPhotoUploadCompleted];
+			 
              [self setCoverphotoImage:result[@"Location"]];
              
              
@@ -2741,7 +2710,8 @@ finishedWithImage: (UIImage *) image
 
 -(void)createNewButtonPressed
 {
-    
+	[[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
+	
     self.creatingChannel = YES;
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
@@ -3091,13 +3061,6 @@ finishedWithImage: (UIImage *) image
         CGRect tmpRect =self.uploadAvatarButton.frame;
         *rect = tmpRect;
     }
-}
-- (IBAction)uploadPicture:(id)sender {
-    
-    [self editButtonTapped:sender];
-    [self changeAvatarButtonTapped:sender];
-    self.uploadAvatar.hidden=YES;
-    
 }
 
 - (NSArray *)filteredSubscriptionsForSearchTerm:(NSString *)searchTerm {

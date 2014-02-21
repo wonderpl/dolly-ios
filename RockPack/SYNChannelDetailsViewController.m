@@ -12,7 +12,6 @@
 #import "Appirater.h"
 #import "Channel.h"
 #import "ChannelOwner.h"
-#import "GAI.h"
 #import "SYNAppDelegate.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
@@ -112,10 +111,6 @@
     return self;
 }
 
-- (void)dealloc {
-	
-}
-
 #pragma mark - View lifecyle
 
 - (void) viewDidLoad
@@ -123,18 +118,6 @@
     [super viewDidLoad];
     
     [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
-    
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    //show we track users channel details mode?
-    if (self.mode == kChannelDetailsModeDisplay )
-    {
-        [tracker set: kGAIScreenName
-               value: @"Channel details"];
-        
-        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    }
-    
     
     if (IS_IPAD)
     {
@@ -274,13 +257,29 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+    
+	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:self.channel.categoryId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	
+	if ([self.channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+		[[SYNTrackingManager sharedManager] setChannelRelationDimension:@"own"];
+		[[SYNTrackingManager sharedManager] trackOwnCollectionScreenView];
+	} else {
+		NSString *subscriptionStatus = (self.channel.subscribedByUserValue ? @"subscribed" : @"unsubscribed");
+		[[SYNTrackingManager sharedManager] setChannelRelationDimension:subscriptionStatus];
+		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
+	}
+}
+
 - (void) viewWillDisappear: (BOOL) animated
 {
     [super viewWillDisappear: animated];
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
     }
-
+	
     // Remove notifications individually
     // Do this rather than plain RemoveObserver call as low memory handling is based on NSNotifications.
     [[NSNotificationCenter defaultCenter] removeObserver: self
@@ -310,6 +309,10 @@
     
     //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
     
+}
+
+- (NSString *)trackingScreenName {
+	return @"Collection";
 }
 
 -(void) setupFonts
@@ -497,33 +500,8 @@
 }
 #pragma mark - Control Actions
 
-- (void) followControlPressed: (SYNSocialButton *) socialControl
-{
-    if (self.channel != nil)
-    {
-        if (self.channel.subscribedByUserValue) {
-            [SYNActivityManager.sharedInstance unsubscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
-                
-                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-
-            } errorHandler:^(NSDictionary *error) {
-                
-            }];
-        }
-        else
-        {
-            [SYNActivityManager.sharedInstance subscribeToChannel:self.channel completionHandler:^(NSDictionary *responseDictionary) {
-                self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-                
-            } errorHandler:^(NSDictionary *error) {
-                
-            }];
-        }
-        
-        
-        
-    }
-    
+- (void) followControlPressed: (SYNSocialButton *) socialControl {
+	[self followButtonPressed:socialControl withChannel:self.channel];
 }
 
 - (void) addSubscribeActivityIndicator
@@ -1274,6 +1252,8 @@
 
 - (IBAction)editTapped:(id)sender
 {
+	
+	[[SYNTrackingManager sharedManager] trackEditCollectionScreenView];
     
     [self killScroll];
 
@@ -1599,19 +1579,10 @@
 
 
 
-- (IBAction) followersLabelPressed: (id) sender
-{
-    // Google analytics support
+- (IBAction) followersLabelPressed: (id) sender {
     if (self.channel.subscribersCountValue == 0) {
         return;
     }
-    
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Subscribers List"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
     
@@ -1673,12 +1644,8 @@
 -(void) saveTapped
 {
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"channelSaveButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
+	[[SYNTrackingManager sharedManager] trackCollectionSaved];
+	
     //
     //    self.saveChannelButton.enabled = NO;
     //    self.deleteChannelButton.enabled = YES;
@@ -1704,12 +1671,7 @@
                                              
                                              self.lblDescription.text = self.txtViewDescription.text;
                                              
-                                             id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                             
-                                             [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                    action: @"channelEdited"
-                                                                                                     label: @""
-                                                                                                     value: nil] build]];
+											 [[SYNTrackingManager sharedManager] trackCollectionEdited:[self.txtFieldChannelName.text uppercaseString]];
                                              
                                             
                                              

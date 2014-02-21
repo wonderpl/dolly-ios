@@ -47,6 +47,7 @@
 
 - (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
                               onError: (MKNKErrorBlock) errorBlock
+						  forceReload: (BOOL)forceReload
 {
     SYNNetworkOperationJsonObject *networkOperation =
     (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPICategories
@@ -66,7 +67,7 @@
         DebugLog(@"API request failed");
     }];
     
-    [self enqueueOperation: networkOperation];
+    [self enqueueOperation: networkOperation forceReload:forceReload];
 }
 
 

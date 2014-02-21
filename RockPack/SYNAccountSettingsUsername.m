@@ -10,6 +10,7 @@
 #import "SYNAccountSettingsUsername.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAccountSettingsUsername ()
 
@@ -17,25 +18,8 @@
 
 @implementation SYNAccountSettingsUsername
 
-
-- (void) viewDidLoad
-{
-    [super viewDidLoad];
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Username"
-                                                            value: nil] build]];
-    
-    
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     
     self.errorLabel.text = @"Your username can only be changed once.";
 }
@@ -57,6 +41,8 @@
         self.errorLabel.text = NSLocalizedString (@"You Have Entered Invalid Characters", nil);
         return;
     }
+	
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Username"];
     
     [self updateField:@"username" forValue:self.inputField.text withCompletionHandler:^{
        

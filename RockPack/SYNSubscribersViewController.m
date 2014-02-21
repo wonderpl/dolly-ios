@@ -12,6 +12,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNFriendCell.h"
 #import "UICollectionReusableView+Helpers.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNSubscribersViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNSocialActionsDelegate>
 
@@ -112,6 +113,12 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackCollectionFollowersScreenView];
+}
+
 
 - (void) setInfoLabelText: (NSString *) text
 {
@@ -137,17 +144,6 @@
     position.y += 40.0;
     self.activityView.center = position;
 }
-
-
-- (void) viewDidAppear: (BOOL) animated
-{
-    
-    [super viewDidAppear:animated];
-    
-    
-}
-
-
 
 #pragma mark - UICollectionView Delegate/Data Source
 

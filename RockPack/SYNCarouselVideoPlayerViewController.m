@@ -26,7 +26,9 @@
 #import "UINavigationBar+Appearance.h"
 #import "SYNActivityManager.h"
 #import "UILabel+Animation.h"
+#import "SYNTrackingManager.h"
 #import <UIButton+WebCache.h>
+#import "SYNTrackingManager.h"
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UIScrollViewDelegate, SYNPagingModelDelegate>
 
@@ -110,6 +112,8 @@
 												   animated:YES
 											 scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 	}
+	
+	[[SYNTrackingManager sharedManager] trackCarouselVideoPlayerScreenView];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -121,6 +125,12 @@
 
 - (void)videoPlayerFinishedPlaying {
 	[self playNextVideo];
+}
+
+#pragma mark - Overridden
+
+- (NSString *)trackingScreenName {
+	return @"Viewer1";
 }
 
 #pragma mark - Getters / Setters
@@ -176,12 +186,7 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-	
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
-                                                           action:@"videoBarClick"
-                                                            label:nil
-                                                            value:nil] build]];
+	[[SYNTrackingManager sharedManager] trackCarouselVideoSelected];
 	
 	if (indexPath.row == self.selectedIndex) {
 		if (self.currentVideoPlayer.state == SYNVideoPlayerStatePlaying) {
@@ -220,7 +225,10 @@ referenceSizeForFooterInSection:(NSInteger)section {
 		NSInteger pageOffset = (scrollView.contentOffset.x - pageWidth) / pageWidth;
 
 		if (pageOffset) {
-			self.selectedIndex = (pageOffset < 0 ? [self previousVideoIndex] : [self nextVideoIndex]);
+			BOOL previousVideo = (pageOffset < 0);
+			[[SYNTrackingManager sharedManager] trackVideoSwipeToVideo:previousVideo];
+			
+			self.selectedIndex = (previousVideo ? [self previousVideoIndex] : [self nextVideoIndex]);
 			
 			scrollView.contentOffset = CGPointMake(pageWidth, 0);
 		}
@@ -252,8 +260,10 @@ referenceSizeForFooterInSection:(NSInteger)section {
 - (IBAction)followButtonPressed:(UIBarButtonItem *)barButton {
 	barButton.enabled = NO;
 	
+	[[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+	
 	Channel *channel = self.videoInstance.channel;
-	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
+	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId];
 	if (channel.subscribedByUserValue) {
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
 												completionHandler:^(NSDictionary *responseDictionary) {
@@ -266,12 +276,8 @@ referenceSizeForFooterInSection:(NSInteger)section {
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 		 
 											  completionHandler: ^(NSDictionary *responseDictionary) {
-												  id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
 												  
-												  [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-																										 action: @"userSubscription"
-																										  label: nil
-																										  value: nil] build]];
 												  barButton.title = @"unfollow";
 												  barButton.enabled = YES;
 											  } errorHandler: ^(NSDictionary *errorDictionary) {

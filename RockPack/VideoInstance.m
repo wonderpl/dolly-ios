@@ -322,18 +322,4 @@ static NSDateFormatter *dateFormatter = nil;
     return self.video.thumbnailURL;
 }
 
--(NSString*)description
-{
-    NSMutableString* dMutableString = [[NSMutableString alloc] init];
-    
-    [dMutableString appendString:@"[VideoInstance "];
-    [dMutableString appendFormat:@"%@", self.starredByUserValue ? @"* " : @""];
-    [dMutableString appendFormat:@"(starrets:%i)", self.starrers.count];
-    [dMutableString appendFormat:@"(position:%lld)", self.positionValue];
-    [dMutableString appendString:@"]"];
-    
-    
-    return [NSString stringWithString:dMutableString];
-}
-
 @end

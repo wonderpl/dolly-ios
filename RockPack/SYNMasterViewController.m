@@ -17,7 +17,7 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNCommentingViewController.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "Genre.h"
 #import "SubGenre.h"
 #import "SYNLoginManager.h"
@@ -124,7 +124,7 @@
             
             self.containerViewController.view = self.containerView;
             
-        } ];
+        } forceReload:NO];
     } else {
         [self addChildViewController:self.containerViewController];
         self.containerViewController.view = self.containerView;
@@ -134,8 +134,7 @@
    
 }
 
-- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
-{
+- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock forceReload:(BOOL)forceReload {
     
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
         
@@ -147,14 +146,14 @@
             
             CompleteBlock(success);
             
-            [[SYNGenreColorManager sharedInstance] registerGenreColorsFromCoreData];
+            [[SYNGenreManager sharedInstance] registerGenreColorsFromCoreData];
             
         }];
     } onError:^(NSError* error) {
         
         CompleteBlock(NO);
         
-    }];
+    } forceReload:forceReload];
 }
 
 #pragma mark - Popular Genre

@@ -7,6 +7,7 @@
 //
 
 #import "SYNWebViewController.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNWebViewController () <UIWebViewDelegate>
 
@@ -19,15 +20,22 @@
 
 @property (nonatomic, strong) NSURL *URL;
 
+@property (nonatomic, copy) NSString *trackingName;
+
 @end
 
 @implementation SYNWebViewController
 
 + (UIViewController *)webViewControllerForURL:(NSURL *)URL {
+	return [self webViewControllerForURL:URL withTrackingName:nil];
+}
+
++ (UIViewController *)webViewControllerForURL:(NSURL *)URL withTrackingName:(NSString *)trackingName {
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"WebView" bundle:nil];
 	UINavigationController *navController = [storyboard instantiateInitialViewController];
 	SYNWebViewController *webViewController = (SYNWebViewController *)navController.topViewController;
 	webViewController.URL = URL;
+	webViewController.trackingName = trackingName;
 	
 	return navController;
 }
@@ -47,6 +55,14 @@
 	[super viewWillAppear:animated];
 	
 	[self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	if (self.trackingName) {
+		[[SYNTrackingManager sharedManager] trackScreenViewWithName:self.trackingName];
+	}
 }
 
 #pragma mark - UIWebViewDelegate

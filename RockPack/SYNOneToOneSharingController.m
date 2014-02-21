@@ -9,7 +9,6 @@
 #import "AppConstants.h"
 #import "Channel.h"
 #import "Friend.h"
-#import "GAI.h"
 #import "OWActivities.h"
 #import "OWActivityView.h"
 #import "OWActivityViewController.h"
@@ -25,6 +24,7 @@
 #import "NSString+Validation.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNWonderMailActivity.h"
+#import "SYNTrackingManager.h"
 @import AddressBook;
 @import QuartzCore;
 
@@ -36,7 +36,8 @@
                                             UITextFieldDelegate,
                                             UITableViewDataSource,
                                             UITableViewDelegate,
-                                            UIScrollViewDelegate>
+                                            UIScrollViewDelegate,
+											UISearchBarDelegate>
 {
     BOOL displayEmailCell;
 }
@@ -201,14 +202,14 @@
                                                    object: nil];
         return;
     }
+	
+	[[SYNTrackingManager sharedManager] trackShareScreenView];
+}
 
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Share"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackShareScreenView];
 }
 
 // Recursively, enable or disable controls contained in a view
@@ -332,6 +333,9 @@
     
     ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[[SYNTrackingManager sharedManager] trackAddressBookPermission:granted];
+			
             if (granted)
             {
                 DebugLog(@"Address Book Access GRANTED");
@@ -351,12 +355,6 @@
                 }
             }
             
-            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-            
-            [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                   action: @"AddressBookPerm"
-                                                                    label: granted ? @"accepted": @"rejected"
-                                                                    value: nil] build]];
             if (addressBookRef)
             {
                 CFRelease(addressBookRef);
@@ -365,6 +363,9 @@
     });
 }
 
+- (NSString *)shareType {
+	return self.mutableShareDictionary[@"type"];
+}
 
 #pragma mark - Data Retrieval
 
@@ -743,16 +744,10 @@
         [self presentAlertToFillEmailForFriend: nil];
     }
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"SearchFriendtoShare"
-                                                            label: (lastCellPressed ? @"New" : ([friend.externalSystem
-                                                                                                 isEqualToString: kFacebook] ? @"fromFB" : @"fromAB"))
-                                                            value: nil] build]];
-    
+	NSString *origin = (lastCellPressed ? @"New" : ([friend.externalSystem isEqualToString: kFacebook] ? @"fromFB" : @"fromAB"));
+	[[SYNTrackingManager sharedManager] trackShareFriendSearchSelect:origin];
+	
     [tableView removeFromSuperview];
-    
 }
 
 
@@ -822,16 +817,9 @@
         self.friendToAddEmail.uniqueId = self.friendToAddEmail.email;
         self.friendToAddEmail.externalUID = self.friendToAddEmail.email; // workaround the fact that we do not have a UID for this new user
     }
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    NSString* whereFrom = [self.friendToAddEmail.externalSystem isEqualToString:kFacebook] ? @"fromFB" : @"New";
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"ProvideEmailtoShare"
-                                                            label: whereFrom
-                                                            value: nil] build]];
-    
+	
+	[[SYNTrackingManager sharedManager] trackShareEmailEnteredIsNew:![self.friendToAddEmail.externalSystem isEqualToString:kFacebook]];
+	
     [self sendEmailToFriend: self.friendToAddEmail];
 }
 
@@ -871,8 +859,9 @@
     return YES;
 }
 
-
-
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [[SYNTrackingManager sharedManager] trackShareFriendSearch];
+}
 
 - (BOOL)searchBarShouldBeginEditing: (UISearchBar *)searchBar
 {
@@ -894,14 +883,6 @@
     
     [self.searchResultsTableView reloadData];
     
-    
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"SearchFriendtoShare"
-                                                            label: nil
-                                                            value: nil] build]];
     return YES;
 }
 
@@ -965,10 +946,9 @@
     
     self.friendHeldInQueue = nil;
     
-    
     SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     __weak SYNOneToOneSharingController *wself = self;
-    
+	
     [appDelegate.oAuthNetworkEngine emailShareWithObjectType: self.mutableShareDictionary[@"type"]
                                                     objectId: self.mutableShareDictionary[@"object_id"]
                                                   withFriend: friend
@@ -983,8 +963,6 @@
          
                                                wself.friendToAddEmail = nil;
          
-                                               wself.view.userInteractionEnabled = YES;
-                                               
                                                [self searchBarTextDidEndEditing:self.searchBar];
                                                
                                                [self fetchAndDisplayFriends];
@@ -1000,15 +978,11 @@
                                                [appDelegate.masterViewController presentNotificationWithMessage:notificationText
                                                                                                         andType:NotificationMessageTypeSuccess];
          
-         
-                                               id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                               NSString *actionType =
-                                               [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"channelShared" : @"videoShared";
-         
-                                               [tracker send: [[GAIDictionaryBuilder  createEventWithCategory: @"goal"
-                                                                                                       action: actionType
-                                                                                                        label: @"1to1"
-                                                                                                        value: nil] build]];
+											   if ([self.mutableShareDictionary[@"type"] isEqualToString:@"channel"]) {
+												   [[SYNTrackingManager sharedManager] trackCollectionShareCompletedWithService:@"1to1"];
+											   } else {
+												   [[SYNTrackingManager sharedManager] trackVideoShareCompletedWithService:@"1to1"];
+											   }
 											   
 											   [self dismissViewControllerAnimated:YES completion:^{
 												   [appDelegate.masterViewController presentNotificationWithMessage:notificationText

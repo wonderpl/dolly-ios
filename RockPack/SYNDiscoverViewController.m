@@ -19,7 +19,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNMasterViewController.h"
 #import "UIButton+WebCache.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "SYNDiscoverSectionView.h"
 #import "SYNOnBoardingHeader.h"
 #import "UINavigationBar+Appearance.h"
@@ -186,14 +186,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	[self updateContainerWidths];
     
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackDiscoverScreenView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+	
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = NO;
 	}
-
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -306,12 +310,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     //Editors picks still get there color
     
     if (indexPath.section == 0 && indexPath.row == 0) {
-        categoryCell.selectedColor = [UIColor darkerColorForColor:[[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId]] ;
-        categoryCell.deSelectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
-        categoryCell.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+        categoryCell.selectedColor = [UIColor darkerColorForColor:[[SYNGenreManager sharedInstance] colorFromID:subgenre.uniqueId]] ;
+        categoryCell.deSelectedColor = [[SYNGenreManager sharedInstance] colorFromID:subgenre.uniqueId];
+        categoryCell.backgroundColor = [[SYNGenreManager sharedInstance] colorFromID:subgenre.uniqueId];
         
     } else {
-        categoryCell.selectedColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+        categoryCell.selectedColor = [[SYNGenreManager sharedInstance] colorFromID:subgenre.uniqueId];
         categoryCell.deSelectedColor = [UIColor whiteColor];
     }
     
@@ -379,7 +383,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
                                                                withReuseIdentifier: DiscoverSectionView
                                                                       forIndexPath: indexPath];
         SubGenre* subgenre = currentGenre.subgenres[indexPath.item];
-        ((SYNDiscoverSectionView*)supplementaryView).background.backgroundColor = [[SYNGenreColorManager sharedInstance] colorFromID:subgenre.uniqueId];
+        ((SYNDiscoverSectionView*)supplementaryView).background.backgroundColor = [[SYNGenreManager sharedInstance] colorFromID:subgenre.uniqueId];
         
         
     }
@@ -690,6 +694,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [self.searchResultsController searchForGenre:searchTerm];
         
     } else {
+		[[SYNTrackingManager sharedManager] trackSearchInitiated];
+		
         [self.categoriesCollectionView deselectItemAtIndexPath:self.selectedCellIndex animated:YES];
         self.selectedCellIndex = nil;
         [self.searchResultsController searchForTerm:searchTerm];

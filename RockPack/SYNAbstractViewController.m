@@ -214,13 +214,8 @@
     // Get the videoinstance associated with the control pressed
     VideoInstance *videoInstance = socialControl.dataItemLinked;
     
-    // Track
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoStarButtonClick"
-                                                            label: @"feed"
-                                                            value: nil] build]];
+	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
+	
     BOOL didStar = (socialControl.selected == NO);
     
     socialControl.enabled = NO;
@@ -285,7 +280,7 @@
     
     VideoInstance *videoInstance = socialControl.dataItemLinked;
 	
-	[[SYNTrackingManager sharedManager] trackVideoAdd];
+	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
 	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: @"select"
@@ -303,6 +298,8 @@
 	if (!socialButton.dataItemLinked) {
 		return;
 	}
+	
+	[[SYNTrackingManager sharedManager] trackVideoCommentFromScreenName:[self trackingScreenName]];
 
 	SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked];
 
@@ -346,8 +343,6 @@
 	[self requestShareLinkWithObjectType: @"video_instance"
 								objectId: videoInstance.uniqueId];
 	
-	[[SYNTrackingManager sharedManager] trackVideoShare];
-    
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];
     
@@ -515,13 +510,7 @@
 
 - (void)shareChannel:(Channel *)channel isOwner:(NSNumber *)isOwner usingImage:(UIImage *)image {
 	[self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
-
-	id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-	[tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"uiAction"
-														  action:@"channelShareButtonClick"
-														   label:nil
-														   value:nil] build]];
-
+	
 	[self shareObjectType:@"channel"
 				 objectId:channel.uniqueId
 				  isOwner:isOwner
@@ -562,24 +551,20 @@
 
 
 
-- (void) followControlPressed: (SYNSocialButton *) socialControl
-{
-    if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
-    {
+- (void) followControlPressed: (SYNSocialButton *) socialControl {
+    if ([socialControl.dataItemLinked isKindOfClass: [Channel class]]) {
         // Get the channel associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
-        if(!channel)
-            return;
-        
-		[self followButtonPressed:socialControl withChannel:channel];
-    }
-    else
-    {
-        
+        if (channel) {
+			[self followButtonPressed:socialControl withChannel:channel];
+		}
+    } else {
         ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
         
         if(!channelOwner)
             return;
+		
+		[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
         
         if(channelOwner.subscribedByUserValue == NO)
         {
@@ -670,6 +655,9 @@
     }
 }
 
+- (NSString *)trackingScreenName {
+	return nil;
+}
 
 - (void) shouldHideTabBar
 {
@@ -825,6 +813,9 @@
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel {
 	button.enabled = NO;
+	
+	[[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+	
 	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
     
 	if (channel.subscribedByUserValue) {
@@ -842,12 +833,8 @@
 	} else {
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 											  completionHandler: ^(NSDictionary *responseDictionary) {
-													id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-													
-													[tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-																										   action: @"userSubscription"
-																											label: nil
-																											value: nil] build]];
+												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
+												  
 													button.selected = YES;
 													button.enabled = YES;
 												} errorHandler: ^(NSDictionary *errorDictionary) {

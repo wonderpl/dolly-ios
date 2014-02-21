@@ -17,6 +17,7 @@
 #import "Video.h"
 #import "GAI.h"
 #import "VideoInstance.h"
+#import "SYNTrackingManager.h"
 #import "UIImage+Resize.h"
 
 @interface SYNOAuthNetworkEngine ()
@@ -134,12 +135,7 @@
              BOOL hasJustBeenRegistered = responseDictionary[@"registered"] ? YES : NO;
              if(hasJustBeenRegistered)
              {
-                 id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                 
-                 [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                        action: @"userRegistration"
-                                                                         label: origin
-                                                                         value: nil] build]];
+				 [[SYNTrackingManager sharedManager] trackUserRegistrationFromOrigin:origin];
              }
              
              SYNOAuth2Credential* newOAuth2Credentials = [SYNOAuth2Credential credentialWithAccessToken: responseDictionary[@"access_token"]
@@ -239,7 +235,7 @@
                                                                                                     httpMethod: @"POST"
                                                                                                            ssl: TRUE];
     [self addCommonOAuthPropertiesToUnsignedNetworkOperation: networkOperation
-                                                   forOrigin: kOriginRockpack
+                                                   forOrigin: kOriginWonderPL
                                            completionHandler: completionBlock
                                                 errorHandler: errorBlock];
     
@@ -333,7 +329,7 @@
     networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
     
     [self addCommonOAuthPropertiesToUnsignedNetworkOperation: networkOperation
-                                                   forOrigin: kOriginRockpack
+                                                   forOrigin: kOriginWonderPL
                                            completionHandler: completionBlock
                                                 errorHandler: errorBlock];
     

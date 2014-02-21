@@ -46,12 +46,16 @@ static const NSInteger UsernameMaxLength = 20;
 
 @implementation SYNIPhoneSignupUsernameViewController
 
+#pragma mark - Init / Dealloc
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
 		self.validatedUsernames = [NSMutableSet set];
 	}
 	return self;
 }
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -65,7 +69,7 @@ static const NSInteger UsernameMaxLength = 20;
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[SYNTrackingManager sharedManager] trackRegisterScreenView];
+	[[SYNTrackingManager sharedManager] trackRegistrationScreenView];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -78,6 +82,8 @@ static const NSInteger UsernameMaxLength = 20;
 	}
 }
 
+#pragma mark - IBActions
+
 - (IBAction)backButtonPressed:(UIBarButtonItem *)barButton {
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -87,6 +93,8 @@ static const NSInteger UsernameMaxLength = 20;
 }
 
 - (IBAction)photoButtonTapped: (id) sender {
+	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:@"Registration"];
+	
     self.imagePicker = [[SYNImagePickerController alloc] initWithHostViewController: self];
     self.imagePicker.delegate = self;
     
@@ -94,17 +102,21 @@ static const NSInteger UsernameMaxLength = 20;
                                          arrowDirection: UIPopoverArrowDirectionLeft];
 }
 
-- (void) picker: (SYNImagePickerController *) picker finishedWithImage: (UIImage *) image {
+#pragma mark - SYNImagePickerControllerDelegate
+
+- (void)picker:(SYNImagePickerController *)picker finishedWithImage:(UIImage *)image {
     self.imagePicker = nil;
 	
     self.avatarImageView.image = image;
 }
 
+#pragma mark - UIBarPositioningDelegate
 
 - (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar {
 	return UIBarPositionTopAttached;
 }
 
+#pragma mark - Private
 
 - (void)submitUsername {
 	if (![self validateFirstNameField:self.firstNameTextField errorLabel:self.errorLabel]) {
@@ -164,6 +176,8 @@ static const NSInteger UsernameMaxLength = 20;
 																self.errorLabel.text = NSLocalizedString(@"unknown_error_message", nil);
 															}];
 }
+
+#pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(SYNTextFieldLogin *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 	textField.errorMode = NO;

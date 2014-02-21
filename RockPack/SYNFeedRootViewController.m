@@ -33,6 +33,7 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "UIColor+SYNColor.h"
+#import "SYNTrackingManager.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
@@ -106,7 +107,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 }
 
-
 - (void) viewWillAppear: (BOOL) animated {
     [super viewWillAppear: animated];
 	
@@ -115,22 +115,16 @@ typedef void(^FeedDataErrorBlock)(void);
 		self.model.delegate = self;
 		[self.feedCollectionView reloadData];
 	}
-
-    // Google analytics support
-    [self updateAnalytics];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackFeedScreenView];
+}
+
 
 #pragma mark - Container Scroll Delegates
-
-- (void) updateAnalytics {
-	// Google analytics support
-	id tracker = [[GAI sharedInstance] defaultTracker];
-
-	[tracker set:kGAIScreenName value: @"Feed"];
-
-	[tracker send:[[GAIDictionaryBuilder createAppView] build]];
-}
-
 
 - (void) willRotateToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                  duration: (NSTimeInterval) duration
@@ -255,6 +249,10 @@ typedef void(^FeedDataErrorBlock)(void);
 
 - (FeedItem *)feedItemAtIndexPath:(NSIndexPath *)indexPath {
 	return [self.model itemAtIndex:indexPath.item];
+}
+
+- (NSString *)trackingScreenName {
+	return @"MyWonders";
 }
 
 #pragma mark - Click Cell Delegates

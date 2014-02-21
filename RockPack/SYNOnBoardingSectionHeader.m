@@ -8,7 +8,6 @@
 
 #import "SYNOnBoardingSectionHeader.h"
 #import "UIFont+SYNFont.h"
-#import "SYNGenreColorManager.h"
 
 @implementation SYNOnBoardingSectionHeader
 

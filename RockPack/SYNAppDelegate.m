@@ -27,6 +27,7 @@
 #import "SYNLoginManager.h"
 #import "SYNOnBoardingViewController.h"
 #import "SYNOnBoardingOverlayViewController.h"
+#import "SYNTrackingManager.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <ACTReporter.h>
 #import <TestFlight.h>
@@ -163,6 +164,9 @@
     
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
+	
+	[[SYNTrackingManager sharedManager] setup];
+	[[SYNTrackingManager sharedManager] setLocaleDimension:[NSLocale currentLocale]];
     
     // Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
     // inlduding logout, which is the correct flow
@@ -173,6 +177,9 @@
     
     if (self.currentUser && credential)
     {
+		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
+		[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
+		
         // If we have a user and a refresh token... //
         if ([self.currentOAuth2Credentials hasExpired])
         {
@@ -425,7 +432,9 @@
 
 - (void) loginCompleted: (NSNotification *) notification
 {
-    
+	[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
+	[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
+	
     if ([SYNLoginManager sharedManager].registrationCheck == YES) {
         self.onBoardingViewController = [[SYNOnBoardingViewController alloc]init];
         self.window.rootViewController = self.onBoardingViewController;
@@ -575,13 +584,6 @@
     [TestFlight addCustomEnvironmentInformation:[NSString stringWithFormat:@"Current User: %@", self.currentUser.username] forKey:@"User Name"];
 
     [TestFlight takeOff: kTestFlightAppToken];
-    
-    // Automatically send uncaught exceptions to Google Analytics.
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [GAI sharedInstance].dispatchInterval = 30;
-    
-    // Create tracker instance.
-    [[GAI sharedInstance] trackerWithTrackingId: kGoogleAnalyticsId];
 }
 
 
@@ -1390,16 +1392,8 @@
                 break;
         }
         
-        
-        // track
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"openDeepLink"
-                                                                label: url.absoluteString
-                                                                value: nil] build]];
-        
+        [[SYNTrackingManager sharedManager] trackExternalLinkOpened:[url absoluteString]];
+		
         enteredAppThroughNotification = YES;
     }
     else
@@ -1455,14 +1449,9 @@
         }
         
         enteredAppThroughNotification = YES;
-        
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"openDeepLink"
-                                                                label: targetURLString
-                                                                value: nil] build]];
-        
+		
+        [[SYNTrackingManager sharedManager] trackExternalLinkOpened:targetURLString];
+		
         return [FBSession.activeSession
                 handleOpenURL: url];
     }

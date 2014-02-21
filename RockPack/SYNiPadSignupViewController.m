@@ -50,7 +50,6 @@
 
 @implementation SYNIPadSignupViewController
 
-
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -78,6 +77,8 @@
 
 
 - (IBAction)uploadPhotoButtonPressed:(UIButton *) button {
+	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:@"Registration"];
+	
     self.imagePicker = [[SYNImagePickerController alloc] initWithHostViewController:self];
     self.imagePicker.delegate = self;
     [self.imagePicker presentImagePickerAsPopupFromView:button arrowDirection:UIPopoverArrowDirectionLeft];
@@ -102,7 +103,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[SYNTrackingManager sharedManager] trackRegisterScreenView];
+	[[SYNTrackingManager sharedManager] trackRegistrationScreenView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -243,6 +244,9 @@
 	
 	[[SYNLoginManager sharedManager] registerUserWithData: userData
 										completionHandler: ^(NSDictionary *dictionary) {
+											
+											[[SYNTrackingManager sharedManager] trackUserRegistrationFromOrigin:kOriginWonderPL];
+											
 											//Onboarding registration check
 											[SYNLoginManager sharedManager].registrationCheck = YES;
 

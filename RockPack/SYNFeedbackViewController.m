@@ -12,6 +12,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNMasterViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SYNTrackingManager.h"
 
 @interface SYNFeedbackViewController () <UITextViewDelegate>
 {
@@ -123,6 +124,12 @@ static NSString* errorText = @"Please provide your feedback here...";
     self.hasTouchedSlider = NO;
     
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackFeedbackScreenView];
 }
 
 

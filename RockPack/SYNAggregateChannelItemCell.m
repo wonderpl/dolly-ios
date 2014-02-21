@@ -10,7 +10,7 @@
 #import "SYNSocialButton.h"
 #import "SYNSocialFollowButton.h"
 #import "UIFont+SYNFont.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "SYNActivityManager.h"
 @interface SYNAggregateChannelItemCell ()
 
@@ -96,7 +96,7 @@
 
     self.followControl.selected = channel.subscribedByUserValue;
    
-    [self.stripView setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:channel.categoryId]];
+    [self.stripView setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
     
     [self.followControl setTitle:@"follow" forState:UIControlStateNormal];
     [self.followControl setTitle:@"unfollow" forState:UIControlStateSelected];

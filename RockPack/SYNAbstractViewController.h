@@ -77,6 +77,7 @@
 
 - (void) shouldHideTabBar;
 
+- (NSString *)trackingScreenName;
 
 // Purchase
 - (void) applicationWillEnterForeground: (UIApplication *) application;

@@ -324,7 +324,7 @@
 		0E2AB166188462DD004557A4 /* SYNWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AB164188462DD004557A4 /* SYNWebViewController.m */; };
 		0E2AB16B1886CBE3004557A4 /* MoodBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB1691886CBE3004557A4 /* MoodBackground.png */; };
 		0E2AB16C1886CBE4004557A4 /* MoodBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AB16A1886CBE3004557A4 /* MoodBackground@2x.png */; };
-		0E3AE6901875DE8C008A8D00 /* SYNGenreColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */; };
+		0E3AE6901875DE8C008A8D00 /* SYNGenreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNGenreManager.m */; };
 		0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */; };
 		0E5B8EE918465C420012F460 /* coverImageTest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E5B8EE818465C420012F460 /* coverImageTest.jpg */; };
 		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
@@ -744,6 +744,8 @@
 		4425147718B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4425147518B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png */; };
 		44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC631884384900B70139 /* ButtonMoreHints.png */; };
 		44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */; };
+		44D66FDF18B67832009BC910 /* ButtonMoreEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */; };
+		44D66FE018B67832009BC910 /* ButtonMoreEdit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */; };
 		4C03237518AE3F4D00E168EF /* SYNDiscoverSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */; };
 		4C03237718AE3F8700E168EF /* SYNDiscoverSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */; };
 		4C03237A18AE6F8300E168EF /* SYNFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03237918AE6F8300E168EF /* SYNFriendCell.m */; };
@@ -1680,8 +1682,8 @@
 		0E2AB164188462DD004557A4 /* SYNWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWebViewController.m; sourceTree = "<group>"; };
 		0E2AB1691886CBE3004557A4 /* MoodBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MoodBackground.png; path = Assets/Images/MoodBackground.png; sourceTree = "<group>"; };
 		0E2AB16A1886CBE3004557A4 /* MoodBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MoodBackground@2x.png"; path = "Assets/Images/MoodBackground@2x.png"; sourceTree = "<group>"; };
-		0E3AE68E1875DE8C008A8D00 /* SYNGenreColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGenreColorManager.h; sourceTree = "<group>"; };
-		0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGenreColorManager.m; sourceTree = "<group>"; };
+		0E3AE68E1875DE8C008A8D00 /* SYNGenreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGenreManager.h; sourceTree = "<group>"; };
+		0E3AE68F1875DE8C008A8D00 /* SYNGenreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGenreManager.m; sourceTree = "<group>"; };
 		0E5B8EA41846007D0012F460 /* SYNProfileFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileFlowLayout.h; sourceTree = "<group>"; };
 		0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileFlowLayout.m; sourceTree = "<group>"; };
 		0E5B8EE818465C420012F460 /* coverImageTest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coverImageTest.jpg; sourceTree = "<group>"; };
@@ -2117,6 +2119,8 @@
 		4425147518B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaceholderNotificationVideo@2x.png"; sourceTree = "<group>"; };
 		44CAFC631884384900B70139 /* ButtonMoreHints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonMoreHints.png; path = Assets/Images/ButtonMoreHints.png; sourceTree = "<group>"; };
 		44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreHints@2x.png"; path = "Assets/Images/ButtonMoreHints@2x.png"; sourceTree = "<group>"; };
+		44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMoreEdit.png; sourceTree = "<group>"; };
+		44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMoreEdit@2x.png"; sourceTree = "<group>"; };
 		4C03237318AE3F4D00E168EF /* SYNDiscoverSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionView.h; sourceTree = "<group>"; };
 		4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionView.m; sourceTree = "<group>"; };
 		4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionView.xib; sourceTree = "<group>"; };
@@ -4046,8 +4050,8 @@
 		0E3AE68D1875DE5D008A8D00 /* Color Manager */ = {
 			isa = PBXGroup;
 			children = (
-				0E3AE68E1875DE8C008A8D00 /* SYNGenreColorManager.h */,
-				0E3AE68F1875DE8C008A8D00 /* SYNGenreColorManager.m */,
+				0E3AE68E1875DE8C008A8D00 /* SYNGenreManager.h */,
+				0E3AE68F1875DE8C008A8D00 /* SYNGenreManager.m */,
 			);
 			name = "Color Manager";
 			sourceTree = "<group>";
@@ -5686,6 +5690,8 @@
 		BED027B51834D4BF00636659 /* Options */ = {
 			isa = PBXGroup;
 			children = (
+				44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */,
+				44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */,
 				44CAFC631884384900B70139 /* ButtonMoreHints.png */,
 				44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */,
 				BED027B61834D4CC00636659 /* ButtonMoreAbout.png */,
@@ -5857,7 +5863,7 @@
 			attributes = {
 				CLASSPREFIX = SYN;
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Rockpack Ltd";
+				ORGANIZATIONNAME = "Wonder PL Ltd";
 				TargetAttributes = {
 					010DEFCF1629BDC40080F26B = {
 						DevelopmentTeam = 55U2NK549A;
@@ -6346,6 +6352,7 @@
 				38A200881731607F00FB9F57 /* PanelSearchSuggestion~iphone.png in Resources */,
 				38A200891731607F00FB9F57 /* PanelSearch~iphone.png in Resources */,
 				38A200901731607F00FB9F57 /* ArrowSettings@2x~iphone.png in Resources */,
+				44D66FE018B67832009BC910 /* ButtonMoreEdit@2x.png in Resources */,
 				38A200911731607F00FB9F57 /* ArrowSettings~iphone.png in Resources */,
 				1F4E7FC8181ACBAA00F59007 /* TabSearchHighlighted~iphone.png in Resources */,
 				38A200961731607F00FB9F57 /* ButtonSettingsDone@2x~iphone.png in Resources */,
@@ -6657,6 +6664,7 @@
 				1F4E7FAF181ACBAA00F59007 /* TabActivityHighlighted@2x~iphone.png in Resources */,
 				BEEC3F2C17465FAD00D8F4C4 /* BackgroundLoadMore@2x.png in Resources */,
 				1F003B42174A782100BBAE2F /* ButtonSettingsSave@2x~iphone.png in Resources */,
+				44D66FDF18B67832009BC910 /* ButtonMoreEdit.png in Resources */,
 				1F003B43174A782100BBAE2F /* ButtonSettingsSave~iphone.png in Resources */,
 				1F003B44174A782100BBAE2F /* ButtonSettingsSaveHighlighted@2x~iphone.png in Resources */,
 				1F003B45174A782100BBAE2F /* ButtonSettingsSaveHighlighted~iphone.png in Resources */,
@@ -7026,7 +7034,7 @@
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
 				E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
-				0E3AE6901875DE8C008A8D00 /* SYNGenreColorManager.m in Sources */,
+				0E3AE6901875DE8C008A8D00 /* SYNGenreManager.m in Sources */,
 				E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */,
 				E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */,
 				E9F6256D1886883A000EF6A2 /* SYNiPadLoginViewController.m in Sources */,

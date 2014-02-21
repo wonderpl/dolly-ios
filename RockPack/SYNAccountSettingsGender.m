@@ -14,6 +14,7 @@
 #import "SYNAccountSettingOtherTableViewCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAccountSettingsGender ()
 
@@ -35,14 +36,7 @@
 {
     [super viewDidLoad];
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Gender"
-                                                            value: nil] build]];
     self.view.backgroundColor = [UIColor whiteColor];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -162,8 +156,8 @@
 
 - (void) changeUserGenderForValue: (NSString*) newGender
 {
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Gender"];
+	
     [self.appDelegate.oAuthNetworkEngine changeUserField: @"gender"
                                                  forUser: self.appDelegate.currentUser
                                             withNewValue: newGender
@@ -171,24 +165,17 @@
                                            if([newGender isEqualToString: @"m"])
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderMale);
-
-                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
-                                                      value: @"male"];
                                            }
                                            else if([newGender isEqualToString: @"f"])
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderFemale);
-                                               
-                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
-                                                      value: @"female"];
                                            }
                                            else
                                            {
                                                self.appDelegate.currentUser.gender = @(GenderUndecided);
-                                               
-                                               [tracker set: [GAIFields customDimensionForIndex: kGADimensionGender]
-                                                      value: @"unknown"];
                                            }
+										   
+										   [[SYNTrackingManager sharedManager] setGenderDimension:self.appDelegate.currentUser.genderValue];
                                            
                                            [self.appDelegate saveContext: YES];
                                            

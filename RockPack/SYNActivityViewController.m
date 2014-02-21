@@ -6,13 +6,13 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
 #import "SYNNotificationsTableViewCell.h"
 #import "SYNActivityViewController.h"
 #import "SYNNotification.h"
 #import "Video.h"
+#import "SYNTrackingManager.h"
 #import "SYNNotificationsMarkAllAsReadCell.h"
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
@@ -54,18 +54,7 @@
 {
     [super viewDidLoad];
 
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
 	self.automaticallyAdjustsScrollViewInsets = YES;
-    
-    [tracker set: kGAIScreenName
-           value: @"Notifications"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
-    
-    
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -94,7 +83,11 @@
 
 }
 
-
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackActivityScreenView];
+}
 
 #pragma mark - Get Data
 
@@ -231,11 +224,13 @@
     
     SYNNotification* notification;
     
-    if(indexPath.row == 0 && hasUnreadNotifications)
+    if(indexPath.row == 0 && hasUnreadNotifications) {
+		[[SYNTrackingManager sharedManager] trackMarkAllNotificationAsRead];
+		
         notification = nil;
-    else
+    } else {
         notification = _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
-    
+	}
     
     [self markAsReadForNotification: notification];
 }
@@ -272,6 +267,8 @@
     NSIndexPath *indexPathForCellPressed = [self.tableView indexPathForCell: cellPressed];
     
     SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(hasUnreadNotifications)];
+	
+	[[SYNTrackingManager sharedManager] trackSelectedNotificationOfType:notification.objectType];
     
     if (!notification)
         return;
@@ -357,8 +354,9 @@
     
     [self markAsReadForNotification: notification];
 }
--(void) markAllAsRead
-{
+
+- (void) markAllAsRead {
+	[[SYNTrackingManager sharedManager] trackMarkAllNotificationAsRead];
     
     SYNNotification* notification;
 
@@ -374,10 +372,11 @@
 {
     
     NSArray *array;
-    if(notification)
+    if (notification) {
         array = @[@(notification.identifier)];
-    else
+	} else {
         array = @[];
+	}
     
     [appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes:array
                                                           fromUserId:appDelegate.currentUser.uniqueId

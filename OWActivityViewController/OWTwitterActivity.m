@@ -27,6 +27,8 @@
 #import "OWTwitterActivity.h"
 #import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
+#import "SYNOneToOneSharingController.h"
+#import "SYNTrackingManager.h"
 
 @import Twitter;
 
@@ -55,14 +57,23 @@
             text = userInfo[@"text"];
         }
         
-		UIViewController *shareViewController = activityViewController.presentingController;
+		SYNOneToOneSharingController *shareViewController = (SYNOneToOneSharingController *)activityViewController.presentingController;
+		
+		if ([[shareViewController shareType] isEqualToString:@"video_instance"]) {
+			[[SYNTrackingManager sharedManager] trackVideoShareWithService:@"twitter"];
+		}
+		if ([[shareViewController shareType] isEqualToString:@"channel"]) {
+			[[SYNTrackingManager sharedManager] trackCollectionShareWithService:@"twitter"];
+		}
+		
 		UIViewController *presentingViewController = shareViewController.presentingViewController;
         [presentingViewController dismissViewControllerAnimated: YES
 													 completion: ^{
 														 [weakSelf  shareFromViewController: presentingViewController
 																					   text: text
 																						url: userInfo[@"url"]
-																					  image: userInfo[@"image"]];
+																					  image: userInfo[@"image"]
+																					isVideo: userInfo[@"video"]];
                                                    }];
     };
     
@@ -70,7 +81,7 @@
 }
 
 
-- (void) shareFromViewController: (UIViewController *) viewController text: (NSString *) text url: (NSURL *) url image: (UIImage *) image
+- (void) shareFromViewController: (UIViewController *) viewController text: (NSString *) text url: (NSURL *) url image: (UIImage *) image isVideo:(NSNumber *)isVideo
 {
     SLComposeViewController *twitterViewComposer = nil;
     
@@ -80,6 +91,12 @@
     twitterViewComposer.completionHandler = ^(SLComposeViewControllerResult result) {
         if (result == SLComposeViewControllerResultDone)
         {
+			if ([isVideo boolValue]) {
+				[[SYNTrackingManager sharedManager] trackVideoShareCompletedWithService:@"twitter"];
+			} else {
+				[[SYNTrackingManager sharedManager] trackCollectionShareCompletedWithService:@"twitter"];
+			}
+			
             [self updateAPIRater];
         }
     };

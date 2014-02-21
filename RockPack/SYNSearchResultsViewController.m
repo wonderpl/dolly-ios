@@ -20,7 +20,7 @@
 #import "VideoInstance.h"
 #import "SYNActivityManager.h"
 #import "SYNVideoPlayerAnimator.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
 #import "UIFont+SYNFont.h"
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
@@ -60,6 +60,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 @property (nonatomic, strong) NSString* currentSearchGenre;
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
+@property (nonatomic, assign) SYNSearchType searchType;
 
 @end
 
@@ -225,6 +226,16 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 }
 
+- (NSString *)trackingScreenName {
+	if (self.searchType == SYNSearchTypeBrowse) {
+		return @"Browse";
+	}
+	if (self.searchType == SYNSearchTypeSearch) {
+		return @"Search";
+	}
+	return nil;
+}
+
 #pragma mark - SYNVideoCellDelegate
 
 - (void)profileButtonPressedForCell:(UICollectionViewCell *)cell {
@@ -280,6 +291,11 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForGenre: (NSString *) genreId
 {
+	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:genreId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	
+	self.searchType = SYNSearchTypeBrowse;
+
     //When searching for category, default to show users/highlights
     self.searchResultsShowing = SearchResultsShowingUsers;
     
@@ -324,7 +340,10 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForTerm: (NSString *) newSearchTerm
 {
-    
+	[[SYNTrackingManager sharedManager] setCategoryDimension:nil];
+	
+	self.searchType = SYNSearchTypeSearch;
+
     [self.usersTabButton setTitle:NSLocalizedString(@"users", @"Users in discover tab") forState:UIControlStateNormal];
     
     //searching a term defaults to videos
@@ -685,8 +704,6 @@ referenceSizeForFooterInSection: (NSInteger) section
     if(!self.moreItemsToLoad2)
         return;
     
-    NSLog(@"Fetching Items for Range: %@", NSStringFromRange(self.dataRequestRange2));
-    
     NSInteger nextStart = self.dataRequestRange2.location + self.dataRequestRange2.length;
     
     NSInteger nextSize = MIN(STANDARD_REQUEST_LENGTH, self.dataItemsAvailable2 - nextStart);
@@ -716,6 +733,20 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 - (void) setSearchResultsShowing: (SearchResultsShowing) searchResultsShowing
 {
+	if (self.searchType == SYNSearchTypeBrowse) {
+		if (searchResultsShowing == SearchResultsShowingVideos) {
+			[[SYNTrackingManager sharedManager] trackVideoBrowseScreenView];
+		} else {
+			[[SYNTrackingManager sharedManager] trackUserBrowseScreenView];
+		}
+	} else if (self.searchType == SYNSearchTypeSearch) {
+		if (searchResultsShowing == SearchResultsShowingVideos) {
+			[[SYNTrackingManager sharedManager] trackVideoSearchScreenView];
+		} else {
+			[[SYNTrackingManager sharedManager] trackUserSearchScreenView];
+		}
+	}
+	
     _searchResultsShowing = searchResultsShowing;
     switch (_searchResultsShowing)
     {

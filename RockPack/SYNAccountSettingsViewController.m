@@ -8,7 +8,6 @@
 
 
 #import "AppConstants.h"
-#import "GAI.h"
 #import "NSString+Utils.h"
 #import "SYNAccountSettingTableViewCell.h"
 #import "SYNAccountSettingOtherTableViewCell.h"
@@ -27,6 +26,7 @@
 #import "User.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+SYNColor.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAccountSettingsViewController ()
 
@@ -69,28 +69,13 @@
     
     user = appDelegate.currentUser;
     
-    
     self.title = NSLocalizedString (@"settings_popover_title" , nil);
     
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Account Settings - Root"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
-
     self.tableView.scrollEnabled = IS_IPHONE;
     self.tableView.scrollsToTop = NO;
 }
 
-
-
-
-
-- (void) viewWillAppear: (BOOL) animated
-{
+- (void) viewWillAppear: (BOOL) animated {
     [super viewWillAppear: animated];
     
     [self.tableView reloadData];
@@ -98,7 +83,12 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackAccountSettingsScreenView];
 }
 
 
@@ -352,6 +342,8 @@
 
 - (void) datePickerValueChanged: (UIDatePicker*) datePicker
 {
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Date of birth"];
+	
     NSString* dateString = [self getDOBFormattedString:datePicker.date];
     
     UIActivityIndicatorView* dobLoader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -369,25 +361,12 @@
                                            self.dobTableViewCell.textLabel.text = [self getDOBPlainString: user.dateOfBirth];
                                            [dobLoader stopAnimating];
                                            [dobLoader removeFromSuperview];
+										   
+										   [[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:datePicker.date];
                                        }
                                             errorHandler: ^(id errorInfo) {
                                             }];
-
-    // Calculate age, taking account of leap-years etc. (probably too accurate!)
-    NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components: NSYearCalendarUnit
-                                                                      fromDate: datePicker.date
-                                                                        toDate: NSDate.date
-                                                                       options: 0];
-    
-    NSInteger age = [ageComponents year];
-    
-    NSString *ageString = [NSString ageCategoryStringFromInt: age];
-    
-    // Now set the age
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker set: [GAIFields customDimensionForIndex: kGADimensionAge]
-           value: ageString];
+	
 }
 
 

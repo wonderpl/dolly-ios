@@ -67,7 +67,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[[SYNTrackingManager sharedManager] trackRegisterStep2ScreenView];
+	[[SYNTrackingManager sharedManager] trackRegistrationStep2ScreenView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -133,6 +133,9 @@
 	
 	[[SYNLoginManager sharedManager] registerUserWithData: userData
 			 completionHandler: ^(NSDictionary *dictionary) {
+				 
+				 [[SYNTrackingManager sharedManager] trackUserRegistrationFromOrigin:kOriginWonderPL];
+				 
 				 //onboarding flag for registration
 				 [SYNLoginManager sharedManager].registrationCheck = YES;
 

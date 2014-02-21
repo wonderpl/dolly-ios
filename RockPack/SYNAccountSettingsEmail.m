@@ -6,32 +6,16 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAccountSettingsEmail.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTrackingManager.h"
 
 @interface SYNAccountSettingsEmail ()
 
 @end
 
 @implementation SYNAccountSettingsEmail
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"accountPropertyChanged"
-                                                            label: @"Email"
-                                                            value: nil] build]];
-
-    
-}
-
 
 - (void) saveButtonPressed: (UIButton*) button
 {
@@ -50,10 +34,11 @@
         self.errorLabel.text = NSLocalizedString (@"You Have Entered Invalid Characters", nil);
         return;
     }
+	
+	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Email"];
     
     [self updateField:@"email" forValue:self.inputField.text withCompletionHandler: ^{
         self.appDelegate.currentUser.emailAddress = self.inputField.text;
-        
         
         [self.appDelegate saveContext: YES];
         

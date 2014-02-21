@@ -24,7 +24,8 @@
 #import "SYNDeviceManager.h"
 #import "SYNActivityManager.h"
 #import "SYNOnBoardingSectionHeader.h"
-#import "SYNGenreColorManager.h"
+#import "SYNGenreManager.h"
+#import "SYNTrackingManager.h"
 
 static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
@@ -50,6 +51,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 @property (nonatomic, strong) NSMutableArray *usersByCategory;
 @property (nonatomic, strong) NSMutableArray *categories;
 
+@property (nonatomic, assign) NSInteger followedCount;
 
 @end
 
@@ -153,6 +155,10 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleDefault;
+}
+
 - (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
 {
     
@@ -166,21 +172,15 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             
             CompleteBlock(success);
             
-            [[SYNGenreColorManager sharedInstance] registerGenreColorsFromCoreData];
+            [[SYNGenreManager sharedInstance] registerGenreColorsFromCoreData];
             
             [appDelegate.mainManagedObjectContext save:nil];
             
         }];
     } onError:^(NSError* error) {
         
-    }];
+    } forceReload:NO];
 }
-
-- (UIStatusBarStyle) preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-
 
 - (void) getRecommendationsFromRemote {
     
@@ -394,7 +394,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             
             Recomendation* recomendation = (Recomendation*)self.usersByCategory[indexPath.section-1][indexPath.row];
 
-            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreColorManager sharedInstance] colorFromID:recomendation.categoryId]];
+            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recomendation.categoryId]];
             
             // special case for editors picks as its a genre not a subgenre
             if (self.genresByIdString[recomendation.categoryId]) {
@@ -432,10 +432,22 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     return supplementaryView;
 }
 
+- (void)followControlPressed:(SYNSocialButton *)socialButton {
+	// Track the number of people followed
+	if (socialButton.selected) {
+		self.followedCount--;
+	} else {
+		self.followedCount++;
+	}
+	
+	[super followControlPressed:socialButton];
+}
+
 - (void) skipButtonPressed: (UIButton*) button
 {
     button.enabled = NO;
     
+	[[SYNTrackingManager sharedManager] trackOnboardingCompletedWithFollowedCount:self.followedCount];
     
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                             object: self
@@ -452,6 +464,10 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     
     
+}
+
+- (NSString *)trackingScreenName {
+	return @"Onboarding";
 }
 
 #pragma mark - AutoRotation
