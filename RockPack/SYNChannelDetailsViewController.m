@@ -833,14 +833,11 @@
     {
         [self displayChannelDetails];
     }
-    // Model out of sync with the initial channel details call
-    //Reset the model when the update channel details notification is sent
-    self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
 }
 
-- (void) reloadCollectionViews
-{
+- (void) reloadCollectionViews {
     [self.videoThumbnailCollectionView reloadData];
+	
     [self displayChannelDetails];
 }
 
@@ -1333,7 +1330,7 @@
     
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
-        
+	
     [self updateCollectionLayout];
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
@@ -1396,6 +1393,11 @@
 
 -(void) updateCollectionLayout
 {
+	// Invalidate layout to work around crash issue with switching layout when there are no items:
+	// http://stackoverflow.com/questions/18339030/uicollectionview-assertion-error-on-stale-data
+	[self.videoThumbnailCollectionView.collectionViewLayout invalidateLayout];
+	[self.videoThumbnailCollectionView reloadData];
+	
     if (self.mode == kChannelDetailsModeEdit )
     {
         //        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
@@ -1515,13 +1517,13 @@
                          cell.alpha = 0.0;
                      }
                      completion: ^(BOOL finished) {
-                         
+						 
                          [self.channel.videoInstancesSet removeObject: videoInstanceToDelete];
                          
                          [videoInstanceToDelete.managedObjectContext deleteObject: videoInstanceToDelete];
-                         
-                         [self.videoThumbnailCollectionView reloadData];
-                         
+						 
+						 self.channel.totalVideosValueValue--;
+						 
                          [appDelegate saveContext: YES];
                      }];
 }

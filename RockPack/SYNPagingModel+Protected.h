@@ -14,11 +14,13 @@
 @property (nonatomic, strong) NSArray *loadedItems;
 @property (nonatomic, assign) NSInteger totalItemCount;
 
-- (instancetype)initWithLoadedRange:(NSRange)range;
+- (instancetype)initWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount;
 
 - (void)handleDataUpdatedForRange:(NSRange)range;
 - (void)handleError;
 
 - (void)loadItemsForRange:(NSRange)range;
+
+- (void)resetWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount;
 
 @end
