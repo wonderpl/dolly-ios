@@ -338,6 +338,9 @@ static NSString* kPopularGenreUniqueId = @"1979";
 #define kUserDefaultsCollectionDetailsFirstTime @"UD_CollectionDetails_First_Time"
 #define kUserDefaultsDiscoverVideoFirstTime @"UD_Discover_Video_First_Time"
 #define kUserDefaultsDiscoverUserFirstTime @"UD_Discover_User_First_Time"
+#define kUserDefaultsYourProfileFirstTime @"UD_Your_Profile_First_Time"
+#define kUserDefaultsCreateChannelFirstTime @"UD_Create_Channel_First_Time"
+#define kUserDefaultsOtherPersonsProfile @"UD_Other_Persons_Profile"
 
 //Login Origin
 
