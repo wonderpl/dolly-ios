@@ -22,12 +22,14 @@ static const NSInteger DefaultBatchSize = 40;
 #pragma mark - Init / Dealloc
 
 - (instancetype)init {
-	return [self initWithLoadedRange:NSMakeRange(NSNotFound, 0)];
+	return [self initWithItems:nil totalItemCount:0];
 }
 
-- (instancetype)initWithLoadedRange:(NSRange)range {
+- (instancetype)initWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount {
 	if (self = [super init]) {
-		self.loadedRange = range;
+		self.loadedItems = items;
+		self.loadedRange = (items ? NSMakeRange(0, [items count]) : NSMakeRange(NSNotFound, 0));
+		self.totalItemCount = totalItemCount;
 	}
 	return self;
 }
@@ -51,9 +53,13 @@ static const NSInteger DefaultBatchSize = 40;
 }
 
 - (void)reset {
-	self.totalItemCount = 0;
-	
-	self.loadedRange = NSMakeRange(NSNotFound, 0);
+	[self resetWithItems:nil totalItemCount:0];
+}
+
+- (void)resetWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount {
+	self.loadedItems = items;
+	self.loadedRange = (items ? NSMakeRange(0, [items count]) : NSMakeRange(NSNotFound, 0));
+	self.totalItemCount = totalItemCount;
 }
 
 - (void)loadNextPage {

@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) Channel *channel;
 
+@property (nonatomic, assign) BOOL isSavingNextPage;
+
 @end
 
 @implementation SYNChannelVideosModel
@@ -32,13 +34,19 @@
 #pragma mark - Init / Dealloc
 
 - (instancetype)initWithChannel:(Channel *)channel {
-	if (self = [super initWithLoadedRange:NSMakeRange(0, [channel.videoInstances count])]) {
+	if (self = [super initWithItems:[channel.videoInstances array] totalItemCount:channel.totalVideosValueValue]) {
 		self.channel = channel;
 		
-		self.loadedItems = [channel.videoInstances array];
-		self.totalItemCount = channel.totalVideosValueValue;
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(managedObjectContextDidSave:)
+													 name:NSManagedObjectContextDidSaveNotification
+												   object:channel.managedObjectContext];
 	}
 	return self;
+}
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Overridden
@@ -49,6 +57,8 @@
 	__weak typeof(self) wself = self;
 	MKNKUserSuccessBlock successBlock = ^(NSDictionary *response) {
 		__strong typeof(self) sself = wself;
+		
+		self.isSavingNextPage = YES;
 		
 		[sself.channel addVideoInstancesFromDictionary:response];
 		[sself.channel.managedObjectContext save:nil];
@@ -78,6 +88,17 @@
 													 inRange:range
 										   completionHandler:successBlock
 												errorHandler:errorBlock];
+	}
+}
+
+- (void)managedObjectContextDidSave:(NSNotification *)notification {
+	// If we're saving the next page then we're handling updating the videos in there so there isn't any need to do anything here
+	if (!self.isSavingNextPage) {
+		self.isSavingNextPage = NO;
+		
+		[self resetWithItems:[self.channel.videoInstances array] totalItemCount:self.channel.totalVideosValueValue];
+		
+		[self.delegate pagingModelDataUpdated:self];
 	}
 }
 

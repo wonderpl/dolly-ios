@@ -11,12 +11,8 @@
 
 @implementation SYNStaticModel
 
-- (instancetype)initWithLoadedItems:(NSArray *)loadedItems {
-	if (self = [super initWithLoadedRange:NSMakeRange(0, [loadedItems count])]) {
-		self.loadedItems = loadedItems;
-		self.totalItemCount = [loadedItems count];
-	}
-	return self;
+- (instancetype)initWithItems:(NSArray *)items {
+	return [super initWithItems:items totalItemCount:[items count]];
 }
 
 @end

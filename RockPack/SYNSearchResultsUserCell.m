@@ -221,8 +221,6 @@
         message =  [message stringByAppendingString:@"'s collections"];
         
     } else {
-        NSLog(@"display name:%@.", self.channelOwner.displayName);
-        
         self.followAllAlertView.title = @"Follow All?";
         message = @"Are you sure you want to follow all";
         message =  [message stringByAppendingString:@" "];

@@ -10,6 +10,6 @@
 
 @interface SYNStaticModel : SYNPagingModel
 
-- (instancetype)initWithLoadedItems:(NSArray *)loadedItems;
+- (instancetype)initWithItems:(NSArray *)items;
 
 @end
