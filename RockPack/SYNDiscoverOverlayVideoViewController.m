@@ -48,9 +48,9 @@
     if (IS_IPAD) {
         
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
-            self.container.frame = CGRectMake(207, 311, 465, 239);
+            self.container.frame = CGRectMake(275, 312, 465, 239);
         } else {
-            self.container.frame = CGRectMake(103, 311, 465, 239);
+            self.container.frame = CGRectMake(104, 313, 465, 239);
         }
     }
 }
