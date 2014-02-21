@@ -132,6 +132,15 @@
     }
     // load basic data like the Genres
    
+    
+    
+    // Hiding the tab bar on load, This bar is animated in the feed view controller in viewdidload
+    if(IS_IPHONE) {
+        CGRect tmpFrame = self.tabsView.frame;
+        tmpFrame.origin.y += self.tabsView.frame.size.height;
+        self.tabsView.frame = tmpFrame;
+        
+    }
 }
 
 - (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock forceReload:(BOOL)forceReload {

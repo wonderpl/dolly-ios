@@ -105,6 +105,11 @@ typedef void(^FeedDataErrorBlock)(void);
         [self.feedCollectionView setContentInset: tmpInsets];
     }
 
+    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                        object: self
+                                                      userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
+
+
 }
 
 - (void) viewWillAppear: (BOOL) animated {
