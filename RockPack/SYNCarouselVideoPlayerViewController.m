@@ -70,7 +70,7 @@
 }
 
 + (UIViewController *)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
-	SYNPagingModel *model = [[SYNStaticModel alloc] initWithLoadedItems:videoInstances];
+	SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:videoInstances];
 	return [self viewControllerWithModel:model selectedIndex:selectedIndex];
 }
 
