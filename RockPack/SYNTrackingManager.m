@@ -76,6 +76,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 #pragma mark - Public
 
+- (void)trackClickToMoreFromScreenName:(NSString *)screenName {
+	[self trackEventWithCategory:UIActionCategory action:@"videoClickToMoreClick" label:screenName value:nil];
+}
+
 - (void)trackVideoAddFromScreenName:(NSString *)screenName {
 	[self trackEventWithCategory:UIActionCategory action:@"videoPlusButtonClick" label:screenName value:nil];
 }
@@ -384,6 +388,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 - (void)trackSearchVideoPlayerScreenView {
 	[self trackScreenViewWithName:@"Video 2"];
+}
+
+- (void)trackClickToMoreScreenView {
+	[self trackScreenViewWithName:@"Click to more"];
 }
 
 - (void)trackMarkAllNotificationAsRead {

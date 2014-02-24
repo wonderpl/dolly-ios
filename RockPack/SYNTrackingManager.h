@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)setup;
 
+- (void)trackClickToMoreFromScreenName:(NSString *)screenName;
 - (void)trackVideoAddFromScreenName:(NSString *)screenName;
 - (void)trackVideoLikeFromScreenName:(NSString *)screenName;
 - (void)trackVideoCommentFromScreenName:(NSString *)screenName;
@@ -91,6 +92,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackFeedScreenView;
 - (void)trackOwnProfileScreenView;
 - (void)trackActivityScreenView;
+- (void)trackClickToMoreScreenView;
 
 - (void)trackVideoBrowseScreenView;
 - (void)trackUserBrowseScreenView;

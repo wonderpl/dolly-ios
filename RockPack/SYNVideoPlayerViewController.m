@@ -27,6 +27,7 @@
 #import "UILabel+Animation.h"
 #import "SYNWebViewController.h"
 #import "SYNGenreManager.h"
+#import "SYNMasterViewController.h"
 #import <SDWebImageManager.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -233,6 +234,7 @@
 }
 
 - (IBAction)commentButtonPressed:(UIButton *)button {
+    
 	SYNCommentingViewController *viewController = [[SYNCommentingViewController alloc] initWithVideoInstance:self.videoInstance withButton:(SYNSocialCommentButton*)button];
 	if (IS_IPHONE) {
 		[self.navigationController pushViewController:viewController animated:YES];
@@ -248,10 +250,15 @@
 }
 
 - (IBAction)linkButtonPressed:(UIButton *)button {
-	[self.currentVideoPlayer pause];
+    
+    SYNAbstractViewController* currentVC = appDelegate.masterViewController.showingViewController;
+	[[SYNTrackingManager sharedManager] trackClickToMoreFromScreenName:[currentVC trackingScreenName]];
+    
+    [self.currentVideoPlayer pause];
 	
 	NSURL *URL = [NSURL URLWithString:self.videoInstance.video.linkURL];
-	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL];
+	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL withTrackingName:@"Click to more"];
+    
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
