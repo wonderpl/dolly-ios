@@ -20,7 +20,7 @@
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcp-Jw-jhh" userLabel="Label - Strip">
-                        <rect key="frame" x="1" y="172" width="358" height="49"/>
+                        <rect key="frame" x="1" y="173" width="358" height="49"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.73633730825538479" green="0.78948260497400713" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
