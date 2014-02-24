@@ -370,7 +370,6 @@ static NSString* PlaceholderText = @"Say something nice";
                                            [wself refreshCollectionView];
                                            wself.videoInstance.commentCountValue = [wself.model totalItemCount];
 
-                                           NSLog(@"wself.videoInstance.commentCount : %@", wself.videoInstance.commentCount);
                                            
                                            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date]
                                                                                      forKey:kUserDefaultsCommentingLastInteracted];
