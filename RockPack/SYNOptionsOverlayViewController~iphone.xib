@@ -22,7 +22,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
                 <button alpha="0.74999999999999978" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWB-CL-GH1" userLabel="Hints">
-                    <rect key="frame" x="130" y="405" width="60" height="60"/>
+                    <rect key="frame" x="130" y="364" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreHints.png">
@@ -30,7 +30,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJF-XA-3U1" userLabel="Logout">
-                    <rect key="frame" x="220" y="405" width="60" height="60"/>
+                    <rect key="frame" x="220" y="364" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreLogout.png">
@@ -38,7 +38,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDc-om-S33" userLabel="Settings">
-                    <rect key="frame" x="40" y="212" width="60" height="60"/>
+                    <rect key="frame" x="40" y="171" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="3sa-VW-JT7"/>
@@ -50,7 +50,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl8-D5-ycD" userLabel="Friends">
-                    <rect key="frame" x="130" y="212" width="60" height="60"/>
+                    <rect key="frame" x="130" y="171" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="ahV-o5-rTN"/>
@@ -62,7 +62,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvl-Tq-qqU" userLabel="About">
-                    <rect key="frame" x="220" y="212" width="60" height="60"/>
+                    <rect key="frame" x="220" y="171" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="36o-Nk-qlw"/>
@@ -74,7 +74,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhV-Nr-PkJ" userLabel="Feedback">
-                    <rect key="frame" x="40" y="309" width="60" height="60"/>
+                    <rect key="frame" x="40" y="268" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreFeedback.png">
@@ -82,7 +82,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67f-LU-RAg" userLabel="Rate">
-                    <rect key="frame" x="130" y="309" width="60" height="60"/>
+                    <rect key="frame" x="130" y="268" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreRate.png">
@@ -90,7 +90,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTM-zm-rmt" userLabel="Blog">
-                    <rect key="frame" x="220" y="309" width="60" height="60"/>
+                    <rect key="frame" x="220" y="268" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreBlog.png">
@@ -98,7 +98,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBb-D6-iHz" userLabel="Help">
-                    <rect key="frame" x="41" y="405" width="60" height="60"/>
+                    <rect key="frame" x="41" y="364" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreHelp.png">
@@ -106,7 +106,7 @@
                     </state>
                 </button>
                 <button alpha="0.74999999999999978" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mW8-ml-mOT" userLabel="Edit Profile">
-                    <rect key="frame" x="130" y="111" width="60" height="60"/>
+                    <rect key="frame" x="130" y="70" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreEdit.png">
@@ -117,11 +117,11 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="GDc-om-S33" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="40" id="5Ak-TG-EfO"/>
-                <constraint firstItem="GDc-om-S33" firstAttribute="top" secondItem="1" secondAttribute="top" constant="212" id="5YX-Kj-7yE"/>
-                <constraint firstItem="tvl-Tq-qqU" firstAttribute="top" secondItem="1" secondAttribute="top" constant="212" id="9XT-Vi-YCe"/>
+                <constraint firstItem="GDc-om-S33" firstAttribute="top" secondItem="1" secondAttribute="top" constant="171" id="5YX-Kj-7yE"/>
+                <constraint firstItem="tvl-Tq-qqU" firstAttribute="top" secondItem="1" secondAttribute="top" constant="171" id="9XT-Vi-YCe"/>
                 <constraint firstAttribute="trailing" secondItem="tvl-Tq-qqU" secondAttribute="trailing" constant="40" id="GhP-oA-W3Q"/>
                 <constraint firstAttribute="centerX" secondItem="dl8-D5-ycD" secondAttribute="centerX" id="YTJ-1W-s8H"/>
-                <constraint firstItem="dl8-D5-ycD" firstAttribute="top" secondItem="1" secondAttribute="top" constant="212" id="cC5-hu-1mg"/>
+                <constraint firstItem="dl8-D5-ycD" firstAttribute="top" secondItem="1" secondAttribute="top" constant="171" id="cC5-hu-1mg"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
