@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SYNAbstractViewController.h"
 #import "VideoInstance.h"
+#import "SYNSocialCommentButton.h"
 
 @interface SYNCommentingViewController : SYNAbstractViewController
 
-- (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance;
+- (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance withButton:(SYNSocialCommentButton*) socialButton;
 
 @end

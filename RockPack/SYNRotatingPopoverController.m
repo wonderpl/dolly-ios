@@ -11,9 +11,9 @@
 @interface SYNRotatingPopoverController () <UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) UIPopoverController *popoverController;
-
 @property (nonatomic, strong) UIView *view;
 @property (nonatomic, strong) UIButton *button;
+
 
 @end
 
@@ -48,6 +48,12 @@
 	CGRect buttonRect = [self.view convertRect:self.button.bounds fromView:self.button];
 
 	*rect = buttonRect;
+}
+
+
+- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [self.commentDelegate commentUpdated];
 }
 
 @end

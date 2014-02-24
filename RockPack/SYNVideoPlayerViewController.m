@@ -233,7 +233,7 @@
 }
 
 - (IBAction)commentButtonPressed:(UIButton *)button {
-	SYNCommentingViewController *viewController = [[SYNCommentingViewController alloc] initWithVideoInstance:self.videoInstance];
+	SYNCommentingViewController *viewController = [[SYNCommentingViewController alloc] initWithVideoInstance:self.videoInstance withButton:(SYNSocialCommentButton*)button];
 	if (IS_IPHONE) {
 		[self.navigationController pushViewController:viewController animated:YES];
 	} else {

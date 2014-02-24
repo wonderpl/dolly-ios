@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SYNCommentUpdateDelegate.h"
+#import "SYNSocialButton.h"
 
 @interface SYNRotatingPopoverController : NSObject
+
+@property (nonatomic, weak) id<SYNCommentUpdateDelegate> commentDelegate;
+@property (nonatomic, weak) SYNSocialButton* socialButton;
 
 - (instancetype)initWithContentViewController:(UIViewController *)viewController;
 
