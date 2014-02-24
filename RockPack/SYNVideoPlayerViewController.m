@@ -129,11 +129,14 @@
 #pragma mark - Getters / Setters
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
-	[self trackViewingStatisticsForCurrentVideo];
-	
+    if (self.videoInstance) {
+        [self trackViewingStatisticsForCurrentVideo];
+    }
+
 	_videoInstance = videoInstance;
-	
+    
 	if ([self isViewLoaded]) {
+
 		[self updateVideoInstanceDetails:videoInstance];
 		[self playCurrentVideo];
 	}
@@ -336,6 +339,9 @@
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {
+    
+    
+    
 	[[SYNTrackingManager sharedManager] trackVideoView:self.videoInstance.video.sourceId
 										   currentTime:self.currentVideoPlayer.currentTime
 											  duration:self.currentVideoPlayer.duration];

@@ -415,8 +415,16 @@ static const NSInteger TrackingDimensionConnection = 6;
 - (void)trackVideoView:(NSString *)videoId currentTime:(CGFloat)currentTime duration:(CGFloat)duration {
 	NSInteger percentageViewed = (NSInteger)((currentTime / duration) * 100);
 	
+    
+    //If the amount of the video watched is below
+    //This threshold we do not send the tracking event
+    if (currentTime <= 0.0001) {
+        return;
+    }
+    
 	[self trackEventWithCategory:GoalCategory action:@"videoViewed" label:videoId value:@(percentageViewed)];
 	[self trackEventWithCategory:GoalCategory action:@"videoViewedDuration" label:videoId value:@((int)currentTime)];
+
 }
 
 - (void)trackNetworkErrorCode:(NSInteger)code forURL:(NSString *)url {
