@@ -587,10 +587,6 @@
 
 -(void) setProfileImage : (NSString*) thumbnailURL
 {
-    
-    if (self.profileImageView.image) {
-        return;
-    }
 
     UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
     
@@ -1823,6 +1819,7 @@
     {
         // isUserProfile set to YES for the current User
         self.isUserProfile = channelOwnerIsUser;
+        
         
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleDataModelChange:)
