@@ -119,38 +119,6 @@
 }
 
 
--(void) setCoverphoto:(NSString*) photoUrl {
-    
-    if (![photoUrl isEqualToString:@""]){ // there is a url string
-        
-        
-        
-        dispatch_queue_t downloadQueue = dispatch_queue_create("com.dolly.coverphotoloadingqueue", NULL);
-        dispatch_async(downloadQueue, ^{
-            
-            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: photoUrl]
-                                  ];
-            
-            UIImage *tmpImage = [UIImage imageWithData: imageData];
-
-
-//            //if statement for now as the db has urls for avatars that have not been uploaded
-//            //should be able to get rid of it later
-//            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    self.coverImage.alpha = 0.0;
-//                    
-//                    self.coverImage.image = tmpImage;
-//                    
-//                    [UIView animateWithDuration:1.5f animations:^{
-//                        self.coverImage.alpha=1.0f;
-//                    }];
-//                });
-//            }
-        });
-    }
-}
-
 // Could not set word wrapping for a UILabel with multiple lines and set linebreak as NSLineBreakByTruncatingTail so this method calculates a good font size according to the optimal font size and works it way down
 
 -(void) setButtonTitleAndResizeText:(NSString*) text forLabel:(UILabel*) label

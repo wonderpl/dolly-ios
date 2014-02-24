@@ -54,6 +54,7 @@ static NSString* PlaceholderText = @"Say something nice";
 // holding the values for deleting until confirmed by the alert view
 @property (nonatomic, weak) NSDictionary* currentlyDeletingComment;
 @property (nonatomic, weak) SYNCommentingCollectionViewCell* currentlyDeletingCell;
+@property (nonatomic, weak) SYNSocialCommentButton* socialButton;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *commentBottomConstraint;
 
@@ -64,10 +65,11 @@ static NSString* PlaceholderText = @"Say something nice";
 
 @implementation SYNCommentingViewController
 
-- (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance {
+- (instancetype)initWithVideoInstance:(VideoInstance *)videoInstance withButton:(SYNSocialCommentButton*) socialButton {
 	if (self = [super initWithViewId:kCommentsViewId]) {
 		self.videoInstance = videoInstance;
 		self.model = [SYNCommentsModel modelWithVideoInstance:videoInstance];
+        self.socialButton = socialButton;
 		self.model.delegate = self;
 	}
 	return self;
@@ -162,9 +164,6 @@ static NSString* PlaceholderText = @"Say something nice";
     if (!IS_IPHONE_5) {
         [self.commentBottomConstraint setConstant:88];
     }
-    
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -184,6 +183,9 @@ static NSString* PlaceholderText = @"Say something nice";
 	[super viewWillDisappear:animated];
 
     self.videoInstance.commentCountValue = [self.model totalItemCount];
+
+    //Updates the iphone comment cont
+    [self.socialButton setCount:self.videoInstance.commentCountValue];
     [appDelegate saveContext:YES];
     self.sendMessageTextView.text = @"";
 
@@ -366,6 +368,8 @@ static NSString* PlaceholderText = @"Say something nice";
                                            [wself.sendMessageTextView resignFirstResponder];
                                            
                                            [wself refreshCollectionView];
+                                           wself.videoInstance.commentCountValue = [wself.model totalItemCount];
+
                                            
                                            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date]
                                                                                      forKey:kUserDefaultsCommentingLastInteracted];

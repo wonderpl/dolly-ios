@@ -59,10 +59,8 @@
         
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
             self.container.frame = CGRectMake(283, 488, 484, 126);
-
         } else {
-            self.container.frame = CGRectMake(115, 601, 484, 126);
-            
+            self.container.frame = CGRectMake(115, 600, 484, 126);
         }
     }
 }
