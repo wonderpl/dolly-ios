@@ -151,15 +151,13 @@
         
         
     }
-}
-
--(void)viewDidAppear:(BOOL)animated {
+    
     if (IS_IPHONE) {
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                             object: self
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
     }
-
+    
     if (IS_IPAD) {
         [UIView animateWithDuration:0.5 animations:^{
             CGRect tmpFrame = self.tabsViewIPad.frame;
@@ -167,6 +165,7 @@
             self.tabsViewIPad.frame = tmpFrame;
         }];
     }
+
 }
 
 - (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock forceReload:(BOOL)forceReload {
