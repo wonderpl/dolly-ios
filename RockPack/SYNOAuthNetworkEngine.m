@@ -460,8 +460,14 @@
           onCompletion:(MKNKUserSuccessBlock) completionBlock
                onError: (MKNKUserErrorBlock) errorBlock
 {
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : user.uniqueId ?: user.username};
+
+    NSString *tmpString = user.uniqueId;
     
+    if ([tmpString isEqualToString:@""]) {
+        tmpString = user.username;
+    }
+    
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : tmpString};
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     
     parameters[@"start"] = @(0);
