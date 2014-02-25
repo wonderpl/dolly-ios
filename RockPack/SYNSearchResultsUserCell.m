@@ -98,7 +98,7 @@
                                if (image && cacheType == SDImageCacheTypeNone)
                                {
                                    weakSelf.coverImage.alpha = 0.0;
-                                   [UIView animateWithDuration:2.0 animations:^{
+                                   [UIView animateWithDuration:1.0 animations:^{
                                        weakSelf.coverImage.alpha = 1.0;
                                    }];
                                }

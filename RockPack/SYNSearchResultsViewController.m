@@ -202,7 +202,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
+    [super viewWillAppear:animated];
 	
 	NSIndexPath *selectedIndexPath = [[self.videosCollectionView indexPathsForSelectedItems] firstObject];
 	if (selectedIndexPath) {
@@ -848,7 +848,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             {
 
                 
-            
+                [self.usersCollectionView setContentOffset:CGPointZero];
             SYNDiscoverOverlayHighlightsViewController* overlay = [[SYNDiscoverOverlayHighlightsViewController alloc] init];
             
             // Set frame to full screen
@@ -860,7 +860,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             [appDelegate.masterViewController addChildViewController:overlay];
             [appDelegate.masterViewController.view addSubview:overlay.view];
             
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.7 animations:^{
                 overlay.view.alpha = 1.0f;
             }];
                 
@@ -888,6 +888,16 @@ referenceSizeForFooterInSection: (NSInteger) section
 
         if (value==2)
         {
+            [self.videosCollectionView setContentOffset:CGPointZero];
+            
+            
+            if (!IS_IPHONE_5) {
+                //Not hiding for some reason
+//                [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+//                                                                    object: self
+//                                                                  userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
+            }
+            
             SYNDiscoverOverlayVideoViewController* overlay = [[SYNDiscoverOverlayVideoViewController alloc] init];
             
             // Set frame to full screen
@@ -899,7 +909,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             [appDelegate.masterViewController addChildViewController:overlay];
             [appDelegate.masterViewController.view addSubview:overlay.view];
             
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.7 animations:^{
                 overlay.view.alpha = 1.0f;
             }];
             value+=1;

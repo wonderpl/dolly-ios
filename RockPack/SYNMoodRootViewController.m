@@ -604,7 +604,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                           [appDelegate.masterViewController addChildViewController:moodOverlay];
                                                           [appDelegate.masterViewController.view addSubview:moodOverlay.view];
                                                           
-                                                          [UIView animateWithDuration:0.3 animations:^{
+                                                          [UIView animateWithDuration:0.7 animations:^{
                                                               moodOverlay.view.alpha = 1.0f;
                                                           }];
                                                       }

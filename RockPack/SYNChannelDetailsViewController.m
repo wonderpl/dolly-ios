@@ -231,32 +231,8 @@
 	self.model.delegate = self;
     [self.navigationController.navigationBar setBackgroundTransparent:YES];
 
-    NSInteger viewCount = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime];
     
-    if ([[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime]<2)
-    {
-        if (self.mode == kChannelDetailsModeDisplay) {
-            
-            SYNCollectectionDetailsOverlayViewController* channeldetailsOverlay = [[SYNCollectectionDetailsOverlayViewController alloc] init];
-            
-            // Set frame to full screen
-            CGRect vFrame = channeldetailsOverlay.view.frame;
-            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-            channeldetailsOverlay.view.frame = vFrame;
-            channeldetailsOverlay.view.alpha = 0.0f;
-            
-            [appDelegate.masterViewController addChildViewController:channeldetailsOverlay];
-            [appDelegate.masterViewController.view addSubview:channeldetailsOverlay.view];
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                channeldetailsOverlay.view.alpha = 1.0f;
-            }];
-        }
-        viewCount+=1;
-        [[NSUserDefaults standardUserDefaults] setInteger: viewCount
-                                                forKey: kUserDefaultsCollectionDetailsFirstTime];
-    }
-
+  
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -273,6 +249,50 @@
 		[[SYNTrackingManager sharedManager] setChannelRelationDimension:subscriptionStatus];
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
 	}
+    
+    NSInteger viewCount = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime];
+
+    if ([[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime]<2)
+    {
+        if (self.mode == kChannelDetailsModeDisplay) {
+            
+            
+            if ([self.btnFollowChannel.title isEqualToString:@"unfollow"]) {
+                
+                return;
+             }
+            // ensure that the view is at the top of the screen
+                [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0,-self.offsetValue) animated:YES];
+            
+
+            self.videoThumbnailCollectionView.contentOffset = CGPointMake(0, self.offsetValue);
+            
+            SYNCollectectionDetailsOverlayViewController* channeldetailsOverlay = [[SYNCollectectionDetailsOverlayViewController alloc] init];
+            
+            // Set frame to full screen
+            CGRect vFrame = channeldetailsOverlay.view.frame;
+            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+            channeldetailsOverlay.view.frame = vFrame;
+            channeldetailsOverlay.view.alpha = 0.0f;
+            
+            [appDelegate.masterViewController addChildViewController:channeldetailsOverlay];
+            [appDelegate.masterViewController.view addSubview:channeldetailsOverlay.view];
+                        
+            if (IS_IPHONE) {
+                [UIView animateWithDuration:0.5 animations:^{
+                    channeldetailsOverlay.view.alpha = 1.0f;
+                }];
+            } else {
+                [UIView animateWithDuration:1.2 animations:^{
+                    channeldetailsOverlay.view.alpha = 1.0f;
+                }];
+            }
+        }
+        viewCount+=1;
+        [[NSUserDefaults standardUserDefaults] setInteger: viewCount
+                                                   forKey: kUserDefaultsCollectionDetailsFirstTime];
+    }
+
 }
 
 - (void) viewWillDisappear: (BOOL) animated
