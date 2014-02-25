@@ -123,7 +123,9 @@
 																 [navigationItem setLeftBarButtonItem:self.backBarButton animated:YES];
 															 }
 														 } errorHandler:^(NSError *error) {
-															 
+                                                             [navigationItem setLeftBarButtonItem:self.backBarButton animated:YES];
+                                                             [navigationItem setRightBarButtonItem:self.confirmBarButton animated:YES];
+ 
 														 }];
 	}
 }
