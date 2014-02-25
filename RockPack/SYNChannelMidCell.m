@@ -412,28 +412,32 @@
 
 -(void) descriptionAnimation {
 
-    [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
-        CGRect tmpRect = self.containerView.frame;
+    float iphoneValue = 250;
+    float ipadValue = 230;
+   __block CGRect tmpRect = self.containerView.frame;
+
+    [UIView animateWithDuration:2.0 animations:^{
+        
         if (IS_IPHONE)
         {
-            tmpRect.origin.x += kShowInboardingAnimationDistance;
+            tmpRect.origin.x += iphoneValue;
         }
         else
         {
-            tmpRect.origin.x += kShowInboardingAnimationDistance;
+            tmpRect.origin.x += ipadValue;
         }
         self.containerView.frame = tmpRect;
     } completion:^(BOOL finished) {
         
-        [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
+        [UIView animateWithDuration:1.0 animations:^{
             CGRect tmpRect = self.containerView.frame;
             if (IS_IPHONE)
             {
-                tmpRect.origin.x -= kShowInboardingAnimationDistance;
+                tmpRect.origin.x -= iphoneValue;
             }
             else
             {
-                tmpRect.origin.x -= kShowInboardingAnimationDistance;
+                tmpRect.origin.x -= ipadValue;
             }
             self.containerView.frame = tmpRect;
             
@@ -444,51 +448,66 @@
 
 
 -(void) descriptionAndDeleteAnimation {
-    
-    [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
-        CGRect tmpRect = self.containerView.frame;
+    __block CGRect tmpRect = self.containerView.frame;
+
+    [UIView animateWithDuration:1.5 animations:^{
         
         if (IS_IPHONE)
         {
-            tmpRect.origin.x += kShowInboardingAnimationDistance;
+            tmpRect.origin.x += 250;
         }
         else
         {
-            tmpRect.origin.x += kShowInboardingAnimationDistance;
+            tmpRect.origin.x += 230;
         }
         self.containerView.frame = tmpRect;
-    } completion:^(BOOL finished) {
+    }  completion:^(BOOL finished) {
         
-        [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
+        [UIView animateWithDuration:1.0f animations:^{
             CGRect tmpRect = self.containerView.frame;
             if (IS_IPHONE)
             {
-                tmpRect.origin.x -= kShowInboardingAnimationDistance*2;
+                tmpRect.origin.x -= 250;
             }
             else
             {
-                tmpRect.origin.x -= kShowInboardingAnimationDistance*2;
+                tmpRect.origin.x -= 250;
             }
             self.containerView.frame = tmpRect;
-            
-            self.descriptionLabel.hidden=YES;
+
         } completion:^(BOOL finished) {
+
+            self.descriptionLabel.hidden = YES;
             
-            
-            [UIView animateWithDuration:kShowInboardingAnimationTime animations:^{
+            [UIView animateWithDuration:1.0 animations:^{
                 CGRect tmpRect = self.containerView.frame;
                 if (IS_IPHONE)
                 {
-                    tmpRect.origin.x += kShowInboardingAnimationDistance;
+                    tmpRect.origin.x -= 120;
                 }
                 else
                 {
-                    tmpRect.origin.x += kShowInboardingAnimationDistance;
+                    tmpRect.origin.x -= 120;
                 }
                 self.containerView.frame = tmpRect;
+
             } completion:^(BOOL finished) {
-                self.descriptionLabel.hidden=YES;
+                [UIView animateWithDuration:1.4f animations:^{
+                    CGRect tmpRect = self.containerView.frame;
+                    if (IS_IPHONE)
+                    {
+                        tmpRect.origin.x += 120;
+                    }
+                    else
+                    {
+                        tmpRect.origin.x += 120;
+                    }
+                    self.containerView.frame = tmpRect;
+                } completion:^(BOOL finished) {
+                }];
+
             }];
+            
         }];
         
     }];

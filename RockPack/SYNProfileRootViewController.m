@@ -2905,6 +2905,9 @@ finishedWithImage: (UIImage *) image
             self.coverImage.alpha = 1.0f;
 
         };
+        
+        __weak SYNProfileRootViewController* wself = self;
+
 
         [UIView transitionWithView:cell
                           duration:0.4f
@@ -2914,11 +2917,12 @@ finishedWithImage: (UIImage *) image
                             float time = 0.4;
                             
                             if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
-                                time= 2.8f;
+                                time= 6.2f;
                             }
-                            [self performSelector:@selector(showInboardingAnimationAfterCreate) withObject:self afterDelay:1.4f];
-
-                            [self performSelector:@selector(scrollUpWithTime) withObject:self afterDelay:time];
+                            if (IS_IPHONE) {
+                                [wself performSelector:@selector(showInboardingAnimationAfterCreate) withObject:self afterDelay:1.4f];
+                            }
+                                [wself performSelector:@selector(scrollUpWithTime) withObject:self afterDelay:time];
 
                         }];
     }
@@ -3095,7 +3099,7 @@ finishedWithImage: (UIImage *) image
     SYNChannelMidCell *cell;
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
-        
+
         
         if (modeType == kModeMyOwnProfile) {
             cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0]]);
