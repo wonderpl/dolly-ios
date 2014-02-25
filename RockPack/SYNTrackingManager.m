@@ -413,16 +413,28 @@ static const NSInteger TrackingDimensionConnection = 6;
 }
 
 - (void)trackVideoView:(NSString *)videoId currentTime:(CGFloat)currentTime duration:(CGFloat)duration {
+    
+    // Defensive
+    if (duration<currentTime) {
+        DebugLog(@"Duration:%f larger than current time%f", duration, currentTime);
+        return;
+    }
+    
 	NSInteger percentageViewed = (NSInteger)((currentTime / duration) * 100);
 	
-    
     //If the amount of the video watched is below
     //This threshold we do not send the tracking event
     if (currentTime <= 0.0001) {
         return;
     }
     
+    if (percentageViewed<0 || percentageViewed > 100) {
+        DebugLog(@"Percentage error : %ld", (long)percentageViewed);
+        return;
+    }
+    
 	[self trackEventWithCategory:GoalCategory action:@"videoViewed" label:videoId value:@(percentageViewed)];
+    
 	[self trackEventWithCategory:GoalCategory action:@"videoViewedDuration" label:videoId value:@((int)currentTime)];
 
 }
