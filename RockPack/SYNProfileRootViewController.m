@@ -1236,7 +1236,29 @@
         
         if (self.modeType == kModeOtherUsersProfile) {
             self.followAllButton.hidden = NO;
-        }        
+        }
+        //    Working load more videos for user channels
+        
+        NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
+        NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
+
+                [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                                   onCompletion: ^(id dictionary) {
+                                                       NSError *error = nil;
+                                                       ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId error: &error];
+                                                       
+                                                       if (channelOwnerFromId)
+                                                       {
+                                                           [channelOwnerFromId setAttributesFromDictionary: dictionary
+                                                                                       ignoringObjectTypes: kIgnoreNothing];
+                                                           
+                                                           [self setUpUserProfile];
+                                                           [self reloadCollectionViews];
+                                                       }
+
+        
+                                                   } onError: nil];
+        
     }
     else
     {
@@ -1775,6 +1797,7 @@
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
                                                    [self setUpUserProfile];
+                                                   [self reloadCollectionViews];
                                                }
                                                else
                                                {

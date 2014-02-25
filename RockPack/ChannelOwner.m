@@ -221,7 +221,13 @@
             
             channel.position = [dictionary objectForKey: @"position"
                                             withDefault: @0];
-
+            
+            channel.subscribersCount = [channelDictionary objectForKey:@"subscriber_count"
+                                                         withDefault:@-1];
+            
+            channel.totalVideosValue = channelDictionary[@"videos"][@"total"];
+            
+            
             if (channel.favouritesValue)
             {
                 SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
