@@ -746,6 +746,8 @@
 		44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */; };
 		44D66FDF18B67832009BC910 /* ButtonMoreEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */; };
 		44D66FE018B67832009BC910 /* ButtonMoreEdit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */; };
+		44E0978918BCD34C00FF0AF4 /* followbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E0978718BCD34C00FF0AF4 /* followbutton.png */; };
+		44E0978A18BCD34C00FF0AF4 /* followbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E0978818BCD34C00FF0AF4 /* followbutton@2x.png */; };
 		4C03237518AE3F4D00E168EF /* SYNDiscoverSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */; };
 		4C03237718AE3F8700E168EF /* SYNDiscoverSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */; };
 		4C03237A18AE6F8300E168EF /* SYNFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03237918AE6F8300E168EF /* SYNFriendCell.m */; };
@@ -766,8 +768,6 @@
 		4C5E861B18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E861918B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController.m */; };
 		4C5E861C18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E861A18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController~iphone.xib */; };
 		4C5E861E18B6582E00D0E937 /* SYNDiscoverOverlayHighlightsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E861D18B6582E00D0E937 /* SYNDiscoverOverlayHighlightsViewController.xib */; };
-		4C5E862418B65AAE00D0E937 /* followbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862018B65AAE00D0E937 /* followbutton.png */; };
-		4C5E862518B65AAE00D0E937 /* followbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862118B65AAE00D0E937 /* followbutton@2x.png */; };
 		4C5E862618B65AAE00D0E937 /* In_AddButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862218B65AAE00D0E937 /* In_AddButton.png */; };
 		4C5E862718B65AAE00D0E937 /* In_AddButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862318B65AAE00D0E937 /* In_AddButton@2x.png */; };
 		4C5E862C18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E862A18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m */; };
@@ -2121,6 +2121,8 @@
 		44CAFC641884384900B70139 /* ButtonMoreHints@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonMoreHints@2x.png"; path = "Assets/Images/ButtonMoreHints@2x.png"; sourceTree = "<group>"; };
 		44D66FDD18B67832009BC910 /* ButtonMoreEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMoreEdit.png; sourceTree = "<group>"; };
 		44D66FDE18B67832009BC910 /* ButtonMoreEdit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMoreEdit@2x.png"; sourceTree = "<group>"; };
+		44E0978718BCD34C00FF0AF4 /* followbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followbutton.png; sourceTree = "<group>"; };
+		44E0978818BCD34C00FF0AF4 /* followbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followbutton@2x.png"; sourceTree = "<group>"; };
 		4C03237318AE3F4D00E168EF /* SYNDiscoverSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionView.h; sourceTree = "<group>"; };
 		4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionView.m; sourceTree = "<group>"; };
 		4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionView.xib; sourceTree = "<group>"; };
@@ -2149,8 +2151,6 @@
 		4C5E861918B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverOverlayHighlightsViewController.m; sourceTree = "<group>"; };
 		4C5E861A18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNDiscoverOverlayHighlightsViewController~iphone.xib"; sourceTree = "<group>"; };
 		4C5E861D18B6582E00D0E937 /* SYNDiscoverOverlayHighlightsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverOverlayHighlightsViewController.xib; sourceTree = "<group>"; };
-		4C5E862018B65AAE00D0E937 /* followbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followbutton.png; sourceTree = "<group>"; };
-		4C5E862118B65AAE00D0E937 /* followbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followbutton@2x.png"; sourceTree = "<group>"; };
 		4C5E862218B65AAE00D0E937 /* In_AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = In_AddButton.png; sourceTree = "<group>"; };
 		4C5E862318B65AAE00D0E937 /* In_AddButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "In_AddButton@2x.png"; sourceTree = "<group>"; };
 		4C5E862918B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCollectectionDetailsOverlayViewController.h; sourceTree = "<group>"; };
@@ -4769,8 +4769,8 @@
 		4C5E861F18B65A8A00D0E937 /* In Boarding */ = {
 			isa = PBXGroup;
 			children = (
-				4C5E862018B65AAE00D0E937 /* followbutton.png */,
-				4C5E862118B65AAE00D0E937 /* followbutton@2x.png */,
+				44E0978718BCD34C00FF0AF4 /* followbutton.png */,
+				44E0978818BCD34C00FF0AF4 /* followbutton@2x.png */,
 				4C5E862218B65AAE00D0E937 /* In_AddButton.png */,
 				4C5E862318B65AAE00D0E937 /* In_AddButton@2x.png */,
 			);
@@ -6144,6 +6144,7 @@
 				01ABBB2017205541007E4462 /* ButtonSubscribeSelected.png in Resources */,
 				01ABBB2117205541007E4462 /* ButtonSubscribeSelected@2x.png in Resources */,
 				BEC39C1D184E363C00DA8089 /* SYNOnBoardingFooter.xib in Resources */,
+				44E0978918BCD34C00FF0AF4 /* followbutton.png in Resources */,
 				BED027CA1834D4CC00636659 /* ButtonMoreFeedback.png in Resources */,
 				BEEB6F25172181FD00FEFA43 /* SearchTab.png in Resources */,
 				BEEB6F26172181FD00FEFA43 /* SearchTab@2x.png in Resources */,
@@ -6329,7 +6330,6 @@
 				38A200711731607F00FB9F57 /* ButtonLoginNext~iphone.png in Resources */,
 				38A200721731607F00FB9F57 /* ButtonRegister@2x~iphone.png in Resources */,
 				38A200731731607F00FB9F57 /* ButtonRegisterHighlighted@2x~iphone.png in Resources */,
-				4C5E862518B65AAE00D0E937 /* followbutton@2x.png in Resources */,
 				38A200741731607F00FB9F57 /* ButtonRegisterHighlighted~iphone.png in Resources */,
 				38A200751731607F00FB9F57 /* ButtonRegister~iphone.png in Resources */,
 				E99AA425188035F100330ABB /* LoginLogo@2x.png in Resources */,
@@ -6459,6 +6459,7 @@
 				BE2D3EF1183A3E9F003B2C26 /* SYNAboutViewController~iphone.xib in Resources */,
 				38A200FD1731607F00FB9F57 /* ButtonVideoOverlayShareSelected@2x~iphone.png in Resources */,
 				38A200FE1731607F00FB9F57 /* ButtonVideoOverlayShareSelected~iphone.png in Resources */,
+				44E0978A18BCD34C00FF0AF4 /* followbutton@2x.png in Resources */,
 				1F4E7F82181AC7D300F59007 /* TabProfileHighlighted@2x.png in Resources */,
 				38A200FF1731607F00FB9F57 /* ButtonVideoOverlayShare~iphone.png in Resources */,
 				E9FDCD9F188D92EF00C31CC1 /* BackButton@2x.png in Resources */,
@@ -6685,7 +6686,6 @@
 				01811A5817576D2A00AFA926 /* ButtonShuttleBarMaximise.png in Resources */,
 				1F4E7FC0181ACBAA00F59007 /* TabProfile~iphone.png in Resources */,
 				01811A5917576D2A00AFA926 /* ButtonShuttleBarMinimise.png in Resources */,
-				4C5E862418B65AAE00D0E937 /* followbutton.png in Resources */,
 				01811A5A17576D2A00AFA926 /* ButtonShuttleBarMinimise@2x.png in Resources */,
 				01F94F2A1761EE56006C024D /* ButtonCreateDisabled.png in Resources */,
 				01F94F2B1761EE56006C024D /* ButtonCreateDisabled@2x~iphone.png in Resources */,
