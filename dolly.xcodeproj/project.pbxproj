@@ -773,6 +773,7 @@
 		4C5E862C18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E862A18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m */; };
 		4C5E862D18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */; };
 		4C5E862F18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */; };
+		4CB63A6E18BD052E00825F7C /* placeholderwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB63A6D18BD052E00825F7C /* placeholderwhite.png */; };
 		4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */; };
 		4CE8AB381896B78900D7E373 /* DefaultCoverPhoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */; };
 		4CE8AE5718A901560031CE1C /* BackButtonApp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AE5518A901560031CE1C /* BackButtonApp.png */; };
@@ -2157,6 +2158,7 @@
 		4C5E862A18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCollectectionDetailsOverlayViewController.m; sourceTree = "<group>"; };
 		4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNCollectectionDetailsOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCollectectionDetailsOverlayViewController.xib; sourceTree = "<group>"; };
+		4CB63A6D18BD052E00825F7C /* placeholderwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderwhite.png; sourceTree = "<group>"; };
 		4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNNotificationsMarkAllAsReadCell.xib; sourceTree = "<group>"; };
 		4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DefaultCoverPhoto.jpg; sourceTree = "<group>"; };
 		4CE8AE5518A901560031CE1C /* BackButtonApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButtonApp.png; sourceTree = "<group>"; };
@@ -4097,6 +4099,7 @@
 		1F1B4BDC17428536009DEB0C /* placeholders */ = {
 			isa = PBXGroup;
 			children = (
+				4CB63A6D18BD052E00825F7C /* placeholderwhite.png */,
 				4425147418B3A52F00E5764A /* PlaceholderNotificationVideo.png */,
 				4425147518B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png */,
 				4CE8AB371896B78900D7E373 /* DefaultCoverPhoto.jpg */,
@@ -5942,6 +5945,7 @@
 				01F8E78016B03A7C000D44B9 /* SYNVideoViewerViewController.xib in Resources */,
 				BEB31389181FCD7500FAF98A /* SYNFeedRootViewController~iphone.xib in Resources */,
 				BED027D21834D4CC00636659 /* ButtonMoreRate.png in Resources */,
+				4CB63A6E18BD052E00825F7C /* placeholderwhite.png in Resources */,
 				BE1B3DC4180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib in Resources */,
 				01F8E78316B0554B000D44B9 /* ButtonClose.png in Resources */,
 				BEB31385181FC5C500FAF98A /* SYNAggregateChannelCell~iphone.xib in Resources */,

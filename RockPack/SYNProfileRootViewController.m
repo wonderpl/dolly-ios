@@ -587,120 +587,55 @@
 
 -(void) setProfileImage : (NSString*) thumbnailURL
 {
-
-    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+    __weak SYNProfileRootViewController *weakSelf = self;
     
-    if (![self.channelOwner.thumbnailURL isEqualToString:@""]){ // there is a url string
-        
-        dispatch_queue_t downloadQueue = dispatch_queue_create("com.dolly.avatarloadingqueue", NULL);
-        dispatch_async(downloadQueue, ^{
-            
-            NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: self.channelOwner.thumbnailLargeUrl ]];
-            
-            UIImage *tmpImage = [UIImage imageWithData: imageData];
-            
-            //if statement for now as the db has urls for avatars that have not been uploaded
-            //should be able to get rid of it later
-            if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.profileImageView.alpha = 0.0;
-                    
-                    self.profileImageView.image = tmpImage;
-                    
-                    [UIView animateWithDuration:0.5f animations:^{
-                        self.profileImageView.alpha=1.0f;
-                    }];
-                    
-                    
-                });
-            }
-            
-        });
-    }else{
-        self.profileImageView.image = placeholderImage;
-        self.profileImageView.alpha = 0.0;
-        
-        [UIView animateWithDuration:1.5f animations:^{
-            self.profileImageView.alpha=1.0f;
-        }];
-        
-    }
+    
+    [self.profileImageView setImageWithURL:[NSURL URLWithString: self.channelOwner.thumbnailLargeUrl]
+                          placeholderImage:[UIImage imageNamed: @"PlaceholderAvatarProfile"]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                     if (image && cacheType == SDImageCacheTypeNone)
+                                     {
+                                         weakSelf.profileImageView.alpha = 0.0;
+                                         [UIView animateWithDuration:1.0 animations:^{
+                                             weakSelf.profileImageView.alpha = 1.0;
+                                         }];
+                                     }
+                                 }];
+
 }
 
 -(void) setCoverphotoImage: (NSString*) thumbnailURL
 {
     
     
+    
 //    if (self.coverImage.image) {
 //        return;
 //    }
-    UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto.jpg"];
-    
-    if (![thumbnailURL isEqualToString:@""]){ // there is a url string
-        
-        NSArray *thumbnailURLItems = [thumbnailURL componentsSeparatedByString: @"/"];
-        
-        if (thumbnailURLItems.count >= 6)
-        {
-            NSString *thumbnailSizeString = thumbnailURLItems[5];
-            NSString *thumbnailUrlString;
-            if (IS_IPAD)
-            {
-                thumbnailUrlString = [thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"ipad"];
-            }
-            else
-            {
-                thumbnailUrlString = [thumbnailURL stringByReplacingOccurrencesOfString: thumbnailSizeString                                                                                               withString: @"thumbnail_medium"];
-            }
-            
-            dispatch_queue_t downloadQueue = dispatch_queue_create("com.dolly.coverphotoloadingqueue", NULL);
-            dispatch_async(downloadQueue, ^{
-                
-                NSData * imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString: thumbnailUrlString]
-                                      ];
-                
-                UIImage *tmpImage = [UIImage imageWithData: imageData];
-                
-                //if statement for now as the db has urls for avatars that have not been uploaded
-                //should be able to get rid of it later
-                if (tmpImage.size.height != 0 && tmpImage.size.height != 0) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.coverImage.alpha = 0.0;
-                        
-                        self.coverImage.image = tmpImage;
-                        
-                        [UIView animateWithDuration:1.5f animations:^{
-                            self.coverImage.alpha=1.0f;
-                        }];
-                        
-                        
-                    });
-                }
-                
-            });
-            
-        }
-        
+
+    NSString *thumbnailUrlString;
+    if (IS_IPAD)
+    {
+        thumbnailUrlString = [thumbnailURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"                                                                                               withString: @"ipad"];
     }
     else
     {
-        
-        //Default cover photo only displayed in your own profile
-        //Other user cover photo are blank if nothing is uploaded
-        if (self.modeType == kModeMyOwnProfile) {
-            if (self.coverImage.image != placeholderImage) {
-                self.coverImage.image = placeholderImage;
-                self.coverImage.alpha = 0.0;
-                
-                
-                
-                [UIView animateWithDuration:1.5f animations:^{
-                    self.coverImage.alpha=1.0f;
-                }];
-            }
-        }
+        thumbnailUrlString = [thumbnailURL stringByReplacingOccurrencesOfString: @"thumbnail_medium"                                                                                               withString: @"thumbnail_medium"];
     }
     
+    __weak SYNProfileRootViewController *weakSelf = self;
+
+    [self.coverImage setImageWithURL:[NSURL URLWithString: thumbnailUrlString]
+                    placeholderImage:[UIImage imageNamed: @"placeholderwhite"]
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                               if (image && cacheType == SDImageCacheTypeNone)
+                               {
+                                   weakSelf.coverImage.alpha = 0.0;
+                                   [UIView animateWithDuration:1.0 animations:^{
+                                       weakSelf.coverImage.alpha = 1.0;
+                                   }];
+                               }
+                           }];
 }
 
 - (void) userDataChanged: (NSNotification*) notification
@@ -1352,9 +1287,7 @@
         
         if (self.modeType == kModeOtherUsersProfile) {
             self.followAllButton.hidden = YES;
-            
         }
-        
     }
 }
 
@@ -2917,7 +2850,7 @@ finishedWithImage: (UIImage *) image
                             float time = 0.4;
                             
                             if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
-                                time= 6.2f;
+                                time= 6.8f;
                             }
                             if (IS_IPHONE) {
                                 [wself performSelector:@selector(showInboardingAnimationAfterCreate) withObject:self afterDelay:1.4f];
