@@ -95,19 +95,22 @@ static const CGFloat ScrollAnimationDuration = 1.0;
         
     // 230 == height of the cell
     
-    self.endPoint = CGPointMake(0, (self.exampleUsers.count * 230));
+    self.endPoint = CGPointMake(0, (self.exampleUsers.count * 230)-230);
     
     //Start off screen
     self.scrollingPoint = CGPointMake(0, -600);
     
     //Unhide the colleciton view now that the animation the reloading is done, and the first cell will be off screen.
-    self.collectionView.hidden = NO;
 
     self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
 }
 
 - (void)scrollSlowlyToPoint {
     self.collectionView.bounds = CGRectMake(self.scrollingPoint.x, self.scrollingPoint.y, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
+
+    if (self.collectionView.hidden) {
+        self.collectionView.hidden = NO;
+    }
     if (self.scrollingPoint.y> self.endPoint.y) {
         
         [self.scrollingTimer invalidate];
