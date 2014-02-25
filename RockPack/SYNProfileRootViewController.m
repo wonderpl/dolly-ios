@@ -2265,13 +2265,13 @@
                                              [self cancelCreateChannel];
                                              //takes 0.6f for the cancel animation to end
                                              
-                                             if (IS_IPHONE) {
-                                                 [self performSelector:@selector(createNewCollection) withObject:nil afterDelay:0.6f];
-                                                 
-                                             } else {
-                                                 [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
-                                             }
-
+                                             //                                             if (IS_IPHONE) {
+                                             [self performSelector:@selector(createNewCollection) withObject:nil afterDelay:0.6f];
+                                             
+                                             //                                             } else {
+                                             //                                                 [self performSelector:@selector(updateChannelOwner) withObject:self afterDelay:0.6f];
+                                             //                                             }
+                                             
                                              
                                              if (IS_IPAD) {
                                                  [self performSelector:@selector(showInboardingAnimationAfterCreate) withObject:nil afterDelay:1.5f];
@@ -2341,17 +2341,22 @@
                                                [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                            ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                if (self.channelOwner.channelsSet.count+1 > oldCount) {
-                                            
+                                                   
+                                                   
+                                                   if (IS_IPAD) {
+                                                       self.channelThumbnailCollectionView.contentSize = CGSizeMake(self.channelThumbnailCollectionView.contentSize.width, self.channelThumbnailCollectionView.contentSize.height*2);
+                                                   }
+                                                   
+                                                   
+                                                   
                                                    [self.channelThumbnailCollectionView performBatchUpdates:^{
-
-                                                   [self.channelThumbnailCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:2 inSection:0]]];
+                                                       
+                                                       [self.channelThumbnailCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:2 inSection:0]]];
                                                    } completion:^(BOOL finished) {
                                                        CGPoint tmp = self.channelThumbnailCollectionView.contentOffset;
                                                        tmp.y+=1;
                                                        [self.channelThumbnailCollectionView setContentOffset:tmp animated:YES];
-                                                       
-                                                
-                                                       
+                                                       [self.channelThumbnailCollectionView sizeToFit];
                                                        
                                                    }];
                                                    
