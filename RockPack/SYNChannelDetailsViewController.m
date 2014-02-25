@@ -119,7 +119,7 @@
 {
     [super viewDidLoad];
     
-    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
+//    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
     
     if (IS_IPAD)
     {
