@@ -262,10 +262,9 @@
                 return;
              }
             // ensure that the view is at the top of the screen
+            if (IS_IPAD) {
                 [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0,-self.offsetValue) animated:YES];
-            
-
-            self.videoThumbnailCollectionView.contentOffset = CGPointMake(0, self.offsetValue);
+            }
             
             SYNCollectectionDetailsOverlayViewController* channeldetailsOverlay = [[SYNCollectectionDetailsOverlayViewController alloc] init];
             
