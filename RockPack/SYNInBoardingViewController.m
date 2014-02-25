@@ -35,7 +35,7 @@
 
 - (void)screenTapped:(UITapGestureRecognizer*)tapGesture {
     
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.6f animations:^{
         self.view.alpha = 0.0f;
     } completion:^(BOOL finished) {
         [self removeFromParentViewController];

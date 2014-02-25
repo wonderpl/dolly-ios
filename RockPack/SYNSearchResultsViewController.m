@@ -838,7 +838,10 @@ referenceSizeForFooterInSection: (NSInteger) section
 -(void) showUserOverLay {
     
 
-    
+    double delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
         if (self.usersArray.count>=1) {
             
             float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverUserFirstTime];
@@ -860,7 +863,7 @@ referenceSizeForFooterInSection: (NSInteger) section
             [appDelegate.masterViewController addChildViewController:overlay];
             [appDelegate.masterViewController.view addSubview:overlay.view];
             
-            [UIView animateWithDuration:0.7 animations:^{
+            [UIView animateWithDuration:1.6 animations:^{
                 overlay.view.alpha = 1.0f;
             }];
                 
@@ -875,9 +878,17 @@ referenceSizeForFooterInSection: (NSInteger) section
 
         }
         
+    });
+    
 }
 
 - (void) showVideoOverlay {
+    
+    
+            double delayInSeconds = 0.4;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
     
     if (self.videosArray.count>=1) {
         
@@ -897,6 +908,8 @@ referenceSizeForFooterInSection: (NSInteger) section
 //                                                                    object: self
 //                                                                  userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
             }
+            
+            
             
             SYNDiscoverOverlayVideoViewController* overlay = [[SYNDiscoverOverlayVideoViewController alloc] init];
             
@@ -923,7 +936,10 @@ referenceSizeForFooterInSection: (NSInteger) section
         
 
     }
-        
+            
+        });
+
+    
     
 
 }
