@@ -631,9 +631,9 @@
 {
     
     
-    if (self.coverImage.image) {
-        return;
-    }
+//    if (self.coverImage.image) {
+//        return;
+//    }
     UIImage* placeholderImage = [UIImage imageNamed: @"DefaultCoverPhoto.jpg"];
     
     if (![thumbnailURL isEqualToString:@""]){ // there is a url string
