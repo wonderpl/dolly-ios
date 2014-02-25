@@ -471,7 +471,7 @@
             }
             else
             {
-                tmpRect.origin.x -= 250;
+                tmpRect.origin.x -= 230;
             }
             self.containerView.frame = tmpRect;
 
