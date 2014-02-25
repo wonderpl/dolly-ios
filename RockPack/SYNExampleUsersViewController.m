@@ -37,7 +37,11 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 	[super viewDidLoad];
 	
     [self performSelector:@selector(getUsersAndAnimate) withObject:self afterDelay:2.5f];
-
+    
+    //As when reloading the data there is a flash
+    //So we hide it until the animation starts
+    
+    self.collectionView.hidden = YES;
 }
 
 - (void) getUsersAndAnimate {
@@ -95,6 +99,10 @@ static const CGFloat ScrollAnimationDuration = 1.0;
     
     //Start off screen
     self.scrollingPoint = CGPointMake(0, -600);
+    
+    //Unhide the colleciton view now that the animation the reloading is done, and the first cell will be off screen.
+    self.collectionView.hidden = NO;
+
     self.scrollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(scrollSlowlyToPoint) userInfo:nil repeats:YES];
 }
 
