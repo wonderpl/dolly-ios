@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNCollectectionDetailsOverlayViewController">
             <connections>
+                <outlet property="textLabel" destination="39N-tQ-K4t" id="Srr-eq-oaZ"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

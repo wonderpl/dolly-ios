@@ -7,9 +7,11 @@
 //
 
 #import "SYNCollectectionDetailsOverlayViewController.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNCollectectionDetailsOverlayViewController ()
 @property (strong, nonatomic) IBOutlet UIView *container;
+@property (strong, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -27,7 +29,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    if (IS_IPHONE) {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:15.0f];
+    } else {
+        self.textLabel.font = [UIFont lightCustomFontOfSize:23.0f];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
