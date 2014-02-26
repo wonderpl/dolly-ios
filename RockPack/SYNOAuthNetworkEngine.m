@@ -19,6 +19,7 @@
 #import "VideoInstance.h"
 #import "SYNTrackingManager.h"
 #import "UIImage+Resize.h"
+#import "SYNLoginManager.h"
 
 @interface SYNOAuthNetworkEngine ()
 
@@ -133,6 +134,7 @@
              // if the user loggin in with an external account is not yet registered, a record is created on the fly and 'registered' is sent back
              
              BOOL hasJustBeenRegistered = responseDictionary[@"registered"] ? YES : NO;
+             [SYNLoginManager sharedManager].registrationCheck = [((NSNumber*)responseDictionary[@"registered"]) boolValue];
              if(hasJustBeenRegistered)
              {
 				 [[SYNTrackingManager sharedManager] trackUserRegistrationFromOrigin:origin];
