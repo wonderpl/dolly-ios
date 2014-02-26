@@ -1784,6 +1784,7 @@
         NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
         NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
         
+        __weak SYNProfileRootViewController *weakSelf = self;
         
         [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                            onCompletion: ^(id dictionary) {
@@ -1796,8 +1797,8 @@
                                                    [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
-                                                   [self setUpUserProfile];
-                                                   [self reloadCollectionViews];
+                                                   [weakSelf setUpUserProfile];
+                                                   [weakSelf reloadCollectionViews];
                                                }
                                                else
                                                {
