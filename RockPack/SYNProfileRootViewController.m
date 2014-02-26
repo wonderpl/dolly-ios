@@ -1252,6 +1252,7 @@
                                                            [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                        ignoringObjectTypes: kIgnoreNothing];
                                                            
+                                                           
                                                            [self setUpUserProfile];
                                                            [self reloadCollectionViews];
                                                        }
@@ -1273,7 +1274,6 @@
         [self.collectionsTabButton setBackgroundColor: [UIColor whiteColor]];
         
         
-        
         __weak typeof(self) weakSelf = self;
         
         MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
@@ -1291,6 +1291,8 @@
             }
             [weakSelf.subscriptionThumbnailCollectionView reloadData];
             [weakSelf.channelOwner.managedObjectContext save: &error];
+            [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Following", nil), dictionary[@"channels"][@"total"]]forState:UIControlStateNormal];
+            
         };
         
         // define success block //

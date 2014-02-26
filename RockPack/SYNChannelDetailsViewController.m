@@ -463,7 +463,6 @@
     [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
     
     
-    NSLog(@"channelOwner.thumbnailLargeUrl  : %@", self.channel.channelOwner.thumbnailLargeUrl);
     [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
                            forState: UIControlStateNormal
                    placeholderImage: placeholderImage
@@ -1584,6 +1583,8 @@
 {
     // return to previous screen as if the back button tapped
     
+    
+    __weak SYNChannelDetailsViewController *weakSelf = self;
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: self.channel.uniqueId
                                          completionHandler: ^(id response) {
@@ -1595,7 +1596,8 @@
                                              // bring back controls
                                              
                                              [appDelegate saveContext: YES];
-                                             
+                                             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+
                                              
                                          } errorHandler: ^(id error) {
                                              
@@ -1604,7 +1606,6 @@
                                          }];
     
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
 
