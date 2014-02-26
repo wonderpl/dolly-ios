@@ -254,8 +254,7 @@
 
 - (IBAction)linkButtonPressed:(UIButton *)button {
     
-    SYNAbstractViewController* currentVC = appDelegate.masterViewController.showingViewController;
-	[[SYNTrackingManager sharedManager] trackClickToMoreFromScreenName:[currentVC trackingScreenName]];
+	[[SYNTrackingManager sharedManager] trackClickToMoreFromLinkTitle:self.videoInstance.video.linkTitle];
     
     [self.currentVideoPlayer pause];
 	

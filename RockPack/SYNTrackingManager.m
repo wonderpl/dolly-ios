@@ -76,8 +76,8 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 #pragma mark - Public
 
-- (void)trackClickToMoreFromScreenName:(NSString *)screenName {
-	[self trackEventWithCategory:UIActionCategory action:@"videoClickToMoreClick" label:screenName value:nil];
+- (void)trackClickToMoreFromLinkTitle:(NSString *)linkTitle {
+	[self trackEventWithCategory:UIActionCategory action:@"videoClickToMoreClick" label:linkTitle value:nil];
 }
 
 - (void)trackVideoAddFromScreenName:(NSString *)screenName {
