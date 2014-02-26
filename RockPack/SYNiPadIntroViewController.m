@@ -133,15 +133,29 @@
 	[[SYNLoginManager sharedManager] loginThroughFacebookWithCompletionHandler:^(NSDictionary *dictionary) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted
 															object:self];
-	} errorHandler:^(NSString *error) {
+        
+        
+	} errorHandler:^(id error) {
 		[weakSelf enableLoginButtons];
 		
+        NSLog(@"error :error :%@", error);
+        if ([error isKindOfClass:[NSString class]]) {
 		[[[UIAlertView alloc] initWithTitle: NSLocalizedString(@"facebook_login_error_title", nil)
 									message: error
 								   delegate: nil
 						  cancelButtonTitle: NSLocalizedString(@"OK", nil)
 						  otherButtonTitles: nil] show];
-		
+
+        }  else if ([error isKindOfClass:[NSDictionary class]]) {
+        
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"facebook_login_error_title", nil)
+                                        message:error[@"error"]
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                              otherButtonTitles:nil] show];
+            
+            
+        }
 		DebugLog(@"Log in failed!");
 	}];
 }
