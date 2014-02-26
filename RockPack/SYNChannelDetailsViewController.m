@@ -131,21 +131,9 @@
         self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
     }
     
-    // == Avatar Image == //
-    
-    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
     
     
-    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
-    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
     
-    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
-                           forState: UIControlStateNormal
-                   placeholderImage: placeholderImage
-                            options: SDWebImageRetryFailed];
-    
-    self.btnAvatar.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
-    self.btnAvatar.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
     
     if (IS_IPHONE)
     {
@@ -467,6 +455,23 @@
 -(void) displayChannelDetails
 {
     
+    // == Avatar Image == //
+
+    UIImage* placeholderImage = [UIImage imageNamed: @"PlaceholderAvatarProfile"];
+
+    [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
+    [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
+    
+    
+    NSLog(@"channelOwner.thumbnailLargeUrl  : %@", self.channel.channelOwner.thumbnailLargeUrl);
+    [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
+                           forState: UIControlStateNormal
+                   placeholderImage: placeholderImage
+                            options: SDWebImageRetryFailed];
+    
+    self.btnAvatar.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.btnAvatar.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+
     self.txtFieldChannelName.text = self.channel.title;
 
     self.lblFullName.text = self.channel.channelOwner.displayName;
