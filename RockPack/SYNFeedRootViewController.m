@@ -182,7 +182,7 @@ typedef void(^FeedDataErrorBlock)(void);
 	Channel *channel = [self.model channelForFeedItem:feedItem];
 	[cell.userThumbnailButton setImageWithURL:[NSURL URLWithString:channel.channelOwner.thumbnailURL]
 									 forState:UIControlStateNormal
-							 placeholderImage:[UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+							 placeholderImage:[UIImage imageNamed: @"PlaceholderAvatarProfile"]
 									  options:SDWebImageRetryFailed];
 	
 	return cell;
