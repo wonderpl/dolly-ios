@@ -119,7 +119,7 @@ static NSDateFormatter *dateFormatter = nil;
     
     NSDictionary* commentsDictionary = [dictionary objectForKey:@"comments"];
         self.commentCount = [commentsDictionary objectForKey: @"total"
-                                                 withDefault: @(-1)];
+                                                 withDefault: @(0)];
     
     
     NSArray *filteredVideos;
