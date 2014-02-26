@@ -114,8 +114,17 @@
         contactAsFriend.markedForDeletionValue = NO;
         contactAsFriend.localOriginValue = YES;
         
-        firstName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
-        lastName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
+        firstName = @"";
+        if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty)) {
+            firstName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
+        }
+        
+        lastName=@"";
+        if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty)) {
+            lastName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
+
+        }
+        
         contactAsFriend.displayName = [NSString stringWithFormat: @"%@ %@", firstName, lastName];
         
         imageData = (__bridge_transfer NSData *) ABPersonCopyImageData(currentPerson);
