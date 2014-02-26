@@ -254,7 +254,7 @@
 
 - (IBAction)linkButtonPressed:(UIButton *)button {
     
-	[[SYNTrackingManager sharedManager] trackClickToMoreFromLinkTitle:self.videoInstance.video.linkTitle];
+	[[SYNTrackingManager sharedManager] trackClickToMoreFromLinkTitle:[NSString stringWithFormat:@"%@", self.videoInstance.video.linkTitle]];
     
     [self.currentVideoPlayer pause];
 	
