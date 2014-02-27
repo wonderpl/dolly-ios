@@ -485,10 +485,14 @@ typedef void (^SearchResultCompleteBlock)(int);
         if (IS_IPAD) {
             if (indexPath.row>2) {
                 userCell.descriptionLabel.hidden = YES;
+            } else {
+                userCell.descriptionLabel.hidden = NO;
             }
         } else {
             if (indexPath.row>1) {
                 userCell.descriptionLabel.hidden = YES;
+            } else {
+                userCell.descriptionLabel.hidden = NO;
             }
         }
         // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
