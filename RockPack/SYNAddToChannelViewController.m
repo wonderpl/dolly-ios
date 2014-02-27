@@ -229,7 +229,7 @@
                     
                     self.selectedChannel = nil;
                     self.confirmButton.hidden = NO;
-                    [self.confirmButton setTitle:@"Create" forState:UIControlStateNormal];
+                    [self.confirmButton setTitle:@"create" forState:UIControlStateNormal];
                     
                 }
                 
@@ -398,7 +398,7 @@
         
         
         self.confirmButton.hidden = NO;
-        [self.confirmButton setTitle:@"Add" forState:UIControlStateNormal];
+        [self.confirmButton setTitle:@"add" forState:UIControlStateNormal];
     }
     else // passed nil probably by pressing on the "create new channel" cell
     {
