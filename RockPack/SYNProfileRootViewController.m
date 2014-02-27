@@ -378,7 +378,7 @@
     // == updates the segmented controllers functionality
     if (IS_IPHONE)
     {
-        [self updateTabStates];
+        [self updateTabStatesWithServerCalls:NO];
     }
     
     
@@ -391,7 +391,7 @@
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     
-    [self updateTabStates];
+    [self updateTabStatesWithServerCalls:NO];
     [self setNeedsStatusBarAppearanceUpdate];
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
@@ -1135,7 +1135,7 @@
         }
     }
     
-    [self updateTabStates];
+    [self updateTabStatesWithServerCalls:YES];
     
 }
 - (IBAction)followingsTabTapped:(id)sender {
@@ -1168,11 +1168,11 @@
         }
     }
     
-    [self updateTabStates];
+    [self updateTabStatesWithServerCalls:YES];
     
 }
 
-- (void) updateTabStates
+- (void) updateTabStatesWithServerCalls:(BOOL) calls
 {
     
     [self killScroll];
@@ -1210,23 +1210,26 @@
         NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
         NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
 
-                [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
-                                                   onCompletion: ^(id dictionary) {
-                                                       NSError *error = nil;
-                                                       ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId error: &error];
+        if (calls) {
+            [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                               onCompletion: ^(id dictionary) {
+                                                   NSError *error = nil;
+                                                   ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId error: &error];
+                                                   
+                                                   if (channelOwnerFromId)
+                                                   {
+                                                       [channelOwnerFromId setAttributesFromDictionary: dictionary
+                                                                                   ignoringObjectTypes: kIgnoreNothing];
                                                        
-                                                       if (channelOwnerFromId)
-                                                       {
-                                                           [channelOwnerFromId setAttributesFromDictionary: dictionary
-                                                                                       ignoringObjectTypes: kIgnoreNothing];
-                                                           
-                                                           
-                                                           [self setUpUserProfile];
-                                                           [self reloadCollectionViews];
-                                                       }
+                                                       
+                                                       [self setUpUserProfile];
+                                                       [self reloadCollectionViews];
+                                                   }
+                                                   
+                                                   
+                                               } onError: nil];
 
-        
-                                                   } onError: nil];
+        }
         
     }
     else
@@ -1272,10 +1275,14 @@
         
         NSRange range = NSMakeRange(0, 100);
         
-        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: weakSelf.channelOwner.uniqueId
-                                                       inRange: range
-                                             completionHandler: successBlock
-                                                  errorHandler: errorBlock];
+        if (calls) {
+            
+            [appDelegate.oAuthNetworkEngine subscriptionsForUserId: weakSelf.channelOwner.uniqueId
+                                                           inRange: range
+                                                 completionHandler: successBlock
+                                                      errorHandler: errorBlock];
+            
+        }
         
         if (self.modeType == kModeOtherUsersProfile) {
             self.followAllButton.hidden = YES;
