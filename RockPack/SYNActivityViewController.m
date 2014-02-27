@@ -281,7 +281,8 @@
         case kNotificationObjectTypeUserLikedYourVideo:
         {
             
-            Channel *channel = [self channelFromChannelId: notification.channelId];
+            Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
+                                     usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
             
             if (!channel)
             {
@@ -302,7 +303,8 @@
             
         case kNotificationObjectTypeUserSubscibedToYourChannel:
         {
-            Channel *channel = [self channelFromChannelId: notification.channelId];
+            Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
+                                     usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
             
             if (!channel)
             {
@@ -329,10 +331,12 @@
             
         case kNotificationObjectTypeCommentMention:
         {
-            Channel *channel = [self channelFromChannelId: notification.channelId];
+            Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
+                                     usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
+            
+            
             if (!channel)
             {
-                
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Video Unavailable", nil)
                                             message:NSLocalizedString(@"The Video for which this notification has been issued might have been deleted", nil)
                                            delegate:nil
@@ -456,6 +460,8 @@
     
     channelFetchRequest.predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", channelId];
 
+    
+    
     NSArray *matchingChannelEntries = [appDelegate.mainManagedObjectContext executeFetchRequest: channelFetchRequest
                                                                                           error: &error];
     
