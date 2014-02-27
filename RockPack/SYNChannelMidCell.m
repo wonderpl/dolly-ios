@@ -81,10 +81,14 @@
     if (IS_IPHONE)
     {
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:14]];
+        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:10]];
+        [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:10]];
     }
     else
     {
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:14]];
+        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
     
     if (IS_IPAD){
