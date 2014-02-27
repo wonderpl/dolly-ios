@@ -86,6 +86,11 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     self.usersByCategory = [[NSMutableArray alloc]init];
     self.categories = [[NSMutableArray alloc]init];
     
+    // =================== //
+    
+    
+    self.data = @[]; // so as not to throw error when accessed
+
     // === Fetch Genres === //
     
     
@@ -130,17 +135,15 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
             }
             
         }
+        
+        [self getRecommendationsFromRemote];
+
 
     }];
 
     
     
-    // =================== //
     
-    
-    self.data = @[]; // so as not to throw error when accessed
-    
-    [self getRecommendationsFromRemote];
     if (IS_IPAD) {
         [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     }
