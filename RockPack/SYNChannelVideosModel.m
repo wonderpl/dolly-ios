@@ -14,6 +14,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "VideoInstance.h"
 
 @interface SYNChannelVideosModel ()
 
@@ -59,11 +60,11 @@
 		__strong typeof(self) sself = wself;
 		
 		self.isSavingNextPage = YES;
-		
+        
 		[sself.channel addVideoInstancesFromDictionary:response];
 		[sself.channel.managedObjectContext save:nil];
 		
-		sself.loadedItems = [self.channel.videoInstances array];
+		sself.loadedItems = [self.channel.videoInstancesSet array];
 		sself.totalItemCount = sself.channel.totalVideosValueValue;
 		
 		[sself handleDataUpdatedForRange:range];

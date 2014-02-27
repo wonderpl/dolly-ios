@@ -393,6 +393,7 @@
 
 - (void) addVideoInstancesFromDictionary: (NSDictionary *) videosInstancesDictionary
 {
+    
     BOOL hasVideoInstances = YES;
     
     NSDictionary *videosDictionary = videosInstancesDictionary[@"videos"];
@@ -414,25 +415,38 @@
         return;
     }
     
-    NSFetchRequest *videoFetchRequest = [[NSFetchRequest alloc] init];
-    
-    [videoFetchRequest setEntity: [NSEntityDescription entityForName: @"Video"
-                                              inManagedObjectContext: self.managedObjectContext]];
-    
+//    NSFetchRequest *videoFetchRequest = [[NSFetchRequest alloc] init];
+//    
+//    [videoFetchRequest setEntity: [NSEntityDescription entityForName: @"Video"
+//                                              inManagedObjectContext: self.managedObjectContext]];
+//    
     NSArray *existingVideos = nil;
-	NSArray *videoIds = [itemArray valueForKeyPath:@"video.id"];
+//	NSArray *videoIds = [itemArray valueForKeyPath:@"video.id"];
+//    
+//    
+//    
+//    if ([videoIds count] > 0) {
+//        NSPredicate *videoPredicate = [NSPredicate predicateWithFormat: @"uniqueId IN %@", videoIds];
+//        
+//        videoFetchRequest.predicate = videoPredicate;
+//        
+//        existingVideos = [self.managedObjectContext executeFetchRequest: videoFetchRequest
+//                                                                  error: nil];
+//    }
+//	
     
-    if ([videoIds count] > 0) {
-        NSPredicate *videoPredicate = [NSPredicate predicateWithFormat: @"uniqueId IN %@", videoIds];
+    NSMutableDictionary *videoIdDictionary = [[NSMutableDictionary alloc] init];
+    
+    for (int i = 0; i<self.videoInstancesSet.count; i++) {
+        VideoInstance *tmpInstance = [self.videoInstancesSet objectAtIndex:i];
         
-        videoFetchRequest.predicate = videoPredicate;
+        [videoIdDictionary setValue:tmpInstance forKey:tmpInstance.uniqueId];
         
-        existingVideos = [self.managedObjectContext executeFetchRequest: videoFetchRequest
-                                                                  error: nil];
     }
-	
+    
     for (NSDictionary *channelDictionary in itemArray)
     {
+        
         VideoInstance *videoInstance = [VideoInstance instanceFromDictionary: channelDictionary
 												   usingManagedObjectContext: self.managedObjectContext
 														 ignoringObjectTypes: kIgnoreChannelObjects
@@ -445,8 +459,18 @@
         
         videoInstance.viewId = self.viewId;
 		
+        for (int i = 0; i<self.videoInstancesSet.count; i++) {
+            VideoInstance *tmpInstance = [self.videoInstancesSet objectAtIndex:i];
+            
+            if ([tmpInstance.uniqueId isEqualToString:videoInstance.uniqueId]) {
+                [self.videoInstancesSet removeObject:tmpInstance];
+            }
+        }
+        
         [self.videoInstancesSet addObject: videoInstance];
     }
+
+
 }
 
 
