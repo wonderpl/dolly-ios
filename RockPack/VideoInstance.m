@@ -29,7 +29,7 @@ static NSDateFormatter *dateFormatter = nil;
     instance.commentCount = existingInstance.commentCount;
     instance.commentCountValue = existingInstance.commentCountValue;
     instance.starredByUserValue = existingInstance.starredByUserValue;
-    
+    instance.starredByUser = existingInstance.starredByUser;
     instance.video = [Video	instanceFromVideo: existingInstance.video
                     usingManagedObjectContext: managedObjectContext];
     
@@ -141,6 +141,8 @@ static NSDateFormatter *dateFormatter = nil;
                          usingManagedObjectContext: managedObjectContext
                                ignoringObjectTypes: ignoringObjects];
     }
+    
+
     
     if (!(ignoringObjects & kIgnoreChannelObjects))
     {
