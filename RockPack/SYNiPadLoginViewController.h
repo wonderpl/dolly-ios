@@ -17,5 +17,6 @@
 @property (nonatomic, strong, readonly) SYNTextFieldLogin *passwordTextField;
 @property (nonatomic, strong, readonly) UIButton *loginButton;
 @property (nonatomic, strong, readonly) UIButton *forgotPasswordButton;
+@property (strong, nonatomic) IBOutlet UILabel *CreateAnAccountLabel;
 
 @end

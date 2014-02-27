@@ -34,6 +34,12 @@
 	[super viewDidLoad];
 	
 	self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.loginButton.titleLabel.font.pointSize];
+    
+    [self.CreateAnAccountLabel setFont:[UIFont regularCustomFontOfSize:19]];
+    
+    [self.forgotPasswordButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

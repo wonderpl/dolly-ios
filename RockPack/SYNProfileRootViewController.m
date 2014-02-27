@@ -543,8 +543,12 @@
     self.fullNameLabel.text = self.channelOwner.displayName;
     
     [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
-    [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
     
+    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
+    
+    [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
+    [self.followingTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
+
     
 }
 

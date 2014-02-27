@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *accountLabel;
 @property (nonatomic, strong) IBOutlet UILabel *termsLabel;
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UILabel *haveAnAccountLabel;
 
 @end
 
@@ -29,7 +30,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	
+	[self.haveAnAccountLabel setFont:[UIFont regularCustomFontOfSize:19]];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

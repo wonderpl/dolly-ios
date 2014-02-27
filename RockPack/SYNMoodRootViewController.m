@@ -86,12 +86,15 @@
     self.watchButton.layer.cornerRadius = 15.5f;
     self.watchButton.layer.masksToBounds = YES;
     
+    [self.watchButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
+    
     self.watchButton.layer.borderWidth = 1.5f;
     self.watchButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
     self.chooseAnotherButton.layer.cornerRadius = 17.0f;
     self.chooseAnotherButton.layer.masksToBounds = YES;
     
+    [self.chooseAnotherButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
     self.chooseAnotherButton.layer.borderWidth = 1.5f;
     self.chooseAnotherButton.layer.borderColor = [[UIColor dollyMoodColor] CGColor];
     
