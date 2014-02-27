@@ -129,7 +129,6 @@
     } else {
         [self addChildViewController:self.containerViewController];
         self.containerViewController.view = self.containerView;
-        [SYNLoginManager sharedManager].registrationCheck = NO;
     }
     // load basic data like the Genres
    

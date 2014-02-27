@@ -195,18 +195,43 @@
 
 - (void) setRegistrationCheck:(BOOL)registrationCheck
 {
-    if (registrationCheck) {
-        
     
+    
+    if (registrationCheck == YES) {
+        // == show on value == 2
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverVideoFirstTime];
+        
+        // == show on value == 1
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsMoodFirstTime];
+        
+        // == show on value < 2
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsCollectionDetailsFirstTime];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
+        
+        // == other user animation < = 2
+        // == inboarding description
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsOtherPersonsProfile];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsMoodFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsYourProfileFirstTime];
+    } else {
+        // == show on value == 2
+        [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: kUserDefaultsDiscoverVideoFirstTime];
+        
+        // == show on value == 1
+        [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsDiscoverUserFirstTime];
+        
+        // == show on value < 2
+        [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsCollectionDetailsFirstTime];
+        
+        // == other user animation < = 2
+        // == inboarding description
+        [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: kUserDefaultsOtherPersonsProfile];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsMoodFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsCreateChannelFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsYourProfileFirstTime];
 
-    
     }
     
     _registrationCheck = registrationCheck;
