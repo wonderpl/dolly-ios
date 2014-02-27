@@ -628,8 +628,20 @@ referenceSizeForFooterInSection: (NSInteger) section
                                                                     forIndexPath:indexPath];
         supplementaryView = self.footerView;
         
-        
-        self.footerView.showsLoading = self.isLoadingMoreContent;
+        // only show footer spinner after first load
+        int count = 0;
+        if (collectionView == self.videosCollectionView)
+        {
+            count = self.videosArray.count;
+        }
+        else if (collectionView == self.usersCollectionView)
+        {
+            count = self.usersArray.count;
+        }
+
+        if (count>0) {
+            self.footerView.showsLoading = self.isLoadingMoreContent;
+        }
         
     }
     

@@ -43,7 +43,6 @@ typedef void(^FeedDataErrorBlock)(void);
 @property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
 
 @property (nonatomic, strong) SYNFeedModel *model;
-
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 @end
@@ -108,7 +107,6 @@ typedef void(^FeedDataErrorBlock)(void);
     [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
-
 
 }
 
@@ -199,7 +197,10 @@ typedef void(^FeedDataErrorBlock)(void);
         supplementaryView = self.footerView;
 		
 		if ([self.model hasMoreItems]) {
-			self.footerView.showsLoading = YES;
+            //hide footer on first load, need more obvious solution
+            if ([self.model itemCount]>1) {
+                self.footerView.showsLoading = YES;
+            }
 			
 			[self.model loadNextPage];
 		}
