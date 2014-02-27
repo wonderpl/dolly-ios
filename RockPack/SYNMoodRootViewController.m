@@ -542,6 +542,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     
     __weak typeof(self) weakSelf = self;
     
+    self.videoCollectionView.hidden = YES;
+    
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId: appDelegate.currentUser.uniqueId
                                                   andEntityName: kVideoInstance
                                                          params: @{@"mood":self.currentMood.uniqueId}
@@ -626,6 +628,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                   } else {
                                                       weakSelf.videosArray = nil;
                                                       [weakSelf.videoCollectionView reloadData];
+                                                      weakSelf.videoCollectionView.hidden = NO;
                                                   }
                                                   
                                                   weakSelf.chooseAnotherButton.userInteractionEnabled = YES;
