@@ -59,12 +59,12 @@
 	MKNKUserSuccessBlock successBlock = ^(NSDictionary *response) {
 		__strong typeof(self) sself = wself;
 		
-		self.isSavingNextPage = YES;
+		wself.isSavingNextPage = YES;
         
 		[sself.channel addVideoInstancesFromDictionary:response];
 		[sself.channel.managedObjectContext save:nil];
 		
-		sself.loadedItems = [self.channel.videoInstancesSet array];
+		sself.loadedItems = [sself.channel.videoInstancesSet array];
 		sself.totalItemCount = sself.channel.totalVideosValueValue;
 		
 		[sself handleDataUpdatedForRange:range];
