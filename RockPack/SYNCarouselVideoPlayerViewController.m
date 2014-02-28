@@ -138,9 +138,8 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 	_selectedIndex = selectedIndex;
 	
-    if (![self.model itemAtIndex:selectedIndex]) {
-        return;
-    }
+	self.videoInstance = [self.model itemAtIndex:selectedIndex];
+	
 	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
 	[self.thumbnailCollectionView selectItemAtIndexPath:selectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
@@ -158,18 +157,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     SYNVideoThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoThumbnailCell reuseIdentifier]
-												
-                                                                            forIndexPath:indexPath];
+																			forIndexPath:indexPath];
     
-    VideoInstance *videoInstance = nil;
-    if ([self.model itemAtIndex:indexPath.item]) {
-        videoInstance = [self.model itemAtIndex:indexPath.item];
-    }
+	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
-    if (videoInstance) {
-        cell.titleLabel.text = videoInstance.title;
-        [cell setImageWithURL:videoInstance.video.thumbnailURL];
-    }
+    cell.titleLabel.text = videoInstance.title;
+	[cell setImageWithURL:videoInstance.video.thumbnailURL];
     
     return cell;
 }

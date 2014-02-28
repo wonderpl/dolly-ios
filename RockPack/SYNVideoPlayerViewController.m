@@ -135,10 +135,10 @@
 
 	_videoInstance = videoInstance;
     
-	if ([self isViewLoaded] && _videoInstance) {
+	if ([self isViewLoaded]) {
 
-        [self updateVideoInstanceDetails:videoInstance];
-        [self playCurrentVideo];
+		[self updateVideoInstanceDetails:videoInstance];
+		[self playCurrentVideo];
 	}
 }
 
@@ -286,21 +286,17 @@
 #pragma mark - Private
 
 - (void)playCurrentVideo {
-   
-    SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:self.videoInstance];
-	videoPlayer.delegate = self;
-	videoPlayer.frame = self.videoPlayerContainerView.bounds;
-    if (self.currentVideoPlayer) {
+	if (self.currentVideoPlayer) {
 		[self.currentVideoPlayer pause];
 		[self.currentVideoPlayer removeFromSuperview];
 		self.currentVideoPlayer.delegate = nil;
 		self.currentVideoPlayer = nil;
 	}
 	
-    if (![self isViewLoaded]) {
-        return;
-    }
-    	
+	SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:self.videoInstance];
+	videoPlayer.delegate = self;
+	videoPlayer.frame = self.videoPlayerContainerView.bounds;
+	
 	self.currentVideoPlayer = videoPlayer;
 	if ([self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]]) {
 		videoPlayer.maximised = YES;
@@ -309,7 +305,6 @@
 	} else {
 		[self.videoPlayerContainerView addSubview:videoPlayer];
 	}
-
 	
 	[videoPlayer play];
 }
