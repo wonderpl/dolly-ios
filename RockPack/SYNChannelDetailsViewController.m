@@ -529,6 +529,18 @@
 #pragma mark - Control Actions
 
 - (void) followControlPressed: (SYNSocialButton *) socialControl {
+
+    if (self.btnFollowChannel.isSelected) {
+        
+        if (self.channel.subscribersCountValue>=1) {
+            self.channel.subscribersCountValue--;
+        }
+        [self updateButtonCounts];
+    } else {
+        self.channel.subscribersCountValue++;
+        [self updateButtonCounts];
+    }
+    
 	[self followButtonPressed:socialControl withChannel:self.channel];
 }
 
