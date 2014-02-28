@@ -132,11 +132,14 @@
     if (self.videoInstance) {
         [self trackViewingStatisticsForCurrentVideo];
     }
+    
+    if (!videoInstance) {
+        return;
+    }
 
 	_videoInstance = videoInstance;
     
 	if ([self isViewLoaded]) {
-
 		[self updateVideoInstanceDetails:videoInstance];
 		[self playCurrentVideo];
 	}
