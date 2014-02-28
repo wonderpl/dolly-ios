@@ -486,23 +486,7 @@
         self.txtViewDescription.text = NSLocalizedString(@"description_placeholder", @"placeholder for editing");
     }
     
-    if (self.channel.subscribersCountValue == 1) {
-        [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Follower", @"followers count in channeldetail")] forState:UIControlStateNormal ];
-
-    }
-    else
-    {
-        [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
-    }
-    
-
-    if (self.channel.totalVideosValueValue == 1) {
-        [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Video", nil)] forState:UIControlStateNormal ];
-    }
-    else
-    {
-        [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
-    }
+    [self updateButtonCounts];
     
     self.dataItemsAvailable = self.channel.totalVideosValueValue;
     [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
@@ -544,6 +528,30 @@
 	[self followButtonPressed:socialControl withChannel:self.channel];
 }
 
+
+-(void) updateButtonCounts {
+    
+    
+    if (self.channel.subscribersCountValue == 1) {
+        [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Follower", @"followers count in channeldetail")] forState:UIControlStateNormal ];
+        
+    }
+    else
+    {
+        [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
+    }
+    
+    
+    if (self.channel.totalVideosValueValue == 1) {
+        [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Video", nil)] forState:UIControlStateNormal ];
+    }
+    else
+    {
+        [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
+    }
+    
+    
+}
 - (void) addSubscribeActivityIndicator
 {
     //    self.subscribingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
