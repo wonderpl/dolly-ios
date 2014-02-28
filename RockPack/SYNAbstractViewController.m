@@ -328,7 +328,11 @@
 
 -(void)commentUpdated{
     int tmpNumber = ((VideoInstance*)self.commentingPopoverController.socialButton.dataItemLinked).commentCountValue;
-    [((SYNSocialCommentButton*)self.commentingPopoverController.socialButton) setCount:tmpNumber];
+    
+    if (tmpNumber) {
+        
+        [((SYNSocialCommentButton*)self.commentingPopoverController.socialButton) setCount:tmpNumber];
+    }
 }
 
 
