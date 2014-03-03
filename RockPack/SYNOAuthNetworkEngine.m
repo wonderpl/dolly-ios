@@ -1608,7 +1608,7 @@
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
     
-    [self enqueueSignedOperation: networkOperation];
+    [self enqueueSignedOperation: networkOperation withForceReload:YES];
 }
 
 -(void)getFlagsforUseId:(NSString*)userId
