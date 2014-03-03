@@ -56,8 +56,6 @@
         return nil;
     }
 	
-	TFLog(@"Creating feed item from dictionary: %@", dictionary);
-    
     FeedItem *instance = [FeedItem insertInManagedObjectContext: managedObjectContext];
     
     instance.uniqueId = aid;
