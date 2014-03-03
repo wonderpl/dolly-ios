@@ -489,8 +489,7 @@
     }
 
     if (self.creatingChannel) {
-        [self updateCollectionLayout];
-        self.creatingChannel = NO;
+        [self cancelCreateChannel];
     }
     
     if (IS_IPHONE) {
@@ -2198,6 +2197,7 @@
     tmpRect.origin.y += 10;
     tmpRect.size.height += 18;
     
+
     
     self.subscriptionThumbnailCollectionView.scrollEnabled = NO;
     self.channelThumbnailCollectionView.scrollEnabled = NO;
@@ -2217,7 +2217,9 @@
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
     self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
     self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
-
+    
+    self.createChannelCell.createCellButton.userInteractionEnabled = NO;
+    
     [UIView animateWithDuration:0.5f animations:^{
         
         self.coverImage.alpha = ALPHA_IN_EDIT;
@@ -2265,6 +2267,9 @@
     
     self.aboutMeTextView.editable = NO;
 	self.aboutMeTextView.userInteractionEnabled = NO;
+    
+    self.createChannelCell.createCellButton.userInteractionEnabled = YES;
+
     
     self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
     self.navigationItem.leftBarButtonItem = self.barBtnBack;
@@ -2841,7 +2846,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     }
     
     if (IS_IPHONE) {
-        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
+        [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 434) animated:YES];
     }
 }
 
