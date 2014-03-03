@@ -214,15 +214,13 @@ typedef void(^FeedDataErrorBlock)(void);
 				  layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	FeedItem *feedItem = [self.model itemAtIndex:indexPath.item];
+	
+	CGFloat collectionViewWidth = CGRectGetWidth(collectionView.bounds);
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-		return (IS_IPAD ? CGSizeMake(927.0, 457.0) : CGSizeMake(320.0, 369.0));
+		return (IS_IPAD ? CGSizeMake(collectionViewWidth, 457.0) : CGSizeMake(collectionViewWidth, 369.0));
     } else {
-        if ([SYNDeviceManager.sharedInstance isPortrait]) {
-			return (IS_IPAD ? CGSizeMake(671.0, 330.0) : CGSizeMake(320.0f, 264.0));
-		} else {
-			return (IS_IPAD ? CGSizeMake(927.0, 330.0) : CGSizeMake(320.0, 264.0));
-        }
+		return (IS_IPAD ? CGSizeMake(collectionViewWidth, 330.0) : CGSizeMake(collectionViewWidth, 264.0));
     }
 }
 
