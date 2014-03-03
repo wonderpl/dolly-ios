@@ -542,8 +542,13 @@
     
     
     [self.networkMessageView setText: message];
-    
-    [self.view addSubview: self.networkMessageView];
+	
+	UIViewController *topViewController = self;
+	while (topViewController.presentedViewController && topViewController.presentedViewController.modalPresentationStyle == UIModalPresentationFullScreen) {
+		topViewController = topViewController.presentedViewController;
+	}
+	
+	[topViewController.view addSubview: self.networkMessageView];
     CGRect newFrame = self.networkMessageView.frame;
     newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - newFrame.size.height;
     
