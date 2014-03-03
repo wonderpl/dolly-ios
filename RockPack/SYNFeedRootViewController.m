@@ -107,6 +107,9 @@ typedef void(^FeedDataErrorBlock)(void);
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
 
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetData) name:kReloadFeed object:nil];
+
 }
 
 - (void) viewWillAppear: (BOOL) animated {

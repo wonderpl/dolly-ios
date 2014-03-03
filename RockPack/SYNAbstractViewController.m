@@ -592,7 +592,9 @@
                                                     
                                                     socialControl.selected = YES;
                                                     socialControl.enabled = YES;
-                                                    
+                                                   
+                                                   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+                                                   
                                                 } errorHandler: ^(id error) {
                                                     
                                                     socialControl.enabled = YES;
@@ -606,7 +608,8 @@
                                                       
                                                       socialControl.selected = NO;
                                                       socialControl.enabled = YES;
-                                                      
+                                                      [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+
                                                   } errorHandler:^(id error) {
                                                       
                                                       socialControl.enabled = YES;
@@ -842,10 +845,13 @@
 													  
 													  button.selected = NO;
 													  button.enabled = YES;
+                                                      [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+
 												  } errorHandler: ^(NSDictionary *errorDictionary) {
 													  button.enabled = YES;
 												  }];
-        
+
+
         
 		
 	} else {
@@ -855,6 +861,8 @@
 												  
 													button.selected = YES;
 													button.enabled = YES;
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+
 												} errorHandler: ^(NSDictionary *errorDictionary) {
 													button.enabled = YES;
 												}];
