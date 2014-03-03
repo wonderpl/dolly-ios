@@ -12,6 +12,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNGenreManager.h"
 #import "SYNActivityManager.h"
+#import "SYNAbstractViewController.h"
 @interface SYNAggregateChannelItemCell ()
 
 @property (strong, nonatomic) IBOutlet SYNSocialButton *followControl;
@@ -39,8 +40,7 @@
 }
 
 - (IBAction)channelControlPressed:(id)sender {
-    [self.delegate channelControlPressed: sender];
-
+    [(SYNAbstractViewController *)self.delegate viewChannelDetails:self.channel withAnimation:YES];
 }
 
 - (IBAction) followControlPressed: (id) sender
