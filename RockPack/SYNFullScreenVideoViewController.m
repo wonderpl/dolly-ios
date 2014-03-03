@@ -29,13 +29,26 @@
 	[super viewDidLoad];
 	
 	[self.view addSubview:self.backgroundView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 	
 	if (IS_IPHONE) {
-		// For the iPhone we only officially supports portrait orientation so we have to manually transform the video on rotation
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(deviceOrientationChanged:)
 													 name:UIDeviceOrientationDidChangeNotification
 												   object:nil];
+	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	if (IS_IPHONE) {
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:UIDeviceOrientationDidChangeNotification
+													  object:nil];
 	}
 }
 
@@ -87,15 +100,16 @@
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
 	UIDevice *device = [notification object];
-	UIDeviceOrientation orientation = [device orientation];
 	
-	if (UIDeviceOrientationIsLandscape(orientation)) {
+	if (device.orientation == UIDeviceOrientationPortrait) {
+		self.videoPlayer.maximised = NO;
+		[self dismissViewControllerAnimated:YES completion:nil];
+	} else if (UIDeviceOrientationIsLandscape(device.orientation)) {
+		// For the iPhone we only officially supports portrait orientation so we have to manually transform
+		// the video on rotation
 		[UIView animateWithDuration:0.3 animations:^{
-			if (orientation == UIDeviceOrientationLandscapeLeft) {
-				self.videoPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
-			} else {
-				self.videoPlayer.transform = CGAffineTransformMakeRotation(M_PI_2 * 3);
-			}
+			CGFloat rotationAngle = (device.orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
+			self.videoPlayer.transform = CGAffineTransformMakeRotation(rotationAngle);
 		}];
 	}
 }

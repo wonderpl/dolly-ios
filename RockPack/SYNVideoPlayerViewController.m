@@ -70,13 +70,6 @@
 	self.linkButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.linkButton.titleLabel.font.pointSize];
     
     [self.commentButton setTitle:@"0" forState:UIControlStateNormal];
-    
-	if (IS_IPHONE) {
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(deviceOrientationChanged:)
-													 name:UIDeviceOrientationDidChangeNotification
-												   object:nil];
-	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,6 +92,20 @@
 	
 	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:self.videoInstance.channel.categoryId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	
+	if (IS_IPHONE) {
+		UIDevice *device = [UIDevice currentDevice];
+		BOOL rotated = [self handleRotationToOrientation:device.orientation];
+		
+		// We only want to add an observer in the case where we haven't displayed the video full screen since
+		// in that case viewWillDisappear is called before the observer is added meaning it isn't removed properly
+		if (!rotated) {
+			[[NSNotificationCenter defaultCenter] addObserver:self
+													 selector:@selector(deviceOrientationChanged:)
+														 name:UIDeviceOrientationDidChangeNotification
+													   object:nil];
+		}
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -108,10 +115,19 @@
 		[self.navigationController.navigationBar setBackgroundTransparent:NO];
 	}
 	
-	if ([self.navigationController isBeingDismissed]) {
+	// If viewWillDisappear is being triggered from viewDidAppear then the isBeingDismissed flag is YES for some reason.
+	// This is to check for this case and work around the issue
+	BOOL isActuallyBeingDismissed = (![self.navigationController isBeingPresented] && [self.navigationController isBeingDismissed]);
+	if (isActuallyBeingDismissed) {
 		[self trackViewingStatisticsForCurrentVideo];
 		
 		[self.currentVideoPlayer pause];
+	}
+	
+	if (IS_IPHONE) {
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:UIDeviceOrientationDidChangeNotification
+													  object:nil];
 	}
 }
 
@@ -271,19 +287,7 @@
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
 	UIDevice *device = [notification object];
-	BOOL isShowingFullScreenVideo = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
-	
-	if (isShowingFullScreenVideo && [device orientation] == UIDeviceOrientationPortrait) {
-		self.currentVideoPlayer.maximised = NO;
-		[self minimiseVideoPlayer];
-	}
-	
-	if (!isShowingFullScreenVideo && UIDeviceOrientationIsLandscape([device orientation])) {
-		[[SYNTrackingManager sharedManager] trackVideoMaximiseViaRotation];
-		
-		self.currentVideoPlayer.maximised = YES;
-		[self maximiseVideoPlayer];
-	}
+	[self handleRotationToOrientation:device.orientation];
 }
 
 #pragma mark - Private
@@ -338,6 +342,17 @@
 	[self.likeButton setTitle:NSLocalizedString(@"like", nil) andCount:[videoInstance.video.starCount integerValue]];
     
     [self.commentButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
+}
+
+- (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {
+	if (UIDeviceOrientationIsLandscape(orientation)) {
+		[[SYNTrackingManager sharedManager] trackVideoMaximiseViaRotation];
+		
+		self.currentVideoPlayer.maximised = YES;
+		[self maximiseVideoPlayer];
+		return YES;
+	}
+	return NO;
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {
