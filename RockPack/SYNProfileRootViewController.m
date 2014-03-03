@@ -113,6 +113,8 @@
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (strong, nonatomic) UITapGestureRecognizer *tapToCancelEditMode;
+
 
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) UIAlertView *sameChannelNameAlertView;
@@ -315,6 +317,8 @@
     
     // == Tap gesture do dismiss the keyboard
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    self.tapToCancelEditMode = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelEditModeTapped)];
     
     // == Required because of autolay, it was not functioning properly when the views were changing
     
@@ -2180,9 +2184,12 @@
 }
 
 - (IBAction)editButtonTapped:(id)sender {
+    
+    [self.view addGestureRecognizer:self.tapToCancelEditMode];
     [[SYNTrackingManager sharedManager] trackEditProfileScreenView];
     
     [self stopCollectionScrollViews];
+    self.channelThumbnailCollectionView.userInteractionEnabled = NO;
     [self.createChannelCell.descriptionTextView resignFirstResponder];
     [self.createChannelCell.createTextField resignFirstResponder];
 	
@@ -2267,9 +2274,12 @@
     tmpRect.origin.y -= 10;
     tmpRect.size.height -= 18;
     
+    [self.view removeGestureRecognizer:self.tapToCancelEditMode];
     self.aboutMeTextView.editable = NO;
 	self.aboutMeTextView.userInteractionEnabled = NO;
     
+    self.channelThumbnailCollectionView.userInteractionEnabled = YES;
+
     self.createChannelCell.createCellButton.userInteractionEnabled = YES;
 
     
