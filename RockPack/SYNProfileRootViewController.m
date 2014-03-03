@@ -1237,6 +1237,10 @@
     }
     else
     {
+        if (self.creatingChannel) {
+            [self cancelCreateChannel];
+        }
+
         [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.followingTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
 
