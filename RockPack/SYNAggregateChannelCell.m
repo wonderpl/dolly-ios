@@ -68,6 +68,13 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
 
 - (void) setCollectionData:(NSArray *)collectionData
 {
+    // == Only sort if there is more than 1 item in the array
+    
+    if (collectionData.count>1) {
+        NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:NO]];
+        collectionData = [collectionData sortedArrayUsingDescriptors:sortDescriptors];
+    }
+    
     [super setCollectionData:collectionData];
     
     if(collectionData.count <= 0)
@@ -102,8 +109,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
                                                                                       attributes: light]];
     
     self.actionButton.attributedTitle = attributedCompleteString;
-    
-        self.actionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    self.actionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 }
 
 

@@ -48,6 +48,7 @@
     copyChannel.eCommerceURL = channel.eCommerceURL;
     copyChannel.public = channel.public;
     copyChannel.viewId = viewId;
+    copyChannel.datePublished = channel.datePublished;
     
     if (!(ignoringObjects & kIgnoreChannelOwnerObject))
     {
