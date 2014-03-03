@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)setup;
 
-- (void)trackClickToMoreFromLinkTitle:(NSString *)linkTitle;
+- (void)trackClickToMoreWithTitle:(NSString *)title URL:(NSString *)URL;
 - (void)trackVideoAddFromScreenName:(NSString *)screenName;
 - (void)trackVideoLikeFromScreenName:(NSString *)screenName;
 - (void)trackVideoCommentFromScreenName:(NSString *)screenName;

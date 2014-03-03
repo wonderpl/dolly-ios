@@ -6,7 +6,6 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
 #import "SYNLoginViewController.h"
@@ -260,14 +259,6 @@
 {
     [super viewDidAppear: animated];
     
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Start"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
     self.isPreIPhone5 = [SYNDeviceManager.sharedInstance currentScreenHeight] < 500;
     
     if (!self.hasAnimated)
@@ -412,14 +403,7 @@
 - (IBAction) facebookTapped: (id) sender
 {
     [self hideOnboarding];
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"facebookLogin"
-                                                            label: nil
-                                                            value: nil] build]];
-    
+
     if (![self isNetworkAccessibleOtherwiseShowErrorAlert])
     {
         return;
@@ -467,20 +451,7 @@
 - (IBAction) signupTapped: (id) sender
 {
     [self hideOnboarding];
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"userRegistration"
-                                                            label: @"Rockpack"
-                                                            value: nil] build]];
-    
-    // Google analytics support
-    [tracker set: kGAIScreenName
-           value: @"Register"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
+	
     //Fade out login background
     self.loginBackgroundImage.alpha = 1.0f;
     
@@ -524,14 +495,6 @@
 {
     [self hideOnboarding];
     
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Login"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
     //Fade out login background
     self.loginBackgroundImage.alpha = 1.0f;
     
@@ -573,14 +536,6 @@
 
 - (IBAction) forgotPasswordTapped: (id) sender
 {
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Forgot password"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
     self.state = kLoginScreenStatePasswordRetrieve;
     
     [UIView animateWithDuration: kLoginAnimationTransitionDuration
@@ -843,12 +798,6 @@
                      
                      [self completeLoginProcess];
                      
-                     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                     
-                     [tracker send: [[GAIDictionaryBuilder	createEventWithCategory: @"goal"
-                                                                            action: @"userLogin"
-                                                                             label: @"Rockpack"
-                                                                             value: nil] build]];
                  } errorHandler: ^(NSDictionary *errorDictionary) {
                      [self.activityIndicator stopAnimating];
                      [self turnOnElement: self.backButton];
@@ -1142,14 +1091,6 @@
 
 - (void) showRegistrationStep2
 {
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Register 2"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
     self.state = kLoginScreenStateRegisterStepTwo;
     [self turnOnElement: self.backButton];
     [self turnOnElement: self.confirmButton];

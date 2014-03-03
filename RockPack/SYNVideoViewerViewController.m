@@ -11,7 +11,6 @@
 #import "Channel.h"
 #import "ChannelCover.h"
 #import "ChannelOwner.h"
-#import "GAI.h"
 #import "NSObject+Blocks.h"
 #import "SYNAbstractViewController.h"
 #import "SYNDeviceManager.h"
@@ -306,14 +305,6 @@
                                        placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                                                 options: SDWebImageRetryFailed];
     }
-    
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Video Viewer"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
     
     [self.videoPlaybackViewController setPlaylist: self.videoInstanceArray
                                     selectedIndex: self.currentSelectedIndex
@@ -650,12 +641,6 @@
     {
         return;
     }
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoBarClick"
-                                                            label: nil
-                                                            value: nil] build]];
     
     // We should start playing the selected vide and scroll the thumbnnail so that it appears under the arrow
     [self playVideoAtIndex: indexPath.item];
@@ -685,13 +670,6 @@
         return;
     }
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoNextClick"
-                                                            label: @"next"
-                                                            value: nil] build]];
-    
     int index = (self.currentSelectedIndex + 1) % self.videoInstanceArray.count;
     
     
@@ -705,13 +683,6 @@
     {
         return;
     }
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoNextClick"
-                                                            label: @"prev"
-                                                            value: nil] build]];
     
     int index = self.currentSelectedIndex - 1;
     
@@ -731,13 +702,6 @@
     {
         return;
     }
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoPlusButtonClick"
-                                                            label: nil
-                                                            value: nil] build]];
     
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
@@ -797,17 +761,6 @@
         __weak SYNVideoViewerViewController *wself = self;
         SYNImplicitSharingController *implicitSharingController = [SYNImplicitSharingController controllerWithBlock: ^(BOOL allowedAutoSharing) {
             [wself toggleStarButton: button];
-            
-            if (allowedAutoSharing)
-            {
-                // track
-                id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                
-                [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                       action: @"videoShared"
-                                                                        label: @"fbi"
-                                                                        value: nil] build]];
-            }
         }];
         [self addChildViewController: implicitSharingController];
         
@@ -827,13 +780,6 @@
         
         return;
     }
-    
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"videoStarButtonClick"
-                                                            label: @"Viewer"
-                                                            value: nil] build]];
     
     button.selected = !button.selected;
     
@@ -1099,17 +1045,6 @@
     {
         // We are on the iPad
         [self handleMinMax];
-    }
-    
-    if (self.isVideoExpanded)
-    {
-        // Update google analytics
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                               action: @"videoMaximizeClick"
-                                                                label: nil
-                                                                value: nil] build]];
     }
 }
 
