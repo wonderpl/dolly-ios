@@ -256,12 +256,12 @@
 }
 
 - (IBAction)linkButtonPressed:(UIButton *)button {
-    
-	[[SYNTrackingManager sharedManager] trackClickToMoreFromLinkTitle:[NSString stringWithFormat:@"%@", self.videoInstance.video.linkTitle]];
+	Video *video = self.videoInstance.video;
+	[[SYNTrackingManager sharedManager] trackClickToMoreWithTitle:video.linkTitle URL:video.linkURL];
     
     [self.currentVideoPlayer pause];
 	
-	NSURL *URL = [NSURL URLWithString:self.videoInstance.video.linkURL];
+	NSURL *URL = [NSURL URLWithString:video.linkURL];
 	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:URL withTrackingName:@"Click to more"];
     
 	[self presentViewController:viewController animated:YES completion:nil];
@@ -341,9 +341,6 @@
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {
-    
-    
-    
 	[[SYNTrackingManager sharedManager] trackVideoView:self.videoInstance.video.sourceId
 										   currentTime:self.currentVideoPlayer.currentTime
 											  duration:self.currentVideoPlayer.duration];

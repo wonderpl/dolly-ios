@@ -44,6 +44,8 @@ static const NSInteger TrackingDimensionConnection = 6;
 	return manager;
 }
 
+#pragma mark - Init / Dealloc
+
 - (instancetype)init {
 	if (self = [super init]) {
 		NSString *hostname = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"APIHostName"];
@@ -63,6 +65,8 @@ static const NSInteger TrackingDimensionConnection = 6;
 	return self;
 }
 
+#pragma mark - Public
+
 - (void)setup {
 	GAI *gai = [GAI sharedInstance];
 	
@@ -74,10 +78,9 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self setConnectionDimension:[self currentConnectionString]];
 }
 
-#pragma mark - Public
-
-- (void)trackClickToMoreFromLinkTitle:(NSString *)linkTitle {
-	[self trackEventWithCategory:UIActionCategory action:@"videoClickToMoreClick" label:linkTitle value:nil];
+- (void)trackClickToMoreWithTitle:(NSString *)title URL:(NSString *)URL {
+	NSString *label = [NSString stringWithFormat:@"%@ - %@", title, URL];
+	[self trackEventWithCategory:UIActionCategory action:@"videoClickToMoreClick" label:label value:nil];
 }
 
 - (void)trackVideoAddFromScreenName:(NSString *)screenName {
