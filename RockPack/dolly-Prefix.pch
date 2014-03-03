@@ -11,9 +11,6 @@
 #ifdef __OBJC__
     @import UIKit;
     #import "UIDevice+Hardware.h"
-    #import "GAI.h"
-    #import "GAIDictionaryBuilder.h"
-    #import "GAIFields.h"
     @import Foundation;
 #endif
 

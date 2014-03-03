@@ -7,7 +7,6 @@
 //
 
 #import "ExternalAccount.h"
-#import "GAI.h"
 #import "NSString+Utils.h"
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
@@ -418,31 +417,6 @@
     
     [facebookManager loginOnSuccess: ^(NSDictionary < FBGraphUser > *dictionary) {
         FBAccessTokenData *accessTokenData = [[FBSession activeSession] accessTokenData];
-        
-        // Log our user's age in Google Analytics
-        NSString *birthday = dictionary[@"birthday"];
-        
-        if (birthday)
-        {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat: @"MM/dd/yyyy"];
-            NSDate *birthdayDate = [dateFormatter dateFromString: birthday];
-            
-            // Calculate age, taking account of leap-years etc. (probably too accurate!)
-            NSDateComponents *ageComponents = [[NSCalendar currentCalendar]	 components: NSYearCalendarUnit
-                                                                                  fromDate: birthdayDate
-                                                                                    toDate: NSDate.date
-                                                                                   options: 0];
-            NSInteger age = [ageComponents year];
-            
-            NSString *ageString = [NSString ageCategoryStringFromInt: age];
-            
-            // Now set the age
-            id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-            
-            [tracker set: [GAIFields customDimensionForIndex: kGADimensionAge]
-                   value: ageString];
-        }
         
         [self doFacebookLoginAnimation];
         
@@ -1016,12 +990,6 @@
     
     self.currentOnBoardingPage = (NSInteger) floorf(contentOffsetX / self.onBoardingController.scrollView.frame.size.width);
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"cardSlide"
-                                                            label: [NSString stringWithFormat: @"%i", (_currentOnBoardingPage + 1)]
-                                                            value: nil] build]];
 }
 
 

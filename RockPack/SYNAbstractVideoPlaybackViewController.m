@@ -376,20 +376,7 @@
 
 - (void) logViewingStatistics
 {
-    if (self.previousSourceId != nil && self.percentageViewed > 0.0f)
-    {
-        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"videoViewed"
-                                                                label: self.previousSourceId
-                                                                value: @((int) (self.percentageViewed  * 100.0f))] build]];
-        
-        [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                               action: @"videoViewedDuration"
-                                                                label: self.previousSourceId
-                                                                value: @((int) (self.timeViewed))] build]];
-    }
+	
 }
 
 - (void) playIfVideoActive

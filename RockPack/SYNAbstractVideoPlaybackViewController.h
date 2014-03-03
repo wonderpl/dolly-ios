@@ -15,7 +15,7 @@
 
 typedef void (^SYNVideoIndexUpdater)(int);
 
-@interface SYNAbstractVideoPlaybackViewController : GAITrackedViewController
+@interface SYNAbstractVideoPlaybackViewController : UIViewController
 
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
 @property (nonatomic, assign, readonly) NSTimeInterval duration;

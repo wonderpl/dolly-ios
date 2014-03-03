@@ -15,7 +15,6 @@
 #import "NSDictionary+RequestEncoding.h"
 #import "SYNFacebookManager.h"
 #import "Video.h"
-#import "GAI.h"
 #import "VideoInstance.h"
 #import "SYNTrackingManager.h"
 #import "UIImage+Resize.h"

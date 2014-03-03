@@ -10,7 +10,6 @@
 #import "Channel.h"
 #import "ChannelOwner.h"
 #import "ExternalAccount.h"
-#import "GAI.h"
 #import "NSObject+Blocks.h"
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"

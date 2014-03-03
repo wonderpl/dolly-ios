@@ -6,7 +6,6 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "NSString+Utils.h"
 #import "SYNDeviceManager.h"
 #import "SYNLoginErrorArrow.h"
@@ -218,15 +217,7 @@
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear:animated];
-
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
-    [tracker set: kGAIScreenName
-           value: @"Start"];
-    
-    [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-    
+	
     memberLabel.center = CGPointMake(memberLabel.center.x, loginButton.center.y - 54.0);
     memberLabel.frame = CGRectIntegral(memberLabel.frame);
     
@@ -378,10 +369,6 @@
 
 - (void) setState: (kLoginScreenState) newState
 {
-    
-    // Google analytics support
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    
     if (newState == state)
         return;
     
@@ -393,29 +380,14 @@
     }
     else if (newState == kLoginScreenStateLogin)
     {
-        [tracker set: kGAIScreenName
-               value: @"Login"];
-        
-        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-        
         [self setUpLoginStateFromPreviousState:state];
     }
     else if (newState == kLoginScreenStateRegister)
     {
-        [tracker set: kGAIScreenName
-               value: @"Register"];
-        
-        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-        
         [self setUpRegisterStateFromState: state];
     }
     else if (newState == kLoginScreenStatePasswordRetrieve)
     {
-        [tracker set: kGAIScreenName
-               value: @"Forgot password"];
-        
-        [tracker send: [[GAIDictionaryBuilder createAppView] build]];
-        
         [self setUpPasswordState];
     }
     
@@ -994,13 +966,6 @@
 
 - (IBAction) doLogin: (id) sender
 {
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"userLogin"
-                                                            label: @"Rockpack"
-                                                            value: nil] build]];
-    
     [self clearAllErrorArrows];
     
     [self resignAllFirstResponders];
@@ -1177,13 +1142,6 @@
 {
     [self hideOnboarding];
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"uiAction"
-                                                           action: @"facebookLogin"
-                                                            label: nil
-                                                            value: nil] build]];
-    
     _facebookLoginIsInProcess = NO;
     
     [self clearAllErrorArrows];
@@ -1315,31 +1273,6 @@
                                @"locale":@"en-US",
                                @"email": emailInputField.text,
                                @"gender": (self.genderSegmentedControl.selectedSegmentIndex == 0) ? @"m" : @"f"};
-    
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat: @"yyyy-MM-dd"];
-    NSDate* birthdayDate = [dateFormatter dateFromString: [self dateStringFromCurrentInput]];
-    
-    // Calculate age, taking account of leap-years etc. (probably too accurate!)
-    NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components: NSYearCalendarUnit
-                                                                      fromDate: birthdayDate
-                                                                        toDate: NSDate.date
-                                                                       options: 0];
-    
-    NSInteger age = [ageComponents year];
-    
-    NSString *ageString = [NSString ageCategoryStringFromInt: age];
-    
-    // Now set the age
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    
-    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                           action: @"userRegistration"
-                                                            label: @"Rockpack"
-                                                            value: nil] build]];
-    
-    [tracker set: [GAIFields customDimensionForIndex: kGADimensionAge]
-           value: ageString];
     
     activityIndicator.center = CGPointMake(registerNewUserButton.center.x, registerNewUserButton.center.y);
     [activityIndicator startAnimating];

@@ -12,7 +12,6 @@
 #import "ChannelCover.h"
 #import "ChannelOwner.h"
 #import "FeedItem.h"
-#import "GAI.h"
 #import "SYNAggregateCell.h"
 #import "SYNAggregateChannelCell.h"
 #import "SYNAggregateVideoCell.h"

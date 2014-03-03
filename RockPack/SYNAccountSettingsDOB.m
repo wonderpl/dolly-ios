@@ -6,7 +6,6 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
-#import "GAI.h"
 #import "SYNAccountSettingsDOB.h"
 #import "SYNAppDelegate.h"
 #import "User.h"

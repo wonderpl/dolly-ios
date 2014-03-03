@@ -8,7 +8,6 @@
 
 #import "AppConstants.h"
 #import "Channel.h"
-#import "GAI.h"
 #import "MKNetworkOperation.h"
 #import "SYNAppDelegate.h"
 #import "SYNChannelManager.h"
@@ -215,20 +214,13 @@
     [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
                                                    channelURL: channel.resourceURL
                                             completionHandler: ^(NSDictionary *responseDictionary) {
-                                                
-                                                id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-                                                
+												
                                                 NSError *error = nil;
                                                 Channel *channelFromId = (Channel *)[channelObjectMOC existingObjectWithID: channelObjectId
                                                                                                                           error: &error];
                                                 
                                                 if (channelFromId)
                                                 {
-                                                    [tracker send: [[GAIDictionaryBuilder createEventWithCategory: @"goal"
-                                                                                                           action: @"userSubscription"
-                                                                                                            label: nil
-                                                                                                            value: nil] build]];
-                                                    
                                                     // This notifies the ChannelDetails through KVO
                                                     channelFromId.hasChangedSubscribeValue = YES;
                                                     channelFromId.subscribedByUserValue = YES;
