@@ -51,7 +51,10 @@
 			[videoInstances addObject:self.videoInstancesById[childFeedItem.resourceId]];
 		}
 	} else {
-		[videoInstances addObject:self.videoInstancesById[feedItem.resourceId]];
+        
+        if (self.videoInstancesById[feedItem.resourceId]) {
+            [videoInstances addObject:self.videoInstancesById[feedItem.resourceId]];
+        }
 	}
 	
 	return videoInstances;
@@ -65,7 +68,9 @@
 			[channels addObject:self.channelsById[childFeedItem.resourceId]];
 		}
 	} else {
-		[channels addObject:self.channelsById[feedItem.resourceId]];
+        if (self.channelsById[feedItem.resourceId]) {
+            [channels addObject:self.channelsById[feedItem.resourceId]];
+        }
 	}
 	
 	return channels;
@@ -154,7 +159,7 @@
 											   
 											   sself.loadedItems = (sself.mode == SYNFeedModelModeFeed ? feedItems : videoInstances);
 											   sself.totalItemCount = [total integerValue];
-											   
+
 											   [sself handleDataUpdatedForRange:range];
 										   }];
                                        } errorHandler:^(NSDictionary *errorDictionary) {
