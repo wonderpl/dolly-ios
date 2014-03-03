@@ -64,9 +64,8 @@
     NSMutableParagraphStyle *paragrapStyleCenter = [[NSMutableParagraphStyle alloc] init];
     paragrapStyleCenter.alignment = NSTextAlignmentCenter;
     
-	NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString *)kCFBundleNameKey];
 	NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString *)kCFBundleVersionKey];
-    NSString *appInfo = [NSString stringWithFormat:@"%@ v%@\n", appName, appVersion];
+    NSString *appInfo = [NSString stringWithFormat:@"%@ v%@\n", @"Wonder PL", appVersion];
     
     [attributedMutString appendAttributedString: [[NSAttributedString alloc] initWithString: appInfo
                                                                                  attributes: @{NSForegroundColorAttributeName: [UIColor blackColor],
@@ -79,10 +78,10 @@
                                                                                                NSFontAttributeName: [UIFont regularCustomFontOfSize:15]}]];
     
     
-    NSArray* creditsArray = @[@"FacebookSDK by Facebook", @"CKImagePicker by George Kitz", @"FacebookSDK by Facebook",
-                              @"FacebookSDK by Facebook", @"CKImagePicker by George Kitz", @"FacebookSDK by Facebook",
-                              @"FacebookSDK by Facebook", @"CKImagePicker by George Kitz", @"FacebookSDK by Facebook",
-                              @"FacebookSDK by Facebook", @"CKImagePicker by George Kitz", @"FacebookSDK by Facebook"];
+    NSArray* creditsArray = @[@"Appirater by Arash Payan", @"GKImagePicker by George Kitz", @"FacebookSDK by Facebook",
+                              @"Google Analytics by Google", @"Google Conversion Tracking by Google", @"ISO8601DateFormatter by Peter Hosey",
+                              @"MKNetworkKit by Mugunth Kumar", @"SDWebImage by Olivier Poitrey", @"SSKeychain by Sam Soffes",
+							  @"OWActivityViewController by Roman Efimov", @"LXReorderableCollectionViewFlowLayout by Stan Chang Khin Boon"];
     
     for (NSString* credit in creditsArray)
     {
