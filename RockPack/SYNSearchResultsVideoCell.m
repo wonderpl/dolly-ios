@@ -71,7 +71,8 @@
 						  forState:UIControlStateNormal];
     [self.channelNameButton setTitle:videoInstance.channel.title forState:UIControlStateNormal];
     [self.commentSocialButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
-
+    [self.likeSocialButton setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateChannelItemCell")
+                           andCount: videoInstance.video.starCountValue];
     // == timestamp == //
     
 	self.timeStampLabel.text = [NSString paddedTimecodeStringFromSeconds:videoInstance.video.durationValue];
