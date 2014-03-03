@@ -1174,7 +1174,7 @@
 - (void) updateTabStatesWithServerCalls:(BOOL) calls
 {
     
-    [self killScroll];
+    [self stopCollectionScrollViews];
     
     self.collectionsTabButton.selected = !self.collectionsTabActive;
     
@@ -1395,19 +1395,21 @@
     
 }
 
-- (void)killScroll {
-    //  == stop the scrollview from scrolling
+- (void)stopCollectionScrollViews {
     
-    CGPoint offset = self.subscriptionThumbnailCollectionView.contentOffset;
-    offset.x -= 1.0;
-    offset.y -= 1.0;
-    [self.subscriptionThumbnailCollectionView setContentOffset:offset animated:NO];
-    offset.x += 1.0;
-    offset.y += 1.0;
-    [self.subscriptionThumbnailCollectionView setContentOffset:offset animated:NO];
-    
+    [self stopScrollView:self.channelThumbnailCollectionView];
+    [self stopScrollView:self.subscriptionThumbnailCollectionView];
 }
 
+-(void) stopScrollView: (UIScrollView*) scrollview {
+    CGPoint offset = scrollview.contentOffset;
+    offset.x -= 1.0;
+    offset.y -= 1.0;
+    [scrollview setContentOffset:offset animated:NO];
+    offset.x += 1.0;
+    offset.y += 1.0;
+    [scrollview setContentOffset:offset animated:NO];
+}
 
 - (void) loadMoreChannels
 {
@@ -1925,7 +1927,7 @@
     BOOL boolToReturn = self.shouldBeginEditing;
     self.searchMode = YES;
     
-    [self killScroll];
+    [self stopCollectionScrollViews];
     
     if (self.shouldBeginEditing)
     {
@@ -2180,7 +2182,7 @@
 - (IBAction)editButtonTapped:(id)sender {
     [[SYNTrackingManager sharedManager] trackEditProfileScreenView];
     
-    [self killScroll];
+    [self stopCollectionScrollViews];
     [self.createChannelCell.descriptionTextView resignFirstResponder];
     [self.createChannelCell.createTextField resignFirstResponder];
 	
@@ -2718,6 +2720,8 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 
 -(void) cancelCreateChannel {
+    
+    [self stopCollectionScrollViews];
     self.creatingChannel = NO;
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
@@ -2877,8 +2881,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     
     self.channelThumbnailCollectionView.contentOffset = tmpPoint;
     [self.channelThumbnailCollectionView.collectionViewLayout invalidateLayout];
-    
-    
 }
 
 #pragma mark - Delete channel
