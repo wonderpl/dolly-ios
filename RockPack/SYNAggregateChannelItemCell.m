@@ -69,7 +69,7 @@
         return;
     }
     
-    [self.channelButton setTitle:_channel.title forState:UIControlStateNormal];
+    [self.channelButton setTitle:[_channel.title uppercaseString] forState:UIControlStateNormal];
     self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
     self.videosLabel.text = [NSString stringWithFormat: @"%lli videos", _channel.totalVideosValueValue];
     
