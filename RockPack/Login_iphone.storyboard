@@ -73,7 +73,7 @@
                                             <constraint firstAttribute="width" constant="140" id="YrW-xd-jVf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="LOGIN">
+                                        <state key="normal" title="LOG IN">
                                             <color key="titleColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -608,7 +608,7 @@
                                                 <action selector="backButtonPressed:" destination="gfp-5v-9XD" id="BCW-9x-eea"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Login" id="Xmb-Gd-Gc4">
+                                        <barButtonItem key="rightBarButtonItem" title="Log In" id="Xmb-Gd-Gc4">
                                             <connections>
                                                 <action selector="loginButtonPressed:" destination="gfp-5v-9XD" id="ZDs-8t-zaR"/>
                                             </connections>
