@@ -391,7 +391,7 @@
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     
-    [self updateTabStatesWithServerCalls:NO];
+    [self updateTabStatesWithServerCalls:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
@@ -536,13 +536,6 @@
     [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     [self setProfileImage:self.channelOwner.thumbnailURL];
     
-    
-
-    
-
-    
-    
-
     self.fullNameLabel.text = self.channelOwner.displayName;
     
     [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
