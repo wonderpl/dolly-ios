@@ -420,6 +420,7 @@
     float ipadValue = 230;
    __block CGRect tmpRect = self.containerView.frame;
 
+    self.deleteButton.hidden = YES;
     [UIView animateWithDuration:2.0 animations:^{
         
         if (IS_IPHONE)
@@ -445,8 +446,9 @@
             }
             self.containerView.frame = tmpRect;
             
+        } completion:^(BOOL finished) {
+            self.deleteButton.hidden = NO;
         }];
-        
     }];
 }
 
