@@ -311,7 +311,7 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	
     [self.channelThumbnailButton setImageWithURL:[NSURL URLWithString:videoInstance.channel.channelOwner.thumbnailURL]
 											forState:UIControlStateNormal
-									placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
+									placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
 											 options:SDWebImageRetryFailed];
     
 	NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
