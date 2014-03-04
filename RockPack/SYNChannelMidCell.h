@@ -23,7 +23,9 @@ typedef enum {
     
     ChannelMidCellStateDefault = 0,
     ChannelMidCellStateDescription = 1,
-    ChannelMidCellStateDelete = 2
+    ChannelMidCellStateDelete = 2,
+    ChannelMidCellStateAnimating = 3
+
     
 } ChannelMidCellState;
 

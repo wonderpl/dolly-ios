@@ -326,6 +326,12 @@
                 self.containerView.frame = tmpRect;
         }
             break;
+            
+        case ChannelMidCellStateAnimating: {
+            
+        }
+            break;
+            
     }
 
     
@@ -400,6 +406,10 @@
             
         }
             break;
+        case ChannelMidCellStateAnimating: {
+           
+        }
+            break;
     }
     
 }
@@ -415,6 +425,7 @@
 
 
 -(void) descriptionAnimation {
+    self.state = ChannelMidCellStateAnimating;
 
     float iphoneValue = 250;
     float ipadValue = 230;
@@ -448,6 +459,8 @@
             
         } completion:^(BOOL finished) {
             self.deleteButton.hidden = NO;
+            [self setState:ChannelMidCellStateDefault withAnimation:NO];
+
         }];
     }];
 }
@@ -456,6 +469,8 @@
 -(void) descriptionAndDeleteAnimation {
     __block CGRect tmpRect = self.containerView.frame;
 
+    self.state = ChannelMidCellStateAnimating;
+    
     [UIView animateWithDuration:1.5 animations:^{
         
         if (IS_IPHONE)
@@ -510,6 +525,7 @@
                     }
                     self.containerView.frame = tmpRect;
                 } completion:^(BOOL finished) {
+                    [self setState:ChannelMidCellStateDefault withAnimation:NO];
                 }];
 
             }];
