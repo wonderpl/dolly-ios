@@ -688,7 +688,7 @@
                                         </constraints>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="send"/>
                                         <connections>
                                             <outlet property="delegate" destination="t7e-i8-el2" id="03u-Ka-Lg2"/>
                                         </connections>
@@ -725,7 +725,7 @@
                                                 <action selector="backButtonPressed:" destination="t7e-i8-el2" id="klc-LD-Elf"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Login" id="JzK-Xo-2jq">
+                                        <barButtonItem key="rightBarButtonItem" title="Send" id="JzK-Xo-2jq">
                                             <connections>
                                                 <action selector="confirmButtonPressed:" destination="t7e-i8-el2" id="jB7-bI-9kd"/>
                                             </connections>

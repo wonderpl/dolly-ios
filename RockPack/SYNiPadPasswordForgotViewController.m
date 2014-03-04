@@ -16,12 +16,11 @@
 
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *emailUsernameTextField;
 @property (nonatomic, strong) IBOutlet UILabel *errorLabel;
-@property (nonatomic, strong) IBOutlet UIButton *registerButton;
+@property (nonatomic, strong) IBOutlet UIButton *sendButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *accountLabel;
-@property (nonatomic, strong) IBOutlet UILabel *termsLabel;
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
-@property (strong, nonatomic) IBOutlet UILabel *haveAnAccountLabel;
+@property (nonatomic, strong) IBOutlet UILabel *haveAnAccountLabel;
 
 @end
 
@@ -82,8 +81,7 @@
 
 - (void)submitForgotPassword {
 	if ([self resetPasswordFormIsValidForTextField:self.emailUsernameTextField]) {
-//		self.loginButton.enabled = NO;
-//		self.registerButton.enabled = NO;
+		self.sendButton.enabled = NO;
 		
 		[[SYNLoginManager sharedManager] doRequestPasswordResetForUsername:self.emailUsernameTextField.text
 														 completionHandler:^(NSDictionary *completionInfo) {
@@ -91,8 +89,7 @@
 																 self.errorLabel.text = NSLocalizedString(@"forgot_password_screen_form_field_username_user_unknown", nil);
 																 self.emailUsernameTextField.errorMode = YES;
 																 
-//																 self.loginButton.enabled = YES;
-//																 self.registerButton.enabled = YES;
+																 self.sendButton.enabled = YES;
 															 } else {
 																 NSString *title = NSLocalizedString(@"forgot_password_screen_complete_title", nil);
 																 NSString *message = NSLocalizedString(@"forgot_password_screen_complete_message", nil);
