@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) UIView *backgroundView;
 
+@property (nonatomic, assign) UIDeviceOrientation videoOrientation;
+
 @end
 
 @implementation SYNFullScreenVideoViewController
@@ -31,10 +33,18 @@
 	[self.view addSubview:self.backgroundView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	self.videoOrientation = [[UIDevice currentDevice] orientation];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
 	if (IS_IPHONE) {
+		self.videoOrientation = [[UIDevice currentDevice] orientation];
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(deviceOrientationChanged:)
 													 name:UIDeviceOrientationDidChangeNotification
@@ -71,8 +81,7 @@
 	_videoPlayer = videoPlayer;
 	
 	if (IS_IPHONE) {
-		UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-		CGFloat angle = (orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
+		CGFloat angle = (self.videoOrientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
 		videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds));
 		videoPlayer.transform = CGAffineTransformMakeRotation(angle);
 	} else {
@@ -81,8 +90,14 @@
 		videoPlayer.bounds = CGRectMake(0, 0, viewWidth, round(viewWidth / aspectRatio));
 	}
 	self.videoPlayer.center = CGPointMake(CGRectGetWidth(self.view.bounds) / 2.0, CGRectGetHeight(self.view.bounds) / 2.0);
-
+	
 	[self.view addSubview:videoPlayer];
+}
+
+- (void)setVideoOrientation:(UIDeviceOrientation)videoOrientation {
+	if (UIDeviceOrientationIsLandscape(videoOrientation)) {
+		_videoOrientation = videoOrientation;
+	}
 }
 
 - (UIView *)backgroundView {
@@ -111,6 +126,8 @@
 			CGFloat rotationAngle = (device.orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
 			self.videoPlayer.transform = CGAffineTransformMakeRotation(rotationAngle);
 		}];
+		
+		self.videoOrientation = device.orientation;
 	}
 }
 
