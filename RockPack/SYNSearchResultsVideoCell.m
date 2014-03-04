@@ -64,7 +64,7 @@
 	NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.channel.channelOwner.thumbnailURL];
 	[self.ownerThumbnailButton setImageWithURL:thumbnailURL
 									  forState:UIControlStateNormal
-							  placeholderImage:[UIImage imageNamed:@"PlaceholderChannelSmall.png"]
+							  placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
 									   options:SDWebImageRetryFailed];
 	
 	[self.ownerNameButton setTitle:videoInstance.channel.channelOwner.displayName
