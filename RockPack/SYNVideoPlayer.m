@@ -208,9 +208,15 @@ static CGFloat const ControlsFadeTimer = 5.0;
 #pragma mark - Protected
 
 - (void)handleVideoPlayerStartedPlaying {
+	self.scrubberBar.playing = YES;
+	
 	[self fadeOutLoadingView];
     
 	[self fadeInControls];
+}
+
+- (void)handleVideoPlayerPaused {
+	self.scrubberBar.playing = NO;
 }
 
 - (void)handleVideoPlayerFinishedPlaying {
