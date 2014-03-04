@@ -411,29 +411,9 @@ static NSString* PlaceholderText = @"Say something nice";
 }
 // override the abstract so that you dont send notifications to the navigation manager
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    
-//    int contentOffSet = scrollView.contentOffset.y;
-//    //For the nav bar
-//    if (IS_IPHONE) {
-//        contentOffSet += 65;
-//    }
-//    
-//    
-//    
-//    if ([self.model hasMoreItems] && scrollView.contentOffset.y<=-60 && !self.loadedComments) {
-//        [self.model loadNextPage];
-//        
-//        self.loadedComments = YES;
-//        
-//        NSLog(@"LOADING COMMENTS ");
-//    }
-}
 
 -(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // override
-    
     self.loadedComments = NO;
 }
 

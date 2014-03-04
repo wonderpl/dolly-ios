@@ -101,55 +101,7 @@
     }
 }
 
-#pragma mark - channel subscriptions
-//
-//- (void) subscriptionRequestToChannel: (Channel *) channel
-//          completionHandler: (MKNKUserSuccessBlock) completionBlock
-//               errorHandler: (MKNKUserErrorBlock) errorBlock
-//{
-// 
-//    if (channel.subscribedByUserValue)
-//    {
-//        //Unsubscribe
-//        [self.appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
-//            
-//            [self.channelSubscriptions removeObject:channel];
-//            channel.subscribedByUserValue = NO;
-//            
-//            if (completionBlock)
-//            {
-//                completionBlock(responseDictionary);
-//            }
-//            
-//        } errorHandler:^(NSDictionary *error) {
-//            if (errorBlock)
-//            {
-//                errorBlock(error);
-//            }
-//        }];
-//    }
-//    else
-//    {
-//        //Subscribe
-//        [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelURL:channel.resourceURL completionHandler:^(NSDictionary *responseDictionary) {
-//            [self.channelSubscriptions addObject:channel.uniqueId];
-//            channel.subscribedByUserValue = YES;
-//            //channel.subscribedByUserValue = [self.subscribed containsObject:channel];
-//            if (completionBlock)
-//            {
-//                completionBlock(responseDictionary);
-//            }
-//        } errorHandler:^(NSDictionary *error) {
-//            
-//            if (errorBlock)
-//            {
-//                errorBlock(error);
-//            }
-//        }];
-//    }
-//}
-//
-//
+
 
 - (void) subscribeToChannel: (Channel *) channel
           completionHandler: (MKNKUserSuccessBlock) completionBlock
@@ -172,34 +124,15 @@
         }
     }];
 }
-//
-//-(void) subscribetoChannel :(Channel*) channel{
-//    [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelURL:channel.resourceURL completionHandler:^(NSDictionary *responseDictionary) {
-//        [self.channelSubscriptions addObject:channel.uniqueId];
-//        channel.subscribedByUserValue = [self.channelSubscriptions containsObject:channel];
-//    } errorHandler:^(NSDictionary *error) {
-//        
-//    }];
-//}
 
 - (void) unsubscribeToChannel: (Channel *) channel
           completionHandler: (MKNKUserSuccessBlock) completionBlock
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-//    NSLog(@"before");
-//    [self subscribedList];
-//
     [self.appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
    
         [self.channelSubscriptions removeObject:channel.uniqueId];
         channel.subscribedByUserValue = NO;
-        
-//        
-//        NSLog(@"unsubscribe");
-//        NSLog(@"%@, %hhd", channel.title, channel.subscribedByUserValue);
-//        
-//        NSLog(@"after");
-//        [self subscribedList];
         
         
         if (completionBlock)
@@ -215,17 +148,6 @@
     }];
     
 }
-
-//-(void) unsubscribetoChannel :(Channel*) channel{
-//    [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelURL:channel.resourceURL completionHandler:^(NSDictionary *responseDictionary) {
-//        
-//        [self.channelSubscriptions removeObject:channel];
-//        
-//    } errorHandler:^(NSDictionary *error) {
-//        
-//        
-//    }];
-//}
 
 #pragma mark - user subscriptions
 

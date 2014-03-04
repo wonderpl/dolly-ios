@@ -99,7 +99,6 @@
     _contentView.backgroundColor = [UIColor clearColor];
     self.cropSize = _contentView.frame.size;
     [self addSubview:_contentView];
-   // NSLog(@"x: %f y: %f %f", CGRectGetMinX(_contentView.frame), CGRectGetMinY(_contentView.frame), self.bounds.size.width);
     
     _cropBorderView = [[GKCropBorderView alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2 - _initialContentSize.width  / 2 - kBorderCorrectionValue, (self.bounds.size.height - toolbarSize) / 2 - _initialContentSize.height / 2 - kBorderCorrectionValue, _initialContentSize.width + kBorderCorrectionValue*2, _initialContentSize.height + kBorderCorrectionValue*2)];
     [self addSubview:_cropBorderView];

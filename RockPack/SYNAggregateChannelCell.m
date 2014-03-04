@@ -73,6 +73,7 @@ static NSString *kChannelItemCellIndetifier = @"SYNAggregateChannelItemCell";
     if (collectionData.count>1) {
         NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:NO]];
         collectionData = [collectionData sortedArrayUsingDescriptors:sortDescriptors];
+
     }
     
     [super setCollectionData:collectionData];
