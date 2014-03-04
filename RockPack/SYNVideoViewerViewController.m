@@ -15,7 +15,6 @@
 #import "SYNAbstractViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
-#import "SYNImplicitSharingController.h"
 #import "SYNMasterViewController.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNPassthroughView.h"
@@ -740,126 +739,126 @@
 
 - (IBAction) toggleStarButton: (UIButton *) button
 {
-    if (self.isVideoExpanded)
-    {
-        return;
-    }
-    
-    // if the user does NOT have a FB account linked, no prompt
-    
-    ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
-    
-    BOOL doesNotHavePublishPermissions = ![[SYNFacebookManager sharedFBManager] hasActiveSessionWithPermissionType: FacebookPublishPermission];
-    BOOL doesNotHaveAutopostStarFlagSet = !(facebookAccount.flagsValue & ExternalAccountFlagAutopostStar);
-    
-    if (facebookAccount && (facebookAccount.noautopostValue == NO) && (doesNotHavePublishPermissions || doesNotHaveAutopostStarFlagSet) )
-    {
-        // then show panel, the newtork code will check for permissions in the FB Engine, is they exist then the code is triggered automatically and the flag is set,
-        // if not then the flag is set after the net call
-        
-        
-        __weak SYNVideoViewerViewController *wself = self;
-        SYNImplicitSharingController *implicitSharingController = [SYNImplicitSharingController controllerWithBlock: ^(BOOL allowedAutoSharing) {
-            [wself toggleStarButton: button];
-        }];
-        [self addChildViewController: implicitSharingController];
-        
-        implicitSharingController.view.alpha = 0.0f;
-        implicitSharingController.view.center = CGPointMake(self.view.center.x, self.view.center.y);
-        implicitSharingController.view.frame = CGRectIntegral(implicitSharingController.view.frame);
-        [self.view  addSubview: implicitSharingController.view];
-        
-        [UIView animateWithDuration: 0.3
-                         animations: ^{
-                             implicitSharingController.view.alpha = 1.0f;
-                         }];
-        
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                                                     action: @selector(dismissImplicitSharing)];
-        [self.view addGestureRecognizer: tapGesture];
-        
-        return;
-    }
-    
-    button.selected = !button.selected;
-    
-    NSString *starAction = (button.selected == TRUE) ? @"star" : @"unstar";
-    
-    button.enabled = NO;
-    
-    [self.heartActivityIndicator startAnimating];
-    
-    __weak VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
-    __weak SYNVideoViewerViewController *wself = self;
-    MKNKUserErrorBlock finishBlock = ^(id obj) {
-        [wself updateVideoDetailsForIndex: self.currentSelectedIndex];
-        
-        [wself.heartActivityIndicator stopAnimating];
-        
-        button.enabled = YES;
-    };
-    
-    [appDelegate.oAuthNetworkEngine
-     recordActivityForUserId: appDelegate.currentUser.uniqueId
-     action: starAction
-     videoInstanceId: videoInstance.uniqueId
-     completionHandler: ^(id response) {
-         BOOL previousStarringState = videoInstance.starredByUserValue;
-         NSNumber *previousStarCount = videoInstance.video.starCount;
-         
-         if (previousStarringState)
-         {
-             // Currently highlighted, so decrement
-             videoInstance.starredByUserValue = FALSE;
-             videoInstance.video.starCountValue -= 1;
-         }
-         else
-         {
-             // Currently highlighted, so increment
-             videoInstance.starredByUserValue = TRUE;
-             videoInstance.video.starCountValue += 1;
-             [Appirater userDidSignificantEvent: FALSE];
-         }
-         
-         NSError *error;
-         
-         if (![videoInstance.managedObjectContext
-               save: &error])                                                                       // something went wrong
-         {
-             // revert to previous state
-             videoInstance.starredByUserValue = previousStarringState;
-             videoInstance.video.starCount = previousStarCount;
-             button.selected = !button.selected;
-         }
-         
-         finishBlock(response);
-     } errorHandler: ^(id error) {
-         DebugLog(@"Could not star video");
-         button.selected = !button.selected;
-         finishBlock(error);
-     }];
+//    if (self.isVideoExpanded)
+//    {
+//        return;
+//    }
+//    
+//    // if the user does NOT have a FB account linked, no prompt
+//    
+//    ExternalAccount *facebookAccount = appDelegate.currentUser.facebookAccount;
+//    
+//    BOOL doesNotHavePublishPermissions = ![[SYNFacebookManager sharedFBManager] hasActiveSessionWithPermissionType: FacebookPublishPermission];
+//    BOOL doesNotHaveAutopostStarFlagSet = !(facebookAccount.flagsValue & ExternalAccountFlagAutopostStar);
+//    
+//    if (facebookAccount && (facebookAccount.noautopostValue == NO) && (doesNotHavePublishPermissions || doesNotHaveAutopostStarFlagSet) )
+//    {
+//        // then show panel, the newtork code will check for permissions in the FB Engine, is they exist then the code is triggered automatically and the flag is set,
+//        // if not then the flag is set after the net call
+//        
+//        
+//        __weak SYNVideoViewerViewController *wself = self;
+//        SYNImplicitSharingController *implicitSharingController = [SYNImplicitSharingController controllerWithBlock: ^(BOOL allowedAutoSharing) {
+//            [wself toggleStarButton: button];
+//        }];
+//        [self addChildViewController: implicitSharingController];
+//        
+//        implicitSharingController.view.alpha = 0.0f;
+//        implicitSharingController.view.center = CGPointMake(self.view.center.x, self.view.center.y);
+//        implicitSharingController.view.frame = CGRectIntegral(implicitSharingController.view.frame);
+//        [self.view  addSubview: implicitSharingController.view];
+//        
+//        [UIView animateWithDuration: 0.3
+//                         animations: ^{
+//                             implicitSharingController.view.alpha = 1.0f;
+//                         }];
+//        
+//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget: self
+//                                                                                     action: @selector(dismissImplicitSharing)];
+//        [self.view addGestureRecognizer: tapGesture];
+//        
+//        return;
+//    }
+//    
+//    button.selected = !button.selected;
+//    
+//    NSString *starAction = (button.selected == TRUE) ? @"star" : @"unstar";
+//    
+//    button.enabled = NO;
+//    
+//    [self.heartActivityIndicator startAnimating];
+//    
+//    __weak VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
+//    __weak SYNVideoViewerViewController *wself = self;
+//    MKNKUserErrorBlock finishBlock = ^(id obj) {
+//        [wself updateVideoDetailsForIndex: self.currentSelectedIndex];
+//        
+//        [wself.heartActivityIndicator stopAnimating];
+//        
+//        button.enabled = YES;
+//    };
+//    
+//    [appDelegate.oAuthNetworkEngine
+//     recordActivityForUserId: appDelegate.currentUser.uniqueId
+//     action: starAction
+//     videoInstanceId: videoInstance.uniqueId
+//     completionHandler: ^(id response) {
+//         BOOL previousStarringState = videoInstance.starredByUserValue;
+//         NSNumber *previousStarCount = videoInstance.video.starCount;
+//         
+//         if (previousStarringState)
+//         {
+//             // Currently highlighted, so decrement
+//             videoInstance.starredByUserValue = FALSE;
+//             videoInstance.video.starCountValue -= 1;
+//         }
+//         else
+//         {
+//             // Currently highlighted, so increment
+//             videoInstance.starredByUserValue = TRUE;
+//             videoInstance.video.starCountValue += 1;
+//             [Appirater userDidSignificantEvent: FALSE];
+//         }
+//         
+//         NSError *error;
+//         
+//         if (![videoInstance.managedObjectContext
+//               save: &error])                                                                       // something went wrong
+//         {
+//             // revert to previous state
+//             videoInstance.starredByUserValue = previousStarringState;
+//             videoInstance.video.starCount = previousStarCount;
+//             button.selected = !button.selected;
+//         }
+//         
+//         finishBlock(response);
+//     } errorHandler: ^(id error) {
+//         DebugLog(@"Could not star video");
+//         button.selected = !button.selected;
+//         finishBlock(error);
+//     }];
 }
 
 
-- (void) dismissImplicitSharing
-{
-    SYNImplicitSharingController *implicitSharingController;
-    
-    for (UIViewController *child in self.childViewControllers)
-    {
-        if ([child isKindOfClass: [SYNImplicitSharingController class]])
-        {
-            implicitSharingController = (SYNImplicitSharingController *) child;
-        }
-    }
-    
-    if (!implicitSharingController)
-    {
-        return;
-    }
-    
-    [implicitSharingController dismiss];
-}
+//- (void) dismissImplicitSharing
+//{
+//    SYNImplicitSharingController *implicitSharingController;
+//    
+//    for (UIViewController *child in self.childViewControllers)
+//    {
+//        if ([child isKindOfClass: [SYNImplicitSharingController class]])
+//        {
+//            implicitSharingController = (SYNImplicitSharingController *) child;
+//        }
+//    }
+//    
+//    if (!implicitSharingController)
+//    {
+//        return;
+//    }
+//    
+//    [implicitSharingController dismiss];
+//}
 
 
 - (IBAction) userTouchedCloseButton: (id) sender
