@@ -12,7 +12,6 @@
 #import "SYNAddToChannelCreateNewCell.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
-#import "SYNChannelThumbnailCell.h"
 #import "SYNDeviceManager.h"
 #import "SYNImagePickerController.h"
 #import "SYNOAuthNetworkEngine.h"

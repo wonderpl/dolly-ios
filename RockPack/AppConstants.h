@@ -13,6 +13,7 @@
 
 #define ENABLE_USER_RATINGS
 
+#define APP_ID @"824769819"
 
 #define kAPIInitialBatchSize 48
 

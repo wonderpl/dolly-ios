@@ -159,6 +159,9 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 		if ([actionData isEqualToString:@"playing"]) {
 			[self handleVideoPlayerStartedPlaying];
 		}
+		if ([actionData isEqualToString:@"paused"]) {
+			[self handleVideoPlayerPaused];
+		}
 		if ([actionData isEqualToString:@"ended"]) {
 			[self handleVideoPlayerFinishedPlaying];
 		}
