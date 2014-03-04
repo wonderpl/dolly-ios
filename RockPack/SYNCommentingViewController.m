@@ -182,7 +182,9 @@ static NSString* PlaceholderText = @"Say something nice";
 -(void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 
-    self.videoInstance.commentCountValue = [self.model totalItemCount];
+    if ([self.model totalItemCount]) {
+        self.videoInstance.commentCountValue = [self.model totalItemCount];
+    }
 
     //Updates the iphone comment cont
     [self.socialButton setCount:self.videoInstance.commentCountValue];

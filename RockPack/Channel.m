@@ -241,7 +241,9 @@
             if(self.favouritesValue && [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId])
                 videoInstance.starredByUserValue = YES;
             
-            if (channelDictionary[@"comments"][@"count"]) {
+            videoInstance.commentCount = 0;
+            
+            if (channelDictionary[@"comments"][@"count"]) {                
                 videoInstance.commentCount = channelDictionary[@"comments"][@"count"];
             }
             
