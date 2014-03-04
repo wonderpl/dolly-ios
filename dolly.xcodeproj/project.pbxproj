@@ -183,12 +183,6 @@
 		019CB6A8181187E80079DFCF /* SYNFadingFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */; };
 		019E6A61165FD99A002B312A /* SYNOAuth2Credential.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E6A60165FD99A002B312A /* SYNOAuth2Credential.m */; };
 		019E6A64165FD9AC002B312A /* SYNOAuthNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E6A63165FD9AC002B312A /* SYNOAuthNetworkEngine.m */; };
-		019E81FF1654043A00744A03 /* Mail Sent.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81F91654043A00744A03 /* Mail Sent.aif */; };
-		019E82001654043A00744A03 /* NewSlideIn.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FA1654043A00744A03 /* NewSlideIn.aif */; };
-		019E82011654043A00744A03 /* NewSlideOut.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FB1654043A00744A03 /* NewSlideOut.aif */; };
-		019E82021654043A00744A03 /* Scroll.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FC1654043A00744A03 /* Scroll.aif */; };
-		019E82031654043A00744A03 /* Select.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FD1654043A00744A03 /* Select.aif */; };
-		019E82041654043A00744A03 /* Trash.aif in Resources */ = {isa = PBXBuildFile; fileRef = 019E81FE1654043A00744A03 /* Trash.aif */; };
 		01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8216F32C3400B05084 /* ShuttleBarRemainingBar.png */; };
 		01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8316F32C3400B05084 /* ShuttleBarRemainingBar@2x.png */; };
 		01A79B9316F32C3400B05084 /* Clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8416F32C3400B05084 /* Clear.png */; };
@@ -1513,12 +1507,6 @@
 		019E6A60165FD99A002B312A /* SYNOAuth2Credential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOAuth2Credential.m; sourceTree = "<group>"; };
 		019E6A62165FD9AC002B312A /* SYNOAuthNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOAuthNetworkEngine.h; sourceTree = "<group>"; };
 		019E6A63165FD9AC002B312A /* SYNOAuthNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOAuthNetworkEngine.m; sourceTree = "<group>"; };
-		019E81F91654043A00744A03 /* Mail Sent.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Mail Sent.aif"; path = "Assets/Audio/Mail Sent.aif"; sourceTree = "<group>"; };
-		019E81FA1654043A00744A03 /* NewSlideIn.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewSlideIn.aif; path = Assets/Audio/NewSlideIn.aif; sourceTree = "<group>"; };
-		019E81FB1654043A00744A03 /* NewSlideOut.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewSlideOut.aif; path = Assets/Audio/NewSlideOut.aif; sourceTree = "<group>"; };
-		019E81FC1654043A00744A03 /* Scroll.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = Scroll.aif; path = Assets/Audio/Scroll.aif; sourceTree = "<group>"; };
-		019E81FD1654043A00744A03 /* Select.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = Select.aif; path = Assets/Audio/Select.aif; sourceTree = "<group>"; };
-		019E81FE1654043A00744A03 /* Trash.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trash.aif; path = Assets/Audio/Trash.aif; sourceTree = "<group>"; };
 		01A79B8216F32C3400B05084 /* ShuttleBarRemainingBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShuttleBarRemainingBar.png; path = Assets/Images/ShuttleBarRemainingBar.png; sourceTree = "<group>"; };
 		01A79B8316F32C3400B05084 /* ShuttleBarRemainingBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShuttleBarRemainingBar@2x.png"; path = "Assets/Images/ShuttleBarRemainingBar@2x.png"; sourceTree = "<group>"; };
 		01A79B8416F32C3400B05084 /* Clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Clear.png; path = Assets/Images/Clear.png; sourceTree = "<group>"; };
@@ -3119,19 +3107,6 @@
 			name = "Mood Controller";
 			sourceTree = "<group>";
 		};
-		01363EA6162F5C2F00FFAA09 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				019E81F91654043A00744A03 /* Mail Sent.aif */,
-				019E81FA1654043A00744A03 /* NewSlideIn.aif */,
-				019E81FB1654043A00744A03 /* NewSlideOut.aif */,
-				019E81FC1654043A00744A03 /* Scroll.aif */,
-				019E81FD1654043A00744A03 /* Select.aif */,
-				019E81FE1654043A00744A03 /* Trash.aif */,
-			);
-			name = Audio;
-			sourceTree = "<group>";
-		};
 		0142ED8D16B1B7FE008694DA /* You */ = {
 			isa = PBXGroup;
 			children = (
@@ -3294,7 +3269,6 @@
 		019824DD1629CA3700216900 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				01363EA6162F5C2F00FFAA09 /* Audio */,
 				019824FB1629D19600216900 /* Fonts */,
 				01F8E76216B0312E000D44B9 /* HTML */,
 				019824DE1629CA5900216900 /* Images */,
@@ -5904,13 +5878,7 @@
 				010DEFDF1629BDC40080F26B /* InfoPlist.strings in Resources */,
 				012CDC3E17E2286C00C723BB /* DeletePackButton@2x.png in Resources */,
 				01B7F765164FC8A8009C5CCD /* SYNChannelThumbnailCell.xib in Resources */,
-				019E81FF1654043A00744A03 /* Mail Sent.aif in Resources */,
-				019E82001654043A00744A03 /* NewSlideIn.aif in Resources */,
-				019E82011654043A00744A03 /* NewSlideOut.aif in Resources */,
-				019E82021654043A00744A03 /* Scroll.aif in Resources */,
 				BEB31368181AB81600FAF98A /* IconVideoAddHighlighted@2x.png in Resources */,
-				019E82031654043A00744A03 /* Select.aif in Resources */,
-				019E82041654043A00744A03 /* Trash.aif in Resources */,
 				01677E0C16554AB500B1B1D8 /* ButtonBack.png in Resources */,
 				4C5E862D18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib in Resources */,
 				01677E0D16554AB500B1B1D8 /* ButtonBack@2x.png in Resources */,
