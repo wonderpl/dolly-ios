@@ -74,7 +74,7 @@
 @property (nonatomic, strong) SYNChannelMidCell *followCell;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPad;
-@property (strong, nonatomic) IBOutlet UIButton *followAllButton;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *followAllButton;
 @property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPhone;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
@@ -1662,7 +1662,11 @@
         [[NSNotificationCenter defaultCenter] removeObserver: self
                                                         name: NSManagedObjectContextDidSaveNotification
                                                       object: self.channelOwner];
+        
+
     }
+    
+
     
     if (!appDelegate)
     {
@@ -2014,54 +2018,15 @@
     //#warning change to server call
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
-        
-        
         self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
-        
-        
-        if(self.channelOwner.subscribedByUserValue)
-        {
-            
-            [SYNActivityManager.sharedInstance unsubscribeToUser:self.channelOwner
-                                               completionHandler:^(id responce) {
-                                                   
-                                                   self.channelOwner.subscribedByUser = [NSNumber numberWithBool:NO];
-                                                   [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
-                                                   [appDelegate saveContext: YES];
-                                                   
-                                                   
-                                               } errorHandler:^(id error) {
-                                                   
-                                                   NSLog(@"%@",error);
-                                               }];
-        }
-        else
-        {
-            
-            [SYNActivityManager.sharedInstance subscribeToUser:self.channelOwner
-                                             completionHandler: ^(id responce) {
-                                                 self.channelOwner.subscribedByUser = [NSNumber numberWithBool:YES];
-
-                                                 [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
-                                                 
-                                                 [appDelegate saveContext: YES];
-                                                 
-                                             } errorHandler: ^(id error) {
-                                                 
-                                                 
-                                             }];
-        }
-        
+        self.followAllButton.dataItemLinked = self.channelOwner;
+        [self followControlPressed:self.followAllButton];
     }
     
     if (alertView == self.deleteChannelAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
-        
         [self deleteChannel:self.deleteCell];
-        
     }
-    
-    
 }
 
 
