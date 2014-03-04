@@ -1093,8 +1093,6 @@
 		BEB83012177491ED00AAA8D5 /* login_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */; };
 		BEB83013177491ED00AAA8D5 /* login_bg_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB8300F177491ED00AAA8D5 /* login_bg_3.jpg */; };
 		BEB83014177491ED00AAA8D5 /* login_bg_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEB83010177491ED00AAA8D5 /* login_bg_4.jpg */; };
-		BEBFD0921779F0F800C90544 /* SYNCaution.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFD0911779F0F800C90544 /* SYNCaution.m */; };
-		BEBFD0951779F25800C90544 /* SYNCautionMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBFD0941779F25800C90544 /* SYNCautionMessageView.m */; };
 		BEBFD0A2177A039D00C90544 /* ButtonPrivateLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD098177A039D00C90544 /* ButtonPrivateLeft.png */; };
 		BEBFD0A3177A039D00C90544 /* ButtonPrivateLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD099177A039D00C90544 /* ButtonPrivateLeft@2x.png */; };
 		BEBFD0A4177A039D00C90544 /* ButtonPrivateLeftHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBFD09A177A039D00C90544 /* ButtonPrivateLeftHighlighted.png */; };
@@ -2556,10 +2554,6 @@
 		BEB8300E177491ED00AAA8D5 /* login_bg_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_2.jpg; path = Assets/Images/login_bg_2.jpg; sourceTree = "<group>"; };
 		BEB8300F177491ED00AAA8D5 /* login_bg_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_3.jpg; path = Assets/Images/login_bg_3.jpg; sourceTree = "<group>"; };
 		BEB83010177491ED00AAA8D5 /* login_bg_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = login_bg_4.jpg; path = Assets/Images/login_bg_4.jpg; sourceTree = "<group>"; };
-		BEBFD0901779F0F800C90544 /* SYNCaution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCaution.h; sourceTree = "<group>"; };
-		BEBFD0911779F0F800C90544 /* SYNCaution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCaution.m; sourceTree = "<group>"; };
-		BEBFD0931779F25700C90544 /* SYNCautionMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCautionMessageView.h; sourceTree = "<group>"; };
-		BEBFD0941779F25800C90544 /* SYNCautionMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCautionMessageView.m; sourceTree = "<group>"; };
 		BEBFD098177A039D00C90544 /* ButtonPrivateLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPrivateLeft.png; path = Assets/Images/ButtonPrivateLeft.png; sourceTree = "<group>"; };
 		BEBFD099177A039D00C90544 /* ButtonPrivateLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPrivateLeft@2x.png"; path = "Assets/Images/ButtonPrivateLeft@2x.png"; sourceTree = "<group>"; };
 		BEBFD09A177A039D00C90544 /* ButtonPrivateLeftHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPrivateLeftHighlighted.png; path = Assets/Images/ButtonPrivateLeftHighlighted.png; sourceTree = "<group>"; };
@@ -5044,10 +5038,6 @@
 		BE285DAD1725A20B00D995AB /* Slide In Messages */ = {
 			isa = PBXGroup;
 			children = (
-				BEBFD0901779F0F800C90544 /* SYNCaution.h */,
-				BEBFD0911779F0F800C90544 /* SYNCaution.m */,
-				BEBFD0931779F25700C90544 /* SYNCautionMessageView.h */,
-				BEBFD0941779F25800C90544 /* SYNCautionMessageView.m */,
 				BE5D29E917577E2800C00486 /* SYNPopupMessageView.h */,
 				BE5D29EA17577E2800C00486 /* SYNPopupMessageView.m */,
 				BE285DAE1725A23300D995AB /* SYNNetworkMessageView.h */,
@@ -7200,8 +7190,6 @@
 				BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */,
 				BEB8300C17745A0400AAA8D5 /* SYNLoginOnBoardingController.m in Sources */,
 				E9AD5B6C187D767200298D95 /* SYNiPhoneLoginViewController.m in Sources */,
-				BEBFD0921779F0F800C90544 /* SYNCaution.m in Sources */,
-				BEBFD0951779F25800C90544 /* SYNCautionMessageView.m in Sources */,
 				BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */,
 				BE7D02F7178C4354008053DC /* SYNSubscribersViewController.m in Sources */,
 				BE7D0301179D5624008053DC /* SYNFriendsViewController.m in Sources */,
