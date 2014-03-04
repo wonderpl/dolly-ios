@@ -216,6 +216,8 @@ typedef void (^SearchResultCompleteBlock)(int);
     } else {
         [self showUserOverLay];
     }
+    // == So the unfollow/follow button gets updated 
+    [self.usersCollectionView reloadData];
 }
 
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader

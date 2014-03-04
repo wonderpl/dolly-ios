@@ -134,8 +134,8 @@
                         <outlet property="delegate" destination="-1" id="0DR-hI-wIs"/>
                     </connections>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vH4-no-prL" userLabel="Button - follow all">
-                    <rect key="frame" x="116" y="452" width="88" height="27"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vH4-no-prL" userLabel="Button - follow all" customClass="SYNSocialFollowButton">
+                    <rect key="frame" x="254" y="313" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title="Follow All">
@@ -213,7 +213,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xcO-ZG-K1B" userLabel="Label - User name">
-                    <rect key="frame" x="20" y="414" width="280" height="18"/>
+                    <rect key="frame" x="20" y="417" width="280" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

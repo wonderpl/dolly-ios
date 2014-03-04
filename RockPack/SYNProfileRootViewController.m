@@ -320,13 +320,6 @@
     
     self.tapToCancelEditMode = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelEditModeTapped)];
     
-    // == Required because of autolay, it was not functioning properly when the views were changing
-    
-    if (IS_IPAD)
-    {
-        self.aboutMeTextView.translatesAutoresizingMaskIntoConstraints = YES;
-    }
-    
     // == The back button title is always set to ""
     [self.navigationController.navigationItem.leftBarButtonItem setTitle:@""];
     
@@ -557,7 +550,8 @@
     
     [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
 
-    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+    
+    [self.aboutMeTextView setText:self.channelOwner.channelOwnerDescription];
     [self setUpViews];
 }
 
@@ -671,7 +665,7 @@
         self.uploadAvatar.hidden = YES;
         if (IS_IPHONE) {
             CGRect tmpFrame = self.aboutMeTextView.frame;
-            tmpFrame.origin.y += 14;
+            tmpFrame.origin.y += 26;
             self.aboutMeTextView.frame = tmpFrame;
             
             tmpFrame = self.segmentedControlsView.frame;
@@ -700,8 +694,6 @@
         }
         
         if (IS_IPAD) {
-            
-            [self.topSegmentedConstraint setConstant:self.topSegmentedConstraint.constant+25];
             
             [self.topTextViewConstraint setConstant:self.topTextViewConstraint.constant+10];
             [self.containerViewIPad layoutIfNeeded];
@@ -809,7 +801,7 @@
     
     //self.navigationController.navigationBarHidden = YES;
     
-    if (!IS_IPHONE)
+    if (IS_IPAD)
     {
         self.channelThumbnailCollectionView.contentOffset = CGPointZero;
         self.subscriptionThumbnailCollectionView.contentOffset = CGPointZero;
@@ -822,11 +814,8 @@
         {
             
             
-            float sectionHeader = 691.0f;
+            float sectionHeader = 702.0f;
             
-            if (self.modeType == kModeOtherUsersProfile) {
-                sectionHeader+=25.0f;
-            }
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(sectionHeader, 47.0, 70.0, 47.0);
             self.subscriptionLayoutIPad.minimumLineSpacing = 14.0f;
@@ -849,10 +838,6 @@
         else
         {
             float sectionHeader = 574.0f;
-
-            if (self.modeType == kModeOtherUsersProfile) {
-                sectionHeader+=25.0f;
-            }
 
             self.channelLayoutIPad.sectionInset = UIEdgeInsetsMake(sectionHeader, 21.0, 70.0, 21.0);
             self.channelLayoutIPad.minimumLineSpacing = 14.0f;
@@ -2194,11 +2179,12 @@
     self.uploadAvatarButton.alpha = 0.0f;
     
     CGRect tmpRect = self.aboutMeTextView.frame;
-    tmpRect.origin.y += 10;
-    tmpRect.size.height += 18;
+    if (IS_IPHONE) {
+//        tmpRect.origin.y += 10;
+//        tmpRect.size.height += 18;
+    }
     
 
-    
     self.subscriptionThumbnailCollectionView.scrollEnabled = NO;
     self.channelThumbnailCollectionView.scrollEnabled = NO;
     self.aboutMeTextView.editable = YES;
@@ -2263,8 +2249,12 @@
     self.uploadAvatar.hidden = NO;
     self.modeType = kModeMyOwnProfile;
     CGRect tmpRect = self.aboutMeTextView.frame;
-    tmpRect.origin.y -= 10;
-    tmpRect.size.height -= 18;
+    
+    if (IS_IPHONE) {
+//        tmpRect.origin.y -= 10;
+//        tmpRect.size.height -= 18;
+        
+    }
     
     [self.view removeGestureRecognizer:self.tapToCancelEditMode];
     self.aboutMeTextView.editable = NO;
