@@ -238,6 +238,9 @@ typedef enum {
              self.completeBlock = ^{
 				 
 				 [[SYNTrackingManager sharedManager] trackRateScreenView];
+				 
+				 NSString *URLString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APP_ID];
+				 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
                  
                  [Appirater userDidSignificantEvent: YES];
 				 

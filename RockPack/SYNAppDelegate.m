@@ -68,7 +68,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
 #ifdef ENABLE_USER_RATINGS
-    [Appirater setAppId: @"660697542"];
+    [Appirater setAppId:APP_ID];
     [Appirater setDaysUntilPrompt: 1];
     [Appirater setUsesUntilPrompt: 2];
     [Appirater setTimeBeforeReminding: 10];
