@@ -54,7 +54,7 @@
 @property (nonatomic, assign) BOOL collectionsTabActive;
 
 @property (nonatomic, strong) NSArray *filteredSubscriptions;
-@property (strong, nonatomic) UIBarButtonItem *barBtnBack; // storage for the navigation back button
+@property (nonatomic, strong) UIBarButtonItem *barBtnBack; // storage for the navigation back button
 
 @property (nonatomic, strong) NSIndexPath *channelsIndexPath;
 @property (nonatomic, strong) NSIndexPath *subscriptionsIndexPath;
@@ -62,73 +62,73 @@
 @property (nonatomic, strong) NSString *currentSearchTerm;
 @property (nonatomic, assign) BOOL shouldBeginEditing;
 
-@property (strong, nonatomic) IBOutlet UIButton *uploadCoverPhotoButton;
+@property (nonatomic, strong) IBOutlet UIButton *uploadCoverPhotoButton;
 
 @property (nonatomic, strong) id orientationDesicionmaker;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topSegmentedConstraint;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topTextViewConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *topSegmentedConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *topTextViewConstraint;
 
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerAvatar;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerCoverphoto;
 
 @property (nonatomic, strong) SYNChannelMidCell *followCell;
-@property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
-@property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPad;
-@property (strong, nonatomic) IBOutlet SYNSocialButton *followAllButton;
-@property (strong, nonatomic) IBOutlet UIView *outerViewFullNameLabel;
-@property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *channelLayoutIPhone;
-@property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
+@property (nonatomic, strong) IBOutlet UICollectionViewFlowLayout *channelLayoutIPad;
+@property (nonatomic, strong) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPad;
+@property (nonatomic, strong) IBOutlet SYNSocialButton *followAllButton;
+@property (nonatomic, strong) IBOutlet UIView *outerViewFullNameLabel;
+@property (nonatomic, strong) IBOutlet UICollectionViewFlowLayout *channelLayoutIPhone;
+@property (nonatomic, strong) IBOutlet UICollectionViewFlowLayout *subscriptionLayoutIPhone;
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 
-@property (strong, nonatomic) SYNProfileExpandedFlowLayout *channelExpandedLayout;
+@property (nonatomic, strong) SYNProfileExpandedFlowLayout *channelExpandedLayout;
 @property (nonatomic, strong) IBOutlet UICollectionView *channelThumbnailCollectionView;
-@property (strong, nonatomic) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
-@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (strong, nonatomic) IBOutlet UIButton *avatarButton;
+@property (nonatomic, strong) IBOutlet UICollectionView *subscriptionThumbnailCollectionView;
+@property (nonatomic, strong) IBOutlet UIImageView *profileImageView;
+//@property (strong, nonatomic) IBOutlet UIButton *avatarButton;
 
-@property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *coverImage;
-@property (strong, nonatomic) IBOutlet UITextView *aboutMeTextView;
+@property (nonatomic, strong) IBOutlet UILabel *fullNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *coverImage;
+@property (nonatomic, strong) IBOutlet UITextView *aboutMeTextView;
 
-@property (strong, nonatomic) IBOutlet UIButton *collectionsTabButton;
-@property (strong, nonatomic) IBOutlet UIButton *followingTabButton;
-@property (strong, nonatomic) IBOutlet UIView *segmentedControlsView;
-@property (strong, nonatomic) IBOutlet UIButton *moreButton;
+@property (nonatomic, strong) IBOutlet UIButton *collectionsTabButton;
+@property (nonatomic, strong) IBOutlet UIButton *followingTabButton;
+@property (nonatomic, strong) IBOutlet UIView *segmentedControlsView;
+@property (nonatomic, strong) IBOutlet UIButton *moreButton;
 @property (nonatomic, strong) SYNChannelMidCell *deleteCell;
 
-@property (strong, nonatomic) IBOutlet UIButton *uploadAvatarButton;
+@property (nonatomic, strong) IBOutlet UIButton *uploadAvatarButton;
 
 
 @property (nonatomic, assign) BOOL searchMode;
-@property (strong, nonatomic) IBOutlet UISearchBar *followingSearchBar;
-@property (strong, nonatomic) IBOutlet UIView *containerViewIPad;
+@property (nonatomic, strong) IBOutlet UISearchBar *followingSearchBar;
+@property (nonatomic, strong) IBOutlet UIView *containerViewIPad;
 @property (nonatomic) ProfileType modeType;
-@property (strong, nonatomic) UIBarButtonItem *barBtnCancelEditMode;
-@property (strong, nonatomic) UIBarButtonItem *barBtnCancelCreateChannel;
-@property (strong, nonatomic) UIBarButtonItem *barBtnSaveEditMode;
-@property (strong, nonatomic) UIBarButtonItem *barBtnSaveCreateChannel;
+@property (nonatomic, strong) UIBarButtonItem *barBtnCancelEditMode;
+@property (nonatomic, strong) UIBarButtonItem *barBtnCancelCreateChannel;
+@property (nonatomic, strong) UIBarButtonItem *barBtnSaveEditMode;
+@property (nonatomic, strong) UIBarButtonItem *barBtnSaveCreateChannel;
 
-@property (strong, nonatomic) IBOutlet UIView *backgroundView;
+@property (nonatomic, strong) IBOutlet UIView *backgroundView;
 
-@property (strong, nonatomic) UITapGestureRecognizer *tapToHideKeyoboard;
-@property (strong, nonatomic) UITapGestureRecognizer *tapToCancelEditMode;
+@property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (nonatomic, strong) UITapGestureRecognizer *tapToCancelEditMode;
 
 
-@property (strong, nonatomic) UIAlertView *followAllAlertView;
-@property (strong, nonatomic) UIAlertView *sameChannelNameAlertView;
+@property (nonatomic, strong) UIAlertView *followAllAlertView;
+@property (nonatomic, strong) UIAlertView *sameChannelNameAlertView;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
 @property (nonatomic) CGPoint contentOffset;
 
 @property (weak, nonatomic) SYNChannelCreateNewCell *createChannelCell;
-@property (strong, nonatomic) IBOutlet UILabel *followersCountLabel;
+@property (nonatomic, strong) IBOutlet UILabel *followersCountLabel;
 
-@property  (nonatomic) BOOL creatingChannel;
+@property (nonatomic) BOOL creatingChannel;
 
 @property (nonatomic) NSRange dataRequestRangeChannel;
 @property (nonatomic) NSRange dataRequestRangeSubscriptions;
-@property (strong, nonatomic) IBOutlet UIButton *uploadAvatar;
+@property (nonatomic, strong) IBOutlet UIButton *uploadAvatar;
 
 @end
 
@@ -522,7 +522,6 @@
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
-    
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:11.0];
 
@@ -733,19 +732,12 @@
      }];
 }
 
-//Doesnt work as expected, check it out.
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
 
 #pragma mark - Orientation
 
 
-//#warning is this needed check ipad
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation
 {
-    //Ensure the collection views are scrolled so the topmost cell in the tallest viewcontroller is again at the top.
     if (self.channelsIndexPath)
     {
         [self.channelThumbnailCollectionView scrollToItemAtIndexPath: self.channelsIndexPath
@@ -1668,11 +1660,13 @@
         [[NSNotificationCenter defaultCenter] removeObserver: self
                                                         name: NSManagedObjectContextDidSaveNotification
                                                       object: self.channelOwner];
-        
 
     }
     
-
+    if (user) {
+        _channelOwner = user;
+        [self setUpUserProfile];
+    }
     
     if (!appDelegate)
     {
@@ -1736,6 +1730,8 @@
                 }
             }
         }
+        
+
     }
     else // The ChannelOwner is the User!
     {
@@ -1796,12 +1792,18 @@
     self.dataRequestRangeChannel = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
     self.dataRequestRangeSubscriptions = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
     self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
-    [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
+    self.userNameLabel.text = self.channelOwner.username;
+    self.fullNameLabel.text = self.channelOwner.displayName;
+    [self.aboutMeTextView setText:self.channelOwner.channelOwnerDescription];
+
+    NSLog(@"++++++++++");
+    NSLog(@"display name %@", self.channelOwner.displayName);
+    NSLog(@"user name %@", self.channelOwner.username);
+    NSLog(@"description %@", self.channelOwner.channelOwnerDescription);
     
-    //    [self.subscriptionThumbnailCollectionView reloadData];
-    //    [self.channelThumbnailCollectionView reloadData];
- 
-    [self setUpUserProfile];
+//    [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
+    
+//    [self setUpUserProfile];
 
 }
 
@@ -1993,22 +1995,18 @@
 
 -(void) hideDescriptionCurrentlyShowing
 {
-    
-    for (UICollectionViewCell *cell in [self.subscriptionThumbnailCollectionView visibleCells])
-    {
+    [self hideDescriptionForCollectioView:self.subscriptionThumbnailCollectionView];
+    [self hideDescriptionForCollectioView:self.channelThumbnailCollectionView];
+}
+
+- (void) hideDescriptionForCollectioView:(UICollectionView*) cv {
+    for (UICollectionViewCell *cell in [cv visibleCells]) {
         if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
-            
-            [((SYNChannelMidCell*)cell) setState:ChannelMidCellStateDefault withAnimation:YES];
+            if (((SYNChannelMidCell*)cell).state != ChannelMidCellStateAnimating) {
+                [((SYNChannelMidCell*)cell) setState:ChannelMidCellStateDefault withAnimation:YES];
+            }
         }
     }
-    
-    for (UICollectionViewCell *cell in [self.channelThumbnailCollectionView visibleCells])
-    {
-        if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
-            [((SYNChannelMidCell*)cell) setState:ChannelMidCellStateDefault withAnimation:YES];
-        }
-    }
-    
 }
 
 - (NSString *) yesButtonTitle{
@@ -2539,31 +2537,21 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 
 - (void) picker: (SYNImagePickerController *) picker finishedWithImage: (UIImage *) image {
-    self.avatarButton.enabled = NO;
     
     if (picker == self.imagePickerControllerAvatar) {
-        
         [appDelegate.oAuthNetworkEngine updateAvatarForUserId: appDelegate.currentOAuth2Credentials.userId
                                                         image: image
-                                            completionHandler: ^(NSDictionary* result)
-         {
+                                            completionHandler: ^(NSDictionary* result) {
 			 [[SYNTrackingManager sharedManager] trackAvatarPhotoUploadCompleted];
              
              [self setProfileImage:result[@"thumbnail_url"]];
-             //[self.activityIndicator stopAnimating];
-             self.avatarButton.enabled = YES;
-             
              [self cancelEditModeTapped];
              
          } errorHandler: ^(id error) {
              NSLog(@"updateProfileForUserId error: %@", error);
          }];
-        
         self.imagePickerControllerAvatar = nil;
-        
-    }
-    else
-    {
+    } else {
         [appDelegate.oAuthNetworkEngine updateProfileCoverForUserId: appDelegate.currentOAuth2Credentials.userId
                                                               image: image
                                                   completionHandler: ^(NSDictionary* result)
@@ -2794,27 +2782,15 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 }
 
--(void) cancelCreateChannelWithNoTime
-{
-    [self updateCollectionLayout];
-    
-    
-}
 
--(void) setCreateOffset
-{
-    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
-    {
+-(void) setCreateOffset {
+    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
         if (self.channelThumbnailCollectionView.contentOffset.y < 120) {
             [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-            
         }
-    }
-    else
-    {
+    } else {
         if (self.channelThumbnailCollectionView.contentOffset.y < 370) {
             [self.channelThumbnailCollectionView setContentOffset: CGPointMake(0, 414) animated:YES];
-            
         }
     }
     
@@ -2824,26 +2800,19 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 
 
--(void) updateCollectionLayout
-{
+-(void) updateCollectionLayout {
     CGPoint tmpPoint = self.channelThumbnailCollectionView.contentOffset;
     
-    if (IS_IPHONE){
+    if (IS_IPHONE) {
         if (self.channelThumbnailCollectionView.collectionViewLayout == self.channelLayoutIPhone) {
             [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelExpandedLayout];
-        }
-        else
-        {
+        } else {
             [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelLayoutIPhone];
         }
-    }
-    else
-    {
+    } else {
         if (self.channelThumbnailCollectionView.collectionViewLayout == self.channelLayoutIPad) {
             [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelExpandedLayout];
-        }
-        else
-        {
+        } else {
             [self.channelThumbnailCollectionView setCollectionViewLayout:self.channelLayoutIPad];
         }
     }
@@ -2854,7 +2823,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 #pragma mark - Delete channel
 
--(void)deleteChannelTapped: (SYNChannelMidCell*) cell{
+-(void)deleteChannelTapped: (SYNChannelMidCell*) cell {
     
     self.deleteCell = cell;
     NSString *tmpString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete Collection", "Alerview confirm to delete a Channel"), cell.channel.title];
@@ -2864,8 +2833,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     
 }
 
--(void) deleteChannel:(SYNChannelMidCell *)cell
-{
+-(void) deleteChannel:(SYNChannelMidCell *)cell {
     ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
     
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
@@ -2880,12 +2848,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
                                                  self.indexPathToDelete = [self.channelThumbnailCollectionView indexPathForItemAtPoint: v.center];
                                                  
                                                  [self.channelThumbnailCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject: self.indexPathToDelete]];
-                                                 
-                                                 
-                                                 //                                                 [appDelegate saveContext:YES];
-                                                 //                                                 [self.channelThumbnailCollectionView reloadData];
-                                                 
-                                                 
                                                  
                                                  [self updateChannelOwner];
                                              } completion:^(BOOL finished) {
