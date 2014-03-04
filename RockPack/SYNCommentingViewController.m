@@ -184,10 +184,10 @@ static NSString* PlaceholderText = @"Say something nice";
 
     if ([self.model totalItemCount]) {
         self.videoInstance.commentCountValue = [self.model totalItemCount];
+        [self.socialButton setCount:self.videoInstance.commentCountValue];
     }
 
     //Updates the iphone comment cont
-    [self.socialButton setCount:self.videoInstance.commentCountValue];
     [appDelegate saveContext:YES];
     self.sendMessageTextView.text = @"";
 

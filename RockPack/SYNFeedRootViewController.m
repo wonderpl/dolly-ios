@@ -118,8 +118,9 @@ typedef void(^FeedDataErrorBlock)(void);
 	if (![self isBeingPresented]) {
 		self.model.mode = SYNFeedModelModeFeed;
 		self.model.delegate = self;
-		[self.feedCollectionView reloadData];
 	}
+    [self.feedCollectionView reloadData];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
