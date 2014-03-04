@@ -70,8 +70,26 @@
     }
     
     [self.channelButton setTitle:[_channel.title uppercaseString] forState:UIControlStateNormal];
-    self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
-    self.videosLabel.text = [NSString stringWithFormat: @"%lli videos", _channel.totalVideosValueValue];
+    
+    if (self.channel.subscribersCountValue == 1)
+    {
+        self.followersLabel.text = [NSString stringWithFormat: @"%lli follower", _channel.subscribersCountValue];
+    }
+    else
+    {
+        self.followersLabel.text = [NSString stringWithFormat: @"%lli followers", _channel.subscribersCountValue];
+    }
+    
+    
+    if (self.channel.totalVideosValueValue == 1)
+    {
+        self.videosLabel.text = [NSString stringWithFormat: @"%lli video", _channel.totalVideosValueValue];
+    }
+    else
+    {
+        self.videosLabel.text = [NSString stringWithFormat: @"%lli videos", _channel.totalVideosValueValue];
+    }
+
     
     // set time ago...
     NSDateComponents *timeAgoComponents = _channel.timeAgo;
