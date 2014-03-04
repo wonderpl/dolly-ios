@@ -95,6 +95,7 @@
     id<FBOpenGraphAction> action = (id<FBOpenGraphAction>)[FBGraphObject graphObject];
     
     FBOpenGraphActionShareDialogParams *params = [[FBOpenGraphActionShareDialogParams alloc] init];
+    params.actionType = [NSString stringWithFormat: @"%@:share", facebookNamespace];
     
     if (isVideo.boolValue)
     {
@@ -103,7 +104,6 @@
         
         params.action = action;
         params.previewPropertyName = @"other";
-        params.actionType = [NSString stringWithFormat: @"%@:share", facebookNamespace];
     }
     else
     {
@@ -112,17 +112,6 @@
         
         params.action = action;
         params.previewPropertyName = @"channel";
-        
-        if (isOwner.boolValue == TRUE)
-        {
-            params.actionType = [NSString stringWithFormat: @"%@:create", facebookNamespace];
-            //            params.actionType = @"rockpack-dev:create";
-        }
-        else
-        {
-            params.actionType = [NSString stringWithFormat: @"%@:share", facebookNamespace];
-            //            params.actionType = @"rockpack-dev:share";
-        }
     }
     
     // Show the Share dialog if available
