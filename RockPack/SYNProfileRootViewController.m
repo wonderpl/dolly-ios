@@ -391,6 +391,9 @@
         self.followingSearchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
     }
 
+    
+    [self setUpViews];
+    
 }
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -406,12 +409,7 @@
     
     self.navigationItem.title = @"";
     
-    if (self.channelOwner.subscribedByUserValue) {
-        [self.followAllButton setTitle:@"Unfollow all" forState:UIControlStateNormal];
-    }
-    else {
-        [self.followAllButton setTitle:@"Follow all" forState:UIControlStateNormal];
-    }
+        [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
     
     self.filteredSubscriptions = [self.channelOwner.subscriptions array];
     
@@ -521,11 +519,23 @@
 
 //Initial set up for user profile uiviews
 
--(void) setUpUserProfile
-{
-    self.userNameLabel.text = [NSString stringWithFormat:@"@%@", self.channelOwner.username];
+- (void) setUpViews {
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:12.0]];
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
+    self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
+    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
+    [self.followingTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
+	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
+	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
+    self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
+    
+    [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:11.0];
+
+}
+
+-(void) setUpUserProfile {
+    self.userNameLabel.text = [NSString stringWithFormat:@"@%@", self.channelOwner.username];
     
     
     //other user cover photos are set in set channel owner succcess block as
@@ -533,26 +543,22 @@
     [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
     [self setProfileImage:self.channelOwner.thumbnailURL];
     
-    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
-	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
-	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
-    self.aboutMeTextView.textContainer.maximumNumberOfLines = 2;
     
-    [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:11.0];
-    self.fullNameLabel.font = [UIFont regularCustomFontOfSize:20];
+
     
-    [self.followAllButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.followAllButton.titleLabel.font.pointSize]];
+
+    
+    
+
     self.fullNameLabel.text = self.channelOwner.displayName;
     
     [self.collectionsTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue ]forState:UIControlStateNormal];
     
-    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
     
     [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue]forState:UIControlStateNormal];
-    [self.followingTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
 
-    
+    self.aboutMeTextView.text = self.channelOwner.channelOwnerDescription;
+    [self setUpViews];
 }
 
 -(void) setUpSegmentedControl{
@@ -1205,9 +1211,6 @@
         [self.collectionsTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.collectionsTabButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         
-        if (self.modeType == kModeOtherUsersProfile) {
-            self.followAllButton.hidden = NO;
-        }
         //    Working load more videos for user channels
         
         NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
@@ -1291,9 +1294,6 @@
             
         }
         
-        if (self.modeType == kModeOtherUsersProfile) {
-            self.followAllButton.hidden = YES;
-        }
     }
 }
 
@@ -1526,7 +1526,7 @@
             self.uploadCoverPhotoButton.transform = move;
             self.userNameLabel.transform = move;
             self.uploadAvatar.transform = move;
-            
+
             if (offset<0)
             {
                 //Scale the cover phote in iphone
@@ -1556,7 +1556,8 @@
             self.uploadCoverPhotoButton.transform = move;
             self.uploadAvatar.transform = move;
             self.followersCountLabel.transform = move;
-            
+            self.followAllButton.transform = move;
+
             //scaling
             if (offset<0)
             {
@@ -1806,21 +1807,8 @@
     
     self.dataRequestRangeChannel = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
     self.dataRequestRangeSubscriptions = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
-    
-    self.userNameLabel.text = [NSString stringWithFormat:@"@%@", self.channelOwner.username];
-	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
-	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
-    
     self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
-    
-    
-    if (self.channelOwner.subscribedByUserValue) {
-        [self.followAllButton setTitle:@"Unfollow all" forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.followAllButton setTitle:@"Follow all" forState:UIControlStateNormal];
-    }
+    [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
     
     //    [self.subscriptionThumbnailCollectionView reloadData];
     //    [self.channelThumbnailCollectionView reloadData];
@@ -2061,7 +2049,7 @@
                                                completionHandler:^(id responce) {
                                                    
                                                    self.channelOwner.subscribedByUser = [NSNumber numberWithBool:NO];
-                                                   [self.followAllButton setTitle:@"Follow all" forState:UIControlStateNormal];
+                                                   [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
                                                    [appDelegate saveContext: YES];
                                                    
                                                    
@@ -2075,8 +2063,9 @@
             
             [SYNActivityManager.sharedInstance subscribeToUser:self.channelOwner
                                              completionHandler: ^(id responce) {
-                                                 
-                                                 [self.followAllButton setTitle:@"Unfollow all" forState:UIControlStateNormal];
+                                                 self.channelOwner.subscribedByUser = [NSNumber numberWithBool:YES];
+
+                                                 [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
                                                  
                                                  [appDelegate saveContext: YES];
                                                  
@@ -2144,9 +2133,7 @@
         message =  [message stringByAppendingString:@" "];
         message =  [message stringByAppendingString:self.channelOwner.displayName];
         message =  [message stringByAppendingString:@"'s collections"];
-        
     } else {
-        
         self.followAllAlertView.title = @"Follow All?";
         message = @"Are you sure you want to follow all";
         message =  [message stringByAppendingString:@" "];
@@ -2232,6 +2219,7 @@
     self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
     
     self.createChannelCell.createCellButton.userInteractionEnabled = NO;
+    
     
     [UIView animateWithDuration:0.5f animations:^{
         
@@ -2378,8 +2366,8 @@
                                              }
                                              
                                              
-                                             //                                             [self	 showError: errorMessage
-                                             //                                               showErrorTitle: errorTitle];
+                                             [self	 showError: errorMessage
+                                                                                showErrorTitle: errorTitle];
                                          }];
     
     
@@ -2387,6 +2375,17 @@
     
     
 }
+
+- (void) showError: (NSString *) errorMessage showErrorTitle: (NSString *) errorTitle
+{
+    
+    [[[UIAlertView alloc] initWithTitle: errorTitle
+                                message: errorMessage
+                               delegate: nil
+                      cancelButtonTitle: NSLocalizedString(@"OK", nil)
+                      otherButtonTitles: nil] show];
+}
+
 
 - (void) createNewCollection {
     
