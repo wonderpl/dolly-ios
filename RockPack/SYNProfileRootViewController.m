@@ -367,6 +367,8 @@
 
     if (self.modeType == kModeMyOwnProfile) {
         [self setUpUserProfile];
+        [self setUpImages];
+
     }
     // == set up the segmented controller
     [self setUpSegmentedControl];
@@ -526,14 +528,18 @@
 
 }
 
--(void) setUpUserProfile {
+
+- (void) setUpImages {
+    [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
+    [self setProfileImage:self.channelOwner.thumbnailURL];
+}
+
+- (void) setUpUserProfile {
     self.userNameLabel.text = [NSString stringWithFormat:@"@%@", self.channelOwner.username];
     
     
     //other user cover photos are set in set channel owner succcess block as
     //places such as the cover photo set yet
-    [self setCoverphotoImage:self.channelOwner.coverPhotoURL];
-    [self setProfileImage:self.channelOwner.thumbnailURL];
     
     self.fullNameLabel.text = self.channelOwner.displayName;
     
@@ -1765,6 +1771,7 @@
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                    
                                                    [weakSelf setUpUserProfile];
+                                                   [weakSelf setUpImages];
                                                    [weakSelf reloadCollectionViews];
                                                }
                                                else
@@ -1793,7 +1800,9 @@
     
     //    [self.subscriptionThumbnailCollectionView reloadData];
     //    [self.channelThumbnailCollectionView reloadData];
-    
+ 
+    [self setUpUserProfile];
+
 }
 
 #pragma mark - Arc menu support
