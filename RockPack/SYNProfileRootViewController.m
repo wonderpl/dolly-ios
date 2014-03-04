@@ -667,7 +667,7 @@
             
             self.followingSearchBar.hidden = YES;
             UIEdgeInsets tmpEdgeInset = self.subscriptionLayoutIPhone.sectionInset;
-            tmpEdgeInset.top -= 43;
+            tmpEdgeInset.top -= 42;
             self.subscriptionLayoutIPhone.sectionInset = tmpEdgeInset;
             self.uploadAvatar.hidden=YES;
             
