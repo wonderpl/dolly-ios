@@ -125,7 +125,7 @@
             
             self.containerViewController.view = self.containerView;
             
-        } forceReload:NO];
+        }];
     } else {
         [self addChildViewController:self.containerViewController];
         self.containerViewController.view = self.containerView;
@@ -167,7 +167,7 @@
 
 }
 
-- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock forceReload:(BOOL)forceReload {
+- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock {
     
     [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
         
@@ -186,7 +186,7 @@
         
         CompleteBlock(NO);
         
-    } forceReload:forceReload];
+    }];
 }
 
 #pragma mark - Popular Genre

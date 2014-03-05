@@ -47,14 +47,12 @@
 
 - (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
                               onError: (MKNKErrorBlock) errorBlock
-						  forceReload: (BOOL)forceReload
 {
     SYNNetworkOperationJsonObject *networkOperation =
     (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPICategories
                                                        params: [self getLocaleParam]
                                                    httpMethod: @"GET"];
     
-    networkOperation.ignoreCachedResponse = YES;
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
         completionBlock(dictionary);
     } errorHandler: ^(NSError *error) {
@@ -67,7 +65,7 @@
         DebugLog(@"API request failed");
     }];
     
-    [self enqueueOperation: networkOperation forceReload:forceReload];
+    [self enqueueOperation: networkOperation];
 }
 
 

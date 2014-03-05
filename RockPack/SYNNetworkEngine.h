@@ -17,8 +17,7 @@
 @interface SYNNetworkEngine : SYNAbstractNetworkEngine
 
 - (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
-                              onError: (MKNKErrorBlock) errorBlock
-						  forceReload: (BOOL)forceReload;
+                              onError: (MKNKErrorBlock) errorBlock;
 
 #pragma mark - Search
 
