@@ -269,17 +269,20 @@ referenceSizeForFooterInSection:(NSInteger)section {
 												completionHandler:^(NSDictionary *responseDictionary) {
 													barButton.title = @"follow";
 													barButton.enabled = YES;
+                                                    [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+
 												} errorHandler: ^(NSDictionary *errorDictionary) {
 													barButton.enabled = YES;
 												}];
 	} else {
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
-		 
 											  completionHandler: ^(NSDictionary *responseDictionary) {
 												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
 												  
 												  barButton.title = @"unfollow";
 												  barButton.enabled = YES;
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+
 											  } errorHandler: ^(NSDictionary *errorDictionary) {
 												  barButton.enabled = YES;
 											  }];
