@@ -824,8 +824,6 @@
                                                        params: [self getLocaleParam]
                                                    httpMethod: @"GET"];
     
-    networkOperation.ignoreCachedResponse = YES;
-    
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
         completionBlock(dictionary);
     } errorHandler: ^(NSError *error) {
