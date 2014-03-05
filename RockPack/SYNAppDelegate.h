@@ -24,7 +24,6 @@
 
 @interface SYNAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic, assign) BOOL playerUpdated;
 @property (nonatomic, readonly) NSManagedObjectContext *channelsManagedObjectContext;
 @property (nonatomic, readonly) NSManagedObjectContext *mainManagedObjectContext;
 @property (nonatomic, readonly) NSManagedObjectContext *searchManagedObjectContext;
