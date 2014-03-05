@@ -139,7 +139,6 @@ static UIWebView* youTubeVideoWebViewInstance;
     self.notYetPlaying = TRUE;
     self.pausedByUser = NO;
     
-    SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
     // Check to see if our JS is loaded
     NSString *availability = [self.currentVideoWebView stringByEvaluatingJavaScriptFromString: @"checkPlayerAvailability();"];
     if ([availability isEqualToString: @"true"])
