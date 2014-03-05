@@ -337,6 +337,9 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
         cell.subGenreLabel.text = subgenre.genre.name;
     }
+    
+    cell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:recomendation.channelOwner.uniqueId];
+
 
     cell.delegate = self;
     
