@@ -1795,15 +1795,6 @@
     self.fullNameLabel.text = self.channelOwner.displayName;
     [self.aboutMeTextView setText:self.channelOwner.channelOwnerDescription];
 
-    NSLog(@"++++++++++");
-    NSLog(@"display name %@", self.channelOwner.displayName);
-    NSLog(@"user name %@", self.channelOwner.username);
-    NSLog(@"description %@", self.channelOwner.channelOwnerDescription);
-    
-//    [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
-    
-//    [self setUpUserProfile];
-
 }
 
 #pragma mark - Arc menu support
