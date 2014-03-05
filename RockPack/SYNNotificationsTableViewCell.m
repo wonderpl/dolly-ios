@@ -69,10 +69,14 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
     self.timeLabel.text = notification.dateDifferenceString;
 	
 	NSURL *thumbnailURL = [NSURL URLWithString:notification.thumbnailUrl];
-	[self.videoThumbnailButton setImageWithURL:thumbnailURL
-									  forState:UIControlStateNormal
-							  placeholderImage:[UIImage imageNamed:@"PlaceholderNotificationVideo"]
-									   options:SDWebImageRetryFailed];
+    
+    if (notification.objectType != kNotificationObjectTypeFacebookFriendJoined) {
+        [self.videoThumbnailButton setImageWithURL:thumbnailURL
+                                          forState:UIControlStateNormal
+                                  placeholderImage:[UIImage imageNamed:@"PlaceholderNotificationVideo"]
+                                           options:SDWebImageRetryFailed];
+        
+    }
 	
 	UIColor *unreadColor = [UIColor colorWithWhite:249.0/255.0 alpha:1.0];
 	UIColor *readColor = [UIColor whiteColor];
@@ -87,12 +91,11 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 		[self.userThumbnailButton removeTarget: _delegate
 									action: @selector(mainImageTableCellPressed:)
 						  forControlEvents: UIControlEventTouchUpInside];
-		
-		[self.videoThumbnailButton removeTarget: _delegate
-										 action: @selector(itemImageTableCellPressed:)
-							   forControlEvents: UIControlEventTouchUpInside];
-	}
-
+        
+        [self.videoThumbnailButton removeTarget: _delegate
+                                         action: @selector(itemImageTableCellPressed:)
+                               forControlEvents: UIControlEventTouchUpInside];
+    }
 
 	_delegate = delegate;
 
@@ -103,9 +106,11 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 							 action: @selector(mainImageTableCellPressed:)
 				   forControlEvents: UIControlEventTouchUpInside];
 
-	[self.videoThumbnailButton addTarget: _delegate
-								  action: @selector(itemImageTableCellPressed:)
-						forControlEvents: UIControlEventTouchUpInside];
+    if (self.notification.objectType != kNotificationObjectTypeFacebookFriendJoined) {
+        [self.videoThumbnailButton addTarget: _delegate
+                                      action: @selector(itemImageTableCellPressed:)
+                            forControlEvents: UIControlEventTouchUpInside];
+    }
 }
 
 #pragma mark - Private
