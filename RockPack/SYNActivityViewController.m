@@ -284,18 +284,18 @@
             Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
                                      usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
             
-            if (!channel)
-            {
-                // the channel is no longer in the DB, might have been deleted after the notification has been issued
-                
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Channel Unavailable", nil)
-                                            message:NSLocalizedString(@"The Channel for which this notification has been issued might have been deleted", nil)
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
-                return;
-            }
-            
+//            if (!channel)
+//            {
+//                // the channel is no longer in the DB, might have been deleted after the notification has been issued
+//                
+//                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Channel Unavailable", nil)
+//                                            message:NSLocalizedString(@"The Channel for which this notification has been issued might have been deleted", nil)
+//                                           delegate:nil
+//                                  cancelButtonTitle:@"OK"
+//                                  otherButtonTitles:nil] show];
+//                return;
+//            }
+//            
             [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             
             break;
@@ -334,17 +334,17 @@
             Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
                                      usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
             
-            
-            if (!channel)
-            {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Video Unavailable", nil)
-                                            message:NSLocalizedString(@"The Video for which this notification has been issued might have been deleted", nil)
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
-
-                return;
-            }
+//            
+//            if (!channel)
+//            {
+//                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Video Unavailable", nil)
+//                                            message:NSLocalizedString(@"The Video for which this notification has been issued might have been deleted", nil)
+//                                           delegate:nil
+//                                  cancelButtonTitle:@"OK"
+//                                  otherButtonTitles:nil] show];
+//
+//                return;
+//            }
             
             [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             break;
