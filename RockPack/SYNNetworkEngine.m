@@ -249,51 +249,6 @@
     return networkOperation;
 }
 
-
-- (MKNetworkOperation *) collectionsForCategory: (NSString *) categoryId
-                                                forRange: (NSRange) range
-                                           ignoringCache: (BOOL) ignore
-                                            onCompletion: (MKNKJSONCompleteBlock) completeBlock
-                                                 onError: (MKNKJSONErrorBlock) errorBlock
-{
-    NSMutableDictionary *tempParameters = [NSMutableDictionary dictionary];
-    
-    tempParameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    tempParameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
-    
-    if (![categoryId isEqualToString: @"all"])
-    {
-        tempParameters[@"category"] = categoryId;
-    }
-    
-    
-    
-    SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIPopularChannels
-                                                       params: [self getLocaleParamWithParams: tempParameters]];
-    
-    networkOperation.ignoreCachedResponse = ignore;
-    
-    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        
-        completeBlock(dictionary);
-        
-    } errorHandler: ^(NSError *error) {
-        
-        errorBlock(@{@"network_error": @"Engine Failed to Load Channels"});
-        
-        if (error.code >= 500 && error.code < 600)
-        {
-            [self showErrorPopUpForError: error];
-        }
-    }];
-    
-    [self enqueueOperation: networkOperation];
-    
-    return networkOperation;
-}
-
-
 #pragma mark - Search
 
 - (MKNetworkOperation *) usersForGenreId: (NSString *) genreId

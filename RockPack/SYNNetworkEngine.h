@@ -20,12 +20,6 @@
                               onError: (MKNKErrorBlock) errorBlock
 						  forceReload: (BOOL)forceReload;
 
-- (MKNetworkOperation *) collectionsForCategory: (NSString *) categoryId
-                                                forRange: (NSRange) range
-                                           ignoringCache: (BOOL) ignore
-                                            onCompletion: (MKNKJSONCompleteBlock) completeBlock
-                                                 onError: (MKNKJSONErrorBlock) errorBlock;
-
 #pragma mark - Search
 
 - (MKNetworkOperation *) searchVideosForTerm: (NSString *) searchTerm
