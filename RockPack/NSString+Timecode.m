@@ -29,6 +29,11 @@
 + (NSString *)paddedTimecodeStringFromSeconds:(NSTimeInterval)seconds {
 	NSInteger timeSeconds = seconds;
 	
+    if (((timeSeconds / 60)/60) % 60>0) {
+        return [NSString stringWithFormat:@"%02d:%02d:%02d", ((timeSeconds / 60)/60) % 60, (timeSeconds / 60) % 60, timeSeconds % 60];
+        
+    }
+    
 	return [NSString stringWithFormat:@"%02d:%02d", (timeSeconds / 60) % 60, timeSeconds % 60];
 }
 
