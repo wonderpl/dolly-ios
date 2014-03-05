@@ -342,7 +342,7 @@
 																									 object:nil
 																								   userInfo: @{kChannelOwner : appDelegate.currentUser }];
 											 } errorHandler:^(NSDictionary *response) {
-												 NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
+												 NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR COLLECTION",nil);
 												 
 												 [appDelegate.masterViewController presentNotificationWithMessage:messageE
 																										  andType:NotificationMessageTypeError];
@@ -362,7 +362,7 @@
 										completionHandler: ^(NSDictionary* result) {
 											[[SYNTrackingManager sharedManager] trackVideoAddedToCollectionCompleted:isFavourites];
 											
-											NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR CHANNEL", nil);
+											NSString* messageS = IS_IPHONE ? NSLocalizedString(@"VIDEO ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS HAVE BEEN ADDED INTO YOUR COLLECTION", nil);
 											
 											[appDelegate.masterViewController presentNotificationWithMessage:messageS
 																									 andType:NotificationMessageTypeSuccess];
@@ -376,7 +376,7 @@
 											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
 																								object: self];
 											
-											NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR CHANNEL",nil);
+											NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR COLLECTION",nil);
 											
 											[appDelegate.masterViewController presentNotificationWithMessage:messageE
 																									 andType:NotificationMessageTypeError];
