@@ -139,10 +139,9 @@ static UIWebView* youTubeVideoWebViewInstance;
     self.notYetPlaying = TRUE;
     self.pausedByUser = NO;
     
-    SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
     // Check to see if our JS is loaded
     NSString *availability = [self.currentVideoWebView stringByEvaluatingJavaScriptFromString: @"checkPlayerAvailability();"];
-    if ([availability isEqualToString: @"true"] && appDelegate.playerUpdated == FALSE)
+    if ([availability isEqualToString: @"true"])
     {
         // Our JS is loaded
         NSString *loadString = [NSString stringWithFormat: @"player.loadVideoById('%@', '0', '%@');", sourceId, self.videoQuality];
@@ -161,7 +160,6 @@ static UIWebView* youTubeVideoWebViewInstance;
         // Reload out webview and load the new video when we get an event to say that the player is ready
         self.hasReloadedWebView = TRUE;
         self.sourceIdToReload = sourceId;
-        appDelegate.playerUpdated = FALSE;
         
         NSError *error = nil;
         

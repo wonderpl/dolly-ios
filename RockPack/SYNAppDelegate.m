@@ -1043,8 +1043,6 @@
                                                asType: @"html"
                                           usingSource: youTubePlayerURLString];
              }
-             
-             self.playerUpdated = TRUE;
          }
          else
          {

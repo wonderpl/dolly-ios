@@ -47,14 +47,12 @@
 
 - (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
                               onError: (MKNKErrorBlock) errorBlock
-						  forceReload: (BOOL)forceReload
 {
     SYNNetworkOperationJsonObject *networkOperation =
     (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPICategories
                                                        params: [self getLocaleParam]
                                                    httpMethod: @"GET"];
     
-    networkOperation.ignoreCachedResponse = YES;
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
         completionBlock(dictionary);
     } errorHandler: ^(NSError *error) {
@@ -67,7 +65,7 @@
         DebugLog(@"API request failed");
     }];
     
-    [self enqueueOperation: networkOperation forceReload:forceReload];
+    [self enqueueOperation: networkOperation];
 }
 
 
@@ -248,51 +246,6 @@
     
     return networkOperation;
 }
-
-
-- (MKNetworkOperation *) collectionsForCategory: (NSString *) categoryId
-                                                forRange: (NSRange) range
-                                           ignoringCache: (BOOL) ignore
-                                            onCompletion: (MKNKJSONCompleteBlock) completeBlock
-                                                 onError: (MKNKJSONErrorBlock) errorBlock
-{
-    NSMutableDictionary *tempParameters = [NSMutableDictionary dictionary];
-    
-    tempParameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    tempParameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
-    
-    if (![categoryId isEqualToString: @"all"])
-    {
-        tempParameters[@"category"] = categoryId;
-    }
-    
-    
-    
-    SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIPopularChannels
-                                                       params: [self getLocaleParamWithParams: tempParameters]];
-    
-    networkOperation.ignoreCachedResponse = ignore;
-    
-    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        
-        completeBlock(dictionary);
-        
-    } errorHandler: ^(NSError *error) {
-        
-        errorBlock(@{@"network_error": @"Engine Failed to Load Channels"});
-        
-        if (error.code >= 500 && error.code < 600)
-        {
-            [self showErrorPopUpForError: error];
-        }
-    }];
-    
-    [self enqueueOperation: networkOperation];
-    
-    return networkOperation;
-}
-
 
 #pragma mark - Search
 
@@ -869,8 +822,6 @@
                                                        params: [self getLocaleParam]
                                                    httpMethod: @"GET"];
     
-    networkOperation.ignoreCachedResponse = YES;
-    
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
         completionBlock(dictionary);
     } errorHandler: ^(NSError *error) {
@@ -960,8 +911,6 @@
 	SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *)[self operationWithPath:kExampleUsers
 																										params:nil
 																									httpMethod:@"GET"];
-    
-    networkOperation.ignoreCachedResponse = YES;
     
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
 		NSArray *users = dictionary[@"users"][@"items"];
