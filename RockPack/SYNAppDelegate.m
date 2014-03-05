@@ -392,31 +392,8 @@
     if ([SYNLoginManager sharedManager].registrationCheck == YES) {
         self.onBoardingViewController = [[SYNOnBoardingViewController alloc]init];
         self.window.rootViewController = self.onBoardingViewController;
-        
-        
-        double delayInSeconds = 0.4;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
-            SYNOnBoardingOverlayViewController* onboardingOverlay = [[SYNOnBoardingOverlayViewController alloc] init];
-            
-            // Set frame to full screen
-            CGRect vFrame = onboardingOverlay.view.frame;
-            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-            onboardingOverlay.view.frame = vFrame;
-            onboardingOverlay.view.alpha = 0.0f;
-            
-            
-            [self.window.rootViewController addChildViewController:onboardingOverlay];
-            [self.window.rootViewController.view addSubview:onboardingOverlay.view];
-            
-            [UIView animateWithDuration:1.6 animations:^{
-                onboardingOverlay.view.alpha = 1.0f;
-            }];
-
-        });
-
-
+        SYNOnBoardingOverlayViewController* onboardingOverlay = [[SYNOnBoardingOverlayViewController alloc] init];
+        [onboardingOverlay addToViewController:self.window.rootViewController];
     } else {
         self.window.rootViewController = [self createAndReturnRootViewController];
     }

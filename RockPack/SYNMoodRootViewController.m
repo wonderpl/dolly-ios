@@ -590,44 +590,8 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                                       [weakSelf.videoCollectionView reloadData];
                                                       
                                                           weakSelf.videoCollectionView.hidden = NO;
+                                                      [self showInboarding];
 
-                                                      
-                                                      if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsMoodFirstTime])
-                                                      {
-
-                                                          
-
-                                                      if (IS_IPAD) {
-                                                          
-                                                          
-                                                          double delayInSeconds = 0.4;
-                                                          dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                                                          dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                                              SYNMoodOverlayViewController* moodOverlay = [[SYNMoodOverlayViewController alloc] init];
-                                                              
-                                                              // Set frame to full screen
-                                                              CGRect vFrame = moodOverlay.view.frame;
-                                                              vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-                                                              moodOverlay.view.frame = vFrame;
-                                                              moodOverlay.view.alpha = 0.0f;
-                                                              
-                                                              [appDelegate.masterViewController addChildViewController:moodOverlay];
-                                                              [appDelegate.masterViewController.view addSubview:moodOverlay.view];
-                                                              
-                                                              [UIView animateWithDuration:1.6 animations:^{
-                                                                  moodOverlay.view.alpha = 1.0f;
-                                                              }];
-                                                              
-                                                          });
-                                                          
-                                                          [[NSUserDefaults standardUserDefaults] setBool: YES
-                                                                                                  forKey: kUserDefaultsMoodFirstTime];
-
-                                                      }
-
-                                                      }
-
-                                                      
                                                   } else {
                                                       weakSelf.videosArray = nil;
                                                       [weakSelf.videoCollectionView reloadData];
@@ -641,6 +605,19 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
                                               }];
     
 }
+
+
+- (void) showInboarding {
+    if (IS_IPAD) {
+        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsMoodFirstTime]) {
+            SYNMoodOverlayViewController* moodOverlay = [[SYNMoodOverlayViewController alloc] init];
+            [moodOverlay addToViewController:appDelegate.masterViewController];
+            [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                    forKey: kUserDefaultsMoodFirstTime];
+        }
+    }
+}
+
 
 // TODO: profile/channel delegates
 - (void) profileButtonPressedForCell:(UICollectionViewCell *)cell {

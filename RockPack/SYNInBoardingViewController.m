@@ -22,15 +22,34 @@
     // Do any additional setup after loading the view from its nib.
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
     [self.view addGestureRecognizer:tapGesture];
-    
-
-
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void) addToViewController :(UIViewController*) vc {
+    
+    double delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
+        
+        // Set frame to full screen
+        CGRect vFrame = self.view.frame;
+        vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+        self.view.frame = vFrame;
+        self.view.alpha = 0.0f;
+        
+        [vc addChildViewController:self];
+        [vc.view addSubview:self.view];
+        [UIView animateWithDuration:1.6 animations:^{
+            self.view.alpha = 1.0f;
+        }];
+    });
 }
 
 - (void)screenTapped:(UITapGestureRecognizer*)tapGesture {

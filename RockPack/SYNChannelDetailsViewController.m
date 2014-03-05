@@ -238,55 +238,33 @@
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
 	}
     
-    NSInteger viewCount = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime];
-
-    if ([[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime]<2)
-    {
-        if (self.mode == kChannelDetailsModeDisplay) {
-            
-            //Small delay before showing the inboarding animation
-            double delayInSeconds = 0.4;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self inboardingAnimation];
-        });
-
-        }
-        viewCount+=1;
-        [[NSUserDefaults standardUserDefaults] setInteger: viewCount
-                                                   forKey: kUserDefaultsCollectionDetailsFirstTime];
+    if (self.mode == kChannelDetailsModeDisplay) {
+        [self inboardingAnimation];
     }
-
 }
 
 - (void) inboardingAnimation {
     if ([self.btnFollowChannel.title isEqualToString:@"unfollow"]) {
-        
         return;
     }
-    // ensure that the view is at the top of the screen
-    if (IS_IPAD) {
+    
+    NSInteger viewCount = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime];
+    
+    if ([[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime]<2) {
+        // ensure that the view is at the top of the screen
         [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0,-self.offsetValue) animated:YES];
+        
+        SYNCollectectionDetailsOverlayViewController* channeldetailsOverlay = [[SYNCollectectionDetailsOverlayViewController alloc] init];
+        [channeldetailsOverlay addToViewController:appDelegate.masterViewController];
+        
+        viewCount+=1;
+        [[NSUserDefaults standardUserDefaults] setInteger: viewCount
+                                                   forKey: kUserDefaultsCollectionDetailsFirstTime];
     }
     
-    SYNCollectectionDetailsOverlayViewController* channeldetailsOverlay = [[SYNCollectectionDetailsOverlayViewController alloc] init];
-    
-    // Set frame to full screen
-    CGRect vFrame = channeldetailsOverlay.view.frame;
-    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-    channeldetailsOverlay.view.frame = vFrame;
-    channeldetailsOverlay.view.alpha = 0.0f;
-    
-    [appDelegate.masterViewController addChildViewController:channeldetailsOverlay];
-    [appDelegate.masterViewController.view addSubview:channeldetailsOverlay.view];
-    
-    [UIView animateWithDuration:1.6 animations:^{
-         channeldetailsOverlay.view.alpha = 1.0f;
-    }];
 }
 
-- (void) viewWillDisappear: (BOOL) animated
-{
+- (void) viewWillDisappear: (BOOL) animated {
     [super viewWillDisappear: animated];
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
@@ -298,16 +276,14 @@
                                                     name: kVideoQueueClear
                                                   object: nil];
     
-    if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId)
-    {
+    if (self.channel.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
         [[NSNotificationCenter defaultCenter] removeObserver: self
                                                         name: kUserDataChanged
                                                       object: nil];
     }
     
     
-    if (self.subscribingIndicator)
-    {
+    if (self.subscribingIndicator) {
         [self.subscribingIndicator removeFromSuperview];
         self.subscribingIndicator = nil;
     }

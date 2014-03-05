@@ -12,4 +12,6 @@
 
 @interface SYNInBoardingViewController : SYNAbstractViewController
 
+
+- (void) addToViewController :(UIViewController*) vc;
 @end

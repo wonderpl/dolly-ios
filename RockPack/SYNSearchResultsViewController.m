@@ -855,112 +855,34 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 
 -(void) showUserOverLay {
-    
-
-    double delayInSeconds = 0.4;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
-        if (self.usersArray.count>=1) {
-            
-            float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverUserFirstTime];
-            // display overlay only on the second time they view the highlights overlay
-            
-            if (value==1)
-            {
-
-                
-                [self.usersCollectionView setContentOffset:CGPointZero];
-            SYNDiscoverOverlayHighlightsViewController* overlay = [[SYNDiscoverOverlayHighlightsViewController alloc] init];
-            
-            // Set frame to full screen
-            CGRect vFrame = overlay.view.frame;
-            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-            overlay.view.frame = vFrame;
-            overlay.view.alpha = 0.0f;
-            
-            [appDelegate.masterViewController addChildViewController:overlay];
-            [appDelegate.masterViewController.view addSubview:overlay.view];
-            
-            [UIView animateWithDuration:1.6 animations:^{
-                overlay.view.alpha = 1.0f;
-            }];
-                
-                value+=1;
-                [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverUserFirstTime];
-
-            } else {
-                value+=1;
-                [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverUserFirstTime];
-
-            }
-
-        }
+    float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverUserFirstTime];
+    if (self.usersArray.count>0 && value<2) {
+        // display overlay only on the second time they view the highlights overlay
         
-    });
-    
+        if (value==1)
+        {
+            [self.usersCollectionView setContentOffset:CGPointZero];
+            SYNDiscoverOverlayHighlightsViewController* overlay = [[SYNDiscoverOverlayHighlightsViewController alloc] init];
+            [overlay addToViewController:appDelegate.masterViewController];
+        }
+        value+=1;
+        [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverUserFirstTime];
+    }
 }
 
 - (void) showVideoOverlay {
-    
-    
-            double delayInSeconds = 0.4;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
-    
-    if (self.videosArray.count>=1) {
-        
-        
-        float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverVideoFirstTime];
-        
+    float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverVideoFirstTime];
+    if (self.videosArray.count>0 && value<3) {
         // display Video overlay only on the third time they view the highlights overlay
-
         if (value==2)
         {
             [self.videosCollectionView setContentOffset:CGPointZero];
-            
-            
-            if (!IS_IPHONE_5) {
-                //Not hiding for some reason
-//                [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-//                                                                    object: self
-//                                                                  userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
-            }
-            
-            
-            
             SYNDiscoverOverlayVideoViewController* overlay = [[SYNDiscoverOverlayVideoViewController alloc] init];
-            
-            // Set frame to full screen
-            CGRect vFrame = overlay.view.frame;
-            vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-            overlay.view.frame = vFrame;
-            overlay.view.alpha = 0.0f;
-            
-            [appDelegate.masterViewController addChildViewController:overlay];
-            [appDelegate.masterViewController.view addSubview:overlay.view];
-            
-            [UIView animateWithDuration:0.7 animations:^{
-                overlay.view.alpha = 1.0f;
-            }];
-            value+=1;
-            [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverVideoFirstTime];
-
-        } else if ( value <2){
-            value+=1;
-            [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverVideoFirstTime];
+            [overlay addToViewController:appDelegate.masterViewController];
         }
-        
-        
-
+        value+=1;
+        [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverVideoFirstTime];
     }
-            
-        });
-
-    
-    
-
 }
 
 @end
