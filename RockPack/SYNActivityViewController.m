@@ -19,12 +19,9 @@
 #define kNotificationsSpecialCellIdent @"SYNNotificationsMarkAllAsReadCell"
 
 @interface SYNActivityViewController ()
-{
-    BOOL hasUnreadNotifications;
-}
 
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
-
+@property (nonatomic, assign) BOOL hasUnreadNotifications;
 
 @end
 
@@ -43,11 +40,17 @@
     if (self = [super initWithViewId:vid])
     {
         appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
-        hasUnreadNotifications = NO;
+        self.hasUnreadNotifications = NO;
         self.notifications = @[];
         [self loadNotifications];
+		
+		[self addObserver:self forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications)) options:0 context:NULL];
     }
     return self;
+}
+
+- (void)dealloc {
+	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications))];
 }
 
 - (void) viewDidLoad
@@ -134,7 +137,7 @@
     {
         
         self.notifications = @[];
-        hasUnreadNotifications = NO;
+        self.hasUnreadNotifications = NO;
         
         return;
     }
@@ -143,7 +146,7 @@
     NSMutableArray* inNotificationsutArray = @[].mutableCopy;
     
     
-    hasUnreadNotifications = NO;
+    self.hasUnreadNotifications = NO;
     for (NSDictionary* itemData in itemsArray)
     {
         
@@ -154,7 +157,7 @@
             continue;
         
         if(!notification.read) // one is enought to display the read all button
-            hasUnreadNotifications = YES;
+            self.hasUnreadNotifications = YES;
         
         
         [inNotificationsutArray addObject:notification];
@@ -178,7 +181,7 @@
 - (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section
 {
     
-    return  _notifications.count + (NSUInteger)(hasUnreadNotifications); // if zero then return zero, else add one
+    return  _notifications.count + (NSUInteger)(self.hasUnreadNotifications); // if zero then return zero, else add one
 }
 
 
@@ -186,7 +189,7 @@
           cellForRowAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    if(indexPath.row == 0 && hasUnreadNotifications) // it is the special 'read all' cell
+    if(indexPath.row == 0 && self.hasUnreadNotifications) // it is the special 'read all' cell
     {
         SYNNotificationsMarkAllAsReadCell *notificationMarkAllAsReadCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsSpecialCellIdent
                                                                                           forIndexPath: indexPath];
@@ -201,7 +204,7 @@
     SYNNotificationsTableViewCell *notificationCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsCellIdent
                                                                                       forIndexPath: indexPath];
     
-    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
+    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row - (NSInteger)(self.hasUnreadNotifications)];
 	
     notificationCell.notification = notification;
     notificationCell.delegate = self;
@@ -224,12 +227,12 @@
     
     SYNNotification* notification;
     
-    if(indexPath.row == 0 && hasUnreadNotifications) {
+    if(indexPath.row == 0 && self.hasUnreadNotifications) {
 		[[SYNTrackingManager sharedManager] trackMarkAllNotificationAsRead];
 		
         notification = nil;
     } else {
-        notification = _notifications[indexPath.row - (NSInteger)(hasUnreadNotifications)];
+        notification = _notifications[indexPath.row - (NSInteger)(self.hasUnreadNotifications)];
 	}
     
     [self markAsReadForNotification: notification];
@@ -249,7 +252,7 @@
     if (indexPathForCellPressed.row > self.notifications.count)
         return;
     
-    SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(hasUnreadNotifications)];
+    SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(self.hasUnreadNotifications)];
     
     
     [self viewProfileDetails: notification.channelOwner];
@@ -266,7 +269,7 @@
     
     NSIndexPath *indexPathForCellPressed = [self.tableView indexPathForCell: cellPressed];
     
-    SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(hasUnreadNotifications)];
+    SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(self.hasUnreadNotifications)];
 	
 	[[SYNTrackingManager sharedManager] trackSelectedNotificationOfType:notification.objectType];
     
@@ -364,7 +367,7 @@
     
     SYNNotification* notification;
 
-    if( hasUnreadNotifications)
+    if (self.hasUnreadNotifications)
         notification = nil;
     
     [self markAsReadForNotification: notification];
@@ -395,10 +398,10 @@
                                                         
                                                            notification.read = YES;
                                                            
-                                                           hasUnreadNotifications = NO;
+                                                           self.hasUnreadNotifications = NO;
                                                            for (SYNNotification* n in self.notifications)
                                                                if(!n.read)
-                                                                   hasUnreadNotifications = YES;
+                                                                   self.hasUnreadNotifications = YES;
                                                        }
                                                        else
                                                        {
@@ -407,7 +410,7 @@
                                                            
                                                            UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
                                                            
-                                                           hasUnreadNotifications = NO;
+                                                           self.hasUnreadNotifications = NO;
                                                            
                                                        }
                                                        
@@ -496,6 +499,23 @@
     
     
     return (SYNNotificationsTableViewCell*)cell;
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	if ([keyPath isEqualToString:NSStringFromSelector(@selector(hasUnreadNotifications))]) {
+		UIButton *activityTab = appDelegate.masterViewController.activityTab;
+		if (self.hasUnreadNotifications) {
+			[activityTab setImage:[UIImage imageNamed:@"TabActivityNoti"] forState:UIControlStateNormal];
+			[activityTab setImage:[UIImage imageNamed:@"TabActivityNotiHighlighted"] forState:UIControlStateHighlighted];
+			[activityTab setImage:[UIImage imageNamed:@"TabActivityNotiSelected"] forState:UIControlStateSelected];
+		} else {
+			[activityTab setImage:[UIImage imageNamed:@"TabActivity"] forState:UIControlStateNormal];
+			[activityTab setImage:[UIImage imageNamed:@"TabActivityHighlighted"] forState:UIControlStateHighlighted];
+			[activityTab setImage:[UIImage imageNamed:@"TabActivitySelected"] forState:UIControlStateSelected];
+		}
+	}
 }
 
 @end

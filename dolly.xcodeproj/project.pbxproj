@@ -600,6 +600,18 @@
 		E9B068E8185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B068E5185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m */; };
 		E9B068E9185B62F500C98AEB /* SYNSearchVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9B068E6185B62F500C98AEB /* SYNSearchVideoPlayerViewController_iphone.storyboard */; };
 		E9B8A504185B20D300F0D625 /* SYNChannelVideosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B8A502185B20D300F0D625 /* SYNChannelVideosModel.m */; };
+		E9B9213018C78C94003093B8 /* TabActivityNoti.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9212A18C78C94003093B8 /* TabActivityNoti.png */; };
+		E9B9213118C78C94003093B8 /* TabActivityNoti@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9212B18C78C94003093B8 /* TabActivityNoti@2x.png */; };
+		E9B9213218C78C94003093B8 /* TabActivityNotiHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9212C18C78C94003093B8 /* TabActivityNotiHighlighted.png */; };
+		E9B9213318C78C94003093B8 /* TabActivityNotiHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9212D18C78C94003093B8 /* TabActivityNotiHighlighted@2x.png */; };
+		E9B9213418C78C94003093B8 /* TabActivityNotiSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9212E18C78C94003093B8 /* TabActivityNotiSelected.png */; };
+		E9B9213518C78C94003093B8 /* TabActivityNotiSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9212F18C78C94003093B8 /* TabActivityNotiSelected@2x.png */; };
+		E9B9213C18C78CA2003093B8 /* TabActivityNoti@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9213618C78CA2003093B8 /* TabActivityNoti@2x~iphone.png */; };
+		E9B9213D18C78CA2003093B8 /* TabActivityNoti~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9213718C78CA2003093B8 /* TabActivityNoti~iphone.png */; };
+		E9B9213E18C78CA2003093B8 /* TabActivityNotiHighlighted@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9213818C78CA2003093B8 /* TabActivityNotiHighlighted@2x~iphone.png */; };
+		E9B9213F18C78CA2003093B8 /* TabActivityNotiHighlighted~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9213918C78CA2003093B8 /* TabActivityNotiHighlighted~iphone.png */; };
+		E9B9214018C78CA2003093B8 /* TabActivityNotiSelected@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9213A18C78CA2003093B8 /* TabActivityNotiSelected@2x~iphone.png */; };
+		E9B9214118C78CA2003093B8 /* TabActivityNotiSelected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9213B18C78CA2003093B8 /* TabActivityNotiSelected~iphone.png */; };
 		E9C2A58D1899231500FC50D3 /* SYNGradientSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2A58C1899231500FC50D3 /* SYNGradientSeparatorView.m */; };
 		E9CE79E21886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE79E11886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m */; };
 		E9CE7A2A1886F9B000023A86 /* SYNIPadSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A291886F9B000023A86 /* SYNIPadSignupViewController.m */; };
@@ -1496,6 +1508,18 @@
 		E9B75F5D1848ADB50066420E /* SYNVideoPlayerViewController+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayerViewController+Protected.h"; sourceTree = "<group>"; };
 		E9B8A502185B20D300F0D625 /* SYNChannelVideosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelVideosModel.m; sourceTree = "<group>"; };
 		E9B8A503185B20D300F0D625 /* SYNChannelVideosModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelVideosModel.h; sourceTree = "<group>"; };
+		E9B9212A18C78C94003093B8 /* TabActivityNoti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabActivityNoti.png; path = Assets/Images/TabActivityNoti.png; sourceTree = "<group>"; };
+		E9B9212B18C78C94003093B8 /* TabActivityNoti@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNoti@2x.png"; path = "Assets/Images/TabActivityNoti@2x.png"; sourceTree = "<group>"; };
+		E9B9212C18C78C94003093B8 /* TabActivityNotiHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabActivityNotiHighlighted.png; path = Assets/Images/TabActivityNotiHighlighted.png; sourceTree = "<group>"; };
+		E9B9212D18C78C94003093B8 /* TabActivityNotiHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNotiHighlighted@2x.png"; path = "Assets/Images/TabActivityNotiHighlighted@2x.png"; sourceTree = "<group>"; };
+		E9B9212E18C78C94003093B8 /* TabActivityNotiSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabActivityNotiSelected.png; path = Assets/Images/TabActivityNotiSelected.png; sourceTree = "<group>"; };
+		E9B9212F18C78C94003093B8 /* TabActivityNotiSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNotiSelected@2x.png"; path = "Assets/Images/TabActivityNotiSelected@2x.png"; sourceTree = "<group>"; };
+		E9B9213618C78CA2003093B8 /* TabActivityNoti@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNoti@2x~iphone.png"; path = "Assets/Images/TabActivityNoti@2x~iphone.png"; sourceTree = "<group>"; };
+		E9B9213718C78CA2003093B8 /* TabActivityNoti~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNoti~iphone.png"; path = "Assets/Images/TabActivityNoti~iphone.png"; sourceTree = "<group>"; };
+		E9B9213818C78CA2003093B8 /* TabActivityNotiHighlighted@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNotiHighlighted@2x~iphone.png"; path = "Assets/Images/TabActivityNotiHighlighted@2x~iphone.png"; sourceTree = "<group>"; };
+		E9B9213918C78CA2003093B8 /* TabActivityNotiHighlighted~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNotiHighlighted~iphone.png"; path = "Assets/Images/TabActivityNotiHighlighted~iphone.png"; sourceTree = "<group>"; };
+		E9B9213A18C78CA2003093B8 /* TabActivityNotiSelected@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNotiSelected@2x~iphone.png"; path = "Assets/Images/TabActivityNotiSelected@2x~iphone.png"; sourceTree = "<group>"; };
+		E9B9213B18C78CA2003093B8 /* TabActivityNotiSelected~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivityNotiSelected~iphone.png"; path = "Assets/Images/TabActivityNotiSelected~iphone.png"; sourceTree = "<group>"; };
 		E9C2A58B1899231500FC50D3 /* SYNGradientSeparatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGradientSeparatorView.h; sourceTree = "<group>"; };
 		E9C2A58C1899231500FC50D3 /* SYNGradientSeparatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGradientSeparatorView.m; sourceTree = "<group>"; };
 		E9CE79E01886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadLoginToForgotPasswordAnimator.h; sourceTree = "<group>"; };
@@ -2559,6 +2583,12 @@
 				1F4E7F62181AC7D200F59007 /* TabActivityHighlighted@2x.png */,
 				1F4E7F63181AC7D200F59007 /* TabActivitySelected.png */,
 				1F4E7F64181AC7D200F59007 /* TabActivitySelected@2x.png */,
+				E9B9212A18C78C94003093B8 /* TabActivityNoti.png */,
+				E9B9212B18C78C94003093B8 /* TabActivityNoti@2x.png */,
+				E9B9212C18C78C94003093B8 /* TabActivityNotiHighlighted.png */,
+				E9B9212D18C78C94003093B8 /* TabActivityNotiHighlighted@2x.png */,
+				E9B9212E18C78C94003093B8 /* TabActivityNotiSelected.png */,
+				E9B9212F18C78C94003093B8 /* TabActivityNotiSelected@2x.png */,
 			);
 			name = Activity;
 			sourceTree = "<group>";
@@ -2636,6 +2666,12 @@
 				1F4E7F92181ACBAA00F59007 /* TabActivityHighlighted~iphone.png */,
 				1F4E7F93181ACBAA00F59007 /* TabActivitySelected@2x~iphone.png */,
 				1F4E7F94181ACBAA00F59007 /* TabActivitySelected~iphone.png */,
+				E9B9213618C78CA2003093B8 /* TabActivityNoti@2x~iphone.png */,
+				E9B9213718C78CA2003093B8 /* TabActivityNoti~iphone.png */,
+				E9B9213818C78CA2003093B8 /* TabActivityNotiHighlighted@2x~iphone.png */,
+				E9B9213918C78CA2003093B8 /* TabActivityNotiHighlighted~iphone.png */,
+				E9B9213A18C78CA2003093B8 /* TabActivityNotiSelected@2x~iphone.png */,
+				E9B9213B18C78CA2003093B8 /* TabActivityNotiSelected~iphone.png */,
 			);
 			name = Activity;
 			sourceTree = "<group>";
@@ -3815,12 +3851,14 @@
 				1F4E7FC7181ACBAA00F59007 /* TabSearchHighlighted@2x~iphone.png in Resources */,
 				1F458B0017E1C4E6003C14AC /* AppIcon29x29.png in Resources */,
 				BE270BD016EF386300CDDA6D /* DividerLogin.png in Resources */,
+				E9B9213F18C78CA2003093B8 /* TabActivityNotiHighlighted~iphone.png in Resources */,
 				BE270BD116EF386300CDDA6D /* DividerLogin@2x.png in Resources */,
 				4C5E862718B65AAE00D0E937 /* In_AddButton@2x.png in Resources */,
 				0E19FBBF1822738A0007DF5B /* SYNChannelSearchCell.xib in Resources */,
 				0EF07867181EAE8300667417 /* ButtonMore.png in Resources */,
 				1F4E7F7A181AC7D300F59007 /* TabFeedHighlighted@2x.png in Resources */,
 				E99B8D3F1892AD9500E08ABD /* ScrubberBarHD@2x.png in Resources */,
+				E9B9214018C78CA2003093B8 /* TabActivityNotiSelected@2x~iphone.png in Resources */,
 				BEE01B6A18520FA6000CF681 /* SYNCommentingCollectionViewCell.xib in Resources */,
 				01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */,
 				01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */,
@@ -3891,6 +3929,7 @@
 				1F458B0417E1C4E6003C14AC /* AppIcon60x60.png in Resources */,
 				4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */,
 				BEB312FE1815638700FAF98A /* TabProfile.png in Resources */,
+				E9B9213C18C78CA2003093B8 /* TabActivityNoti@2x~iphone.png in Resources */,
 				1F4E7FB9181ACBAA00F59007 /* TabMoods@2x~iphone.png in Resources */,
 				E9FDCD98188D902A00C31CC1 /* WebView.storyboard in Resources */,
 				0127B87F1810479E00DE2FD6 /* ProximaNova-Regular.otf in Resources */,
@@ -3904,6 +3943,7 @@
 				BE285D9C1725726300D995AB /* SYNAddToChannelViewController.xib in Resources */,
 				4425147618B3A52F00E5764A /* PlaceholderNotificationVideo.png in Resources */,
 				BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib in Resources */,
+				E9B9213218C78C94003093B8 /* TabActivityNotiHighlighted.png in Resources */,
 				E9AB7E05188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */,
 				1F458B0617E1C4E6003C14AC /* AppIcon76x76.png in Resources */,
 				1F4E7F85181AC7D300F59007 /* TabSearchHighlighted.png in Resources */,
@@ -3914,6 +3954,7 @@
 				1F458B2317E1CE8E003C14AC /* AppIcon-Dev-29x29@2x.png in Resources */,
 				E98369D7188937B300363709 /* ButtonLogin@2x.png in Resources */,
 				0111CDFE1729317100612186 /* SYNCoverThumbnailCell.xib in Resources */,
+				E9B9213418C78C94003093B8 /* TabActivityNotiSelected.png in Resources */,
 				3862E8A4172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib in Resources */,
 				E99AA424188035F100330ABB /* LoginLogo.png in Resources */,
 				BEB31397182170E500FAF98A /* SYNSearchResultsUserCell.xib in Resources */,
@@ -3932,8 +3973,10 @@
 				011C1679173003E800CF50B9 /* OWActivityViewController.bundle in Resources */,
 				BEB312F81815638700FAF98A /* TabActivity.png in Resources */,
 				1FC24E921851F7690022548B /* IconVideoCommentDefault@2x.png in Resources */,
+				E9B9213318C78C94003093B8 /* TabActivityNotiHighlighted@2x.png in Resources */,
 				1F4E7FB2181ACBAA00F59007 /* TabActivitySelected~iphone.png in Resources */,
 				BEA216AF17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib in Resources */,
+				E9B9213518C78C94003093B8 /* TabActivityNotiSelected@2x.png in Resources */,
 				E972DFB1187C6FD900CB9C78 /* Login_iphone.storyboard in Resources */,
 				1F4E7F87181AC7D300F59007 /* TabSearchSelected.png in Resources */,
 				BEE01B641851E187000CF681 /* SYNCommentingViewController~iphone.xib in Resources */,
@@ -3994,6 +4037,7 @@
 				44E0978A18BCD34C00FF0AF4 /* followbutton@2x.png in Resources */,
 				1F4E7F82181AC7D300F59007 /* TabProfileHighlighted@2x.png in Resources */,
 				E9FDCD9F188D92EF00C31CC1 /* BackButton@2x.png in Resources */,
+				E9B9213018C78C94003093B8 /* TabActivityNoti.png in Resources */,
 				4C5E860C18B6338800D0E937 /* SYNMoodOverlayViewController.xib in Resources */,
 				BEB313B618280F1200FAF98A /* divider_feed@x2.png in Resources */,
 				38A201071731738F00FB9F57 /* SYNAddToChannelViewController~iphone.xib in Resources */,
@@ -4043,8 +4087,10 @@
 				E9B068E9185B62F500C98AEB /* SYNSearchVideoPlayerViewController_iphone.storyboard in Resources */,
 				BEB312FD1815638700FAF98A /* TabMoods@2x.png in Resources */,
 				1F51A69F1742A93B009907CA /* PlaceholderNotificationAvatar@2x.png in Resources */,
+				E9B9213118C78C94003093B8 /* TabActivityNoti@2x.png in Resources */,
 				1F51A6B01742A959009907CA /* PlaceholderAvatarChannel@2x~iphone.png in Resources */,
 				1F51A6B11742A959009907CA /* PlaceholderAvatarChannel~iphone.png in Resources */,
+				E9B9213D18C78CA2003093B8 /* TabActivityNoti~iphone.png in Resources */,
 				1F51A6B41742A959009907CA /* PlaceholderAvatarProfile@2x~iphone.png in Resources */,
 				1F51A6B51742A959009907CA /* PlaceholderAvatarProfile~iphone.png in Resources */,
 				4CE8AE5818A901560031CE1C /* BackButtonApp@2x.png in Resources */,
@@ -4074,7 +4120,9 @@
 				1F4E7FBE181ACBAA00F59007 /* TabMoodsSelected~iphone.png in Resources */,
 				44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */,
 				BEB31391181FDB5A00FAF98A /* SYNAggregateVideoItemCell~iphone.xib in Resources */,
+				E9B9214118C78CA2003093B8 /* TabActivityNotiSelected~iphone.png in Resources */,
 				BE1B3DD3180E902800DA2BD6 /* SYNMoodRootViewController.xib in Resources */,
+				E9B9213E18C78CA2003093B8 /* TabActivityNotiHighlighted@2x~iphone.png in Resources */,
 				BED027CF1834D4CC00636659 /* ButtonMoreHelp@2x.png in Resources */,
 				1F458B2A17E1CE8E003C14AC /* AppIcon-Dev-60x60.png in Resources */,
 				E98369D6188937B300363709 /* ButtonLogin.png in Resources */,

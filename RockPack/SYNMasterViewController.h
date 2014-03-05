@@ -45,6 +45,7 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 @property (nonatomic, readonly) BOOL hasCreatedPopularGenre;
 
+@property (nonatomic, strong, readonly) UIButton *activityTab;
 
 @property (nonatomic, readonly) SYNAbstractViewController* showingViewController;
 
