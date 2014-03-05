@@ -554,6 +554,8 @@
 		E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */; };
 		E91D364B1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91D364A1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard */; };
 		E91D4105187DAE5D00E712CC /* SYNLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91D4104187DAE5D00E712CC /* SYNLoginManager.m */; };
+		E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */; };
+		E91E3B2218C7292400F79020 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */; };
 		E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */; };
 		E92837AC189C022E005D5108 /* SYNCommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837AB189C022E005D5108 /* SYNCommentsModel.m */; };
 		E92837B2189C0BE9005D5108 /* SYNFacebookButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */; };
@@ -1417,6 +1419,8 @@
 		E91D364A1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNCarouselVideoPlayerViewController_iphone4.storyboard; sourceTree = "<group>"; };
 		E91D4103187DAE5D00E712CC /* SYNLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginManager.h; sourceTree = "<group>"; };
 		E91D4104187DAE5D00E712CC /* SYNLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginManager.m; sourceTree = "<group>"; };
+		E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonVideoDeleteDefault.png; path = Assets/Images/iPhone/channelDetail/ButtonVideoDeleteDefault.png; sourceTree = "<group>"; };
+		E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonVideoDeleteDefault@2x.png"; path = "Assets/Images/iPhone/channelDetail/ButtonVideoDeleteDefault@2x.png"; sourceTree = "<group>"; };
 		E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoLoadingView.h; sourceTree = "<group>"; };
 		E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingView.m; sourceTree = "<group>"; };
 		E91F04531844C4410009D610 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -1924,6 +1928,8 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */,
+				E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */,
 				4CE8AE5518A901560031CE1C /* BackButtonApp.png */,
 				4CE8AE5618A901560031CE1C /* BackButtonApp@2x.png */,
 				1F65D48F17EB3C8B004326A9 /* Images.xcassets */,
@@ -4017,6 +4023,7 @@
 				0E0062E5188EBCCC00429C79 /* SYNOnBoardingSectionHeader.xib in Resources */,
 				E9F6255B1885B2A1000EF6A2 /* Login_ipad.storyboard in Resources */,
 				1F4560711844E5EF0098983B /* PlaceholderAvatarFriends.png in Resources */,
+				E91E3B2218C7292400F79020 /* ButtonVideoDeleteDefault@2x.png in Resources */,
 				0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */,
 				E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */,
 				1F4E7FC4181ACBAA00F59007 /* TabProfileSelected~iphone.png in Resources */,
@@ -4121,6 +4128,7 @@
 				010AAE9F17D9EF48001DD5FA /* ShareFacebookButton@2x.png in Resources */,
 				010AAEA317D9EF48001DD5FA /* ShareMailButton@2x.png in Resources */,
 				BED027CD1834D4CC00636659 /* ButtonMoreFriends@2x.png in Resources */,
+				E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */,
 				010AAEA717D9EF48001DD5FA /* ShareTwitterButton@2x.png in Resources */,
 				BEF5ED8F17DE061E006EF5A1 /* ShareAddEntry.jpg in Resources */,
 				BEF5ED9017DE061E006EF5A1 /* ShareAddEntry@2x.jpg in Resources */,
