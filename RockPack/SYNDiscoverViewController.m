@@ -151,11 +151,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 						  withReuseIdentifier:[SYNDiscoverSectionView reuseIdentifier]];
 
     self.sideContainerView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
-    if (IS_RETINA) {
-        self.sideContainerView.layer.borderWidth = 0.5f;
-    } else {
-        self.sideContainerView.layer.borderWidth = 1.0f;
-    }
+    
+    self.sideContainerView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
     [self reloadCategories];
 	
