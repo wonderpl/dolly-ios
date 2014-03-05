@@ -179,7 +179,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
-    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
+    [SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
     
     self.shouldBeginEditing = YES;
     self.collectionsTabActive = YES;
@@ -428,7 +428,6 @@
         self.channelThumbnailCollectionView.hidden=NO;
         self.subscriptionThumbnailCollectionView.hidden=NO;
     }
-    
 }
 
 
@@ -2700,46 +2699,32 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         void (^animateProfileMode)(void) = ^{
             CGRect frame = cell.frame;
             
-            if (index == 0)
-            {
+            if (index == 0) {
                 ((SYNChannelCreateNewCell*)cell).createCellButton.alpha = 1.0f;
                 ((SYNChannelCreateNewCell*)cell).descriptionTextView .alpha = 0.0f;
                 ((SYNChannelCreateNewCell*)cell).state = CreateNewChannelCellStateHidden;
                 CGRect tmpBoarder = ((SYNChannelCreateNewCell*)cell).boarderView.frame;
                 if (IS_IPHONE) {
                     tmpBoarder.size.height = 61;
-                }
-                else
-                {
+                } else {
                     tmpBoarder.size.height = 80;
                 }
                 ((SYNChannelCreateNewCell*)cell).boarderView.frame = tmpBoarder;
-                
-            }
-            else
-            {
-                if (IS_IPHONE)
-                {
+            } else {
+                if (IS_IPHONE) {
                     frame.origin.y -= kHeightChange+18;
                 }
                 
-                if (IS_IPAD)
-                {
-                    
-                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
-                    {
-                        if (index%2 == 0)
-                        {
+                if (IS_IPAD) {
+                    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+                        if (index%2 == 0) {
                             frame.origin.y -=kHeightChange;
                         }
                     }
-                    else
-                    {
-                        if (index%3 == 0)
-                        {
+                    else {
+                        if (index%3 == 0) {
                             frame.origin.y -=kHeightChange;
                         }
-                        
                     }
                 }
             }
@@ -2750,7 +2735,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         };
         
         __weak SYNProfileRootViewController* wself = self;
-
 
         [UIView transitionWithView:cell
                           duration:0.4f
@@ -2766,12 +2750,10 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
                                 [wself performSelector:@selector(showInboardingAnimationAfterCreate) withObject:self afterDelay:1.4f];
                             }
                                 [wself performSelector:@selector(scrollUpWithTime) withObject:self afterDelay:time];
-
                         }];
     }
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
 }
-
 
 -(void) scrollUpWithTime{
     if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
@@ -2779,9 +2761,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
             [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
         }];
     }
-
 }
-
 
 -(void) setCreateOffset {
     if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
@@ -2863,8 +2843,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 }
 
 #pragma mark popover controller
-- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView **)view
-{
+- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView **)view {
     
     if (popoverController == self.imagePickerControllerCoverphoto.cameraPopoverController) {
         CGRect tmpRect =self.uploadCoverPhotoButton.frame;
@@ -2877,19 +2856,15 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     }
 }
 
-
-
-    
 - (NSString *)trackingScreenName {
 	return @"Profile";
 }
 
 
-- (void) showInboardingAnimationAfterCreate{
+- (void) showInboardingAnimationAfterCreate {
     SYNChannelMidCell *cell;
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
-
         
         if (modeType == kModeMyOwnProfile) {
             cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0]]);
