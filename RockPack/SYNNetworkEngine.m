@@ -916,8 +916,6 @@
 																										params:nil
 																									httpMethod:@"GET"];
     
-    networkOperation.ignoreCachedResponse = YES;
-    
     [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
 		NSArray *users = dictionary[@"users"][@"items"];
         completionBlock(users);
