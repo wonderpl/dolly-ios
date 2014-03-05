@@ -16,14 +16,13 @@
 
 + (instancetype) sharedInstance;
 
-- (void) updateActivityForCurrentUser;
-
 - (BOOL) isRecentlyStarred:(NSString*)videoInstanceId;
 - (BOOL) isRecentlyViewed:(NSString*)videoId;
 - (BOOL) isSubscribedToChannelId:(NSString*)channelId;
 - (BOOL) isSubscribedToUserId:(NSString*)userId;
 
--(void)registerActivityFromDictionary:(NSDictionary*)dictionary;
+- (void)registerActivityFromDictionary:(NSDictionary*)dictionary;
+- (void) updateActivityForCurrentUserWithReset:(BOOL) reset;
 
 
 //- (void) subscriptionRequestToChannel: (Channel *) channel

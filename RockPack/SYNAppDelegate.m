@@ -498,7 +498,7 @@
 //        [self.loginViewController applicationResume];
 //    }
     
-    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
+    [SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
     
     [self checkForUpdatedPlayerCode];
     

@@ -142,7 +142,7 @@
 	
 	appDelegate.currentOAuth2Credentials = credential;
 	
-	[[SYNActivityManager sharedInstance] updateActivityForCurrentUser];
+	[[SYNActivityManager sharedInstance] updateActivityForCurrentUserWithReset:YES];
 	
 	return YES;
 }

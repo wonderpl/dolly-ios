@@ -45,13 +45,17 @@
 -(id)init {
 	if (self = [super init]) {
 		self.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
-		self.recentlyStarred = [[NSMutableSet alloc] init];
-		self.recentlyViewed = [[NSMutableSet alloc] init];
-		self.channelSubscriptions = [[NSMutableSet alloc] init];
-		self.userSubscriptons = [[NSMutableSet alloc] init];
+        [self initAllValues];
     }
     return self;
+}
+
+-(void) initAllValues {
+    self.recentlyStarred = [[NSMutableSet alloc] init];
+    self.recentlyViewed = [[NSMutableSet alloc] init];
+    self.channelSubscriptions = [[NSMutableSet alloc] init];
+    self.userSubscriptons = [[NSMutableSet alloc] init];
+    
 }
 
 -(void)registerActivityFromDictionary:(NSDictionary*)dictionary
@@ -84,7 +88,7 @@
 }
 
 #pragma mark - update activity manager
-- (void) updateActivityForCurrentUser
+- (void) updateActivityForCurrentUserWithReset:(BOOL)reset
 {
     // Don't do this if we don't yet have a user
     NSString *userId =self.appDelegate.currentOAuth2Credentials.userId;
@@ -93,6 +97,10 @@
         [self.appDelegate.oAuthNetworkEngine activityForUserId: userId
                                              completionHandler: ^(NSDictionary *responseDictionary) {
 
+                                                 if (reset) {
+                                                     [self initAllValues];                                                 
+                                                 }
+                                                 
                                                  [self registerActivityFromDictionary:responseDictionary];
                                                  
                                              } errorHandler: ^(NSDictionary* error) {
@@ -100,6 +108,7 @@
                                              }];
     }
 }
+
 
 
 
