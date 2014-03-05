@@ -85,7 +85,6 @@
 		015CB01616AE039900FEB8E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01516AE039900FEB8E7 /* User.m */; };
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
 		0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165542A18363ADC009B161C /* SYNTextFieldLogin.m */; };
-		01655434183680CE009B161C /* SYNFormButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 01655433183680CE009B161C /* SYNFormButton.m */; };
 		016AED3B1821349800DEAF7E /* SYNSocialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AED3A1821349800DEAF7E /* SYNSocialButton.m */; };
 		016B97151770C3DE00892211 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016B97141770C3DE00892211 /* CFNetwork.framework */; };
 		0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717D165550A900A3C7C4 /* SystemConfiguration.framework */; };
@@ -772,8 +771,6 @@
 		015CB01816AE03B200FEB8E7 /* _User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _User.m; sourceTree = "<group>"; };
 		0165542918363ADC009B161C /* SYNTextFieldLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTextFieldLogin.h; sourceTree = "<group>"; };
 		0165542A18363ADC009B161C /* SYNTextFieldLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTextFieldLogin.m; sourceTree = "<group>"; };
-		01655432183680CE009B161C /* SYNFormButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFormButton.h; sourceTree = "<group>"; };
-		01655433183680CE009B161C /* SYNFormButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFormButton.m; sourceTree = "<group>"; };
 		016AED391821349800DEAF7E /* SYNSocialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialButton.h; sourceTree = "<group>"; };
 		016AED3A1821349800DEAF7E /* SYNSocialButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialButton.m; sourceTree = "<group>"; };
 		016B97141770C3DE00892211 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -3464,8 +3461,6 @@
 		BEB31371181AC40100FAF98A /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				01655432183680CE009B161C /* SYNFormButton.h */,
-				01655433183680CE009B161C /* SYNFormButton.m */,
 				016AED391821349800DEAF7E /* SYNSocialButton.h */,
 				016AED3A1821349800DEAF7E /* SYNSocialButton.m */,
 				0125FB6D182BEAFB00EC822E /* SYNAvatarButton.h */,
@@ -4437,7 +4432,6 @@
 				0165542B18363ADC009B161C /* SYNTextFieldLogin.m in Sources */,
 				BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */,
 				BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */,
-				01655434183680CE009B161C /* SYNFormButton.m in Sources */,
 				E92CBAEE1887E29500A07070 /* SYNVideoPlayerAnimator.m in Sources */,
 				BED027B11833F66700636659 /* SYNOptionsOverlayViewController.m in Sources */,
 				0E0062E1188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m in Sources */,
