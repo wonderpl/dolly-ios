@@ -25,11 +25,6 @@
 
 - (void) setDisplayName: (NSString*) displayName
 {
-    if(!displayName)
-    {
-        self.nameLabel.text = @"";
-        return;
-    }
     self.nameLabel.text = displayName;
 }
 @end

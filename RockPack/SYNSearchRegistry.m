@@ -27,23 +27,21 @@
         [appDelegate saveSearchContext];
         return YES;
     }
-    
     return NO;
 }
 
 
 // returns a cached image dictionary
-- (NSCache *) registerFriendsFromAddressBookArray: (NSArray *) abArray
+- (NSMutableDictionary *) registerFriendsFromAddressBookArray: (NSArray *) abArray
 {
     NSInteger total = [abArray count];
     
     // placeholders
-    NSString *firstName, *lastName, *email;
     NSData *imageData;
     Friend *contactAsFriend;
     
     
-    NSCache *imageCache = [[NSCache alloc] init];
+    NSMutableDictionary *imageCache = [[NSMutableDictionary alloc] init];
     
     // fetch existing friends from DB
     
@@ -100,35 +98,43 @@
             continue;
         }
         
-        email = (NSString *) emailAddresses[0];
+        NSString *email;
         
-        if (!(contactAsFriend = existingFriendsByEmail[email])) // will have email due to previous condition
-        {
-            if (!(contactAsFriend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext]))
+        for (int i = 0; i<emailAddresses.count; i++) {
+            email = (NSString *) emailAddresses[i];
+
+            if (!(contactAsFriend = existingFriendsByEmail[email])) // will have email due to previous condition
             {
-                continue; // if cache AND instatiation fails, bail
+                if (!(contactAsFriend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext]))
+                {
+                    continue; // if cache AND instatiation fails, bail
+                }
             }
-        }
-        
-        
-        [contactAsFriend setAttributesFromAddressBook:currentPerson email:email];
-        
-        
-        imageData = (__bridge_transfer NSData *) ABPersonCopyImageData(currentPerson);
-        
-        
-        contactAsFriend.email = email;
-        contactAsFriend.externalSystem = kEmail;
-        contactAsFriend.externalUID = [NSString stringWithFormat: @"%i", cid];
-        
-        if (imageData)
-        {
-            NSString *key = [NSString stringWithFormat: @"cached://%@", contactAsFriend.uniqueId];
             
-            contactAsFriend.thumbnailURL = key;
             
-            [imageCache setObject: imageData
-                           forKey: key];
+            
+            
+            [contactAsFriend setAttributesFromAddressBook:currentPerson email:email];
+            
+            imageData = (__bridge_transfer NSData *) ABPersonCopyImageData(currentPerson);
+            
+            if (imageData)
+            {
+                NSString *key = [NSString stringWithFormat: @"cached://%@", contactAsFriend.uniqueId];
+                
+                contactAsFriend.thumbnailURL = key;
+                
+                [imageCache setObject: imageData
+                               forKey: key];
+            }
+
+            
+            if (existingFriendsByEmail[contactAsFriend.email]) {
+                contactAsFriend.lastShareDate = ((Friend*)existingFriendsByEmail[contactAsFriend.email]).lastShareDate;
+            }
+            
+            contactAsFriend.externalUID = [NSString stringWithFormat: @"%i", cid];
+
         }
     }
     
@@ -197,7 +203,7 @@
             continue;
         }
         
-        existingFriendsByUID[existingFriend.email] = existingFriend;
+        existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
         
         if (!existingFriend.localOriginValue) // protect the address book friends...
         {
@@ -212,12 +218,13 @@
     
     
     NSArray *itemsDictionary = usersDictionary[@"items"];
-    
+
     Friend *friend;
     
     for (NSDictionary *itemDictionary in itemsDictionary)
     {
-        if (!(friend = existingFriendsByUID[itemDictionary[@"email"]]))
+        
+        if (!(friend = existingFriendsByUID[itemDictionary[@"id"]]))
         {
             if (!(friend = [Friend instanceFromDictionary: itemDictionary
                                 usingManagedObjectContext: appDelegate.searchManagedObjectContext]))

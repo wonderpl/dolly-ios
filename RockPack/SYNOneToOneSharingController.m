@@ -54,7 +54,7 @@ UISearchBarDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *activitiesContainerView;
 @property (nonatomic, strong) NSArray *recentFriends;
-@property (nonatomic, strong) NSCache *addressBookImageCache;
+@property (nonatomic, strong) NSMutableDictionary *addressBookImageCache;
 @property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, strong) NSString *currentSearchTerm;
 @property (nonatomic, strong) SYNNetworkOperationJsonObject* lastNetworkOperation;
@@ -109,7 +109,7 @@ UISearchBarDelegate>
     self.friends = [NSMutableArray array];
     self.recentFriends = @[];
     
-    self.addressBookImageCache = [[NSCache alloc] init];
+    self.addressBookImageCache = [[NSMutableDictionary alloc] init];
     
     self.currentSearchTerm = @"";
     
@@ -210,6 +210,11 @@ UISearchBarDelegate>
 	[super viewWillAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackShareScreenView];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.addressBookImageCache = nil;
 }
 
 // Recursively, enable or disable controls contained in a view
@@ -399,20 +404,30 @@ UISearchBarDelegate>
     
     [existingFriendsArray addObjectsFromArray:[NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                                                                    error: &error]]];
-        
+    
     if (!error)
     {
         [self.friends removeAllObjects];
         
         NSMutableArray *recentlySharedFriendsMutableArray = [NSMutableArray arrayWithCapacity: existingFriendsArray.count]; // maximum
         
+        NSMutableDictionary *lastSharedEmail = [[NSMutableDictionary alloc]init];
+        NSMutableDictionary *existingFriendsByEmail = [[NSMutableDictionary alloc]init];
+        
         for (Friend *existingFriend in existingFriendsArray)
         {
-            [self.friends addObject: existingFriend];
+            if (![existingFriendsByEmail objectForKey:existingFriend.email]) {
+                [self.friends addObject: existingFriend];
+                [existingFriendsByEmail setObject:existingFriend forKey:existingFriend.email];
+            }
             
             if (existingFriend.lastShareDate)
             {
-                [recentlySharedFriendsMutableArray addObject: existingFriend];
+                if (![lastSharedEmail objectForKey:existingFriend.email]) {
+                    [recentlySharedFriendsMutableArray addObject: existingFriend];
+                    [lastSharedEmail setObject:existingFriend forKey:existingFriend.email];
+                }
+
             }
         }
         
@@ -422,6 +437,11 @@ UISearchBarDelegate>
             return [friendB.lastShareDate compare: friendA.lastShareDate];
         }];
         
+        
+        if ([self.recentFriends count]>7) {
+            self.recentFriends = [self.recentFriends objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 8)]];
+
+        }
         [self.recentFriendsCollectionView reloadData];
     }
     
@@ -439,6 +459,8 @@ UISearchBarDelegate>
         if ([appDelegate.searchRegistry
              registerFriendsFromDictionary: dictionary])
         {
+            
+            NSLog(@"get friends : %@", dictionary);
             [weakSelf fetchAndDisplayFriends]; // this will reload the collection view
         }
         else
@@ -490,7 +512,7 @@ UISearchBarDelegate>
     }
     else
     {
-        self.addressBookImageCache = [[NSCache alloc] init]; // keep a valid cache to avoid unexpecatble crashes
+        self.addressBookImageCache = [[NSMutableDictionary alloc] init]; // keep a valid cache to avoid unexpecatble crashes
     }
 }
 
@@ -506,7 +528,7 @@ UISearchBarDelegate>
 - (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
 {
     // if we have not yet loaded, present nothing, otherwise if we have a FB connection do NOT present email cell
-    return (!self.hasAttemptedToLoadData ? 0 : (displayEmailCell ? 1 : 0) + self.recentFriends.count + kNumberOfEmptyRecentSlots);
+    return (!self.hasAttemptedToLoadData ? 0 : (displayEmailCell ? 1 : 0) + (self.recentFriends.count>3 ? self.recentFriends.count : 3));
 }
 
 
@@ -517,7 +539,7 @@ UISearchBarDelegate>
                                                                                                 forIndexPath:indexPath];
     NSInteger realIndex = indexPath.item;
     
-    if (realIndex == 0 && displayEmailCell)
+    if (realIndex == 0)
     {
         userThumbnailCell.imageView.image = [UIImage imageNamed: @"ShareAddEntry.jpg"];
         
@@ -539,29 +561,33 @@ UISearchBarDelegate>
         
         NSString *nameToDisplay;
         
-        if (friend.displayName && ![friend.displayName isEqualToString: @""])
+        if ([friend.displayName length] > 0)
         {
             nameToDisplay = friend.displayName;
-        }
-        else if (friend.email && ![friend.email isEqualToString: @""])
-        {
-            nameToDisplay = friend.email;
+            
+#warning REMOVE!!! later 
+            if ([friend.displayName isEqualToString:@" "]) {
+                nameToDisplay = friend.email;
+            }
         }
         else
         {
-            nameToDisplay = @"";
+            nameToDisplay = friend.email;
         }
+        
+        
+        NSLog(@"friend.thumbnailURL :%@", friend.thumbnailURL);
         
         if ([friend.thumbnailURL hasPrefix: @"cached://"])                     // cached from address book image
         {
-            NSPurgeableData *pdata = [self.addressBookImageCache
+            NSData *pdata = [self.addressBookImageCache
                                       objectForKey: friend.thumbnailURL];
             
             UIImage *img;
             
             if (!pdata || !(img = [UIImage imageWithData: pdata])) // address book friends with no image
             {
-                img = [UIImage imageNamed: @"ABContactPlaceholder"];
+                img = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
             }
             
             userThumbnailCell.imageView.image = img;
@@ -576,7 +602,7 @@ UISearchBarDelegate>
             }
             else if (friend.email)
             {
-                userThumbnailCell.imageView.image = [UIImage imageNamed: @"ABContactPlaceholder"];
+                userThumbnailCell.imageView.image = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
             }
             else
             {
@@ -603,7 +629,7 @@ UISearchBarDelegate>
         userThumbnailCell.nameLabel.text = @"Recent";
         
         
-        CGFloat factor = 1.0f - ((float) (realIndex - self.recentFriends.count) / (float) kNumberOfEmptyRecentSlots);
+        CGFloat factor = 1.0f - ((float) (realIndex - self.recentFriends.count) / (8-self.recentFriends.count));
         // fade slots
         userThumbnailCell.imageView.alpha = factor;
     }
@@ -701,7 +727,7 @@ shouldSelectItemAtIndexPath: (NSIndexPath *) indexPath
     }
     else if ([friend.thumbnailURL hasPrefix: @"cached://"])                                       // has been cached from the address book access
     {
-        NSPurgeableData *pdata = [self.addressBookImageCache
+        NSData *pdata = [self.addressBookImageCache
                                   objectForKey: friend.thumbnailURL];
         
         UIImage *img;
@@ -846,6 +872,7 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     [self.searchResultsTableView removeFromSuperview];
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
+    [self.recentFriendsCollectionView reloadData];
     
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -962,6 +989,7 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     __weak SYNOneToOneSharingController *wself = self;
 	
+    
     [appDelegate.oAuthNetworkEngine emailShareWithObjectType: self.mutableShareDictionary[@"type"]
                                                     objectId: self.mutableShareDictionary[@"object_id"]
                                                   withFriend: friend
@@ -969,6 +997,8 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
                                                
                                                friend.lastShareDate = [NSDate date];
                                                
+                                               
+                                               NSLog(@"friend.thumbnailURL :%@", friend.thumbnailURL);
                                                
                                                
                                                NSError * error;

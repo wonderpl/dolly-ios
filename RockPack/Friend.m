@@ -107,6 +107,7 @@
     self.markedForDeletionValue = NO;
     self.localOriginValue = YES;
     self.email = email;
+    self.externalSystem = kEmail;
     
     if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty)) {
         self.firstName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
@@ -180,7 +181,7 @@
     else
         from = @"?";
     
-    return [NSString stringWithFormat:@"[Friend [%@] (name:'%@', email:'%@')]", from, self.displayName, self.email];
+    return [NSString stringWithFormat:@"[Friend [%@] (name:'%@', email:'%@') id %@]", from, self.displayName, self.email, self.uniqueId];
 }
 
 @end
