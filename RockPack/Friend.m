@@ -117,7 +117,7 @@
         self.lastName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
     }
     
-    if (![self.firstName length]>0 && [self.lastName length]>0) {
+    if ([self.firstName length]>0 && [self.lastName length]>0) {
         self.displayName = [NSString stringWithFormat: @"%@ %@", self.firstName, self.lastName];
     } else if ([self.firstName length]>0 && ![self.lastName length]>0) {
         self.displayName = self.firstName;
