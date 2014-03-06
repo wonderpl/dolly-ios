@@ -15,6 +15,8 @@
 #import "Video.h"
 #import "VideoInstance.h"
 #import "Recomendation.h"
+#import "NSString+Validation.h"
+
 @import AddressBook;
 
 @implementation SYNSearchRegistry
@@ -102,7 +104,11 @@
         
         for (int i = 0; i<emailAddresses.count; i++) {
             email = (NSString *) emailAddresses[i];
-
+            
+            if (![email isValidEmail]) {
+                continue;
+            }
+            
             if (!(contactAsFriend = existingFriendsByEmail[email])) // will have email due to previous condition
             {
                 if (!(contactAsFriend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext]))

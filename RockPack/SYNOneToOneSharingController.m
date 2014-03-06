@@ -214,6 +214,8 @@ UISearchBarDelegate>
 	[super viewWillAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackShareScreenView];
+    
+    [self.recentFriendsCollectionView reloadData];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -993,10 +995,6 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
                                            completionHandler: ^(id no_content) {
                                                
                                                friend.lastShareDate = [NSDate date];
-                                               
-                                               
-                                               NSLog(@"friend.thumbnailURL :%@", friend.thumbnailURL);
-                                               
                                                
                                                NSError * error;
                                                [friend.managedObjectContext save: &error];
