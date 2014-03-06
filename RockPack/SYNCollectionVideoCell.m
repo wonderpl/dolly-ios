@@ -70,6 +70,12 @@
     // == timestamp == //
     
     self.timeStampLabel.text = [NSString paddedTimecodeStringFromSeconds:videoInstance.video.durationValue];
+	CGFloat rightOffset = (CGRectGetWidth(self.frame) - CGRectGetMaxX(self.timeStampLabel.frame));
+	[self.timeStampLabel sizeToFit];
+	self.timeStampLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - (rightOffset + CGRectGetWidth(self.timeStampLabel.frame)),
+										   CGRectGetMinY(self.timeStampLabel.frame),
+										   CGRectGetWidth(self.timeStampLabel.frame),
+										   CGRectGetHeight(self.timeStampLabel.frame));
     
     [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]

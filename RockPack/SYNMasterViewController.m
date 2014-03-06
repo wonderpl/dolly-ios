@@ -84,8 +84,7 @@
 {
     
     [super viewDidLoad];
-    
-    
+	
     // == Setup Navigation Manager == (This should be done here because it is dependent on controls) == //
     
     appDelegate.navigationManager.masterController = self;
@@ -661,6 +660,10 @@
 -(NSArray*)tabs
 {
     return self.tabsView.subviews;
+}
+
+- (UIButton *)activityTab {
+	return self.tabs[4];
 }
 
 
