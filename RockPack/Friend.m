@@ -6,12 +6,15 @@
 
 // Private interface goes here.
 
+@property (nonatomic, strong) NSString* firstName;
+@property (nonatomic, strong) NSString* lastName;
+
 @end
 
 
 @implementation Friend
 
-@synthesize isOnRockpack;
+@synthesize isOnRockpack, firstName, lastName;
 
 + (Friend *) friendFromFriend:(Friend *)friendToCopy
       forManagedObjectContext:(NSManagedObjectContext*)managedObjectContext
@@ -98,18 +101,52 @@
     
 }
 
--(NSString*)firstName
-{
-    NSArray* dNameArray = [self.displayName componentsSeparatedByString:@" "];
-    return (dNameArray.count > 0 ? dNameArray[0] : @"");
+-(void) setAttributesFromAddressBook :(ABRecordRef) currentPerson email:(NSString*) email{
+    
+    self.uniqueId = email; // email serves as a uniqueId for address book friends
+    self.markedForDeletionValue = NO;
+    self.localOriginValue = YES;
+    self.email = email;
+    
+    if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty)) {
+        self.firstName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
+    }
+    
+    if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty)) {
+        self.lastName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
+    }
+    
+    if (![self.firstName length]>0 && [self.lastName length]>0) {
+        self.displayName = [NSString stringWithFormat: @"%@ %@", self.firstName, self.lastName];
+    } else if (self.firstName && ![self.lastName length]>0) {
+        self.displayName = self.firstName;
+    } else if (![self.firstName isEqualToString:@""] && self.lastName) {
+        self.displayName = self.lastName;
+    } else {
+        self.displayName = @"";
+    }
+
+    
+    
 }
 
--(NSString*)lastName
-{
-    NSArray* dNameArray = [self.displayName componentsSeparatedByString:@" "];
-    return (dNameArray.count > 1 ? dNameArray[dNameArray.count - 1] : @"");
-}
 
+//-(NSString*)displayName
+//{
+//    NSString *displayName = @"";
+//    if (![self.firstName length]>0 && [self.lastName length]>0) {
+//        displayName = [NSString stringWithFormat: @"%@ %@", self.firstName, self.lastName];
+//    } else if (self.firstName && ![self.lastName length]>0) {
+//        displayName = self.firstName;
+//    } else if (![self.firstName isEqualToString:@""] && self.lastName) {
+//        displayName = self.lastName;
+//    } else {
+//        displayName = @"";
+//    }
+//
+//    return displayName;
+//}
+//
 -(BOOL)isOnRockpack
 {
     return (self.resourceURL != nil);

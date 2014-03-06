@@ -1,4 +1,4 @@
-    //
+//
 //  SYNOneToOneSharingController.m
 //  rockpack
 //
@@ -32,12 +32,12 @@
 
 
 @interface SYNOneToOneSharingController () <UICollectionViewDataSource,
-                                            UICollectionViewDelegate,
-                                            UITextFieldDelegate,
-                                            UITableViewDataSource,
-                                            UITableViewDelegate,
-                                            UIScrollViewDelegate,
-											UISearchBarDelegate>
+UICollectionViewDelegate,
+UITextFieldDelegate,
+UITableViewDataSource,
+UITableViewDelegate,
+UIScrollViewDelegate,
+UISearchBarDelegate>
 {
     BOOL displayEmailCell;
 }
@@ -118,7 +118,7 @@
     [self.recentFriendsCollectionView registerNib:[SYNOneToOneSharingFriendCell nib]
                        forCellWithReuseIdentifier:[SYNOneToOneSharingFriendCell reuseIdentifier]];
     
-
+    
     if (IS_IPHONE)
     {
         // resize panel for iPhone
@@ -135,7 +135,7 @@
     
     // Basic recognition
     self.loader.hidden = YES;
-
+    
     BOOL canReadAddressBook = NO;
     
     switch (ABAddressBookGetAuthorizationStatus())
@@ -375,8 +375,9 @@
     
     __weak SYNOneToOneSharingController *weakSelf = self;
     
+    
     NSError *error;
-    NSArray *existingFriendsArray;
+    NSMutableArray *existingFriendsArray;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
@@ -384,9 +385,21 @@
                                          inManagedObjectContext: appDelegate.searchManagedObjectContext]];
     
     
-    existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                 error: &error];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
     
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName != %@", @""]];
+   
+    existingFriendsArray = [NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                                                error: &error]];
+    
+    
+    fetchRequest.sortDescriptors =  @[[NSSortDescriptor sortDescriptorWithKey:@"email" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName == %@", @""]];
+    
+    [existingFriendsArray addObjectsFromArray:[NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                                                                   error: &error]]];
+        
     if (!error)
     {
         [self.friends removeAllObjects];
@@ -408,7 +421,7 @@
             
             return [friendB.lastShareDate compare: friendA.lastShareDate];
         }];
-
+        
         [self.recentFriendsCollectionView reloadData];
     }
     
@@ -434,7 +447,7 @@
         }
         
         self.hasAttemptedToLoadData = YES;
-
+        
         [self showLoader: NO];
     };
     
@@ -600,7 +613,7 @@
 
 
 - (BOOL) collectionView: (UICollectionView *) collectionView
-         shouldSelectItemAtIndexPath: (NSIndexPath *) indexPath
+shouldSelectItemAtIndexPath: (NSIndexPath *) indexPath
 {
     // "Recent" stub cells are not clickable...
     return indexPath.item + (displayEmailCell ? 0 : 1) <= self.recentFriends.count;
@@ -712,14 +725,14 @@
 
 
 - (CGFloat) tableView: (UITableView *) tableView
-            heightForRowAtIndexPath: (NSIndexPath *) indexPath;
+heightForRowAtIndexPath: (NSIndexPath *) indexPath;
 {
     return 50.0f;
 }
 
 
 - (void) tableView: (UITableView *) tableView
-         didSelectRowAtIndexPath: (NSIndexPath *) indexPath
+didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 {
     Friend *friend;
     
@@ -768,7 +781,7 @@
     }
     else
     {
-        titleText = [NSString stringWithFormat: @"Enter an Email for %@", friend.firstName];
+        titleText = [NSString stringWithFormat: @"Enter an Email for %@", friend.displayName];
     }
     
     self.friendToAddEmail = friend; // either a newly created or
@@ -853,7 +866,7 @@
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
 {
 	self.currentSearchTerm = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-
+    
     [self.searchResultsTableView reloadData];
     
     return YES;
@@ -878,7 +891,7 @@
     sResTblFrame.size.height = self.view.frame.size.height - sResTblFrame.origin.y;
     
     self.searchResultsTableView.frame = sResTblFrame;
-
+    
     [self.view addSubview: self.searchResultsTableView];
     
     [self.searchResultsTableView reloadData];
@@ -955,29 +968,29 @@
                                            completionHandler: ^(id no_content) {
                                                
                                                friend.lastShareDate = [NSDate date];
-         
                                                
-         
+                                               
+                                               
                                                NSError * error;
                                                [friend.managedObjectContext save: &error];
-         
+                                               
                                                wself.friendToAddEmail = nil;
-         
+                                               
                                                [self searchBarTextDidEndEditing:self.searchBar];
                                                
                                                [self fetchAndDisplayFriends];
-         
+                                               
                                                [self showLoader: NO];
-         
+                                               
                                                NSString *typeName =
                                                [self.mutableShareDictionary[@"type"] isEqualToString: @"channel"] ? @"Collection" : @"Video";
-         
+                                               
                                                NSString *notificationText =
                                                [NSString stringWithFormat: NSLocalizedString(@"sharing_object_sent", nil), typeName];
-         
+                                               
                                                [appDelegate.masterViewController presentNotificationWithMessage:notificationText
                                                                                                         andType:NotificationMessageTypeSuccess];
-         
+                                               
 											   if ([self.mutableShareDictionary[@"type"] isEqualToString:@"channel"]) {
 												   [[SYNTrackingManager sharedManager] trackCollectionShareCompletedWithService:@"1to1"];
 											   } else {
@@ -994,38 +1007,38 @@
                                                NSString *title = @"Email Couldn't be Sent";
                                                NSString *reason = @"Unkown reson";
                                                NSDictionary *formErrors = error[@"form_errors"];
-         
+                                               
                                                DebugLog(@"%@", error);
-         
+                                               
                                                if (formErrors[@"email"])
                                                {
                                                    reason = @"The email could be wrong or the service down.";
                                                }
-         
+                                               
                                                if (formErrors[@"external_system"])
                                                {
                                                    reason = @"The email could be wrong or the service down.";
                                                }
-         
+                                               
                                                if (formErrors[@"object_id"])
                                                {
                                                    reason = @"The email could be wrong or the service down.";
                                                }
-         
+                                               
                                                UIAlertView *prompt = [[UIAlertView alloc] initWithTitle: title
                                                                                                 message: reason
                                                                                                delegate: self
                                                                                       cancelButtonTitle: @"OK"
                                                                                       otherButtonTitles: nil];
-         
+                                               
                                                [prompt show];
-         
+                                               
                                                friend.email = nil;
-         
+                                               
                                                wself.friendToAddEmail = nil;
-         
+                                               
                                                [self showLoader: NO];
-         
+                                               
                                                self.view.userInteractionEnabled = YES;
                                                
                                            }];

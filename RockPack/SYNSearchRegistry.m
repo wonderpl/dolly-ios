@@ -110,22 +110,9 @@
             }
         }
         
-        contactAsFriend.uniqueId = email; // email serves as a uniqueId for address book friends
-        contactAsFriend.markedForDeletionValue = NO;
-        contactAsFriend.localOriginValue = YES;
         
-        firstName = @"";
-        if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty)) {
-            firstName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
-        }
+        [contactAsFriend setAttributesFromAddressBook:currentPerson email:email];
         
-        lastName=@"";
-        if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty)) {
-            lastName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
-
-        }
-        
-        contactAsFriend.displayName = [NSString stringWithFormat: @"%@ %@", firstName, lastName];
         
         imageData = (__bridge_transfer NSData *) ABPersonCopyImageData(currentPerson);
         
@@ -210,7 +197,7 @@
             continue;
         }
         
-        existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
+        existingFriendsByUID[existingFriend.email] = existingFriend;
         
         if (!existingFriend.localOriginValue) // protect the address book friends...
         {
@@ -230,7 +217,7 @@
     
     for (NSDictionary *itemDictionary in itemsDictionary)
     {
-        if (!(friend = existingFriendsByUID[itemDictionary[@"id"]]))
+        if (!(friend = existingFriendsByUID[itemDictionary[@"email"]]))
         {
             if (!(friend = [Friend instanceFromDictionary: itemDictionary
                                 usingManagedObjectContext: appDelegate.searchManagedObjectContext]))
