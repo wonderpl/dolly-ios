@@ -565,10 +565,6 @@ UISearchBarDelegate>
         {
             nameToDisplay = friend.displayName;
             
-#warning REMOVE!!! later 
-            if ([friend.displayName isEqualToString:@" "]) {
-                nameToDisplay = friend.email;
-            }
         }
         else
         {
