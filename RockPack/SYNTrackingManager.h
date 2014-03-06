@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)trackVideoMaximiseViaRotation;
 - (void)trackVideoMaximise;
+- (void)trackVideoAirPlayUsed;
 
 - (void)trackCreateChannelScreenView;
 

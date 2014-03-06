@@ -29,7 +29,8 @@
 #import "SYNGenreManager.h"
 #import "SYNMasterViewController.h"
 #import <SDWebImageManager.h>
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
+@import MediaPlayer;
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
 
@@ -70,6 +71,11 @@
 	self.linkButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.linkButton.titleLabel.font.pointSize];
     
     [self.commentButton setTitle:@"0" forState:UIControlStateNormal];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(activeWirelessRouteChanged:)
+												 name:MPVolumeViewWirelessRouteActiveDidChangeNotification
+											   object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -353,6 +359,17 @@
 		return YES;
 	}
 	return NO;
+}
+
+- (void)activeWirelessRouteChanged:(NSNotification *)notification {
+	MPVolumeView *volumeView = [notification object];
+	
+	if (volumeView.isWirelessRouteActive) {
+		// This is meant to track AirPlay usage, it doesn't since there isn't a way to determine
+		// if the YouTube player is using AirPlay, so we're just going to assume if they're using a wireless
+		// route then they're using AirPlay for now
+		[[SYNTrackingManager sharedManager] trackVideoAirPlayUsed];
+	}
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {

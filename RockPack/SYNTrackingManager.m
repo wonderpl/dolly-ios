@@ -189,6 +189,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:UIActionCategory action:@"videoMaximizeClick"];
 }
 
+- (void)trackVideoAirPlayUsed {
+	[self trackEventWithCategory:UIActionCategory action:@"videoAirPlayUsed"];
+}
+
 - (void)trackCarouselVideoSelected {
 	[self trackEventWithCategory:UIActionCategory action:@"videoBarClick"];
 }
