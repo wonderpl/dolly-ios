@@ -193,6 +193,8 @@
     
     
     NSMutableDictionary *existingFriendsByUID = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
+    NSMutableDictionary *existingFriendsByemail = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
+
     //    NSMutableDictionary* existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity:existingFriendsArray.count];
     
     for (Friend *existingFriend in existingFriendsArray)
@@ -204,6 +206,7 @@
         }
         
         existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
+        existingFriendsByemail[existingFriend.email] = existingFriend;
         
         if (!existingFriend.localOriginValue) // protect the address book friends...
         {
@@ -235,6 +238,9 @@
         
         // if an address book friend has been transfered to
         
+        if (existingFriendsByemail[itemDictionary[@"email"]]) {
+            friend.thumbnailURL = ((Friend*)existingFriendsByemail[itemDictionary[@"email"]]).thumbnailURL;
+        }
         friend.markedForDeletionValue = NO;
     }
     
