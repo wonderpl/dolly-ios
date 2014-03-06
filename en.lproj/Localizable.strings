@@ -246,6 +246,7 @@
 
 "no_videos" = "We couldn't find any videos that matched what you typed in. Please try searching for something else";
 "no_users" = "We couldn't find anyone that matched what you typed in. Please try searching for something else";
+"no_highlights" = "Our most popular featured collections will appear here. Check back later so you can follow them";
 "users" = "Users";
 "highlights" = "Highlights";
 
