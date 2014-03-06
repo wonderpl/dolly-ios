@@ -119,9 +119,9 @@
     
     if (![self.firstName length]>0 && [self.lastName length]>0) {
         self.displayName = [NSString stringWithFormat: @"%@ %@", self.firstName, self.lastName];
-    } else if (self.firstName && ![self.lastName length]>0) {
+    } else if ([self.firstName length]>0 && ![self.lastName length]>0) {
         self.displayName = self.firstName;
-    } else if (![self.firstName isEqualToString:@""] && self.lastName) {
+    } else if (![self.firstName length]>0 && [self.lastName length]>0) {
         self.displayName = self.lastName;
     } else {
         self.displayName = @"";

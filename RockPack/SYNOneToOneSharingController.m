@@ -138,6 +138,8 @@ UISearchBarDelegate>
     
     BOOL canReadAddressBook = NO;
     
+    
+
     switch (ABAddressBookGetAuthorizationStatus())
     {
         case kABAuthorizationStatusNotDetermined:
@@ -147,10 +149,12 @@ UISearchBarDelegate>
             
         case kABAuthorizationStatusDenied:
             DebugLog(@"AddressBook Status: Denied");
+
             break;
             
         case kABAuthorizationStatusRestricted:
             DebugLog(@"AddressBook Status: Restricted");
+
             break;
             
         case kABAuthorizationStatusAuthorized:
@@ -459,8 +463,6 @@ UISearchBarDelegate>
         if ([appDelegate.searchRegistry
              registerFriendsFromDictionary: dictionary])
         {
-            
-            NSLog(@"get friends : %@", dictionary);
             [weakSelf fetchAndDisplayFriends]; // this will reload the collection view
         }
         else
@@ -571,9 +573,6 @@ UISearchBarDelegate>
             nameToDisplay = friend.email;
         }
         
-        
-        NSLog(@"friend.thumbnailURL :%@", friend.thumbnailURL);
-        
         if ([friend.thumbnailURL hasPrefix: @"cached://"])                     // cached from address book image
         {
             NSData *pdata = [self.addressBookImageCache
@@ -611,7 +610,7 @@ UISearchBarDelegate>
         }
         else
         {
-            userThumbnailCell.imageView.image = [UIImage imageNamed: @"ABContactPlaceholder"];
+            userThumbnailCell.imageView.image = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
         }
         
         [userThumbnailCell setDisplayName:nameToDisplay];

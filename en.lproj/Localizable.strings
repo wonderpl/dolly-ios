@@ -292,6 +292,10 @@
 
 "back" = "back";
 
+// == One to one sharing == //
+
+"sharing_message" = "To share with your contacts, please go to Settings, Privacy, and in Contacts give access to Wonder PL";
+
 // == Instructions == //
 
 "instruction_packs_for_you" = "Here are some popular\ncollections for you";
