@@ -41,6 +41,8 @@
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
 @property (nonatomic, strong) IBOutlet UIButton *linkButton;
 
+@property (nonatomic, assign) BOOL hasTrackedAirPlayUse;
+
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
 @property (nonatomic, strong) SYNRotatingPopoverController *commentPopoverController;
@@ -48,6 +50,10 @@
 @end
 
 @implementation SYNVideoPlayerViewController
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - UIViewController
 
@@ -365,11 +371,18 @@
 	MPVolumeView *volumeView = [notification object];
 	
 	if (volumeView.isWirelessRouteActive) {
-		// This is meant to track AirPlay usage, it doesn't since there isn't a way to determine
-		// if the YouTube player is using AirPlay, so we're just going to assume if they're using a wireless
-		// route then they're using AirPlay for now
-		[[SYNTrackingManager sharedManager] trackVideoAirPlayUsed];
+		if (!self.hasTrackedAirPlayUse) {
+			// This is meant to track AirPlay usage, it doesn't since there isn't a way to determine
+			// if the YouTube player is using AirPlay, so we're just going to assume if they're using a wireless
+			// route then they're using AirPlay for now
+			[[SYNTrackingManager sharedManager] trackVideoAirPlayUsed];
+			
+			self.hasTrackedAirPlayUse = YES;
+		}
+	} else {
+		self.hasTrackedAirPlayUse = NO;
 	}
+	
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {
