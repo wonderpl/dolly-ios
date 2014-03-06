@@ -206,7 +206,9 @@
         }
         
         existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
-        existingFriendsByemail[existingFriend.email] = existingFriend;
+        if (existingFriend.email) {
+            existingFriendsByemail[existingFriend.email] = existingFriend;
+        }
         
         if (!existingFriend.localOriginValue) // protect the address book friends...
         {

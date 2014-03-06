@@ -172,7 +172,7 @@ UISearchBarDelegate>
     if ([[SYNFacebookManager sharedFBManager] hasActiveSession])
     {
         DebugLog(@"The user is FB connected, trying to pull friends from server");
-        displayEmailCell = NO;
+        displayEmailCell = YES;
         [self fetchAndDisplayFriends];
     }
     else
@@ -422,7 +422,9 @@ UISearchBarDelegate>
         {
             if (![existingFriendsByEmail objectForKey:existingFriend.email]) {
                 [self.friends addObject: existingFriend];
-                [existingFriendsByEmail setObject:existingFriend forKey:existingFriend.email];
+                if (existingFriend.email) {
+                    [existingFriendsByEmail setObject:existingFriend forKey:existingFriend.email];
+                }
             }
             
             if (existingFriend.lastShareDate)
