@@ -406,7 +406,7 @@
                                             <outlet property="delegate" destination="hNy-rk-sTx" id="p3p-3h-iQu"/>
                                         </connections>
                                     </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AvJ-st-bOY" userLabel="Genred Control">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="AvJ-st-bOY" userLabel="Genred Control">
                                         <rect key="frame" x="19" y="264" width="282" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
@@ -971,6 +971,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uhx-wm-F66"/>
+        <segue reference="1fQ-HG-P1W"/>
     </inferredMetricsTieBreakers>
 </document>
