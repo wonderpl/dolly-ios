@@ -243,7 +243,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     NSMutableArray *tmpArr = [[NSMutableArray alloc]init];
     NSString *tmpString = [[NSString alloc]init];
     
-    
+	self.usersByCategory = [NSMutableArray array];
     
     for (Genre *tmpGenre in genres) {
         tmpString = [[NSString alloc]init];
