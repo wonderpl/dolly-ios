@@ -157,6 +157,9 @@
 
 // == Notifications == //
 
+"%@ shared a video_instance with you" = "%@ shared a video with you";
+"%@ shared a channel with you" = "%@ shared a collection with you";
+"%@ has added a new channel" = "%@ has added a new collection";
 "%@ has subscribed to your channel" = "%@ is now following your collection";
 
 "notification_empty" = "Notifications will appear here when you have some";
