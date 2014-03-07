@@ -187,8 +187,6 @@
     // == Masking Images into a circle
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.masksToBounds = YES;
-	self.profileImageView.layer.borderColor = [[UIColor colorWithWhite:219/255.0 alpha:1.0] CGColor];
-	self.profileImageView.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0);
     self.uploadAvatarButton.layer.cornerRadius = self.uploadAvatarButton.frame.size.width/2;
     self.uploadAvatarButton.layer.masksToBounds = YES;
     self.uploadCoverPhotoButton.layer.cornerRadius = self.uploadCoverPhotoButton.frame.size.width/2;
@@ -565,15 +563,28 @@
     __weak SYNProfileRootViewController *weakSelf = self;
     
     
+    
     [self.profileImageView setImageWithURL:[NSURL URLWithString: self.channelOwner.thumbnailLargeUrl]
-                          placeholderImage:[UIImage imageNamed: @"PlaceholderAvatarProfile"]
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                     
+                                     weakSelf.profileImageView.layer.borderColor = [[UIColor colorWithWhite:219/255.0 alpha:1.0] CGColor];
+                                     weakSelf.profileImageView.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0);
+
                                      if (image && cacheType == SDImageCacheTypeNone)
                                      {
                                          weakSelf.profileImageView.alpha = 0.0;
                                          [UIView animateWithDuration:1.0 animations:^{
                                              weakSelf.profileImageView.alpha = 1.0;
                                          }];
+                                     }
+                                     if (!image) {
+                                         weakSelf.profileImageView.alpha = 0.0;
+                                         [weakSelf.profileImageView setImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]];
+
+                                         [UIView animateWithDuration:1.0 animations:^{
+                                             weakSelf.profileImageView.alpha = 1.0;
+                                         }];
+
                                      }
                                  }];
 
