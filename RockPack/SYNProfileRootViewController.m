@@ -953,8 +953,9 @@
             channelThumbnailCell.channel = channel;
 			
 			// indexPath.row == Favourites cell, which is a special case
-            if(self.modeType == kModeMyOwnProfile && indexPath.row != 1)
-            {
+            if(channel.favouritesValue && self.modeType == kModeMyOwnProfile) {
+                channelThumbnailCell.deletableCell = NO;
+            } else {
                 channelThumbnailCell.deletableCell = YES;
             }
         }
@@ -1004,24 +1005,21 @@
         NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
         SYNChannelDetailsViewController *channelVC;
         
-        Channel *channel;
+        Channel *channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+
         
         if (self.isUserProfile && indexPath.row == 0)
         {
             //never gets called, first cell gets called and created in didSelectItem
             return;
         }
-        else if( self.isUserProfile && indexPath.row == 1)
+        else if(self.isUserProfile && channel.favouritesValue)
         {
-            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
             [self.navigationController pushViewController:channelVC animated:YES];
             return;
         }
-        else
-        {
-            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
-        }
+
         if (modeType == kModeMyOwnProfile)
         {
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplayUser];
