@@ -787,50 +787,53 @@
 
 - (void) handleDataModelChange: (NSNotification *) notification
 {
-    NSArray *updatedObjects = [notification userInfo][NSUpdatedObjectsKey];
-    
-    NSArray *deletedObjects = [notification userInfo][NSDeletedObjectsKey]; // our channel has been deleted
-    
-    if ([deletedObjects containsObject: self.channel])
-    {
-        return;
-    }
-    
-    [updatedObjects enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        if (obj == self.channel)
-        {
-            if (self.subscribingIndicator)
-            {
-                [self.subscribingIndicator removeFromSuperview];
-                self.subscribingIndicator = nil;
-            }
-            
-            [self reloadCollectionViews];
-            
-            if (self.channel.videoInstances.count == 0)
-            {
-                //                [self showNoVideosMessage: NSLocalizedString(@"channel_screen_no_videos", nil)
-                //                               withLoader: NO];
-            }
-            else
-            {
-                //                [self showNoVideosMessage: nil
-                //                               withLoader: NO];
-            }
-            
-            return;
-        }
-        else if ([obj isKindOfClass: [User class]] && [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-        {
-            [self updateChannelOwnerWithUser];
-        }
-    }];
-    
-    if ((self.channel.channelOwner.displayName !=  nil) && (self.txtFieldChannelName.text == nil))
-    {
-        [self displayChannelDetails];
-    }
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSArray *updatedObjects = [notification userInfo][NSUpdatedObjectsKey];
+		
+		NSArray *deletedObjects = [notification userInfo][NSDeletedObjectsKey]; // our channel has been deleted
+		
+		if ([deletedObjects containsObject: self.channel])
+		{
+			return;
+		}
+		
+		[updatedObjects enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+			
+			if (obj == self.channel)
+			{
+				if (self.subscribingIndicator)
+				{
+					[self.subscribingIndicator removeFromSuperview];
+					self.subscribingIndicator = nil;
+				}
+				
+				[self reloadCollectionViews];
+				
+				if (self.channel.videoInstances.count == 0)
+				{
+					//                [self showNoVideosMessage: NSLocalizedString(@"channel_screen_no_videos", nil)
+					//                               withLoader: NO];
+				}
+				else
+				{
+					//                [self showNoVideosMessage: nil
+					//                               withLoader: NO];
+				}
+				
+				return;
+			}
+			else if ([obj isKindOfClass: [User class]] && [self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
+			{
+				[self updateChannelOwnerWithUser];
+			}
+		}];
+		
+		if ((self.channel.channelOwner.displayName !=  nil) && (self.txtFieldChannelName.text == nil))
+		{
+			[self displayChannelDetails];
+		}
+
+	});
 }
 
 - (void) reloadCollectionViews {
