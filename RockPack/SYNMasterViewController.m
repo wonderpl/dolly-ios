@@ -117,6 +117,12 @@
     
     if ([SYNLoginManager sharedManager].registrationCheck == NO) {
         [self loadBasicDataWithComplete:^(BOOL success) {
+			
+			// HACK: THIS IS TO WORK AROUND THE CASE OF THE STUPID NETWORKING LIBRARY CALLING
+			// THIS BLOCK TWICE RESULTING IN NOTIFICATIONS NOT SHOWING
+			if ([self.childViewControllers containsObject:self.containerViewController]) {
+				return;
+			}
             
             [self addChildViewController:self.containerViewController];
             
@@ -124,6 +130,7 @@
             
             self.containerViewController.view = self.containerView;
             
+			[appDelegate handlePendingNotification];
         }];
     } else {
         [self addChildViewController:self.containerViewController];

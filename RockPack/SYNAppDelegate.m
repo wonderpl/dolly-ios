@@ -54,6 +54,7 @@
 @property (nonatomic, strong) SYNVideoQueue *videoQueue;
 @property (nonatomic, strong) SYNNavigationManager* navigationManager;
 @property (nonatomic, strong) User *currentUser;
+@property (nonatomic, strong) NSDictionary *pendingNotificationDictionary;
 
 @end
 
@@ -215,12 +216,20 @@
     if (launchOptions != nil)
     {
         NSDictionary* userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-        
+		
         if (userInfo != nil)
         {
             DebugLog(@"Launched from push notification: %@", userInfo);
-            
-            [self handleRemoteNotification: userInfo];
+			if (self.masterViewController.showingViewController) {
+				[self handleRemoteNotification: userInfo];
+			} else {
+				// FIXME: This is a really dodgy hack to sort out an issue with how the view hierarchy is set up.
+				// There isn't any showingViewController until the call to get the categories returns in
+				// viewDidLoad in MasterViewController. Since we expect it to exist in order to show the notification
+				// this causes problems. So I'm currently storing it here and going to handle it when we finish
+				// getting the categories
+				self.pendingNotificationDictionary = userInfo;
+			}
         }
     }
     
@@ -994,6 +1003,13 @@
         [[NSNotificationCenter defaultCenter] postNotificationName: kClearedLocationBoundData
                                                             object: self];
     }
+}
+
+- (void)handlePendingNotification {
+	if (self.pendingNotificationDictionary) {
+		[self handleRemoteNotification:self.pendingNotificationDictionary];
+	}
+	self.pendingNotificationDictionary = nil;
 }
 
 
