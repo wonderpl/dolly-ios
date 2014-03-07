@@ -6,8 +6,6 @@
 
 // Private interface goes here.
 
-@property (nonatomic, strong) NSString* firstName;
-@property (nonatomic, strong) NSString* lastName;
 
 @end
 
@@ -109,29 +107,30 @@
     self.email = email;
     self.externalSystem = kEmail;
     
+    NSString *fName = @"";
+    NSString *lName = @"";
+    
     if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty)) {
-        self.firstName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
+        fName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
     }
     
     if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty)) {
-        self.lastName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
+        lName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
     }
     
-    if ([self.firstName length]>0 && [self.lastName length]>0) {
-        self.displayName = [NSString stringWithFormat: @"%@ %@", self.firstName, self.lastName];
-    } else if ([self.firstName length]>0 && ![self.lastName length]>0) {
-        self.displayName = self.firstName;
-    } else if (![self.firstName length]>0 && [self.lastName length]>0) {
-        self.displayName = self.lastName;
+    if ([fName length]>0 && [lName length]>0) {
+        self.displayName = [NSString stringWithFormat: @"%@ %@", fName, lName];
+    } else if ([fName length]>0 && ![lName length]>0) {
+        self.displayName = fName;
+    } else if (![fName length]>0 && [lName length]>0) {
+        self.displayName = lName;
     } else {
         self.displayName = @"";
     }
 
-    
-    
 }
 
-
+//
 //-(NSString*)displayName
 //{
 //    NSString *displayName = @"";
@@ -148,6 +147,20 @@
 //    return displayName;
 //}
 //
+
+-(NSString*)firstName
+{
+    NSArray* dNameArray = [self.displayName componentsSeparatedByString:@" "];
+    return (dNameArray.count > 0 ? dNameArray[0] : @"");
+}
+
+-(NSString*)lastName
+{
+    NSArray* dNameArray = [self.displayName componentsSeparatedByString:@" "];
+    return (dNameArray.count > 1 ? dNameArray[dNameArray.count - 1] : @"");
+}
+
+
 -(BOOL)isOnRockpack
 {
     return (self.resourceURL != nil);
