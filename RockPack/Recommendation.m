@@ -1,23 +1,22 @@
-#import "Recomendation.h"
+#import "Recommendation.h"
 #import "NSDictionary+Validation.h"
 #import "ChannelOwner.h"
 
-@interface Recomendation ()
 
-// Private interface goes here.
+@interface Recommendation ()
 
 @end
 
 
-@implementation Recomendation
+@implementation Recommendation
 
-+ (Recomendation *) instanceFromDictionary: (NSDictionary *) dictionary
-                 usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
++ (Recommendation *)instanceFromDictionary:(NSDictionary *) dictionary
+				 usingManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     if (![dictionary isKindOfClass: [NSDictionary class]] || ![dictionary objectForKey:@"id"])
         return nil;
     
-    Recomendation *instance = [Recomendation insertInManagedObjectContext: managedObjectContext];
+    Recommendation *instance = [Recommendation insertInManagedObjectContext: managedObjectContext];
     
     
     [instance setAttributesFromDictionary: dictionary];
@@ -48,26 +47,21 @@
     
     self.descriptionText = [dictionary objectForKey:@"description"
                                         withDefault:@""];
-    
-    
 }
 
-- (ChannelOwner*) channelOwner
-{
-    NSDictionary* coDictionary = @{@"id": self.uniqueId,
-                                   @"display_name" : self.displayName,
-                                   @"avatar_thumbnail_url" : self.avatarUrl};
-    
-    ChannelOwner* co = [ChannelOwner instanceFromDictionary:coDictionary
-                                  usingManagedObjectContext:self.managedObjectContext
-                                        ignoringObjectTypes:kIgnoreAll];
-    
-    return co;
+- (ChannelOwner *)channelOwner {
+	NSDictionary* coDictionary = @{@"id": self.uniqueId,
+								   @"display_name" : self.displayName,
+								   @"avatar_thumbnail_url" : self.avatarUrl};
+	
+	ChannelOwner *co = [ChannelOwner instanceFromDictionary:coDictionary
+								  usingManagedObjectContext:self.managedObjectContext
+										ignoringObjectTypes:kIgnoreAll];
+	return co;
 }
 
-- (NSString*) description
-{
-    return [NSString stringWithFormat:@"[Recomendation %p <co_name:%@, categoryId:%@>]", self, self.displayName, self.categoryId];
+- (NSString*) description {
+    return [NSString stringWithFormat:@"[Recommendation %p <co_name:%@, categoryId:%@>]", self, self.displayName, self.categoryId];
 }
 
 @end

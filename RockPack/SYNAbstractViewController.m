@@ -22,7 +22,6 @@
 #import "SYNOneToOneSharingController.h"
 #import "SYNPopoverBackgroundView.h"
 #import "SYNProfileRootViewController.h"
-#import "Recomendation.h"
 #import "SYNSocialButton.h"
 #import "SYNCommentingViewController.h"
 #import "UIFont+SYNFont.h"

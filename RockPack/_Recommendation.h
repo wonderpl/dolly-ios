@@ -1,25 +1,23 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Recomendation.h instead.
+// Make changes to Recommendation.h instead.
 
 #import <CoreData/CoreData.h>
 #import "AbstractCommon.h"
 
-extern const struct RecomendationAttributes {
+extern const struct RecommendationAttributes {
 	__unsafe_unretained NSString *avatarUrl;
 	__unsafe_unretained NSString *categoryId;
 	__unsafe_unretained NSString *descriptionText;
 	__unsafe_unretained NSString *displayName;
 	__unsafe_unretained NSString *position;
 	__unsafe_unretained NSString *resourceUrl;
-} RecomendationAttributes;
+} RecommendationAttributes;
 
-extern const struct RecomendationRelationships {
-} RecomendationRelationships;
+extern const struct RecommendationRelationships {
+} RecommendationRelationships;
 
-extern const struct RecomendationFetchedProperties {
-} RecomendationFetchedProperties;
-
-
+extern const struct RecommendationFetchedProperties {
+} RecommendationFetchedProperties;
 
 
 
@@ -27,14 +25,16 @@ extern const struct RecomendationFetchedProperties {
 
 
 
-@interface RecomendationID : NSManagedObjectID {}
+
+
+@interface RecommendationID : NSManagedObjectID {}
 @end
 
-@interface _Recomendation : AbstractCommon {}
+@interface _Recommendation : AbstractCommon {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-- (RecomendationID*)objectID;
+- (RecommendationID*)objectID;
 
 
 
@@ -107,11 +107,11 @@ extern const struct RecomendationFetchedProperties {
 
 @end
 
-@interface _Recomendation (CoreDataGeneratedAccessors)
+@interface _Recommendation (CoreDataGeneratedAccessors)
 
 @end
 
-@interface _Recomendation (CoreDataGeneratedPrimitiveAccessors)
+@interface _Recommendation (CoreDataGeneratedPrimitiveAccessors)
 
 
 - (NSString*)primitiveAvatarUrl;

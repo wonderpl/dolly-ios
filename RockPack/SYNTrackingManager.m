@@ -445,7 +445,6 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:GoalCategory action:@"videoViewed" label:videoId value:@(percentageViewed)];
     
 	[self trackEventWithCategory:GoalCategory action:@"videoViewedDuration" label:videoId value:@((int)currentTime)];
-
 }
 
 - (void)trackNetworkErrorCode:(NSInteger)code forURL:(NSString *)url {
@@ -505,7 +504,7 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 - (void)trackScreenViewWithName:(NSString *)name {
 	[[self defaultTracker] set:kGAIScreenName value:name];
-    [[self defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
+	[[self defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 #pragma mark - Private
