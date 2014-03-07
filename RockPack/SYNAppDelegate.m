@@ -1260,43 +1260,32 @@
     NSNumber *notificationId = userInfo[@"id"];
     NSString *urlString = userInfo[@"url"];
     
-    // Parse optional data in the payload defensively
-    if (urlString == nil || notificationId == nil)
-    {
-        // No additionaly rockpack:// url, so just display the notifications panel
-        // TODO: Re-Implement the old [self.viewStackManager displaySideNavigatorFromPushNotification] method
-    }
-    else if(!self.currentUser)
-    {
-        // do nothing for the moment
-    }
-    else
-    {
-        NSArray *array = @[notificationId];
-        
-        // First, mark the notification as read (on the server)
-        [self.oAuthNetworkEngine markAsReadForNotificationIndexes: array
-                                                       fromUserId: self.currentUser.uniqueId
-                                                completionHandler: ^(id response) {
-                                                    DebugLog(@"Mark as read succeeded");
-                                                    
-                                                    // TODO: Check that the bedge count is being handled correctly
-                                                    // Decrement the badge number (min zero)
-                                                    UIApplication.sharedApplication.applicationIconBadgeNumber = MAX((UIApplication.sharedApplication.applicationIconBadgeNumber - 1) , 0);
-                                                }
-                                                     errorHandler: ^(id error) {
-                                                    DebugLog(@"Mark as read failed");
-                                                }];
+	if (self.currentUser && urlString) {
+		if (notificationId) {
+			NSArray *array = @[notificationId];
+			
+			// First, mark the notification as read (on the server)
+			[self.oAuthNetworkEngine markAsReadForNotificationIndexes: array
+														   fromUserId: self.currentUser.uniqueId
+													completionHandler: ^(id response) {
+														DebugLog(@"Mark as read succeeded");
+														
+														// TODO: Check that the bedge count is being handled correctly
+														// Decrement the badge number (min zero)
+														UIApplication.sharedApplication.applicationIconBadgeNumber = MAX((UIApplication.sharedApplication.applicationIconBadgeNumber - 1) , 0);
+													}
+														 errorHandler: ^(id error) {
+														DebugLog(@"Mark as read failed");
+													}];
+		}
         
         // Now actually handle the rockpack:// url
 		NSString *appURLScheme = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppURLScheme"];
 		
 		NSString *dollyURLString = [NSString stringWithFormat:@"%@://%@", appURLScheme, urlString];
         NSURL *dollyURL = [NSURL URLWithString:dollyURLString];
-        
+		
         [self parseAndActionRockpackURL:dollyURL];
-        
-        
     }
 }
 
