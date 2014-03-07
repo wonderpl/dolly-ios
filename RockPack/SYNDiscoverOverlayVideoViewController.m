@@ -17,8 +17,7 @@
 
 @implementation SYNDiscoverOverlayVideoViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -26,8 +25,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     if (IS_IPHONE) {
         self.textLabel.font = [UIFont lightCustomFontOfSize:15.0f];
@@ -36,17 +34,14 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillLayoutSubviews
-{
+- (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     if (IS_IPAD) {
-        
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
             self.container.frame = CGRectMake(275, 312, 465, 239);
         } else {
@@ -54,7 +49,5 @@
         }
     }
 }
-
-
 
 @end

@@ -1,5 +1,5 @@
 #import "_Friend.h"
-
+@import AddressBook;
 @interface Friend : _Friend {}
 
 
@@ -9,13 +9,11 @@
 + (Friend *) friendFromFriend:(Friend *)friendToCopy
       forManagedObjectContext:(NSManagedObjectContext*)managedObjectContext;
 
-
+- (void) setAttributesFromAddressBook :(ABRecordRef) currentPerson email:(NSString*) email;
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary;
 
 @property (nonatomic, readonly) BOOL isOnRockpack;
 
-@property (nonatomic, readonly) NSString* firstName;
-@property (nonatomic, readonly) NSString* lastName;
 
 @property (nonatomic, readonly) BOOL isFromFacebook;
 @property (nonatomic, readonly) BOOL isFromTwitter;

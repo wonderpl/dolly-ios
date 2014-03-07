@@ -15,6 +15,8 @@
 #import "Video.h"
 #import "VideoInstance.h"
 #import "Recomendation.h"
+#import "NSString+Validation.h"
+
 @import AddressBook;
 
 @implementation SYNSearchRegistry
@@ -27,23 +29,21 @@
         [appDelegate saveSearchContext];
         return YES;
     }
-    
     return NO;
 }
 
 
 // returns a cached image dictionary
-- (NSCache *) registerFriendsFromAddressBookArray: (NSArray *) abArray
+- (NSMutableDictionary *) registerFriendsFromAddressBookArray: (NSArray *) abArray
 {
     NSInteger total = [abArray count];
     
     // placeholders
-    NSString *firstName, *lastName, *email;
     NSData *imageData;
     Friend *contactAsFriend;
     
     
-    NSCache *imageCache = [[NSCache alloc] init];
+    NSMutableDictionary *imageCache = [[NSMutableDictionary alloc] init];
     
     // fetch existing friends from DB
     
@@ -100,48 +100,47 @@
             continue;
         }
         
-        email = (NSString *) emailAddresses[0];
+        NSString *email;
         
-        if (!(contactAsFriend = existingFriendsByEmail[email])) // will have email due to previous condition
-        {
-            if (!(contactAsFriend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext]))
-            {
-                continue; // if cache AND instatiation fails, bail
+        for (int i = 0; i<emailAddresses.count; i++) {
+            email = (NSString *) emailAddresses[i];
+            
+            if (![email isValidEmail]) {
+                continue;
             }
-        }
-        
-        contactAsFriend.uniqueId = email; // email serves as a uniqueId for address book friends
-        contactAsFriend.markedForDeletionValue = NO;
-        contactAsFriend.localOriginValue = YES;
-        
-        firstName = @"";
-        if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty)) {
-            firstName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonFirstNameProperty);
-        }
-        
-        lastName=@"";
-        if ((__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty)) {
-            lastName = (__bridge_transfer NSString *) ABRecordCopyValue(currentPerson, kABPersonLastNameProperty);
+            
+            if (!(contactAsFriend = existingFriendsByEmail[email])) // will have email due to previous condition
+            {
+                if (!(contactAsFriend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext]))
+                {
+                    continue; // if cache AND instatiation fails, bail
+                }
+            }
+            
+            
+            
+            
+            [contactAsFriend setAttributesFromAddressBook:currentPerson email:email];
+            
+            imageData = (__bridge_transfer NSData *) ABPersonCopyImageData(currentPerson);
+            
+            if (imageData)
+            {
+                NSString *key = [NSString stringWithFormat: @"cached://%@", contactAsFriend.uniqueId];
+                
+                contactAsFriend.thumbnailURL = key;
+                
+                [imageCache setObject: imageData
+                               forKey: key];
+            }
 
-        }
-        
-        contactAsFriend.displayName = [NSString stringWithFormat: @"%@ %@", firstName, lastName];
-        
-        imageData = (__bridge_transfer NSData *) ABPersonCopyImageData(currentPerson);
-        
-        
-        contactAsFriend.email = email;
-        contactAsFriend.externalSystem = kEmail;
-        contactAsFriend.externalUID = [NSString stringWithFormat: @"%i", cid];
-        
-        if (imageData)
-        {
-            NSString *key = [NSString stringWithFormat: @"cached://%@", contactAsFriend.uniqueId];
             
-            contactAsFriend.thumbnailURL = key;
+            if (existingFriendsByEmail[contactAsFriend.email]) {
+                contactAsFriend.lastShareDate = ((Friend*)existingFriendsByEmail[contactAsFriend.email]).lastShareDate;
+            }
             
-            [imageCache setObject: imageData
-                           forKey: key];
+            contactAsFriend.externalUID = [NSString stringWithFormat: @"%i", cid];
+
         }
     }
     
@@ -200,6 +199,8 @@
     
     
     NSMutableDictionary *existingFriendsByUID = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
+    NSMutableDictionary *existingFriendsByemail = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
+
     //    NSMutableDictionary* existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity:existingFriendsArray.count];
     
     for (Friend *existingFriend in existingFriendsArray)
@@ -211,6 +212,9 @@
         }
         
         existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
+        if (existingFriend.email) {
+            existingFriendsByemail[existingFriend.email] = existingFriend;
+        }
         
         if (!existingFriend.localOriginValue) // protect the address book friends...
         {
@@ -225,11 +229,12 @@
     
     
     NSArray *itemsDictionary = usersDictionary[@"items"];
-    
+
     Friend *friend;
     
     for (NSDictionary *itemDictionary in itemsDictionary)
     {
+        
         if (!(friend = existingFriendsByUID[itemDictionary[@"id"]]))
         {
             if (!(friend = [Friend instanceFromDictionary: itemDictionary
@@ -241,6 +246,9 @@
         
         // if an address book friend has been transfered to
         
+        if (existingFriendsByemail[itemDictionary[@"email"]]) {
+            friend.thumbnailURL = ((Friend*)existingFriendsByemail[itemDictionary[@"email"]]).thumbnailURL;
+        }
         friend.markedForDeletionValue = NO;
     }
     

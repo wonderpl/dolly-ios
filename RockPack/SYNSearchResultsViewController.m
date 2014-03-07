@@ -160,6 +160,10 @@ typedef void (^SearchResultCompleteBlock)(int);
         wself.usersArray = [NSArray arrayWithArray: fetchedObjects];
         if (wself.searchResultsShowing == SearchResultsShowingUsers) {
             if (wself.usersArray.count == 0) {
+				BOOL searching = (wself.searchType == SYNSearchTypeSearch);
+				NSString *message = (searching ? NSLocalizedString(@"no_users", @"no users in search") : NSLocalizedString(@"no_highlights", @"no highlights in search"));
+				wself.noUsersLabel.text = message;
+
                 wself.noUsersLabel.hidden = NO;
             } else {
                 wself.noUsersLabel.hidden = YES;
@@ -193,7 +197,6 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     
     self.noVideosLabel.text = NSLocalizedString(@"no_videos", @"no videos in search");
-    self.noUsersLabel.text = NSLocalizedString(@"no_users", @"no users in search");
 
     self.noUsersLabel.font = [UIFont regularCustomFontOfSize:18.0f];
     self.noVideosLabel.font = [UIFont regularCustomFontOfSize:18.0f];
@@ -816,6 +819,9 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             if (self.usersArray.count == 0) {
+				BOOL searching = (self.searchType == SYNSearchTypeSearch);
+				NSString *message = (searching ? NSLocalizedString(@"no_users", @"no users in search") : NSLocalizedString(@"no_highlights", @"no highlights in search"));
+				self.noUsersLabel.text = message;
                 self.noUsersLabel.hidden = NO;
             } else {
                 self.noUsersLabel.hidden = YES;

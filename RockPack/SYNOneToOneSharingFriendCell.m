@@ -42,7 +42,6 @@
                                                context:nil];
     
     
-  
     
     currentNameLabelFrame.origin.y = 56.0f;
     currentNameLabelFrame.size.height = rect.size.height;
