@@ -325,6 +325,9 @@
 		4C5E862D18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */; };
 		4C5E862F18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */; };
 		4CB63A6E18BD052E00825F7C /* placeholderwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB63A6D18BD052E00825F7C /* placeholderwhite.png */; };
+		4CDD76A618CA014A000B2CBD /* SYNFeedOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD76A318CA014A000B2CBD /* SYNFeedOverlayViewController.m */; };
+		4CDD76A718CA014A000B2CBD /* SYNFeedOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD76A418CA014A000B2CBD /* SYNFeedOverlayViewController.xib */; };
+		4CDD76A818CA014A000B2CBD /* SYNFeedOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD76A518CA014A000B2CBD /* SYNFeedOverlayViewController~iphone.xib */; };
 		4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */; };
 		4CE8AE5718A901560031CE1C /* BackButtonApp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AE5518A901560031CE1C /* BackButtonApp.png */; };
 		4CE8AE5818A901560031CE1C /* BackButtonApp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE8AE5618A901560031CE1C /* BackButtonApp@2x.png */; };
@@ -1098,6 +1101,10 @@
 		4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNCollectectionDetailsOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCollectectionDetailsOverlayViewController.xib; sourceTree = "<group>"; };
 		4CB63A6D18BD052E00825F7C /* placeholderwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderwhite.png; sourceTree = "<group>"; };
+		4CDD76A218CA014A000B2CBD /* SYNFeedOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedOverlayViewController.h; sourceTree = "<group>"; };
+		4CDD76A318CA014A000B2CBD /* SYNFeedOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedOverlayViewController.m; sourceTree = "<group>"; };
+		4CDD76A418CA014A000B2CBD /* SYNFeedOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFeedOverlayViewController.xib; sourceTree = "<group>"; };
+		4CDD76A518CA014A000B2CBD /* SYNFeedOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFeedOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		4CE8AAD018967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNNotificationsMarkAllAsReadCell.xib; sourceTree = "<group>"; };
 		4CE8AE5518A901560031CE1C /* BackButtonApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButtonApp.png; sourceTree = "<group>"; };
 		4CE8AE5618A901560031CE1C /* BackButtonApp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackButtonApp@2x.png"; sourceTree = "<group>"; };
@@ -2817,6 +2824,7 @@
 		4C5E85EC18B6203600D0E937 /* In Boarding */ = {
 			isa = PBXGroup;
 			children = (
+				4CDD76A118CA012B000B2CBD /* Feed */,
 				4C5E862818B6812900D0E937 /* Collection details */,
 				4C5E860318B6332100D0E937 /* Mood */,
 				4C5E860218B6331800D0E937 /* Discover */,
@@ -2908,6 +2916,17 @@
 				4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */,
 			);
 			name = "Collection details";
+			sourceTree = "<group>";
+		};
+		4CDD76A118CA012B000B2CBD /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				4CDD76A218CA014A000B2CBD /* SYNFeedOverlayViewController.h */,
+				4CDD76A318CA014A000B2CBD /* SYNFeedOverlayViewController.m */,
+				4CDD76A418CA014A000B2CBD /* SYNFeedOverlayViewController.xib */,
+				4CDD76A518CA014A000B2CBD /* SYNFeedOverlayViewController~iphone.xib */,
+			);
+			name = Feed;
 			sourceTree = "<group>";
 		};
 		BE03A69016F7457900245314 /* Account Settings */ = {
@@ -4025,6 +4044,7 @@
 				38A200B41731607F00FB9F57 /* IconUsername@2x~iphone.png in Resources */,
 				38A200B51731607F00FB9F57 /* IconUsername~iphone.png in Resources */,
 				4C5E861C18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController~iphone.xib in Resources */,
+				4CDD76A818CA014A000B2CBD /* SYNFeedOverlayViewController~iphone.xib in Resources */,
 				BED027D01834D4CC00636659 /* ButtonMoreLogout.png in Resources */,
 				BEB31367181AB81600FAF98A /* IconVideoAddHighlighted.png in Resources */,
 				BE57C0331844FA9B00C6444A /* SYNSubscribersViewController~iphone.xib in Resources */,
@@ -4055,6 +4075,7 @@
 				0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */,
 				1F458B2517E1CE8E003C14AC /* AppIcon-Dev-40x40@2x.png in Resources */,
 				BE57C022184358BA00C6444A /* SYNOnBoardingViewController~iphone.xib in Resources */,
+				4CDD76A718CA014A000B2CBD /* SYNFeedOverlayViewController.xib in Resources */,
 				1F4E7FB8181ACBAA00F59007 /* TabFeedSelected~iphone.png in Resources */,
 				1F458B2F17E1CE8E003C14AC /* AppIcon-Dev-76x76@2x.png in Resources */,
 				E99B8D3E1892AD9500E08ABD /* ScrubberBarHD.png in Resources */,
@@ -4324,6 +4345,7 @@
 				0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */,
 				01946B911683335400354601 /* _ChannelOwner.m in Sources */,
 				BEE01B681851E7B1000CF681 /* SYNCommentingCollectionViewCell.m in Sources */,
+				4CDD76A618CA014A000B2CBD /* SYNFeedOverlayViewController.m in Sources */,
 				E9F6255618854A3D000EF6A2 /* SYNIPhoneSignupUsernameViewController.m in Sources */,
 				01946B921683335400354601 /* _VideoInstance.m in Sources */,
 				E9F7D9FC189A99D400BA79D4 /* SYNCarouselVideoScrollView.m in Sources */,
