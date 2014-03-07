@@ -204,8 +204,6 @@
         // == show on value == 1
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
         
-        // == show on value < 2
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsCollectionDetailsFirstTime];
         
         // == other user animation < = 2
         // == inboarding description
@@ -222,10 +220,7 @@
         
         // == show on value == 1
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsDiscoverUserFirstTime];
-        
-        // == show on value < 2
-        [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsCollectionDetailsFirstTime];
-        
+
         // == other user animation < = 2
         // == inboarding description
         [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: kUserDefaultsOtherPersonsProfile];

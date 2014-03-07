@@ -238,30 +238,6 @@
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
 	}
     
-    if (self.mode == kChannelDetailsModeDisplay) {
-        [self inboardingAnimation];
-    }
-}
-
-- (void) inboardingAnimation {
-    if ([self.btnFollowChannel.title isEqualToString:@"unfollow"]) {
-        return;
-    }
-    
-    NSInteger viewCount = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime];
-    
-    if ([[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsCollectionDetailsFirstTime]<2) {
-        // ensure that the view is at the top of the screen
-        [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0,-self.offsetValue) animated:YES];
-        
-        SYNCollectectionDetailsOverlayViewController* channeldetailsOverlay = [[SYNCollectectionDetailsOverlayViewController alloc] init];
-        [channeldetailsOverlay addToViewController:appDelegate.masterViewController];
-        
-        viewCount+=1;
-        [[NSUserDefaults standardUserDefaults] setInteger: viewCount
-                                                   forKey: kUserDefaultsCollectionDetailsFirstTime];
-    }
-    
 }
 
 - (void) viewWillDisappear: (BOOL) animated {
