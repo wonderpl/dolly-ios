@@ -147,14 +147,16 @@ UISearchBarDelegate>
             [self requestAddressBookAuthorization];
             break;
             
-        case kABAuthorizationStatusDenied:
+        case kABAuthorizationStatusDenied:{
+            [self showAlertView];
             DebugLog(@"AddressBook Status: Denied");
-
+        }
             break;
             
         case kABAuthorizationStatusRestricted:
             DebugLog(@"AddressBook Status: Restricted");
 
+            [self showAlertView];
             break;
             
         case kABAuthorizationStatusAuthorized:
@@ -1067,6 +1069,27 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
                                                self.view.userInteractionEnabled = YES;
                                                
                                            }];
+}
+
+#pragma mark - alertview
+
+- (void) showAlertView {
+
+    int value = [[[NSUserDefaults standardUserDefaults] valueForKey:kUserDefaultsSharingAlert] intValue];
+
+    if (value<2) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sharing", @"sharing alertview title")
+                                                     message:NSLocalizedString(@"sharing_message", @"sharing alert view message")
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil, nil];
+
+        [av show];
+        
+        value++;
+        
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:value] forKey:kUserDefaultsSharingAlert];
+    }
 }
 
 - (void) dealloc
