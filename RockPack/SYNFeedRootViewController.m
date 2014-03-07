@@ -131,6 +131,14 @@ typedef void(^FeedDataErrorBlock)(void);
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
     
+    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsFeedFirstTime]) {
+        if ([self.model itemCount]>0) {
+            SYNFeedOverlayViewController* feedOverlay = [[SYNFeedOverlayViewController alloc] init];
+            [feedOverlay addToViewController:appDelegate.masterViewController];
+            [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                    forKey: kUserDefaultsFeedFirstTime];
+        }
+    }
 
 }
 
@@ -245,14 +253,6 @@ typedef void(^FeedDataErrorBlock)(void);
 
 	[self.feedCollectionView reloadData];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsFeedFirstTime]) {
-        if ([self.model itemCount]>0) {
-            SYNFeedOverlayViewController* feedOverlay = [[SYNFeedOverlayViewController alloc] init];
-            [feedOverlay addToViewController:appDelegate.masterViewController];
-            [[NSUserDefaults standardUserDefaults] setBool: YES
-                                                    forKey: kUserDefaultsFeedFirstTime];
-        }
-    }
 
 }
 
