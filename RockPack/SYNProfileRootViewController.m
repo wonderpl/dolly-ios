@@ -1005,7 +1005,7 @@
         NSIndexPath *indexPath = [self.channelThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
         SYNChannelDetailsViewController *channelVC;
         
-        Channel *channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+        Channel *channel;
 
         
         if (self.isUserProfile && indexPath.row == 0)
@@ -1013,12 +1013,22 @@
             //never gets called, first cell gets called and created in didSelectItem
             return;
         }
-        else if(self.isUserProfile && channel.favouritesValue)
+        else if(self.isUserProfile)
         {
-            channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
-            [self.navigationController pushViewController:channelVC animated:YES];
-            return;
+            
+            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+
+            if (channel.favouritesValue) {
+                channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
+                [self.navigationController pushViewController:channelVC animated:YES];
+                return;
+            }
         }
+        else
+        {
+            channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
+        }
+
 
         if (modeType == kModeMyOwnProfile)
         {
@@ -2187,8 +2197,13 @@
         }
         [[self.aboutMeTextView layer] setCornerRadius:0];
         
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
-        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+        if (!IS_IPHONE_5) {
+            self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
+            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
+        } else {
+            self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+        }
         
     }];
 }
@@ -2557,8 +2572,14 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 -(void)createNewButtonPressed {
 	[[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
-	
+
     self.creatingChannel = YES;
+    
+    
+    //    if (!IS_IPHONE_5) {
+    self.channelThumbnailCollectionView.scrollEnabled = NO;
+    //    }
+
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells) {
         NSIndexPath* indexPathForCell = [self.channelThumbnailCollectionView indexPathForCell:cell];
         
@@ -2671,6 +2692,9 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
     
+//    if (IS_IPHONE_5) {
+        self.channelThumbnailCollectionView.scrollEnabled = YES;
+//    }
     
     for (SYNChannelMidCell* cell in self.channelThumbnailCollectionView.visibleCells)
     {
