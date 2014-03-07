@@ -573,6 +573,7 @@
 		E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */; };
 		E94BEFA918C9F18F00762651 /* _Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFA818C9F18F00762651 /* _Recommendation.m */; };
 		E94BEFAC18C9F19A00762651 /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAB18C9F19A00762651 /* Recommendation.m */; };
+		E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */; };
 		E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */; };
 		E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */ = {isa = PBXBuildFile; fileRef = E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */; };
 		E972DFAF187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E972DFAE187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m */; };
@@ -1468,6 +1469,7 @@
 		E94BEFA818C9F18F00762651 /* _Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Recommendation.m; sourceTree = "<group>"; };
 		E94BEFAA18C9F19A00762651 /* Recommendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recommendation.h; sourceTree = "<group>"; };
 		E94BEFAB18C9F19A00762651 /* Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recommendation.m; sourceTree = "<group>"; };
+		E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringTimecodeSpec.m; sourceTree = "<group>"; };
 		E9533226185B7CE30031CA2B /* SYNSearchVideoLikesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoLikesModel.h; sourceTree = "<group>"; };
 		E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoLikesModel.m; sourceTree = "<group>"; };
 		E96A4C6818439CD100ED5782 /* CIFilter+Monochrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIFilter+Monochrome.h"; sourceTree = "<group>"; };
@@ -1927,6 +1929,7 @@
 				01901AA11771CCBA007DBEAC /* dollyTests.m */,
 				E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */,
 				E985176318B4B37100ADBD0F /* NSRegularExpressionUsername.m */,
+				E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
 				BEB3135918182D6100FAF98A /* data */,
 			);
@@ -4570,6 +4573,7 @@
 			files = (
 				E985176418B4B37100ADBD0F /* NSRegularExpressionUsername.m in Sources */,
 				01901AA21771CCBA007DBEAC /* dollyTests.m in Sources */,
+				E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */,
 				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

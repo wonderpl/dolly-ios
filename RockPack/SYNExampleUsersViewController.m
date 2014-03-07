@@ -98,7 +98,7 @@ static const CGFloat ScrollAnimationDuration = 1.0;
     self.endPoint = CGPointMake(0, (self.exampleUsers.count * 230)-230);
     
     //Start off screen
-    self.scrollingPoint = CGPointMake(0, -600);
+    self.scrollingPoint = CGPointMake(0, -300);
     
     //Unhide the colleciton view now that the animation the reloading is done, and the first cell will be off screen.
 

@@ -90,7 +90,7 @@
     
     // == timestamp == //
     
-    self.timestampLabel.text = [NSString paddedTimecodeStringFromSeconds:videoInstance.video.durationValue];
+    self.timestampLabel.text = [NSString timecodeStringFromSeconds:videoInstance.video.durationValue];
 	CGFloat rightOffset = (CGRectGetWidth(self.frame) - CGRectGetMaxX(self.timestampLabel.frame));
 	[self.timestampLabel sizeToFit];
 	self.timestampLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - (rightOffset + CGRectGetWidth(self.timestampLabel.frame)),
