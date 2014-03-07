@@ -406,7 +406,13 @@
 // User Recommendations (like that on the on boarding) are registered as Recommendation Obejcts
 - (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary
 {
-    
+	// Delete existing recommendations
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Recomendation entityName]];
+	NSArray *recommendations = [importManagedObjectContext executeFetchRequest:fetchRequest error:nil];
+	for (Recomendation *recommendation in recommendations) {
+		[importManagedObjectContext deleteObject:recommendation];
+	}
+	
     NSDictionary *usersDictionary = dictionary[@"users"];
     if (![usersDictionary isKindOfClass: [NSDictionary class]])
         return NO;
