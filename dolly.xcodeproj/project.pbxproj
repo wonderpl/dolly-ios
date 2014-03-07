@@ -91,7 +91,6 @@
 		0170717E165550A900A3C7C4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0170717D165550A900A3C7C4 /* SystemConfiguration.framework */; };
 		0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */; };
 		0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0173F70A16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m */; };
-		0177002A17C382C3006DE415 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177002917C382C3006DE415 /* UIImage+Tint.m */; };
 		01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD41629BDC40080F26B /* UIKit.framework */; };
 		01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD61629BDC40080F26B /* Foundation.framework */; };
 		01901A9F1771CCBA007DBEAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01901A9D1771CCBA007DBEAC /* InfoPlist.strings */; };
@@ -801,8 +800,6 @@
 		0173F70716E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewerThumbnailLayout.m; sourceTree = "<group>"; };
 		0173F70916E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewerThumbnailLayoutAttributes.h; sourceTree = "<group>"; };
 		0173F70A16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewerThumbnailLayoutAttributes.m; sourceTree = "<group>"; };
-		0177002817C382C3006DE415 /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
-		0177002917C382C3006DE415 /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
 		01901A951771CCBA007DBEAC /* dollyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dollyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01901A9C1771CCBA007DBEAC /* dollyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "dollyTests-Info.plist"; sourceTree = "<group>"; };
 		01901A9E1771CCBA007DBEAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2195,8 +2192,6 @@
 				019825F3162C94B500216900 /* UIFont+SYNFont.m */,
 				011A160C16EE53A0008CF25E /* UIImage+Resize.h */,
 				011A160D16EE53A0008CF25E /* UIImage+Resize.m */,
-				0177002817C382C3006DE415 /* UIImage+Tint.h */,
-				0177002917C382C3006DE415 /* UIImage+Tint.m */,
 				012CDC2E17E1CE1A00C723BB /* UIDevice+Hardware.h */,
 				012CDC2F17E1CE1A00C723BB /* UIDevice+Hardware.m */,
 				01578C2017DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.h */,
@@ -4558,7 +4553,6 @@
 				BE8F938D17B1268500E7035F /* ExternalAccount.m in Sources */,
 				BE1B3DC3180D4EEB00DA2BD6 /* SYNDiscoverViewController.m in Sources */,
 				0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */,
-				0177002A17C382C3006DE415 /* UIImage+Tint.m in Sources */,
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
 				BE06EEF417D78DCA0028F2E3 /* SYNOneToOneFriendCell.m in Sources */,
 				E9E1E28118561C780051E312 /* SYNPopoverAnimator.m in Sources */,

@@ -10,7 +10,6 @@
 #import "AppConstants.h"
 #import "SYNChannelMidCell.h"
 #import "UIFont+SYNFont.h"
-#import "UIImage+Tint.h"
 #import <UIImageView+WebCache.h>
 #import "ChannelOwner.h"
 #import "SYNAppDelegate.h"

@@ -10,7 +10,6 @@
 #import "SYNAggregateChannelCell.h"
 #import "SYNAggregateFlowLayout.h"
 #import "SYNAggregateChannelItemCell.h"
-#import "UIImage+Tint.h"
 #import "UIFont+SYNFont.h"
 
 @interface SYNAggregateChannelCell () <UIGestureRecognizerDelegate>

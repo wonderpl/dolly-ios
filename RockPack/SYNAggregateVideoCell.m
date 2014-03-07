@@ -16,7 +16,6 @@
 #import "SYNDeviceManager.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
-#import "UIImage+Tint.h"
 #import "Video.h"
 #import "VideoInstance.h"
 
