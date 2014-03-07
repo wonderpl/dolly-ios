@@ -53,6 +53,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	self.registerButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.registerButton.titleLabel.font.pointSize];
+	
 	self.emailTextField.font = [UIFont lightCustomFontOfSize:self.emailTextField.font.pointSize];
 	self.passwordTextField.font = [UIFont lightCustomFontOfSize:self.passwordTextField.font.pointSize];
 	
