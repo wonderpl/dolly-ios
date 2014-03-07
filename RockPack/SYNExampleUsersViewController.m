@@ -40,8 +40,8 @@ static const CGFloat ScrollAnimationDuration = 1.0;
     
     //As when reloading the data there is a flash
     //So we hide it until the animation starts
-    
     self.collectionView.hidden = YES;
+
 }
 
 - (void) getUsersAndAnimate {
@@ -49,7 +49,7 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 	
 	[appDelegate.networkEngine exampleUsersWithCompletionHandler:^(NSArray *users) {
 		self.exampleUsers = users;
-		
+        self.collectionView.hidden = YES;
 		[self.collectionView reloadData];
         [self scrollSlowly];
         
@@ -89,6 +89,8 @@ static const CGFloat ScrollAnimationDuration = 1.0;
 
 
 - (void)scrollSlowly {
+    self.collectionView.hidden = YES;
+
     if (self.exampleUsers.count>1) {
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
     }
@@ -98,7 +100,7 @@ static const CGFloat ScrollAnimationDuration = 1.0;
     self.endPoint = CGPointMake(0, (self.exampleUsers.count * 230)-230);
     
     //Start off screen
-    self.scrollingPoint = CGPointMake(0, -300);
+    self.scrollingPoint = CGPointMake(0, -400);
     
     //Unhide the colleciton view now that the animation the reloading is done, and the first cell will be off screen.
 
