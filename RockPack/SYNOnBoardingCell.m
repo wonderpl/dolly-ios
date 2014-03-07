@@ -11,6 +11,7 @@
 #import "UIFont+SYNFont.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SYNGenreManager.h"
+#import "Recommendation.h"
 
 @implementation SYNOnBoardingCell
 
@@ -56,31 +57,31 @@
 
 }
 
-- (void) setRecomendation:(Recomendation *)recomendation
+- (void) setRecommendation:(Recommendation *)recommendation
 {
     
-    if(!recomendation)
+    if(!recommendation)
         return;
     
-    _recomendation = recomendation;
+    _recommendation = recommendation;
     
-    self.followButton.dataItemLinked = recomendation.channelOwner;
+    self.followButton.dataItemLinked = recommendation.channelOwner;
     
-    self.nameLabel.text = recomendation.displayName;
+    self.nameLabel.text = recommendation.displayName;
     
-    recomendation.descriptionText = recomendation.descriptionText;
+    recommendation.descriptionText = recommendation.descriptionText;
     
     if (IS_IPAD) {
-        [self.subGenreLabel setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recomendation.categoryId]];
+        [self.subGenreLabel setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recommendation.categoryId]];
     }
     
-    self.descriptionLabel.text = recomendation.descriptionText;
+    self.descriptionLabel.text = recommendation.descriptionText;
     
     if ([self.descriptionLabel.text isEqualToString:@""]) {
         self.descriptionLabel.text = @"";
     }
     
-    [self.avatarButton setImageWithURL: [NSURL URLWithString: recomendation.avatarUrl]
+    [self.avatarButton setImageWithURL: [NSURL URLWithString: recommendation.avatarUrl]
                               forState: UIControlStateNormal
                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
                                options: SDWebImageRetryFailed];

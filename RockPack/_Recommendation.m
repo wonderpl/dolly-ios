@@ -1,9 +1,9 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Recomendation.m instead.
+// Make changes to Recommendation.m instead.
 
-#import "_Recomendation.h"
+#import "_Recommendation.h"
 
-const struct RecomendationAttributes RecomendationAttributes = {
+const struct RecommendationAttributes RecommendationAttributes = {
 	.avatarUrl = @"avatarUrl",
 	.categoryId = @"categoryId",
 	.descriptionText = @"descriptionText",
@@ -12,33 +12,33 @@ const struct RecomendationAttributes RecomendationAttributes = {
 	.resourceUrl = @"resourceUrl",
 };
 
-const struct RecomendationRelationships RecomendationRelationships = {
+const struct RecommendationRelationships RecommendationRelationships = {
 };
 
-const struct RecomendationFetchedProperties RecomendationFetchedProperties = {
+const struct RecommendationFetchedProperties RecommendationFetchedProperties = {
 };
 
-@implementation RecomendationID
+@implementation RecommendationID
 @end
 
-@implementation _Recomendation
+@implementation _Recommendation
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"Recomendation" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Recommendation" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"Recomendation";
+	return @"Recommendation";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"Recomendation" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"Recommendation" inManagedObjectContext:moc_];
 }
 
-- (RecomendationID*)objectID {
-	return (RecomendationID*)[super objectID];
+- (RecommendationID*)objectID {
+	return (RecommendationID*)[super objectID];
 }
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {

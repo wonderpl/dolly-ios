@@ -28,7 +28,6 @@
 #define kComment                    @"Comment"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
-#define kRecommendation             @"Recomendation"
 #define kVideo                      @"Video"
 #define kVideoInstance              @"VideoInstance"
 #define kChannelOwner               @"ChannelOwner"

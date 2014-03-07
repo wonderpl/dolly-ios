@@ -10,8 +10,8 @@
 #import "SYNSocialActionsDelegate.h"
 #import "SYNAvatarButton.h"
 #import "SYNSocialButton.h"
-#import "Recomendation.h"
 
+@class Recommendation;
 @interface SYNOnBoardingCell : UICollectionViewCell
 {
     CGPoint nameLabelOrigin;
@@ -30,6 +30,6 @@
 
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
-@property (nonatomic, weak) Recomendation* recomendation;
+@property (nonatomic, weak) Recommendation* recommendation;
 
 @end

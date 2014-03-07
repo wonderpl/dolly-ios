@@ -12,7 +12,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "ChannelOwner.h"
-#import "Recomendation.h"
+#import "Recommendation.h"
 #import "SYNMasterViewController.h"
 #import "SYNOnBoardingHeader.h"
 #import "SYNOnBoardingFooter.h"
@@ -218,11 +218,11 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
-    [fetchRequest setEntity: [NSEntityDescription entityForName: kRecommendation
-                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
-    NSError* error;
-    self.data = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                      error: &error];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:[Recommendation entityName]
+										inManagedObjectContext:appDelegate.searchManagedObjectContext]];
+	
+    self.data = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest
+                                                                      error:NULL];
     
     
     NSFetchRequest *categoriesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Genre entityName]];
@@ -232,8 +232,9 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
     [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
     
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                      error: &error];
+    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest:
+								   categoriesFetchRequest
+                                                                                      error:NULL];
     // == Gets the data from core data in order of priority and then adds its to the displayed data by that order aswell as groups users with common genres.
     
     NSArray *genres = [NSArray arrayWithArray:genresFetchedArray];
@@ -251,7 +252,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         }
         
         for (int i = tmpData.count; i>0; i--) {
-            Recomendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
+            Recommendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
             
             SubGenre* subgenre = self.subgenresByIdString[tmpRecomendation.categoryId];
             
@@ -278,7 +279,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     if (IS_IPAD) {
         // assuming the list is ordered in the backend
         for (int i = tmpData.count; i>0; i--) {
-            Recomendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
+            Recommendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
             [tmpArr insertObject:tmpRecomendation atIndex:0];
         }
         
@@ -321,9 +322,9 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier: OnBoardingCellIndent
                                                                         forIndexPath: indexPath];
     
-    Recomendation* recomendation = (Recomendation*)self.usersByCategory[indexPath.section-1][indexPath.row];
+    Recommendation* recomendation = self.usersByCategory[indexPath.section-1][indexPath.row];
     
-    cell.recomendation = recomendation;
+    cell.recommendation = recomendation;
     
     if (self.genresByIdString[recomendation.categoryId]) {
         Genre* genre = self.genresByIdString[recomendation.categoryId];
@@ -398,7 +399,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
                                                                    withReuseIdentifier: OnBoardingSectionHeader
                                                                           forIndexPath: indexPath];
             
-            Recomendation* recomendation = (Recomendation*)self.usersByCategory[indexPath.section-1][indexPath.row];
+            Recommendation* recomendation = self.usersByCategory[indexPath.section-1][indexPath.row];
 
             [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recomendation.categoryId]];
             

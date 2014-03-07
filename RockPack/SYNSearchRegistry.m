@@ -14,7 +14,7 @@
 #import "SYNSearchRegistry.h"
 #import "Video.h"
 #import "VideoInstance.h"
-#import "Recomendation.h"
+#import "Recommendation.h"
 #import "NSString+Validation.h"
 
 @import AddressBook;
@@ -407,9 +407,9 @@
 - (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary
 {
 	// Delete existing recommendations
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Recomendation entityName]];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Recommendation entityName]];
 	NSArray *recommendations = [importManagedObjectContext executeFetchRequest:fetchRequest error:nil];
-	for (Recomendation *recommendation in recommendations) {
+	for (Recommendation *recommendation in recommendations) {
 		[importManagedObjectContext deleteObject:recommendation];
 	}
 	
@@ -421,7 +421,7 @@
     NSArray* itemsArray = usersDictionary[@"items"];
     for (NSDictionary* itemDictionary in itemsArray)
     {
-        Recomendation* recomendation = [Recomendation instanceFromDictionary:itemDictionary
+        Recommendation* recomendation = [Recommendation instanceFromDictionary:itemDictionary
                                                    usingManagedObjectContext:importManagedObjectContext];
         
         if(!recomendation)
