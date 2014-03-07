@@ -33,6 +33,7 @@
 #import "SYNVideoPlayerAnimator.h"
 #import "UIColor+SYNColor.h"
 #import "SYNTrackingManager.h"
+#import "SYNFeedOverlayViewController.h"
 
 typedef void(^FeedDataErrorBlock)(void);
 
@@ -110,6 +111,8 @@ typedef void(^FeedDataErrorBlock)(void);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetData) name:kReloadFeed object:nil];
 
+    
+    
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -120,7 +123,16 @@ typedef void(^FeedDataErrorBlock)(void);
 		self.model.delegate = self;
 	}
     [self.feedCollectionView reloadData];
-
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsFeedFirstTime]) {
+        if ([self.model itemCount]>0) {
+            SYNFeedOverlayViewController* feedOverlay = [[SYNFeedOverlayViewController alloc] init];
+            [feedOverlay addToViewController:appDelegate.masterViewController];
+            [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                    forKey: kUserDefaultsFeedFirstTime];
+        }
+    }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

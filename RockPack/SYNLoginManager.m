@@ -214,6 +214,8 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsMoodFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsYourProfileFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool: NO forKey: kUserDefaultsFeedFirstTime];
+
     } else {
         // == show on value == 2
         [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: kUserDefaultsDiscoverVideoFirstTime];
@@ -231,6 +233,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsMoodFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsYourProfileFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsFeedFirstTime];
 
     }
     
