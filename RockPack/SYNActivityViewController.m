@@ -68,13 +68,14 @@
            forCellReuseIdentifier:kNotificationsCellIdent];
     
     
-    if(self.notifications.count == 0)
-    {
-        
-        // display no notifications message
-        
-        [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
-    }
+	if (self.notifications.count == 0) {
+		// Hack to stop the tab bar from being by scrolling via bouncing with no notifications
+		self.tableView.alwaysBounceVertical = NO;
+		
+		[self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
+	} else {
+		self.tableView.alwaysBounceVertical = YES;
+	}
     
     [self.tableView reloadData];
     
