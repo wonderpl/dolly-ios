@@ -2138,7 +2138,7 @@
     
     // same as default values... they are here in case we need to change them in the future
     parameters[@"start"] = @(0);
-    parameters[@"size"] = @(10);
+    parameters[@"size"] = @(30);
     parameters[@"locale"] = self.localeString;
     parameters[@"location"] = self.locationString;
     
