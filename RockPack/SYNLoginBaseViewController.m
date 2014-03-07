@@ -16,7 +16,6 @@
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIDevice+Hardware.h"
-#import "UIInterpolatingMotionEffect+DualAxis.h"
 #import "User.h"
 #import "NSString+Validation.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -125,20 +124,12 @@
     self.lowerParallaxImageView.contentMode = UIViewContentModeCenter;
     self.lowerParallaxImageView.frame = totalImageRect;
     
-    UIMotionEffectGroup *lowerMotionEffectGroup = [UIInterpolatingMotionEffect dualAxisMotionEffectWithMaxDisplacement: 100.0f];
-    
-    [self.lowerParallaxImageView addMotionEffect: lowerMotionEffectGroup];
-    
     [self.view insertSubview: self.lowerParallaxImageView
                      atIndex: 1];
     
     self.upperParallaxImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"UpperParallaxStars"]];
     self.upperParallaxImageView.contentMode = UIViewContentModeCenter;
     self.upperParallaxImageView.frame = totalImageRect;
-    
-    UIMotionEffectGroup *upperMotionEffectGroup = [UIInterpolatingMotionEffect dualAxisMotionEffectWithMaxDisplacement: 200.0f];
-    
-    [self.upperParallaxImageView addMotionEffect: upperMotionEffectGroup];
     
     [self.view insertSubview: self.upperParallaxImageView
                      atIndex: 2];

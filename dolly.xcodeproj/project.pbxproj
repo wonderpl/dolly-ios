@@ -80,7 +80,6 @@
 		014D514F16F738C500B82B00 /* SYNAbstractNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */; };
 		015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */; };
 		0155FA2817A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */; };
-		01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */; };
 		015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */; };
 		015CB01616AE039900FEB8E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01516AE039900FEB8E7 /* User.m */; };
 		015CB01916AE03B200FEB8E7 /* _User.m in Sources */ = {isa = PBXBuildFile; fileRef = 015CB01816AE03B200FEB8E7 /* _User.m */; };
@@ -777,8 +776,6 @@
 		015487CE16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNYouTubeVideoPlaybackViewController.m; sourceTree = "<group>"; };
 		0155FA2617A81D7600B04B51 /* SYNSessionTokenCachingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSessionTokenCachingStrategy.h; sourceTree = "<group>"; };
 		0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSessionTokenCachingStrategy.m; sourceTree = "<group>"; };
-		01578C2017DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIInterpolatingMotionEffect+DualAxis.h"; sourceTree = "<group>"; };
-		01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIInterpolatingMotionEffect+DualAxis.m"; sourceTree = "<group>"; };
 		015AC9FB181EB86E0020E685 /* SYNAggregateFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAggregateFlowLayout.h; sourceTree = "<group>"; };
 		015AC9FC181EB86E0020E685 /* SYNAggregateFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAggregateFlowLayout.m; sourceTree = "<group>"; };
 		015CB01416AE039900FEB8E7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -2194,8 +2191,6 @@
 				011A160D16EE53A0008CF25E /* UIImage+Resize.m */,
 				012CDC2E17E1CE1A00C723BB /* UIDevice+Hardware.h */,
 				012CDC2F17E1CE1A00C723BB /* UIDevice+Hardware.m */,
-				01578C2017DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.h */,
-				01578C2117DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m */,
 				E96A4C6818439CD100ED5782 /* CIFilter+Monochrome.h */,
 				E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */,
 				E9F7CC741846273E0026C97D /* NSString+Validation.h */,
@@ -4466,7 +4461,6 @@
 				E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */,
 				01F1B85D17297471005735AF /* CoverArt.m in Sources */,
 				BEB313C0182A829400FAF98A /* SYNCollectionVideoCell.m in Sources */,
-				01578C2317DF653F00B4F498 /* UIInterpolatingMotionEffect+DualAxis.m in Sources */,
 				011C1676173003E800CF50B9 /* OWActivity.m in Sources */,
 				011C1677173003E800CF50B9 /* OWActivityDelegateObject.m in Sources */,
 				E9B8A504185B20D300F0D625 /* SYNChannelVideosModel.m in Sources */,
