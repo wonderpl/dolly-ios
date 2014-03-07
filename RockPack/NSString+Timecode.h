@@ -10,8 +10,6 @@
 
 @interface NSString (Timecode)
 
-+ (NSString *) timecodeStringFromSeconds: (float) timeSeconds;
-
-+ (NSString *)paddedTimecodeStringFromSeconds:(NSTimeInterval)seconds;
++ (NSString *)timecodeStringFromSeconds:(NSTimeInterval)timeSeconds;
 
 @end

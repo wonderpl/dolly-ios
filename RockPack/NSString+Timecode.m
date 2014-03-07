@@ -10,31 +10,18 @@
 
 @implementation NSString (Timecode)
 
-+ (NSString *) timecodeStringFromSeconds: (float) timeSeconds
-{
-    // Round down to nearest second
-    int time = (int) timeSeconds;
-    
-    // We should display slightly differently if we have a length in hours
-    if (time > 3600)
-    {
-        return [NSString stringWithFormat:@"%d:%02d:%02d", time / 3600, (time / 60) % 60, time % 60];
-    }
-    else
-    {
-        return [NSString stringWithFormat:@"%d:%02d", (time / 60) % 60, time % 60];
-    }
-}
-
-+ (NSString *)paddedTimecodeStringFromSeconds:(NSTimeInterval)seconds {
-	NSInteger timeSeconds = seconds;
++ (NSString *)timecodeStringFromSeconds:(NSTimeInterval)timeSeconds {
+	NSInteger totalSeconds = timeSeconds;
 	
-    if (((timeSeconds / 60)/60) % 60>0) {
-        return [NSString stringWithFormat:@"%02d:%02d:%02d", ((timeSeconds / 60)/60) % 60, (timeSeconds / 60) % 60, timeSeconds % 60];
-        
-    }
-    
-	return [NSString stringWithFormat:@"%02d:%02d", (timeSeconds / 60) % 60, timeSeconds % 60];
+	NSInteger hours = (totalSeconds / 3600);
+	NSInteger minutes = ((totalSeconds / 60) % 60);
+	NSInteger seconds = (totalSeconds % 60);
+	
+	if (hours) {
+		return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes, seconds];
+	}
+	
+	return [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
 }
 
 @end
