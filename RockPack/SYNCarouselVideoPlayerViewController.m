@@ -115,6 +115,18 @@
 	[[SYNTrackingManager sharedManager] trackCarouselVideoPlayerScreenView];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	// FIXME: This is a dodgy hack to work around a race condition in SYNFeedModel because it has separate modes
+	// which are switched between. Need to go back and rework how that's done but for now we have this hack to prevent
+	// a crash when we try to reference what we think is a VideoInstance but is instead a FeedItem since the mode has changed
+	if ([self.navigationController isBeingDismissed]) {
+		self.thumbnailCollectionView.delegate = nil;
+		self.thumbnailCollectionView.dataSource = nil;
+	}
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
