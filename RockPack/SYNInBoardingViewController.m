@@ -32,11 +32,6 @@
 
 
 - (void) addToViewController :(UIViewController*) vc {
-    
-    double delayInSeconds = 0.4;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
         
         // Set frame to full screen
         CGRect vFrame = self.view.frame;
@@ -46,10 +41,9 @@
         
         [vc addChildViewController:self];
         [vc.view addSubview:self.view];
-        [UIView animateWithDuration:1.6 animations:^{
+        [UIView animateWithDuration:2.0 animations:^{
             self.view.alpha = 1.0f;
         }];
-    });
 }
 
 - (void)screenTapped:(UITapGestureRecognizer*)tapGesture {
