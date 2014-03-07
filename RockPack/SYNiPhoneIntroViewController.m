@@ -19,7 +19,7 @@
 #import "SYNTrackingManager.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Reachability.h>
-#import "SYNExampleUsersViewController.h"
+
 @interface SYNiPhoneIntroViewController () <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) SYNAppDelegate *appDelegate;
