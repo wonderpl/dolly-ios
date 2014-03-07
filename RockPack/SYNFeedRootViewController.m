@@ -123,7 +123,8 @@ typedef void(^FeedDataErrorBlock)(void);
 		self.model.delegate = self;
 	}
     [self.feedCollectionView reloadData];
-    
+   
+    [self showInboarding];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -131,14 +132,6 @@ typedef void(^FeedDataErrorBlock)(void);
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsFeedFirstTime]) {
-        if ([self.model itemCount]>0) {
-            SYNFeedOverlayViewController* feedOverlay = [[SYNFeedOverlayViewController alloc] init];
-            [feedOverlay addToViewController:appDelegate.masterViewController];
-            [[NSUserDefaults standardUserDefaults] setBool: YES
-                                                    forKey: kUserDefaultsFeedFirstTime];
-        }
-    }
 
 }
 
@@ -254,6 +247,10 @@ typedef void(^FeedDataErrorBlock)(void);
 	[self.feedCollectionView reloadData];
     
 
+    if (self.isViewLoaded && self.view.window) {
+        [self showInboarding];
+    
+    }
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
@@ -360,6 +357,18 @@ typedef void(^FeedDataErrorBlock)(void);
 	[super applicationWillEnterForeground: application];
 	
 	[self resetData];
+}
+
+- (void) showInboarding {
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsFeedFirstTime]) {
+        if ([self.model itemCount]>0) {
+            SYNFeedOverlayViewController* feedOverlay = [[SYNFeedOverlayViewController alloc] init];
+            [feedOverlay addToViewController:appDelegate.masterViewController];
+            [[NSUserDefaults standardUserDefaults] setBool: YES
+                                                    forKey: kUserDefaultsFeedFirstTime];
+        }
+    }
 }
 
 @end
