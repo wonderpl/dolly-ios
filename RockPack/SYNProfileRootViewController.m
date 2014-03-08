@@ -964,10 +964,10 @@
             channelThumbnailCell.channel = channel;
 			
 			// indexPath.row == Favourites cell, which is a special case
-            if(channel.favouritesValue && self.modeType == kModeMyOwnProfile) {
-                channelThumbnailCell.deletableCell = NO;
-            } else {
+            if(!channel.favouritesValue && self.modeType == kModeMyOwnProfile) {
                 channelThumbnailCell.deletableCell = YES;
+            } else {
+                channelThumbnailCell.deletableCell = NO;
             }
         }
         else
