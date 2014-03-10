@@ -60,6 +60,8 @@
 			[fromViewController.view removeFromSuperview];
 			
 			[transitionContext completeTransition:YES];
+			
+			fromViewController.transitioningDelegate = nil;
 		}];
 	}
 }

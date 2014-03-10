@@ -90,6 +90,7 @@ static const CGFloat AnimationDuration = 0.3;
 - (void)animateDismissingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 	SYNFullScreenVideoViewController *fullScreenViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UINavigationController *navigationController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+	UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	SYNVideoPlayerViewController *videoViewController = (SYNVideoPlayerViewController *)navigationController.topViewController;
 	UIView *containerView = [transitionContext containerView];
 	SYNVideoPlayer *videoPlayer = fullScreenViewController.videoPlayer;
@@ -116,6 +117,8 @@ static const CGFloat AnimationDuration = 0.3;
 		[playerContainerView addSubview:videoPlayer];
 		
 		[transitionContext completeTransition:YES];
+		
+		fromViewController.transitioningDelegate = nil;
 	}];
 }
 
