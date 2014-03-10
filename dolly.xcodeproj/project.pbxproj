@@ -2074,7 +2074,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0E3AE68D1875DE5D008A8D00 /* Color Manager */,
+				0E3AE68D1875DE5D008A8D00 /* Genre Manager */,
 				E9B8A501185B209B00F0D625 /* Animators */,
 				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
@@ -2514,13 +2514,13 @@
 			name = WebView;
 			sourceTree = "<group>";
 		};
-		0E3AE68D1875DE5D008A8D00 /* Color Manager */ = {
+		0E3AE68D1875DE5D008A8D00 /* Genre Manager */ = {
 			isa = PBXGroup;
 			children = (
 				0E3AE68E1875DE8C008A8D00 /* SYNGenreManager.h */,
 				0E3AE68F1875DE8C008A8D00 /* SYNGenreManager.m */,
 			);
-			name = "Color Manager";
+			name = "Genre Manager";
 			sourceTree = "<group>";
 		};
 		1F1B4BD317427E2F009DEB0C /* Placeholders */ = {
