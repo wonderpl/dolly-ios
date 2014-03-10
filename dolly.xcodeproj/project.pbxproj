@@ -445,7 +445,6 @@
 		BEA1E33116CE6045000AB59D /* SYNNetworkOperationJsonObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA1E33016CE6045000AB59D /* SYNNetworkOperationJsonObject.m */; };
 		BEA216AF17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA216AE17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib */; };
 		BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA216B117E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m */; };
-		BEA216E517E9ED31007C6DF7 /* SYNTrackableFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA216E417E9ED31007C6DF7 /* SYNTrackableFrameView.m */; };
 		BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB15767173BA75100DAFA2F /* _Genre.m */; };
 		BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB15769173BA75100DAFA2F /* _SubGenre.m */; };
 		BEB1577B173C10E900DAFA2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB1577D173C10E900DAFA2F /* Localizable.strings */; };
@@ -1285,8 +1284,6 @@
 		BEA216AE17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOneToOneSharingFriendCell.xib; sourceTree = "<group>"; };
 		BEA216B017E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOneToOneSharingFriendCell.h; sourceTree = "<group>"; };
 		BEA216B117E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOneToOneSharingFriendCell.m; sourceTree = "<group>"; };
-		BEA216E317E9ED31007C6DF7 /* SYNTrackableFrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTrackableFrameView.h; sourceTree = "<group>"; };
-		BEA216E417E9ED31007C6DF7 /* SYNTrackableFrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTrackableFrameView.m; sourceTree = "<group>"; };
 		BEB15766173BA75100DAFA2F /* _Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Genre.h; sourceTree = "<group>"; };
 		BEB15767173BA75100DAFA2F /* _Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Genre.m; sourceTree = "<group>"; };
 		BEB15768173BA75100DAFA2F /* _SubGenre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SubGenre.h; sourceTree = "<group>"; };
@@ -2076,7 +2073,6 @@
 			children = (
 				0E3AE68D1875DE5D008A8D00 /* Genre Manager */,
 				E9B8A501185B209B00F0D625 /* Animators */,
-				BEB313BB182A7FDF00FAF98A /* Trackable View */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
 				01AEFBCA1701AC270060467A /* Activity Manager */,
 				BE285DB91726826800D995AB /* Channels Manager */,
@@ -3561,15 +3557,6 @@
 			name = Channels;
 			sourceTree = "<group>";
 		};
-		BEB313BB182A7FDF00FAF98A /* Trackable View */ = {
-			isa = PBXGroup;
-			children = (
-				BEA216E317E9ED31007C6DF7 /* SYNTrackableFrameView.h */,
-				BEA216E417E9ED31007C6DF7 /* SYNTrackableFrameView.m */,
-			);
-			name = "Trackable View";
-			sourceTree = "<group>";
-		};
 		BEB313BC182A822900FAF98A /* Add to Channels */ = {
 			isa = PBXGroup;
 			children = (
@@ -4381,7 +4368,6 @@
 				E972DFAF187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m in Sources */,
 				BE0815CA16D5478B00ADB1DC /* SYNRegistry.m in Sources */,
 				BE0815CD16D5487B00ADB1DC /* SYNSearchRegistry.m in Sources */,
-				BEA216E517E9ED31007C6DF7 /* SYNTrackableFrameView.m in Sources */,
 				0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */,
 				BEF9E5B016DCBAC800286113 /* SYNSoundPlayer.m in Sources */,
 				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,

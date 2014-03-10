@@ -14,7 +14,6 @@
 #import "SYNDiscoverViewController.h"
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
-#import "SYNTrackableFrameView.h"
 #import "UINavigationBar+Appearance.h"
 
 @import AudioToolbox;
@@ -36,13 +35,6 @@
 
 // Initialise all the elements common to all 4 tabs
 #pragma mark - View lifecycle
-
-/* Uncomment to test the frame setting from outside this class
--(void)loadView
-{
-    self.view = [[SYNTrackableFrameView alloc] initWithFrame:CGRectZero];
-}
-*/
 
 -(void)setView:(UIView *)view
 {
