@@ -156,13 +156,6 @@
                                                  name: kOnboardingCompleted
                                                object: nil];
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // Create a dictionary of defaults to add and register them (if they have not already been set)
-    NSDictionary *initDefaults = @{kDownloadedVideoContentBool: @(NO)};
-    
-    [defaults registerDefaults: initDefaults];
-    
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
 	self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

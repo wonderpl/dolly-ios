@@ -265,10 +265,6 @@ typedef enum : NSInteger {
 #define kChannelUpdatedKey @"eCommerceURL"
 #define kSubscribedByUserKey @"subscribedByUser"
 
-// Settings
-
-#define kDownloadedVideoContentBool @"kDownloadedVideoContentBool"
-
 // Major functionality switches
 
 // OAuth Username and Password
