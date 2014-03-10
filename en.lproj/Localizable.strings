@@ -300,6 +300,10 @@
 
 "sharing_message" = "To share with your contacts, please go to Settings, Privacy, and in Contacts give access to Wonder PL";
 
+"sharing_video" = "We'll send this video to their email";
+"sharing_collection" = "We'll send this collection to their email";
+
+
 // == Instructions == //
 
 "instruction_packs_for_you" = "Here are some popular\ncollections for you";

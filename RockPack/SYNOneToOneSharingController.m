@@ -813,8 +813,17 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     
     self.friendToAddEmail = friend; // either a newly created or
     
+    NSString *message = @"";
+    
+    if ([self.mutableShareDictionary[@"type"] isEqualToString:@"video_instance"]) {
+        message = NSLocalizedString(@"sharing_video", @"alertview message when sending a email");
+
+    } else if ([self.mutableShareDictionary[@"type"] isEqualToString:@"channel"]){
+        message = NSLocalizedString(@"sharing_collection", @"alertview message when sending a channel");
+    }
+
     UIAlertView *prompt = [[UIAlertView alloc] initWithTitle: titleText
-                                                     message: @"We'll send this collection to their email."
+                                                     message: message
                                                     delegate: self
                                            cancelButtonTitle: @"Cancel"
                                            otherButtonTitles: @"Send", nil];
@@ -1078,6 +1087,9 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     int value = [[[NSUserDefaults standardUserDefaults] valueForKey:kUserDefaultsSharingAlert] intValue];
 
     if (value<2) {
+        
+        
+        
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sharing", @"sharing alertview title")
                                                      message:NSLocalizedString(@"sharing_message", @"sharing alert view message")
                                                     delegate:nil
