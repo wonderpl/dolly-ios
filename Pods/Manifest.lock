@@ -1,4 +1,23 @@
 PODS:
+  - AFNetworking (2.2.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.2.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.2.0):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.2.0)
+  - AFNetworking/Security (2.2.0)
+  - AFNetworking/Serialization (2.2.0)
+  - AFNetworking/UIKit (2.2.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - Appirater (2.0.2)
   - Facebook-iOS-SDK (3.12.0)
   - GoogleAnalytics-iOS-SDK (3.0.3)
@@ -20,6 +39,7 @@ PODS:
   - TestFlightSDK (2.2.3-beta)
 
 DEPENDENCIES:
+  - AFNetworking
   - Appirater
   - Facebook-iOS-SDK
   - GoogleAnalytics-iOS-SDK
@@ -39,6 +59,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/rockpack/MKNetworkKit.git
 
 SPEC CHECKSUMS:
+  AFNetworking: e8cfd8f3fe3bfe19124a0cc63f4d45752d892a56
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
   Facebook-iOS-SDK: c09f7d80db5c48170ff834bc03ebe774c49d1f5b
   GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
