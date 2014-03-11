@@ -85,7 +85,7 @@
 
 - (BOOL)resetPasswordFormIsValidForTextField:(SYNTextFieldLogin *)textField {
     if (textField.text.length < 1) {
-		((SYNTextFieldLogin *)textField).errorMode = YES;
+		textField.errorMode = YES;
 		self.errorLabel.text = NSLocalizedString(@"forgot_password_screen_form_field_username_error_empty", nil);
         
         [textField becomeFirstResponder];

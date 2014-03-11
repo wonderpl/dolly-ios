@@ -10,11 +10,14 @@
 #import "SYNProgressView.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTimestampView.h"
+#import "NSString+Timecode.h"
 @import MediaPlayer;
 
 @interface SYNScrubberBar ()
 
 @property (nonatomic, strong) IBOutlet UIButton *playPauseButton;
+
+@property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
 @property (nonatomic, strong) IBOutlet SYNProgressView *bufferingProgressView;
 @property (nonatomic, strong) IBOutlet UISlider *progressSlider;
@@ -53,6 +56,8 @@
 	[self updateHighDefinitionDisplay];
 	[self updateVolumeViewDisplay];
 	
+	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
+	
 	self.volumeView.showsVolumeSlider = NO;
 	
 	[self.layer addSublayer:self.topLineLayer];
@@ -89,6 +94,12 @@
 	_currentTime = currentTime;
 	
 	self.progressSlider.value = currentTime / self.duration;
+}
+
+- (void)setDuration:(NSTimeInterval)duration {
+	_duration = duration;
+	
+	self.durationLabel.text = [NSString timecodeStringFromSeconds:duration];
 }
 
 - (void)setPlaying:(BOOL)playing {
