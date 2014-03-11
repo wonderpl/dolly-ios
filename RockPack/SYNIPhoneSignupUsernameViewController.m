@@ -64,6 +64,8 @@ static const NSInteger UsernameMaxLength = 20;
 	self.errorLabel.font = [UIFont lightCustomFontOfSize:self.errorLabel.font.pointSize];
     
     [self.avatarImageView roundImage];
+    [self.avatarImageView setContentMode:UIViewContentModeScaleAspectFill];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
