@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="h6T-H1-ExR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="h6T-H1-ExR">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -283,10 +283,10 @@
                                     <constraint firstAttribute="centerX" secondItem="YTM-1r-Zpl" secondAttribute="centerX" id="5HE-WH-hD7"/>
                                     <constraint firstItem="EQP-Lj-nBZ" firstAttribute="centerY" secondItem="OJf-c6-72A" secondAttribute="centerY" id="5wy-K0-gGT"/>
                                     <constraint firstAttribute="centerX" secondItem="x7X-da-tl9" secondAttribute="centerX" id="8ZV-NH-shi"/>
+                                    <constraint firstItem="YTM-1r-Zpl" firstAttribute="top" secondItem="PqI-FD-gXl" secondAttribute="top" constant="192" id="EOB-w8-f6w"/>
                                     <constraint firstItem="EQP-Lj-nBZ" firstAttribute="width" secondItem="OJf-c6-72A" secondAttribute="width" id="H0C-L8-LHI"/>
                                     <constraint firstItem="EQP-Lj-nBZ" firstAttribute="top" secondItem="PqI-FD-gXl" secondAttribute="top" constant="76" id="IJy-uP-UcD"/>
                                     <constraint firstItem="JPL-Qb-onL" firstAttribute="top" secondItem="x7X-da-tl9" secondAttribute="bottom" constant="8" id="Xcv-VG-Ip3"/>
-                                    <constraint firstItem="YTM-1r-Zpl" firstAttribute="top" secondItem="EQP-Lj-nBZ" secondAttribute="bottom" constant="8" id="coO-Hu-bsV"/>
                                     <constraint firstAttribute="bottom" secondItem="aB2-qR-1JB" secondAttribute="bottom" id="e69-YK-J20"/>
                                     <constraint firstAttribute="centerX" secondItem="JPL-Qb-onL" secondAttribute="centerX" id="fsZ-hF-7T1"/>
                                     <constraint firstItem="x7X-da-tl9" firstAttribute="top" secondItem="YTM-1r-Zpl" secondAttribute="bottom" constant="8" id="hvq-WE-vyM"/>
@@ -335,6 +335,8 @@
                         <outlet property="lastNameTextField" destination="x7X-da-tl9" id="BjS-Ud-8lA"/>
                         <outlet property="navigationBar" destination="Bja-Qd-fQZ" id="fmZ-ea-dTh"/>
                         <outlet property="nextBarButton" destination="2kZ-qJ-f4F" id="JJ2-R0-eQv"/>
+                        <outlet property="topFirstNameLabelConstraint" destination="EOB-w8-f6w" id="hEd-jK-jgN"/>
+                        <outlet property="uploadAvatarButton" destination="OJf-c6-72A" id="Vl6-ys-afB"/>
                         <outlet property="usernameTextField" destination="JPL-Qb-onL" id="RCg-4W-1SY"/>
                         <segue destination="hNy-rk-sTx" kind="push" identifier="SignupDetails" id="Aze-3S-NiD"/>
                     </connections>

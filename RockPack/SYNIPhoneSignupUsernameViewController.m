@@ -38,7 +38,9 @@ static const NSInteger UsernameMaxLength = 20;
 
 @property (nonatomic, strong) IBOutlet UILabel *errorLabel;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topFirstNameLabelConstraint;
 @property (nonatomic, strong) SYNImagePickerController *imagePicker;
+@property (strong, nonatomic) IBOutlet UIButton *uploadAvatarButton;
 
 @property (nonatomic, strong) IBOutlet UIImageView *avatarImageView;
 
@@ -66,6 +68,12 @@ static const NSInteger UsernameMaxLength = 20;
     [self.avatarImageView roundImage];
     [self.avatarImageView setContentMode:UIViewContentModeScaleAspectFill];
 
+    if (!IS_IPHONE_5) {
+        self.avatarImageView.hidden = YES;
+        self.uploadAvatarButton.hidden = YES;
+        
+        [self.topFirstNameLabelConstraint setConstant:101];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
