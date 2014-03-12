@@ -467,7 +467,15 @@
         if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsYourProfileFirstTime])
         {
 
-            [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
+            if (IS_IPHONE) {
+                if (!IS_IPHONE_5) {
+                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 250) animated:YES];
+                } else {
+                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
+                }
+            } else {
+                [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
+            }
             [self performSelector:@selector(showInboardingAnimationDescription) withObject:nil afterDelay:0.9f];
         }
     }
