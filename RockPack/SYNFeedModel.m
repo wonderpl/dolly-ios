@@ -48,12 +48,15 @@
 	
 	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
 		for (FeedItem* childFeedItem in feedItem.feedItems) {
-			[videoInstances addObject:self.videoInstancesById[childFeedItem.resourceId]];
+			VideoInstance *videoInstance = self.videoInstancesById[childFeedItem.resourceId];
+			if (videoInstance) {
+				[videoInstances addObject:videoInstance];
+			}
 		}
 	} else {
-        
-        if (self.videoInstancesById[feedItem.resourceId]) {
-            [videoInstances addObject:self.videoInstancesById[feedItem.resourceId]];
+        VideoInstance *videoInstance = self.videoInstancesById[feedItem.resourceId];
+        if (videoInstance) {
+            [videoInstances addObject:videoInstance];
         }
 	}
 	
@@ -65,11 +68,15 @@
 	
 	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
 		for (FeedItem* childFeedItem in feedItem.feedItems) {
-			[channels addObject:self.channelsById[childFeedItem.resourceId]];
+			Channel *channel = self.channelsById[childFeedItem.resourceId];
+			if (channel) {
+				[channels addObject:channel];
+			}
 		}
 	} else {
-        if (self.channelsById[feedItem.resourceId]) {
-            [channels addObject:self.channelsById[feedItem.resourceId]];
+		Channel *channel = self.channelsById[feedItem.resourceId];
+        if (channel) {
+            [channels addObject:channel];
         }
 	}
 	

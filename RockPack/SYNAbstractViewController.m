@@ -346,11 +346,13 @@
     }
     else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
     {
-        // Get the videoinstance associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
+		VideoInstance *firstVideoInstance = [channel.videoInstances firstObject];
+		
+		UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:firstVideoInstance.thumbnailURL];
         
 		BOOL isOwner = [channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
-		[self shareChannel:channel isOwner:@(isOwner) usingImage:nil];
+		[self shareChannel:channel isOwner:@(isOwner) usingImage:image];
 	}
 }
 
@@ -393,51 +395,6 @@
 																	isOwner:(BOOL)isOwner
 																	isVideo:(BOOL)isVideo
 																	  image:(UIImage *)image {
-	if ([objectType isEqualToString: @"channel"]) {
-		if (!image) {
-			// Capture screen image if we weren't passed an image in
-			UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-			CGRect keyWindowRect = [keyWindow bounds];
-			UIGraphicsBeginImageContextWithOptions(keyWindowRect.size, YES, 0.0f);
-			
-			CGContextRef context = UIGraphicsGetCurrentContext();
-			[keyWindow.layer
-			 renderInContext: context];
-			UIImage *capturedScreenImage = UIGraphicsGetImageFromCurrentImageContext();
-			UIGraphicsEndImageContext();
-			
-			UIInterfaceOrientation orientation = [SYNDeviceManager.sharedInstance orientation];
-			
-			switch (orientation) {
-				case UIDeviceOrientationPortrait:
-					orientation = UIImageOrientationUp;
-					break;
-					
-				case UIDeviceOrientationPortraitUpsideDown:
-					orientation = UIImageOrientationDown;
-					break;
-					
-				case UIDeviceOrientationLandscapeLeft:
-					orientation = UIImageOrientationLeft;
-					break;
-					
-				case UIDeviceOrientationLandscapeRight:
-					orientation = UIImageOrientationRight;
-					break;
-					
-				default:
-					orientation = UIImageOrientationRight;
-					DebugLog(@"Unknown orientation");
-					break;
-			}
-			
-			UIImage *fixedOrientationImage = [UIImage  imageWithCGImage: capturedScreenImage.CGImage
-																  scale: capturedScreenImage.scale
-															orientation: orientation];
-			image = fixedOrientationImage;
-		}
-	}
-	
 	NSString *userName = nil;
 	NSString *subject = @"";
 	

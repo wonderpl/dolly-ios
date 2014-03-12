@@ -319,9 +319,14 @@ UISearchBarDelegate>
     // load activities
     OWFacebookActivity *facebookActivity = [[OWFacebookActivity alloc] init];
     OWTwitterActivity *twitterActivity = [[OWTwitterActivity alloc] init];
-	SYNWonderMailActivity *mailActivity = [[SYNWonderMailActivity alloc] init];
+	OWMailActivity *mailActivity = [[OWMailActivity alloc] init];
     
-    NSArray *activities = @[ facebookActivity, twitterActivity, mailActivity ];
+	NSArray *activities;
+	if ([MFMailComposeViewController canSendMail]) {
+		activities = @[ facebookActivity, twitterActivity, mailActivity ];
+	} else {
+		activities = @[ facebookActivity, twitterActivity ];
+	}
     
     self.activityViewController = [[OWActivityViewController alloc] initWithViewController: self
                                                                                 activities: activities];
