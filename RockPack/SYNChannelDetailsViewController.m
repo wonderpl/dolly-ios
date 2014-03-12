@@ -514,10 +514,12 @@
 }
 
 - (IBAction)shareChannelPressed:(id)sender {
+	VideoInstance *firstVideoInstance = [self.channel.videoInstances firstObject];
+	UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:firstVideoInstance.thumbnailURL];
+	
     [self shareChannel:self.channel
                isOwner:@([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
-            usingImage:nil];
-    
+            usingImage:image];
 }
 //- (void) likeControlPressed: (SYNSocialButton *) socialButton
 //{

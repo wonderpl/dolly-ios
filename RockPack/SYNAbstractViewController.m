@@ -346,11 +346,13 @@
     }
     else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
     {
-        // Get the videoinstance associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
+		VideoInstance *firstVideoInstance = [channel.videoInstances firstObject];
+		
+		UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:firstVideoInstance.thumbnailURL];
         
 		BOOL isOwner = [channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
-		[self shareChannel:channel isOwner:@(isOwner) usingImage:nil];
+		[self shareChannel:channel isOwner:@(isOwner) usingImage:image];
 	}
 }
 
