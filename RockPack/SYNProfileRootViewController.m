@@ -2208,9 +2208,15 @@
         }
         [[self.aboutMeTextView layer] setCornerRadius:0];
         
-        if (!IS_IPHONE_5) {
-            self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
-            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
+        if (IS_IPHONE) {
+            if (!IS_IPHONE_5) {
+                self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
+                self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
+            } else {
+                self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+                self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+
+            }
         } else {
             self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
             self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
@@ -2495,8 +2501,15 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
     if (self.modeType == kModeEditProfile) {
         
         [UIView animateWithDuration:0.3f animations:^{
-            self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
-            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, OFFSET_DESCRIPTION_EDIT);
+            
+            int offset = OFFSET_DESCRIPTION_EDIT;
+            
+            if (!IS_IPHONE_5) {
+                offset += 70;
+            }
+            
+            self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, offset);
+            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, offset);
             
         }];
     }
@@ -2543,8 +2556,19 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
 
 -(void) resetOffsetWithAnimation {
     [UIView animateWithDuration:0.3f animations:^{
-        self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
-        self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+        
+        if (IS_IPHONE) {
+            if (!IS_IPHONE_5) {
+                self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
+                self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 100);
+            } else {
+                self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+                self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+            }
+        } else {
+            self.subscriptionThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+            self.channelThumbnailCollectionView.contentOffset = CGPointMake(0, 0);
+        }
     }];
     
 }
