@@ -2934,8 +2934,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
                 } else {
                     [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
                 }
-            } else {
-                [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
             }
             value+=1;
             [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsOtherPersonsProfile];
@@ -2949,7 +2947,13 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
             cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:0]]);
             
             if (cell) {
-                
+                if (IS_IPHONE) {
+                    if (!IS_IPHONE_5) {
+                        [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 250) animated:YES];
+                    } else {
+                        [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
+                    }
+                } 
                 [cell descriptionAnimation];
             } else {
                 NSLog(@"cell is nil");
