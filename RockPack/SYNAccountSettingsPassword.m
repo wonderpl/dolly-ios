@@ -63,6 +63,12 @@
 -(void)saveButtonPressed:(UIButton*)button
 {
 	[[SYNTrackingManager sharedManager] trackAccountPropertyChanged:@"Password"];
+	
+	if (IS_IPHONE && !IS_IPHONE_5) {
+		[self.inputField resignFirstResponder];
+		[self.passwordField resignFirstResponder];
+		[self.passwordConfirmField resignFirstResponder];
+	}
     
     if([self.inputField.text isEqualToString:@""] || [self.passwordField isEqual:@""] || [self.passwordConfirmField isEqual:@""]) {
         self.errorLabel.text = NSLocalizedString (@"Please Fill All Fields", nil);
