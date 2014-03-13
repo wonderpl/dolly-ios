@@ -51,8 +51,7 @@
          completionHandler: (MKNKUserSuccessBlock) completionBlock
               errorHandler: (MKNKUserErrorBlock) errorBlock;
 
--(void) addChannelSubscriptionsObject:(Channel *)channel;
--(void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
--(void) subscribedList;
-
+- (void) addChannelSubscriptionsObject:(Channel *)channel;
+- (void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
+- (void) subscribedList;
 @end

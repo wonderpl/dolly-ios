@@ -391,7 +391,7 @@
 {
 	[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
 	[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
-	
+    [SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:YES];
     if ([SYNLoginManager sharedManager].registrationCheck == YES) {
         self.onBoardingViewController = [[SYNOnBoardingViewController alloc]init];
         self.window.rootViewController = self.onBoardingViewController;
