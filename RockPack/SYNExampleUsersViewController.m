@@ -13,8 +13,6 @@
 #import "SYNNetworkEngine.h"
 #import "SYNGradientMaskView.h"
 
-static const CGFloat ScrollAnimationDuration = 1.0;
-
 @interface SYNExampleUsersViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
