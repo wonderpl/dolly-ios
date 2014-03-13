@@ -32,11 +32,11 @@ PODS:
     - Reachability (~> 3.1.0)
   - Ooyala (1.5.1)
   - Reachability (3.1.1)
-  - SDWebImage (3.5.2):
+  - SDWebImage (3.5.4):
     - SDWebImage/Core
-  - SDWebImage/Core (3.5.2)
+  - SDWebImage/Core (3.5.4)
   - SSKeychain (0.2.1)
-  - TestFlightSDK (2.2.3-beta)
+  - TestFlightSDK (3.0.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -69,8 +69,8 @@ SPEC CHECKSUMS:
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
   Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
+  SDWebImage: 1a62010700adbba823b621fc217906739dbf6aa5
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
-  TestFlightSDK: a959afdd20fd2a43a198bab1e6aa81f9469e5423
+  TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
 
 COCOAPODS: 0.29.0
