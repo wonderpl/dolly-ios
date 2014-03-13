@@ -219,6 +219,8 @@
 
 - (void) scrollViewDidScroll: (UIScrollView *) scrollView
 {
+    [super scrollViewDidScroll:scrollView];
+    
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height - kLoadMoreFooterViewHeight
         && self.isLoadingMoreContent == NO)
     {
