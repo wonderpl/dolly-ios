@@ -457,28 +457,11 @@
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
-    
-    
-    if (IS_IPAD) {
-        [self performSelector:@selector(showInboardingAnimationDescription) withObject:nil afterDelay:1.2f];
-
-    } else {
-        
-        if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsYourProfileFirstTime])
-        {
-
-            if (IS_IPHONE) {
-                if (!IS_IPHONE_5) {
-                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 250) animated:YES];
-                } else {
-                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
-                }
-            } else {
-                [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
-            }
-            [self performSelector:@selector(showInboardingAnimationDescription) withObject:nil afterDelay:0.9f];
-        }
-    }
+        double delayInSeconds = 0.9;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self showInboardingAnimationDescription];
+        });
     
     
 }
@@ -2942,13 +2925,23 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         cell = ((SYNChannelMidCell*)[self.channelThumbnailCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]]);
         
         NSInteger value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsOtherPersonsProfile];
-        if (value<=2)
+        if (value<2)
         {
             if (cell) {
-                [cell descriptionAnimation];
+            if (IS_IPHONE) {
+                if (!IS_IPHONE_5) {
+                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 250) animated:YES];
+                } else {
+                    [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
+                }
+            } else {
+                [self.channelThumbnailCollectionView setContentOffset:CGPointMake(0, 150) animated:YES];
             }
             value+=1;
             [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsOtherPersonsProfile];
+
+                [cell descriptionAnimation];
+            }
         }
     }
     else if (self.modeType == kModeMyOwnProfile) {

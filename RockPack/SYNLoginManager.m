@@ -223,7 +223,7 @@
 
         // == other user animation < = 2
         // == inboarding description
-        [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: kUserDefaultsOtherPersonsProfile];
+        [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsOtherPersonsProfile];
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsMoodFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsCreateChannelFirstTime];
