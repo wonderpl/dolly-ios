@@ -14,6 +14,7 @@ extern NSString *const OOOoyalaPlayerViewControllerFullscreenEnter;
 extern NSString *const OOOoyalaPlayerViewControllerFullscreenExit;
 
 @class OOOoyalaAPIClient;
+@class OOControlsViewController;
 
 /**
  * Main ViewController class for Ooyala player.
@@ -116,21 +117,29 @@ embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator
          controlType:(OOOoyalaPlayerControlType)controlType;
 
 /**
- * Loads a dictionary of localized strings for specified locale
- * @param[in] localeId Locale ID such as @"en_US"
+ * Loads a dictionary of language strings according to language settings in the device
  */
-+ (NSDictionary*)loadLocalizedStrings:(NSString *)localeId;
++ (void)loadDeviceLanguage;
 
 /**
- * Instructs the player to use supplied localized strings, regardless of system language
- * @param[in] strings Dictionary of localized strings to use
+ *  Instructs the player to use given dictionary of language, regardless of localization
  */
-+ (void)useLocalizedStrings:(NSDictionary *)strings;
++ (void)useLanguageStrings:(NSDictionary *)strings;
 
 /**
- * Returns a dictionary of currently used localized strings
+ * Returns a dictionary of language according to the given language string
  */
-+ (NSDictionary*)currentLocalizedStrings;
++ (NSDictionary*)getLanguageSettings:(NSString *)language;
+
+/**
+ * Returns a dictionary of current language
+ */
++ (NSDictionary*)currentLanguageSettings;
+
+/**
+ * Returns the currently active controls
+ */
+- (OOControlsViewController *)getControls;
 
 /**
  * Shows controls on the current player

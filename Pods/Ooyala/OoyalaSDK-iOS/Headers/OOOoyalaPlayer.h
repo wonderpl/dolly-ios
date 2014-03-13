@@ -113,12 +113,7 @@ extern NSString *const OOOoyalaPlayerAdSkippedNotification; /**< Fires when an a
 extern NSString *const OOOoyalaPlayerErrorNotification; /**< Fires when an error occurs */
 extern NSString *const OOOoyalaPlayerAdErrorNotification; /**< Fires when an error occurs while trying to play an ad */
 extern NSString *const OOOoyalaPlayerMetadataReadyNotification; /**< Fires when content metadata is ready to be accessed */
-
-/**
- * Fires when the presentation size of the video changes.
- * userInfo holds the new CGSize wrapped in an NSValue for the key "presentationSize".
- */
-extern NSString *const OOOoyalaPlayerPresentationSizeChangedNotification;
+extern NSString *const OOOoyalaPlayerLanguageChangedNotification; /**< Fires when close caption language changed*/
 
 @interface OOOoyalaPlayer : NSObject
 
@@ -146,7 +141,6 @@ extern NSString *const OOOoyalaPlayerPresentationSizeChangedNotification;
 @property (readonly, nonatomic, getter = isExternalPlaybackActive) BOOL externalPlaybackActive;
 
 @property (nonatomic) BOOL allowsExternalPlayback;
-@property(nonatomic, assign) NSTimeInterval suspendTime;
 @property (nonatomic) float playbackRate; /** the rate of playback. 1 is the normal speed.  Set to .5 for half speed, 2 for double speed, etc. */
 @property (readonly, nonatomic) NSString *authToken;
 
@@ -337,6 +331,11 @@ embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator;
  * @returns an NSArray containing the available closed captions languages as NSStrings
  */
 - (NSArray *)availableClosedCaptionsLanguages;
+
+/**
+ * Set the closed caption with given language
+ */
+- (void)setClosedCaptionsLanguage:(NSString *)language;
 
 /**
  * Get the current bitrate
