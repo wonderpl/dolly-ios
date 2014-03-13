@@ -78,7 +78,7 @@
     saveButton.frame = CGRectMake(self.view.frame.size.width * 0.5f - 70.0f,
                                   0.0f,
                                   140.0f,
-                                  44.0f);
+                                  34.0f);
     
     [saveButton setTitle:@"Save" forState:UIControlStateNormal];
     
@@ -136,13 +136,17 @@
     
     [self.view addSubview: inputField];
     
-    errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(5.0,
-                                                            saveButton.frame.origin.y + saveButton.frame.size.height + 6.0,
-                                                            self.preferredContentSize.width - 10.0,
-                                                            50)];
-    
-    
-    
+	if (IS_IPAD) {
+		errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(5.0,
+																CGRectGetMaxY(saveButton.frame) + 2.0,
+																self.view.frame.size.width - 10.0,
+																24)];
+	} else {
+		errorLabel = [[UILabel alloc] initWithFrame: CGRectMake(5.0,
+																CGRectGetMaxY(saveButton.frame) + 2.0,
+																self.view.frame.size.width - 10.0,
+																50)];
+	}
     
     // == Spinner == //
     
@@ -153,11 +157,7 @@
     
     // == Error == //
     
-    errorLabel.textColor = [UIColor colorWithRed: (11.0/255.0)
-                                           green: (166.0/255.0)
-                                            blue: (171.0/255.0)
-                                           alpha: (1.0)];
-    
+	errorLabel.textColor = [UIColor redColor];
     errorLabel.font = [UIFont lightCustomFontOfSize: 18];
     errorLabel.numberOfLines = 0;
     errorLabel.textAlignment = NSTextAlignmentCenter;
@@ -192,7 +192,7 @@
     
     
     CGRect errorTextFrame = errorLabel.frame;
-    errorTextFrame.origin.y = saveButtonFrame.origin.y + saveButtonFrame.size.height + 10.0;
+    errorTextFrame.origin.y = saveButtonFrame.origin.y + saveButtonFrame.size.height + 2.0;
     errorLabel.frame = CGRectIntegral(errorTextFrame);
     
     

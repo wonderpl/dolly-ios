@@ -81,7 +81,7 @@
     }
     
     if([self.inputField.text isEqualToString:passwordField.text]) {
-        self.errorLabel.text = NSLocalizedString (@"The new password typed is the same with old", nil);
+        self.errorLabel.text = NSLocalizedString (@"The new password typed is the same as the old one", nil);
         return;
     }
     
