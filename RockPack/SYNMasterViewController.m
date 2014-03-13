@@ -130,7 +130,7 @@
             
             self.containerViewController.view = self.containerView;
             
-			[appDelegate handlePendingNotification];
+			[appDelegate handlePendingOpenURL];
         }];
     } else {
         [self addChildViewController:self.containerViewController];

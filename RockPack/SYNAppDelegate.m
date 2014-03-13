@@ -54,7 +54,7 @@
 @property (nonatomic, strong) SYNVideoQueue *videoQueue;
 @property (nonatomic, strong) SYNNavigationManager* navigationManager;
 @property (nonatomic, strong) User *currentUser;
-@property (nonatomic, strong) NSDictionary *pendingNotificationDictionary;
+@property (nonatomic, strong) NSURL *pendingOpenURL;
 
 @end
 
@@ -213,16 +213,7 @@
         if (userInfo != nil)
         {
             DebugLog(@"Launched from push notification: %@", userInfo);
-			if (self.masterViewController.showingViewController) {
-				[self handleRemoteNotification: userInfo];
-			} else {
-				// FIXME: This is a really dodgy hack to sort out an issue with how the view hierarchy is set up.
-				// There isn't any showingViewController until the call to get the categories returns in
-				// viewDidLoad in MasterViewController. Since we expect it to exist in order to show the notification
-				// this causes problems. So I'm currently storing it here and going to handle it when we finish
-				// getting the categories
-				self.pendingNotificationDictionary = userInfo;
-			}
+			[self handleRemoteNotification: userInfo];
         }
     }
     
@@ -998,11 +989,11 @@
     }
 }
 
-- (void)handlePendingNotification {
-	if (self.pendingNotificationDictionary) {
-		[self handleRemoteNotification:self.pendingNotificationDictionary];
+- (void)handlePendingOpenURL {
+	if (self.pendingOpenURL) {
+		[self parseAndActionRockpackURL:self.pendingOpenURL];
 	}
-	self.pendingNotificationDictionary = nil;
+	self.pendingOpenURL = nil;
 }
 
 
@@ -1322,6 +1313,15 @@
 
 - (BOOL) parseAndActionRockpackURL: (NSURL *) url
 {
+	if (!self.masterViewController.showingViewController) {
+		// FIXME: This is a really dodgy hack to sort out an issue with how the view hierarchy is set up.
+		// There isn't any showingViewController until the call to get the categories returns in
+		// viewDidLoad in MasterViewController. Since we expect it to exist in order to show the notification
+		// this causes problems. So I'm currently storing it here and going to handle it when we finish
+		// getting the categories
+		self.pendingOpenURL = url;
+	}
+	
     BOOL success = FALSE;
     
     if (self.currentUser)
