@@ -207,7 +207,13 @@ static const NSInteger UsernameMaxLength = 20;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[self submitUsername];
+	if (textField == self.firstNameTextField) {
+		[self.lastNameTextField becomeFirstResponder];
+	} else if (textField == self.lastNameTextField) {
+		[self.usernameTextField becomeFirstResponder];
+	} else {
+		[self submitUsername];
+	}
 	
 	return YES;
 }
