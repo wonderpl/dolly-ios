@@ -54,6 +54,6 @@
 - (void) resetCurrentOAuth2Credentials;
 - (void) setTokenExpiryTimer;
 
-- (void)handlePendingNotification;
+- (void)handlePendingOpenURL;
 
 @end
