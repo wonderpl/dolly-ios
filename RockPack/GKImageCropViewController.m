@@ -196,7 +196,7 @@
 
 - (UIImage *) _toolbarBackgroundImage
 {
-    const float colorMask[6] = {
+    const CGFloat colorMask[6] = {
         222, 255, 222, 255, 222, 255
     };
     
