@@ -213,6 +213,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	[self fadeOutLoadingView];
     
 	[self fadeInControls];
+	
+	[self.delegate videoPlayerStartedPlaying];
 }
 
 - (void)handleVideoPlayerPaused {
