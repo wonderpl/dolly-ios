@@ -55,25 +55,22 @@
     NSNumber *priorityString = (NSNumber *) dictionary[@"priority"];
     self.priority = @([priorityString integerValue]);
     
-    // Parse Subcategories
-    
-    if ([dictionary[@"sub_categories"] isKindOfClass: [NSArray class]])
-    {
-        NSLock *lock = [NSLock new];
-        @synchronized(lock) { // to protect from very rare "Collection <__NSCFSet: 0xc1e0040> was mutated while being enumerated"
-        NSMutableArray *subgenresArray = [[NSMutableArray alloc] initWithCapacity:((NSArray*)dictionary[@"sub_categories"]).count];
-            
-        for (NSDictionary *subgenreData in dictionary[@"sub_categories"])
-        {
-            SubGenre *subgenre = [SubGenre instanceFromDictionary: subgenreData
-                                        usingManagedObjectContext: managedObjectContext];
-            
-            [subgenresArray addObject: subgenre];
-        }
-        
-            self.subgenres = [NSOrderedSet orderedSetWithArray:subgenresArray];
-        }
-    }
+	NSArray *subcategoryDictionaries = dictionary[@"sub_categories"];
+	NSLog(@"Subcategories: %@", subcategoryDictionaries);
+	
+	NSSortDescriptor *prioritySortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:NO];
+	NSArray *sortedSubcategoryDictionaries = [subcategoryDictionaries sortedArrayUsingDescriptors:@[ prioritySortDescriptor ]];
+	
+	NSLog(@"Sorted: %@", sortedSubcategoryDictionaries);
+	
+	NSMutableArray *subgenres = [NSMutableArray array];
+	for (NSDictionary *subcategoryDictionary in sortedSubcategoryDictionaries) {
+		SubGenre *subgenre = [SubGenre instanceFromDictionary:subcategoryDictionary
+									usingManagedObjectContext:self.managedObjectContext];
+		[subgenres addObject:subgenre];
+	}
+	
+	self.subgenres = [NSOrderedSet orderedSetWithArray:subgenres];
 }
 
 - (NSArray *) getSubGenreIdArray
