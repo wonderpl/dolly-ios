@@ -88,6 +88,8 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackRegistrationScreenView;
 - (void)trackRegistrationStep2ScreenView;
 
+- (void)trackOnboardingScreenView;
+
 - (void)trackMoodMinderScreenView;
 - (void)trackDiscoverScreenView;
 - (void)trackFeedScreenView;

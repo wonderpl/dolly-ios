@@ -158,6 +158,12 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[[SYNTrackingManager sharedManager] trackOnboardingScreenView];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
 	return UIStatusBarStyleDefault;
 }

@@ -279,6 +279,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackScreenViewWithName:@"Registration 2"];
 }
 
+- (void)trackOnboardingScreenView {
+	[self trackScreenViewWithName:@"Onboarding"];
+}
+
 - (void)trackMoodMinderScreenView {
 	[self trackScreenViewWithName:@"Mood-Minder"];
 }
