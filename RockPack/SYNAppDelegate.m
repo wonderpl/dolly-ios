@@ -27,6 +27,7 @@
 #import "SYNOnBoardingViewController.h"
 #import "SYNOnBoardingOverlayViewController.h"
 #import "SYNTrackingManager.h"
+#import "SYNYouTubeWebView.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <ACTReporter.h>
 #import <TestFlight.h>
@@ -138,7 +139,7 @@
     // Subscriptions Manager //
     self.channelManager = [SYNChannelManager manager];
     
-    
+    [SYNYouTubeWebView setup];
     
     // Video Queue View Controller //
     self.navigationManager = [SYNNavigationManager manager];

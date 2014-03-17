@@ -568,6 +568,7 @@
 		E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */; };
 		E93E10E6183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */; };
 		E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */; };
+		E947097318D70F21000174A7 /* SYNYouTubeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E947097218D70F21000174A7 /* SYNYouTubeWebView.m */; };
 		E94BEFA918C9F18F00762651 /* _Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFA818C9F18F00762651 /* _Recommendation.m */; };
 		E94BEFAC18C9F19A00762651 /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAB18C9F19A00762651 /* Recommendation.m */; };
 		E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */; };
@@ -1456,6 +1457,8 @@
 		E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNYouTubeWebVideoPlayer.m; sourceTree = "<group>"; };
 		E93E10E7183512D600A62F64 /* SYNOoyalaVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOoyalaVideoPlayer.h; sourceTree = "<group>"; };
 		E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOoyalaVideoPlayer.m; sourceTree = "<group>"; };
+		E947097118D70F21000174A7 /* SYNYouTubeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNYouTubeWebView.h; sourceTree = "<group>"; };
+		E947097218D70F21000174A7 /* SYNYouTubeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNYouTubeWebView.m; sourceTree = "<group>"; };
 		E94BEFA718C9F18F00762651 /* _Recommendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Recommendation.h; sourceTree = "<group>"; };
 		E94BEFA818C9F18F00762651 /* _Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Recommendation.m; sourceTree = "<group>"; };
 		E94BEFAA18C9F19A00762651 /* Recommendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recommendation.h; sourceTree = "<group>"; };
@@ -2485,6 +2488,8 @@
 				E98369D81889457500363709 /* SYNVideoInfoCell.h */,
 				E9F7D9FA189A99D400BA79D4 /* SYNCarouselVideoScrollView.h */,
 				E9F7D9FB189A99D400BA79D4 /* SYNCarouselVideoScrollView.m */,
+				E947097118D70F21000174A7 /* SYNYouTubeWebView.h */,
+				E947097218D70F21000174A7 /* SYNYouTubeWebView.m */,
 			);
 			name = "Video Player";
 			sourceTree = "<group>";
@@ -4352,6 +4357,7 @@
 				BEA043E716CAA8E1005406E7 /* Genre.m in Sources */,
 				012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */,
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,
+				E947097318D70F21000174A7 /* SYNYouTubeWebView.m in Sources */,
 				E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
 				0E3AE6901875DE8C008A8D00 /* SYNGenreManager.m in Sources */,
