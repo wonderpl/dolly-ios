@@ -17,7 +17,8 @@
 typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStateInitialised,
 	SYNYouTubeVideoPlayerStateReady,
-	SYNYouTubeVideoPlayerStateLoaded
+	SYNYouTubeVideoPlayerStateLoaded,
+	SYNYouTubeVideoPlayerStatePlayStarted
 };
 
 @interface SYNYouTubeWebVideoPlayer () <UIWebViewDelegate>
@@ -98,7 +99,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 - (void)play {
 	[super play];
 	
-	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
+	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded || self.youTubePlayerState == SYNYouTubeVideoPlayerStatePlayStarted) {
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
 	} else {
 		[self loadPlayer];
@@ -142,7 +143,8 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	}
 	
 	if ([actionName isEqualToString:@"stateChange"]) {
-		if ([actionData isEqualToString:@"playing"]) {
+		if ([actionData isEqualToString:@"playing"] && self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
+			self.youTubePlayerState = SYNYouTubeVideoPlayerStatePlayStarted;
 			[self handleVideoPlayerStartedPlaying];
 		}
 		if ([actionData isEqualToString:@"paused"]) {

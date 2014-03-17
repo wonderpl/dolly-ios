@@ -45,6 +45,8 @@
 
 @property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
+@property (nonatomic, assign) NSTimeInterval autoplayStartTime;
+
 @property (nonatomic, strong) SYNRotatingPopoverController *commentPopoverController;
 
 @end
@@ -207,6 +209,15 @@
 											   }];
 }
 
+- (void)videoPlayerStartedPlaying {
+	if (self.autoplayStartTime) {
+		NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
+		
+		[[SYNTrackingManager sharedManager] trackVideoLoadTime:currentTime - self.autoplayStartTime];
+		self.autoplayStartTime = 0;
+	}
+}
+
 - (void)videoPlayerFinishedPlaying {
 	
 }
@@ -324,6 +335,8 @@
 	} else {
 		[self.videoPlayerContainerView addSubview:videoPlayer];
 	}
+	
+	self.autoplayStartTime = [NSDate timeIntervalSinceReferenceDate];
 	
 	[videoPlayer play];
 }

@@ -76,6 +76,8 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackMoodSelected:(NSString *)name;
 - (void)trackIPadMoodVideoSelected:(NSString *)name;
 
+- (void)trackVideoLoadTime:(NSTimeInterval)loadTime;
+
 - (void)trackVideoView:(NSString *)videoId currentTime:(CGFloat)currentTime duration:(CGFloat)duration;
 
 - (void)trackAccountPropertyChanged:(NSString *)property;

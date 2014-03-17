@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 - (void)videoPlayerMaximise;
 - (void)videoPlayerMinimise;
 
+- (void)videoPlayerStartedPlaying;
+
 - (void)videoPlayerVideoViewed;
 - (void)videoPlayerFinishedPlaying;
 
