@@ -11,9 +11,8 @@
 #import "Video.h"
 #import "SYNScrubberBar.h"
 #import "SYNVideoPlayer+Protected.h"
+#import "SYNYouTubeWebView.h"
 #import <Reachability.h>
-
-static const CGFloat VideoAspectRatio = 16.0 / 9.0;;
 
 typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStateInitialised,
@@ -41,9 +40,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	return self;
 }
 
-- (void)dealloc {
-	self.youTubeWebView.delegate = nil;
-}
+#pragma mark - UIView
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
@@ -61,25 +58,14 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (UIWebView *)youTubeWebView {
 	if (!_youTubeWebView) {
-		CGRect screenBounds = [[UIScreen mainScreen] bounds];
+		UIWebView *webView = [SYNYouTubeWebView webView];
 		
-		CGSize videoPlayerSize = CGSizeMake(round(CGRectGetHeight(screenBounds)),
-											round(CGRectGetHeight(screenBounds) / VideoAspectRatio));
-		
-		CGRect videoPlayerRect = CGRectMake(0, 0, videoPlayerSize.width, videoPlayerSize.height);
-		
-		UIWebView *webView = [[UIWebView alloc] initWithFrame:videoPlayerRect];
-		webView.scrollView.scrollEnabled = NO;
-		webView.allowsInlineMediaPlayback = YES;
-		webView.mediaPlaybackRequiresUserAction = NO;
-		
-		NSString *templateHTMLString = [NSString stringWithContentsOfURL:[self URLForPlayerHTML] encoding:NSUTF8StringEncoding error:nil];
-		
-		NSString *iFrameHTML = [NSString stringWithFormat:templateHTMLString,
-								(int)videoPlayerSize.width,
-								(int)videoPlayerSize.height];
-		
-		[webView loadHTMLString:iFrameHTML baseURL:[NSURL URLWithString: @"http://www.youtube.com"]];
+		// The method is meant to return a number, so the only way it will return an empty string is if the method
+		// isn't loaded, which will only happen if the player isn't ready
+		BOOL isPlayerReady = ([[webView stringByEvaluatingJavaScriptFromString:@"player.getPlayerState()"] length] > 0);
+		if (isPlayerReady) {
+			self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
+		}
 		
 		webView.delegate = self;
 		
@@ -183,19 +169,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 - (void)updatePlayerSize:(CGSize)size {
 	NSString *javascript = [NSString stringWithFormat:@"player.setSize(%f, %f);", size.width, size.height];
 	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:javascript];
-}
-
-- (NSURL *)URLForPlayerHTML {
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	
-	NSURL *documentsURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-	NSURL *fileURL = [documentsURL URLByAppendingPathComponent:@"YouTubeIFramePlayer.html"];
-	
-	if ([fileManager fileExistsAtPath:[fileURL path]]) {
-		return fileURL;
-	}
-	
-	return [[NSBundle mainBundle] URLForResource:@"YouTubeIFramePlayer" withExtension:@"html"];
 }
 
 - (void)loadPlayer {
