@@ -525,6 +525,7 @@
 
 
 - (void) followControlPressed: (SYNSocialButton *) socialControl {
+ 
     if ([socialControl.dataItemLinked isKindOfClass: [Channel class]]) {
         // Get the channel associated with the control pressed
         Channel *channel = socialControl.dataItemLinked;
@@ -542,6 +543,8 @@
         if(channelOwner.subscribedByUserValue == NO)
         {
             
+            socialControl.enabled = NO;
+
             [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
                                                completionHandler: ^(id responce) {
                                                     
@@ -558,6 +561,9 @@
         }
         else
         {
+            
+            socialControl.enabled = NO;
+
             [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
                                                   completionHandler:^(id responce) {
                                                       
