@@ -339,13 +339,11 @@
     {
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login_ipad" bundle:nil];
 		self.loginViewController = [storyboard instantiateInitialViewController];
-//        self.loginViewController = [[SYNLoginViewController alloc] init];
     }
     else
     {
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login_iphone" bundle:nil];
 		self.loginViewController = [storyboard instantiateInitialViewController];
-//        self.loginViewController = [[SYNLoginViewControllerIphone alloc] init];
     }
     
     return self.loginViewController;
