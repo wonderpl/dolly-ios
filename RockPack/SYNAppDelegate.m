@@ -102,33 +102,9 @@
                withObject: nil
                afterDelay: 0];
     
-    // Interesting trick to get the user agent string (so that we can send (rough) details about what platform and version of the OS
-    // will be similar to... "Mozilla/5.0 (iPad; CPU OS 6_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B141"
-    UIWebView *webView = [[UIWebView alloc]initWithFrame: CGRectZero];
-    NSString *completeUserAgentString = [webView stringByEvaluatingJavaScriptFromString: @"navigator.userAgent"];
-    
-    NSString *bundleAndVersionString = [NSString stringWithFormat: @"%@/%@",
-                                        [[NSBundle mainBundle] infoDictionary][(NSString *) kCFBundleNameKey],
-                                        [[NSBundle mainBundle] infoDictionary][(NSString *) kCFBundleVersionKey]];
-    
-    // We just want the bit in-between the first set of brackets
-    NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString: @"()"];
-	
 	UIImage *backButtonImage = [[UIImage imageNamed:@"BackButtonApp.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 	[[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
 	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
-    
-    NSArray *agentSubStrings = [completeUserAgentString componentsSeparatedByCharactersInSet: separatorSet];
-    
-    if (agentSubStrings.count > 1)
-    {
-        self.userAgentString = [NSString stringWithFormat: @"%@ (%@)", bundleAndVersionString, agentSubStrings [1]];
-    }
-    else
-    {
-        // Shouldn't happen, but programming defensively
-        self.userAgentString = bundleAndVersionString;
-    }
     
     // Se up CoreData //
     [self initializeCoreDataStack];
@@ -1485,6 +1461,20 @@
     }
 }
 
+- (NSString *)userAgentString {
+	if (!_userAgentString) {
+		NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+		
+		NSString *bundleName = infoDictionary[(NSString *)kCFBundleNameKey];
+		NSString *bundleVersion = infoDictionary[(NSString *)kCFBundleVersionKey];
+		
+		NSString *deviceModel = [[UIDevice currentDevice] model];
+		NSString *osVersion = [[UIDevice currentDevice] systemVersion];
+		
+		self.userAgentString = [NSString stringWithFormat:@"%@/%@ (%@; iOS %@)", bundleName, bundleVersion, deviceModel, osVersion];
+	}
+	return _userAgentString;
+}
 
 - (NSURLRequest *) connection: (NSURLConnection *) connection
               willSendRequest: (NSURLRequest *) request
