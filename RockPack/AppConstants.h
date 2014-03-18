@@ -472,7 +472,7 @@ typedef enum : NSInteger {
 //
 
 // TestFlight support
-#define  kTestFlightAppToken @"06088ae8-9f37-4fc5-aa05-2598b3a86bca"
+#define  kTestFlightAppToken @"c051d2e5-ef68-4bda-b71c-86393cba33f2"
 
 // Google Analytics
 #ifdef DEBUG
