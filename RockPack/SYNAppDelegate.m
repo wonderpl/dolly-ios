@@ -78,9 +78,6 @@
     //[Appirater setDebug: YES];
 #endif
     
-#if USEUDID
-    //    [TestFlight setDeviceIdentifier: [[UIDevice currentDevice] uniqueIdentifier]];
-#endif
     // Google Adwords conversion tracking.
 	[ACTConversionReporter reportWithConversionID:@"983664386"
 											label:@"Km3nCP6G-wQQgo6G1QM"
