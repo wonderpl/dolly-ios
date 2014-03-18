@@ -100,7 +100,6 @@
 		01946B981683339F00354601 /* VideoInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B961683339F00354601 /* VideoInstance.m */; };
 		0194FD2216DE6FE40058A7C2 /* SYNVideoThumbnailCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EA81C616B9487A0069AFF9 /* SYNVideoThumbnailCell~ipad.xib */; };
 		0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EA81C416B9483D0069AFF9 /* SYNVideoThumbnailCell.m */; };
-		019824EC1629CBDF00216900 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 019824EB1629CBDF00216900 /* UncaughtExceptionHandler.m */; };
 		019824F01629CC7600216900 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824EE1629CC7600216900 /* libTestFlight.a */; };
 		019824F21629CE1600216900 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824F11629CE1600216900 /* libz.dylib */; };
 		0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198250B1629DCF100216900 /* SYNContainerViewController.m */; };
@@ -810,8 +809,6 @@
 		01946B941683339F00354601 /* ChannelOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelOwner.m; sourceTree = "<group>"; };
 		01946B951683339F00354601 /* VideoInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoInstance.h; sourceTree = "<group>"; };
 		01946B961683339F00354601 /* VideoInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoInstance.m; sourceTree = "<group>"; };
-		019824EA1629CBDF00216900 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
-		019824EB1629CBDF00216900 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		019824EE1629CC7600216900 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = RockPack/libTestFlight.a; sourceTree = "<group>"; };
 		019824F11629CE1600216900 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0198250A1629DCF100216900 /* SYNContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNContainerViewController.h; sourceTree = "<group>"; };
@@ -2080,7 +2077,6 @@
 				01AEFBCA1701AC270060467A /* Activity Manager */,
 				BE285DB91726826800D995AB /* Channels Manager */,
 				BE7D34CB171443330085AB81 /* Device */,
-				019824E91629CBD000216900 /* Exception Handler */,
 				011A162016EF5E96008CF25E /* Image Picker */,
 				019E6A5E165FD958002B312A /* OAuth2 */,
 				012502BA16CA8FCE0029C7C8 /* Social Media */,
@@ -2089,15 +2085,6 @@
 				E9E1E27918561BFF0051E312 /* Paging Models */,
 			);
 			name = Helpers;
-			sourceTree = "<group>";
-		};
-		019824E91629CBD000216900 /* Exception Handler */ = {
-			isa = PBXGroup;
-			children = (
-				019824EA1629CBDF00216900 /* UncaughtExceptionHandler.h */,
-				019824EB1629CBDF00216900 /* UncaughtExceptionHandler.m */,
-			);
-			name = "Exception Handler";
 			sourceTree = "<group>";
 		};
 		019824F41629CEA200216900 /* App Icons */ = {
@@ -4297,7 +4284,6 @@
 				010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */,
 				E9B068E8185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m in Sources */,
 				015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */,
-				019824EC1629CBDF00216900 /* UncaughtExceptionHandler.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */,
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,

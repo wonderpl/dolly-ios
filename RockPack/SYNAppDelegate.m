@@ -22,7 +22,6 @@
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
-#import "UncaughtExceptionHandler.h"
 #import "SYNLoginManager.h"
 #import "SYNOnBoardingViewController.h"
 #import "SYNOnBoardingOverlayViewController.h"
@@ -94,11 +93,6 @@
         DebugLog(@"Error setting AVAudioSessionCategoryPlayback: %@", setCategoryError);
     }
     
-    // Install our exception handler (must happen on the next turn through the event loop - as opposed to right now)
-    [self performSelector: @selector(installUncaughtExceptionHandler)
-               withObject: nil
-               afterDelay: 0];
-    
 	UIImage *backButtonImage = [[UIImage imageNamed:@"BackButtonApp.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 	[[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
 	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
@@ -133,6 +127,9 @@
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
 	self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+	
+    [TestFlight addCustomEnvironmentInformation:[NSString stringWithFormat:@"Current User: %@", self.currentUser.username] forKey:@"User Name"];
+    [TestFlight takeOff: kTestFlightAppToken];
 	
 	[[SYNTrackingManager sharedManager] setup];
 	[[SYNTrackingManager sharedManager] setLocaleDimension:[NSLocale currentLocale]];
@@ -477,19 +474,6 @@
     // We need to save out database here (not in background)
     [self saveContext: kSaveSynchronously];
 }
-
-
-#pragma mark - Exception handler
-
-- (void) installUncaughtExceptionHandler
-{
-    InstallUncaughtExceptionHandler();
-
-    [TestFlight addCustomEnvironmentInformation:[NSString stringWithFormat:@"Current User: %@", self.currentUser.username] forKey:@"User Name"];
-
-    [TestFlight takeOff: kTestFlightAppToken];
-}
-
 
 #pragma mark - Core Data stack
 
