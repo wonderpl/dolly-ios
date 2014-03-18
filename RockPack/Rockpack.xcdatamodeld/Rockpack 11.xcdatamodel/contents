@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractCommon" representedClassName="AbstractCommon" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletion" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
@@ -105,7 +105,7 @@
         <attribute name="resourceURL" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Genre" representedClassName="Genre" parentEntity="AbstractCommon" syncable="YES">
-        <attribute name="color" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="Integer 64" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="priority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="subgenres" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SubGenre" inverseName="genre" inverseEntity="SubGenre" syncable="YES"/>
@@ -167,21 +167,21 @@
         <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="videoInstances" inverseEntity="Video" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AbstractCommon" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Channel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ChannelCover" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ChannelOwner" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Comment" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="CoverArt" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ExternalAccount" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="FeedItem" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Genre" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Mood" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Recommendation" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SubGenre" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Video" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="VideoInstance" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AbstractCommon" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Channel" positionX="0" positionY="0" width="128" height="315"/>
+        <element name="ChannelCover" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="ChannelOwner" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="Comment" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="CoverArt" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="ExternalAccount" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="FeedItem" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="Friend" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="Genre" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Mood" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="Recommendation" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="SubGenre" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="User" positionX="0" positionY="0" width="128" height="240"/>
+        <element name="Video" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="VideoInstance" positionX="0" positionY="0" width="128" height="165"/>
     </elements>
 </model>
