@@ -56,12 +56,9 @@
     self.priority = @([priorityString integerValue]);
     
 	NSArray *subcategoryDictionaries = dictionary[@"sub_categories"];
-	NSLog(@"Subcategories: %@", subcategoryDictionaries);
 	
 	NSSortDescriptor *prioritySortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:NO];
 	NSArray *sortedSubcategoryDictionaries = [subcategoryDictionaries sortedArrayUsingDescriptors:@[ prioritySortDescriptor ]];
-	
-	NSLog(@"Sorted: %@", sortedSubcategoryDictionaries);
 	
 	NSMutableArray *subgenres = [NSMutableArray array];
 	for (NSDictionary *subcategoryDictionary in sortedSubcategoryDictionaries) {
