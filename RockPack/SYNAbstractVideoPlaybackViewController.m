@@ -580,31 +580,31 @@
     }
     
     // Now, if we have viewed more than kPercentageThresholdForView%, then mark as viewed
-    if (viewedPercentage > kPercentageThresholdForView && self.currentVideoViewedFlag == FALSE)
-    {
-        // Don't mark as viewed again
-        self.currentVideoViewedFlag = TRUE;
-        
-        SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
-        
-        // Just double-check that we have both params required for
-        if (self.currentVideoInstance.uniqueId && appDelegate.currentOAuth2Credentials.userId)
-        {
-            // Update the star/unstar status on the server
-            [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                             action: @"view"
-                                                    videoInstanceId: self.currentVideoInstance.uniqueId
-                                                  completionHandler: ^(NSDictionary *responseDictionary) {
-                                                  }
-                                                       errorHandler: ^(NSDictionary* errorDictionary) {
-                                                           DebugLog(@"View action failed");
-                                                       }];
-        }
-        else
-        {
-            AssertOrLog(@"We seem to be missing one of the parameters for recording video play activity");
-        }
-    }
+//    if (viewedPercentage > kPercentageThresholdForView && self.currentVideoViewedFlag == FALSE)
+//    {
+//        // Don't mark as viewed again
+//        self.currentVideoViewedFlag = TRUE;
+//        
+//        SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
+//        
+//        // Just double-check that we have both params required for
+//        if (self.currentVideoInstance.uniqueId && appDelegate.currentOAuth2Credentials.userId)
+//        {
+//            // Update the star/unstar status on the server
+//            [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentOAuth2Credentials.userId
+//                                                             action: @"view"
+//                                                    videoInstanceId: self.currentVideoInstance.uniqueId
+//                                                  completionHandler: ^(NSDictionary *responseDictionary) {
+//                                                  }
+//                                                       errorHandler: ^(NSDictionary* errorDictionary) {
+//                                                           DebugLog(@"View action failed");
+//                                                       }];
+//        }
+//        else
+//        {
+//            AssertOrLog(@"We seem to be missing one of the parameters for recording video play activity");
+//        }
+//    }
 }
 
 #pragma mark - SYNScrubberBarDelegate

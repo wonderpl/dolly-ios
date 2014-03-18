@@ -474,9 +474,6 @@ typedef enum : NSInteger {
 // TestFlight support
 #define  kTestFlightAppToken @"06088ae8-9f37-4fc5-aa05-2598b3a86bca"
 
-// Video view threshold
-#define kPercentageThresholdForView 0.1f
-
 // Google Analytics
 #ifdef DEBUG
 // Id to use for debug
@@ -486,17 +483,7 @@ typedef enum : NSInteger {
 #define kGoogleAnalyticsId @"UA-46520786-1"
 #endif
 
-// Custom GA Dimensions
-
-#define kGADimensionAge         1
-#define kGADimensionCategory    2
-#define kGADimensionGender      3
-#define kGADimensionLocale      4
-
 // Sharing messages
-
-#define kChannelShareMessage NSLocalizedString (@"Take a look at this great channel I found on Wonder PL", nil)
-#define kVideoShareMessage NSLocalizedString (@"Take a look at this great video I found on Wonder PL", nil)
 
 #endif
 
