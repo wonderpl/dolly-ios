@@ -534,19 +534,25 @@
         
         // if we have already created the FeedItem, use it
         aggregationFeedItem = aggregationItems[aggregationIndex];
-        
+		
         // else, create a new one
         if(!aggregationFeedItem)
         {
             NSDictionary* aggregationItemDictionary = aggregationsDictionary[aggregationIndex];
-            if(!(aggregationFeedItem = feedItemInstacesByUniqueId[aggregationIndex]))
-               if(!(aggregationFeedItem = [FeedItem instanceFromDictionary:aggregationItemDictionary
-                                                                    withId:aggregationIndex
-                                                 usingManagedObjectContext:importManagedObjectContext]))
-               {
-                   continue;
-               }
-                  
+			
+			aggregationFeedItem = feedItemInstacesByUniqueId[aggregationIndex];
+			
+			if (aggregationFeedItem) {
+				[aggregationFeedItem setAttributesFromDictionary:aggregationItemDictionary];
+			} else {
+				aggregationFeedItem = [FeedItem instanceFromDictionary:aggregationItemDictionary
+																withId:aggregationIndex
+											 usingManagedObjectContext:importManagedObjectContext];
+				
+				if (!aggregationFeedItem) {
+					continue;
+				}
+			}
             
             aggregationFeedItem.viewId = kFeedViewId;
             aggregationFeedItem.markedForDeletionValue = NO;
