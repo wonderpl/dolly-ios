@@ -8,7 +8,6 @@
 
 #import "SYNImagePickerController.h"
 #import "SYNCameraPopoverViewController.h"
-#import "SYNPopoverBackgroundView.h"
 
 @interface SYNImagePickerController () <SYNCameraPopoverViewControllerDelegate, UIPopoverControllerDelegate, GKImagePickerDelegate, UIActionSheetDelegate>
 
@@ -175,8 +174,6 @@
     
     
     self.cameraPopoverController = [[UIPopoverController alloc] initWithContentViewController: self.gkImagePicker.imagePickerController];
-    
-//    self.cameraPopoverController.popoverBackgroundViewClass = [SYNPopoverBackgroundView class];
     
     self.cameraPopoverController.delegate = self;
 //    [self.cameraPopoverController setPopoverContentSize:CGSizeMake(1024, 1024)];

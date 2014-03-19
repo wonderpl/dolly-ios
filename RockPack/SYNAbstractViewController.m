@@ -20,7 +20,6 @@
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNOneToOneSharingController.h"
-#import "SYNPopoverBackgroundView.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNSocialButton.h"
 #import "SYNCommentingViewController.h"
