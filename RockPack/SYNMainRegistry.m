@@ -527,7 +527,7 @@
         
         // object has been created, see if it belongs to an aggregation
         
-        NSString* aggregationIndex = itemDictionary[@"aggregation"] ? itemDictionary[@"aggregation"] : nil;
+        NSString* aggregationIndex = itemDictionary[@"aggregation"];
         if(!aggregationIndex || ![aggregationIndex isKindOfClass:[NSString class]]) // the item IS part of an aggregation
             continue;
         
