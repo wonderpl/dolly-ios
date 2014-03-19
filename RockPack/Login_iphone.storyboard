@@ -969,6 +969,7 @@
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="LoginLogo.png" width="265" height="91"/>
     </resources>
+    <color key="tintColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -45,11 +45,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	NSDictionary *textAttributes = @{ NSFontAttributeName : [UIFont regularCustomFontOfSize:15.0],
-									  NSForegroundColorAttributeName : [UIColor colorWithWhite:167/255.0 alpha:1.0] };
-	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:textAttributes
-																							forState:UIControlStateNormal];
-	
 	self.navigationController.delegate = self;
 	
 	self.appDelegate = [[UIApplication sharedApplication] delegate];
