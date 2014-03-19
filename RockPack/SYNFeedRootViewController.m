@@ -35,8 +35,6 @@
 #import "SYNTrackingManager.h"
 #import "SYNFeedOverlayViewController.h"
 
-typedef void(^FeedDataErrorBlock)(void);
-
 @interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
