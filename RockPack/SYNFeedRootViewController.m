@@ -50,14 +50,11 @@
 
 #pragma mark - Object lifecycle
 
-- (void) dealloc
-{
-    // No harm in removing all notifications, as we are being de-alloced after all..
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    
-    // Defensive programming
-    self.feedCollectionView.delegate = nil;
-    self.feedCollectionView.dataSource = nil;
+- (void) dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
+	self.feedCollectionView.delegate = nil;
+	self.feedCollectionView.dataSource = nil;
 }
 
 
