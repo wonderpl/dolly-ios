@@ -346,50 +346,6 @@
     return YES;
 }
 
-
-- (BOOL) registerChannelsFromDictionary: (NSDictionary *) dictionary
-{
-    NSDictionary *channelsDictionary = dictionary[@"channels"];
-    
-    if (!channelsDictionary || ![channelsDictionary isKindOfClass: [NSDictionary class]])
-    {
-        return NO;
-    }
-    
-    NSArray *itemArray = channelsDictionary[@"items"];
-    
-    if (![itemArray isKindOfClass: [NSArray class]])
-    {
-        return NO;
-    }
-    
-    for (NSDictionary *itemDictionary in itemArray)
-    {
-        Channel *channel = [Channel instanceFromDictionary: itemDictionary
-                                 usingManagedObjectContext: importManagedObjectContext];
-        
-        if (!channel)
-        {
-            DebugLog(@"Could not instantiate channel with data:\n%@", itemDictionary);
-            continue;
-        }
-        
-        channel.viewId = kSearchViewId;
-    }
-    
-    BOOL saveResult = [self saveImportContext];
-    
-    if (!saveResult)
-    {
-        return NO;
-    }
-    
-    [appDelegate saveSearchContext];
-    
-    return YES;
-}
-
-
 - (BOOL) registerSubscribersFromDictionary: (NSDictionary *) dictionary;
 {
     return [self registerChannelOwnersFromDictionary: dictionary

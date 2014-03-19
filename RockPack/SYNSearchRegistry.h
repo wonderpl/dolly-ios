@@ -12,7 +12,6 @@
 @interface SYNSearchRegistry : SYNRegistry
 
 - (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary;
-- (BOOL) registerChannelsFromDictionary: (NSDictionary *) dictionary;
 
 - (BOOL) registerUsersFromDictionary: (NSDictionary *) dictionary;
 

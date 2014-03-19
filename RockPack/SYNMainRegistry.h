@@ -15,11 +15,6 @@
 
 - (BOOL) registerCategoriesFromDictionary: (NSDictionary *) dictionary;
 
-
-- (BOOL) registerChannelsFromDictionary: (NSDictionary *) dictionary
-                               forGenre: (Genre *) genre
-                            byAppending: (BOOL) append;
-
 - (BOOL) registerIPBasedLocation:(NSString*)locationString;
 
 
