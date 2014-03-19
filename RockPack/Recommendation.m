@@ -31,13 +31,9 @@
     self.uniqueId = [dictionary objectForKey:@"id"
                                  withDefault:@""];
     
-    NSString* positionString = [dictionary objectForKey:@"position"];
-    if([positionString isKindOfClass:[NSString class]])
-        self.positionValue = [positionString integerValue];
-    
-    NSNumber* categoryNumber = [dictionary objectForKey:@"category"];
-    if([categoryNumber isKindOfClass:[NSNumber class]])
-        self.categoryId = categoryNumber.stringValue;
+	self.position = dictionary[@"position"];
+	
+	self.categoryId = [NSString stringWithFormat:@"%@", dictionary[@"category"]];
     
     self.displayName = [dictionary objectForKey:@"display_name"
                                     withDefault:@""];
