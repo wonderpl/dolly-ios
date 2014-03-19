@@ -2683,7 +2683,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
         [UIView animateKeyframesWithDuration:0.2 delay:0.4 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState animations:^{
             [self setCreateOffset];
             
-        } completion:Nil];
+        } completion:nil];
     }
     
     [self performSelector:@selector(updateCollectionLayout) withObject:self afterDelay:0.6f];
