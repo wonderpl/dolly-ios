@@ -31,6 +31,7 @@
 #import <ACTReporter.h>
 #import <TestFlight.h>
 #import <sqlite3.h>
+#import "SYNAppearanceManager.h"
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
@@ -86,16 +87,14 @@
     // We need to set the audio session so that that app will continue to play audio even if the mute switch is on
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *setCategoryError = nil;
-    
+	
     if (![audioSession setCategory: AVAudioSessionCategoryPlayback
                              error: &setCategoryError])
     {
         DebugLog(@"Error setting AVAudioSessionCategoryPlayback: %@", setCategoryError);
     }
-    
-	UIImage *backButtonImage = [[UIImage imageNamed:@"BackButtonApp.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-	[[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
-	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
+	
+	[SYNAppearanceManager setupGlobalAppAppearance];
     
     // Se up CoreData //
     [self initializeCoreDataStack];

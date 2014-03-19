@@ -49,40 +49,16 @@
     
     self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     
-    // set general styling things
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
-                                                           NSFontAttributeName:[UIFont regularCustomFontOfSize:(IS_IPAD ? 22.0f : 15.0f)]}];
-    
-    [[UINavigationBar appearance] setTintColor:[UIColor grayColor]];
-    
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:nil
                                                                   action:nil];
-    
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont regularCustomFontOfSize:15]];
-    
-    if (IS_IPHONE) {
-        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:15.0]}    forState:UIControlStateNormal];
-    }
-    else
-    {
-        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
-        
-    }
-    
-    
+	
     // == Feed Page == //
     
     SYNFeedRootViewController *feedRootViewController = [[SYNFeedRootViewController alloc] initWithViewId: kFeedViewId];
     feedRootViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
-    
-
-    
     
     // == Profile Page == //
 

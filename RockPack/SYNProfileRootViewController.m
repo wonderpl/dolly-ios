@@ -2152,18 +2152,7 @@
     self.subscriptionThumbnailCollectionView.scrollEnabled = NO;
     self.channelThumbnailCollectionView.scrollEnabled = NO;
     self.aboutMeTextView.editable = YES;
-    
-    //TODO: Find better solution wierd.
-    if (IS_IPHONE) {
-        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
-    }
-    else
-    {
-        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont regularCustomFontOfSize:19.0]}    forState:UIControlStateNormal];
-        
-    }
+	
     self.barBtnBack = self.navigationItem.leftBarButtonItem;
     self.navigationItem.leftBarButtonItem = self.barBtnCancelEditMode;
     self.navigationItem.rightBarButtonItem = self.barBtnSaveEditMode;
@@ -2687,17 +2676,6 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock
                             
                             
                         }];
-        
-        //TODO: Find better solution wierd.
-        if (IS_IPHONE) {
-            [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-             @{NSFontAttributeName:[UIFont regularCustomFontOfSize:17.0]}    forState:UIControlStateNormal];
-        }
-        else {
-            [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:
-             @{NSFontAttributeName:[UIFont regularCustomFontOfSize:19.0]}    forState:UIControlStateNormal];
-            
-        }
         
         self.navigationItem.leftBarButtonItem = self.barBtnCancelCreateChannel;
         self.navigationItem.rightBarButtonItem = self.barBtnSaveCreateChannel;
