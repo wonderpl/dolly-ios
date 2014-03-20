@@ -36,7 +36,6 @@
 @property (nonatomic, assign, getter = isLoadingMoreContent) BOOL loadingMoreContent;
 @property (nonatomic, readonly) NSString *viewId;
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
-@property (readonly) NSManagedObjectContext *mainManagedObjectContext;
 
 - (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
                          andSubCell: (UICollectionViewCell *) subCell
