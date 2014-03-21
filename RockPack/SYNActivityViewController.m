@@ -451,37 +451,6 @@
     return _notifications;
 }
 
-
-- (Channel *) channelFromChannelId: (NSString *) channelId
-{
-   
-    
-    NSError *error;
-    Channel *channel;
-    
-    if(!channelId)
-        return channel; // returns nil;
-
-    NSFetchRequest *channelFetchRequest = [[NSFetchRequest alloc] init];
-    
-    channelFetchRequest.entity = [NSEntityDescription entityForName: kChannel
-                                             inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
-    channelFetchRequest.predicate = [NSPredicate predicateWithFormat: @"uniqueId == %@", channelId];
-
-    
-    
-    NSArray *matchingChannelEntries = [appDelegate.mainManagedObjectContext executeFetchRequest: channelFetchRequest
-                                                                                          error: &error];
-    
-    if (matchingChannelEntries.count > 0)
-    {
-        channel = matchingChannelEntries[0];
-    }
-    
-    return channel;
-}
-
 #pragma mark - Delegate Handler
 
 -(SYNNotificationsTableViewCell*)getCellFromButton:(UIButton*)button
