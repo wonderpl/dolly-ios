@@ -85,10 +85,11 @@ static const NSInteger InitialWebViewCount = 3;
 
 #pragma mark - UIView
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-	[super willMoveToSuperview:newSuperview];
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+	[super willMoveToWindow:newWindow];
 	
-	if (!newSuperview) {
+	if (!newWindow) {
+		self.delegate = nil;
 		[[[self class] reusableWebViews] addObject:self];
 	}
 }

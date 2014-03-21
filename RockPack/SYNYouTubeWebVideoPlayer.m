@@ -40,10 +40,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	return self;
 }
 
-- (void)dealloc {
-	_youTubeWebView.delegate = nil;
-}
-
 #pragma mark - UIView
 
 - (void)layoutSubviews {
@@ -56,18 +52,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	
 	self.youTubeWebView.center = self.playerContainerView.center;
 	self.youTubeWebView.transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
-}
-
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-	[super willMoveToSuperview:newSuperview];
-	
-	if (!newSuperview) {
-		// This is needed since we want to trigger viewWillMoveToSuperview on SYNYouTubeWebView straight
-		// away instead of when this object is dealloced so that we can reuse the web view
-		[self.youTubeWebView removeFromSuperview];
-		self.youTubeWebView.delegate = nil;
-		self.youTubeWebView = nil;
-	}
 }
 
 #pragma mark - Getters / Setters
