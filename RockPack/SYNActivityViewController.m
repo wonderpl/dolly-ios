@@ -20,8 +20,10 @@
 
 @interface SYNActivityViewController ()
 
-@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) BOOL hasUnreadNotifications;
+
+@property (nonatomic, strong) NSArray *notifications;
 
 @end
 
@@ -42,9 +44,12 @@
         appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         self.hasUnreadNotifications = NO;
         self.notifications = @[];
-        [self loadNotifications];
+		[self loadNotifications];
 		
-		[self addObserver:self forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications)) options:0 context:NULL];
+		[self addObserver:self
+			   forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications))
+				  options:0
+				  context:NULL];
     }
     return self;
 }
@@ -475,15 +480,6 @@
     }
     
     return channel;
-}
-
--(NSInteger)unreadNotificationsCount
-{
-    __block NSInteger unread = 0;
-    [self.notifications enumerateObjectsUsingBlock:^(SYNNotification* notification, NSUInteger idx, BOOL *stop) {
-        unread += (NSInteger)(notification.read); // convert the YES, NO into a 1, 0 int and add it
-    }];
-    return unread;
 }
 
 #pragma mark - Delegate Handler
