@@ -1,7 +1,7 @@
 #import <Kiwi.h>
 #import "NSString+Validation.h"
 
-SPEC_BEGIN(NSStringValidation)
+SPEC_BEGIN(NSStringValidationSpec)
 
 describe(@"The NSString Validation category", ^{
 	

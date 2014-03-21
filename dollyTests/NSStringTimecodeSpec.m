@@ -1,7 +1,7 @@
 #import <Kiwi.h>
 #import "NSString+Timecode.h"
 
-SPEC_BEGIN(NSStringTimecode)
+SPEC_BEGIN(NSStringTimecodeSpec)
 
 describe(@"The NSString Timecode category", ^{
 	

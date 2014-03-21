@@ -1,7 +1,7 @@
 #import <Kiwi.h>
 #import "NSRegularExpression+Username.h"
 
-SPEC_BEGIN(NSRegularExpressionUsername)
+SPEC_BEGIN(NSRegularExpressionUsernameSpec)
 
 describe(@"The NSRegularExpression Username category", ^{
 	
