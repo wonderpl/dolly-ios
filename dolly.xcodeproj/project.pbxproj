@@ -92,7 +92,6 @@
 		01901A981771CCBA007DBEAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD41629BDC40080F26B /* UIKit.framework */; };
 		01901A991771CCBA007DBEAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD61629BDC40080F26B /* Foundation.framework */; };
 		01901A9F1771CCBA007DBEAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01901A9D1771CCBA007DBEAC /* InfoPlist.strings */; };
-		01901AA21771CCBA007DBEAC /* dollyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01901AA11771CCBA007DBEAC /* dollyTests.m */; };
 		01946B911683335400354601 /* _ChannelOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B8E1683335400354601 /* _ChannelOwner.m */; };
 		01946B921683335400354601 /* _VideoInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B901683335400354601 /* _VideoInstance.m */; };
 		01946B971683339F00354601 /* ChannelOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B941683339F00354601 /* ChannelOwner.m */; };
@@ -800,7 +799,6 @@
 		01901A951771CCBA007DBEAC /* dollyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dollyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01901A9C1771CCBA007DBEAC /* dollyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "dollyTests-Info.plist"; sourceTree = "<group>"; };
 		01901A9E1771CCBA007DBEAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		01901AA11771CCBA007DBEAC /* dollyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dollyTests.m; sourceTree = "<group>"; };
 		01901AA31771CCBA007DBEAC /* dollyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dollyTests-Prefix.pch"; sourceTree = "<group>"; };
 		01946B8D1683335400354601 /* _ChannelOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ChannelOwner.h; sourceTree = "<group>"; };
 		01946B8E1683335400354601 /* _ChannelOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ChannelOwner.m; sourceTree = "<group>"; };
@@ -1929,7 +1927,6 @@
 		01901A9A1771CCBA007DBEAC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				01901AA11771CCBA007DBEAC /* dollyTests.m */,
 				E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */,
 				E985176318B4B37100ADBD0F /* NSRegularExpressionUsername.m */,
 				E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */,
@@ -4566,7 +4563,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E985176418B4B37100ADBD0F /* NSRegularExpressionUsername.m in Sources */,
-				01901AA21771CCBA007DBEAC /* dollyTests.m in Sources */,
 				E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */,
 				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
 			);
