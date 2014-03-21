@@ -30,10 +30,6 @@
 
 @implementation SYNActivityViewController
 
-@synthesize notifications = _notifications;
-
-
-
 
 #pragma mark - View Life Cycle
 
@@ -50,7 +46,7 @@
 			   forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications))
 				  options:0
 				  context:NULL];
-    }
+	}
     return self;
 }
 
@@ -58,8 +54,7 @@
 	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications))];
 }
 
-- (void) viewDidLoad
-{
+- (void) viewDidLoad {
     [super viewDidLoad];
 
 	self.automaticallyAdjustsScrollViewInsets = YES;
@@ -72,18 +67,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SYNNotificationsTableViewCell" bundle:nil]
            forCellReuseIdentifier:kNotificationsCellIdent];
     
-    
-	if (self.notifications.count == 0) {
-		// Hack to stop the tab bar from being by scrolling via bouncing with no notifications
-		self.tableView.alwaysBounceVertical = NO;
-		
-		[self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
-	} else {
-		self.tableView.alwaysBounceVertical = YES;
-	}
-    
-    [self.tableView reloadData];
-    
     if (!IS_IPHONE_5) {
         UIEdgeInsets tmpInsets = self.tableView.contentInset;
         tmpInsets.bottom += 88;
@@ -94,6 +77,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	
+	[self loadNotifications];
 	
 	[[SYNTrackingManager sharedManager] trackActivityScreenView];
 }
@@ -108,6 +93,17 @@
                                               
                                               [self parseNotificationsFromDictionary:response];
                                               
+											  
+											  if (self.notifications.count == 0) {
+												  // Hack to stop the tab bar from being by scrolling via bouncing with no notifications
+												  self.tableView.alwaysBounceVertical = NO;
+												  
+												  [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
+											  } else {
+												  self.tableView.alwaysBounceVertical = YES;
+											  }
+											  
+											  [self.tableView reloadData];
                                               
                                           } errorHandler:^(id error) {
                                               DebugLog(@"Could not load notifications");
@@ -434,23 +430,6 @@
 }
 
 
-
-
-#pragma mark - Accessors
-
-- (void) setNotifications: (NSArray *) notifications
-{
-    _notifications = notifications;
-    
-    [self.tableView reloadData];
-}
-
-
-- (NSArray *) notifications
-{
-    return _notifications;
-}
-
 #pragma mark - Delegate Handler
 
 -(SYNNotificationsTableViewCell*)getCellFromButton:(UIButton*)button
@@ -465,6 +444,10 @@
     
     
     return (SYNNotificationsTableViewCell*)cell;
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification {
+	[self loadNotifications];
 }
 
 #pragma mark - KVO
