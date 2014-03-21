@@ -98,10 +98,10 @@ static NSString* kVideoItemCellIndentifier = @"SYNAggregateVideoItemCell";
     // Get the Channel from the first videoInstance (as a heuristic)
     self.channel = firstVideoInstance.channel;
 //    NSString *nameString = self.channel.channelOwner.displayName; // ex 'Dolly Proxima'
-    NSString *actionString = [NSString stringWithFormat: @" Added %i videos to", _collectionData.count];
+    NSString *actionString = [NSString stringWithFormat: @" Added %@ videos to", @([_collectionData count])];
     
     if (_collectionData.count == 1) {
-        actionString = [NSString stringWithFormat: @" Added %i video to", _collectionData.count];
+        actionString = [NSString stringWithFormat: @" Added %@ video to", @([_collectionData count])];
     
     }
     

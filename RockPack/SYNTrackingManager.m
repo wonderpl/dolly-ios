@@ -425,7 +425,7 @@ static const NSInteger TrackingDimensionConnection = 6;
 }
 
 - (void)trackOnboardingCompletedWithFollowedCount:(NSInteger)followedCount {
-	NSString *label = [NSString stringWithFormat:@"%d", followedCount];
+	NSString *label = [NSString stringWithFormat:@"%@", @(followedCount)];
 	[self trackEventWithCategory:UIActionCategory action:@"completedOnboarding" label:label value:nil];
 }
 
@@ -456,7 +456,7 @@ static const NSInteger TrackingDimensionConnection = 6;
 }
 
 - (void)trackNetworkErrorCode:(NSInteger)code forURL:(NSString *)url {
-	NSString *action = [NSString stringWithFormat:@"Error %d", code];
+	NSString *action = [NSString stringWithFormat:@"Error %@", @(code)];
 	[self trackEventWithCategory:NetworkCategory action:action label:url value:nil];
 }
 
@@ -480,7 +480,7 @@ static const NSInteger TrackingDimensionConnection = 6;
 																			toDate:NSDate.date
 																		   options:0];
 		NSInteger age = [ageComponents year];
-		ageString = [NSString ageCategoryStringFromInt:age];
+		ageString = [NSString ageCategoryStringFromInteger:age];
 	}
 	
 	[[self defaultTracker] set:[GAIFields customDimensionForIndex:TrackingDimensionAge] value:ageString];

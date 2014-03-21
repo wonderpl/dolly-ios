@@ -193,34 +193,34 @@
     }
     else if (components.month > 0)
     {
-        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i month%@", components.month, (components.month > 1 ? @"s" : @"")]];
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%@ month%@", @(components.month), (components.month > 1 ? @"s" : @"")]];
         
         if (components.day > 0)
         {
-            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i day%@ ago", components.day, (components.day > 1 ? @"s" : @"")]];
+            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %@ day%@ ago", @(components.day), (components.day > 1 ? @"s" : @"")]];
         }
     }
     else if (components.day > 0)
     {
-        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i day%@", components.day, (components.day > 1 ? @"s" : @"")]];
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%@ day%@", @(components.day), (components.day > 1 ? @"s" : @"")]];
         
         if (components.hour > 0)
         {
-            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i hour%@ ago", components.hour, (components.hour > 1 ? @"s" : @"")]];
+            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %@ hour%@ ago", @(components.hour), (components.hour > 1 ? @"s" : @"")]];
         }
     }
     else if (components.hour > 0)
     {
-        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i hour%@", components.hour, (components.hour > 1 ? @"s" : @"")]];
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%@ hour%@", @(components.hour), (components.hour > 1 ? @"s" : @"")]];
         
         if (components.minute > 0)
         {
-            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %i minute%@ ago", components.minute, (components.minute > 1 ? @"s" : @"")]];
+            [dateDifferenceMutableString appendString: [NSString stringWithFormat: @" and %@ minute%@ ago", @(components.minute), (components.minute > 1 ? @"s" : @"")]];
         }
     }
     else
     {
-        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%i minute%@ ago", components.minute, (components.minute > 1 ? @"s" : @"")]];
+        [dateDifferenceMutableString appendString: [NSString stringWithFormat: @"%@ minute%@ ago", @(components.minute), (components.minute > 1 ? @"s" : @"")]];
     }
     
     return [NSString stringWithString: dateDifferenceMutableString];
@@ -283,7 +283,7 @@
 {
     NSMutableString *descriptionToReturn = [[NSMutableString alloc] init];
     
-    [descriptionToReturn appendFormat: @"<SYNRockpackNotification: %p (identifier:'%i', type:%i,", self, self.identifier, self.objectType];
+    [descriptionToReturn appendFormat: @"<SYNRockpackNotification: %p (identifier:'%@', type:%@,", self, @(self.identifier), @(self.objectType)];
     [descriptionToReturn appendFormat: @" channelOwner:'%@')", self.channelOwner.displayName];
     [descriptionToReturn appendFormat: @" videoThumbnailUrl:'%@')", self.videoThumbnailUrl];
     [descriptionToReturn appendString: @">"];

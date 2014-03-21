@@ -104,24 +104,24 @@
     
     if (timeAgoComponents.year)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i year%@ ago", timeAgoComponents.year, timeAgoComponents.year == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"%@ year%@ ago", @(timeAgoComponents.year), timeAgoComponents.year == 1 ? @"": @"s"];
     }
     else if (timeAgoComponents.month)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i month%@ ago", timeAgoComponents.month, timeAgoComponents.month == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"%@ month%@ ago", @(timeAgoComponents.month), timeAgoComponents.month == 1 ? @"": @"s"];
     }
     else if (timeAgoComponents.day)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i day%@ ago", timeAgoComponents.day, timeAgoComponents.day == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"%@ day%@ ago", @(timeAgoComponents.day), timeAgoComponents.day == 1 ? @"": @"s"];
     }
     else if (timeAgoComponents.hour)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i hour%@ ago", timeAgoComponents.hour,
+        self.timeLabel.text = [NSString stringWithFormat: @"%@ hour%@ ago", @(timeAgoComponents.hour),
                                timeAgoComponents.hour == 1 ? @"": @"s"];
     }
     else if (timeAgoComponents.minute)
     {
-        self.timeLabel.text = [NSString stringWithFormat: @"%i minute%@ ago", timeAgoComponents.minute, timeAgoComponents.minute == 1 ? @"": @"s"];
+        self.timeLabel.text = [NSString stringWithFormat: @"%@ minute%@ ago", @(timeAgoComponents.minute), timeAgoComponents.minute == 1 ? @"": @"s"];
     }
     
     

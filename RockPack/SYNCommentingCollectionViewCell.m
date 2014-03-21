@@ -156,15 +156,15 @@
     NSString *dateDifferenceString;
     
     if (components.year > 0)
-        dateDifferenceString = [NSString stringWithFormat: @"%i year%@", components.year, (components.year > 1 ? @"s" : @"")];
+        dateDifferenceString = [NSString stringWithFormat: @"%@ year%@", @(components.year), (components.year > 1 ? @"s" : @"")];
     else if (components.month > 0)
-        dateDifferenceString =  [NSString stringWithFormat: @"%i month%@", components.month, (components.month > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%@ month%@", @(components.month), (components.month > 1 ? @"s" : @"")];
     else if (components.day > 0)
-        dateDifferenceString =  [NSString stringWithFormat: @"%i day%@", components.day, (components.day > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%@ day%@", @(components.day), (components.day > 1 ? @"s" : @"")];
     else if (components.hour > 0)
-        dateDifferenceString =  [NSString stringWithFormat: @"%i hour%@", components.hour, (components.hour > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%@ hour%@", @(components.hour), (components.hour > 1 ? @"s" : @"")];
     else if (components.minute > 0)
-        dateDifferenceString =  [NSString stringWithFormat: @"%i min%@", components.minute, (components.minute > 1 ? @"s" : @"")];
+        dateDifferenceString =  [NSString stringWithFormat: @"%@ min%@", @(components.minute), (components.minute > 1 ? @"s" : @"")];
     else
         dateDifferenceString = @"now";
     

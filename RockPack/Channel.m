@@ -150,7 +150,7 @@
         }
         else
         {
-            self.totalVideosValue = [NSNumber numberWithInt:itemArray.count]; // if the 'total' value was not returned then pass the existing numbers fetched
+            self.totalVideosValue = @([itemArray count]); // if the 'total' value was not returned then pass the existing numbers fetched
         }
         
         NSMutableDictionary *videoInsanceByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.videoInstances.count];
@@ -368,7 +368,7 @@
     }
     else
     {
-        self.totalVideosValue = [NSNumber numberWithInt:0]; // if the 'total' value was not returned then pass the existing numbers fetched
+        self.totalVideosValue = @0; // if the 'total' value was not returned then pass the existing numbers fetched
     }
 
  

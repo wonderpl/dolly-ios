@@ -175,7 +175,7 @@
              [self showErrorPopUpForError:error];
          }
          
-         NSDictionary* customErrorDictionary = @{@"network_error": [NSString stringWithFormat: @"%@, Server responded with %i", error.domain, error.code], @"nserror" : error };
+         NSDictionary* customErrorDictionary = @{@"network_error": [NSString stringWithFormat: @"%@, Server responded with %@", error.domain, @(error.code)], @"nserror" : error };
          errorBlock(customErrorDictionary);
      }];
 
@@ -623,7 +623,7 @@
                                        }
                                        
                                        DebugLog(@"API Call failed");
-                                       NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %i", error.domain, error.code] , @"nserror" : error };
+                                       NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %@", error.domain, @(error.code)] , @"nserror" : error };
                                        errorBlock(customErrorDictionary);
                                    }
                                    else
@@ -642,7 +642,7 @@
              [self showErrorPopUpForError:error];
          }
          
-         NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %i", error.domain, error.code] , @"nserror" : error };
+         NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %@", error.domain, @(error.code)] , @"nserror" : error };
          errorBlock(customErrorDictionary);
      }];
     
@@ -1195,8 +1195,8 @@
 {
     NSMutableDictionary *tempParameters = [NSMutableDictionary dictionary];
     
-    tempParameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    tempParameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    tempParameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    tempParameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     NSString *apiString = [kAPIRecommendedChannels stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1588,8 +1588,8 @@
 }
 
 - (void) feedUpdatesForUserId: (NSString *) userId
-                        start: (unsigned int) start
-                         size: (unsigned int) size
+                        start: (NSUInteger) start
+                         size: (NSUInteger) size
             completionHandler: (MKNKUserSuccessBlock) completionBlock
                  errorHandler: (MKNKUserErrorBlock) errorBlock
 {
@@ -2220,8 +2220,8 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    parameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    parameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     
     [parameters addEntriesFromDictionary: [self getLocaleParam]];
     

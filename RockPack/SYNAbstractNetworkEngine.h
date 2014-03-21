@@ -40,11 +40,11 @@
                                        errorHandler: (MKNKUserSuccessBlock) errorBlock;
 
 
-- (NSDictionary *) paramsForStart: (int) start
-                             size: (int) size;
+- (NSDictionary *) paramsForStart: (NSUInteger) start
+                             size: (NSUInteger) size;
 
-- (NSDictionary *) paramsAndLocaleForStart: (int) start
-                                      size: (int) size;
+- (NSDictionary *) paramsAndLocaleForStart: (NSUInteger) start
+                                      size: (NSUInteger) size;
 
 -(NSDictionary*) getLocaleParam;
 

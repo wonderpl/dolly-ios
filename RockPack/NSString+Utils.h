@@ -12,7 +12,7 @@
 
 - (NSString *) stringByReplacingOccurrencesOfStrings: (NSDictionary *) dictionary;
 
-+ (NSString *) ageCategoryStringFromInt: (int) age;
++ (NSString *)ageCategoryStringFromInteger:(NSInteger)age;
 
 - (NSString *)apostrophisedString;
 

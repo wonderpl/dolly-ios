@@ -203,7 +203,7 @@
         
         NSIndexPath* indexPathForCell = [self.currentChannelsCollectionView indexPathForCell:cell];
         
-        __block int iindex = indexPathForCell.item;
+        __block NSInteger iindex = indexPathForCell.item;
         void (^animateChangeWidth)(void) = ^{
             
             CGRect frame = cell.frame;

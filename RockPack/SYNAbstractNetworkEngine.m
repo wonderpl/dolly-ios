@@ -178,7 +178,7 @@
                            if ([response isKindOfClass: [NSError class]])
                            {
                                NSError *responseError = (NSError *) response;
-                               NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %i", responseError.domain, responseError.code ] ,@"nserror" : responseError};
+                               NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %@", responseError.domain, @(responseError.code)] ,@"nserror" : responseError};
                                DebugLog(@"API Call failed: %@", customErrorDictionary);
                                if (responseError.code >=500 && responseError.code < 600)
                                {
@@ -237,7 +237,7 @@
          if ([response isKindOfClass: [NSError class]])
          {
              NSError *responseError = (NSError *) response;
-             NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %i", responseError.domain, responseError.code], @"nserror" : responseError};
+             NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %@", responseError.domain, @(responseError.code)], @"nserror" : responseError};
              DebugLog(@"API Call failed: %@", customErrorDictionary);
 			 
 			 [[SYNTrackingManager sharedManager] trackNetworkErrorCode:responseError.code forURL:weakNetworkOperation.url];
@@ -273,8 +273,8 @@
 }
 
 
-- (NSDictionary *) paramsAndLocaleForStart: (int) start
-                                      size: (int) size
+- (NSDictionary *) paramsAndLocaleForStart: (NSUInteger) start
+                                      size: (NSUInteger) size
 {
     NSDictionary *params = nil;
     
@@ -291,8 +291,8 @@
     return params;
 }
 
-- (NSDictionary *) paramsForStart: (int) start
-                             size: (int) size
+- (NSDictionary *) paramsForStart: (NSUInteger) start
+                             size: (NSUInteger) size
 {
     NSDictionary *params = nil;
     

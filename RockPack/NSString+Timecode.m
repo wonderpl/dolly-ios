@@ -18,10 +18,10 @@
 	NSInteger seconds = (totalSeconds % 60);
 	
 	if (hours) {
-		return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes, seconds];
+		return [NSString stringWithFormat:@"%ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
 	}
 	
-	return [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+	return [NSString stringWithFormat:@"%ld:%02ld", (long)minutes, (long)seconds];
 }
 
 @end

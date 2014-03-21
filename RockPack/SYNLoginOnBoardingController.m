@@ -280,7 +280,7 @@
 
 - (void) pageTurn: (UIPageControl *) aPageControl
 {
-    int whichPage = aPageControl.currentPage;
+    NSInteger whichPage = aPageControl.currentPage;
     
     [UIView animateWithDuration:0.3f
                           delay:0.0

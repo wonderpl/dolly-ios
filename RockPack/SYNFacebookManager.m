@@ -200,7 +200,7 @@
             break;
             
         default:
-            failureBlock([NSString stringWithFormat:@"permissionType '%d' was not recognised", permissionType]);
+            failureBlock([NSString stringWithFormat:@"permissionType '%@' was not recognised", @(permissionType)]);
             return;
     }
     

@@ -208,7 +208,7 @@
 {
     NSMutableString *userDescription = [NSMutableString stringWithFormat: @"User (id:'%i') - username: '%@'", [self.uniqueId intValue], self.username];
     
-    [userDescription appendFormat: @"\n=== Own Channels (%i): ===", self.channels.count];
+    [userDescription appendFormat: @"\n=== Own Channels (%@): ===", @([self.channels count])];
     
     
     Channel *channel;
@@ -217,7 +217,7 @@
         [userDescription appendFormat: @"\n * %@", channel.title];
     }
     
-    [userDescription appendFormat: @"\n=== Subscribed Channels (%i): ===", self.subscriptions.count];
+    [userDescription appendFormat: @"\n=== Subscribed Channels (%@): ===", @([self.subscriptions count])];
     
     
     for (channel in self.subscriptions)
@@ -225,7 +225,7 @@
         [userDescription appendFormat: @"\n - %@", channel.title];
     }
     
-    [userDescription appendFormat: @"\n=== External Accounts (%i): ===", self.externalAccounts.count];
+    [userDescription appendFormat: @"\n=== External Accounts (%@): ===", @([self.externalAccounts count])];
     
     
     for (ExternalAccount *account in self.externalAccounts)

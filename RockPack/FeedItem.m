@@ -96,7 +96,7 @@
     
     if (n_count && [n_count isKindOfClass: [NSNumber class]])
     {
-        self.itemCountValue = n_count.integerValue;
+        self.itemCount = n_count;
     }
     
     self.positionValue = INT_MAX; // heuristic, place it at the end

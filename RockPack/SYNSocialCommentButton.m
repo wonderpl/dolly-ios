@@ -72,7 +72,7 @@
 	if (count == 0) {
 		[self setTitle:@"" forState:UIControlStateNormal];
 	} else if (count < 100) {
-		[self setTitle:[NSString stringWithFormat:@"%i", count] forState:UIControlStateNormal];
+		[self setTitle:[NSString stringWithFormat:@"%@", @(count)] forState:UIControlStateNormal];
 	} else {
 		[self setTitle:@"99+" forState:UIControlStateNormal];
 	}

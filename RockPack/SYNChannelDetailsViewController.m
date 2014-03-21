@@ -1912,7 +1912,7 @@
         VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
         
         
-        int tmpPosition = -1;
+        int64_t tmpPosition = -1;
         
         // Check if the video instance is in the first set of videos
         for (int i = 0; i<self.model.itemCount; i++) {

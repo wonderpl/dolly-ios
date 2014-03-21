@@ -227,12 +227,12 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
 	if (pagingModel == self.likesModel) {
-		NSString *segmentedControlTitle = [NSString stringWithFormat:@"Loved by (%d)", [pagingModel totalItemCount]];
+		NSString *segmentedControlTitle = [NSString stringWithFormat:@"Loved by (%@)", @([pagingModel totalItemCount])];
 		[self.segmentedControl setTitle:segmentedControlTitle forSegmentAtIndex:1];
 		[self.likesCollectionView reloadData];
 	}
 	if (pagingModel == self.channelsModel) {
-		NSString *segmentedControlTitle = [NSString stringWithFormat:@"Appears in (%d)", [pagingModel totalItemCount]];
+		NSString *segmentedControlTitle = [NSString stringWithFormat:@"Appears in (%@)", @([pagingModel totalItemCount])];
 		[self.segmentedControl setTitle:segmentedControlTitle forSegmentAtIndex:0];
 		[self.channelsCollectionView reloadData];
 	}

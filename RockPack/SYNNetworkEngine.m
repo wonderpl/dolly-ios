@@ -232,8 +232,8 @@
         parameters[@"category"] = genreId;
     
     
-    parameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    parameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    parameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     
     SYNNetworkOperationJsonObject *networkOperation =
     (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIUsers
@@ -296,8 +296,8 @@
     if(![genreId isEqualToString:kPopularGenreUniqueId]) // else -> 'POPULAR' SubGenre passed, do not create a 'category' argument
         parameters[@"category"] = genreId;
     
-    parameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    parameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    parameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPIVideos
@@ -366,8 +366,8 @@
     NSMutableDictionary *tempParameters = [NSMutableDictionary dictionary];
     
     tempParameters[@"q"] = searchTerm;
-    tempParameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    tempParameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    tempParameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    tempParameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     [tempParameters addEntriesFromDictionary: [self getLocaleParam]];
     
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary: tempParameters];
@@ -434,8 +434,8 @@
     NSMutableDictionary *tempParameters = [NSMutableDictionary dictionary];
     
     tempParameters[@"q"] = searchTerm;
-    tempParameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    tempParameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    tempParameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    tempParameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     [tempParameters addEntriesFromDictionary: [self getLocaleParam]];
     
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary: tempParameters];
@@ -501,8 +501,8 @@
     NSString *URLString = [kAPIVideoLikes stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
 	
 	NSDictionary *parameters = @{
-								 @"start" : [NSString stringWithFormat:@"%d", range.location],
-								 @"size"  : [NSString stringWithFormat:@"%d", range.length]
+								 @"start" : [NSString stringWithFormat:@"%@", @(range.location)],
+								 @"size"  : [NSString stringWithFormat:@"%@", @(range.length)]
 								 };
 	
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *)[self operationWithPath:URLString params:parameters];
@@ -527,8 +527,8 @@
     NSString *URLString = [kAPIVideoChannels stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
 	
 	NSDictionary *parameters = @{
-								 @"start" : [NSString stringWithFormat:@"%d", range.location],
-								 @"size"  : [NSString stringWithFormat:@"%d", range.length]
+								 @"start" : [NSString stringWithFormat:@"%@", @(range.location)],
+								 @"size"  : [NSString stringWithFormat:@"%@", @(range.length)]
 								 };
 	
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *)[self operationWithPath:URLString params:parameters];
@@ -731,8 +731,8 @@
     
     NSMutableDictionary *tempParameters = [NSMutableDictionary dictionary];
     
-    tempParameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    tempParameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    tempParameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    tempParameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     [tempParameters addEntriesFromDictionary: [self getLocaleParam]];
     
     NSDictionary *apiSubstitutionDictionary = @{
@@ -861,8 +861,8 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"start"] = [NSString stringWithFormat: @"%i", range.location];
-    parameters[@"size"] = [NSString stringWithFormat: @"%i", range.length];
+    parameters[@"start"] = [NSString stringWithFormat: @"%@", @(range.location)];
+    parameters[@"size"] = [NSString stringWithFormat: @"%@", @(range.length)];
     
     [parameters addEntriesFromDictionary: [self getLocaleParam]];
     

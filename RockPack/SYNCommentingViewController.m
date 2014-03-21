@@ -183,7 +183,7 @@ static NSString* PlaceholderText = @"Say something nice";
 	[super viewWillDisappear:animated];
 
     if ([self.model totalItemCount]) {
-        self.videoInstance.commentCountValue = [self.model totalItemCount];
+        self.videoInstance.commentCount = @([self.model totalItemCount]);
         [self.socialButton setCount:self.videoInstance.commentCountValue];
     }
 
@@ -302,7 +302,7 @@ static NSString* PlaceholderText = @"Say something nice";
     
 	NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
 	NSInteger charactersLeft = kMaxCommentCharacters - [newString length];
-	self.charactersLeftLabel.text = [NSString stringWithFormat:@"%d", charactersLeft];
+	self.charactersLeftLabel.text = [NSString stringWithFormat:@"%@", @(charactersLeft)];
     
     return YES;
 }
@@ -370,7 +370,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                            [wself.sendMessageTextView resignFirstResponder];
                                            
                                            [wself refreshCollectionView];
-                                           wself.videoInstance.commentCountValue = [wself.model totalItemCount];
+                                           wself.videoInstance.commentCount = @([wself.model totalItemCount]);
 
                                            
                                            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date]

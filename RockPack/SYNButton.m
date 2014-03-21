@@ -43,7 +43,7 @@
 - (void)setTitle:(NSString *)title andCount:(NSInteger)count {
     _title = title;
 	
-	NSString *countString = (count > 0 ? [NSString stringWithFormat:@"%d", count] : @"");
+	NSString *countString = (count > 0 ? [NSString stringWithFormat:@"%@", @(count)] : @"");
     [self setTitle:[NSString stringWithFormat:@"%@\n%@", title, countString] forState:UIControlStateNormal];
 }
 

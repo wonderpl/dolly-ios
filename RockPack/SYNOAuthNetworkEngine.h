@@ -188,8 +188,8 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                            errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 - (void) feedUpdatesForUserId: (NSString *) userId
-                        start: (unsigned int) start
-                         size: (unsigned int) size
+                        start: (NSUInteger) start
+                         size: (NSUInteger) size
             completionHandler: (MKNKUserSuccessBlock) completionBlock
                  errorHandler: (MKNKUserErrorBlock) errorBlock;
 

@@ -24,8 +24,7 @@
 }
 
 
-+ (NSString *) ageCategoryStringFromInt: (int) age
-{
++ (NSString *)ageCategoryStringFromInteger:(NSInteger)age {
     NSString *ageString = @"55+";
     
     if (age < 13)
