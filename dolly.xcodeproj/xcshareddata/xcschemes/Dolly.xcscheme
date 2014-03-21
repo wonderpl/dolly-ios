@@ -20,6 +20,20 @@
                ReferencedContainer = "container:dolly.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "01901A941771CCBA007DBEAC"
+               BuildableName = "dollyTests.xctest"
+               BlueprintName = "dollyTests"
+               ReferencedContainer = "container:dolly.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
