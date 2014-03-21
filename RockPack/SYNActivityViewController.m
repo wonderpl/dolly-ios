@@ -101,6 +101,8 @@
 												  [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
 											  } else {
 												  self.tableView.alwaysBounceVertical = YES;
+												  
+												  [self removePopupMessage];
 											  }
 											  
 											  [self.tableView reloadData];
