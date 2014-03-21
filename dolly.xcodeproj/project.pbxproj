@@ -582,7 +582,7 @@
 		E98369D6188937B300363709 /* ButtonLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D4188937B300363709 /* ButtonLogin.png */; };
 		E98369D7188937B300363709 /* ButtonLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D5188937B300363709 /* ButtonLogin@2x.png */; };
 		E985176218B39D4A00ADBD0F /* SYNTrackingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E985176118B39D4A00ADBD0F /* SYNTrackingManager.m */; };
-		E985176418B4B37100ADBD0F /* NSRegularExpressionUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = E985176318B4B37100ADBD0F /* NSRegularExpressionUsername.m */; };
+		E985176418B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */; };
 		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
 		E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */; };
 		E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C1518967BA500767BBD /* SYNTimestampLabel.m */; };
@@ -1484,7 +1484,7 @@
 		E98369D81889457500363709 /* SYNVideoInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoInfoCell.h; sourceTree = "<group>"; };
 		E985176018B39D4A00ADBD0F /* SYNTrackingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTrackingManager.h; sourceTree = "<group>"; };
 		E985176118B39D4A00ADBD0F /* SYNTrackingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTrackingManager.m; sourceTree = "<group>"; };
-		E985176318B4B37100ADBD0F /* NSRegularExpressionUsername.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSRegularExpressionUsername.m; sourceTree = "<group>"; };
+		E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSRegularExpressionUsernameSpec.m; sourceTree = "<group>"; };
 		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
 		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
 		E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Username.h"; sourceTree = "<group>"; };
@@ -1928,7 +1928,7 @@
 			isa = PBXGroup;
 			children = (
 				E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */,
-				E985176318B4B37100ADBD0F /* NSRegularExpressionUsername.m */,
+				E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */,
 				E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
 				BEB3135918182D6100FAF98A /* data */,
@@ -4562,7 +4562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E985176418B4B37100ADBD0F /* NSRegularExpressionUsername.m in Sources */,
+				E985176418B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m in Sources */,
 				E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */,
 				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
 			);
