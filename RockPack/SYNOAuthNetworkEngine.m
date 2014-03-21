@@ -428,6 +428,10 @@
                                                                                                        params: @{@"locale" : self.localeString}
                                                                                                    httpMethod: @"GET"
                                                                                                           ssl: TRUE];
+	
+	// Disable caching to prevent issue where having marked notifications as being read, this API returns them as being
+	// while waiting for the server response
+	networkOperation.shouldNotCacheResponse = YES;
     
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
