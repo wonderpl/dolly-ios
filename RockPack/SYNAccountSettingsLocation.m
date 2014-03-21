@@ -15,6 +15,7 @@
 #import "SYNMasterViewController.h"
 #import "SYNTrackingManager.h"
 #import "User.h"
+#import "SYNGenreManager.h"
 
 @interface SYNAccountSettingsLocation ()
 
@@ -176,15 +177,13 @@
                                            appDelegate.currentUser.locale = newLocale;
                                            
                                            [appDelegate clearCoreDataMainEntities:NO];
-                                           
-										   [appDelegate.masterViewController loadBasicDataWithComplete:^(BOOL success) {
+										   
+										   [[SYNGenreManager sharedManager] fetchGenresWithCompletion:^(NSArray *results) {
 											   [spinner stopAnimating];
 											   
 											   [wself.navigationController popViewControllerAnimated:YES];
-											   
-											   [[NSNotificationCenter defaultCenter] postNotificationName:CategoriesReloadedNotification object:nil];
 										   }];
-                                           
+										   
                                        } errorHandler:^(id errorInfo) {
                                            
                                            

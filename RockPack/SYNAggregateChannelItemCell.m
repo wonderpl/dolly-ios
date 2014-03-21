@@ -119,7 +119,7 @@
 
     self.followControl.selected = channel.subscribedByUserValue;
    
-    [self.stripView setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
+    [self.stripView setBackgroundColor:[[SYNGenreManager sharedManager] colorForGenreWithId:channel.categoryId]];
     
     [self.followControl setTitle:@"follow" forState:UIControlStateNormal];
     [self.followControl setTitle:@"unfollow" forState:UIControlStateSelected];

@@ -41,34 +41,6 @@
     return self;
 }
 
-
-#pragma mark - Engine API
-
-
-- (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
-                              onError: (MKNKErrorBlock) errorBlock
-{
-    SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithPath: kAPICategories
-                                                       params: [self getLocaleParam]
-                                                   httpMethod: @"GET"];
-    
-    [networkOperation addJSONCompletionHandler: ^(NSDictionary *dictionary) {
-        completionBlock(dictionary);
-    } errorHandler: ^(NSError *error) {
-        if (error.code >= 500 && error.code < 600)
-        {
-            [self showErrorPopUpForError: error];
-        }
-		errorBlock(error);
-        
-        DebugLog(@"API request failed");
-    }];
-    
-    [self enqueueOperation: networkOperation];
-}
-
-
 #pragma mark - Cover art
 
 - (void) updateCoverArtWithWithStart: (unsigned int) start

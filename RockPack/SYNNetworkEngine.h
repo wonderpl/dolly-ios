@@ -16,9 +16,6 @@
 
 @interface SYNNetworkEngine : SYNAbstractNetworkEngine
 
-- (void) updateCategoriesOnCompletion: (MKNKJSONCompleteBlock) completionBlock
-                              onError: (MKNKErrorBlock) errorBlock;
-
 #pragma mark - Search
 
 - (MKNetworkOperation *) searchVideosForTerm: (NSString *) searchTerm

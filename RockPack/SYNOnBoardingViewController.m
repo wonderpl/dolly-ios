@@ -26,136 +26,57 @@
 #import "SYNOnBoardingSectionHeader.h"
 #import "SYNGenreManager.h"
 #import "SYNTrackingManager.h"
+#import "UICollectionReusableView+Helpers.h"
+#import "SYNGenreManager.h"
 
-static NSString* OnBoardingCellIndent = @"SYNOnBoardingCell";
-static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
-static NSString* OnBoardingFooterIndent = @"SYNOnBoardingFooter";
-static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
+@interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
-@interface SYNOnBoardingViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 
-@property (nonatomic, strong) NSArray* data;
-@property (nonatomic, strong) IBOutlet UICollectionView* collectionView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
 
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* spinner;
-
-// fake navigation bar stuff
-@property (nonatomic, strong) IBOutlet UILabel* navigationTitleLabel;
-
-
-@property (nonatomic, strong) NSMutableDictionary* subgenresByIdString;
-@property (nonatomic, strong) NSMutableDictionary* genresByIdString;
-
-@property (nonatomic, weak) UIButton* skipButton;
-
-@property (nonatomic, strong) NSMutableArray *usersByCategory;
-@property (nonatomic, strong) NSMutableArray *categories;
+@property (nonatomic, weak) UIButton *skipButton;
 
 @property (nonatomic, assign) NSInteger followedCount;
+
+@property (nonatomic, copy) NSArray *groupedRecommendations;
 
 @end
 
 @implementation SYNOnBoardingViewController
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Welcome";
+    [self.collectionView registerNib:[SYNOnBoardingCell nib]
+          forCellWithReuseIdentifier:[SYNOnBoardingCell reuseIdentifier]];
     
-    [self.collectionView registerNib:[UINib nibWithNibName:OnBoardingCellIndent bundle:nil]
-          forCellWithReuseIdentifier:OnBoardingCellIndent];
+    [self.collectionView registerNib:[SYNOnBoardingHeader nib]
+          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                 withReuseIdentifier:[SYNOnBoardingHeader reuseIdentifier]];
     
-    [self.collectionView registerNib: [UINib nibWithNibName: OnBoardingHeaderIndent bundle: nil]
-          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
-                 withReuseIdentifier: OnBoardingHeaderIndent];
+    [self.collectionView registerNib:[SYNOnBoardingSectionHeader nib]
+          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                 withReuseIdentifier:[SYNOnBoardingSectionHeader reuseIdentifier]];
     
-    
-    
-    [self.collectionView registerNib: [UINib nibWithNibName: OnBoardingSectionHeader bundle: nil]
-          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
-                 withReuseIdentifier: OnBoardingSectionHeader];
-    
-    [self.collectionView registerNib: [UINib nibWithNibName: OnBoardingFooterIndent bundle: nil]
-          forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
-                 withReuseIdentifier: OnBoardingFooterIndent];
-    
-    self.navigationTitleLabel.font = [UIFont regularCustomFontOfSize:self.navigationTitleLabel.font.pointSize];
-    
-    self.usersByCategory = [[NSMutableArray alloc]init];
-    self.categories = [[NSMutableArray alloc]init];
-    
-    // =================== //
-    
-    
-    self.data = @[]; // so as not to throw error when accessed
-
-    // === Fetch Genres === //
-    
-    
-    [self loadBasicDataWithComplete:^(BOOL success) {
-    
-        NSFetchRequest *categoriesFetchRequest = [[NSFetchRequest alloc] init];
-        
-        categoriesFetchRequest.entity = [NSEntityDescription entityForName: kGenre
-                                                    inManagedObjectContext: appDelegate.mainManagedObjectContext];
-        
-        
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
-        
-        [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
-        
-        
-        categoriesFetchRequest.includesSubentities = NO;
-        
-        NSError* error;
-        
-        NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: categoriesFetchRequest
-                                                                                          error: &error];
-        
-        
-        // we hold subgenres only in a dictionary
-        self.subgenresByIdString = @{}.mutableCopy;
-        self.genresByIdString = @{}.mutableCopy;
-        
-        for (Genre* g in genresFetchedArray) {
-            
-            if(!g.uniqueId)
-                continue;
-            
-            self.genresByIdString[g.uniqueId] = g;
-            
-            for (SubGenre* s in g.subgenres)
-            {
-                if(!s.uniqueId)
-                    continue;
-                
-                self.subgenresByIdString[s.uniqueId] = s;
-            }
-            
-        }
-        
-        [self getRecommendationsFromRemote];
-
-
-    }];
-
-    
-    
-    
+    [self.collectionView registerNib:[SYNOnBoardingFooter nib]
+          forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                 withReuseIdentifier:[SYNOnBoardingFooter reuseIdentifier]];
+	
+	[[SYNGenreManager sharedManager] fetchGenresWithCompletion:^(NSArray *results) {
+		[self getRecommendationsFromRemoteWithGenres:results];
+	}];
+	
     if (IS_IPAD) {
         [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     }
-
-    
+	
     if (!IS_IPHONE_5) {
         UIEdgeInsets tmpInsets = self.collectionView.contentInset;
         tmpInsets.bottom += 88;
         [self.collectionView setContentInset: tmpInsets];
     }
-
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -164,197 +85,136 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 	[[SYNTrackingManager sharedManager] trackOnboardingScreenView];
 }
 
+- (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar {
+	return UIBarPositionTopAttached;
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
 	return UIStatusBarStyleDefault;
 }
 
-- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock
-{
-    
-    [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
-        
-        [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
-            
-            return [appDelegate.mainRegistry registerCategoriesFromDictionary: dictionary];
-            
-        } completionBlock:^(BOOL success) {
-            
-            CompleteBlock(success);
-            
-            [[SYNGenreManager sharedInstance] registerGenreColorsFromCoreData];
-            
-            [appDelegate.mainManagedObjectContext save:nil];
-            
-        }];
-    } onError:^(NSError* error) {
-        
-    }];
-}
-
-- (void) getRecommendationsFromRemote {
-    
-    self.spinner.hidden = NO;
+- (void)getRecommendationsFromRemoteWithGenres:(NSArray *)genres {
+	
+    [self.spinner startAnimating];
     
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
                                                   andEntityName: kChannelOwner
                                                          params: nil
-                                              completionHandler:^(id responce) {
+                                              completionHandler:^(id response) {
+                                                  [self.spinner stopAnimating];
                                                   
-                                                  if(![responce isKindOfClass:[NSDictionary class]])
+                                                  if (![appDelegate.searchRegistry registerRecommendationsFromDictionary:response])
                                                       return;
-
-                                                  self.spinner.hidden = YES;
+												  
+												  NSArray *recommendations = [self fetchRecommendations];
+												  NSArray *groupedRecommendations = [self groupRecommendations:recommendations byGenres:genres];
+												  
+												  if (IS_IPHONE) {
+													  self.groupedRecommendations = groupedRecommendations;
+												  } else {
+													  // For the iPad we only have one section so we're going to flatten the array
+													  NSMutableArray *array = [NSMutableArray array];
+													  for (NSArray *groupedRecommendation in groupedRecommendations) {
+														  [array addObjectsFromArray:groupedRecommendation];
+													  }
+													  self.groupedRecommendations = @[ array ];
+												  }
                                                   
-                                                  if(![appDelegate.searchRegistry registerRecommendationsFromDictionary:responce])
-                                                      return;
-                                                  
-                                                  [self fetchRecommendationsFromLocal];
-                                                  
+												  [self.collectionView reloadData];
                                                   
                                               } errorHandler:^(id error) {
                                                   
-                                                  self.spinner.hidden = YES;
+                                                  [self.spinner stopAnimating];
                                                   
                                               }];
 }
 
-
-
-- (void) fetchRecommendationsFromLocal {
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    [fetchRequest setEntity:[NSEntityDescription entityForName:[Recommendation entityName]
-										inManagedObjectContext:appDelegate.searchManagedObjectContext]];
+- (NSArray *)fetchRecommendations {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Recommendation entityName]];
+	NSArray *sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES] ];
+	fetchRequest.sortDescriptors = sortDescriptors;
 	
-    self.data = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest
-                                                                      error:NULL];
-    
-    
-    NSFetchRequest *categoriesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Genre entityName]];
-    
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"priority" ascending:NO];
-    
-    [categoriesFetchRequest setSortDescriptors:@[sortDescriptor]];
-    
-    NSArray* genresFetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest:
-								   categoriesFetchRequest
-                                                                                      error:NULL];
-    // == Gets the data from core data in order of priority and then adds its to the displayed data by that order aswell as groups users with common genres.
-    
-    NSArray *genres = [NSArray arrayWithArray:genresFetchedArray];
-    NSMutableArray *tmpData = [NSMutableArray arrayWithArray:self.data];
-    
-    NSMutableArray *tmpArr = [[NSMutableArray alloc]init];
-    NSString *tmpString = [[NSString alloc]init];
-    
-	self.usersByCategory = [NSMutableArray array];
-    
-    for (Genre *tmpGenre in genres) {
-        tmpString = [[NSString alloc]init];
-        if (IS_IPHONE) {
-            tmpArr = [[NSMutableArray alloc]init];
-        }
-        
-        for (int i = tmpData.count; i>0; i--) {
-            Recommendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
-            
-            SubGenre* subgenre = self.subgenresByIdString[tmpRecomendation.categoryId];
-            
-            if ([subgenre.genre.name isEqualToString:tmpGenre.name]) {
-                
-                [tmpArr addObject:tmpRecomendation];
-                [tmpData removeObject:tmpRecomendation];
-                tmpString = tmpGenre.name;
-            }
-        }
-        
-        if (tmpArr.count>0 && IS_IPHONE) {
-            
-            [self.usersByCategory addObject:tmpArr];
-            [self.categories addObject:tmpString];
-        }
-    }
-    
+	return [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest error:nil];
+}
 
-    if (IS_IPHONE && tmpData.count >0) {
-        [self.usersByCategory insertObject: tmpData atIndex:0];
-    }
-    
-    if (IS_IPAD) {
-        // assuming the list is ordered in the backend
-        for (int i = tmpData.count; i>0; i--) {
-            Recommendation *tmpRecomendation = [tmpData objectAtIndex:i-1];
-            [tmpArr insertObject:tmpRecomendation atIndex:0];
-        }
-        
-        [self.usersByCategory addObject:tmpArr];
-    }
-    
-    [self.collectionView reloadData];
+- (NSArray *)groupRecommendations:(NSArray *)recommendations byGenres:(NSArray *)genres {
+	NSDictionary *recommendationsByGenre = [self groupRecommendationsByGenre:recommendations];
+	
+	NSMutableArray *genreRecommendations = [NSMutableArray array];
+	for (Genre *genre in genres) {
+		NSMutableArray *array = [NSMutableArray array];
+		
+		[array addObjectsFromArray:recommendationsByGenre[genre.uniqueId]];
+		
+		for (SubGenre *subgenre in genre.subgenres) {
+			[array addObjectsFromArray:recommendationsByGenre[subgenre.uniqueId]];
+		}
+		
+		if ([array count]) {
+			[genreRecommendations addObject:array];
+		}
+	}
+	
+	return genreRecommendations;
+}
+
+- (NSDictionary *)groupRecommendationsByGenre:(NSArray *)recommendations {
+	NSMutableDictionary *recommendationsByGenre = [NSMutableDictionary dictionary];
+	
+	for (Recommendation *recommendation in recommendations) {
+		NSString *categoryId = recommendation.categoryId;
+		
+		NSMutableArray *genreRecommendations = (recommendationsByGenre[categoryId] ?: [NSMutableArray array]);
+		[genreRecommendations addObject:recommendation];
+		
+		recommendationsByGenre[recommendation.categoryId] = genreRecommendations;
+	}
+	
+	return recommendationsByGenre;
 }
 
 #pragma mark - UICollectionView Delegate/Data Source
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
-    
-    if (IS_IPAD) {
-        return 2;
-    }
-    return self.usersByCategory.count+1;
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+	return [self.groupedRecommendations count] + 1;
 }
 
 
-- (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section {
-    
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     if (section == 0) {
         return 0;
     }
-    
-    //Ipad has no section headers, all data is in the first object
-    if (IS_IPAD) {
-        return ((NSArray*)[self.usersByCategory firstObject]).count;
-    }
-    
-    
-    return ((NSArray*)[self.usersByCategory objectAtIndex:section-1]).count;
+	return [self numberOfRecommendationsForSection:section];
 }
 
 
-- (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
-                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier: OnBoardingCellIndent
-                                                                        forIndexPath: indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+				  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+	
+    SYNOnBoardingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNOnBoardingCell reuseIdentifier]
+                                                                        forIndexPath:indexPath];
     
-    Recommendation* recomendation = self.usersByCategory[indexPath.section-1][indexPath.row];
+	Recommendation *recommendation = [self recommendationForIndexPath:indexPath];
     
-    cell.recommendation = recomendation;
-    
-    if (self.genresByIdString[recomendation.categoryId]) {
-        Genre* genre = self.genresByIdString[recomendation.categoryId];
-        cell.subGenreLabel.text = genre.name;
-        
-        cell.followButton.selected = YES;
-        cell.followButton.userInteractionEnabled = NO;
-    }
-    
-    if(self.subgenresByIdString[recomendation.categoryId]){
-        SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
-        cell.subGenreLabel.text = subgenre.genre.name;
-    }
-    
-    cell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:recomendation.channelOwner.uniqueId];
-
+    cell.recommendation = recommendation;
+	
+	BOOL isEditorsPicks = (indexPath.section == 1 && indexPath.row == 0);
+	if (isEditorsPicks) {
+		cell.followButton.selected = YES;
+		cell.followButton.userInteractionEnabled = NO;
+	}
+	
+	if (IS_IPAD) {
+		cell.subGenreLabel.text = [self titleForIndexPath:indexPath];
+		cell.subGenreLabel.backgroundColor = [self colorForIndexPath:indexPath];
+	}
 
     cell.delegate = self;
     
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     // IPAD has a section for the empty header and
     if (IS_IPAD) {
         if (section != 0) {
@@ -373,76 +233,54 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
     return CGSizeZero;
 }
 
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (IS_IPAD && section != 0) {
         return CGSizeMake(320, 76);
     }
+	
+	if (section == [self.groupedRecommendations count]) {
+		return CGSizeMake(320, 76);
+	}
     
-    if(section!=self.usersByCategory.count)
-    {
-        return CGSizeZero;
-    }
-    return CGSizeMake(320, 76);
+	return CGSizeZero;
 }
 
-- (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
-            viewForSupplementaryElementOfKind: (NSString *) kind
-                                  atIndexPath: (NSIndexPath *) indexPath
-{
-    UICollectionReusableView *supplementaryView = nil;
-	if (kind == UICollectionElementKindSectionHeader)
-    {
-        
+- (UICollectionReusableView *)collectionView:(UICollectionView *) collectionView
+		   viewForSupplementaryElementOfKind:(NSString *) kind
+								 atIndexPath:(NSIndexPath *) indexPath {
+	
+	if (kind == UICollectionElementKindSectionHeader) {
         if (indexPath.section == 0) {
-            supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                                   withReuseIdentifier: OnBoardingHeaderIndent
-                                                                          forIndexPath: indexPath];
+			return [collectionView dequeueReusableSupplementaryViewOfKind:kind
+													  withReuseIdentifier:[SYNOnBoardingHeader reuseIdentifier]
+															 forIndexPath:indexPath];
             
         } else {
-            supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                                   withReuseIdentifier: OnBoardingSectionHeader
-                                                                          forIndexPath: indexPath];
+			
+			SYNOnBoardingSectionHeader *sectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+																						   withReuseIdentifier:[SYNOnBoardingSectionHeader reuseIdentifier]
+																								  forIndexPath:indexPath];
+			
+			sectionHeader.sectionTitle.backgroundColor = [self colorForIndexPath:indexPath];
+			sectionHeader.sectionTitle.text = [self titleForIndexPath:indexPath];
             
-            Recommendation* recomendation = self.usersByCategory[indexPath.section-1][indexPath.row];
-
-            [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recomendation.categoryId]];
-            
-            // special case for editors picks as its a genre not a subgenre
-            if (self.genresByIdString[recomendation.categoryId]) {
-                Genre* genre = self.genresByIdString[recomendation.categoryId];
-                
-                [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:genre.name];
-                
-            } else if(self.subgenresByIdString[recomendation.categoryId]) {
-                SubGenre* subgenre = self.subgenresByIdString[recomendation.categoryId];
-                
-                [((SYNOnBoardingSectionHeader*)supplementaryView).sectionTitle setText:subgenre.genre.name];
-            }
-            
+			return sectionHeader;
         }
-        
-        
-        
-        
-    }
-    else if (kind == UICollectionElementKindSectionFooter)
-    {
-        
-        supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                               withReuseIdentifier: OnBoardingFooterIndent
-                                                                      forIndexPath: indexPath];
-        
-        self.skipButton = ((SYNOnBoardingFooter*)supplementaryView).skipButton;
-        
-        [self.skipButton addTarget:self
-                            action:@selector(skipButtonPressed:)
-                  forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    
-    return supplementaryView;
+    } else if (kind == UICollectionElementKindSectionFooter) {
+		SYNOnBoardingFooter *footer = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+																		 withReuseIdentifier:[SYNOnBoardingFooter reuseIdentifier]
+																				forIndexPath:indexPath];
+		
+		self.skipButton = footer.skipButton;
+		
+		[self.skipButton addTarget:self
+							action:@selector(skipButtonPressed:)
+				  forControlEvents:UIControlEventTouchUpInside];
+		
+		return footer;
+	}
+	
+	return nil;
 }
 
 - (void)followControlPressed:(SYNSocialButton *)socialButton {
@@ -456,8 +294,7 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 	[super followControlPressed:socialButton];
 }
 
-- (void) skipButtonPressed: (UIButton*) button
-{
+- (void)skipButtonPressed:(UIButton*) button {
     button.enabled = NO;
     
 	[[SYNTrackingManager sharedManager] trackOnboardingCompletedWithFollowedCount:self.followedCount];
@@ -470,30 +307,41 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
 
         [[NSNotificationCenter defaultCenter] postNotificationName:kOnboardingCompleted
 															object:self];
-
-}
-
-- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
-    
-    
-    
 }
 
 - (NSString *)trackingScreenName {
 	return @"Onboarding";
 }
 
+- (NSString *)titleForIndexPath:(NSIndexPath *)indexPath {
+	Recommendation *recommendation = [self recommendationForIndexPath:indexPath];
+	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:recommendation.categoryId];
+	return genre.genreName;
+}
+
+- (UIColor *)colorForIndexPath:(NSIndexPath *)indexPath {
+	Recommendation *recommendation = [self recommendationForIndexPath:indexPath];
+	return [[SYNGenreManager sharedManager] colorForGenreWithId:recommendation.categoryId];
+}
+
+- (NSInteger)numberOfRecommendationsForSection:(NSInteger)section {
+	NSArray *recommendations = self.groupedRecommendations[section - 1];
+	return [recommendations count];
+}
+
+- (Recommendation *)recommendationForIndexPath:(NSIndexPath *)indexPath {
+	return self.groupedRecommendations[indexPath.section - 1][indexPath.row];
+}
+
 #pragma mark - AutoRotation
 
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
     [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
-
 }
 
-- (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation {
-    
+- (void)updateLayoutForOrientation:(UIDeviceOrientation)orientation {
     if (IS_IPAD) {
         if ([[SYNDeviceManager sharedInstance] isPortrait]) {
             UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)[self.collectionView collectionViewLayout]);
@@ -511,9 +359,6 @@ static NSString* OnBoardingSectionHeader = @"SYNOnBoardingSectionHeader";
         }
         
     }
-
 }
-
-
 
 @end

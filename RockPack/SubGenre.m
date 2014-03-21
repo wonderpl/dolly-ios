@@ -48,6 +48,14 @@
     self.isDefaultValue = [isDefault boolValue];
 }
 
+- (NSNumber *)color {
+	return self.genre.color;
+}
+
+- (NSString *)genreName {
+	return self.genre.name;
+}
+
 - (NSString *) description
 {
     return [NSString stringWithFormat:@"[Subgenre %p (label:'%@', priority:%i)", self, self.name, self.priorityValue];

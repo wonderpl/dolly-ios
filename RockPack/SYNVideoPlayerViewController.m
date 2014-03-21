@@ -104,8 +104,8 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:self.videoInstance.channel.categoryId];
-	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	
 	if (IS_IPHONE) {
 		UIDevice *device = [UIDevice currentDevice];

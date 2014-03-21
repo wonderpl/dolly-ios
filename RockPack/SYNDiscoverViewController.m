@@ -25,8 +25,8 @@
 #import "UINavigationBar+Appearance.h"
 #import "SYNDiscoverOverlayVideoViewController.h"
 #import "SYNDiscoverOverlayHighlightsViewController.h"
-
 #import "SYNTrackingManager.h"
+#import "SYNGenreManager.h"
 @import QuartzCore;
 
 #define kAutocompleteTime 0.2
@@ -61,13 +61,14 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) SYNSearchResultsViewController* searchResultsController;
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
 // only used on iPad
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *sideContainerWidth;
 
 @property (nonatomic, strong) NSIndexPath *selectedCellIndex;
+
+@property (nonatomic, strong) NSArray *genres;
+
 @end
 
 @implementation SYNDiscoverViewController
@@ -77,9 +78,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 
-- (void)viewDidLoad
-{
-    
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -89,12 +88,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.searchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
     }
     
-    
-    
     self.autocompleteTableView.hidden = YES;
     
     // == Set the Collection View's Cells == //
-    
     
     [self.categoriesCollectionView registerNib:[SYNDiscoverCategoriesCell nib]
                     forCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]];
@@ -170,7 +166,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	if (IS_IPHONE) {
 		[self.navigationController.navigationBar setBackgroundTransparent:NO];
 	}
-
+	
 	[self updateContainerWidths];
     
 }
@@ -179,6 +175,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	[super viewDidAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackDiscoverScreenView];
+	
+	[self.categoriesCollectionView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -199,7 +197,8 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 #pragma mark - Data Retrieval
 
 - (void)selectCategoryForCollection:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath {
-    SubGenre *subGenre = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	Genre *genre = self.genres[indexPath.section];
+	SubGenre *subGenre = genre.subgenres[indexPath.row];
     
     NSString *title = (IS_IPHONE ? subGenre.name : @"");
     
@@ -211,29 +210,30 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 #pragma mark - CollectionView Delegate/Data Source
 
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-	return [self.fetchedResultsController.sections count];
+	return [self.genres count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-	id<NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[section];
-	return [sectionInfo numberOfObjects];
+	Genre *genre = self.genres[section];
+	return [genre.subgenres count];
 }
 
-- (UICollectionViewCell *) collectionView: (UICollectionView *) cv cellForItemAtIndexPath: (NSIndexPath *) indexPath {
-    SubGenre *subGenre = [self.fetchedResultsController objectAtIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+	Genre *genre = self.genres[indexPath.section];
+	SubGenre *subGenre = genre.subgenres[indexPath.row];
 	
     SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
     
-    //Editors picks still get there color
+	UIColor *genreColor = [[SYNGenreManager sharedManager] colorForGenreWithId:subGenre.uniqueId];
     
     if (indexPath.section == 0 && indexPath.row == 0) {
-        categoryCell.selectedColor = [UIColor darkerColorForColor:[[SYNGenreManager sharedInstance] colorFromID:subGenre.uniqueId]] ;
-        categoryCell.deSelectedColor = [[SYNGenreManager sharedInstance] colorFromID:subGenre.uniqueId];
-        categoryCell.backgroundColor = [[SYNGenreManager sharedInstance] colorFromID:subGenre.uniqueId];
+        categoryCell.selectedColor = [UIColor darkerColorForColor:genreColor];
+        categoryCell.deSelectedColor = genreColor;
+        categoryCell.backgroundColor = genreColor;
         
     } else {
-        categoryCell.selectedColor = [[SYNGenreManager sharedInstance] colorFromID:subGenre.uniqueId];
+        categoryCell.selectedColor = genreColor;
         categoryCell.deSelectedColor = [UIColor whiteColor];
     }
 	
@@ -286,19 +286,21 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             viewForSupplementaryElementOfKind: (NSString *) kind
                                   atIndexPath: (NSIndexPath *) indexPath
 {
-    UICollectionReusableView *supplementaryView = nil;
-    
     if (kind == UICollectionElementKindSectionFooter)
     {
-        supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+        SYNDiscoverSectionView *supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
                                                                withReuseIdentifier: DiscoverSectionView
                                                                       forIndexPath: indexPath];
-
-		SubGenre *subGenre = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        ((SYNDiscoverSectionView*)supplementaryView).background.backgroundColor = [[SYNGenreManager sharedInstance] colorFromID:subGenre.uniqueId];
+		
+		Genre *genre = self.genres[indexPath.section];
+		SubGenre *subGenre = genre.subgenres[indexPath.row];
+		
+        supplementaryView.background.backgroundColor = [[SYNGenreManager sharedManager] colorForGenreWithId:subGenre.uniqueId];
+		
+		return supplementaryView;
     }
     
-    return supplementaryView;
+	return nil;
 }
 
 
@@ -416,24 +418,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     
     [self closeAutocomplete];
     
-}
-
-- (NSFetchedResultsController *)fetchedResultsController {
-	if (!_fetchedResultsController) {
-		NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[SubGenre entityName]];
-		[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"genre != nil"]];
-		NSArray *sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"genre.priority" ascending:NO],
-									  [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:NO] ];
-		[fetchRequest setSortDescriptors:sortDescriptors];
-		
-		NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-																								   managedObjectContext:appDelegate.mainManagedObjectContext
-																									 sectionNameKeyPath:@"genre.priority"
-																											  cacheName:nil];
-		
-		self.fetchedResultsController = fetchedResultsController;
-	}
-	return _fetchedResultsController;
 }
 
 #pragma mark - UISearchBar Delegate and Autocomplete Methods
@@ -656,10 +640,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 }
 
 - (void)reloadCategories {
-	[self.fetchedResultsController performFetch:nil];
+	self.genres = [[SYNGenreManager sharedManager] genres];
+	
     [self.categoriesCollectionView reloadData];
-    
-    if ([[self.fetchedResultsController fetchedObjects] count] > 0 && IS_IPAD) {
+	
+	if ([self.genres count] && IS_IPAD) {
         NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         [self.categoriesCollectionView selectItemAtIndexPath:firstIndexPath
 													animated:NO

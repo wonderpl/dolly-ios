@@ -2023,28 +2023,6 @@
     return networkOperation;
 }
 
--(void)getClientIPBasedLocation
-{
-    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: kLocationService
-                                                                                                       params: nil
-                                                                                                   httpMethod: @"GET"
-                                                                                                          ssl: YES];
-    __weak SYNOAuthNetworkEngine* wself = self;
-    [self addCommonHandlerToNetworkOperation: networkOperation
-                           completionHandler:^(id responce) {
-                               
-                               if(![responce isKindOfClass:[NSString class]])
-                                   return;
-                               
-                               [wself.registry registerIPBasedLocation:responce];
-                               
-                           } errorHandler:^(id error) {
-                               
-                           }];
-    
-    [self enqueueOperation: networkOperation];
-}
-
 -(void)trackSessionWithMessage:(NSString*)message
 {
     

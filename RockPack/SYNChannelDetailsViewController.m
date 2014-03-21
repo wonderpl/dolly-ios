@@ -226,8 +226,8 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     
-	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:self.channel.categoryId];
-	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.channel.categoryId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	
 	if ([self.channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
 		[[SYNTrackingManager sharedManager] setChannelRelationDimension:@"own"];

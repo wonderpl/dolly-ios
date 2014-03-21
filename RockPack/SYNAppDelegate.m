@@ -31,6 +31,8 @@
 #import <ACTReporter.h>
 #import <TestFlight.h>
 #import <sqlite3.h>
+#import "SYNGenreManager.h"
+#import "SYNLocationManager.h"
 #import "SYNAppearanceManager.h"
 @import AVFoundation;
 
@@ -48,7 +50,6 @@
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) SYNChannelManager *channelManager;
 @property (nonatomic, strong) SYNLoginBaseViewController *loginViewController;
-@property (nonatomic, strong) SYNOnBoardingViewController *onBoardingViewController;
 @property (nonatomic, strong) SYNMasterViewController *masterViewController;
 @property (nonatomic, strong) SYNNetworkEngine *networkEngine;
 @property (nonatomic, strong) SYNOAuthNetworkEngine *oAuthNetworkEngine;
@@ -106,7 +107,13 @@
     self.channelManager = [SYNChannelManager manager];
     
     [SYNYouTubeWebView setup];
-    
+	
+	[[SYNLocationManager sharedManager] updateLocationWithCompletion:^(NSString *location) {
+		if (self.currentUser) {
+			[[SYNGenreManager sharedManager] fetchGenresWithCompletion:nil];
+		}
+	}];
+	
     // Video Queue View Controller //
     self.navigationManager = [SYNNavigationManager manager];
     
@@ -341,35 +348,33 @@
     _currentUser = nil;
     
     [self nukeCoreData];
-    
+	
     self.window.rootViewController = [self createAndReturnLoginViewController];
 }
 
 
-- (void) loginCompleted: (NSNotification *) notification
-{
+- (void)loginCompleted:(NSNotification *)notification {
 	[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
 	[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
-    [SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:YES];
-    if ([SYNLoginManager sharedManager].registrationCheck == YES) {
-        self.onBoardingViewController = [[SYNOnBoardingViewController alloc]init];
-        self.window.rootViewController = self.onBoardingViewController;
-        SYNOnBoardingOverlayViewController* onboardingOverlay = [[SYNOnBoardingOverlayViewController alloc] init];
-        [onboardingOverlay addToViewController:self.window.rootViewController];
-    } else {
-        self.window.rootViewController = [self createAndReturnRootViewController];
-    }
-    
-    self.loginViewController = nil;
+	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:YES];
+	
+	[[SYNGenreManager sharedManager] fetchGenresWithCompletion:nil];
+	
+	if ([SYNLoginManager sharedManager].registrationCheck) {
+		self.window.rootViewController = [[SYNOnBoardingViewController alloc] init];
+		
+		SYNOnBoardingOverlayViewController* onboardingOverlay = [[SYNOnBoardingOverlayViewController alloc] init];
+		[onboardingOverlay addToViewController:self.window.rootViewController];
+	} else {
+		self.window.rootViewController = [self createAndReturnRootViewController];
+	}
+	
+	self.loginViewController = nil;
 }
 
 
-- (void) onBoardingCompleted: (NSNotification *) notification
-{
-    
+- (void)onBoardingCompleted: (NSNotification *)notification {
     self.window.rootViewController = [self createAndReturnRootViewController];
-    self.onBoardingViewController = nil;
-    
 }
 
 #pragma mark - App Delegate Methods
@@ -778,8 +783,6 @@
     self.oAuthNetworkEngine = [[SYNOAuthNetworkEngine alloc] initWithDefaultSettings];
     
     [self.oAuthNetworkEngine useCache];
-    
-    [self.oAuthNetworkEngine getClientIPBasedLocation];
     
     // Use this engine as the default for the asynchronous image loading category on UIImageView
     UIImageView.defaultEngine = self.networkEngine;

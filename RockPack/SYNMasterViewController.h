@@ -71,8 +71,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 -(void)displayNotificationsLoaded:(NSInteger)notificationsCount;
 
-- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock;
-
 // on-boarding
 
 

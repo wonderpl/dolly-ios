@@ -188,7 +188,7 @@
     
     [self setBorder];
 	
-	[self setCategoryColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
+	[self setCategoryColor:[[SYNGenreManager sharedManager] colorForGenreWithId:channel.categoryId]];
 
 	self.separatorView.hidden = NO;
 

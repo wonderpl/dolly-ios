@@ -7,14 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SYNNetworkTypes.h"
+
+@class Genre;
 
 @interface SYNGenreManager : NSObject
 
+@property (nonatomic, copy, readonly) NSArray *genres;
 
-+ (instancetype) sharedInstance;
++ (instancetype)sharedManager;
 
--(void)registerGenreColorsFromCoreData;
--(UIColor *) colorFromID : (NSString *) genreId;
-- (NSString *)nameFromID:(NSString *)genreId;
+- (void)fetchGenresWithCompletion:(SYNNetworkArrayResultBlock)completionBlock;
+
+- (UIColor *)colorForGenreWithId:(NSString *)genreId;
+
+- (Genre *)genreWithId:(NSString *)genreId;
 
 @end

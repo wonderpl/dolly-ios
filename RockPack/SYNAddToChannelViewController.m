@@ -156,7 +156,7 @@
         
         existingChannel.titleLabel.text = [channel.title uppercaseString];
         
-        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:channel.categoryId]];
+        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreManager sharedManager] colorForGenreWithId:channel.categoryId]];
         
         cell = existingChannel;
     }

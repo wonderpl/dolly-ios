@@ -556,6 +556,7 @@
 		E92835DF18D9B78F00F7DA27 /* SYNAppearanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E92835DE18D9B78F00F7DA27 /* SYNAppearanceManager.m */; };
 		E92837AC189C022E005D5108 /* SYNCommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837AB189C022E005D5108 /* SYNCommentsModel.m */; };
 		E92837B2189C0BE9005D5108 /* SYNFacebookButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */; };
+		E929AD7218D0AF0B001E1792 /* SYNHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E929AD7118D0AF0B001E1792 /* SYNHTTPSessionManager.m */; };
 		E92CBAEE1887E29500A07070 /* SYNVideoPlayerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */; };
 		E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D3357184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m */; };
 		E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D335A184E239C0025D1DF /* SYNPagingModel.m */; };
@@ -568,6 +569,8 @@
 		E93E10E6183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */; };
 		E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */; };
 		E947097318D70F21000174A7 /* SYNYouTubeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E947097218D70F21000174A7 /* SYNYouTubeWebView.m */; };
+		E947097918D75F5A000174A7 /* SYNLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E947097818D75F5A000174A7 /* SYNLocationManager.m */; };
+		E947097D18D76277000174A7 /* SYNStringResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = E947097C18D76277000174A7 /* SYNStringResponseSerializer.m */; };
 		E94BEFA918C9F18F00762651 /* _Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFA818C9F18F00762651 /* _Recommendation.m */; };
 		E94BEFAC18C9F19A00762651 /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAB18C9F19A00762651 /* Recommendation.m */; };
 		E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */; };
@@ -1433,6 +1436,8 @@
 		E92837AB189C022E005D5108 /* SYNCommentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCommentsModel.m; sourceTree = "<group>"; };
 		E92837B0189C0BE9005D5108 /* SYNFacebookButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFacebookButton.h; sourceTree = "<group>"; };
 		E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFacebookButton.m; sourceTree = "<group>"; };
+		E929AD7018D0AF0B001E1792 /* SYNHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNHTTPSessionManager.h; sourceTree = "<group>"; };
+		E929AD7118D0AF0B001E1792 /* SYNHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNHTTPSessionManager.m; sourceTree = "<group>"; };
 		E92A2C5D187F0A7C002A6447 /* SYNVideoCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoCellDelegate.h; sourceTree = "<group>"; };
 		E92CBAEC1887E29500A07070 /* SYNVideoPlayerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerAnimator.h; sourceTree = "<group>"; };
 		E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerAnimator.m; sourceTree = "<group>"; };
@@ -1456,6 +1461,11 @@
 		E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOoyalaVideoPlayer.m; sourceTree = "<group>"; };
 		E947097118D70F21000174A7 /* SYNYouTubeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNYouTubeWebView.h; sourceTree = "<group>"; };
 		E947097218D70F21000174A7 /* SYNYouTubeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNYouTubeWebView.m; sourceTree = "<group>"; };
+		E947097718D75F5A000174A7 /* SYNLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLocationManager.h; sourceTree = "<group>"; };
+		E947097818D75F5A000174A7 /* SYNLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLocationManager.m; sourceTree = "<group>"; };
+		E947097B18D76277000174A7 /* SYNStringResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNStringResponseSerializer.h; sourceTree = "<group>"; };
+		E947097C18D76277000174A7 /* SYNStringResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNStringResponseSerializer.m; sourceTree = "<group>"; };
+		E947097E18D84BBB000174A7 /* SYNNetworkTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNNetworkTypes.h; sourceTree = "<group>"; };
 		E94BEFA718C9F18F00762651 /* _Recommendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Recommendation.h; sourceTree = "<group>"; };
 		E94BEFA818C9F18F00762651 /* _Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Recommendation.m; sourceTree = "<group>"; };
 		E94BEFAA18C9F19A00762651 /* Recommendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recommendation.h; sourceTree = "<group>"; };
@@ -1873,6 +1883,8 @@
 				019E6A62165FD9AC002B312A /* SYNOAuthNetworkEngine.h */,
 				019E6A63165FD9AC002B312A /* SYNOAuthNetworkEngine.m */,
 				BEA1E33216CE605A000AB59D /* Custom Network Operations */,
+				E929AD7018D0AF0B001E1792 /* SYNHTTPSessionManager.h */,
+				E929AD7118D0AF0B001E1792 /* SYNHTTPSessionManager.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -2071,6 +2083,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E947097A18D76236000174A7 /* Serializers */,
 				0E3AE68D1875DE5D008A8D00 /* Genre Manager */,
 				E9B8A501185B209B00F0D625 /* Animators */,
 				BE1B3DE31810263B00DA2BD6 /* Navigation Manager */,
@@ -2083,6 +2096,9 @@
 				BEF9E5AD16DCBAA300286113 /* Sound */,
 				BEF9E5B416DD23F000286113 /* Video Queue */,
 				E9E1E27918561BFF0051E312 /* Paging Models */,
+				E947097718D75F5A000174A7 /* SYNLocationManager.h */,
+				E947097818D75F5A000174A7 /* SYNLocationManager.m */,
+				E947097E18D84BBB000174A7 /* SYNNetworkTypes.h */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -3684,6 +3700,15 @@
 			name = "Video Queue";
 			sourceTree = "<group>";
 		};
+		E947097A18D76236000174A7 /* Serializers */ = {
+			isa = PBXGroup;
+			children = (
+				E947097B18D76277000174A7 /* SYNStringResponseSerializer.h */,
+				E947097C18D76277000174A7 /* SYNStringResponseSerializer.m */,
+			);
+			name = Serializers;
+			sourceTree = "<group>";
+		};
 		E9B8A501185B209B00F0D625 /* Animators */ = {
 			isa = PBXGroup;
 			children = (
@@ -4319,6 +4344,7 @@
 				BEE01B681851E7B1000CF681 /* SYNCommentingCollectionViewCell.m in Sources */,
 				4CDD76A618CA014A000B2CBD /* SYNFeedOverlayViewController.m in Sources */,
 				E9F6255618854A3D000EF6A2 /* SYNIPhoneSignupUsernameViewController.m in Sources */,
+				E947097D18D76277000174A7 /* SYNStringResponseSerializer.m in Sources */,
 				01946B921683335400354601 /* _VideoInstance.m in Sources */,
 				E9F7D9FC189A99D400BA79D4 /* SYNCarouselVideoScrollView.m in Sources */,
 				01946B971683339F00354601 /* ChannelOwner.m in Sources */,
@@ -4411,6 +4437,7 @@
 				BEE01B7018521DB8000CF681 /* _Comment.m in Sources */,
 				E93C7F0C18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m in Sources */,
 				E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */,
+				E947097918D75F5A000174A7 /* SYNLocationManager.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
 				E9F62550188404A8000EF6A2 /* SYNiPhoneLoginAnimator.m in Sources */,
 				BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */,
@@ -4491,6 +4518,7 @@
 				E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */,
 				E9F625641885C238000EF6A2 /* SYNGradientMaskView.m in Sources */,
 				E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */,
+				E929AD7218D0AF0B001E1792 /* SYNHTTPSessionManager.m in Sources */,
 				38281F1D17439B770024DC18 /* SYNLoginBaseViewController.m in Sources */,
 				3864D2DC1743DB3000A90ED3 /* SYNImagePickerController.m in Sources */,
 				E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */,

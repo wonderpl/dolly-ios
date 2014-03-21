@@ -17,7 +17,7 @@
 
 - (void) awakeFromNib
 {
-    
+    [super awakeFromNib];
     
     
     self.descriptionLabel.font = [UIFont regularCustomFontOfSize:self.descriptionLabel.font.pointSize];
@@ -70,9 +70,10 @@
     self.nameLabel.text = recommendation.displayName;
     
     recommendation.descriptionText = recommendation.descriptionText;
-    
+	
     if (IS_IPAD) {
-        [self.subGenreLabel setBackgroundColor:[[SYNGenreManager sharedInstance] colorFromID:recommendation.categoryId]];
+		SYNGenreManager *genreManager = [SYNGenreManager sharedManager];
+		self.subGenreLabel.backgroundColor = [genreManager colorForGenreWithId:recommendation.categoryId];
     }
     
     self.descriptionLabel.text = recommendation.descriptionText;

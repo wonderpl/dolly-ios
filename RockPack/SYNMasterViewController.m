@@ -112,34 +112,9 @@
     
     self.arrowForOverlayImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ArrowCommentBox"]];
     
-    //This call is not being made, the data is in core data as there is also a call in the onboarding view controller
-    //Need a solution that wouldnt require this check. The sucess block is not getting called when the same call was made earlier. Could be something to do with cacheing 
-    
-    if ([SYNLoginManager sharedManager].registrationCheck == NO) {
-        [self loadBasicDataWithComplete:^(BOOL success) {
-			
-			// HACK: THIS IS TO WORK AROUND THE CASE OF THE STUPID NETWORKING LIBRARY CALLING
-			// THIS BLOCK TWICE RESULTING IN NOTIFICATIONS NOT SHOWING
-			if ([self.childViewControllers containsObject:self.containerViewController]) {
-				return;
-			}
-            
-            [self addChildViewController:self.containerViewController];
-            
-            // set the view programmatically, this will call the viewDidLoad of the container through its custom setter
-            
-            self.containerViewController.view = self.containerView;
-            
-			[appDelegate handlePendingOpenURL];
-        }];
-    } else {
-        [self addChildViewController:self.containerViewController];
-        self.containerViewController.view = self.containerView;
-    }
-    // load basic data like the Genres
-   
-    
-    
+	[self addChildViewController:self.containerViewController];
+	self.containerViewController.view = self.containerView;
+	
     //Hiding the tab bar before a animation to show it
     //Hiding here to keep the nib more clean
     //Animation is done in ViewDidAppear
@@ -171,28 +146,6 @@
         }];
     }
 
-}
-
-- (void)loadBasicDataWithComplete:(void(^)(BOOL))CompleteBlock {
-    
-    [appDelegate.networkEngine updateCategoriesOnCompletion: ^(NSDictionary* dictionary){
-        
-        [appDelegate.mainRegistry performInBackground:^BOOL(NSManagedObjectContext *backgroundContext) {
-            
-            return [appDelegate.mainRegistry registerCategoriesFromDictionary: dictionary];
-            
-        } completionBlock:^(BOOL success) {
-            
-            CompleteBlock(success);
-            
-            [[SYNGenreManager sharedInstance] registerGenreColorsFromCoreData];
-            
-        }];
-    } onError:^(NSError* error) {
-        
-        CompleteBlock(NO);
-        
-    }];
 }
 
 #pragma mark - Popular Genre

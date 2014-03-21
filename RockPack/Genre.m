@@ -84,6 +84,9 @@
     return subGenreIds;
 }
 
+- (NSString *)genreName {
+	return self.name;
+}
 
 - (NSString *) description
 {

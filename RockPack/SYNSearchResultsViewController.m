@@ -304,8 +304,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForGenre: (NSString *) genreId
 {
-	NSString *genreName = [[SYNGenreManager sharedInstance] nameFromID:genreId];
-	[[SYNTrackingManager sharedManager] setCategoryDimension:genreName];
+	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:genreId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	
 	self.searchType = SYNSearchTypeBrowse;
 

@@ -11,5 +11,6 @@
 
 - (NSArray *) getSubGenreIdArray;
 
+- (NSString *)genreName;
 
 @end
