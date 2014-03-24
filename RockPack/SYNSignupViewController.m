@@ -144,12 +144,14 @@ static const NSInteger UsernameMaxLength = 20;
     // == Not a real date == //
     
     if (!potentialDate) {
+		dateField.errorMode = YES;
+		monthField.errorMode = YES;
 		yearField.errorMode = YES;
 		errorLabel.text = NSLocalizedString(@"register_screen_form_error_invalid_date", nil);
 		
         return NO;
     }
-    
+	
     NSDate *nowDate = [NSDate date];
     
     // == In the future == //
