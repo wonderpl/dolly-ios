@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -58,7 +58,7 @@
                         </button>
                     </subviews>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Xpe-E2-vgS" userLabel="Users Collection View">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Xpe-E2-vgS" userLabel="Users Collection View">
                     <rect key="frame" x="0.0" y="111" width="320" height="457"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -66,7 +66,7 @@
                         <size key="itemSize" width="320" height="120"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="49"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -74,7 +74,7 @@
                         <outlet property="delegate" destination="-1" id="hWC-DU-jSg"/>
                     </connections>
                 </collectionView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="FGp-za-xxN" userLabel="Videos Collection View">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="FGp-za-xxN" userLabel="Videos Collection View">
                     <rect key="frame" x="0.0" y="111" width="320" height="457"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -82,7 +82,7 @@
                         <size key="itemSize" width="320" height="382"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="49"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
@@ -90,22 +90,44 @@
                         <outlet property="delegate" destination="-1" id="VQ7-oN-6G8"/>
                     </connections>
                 </collectionView>
-                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Videos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="254" translatesAutoresizingMaskIntoConstraints="NO" id="bZV-Ur-AjO" userLabel="Label - No Videos Label">
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Videos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="254" translatesAutoresizingMaskIntoConstraints="NO" id="bZV-Ur-AjO" userLabel="Label - No Videos Label">
                     <rect key="frame" x="33" y="234" width="254" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="254" id="NF2-Oh-3ln"/>
+                        <constraint firstAttribute="height" constant="100" id="lMc-DG-lBX"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Users" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="254" translatesAutoresizingMaskIntoConstraints="NO" id="9AH-zX-4as" userLabel="Label - No Users Label">
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Users" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="254" translatesAutoresizingMaskIntoConstraints="NO" id="9AH-zX-4as" userLabel="Label - No Users Label">
                     <rect key="frame" x="33" y="234" width="254" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="NaP-vT-rNZ"/>
+                        <constraint firstAttribute="width" constant="254" id="YT3-cH-eNl"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="bZV-Ur-AjO" secondAttribute="centerX" id="4dO-Jq-dXR"/>
+                <constraint firstItem="FGp-za-xxN" firstAttribute="leading" secondItem="pzo-pG-kmB" secondAttribute="leading" id="50H-qq-3Dv"/>
+                <constraint firstItem="Xpe-E2-vgS" firstAttribute="leading" secondItem="pzo-pG-kmB" secondAttribute="leading" id="8I3-ip-zdI"/>
+                <constraint firstAttribute="trailing" secondItem="FGp-za-xxN" secondAttribute="trailing" id="PGH-XU-hUW"/>
+                <constraint firstAttribute="bottom" secondItem="FGp-za-xxN" secondAttribute="bottom" id="QKq-8L-x8O"/>
+                <constraint firstAttribute="trailing" secondItem="Xpe-E2-vgS" secondAttribute="trailing" id="SBP-B8-5Or"/>
+                <constraint firstItem="Xpe-E2-vgS" firstAttribute="top" secondItem="pzo-pG-kmB" secondAttribute="top" constant="111" id="azm-s7-Fah"/>
+                <constraint firstItem="FGp-za-xxN" firstAttribute="top" secondItem="pzo-pG-kmB" secondAttribute="top" constant="111" id="b6b-8G-Ugw"/>
+                <constraint firstAttribute="centerY" secondItem="9AH-zX-4as" secondAttribute="centerY" id="gGk-k1-wtS"/>
+                <constraint firstAttribute="centerY" secondItem="bZV-Ur-AjO" secondAttribute="centerY" id="noF-1s-tIU"/>
+                <constraint firstAttribute="bottom" secondItem="Xpe-E2-vgS" secondAttribute="bottom" id="qAc-fT-W7b"/>
+                <constraint firstAttribute="centerX" secondItem="9AH-zX-4as" secondAttribute="centerX" id="yZ1-7V-809"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
