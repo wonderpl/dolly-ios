@@ -867,9 +867,6 @@
     {
         return;
     }
-    
-    // Call the close method on our parent
-    [self.overlayParent removeVideoOverlayController];
 }
 
 
@@ -888,8 +885,6 @@
         return;
     }
     
-    [self.overlayParent removeVideoOverlayController];
-    
     // Get the video instance for the currently selected video
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];
     
@@ -904,8 +899,6 @@
     {
         return;
     }
-    
-    [self.overlayParent removeVideoOverlayController];
     
     // Get the video instance for the currently selected video
     VideoInstance *videoInstance = self.videoInstanceArray [self.currentSelectedIndex];

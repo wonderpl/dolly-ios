@@ -638,8 +638,7 @@
 }
 
 - (void)scrubberBarFullScreenToggled:(BOOL)fullScreen {
-	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	[appDelegate.masterViewController.videoViewerViewController userTouchedMaxMinButton];
+	
 }
 
 

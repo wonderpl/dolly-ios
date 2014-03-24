@@ -33,7 +33,6 @@
 
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
 @property (nonatomic, strong) SYNNetworkMessageView* networkMessageView;
-@property (nonatomic, strong) SYNVideoViewerViewController *videoViewerViewController;
 
 @property (nonatomic, weak) UIViewController *overlayController; // keep it weak so that the overlay gets deallocated as soon as it dissapears from screen
 @property (nonatomic, strong) UIView* backgroundOverlayView; // darken the screen
@@ -265,14 +264,6 @@
     {
         AnimationsBlock();
     }
-    
-    
-    // pause video
-    
-    if (self.videoViewerViewController)
-    {
-        [self.videoViewerViewController pauseIfVideoActive];
-    }
 }
 
 - (void) backgroundOverlayTapped:(UITapGestureRecognizer*)recogniser
@@ -354,21 +345,6 @@
     }
     
 }
-
-#pragma mark - Video Overlay View
-
-- (void) removeVideoOverlayController
-{
-
-    if (!self.videoViewerViewController) {
-        [self dismissViewControllerAnimated:NO completion:^{
-            self.videoViewerViewController = nil;
-        }];
-    }
-    
-
-}
-
 
 #pragma mark - Notification Handlers
 

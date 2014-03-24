@@ -9,7 +9,7 @@
 
 #import "SYNAppDelegate.h"
 #import "SYNNetworkMessageView.h"
-#import "SYNVideoViewerViewController.h"
+#import "SYNAbstractViewController.h"
 #import "SYNPopoverable.h"
 
 @import UIKit;
@@ -26,7 +26,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 @property (nonatomic, strong) SYNAbstractViewController* originViewController;
 @property (strong, nonatomic) Reachability *reachability;
-@property (nonatomic, readonly) SYNVideoViewerViewController *videoViewerViewController;
 
 @property (nonatomic, strong) IBOutlet UIView* errorContainerView;
 
@@ -41,8 +40,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 - (id) initWithContainerViewController: (UIViewController*) root;
 
 - (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;
-
-- (void) removeVideoOverlayController;
 
 // == Adding an Overlay == //
 

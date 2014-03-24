@@ -756,10 +756,6 @@
 
 - (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId
 {
-    // The Overlay must be removed if there is ont alreaedy displaying
-    [appDelegate.masterViewController removeVideoOverlayController];
-
-    
 //    [self viewChannelDetails:channel withAnimation:NO];
     SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                usingMode:kChannelDetailsModeDisplay];
