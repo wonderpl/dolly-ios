@@ -28,12 +28,6 @@
 #define kBackgroundOverlayAlpha 0.5f
 
 @interface SYNMasterViewController ()
-{
-    
-}
-
-@property (nonatomic) BOOL searchIsInProgress;
-@property (nonatomic) BOOL showingBackButton;
 
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 
