@@ -222,6 +222,13 @@
 		return;
 	}
 	
+	if (![self validateDateField:self.dayTextField
+					  monthField:self.monthTextField
+					   yearField:self.yearTextField
+					  errorLabel:self.dobErrorLabel]) {
+		return;
+	}
+	
 	[self.emailTextField resignFirstResponder];
 	[self.passwordTextField resignFirstResponder];
 	
