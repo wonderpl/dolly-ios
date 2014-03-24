@@ -191,17 +191,4 @@
 
 }
 
-#pragma mark - Description
-
-- (NSString *) description
-{
-    return NSStringFromClass([self class]);
-}
-
--(void) popBack
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
 @end
