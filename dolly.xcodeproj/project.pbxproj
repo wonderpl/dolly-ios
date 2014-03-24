@@ -595,6 +595,7 @@
 		E99B8D3F1892AD9500E08ABD /* ScrubberBarHD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E99B8D3D1892AD9500E08ABD /* ScrubberBarHD@2x.png */; };
 		E9A465FE187FFA76007511B3 /* SYNTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A465FD187FFA76007511B3 /* SYNTabBar.m */; };
 		E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */; };
+		E9A6900B18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6900A18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m */; };
 		E9A75E8118882D8200B7F55F /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A75E8018882D8200B7F55F /* UIImage+Blur.m */; };
 		E9AB7E05188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9AB7E04188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib */; };
 		E9AD5B68187D6B9600298D95 /* ButtonFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AD5B66187D6B9600298D95 /* ButtonFacebook.png */; };
@@ -1505,6 +1506,7 @@
 		E9A465FD187FFA76007511B3 /* SYNTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTabBar.m; sourceTree = "<group>"; };
 		E9A4E5301864623E00972F09 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
 		E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
+		E9A6900A18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnboardingViewControllerSpec.m; sourceTree = "<group>"; };
 		E9A75E7F18882D8200B7F55F /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		E9A75E8018882D8200B7F55F /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		E9AB7E04188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelCreateNewCell~iphone.xib"; sourceTree = "<group>"; };
@@ -1930,6 +1932,7 @@
 				E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */,
 				E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */,
 				E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */,
+				E9A6900A18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
 				BEB3135918182D6100FAF98A /* data */,
 			);
@@ -4563,6 +4566,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E985176418B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m in Sources */,
+				E9A6900B18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m in Sources */,
 				E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */,
 				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
 			);

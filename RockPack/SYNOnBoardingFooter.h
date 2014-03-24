@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNOnBoardingFooter : UICollectionReusableView
-@property (strong, nonatomic) IBOutlet UIView *border;
+@protocol SYNOnboardingFooterDelegate <NSObject>
 
-@property (nonatomic, strong) IBOutlet UIButton* skipButton;
+- (void)continueButtonPressed:(UIButton *)button;
+
+@end
+
+@interface SYNOnBoardingFooter : UICollectionReusableView
+
+@property (nonatomic, weak) id<SYNOnboardingFooterDelegate> delegate;
 
 @end

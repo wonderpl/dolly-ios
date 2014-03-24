@@ -29,12 +29,10 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNGenreManager.h"
 
-@interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SYNOnboardingFooterDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
-
-@property (nonatomic, weak) UIButton *skipButton;
 
 @property (nonatomic, assign) NSInteger followedCount;
 
@@ -267,12 +265,7 @@
 		SYNOnBoardingFooter *footer = [collectionView dequeueReusableSupplementaryViewOfKind:kind
 																		 withReuseIdentifier:[SYNOnBoardingFooter reuseIdentifier]
 																				forIndexPath:indexPath];
-		
-		self.skipButton = footer.skipButton;
-		
-		[self.skipButton addTarget:self
-							action:@selector(skipButtonPressed:)
-				  forControlEvents:UIControlEventTouchUpInside];
+		footer.delegate = self;
 		
 		return footer;
 	}
@@ -291,19 +284,17 @@
 	[super followControlPressed:socialButton];
 }
 
-- (void)skipButtonPressed:(UIButton*) button {
-    button.enabled = NO;
-    
+- (void)continueButtonPressed:(UIButton *)button {
+	button.enabled = NO;
+	
 	[[SYNTrackingManager sharedManager] trackOnboardingCompletedWithFollowedCount:self.followedCount];
     
-        [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                            object: self
-                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
-
-        
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:kOnboardingCompleted
-															object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+														object: self
+													  userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kOnboardingCompleted
+														object:self];
 }
 
 - (NSString *)trackingScreenName {
