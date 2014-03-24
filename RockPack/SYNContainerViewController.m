@@ -16,12 +16,6 @@
 #import "UIFont+SYNFont.h"
 #import "UINavigationBar+Appearance.h"
 
-@import AudioToolbox;
-@import QuartzCore;
-
-
-#define VIEW_CONTROLLER_TRANSITION_DURATION 0.4
-
 @interface SYNContainerViewController ()
 
 @property (nonatomic, strong) NSArray *viewControllers;
