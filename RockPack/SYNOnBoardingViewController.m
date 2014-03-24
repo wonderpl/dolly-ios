@@ -17,7 +17,9 @@
 #import "SYNOnBoardingHeader.h"
 #import "SYNOnBoardingFooter.h"
 #import "UIFont+SYNFont.h"
+#import "UIDevice+Helpers.h"
 #import "Genre.h"
+#import "UIDevice+Hardware.h"
 #import "AppConstants.h"
 #import "SubGenre.h"
 #import "UIColor+SYNColor.h"
@@ -42,6 +44,7 @@
 
 @implementation SYNOnBoardingViewController
 
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,11 +68,11 @@
 		[self getRecommendationsFromRemoteWithGenres:results];
 	}];
 	
-    if (IS_IPAD) {
+    if ([[UIDevice currentDevice] isPad]) {
         [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     }
 	
-	if (IS_IPHONE) {
+	if ([[UIDevice currentDevice] isPhone]) {
 		self.collectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
 	}
 }
@@ -80,12 +83,14 @@
 	[[SYNTrackingManager sharedManager] trackOnboardingScreenView];
 }
 
-- (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar {
-	return UIBarPositionTopAttached;
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
 	return UIStatusBarStyleDefault;
+}
+
+#pragma mark - UIBarPositioningDelegate
+
+- (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar {
+	return UIBarPositionTopAttached;
 }
 
 - (void)getRecommendationsFromRemoteWithGenres:(NSArray *)genres {
@@ -104,7 +109,7 @@
 												  NSArray *recommendations = [self fetchRecommendations];
 												  NSArray *groupedRecommendations = [self groupRecommendations:recommendations byGenres:genres];
 												  
-												  if (IS_IPHONE) {
+												  if ([[UIDevice currentDevice] isPhone]) {
 													  self.groupedRecommendations = groupedRecommendations;
 												  } else {
 													  // For the iPad we only have one section so we're going to flatten the array
@@ -199,7 +204,7 @@
 		cell.followButton.userInteractionEnabled = NO;
 	}
 	
-	if (IS_IPAD) {
+	if ([[UIDevice currentDevice] isPad]) {
 		cell.subGenreLabel.text = [self titleForIndexPath:indexPath];
 		cell.subGenreLabel.backgroundColor = [self colorForIndexPath:indexPath];
 	}
@@ -210,22 +215,19 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    // IPAD has a section for the empty header and
-    if (IS_IPAD) {
-        if (section != 0) {
-            return CGSizeZero;
-        } else {
+    if ([[UIDevice currentDevice] isPad]) {
+        if (section == 0) {
             return CGSizeMake(320, 108);
+		} else {
+            return CGSizeZero;
         }
-    }
-    
-    if (section==0) {
-        return CGSizeMake(320, 90);
     } else {
-        return CGSizeMake(320, 30);
-    }
-    
-    return CGSizeZero;
+		if (section == 0) {
+			return CGSizeMake(320, 90);
+		} else {
+			return CGSizeMake(320, 30);
+		}
+	}
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
@@ -240,9 +242,9 @@
 	return CGSizeZero;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *) collectionView
-		   viewForSupplementaryElementOfKind:(NSString *) kind
-								 atIndexPath:(NSIndexPath *) indexPath {
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+		   viewForSupplementaryElementOfKind:(NSString *)kind
+								 atIndexPath:(NSIndexPath *)indexPath {
 	
 	if (kind == UICollectionElementKindSectionHeader) {
         if (indexPath.section == 0) {
@@ -326,27 +328,26 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
+	if ([[UIDevice currentDevice] isPad]) {
+		[self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
+	}
 }
 
 - (void)updateLayoutForOrientation:(UIDeviceOrientation)orientation {
-    if (IS_IPAD) {
-        if ([[SYNDeviceManager sharedInstance] isPortrait]) {
-            UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)[self.collectionView collectionViewLayout]);
-            
-            tmpLayout.sectionInset = UIEdgeInsetsMake(0, 120, 0, 120);
-            [self.collectionView setCollectionViewLayout:tmpLayout];
-            [self.collectionView.collectionViewLayout invalidateLayout];
-            
-        } else {
-            UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)[self.collectionView collectionViewLayout]);
-            
-            tmpLayout.sectionInset = UIEdgeInsetsMake(0, 100, 0, 100);
-            [self.collectionView setCollectionViewLayout:tmpLayout];
-            [self.collectionView.collectionViewLayout invalidateLayout];
-        }
-        
-    }
+	if ([[SYNDeviceManager sharedInstance] isPortrait]) {
+		UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)[self.collectionView collectionViewLayout]);
+		
+		tmpLayout.sectionInset = UIEdgeInsetsMake(0, 120, 0, 120);
+		[self.collectionView setCollectionViewLayout:tmpLayout];
+		[self.collectionView.collectionViewLayout invalidateLayout];
+		
+	} else {
+		UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)[self.collectionView collectionViewLayout]);
+		
+		tmpLayout.sectionInset = UIEdgeInsetsMake(0, 100, 0, 100);
+		[self.collectionView setCollectionViewLayout:tmpLayout];
+		[self.collectionView.collectionViewLayout invalidateLayout];
+	}
 }
 
 @end

@@ -540,6 +540,7 @@
 		BEF9E5B016DCBAC800286113 /* SYNSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF9E5AF16DCBAC800286113 /* SYNSoundPlayer.m */; };
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
 		C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3685246F69AA4C9B93DDEDAC /* libPods.a */; };
+		E90506A618E05FD800E0910E /* UIDevice+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E90506A518E05FD800E0910E /* UIDevice+Helpers.m */; };
 		E9058169183CC87C00257E7F /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9058168183CC87C00257E7F /* libicucore.dylib */; };
 		E905A93B189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E905A93A189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib */; };
 		E905A93E189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E905A93C189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png */; };
@@ -1409,6 +1410,8 @@
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
 		BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoQueue.m; sourceTree = "<group>"; };
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E90506A418E05FD800E0910E /* UIDevice+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Helpers.h"; sourceTree = "<group>"; };
+		E90506A518E05FD800E0910E /* UIDevice+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Helpers.m"; sourceTree = "<group>"; };
 		E9058166183CC77F00257E7F /* libPods-Ooyala.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Ooyala.a"; path = "Pods/build/Debug-iphoneos/libPods-Ooyala.a"; sourceTree = "<group>"; };
 		E9058168183CC87C00257E7F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E905A93A189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNNotificationsTableViewCell~ipad.xib"; sourceTree = "<group>"; };
@@ -2207,6 +2210,8 @@
 				E9FDCD95188D7C4700C31CC1 /* UILabel+Animation.m */,
 				E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */,
 				E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */,
+				E90506A418E05FD800E0910E /* UIDevice+Helpers.h */,
+				E90506A518E05FD800E0910E /* UIDevice+Helpers.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -4338,6 +4343,7 @@
 				014A456816691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				BE31EFB0182D4B00006E20E2 /* SYNAddToChannelCell.m in Sources */,
 				E92835DF18D9B78F00F7DA27 /* SYNAppearanceManager.m in Sources */,
+				E90506A618E05FD800E0910E /* UIDevice+Helpers.m in Sources */,
 				BEE01B7318521DCF000CF681 /* Comment.m in Sources */,
 				0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */,
 				01946B911683335400354601 /* _ChannelOwner.m in Sources */,
