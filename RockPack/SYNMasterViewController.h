@@ -18,15 +18,10 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 
 
-@interface SYNMasterViewController : UIViewController <UIPopoverControllerDelegate,
-                                                       UIGestureRecognizerDelegate,
-                                                       UINavigationControllerDelegate>
-
+@interface SYNMasterViewController : UIViewController
 {
     SYNAppDelegate* appDelegate;
 }
-
-
 
 
 @property (nonatomic, strong) SYNAbstractViewController* originViewController;
@@ -37,13 +32,7 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 @property (nonatomic, strong) IBOutlet UIView* tabsView;
 
-@property (nonatomic, strong) IBOutlet UIButton* closeSearchButton;
-@property (nonatomic, strong) IBOutlet UIView* videoOverlayView;
-@property (nonatomic, strong) IBOutlet UIButton* sideNavigationButton;
-
 @property (nonatomic, readonly) NSArray* tabs;
-
-@property (nonatomic, readonly) BOOL hasCreatedPopularGenre;
 
 @property (nonatomic, strong, readonly) UIButton *activityTab;
 
@@ -68,8 +57,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 // ======================= //
 
 -(void) removeOverlayControllerAnimated:(BOOL)animated;
-
--(void)displayNotificationsLoaded:(NSInteger)notificationsCount;
 
 // on-boarding
 

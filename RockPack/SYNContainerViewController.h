@@ -13,7 +13,6 @@
 @property (nonatomic, readonly) NSInteger currentPage;
 @property (nonatomic, readonly) UINavigationController *currentViewController;
 @property (nonatomic, readonly) NSArray* viewControllers;
-@property (nonatomic, assign) BOOL isTransitioning;
 
 -(void)navigateToPage:(NSInteger)index;
 

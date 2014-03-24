@@ -171,12 +171,8 @@
         tab.highlighted = (BOOL) (tab == tabPressed);
         tab.selected = (BOOL) (tab == tabPressed);
     }
-    
-    if (!self.containerController.isTransitioning)
-    {
-        [self navigateToPage: tabPressed.tag];
-    }
-    
+	
+	[self navigateToPage:tabPressed.tag];
 }
 
 

@@ -90,9 +90,6 @@
     
     self.reachability = [Reachability reachabilityWithHostname:appDelegate.networkEngine.hostName];
     
-    self.closeSearchButton.hidden = YES;
-
-    
     // == Set Up Notifications == //
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(channelSuccessfullySaved:) name:kNoteChannelSaved object:nil];
@@ -140,75 +137,6 @@
         }];
     }
 
-}
-
-#pragma mark - Popular Genre
-
--(BOOL)hasCreatedPopularGenre
-{
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    fetchRequest.entity = [NSEntityDescription entityForName: kSubGenre
-                                                inManagedObjectContext: appDelegate.mainManagedObjectContext];
-    
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", kPopularGenreName];
-    
-    
-    NSError* error;
-    
-    NSArray* fetchedArray = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                error: &error];
-    
-    return (BOOL)(fetchedArray.count > 0);
-}
-
-
-
--(BOOL)createPopularGenre
-{
-    // Create Genre
-    Genre* popularGenre = [Genre insertInManagedObjectContext: appDelegate.mainManagedObjectContext];
-    popularGenre.uniqueId = [NSString stringWithString:kPopularGenreUniqueId];
-    popularGenre.name = [NSString stringWithString:kPopularGenreName];
-    popularGenre.priority = @(100000);
-
-    
-    NSString* colourHash = @"#c2c0d8"; // default to Green
-    
-    if(![colourHash hasPrefix:@"#"])
-        colourHash = [NSString stringWithFormat:@"0x%@", colourHash];
-    else
-        colourHash = [colourHash stringByReplacingOccurrencesOfString:@"#" withString:@"0x"];
-    
-    NSScanner* scanner = [NSScanner scannerWithString:colourHash];
-    
-    unsigned int intValue;
-    [scanner scanHexInt:&intValue];
-    
-    popularGenre.colorValue = intValue;
-    
-    // Create SubGenre
-    SubGenre* popularSubGenre = [SubGenre insertInManagedObjectContext:appDelegate.mainManagedObjectContext];
-    popularSubGenre.uniqueId = [NSString stringWithString:kPopularGenreUniqueId];
-    popularSubGenre.name = [NSString stringWithString:kPopularGenreName];
-    popularSubGenre.priority = @(100000);
-    
-    popularSubGenre.colorValue = intValue;
-    
-    // NOTE: Since SubGenres are only displayed, the POPULAR Genre needs to have one SubGenre also called POPULAR to display in the list
-    [popularGenre.subgenresSet addObject:popularSubGenre];
-    
-    NSError* error;
-    return ([appDelegate.mainManagedObjectContext save:&error]);
-}
-
-
-
-// temporary
--(void)hideOrShowNetworkMessages:(NSNotification*)notifcation
-{
-    
 }
 
 
@@ -623,17 +551,11 @@
 
 #pragma mark - Display Notifications Number
 
--(void)displayNotificationsLoaded:(NSInteger)notificationsCount
-{
-    
-}
-
 - (BOOL)shouldAutomaticallyForwardRotationMethods {
     return YES;
 }
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
     return YES;
 }
-
 
 @end

@@ -170,8 +170,6 @@
     
     self.notifications = [NSArray arrayWithArray:inNotificationsutArray];
     
-    [appDelegate.masterViewController displayNotificationsLoaded:self.notifications.count];
-    
 }
 
 #pragma mark - TableView Delegate/Data Source
