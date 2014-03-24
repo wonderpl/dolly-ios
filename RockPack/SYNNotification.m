@@ -77,8 +77,10 @@
         
         else if ([self.messageType isEqualToString: @"unavailable"])
         {
-            self.objectType = kNotificationObjectTypeFacebookFriendJoined;
-        } else if ([self.messageType isEqualToString: @"comment_mention"])
+            self.objectType = kNotificationObjectTypeYourVideoNotAvailable;
+        }
+
+        else if ([self.messageType isEqualToString: @"comment_mention"])
         {
             self.objectType = kNotificationObjectTypeCommentMention;
         }
