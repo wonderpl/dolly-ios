@@ -12,6 +12,4 @@
 
 @interface SYNOnBoardingViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
 
-
-
 @end

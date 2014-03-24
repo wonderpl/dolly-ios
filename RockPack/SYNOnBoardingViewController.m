@@ -32,7 +32,6 @@
 @interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
-
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
 
 @property (nonatomic, weak) UIButton *skipButton;
@@ -72,11 +71,9 @@
         [self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
     }
 	
-    if (!IS_IPHONE_5) {
-        UIEdgeInsets tmpInsets = self.collectionView.contentInset;
-        tmpInsets.bottom += 88;
-        [self.collectionView setContentInset: tmpInsets];
-    }
+	if (IS_IPHONE) {
+		self.collectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -98,8 +95,8 @@
     [self.spinner startAnimating];
     
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
-                                                  andEntityName: kChannelOwner
-                                                         params: nil
+                                                  andEntityName:[ChannelOwner entityName]
+                                                         params:nil
                                               completionHandler:^(id response) {
                                                   [self.spinner stopAnimating];
                                                   
