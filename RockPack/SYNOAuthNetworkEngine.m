@@ -742,8 +742,8 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[@"start"] = @(range.location);
-    parameters[@"size"] = @(48);
-    
+    parameters[@"size"] = @(range.length);
+
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject *) [self operationWithPath: apiString
                                                                                                          params: [self getLocaleParamWithParams: parameters]
                                                                                                      httpMethod: @"GET"
