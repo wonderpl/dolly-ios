@@ -13,10 +13,10 @@
 
 @protocol SYNChannelMidCellDelegate <NSObject>
 
-- (void)deleteChannelTapped:(SYNChannelMidCell *)cell;
-
 @optional
-- (void)followButtonTapped:(SYNChannelMidCell *)cell;
+- (void) cellStateChanged;
+- (void) followButtonTapped:(SYNChannelMidCell *)cell;
+- (void) deleteChannelTapped:(SYNChannelMidCell *)cell;
 
 
 typedef enum {
