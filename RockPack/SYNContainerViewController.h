@@ -10,7 +10,6 @@
 
 @interface SYNContainerViewController : UIViewController
 
-@property (nonatomic, readonly) NSInteger currentPage;
 @property (nonatomic, readonly) UINavigationController *currentViewController;
 @property (nonatomic, readonly) NSArray* viewControllers;
 
