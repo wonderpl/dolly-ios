@@ -176,6 +176,7 @@ static const NSInteger MinutesCacheLength = 1;
     NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:self.loadedItems];
     [tmpArray removeObjectAtIndex:index];
     self.loadedItems = tmpArray;
+	self.totalItemCount = [tmpArray count];
 }
 
 

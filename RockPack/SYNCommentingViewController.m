@@ -457,7 +457,7 @@ static NSString* PlaceholderText = @"Say something nice";
                                                      [wself.commentsCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete]];
                                                  } completion:^(BOOL finished) {
                                                      [wself.commentsCollectionView reloadData];
-                                                
+													 [self updateCommentCountButton];
                                                  }];
                                                  
                                                  
@@ -592,6 +592,7 @@ static NSString* PlaceholderText = @"Say something nice";
         
         
     }
+	[self updateCommentCountButton];
     self.loadingNewComments = NO;
     
     
@@ -663,6 +664,13 @@ static NSString* PlaceholderText = @"Say something nice";
     }
     
     [controllerToShowProfile viewProfileDetails:co];
+}
+
+- (void) updateCommentCountButton {
+	if ([self.model totalItemCount]) {
+		self.videoInstance.commentCount = @([self.model totalItemCount]);
+		[self.socialButton setCount:self.videoInstance.commentCountValue];
+	}
 }
 
 @end
