@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNProfileHeader"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SYNProfileHeader" reuseIdentifier="SYNProfileHeader" id="79y-KX-90i" customClass="SYNProfileHeader">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="516"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WTJ-1k-eNv" userLabel="Image View - Cover image">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="338"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mr2-HA-7xn" userLabel="View - Background ">
+                    <rect key="frame" x="0.0" y="338" width="321" height="152"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-Al-e0n" userLabel="Text View - Description">
+                    <rect key="frame" x="10" y="428" width="300" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="Z2I-9Q-0Gj"/>
+                        <constraint firstAttribute="height" constant="45" id="jHH-3i-uTW"/>
+                    </constraints>
+                    <string key="text">Something about
+                        me...</string>
+                    <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="numberPad" returnKeyType="send"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qG4-1X-MoW" userLabel="Button - follow all" customClass="SYNSocialFollowButton">
+                    <rect key="frame" x="254" y="313" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="9sP-lk-QMo"/>
+                        <constraint firstAttribute="width" constant="50" id="zIM-Yq-yIF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <state key="normal" title="Follow All">
+                        <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="followUserButtonTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="efw-v1-43a"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyE-Km-Hdh" userLabel="Button - More Button">
+                    <rect key="frame" x="282" y="338" width="38" height="38"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="hYE-5f-D7c"/>
+                        <constraint firstAttribute="height" constant="38" id="r95-3G-UOB"/>
+                    </constraints>
+                    <state key="normal" image="ButtonMore.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="moreButtonTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="rp7-sj-IPt"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzg-oF-9q5" userLabel="Button - Upload Avatar" customClass="SYNAvatarButton">
+                    <rect key="frame" x="112" y="287" width="96" height="96"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="96" id="VPr-aw-2be"/>
+                        <constraint firstAttribute="height" constant="96" id="ZIg-IX-Mpp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <connections>
+                        <action selector="avatarButtonTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="jLw-co-8MP"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPE-qM-wrN" userLabel="Label - User name">
+                    <rect key="frame" x="20" y="415" width="280" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="Mc6-yN-YMz"/>
+                        <constraint firstAttribute="width" constant="280" id="xSJ-T5-Ccs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3x0-8E-Inl" userLabel="Label - Followers Count">
+                    <rect key="frame" x="13" y="349" width="31" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0i5-fa-0Qz">
+                    <rect key="frame" x="10" y="383" width="300" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="D9t-wn-gnN"/>
+                        <constraint firstAttribute="height" constant="40" id="v4b-TN-Op4"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content="Full Name Label">
+                            <attributes>
+                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <font key="NSFont" size="20" name="HelveticaNeue"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bql-TC-S7R">
+                    <rect key="frame" x="37" y="481" width="246" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="5cZ-xf-7Vh"/>
+                        <constraint firstAttribute="width" constant="246" id="sUC-Yz-cCL"/>
+                    </constraints>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                    <color key="tintColor" red="0.61960784313725492" green="0.61960784313725492" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="segmentedControllerTapped:" destination="79y-KX-90i" eventType="valueChanged" id="OdK-RU-q7Z"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <constraints>
+                <constraint firstItem="WTJ-1k-eNv" firstAttribute="top" secondItem="79y-KX-90i" secondAttribute="top" id="1ut-Pa-fNu"/>
+                <constraint firstItem="FyE-Km-Hdh" firstAttribute="top" secondItem="79y-KX-90i" secondAttribute="top" constant="338" id="5e3-nW-Qjs"/>
+                <constraint firstAttribute="bottom" secondItem="Pnq-Al-e0n" secondAttribute="bottom" constant="43" id="92R-NS-gxn"/>
+                <constraint firstItem="0i5-fa-0Qz" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="10" id="Akg-21-bqY"/>
+                <constraint firstItem="3x0-8E-Inl" firstAttribute="top" secondItem="79y-KX-90i" secondAttribute="top" constant="349" id="Foe-NB-dMD"/>
+                <constraint firstAttribute="trailing" secondItem="WTJ-1k-eNv" secondAttribute="trailing" id="Fxt-2t-wma"/>
+                <constraint firstAttribute="trailing" secondItem="qG4-1X-MoW" secondAttribute="trailing" constant="16" id="G0f-TM-VG1"/>
+                <constraint firstAttribute="bottom" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="178" id="Gad-sf-cIj"/>
+                <constraint firstAttribute="bottom" secondItem="Bql-TC-S7R" secondAttribute="bottom" constant="10" id="NdA-Pt-o7Z"/>
+                <constraint firstItem="0i5-fa-0Qz" firstAttribute="top" secondItem="Wzg-oF-9q5" secondAttribute="top" constant="96" id="NdY-67-ZyD"/>
+                <constraint firstItem="3x0-8E-Inl" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="13" id="V92-e5-0AF"/>
+                <constraint firstItem="0i5-fa-0Qz" firstAttribute="top" secondItem="SPE-qM-wrN" secondAttribute="top" constant="-32" id="Wrx-gT-qJ5"/>
+                <constraint firstItem="SPE-qM-wrN" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="20" id="YA6-K1-1Eo"/>
+                <constraint firstItem="Wzg-oF-9q5" firstAttribute="top" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="-51" id="jbm-08-tOy"/>
+                <constraint firstAttribute="trailing" secondItem="FyE-Km-Hdh" secondAttribute="trailing" id="lLt-oR-dXD"/>
+                <constraint firstItem="WTJ-1k-eNv" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" id="o9Y-JO-D5B"/>
+                <constraint firstItem="WTJ-1k-eNv" firstAttribute="leading" secondItem="Wzg-oF-9q5" secondAttribute="trailing" constant="-208" id="pvW-3f-3Iv"/>
+                <constraint firstItem="Bql-TC-S7R" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="37" id="qd9-dK-72x"/>
+                <constraint firstAttribute="bottom" secondItem="qG4-1X-MoW" secondAttribute="bottom" constant="153" id="sjV-pB-rGr"/>
+                <constraint firstItem="Pnq-Al-e0n" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="10" id="zqn-8h-I5B"/>
+            </constraints>
+            <connections>
+                <outlet property="aboutMeTextView" destination="Pnq-Al-e0n" id="VW9-ZT-aPf"/>
+                <outlet property="avatarButton" destination="Wzg-oF-9q5" id="GEt-Xv-mWG"/>
+                <outlet property="coverImage" destination="WTJ-1k-eNv" id="RAx-PU-VBY"/>
+                <outlet property="coverImageBottom" destination="Gad-sf-cIj" id="uYk-KF-VGZ"/>
+                <outlet property="coverImageTop" destination="1ut-Pa-fNu" id="Aca-Ot-maw"/>
+                <outlet property="descriptionTopConstraint" destination="92R-NS-gxn" id="MJw-dA-Ec4"/>
+                <outlet property="followAllButton" destination="qG4-1X-MoW" id="iiV-GK-36b"/>
+                <outlet property="followersCountLabel" destination="3x0-8E-Inl" id="2u3-cf-dop"/>
+                <outlet property="fullNameLabel" destination="0i5-fa-0Qz" id="jxT-KC-7Ks"/>
+                <outlet property="moreButton" destination="FyE-Km-Hdh" id="th8-PU-VDY"/>
+                <outlet property="segmentedController" destination="Bql-TC-S7R" id="CPy-DI-Owb"/>
+                <outlet property="userNameLabel" destination="SPE-qM-wrN" id="vbO-Ip-nyo"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="ButtonMore.png" width="56" height="56"/>
+    </resources>
+</document>

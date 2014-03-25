@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SYNProfileHeader" reuseIdentifier="SYNProfileHeader" id="CwX-kR-DQ1" customClass="SYNProfileHeader">
+            <rect key="frame" x="0.0" y="0.0" width="671" height="701"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9PC-4a-87q" userLabel="Image View - Cover image">
+                    <rect key="frame" x="0.0" y="0.0" width="671" height="512"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YV-aZ-EKa" userLabel="Button - follow all" customClass="SYNSocialFollowButton">
+                    <rect key="frame" x="598" y="487" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="jPX-Xg-iwz"/>
+                        <constraint firstAttribute="width" constant="50" id="tJv-YO-kK7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <state key="normal" title="follow">
+                        <color key="titleColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="followUserButtonTapped:" destination="CwX-kR-DQ1" eventType="touchUpInside" id="vgT-m8-MGp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8W-Sv-btW" userLabel="Button - More Button">
+                    <rect key="frame" x="615" y="512" width="56" height="56"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="4bO-o2-XzV"/>
+                        <constraint firstAttribute="width" constant="56" id="FOw-lD-TbP"/>
+                    </constraints>
+                    <state key="normal" image="ButtonMore.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="moreButtonTapped:" destination="CwX-kR-DQ1" eventType="touchUpInside" id="Zq7-7u-Noe"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88l-sj-JDE" userLabel="Label - Followers Count">
+                    <rect key="frame" x="12" y="524" width="31" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3W-xz-Bg8" userLabel="View container">
+                    <rect key="frame" x="137" y="397" width="398" height="284"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAj-tb-ncC" userLabel="Button - Upload Avatar" customClass="SYNAvatarButton">
+                            <rect key="frame" x="151" y="67" width="96" height="96"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <connections>
+                                <action selector="avatarButtonTapped:" destination="CwX-kR-DQ1" eventType="touchUpInside" id="7Fn-sG-MEI"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cha-pJ-bzu" userLabel="Label - User name">
+                            <rect key="frame" x="91" y="189" width="216" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCZ-qA-mlf">
+                            <rect key="frame" x="-137" y="165" width="672" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Full Name Label">
+                                    <attributes>
+                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <font key="NSFont" size="20" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGW-qb-DqS" userLabel="Text View - Description">
+                            <rect key="frame" x="49" y="189" width="300" height="45"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="5jX-VI-B33"/>
+                                <constraint firstAttribute="width" constant="300" id="S99-Wa-MZM"/>
+                            </constraints>
+                            <string key="text">Something about
+                        me...</string>
+                            <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="numberPad" returnKeyType="send"/>
+                        </textView>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uRX-vv-NrM">
+                            <rect key="frame" x="76" y="251" width="246" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="h1S-bH-b3e"/>
+                                <constraint firstAttribute="width" constant="246" id="oUI-SD-ZjH"/>
+                            </constraints>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                            <color key="tintColor" red="0.61960784313725492" green="0.61960784313725492" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="segmentedControllerTapped:" destination="CwX-kR-DQ1" eventType="valueChanged" id="Zwe-Af-r3m"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="284" id="SgW-WW-Jk1"/>
+                        <constraint firstItem="uRX-vv-NrM" firstAttribute="leading" secondItem="a3W-xz-Bg8" secondAttribute="leading" constant="76" id="ecO-GQ-IRd"/>
+                        <constraint firstAttribute="width" constant="398" id="iJK-ei-sNk"/>
+                        <constraint firstItem="uRX-vv-NrM" firstAttribute="top" secondItem="a3W-xz-Bg8" secondAttribute="top" constant="251" id="jFH-Sm-F91"/>
+                        <constraint firstItem="ZGW-qb-DqS" firstAttribute="top" secondItem="a3W-xz-Bg8" secondAttribute="top" constant="189" id="kVs-Rh-abK"/>
+                        <constraint firstAttribute="centerX" secondItem="ZGW-qb-DqS" secondAttribute="centerX" id="oK9-ev-Hnr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="r8W-Sv-btW" secondAttribute="bottom" constant="133" id="4go-k2-Jmd"/>
+                <constraint firstItem="9PC-4a-87q" firstAttribute="leading" secondItem="CwX-kR-DQ1" secondAttribute="leading" id="995-nl-dSb"/>
+                <constraint firstAttribute="bottom" secondItem="9PC-4a-87q" secondAttribute="bottom" constant="189" id="IsT-oA-MPv"/>
+                <constraint firstAttribute="trailing" secondItem="r8W-Sv-btW" secondAttribute="trailing" id="JKD-rm-OOd"/>
+                <constraint firstAttribute="bottom" secondItem="88l-sj-JDE" secondAttribute="bottom" constant="162" id="KQp-Vs-Ay7"/>
+                <constraint firstAttribute="bottom" secondItem="a3W-xz-Bg8" secondAttribute="bottom" constant="20" id="MtS-gt-Qag"/>
+                <constraint firstItem="9PC-4a-87q" firstAttribute="top" secondItem="CwX-kR-DQ1" secondAttribute="top" id="S7f-yg-ibX"/>
+                <constraint firstItem="88l-sj-JDE" firstAttribute="leading" secondItem="CwX-kR-DQ1" secondAttribute="leading" constant="12" id="Y2g-Ra-s0u"/>
+                <constraint firstAttribute="trailing" secondItem="9PC-4a-87q" secondAttribute="trailing" id="ZrX-cP-cbw"/>
+                <constraint firstAttribute="bottom" secondItem="7YV-aZ-EKa" secondAttribute="bottom" constant="164" id="cDi-J3-zEH"/>
+                <constraint firstAttribute="centerX" secondItem="a3W-xz-Bg8" secondAttribute="centerX" constant="-0.5" id="sUk-CW-fcI"/>
+                <constraint firstAttribute="trailing" secondItem="7YV-aZ-EKa" secondAttribute="trailing" constant="23" id="zRV-rD-Wzq"/>
+            </constraints>
+            <connections>
+                <outlet property="aboutMeTextView" destination="ZGW-qb-DqS" id="ENw-9J-aob"/>
+                <outlet property="avatarButton" destination="rAj-tb-ncC" id="Y17-6L-ans"/>
+                <outlet property="coverImage" destination="9PC-4a-87q" id="ZcF-Lp-plG"/>
+                <outlet property="coverImageTop" destination="S7f-yg-ibX" id="vhO-AO-upr"/>
+                <outlet property="descriptionTopConstraint" destination="kVs-Rh-abK" id="PVq-v4-qLy"/>
+                <outlet property="followAllButton" destination="7YV-aZ-EKa" id="hni-tV-mSP"/>
+                <outlet property="followersCountLabel" destination="88l-sj-JDE" id="vVn-DE-icw"/>
+                <outlet property="fullNameLabel" destination="OCZ-qA-mlf" id="aw3-Ey-yNI"/>
+                <outlet property="moreButton" destination="r8W-Sv-btW" id="RUW-VI-5xt"/>
+                <outlet property="segmentedController" destination="uRX-vv-NrM" id="VaX-Zz-3TO"/>
+                <outlet property="userNameLabel" destination="cha-pJ-bzu" id="w5g-il-Cbx"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="ButtonMore.png" width="56" height="56"/>
+    </resources>
+</document>
