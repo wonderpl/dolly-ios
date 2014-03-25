@@ -169,7 +169,10 @@ static NSString* PlaceholderText = @"Say something nice";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     
-    // observer the size of the text view to set the frame accordingly
+	[self.sendMessageTextView addObserver:self
+							   forKeyPath:NSStringFromSelector(@selector(contentSize))
+								  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+								  context:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                         object: self
@@ -186,7 +189,9 @@ static NSString* PlaceholderText = @"Say something nice";
         self.videoInstance.commentCount = @([self.model totalItemCount]);
         [self.socialButton setCount:self.videoInstance.commentCountValue];
     }
-
+	
+	[self.sendMessageTextView removeObserver:self forKeyPath:NSStringFromSelector(@selector(contentSize))];
+	
     //Updates the iphone comment cont
     [appDelegate saveContext:YES];
     self.sendMessageTextView.text = @"";
