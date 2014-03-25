@@ -165,8 +165,6 @@
 		0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF07869181EAE9100667417 /* ButtonMore@2x~iphone.png */; };
 		0EF0786C181EAE9100667417 /* ButtonMore~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0786A181EAE9100667417 /* ButtonMore~iphone.png */; };
 		0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */; };
-		1F076B62185B398100618B0C /* ArrowCommentBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F076B60185B398100618B0C /* ArrowCommentBox.png */; };
-		1F076B63185B398100618B0C /* ArrowCommentBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F076B61185B398100618B0C /* ArrowCommentBox@2x.png */; };
 		1F1B4BD6174280F0009DEB0C /* PlaceholderVideoWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F1B4BD4174280F0009DEB0C /* PlaceholderVideoWide.png */; };
 		1F1B4BD7174280F0009DEB0C /* PlaceholderVideoWide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F1B4BD5174280F0009DEB0C /* PlaceholderVideoWide@2x.png */; };
 		1F1B4BDA1742852A009DEB0C /* PlaceholderVideoWide@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F1B4BD81742852A009DEB0C /* PlaceholderVideoWide@2x~iphone.png */; };
@@ -918,8 +916,6 @@
 		0EF0786A181EAE9100667417 /* ButtonMore~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMore~iphone.png"; sourceTree = "<group>"; };
 		0EFE39AE186458DE0006FA78 /* UIImageView+RoundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RoundImage.h"; sourceTree = "<group>"; };
 		0EFE39AF186458DE0006FA78 /* UIImageView+RoundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RoundImage.m"; sourceTree = "<group>"; };
-		1F076B60185B398100618B0C /* ArrowCommentBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ArrowCommentBox.png; path = Assets/Images/ArrowCommentBox.png; sourceTree = "<group>"; };
-		1F076B61185B398100618B0C /* ArrowCommentBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ArrowCommentBox@2x.png"; path = "Assets/Images/ArrowCommentBox@2x.png"; sourceTree = "<group>"; };
 		1F1B4BD4174280F0009DEB0C /* PlaceholderVideoWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlaceholderVideoWide.png; path = Assets/Images/PlaceholderVideoWide.png; sourceTree = "<group>"; };
 		1F1B4BD5174280F0009DEB0C /* PlaceholderVideoWide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlaceholderVideoWide@2x.png"; path = "Assets/Images/PlaceholderVideoWide@2x.png"; sourceTree = "<group>"; };
 		1F1B4BD81742852A009DEB0C /* PlaceholderVideoWide@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlaceholderVideoWide@2x~iphone.png"; path = "placeholders/PlaceholderVideoWide@2x~iphone.png"; sourceTree = "<group>"; };
@@ -1973,8 +1969,6 @@
 				4CE8AE5518A901560031CE1C /* BackButtonApp.png */,
 				4CE8AE5618A901560031CE1C /* BackButtonApp@2x.png */,
 				1F65D48F17EB3C8B004326A9 /* Images.xcassets */,
-				1F076B60185B398100618B0C /* ArrowCommentBox.png */,
-				1F076B61185B398100618B0C /* ArrowCommentBox@2x.png */,
 				4C5E861F18B65A8A00D0E937 /* In Boarding */,
 				BED027B51834D4BF00636659 /* Options */,
 				0127B880181139F500DE2FD6 /* Mood Controller */,
@@ -4018,7 +4012,6 @@
 				BEB3134E1817D4B500FAF98A /* SYNSearchResultsVideoCell.xib in Resources */,
 				BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */,
 				BED027CC1834D4CC00636659 /* ButtonMoreFriends.png in Resources */,
-				1F076B62185B398100618B0C /* ArrowCommentBox.png in Resources */,
 				4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */,
 				1F4E7FC6181ACBAA00F59007 /* TabSearch~iphone.png in Resources */,
 				BE57C02C184361D300C6444A /* SYNOnBoardingCell.xib in Resources */,
@@ -4084,7 +4077,6 @@
 				E905A93B189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib in Resources */,
 				1F4E7FBC181ACBAA00F59007 /* TabMoodsHighlighted~iphone.png in Resources */,
 				1F4E7FBA181ACBAA00F59007 /* TabMoods~iphone.png in Resources */,
-				1F076B63185B398100618B0C /* ArrowCommentBox@2x.png in Resources */,
 				1F4E7FC2181ACBAA00F59007 /* TabProfileHighlighted~iphone.png in Resources */,
 				BE851B48183BE6BC00B8E8C6 /* ButtonUpload.png in Resources */,
 				0E0062E5188EBCCC00429C79 /* SYNOnBoardingSectionHeader.xib in Resources */,

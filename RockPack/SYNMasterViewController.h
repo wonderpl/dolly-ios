@@ -47,10 +47,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 - (void) addOverlayController:(UIViewController*)overlayViewController animated:(BOOL)animated;
 
-- (void) addOverlayController:(UIViewController*)overlayViewController
-                     animated:(BOOL)animated
-               pointingToRect:(CGRect)rectToPoint;
-
 // ======================= //
 
 -(void) removeOverlayControllerAnimated:(BOOL)animated;

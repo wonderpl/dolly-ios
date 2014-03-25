@@ -40,10 +40,6 @@
 @property (strong, nonatomic) IBOutlet UIView *tabsViewIPad;
 @property (nonatomic) CGRect overlayControllerFrame;
 
-@property (nonatomic, strong) UIImageView* arrowForOverlayImageView;
-
-
-
 @end
 
 
@@ -100,8 +96,6 @@
     self.backgroundOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.backgroundOverlayView.backgroundColor = [UIColor darkGrayColor];
     
-    self.arrowForOverlayImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ArrowCommentBox"]];
-    
 	[self addChildViewController:self.containerViewController];
 	self.containerViewController.view = self.containerView;
 	
@@ -151,12 +145,6 @@
 
 - (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController animated:(BOOL)animated
 {
-    [self addOverlayController:overlayViewController animated:animated pointingToRect:CGRectZero];
-}
-- (void) addOverlayController:(UIViewController<SYNPopoverable>*)overlayViewController
-                     animated:(BOOL)animated
-               pointingToRect:(CGRect)rectToPoint
-{
     if(!overlayViewController)
     {
         AssertOrLog(@"Trying to add nil as an overlay controller");
@@ -200,30 +188,8 @@
     }
     else
     {
-        
-        if(CGRectEqualToRect(rectToPoint, CGRectZero)) // CGZero is passed to diaplay in the middle of the screen
-        {
-            endFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - endFrame.size.width * 0.5f;
-            endFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - endFrame.size.height * 0.5f;
-        }
-        else // make it point to a specific part of the screen
-        {
-            
-            endFrame.origin.x = rectToPoint.origin.x - endFrame.size.width - 8.0f;
-            endFrame.origin.y = rectToPoint.origin.y - MIN(endFrame.size.height - 50.0f, rectToPoint.origin.y - 20.0f);
-            
-            self.arrowForOverlayImageView.transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
-            
-            CGRect arrowFrame = self.arrowForOverlayImageView.frame;
-            arrowFrame.origin.x = rectToPoint.origin.x - arrowFrame.size.width + 4.0f;
-            arrowFrame.origin.y = rectToPoint.origin.y;
-            self.arrowForOverlayImageView.frame = arrowFrame;
-            
-            self.arrowForOverlayImageView.alpha = 0.0f;
-            [self.view addSubview:self.arrowForOverlayImageView];
-            
-        }
-        
+		endFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - endFrame.size.width * 0.5f;
+		endFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - endFrame.size.height * 0.5f;
         
         self.overlayController.view.alpha = 0.0;
         
@@ -248,7 +214,6 @@
         else
         {
             self.overlayController.view.alpha = 1.0;
-            self.arrowForOverlayImageView.alpha = 1.0f;
         }
     };
     
@@ -292,9 +257,6 @@
         else
         {
             wself.overlayController.view.alpha = 0.0f;
-            
-            wself.arrowForOverlayImageView.alpha = 0.0f;
-            
         }
         
     };
@@ -317,11 +279,6 @@
         if([popoverable conformsToProtocol:@protocol(SYNPopoverable)])
         {
             [popoverable finishingPresentation];
-        }
-        
-        if(IS_IPAD)
-        {
-            [wself.arrowForOverlayImageView removeFromSuperview];
         }
         
         [wself.overlayController.view removeFromSuperview];
@@ -493,11 +450,6 @@
         else
         {
             currentOverlayFrame.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 120.0f;
-            
-            CGRect arrowRect = self.arrowForOverlayImageView.frame;
-            arrowRect.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 100.0f;
-            
-            self.arrowForOverlayImageView.frame = arrowRect;
         }
         
         self.overlayController.view.frame = currentOverlayFrame;
