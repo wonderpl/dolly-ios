@@ -20,7 +20,6 @@
 #import "SYNSearchVideoLikesModel.h"
 #import "UINavigationBar+Appearance.h"
 #import "SYNTrackingManager.h"
-@import MediaPlayer;
 
 @interface SYNSearchVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate>
 
