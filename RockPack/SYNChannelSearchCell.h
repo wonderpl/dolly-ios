@@ -10,6 +10,6 @@
 
 @interface SYNChannelSearchCell : UICollectionViewCell <UISearchBarDelegate>
 
-@property (strong, nonatomic) IBOutlet UISearchBar *channelSearchBar;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end

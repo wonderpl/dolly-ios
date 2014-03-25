@@ -7,6 +7,7 @@
 //
 
 #import "SYNChannelSearchCell.h"
+#import "UIColor+SYNColor.h"
 
 @implementation SYNChannelSearchCell
 
@@ -23,6 +24,11 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    UITextField *txfSearchField = [self.searchBar valueForKey:@"_searchField"];
+    if(txfSearchField)
+        txfSearchField.backgroundColor = [UIColor dollySearchBarColor];
+
 }
 
 /*
