@@ -93,12 +93,6 @@
     
     [self.feedCollectionView addSubview: self.refreshControl];
     
-    if (!IS_IPHONE_5) {
-        UIEdgeInsets tmpInsets = self.feedCollectionView.contentInset;
-        tmpInsets.bottom += 88;
-        [self.feedCollectionView setContentInset: tmpInsets];
-    }
-
     [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];

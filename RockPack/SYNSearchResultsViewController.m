@@ -185,17 +185,6 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.searchResultsShowing = SearchResultsShowingUsers;
     self.dataRequestRange2 = self.dataRequestRange; // they start off as (0, 48) for both...
     
-    if (!IS_IPHONE_5) {
-        UIEdgeInsets tmpInsets = self.usersCollectionView.contentInset;
-        tmpInsets.bottom += 88;
-        self.usersCollectionView.contentInset = tmpInsets;
-        
-        tmpInsets = self.videosCollectionView.contentInset;
-        tmpInsets.bottom += 88;
-        self.videosCollectionView.contentInset = tmpInsets;
-    }
-    
-    
     self.noVideosLabel.text = NSLocalizedString(@"no_videos", @"no videos in search");
 
     self.noUsersLabel.font = [UIFont regularCustomFontOfSize:18.0f];

@@ -66,13 +66,6 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SYNNotificationsTableViewCell" bundle:nil]
            forCellReuseIdentifier:kNotificationsCellIdent];
-    
-    if (!IS_IPHONE_5) {
-        UIEdgeInsets tmpInsets = self.tableView.contentInset;
-        tmpInsets.bottom += 88;
-        [self.tableView setContentInset: tmpInsets];
-    }
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {

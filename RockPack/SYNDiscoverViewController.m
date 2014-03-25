@@ -125,14 +125,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.searchResultsController.view.frame = sResRect;
     }
     
-    
-    if (!IS_IPHONE_5) {
-        UIEdgeInsets tmpInsets = self.categoriesCollectionView.contentInset;
-        tmpInsets.bottom += 88;
-        [self.categoriesCollectionView setContentInset: tmpInsets];
-
-    }
-    
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = YES;        
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -18,17 +18,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="u8T-dF-drJ" userLabel="Container View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8T-dF-drJ" userLabel="Container View">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
-                <view contentMode="scaleToFill" id="6hy-Hf-wx9" userLabel="Tabs" customClass="SYNTabBar">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hy-Hf-wx9" userLabel="Tabs" customClass="SYNTabBar">
                     <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <subviews>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="jmp-TX-9Wq" userLabel="Tab - Mood-o-Meter">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmp-TX-9Wq" userLabel="Tab - Mood-o-Meter">
                             <rect key="frame" x="0.0" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -37,7 +37,7 @@
                             <state key="selected" image="TabMoodsSelected.png"/>
                             <state key="highlighted" image="TabMoodsHighlighted.png"/>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="D77-86-KYt" userLabel="Tab - Discover">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D77-86-KYt" userLabel="Tab - Discover">
                             <rect key="frame" x="64" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -46,7 +46,7 @@
                             <state key="selected" image="TabSearchSelected.png"/>
                             <state key="highlighted" image="TabSearchHighlighted.png"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="MW4-we-NYV" userLabel="Tab - Feed">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MW4-we-NYV" userLabel="Tab - Feed">
                             <rect key="frame" x="128" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -55,7 +55,7 @@
                             <state key="selected" image="TabFeedSelected.png"/>
                             <state key="highlighted" image="TabFeedHighlighted.png"/>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="H3w-hz-oZe" userLabel="Tab - Profile">
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3w-hz-oZe" userLabel="Tab - Profile">
                             <rect key="frame" x="192" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -64,7 +64,7 @@
                             <state key="selected" image="TabProfileSelected.png"/>
                             <state key="highlighted" image="TabProfileHighlighted.png"/>
                         </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="2cq-OW-20C" userLabel="Tab - Activity (Notifications)">
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cq-OW-20C" userLabel="Tab - Activity (Notifications)">
                             <rect key="frame" x="256" y="0.0" width="64" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -75,9 +75,12 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.94000000000000006" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="2hy-U1-VFv"/>
+                    </constraints>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="31" userLabel="Error Container View">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31" userLabel="Error Container View">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -85,6 +88,19 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="deviceRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="31" secondAttribute="bottom" id="2ga-hq-zio"/>
+                <constraint firstItem="31" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="4Hy-GS-eTt"/>
+                <constraint firstItem="u8T-dF-drJ" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="5Cw-El-ABA"/>
+                <constraint firstItem="u8T-dF-drJ" firstAttribute="top" secondItem="1" secondAttribute="top" id="7Uq-uN-ZSD"/>
+                <constraint firstAttribute="trailing" secondItem="u8T-dF-drJ" secondAttribute="trailing" id="D4r-AN-YIg"/>
+                <constraint firstAttribute="bottom" secondItem="u8T-dF-drJ" secondAttribute="bottom" id="Dpm-0Y-Br2"/>
+                <constraint firstItem="6hy-Hf-wx9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="If8-Qd-Slg"/>
+                <constraint firstAttribute="bottom" secondItem="6hy-Hf-wx9" secondAttribute="bottom" id="JgL-9t-TyP"/>
+                <constraint firstAttribute="trailing" secondItem="31" secondAttribute="trailing" id="KKh-Xj-cSj"/>
+                <constraint firstAttribute="trailing" secondItem="6hy-Hf-wx9" secondAttribute="trailing" id="Zfw-Pp-389"/>
+                <constraint firstItem="31" firstAttribute="top" secondItem="1" secondAttribute="top" id="l43-C4-o5R"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
