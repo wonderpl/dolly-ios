@@ -113,6 +113,10 @@
     {
         [twitterViewComposer addURL: url];
     }
+	
+	if (image) {
+		[twitterViewComposer addImage:image];
+	}
     
     [viewController presentViewController: twitterViewComposer
                                  animated: YES
