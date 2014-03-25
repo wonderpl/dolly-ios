@@ -14,16 +14,9 @@
 #import "UIFont+SYNFont.h"
 #import "VideoInstance.h"
 #import "SYNPopoverable.h"
-#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNCommentingViewController.h"
 #import "SYNGenreManager.h"
-#import "Genre.h"
-#import "SubGenre.h"
-#import "SYNLoginManager.h"
-
-@import QuartzCore;
-
 
 #define kBackgroundOverlayAlpha 0.5f
 
