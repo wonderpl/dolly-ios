@@ -267,18 +267,17 @@ static NSString* PlaceholderText = @"Say something nice";
 
 #pragma mark - UITextViewDelegate
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if ([self.sendMessageTextView.text isEqualToString:PlaceholderText])
-    {
-        self.sendMessageTextView.text = @"";
-    }
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+	self.sendMessageButton.enabled = YES;
+
+	if ([self.sendMessageTextView.text isEqualToString:PlaceholderText]) {
+		self.sendMessageTextView.text = @"";
+	}
 }
 
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    self.sendMessageTextView.text = PlaceholderText;
+- (void)textViewDidEndEditing:(UITextView *)textView {
+	self.sendMessageTextView.text = PlaceholderText;
 }
 
 
