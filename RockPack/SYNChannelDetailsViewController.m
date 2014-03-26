@@ -199,7 +199,6 @@
     [self.videoThumbnailCollectionView reloadData];
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     
-    [self.navigationController.navigationBar.backItem setTitle:@""];
     
     [self setUpMode];
     
