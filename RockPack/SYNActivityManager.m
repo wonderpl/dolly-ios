@@ -118,8 +118,8 @@
 {
     
     [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelURL:channel.resourceURL completionHandler:^(NSDictionary *responseDictionary) {
-        [self addChannelSubscriptionsObject:channel];
-
+		channel.subscribedByUserValue = YES;
+		[self.channelSubscriptions addObject:channel.uniqueId];
         if (completionBlock)
         {
             completionBlock(responseDictionary);
@@ -139,10 +139,8 @@
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     [self.appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
-   
+		channel.subscribedByUserValue = NO;
         [self.channelSubscriptions removeObject:channel.uniqueId];
-        channel.subscribedByUserValue = NO;
-        
         
         if (completionBlock)
         {
@@ -209,7 +207,8 @@
                                                      
                                                      [self.userSubscriptons removeObject:channelOwner.uniqueId];
                                                      channelOwner.subscribedByUserValue = NO;
-
+													 
+													 [self subscribedList];
 
                                                      completionBlock(responseDictionary);
                                                  }

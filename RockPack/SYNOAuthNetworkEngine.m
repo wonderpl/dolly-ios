@@ -1322,6 +1322,7 @@
                                                                                                    httpMethod: @"GET"
                                                                                                           ssl: TRUE];
     
+	networkOperation.shouldNotCacheResponse = YES;
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];

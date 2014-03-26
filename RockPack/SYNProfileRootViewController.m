@@ -179,7 +179,6 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
-    [SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
     
     self.shouldBeginEditing = YES;
     self.collectionsTabActive = YES;
@@ -390,6 +389,7 @@
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     
+	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
     [self updateTabStatesWithServerCalls:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
@@ -1050,7 +1050,6 @@
         
         if (indexPath.row < [self.filteredSubscriptions count]) {
             Channel *channel = self.filteredSubscriptions[indexPath.item];
-            //        self.navigationController.navigationBarHidden = NO;
             
             SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
             
@@ -1246,14 +1245,6 @@
             NSError *error = nil;
             
             [weakSelf.channelOwner setSubscriptionsDictionary: dictionary];
-            //#warning cache all the channels to activity manager?
-            // is there a better way?
-            // can use the range object, this should be poosible
-            if (weakSelf.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
-                for (Channel *tmpChannel in weakSelf.channelOwner.subscriptions) {
-                    [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
-                }
-            }
             [weakSelf.subscriptionThumbnailCollectionView reloadData];
             [weakSelf.channelOwner.managedObjectContext save: &error];
             [self.followingTabButton setTitle:[NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Following", nil), dictionary[@"channels"][@"total"]]forState:UIControlStateNormal];
@@ -1275,7 +1266,6 @@
                                                            inRange: range
                                                  completionHandler: successBlock
                                                       errorHandler: errorBlock];
-            
         }
         
     }

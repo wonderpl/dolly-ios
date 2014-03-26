@@ -193,7 +193,6 @@
 {
     [super viewWillAppear: animated];
     
-    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
     
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
@@ -204,9 +203,6 @@
     
     [self setUpMode];
     
-    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-    
-    
     [self setupFonts];
     self.navigationItem.title = @"";
 
@@ -215,7 +211,7 @@
     [self.navigationController.navigationBar setBackgroundTransparent:YES];
 
     
-  
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -440,9 +436,7 @@
     
     [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
     
-    self.channel.subscribedByUserValue =[SYNActivityManager.sharedInstance isSubscribedToChannelId:self.channel.uniqueId];
-    self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
-    
+	[self setFollowButton];
     if ([self.channel.totalVideosValue integerValue] == 0)
     {
         self.lblNoVideos.hidden = NO;
@@ -457,6 +451,13 @@
     [self.btnDeleteChannel setBackgroundColor:[UIColor whiteColor]];
     
 }
+
+
+- (void) setFollowButton {
+	self.channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:self.channel.uniqueId];
+	self.btnFollowChannel.selected = self.channel.subscribedByUserValue;
+}
+
 #pragma mark - Control Actions
 
 - (void) followControlPressed: (SYNSocialButton *) socialControl {
@@ -709,16 +710,7 @@
     
     if (self.channel)
     {
-        // check for subscribed
-//        self.channel.subscribedByUserValue = NO;
-//        
-//        for (Channel *subscription in appDelegate.currentUser.subscriptions)
-//        {
-//            if ([subscription.uniqueId isEqualToString: self.channel.uniqueId])
-//            {
-//                self.channel.subscribedByUserValue = YES;
-//            }
-//        }
+		[self setFollowButton];
         
         self.channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToChannelId:self.channel.uniqueId];
         
@@ -825,6 +817,7 @@
 			}
 		}];
 		
+		[self setFollowButton];
 		if ((self.channel.channelOwner.displayName !=  nil) && (self.txtFieldChannelName.text == nil))
 		{
 			[self displayChannelDetails];
