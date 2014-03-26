@@ -8,7 +8,7 @@
 
 #import "SYNSocialFollowButton.h"
 #import "UIColor+SYNColor.h"
-
+#import "UIFont+SYNFont.h"
 @implementation SYNSocialFollowButton
 
 -(void)awakeFromNib
@@ -28,7 +28,8 @@
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
         [self setTitleColor: [self selectedBorderColor]
                    forState: UIControlStateSelected];
-    
+		
+		self.titleLabel.font = [UIFont lightCustomFontOfSize:12.5f];
         
         
     }
@@ -40,6 +41,8 @@
         
         [self setTitleColor: [UIColor dollyButtonDefaultColor]
                    forState: UIControlStateNormal];
+		self.titleLabel.font = [UIFont lightCustomFontOfSize:13.0f];
+
     }
 }
 
