@@ -116,7 +116,6 @@
 
 
 @property (nonatomic, strong) UIAlertView *followAllAlertView;
-@property (nonatomic, strong) UIAlertView *sameChannelNameAlertView;
 @property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 
 @property (nonatomic) CGPoint contentOffset;
@@ -324,7 +323,6 @@
     // == Init alert views, Follow and Unfollow
     self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
     
-    self.sameChannelNameAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"New channels can not have the same titles", @"Unfollow a channel in profile") message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:nil];
     
     self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle] , nil];
     
@@ -2299,7 +2297,6 @@
                                                  {
                                                      errorTitle = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_title", nil);
                                                      errorMessage = NSLocalizedString(@"channel_creation_screen_error_existing_dialog_description", nil);
-                                                     [self.sameChannelNameAlertView show];
                                                      [self.createChannelCell.createTextField becomeFirstResponder];
                                                  }
                                                  else if ([errorType isEqualToString: @"Mind your language!"])
