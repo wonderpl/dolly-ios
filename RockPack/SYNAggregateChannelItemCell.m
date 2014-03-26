@@ -121,8 +121,8 @@
    
     [self.stripView setBackgroundColor:[[SYNGenreManager sharedManager] colorForGenreWithId:channel.categoryId]];
     
-    [self.followControl setTitle:@"follow" forState:UIControlStateNormal];
-    [self.followControl setTitle:@"unfollow" forState:UIControlStateSelected];
+    [self.followControl setTitle:NSLocalizedString(@"follow", "follow in a channel item of th e feed") forState:UIControlStateNormal];
+    [self.followControl setTitle:NSLocalizedString(@"unfollow", "unfollow in a channel item of th e feed") forState:UIControlStateSelected];
     
 }
 

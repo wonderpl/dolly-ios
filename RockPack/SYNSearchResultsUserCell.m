@@ -110,11 +110,11 @@
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     
     if (channelOwner.subscribedByUserValue == NO) {
-        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+        [self.followButton setTitle:NSLocalizedString(@"follow", "follow discover screen") forState:UIControlStateNormal];
     }
     else
     {
-        [self.followButton setTitle:@"Unfollow" forState:UIControlStateSelected];
+        [self.followButton setTitle:NSLocalizedString(@"unfollow", "unfollow discover screen") forState:UIControlStateSelected];
     }
 }
 
