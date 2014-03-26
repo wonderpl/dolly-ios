@@ -3,7 +3,7 @@
 //  rockpack
 //
 //  Created by Michael Michailidis on 15/10/2013.
-//  Copyright (c) 2013 Nick Banks. All rights reserved.
+//  Copyright (c) 2013 Wonder PL Ltd. All rights reserved.
 //
 
 #import "AppConstants.h"
@@ -168,6 +168,18 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	
 	[[SYNTrackingManager sharedManager] trackDiscoverScreenView];
 	
+	if (IS_IPHONE) {
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardChanged:)
+													 name:UIKeyboardWillShowNotification
+												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardChanged:)
+													 name:UIKeyboardWillHideNotification
+												   object:nil];
+	}
+    
 	[self.categoriesCollectionView reloadData];
 }
 
@@ -176,6 +188,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	
     if (IS_IPAD) {
         self.navigationController.navigationBarHidden = NO;
+	}
+	
+	if (IS_IPHONE) {
+		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+		[notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:self];
+		[notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:self];
 	}
 }
 
@@ -223,7 +241,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         categoryCell.selectedColor = [UIColor darkerColorForColor:genreColor];
         categoryCell.deSelectedColor = genreColor;
         categoryCell.backgroundColor = genreColor;
-        
     } else {
         categoryCell.selectedColor = genreColor;
         categoryCell.deSelectedColor = [UIColor whiteColor];
@@ -644,6 +661,35 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         
         [self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:firstIndexPath];
     }
+}
+
+- (void)keyboardChanged:(NSNotification *)notification {
+	NSDictionary* userInfo = [notification userInfo];
+	NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	UIViewAnimationCurve animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+	CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	
+	BOOL isShowing = [[notification name] isEqualToString:UIKeyboardWillShowNotification];
+	
+	CGFloat keyboardHeight = CGRectGetHeight(keyboardFrame);
+	CGFloat keyboardHeightChange = (isShowing ? keyboardHeight : 0.0);
+	
+	UICollectionView *collectionView = self.categoriesCollectionView;
+	UITableView *tableView = self.autocompleteTableView;
+	
+	[UIView animateWithDuration:animationDuration
+						  delay:0.0f
+						options:(animationCurve << 16) // convert AnimationCurve to AnimationOption
+					 animations:^{
+						 collectionView.contentInset = UIEdgeInsetsMake(collectionView.contentInset.top,
+																		collectionView.contentInset.left,
+																		keyboardHeightChange,
+																		collectionView.contentInset.right);
+						 tableView.contentInset = UIEdgeInsetsMake(tableView.contentInset.top,
+																   tableView.contentInset.left,
+																   keyboardHeightChange,
+																   tableView.contentInset.right);
+					 } completion:nil];
 }
 
 @end
