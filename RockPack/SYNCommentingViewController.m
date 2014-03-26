@@ -317,7 +317,7 @@ static NSString* PlaceholderText = @"Say something nice";
 - (void) sendComment
 {
     NSString* commentText = self.sendMessageTextView.text;
-	if (![commentText length]) {
+	if (![commentText length] || [commentText isEqualToString:PlaceholderText]) {
 		[self.sendMessageTextView resignFirstResponder];
 		return;
 	}
