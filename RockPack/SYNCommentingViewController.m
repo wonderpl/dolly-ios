@@ -230,7 +230,7 @@ static NSString *const PlaceholderText = @"Say something nice";
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    if ([keyPath isEqualToString:kTextViewContentSizeKey]) {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(contentSize))]) {
 		CGSize oldContentSize = [change[NSKeyValueChangeOldKey] CGSizeValue];
 		CGSize newContentSize = [change[NSKeyValueChangeNewKey] CGSizeValue];
 		
