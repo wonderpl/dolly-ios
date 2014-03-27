@@ -10,13 +10,9 @@
 #import "SYNCommentingCollectionViewCell.h"
 #import "UIFont+SYNFont.h"
 #import "UIImageView+WebCache.h"
-#import "SYNAppDelegate.h"
 #import "SYNMasterViewController.h"
-#import "SYNDeviceManager.h"
 #import "UICollectionReusableView+Helpers.h"
-#import "SYNNavigationManager.h"
 #import "SYNCommentsModel.h"
-#import <QuartzCore/QuartzCore.h>
 #import "UIColor+SYNColor.h"
 #import "SYNTrackingManager.h"
 #import "NSRegularExpression+Username.h"
