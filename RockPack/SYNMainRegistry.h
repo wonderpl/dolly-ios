@@ -13,8 +13,6 @@
 
 @interface SYNMainRegistry : SYNRegistry
 
-- (BOOL) registerCategoriesFromDictionary: (NSDictionary *) dictionary;
-
 - (BOOL) registerIPBasedLocation:(NSString*)locationString;
 
 
