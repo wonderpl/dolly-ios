@@ -9,9 +9,7 @@
 #import "SYNCommentingCollectionViewCell.h"
 #import "UIButton+WebCache.h"
 #import "UIFont+SYNFont.h"
-#import "SYNCommentingViewController.h"
 #import "NSRegularExpression+Username.h"
-#import "SYNProfileRootViewController.h"
 #import "NSDictionary+Validation.h"
 
 @interface SYNCommentingCollectionViewCell () <UIGestureRecognizerDelegate, UITextViewDelegate>

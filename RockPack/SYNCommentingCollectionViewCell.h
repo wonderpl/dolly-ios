@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SYNCommentingViewController;
-@class SYNCommentingCollectionViewCell;
 
-#define kCommentTextSizeWidth 200.0f
+@class SYNCommentingCollectionViewCell;
 
 @protocol SYNCommentingCollectionViewCellDelegate <NSObject>
 

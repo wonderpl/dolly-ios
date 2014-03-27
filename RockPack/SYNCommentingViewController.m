@@ -21,11 +21,13 @@
 #import "SYNTrackingManager.h"
 #import "NSRegularExpression+Username.h"
 
-#define kMaxCommentCharacters 120
-#define kCacheTimeInMinutes 1
 
-static const CGFloat CharacterCountThreshold = 30.0;
-static NSString* PlaceholderText = @"Say something nice";
+static const NSInteger MaxCommentCharacterCount = 120;
+
+static const CGFloat CommentTextSizeWidth = 200.0;
+static const CGFloat CharacterCountHeightThreshold = 30.0;
+
+static NSString *const PlaceholderText = @"Say something nice";
 
 @interface SYNCommentingViewController () <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, SYNPagingModelDelegate, SYNCommentingCollectionViewCellDelegate>
 
@@ -41,8 +43,6 @@ static NSString* PlaceholderText = @"Say something nice";
 
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *sendMessageTextViewHeight;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomContainerViewBottom;
-
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* generalLoader;
 
 @property (nonatomic, strong) IBOutlet UILabel *charactersLeftLabel;
 
@@ -114,14 +114,9 @@ static NSString* PlaceholderText = @"Say something nice";
     
     self.sendMessageTextView.font = [UIFont regularCustomFontOfSize:self.sendMessageTextView.font.pointSize];
     
-    
-    
     [self.sendMessageAvatarmageView setImageWithURL: [NSURL URLWithString: appDelegate.currentUser.thumbnailURL]
                                    placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
                                             options: SDWebImageRetryFailed];
-    
-    
-    self.generalLoader.hidden = YES;
     
 	[self.model reset];
 	[self.model loadNextPage];
@@ -244,7 +239,7 @@ static NSString* PlaceholderText = @"Say something nice";
 		CGSize newContentSize = [change[NSKeyValueChangeNewKey] CGSizeValue];
 		
 		self.sendMessageTextViewHeight.constant = newContentSize.height;
-		self.charactersLeftLabel.hidden = (newContentSize.height == CharacterCountThreshold);
+		self.charactersLeftLabel.hidden = (newContentSize.height == CharacterCountHeightThreshold);
 		
 		UICollectionView *collectionView = self.commentsCollectionView;
 		CGFloat heightDifference = (newContentSize.height - oldContentSize.height);
@@ -279,28 +274,21 @@ static NSString* PlaceholderText = @"Say something nice";
 
 
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    
-    if ([text isEqualToString:@"\n"])
-    {
-        [self sendComment];
-        return NO;
-    }
-    
-    
-    // == Exceeded character count ? == //
-    
-    if(range.location >= kMaxCommentCharacters)
-    {
-        return NO;
-    }
-    
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+	if ([text isEqualToString:@"\n"]) {
+		[self sendComment];
+		return NO;
+	}
+
 	NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
-	NSInteger charactersLeft = kMaxCommentCharacters - [newString length];
+	if ([newString length] > MaxCommentCharacterCount) {
+		return NO;
+	}
+
+	NSInteger charactersLeft = MaxCommentCharacterCount - [newString length];
 	self.charactersLeftLabel.text = [NSString stringWithFormat:@"%@", @(charactersLeft)];
-    
-    return YES;
+
+	return YES;
 }
 
 - (void) refreshCollectionView
@@ -525,12 +513,11 @@ static NSString* PlaceholderText = @"Say something nice";
 {
     
     NSDictionary* comment = [self.model itemAtIndex:indexPath.item];
-    // size
     
     UIFont* correctFont = [SYNCommentingCollectionViewCell commentFieldFont];
 	NSParagraphStyle *paragraphStyle = [SYNCommentingCollectionViewCell paragraphStyle];
     
-    CGRect rect = [comment[@"comment"] boundingRectWithSize:(CGSize){kCommentTextSizeWidth, CGFLOAT_MAX}
+    CGRect rect = [comment[@"comment"] boundingRectWithSize:(CGSize){CommentTextSizeWidth, CGFLOAT_MAX}
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:@{ NSFontAttributeName : correctFont,
 															   NSParagraphStyleAttributeName : paragraphStyle}

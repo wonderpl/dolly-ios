@@ -11,7 +11,6 @@
                 <outlet property="charactersLeftLabel" destination="XfH-Sf-uWI" id="Ped-7H-LHm"/>
                 <outlet property="commentBottomConstraint" destination="Rvd-sV-938" id="fKt-8M-haf"/>
                 <outlet property="commentsCollectionView" destination="dnW-Ka-mTj" id="uct-wR-f53"/>
-                <outlet property="generalLoader" destination="sXy-pr-7bU" id="4M8-K1-m7s"/>
                 <outlet property="sendMessageAvatarmageView" destination="CxQ-bj-tgi" id="ODI-Xx-iiC"/>
                 <outlet property="sendMessageButton" destination="CFg-Xg-irR" id="I07-Dx-dgz"/>
                 <outlet property="sendMessageTextView" destination="UWz-rP-5kl" id="uC1-UV-X59"/>
@@ -24,10 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sXy-pr-7bU" userLabel="Loader">
-                    <rect key="frame" x="142" y="267" width="37" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dnW-Ka-mTj">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

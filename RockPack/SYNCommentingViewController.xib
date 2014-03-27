@@ -9,7 +9,6 @@
                 <outlet property="bottomContainerView" destination="uyA-H8-2fC" id="oOe-2E-kaO"/>
                 <outlet property="charactersLeftLabel" destination="g7w-Wi-7jW" id="6EL-gV-vYE"/>
                 <outlet property="commentsCollectionView" destination="xHI-4t-8mN" id="SV7-Pg-mCc"/>
-                <outlet property="generalLoader" destination="MKx-RD-ja4" id="ce8-1H-yCK"/>
                 <outlet property="sendMessageAvatarmageView" destination="dQD-R9-Cwe" id="HOs-fc-pMz"/>
                 <outlet property="sendMessageButton" destination="wJi-Y3-1s8" id="TyU-7o-Bdd"/>
                 <outlet property="sendMessageTextView" destination="FjY-KP-s3D" id="blI-8l-gOW"/>
@@ -22,10 +21,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="MKx-RD-ja4" userLabel="Loader">
-                    <rect key="frame" x="142" y="149" width="37" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xHI-4t-8mN">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="287"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,9 +104,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="MKx-RD-ja4" secondAttribute="centerY" id="Bbc-Xk-5O2"/>
                 <constraint firstAttribute="trailing" secondItem="xHI-4t-8mN" secondAttribute="trailing" id="ISM-XB-7At"/>
-                <constraint firstAttribute="centerX" secondItem="MKx-RD-ja4" secondAttribute="centerX" id="Nmw-Lf-n1Q"/>
                 <constraint firstItem="uyA-H8-2fC" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="ZyG-CG-1VA"/>
                 <constraint firstAttribute="trailing" secondItem="uyA-H8-2fC" secondAttribute="trailing" id="aao-D1-sr4"/>
                 <constraint firstItem="xHI-4t-8mN" firstAttribute="bottom" secondItem="uyA-H8-2fC" secondAttribute="bottom" constant="-49" id="dca-oV-bQZ"/>
