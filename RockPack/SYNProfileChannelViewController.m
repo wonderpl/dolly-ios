@@ -228,7 +228,10 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
     
-    
+	if (self.isUserProfile && indexPath.row == 0) {
+        return;
+    }
+
     if (self.creatingChannel) {
         [self cancelCreateChannel];
         return;
