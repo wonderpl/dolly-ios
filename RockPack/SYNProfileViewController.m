@@ -79,7 +79,6 @@ static const CGFloat TransitionDuration = 1.0f;
         [self.subscriptionCollectionViewController.model reset];
         [self.subscriptionCollectionViewController.model loadFirstPage];
     }
-    [self reloadCollectionViews];
 }
 
 #pragma mark - segue
@@ -96,9 +95,6 @@ static const CGFloat TransitionDuration = 1.0f;
         SYNProfileSubscriptionViewController * subscriptionCollectionViewController =[segue destinationViewController];
         subscriptionCollectionViewController.channelOwner = self.channelOwner;
         subscriptionCollectionViewController.isUserProfile = self.isUserProfile;
-        
-        //TODO: Change modeType to BOOL
-
         self.subscriptionCollectionViewController = subscriptionCollectionViewController;
     }
 }
@@ -260,6 +256,8 @@ static const CGFloat TransitionDuration = 1.0f;
     self.channelContainer.hidden = YES;
     self.followingContainer.hidden = NO;
     
+	NSLog(@"followingsTabTapped");
+	
     [self.subscriptionCollectionViewController.model reset];
     [self.subscriptionCollectionViewController.model loadFirstPage];    
 
