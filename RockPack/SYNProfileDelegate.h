@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SYNSocialFollowButton.h"
+
+@class SYNSocialFollowButton;
+
 
 @protocol SYNProfileDelegate <NSObject>
 
