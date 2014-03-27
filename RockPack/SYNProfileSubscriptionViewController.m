@@ -347,7 +347,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [self.searchBar resignFirstResponder];
 }
 
-#pragma mark - channel mid cell delegate
+#pragma mark - SYNChannelMidCellDelegate
 - (void) cellStateChanged {
     [self hideDescriptionCurrentlyShowing];
     [self.tapToResetCells setEnabled:YES];
@@ -371,7 +371,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
-#pragma mark - Paging model delegates
+#pragma mark - SYNPagingModelDelegate
 
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
