@@ -18,13 +18,11 @@
 #import "SYNDeviceManager.h"
 #import "SYNProfileViewController.h"
 
-#define PARALLAX_SCROLL_VALUE 2.0f
-#define SEARCHBAR_Y 430.0f
-#define FULL_NAME_LABEL_IPHONE 364.0f // lower is down
-#define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
-#define FULLNAMELABELIPADLANDSCAPE 412.0f
-
-//TODO: Variables
+static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
+static const CGFloat SEARCHBAR_Y = 430.0f;
+static const CGFloat FULL_NAME_LABEL_IPHONE = 364.0f; // lower is down
+static const CGFloat FULL_NAME_LABEL_IPAD_PORTRAIT = 533.0f;
+static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 
 @interface SYNProfileSubscriptionViewController () <UISearchBarDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *defaultLayout;
