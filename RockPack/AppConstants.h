@@ -15,23 +15,17 @@
 
 #define APP_ID @"824769819"
 
-#define kAPIInitialBatchSize 48
-
 //
 // API
 //
 
 // Entities
 
-#define kGenre                      @"Genre"
-#define kSubGenre                   @"SubGenre"
-#define kComment                    @"Comment"
 #define kFeedItem                   @"FeedItem"
 #define kChannel                    @"Channel"
 #define kVideo                      @"Video"
 #define kVideoInstance              @"VideoInstance"
 #define kChannelOwner               @"ChannelOwner"
-#define kUser                       @"User"
 
 // viewId
 #define kFeedViewId                 @"MY WONDERS"
@@ -214,12 +208,7 @@ typedef enum : NSInteger {
 #define kChannelOwnerSubscribeToUserRequest @"kChannelOwnerSubscribeToUserRequest"
 
 
-
-#define kRefreshComplete            @"kRefreshComplete"
-
 #define kUpdateFailed               @"kUpdateFailed"
-
-#define kShowUserChannels           @"kShowUserChannels"
 
 #define kImageSizeStringReplace     @"thumbnail_medium"
 
@@ -232,9 +221,6 @@ typedef enum : NSInteger {
 
 #define kAPIDefaultTimout 30
 
-// API default batch size (we may need different ones for each API at some stage)
-#define kDefaultBatchSize 20
-
 // Savecontext
 
 #define kSaveSynchronously TRUE
@@ -246,33 +232,18 @@ typedef enum : NSInteger {
 
 // Notifications
 
-#define kMainControlsChangeEnter @"kMainControlsChangeEnter"
 #define kScrollMovement @"kScrollMovement"
 #define kHideAllDesciptions @"kHideAllDesciptions"
 #define kReloadFeed @"kReloadFeed"
 
-
-// One the APIs imported some new data - we will need to be more specific at some stage.
-#define kCategoriesUpdated @"kCategoriesUpdated"
-
 #define kLoginOnBoardingMessagesNum 5
-#define kInstruction1OnBoardingState @"kInstruction1OnBoardingState"
-#define kInstruction2OnBoardingState @"kInstruction2OnBoardingState"
 
 // Observers
-#define kCollectionViewContentOffsetKey @"contentOffset"
 #define kTextViewContentSizeKey @"contentSize"
-#define kChannelUpdatedKey @"eCommerceURL"
-#define kSubscribedByUserKey @"subscribedByUser"
-
-// Major functionality switches
 
 // OAuth Username and Password
 
 #define kOAuth2ClientId @"c8fe5f6rock873dpack19Q"
-
-// Enable full screen thumbnail view
-#define FULL_SCREEN_THUMBNAILS__
 
 
 typedef enum : NSInteger {
@@ -282,13 +253,6 @@ typedef enum : NSInteger {
     GenderUndecided = 2 // how post-modern
     
 } Gender;
-
-//
-// Colours
-//
-
-// Highlighted RockIt number text colour
-#define kHighlightedStarTextColour [UIColor colorWithRed: 0.894f green: 0.945f blue: 0.965f alpha: 1.0f]
 
 //
 // Animations
@@ -301,8 +265,6 @@ typedef enum : NSInteger {
 #define kChannelEditModeAnimationDuration 0.4f
 
 #define kClearedLocationBoundData           @"kClearedLocationBoundData"
-
-#define kVideoInAnimationDuration 0.3f
 
 //
 // Dimensions
@@ -323,12 +285,6 @@ static NSString* kPopularGenreUniqueId = @"1979";
 
 // UserDefaults
 #define kUserDefaultsNotFirstInstall @"UD_Not_First_Install"
-#define kUserDefaultsSubscribe @"UD_OnBoaring_Subscribe"
-#define kUserDefaultsAddVideo @"UD_OnBoaring_AddVideo"
-#define kUserDefaultsFriendsTab @"UD_OnBoaring_FriendsTab"
-#define kUserDefaultsChannels @"UD_OnBoaring_Channels"
-#define kUserDefaultsFeed @"UD_OnBoaring_Feed"
-#define kUserDefaultsSeenOnBoarding @"UD_Seen_On_Boarding"
 #define kUserDefaultsCommentingLastInteracted @"CMT_Interaction_Date"
 #define kUserDefaultsMoodFirstTime @"UD_Mood_First_Time"
 #define kUserDefaultsDiscoverVideoFirstTime @"UD_Discover_Video_First_Time"
@@ -383,14 +339,6 @@ typedef enum : NSInteger {
     ScrollingDirectionDown,
 } ScrollingDirection;
 
-typedef enum : NSInteger {
-    PointingDirectionNone = 0,
-    PointingDirectionUp,
-    PointingDirectionDown,
-    PointingDirectionLeft,
-    PointingDirectionRight
-} PointingDirection;
-
 typedef enum : NSInteger
 {
     kChannelDetailsModeDisplay = 0,
@@ -413,24 +361,6 @@ typedef enum : NSInteger {
     kModeOtherUsersProfile,
     kModeEditProfile,
 } ProfileType;
-
-
-// Height of the bottom tab bar in pixels
-#define kBottomTabBarHeight 62
-
-// Height of the header bar
-#define kHeaderBarHeight 44
-
-// Height of the top tab bar
-#define kTopTabBarHeight 45
-
-// Offset from the bottom of the status bar to the bottom of the top tab bar
-#define kTabTopContentOffset (kHeaderBarHeight + kTopTabBarHeight)
-
-// Amount of overspill for top tab bar
-#define kTopTabOverspill 7
-
-#define kCategorySecondRowHeight 35.0f
 
 //
 // Tabs
