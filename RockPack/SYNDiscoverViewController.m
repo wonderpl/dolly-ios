@@ -179,8 +179,10 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 													 name:UIKeyboardWillHideNotification
 												   object:nil];
 	}
-    
+
 	[self.categoriesCollectionView reloadData];
+	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+	
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
