@@ -340,46 +340,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	return [self.channelOwner.subscriptions array];
 }
 
-#pragma mark - Get channels
-
-- (void) getChannels {
-    
-    __weak typeof(self) weakSelf = self;
-    
-    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
-        weakSelf.loadingMoreContent = NO;
-        NSError *error = nil;
-        
-        [weakSelf.channelOwner setSubscriptionsDictionary: dictionary];
-        //#warning cache all the channels to activity manager?
-        // is there a better way?
-        // can use the range object, this should be poosible
-        if (weakSelf.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
-            for (Channel *tmpChannel in weakSelf.channelOwner.subscriptions) {
-                [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
-            }
-        }
-        [weakSelf.cv reloadData];
-        [weakSelf.channelOwner.managedObjectContext save: &error];
-        
-    };
-    
-    // define success block //
-    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
-        weakSelf.loadingMoreContent = NO;
-        DebugLog(@"Update action failed");
-    };
-    //    Working load more videos for user channels
-    
-    NSRange range = NSMakeRange(0, 100);
-    
-    [appDelegate.oAuthNetworkEngine subscriptionsForUserId: weakSelf.channelOwner.uniqueId
-                                                   inRange: range
-                                         completionHandler: successBlock
-                                              errorHandler: errorBlock];
-}
-
-
 #pragma mark - setOffset
 
 - (void) setContentOffSet: (CGPoint) offset {
