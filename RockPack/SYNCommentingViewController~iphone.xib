@@ -19,12 +19,12 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dnW-Ka-mTj">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="382"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="feE-b5-yXT">
@@ -40,7 +40,7 @@
                     </connections>
                 </collectionView>
                 <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RwK-Zh-8aD" userLabel="Bottom Container">
-                    <rect key="frame" x="0.0" y="510" width="320" height="58"/>
+                    <rect key="frame" x="0.0" y="382" width="320" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CxQ-bj-tgi" userLabel="Avatar Image View">
@@ -104,20 +104,28 @@
                     </constraints>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCP-bK-5VX">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <navigationItem title="COMMENTS" id="Je4-OE-Ynv"/>
+                    </items>
+                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="LCP-bK-5VX" firstAttribute="top" secondItem="1" secondAttribute="top" id="2bS-0k-2Eh"/>
                 <constraint firstAttribute="trailing" secondItem="RwK-Zh-8aD" secondAttribute="trailing" id="CO1-i3-qjs"/>
                 <constraint firstItem="dnW-Ka-mTj" firstAttribute="top" secondItem="1" secondAttribute="top" id="Fqr-a2-Mbo"/>
+                <constraint firstAttribute="trailing" secondItem="LCP-bK-5VX" secondAttribute="trailing" id="HWJ-4g-bYk"/>
                 <constraint firstAttribute="bottom" secondItem="RwK-Zh-8aD" secondAttribute="bottom" id="Rvd-sV-938"/>
+                <constraint firstItem="LCP-bK-5VX" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="T9u-eo-Pi2"/>
                 <constraint firstAttribute="trailing" secondItem="dnW-Ka-mTj" secondAttribute="trailing" id="XFM-hM-YVx"/>
                 <constraint firstItem="dnW-Ka-mTj" firstAttribute="bottom" secondItem="RwK-Zh-8aD" secondAttribute="bottom" constant="-58" id="byZ-fq-l6I"/>
                 <constraint firstItem="RwK-Zh-8aD" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ctN-4q-KCR"/>
                 <constraint firstItem="dnW-Ka-mTj" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ge0-uW-MbS"/>
             </constraints>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
 </document>

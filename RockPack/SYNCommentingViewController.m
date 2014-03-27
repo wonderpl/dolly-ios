@@ -76,15 +76,9 @@ static NSString *const PlaceholderText = @"Say something nice";
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-																			 style:UIBarButtonItemStylePlain
-																			target:nil
-																			action:nil];
-	
-    // on iPhone the controller appears in a popup
-    if (IS_IPHONE) {
-		self.commentsCollectionView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    }
+	if (IS_IPHONE) {
+		self.commentsCollectionView.contentInset = UIEdgeInsetsMake(44.0, 0, 0, 0);
+	}
     
     self.sendMessageAvatarmageView.layer.cornerRadius = self.sendMessageAvatarmageView.frame.size.width * 0.5f;
     self.sendMessageAvatarmageView.clipsToBounds = YES;
@@ -146,14 +140,6 @@ static NSString *const PlaceholderText = @"Say something nice";
     self.loadingNewComments = NO;
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                        object: self
-                                                      userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     
@@ -162,15 +148,10 @@ static NSString *const PlaceholderText = @"Say something nice";
 								  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
 								  context:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                        object: self
-                                                      userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
-    
     [[SYNTrackingManager sharedManager] trackCommentingScreenView];
 }
 
-
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 
     if ([self.model totalItemCount]) {
@@ -185,7 +166,6 @@ static NSString *const PlaceholderText = @"Say something nice";
     self.sendMessageTextView.text = @"";
 
 }
-
 
 #pragma mark - Keyboard Animation
 

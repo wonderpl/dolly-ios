@@ -282,7 +282,10 @@
     
 	SYNCommentingViewController *viewController = [[SYNCommentingViewController alloc] initWithVideoInstance:self.videoInstance withButton:(SYNSocialCommentButton*)button];
 	if (IS_IPHONE) {
-		[self.navigationController pushViewController:viewController animated:YES];
+		viewController.transitioningDelegate = self;
+		viewController.modalPresentationStyle = UIModalPresentationCustom;
+		
+		[self presentViewController:viewController animated:YES completion:nil];
 	} else {
 		SYNRotatingPopoverController *popoverController = [[SYNRotatingPopoverController alloc] initWithContentViewController:viewController];
 		[popoverController presentPopoverFromButton:button
@@ -407,8 +410,9 @@
 - (Class)animationClassForViewController:(UIViewController *)viewController {
 	NSDictionary *mapping = @{
 							  NSStringFromClass([SYNFullScreenVideoViewController class]) : [SYNFullScreenVideoAnimator class],
-							  NSStringFromClass([SYNOneToOneSharingController class]) : [SYNPopoverAnimator class],
-							  NSStringFromClass([SYNAddToChannelViewController class]) : [SYNPopoverAnimator class]
+							  NSStringFromClass([SYNOneToOneSharingController class])     : [SYNPopoverAnimator class],
+							  NSStringFromClass([SYNAddToChannelViewController class])    : [SYNPopoverAnimator class],
+							  NSStringFromClass([SYNCommentingViewController class])      : [SYNPopoverAnimator class]
 							  };
 	return mapping[NSStringFromClass([viewController class])];
 }

@@ -301,7 +301,7 @@
 	}
 	
 	[[SYNTrackingManager sharedManager] trackVideoCommentFromScreenName:[self trackingScreenName]];
-
+	
 	SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked withButton:(SYNSocialCommentButton*)socialButton];
 
 	if (IS_IPAD) {
@@ -319,7 +319,9 @@
 		self.commentingPopoverController = popoverController;
 
 	} else {
-		[self.navigationController pushViewController:commentController animated:YES];
+		commentController.transitioningDelegate = self;
+		commentController.modalPresentationStyle = UIModalPresentationCustom;
+		[self presentViewController:commentController animated:YES completion:nil];
 	}
 }
 
