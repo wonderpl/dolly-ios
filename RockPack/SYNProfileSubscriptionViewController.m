@@ -23,10 +23,10 @@ static const CGFloat SEARCHBAR_Y = 430.0f;
 static const CGFloat FULL_NAME_LABEL_IPHONE = 364.0f; // lower is down
 static const CGFloat FULL_NAME_LABEL_IPAD_PORTRAIT = 533.0f;
 static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
+static const CGFloat OWNUSERHEADERHEIGHT = 494.0f;
 
 @interface SYNProfileSubscriptionViewController () <UISearchBarDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *defaultLayout;
-
 @property (nonatomic, strong) IBOutlet UIView *fakeNavigationBar;
 @property (nonatomic, strong) IBOutlet UILabel *fakeNavigationBarTitle;
 @property (nonatomic, strong) NSArray *filteredSubscriptions;
@@ -42,11 +42,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    //TODO: Helpers
-    
+    [super viewDidLoad];    
     [self.cv registerNib: [SYNChannelMidCell nib]
 forCellWithReuseIdentifier: [SYNChannelMidCell reuseIdentifier]];
     
@@ -68,31 +64,24 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     if (self.isUserProfile && IS_IPHONE) {
         
-        //Search bar added to view because as reload data messes it up when its a cell.
-        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 494, CGRectGetWidth(self.cv.frame), 44)];
+        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, OWNUSERHEADERHEIGHT, CGRectGetWidth(self.cv.frame), 44)];
         self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-        //        [self enableCancelButton:self.searchBar];
         self.searchBar.delegate = self;
-        
-        //        [self.searchBar setBarTintColor:[UIColor whiteColor]];
-        
         
         self.searchBar.tintColor = [UIColor colorWithRed: (127.0f / 255.0f)
                                                    green: (127.0f / 255.0f)
                                                     blue: (127.0f / 255.0f)
                                                    alpha: 1.0f];
-        //good
         self.searchBar.translucent = YES;
         
         self.searchBar.layer.borderWidth = IS_RETINA ? 0.5f: 1.0f;
         self.searchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
         
-        //TODO: Look into making it a cell
-        [self.cv insertSubview:self.searchBar belowSubview:self.headerView];
         [self.cv addSubview:self.searchBar];
-        [self.cv setContentOffset:CGPointMake(0, 44)];
-        
+		
     }
+	
+	
     
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:20];
     [self.fakeNavigationBarTitle setText: _channelOwner.displayName];
@@ -184,7 +173,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
 {
-    return self.model.itemCount + (self.isUserProfile&&IS_IPHONE ? 1:0);
+    return self.model.itemCount;
 }
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
@@ -197,36 +186,23 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    UICollectionViewCell *cell = nil;
-    NSInteger index = indexPath.row - (self.isUserProfile&&IS_IPHONE ? 1:0);
+    NSInteger index = indexPath.row;
     
-    if (indexPath.row == 0 && self.isUserProfile && IS_IPHONE) {
-        
-        //TODO: Helpers
-        SYNChannelSearchCell *searchCell = [collectionView dequeueReusableCellWithReuseIdentifier: [SYNChannelSearchCell reuseIdentifier]
-                                                                                     forIndexPath: indexPath];
-        cell = searchCell;
-        
-    } else {
-        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: [SYNChannelMidCell reuseIdentifier] forIndexPath: indexPath];
-        
-        Channel *channel;
-        
-        if (index < [self.filteredSubscriptions count]) {
-            channel = self.filteredSubscriptions[index];
-            //text is set in the channelmidcell setChannel method
-            channelThumbnailCell.channel = channel;
-        } else {
-            channelThumbnailCell.channel = nil;
-        }
-        
-        channelThumbnailCell.viewControllerDelegate = self;
-        
-        cell = channelThumbnailCell;
-        
-    }
+	SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: [SYNChannelMidCell reuseIdentifier] forIndexPath: indexPath];
 	
-    return cell;
+	Channel *channel;
+	
+	if (index < [self.filteredSubscriptions count]) {
+		channel = self.filteredSubscriptions[index];
+		//text is set in the channelmidcell setChannel method
+		channelThumbnailCell.channel = channel;
+	} else {
+		channelThumbnailCell.channel = nil;
+	}
+	
+	channelThumbnailCell.viewControllerDelegate = self;
+	
+    return channelThumbnailCell;
 }
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
@@ -256,16 +232,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     return;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (IS_IPHONE) {
-        if (indexPath.row == 0  && self.isUserProfile) {
-            return CGSizeMake(320, 44);
-        }
-    }
-    
-    return self.defaultLayout.itemSize;
-}
 
 
 - (UICollectionReusableView *) collectionView: (UICollectionView *) collectionView
@@ -311,7 +277,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     if (IS_IPHONE) {
         if (self.isUserProfile) {
-            return CGSizeMake(320, 494);
+            return CGSizeMake(320, OWNUSERHEADERHEIGHT);
         } else {
             return CGSizeMake(320, 516);
         }
