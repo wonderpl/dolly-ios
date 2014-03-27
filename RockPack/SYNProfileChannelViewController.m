@@ -20,17 +20,16 @@
 #import "SYNChannelFooterMoreView.h"
 #import "SYNProfileExpandedFlowLayout.h"
 
-#define kHeightChange 94.0f
-#define PARALLAX_SCROLL_VALUE 2.0f
-#define ALPHA_IN_EDIT 0.2f
-#define FULL_NAME_LABEL_IPHONE 364.0f // lower is down
-#define FULL_NAME_LABEL_IPAD_PORTRAIT 533.0f
-#define FULLNAMELABELIPADLANDSCAPE 412.0f
-
+static const CGFloat kHeightChange = 94.0f;
+static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
+static const CGFloat ALPHA_IN_EDIT = 0.2f;
+static const CGFloat FULL_NAME_LABEL_IPHONE = 364.0f; // lower is down
+static const CGFloat FULL_NAME_LABEL_IPAD_PORTRAIT = 533.0f;
+static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 
 @interface SYNProfileChannelViewController () <SYNChannelCreateNewCelllDelegate, SYNChannelMidCellDelegate, SYNPagingModelDelegate>
-@property (strong, nonatomic) IBOutlet UIView *fakeNavigationBar;
-@property (strong, nonatomic) IBOutlet UILabel *fakeNavigationBarTitle;
+@property (nonatomic,strong) IBOutlet UIView *fakeNavigationBar;
+@property (nonatomic,strong) IBOutlet UILabel *fakeNavigationBarTitle;
 @property (nonatomic, weak) SYNChannelCreateNewCell *createChannelCell;
 @property (nonatomic) BOOL creatingChannel;
 
