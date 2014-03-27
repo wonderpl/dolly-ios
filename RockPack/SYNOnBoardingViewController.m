@@ -10,26 +10,20 @@
 #import "SYNOnBoardingCell.h"
 #import "SYNOnBoardingHeader.h"
 #import "SYNAppDelegate.h"
-#import "SYNOAuthNetworkEngine.h"
-#import "ChannelOwner.h"
 #import "Recommendation.h"
-#import "SYNMasterViewController.h"
 #import "SYNOnBoardingHeader.h"
 #import "SYNOnBoardingFooter.h"
 #import "UIFont+SYNFont.h"
 #import "UIDevice+Helpers.h"
 #import "Genre.h"
-#import "UIDevice+Hardware.h"
 #import "AppConstants.h"
 #import "SubGenre.h"
 #import "UIColor+SYNColor.h"
 #import "SYNDeviceManager.h"
-#import "SYNActivityManager.h"
 #import "SYNOnBoardingSectionHeader.h"
 #import "SYNGenreManager.h"
 #import "SYNTrackingManager.h"
 #import "UICollectionReusableView+Helpers.h"
-#import "SYNGenreManager.h"
 
 @interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SYNOnboardingFooterDelegate>
 
@@ -85,6 +79,14 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
 	return UIStatusBarStyleDefault;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+	if ([[UIDevice currentDevice] isPad]) {
+		[self updateLayoutForOrientation:toInterfaceOrientation];
+	}
 }
 
 #pragma mark - UIBarPositioningDelegate
@@ -325,29 +327,16 @@
 
 #pragma mark - AutoRotation
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-	if ([[UIDevice currentDevice] isPad]) {
-		[self updateLayoutForOrientation:[SYNDeviceManager.sharedInstance orientation]];
-	}
-}
-
 - (void)updateLayoutForOrientation:(UIDeviceOrientation)orientation {
-	if ([[SYNDeviceManager sharedInstance] isPortrait]) {
-		UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)[self.collectionView collectionViewLayout]);
-		
-		tmpLayout.sectionInset = UIEdgeInsetsMake(0, 120, 0, 120);
-		[self.collectionView setCollectionViewLayout:tmpLayout];
-		[self.collectionView.collectionViewLayout invalidateLayout];
-		
+	UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)[self.collectionView collectionViewLayout];
+	
+	if (UIInterfaceOrientationIsPortrait(orientation)) {
+		layout.sectionInset = UIEdgeInsetsMake(0, 120, 0, 120);
 	} else {
-		UICollectionViewFlowLayout *tmpLayout = ((UICollectionViewFlowLayout*)[self.collectionView collectionViewLayout]);
-		
-		tmpLayout.sectionInset = UIEdgeInsetsMake(0, 100, 0, 100);
-		[self.collectionView setCollectionViewLayout:tmpLayout];
-		[self.collectionView.collectionViewLayout invalidateLayout];
+		layout.sectionInset = UIEdgeInsetsMake(0, 100, 0, 100);
 	}
+	
+	[self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 @end
