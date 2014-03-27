@@ -10,7 +10,7 @@
 
 @protocol SYNProfileEditDelegate <NSObject>
 
-@required
+
 - (void) setCollectionViewContentOffset:(CGPoint)contentOffset animated:(BOOL) animated;
 - (void) updateCoverImage: (NSString*) url;
 - (void) updateAvatarImage: (NSString*) url;
