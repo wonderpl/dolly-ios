@@ -340,12 +340,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	return [self.channelOwner.subscriptions array];
 }
 
-#pragma mark - setOffset
-
-- (void) setContentOffSet: (CGPoint) offset {
-    [self.cv setContentOffset:offset];
-}
-
 
 #pragma mark - Gesture reconisers
 
