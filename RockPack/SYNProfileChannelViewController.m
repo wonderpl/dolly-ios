@@ -40,7 +40,6 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 @property (nonatomic, strong) UIBarButtonItem *barBtnSaveCreateChannel;
 
 @property (nonatomic, strong) SYNProfileHeader* headerView;
-@property (nonatomic, strong) UIAlertView *deleteChannelAlertView;
 @property (nonatomic, strong) SYNChannelMidCell *deleteCell;
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 @property (nonatomic, strong) SYNProfileChannelModel *model;
@@ -651,11 +650,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     self.deleteCell = cell;
     NSString *titleString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete Collection", "Alerview confirm to delete a Channel"), cell.channel.title];
     
-    
-    self.deleteChannelAlertView = [[UIAlertView alloc] initWithTitle:titleString message:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view") , nil];
-    
-    [self.deleteChannelAlertView show];
-    
+    [[[UIAlertView alloc] initWithTitle:titleString message:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view") , nil] show];
 }
 
 -(void) deleteChannel:(SYNChannelMidCell *)cell {
@@ -694,16 +689,10 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 #pragma mark - Alertview delegate
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
-	
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
     
-    __weak SYNProfileChannelViewController *weakSelf = self;
-    
-    //TODO: Don't use string, use the index
-    if (alertView == self.deleteChannelAlertView && [buttonTitle isEqualToString:@"Yes"])
-    {
-        [weakSelf deleteChannel:weakSelf.deleteCell];
+    if (buttonIndex == 1) {
+        [self deleteChannel:self.deleteCell];
     }
 }
 
