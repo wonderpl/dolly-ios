@@ -32,9 +32,6 @@
 @property (nonatomic, strong) IBOutlet UIView *fakeNavigationBar;
 @property (nonatomic, strong) IBOutlet UILabel *fakeNavigationBarTitle;
 @property (nonatomic, strong) NSArray *filteredSubscriptions;
-@property (nonatomic, strong) NSString *currentSearchTerm;
-@property (nonatomic, assign) BOOL searchMode;
-@property (nonatomic, assign) BOOL shouldBeginEditing;
 @property (nonatomic, strong) SYNProfileHeader* headerView;
 @property (nonatomic, strong) UISearchBar* searchBar;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
@@ -359,10 +356,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.currentSearchTerm = searchBar.text;
     [self.cv reloadData];
-    
-    self.searchMode = NO;
     
     [self.searchBar resignFirstResponder];
     
@@ -377,14 +371,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    //To not get the keyboard to show when the x button is clicked
-    //    if(![self.followingSearchBar isFirstResponder]) {
-    //        self.shouldBeginEditing = NO;
-    //    }
     
-    
-    self.currentSearchTerm = searchBar.text;
-	
     [self.searchBar resignFirstResponder];
     
     if (searchBar.text.length == 0) {
@@ -392,26 +379,16 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     } else {
         self.searchBar.showsCancelButton = YES;
     }
-    
-    
+
 	self.filteredSubscriptions = [self filteredSubscriptionsForSearchTerm:searchBar.text];
 	
-    
     [self.cv reloadData];
     [self.searchBar becomeFirstResponder];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar
 {
-    // boolean to check if the keyboard should show
-    BOOL boolToReturn = self.shouldBeginEditing;
-    self.searchMode = YES;
     
-    //    [self stopCollectionScrollViews];
-    
-    if (self.shouldBeginEditing)
-    {
-        
         [UIView animateWithDuration:0.2 animations:^{
             self.cv.contentOffset = CGPointMake(0, SEARCHBAR_Y);
             
@@ -422,14 +399,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
             [self.cv.collectionViewLayout invalidateLayout];
         }];
         [self.searchBar setShowsCancelButton:YES animated:YES];
-        
-        
-        
-    }
-    
-    self.shouldBeginEditing = YES;
-    
-    return boolToReturn;
+    return YES;
 }
 
 - (void)enableCancelButton:(UISearchBar *)searchBar {
@@ -549,15 +519,16 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                           duration: (NSTimeInterval) duration {
+	
+    if (IS_IPHONE) {
+        return;
+    }
+
     [self updateLayoutForOrientation: toInterfaceOrientation];
 }
 
 
 - (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation {
-    
-    if (IS_IPHONE) {
-        return;
-    }
     
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.defaultLayout.minimumLineSpacing = 14.0f;
