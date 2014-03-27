@@ -88,6 +88,22 @@ describe(@"SYNCommentingViewController", ^{
 											 replacementText:@"0"];
 			[[theValue(shouldChangeText) should] beNo];
 		});
+		
+		it(@"should send the comment when the return key is pressed", ^{
+			UITextView *textView = viewController.sendMessageTextView;
+			
+			[viewController textViewDidBeginEditing:textView];
+			textView.text = @"This is a test message";
+			
+			[[viewController should] receive:@selector(sendComment)];
+			
+			BOOL shouldChangeText = [viewController textView:textView
+									 shouldChangeTextInRange:NSMakeRange([textView.text length], 0)
+											 replacementText:@"\n"];
+			
+			[[theValue(shouldChangeText) should] beNo];
+		});
+		
 	});
 	
 	context(@"when finishing editing a comment", ^{
