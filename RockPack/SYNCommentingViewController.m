@@ -544,31 +544,6 @@ static NSString* PlaceholderText = @"Say something nice";
     return CGSizeMake(self.commentsCollectionView.frame.size.width, correctHeight);
 }
 
-#pragma mark - Dealloc
-
-// this controller gets destroyed and recreated every time we press the comment button so need to catch dealloc rather than viewDidUnload
-- (void) dealloc
-{
-    //    // delete all the comments for which we did not retrieve an OK. They might still have been saved and will appear upon load
-    //    // but we need to be consistent by only showing what we are certain has been received form the server
-    //    Comment* comment;
-    //    for (comment in self.comments)
-    //    {
-    //        if(!comment.validatedValue)
-    //        {
-    //            DebugLog(@"Deleting unvalidated comment: %@", comment);
-    //            [comment.managedObjectContext deleteObject:comment];
-    //        }
-    //    }
-    //
-    //    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //    
-    //    
-    //    NSError* error;
-    //    [comment.managedObjectContext save:&error];
-    
-}
-
 - (void)resetData {
     self.loadingNewComments = YES;
 	[self.model loadNextPage];
