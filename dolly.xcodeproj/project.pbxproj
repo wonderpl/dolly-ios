@@ -299,6 +299,7 @@
 		4C03237E18AE6FBD00E168EF /* SYNFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */; };
 		4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */; };
 		4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */; };
+		4C1DBBEC18E48E5D0047CAFA /* SYNIPadSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */; };
 		4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */; };
 		4C5E85FE18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85FC18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m */; };
 		4C5E85FF18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85FD18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib */; };
@@ -620,7 +621,6 @@
 		E9B9214118C78CA2003093B8 /* TabActivityNotiSelected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B9213B18C78CA2003093B8 /* TabActivityNotiSelected~iphone.png */; };
 		E9C2A58D1899231500FC50D3 /* SYNGradientSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C2A58C1899231500FC50D3 /* SYNGradientSeparatorView.m */; };
 		E9CE79E21886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE79E11886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m */; };
-		E9CE7A2A1886F9B000023A86 /* SYNIPadSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A291886F9B000023A86 /* SYNIPadSignupViewController.m */; };
 		E9CE7A2D1887057500023A86 /* SYNiPadLoginToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */; };
 		E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */; };
 		E9D71AD7187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D71AD6187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m */; };
@@ -1066,6 +1066,8 @@
 		4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFriendCell.xib; sourceTree = "<group>"; };
 		4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconWonderAbout.png; sourceTree = "<group>"; };
 		4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconWonderAbout@2x.png"; sourceTree = "<group>"; };
+		4C1DBBEA18E48E5D0047CAFA /* SYNIPadSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadSignupViewController.h; sourceTree = "<group>"; };
+		4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadSignupViewController.m; sourceTree = "<group>"; };
 		4C30407718BB6972006B5463 /* SYNCommentUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNCommentUpdateDelegate.h; sourceTree = "<group>"; };
 		4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNInBoardingViewController.h; sourceTree = "<group>"; };
 		4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNInBoardingViewController.m; sourceTree = "<group>"; };
@@ -1541,8 +1543,6 @@
 		E9C2A58C1899231500FC50D3 /* SYNGradientSeparatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGradientSeparatorView.m; sourceTree = "<group>"; };
 		E9CE79E01886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadLoginToForgotPasswordAnimator.h; sourceTree = "<group>"; };
 		E9CE79E11886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadLoginToForgotPasswordAnimator.m; sourceTree = "<group>"; };
-		E9CE7A281886F9B000023A86 /* SYNIPadSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadSignupViewController.h; sourceTree = "<group>"; };
-		E9CE7A291886F9B000023A86 /* SYNIPadSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadSignupViewController.m; sourceTree = "<group>"; };
 		E9CE7A2B1887057500023A86 /* SYNiPadLoginToSignupAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadLoginToSignupAnimator.h; sourceTree = "<group>"; };
 		E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadLoginToSignupAnimator.m; sourceTree = "<group>"; };
 		E9CE7A2E1887161B00023A86 /* SYNiPadIntroToSignupAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadIntroToSignupAnimator.h; sourceTree = "<group>"; };
@@ -3067,6 +3067,8 @@
 		BE270B7B16EDE0A500CDDA6D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				4C1DBBEA18E48E5D0047CAFA /* SYNIPadSignupViewController.h */,
+				4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */,
 				38281F1B17439B770024DC18 /* SYNLoginBaseViewController.h */,
 				38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */,
 				BE57C0391847541A00C6444A /* iPad */,
@@ -3107,8 +3109,6 @@
 				E9F6257218868ADF000EF6A2 /* SYNiPadIntroToLoginAnimator.m */,
 				E9CE79E01886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.h */,
 				E9CE79E11886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m */,
-				E9CE7A281886F9B000023A86 /* SYNIPadSignupViewController.h */,
-				E9CE7A291886F9B000023A86 /* SYNIPadSignupViewController.m */,
 				E9CE7A2B1887057500023A86 /* SYNiPadLoginToSignupAnimator.h */,
 				E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */,
 				E9CE7A2E1887161B00023A86 /* SYNiPadIntroToSignupAnimator.h */,
@@ -4493,7 +4493,6 @@
 				011C1681173003E800CF50B9 /* OWSafariActivity.m in Sources */,
 				BEB3134A1817D46B00FAF98A /* SYNSearchResultsVideoCell.m in Sources */,
 				E91D4105187DAE5D00E712CC /* SYNLoginManager.m in Sources */,
-				E9CE7A2A1886F9B000023A86 /* SYNIPadSignupViewController.m in Sources */,
 				E9C2A58D1899231500FC50D3 /* SYNGradientSeparatorView.m in Sources */,
 				011C1682173003E800CF50B9 /* OWSaveToCameraRollActivity.m in Sources */,
 				011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */,
@@ -4547,6 +4546,7 @@
 				BE1B3DF018114F9400DA2BD6 /* SYNAggregateChannelItemCell.m in Sources */,
 				BE7D030D179D8EFB008053DC /* _Friend.m in Sources */,
 				BE7D035F17A1440A008053DC /* FeedItem.m in Sources */,
+				4C1DBBEC18E48E5D0047CAFA /* SYNIPadSignupViewController.m in Sources */,
 				BE57C01F1843588A00C6444A /* SYNOnBoardingViewController.m in Sources */,
 				BE7D036217A14417008053DC /* _FeedItem.m in Sources */,
 				019CB6A218117D300079DFCF /* SYNMoodCell.m in Sources */,

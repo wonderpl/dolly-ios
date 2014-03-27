@@ -47,6 +47,8 @@
 
 // == Login / Registration / Forgot Password == //
 
+"Add your photo" = "Add your photo";
+
 // Pre Sign-Up Onboarding
 //iPhone - has line breaks
 "startscreen_onboard_1_title_iphone" = " ";

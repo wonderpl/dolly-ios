@@ -21,6 +21,7 @@ static const NSInteger NameMaxLength = 32;
 static const NSInteger UsernameMaxLength = 20;
 
 @interface SYNIPhoneSignupUsernameViewController () <UIBarPositioningDelegate, UITextFieldDelegate, SYNImagePickerControllerDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *addPhotoLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *backgroundView;
 @property (nonatomic, strong) IBOutlet UIView *containerView;
@@ -64,6 +65,10 @@ static const NSInteger UsernameMaxLength = 20;
 	
 	self.usernameTextField.font = [UIFont lightCustomFontOfSize:self.usernameTextField.font.pointSize];
 	self.errorLabel.font = [UIFont lightCustomFontOfSize:self.errorLabel.font.pointSize];
+	
+	self.addPhotoLabel.font = [UIFont regularCustomFontOfSize:self.addPhotoLabel.font.pointSize];
+	
+	self.addPhotoLabel.text = NSLocalizedString(@"Add your photo", @"Add your photo in login");
     
     [self.avatarImageView roundImage];
     [self.avatarImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -73,6 +78,7 @@ static const NSInteger UsernameMaxLength = 20;
         self.uploadAvatarButton.hidden = YES;
         
         [self.topFirstNameLabelConstraint setConstant:101];
+		self.addPhotoLabel.hidden = YES;
     }
 }
 

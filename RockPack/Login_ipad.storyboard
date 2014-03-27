@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="faf-aZ-ZOn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="faf-aZ-ZOn">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Ni Pad Intro View Controller-->
@@ -434,6 +434,13 @@
                                 <color key="textColor" red="0.5568627451" green="0.086274509799999996" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Kn-IA-NUS" userLabel="Label - Add photo label">
+                                <rect key="frame" x="91" y="254" width="38" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -450,6 +457,7 @@
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="leading" secondItem="uV0-QA-Zay" secondAttribute="leading" id="Gcx-oJ-UKj"/>
                             <constraint firstAttribute="centerX" secondItem="Wme-3y-nyg" secondAttribute="centerX" id="GuR-jS-2Jb"/>
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="leading" secondItem="4Lq-mR-Smo" secondAttribute="trailing" constant="35" id="Hnh-xD-ArM"/>
+                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="top" secondItem="4Lq-mR-Smo" secondAttribute="bottom" constant="18" id="I1O-7c-sh8"/>
                             <constraint firstAttribute="centerX" secondItem="GvU-M3-vTi" secondAttribute="centerX" constant="270" id="IKf-NC-Goo"/>
                             <constraint firstItem="4Lq-mR-Smo" firstAttribute="top" secondItem="Fm5-ca-Fg9" secondAttribute="top" constant="82" id="KAQ-xI-ZdF"/>
                             <constraint firstItem="bzL-gs-cfb" firstAttribute="leading" secondItem="UZY-cA-Eit" secondAttribute="trailing" constant="12" id="Pay-O6-gsq"/>
@@ -458,6 +466,7 @@
                             <constraint firstItem="JVE-g9-65a" firstAttribute="leading" secondItem="nqG-fN-QUl" secondAttribute="trailing" constant="12" id="Qgg-HF-Nlc"/>
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="trailing" secondItem="UZY-cA-Eit" secondAttribute="trailing" id="Que-28-Cdn"/>
                             <constraint firstItem="nqG-fN-QUl" firstAttribute="centerY" secondItem="JVE-g9-65a" secondAttribute="centerY" id="Rc0-7Z-1Jp"/>
+                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="centerX" secondItem="4Lq-mR-Smo" secondAttribute="centerX" constant="-2" id="VTC-Ea-UjP"/>
                             <constraint firstItem="UZY-cA-Eit" firstAttribute="centerY" secondItem="bzL-gs-cfb" secondAttribute="centerY" id="apb-Sn-Pj2"/>
                             <constraint firstItem="e2l-ND-BGh" firstAttribute="centerY" secondItem="828-gY-WBy" secondAttribute="centerY" id="clj-JU-Wva"/>
                             <constraint firstItem="uV0-QA-Zay" firstAttribute="top" secondItem="FDL-zp-eAh" secondAttribute="bottom" constant="12" id="fZW-fe-rJ1"/>
@@ -482,6 +491,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="8e3-Pb-3ye"/>
                     <connections>
+                        <outlet property="AddPhotoLabel" destination="8Kn-IA-NUS" id="v1n-j3-gNz"/>
+                        <outlet property="addPhotoLabel" destination="8Kn-IA-NUS" id="pSR-3T-jYk"/>
                         <outlet property="dayTextField" destination="fEc-vg-oaK" id="fCW-gg-w0B"/>
                         <outlet property="dobContainerView" destination="e2l-ND-BGh" id="cKL-wp-sci"/>
                         <outlet property="dobErrorLabel" destination="828-gY-WBy" id="Ip5-Vo-ZfB"/>
@@ -964,6 +975,7 @@
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="210" height="84"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQw-Tg-utL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1087,8 +1099,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ahx-Sv-3Mj"/>
-        <segue reference="a0x-hG-aBP"/>
         <segue reference="8dQ-Bm-dYZ"/>
+        <segue reference="fNr-jN-dIg"/>
+        <segue reference="7Bv-VN-bSo"/>
     </inferredMetricsTieBreakers>
 </document>

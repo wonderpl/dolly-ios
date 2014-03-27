@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *dayTextField;
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *monthTextField;
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *yearTextField;
+@property (strong, nonatomic) IBOutlet UILabel *addPhotoLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *dobContainerView;
 
@@ -68,6 +69,9 @@
 	self.dobErrorLabel.font = [UIFont lightCustomFontOfSize:self.dobErrorLabel.font.pointSize];
 	
 	self.textFields = @[ self.emailTextField, self.firstNameTextField, self.lastNameTextField, self.usernameTextField, self.passwordTextField, self.dayTextField, self.monthTextField, self.yearTextField ];
+	
+	self.addPhotoLabel.font = [UIFont regularCustomFontOfSize:self.addPhotoLabel.font.pointSize];
+	self.addPhotoLabel.text = NSLocalizedString(@"Add your photo", @"Ipad add your photo label");
 	
     self.uploadPhotoButton.layer.borderColor = [UIColor colorWithWhite:167.0f/255.0f alpha:1.0f].CGColor;
     self.uploadPhotoButton.layer.borderWidth = 1.0f;
