@@ -23,7 +23,6 @@
 
 @property (nonatomic, assign, readonly) NSInteger itemCount;
 @property (nonatomic, assign, readonly) NSInteger totalItemCount;
-@property (nonatomic, assign, readonly) NSInteger batchSize;
 
 @property (nonatomic, weak) id<SYNPagingModelDelegate> delegate;
 

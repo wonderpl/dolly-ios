@@ -46,7 +46,13 @@
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
 		__strong typeof(self) sself = wself;
 		
-        [wself.channelOwner addChannelsFromDictionary: dictionary];
+		BOOL isInitalPage = (range.location == 0);
+		if (isInitalPage) {
+            [sself.channelOwner setSubscriptionsDictionary: dictionary];
+		} else {
+			[sself.channelOwner addChannelsFromDictionary: dictionary];
+		}
+				
 		sself.loadedItems = [sself.channelOwner.channelsSet array];
 		sself.totalItemCount = sself.channelOwner.totalVideosValueChannelValue;
         
@@ -59,71 +65,11 @@
         DebugLog(@"Update action failed");
     };
     
-    //My own profile web service call
-        [appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
-                                                  inRange: range
-                                        completionHandler: successBlock
-                                             errorHandler: errorBlock];
-        
-//    //Other users web service call
-//        [appDelegate.networkEngine channelsForUserId: self.channelOwner.uniqueId
-//                                             inRange: range
-//                                   completionHandler: successBlock
-//                                        errorHandler: errorBlock];
-
-    
+	[appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
+											  inRange: range
+									completionHandler: successBlock
+										 errorHandler: errorBlock];
 }
-
-- (void) loadFirstPage {
-    
-    SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    NSRange range = NSMakeRange(0, self.batchSize);
-    
-    __weak typeof(self) wself = self;
-    
-    NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
-    NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
-
-    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
-		__strong typeof(self) sself = wself;
-		
-        ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId error: nil];
-        
-        
-        if (channelOwnerFromId)
-        {
-            [channelOwnerFromId setSubscriptionsDictionary: dictionary];
-            
-        }
-
-		sself.loadedItems = [sself.channelOwner.channelsSet array];
-		sself.totalItemCount = sself.channelOwner.totalVideosValueChannelValue;
-        
-        [sself handleDataUpdatedForRange:range];
-        
-    };
-    
-    // define error block //
-    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
-        DebugLog(@"Update action failed");
-    };
-    
-    //My own profile web service call
-    [appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
-                                              inRange: range
-                                    completionHandler: successBlock
-                                         errorHandler: errorBlock];
-    
-    //    //Other users web service call
-    //        [appDelegate.networkEngine channelsForUserId: self.channelOwner.uniqueId
-    //                                             inRange: range
-    //                                   completionHandler: successBlock
-    //                                        errorHandler: errorBlock];
-
-
-}
-
 
 
 @end

@@ -48,15 +48,13 @@
 
         NSError *error = nil;
         
-        [wself.channelOwner addSubscriptionsFromDictionary: dictionary];
-        //#warning cache all the channels to activity manager?
-        // is there a better way?
-        // can use the range object, this should be poosible
-        if (wself.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
-            for (Channel *tmpChannel in wself.channelOwner.subscriptions) {
-                [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
-            }
-        }
+		BOOL isInitalPage = (range.location == 0);
+		if (isInitalPage) {
+			[sself.channelOwner setSubscriptionsDictionary:dictionary];
+		} else {
+			[sself.channelOwner addSubscriptionsFromDictionary: dictionary];
+		}
+		
         [wself.channelOwner.managedObjectContext save: &error];
 
         sself.loadedItems = [sself.channelOwner.subscriptionsSet array];
@@ -66,66 +64,14 @@
         [sself handleDataUpdatedForRange:range];
     };
     
-    // define success block //
     MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
-//        weakSelf.loadingMoreContent = NO;
         DebugLog(@"Update action failed");
     };
-    //    Working load more videos for user channels
-    
-//    NSRange range = NSMakeRange(0, 100);
-    
-        [appDelegate.oAuthNetworkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
-                                                       inRange: range
-                                             completionHandler: successBlock
-                                                  errorHandler: errorBlock];
-}
 
-- (void)loadFirstPage {
-    
-    SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    NSRange range = NSMakeRange(0, self.batchSize);
-    
-    __weak typeof(self) wself = self;
-    
-    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
-        __strong typeof(self) sself = wself;
-        
-        NSError *error = nil;
-        
-        [wself.channelOwner setSubscriptionsDictionary: dictionary];
-        //#warning cache all the channels to activity manager?
-        // is there a better way?
-        // can use the range object, this should be poosible
-        if (wself.channelOwner.uniqueId == appDelegate.currentUser.uniqueId) {
-            for (Channel *tmpChannel in wself.channelOwner.subscriptions) {
-                [SYNActivityManager.sharedInstance addChannelSubscriptionsObject:tmpChannel];
-            }
-        }
-        [wself.channelOwner.managedObjectContext save: &error];
-        
-        sself.loadedItems = [sself.channelOwner.subscriptionsSet array];
-		sself.totalItemCount = [dictionary[@"channels"][@"total"] intValue];
-        
-        
-        [sself handleDataUpdatedForRange:range];
-    };
-    
-    // define success block //
-    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
-        //        weakSelf.loadingMoreContent = NO;
-        DebugLog(@"Update action failed");
-    };
-    //    Working load more videos for user channels
-    
-    //    NSRange range = NSMakeRange(0, 100);
-    
-    [appDelegate.oAuthNetworkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
-                                                   inRange: range
-                                         completionHandler: successBlock
-                                              errorHandler: errorBlock];
-    
+	[appDelegate.oAuthNetworkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
+												   inRange: range
+										 completionHandler: successBlock
+											  errorHandler: errorBlock];
 }
 
 

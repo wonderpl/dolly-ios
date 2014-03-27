@@ -77,7 +77,7 @@ static const CGFloat TransitionDuration = 1.0f;
     
     if (self.followingContainer.hidden == NO) {
         [self.subscriptionCollectionViewController.model reset];
-        [self.subscriptionCollectionViewController.model loadFirstPage];
+        [self.subscriptionCollectionViewController.model loadNextPage];
     }
 }
 
@@ -231,7 +231,7 @@ static const CGFloat TransitionDuration = 1.0f;
     
 
     [self.channelCollectionViewController.model reset];
-    [self.channelCollectionViewController.model loadFirstPage];
+    [self.channelCollectionViewController.model loadNextPage];
     [self.channelCollectionViewController.headerView.segmentedController setSelectedSegmentIndex:0];
 
 }
@@ -259,7 +259,7 @@ static const CGFloat TransitionDuration = 1.0f;
 	NSLog(@"followingsTabTapped");
 	
     [self.subscriptionCollectionViewController.model reset];
-    [self.subscriptionCollectionViewController.model loadFirstPage];    
+    [self.subscriptionCollectionViewController.model loadNextPage];
 
 }
 

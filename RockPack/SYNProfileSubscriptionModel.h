@@ -14,6 +14,4 @@
 
 + (instancetype)modelWithChannelOwner:(ChannelOwner *)channelOwner;
 
-- (void) loadFirstPage;
-
 @end
