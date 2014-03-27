@@ -15,7 +15,6 @@
 #import "VideoInstance.h"
 #import "SYNPopoverable.h"
 #import "SYNContainerViewController.h"
-#import "SYNCommentingViewController.h"
 #import "SYNGenreManager.h"
 
 #define kBackgroundOverlayAlpha 0.5f
@@ -432,21 +431,11 @@
     if(IS_IPAD && self.overlayController)
     {
         CGRect currentOverlayFrame = self.overlayController.view.frame;
-        if(![self.overlayController isKindOfClass:[SYNCommentingViewController class]])
-        {
-            
-            currentOverlayFrame.size = self.overlayControllerFrame.size;
-            currentOverlayFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5f - currentOverlayFrame.size.width * 0.5;
-            currentOverlayFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5f - currentOverlayFrame.size.height * 0.5;
-            
-        }
-        else
-        {
-            currentOverlayFrame.origin.x += UIInterfaceOrientationIsPortrait(toInterfaceOrientation) ? -120.0f : 120.0f;
-        }
+		currentOverlayFrame.size = self.overlayControllerFrame.size;
+		currentOverlayFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5f - currentOverlayFrame.size.width * 0.5;
+		currentOverlayFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5f - currentOverlayFrame.size.height * 0.5;
         
         self.overlayController.view.frame = currentOverlayFrame;
-        
     }
 
     
