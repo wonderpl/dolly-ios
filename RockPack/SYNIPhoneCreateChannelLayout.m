@@ -25,24 +25,6 @@
     return self;
 }
 
-
--(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
-{
-    NSArray *attributesArray = [super layoutAttributesForElementsInRect:rect];
-    
-    for (UICollectionViewLayoutAttributes *attributes in attributesArray)
-    {
-        CGRect cellFrame = attributes.frame;
-        if(attributes.indexPath.item == 0)
-        {
-            cellFrame.size.height = 183.0f;
-        }
-
-    }
-    return attributesArray;
-}
-
-
 -(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
     return YES;
