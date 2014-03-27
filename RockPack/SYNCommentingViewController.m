@@ -269,6 +269,8 @@ static NSString *const PlaceholderText = @"Say something nice";
 
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
+	self.sendMessageButton.enabled = NO;
+	
 	self.sendMessageTextView.text = PlaceholderText;
 }
 

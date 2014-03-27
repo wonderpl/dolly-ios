@@ -37,16 +37,16 @@ describe(@"SYNCommentingViewController", ^{
 	context(@"when loading the view", ^{
 		
 		it(@"the send button should be disabled", ^{
-			[[theValue(viewController.sendMessageButton.enabled) should] equal:theValue(NO)];
+			[[theValue(viewController.sendMessageButton.enabled) should] beNo];
 		});
 		
 	});
 	
 	context(@"when editing a comment is started", ^{
 		
-		it(@"the send button should be enabled", ^{
+		it(@"should enable the send message button", ^{
 			[viewController textViewDidBeginEditing:viewController.sendMessageTextView];
-			[[theValue(viewController.sendMessageButton.enabled) should] equal:theValue(YES)];
+			[[theValue(viewController.sendMessageButton.enabled) should] beYes];
 		});
 		
 	});
@@ -88,6 +88,16 @@ describe(@"SYNCommentingViewController", ^{
 											 replacementText:@"0"];
 			[[theValue(shouldChangeText) should] beNo];
 		});
+	});
+	
+	context(@"when finishing editing a comment", ^{
+		
+		it(@"should disable the send message button", ^{
+			[viewController textViewDidBeginEditing:viewController.sendMessageTextView];
+			[viewController textViewDidEndEditing:viewController.sendMessageTextView];
+			[[theValue(viewController.sendMessageButton.enabled) should] beNo];
+		});
+		
 	});
 	
 });
