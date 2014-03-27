@@ -24,26 +24,10 @@
 {
     UICollectionViewLayoutAttributes *attributes =
     [super layoutAttributesForItemAtIndexPath:indexPath];
-    
-    CGRect cellFrame = attributes.frame;
 
-    if (attributes.indexPath.item == 0 && ![attributes valueForKeyPath:@"representedElementKind"]) {
-        cellFrame.size.height = 280;
-    } else if (attributes.indexPath.item == 0 && [attributes valueForKeyPath:@"representedElementKind"]) {
-      
-    } else if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
-        if (attributes.indexPath.item %2 == 0) {
-            cellFrame.origin.y +=94.0f;
-        }
-    } else if (UIDeviceOrientationIsLandscape([[SYNDeviceManager sharedInstance] orientation])){
-        if (attributes.indexPath.item%3 == 0) {
-            cellFrame.origin.y +=94.0f;
-        }
-    }
+	attributes.frame = [self frameForItem :attributes];
     
-    attributes.frame = cellFrame;
-
-    return attributes;
+	return attributes;
 }
 
 
@@ -53,28 +37,36 @@
     
     for (UICollectionViewLayoutAttributes *attributes in attributesArray)
     {
-        CGRect cellFrame = attributes.frame;
-
-        if (attributes.indexPath.item == 0 && ![attributes valueForKeyPath:@"representedElementKind"]) {
-            cellFrame.size.height = 280;
-            
-        } else if (attributes.indexPath.item == 0 && [attributes valueForKeyPath:@"representedElementKind"]) {
-
-        }
-        else if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
-            if (attributes.indexPath.item %2 == 0) {
-                cellFrame.origin.y +=94.0f;
-            }
-        } else {
-            if (attributes.indexPath.item%3 == 0) {
-                cellFrame.origin.y +=94.0f;
-            }
-        }
-
-        attributes.frame = cellFrame;
+        attributes.frame = [self frameForItem :attributes];
     }
     return attributesArray;
 }
+
+- (CGRect) frameForItem: (UICollectionViewLayoutAttributes*) attributes {
+	
+	CGRect cellFrame = attributes.frame;
+
+	if (attributes.indexPath.item == 0 && !attributes.representedElementKind) {
+		cellFrame.size.height = 280;
+		
+	}
+	else if (attributes.indexPath.item == 0 && attributes.representedElementKind){
+		
+	}
+	else if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
+		if (attributes.indexPath.item %2 == 0) {
+			cellFrame.origin.y +=94.0f;
+		}
+	} else if (UIDeviceOrientationIsLandscape([[SYNDeviceManager sharedInstance] orientation])) {
+		if (attributes.indexPath.item%3 == 0) {
+			cellFrame.origin.y +=94.0f;
+		}
+	}
+
+	return cellFrame;
+}
+
+
 
 -(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
