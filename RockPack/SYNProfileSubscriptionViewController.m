@@ -32,7 +32,6 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 @property (nonatomic, strong) NSArray *filteredSubscriptions;
 @property (nonatomic, strong) SYNProfileHeader* headerView;
 @property (nonatomic, strong) UISearchBar* searchBar;
-@property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
 @property (nonatomic, strong) SYNProfileSubscriptionModel *model;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToResetCells;
 
@@ -94,8 +93,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         [self.cv setContentOffset:CGPointMake(0, 44)];
         
     }
-    
-    self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:20];
     [self.fakeNavigationBarTitle setText: _channelOwner.displayName];
