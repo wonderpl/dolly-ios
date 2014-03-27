@@ -303,7 +303,7 @@ static const CGFloat TransitionDuration = 1.0f;
     }];
 }
 
-- (void)followUserButtonTapped:(SYNSocialFollowButton*)sender {
+- (void)followUserButtonTapped:(SYNSocialButton*)sender {
     
     self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view"), nil];
     self.followAllButton = sender;
