@@ -34,6 +34,7 @@
 #import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNCommentUpdateDelegate.h"
 #import "SYNSocialCommentButton.h"
+#import "SYNProfileChannelViewController.h"
 
 @import QuartzCore;
 
@@ -705,21 +706,16 @@
     
 	if (!channelOwner)
 		return;
+    
+    NSString *tmp = IS_IPAD ? @"Profile_IPad" : @"Profile_IPhone";
+    NSString *storyBoard = tmp;
 
-	SYNProfileRootViewController *profileVC = (SYNProfileRootViewController *)[self viewControllerOfClass:[SYNProfileRootViewController class]];
-    [self.navigationController.navigationItem.backBarButtonItem setTitle:@""];
+    SYNProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyBoard bundle:nil] instantiateViewControllerWithIdentifier: @"SYNProfileViewController"];
+    
+    profileVC.channelOwner = channelOwner;
+    
+    [self.navigationController pushViewController:profileVC animated:YES];
 
-	if (profileVC)
-    {
-        
-
-		[self.navigationController popToViewController:profileVC animated:YES];
-	}
-    else
-    {
-		profileVC = [[SYNProfileRootViewController alloc] initWithViewId:kProfileViewId  andChannelOwner:channelOwner];
-		[self.navigationController pushViewController:profileVC animated:YES];
-	}
 }
 
 - (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated {

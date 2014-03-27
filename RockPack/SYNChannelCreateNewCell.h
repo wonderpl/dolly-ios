@@ -24,4 +24,8 @@
 @property (nonatomic) CreateNewChannelCellState state;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionPlaceholderLabel;
 
+
+
+- (void) setBorder;
+
 @end

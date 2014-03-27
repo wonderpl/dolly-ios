@@ -100,17 +100,11 @@
             [self.boarderView.layer setBorderWidth:1.0f];
         }
     }
-
 }
 
 - (void) setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate
 {
-    
     _viewControllerDelegate = viewControllerDelegate;
-    
-    if(!_viewControllerDelegate)
-        return;
-    
 }
 
 
@@ -202,10 +196,6 @@
 
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-    if (!self.showsDescriptionOnSwipe) {
-		return;
-	}
-	
     if (self.state == ChannelMidCellStateDefault) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
         
@@ -365,6 +355,9 @@
             if (self.deletableCell) {
             self.deleteButton.hidden = NO;
             self.descriptionLabel.hidden = YES;
+                
+                [self.viewControllerDelegate cellStateChanged];
+
             [UIView animateWithDuration:0.5f animations:^{
                 
                 CGRect tmpRect = self.containerView.frame;
@@ -378,6 +371,7 @@
                     tmpRect.origin.x = -120;
                 }
                 self.containerView.frame = tmpRect;
+            } completion:^(BOOL finished) {
             }];
             
             }
@@ -390,6 +384,9 @@
             
             self.deleteButton.hidden = YES;
             self.descriptionLabel.hidden = NO;
+            
+            [self.viewControllerDelegate cellStateChanged];
+
             [UIView animateWithDuration:0.5f animations:^{
                 CGRect tmpRect = self.containerView.frame;
                 if (IS_IPHONE)

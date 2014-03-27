@@ -154,6 +154,10 @@
                                                 withDefault:@""];
     
     
+    
+    
+    self.totalVideosValueSubscriptions = [dictionary objectForKey: @"subscription_count" withDefault:0];
+
     BOOL hasChannels = YES;
     
     NSDictionary *channelsDictionary = dictionary[@"channels"];
@@ -277,6 +281,7 @@
     }
     
     self.totalVideosValueSubscriptions = [channeslDictionary objectForKey: @"total"];
+    
     
     NSArray *itemsArray = channeslDictionary[@"items"];
     
@@ -455,7 +460,7 @@
     NSArray *items = [itemDict objectForKey:@"items"];
     
     for (NSDictionary *tmpDict in items) {
-        
+                
         [self addChannelsObject:[Channel instanceFromDictionary:tmpDict usingManagedObjectContext:self.managedObjectContext]];
     }
 }

@@ -15,6 +15,8 @@
 #import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNProfileViewController.h"
+
 
 @interface SYNContainerViewController ()
 
@@ -60,9 +62,17 @@
     profileViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
     
-    
-    
-    if (!IS_IPAD)
+	
+	
+	NSString *storyBoardName = IS_IPHONE ? @"Profile_IPhone" : @"Profile_IPad";
+	
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyBoardName bundle:nil];
+        
+        navProfileViewController = [storyboard instantiateInitialViewController];
+
+        ((SYNProfileViewController*)navProfileViewController.viewControllers.firstObject).channelOwner = self.appDelegate.currentUser;
+
+    if (IS_IPHONE)
     {
         profileViewController.hideUserProfile = YES;
     }
