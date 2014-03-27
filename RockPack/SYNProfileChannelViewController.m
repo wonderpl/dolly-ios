@@ -20,7 +20,6 @@
 #import "SYNChannelFooterMoreView.h"
 #import "SYNProfileExpandedFlowLayout.h"
 
-static const CGFloat kHeightChange = 94.0f;
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 static const CGFloat ALPHA_IN_EDIT = 0.2f;
 static const CGFloat FULL_NAME_LABEL_IPHONE = 364.0f; // lower is down
@@ -77,6 +76,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 
 -(void) viewDidAppear:(BOOL)animated {
     
+	[self viewWillDisappear:YES];
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
     }
@@ -228,10 +228,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
     
-    if (self.isUserProfile && indexPath.row == 0) {
-        //never gets called, first cell gets called and created in didSelectItem
-        return;
-    }
     
     if (self.creatingChannel) {
         [self cancelCreateChannel];
@@ -654,7 +650,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 -(void) deleteChannel:(SYNChannelMidCell *)cell {
-    ((SYNChannelMidCell*)cell).state = ChannelMidCellStateDefault;
+    cell.state = ChannelMidCellStateDefault;
     
     __weak SYNProfileChannelViewController *weakSelf = self;
     
@@ -701,14 +697,15 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                           duration: (NSTimeInterval) duration {
+	if (IS_IPHONE) {
+        return;
+    }
+
     [self updateLayoutForOrientation: toInterfaceOrientation];
 }
 
 - (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation {
     
-    if (IS_IPHONE) {
-        return;
-    }
     
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.defaultLayout.minimumLineSpacing = 14.0f;
@@ -836,8 +833,5 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [self.createChannelCell.createTextField resignFirstResponder];
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
 }
-
-
-
 
 @end
