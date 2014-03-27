@@ -11,13 +11,13 @@
 @implementation SYNIPadCreateChannelLayout
 
 -(id)init {
-    if (!(self = [super init])) return nil;
-    
-    self.sectionInset = UIEdgeInsetsMake(0, 47, 700, 47);
-    self.minimumInteritemSpacing = 0.0f;
-    self.minimumLineSpacing = 14.0f;
-    self.itemSize = CGSizeMake(280, 80);
-    return self;
+	if (self = [super init]) {
+		self.sectionInset = UIEdgeInsetsMake(0, 47, 700, 47);
+		self.minimumInteritemSpacing = 0.0f;
+		self.minimumLineSpacing = 14.0f;
+		self.itemSize = CGSizeMake(280, 80);
+	}
+	return self;
 }
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
