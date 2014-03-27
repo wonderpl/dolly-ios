@@ -84,7 +84,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
     
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:20];
-    [self.fakeNavigationBarTitle setText: _channelOwner.displayName];
+    [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
     
     self.tapToResetCells = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDescriptionCurrentlyShowing)];
     
@@ -98,17 +98,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
     }
-    
-    
-    if (!IS_IPHONE_5 && IS_IPHONE) {
-        UIEdgeInsets tmpInsets = self.cv.contentInset;
-        tmpInsets.bottom += 88;
-        [self.cv setContentInset: tmpInsets];
-    }
-
-    //    [self.model reset];
-    //    [self.model loadNextPage];
-    
 }
 
 
@@ -117,7 +106,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     self.model = [SYNProfileSubscriptionModel modelWithChannelOwner:channelOwner];
     self.model.delegate = self;
-    self.isUserProfile = (BOOL)[_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
 }
 
 #pragma mark - Scrollview delegates
@@ -209,21 +197,16 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 {
     SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
-    SYNChannelMidCell *selectedCell = cell;
     
-    if (selectedCell.state != ChannelMidCellStateDefault) {
-        [selectedCell setState: ChannelMidCellStateDefault withAnimation:YES];
+    if (cell.state != ChannelMidCellStateDefault) {
+        [cell setState: ChannelMidCellStateDefault withAnimation:YES];
         return;
     }
     
     
     if (indexPath.row < [self.filteredSubscriptions count]) {
         
-        int index = indexPath.row - (self.isUserProfile&&IS_IPHONE ? 1 : 0);
-        
-        Channel *channel = self.filteredSubscriptions[index];
-        //        self.navigationController.navigationBarHidden = NO;
-        
+        Channel *channel = self.filteredSubscriptions[indexPath.row];
         SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
         
         [self.navigationController pushViewController:channelVC animated:YES];
@@ -250,13 +233,11 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
     
     if (kind == UICollectionElementKindSectionFooter) {
-        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+        SYNChannelFooterMoreView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                              withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
                                                                     forIndexPath:indexPath];
-        supplementaryView = self.footerView;
-        
 		if ([self.model hasMoreItems]) {
-			self.footerView.showsLoading = YES;
+			footerView.showsLoading = YES;
 			
 			[self.model loadNextPage];
 		}
@@ -295,21 +276,13 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 #pragma mark - Searchbar delegates
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    //    self.searchMode = NO;
-    //[self calculateOffsetForSearch];
     
     [self.cv setContentOffset:CGPointZero animated:YES];
     
-    double delayInSeconds = 0.4;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
         UIEdgeInsets tmp = self.defaultLayout.sectionInset;
         tmp.bottom += 300;
         self.defaultLayout.sectionInset = tmp;
         [self.cv.collectionViewLayout invalidateLayout];
-        
-    });
     
     [self.searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
@@ -319,12 +292,10 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.cv reloadData];
     
-    [self.searchBar resignFirstResponder];
-    
     if (searchBar.text.length == 0) {
         [self.searchBar setShowsCancelButton:NO animated:YES];
     } else {
-        [self enableCancelButton: self.searchBar];
+        [self.searchBar setShowsCancelButton:YES animated:YES];
     }
     
     self.cv.contentOffset = CGPointMake(0, SEARCHBAR_Y);
@@ -332,9 +303,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
-    [self.searchBar resignFirstResponder];
-    
+        
     if (searchBar.text.length == 0) {
         [self.searchBar setShowsCancelButton:NO animated:YES];
     } else {
@@ -362,21 +331,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         [self.searchBar setShowsCancelButton:YES animated:YES];
     return YES;
 }
-
-- (void)enableCancelButton:(UISearchBar *)searchBar {
-    for (UIView *view in searchBar.subviews)
-    {
-        for (id subview in view.subviews)
-        {
-            if ( [subview isKindOfClass:[UIButton class]] )
-            {
-                [subview setEnabled:YES];
-                return;
-            }
-        }
-    }
-}
-
 
 - (NSArray *)filteredSubscriptionsForSearchTerm:(NSString *)searchTerm {
 	if ([searchTerm length]) {
@@ -505,5 +459,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
+-(BOOL) isUserProfile {
+	return [_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+}
 
 @end
