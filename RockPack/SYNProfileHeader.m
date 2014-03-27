@@ -21,8 +21,6 @@
 @property (nonatomic, strong) IBOutlet UILabel *fullNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) IBOutlet UITextView *aboutMeTextView;
-@property (nonatomic, strong) IBOutlet UIButton *collectionsTabButton;
-@property (nonatomic, strong) IBOutlet UIButton *followingTabButton;
 @property (nonatomic, strong) IBOutlet UIView *segmentedControlsView;
 @property (nonatomic, strong) IBOutlet UIButton *moreButton;
 @property (nonatomic, strong) IBOutlet SYNSocialFollowButton *followAllButton;
@@ -124,8 +122,6 @@
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:self.userNameLabel.font.pointSize]];
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     self.fullNameLabel.font = [UIFont regularCustomFontOfSize:self.fullNameLabel.font.pointSize];
-    [self.collectionsTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.collectionsTabButton.titleLabel.font.pointSize]];
-    [self.followingTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.followingTabButton.titleLabel.font.pointSize]];
 
     [self setUpDescriptionTextView];
     
