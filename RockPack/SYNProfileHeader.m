@@ -142,7 +142,7 @@
     }
 
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [UIFont lightCustomFontOfSize:15], NSFontAttributeName,
+                                [UIFont regularCustomFontOfSize:15], NSFontAttributeName,
                                 [UIColor dollyTextMediumGray], NSForegroundColorAttributeName, nil];
     [self.segmentedController setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
