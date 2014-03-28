@@ -19,10 +19,7 @@
 #import "SYNTrackingManager.h"
 #import "SYNProfileHeader.h"
 
-#define TRANSITION_DURATION 1.0
-#define ALPHA_IN_EDIT 0.2f
-
-static const CGFloat TransitionDuration = 1.0f;
+static const CGFloat TransitionDuration = 0.5f;
 
 @interface SYNProfileViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
@@ -32,8 +29,8 @@ static const CGFloat TransitionDuration = 1.0f;
 @property (nonatomic, strong) IBOutlet UIView *followingContainer;
 @property (nonatomic, strong) UIAlertView *followAllAlertView;
 @property (nonatomic, strong) SYNSocialButton *followAllButton;
-@property (nonatomic) BOOL isUserProfile;
-@property (nonatomic) BOOL creatingChannel;
+@property (nonatomic, assign) BOOL isUserProfile;
+@property (nonatomic, assign) BOOL creatingChannel;
 
 @end
 
@@ -41,9 +38,6 @@ static const CGFloat TransitionDuration = 1.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    
     self.followingContainer.hidden = YES;
 }
 
@@ -53,20 +47,13 @@ static const CGFloat TransitionDuration = 1.0f;
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
     
     self.navigationItem.title = @"";
-    
-    
-//    
-    NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
-    NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
 
     [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                        onCompletion: ^(id dictionary) {
-                                           NSError *error = nil;
-                                           ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId error: &error];
                                            
-                                           if (channelOwnerFromId)
+                                           if (self.channelOwner)
                                            {
-                                               [channelOwnerFromId setAttributesFromDictionary: dictionary
+                                               [self.channelOwner setAttributesFromDictionary: dictionary
                                                                            ignoringObjectTypes: kIgnoreNothing];
                                                [self reloadCollectionViews];
                                            }
@@ -96,8 +83,6 @@ static const CGFloat TransitionDuration = 1.0f;
         self.subscriptionCollectionViewController = subscriptionCollectionViewController;
     }
 }
-
-#pragma mark - setChannelOwner
 
 - (void) setChannelOwner: (ChannelOwner *) user {
     
@@ -303,9 +288,8 @@ static const CGFloat TransitionDuration = 1.0f;
 
 - (void)followUserButtonTapped:(SYNSocialButton*)sender {
     
-    self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view"), nil];
+	[[[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view"), nil] show];
     self.followAllButton = sender;
-    [self.followAllAlertView show];
 }
 
 - (void) resetCollectionViewOffset {
@@ -361,8 +345,7 @@ static const CGFloat TransitionDuration = 1.0f;
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
     
-    //#warning change to server call
-    if (alertView == self.followAllAlertView && buttonIndex == 1) {
+    if (buttonIndex == 1) {
         self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
         self.followAllButton.dataItemLinked = self.channelOwner;
         [self followControlPressed:self.followAllButton];
