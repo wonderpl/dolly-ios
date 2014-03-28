@@ -77,7 +77,8 @@ static NSString *const PlaceholderText = @"Say something nice";
     [super viewDidLoad];
 	
 	if (IS_IPHONE) {
-		self.commentsCollectionView.contentInset = UIEdgeInsetsMake(44.0, 0, 0, 0);
+		CGFloat bottomViewHeight = CGRectGetHeight(self.bottomContainerView.frame);
+		self.commentsCollectionView.contentInset = UIEdgeInsetsMake(44.0, 0, bottomViewHeight, 0);
 	}
     
     self.sendMessageAvatarmageView.layer.cornerRadius = self.sendMessageAvatarmageView.frame.size.width * 0.5f;
@@ -185,6 +186,23 @@ static NSString *const PlaceholderText = @"Say something nice";
         
 		CGFloat newYOffset = self.commentsCollectionView.contentOffset.y + (isShowing ? keyboardHeight : -keyboardHeight);
 		
+		CGFloat commentsContentHeight = self.commentsCollectionView.contentSize.height;
+		CGFloat commentsBoundsHeight = CGRectGetHeight(self.commentsCollectionView.bounds);
+		CGFloat navigationBarHeight = 44.0;
+		CGFloat bottomViewHeight = CGRectGetHeight(self.bottomContainerView.frame);
+		
+		CGFloat newViewHeight = commentsBoundsHeight - navigationBarHeight - bottomViewHeight - keyboardHeight;
+		
+		if (commentsContentHeight < newViewHeight) {
+			// If the height of the comment cells is less than the new height of the collection view then we want to
+			// keep the offset at -44 to take into account the navigation bar
+			newYOffset = -navigationBarHeight;
+		} else if (commentsContentHeight < commentsBoundsHeight) {
+			// We also don't want to scroll up too far if the bottom of the
+			CGFloat difference = (commentsBoundsHeight - commentsContentHeight - navigationBarHeight - bottomViewHeight);
+			newYOffset = newYOffset + (isShowing ? -difference : difference);
+		}
+		
 		UICollectionView *collectionView = self.commentsCollectionView;
 		UIView *view = self.view;
 		[UIView animateWithDuration:animationDuration
@@ -193,14 +211,13 @@ static NSString *const PlaceholderText = @"Say something nice";
 						 animations:^{
 							 collectionView.contentInset = UIEdgeInsetsMake(collectionView.contentInset.top,
 																			collectionView.contentInset.left,
-																			keyboardHeightChange,
+																			keyboardHeightChange + bottomViewHeight,
 																			collectionView.contentInset.right);
+							 
 							 collectionView.contentOffset = CGPointMake(0, newYOffset);
 							 
 							 [view layoutIfNeeded];
-						 } completion:^(BOOL finished) {
-							 
-						 }];
+						 } completion:nil];
     }
 }
 
