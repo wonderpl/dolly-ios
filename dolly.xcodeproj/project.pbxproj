@@ -327,6 +327,8 @@
 		4CADB33718F2C34E00409996 /* MoodsSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB33118F2C34E00409996 /* MoodsSelected.png */; };
 		4CADB33818F2C34E00409996 /* MoodsSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB33218F2C34E00409996 /* MoodsSelected@2x.png */; };
 		4C63487318E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487218E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m */; };
+		4C63487518E5E04600FF7168 /* SYNProfileChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487418E5E04600FF7168 /* SYNProfileChannelViewController.m */; };
+		4C63487918E5E65E00FF7168 /* SYNProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487818E5E65E00FF7168 /* SYNProfileEditViewController.m */; };
 		4C9B519918D71FCB00A3AB0D /* Profile_IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */; };
 		4C9B519B18D721D600A3AB0D /* SYNProfileHeader~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */; };
 		4C9B519E18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B519D18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m */; };
@@ -1131,6 +1133,8 @@
 		4CADB33118F2C34E00409996 /* MoodsSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoodsSelected.png; sourceTree = "<group>"; };
 		4CADB33218F2C34E00409996 /* MoodsSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MoodsSelected@2x.png"; sourceTree = "<group>"; };
 		4C63487218E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileViewControllerSpec.m; sourceTree = "<group>"; };
+		4C63487418E5E04600FF7168 /* SYNProfileChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileChannelViewController.m; sourceTree = "<group>"; };
+		4C63487818E5E65E00FF7168 /* SYNProfileEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileEditViewController.m; sourceTree = "<group>"; };
 		4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile_IPad.storyboard; sourceTree = "<group>"; };
 		4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileHeader~ipad.xib"; sourceTree = "<group>"; };
 		4C9B519C18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadCreateChannelLayout.h; sourceTree = "<group>"; };
@@ -2000,6 +2004,8 @@
 				E9A6900A18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m */,
 				E90506AA18E1925700E0910E /* SYNCommentingViewControllerSpec.m */,
 				4C63487218E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m */,
+				4C63487418E5E04600FF7168 /* SYNProfileChannelViewController.m */,
+				4C63487818E5E65E00FF7168 /* SYNProfileEditViewController.m */,
 				01901A9B1771CCBA007DBEAC /* Supporting Files */,
 				BEB3135918182D6100FAF98A /* data */,
 				E94E9C7518E44D8700E8CE84 /* NSString+TestHelpers.h */,
@@ -4717,6 +4723,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E985176418B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m in Sources */,
+				4C63487918E5E65E00FF7168 /* SYNProfileEditViewController.m in Sources */,
+				4C63487518E5E04600FF7168 /* SYNProfileChannelViewController.m in Sources */,
 				E9A6900B18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m in Sources */,
 				4C63487318E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m in Sources */,
 				E90506AB18E1925700E0910E /* SYNCommentingViewControllerSpec.m in Sources */,
