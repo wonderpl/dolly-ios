@@ -148,6 +148,16 @@
 }
 
 - (BOOL)textField:(SYNTextFieldLogin *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	textField.errorMode = NO;
+	UILabel *errorLabel = [self errorLabelForTextField:textField];
+	errorLabel.text = nil;
+	
+	BOOL isDateField = (textField == self.dayTextField || textField == self.monthTextField || textField == self.yearTextField);
+	if (isDateField) {
+		self.dayTextField.errorMode = NO;
+		self.monthTextField.errorMode = NO;
+		self.yearTextField.errorMode = NO;
+	}
 	
 	NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
 	NSUInteger newLength = [newString length];
@@ -298,6 +308,25 @@
 		self.emailErrorLabel.text = [emailError firstObject];
 		self.emailTextField.errorMode = YES;
 	}
+}
+
+- (UILabel *)errorLabelForTextField:(UITextField *)textField {
+	if (textField == self.emailTextField) {
+		return self.emailErrorLabel;
+	}
+	if (textField == self.firstNameTextField || textField == self.lastNameTextField) {
+		return self.nameErrorLabel;
+	}
+	if (textField == self.usernameTextField) {
+		return self.usernameErrorLabel;
+	}
+	if (textField == self.passwordTextField) {
+		return self.passwordErrorLabel;
+	}
+	if (textField == self.dayTextField || textField == self.monthTextField || textField == self.yearTextField) {
+		return self.dobErrorLabel;
+	}
+	return nil;
 }
 
 - (void)uploadAvatar:(UIImage *)avatarImage {
