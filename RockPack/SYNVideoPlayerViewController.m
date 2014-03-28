@@ -64,11 +64,6 @@
 	
 	appDelegate = [[UIApplication sharedApplication] delegate];
 	
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-																			 style:UIBarButtonItemStylePlain
-																			target:nil
-																			action:nil];
-	
 	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
 	
 	self.linkButton.backgroundColor = [UIColor colorWithWhite:241/255.0 alpha:1.0];
