@@ -36,6 +36,18 @@ static const CGFloat TransitionDuration = 0.5f;
 
 @implementation SYNProfileViewController
 
++ (UINavigationController *)navigationControllerWithChannelOwner:(ChannelOwner*) channelOwner {
+	NSString *filename = IS_IPAD ? @"Profile_IPad" : @"Profile_IPhone";
+	
+	UINavigationController *navigationController = [[UIStoryboard storyboardWithName:filename bundle:nil] instantiateInitialViewController];
+	
+	SYNProfileViewController *profileVC = ((SYNProfileViewController*)navigationController.topViewController);
+	profileVC.channelOwner = channelOwner;
+	
+	
+	return navigationController;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.followingContainer.hidden = YES;

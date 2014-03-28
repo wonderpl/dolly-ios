@@ -15,5 +15,7 @@
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 
++ (UINavigationController *)navigationControllerWithChannelOwner:(ChannelOwner*) channelOwner;
+
 
 @end
