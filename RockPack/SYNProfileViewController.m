@@ -182,8 +182,6 @@ static const CGFloat TransitionDuration = 0.5f;
 
 # pragma mark SYNProfileDelegate
 
-
-//make a real segmented controller
 - (void) collectionsTabTapped {
     if (!self.channelContainer.hidden) {
         return;
@@ -246,16 +244,23 @@ static const CGFloat TransitionDuration = 0.5f;
     
     viewController.descriptionString = self.channelOwner.channelOwnerDescription;
 
-    if (!IS_IPHONE_5 && IS_IPHONE) {
-        [self setCollectionViewContentOffset:CGPointMake(0, 110) animated:YES];
-    } else {
-        [self setCollectionViewContentOffset:CGPointMake(0, 0) animated:YES];
-    }
 
+	
+	[UIView animateWithDuration:0.3 animations:^{
+		if (!IS_IPHONE_5 && IS_IPHONE) {
+			[self setCollectionViewContentOffset:CGPointMake(0, 110) animated:NO];
+		} else {
+			[self setCollectionViewContentOffset:CGPointMake(0, 0) animated:NO];
+		}
+
+	} completion:^(BOOL finished) {
+		[self presentViewController:viewController animated:YES completion:nil];
+	}];
+	
+	// Le tthe content off set animation finish
 	double delayInSeconds = 0.2;
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-		[self presentViewController:viewController animated:YES completion:nil];
 		
 	});
 }
