@@ -546,6 +546,7 @@
 		E905A93E189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E905A93C189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png */; };
 		E905A93F189ACA0500FED785 /* PlaceholderNotificationVideo~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E905A93D189ACA0500FED785 /* PlaceholderNotificationVideo~iphone.png */; };
 		E905A945189BCD1500FED785 /* SYNSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E905A944189BCD1500FED785 /* SYNSignupViewController.m */; };
+		E90D558A18E57D1200647051 /* SYNAprilFoolsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E90D558918E57D1200647051 /* SYNAprilFoolsManager.m */; };
 		E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */; };
 		E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */; };
 		E91D364B1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91D364A1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard */; };
@@ -1421,6 +1422,8 @@
 		E905A943189BCD1500FED785 /* SYNSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSignupViewController.h; sourceTree = "<group>"; };
 		E905A944189BCD1500FED785 /* SYNSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSignupViewController.m; sourceTree = "<group>"; };
 		E905A946189BE9F200FED785 /* SYNSignupViewController+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNSignupViewController+Protected.h"; sourceTree = "<group>"; };
+		E90D558818E57D1200647051 /* SYNAprilFoolsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAprilFoolsManager.h; sourceTree = "<group>"; };
+		E90D558918E57D1200647051 /* SYNAprilFoolsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAprilFoolsManager.m; sourceTree = "<group>"; };
 		E914BED5183CF018001616D3 /* SYNFullScreenVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFullScreenVideoViewController.h; sourceTree = "<group>"; };
 		E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFullScreenVideoViewController.m; sourceTree = "<group>"; };
 		E914BED8183CF33A001616D3 /* SYNFullScreenVideoAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFullScreenVideoAnimator.h; sourceTree = "<group>"; };
@@ -1719,6 +1722,8 @@
 				010DEFDB1629BDC40080F26B /* Supporting Files */,
 				019824E11629CAB600216900 /* View Controllers */,
 				019824E31629CADE00216900 /* Views */,
+				E90D558818E57D1200647051 /* SYNAprilFoolsManager.h */,
+				E90D558918E57D1200647051 /* SYNAprilFoolsManager.m */,
 			);
 			name = rockpack;
 			path = RockPack;
@@ -4407,6 +4412,7 @@
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */,
 				E93122FB18916A43008ADBEB /* SYNTimestampView.m in Sources */,
+				E90D558A18E57D1200647051 /* SYNAprilFoolsManager.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */,
 				011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */,

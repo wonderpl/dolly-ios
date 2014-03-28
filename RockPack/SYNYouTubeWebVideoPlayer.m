@@ -13,6 +13,7 @@
 #import "SYNVideoPlayer+Protected.h"
 #import "SYNYouTubeWebView.h"
 #import <Reachability.h>
+#import "SYNAprilFoolsManager.h"
 
 typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStateInitialised,
@@ -189,7 +190,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (void)loadPlayer {
 	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateReady) {
-		NSString *sourceId = self.videoInstance.video.sourceId;
+		NSString *sourceId = ([SYNAprilFoolsManager shouldTriggerAprilFools] ? @"8ZP7Fc2lCYY" : self.videoInstance.video.sourceId);
 		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
 		
