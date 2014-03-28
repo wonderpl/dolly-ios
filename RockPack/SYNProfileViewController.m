@@ -180,17 +180,7 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 
--(void) stopScrollView: (UIScrollView*) scrollview {
-    CGPoint offset = scrollview.contentOffset;
-    offset.x -= 1.0;
-    offset.y -= 1.0;
-    [scrollview setContentOffset:offset animated:NO];
-    offset.x += 1.0;
-    offset.y += 1.0;
-    [scrollview setContentOffset:offset animated:NO];
-}
-
-# pragma mark profile delegate methods
+# pragma mark SYNProfileDelegate
 
 
 //make a real segmented controller
@@ -315,7 +305,7 @@ static const CGFloat TransitionDuration = 0.5f;
     }
 }
 
-#pragma mark - Profile edit delegates
+#pragma mark - SYNProfileEditDelegate
 
 - (void) setCollectionViewContentOffset:(CGPoint)contentOffset animated:(BOOL) animated{
     [self.channelCollectionViewController.cv setContentOffset:contentOffset animated:animated];
