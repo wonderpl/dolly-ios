@@ -25,7 +25,4 @@
 @property (strong, nonatomic) IBOutlet UILabel *descriptionPlaceholderLabel;
 
 
-
-- (void) setBorder;
-
 @end

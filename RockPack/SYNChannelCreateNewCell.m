@@ -15,19 +15,14 @@
 {
     [super awakeFromNib];
     
-    if (IS_IPHONE)
-    {
-        [self.createTextField setFont:[UIFont lightCustomFontOfSize:15]];
-    }else{
-        [self.createTextField setFont:[UIFont lightCustomFontOfSize:18]];
-    }
-    
+	[self.createTextField setFont:[UIFont regularCustomFontOfSize:self.createTextField.font.pointSize]];
     
     [self setBorder];
     //May not be a good idea to do this
     [self.createTextField setValue:[UIColor lightGrayColor]
                     forKeyPath:@"_placeholderLabel.textColor"];
     
+	
     [self.createTextField setFont:[UIFont lightCustomFontOfSize:17.0f]];
     [self.descriptionTextView setFont:[UIFont lightCustomFontOfSize:14.0f]];
     [self.createCellButton.titleLabel setFont:[UIFont lightCustomFontOfSize:15.0f]];
@@ -45,7 +40,7 @@
     
     //    self.descriptionTextView.alpha = 0.0f;
     
-    [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
+//    [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
     
     if (IS_RETINA)
     {
