@@ -18,13 +18,11 @@ describe(@"SYNProfileViewController", ^{
 		
 //		[[mockManager should]receive:@selector(trackOwnProfileScreenView)];
 //		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
-//		[[mockManager should]receive:@selector(trackCoverPhotoUpload)];
-//		[[mockManager should]receive:@selector(trackAvatarUploadFromScreen) withArguments:[viewController trackingScreenName]];
+//		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
 //		[[mockManager should]receive:@selector(trackCollectionCreatedWithName) withArguments:@"name of channel"];
 //		[[mockManager should]receive:@selector(trackAvatarPhotoUploadCompleted)];
 //		[[mockManager should]receive:@selector(trackCoverPhotoUploadCompleted)];
 //		[[mockManager should]receive:@selector(trackCreateChannelScreenView)];
-//		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
 //		[[mockManager should]receive:@selector(trackUserCollectionsFollowFromScreenName) withArguments:[viewController trackingScreenName]];
 
 		
@@ -39,6 +37,12 @@ describe(@"SYNProfileViewController", ^{
 		[[mockManager should]receive:@selector(trackOtherUserCollectionFollowingScreenView)];
 		[viewController followingsTabTapped];
 		
+		[[mockManager should]receive:@selector(trackCoverPhotoUpload)];
+		[viewController updateCoverImage:nil];
+		
+		
+		[viewController updateAvatarImage:nil];
+		[[mockManager should]receive:@selector(trackAvatarUploadFromScreen) withArguments:[viewController trackingScreenName]];		
 		
 	});
 	
