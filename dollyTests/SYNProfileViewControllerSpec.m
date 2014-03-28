@@ -25,6 +25,7 @@ describe(@"SYNProfileViewController", ^{
 //		[[mockManager should]receive:@selector(trackCoverPhotoUploadCompleted)];
 //		[[mockManager should]receive:@selector(trackCreateChannelScreenView)];
 //		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
+//		[[mockManager should]receive:@selector(trackUserCollectionsFollowFromScreenName) withArguments:[viewController trackingScreenName]];
 
 		
 		
@@ -36,10 +37,6 @@ describe(@"SYNProfileViewController", ^{
 		[viewController editButtonTapped];
 
 		[[mockManager should]receive:@selector(trackOtherUserCollectionFollowingScreenView)];
-		[viewController followingsTabTapped];
-		
-		[[mockManager should]receive:@selector(trackUserCollectionsFollowFromScreenName) withArguments:[viewController trackingScreenName]];
-
 		[viewController followingsTabTapped];
 		
 		
