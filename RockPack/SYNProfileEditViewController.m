@@ -78,9 +78,8 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[[SYNTrackingManager sharedManager] trackEditProfileScreenView];
-
-	
 }
+
 - (void) goBack {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
