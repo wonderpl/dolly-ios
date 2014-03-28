@@ -273,8 +273,6 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) editButtonTapped {
     
-	[[SYNTrackingManager sharedManager] trackEditProfileScreenView];
-
     SYNProfileEditViewController *viewController = [[UIStoryboard storyboardWithName:IS_IPHONE ? @"Profile_IPhone":@"Profile_IPad"  bundle:nil] instantiateViewControllerWithIdentifier:@"SYNProfileEditViewController"];
     
 	viewController.modalPresentationStyle = UIModalPresentationCustom;
@@ -333,6 +331,8 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 - (void) updateCoverImage: (NSString*) urlString {
+	[[SYNTrackingManager sharedManager] trackCoverPhotoUpload];
+
     self.channelOwner.coverPhotoURL = urlString;
     
     [self.channelCollectionViewController.headerView setCoverphotoImage:urlString];
@@ -340,6 +340,8 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 - (void) updateAvatarImage: (NSString*) urlString {
+	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:[self trackingScreenName]];
+
     [self.channelCollectionViewController.headerView setProfileImage:urlString];
     [self.subscriptionCollectionViewController.headerView setProfileImage:urlString];
 }
