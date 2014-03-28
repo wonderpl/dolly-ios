@@ -22,14 +22,17 @@
 
 + (BOOL)shouldTriggerAprilFools {
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	BOOL isWonderPLEmail = ([appDelegate.currentUser.emailAddress rangeOfString:@"wonderpl.com"].location != NSNotFound);
-	BOOL isRockpackEmail = ([appDelegate.currentUser.emailAddress rangeOfString:@"rockpack.com"].location != NSNotFound);
+	
+	NSString *emailAddress = appDelegate.currentUser.emailAddress;
+	BOOL isWonderPLEmail = ([emailAddress rangeOfString:@"wonderpl.com"].location != NSNotFound);
+	BOOL isRockpackEmail = ([emailAddress rangeOfString:@"rockpack.com"].location != NSNotFound);
+	BOOL isPatricia = [emailAddress isEqualToString:@"pjaderocco@live.co.uk"];
 	
 	NSDate *now = [NSDate date];
 	NSDateComponents *components = [[self calendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:now];
 	BOOL isAprilFoolsDay = (components.day == 1 && components.month == 4);
 	
-	return ((isWonderPLEmail | isRockpackEmail) && isAprilFoolsDay);
+	return ((isWonderPLEmail || isRockpackEmail || isPatricia) && isAprilFoolsDay);
 }
 
 @end
