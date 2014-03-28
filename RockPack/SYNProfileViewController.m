@@ -8,8 +8,6 @@
 
 #import "SYNProfileViewController.h"
 #import "SYNProfileSubscriptionViewController.h"
-#import <UIImageView+WebCache.h>
-#import <UIButton+WebCache.h>
 #import "SYNProfileChannelViewController.h"
 #import "SYNActivityManager.h"
 #import "UIFont+SYNFont.h"
