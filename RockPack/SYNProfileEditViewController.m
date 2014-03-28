@@ -20,12 +20,12 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerAvatar;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerCoverphoto;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *barBtnCancel;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *barBtnSave;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *barBtnCancel;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *barBtnSave;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
 
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
-@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *topConstraint;
+@property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
 
 @end
 
