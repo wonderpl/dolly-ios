@@ -353,9 +353,9 @@
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
 	
-	[self.linkButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
+	[self.linkButton setTitle:videoInstance.video.linkTitle forState:UIControlStateNormal];
 	[UIView animateWithDuration:0.3 animations:^{
-		self.linkButton.alpha = (self.videoInstance.video.hasLink ? 1.0 : 0.0);
+		self.linkButton.alpha = (videoInstance.video.hasLink ? 1.0 : 0.0);
 	}];
     
 	self.likeButton.dataItemLinked = videoInstance;
