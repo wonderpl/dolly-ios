@@ -67,6 +67,8 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
+
 	if (self.isUserProfile) {
 		[[SYNTrackingManager sharedManager] trackOwnProfileScreenView];
     } else {
