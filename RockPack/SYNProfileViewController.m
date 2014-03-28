@@ -226,8 +226,6 @@ static const CGFloat TransitionDuration = 0.5f;
     
     self.channelContainer.hidden = YES;
     self.followingContainer.hidden = NO;
-    
-	NSLog(@"followingsTabTapped");
 	
     [self.subscriptionCollectionViewController.model reset];
     [self.subscriptionCollectionViewController.model loadNextPage];
@@ -244,8 +242,6 @@ static const CGFloat TransitionDuration = 0.5f;
     
     viewController.descriptionString = self.channelOwner.channelOwnerDescription;
 
-
-	
 	[UIView animateWithDuration:0.3 animations:^{
 		if (!IS_IPHONE_5 && IS_IPHONE) {
 			[self setCollectionViewContentOffset:CGPointMake(0, 110) animated:NO];
@@ -286,15 +282,6 @@ static const CGFloat TransitionDuration = 0.5f;
     
 	[[[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view"), nil] show];
     self.followAllButton = sender;
-}
-
-
-- (UIView*) showingContainerView {
-    if (self.channelContainer.hidden == NO  ) {
-        return self.channelContainer;
-    } else {
-        return self.followingContainer;
-    }
 }
 
 #pragma mark - SYNProfileEditDelegate
