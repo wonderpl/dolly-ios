@@ -281,25 +281,19 @@ typedef enum {
         case OptionButtonTagEdit:
         {
             [self removeFromScreen];
-            
-            [((SYNProfileRootViewController*)[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2]) editButtonTapped:nil];
-            
-           UINavigationController *tmpNav = appDelegate.navigationManager.containerController.currentViewController;
-            
-                    
-            [((SYNProfileRootViewController*)[tmpNav.viewControllers objectAtIndex:tmpNav.viewControllers.count-1]) editButtonTapped:nil];
-            
-            
-            
+			
+			__weak SYNOptionsOverlayViewController *wself = self;
+			self.completeBlock = ^{
+				[wself.delegate editButtonTapped];
+			};
         }
             
     }
     
     [self removeFromScreen];
-       
 }
 
--(void)removeFromScreen
+- (void) removeFromScreen
 {
     [UIView animateWithDuration:0.3f animations:^{
         
