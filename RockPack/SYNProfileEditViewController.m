@@ -261,6 +261,10 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
 }
 
 
+- (NSString *)trackingScreenName {
+	return @"Profile";
+}
+
 
 
 @end

@@ -405,5 +405,10 @@ static const CGFloat TransitionDuration = 0.5f;
     [self.channelCollectionViewController.cv reloadData];
 }
 
+- (NSString *)trackingScreenName {
+	return @"Profile";
+}
+
+
 
 @end

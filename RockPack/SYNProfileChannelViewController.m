@@ -837,4 +837,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
 }
 
+- (NSString *)trackingScreenName {
+	return @"Profile";
+}
+
 @end
