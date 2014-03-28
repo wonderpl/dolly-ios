@@ -65,6 +65,14 @@ static const CGFloat TransitionDuration = 0.5f;
     self.followingContainer.hidden = YES;
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	if (self.isUserProfile) {
+		[[SYNTrackingManager sharedManager] trackOwnProfileScreenView];
+    } else {
+		[[SYNTrackingManager sharedManager] trackOtherUserProfileScreenView];
+	}
+}
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -233,7 +241,12 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) followingsTabTapped {
     
-    
+	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
+	} else {
+		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
+	}
+	
     if (!self.followingContainer.hidden) {
         return;
     }
@@ -258,6 +271,8 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) editButtonTapped {
     
+	[[SYNTrackingManager sharedManager] trackEditProfileScreenView];
+
     SYNProfileEditViewController *viewController = [[UIStoryboard storyboardWithName:IS_IPHONE ? @"Profile_IPhone":@"Profile_IPad"  bundle:nil] instantiateViewControllerWithIdentifier:@"SYNProfileEditViewController"];
     
 	viewController.modalPresentationStyle = UIModalPresentationCustom;
