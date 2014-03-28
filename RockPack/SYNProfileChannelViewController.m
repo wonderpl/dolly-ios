@@ -477,7 +477,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                              NSString *errorMessage = NSLocalizedString(@"channel_creation_screen_error_unknown_create_description", nil);
                                              
                                              NSArray *errorTitleArray = error[@"form_errors"][@"title"];
-                                             
+												
                                              if ([errorTitleArray count] > 0)
                                              {
                                                  NSString *errorType = errorTitleArray[0];
