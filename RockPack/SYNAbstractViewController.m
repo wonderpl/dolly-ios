@@ -709,12 +709,7 @@
 	if (!channelOwner)
 		return;
     
-    NSString *tmp = IS_IPAD ? @"Profile_IPad" : @"Profile_IPhone";
-    NSString *storyBoard = tmp;
-
-    SYNProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyBoard bundle:nil] instantiateViewControllerWithIdentifier: @"SYNProfileViewController"];
-    
-    profileVC.channelOwner = channelOwner;
+    UIViewController *profileVC = [SYNProfileViewController viewControllerWithChannelOwner:channelOwner];
     
     [self.navigationController pushViewController:profileVC animated:YES];
 
