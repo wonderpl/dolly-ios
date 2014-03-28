@@ -287,20 +287,6 @@ static const CGFloat TransitionDuration = 0.5f;
     self.followAllButton = sender;
 }
 
-- (void) resetCollectionViewOffset {
-    
-    CGPoint newOffset = CGPointZero;
-    
-    if (IS_IPHONE && !IS_IPHONE_5) {
-        newOffset = CGPointMake(0, 100);
-    }
-    
-    if (self.channelContainer.hidden == NO  ) {
-        [self.channelCollectionViewController.cv setContentOffset:newOffset animated:YES];
-    } else {
-        [self.subscriptionCollectionViewController.cv setContentOffset:newOffset animated:YES];
-    }
-}
 
 - (UIView*) showingContainerView {
     if (self.channelContainer.hidden == NO  ) {
