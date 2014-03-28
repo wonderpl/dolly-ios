@@ -460,26 +460,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 											 
 											 NSString *name = [self.createChannelCell.createTextField.text uppercaseString];
 											 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
-                                             
-//                                             [self cancelCreateChannel ];
-                                             
-                                             
-//                                             float time = 0.4;
-                                             //
-                                             //    //    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
-                                             //    time= 6.8f;
-                                             //    //    }
-                                             //    if (IS_IPHONE) {
-                                             //        [self performSelector:@selector(showInboardingAnimationAfterCreate) withObject:self afterDelay:1.4f];
-                                             //    }
-                                             
-                                             //    double delayInSeconds = time;
-                                             //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                                             //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                             //        
-                                             //        [self scrollUpWithTime];
-                                             //    });
-
+			
                                             
                                              [self cancelCreateChannelWithBlock:^{
                                                  
