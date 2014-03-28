@@ -14,7 +14,7 @@
 #import "UINavigationBar+Appearance.h"
 
 
-#define OFFSET_DESCRIPTION_EDIT 130.0f
+static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 
 @interface SYNProfileEditViewController () <SYNImagePickerControllerDelegate, UITextViewDelegate>
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
