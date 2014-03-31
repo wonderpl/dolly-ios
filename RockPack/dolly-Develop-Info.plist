@@ -63,8 +63,12 @@
 	<string>secure.dev.wonderpl.com</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MinionPro-Italic.otf</string>
+		<string>MinionPro-Regular.otf</string>
 		<string>ProximaNova-Light.otf</string>
 		<string>ProximaNova-Regular.otf</string>
+		<string>ProximaNova-Semibold.otf</string>
+		<string>ProximaNova-Bold.otf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

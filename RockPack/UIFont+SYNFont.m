@@ -10,18 +10,28 @@
 
 @implementation UIFont (SYNFont)
 
-+ (UIFont *) lightCustomFontOfSize: (CGFloat) fontSize
-{
-    return [UIFont fontWithName: @"ProximaNova-Light"
-                           size: fontSize];
++ (UIFont *)lightCustomFontOfSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Light" size:fontSize];
 }
 
-
-+ (UIFont *) regularCustomFontOfSize: (CGFloat) fontSize
-{
-    return [UIFont fontWithName: @"ProximaNova-Regular"
-                           size: fontSize];
++ (UIFont *)regularCustomFontOfSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
 }
 
++ (UIFont *)semiboldCustomFontOfSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
+}
+
++ (UIFont *)boldCustomFontOfSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Bold" size:fontSize];
+}
+
++ (UIFont *)italicAlternateFontOfSize:(CGFloat)fontSize {
+	return [UIFont fontWithName:@"MinionPro-Italic" size:fontSize];
+}
+
++ (UIFont *)regularAlternateFontOfSize:(CGFloat)fontSize {
+	return [UIFont fontWithName:@"MinionPro-Regular" size:fontSize];
+}
 
 @end
