@@ -182,7 +182,8 @@ static const NSInteger TrackingDimensionConnection = 6;
 }
 
 - (void)trackVideoLoadTime:(NSTimeInterval)loadTime {
-	[self trackEventWithCategory:NetworkCategory action:@"videoLoadTime" label:nil value:@(loadTime)];
+	NSInteger loadTimeInMilliseconds = (NSInteger)(loadTime * 1000);
+	[self trackEventWithCategory:NetworkCategory action:@"videoLoadTime" label:nil value:@(loadTimeInMilliseconds)];
 }
 
 - (void)trackVideoMaximiseViaRotation {
