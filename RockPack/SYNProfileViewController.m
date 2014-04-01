@@ -83,7 +83,7 @@ static const CGFloat TransitionDuration = 0.5f;
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
 	
     [self.navigationBar setBarTintColor:[UIColor whiteColor]];
-	[self hideNavigationBar];
+	self.navigationBar.hidden = YES;
 //	self.navigationItem.title = self.channelOwner.username;
 
     [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
@@ -438,11 +438,11 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) hideNavigationBar {
 	
-	self.navigationBar.hidden = YES;
+//	self.navigationBar.hidden = YES;
 }
 
 - (void) showNavigationBar {
-	self.navigationBar.hidden = NO;
+//	self.navigationBar.hidden = NO;
 }
 
 @end
