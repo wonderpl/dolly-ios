@@ -257,6 +257,13 @@
 	textField.errorMode = NO;
 	self.errorLabel.text = nil;
 	
+	BOOL isDateField = (textField == self.dayTextField || textField == self.monthTextField || textField == self.yearTextField);
+	if (isDateField) {
+		self.dayTextField.errorMode = NO;
+		self.monthTextField.errorMode = NO;
+		self.yearTextField.errorMode = NO;
+	}
+	
 	NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
 	NSUInteger newLength = [newString length];
     
