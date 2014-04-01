@@ -156,7 +156,6 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
     [self updateField:@"description" forValue:self.descriptionTextView.text withCompletionHandler:^{
         appDelegate.currentUser.channelOwnerDescription = self.descriptionTextView.text;
         [appDelegate saveContext: YES];
-        [self.delegate updateUserDescription:self.descriptionTextView.text];
         [self goBack];
     }];
     
