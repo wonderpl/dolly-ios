@@ -1140,7 +1140,7 @@
 		4C9B519C18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadCreateChannelLayout.h; sourceTree = "<group>"; };
 		4C9B519D18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadCreateChannelLayout.m; sourceTree = "<group>"; };
 		4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile_IPhone.storyboard; sourceTree = "<group>"; };
-		4CAC2B0D18E070C2004AB77E /* SYNProfileDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileDelegate.h; sourceTree = "<group>"; };
+		4CAC2B0D18E070C2004AB77E /* SYNProfileHeaderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileHeaderDelegate.h; sourceTree = "<group>"; };
 		4CB63A6D18BD052E00825F7C /* placeholderwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderwhite.png; sourceTree = "<group>"; };
 		4CCAD0B018D7520F00EC0F03 /* SYNProfileChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileChannelModel.h; sourceTree = "<group>"; };
 		4CCAD0B118D7520F00EC0F03 /* SYNProfileChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileChannelModel.m; sourceTree = "<group>"; };
@@ -3060,7 +3060,7 @@
 				4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */,
 				4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */,
 				4C1D30A718D9ECAC00F96F7C /* SYNProfileEditDelegate.h */,
-				4CAC2B0D18E070C2004AB77E /* SYNProfileDelegate.h */,
+				4CAC2B0D18E070C2004AB77E /* SYNProfileHeaderDelegate.h */,
 			);
 			name = "new profile";
 			sourceTree = "<group>";

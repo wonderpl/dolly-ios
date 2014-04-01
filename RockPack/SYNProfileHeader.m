@@ -176,7 +176,7 @@
 }
 
 
-- (void) setDelegate: (id<SYNProfileDelegate>)  delegate
+- (void) setDelegate: (id<SYNProfileHeaderDelegate>)  delegate
 {
     _delegate = delegate;
 }

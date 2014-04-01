@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SYNPopoverable.h"
-#import "SYNProfileDelegate.h"
+#import "SYNProfileHeaderDelegate.h"
 
 @interface SYNOptionsOverlayViewController : UIViewController <SYNPopoverable>
 
 
-@property (weak, nonatomic) id<SYNProfileDelegate> delegate;
+@property (weak, nonatomic) id<SYNProfileHeaderDelegate> delegate;
 
 -(void)removeFromScreen;
 

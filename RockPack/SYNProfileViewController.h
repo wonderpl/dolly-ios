@@ -7,11 +7,11 @@
 //
 
 #import "SYNAbstractViewController.h"
-#import "SYNProfileDelegate.h"
+#import "SYNProfileHeaderDelegate.h"
 #import "SYNProfileEditDelegate.h"
 #import "SYNProfileHeader.h"
 
-@interface SYNProfileViewController : SYNAbstractViewController <SYNProfileDelegate,SYNProfileEditDelegate>
+@interface SYNProfileViewController : SYNAbstractViewController <SYNProfileHeaderDelegate,SYNProfileEditDelegate>
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 

@@ -2,7 +2,7 @@
 #import "SYNProfileViewController.h"
 #import "SYNTrackingManager.h"
 
-@interface SYNProfileViewController () <SYNProfileDelegate>
+@interface SYNProfileViewController () <SYNProfileHeaderDelegate>
 
 @end
 

@@ -11,7 +11,7 @@
 @class SYNSocialFollowButton;
 
 
-@protocol SYNProfileDelegate <NSObject>
+@protocol SYNProfileHeaderDelegate <NSObject>
 
 - (void) followingsTabTapped;
 - (void) collectionsTabTapped;

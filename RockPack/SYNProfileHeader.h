@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ChannelOwner.h"
 #import "AppConstants.h"
-#import "SYNProfileDelegate.h"
+#import "SYNProfileHeaderDelegate.h"
 
 @interface SYNProfileHeader : UICollectionReusableView
 
@@ -21,7 +21,7 @@
 @property (nonatomic, strong, readonly) UIImageView *coverImage;
 @property (nonatomic, strong, readonly) UIView *outerViewFullNameLabel;
 @property (nonatomic, readonly) UILabel *fullNameLabel;
-@property (nonatomic, weak) id<SYNProfileDelegate> delegate;
+@property (nonatomic, weak) id<SYNProfileHeaderDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedController;
 
 
