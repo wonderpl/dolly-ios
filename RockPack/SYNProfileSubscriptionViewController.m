@@ -33,7 +33,7 @@ static const CGFloat OWNUSERHEADERHEIGHT = 494.0f;
 @property (nonatomic, strong) SYNProfileHeader* headerView;
 @property (nonatomic, strong) UISearchBar* searchBar;
 @property (nonatomic, strong) SYNProfileSubscriptionModel *model;
-@property (nonatomic, strong) UITapGestureRecognizer *tapToResetCells;
+@property (nonatomic) BOOL showingDescription;
 
 
 @end
@@ -85,10 +85,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:20];
     [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
     
-    self.tapToResetCells = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDescriptionCurrentlyShowing)];
-    
-    [self.view addGestureRecognizer:self.tapToResetCells];
-    [self.tapToResetCells setEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -103,6 +99,11 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     self.model = [SYNProfileSubscriptionModel modelWithChannelOwner:channelOwner];
     self.model.delegate = self;
 }
+
+- (void)setShowingDescription:(BOOL)showingDescription {
+	_showingDescription = showingDescription;
+}
+
 
 #pragma mark - Scrollview delegates
 
@@ -183,6 +184,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
+	
+	
+	if (self.showingDescription) {
+		[self hideDescriptionCurrentlyShowing];
+	}
+
     SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
 
     if (cell.state != ChannelMidCellStateDefault) {
@@ -335,14 +342,13 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 #pragma mark - SYNChannelMidCellDelegate
 - (void)cellStateChanged {
     [self hideDescriptionCurrentlyShowing];
-    [self.tapToResetCells setEnabled:YES];
+	self.showingDescription = YES;
 }
 
 
 #pragma mark - bar buttons
 
 - (void)hideDescriptionCurrentlyShowing{
-    [self.tapToResetCells setEnabled:NO];
     for (UICollectionViewCell *cell in [self.cv visibleCells]) {
         if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
             if (((SYNChannelMidCell*)cell).state != ChannelMidCellStateAnimating) {
@@ -350,6 +356,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
             }
         }
     }
+	self.showingDescription = NO;
 }
 
 

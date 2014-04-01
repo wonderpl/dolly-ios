@@ -238,7 +238,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
 	
 	if (self.showingDescription) {
-		NSLog(@"didSelectItemAtIndexPath");
 		[self hideDescriptionCurrentlyShowing];
 	}
 	
