@@ -157,9 +157,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
 }
 
-- (void)moveNameLabelWithOffset :(CGFloat) offset {
-    
-	NSLog(@"offset : %f", offset);
+- (void)moveNameLabelWithOffset :(CGFloat) offset {    
     float offSetCheck = IS_IPHONE? FULL_NAME_LABEL_IPHONE: UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]) ? FULL_NAME_LABEL_IPAD_PORTRAIT: FULLNAMELABELIPADLANDSCAPE;
     
     if (offset > offSetCheck) {
