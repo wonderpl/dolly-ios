@@ -77,10 +77,11 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
-    
-    self.navigationItem.title = @"";
+	
+    [self.navigationBar setBarTintColor:[UIColor whiteColor]];
+	[self hideNavigationBar];
+//	self.navigationItem.title = self.channelOwner.username;
 
     [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                        onCompletion: ^(id dictionary) {
@@ -273,8 +274,8 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) editButtonTapped {
     
-    SYNProfileEditViewController *viewController = [[UIStoryboard storyboardWithName:IS_IPHONE ? @"Profile_IPhone":@"Profile_IPad"  bundle:nil] instantiateViewControllerWithIdentifier:@"SYNProfileEditViewController"];
-    
+    SYNProfileEditViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SYNProfileEditViewController"];
+	
 	viewController.modalPresentationStyle = UIModalPresentationCustom;
 	viewController.transitioningDelegate = self;
     viewController.delegate = self;
