@@ -338,11 +338,10 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
     
 	if (kind == UICollectionElementKindSectionFooter) {
-        self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+		self.footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                              withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]
                                                                     forIndexPath:indexPath];
         supplementaryView = self.footerView;
-        
 		if ([self.model hasMoreItems]) {
 			self.footerView.showsLoading = YES;
 			
