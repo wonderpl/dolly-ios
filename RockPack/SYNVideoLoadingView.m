@@ -128,9 +128,13 @@ static const CGFloat TextSideInset = 20.0;
 											   options:0
 											  progress:nil
 											 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-												 UIImage *blurredImage = [UIImage blurredImageFromImage:image];
-												 self.imageLayer.contents = (__bridge id)blurredImage.CGImage;
-												 self.textLayer.contents = (__bridge id)blurredImage.CGImage;
+												 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+													 UIImage *blurredImage = [UIImage blurredImageFromImage:image];
+													 dispatch_async(dispatch_get_main_queue(), ^{
+														 self.imageLayer.contents = (__bridge id)blurredImage.CGImage;
+														 self.textLayer.contents = (__bridge id)blurredImage.CGImage;
+													 });
+												 });
 											 }];
 }
 
