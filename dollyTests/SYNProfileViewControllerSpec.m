@@ -9,13 +9,21 @@
 SPEC_BEGIN(SYNProfileViewControllerSpec)
 
 describe(@"SYNProfileViewController", ^{
-	SYNTrackingManager *mockManager = [SYNTrackingManager mock];
-	[SYNTrackingManager stub:@selector(sharedManager) andReturn:mockManager];
-	
-	SYNProfileViewController *viewController = [[SYNProfileViewController alloc] init];
 
+	__block SYNProfileViewController *viewController;
+	__block SYNTrackingManager *mockManager;
+
+	beforeEach(^{
+		viewController = [[SYNProfileViewController alloc] init];
+		[[viewController should] beNonNil];
+		mockManager = [SYNTrackingManager mock];
+		[SYNTrackingManager stub:@selector(sharedManager) andReturn:mockManager];
+
+	});
+
+	
 	it(@"should track screen view", ^{
-		
+
 //		[[mockManager should]receive:@selector(trackOwnProfileScreenView)];
 //		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
 //		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
@@ -35,7 +43,7 @@ describe(@"SYNProfileViewController", ^{
 		[viewController followingsTabTapped];
 
 	});
-	
+
 	it(@"should track cover photo upload", ^{
 		[[mockManager should]receive:@selector(trackCoverPhotoUpload)];
 		[viewController updateCoverImage:nil];
